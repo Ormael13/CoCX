@@ -2604,8 +2604,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		return permanentsteelgolemsendcost;
 	}
 
-	//unused for now
-	/*
 	public function permanentimprovedsteelgolemsendcost():Number {
 		var permanentimprovedsteelgolemsendcost:Number = 625;
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 1) permanentimprovedsteelgolemsendcost += 100;
@@ -2616,7 +2614,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		permanentimprovedsteelgolemsendcost = Math.round(permanentimprovedsteelgolemsendcost);
 		return permanentimprovedsteelgolemsendcost;
 	}
-	*/
 
 	private function golemsDunks(damage:Number):void {
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
@@ -2692,14 +2689,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		dmgamp += dmgamp_permanent_shared();
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		//count
-		if (cnt == 3)
-			damage *= 5;
-		else if (cnt == 5)
-			damage *= 10;
+		if (cnt == 3) damage *= 5;
+		else if (cnt == 5) damage *= 10;
 		//mult-round
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText((cnt > 1 ? "Your stone golems slam" : "Your stone golem slams") + " into [themonster]. ");
+		outputText("Your stone golem" + (cnt > 1 ? "s slam" : " slams") + " into [themonster]. ");
 		golemsDunks(damage);
 		outputText("\n\n");
 		//set flag that golems attacked
@@ -2733,14 +2728,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		dmgamp += dmgamp_permanent_shared();
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		//count
-		if (cnt == 3)
-			damage *= 5;
-		else if (cnt == 5)
-			damage *= 10;
+		if (cnt == 3) damage *= 5;
+		else if (cnt == 5) damage *= 10;
 		//mult-round
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText((cnt > 1 ? "Your improved stone golems slam" : "Your stone golem slams") + " into [themonster]. ");
+		outputText("Your improved stone golem" + (cnt > 1 ? "s slam" : " slams") + " into [themonster]. ");
 		golemsDunks(damage);
 		outputText(" And then attack" + (cnt > 1 ? "" : "s") + " once again. ");
 		golemsDunks(damage);
@@ -2753,17 +2746,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 	}
 
-	public function sendPermanentSteelGolem1():void {
-		//NOTE FOR ORM: if you're going to implement multiple, look at the examples above.
+	public function sendPermanentSteelGolem(cnt:int = 1):void {
+		if (cnt != 1 && cnt != 3 && cnt != 5) throw new Error("Invalid golem count!");
 		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
 		else outputText("\n\n");
-		if (player.mana < permanentsteelgolemsendcost()) {
+		if (player.mana < permanentsteelgolemsendcost() * cnt) {
 			outputText("Your mana is too low to make your golem attack.");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		else useMana(permanentsteelgolemsendcost());
+		else useMana(permanentsteelgolemsendcost() * cnt);
 		var damage:Number = 0;
 		var dmgamp:Number = 1.2;
 		damage += ((player.inte + player.wis + 750 + rand(251)) * 5);
@@ -2777,9 +2770,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		dmgamp += dmgamp_permanent_shared();
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		//count
+		if (cnt == 3) damage *= 5;
+		else if (cnt == 5) damage *= 10;
+		//mult-round
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText("Your steel golem slam into [themonster]. ");
+		outputText("Your steel golem" + (cnt > 1 ? "s slam" : " slams") + " into [themonster]. ");
 		golemsDunks(damage);
 		outputText("\n\n");
 		//set flag that golems attacked
@@ -2790,17 +2787,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 	}
 
-	//Old, unused.
-	/*
-	public function sendPermanentImprovedSteelGolem1():void {
-		clearOutput();
-		if (player.mana < permanentimprovedsteelgolemsendcost()) {
+	public function sendPermanentImprovedSteelGolem(cnt:int = 1):void {
+		if (cnt != 1 && cnt != 3 && cnt != 5) throw new Error("Invalid golem count!");
+		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
+		else outputText("\n\n");
+		if (player.mana < permanentimprovedsteelgolemsendcost() * cnt) {
 			outputText("Your mana is too low to make your golem attack.");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		else useMana(permanentimprovedsteelgolemsendcost());
+		else useMana(permanentimprovedsteelgolemsendcost() * cnt);
 		var damage:Number = 0;
 		var dmgamp:Number = 2.4;
 		damage += ((player.inte + player.wis + 2250 + rand(751)) * 25);
@@ -2812,37 +2809,28 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
 		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
 		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
-		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
-		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
-		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
-			dmgamp += 0.1;
-			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
-			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
-			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
-			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
-		}
+		dmgamp += dmgamp_permanent_shared();
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
+		//count
+		if (cnt == 3) damage *= 5;
+		else if (cnt == 5) damage *= 10;
+		//mult-round
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText("Your improved steel golem slam into [themonster]. ");
+		outputText("Your improved steel golem" + (cnt > 1 ? "s slam" : " slams") + " into [themonster]. ");
 		golemsDunks(damage);
-		outputText(" Then attack second time. ");
+		outputText(" Then attack" + (cnt > 1 ? "" : "s") + " second time. ");
 		golemsDunks(damage);
 		outputText(" And finish with a third round. ");
 		golemsDunks(damage);
 		outputText("\n\n");
-		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
-			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
-			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
-				menu();
-				addButton(0, "Next", combatMenu, false);
-			}
+		//set flag that golems attacked
+		flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+			menu();
+			addButton(0, "Next", combatMenu, false);
 		}
-		else enemyAI();
 	}
-	*/
 
 	public function notSendAnyGolem():void {
 		//set flag that golems attacked

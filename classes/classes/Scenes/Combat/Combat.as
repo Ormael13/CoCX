@@ -876,7 +876,7 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
 		}
-		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
+		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
 		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) bd = buttons.add("Elem.Asp", ElementalAspectsMenu);
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
@@ -1124,74 +1124,97 @@ public class Combat extends BaseContent {
 			}
 		}
     }
-	public function GolemsMenu():void {
+	public function GolemsMenu(page:int = 1):void {
 		menu();
-		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
-			if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
-				addButtonDisabled(0, "Send T.Gol/1", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
-				if (monster.plural) {
-					addButtonDisabled(5, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
-					addButtonDisabled(10, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
-				}
-				if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this)");
-			}
-			else {
-				addButton(0, "Send T.Gol/1", combat.pspecials.sendTemporalGolem1)
-					.hint("Send one golem from your bag to attack the enemy. <b>After attacking, the golem will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and its core can shatter, leaving it unable to be reused in future")+"!</b>");
-				if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) {
-					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 4) addButton(1, "Send T.Gol/4", combat.pspecials.sendTemporalGolem4)
-						.hint("Send four golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart!</b>");
+		if (page == 1) {
+			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
+				if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
+					addButtonDisabled(0, "Send T.Gol/1", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
 					if (monster.plural) {
-						if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 10) addButton(6, "Send T.Gol/10", combat.pspecials.sendTemporalGolem10)
-							.hint("Send ten golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
-						if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 20) addButton(11, "Send T.Gol/20", combat.pspecials.sendTemporalGolem20)
-							.hint("Send twenty golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
+						addButtonDisabled(1, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+						addButtonDisabled(2, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+					}
+					if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this)");
+				}
+				else {
+					addButton(0, "Send T.Gol/1", combat.pspecials.sendTemporalGolem1)
+						.hint("Send one golem from your bag to attack the enemy. <b>After attacking, the golem will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and its core can shatter, leaving it unable to be reused in future")+"!</b>");
+					if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) {
+						if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 4) addButton(5, "Send T.Gol/4", combat.pspecials.sendTemporalGolem4)
+							.hint("Send four golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
+						if (monster.plural) {
+							if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 10) addButton(6, "Send T.Gol/10", combat.pspecials.sendTemporalGolem10)
+								.hint("Send ten golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
+							if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 20) addButton(7, "Send T.Gol/20", combat.pspecials.sendTemporalGolem20)
+								.hint("Send twenty golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
+						}
+					}
+					if (monster.plural) {
+						if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 3) addButton(1, "Send T.Gol/3", combat.pspecials.sendTemporalGolem3)
+							.hint("Send three golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and their cores can shatter, leaving them unable to be reused in future")+"!</b>");
+						if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 5) addButton(2, "Send T.Gol/5", combat.pspecials.sendTemporalGolem5)
+							.hint("Send five golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and their cores can shatter, leaving them unable to be reused in future")+"!</b>");
+					}
+					if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButton(4, "KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
+						.hint("Send all temporal golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
+				}
+			}
+			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) {
+				if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
+					addButtonDisabled(10, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
+					if (monster.plural) {
+						addButtonDisabled(11, "Send P.Gol/3", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
+						addButtonDisabled(12, "Send P.Gol/5", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
 					}
 				}
-				if (monster.plural) {
-					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 3) addButton(5, "Send T.Gol/3", combat.pspecials.sendTemporalGolem3)
-						.hint("Send three golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and their cores can shatter, leaving them unable to be reused in future")+"!</b>");
-					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] >= 5) addButton(10, "Send T.Gol/5", combat.pspecials.sendTemporalGolem5)
-						.hint("Send five golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart"+(player.hasPerk(PerkLib.MasterGolemMaker)?"":" and their cores can shatter, leaving them unable to be reused in future")+"!</b>");
+				else {
+					addButton(10, "Send P.Gol/1", combat.pspecials.sendPermanentGolem)
+						.hint("Send one stone golem from your bag to attack the enemy.");
+					if (monster.plural) {
+						if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) addButton(11, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3)
+							.hint("Send three stone golems from your bag to attack the enemy.");
+						if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) addButton(12, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5)
+							.hint("Send five stone golems from your bag to attack the enemy.");
+					}
 				}
-				if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButton(4, "KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
-					.hint("Send all temporal golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
 			}
+			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) addButton(9, "-2-", GolemsMenu, page + 1);
+			addButton(14, "Back", combat.combatMenu, false);
 		}
-        if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) {
-            if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-				addButtonDisabled(2, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
+		if (page == 2) {
+			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
+				addButton(0, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1)
+					.hint("Send one improved stone golem from your bag to attack the enemy.");
 				if (monster.plural) {
-					addButtonDisabled(7, "Send P.Gol/3", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
-					addButtonDisabled(12, "Send P.Gol/5", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
-				}
-            }
-			else {
-				addButton(2, "Send P.Gol/1", combat.pspecials.sendPermanentGolem)
-					.hint("Send one stone golem from your bag to attack the enemy.");
-				if (monster.plural) {
-					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) addButton(7, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3)
-						.hint("Send three stone golems from your bag to attack the enemy.");
-					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) addButton(12, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5)
-						.hint("Send five stone golems from your bag to attack the enemy.");
+					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) addButton(1, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3)
+						.hint("Send three improved stone golems from your bag to attack the enemy.");
+					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) addButton(2, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5)
+						.hint("Send five improved stone golems from your bag to attack the enemy.");
 				}
 			}
-        }
-        if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
-            addButton(3, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1)
-				.hint("Send one improved stone golem from your bag to attack the enemy.");
-			if (monster.plural) {
-				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) addButton(8, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3)
-					.hint("Send three improved stone golems from your bag to attack the enemy.");
-				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) addButton(13, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5)
-					.hint("Send five improved stone golems from your bag to attack the enemy.");
+			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
+				addButton(5, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem, 1)
+					.hint("Send one steel golem from your bag to attack the enemy.");
+				if (monster.plural) {
+					if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 3) addButton(6, "Send S.Gol/3", combat.pspecials.sendPermanentSteelGolem, 3)
+						.hint("Send three steel golems from your bag to attack the enemy.");
+					if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 5) addButton(7, "Send S.Gol/5", combat.pspecials.sendPermanentSteelGolem, 5)
+						.hint("Send five steel golems from your bag to attack the enemy.");
+				}
 			}
-        }
-		if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-			addButton(9, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1)
-				.hint("Send one steel golem from your bag to attack the enemy.");
+			if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) {
+				addButton(10, "Send S.Gol/1", combat.pspecials.sendPermanentImprovedSteelGolem, 1)
+					.hint("Send one improved steel golem from your bag to attack the enemy.");
+				if (monster.plural) {
+					if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 3) addButton(11, "Send I.S.Gol/3", combat.pspecials.sendPermanentImprovedSteelGolem, 3)
+						.hint("Send three improved steel golems from your bag to attack the enemy.");
+					if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 5) addButton(12, "Send I.S.Gol/5", combat.pspecials.sendPermanentImprovedSteelGolem, 5)
+						.hint("Send five improved steel golems from your bag to attack the enemy.");
+				}
+			}
+			addButton(9, "-1-", GolemsMenu, page - 1);
+			addButton(14, "Back", combat.combatMenu, false);
 		}
-		addButton(14, "Back", combat.combatMenu, false);
 	}
 	public function ElementalAspectsMenu():void {
 		menu();
@@ -1470,13 +1493,18 @@ public class Combat extends BaseContent {
             //array of possible golems. Sorted ascending by power.
             // [Function, mana cost, requirements]
             var golemArray:Array = [
-                [curry(pspecials.sendPermanentGolem, 1)         , pspecials.permanentgolemsendcost()            , true],
-                [pspecials.sendPermanentSteelGolem1                  , pspecials.permanentsteelgolemsendcost()       , flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0],
-                [curry(pspecials.sendPermanentGolem, 3)         , pspecials.permanentgolemsendcost() * 3        , monster.plural && flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3],
-                [curry(pspecials.sendPermanentGolem, 5)         , pspecials.permanentgolemsendcost() * 5        , monster.plural && flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5],
-                [curry(pspecials.sendPermanentImprovedGolem, 1) , pspecials.permanentimprovedgolemsendcost()    , flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0],
-                [curry(pspecials.sendPermanentImprovedGolem, 3) , pspecials.permanentimprovedgolemsendcost() * 3, monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3],
-                [curry(pspecials.sendPermanentImprovedGolem, 5) , pspecials.permanentimprovedgolemsendcost() * 5, monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5]
+                [curry(pspecials.sendPermanentGolem, 1)              , pspecials.permanentgolemsendcost()                 , true],
+                [curry(pspecials.sendPermanentGolem, 3)              , pspecials.permanentgolemsendcost() * 3             , monster.plural && flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3],
+                [curry(pspecials.sendPermanentGolem, 5)              , pspecials.permanentgolemsendcost() * 5             , monster.plural && flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5],
+                [curry(pspecials.sendPermanentSteelGolem, 1)         , pspecials.permanentsteelgolemsendcost()            , flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0],
+                [curry(pspecials.sendPermanentSteelGolem, 3)         , pspecials.permanentsteelgolemsendcost() * 3        , monster.plural && flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 3],
+                [curry(pspecials.sendPermanentSteelGolem, 5)         , pspecials.permanentsteelgolemsendcost() * 5        , monster.plural && flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 5],
+                [curry(pspecials.sendPermanentImprovedGolem, 1)      , pspecials.permanentimprovedgolemsendcost()         , flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0],
+                [curry(pspecials.sendPermanentImprovedGolem, 3)      , pspecials.permanentimprovedgolemsendcost() * 3     , monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3],
+                [curry(pspecials.sendPermanentImprovedGolem, 5)      , pspecials.permanentimprovedgolemsendcost() * 5     , monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5],
+                [curry(pspecials.sendPermanentImprovedSteelGolem, 1) , pspecials.permanentimprovedsteelgolemsendcost()    , flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0],
+                [curry(pspecials.sendPermanentImprovedSteelGolem, 3) , pspecials.permanentimprovedsteelgolemsendcost() * 3, monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 3],
+                [curry(pspecials.sendPermanentImprovedSteelGolem, 5) , pspecials.permanentimprovedsteelgolemsendcost() * 5, monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 5]
                 //new powerful golems go here.
             ];
             var bestGolem:Array = null;

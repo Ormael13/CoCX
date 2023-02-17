@@ -182,8 +182,8 @@ public class Changelog extends BaseContent
 			outputText("-Asterius Rage max atk value increased from 110 to 176. Their classification is now Dual Massive instead of Dual Large weapons.\n");
 			outputText("-Having equipped more than one of three Necro items (wand/shield/necklace) would give PC set items bonuses: 2/3 items - control 2/7 more skeletons of each type, 10/40% higher dmg of them and for 3 set items additionally lower demon bopnes cost of necro spells by 20% of base cost.\n");
 			outputText("-Demon Soldier enemies could be now harvested to get demon bones for necromancers.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-I heard some want measure their kid-o-pen...so they can now seeing how many ascension points comes from kids they sires/birthed ^^\n");
+			outputText("-More options for minions actions turn and PC action turn was added for higher grades of golems stell/improved steel.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
