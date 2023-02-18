@@ -4773,6 +4773,8 @@ public function rebirthFromBadEnd():void {
 		if (player.level >= 42) performancePointsPrediction += (player.level - 41);
 		if (player.level >= 102) performancePointsPrediction += (player.level - 101);
 		if (player.level >= 180) performancePointsPrediction += (player.level - 179);
+		performancePointsPrediction += player.herbalismLevel;
+		performancePointsPrediction += player.miningLevel;
 		if (player.teaseLevel >= 25) {
 			performancePointsPrediction += 25;
 		}
@@ -4944,4 +4946,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

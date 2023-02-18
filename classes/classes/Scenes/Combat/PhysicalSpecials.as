@@ -2648,6 +2648,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function dmgamp_permanent_shared():Number {
 		var dmgamp:Number = 0;
+		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.15;
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.375;
+		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
+		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) dmgamp += combat.intwisscaling() * 0.15;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
@@ -2676,16 +2686,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//base
 		var damage:Number = (player.inte + player.wis + 500 + rand(201)) * 2;
 		var dmgamp:Number = 1;
-		if (player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyLieutenant)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
 		dmgamp += dmgamp_permanent_shared();
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		//count
@@ -2716,16 +2716,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		else useMana(permanentimprovedgolemsendcost() * cnt);
-		var damage:Number = 0;
-		var dmgamp:Number = 2;
-		damage += ((player.inte + player.wis + 1500 + rand(501)) * 10);
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.2;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.2;
-		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.2;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.2;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.9;
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.3;
+		var damage:Number = ((player.inte + player.wis + 1500 + rand(501)) * 10);
+		var dmgamp:Number = 1;
 		dmgamp += dmgamp_permanent_shared();
+		dmgamp *= 2;
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		//count
 		if (cnt == 3) damage *= 5;
@@ -2757,18 +2751,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		else useMana(permanentsteelgolemsendcost() * cnt);
-		var damage:Number = 0;
-		var dmgamp:Number = 1.2;
-		damage += ((player.inte + player.wis + 750 + rand(251)) * 5);
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.12;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.12;
-		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.12;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.12;
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		var damage:Number = ((player.inte + player.wis + 750 + rand(251)) * 5);
+		var dmgamp:Number = 1;
 		dmgamp += dmgamp_permanent_shared();
+		dmgamp *= 1.2;
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		//count
 		if (cnt == 3) damage *= 5;
@@ -2798,18 +2784,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		else useMana(permanentimprovedsteelgolemsendcost() * cnt);
-		var damage:Number = 0;
-		var dmgamp:Number = 2.4;
-		damage += ((player.inte + player.wis + 2250 + rand(751)) * 25);
-		if (player.hasPerk(PerkLib.GolemArmyCaptain)) dmgamp += 0.24;
-		if (player.hasPerk(PerkLib.GolemArmyMajor)) dmgamp += 0.24;
-		if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) dmgamp += 0.24;
-		if (player.hasPerk(PerkLib.GolemArmyColonel)) dmgamp += 0.24;
-		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) dmgamp += 0.1;
-		if (player.hasPerk(PerkLib.EpicGolemMaker)) dmgamp += 0.25;
-		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.6;
-		if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) damage += combat.intwisscaling() * 0.1;
+		var damage:Number = ((player.inte + player.wis + 2250 + rand(751)) * 25);
+		var dmgamp:Number = 1;
 		dmgamp += dmgamp_permanent_shared();
+		dmgamp *= 2.4;
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		//count
 		if (cnt == 3) damage *= 5;
