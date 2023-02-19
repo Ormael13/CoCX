@@ -148,6 +148,11 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.hasKeyItem("Radiant shard") >= 0) miscStats += "<b>Radiant Shards:</b> " + player.keyItemvX("Radiant shard", 1) + "\n";
 
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
+			miscStats += "<b>Fishery daily production:</b> " + camp.FisheryDailyProduction() + "\n";
+			miscStats += "<b>Fishery workers (current/max):</b> " + camp.FisheryWorkersCount() + "/" + camp.FisheryMaxWorkersCount() + "\n";
+		}
+
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
 			miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750" + "\n";
 		else

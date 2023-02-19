@@ -938,8 +938,8 @@ public class Soulforce extends BaseContent
 				if (flags[kFLAGS.ETNA_AFFECTION] >= 2 && flags[kFLAGS.ETNA_FOLLOWER] < 1) addButton(0, "???", hornyCore).hint("Horny-core.");
 				if (flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && flags[kFLAGS.ELECTRA_FOLLOWER] < 2) addButton(1, "???", lightningRod).hint("Lightning Rod.");
 				if (SceneLib.helScene.helSexualAmbushCondition()) addButton(9, "???", analLover).hint("Anal-lover.");
-				addButton(10, "???", returnToMonke);
-				addButton(11, "???", dragON);
+				addButton(10, "???", dragON);
+				addButton(11, "???", returnToMonke);
 				addButton(13, "-1-", theUnknown, page - 1);
 				addButton(14, "Back", SoulSense);
 			}

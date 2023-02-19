@@ -13,7 +13,16 @@ package classes.Scenes.Camp
 		
 		public function TrainingDummy() 
 		{
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) {
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 5) {
+				initStrTouSpeInte(100, 5000, 1400, 10);
+				initWisLibSensCor(10, 700, 10, 50);
+				this.bonusHP = 200000;
+				this.bonusLust = 10000;
+				this.armorDef = 10000;
+				this.armorMDef = 10000;
+				this.level = 90;
+			}
+			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) {
 				initStrTouSpeInte(10, 3500, 1000, 10);
 				initWisLibSensCor(10, 500, 10, 50);
 				this.bonusHP = 140000;
@@ -40,10 +49,16 @@ package classes.Scenes.Camp
 				this.armorMDef = 1000;
 				this.level = 0;
 			}
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 5) {
+				this.short = "training dummies";
+				this.long = "You're currently facing training dummies. Maybe they can't harm a fly (too much) but still could take a beating before they would fall apart....";
+			}
+			else {
+				this.short = "training dummy";
+				this.long = "You're currently facing training dummy. Can't harm a fly (too much) but still can take a beating before it would fall apart....";
+			}
 			this.a = "the ";
-			this.short = "training dummy";
 			this.imageName = "trainingdummy";
-			this.long = "You're currently facing training dummy. Can't harm a fly (too much) but still can take a beating before it would fall apart....";
 			this.plural = false;
 			this.lustVuln = 0;
 			this.tallness = 144;
@@ -57,6 +72,7 @@ package classes.Scenes.Camp
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.NoExpGained, 0, 0, 0, 0);
+			this.createPerk(PerkLib.NoItemsGained, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) {
@@ -68,6 +84,11 @@ package classes.Scenes.Camp
 				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 5) {
+				this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 			}
 			checkMonster();
 		}

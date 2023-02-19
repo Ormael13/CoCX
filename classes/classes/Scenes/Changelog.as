@@ -89,7 +89,6 @@ public class Changelog extends BaseContent
 			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
 			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -190,8 +189,9 @@ public class Changelog extends BaseContent
 			outputText("-Added 2 more upgrade options for golems.\n");
 			outputText("-Added few new ??? options in one of soulsense submenus labeled: 'Quasi-dragoness' which appears after talking once or twice with her, 'Horny-core' & 'Lightning Rod' req. have more than 1% affection toward PC, ' They see him trollin' They hatin' ' and 'Anal-lover'.\n");
 			outputText("-Fatigue costs on toooltips and when game check for having enough to build camp structure will now take into account all factors that can reduce fatigue usage. Some of the options like arcane circle or other options that req. pc personaly do all the work won't be affected by this change.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam), Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%) and Sparring Ring once (Decrease npc's training time by 1/4 and increase exp from using training dummy by 250% more (700% of base amount))\n");
+			outputText("-Added to stats 1st page two new lines after PC build Fishery: daily fish production and current/max workers count\n");
+			outputText("-New monster perk: No Item(s) Gained - for enemies that really shouldn't drop even super rare (1:200 or 1:1000 chance loot or eggs during eastern). Training Dummy got this (no you not gonna get anymore any liquors of brews out of it)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -225,7 +225,7 @@ public class Changelog extends BaseContent
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
-			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks\n");
+			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks, Anita (Harpy from Black Cock) 69 scene locked for some of the PC that had non taur lower bodies\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

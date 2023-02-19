@@ -766,10 +766,12 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There are two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			outputText("Some of your friends are currently sparring at the ");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) outputText("massive");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 7) outputText("massive");
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) outputText("large");
 			else outputText("small");
-			outputText(" ring toward side of your [camp].");
+			outputText(" ring");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 5) outputText(" with wooden floor");
+			outputText(" toward side of your [camp].");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring, maybe it's a little excessive for even the largest of people around.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" A small stand rests adjacent, allowing spectators to cheer on any duels taking place.");
 			outputText("\n\n");
@@ -782,22 +784,22 @@ public class Camp extends NPCAwareContent{
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) outputText("Four large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("Three large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("Two large arcane circles are");
-			else outputText("A large arcane circle is");
+			else outputText("Large arcane circle is");
 			outputText(" written at the edge of your [camp]. Their runes regularly glow with impulse of power.\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
-			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
-			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("A wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
-			else outputText("A small wooden dam drapes across the stream, slowing the passage of water");
+			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("Big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("Wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
+			else outputText("Small wooden dam drapes across the stream, slowing the passage of water");
 			outputText(".\n\n");
-		}
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
-			outputText("Not so far from it is your ");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
-			outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
+				outputText("Not so far from it is your ");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
+				outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
+			}
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
 			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) outputText("At the corner of camp where you planted a seed, a sapling has grown. It has dozens of branches and bright green leaves.\n\n");
@@ -2865,6 +2867,37 @@ public class Camp extends NPCAwareContent{
 			outputText("\n\nYou need more fish to bag out a bundle.");
 			doNext(VisitFishery);
 		}
+	}
+	
+	public function FisheryDailyProduction():Number {
+		var fishproduction:Number = 0;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) fishproduction -= 5;
+		return fishproduction;
+	}
+	public function FisheryWorkersCount():Number {
+		var fisheryworkers:Number = 0;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") fisheryworkers += 1;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "") fisheryworkers += 1;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "") fisheryworkers += 1;
+		return fisheryworkers;
+	}
+	public function FisheryMaxWorkersCount():Number {
+		var fisherymaxworkers:Number = 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fisherymaxworkers += 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 3) fisherymaxworkers += 1;
+		return fisherymaxworkers;
 	}
 
 	private function MagicWardMenu():void {
@@ -4946,4 +4979,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
