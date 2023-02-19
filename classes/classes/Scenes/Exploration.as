@@ -886,7 +886,11 @@ public class Exploration extends BaseContent
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
 				return;
 			}
-			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && rand(5) == 0) {
+			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && !player.hasStatusEffect(StatusEffects.PocketWatch) && rand(3) == 0) {
+				pocketwatchdiscovery();
+				return;
+			}
+			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && player.superPerkPoints > 0 && rand(5) == 0) {
 				pocketwatchdiscovery();
 				return;
 			}
@@ -1252,10 +1256,12 @@ public class Exploration extends BaseContent
 			player.superPerkPoints--;
 			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.PocketWatch)) player.removeStatusEffect(StatusEffects.PocketWatch);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function pocketwatchdiscoveryNo():void {
 			outputText("No you do not want to sacrifice anything. Leaving the watch behind, you return to the camp.\n\n");
+			player.createStatusEffect(StatusEffects.PocketWatch, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1389,4 +1395,4 @@ public class Exploration extends BaseContent
 		}
 
 	}
-}
+}

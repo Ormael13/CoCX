@@ -133,7 +133,7 @@ public class Changelog extends BaseContent
 			outputText("-Normal weapons will now multi-attack the correct number of times when a ranged weapon is equipped. (Chibizs)\n");
 			outputText("-Fix feral on load, fix catgloves feral attack, Bee cock masturbation fix, Fix Sheila 69 (EragonX)\n");
 			outputText("-Minor rearrangment of elementalist summon menu. Totaly not preparing for another summon/upgrade section totaly not that...\n");
-			outputText("-When exploring at lvl 9+ can found some weird pocket watch. Taking it would req. some 'super' sacrifice but will in turn allow to make something back. After picking it's accessable in one of camp actions submenu.\n");
+			outputText("-When exploring at lvl 9+ PC can found some weird pocket watch. Taking it would req. some 'super' sacrifice but will in turn allow to make something back. After picking it's accessable in one of camp actions submenu. In case of not picking it at first time finding it need to have req. 'sacrifice' to find it again.\n");
 			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
 			outputText("-Fixed the small error in the nightwalker dialogue. Fixed the issue of bull strength not properly giving its buff if the player would receive less than a 50% buff from the perk. (Chibizs)\n");
 			outputText("-Elemental Contract Rank 2 perk got additional req. of actualy having arcane circle.\n");
@@ -188,8 +188,8 @@ public class Changelog extends BaseContent
 			outputText("-All perks that are from .... GolemMaker line won't be increasing bag size for pernament golems. Only 4 of them - each that is req. to open new type of golem will increase that specific golem type bag size by 1. Instead their golem dmg amplification effects will be a bit better. In case after update PC own too many golems of specific type most of materials will be refunded.\n");
 			outputText("-Reusable golem cores bag capacity would now be bit larger too. all golem bag parts size for improved stone golems or better golems would count as 2/3 higher in calculating golem cores bag size.\n");
 			outputText("-Added 2 more upgrade options for golems.\n");
-			outputText("-Added now ??? option in soulsense labeled 'quasi-dragoness' which appears after talking once or twice with her.\n");
-			outputText("-Fatigue costs on toooltips and when game check for having enough to build camp structure will now take into account all factors that can reduce fatigue usage. Some of the options like arcane circle or other options that req. pc personlay do all the work won;t be affected by this change.\n");
+			outputText("-Added few new ??? options in one of soulsense submenus labeled: 'Quasi-dragoness' which appears after talking once or twice with her, 'Horny-core' & 'Lightning Rod' req. have more than 1% affection toward PC and 'Anal-lover'.\n");
+			outputText("-Fatigue costs on toooltips and when game check for having enough to build camp structure will now take into account all factors that can reduce fatigue usage. Some of the options like arcane circle or other options that req. pc personaly do all the work won't be affected by this change.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -206,8 +206,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
@@ -215,8 +215,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
