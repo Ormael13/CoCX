@@ -188,6 +188,15 @@ public class Changelog extends BaseContent
 			outputText("-All perks that are from .... GolemMaker line won't be increasing bag size for pernament golems. Only 4 of them - each that is req. to open new type of golem will increase that specific golem type bag size by 1. Instead their golem dmg amplification effects will be a bit better. In case after update PC own too many golems of specific type most of materials will be refunded.\n");
 			outputText("-Reusable golem cores bag capacity would now be bit larger too. all golem bag parts size for improved stone golems or better golems would count as 2/3 higher in calculating golem cores bag size.\n");
 			outputText("-Added 2 more upgrade options for golems.\n");
+			outputText("-Added now ??? option in soulsense labeled 'quasi-dragoness' which appears after talking once or twice with her.\n");
+			outputText("-Fatigue costs on toooltips and when game check for having enough to build camp structure will now take into account all factors that can reduce fatigue usage. Some of the options like arcane circle or other options that req. pc personlay do all the work won;t be affected by this change.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -205,13 +214,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -293,7 +295,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -325,10 +329,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

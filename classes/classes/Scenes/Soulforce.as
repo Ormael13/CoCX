@@ -928,6 +928,7 @@ public class Soulforce extends BaseContent
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
 			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
 			if (player.level >= 3 && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
+			if (!SceneLib.kihaFollower.followerKiha() && flags[kFLAGS.KIHA_TALK_STAGE] > 0) addButton(7, "???", SceneLib.kihaScene.encounterKiha).hint("Quasi-dragoness.");
 			addButton(10, "???", returnToMonke);
 			addButton(11, "???", dragON);
 			addButton(14, "Back", SoulSense);

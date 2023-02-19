@@ -2142,7 +2142,7 @@ public class Camp extends NPCAwareContent{
 		addButton(14, "Back", campActions);
 	}
 
-	private function campBuildingSim():void {
+	public function campBuildingSim():void {
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
@@ -4946,4 +4946,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
