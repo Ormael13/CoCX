@@ -188,7 +188,7 @@ public class Changelog extends BaseContent
 			outputText("-All perks that are from .... GolemMaker line won't be increasing bag size for pernament golems. Only 4 of them - each that is req. to open new type of golem will increase that specific golem type bag size by 1. Instead their golem dmg amplification effects will be a bit better. In case after update PC own too many golems of specific type most of materials will be refunded.\n");
 			outputText("-Reusable golem cores bag capacity would now be bit larger too. all golem bag parts size for improved stone golems or better golems would count as 2/3 higher in calculating golem cores bag size.\n");
 			outputText("-Added 2 more upgrade options for golems.\n");
-			outputText("-Added few new ??? options in one of soulsense submenus labeled: 'Quasi-dragoness' which appears after talking once or twice with her, 'Horny-core' & 'Lightning Rod' req. have more than 1% affection toward PC and 'Anal-lover'.\n");
+			outputText("-Added few new ??? options in one of soulsense submenus labeled: 'Quasi-dragoness' which appears after talking once or twice with her, 'Horny-core' & 'Lightning Rod' req. have more than 1% affection toward PC, ' They see him trollin' They hatin' ' and 'Anal-lover'.\n");
 			outputText("-Fatigue costs on toooltips and when game check for having enough to build camp structure will now take into account all factors that can reduce fatigue usage. Some of the options like arcane circle or other options that req. pc personaly do all the work won't be affected by this change.\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -930,6 +930,7 @@ public class Soulforce extends BaseContent
 				if (flags[kFLAGS.ISABELLA_AFFECTION] > 0 && flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
 				if (player.isNaga() && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
 				if (!SceneLib.kihaFollower.followerKiha() && flags[kFLAGS.KIHA_TALK_STAGE] > 0) addButton(7, "???", quasiDragoness).hint("Quasi-dragoness.");
+				if (flags[kFLAGS.ZENJI_PROGRESS] != -1 && flags[kFLAGS.ZENJI_PROGRESS] > 0 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)) addButton(8, "???", theySeeHimTrollinTheyHatin).hint("They see him trollin' They hatin'");
 				addButton(13, "-2-", theUnknown, page + 1);
 				addButton(14, "Back", SoulSense);
 			}
@@ -989,10 +990,23 @@ public class Soulforce extends BaseContent
 		SceneLib.kihaScene.encounterKiha();
 	}
 	public function hornyCore():void {
-		SceneLib.kihaScene.encounterKiha();
+		SceneLib.etnaScene.repeatEnc();
 	}
 	public function lightningRod():void {
-		SceneLib.kihaScene.encounterKiha();
+		SceneLib.electraScene.repeatMountainEnc();
+	}
+	public function theySeeHimTrollinTheyHatin():void {
+		if (flags[kFLAGS.ZENJI_PROGRESS] >= 4) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 6) {
+				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 100) {
+					if (flags[kFLAGS.ZENJI_PROGRESS] == 7) SceneLib.zenjiScene.followerZenjiRepeatOffer();
+					else SceneLib.zenjiScene.followerZenjiFirstTimeOffer();
+				} else if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 0) {
+					if (flags[kFLAGS.ZENJI_PROGRESS] == 10) SceneLib.zenjiScene.loverZenjiRepeatOffer();
+					else SceneLib.zenjiScene.loverZenjiFirstTimeOffer();
+				} else SceneLib.zenjiScene.part2TrollEncounterRepeat();
+			} else SceneLib.zenjiScene.part2TrollEncounterFirst();
+		} else if (flags[kFLAGS.ZENJI_PROGRESS] > 0 && flags[kFLAGS.ZENJI_PROGRESS] < 4) SceneLib.zenjiScene.part1TrollEncounterRepeat();
 	}
 	public function analLover():void {
 		SceneLib.helScene.helSexualAmbush();
