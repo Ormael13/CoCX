@@ -386,7 +386,7 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	if (itemValue > itemValueOrgin) itemValue = itemValueOrgin;
-	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal.");
+	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal. ");
 	if (shiftKeyDown == 1) {
 		if (itemValue == 0)
 			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
@@ -419,7 +419,7 @@ private function oswaldPawnSellAll():void {
 	}
 	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
-	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
+	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText(" Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
@@ -904,9 +904,12 @@ private function carpentryShopSellNailsYes():void {
 	clearOutput();
 	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= nails)
 	{
-		player.gems += nails;
+		var nailses:Number = nails;
+		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) nailses *= 2;
+		player.gems += nailses;
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= nails;
 		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
+		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your nail"+(nails>1?"s":"")+" for more than normal.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750");
 		}
@@ -953,9 +956,15 @@ private function carpentryShopSellWoodYes():void {
 	clearOutput();
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= wood)
 	{
-		player.gems += (wood * 2);
+		var woodes:Number = wood;
+		var woodes2:Number = 2;
+		if (player.hasPerk(PerkLib.Greedy)) woodes2 *= 2;
+		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) woodes2 *= 2;
+		if (woodes2 > 5) woodes2 = 5;
+		player.gems += (woodes * woodes2);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
 		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 2) + " gems,</i>\" he says.\n\n");
+		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your wood for more than normal.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
 		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200");
 		}
@@ -1002,9 +1011,15 @@ private function carpentryShopSellStoneYes():void {
 	clearOutput();
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= stone)
 	{
-		player.gems += (stone * 4);
+		var stones:Number = stone;
+		var stones2:Number = 4;
+		if (player.hasPerk(PerkLib.Greedy)) stones2 *= 2;
+		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) stones2 *= 2;
+		if (stones2 > 10) stones2 = 10;
+		player.gems += (stones * stones2);
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stone;
 		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 4) + " gems,</i>\" he says.\n\n");
+		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your stone"+(stone>1?"s":"")+" for more than normal.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
 		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200");
 		}

@@ -67,16 +67,19 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			menu();
 			outputText("\"<i>Only the biggest deadliest weapon right here!</i>\"");
 			addButton(0, weapons.BFSWORD.shortName, itemBuy2, weapons.BFSWORD);
-			addButton(1, weapons.DBFSWO.shortName, itemBuy2, weapons.DBFSWO);
-			addButton(2, weapons.BFTHSWORD.shortName, itemBuy2, weapons.BFTHSWORD);
-			addButton(3, weapons.BFWHIP.shortName, itemBuy2, weapons.BFWHIP);
-			addButton(4, weapons.DBFWHIP.shortName, itemBuy2, weapons.DBFWHIP);
-			addButton(5, weapons.OTETSU.shortName, itemBuy2, weapons.OTETSU);
-			addButton(6, weapons.DWARWA.shortName, itemBuy2, weapons.DWARWA);
-			addButton(7, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
+			addButton(1, weapons.BFTHSWORD.shortName, itemBuy2, weapons.BFTHSWORD);
+			addButton(2, weapons.BFWHIP.shortName, itemBuy2, weapons.BFWHIP);
+			addButton(3, weapons.OTETSU.shortName, itemBuy2, weapons.OTETSU);
+			addButton(4, weapons.DWARWA.shortName, itemBuy2, weapons.DWARWA);
+			addButton(5, weapons.DBFSWO.shortName, itemBuy2, weapons.DBFSWO);
+			addButton(6, weapons.DBFTHSWO.shortName, itemBuy2, weapons.DBFTHSWO);
+			addButton(7, weapons.DBFWHIP.shortName, itemBuy2, weapons.DBFWHIP);
 			addButton(8, weapons.SKYPIER.shortName, itemBuy2, weapons.SKYPIER);
-			addButton(10, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
-			addButton(11, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
+			//9
+			addButton(10, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
+			addButton(11, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
+			addButton(12, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
+			//13
 			addButton(14, "Back", OrsbulgMainMenu);
 		}
 		private function itemBuy2(itype:ItemType):void {
