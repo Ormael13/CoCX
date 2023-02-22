@@ -64,7 +64,7 @@ public class Mountain extends BaseContent
 				name: "common",
 				chance: 0.8,
 				call: function ():void{
-					if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+					if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
 					else SceneLib.exploration.genericGolGobImpEncounters();
 				}
 			}, {

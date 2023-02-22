@@ -97,7 +97,7 @@ use namespace CoC;
 						chance: 0.8,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+							if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
 							else SceneLib.exploration.genericGolGobImpEncounters();
 						}
 					}, {
@@ -162,6 +162,7 @@ use namespace CoC;
 					}, {
 						name  : "werewolfFemale",
 						day : false,
+						when: fn.ifLevelMin(12),
 						call  : function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.werewolfFemaleScene.introWerewolfFemale();
@@ -462,6 +463,7 @@ use namespace CoC;
 					}, {
 						name  : "werewolfFemale",
 						day : false,
+						when: fn.ifLevelMin(12),
 						call  : function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.werewolfFemaleScene.introWerewolfFemale();

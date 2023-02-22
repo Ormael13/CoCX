@@ -784,8 +784,8 @@ public class Exploration extends BaseContent
 		public function genericAngelsEncounters(even:Boolean = false):void {
 			var angelsChooser:int = rand(15);
 			//Limit chooser range
-			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 4;
-			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 9;
+			if (player.level < 6 && angelsChooser >= 5) angelsChooser = 4;
+			else if (player.level < 12 && angelsChooser >= 10) angelsChooser = 9;
 			clearOutput();
 			//Mid-rank Angel
 			if (angelsChooser >= 5 && angelsChooser < 10) {
