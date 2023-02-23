@@ -198,11 +198,11 @@ public class Changelog extends BaseContent
 			outputText("-Reaching Master Golem Maker step would make HXD shop with stuff for golemancers giving pc 50% discount... or maybe all others are actualy paying 200% and Master golemancer only pay default price.... ^^\n");
 			outputText("-New melee weapon (by Ormael): Dual BF Two-Handed Swords - buyable at Orsbulg shop. 100 atk, costing 8000 gems, Low grade wrath weapon (dual massive), max base atk value reached at 250+ strength.\n");
 			outputText("-Traveling Merchant Outfit or/and having Greedy perk would increase sell price of metal plates, nails, stones, wood. Still it won't go over buy price.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Angeloids can be meet least often + req. PC have lvl 6+ and PC with less than 67 corruption could even run away from them without problem. (They will get then monster perk: Always Succesfull Runaway).\n");
+			outputText("-Necromancy perk effectivness bonus affect Hex and Necromancy spells too. Cooldowns for Black/Hex/Necro spells are 1 turn shorter.\n");
+			outputText("-Chimerical Body perks req. on lvl up menu correctly refering to internal mutations instead of racial perks.\n");
+			outputText("-Added some of the missing checks for mostly children of specific camp npc's not counting toward camp population counter.\n");
+			outputText("-While punching enemy with bare fists and having more than 2 arms (like... four) amount of atacks per attack will increase from 2 to 4. While using Asura from on top of punching with more than 2 arms at once asura dmg multiplier will be descreased by 50%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -217,6 +217,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
@@ -296,7 +308,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -329,6 +343,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

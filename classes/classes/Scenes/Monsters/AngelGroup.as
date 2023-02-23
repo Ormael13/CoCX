@@ -135,6 +135,7 @@ package classes.Scenes.Monsters
 			this.armorDef = 15;
 			this.armorMDef = 15;
 			this.wings.type = Wings.FEATHERED_AVIAN;
+			if (player.cor < 67) this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 9, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

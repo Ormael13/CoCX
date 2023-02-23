@@ -1132,6 +1132,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
 		if (flags[kFLAGS.TIFA_FOLLOWER] > 5) counter++;
+		if (etnaScene().etnaTotalKids() > 0) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.FOLLOWER)) {
 				counter++;
@@ -4747,6 +4748,7 @@ public function rebirthFromBadEnd():void {
 		var performancePointsPrediction:Number = 0;
 		//Companions
 		performancePointsPrediction += companionsCount();
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) performancePointsPrediction--;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] == 12) performancePointsPrediction++;
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePointsPrediction++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5 || player.hasStatusEffect(StatusEffects.ChiChiOff)) performancePointsPrediction++;
@@ -4822,7 +4824,7 @@ public function rebirthFromBadEnd():void {
 		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
 		childPerformance += (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4) + (etnaScene().etnaTotalKids()));
-		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4) + flags[kFLAGS.AYANE_CHILDREN_MALES] + flags[kFLAGS.AYANE_CHILDREN_FEMALES] + flags[kFLAGS.AYANE_CHILDREN_HERMS] + flags[kFLAGS.LOPPE_KIDS]);
+		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4) + SceneLib.ayaneFollower.ayaneChildren() + flags[kFLAGS.LOPPE_KIDS]);
 		performancePointsPredictionChildren += Math.sqrt(childPerformance);
 		return performancePointsPredictionChildren;
 	}
@@ -4939,25 +4941,28 @@ public function rebirthFromBadEnd():void {
 		var pop:int = 0; //Once you enter Mareth, this will increase to 1.
 		if (!flags[kFLAGS.IN_INGNAM]) pop++; //You count toward the population!
 		pop += companionsCount();
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) pop--;
 		//------------
 		//Misc check!
 		if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
 		if (player.armor == armors.GOOARMR) pop++; //Include Valeria if you're wearing her.
+		if (player.weapon == weapons.AETHERD) pop++; //Include Aether D twin if you're wearing her.
+		if (player.shield == shields.AETHERS) pop++; //Include Aether S twin if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
 		//------------
 		//Children check!
 		//Followers
 		if (followerEmber() && emberScene.emberChildren() > 0) pop += emberScene.emberChildren();
+		if (flags[kFLAGS.MITZI_DAUGHTERS] > 0) pop += flags[kFLAGS.MITZI_DAUGHTERS];
 		if (SceneLib.ayaneFollower.ayaneChildren() > 0) pop += SceneLib.ayaneFollower.ayaneChildren();
 		//Jojo's offsprings don't stay in your camp; they will join with Amily's litters as well.
 		if (sophieFollower()) {
 			if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT]) pop += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
 		}
-
 		//Lovers
 		//Amily's offsprings don't stay in your camp.
-		//Helia can only have 1 child: Helspawn. She's included in companions count.
+		//Helia can only have 1 child: Helspawn. She's included in companions count. The same with Etna child.
 		if (isabellaFollower() && isabellaScene.totalIsabellaChildren() > 0) pop += isabellaScene.totalIsabellaChildren();
 		if (izmaFollower() && izmaScene.totalIzmaChildren() > 0) pop += izmaScene.totalIzmaChildren();
 		if (followerKiha() && kihaFollower.totalKihaChildren() > 0) pop += kihaFollower.totalKihaChildren();
@@ -4965,6 +4970,12 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
 		if (flags[kFLAGS.ZENJI_KIDS] > 0) pop += flags[kFLAGS.ZENJI_KIDS];
 		if (DriderTown.BelisaKids > 0) pop += DriderTown.BelisaKids;
+		if (DriderTown.LilyKidsPC > 0) pop += DriderTown.LilyKidsPC;
+		if (DriderTown.TyrantiaFemaleKids > 0) pop += DriderTown.TyrantiaFemaleKids;
+		if (DriderTown.TyrantiaMaleKids > 0) pop += DriderTown.TyrantiaMaleKids;
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) pop += flags[kFLAGS.PC_GOBLIN_DAUGHTERS];
+		//From npcs that can be in more than one tab
+		if (SceneLib.excelliaFollower.totalExcelliaChildren() > 0) pop += SceneLib.excelliaFollower.totalExcelliaChildren();
 		//------------
 		//Return number!
 		return pop;
@@ -4979,4 +4990,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

@@ -536,6 +536,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.Necromancy)) mod -= 1;
 		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
@@ -548,6 +549,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.Necromancy)) mod -= 1;
 		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
@@ -560,6 +562,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.Necromancy)) mod -= 1;
 		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 4;
 		if (mod < 0) mod = 0;
 		return mod;

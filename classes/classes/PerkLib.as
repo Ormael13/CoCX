@@ -3675,7 +3675,7 @@ public class PerkLib
 		public static const NaturalSpellcasting:PerkType = mk("Natural Spellcasting", "Natural Spellcasting",
 				"Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace).");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
-				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster
+				"Black, Hex and Necromancy magic effectiveness is increased by 50%. Cooldowns for all those spells are 1 turn shorter. Soulforce regenerate passively by 2%.");
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread the narrow path between corruption and true enlightment maintaining a balance that allows you to fuse both sides powers.",null,true);
 		public static const OneWiththeForest:OneWithTheForest = new OneWithTheForest();
@@ -4209,6 +4209,7 @@ public class PerkLib
 			ePerkL.push(EnemyTrueAngel);
 			ePerkL.push(EnemyTrueDemon);
 			ePerkL.push(EnemyResiliance);
+			ePerkL.push(EnemyUndeadType);
 			ePerkL.push(FireNature);
 			ePerkL.push(FireVulnerability);
 			ePerkL.push(IceNature);
@@ -6697,7 +6698,7 @@ public class PerkLib
 					.requireNotThosePerks(ChimericalBodySemiImprovedStageEx, ChimericalBodySemiSuperiorStageEx)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
-                    }, "Two racial perks");
+                    }, "Two internal mutations");
 			RacialParagon.requireLevel(6);
             //Speedy Recovery - Regain Fatigue 50% faster.
             SpeedyRecovery.requireLevel(6);
@@ -6835,7 +6836,7 @@ public class PerkLib
                     .requireLevel(12)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 4;
-                    }, "Four racial perks");
+                    }, "Four internal mutations");
 			Apex.requireLevel(12)
 					.requirePerk(RacialParagon);
             Survivalist2.requireLevel(12)
@@ -6939,7 +6940,7 @@ public class PerkLib
                     .requireLevel(18)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 8;
-                    }, "Eight racial perks");
+                    }, "Eight internal mutations");
 			AlphaAndOmega.requireLevel(18)
 					.requirePerk(Apex);
             JobWarlord.requireAdvancedJobSlot()
@@ -7020,9 +7021,9 @@ public class PerkLib
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 12;
-                    }, "Twelve racial perks");
+                    }, "Twelve internal mutations");
 			JobAllRounder.requireLevel(24)
-                    .requirePerks(JobBeastWarrior , JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobWarrior)
+                    .requirePerks(JobBeastWarrior, JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobWarrior)
                     .requireStr(75)
                     .requireTou(75)
                     .requireSpe(75)
@@ -7115,7 +7116,7 @@ public class PerkLib
                     .requireLevel(30)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 18;
-                    }, "Eighteen racial perks");
+                    }, "Eighteen internal mutations");
             //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
             CycloneStage3.requireLevel(30)
                     .requireStr(90)
@@ -7156,7 +7157,7 @@ public class PerkLib
                     .requireLevel(36)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 24;
-                    }, "Twenty four racial perks");
+                    }, "Twenty four internal mutations");
             CycloneStage4.requireLevel(36)
                     .requireStr(120)
                     .requireTou(120)
@@ -7184,7 +7185,7 @@ public class PerkLib
                     .requireLevel(42)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 32;
-                    }, "Thirty two racial perks");
+                    }, "Thirty two internal mutations");
             CycloneStage5.requireLevel(42)
                     .requireStr(160)
                     .requireTou(160)
@@ -7231,7 +7232,7 @@ public class PerkLib
                     .requireLevel(48)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 40;
-                    }, "Forty racial perks");
+                    }, "Forty internal mutations");
             EpicGolemMaker.requireLevel(48)
                     .requireInt(150)
                     .requireWis(150)
@@ -7245,7 +7246,7 @@ public class PerkLib
                     .requireLevel(48)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 50;
-                    }, "Fifty racial perks");
+                    }, "Fifty internal mutations");
             GolemArmyCaptain.requireLevel(54)
                     .requireInt(160)
                     .requireWis(160)
@@ -7273,7 +7274,7 @@ public class PerkLib
                     .requireLevel(60)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 61;
-                    }, "Sixty one racial perks");
+                    }, "Sixty one internal mutations");
             EpicGolemMaker2ndCircle.requireLevel(60)
                     .requireInt(175)
                     .requireWis(175)
@@ -7287,7 +7288,7 @@ public class PerkLib
                     .requireLevel(66)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 72;
-                    }, "Seventy two racial perks");
+                    }, "Seventy two internal mutations");
             GolemArmyMajor.requireLevel(66)
                     .requireInt(185)
                     .requireWis(185)
@@ -7299,7 +7300,7 @@ public class PerkLib
                      .requireLevel(72)
                      .requireCustomFunction(function (player:Player):Boolean {
                          return player.internalChimeraScore() >= 85;
-                     }, "Eighty five racial perks");
+                     }, "Eighty five internal mutations");
             EpicGolemMaker3rdCircle.requireLevel(72)
                     .requireInt(200)
                     .requireWis(200)
@@ -7334,7 +7335,7 @@ public class PerkLib
                     .requireLevel(78)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 99;
-                    }, "Ninety nine racial perks");
+                    }, "Ninety nine internal mutations");
             GolemArmyLieutenantColonel.requireLevel(78)
                     .requireInt(210)
                     .requireWis(210)
@@ -7453,7 +7454,7 @@ public class PerkLib
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
-            //        }, "Two racial perks");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+            //        }, "Two internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
 			
 			// validate tier lists
 			for each (var tierlist:Array in PERK_TIER_LISTS) {

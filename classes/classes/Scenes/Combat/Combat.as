@@ -5501,6 +5501,7 @@ public class Combat extends BaseContent {
 			var AFAAM:Number = 3;
 			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) AFAAM += 1;
             if (player.hasPerk(PerkLib.AsuraStrength)) AFAAM += 1;
+			if (player.isUnarmedCombat() && player.playerHasFourArms()) AFAAM *= 0.5;
             damage *= AFAAM;
         }
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
@@ -5941,6 +5942,10 @@ public class Combat extends BaseContent {
 					else if (player.isUnarmedCombat()) {
 						doPhysicalDamage(damage, true, true);
 						doPhysicalDamage(damage, true, true);
+						if (player.playerHasFourArms()) {
+							doPhysicalDamage(damage, true, true);
+							doPhysicalDamage(damage, true, true);
+						}
 					}
                     else {
                         doPhysicalDamage(damage, true, true);
@@ -14560,7 +14565,7 @@ public function runAway(callHook:Boolean = true):void {
         }
         inCombat = false;
         clearStatuses(false);
-        doNext(camp.returnToCampUseOneHour);
+		doNext(camp.returnToCampUseOneHour);
         return;
     }
     //Runner perk chance
