@@ -1101,6 +1101,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CounterGlacialStorm:StatusEffectType       = mkCombat("Counter Glacial Storm");
 		public static const CounterHighVoltage:StatusEffectType        = mkCombat("Counter High Voltage");
 		public static const CounterRagingInferno:StatusEffectType      = mkCombat("Counter Raging Inferno");
+		public static const CounterHighTide:StatusEffectType           = mkCombat("Counter High Tide");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");

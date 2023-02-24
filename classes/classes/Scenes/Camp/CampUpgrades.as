@@ -169,6 +169,10 @@ public class CampUpgrades extends BaseContent {
             helperArray[helperArray.length] = "Aurora";
             helpers.count++;
         }
+        if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) {
+			helperArray[helperArray.length] = "A group of your stone golems";
+			helpers.count++;
+        }
         helpers.names = formatStringArray(helperArray);
         return helpers;
     }

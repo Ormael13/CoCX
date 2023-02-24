@@ -559,6 +559,9 @@ public class PerkLib
 		public static const SaintOfZariman:PerkType = mk("Saint of Zariman", "Saint of Zariman",
 				"Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)",
 				"You've chosen the 'Saint of Zariman' perk. Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)");
+		public static const MasterpieceGolem:PerkType = mk("Masterpiece Golem", "Masterpiece Golem",
+				"Now you could make your very own and unique golem that would be your pride as golemancer. (Allow to make 1 special golem that can be upgraded and rebuild into better form after attaining additional knowledge)",
+				"You've chosen the 'Masterpiece Golem' perk. Now you could make your very own and unique golem that would be your pride as golemancer.");
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -566,9 +569,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1811,6 +1811,15 @@ public class PerkLib
 		public static const HighVoltageSu:PerkType = mk("High Voltage (Su)", "High Voltage (Su)",
 				"Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Penalty for turn without casted lightning spell decreased by another 5%.",
 				"You've chosen the 'High Voltage (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Penalty for turn without casted lightning spell decreased by another 5%.");
+		public static const HighTide:PerkType = mk("High Tide", "High Tide",
+				"Cumulative 20% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 20% down to normal (100%) damage.",
+				"You've chosen the 'High Tide' perk. Cumulative 20% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 20% down to normal (100%) damage.");
+		public static const HighTideEx:PerkType = mk("High Tide (Ex)", "High Tide (Ex)",
+				"Increase to cumulative damage by 10%. Penalty for turn without casted water spell decreased by 5%.",
+				"You've chosen the 'High Tide (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted water spell decreased by 5%.");
+		public static const HighTideSu:PerkType = mk("High Tide (Su)", "High Tide (Su)",
+				"Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 5%.",
+				"You've chosen the 'High Tide (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 5%.");
 		public static const Hoarder:PerkType = mk("Hoarder", "Hoarder",
 				"That's what you are, a hoarder. I bet you don't even spend the money. Sleep well at night knowing you're ruining the economy... while you take more money after each victory. (15% more gems from victories)",
 				"You've chosen the 'Hoarder' perk, increasing gem gains from victories by 15%.");
@@ -5438,7 +5447,15 @@ public class PerkLib
                                 || player.hasPerk(DragonDarknessBreath);
                     }, "Any darkness spell")
                     .requireLevel(12)
-                    .requireInt(75);
+                    .requireInt(75);/*
+            HighTide.requirePerks(GrandMage, Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWaterBall)
+                                || player.hasStatusEffect(StatusEffects.KnowsWaterSphere)
+                                || player.hasPerk(DragonWaterBreath);
+                    }, "Any lightning spell")
+                    .requireLevel(12)
+                    .requireInt(75);*/
             // Spell-boosting perks
             // Battlemage: auto-use Might
             Battlemage.requireLevel(12)
@@ -7486,4 +7503,4 @@ public class PerkLib
         }
 	}
 }
-}
+}
