@@ -3654,10 +3654,18 @@ public class Camp extends NPCAwareContent{
 		if (CoC.instance.timeQ == 0) {
 			CanDream = true;
 			model.time.minutes = 0;
-			if (model.time.hours >= 21)
-				CoC.instance.timeQ += 24-model.time.hours +6;
-			if (model.time.hours < 6)
-				CoC.instance.timeQ += 6-model.time.hours;
+			if (player.isNightCreature() == true)
+			{
+				if (model.time.hours >= 6 && model.time.hours <=21)
+						CoC.instance.timeQ += 15 - model.time.hours + 7;
+			}
+			else
+			{
+				if (model.time.hours >= 21)
+					CoC.instance.timeQ += 24-model.time.hours +6;
+				if (model.time.hours < 6)
+					CoC.instance.timeQ += 6-model.time.hours;
+			}
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
 				CoC.instance.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			}
