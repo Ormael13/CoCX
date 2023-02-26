@@ -5368,9 +5368,8 @@ public class Combat extends BaseContent {
         //Unique attack Alraune
         if (player.isAlraune()) {
             outputText("You lash at your opponent with your many vines, striking twelve times.");
-            var x:int = 12
-            while (x-->0)
-                ExtraNaturalWeaponAttack();
+            var x:int = 12;
+            while (x-->0) ExtraNaturalWeaponAttack();
         }
         //Unique TENTACLES STRIKES
         if ((player.isScylla() || player.isKraken()) && player.effectiveTallness >= 70){
@@ -5966,85 +5965,104 @@ public class Combat extends BaseContent {
                     if (isFireTypeWeapon()) {
                         damage = Math.round(damage * fireDamage);
 						doFireDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						if (isUnarmedCombatButDealFireDamage()) {
 							doFireDamage(damage, true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 							if (player.playerHasFourArms()) {
 								doFireDamage(damage, true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 								doFireDamage(damage, true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 							}
 						}
                     }
                     else if (isIceTypeWeapon()) {
                         damage = Math.round(damage * iceDamage);
                         doIceDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     else if (isLightningTypeWeapon()) {
                         damage = Math.round(damage * lightningDamage);
                         doLightingDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     else if (isDarknessTypeWeapon()) {
                         damage = Math.round(damage * darkDamage);
                         doDarknessDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+                    }
+                    else if (isPlasmaTypeWeapon()) {
+                        doPlasmaDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 						doPhysicalDamage(damage, true, true);
                         doMagicDamage(Math.round(damage * 0.2), true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 					}
-                    else if (player.weapon == weapons.MGSWORD)
+                    else if (player.weapon == weapons.MGSWORD) {
+						doMagicDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+					}
+                    else if (player.weapon == weapons.MCLAWS) {
+						doMagicDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         doMagicDamage(damage, true, true);
-                    else if (player.weapon == weapons.MCLAWS)
-                        doMagicDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+					}
                     else if (player.weapon == weapons.PHALLUS) {
-                        if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(Math.round(monster.lustVuln * damage * 0.05));
+                        if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) {
+							monster.teased(Math.round(monster.lustVuln * damage * 0.05));
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						}
                         else {
                             doPhysicalDamage(Math.round(damage * 0.75), true, true);
                             monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         }
                     }
 					else if (player.isUnarmedCombat()) {
 						doPhysicalDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						doPhysicalDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						if (player.playerHasFourArms()) {
 							doPhysicalDamage(damage, true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 							doPhysicalDamage(damage, true, true);
-						}
-					}
-					else if (player.statStore.hasBuff("FoxflamePelt")) {
-						damage = Math.round(damage * 2 * fireDamage);
-						doFireDamage(damage, true, true);
-						var foxpunchlust:Number = (10 + player.cor / 8);
-						monster.teased((monster.lustVuln * foxpunchlust), false);
-						if (player.isUnarmedCombat()) {
-							doFireDamage(damage, true, true);
-							monster.teased((monster.lustVuln * foxpunchlust), false);
-							if (player.playerHasFourArms()) {
-								doFireDamage(damage, true, true);
-								monster.teased((monster.lustVuln * foxpunchlust), false);
-								doFireDamage(damage, true, true);
-								monster.teased((monster.lustVuln * foxpunchlust), false);
-							}
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						}
 					}
                     else {
                         doPhysicalDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         if (player.weapon == weapons.DAISHO) doPhysicalDamage(Math.round(damage * 0.5), true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.5);
                     }
-                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
+                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) {
+						doLightingDamage(Math.round(damage * 0.3), true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+					}
                     if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
                         doPhysicalDamage(damage, true, true);
                         if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         if (player.spe >= 225) {
                             doPhysicalDamage(damage, true, true);
                             if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         }
                         if (player.spe >= 300) {
                             doPhysicalDamage(damage, true, true);
                             if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         }
                     }
                     if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
                         if (player.weapon == weapons.PHALLUS) doPhysicalDamage((damage * 2), true, true);
                         else doPhysicalDamage(Math.round(damage * 0.2), true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
                     if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
                         if (player.spe >= 300) damage *= 4;
@@ -6506,6 +6524,12 @@ public class Combat extends BaseContent {
 		venomCombatRecharge1();
         enemyAI();
     }
+	
+	public function layerFoxflamePeltOnThis(damage:Number):void {
+		doFireDamage(Math.round(damage * 2 * fireDamageBoostedByDao()), true, true);
+		var foxpunchlust:Number = (10 + player.cor / 8);
+		monster.teased((monster.lustVuln * foxpunchlust), false);
+	}
 
     public function JabbingStyleIncrement():void{
         if (player.hasPerk(PerkLib.JabbingStyle)){
@@ -6743,7 +6767,7 @@ public class Combat extends BaseContent {
 
     public function isFireTypeWeapon():Boolean {
         return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat))
-		|| player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
+		|| (player.hasStatusEffect(StatusEffects.FlameBlade) && !player.hasStatusEffect(StatusEffects.ElectrifyWeapon)) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
     }
 
     public function isIceTypeWeapon():Boolean {
@@ -6751,11 +6775,15 @@ public class Combat extends BaseContent {
     }
 
     public function isLightningTypeWeapon():Boolean {
-        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER || player.hasStatusEffect(StatusEffects.ElectrifyWeapon);
+        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER || (player.hasStatusEffect(StatusEffects.ElectrifyWeapon) && !player.hasStatusEffect(StatusEffects.FlameBlade));
     }
 
     public function isDarknessTypeWeapon():Boolean {
         return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst"));
+    }
+
+    public function isPlasmaTypeWeapon():Boolean {
+        return (player.hasStatusEffect(StatusEffects.FlameBlade) && player.hasStatusEffect(StatusEffects.ElectrifyWeapon));
     }
 	
 	public function isUnarmedCombatButDealFireDamage():Boolean {
@@ -8603,7 +8631,7 @@ public class Combat extends BaseContent {
 		if (player.statStore.hasBuff("FoxflamePelt")) {
 			var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
 			player.soulforce -= soulforcecost;
-			useMana((100 * combat.mspecials.kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+			useMana((100 * combat.mspecials.kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
 		}
         combatRoundOver();
     }
@@ -9903,7 +9931,7 @@ public class Combat extends BaseContent {
         }
         //Asura form
         if (player.statStore.hasBuff("FoxflamePelt")) {
-            if ((player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) || (player.mana < spellCost(100 * combat.mspecials.kitsuneskillCost()))) {
+            if ((player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) || (player.mana < spellCost(100 * combat.mspecials.kitsuneskill2Cost()))) {
                 player.statStore.removeBuffs("FoxflamePelt");
                 outputText("<b>The flow of power through you suddenly stops, as you no longer able to sustain it.  Your Foxflame Pelt slowly extinguish, leaving you in your normal form.</b>\n\n");
             }
@@ -15243,7 +15271,7 @@ public function asuraformCost():Number {
 public function assumeAsuraForm():void {
     clearOutput();
     player.wrath -= asuraformCost();
-    outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+    outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
     if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
         outputText("Additionaly from your back emerge ");
 		if (player.hasPerk(PerkLib.AsuraStrength)) outputText("two ");

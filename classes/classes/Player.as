@@ -5827,9 +5827,9 @@ use namespace CoC;
 			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}
-			// Flurry of Blows gets +1
+			// Flurry of Blows gets +2
 			if(isUnarmedCombat() && hasPerk(PerkLib.FlurryOfBlows)){
-                rval += 1;
+                rval += 2;
 			}
 			return rval;
 		}

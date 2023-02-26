@@ -45,12 +45,11 @@ public class YgddrasilRace extends Race {
 				.hairColor1("green", +1)
 				.earType(Ears.LIZARD, +1)
 				.earType(NOT(Ears.ELFIN), 0, -2)
-				.armType(ANY(Arms.PLANT,Arms.PLANT2), +2) //++ - untill claws tf added arms tf will count for both arms and claws tf
-				//claws?
+				.armType(ANY(Arms.PLANT,Arms.PLANT2), +2)
 				.wingType(Wings.YGGDRASIL_LARGE, +2)
 				.wingType(Wings.YGGDRASIL_HUGE, +4)
 				.wingType(Wings.YGGDRASIL_HUGE_2, +6)
-				.skinCoatType(Skin.BARK, +1)
+				.skinCoatType(Skin.BARK, +2)
 				.customRequirement("cock","tentacle or stamen cock",
 						function (body:BodyData):Boolean {
 							return body.player.tentacleCocks() > 0 || body.player.stamenCocks() > 0;

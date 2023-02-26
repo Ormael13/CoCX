@@ -6079,7 +6079,7 @@ public class PerkLib
                     }, "Having Elemental Contract Rank 6 or Dao of the Elements (layer 2 or higher) perks");
             //Tier 8 Wisdom perks
             ElementalContractRank9.requireOrPerks(ElementalContractRank8, DaoOfTheElements, 2)
-					.requirePerk(ElementalConjurerSacrifice)
+					.requireAnyPerk(ElementalConjurerSacrifice, ElementalConjurerMindAndBodySacrificeEx)
                     .requireWis(225)
                     .requireLevel(48);
             ElementalConjurerSacrifice.requireAnyPerk(ElementalConjurerMindAndBodyDedication, ElementalConjurerMindAndBodyDedicationEx)
