@@ -182,14 +182,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("While exploring the town, you can't seem to find anything interesting until something shiny catches your eye. There are exposed nails in a house wreckage! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
 			outputText("\n\nNails: ");
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/750");
-			}
-			else {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250");
-			}
+			if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
+			outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

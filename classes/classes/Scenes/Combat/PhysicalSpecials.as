@@ -1872,6 +1872,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += player.str;
 			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
 			damage = calcInfernoMod(damage, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) {
+				var foxfiremulti:Number = 1;
+				foxfiremulti += spellMod() - 1;
+				foxfiremulti += soulskillMagicalMod() - 1;
+				if (player.shieldName == "spirit focus") foxfiremulti += .2;
+				if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") foxfiremulti += .2;
+				if (player.headjewelryName == "fox hairpin") foxfiremulti += .2;
+				if (player.hasPerk(PerkLib.StarSphereMastery)) foxfiremulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
+				if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) foxfiremulti += 1;
+				damage *= foxfiremulti;
+			}
 			if (monster.plural) damage *= 5;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
@@ -1887,9 +1898,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			outputText("  Your tail"+kitshoo+" slams against [themonster], dealing ");
 			doFireDamage(damage, true, true);
+			if (player.statStore.hasBuff("FoxflamePelt")) {
+				var lustDmg:Number = tailSlapAttackKitshoo();
+				lustDmg = Math.round(monster.lustVuln * lustDmg);
+				monster.teased(lustDmg, false);
+			}
 			if (player.tailType == Tail.KITSHOO && player.tailCount > 1) {
 				var multismack:Number = (player.tailCount - 1);
-				while (multismack-->0) doFireDamage(damage, true, true);
+				while (multismack-->0) {
+					doFireDamage(damage, true, true);
+					if (player.statStore.hasBuff("FoxflamePelt")) monster.teased(lustDmg, false);
+				}
 			}
 			outputText(" damage! ");
 			if (player.hasPerk(PerkLib.PhantomStrike)) {
@@ -1908,10 +1927,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
-		combat.WrathGenerationPerHit2(5);
+		combat.WrathGenerationPerHit2(5*player.tailCount);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
+	}
+	private function tailSlapAttackKitshoo():Number {
+		var lustDmg:Number = monster.lustVuln * ((player.inte / 12 + player.wis / 8) * ((spellMod() + soulskillMagicalMod()) / 2) + rand(monster.lib + monster.cor) / 5);
+		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+		lustDmg *= 0.1;
+		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
+		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+		return lustDmg;
 	}
 
 	public function tailSmackAttack():void {

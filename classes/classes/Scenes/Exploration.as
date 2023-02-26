@@ -765,16 +765,18 @@ public class Exploration extends BaseContent
 			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
 			clearOutput();
 			if (gobimpChooser >= 10 && gobimpChooser < 20) {
-				if (rand(2) == 0) SceneLib.impScene.impPackEncounter2();
-				else SceneLib.angelScene.angelGroupEncounter();
+				SceneLib.impScene.impPackEncounter2();
 			}
 			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				if (rand(2) == 0) SceneLib.impScene.impPackEncounter();
-				else SceneLib.angelScene.angelGroupEncounter();
+				if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+				else SceneLib.impScene.impPackEncounter();
 			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
-				else SceneLib.impScene.impPackEncounter();
+				else {
+					if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+					else SceneLib.impScene.impPackEncounter();
+				}
 			}
 			else {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) SceneLib.goblinScene.goblinAdventurersEncounter();
@@ -1395,4 +1397,4 @@ public class Exploration extends BaseContent
 		}
 
 	}
-}
+}

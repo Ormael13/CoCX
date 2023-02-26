@@ -22,18 +22,19 @@ public class CampUpgrades extends BaseContent {
 
     /*
     flags[kFLAGS.MATERIALS_STORAGE_UPGRADES]:
-    1 - Toolbox bought
-    2 - Nails box bought
-    3 - Wood storage built
-    4 - Stone storage built
-    5 - Stone constructions guide bought
-    ?5a - expanding Wood storage?
-    ?5b - expanding Stones storage?
-    ?5c - expanding Nails storage?
-    ?6 - Sand storage built?
-    ?6a - water cystern or req. dam be high enough expanded to provide water in unlimited amount as if needed?
-    ?7 - Concrete storage built (unless building won't be req. so much of it to need another storage ^^ or just make one storage that will increase slightly both sand and concrete store space)?
-    ?(8 - Possible special materials storage/and or addidtional building guide for specific structures (fireproof dweeling that even with stones and concrete isn't enough?))?
+    01 - Toolbox bought
+    02 - Nails box bought
+    03 - Wood storage built
+    04 - Stone storage built
+    05 - Stone constructions guide bought
+    ?06 - expanding Wood storage?
+    ?07 - expanding Stones storage?
+    ?08 - expanding Nails storage?
+    ?09 - Sand storage built?
+    ?10 - water cystern or req. dam be high enough expanded to provide water in unlimited amount as if needed?
+    ?11 - Concrete storage built (unless building won't be req. so much of it to need another storage ^^ or just make one storage that will increase slightly both sand and concrete store space)?
+    ?(12 - Possible special materials storage/and or addidtional building guide for specific structures (fireproof dweeling that even with stones and concrete isn't enough?))?
+	?xx- metal plates storage, mechanisms, energy core storages?
 
     flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY]:
     1 - 1st Warehouse 1st part built
@@ -61,9 +62,9 @@ public class CampUpgrades extends BaseContent {
     2 - ring build (small) - 6x training time for npc's
     3 - ring build (large) - 5x training time for npc's
     4 - ring build (massive) - 4x training time for npc's
-    5 - ring build (massive w/ wood floor) - 3x training time for npc's?
-    ?6 - ring build (massive w/ stone floor) - 2x training time for npc's?	/NYI
-    ?7 - ring build (collosal w/ stone floor) - 1x training time for npc's?	/NYI
+    5 - ring build (massive w/ wood floor) - 3x training time for npc's
+    6 - ring build (massive w/ stone floor) - 2x training time for npc's	/NYI
+    7 - ring build (collosal w/ stone floor) - 1x training time for npc's	/NYI
 
     flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]:
     1 - first arcane circle
@@ -135,13 +136,26 @@ public class CampUpgrades extends BaseContent {
     }
 
     public function checkMaterials():void {
-        var maxNails:int = flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2 ? 750 : 250;
-        var maxWood:int = flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3 ? 1200 : 400;
-        var maxStone:int = flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4 ? 1200 : 400;
-        outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + maxNails + "\n");
-        outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + maxWood + "\n");
-        outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + maxStone + "\n");
+        outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + checkMaterialsCapNails() + "\n");
+        outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + checkMaterialsCapWood() + "\n");
+        outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + checkMaterialsCapStones() + "\n");
     }
+	
+	public function checkMaterialsCapNails():Number {
+		var cMC1:Number = 250;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) cMC1 += 750;
+		return cMC1;
+	}
+	public function checkMaterialsCapWood():Number {
+		var cMC1:Number = 400;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) cMC1 += 1200;
+		return cMC1;
+	}
+	public function checkMaterialsCapStones():Number {
+		var cMC1:Number = 400;
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) cMC1 += 1200;
+		return cMC1;
+	}
 
     private function getHelpers():Object {
         var helpers:Object = {

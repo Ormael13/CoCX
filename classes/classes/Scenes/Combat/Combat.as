@@ -2907,7 +2907,6 @@ public class Combat extends BaseContent {
 			}
             if (player.weaponRangePerk == "Dual Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
         }
-
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
         var ammoWord:String = weaponRangeAmmo;
         //Keep logic sane if this attack brings victory
@@ -2928,7 +2927,6 @@ public class Combat extends BaseContent {
             if (SceneLib.isabellaFollowerScene.isabellaAccent())
                 outputText("\"<i>You remind me of ze horse-people.  Zey cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n");
             else outputText("\"<i>You remind me of the horse-people.  They cannot deal with my shield either!</i>\" cheers Isabella.\n\n");
-
             enemyAI();
             return;
         }
@@ -2955,7 +2953,6 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-
         if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
             if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at [monster name].\n\n");
             multiArrowsStrike();
@@ -3408,8 +3405,13 @@ public class Combat extends BaseContent {
         else {
 			doPhysicalDamage(damage, true, true);
 		}
-        if (player.hasStatusEffect(StatusEffects.ChargeRWeapon))
-            doMagicDamage(Math.round(damage * 0.2), true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) {
+			doFireDamage((damage*2), true, true);
+			monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+		}
+        if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+			doMagicDamage(Math.round(damage * 0.2), true, true);
+		}
     }
 
     public function elementalArrowDamageMod(damage:Number):Number {
@@ -3541,6 +3543,11 @@ public class Combat extends BaseContent {
 				doPhysicalDamage(damage, true, true);
 				doMagicDamage(Math.round(damage * 0.2), true, true);
 			}
+		}
+		else if (player.statStore.hasBuff("FoxflamePelt")) {
+			doFireDamage((damage * 2), true, true);
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+			monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 		}
 		else doPhysicalDamage(damage, true, true);
 	}
@@ -4126,6 +4133,11 @@ public class Combat extends BaseContent {
 					doPhysicalDamage(damage, true, true);
 					doMagicDamage(Math.round(damage * 0.2), true, true);
 				}
+				else if (player.statStore.hasBuff("FoxflamePelt")) {
+					doFireDamage((damage * 2), true, true);
+					if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+					monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+				}
 				else doPhysicalDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				firearmsXP(rangeMasteryEXPgained(crit));
@@ -4199,12 +4211,22 @@ public class Combat extends BaseContent {
 								doPhysicalDamage(damage, true, true);
 								doMagicDamage(Math.round(damage * 0.2), true, true);
 							}
+							else if (player.statStore.hasBuff("FoxflamePelt")) {
+								doFireDamage((damage * 2), true, true);
+								if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+								monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+							}
 							else doPhysicalDamage(damage, true, true);
 							if (player.weaponRange == weaponsrange.M1CERBE) {
 								if (player.hasPerk(PerkLib.AmateurGunslinger)) {
 									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 										doPhysicalDamage(damage, true, true);
 										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else if (player.statStore.hasBuff("FoxflamePelt")) {
+										doFireDamage((damage * 2), true, true);
+										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 									}
 									else doPhysicalDamage(damage, true, true);
 								}
@@ -4213,12 +4235,22 @@ public class Combat extends BaseContent {
 										doPhysicalDamage(damage, true, true);
 										doMagicDamage(Math.round(damage * 0.2), true, true);
 									}
+									else if (player.statStore.hasBuff("FoxflamePelt")) {
+										doFireDamage((damage * 2), true, true);
+										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+									}
 									else doPhysicalDamage(damage, true, true);
 								}
 								if (player.hasPerk(PerkLib.MasterGunslinger)) {
 									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 										doPhysicalDamage(damage, true, true);
 										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else if (player.statStore.hasBuff("FoxflamePelt")) {
+										doFireDamage((damage * 2), true, true);
+										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 									}
 									else doPhysicalDamage(damage, true, true);
 								}
@@ -4227,12 +4259,22 @@ public class Combat extends BaseContent {
 										doPhysicalDamage(damage, true, true);
 										doMagicDamage(Math.round(damage * 0.2), true, true);
 									}
+									else if (player.statStore.hasBuff("FoxflamePelt")) {
+										doFireDamage((damage * 2), true, true);
+										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+									}
 									else doPhysicalDamage(damage, true, true);
 								}
 								if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
 									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 										doPhysicalDamage(damage, true, true);
 										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else if (player.statStore.hasBuff("FoxflamePelt")) {
+										doFireDamage((damage * 2), true, true);
+										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
+										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 									}
 									else doPhysicalDamage(damage, true, true);
 								}
@@ -4912,9 +4954,9 @@ public class Combat extends BaseContent {
                 }
             }
             outputText(".");
-            if (player.hasPerk(PerkLib.HellfireCoat))
-                ExtraNaturalWeaponAttack(biteMultiplier, "fire");
-            ExtraNaturalWeaponAttack(biteMultiplier);
+            if (player.hasPerk(PerkLib.HellfireCoat)) ExtraNaturalWeaponAttack(biteMultiplier, "fire");
+            else if (player.statStore.hasBuff("FoxflamePelt")) ExtraNaturalWeaponAttack(biteMultiplier, "foxflame");
+			ExtraNaturalWeaponAttack(biteMultiplier);
             if (player.faceType == Face.CERBERUS) {
                 if (player.hasPerk(PerkLib.HellfireCoat)) {
                     ExtraNaturalWeaponAttack(biteMultiplier, "fire");
@@ -5003,7 +5045,10 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.HellfireCoat)) {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
-                } else {
+                } else if (player.statStore.hasBuff("FoxflamePelt")) {
+					ExtraNaturalWeaponAttack(ClawDamageMultiplier, "foxflame", true);
+					ExtraNaturalWeaponAttack(ClawDamageMultiplier, "foxflame", true);
+				} else {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     if (player.weaponName == "black cat glove" && Arms.hasFelineArms(player)) {
@@ -5028,8 +5073,14 @@ public class Combat extends BaseContent {
             if (player.arms.type == Arms.DISPLACER)
             {
                 outputText("You use your extra arms to rend your opponent two more times.");
-                ExtraNaturalWeaponAttack(1, "", true);
-                ExtraNaturalWeaponAttack(1, "", true);
+				if (player.statStore.hasBuff("FoxflamePelt")) {
+					ExtraNaturalWeaponAttack(1, "foxflame", true);
+					ExtraNaturalWeaponAttack(1, "foxflame", true);
+				}
+				else {
+					ExtraNaturalWeaponAttack(1, "", true);
+					ExtraNaturalWeaponAttack(1, "", true);
+				}
                 outputText("\n");
             }
             if (player.arms.type == Arms.WENDIGO)
@@ -5051,7 +5102,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.HellfireCoat)) {
                 ExtraNaturalWeaponAttack(1, "fire");
                 ExtraNaturalWeaponAttack(1, "fire");
-            } else {
+            } else if (player.statStore.hasBuff("FoxflamePelt")) {
+				ExtraNaturalWeaponAttack(1, "foxflame");
+				ExtraNaturalWeaponAttack(1, "foxflame");
+			} else {
                 ExtraNaturalWeaponAttack();
                 ExtraNaturalWeaponAttack();
             }
@@ -5125,7 +5179,9 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.HellfireCoat)) {
                 ExtraNaturalWeaponAttack(1.5, "fire");
-            } else {
+            } else if (player.statStore.hasBuff("FoxflamePelt")) {
+				ExtraNaturalWeaponAttack(1.5, "foxflame");
+			} else {
                 ExtraNaturalWeaponAttack(1.5);
             }
             outputText("\n");
@@ -5230,8 +5286,10 @@ public class Combat extends BaseContent {
 			}
             else if (player.tail.type == Tail.SALAMANDER || player.tail.type == Tail.KITSHOO){
                 outputText("You hit your opponent with a slam of your tail, setting your target on fire");
-                for (var tail:int=player.tailCount; tail > 0; tail--)
-                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                for (var tail:int = player.tailCount; tail > 0; tail--) {
+					if (player.statStore.hasBuff("FoxflamePelt")) ExtraNaturalWeaponAttack(TailDamageMultiplier, "foxflame");
+                    else ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+				}
                 outputText("\n");
             }
             else{
@@ -5907,10 +5965,13 @@ public class Combat extends BaseContent {
                     //Damage is delivered HERE
                     if (isFireTypeWeapon()) {
                         damage = Math.round(damage * fireDamage);
-                        doFireDamage(damage, true, true);
+						doFireDamage(damage, true, true);
 						if (isUnarmedCombatButDealFireDamage()) {
-							damage = Math.round(damage * fireDamage);
 							doFireDamage(damage, true, true);
+							if (player.playerHasFourArms()) {
+								doFireDamage(damage, true, true);
+								doFireDamage(damage, true, true);
+							}
 						}
                     }
                     else if (isIceTypeWeapon()) {
@@ -5946,6 +6007,22 @@ public class Combat extends BaseContent {
 						if (player.playerHasFourArms()) {
 							doPhysicalDamage(damage, true, true);
 							doPhysicalDamage(damage, true, true);
+						}
+					}
+					else if (player.statStore.hasBuff("FoxflamePelt")) {
+						damage = Math.round(damage * 2 * fireDamage);
+						doFireDamage(damage, true, true);
+						var foxpunchlust:Number = (10 + player.cor / 8);
+						monster.teased((monster.lustVuln * foxpunchlust), false);
+						if (player.isUnarmedCombat()) {
+							doFireDamage(damage, true, true);
+							monster.teased((monster.lustVuln * foxpunchlust), false);
+							if (player.playerHasFourArms()) {
+								doFireDamage(damage, true, true);
+								monster.teased((monster.lustVuln * foxpunchlust), false);
+								doFireDamage(damage, true, true);
+								monster.teased((monster.lustVuln * foxpunchlust), false);
+							}
 						}
 					}
                     else {
@@ -6926,6 +7003,10 @@ public class Combat extends BaseContent {
                 damage *= FeraldamageMultiplier;
 				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
 				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
+				else if (SpecialEffect == "foxflame") {
+					doFireDamage((damage * 2), true, true);
+					monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+				}
 				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
 				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
 				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
@@ -8519,6 +8600,11 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("TranceTransformation")) player.soulforce -= 50;
         if (player.statStore.hasBuff("CrinosShape")) player.wrath -= mspecials.crinosshapeCost();
         if (player.statStore.hasBuff("AsuraForm")) player.wrath -= asuraformCost();
+		if (player.statStore.hasBuff("FoxflamePelt")) {
+			var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+			player.soulforce -= soulforcecost;
+			useMana((100 * combat.mspecials.kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		}
         combatRoundOver();
     }
 
@@ -9809,7 +9895,17 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("AsuraForm")) {
             if (player.wrath < asuraformCost()) {
                 player.statStore.removeBuffs("AsuraForm");
-                outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  You drop roughly to the floor. Your Asura form slowly fades away, leaving you in your normal form.</b>\n\n");
+                outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  Your Asura form slowly fades away, leaving you in your normal form.</b>\n\n");
+            }
+            //	else {
+            //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
+            //	}
+        }
+        //Asura form
+        if (player.statStore.hasBuff("FoxflamePelt")) {
+            if ((player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) || (player.mana < spellCost(100 * combat.mspecials.kitsuneskillCost()))) {
+                player.statStore.removeBuffs("FoxflamePelt");
+                outputText("<b>The flow of power through you suddenly stops, as you no longer able to sustain it.  Your Foxflame Pelt slowly extinguish, leaving you in your normal form.</b>\n\n");
             }
             //	else {
             //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
@@ -16144,4 +16240,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

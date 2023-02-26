@@ -4174,8 +4174,8 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
 		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
 				.hint("You need to explore Forest more to unlock this place.")
-				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
-				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
+				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Forest more to unlock this place.", null, "???")
+				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the forest.", null, "???");
 		bd.add("Quarry", camp.cabinProgress.quarrySite)
 				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
 				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")

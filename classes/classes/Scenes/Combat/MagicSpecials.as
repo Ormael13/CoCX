@@ -153,8 +153,10 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if ((player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) || (player.tailType == Tail.KITSHOO && player.tailCount >= 2)) {
 				bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
-				bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
-				bd.requireMana(spellCost(60 * kitsuneskillCost()));
+				if (!player.statStore.hasBuff("FoxflamePelt")) {
+					bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
+					bd.requireMana(spellCost(60 * kitsuneskillCost()));
+				}
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -230,6 +232,15 @@ public class MagicSpecials extends BaseCombatContent {
 				} else if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficulty breathing.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.tailType == Tail.KITSHOO && player.tailCount >= 2) {
+				if (player.statStore.hasBuff("FoxflamePelt")) {
+					buttons.add("Return", extinguishFoxflamePelt).hint("Release foxflames.");
+				} else {
+					bd = buttons.add("Foxflame Pelt", lightupFoxflamePelt, "Coat yourself with foxflame pelt. (It would drain soulforce and mana until deactivated)\n");
+					bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
+					bd.requireMana(spellCost(100 * kitsuneskillCost()));
+				}
 			}
 			if ((player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2))) {//player.hasPerk(MutationsLib.NekomataThyroidGland) ||
 				bd = buttons.add("GhostFire", nekomataGhostFire).hint("Unleash a ghost flame at your opponent for high damage. It's unstoped by barriers that stops magic spells or attacks. \n");
@@ -3219,6 +3230,35 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.FalseWeapon, 0, 0, 0, 0);
 		enemyAI();
 	}
+	
+	public function lightupFoxflamePelt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		lightupFoxflamePelt2();
+	}
+	public function lightupFoxflamePelt2():void {
+		useMana((100 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		outputText("Holding out your palm, you conjure fox flame that dances across your fingertips.  Then is spread all over your arm to rest of your body!\n\n");
+		var temp1:Number = 0;
+		var tempSpe:Number;
+		temp1 += player.speStat.core.value * 0.2;
+		temp1 = Math.round(temp1);
+		var oldHPratio:Number = player.hp100/100;
+		tempSpe = temp1;
+		mainView.statsView.showStatUp('spe');
+		player.buff("FoxflamePelt").addStats({spe:tempSpe}).withText("Foxflame Pelt").combatPermanent();
+		player.HP = oldHPratio*player.maxHP();
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function extinguishFoxflamePelt():void {
+		clearOutput();
+		outputText("Gathering you willpower you forcefully extinguish flames coating your body.");
+		player.statStore.removeBuffs("FoxflamePelt");
+		enemyAI();
+	}
 
 	public function EverywhereAndNowhere():void {
 		clearOutput();
@@ -3820,12 +3860,14 @@ public class MagicSpecials extends BaseCombatContent {
 	public function basicFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
-		player.soulforce -= soulforcecost;
+		if (!player.statStore.hasBuff("FoxflamePelt")) {
+			var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+			player.soulforce -= soulforcecost;
+		}
 		basicFoxFire2();
 	}
 	public function basicFoxFire2():void {
-		useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		if (!player.statStore.hasBuff("FoxflamePelt")) useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
 		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -4215,7 +4257,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneskillCost():Number {
 		var modksc:Number = 1;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) modksc -= 0.5;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX) {
+		if (player.tailCount == 9 && (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO)) {
 			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) modksc *= 3;
 			else if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) modksc *= 2;
 			else modksc += 0.5;

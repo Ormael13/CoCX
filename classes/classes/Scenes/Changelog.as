@@ -205,9 +205,10 @@ public class Changelog extends BaseContent
 			outputText("-While punching enemy with bare fists and having more than 2 arms (like... four) amount of atacks per attack will increase from 2 to 4. While using Asura from on top of punching with more than 2 arms at once asura dmg multiplier will be descreased by 50%.\n");
 			outputText("-Fixed the issue of creatures of night being unable to sleep during the day. 0600 - 2100. (Chibizs)\n");
 			outputText("-When having 5 or more pernament stone golems they would count as helper for building camp structures.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Wood, Stones storages after building would increase materials storage by 4x not 3x. Buying nails box would also increase cap by 4x.\n");
+			outputText("-Sidonie wood cutting option can now count as progress toward unlock woodcutter location but... will only make possible to progress unlock until 5th one. The last 6th event for wood cutting must be done traditional way by finding it in forest.\n");
+			outputText("-New M. Special for Kitshoo: Foxflame Pelt - req. been Kitshoo with min. 2 cinder tails - activated/deactivated ability that drain SF/Mana for each turn it's active. ");
+			outputText("When it's active basic foxfire use cost nothing to use, tail slap special will deal lust dmage and fire dmg would be increased, weakened foxfire effect (fire + lust dmg) would apply to melee/range/feral attacks, speed is increased by ~20%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

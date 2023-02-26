@@ -959,7 +959,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Flying:StatusEffectType                    = mkCombat("Flying");
 		public static const FlyingDisabled:StatusEffectType            = mkCombat("Flying Disabled");
 		public static const FlyingNoStun:StatusEffectType              = mkCombat("FlyingNoStun");
-		public static const FoxflamePelt:StatusEffectType              = mkCombat("Foxflame Pelt");
 		public static const Frostbite:StatusEffectType                 = mkCombat("Frostbite");
 		public static const FrostburnDoT:StatusEffectType              = mkCombat("Frostburn DoT");
 		public static const FrozenLung:StatusEffectType	               = mkCombat("Frozen Lung");
