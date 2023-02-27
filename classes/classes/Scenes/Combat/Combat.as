@@ -1468,7 +1468,7 @@ public class Combat extends BaseContent {
                 }
             }
             if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
+            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && (dualWeapon || player.weapon == weapons.DAISHO)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
         }
         else {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -5966,16 +5966,6 @@ public class Combat extends BaseContent {
                         damage = Math.round(damage * fireDamage);
 						doFireDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-						if (isUnarmedCombatButDealFireDamage()) {
-							doFireDamage(damage, true, true);
-							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-							if (player.playerHasFourArms()) {
-								doFireDamage(damage, true, true);
-								if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-								doFireDamage(damage, true, true);
-								if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-							}
-						}
                     }
                     else if (isIceTypeWeapon()) {
                         damage = Math.round(damage * iceDamage);
@@ -5996,6 +5986,32 @@ public class Combat extends BaseContent {
                         doPlasmaDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                     }
+                    else if (isUnarmedCombatButDealFireDamage()) {
+                        damage = Math.round(damage * fireDamage);
+						doFireDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						doFireDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.playerHasFourArms()) {
+							doFireDamage(damage, true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+							doFireDamage(damage, true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						}
+                    }
+					else if (isUnarmedCombatButDealIceDamage()) {
+						damage = Math.round(damage * iceDamage);
+                        doIceDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+                        doIceDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.playerHasFourArms()) {
+							doIceDamage(damage, true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+							doIceDamage(damage, true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						}
+					}
                     else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 						doPhysicalDamage(damage, true, true);
                         doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -6037,8 +6053,10 @@ public class Combat extends BaseContent {
                     else {
                         doPhysicalDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
-                        if (player.weapon == weapons.DAISHO) doPhysicalDamage(Math.round(damage * 0.5), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.5);
+                        if (player.weapon == weapons.DAISHO) {
+							doPhysicalDamage(Math.round(damage * 0.5), true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.5);
+						}
                     }
                     if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) {
 						doLightingDamage(Math.round(damage * 0.3), true, true);
@@ -6766,28 +6784,28 @@ public class Combat extends BaseContent {
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat))
-		|| (player.hasStatusEffect(StatusEffects.FlameBlade) && !player.hasStatusEffect(StatusEffects.ElectrifyWeapon)) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY
+		|| (player.hasStatusEffect(StatusEffects.FlameBlade) && !player.hasStatusEffect(StatusEffects.ElectrifyWeapon));
     }
-
     public function isIceTypeWeapon():Boolean {
-        return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire")) || player.weapon == weapons.BCLAWS || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw));
+        return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire")) || player.weapon == weapons.BCLAWS;
     }
-
     public function isLightningTypeWeapon():Boolean {
-        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER || (player.hasStatusEffect(StatusEffects.ElectrifyWeapon) && !player.hasStatusEffect(StatusEffects.FlameBlade));
+        return ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "topaz")) || player.weapon == weapons.S_RULER
+		|| (player.hasStatusEffect(StatusEffects.ElectrifyWeapon) && !player.hasStatusEffect(StatusEffects.FlameBlade));
     }
-
     public function isDarknessTypeWeapon():Boolean {
         return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst"));
     }
-
     public function isPlasmaTypeWeapon():Boolean {
         return (player.hasStatusEffect(StatusEffects.FlameBlade) && player.hasStatusEffect(StatusEffects.ElectrifyWeapon));
     }
 	
 	public function isUnarmedCombatButDealFireDamage():Boolean {
-		return (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat));
+		return (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat));
+	}
+	public function isUnarmedCombatButDealIceDamage():Boolean {
+		return (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw));
 	}
 
     public function monsterPureDamageBonus(damage:Number):Number {

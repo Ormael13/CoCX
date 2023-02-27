@@ -48,7 +48,9 @@ public class PlantRace extends Race {
 				.hairTypeAndColor1(ANY(Hair.LEAF, Hair.GRASS), "green", +1)
 				.plainSkinOfColor1(ANY("leaf green", "lime green", "turquoise", "light green"), +1)
 				//	if (skinType == 6)/zielona skóra +1, bark skin +2
-				.skinCoatType(Skin.BARK, +2)
+				.customRequirement("skin", "bark skin", function (body:BodyData):Boolean {
+					return body.player.isBarkSkin()
+				}, +2)
 				.armType(Arms.PLANT, +1)
 				.legType(ANY(LowerBody.PLANT_HIGH_HEELS,LowerBody.PLANT_ROOT_CLAWS), +1)
 				.hasCockOfType(CockTypesEnum.TENTACLE, +1)

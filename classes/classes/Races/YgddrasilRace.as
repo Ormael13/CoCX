@@ -49,7 +49,9 @@ public class YgddrasilRace extends Race {
 				.wingType(Wings.YGGDRASIL_LARGE, +2)
 				.wingType(Wings.YGGDRASIL_HUGE, +4)
 				.wingType(Wings.YGGDRASIL_HUGE_2, +6)
-				.skinCoatType(Skin.BARK, +2)
+				.customRequirement("skin", "bark skin", function (body:BodyData):Boolean {
+					return body.player.isBarkSkin()
+				}, +2)
 				.customRequirement("cock","tentacle or stamen cock",
 						function (body:BodyData):Boolean {
 							return body.player.tentacleCocks() > 0 || body.player.stamenCocks() > 0;
