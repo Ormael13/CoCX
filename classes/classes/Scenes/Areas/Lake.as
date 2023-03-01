@@ -117,7 +117,7 @@ use namespace CoC;
 			}, {
 				name: "izma",
 				when: function ():Boolean {
-					return player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (player.exploredLake >= 10) && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
+					return player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && player.exploredLake >= 10 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
 				},
 				chance: 0.15,
 				call: SceneLib.izmaScene.meetIzmaAtLake

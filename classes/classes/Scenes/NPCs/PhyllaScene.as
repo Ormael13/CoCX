@@ -1828,14 +1828,10 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
 				outputText("\n\nYou gain " + stones + " stones.");
 			}
-			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 1200;
+			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
 				outputText(" <b>Your stone capacity is full.</b>");
 			}
-			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 400 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 400;
-				outputText(" <b>Your stone capacity is full.</b>");
- 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 

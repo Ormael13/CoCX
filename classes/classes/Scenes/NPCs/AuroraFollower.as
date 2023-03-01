@@ -48,6 +48,11 @@ public function auroraCampMenu():void {
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Aurora about accompaning you.");
 	}
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
+		if (camp.FisheryWorkersCount() < camp.FisheryMaxWorkersCount() && flags[kFLAGS.PLAYER_COMPANION_1] != "Aurora") addButton(6, "Fishery Work", sendToFishery);
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Aurora" || flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Aurora" || flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Aurora") addButton(6, "Stop Work", backFromFishery);
+	}
+	else addButtonDisabled(6, "???", "You need to have functional fishery first.");
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -183,6 +188,26 @@ public function auroraHenchmanOption():void
 	}
 	doNext(auroraCampMenu);
 	cheatTime(1/12);
+}
+
+private function sendToFishery():void
+{
+	clearOutput();
+	outputText("Information Noona here: So you bossy today and asked gargoyle servant to work at fishery.... very clever.");
+	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "Aurora";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "Aurora";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "Aurora";
+	doNext(auroraCampMenu);
+}
+
+private function backFromFishery():void
+{
+	clearOutput();
+	outputText("Information Noone reminds your gargoyle servant no longer work at fishery.");
+	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Aurora") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "";
+	doNext(auroraCampMenu);
 }
 
 //9 feet tall THICC bat gargoyle gurl ^^ (mk 2 ma 4 feet a Ted ma 6 and half feet czyli po miedzy wzrostami mk 2 i mk 3 xD)

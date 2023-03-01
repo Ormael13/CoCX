@@ -2537,14 +2537,14 @@ import flash.utils.getQualifiedClassName;
 		public function dropLoot():ItemType
 		{
 			//Chance of armor if at level 1 pierce fetish
-			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
+			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && !hasPerk(PerkLib.NoItemsGained) && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
 				return armors.SEDUCTA;
 			}
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BROBREW;
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
-			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BROBREW;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BIMBOLQ;
+			if (!game.plotFight && rand(1000) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.RAINDYE;
 			//Chance of eggs if Easter!
-			if (!game.plotFight && rand(6) == 0 && SceneLib.holidays.isEaster()) {
+			if (!game.plotFight && rand(6) == 0 && !hasPerk(PerkLib.NoItemsGained) && SceneLib.holidays.isEaster()) {
 				return randomChoice(
 						consumables.BROWNEG,
 						consumables.L_BRNEG,

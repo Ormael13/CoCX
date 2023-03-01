@@ -765,16 +765,18 @@ public class Exploration extends BaseContent
 			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
 			clearOutput();
 			if (gobimpChooser >= 10 && gobimpChooser < 20) {
-				if (rand(2) == 0) SceneLib.impScene.impPackEncounter2();
-				else SceneLib.angelScene.angelGroupEncounter();
+				SceneLib.impScene.impPackEncounter2();
 			}
 			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				if (rand(2) == 0) SceneLib.impScene.impPackEncounter();
-				else SceneLib.angelScene.angelGroupEncounter();
+				if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+				else SceneLib.impScene.impPackEncounter();
 			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
-				else SceneLib.impScene.impPackEncounter();
+				else {
+					if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+					else SceneLib.impScene.impPackEncounter();
+				}
 			}
 			else {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) SceneLib.goblinScene.goblinAdventurersEncounter();
@@ -784,8 +786,8 @@ public class Exploration extends BaseContent
 		public function genericAngelsEncounters(even:Boolean = false):void {
 			var angelsChooser:int = rand(15);
 			//Limit chooser range
-			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 4;
-			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 9;
+			if (player.level < 6 && angelsChooser >= 5) angelsChooser = 4;
+			else if (player.level < 12 && angelsChooser >= 10) angelsChooser = 9;
 			clearOutput();
 			//Mid-rank Angel
 			if (angelsChooser >= 5 && angelsChooser < 10) {
@@ -886,7 +888,11 @@ public class Exploration extends BaseContent
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
 				return;
 			}
-			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && rand(5) == 0) {
+			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && !player.hasStatusEffect(StatusEffects.PocketWatch) && rand(3) == 0) {
+				pocketwatchdiscovery();
+				return;
+			}
+			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && player.superPerkPoints > 0 && rand(5) == 0) {
 				pocketwatchdiscovery();
 				return;
 			}
@@ -1252,10 +1258,12 @@ public class Exploration extends BaseContent
 			player.superPerkPoints--;
 			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.PocketWatch)) player.removeStatusEffect(StatusEffects.PocketWatch);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function pocketwatchdiscoveryNo():void {
 			outputText("No you do not want to sacrifice anything. Leaving the watch behind, you return to the camp.\n\n");
+			player.createStatusEffect(StatusEffects.PocketWatch, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1389,4 +1397,4 @@ public class Exploration extends BaseContent
 		}
 
 	}
-}
+}

@@ -1021,13 +1021,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				//Daily Fishery production
-				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
-					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
-						flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
-						if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 2;
-					}
-					if (flags[kFLAGS.CEANI_FOLLOWER] > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 5;
-				}
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0 && camp.FisheryDailyProduction() > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += camp.FisheryDailyProduction();
 				//Daily barrels refill
 				if (player.hasStatusEffect(StatusEffects.MitziDaughtersBarrels)) {
 					if (rand(3) == 0) player.addStatusValue(StatusEffects.MitziDaughtersBarrels, 1, 5);

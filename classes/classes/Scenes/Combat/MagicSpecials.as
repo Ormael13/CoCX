@@ -65,7 +65,7 @@ public class MagicSpecials extends BaseCombatContent {
 			assumeCrinosShape007();
 		}
 		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0 && player.wrath >= combat.asuraformCost() && !player.hasPerk(PerkLib.ElementalBody)) {
-			outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+			outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
 			if (player.hasPerk(PerkLib.AsuraStrength)) {
 				outputText("Additionaly from your back emerge ");
 				outputText("pair");
@@ -153,8 +153,10 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if ((player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) || (player.tailType == Tail.KITSHOO && player.tailCount >= 2)) {
 				bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
-				bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
-				bd.requireMana(spellCost(60 * kitsuneskillCost()));
+				if (!player.statStore.hasBuff("FoxflamePelt")) {
+					bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
+					bd.requireMana(spellCost(60 * kitsuneskillCost()));
+				}
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -230,6 +232,15 @@ public class MagicSpecials extends BaseCombatContent {
 				} else if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficulty breathing.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.tailType == Tail.KITSHOO && player.tailCount >= 6) {
+				if (player.statStore.hasBuff("FoxflamePelt")) {
+					buttons.add("Return", extinguishFoxflamePelt).hint("Release foxflames.");
+				} else {
+					bd = buttons.add("Foxflame Pelt", lightupFoxflamePelt, "Coat yourself with foxflame pelt. (It would drain soulforce and mana until deactivated)\n");
+					bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
+					bd.requireMana(spellCost(100 * kitsuneskill2Cost()));
+				}
 			}
 			if ((player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2))) {//player.hasPerk(MutationsLib.NekomataThyroidGland) ||
 				bd = buttons.add("GhostFire", nekomataGhostFire).hint("Unleash a ghost flame at your opponent for high damage. It's unstoped by barriers that stops magic spells or attacks. \n");
@@ -2566,6 +2577,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 			if (player.hasPerk(PerkLib.HighVoltageSu) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
 			if (player.hasPerk(PerkLib.EclipsingShadowSu) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);
+			if (player.hasPerk(PerkLib.HighTideSu) && player.hasStatusEffect(StatusEffects.CounterHighTide)) player.addStatusValue(StatusEffects.CounterHighTide, 3, -1);
 			var damage:Number = 0;
 			var damult:Number = 1;
 			damage += scalingBonusIntelligence() * 5;
@@ -2644,6 +2656,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 			if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, 1);
 			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
+			if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 3, 1);
 			enemyAI();
 		}
 	}
@@ -3215,6 +3228,36 @@ public class MagicSpecials extends BaseCombatContent {
 		player.lust -= Math.round(player.maxLust() * 0.1);
 		outputText("You focus on the heat in your body, and with your mind focused, you send your heat down, into the ground. The ground cracks under your [legs], and from the crack emerges a stone, shaped nearly perfectly into the shape of your [weapon].\n\n");
 		player.createStatusEffect(StatusEffects.FalseWeapon, 0, 0, 0, 0);
+		enemyAI();
+	}
+	
+	public function lightupFoxflamePelt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		lightupFoxflamePelt2();
+	}
+	public function lightupFoxflamePelt2():void {
+		useMana((100 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+		outputText("Holding out your palm, you conjure fox flame that dances across your fingertips.  Then is spread all over your arm to rest of your body!\n\n");
+		var temp1:Number = 0;
+		var tempSpe:Number;
+		temp1 += player.speStat.core.value * 0.1;
+		if (player.tailCount >= 7) temp1 += player.speStat.core.value * 0.1 * (player.tailCount - 6);
+		temp1 = Math.round(temp1);
+		var oldHPratio:Number = player.hp100/100;
+		tempSpe = temp1;
+		mainView.statsView.showStatUp('spe');
+		player.buff("FoxflamePelt").addStats({spe:tempSpe}).withText("Foxflame Pelt").combatPermanent();
+		player.HP = oldHPratio*player.maxHP();
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function extinguishFoxflamePelt():void {
+		clearOutput();
+		outputText("Gathering you willpower you forcefully extinguish flames coating your body.");
+		player.statStore.removeBuffs("FoxflamePelt");
 		enemyAI();
 	}
 
@@ -3818,12 +3861,14 @@ public class MagicSpecials extends BaseCombatContent {
 	public function basicFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
-		player.soulforce -= soulforcecost;
+		if (!player.statStore.hasBuff("FoxflamePelt")) {
+			var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+			player.soulforce -= soulforcecost;
+		}
 		basicFoxFire2();
 	}
 	public function basicFoxFire2():void {
-		useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		if (!player.statStore.hasBuff("FoxflamePelt")) useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
 		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -4213,7 +4258,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneskillCost():Number {
 		var modksc:Number = 1;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) modksc -= 0.5;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX) {
+		if (player.tailCount == 9 && (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO)) {
 			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) modksc *= 3;
 			else if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) modksc *= 2;
 			else modksc += 0.5;
@@ -6382,4 +6427,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

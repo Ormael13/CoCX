@@ -1033,12 +1033,12 @@ use namespace CoC;
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") &&!weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
+			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") && !weaponSpecials("Dual Massive") && !weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
 		}
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
+			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
@@ -3874,8 +3874,6 @@ use namespace CoC;
 				basicJobs++;
 			if (hasPerk(PerkLib.JobSorcerer))
 				basicJobs++;
-			if (hasPerk(PerkLib.JobSoulCultivator))
-				basicJobs++;
 			if (hasPerk(PerkLib.JobWarrior))
 				basicJobs++;
 			return basicJobs;
@@ -5829,9 +5827,9 @@ use namespace CoC;
 			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}
-			// Flurry of Blows gets +1
+			// Flurry of Blows gets +2
 			if(isUnarmedCombat() && hasPerk(PerkLib.FlurryOfBlows)){
-                rval += 1;
+                rval += 2;
 			}
 			return rval;
 		}

@@ -48,7 +48,7 @@ public class PerkLib
 		public static const BigCock:PerkType = mk("Big Cock", "Big Cock",
 				"Gains cock size 25% faster and with less limitations.", null, true);
 		public static const MessyOrgasms:PerkType = mk("Messy Orgasms", "Messy Orgasms",
-				"Produces 50% more cum volume.", null, true);
+				"Produces 100% more cum volume.", null, true);
 
 		// Ascension perks
 		public static const AscensionBloodlust:AscensionBloodlustPerk = new AscensionBloodlustPerk();
@@ -559,6 +559,9 @@ public class PerkLib
 		public static const SaintOfZariman:PerkType = mk("Saint of Zariman", "Saint of Zariman",
 				"Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)",
 				"You've chosen the 'Saint of Zariman' perk. Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)");
+		public static const MasterpieceGolem:PerkType = mk("Masterpiece Golem", "Masterpiece Golem",
+				"Now you could make your very own and unique golem that would be your pride as golemancer. (Allow to make 1 special golem that can be upgraded and rebuild into better form after attaining additional knowledge)",
+				"You've chosen the 'Masterpiece Golem' perk. Now you could make your very own and unique golem that would be your pride as golemancer.");
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -566,9 +569,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1311,11 +1311,11 @@ public class PerkLib
 				"Your proficiency in making golems allows to make stronger golems. Also allows you to make and store 1 improved stone golem.",
 				"You've chosen the 'Epic Golem Maker' perk, increasing your proficiency in making golems. Also allows you to make improved stone golems.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
 		public static const EpicGolemMaker2ndCircle:PerkType = mk("Epic Golem Maker (2nd Circle)", "Epic Golem Maker (2nd Circle)",
-				"Your proficiency in making golems allows to make stronger than before golems. Allows you to store 1 more improved stone golem.",
-				"You've chosen the 'Epic Golem Maker (2nd Circle)' perk, increasing your proficiency in making golems. Allows you to store 1 more improved stone golem.").withBuffs({'int.mult':0.20,'wis.mult':0.20});
+				"Your proficiency in making golems allows to make stronger than before golems.",
+				"You've chosen the 'Epic Golem Maker (2nd Circle)' perk, increasing your proficiency in making golems.").withBuffs({'int.mult':0.20,'wis.mult':0.20});
 		public static const EpicGolemMaker3rdCircle:PerkType = mk("Epic Golem Maker (3rd Circle)", "Epic Golem Maker (3rd Circle)",
-				"Your proficiency in making golems allows to make stronger golems as much stronger their creator became and slightly raise your intelligence and wisdom. Allows you to store 1 more improved stone golem.",
-				"You've chosen the 'Epic Golem Maker (3rd Circle)' perk, increasing your proficiency in making golems. Allows you to store 1 more improved stone golem.").withBuffs({'int.mult':0.30,'wis.mult':0.30});
+				"Your proficiency in making golems allows to make stronger golems as much stronger their creator became and slightly raise your intelligence and wisdom.",
+				"You've chosen the 'Epic Golem Maker (3rd Circle)' perk, increasing your proficiency in making golems.").withBuffs({'int.mult':0.30,'wis.mult':0.30});
 		public static const EpicIntelligence:PerkType = mk("Epic Intelligence", "Epic Intelligence",
 				"",
 				"You've chosen the 'Epic Intelligence' perk.").withBuffs({'int.mult':0.35});
@@ -1589,7 +1589,7 @@ public class PerkLib
 				"You've chosen the 'Grand Mage' perk, increasing base spell strength by 30%, mana pool by 135 and lust bar by 30.")
 				.withBuffs({'maxlust_base':+30});
 		public static const GrandMasterGolemMaker:PerkType = mk("Grand-Master Golem Maker", "Grand-Master Golem Maker",
-				"Your proficiency in making golems allows to make golems that can attack flying enemies at small cost in mana drawn from it owner (aka PC). Also allowing you to store one more in golem bag.",
+				"Your proficiency in making golems allows to make golems that can attack flying enemies at small cost in mana drawn from it owner (aka PC).",
 				"You've chosen the 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const GrandTactician:PerkType = mk("Grand Tactician", "Grand Tactician",
 				"[if(player.inte>=150)" +
@@ -1811,6 +1811,15 @@ public class PerkLib
 		public static const HighVoltageSu:PerkType = mk("High Voltage (Su)", "High Voltage (Su)",
 				"Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Penalty for turn without casted lightning spell decreased by another 5%.",
 				"You've chosen the 'High Voltage (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Penalty for turn without casted lightning spell decreased by another 5%.");
+		public static const HighTide:PerkType = mk("High Tide", "High Tide",
+				"Cumulative 20% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 20% down to normal (100%) damage.",
+				"You've chosen the 'High Tide' perk. Cumulative 20% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 20% down to normal (100%) damage.");
+		public static const HighTideEx:PerkType = mk("High Tide (Ex)", "High Tide (Ex)",
+				"Increase to cumulative damage by 10%. Penalty for turn without casted water spell decreased by 5%.",
+				"You've chosen the 'High Tide (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted water spell decreased by 5%.");
+		public static const HighTideSu:PerkType = mk("High Tide (Su)", "High Tide (Su)",
+				"Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 5%.",
+				"You've chosen the 'High Tide (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 5%.");
 		public static const Hoarder:PerkType = mk("Hoarder", "Hoarder",
 				"That's what you are, a hoarder. I bet you don't even spend the money. Sleep well at night knowing you're ruining the economy... while you take more money after each victory. (15% more gems from victories)",
 				"You've chosen the 'Hoarder' perk, increasing gem gains from victories by 15%.");
@@ -2014,8 +2023,8 @@ public class PerkLib
 				"Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allows you to make and store 1 improved steel golem.",
 				"You've chosen the 'Legendary Golem Maker' perk, increasing your proficiency in making golems and quality of their upgrades. Also allows you to make improved steel golems.").withBuffs({'int.mult':0.40,'wis.mult':0.40});
 		public static const LegendaryGolemMaker2ndCircle:PerkType = mk("Legendary Golem Maker (2nd Circle)", "Legendary Golem Maker (2nd Circle)",
-				"Your permanent golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allows you to store 1 more improved steel golem.",
-				"You've chosen the 'Legendary Golem Maker (2nd Circle)' perk, increasing your golems mana efficiency. Allows you to store additional improved steel golem.").withBuffs({'int.mult':0.50,'wis.mult':0.50});/*
+				"Your permanent golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower).",
+				"You've chosen the 'Legendary Golem Maker (2nd Circle)' perk, increasing your golems mana efficiency.").withBuffs({'int.mult':0.50,'wis.mult':0.50});/*
 		public static const LegendaryGolemMaker3rdCircle:PerkType = mk("Legendary Golem Maker (3rd Circle)", "Legendary Golem Maker (3rd Circle)",
 				".",
 				"You've chosen the 'Legendary Golem Maker (3rd Circle)' perk, .").withBuffs({'int.mult':0.60,'wis.mult':0.60});*/
@@ -2878,7 +2887,7 @@ public class PerkLib
 				"You've chosen the 'Temporal Golems Restructuration' perk, adding the option to make faster and more temporary golems at once and have the option to send more of them at once to attack. (+5 to max limit of stored temporary stone golems)");
 		public static const TemporalGolemsRestructurationEx:PerkType = mk("Temporal Golems Restructuration (Ex)", "Temporal Golems Restructuration (Ex)",
 				"Allows you to use option of send all temporary golems to attack in one turn. Adding the option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)",
-				"You've chosen the 'Temporal Golems Restructuration' perk, adding the option to make faster and more temporary golems at once and have the option to send them all at once to attack. (+10 to max limit of stored temporary stone golems)");
+				"You've chosen the 'Temporal Golems Restructuration (Ex)' perk, adding the option to make faster and more temporary golems at once and have the option to send them all at once to attack. (+10 to max limit of stored temporary stone golems)");
 		public static const ThirdRing:PerkType = mk("Third Ring", "Third Ring",
 				"Your advanced understanding of magic pools allows you to equip third ring.",
 				"You've chosen the 'Third Ring' perk, reaching advanced understanding of magic pools to allow you equip third ring.");
@@ -3675,7 +3684,7 @@ public class PerkLib
 		public static const NaturalSpellcasting:PerkType = mk("Natural Spellcasting", "Natural Spellcasting",
 				"Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace).");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
-				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster
+				"Black, Hex and Necromancy magic effectiveness is increased by 50%. Cooldowns for all those spells are 1 turn shorter. Soulforce regenerate passively by 2%.");
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread the narrow path between corruption and true enlightment maintaining a balance that allows you to fuse both sides powers.",null,true);
 		public static const OneWiththeForest:OneWithTheForest = new OneWithTheForest();
@@ -4166,6 +4175,7 @@ public class PerkLib
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoExpGained:PerkType = mk("No Exp Gained", "No Exp Gained", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
+		public static const NoItemsGained:PerkType = mk("No Item(s) Gained", "No Item(s) Gained", "");
 		public static const OverMaxHP:PerkType = mk("OverMax HP", "OverMax HP", "");
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
@@ -4208,6 +4218,7 @@ public class PerkLib
 			ePerkL.push(EnemyTrueAngel);
 			ePerkL.push(EnemyTrueDemon);
 			ePerkL.push(EnemyResiliance);
+			ePerkL.push(EnemyUndeadType);
 			ePerkL.push(FireNature);
 			ePerkL.push(FireVulnerability);
 			ePerkL.push(IceNature);
@@ -4545,7 +4556,7 @@ public class PerkLib
             UnlockId2ndStage.requirePerk(UnlockId)
                     .requireStr(125)
                     .requireLevel(30);
-            DualWieldMassive.requirePerks(DualWield, GigantGripEx)
+            DualWieldMassive.requirePerks(DualWield, GigantGripSu)
                     .requireStr(150)
                     .requireLevel(30);
             GigantGripSu.requireLevel(30)
@@ -5436,7 +5447,15 @@ public class PerkLib
                                 || player.hasPerk(DragonDarknessBreath);
                     }, "Any darkness spell")
                     .requireLevel(12)
-                    .requireInt(75);
+                    .requireInt(75);/*
+            HighTide.requirePerks(GrandMage, Channeling)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWaterBall)
+                                || player.hasStatusEffect(StatusEffects.KnowsWaterSphere)
+                                || player.hasPerk(DragonWaterBreath);
+                    }, "Any lightning spell")
+                    .requireLevel(12)
+                    .requireInt(75);*/
             // Spell-boosting perks
             // Battlemage: auto-use Might
             Battlemage.requireLevel(12)
@@ -6060,7 +6079,7 @@ public class PerkLib
                     }, "Having Elemental Contract Rank 6 or Dao of the Elements (layer 2 or higher) perks");
             //Tier 8 Wisdom perks
             ElementalContractRank9.requireOrPerks(ElementalContractRank8, DaoOfTheElements, 2)
-					.requirePerk(ElementalConjurerSacrifice)
+					.requireAnyPerk(ElementalConjurerSacrifice, ElementalConjurerMindAndBodySacrificeEx)
                     .requireWis(225)
                     .requireLevel(48);
             ElementalConjurerSacrifice.requireAnyPerk(ElementalConjurerMindAndBodyDedication, ElementalConjurerMindAndBodyDedicationEx)
@@ -6696,7 +6715,7 @@ public class PerkLib
 					.requireNotThosePerks(ChimericalBodySemiImprovedStageEx, ChimericalBodySemiSuperiorStageEx)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
-                    }, "Two racial perks");
+                    }, "Two internal mutations");
 			RacialParagon.requireLevel(6);
             //Speedy Recovery - Regain Fatigue 50% faster.
             SpeedyRecovery.requireLevel(6);
@@ -6834,7 +6853,7 @@ public class PerkLib
                     .requireLevel(12)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 4;
-                    }, "Four racial perks");
+                    }, "Four internal mutations");
 			Apex.requireLevel(12)
 					.requirePerk(RacialParagon);
             Survivalist2.requireLevel(12)
@@ -6938,7 +6957,7 @@ public class PerkLib
                     .requireLevel(18)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 8;
-                    }, "Eight racial perks");
+                    }, "Eight internal mutations");
 			AlphaAndOmega.requireLevel(18)
 					.requirePerk(Apex);
             JobWarlord.requireAdvancedJobSlot()
@@ -7019,9 +7038,9 @@ public class PerkLib
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 12;
-                    }, "Twelve racial perks");
+                    }, "Twelve internal mutations");
 			JobAllRounder.requireLevel(24)
-                    .requirePerks(JobBeastWarrior , JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobWarrior)
+                    .requirePerks(JobBeastWarrior, JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobWarrior)
                     .requireStr(75)
                     .requireTou(75)
                     .requireSpe(75)
@@ -7114,7 +7133,7 @@ public class PerkLib
                     .requireLevel(30)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 18;
-                    }, "Eighteen racial perks");
+                    }, "Eighteen internal mutations");
             //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
             CycloneStage3.requireLevel(30)
                     .requireStr(90)
@@ -7155,7 +7174,7 @@ public class PerkLib
                     .requireLevel(36)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 24;
-                    }, "Twenty four racial perks");
+                    }, "Twenty four internal mutations");
             CycloneStage4.requireLevel(36)
                     .requireStr(120)
                     .requireTou(120)
@@ -7183,7 +7202,7 @@ public class PerkLib
                     .requireLevel(42)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 32;
-                    }, "Thirty two racial perks");
+                    }, "Thirty two internal mutations");
             CycloneStage5.requireLevel(42)
                     .requireStr(160)
                     .requireTou(160)
@@ -7230,7 +7249,7 @@ public class PerkLib
                     .requireLevel(48)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 40;
-                    }, "Forty racial perks");
+                    }, "Forty internal mutations");
             EpicGolemMaker.requireLevel(48)
                     .requireInt(150)
                     .requireWis(150)
@@ -7244,7 +7263,7 @@ public class PerkLib
                     .requireLevel(48)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 50;
-                    }, "Fifty racial perks");
+                    }, "Fifty internal mutations");
             GolemArmyCaptain.requireLevel(54)
                     .requireInt(160)
                     .requireWis(160)
@@ -7272,7 +7291,7 @@ public class PerkLib
                     .requireLevel(60)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 61;
-                    }, "Sixty one racial perks");
+                    }, "Sixty one internal mutations");
             EpicGolemMaker2ndCircle.requireLevel(60)
                     .requireInt(175)
                     .requireWis(175)
@@ -7286,7 +7305,7 @@ public class PerkLib
                     .requireLevel(66)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 72;
-                    }, "Seventy two racial perks");
+                    }, "Seventy two internal mutations");
             GolemArmyMajor.requireLevel(66)
                     .requireInt(185)
                     .requireWis(185)
@@ -7298,7 +7317,7 @@ public class PerkLib
                      .requireLevel(72)
                      .requireCustomFunction(function (player:Player):Boolean {
                          return player.internalChimeraScore() >= 85;
-                     }, "Eighty five racial perks");
+                     }, "Eighty five internal mutations");
             EpicGolemMaker3rdCircle.requireLevel(72)
                     .requireInt(200)
                     .requireWis(200)
@@ -7333,7 +7352,7 @@ public class PerkLib
                     .requireLevel(78)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 99;
-                    }, "Ninety nine racial perks");
+                    }, "Ninety nine internal mutations");
             GolemArmyLieutenantColonel.requireLevel(78)
                     .requireInt(210)
                     .requireWis(210)
@@ -7452,7 +7471,7 @@ public class PerkLib
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
-            //        }, "Two racial perks");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+            //        }, "Two internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
 			
 			// validate tier lists
 			for each (var tierlist:Array in PERK_TIER_LISTS) {
@@ -7484,4 +7503,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

@@ -364,7 +364,7 @@ import classes.lists.Gender;
 			addButtonIfTrue(0, "Eagle Fuck", eagleFuckAnita, !player.canFly() ? "You'll need wings for that." : "You need either a penis or a vagina to do that.",
 				player.canFly() && player.gender > 0, "Take a wild trip in the skies with Anita and fuck her!");
 			addButtonIfTrue(1, "Vaginal", vaginalFuckAnita, "You'll need a penis for that.", player.hasCock());
-			addButtonIfTrue(2, "Sixty Nine", sex69Anita, "You won't be able to do this with your unusual body shape.", player.isBiped() || player.isNaga() || player.isGoo());
+			addButtonIfTrue(2, "Sixty Nine", sex69Anita, "You won't be able to do this with your taur body shape.", !player.isTaur());
 		}
 
 		private function eagleFuckAnita():void { //Eagle fuck, must have wings

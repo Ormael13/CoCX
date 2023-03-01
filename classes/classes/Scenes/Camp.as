@@ -766,10 +766,12 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There are two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			outputText("Some of your friends are currently sparring at the ");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) outputText("massive");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 7) outputText("massive");
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) outputText("large");
 			else outputText("small");
-			outputText(" ring toward side of your [camp].");
+			outputText(" ring");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 5) outputText(" with wooden floor");
+			outputText(" toward side of your [camp].");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring, maybe it's a little excessive for even the largest of people around.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" A small stand rests adjacent, allowing spectators to cheer on any duels taking place.");
 			outputText("\n\n");
@@ -782,22 +784,22 @@ public class Camp extends NPCAwareContent{
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) outputText("Four large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("Three large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("Two large arcane circles are");
-			else outputText("A large arcane circle is");
+			else outputText("Large arcane circle is");
 			outputText(" written at the edge of your [camp]. Their runes regularly glow with impulse of power.\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
-			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
-			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("A wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
-			else outputText("A small wooden dam drapes across the stream, slowing the passage of water");
+			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("Big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("Wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
+			else outputText("Small wooden dam drapes across the stream, slowing the passage of water");
 			outputText(".\n\n");
-		}
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
-			outputText("Not so far from it is your ");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
-			outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
+				outputText("Not so far from it is your ");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
+				outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
+			}
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
 			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) outputText("At the corner of camp where you planted a seed, a sapling has grown. It has dozens of branches and bright green leaves.\n\n");
@@ -1130,6 +1132,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
 		if (flags[kFLAGS.TIFA_FOLLOWER] > 5) counter++;
+		if (etnaScene().etnaTotalKids() > 0) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.FOLLOWER)) {
 				counter++;
@@ -2142,7 +2145,7 @@ public class Camp extends NPCAwareContent{
 		addButton(14, "Back", campActions);
 	}
 
-	private function campBuildingSim():void {
+	public function campBuildingSim():void {
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
@@ -2865,6 +2868,37 @@ public class Camp extends NPCAwareContent{
 			outputText("\n\nYou need more fish to bag out a bundle.");
 			doNext(VisitFishery);
 		}
+	}
+	
+	public function FisheryDailyProduction():Number {
+		var fishproduction:Number = 0;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) fishproduction -= 5;
+		return fishproduction;
+	}
+	public function FisheryWorkersCount():Number {
+		var fisheryworkers:Number = 0;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") fisheryworkers += 1;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "") fisheryworkers += 1;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "") fisheryworkers += 1;
+		return fisheryworkers;
+	}
+	public function FisheryMaxWorkersCount():Number {
+		var fisherymaxworkers:Number = 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fisherymaxworkers += 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 3) fisherymaxworkers += 1;
+		return fisherymaxworkers;
 	}
 
 	private function MagicWardMenu():void {
@@ -3620,10 +3654,18 @@ public class Camp extends NPCAwareContent{
 		if (CoC.instance.timeQ == 0) {
 			CanDream = true;
 			model.time.minutes = 0;
-			if (model.time.hours >= 21)
-				CoC.instance.timeQ += 24-model.time.hours +6;
-			if (model.time.hours < 6)
-				CoC.instance.timeQ += 6-model.time.hours;
+			if (player.isNightCreature() == true)
+			{
+				if (model.time.hours >= 6 && model.time.hours <=21)
+						CoC.instance.timeQ += 15 - model.time.hours + 7;
+			}
+			else
+			{
+				if (model.time.hours >= 21)
+					CoC.instance.timeQ += 24-model.time.hours +6;
+				if (model.time.hours < 6)
+					CoC.instance.timeQ += 6-model.time.hours;
+			}
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
 				CoC.instance.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			}
@@ -4132,8 +4174,8 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
 		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
 				.hint("You need to explore Forest more to unlock this place.")
-				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
-				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
+				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Forest more to unlock this place.", null, "???")
+				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the forest.", null, "???");
 		bd.add("Quarry", camp.cabinProgress.quarrySite)
 				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
 				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
@@ -4714,6 +4756,7 @@ public function rebirthFromBadEnd():void {
 		var performancePointsPrediction:Number = 0;
 		//Companions
 		performancePointsPrediction += companionsCount();
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) performancePointsPrediction--;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] == 12) performancePointsPrediction++;
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePointsPrediction++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5 || player.hasStatusEffect(StatusEffects.ChiChiOff)) performancePointsPrediction++;
@@ -4767,17 +4810,14 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPrediction += 2;
 		//Children
-		var childPerformance:int = 0;
-		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
-		childPerformance += (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
-		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4) + (etnaScene().etnaTotalKids()));
-		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4) + flags[kFLAGS.AYANE_CHILDREN_MALES] + flags[kFLAGS.AYANE_CHILDREN_FEMALES] + flags[kFLAGS.AYANE_CHILDREN_HERMS] + flags[kFLAGS.LOPPE_KIDS]);
-		performancePointsPrediction += Math.sqrt(childPerformance);
+		possibleToGainAscensionPointsChildren();
 		//Various Level trackers
 		performancePointsPrediction += player.level;
 		if (player.level >= 42) performancePointsPrediction += (player.level - 41);
 		if (player.level >= 102) performancePointsPrediction += (player.level - 101);
 		if (player.level >= 180) performancePointsPrediction += (player.level - 179);
+		performancePointsPrediction += player.herbalismLevel;
+		performancePointsPrediction += player.miningLevel;
 		if (player.teaseLevel >= 25) {
 			performancePointsPrediction += 25;
 		}
@@ -4785,6 +4825,16 @@ public function rebirthFromBadEnd():void {
         performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
+	}
+	public function possibleToGainAscensionPointsChildren():Number {
+		var performancePointsPredictionChildren:Number = 0;
+		var childPerformance:int = 0;
+		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
+		childPerformance += (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
+		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4) + (etnaScene().etnaTotalKids()));
+		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4) + SceneLib.ayaneFollower.ayaneChildren() + flags[kFLAGS.LOPPE_KIDS]);
+		performancePointsPredictionChildren += Math.sqrt(childPerformance);
+		return performancePointsPredictionChildren;
 	}
 
     public static function getTotalWeaponMasteryLevels():Number{
@@ -4899,25 +4949,28 @@ public function rebirthFromBadEnd():void {
 		var pop:int = 0; //Once you enter Mareth, this will increase to 1.
 		if (!flags[kFLAGS.IN_INGNAM]) pop++; //You count toward the population!
 		pop += companionsCount();
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) pop--;
 		//------------
 		//Misc check!
 		if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
 		if (player.armor == armors.GOOARMR) pop++; //Include Valeria if you're wearing her.
+		if (player.weapon == weapons.AETHERD) pop++; //Include Aether D twin if you're wearing her.
+		if (player.shield == shields.AETHERS) pop++; //Include Aether S twin if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
 		//------------
 		//Children check!
 		//Followers
 		if (followerEmber() && emberScene.emberChildren() > 0) pop += emberScene.emberChildren();
+		if (flags[kFLAGS.MITZI_DAUGHTERS] > 0) pop += flags[kFLAGS.MITZI_DAUGHTERS];
 		if (SceneLib.ayaneFollower.ayaneChildren() > 0) pop += SceneLib.ayaneFollower.ayaneChildren();
 		//Jojo's offsprings don't stay in your camp; they will join with Amily's litters as well.
 		if (sophieFollower()) {
 			if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT]) pop += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
 		}
-
 		//Lovers
 		//Amily's offsprings don't stay in your camp.
-		//Helia can only have 1 child: Helspawn. She's included in companions count.
+		//Helia can only have 1 child: Helspawn. She's included in companions count. The same with Etna child.
 		if (isabellaFollower() && isabellaScene.totalIsabellaChildren() > 0) pop += isabellaScene.totalIsabellaChildren();
 		if (izmaFollower() && izmaScene.totalIzmaChildren() > 0) pop += izmaScene.totalIzmaChildren();
 		if (followerKiha() && kihaFollower.totalKihaChildren() > 0) pop += kihaFollower.totalKihaChildren();
@@ -4925,6 +4978,12 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
 		if (flags[kFLAGS.ZENJI_KIDS] > 0) pop += flags[kFLAGS.ZENJI_KIDS];
 		if (DriderTown.BelisaKids > 0) pop += DriderTown.BelisaKids;
+		if (DriderTown.LilyKidsPC > 0) pop += DriderTown.LilyKidsPC;
+		if (DriderTown.TyrantiaFemaleKids > 0) pop += DriderTown.TyrantiaFemaleKids;
+		if (DriderTown.TyrantiaMaleKids > 0) pop += DriderTown.TyrantiaMaleKids;
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) pop += flags[kFLAGS.PC_GOBLIN_DAUGHTERS];
+		//From npcs that can be in more than one tab
+		if (SceneLib.excelliaFollower.totalExcelliaChildren() > 0) pop += SceneLib.excelliaFollower.totalExcelliaChildren();
 		//------------
 		//Return number!
 		return pop;

@@ -6,12 +6,12 @@ package classes.Scenes.Monsters
 	import classes.Scenes.SceneLib;
 	import classes.internals.ChainedDrop;
 	
-	public class AngelGroup extends AbstractAngel
+	public class AngeloidGroup extends AbstractAngel
 	{
 		private function angelsReactsToLustiness():void {
-			outputText("Angels stops their actions clearly overflowing with lust.");
+			outputText("Angeloids stops their actions clearly overflowing with lust.");
 			outputText("\n\n\"<i>Sinner!!! We.Must.Contact.Supreviser.</i>\"");
-			outputText("\n\nThe angels starts to burn more and more intense causing you to temporaly avert your gaze. When you look agian at spot they were you could only see a bit of ashes.");
+			outputText("\n\nThe angeloids starts to burn more and more intense causing you to temporaly avert your gaze. When you look agian at spot they were you could only see a bit of ashes.");
 			gems = 0;
 			XP = 0;
 			HP = minHP() - 1;
@@ -19,7 +19,7 @@ package classes.Scenes.Monsters
 		}
 		
 		private function AngelEnergyRays():void {
-			outputText("Angels fixates you with all of their eyes unleashing a barrage of concentrated rays at you! ");
+			outputText("Angeloids fixates you with all of their eyes unleashing a barrage of concentrated rays at you! ");
 			var omni:Number = 10;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) omni *= 3;
 			while (omni-->0) AngelEnergyRaysD();
@@ -33,7 +33,7 @@ package classes.Scenes.Monsters
 		}
 		
 		private function AngelBaseAttack():void {
-			outputText("Angels gather energy and then blasts it toward you. ");
+			outputText("Angeloids gather energy and then blasts it toward you. ");
 			var damage:Number = eBaseWisdomDamage() * 2;
 			damage += eBaseIntelligenceDamage() * 0.4;
 			damage = Math.round(damage);
@@ -77,7 +77,7 @@ package classes.Scenes.Monsters
 			HP = maxHP();
 			bonusWrath += 400;
 			bonusSoulforce += 700;
-			outputText("Staggering back, Angels wastes no time and above their heads starts to manifest halos. All irises become uniform purple colored. And around body manifest few crossed circles with few eyes looking exactly the same as main eye down to each detail including dual irises.\n"
+			outputText("Staggering back, Angeloids wastes no time and above their heads starts to manifest halos. All irises become uniform purple colored. And around body manifest few crossed circles with few eyes looking exactly the same as main eye down to each detail including dual irises.\n"
 				+ "\"<i>Don't be afraid!!! Embrace the light!!!</i>\" their unified voices sounds almost as cheer before they all launching up to continue the fight.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
 			SceneLib.combat.combatRoundOver();
@@ -97,7 +97,7 @@ package classes.Scenes.Monsters
 		
 		override public function get long():String
 		{
-			var str:String = "You're currently fighting group of low to high ranked angels. They looks like winged eyeballs with small mouth full of jagged teeth and one to three eyes having two";
+			var str:String = "You're currently fighting group of low to high ranked angeloids. They looks like winged eyeballs with small mouth full of jagged teeth and one to three eyes having two";
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " purple irises. Around their body are two to four circles each with two to four eyes looking the same as the main eye and above their heads are halo.";
 			else str += " irises, one red and the other blue.";
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField))
@@ -109,22 +109,22 @@ package classes.Scenes.Monsters
 			return str;
 		}
 		
-		public function AngelGroup() 
+		public function AngeloidGroup() 
 		{
 			super(false);
 			this.plural = true;
 			this.a = "the ";
-			this.short = "group of angels";
-			this.imageName = "angels";
+			this.short = "group of angeloids";
+			this.imageName = "angeloids";
 			this.long = "";
 			initStrTouSpeInte(10, 100, 45, 25);
 			initWisLibSensCor(180, 4, 30, 0);
 			this.tallness = 30;
 			this.drop = new ChainedDrop()
 					.add(useables.SRESIDUE, 1);
-			this.level = 15;
+			this.level = 18;
 			this.bonusHP = 700;
-            this.bonusLust = 49;
+            this.bonusLust = 52;
 			this.bonusWrath = 200;
 			this.bonusSoulforce = 400;
 			this.additionalXP = 90;
@@ -135,6 +135,7 @@ package classes.Scenes.Monsters
 			this.armorDef = 15;
 			this.armorMDef = 15;
 			this.wings.type = Wings.FEATHERED_AVIAN;
+			if (player.cor < 67) this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 9, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

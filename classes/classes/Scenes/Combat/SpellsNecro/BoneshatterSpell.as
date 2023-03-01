@@ -34,6 +34,7 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 	override public function demonBonesCost():int {
 		var calcDBC:int = 5;
 		if (player.hasPerk(PerkLib.HyperCasting)) calcDBC -= 1;
+		if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet) && player.statusEffectv3(StatusEffects.BonusEffectsNecroSet) > 0) calcDBC -= 1;
 		return calcDBC;
 	}
 	

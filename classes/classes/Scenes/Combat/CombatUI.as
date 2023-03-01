@@ -626,8 +626,32 @@ public class CombatUI extends BaseCombatContent {
 			}
 		}
 		if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1).hint("Mana cost of sending 1 permanent steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
-			else addButtonDisabled(2, "Send S.Gol/1", "Not enough mana.");
+			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem, 1).hint("Mana cost of sending 1 permanent steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
+			else addButtonDisabled(3, "Send S.Gol/1", "Not enough mana.");
+			if (monster.plural) {
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(8, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 3 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3) + "</b>");
+					else addButtonDisabled(8, "Send I.P.Gol/3", "Not enough mana.");
+				}
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(13, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 5 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5) + "</b>");
+					else addButtonDisabled(13, "Send I.P.Gol/5", "Not enough mana.");
+				}
+			}
+		}
+		if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) {
+			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(4, "Send I.S.Gol/1", combat.pspecials.sendPermanentImprovedSteelGolem, 1).hint("Mana cost of sending 1 permanent improved steel golem: "+combat.pspecials.permanentimprovedsteelgolemsendcost());
+			else addButtonDisabled(4, "Send I.S.Gol/1", "Not enough mana.");
+			if (monster.plural) {
+				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 3) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(9, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 3 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3) + "</b>");
+					else addButtonDisabled(9, "Send I.P.Gol/3", "Not enough mana.");
+				}
+				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 5) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(14, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 5 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5) + "</b>");
+					else addButtonDisabled(14, "Send I.P.Gol/5", "Not enough mana.");
+				}
+			}
 		}
 	}
 

@@ -89,7 +89,6 @@ public class Changelog extends BaseContent
 			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
 			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -133,7 +132,7 @@ public class Changelog extends BaseContent
 			outputText("-Normal weapons will now multi-attack the correct number of times when a ranged weapon is equipped. (Chibizs)\n");
 			outputText("-Fix feral on load, fix catgloves feral attack, Bee cock masturbation fix, Fix Sheila 69 (EragonX)\n");
 			outputText("-Minor rearrangment of elementalist summon menu. Totaly not preparing for another summon/upgrade section totaly not that...\n");
-			outputText("-When exploring at lvl 9+ can found some weird pocket watch. Taking it would req. some 'super' sacrifice but will in turn allow to make something back. After picking it's accessable in one of camp actions submenu.\n");
+			outputText("-When exploring at lvl 9+ PC can found some weird pocket watch. Taking it would req. some 'super' sacrifice but will in turn allow to make something back. After picking it's accessable in one of camp actions submenu. In case of not picking it at first time finding it need to have req. 'sacrifice' to find it again.\n");
 			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
 			outputText("-Fixed the small error in the nightwalker dialogue. Fixed the issue of bull strength not properly giving its buff if the player would receive less than a 50% buff from the perk. (Chibizs)\n");
 			outputText("-Elemental Contract Rank 2 perk got additional req. of actualy having arcane circle.\n");
@@ -177,9 +176,41 @@ public class Changelog extends BaseContent
 			outputText("-Added sand worm sprite added to the game in full. (Liadri)\n");
 			outputText("-Air elementals dmg dealt changed to wind type.\n");
 			outputText("-Druid fusion specials/range attacks could use now cumulative elemental damage perks effects (due to epic elementals choice it's only for fire fusion only).\n");
-			outputText("-New tier 5 strength lvl-up perk: Dual Wield (Massive). Req. Gigant's Grip (Ex) and Dual Wield perks, 150+ str. Effect: Allows you to wield two massive sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)\n");
+			outputText("-New tier 5 strength lvl-up perk: Dual Wield (Massive). Req. Gigant's Grip (Su) and Dual Wield perks, 150+ str. Effect: Allows you to wield two massive sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)\n");
 			outputText("-New tier 5 strength lvl-up perk: Gigant's Grip (Su). Req. Gigant's Grip (Ex) perk, having 4 arms, 150+ str. Effect: Gain an ability to wield two massive weapons as long you have four arms. (+20% melee physical attacks multiplier) (+50% to str/tou/spe multi)\n");
 			outputText("-Asterius Rage max atk value increased from 110 to 176. Their classification is now Dual Massive instead of Dual Large weapons.\n");
+			outputText("-Having equipped more than one of three Necro items (wand/shield/necklace) would give PC set items bonuses: 2/3 items - control 2/7 more skeletons of each type, 10/40% higher dmg of them and for 3 set items additionally lower demon bopnes cost of necro spells by 20% of base cost.\n");
+			outputText("-Demon Soldier enemies could be now harvested to get demon bones for necromancers.\n");
+			outputText("-I heard some want measure their kid-o-pen...so they can now seeing how many ascension points comes from kids they sires/birthed ^^\n");
+			outputText("-More options for minions actions turn and PC action turn was added for higher grades of golems steel/improved steel.\n");
+			outputText("-Herbalism and Mining level would also add ascension points.\n");
+			outputText("-All perks that are from .... GolemMaker line won't be increasing bag size for pernament golems. Only 4 of them - each that is req. to open new type of golem will increase that specific golem type bag size by 1. Instead their golem dmg amplification effects will be a bit better. In case after update PC own too many golems of specific type most of materials will be refunded.\n");
+			outputText("-Reusable golem cores bag capacity would now be bit larger too. all golem bag parts size for improved stone golems or better golems would count as 2/3 higher in calculating golem cores bag size.\n");
+			outputText("-Added 2 more upgrade options for golems.\n");
+			outputText("-Added few new ??? options in one of soulsense submenus labeled: 'Quasi-dragoness' which appears after talking once or twice with her, 'Horny-core' & 'Lightning Rod' req. have more than 1% affection toward PC, ' They see him trollin' They hatin' ' and 'Anal-lover'.\n");
+			outputText("-Fatigue costs on toooltips and when game check for having enough to build camp structure will now take into account all factors that can reduce fatigue usage. Some of the options like arcane circle or other options that req. pc personaly do all the work won't be affected by this change.\n");
+			outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam), Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%) and Sparring Ring once (Decrease npc's training time by 1/4 and increase exp from using training dummy by 250% more (700% of base amount))\n");
+			outputText("-Izma got now specific option to send her to work at fisher which wouldn't be possible if she work at farm. And another npc can work at fishery: Aurora - she can't work at fishery if she stay in PC party\n");
+			outputText("-Added to stats 1st page two new lines after PC build Fishery: daily fish production and current/max workers count\n");
+			outputText("-New monster perk: No Item(s) Gained - for enemies that really shouldn't drop even super rare (1:200 or 1:1000 chance loot or eggs during eastern). Training Dummy got this (no you not gonna get anymore any liquors of brews out of it)\n");
+			outputText("-Metal Plates cost decreased by half so buying them would be only 100 gems. That price would affect (decreasing) all related items that req. use of metal plates in crafting them.\n");
+			outputText("-Energy core crafting req. now 1 more golem core.\n");
+			outputText("-Reaching Master Golem Maker step would make HXD shop with stuff for golemancers giving pc 50% discount... or maybe all others are actualy paying 200% and Master golemancer only pay default price.... ^^\n");
+			outputText("-New melee weapon (by Ormael): Dual BF Two-Handed Swords - buyable at Orsbulg shop. 100 atk, costing 8000 gems, Low grade wrath weapon (dual massive), max base atk value reached at 250+ strength.\n");
+			outputText("-Traveling Merchant Outfit or/and having Greedy perk would increase sell price of metal plates, nails, stones, wood. Still it won't go over buy price.\n");
+			outputText("-Angeloids can be meet least often + req. PC have lvl 6+ and PC with less than 67 corruption could even run away from them without problem. (They will get then monster perk: Always Succesfull Runaway).\n");
+			outputText("-Necromancy perk effectivness bonus affect Hex and Necromancy spells too. Cooldowns for Black/Hex/Necro spells are 1 turn shorter.\n");
+			outputText("-Chimerical Body perks req. on lvl up menu correctly refering to internal mutations instead of racial perks.\n");
+			outputText("-Added some of the missing checks for mostly children of specific camp npc's not counting toward camp population counter.\n");
+			outputText("-While punching enemy with bare fists and having more than 2 arms (like... four) amount of atacks per attack will increase from 2 to 4. While using Asura from on top of punching with more than 2 arms at once asura dmg multiplier will be descreased by 50%.\n");
+			outputText("-Fixed the issue of creatures of night being unable to sleep during the day. 0600 - 2100. (Chibizs)\n");
+			outputText("-When having 5 or more pernament stone golems they would count as helper for building camp structures.\n");
+			outputText("-Wood, Stones storages after building would increase materials storage by 4x not 3x. Buying nails box would also increase cap by 4x.\n");
+			outputText("-Sidonie wood cutting option can now count as progress toward unlock woodcutter location but... will only make possible to progress unlock until 5th one. The last 6th event for wood cutting must be done traditional way by finding it in forest.\n");
+			outputText("-New M. Special for Kitshoo: Foxflame Pelt - req. been Kitshoo with min. 6 cinder tails - activated/deactivated ability that drain SF/Mana for each turn it's active. ");
+			outputText("When it's active basic foxfire use cost nothing to use, tail slap special will deal lust dmage and fire dmg would be increased, weakened foxfire effect (fire + lust dmg) would apply to melee/range/feral attacks as seperate from others buffs, speed is increased by 10%(+10% for each tail after 6th reaching 40% at 9th tail).\n");
+			outputText("-Using on weapons at once Flame Blade and Electrify Weapon buffs would result with weapon dealing plasma type dmg as long both buffs are active.\n");
+			outputText("-Bark skin give +2 to Yggdrasil and Plant race score now.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -188,8 +219,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
@@ -197,13 +234,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");
+			outputText("-\n");
+			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
-			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks\n");
+			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks, Anita (Harpy from Black Cock) 69 scene locked for some of the PC that had non taur lower bodies, (Ice) Troll Fig items not increasing stat bonuses for perm race PC, ");
+			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -220,7 +262,6 @@ public class Changelog extends BaseContent
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
 			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
-			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
 			//outputText("\n");cel na 0.8: dodać siren TF
 			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
@@ -274,7 +315,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -306,6 +349,14 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

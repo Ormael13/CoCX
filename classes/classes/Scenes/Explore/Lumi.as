@@ -290,7 +290,7 @@ public class Lumi extends BaseContent {
         spriteSelect(SpriteDb.s_lumi);
         //Set item handling to lumi shop
         clearOutput();
-        outputText("\"<i>Ya want to sell me this thing? Sure I will take it from you but only for 40 gem. I ain't running a pawn shop or charity booth here, this is a lab and I need parts and fundings. So in what quantity are we speaking?</i>\"\n\n");
+        outputText("\"<i>Ya want to sell me this thing? Sure I will take it from you but only for 20 gem. I ain't running a pawn shop or charity booth here, this is a lab and I need parts and fundings. So in what quantity are we speaking?</i>\"\n\n");
         menu();
 		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 1) addButton(0, "Sell 1", lumiSellMatsMetalPlatesAmount, 1).hint("Sell 1 Metal Plate.");
 		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5) addButton(1, "Sell 5", lumiSellMatsMetalPlatesAmount, 5).hint("Sell 5 Metal Plates.");
@@ -301,7 +301,11 @@ public class Lumi extends BaseContent {
 	private function lumiSellMatsMetalPlatesAmount(amount:int):void {
 		metal_pieces = amount;
 		clearOutput();
-		player.gems += (metal_pieces * 40);
+		var gems:Number = (metal_pieces * 20);
+		if (player.hasPerk(PerkLib.Greedy)) gems *= 2;
+		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) gems *= 2;
+		player.gems += gems;
+		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal.\n\n");
 		outputText("You shake hands with Lumi and trade off the parts.\n\n\"<i>Happy doing business with you… anything else or can I get back to work?</i>\"\n\n");
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= metal_pieces;
 		statScreenRefresh();
@@ -1069,7 +1073,7 @@ public class Lumi extends BaseContent {
 	}
 	public function lumiEngineeringBuyMetalPieces():void {
 		clearOutput();
-		outputText("\"<i>Metal plate ya say? Ya it'l only be 200 gems each hun.</i>\"\n\n");
+		outputText("\"<i>Metal plate ya say? Ya it'l only be 100 gems each hun.</i>\"\n\n");
 		/*if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
 			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WCAMP_CABIN_METAL_PIECES_RESOURCESOOD_RESOURCES] + "/600")
 		}
@@ -1077,22 +1081,22 @@ public class Lumi extends BaseContent {
 			outputText("Metal Pieces: " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200");
 		//}
 		menu();
-		if (player.gems >= 200) addButton(0, "Buy 1", lumiEngineeringBuyMetalPiecesAmount, 1);
+		if (player.gems >= 100) addButton(0, "Buy 1", lumiEngineeringBuyMetalPiecesAmount, 1);
 		else addButtonDisabled(0, "Buy 1", "Not enough gems.");
-		if (player.gems >= 1000) addButton(1, "Buy 5", lumiEngineeringBuyMetalPiecesAmount, 5);
+		if (player.gems >= 500) addButton(1, "Buy 5", lumiEngineeringBuyMetalPiecesAmount, 5);
 		else addButtonDisabled(1, "Buy 5", "Not enough gems.");
-		if (player.gems >= 2000) addButton(2, "Buy 10", lumiEngineeringBuyMetalPiecesAmount, 10);
+		if (player.gems >= 1000) addButton(2, "Buy 10", lumiEngineeringBuyMetalPiecesAmount, 10);
 		else addButtonDisabled(2, "Buy 10", "Not enough gems.");
-		if (player.gems >= 3000) addButton(3, "Buy 15", lumiEngineeringBuyMetalPiecesAmount, 15);
+		if (player.gems >= 1500) addButton(3, "Buy 15", lumiEngineeringBuyMetalPiecesAmount, 15);
 		else addButtonDisabled(3, "Buy 15", "Not enough gems.");
-		if (player.gems >= 4000) addButton(4, "Buy 20", lumiEngineeringBuyMetalPiecesAmount, 20);
+		if (player.gems >= 2000) addButton(4, "Buy 20", lumiEngineeringBuyMetalPiecesAmount, 20);
 		else addButtonDisabled(4, "Buy 20", "Not enough gems.");
 		addButton(14, "Back", lumiEngineering);
 	}	
 	private function lumiEngineeringBuyMetalPiecesAmount(amount:int):void {
 		metal_pieces = amount;
 		clearOutput();
-		player.gems -= (metal_pieces * 200);
+		player.gems -= (metal_pieces * 100);
 		//flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += metal_pieces;
 		//if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += metal_pieces;
@@ -1105,7 +1109,7 @@ public class Lumi extends BaseContent {
 		}
 		else */if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] > 200) {// && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3
 			outputText("Unfortunately, your metal pieces supply seem to be full. You inform her. She refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] - 200) * 200);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] - 200) * 100);
 			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] - 200);
 			outputText("Metal Pieces: " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200");
 		}
@@ -1170,11 +1174,11 @@ public class Lumi extends BaseContent {
 			if (player.hasKeyItem("Blueprint - Powboy") >= 0) outputText("Powboy - Req. 75+ int, Power bracer, 5 metal pieces, 200 nails, 1 energy core.\n");
 			if (player.hasKeyItem("Blueprint - Power bracer") >= 0) outputText("Power bracer - Req. 50+ int, any Drug injector, 3 metal pieces, 100 nails, 1 energy core.\n");
 			menu();
-			if (player.hasKeyItem("Blueprint - Energy Core") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && player.hasItem(useables.GOLCORE, 3)) {
+			if (player.hasKeyItem("Blueprint - Energy Core") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && player.hasItem(useables.GOLCORE, 4)) {
 				if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 200) addButtonDisabled(0, "Energy Core", "Your storage for energy cores is full.");
-				else addButton(0, "Energy Core", lumiWorkshopEnergyCore).hint("Energy Core - A power source for devices. Necessary for advanced engineering - 3 golem cores, 5 metal piece, 4 hours of work.");
+				else addButton(0, "Energy Core", lumiWorkshopEnergyCore).hint("Energy Core - A power source for devices. Necessary for advanced engineering - 4 golem cores, 5 metal piece, 4 hours of work.");
 			}
-			else addButtonDisabled(0, "Energy Core", "Req. 3 golem cores, 5 metal piece.");
+			else addButtonDisabled(0, "Energy Core", "Req. 4 golem cores, 5 metal piece.");
 			if (player.hasKeyItem("Blueprint - Mechanism") >= 0 && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 5 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200) {
 				if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Mechanism", "Your storage for mechanisms is full.");
 				else addButton(1, "Mechanism", lumiWorkshopMechanism).hint("Mechanism - A complex set of gear and gyro. Necessary for advanced engineering - 200 nails, 5 metal piece, 4 hours of work.");
@@ -1279,7 +1283,7 @@ public class Lumi extends BaseContent {
 		clearOutput();
 		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 5;
-		player.destroyItems(useables.GOLCORE, 3);
+		player.destroyItems(useables.GOLCORE, 4);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Energy Core is ready.\n\n");
 		statScreenRefresh();
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);

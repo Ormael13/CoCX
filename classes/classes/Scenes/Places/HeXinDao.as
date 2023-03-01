@@ -1422,7 +1422,8 @@ public function soularena():void {
 	}
 	private function buyItemEnergyCore():void {
 		clearOutput();
-		var cost:int = 1015 / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = 520 / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1431,7 +1432,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemEnergyCoreYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 1015 / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= 520 / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1440,7 +1441,8 @@ public function soularena():void {
 	}
 	private function buyItemMechanism():void {
 		clearOutput();
-		var cost:int = 1200 / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = 700 / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1449,7 +1451,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemMechanismYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 1200 / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= 700 / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1458,7 +1460,8 @@ public function soularena():void {
 	}	
 	private function buyItem(odd:ItemType):void {
 		clearOutput();
-		var cost:int = odd.value / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = odd.value / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1466,7 +1469,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemYes(odd:ItemType):void {
-		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business: Anything else you want to buy?</i>\"\n\n");

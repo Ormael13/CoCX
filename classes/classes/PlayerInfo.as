@@ -148,18 +148,14 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.hasKeyItem("Radiant shard") >= 0) miscStats += "<b>Radiant Shards:</b> " + player.keyItemvX("Radiant shard", 1) + "\n";
 
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
-			miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750" + "\n";
-		else
-			miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250" + "\n";
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)
-			miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200" + "\n";
-		else
-			miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400" + "\n";
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)
-			miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200" + "\n";
-		else
-			miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400" + "\n";
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
+			miscStats += "<b>Fishery daily production:</b> " + camp.FisheryDailyProduction() + "\n";
+			miscStats += "<b>Fishery workers (current/max):</b> " + camp.FisheryWorkersCount() + "/" + camp.FisheryMaxWorkersCount() + "\n";
+		}
+
+		miscStats += "<b>Nails:</b> " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "\n";
+		miscStats += "<b>Wood:</b> " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapWood() + "\n";
+		miscStats += "<b>Stone:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/" + SceneLib.campUpgrades.checkMaterialsCapStones() + "\n";
 		miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
 		miscStats += "<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "/200" + "\n";
 		miscStats += "<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "/200" + "\n";
@@ -235,6 +231,7 @@ public class PlayerInfo extends BaseContent {
 		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (currently possessed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
+		miscStats += "<i>Ascension points - kids edition (possible to gain during next ascension from kids only):</i> " + camp.possibleToGainAscensionPointsChildren() + "\n";
 		miscStats += "<b>Ascensions:</b> " + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + "\n";
 
 		if (miscStats != "")
@@ -1058,6 +1055,8 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0)
 			childStats += "<b>[name] goblin daughters:</b> " + flags[kFLAGS.PC_GOBLIN_DAUGHTERS] + "\n";
+		if (flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] != "")
+			childStats += "<b>Eldest goblin name:</b> " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + "\n";
 
 		if (flags[kFLAGS.AMILY_MET] > 0)
 			childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
@@ -2222,10 +2221,10 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 90) {
 					if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
 					else {
-						if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.currentBasicJobs() >= 9 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
+						if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.currentBasicJobs() >= 8 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
 							addButton(0, "DJ:M", perkDeityJobMunchkin).hint("Choose the 'Deity Job: Munchkin' super munchkin perk. You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
 						}
-						else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 9 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
+						else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 8 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
 					}
 				}
 				else addButtonDisabled(0, "DJ:M", "You need to reach level 90 first.");

@@ -73,10 +73,6 @@ public class CampMakeWinions extends BaseContent
 		public function maxPermanentImprovedStoneGolemsBagSize():Number {
 			var maxPermanentImprovedStoneGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.EpicGolemMaker)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
@@ -88,8 +84,6 @@ public class CampMakeWinions extends BaseContent
 		public function maxPermanentSteelGolemsBagSize():Number {
 			var maxPermanentSteelGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) maxPermanentSteelGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentSteelGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxPermanentSteelGolemsBagSizeCounter += 1;
@@ -101,7 +95,6 @@ public class CampMakeWinions extends BaseContent
 		public function maxPermanentImprovedSteelGolemsBagSize():Number {
 			var maxPermanentImprovedSteelGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyMajorGeneral)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
@@ -111,9 +104,9 @@ public class CampMakeWinions extends BaseContent
 			var maxReusableGolemCoresBagSizeCounter:Number = 0;
 			if (maxTemporalGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxTemporalGolemsBagSize();
 			if (maxPermanentStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentStoneGolemsBagSize();
-			if (maxPermanentImprovedStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentImprovedStoneGolemsBagSize();
-			if (maxPermanentSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentSteelGolemsBagSize();
-			if (maxPermanentImprovedSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentImprovedSteelGolemsBagSize();
+			if (maxPermanentImprovedStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += (maxPermanentImprovedStoneGolemsBagSize() * 2);
+			if (maxPermanentSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += (maxPermanentSteelGolemsBagSize() * 2);
+			if (maxPermanentImprovedSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += (maxPermanentImprovedSteelGolemsBagSize() * 3);
 			if (player.hasPerk(PerkLib.BeginnerGolemMaker)) maxReusableGolemCoresBagSizeCounter += 2;
 			maxReusableGolemCoresBagSizeCounter *= 3;
 			return maxReusableGolemCoresBagSizeCounter;
@@ -187,7 +180,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make the most simple golem out of a pile of stones.  <b>It will crumble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePermanentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + eleShardCost + permanentStoneGolemMakingCost() + " Mana");
 			else addButtonDisabled(1, "P.S.Golem", "Req. Master Golem Maker perk.");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) addButton(2, "S.Golem", makePermanentSteelGolem).hint("Make steel golem.\n\nCost: 1 Golem Core, 2 Energy Cores, 10 Metal Plates, 4 Mechanisms, " + eleShardCost + permanentSteelGolemMakingCost() + " Mana");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) addButton(2, "M.Golem", makePermanentSteelGolem).hint("Make steel golem.\n\nCost: 1 Golem Core, 2 Energy Cores, 10 Metal Plates, 4 Mechanisms, " + eleShardCost + permanentSteelGolemMakingCost() + " Mana");
 			else addButtonDisabled(2, "M.Golem", "Req. Advanced Golemancy Theory perk.");
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
 			else addButtonDisabled(5, "T.S.Golem(5x)", "Req. Temporal Golems Restructuration perk.");
@@ -579,14 +572,33 @@ public class CampMakeWinions extends BaseContent
 			else addButtonDisabled(0, "I.M.Circ.(1)", "You already used this upgrade option on your golems.");
 			if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "I.M.Circ.(2)", "You can't use this upgrade options without previous one.");
 			else {
-				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1) addButton(1, "I.M.Circ.(2)", upgradesForPermanentGolemsImprovedManaCircuitRank2);
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1) addButton(1, "I.M.Circ.(2)", upgradesForPermanentGolemsImprovedManaCircuits);
 				else addButtonDisabled(1, "I.M.Circ.(2)", "You already used this upgrade option on your golems.");
-			}/*
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
-				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(2, "I.M.Circ.(3)", upgradesForPermanentGolemsImprovedManaCircuitRank3);
-				else addButtonDisabled(2, "I.M.Circ.(3)", "You already used this upgrade option on your golems.");
 			}
-			else addButtonDisabled(2, "I.M.Circ.(3)", "You need to reach at least Legendary Golem Maker to work on this upgrade.");*/
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 2) addButtonDisabled(2, "I.M.Circ.(3)", "You can't use this upgrade options without previous one.");
+				else {
+					if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 2) addButton(2, "I.M.Circ.(3)", upgradesForPermanentGolemsImprovedManaCircuits);
+					else addButtonDisabled(2, "I.M.Circ.(3)", "You already used this upgrade option on your golems.");
+				}
+			}
+			else addButtonDisabled(2, "I.M.Circ.(3)", "You need to reach at least Epic Golem Maker to work on this upgrade.");
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 3) addButtonDisabled(3, "I.M.Circ.(4)", "You can't use this upgrade options without previous one.");
+				else {
+					if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 3) addButton(3, "I.M.Circ.(4)", upgradesForPermanentGolemsImprovedManaCircuits);
+					else addButtonDisabled(3, "I.M.Circ.(4)", "You already used this upgrade option on your golems.");
+				}
+			}
+			else addButtonDisabled(3, "I.M.Circ.(4)", "You need to reach at least Epic Golem Maker (3rd circle) to work on this upgrade.");
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 4) addButtonDisabled(4, "I.M.Circ.(5)", "You can't use this upgrade options without previous one.");
+				else {
+					if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 4) addButton(4, "I.M.Circ.(5)", upgradesForPermanentGolemsImprovedManaCircuits);
+					else addButtonDisabled(4, "I.M.Circ.(5)", "You already used this upgrade option on your golems.");
+				}
+			}
+			else addButtonDisabled(4, "I.M.Circ.(5)", "You need to reach at least Legendary Golem Maker (2nd circle) to work on this upgrade.");
 			addButton(14, "Back", upgradesForPermanentGolems);
 		}
 		public function upgradesForPermanentGolemsImprovedManaCircuitRank1():void {
@@ -606,17 +618,17 @@ public class CampMakeWinions extends BaseContent
 			doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
 		}
-		public function upgradesForPermanentGolemsImprovedManaCircuitRank2():void {
+		private function upgradesForPermanentGolemsImprovedManaCircuits():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
 			outputText("Checking the page for this upgrade, you see it would req. 150 mana for each permanent golem to make that modification.\n\n");
-			if (player.mana >= (150 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsImprovedManaCircuitRank2Yes, upgradesForPermanentGolemsImprovedManaCircuit);
+			if (player.mana >= (150 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsImprovedManaCircuitYes, upgradesForPermanentGolemsImprovedManaCircuit);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
 				doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			}
 		}
-		public function upgradesForPermanentGolemsImprovedManaCircuitRank2Yes():void {
+		public function upgradesForPermanentGolemsImprovedManaCircuitYes():void {
 			useMana((150 * counterOfPermanentGolems()));
 			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
@@ -2513,6 +2525,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonWarriorsCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonWarriorsCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonWarriorsCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonWarriorsCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonWarriorsCounter;
 		}
 		public function maxSkeletonArchers():Number {
@@ -2523,6 +2536,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonArchersCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonArchersCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonArchersCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonArchersCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonArchersCounter;
 		}
 		public function maxSkeletonMages():Number {
@@ -2533,6 +2547,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonMagesCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonMagesCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonMagesCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonMagesCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonMagesCounter;
 		}
 		
