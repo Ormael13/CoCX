@@ -211,7 +211,7 @@ public class Changelog extends BaseContent
 			outputText("When it's active basic foxfire use cost nothing to use, tail slap special will deal lust dmage and fire dmg would be increased, weakened foxfire effect (fire + lust dmg) would apply to melee/range/feral attacks as seperate from others buffs, speed is increased by 10%(+10% for each tail after 6th reaching 40% at 9th tail).\n");
 			outputText("-Using on weapons at once Flame Blade and Electrify Weapon buffs would result with weapon dealing plasma type dmg as long both buffs are active.\n");
 			outputText("-Bark skin give +2 to Yggdrasil and Plant race score now.\n");
-			outputText("-\n");
+			outputText("-Plant race tiers for bonuses been reduced from 4 to 2. New race tiers req. now 7 or 10 pts in score with adjusted stat bonuses.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

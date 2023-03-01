@@ -555,7 +555,7 @@ public function goblinsBirthScene(womb:int = 0):void {
 		outputText("Still, since she is your firstborn, what will you name her?\n\n");
 		mainView.nameBox.text = "";
 		menu();
-		addButton(0, "Next", nameEldestGobo);
+		addButton(0, "Next", curry(nameEldestGobo, womb));
 	}
 	else goblinsBirthScene2(womb);
 }
