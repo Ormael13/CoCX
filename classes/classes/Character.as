@@ -501,7 +501,7 @@ import classes.Scenes.NPCs.Forgefather;
 			}
 			if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 1 && game.player.isRace(Races.HUMAN)) {
 				min -= maxHP() * 0.02;
-				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.03;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 2) min -= maxHP() * 0.03;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
