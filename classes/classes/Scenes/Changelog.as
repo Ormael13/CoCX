@@ -212,8 +212,8 @@ public class Changelog extends BaseContent
 			outputText("-Using on weapons at once Flame Blade and Electrify Weapon buffs would result with weapon dealing plasma type dmg as long both buffs are active.\n");
 			outputText("-Bark skin give +2 to Yggdrasil and Plant race score now.\n");
 			outputText("-Plant race tiers for bonuses been reduced from 4 to 2. New race tiers req. now 7 or 10 pts in score with adjusted stat bonuses.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race. Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 2%\n");//score 4+
+			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 5%\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

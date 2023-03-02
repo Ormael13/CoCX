@@ -6078,9 +6078,14 @@ public class Combat extends BaseContent {
                         }
                     }
                     if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
-                        if (player.weapon == weapons.PHALLUS) doPhysicalDamage((damage * 2), true, true);
-                        else doPhysicalDamage(Math.round(damage * 0.2), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+                        if (player.weapon == weapons.PHALLUS) {
+							doPhysicalDamage((damage * 2), true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						}
+                        else {
+							doPhysicalDamage(Math.round(damage * 0.2), true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.1);
+						}
                     }
                     if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
                         if (player.spe >= 300) damage *= 4;
