@@ -17,14 +17,17 @@ import classes.Races;
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
+			if (pTier >= 1){
+				descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. "
+			}
             if (pTier == 1){
-                descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+200% to azureflame breath / acid spit damage)";
+                descS += "(+200% to azureflame breath / acid spit damage)";
             }
             if (pTier == 2){
-                descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+400% to azureflame breath / acid spit damage, increase str/tou scaling by 50%) ";
+                descS += "(+400% to azureflame breath / acid spit damage, increase str/tou scaling by 100%) ";
             }
             if (pTier == 3){
-                descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%)";
+                descS += "(+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%, , allows to keep both specials even without been cave wyrm)";
             }
             return descS;
         }

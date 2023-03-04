@@ -16,16 +16,15 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS += "Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)";
+            if (pTier == 1){
+                descS += "Increases self healing by 300 out of combat and by 150 in combat. (using defend option will double it)";
             }
-            if (pTier >= 2){
-                descS += ", Mana and fatigue recovery increased, 50% reduced costs for Illusion and Terror";
+            if (pTier == 2){
+                descS += "Increases self healing by 600 out of combat and by 300 in combat. (using defend option will double it)";
             }
-            if (pTier >= 3){
+            if (pTier == 3){
                 descS += ", further boost mana regen based on star sphere rank, speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";
             }
-            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -69,16 +68,16 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
             var pBuffs:Object = {};
 			if (player.racialScore(Races.HUMAN) > 17) {
 				if (pTier == 1) {
-					pBuffs['spe.mult'] = 0.05;
-					pBuffs['int.mult'] = 0.05;
-				}
-				if (pTier == 2) {
-					pBuffs['spe.mult'] = 0.1;
+					pBuffs['spe.mult'] = 0.15;
 					pBuffs['int.mult'] = 0.15;
 				}
+				if (pTier == 2) {
+					pBuffs['spe.mult'] = 0.35;
+					pBuffs['int.mult'] = 0.4;
+				}
 				if (pTier == 3) {
-					pBuffs['spe.mult'] = 0.15;
-					pBuffs['int.mult'] = 0.35;
+					pBuffs['spe.mult'] = 0.6;
+					pBuffs['int.mult'] = 0.9;
 				}
 			}
             return pBuffs;
@@ -86,7 +85,7 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
 
         public function HumanParathyroidGlandMutation() 
 		{
-			super(mName + " IM", mName, SLOT_PARATHYROID, 1);
+			super(mName + " IM", mName, SLOT_PARATHYROID, 2);
         }
         
     }

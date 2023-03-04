@@ -10847,6 +10847,7 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5;
@@ -10872,6 +10873,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.GreaterLifeline)) maxNonPercentRegen += 90 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.EpicLifeline)) maxNonPercentRegen += 120 * (1 + player.newGamePlusMod());
 		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 300 * (1 + player.newGamePlusMod());
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 300 * (1 + player.newGamePlusMod());
         if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen *= 2;
         return maxNonPercentRegen;
     }

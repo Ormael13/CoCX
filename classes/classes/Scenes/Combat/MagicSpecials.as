@@ -1924,11 +1924,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1) damult += 2;
 		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2) {
 			damult += 2;
-			scalingmulti += 0.5;
+			scalingmulti += 1;
 		}
 		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
 			damult += 2;
-			scalingmulti += 0.5;
 			debufstr += 2;
 		}
 		damage += player.str;
@@ -1984,12 +1983,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1) damult += 2;
 		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2) {
 			damult += 2;
-			scalingmulti += 0.5;
+			scalingmulti += 1;
 		}
-		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
-			damult += 2;
-			scalingmulti += 0.5;
-		}
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) damult += 2;
 		damage += player.str;
 		damage += scalingBonusStrength() * scalingmulti;
 		damage += player.tou;

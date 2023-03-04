@@ -70,17 +70,17 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
             var pBuffs:Object = {};
             if (player.racialScore(Races.HUMAN) > 17) {
 				if (pTier == 1) {
-					pBuffs['tou.mult'] = 0.1;
+					pBuffs['tou.mult'] = 0.3;
 				}
 				else if (pTier == 2) {
-					pBuffs['tou.mult'] = 0.1;
-					pBuffs['str.mult'] = 0.1;
-					pBuffs['spe.mult'] = 0.1;
+					pBuffs['tou.mult'] = 0.3;
+					pBuffs['str.mult'] = 0.3;
+					pBuffs['spe.mult'] = 0.3;
 				}
 				else if (pTier == 3) {
-					pBuffs['tou.mult'] = 0.2;
-					pBuffs['str.mult'] = 0.2;
-					pBuffs['spe.mult'] = 0.3;
+					pBuffs['tou.mult'] = 0.7;
+					pBuffs['str.mult'] = 0.7;
+					pBuffs['spe.mult'] = 0.7;
 				}
 			}
             return pBuffs;

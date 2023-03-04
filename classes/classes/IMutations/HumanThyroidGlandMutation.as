@@ -16,13 +16,13 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS += "Regenerates 2% of max HP/hour and 1% of max HP/round.";
+            if (pTier == 1){
+                descS += "Regenerates 2% of max HP/hour and 1% of max HP/round";
             }
-            if (pTier >= 2){
-                descS += ", FoxFire +50% damage (fire and lust)";
+            if (pTier == 2){
+                descS += "Regenerates 4% of max HP/hour and 2% of max HP/round";
             }
-            if (pTier >= 3){
+            if (pTier == 3){
                 descS += ", +20% Evasion to Illusion, +50 speed debuff to Terror target, +SF/Mana regen (Star Sphere rank x3/2 respectively), increase Star Sphere Max to 20";
             }
             if (descS != "")descS += ".";
@@ -68,17 +68,17 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
             var pBuffs:Object = {};
             if (player.racialScore(Races.HUMAN) > 17) {
 				if (pTier == 1) {
-					pBuffs['spe.mult'] = 0.05;
-					pBuffs['wis.mult'] = 0.05;
-				}
-				if (pTier == 2){
-					pBuffs['spe.mult'] = 0.1;
+					pBuffs['spe.mult'] = 0.15;
 					pBuffs['wis.mult'] = 0.15;
 				}
+				if (pTier == 2){
+					pBuffs['spe.mult'] = 0.35;
+					pBuffs['wis.mult'] = 0.4;
+				}
 				if (pTier == 3){
-					pBuffs['spe.mult'] = 0.15;
-					pBuffs['wis.mult'] = 0.35;
-					pBuffs['int.mult'] = 0.2;
+					pBuffs['spe.mult'] = 0.5;
+					pBuffs['wis.mult'] = 0.9;
+					pBuffs['int.mult'] = 0.7;
 				}
 			}
             return pBuffs;
@@ -87,7 +87,7 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
         //Mutations Buffs
         public function HumanThyroidGlandMutation() 
 		{
-			super(mName + " IM", mName, SLOT_THYROID, 1);
+			super(mName + " IM", mName, SLOT_THYROID, 2);
 		}
 		
 	}
