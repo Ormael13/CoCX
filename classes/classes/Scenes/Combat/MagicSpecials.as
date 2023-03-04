@@ -1918,12 +1918,26 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(40, USEFATG_MAGIC_NOBM);
 		var damage:Number = 0;
+		var damult:Number = 1;
+		var scalingmulti:Number = 1;
+		var debufstr:Number = 1;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1) damult += 2;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2) {
+			damult += 2;
+			scalingmulti += 0.5;
+		}
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
+			damult += 2;
+			scalingmulti += 0.5;
+			debufstr += 2;
+		}
 		damage += player.str;
-		damage += scalingBonusStrength();// * 0.5
+		damage += scalingBonusStrength() * scalingmulti;
 		damage += player.tou;
-		damage += scalingBonusToughness();// * 0.5
+		damage += scalingBonusToughness() * scalingmulti;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1952,9 +1966,9 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
 			monster.addStatusValue(StatusEffects.AcidDoT,1,1);
-			monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+			monster.addStatusValue(StatusEffects.AcidDoT,3,debufstr);
 		}
-		else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+		else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,debufstr,0);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		checkLethiceAndCombatRoundOver();
@@ -1965,13 +1979,25 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(40, USEFATG_MAGIC_NOBM);
 		var damage:Number = 0;
+		var damult:Number = 1;
+		var scalingmulti:Number = 1;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1) damult += 2;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2) {
+			damult += 2;
+			scalingmulti += 0.5;
+		}
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
+			damult += 2;
+			scalingmulti += 0.5;
+		}
 		damage += player.str;
-		damage += scalingBonusStrength();// * 0.5
+		damage += scalingBonusStrength() * scalingmulti;
 		damage += player.tou;
-		damage += scalingBonusToughness();// * 0.5
+		damage += scalingBonusToughness() * scalingmulti;
 		damage = calcInfernoMod(damage, true);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2019,8 +2045,21 @@ public class MagicSpecials extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5 * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
+			if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 		}
 		else {
+			if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
+				if(!monster.hasPerk(PerkLib.Resolute)) {
+					outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
+					monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+				}
+				else {
+					outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
+					if(!monster.plural) outputText("is ");
+					else outputText("are");
+					outputText("too resolute to be stunned by your attack.</b> ");
+				}
+			}
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 		}
@@ -3130,10 +3169,17 @@ public class MagicSpecials extends BaseCombatContent {
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		if (player.hasPerk(PerkLib.BerserkerArmor)){
-			tempStr = tempStr*1.5;
-			tempTou = tempTou*1.5;
-			tempSpe = tempSpe*1.5;
+		if (player.hasPerk(PerkLib.BerserkerArmor) || (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) {
+			if (player.hasPerk(PerkLib.BerserkerArmor) && player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+				tempStr = tempStr*2;
+				tempTou = tempTou*2;
+				tempSpe = tempSpe*2;
+			}
+			else {
+				tempStr = tempStr*1.5;
+				tempTou = tempTou*1.5;
+				tempSpe = tempSpe*1.5;
+			}
 		}
 		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
 		player.HP = oldHPratio*player.maxHP();
@@ -3185,10 +3231,17 @@ public class MagicSpecials extends BaseCombatContent {
 			temp2 += player.touStat.core.value * 0.2;
 			temp3 += player.speStat.core.value * 0.2;
 		}
-		if (player.hasPerk(PerkLib.BerserkerArmor)){
-			temp1 *= 1.5;
-			temp2 *= 1.5;
-			temp3 *= 1.5;
+		if (player.hasPerk(PerkLib.BerserkerArmor) || (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) {
+			if (player.hasPerk(PerkLib.BerserkerArmor) && player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+				temp1 *= 2;
+				temp2 *= 2;
+				temp3 *= 2;
+			}
+			else {
+				temp1 *= 1.5;
+				temp2 *= 1.5;
+				temp3 *= 1.5;
+			}
 		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);

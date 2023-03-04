@@ -67,24 +67,26 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) {
-                pBuffs['spe.mult'] = 0.05;
-                pBuffs['int.mult'] = 0.05;
-            }
-            if (pTier == 2) {
-                pBuffs['spe.mult'] = 0.1;
-                pBuffs['int.mult'] = 0.15;
-            }
-            if (pTier == 3) {
-                pBuffs['spe.mult'] = 0.15;
-                pBuffs['int.mult'] = 0.35;
-            }
+			if (player.racialScore(Races.HUMAN) > 17) {
+				if (pTier == 1) {
+					pBuffs['spe.mult'] = 0.05;
+					pBuffs['int.mult'] = 0.05;
+				}
+				if (pTier == 2) {
+					pBuffs['spe.mult'] = 0.1;
+					pBuffs['int.mult'] = 0.15;
+				}
+				if (pTier == 3) {
+					pBuffs['spe.mult'] = 0.15;
+					pBuffs['int.mult'] = 0.35;
+				}
+			}
             return pBuffs;
         }
 
         public function HumanParathyroidGlandMutation() 
 		{
-			super(mName + " IM", mName, SLOT_PARATHYROID, 3);
+			super(mName + " IM", mName, SLOT_PARATHYROID, 1);
         }
         
     }

@@ -216,16 +216,17 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 10%\n");
 			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race. Effects: Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)\n");
 			outputText("-New mutation perk: Human Thyroid Gland Req. having free thyroid glands mutation slot, human race. Effects: Regenerates 2% of max HP/hour and 1% of max HP/round.\n");
+			outputText("-New mutation perk: Cave Wyrm Lungs Req. having free lungs mutation slot, cave wyrm race. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+200% to azurflame breath / acid spit damage)\n");
+			outputText("-New mutation perk: Cave Wyrm Lungs (Primitive). Req. Cave Wyrm Lungs and lvl 30+. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+400% to azurflame breath / acid spit damage, increase str/tou scaling by 50%)\n");
+			outputText("-New mutation perk: Cave Wyrm Lungs (Evolved). Req. Cave Wyrm Lungs (Primitive) and lvl 60+. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. ");
+			outputText("(+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%)\n");
+			outputText("-New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 60+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed, wrath Gained from taking damage and dealing damage increased and rising Diehard limit by 25%\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 30+. Effects: 
 			outputText("-\n");
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
@@ -238,6 +239,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
@@ -245,7 +258,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
 			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks, Anita (Harpy from Black Cock) 69 scene locked for some of the PC that had non taur lower bodies, (Ice) Troll Fig items not increasing stat bonuses for perm race PC, ");
-			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho\n");
+			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho, Melkie Lung mutation not gibing any stat multi bonus\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -316,7 +329,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -349,6 +366,11 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

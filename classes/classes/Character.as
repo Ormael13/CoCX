@@ -500,7 +500,7 @@ import classes.Scenes.NPCs.Forgefather;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
 				//if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4) min -= maxHP() * 0.05;
 			}
-			if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 1 && game.player.isRace(Races.HUMAN, 1, false)) {
+			if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17) {
 				min -= maxHP() * 0.05;
 				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 2) min -= maxHP() * 0.05;
 				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3) min -= maxHP() * 0.15;

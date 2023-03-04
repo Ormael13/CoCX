@@ -2122,7 +2122,7 @@ public class Camp extends NPCAwareContent{
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
-		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
+		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
 

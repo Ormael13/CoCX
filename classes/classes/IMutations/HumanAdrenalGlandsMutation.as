@@ -24,7 +24,7 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
                 descS += ", strength, speed and increasing Diehard limit by 10%";
             }
             if (pTier == 3){
-                descS += ", strength, speed,  and increasing Diehard limit by 25%";
+                descS += ", strength, speed, wrath Gained from taking damage and dealing damage increased and rising Diehard limit by 25%";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -68,25 +68,27 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) {
-                pBuffs['tou.mult'] = 0.1;
-            }
-            else if (pTier == 2) {
-                pBuffs['tou.mult'] = 0.1;
-                pBuffs['str.mult'] = 0.1;
-                pBuffs['spe.mult'] = 0.1;
-            }
-            else if (pTier == 3) {
-                pBuffs['tou.mult'] = 0.2;
-                pBuffs['str.mult'] = 0.2;
-                pBuffs['spe.mult'] = 0.3;
-            }
+            if (player.racialScore(Races.HUMAN) > 17) {
+				if (pTier == 1) {
+					pBuffs['tou.mult'] = 0.1;
+				}
+				else if (pTier == 2) {
+					pBuffs['tou.mult'] = 0.1;
+					pBuffs['str.mult'] = 0.1;
+					pBuffs['spe.mult'] = 0.1;
+				}
+				else if (pTier == 3) {
+					pBuffs['tou.mult'] = 0.2;
+					pBuffs['str.mult'] = 0.2;
+					pBuffs['spe.mult'] = 0.3;
+				}
+			}
             return pBuffs;
         }
 
         public function HumanAdrenalGlandsMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADRENALS, 2);
+			super(mName + " IM", mName, SLOT_ADRENALS, 3);
 		}
 		
 	}
