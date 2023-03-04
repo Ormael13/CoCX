@@ -4,6 +4,7 @@ import classes.BodyParts.*;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
+import classes.IMutations.IMutationsLib;
 import classes.Player;
 import classes.Race;
 import classes.VaginaClass;
@@ -66,6 +67,10 @@ public class HumanRace extends Race {
 									&& body.player.hasPlainSkinOnly()
 									&& body.skinBaseAdj != "slippery")
 						}, +1);
+		
+		addMutation(IMutationsLib.HumanAdrenalGlandsIM, +2);
+		addMutation(IMutationsLib.HumanParathyroidGlandIM, +2);
+		addMutation(IMutationsLib.HumanThyroidGlandIM, +2);
 		
 		tiers.push(new HumanRaceTier(maxScore-9));
 		

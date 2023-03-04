@@ -212,8 +212,10 @@ public class Changelog extends BaseContent
 			outputText("-Using on weapons at once Flame Blade and Electrify Weapon buffs would result with weapon dealing plasma type dmg as long both buffs are active.\n");
 			outputText("-Bark skin give +2 to Yggdrasil and Plant race score now.\n");
 			outputText("-Plant race tiers for bonuses been reduced from 4 to 2. New race tiers req. now 7 or 10 pts in score with adjusted stat bonuses.\n");
-			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race. Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 2%\n");//score 4+
-			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 5%\n");
+			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race. Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 5%\n");
+			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 10%\n");
+			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race. Effects: Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)\n");
+			outputText("-New mutation perk: Human Thyroid Gland Req. having free thyroid glands mutation slot, human race. Effects: Regenerates 2% of max HP/hour and 1% of max HP/round.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -223,9 +225,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 30+. Effects: 
 			outputText("-\n");
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk

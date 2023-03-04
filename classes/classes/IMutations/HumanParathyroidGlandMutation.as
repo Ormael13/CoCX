@@ -2,29 +2,28 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations 
+package classes.IMutations
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Races;
 
-public class HumanAdrenalGlandsMutation extends IMutationPerkType
-	{
-		private static const mName:String = "Human Adrenal Glands";
+public class HumanParathyroidGlandMutation extends IMutationPerkType
+    {
+        private static const mName:String = "Human Parathyroid Gland";
         //v1 contains the mutation tier
-		override public function mDesc(params:PerkClass, pTier:int = -1):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1) descS += "Your human adrenal glands are giving you slight boost to your natural stamina";
-            if (pTier == 1){
-                descS += " and increasing Diehard limit by 5%";
+            if (pTier >= 1){
+                descS += "Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)";
             }
-            if (pTier == 2){
-                descS += ", strength, speed and increasing Diehard limit by 10%";
+            if (pTier >= 2){
+                descS += ", Mana and fatigue recovery increased, 50% reduced costs for Illusion and Terror";
             }
-            if (pTier == 3){
-                descS += ", strength, speed,  and increasing Diehard limit by 25%";
+            if (pTier >= 3){
+                descS += ", further boost mana regen based on star sphere rank, speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -53,7 +52,7 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireAdrenalGlandsMutationSlot()
+                    this.requireParathyroidGlandMutationSlot()
                     .requireRace(Races.HUMAN);
                 }
                 else{
@@ -69,25 +68,24 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) {
-                pBuffs['tou.mult'] = 0.1;
+                pBuffs['spe.mult'] = 0.05;
+                pBuffs['int.mult'] = 0.05;
             }
-            else if (pTier == 2) {
-                pBuffs['tou.mult'] = 0.1;
-                pBuffs['str.mult'] = 0.1;
+            if (pTier == 2) {
                 pBuffs['spe.mult'] = 0.1;
+                pBuffs['int.mult'] = 0.15;
             }
-            else if (pTier == 3) {
-                pBuffs['tou.mult'] = 0.2;
-                pBuffs['str.mult'] = 0.2;
-                pBuffs['spe.mult'] = 0.3;
+            if (pTier == 3) {
+                pBuffs['spe.mult'] = 0.15;
+                pBuffs['int.mult'] = 0.35;
             }
             return pBuffs;
         }
 
-        public function HumanAdrenalGlandsMutation() 
+        public function HumanParathyroidGlandMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADRENALS, 2);
-		}
-		
-	}
+			super(mName + " IM", mName, SLOT_PARATHYROID, 3);
+        }
+        
+    }
 }
