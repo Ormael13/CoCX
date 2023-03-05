@@ -20,7 +20,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
                 descS += "Your agility is increased, and can be even further boosted if you have natural armour or thick skin";
             }
             if (pTier >= 3){
-                descS += ", (+30% max core spe as phantom spe)";
+                descS += ", +30% max core spe as phantom spe";
             }
             if (descS != "")descS += ".";
             return descS;

@@ -1511,7 +1511,6 @@ import classes.Scenes.Crafting;
 						"elf far older than you but her fingers do magic even the best cock would fail to, her precise movement causing you to cum gracefully on her hand with some of your juice splashing on the nearby grass. You ride this orgasm for a few seconds, losing yourself in the bright green of the eyes of your partner before slowly matching your excited breath back down to the rhythm of the ambient natural world.[pg]");
 			outputText("Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more self control especially if you plan to take the demons down. Don't you worry sis I will train you into a pillar of willpower and stamina even demons charm won't be able to overcome.</i></i>\"[pg]");
 			outputText("On this you wave goodbye and head back to camp.[pg]");
-
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
 			player.trainStat("lib", 4, 300);
@@ -1530,7 +1529,6 @@ import classes.Scenes.Crafting;
 			outputText("Later when you wake up Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more empathy training especially if you plan to take the demons down. Don't you worry sis I will train you until your senses are as sharp as the edge of an elven glaive.</i>\"[pg]");
 			outputText("On this you wave goodbye and head back to camp.[pg]");
 			player.SexXP((5+player.level) * 10);
-
 			player.trainStat("lib", 4, 300);
 			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && !hasTrainedToday && player.lib >= 200) {
 				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);

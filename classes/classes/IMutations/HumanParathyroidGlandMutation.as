@@ -24,7 +24,7 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
                 descS += "Increases self healing by 600 out of combat and by 300 in combat. (using defend option will double it)";
             }
             if (pTier == 3){
-                descS += ", further boost mana regen based on star sphere rank, speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";
+                descS += "Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.";
             }
             return descS;
         }
@@ -88,7 +88,7 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
 
         public function HumanParathyroidGlandMutation() 
 		{
-			super(mName + " IM", mName, SLOT_PARATHYROID, 2);
+			super(mName + " IM", mName, SLOT_PARATHYROID, 3);
         }
         
     }

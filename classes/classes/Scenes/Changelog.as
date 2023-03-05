@@ -212,10 +212,10 @@ public class Changelog extends BaseContent
 			outputText("-Using on weapons at once Flame Blade and Electrify Weapon buffs would result with weapon dealing plasma type dmg as long both buffs are active.\n");
 			outputText("-Bark skin give +2 to Yggdrasil and Plant race score now.\n");
 			outputText("-Plant race tiers for bonuses been reduced from 4 to 2. New race tiers req. now 7 or 10 pts in score with adjusted stat bonuses.\n");
-			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race. Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 5%\n");
+			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race (17+). Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 5%\n");
 			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 10%\n");
-			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race. Effects: Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)\n");
-			outputText("-New mutation perk: Human Thyroid Gland Req. having free thyroid glands mutation slot, human race. Effects: Regenerates 2% of max HP/hour and 1% of max HP/round.\n");
+			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race (17+). Effects: Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)\n");
+			outputText("-New mutation perk: Human Thyroid Gland Req. having free thyroid glands mutation slot, human race (17+). Effects: Regenerates 2% of max HP/hour and 1% of max HP/round.\n");
 			outputText("-New mutation perk: Cave Wyrm Lungs Req. having free lungs mutation slot, azureflame breath and acid spit perks, cave wyrm race. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+200% to azurflame breath / acid spit damage)\n");
 			outputText("-New mutation perk: Cave Wyrm Lungs (Primitive). Req. Cave Wyrm Lungs and lvl 30+. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+400% to azurflame breath / acid spit damage, increase str/tou scaling by 100%)\n");
 			outputText("-New mutation perk: Cave Wyrm Lungs (Evolved). Req. Cave Wyrm Lungs (Primitive) and lvl 60+. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. ");
@@ -223,11 +223,11 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 60+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed, wrath Gained from taking damage and dealing damage increased and rising Diehard limit by 25%\n");
 			outputText("-New mutation perk: Human Parathyroid Gland (Primitive). Req. Human Parathyroid Gland and lvl 30+. Effects: Increases self healing by 600 out of combat and by 300 in combat (using defend option will double it)\n");
 			outputText("-New mutation perk: Human Thyroid Gland (Primitive). Req. Human Thyroid Gland and lvl 30+. Effects: Regenerates 4% of max HP/hour and 2% of max HP/round.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Human Parathyroid Glands (Evolved). Req. Human Parathyroid Glands (Primitive) and lvl 60+. Effects: Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.\n");
+			outputText("-New mutation perk: Human Thyroid Glands (Evolved). Req. Human Thyroid Glands (Primitive) and lvl 60+. Effects: Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana.\n");
+			outputText("-New mutation perk: Human Ovaries Glands. Req. having free ovaries mutation slot, human race (17+). Effects: Increases fertility rating by 15, +5% to lust resistance.\n");
+			outputText("-New mutation perk: Human Testicles Glands. Req. having free testicles mutation slot, human race (17+). Effects: Increases virility rating by 15, +5% to lust resistance.\n");
+			outputText("-New mutation perk: Human Musculature. Req. having free musculature mutation slot, 100+ tone, human race (17+). Effects: Your altered musculature allows to increase your natural strength and tone.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -255,6 +255,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
@@ -338,6 +344,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -374,8 +381,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -10,21 +10,21 @@ import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class HumanThyroidGlandMutation extends IMutationPerkType
+public class HumanMusculatureMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Thyroid Gland";
+        private static const mName:String = "Human Musculature";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS += "Regenerates 2% of max HP/hour and 1% of max HP/round";
+                descS = "Your altered musculature allows to increase your natural strength and tone";
             }
             if (pTier == 2){
-                descS += "Regenerates 4% of max HP/hour and 2% of max HP/round";
+                descS = "Your musculature continue to increase your natural strength and tone gained from previous change";
             }
             if (pTier == 3){
-                descS += "Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana";
+                descS = "Your musculature increased again your natural strength and tone limit. +10% max core str/spe as phantom str/spe          Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -33,7 +33,7 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this, player)) {
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -53,10 +53,10 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireThyroidGlandMutationSlot()
+                    this.requireMusclesMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.racialScore(Races.HUMAN) > 16;
-                    }, "Human race (17+)");
+                        return player.tone >= 100 && player.racialScore(Races.HUMAN) > 16;
+                    }, "100+ tone & Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -67,31 +67,19 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
             }
         }
 
+        //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (player.racialScore(Races.HUMAN) > 17) {
-				if (pTier == 1) {
-					pBuffs['spe.mult'] = 0.15;
-					pBuffs['wis.mult'] = 0.15;
-				}
-				if (pTier == 2){
-					pBuffs['spe.mult'] = 0.35;
-					pBuffs['wis.mult'] = 0.4;
-				}
-				if (pTier == 3){
-					pBuffs['spe.mult'] = 0.5;
-					pBuffs['wis.mult'] = 0.9;
-					pBuffs['int.mult'] = 0.7;
-				}
-			}
+            if (pTier == 1) pBuffs['str.mult'] = 0.15;
+            if (pTier == 2) pBuffs['str.mult'] = 0.45;
+            if (pTier == 3) pBuffs['str.mult'] = 0.9;
             return pBuffs;
         }
 
-        //Mutations Buffs
-        public function HumanThyroidGlandMutation() 
+        public function HumanMusculatureMutation() 
 		{
-			super(mName + " IM", mName, SLOT_THYROID, 3);
-		}
-		
-	}
+			super(mName + " IM", mName, SLOT_MUSCLE, 1);
+        }
+        
+    }
 }

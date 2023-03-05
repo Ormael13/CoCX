@@ -10,21 +10,21 @@ import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class HumanThyroidGlandMutation extends IMutationPerkType
+public class HumanTesticlesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Human Thyroid Gland";
+        private static const mName:String = "Human Testicles";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS += "Regenerates 2% of max HP/hour and 1% of max HP/round";
+                descS += "Increases virility rating by 15, +5% to lust resistance";
             }
             if (pTier == 2){
-                descS += "Regenerates 4% of max HP/hour and 2% of max HP/round";
+                descS += "Increases virility rating by 30, +10% to lust resistance";
             }
             if (pTier == 3){
-                descS += "Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana";
+                descS += ", +5 to max tou an +10 to max str/lib, increase cum production by ~100%, +90 to max lust and Cum Cannon cost rise to 200 lust but can be used more than once per fight";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -33,7 +33,7 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this, player)) {
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -53,7 +53,7 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireThyroidGlandMutationSlot()
+                    this.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.racialScore(Races.HUMAN) > 16;
                     }, "Human race (17+)");
@@ -67,31 +67,27 @@ public class HumanThyroidGlandMutation extends IMutationPerkType
             }
         }
 
+        //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (player.racialScore(Races.HUMAN) > 17) {
-				if (pTier == 1) {
-					pBuffs['spe.mult'] = 0.15;
-					pBuffs['wis.mult'] = 0.15;
-				}
-				if (pTier == 2){
-					pBuffs['spe.mult'] = 0.35;
-					pBuffs['wis.mult'] = 0.4;
-				}
-				if (pTier == 3){
-					pBuffs['spe.mult'] = 0.5;
-					pBuffs['wis.mult'] = 0.9;
-					pBuffs['int.mult'] = 0.7;
-				}
+            if (pTier == 1) pBuffs['lib.mult'] = 0.3;
+            if (pTier == 2) {
+				pBuffs['str.mult'] = 0.3;
+                pBuffs['tou.mult'] = 0.2;
+                pBuffs['lib.mult'] = 0.4;
 			}
+            if (pTier == 3){
+                pBuffs['str.mult'] = 0.1;
+                pBuffs['tou.mult'] = 0.05;
+                pBuffs['lib.mult'] = 0.2;
+            }
             return pBuffs;
         }
 
-        //Mutations Buffs
-        public function HumanThyroidGlandMutation() 
+        public function HumanTesticlesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_THYROID, 3);
-		}
-		
-	}
+			super(mName + " IM", mName, SLOT_TESTICLES, 1);
+        }
+
+    }
 }
