@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
 public class HumanAdrenalGlandsMutation extends IMutationPerkType
@@ -54,7 +55,9 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdrenalGlandsMutationSlot()
-                    .requireRace(Races.HUMAN);
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.racialScore(Races.HUMAN) > 16;
+                    }, "Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
