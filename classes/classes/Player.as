@@ -2408,10 +2408,10 @@ use namespace CoC;
 			if(hasPerk(PerkLib.Pope)) lust -= 5;
 			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 2) lust -= 5;
 			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2) lust -= 5;
-			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1) lust -= 5;
-			if(perkv1(IMutationsLib.HumanOvariesIM) >= 2) lust -= 5;
-			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1) lust -= 5;
-			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 2) lust -= 5;
+			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= 5;
+			if(perkv1(IMutationsLib.HumanOvariesIM) >= 2 && racialScore(Races.HUMAN) > 17) lust -= 5;
+			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= 5;
+			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 2 && racialScore(Races.HUMAN) > 17) lust -= 5;
 			if((hasPerk(PerkLib.UnicornBlessing) && cor <= 20) || (hasPerk(PerkLib.BicornBlessing) && cor >= 80)) lust -= 10;
 			if(hasPerk(PerkLib.ChiReflowLust)) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
@@ -4838,9 +4838,9 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 2) maxToneCap += 20;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 3) maxToneCap += 30;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) maxToneCap += 10;
-			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 1) maxToneCap += 5;
-			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 2) maxToneCap += 10;
-			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3) maxToneCap += 10;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 1 && racialScore(Races.HUMAN) > 17) maxToneCap += 5;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
 			return maxToneCap;
 		}
 		public function maxThicknessCap():Number {

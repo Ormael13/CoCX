@@ -14,37 +14,37 @@ package classes.Scenes.Camp
 		public function TrainingDummy() 
 		{
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 5) {
-				initStrTouSpeInte(100, 5000, 1400, 10);
-				initWisLibSensCor(10, 700, 10, 50);
+				initStrTouSpeInte(5, 200, 35, 10);
+				initWisLibSensCor(10, 35, 10, 50);
 				this.bonusHP = 200000;
-				this.bonusLust = 10000;
+				this.bonusLust = 135;
 				this.armorDef = 10000;
 				this.armorMDef = 10000;
 				this.level = 90;
 			}
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) {
-				initStrTouSpeInte(10, 3500, 1000, 10);
-				initWisLibSensCor(10, 500, 10, 50);
+				initStrTouSpeInte(5, 150, 25, 10);
+				initWisLibSensCor(10, 25, 10, 50);
 				this.bonusHP = 140000;
-				this.bonusLust = 7000;
+				this.bonusLust = 95;
 				this.armorDef = 7000;
 				this.armorMDef = 7000;
 				this.level = 60;
 			}
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) {
-				initStrTouSpeInte(10, 2000, 600, 10);
-				initWisLibSensCor(10, 300, 10, 50);
+				initStrTouSpeInte(5, 100, 15, 10);
+				initWisLibSensCor(10, 15, 10, 50);
 				this.bonusHP = 80000;
-				this.bonusLust = 4000;
+				this.bonusLust = 55;
 				this.armorDef = 4000;
 				this.armorMDef = 4000;
 				this.level = 30;
 			}
 			else {
-				initStrTouSpeInte(10, 500, 200, 10);
-				initWisLibSensCor(10, 100, 10, 50);
+				initStrTouSpeInte(5, 50, 5, 10);
+				initWisLibSensCor(10, 5, 10, 50);
 				this.bonusHP = 20000;
-				this.bonusLust = 1000;
+				this.bonusLust = 15;
 				this.armorDef = 1000;
 				this.armorMDef = 1000;
 				this.level = 0;
@@ -71,6 +71,7 @@ package classes.Scenes.Camp
 			this.armorName = "dummy stick";
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 50, 0, 0, 0);
 			this.createPerk(PerkLib.NoExpGained, 0, 0, 0, 0);
 			this.createPerk(PerkLib.NoItemsGained, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);

@@ -86,7 +86,7 @@ public class HumanOvariesMutation extends IMutationPerkType
 
         public function HumanOvariesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_OVARIES, 1);
+			super(mName + " IM", mName, SLOT_OVARIES, 2);
         }
 
     }

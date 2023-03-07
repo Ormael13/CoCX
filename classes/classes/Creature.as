@@ -2567,9 +2567,9 @@ public class Creature extends Utils
 				percent += 0.03;
 			if (hasPerk(PerkLib.MagicalVirility))
 				percent += 0.05 + (perkv1(PerkLib.MagicalVirility) * 0.01);
-			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 1)
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
 				percent += 0.05;
-			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 2)
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 2 && game.player.racialScore(Races.HUMAN) > 17)
 				percent += 0.05;
 			//Messy Orgasms?
 			if (hasPerk(PerkLib.MessyOrgasms))
@@ -3436,9 +3436,9 @@ public class Creature extends Utils
 				counter += 30;
 			if (hasPerk(PerkLib.MagicalFertility))
 				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
-			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1)
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
 				counter += 15;
-			if (perkv1(IMutationsLib.HumanOvariesIM) >= 2)
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 2 && game.player.racialScore(Races.HUMAN) > 17)
 				counter += 15;
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
@@ -4385,7 +4385,6 @@ public class Creature extends Utils
 			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Minimise";
 			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Phasing";
 			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) evasionReason = "Displacing";
-
 			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) SceneLib.combat.teases.tease();
 			return evasionReason;
 		}

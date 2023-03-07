@@ -2102,11 +2102,11 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += (costback3 * 12);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.054;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.055) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.055;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.055) {
+				player.buff("Curse").remove();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.055;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.056) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.056;

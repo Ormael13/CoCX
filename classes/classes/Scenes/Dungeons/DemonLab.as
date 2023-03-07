@@ -5,6 +5,7 @@
 package classes.Scenes.Dungeons {
 import classes.EventParser;
 import classes.PerkLib;
+import classes.Races;
 import classes.Saves;
 import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
 import classes.Scenes.Dungeons.DemonLab.Incels;
@@ -695,9 +696,9 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         menu();
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
-        addButton(2, "CAVEMAN!!!", WEHAVETECHNOLOGY);
-	// Todo make goblin button.
-        addButton(3, "Leave", PanicRoom);
+		addButtonIfTrue(2, "GoblinHaxxors", GoblinHaxxors, "Req. to be Goblin or Gremlin.", (player.isRaceCached(Races.GOBLIN) || player.isRaceCached(Races.GREMLIN)));
+        addButton(3, "CAVEMAN!!!", WEHAVETECHNOLOGY);
+        addButton(4, "Leave", PanicRoom);
     }
 
     public function Desk():void {
@@ -724,11 +725,12 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("Quickly frustrated, you realise you're getting nowhere with this infernal device!\n\n");
         doNext(PanicRoom);
     }
+	
     public function GoblinHaxxors():void {
         clearOutput();
-        outputText("You open the security protocols for the computer, your green ears quivering with excitement. Demons using tech? Thanks for the free information! You quickly break into the userdata and pull up several passwords. Then, you attempt to log in. After a few attempts, you access the account of a \"Doctor Grindr\". \n\n");
+        outputText("You open the security protocols for the computer, your green ears quivering with excitement. Demons using tech? Thanks for the free information! You quickly break into the userdata and pull up several passwords. Then, you attempt to log in. After a few attempts, you access the account of a \"Doctor Grindr\".\n\n");
         outputText("You deactivate the security protocols and rescind the lockdown. You hear a metallic \"clang\" in the distance. \n\n");
-	WayOutBlocked = false;
+		WayOutBlocked = false;
         doNext(PanicRoom);
     }
 

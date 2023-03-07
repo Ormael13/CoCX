@@ -32,6 +32,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
@@ -268,9 +269,18 @@ import flash.utils.getQualifiedClassName;
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
-			if (hasPerk(PerkLib.TankI)) temp += ((baseStat*12) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.GoliathI)) temp += ((this.str*8) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.CheetahI)) temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.TankI)) {
+				if (this is TrainingDummy) temp += ((baseStat*1200) * (1 + newGamePlusMod()));
+				else temp += ((baseStat*12) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.GoliathI)) {
+				if (this is TrainingDummy) temp += ((this.str*800) * (1 + newGamePlusMod()));
+				else temp += ((this.str*8) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.CheetahI)) {
+				if (this is TrainingDummy) temp += ((this.spe*400) * (1 + newGamePlusMod()));
+				else temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) temp += (400 * (1 + newGamePlusMod()));
@@ -488,6 +498,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyGroupType)) anotherOne *= 5;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) anotherOne *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) anotherOne *= 15;
+			if (this is TrainingDummy) anotherOne *= 100;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;

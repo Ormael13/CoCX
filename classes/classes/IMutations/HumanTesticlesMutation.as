@@ -86,7 +86,7 @@ public class HumanTesticlesMutation extends IMutationPerkType
 
         public function HumanTesticlesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_TESTICLES, 1);
+			super(mName + " IM", mName, SLOT_TESTICLES, 2);
         }
 
     }

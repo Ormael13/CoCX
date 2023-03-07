@@ -225,9 +225,12 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Thyroid Gland (Primitive). Req. Human Thyroid Gland and lvl 30+. Effects: Regenerates 4% of max HP/hour and 2% of max HP/round.\n");
 			outputText("-New mutation perk: Human Parathyroid Glands (Evolved). Req. Human Parathyroid Glands (Primitive) and lvl 60+. Effects: Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.\n");
 			outputText("-New mutation perk: Human Thyroid Glands (Evolved). Req. Human Thyroid Glands (Primitive) and lvl 60+. Effects: Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana.\n");
-			outputText("-New mutation perk: Human Ovaries Glands. Req. having free ovaries mutation slot, human race (17+). Effects: Increases fertility rating by 15, +5% to lust resistance.\n");
-			outputText("-New mutation perk: Human Testicles Glands. Req. having free testicles mutation slot, human race (17+). Effects: Increases virility rating by 15, +5% to lust resistance.\n");
+			outputText("-New mutation perk: Human Ovaries. Req. having free ovaries mutation slot, human race (17+). Effects: Increases fertility rating by 15, +5% to lust resistance.\n");
+			outputText("-New mutation perk: Human Testicles. Req. having free testicles mutation slot, human race (17+). Effects: Increases virility rating by 15, +5% to lust resistance.\n");
 			outputText("-New mutation perk: Human Musculature. Req. having free musculature mutation slot, 100+ tone, human race (17+). Effects: Your altered musculature allows to increase your natural strength and tone.\n");
+			outputText("-Text changes to the battlefield, hellcat, quasi-phoenix squad (ashland) scenes. (Snas)\n");
+			outputText("-New mutation perk: Human Ovaries (Primitive). Req. Human Ovaries and lvl 30+. Increases fertility rating by another 15(30), +5(10)% more to lust resistance.\n");
+			outputText("-New mutation perk: Human Testicles (Primitive). Req. Human Testicles and lvl 30+. Increases fertility rating by another 15(30), +5(10)% more to lust resistance.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -246,21 +249,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
@@ -270,7 +270,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
 			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks, Anita (Harpy from Black Cock) 69 scene locked for some of the PC that had non taur lower bodies, (Ice) Troll Fig items not increasing stat bonuses for perm race PC, ");
-			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho, Melkie Lung mutation not gibing any stat multi bonus\n");
+			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho, Melkie Lung mutation not giving any stat multi bonus\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
