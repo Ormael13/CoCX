@@ -5,29 +5,26 @@
 package classes.IMutations
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
-    public class CaveWyrmLungsMutation extends IMutationPerkType
+public class HumanParathyroidGlandMutation extends IMutationPerkType
     {
-        private static const mName:String = "Cave Wyrm Lungs";
+        private static const mName:String = "Human Parathyroid Gland";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-			if (pTier >= 1){
-				descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. "
-			}
             if (pTier == 1){
-                descS += "(+200% to azureflame breath / acid spit damage)";
+                descS += "Increases self healing by 300 out of combat and by 150 in combat. (using defend option will double it)";
             }
             if (pTier == 2){
-                descS += "(+400% to azureflame breath / acid spit damage, increase str/tou scaling by 100%) ";
+                descS += "Increases self healing by 600 out of combat and by 300 in combat. (using defend option will double it)";
             }
             if (pTier == 3){
-                descS += "(+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%, , allows to keep both specials even without been cave wyrm)";
+                descS += "Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.";
             }
             return descS;
         }
@@ -55,9 +52,10 @@ import classes.Races;
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireLungsMutationSlot()
-                    .requirePerks(PerkLib.AzureflameBreath, PerkLib.AcidSpit)
-                    .requireRace(Races.CAVEWYRM);
+                    this.requireParathyroidGlandMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.racialScore(Races.HUMAN) > 16;
+                    }, "Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -71,14 +69,26 @@ import classes.Races;
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
-            if (pTier == 2) pBuffs['spe.mult'] = 0.15;
-            if (pTier == 3) pBuffs['spe.mult'] = 0.35;
+			if (player.racialScore(Races.HUMAN) > 17) {
+				if (pTier == 1) {
+					pBuffs['spe.mult'] = 0.15;
+					pBuffs['int.mult'] = 0.15;
+				}
+				if (pTier == 2) {
+					pBuffs['spe.mult'] = 0.35;
+					pBuffs['int.mult'] = 0.4;
+				}
+				if (pTier == 3) {
+					pBuffs['spe.mult'] = 0.6;
+					pBuffs['int.mult'] = 0.9;
+				}
+			}
             return pBuffs;
         }
 
-        public function CaveWyrmLungsMutation() {
-            super(mName + " IM", mName, SLOT_LUNGS, 3);
+        public function HumanParathyroidGlandMutation() 
+		{
+			super(mName + " IM", mName, SLOT_PARATHYROID, 3);
         }
         
     }

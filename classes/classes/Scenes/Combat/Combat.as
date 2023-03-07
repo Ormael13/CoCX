@@ -160,6 +160,7 @@ public class Combat extends BaseContent {
         var costPercent:Number = 100;
         if (player.hasPerk(PerkLib.IronMan)) costPercent -= 50;
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) costPercent -= 20;
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) costPercent -= 10;
         if (costPercent < 10) costPercent = 10;
         mod *= costPercent / 100;
         return mod;
@@ -6078,9 +6079,14 @@ public class Combat extends BaseContent {
                         }
                     }
                     if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
-                        if (player.weapon == weapons.PHALLUS) doPhysicalDamage((damage * 2), true, true);
-                        else doPhysicalDamage(Math.round(damage * 0.2), true, true);
-						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+                        if (player.weapon == weapons.PHALLUS) {
+							doPhysicalDamage((damage * 2), true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						}
+                        else {
+							doPhysicalDamage(Math.round(damage * 0.2), true, true);
+							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage * 0.1);
+						}
                     }
                     if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
                         if (player.spe >= 300) damage *= 4;
@@ -7899,11 +7905,7 @@ public class Combat extends BaseContent {
         }
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
-            if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-            if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
-        }
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
 			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(camp.codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(camp.codex.checkUnlocked() / 100));
@@ -7965,7 +7967,11 @@ public class Combat extends BaseContent {
             packmultiplier += (packMembers*PerkMultiplier)/100
             damage *= packmultiplier;
         }
-        doDamage(damage, apply, display);
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+            if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+            if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
+        }
+		doDamage(damage, apply, display);
     }
 
     public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
@@ -10841,6 +10847,9 @@ public class Combat extends BaseContent {
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5;
@@ -10865,6 +10874,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ImprovedLifeline)) maxNonPercentRegen += 60 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GreaterLifeline)) maxNonPercentRegen += 90 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.EpicLifeline)) maxNonPercentRegen += 120 * (1 + player.newGamePlusMod());
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 300 * (1 + player.newGamePlusMod());
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 300 * (1 + player.newGamePlusMod());
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 600 * (1 + player.newGamePlusMod());
         if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen *= 2;
         return maxNonPercentRegen;
     }
@@ -10879,6 +10891,9 @@ public class Combat extends BaseContent {
 			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxRegen += 1;
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
@@ -10935,6 +10950,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) fatiguecombatrecovery += 1;
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) fatiguecombatrecovery += 1;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) fatiguecombatrecovery += 5;
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 10;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) fatiguecombatrecovery += 1;
@@ -11022,6 +11038,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
@@ -11098,6 +11115,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
+		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageExpert)) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageMaster)) manaregen += Math.round(player.maxMana() * 0.01);
         if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana() * 0.02);
@@ -11142,6 +11160,7 @@ public class Combat extends BaseContent {
         if (combat) {
             var BonusWrathMult:Number = 1;
             if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 0.2;
+			if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) BonusWrathMult += 0.2;
             gainedwrath += wrathregeneration2() * 2 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6 * BonusWrathMult;
@@ -11206,6 +11225,7 @@ public class Combat extends BaseContent {
         if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry1 == jewelries.UNDKINS) wrathregen += 3;
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
+		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) BonusWrathMult += 1;
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
 		return wrathregen*BonusWrathMult;
     }

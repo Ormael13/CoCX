@@ -211,6 +211,25 @@ public class Changelog extends BaseContent
 			outputText("When it's active basic foxfire use cost nothing to use, tail slap special will deal lust dmage and fire dmg would be increased, weakened foxfire effect (fire + lust dmg) would apply to melee/range/feral attacks as seperate from others buffs, speed is increased by 10%(+10% for each tail after 6th reaching 40% at 9th tail).\n");
 			outputText("-Using on weapons at once Flame Blade and Electrify Weapon buffs would result with weapon dealing plasma type dmg as long both buffs are active.\n");
 			outputText("-Bark skin give +2 to Yggdrasil and Plant race score now.\n");
+			outputText("-Plant race tiers for bonuses been reduced from 4 to 2. New race tiers req. now 7 or 10 pts in score with adjusted stat bonuses.\n");
+			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race (17+). Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 5%\n");
+			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 10%\n");
+			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race (17+). Effects: Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)\n");
+			outputText("-New mutation perk: Human Thyroid Gland Req. having free thyroid glands mutation slot, human race (17+). Effects: Regenerates 2% of max HP/hour and 1% of max HP/round.\n");
+			outputText("-New mutation perk: Cave Wyrm Lungs Req. having free lungs mutation slot, azureflame breath and acid spit perks, cave wyrm race. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+200% to azurflame breath / acid spit damage)\n");
+			outputText("-New mutation perk: Cave Wyrm Lungs (Primitive). Req. Cave Wyrm Lungs and lvl 30+. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. (+400% to azurflame breath / acid spit damage, increase str/tou scaling by 100%)\n");
+			outputText("-New mutation perk: Cave Wyrm Lungs (Evolved). Req. Cave Wyrm Lungs (Primitive) and lvl 60+. Effects: Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. ");
+			outputText("(+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%, allows to keep both specials even without been cave wyrm)\n");
+			outputText("-New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 60+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed, wrath Gained from taking damage and dealing damage increased and rising Diehard limit by 25%\n");
+			outputText("-New mutation perk: Human Parathyroid Gland (Primitive). Req. Human Parathyroid Gland and lvl 30+. Effects: Increases self healing by 600 out of combat and by 300 in combat (using defend option will double it)\n");
+			outputText("-New mutation perk: Human Thyroid Gland (Primitive). Req. Human Thyroid Gland and lvl 30+. Effects: Regenerates 4% of max HP/hour and 2% of max HP/round.\n");
+			outputText("-New mutation perk: Human Parathyroid Glands (Evolved). Req. Human Parathyroid Glands (Primitive) and lvl 60+. Effects: Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.\n");
+			outputText("-New mutation perk: Human Thyroid Glands (Evolved). Req. Human Thyroid Glands (Primitive) and lvl 60+. Effects: Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana.\n");
+			outputText("-New mutation perk: Human Ovaries Glands. Req. having free ovaries mutation slot, human race (17+). Effects: Increases fertility rating by 15, +5% to lust resistance.\n");
+			outputText("-New mutation perk: Human Testicles Glands. Req. having free testicles mutation slot, human race (17+). Effects: Increases virility rating by 15, +5% to lust resistance.\n");
+			outputText("-New mutation perk: Human Musculature. Req. having free musculature mutation slot, 100+ tone, human race (17+). Effects: Your altered musculature allows to increase your natural strength and tone.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -238,6 +257,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
@@ -245,7 +270,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
 			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks, Anita (Harpy from Black Cock) 69 scene locked for some of the PC that had non taur lower bodies, (Ice) Troll Fig items not increasing stat bonuses for perm race PC, ");
-			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho\n");
+			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho, Melkie Lung mutation not gibing any stat multi bonus\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -316,7 +341,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -349,6 +381,20 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

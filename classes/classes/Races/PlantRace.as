@@ -64,40 +64,23 @@ public class PlantRace extends Race {
 							return !body.player.isRace(Races.YGGDRASIL);
 						}, 0, -4);
 		
-		buildTier(4, "plant-morph")
-				.buffs({
-					"tou.mult": +0.30,
-					"spe.mult": -0.10,
-					"def": +2
-				})
-				.end();
-		//zmniejszyc ilosc stopni do 2-3 i wymagajace wiecej ptk niz 4
-		buildTier(5, "plant-morph")
-				.buffs({
-					"str.mult": +0.10,
-					"tou.mult": +0.50,
-					"spe.mult": -0.20,
-					"def": +4
-				})
-				.end();
-		
-		buildTier(6, "treant")
-				.namesMaleFemaleTaur("treant", "dryad", "treant-taur", "dryad-taur")
-				.buffs({
-					"str.mult": +0.20,
-					"tou.mult": +0.80,
-					"spe.mult": -0.40,
-					"def": +8
-				})
-				.end();
-		
-		buildTier(7, "treant")
-				.namesMaleFemaleTaur("treant", "dryad", "treant-taur", "dryad-taur")
+		buildTier(7, "plant-morph")
 				.buffs({
 					"str.mult": +0.25,
-					"tou.mult": +1.00,
+					"tou.mult": +0.75,
+					"spe.mult": -0.25,
+					"def": +5
+				})
+				.end();
+		
+		buildTier(10, "treant")
+				.namesMaleFemaleTaur("treant", "dryad", "treant-taur", "dryad-taur")
+				.buffs({
+					"str.mult": +0.40,
+					"tou.mult": +1.30,
 					"spe.mult": -0.50,
-					"def": +10
+					"def": +10,
+					"mdef": +2
 				})
 				.end();
 	}

@@ -2,33 +2,31 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations
+package classes.IMutations 
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
-    public class CaveWyrmLungsMutation extends IMutationPerkType
+public class HumanMusculatureMutation extends IMutationPerkType
     {
-        private static const mName:String = "Cave Wyrm Lungs";
+        private static const mName:String = "Human Musculature";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-			if (pTier >= 1){
-				descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. "
-			}
             if (pTier == 1){
-                descS += "(+200% to azureflame breath / acid spit damage)";
+                descS = "Your altered musculature allows to increase your natural strength and tone";
             }
             if (pTier == 2){
-                descS += "(+400% to azureflame breath / acid spit damage, increase str/tou scaling by 100%) ";
+                descS = "Your musculature continue to increase your natural strength and tone gained from previous change";
             }
             if (pTier == 3){
-                descS += "(+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%, , allows to keep both specials even without been cave wyrm)";
+                descS = "Your musculature increased again your natural strength and tone limit. +10% max core str/spe as phantom str/spe          Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
             }
+            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -55,9 +53,10 @@ import classes.Races;
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireLungsMutationSlot()
-                    .requirePerks(PerkLib.AzureflameBreath, PerkLib.AcidSpit)
-                    .requireRace(Races.CAVEWYRM);
+                    this.requireMusclesMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.tone >= 100 && player.racialScore(Races.HUMAN) > 16;
+                    }, "100+ tone & Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -71,14 +70,15 @@ import classes.Races;
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
-            if (pTier == 2) pBuffs['spe.mult'] = 0.15;
-            if (pTier == 3) pBuffs['spe.mult'] = 0.35;
+            if (pTier == 1) pBuffs['str.mult'] = 0.15;
+            if (pTier == 2) pBuffs['str.mult'] = 0.45;
+            if (pTier == 3) pBuffs['str.mult'] = 0.9;
             return pBuffs;
         }
 
-        public function CaveWyrmLungsMutation() {
-            super(mName + " IM", mName, SLOT_LUNGS, 3);
+        public function HumanMusculatureMutation() 
+		{
+			super(mName + " IM", mName, SLOT_MUSCLE, 1);
         }
         
     }

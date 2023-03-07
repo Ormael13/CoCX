@@ -2567,6 +2567,10 @@ public class Creature extends Utils
 				percent += 0.03;
 			if (hasPerk(PerkLib.MagicalVirility))
 				percent += 0.05 + (perkv1(PerkLib.MagicalVirility) * 0.01);
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 1)
+				percent += 0.05;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 2)
+				percent += 0.05;
 			//Messy Orgasms?
 			if (hasPerk(PerkLib.MessyOrgasms))
 				percent += 0.06;
@@ -3432,6 +3436,10 @@ public class Creature extends Utils
 				counter += 30;
 			if (hasPerk(PerkLib.MagicalFertility))
 				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1)
+				counter += 15;
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 2)
+				counter += 15;
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)

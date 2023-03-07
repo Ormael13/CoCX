@@ -2,33 +2,31 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations
+package classes.IMutations 
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
-    public class CaveWyrmLungsMutation extends IMutationPerkType
+public class HumanOvariesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Cave Wyrm Lungs";
+        private static const mName:String = "Human Ovaries";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-			if (pTier >= 1){
-				descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. "
-			}
             if (pTier == 1){
-                descS += "(+200% to azureflame breath / acid spit damage)";
+                descS += "Increases fertility rating by 15, +5% to lust resistance";
             }
             if (pTier == 2){
-                descS += "(+400% to azureflame breath / acid spit damage, increase str/tou scaling by 100%) ";
+                descS += "Increases fertility rating by 30, +10% to lust resistance";
             }
             if (pTier == 3){
-                descS += "(+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%, , allows to keep both specials even without been cave wyrm)";
+                descS += ", +5 to max tou an +10 to max str/lib, increase milk production by ~100%, +90 to max lust and Milk Blast cost is increaed to 200 lust but can be used more than once per fight";
             }
+            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -55,9 +53,10 @@ import classes.Races;
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireLungsMutationSlot()
-                    .requirePerks(PerkLib.AzureflameBreath, PerkLib.AcidSpit)
-                    .requireRace(Races.CAVEWYRM);
+                    this.requireOvariesMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.racialScore(Races.HUMAN) > 16;
+                    }, "Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -71,15 +70,24 @@ import classes.Races;
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
-            if (pTier == 2) pBuffs['spe.mult'] = 0.15;
-            if (pTier == 3) pBuffs['spe.mult'] = 0.35;
+            if (pTier == 1) pBuffs['lib.mult'] = 0.3;
+            if (pTier == 2) {
+				pBuffs['str.mult'] = 0.3;
+                pBuffs['tou.mult'] = 0.2;
+                pBuffs['lib.mult'] = 0.4;
+			}
+            if (pTier == 3){
+                pBuffs['str.mult'] = 0.1;
+                pBuffs['tou.mult'] = 0.05;
+                pBuffs['lib.mult'] = 0.2;
+            }
             return pBuffs;
         }
 
-        public function CaveWyrmLungsMutation() {
-            super(mName + " IM", mName, SLOT_LUNGS, 3);
+        public function HumanOvariesMutation() 
+		{
+			super(mName + " IM", mName, SLOT_OVARIES, 1);
         }
-        
+
     }
 }

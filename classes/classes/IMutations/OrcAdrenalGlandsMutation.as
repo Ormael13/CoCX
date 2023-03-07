@@ -26,6 +26,9 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
             if (pTier == 3){
                 descS = "Your Orc adrenal glands are increasing Ferocity limit by 3%, +30% of max core Str as phantom Str, increase your natural strength and tone, boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc";
             }
+            if (pTier == 4){
+                descS = "Your Orc adrenal glands are increasing Ferocity limit by 8%, +30% of max core Str as phantom Str, increase your natural strength and tone, boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc";
+            }
             if (descS != "")descS += ".";
             return descS;
         }
