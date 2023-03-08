@@ -1300,6 +1300,7 @@ public class Camp extends NPCAwareContent{
 
 	public function nightTimeActiveLovers():Number {
 		var counter:Number = 0;
+		if (DivaScene.instance.isCompanion()) counter++;
 		return counter;
 	}
 
