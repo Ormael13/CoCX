@@ -169,11 +169,11 @@ use namespace CoC;
 					when  : fn.ifLevelMin(2),
 					call  : oasis.oasisEncounter
 				}, {
-					name: "Etna",
+					name: "etna",
 					chance: 0.2,
 					when: function ():Boolean
 					{
-						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)&& (player.level >= 20));
+						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
 					},
 					call: SceneLib.etnaScene.repeatYandereEnc
 				}, {
@@ -210,11 +210,11 @@ use namespace CoC;
 					night: false,
 					call: sandWormScene.SandWormEncounter
 				}, {
-					name: "Etna",
+					name: "etna",
 					chance: 0.2,
 					when: function ():Boolean
 					{
-						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)&& (player.level >= 20));
+						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
 					},
 					call: SceneLib.etnaScene.repeatYandereEnc
 				}, {
@@ -227,19 +227,16 @@ use namespace CoC;
 				},{
 					name: "electra",
 					night : false,
-					when: function ():Boolean {
-						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
+					when: function():Boolean {
+						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 					},
 					chance:0.5,
 					call: function ():void {
-						if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
-						else {
-							if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
-								if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
-								else SceneLib.electraScene.ElectraRecruiting();
-							}
-							else SceneLib.electraScene.repeatMountainEnc();
+						if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
+							if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
+							else SceneLib.electraScene.ElectraRecruiting();
 						}
+						else SceneLib.electraScene.repeatDesertEnc();
 					}
 				}, {/*
 					name: "lactoblasters",

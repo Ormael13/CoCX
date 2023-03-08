@@ -18,15 +18,14 @@ public class HumanMusculatureMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "Your altered musculature allows to increase your natural strength and tone";
+                descS = "Your altered musculature allows to increase your natural strength and tone.";
             }
             if (pTier == 2){
-                descS = "Your musculature continue to increase your natural strength and tone gained from previous change";
+                descS = "Your musculature continue to increase your natural strength and tone gained from previous change. (+15% of max core Str as phantom Str)";
             }
             if (pTier == 3){
-                descS = "Your musculature increased again your natural strength and tone limit. +10% max core str/spe as phantom str/spe          Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
+                descS = "Your musculature increased again your natural strength and tone limit. +10% max core str/spe as phantom str/spe (+45% of max core Str as phantom Str)          Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
             }
-            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -78,7 +77,7 @@ public class HumanMusculatureMutation extends IMutationPerkType
 
         public function HumanMusculatureMutation() 
 		{
-			super(mName + " IM", mName, SLOT_MUSCLE, 1);
+			super(mName + " IM", mName, SLOT_MUSCLE, 2);
         }
         
     }

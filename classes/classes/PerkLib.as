@@ -4174,9 +4174,11 @@ public class PerkLib
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoExpGained:PerkType = mk("No Exp Gained", "No Exp Gained", "");
+		public static const NoDodges:PerkType = mk("No Dodge(s)", "No Dodge(s)", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
 		public static const NoItemsGained:PerkType = mk("No Item(s) Gained", "No Item(s) Gained", "");
 		public static const OverMaxHP:PerkType = mk("OverMax HP", "OverMax HP", "");
+		public static const OverMaxLust:PerkType = mk("OverMax Lust", "OverMax Lust", "");
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
@@ -7503,4 +7505,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

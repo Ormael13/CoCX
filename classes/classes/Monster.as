@@ -270,15 +270,15 @@ import flash.utils.getQualifiedClassName;
 			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
 			if (hasPerk(PerkLib.TankI)) {
-				if (this is TrainingDummy) temp += ((baseStat*1200) * (1 + newGamePlusMod()));
+				if (this is TrainingDummy) temp += ((baseStat*6000) * (1 + newGamePlusMod()));
 				else temp += ((baseStat*12) * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.GoliathI)) {
-				if (this is TrainingDummy) temp += ((this.str*800) * (1 + newGamePlusMod()));
+				if (this is TrainingDummy) temp += ((this.str*4000) * (1 + newGamePlusMod()));
 				else temp += ((this.str*8) * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.CheetahI)) {
-				if (this is TrainingDummy) temp += ((this.spe*400) * (1 + newGamePlusMod()));
+				if (this is TrainingDummy) temp += ((this.spe*2000) * (1 + newGamePlusMod()));
 				else temp += ((this.spe*4) * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
@@ -362,7 +362,13 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyEliteType)) maxOver2 += 0.05;
 			if (hasPerk(PerkLib.EnemyChampionType)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.EnemyBossType)) maxOver2 += 0.15;
-			maxOver *= maxOver2;//~180%
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				maxOver2 += (maxHP() * 0.01 * bonus);
+			}
+			maxOver *= maxOver2;//~240%
 			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -498,7 +504,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyGroupType)) anotherOne *= 5;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) anotherOne *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) anotherOne *= 15;
-			if (this is TrainingDummy) anotherOne *= 100;
+			if (this is TrainingDummy) anotherOne *= 500;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
@@ -523,6 +529,15 @@ import flash.utils.getQualifiedClassName;
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.OverMaxLust)) {
+				if (hasPerk(PerkLib.Enemy300Type)) max2 += (0.15 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) max2 += (0.1 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyGroupType)) max2 += (0.05 * perkv1(PerkLib.OverMaxLust));
+				else max2 += (0.01 * perkv1(PerkLib.OverMaxLust));
+			}
+			if (hasPerk(PerkLib.EnemyEliteType)) max2 += 0.05;
+			if (hasPerk(PerkLib.EnemyChampionType)) max2 += 0.1;
+			if (hasPerk(PerkLib.EnemyBossType)) max2 += 0.15;
 			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
 				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
 				var bonus:Number = Math.round((level - 1) / 3);

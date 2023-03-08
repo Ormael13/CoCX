@@ -449,7 +449,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 	}
 	private function monsterDodgeSkill(skillName:String):Boolean {
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your " + skillName + "!");
 			else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges your " + skillName + " with superior quickness!");
 			else outputText("[Themonster] deftly avoids your slow " + skillName + ".");

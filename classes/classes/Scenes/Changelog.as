@@ -231,11 +231,11 @@ public class Changelog extends BaseContent
 			outputText("-Text changes to the battlefield, hellcat, quasi-phoenix squad (ashland) scenes. (Snas)\n");
 			outputText("-New mutation perk: Human Ovaries (Primitive). Req. Human Ovaries and lvl 30+. Increases fertility rating by another 15(30), +5(10)% more to lust resistance.\n");
 			outputText("-New mutation perk: Human Testicles (Primitive). Req. Human Testicles and lvl 30+. Increases fertility rating by another 15(30), +5(10)% more to lust resistance.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New monster perk: No Dodge(s) - for enemies that really shouldn't evage/dodge PC attacks. Training Dummy got this (no with even chess player reflex you can hit it to train instead to be recieving end of uno reverse card from dummy)\n");
+			outputText("-Fix: Diva not being available at night (Chibizs)\n");
+			outputText("-Training dummy in camp getting 50% of Diehard, Overmax HP, Overmax Lust effects. Is it angel or is it demon noone knows...\n");
+			outputText("-New mutation perk: Human Musculature (Primitive). Req. Human Musculature and lvl 30+. Effects: Your musculature continue to increase your natural strength and tone gained from previous change. (+15% of max core Str as phantom Str)\n");
+			outputText("-History Scholar would give additionaly 150 gems for start (PC just 'borrows' some gems from that 'kind' richest man in Ignam and even leave memo that will return that 'investition' with interest after return from Mareth ;) In case other hisotires that gives 50 gems at start been gained at once (special name, etc.) it will no longer give only 50 gems once but 50 gems per each history.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -265,8 +265,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//remove this line when other two lines below get added ingame
-			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
-			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
+			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
+			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
 			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks, Anita (Harpy from Black Cock) 69 scene locked for some of the PC that had non taur lower bodies, (Ice) Troll Fig items not increasing stat bonuses for perm race PC, ");
@@ -776,7 +776,7 @@ public class Changelog extends BaseContent
 			outputText("-Bonus to mastery exp gains for expanding sparring ring was moved to only apply to fighting training dummy. With this bonus was changed from 1x/2x/3x for each of three sizes of the ring to 2x/5x/10x.\n");
 			outputText("-Any PC that may have Aura of Corruption/Purity can now suppress it or release. At suppressed state it will no longer deal dmg to enemies.\n");
 			outputText("-True Demon enemies getting innate OverMax HP effect. It would be % one with number matching enemy current lvl so factory bosses for ex. would have between 10 to 16 % OverMax HP bonus. They all would also receive 1% of max HP innate HP regen.\n");
-			outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
+			outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP / Lust effect of 15% magnitude.\n");
 			outputText("-Axillary Venom Glands & Highly Venomous Diet perks won't drain HP/hunger bar faster if venom/web pool is at max value.\n");
 			outputText("-Fusing with Elder rank or higher Epic Elemental would give access to new utility oriented special: Moment of Clarity (Water) - immunity to lust damage and remove 5% of max lust per round for 3 rounds, 6 round cooldown, Fiery Rage (fire) - Work as a no damage taken Over Limit that instead consume soulforce over time, ");
 			outputText("Adamantine Shell (earth) - Greatly raise damage reduction (75% for 7 rounds, 10 round cooldown), True Evasion (Air) - Invulnerable for 3 rounds, 10 round cooldown.\n");

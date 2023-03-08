@@ -1974,7 +1974,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || monster.getEvasionRoll(false, player.spe)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -4808,7 +4808,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || monster.getEvasionRoll(false, player.spe)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -16111,6 +16111,8 @@ public function ghostStrength():Number {
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) ghostStrMulti += 0.05;
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) ghostStrMulti += 0.1;
     if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) ghostStrMulti += 0.15;
+    if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && player.racialScore(Races.HUMAN) > 17) ghostStrMulti += 0.15;
+    if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) ghostStrMulti += 0.3;
     ghostStr *= ghostStrMulti;
     ghostStr *= ghostStrMulti2;
     ghostStr = Math.round(ghostStr);

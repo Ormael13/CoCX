@@ -14,37 +14,37 @@ package classes.Scenes.Camp
 		public function TrainingDummy() 
 		{
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 5) {
-				initStrTouSpeInte(5, 200, 35, 10);
-				initWisLibSensCor(10, 35, 10, 50);
+				initStrTouSpeInte(8, 200, 14, 10);
+				initWisLibSensCor(10, 14, 5, 50);
 				this.bonusHP = 200000;
-				this.bonusLust = 135;
+				this.bonusLust = 109;
 				this.armorDef = 10000;
 				this.armorMDef = 10000;
 				this.level = 90;
 			}
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) {
-				initStrTouSpeInte(5, 150, 25, 10);
-				initWisLibSensCor(10, 25, 10, 50);
+				initStrTouSpeInte(7, 150, 10, 10);
+				initWisLibSensCor(10, 10, 5, 50);
 				this.bonusHP = 140000;
-				this.bonusLust = 95;
+				this.bonusLust = 75;
 				this.armorDef = 7000;
 				this.armorMDef = 7000;
 				this.level = 60;
 			}
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) {
-				initStrTouSpeInte(5, 100, 15, 10);
-				initWisLibSensCor(10, 15, 10, 50);
+				initStrTouSpeInte(6, 100, 6, 10);
+				initWisLibSensCor(10, 6, 5, 50);
 				this.bonusHP = 80000;
-				this.bonusLust = 55;
+				this.bonusLust = 41;
 				this.armorDef = 4000;
 				this.armorMDef = 4000;
 				this.level = 30;
 			}
 			else {
-				initStrTouSpeInte(5, 50, 5, 10);
-				initWisLibSensCor(10, 5, 10, 50);
+				initStrTouSpeInte(5, 50, 2, 10);
+				initWisLibSensCor(10, 2, 5, 50);
 				this.bonusHP = 20000;
-				this.bonusLust = 15;
+				this.bonusLust = 7;
 				this.armorDef = 1000;
 				this.armorMDef = 1000;
 				this.level = 0;
@@ -71,8 +71,11 @@ package classes.Scenes.Camp
 			this.armorName = "dummy stick";
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.NoDodges, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DieHardHP, 50, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 50, 0, 0, 0);
 			this.createPerk(PerkLib.NoExpGained, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxLust, 50, 0, 0, 0);
 			this.createPerk(PerkLib.NoItemsGained, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
