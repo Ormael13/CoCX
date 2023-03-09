@@ -483,6 +483,17 @@ import classes.CoC;
             }
         });
 
+        public static const PLANT_2:int = _partid++;
+        EnumValue.add(Memories, PLANT_2, "PLANT_2", {
+            id: "Plant Arms 2",
+            name: "Plant Arms 2",
+            cost: 100,
+            title: "Plant 2",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsPlant2;
+            }
+        });
+
         public static const RACCOON:int = _partid++;
         EnumValue.add(Memories, RACCOON, "RACCOON", {
             id: "Raccoon Arms",

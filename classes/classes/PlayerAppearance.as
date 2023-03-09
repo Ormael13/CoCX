@@ -1092,6 +1092,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		var score:Number;
+		var scoreH:Number;
 		//CHIMERA
 		outputText("\nCHIMERA: " + player.chimeraScore());
 		//GRAND CHIMERA
@@ -1107,6 +1108,17 @@ public class PlayerAppearance extends BaseContent {
 			outputText("[/font]")
         } else {
 			outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0");
+		}
+		scoreH = player.internalHumanScore();
+		if (scoreH >= 1) {
+			outputText("\n");
+			outputText(player.hasPerk(PerkLib.RacialParagon) ? "[font-green]" : "[font-lblue]");
+			outputText("INTERNAL HUMAN DISPOSITION: (" + player.internalHumanScore() + ") " + scoreH)
+            //if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk");
+            //else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib");
+			outputText("[/font]")
+        } else {
+			outputText("\nINTERNAL HUMAN DISPOSITION: 0");
 		}
 		
 		// Other body part-related buffs that contribute to the "Racial" buff object in Player.calcRacialBuffs

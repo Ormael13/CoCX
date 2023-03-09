@@ -229,6 +229,28 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const OAK:int = _partid++;
+	  EnumValue.add(Memories, OAK, "OAK", {
+		  id: "Oak Horns",
+		  name: "Oak Horns",
+		  cost: 100,
+		  title: "Oak",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsOak;
+		  }
+	  });
+
+	  public static const ORCHID:int = _partid++;
+	  EnumValue.add(Memories, ORCHID, "ORCHID", {
+		  id: "Orchid Flowers",
+		  name: "Orchid Flowers",
+		  cost: 100,
+		  title: "Orchid flowers",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsOrchid;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

@@ -54,6 +54,12 @@ public class HumanOvariesMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireOvariesMutationSlot()
+                    requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasVagina();
+                    }, "is Female")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.femininity >= 95;
+                    }, "95+ feminity")
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.racialScore(Races.HUMAN) > 16;
                     }, "Human race (17+)");

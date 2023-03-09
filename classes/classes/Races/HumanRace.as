@@ -68,12 +68,12 @@ public class HumanRace extends Race {
 									&& body.skinBaseAdj != "slippery")
 						}, +1);
 		
-		addMutation(IMutationsLib.HumanAdrenalGlandsIM, +2);
-		addMutation(IMutationsLib.HumanMusculatureIM, +2);
-		addMutation(IMutationsLib.HumanOvariesIM, +2);
-		addMutation(IMutationsLib.HumanParathyroidGlandIM, +2);
-		addMutation(IMutationsLib.HumanTesticlesIM, +2);
-		addMutation(IMutationsLib.HumanThyroidGlandIM, +2);
+		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
+		addMutation(IMutationsLib.HumanMusculatureIM);
+		addMutation(IMutationsLib.HumanOvariesIM);
+		addMutation(IMutationsLib.HumanParathyroidGlandIM);
+		addMutation(IMutationsLib.HumanTesticlesIM);
+		addMutation(IMutationsLib.HumanThyroidGlandIM);
 		
 		tiers.push(new HumanRaceTier(maxScore-9));
 		
@@ -103,7 +103,8 @@ public class HumanRace extends Race {
 	public static const maxScore:int = 17;
 	
 	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
-		var ics:Number = body.player.internalChimeraScore();
+		var ics:Number = (body.player.internalChimeraScore() - body.player.internalHumanScore());
+		if (ics < 0) ics = 0;
 		if (ics > 0) {
 			if (outputText != null) {
 				outputText(ics == 1 ? "Mutation" : "Mutations", -ics);

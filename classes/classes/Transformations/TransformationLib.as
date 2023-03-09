@@ -273,6 +273,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsPhoenix: Transformation 			= arms.ArmsPhoenix;
 	public const ArmsPig: Transformation 				= arms.ArmsPig;
 	public const ArmsPlant: Transformation 				= arms.ArmsPlant;
+	public const ArmsPlant2: Transformation 			= arms.ArmsPlant2;
 	public const ArmsRaccoon: Transformation 			= arms.ArmsRaccoon;
 	public const ArmsRaiju: Transformation 				= arms.ArmsRaiju;
 	public const ArmsRaijuPaws: Transformation 			= arms.ArmsRaijuPaws;

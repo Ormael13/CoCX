@@ -410,6 +410,7 @@ public class HornsTransformations extends MutationsHelper {
 
 				player.horns.type = Horns.OAK;
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.OAK));
 			},
 			// is present
 			function (): Boolean {
@@ -432,6 +433,7 @@ public class HornsTransformations extends MutationsHelper {
 				player.horns.type = Horns.ORCHID;
 				player.featherColor = randomChoice("snow white","pink","red","blue","purple","peach");
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.ORCHID));
 			},
 			// is present
 			function (): Boolean {

@@ -241,31 +241,31 @@ public class WorldTree extends BaseContent
 			//Vines/tentacles arms
 			if (player.cor >= 66) {
 				if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
-					outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>");
-					player.arms.type = Arms.PLANT2;
+					outputText("\n\n");
+					CoC.instance.transformations.ArmsPlant2.applyEffect();
 					changes++;
 				}
 			}
 			if (player.cor >= 33 && player.cor < 66) {
 				if (rand(2) == 0) {
 					if (player.arms.type != Arms.PLANT2 && changes < changeLimit) {
-						outputText("\n\nYou watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>");
-						player.arms.type = Arms.PLANT2;
+						outputText("\n\n");
+						CoC.instance.transformations.ArmsPlant2.applyEffect();
 						changes++;
 					}
 				}
 				else {
 					if (player.arms.type != Arms.PLANT && changes < changeLimit) {
-						outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
-						player.arms.type = Arms.PLANT;
+						outputText("\n\n");
+						CoC.instance.transformations.ArmsPlant.applyEffect();
 						changes++;
 					}
 				}
 			}
 			if (player.cor < 33) {
 				if (player.arms.type != Arms.PLANT && changes < changeLimit) {
-					outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
-					player.arms.type = Arms.PLANT;
+					outputText("\n\n");
+					CoC.instance.transformations.ArmsPlant.applyEffect();
 					changes++;
 				}
 			}

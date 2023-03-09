@@ -3785,6 +3785,20 @@ use namespace CoC;
 			return internalChimeraCounter;
 		}
 
+		//Determine Inner Human Score
+		public function internalHumanScore():Number {
+			Begin("Player","racialScore","internalHumanScore");
+			var internalHumanCounter:Number = 0;
+			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);
+			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);
+			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);
+			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);
+			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);
+			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);
+			End("Player","racialScore");
+			return internalHumanCounter;
+		}
+
 		public function increaseFromBloodlinePerks():Number {
 			var incFBP:Number = 2;
 			if (hasPerk(PerkLib.AscensionBloodlineHeritage)) incFBP += 2;

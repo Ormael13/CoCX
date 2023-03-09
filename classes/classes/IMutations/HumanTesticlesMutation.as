@@ -55,6 +55,12 @@ public class HumanTesticlesMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasCock();
+                    }, "is Male")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.femininity <= 5;
+                    }, "5- feminity")
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.racialScore(Races.HUMAN) > 16;
                     }, "Human race (17+)");
                 }
