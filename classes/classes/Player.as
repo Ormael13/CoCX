@@ -2408,10 +2408,8 @@ use namespace CoC;
 			if(hasPerk(PerkLib.Pope)) lust -= 5;
 			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 2) lust -= 5;
 			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2) lust -= 5;
-			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= 5;
-			if(perkv1(IMutationsLib.HumanOvariesIM) >= 2 && racialScore(Races.HUMAN) > 17) lust -= 5;
-			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= 5;
-			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 2 && racialScore(Races.HUMAN) > 17) lust -= 5;
+			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanOvariesIM));
+			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanTesticlesIM));
 			if((hasPerk(PerkLib.UnicornBlessing) && cor <= 20) || (hasPerk(PerkLib.BicornBlessing) && cor >= 80)) lust -= 10;
 			if(hasPerk(PerkLib.ChiReflowLust)) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
@@ -4144,6 +4142,8 @@ use namespace CoC;
 				total += (perkv3(PerkLib.ProductivityDrugs));
 			if (hasPerk(PerkLib.AscensionMilkFaucet))
 				total += (perkv1(PerkLib.AscensionMilkFaucet) * 200);
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17)
+				total *= 2;
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3)
 				total *= 2.5;
 			if (necklaceName == "Cow bell")
@@ -6302,6 +6302,8 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			return max;
 		}
 

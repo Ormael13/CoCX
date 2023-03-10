@@ -352,7 +352,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasVagina() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.hasVagina() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1 || (player.perkv1(IMutationsLib.HumanOvariesIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) && !player.hasPerk(PerkLib.ElementalBody)) {
 				var blaaaast2:String = player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Milk Blast", milkBlast).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production." + blaaaast2 + "\n");
 				if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) bd.requireLust(200);
@@ -362,7 +362,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasCock() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.hasCock() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1 || (player.perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) && !player.hasPerk(PerkLib.ElementalBody)) {
 				var blaaaast1:String = player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3 ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. " + blaaaast1 + "\n");
 				if (player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) bd.requireLust(200);

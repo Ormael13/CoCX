@@ -111,8 +111,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
 			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			if ((player.hasVagina() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1)) || (player.hasCock() && (player.isRaceCached(Races.MINOTAUR) || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1))) {
-				bd = buttons.add("Plasma blast", PlasmaBlast, "Masturbate to unleash a massive discharge of milk/cum mized with plasma.", "Plasma blast");
+			if ((player.hasVagina() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1 || (player.perkv1(IMutationsLib.HumanOvariesIM) >= 3 && player.racialScore(Races.HUMAN) > 17))) ||
+			(player.hasCock() && (player.isRaceCached(Races.MINOTAUR) || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1 || (player.perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && player.racialScore(Races.HUMAN) > 17)))) {
+				bd = buttons.add("Plasma blast", PlasmaBlast, "Masturbate to unleash a massive discharge of milk/cum mixed with plasma.", "Plasma blast");
 				if (player.hasStatusEffect(StatusEffects.CooldownPlasmaBlast)) {
 					if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");

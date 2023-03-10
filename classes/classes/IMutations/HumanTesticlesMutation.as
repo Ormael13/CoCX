@@ -24,7 +24,7 @@ public class HumanTesticlesMutation extends IMutationPerkType
                 descS += "Increases virility rating by 30, +10% to lust resistance";
             }
             if (pTier == 3){
-                descS += ", +5 to max tou an +10 to max str/lib, increase cum production by ~100%, +90 to max lust and Cum Cannon cost rise to 200 lust but can be used more than once per fight";
+                descS += "Increases virility rating by 45, +15% to lust resistance, increase cum production by ~100%, +200 to max lust and allow to use Cum Cannon once per fight";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -83,16 +83,16 @@ public class HumanTesticlesMutation extends IMutationPerkType
                 pBuffs['lib.mult'] = 0.4;
 			}
             if (pTier == 3){
-                pBuffs['str.mult'] = 0.1;
-                pBuffs['tou.mult'] = 0.05;
-                pBuffs['lib.mult'] = 0.2;
+                pBuffs['str.mult'] = 0.6;
+                pBuffs['tou.mult'] = 0.4;
+                pBuffs['lib.mult'] = 0.8;
             }
             return pBuffs;
         }
 
         public function HumanTesticlesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_TESTICLES, 2);
+			super(mName + " IM", mName, SLOT_TESTICLES, 3);
         }
 
     }

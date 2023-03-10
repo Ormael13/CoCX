@@ -24,7 +24,7 @@ public class HumanOvariesMutation extends IMutationPerkType
                 descS += "Increases fertility rating by 30, +10% to lust resistance";
             }
             if (pTier == 3){
-                descS += ", +5 to max tou an +10 to max str/lib, increase milk production by ~100%, +90 to max lust and Milk Blast cost is increaed to 200 lust but can be used more than once per fight";
+                descS += "Increases fertility rating by 45, +15% to lust resistance, increase milk production by ~100%, +200 to max lust and allow to use Milk Blast once per fight";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -83,16 +83,16 @@ public class HumanOvariesMutation extends IMutationPerkType
                 pBuffs['lib.mult'] = 0.4;
 			}
             if (pTier == 3){
-                pBuffs['str.mult'] = 0.1;
-                pBuffs['tou.mult'] = 0.05;
-                pBuffs['lib.mult'] = 0.2;
+                pBuffs['str.mult'] = 0.6;
+                pBuffs['tou.mult'] = 0.4;
+                pBuffs['lib.mult'] = 0.8;
             }
             return pBuffs;
         }
 
         public function HumanOvariesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_OVARIES, 2);
+			super(mName + " IM", mName, SLOT_OVARIES, 3);
         }
 
     }

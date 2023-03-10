@@ -2568,9 +2568,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.MagicalVirility))
 				percent += 0.05 + (perkv1(PerkLib.MagicalVirility) * 0.01);
 			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
-				percent += 0.05;
-			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 2 && game.player.racialScore(Races.HUMAN) > 17)
-				percent += 0.05;
+				percent += (0.05 * perkv1(IMutationsLib.HumanTesticlesIM));
 			//Messy Orgasms?
 			if (hasPerk(PerkLib.MessyOrgasms))
 				percent += 0.06;
@@ -2628,6 +2626,8 @@ public class Creature extends Utils
 				quantity *= 2;
 			if (hasPerk(PerkLib.OneTrackMind))
 				quantity *= 1.1;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17)
+				quantity *= 2;
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3)
 				quantity *= 2.5;
 			if (hasPerk(PerkLib.MaraesGiftStud))
@@ -3437,9 +3437,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.MagicalFertility))
 				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
-				counter += 15;
-			if (perkv1(IMutationsLib.HumanOvariesIM) >= 2 && game.player.racialScore(Races.HUMAN) > 17)
-				counter += 15;
+				counter += (15 * perkv1(IMutationsLib.HumanOvariesIM));
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
