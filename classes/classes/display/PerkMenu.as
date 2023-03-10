@@ -1380,12 +1380,15 @@ public class PerkMenu extends BaseContent {
 							change = true;
 						}
 					}
+					else if (cond.type == "noperks"){
+						continue;
+					}
 					else {	//The effect from this cause should never occur, as all these in masterlist should have a perk requirement of some sort.
 						requirelen++
 					}
 				}//Why is this suddenly triggering now? Could it be due to whatever changes were recently added in regards to Orm "merging" perks?
 				if (requirelen == pPerk.requirements.length){
-					//outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
+					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
 					trace("pPerk.name() + \"shouldn't be here. This is a bug. Trace is in repPerkClr.");
 				}
 			}
