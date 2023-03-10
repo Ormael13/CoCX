@@ -24,7 +24,7 @@ public class HumanMusculatureMutation extends IMutationPerkType
                 descS = "Your musculature continue to increase your natural strength and tone gained from previous change. (+15% of max core Str as phantom Str)";
             }
             if (pTier == 3){
-                descS = "Your musculature increased again your natural strength and tone limit. +10% max core str/spe as phantom str/spe (+45% of max core Str as phantom Str)          Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
+                descS = "Your musculature increased again your natural strength and tone limit. (+45% of max core Str as phantom Str) +10% max core str/spe as phantom str/spe          Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
             }
             return descS;
         }

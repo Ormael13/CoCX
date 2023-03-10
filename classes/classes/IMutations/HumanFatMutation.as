@@ -2,31 +2,30 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations
+package classes.IMutations 
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-public class NaturalPunchingBagMutation extends IMutationPerkType
+public class HumanFatMutation extends IMutationPerkType
     {
-        private static const mName:String = "Natural Punching Bag";
+        private static const mName:String = "Human Fat";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "Increases the damage reduction from Bouncy body by 5% and increase your natural toughness";
+                descS = "Your altered fat tissue allows to increase your natural toughness and thickness.";
             }
-            else if (pTier == 2){
-                descS = "Increases the damage reduction from Bouncy body by 15%, continue to increase your natural toughness and healing items are more effective";
+            if (pTier == 2){
+                descS = "Your fat tissue continue to increase your natural toughness and thickness gained from previous change. (+15% of max core Tou as phantom Tou)";
             }
-            else if (pTier == 3){
-                descS = "Increases the damage reduction from Bouncy body by 35%, continue to increase your natural toughness, healing/wrath/stat boosting items are more effective and allows you to keep the effect of bouncy body as long as you are below 4 feet tall";
+            if (pTier == 3){
+                descS = "Your fat tissue increased again your natural toughness and thickness limit. (+45% of max core Tou as phantom Tou) +10% max core str/spe as phantom str/spe          Body Slam req. lower thickness and doubled power, pig/boar req. removed, thickness requirement lowered, increase max Hunger cap by 35 (if PC have Hunger bar active)";
             }
-            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -54,10 +53,9 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireFatTissueMutationSlot()
-                    .requirePerk(PerkLib.BouncyBody)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isGoblinoid();
-                    }, "Goblin race");
+                        return player.thickness >= 100 && player.racialScore(Races.HUMAN) > 16;
+                    }, "100+ thickness & Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -71,14 +69,15 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
-            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
-            if (pTier == 3) pBuffs['tou.mult'] = 0.35;
+            if (pTier == 1) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.45;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.9;
             return pBuffs;
         }
 
-        public function NaturalPunchingBagMutation() {
-            super(mName + " IM", mName, SLOT_FAT, 3);
+        public function HumanFatMutation() 
+		{
+			super(mName + " IM", mName, SLOT_FAT, 2);
         }
 
     }

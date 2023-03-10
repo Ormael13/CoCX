@@ -69,6 +69,7 @@ public class HumanRace extends Race {
 						}, +1);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
+		addMutation(IMutationsLib.HumanFatIM);
 		addMutation(IMutationsLib.HumanMusculatureIM);
 		addMutation(IMutationsLib.HumanOvariesIM);
 		addMutation(IMutationsLib.HumanParathyroidGlandIM);

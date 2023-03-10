@@ -16190,6 +16190,8 @@ public function ghostToughness():Number {
     var ghostTouMulti:Number = 0;
     if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 2) ghostTouMulti += 0.05;
     if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) ghostTouMulti += 0.1;
+    if (player.perkv1(IMutationsLib.HumanFatIM) >= 2 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.15;
+    if (player.perkv1(IMutationsLib.HumanFatIM) >= 3 && player.racialScore(Races.HUMAN) > 17) ghostTouMulti += 0.3;
     ghostTou *= ghostTouMulti;
     ghostTou = Math.round(ghostTou);
     return ghostTou;

@@ -239,8 +239,8 @@ public class Changelog extends BaseContent
 			outputText("-Added to unlockable options in metamorph menu: Plant Arms v2 (tentacle covered one); Leaf, Grass and Snowy Hairs; Oak Horns, Orchid Flowers\n");
 			outputText("-New mutation perk: Human Ovaries (Evolved). Req. Human Ovaries (Primitive) and lvl 60+. Effects: Increases fertility rating by 45, +15% to lust resistance, increase milk production by ~100%, +200 to max lust and allow to use Milk Blast once per fight.\n");
 			outputText("-New mutation perk: Human Testicles (Evolved). Req. Human Testicles (Primitive) and lvl 60+. Effects: Increases virility rating by 45, +15% to lust resistance, increase cum production by ~100%, +200 to max lust and allow to use Cum Cannon once per fight.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Human Fat. Req. having free fat tissue mutation slot, 100+ thickness, human race (17+). Effects: Your altered fat tissue allows to increase your natural toughness and thickness.\n");
+			outputText("-New mutation perk: Human Fat (Primitive). Req. Human Fat and lvl 30+. Effects: Your fat tissue continue to increase your natural toughness and thickness gained from previous change. (+15% of max core Tou as phantom Tou)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

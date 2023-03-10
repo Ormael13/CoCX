@@ -3788,6 +3788,7 @@ use namespace CoC;
 			Begin("Player","racialScore","internalHumanScore");
 			var internalHumanCounter:Number = 0;
 			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);
+			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);
 			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);
 			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);
 			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);
@@ -4863,6 +4864,9 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) maxThicknessCap += 20;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) maxThicknessCap += 30;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 1 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 5;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 2 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
 			return maxThicknessCap;
 		}
 

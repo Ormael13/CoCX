@@ -72,8 +72,8 @@ public class WhaleFatMutation extends IMutationPerkType
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
-            else if (pTier == 2) pBuffs['tou.mult'] = 0.15;
-            else if (pTier == 3) pBuffs['tou.mult'] = 0.3;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
             return pBuffs;
         }
 
