@@ -24,7 +24,7 @@ public class HumanMusculatureMutation extends IMutationPerkType
                 descS = "Your musculature continue to increase your natural strength and tone gained from previous change. (+15% of max core Str as phantom Str)";
             }
             if (pTier == 3){
-                descS = "Your musculature increased again your natural strength and tone limit. (+45% of max core Str as phantom Str) +10% max core str/spe as phantom str/spe          Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
+                descS = "Your musculature increased again your natural strength and tone limit. Boost Warrior's Rage effect (+1 per 10 pts of core stat value) and duration by 5 turns. (+45%/+15% of max core Str/Spe as phantom Str/Spe)";
             }
             return descS;
         }
@@ -77,7 +77,7 @@ public class HumanMusculatureMutation extends IMutationPerkType
 
         public function HumanMusculatureMutation() 
 		{
-			super(mName + " IM", mName, SLOT_MUSCLE, 2);
+			super(mName + " IM", mName, SLOT_MUSCLE, 3);
         }
         
     }

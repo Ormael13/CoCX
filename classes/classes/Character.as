@@ -933,6 +933,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) max += 5;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) max += 10;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) max += 20;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17) max += 50;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

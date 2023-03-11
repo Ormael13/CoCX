@@ -16175,6 +16175,7 @@ public function ghostSpeed():Number {
     if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) ghostSpeMulti += 0.15;
     if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 3) ghostSpeMulti += 0.3;
     if (player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 4) ghostSpeMulti += 0.1;
+    if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) ghostSpeMulti += 0.15;
     ghostSpe *= ghostSpeMulti;
     ghostSpe = Math.round(ghostSpe);
     return ghostSpe;

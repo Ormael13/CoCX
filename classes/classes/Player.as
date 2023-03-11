@@ -720,6 +720,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) armorDef += (1 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) armorDef += (2 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) armorDef += (12 * newGamePlusMod);
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) armorDef += (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
 				if (hasKeyItem("Powboy") >= 0) {
@@ -919,6 +920,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) armorMDef += (1 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) armorMDef += (2 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) armorMDef += (12 * newGamePlusMod);
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) armorMDef += (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
 				if (hasKeyItem("Powboy") >= 0) {
@@ -2753,6 +2755,9 @@ use namespace CoC;
 				var packMembers:Number = LunaFollower.WerewolfPackMember;
 				if (hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
 				mult -= (2*packMembers);
+			}
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3) {
+				mult -= 25;
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
@@ -4855,7 +4860,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) maxToneCap += 10;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 1 && racialScore(Races.HUMAN) > 17) maxToneCap += 5;
 			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
-			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && racialScore(Races.HUMAN) > 17) maxToneCap += 15;
 			return maxToneCap;
 		}
 		public function maxThicknessCap():Number {
@@ -4866,7 +4871,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) maxThicknessCap += 10;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 1 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 5;
 			if (perkv1(IMutationsLib.HumanFatIM) >= 2 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
-			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 15;
 			return maxThicknessCap;
 		}
 

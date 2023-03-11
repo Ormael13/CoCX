@@ -24,7 +24,7 @@ public class HumanFatMutation extends IMutationPerkType
                 descS = "Your fat tissue continue to increase your natural toughness and thickness gained from previous change. (+15% of max core Tou as phantom Tou)";
             }
             if (pTier == 3){
-                descS = "Your fat tissue increased again your natural toughness and thickness limit. (+45% of max core Tou as phantom Tou) +10% max core str/spe as phantom str/spe          Body Slam req. lower thickness and doubled power, pig/boar req. removed, thickness requirement lowered, increase max Hunger cap by 35 (if PC have Hunger bar active)";
+                descS = "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
             }
             return descS;
         }
@@ -77,7 +77,7 @@ public class HumanFatMutation extends IMutationPerkType
 
         public function HumanFatMutation() 
 		{
-			super(mName + " IM", mName, SLOT_FAT, 2);
+			super(mName + " IM", mName, SLOT_FAT, 3);
         }
 
     }
