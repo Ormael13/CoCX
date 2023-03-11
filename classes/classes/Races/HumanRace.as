@@ -5,6 +5,7 @@ import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Player;
 import classes.Race;
 import classes.VaginaClass;
@@ -67,6 +68,10 @@ public class HumanRace extends Race {
 									&& body.player.hasPlainSkinOnly()
 									&& body.skinBaseAdj != "slippery")
 						}, +1);
+		addScoresAfter(17)
+				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
+				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
+				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
 		addMutation(IMutationsLib.HumanFatIM);

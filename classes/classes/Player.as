@@ -3763,6 +3763,14 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 18;
 			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx))//+2 racials
 				internalChimeraRatingCounter -= 56;
+			if (hasPerk(PerkLib.HumanSupremacyInitial))
+				internalChimeraRatingCounter -= 5;
+			if (hasPerk(PerkLib.HumanSupremacyBasic))
+				internalChimeraRatingCounter -= 5;
+			if (hasPerk(PerkLib.HumanSupremacyImproved))
+				internalChimeraRatingCounter -= 10;
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced))
+				internalChimeraRatingCounter -= 1;
 			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
@@ -3774,7 +3782,7 @@ use namespace CoC;
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
-		}//każdy nowy chimerical body perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle
+		}
 
 		//Determine Inner Chimera Score
 		public function internalChimeraScore():Number {
@@ -4037,7 +4045,7 @@ use namespace CoC;
 		public function maxTotalMutationsInSlot(slot:String):int {
 			switch (slot) {
 				case IMutationPerkType.SLOT_ADAPTATIONS:
-					return 2 + maxAscensionBoost();
+					return 2 * (1 + maxHumanityBoost() + maxAscensionBoost());
 				case IMutationPerkType.SLOT_HEART:
 				case IMutationPerkType.SLOT_MUSCLE:
 				case IMutationPerkType.SLOT_MOUTH:
@@ -4054,7 +4062,7 @@ use namespace CoC;
 				case IMutationPerkType.SLOT_THYROID:
 				case IMutationPerkType.SLOT_PARATHYROID:
 				default:
-					return 1 + maxAscensionBoost();
+					return 1 + maxHumanityBoost() + maxAscensionBoost();
 			}
 		}
 		public function maxCurrentMutationsInSlot(slot:String):int {
@@ -4126,6 +4134,11 @@ use namespace CoC;
 		}
 		public function maxAscensionBoost():Number {
 			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
+		}
+		public function maxHumanityBoost():Number {
+			var mHB:Number = 0;
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mHB += 1;
+			return mHB;
 		}
 
 		public function lactationQ():Number

@@ -244,11 +244,11 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Fat (Primitive). Req. Human Fat and lvl 30+. Effects: Your fat tissue continue to increase your natural toughness and thickness gained from previous change. (+15% of max core Tou as phantom Tou)\n");
 			outputText("-New mutation perk: Human Musculature (Evolved). Req. Human Musculature (Primitive) and lvl 60+. Effects: Your musculature increased again your natural strength and tone limit. Boost Warrior's Rage effect (+1 per 10 pts of core stat value) and duration by 5 turns. (+45%/+15% of max core Str/Spe as phantom Str/Spe)\n");
 			outputText("-New mutation perk: Human Fat (Evolved). Req. Human Fat (Primitive) and lvl 60+. Effects: Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 1 misc lvl-up perk: Human Supremacy (Initial). Req. 5+ points in Internal Human Disposition score. Effect: Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)\n");
+			outputText("-New tier 3 misc lvl-up perk: Human Supremacy (Basic). Req. Human Supremacy (Initial) perk and 10+ points in Internal Human Disposition score. Effect: Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)\n");
+			outputText("-New tier 5 misc lvl-up perk: Human Supremacy (Improved). Req. Human Supremacy (Basic) perk and 20+ points in Internal Human Disposition score. Effect: Delay by 10 points appearing effect of negative HP regeneration. (+2 to human score)\n");
+			outputText("-New tier 7 misc lvl-up perk: Human Supremacy (Advanced). Req. Human Supremacy (Improved) perk and 21+ points in Internal Human Disposition score. Effect: Delay by 1 points appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))\n");
+			outputText("-Ascension perk to increase internal mutation slots would increase adaptation slots capacity by 2 not 1.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -262,6 +262,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
@@ -346,7 +358,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -382,6 +398,18 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

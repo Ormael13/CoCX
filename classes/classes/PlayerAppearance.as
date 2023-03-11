@@ -1102,7 +1102,7 @@ public class PlayerAppearance extends BaseContent {
 		if (score >= 1) {
 			outputText("\n");
 			outputText(player.hasPerk(PerkLib.RacialParagon) ? "[font-green]" : "[font-lblue]");
-			outputText("INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + score)
+			outputText("INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + score);
             if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk");
             else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib");
 			outputText("[/font]")
@@ -1113,7 +1113,7 @@ public class PlayerAppearance extends BaseContent {
 		if (scoreH >= 1) {
 			outputText("\n");
 			outputText(player.hasPerk(PerkLib.RacialParagon) ? "[font-green]" : "[font-lblue]");
-			outputText("INTERNAL HUMAN DISPOSITION: (" + player.internalHumanScore() + ") " + scoreH)
+			outputText("INTERNAL HUMAN DISPOSITION: " + player.internalHumanScore());
             //if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk");
             //else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib");
 			outputText("[/font]")

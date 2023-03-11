@@ -562,6 +562,18 @@ public class PerkLib
 		public static const MasterpieceGolem:PerkType = mk("Masterpiece Golem", "Masterpiece Golem",
 				"Now you could make your very own and unique golem that would be your pride as golemancer. (Allow to make 1 special golem that can be upgraded and rebuild into better form after attaining additional knowledge)",
 				"You've chosen the 'Masterpiece Golem' perk. Now you could make your very own and unique golem that would be your pride as golemancer.");
+		public static const HumanSupremacyInitial:PerkType = mk("Human Supremacy (Initial)", "Human Supremacy (Initial)",
+				"Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)",
+				"You've chosen the 'Human Supremacy (Initial)' perk. Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)");
+		public static const HumanSupremacyBasic:PerkType = mk("Human Supremacy (Basic)", "Human Supremacy (Basic)",
+				"Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)",
+				"You've chosen the 'Human Supremacy (Basic)' perk. Delay by 5 points appearing effect of negative HP regeneration. (+2 to human score)");
+		public static const HumanSupremacyImproved:PerkType = mk("Human Supremacy (Improved)", "Human Supremacy (Improved)",
+				"Delay by 10 points appearing effect of negative HP regeneration. (+2 to human score)",
+				"You've chosen the 'Human Supremacy (Improved)' perk. Delay by 10 points appearing effect of negative HP regeneration. (+2 to human score)");
+		public static const HumanSupremacyAdvanced:PerkType = mk("Human Supremacy (Advanced)", "Human Supremacy (Advanced)",
+				"Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))",
+				"You've chosen the 'Human Supremacy (Advanced)' perk. Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))");
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -569,6 +581,24 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -4291,6 +4321,7 @@ public class PerkLib
 			[GoliathI, GoliathII, GoliathIII, GoliathIV, GoliathV, GoliathVI], // systems functional
 			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
 			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
+			[HumanSupremacyInitial, HumanSupremacyBasic, HumanSupremacyImproved, HumanSupremacyAdvanced],//, CheetahV, CheetahVI
 			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
 			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
 				InsightfulResourcesV, InsightfulResourcesVI],
@@ -6717,7 +6748,11 @@ public class PerkLib
 					.requireNotThosePerks(ChimericalBodySemiImprovedStageEx, ChimericalBodySemiSuperiorStageEx)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
-                    }, "Two internal mutations");
+                    }, "Two of any race internal mutations");
+			HumanSupremacyInitial.requireLevel(6)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalHumanScore() >= 5;
+                    }, "Five human internal mutations");
 			RacialParagon.requireLevel(6);
             //Speedy Recovery - Regain Fatigue 50% faster.
             SpeedyRecovery.requireLevel(6);
@@ -6855,7 +6890,7 @@ public class PerkLib
                     .requireLevel(12)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 4;
-                    }, "Four internal mutations");
+                    }, "Four of any race internal mutations");
 			Apex.requireLevel(12)
 					.requirePerk(RacialParagon);
             Survivalist2.requireLevel(12)
@@ -6959,7 +6994,12 @@ public class PerkLib
                     .requireLevel(18)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 8;
-                    }, "Eight internal mutations");
+                    }, "Eight of any race internal mutations");
+            HumanSupremacyBasic.requirePerk(HumanSupremacyInitial)
+                    .requireLevel(18)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalHumanScore() >= 10;
+                    }, "Ten human internal mutations");
 			AlphaAndOmega.requireLevel(18)
 					.requirePerk(Apex);
             JobWarlord.requireAdvancedJobSlot()
@@ -7040,7 +7080,7 @@ public class PerkLib
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 12;
-                    }, "Twelve internal mutations");
+                    }, "Twelve of any race internal mutations");
 			JobAllRounder.requireLevel(24)
                     .requirePerks(JobBeastWarrior, JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobWarrior)
                     .requireStr(75)
@@ -7135,7 +7175,12 @@ public class PerkLib
                     .requireLevel(30)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 18;
-                    }, "Eighteen internal mutations");
+                    }, "Eighteen of any race internal mutations");
+            HumanSupremacyImproved.requirePerk(HumanSupremacyBasic)
+                    .requireLevel(30)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalHumanScore() >= 20;
+                    }, "Twenty human internal mutations");
             //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
             CycloneStage3.requireLevel(30)
                     .requireStr(90)
@@ -7176,7 +7221,7 @@ public class PerkLib
                     .requireLevel(36)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 24;
-                    }, "Twenty four internal mutations");
+                    }, "Twenty four of any race internal mutations");
             CycloneStage4.requireLevel(36)
                     .requireStr(120)
                     .requireTou(120)
@@ -7204,7 +7249,12 @@ public class PerkLib
                     .requireLevel(42)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 32;
-                    }, "Thirty two internal mutations");
+                    }, "Thirty two of any race internal mutations");
+            HumanSupremacyAdvanced.requirePerk(HumanSupremacyImproved)
+                    .requireLevel(42)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalHumanScore() >= 21;
+                    }, "Twenty one human internal mutations");
             CycloneStage5.requireLevel(42)
                     .requireStr(160)
                     .requireTou(160)
@@ -7251,7 +7301,7 @@ public class PerkLib
                     .requireLevel(48)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 40;
-                    }, "Forty internal mutations");
+                    }, "Forty of any race internal mutations");
             EpicGolemMaker.requireLevel(48)
                     .requireInt(150)
                     .requireWis(150)
@@ -7265,7 +7315,7 @@ public class PerkLib
                     .requireLevel(48)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 50;
-                    }, "Fifty internal mutations");
+                    }, "Fifty of any race internal mutations");
             GolemArmyCaptain.requireLevel(54)
                     .requireInt(160)
                     .requireWis(160)
@@ -7293,7 +7343,7 @@ public class PerkLib
                     .requireLevel(60)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 61;
-                    }, "Sixty one internal mutations");
+                    }, "Sixty one of any race internal mutations");
             EpicGolemMaker2ndCircle.requireLevel(60)
                     .requireInt(175)
                     .requireWis(175)
@@ -7307,7 +7357,7 @@ public class PerkLib
                     .requireLevel(66)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 72;
-                    }, "Seventy two internal mutations");
+                    }, "Seventy two of any race internal mutations");
             GolemArmyMajor.requireLevel(66)
                     .requireInt(185)
                     .requireWis(185)
@@ -7319,7 +7369,7 @@ public class PerkLib
                      .requireLevel(72)
                      .requireCustomFunction(function (player:Player):Boolean {
                          return player.internalChimeraScore() >= 85;
-                     }, "Eighty five internal mutations");
+                     }, "Eighty five of any race internal mutations");
             EpicGolemMaker3rdCircle.requireLevel(72)
                     .requireInt(200)
                     .requireWis(200)
@@ -7354,7 +7404,7 @@ public class PerkLib
                     .requireLevel(78)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 99;
-                    }, "Ninety nine internal mutations");
+                    }, "Ninety nine of any race internal mutations");
             GolemArmyLieutenantColonel.requireLevel(78)
                     .requireInt(210)
                     .requireWis(210)
@@ -7473,7 +7523,7 @@ public class PerkLib
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {
             //            return player.internalChimeraScore() >= 2;
-            //        }, "Two internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
+            //        }, "Two of any race internal mutations");//TYLKO do szybkich testów rasowych/rasowych perków mutacyjnych
 			
 			// validate tier lists
 			for each (var tierlist:Array in PERK_TIER_LISTS) {
@@ -7505,4 +7555,4 @@ public class PerkLib
         }
 	}
 }
-}
+}
