@@ -4116,22 +4116,6 @@ use namespace CoC;
 		public function maxAdaptationsMutations():Number {
 			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
-		public function maxDragonMutations():Number {
-			var dragonMutations:Number = 1;
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 1) dragonMutations--;
-			if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) dragonMutations--;
-			if (perkv1(IMutationsLib.DraconicLungIM) >= 1) dragonMutations--;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) dragonMutations++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) dragonMutations++;
-			return dragonMutations;
-		}
-		public function maxKitsuneMutations():Number {
-			var kitsuneMutations:Number = 1;
-			if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) kitsuneMutations--;
-			if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) kitsuneMutations--;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) kitsuneMutations++;
-			return kitsuneMutations;
-		}
 		public function maxAscensionBoost():Number {
 			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
 		}

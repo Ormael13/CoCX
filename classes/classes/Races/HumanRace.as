@@ -68,7 +68,7 @@ public class HumanRace extends Race {
 									&& body.player.hasPlainSkinOnly()
 									&& body.skinBaseAdj != "slippery")
 						}, +1);
-		addScoresAfter(17)
+		addScoresAfter(18)
 				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
 				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
 				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
@@ -81,7 +81,9 @@ public class HumanRace extends Race {
 		addMutation(IMutationsLib.HumanTesticlesIM);
 		addMutation(IMutationsLib.HumanThyroidGlandIM);
 		
-		tiers.push(new HumanRaceTier(maxScore-9));
+		tiers.push(new HumanRaceTier(1, maxScore-9, "Human"));
+		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human"));
+        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human"));
 		
 		debugForms = {
 			"human": [
@@ -151,17 +153,17 @@ import classes.Races;
 import classes.Races.HumanRace;
 
 class HumanRaceTier extends RaceTier {
-	public function HumanRaceTier(minScore:int) {
+	public function HumanRaceTier(tierNumber:int, minScore:int, tierName:String) {
 		super(
-				minScore,
-				"human",
-				function (body:BodyData):String {
-					return "human"
+				tierNumber,
+				tierName,
+				/* nameFn */ function (body:BodyData):String {
+					return tierName
 				},
-				1,
-				{},
-				[],
-				[]
+				minScore,
+				/* buff object */ {},
+				/* requirement list */ [],
+				/* extra bonus names */ []
 		);
 	}
 	

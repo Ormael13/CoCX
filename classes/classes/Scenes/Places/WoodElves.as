@@ -1462,7 +1462,7 @@ import classes.Scenes.Crafting;
 			outputText("On this you wave goodbye and head back to camp.[pg]");
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
-			player.trainStat("lib", 4, 300);
+			player.trainStat("lib", 4, 100);
 			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING2;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1513,7 +1513,7 @@ import classes.Scenes.Crafting;
 			outputText("On this you wave goodbye and head back to camp.[pg]");
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
-			player.trainStat("lib", 4, 300);
+			player.trainStat("lib", 4, 100);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function ChelseaRandomTrain1():void {
@@ -1529,7 +1529,7 @@ import classes.Scenes.Crafting;
 			outputText("Later when you wake up Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more empathy training especially if you plan to take the demons down. Don't you worry sis I will train you until your senses are as sharp as the edge of an elven glaive.</i>\"[pg]");
 			outputText("On this you wave goodbye and head back to camp.[pg]");
 			player.SexXP((5+player.level) * 10);
-			player.trainStat("lib", 4, 300);
+			player.trainStat("lib", 4, 100);
 			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && !hasTrainedToday && player.lib >= 200) {
 				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
