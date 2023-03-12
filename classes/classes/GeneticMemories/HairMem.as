@@ -185,6 +185,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const FLUFFY:int = _partid++;
+		EnumValue.add(Memories, FLUFFY, "FLUFFY", {
+			id: "Fluffy Hair",
+			name: "Fluffy Hair",
+			cost: 100,
+			title: "Fluffy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairFluffy;
+			}
+		});
+
+		public static const CRAZY:int = _partid++;
+		EnumValue.add(Memories, CRAZY, "CRAZY", {
+			id: "Crazy Hair",
+			name: "Crazy Hair",
+			cost: 100,
+			title: "Crazy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairCrazy;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

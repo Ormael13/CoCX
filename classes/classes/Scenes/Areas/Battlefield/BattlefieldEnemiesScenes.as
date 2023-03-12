@@ -77,7 +77,7 @@ import classes.Scenes.Areas.Battlefield.*;
 				else outputText("[cock]");
 			}
 			outputText(".\n\nYou wake up several hours later, feeling empty and weak. Whatever the thing took from you, it left you worse for the wear.\n\n");
-			player.addCurse("tou", 1, 40);
+			player.addCurse("tou", 40, 1);
 			player.HP = player.minHP() + 1;
 			player.fatigue = player.maxFatigue();
 			player.mana = 0;

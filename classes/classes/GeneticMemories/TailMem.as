@@ -793,6 +793,17 @@ import classes.CoC;
 			}
 		});
 
+		public static const YGGDRASIL:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL, "YGGDRASIL", {
+			id: "Ygddrasil Tail",
+			name: "Ygddrasil Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Ygddrasil",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailYgddrasil;
+			}
+		});
+
 		public static function getTailCost(startTails:int, endTails:int):int {
 			return Math.abs(startTails - endTails)*100 || 100;
 		}

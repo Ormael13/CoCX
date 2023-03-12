@@ -814,6 +814,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake;
     public const LowerBodyTiny: Transformation 			    = lowerBody.LowerBodyTiny;
     public const LowerBodyWorm: Transformation 			    = lowerBody.LowerBodyWorm;
+    public const LowerBodyYgddrasilRootClaws: Transformation 	= lowerBody.LowerBodyYgddrasilRootClaws;
 
 
 
@@ -989,6 +990,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailHydra: Transformation 						= tail.TailHydra;
 	public const TailSpinneretAtlach: Transformation 			= tail.TailSpinneretAtlach;
 	public const TailDeer: Transformation 						= tail.TailDeer;
+	public const TailYgddrasil: Transformation 					= tail.TailYgddrasil;
 	/**
 	 * @param tailCount target tail count
 	 * @param magnitude max. number of added/removed tails

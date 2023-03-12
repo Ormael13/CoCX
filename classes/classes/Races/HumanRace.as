@@ -68,10 +68,6 @@ public class HumanRace extends Race {
 									&& body.player.hasPlainSkinOnly()
 									&& body.skinBaseAdj != "slippery")
 						}, +1);
-		addScoresAfter(18)
-				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
-				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
-				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
 		addMutation(IMutationsLib.HumanFatIM);
@@ -80,6 +76,11 @@ public class HumanRace extends Race {
 		addMutation(IMutationsLib.HumanParathyroidGlandIM);
 		addMutation(IMutationsLib.HumanTesticlesIM);
 		addMutation(IMutationsLib.HumanThyroidGlandIM);
+		
+		addScoresAfter(18)
+				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
+				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
+				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
 		
 		tiers.push(new HumanRaceTier(1, maxScore-9, "Human"));
 		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human"));

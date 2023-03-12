@@ -293,10 +293,9 @@ public class WorldTree extends BaseContent
 		//	}
 			//Root claws
 			if ((player.wings.type == Wings.YGGDRASIL_LARGE || player.wings.type == Wings.YGGDRASIL_HUGE || player.wings.type == Wings.YGGDRASIL_HUGE_2) && player.lowerBody != LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
-				outputText("\n\nYou lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>");
-				player.lowerBody = LowerBody.YGG_ROOT_CLAWS;
-				if (player.legCount != 2) player.legCount = 2;
-				changes++;//player.arms.type == ORCA &&
+				outputText("\n\n");
+				CoC.instance.transformations.LowerBodyYgddrasilRootClaws.applyEffect();
+				changes++;
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS && player.faceType != Face.PLANT_DRAGON && changes < changeLimit) {
@@ -306,33 +305,21 @@ public class WorldTree extends BaseContent
 			}
 			//Plant dragon tail
 			if (player.faceType == Face.PLANT_DRAGON && player.tailType != Tail.YGGDRASIL && changes < changeLimit) {
-				outputText("\n\nYou feel a weird sensation in your ");
-				if (player.tailType > Tail.NONE) {
-					outputText("tail");
-					if (player.tailCount > 1) outputText("s");
-				}
-				else outputText("tailbone");
-				outputText(". It kind of feels cool, pleasurable and makes you queasy all at once. Suddenly, ");
-				if (player.tailType > Tail.NONE) outputText("it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage");
-				else outputText("your tailbone erupts and elongates into a new limb, your new tail");
-				outputText(". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>");
-				player.tailType = Tail.YGGDRASIL;
-				if (player.tailCount != 1) player.tailCount = 1;
+				outputText("\n\n");
+				CoC.instance.transformations.TailYgddrasil.applyEffect();
 				changes++;
 			}
 			//Moss (fur)/else Bark skin
 			if (!player.isBarkSkin() && !player.isGargoyle() && changes < changeLimit && player.faceType == Face.PLANT_DRAGON) {
 				outputText("\n\n");
-				CoC.instance.transformations.SkinBark(Skin.COVERAGE_COMPLETE, {
-					colors: YgddrasilRace.YgddrasilSkinColors
-				}).applyEffect();
+				CoC.instance.transformations.SkinBark(Skin.COVERAGE_COMPLETE, {colors: YgddrasilRace.YgddrasilSkinColors}).applyEffect();
 				changes++;
 			}
 			if (player.ears.type != Ears.LIZARD && player.tailType == Tail.YGGDRASIL && player.lowerBody == LowerBody.YGG_ROOT_CLAWS && changes < changeLimit) {
 				outputText("\n\nAll around you, a omnipresent buzzing is gradually becoming louder and louder.  Suddenly, you realize that it’s become painfully loud, the force of the sound making your eardrums throb painfully.  You attempt to block the sound with your ears, but your hands can’t find any ears to plug!  Suddenly, the buzzing stops, and the ringing in your ears begins to subside.  Probing the side of your head with your hands, you realize that your ears have become ");
 				if (player.isFurCovered() || player.hairLength > 0) outputText("discreet ");
 				outputText("earholes onthe side of your head. <b>You now have lizardlike ears.</b>");
-				player.ears.type = Ears.LIZARD;
+				CoC.instance.transformations.EarsLizard.applyEffect(false);
 				changes++;
 			}
 			if (changes < changeLimit && player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.DragonPoisonBreath)) {
