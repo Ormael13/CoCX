@@ -6750,8 +6750,8 @@ public class PerkLib
                     }, "Two of any race internal mutations");
 			HumanSupremacyInitial.requireLevel(6)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.internalHumanScore() >= 5;
-                    }, "Five human internal mutations");
+                        return player.internalHumanScore() >= 5 && player.racialScore(Races.HUMAN) > 17;
+                    }, "Five human internal mutations & 18+ human score");
 			RacialParagon.requireLevel(6);
             //Speedy Recovery - Regain Fatigue 50% faster.
             SpeedyRecovery.requireLevel(6);
@@ -6997,8 +6997,8 @@ public class PerkLib
             HumanSupremacyBasic.requirePerk(HumanSupremacyInitial)
                     .requireLevel(18)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.internalHumanScore() >= 10;
-                    }, "Ten human internal mutations");
+                        return player.internalHumanScore() >= 10 && player.racialScore(Races.HUMAN) > 17;
+                    }, "Ten human internal mutations & 18+ human score");
 			AlphaAndOmega.requireLevel(18)
 					.requirePerk(Apex);
             JobWarlord.requireAdvancedJobSlot()
@@ -7178,8 +7178,8 @@ public class PerkLib
             HumanSupremacyImproved.requirePerk(HumanSupremacyBasic)
                     .requireLevel(30)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.internalHumanScore() >= 20;
-                    }, "Twenty human internal mutations");
+                        return player.internalHumanScore() >= 20 && player.racialScore(Races.HUMAN) > 17;
+                    }, "Twenty human internal mutations & 18+ human score");
             //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
             CycloneStage3.requireLevel(30)
                     .requireStr(90)
@@ -7252,8 +7252,8 @@ public class PerkLib
             HumanSupremacyAdvanced.requirePerk(HumanSupremacyImproved)
                     .requireLevel(42)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.internalHumanScore() >= 21;
-                    }, "Twenty one human internal mutations");
+                        return player.internalHumanScore() >= 21 && player.racialScore(Races.HUMAN) > 17;
+                    }, "Twenty one human internal mutations & 18+ human score");
             CycloneStage5.requireLevel(42)
                     .requireStr(160)
                     .requireTou(160)

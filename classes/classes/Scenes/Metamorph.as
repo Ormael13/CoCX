@@ -801,7 +801,7 @@ import classes.internals.SaveableState;
 
 			outputText(Hair.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
-			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, HairMem.Memories);
+			openPaginatedMenu(title, accessHairMenu, currentPage, HairMem.Memories);
 		}
 
 		private function accessFaceMenu(currentPage: int = 0): void {
