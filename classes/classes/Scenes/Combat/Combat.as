@@ -8454,7 +8454,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
-        if (display) CommasForDigits(damage, false, "", "poison");
+        if (display) CommasForDigits(damage, false, "", "acid");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
