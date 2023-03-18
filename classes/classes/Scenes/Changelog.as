@@ -114,6 +114,15 @@ public class Changelog extends BaseContent
 			outputText("-New tier 5 misc lvl-up perk: Human Supremacy (Improved). Req. Human Supremacy (Basic) perk and 20+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 10 points appearing effect of negative HP regeneration. (+2 to human score)\n");
 			outputText("-New tier 7 misc lvl-up perk: Human Supremacy (Advanced). Req. Human Supremacy (Improved) perk and 21+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 1 points appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))\n");
 			outputText("-Ascension perk to increase internal mutation slots would increase adaptation slots capacity by 2 not 1.\n");
+			outputText("-New mutation perk: Human Versatility. Req. having free adaptation mutation slot, human race (17+). Effects: Mastery gains increased by 1 point or in case of multtiplier +1 to multiplier.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -133,15 +142,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?

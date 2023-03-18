@@ -11864,8 +11864,10 @@ public class Combat extends BaseContent {
     }
 
     public function teaseXP(XP:Number = 0):void {
-        if (player.armor == armors.SCANSC) player.SexXP(XP);
-        player.SexXP(XP);
+		var teaseEXPgogo:Number = XP;
+        if (player.armor == armors.SCANSC) teaseEXPgogo += 1;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.racialScore(Races.HUMAN) > 17) teaseEXPgogo += player.perkv1(IMutationsLib.HumanVersatilityIM);
+        player.SexXP(teaseEXPgogo);
     }
 
 	private function weaponmasteryXPMulti():Number {
@@ -11874,6 +11876,7 @@ public class Combat extends BaseContent {
 			multi += 1;
 			if (player.isPureHuman()) multi += 1;
 		}
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.racialScore(Races.HUMAN) > 17) multi += player.perkv1(IMutationsLib.HumanVersatilityIM);
         return multi;
 	}
 

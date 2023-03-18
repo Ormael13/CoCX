@@ -3807,6 +3807,7 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);
 			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);
 			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);
 			End("Player","racialScore");
 			return internalHumanCounter;
 		}
@@ -5869,7 +5870,12 @@ use namespace CoC;
 			return rval;
 		}
 
-
+		public function MiningMulti():Number {
+			var mineMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) mineMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineMlt *= 2;
+			return mineMlt;
+		}
 
 		public function maxMiningLevel():Number {
 			var maxLevel:Number = 2;
@@ -5961,6 +5967,7 @@ use namespace CoC;
 
 		public function HerbalismMulti():Number {
 			var herbMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) herbMlt += perkv1(IMutationsLib.HumanVersatilityIM);
 			if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
 			if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
 			if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
