@@ -4012,7 +4012,7 @@ public class PerkLib
 				"You chose 'Job ( Advanced ): Courtesan' perk, training yourself to become a(n) Courtesan.").withBuffs({'lib.mult':0.15,'maxlust_base':+60});
 		public static const JobDefender:PerkType = mk("Job: Defender", "Job ( Advanced ): Defender",
 				"You've trained in withstanding even the heaviest attacks head on.",
-				"You chose 'Job ( Advanced ): Defender' perk, training yourself to bocame a Defender.").withBuffs({'tou.mult':0.15});
+				"You chose 'Job ( Advanced ): Defender' perk, training yourself to became a Defender.").withBuffs({'tou.mult':0.15});
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job ( Advanced ): Dervish",
 				"You've trained in multi meele attacks combat and using of medium sized weapons.",
 				"You chose 'Job ( Advanced ): Dervish' perk, training yourself to become a(n) Dervish.").withBuffs({'spe.mult':0.10,'maxwrath_base':+100});

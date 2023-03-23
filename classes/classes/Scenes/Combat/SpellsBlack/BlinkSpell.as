@@ -54,8 +54,8 @@ public class BlinkSpell extends AbstractBlackSpell {
 	public function calcBoost():Number {
 		var BlinkBoostCap:Number = 2;
 		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) {
-			var capB:Number = 1.2;
-			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.8;
+			var capB:Number = 1.3;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.7;
 			if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) capB *= 5;
 			BlinkBoostCap *= capB;
 		}

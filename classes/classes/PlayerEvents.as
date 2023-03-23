@@ -1863,7 +1863,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Oni Might
 			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA) || player.isRaceCached(Races.SEA_DRAGON)) {
 				if (!player.hasPerk(PerkLib.GiantMight)) {
-					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strenght. That must be the so called fabled strenght of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
+					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strength. That must be the so called fabled strength of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
 					player.createPerk(PerkLib.GiantMight, 0, 0, 0, 0);
 					needNext = true;
 				}

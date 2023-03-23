@@ -115,7 +115,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 7 misc lvl-up perk: Human Supremacy (Advanced). Req. Human Supremacy (Improved) perk and 21+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 1 points appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))\n");
 			outputText("-Ascension perk to increase internal mutation slots would increase adaptation slots capacity by 2 not 1.\n");
 			outputText("-New mutation perk: Human Versatility. Req. having free adaptation mutation slot, human race (17+). Effects: Mastery gains increased by 1 point or in case of multtiplier +1 to multiplier.\n");
-			outputText("-\n");
+			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -142,6 +142,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
@@ -229,7 +232,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -269,11 +274,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
