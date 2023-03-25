@@ -115,15 +115,15 @@ public class Changelog extends BaseContent
 			outputText("-New tier 7 misc lvl-up perk: Human Supremacy (Advanced). Req. Human Supremacy (Improved) perk and 21+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 1 points appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))\n");
 			outputText("-Ascension perk to increase internal mutation slots would increase adaptation slots capacity by 2 not 1.\n");
 			outputText("-New mutation perk: Human Versatility. Req. having free adaptation mutation slot, human race (17+). Effects: Mastery gains increased by 1 point or in case of multtiplier +1 to multiplier.\n");
+			outputText("-Added to Giacomo offer Herbs / Potions (Lowest grade) Bags. Both cost 150 gems and can store up to 3 items of proper type in one of 5 slots.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//Added Farming mastery. Max lvl is 2 and increase by 1 each lvl until 18. Each 5 levels it would enable to use 2 more garden plots and decrease farming time by 12 hours.
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -29,6 +29,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Camp.Garden;
 import classes.display.SpriteDb;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
@@ -188,6 +189,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
+			if (Garden.IngrediantBagSlot01Cap == 0) addButton(8, "Herb Bag (LowG)", pitchHerbsBag).hint("Herbs Bag (Lowest Grade)");
+			if (Garden.PotionsBagSlot01Cap == 0) addButton(9, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
 			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
@@ -475,6 +478,60 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				player.gems -= 100;
 				player.createKeyItem("Tel'Adre Magazine Issue 10", 0, 0, 0, 0);
+			}
+		}
+		
+		private function pitchHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep herbs between your other stuff. Why not you buy this one bag that is much better to keep them in one place? Only 150 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyHerbsBag, miscMenu);
+		}
+		
+		private function buyHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 150) {
+				outputText("\n\nGiacomo sighs, indicating you need 150 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Herbs Bag (Lowest grade).</b>");
+				player.gems -= 150;
+				player.createKeyItem("Herbs Bag (Lowest grade)", 0, 0, 0, 0);
+				Garden.IngrediantBagSlot01Cap = 3;
+				Garden.IngrediantBagSlot02Cap = 3;
+				Garden.IngrediantBagSlot03Cap = 3;
+				Garden.IngrediantBagSlot04Cap = 3;
+				Garden.IngrediantBagSlot05Cap = 3;
+				doNext(miscMenu);
+			}
+		}
+		
+		private function pitchPotionsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep potions between your other stuff. Why not you buy this one bag that is much better to organize them? Only 150 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyPotionsBag, miscMenu);
+		}
+		
+		private function buyPotionsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 150) {
+				outputText("\n\nGiacomo sighs, indicating you need 150 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Potions Bag (Lowest grade).</b>");
+				player.gems -= 150;
+				player.createKeyItem("Potions Bag (Lowest grade)", 0, 0, 0, 0);
+				Garden.PotionsBagSlot01Cap = 3;
+				Garden.PotionsBagSlot02Cap = 3;
+				Garden.PotionsBagSlot03Cap = 3;
+				Garden.PotionsBagSlot04Cap = 3;
+				Garden.PotionsBagSlot05Cap = 3;
+				doNext(miscMenu);
 			}
 		}
 		

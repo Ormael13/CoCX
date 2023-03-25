@@ -1460,6 +1460,11 @@ public class PlayerInfo extends BaseContent {
 		else
 			masteryStats += "<b>Mining Skill:</b>  " + player.miningLevel + " / " + player.maxMiningLevel() + " (Exp: MAX)\n";
 		masteryStats += "\n";
+		if (player.farmingLevel < player.maxFarmingLevel())
+			masteryStats += "<b>Farming Skill:</b>  " + player.farmingLevel + " / " + player.maxFarmingLevel() + " (Exp: " + player.farmingXP + " / " + player.FarmExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Farming Skill:</b>  " + player.farmingLevel + " / " + player.maxFarmingLevel() + " (Exp: MAX)\n";
+		masteryStats += "\n";
 		if (player.herbalismLevel < player.maxHerbalismLevel())
 			masteryStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: " + player.herbalismXP + " / " + player.HerbExpToLevelUp() + ")\n";
 		else

@@ -162,6 +162,10 @@ use namespace CoC;
 		public var miningLevel:Number = 0;
 		public var miningXP:Number = 0;
 		
+		//Farming attributes
+		public var farmingLevel:Number = 0;
+		public var farmingXP:Number = 0;
+		
 		//Herbalism attributes
 		public var herbalismLevel:Number = 0;
 		public var herbalismXP:Number = 0;
@@ -5916,6 +5920,56 @@ use namespace CoC;
 					miningXP = 0;
 				}
 			}
+		}
+
+		public function maxFarmingLevel():Number {
+			var maxLevel:Number = 2;
+			if (level < 18) maxLevel += level;
+			else maxLevel += 18;
+			return maxLevel;
+		}
+		public function FarmExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = farmingLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = farmingLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function farmXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					farmingXP++;
+					XP--;
+				}
+				else {
+					farmingXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (farmingLevel < maxFarmingLevel() && farmingXP >= FarmExpToLevelUp()) {
+					outputText("\n\n<b>Farming skill leveled up to " + (farmingLevel + 1) + "!</b>");
+					farmingLevel++;
+					farmingXP = 0;
+				}
+			}
+		}
+
+		public function FarmingMulti():Number {
+			var herbMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) herbMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			//if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
+			//if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
+			//if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
+			return herbMlt;
 		}
 
 		public function maxHerbalismLevel():Number {
