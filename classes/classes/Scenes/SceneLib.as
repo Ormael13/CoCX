@@ -298,8 +298,6 @@ public class SceneLib {
 
     public static var garden:Garden = new Garden();
 
-    //public static var harvestMoon:HarvestMoonScenes = new HarvestMoonScenes();
-
     public static var aikoScene:AikoScene = new AikoScene();
 	
 	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();

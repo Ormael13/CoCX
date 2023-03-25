@@ -619,6 +619,17 @@ import classes.Items.Consumables.SimpleConsumable;
 		menu();
 		//Checks if pc has this ingrediant growing
 		outputText("You move over to your gardening fields. You can plant and grow herbs here.");
+		outputText("\n\n");
+		outputText("<b>Ingrediant Bag</b>\n");
+		outputText("Healing herb: "+IngrediantBagSlot01+"/"+IngrediantBagSlot01Cap+"\n");
+		outputText("Moon grass: "+IngrediantBagSlot02+"/"+IngrediantBagSlot02Cap+"\n");
+		outputText("Snakebane flower: "+IngrediantBagSlot03+"/"+IngrediantBagSlot03Cap+"\n");
+		outputText("Ironweed: "+IngrediantBagSlot04+"/"+IngrediantBagSlot04Cap+"\n");
+		outputText("Blade fern: "+IngrediantBagSlot05+"/"+IngrediantBagSlot05Cap+"\n");
+		outputText("\n\n");
+		outputText("<b>Fields</b>\n");
+		outputText("-01-: "+(GardenSlot01 != "" ? ""+GardenSlot01+" (Time until harvest: "+GardenSlot01Time+")":"empty")+"");
+		outputText("-02-: "+(GardenSlot02 != "" ? ""+GardenSlot02+" (Time until harvest: "+GardenSlot02Time+")":"empty")+"");
 		addButton(0, "Put Herb In", putInHerbIntoHerbBag0);
 		//plants typicaly takes 1 week to grow from a single ingrediant into 5 new ingrediants sample player can use this button to go to the harvest selection
 		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingrediants.");
@@ -657,7 +668,7 @@ import classes.Items.Consumables.SimpleConsumable;
 		clearOutput();
 		menu();
 		outputText("What kind of herb would you like to grow?");
-		if (IngrediantBagSlot02 == 0) addButtonDisabled(0, "Healing herb", "You lack a plant sample in ingrediant bag to get seeds from.");
+		if (IngrediantBagSlot01 == 0) addButtonDisabled(0, "Healing herb", "You lack a plant sample in ingrediant bag to get seeds from.");
 		else addButton(0, "Healing herb", Seed1, CoC.instance.consumables.HEALHERB).hint("Plant new seeds.");
 		if (IngrediantBagSlot02 == 0) addButtonDisabled(1, "Moon grass", "You lack a plant sample in ingrediant bag to get seeds from.");
 		else addButton(1, "Moon grass", Seed1, CoC.instance.consumables.MOONGRASS).hint("Plant new seeds.");
@@ -675,10 +686,10 @@ import classes.Items.Consumables.SimpleConsumable;
 		clearOutput();
 		menu();
 		outputText("Which plot would you like to use?");
-		if (GardenSlot01 != "") addButtonDisabled(0, "-1-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
-		else addButton(0, "-1-", curry(Seed2, ItemID, 1));
-		if (GardenSlot02 != "") addButtonDisabled(1, "-2-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
-		else addButton(1, "-2-", curry(Seed2, ItemID, 2));
+		if (GardenSlot01 != "") addButtonDisabled(0, "-01-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+		else addButton(0, "-01-", curry(Seed2, ItemID, 1));
+		if (GardenSlot02 != "") addButtonDisabled(1, "-02-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+		else addButton(1, "-02-", curry(Seed2, ItemID, 2));
 		addButton(14, "Back", Seed).hint("Go back to plot choice menu.");
 	}
 
