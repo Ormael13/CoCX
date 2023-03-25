@@ -613,14 +613,16 @@ import classes.Items.Consumables.SimpleConsumable;
 			Saves.registerSaveableState(this);
 		}
 
+	public function canAccessGarden():Boolean {
+		return IngrediantBagSlot01Cap > 0;
+	}
 	public function accessGarden():void {
 		hideMenus();
 		clearOutput();
 		menu();
-		//Checks if pc has this ingrediant growing
 		outputText("You move over to your gardening fields. You can plant and grow herbs here.");
 		outputText("\n\n");
-		outputText("<b>Ingrediant Bag</b>\n");
+		outputText("<b>Herbs Bag</b>\n");
 		outputText("Healing herb: "+IngrediantBagSlot01+"/"+IngrediantBagSlot01Cap+"\n");
 		outputText("Moon grass: "+IngrediantBagSlot02+"/"+IngrediantBagSlot02Cap+"\n");
 		outputText("Snakebane flower: "+IngrediantBagSlot03+"/"+IngrediantBagSlot03Cap+"\n");
@@ -630,10 +632,20 @@ import classes.Items.Consumables.SimpleConsumable;
 		outputText("<b>Fields</b>\n");
 		outputText("-01-: "+(GardenSlot01 != "" ? ""+GardenSlot01+" (Time until harvest: "+GardenSlot01Time+")":"empty")+"");
 		outputText("-02-: "+(GardenSlot02 != "" ? ""+GardenSlot02+" (Time until harvest: "+GardenSlot02Time+")":"empty")+"");
+		if (player.farmingLevel >= 5) outputText("-03-: "+(GardenSlot03 != "" ? ""+GardenSlot03+" (Time until harvest: "+GardenSlot03Time+")":"empty")+"");
+		if (player.farmingLevel >= 10) outputText("-04-: "+(GardenSlot04 != "" ? ""+GardenSlot04+" (Time until harvest: "+GardenSlot04Time+")":"empty")+"");
+		if (player.farmingLevel >= 15) outputText("-05-: "+(GardenSlot05 != "" ? ""+GardenSlot05+" (Time until harvest: "+GardenSlot05Time+")":"empty")+"");
+		if (player.farmingLevel >= 20) outputText("-06-: "+(GardenSlot06 != "" ? ""+GardenSlot06+" (Time until harvest: "+GardenSlot06Time+")":"empty")+"");
+		if (player.farmingLevel >= 25) outputText("-07-: "+(GardenSlot07 != "" ? ""+GardenSlot07+" (Time until harvest: "+GardenSlot07Time+")":"empty")+"");
+		if (player.farmingLevel >= 30) outputText("-08-: "+(GardenSlot08 != "" ? ""+GardenSlot08+" (Time until harvest: "+GardenSlot08Time+")":"empty")+"");
+		if (player.farmingLevel >= 35) outputText("-09-: "+(GardenSlot09 != "" ? ""+GardenSlot09+" (Time until harvest: "+GardenSlot09Time+")":"empty")+"");
+		if (player.farmingLevel >= 40) outputText("-10-: "+(GardenSlot10 != "" ? ""+GardenSlot10+" (Time until harvest: "+GardenSlot10Time+")":"empty")+"");
+		if (player.farmingLevel >= 45) outputText("-11-: "+(GardenSlot11 != "" ? ""+GardenSlot11+" (Time until harvest: "+GardenSlot11Time+")":"empty")+"");
+		if (player.farmingLevel >= 50) outputText("-12-: "+(GardenSlot12 != "" ? ""+GardenSlot12+" (Time until harvest: "+GardenSlot12Time+")":"empty")+"");
 		addButton(0, "Put Herb In", putInHerbIntoHerbBag0);
 		//plants typicaly takes 1 week to grow from a single ingrediant into 5 new ingrediants sample player can use this button to go to the harvest selection
-		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingrediants.");
-		//addFiveArgButton(2, "Harvest", Harvest, HarvestMoonScenes.harvestmoonstageHH >= 1, HarvestMoonScenes.harvestmoonstageMG >= 1, HarvestMoonScenes.harvestmoonstageSB >= 1, HarvestMoonScenes.harvestmoonstageIW >= 1, HarvestMoonScenes.harvestmoonstageBF >= 1).hint("Check your harvests.")
+		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingredients.");
+		addButton(2, "Harvest", Harvest).hint("Check your harvests.")
 		addButton(14, "Back", camp.HerbalismMenu);
 	}
 	
@@ -660,6 +672,9 @@ import classes.Items.Consumables.SimpleConsumable;
 	
 	private function timeUntilHarvest():Number {
 		var tUH:Number = 168;
+		if (player.farmingLevel >= 5) tUH -= 12;
+		if (player.farmingLevel >= 10) tUH -= 12;
+		if (player.farmingLevel >= 15) tUH -= 12;
 		return tUH;
 	}
 
@@ -668,45 +683,61 @@ import classes.Items.Consumables.SimpleConsumable;
 		clearOutput();
 		menu();
 		outputText("What kind of herb would you like to grow?");
-		if (IngrediantBagSlot01 == 0) addButtonDisabled(0, "Healing herb", "You lack a plant sample in ingrediant bag to get seeds from.");
-		else addButton(0, "Healing herb", Seed1, CoC.instance.consumables.HEALHERB).hint("Plant new seeds.");
-		if (IngrediantBagSlot02 == 0) addButtonDisabled(1, "Moon grass", "You lack a plant sample in ingrediant bag to get seeds from.");
-		else addButton(1, "Moon grass", Seed1, CoC.instance.consumables.MOONGRASS).hint("Plant new seeds.");
-		if (IngrediantBagSlot03 == 0) addButtonDisabled(2, "Snakebane", "You lack a plant sample in ingrediant bag to get seeds from.");
-		else addButton(2, "Snakebane", Seed1, CoC.instance.consumables.SNAKEBANE).hint("Plant new seeds.");
-		if (IngrediantBagSlot04 == 0) addButtonDisabled(3, "Ironweed", "You lack a plant sample in ingrediant bag to get seeds from.");
-		else addButton(3, "Ironweed", Seed1, CoC.instance.consumables.IRONWEED).hint("Plant new seeds.");
-		if (IngrediantBagSlot05 == 0) addButtonDisabled(4, "Blade fern", "You lack a plant sample in ingrediant bag to get seeds from.");
-		else addButton(4, "Blade fern", Seed1, CoC.instance.consumables.BLADEFERN).hint("Plant new seeds.");
+		if (IngrediantBagSlot01 == 0) addButtonDisabled(0, "Healing herb", "You lack a plant sample in ingredient bag to get seeds from.");
+		else addButton(0, "Healing herb", Seed1, 1).hint("Plant new seeds.");
+		if (IngrediantBagSlot02 == 0) addButtonDisabled(1, "Moon grass", "You lack a plant sample in ingredient bag to get seeds from.");
+		else addButton(1, "Moon grass", Seed1, 2).hint("Plant new seeds.");
+		if (IngrediantBagSlot03 == 0) addButtonDisabled(2, "Snakebane", "You lack a plant sample in ingredient bag to get seeds from.");
+		else addButton(2, "Snakebane", Seed1, 3).hint("Plant new seeds.");
+		if (IngrediantBagSlot04 == 0) addButtonDisabled(3, "Ironweed", "You lack a plant sample in ingredient bag to get seeds from.");
+		else addButton(3, "Ironweed", Seed1, 4).hint("Plant new seeds.");
+		if (IngrediantBagSlot05 == 0) addButtonDisabled(4, "Blade fern", "You lack a plant sample in ingredient bag to get seeds from.");
+		else addButton(4, "Blade fern", Seed1, 5).hint("Plant new seeds.");
 		addButton(14, "Back", accessGarden).hint("Go back to garden menu.");
 	}
 	
-	private function Seed1(ItemID:SimpleConsumable):void {
+	private function Seed1(Item:Number):void {
 		hideMenus();
 		clearOutput();
 		menu();
 		outputText("Which plot would you like to use?");
 		if (GardenSlot01 != "") addButtonDisabled(0, "-01-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
-		else addButton(0, "-01-", curry(Seed2, ItemID, 1));
+		else addButton(0, "-01-", curry(Seed2, Item, 1));
 		if (GardenSlot02 != "") addButtonDisabled(1, "-02-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
-		else addButton(1, "-02-", curry(Seed2, ItemID, 2));
+		else addButton(1, "-02-", curry(Seed2, Item, 2));
+		if (player.farmingLevel >= 5) {
+			if (GardenSlot03 != "") addButtonDisabled(2, "-03-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(2, "-03-", curry(Seed2, Item, 3));
+		}
+		if (player.farmingLevel >= 10) {
+			if (GardenSlot04 != "") addButtonDisabled(3, "-04-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(3, "-04-", curry(Seed2, Item, 4));
+		}
+		if (player.farmingLevel >= 15) {
+			if (GardenSlot05 != "") addButtonDisabled(4, "-05-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(4, "-05-", curry(Seed2, Item, 5));
+		}
+		if (player.farmingLevel >= 20) {
+			if (GardenSlot06 != "") addButtonDisabled(5, "-06-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(5, "-06-", curry(Seed2, Item, 6));
+		}
 		addButton(14, "Back", Seed).hint("Go back to plot choice menu.");
 	}
 
-	private function Seed2(ItemID:SimpleConsumable, plot:Number):void {
+	private function Seed2(Item:Number, plot:Number):void {
 		hideMenus();
 		clearOutput();
 		outputText("Planting a new herb will consume one of your herb items, proceed anyway?");
-		doYesNo(curry(Seed3,ItemID,plot), Seed);
+		doYesNo(curry(Seed3,Item,plot), Seed);
 	}
 
-	private function Seed3(ItemID:SimpleConsumable, plot:Number):void {
+	private function Seed3(Item:Number, plot:Number):void {
 		var herb:String = "";
-		if (ItemID == CoC.instance.consumables.HEALHERB) herb = "healing herb";
-		if (ItemID == CoC.instance.consumables.MOONGRASS) herb = "moon grass";
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) herb = "snakebane";
-		if (ItemID == CoC.instance.consumables.IRONWEED) herb = "ironweed";
-		if (ItemID == CoC.instance.consumables.BLADEFERN) herb = "bladefern";
+		if (Item == 1) herb = "healing herb";
+		if (Item == 2) herb = "moon grass";
+		if (Item == 3) herb = "snakebane";
+		if (Item == 4) herb = "ironweed";
+		if (Item == 5) herb = "bladefern";
 		switch (plot) {
 			case 1:
 				GardenSlot01 = herb;
@@ -760,22 +791,139 @@ import classes.Items.Consumables.SimpleConsumable;
 				GardenSlot01 = herb;
 				GardenSlot01Time = timeUntilHarvest();
 		}
-		Seed4(ItemID);
+		Seed4(Item);
 	}
-	private function Seed4(ItemID:SimpleConsumable):void {
+	private function Seed4(Item:Number):void {
 		clearOutput();
 		outputText("You begin carefully planting the");
-		player.destroyItems(ItemID, 1);
-		if (ItemID == CoC.instance.consumables.HEALHERB) outputText("healing herb");
-		if (ItemID == CoC.instance.consumables.MOONGRASS) outputText("moon grass");
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) outputText("snakebane");
-		if (ItemID == CoC.instance.consumables.IRONWEED) outputText("ironweed");
-		if (ItemID == CoC.instance.consumables.BLADEFERN) outputText("bladefern");
+		if (Item == 1) {
+			outputText("healing herb");
+			IngrediantBagSlot01 -= 1;
+		}
+		if (Item == 2) {
+			outputText("moon grass");
+			IngrediantBagSlot02 -= 1;
+		}
+		if (Item == 3) {
+			outputText("snakebane");
+			IngrediantBagSlot03 -= 1;
+		}
+		if (Item == 4) {
+			outputText("ironweed");
+			IngrediantBagSlot04 -= 1;
+		}
+		if (Item == 5) {
+			outputText("bladefern");
+			IngrediantBagSlot05 -= 1;
+		}
 		outputText("into the fertile soil. It should grow back into several or more plants within a few days. Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
-		var HE:Number = 20 + player.level;
-		HE *= player.HerbalismMulti();
-		player.herbXP(HE);
+		var FE:Number = 20 + player.level;
+		FE *= player.FarmingMulti();
+		player.farmXP(FE);
 		doNext(Seed);
+	}
+
+	private function Harvest():void{
+		hideMenus();
+		clearOutput();
+		menu();
+		outputText("You take a tour of your garden and survey your crops for readied harvests.");
+		if (GardenSlot01 == "" && GardenSlot02 == "" && GardenSlot03 == "" && GardenSlot04 == "" && GardenSlot05 == "" && GardenSlot06 == "" && GardenSlot07 == "" && GardenSlot08 == "" && GardenSlot09 == "" && GardenSlot10 == "" && GardenSlot11 == "" && GardenSlot12 == "") outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
+		if (GardenSlot01 != "") {
+			addButton(0, "-01-", Harvest2,GardenSlot01, 1).hint("Harvest your ingredients.");
+			if (GardenSlot01Time > 0) addButtonDisabled(0,"-01-","Your crops are still growing.");
+		}
+		if (GardenSlot02 != "") {
+			addButton(1, "-02-", Harvest2,GardenSlot02, 2).hint("Harvest your ingredients.");
+			if (GardenSlot02Time > 0) addButtonDisabled(1,"-02-","Your crops are still growing.");
+		}
+		if (GardenSlot03 != "") {
+			addButton(2, "-03-", Harvest2,GardenSlot03, 3).hint("Harvest your ingredients.");
+			if (GardenSlot03Time > 0) addButtonDisabled(2,"-03-","Your crops are still growing.");
+		}
+		if (GardenSlot04 != "") {
+			addButton(3, "-04-", Harvest2,GardenSlot04, 4).hint("Harvest your ingredients.");
+			if (GardenSlot04Time > 0) addButtonDisabled(3,"-04-","Your crops are still growing.");
+		}
+		if (GardenSlot05 != "") {
+			addButton(4, "-05-", Harvest2,GardenSlot05, 5).hint("Harvest your ingredients.");
+			if (GardenSlot05Time > 0) addButtonDisabled(4,"-05-","Your crops are still growing.");
+		}
+		if (GardenSlot06 != "") {
+			addButton(5, "-06-", Harvest2,GardenSlot06, 6).hint("Harvest your ingredients.");
+			if (GardenSlot06Time > 0) addButtonDisabled(5,"-06-","Your crops are still growing.");
+		}
+		addButton(14, "Back", accessGarden).hint("Go back to garden menu.")
+	}
+
+	public function Harvest2(IngredientName:String, plot:Number):void{
+		hideMenus();
+		clearOutput();
+		if (IngredientName == "healing herb") {
+			IngrediantBagSlot01 += 5;
+			if (IngrediantBagSlot01 > IngrediantBagSlot01Cap) IngrediantBagSlot01 = IngrediantBagSlot01Cap;
+		}
+		if (IngredientName == "moon grass") {
+			IngrediantBagSlot02 += 5;
+			if (IngrediantBagSlot02 > IngrediantBagSlot02Cap) IngrediantBagSlot02 = IngrediantBagSlot02Cap;
+		}
+		if (IngredientName == "snakebane") {
+			IngrediantBagSlot03 += 5;
+			if (IngrediantBagSlot03 > IngrediantBagSlot03Cap) IngrediantBagSlot03 = IngrediantBagSlot03Cap;
+		}
+		if (IngredientName == "ironweed") {
+			IngrediantBagSlot04 += 5;
+			if (IngrediantBagSlot04 > IngrediantBagSlot04Cap) IngrediantBagSlot04 = IngrediantBagSlot04Cap;
+		}
+		if (IngredientName == "bladefern") {
+			IngrediantBagSlot05 += 5;
+			if (IngrediantBagSlot05 > IngrediantBagSlot05Cap) IngrediantBagSlot05 = IngrediantBagSlot05Cap;
+		}
+		switch (plot) {
+			case 1:
+				GardenSlot01 = "";
+				break;
+			case 2:
+				GardenSlot02 = "";
+				break;
+			case 3:
+				GardenSlot03 = "";
+				break;
+			case 4:
+				GardenSlot04 = "";
+				break;
+			case 5:
+				GardenSlot05 = "";
+				break;
+			case 6:
+				GardenSlot06 = "";
+				break;
+			case 7:
+				GardenSlot07 = "";
+				break;
+			case 8:
+				GardenSlot08 = "";
+				break;
+			case 9:
+				GardenSlot09 = "";
+				break;
+			case 10:
+				GardenSlot10 = "";
+				break;
+			case 11:
+				GardenSlot11 = "";
+				break;
+			case 12:
+				GardenSlot12 = "";
+				break;
+			default:
+				GardenSlot01 = "";
+		}
+		outputText("Youve collected all of the ingredients.");
+		var FE:Number = 20 + player.level;
+		FE *= player.FarmingMulti();
+		player.farmXP(FE);
+		doNext(Harvest);
 	}
 
 	}

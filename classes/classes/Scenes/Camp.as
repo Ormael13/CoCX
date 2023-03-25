@@ -2117,6 +2117,9 @@ public class Camp extends NPCAwareContent{
 		addButton(3, "Spend Time", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
 		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
+		//addButtonDisabled(6, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
+		if (SceneLib.garden.canAccessGarden()) addButton(6, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants.");
+		else addButtonDisabled(6, "Garden", "Req. to have Herb bag of any sort.");
 		addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
 		addButton(8, "Materials", SceneLib.crafting.accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(Crafting.BagSlot01Cap <= 0, "You'll need a bag to do that.");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(AdventurerGuild.Slot01Cap <= 0, "Join the Adventure Guild for a quest bag!");
@@ -2648,86 +2651,10 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", PotionType.PERFUME).hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
 		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
 		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
-		addButtonDisabled(10, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
-		//THE GARDEN!if () addButton(10, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants");
-		//else addButton(10, "Garden", "Req. to have Herb bag of any sort.");
 		addButton(14, "Back", campActions);
 	}
 
 	
-
-	private function Harvest(HealingHerb:Boolean = false, MoonGrass:Boolean = false, Snakebane:Boolean = false, Ironweed:Boolean = false, BladeFern:Boolean = false):void{
-		hideMenus();
-		clearOutput();
-		menu();
-		outputText("You take a tour of your garden and survey your crops for readied harvests.");
-		if (!HealingHerb && !MoonGrass && !Snakebane && !Ironweed && !BladeFern) outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
-		if (HealingHerb)
-		{
-			addButton(0, "Healing herb", Harvest2,CoC.instance.consumables.HEALHERB,"Healing herbs").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageHH != HarvestMoonScenes.HARVESTMOONREADYHH) addButtonDisabled(0,"Healing herb","Your crops are still growing.");
-		}
-		if (MoonGrass)
-		{
-			addButton(1, "Moon grass", Harvest2,CoC.instance.consumables.MOONGRASS,"Moongrass").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageMG != HarvestMoonScenes.HARVESTMOONREADYMG) addButtonDisabled(1,"Moon grass","Your crops are still growing.");
-		}
-		if (Snakebane)
-		{
-			addButton(2, "Snakebane", Harvest2,CoC.instance.consumables.SNAKEBANE,"Snakebane").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageSB != HarvestMoonScenes.HARVESTMOONREADYSB) addButtonDisabled(2,"Snakebane","Your crops are still growing.");
-		}
-		if (Ironweed)
-		{
-			addButton(3, "Ironweed", Harvest2,CoC.instance.consumables.IRONWEED,"Ironweed").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageIW != HarvestMoonScenes.HARVESTMOONREADYIW) addButtonDisabled(3,"Ironweed","Your crops are still growing.");
-		}
-		if (BladeFern)
-		{
-			addButton(4, "Blade fern", Harvest2,CoC.instance.consumables.BLADEFERN,"Blade ferns").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageBF != HarvestMoonScenes.HARVESTMOONREADYBF) addButtonDisabled(4,"Blade fern","Your crops are still growing.");
-		}
-		//addButton(14, "Back", Garden).hint("Go back to garden menu.")
-	}
-
-	public function Harvest2(ItemID:SimpleConsumable,IngrediantName:String):void{
-		hideMenus();
-		clearOutput();
-		menu();
-		if (ItemID == CoC.instance.consumables.HEALHERB) HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONNOTSTARTEDHH;
-		if (ItemID == CoC.instance.consumables.MOONGRASS) HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONNOTSTARTEDMG;
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONNOTSTARTEDSB;
-		if (ItemID == CoC.instance.consumables.IRONWEED) HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONNOTSTARTEDIW;
-		if (ItemID == CoC.instance.consumables.BLADEFERN) HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONNOTSTARTEDBF;
-		outputText("Click to collect your "+IngrediantName+".");
-		addButton(0, "Collect", curry(recoverHerbLoot,ItemID)).hint("Click to collect your "+IngrediantName+".");
-	}
-
-	public function recoverHerbLoot(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot2,ItemID));
-	}
-	public function recoverHerbLoot2(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot3,ItemID));
-	}
-	public function recoverHerbLoot3(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot4,ItemID));
-	}
-	public function recoverHerbLoot4(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot5,ItemID));
-	}
-	public function recoverHerbLoot5(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,recoverHerbLoot6);
-	}
-	public function recoverHerbLoot6():void{
-		clearOutput();
-		outputText("Youve collected all of the ingrediants.");
-		doNext(Harvest, HarvestMoonScenes.harvestmoonstageHH >= 1, HarvestMoonScenes.harvestmoonstageMG >= 1, HarvestMoonScenes.harvestmoonstageSB >= 1, HarvestMoonScenes.harvestmoonstageIW >= 1, HarvestMoonScenes.harvestmoonstageBF >= 1);
-	}
 
 	private function HerbalismCraftItem(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
 		clearOutput();

@@ -18,6 +18,7 @@ import classes.Items.*;
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
@@ -373,6 +374,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (DriderTown.TyrantiaKidsEggsHatching > 1) DriderTown.TyrantiaKidsEggsHatching -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching1 > 1) DriderTown.TyrantiaKidsEggsHatching1 -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching2 > 1) DriderTown.TyrantiaKidsEggsHatching2 -= 1;
+			//Gardening
+			if (Garden.GardenSlot01Time > 0) Garden.GardenSlot01Time -= 1;
+			if (Garden.GardenSlot02Time > 0) Garden.GardenSlot02Time -= 1;
+			if (Garden.GardenSlot03Time > 0) Garden.GardenSlot03Time -= 1;
+			if (Garden.GardenSlot04Time > 0) Garden.GardenSlot04Time -= 1;
+			if (Garden.GardenSlot05Time > 0) Garden.GardenSlot05Time -= 1;
+			if (Garden.GardenSlot06Time > 0) Garden.GardenSlot06Time -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 				//Balls
@@ -2711,3 +2719,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
+
