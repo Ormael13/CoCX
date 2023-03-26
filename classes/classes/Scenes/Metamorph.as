@@ -5,9 +5,9 @@
 package classes.Scenes {
 	import classes.*;
 	import classes.GeneticMemories.VaginaCountMem;
-import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Areas.Ocean.Scylla;
-import classes.internals.SaveableState;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.Ocean.Scylla;
+	import classes.internals.SaveableState;
 	import classes.BodyParts.Hair;
 	import classes.BodyParts.Antennae;
 	import classes.BodyParts.Arms;

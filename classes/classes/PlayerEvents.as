@@ -381,6 +381,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (Garden.GardenSlot04Time > 0) Garden.GardenSlot04Time -= 1;
 			if (Garden.GardenSlot05Time > 0) Garden.GardenSlot05Time -= 1;
 			if (Garden.GardenSlot06Time > 0) Garden.GardenSlot06Time -= 1;
+			if (Garden.GardenSlot07Time > 0) Garden.GardenSlot07Time -= 1;
+			if (Garden.GardenSlot08Time > 0) Garden.GardenSlot08Time -= 1;
+			if (Garden.GardenSlot09Time > 0) Garden.GardenSlot09Time -= 1;
+			if (Garden.GardenSlot10Time > 0) Garden.GardenSlot10Time -= 1;
+			if (Garden.GardenSlot11Time > 0) Garden.GardenSlot11Time -= 1;
+			if (Garden.GardenSlot12Time > 0) Garden.GardenSlot12Time -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 				//Balls
@@ -2719,4 +2725,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-
+

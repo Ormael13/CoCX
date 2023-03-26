@@ -8,6 +8,7 @@ import classes.*;
 import classes.BaseContent;
 import classes.internals.SaveableState;
 import classes.Items.Consumables.SimpleConsumable;
+import classes.Scenes.SceneLib;
 
 	public class Garden extends BaseContent implements SaveableState
 	{
@@ -57,16 +58,22 @@ import classes.Items.Consumables.SimpleConsumable;
 		public static var IngrediantBagSlot10Cap:Number;//	???
 		public static var PotionsBagSlot01:Number;
 		public static var PotionsBagSlot01Cap:Number;
+		public static var PotionsBagSlot01Potion:String;
 		public static var PotionsBagSlot02:Number;
 		public static var PotionsBagSlot02Cap:Number;
+		public static var PotionsBagSlot02Potion:String;
 		public static var PotionsBagSlot03:Number;
 		public static var PotionsBagSlot03Cap:Number;
+		public static var PotionsBagSlot03Potion:String;
 		public static var PotionsBagSlot04:Number;
 		public static var PotionsBagSlot04Cap:Number;
+		public static var PotionsBagSlot04Potion:String;
 		public static var PotionsBagSlot05:Number;
 		public static var PotionsBagSlot05Cap:Number;
+		public static var PotionsBagSlot05Potion:String;
 		public static var PotionsBagSlot06:Number;
 		public static var PotionsBagSlot06Cap:Number;
+		public static var PotionsBagSlot06Potion:String;
 		public static var PotionsBagSlot07:Number;
 		public static var PotionsBagSlot07Cap:Number;
 		public static var PotionsBagSlot08:Number;
@@ -207,16 +214,22 @@ import classes.Items.Consumables.SimpleConsumable;
 			IngrediantBagSlot10Cap = 0;
 			PotionsBagSlot01 = 0;
 			PotionsBagSlot01Cap = 0;
+			PotionsBagSlot01Potion = "";
 			PotionsBagSlot02 = 0;
 			PotionsBagSlot02Cap = 0;
+			PotionsBagSlot02Potion = "";
 			PotionsBagSlot03 = 0;
 			PotionsBagSlot03Cap = 0;
+			PotionsBagSlot03Potion = "";
 			PotionsBagSlot04 = 0;
 			PotionsBagSlot04Cap = 0;
+			PotionsBagSlot04Potion = "";
 			PotionsBagSlot05 = 0;
 			PotionsBagSlot05Cap = 0;
+			PotionsBagSlot05Potion = "";
 			PotionsBagSlot06 = 0;
 			PotionsBagSlot06Cap = 0;
+			PotionsBagSlot06Potion = "";
 			PotionsBagSlot07 = 0;
 			PotionsBagSlot07Cap = 0;
 			PotionsBagSlot08 = 0;
@@ -355,16 +368,22 @@ import classes.Items.Consumables.SimpleConsumable;
 				"IngrediantBagSlot10Cap": IngrediantBagSlot10Cap,
 				"PotionsBagSlot01": PotionsBagSlot01,
 				"PotionsBagSlot01Cap": PotionsBagSlot01Cap,
+				"PotionsBagSlot01Potion": PotionsBagSlot01Potion,
 				"PotionsBagSlot02": PotionsBagSlot02,
 				"PotionsBagSlot02Cap": PotionsBagSlot02Cap,
+				"PotionsBagSlot02Potion": PotionsBagSlot02Potion,
 				"PotionsBagSlot03": PotionsBagSlot03,
 				"PotionsBagSlot03Cap": PotionsBagSlot03Cap,
+				"PotionsBagSlot03Potion": PotionsBagSlot03Potion,
 				"PotionsBagSlot04": PotionsBagSlot04,
 				"PotionsBagSlot04Cap": PotionsBagSlot04Cap,
+				"PotionsBagSlot04Potion": PotionsBagSlot04Potion,
 				"PotionsBagSlot05": PotionsBagSlot05,
 				"PotionsBagSlot05Cap": PotionsBagSlot05Cap,
+				"PotionsBagSlot05Potion": PotionsBagSlot05Potion,
 				"PotionsBagSlot06": PotionsBagSlot06,
 				"PotionsBagSlot06Cap": PotionsBagSlot06Cap,
+				"PotionsBagSlot06Potion": PotionsBagSlot06Potion,
 				"PotionsBagSlot07": PotionsBagSlot07,
 				"PotionsBagSlot07Cap": PotionsBagSlot07Cap,
 				"PotionsBagSlot08": PotionsBagSlot08,
@@ -504,16 +523,22 @@ import classes.Items.Consumables.SimpleConsumable;
 				IngrediantBagSlot10Cap = o["IngrediantBagSlot10Cap"];
 				PotionsBagSlot01 = o["PotionsBagSlot01"];
 				PotionsBagSlot01Cap = o["PotionsBagSlot01Cap"];
+				PotionsBagSlot01Potion = valueOr(o["PotionsBagSlot01Potion"], "");
 				PotionsBagSlot02 = o["PotionsBagSlot02"];
 				PotionsBagSlot02Cap = o["PotionsBagSlot02Cap"];
+				PotionsBagSlot02Potion = valueOr(o["PotionsBagSlot02Potion"], "");
 				PotionsBagSlot03 = o["PotionsBagSlot03"];
 				PotionsBagSlot03Cap = o["PotionsBagSlot03Cap"];
+				PotionsBagSlot03Potion = valueOr(o["PotionsBagSlot03Potion"], "");
 				PotionsBagSlot04 = o["PotionsBagSlot04"];
 				PotionsBagSlot04Cap = o["PotionsBagSlot04Cap"];
+				PotionsBagSlot04Potion = valueOr(o["PotionsBagSlot04Potion"], "");
 				PotionsBagSlot05 = o["PotionsBagSlot05"];
 				PotionsBagSlot05Cap = o["PotionsBagSlot05Cap"];
+				PotionsBagSlot05Potion = valueOr(o["PotionsBagSlot05Potion"], "");
 				PotionsBagSlot06 = o["PotionsBagSlot06"];
 				PotionsBagSlot06Cap = o["PotionsBagSlot06Cap"];
+				PotionsBagSlot06Potion = valueOr(o["PotionsBagSlot06Potion"], "");
 				PotionsBagSlot07 = o["PotionsBagSlot07"];
 				PotionsBagSlot07Cap = o["PotionsBagSlot07Cap"];
 				PotionsBagSlot08 = o["PotionsBagSlot08"];
@@ -669,6 +694,10 @@ import classes.Items.Consumables.SimpleConsumable;
 			if (IngrediantBagSlot05 >= IngrediantBagSlot05Cap) addButtonDisabled(4, "Blade fern", "You not have space to put in another blade fern.");
 			else addButton(4, "Blade fern", putInHerbIntoHerbBag, CoC.instance.consumables.BLADEFERN);
 		}
+		if (player.hasItem(consumables.RAUNENECT)) {
+			if (IngrediantBagSlot06 >= IngrediantBagSlot06Cap) addButtonDisabled(5, "Alraune nectar", "You not have space to put in another bottle of alraune nectar.");
+			else addButton(5, "Alraune nectar", putInHerbIntoHerbBag, CoC.instance.consumables.RAUNENECT);
+		}
 		addButton(14, "Back", accessGarden);
 	}
 	private function putInHerbIntoHerbBag(ItemID:SimpleConsumable):void {
@@ -680,6 +709,7 @@ import classes.Items.Consumables.SimpleConsumable;
 		if (ItemID == CoC.instance.consumables.SNAKEBANE) IngrediantBagSlot03++;
 		if (ItemID == CoC.instance.consumables.IRONWEED) IngrediantBagSlot04++;
 		if (ItemID == CoC.instance.consumables.BLADEFERN) IngrediantBagSlot05++;
+		if (ItemID == CoC.instance.consumables.RAUNENECT) IngrediantBagSlot06++;
 		doNext(putInHerbIntoHerbBag0);
 	}
 	
@@ -715,7 +745,6 @@ import classes.Items.Consumables.SimpleConsumable;
 		else addButton(4, "Blade fern", Seed1, 5).hint("Plant new seeds.");
 		addButton(14, "Back", accessGarden).hint("Go back to garden menu.");
 	}
-	
 	private function Seed1(Item:Number):void {
 		hideMenus();
 		clearOutput();
@@ -741,16 +770,30 @@ import classes.Items.Consumables.SimpleConsumable;
 			if (GardenSlot06 != "") addButtonDisabled(5, "-06-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
 			else addButton(5, "-06-", curry(Seed2, Item, 6));
 		}
+		if (player.farmingLevel >= 25) {
+			if (GardenSlot07 != "") addButtonDisabled(6, "-07-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(6, "-07-", curry(Seed2, Item, 7));
+		}
+		if (player.farmingLevel >= 30) {
+			if (GardenSlot08 != "") addButtonDisabled(7, "-08-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(7, "-08-", curry(Seed2, Item, 8));
+		}
+		if (player.farmingLevel >= 35) {
+			if (GardenSlot09 != "") addButtonDisabled(8, "-09-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(8, "-09-", curry(Seed2, Item, 9));
+		}
+		if (player.farmingLevel >= 40) {
+			if (GardenSlot10 != "") addButtonDisabled(9, "-10-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(9, "-10-", curry(Seed2, Item, 10));
+		}
 		addButton(14, "Back", Seed).hint("Go back to plot choice menu.");
 	}
-
 	private function Seed2(Item:Number, plot:Number):void {
 		hideMenus();
 		clearOutput();
 		outputText("Planting a new herb will consume one of your herb items, proceed anyway?");
 		doYesNo(curry(Seed3,Item,plot), Seed);
 	}
-
 	private function Seed3(Item:Number, plot:Number):void {
 		var herb:String = "";
 		if (Item == 1) herb = "healing herb";
@@ -842,7 +885,7 @@ import classes.Items.Consumables.SimpleConsumable;
 		player.farmXP(FE);
 		doNext(Seed);
 	}
-
+	
 	private function Harvest():void{
 		hideMenus();
 		clearOutput();
@@ -873,9 +916,24 @@ import classes.Items.Consumables.SimpleConsumable;
 			addButton(5, "-06-", Harvest2,GardenSlot06, 6).hint("Harvest your ingredients.");
 			if (GardenSlot06Time > 0) addButtonDisabled(5,"-06-","Your crops are still growing.");
 		}
+		if (GardenSlot07 != "") {
+			addButton(6, "-07-", Harvest2,GardenSlot07, 7).hint("Harvest your ingredients.");
+			if (GardenSlot07Time > 0) addButtonDisabled(6,"-07-","Your crops are still growing.");
+		}
+		if (GardenSlot08 != "") {
+			addButton(7, "-08-", Harvest2,GardenSlot08, 8).hint("Harvest your ingredients.");
+			if (GardenSlot08Time > 0) addButtonDisabled(7,"-08-","Your crops are still growing.");
+		}
+		if (GardenSlot09 != "") {
+			addButton(8, "-09-", Harvest2,GardenSlot09, 9).hint("Harvest your ingredients.");
+			if (GardenSlot09Time > 0) addButtonDisabled(8,"-09-","Your crops are still growing.");
+		}
+		if (GardenSlot10 != "") {
+			addButton(9, "-10-", Harvest2,GardenSlot10, 10).hint("Harvest your ingredients.");
+			if (GardenSlot10Time > 0) addButtonDisabled(9,"-10-","Your crops are still growing.");
+		}
 		addButton(14, "Back", accessGarden).hint("Go back to garden menu.")
 	}
-
 	public function Harvest2(IngredientName:String, plot:Number):void{
 		hideMenus();
 		clearOutput();
@@ -944,6 +1002,315 @@ import classes.Items.Consumables.SimpleConsumable;
 		FE *= player.FarmingMulti();
 		player.farmXP(FE);
 		doNext(Harvest);
+	}
+
+	private function canStoreCraftedPotions():Boolean {
+		return PotionsBagSlot01 < PotionsBagSlot01Cap && PotionsBagSlot02 < PotionsBagSlot02Cap && PotionsBagSlot03 < PotionsBagSlot03Cap&& PotionsBagSlot04 < PotionsBagSlot04Cap && PotionsBagSlot05 < PotionsBagSlot05Cap 
+		&& PotionsBagSlot06 < PotionsBagSlot06Cap;
+	}
+	public function herbalismMenu():void {
+		hideMenus();
+		clearOutput();
+		menu();
+		outputText("You move to Rathazul’s side alchemy equipment. Using these tools you can process raw natural materials into poultices and medicines.\n\nWhat would you like to craft?\n\n");
+		outputText("<b><u>Availlable potions:</u></b>\n");
+		if (PotionsBagSlot01Cap > 0) outputText("Slot 1 - "+(PotionsBagSlot01Potion == "" ? "EMPTY":""+PotionsBagSlot01Potion+" "+PotionsBagSlot01+" "+PotionsBagSlot01Cap+"")+"\n");
+		if (PotionsBagSlot02Cap > 0) outputText("Slot 2 - "+(PotionsBagSlot02Potion == "" ? "EMPTY":""+PotionsBagSlot02Potion+" "+PotionsBagSlot02+" "+PotionsBagSlot02Cap+"")+"\n");
+		if (PotionsBagSlot03Cap > 0) outputText("Slot 3 - "+(PotionsBagSlot03Potion == "" ? "EMPTY":""+PotionsBagSlot03Potion+" "+PotionsBagSlot03+" "+PotionsBagSlot03Cap+"")+"\n");
+		if (PotionsBagSlot04Cap > 0) outputText("Slot 4 - "+(PotionsBagSlot04Potion == "" ? "EMPTY":""+PotionsBagSlot04Potion+" "+PotionsBagSlot04+" "+PotionsBagSlot04Cap+"")+"\n");
+		if (PotionsBagSlot05Cap > 0) outputText("Slot 5 - "+(PotionsBagSlot05Potion == "" ? "EMPTY":""+PotionsBagSlot05Potion+" "+PotionsBagSlot05+" "+PotionsBagSlot05Cap+"")+"\n");
+		if (PotionsBagSlot06Cap > 0) outputText("Slot 6 - "+(PotionsBagSlot06Potion == "" ? "EMPTY":""+PotionsBagSlot06Potion+" "+PotionsBagSlot06+" "+PotionsBagSlot06Cap+"")+"\n");
+		//Poultrice
+		addButton(0, "Poultice", HerbalismCraftItem, 1, "healing herb", "Poultrice").hint("Craft a Poultrice using healing herb.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"")
+			.disableIf(IngrediantBagSlot01 == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"");
+		//Energy drink
+		addButton(1, "Energy drink", HerbalismCraftItem, 2, "moon grass", "Energy drink").hint("Craft a Energy drink using moon grass.\n\nMoon grass currently in Ingredient Bag "+IngrediantBagSlot02+"");
+		if (player.herbalismLevel < 2) button(1).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 2");
+		if (IngrediantBagSlot02 == 0) button(1).disable("You lack the ingrediants to craft this item. \n\nMoon grass currently in Ingredient Bag "+IngrediantBagSlot02+"");
+		//Cure
+		addButton(2, "Cure", HerbalismCraftItem, 3, "snakebane flower", "Cure").hint("Craft a Cure using snakebane flower.\n\nSnakebane flower currently in Ingredient Bag "+IngrediantBagSlot03+"");
+		if (player.herbalismLevel < 4) button(2).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 4");
+		if (IngrediantBagSlot03 == 0) button(2).disable("You lack the ingrediants to craft this item. \n\nSnakebane flower currently in Ingredient Bag "+IngrediantBagSlot03+"");
+		//Painkiller
+		addButton(3, "Painkiller", HerbalismCraftItem, 4, "ironweed", "Painkiller").hint("Craft a Painkiller using ironweed.\n\nIronweed currently in Ingredient Bag "+IngrediantBagSlot04+"");
+		if (player.herbalismLevel < 6) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 6");
+		if (IngrediantBagSlot04 == 0) button(3).disable("You lack the ingrediants to craft this item. \n\nIronweed currently in Ingredient Bag "+IngrediantBagSlot04+"");
+		//Stimulant
+		addButton(4, "Stimulant", HerbalismCraftItem, 5, "blade ferns", "Stimulant").hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently in Ingredient Bag "+IngrediantBagSlot05+"");
+		if (player.herbalismLevel < 8) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 8");
+		if (IngrediantBagSlot05 == 0) button(4).disable("You lack the ingrediants to craft this item. \n\nBlade ferns currently in Ingredient Bag "+IngrediantBagSlot05+"");
+		//Perfume
+		addButton(5, "Perfume", HerbalismCraftItem, 6, "alraune nectar", "Perfume").hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently in Ingredient Bag "+IngrediantBagSlot06+"");
+		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (IngrediantBagSlot06 == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently in Ingredient Bag "+IngrediantBagSlot06+"");
+		addButton(14, "Back", camp.campActions);
+	}
+	private function HerbalismCraftItem(Item:Number, IngrediantName:String, CraftingResult:String):void {
+		clearOutput();
+		menu();
+		outputText("Refine "+IngrediantName+" into a "+CraftingResult+"?");
+		addButton(0, "Craft (x1)", HerbalismCraftItem2, Item, IngrediantName, CraftingResult).disableIf(!canStoreCraftedPotions(), "You not have left any space to store crafted potion in your potions bag.");
+		addButton(1, "Craft (x5)", HerbalismCraftItem3, Item, IngrediantName, CraftingResult).disableIf(!canStoreCraftedPotions(), "You not have left any space to store crafted potion in your potions bag.");
+		addButton(2, "Cancel", herbalismMenu);
+	}
+	private function HerbalismCraftItem2(Item:Number, IngrediantName:String, CraftingResult:String):void {
+		clearOutput();
+		outputText("In which slot you want to store crafted potion?");
+		menu();
+		addButton(0, "-01-", HerbalismCraftItem2a, Item, 1, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
+			.disableIf(PotionsBagSlot01Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+		addButton(1, "-02-", HerbalismCraftItem2a, Item, 2, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
+			.disableIf(PotionsBagSlot02Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+		addButton(2, "-03-", HerbalismCraftItem2a, Item, 3, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
+			.disableIf(PotionsBagSlot03Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+		addButton(3, "-04-", HerbalismCraftItem2a, Item, 4, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
+			.disableIf(PotionsBagSlot04Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+		addButton(4, "-05-", HerbalismCraftItem2a, Item, 5, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
+			.disableIf(PotionsBagSlot05Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+		addButton(5, "-06-", HerbalismCraftItem2a, Item, 6, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
+			.disableIf(PotionsBagSlot06Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+		addButton(14, "Back", HerbalismCraftItem);
+	}
+	private function HerbalismCraftItem2a(Item:Number, Item2:Number, CraftingResult:String):void {
+		var Ingredient:String = "";
+		var count:Number = 1;
+		switch (Item) {
+			case 1:
+				IngrediantBagSlot01 -= 1;
+				Ingredient = "healing herb";
+				break;
+			case 2:
+				IngrediantBagSlot02 -= 1;
+				Ingredient = "moon grass";
+				break;
+			case 3:
+				IngrediantBagSlot03 -= 1;
+				Ingredient = "snakebane flower";
+				break;
+			case 4:
+				IngrediantBagSlot04 -= 1;
+				Ingredient = "ironweed";
+				break;
+			case 5:
+				IngrediantBagSlot05 -= 1;
+				Ingredient = "blade ferns";
+				break;
+			case 6:
+				IngrediantBagSlot06 -= 1;
+				Ingredient = "alraune nectar";
+				break;
+			default:
+				IngrediantBagSlot01 -= 1;
+				Ingredient = "healing herb";
+		}
+		outputText("You spend the better part of the next hour refining the "+Ingredient+" into a "+CraftingResult+" adding it to your potion bag.");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
+			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal " + CraftingResult + ".");
+			count *= 3;
+		}
+		var HE:Number = 20 + player.level;
+		HE *= player.HerbalismMulti();
+		player.herbXP(HE);
+		doNext(HerbalismCraftItem4, Item, Item2, count);
+	}
+	private function HerbalismCraftItem3(Item:Number, IngrediantName:String, CraftingResult:String):void {
+		clearOutput();
+		outputText("In which slot you want to store crafted potion?");
+		menu();
+		addButton(0, "-01-", HerbalismCraftItem3a, Item, 1, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
+			.disableIf(PotionsBagSlot01Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+		addButton(1, "-02-", HerbalismCraftItem3a, Item, 2, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
+			.disableIf(PotionsBagSlot02Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+		addButton(2, "-03-", HerbalismCraftItem3a, Item, 3, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
+			.disableIf(PotionsBagSlot03Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+		addButton(3, "-04-", HerbalismCraftItem3a, Item, 4, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
+			.disableIf(PotionsBagSlot04Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+		addButton(4, "-05-", HerbalismCraftItem3a, Item, 5, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
+			.disableIf(PotionsBagSlot05Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+		addButton(5, "-06-", HerbalismCraftItem3a, Item, 6, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
+			.disableIf(PotionsBagSlot06Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+		addButton(14, "Back", HerbalismCraftItem);
+	}
+	private function HerbalismCraftItem3a(Item:Number, Item2:Number, CraftingResult:String):void {
+		var Ingredient:String = "";
+		var count:Number = 1;
+		switch (Item) {
+			case 1:
+				IngrediantBagSlot01 -= 1;
+				Ingredient = "healing herb";
+				break;
+			case 2:
+				IngrediantBagSlot02 -= 1;
+				Ingredient = "moon grass";
+				break;
+			case 3:
+				IngrediantBagSlot03 -= 1;
+				Ingredient = "snakebane flower";
+				break;
+			case 4:
+				IngrediantBagSlot04 -= 1;
+				Ingredient = "ironweed";
+				break;
+			case 5:
+				IngrediantBagSlot05 -= 1;
+				Ingredient = "blade ferns";
+				break;
+			case 6:
+				IngrediantBagSlot06 -= 1;
+				Ingredient = "alraune nectar";
+				break;
+			default:
+				IngrediantBagSlot01 -= 1;
+				Ingredient = "healing herb";
+		}
+		var HE:Number = (20 + player.level)*count;
+		HE *= player.HerbalismMulti();
+		player.herbXP(HE);
+		outputText("You spend the better part of the next hour refining the "+Ingredient+" into multiple "+CraftingResult+" adding them to your bag.");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
+			outputText("Your natural knowledge of herbalism allowed you to craft thrice as many "+CraftingResult+".");
+			count *= 3;
+		}
+		doNext(HerbalismCraftItem4, Item, Item2, count);
+	}
+	private function HerbalismCraftItem4(Item:Number, Item2:Number, count:Number):void {
+		var resultName:String = "";
+		switch (Item) {
+			case 1:
+				resultName = "Poultrice";
+				break;
+			case 2:
+				resultName = "Energy drink";
+				break;
+			case 3:
+				resultName = "Cure";
+				break;
+			case 4:
+				resultName = "Painkiller";
+				break;
+			case 5:
+				resultName = "Stimulant";
+				break;
+			case 6:
+				resultName = "Perfume";
+				break;
+			default:
+				resultName = "Poultrice";
+		}
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) count *= 3;
+		switch (Item2) {
+			case 1:
+				PotionsBagSlot01 += count;
+				if (PotionsBagSlot01Potion == "") PotionsBagSlot01Potion = resultName;
+				break;
+			case 2:
+				PotionsBagSlot02 += count;
+				if (PotionsBagSlot02Potion == "") PotionsBagSlot02Potion = resultName;
+				break;
+			case 3:
+				PotionsBagSlot03 += count;
+				if (PotionsBagSlot03Potion == "") PotionsBagSlot03Potion = resultName;
+				break;
+			case 4:
+				PotionsBagSlot04 += count;
+				if (PotionsBagSlot04Potion == "") PotionsBagSlot04Potion = resultName;
+				break;
+			case 5:
+				PotionsBagSlot05 += count;
+				if (PotionsBagSlot05Potion == "") PotionsBagSlot05Potion = resultName;
+				break;
+			case 6:
+				PotionsBagSlot06 += count;
+				if (PotionsBagSlot06Potion == "") PotionsBagSlot06Potion = resultName;
+				break;
+			default:
+				PotionsBagSlot01 += count;
+		}
+		doNext(HerbalismCraftItem);
+	}
+	
+	public function justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat():void {
+		if ((IngrediantBagSlot01Cap == 3 || PotionsBagSlot01Cap == 3) && player.gems >= 150) {
+			clearOutput();
+			if (IngrediantBagSlot01Cap == 3 && player.gems >= 150) {
+				outputText("Ingredients Bag Expansion COMPLETED!!!\n\n");
+				player.gems -= 150;
+				IngrediantBagSlot01Cap = 5;
+				IngrediantBagSlot02Cap = 5;
+				IngrediantBagSlot03Cap = 5;
+				IngrediantBagSlot04Cap = 5;
+				IngrediantBagSlot05Cap = 5;
+				IngrediantBagSlot06Cap = 5;
+			}
+			if (PotionsBagSlot01Cap == 3 && player.gems >= 150) {
+				outputText("Potions Bag Expansion COMPLETED!!!");
+				player.gems -= 150;
+				PotionsBagSlot01Cap = 5;
+				PotionsBagSlot02Cap = 5;
+				PotionsBagSlot03Cap = 5;
+				PotionsBagSlot04Cap = 5;
+				PotionsBagSlot05Cap = 5;
+				PotionsBagSlot06Cap = 5;
+			}
+		}
+		doNext(camp.campActions);
+	}
+
+	public function PotionMenu(page:int = 1):void {
+		hideMenus();
+		hideUpDown();
+		clearOutput();
+		EngineCore.displayHeader("Potions");
+		outputText("<b><u>Availlable potions:</u></b>\n");
+		if (PotionsBagSlot01Cap > 0) outputText("Slot 1 - "+(PotionsBagSlot01Potion == "" ? "EMPTY":""+PotionsBagSlot01Potion+" "+PotionsBagSlot01+" "+PotionsBagSlot01Cap+"")+"\n");
+		if (PotionsBagSlot02Cap > 0) outputText("Slot 2 - "+(PotionsBagSlot02Potion == "" ? "EMPTY":""+PotionsBagSlot02Potion+" "+PotionsBagSlot02+" "+PotionsBagSlot02Cap+"")+"\n");
+		if (PotionsBagSlot03Cap > 0) outputText("Slot 3 - "+(PotionsBagSlot03Potion == "" ? "EMPTY":""+PotionsBagSlot03Potion+" "+PotionsBagSlot03+" "+PotionsBagSlot03Cap+"")+"\n");
+		if (PotionsBagSlot04Cap > 0) outputText("Slot 4 - "+(PotionsBagSlot04Potion == "" ? "EMPTY":""+PotionsBagSlot04Potion+" "+PotionsBagSlot04+" "+PotionsBagSlot04Cap+"")+"\n");
+		if (PotionsBagSlot05Cap > 0) outputText("Slot 5 - "+(PotionsBagSlot05Potion == "" ? "EMPTY":""+PotionsBagSlot05Potion+" "+PotionsBagSlot05+" "+PotionsBagSlot05Cap+"")+"\n");
+		if (PotionsBagSlot06Cap > 0) outputText("Slot 6 - "+(PotionsBagSlot06Potion == "" ? "EMPTY":""+PotionsBagSlot06Potion+" "+PotionsBagSlot06+" "+PotionsBagSlot06Cap+"")+"\n");
+		outputText("\n\nPotion Effects:");
+		outputText("\nPoultice - Apply a healing salve to your wounds in order to recover health");
+		outputText("\nEnergy drink - Use an energy drink to recover your ressources");
+		outputText("\nCure - Negate status ailments");
+		outputText("\nPainkiller - Greatly reduce damage taken");
+		outputText("\nStimulant - Increase physical attack power");
+		outputText("\nPerfume - Empower teases throught scent components");
+		outputText("\n\nWhich item will you use?");
+		menu();
+		if (PotionsBagSlot01 > 0) addButton(0, ""+PotionsBagSlot01Potion+"", PotionMenuUse, PotionsBagSlot01Potion);
+		if (PotionsBagSlot02 > 0) addButton(1, ""+PotionsBagSlot02Potion+"", PotionMenuUse, PotionsBagSlot02Potion);
+		if (PotionsBagSlot03 > 0) addButton(2, ""+PotionsBagSlot03Potion+"", PotionMenuUse, PotionsBagSlot03Potion);
+		if (PotionsBagSlot04 > 0) addButton(3, ""+PotionsBagSlot04Potion+"", PotionMenuUse, PotionsBagSlot04Potion);
+		if (PotionsBagSlot05 > 0) addButton(4, ""+PotionsBagSlot05Potion+"", PotionMenuUse, PotionsBagSlot05Potion);
+		if (PotionsBagSlot06 > 0) addButton(5, ""+PotionsBagSlot06Potion+"", PotionMenuUse, PotionsBagSlot06Potion);
+		addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
+	}
+	
+	private function PotionMenuUse(potion:String):void {
+		switch (potion) {
+			case "Poultrice":
+				SceneLib.combat.Poultice();
+				break;
+			case "Energy drink":
+				SceneLib.combat.EnergyDrink();
+				break;
+			case "Cure":
+				SceneLib.combat.Cure();
+				break;
+			case "Painkiller":
+				SceneLib.combat.Painkiller();
+				break;
+			case "Stimulant":
+				SceneLib.combat.Stimulant();
+				break;
+			case "Perfume":
+				SceneLib.combat.Perfume();
+				break;
+			default:
+				SceneLib.combat.Poultice();
+				break;
+		}
+		doNext(playerMenu);
 	}
 
 	}
