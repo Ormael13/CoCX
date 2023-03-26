@@ -5924,8 +5924,8 @@ use namespace CoC;
 
 		public function maxFarmingLevel():Number {
 			var maxLevel:Number = 2;
-			if (level < 28) maxLevel += level;
-			else maxLevel += 28;
+			if (level < 48) maxLevel += level;
+			else maxLevel += 48;
 			return maxLevel;
 		}
 		public function FarmExpToLevelUp():Number {
@@ -5964,12 +5964,12 @@ use namespace CoC;
 		}
 
 		public function FarmingMulti():Number {
-			var herbMlt:Number = 1;
-			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) herbMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			var farmMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) farmMlt += perkv1(IMutationsLib.HumanVersatilityIM);
 			//if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
 			//if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
-			//if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
-			return herbMlt;
+			if (hasKeyItem("Tel'Adre Magazine Issue 8") >= 0) farmMlt *= 2;
+			return farmMlt;
 		}
 
 		public function maxHerbalismLevel():Number {

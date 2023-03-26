@@ -116,11 +116,11 @@ public class Changelog extends BaseContent
 			outputText("-Ascension perk to increase internal mutation slots would increase adaptation slots capacity by 2 not 1.\n");
 			outputText("-New mutation perk: Human Versatility. Req. having free adaptation mutation slot, human race (17+). Effects: Mastery gains increased by 1 point or in case of multtiplier +1 to multiplier.\n");
 			outputText("-Added to Giacomo offer Herbs / Potions (Lowest grade) Bags. Both cost 300 gems and have 6 slots for items (herbs or potions) with stack size of 5.\n");
-			outputText("-Added Farming mastery. Max lvl is 40 and increase by 1 each lvl until 38. Each 5 levels it would enable to use another garden plot and decrease farming time by 12 hours.\n");
+			outputText("-Added Farming mastery. Max lvl is 50 and increase by 1 each lvl until 48. Each 5 levels it would enable to use another garden plot and decrease farming time by 12 hours.\n");
 			outputText("-Garden was bit changed: It been moved out of Herbalism menu and req. bought herb bag of any size to access. Starting with 2 plots usable for any type of herb seed planted. Farming exp is gained at the moment of planting and harvesting.\n");
 			outputText("-One of Luna scenes fix (Jtecx)\n");
 			outputText("-Herbalism was bit changed: Instead of limitless potions bag it now hav limited slots and size of stack. But... it not super strict on caps when crafting so even if PC had left 1 potion slot left and craft more than 1 potion it will still be put in. Still until bag slot drop below the cap will be impossible to put any new potions in that slot.\n");
-			outputText("-\n");
+			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 8 - Increase 2x Farming EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New tier   lvl-up perk: . Req. . Effect: .

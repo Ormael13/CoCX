@@ -786,6 +786,14 @@ import classes.Scenes.SceneLib;
 			if (GardenSlot10 != "") addButtonDisabled(9, "-10-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
 			else addButton(9, "-10-", curry(Seed2, Item, 10));
 		}
+		if (player.farmingLevel >= 45) {
+			if (GardenSlot11 != "") addButtonDisabled(10, "-11-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(10, "-11-", curry(Seed2, Item, 11));
+		}
+		if (player.farmingLevel >= 50) {
+			if (GardenSlot12 != "") addButtonDisabled(11, "-12-", "This plot is already occupied. Wait until the crops are ready for harvest to plant anything here.");
+			else addButton(11, "-12-", curry(Seed2, Item, 12));
+		}
 		addButton(14, "Back", Seed).hint("Go back to plot choice menu.");
 	}
 	private function Seed2(Item:Number, plot:Number):void {
@@ -932,6 +940,14 @@ import classes.Scenes.SceneLib;
 			addButton(9, "-10-", Harvest2,GardenSlot10, 10).hint("Harvest your ingredients.");
 			if (GardenSlot10Time > 0) addButtonDisabled(9,"-10-","Your crops are still growing.");
 		}
+		if (GardenSlot11 != "") {
+			addButton(10, "-11-", Harvest2,GardenSlot11, 11).hint("Harvest your ingredients.");
+			if (GardenSlot11Time > 0) addButtonDisabled(10,"-11-","Your crops are still growing.");
+		}
+		if (GardenSlot12 != "") {
+			addButton(11, "-12-", Harvest2,GardenSlot12, 12).hint("Harvest your ingredients.");
+			if (GardenSlot12Time > 0) addButtonDisabled(11,"-12-","Your crops are still growing.");
+		}
 		addButton(14, "Back", accessGarden).hint("Go back to garden menu.")
 	}
 	public function Harvest2(IngredientName:String, plot:Number):void{
@@ -1058,18 +1074,18 @@ import classes.Scenes.SceneLib;
 		outputText("In which slot you want to store crafted potion?");
 		menu();
 		addButton(0, "-01-", HerbalismCraftItem2a, Item, 1, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf(PotionsBagSlot01Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+			.disableIf((PotionsBagSlot01Potion != CraftingResult && PotionsBagSlot01Potion != ""), "You already keep different type of the potion in this slot.");
 		addButton(1, "-02-", HerbalismCraftItem2a, Item, 2, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf(PotionsBagSlot02Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+			.disableIf((PotionsBagSlot02Potion != CraftingResult && PotionsBagSlot02Potion != ""), "You already keep different type of the potion in this slot.");
 		addButton(2, "-03-", HerbalismCraftItem2a, Item, 3, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf(PotionsBagSlot03Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+			.disableIf((PotionsBagSlot03Potion != CraftingResult && PotionsBagSlot03Potion != ""), "You already keep different type of the potion in this slot.");
 		addButton(3, "-04-", HerbalismCraftItem2a, Item, 4, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf(PotionsBagSlot04Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+			.disableIf((PotionsBagSlot04Potion != CraftingResult && PotionsBagSlot04Potion != ""), "You already keep different type of the potion in this slot.");
 		addButton(4, "-05-", HerbalismCraftItem2a, Item, 5, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf(PotionsBagSlot05Potion != CraftingResult, "You already keep different type of the potion in this slot.");
+			.disableIf((PotionsBagSlot05Potion != CraftingResult && PotionsBagSlot05Potion != ""), "You already keep different type of the potion in this slot.");
 		addButton(5, "-06-", HerbalismCraftItem2a, Item, 6, CraftingResult).hint("Put crafted potion in first slot of potions bag.")
-			.disableIf(PotionsBagSlot06Potion != CraftingResult, "You already keep different type of the potion in this slot.");
-		addButton(14, "Back", HerbalismCraftItem);
+			.disableIf((PotionsBagSlot06Potion != CraftingResult && PotionsBagSlot06Potion != ""), "You already keep different type of the potion in this slot.");
+		addButton(14, "Back", herbalismMenu);
 	}
 	private function HerbalismCraftItem2a(Item:Number, Item2:Number, CraftingResult:String):void {
 		var Ingredient:String = "";
@@ -1118,18 +1134,18 @@ import classes.Scenes.SceneLib;
 		outputText("In which slot you want to store crafted potion?");
 		menu();
 		addButton(0, "-01-", HerbalismCraftItem3a, Item, 1, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
-			.disableIf(PotionsBagSlot01Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+			.disableIf((PotionsBagSlot01Potion != CraftingResult && PotionsBagSlot01Potion != ""), "You already keep different type of the potions in this slot.");
 		addButton(1, "-02-", HerbalismCraftItem3a, Item, 2, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
-			.disableIf(PotionsBagSlot02Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+			.disableIf((PotionsBagSlot02Potion != CraftingResult && PotionsBagSlot02Potion != ""), "You already keep different type of the potions in this slot.");
 		addButton(2, "-03-", HerbalismCraftItem3a, Item, 3, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
-			.disableIf(PotionsBagSlot03Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+			.disableIf((PotionsBagSlot03Potion != CraftingResult && PotionsBagSlot03Potion != ""), "You already keep different type of the potions in this slot.");
 		addButton(3, "-04-", HerbalismCraftItem3a, Item, 4, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
-			.disableIf(PotionsBagSlot04Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+			.disableIf((PotionsBagSlot04Potion != CraftingResult && PotionsBagSlot04Potion != ""), "You already keep different type of the potions in this slot.");
 		addButton(4, "-05-", HerbalismCraftItem3a, Item, 5, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
-			.disableIf(PotionsBagSlot05Potion != CraftingResult, "You already keep different type of the potions in this slot.");
+			.disableIf((PotionsBagSlot05Potion != CraftingResult && PotionsBagSlot05Potion != ""), "You already keep different type of the potions in this slot.");
 		addButton(5, "-06-", HerbalismCraftItem3a, Item, 6, CraftingResult).hint("Put crafted potions in first slot of potions bag.")
-			.disableIf(PotionsBagSlot06Potion != CraftingResult, "You already keep different type of the potions in this slot.");
-		addButton(14, "Back", HerbalismCraftItem);
+			.disableIf((PotionsBagSlot06Potion != CraftingResult && PotionsBagSlot06Potion != ""), "You already keep different type of the potions in this slot.");
+		addButton(14, "Back", herbalismMenu);
 	}
 	private function HerbalismCraftItem3a(Item:Number, Item2:Number, CraftingResult:String):void {
 		var Ingredient:String = "";
