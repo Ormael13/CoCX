@@ -79,6 +79,7 @@ public class TestMenu extends BaseContent
 		bd.add("DebugMenu", SceneLib.debugMenu.accessDebugMenu, "The older debug menu. Who knows what it hides?");
 		bd.add("Bugfixes", cheatBugfixes, "Buttons or fixing some rare old bugs that can't be fixd with save-updater.");
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
+		bd.add("Bags expansion", SceneLib.garden.justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat, "Expand the bags. (If you not own any of them will not have any effect)");
 		submenu(bd, playerMenu, 0, false);
 	}
 

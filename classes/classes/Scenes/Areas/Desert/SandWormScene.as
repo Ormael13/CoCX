@@ -14,7 +14,6 @@ public class SandWormScene extends BaseContent
 	public function SandWormEncounter():void {
 		clearOutput();
 		outputText("While exploring the desert, the ground around you begins to quake. A large mound of sand is heading straight for you. You begin running in the opposite direction but the thing quickly catches up to you and leaps out of the sand, its looming shadow covering your own just before you dodge to the side, avoiding the crashing giant chitinous body that lands in where you were moments before and rapidly digging back underground again. A second later and its head and massive circular maw surges out of the sand again, staring at you before screeching loudly, sending strands of green fluid flying which smokes when making contact with the ground. <b>It's a sandworm, one of the desert's scariest residents and it's clearly going for you!</b>[pg]");
-
 		startCombat(new SandWorm());
 		doNext(playerMenu);
 	}
@@ -25,10 +24,8 @@ public class SandWormScene extends BaseContent
 			loseAsTallPerson();
 			return;
 		}
-
 		if (!player.hasStatusEffect(StatusEffects.Devoured))
 			getSwallowed();
-
 		if (player.hasCock())
 			loseAsMale();
 		else loseAsFemale();
@@ -38,7 +35,6 @@ public class SandWormScene extends BaseContent
 		outputText("As you fall over to the ground defeated, the sand worm looms over you. Well clearly you just wouldn't fit in that gaping mouth of his so it can't exactly eat you. To your absolute surprise instead a tiny human sized pink woman slides out of its mouth and starts yelling angrily at you.[pg]");
 		outputText("\"<i>My territory you biggy no welcome you leave! You're scaring away mates!</i>\"[pg]");
 		outputText("You do try and clear the misunderstanding but the not so bright pink woman does not seem to care for your reasoning. In an effort to kick you out she begins to push your prone form across the desert. A few minutes later you're at the limit of her territory and she digs back underground heading back to whence she came. Beaten up you head back to camp.[pg]");
-
 		cleanupAfterCombat();
 	}
 
@@ -54,11 +50,11 @@ public class SandWormScene extends BaseContent
 		outputText("Unsurprisingly, for an invertebrate, she's clearly not the brightest tool in the shed, more a creature of extinct then reason but she seems to only be after your seed. Well, still better than getting digested by her. You accept to mate with her so long as she lets you free after.[pg]");
 		outputText("\"<i>Sure, now we mate!</i>\"[pg]");
 		outputText("Before you can say anything, she is already crawling toward you. The tentacles did short work on pulling you out of your gear, and now the sand worm is more than ready to take you in. She parts a few tentacles away, revealing a somewhat human looking pussy before wrapping her arms around your shoulder.[pg]");
-		outputText("Her hand roams around your body briefly, getting a feel of you before she leans closer, pulling toward her and guiding your dick in her. While you're already immobilized, stuck into the flora of her fleshy tentacles, the worm tongue-like appendage proceeds and slowly milk you of your semen. It would be rather pleasant if you didn't have the knowledge of having sex in the depth of some giant monster body while being covered in aphrodisiac clothes dissolving fluids! (if the pc was wearing underwear) Heck your underwear are already in ruin whatever is left of them you won't be able to use anymore!(end of cut destroys pc underwear) The pressuire builds up within your lons as an incoming climax forces you back to reality. You unleash rope after rope of your seed into the greedy girl.[pg]");
+		outputText("Her hand roams around your body briefly, getting a feel of you before she leans closer, pulling toward her and guiding your dick in her. While you're already immobilized, stuck into the flora of her fleshy tentacles, the worm tongue-like appendage proceeds and slowly milk you of your semen. It would be rather pleasant if you didn't have the knowledge of having sex in the depth of some giant monster body while being covered in aphrodisiac clothes dissolving fluids!"+(!player.lowerGarment.isNothing ? " Heck your underwear are already in ruin whatever is left of them you won't be able to use anymore!":"")+" The pressuire builds up within your lons as an incoming climax forces you back to reality. You unleash rope after rope of your seed into the greedy girl.[pg]");
 		outputText("\"<i>Fair, fair me happy, you free… Go.</i>\"[pg]");
 		outputText("A second later, you see the bright light of the sun as you are expelled from the worm's body, left hanging in the middle of the desert. The pink girl waves you off before digging back underground to do whatever those sex crazed invertebrates do once they finish mating. You, on the other hand, are exhausted by the session and need to return back to camp to recover.[pg]");
+		if (!player.lowerGarment.isNothing) player.lowerGarment.name == "nothing";
 		player.sexReward("vaginalFluid", "Dick");
-
 		cleanupAfterCombat();
 	}
 
@@ -73,7 +69,6 @@ public class SandWormScene extends BaseContent
 		outputText("When you open your eyes, you see outside and inside at the same time, a weird experience that leaves you dazed and confused for a moment as your mind catches up with the feedback. A brief analysis of your body reveals two things, first you indeed are still within the worm, and second, you now are this very worm. Your upper body has merged with that of the giant invertebrate, becoming the tongue within its mouth. While the change seems to have greatly diminished your ability to think rationally beyond your irrepressible desire to mate, you are very much in control of this combined body. Every curve of the beast's titanic coils obeying your thoughts. With this kind of power you feel like you could wake to a demon army, beat them up and force them into mating you… wait that's not right.[pg]");
 		outputText("Something here definitely is very messed up but you can't exactly pinpoint what.[pg]");
 		outputText("Reproducing is your life purpose after all, and defeating the demons is how you will safeguard your eggs. Not too sure about what is going on here, you just decide to head back to camp.[pg]");
-
 		transformations.HairDripping.applyEffect(false);
 		transformations.HairChangeColor(["pink"]).applyEffect(false);
 		transformations.FaceHuman.applyEffect(false);
@@ -95,11 +90,9 @@ public class SandWormScene extends BaseContent
 		player.tallness = 11*12
 		transformations.LowerBodyWorm.applyEffect(false);
 		player.skin.setBaseOnly({ type: Skin.PLAIN, color1:"light pink", adj: "slippery" });
-
 		IMutationsLib.TrachealSystemIM.trueMutation = true;
 		IMutationsLib.TwinHeartIM.trueMutation = true;
 		player.removeAllRacialMutation();
-
 		outputText("Gained combat ability: <b>Dig</b>\n\n");
 		outputText("Gained combat ability: <b>Swallow Whole</b>:  Leap out of the ground and attempt to swallow your enemy whole for sticky pleasure time.\n\n");
 		outputText("Gained combat ability: <b>Devastating Bite</b>: Strike for massive the damage as a bite natural weapon.\n\n");
@@ -114,7 +107,6 @@ public class SandWormScene extends BaseContent
 	public function transformationImmune():void {
 		outputText("The sandworm sddenly spits you out and you watch with increasing confusion as it suddenly dives into the sands before you pass out.\n\n");
 		player.sexReward("none", "Vaginal");
-
 		cleanupAfterCombat();
 	}
 

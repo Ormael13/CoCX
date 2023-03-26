@@ -79,6 +79,7 @@ public class HumanRace extends Race {
 		addMutation(IMutationsLib.HumanParathyroidGlandIM);
 		addMutation(IMutationsLib.HumanTesticlesIM);
 		addMutation(IMutationsLib.HumanThyroidGlandIM);
+		addMutation(IMutationsLib.HumanVersatilityIM);
 		
 		tiers.push(new HumanRaceTier(1, maxScore-9, "Human"));
 		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human"));

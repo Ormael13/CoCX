@@ -76,6 +76,7 @@ public class IMutationsLib
 		public static const HumanParathyroidGlandIM:IMutationPerkType = new HumanParathyroidGlandMutation();
 		public static const HumanTesticlesIM:IMutationPerkType = new HumanTesticlesMutation();
 		public static const HumanThyroidGlandIM:IMutationPerkType = new HumanThyroidGlandMutation();
+		public static const HumanVersatilityIM:IMutationPerkType = new HumanVersatilityMutation();
 		public static const KitsuneParathyroidGlandsIM:IMutationPerkType = new KitsuneParathyroidGlandMutation();
 		public static const KitsuneThyroidGlandIM:IMutationPerkType = new KitsuneThyroidGlandMutation();
 		public static const LactaBovinaOvariesIM:IMutationPerkType = new LactaBovinaOvariesMutation();

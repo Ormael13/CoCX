@@ -256,8 +256,7 @@ import classes.Scenes.SceneLib;
 			if (minedStones > (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()))) minedStones = (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()));
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
 			incrementStoneSupply(minedStones);
-			var mineEXP:Number = 1;
-			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineEXP *= 2;
+			var mineEXP:Number = player.MiningMulti();
 			player.mineXP(mineEXP);
 			if (rand(10) == 0) {
 				var gemsMined:Number = 1 + rand(1+player.miningLevel);

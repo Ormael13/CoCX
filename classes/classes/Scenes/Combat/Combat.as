@@ -6013,7 +6013,7 @@ public class Combat extends BaseContent {
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						}
 					}
-                    else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+                    else if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && !player.isUnarmedCombat()) {
 						doPhysicalDamage(damage, true, true);
                         doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6041,13 +6041,17 @@ public class Combat extends BaseContent {
                     }
 					else if (player.isUnarmedCombat()) {
 						doPhysicalDamage(damage, true, true);
+						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						doPhysicalDamage(damage, true, true);
+						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						if (player.playerHasFourArms()) {
 							doPhysicalDamage(damage, true, true);
+							if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 							doPhysicalDamage(damage, true, true);
+							if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 						}
 					}
@@ -8454,7 +8458,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
-        if (display) CommasForDigits(damage, false, "", "poison");
+        if (display) CommasForDigits(damage, false, "", "acid");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -11864,8 +11868,10 @@ public class Combat extends BaseContent {
     }
 
     public function teaseXP(XP:Number = 0):void {
-        if (player.armor == armors.SCANSC) player.SexXP(XP);
-        player.SexXP(XP);
+		var teaseEXPgogo:Number = XP;
+        if (player.armor == armors.SCANSC) teaseEXPgogo += 1;
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.racialScore(Races.HUMAN) > 17) teaseEXPgogo += player.perkv1(IMutationsLib.HumanVersatilityIM);
+        player.SexXP(teaseEXPgogo);
     }
 
 	private function weaponmasteryXPMulti():Number {
@@ -11874,6 +11880,7 @@ public class Combat extends BaseContent {
 			multi += 1;
 			if (player.isPureHuman()) multi += 1;
 		}
+		if (player.hasMutation(IMutationsLib.HumanVersatilityIM) && player.racialScore(Races.HUMAN) > 17) multi += player.perkv1(IMutationsLib.HumanVersatilityIM);
         return multi;
 	}
 
