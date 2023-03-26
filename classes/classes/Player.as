@@ -137,7 +137,8 @@ use namespace CoC;
         /*20*/	{combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
         /*21*/	{combat: "Massive", 	level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Massive</b>"},
         /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"},
-        /*23*/	{combat: "Unarmed", 	level:0, experience:0, melee: true, desc:"<b>Dao of Fists</b>"}
+        /*23*/	{combat: "Unarmed", 	level:0, experience:0, melee: true, desc:"<b>Dao of Fists</b>"},
+        /*24*/	{combat: "DualMassive", level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Massive</b>"}
 		];
 
         public function initCombatMastery():void{
@@ -160,6 +161,10 @@ use namespace CoC;
 		//Mining attributes
 		public var miningLevel:Number = 0;
 		public var miningXP:Number = 0;
+		
+		//Farming attributes
+		public var farmingLevel:Number = 0;
+		public var farmingXP:Number = 0;
 		
 		//Herbalism attributes
 		public var herbalismLevel:Number = 0;
@@ -719,6 +724,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) armorDef += (1 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) armorDef += (2 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) armorDef += (12 * newGamePlusMod);
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) armorDef += (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
 				if (hasKeyItem("Powboy") >= 0) {
@@ -918,6 +924,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) armorMDef += (1 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) armorMDef += (2 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) armorMDef += (12 * newGamePlusMod);
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) armorMDef += (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
 				if (hasKeyItem("Powboy") >= 0) {
@@ -1032,12 +1039,12 @@ use namespace CoC;
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") &&!weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
+			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") && !weaponSpecials("Dual Massive") && !weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
 		}
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
+			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
@@ -2407,6 +2414,8 @@ use namespace CoC;
 			if(hasPerk(PerkLib.Pope)) lust -= 5;
 			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 2) lust -= 5;
 			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2) lust -= 5;
+			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanOvariesIM));
+			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanTesticlesIM));
 			if((hasPerk(PerkLib.UnicornBlessing) && cor <= 20) || (hasPerk(PerkLib.BicornBlessing) && cor >= 80)) lust -= 10;
 			if(hasPerk(PerkLib.ChiReflowLust)) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
@@ -2750,6 +2759,9 @@ use namespace CoC;
 				var packMembers:Number = LunaFollower.WerewolfPackMember;
 				if (hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
 				mult -= (2*packMembers);
+			}
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3) {
+				mult -= 25;
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
@@ -3755,6 +3767,14 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 18;
 			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx))//+2 racials
 				internalChimeraRatingCounter -= 56;
+			if (hasPerk(PerkLib.HumanSupremacyInitial))
+				internalChimeraRatingCounter -= 5;
+			if (hasPerk(PerkLib.HumanSupremacyBasic))
+				internalChimeraRatingCounter -= 5;
+			if (hasPerk(PerkLib.HumanSupremacyImproved))
+				internalChimeraRatingCounter -= 10;
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced))
+				internalChimeraRatingCounter -= 1;
 			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
@@ -3766,7 +3786,7 @@ use namespace CoC;
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
-		}//każdy nowy chimerical body perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle
+		}
 
 		//Determine Inner Chimera Score
 		public function internalChimeraScore():Number {
@@ -3778,6 +3798,22 @@ use namespace CoC;
 			}
 			End("Player","racialScore");
 			return internalChimeraCounter;
+		}
+
+		//Determine Inner Human Score
+		public function internalHumanScore():Number {
+			Begin("Player","racialScore","internalHumanScore");
+			var internalHumanCounter:Number = 0;
+			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);
+			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);
+			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);
+			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);
+			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);
+			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);
+			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);
+			End("Player","racialScore");
+			return internalHumanCounter;
 		}
 
 		public function increaseFromBloodlinePerks():Number {
@@ -3872,8 +3908,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.JobSeducer))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobSorcerer))
-				basicJobs++;
-			if (hasPerk(PerkLib.JobSoulCultivator))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobWarrior))
 				basicJobs++;
@@ -4016,7 +4050,7 @@ use namespace CoC;
 		public function maxTotalMutationsInSlot(slot:String):int {
 			switch (slot) {
 				case IMutationPerkType.SLOT_ADAPTATIONS:
-					return 2 + maxAscensionBoost();
+					return 2 * (1 + maxHumanityBoost() + maxAscensionBoost());
 				case IMutationPerkType.SLOT_HEART:
 				case IMutationPerkType.SLOT_MUSCLE:
 				case IMutationPerkType.SLOT_MOUTH:
@@ -4033,7 +4067,7 @@ use namespace CoC;
 				case IMutationPerkType.SLOT_THYROID:
 				case IMutationPerkType.SLOT_PARATHYROID:
 				default:
-					return 1 + maxAscensionBoost();
+					return 1 + maxHumanityBoost() + maxAscensionBoost();
 			}
 		}
 		public function maxCurrentMutationsInSlot(slot:String):int {
@@ -4087,24 +4121,13 @@ use namespace CoC;
 		public function maxAdaptationsMutations():Number {
 			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
-		public function maxDragonMutations():Number {
-			var dragonMutations:Number = 1;
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 1) dragonMutations--;
-			if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) dragonMutations--;
-			if (perkv1(IMutationsLib.DraconicLungIM) >= 1) dragonMutations--;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) dragonMutations++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) dragonMutations++;
-			return dragonMutations;
-		}
-		public function maxKitsuneMutations():Number {
-			var kitsuneMutations:Number = 1;
-			if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) kitsuneMutations--;
-			if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) kitsuneMutations--;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) kitsuneMutations++;
-			return kitsuneMutations;
-		}
 		public function maxAscensionBoost():Number {
 			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
+		}
+		public function maxHumanityBoost():Number {
+			var mHB:Number = 0;
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mHB += 1;
+			return mHB;
 		}
 
 		public function lactationQ():Number
@@ -4127,6 +4150,8 @@ use namespace CoC;
 				total += (perkv3(PerkLib.ProductivityDrugs));
 			if (hasPerk(PerkLib.AscensionMilkFaucet))
 				total += (perkv1(PerkLib.AscensionMilkFaucet) * 200);
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17)
+				total *= 2;
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3)
 				total *= 2.5;
 			if (necklaceName == "Cow bell")
@@ -4835,6 +4860,9 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 2) maxToneCap += 20;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 3) maxToneCap += 30;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) maxToneCap += 10;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 1 && racialScore(Races.HUMAN) > 17) maxToneCap += 5;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && racialScore(Races.HUMAN) > 17) maxToneCap += 15;
 			return maxToneCap;
 		}
 		public function maxThicknessCap():Number {
@@ -4843,6 +4871,9 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) maxThicknessCap += 20;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) maxThicknessCap += 30;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 1 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 5;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 2 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 15;
 			return maxThicknessCap;
 		}
 
@@ -5828,9 +5859,9 @@ use namespace CoC;
 			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}
-			// Flurry of Blows gets +1
+			// Flurry of Blows gets +2
 			if(isUnarmedCombat() && hasPerk(PerkLib.FlurryOfBlows)){
-                rval += 1;
+                rval += 2;
 			}
 			return rval;
 		}
@@ -5843,7 +5874,12 @@ use namespace CoC;
 			return rval;
 		}
 
-
+		public function MiningMulti():Number {
+			var mineMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) mineMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineMlt *= 2;
+			return mineMlt;
+		}
 
 		public function maxMiningLevel():Number {
 			var maxLevel:Number = 2;
@@ -5884,6 +5920,56 @@ use namespace CoC;
 					miningXP = 0;
 				}
 			}
+		}
+
+		public function maxFarmingLevel():Number {
+			var maxLevel:Number = 2;
+			if (level < 48) maxLevel += level;
+			else maxLevel += 48;
+			return maxLevel;
+		}
+		public function FarmExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = farmingLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = farmingLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function farmXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					farmingXP++;
+					XP--;
+				}
+				else {
+					farmingXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (farmingLevel < maxFarmingLevel() && farmingXP >= FarmExpToLevelUp()) {
+					outputText("\n\n<b>Farming skill leveled up to " + (farmingLevel + 1) + "!</b>");
+					farmingLevel++;
+					farmingXP = 0;
+				}
+			}
+		}
+
+		public function FarmingMulti():Number {
+			var farmMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) farmMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			//if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
+			//if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
+			if (hasKeyItem("Tel'Adre Magazine Issue 8") >= 0) farmMlt *= 2;
+			return farmMlt;
 		}
 
 		public function maxHerbalismLevel():Number {
@@ -5935,6 +6021,7 @@ use namespace CoC;
 
 		public function HerbalismMulti():Number {
 			var herbMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) herbMlt += perkv1(IMutationsLib.HumanVersatilityIM);
 			if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
 			if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
 			if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
@@ -6282,6 +6369,8 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			return max;
 		}
 
@@ -6692,4 +6781,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

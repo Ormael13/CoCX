@@ -1328,9 +1328,9 @@ public static const DEMON_LABORATORY_DISCOVERED:int                             
 public static const DONT_TAKE_ANEMONES_PLEZ:int                                     = 1320;
 public static const CHICHI_INCUBATION:int                                           = 1321;
 public static const CHICHI_PREGNANCY_TYPE:int                                       = 1322;
-public static const UNKNOWN_FLAG_NUMBER_01323:int                                   = 1323;
-public static const UNKNOWN_FLAG_NUMBER_01324:int                                   = 1324;
-public static const UNKNOWN_FLAG_NUMBER_01325:int                                   = 1325;
+public static const FOLLOWER_AT_FISHERY_1:int                                       = 1323;
+public static const FOLLOWER_AT_FISHERY_2:int                                       = 1324;
+public static const FOLLOWER_AT_FISHERY_3:int                                       = 1325;
 public static const UNKNOWN_FLAG_NUMBER_01326:int                                   = 1326;
 public static const UNKNOWN_FLAG_NUMBER_01327:int                                   = 1327;
 public static const UNKNOWN_FLAG_NUMBER_01328:int                                   = 1328;

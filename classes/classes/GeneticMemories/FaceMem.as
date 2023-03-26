@@ -583,6 +583,50 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const PLANT_DRAGON:int = _partid++;
+		EnumValue.add(Memories, PLANT_DRAGON, "PLANT_DRAGON", {
+		  id: "Plant Dragon Face",
+		  name: "Plant Dragon Face",
+		  cost: 100,
+		  title: "Plant Dragon Face",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.FacePlantDragon;
+		  }
+		});
+
+		public static const CRAZY:int = _partid++;
+		EnumValue.add(Memories, CRAZY, "CRAZY", {
+		  id: "Gremlin Crazy Face",
+		  name: "Gremlin Crazy Face",
+		  cost: 100,
+		  title: "Gremlin Crazy Face",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.FaceCrazy;
+		  }
+		});
+
+		public static const SMUG:int = _partid++;
+		EnumValue.add(Memories, SMUG, "SMUG", {
+		  id: "Smug Face",
+		  name: "Smugy Face",
+		  cost: 100,
+		  title: "Smug Face",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.FaceSmug;
+		  }
+		});
+
+		public static const AVIAN:int = _partid++;
+		EnumValue.add(Memories, AVIAN, "AVIAN", {
+		  id: "Avian Face",
+		  name: "Avian Face",
+		  cost: 100,
+		  title: "Avian Face",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.FaceAvian;
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

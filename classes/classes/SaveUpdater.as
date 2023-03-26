@@ -2072,18 +2072,56 @@ public class SaveUpdater extends NPCAwareContent {
 					else player.createKeyItem("Radiant shard", 1,0,0,0);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.053) {
-				
+				SceneLib.setItemsChecks.equipNecroItemsSet();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.053;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.054) {
-				
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > camp.campMake.maxPermanentImprovedStoneGolemsBagSize()) {
+					var costback1:Number = (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] - camp.campMake.maxPermanentImprovedStoneGolemsBagSize());
+					flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] -= costback1;
+					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += (costback1 * 3);
+					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += costback1;
+					flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += (costback1 * 50);
+				}
+				if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > camp.campMake.maxPermanentSteelGolemsBagSize()) {
+					var costback2:Number = (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] - camp.campMake.maxPermanentSteelGolemsBagSize());
+					flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] -= costback2;
+					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += costback2;
+					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += (costback2 * 2);
+					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += (costback2 * 10);
+					flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += (costback2 * 4);
+				}
+				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > camp.campMake.maxPermanentImprovedSteelGolemsBagSize()) {
+					var costback3:Number = (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] - camp.campMake.maxPermanentImprovedSteelGolemsBagSize());
+					flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] -= costback3;
+					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += (costback3 * 3);
+					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += (costback3 * 6);
+					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += (costback3 * 50);
+					flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += (costback3 * 12);
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.054;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.055) {
-				
+				player.buff("Curse").remove();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.055;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.056) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.056;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.057) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.057;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.058) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.059;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

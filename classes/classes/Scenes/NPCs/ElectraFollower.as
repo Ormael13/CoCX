@@ -51,6 +51,12 @@ public function repeatDeepwoodsEnc():void {
 	outputText("As you wander the woods you hear the sound of echoing thunder...But the rains have long since been stopped here. You see multiple imps and even a satyr run away from the spot where the sound was heard. ");
 	repeatElectraEnc();
 }
+public function repeatDesertEnc():void {
+	spriteSelect(SpriteDb.s_electra);
+	clearOutput();
+	outputText("As you wander the desert you hear the sound of echoing thunder...But the rains have long since been stopped here. You see multiple imps and even an apophis run away from the spot where the sound was heard. ");
+	repeatElectraEnc();
+}
 public function repeatElectraEnc():void {
 	outputText("As you go to see what’s going on you come upon ");
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");

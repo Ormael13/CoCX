@@ -134,8 +134,7 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventually passes but you remain relatively less libidinous afterward.");
-        player.buff("Curse").addStats( {"lib.mult": -0.05} ).permanent();
-		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) dynStats("lib", -4, "lus", -20);
+        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) dynStats("lib", -4, "lus", -20);
         else dynStats("lus", -10, "scale", false);
         player.addCurse("lib", 2, 1);
         player.refillHunger(15);
@@ -844,8 +843,8 @@ public final class Mutations extends MutationsHelper {
         outputText("You open the pack to find " + nails + " nails inside.");
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
-        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
-        else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+        if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
+        
     }
 
     public function packOfDemonBones(player:Player):void {
@@ -8792,12 +8791,7 @@ public final class Mutations extends MutationsHelper {
         //Face
         if (player.faceType != Face.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("[pg]");
-            if (player.faceType == Face.HUMAN) {
-                outputText("With the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your mouth and nose feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.[pg]Too busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak.[pg]A bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike on an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.[pg]This isn’t the only major change, as you feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
-            } else {
-                outputText("With the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your [face] feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.[pg]Too busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak. That's quite the change, even for your [face].[pg]A bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike of an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.[pg]This isn’t the only major change, as you feel your [ears] twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
-            }
-            transformations.FaceAvian.applyEffect(false);
+            transformations.FaceAvian.applyEffect();
             changes++;
         }
         //Ears
@@ -15796,16 +15790,16 @@ public final class Mutations extends MutationsHelper {
 
     public function thickGossamer(type:Number, player:Player):void {
         //'type' refers to the variety of gossamer.
-        //0 == Thick Green Onna Gossamer
-        //1 == Thick Green Herm Gossamer
-        //2 == Thick Green Oni Gossamer
-        //3 == Thick Fiery Onna Gossamer
-        //4 == Thick Fiery Herm Gossamer
-        //5 == Thick Fiery Oni Gossamer
-        //6 == Thick Frozen Onna Gossamer
-        //7 == Thick Frozen Herm Gossamer
-        //8 == Thick Frozen Oni Gossamer
-        //9 == Thick Sandy Onna Gossamer
+        //00 == Thick Green Onna Gossamer
+        //01 == Thick Green Herm Gossamer
+        //02 == Thick Green Oni Gossamer
+        //03 == Thick Fiery Onna Gossamer
+        //04 == Thick Fiery Herm Gossamer
+        //05 == Thick Fiery Oni Gossamer
+        //06 == Thick Frozen Onna Gossamer
+        //07 == Thick Frozen Herm Gossamer
+        //08 == Thick Frozen Oni Gossamer
+        //09 == Thick Sandy Onna Gossamer
         //10 == Thick Sandy Herm Gossamer
         //11 == Thick Sandy Oni Gossamer
         //12 == Thick Pure Onna Gossamer
@@ -16278,12 +16272,12 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
-		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//wis change
         if (rand(4) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
             outputText("[pg]You feel a tremendous rush of mental celerity, as if your mind were clear of all doubt.");
             changes++;
         }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//Boost cum production
         if (player.hasBalls() && player.hasCock() && rand(4) == 0 && changes < changeLimit) {
             player.cumMultiplier += 15;

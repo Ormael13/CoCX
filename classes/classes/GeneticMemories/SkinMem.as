@@ -167,6 +167,18 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const BARK:int = _partid++;
+	  EnumValue.add(Memories, BARK, "BARK", {
+		  id: "Bark Skin",
+		  name: "Bark skin",
+		  cost: 100,
+		  title: "Bark",
+		  availableCoverages: [Skin.COVERAGE_COMPLETE],
+		  transformationCoverage: function(coverage: int): Transformation {
+              return CoC.instance.transformations.SkinBark(coverage);
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

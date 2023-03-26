@@ -498,6 +498,12 @@ import classes.Scenes.NPCs.Forgefather;
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
+				//if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4) min -= maxHP() * 0.05;
+			}
+			if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17) {
+				min -= maxHP() * 0.05;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 2) min -= maxHP() * 0.05;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3) min -= maxHP() * 0.15;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
@@ -927,6 +933,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) max += 5;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) max += 10;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) max += 20;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17) max += 50;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

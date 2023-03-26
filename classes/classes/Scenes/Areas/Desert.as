@@ -169,11 +169,11 @@ use namespace CoC;
 					when  : fn.ifLevelMin(2),
 					call  : oasis.oasisEncounter
 				}, {
-					name: "Etna",
+					name: "etna",
 					chance: 0.2,
 					when: function ():Boolean
 					{
-						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)&& (player.level >= 20));
+						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
 					},
 					call: SceneLib.etnaScene.repeatYandereEnc
 				}, {
@@ -210,11 +210,11 @@ use namespace CoC;
 					night: false,
 					call: sandWormScene.SandWormEncounter
 				}, {
-					name: "Etna",
+					name: "etna",
 					chance: 0.2,
 					when: function ():Boolean
 					{
-						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)&& (player.level >= 20));
+						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
 					},
 					call: SceneLib.etnaScene.repeatYandereEnc
 				}, {
@@ -227,19 +227,16 @@ use namespace CoC;
 				},{
 					name: "electra",
 					night : false,
-					when: function ():Boolean {
-						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
+					when: function():Boolean {
+						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 					},
 					chance:0.5,
 					call: function ():void {
-						if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
-						else {
-							if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
-								if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
-								else SceneLib.electraScene.ElectraRecruiting();
-							}
-							else SceneLib.electraScene.repeatMountainEnc();
+						if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
+							if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
+							else SceneLib.electraScene.ElectraRecruiting();
 						}
+						else SceneLib.electraScene.repeatDesertEnc();
 					}
 				}, {/*
 					name: "lactoblasters",
@@ -323,14 +320,8 @@ use namespace CoC;
 				+ "\n"
 				+ "You circle the wreckage for a good while and you can't seem to find anything to salvage until something shiny catches your eye. There are exposed nails! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
 			outputText("\n\nNails: ");
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/750");
-			}
-			else {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
-			}
+			if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
+			outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 		}
 
 		public function wstaffEncounter():void {

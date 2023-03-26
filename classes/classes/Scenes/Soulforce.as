@@ -916,21 +916,33 @@ public class Soulforce extends BaseContent
 		return 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
 	}
 
-	public function theUnknown():void {
+	public function theUnknown(page:int = 1):void {
 		if (player.soulforce >= 100) {
 			player.soulforce -= 100;
 			menu();
 			statScreenRefresh();
-			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(0, "???", belisatest).hint("Shy Spooder");
-			if (!LilyFollower.LilyFollowerState && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(1, "???", lilytest).hint("Lewd Spooder");
-			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(2, "???", FightTyrantia).hint("Scary Spooder");
-			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0) addButton(3, "???", tigerSharkGal).hint("Tigershark Gal?");
-			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
-			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
-			if (player.level >= 3 && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
-			addButton(10, "???", returnToMonke);
-			addButton(11, "???", dragON);
-			addButton(14, "Back", SoulSense);
+			if (page == 1) {
+				if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(0, "???", belisatest).hint("Shy Spooder");
+				if (!LilyFollower.LilyFollowerState && flags[kFLAGS.LILY_LVL_UP] > 0 && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(1, "???", lilytest).hint("Lewd Spooder");
+				if (TyrantiaFollower.TyrantiaFollowerStage > 0 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(2, "???", FightTyrantia).hint("Scary Spooder");
+				if (flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0) addButton(3, "???", tigerSharkGal).hint("Tigershark Gal?");
+				if (flags[kFLAGS.DIANA_LVL_UP] > 0 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
+				if (flags[kFLAGS.ISABELLA_AFFECTION] > 0 && flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
+				if (player.isNaga() && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
+				if (!SceneLib.kihaFollower.followerKiha() && flags[kFLAGS.KIHA_TALK_STAGE] > 0) addButton(7, "???", quasiDragoness).hint("Quasi-dragoness.");
+				if (flags[kFLAGS.ZENJI_PROGRESS] != -1 && flags[kFLAGS.ZENJI_PROGRESS] > 0 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)) addButton(8, "???", theySeeHimTrollinTheyHatin).hint("They see him trollin' They hatin'");
+				addButton(13, "-2-", theUnknown, page + 1);
+				addButton(14, "Back", SoulSense);
+			}
+			if (page == 2) {
+				if (flags[kFLAGS.ETNA_AFFECTION] >= 2 && flags[kFLAGS.ETNA_FOLLOWER] < 1) addButton(0, "???", hornyCore).hint("Horny-core.");
+				if (flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && flags[kFLAGS.ELECTRA_FOLLOWER] < 2) addButton(1, "???", lightningRod).hint("Lightning Rod.");
+				if (SceneLib.helScene.helSexualAmbushCondition()) addButton(9, "???", analLover).hint("Anal-lover.");
+				addButton(10, "???", dragON);
+				addButton(11, "???", returnToMonke);
+				addButton(13, "-1-", theUnknown, page - 1);
+				addButton(14, "Back", SoulSense);
+			}
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");
@@ -968,10 +980,36 @@ public class Soulforce extends BaseContent
 		else SceneLib.dianaScene.repeatEnc();
 	}
 	public function germanCow():void {
+		player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 		SceneLib.isabellaScene.isabellaGreeting();
 	}
 	public function sneakOnThePlane():void {
 		nagaScene.nagaEncounter();
+	}
+	public function quasiDragoness():void {
+		SceneLib.kihaScene.encounterKiha();
+	}
+	public function hornyCore():void {
+		SceneLib.etnaScene.repeatEnc();
+	}
+	public function lightningRod():void {
+		SceneLib.electraScene.repeatMountainEnc();
+	}
+	public function theySeeHimTrollinTheyHatin():void {
+		if (flags[kFLAGS.ZENJI_PROGRESS] >= 4) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 6) {
+				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 100) {
+					if (flags[kFLAGS.ZENJI_PROGRESS] == 7) SceneLib.zenjiScene.followerZenjiRepeatOffer();
+					else SceneLib.zenjiScene.followerZenjiFirstTimeOffer();
+				} else if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 0) {
+					if (flags[kFLAGS.ZENJI_PROGRESS] == 10) SceneLib.zenjiScene.loverZenjiRepeatOffer();
+					else SceneLib.zenjiScene.loverZenjiFirstTimeOffer();
+				} else SceneLib.zenjiScene.part2TrollEncounterRepeat();
+			} else SceneLib.zenjiScene.part2TrollEncounterFirst();
+		} else if (flags[kFLAGS.ZENJI_PROGRESS] > 0 && flags[kFLAGS.ZENJI_PROGRESS] < 4) SceneLib.zenjiScene.part1TrollEncounterRepeat();
+	}
+	public function analLover():void {
+		SceneLib.helScene.helSexualAmbush();
 	}
 }
 }

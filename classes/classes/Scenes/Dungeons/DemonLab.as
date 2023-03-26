@@ -5,6 +5,7 @@
 package classes.Scenes.Dungeons {
 import classes.EventParser;
 import classes.PerkLib;
+import classes.Races;
 import classes.Saves;
 import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
 import classes.Scenes.Dungeons.DemonLab.Incels;
@@ -695,8 +696,9 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         menu();
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
-        addButton(2, "CAVEMAN!!!", WEHAVETECHNOLOGY);
-        addButton(3, "Leave", PanicRoom);
+		addButtonIfTrue(2, "GoblinHaxxors", GoblinHaxxors, "Req. to be Goblin or Gremlin.", (player.isRaceCached(Races.GOBLIN) || player.isRaceCached(Races.GREMLIN)));
+        addButton(3, "CAVEMAN!!!", WEHAVETECHNOLOGY);
+        addButton(4, "Leave", PanicRoom);
     }
 
     public function Desk():void {
@@ -721,6 +723,14 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         clearOutput();
         outputText("You open the \"settings\" folder, quickly flicking through the options. Some, like \"Brightness\" confuse you, but upon investigation, it just makes the device glow brighter or softer. Another, \"Sound\" would seem useful, but nothing happens when you adjust it. And what on Mareth is this \"BlueTooth\"? What are these demons into?\n\n");
         outputText("Quickly frustrated, you realise you're getting nowhere with this infernal device!\n\n");
+        doNext(PanicRoom);
+    }
+	
+    public function GoblinHaxxors():void {
+        clearOutput();
+        outputText("You open the security protocols for the computer, your green ears quivering with excitement. Demons using tech? Thanks for the free information! You quickly break into the userdata and pull up several passwords. Then, you attempt to log in. After a few attempts, you access the account of a \"Doctor Grindr\".\n\n");
+        outputText("You deactivate the security protocols and rescind the lockdown. You hear a metallic \"clang\" in the distance. \n\n");
+		WayOutBlocked = false;
         doNext(PanicRoom);
     }
 
@@ -1061,7 +1071,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("“<i>Captains? What do you think?</i>” He squints past you, to the people behind. Evidently, his eyes aren’t the best.\n\n");
         outputText("Urta looks at the people behind you. “<i>... The Driders are malnourished... Very few men among them.</i>” She squints. “<i>... Their clothing is ragtag.</i>” She nods. “<i>The story appears to check out, sir, but more investigation will be needed..</i>”\n\n");
         outputText("“<i>And what about [name] here?</i>” He looks at you thoughtfully. “<i>Can we trust them with Tel’Adre’s safety?</i>”\n\n");
-        outputText("Edryn nods. “<i>Sir, [name] is an otherworlder who lives out by one of the portals to other worlds. They’ve had to fight to survive, and they have. Demons fear them." + (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0 ? " I trust them with my life... and they’ve proven themselves to be a good person... As have their children.</i>”" : "") + "\n\n");
+        outputText("Edryn nods. “<i>Sir, [name] is an otherworlder who lives out by one of the portals to other worlds. They’ve had to fight to survive, and they have. Demons fear them." + (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0 ? " I trust them with my life... and they’ve proven themselves to be a good person... As have their children.”" : "") + "</i>\n\n");
         if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) outputText("“<i>[name] here literally helped me bring an uncorrupted God back into play. If that isn’t contributing to Tel’Adre’s safety, I don’t know what is.</i>” This from Urta, who gives you a warm smile.\n\n");
         if (SceneLib.urtaPregs.urtaKids() > 0 && flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText(" The pig-morph gives both women a glare. “<i>Ah, so this is the one you’ve both been sleeping with.</i>” The two ladies look at each other, grinning. Brag rolls his eyes.\n\n");
 

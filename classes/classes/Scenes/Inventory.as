@@ -17,6 +17,7 @@ import classes.Items.Useable;
 import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
 import classes.Scenes.NPCs.MagnoliaFollower;
@@ -150,10 +151,6 @@ use namespace CoC;
 			if (player.keyItems.length > 0) outputText("\n<b><u>Key Items:</u></b>\n");
 			for (x = 0; x < player.keyItems.length; x++) outputText(player.keyItems[x].keyName + "\n");
 			menu();
-			//Button for alchemical items during combat
-			if (CoC.instance.inCombat) {
-				addButton(12, "Potions", PotionMenu, page + 1);
-			}
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
@@ -181,6 +178,10 @@ use namespace CoC;
 					addButton(12, "Sky P. Pearl", SkyPoisonPearlMenuv2);
 				}
 			}
+			//Button for alchemical items during combat
+			if (CoC.instance.inCombat) {
+				addButton(12, "Potions", SceneLib.garden.PotionMenu).disableIf(Garden.PotionsBagSlot01Cap == 0, "You not have any potions bag.");
+			}
             if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
 				outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
 				SceneLib.combat.enemyAIImpl();
@@ -199,42 +200,6 @@ use namespace CoC;
 				mainView.toolTipView.text   = item.description;
 				mainView.toolTipView.show(mainView.mouseX, mainView.mouseY, 0, 0);
 			}
-		}
-
-		public function PotionMenu(page:int = 1):void {
-			//var foundItem:Boolean = false;
-			if (CoC.instance.inCombat) {
-				callNext = inventoryCombatHandler; //Player will return to combat after item use
-			}
-			else {
-				spriteSelect(null);
-				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
-			}
-			hideMenus();
-			hideUpDown();
-			clearOutput();
-			EngineCore.displayHeader("Potions");
-			//List all availlable potions quantity
-			outputText("<b><u>Availlable potions:</u></b>\n");
-			for (var ID:String in PotionType.ALL_POTIONS) {
-				var potionType: PotionType = PotionType.ALL_POTIONS[ID];
-				var potionCount: Number = player.numberOfPotions(potionType);
-				outputText("<b>"+potionType.name+":</b> : " + potionCount + ")\n");
-			}
-			outputText("\n\nWhich item will you use?");
-
-			menu();
-			var position:Number = 0;
-			for (ID in PotionType.ALL_POTIONS) {
-				potionType = PotionType.ALL_POTIONS[ID];
-				potionCount = player.numberOfPotions(potionType);
-				addButton(position, potionType.name, player.usePotion, potionType).disableIf(potionCount == 0);
-				position++;
-			}
-
-			addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
-//Gone		menuLoc = 1;
-
 		}
 
 		public function manageEquipmentmiscitemsMenu():void {

@@ -65,11 +65,11 @@ public class MagicSpecials extends BaseCombatContent {
 			assumeCrinosShape007();
 		}
 		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0 && player.wrath >= combat.asuraformCost() && !player.hasPerk(PerkLib.ElementalBody)) {
-			outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+			outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
 			if (player.hasPerk(PerkLib.AsuraStrength)) {
 				outputText("Additionaly from your back emerge ");
-				outputText("pair ");
-				outputText("of semi-transparent arms. ");
+				outputText("pair");
+				outputText(" of semi-transparent arms. ");
 			}
 			outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
 			combat.assumeAsuraForm007();
@@ -111,8 +111,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
 			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			if ((player.hasVagina() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1)) || (player.hasCock() && (player.isRaceCached(Races.MINOTAUR) || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1))) {
-				bd = buttons.add("Plasma blast", PlasmaBlast, "Masturbate to unleash a massive discharge of milk/cum mized with plasma.", "Plasma blast");
+			if ((player.hasVagina() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1 || (player.perkv1(IMutationsLib.HumanOvariesIM) >= 3 && player.racialScore(Races.HUMAN) > 17))) ||
+			(player.hasCock() && (player.isRaceCached(Races.MINOTAUR) || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1 || (player.perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && player.racialScore(Races.HUMAN) > 17)))) {
+				bd = buttons.add("Plasma blast", PlasmaBlast, "Masturbate to unleash a massive discharge of milk/cum mixed with plasma.", "Plasma blast");
 				if (player.hasStatusEffect(StatusEffects.CooldownPlasmaBlast)) {
 					if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
@@ -153,8 +154,10 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if ((player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) || (player.tailType == Tail.KITSHOO && player.tailCount >= 2)) {
 				bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
-				bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
-				bd.requireMana(spellCost(60 * kitsuneskillCost()));
+				if (!player.statStore.hasBuff("FoxflamePelt")) {
+					bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
+					bd.requireMana(spellCost(60 * kitsuneskillCost()));
+				}
 				if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -230,6 +233,15 @@ public class MagicSpecials extends BaseCombatContent {
 				} else if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 					bd.disable("You cannot focus to use this ability while you're having so much difficulty breathing.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.tailType == Tail.KITSHOO && player.tailCount >= 6) {
+				if (player.statStore.hasBuff("FoxflamePelt")) {
+					buttons.add("Return", extinguishFoxflamePelt).hint("Release foxflames.");
+				} else {
+					bd = buttons.add("Foxflame Pelt", lightupFoxflamePelt, "Coat yourself with foxflame pelt. (It would drain soulforce and mana until deactivated)\n");
+					bd.requireSoulforce(50 * soulskillCost() * soulskillcostmulti());
+					bd.requireMana(spellCost(100 * kitsuneskill2Cost()));
+				}
 			}
 			if ((player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2))) {//player.hasPerk(MutationsLib.NekomataThyroidGland) ||
 				bd = buttons.add("GhostFire", nekomataGhostFire).hint("Unleash a ghost flame at your opponent for high damage. It's unstoped by barriers that stops magic spells or attacks. \n");
@@ -778,6 +790,11 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.isRaceCached(Races.FAIRY)) {
 			bd = buttons.add("Fae Storm", FaeStorm).hint("Use a beam of chaotic magic, damaging your foe and inflicting various status effects. Single target but very likely to cause a lot of effects.");
 			bd.requireMana(spellCost(80));
+			bd = buttons.add("Baleful Polymorph", BalefulPolymorph).hint("Turn an opponent into a cute harmless critter.");
+			bd.requireMana(spellCost(80));
+			if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
+				bd.disable("You need more time before you can use Baleful Polymorph again.\n\n");
+			}
 		}
 		if (player.isRaceCached(Races.FAIRY) || player.isRaceCached(Races.FAERIEDRAGON)) {
 			bd = buttons.add("Flicker", Flicker).hint("Vanish out of sight for a short time. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds");
@@ -793,13 +810,6 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.isRaceCached(Races.FAIRY) && player.hasStatusEffect(StatusEffects.Minimise)) {
 			bd = buttons.add("Enlarge", Enlarge).hint("Grow back to your normal size.");
 			bd.requireMana(spellCost(40));
-		}
-		if (player.isRaceCached(Races.FAIRY)) {
-			bd = buttons.add("Baleful Polymorph", BalefulPolymorph).hint("Turn an opponent into a cute harmless critter.");
-			bd.requireMana(spellCost(80));
-			if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
-				bd.disable("You need more time before you can use Baleful Polymorph again.\n\n");
-			}
 		}
 		if (player.isRaceCached(Races.DISPLACERBEAST)) {
 			bd = buttons.add("Displacement", Displacement).hint("Teleport around to avoid your opponents attacks. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds");
@@ -1697,7 +1707,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -1909,12 +1919,25 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(40, USEFATG_MAGIC_NOBM);
 		var damage:Number = 0;
+		var damult:Number = 1;
+		var scalingmulti:Number = 1;
+		var debufstr:Number = 1;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1) damult += 2;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2) {
+			damult += 2;
+			scalingmulti += 1;
+		}
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
+			damult += 2;
+			debufstr += 2;
+		}
 		damage += player.str;
-		damage += scalingBonusStrength();// * 0.5
+		damage += scalingBonusStrength() * scalingmulti;
 		damage += player.tou;
-		damage += scalingBonusToughness();// * 0.5
+		damage += scalingBonusToughness() * scalingmulti;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1931,7 +1954,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("You spit a blob of neon blue acid at [themonster] your corrosive fluids burning at "+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "their" : "[monster his]")+" flesh.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -1943,9 +1966,9 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
 			monster.addStatusValue(StatusEffects.AcidDoT,1,1);
-			monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+			monster.addStatusValue(StatusEffects.AcidDoT,3,debufstr);
 		}
-		else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+		else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,debufstr,0);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		checkLethiceAndCombatRoundOver();
@@ -1956,13 +1979,22 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(40, USEFATG_MAGIC_NOBM);
 		var damage:Number = 0;
+		var damult:Number = 1;
+		var scalingmulti:Number = 1;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1) damult += 2;
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2) {
+			damult += 2;
+			scalingmulti += 1;
+		}
+		if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) damult += 2;
 		damage += player.str;
-		damage += scalingBonusStrength();// * 0.5
+		damage += scalingBonusStrength() * scalingmulti;
 		damage += player.tou;
-		damage += scalingBonusToughness();// * 0.5
+		damage += scalingBonusToughness() * scalingmulti;
 		damage = calcInfernoMod(damage, true);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= damult;
 		damage = Math.round(damage);
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -1999,7 +2031,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2010,8 +2042,21 @@ public class MagicSpecials extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5 * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
+			if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 		}
 		else {
+			if (player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
+				if(!monster.hasPerk(PerkLib.Resolute)) {
+					outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
+					monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+				}
+				else {
+					outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] staggering back, but <b>[monster he] ");
+					if(!monster.plural) outputText("is ");
+					else outputText("are");
+					outputText("too resolute to be stunned by your attack.</b> ");
+				}
+			}
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 		}
@@ -2086,7 +2131,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2161,7 +2206,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2226,7 +2271,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2425,7 +2470,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2489,7 +2534,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2568,6 +2613,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 			if (player.hasPerk(PerkLib.HighVoltageSu) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
 			if (player.hasPerk(PerkLib.EclipsingShadowSu) && player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, -1);
+			if (player.hasPerk(PerkLib.HighTideSu) && player.hasStatusEffect(StatusEffects.CounterHighTide)) player.addStatusValue(StatusEffects.CounterHighTide, 3, -1);
 			var damage:Number = 0;
 			var damult:Number = 1;
 			damage += scalingBonusIntelligence() * 5;
@@ -2612,7 +2658,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			outputText("You wreel back your head, sucking in a large breath of air before letting out all the collected energy. You let loose a bellowing roar at [themonster], so forceful that even the landscape begins to warp around the blast. [Themonster] attempts to dodge but the sheer size and speed is to immense to avoid as they are slammed with Fire, Ice, Lightning and Darkness. ");
 			//Miss:
-			if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+			if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 				outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 			}
 			//Special enemy avoidances
@@ -2646,6 +2692,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 			if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, 1);
 			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
+			if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 3, 1);
 			enemyAI();
 		}
 	}
@@ -3115,14 +3162,27 @@ public class MagicSpecials extends BaseCombatContent {
 			tempTou += Math.round(player.touStat.core.value * 0.1);
 			tempSpe += Math.round(player.speStat.core.value * 0.1);
 		}
+		if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			tempStr += Math.round(player.strStat.core.value * 0.1);
+			tempTou += Math.round(player.touStat.core.value * 0.1);
+			tempSpe += Math.round(player.speStat.core.value * 0.1);
+			warriorsrageDuration += 5;
+		}
 		tempStr *= 2;
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
-		if (player.hasPerk(PerkLib.BerserkerArmor)){
-			tempStr = tempStr*1.5;
-			tempTou = tempTou*1.5;
-			tempSpe = tempSpe*1.5;
+		if (player.hasPerk(PerkLib.BerserkerArmor) || (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) {
+			if (player.hasPerk(PerkLib.BerserkerArmor) && player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+				tempStr = tempStr*2;
+				tempTou = tempTou*2;
+				tempSpe = tempSpe*2;
+			}
+			else {
+				tempStr = tempStr*1.5;
+				tempTou = tempTou*1.5;
+				tempSpe = tempSpe*1.5;
+			}
 		}
 		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
 		player.HP = oldHPratio*player.maxHP();
@@ -3174,10 +3234,17 @@ public class MagicSpecials extends BaseCombatContent {
 			temp2 += player.touStat.core.value * 0.2;
 			temp3 += player.speStat.core.value * 0.2;
 		}
-		if (player.hasPerk(PerkLib.BerserkerArmor)){
-			temp1 *= 1.5;
-			temp2 *= 1.5;
-			temp3 *= 1.5;
+		if (player.hasPerk(PerkLib.BerserkerArmor) || (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) {
+			if (player.hasPerk(PerkLib.BerserkerArmor) && player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+				temp1 *= 2;
+				temp2 *= 2;
+				temp3 *= 2;
+			}
+			else {
+				temp1 *= 1.5;
+				temp2 *= 1.5;
+				temp3 *= 1.5;
+			}
 		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);
@@ -3217,6 +3284,36 @@ public class MagicSpecials extends BaseCombatContent {
 		player.lust -= Math.round(player.maxLust() * 0.1);
 		outputText("You focus on the heat in your body, and with your mind focused, you send your heat down, into the ground. The ground cracks under your [legs], and from the crack emerges a stone, shaped nearly perfectly into the shape of your [weapon].\n\n");
 		player.createStatusEffect(StatusEffects.FalseWeapon, 0, 0, 0, 0);
+		enemyAI();
+	}
+	
+	public function lightupFoxflamePelt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		lightupFoxflamePelt2();
+	}
+	public function lightupFoxflamePelt2():void {
+		useMana((100 * kitsuneskill2Cost()), Combat.USEMANA_MAGIC_NOBM);
+		outputText("Holding out your palm, you conjure fox flame that dances across your fingertips.  Then is spread all over your arm to rest of your body!\n\n");
+		var temp1:Number = 0;
+		var tempSpe:Number;
+		temp1 += player.speStat.core.value * 0.1;
+		if (player.tailCount >= 7) temp1 += player.speStat.core.value * 0.1 * (player.tailCount - 6);
+		temp1 = Math.round(temp1);
+		var oldHPratio:Number = player.hp100/100;
+		tempSpe = temp1;
+		mainView.statsView.showStatUp('spe');
+		player.buff("FoxflamePelt").addStats({spe:tempSpe}).withText("Foxflame Pelt").combatPermanent();
+		player.HP = oldHPratio*player.maxHP();
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function extinguishFoxflamePelt():void {
+		clearOutput();
+		outputText("Gathering you willpower you forcefully extinguish flames coating your body.");
+		player.statStore.removeBuffs("FoxflamePelt");
 		enemyAI();
 	}
 
@@ -3820,12 +3917,14 @@ public class MagicSpecials extends BaseCombatContent {
 	public function basicFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
-		player.soulforce -= soulforcecost;
+		if (!player.statStore.hasBuff("FoxflamePelt")) {
+			var soulforcecost:int = 30 * soulskillCost() * soulskillcostmulti();
+			player.soulforce -= soulforcecost;
+		}
 		basicFoxFire2();
 	}
 	public function basicFoxFire2():void {
-		useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		if (!player.statStore.hasBuff("FoxflamePelt")) useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
 		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -4215,7 +4314,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneskillCost():Number {
 		var modksc:Number = 1;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) modksc -= 0.5;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX) {
+		if (player.tailCount == 9 && (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO)) {
 			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) modksc *= 3;
 			else if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) modksc *= 2;
 			else modksc += 0.5;
@@ -5193,7 +5292,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -5275,7 +5374,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -6244,6 +6343,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (type == 3) {
 			outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
+			damage = calcInfernoMod(damage, true);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
 				if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
@@ -6382,4 +6483,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

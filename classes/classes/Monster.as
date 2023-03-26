@@ -32,6 +32,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
@@ -268,9 +269,18 @@ import flash.utils.getQualifiedClassName;
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
-			if (hasPerk(PerkLib.TankI)) temp += ((baseStat*12) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.GoliathI)) temp += ((this.str*8) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.CheetahI)) temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.TankI)) {
+				if (this is TrainingDummy) temp += ((baseStat*6000) * (1 + newGamePlusMod()));
+				else temp += ((baseStat*12) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.GoliathI)) {
+				if (this is TrainingDummy) temp += ((this.str*4000) * (1 + newGamePlusMod()));
+				else temp += ((this.str*8) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.CheetahI)) {
+				if (this is TrainingDummy) temp += ((this.spe*2000) * (1 + newGamePlusMod()));
+				else temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) temp += (400 * (1 + newGamePlusMod()));
@@ -352,7 +362,13 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyEliteType)) maxOver2 += 0.05;
 			if (hasPerk(PerkLib.EnemyChampionType)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.EnemyBossType)) maxOver2 += 0.15;
-			maxOver *= maxOver2;//~180%
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				maxOver2 += (maxHP() * 0.01 * bonus);
+			}
+			maxOver *= maxOver2;//~240%
 			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -488,6 +504,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyGroupType)) anotherOne *= 5;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) anotherOne *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) anotherOne *= 15;
+			if (this is TrainingDummy) anotherOne *= 500;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
@@ -512,6 +529,15 @@ import flash.utils.getQualifiedClassName;
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.OverMaxLust)) {
+				if (hasPerk(PerkLib.Enemy300Type)) max2 += (0.15 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) max2 += (0.1 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyGroupType)) max2 += (0.05 * perkv1(PerkLib.OverMaxLust));
+				else max2 += (0.01 * perkv1(PerkLib.OverMaxLust));
+			}
+			if (hasPerk(PerkLib.EnemyEliteType)) max2 += 0.05;
+			if (hasPerk(PerkLib.EnemyChampionType)) max2 += 0.1;
+			if (hasPerk(PerkLib.EnemyBossType)) max2 += 0.15;
 			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
 				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
 				var bonus:Number = Math.round((level - 1) / 3);
@@ -2537,14 +2563,14 @@ import flash.utils.getQualifiedClassName;
 		public function dropLoot():ItemType
 		{
 			//Chance of armor if at level 1 pierce fetish
-			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
+			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && !hasPerk(PerkLib.NoItemsGained) && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
 				return armors.SEDUCTA;
 			}
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BROBREW;
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
-			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BROBREW;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BIMBOLQ;
+			if (!game.plotFight && rand(1000) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.RAINDYE;
 			//Chance of eggs if Easter!
-			if (!game.plotFight && rand(6) == 0 && SceneLib.holidays.isEaster()) {
+			if (!game.plotFight && rand(6) == 0 && !hasPerk(PerkLib.NoItemsGained) && SceneLib.holidays.isEaster()) {
 				return randomChoice(
 						consumables.BROWNEG,
 						consumables.L_BRNEG,

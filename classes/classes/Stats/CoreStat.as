@@ -9,7 +9,7 @@ public class CoreStat extends RawStat{
 	}
 	
 	override public function get max():Number {
-		if (this is Monster) return Infinity;
+		if (host is Monster) return Infinity;
 		var base:Number = 100;
 		base += 2 * host.perkv1(PerkLib.AscensionTranshumanism);
 		switch (statName) {

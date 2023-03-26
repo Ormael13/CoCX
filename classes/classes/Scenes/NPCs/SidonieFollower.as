@@ -8,6 +8,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Plains.GnollPack;
 	import classes.Scenes.Camp.CampUpgrades;
+	import classes.Scenes.SceneLib;
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	
@@ -303,15 +304,11 @@ package classes.Scenes.NPCs
 				outputText("The remaining two hours are spent reducing those planks into a more manageable size, softening it with sandpaper and bringing it back to the camp in the wagon. The clearing is quite devoid of any kind of hostile wildlife, so the process is painless, though tiresome. Both of you are left sweaty and exhausted, albeit you are quite satisfied by the huge amount of high-quality wood that you’ve brought home. ");
 				outputText("Sidonie seems a bit affected by the work-induced heat, excusing herself for a \"private\" matter.\n\n");
 				outputText("Once the last load of wood has been brought to the camp, you place the tools in the wagon and return to the camp, satisfied with today’s haul.\n\n");
+				if (player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv1(StatusEffects.ResourceNode1) < 4) player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
+				else player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
 				flags[kFLAGS.SIDONIE_RECOLLECTION] = 46;
-				if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-					if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < 400) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
-					else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 400;
-				}
-				else {
-					if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < 1200) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
-					else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 1200;
-				}
+				if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < SceneLib.campUpgrades.checkMaterialsCapWood()) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
+				else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapWood();
 				doNext(camp.returnToCampUseFourHours);
 			}
 		}

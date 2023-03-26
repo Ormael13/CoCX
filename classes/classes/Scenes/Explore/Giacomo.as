@@ -29,6 +29,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Camp.Garden;
 import classes.display.SpriteDb;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
@@ -162,7 +163,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(8, "Red Manuscript", pitchRedManuscript);
 			addButton(9, "Crimson Jade", pitchCrimsonJade);
 			addButton(10, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
-			addButton(11, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
+			addButton(11, "TelAdreMagI8", pitchTelAdreMagazineIssue8).hint("Tel'Adre Magazine Issue 8");
+			addButton(12, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -188,6 +190,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
+			if (Garden.IngrediantBagSlot01Cap == 0) addButton(8, "Herb Bag (LowG)", pitchHerbsBag).hint("Herbs Bag (Lowest Grade)");
+			if (Garden.PotionsBagSlot01Cap == 0) addButton(9, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
 			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
@@ -451,6 +455,33 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 		}
 		
+		private function pitchTelAdreMagazineIssue8():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 8") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 8'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 8th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... err well sometimes just eight to hold your farming tools.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your farming horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue8, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue8():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("Giacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("You consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in.... not cutting any of your fingers when you try to use farming tools. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 8", 0, 0, 0, 0);
+			}
+		}
+		
 		private function pitchTelAdreMagazineIssue10():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -475,6 +506,62 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				player.gems -= 100;
 				player.createKeyItem("Tel'Adre Magazine Issue 10", 0, 0, 0, 0);
+			}
+		}
+		
+		private function pitchHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep herbs between your other stuff. Why not you buy this one bag that is much better to keep them in one place? Only 300 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyHerbsBag, miscMenu);
+		}
+		
+		private function buyHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 300) {
+				outputText("\n\nGiacomo sighs, indicating you need 300 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Herbs Bag (Lowest grade).</b>");
+				player.gems -= 300;
+				player.createKeyItem("Herbs Bag (Lowest grade)", 0, 0, 0, 0);
+				Garden.IngrediantBagSlot01Cap = 5;
+				Garden.IngrediantBagSlot02Cap = 5;
+				Garden.IngrediantBagSlot03Cap = 5;
+				Garden.IngrediantBagSlot04Cap = 5;
+				Garden.IngrediantBagSlot05Cap = 5;
+				Garden.IngrediantBagSlot06Cap = 5;
+				doNext(miscMenu);
+			}
+		}
+		
+		private function pitchPotionsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep potions between your other stuff. Why not you buy this one bag that is much better to organize them? Only 300 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyPotionsBag, miscMenu);
+		}
+		
+		private function buyPotionsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 300) {
+				outputText("\n\nGiacomo sighs, indicating you need 300 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Potions Bag (Lowest grade).</b>");
+				player.gems -= 300;
+				player.createKeyItem("Potions Bag (Lowest grade)", 0, 0, 0, 0);
+				Garden.PotionsBagSlot01Cap = 5;
+				Garden.PotionsBagSlot02Cap = 5;
+				Garden.PotionsBagSlot03Cap = 5;
+				Garden.PotionsBagSlot04Cap = 5;
+				Garden.PotionsBagSlot05Cap = 5;
+				Garden.PotionsBagSlot06Cap = 5;
+				doNext(miscMenu);
 			}
 		}
 		

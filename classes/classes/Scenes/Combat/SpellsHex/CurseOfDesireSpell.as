@@ -42,12 +42,13 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 	}
 	
 	public function calcDuration():int {
-		return 8
+		return 8;
 	}
 	
 	override public function calcCooldown():int {
 		var calcC:int = 12;
 		calcC += spellGenericCooldown();
+		if (player.hasPerk(PerkLib.Necromancy)) calcC -= 1;
 		return calcC;
 	}
 	
@@ -62,6 +63,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 			var lustDmg3:Number = 0;
 			lustDmg3 += monster.statusEffectv2(StatusEffects.CurseOfDesire);
 			lustDmg3 *= 0.2;
+			if (player.hasPerk(PerkLib.Necromancy)) lustDmg3 *= 1.5;
 			if (lustDmg3 < 1) lustDmg3 = 1;
 			else lustDmg3 = Math.round(lustDmg3);
 			if (display) {

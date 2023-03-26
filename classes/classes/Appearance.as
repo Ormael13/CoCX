@@ -688,7 +688,7 @@ public class Appearance extends Utils
 						"eldritch member",
 						"green goo dripping member",
 						"dripping eldritch shaft",
-						"taperred eldritch shaft");
+						"tapered eldritch shaft");
 			}
 			return randomChoice("cock",
 				"prick",
