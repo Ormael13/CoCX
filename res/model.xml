@@ -1416,7 +1416,8 @@
 		<cell rect="111,599,49,29" name="pussy/bee" dx="80" dy="99"/>
 		<cell rect="161,599,49,29" name="pussy/scales" dx="80" dy="99"/>
 		<cell rect="161,599,49,29" name="pussy/dscale" dx="80" dy="99"/>
-		<cell rect="211,599,49,29" name="pussy/shark" dx="80" dy="99"/>
+		<cell rect="161,599,49,29" name="pussy/shark" dx="80" dy="99"/>
+		<cell rect="211,599,49,29" name="pussy/orca" dx="80" dy="99"/>
 		<cell rect="261,599,49,29" name="overpussy/neonblue" dx="80" dy="99"/>
 		<cell rect="311,599,49,29" name="overpussy/black" dx="80" dy="99"/>
 		
@@ -4608,52 +4609,31 @@
         </switch>
 		
 		<!-- Pussy AREA -->
-        <if test="hasVagina">
+        <if test="hasVagina()">
 			<show part="pussy/$skinx"/>
-            <switch value="vaginaType()">
+            <!--<switch value="VaginaClass"> -->
 				
-				<case values="VaginaClass.CAVE_WYRM,VaginaClass.RAIJU">
+				<if test="vaginaType() == VaginaClass.CAVE_WYRM or vaginaType() == VaginaClass.RAIJU">
                     <if test="taur">
                         <hide part="pussy/*"/>
                         <else>
                             <show part="overpussy/neonblue"/>
                         </else>
                     </if>
-                </case>
+                </if>
 				
-				<case values="VaginaClass.BEE,VaginaClass.BLACK_SAND_TRAP">
+				<if test="vaginaType() == VaginaClass.BEE or vaginaType() == VaginaClass.BLACK_SAND_TRAP">
                     <if test="taur">
                         <hide part="pussy/*"/>
                         <else>
                             <show part="overpussy/black"/>
                         </else>
                     </if>
-                </case>
+                </if>
 				
-				<default>
-					<if test="skin.type == Skin.AQUA_SCALES or skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
-						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
-							<if test="taur">
-								<hide part="pussy/*"/>
-								<else>
-									<show part="pussy/orca"/>
-								</else>
-							</if>
-							<else>
-								
-							</else>
-						</if>
-						<else>
-							<if test="taur">
-								<hide part="pussy/*"/>
-								<else>
-									<show part="pussy/human"/>
-								</else>
-							</if>
-						</else>
-					</if>
-                </default>
-            </switch>
+				<!--<default>-->				
+                <!--</default>-->
+            <!--</switch> -->
             <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
                 <hide part="pussy/*"/>
             </if>
