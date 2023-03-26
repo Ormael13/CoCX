@@ -859,8 +859,8 @@ import classes.Scenes.SceneLib;
 				GardenSlot12Time = timeUntilHarvest();
 				break;
 			default:
-				GardenSlot01 = herb;
-				GardenSlot01Time = timeUntilHarvest();
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		Seed4(Item);
 	}
@@ -1011,7 +1011,8 @@ import classes.Scenes.SceneLib;
 				GardenSlot12 = "";
 				break;
 			default:
-				GardenSlot01 = "";
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		outputText("Youve collected all of the ingredients.");
 		var FE:Number = 20 + player.level;
@@ -1116,8 +1117,8 @@ import classes.Scenes.SceneLib;
 				Ingredient = "alraune nectar";
 				break;
 			default:
-				IngrediantBagSlot01 -= 1;
-				Ingredient = "healing herb";
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		outputText("You spend the better part of the next hour refining the "+Ingredient+" into a "+CraftingResult+" adding it to your potion bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
@@ -1194,11 +1195,8 @@ import classes.Scenes.SceneLib;
 				}
 				break;
 			default:
-				if (IngrediantBagSlot01 < 5) HerbalismCraftItem0();
-				else {
-					IngrediantBagSlot01 -= 5;
-					Ingredient = "healing herb";
-				}
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		clearOutput();
 		outputText("You spend the better part of the next hour refining the "+Ingredient+" into multiple "+CraftingResult+" adding them to your bag.");
