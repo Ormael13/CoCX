@@ -21,20 +21,20 @@ public class WerewolfFemaleScene extends BaseContent
 		public function introWerewolfFemale():void {
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
-			outputText("As you explore the sleeping land of mareth you begin to feel as if something was stalking you just out of your line of sight.");
-			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("You focus your night eyes to quickly notice what appears to be wolf girl skulking in the shadow nearby. She pounces at you but you easily dodge her attack readying for battle.");
-			else outputText("Out of nowhere a shadowy pounce on you and it’s barely if you manage to shove her back after overcoming the surprise attack. You focus your vision on your opponent and determine it to be a wolf girl of some sort.");
-			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. Seems you are under attack by a werewolf!");
+			outputText("As you explore the sleeping land of Mareth, you begin to feel as if something was stalking you, a presence just out of your line of sight.");
+			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("Your night-adapted eyes allow you to quickly notice a silver-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
+			else outputText("Out of nowhere a fur-covered figure hits you from the side, bringing you down to the ground. You quickly shove it off, you manage to shove her back, and you see your assailant clearly for the first time. She appears to be a wolf girl of some sort.");
+			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. This She-wolf seems intent on fighting you.");
 			startCombat(new WerewolfFemale());
 		}
 
 		public function introWerewolfHuntress():void {
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
-			outputText("As you explore the sleeping land of mareth you begin to feel as if something was stalking you just out of your line of sight.");
-			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("You focus your night eyes to quickly notice what appears to be wolf girl skulking in the shadow nearby. She pounces at you but you easily dodge her attack readying for battle.");
+			outputText("As you explore the sleeping land of Mareth, you begin to feel as if something was stalking you, a presence just out of your line of sight.");
+			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("Your night-adapted eyes allow you to quickly notice a silver-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
 			else outputText("Out of nowhere a shadowy pounce on you and it’s barely if you manage to shove her back after overcoming the surprise attack. You focus your vision on your opponent and determine it to be a wolf girl of some sort.");
-			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. Seems you are under attack by a werewolf!");
+			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. This She-wolf seems intent on fighting you.");
 			startCombat(new WerewolfHuntress());
 		}
 		
@@ -43,13 +43,13 @@ public class WerewolfFemaleScene extends BaseContent
 			//spriteSelect(SpriteDb.s_DarkElf);
 
 			outputText("As you hit the ground, the werewolf approaches you with a vicious smile.\n\n");
-			outputText("\"<i>It's your lucky night intruder my alpha happens to be too lazy to leave the den and claim his prizes himself so I'm claiming you in his stead however I have no need of a new bitch begging and competing with me for my man's dick.</i>\"\n\n");
-			outputText("Relieved you're about to leave when the female firmly sits on your face pinning you to the ground.\n\n");
-			outputText("\"<i>Who said I was done with you slut? You want your freedom? Well I want you to lick my cunt and soothe my itch. Get to it and make sure you don't bite anything or I'll tear off one of your limbs. That'll also happen if I feel you don't put in enough enthusiasm!</i>\"\n\n");
-			outputText("Knowing she's as serious as the crazies on Mareth goes you don't second guess her and proceed to dive in her needy pussy like your life depends on it which considering her sharp claws and fang just might." +
-					" She almost asphyxiates you three times through the process threatening you everytime you relent but your efforts are eventually rewarded as the werewolf cum into your dazed face." +
+			outputText("\"<i>It's your lucky night intruder. My alpha happens to be too lazy to leave the den and claim his prizes himself. He might want to claim another bitch like you...</i>\" She scowls, shaking her head. \"<i> But I have no need of a new bitch begging and competing with me for my man's dick. He's MINE. </i>\"\n\n");
+			outputText("Relieved, you begin to relax. You begin to get off your back, but she growls, pinning your chest down with one foot. You freeze, instinctively, and she nods, firmly stepping over your chest, positioning her wolf-like cunt above your face.\n\n");
+			outputText("\"<i>Who said I was done with you slut? You want your freedom? Well, my man isn't here. You get to service me instead, bitch.</i>\" She slams her cunt down onto your mouth, growling slightly.\"<i> Get to it...Oh. And don't get any ideas. Bite anything, slack off...If you do ANYthing other than give me a proper tonguing, I'll rip your fucking arms off.</i>\"\n\n");
+			outputText("Knowing the crazies on Mareth, she's serious! You don't second guess her, extending your [tongue] and diving into her needy pussy like your life depends on it." +
+					" She almost asphyxiates you three times through the process, threatening you every time you relent, but your efforts are eventually rewarded as the werewolf cum into your dazed face." +
 					" You barely register her lifting up and taking distance as she leaves a last warning.\n\n");
-			outputText("\"<i>By the way loser if my lazy Alpha somehow ever manages to acquire you I've already marked your face as my sub. Don't you ever get the crazy idea that you could get ahead of me. I'll use your subby face as my toilet as many times as it takes until I get that through your skull if I have to.</i>\"\n\n");
+			outputText("\"<i>By the way, loser... If my lazy Alpha somehow ever manages to acquire you, I've already marked your face as my sub. Don't you ever get the crazy idea that you could get ahead of me. I'll use your subby face as my toilet as many times as it takes until I get that through your skull if I have to.</i>\"\n\n");
 			outputText("You barely register her departure as you slowly lift up and drag your sorry self back to camp.\n\n");
 
 			cleanupAfterCombat();
