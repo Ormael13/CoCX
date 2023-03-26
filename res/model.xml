@@ -1192,8 +1192,6 @@
         <cell rect="661,230,49,58" name="penis/raijubig" dx="77" dy="103"/>
 		<cell rect="911,290,49,58" name="penis/kirin" dx="77" dy="103"/>
         <cell rect="911,350,49,58" name="penis/kirinbig" dx="77" dy="103"/>
-		<cell rect="961,200,49,29" name="penis/demon" dx="76" dy="86"/>
-        <cell rect="961,230,49,58" name="penis/demonbig" dx="74" dy="64"/>
 		<cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -1773,10 +1771,15 @@
         -->
 		<!-- SETUP VARS -->
 		<if test="isTaur()">
-            <set var="taur">_taur</set>
-            <else>
-                <set var="taur"></set>
-            </else>
+			<if test="isDrider()">
+				<set var="taur"></set>
+				<else>
+					<set var="taur">_taur</set>
+				</else>
+			</if>
+			<else>
+				<set var="taur"></set>
+			</else>
         </if>
 
 		<!-- VARIABLES AREA -->
@@ -4614,7 +4617,7 @@
             <!--<switch value="VaginaClass"> -->
 				
 				<if test="vaginaType() == VaginaClass.CAVE_WYRM or vaginaType() == VaginaClass.RAIJU">
-                    <if test="taur">
+                    <if test="isTaur()">
                         <hide part="pussy/*"/>
                         <else>
                             <show part="overpussy/neonblue"/>
@@ -4623,7 +4626,7 @@
                 </if>
 				
 				<if test="vaginaType() == VaginaClass.BEE or vaginaType() == VaginaClass.BLACK_SAND_TRAP">
-                    <if test="taur">
+                    <if test="isTaur()">
                         <hide part="pussy/*"/>
                         <else>
                             <show part="overpussy/black"/>
@@ -4631,13 +4634,28 @@
                     </if>
                 </if>
 				
-				<!--<default>-->				
-                <!--</default>-->
             <!--</switch> -->
             <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
                 <hide part="pussy/*"/>
+				<hide part="overpussy/*"/>
             </if>
+			<if test="isTaur()">
+				<if test="lowerBody == LowerBody.DRIDER">
+					<else>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
+					</else>
+				</if>
+			 </if>
         </if>
+		
+		<!-- Unique pussy juice AREA -->
+		<if test="CaveWyrmPussy">
+			<show part="overskinpanty/caveWyrm"/>
+		</if>
+		<if test="MindBreakerPussy">
+			<show part="overskinpanty/mindbreaker"/>
+		</if>
 
         <!-- Penis AREA -->
         <if test="hasCock()">
@@ -4772,12 +4790,32 @@
                 </case>
 				
 				<case values="CockTypesEnum.DEMON">
-                    <if test="big">
-                        <show part="penis$taur/demonbig$taur"/>
-                        <else>
-                            <show part="penis$taur/demon$taur"/>
-                        </else>
-                    </if>
+					<if test="isTaur()">
+						<if test="isDrider()">
+							<if test="big">
+								<show part="fullbodyPenisFg/demonbig"/>
+								<else>
+									<show part="fullbodyPenisFg/demon"/>
+								</else>
+							</if>
+							<else>
+								<if test="big">
+									<show part="penis_taur/demonbig_taur"/>
+									<else>
+										<show part="penis_taur/demon_taur"/>
+									</else>
+								</if>
+							</else>
+						</if>		
+						<else>
+							<if test="big">
+								<show part="fullbodyPenisFg/demonbig"/>
+								<else>
+									<show part="fullbodyPenisFg/demon"/>
+								</else>
+							</if>	
+						</else>
+					</if>                 
                 </case>
 
                 <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
@@ -4831,16 +4869,10 @@
             <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
                 <hide part="penis/*"/>
 				<hide part="penis_taur/*"/>
+				<hide part="pussy/*"/>
+				<hide part="overpussy/*"/>
             </if>
         </if>
-
-		<!-- Unique pussy AREA -->
-		<if test="CaveWyrmPussy">
-			<show part="overskinpanty/caveWyrm"/>
-		</if>
-		<if test="MindBreakerPussy">
-			<show part="overskinpanty/mindbreaker"/>
-		</if>
 
 		<!-- BALLS AREA -->
         <if test="balls gt 0">
@@ -5455,6 +5487,8 @@
 					<show part="panty/goblinTechnomancerPanty"/>
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
+					<hide part="pussy/*"/>
+					<hide part="overpussy/*"/>
 				</if>
 			</if>
 		</if>
@@ -5495,6 +5529,8 @@
 					<show part="clotheLegs/mageRobe"/>
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
+					<hide part="pussy/*"/>
+					<hide part="overpussy/*"/>
 				</if>
 			</if>
 		</if>
@@ -5571,6 +5607,8 @@
 					<show part="panty/dragonScalePanty"/>
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
+					<hide part="pussy/*"/>
+					<hide part="overpussy/*"/>
 				</if>
 			</if>
 		</if>
@@ -5606,6 +5644,8 @@
 					<show part="panty/comfortablePanty"/>
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
+					<hide part="pussy/*"/>
+					<hide part="overpussy/*"/>
 				</if>
 			</if>
 		</if>
@@ -5640,6 +5680,8 @@
 						<show part="panty/sexyBlackBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5673,6 +5715,8 @@
 						<show part="panty/sexyAquamarineBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5706,6 +5750,8 @@
 						<show part="panty/sexyBlueBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5739,6 +5785,8 @@
 						<show part="panty/sexyGreenBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5772,6 +5820,8 @@
 						<show part="panty/sexyPinkBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5805,6 +5855,8 @@
 						<show part="panty/sexyRedBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5838,6 +5890,8 @@
 						<show part="panty/sexyWhiteBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5871,6 +5925,8 @@
 						<show part="panty/sexyYellowBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5923,6 +5979,8 @@
 						<show part="panty/cowPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5960,6 +6018,8 @@
 						<show part="panty/sexyBlackBikiniPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
@@ -5996,6 +6056,8 @@
                             <show part="clotheLegs/comfortableClothes"/>
                             <hide part="penis/*"/>
                             <hide part="balls/*"/>
+							<hide part="pussy/*"/>
+							<hide part="overpussy/*"/>
                         </else>
                     </if>
                 </if>
@@ -6168,6 +6230,8 @@
 							<show part="clotheLegs/francescaBoots"/>
 							<hide part="penis/*"/>
 							<hide part="balls/*"/>
+							<hide part="pussy/*"/>
+							<hide part="overpussy/*"/>
 						</else>
 					</if>
 				</if>
@@ -6247,6 +6311,8 @@
                         <hide part="penis/*"/>
                         <hide part="balls/*"/>
                         <show part="panty/scandalousSuccubusClothingPanty"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</else>
 				</if>
 			</if>
@@ -6495,10 +6561,12 @@
 						</else>
 					</if>
 				</if>
-				<if test="isTaur">
+				<if test="isTaur()">
 					<else>
                         <hide part="penis/*"/>
                         <hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</else>
 				</if>
 			</if>
@@ -6619,6 +6687,8 @@
 						<show part="panty/chainMailPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
 					</if>
 				</if>
 			</if>
