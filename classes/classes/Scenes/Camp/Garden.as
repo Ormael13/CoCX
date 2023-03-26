@@ -1021,9 +1021,25 @@ import classes.Scenes.SceneLib;
 		doNext(Harvest);
 	}
 
-	private function canStoreCraftedPotions():Boolean {
-		return PotionsBagSlot01 < PotionsBagSlot01Cap && PotionsBagSlot02 < PotionsBagSlot02Cap && PotionsBagSlot03 < PotionsBagSlot03Cap&& PotionsBagSlot04 < PotionsBagSlot04Cap && PotionsBagSlot05 < PotionsBagSlot05Cap 
-		&& PotionsBagSlot06 < PotionsBagSlot06Cap;
+	private function canStoreCraftedPotionsCur():Number {
+		var cSCPC:Number = 0;
+		if (PotionsBagSlot01 > 0) cSCPC += PotionsBagSlot01;
+		if (PotionsBagSlot02 > 0) cSCPC += PotionsBagSlot02;
+		if (PotionsBagSlot03 > 0) cSCPC += PotionsBagSlot03;
+		if (PotionsBagSlot04 > 0) cSCPC += PotionsBagSlot04;
+		if (PotionsBagSlot05 > 0) cSCPC += PotionsBagSlot05;
+		if (PotionsBagSlot06 > 0) cSCPC += PotionsBagSlot06;
+		return cSCPC;
+	}
+	private function canStoreCraftedPotionsMax():Number {
+		var cSCPM:Number = 0;
+		if (PotionsBagSlot01Cap > 0) cSCPM += PotionsBagSlot01Cap;
+		if (PotionsBagSlot02Cap > 0) cSCPM += PotionsBagSlot02Cap;
+		if (PotionsBagSlot03Cap > 0) cSCPM += PotionsBagSlot03Cap;
+		if (PotionsBagSlot04Cap > 0) cSCPM += PotionsBagSlot04Cap;
+		if (PotionsBagSlot05Cap > 0) cSCPM += PotionsBagSlot05Cap;
+		if (PotionsBagSlot06Cap > 0) cSCPM += PotionsBagSlot06Cap;
+		return cSCPM;
 	}
 	public function herbalismMenu():void {
 		hideMenus();
@@ -1066,8 +1082,8 @@ import classes.Scenes.SceneLib;
 		clearOutput();
 		menu();
 		outputText("Refine "+IngrediantName+" into a "+CraftingResult+"?");
-		addButton(0, "Craft (x1)", HerbalismCraftItem2, Item, IngrediantName, CraftingResult).disableIf(!canStoreCraftedPotions(), "You not have left any space to store crafted potion in your potions bag.");
-		addButton(1, "Craft (x5)", HerbalismCraftItem3, Item, IngrediantName, CraftingResult).disableIf(!canStoreCraftedPotions(), "You not have left any space to store crafted potion in your potions bag.");
+		addButton(0, "Craft (x1)", HerbalismCraftItem2, Item, IngrediantName, CraftingResult).disableIf((canStoreCraftedPotionsCur() >= canStoreCraftedPotionsMax()), "You not have left any space to store crafted potion in your potions bag.");
+		addButton(1, "Craft (x5)", HerbalismCraftItem3, Item, IngrediantName, CraftingResult).disableIf((canStoreCraftedPotionsCur() >= canStoreCraftedPotionsMax()), "You not have left any space to store crafted potions in your potions bag.");
 		addButton(2, "Cancel", herbalismMenu);
 	}
 	private function HerbalismCraftItem2(Item:Number, IngrediantName:String, CraftingResult:String):void {
@@ -1120,6 +1136,7 @@ import classes.Scenes.SceneLib;
 				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
 				doNext(playerMenu);
 		}
+		clearOutput();
 		outputText("You spend the better part of the next hour refining the "+Ingredient+" into a "+CraftingResult+" adding it to your potion bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
 			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal " + CraftingResult + ".");
@@ -1128,7 +1145,7 @@ import classes.Scenes.SceneLib;
 		var HE:Number = 20 + player.level;
 		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
-		doNext(HerbalismCraftItem4, Item, Item2, count);
+		doNext(curry(HerbalismCraftItem4, Item, Item2, count));
 	}
 	private function HerbalismCraftItem3(Item:Number, IngrediantName:String, CraftingResult:String):void {
 		clearOutput();
@@ -1207,7 +1224,7 @@ import classes.Scenes.SceneLib;
 		var HE:Number = (20 + player.level)*5;
 		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
-		doNext(HerbalismCraftItem4, Item, Item2, count);
+		doNext(curry(HerbalismCraftItem4, Item, Item2, count));
 	}
 	private function HerbalismCraftItem0():void {
 		clearOutput();
