@@ -628,34 +628,47 @@ import classes.Items.Consumables.SimpleConsumable;
 		outputText("Snakebane flower: "+IngrediantBagSlot03+"/"+IngrediantBagSlot03Cap+"\n");
 		outputText("Ironweed: "+IngrediantBagSlot04+"/"+IngrediantBagSlot04Cap+"\n");
 		outputText("Blade fern: "+IngrediantBagSlot05+"/"+IngrediantBagSlot05Cap+"\n");
-		outputText("\n\n");
-		outputText("<b>Fields</b>\n");
-		outputText("-01-: "+(GardenSlot01 != "" ? ""+GardenSlot01+" (Time until harvest: "+GardenSlot01Time+")":"empty")+"");
-		outputText("-02-: "+(GardenSlot02 != "" ? ""+GardenSlot02+" (Time until harvest: "+GardenSlot02Time+")":"empty")+"");
-		if (player.farmingLevel >= 5) outputText("-03-: "+(GardenSlot03 != "" ? ""+GardenSlot03+" (Time until harvest: "+GardenSlot03Time+")":"empty")+"");
-		if (player.farmingLevel >= 10) outputText("-04-: "+(GardenSlot04 != "" ? ""+GardenSlot04+" (Time until harvest: "+GardenSlot04Time+")":"empty")+"");
-		if (player.farmingLevel >= 15) outputText("-05-: "+(GardenSlot05 != "" ? ""+GardenSlot05+" (Time until harvest: "+GardenSlot05Time+")":"empty")+"");
-		if (player.farmingLevel >= 20) outputText("-06-: "+(GardenSlot06 != "" ? ""+GardenSlot06+" (Time until harvest: "+GardenSlot06Time+")":"empty")+"");
-		if (player.farmingLevel >= 25) outputText("-07-: "+(GardenSlot07 != "" ? ""+GardenSlot07+" (Time until harvest: "+GardenSlot07Time+")":"empty")+"");
-		if (player.farmingLevel >= 30) outputText("-08-: "+(GardenSlot08 != "" ? ""+GardenSlot08+" (Time until harvest: "+GardenSlot08Time+")":"empty")+"");
-		if (player.farmingLevel >= 35) outputText("-09-: "+(GardenSlot09 != "" ? ""+GardenSlot09+" (Time until harvest: "+GardenSlot09Time+")":"empty")+"");
-		if (player.farmingLevel >= 40) outputText("-10-: "+(GardenSlot10 != "" ? ""+GardenSlot10+" (Time until harvest: "+GardenSlot10Time+")":"empty")+"");
-		if (player.farmingLevel >= 45) outputText("-11-: "+(GardenSlot11 != "" ? ""+GardenSlot11+" (Time until harvest: "+GardenSlot11Time+")":"empty")+"");
-		if (player.farmingLevel >= 50) outputText("-12-: "+(GardenSlot12 != "" ? ""+GardenSlot12+" (Time until harvest: "+GardenSlot12Time+")":"empty")+"");
+		outputText("\n<b>Fields</b>\n");
+		outputText("-01-: "+(GardenSlot01 != "" ? ""+GardenSlot01+" (Time until harvest: "+GardenSlot01Time+" hours)":"empty")+"");
+		outputText("\n-02-: "+(GardenSlot02 != "" ? ""+GardenSlot02+" (Time until harvest: "+GardenSlot02Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 5) outputText("\n-03-: "+(GardenSlot03 != "" ? ""+GardenSlot03+" (Time until harvest: "+GardenSlot03Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 10) outputText("\n-04-: "+(GardenSlot04 != "" ? ""+GardenSlot04+" (Time until harvest: "+GardenSlot04Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 15) outputText("\n-05-: "+(GardenSlot05 != "" ? ""+GardenSlot05+" (Time until harvest: "+GardenSlot05Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 20) outputText("\n-06-: "+(GardenSlot06 != "" ? ""+GardenSlot06+" (Time until harvest: "+GardenSlot06Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 25) outputText("\n-07-: "+(GardenSlot07 != "" ? ""+GardenSlot07+" (Time until harvest: "+GardenSlot07Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 30) outputText("\n-08-: "+(GardenSlot08 != "" ? ""+GardenSlot08+" (Time until harvest: "+GardenSlot08Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 35) outputText("\n-09-: "+(GardenSlot09 != "" ? ""+GardenSlot09+" (Time until harvest: "+GardenSlot09Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 40) outputText("\n-10-: "+(GardenSlot10 != "" ? ""+GardenSlot10+" (Time until harvest: "+GardenSlot10Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 45) outputText("\n-11-: "+(GardenSlot11 != "" ? ""+GardenSlot11+" (Time until harvest: "+GardenSlot11Time+" hours)":"empty")+"");
+		if (player.farmingLevel >= 50) outputText("\n-12-: "+(GardenSlot12 != "" ? ""+GardenSlot12+" (Time until harvest: "+GardenSlot12Time+" hours)":"empty")+"");
 		addButton(0, "Put Herb In", putInHerbIntoHerbBag0);
-		//plants typicaly takes 1 week to grow from a single ingrediant into 5 new ingrediants sample player can use this button to go to the harvest selection
 		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingredients.");
 		addButton(2, "Harvest", Harvest).hint("Check your harvests.")
-		addButton(14, "Back", camp.HerbalismMenu);
+		addButton(14, "Back", camp.campActions);
 	}
 	
 	private function putInHerbIntoHerbBag0():void {
 		menu();
-		if (player.hasItem(consumables.HEALHERB)) addButton(0, "Healing herb", putInHerbIntoHerbBag, CoC.instance.consumables.HEALHERB);
-		if (player.hasItem(consumables.MOONGRASS)) addButton(1, "Moon grass", putInHerbIntoHerbBag, CoC.instance.consumables.MOONGRASS);
-		if (player.hasItem(consumables.SNAKEBANE)) addButton(2, "Snakebane", putInHerbIntoHerbBag, CoC.instance.consumables.SNAKEBANE);
-		if (player.hasItem(consumables.IRONWEED)) addButton(3, "Ironweed", putInHerbIntoHerbBag, CoC.instance.consumables.IRONWEED);
-		if (player.hasItem(consumables.BLADEFERN)) addButton(4, "Blade fern", putInHerbIntoHerbBag, CoC.instance.consumables.BLADEFERN);
+		if (player.hasItem(consumables.HEALHERB)) {
+			if (IngrediantBagSlot01 >= IngrediantBagSlot01Cap) addButtonDisabled(0, "Healing herb", "You not have space to put in another healing herb.");
+			else addButton(0, "Healing herb", putInHerbIntoHerbBag, CoC.instance.consumables.HEALHERB);
+		}
+		if (player.hasItem(consumables.MOONGRASS)) {
+			if (IngrediantBagSlot02 >= IngrediantBagSlot02Cap) addButtonDisabled(1, "Moon grass", "You not have space to put in another healing herb.");
+			else addButton(1, "Moon grass", putInHerbIntoHerbBag, CoC.instance.consumables.MOONGRASS);
+		}
+		if (player.hasItem(consumables.SNAKEBANE)) {
+			if (IngrediantBagSlot03 >= IngrediantBagSlot03Cap) addButtonDisabled(2, "Snakebane", "You not have space to put in another snakebane flower.");
+			else addButton(2, "Snakebane", putInHerbIntoHerbBag, CoC.instance.consumables.SNAKEBANE);
+		}
+		if (player.hasItem(consumables.IRONWEED)) {
+			if (IngrediantBagSlot04 >= IngrediantBagSlot04Cap) addButtonDisabled(0, "Healing herb", "You not have space to put in another ironweed.");
+			else addButton(3, "Ironweed", putInHerbIntoHerbBag, CoC.instance.consumables.IRONWEED);
+		}
+		if (player.hasItem(consumables.BLADEFERN)) {
+			if (IngrediantBagSlot05 >= IngrediantBagSlot05Cap) addButtonDisabled(4, "Blade fern", "You not have space to put in another blade fern.");
+			else addButton(4, "Blade fern", putInHerbIntoHerbBag, CoC.instance.consumables.BLADEFERN);
+		}
 		addButton(14, "Back", accessGarden);
 	}
 	private function putInHerbIntoHerbBag(ItemID:SimpleConsumable):void {
@@ -675,6 +688,13 @@ import classes.Items.Consumables.SimpleConsumable;
 		if (player.farmingLevel >= 5) tUH -= 12;
 		if (player.farmingLevel >= 10) tUH -= 12;
 		if (player.farmingLevel >= 15) tUH -= 12;
+		if (player.farmingLevel >= 20) tUH -= 12;
+		if (player.farmingLevel >= 25) tUH -= 12;
+		if (player.farmingLevel >= 30) tUH -= 12;
+		if (player.farmingLevel >= 35) tUH -= 12;
+		if (player.farmingLevel >= 40) tUH -= 12;
+		if (player.farmingLevel >= 45) tUH -= 12;
+		if (player.farmingLevel >= 50) tUH -= 12;
 		return tUH;
 	}
 

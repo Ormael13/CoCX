@@ -5924,8 +5924,8 @@ use namespace CoC;
 
 		public function maxFarmingLevel():Number {
 			var maxLevel:Number = 2;
-			if (level < 18) maxLevel += level;
-			else maxLevel += 18;
+			if (level < 28) maxLevel += level;
+			else maxLevel += 28;
 			return maxLevel;
 		}
 		public function FarmExpToLevelUp():Number {
@@ -6781,4 +6781,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}
