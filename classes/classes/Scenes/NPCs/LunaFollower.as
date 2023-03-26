@@ -952,9 +952,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				if (player.hasVagina()) outputText(" and");
 				}
 			if (player.hasVagina()) outputText(" fingering your increasingly wet pussy");
-			outputText(", enjoying the artless strip show Luna puts on for you. She undoes her apron straps and tosses it aside, then hastily pulls her dress over her head without bothering with buttons. That gone, she fumbles with the clasp on the front of her frilly white bra while her hips, covered in their cute white panties, visibly squirm in anticipation. You can already see a trickle running down her thighs. As she tosses her bra on top of the rest of her garments she looks back at you, not with a sultry grin but a look of anxious need, and when she sees your meaty pole");
+			outputText(", enjoying the artless strip show Luna puts on for you. She undoes her apron straps and tosses it aside, then hastily pulls her dress over her head without bothering with buttons. That gone, she fumbles with the clasp on the front of her frilly white bra while her hips, covered in their cute white panties, visibly squirm in anticipation. You can already see a trickle running down her thighs. As she tosses her bra on top of the rest of her garments she looks back at you, not with a sultry grin but a look of anxious need,");
 			if (player.cocks.length > 1) outputText("s");
-			outputText(" already exposed she smiles excitedly, and her crazed eyes begin glowing a familiar, phosphorescent green as her lust begins to boil over. " +
+			outputText("and when she sees your meaty pole already exposed she smiles excitedly, and her crazed eyes begin glowing a familiar, phosphorescent green as her lust begins to boil over. " +
 					"\"<i>Oh no,</i>\"" +
 					" she says, " +
 					"\"<i>I'm already tranforming... need to get the rest off before- EEEEEEEP!</i>\"" +
