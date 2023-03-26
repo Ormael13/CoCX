@@ -860,9 +860,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		//Alchemical stuff
 		public static const AlchIronweed:StatusEffectType		= mk("IronweedEffect");
 		public static const AlchBladeFerns:StatusEffectType		= mk("BladeFernsEffect");
-		public static const ArmorPotion:StatusEffectType        = mk("Painkiller");
+		public static const ArmorPotion:StatusEffectType        = mkCombat("Painkiller");
 		public static const ArousalPotion:StatusEffectType      = mk("Perfume");
-		public static const AttackPotion:StatusEffectType       = mk("Stimulant");
+		public static const AttackPotion:StatusEffectType       = mkCombat("Stimulant");
 
 		// combat
 		public static const AcidDoT:StatusEffectType                   = mkCombat("Acid DoT");

@@ -859,8 +859,8 @@ import classes.Scenes.SceneLib;
 				GardenSlot12Time = timeUntilHarvest();
 				break;
 			default:
-				GardenSlot01 = herb;
-				GardenSlot01Time = timeUntilHarvest();
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		Seed4(Item);
 	}
@@ -1011,7 +1011,8 @@ import classes.Scenes.SceneLib;
 				GardenSlot12 = "";
 				break;
 			default:
-				GardenSlot01 = "";
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		outputText("Youve collected all of the ingredients.");
 		var FE:Number = 20 + player.level;
@@ -1020,22 +1021,38 @@ import classes.Scenes.SceneLib;
 		doNext(Harvest);
 	}
 
-	private function canStoreCraftedPotions():Boolean {
-		return PotionsBagSlot01 < PotionsBagSlot01Cap && PotionsBagSlot02 < PotionsBagSlot02Cap && PotionsBagSlot03 < PotionsBagSlot03Cap&& PotionsBagSlot04 < PotionsBagSlot04Cap && PotionsBagSlot05 < PotionsBagSlot05Cap 
-		&& PotionsBagSlot06 < PotionsBagSlot06Cap;
+	private function canStoreCraftedPotionsCur():Number {
+		var cSCPC:Number = 0;
+		if (PotionsBagSlot01 > 0) cSCPC += PotionsBagSlot01;
+		if (PotionsBagSlot02 > 0) cSCPC += PotionsBagSlot02;
+		if (PotionsBagSlot03 > 0) cSCPC += PotionsBagSlot03;
+		if (PotionsBagSlot04 > 0) cSCPC += PotionsBagSlot04;
+		if (PotionsBagSlot05 > 0) cSCPC += PotionsBagSlot05;
+		if (PotionsBagSlot06 > 0) cSCPC += PotionsBagSlot06;
+		return cSCPC;
+	}
+	private function canStoreCraftedPotionsMax():Number {
+		var cSCPM:Number = 0;
+		if (PotionsBagSlot01Cap > 0) cSCPM += PotionsBagSlot01Cap;
+		if (PotionsBagSlot02Cap > 0) cSCPM += PotionsBagSlot02Cap;
+		if (PotionsBagSlot03Cap > 0) cSCPM += PotionsBagSlot03Cap;
+		if (PotionsBagSlot04Cap > 0) cSCPM += PotionsBagSlot04Cap;
+		if (PotionsBagSlot05Cap > 0) cSCPM += PotionsBagSlot05Cap;
+		if (PotionsBagSlot06Cap > 0) cSCPM += PotionsBagSlot06Cap;
+		return cSCPM;
 	}
 	public function herbalismMenu():void {
 		hideMenus();
 		clearOutput();
 		menu();
 		outputText("You move to Rathazul’s side alchemy equipment. Using these tools you can process raw natural materials into poultices and medicines.\n\nWhat would you like to craft?\n\n");
-		outputText("<b><u>Availlable potions:</u></b>\n");
-		if (PotionsBagSlot01Cap > 0) outputText("Slot 1 - "+(PotionsBagSlot01Potion == "" ? "EMPTY":""+PotionsBagSlot01Potion+" "+PotionsBagSlot01+" "+PotionsBagSlot01Cap+"")+"\n");
-		if (PotionsBagSlot02Cap > 0) outputText("Slot 2 - "+(PotionsBagSlot02Potion == "" ? "EMPTY":""+PotionsBagSlot02Potion+" "+PotionsBagSlot02+" "+PotionsBagSlot02Cap+"")+"\n");
-		if (PotionsBagSlot03Cap > 0) outputText("Slot 3 - "+(PotionsBagSlot03Potion == "" ? "EMPTY":""+PotionsBagSlot03Potion+" "+PotionsBagSlot03+" "+PotionsBagSlot03Cap+"")+"\n");
-		if (PotionsBagSlot04Cap > 0) outputText("Slot 4 - "+(PotionsBagSlot04Potion == "" ? "EMPTY":""+PotionsBagSlot04Potion+" "+PotionsBagSlot04+" "+PotionsBagSlot04Cap+"")+"\n");
-		if (PotionsBagSlot05Cap > 0) outputText("Slot 5 - "+(PotionsBagSlot05Potion == "" ? "EMPTY":""+PotionsBagSlot05Potion+" "+PotionsBagSlot05+" "+PotionsBagSlot05Cap+"")+"\n");
-		if (PotionsBagSlot06Cap > 0) outputText("Slot 6 - "+(PotionsBagSlot06Potion == "" ? "EMPTY":""+PotionsBagSlot06Potion+" "+PotionsBagSlot06+" "+PotionsBagSlot06Cap+"")+"\n");
+		outputText("<b><u>Available potions:</u></b>\n");
+		if (PotionsBagSlot01Cap > 0) outputText("Slot 1 - "+(PotionsBagSlot01Potion == "" ? "EMPTY":""+PotionsBagSlot01Potion+" "+PotionsBagSlot01+" / "+PotionsBagSlot01Cap+"")+"\n");
+		if (PotionsBagSlot02Cap > 0) outputText("Slot 2 - "+(PotionsBagSlot02Potion == "" ? "EMPTY":""+PotionsBagSlot02Potion+" "+PotionsBagSlot02+" / "+PotionsBagSlot02Cap+"")+"\n");
+		if (PotionsBagSlot03Cap > 0) outputText("Slot 3 - "+(PotionsBagSlot03Potion == "" ? "EMPTY":""+PotionsBagSlot03Potion+" "+PotionsBagSlot03+" / "+PotionsBagSlot03Cap+"")+"\n");
+		if (PotionsBagSlot04Cap > 0) outputText("Slot 4 - "+(PotionsBagSlot04Potion == "" ? "EMPTY":""+PotionsBagSlot04Potion+" "+PotionsBagSlot04+" / "+PotionsBagSlot04Cap+"")+"\n");
+		if (PotionsBagSlot05Cap > 0) outputText("Slot 5 - "+(PotionsBagSlot05Potion == "" ? "EMPTY":""+PotionsBagSlot05Potion+" "+PotionsBagSlot05+" / "+PotionsBagSlot05Cap+"")+"\n");
+		if (PotionsBagSlot06Cap > 0) outputText("Slot 6 - "+(PotionsBagSlot06Potion == "" ? "EMPTY":""+PotionsBagSlot06Potion+" "+PotionsBagSlot06+" / "+PotionsBagSlot06Cap+"")+"\n");
 		//Poultrice
 		addButton(0, "Poultice", HerbalismCraftItem, 1, "healing herb", "Poultrice").hint("Craft a Poultrice using healing herb.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"")
 			.disableIf(IngrediantBagSlot01 == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently in Ingredient Bag "+IngrediantBagSlot01+"");
@@ -1065,8 +1082,8 @@ import classes.Scenes.SceneLib;
 		clearOutput();
 		menu();
 		outputText("Refine "+IngrediantName+" into a "+CraftingResult+"?");
-		addButton(0, "Craft (x1)", HerbalismCraftItem2, Item, IngrediantName, CraftingResult).disableIf(!canStoreCraftedPotions(), "You not have left any space to store crafted potion in your potions bag.");
-		addButton(1, "Craft (x5)", HerbalismCraftItem3, Item, IngrediantName, CraftingResult).disableIf(!canStoreCraftedPotions(), "You not have left any space to store crafted potion in your potions bag.");
+		addButton(0, "Craft (x1)", HerbalismCraftItem2, Item, IngrediantName, CraftingResult).disableIf((canStoreCraftedPotionsCur() >= canStoreCraftedPotionsMax()), "You not have left any space to store crafted potion in your potions bag.");
+		addButton(1, "Craft (x5)", HerbalismCraftItem3, Item, IngrediantName, CraftingResult).disableIf((canStoreCraftedPotionsCur() >= canStoreCraftedPotionsMax()), "You not have left any space to store crafted potions in your potions bag.");
 		addButton(2, "Cancel", herbalismMenu);
 	}
 	private function HerbalismCraftItem2(Item:Number, IngrediantName:String, CraftingResult:String):void {
@@ -1116,9 +1133,10 @@ import classes.Scenes.SceneLib;
 				Ingredient = "alraune nectar";
 				break;
 			default:
-				IngrediantBagSlot01 -= 1;
-				Ingredient = "healing herb";
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
+		clearOutput();
 		outputText("You spend the better part of the next hour refining the "+Ingredient+" into a "+CraftingResult+" adding it to your potion bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
 			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal " + CraftingResult + ".");
@@ -1127,7 +1145,7 @@ import classes.Scenes.SceneLib;
 		var HE:Number = 20 + player.level;
 		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
-		doNext(HerbalismCraftItem4, Item, Item2, count);
+		doNext(curry(HerbalismCraftItem4, Item, Item2, count));
 	}
 	private function HerbalismCraftItem3(Item:Number, IngrediantName:String, CraftingResult:String):void {
 		clearOutput();
@@ -1149,45 +1167,69 @@ import classes.Scenes.SceneLib;
 	}
 	private function HerbalismCraftItem3a(Item:Number, Item2:Number, CraftingResult:String):void {
 		var Ingredient:String = "";
-		var count:Number = 1;
+		var count:Number = 5;
 		switch (Item) {
 			case 1:
-				IngrediantBagSlot01 -= 1;
-				Ingredient = "healing herb";
+				if (IngrediantBagSlot01 < 5) HerbalismCraftItem0();
+				else {
+					IngrediantBagSlot01 -= 5;
+					Ingredient = "healing herb";
+				}
 				break;
 			case 2:
-				IngrediantBagSlot02 -= 1;
-				Ingredient = "moon grass";
+				if (IngrediantBagSlot02 < 5) HerbalismCraftItem0();
+				else {
+					IngrediantBagSlot02 -= 5;
+					Ingredient = "moon grass";
+				}
 				break;
 			case 3:
-				IngrediantBagSlot03 -= 1;
-				Ingredient = "snakebane flower";
+				if (IngrediantBagSlot03 < 5) HerbalismCraftItem0();
+				else {
+					IngrediantBagSlot03 -= 5;
+					Ingredient = "snakebane flower";
+				}
 				break;
 			case 4:
-				IngrediantBagSlot04 -= 1;
-				Ingredient = "ironweed";
+				if (IngrediantBagSlot04 < 5) HerbalismCraftItem0();
+				else {
+					IngrediantBagSlot04 -= 5;
+					Ingredient = "ironweed";
+				}
 				break;
 			case 5:
-				IngrediantBagSlot05 -= 1;
-				Ingredient = "blade ferns";
+				if (IngrediantBagSlot05 < 5) HerbalismCraftItem0();
+				else {
+					IngrediantBagSlot05 -= 5;
+					Ingredient = "blade ferns";
+				}
 				break;
 			case 6:
-				IngrediantBagSlot06 -= 1;
-				Ingredient = "alraune nectar";
+				if (IngrediantBagSlot06 < 5) HerbalismCraftItem0();
+				else {
+					IngrediantBagSlot06 -= 5;
+					Ingredient = "alraune nectar";
+				}
 				break;
 			default:
-				IngrediantBagSlot01 -= 1;
-				Ingredient = "healing herb";
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
-		var HE:Number = (20 + player.level)*count;
-		HE *= player.HerbalismMulti();
-		player.herbXP(HE);
+		clearOutput();
 		outputText("You spend the better part of the next hour refining the "+Ingredient+" into multiple "+CraftingResult+" adding them to your bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
 			outputText("Your natural knowledge of herbalism allowed you to craft thrice as many "+CraftingResult+".");
 			count *= 3;
 		}
-		doNext(HerbalismCraftItem4, Item, Item2, count);
+		var HE:Number = (20 + player.level)*5;
+		HE *= player.HerbalismMulti();
+		player.herbXP(HE);
+		doNext(curry(HerbalismCraftItem4, Item, Item2, count));
+	}
+	private function HerbalismCraftItem0():void {
+		clearOutput();
+		outputText("You not have enough herbs to make this potion.");
+		doNext(herbalismMenu);
 	}
 	private function HerbalismCraftItem4(Item:Number, Item2:Number, count:Number):void {
 		var resultName:String = "";
@@ -1211,7 +1253,8 @@ import classes.Scenes.SceneLib;
 				resultName = "Perfume";
 				break;
 			default:
-				resultName = "Poultrice";
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) count *= 3;
 		switch (Item2) {
@@ -1240,7 +1283,8 @@ import classes.Scenes.SceneLib;
 				if (PotionsBagSlot06Potion == "") PotionsBagSlot06Potion = resultName;
 				break;
 			default:
-				PotionsBagSlot01 += count;
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				doNext(playerMenu);
 		}
 		doNext(HerbalismCraftItem);
 	}
@@ -1277,13 +1321,13 @@ import classes.Scenes.SceneLib;
 		hideUpDown();
 		clearOutput();
 		EngineCore.displayHeader("Potions");
-		outputText("<b><u>Availlable potions:</u></b>\n");
-		if (PotionsBagSlot01Cap > 0) outputText("Slot 1 - "+(PotionsBagSlot01Potion == "" ? "EMPTY":""+PotionsBagSlot01Potion+" "+PotionsBagSlot01+" "+PotionsBagSlot01Cap+"")+"\n");
-		if (PotionsBagSlot02Cap > 0) outputText("Slot 2 - "+(PotionsBagSlot02Potion == "" ? "EMPTY":""+PotionsBagSlot02Potion+" "+PotionsBagSlot02+" "+PotionsBagSlot02Cap+"")+"\n");
-		if (PotionsBagSlot03Cap > 0) outputText("Slot 3 - "+(PotionsBagSlot03Potion == "" ? "EMPTY":""+PotionsBagSlot03Potion+" "+PotionsBagSlot03+" "+PotionsBagSlot03Cap+"")+"\n");
-		if (PotionsBagSlot04Cap > 0) outputText("Slot 4 - "+(PotionsBagSlot04Potion == "" ? "EMPTY":""+PotionsBagSlot04Potion+" "+PotionsBagSlot04+" "+PotionsBagSlot04Cap+"")+"\n");
-		if (PotionsBagSlot05Cap > 0) outputText("Slot 5 - "+(PotionsBagSlot05Potion == "" ? "EMPTY":""+PotionsBagSlot05Potion+" "+PotionsBagSlot05+" "+PotionsBagSlot05Cap+"")+"\n");
-		if (PotionsBagSlot06Cap > 0) outputText("Slot 6 - "+(PotionsBagSlot06Potion == "" ? "EMPTY":""+PotionsBagSlot06Potion+" "+PotionsBagSlot06+" "+PotionsBagSlot06Cap+"")+"\n");
+		outputText("<b><u>Available potions:</u></b>\n");
+		if (PotionsBagSlot01Cap > 0) outputText("Slot 1 - "+(PotionsBagSlot01Potion == "" ? "EMPTY":""+PotionsBagSlot01Potion+" "+PotionsBagSlot01+" / "+PotionsBagSlot01Cap+"")+"\n");
+		if (PotionsBagSlot02Cap > 0) outputText("Slot 2 - "+(PotionsBagSlot02Potion == "" ? "EMPTY":""+PotionsBagSlot02Potion+" "+PotionsBagSlot02+" / "+PotionsBagSlot02Cap+"")+"\n");
+		if (PotionsBagSlot03Cap > 0) outputText("Slot 3 - "+(PotionsBagSlot03Potion == "" ? "EMPTY":""+PotionsBagSlot03Potion+" "+PotionsBagSlot03+" / "+PotionsBagSlot03Cap+"")+"\n");
+		if (PotionsBagSlot04Cap > 0) outputText("Slot 4 - "+(PotionsBagSlot04Potion == "" ? "EMPTY":""+PotionsBagSlot04Potion+" "+PotionsBagSlot04+" / "+PotionsBagSlot04Cap+"")+"\n");
+		if (PotionsBagSlot05Cap > 0) outputText("Slot 5 - "+(PotionsBagSlot05Potion == "" ? "EMPTY":""+PotionsBagSlot05Potion+" "+PotionsBagSlot05+" / "+PotionsBagSlot05Cap+"")+"\n");
+		if (PotionsBagSlot06Cap > 0) outputText("Slot 6 - "+(PotionsBagSlot06Potion == "" ? "EMPTY":""+PotionsBagSlot06Potion+" "+PotionsBagSlot06+" / "+PotionsBagSlot06Cap+"")+"\n");
 		outputText("\n\nPotion Effects:");
 		outputText("\nPoultice - Apply a healing salve to your wounds in order to recover health");
 		outputText("\nEnergy drink - Use an energy drink to recover your ressources");
