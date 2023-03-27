@@ -1286,7 +1286,9 @@ public final class Mutations extends MutationsHelper {
                         transformations.VaginaHuman().applyEffect();
                     }
                 } else {
-                    player.skinColor = randomChoice(DemonRace.DemonSkinColors);
+                    var choice = randomChoice(DemonRace.DemonSkinColors);
+                    player.skinColor1 = choice;
+                    player.skinColor2 = choice;
                     outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become [skin color] in color.</b>");
                     if (tainted) dynStats("cor", 1);
                     else dynStats("cor", 0);

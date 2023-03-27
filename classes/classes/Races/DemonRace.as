@@ -8,7 +8,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class DemonRace extends Race {
-	public static const DemonSkinColors:/*String*/Array = ["shiny black", "sky blue", "indigo", "ghostly white", "light purple", "purple", "red", "grey", "blue"];
+	public static const DemonSkinColors:/*String*/Array = ["shiny black", "sky blue", "indigo", "ghostly white", "leaf green", "light green", "light purple", "purple", "red", "grey", "blue"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
