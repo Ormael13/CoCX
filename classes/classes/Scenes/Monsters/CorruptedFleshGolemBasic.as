@@ -16,7 +16,7 @@ package classes.Scenes.Monsters
 	public class CorruptedFleshGolemBasic extends AbstractFleshGolem
 	{
 		public function corruptedGolemSwordSlash():void {
-			outputText("The corrupted golem's head tilts, shaking slightly. She lunges, swinging her swords at you.");
+			outputText("The corrupted golem's head tilts, shaking slightly. She lunges, teeth chattering as she swings her swords at you.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			//Dodge
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise slash!");
@@ -54,7 +54,7 @@ package classes.Scenes.Monsters
 			this.a = "the ";
 			this.short = "corrupted basic flesh golem";
 			this.imageName = "corrupted basic flesh golem";
-			this.long = "You're currently fighting a corrupted basic flesh golem. She's seven feet tall, her flesh covered sporadically by fragments of what must have once been a decorative set of armour. They seem to have been broken in places, but the shards of armor still provide decent protection. Several large holes in the armour were clearly made intentionally, exposing a throbbing cock and firm breasts. The golem keeps its head aligned with you, but its featureless, with no visible mouth, eyes or nose. She clutches a pair of swords in her meaty fists.";
+			this.long = "You're currently fighting a corrupted basic flesh golem. She's seven feet tall, her flesh covered sporadically by fragments of what must have once been a decorative set of armour. They seem to have been broken in places, but the shards of armor still provide decent protection. Several large holes in the armour were clearly made intentionally, exposing a throbbing cock and firm breasts. The golem keeps its head aligned with you, large, gaping mouth open constantly. She clutches a pair of swords in her meaty fists.";
 			this.createCock(12,2,CockTypesEnum.DEMON);
 			this.balls = 0;
 			this.ballSize = 0;
