@@ -17,7 +17,7 @@ public class DarkElfRanger extends DarkElfScout
 			var Acc:Number = 0;
 			Acc += (this.spe - player.spe);
 			if (Acc < 0) Acc = 0;
-			outputText("The black skinned elf aims her bow at you, drawing several arrows and starts shooting.\n\n");
+			outputText("The black skinned elf aims her bow at you, drawing several arrows and firing with expert precision.\n\n");
 			PoisonedBowShoot();
 			if (rand(100) < (90 + Acc)) PoisonedBowShoot();
 			else outputText("An arrow missed you.\n\n");
@@ -34,7 +34,7 @@ public class DarkElfRanger extends DarkElfScout
 			this.a = "the ";
 			this.short = "dark elf ranger";
 			this.imageName = "dark elf";
-			this.long = "This woman with dark skin has long pointed ears. You suspect her to be a dark elf, though why she’s here on the surface, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
+			this.long = "This woman is a Dark elf. She's slender and elegant, with dark skin and long pointed ears. The look in her eyes, a mixture of bloodlust and greed, give her intentions away...as does her equipment. Ropes, poisoned arrows, she's come to the surface to capture slaves.";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
