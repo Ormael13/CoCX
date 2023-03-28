@@ -1182,7 +1182,7 @@ import classes.Scenes.SceneLib;
 				.disableIf((PotionsBagSlot06 + 5 > PotionsBagSlot06Cap), "You not have left any space to store crafted potions in this potions bag slot.");
 		}
 		else {
-			outputText("\n\n<b>Unfortunately you lack enough ingrediants to crafted all potion!!!</b>");
+			outputText("\n\n<b>You not have enough ingrediants to make this potions!!!</b>");
 		}
 		addButton(14, "Back", herbalismMenu);
 	}
@@ -1228,11 +1228,6 @@ import classes.Scenes.SceneLib;
 		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
 		HerbalismCraftItem4(Item, Item2, count);
-	}
-	private function HerbalismCraftItem0():void {
-		clearOutput();
-		outputText("You not have enough herbs to make this potion.");
-		doNext(herbalismMenu);
 	}
 	private function HerbalismCraftItem4(Item:Number, Item2:Number, count:Number):void {
 		var resultName:String = "";
@@ -1340,16 +1335,39 @@ import classes.Scenes.SceneLib;
 		outputText("\nPerfume - Empower teases throught scent components");
 		outputText("\n\nWhich item will you use?");
 		menu();
-		if (PotionsBagSlot01 > 0) addButton(0, ""+PotionsBagSlot01Potion+"", PotionMenuUse, PotionsBagSlot01Potion);
-		if (PotionsBagSlot02 > 0) addButton(1, ""+PotionsBagSlot02Potion+"", PotionMenuUse, PotionsBagSlot02Potion);
-		if (PotionsBagSlot03 > 0) addButton(2, ""+PotionsBagSlot03Potion+"", PotionMenuUse, PotionsBagSlot03Potion);
-		if (PotionsBagSlot04 > 0) addButton(3, ""+PotionsBagSlot04Potion+"", PotionMenuUse, PotionsBagSlot04Potion);
-		if (PotionsBagSlot05 > 0) addButton(4, ""+PotionsBagSlot05Potion+"", PotionMenuUse, PotionsBagSlot05Potion);
-		if (PotionsBagSlot06 > 0) addButton(5, ""+PotionsBagSlot06Potion+"", PotionMenuUse, PotionsBagSlot06Potion);
+		if (PotionsBagSlot01 > 0) addButton(0, ""+PotionsBagSlot01Potion+"", PotionMenuUse, PotionsBagSlot01Potion, 1);
+		if (PotionsBagSlot02 > 0) addButton(1, ""+PotionsBagSlot02Potion+"", PotionMenuUse, PotionsBagSlot02Potion, 2);
+		if (PotionsBagSlot03 > 0) addButton(2, ""+PotionsBagSlot03Potion+"", PotionMenuUse, PotionsBagSlot03Potion, 3);
+		if (PotionsBagSlot04 > 0) addButton(3, ""+PotionsBagSlot04Potion+"", PotionMenuUse, PotionsBagSlot04Potion, 4);
+		if (PotionsBagSlot05 > 0) addButton(4, ""+PotionsBagSlot05Potion+"", PotionMenuUse, PotionsBagSlot05Potion, 5);
+		if (PotionsBagSlot06 > 0) addButton(5, ""+PotionsBagSlot06Potion+"", PotionMenuUse, PotionsBagSlot06Potion, 6);
 		addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
 	}
 	
-	private function PotionMenuUse(potion:String):void {
+	private function PotionMenuUse(potion:String, slot:Number):void {
+		switch (slot) {
+			case 1:
+				PotionsBagSlot01 -= 1;
+				break;
+			case 2:
+				PotionsBagSlot02 -= 1;
+				break;
+			case 3:
+				PotionsBagSlot03 -= 1;
+				break;
+			case 4:
+				PotionsBagSlot04 -= 1;
+				break;
+			case 5:
+				PotionsBagSlot05 -= 1;
+				break;
+			case 6:
+				PotionsBagSlot06 -= 1;
+				break;
+			default:
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
+				break;
+		}
 		switch (potion) {
 			case "Poultrice":
 				SceneLib.combat.Poultice();
@@ -1370,7 +1388,7 @@ import classes.Scenes.SceneLib;
 				SceneLib.combat.Perfume();
 				break;
 			default:
-				SceneLib.combat.Poultice();
+				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
 				break;
 		}
 		doNext(playerMenu);

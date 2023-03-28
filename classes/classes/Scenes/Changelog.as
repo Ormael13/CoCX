@@ -121,7 +121,7 @@ public class Changelog extends BaseContent
 			outputText("-One of Luna scenes fix (Jtecx)\n");
 			outputText("-Herbalism was bit changed: Instead of limitless potions bag it now hav limited slots and size of stack. But... it not super strict on caps when crafting so even if PC had left 1 potion slot left and craft more than 1 potion it will still be put in. Still until bag slot drop below the cap will be impossible to put any new potions in that slot.\n");
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 8 - Increase 2x Farming EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
-			outputText("-Painkiller & Stimulant potions effects have some effects (no that not a pun or joke): they either add to melee atk value or substract set amount of dmg from each attack. (they can also expire not last forever and beyond...)\n");
+			outputText("-Painkiller, Stimulant & Cure potions effects have some effects (no that not a pun or joke): they either add to melee atk value or increase phys def or cure some negative effects. (if they sound like charge weapon / charge armor / cure spells effect they do work the same way) ((they can also expire not last forever and beyond...))\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

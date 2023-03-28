@@ -773,6 +773,7 @@ use namespace CoC;
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColdFury)) armorDef = 0;
 			if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (hasStatusEffect(StatusEffects.ArmorPotion) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ArmorPotion));
 			if (hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) armorDef += (level * newGamePlusMod);
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (hasStatusEffect(StatusEffects.BarkSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
@@ -1460,7 +1461,10 @@ use namespace CoC;
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
 				else attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
 			}
-			if (hasStatusEffect(StatusEffects.AttackPotion)) attack += statusEffectv1(StatusEffects.AttackPotion);
+			if (hasStatusEffect(StatusEffects.AttackPotion)) {
+				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
+				else attack += Math.round(statusEffectv1(StatusEffects.AttackPotion));
+			}
 			attack = Math.round(attack);
 			return attack;
 		}
@@ -2640,14 +2644,6 @@ use namespace CoC;
 				}
 				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
 					damage = bloodShieldAbsorb(damage, display);
-				}
-				else if (hasStatusEffect(StatusEffects.ArmorPotion)) {
-					if (statusEffectv1(StatusEffects.ArmorPotion) < damage) {
-						damage -= statusEffectv1(StatusEffects.ArmorPotion);
-					}
-					else {
-						damage = 0;
-					}
 				}
 				if (hasStatusEffect(StatusEffects.AdamantineShell)) damage *= 0.25;
 				if (hasStatusEffect(StatusEffects.TrueEvasion)) damage = 0;
