@@ -696,9 +696,10 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         menu();
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
-		addButtonIfTrue(2, "GoblinHaxxors", GoblinHaxxors, "Req. to be Goblin or Gremlin.", (player.isRaceCached(Races.GOBLIN) || player.isRaceCached(Races.GREMLIN)));
-        addButton(3, "CAVEMAN!!!", WEHAVETECHNOLOGY);
-        addButton(4, "Leave", PanicRoom);
+		addButton(2, "Video Log", VideoLog);
+		addButtonIfTrue(5, "GoblinHaxxors", GoblinHaxxors, "Req. to be Goblin or Gremlin.", (player.isRaceCached(Races.GOBLIN) || player.isRaceCached(Races.GREMLIN)));
+        addButton(6, "CAVEMAN!!!", WEHAVETECHNOLOGY);
+        addButton(14, "Leave", PanicRoom);
     }
 
     public function Desk():void {
@@ -725,6 +726,25 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("Quickly frustrated, you realise you're getting nowhere with this infernal device!\n\n");
         doNext(PanicRoom);
     }
+	
+	public function VideoLog():void {
+		clearOutput();
+		outputText("You open the file, and a video begins to play…Dated just a week or so after you entered this realm.\n\n");
+		outputText("A single demon, a grin on his face, fills the screen. “<i>Doctor Hemos’ Log…SHE’s coming here! Finally, I’ll be able to showcase my work!</i>” The camera moves, and is left on a table. As the demon walks backwards, you realise that this room is the white, sterile room at the front of the lab. You watch as the scientists file into view on the other side of the room, and wait. Most are still, sterile, but the demon who’d started the video is bursting with excitement. A moment or so later, the distant flapping of leathery wings sounds.\n\n");
+		outputText("“<i>My queen.</i>” A gruff, bullish voice sounds. The door opens, and a massive minotaur enters, facing the line of scientists. “<i>Bow.</i>” The line of demons drop to one knee, and he moves forward, brandishing his axe. The minotaur steps out of frame, and two women enter.\n\n");
+		outputText("One is a succubus…Her purple hair is woven with black roses, oversized dragon wings folded against her back. Goat horns curl delicately from her head, and she walks slowly, sensually, on heels of bone. Her breasts, shockingly, are slim. She wears black cloth, cut down to nearly nothing…But her black-rimmed eyes are cold, odd, slitted pupils giving an air of dark intellect.\n\n");
+		outputText("“<i>Your Majesty, is there anything in particular you wish to see?</i>” The second woman asks. This one is odd, even by demon standards. She has long, sharp bull horns, a horselike face and a red mane running down her body…A body covered in black and white striped scales. Her hair is red…and appears to be made from thin tendrils. Almost like the anemones from the lake. She turns her head towards the camera, and sticks her forked tongue out. Despite the horse-like shape of her face, she has snake-fangs, but the rest of her teeth are sharp. The back of her throat glows red, and she lets out a puff of smoke.\n\n");
+		outputText("Her breasts are C-cups, perky, and held in place by a milking machine repurposed as a bra. She wears a lab coat overtop, unbuttoned. Electricity visibly sparks from her body, and she levitates an inch or so off the ground. Her legs are thin, with a bone spike protruding from her knees, and her legs end in razor-sharp talons. She looks at the camera, and her pupils are…odd. They’re perfect ‘X’s, yellow, with a distinct glow.\n\n");
+		outputText("The Chimera has four arms, ending with clawed fingers. One holds an inkpot, and two hold a clipboard in front of her. She dips a single claw into the inkpot, jotting down notes with her remaining hand.\n\n");
+		outputText("“<i>No, Lucina. I want to know everything about the projects, and their progress.</i>” Lethice’s voice is firm, but very feminine, and she moves with an air of assured confidence. “<i>We’ve put a lot of effort into these labs of yours.</i>”\n\n"); 
+		outputText("“<i>Of course, my queen.</i>” As Lethice and her two retainers walk past, the quivering demon scientist in the back breaks formation, raising his voice.\n\n"); 
+		outputText("“<i>Queen Lethice! Please, if you would?</i>” He takes two steps towards Lethice, but the massive minotaur turns, hefting his axe.\n\n");
+		outputText("“<i>You will speak to the queen when she requests your presence, and not a moment before.</i>” The chimeric woman says. Lethice ignores the disturbance, continuing on into the lab.\n\n");
+		outputText("“<i>Doctor Hemos, you will behave yourself.</i>” Another demon says, taking the doctor’s hand and pulling him back in line. “<i>Apologies, Doctor Lucina, for my…colleague's outburst.</i>” He shakes his head. “<i>He’s been working in his own lab for quite some time, and doesn’t know how to interact with others.</i>”\n\n");
+		outputText("The odd chimeric woman nods, scribbling down more notes. “<i>Very well…His problematic behaviour has been noted, but we’ll deal with that when we’re off the queen’s clock.</i>” She gives a very direct look to the Incubus who’d started the recording. “<i>Be careful in the future, Doctor Hemos. We wouldn’t want anything to happen to you.</i>” She looks down at the camera, frowning. “And what is this device doing on the table?” She picks it up, and the recording stops.\n\n");
+		outputText("Lethice was here, and clearly knew what was happening…But who was that chimaera? Those eyes…You’ve seen their like before.\n\n");
+		doNext(PanicRoom);
+	}
 	
     public function GoblinHaxxors():void {
         clearOutput();

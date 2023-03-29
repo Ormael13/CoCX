@@ -10557,6 +10557,26 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
+		//Mutant Incubus Venom
+		if (player.hasStatusEffect(StatusEffects.MutantIncubusVenom)) {
+            if (player.statusEffectv1(StatusEffects.MutantIncubusVenom) <= 0) {
+                player.removeStatusEffect(StatusEffects.MutantIncubusVenom);
+            } else {
+                player.addStatusValue(StatusEffects.MutantIncubusVenom, 1, -1);
+				player.takePoisonDamage(player.tou);
+            }
+        }
+		//Blacken
+		if (monster.hasStatusEffect(StatusEffects.Blacken)) {
+            if (monster.statusEffectv1(StatusEffects.Blacken) <= 0) {
+                monster.removeStatusEffect(StatusEffects.Blacken);
+				player.removeStatusEffect(StatusEffects.Blind);
+				player.buff("Black Gas").remove();
+            } else {
+                monster.addStatusValue(StatusEffects.Blacken, 1, -1);
+				player.takePoisonDamage(player.tou);
+            }
+        }
         //Companion Boosting PC Armor Value
         if (player.hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) player.removeStatusEffect(StatusEffects.CompBoostingPCArmorValue);
         //Elemental Aspect status effects

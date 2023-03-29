@@ -1225,6 +1225,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PigbysHands:StatusEffectType           = mkCombat("Pigbys Hands");
 		public static const SoulArena:StatusEffectType             = mkCombat("Soul Arena");
 		public static const SoulArenaGaunlet:StatusEffectType      = mkCombat("Soul Arena Gaunlet");
+		public static const Blacken:StatusEffectType               = mkCombat("Blacken");
+		public static const MutantIncubusVenom:StatusEffectType    = mkCombat("Mutant Incubus Venom");
 		public static const AikoLightningArrow:StatusEffectType    = mkCombat("Aiko Lightning Arrow");
 		public static const YamataEntwine:StatusEffectType 		   = mkCombat("Yamata Entwine");
 		public static const BerzerkingSiegweird:StatusEffectType   = mkCombat("Berzerking Siegweird");
