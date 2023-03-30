@@ -1274,8 +1274,7 @@ public class Combat extends BaseContent {
 		//?lust?
 		addButton(14, "Back", combat.combatMenu, false);
 	}
-
-    //ALCHEMY ZONE
+	
     public function CalcAlchemyPower():Number{
         var power:Number = 0;
         power += scalingBonusWisdom();
@@ -1284,8 +1283,7 @@ public class Combat extends BaseContent {
         power = Math.round(power);
         return power;
     }
-
-    public function Poultice():void {
+	public function Poultice():void {
         clearOutput();
         var power:Number = CalcAlchemyPower();
         power += (player.maxHP()*0.15)+(power*0.01*player.maxHP());
@@ -1295,7 +1293,6 @@ public class Combat extends BaseContent {
         outputText("You apply the poultice, your wounds closing at high speed. Healed for ");
         CommasForDigits(power*-1);
     }
-
     public function EnergyDrink():void {
         clearOutput();
         var power:Number = CalcAlchemyPower()*5;
@@ -1304,18 +1301,66 @@ public class Combat extends BaseContent {
         player.soulforce += power;
         outputText("You chug your energy drink, and as you toss the container aside, you feel your body loosen, your mind fizzing with sudden mana. Your soul feels much better, power whirling through you. Recovered "+power+" ressources.");
     }
-
     public function Cure():void {
         clearOutput();
-        player.buff("Poison").remove();
-        player.removeStatusEffect(StatusEffects.BurnDoT);
-        player.removeStatusEffect(StatusEffects.BurnDoT2);
-        player.removeStatusEffect(StatusEffects.FrostburnDoT);
-        player.removeStatusEffect(StatusEffects.FrozenLung);
-        player.removeStatusEffect(StatusEffects.Hemorrhage);
+		var uses:Number = 0;
+		for each (var buff:String in CurableBuffs) {
+			player.buff(buff).remove();
+			uses += 1;
+		}
+		for each (var type:StatusEffectType in CurableEffects) {
+			if (uses == 0) {
+				player.removeStatusEffect(type);
+				uses += 1;
+			}
+		}
+		if ((player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained")) && uses == 0) {
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+				player.removeCurse(stat, 6,1);
+				player.removeCurse(stat, 3,2);
+				if (stat != "sens") {
+					player.removeCurse(stat+".mult", 0.06,1);
+					player.removeCurse(stat+".mult", 0.03,2);
+				}
+			}
+		}
         outputText("You drink up the cure, feeling relieved as your status ailments are cleansed.");
     }
-
+	private const CurableBuffs:/*String*/Array = [
+		"LightningArrowStr",
+		"LightningArrowSpe",
+		"FireArrow",
+		"IceArrow",
+		"Illusion",
+		"Fear",
+		"CombatDebuffStr",
+		"CombatDebuffSpe",
+		"BasiliskGaze",
+		"LightningArrow",
+		"AkbalDebuff",
+		"FrostGiantDebuff",
+		"GnollSpearThrowerDebuff",
+		"YoungFrostGiantDebuff",
+		"PoisonedArrow",
+		"MalikoreVenom",
+		"ManticoreVenom",
+		"Nightmare",
+		"Entwine",
+		"Poison"
+	];
+	private const CurableEffects:/*StatusEffectType*/Array = [
+		StatusEffects.BurnDoT,
+		StatusEffects.AcidSlap,
+		StatusEffects.DriderKiss,
+		StatusEffects.AikoLightningArrow,
+		StatusEffects.NagaVenom,
+		StatusEffects.MedusaVenom,
+		StatusEffects.DriderIncubusVenom,
+		StatusEffects.Poison,
+		StatusEffects.AcidDoT,
+		StatusEffects.FrostburnDoT,
+		StatusEffects.FrozenLung,
+	];
     public function Painkiller():void {
         clearOutput();
         var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
@@ -1324,7 +1369,6 @@ public class Combat extends BaseContent {
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling any lingering pain recede as your skin hardens like stone. "+power+" "+duration+"");
     }
-
     public function Stimulant():void {
         clearOutput();
         var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
@@ -1333,7 +1377,6 @@ public class Combat extends BaseContent {
         player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling stronger and more agile already. "+power+" "+duration+"");
     }
-
     public function Perfume():void {
         clearOutput();
         var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
@@ -1345,7 +1388,7 @@ public class Combat extends BaseContent {
         }
         else {
             outputText("You grab your bottle of Alraune perfume and almost spray yourself before remembering that you actualy already produce your own perfume, heck you are bathing into it! You slap yourself before puting back the item in your bag... what a dummy.");
-            player.changeNumberOfPotions(PotionType.PERFUME, +1);
+            //player.changeNumberOfPotions(PotionType.PERFUME, +1);
         }
     }
 
@@ -9786,14 +9829,6 @@ public class Combat extends BaseContent {
 				} else player.addStatusValue(StatusEffects.Berzerking, 1, -1);
 			}
         }
-        //Blood Frenzy until ennemies stops bleeding
-        if (player.hasStatusEffect(StatusEffects.BloodFrenzy)) {
-            if (!MonsterIsBleeding()) {
-                player.removeStatusEffect(StatusEffects.BloodFrenzy);
-                player.statStore.removeBuffs("Blood Frenzy");
-                outputText("<b>With no blood in the air, your mind clears, your frenzy fades. </b>\n\n");
-            }
-        }
         if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
             if (player.statusEffectv1(StatusEffects.Lustzerking) <= 0) {
                 player.removeStatusEffect(StatusEffects.Lustzerking);
@@ -9835,6 +9870,14 @@ public class Combat extends BaseContent {
                 outputText("<b>Cauterize effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Cauterize, 1, -1);
         }
+        //Blood Frenzy until ennemies stops bleeding
+        if (player.hasStatusEffect(StatusEffects.BloodFrenzy)) {
+            if (!MonsterIsBleeding()) {
+                player.removeStatusEffect(StatusEffects.BloodFrenzy);
+                player.statStore.removeBuffs("Blood Frenzy");
+                outputText("<b>With no blood in the air, your mind clears, your frenzy fades. </b>\n\n");
+            }
+        }
         //Elven Eye
         if (player.hasStatusEffect(StatusEffects.ElvenEye)) {
             if (player.statusEffectv1(StatusEffects.ElvenEye) <= 0) {
@@ -9871,6 +9914,19 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.WinterClaw);
                 outputText("<b>Winter Claw effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.WinterClaw, 1, -1);
+        }
+		//Alchemic potions
+		if (player.hasStatusEffect(StatusEffects.ArmorPotion)) {
+            if (player.statusEffectv2(StatusEffects.ArmorPotion) <= 0) {
+                player.removeStatusEffect(StatusEffects.ArmorPotion);
+                outputText("<b>Painkiller effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.ArmorPotion, 2, -1);
+        }
+		if (player.hasStatusEffect(StatusEffects.AttackPotion)) {
+            if (player.statusEffectv2(StatusEffects.AttackPotion) <= 0) {
+                player.removeStatusEffect(StatusEffects.AttackPotion);
+                outputText("<b>Stimulant effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.AttackPotion, 2, -1);
         }
         //Spell buffs
         //Violet Pupil Transformation
@@ -10499,6 +10555,26 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
+            }
+        }
+		//Mutant Incubus Venom
+		if (player.hasStatusEffect(StatusEffects.MutantIncubusVenom)) {
+            if (player.statusEffectv1(StatusEffects.MutantIncubusVenom) <= 0) {
+                player.removeStatusEffect(StatusEffects.MutantIncubusVenom);
+            } else {
+                player.addStatusValue(StatusEffects.MutantIncubusVenom, 1, -1);
+				player.takePoisonDamage(player.tou);
+            }
+        }
+		//Blacken
+		if (monster.hasStatusEffect(StatusEffects.Blacken)) {
+            if (monster.statusEffectv1(StatusEffects.Blacken) <= 0) {
+                monster.removeStatusEffect(StatusEffects.Blacken);
+				player.removeStatusEffect(StatusEffects.Blind);
+				player.buff("Black Gas").remove();
+            } else {
+                monster.addStatusValue(StatusEffects.Blacken, 1, -1);
+				player.takePoisonDamage(player.tou);
             }
         }
         //Companion Boosting PC Armor Value

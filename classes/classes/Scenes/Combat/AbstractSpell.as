@@ -125,6 +125,11 @@ public class AbstractSpell extends CombatAbility {
 		} else {
 			if (!isAutocasting) preSpellEffect();
 			doSpellEffect(display);
+			if(monster.hasStatusEffect(StatusEffects.Blacken) && (hasTag(TAG_FIRE) || hasTag(TAG_AOE))) {
+				monster.removeStatusEffect(StatusEffects.Blacken);
+				player.removeStatusEffect(StatusEffects.Blind);
+				player.buff("Black Gas").remove();
+			}
 			if (!isAutocasting) postSpellEffect();
 			if (display) {
 				outputText("\n\n");

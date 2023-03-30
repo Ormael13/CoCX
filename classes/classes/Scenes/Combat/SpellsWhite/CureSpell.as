@@ -77,7 +77,7 @@ public class CureSpell extends AbstractWhiteSpell{
 			player.buff(buff).remove();
 		}
 		for each (var type:StatusEffectType in CurableEffects) {
-			player.removeStatusEffect(type)
+			player.removeStatusEffect(type);
 		}
 		if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained")) {
 			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {

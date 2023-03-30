@@ -86,43 +86,58 @@ public class MutantIncubus extends Monster {
     }
 
     private function BladeFlurry():void {
-        outputText("The mutant Incubus rushes towards you, blades outstretched.\n\n");
-        //Miss:
-        //Determine if evaded
-        if (player.getEvasionRoll()) {
-            outputText("Using your talent for evasion, you manage to sidestep the creature's clumsy charge.");
-        }
-        else {
-            outputText("You try to dodge, but the creature’s fist is too fast, hitting you square in the chest. You’re sent tumbling back.");
-            eOneAttack(true);
-            outputText("As it keeps charging through, a few of the drider’s legs come down onto your prone frame, trampling you. ");
-            eOneAttack(true);
-            eOneAttack(true);
-            outputText("\n");
-        }
+        if (hasStatusEffect(StatusEffects.Blacken)) {
+			outputText("From the darkness, you feel the air moving…too late to dodge. The Incubus seems to be everywhere, slashing at you from multiple angles at once! ");
+			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+			else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			for (var i1:int = 0; i1 < 8; ++i1) {
+				player.buff("Blackened Blade Furry").addStats({"str":-5}).withText("Blackened Blade Furry!").combatPermanent();
+				eOneAttack(true);
+			}
+		}
+		else {
+			outputText("The mutant incubus grits his teeth, slashing at you with his thin swords. They flick in behind your guard, leaving thin, bleeding wounds. Your muscles feel weaker where the swords hit. ");
+			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+			else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			for (var i2:int = 0; i2 < 4; ++i2) {
+				player.buff("Blade Furry").addStats({"str":-2}).withText("Blade Furry!").combatPermanent();
+				eOneAttack(true);
+			}
+		}
+        outputText("\n");
     }
 
-    private function HandStab():void {
-        outputText(capitalA + short + " steps in, stabbing at your chest with one blade. You move, but it was a feint! His other rapier is headed right towards your [weapon] hand.  ");
-        if (player.getEvasionRoll()) {
-            outputText("You pull your weapon back and the stab whiffs, hitting nothing but air.");
-        }
-        else if (player.hasPerk(PerkLib.ShieldWard) && rand(2) == 0) {
-            outputText("You intercept the Incubus's blade with your shield.");
-        } else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {
-            outputText("The rapier hits your gauntlet, but your armored hand is too tough for the rapier to pierce.\n");
-        } else {
-            outputText("You don't react fast enough, the rapier piercing your hand! You let out a cry of pain, dropping your [weapon] to the ground. You can't give this slippery incubus the opening and pick it up, and your hand is bleeding from the attack.");
-            player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
-            flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-            player.setWeapon(WeaponLib.FISTS);
-            player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
-        }
+    private function StingerTail():void {
+        outputText("The mutant incubus lunges forward, stabbing at you. You dodge that, then a sweeping slash from his other blade…only to realise, too late, that they were feints! The Incubus drives his tail into your stomach, dumping a load of venom into your system! ");
+		player.createStatusEffect(StatusEffects.MutantIncubusVenom, 5, 0, 0, 0);
+		player.buff("Mutant Incubus Venom").addStats({"int":-5}).withText("Poisoned!").combatTemporary(5);
     }
+
+    private function Blacken():void {
+        outputText("The incubus groans, and the room shudders around you. From the incubus’s body spews a gaseous substance. It quickly fills the room, concealing the demon from view. All you can see of your foe is a single glowing purple eye…Wait. Your vision blurs for a moment, and the glowing eye seems to multiply, spreading through the room. Hitting the Mutant Incubus will be MUCH harder now! ");
+		player.buff("Black Gas").addStats({"spe":-5}).withText("Black Gas!").combatPermanent();
+		player.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
+		createStatusEffect(StatusEffects.Blacken, 3, 0, 0, 0);
+	}
 
     override protected function performCombatAction():void {
-        if (rand(2) == 0) HandStab();
-        else BladeFlurry();
+        if (hasStatusEffect(StatusEffects.Blacken)) BladeFlurry();
+		else {
+			var choice:Number = rand(5);
+			switch (choice) {
+				case 0:
+				case 1:
+					BladeFlurry();
+					break;
+				case 2:
+				case 3:
+					StingerTail();
+					break;
+				case 4:
+					Blacken();
+					break;
+			}
+		}
     }
 }
 
