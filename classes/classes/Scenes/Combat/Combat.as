@@ -2930,6 +2930,13 @@ public class Combat extends BaseContent {
 			}
 			else if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+			else if (player.weaponRange == weaponsrange.GOODSAM) {
+				var recoil:Number = 1;
+				if (player.str >= 50) recoil += 1;
+				if (player.str >= 100) recoil += 1;
+				if (player.str >= 200) recoil += 1;
+				flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = recoil;
+			}
             else if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) {
 				if (flags[kFLAGS.MULTISHOT_STYLE] >= 1 && player.hasPerk(PerkLib.PrimedClipWarp)) {
 					if (flags[kFLAGS.MULTISHOT_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
@@ -3769,7 +3776,7 @@ public class Combat extends BaseContent {
 				damage *= 1.5;
                 //Weapon addition!
                 damage = rangeAttackModifier(damage);
-                if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
+                if (player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.GOODSAM || Forgefather.purePearlEaten) {
                     damage = monsterPureDamageBonus(damage);
                 }
                 if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
@@ -3914,7 +3921,7 @@ public class Combat extends BaseContent {
             }
             //Weapon addition!
             damage = rangeAttackModifier(damage);
-            if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
+            if (player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.GOODSAM || Forgefather.purePearlEaten) {
                 damage = monsterPureDamageBonus(damage);
             }
             if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
@@ -4453,6 +4460,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
+        if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
@@ -6862,20 +6870,22 @@ public class Combat extends BaseContent {
 	}
 
     public function monsterPureDamageBonus(damage:Number):Number {
-        if (monster.cor < 33) damage = Math.round(damage * 1.0);
-        else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-        else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-        else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-        else damage = Math.round(damage * 1.4);//30% more damage against very high corruption.
+        if (monster.cor <= 33) damage = Math.round(damage * 1.0);
+        else if (monster.cor <= 50) damage = Math.round(damage * 1.2);
+        else if (monster.cor <= 70) damage = Math.round(damage * 1.6);
+        else if (monster.cor <= 90) damage = Math.round(damage * 2.2);
+        else if (monster.cor <= 99) damage = Math.round(damage * 3);//200% more damage against very high corruption.
+        else damage = Math.round(damage * 5);//400% more damage against full corruption.
         return damage;
     }
 
     public function monsterCorruptDamageBonus(damage:Number):Number {
         if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-        else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-        else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-        else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-        else damage = Math.round(damage * 1.4);
+        else if (monster.cor >= 50) damage = Math.round(damage * 1.2);
+        else if (monster.cor >= 30) damage = Math.round(damage * 1.6);
+        else if (monster.cor >= 10) damage = Math.round(damage * 2.2);
+        else if (monster.cor >= 1) damage = Math.round(damage * 3);
+        else damage = Math.round(damage * 5);
         return damage;
     }
 
@@ -11503,6 +11513,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
+        if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;

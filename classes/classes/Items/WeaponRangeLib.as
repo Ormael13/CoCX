@@ -15,7 +15,8 @@ public final class WeaponRangeLib extends ItemConstants
 		public function LegendaryPure():Array {
 			return [
 				ARTEMIS,
-				KSLHARP
+				KSLHARP,
+				GOODSAM
 			]
 		}
 		public function LegendaryCorrupt():Array {
@@ -54,6 +55,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const DUEL_P_:WeaponRange = new WeaponRange("DuelP", "DuelingP", "dueling pistol", "a dueling pistol", "shot", 20, 430, "A pistol for duels between gentelmen. Or just for shooting. Can shoot only once before it need reload.", "Pistol").withBuffs({'rangedaccuracy':-10}) as WeaponRange;
 		public const EVELYN_:WeaponRange = new WeaponRange("Evelyn", "Evelyn", "Evelyn", "Evelyn", "shot", 40, 6000, "A marvel of goblin prehistory before the time the first firearms were created, Avelynn prototype 3.0 is designed with several chained mechanism in order to allow firing up to 3 bolts all at the same time. Despite being primitive by modern goblin design this exquisite tool of death does its job well.", WT_CROSSBOW).withBuffs({'rangedaccuracy':+60}) as WeaponRange;
 		public const FLINTLK:WeaponRange = new WeaponRange("Flintlk", "Flintlock", "flintlock pistol", "a flintlock pistol", "shot", 14, 310, "A flintlock pistol. Pew pew pew. Can fire once before a reload is required.", "Pistol");
+		public const GOODSAM:GoodSamaritan = new GoodSamaritan();
 		public const GTHRAXE:WeaponRange = new WeaponRange("GThrAxe", "GThrowAxes", "gnoll throwing axes", "a gnoll throwing axes", "shot", 25, 1250, "A set of throwing axes made and used by the gnoll barbarian, they are actually heavier than standard throwing weapon but all the more effective. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const GTHRSPE:WeaponRange = new WeaponRange("GThrSpe", "GThrowSpear", "gnoll throwing spear", "a gnoll throwing spear", "shot", 18, 900, "A standard javelin for ranged combat made by the gnolls. You can carry up to 20 on you and need to retrieve them after battles.", "Throwing");
 		public const HARKON1:WeaponRange = new WeaponRange("Harkon1", "Harkonnen", "Harkonnen", "a Harkonnen", "shot", 160, 3230, "This 30 mm, single-shot breech loader cannon use 'true damage' shells.", WT_2H_FIREARM).withBuffs({'rangedaccuracy':-20}) as WeaponRange;
