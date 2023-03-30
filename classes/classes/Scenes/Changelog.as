@@ -86,11 +86,10 @@ public class Changelog extends BaseContent
 			outputText("-Added Farming mastery. Max lvl is 50 and increase by 1 each lvl until 48. Each 5 levels it would enable to use another garden plot and decrease farming time by 12 hours.\n");
 			outputText("-Garden was bit changed: It been moved out of Herbalism menu and req. bought herb bag of any size to access. Starting with 2 plots usable for any type of herb seed planted. Farming exp is gained at the moment of planting and harvesting.\n");
 			outputText("-Herbalism was bit changed: Instead of limitless potions bag it now hav limited slots and size of stack. But... it not super strict on caps when crafting so even if PC had left 1 potion slot left and craft more than 1 potion it will still be put in. Still until bag slot drop below the cap will be impossible to put any new potions in that slot.\n");
-			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 8 - Increase 2x Farming EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-Painkiller, Stimulant & Cure potions effects have some effects (no that not a pun or joke): they either add to melee atk value or increase phys def or cure some negative effects. (if they sound like charge weapon / charge armor / cure spells effect they do work the same way) ((they can also expire not last forever and beyond...))\n");
-			outputText("-New range weapon (by Lady Aeducan): Good Samaritan - obtainable by giving Desert Eagle to Pure Celess to purify. Base atk is 150 (including up to 50 from corruption scaling and up to 90 from str scaling) and ammo clip size 4. Without 200+ str amount of shoots per turn (with feat for those) will be reduced due to recoil effect. It's Pistol type range weapon, dealing bonus dmg to corrupted enemies.\n");
+			outputText("-New range weapon (by Lady Aeducan): Good Samaritan - obtainable by giving Desert Eagle to Pure Celess to purify. Base atk is 150 (including up to 50 from corruption scaling and up to 90 from str scaling) and ammo clip size 4. Without 200+ str amount of shoots per turn (with feat for those) will be reduced due to recoil effect. It's Pistol type range weapon, dealing bonus dmg to corrupted enemies, +25% dmg to true demons.\n");
 			outputText("-Purity and Corruption based scaling of damage been increased from 100%/110%/120%/130%/140% tiers to 100%/120%/160%/220%/300%/500%. Last one is newly added tier of bonus for case enemy is above 99% or below 1% corruption.\n");
-			outputText("-\n");
+			outputText("-New range weapon (by Ormael): Bad Omen - obtainable by giving Desert Eagle to Corrupted Celess to corrupt. Base atk is 150 (including up to 50 from corruption scaling and up to 90 from str scaling) and ammo clip size 4. Without 200+ str amount of shoots per turn (with feat for those) will be reduced due to recoil effect. It's Pistol type range weapon, dealing bonus dmg to pure enemies, +25% dmg to true angels.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -120,7 +119,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
 			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks, Anita (Harpy from Black Cock) 69 scene locked for some of the PC that had non taur lower bodies, (Ice) Troll Fig items not increasing stat bonuses for perm race PC, ");
-			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho, Melkie Lung mutation not giving any stat multi bonus\n");
+			outputText("Flurry of Blows adding only 1 to total multiattacks instead of 2, Steel Storm not affecting Daisho, Melkie Lung mutation not giving any stat multi bonus, First Attack: Golems perk not working when pc not build basic stone golems\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -411,6 +410,7 @@ public class Changelog extends BaseContent
 			outputText("-New material: Elemental Crystal. Cost 10 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 10 times more elemental energy than normal Elemental Shard)\n");
 			outputText("-New material: Elemental Core. Cost 20 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 2 times more elemental energy than Elemental Crystal)\n");
 			outputText("-New material: a Soul Residue. Cost 1 gem. Could drop after beating angel type enemies.\n");
+			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 8 - Increase 2x Farming EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-New Sand worm encounter and opening previously hidden Inner Desert area for exploration! (EragonX)\n");
 			outputText("-New enemy: Gorgon - lvl 24. Encounterable in inner desert from lvl 14+.\n");
 			outputText("-New enemies (by Liadri with slight modification to be group enemy): Zombies - lvl 25. Encounterable in Boundary/Outer Battlefield as long PC isn't Jiangshi. They have Undead enemy type perk.\n");
@@ -433,6 +433,15 @@ public class Changelog extends BaseContent
 			outputText("-Added option to capture & convert some of the enemies into new wood elfs.\n");
 			outputText("-Factory, Deep Cave and Lethice Stronghold monsters went to gym and they are now punch harder. They even lvl up when was there by 4 lvl's (factory), 10 lvl's (deep cave) or whooping 30 lvl's (lethice stronghold).\n");
 			outputText("-Flurry of Blows no longer req. Combo Master perk and physical soulskills hits trice not twice.\n");
+			outputText("-Bee race req. for vagina replaced for specificaly req. bee vagina.\n");
+			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
+			outputText("-Madmen knowledge can be bought in Dinah shop too now under 'Misc' tab but be warned it's not the cheapest item in her offer....even insanity have it price a BIG price that makes merchant selling bit of it happy ;) And items she had on main shop display been all moved to subtab named 'Misc'.\n");
+			outputText("-Base dmg of crossbow/firearms atk get very rudimentary scaling of stats. Crossbows getting added speed core/trained value parts * 2 added and firearms spe/int/wis core/trained values added. Job: Gunslinger would multiply base dmg not add 2x weapon atk.\n");
+			outputText("-Elemental conversion of shards/crystals/cores can now be done using 1 or 5 of them.\n");
+			outputText("-Survival Training super perk can be ranked up two more times (up to rank 6).\n");
+			outputText("-Elemental Pearls can be now found fighting enemeis that are encoutered by going to summoning elementals menu and picking option to go on journey there (would only be possible if PC need to find one of three pearls).\n");
+			outputText("-3rd tier of wolf race bonuses been increased from 21 to 22 pts and bonuses boosted accordly (and then doubled due to 2 body slots been locked similary to perm tf's). It stronger variant of bite would also deal dmg/leave bleeding wounds on top of injecting cold energy into enemy body.\n");
+			outputText("-Added to main story dungeons clean reward additonal thing - 1 super perk point ;)\n");
 			
 			outputText("-Electra now acknowledges that more then just Raiju can volt transfer. Tbird can get supercharged too. More accounting for Kirin existing. Added centaur support to Supercharged scene, Horsecock now become big starting higher then 25 inch seeing as a normal horse cock is 20 inch. (Liadri)\n");
 			outputText("-Added sand worm sprite added to the game in full. (Liadri)\n");
@@ -479,15 +488,6 @@ public class Changelog extends BaseContent
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-Bee race req. for vagina replaced for specificaly req. bee vagina.\n");
-			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
-			outputText("-Madmen knowledge can be bought in Dinah shop too now under 'Misc' tab but be warned it's not the cheapest item in her offer....even insanity have it price a BIG price that makes merchant selling bit of it happy ;) And items she had on main shop display been all moved to subtab named 'Misc'.\n");
-			outputText("-Base dmg of crossbow/firearms atk get very rudimentary scaling of stats. Crossbows getting added speed core/trained value parts * 2 added and firearms spe/int/wis core/trained values added. Job: Gunslinger would multiply base dmg not add 2x weapon atk.\n");
-			outputText("-Elemental conversion of shards/crystals/cores can now be done using 1 or 5 of them.\n");
-			outputText("-Survival Training super perk can be ranked up two more times (up to rank 6).\n");
-			outputText("-Elemental Pearls can be now found fighting enemeis that are encoutered by going to summoning elementals menu and picking option to go on journey there (would only be possible if PC need to find one of three pearls).\n");
-			outputText("-3rd tier of wolf race bonuses been increased from 21 to 22 pts and bonuses boosted accordly (and then doubled due to 2 body slots been locked similary to perm tf's). It stronger variant of bite would also deal dmg/leqve bleeding wounds on top of injecting cold energy into enemy body.\n");
-			outputText("-Added to main story dungeons clean reward additonal thing - 1 super perk point ;)\n");
 			menu();
 			addButton(0, "Next", Changelog43);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

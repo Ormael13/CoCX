@@ -97,7 +97,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(10, "Elementals",summonsbehaviourOptions);
 		}
-		if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
+		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) && player.hasPerk(PerkLib.FirstAttackGolems)) {
 			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
 			addButton(11, "P.Golems",golemsbehaviourOptions);
 		}

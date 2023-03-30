@@ -37,6 +37,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const ARTEMIS:Artemis = new Artemis();
 		public const ATKNIFE:WeaponRange = new WeaponRange("ATKnife", "A.ThrowingKnife", "amethyst throwing knife", "an amethyst throwing knife", "shot", 3, 300, "A small knife made of obsidian and grotesquely decorated with amethysts and lead engravings that could be thrown. The magic within this murky blade will bleed unnatural darkness when charged with magic. You can carry up to 15 on you and need to retrieve them after battles.", "Throwing");
 		public const AVELYNN:WeaponRange = new WeaponRange("Avelynn", "Avelynn", "Avelynn", "Avelynn", "shot", 40, 6000, "A marvel of goblin prehistory before the time the first firearms were created, Avelynn prototype 3.0 is designed with several chained mechanism in order to allow firing up to 3 bolts all at the same time. Despite being primitive by modern goblin design this exquisite tool of death does its job well.", WT_CROSSBOW).withBuffs({'rangedaccuracy':+60}) as WeaponRange;
+		public const BADOMEN:BadOmen = new BadOmen();
 		public const BEA_BOW:BeautifulBow = new BeautifulBow();
 		public const B_F_BOW:BFBow = new BFBow();
 		public const BFXBOW_:WeaponRange = new WeaponRange("BFXBow", "BFXBow", "big fucking crossbow", "a big fucking crossbow", "shot", 60, 3000, "Big Fucking Crossbow - the best solution for a tiny e-pen complex at this side of the Mareth!", WT_CROSSBOW).withBuffs({'rangedaccuracy':+60}) as WeaponRange;

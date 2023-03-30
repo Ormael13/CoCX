@@ -1357,6 +1357,9 @@ public class PerkLib
 		public static const FirstAttackGolems:PerkType = mk("First Attack: Golems", "First Attack: Golems",
 				"Before your actions one or more of your golems will attack.",
 				"You've chosen the 'First Attack: Golems' perk, allowing some of your permanent golems to strike before you.");
+		public static const FirstAttackSkeleton:PerkType = mk("First Attack: Skeleton", "First Attack: Skeleton",
+				"Before your actions one or more of your skeletons will attack.",
+				"You've chosen the 'First Attack: Golems' perk, allowing some of your skeletons to strike before you.");
 		public static const FirstResponse:PerkType = mk("First Response", "First Response",
 				"Your time running into disaster to take care of others allows you to take better care of wounds, further increasing your regen.",
 				"You've chosen the 'First Response' perk, increasing HP gains by 20%.");
