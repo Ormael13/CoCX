@@ -529,6 +529,8 @@ public class CombatUI extends BaseCombatContent {
 			//again, no else after - ally turns SHOULD be disabled.
 			if (isGolemTurn())
 				doGolemTurn();
+			if (isSkeletonsTurn())
+				combat.sendSkeletonToFight();
 			else if (isEpicElementalTurn())
 				doEpicElementalTurn();
 			else if (isElementalTurn())
@@ -653,6 +655,10 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 		}
+	}
+
+	public function isSkeletonsTurn():Boolean {
+		return (player.hasPerk(PerkLib.FirstAttackSkeletons) && ((player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 && !monster.isFlying()) || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) && flags[kFLAGS.NECROMANCER_SKELETONS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] != 1;
 	}
 
 	public function isEpicElementalTurn():Boolean {

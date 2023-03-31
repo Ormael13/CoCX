@@ -90,11 +90,14 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         //Dungeon operational
         if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
             //First meeting
-            if (flags[kFLAGS.MET_MARAE] <= 0) {
+            if (flags[kFLAGS.MET_MARAE] <= 0 && flags[kFLAGS.MARAE_QUEST_START] <= 0) {
                 flags[kFLAGS.MET_MARAE] = 1;
                 flags[kFLAGS.MARAE_ISLAND] = 1;
                 outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n");
-                if (player.cor > 66 + player.corruptionTolerance) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
+                if (player.cor > 66 + player.corruptionTolerance) {
+					outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
+					firstEncounterWentBad();
+				}
                 //Explain the dungeon scenario
                 else {
                     flags[kFLAGS.MARAE_QUEST_START] = 1;
@@ -122,8 +125,8 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n");
                 if (player.cor > 66 + player.corruptionTolerance) {
                     outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
-                    if (player.level >= 30) outputText(" Of course, you could probably try to overthrow her.");
-                    doNext(camp.returnToCampUseOneHour);
+                    if (player.level >= 130) outputText(" Of course, you could probably try to overthrow her.");
+					doNext(camp.returnToCampUseOneHour);
                 } else {
                     //If youve taken her quest already
                     if (flags[kFLAGS.MARAE_QUEST_START] >= 1) {
@@ -167,6 +170,28 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             else firstCorruptEncounter();
         }
     }
+	private function firstEncounterWentBad():void {
+		if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+			outputText("As you hit the shore and jump out of the boat, you spot a wood elf sister casually sitting on a rock by the beach. She's quite far from the forest, come to think of it.\n\n");
+			outputText("\"<i>Hey sister, nice to see you here. I imagine from the look of you that you came here and met the goddess Marae? Sorry to tell you, but ever since the tree became messed up, she refuses to speak to us.</i>\" She pauses for a second, scratching her chin thoughtfully. \"<i>Well, there may be a way for things to work out again. ");
+			outputText("If we can't purify ourselves, then all we have to do is make her the same as us. Find the demon factory deep in the mountain and cause it to overflow. Not only will that break the machinery preventing the demons from using it further, but it will also flood marae with whatever corrupt fluid is left all at once. Once she sees things from our point of view, we can all be friends again.</i>\"\n\n");
+			outputText("Well, you didn't expect to find one of your sisters here, but sure, you will do what must be done. You set back out for your camp, planning how you will take down this factory the demons built.\n\n");
+		}
+		if (player.hasPerk(PerkLib.Soulless) || (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery))) {
+			outputText("As you hit the shore and jump out of the boat, you spot a succubus casually sitting on a rock by the beach, keenly observing the island you just rowed from.\n\n");
+			outputText("\"<i>Hey you, the [race] over there. You came back from that island, right? Bet the goddess kicked you out, eh? You're lucky she didn't take your head instead. A little bit of advice from a fellow demon, but you should keep away from big shots like her. She's out of your league. That said, that stuck up goddess is on her way out soon. The factory up in the hills will finish turning her into a soulless slut, and whoever makes it there first may be able to claim that bitch’s lethicite for themselves. ");
+			outputText("It will probably go straight to Lethice, unless an entrepreuneur demon decides to fuck with her majesty’s plans and screw a few jobs along the way. The political arena is pretty big and Lethice has quite a few enemies within the nobility. Would be a shame if the factory in the mountain was to overflow early and ruin her plan, hm? My master is only interested in seeing Lethice's agenda getting foiled, but is too lazy to act on his own, but you look the kind that has the ambition for this. ");
+			outputText("Find the demon factory in the hills and cause it to overflow. Not only will that break the machinery, making Lethice’s subordinates look incompetent, but it will also flood marae with whatever corrupt fluid is left all at once. Then you can just race back here and take the stone for yourself.</i>\"\n\n");
+			outputText("Well, this looks like a great opportunity. You set back out for your camp, planning how you will take down this factory the demons built.\n\n");
+		}
+		if (player.isRaceCached(Races.FMINDBREAKER) || player.isRaceCached(Races.MMINDBREAKER, 2) || player.isRaceCached(Races.ATLACH_NACHA, 3)) {
+			outputText("As you hit the shore and jump out of the boat, you spot a strange figure with alabaster skin and long flowing silver hair. The humanoid silhouette is simplified to the extreme, like a blank slate, save for two black scleraed yellow eyes that stare back with a void similar to your own. The creature addresses you right away, speaking directly to your mind.\n\n");
+			outputText("\"<i>Good afternoon voidspawn. You and I serve the same master. I imagine from the look of you that you came here and met the goddess Marae. There is no reasoning with her, as you can see. You’re fortunate. If she wasn’t so badly weakened, she would probably have erased you where you stood. This world is a dying one, and the demons are pointlessly prolonging the inevitable by slowing down the advance of our lord. ");
+			outputText("You need to set the rain free, so our plans can progress once again. Find the demon factory in the hills and cause it to overflow. Not only will that break the machinery, preventing the demons from using it further, but it will also flood marae with whatever corrupt fluid is left all at once, ending the threat she poses to us once and for all.</i>\"\n\n");
+			outputText("Well you didn't expect to find a kindred soul here, but sure, you will do what must be done. You set back out for your camp, planning how you will take down this factory the demons built.\n\n");
+		}
+		flags[kFLAGS.MARAE_QUEST_START] = 0.5;
+	}
 
     public function firstCorruptEncounter():void {
         clearOutput();

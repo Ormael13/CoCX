@@ -4764,9 +4764,7 @@ use namespace CoC;
 				if (this.hasKeyItem("Powboy") >= 0) minSen += 10;
 				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
 			}
-			if (hasPerk(PerkLib.Soulless)) minCor += 50;
-			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
-			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
+			if (hasPerk(PerkLib.Soulless) || hasPerk(PerkLib.Phylactery) || hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 100;
 			if (hasPerk(PerkLib.HellfireCoat)) minCor = 50;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;

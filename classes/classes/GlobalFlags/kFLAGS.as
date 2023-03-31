@@ -2808,8 +2808,8 @@ public static const ELVEN_TWINSHOT_ENABLED:int                                  
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene
 public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801;
 public static const E_ICHOR_PITY_SYSTEM:int                                   		= 2802;
-public static const UNKNOWN_FLAG_NUMBER_02803:int                                   = 2803;
-public static const UNKNOWN_FLAG_NUMBER_02804:int                                   = 2804;
+public static const NECROMANCER_SKELETONS:int                                   	= 2803;
+public static const IN_COMBAT_PLAYER_SKELETONS_ATTACKED:int                         = 2804;
 public static const UNKNOWN_FLAG_NUMBER_02805:int                                   = 2805;
 public static const UNKNOWN_FLAG_NUMBER_02806:int                                   = 2806;
 public static const UNKNOWN_FLAG_NUMBER_02807:int                                   = 2807;

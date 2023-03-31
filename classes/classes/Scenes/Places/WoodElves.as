@@ -270,7 +270,6 @@ import classes.Scenes.Crafting;
 			player.antennae.type = Antennae.NONE;
 			player.tailType = Tail.NONE;
 			player.rearBody.type = RearBody.NONE;
-			player.femininity = 80;
 			player.killCocks(player.cocks.length);
 			player.balls = 0;
 			player.ballSize = 0;
