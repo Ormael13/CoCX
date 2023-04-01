@@ -101,6 +101,15 @@ public class Equipable extends Useable {
 			desc = "Effect: "+desc;
 			list.push([70, desc]);
 		}
+		if (_tags) {
+			var desc2:String = ""
+			for (var key2:String in _tags) {
+				if (desc2) desc2 += ", ";
+				desc2 += key2;
+			}
+			desc2 = "Tags: "+desc2;
+			list.push([70, desc2]);
+		}
 		if (_playerPerks) {
 			for each (var perk:Array in _playerPerks) {
 				var pc:PerkClass = new PerkClass(perk[0], perk[1], perk[2], perk[3], perk[4]);

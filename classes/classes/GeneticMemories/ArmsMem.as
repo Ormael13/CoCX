@@ -373,6 +373,28 @@ import classes.CoC;
             }
         });
 
+        public static const HOUND:int = _partid++;
+        EnumValue.add(Memories, HOUND, "HOUND", {
+            id: "Hound Arms",
+            name: "Hound Arms",
+            cost: 100,
+            title: "Hound",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsHound;
+            }
+        });
+
+        public static const JIANGSHI:int = _partid++;
+        EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
+            id: "Jiangshi Arms",
+            name: "Jiangshi Arms",
+            cost: 100,
+            title: "Jiangshi",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsJiangshi;
+            }
+        });
+
         public static const MANTIS:int = _partid++;
         EnumValue.add(Memories, MANTIS, "MANTIS", {
             id: "Mantis Arms",
@@ -458,6 +480,17 @@ import classes.CoC;
             title: "Plant",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsPlant;
+            }
+        });
+
+        public static const PLANT_2:int = _partid++;
+        EnumValue.add(Memories, PLANT_2, "PLANT_2", {
+            id: "Plant Arms 2",
+            name: "Plant Arms 2",
+            cost: 100,
+            title: "Plant 2",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsPlant2;
             }
         });
 
@@ -571,6 +604,17 @@ import classes.CoC;
             }
         });
 
+        public static const TINY:int = _partid++;
+        EnumValue.add(Memories, TINY, "TINY", {
+            id: "Tiny Arms",
+            name: "Tiny Arms",
+            cost: 100,
+            title: "Tiny",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsTiny;
+            }
+        });
+
         public static const USHI_ONI:int = _partid++;
         EnumValue.add(Memories, USHI_ONI, "USHI_ONI", {
             id: "UshiOni Arms",
@@ -579,17 +623,6 @@ import classes.CoC;
             title: "UshiOni",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsUshiOni;
-            }
-        });
-
-        public static const JIANGSHI:int = _partid++;
-        EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
-            id: "Jiangshi Arms",
-            name: "Jiangshi Arms",
-            cost: 100,
-            title: "Jiangshi",
-            transformation: function(): Transformation {
-                return CoC.instance.transformations.ArmsJiangshi;
             }
         });
 

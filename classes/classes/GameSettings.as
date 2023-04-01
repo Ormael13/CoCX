@@ -42,7 +42,7 @@ public class GameSettings extends BaseContent {
 		menu();
 		addButton(0, "Gameplay(1)", settingsScreenGameSettings);
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
-		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings by Jtecx.");
+		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings.");
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
@@ -140,7 +140,7 @@ public class GameSettings extends BaseContent {
 		if (player) {
 			addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
-			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
+			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mode.");
 			addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 			addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 			addButton(5, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
@@ -591,15 +591,17 @@ public class GameSettings extends BaseContent {
 		simpPerkSetting();
 		invMgmtSetting();
 		USSdisplayOpt();
+		IMDBdisplayStyle();
 
 		outputText("\n\n");
 		menu();
 
-		addButton(0, "Fast Lvl", flagUpdate, kFLAGS.LVL_UP_FAST, 2).hint("Immediately level to highest possible from XP instead of spamming next.");
+		addButton(0, "Fast Lvl", flagUpdate, kFLAGS.LVL_UP_FAST, 2).hint("Immediately level to the highest possible from XP instead of spamming next.");
 		addButton(1, "Mutation Assist", flagUpdate, kFLAGS.MUTATIONS_SPOILERS, 1).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
 		addButton(2, "PerkView Simplfied", flagUpdate, kFLAGS.NEWPERKSDISPLAY, 1).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
 		addButton(3, "Inventory Mgmt", flagUpdate, kFLAGS.INVT_MGMT_TYPE, 1).hint("Toggle between existing SHIFT to remove items vs an extra menu. Recommended to enable for Mobile users.");
 		addButton(4,"USS Display Opt.", flagUpdate, kFLAGS.USSDISPLAY_STYLE,1).hint("Switches between USS Display options.");
+		addButton(5,"IMDB Details", flagUpdate, kFLAGS.IMDB_DETAILS,1).hint("Switches between Internal Mutation DB display styles.");
 		addButton(14, "Back", settingsScreenMain);
 
 		function fastLvlSettings():void{
@@ -650,12 +652,23 @@ public class GameSettings extends BaseContent {
 
 		function USSdisplayOpt():void{
 			if (flags[kFLAGS.USSDISPLAY_STYLE] > 0){
-				outputText("USS Display: <b>Default</b>\n All options will be shown.");
+				outputText("USS Display: <b>Old</b>\n All options will be shown.");
 			}
 			else{
-				outputText("Inventory Mgmt: <b>Shuffled</b>\n Options that can be used will show up first.");
+				outputText("USS Display: <b>Shuffled</b>\n Options that can be used will show up first.");
 			}
 			outputText("This toggle is used to hide extra scenes.");
+			outputText("\n\n");
+		}
+
+		function IMDBdisplayStyle():void{
+			if (flags[kFLAGS.IMDB_DETAILS] > 0){
+				outputText("IMDB style: <b>Detailed</b>\n All mutation tiers will be displayed.");
+			}
+			else{
+				outputText("IMDB style: <b>Short</b>\n Only the next tier will be displayed for each mutation.");
+			}
+			outputText("This toggle is used to show more info in Internal Mutation Database.");
 			outputText("\n\n");
 		}
 

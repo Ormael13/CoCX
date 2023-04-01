@@ -4,6 +4,8 @@ import classes.BodyParts.*;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
+import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Player;
 import classes.Race;
 import classes.VaginaClass;
@@ -65,9 +67,23 @@ public class HumanRace extends Race {
 							return (body.player.breastRows.length == 1
 									&& body.player.hasPlainSkinOnly()
 									&& body.skinBaseAdj != "slippery")
-						}, +1);
+						}, +1)
+				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
+				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
+				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
 		
-		tiers.push(new HumanRaceTier(maxScore-9));
+		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
+		addMutation(IMutationsLib.HumanFatIM);
+		addMutation(IMutationsLib.HumanMusculatureIM);
+		addMutation(IMutationsLib.HumanOvariesIM);
+		addMutation(IMutationsLib.HumanParathyroidGlandIM);
+		addMutation(IMutationsLib.HumanTesticlesIM);
+		addMutation(IMutationsLib.HumanThyroidGlandIM);
+		addMutation(IMutationsLib.HumanVersatilityIM);
+		
+		tiers.push(new HumanRaceTier(1, maxScore-9, "Human"));
+		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human"));
+        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human"));
 		
 		debugForms = {
 			"human": [
@@ -95,7 +111,8 @@ public class HumanRace extends Race {
 	public static const maxScore:int = 17;
 	
 	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
-		var ics:Number = -body.player.internalChimeraScore();
+		var ics:Number = (body.player.internalChimeraScore() - body.player.internalHumanScore());
+		if (ics < 0) ics = 0;
 		if (ics > 0) {
 			if (outputText != null) {
 				outputText(ics == 1 ? "Mutation" : "Mutations", -ics);
@@ -136,17 +153,17 @@ import classes.Races;
 import classes.Races.HumanRace;
 
 class HumanRaceTier extends RaceTier {
-	public function HumanRaceTier(minScore:int) {
+	public function HumanRaceTier(tierNumber:int, minScore:int, tierName:String) {
 		super(
-				minScore,
-				"human",
-				function (body:BodyData):String {
-					return "human"
+				tierNumber,
+				tierName,
+				/* nameFn */ function (body:BodyData):String {
+					return tierName
 				},
-				1,
-				{},
-				[],
-				[]
+				minScore,
+				/* buff object */ {},
+				/* requirement list */ [],
+				/* extra bonus names */ []
 		);
 	}
 	

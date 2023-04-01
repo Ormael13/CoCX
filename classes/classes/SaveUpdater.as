@@ -17,6 +17,7 @@ import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
+import classes.StatusEffects;
 
 use namespace CoC;
 
@@ -29,6 +30,7 @@ public class SaveUpdater extends NPCAwareContent {
 		var dungeonsList:Array = [
 			SceneLib.dungeons.checkFactoryClear(),
 			SceneLib.dungeons.checkDeepCaveClear(),
+			SceneLib.dungeons.checkDemonLaboratoryClear(),
 			SceneLib.dungeons.checkLethiceStrongholdClear(),
 			SceneLib.dungeons.checkSandCaveClear(),
 			SceneLib.dungeons.checkPhoenixTowerClear(),
@@ -98,6 +100,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, true],
 			["Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR, flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0],
 			["Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, player.hasKeyItem("Zetaz's Map") >= 0],
+			["Chimera Squad", kACHIEVEMENTS.STORY_CHIMERA_SQUAD, player.hasKeyItem("Map to the Lethice’s Fortress") >= 0],
 			["Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, flags[kFLAGS.LETHICE_DEFEATED] > 0],
 			//Zones
 			["Explorer", kACHIEVEMENTS.ZONE_EXPLORER, player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && flags[kFLAGS.DISCOVERED_CAVES] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_TUNDRA] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_ASHLANDS] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0],
@@ -107,6 +110,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100],
 			["Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, player.exploredLake >= 100],
 			["Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, player.exploredDesert >= 100],
+			["Bedouin", kACHIEVEMENTS.ZONE_BEDOUIN, flags[kFLAGS.DISCOVERED_INNER_DESERT] >= 100],
 			["Rookie", kACHIEVEMENTS.ZONE_ROOKIE, flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 100],
 			["Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] >= 100],
 			["Hiking", kACHIEVEMENTS.ZONE_HIKING, flags[kFLAGS.DISCOVERED_HILLS] >= 100],
@@ -320,16 +324,16 @@ public class SaveUpdater extends NPCAwareContent {
 			["All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2, camp.followersCount() + camp.loversCount() + camp.slavesCount() >= 38],
 			["All Your People are Belong to Me (3)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_3, camp.followersCount() + camp.loversCount() + camp.slavesCount() >= 57],
 			["Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER, flags[kFLAGS.MANSION_VISITED] >= 3],
-			["Perky", kACHIEVEMENTS.GENERAL_PERKY, player.perks.length - player.hasMutationCount(true) >= 25],
-			["Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY, player.perks.length - player.hasMutationCount(true) >= 50],
-			["Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY, player.perks.length - player.hasMutationCount(true) >= 75],
-			["Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY, player.perks.length - player.hasMutationCount(true) >= 100],
-			["Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY, player.perks.length - player.hasMutationCount(true) >= 200],
-			["Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY, player.perks.length - player.hasMutationCount(true) >= 300],
-			["Perky Beast of Death", kACHIEVEMENTS.GENERAL_PERKY_BEAST_OF_DEATH, player.perks.length - player.hasMutationCount(true) >= 444],
-			["Perky King", kACHIEVEMENTS.GENERAL_PERKY_KING, player.perks.length - player.hasMutationCount(true) >= 600],
-			["Ridiculous Perky King", kACHIEVEMENTS.GENERAL_RIDICULOUS_PERKY_KING, player.perks.length - player.hasMutationCount(true) >= 800],
-			["Ludicrous Perky King", kACHIEVEMENTS.GENERAL_LUDICROUS_PERKY_KING, player.perks.length >= 1000],
+			["Perky", kACHIEVEMENTS.GENERAL_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 25],
+			["Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 50],
+			["Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 75],
+			["Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 100],
+			["Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 200],
+			["Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 300],
+			["Perky Beast of Death", kACHIEVEMENTS.GENERAL_PERKY_BEAST_OF_DEATH, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 444],
+			["Perky King", kACHIEVEMENTS.GENERAL_PERKY_KING, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 600],
+			["Ridiculous Perky King", kACHIEVEMENTS.GENERAL_RIDICULOUS_PERKY_KING, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 800],
+			["Ludicrous Perky King", kACHIEVEMENTS.GENERAL_LUDICROUS_PERKY_KING, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 1000],
 			["Lesser Chimera", kACHIEVEMENTS.GENERAL_LESSER_CHIMERA, player.internalChimeraScore() >= 4],
 			["Normal Chimera", kACHIEVEMENTS.GENERAL_NORMAL_CHIMERA, player.internalChimeraScore() >= 8],
 			["Greater Chimera", kACHIEVEMENTS.GENERAL_GREATER_CHIMERA, player.internalChimeraScore() >= 16],
@@ -402,6 +406,16 @@ public class SaveUpdater extends NPCAwareContent {
 		if (achStat.achievementsTotalCurrentlyUnlocked >= 100) awardAchievement("Achievements - Going Deeper (2nd layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_2L);
 		if (achStat.achievementsTotalCurrentlyUnlocked >= 300) awardAchievement("Achievements - Going Deeper (3rd layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_3L);
 		if (achStat.achievementsTotalCurrentlyUnlocked >= 600) awardAchievement("Achievements Limbo", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_LIMBO);
+	}
+	
+	public function bringBackEncoutersForSouless():void {
+		if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) flags[kFLAGS.SOUL_SENSE_GIACOMO] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) flags[kFLAGS.SOUL_SENSE_TAMANI] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) flags[kFLAGS.SOUL_SENSE_PRISCILLA] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) flags[kFLAGS.SOUL_SENSE_IZUMI] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] = 2;
 	}
 
 	public function fixFlags():void {
@@ -1264,7 +1278,7 @@ public class SaveUpdater extends NPCAwareContent {
 				AdventurerGuild.Slot04Cap = 10;
 			}
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 2 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-				outputText(" Opps seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk pernamency will be nullified.");
+				outputText(" Oops seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk permanency will be nullified.");
 				player.setPerkValue(PerkLib.NinetailsKitsuneOfBalance, 4, 0);
 				player.ascensionPerkPoints += 5;
 			}
@@ -1756,7 +1770,6 @@ public class SaveUpdater extends NPCAwareContent {
 				// - Compute how much total training pc did
 				// - Try to re-allocate training, maintain the ratio between stats
 				var primaryStats:/*PrimaryStat*/Array = [player.strStat,player.touStat,player.speStat,player.intStat,player.wisStat,player.libStat];
-
 				var oldCoreTotal:int = 0;
 				var oldCoreStats:/*int*/Array = [0,0,0,0,0,0];
 				outputText("\n\nStat rework! Training is separated from level-up, <b>but benefits less from multipliers</b>.\nOld core stat values:")
@@ -1768,11 +1781,11 @@ public class SaveUpdater extends NPCAwareContent {
 					stat.core.value = 0;
 				}
 				outputText(" = total "+oldCoreTotal+".");
-
 				// Compute total stat points spent
 				var statPointsPerLevel:int = 5 + (player.perkv1(PerkLib.AscensionAdvTrainingX));
 				var statPoints:int = player.level*statPointsPerLevel;
-				if (player.level <= 6) statPoints += player.level*statPointsPerLevel; else statPoints += 6*statPointsPerLevel;
+				if (player.level <= 6) statPoints += player.level * statPointsPerLevel;
+				else statPoints += 6*statPointsPerLevel;
 				statPoints -= player.statPoints;
 				statPoints -= JourneyToTheEast.AhriStatsToPerksConvertCounter*5;
 				statPoints += JourneyToTheEast.EvelynnPerksToStatsConvertCounter * 5;
@@ -1788,7 +1801,6 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) statPoints += 5 * player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards);
 				if (flags[kFLAGS.EBON_LABYRINTH] >= 50) statPoints += 5;
 				statPoints += int(flags[kFLAGS.EBON_LABYRINTH]/150) * 5;
-
 				var totalTrainPoints:int = oldCoreTotal - statPoints;
 				var remainingTrainPoints:int = totalTrainPoints;
 				// Re-allocate training stats, maintaining ratio
@@ -1828,7 +1840,6 @@ public class SaveUpdater extends NPCAwareContent {
 				for (i = 0; i < primaryStats.length; i++) {
 					outputText(" "+primaryStats[i].train.value);
 				}
-
 				player.statPoints += statPoints;
 				outputText("\n\n<b>You have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.025;
@@ -1953,6 +1964,165 @@ public class SaveUpdater extends NPCAwareContent {
 				if (flags[kFLAGS.MINERVA_LVL_UP] > 1) flags[kFLAGS.MINERVA_LVL_UP] -= 2;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.038;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.039) {
+				if (flags[kFLAGS.LOPPE_KIDS_LIMIT] == 0) flags[kFLAGS.LOPPE_KIDS_LIMIT] = 8;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.039;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.040) {
+				if (flags[kFLAGS.LETHICE_DEFEATED] == 2) {
+					player.perkPoints += 2;
+					player.statPoints += 10;
+					statScreenRefresh();
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.040;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.041) {
+				if (player.isRace(Races.CERBERUS)) player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
+				if (player.hasPerk(PerkLib.TransformationImmunityAtlach)) {
+					player.removePerk(PerkLib.TransformationImmunityAtlach);
+					if (player.isRace(Races.ATLACH_NACHA)) player.createPerk(PerkLib.TransformationImmunity2, 1, 0, 0, 0);
+					else player.createPerk(PerkLib.TransformationImmunity2, 2, 0, 0, 0);
+				}
+				if (player.hasPerk(PerkLib.TransformationImmunityFairy)) player.createPerk(PerkLib.TransformationImmunity2, 4, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.041;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.042) {
+				if (player.hasPerk(PerkLib.HellfireCoat) && !player.hasPerk(PerkLib.TransformationImmunity2)) player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.042;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.043) {
+				if (player.hasPerk(PerkLib.Soulless)) bringBackEncoutersForSouless();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.043;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.044) {
+				if (player.hasPerk(PerkLib.Soulless)) player.skinColor2 = "midnight black";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.044;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.045) {
+				if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.DEFEATED_ZETAZ] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.LETHICE_DEFEATED] == 2) player.superPerkPoints++;
+				outputText("\n\nAdditional smol really smol bonus reward for those that not forget to progress main quest - 1 super perk per each finished main story dungeon ^^");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.045;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.046) {
+				if (flags[1320] > 0) {
+					player.createStatusEffect(StatusEffects.TookImpTome, 0, 0, 0, 0);
+					flags[1320] = 0;
+				}
+				if (!player.hasStatusEffect(StatusEffects.TookImpTome) && (player.hasItem(shields.IMPTOME) || player.shieldName == "cursed Tome of Imp"))
+					player.createStatusEffect(StatusEffects.TookImpTome,  0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.046;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.047) {
+				if (player.level > 0) {
+					player.statPoints += 20;
+					player.perkPoints += 4;
+				}
+				if (player.level > 6) {
+					if (player.level < 9) {
+						player.statPoints += (player.level - 6) * 5;
+						player.perkPoints += (player.level - 6);
+					}
+					else {
+						player.statPoints += 15;
+						player.perkPoints += 3;
+					}
+				}
+				outputText("\n\nAnother really smol bonus to spare stat/perk points for the starting phase of the adventure ^^");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.047;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.048) {
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) player.vaginaType(VaginaClass.BEE);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.048;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.049) {
+				if (player.hasKeyItem("Pocket Watch") >= 0) {
+					player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
+					if (player.hasPerk(PerkLib.DaoOfTheElements)) player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
+					if (player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx)) player.addStatusValue(StatusEffects.MergedPerksCount, 1, 1);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.049;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.050) {
+				if (player.hasPerk(PerkLib.ElementalContractRank2) || flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) {
+					var acv:Number = 0;
+					if (player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements))) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank8) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) == 2)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank12)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank16)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank20)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank24)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank28)) acv += 1;
+					player.createStatusEffect(StatusEffects.ArcaneCircle, acv, 0, 0, 0);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.050;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.051) {
+				if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) {
+					var capacityIncrease:Number = player.statusEffectv2(StatusEffects.ElementalEnergyConduits) * 0.5;
+					player.addStatusValue(StatusEffects.ElementalEnergyConduits, 2, capacityIncrease);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.051;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.052) {
+				if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) {
+					if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+					else player.createKeyItem("Radiant shard", 1,0,0,0);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.053) {
+				SceneLib.setItemsChecks.equipNecroItemsSet();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.053;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.054) {
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > camp.campMake.maxPermanentImprovedStoneGolemsBagSize()) {
+					var costback1:Number = (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] - camp.campMake.maxPermanentImprovedStoneGolemsBagSize());
+					flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] -= costback1;
+					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += (costback1 * 3);
+					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += costback1;
+					flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += (costback1 * 50);
+				}
+				if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > camp.campMake.maxPermanentSteelGolemsBagSize()) {
+					var costback2:Number = (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] - camp.campMake.maxPermanentSteelGolemsBagSize());
+					flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] -= costback2;
+					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += costback2;
+					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += (costback2 * 2);
+					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += (costback2 * 10);
+					flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += (costback2 * 4);
+				}
+				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > camp.campMake.maxPermanentImprovedSteelGolemsBagSize()) {
+					var costback3:Number = (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] - camp.campMake.maxPermanentImprovedSteelGolemsBagSize());
+					flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] -= costback3;
+					flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] += (costback3 * 3);
+					flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += (costback3 * 6);
+					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += (costback3 * 50);
+					flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += (costback3 * 12);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.054;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.055) {
+				player.buff("Curse").remove();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.055;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.056) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.056;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.057) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.057;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.058) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.059;
+			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

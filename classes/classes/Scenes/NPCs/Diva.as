@@ -114,7 +114,7 @@ public class Diva extends Monster {
             outputText("Diva tries to bite you but quickly step back holding a hand to her mouth with a surprised yelp of clear pain. You smirk amused... did she seriously try to bite in your stone skin?");
             takePhysDamage(maxHP() * .1);
         } else if (player.isAlraune()) {
-            outputText("Diva tries to bite you but just as her fang pierce her skin she shoves you off and starts spitting."
+            outputText("Diva tries to bite you but just as her fang pierces your skin she shoves you off and starts spitting."
                 + "\n\n"
                 + "\"<i>Puaaah what the hell did I taste just now! Your blood taste like saps and flower nectar. How disgusting!</i>\""
                 + "\n\n"

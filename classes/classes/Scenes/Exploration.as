@@ -12,14 +12,15 @@ import classes.Scenes.Areas.Forest.WapsHuntress;
 import classes.Scenes.Areas.Forest.WaspAssassin;
 import classes.Scenes.Areas.Forest.WaspGirl;
 import classes.Scenes.Areas.Ocean.Scylla;
+import classes.Scenes.Dungeons.DemonLab.ProjectFlameSpreader;
+import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
+import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
 import classes.Scenes.Dungeons.HiddenCave;
-import classes.Scenes.Explore.ExploreDebug;
-import classes.Scenes.Explore.KitsuneAncestor;
-import classes.Scenes.Explore.KitsuneElder;
-import classes.Scenes.Explore.RNGod;
-import classes.Scenes.Explore.SeabedAlrauneBoss;
+import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.KihaFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.Places.TrollVillage;
 import classes.display.SpriteDb;
@@ -117,11 +118,14 @@ public class Exploration extends BaseContent
 			bd.add("");
 			bd.add("");
 			// Row 3
-			bd.add("Desert", SceneLib.desert.exploreDesert)
-					.hint("Visit the dry desert. "
+			bd.add("Desert (O)", SceneLib.desert.exploreDesert)
+					.hint("Visit the dry desert (outer part). "
 							+ (debug ? "\n\nTimes explored: " + player.exploredDesert : ""))
 					.disableIf(player.exploredDesert == 0, "You need to 'Explore' Mareth more.");
-			bd.add(""); // Desert(I)
+			bd.add("Desert (I)", SceneLib.desert.exploreInnerDesert)
+					.hint("Visit the dry desert (inner part). "
+							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_INNER_DESERT] : ""))
+					.disableIf(flags[kFLAGS.DISCOVERED_INNER_DESERT] == 0, "Discovered when exploring Desert (Outer).");
 			bd.add("");
 			bd.add("");
 			bd.add("");
@@ -130,7 +134,7 @@ public class Exploration extends BaseContent
 					.hint("Visit the battlefield boundary. "
 							+ (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "")
 							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""))
-					.disableIf(flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] == 0, "Discovered when using 'Explore' after finding Desert.");
+					.disableIf(flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] == 0, "Discovered when using 'Explore' after finding Desert (Outer).");
 			bd.add("Battlefield (O)", SceneLib.battlefiledouter.exploreOuterBattlefield)
 					.hint("Visit the outer battlefield. "
 							+ (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "")
@@ -289,17 +293,21 @@ public class Exploration extends BaseContent
 				explorePageIV();
 				return;
 			}
+			if (flags[kFLAGS.EXPLORATION_PAGE] == 5) {
+				explorePageV();
+				return;
+			}
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");
 			if (SceneLib.forest.isDiscovered()) addButton(1, "Forest (O)", SceneLib.forest.exploreForestOutskirts).hint("Visit the lush forest. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
 			if (player.exploredLake > 0) addButton(2, "Lake", SceneLib.lake.exploreLake).hint("Visit the lake and explore the beach. " + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
 			else addButtonDisabled(2, "Lake", "You need to 'Explore' Mareth more.");
-			if (player.exploredDesert > 0) addButton(3, "Desert", SceneLib.desert.exploreDesert).hint("Visit the dry desert. " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
+			if (player.exploredDesert > 0) addButton(3, "Desert (O)", SceneLib.desert.exploreDesert).hint("Visit the dry desert (outer part). " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			else addButtonDisabled(3, "Desert", "You need to 'Explore' Mareth more.");
 			
 			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledboundary.exploreBattlefieldBoundary).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
-			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert.");
+			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert (Outer).");
 			if (flags[kFLAGS.DISCOVERED_HILLS] > 0) addButton(6, "Hills", SceneLib.mountain.exploreHills).hint("Visit the hills. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HILLS] : ""));
 			else addButtonDisabled(6, "Hills", "Discovered when using 'Explore' after finding Battlefield (Boundary).");
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", SceneLib.plains.explorePlains).hint("Visit the plains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
@@ -315,8 +323,8 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(12, "Caves", "Discovered when using 'Explore' after finding Beach.");
 			
 			addButton(4, "Next", explorePageII);
-			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
-			else addButton(13, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
+			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
+			else addButton(9, "Menu Style", toggleMenuStyle).hint("Switch to new menu style");
 			
 			addButton(14, "Back", playerMenu);
 		}
@@ -331,29 +339,23 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(1, "Forest(I)", "You need to be ready (lvl 3+) to reach this area.");
 			if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(2, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
 			else addButtonDisabled(2, "???", "Search the lake.");
-			//2 - desert inner part
-			//addButtonDisabled(2, "Desert(I)", "Discovered when exploring Desert.");
-			if (flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] > 0) addButton(3, "Low Mountain", SceneLib.mountain.exploreLowMountain).hint("Visit the low mountains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] : ""));
-			else addButtonDisabled(3, "Low Mountain", "Discovered when exploring Hills.");
+			if (flags[kFLAGS.DISCOVERED_INNER_DESERT] > 0) addButton(3, "Desert (I)", SceneLib.desert.exploreInnerDesert).hint("Visit the dry desert (inner part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_INNER_DESERT] : ""));
+			else addButtonDisabled(3, "Desert (I)", "Discovered when exploring Desert (Outer).");
 			
 			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
 			else addButtonDisabled(5, "Defiled Ravine", "Discovered when exploring Blight Ridge.");
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(6, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
-			else addButtonDisabled(6, "Bog", "Discovered when exploring Swamp.");
+			if (flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] > 0) addButton(6, "Low Mountain", SceneLib.mountain.exploreLowMountain).hint("Visit the low mountains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] : ""));
+			else addButtonDisabled(6, "Low Mountain", "Discovered when exploring Hills.");
 			// 7 - plains inner part
-			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) {
-				if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(8, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
-				else addButtonDisabled(8, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
-			} else addButtonDisabled(8, "Ocean", "Need to find Beach first and then finding some way to sail on the water.");
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(8, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
+			else addButtonDisabled(8, "Bog", "Discovered when exploring Swamp.");
 			
 			if (flags[kFLAGS.DISCOVERED_TUNDRA] > 0) addButton(10, "Tundra", SceneLib.tundra.exploreTundra).hint("Visit the tundra. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_TUNDRA] : ""));
 			else addButtonDisabled(10, "Tundra", "Discovered when exploring Caves.");
 			if (flags[kFLAGS.DISCOVERED_ASHLANDS] > 0) addButton(11, "Ashlands", SceneLib.ashlands.exploreAshlands).hint("Visit the ashlands. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ASHLANDS] : ""));
 			else addButtonDisabled(11, "Ashlands", "Discovered when exploring Caves.");
-			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
-			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
-			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(10, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
-			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
+			//12 - darkness area
+			//13 - lightning area
 			
 			addButton(4, "Next", explorePageIII);
 			addButton(9, "Previous", goBackToPageI);
@@ -365,12 +367,21 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 3;
 			hideMenus();
 			menu();
-			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
-			else addButtonDisabled(0, "Deepwoods", "Discovered when exploring Forest (I).");
-			//addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
-			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-			if (player.exploredMountain > 0) addButton(3, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
-			else addButtonDisabled(3, "Mountain", "Discovered when exploring Low .");
+			// 0 - battlefield inner part
+			if (SceneLib.forest.deepwoodsDiscovered()) addButton(1, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
+			else addButtonDisabled(1, "Deepwoods", "Discovered when exploring Forest (I).");
+			//addButtonDisabled(2, "Shore", "TBA");//Discovered when exploring using Lake Boat.
+			
+			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
+			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
+			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(5, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
+			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(5, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
+			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
+			else addButtonDisabled(6, "Mountain", "Discovered when exploring Low .");
+			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) {
+				if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(8, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
+				else addButtonDisabled(8, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
+			} else addButtonDisabled(8, "Ocean", "Need to find Beach first and then finding some way to sail on the water.");
 			
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
 			else addButtonDisabled(10, "Glacial Rift(O)", "Discovered when exploring Tundra.");
@@ -387,8 +398,9 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 4;
 			hideMenus();
 			menu();
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
-			else addButtonDisabled(3, "High Mountain", "Discovered when exploring Mountain.");
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(6, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
+			else addButtonDisabled(6, "High Mountain", "Discovered when exploring Mountain.");
+			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(8, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 			
 			addButton(4, "Next", goBackToPageV);
 			addButton(9, "Previous", goBackToPageIII);
@@ -753,16 +765,18 @@ public class Exploration extends BaseContent
 			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
 			clearOutput();
 			if (gobimpChooser >= 10 && gobimpChooser < 20) {
-				if (rand(2) == 0) SceneLib.impScene.impPackEncounter2();
-				else SceneLib.angelScene.angelGroupEncounter();
+				SceneLib.impScene.impPackEncounter2();
 			}
 			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
-				if (rand(2) == 0) SceneLib.impScene.impPackEncounter();
-				else SceneLib.angelScene.angelGroupEncounter();
+				if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+				else SceneLib.impScene.impPackEncounter();
 			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
-				else SceneLib.impScene.impPackEncounter();
+				else {
+					if (rand(10) == 0) SceneLib.angelScene.angeloidGroupEncounter();
+					else SceneLib.impScene.impPackEncounter();
+				}
 			}
 			else {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) SceneLib.goblinScene.goblinAdventurersEncounter();
@@ -772,8 +786,8 @@ public class Exploration extends BaseContent
 		public function genericAngelsEncounters(even:Boolean = false):void {
 			var angelsChooser:int = rand(15);
 			//Limit chooser range
-			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 4;
-			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 9;
+			if (player.level < 6 && angelsChooser >= 5) angelsChooser = 4;
+			else if (player.level < 12 && angelsChooser >= 10) angelsChooser = 9;
 			clearOutput();
 			//Mid-rank Angel
 			if (angelsChooser >= 5 && angelsChooser < 10) {
@@ -797,6 +811,59 @@ public class Exploration extends BaseContent
 				return;
 			}
 		}
+		public function demonLabProjectEncounters():void {
+			clearOutput();
+			var choices:Array = [];
+			if (time.hours <= 8 || time.hours >= 18) choices.push(0);
+			choices.push(1);
+			choices.push(2);
+			if (!KihaFollower.FlameSpreaderBossKilled && KihaFollower.FlameSpreaderKillCount >= 20 && InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_1], flags[kFLAGS.PLAYER_COMPANION_2] ,flags[kFLAGS.PLAYER_COMPANION_3]))
+					choices.push(3);
+			var select:int = rand(choices.length)
+			switch (choices[select]) {
+				case 0:
+					nightwalkerEncounter();
+					break;
+				case 1:
+					flamespreaderEncounter();
+					break;
+				case 2:
+					tyrantEncounter();
+					break;
+				case 3:
+					ultimisEcounter();
+					break;
+			}
+
+			function nightwalkerEncounter():void {
+				outputText("You find yourself feeling somewhat nervous. Your [skin] crawls, but as you wheel about, you see nothing. You hear nothing but a faint whisper on the wind.[pg]");
+				outputText("“<i>Blood.</i>” A faint dripping sound comes from behind you. You turn, slowly, to face a corpse-pale woman in a crotchless skintight latex suit that leaves nothing to the imagination. Her eyes shine red, and her fangs stick out well beyond her lips. A spadelike tail flicks back and forth, dripping red, and she smiles, curved black horns and ebony tresses combining to make her seem...well, you assume the intent was to make her beautiful, but unlike the succubi, there’s almost no sex appeal in those eyes, no carnal desire as she glances between your legs, scraping one of her fingernails along her swollen pussy lips, cutting herself and drawing a trickle of blood.[pg]");
+				outputText("“<i>Sweet blood, come... Sate yourself.</i>” Her nails are like black claws, but as she licks the blood off her fingers, part of you recoils in fear. “<i>Sate you...Then you’ll sate...me.</i>” You draw your [weapon], bracing yourself, but as you do, this gets only a smile as the curvy, short woman tilts her head. She launches herself toward you, claws outstretched, the eerie grin still on her face.[pg]");
+				outputText("“<i>Blood! Blood for me!</i>”");
+				outputText("[pg]“<b>You are now fighting Project Nightwalker.</b>”");
+				startCombat(new ProjectNightwalker());
+			}
+			function flamespreaderEncounter():void {
+				outputText("Hearing the flapping of leathery wings, you look skyward. A reddish figure is already swooping down towards you, and you throw yourself backwards. A massive spear barely misses your head, and a cloud of dust is thrown up by the impact. You draw your [weapon], the dust settling, and you finally get a glimpse of your attacker.[pg]");
+				outputText("Your attacker has dusky brown skin, red scales from calf to neck, and slender curves. You look at her face, with draconic fangs, demonic horns and reptilian eyes. Flames jet from her nose with every breath, and she shifts her weight from side to side. She’s an odd mix of dragon and demon, with wide, womanly hips. She plants her spear, wings flapping.[pg]");
+				outputText("You ready yourself for battle, and you hear the cracking of bones as the creature almost violently twists its own neck one way, then the other, laughing as it takes off, flying towards you with malice in its gaze.");
+				outputText("[pg]“<b>You are now fighting Project Flamespreader.</b>”");
+				startCombat(new ProjectFlameSpreader());
+			}
+			function tyrantEncounter():void {
+				outputText("Your wanderings bring you in front of a massive form vaguely resembling a Drider. Easily seventeen feet tall and thirty feet long, the creature turns to face you, six crimson eyes gleaming. It wears blackened full plate armor thicker than any you’ve ever seen, with glistening spikes on its shoulders. Twin horns poke through the creature’s helmet. Those, and the eyes, are the only part of its body not covered in metal. It breathes heavily, and as it takes a step, the spikes on its legs sink a half-inch into the ground below. Corruption oozes from this creature in a sickening aura. It holds a massive halberd in each meaty fist, using them like axes.");
+				outputText("[pg]On the creature’s back sits a heavily muscled Incubus, armored lightly, and holding an odd crossbow in one hand. He looks at you, smirking, and points.");
+				outputText("[pg]“<i>Tyrant? Kill!</i>”");
+				outputText("[pg]“<b>You are now fighting Project Tyrant.</b>”");
+				startCombat(new ProjectTyrant());
+			}
+			function ultimisEcounter():void {
+				outputText("You and your dragoness lover travel through [place], stopping for a moment. The air smells vaguely of sulphur...and it’s getting stronger. Casting your gaze skyward, you see a massive form, bright red, flying low to the ground...and heading right towards you. You barely have any time at all to react, but you manage to leap to the side, narrowly dodging a veritable pillar of flame. Kiha roars her rage, taking to the sky, but as she does, no less than five Flamespreaders fly in, forcing her to evade their deadly spears. Kiha looks back at you for a moment, before banking away, taking all five of the fakers with her.");
+				if (silly()) outputText("[pg]Having seen plenty of Kiha’s ass, child-bearing hips and bountiful breasts, you conclude that they’re not even good enough to be Kiha’s fakes! You just hope she doesn’t eat those words.");
+				outputText("[pg]“<b>You are now fighting the Ultimis Flamespreader.</b>”");
+				startCombat(new UltimisFlamespreader());
+			}
+		}
 
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
@@ -805,11 +872,11 @@ public class Exploration extends BaseContent
 				SceneLib.evangelineFollower.enterTheEvangeline();
 				return;
 			}
-			if (player.level > 2 && EvangelineFollower.EvangelineAffectionMeter == 2 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && rand(10) == 0) {
+			if (player.level > 0 && (EvangelineFollower.EvangelineAffectionMeter == 1 || EvangelineFollower.EvangelineAffectionMeter == 2) && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && rand(2) == 0) {
 				SceneLib.evangelineFollower.alternativEvangelineRecruit();
 				return;
 			}
-			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10) == 0) {
+			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(5) == 0) {
 				pearldiscovery();
 				return;
 			}
@@ -817,8 +884,16 @@ public class Exploration extends BaseContent
 				hiddencavediscovery();
 				return;
 			}
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0) {
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(5) == 0) {
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
+				return;
+			}
+			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && !player.hasStatusEffect(StatusEffects.PocketWatch) && rand(3) == 0) {
+				pocketwatchdiscovery();
+				return;
+			}
+			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && player.superPerkPoints > 0 && rand(5) == 0) {
+				pocketwatchdiscovery();
 				return;
 			}
 /*			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
@@ -829,7 +904,7 @@ public class Exploration extends BaseContent
 				ryubirepenc();
 				return;
 			}
-*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
+*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(5) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
@@ -842,7 +917,7 @@ public class Exploration extends BaseContent
 				outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into a strange area.");
 				outputText("\n\nNot long into your journey, you see a hooded figure looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest, and you start to follow it. You glance around, there's still no one else nearby, so you continue to tail the mysterious being.");
 				outputText("\n\nHalf an hour or so later, still following the cloaked figure, you begin to hear the sound of running water. Moving on, you eventually come across the source: a decently sized river flows across the land, populated by variously sized islands. Stopping for a second to take a look around, the hooded person seems to be moving towards one of the several islands. He? She? It is still oblivious to your presence.");
-				outputText("\n\nA voice rings from behind you, \"<i>Come to visit He'Xin'Dao, stranger? </i>\"");
+				outputText("\n\nA voice rings from behind you, \"<i>Come to visit He'Xin'Dao, stranger?</i>\"");
 				outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood.\n\n"
 					+ "\"<i>You seem lacking in soulforce, but luckily your soul is enough intact to allow future cultivation. So, since you are already here, what do you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
 				outputText("\n\nYou ponder for a moment over the offer. The hooded beings don't seem to carry any malice, given they haven't attacked you nor attempted rape. Perhaps it would be of interest to explore this place?  You decide to accept their offer as they lead you over the wide bridge to one of the islands.  Several heavily armored guards peer at you searchingly, to which one of your new companions state that you are a new guest.  The guard gives a stoic nod as they step aside, no longer barring you from entry.  Your hooded friends guide you to a small island to properly register you as a guest. They give you a small guide on a piece of parchment, telling you places of interest and instructions on how to find this place again.");
@@ -874,7 +949,7 @@ public class Exploration extends BaseContent
 					else if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
 					else if (player.isNaga()) outputText("in your scales");
 					else outputText("inside your footwear, between your toes");
-					outputText(".\n\n<b>You've discovered the Desert!</b>");
+					outputText(".\n\n<b>You've discovered the Desert (Outer)!</b>");
 					player.exploredDesert = 1;
 					player.explored++;
 					doNext(camp.returnToCampUseOneHour);
@@ -1171,17 +1246,84 @@ public class Exploration extends BaseContent
 			doNext(hiddencave.enterDungeon);
 		}
 
+		public function pocketwatchdiscovery():void {
+			clearOutput();
+			outputText("While exploring, you feel something is off.  Wary of finding new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pocket watch.  Knowing that it may be more than it looks, you inspect the adjacent surroundings for a while before deciding to touch it. A faint voice echoes in your mind.\n\n \"<i>Only thou that shall sacrifice shall be rewarded.</i>\" \n\n");
+			menu();
+			addButtonIfTrue(6, "Sacrifice", pocketwatchdiscoveryYes, "Req. something 'super'.", player.superPerkPoints > 0);
+			addButton(8, "Leave", pocketwatchdiscoveryNo);
+		}
+		private function pocketwatchdiscoveryYes():void {
+			outputText("Determined you grab the watch. A feeling of pain pierces your soul making you momentarily black out. After returning to your senses, you see the watch is already hanging on your waist. A feeling of missing some piece of yourself nags at you but there doesn't appear to be anything missing at first glance. Well guess it won't kill you for now...	 you hope as you return to camp.\n\n");
+			player.superPerkPoints--;
+			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.PocketWatch)) player.removeStatusEffect(StatusEffects.PocketWatch);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function pocketwatchdiscoveryNo():void {
+			outputText("No you do not want to sacrifice anything. Leaving the watch behind, you return to the camp.\n\n");
+			player.createStatusEffect(StatusEffects.PocketWatch, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
+
 		public function ryubifirstenc():void {
 			flags[kFLAGS.RYUBI_LVL_UP] = 1;
 			clearOutput();
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
 		}
-
 		public function ryubirepenc():void {
 			clearOutput();
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
+		}
+
+		public function goSearchForPearls():void {
+			clearOutput();
+			outputText("You grab your [weapon] and goes on serching solution to your waning physical constitution.");
+			if (player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2 && player.hasStatusEffect(StatusEffects.ElementalPearlGolems) && player.statusEffectv1(StatusEffects.ElementalPearlGolems) == 2) {
+				player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
+				player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
+			}
+			if (player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2 && player.hasStatusEffect(StatusEffects.ElementalPearlGolems)) {
+				player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
+				player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
+			}
+			if (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) {
+				player.createStatusEffect(StatusEffects.ElementalPearlGolems, 1, 0, 0, 0);
+				player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
+			}
+			startCombat(new ElementalGolems());
+		}
+		public function elementalGolemBeaten1():void {
+			clearOutput();
+			outputText("You stops before beaten guardian quasi-gargoyle and reach toward it shoulder mounted shards yanking off each of them.\n\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten1a);
+		}
+		private function elementalGolemBeaten1a():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
+			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
+		}
+		public function elementalGolemBeaten2():void {
+			clearOutput();
+			outputText("You stops before beaten obsidian gargoyle and reach toward it shoulder mounted shards yanking off each of them.\n\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten2a);
+		}
+		private function elementalGolemBeaten2a():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
+			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
+		}
+		public function elementalGolemBeaten3():void {
+			outputText("You stops before beaten living statue golem and reach toward it shoulder mounted crystals yanking off each of them.\n\n");
+			inventory.takeItem(useables.ELCRYST, elementalGolemBeaten3a);
+		}
+		private function elementalGolemBeaten3a():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
+			inventory.takeItem(useables.ELCRYST, cleanupAfterCombat);
 		}
 
 		public function debugOptions():void
@@ -1255,4 +1397,4 @@ public class Exploration extends BaseContent
 		}
 
 	}
-}
+}

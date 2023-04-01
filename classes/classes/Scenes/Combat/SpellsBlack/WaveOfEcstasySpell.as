@@ -47,6 +47,9 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You almost moan in pleasure as you draw on this spell, sending forth your lust like a shockwave. ");
+			if (player.perkv1(PerkLib.ImpNobility) > 0) {
+				outputText("Your imp cohorts assist you spellcasting adding their diagrams to your own.  ");
+			}
 		}
 		if (monster is WormMass) {
 			if (display) {

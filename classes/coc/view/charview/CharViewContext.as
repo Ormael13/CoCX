@@ -46,7 +46,7 @@ public class CharViewContext extends ExecContext {
 			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
 
 			function showLegClothing():Boolean {
-				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing();
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing();
 			}
 			function showPanty():Boolean {
 				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing();
@@ -68,7 +68,7 @@ public class CharViewContext extends ExecContext {
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					AzazelPhylactery: player.hasPerk(PerkLib.InnerPhylactery),
 					showClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing(),
-					showArmClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
+					showArmClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI, Arms.FROSTWYRM, Arms.JABBERWOCKY].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
 					showLegClothing: showLegClothing(),
 					showPanty: showPanty(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
@@ -223,18 +223,23 @@ public class CharViewContext extends ExecContext {
 					elfClothing: player.armor == game.armors.ERA,
 					iceQueenGown: player.armor == game.armors.IQG,
 					gooArmor: player.armor == game.armors.GOOARMR,
+					franRegalia: player.armor == game.armors.FCLOAK,
+					elfWizardDress: player.armor == game.armors.FMDRESS,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
 					dragonscaleBikiniBra: player.upperGarment == game.undergarments.DS_BRA,
 					comfyBikiniBra: player.upperGarment == game.undergarments.C_BRA,
 					cowBra: player.upperGarment == game.undergarments.COW_BRA,
+					blackCatBra: player.upperGarment == game.undergarments.BN_TOP,
+
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
 					cowPanty: player.lowerGarment == game.undergarments.COW_PANTY,
+					blackCatPanty: player.lowerGarment == game.undergarments.BN_SKIRT,
 
 					// Unique misc Accessories
 					oniGourd: player.countMiscJewelry(game.miscjewelries.ONI_GOURD) > 0,

@@ -14,9 +14,9 @@ public function treeMenu(output:Boolean = true):void {
 		outputText("The demon tree is still here, and the face peeking from it still stares daggers at you even from a distance.  It looks like forgiveness won't be forthcoming.");
 		//Call Jojo goes to above scene, others go to fight or camp directly
 		menu();
-		addButton(0,"Fight",fightHolli);
-		if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(1,"Call Jojo",callDatJojo);
-		addButton(4, "Back", inventory.inventoryMenu);
+		addButton(1,"Fight",fightHolli);
+		if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(2,"Call Jojo",callDatJojo);
+		addButton(3, "Back", inventory.inventoryMenu);
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 1) flowerStage1Menu(output);
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 2) flowerStage2Menu(output);
@@ -257,8 +257,9 @@ public function getASprout():void {
 	outputText("  You look closer and see purple veins on the undersides of the leaves, throbbing with what can only be the tainted liquids that suffuse much of this planet.  Fully grown, it might spread its corruption to your camp.\n\n<b>Do you destroy it?</b>");
 	flags[kFLAGS.FUCK_FLOWER_LEVEL] = 1;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
-	//[Yes] [No]
-	doYesNo(destroyDatFukkinTree, letZeFuckingSproutLive);
+	menu();
+	addButton(6, "Yes", destroyDatFukkinTree);
+	addButton(8, "No", letZeFuckingSproutLive);
 }
 //[Yes] Destroy Tree (edited)
 private function destroyDatFukkinTree():void {
@@ -630,6 +631,7 @@ private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+	if (player.pregnancy2Type == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancy2Incubation, 1);
 	doNext(playerMenu);
 }
 
@@ -1086,9 +1088,9 @@ private function slapDatHo():void {
 	//[Cut Her Down][Call Jojo(requires talisman)][Ignore Her]
 	//ignore returns to previous menu and is default spacebar option
 	menu();
-	addButton(0,"CutHerDown",cutHerDown);
-	if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(1,"Call Jojo",callDatJojo);
-	addButton(4,"Ignore",treeMenu,true);
+	addButton(6,"CutHerDown",cutHerDown);
+	if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(7,"Call Jojo",callDatJojo);
+	addButton(8,"Ignore",treeMenu,true);
 }
 
 //[Cut Her Down]

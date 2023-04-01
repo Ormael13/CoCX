@@ -6,6 +6,7 @@ package classes.Scenes.Camp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class CampMakeWinions extends BaseContent
 	{
@@ -72,10 +73,6 @@ public class CampMakeWinions extends BaseContent
 		public function maxPermanentImprovedStoneGolemsBagSize():Number {
 			var maxPermanentImprovedStoneGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.EpicGolemMaker)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxPermanentImprovedStoneGolemsBagSizeCounter += 1;
@@ -87,8 +84,6 @@ public class CampMakeWinions extends BaseContent
 		public function maxPermanentSteelGolemsBagSize():Number {
 			var maxPermanentSteelGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) maxPermanentSteelGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentSteelGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyCaptain)) maxPermanentSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyMajor)) maxPermanentSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyLieutenantColonel)) maxPermanentSteelGolemsBagSizeCounter += 1;
@@ -100,7 +95,6 @@ public class CampMakeWinions extends BaseContent
 		public function maxPermanentImprovedSteelGolemsBagSize():Number {
 			var maxPermanentImprovedSteelGolemsBagSizeCounter:Number = 0;
 			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyColonel)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyGeneral)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
 			if (player.hasPerk(PerkLib.GolemArmyMajorGeneral)) maxPermanentImprovedSteelGolemsBagSizeCounter += 1;
@@ -110,9 +104,9 @@ public class CampMakeWinions extends BaseContent
 			var maxReusableGolemCoresBagSizeCounter:Number = 0;
 			if (maxTemporalGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxTemporalGolemsBagSize();
 			if (maxPermanentStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentStoneGolemsBagSize();
-			if (maxPermanentImprovedStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentImprovedStoneGolemsBagSize();
-			if (maxPermanentSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentSteelGolemsBagSize();
-			if (maxPermanentImprovedSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += maxPermanentImprovedSteelGolemsBagSize();
+			if (maxPermanentImprovedStoneGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += (maxPermanentImprovedStoneGolemsBagSize() * 2);
+			if (maxPermanentSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += (maxPermanentSteelGolemsBagSize() * 2);
+			if (maxPermanentImprovedSteelGolemsBagSize() > 0) maxReusableGolemCoresBagSizeCounter += (maxPermanentImprovedSteelGolemsBagSize() * 3);
 			if (player.hasPerk(PerkLib.BeginnerGolemMaker)) maxReusableGolemCoresBagSizeCounter += 2;
 			maxReusableGolemCoresBagSizeCounter *= 3;
 			return maxReusableGolemCoresBagSizeCounter;
@@ -186,7 +180,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make the most simple golem out of a pile of stones.  <b>It will crumble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePermanentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + eleShardCost + permanentStoneGolemMakingCost() + " Mana");
 			else addButtonDisabled(1, "P.S.Golem", "Req. Master Golem Maker perk.");
-			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) addButton(2, "S.Golem", makePermanentSteelGolem).hint("Make steel golem.\n\nCost: 1 Golem Core, 2 Energy Cores, 10 Metal Plates, 4 Mechanisms, " + eleShardCost + permanentSteelGolemMakingCost() + " Mana");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) addButton(2, "M.Golem", makePermanentSteelGolem).hint("Make steel golem.\n\nCost: 1 Golem Core, 2 Energy Cores, 10 Metal Plates, 4 Mechanisms, " + eleShardCost + permanentSteelGolemMakingCost() + " Mana");
 			else addButtonDisabled(2, "M.Golem", "Req. Advanced Golemancy Theory perk.");
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
 			else addButtonDisabled(5, "T.S.Golem(5x)", "Req. Temporal Golems Restructuration perk.");
@@ -578,14 +572,33 @@ public class CampMakeWinions extends BaseContent
 			else addButtonDisabled(0, "I.M.Circ.(1)", "You already used this upgrade option on your golems.");
 			if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "I.M.Circ.(2)", "You can't use this upgrade options without previous one.");
 			else {
-				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1) addButton(1, "I.M.Circ.(2)", upgradesForPermanentGolemsImprovedManaCircuitRank2);
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 1) addButton(1, "I.M.Circ.(2)", upgradesForPermanentGolemsImprovedManaCircuits);
 				else addButtonDisabled(1, "I.M.Circ.(2)", "You already used this upgrade option on your golems.");
-			}/*
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
-				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 0) addButton(2, "I.M.Circ.(3)", upgradesForPermanentGolemsImprovedManaCircuitRank3);
-				else addButtonDisabled(2, "I.M.Circ.(3)", "You already used this upgrade option on your golems.");
 			}
-			else addButtonDisabled(2, "I.M.Circ.(3)", "You need to reach at least Legendary Golem Maker to work on this upgrade.");*/
+			if (player.hasPerk(PerkLib.EpicGolemMaker)) {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 2) addButtonDisabled(2, "I.M.Circ.(3)", "You can't use this upgrade options without previous one.");
+				else {
+					if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 2) addButton(2, "I.M.Circ.(3)", upgradesForPermanentGolemsImprovedManaCircuits);
+					else addButtonDisabled(2, "I.M.Circ.(3)", "You already used this upgrade option on your golems.");
+				}
+			}
+			else addButtonDisabled(2, "I.M.Circ.(3)", "You need to reach at least Epic Golem Maker to work on this upgrade.");
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 3) addButtonDisabled(3, "I.M.Circ.(4)", "You can't use this upgrade options without previous one.");
+				else {
+					if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 3) addButton(3, "I.M.Circ.(4)", upgradesForPermanentGolemsImprovedManaCircuits);
+					else addButtonDisabled(3, "I.M.Circ.(4)", "You already used this upgrade option on your golems.");
+				}
+			}
+			else addButtonDisabled(3, "I.M.Circ.(4)", "You need to reach at least Epic Golem Maker (3rd circle) to work on this upgrade.");
+			if (player.hasPerk(PerkLib.LegendaryGolemMaker2ndCircle)) {
+				if (player.statusEffectv2(StatusEffects.GolemUpgrades1) < 4) addButtonDisabled(4, "I.M.Circ.(5)", "You can't use this upgrade options without previous one.");
+				else {
+					if (player.statusEffectv2(StatusEffects.GolemUpgrades1) == 4) addButton(4, "I.M.Circ.(5)", upgradesForPermanentGolemsImprovedManaCircuits);
+					else addButtonDisabled(4, "I.M.Circ.(5)", "You already used this upgrade option on your golems.");
+				}
+			}
+			else addButtonDisabled(4, "I.M.Circ.(5)", "You need to reach at least Legendary Golem Maker (2nd circle) to work on this upgrade.");
 			addButton(14, "Back", upgradesForPermanentGolems);
 		}
 		public function upgradesForPermanentGolemsImprovedManaCircuitRank1():void {
@@ -605,17 +618,17 @@ public class CampMakeWinions extends BaseContent
 			doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
 		}
-		public function upgradesForPermanentGolemsImprovedManaCircuitRank2():void {
+		private function upgradesForPermanentGolemsImprovedManaCircuits():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
 			outputText("Checking the page for this upgrade, you see it would req. 150 mana for each permanent golem to make that modification.\n\n");
-			if (player.mana >= (150 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsImprovedManaCircuitRank2Yes, upgradesForPermanentGolemsImprovedManaCircuit);
+			if (player.mana >= (150 * counterOfPermanentGolems())) doYesNo(upgradesForPermanentGolemsImprovedManaCircuitYes, upgradesForPermanentGolemsImprovedManaCircuit);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
 				doNext(upgradesForPermanentGolemsImprovedManaCircuit);
 			}
 		}
-		public function upgradesForPermanentGolemsImprovedManaCircuitRank2Yes():void {
+		public function upgradesForPermanentGolemsImprovedManaCircuitYes():void {
 			useMana((150 * counterOfPermanentGolems()));
 			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
@@ -761,6 +774,8 @@ public class CampMakeWinions extends BaseContent
 		//
 		//--------------
 		
+		private var elecost:Number = 0;
+		private var elecostr:Boolean = false;
 		private function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
 			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 3;
@@ -798,6 +813,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 2;
 			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 2;
 			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.DaoOfTheElements)) maxSizeOfElementalsArmyCounter += player.perkv2(PerkLib.DaoOfTheElements);
 			return maxSizeOfElementalsArmyCounter;
 		}
 		private function currentSizeOfElementalsArmy():Number {
@@ -817,7 +833,7 @@ public class CampMakeWinions extends BaseContent
 					outputText("-Normal: " + player.statusEffectv1(StatusEffects.SummonedElementals) + " (" + player.statusEffectv1(StatusEffects.SummonedElementals) + ")\n");
 					outputText("-Epic: " + player.statusEffectv2(StatusEffects.SummonedElementals) + " (" + player.statusEffectv2(StatusEffects.SummonedElementals) * 2 + ")\n");
 				}
-				outputText("-Unique: 0</i>\n\n");
+				outputText("-Unique: ? (?)</i>\n\n");
 			}
 			if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
 			outputText("<b>Currently summoned elementals:</b><i>");
@@ -1345,21 +1361,32 @@ public class CampMakeWinions extends BaseContent
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 7) outputText(" (Baron Rank)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 8) outputText(" (Viscount Rank)");
 			}
-			outputText("</i>");
+			outputText("</i>");/*	usunąć za jakiś czas wykorektorowaną cześć
+			outputText("\n"+player.statusEffectv1(StatusEffects.ElementalPearlGolems)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerResolve)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerDedication)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerSacrifice)+"");*/
 			menu();
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu).hint("Summon a Normal-tier Elementals");
 			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible Normal-tier elementals or reached limit of how many elementals you can command at once.");
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
-			else addButtonDisabled(1, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
-			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
-			else addButtonDisabled(5, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (currentSizeOfElementalsArmy() > 0) addButton(1, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
+			else addButtonDisabled(1, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(5, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
+			else addButtonDisabled(5, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(6, "ElementUp(E)", elementaLvlUpEpic);
 			else addButtonDisabled(6, "ElementUp(E)", "You don't have any epic elementals, try summoning one!");
+			if (canSearchForParls()) addButton(10, "Explore", SceneLib.exploration.goSearchForPearls);
 			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) >= 1) addButton(12, "E.S.Conv.", elementalShardsConversion).hint("Conversion of Elemental Shards"+(player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)?" of Soulforce":"")+" into energy stored in arcane circle elemental conduit.");
 			else addButtonDisabled(12, "E.S.Conv.", "You need to have any elemental conduit added to the arcane circle to use this option.");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
+		private function canSearchForParls():Boolean {
+			return (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) ||
+				(player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2) ||
+				(player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2);
+		}
+		
 		private function elementaLvlUp():void {
 			var elementalTypes:Array = [];
 			var contractRankI:int = 0;
@@ -1439,34 +1466,38 @@ public class CampMakeWinions extends BaseContent
 		}
 		private function elementaLvlUpEpic():void {
 			menu();
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 8) {
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", rankUpElementalAirEpic);
 					else addButtonDisabled(0, "Air", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(0, "Air", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 8) {
+			else addButtonDisabled(0, "Air", "You don't have this epic elemental yet!");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", rankUpElementalEarthEpic);
 					else addButtonDisabled(1, "Earth", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(1, "Earth", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 8) {
+			else addButtonDisabled(1, "Earth", "You don't have this epic elemental yet!");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", rankUpElementalFireEpic);
 					else addButtonDisabled(2, "Fire", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(2, "Fire", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 8) {
+			else addButtonDisabled(2, "Fire", "You don't have this epic elemental yet!");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", rankUpElementalWaterEpic);
 					else addButtonDisabled(3, "Water", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(3, "Water", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
+			else addButtonDisabled(3, "Water", "You don't have this epic elemental yet!");
 			addButton(14, "Back", accessSummonElementalsMainMenu)
 		}
 		private function elementalShardsConversion():void {
@@ -1474,18 +1505,84 @@ public class CampMakeWinions extends BaseContent
 			outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
 			outputText("Do you like to convert elemental shard into energy stored in conduit? (Excess energy will be lost)\n\n");
 			menu();
-			if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo);
-			else addButtonDisabled(1, "Yes", "You don't have any Elemental Shards to convert currently.");
-			addButton(3, "Back", accessSummonElementalsMainMenu);
+			if (player.hasItem(useables.ELSHARD, 1)) addButton(0, "Yes", elementalShardsConversionGo, 0).hint("Use 1 Elemental Shard");
+			else addButtonDisabled(0, "Yes", "You don't have any Elemental Shards to convert currently.");
+			if (player.hasItem(useables.LELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo, 1).hint("Use 1 Large Elemental Shard");
+			else addButtonDisabled(1, "Yes", "You don't have any Large Elemental Shards to convert currently.");
+			if (player.hasItem(useables.ELCRYST, 1)) addButton(2, "Yes", elementalShardsConversionGo, 2).hint("Use 1 Elemental Crystal");
+			else addButtonDisabled(2, "Yes", "You don't have any Elemental Crystals to convert currently.");
+			if (player.hasItem(useables.EL_CORE, 1)) addButton(3, "Yes", elementalShardsConversionGo, 3).hint("Use 1 Elemental Core");
+			else addButtonDisabled(3, "Yes", "You don't have any Elemental Cores to convert currently.");
+			if (player.hasItem(useables.ELSHARD, 5)) addButton(5, "Yes", elementalShardsConversionGo, 10).hint("Use 5 Elemental Shards");
+			else addButtonDisabled(5, "Yes", "You don't have enough Elemental Shards to convert currently.");
+			if (player.hasItem(useables.LELSHARD, 5)) addButton(6, "Yes", elementalShardsConversionGo, 11).hint("Use 5 Large Elemental Shards");
+			else addButtonDisabled(6, "Yes", "You don't have enough Large Elemental Shards to convert currently.");
+			if (player.hasItem(useables.ELCRYST, 5)) addButton(7, "Yes", elementalShardsConversionGo, 12).hint("Use 5 Elemental Crystals");
+			else addButtonDisabled(7, "Yes", "You don't have enough Elemental Crystals to convert currently.");
+			if (player.hasItem(useables.EL_CORE, 5)) addButton(8, "Yes", elementalShardsConversionGo, 13).hint("Use 5 Elemental Cores");
+			else addButtonDisabled(8, "Yes", "You don't have enough Elemental Cores to convert currently.");
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) {
+				if (player.soulforce >= 10000) addButton(10, "1K", soulforceConversionGo, 1000).hint("Convert 10,000 SF into 1,000 EE");
+				else addButtonDisabled(10, "1K", "You not have enough (10,000) SF for conversion.");
+				if (player.soulforce >= 20000) addButton(11, "2K", soulforceConversionGo, 2000).hint("Convert 20,000 SF into 2,000 EE");
+				else addButtonDisabled(11, "2K", "You not have enough (20,000) SF for conversion.");
+				if (player.soulforce >= 10000) addButton(12, "5K", soulforceConversionGo, 5000).hint("Convert 50,000 SF into 5,000 EE");
+				else addButtonDisabled(12, "5K", "You not have enough (50,000) SF for conversion.");
+				if (player.soulforce >= 20000) addButton(13, "10K", soulforceConversionGo, 10000).hint("Convert 100,000 SF into 10,000 EE");
+				else addButtonDisabled(13, "10K", "You not have enough (100,000) SF for conversion.");
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
-		private function elementalShardsConversionGo():void {
+		private function elementalShardsConversionGo(shardtype:Number):void {
 			clearOutput();
 			outputText("You remove the elemental shard from your pack, taking it in both hands. You sit in the middle of your circle, the shard resting in your palms. You close your eyes, letting your mana spread into the crystal. As you focus your power, the crystal shatters, little pieces floating around your head. You can’t see, but you feel it as the shards liquify, crystal bits becoming globes, shimmering with power. With a thought, you will the globes down, into the leylines you’ve made in the ground, into the engravings of your circle. You feel the power settle, a magical pulse that you feel, ready to be unleashed.\n\n");
-			player.destroyItems(useables.ELSHARD, 1);
 			var convertedShard:Number = 0;
-			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + 400 > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
-			else convertedShard += 400;
+			var shardEnergy:Number = 0;
+			if (shardtype == 0) {
+				player.destroyItems(useables.ELSHARD, 1);
+				shardEnergy += 400;
+			}
+			if (shardtype == 1) {
+				player.destroyItems(useables.LELSHARD, 1);
+				shardEnergy += 1200;
+			}
+			if (shardtype == 2) {
+				player.destroyItems(useables.ELCRYST, 1);
+				shardEnergy += 4000;
+			}
+			if (shardtype == 3) {
+				player.destroyItems(useables.EL_CORE, 1);
+				shardEnergy += 8000;
+			}
+			if (shardtype == 10) {
+				player.destroyItems(useables.ELSHARD, 5);
+				shardEnergy += 2000;
+			}
+			if (shardtype == 11) {
+				player.destroyItems(useables.LELSHARD, 5);
+				shardEnergy += 6000;
+			}
+			if (shardtype == 12) {
+				player.destroyItems(useables.ELCRYST, 5);
+				shardEnergy += 20000;
+			}
+			if (shardtype == 13) {
+				player.destroyItems(useables.EL_CORE, 5);
+				shardEnergy += 40000;
+			}
+			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + shardEnergy > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
+			else convertedShard += shardEnergy;
 			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,convertedShard);
+			doNext(elementalShardsConversion);
+		}
+		private function soulforceConversionGo(amount:Number):void {
+			clearOutput();
+			outputText("Information Noona informing your on exchanging some soulforce into elemental energy.\n\n");
+			var converted:Number = 0;
+			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + amount > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) converted += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
+			else converted += amount;
+			EngineCore.SoulforceChange(-(amount * 10));
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,converted);
 			doNext(elementalShardsConversion);
 		}
 		private function evocationTome():void {
@@ -1496,7 +1593,7 @@ public class CampMakeWinions extends BaseContent
 			addButton(1, "Earth", evocationTomeEarth).hint(" Information about the Earth Elements.");
 			addButton(2, "Fire", evocationTomeFire).hint(" Information about the Fire Elements.");
 			addButton(3, "Water", evocationTomeWater).hint(" Information about the Water Elements.");
-			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
+			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath) || player.hasPerk(PerkLib.DaoOfTheElements)) {
 				addButton(4, "Ether", evocationTomeEther).hint(" Information about the Ether Elements.");
 				addButton(5, "Wood", evocationTomeWood).hint(" Information about the Wood Elements.");
 				addButton(6, "Metal", evocationTomeMetal).hint(" Information about the Metal Elements.");
@@ -1506,7 +1603,7 @@ public class CampMakeWinions extends BaseContent
 				addButtonDisabled(5, "Wood", "Req. Elements of the orthodox Path perk.");
 				addButtonDisabled(6, "Metal", "Req. Elements of the orthodox Path perk.");
 			}
-			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
+			if (player.hasPerk(PerkLib.ElementsOfMarethBasics) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1)) {
 				addButton(7, "Ice", evocationTomeIce).hint(" Information about the Ice Elements.");
 				addButton(8, "Lightning", evocationTomeLightning).hint(" Information about the Lightning Elements.");
 				addButton(9, "Darkness", evocationTomeDarkness).hint(" Information about the Darkness Elements.");
@@ -1516,7 +1613,7 @@ public class CampMakeWinions extends BaseContent
 				addButtonDisabled(8, "Lightning", "Req. Elements of Mareth: Basics perk.");
 				addButtonDisabled(9, "Darkness", "Req. Elements of Mareth: Basics perk.");
 			}
-			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) {
+			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 2)) {
 				addButton(10, "Poison", evocationTomePoison).hint(" Information about the Poison Elements.");
 				addButton(11, "Purity", evocationTomePurity).hint(" Information about the Purity Elements.");
 				addButton(12, "Corruption", evocationTomeCorruption).hint(" Information about the Corruption Elements.");
@@ -1535,6 +1632,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
 			outputText("-When attacking, it will ignore enemy damage reduction.\n");
+			outputText("-When attacking, it will deal Wind type damage.\n");
 			outputText("-M. Special: Creates a Wind Wall that deflects incoming projectiles for few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
@@ -1661,17 +1759,17 @@ public class CampMakeWinions extends BaseContent
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater);
-				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
+				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath) || player.hasPerk(PerkLib.DaoOfTheElements)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal);
 				}
-				if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
+				if (player.hasPerk(PerkLib.ElementsOfMarethBasics) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness);
 				}
-				if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) {
+				if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 2)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsPoison) < 1) addButton(10, "Poison", summonElementalPoison);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsPurity) < 1) addButton(11, "Purity", summonElementalPurity);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption);
@@ -1919,7 +2017,11 @@ public class CampMakeWinions extends BaseContent
 		
 		private function rankUpElementalAir():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsAir))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsAir))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
@@ -1931,16 +2033,20 @@ public class CampMakeWinions extends BaseContent
 			else summmast += player.wis / player.statusEffectv2(StatusEffects.SummonedElementalsAir);
 			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx)) summmast += 25;
 			if (rand(summmast) > 5) {
-				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				outputText("The outraged elemental starts by struggling but is unable to defeat its binding, letting go and standing still, awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEarth))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEarth))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
@@ -1955,13 +2061,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsEarth, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsFire))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsFire))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
@@ -1976,13 +2086,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsFire, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWater))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWater))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
@@ -1997,13 +2111,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsWater, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalIce():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsIce))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsIce))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
@@ -2018,13 +2136,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsIce, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalLightning():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsLightning))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsLightning))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
@@ -2039,13 +2161,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsLightning, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalDarkness():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsDarkness))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsDarkness))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
@@ -2060,13 +2186,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsDarkness, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalWood():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWood))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWood))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
@@ -2081,13 +2211,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsWood, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalMetal():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsMetal))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsMetal))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
@@ -2102,13 +2236,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsMetal, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalEther():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEther))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEther))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
@@ -2123,13 +2261,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsEther, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalPoison():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPoison))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPoison))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
@@ -2144,13 +2286,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsPoison, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalPurity():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPurity))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPurity))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
@@ -2165,13 +2311,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsPurity, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalCorruption():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsCorruption))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsCorruption))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
@@ -2186,7 +2336,7 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsCorruption, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
@@ -2206,18 +2356,19 @@ public class CampMakeWinions extends BaseContent
 		}
 		private function rankUpElementalPart1():void {
 			outputText("It has been a while and your mastery of summoning has increased as a consequence. Now confident that you can contain it you head to the arcane circle and set up the ritual to release some of your servant restraints. You order your pet to stand still as you release the binding rune containing it. ");
-			outputText("At first it trash in its prison with the clear intention to break free, kill and consume you but the ward holds. You write an additional arcane circle ");
+			outputText("At first it thrashes in its prison with the clear intention to break free, kill and consume you but the ward holds. You write an additional arcane circle ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("around the first ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("around the previous one ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) outputText("around the previous two ");
 			outputText("and add new directive and containment runes to the formula. Satisfied with the result you incant a final word of power.");
 		}
-		private function failToRankUpElemental():void {
-			outputText("The enraged elemental struggle against its containment and to your horror find a breach beginning to grow to its full power and striking you in the process with a powerful barrage of energy.\n\n");
+		private function failToRankUpElemental(elecost:Number, elecostr:Boolean):void {
+			outputText(" The enraged elemental struggle against its containment and to your horror find a breach beginning to grow to its full power and striking you in the process with a powerful barrage of energy.\n\n");
 			outputText("\"<i>You pitiful mortal... you though you could contain me forever! I’m going to make you regret ever summoning me by...</i>\"");
 			outputText("The elemental screams in dismay as your larger arcane circle unleash the full might of its last resort rune. Powerful discharge of energy strikes the wayward servants buying you enough time to rewrite its seal and force it back into servitude.\n\n");
 			outputText("\"<i>Someday you will attempt this ritual again and when you do I will..</i>\"");
 			outputText("Its final curse is silenced as its power are sealed again reducing it back to its former size. \"<b>Well this ritual is a failure you will have to try again when you achieved better control.</b>\"");
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu) && elecostr) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(elecost*0.5));
 			HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 		}
 		private function failToRankUpHPCost():Number {
@@ -2251,6 +2402,7 @@ public class CampMakeWinions extends BaseContent
 				outputText("Your magic circle groans, your control runes warping. You watch in horror as one of your runes is pulled in between two of the three swirling vortexes...and is promptly torn to shreds. As if a switch had been pulled, the winds explode in a howling, screaming force, throwing you away from the circle. ");
 				outputText("You hit a rock back-first, and as you sit there, dazed, the figure of your epic air elemental lowers itself in front of you.\n\n");
 				outputText("\"<i>The storm seems to have failed to claim you. Good. Call upon the winds once more, once you have recovered.</i>\" Your epic air elemental fades from view, a light warm breeze blowing past your face.\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
@@ -2281,6 +2433,7 @@ public class CampMakeWinions extends BaseContent
 			else {
 				outputText("\"<i>Some sooner than most.</i>\" Your mountain caves inward, spikes of stone forming on the inside. You charge one side of your magic circle, and the thin spire of stone explodes outwards. Finally disrupted, the gemstones shatter, pelting you in painful shards. ");
 				outputText("As the dust settles, cuts on your [skin] gushing blood, your elemental frowns, shaking its head. \"<i>A disappointment, to be sure.</i>\"\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
@@ -2312,6 +2465,7 @@ public class CampMakeWinions extends BaseContent
 			else {
 				outputText("The flames roar, and your elemental winces, vanishing from the circle. You watch in horror as the flames roar out of control, consuming your runes, turning them black before they vanish. The lines of your magic circle whine, barely containing the raging inferno. You wince, enduring the flames as best you can, but before it dies down, you’ve taken a lot of damage.\n\n");
 				outputText("\"<i>...And it will consume those who underestimate its power. Perhaps another time, [master].</i>\"\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
@@ -2341,6 +2495,7 @@ public class CampMakeWinions extends BaseContent
 				outputText("The moon-runes underneath you warp and groan, the white-whipped waters thrash harder. A single rune in the thrashing waves shudders...and shatters. This unleashes a wave of power that shatters your control runes. Stuck in the magic circle, you hunker down as the roaring water strikes you from every side. ");
 				outputText("For what feels like hours, you sit in your circle, enduring the waves you unleashed until your power runes are spent.\n\n");
 				outputText("\"<i>...and wash away those foolish enough to think they can weather the storm.</i>\" Your epic water elemental stands. \"<i>A pity, that more of my power cannot be unleashed in this realm.</i>\"\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
@@ -2370,6 +2525,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonWarriorsCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonWarriorsCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonWarriorsCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonWarriorsCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonWarriorsCounter;
 		}
 		public function maxSkeletonArchers():Number {
@@ -2380,6 +2536,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonArchersCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonArchersCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonArchersCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonArchersCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonArchersCounter;
 		}
 		public function maxSkeletonMages():Number {
@@ -2390,6 +2547,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonMagesCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonMagesCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonMagesCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonMagesCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonMagesCounter;
 		}
 		

@@ -248,7 +248,7 @@ public class CockTransformations extends MutationsHelper {
 
 					if (player.cocks.length > cock){
 
-						desc += "You smile, watching your [cock] grow longer.  Inches of newfound dick-flesh erupt from your crotch in response to omnibus' dark magics.  Before you can play with your transformed tool, a wave of burning desire passes through you.  ";
+						desc += "You smile, watching your [cock] grow longer.  Inches of newfound dick-flesh erupt from your crotch.  Before you can play with your transformed tool, a wave of burning desire passes through you.  ";
 						if(player.cor < 80) desc += "You watch in horror as the skin of your [cock] turns shiny and purplish-black.  ";
 						else desc += "Curious, you watch the skin of your [cock] turn a shiny-dark purple.  ";
 
@@ -361,7 +361,7 @@ public class CockTransformations extends MutationsHelper {
 						if (player.hasSheath()) desc += "  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.";
 						else {
 							desc +="  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your [cock "+(cock+1)+"]'s root, tightening and pulling it inside its depths.";
-							if (player.hasBalls()) outputText("  Thankfully, your balls appear untouched.");
+							if (player.hasBalls()) desc +="  Thankfully, your balls appear untouched.";
 						}
 					}
 					else {
@@ -370,7 +370,7 @@ public class CockTransformations extends MutationsHelper {
 						if (player.hasSheath()) desc += "  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.";
 						else {
 							desc +="  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's root, tightening and pulling it inside its depths.";
-							if (player.hasBalls()) outputText("  Thankfully, your balls appear untouched.");
+							if (player.hasBalls()) desc +="  Thankfully, your balls appear untouched.";
 						}
 						player.createCock();
 					}
@@ -460,10 +460,10 @@ public class CockTransformations extends MutationsHelper {
 					}
 					else {
 						if (player.lizardCocks() > 0) {
-							outputText("[pg]A knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
+							desc += "A knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple";
 							if (player.hasCoat())
-								outputText(" and shedding " + player.coatColor);
-							outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
+								desc += " and shedding " + player.coatColor;
+							desc += " as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.";
 						} else {
 							desc += GrowCockGenericText();
 							desc += "it ripples loosely from "+
@@ -781,8 +781,8 @@ public class CockTransformations extends MutationsHelper {
 
 					if (player.cocks.length > cock){
 						desc += "Your huge [cock "+(cock+1)+"] suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.  ";
-						outputText("It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming.  ");
-						outputText("<b>You now have a bee cock!</b>");
+						desc += "It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming.  ";
+						desc += "<b>You now have a bee cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();

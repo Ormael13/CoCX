@@ -66,9 +66,6 @@ use namespace CoC;
 		public const DBAPLAT:SimpleUseable = new SimpleUseable("DBaPlat", "D.BarkPlates", "a Divine Bark Plates", 3000,
 			"A Divine Bark Plates.",
 			"You look over the Divine Bark Plates.  Tencales writhe and worm softly along the thick, sturdy plate.");
-		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000,
-			"A chunk of lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat.",
-			"You examine the pinkish-purple crystal. It must be lethicite. You know that the demons like to consume them but you're sure there might be a use for it.");
 		public const GOLCORE:SimpleUseable = new SimpleUseable("GolCore", "GolemCore", "a golem core", 1,
 			"An undamaged core taken from a defeated golem.",
 			"You look at the undamaged golem core. A simple small crystal sphere, no larger than your fist glows gently. Any proper Golemancer knows the use of each core. For others, it's vendor fodder, preferably to a merchant that specifically seeks such items.");
@@ -81,12 +78,24 @@ use namespace CoC;
 		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 1,
 			"An Elemental Shard.",
 			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
+		public const LELSHARD:SimpleUseable = new SimpleUseable("LELShard", "Large Elemental Shard", "a Large Elemental Shard", 3,
+			"A Large Elemental Shard.",
+			"You look at the large elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
+		public const ELCRYST:SimpleUseable = new SimpleUseable("ELCryst", "Elemental Crystal", "an Elemental Crystal", 10,
+			"An Elemental Crystal.",
+			"You look at the elemental crystal. It occasionally glows gently in your hand.  It precious material that may be usefull to make your summoned elementals stronger.");
+		public const EL_CORE:SimpleUseable = new SimpleUseable("ELCore", "Elemental Core", "an Elemental Core", 20,
+			"An Elemental Core.",
+			"You look at the elemental core. It occasionally glows gently in your hand.  Rare treasure that have wide range of uses for elementalists.");
 		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
 			"An vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
 		public const BTSOLUTION:SimpleUseable = new SimpleUseable("BTSolution", "Body Tempering Solution vial", "a vial of Body Tempering solution", 100,
 			"An vial of Body Tempering solution.",
 			"You look at the vial of substance called Body Tempering solution. It's only usefull for Body Cultivators and probably harmfull for anyone else.");
+		public const SRESIDUE:SimpleUseable = new SimpleUseable("SoulResidue", "Soul Residue", "a Soul Residue", 1,
+			"A Soul Residue.",
+			"You look at the soul residue. It looks to be incredibly fine powder and may have some uses. If you find anyone that could work with this.");
 		public const SKYMETA:SimpleUseable = new SimpleUseable("Skymetal", "Skymetal" , "a Skymetal", 900,
 			"A Skymetal ore.",
 			"You gaze at the skymetal ore. Likely usefull to making some weapons.");

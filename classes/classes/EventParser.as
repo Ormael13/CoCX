@@ -11,6 +11,8 @@ import classes.Items.Armors.SuccubusArmor;
 import classes.Items.WeaponLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Metamorph;
+import classes.Scenes.NPCs.EtnaDaughterScene;
+import classes.Scenes.NPCs.MidokaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -125,7 +127,7 @@ public class EventParser {
     private static function goNextWrapped(needNext:Boolean):Boolean {
         var player:Player = CoC.instance.player;
         //clearOutput();
-        if (timeAwareLargeLastEntry >= 0) { //Finish calling timeChangeLarge before advancing the hour again
+        if (timeAwareLargeLastEntry >= 0 && !DungeonAbstractContent.inDungeon) { //Finish calling timeChangeLarge before advancing the hour again
             for (; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
                 var item:TimeAwareInterface = _timeAwareClassList[timeAwareLargeLastEntry];
                 var classname:String = getQualifiedClassName(item);
@@ -222,7 +224,7 @@ public class EventParser {
             /* Inform all time aware classes that it's time for large events to trigger. Note that timeChangeLarge could be called multiple times in a single tick
                of the clock, so any updates should happen in timeChange and any timeChangeLarge events need to make sure they cannot repeat within the same hour.
                In effect these are the same rules the existing code acted under. */
-            for (timeAwareLargeLastEntry = 0; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
+            for (timeAwareLargeLastEntry = 0; timeAwareLargeLastEntry < _timeAwareClassList.length && !DungeonAbstractContent.inDungeon; timeAwareLargeLastEntry++) {
                 item = _timeAwareClassList[timeAwareLargeLastEntry];
                 classname = getQualifiedClassName(item);
                 Utils.Begin("TimeAwareInterface", classname + ".timeChangeLarge");
@@ -234,23 +236,25 @@ public class EventParser {
             }
             timeAwareLargeLastEntry = -1; //If this var is -1 then this function has called timeChangeLarge for all entries in the _timeAwareClassList
 
-            Utils.Begin("eventParser", "impGangBangProgress");
-            var igb:int = impGangBangProgress();
-            Utils.End("eventParser", "impGangBangProgress");
-            if (igb == 1) needNext = true;
-            if (igb == 2) return true;
+            if (!DungeonAbstractContent.inDungeon) {
+                Utils.Begin("eventParser", "impGangBangProgress");
+                var igb:int = impGangBangProgress();
+                Utils.End("eventParser", "impGangBangProgress");
+                if (igb == 1) needNext = true;
+                if (igb == 2) return true;
 
-            Utils.Begin("eventParser", "pregnancyProgress");
-            igb = pregnancyProgress();
-            Utils.End("eventParser", "pregnancyProgress");
-            if (igb == 1) needNext = true;
-            if (igb == 2) return true;
+                Utils.Begin("eventParser", "pregnancyProgress");
+                igb = pregnancyProgress();
+                Utils.End("eventParser", "pregnancyProgress");
+                if (igb == 1) needNext = true;
+                if (igb == 2) return true;
 
-            Utils.Begin("eventParser", "eggLoot");
-            igb = eggLootProgress();
-            Utils.End("eventParser", "eggLoot");
-            if (igb == 1) needNext = true;
-            if (igb == 2) return true;
+                Utils.Begin("eventParser", "eggLoot");
+                igb = eggLootProgress();
+                Utils.End("eventParser", "eggLoot");
+                if (igb == 1) needNext = true;
+                if (igb == 2) return true;
+            }
         }
 
         // Hanging the Uma massage update here, I think it should work...
@@ -279,10 +283,12 @@ public class EventParser {
         if (player.miscJewelry1 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
             SceneLib.inventory.takeItem(player.unequipMiscJewelry1(false,true), playerMenu);
+            return true;
         }
         if (player.miscJewelry2 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
             SceneLib.inventory.takeItem(player.unequipMiscJewelry2(false,true), playerMenu);
+            return true;
         }
         //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
         if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= 33 + player.corruptionTolerance) {
@@ -442,7 +448,7 @@ public class EventParser {
         var flags:DefaultDict = CoC.instance.flags;
 
         if (player.hasPerk(PerkLib.Diapause)) {
-            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
+            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || !player.isPregnant() && !player.isButtPregnant()) //no pregnancy, I guess?
                 return 0;
             //unique checks for diapause
             if (flags[kFLAGS.DIAPAUSE_DISPLAYED] == 1) {
@@ -500,7 +506,7 @@ public class EventParser {
                 SceneLib.kidAScene.goblinNightAnemone();
                 return 1;
             } else if (chance > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
-                if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && !(SceneLib.camp.sleepInCabin() && (player.inte / 5 >= Utils.rand(15) || player.lust < 0.8 * player.maxLust() || CoC.instance.gameSettings.sceneHunter_inst.other)) &&
+                if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && EtnaDaughterScene.EtnaDaughterGuardingCamp != 2 && SceneLib.midokaScene.MidokaGuardingCamp != 2 && !(SceneLib.camp.sleepInCabin() && (player.inte / 5 >= Utils.rand(15) || player.lust < 0.8 * player.maxLust() || CoC.instance.gameSettings.sceneHunter_inst.other)) &&
                         !flags[kFLAGS.IN_INGNAM] || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
                     SceneLib.impScene.impGangabangaEXPLOSIONS();
                     EngineCore.doNext(playerMenu);
@@ -532,6 +538,10 @@ public class EventParser {
                 }
                 else if (ZenjiScenes.ZenjiNightWatch == 1) {
                     EngineCore.outputText("\n<b>Zenji informs you that he managed to fend off creatures that tried to assault you during the night.</b>\n");
+                    return 1;
+                }
+                else if (EtnaDaughterScene.EtnaDaughterGuardingCamp == 2) {
+                    EngineCore.outputText("\n<b>A group of imps tried to attack that night but you heard their screams in the distance as [etnakidname] laughed and made a feast out of them.</b>\n");
                     return 1;
                 }
                 else if (SceneLib.camp.sleepInCabin() && player.inte / 5 >= Utils.rand(15) && player.lust < 0.8 * player.maxLust()) { //lust condition: horny - less smart!

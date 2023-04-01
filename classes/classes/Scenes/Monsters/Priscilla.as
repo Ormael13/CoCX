@@ -175,7 +175,7 @@ public class Priscilla extends Goblin
 				this.level = 98;
 			}
 			else {	//leave min and max levels to easily balance npc combat
-				var lvlMulti:Number = flags[kFLAGS.MINERVA_LVL_UP];
+				var lvlMulti:Number = flags[kFLAGS.PRISCILLA_LVL_UP];
 				initStrTouSpeInte(115 + 20*lvlMulti, 95 + 10*lvlMulti, 80 + 18*lvlMulti, 120 + 20*lvlMulti);
 				initWisLibSensCor(120 + 20*lvlMulti, 65 + 5*lvlMulti, 35 + 5*lvlMulti, 45);
 				this.weaponAttack = 35 + 5*lvlMulti;

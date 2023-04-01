@@ -56,11 +56,16 @@ use namespace CoC;
 					addButtonIfTrue(5, "Centaur Rape", centaurOnImpStart, ("Req. dick with area smaller than " + monster.analCapacity() + " or pussy."), player.cockThatFits(monster.analCapacity()) >= 0 || player.hasVagina());
 					addButtonIfTrue(6, "Group Vaginal", centaurGirlOnImps, "Req. vagina", player.hasVagina(), "Being a taur, you look like you could do with multiple imps to get you off. Call the imps.");
 				}
+
+				if ((player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") && player.isRaceCached(Races.IMP, 3)) {
+					addButtonIfTrue(0, "Male Dom", dominateM, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0, "Teach the imp a lesson and ram his butt with your dick!");
+					addButtonIfTrue(1, "Female Dom", dominateF, "Req. a vagina", player.hasVagina(), "Dominate and ride the imp's large dick vaginally.");
+				}
 				addButton(2, "Oral Give", oralGive);
 				addButton(3, "AnalReceive", analReceive);
 				addButtonIfTrue(7, "NippleFuck", nipFuckRouter, "Req. nipplecunts.", player.hasFuckableNipples(), "Have the imp fuck your perfectly fuckable nipples.");
 				LustyMaidensArmor.addTitfuckButton(8);
-				addButtonIfTrue(9, "Fuck & Piss", pissDom, "Requires you to have non-taur body and 'Watersports' to be enabled", flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && !player.isTaur(), "Fuck the Imp's ass, and relieve yourself. What's a better way to leave your scent and mark on him?");
+				addButtonIfTrue(9, "Fuck & Piss", pissDom, "Requires you to have non-taur body and 'Watersports' to be enabled", flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && player.hasCock() && !player.isTaur(), "Fuck the Imp's ass, and relieve yourself. What's a better way to leave your scent and mark on him?");
 				addButtonIfTrue(11, "Oviposit", putBeeEggsInAnImpYouMonster, "Req. bee ovipositor", player.canOvipositBee(), "Use your ovipositor and lay some eggs in his butt.");
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(impRapeMenu);
 			} else {
@@ -654,9 +659,9 @@ use namespace CoC;
                 if (player.str < 80)
                     outputText("holding the creature over your head as ");
                 else
-                    outputText("you guide his [monster cock] to liberally coat your face" + (player.hasBreasts() ? "and [allbreasts]" : ""));
+                    outputText("you guide his [monster cock] to liberally coat your face " + (player.hasBreasts() ? "and [allbreasts] " : ""));
             }
-            outputText("\nYou lick your lips clean of the creamy mess as you put down the now unconscious Imp and give it a look-over for valuables.");
+            outputText("you lick your lips clean of the creamy mess as you put down the now unconscious Imp and give it a look-over for valuables.");
             if (player.cor >= 80)
                 outputText("  As you trot back the way you have come you idly trace a finger through the dangling sperm, hoping someone might see what a slut you have become. Though if you have to clean it off, you can always get more.. perhaps from an even more copious source.");
 			player.sexReward("cum", "Lips");
@@ -701,8 +706,8 @@ use namespace CoC;
 
         public function nipFuckBig():void {
             clearOutput();
-            outputText("As the imp falls to the ground, furiously masturbating his [monster cock] you smile in delight, your [nipples] already beginning to grow wet" + (player.biggestLactation() > 2) ? " with the massive flow of milk pouring out of them" : ".");
-            outputText("\nYou approach the little Imp at an eager trot, lowering yourself down and encasing his [monster cock] in your [breasts].  His eyes fly open and stare in wicked delight at what it sees, quickly reaching out and beginning to fondle and finger your [nipples].  Unable to resist anymore, you press the opening of one of your [breasts] against the tip of the [monster cock].  If the creature is confused it does not show it, shoving his dick quickly and hard into your tit.");
+            outputText("As the imp falls to the ground, furiously masturbating his [monster cock] you smile in delight, your [nipples] already beginning to grow wet" + ((player.biggestLactation() > 2) ? " with the massive flow of milk pouring out of them." : "."));
+            outputText("\n\nYou approach the little Imp at an eager trot, lowering yourself down and encasing his [monster cock] in your [breasts].  His eyes fly open and stare in wicked delight at what it sees, quickly reaching out and beginning to fondle and finger your [nipples].  Unable to resist anymore, you press the opening of one of your [breasts] against the tip of the [monster cock].  If the creature is confused it does not show it, shoving his dick quickly and hard into your tit.");
             outputText("\n\nPain shoots through you as you feel the [nipples] being forced to widen by the imp's massive tool, and you let out a slight scream.");
             outputText("  Without missing a beat the creature wraps his hands around your [breasts] and begins thrusting liberally into it as if your tit was nothing more than a giant and perverted fuck-toy.  Seeing no point in arguing with the perception, you reach over and start shoving your own finger into your other [nipples], crying out as you urge the imp to use your [breasts].  Part of you longs to feel the imp's thick and corrupted cream filling your tit-hole, ");
             //cor check
@@ -716,7 +721,8 @@ use namespace CoC;
                 outputText("leaving you frustrated.");
                 player.slimeFeed();
                 dynStats("cor", 3);
-                return;
+				cleanupAfterCombat();
+				return;
                 //no lust reduction
             }
             else if (player.cor < 50) {
@@ -1362,7 +1368,7 @@ use namespace CoC;
 		}
 
         public function impRapesAlraune():void {
-            outputText("You sink to the ground, too overcame by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows...and grows...and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
+            outputText("You sink to the ground, too overcame by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows... and grows... and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
             if (player.isLiliraune()){ outputText(" Your twin sister can’t help but rub her pussy in anticipation the moment she sees this.\n\n" +
 
                     "\"<i>Woah sis, he looks well-equipped. You get fucked or I get fucked?</i>\"\n\n" +
@@ -1466,7 +1472,7 @@ use namespace CoC;
 			//========================================
 			function vaginal():void {
 				outputText(images.showImage("imp-loss-female-fuck"));
-				outputText("You sink to the ground, too overcame by lust and desire to fight.  The imp smiles, a wicked look glinting in his eyes.  He drops his loincloth to reveal a hardening cock.  Your eyes bulge a bit as it grows...and grows...and grows!  That imp has a twelve-inch cock... and he's walking towards you.   Your [vag] practically juices itself in anticipation, and you find yourself spreading your [legs] in preparation.");
+				outputText("You sink to the ground, too overcame by lust and desire to fight.  The imp smiles, a wicked look glinting in his eyes.  He drops his loincloth to reveal a hardening cock.  Your eyes bulge a bit as it grows... and grows... and grows!  That imp has a twelve-inch cock... and he's walking towards you.   Your [vag] practically juices itself in anticipation, and you find yourself spreading your [legs] in preparation.");
 				outputText("\n\nHe smiles and presses his cock against your [vag].  Your lust-driven mind is speechless, leaving you panting and moaning like a whore.");
 				//If too big, only partly penetrate.
 				if(player.vaginalCapacity() < monster.cockArea(0)) {
@@ -1487,12 +1493,12 @@ use namespace CoC;
 				if(player.gender == 3) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes, until you cannot help but stroke your [cock] along with each plunge he takes in your [vag].  You feel yourself clench around him as your sexual organs release, erupting spurts of cum and milking the demon's cock like your life depended on it.");
 				if(player.gender == 2) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes.  You moan loudly and lewdly with each thrust, hips squeezing around the demon-cock, relishing the feeling of fullness.  Before long you cannot help but cum all over him, [vag] locking around his cock like a vice, muscles rippling, milking him for his cum.");
 				outputText("  The imp's [monster cockshort] explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption.  You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with an unnatural quantity of corrupted semen.\n\nWith a sigh, he pulls his dick free, and you flop back on your back, cum surging out onto the ground from your well-fucked hole.  ");
-				if(player.pregnancyIncubation > 0 && player.pregnancyIncubation <= 216) {
+				if(player.hasVisiblePregnancy()) {
 					outputText("You wonder what this will do to whatever is growing in your womb...  ");
 				}
 				else {
 					if(player.inHeat) outputText("You find yourself hoping you're pregnant as you swiftly lose consciousness.");
-					else if(player.pregnancyIncubation <= 0) {
+					else if(player.canGetPregnant()) {
 						if(player.cor > 75) outputText("With an appreciative moan, you bury your fingers in its slimy warmth, hoping you are pregnant with some fiendish offspring, and lose consciousness.");
 						else outputText("You hope you don't become pregnant, but promptly lose consciousness before you can contemplate the prospect any further.");
 					}
@@ -1754,6 +1760,10 @@ use namespace CoC;
                 addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area smaller than " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1,"Get Blown", getBlownByAnImpLord, "Req. cock", player.hasCock());
                 addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
+				if ((player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") && player.isRaceCached(Races.IMP, 3)) {
+					addButtonIfTrue(6, "Male Dom", dominateM, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0, "Teach the imp a lesson and ram his butt with your dick!");
+					addButtonIfTrue(7, "Female Dom", dominateF, "Req. a vagina", player.hasVagina(), "Dominate and ride the imp's large dick vaginally.");
+				}
 				if (monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape)
 					.disableIf(!player.hasPerk(PerkLib.Feeder), "Req. Feeder perk");
 				LustyMaidensArmor.addTitfuckButton(4);
@@ -2179,6 +2189,55 @@ use namespace CoC;
 			cleanupAfterCombat();
 		}
 
+		public function dominateF():void {
+			clearOutput();
+			outputText("As you approach the defeated imp, towering over his penis with your threatening but somewhat tiny stature, you give the new plaything an impish smirk. He backs away sweating profusely.[pg]");
+			outputText("\"<i>Hey what's with that face?! If you're going to rape me get down to it!</i>\"[pg]");
+			outputText("Oh, sure, you're going to rape him. Just not in the way he thought. [if(hasarmor) You nonchalantly toss your gear to the side before| With nothing in the way between the two of you,] you align his erection to your labia, sliding inch after inch of his meaty rod down your snatch. ");
+			outputText("It would be comical how his member, at least a foot in length, somehow manages to slide in your body if not for the fact that it was made for it. You're the female counterpart of this midget after all. Your equally tiny body managing to accommodate his freakishly large prick is a simple matter of biology mixed with a tinge of black magic.[pg]");
+			outputText("You gasp in delight as the tip finally bottoms in and begins forcefully humping up and down, the sound of your shapely ass slamming against his churning balls filling the air. Pressure quickly builds up within you as you clench tighter against his dick. You're on the verge of an orgasm when you notice the dimwit's cock begin to tense up. ");
+			outputText("No way, is this idiot cumming before you, let alone without your permission? You grab his balls with your hands and unleash a spell closing the valve just as he's about to ejaculate. The imp now looks at you with stupor mixed with terror.[pg]");
+			outputText("\"<i>Nooo! Please, anything but this!</i>\"[pg]");
+			outputText("Pets don't get to argue or plead, just who does he think he is?! He should be grateful to be allowed to taste your pussy with his unworthy dick.");
+			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" Annoyed, you fetch your backpack grab a dildo and cut short his pitiful cry by forcing the toy into his mouth. With the moron now properly gaged, you") else outputText(" You");
+			outputText(" resume your ride, the imp’s balls increasing in volume after each trust as a buildup of cum is sealed within. You reach your first orgasm and keep on raping him until his balls are big enough to act as pillows for you to rest on.");
+			outputText("Thoroughly satisfied, you unplug from the tormented imp, his cock sliding out of your cunt with a wet pop before you take several steps as he seems on the verge of eruption, yet still bound by your magic. ");
+			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" You remove the toy from his mouth only when your sure he won't protest further. ");
+			outputText("The tormented imp gives you a pleading stare, his mouth foaming from the accumulated pleasure.[pg]");
+			outputText("Well, he did fulfill his purpose but keeping him around as a lackey to do your bidding wouldn't be so bad. You tell him that if he pledges fealty to you and the book, you will allow him the right to cum. Otherwise, you're not beyond leaving him here to agonize forever.[pg]");
+			outputText("\"<i>Please "+player.mf("master", "mistress")+", don't leave me like this! Please let me cum I can't..I can't keep up like this! Make it stop!</i>\"[pg]");
+			outputText("Staring at your book you confirm that the imp indeed willingly surrendered his being to your care as a new inky note appears in the tome of imp. Satisfied with this you undo the spell, his cock unleashing a lovely fountain of white cream all around him. You almost get painted yourself but flap your tiny wings to evade the jet moving out of reach.[pg]");
+			player.sexReward("cum", "Vaginal");
+			recruitImp();
+		}
+
+		public function dominateM():void {
+			clearOutput();
+			outputText("You loom over the defeated imp, the weight of your throbbing erection only serving to entice you of the prize that awaits.[pg]");
+			outputText("He looks back at you warily, \"<i>Well? Just get on with it already.</i>\"[pg]");
+			outputText("You grin in delight, baring your teeth. Oh, you plan on giving him what he's asking for, but perhaps not quite how he wants it.[pg]");
+			outputText("[if (hasarmor)You disrobe immediately, not giving a moment's hesitation.[pg]]");
+			outputText("Looming over him, you force him on his stomach before pressing his face into the dirt. The imp below you grunts, yet still raises his ass toward you for easier access.[pg]");
+			outputText("The slut wants it, but you want to make sure he knows his place beneath you.[pg]");
+			outputText("Now that you've positioned yourself behind him properly, your pre-leaking [cock] throbs with greater intensity as you circle the tip of your erection around his hole. He's already wet himself, the more to toy with.[pg]");
+			outputText("He grunts eagerly as you begin to drive your [cock] in. You have to put your entire weight into it as you keep your other hand rubbing his face into the earth beneath you.[pg]");
+			outputText("He reaches down to begin jerking himself off but you're not so willing to let him enjoy himself yet. You reach your other hand down as your weight collapses onto him.[pg]");
+			outputText("You grin wickedly as you force a vice grip onto his meaty shaft. He's not going to cum until you let him. Otherwise, how will he learn his place beneath you?[pg]");
+			outputText("The imp grunts with need, \"<i>No, please! Please let me cum, anything but this, I'll do anything.</i>\"[pg]");
+			outputText("Anything? Then he'll just have to learn how to cum when you let him.[pg]");
+			outputText("The imp lets loose a pitiful whine but slowly submits his place as you continue pounding at him. You tighten your grip on him as his member desperately tries to swell, forcing seed past your grip, yet you hold tight, not wanting him to get the slightest amount of release.[pg]");
+			outputText("Your [balls] slap against his rear as your thrusts grow in intensity. The imp seems to be getting accustomed to his place as he leans back into you, desperate for more of your length. Perhaps he's trying to get you off quicker for himself[pg]");
+			outputText("You press his face harder against the ground again, not wanting him to forget who's in control here.[pg]");
+			outputText("Your length begins pulsating with a greater rhythm as a familiar heat builds up deep within you. Your thrusts grow frantic as his sphincter grips onto you tighter, ready to milk you for everything you're worth.	[pg]");
+			outputText("\"<i>Please cum in me. Make me yours, I'll do anything for you!</i>\"[pg]");
+			outputText("Your grip tightens as you demand he pledge his allegiance to you. Beg for mercy as he forfeits his ownership to you.[pg]");
+			outputText("\"<i>Pleasepleaseplease master! Let me cum, I'll do it!</i>\"[pg]");
+			outputText("Staring at your book you confirm that the imp indeed willingly surrendered his being to your care as a new inky note appears in the tome of imp. Now that he's surrendered to you, you're all the more ready to heed his demand. With a loud moan, you hit your climax, unloading wave after wave of seed into him as you finally loosen your grip on him.[pg]");
+			outputText("The imp howls in pleasure as he cums, drenching the ground beneath him with his corrupted cum.[pg]");
+			player.sexReward("Default", "Dick",true,false);
+			recruitImp();
+		}
+
 		//IMP PACK
 		public function impPackEncounter():void {
 			clearOutput();
@@ -2257,7 +2316,7 @@ use namespace CoC;
 			outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n");
 
 			outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.");
-			if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
+			if(player.canGetPregnant()) outputText("  You'll probably get pregnant.");
 			player.sexReward("cum","Vaginal");
 			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 			cleanupAfterCombat();
@@ -2347,6 +2406,9 @@ use namespace CoC;
 			clearOutput();
 			flags[kFLAGS.IMPS_KILLED]++;
 			outputText("You make a quick work of the imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+			if (player.hasPerk(PerkLib.QueenOfTheFairies)) player.QueenOfTheForestDemonBonus();
+
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
@@ -2358,6 +2420,9 @@ use namespace CoC;
 			clearOutput();
 			flags[kFLAGS.IMPS_KILLED]++;
 			outputText("You make a quick work of the feral imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+			if (player.hasPerk(PerkLib.QueenOfTheFairies)) player.QueenOfTheForestDemonBonus();
+
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
@@ -2377,6 +2442,12 @@ use namespace CoC;
 			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > SceneLib.camp.campMake.maxDemonBonesStored()) harv = SceneLib.camp.campMake.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
 			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
 			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
+			cleanupAfterCombat();
+		}
+
+		private function recruitImp():void {
+			player.addPerkValue(PerkLib.ImpNobility, 1, 1);
+			outputText("Done here you open your book which promptly pulls the spent imp form inside for reeducation and your later perusage. Satisfied with the result, you head back to camp. <b>You now have "+player.perkv1(PerkLib.ImpNobility)+" imp cohorts.</b>");
 			cleanupAfterCombat();
 		}
 	}

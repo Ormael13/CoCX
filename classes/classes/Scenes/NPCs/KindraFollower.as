@@ -51,13 +51,13 @@ public function secondWonFightWithKindra():void {
 
 public function thirdWonFightWithKindra():void {
 	clearOutput();
-	outputText("The sheep girl falls down defeated then look at you finally speaking for the first time.\n\n");
-	outputText("\"<i>I guess my grounds below to you now hunter. I will have to head out and hunt elsewhere...</i>\"\n\n");
-	outputText("Whoa, wait, you just wanted to talk to her and get she was constantly attacking you.\n\n");
+	outputText("The sheep girl falls down defeated, then looks at you, finally speaking for the first time.\n\n");
+	outputText("\"<i>I guess my grounds belong to you now hunter. I will have to head out and hunt elsewhere...</i>\"\n\n");
+	outputText("Whoa, wait, you just wanted to talk to her and know why she was constantly attacking you.\n\n");
 	outputText("\"<i>A hunter has to defend its territory lest it be taken by others. You won it fair and square also the game was becoming scarce in the area anyway it’s time for me to move.</i>\"\n\n");
-	outputText("You tell her she doesn’t have to go this far just for you not to mention the area around your camp is ripe for hunting.\n\n");
-	outputText("\"<i>Bah I stuck next to these coward up to now because I need supplies but truth be told you look like you can handle yourself so I'll come with you. Names Kindra by the way make sure you remember it.</i>\"\n\n");
-	outputText("You tell her your name is [name] and that she's free to hunt around your camp. She grunts in approval then follows you back to camp.\n\n");
+	outputText("She doesn’t have to go this far just for you, not to mention the area around your camp is ripe for hunting.\n\n");
+	outputText("\"<i>Bah I'm stuck with these these cowards for now because I need supplies. Truth be told, you look like you can handle yourself, so maybe I'll come with you. The name's Kindra by the way, make sure you remember it.</i>\"\n\n");
+	outputText("You tell her your name and that she's free to hunt around your camp. She grunts in approval as she follows you back to camp.\n\n");
 	outputText("(<b>Kindra has been added to the Followers menu!</b>)\n\n");
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);

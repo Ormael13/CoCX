@@ -160,6 +160,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			menu();
 			addButton(0, "Item", item);
 			addButton(1, weaponT, weaponB);
+			addButton(5, "Leave Anemones", dontTakeAnemones).hint("Please dont take away any anemones you bear.").disableIf(flags[kFLAGS.DONT_TAKE_ANEMONES_PLEZ] == 1, "She has agreed to leave your anemones alone");
 			if (flags[kFLAGS.KID_SITTER] <= 1) {
 				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= (player.maxFatigue() - 25)) addButton(3, "Tutor", tutorAnemoneKid);
 				else if (player.fatigue > (player.maxFatigue() - 25)) outputText("\n\nYou're too tired to tutor Kid A.");
@@ -210,6 +211,14 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			inventory.takeItem(itype, playerMenu);
 			//(set hourssinceKiditem = 0)
 			flags[kFLAGS.KID_ITEM_FIND_HOURS] = model.time.days;
+		}
+
+		private function dontTakeAnemones():void {
+			clearOutput();
+			outputText("You ask the little anemone kid to please leave any Anemones that you bear to term, rather than deal with them like she has been.[pg]");
+			outputText("She looks at you quizically for a moment before nodding her head.");
+			flags[kFLAGS.DONT_TAKE_ANEMONES_PLEZ] = 1;
+			doNext(approachAnemoneBarrel);
 		}
 
 //[Give Weapon]

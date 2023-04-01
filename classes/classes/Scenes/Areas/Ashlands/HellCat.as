@@ -26,13 +26,13 @@ import classes.internals.*;
 		{
 			var damage:int = (inte * 1.1) + rand(25);
 			damage = Math.round(damage);
-			outputText("The hellcat cast a spell, materializing a fireball before throwing it at you. ");
+			outputText("The hellcat holds out her hand, a fireball forming in her palm. She launches the ball of molten heat your way.");
 			player.takeFireDamage(damage, true);
 		}
 		
 		public function hellcatInfernalClaw():void
 		{
-			outputText("The hellcat growls at you, unsheathing her claws which turns orange-red like hot irons as she enhances it with a dash of fire magic. She leaps forward and viciously attempts to rend you. ");
+			outputText("The hellcat growls at you, unsheathing her claws. She crouches, her claws beginning to glow with orange-red heat. The smell of molten iron fills the air as she pounces at you, claws outstretched. ");
 			var firedamage:int = (inte * 0.45) + rand(10);
 			firedamage = Math.round(firedamage);
 			player.takeFireDamage(firedamage, true);
@@ -48,7 +48,7 @@ import classes.internals.*;
 		
 		public function hellcatFelineCurse():void
 		{
-			outputText("The hellcat incants a curse and you suddenly shrink in size. To your complete horror, you realize she polymorphed you into a small housecat!");
+			outputText("The hellcat incants a curse. Your head reels as the world around you seems to grow. You fall, unable to balance as your [legs] give way. After a few seconds, you open your eyes, trying to rub them...but your arm isn't moving right. You look down and see...fuzzy paws. Cat paws. To your growing horror, you realize what she did. You're now a housecat!");
 			player.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 8, 0, 0, 0);
 		}
@@ -90,7 +90,7 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "hellcat";
 			this.imageName = "hellcat";
-			this.long = "Your opponent is a Hellcat, a fire witch with cat-like features. She would look like a standard catgirl if not for her ashen skin, fiery hair and blazing tail. Fire seeps up from the side corner of her ember-like black sclera eyes which glow with the dark promise of burning passion. The catgirl caster is clearly in heat and plans to vent it on you. Aside from her black hooded cape, she wears nothing to hide her modesty, displaying her D cup breast, drooling pussy and hardening cat cock for you to enjoy.";
+			this.long = "Your opponent is a Hellcat, a fire witch with cat-like features. She would look like a standard catgirl if not for her ashen skin, fiery hair and blazing tail. Fire seeps up from the side corner of her ember-like black sclera eyes which glow with the dark promise of burning passion. The catgirl caster is clearly in heat and plans to vent it on you. Aside from her black hooded cape, she wears nothing to hide her modesty, displaying her D cup breasts, drooling pussy and hardening cat cock for you to enjoy.";
 			// this.plural = false;
 			this.createCock(10,2.5,CockTypesEnum.CAT);
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
@@ -125,7 +125,8 @@ import classes.internals.*;
 			this.drop = new WeightedDrop().addMany(5,
 					consumables.W_FRUIT,
 					weapons.H_WAND,
-					null);
+					null)
+					.add(weaponsrange.NEKONOM, 1);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			checkMonster();
 		}

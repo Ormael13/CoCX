@@ -27,7 +27,7 @@ Note: Satyrs actively increase their own lust in order to use their lust charge,
 public function satyrEncounter(location:int = 0):void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_satyr);
-	if(rand(2) == 0 || player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0 || player.gender == 0) {
+	if(rand(2) == 0 || player.isPregnant() || player.isButtPregnant() || player.gender == 0) {
 		outputText("As you cross the ");
 		if(location == 0) outputText("grassy plains");
 		else outputText("sodden expanse of the swamp");
@@ -421,24 +421,20 @@ private function satyrPreggo():void {
 
 //Birthing (Z)
 //Baby is always male.
-public function satyrBirth(vag:Boolean):void {
+public function satyrBirth(vag:Boolean, womb:int = 0):void {
 	spriteSelect(SpriteDb.s_satyr);
 	outputText("\nSudden sharp, intense pangs rip through your gut, seeming to emanate from your ");
-	if(vag && !player.hasVagina()) {
-		outputText("newly grown vagina");
-		player.createVagina();
-	}
-	else if(vag) outputText("[vagina]");
+	if(vag) outputText(player.vaginaDescript(womb));
 	else outputText("[butt]");
 	outputText(", a gripping, writhing sensation as if something is thrashing around inside you and wants to get out.  Looks like it's time for whatever is inside you to emerge.");
 
 	outputText("\n\nYou strip your [armor] and lay down, waiting for the incoming contractions, and sure enough they come.  Your body is wracked with intense pain as you push to get your newborn out; your muscles writhe and flex, anxious to fulfil their task and empty your distended belly of the new life grown within it.");
 	
 	outputText("\n\nIt doesn't take long until you see a small round head poking out of your ");
-	if(vag) outputText("[vagina]");
+	if(vag) outputText(player.vaginaDescript(womb));
 	else outputText("[asshole]");
 	outputText("; it's adorned with a pair of miniscule horns.  You groan in pain as its shoulders stretch you even wider, but the worst part of it is over and, within moments, you are delivered of your child.  ");
-	if(vag) player.cuntChange(40,true,false,true);
+	if(vag) player.cuntChange(40,true,false,true, womb);
 	else player.buttChange(40,true,false,true);
 	outputText("Long minutes pass as your body recovers from the strain, bouncing back with unnatural vitality from the exhaustion and pain of giving birth, but finally you are ready to look at it.");
 	

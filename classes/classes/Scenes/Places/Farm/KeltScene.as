@@ -246,19 +246,19 @@ private function keltEagerlyGetNaked():void {
 		//(Any Cock:
 		outputText("and almost inevitably, his eyes drop down to your [cock].  He snorts, ");
 		//(Human Cock:
-		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Heh.  Just sporting the normal model, huh?  You know there's a phrase around here... hung like a human!  Trust me... it's not a compliment.  ");
+		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Heh.  Just sporting the normal model, huh?  You know there's a phrase around here... hung like a human!  Trust me... it's not a compliment.</i>\"\r\r");
 		//(Dog Cock:
-		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.  ");
+		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.</i>\"\r\r");
 		//(Horse Cock:
-		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ");
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!</i>\"\r\r");
 		//(Tentacle Cock or other weirdness
-		if(player.cocks[0].cockType.Index >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!  ");
+		if(player.cocks[0].cockType.Index >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!</i>\"\r\r");
 		//(Small Size, ?-10 inches:
-		if(player.cocks[0].cockLength <= 10) outputText("\"So, when you poke a woman with that, does she notice?  Or do you have to tell her when to start faking her orgasm?</i>\"\r\r");
+		if(player.cocks[0].cockLength <= 10) outputText("\"<i>So, when you poke a woman with that, does she notice?  Or do you have to tell her when to start faking her orgasm?</i>\"\r\r");
 		//(Medium Size, 11-20 inches:
-		else if(player.cocks[0].cockLength <= 20) outputText("\"Still, at least you've got a decent sized cock.  You know, for a colt.  Maybe you'll get lucky, and the real women will take pity on you!</i>\"\r\r");
+		else if(player.cocks[0].cockLength <= 20) outputText("\"<i>Still, at least you've got a decent sized cock.  You know, for a colt.  Maybe you'll get lucky, and the real women will take pity on you!</i>\"\r\r");
 		//(Big Size, 21 inches and beyond:
-		else outputText("\"Now if only they could find a way to get you to stop stepping on your own cock every other step, maybe you'd be a real man!  Can you even get it up, at this point?  Or would that tip you over?  Ha!</i>\"\r\r");
+		else outputText("\"<i>Now if only they could find a way to get you to stop stepping on your own cock every other step, maybe you'd be a real man!  Can you even get it up, at this point?  Or would that tip you over?  Ha!</i>\"\r\r");
 	}
 	outputText("He looks you over one last time, and sneers condescendingly.  \"<i>Well, it ain't much as far as heroes go.  But it's better than nothing.  Fine, I'll teach ya some more.  But I don't want to see those damn clothes again.  You'll learn the way I tell you to learn, got it?</i>\"\r\r");
 	outputText("You nod, almost grateful for the excuse to go naked.  From the way Kelt is eyeing your ass, you think he'll enjoy it too.\r\r");
@@ -613,7 +613,7 @@ private function keltMainEncounter3():void {
 			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 			else player.knockUp(PregnancyStore.PREGNANCY_KELT, PregnancyStore.INCUBATION_CENTAUR, 50);
 				//Should be equivalent to the old way, but now Kelt does all the usual things like checking for contraceptives and fertilizing eggs if PC can oviposit
-			if (player.pregnancyType == PregnancyStore.PREGNANCY_KELT) trace("PLAYER GOT KNOCKED UP BY KELT");
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_KELT || player.pregnancy2Type == PregnancyStore.PREGNANCY_KELT) trace("PLAYER GOT KNOCKED UP BY KELT");
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}

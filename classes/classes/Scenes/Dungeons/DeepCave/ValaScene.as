@@ -10,6 +10,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -824,7 +825,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					"Not one to waste time, as instructed by Vala you lay down in the giant orchid. The flower is surprisingly comfortable for a plant, you could almost mistake it for a comfy velvet bed, and so you slowly drift to sleep as the petals close on you.\n\n" +
 					"You dream of a beautiful world from before the age of the demons as you walk in a floral palace filled with echoes of laughter and cheers. Small fairies fly from one side to another, singing while carrying foods, flowers, and various items. At the back of the room is a figure of greater size. Sitting on a crystalline throne is a woman who wields no crown yet has the presence of royalty. While bigger in size than her sisters who fly in this otherworldly palace she is nonetheless a fairy and only one word comes to your mind to describe her… queen. This fairy sports a pair of colorful translucent butterfly wings, which stretch six feet wide on a mature, almost perfect body not unlike that of an elf. Her regal visage turns toward you and looks straight in your eyes as if peering at the depth of your soul. It is only as you realise this royal figure was a beautified version of yourself all along that you slowly open your eyes, waking up with a loud yawn. The flower feels bigger than what you remembered it to be and so you slowly part away the petals so to let the light of the sun filter in. To your surprise, it's not the flower that got smaller but your body that got slightly bigger. While your overall shape did not change that much your body took on a more fragile and graceful version of itself, almost a mimicry of that of the elves. Your unblemished skin and refined limbs wouldn't look out of place on a nymph, not to mention your elf like pointed ears. However what really sets you apart from a human is your shiny, almost translucent hair, in which many beads of morning dew shine like beautiful gems, and your large, colorful butterfly wings easily twice as wide as your stretched arms. You flap them a few times with childlike curiosity and only stop short of taking flight. While admiring your new body you can't help but wish the flower was just a little bigger and to your surprise you actually shrink in size. Afraid as the world suddenly becomes bigger around you, including dog sized bugs you swiftly return to normal realizing that you can now shrink and grow back to human size at will. Heck, this is only a fragment of your new powers as you begin exploring the many fae magical abilities you acquired. After a few minutes, satisfied with your inspection, you finally take the time to gaze beyond the flower back to your waiting subjects. These fairies need a champion and a leader to fight for and rule them, you won’t let the fairies or Vala down. Lethice shall be defeated and the fairies protected! A few fairies come over to you carrying a human sized dress that could actually fit you just right. It's light but... perhaps a little skimpy? Well at least it won't hinder your flight. Still you are amazed they got it so quickly. To humor them you put the dress on and discover to your delight that it is the dress from the dream. Vala cheers for you right away pulling all the other fairies in.\n\n" +
 					"\"<i>All hail [name], new queen of the fairies!!</i>\"\n\n" +
-					"The fairies give you an ovation, everyone claps for the new fairy queen. You are in awe before the thousands of butterfly girls cheering for you and while your charge is a big one, you are confident that you will succeed. It's time for you to make good on your promise to them thus you head back out to your adventure ready to face the agents of evil in the name of your people.\n");
+					"The fairies give you an ovation, everyone claps for the new fairy queen. You are in awe before the thousands of butterfly girls cheering for you and while your charge is a big one, you are confident that you will succeed. It's time for you to make good on your promise to them thus you head back out to your adventure ready to face the agents of evil in the name of your people.\n\n");
 			ValaFairyQueenQuest = QUEST_STAGE_PCDACCEPTED;
 			//Turn pc into a proper fairy
 			CoC.instance.transformations.FaceFairy.applyEffect(false);
@@ -846,10 +847,13 @@ public class ValaScene extends BaseContent implements SaveableState
 				if (player.breastRows[0].breastRating < 3 && rand(2) == 0) growth++;
 				if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
 			}
-			player.createPerk(PerkLib.TransformationImmunityFairy, 0, 0, 0, 0);
+			player.createPerk(PerkLib.TransformationImmunity2, 4, 0, 0, 0);
 			if (player.hasPerk(PerkLib.RacialParagon))
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.FAIRY;
+			IMutationsLib.FeyArcaneBloodstreamIM.trueMutation = true;
 			player.removeAllRacialMutation();
+			player.createPerk(PerkLib.QueenOfTheFairies, 0, 0, 0, 0);
+			outputText("<b>Gained Perk: Queen of the Fairies!</b> "+PerkLib.QueenOfTheFairies.desc());
 			outputText("\n\n");
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			inventory.takeItem(armors.FQR, camp.returnToCampUseOneHour);

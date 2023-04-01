@@ -30,6 +30,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public static var Sated:Boolean;
 		public static var SatedCooldown:int;
 		public static var WerewolfPackMember:int;
+		public static var HellhoundPackMember:int;
 
 		public static var mooning:Boolean = false; //no need to save it
 
@@ -42,6 +43,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			NursedCooldown = 0;
 			Sated = false;
 			SatedCooldown = 0;
+			WerewolfPackMember = 0;
+			HellhoundPackMember = 0;
 		}
 
 		public function saveToObject():Object {
@@ -50,7 +53,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				"LunaNursedCooldown": NursedCooldown,
 				"LunaSated": Sated,
 				"LunaSatedCooldown": SatedCooldown,
-				"LunaWerewolfPackMember": WerewolfPackMember
+				"LunaWerewolfPackMember": WerewolfPackMember,
+				"LunaHellhoundPackMember": HellhoundPackMember
 			};
 		}
 
@@ -58,12 +62,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (o) {
 				Nursed = o["LunaNursed"];
 				Sated = o["LunaSated"];
-				if ("LunaNursedCooldown" in o) NursedCooldown = o["LunaNursedCooldown"];
-				else NursedCooldown = 0;
-				if ("LunaSatedCooldown" in o) SatedCooldown = o["LunaSatedCooldown"];
-				else SatedCooldown = 0;
-				if ("LunaWerewolfPackMember" in o) WerewolfPackMember = o["LunaWerewolfPackMember"];
-				else WerewolfPackMember = 0;
+				NursedCooldown = valueOr(o["LunaNursedCooldown"], 0);
+				SatedCooldown = valueOr(o["LunaSatedCooldown"], 0);
+				WerewolfPackMember = valueOr(o["LunaWerewolfPackMember"], 0);
+				HellhoundPackMember = valueOr(o["HellhoundPackMember"], 0);
 			} else resetState();
 		}
 
@@ -950,9 +952,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				if (player.hasVagina()) outputText(" and");
 				}
 			if (player.hasVagina()) outputText(" fingering your increasingly wet pussy");
-			outputText(", enjoying the artless strip show Luna puts on for you. She undoes her apron straps and tosses it aside, then hastily pulls her dress over her head without bothering with buttons. That gone, she fumbles with the clasp on the front of her frilly white bra while her hips, covered in their cute white panties, visibly squirm in anticipation. You can already see a trickle running down her thighs. As she tosses her bra on top of the rest of her garments she looks back at you, not with a sultry grin but a look of anxious need, and when she sees your meaty pole");
+			outputText(", enjoying the artless strip show Luna puts on for you. She undoes her apron straps and tosses it aside, then hastily pulls her dress over her head without bothering with buttons. That gone, she fumbles with the clasp on the front of her frilly white bra while her hips, covered in their cute white panties, visibly squirm in anticipation. You can already see a trickle running down her thighs. As she tosses her bra on top of the rest of her garments she looks back at you, not with a sultry grin but a look of anxious need,");
 			if (player.cocks.length > 1) outputText("s");
-			outputText(" already exposed she smiles excitedly, and her crazed eyes begin glowing a familiar, phosphorescent green as her lust begins to boil over. " +
+			outputText("and when she sees your meaty pole already exposed she smiles excitedly, and her crazed eyes begin glowing a familiar, phosphorescent green as her lust begins to boil over. " +
 					"\"<i>Oh no,</i>\"" +
 					" she says, " +
 					"\"<i>I'm already tranforming... need to get the rest off before- EEEEEEEP!</i>\"" +

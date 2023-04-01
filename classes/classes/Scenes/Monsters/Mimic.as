@@ -92,15 +92,15 @@ public class Mimic extends Monster {
         this.pronoun1 = "it";
         this.pronoun2 = "it";
         this.pronoun3 = "its";
-        initStrTouSpeInte(30, 45, 15, 5);
+        initStrTouSpeInte(30, 95, 5, 5);
         initWisLibSensCor(45, 45, 45, 100);
         this.weaponName = "mouth";
         this.weaponVerb = "bite";
         this.weaponAttack = 20 + player.level;
         if (type == 3) {
             this.armorName = "wooden surface";
-            this.armorDef = 10;
-			this.armorMDef = 10;
+            this.armorDef = 30;
+			this.armorMDef = 30;
         }
         if (type == 2 || type == 1) {
             this.armorName = "flesh";
@@ -108,14 +108,14 @@ public class Mimic extends Monster {
 			this.armorMDef = 0;
         } else {
             this.armorName = "stone surface";
-            this.armorDef = 25;
-			this.armorMDef = 25;
+            this.armorDef = 75;
+			this.armorMDef = 75;
         }
         this.lust = 10;
         this.lustVuln = 0;
 		this.bonusLust = 96;
         this.level = 6;
-        this.gems = rand(30) + 11;
+        this.gems = rand(20) + 21;
         this.drop = new WeightedDrop()
             .add(consumables.PPHILTR, 4)
             .add(consumables.NUMBOIL, 4)

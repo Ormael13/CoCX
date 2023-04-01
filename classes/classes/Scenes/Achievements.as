@@ -43,13 +43,14 @@ public class Achievements extends BaseContent
 			achievementsShadowEarned = 0;
 			achievementsTotalCurrentlyUnlocked = 0;
 			achievementsTotal = 0;
-			titleAchievementSection("Storyline"); //4 achievements
+			titleAchievementSection("Storyline"); //5 achievements
 			addAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, "Enter the realm of Mareth.");
 			addAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR, "Complete Marae's quest.");
 			addAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, "Defeat Zetaz and obtain the map.");
+			addAchievement("Chimera Squad", kACHIEVEMENTS.STORY_CHIMERA_SQUAD, "Clean up demons secret laboratory.");
 			addAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, "Defeat Lethice.");
 
-			titleAchievementSection("Zones"); //26 achievements
+			titleAchievementSection("Zones"); //29 achievements
 			addAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER, "Discover every zone.");
 			addAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER, "Discover every place.");
 			addAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I, "Explore for the first time.");
@@ -57,7 +58,8 @@ public class Achievements extends BaseContent
 			addAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, "Explore the deepwoods 100 times.");
 			//addAchievement("Jumanji", kACHIEVEMENTS., "Explore the jungle 100 times.");
 			addAchievement("Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, "Explore the lake 100 times.");
-			addAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, "Explore the desert 100 times.");
+			addAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, "Explore the outer desert 100 times.");
+			addAchievement("Bedouin", kACHIEVEMENTS.ZONE_BEDOUIN, "Explore the inner desert 100 times.");
 			addAchievement("Rookie", kACHIEVEMENTS.ZONE_ROOKIE, "Explore the boundary battlefield 100 times.");
 			addAchievement("Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, "Explore the outer battlefield 100 times.");
 			addAchievement("Hiking", kACHIEVEMENTS.ZONE_HIKING, "Explore the hills 100 times.");
@@ -450,7 +452,7 @@ public class Achievements extends BaseContent
 			addAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM, "Have at least 128 racial internal mutation perks.", "", true);
 			addAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING, "Defeat Archmage Alvina.");
 			addAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS, "Defeat Alvina at the peak of her power on Xianxia Difficulty.");
-			//addAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT, "Successfully redeem the broken soul who lost everything. This is the dawn of a new era for Mareth.");
+			addAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT, "Successfully redeem the broken soul who lost everything. This is the dawn of a new era for Mareth.");
 		}
 		
 		public function achievementsScreen():void {

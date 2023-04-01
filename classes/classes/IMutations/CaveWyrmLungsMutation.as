@@ -5,8 +5,10 @@
 package classes.IMutations
 {
 import classes.PerkClass;
+import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Races;
 
     public class CaveWyrmLungsMutation extends IMutationPerkType
     {
@@ -15,16 +17,18 @@ import classes.Creature;
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS += "";//Your lung has became accustomed to the presence of acid in your biology improving the corrosiveness and volatility of your biochemical weapons.
+			if (pTier >= 1){
+				descS += "Your lung has became accustomed to the presence of acid and fire in your biology improving the corrosiveness and volatility of your biochemical weapons. "
+			}
+            if (pTier == 1){
+                descS += "(+200% to azureflame breath / acid spit damage)";
             }
-            if (pTier >= 2){
-                descS += ", ";
+            if (pTier == 2){
+                descS += "(+400% to azureflame breath / acid spit damage, increase str/tou scaling by 100%) ";
             }
-            if (pTier >= 3){
-                descS += ", ";
+            if (pTier == 3){
+                descS += "(+600% to azureflame breath / acid spit damage, increase str/tou scaling by 100%, azureflame breath can cause stun like fire dragon breath, acid spit DoT increase phys dmg dealt to enemy by 90%, , allows to keep both specials even without been cave wyrm)";
             }
-            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -45,13 +49,15 @@ import classes.Creature;
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireHeartMutationSlot();
+                    this.requireLungsMutationSlot()
+                    .requirePerks(PerkLib.AzureflameBreath, PerkLib.AcidSpit)
+                    .requireRace(Races.CAVEWYRM);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -63,13 +69,16 @@ import classes.Creature;
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
+            if (pTier == 1) pBuffs['spe.mult'] = 0.05;
+            if (pTier == 2) pBuffs['spe.mult'] = 0.15;
+            if (pTier == 3) pBuffs['spe.mult'] = 0.35;
             return pBuffs;
         }
 
         public function CaveWyrmLungsMutation() {
-            super(mName + " IM", mName, SLOT_NONE, 3);
+            super(mName + " IM", mName, SLOT_LUNGS, 3);
         }
         
     }

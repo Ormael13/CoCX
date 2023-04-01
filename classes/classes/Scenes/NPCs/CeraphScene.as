@@ -236,7 +236,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("The omnibus' facade of feigned innocence drops under the force of the hot, wet fuck.  Her mouth opens into an 'o' of pleasure, and you feel her rod thicken as it begins pumping the proof of her ecstasy inside you.  The nodules that cover Ceraph's demonic erection wildly vibrate as she orgasms, throwing you over the edge and into the midst of a body-shaking orgasm.  Demon-seed floods your womb, squeezed inside it by your body's orgasmic contractions.  You shudder with the demon as you both begin calming down.\n\n");
 
 			outputText("She groans, \"<i>Ooooh... Champion why did you make me despoil your womb?  ");
-			if (player.pregnancyIncubation == 0) outputText("You're only feeding the swarms of imps that are despoiling this land.");
+			if (!player.isPregnant()) outputText("You're only feeding the swarms of imps that are despoiling this land.");
 			else outputText("I'm sure whatever baby you have in there won't enjoy being so soaked in corruption.");
 			outputText("</i>\"\n\n");
 
@@ -668,6 +668,8 @@ public class CeraphScene extends NPCAwareContent
 						"Requires: not taur lower body, a dick with area larger than 500, high corruption (80)");
 				addButton(3, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven).disableIf(!player.hasVagina(), "Req. a vagina.");
 				addButton(4, "Leave", leave);
+				if (player.isRaceCached(Races.CERBERUS))
+					addButton(5, "Use demon", rapeCerberusStyle);
 			} else {
 				if (player.lust < 33) outputText("\n\nYou're not aroused enough to fuck her.");
 				else outputText("  You don't really have the equipment to fuck her. Oh, well.");
@@ -1440,6 +1442,23 @@ public class CeraphScene extends NPCAwareContent
 			player.sexReward("no", "Dick");
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
+			else doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function rapeCerberusStyle():void {
+			flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING]++;
+			spriteSelect(SpriteDb.s_ceraph);
+			outputText("[Themonster] slowly backs away from you as her strength and charms wane, replaced by sheer terror. Your sensitive nose picks up a scent… the scent of a bitch in heat, ready to be bred by a mighty alpha… the slut is actually wet and ready for you and your twinned pricks react accordingly, hardening as a blob of steaming semen drops from your tip.[pg]");
+			outputText("Ceraph seeing your instincts kick in starts to panic ”<i>By Lethice, [name] you beast! You can’t be serious. Get a hold of yourself, I’m supposed to be the one in control here! Not…</i>”([pg]");
+			outputText("You shut off any protest from the bitch with a deafening roar, pouncing on your target and grabbing it by both arms as you lift the toy right above your twin corrupted dog dicks smearing your burning pre on the omnibus/succubus labia. You’re going to fuck that bitch pregnant with your seed. Soon, every cocksleeve of Mareth will know they belong to you.[pg]");
+			outputText("It takes you mere seconds to properly align the tip of your dual erections with both holes before you slide your new toy along your throbbing erections. Ceraph's/The demon's body is now bloated with the sheer thickness of your members, her belly visibly giving out to accommodate your insertion. She desperately tries to pull out but with the work of gravity in tandem with your throbbing hardness working against her, all she does is fuel your lust in a flimsy attempt that only serves to jerk you off more.[pg]");
+			outputText("Your left side growls in pleasure as your right side lecherously licks the demon's right breast…  Controlling them all the time can grow tiresome, and besides, you feel like letting them do what they want as you savor the ripples of the succubus cunt instinctively trying to draw the sperm out of your balls. The bitch can cry those alligator tears all she wants, you know that in truth, she's thoroughly enjoying being subject to your mighty cock. The thought of forcing the slut on her knees so you can fuck her throat next hit you for a moment but you sternly remember the bitch is just soulless flesh hardly worth your time aside from relieving the pressure in your balls. This worthless pile of meat is unworthy of being anywhere close to your beta.[pg]");
+			outputText("You buck into her with increasing aggression as she squeezes her legs together, clenching her inner walls against you as she draws out a long moan, desperately trying to milk you of everything you have to offer as she cums. Her juices lubricate you further as your cocks throb with increasing intensity, twitching in barely contained anticipation.[pg]");
+			outputText("Your three heads unleash a bellowing roar as you buck into her with all your might, shoving both your cocks as deep into her as you can reach, forcing her to take in every last ounce of cum as you unload it all into her. Her stomach deforms as she's helpless before the waves of jizz you deposit into her. Her belly bloats before you slowly pull out, your hot cum falling to the ground beneath you.[pg]");
+			outputText("You toss the used toy to the ground now that you're done with it, taking your walk back to camp");
+			player.sexReward("vaginalFluids","Dick");
+			if (CoC.instance.inCombat)
+				cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 	}

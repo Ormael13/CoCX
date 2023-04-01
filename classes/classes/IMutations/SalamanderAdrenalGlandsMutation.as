@@ -22,10 +22,10 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
                 descS += " and libido";
             }
             if (pTier == 2){
-                descS += ", stamina, speed, libido and extend lustzerker and berserker duration by 2 turns";
+                descS += ", strength, speed, libido and extend lustzerker and berserker duration by 2 turns";
             }
             if (pTier == 3){
-                descS += ", stamina, speed and libido, extend lustzerker and berserker duration by 8 turns, allows for either or both to trigger on combat start, double bonus to attack, boost slight natural wrath generation rate";
+                descS += ", strength, speed and libido, extend lustzerker and berserker duration by 8 turns, allows for either or both to trigger on combat start, double bonus to attack, boost slight natural wrath generation rate";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -48,9 +48,9 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -67,7 +67,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;

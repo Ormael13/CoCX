@@ -44,6 +44,7 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 	if (flags[kFLAGS.COTTON_HERBS_OFF] > 0) {
 		if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
+			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}
 	}
 	//HERBS ON - LESS CHANCE
@@ -52,11 +53,13 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 		if (flags[kFLAGS.COTTON_KID_COUNT] == 0) {
 			if (rand(5) == 0 || player.cumQ() * player.virilityQ() >= rand(1000)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 			}
 		}
 		//NOT FIRST KID - LESS LUCKY!
 		else if (player.cumQ() * player.virilityQ() >= rand(1000)) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
+			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}
 	}
 }
@@ -128,7 +131,7 @@ public function cottonGreeting():void {
 }
 
 private function cottonGreetingCommonEnd():void {
-	if (player.pregnancyIncubation <= 225 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)
+	if (player.hasVisiblePregnancy() && (player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON))
 	{
 		outputText("As you approach Cotton, she smiles and looks at your round belly.  \"<i>Hey there my pet, I'm afraid in your condition, yoga is out of the question... but we can do some special stretches and lamaze, just get dressed as usual.</i>\"");
 		outputText("Do you want to engage in yoga lamaze with her?");
@@ -225,7 +228,7 @@ private function acceptYoga():void {
 		outputText("The centauress collects ten gems for gym fees before the two of you can get into it.\n\n");
 	}
 	//(Yes) LAMAZE
-	if (player.pregnancyIncubation <= 225 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)
+	if (player.hasVisiblePregnancy() && (player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON))
 	{
 		outputText("You change into your yoga clothes and approach Cotton, saying you'd love a lamaze class. Cotton smiles and sets up a mat for you, then sits down, urging you to sit in front of her.  You do so, feeling the bulge in her pants pressing against your rump, and her breasts at your back.  You spend the next fifteen minutes doing breathing exercises like this, and another fifteen minutes doing stretches on an exercise ball.  As you're working out, Cotton presses her body against yours, running her hands around your swollen belly at every opportunity.\n\n");
 		cottonChat();
@@ -1379,7 +1382,6 @@ public function birthingCottonsKids():void {
 	outputText("\n");
 	flags[kFLAGS.COTTON_KID_COUNT]++;
 	if(flags[kFLAGS.COTTON_KID_COUNT] == 1) flags[kFLAGS.COTTON_OLDEST_KID_AGE] = 1;
-	player.knockUpForce(); //Clear Pregnancy
 }
 
 

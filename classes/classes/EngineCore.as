@@ -1,5 +1,6 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Parser.Parser;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -13,6 +14,7 @@ import flash.net.navigateToURL;
 import flash.utils.ByteArray;
 import flash.utils.Dictionary;
 import flash.utils.describeType;
+import flash.utils.setTimeout;
 
 public class EngineCore {
     private static var funcLookups:Dictionary = null;
@@ -82,8 +84,9 @@ public class EngineCore {
 				if (CoC.instance.player.hasPerk(PerkLib.Surgeon)) healingFromHealer += 0.2;
 				if (CoC.instance.player.hasPerk(PerkLib.Medic)) healingFromHealer += 0.2;
 				changeNum *= healingFromHealer;
+                changeNum = Math.min(changeNum, int.MAX_VALUE)
 			}
-            if (CoC.instance.player.HP + int(changeNum) > maxOverHP()) {
+            if (Math.min(CoC.instance.player.HP + changeNum, int.MAX_VALUE) > maxOverHP()) {
                 if (CoC.instance.player.HP >= maxOverHP()) {
                     if (display) HPChangeNotify(changeNum);
                     return CoC.instance.player.HP - before;
@@ -159,6 +162,7 @@ public class EngineCore {
         } else {
             if (CoC.instance.player.mana + changeNum <= 0) CoC.instance.player.mana = 0;
             else CoC.instance.player.mana += changeNum;
+            if (CoC.instance.player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) HPChange(-changeNum, false);
         }
         CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();
@@ -626,7 +630,9 @@ public class EngineCore {
     /**
      * Used to update the display of statistics
      */
-    public static function statScreenRefresh():void {
+    private static var statScreenRefreshScheduled:Boolean = false;
+    public static function doStatScreenRefresh():void {
+        statScreenRefreshScheduled = false;
         Utils.Begin("engineCore", "statScreenRefresh");
         CoC.instance.mainView.statsView.show(); // show() method refreshes.
         CoC.instance.mainViewManager.refreshStats();
@@ -637,6 +643,12 @@ public class EngineCore {
             CoC.instance.mainView.monsterStatsView.hide();
         }
         Utils.End("engineCore", "statScreenRefresh");
+    }
+    public static function statScreenRefresh():void {
+        if (statScreenRefreshScheduled) return;
+        statScreenRefreshScheduled = true;
+        // call doStatScreenRefresh ASAP after all other code is executed
+        setTimeout(doStatScreenRefresh, 0);
     }
 
     /**

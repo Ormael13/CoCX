@@ -47,9 +47,9 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -69,13 +69,11 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            var buffVal:Number = 0;
-            if (pTier == 1) buffVal = 0.05;
-            if (pTier == 2) buffVal = 0.15;
-            if (pTier == 3) buffVal = 0.35;
-            pBuffs['tou.mult'] = buffVal;
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.35;
             return pBuffs;
         }
 

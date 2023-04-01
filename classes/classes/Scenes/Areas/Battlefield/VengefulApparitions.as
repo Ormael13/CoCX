@@ -16,7 +16,7 @@ import classes.internals.*;
 		public var Ghosts:BattlefieldEnemiesScenes = new BattlefieldEnemiesScenes();
 		
 		private function VengefulApparitionsMagicMissles():void {
-			outputText("Among group, few appariutions raises their hand and casts a small spell. From their fingertips shoot magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
+			outputText("You hear a hissing, as several of the ghastly figures float forward. From their glowing palms, pulsating orbs are formed, and launched, one after the other. The projectiles aren't all fired directly at you, but they seem to arc, violet orbs darkening the area as they all home in on you. You dodge, but they track your movements effortlessly. The first few don't hurt much, but the sheer number of the projectiles quickly add up. ");
 			var damage:Number = eBaseIntelligenceDamage() * 0.25;
 			player.takeMagicDamage(damage, true);
 			player.takeMagicDamage(damage, true);
@@ -67,7 +67,7 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "vengeful apparitions";
 			this.imageName = "vengefulapparitions";
-			this.long = "You are currently battling vengeful apparitions. They all looks very humanlike, even dressed in various exotic looking clothes. But they ocassionaly fades away partialy and this only server to increase difficulty of predicting attacks.";
+			this.long = "You are currently battling the vengeful apparitions. While they're humanoid, they seem to have once been a variety of races, from goblins to minotaurs...Even a human or two. While their \"bodies\" appear almost normal, draped in a variety of armors or fancy clothing, their legs end in misty vapor, inches off the ground. Their jaws all hang open, and their eyes are blank, staring at you unblinking. They flicker in and out of sight, heads and limbs shaking unnaturally. The only sound they make is the occasional moan, or single, hissing word.";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -110,7 +110,7 @@ import classes.internals.*;
 				this.bonusLust = 131;
 				this.level = 24;
 			}
-			this.gems = 0;
+			this.gems = 10 + rand(5);
 			this.drop = NO_DROP;
 			if (rand(2) == 0) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

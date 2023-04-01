@@ -205,6 +205,7 @@ public class ItemConstants extends Utils {
 	public static const WT_THROWING:String      = "Throwing";
 	public static const WT_WHIP:String          = "Whip";
 	public static const WT_WAND:String         	= "Wand";
+	public static const WT_TOME:String         	= "Tome";
 	// Ranged weapon classes
 	public static const WT_BOW:String           = "Bow";
 	public static const WT_CROSSBOW:String      = "Crossbow";
@@ -214,36 +215,37 @@ public class ItemConstants extends Utils {
 	public static const WT_2H_FIREARM:String    = "2H Firearm";
 	
 	// Weapon 'perks' (specials)
-	public static const WP_DUAL:String       = "Dual";
-	public static const WP_DUAL_SMALL:String = "Dual Small";
-	public static const WP_DUAL_LARGE:String = "Dual Large";
-	public static const WP_SMALL:String      = "Small";
-	public static const WP_LARGE:String      = "Large";
-	public static const WP_MASSIVE:String    = "Massive";
-	public static const WP_HYBRID:String     = "Hybrid";
-	public static const WP_WHIPPING:String   = "Whipping";
-	public static const WP_WHIRLWIND:String  = "Whirlwind";
-	public static const WP_STAFF:String      = "Staff";
-	public static const WP_AP10:String       = "AP10";
-	public static const WP_AP30:String       = "AP30";
-	public static const WP_AP40:String       = "AP40";
-	public static const WP_AP45:String       = "AP45";
-	public static const WP_AP60:String       = "AP60";
-	public static const WP_AP100:String      = "AP100";
-	public static const WP_STUN10:String     = "Stun10";
-	public static const WP_STUN15:String     = "Stun15";
-	public static const WP_STUN20:String     = "Stun20";
-	public static const WP_STUN25:String     = "Stun25";
-	public static const WP_STUN30:String     = "Stun30";
-	public static const WP_STUN40:String     = "Stun40";
-	public static const WP_STUN50:String     = "Stun50";
-	public static const WP_BLEED10:String    = "Bleed10";
-	public static const WP_BLEED25:String    = "Bleed25";
-	public static const WP_BLEED45:String    = "Bleed45";
-	public static const WP_BLEED100:String   = "Bleed100";
-	public static const WP_LGWRATH:String    = "LGWrath";
-	public static const WP_MGWRATH:String    = "MGWrath";
-	public static const WP_MAGICAL:String	 = "MAGICDMG";
+	public static const WP_DUAL:String         = "Dual";
+	public static const WP_DUAL_SMALL:String   = "Dual Small";
+	public static const WP_DUAL_LARGE:String   = "Dual Large";
+	public static const WP_DUAL_MASSIVE:String = "Dual Massive";
+	public static const WP_SMALL:String        = "Small";
+	public static const WP_LARGE:String        = "Large";
+	public static const WP_MASSIVE:String      = "Massive";
+	public static const WP_HYBRID:String       = "Hybrid";
+	public static const WP_WHIPPING:String     = "Whipping";
+	public static const WP_WHIRLWIND:String    = "Whirlwind";
+	public static const WP_STAFF:String        = "Staff";
+	public static const WP_AP10:String         = "AP10";
+	public static const WP_AP30:String         = "AP30";
+	public static const WP_AP40:String         = "AP40";
+	public static const WP_AP45:String         = "AP45";
+	public static const WP_AP60:String         = "AP60";
+	public static const WP_AP100:String        = "AP100";
+	public static const WP_STUN10:String       = "Stun10";
+	public static const WP_STUN15:String       = "Stun15";
+	public static const WP_STUN20:String       = "Stun20";
+	public static const WP_STUN25:String       = "Stun25";
+	public static const WP_STUN30:String       = "Stun30";
+	public static const WP_STUN40:String       = "Stun40";
+	public static const WP_STUN50:String       = "Stun50";
+	public static const WP_BLEED10:String      = "Bleed10";
+	public static const WP_BLEED25:String      = "Bleed25";
+	public static const WP_BLEED45:String      = "Bleed45";
+	public static const WP_BLEED100:String     = "Bleed100";
+	public static const WP_LGWRATH:String      = "LGWrath";
+	public static const WP_MGWRATH:String      = "MGWrath";
+	public static const WP_MAGICAL:String	   = "MAGICDMG";
 	
 	public static const WEAPON_PERK_NAMES:Object = createMapFromPairs([
 		[WP_AP10, "10% Armor Penetration"],

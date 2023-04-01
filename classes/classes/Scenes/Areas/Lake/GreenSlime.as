@@ -66,6 +66,7 @@ public class GreenSlime extends Monster
 				this.bonusHP = 50;
 				this.bonusLust = 114;
 				this.level = 4;
+				this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			}
 			trace("GreenSlime Constructor!");
 			this.a = "a ";

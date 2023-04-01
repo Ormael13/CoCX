@@ -52,14 +52,15 @@ public function benoitAffection(changes:Number = 0):Number {
 private function benoitKnocksUpPCCheck():void {
 	//Convert old basi's to real basi's!
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.hasPerk(PerkLib.BasiliskWomb)) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+	if (player.pregnancy2Type == PregnancyStore.PREGNANCY_BASILISK && player.hasPerk(PerkLib.BasiliskWomb)) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancy2Incubation, 1);
 	//Knock up chances:
-	if ((player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+	if ((player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) && ((player.canGetPregnant() || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS))) {
 		if (player.hasPerk(PerkLib.BasiliskWomb) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
-			if (player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
-				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-				else player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
+			if (player.canGetPregnant() || ((player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) && !player.hasUniquePregnancy())) {
+				player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
 			}
-			if (player.pregnancyIncubation > 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+			if (player.pregnancyIncubation > 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+			if (player.pregnancy2Incubation > 0 && player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation, 1);
 		}
 		else {
 			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
@@ -138,6 +139,7 @@ public function numEggs():int {
 public function benoitKnockUp():Boolean
 {
 	if (benoitPreggers() || !benoitInClutch()) return false;
+	if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Benoit is pregnant!</b>");
 	flags[kFLAGS.FEMOIT_EGGS] = numEggs();
 	flags[kFLAGS.FEMOIT_INCUBATION] = 168;
 	return true;
@@ -196,7 +198,7 @@ public function benoitIntro():void {
 
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls [benoit eir] claws protectively into what appears to be a pile of robes sitting next to [benoit em], which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition)) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition)) && (player.canGetPregnant() || (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
 		benoitAndFemPCTalkAboutEggings();
 	}
     else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= CoC.instance.model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0) {
@@ -353,7 +355,7 @@ public function benoitsBuyMenu():void {
 	}
 	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
-	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
+	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Francisca t a", buyFranciscaThrowingAxe).hint("Francisca throwing axe");
 	addButton(14, "Back", benoitIntro);
 }
 
@@ -559,6 +561,7 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	outputText("\"<i>Here you go.  I have no need for zis,</i>\" [benoit name] says.");
 	if (player.hasKeyItem("Backpack") >= 0) {
+		price = (size - player.keyItemvX("Backpack", 1)) * 50;
 		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemvX("Backpack", 1)) + " extra inventory slots");
 		player.addKeyValue("Backpack", 1, size - player.keyItemvX("Backpack", 1));
 		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
@@ -573,16 +576,16 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	doNext(benoitsBuyMenu);
 }
 
-private function buyZweihander():void {
+private function buyFranciscaThrowingAxe():void {
 	clearOutput();
 	outputText("You look around the things that [benoit name] has to sell and a strange axe catches your attention. It’s big, and it’s head has a very unusual shape. Odd runes cover its handle. Curious, you pick it up, and take it to [benoit name].");
 	outputText("\n\n[benoit Ey] examines it for a bit, mumbling something about harpies.");
 	outputText("\n\n\"<i>Huh, zis is a very old ax. Still in good shape, but I’m not using zat kind of stuff anytime soon. You can have it for, let me zink, 2000 gems.</i>\" [benoit name] says.");
 	menu();
-	addButton(0, "Yes", buyZweihanderConfirmation);
+	addButton(0, "Yes", buyFranciscaThrowingAxeConfirmation);
 	addButton(1, "No", benoitsBuyMenu);
 }
-private function buyZweihanderConfirmation():void {
+private function buyFranciscaThrowingAxeConfirmation():void {
 	clearOutput();
 	if (player.gems < 2000) {
 		outputText("You count out your gems and realize it's beyond your price range.");
@@ -884,7 +887,7 @@ public function eggySuggest():void {
 		outputText("\n\n\"<i>Zis will sound strange,</i>\" says [benoit name] in a low, thick voice, \"<i>But - would you mind if I just touched you a bit first?  All I know about you is your smell and ze sound of your voice.</i>\"  You acquiesce and draw close, taking [benoit eir] hands once again and gently laying them upon your body.  You sigh as, holding [benoit eir] index claws back, [benoit ey] begins to move them slowly up and down.");
 
 	//[Demon:
-		if(player.horns.count > 0 && player.horns.type == Horns.DEMON && player.tailType == Tail.DEMONIC && player.isRace(Races.DEMON, 1, false)) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] touches your horns and pauses; [benoit ey] reaches around, finds and grips your tail, running [benoit eir] pads up to the spaded point.  \"<i>So,</i>\" [benoit ey] says quietly.  \"<i>You are one of zem.</i>\"  [benoit Ey] is silent for a while before finding a warm smile.  \"<i>But I am being silly.  I know you are different inside.</i>\"");
+		if(player.horns.count > 0 && player.horns.type == Horns.DEMON && player.tailType == Tail.DEMONIC && (player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false))) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] touches your horns and pauses; [benoit ey] reaches around, finds and grips your tail, running [benoit eir] pads up to the spaded point.  \"<i>So,</i>\" [benoit ey] says quietly.  \"<i>You are one of zem.</i>\"  [benoit Ey] is silent for a while before finding a warm smile.  \"<i>But I am being silly.  I know you are different inside.</i>\"");
 		//[Dog enough for ears and tail:
 		else if(player.ears.type == Ears.DOG && player.tailType == Tail.DOG && player.racialScore(Races.DOG, false) >= 3) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] grins as [benoit ey] finds your floppy ears and outright laughs when [benoit ey] reaches around and touches your tail. \"<i>I like dogs, but not ZAT much, [name],</i>\" [benoit ey] laughs.");
 		//[Cat/Bunny enough for ditto:
@@ -944,7 +947,7 @@ public function eggySuggest():void {
 	outputText("[benoit Ey] brushes your shoulder as [benoit ey] walks past you, feeling around the stockroom until [benoit ey] finds a chest of drawers.  [benoit Ey] opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" [benoit ey] says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	player.sexReward("cum", "Vaginal");
-	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) >= 0) && (player.canGetPregnant() || (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) && !player.hasUniquePregnancy())) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
 	}
@@ -1233,6 +1236,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 			outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 		}
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+		if (player.pregnancy2Type == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancy2Incubation, 1);
 		player.sexReward("cum", "Vaginal");
 		doNext(camp.returnToCampUseOneHour);
 		dynStats("sen", -2);
@@ -1288,7 +1292,6 @@ public function popOutBenoitEggs():void {
 		outputText("\n\nBenoit smiles proudly.  \"<i>I cannot zank you enough for zis.  Do not worry, I shall keep zem as safe as I ave ze ozzeir clutches.</i>\"\n");
 	}
 	player.orgasm();
-	player.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.BENOIT_EGGS] += Math.floor(player.totalFertility() / 10);
 	//doNext(1);
 }
@@ -1409,7 +1412,7 @@ public function femoitFirstTimeYes():void
 
 	if (player.isTaur()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your flanks.  \"<i>Good Gods!</i>\" she cries out as she follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" she says, rubbing your side back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  She sighs.  \"<i>Zis is going to be... awkward, but I guess you are probably used to zat by now, yes?</i>\"");
 	else if (player.isDrider()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your abdomen. \"<i>Good Gods!</i>\" she cries out as she follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click clacking,</i>\" she says, her fingers feeling around one of your intricate, many-jointed legs in wonder . \"<i>But to know it and actually feel it, zey are very different.</i>\"");
-	else if (player.isRace(Races.DEMON, 1, false)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"");
+	else if (player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"");
 	else if (player.isRace(Races.DOG, 1, false) && player.ears.type == 2 && player.tailType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogs but not ZAT much, \"<i>[name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"");
 	else if ((player.racialScore(Races.BUNNY, false) >= 4 && player.ears.type == 7 && player.tailType == 10) || (player.racialScore(Races.CAT, false) >= 4 && player.ears.type == 5 && player.tailType == 8)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your ears, outright laughs when she reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" she giggles.");
 	else if (player.isRace(Races.HARPY, 1, false) && player.wings.type != 0 && player.arms.type == 1) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your wings and follows them up as far as she can reach; she carefully shifts her feet forward to touch at your own clawed toes.  \"<i>So zis is what irony is,</i>\" she murmurs, a smile playing on her lips as she touches your shoulder.  \"<i>My saviour is an 'arpy, come to ravish me.</i>\"");

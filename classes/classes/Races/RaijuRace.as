@@ -47,9 +47,11 @@ public class RaijuRace extends Race {
 				.eyeType(Eyes.RAIJU, +1)
 				.eyeColor(ANY(RaijuEyeColors), +1)
 				.faceType(Face.WEASEL, +1)
+				.hornType(NOT(Horns.KIRIN), 0, -1000)
 				.armType(ANY(Arms.RAIJU,Arms.RAIJU_PAWS), +1)
 				.legType(LowerBody.RAIJU, +1)
 				.tailType(Tail.RAIJU, +1)
+				.tailType(NOT(Tail.THUNDERBIRD), 0, -1000)
 				.wingType(Wings.THUNDEROUS_AURA, +4)
 				.rearType(RearBody.RAIJU_MANE, +1)
 				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO,+1)
@@ -66,6 +68,7 @@ public class RaijuRace extends Race {
 		addMutation(IMutationsLib.RaijuCathodeIM);
 		
 		buildTier(10, "raiju")
+				.requireWingType(Wings.THUNDEROUS_AURA)
 				.namesTauric("raiju", "raiju-taur")
 				.buffs({
 					"spe.mult": +0.70,
@@ -77,6 +80,7 @@ public class RaijuRace extends Race {
 		
 		buildTier(20, "greater raiju")
 				.namesTauric("greater raiju", "greater raiju-taur")
+				.requirePreviousTier()
 				.buffs({
 					"spe.mult": +1.50,
 					"int.mult": +0.50,

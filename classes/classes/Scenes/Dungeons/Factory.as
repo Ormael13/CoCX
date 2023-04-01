@@ -1664,7 +1664,7 @@ use namespace CoC;
 				outputText("\n\nStanding next to the coffeemaker is a blue-skinned woman holding a mug of coffee.  As she takes a sip, oblivious to your presence, you see the mug has '#1 Dad' written on it.  Dressed in a tiny vest, short skirt, and sheer stockings, she looks every bit an air-headed secretarial ditz.  Her two horns are little more than nubs, mostly covered by her flowing blond hair, and if it wasn't for her blue skin and the tip of a spaded tail peeking out from under her skirt, you'd never know what she was.\n\n");
 				menu();
 				// demon bad end available
-				if(player.isRace(Races.DEMON, 1, false) && player.cor > 75 - player.corruptionTolerance) {
+				if((player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)) && player.cor > 75 - player.corruptionTolerance) {
 					outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ");
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");
@@ -1832,7 +1832,8 @@ use namespace CoC;
 			dungeons.setDungeonButtons(null, null, roomForemanOffice, null);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				addButton(0, "Valves", factoryOverload).hint("Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.");
-				addButton(1, "Shutdown", factoryShutdown).hint("Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
+				if (flags[kFLAGS.MARAE_QUEST_START] == 0.5) addButtonDisabled(1, "Shutdown", "She kicked you out of her island and you still as corrupted as you're still save her? BLASPHEMY!!! HERESY!!!");
+				else addButton(1, "Shutdown", factoryShutdown).hint("Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
 			}
 		}
 

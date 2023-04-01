@@ -511,6 +511,7 @@ public class SceneHunter extends BaseContent {
                     addButton(pcnt++, name, disablePoly, name);
             //best case? Skip to settings!
             if (pcnt == 1) disablePoly(button(0).labelText); //the button should contain spouse's name
+            else if (pcnt == 0) disablePoly(""); // no marriages - just disable it
         } else {
             //Fix 'unmarried' NPCs
             if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_CHICHI && flags[kFLAGS.MARRIAGE_FLAG] != "Chi Chi")
@@ -528,17 +529,19 @@ public class SceneHunter extends BaseContent {
         }
 
         function disablePoly(singleName:String):void {
-            var singleBit:int = polyBits[singleName];
-            //revert some flags to pre-marriage state
-            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_CHICHI && singleBit != POLYGAMY_CHICHI)
-                flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
-            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ETNA && singleBit != POLYGAMY_ETNA)
-                flags[kFLAGS.ETNA_FOLLOWER] = 2;
-            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ZENJI && singleBit != POLYGAMY_ZENJI)
-                flags[kFLAGS.ZENJI_PROGRESS] = 11;
-            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ALVINA && singleBit != POLYGAMY_ALVINA) {
-                flags[kFLAGS.ALVINA_FOLLOWER] = 20;
-                if (flags[kFLAGS.SLEEP_WITH] == "Alvina") flags[kFLAGS.SLEEP_WITH] = "";
+            if (singleName) {
+                var singleBit:int = polyBits[singleName];
+                //revert some flags to pre-marriage state
+                if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_CHICHI && singleBit != POLYGAMY_CHICHI)
+                    flags[kFLAGS.CHI_CHI_FOLLOWER] = 3;
+                if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ETNA && singleBit != POLYGAMY_ETNA)
+                    flags[kFLAGS.ETNA_FOLLOWER] = 2;
+                if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ZENJI && singleBit != POLYGAMY_ZENJI)
+                    flags[kFLAGS.ZENJI_PROGRESS] = 11;
+                if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ALVINA && singleBit != POLYGAMY_ALVINA) {
+                    flags[kFLAGS.ALVINA_FOLLOWER] = 20;
+                    if (flags[kFLAGS.SLEEP_WITH] == "Alvina") flags[kFLAGS.SLEEP_WITH] = "";
+                }
             }
             //set marriage flag
             flags[kFLAGS.MARRIAGE_FLAG] = singleName;

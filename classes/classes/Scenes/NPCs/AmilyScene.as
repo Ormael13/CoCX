@@ -182,14 +182,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("While exploring the town, you can't seem to find anything interesting until something shiny catches your eye. There are exposed nails in a house wreckage! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
 			outputText("\n\nNails: ");
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/750");
-			}
-			else {
-				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
-				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250");
-			}
+			if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
+			outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -662,10 +656,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("She grins at you with open delight. \"<i>Hey there, [name]! It's great to see you again... ");
 						if (player.hasCock()) {
 							outputText("Have you come to knock me up?");
-							if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.pregnancyIncubation == 0) outputText(" Or have you come to get knocked up?");
+							if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.canGetPregnant()) outputText(" Or have you come to get knocked up?");
 						}
 						else if (player.hasVagina()) {
-							if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.pregnancyIncubation == 0) outputText("Have you come back so I could stuff another bun in your oven?");
+							if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.canGetPregnant()) outputText("Have you come back so I could stuff another bun in your oven?");
 							else outputText("Did you come back for a little 'quality time' with me?");
 						}
 						outputText("</i>\" she teases, but her body language ");
@@ -707,7 +701,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
                 choices.push(girlyGirlMouseSex);
 				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
                     choices.push(hermilyOnFemalePC);
-					if (!player.isPregnant()) choices.push(hermilyOnFemalePC, hermilyOnFemalePC);
+					if (player.canGetPregnant()) choices.push(hermilyOnFemalePC, hermilyOnFemalePC);
 				}
 			}
 			//If Amily is a herm lover!
@@ -720,7 +714,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//Amily is herm too!
 				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
                     choices.push(hermilyOnFemalePC);
-					if (!player.isPregnant()) choices.push(hermilyOnFemalePC, hermilyOnFemalePC);
+					if (player.canGetPregnant()) choices.push(hermilyOnFemalePC, hermilyOnFemalePC);
 				}
 			}
 			//Dudesex!
@@ -2427,6 +2421,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//25% + gradually increasing cumQ bonus
 			if (rand(4) == 0 || player.cumQ() > rand(1000)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE - 182); //Amily completes her pregnancies much faster than a regular player
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Amily is pregnant!</b>");
 			}
 		}
 
@@ -3139,6 +3134,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						flags[kFLAGS.AMILY_WANG_LENGTH] > 0 && player.hasVagina()],
 					[6, "SuckHerOff", suckHerOff, "Amily needs a cock.", flags[kFLAGS.AMILY_WANG_LENGTH] > 0],
 					[11, "EatHerOut", eatHerOut],
+					[14, "Back", fuckTheMouseBitch],
 				],
 				"Seems like she has an idea of some sort already, but perhaps you still can have your input?\n\n"
 			);
@@ -3284,7 +3280,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				dynStats("sen", -1);
 			}
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 
@@ -4955,7 +4950,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You smile and reach up to stroke her cheek. She smiles back and reaches down to pat you on your belly.");
 			//(If player is preg
 			if (player.isPregnant()) {
-				if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY || player.pregnancy2Type == PregnancyStore.PREGNANCY_AMILY)
 					outputText("\"<i>Boy, this is weird.  I'm a woman and I'm going to be a dad.");
 				else outputText("\"<i>After you give birth to this baby come and see me when you're ready for mine.  This is really weird, I'm a woman and I can't wait to be a dad.");
 			}
@@ -4974,7 +4969,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		//Player gives Birth (quest version):
-		public function pcBirthsAmilysKidsQuestVersion():void {
+		public function pcBirthsAmilysKidsQuestVersion(womb:int = 0):void {
 			amilySprite();
 			flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
 			//In camp version:
@@ -4989,7 +4984,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("Pain shoots through you as they pull open your cervix forcefully, causing you to cry out involuntarily. At once, Amily suddenly appears, racing out from the undergrowth. \"<i>Is it time? Are you going into labor?</i>\" She asks, worry evident in her voice. Your pain is momentarily forgotten by your surprise and you ask where she came from. She snorts disdainfully at the question. \"<i>I've been shadowing you for a couple of days, now. Did you really think I'd let the mother of my children go through this alone?</i>\"\n\n");
 
-				outputText("Any reply you may have been inclined to make to that is swallowed by another cry of pain as yet another contraction wrings its way through you. Amily takes your hand in hers and you cling to the lifeline of comfort it offers, thankful to not be alone for this. You can feel the first child moving out of your womb, through your cervix, down and into your " + vaginaDescript() + ". Your lips part and, with a grunt, you expel the first child into Amily's waiting hand. She holds it up to you so that you can see your firstborn; it's a little mouselet");
+				outputText("Any reply you may have been inclined to make to that is swallowed by another cry of pain as yet another contraction wrings its way through you. Amily takes your hand in hers and you cling to the lifeline of comfort it offers, thankful to not be alone for this. You can feel the first child moving out of your womb, through your cervix, down and into your " + vaginaDescript(womb) + ". Your lips part and, with a grunt, you expel the first child into Amily's waiting hand. She holds it up to you so that you can see your firstborn; it's a little mouselet");
 				//(if player is female: 1 in 3 chance of it being boy, girl or herm, if player is herm, 100% chance of it being a herm)"
 				outputText(((flags[kFLAGS.AMILY_NOT_FURRY]==0)?", naked, pink, and totally hairless":"")+". Amily helps hold it to your " + breastDescript(0) + ", where it eagerly takes hold of your " + nippleDescript(0) + " and starts to suckle. As it drinks, it starts to grow larger, and "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"fur the same color as your own hair starts to cover its body":"")+". It quickly drinks its fill and then detaches, its 'father' putting it aside, which is good, because by this time there's another baby waiting for its turn... and another... and another...\n\n");
 
@@ -5007,7 +5002,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Pain shoots through you as they pull open your cervix forcefully, causing you to cry out involuntarily. At once, Amily suddenly appears, racing out from the undergrowth. \"<i>Is it time? Are you going into labor?</i>\" She asks, worry evident in her voice. Your pain is momentarily forgotten by your surprise and you ask where she came from. She snorts disdainfully at the question. \"<i>I've been shadowing you for a couple of days, now. Did you really think I'd let the mother of my children go through this alone?</i>\"\n\n");
 
-			outputText("Any reply you may have been inclined to make to that is swallowed by another cry of pain as yet another contraction wrings its way through you. Amily takes your hand in hers and you cling to the lifeline of comfort it offers, thankful to not be alone for this. You can feel the first child moving out of your womb, through your cervix, down and into your " + vaginaDescript() + ". Your lips part and, with a grunt, you expel the first child into Amily's waiting hand. She holds it up to you so that you can see your firstborn; it's a little mouselet");
+			outputText("Any reply you may have been inclined to make to that is swallowed by another cry of pain as yet another contraction wrings its way through you. Amily takes your hand in hers and you cling to the lifeline of comfort it offers, thankful to not be alone for this. You can feel the first child moving out of your womb, through your cervix, down and into your " + vaginaDescript(womb) + ". Your lips part and, with a grunt, you expel the first child into Amily's waiting hand. She holds it up to you so that you can see your firstborn; it's a little mouselet");
 			//(if player is female: 1 in 3 chance of it being boy, girl or herm, if player is herm, 100% chance of it being a herm)
 			outputText(((flags[kFLAGS.AMILY_NOT_FURRY]==0)?", naked, pink, and totally hairless":"")+". Amily helps hold it to your " + chestDesc() + ", where it eagerly takes hold of your " + nippleDescript(0) + " and starts to suckle. As it drinks, it starts to grow larger, and "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"fur the same color as your own hair starts to cover its body":"")+". It quickly drinks its fill and then detaches, its 'father' putting it aside, which is good, because by this time there's another baby waiting for its turn... and another... and another...\n\n");
 
@@ -6731,6 +6726,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				flags[kFLAGS.AMILY_FOLLOWER] = 2;
 				//Switch to less lovey pregnancy!
 				if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+				if (player.pregnancy2Type == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancy2Incubation, 1);
 				//Make babies disappear
 				//pregnancyStore.knockUpForce(); //Clear Pregnancy - though this seems unneccessary to me. Maybe it was needed in an older version of the code?
 				//Set other flags if Amily is moving in for the first time
@@ -6943,6 +6939,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 			//Change to plain mouse birth!
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+			if (player.pregnancy2Type == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancy2Incubation, 1);
 			doNext(playerMenu);
 		}
 

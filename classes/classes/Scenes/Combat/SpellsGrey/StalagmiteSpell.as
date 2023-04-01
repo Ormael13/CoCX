@@ -13,8 +13,8 @@ public class StalagmiteSpell extends AbstractGreySpell {
 		super(
 			ex ? "Stalagmite (Ex)" : "Stalagmite",
 			ex ?
-				"Harden part of the the ground into wrath-enpowered earth spike to attack your enemy."
-				: "Harden part of the the ground into earth spike to attack your enemy.",
+				"Harden part of the ground into an wrath-empowered earth spike to attack your enemy."
+				: "Harden part of the ground into an earth spike to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_EARTH, TAG_TIER1]

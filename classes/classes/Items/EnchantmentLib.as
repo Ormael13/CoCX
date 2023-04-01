@@ -314,6 +314,30 @@ public class EnchantmentLib extends ItemConstants {
 			.setItemCategories(CATEGORIES_WEARABLE)
 			.setNegative()
 			.setSpawnChance(SPAWN_UNCOMMON);
+	public static const RaceSpellPowerDoubled:SimpleRaceEnchantmentType = EnchantmentLib.mkRacial(33, "RaceSpellPowerDoubled", {
+		prefix: "",
+		suffix: " of {race.name;C}",
+		shortSuffix: "RSp",
+		description: "Increase Spellpower by {power*100}%. Effect doubled for {race.name} race",
+		minLevel: 1,
+		chance: 1,
+		minPower: 1,
+		maxPower: 2,
+		valuePerPower: 200,
+		categories: [CATEGORY_SHIELD]
+	});
+	public static const RaceTeasePowerDoubled:SimpleRaceEnchantmentType = EnchantmentLib.mkRacial(34, "RaceTeasePowerDoubled", {
+		prefix: "",
+		suffix: " of {race.name;C}",
+		shortSuffix: "RSp",
+		description: "Increase Tease potency by {power*200}%. Effect doubled for {race.name} race",
+		minLevel: 1,
+		chance: 1,
+		minPower: 1,
+		maxPower: 2,
+		valuePerPower: 200,
+		categories: [CATEGORY_SHIELD]
+	});
 	
 	public static function decode(o:Array):Enchantment {
 		var id:int               = o[1];

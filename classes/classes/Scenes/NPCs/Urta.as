@@ -60,7 +60,7 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 		public function Urta()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.URTA_PREGNANCY_TYPE, kFLAGS.URTA_INCUBATION, 0, 0);
-			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 330, 334, 288, 240, 192, 144, 96, 48);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 430, 330, 288, 240, 192, 144, 96, 48);
 												//Event: 0 (= not pregnant),  1,   2,   3,   4,   5,   6,  7,  8,  9 (< 48)
 			EventParser.timeAwareClassAdd(this);
 		}
@@ -101,6 +101,10 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 		}
 
 		public function timeChangeLarge():Boolean {
+			if (pregnancy.isPregnant && pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && model.time.hours >= 20 && model.time.hours < 2) {
+				urtaPregs.preggoUrtaGivingBirth();
+				return true;
+			}
 			return false;
 		}
 		//End of Interface Implementation
@@ -200,6 +204,7 @@ public function knockUpUrtaChance():void { //Moved here from UrtaPregs since it 
 	if (chance > rand(100)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 384);
 		flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 0;
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Urta is pregnant!</b>");
 	}
 }
 
@@ -2752,7 +2757,7 @@ public function chastityBeltFun(cameFromSexMenu:Boolean = true):void
         outputText("Smiling, you turn to pick up the belt and hand it over to her, uttering a single command, \"<i>Put it on.</i>\"  Urta discards her condom and hesitantly takes the offered belt, opening it; slowly she guides her erect shaft into the slot, stopping when her flared tip touches the padded entrance of the tube.  She looks at you, looking for some sort of guidance or confirmation that is really what you want.  You just shoot her a look of impatience.  With a sigh and a groan, she begins pushing her shaft into the rather tight tube.  Grinning mischievously you help her by going around her and pulling the belt all the way, eliciting a whimper from the herm-fox.\n\n");
         outputText("\"<i>N-no fair...</i>\" she whimpers to you.  \"<i>This is already so hard to put up with...</i>\"  You tell her you were merely trying to help her, since she seemed to be having such a hard time putting it on... if she wants you can finish up for her.  She swallows audibly and nods her head, reaching back with one trembling hand to offer you the keys.  You try to take the keys from her, but she refuses to let go.  You cough, indicating that you can’t continue unless she lets go of the keys.\n\n");
         outputText("\"<i>Wha? Oh, sorry.</i>\"  She blushes, hand trembling wildly before she visibly forces herself to drop the keys into your hand.  \"<i>...Please don’t make me wait too long before using them, alright?</i>\" she meekly asks.\n\n");
-        outputText("You reply that you don’t intend to... then quickly snap the the belt shut, snugly against her soft furry buttcheeks and twist the key in the lock, sealing Urta in her metaphorical jail.  Getting up you dangle the keys in front of her eyes and smile triumphantly, teasing her by telling her this is a wonderful pair of panties she’s wearing.");
+        outputText("You reply that you don’t intend to... then quickly snap the belt shut, snugly against her soft furry buttcheeks and twist the key in the lock, sealing Urta in her metaphorical jail.  Getting up you dangle the keys in front of her eyes and smile triumphantly, teasing her by telling her this is a wonderful pair of panties she’s wearing.");
     }
     else { //Follow up from previous scene, Urta needs to undress!
         outputText("Swallowing hard, Urta gives you a pleading look as if hoping against hope that you’ll change your mind.  You suddenly tell her to stop!  Urta stares at you, expression changing to one of joy, a wide grin so thankful it’s almost silly spreading across her face at the prospect of avoiding this.\n\n");
@@ -4027,7 +4032,7 @@ private function fillMeUpPleaseUrta():void {
 		outputText("\n\nThe first sign of your orgasm is a cunt-clenching explosion of satisfaction that worms through your womanhood, sending your muscles into fluttering convulsions.  As you scream in exquisite enjoyment, you feel those contractions settling into a rhythm that squeezes the vixen's horse-prick from stern to stem, milking the thick cock, egging it on towards the heady rush of climax.  You can feel it thickening, becoming more rigid inside of you, and as Urta nears orgasm of her own, all you can do is cum your brains out in anticipation of being filled.");
 	}
 	outputText("\n\nThere's an odd, shivering motion beneath you, in the herm's taut nutsack.  A moment later, your spasming cunt is forced to open wider, stretched by a bulge of cum that visibly distends not just the cock it travels through");
-	if(player.thickness < 50 && (player.pregnancyIncubation == 0 || player.pregnancyIncubation > 200)) outputText(" but the outline on your abdomen as well");
+	if(player.thickness < 50 && (!player.isPregnant() || player.hasNonVisiblePregnancy())) outputText(" but the outline on your abdomen as well");
 	else outputText(" but your [vagina] as well");
 	outputText(".  It sets you aflutter all over again, just before it bursts against your cervix.  Urta's hands dig into your sides as she suddenly pulls you against her, somehow squeezing another inch of cock into you from somewhere, battering her tip directly against your inner opening.  The next slit-stretching pulse of jism erupts directly into your womb, filling you with salty horse seed in an explosion of warm indulgence.");
 	outputText("\n\nYou bubble happily, a sense of motherly pride welling up in your breast as you continue to cum, your [vagina] helplessly milking the equine invader with rapacious hunger.  Again, it cums, injecting another plus-sized load directly into your precious baby-maker.  It fills you with enough force to round your belly a little, giving you a nice, sperm-bloated paunch.  Urta's hands dig into your [butt], holding you still and immobile, as if she were restraining you in order to fully breed.  The onrushing spunk expands your womb further, stretching your belly tight.  Rivulets of spooge squeeze out the sides of your clenching cunt as your jizz-packed body fails to hold it all in.");
@@ -5175,7 +5180,7 @@ private function urtaTakesPCOnWalkies():void {
 		outputText("\n\nHot damn! You love it when she takes her wonderful twins out to play, but what exactly does she have in mind? You can't help but stare cravingly at her jiggling bust and jet black nipples, utterly captivated by the glorious sight. ");
 		outputText("\n\nUrta shoots you a wicked little grin and takes full advantage of your stunned state. She " + player.clothedOrNakedLower("strips you of your lower garments and") + " slinks down between your spread thighs. Her body is now almost completely naked, her dress doing little more than covering her midsection. ");
 		outputText("\n\nLooking down between your legs you get the perfect down view of her magnificent furry melons. Her erect inky nipples jut out impressively as if pointing directly at your loins. As her chest swells with each husky breath you let out a low moan. ");
-		outputText("\n\nWith a lusty look in her eyes, Urta gives the underside of your [cock] a nice long lick from base to tip. Your undercarriage is thoroughly slickened in her sticky saliva, lathering it in a wonderfully warm and moist sensation. You can hear an exquisite moan as she lovingly laps your length, swooning from the the scent of your steadfast erection.");
+		outputText("\n\nWith a lusty look in her eyes, Urta gives the underside of your [cock] a nice long lick from base to tip. Your undercarriage is thoroughly slickened in her sticky saliva, lathering it in a wonderfully warm and moist sensation. You can hear an exquisite moan as she lovingly laps your length, swooning from the scent of your steadfast erection.");
 		//2nd dynamic text of Vixen & Cream
 		outputText("\n\nThe voluminous vixen applies so much pressure to your pole that when she removes her tongue it snaps back as if released from a spring. She secures it with one of her hands and looks up at you adoringly, ");
 		if (player.hasBalls()) outputText("all the while kissing down your slickened shaft.");

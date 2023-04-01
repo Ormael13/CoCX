@@ -142,36 +142,38 @@ public class IncubusMechanic extends Monster {
 			this.bodyColor = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
-			initStrTouSpeInte(95, 60, 45, 85);
-			initWisLibSensCor(85, 80, 70, 80);
+			initStrTouSpeInte(95, 65, 51, 85);
+			initWisLibSensCor(85, 85, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 12;
+			this.weaponAttack = 14;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 12;
-			this.armorMDef = 1;
-			this.bonusHP = 350;
-			this.bonusLust = 164;
+			this.armorDef = 15;
+			this.armorMDef = 3;
+			this.bonusHP = 370;
+			this.bonusLust = 173;
 			this.lust = 50;
 			this.lustVuln = .5;
-			this.level = 14;
+			this.level = 18;
 			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
 			this.gems = rand(25) + 20;
 			this.additionalXP = 100;
 			if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] > 0) {
-				this.gems += rand(30) + 60;
-				this.additionalXP += 250;
-				this.level += 24;
-				this.bonusLust += 24;
-				this.bonusHP += 600 + (60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.strStat.core.value += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.touStat.core.value += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.speStat.core.value += 35 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.intStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
-				this.weaponAttack += 10;
-				this.HP = maxHP();
+				this.gems += rand(20) + 100;
+				this.additionalXP += 500;
+				this.level += 50;
+				this.bonusLust += 50;
+				this.bonusHP += 1200 + (120 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.strStat.core.value += 120 + (24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.touStat.core.value += 120 + (24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.speStat.core.value += 85 + (17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.intStat.core.value += 80 + (16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack += 20;
+				this.armorDef += 15;
+				this.armorMDef += 3;
+				this.HP = maxOverHP();
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			this.abilities = [
@@ -185,8 +187,8 @@ public class IncubusMechanic extends Monster {
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
-			if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] > 0) this.createPerk(PerkLib.OverMaxHP, 38, 0, 0, 0);
-			else this.createPerk(PerkLib.OverMaxHP, 14, 0, 0, 0);
+			if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] > 0) this.createPerk(PerkLib.OverMaxHP, 68, 0, 0, 0);
+			else this.createPerk(PerkLib.OverMaxHP, 18, 0, 0, 0);
 			checkMonster();
 		}
 	}

@@ -508,7 +508,7 @@ public class SkinTransformations extends MutationsHelper {
 					desc += "Thick bark, not unlike that of the world tree’s, now covers your entire body. The iron-hard, rough wood is surprisingly flexible, but you notice that you can’t feel as much through this new, natural armour. <b>You are now covered by [skin color] bark from head to toe.</b>";
 					player.skin.setBaseOnly({type: Skin.BARK, adj: "bark-like", pattern: Skin.PATTERN_NONE});
 					if (doOutput) outputText(desc);
-					//Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.));
+					Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.BARK));
 				},
 				// is present
 				function (): Boolean {
@@ -837,6 +837,25 @@ public class SkinTransformations extends MutationsHelper {
 			// is present
 			function ():Boolean {
 				return player.skin.pattern === Skin.PATTERN_SEA_DRAGON_UNDERBODY;
+			}
+	);
+
+	public const SkinPatternArchImp: Transformation = new SimpleTransformation("Arch-Imp Runic Tattoo Skin Pattern",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+
+				desc += "You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face. You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin]. The glow gradually dulls, but the distinctive angular markings remain, as if etched into your skin. <b>You now have Arch-Imp tattoos on your skin.</b>";
+
+				player.skin.base.pattern = Skin.PATTERN_ARCH_IMP_RUNIC_TATTOO;
+				player.skin.base.adj = "tattooed";
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.skin.base.pattern === Skin.PATTERN_ARCH_IMP_RUNIC_TATTOO;
 			}
 	);
 	/*

@@ -8,6 +8,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.DynamicItems;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Imp extends Monster
@@ -22,7 +23,15 @@ public class Imp extends Monster
 				SceneLib.evangelineFollower.winEvangelineImpFight();
 			}
 			else {
-				SceneLib.impScene.impVictory();
+				if (rand(20) == 0 && !player.hasStatusEffect(StatusEffects.TookImpTome)) {
+					outputText("\n\nYou spot an odd book lying close by the imp and stook to pick it up. ");
+					SceneLib.inventory.takeItem(shields.IMPTOME, hasTakenBook);
+					function hasTakenBook():void {
+						if (player.hasItem(shields.IMPTOME) || player.shieldName == "cursed Tome of Imp")
+							player.createStatusEffect(StatusEffects.TookImpTome,  0, 0, 0, 0);
+						SceneLib.impScene.impVictory();
+					}
+				} else SceneLib.impScene.impVictory();
 			}
 		}
 

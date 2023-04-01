@@ -136,7 +136,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 			initStrTouSpeInte(150, 120, 90, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.drop = new ChainedDrop()
-					.add(consumables.E5PEARL, 1);
+					.add(useables.ELCRYST, 1);
 			this.level = 28;
 			this.bonusHP = 2500;
 			this.additionalXP = 500;

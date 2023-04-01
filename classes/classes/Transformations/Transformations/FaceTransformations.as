@@ -64,6 +64,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.DOG;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DOG));
 			},
 			// is present
 			function (): Boolean {
@@ -72,6 +73,27 @@ public class FaceTransformations extends MutationsHelper {
 			// is possible
 			function (): Boolean {
 				return player.faceType != Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG;
+			}
+	);
+
+	public const FaceCerberus: Transformation = new SimpleTransformation("Cerberus Tripple Head",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection...<b>your face is now a cross between human and canine features.</b>";
+				desc += "Flanking your main head are two more wich never truly fully agree with one another. You regularly need to put them back into their place and remind them who leads this body lest they start fighting each other.";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.CERBERUS;
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.CERBERUS;
+			},
+			// is possible
+			function (): Boolean {
+				return player.faceType == Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG;
 			}
 	);
 
@@ -194,6 +216,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.BUNNY;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.BUNNY));
 			},
 			// is present
 			function (): Boolean {
@@ -211,6 +234,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.KANGAROO;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.KANGAROO));
 			},
 			// is present
 			function (): Boolean {
@@ -380,6 +404,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.FERRET_MASK;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FERRET_MASK));
 			},
 			// is present
 			function (): Boolean {
@@ -396,6 +421,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.FERRET;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FERRET));
 			},
 			// is present
 			function (): Boolean {
@@ -446,6 +472,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.RHINO;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.RHINO));
 			},
 			// is present
 			function (): Boolean {
@@ -462,6 +489,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.ECHIDNA;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ECHIDNA));
 			},
 			// is present
 			function (): Boolean {
@@ -478,6 +506,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.DEER;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DEER));
 			},
 			// is present
 			function (): Boolean {
@@ -584,6 +613,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.PLANT_DRAGON;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.PLANT_DRAGON));
 			},
 			// is present
 			function (): Boolean {
@@ -779,8 +809,13 @@ public class FaceTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
+				desc += "With the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your ";
+				if (player.faceType == Face.HUMAN) desc += "mouth and nose feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.[pg]Too busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak.[pg]A bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike on an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.[pg]This isn’t the only major change, as you feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>";
+				else desc += "[face] feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.[pg]Too busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak. That's quite the change, even for your [face].[pg]A bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike of an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.[pg]This isn’t the only major change, as you feel your [ears] twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>";
+
 				if (doOutput) outputText(desc);
 				player.faceType = Face.AVIAN;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.AVIAN));
 			},
 			// is present
 			function (): Boolean {
@@ -849,6 +884,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.BEAR;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.BEAR));
 			},
 			// is present
 			function (): Boolean {
@@ -930,6 +966,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.YUKI_ONNA;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.YUKI_ONNA));
 			},
 			// is present
 			function (): Boolean {
@@ -994,6 +1031,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.CRAZY;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.CRAZY));
 			},
 			// is present
 			function (): Boolean {
@@ -1012,6 +1050,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.SMUG;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.SMUG));
 			},
 			// is present
 			function (): Boolean {
@@ -1028,6 +1067,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.SQUIRREL;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.SQUIRREL));
 			},
 			// is present
 			function (): Boolean {

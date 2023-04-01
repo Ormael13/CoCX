@@ -12,16 +12,6 @@ import classes.Scenes.SceneLib;
 	 */
 	public class CabinProgress extends BaseContent {
 		
-//		public var maxNailSupply:int = 750;
-		public function get maxWoodSupply():int {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) return 1200;
-			return 400;
-		}
-		public function get maxStoneSupply():int {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) return 1200;
-			return 400;
-		}
-		
 		public function CabinProgress() {
 			
 		}
@@ -106,7 +96,7 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function canGatherWoods():Boolean {
-			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
+			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < SceneLib.campUpgrades.checkMaterialsCapWood() && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
@@ -266,8 +256,7 @@ import classes.Scenes.SceneLib;
 			if (minedStones > (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()))) minedStones = (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()));
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
 			incrementStoneSupply(minedStones);
-			var mineEXP:Number = 1;
-			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineEXP *= 2;
+			var mineEXP:Number = player.MiningMulti();
 			player.mineXP(mineEXP);
 			if (rand(10) == 0) {
 				var gemsMined:Number = 1 + rand(1+player.miningLevel);
@@ -355,8 +344,8 @@ import classes.Scenes.SceneLib;
 		public function incrementWoodSupply(amount:int):void {
 			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
-			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= maxWoodSupply) {
-				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = maxWoodSupply;
+			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapWood()) {
+				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapWood();
 				outputText(" Your wood capacity is full.")
 			}
 			outputText(")</b>");
@@ -365,8 +354,8 @@ import classes.Scenes.SceneLib;
 		public function incrementStoneSupply(amount:int):void {
 			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += amount;
-			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= maxStoneSupply) {
-				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = maxStoneSupply;
+			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
 				outputText(" Your stone capacity is full.")
 			}
 			outputText(")</b>");

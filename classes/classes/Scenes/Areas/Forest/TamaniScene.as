@@ -770,6 +770,7 @@ private function tamaniPoopsOutBabies():void {
 internal function tamaniKnockUp():void {
 	if (pregnancy.isPregnant) return; //Already preggers
 	pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 216); //Nine day long pregnancy
+	if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Tamani is pregnant!</b>");
 	//Determine how many kids...
 	flags[kFLAGS.TAMANI_PREGNANCY_COUNT] = 2;
 	var cum:Number = player.cumQ();

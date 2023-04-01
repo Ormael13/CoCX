@@ -449,7 +449,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 	}
 	private function monsterDodgeSkill(skillName:String):Boolean {
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your " + skillName + "!");
 			else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges your " + skillName + " with superior quickness!");
 			else outputText("[Themonster] deftly avoids your slow " + skillName + ".");
@@ -470,7 +470,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		multiTrustDNLag = 0;
 		var triTru:Number = 3;
-		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) triTru += 3;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) triTru += 6;
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
 			while (triTru-->0) MultiThrustD();
@@ -499,7 +499,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		multiTrustDNLag = 0;
 		var sexTru:Number = 6;
-		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) sexTru += 6;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) sexTru += 12;
 		player.createStatusEffect(StatusEffects.CooldownSextupleThrust, 1, 0, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
@@ -529,7 +529,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		multiTrustDNLag = 0;
 		var nonTru:Number = 9;
-		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) nonTru += 9;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) nonTru += 18;
 		player.createStatusEffect(StatusEffects.CooldownNonupleThrust, 2, 0, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
@@ -741,7 +741,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
 			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
 				doDamage(damage, true, true);
-				damage *= 2;
+				doDamage(damage, true, true);
+				damage *= 3;
 			}
 		}
 		outputText(" damage! ");
@@ -1020,7 +1021,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			doMagicDamage(damage, true, true);
 			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 				doMagicDamage(damage, true, true);
-				damage *= 2;
+				doMagicDamage(damage, true, true);
+				damage *= 3;
 			}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText("damage \n\n");
@@ -1071,7 +1073,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		doIceDamage(damage, true, true);
 		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 			doIceDamage(damage, true, true);
-			damage *= 2;
+			doIceDamage(damage, true, true);
+			damage *= 3;
 		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		//stun
@@ -1137,7 +1140,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			doFireDamage(damage, true, true);
 			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 				doFireDamage(damage, true, true);
-				damage *= 2;
+				doFireDamage(damage, true, true);
+				damage *= 3;
 			}
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage = Math.round(damage * 1.1);
@@ -1146,7 +1150,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			doFireDamage(damage, true, true);
 			if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 				doFireDamage(damage, true, true);
-				damage *= 2;
+				doFireDamage(damage, true, true);
+				damage *= 3;
 			}
 		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -1224,7 +1229,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		doDamage(damage, true, true);
 		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 			doDamage(damage, true, true);
-			damage *= 2;
+			doDamage(damage, true, true);
+			damage *= 3;
 		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		endTurnBySpecialHit(damage);

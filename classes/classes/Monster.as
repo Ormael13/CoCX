@@ -32,6 +32,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
@@ -268,9 +269,18 @@ import flash.utils.getQualifiedClassName;
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
-			if (hasPerk(PerkLib.TankI)) temp += ((baseStat*12) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.GoliathI)) temp += ((this.str*8) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.CheetahI)) temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.TankI)) {
+				if (this is TrainingDummy) temp += ((baseStat*6000) * (1 + newGamePlusMod()));
+				else temp += ((baseStat*12) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.GoliathI)) {
+				if (this is TrainingDummy) temp += ((this.str*4000) * (1 + newGamePlusMod()));
+				else temp += ((this.str*8) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.CheetahI)) {
+				if (this is TrainingDummy) temp += ((this.spe*2000) * (1 + newGamePlusMod()));
+				else temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) temp += (400 * (1 + newGamePlusMod()));
@@ -308,7 +318,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) {
+			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
 				else temp *= 0.6;
 			}
@@ -352,7 +362,13 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyEliteType)) maxOver2 += 0.05;
 			if (hasPerk(PerkLib.EnemyChampionType)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.EnemyBossType)) maxOver2 += 0.15;
-			maxOver *= maxOver2;//~180%
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				maxOver2 += (maxHP() * 0.01 * bonus);
+			}
+			maxOver *= maxOver2;//~240%
 			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -488,6 +504,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyGroupType)) anotherOne *= 5;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) anotherOne *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) anotherOne *= 15;
+			if (this is TrainingDummy) anotherOne *= 500;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
@@ -500,7 +517,7 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) {
+			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
 				else temp *= 0.6;
 			}
@@ -512,6 +529,15 @@ import flash.utils.getQualifiedClassName;
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.OverMaxLust)) {
+				if (hasPerk(PerkLib.Enemy300Type)) max2 += (0.15 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) max2 += (0.1 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyGroupType)) max2 += (0.05 * perkv1(PerkLib.OverMaxLust));
+				else max2 += (0.01 * perkv1(PerkLib.OverMaxLust));
+			}
+			if (hasPerk(PerkLib.EnemyEliteType)) max2 += 0.05;
+			if (hasPerk(PerkLib.EnemyChampionType)) max2 += 0.1;
+			if (hasPerk(PerkLib.EnemyBossType)) max2 += 0.15;
 			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
 				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
 				var bonus:Number = Math.round((level - 1) / 3);
@@ -883,6 +909,12 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
+		private function capForDmgReduction():Number {
+			var cFDR:Number = 20;
+			if (hasPerk(PerkLib.EnemyUndeadType)) cFDR -= 15;
+			return cFDR;
+		}
+
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
@@ -911,7 +943,7 @@ import flash.utils.getQualifiedClassName;
 			mult -= damagePercentShared();
 			//Caps damage reduction at 80/99%.
 			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
-			if (mult < 20) mult = 20;
+			if (mult < capForDmgReduction()) mult = capForDmgReduction();
 			return mult;
 		}
 		public override function damageRangePercent():Number {
@@ -926,7 +958,7 @@ import flash.utils.getQualifiedClassName;
 			mult -= damagePercentShared();
 			//Caps damage reduction at 80/99%.
 			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
-			if (mult < 20) mult = 20;
+			if (mult < capForDmgReduction()) mult = capForDmgReduction();
 			return mult;
 		}
 		private function damagePercentShared():Number {
@@ -971,6 +1003,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//Misc
 			if (hasPerk(PerkLib.EnemyGooType)) multShared += 80;
+			if (hasPerk(PerkLib.EnemyUndeadType)) multShared += 95;
 			return multShared;
 		}
 
@@ -992,7 +1025,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function canMonsterBleed():Boolean
 		{
-			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType);
+			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType) || !hasPerk(PerkLib.EnemyUndeadType);
 		}
 
 		/**
@@ -1896,6 +1929,7 @@ import flash.utils.getQualifiedClassName;
 				StatusEffects.CancerGrab,
 				StatusEffects.MysticWeb,
 				StatusEffects.Entangled,
+				StatusEffects.Swallowed,
 			]
 			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
 			return false;
@@ -2077,15 +2111,15 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			else if (LowerBody.hasTentacles(player)) {
-			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
-			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.ConstrictedScylla);
-			}
-			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
+				if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.ConstrictedScylla);
+				}
+				addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 			else if (LowerBody.hasPincers(player)) {
 				EngineCore.outputText("Your prey pushes at your pincer, twisting and writhing in an effort to escape from your iron grip.");
@@ -2097,55 +2131,66 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			else if (LowerBody.isGoo(player)) {
-			EngineCore.outputText("[Themonster] struggle in your fluid form kicking and screaming to try and get out.");
-			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your slimy body to handle, breaking free of your fluids.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.GooEngulf);
-			}
-			addStatusValue(StatusEffects.GooEngulf, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				EngineCore.outputText("[Themonster] struggle in your fluid form kicking and screaming to try and get out.");
+				if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your slimy body to handle, breaking free of your fluids.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.GooEngulf);
+				}
+				addStatusValue(StatusEffects.GooEngulf, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 			else if (hasStatusEffect(StatusEffects.ConstrictedWhip)) {
-			EngineCore.outputText("[Themonster] pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
-			if (statusEffectv1(StatusEffects.ConstrictedWhip) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.ConstrictedWhip);
-			}
-			addStatusValue(StatusEffects.ConstrictedWhip, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				EngineCore.outputText("[Themonster] pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
+				if (statusEffectv1(StatusEffects.ConstrictedWhip) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.ConstrictedWhip);
+				}
+				addStatusValue(StatusEffects.ConstrictedWhip, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
-			if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
-				EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your embrace!");
-				removeStatusEffect(StatusEffects.EmbraceVampire);
-			}
-			else EngineCore.outputText("[Themonster] struggle but you manage to maintain the embrace.");
-			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
-			return false;
+				if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
+					EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your embrace!");
+					removeStatusEffect(StatusEffects.EmbraceVampire);
+				}
+				else EngineCore.outputText("[Themonster] struggle but you manage to maintain the embrace.");
+				addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
+				return false;
 			}
 			else if (hasStatusEffect(StatusEffects.GrabBear)) {
-			if (statusEffectv1(StatusEffects.GrabBear) <= 0) {
-				EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your grab!");
-				removeStatusEffect(StatusEffects.GrabBear);
-			}
-			else EngineCore.outputText("[Themonster] struggle but you manage to maintain the grab.");
-			addStatusValue(StatusEffects.GrabBear, 1, -1);
-			return false;
-			}
-			else {
-			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
-			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.Constricted);
-			}
-			addStatusValue(StatusEffects.Constricted, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				if (statusEffectv1(StatusEffects.GrabBear) <= 0) {
+					EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your grab!");
+					removeStatusEffect(StatusEffects.GrabBear);
+				}
+				else EngineCore.outputText("[Themonster] struggle but you manage to maintain the grab.");
+				addStatusValue(StatusEffects.GrabBear, 1, -1);
+				return false;
+			} if (hasStatusEffect(StatusEffects.Swallowed)) {
+				if (statusEffectv1(StatusEffects.Swallowed) <= 0) {
+					EngineCore.outputText("Desperately punching around to get free from the fleshy tentacle hell that is your insides your opponent finally strikes a weak spot forcing you to spit [monster him] out as you contort yourself.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.Swallowed);
+					removeStatusEffect(StatusEffects.Dig);
+				} else {
+					EngineCore.outputText("Your newest unwilling mate tries really hard to get free but simply fails to inflict any lasting damage to you.");
+				}
+				addStatusValue(StatusEffects.Swallowed, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
+			} else {
+				EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
+				if (statusEffectv1(StatusEffects.Constricted) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.Constricted);
+				}
+				addStatusValue(StatusEffects.Constricted, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 		}
 		private function ControlFreakStacking():void {
@@ -2401,8 +2446,8 @@ import flash.utils.getQualifiedClassName;
 			lust += lustDelta;
 			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
-			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-				outputText("\nYou cool down a little bit");
+			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
+				outputText(" You cool down a little bit ");
 				player.takeLustDamage(Math.round(-lustDelta)/20);
 			}
 		}
@@ -2518,14 +2563,14 @@ import flash.utils.getQualifiedClassName;
 		public function dropLoot():ItemType
 		{
 			//Chance of armor if at level 1 pierce fetish
-			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
+			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && !hasPerk(PerkLib.NoItemsGained) && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
 				return armors.SEDUCTA;
 			}
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BROBREW;
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
-			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BROBREW;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BIMBOLQ;
+			if (!game.plotFight && rand(1000) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.RAINDYE;
 			//Chance of eggs if Easter!
-			if (!game.plotFight && rand(6) == 0 && SceneLib.holidays.isEaster()) {
+			if (!game.plotFight && rand(6) == 0 && !hasPerk(PerkLib.NoItemsGained) && SceneLib.holidays.isEaster()) {
 				return randomChoice(
 						consumables.BROWNEG,
 						consumables.L_BRNEG,
@@ -2880,6 +2925,22 @@ import flash.utils.getQualifiedClassName;
 				}
 				addStatusValue(StatusEffects.Hypermode,1,-1);
 			}
+			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
+				//Deal severe true damage each round
+				var store14:Number = (player.inte + player.spe) * 2;
+				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+				store14 = Math.round(store14);
+				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
+				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
+				store14 += maxHP()*0.02;
+				store14 = SceneLib.combat.doDamage(store14);
+				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
+				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
+				SceneLib.combat.CommasForDigits(store14);
+				outputText("[pg]");
+				temp = rand(4);
+				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
+			}
 			if(hasStatusEffect(StatusEffects.IzmaBleed)) {
 				//Countdown to heal
 				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.IzmaBleed, 1, -2);
@@ -2894,17 +2955,12 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var procentvalue:Number = (4 + rand(7));
-					var procentvalue1:Number = 1;
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue1 += .25;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) procentvalue1 += .2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) procentvalue1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) procentvalue1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) procentvalue1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) procentvalue1 += .25;
+					var procentvalue1:Number = SceneLib.combat.BleedDamageBoost();
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
 					procentvalue *= procentvalue1;
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
+					store = boundInt(1, store, maxHP()*.05);
 					store = SceneLib.combat.doDamage(store);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. ");
@@ -2923,19 +2979,10 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store3:Number = (player.str + player.spe) * 2;
-					var store3a:Number = 1;
-					if (player.hasPerk(PerkLib.ThirstForBlood)) store3a += .25;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3a += .2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store3a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store3a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store3a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store3a += .25;
-					if (player.hasPerk(PerkLib.RacialParagon)) store3a += .5;
-					if (player.hasPerk(PerkLib.Apex)) store3a += .5;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3a += .5;
+					var store3:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
+					var store3a:Number = SceneLib.combat.BleedDamageBoost(true);
 					store3 *= store3a;
-					store3 = Math.round(store3);
+					store3 = boundInt(1, store3, maxHP()*.05);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
 					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. ");
@@ -2944,34 +2991,18 @@ import flash.utils.getQualifiedClassName;
 					outputText("[pg]");
 				}
 			}
-			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
-				//Deal severe true damage each round
-				var store14:Number = (player.inte + player.spe) * 2;
-				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				store14 = Math.round(store14);
-				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
-				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
-				store14 += maxHP()*0.02;
-				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
-				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
-				SceneLib.combat.CommasForDigits(store14);
-				outputText("[pg]");
-				temp = rand(4);
-				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
-			}
 			if(hasStatusEffect(StatusEffects.KamaitachiBleed)) {
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
-				var store13:Number = (player.str + player.spe) * 2;
-				var store13a:Number = 1;
-				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store13a += .25;
-				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store13a += .2;
+				var store13:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
+				var store13a:Number = SceneLib.combat.BleedDamageBoost();
+				if (player.hasPerk(PerkLib.RacialParagon)) store13a += .5;
+				if (player.hasPerk(PerkLib.Apex)) store13a += .5;
+				if (player.hasPerk(PerkLib.AlphaAndOmega)) store13a += .5;
 				store13 *= store13a;
 				store13 = Math.round(store13);
 				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
-				store13 += maxHP()*0.02;
 				store13 = SceneLib.combat.doDamage(store13);
 				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. ");
@@ -2992,7 +3023,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store5:Number = (player.str + player.spe) * 2;
+					var store5:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
 					var store5a:Number = 1;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store5a += .25;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store5a += .2;
@@ -3004,7 +3035,7 @@ import flash.utils.getQualifiedClassName;
 					if (player.hasPerk(PerkLib.Apex)) store5a += .5;
 					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5a += .5;
 					store5 *= store5a;
-					store5 = Math.round(store5);
+					store5 = boundInt(1, store5, maxHP()*.05);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged ");
 					else outputText("[Themonster] bleeds profusely from the jagged ")
@@ -3025,8 +3056,13 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage1:Number = 0;
 					hemorrhage1 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
-					hemorrhage1 = SceneLib.combat.fixPercentDamage(hemorrhage1);
+					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage1 += .25;
+					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage1 += .25;
+					hemorrhage1 = boundInt(1, hemorrhage1, maxHP()*.05);
 					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. ");
@@ -3044,8 +3080,13 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage2:Number = 0;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
-					hemorrhage2 = SceneLib.combat.fixPercentDamage(hemorrhage2);
+					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage2 += .25;
+					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage2 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage2 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage2 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage2 += .25;
+					hemorrhage2 = boundInt(1, hemorrhage2, maxHP()*.05);
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds that resulted from contact with your armor. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds that resulted from contact with your armor. ");
@@ -3063,8 +3104,13 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage3:Number = 0;
 					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage3 *= 1.2;
-					hemorrhage3 = SceneLib.combat.fixPercentDamage(hemorrhage3);
+					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage3 += .25;
+					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage3 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage3 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage3 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage3 += .25;
+					hemorrhage3 = boundInt(1, hemorrhage3, maxHP()*.05);
 					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your shield left behind. ");
@@ -3082,8 +3128,7 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage4:Number = 0;
 					hemorrhage4 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage4 *= 1.2;
-					hemorrhage4 = SceneLib.combat.fixPercentDamage(hemorrhage4);
+					hemorrhage4 = boundInt(1, hemorrhage4, maxHP()*.05);
 					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
 					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. ");
@@ -3128,17 +3173,34 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Briarthorn)) {
 				var store16:Number = (player.str + player.spe) * 2;
-				var store16a:Number = 1;
-				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store16a += .25;
-				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16a += .2;
+				var store16a:Number = SceneLib.combat.BleedDamageBoost();
 				store16 *= store16a;
 				store16 += maxHP()*0.05;
-				store16 = Math.round(store16);
+				store16 = boundInt(1, store16, maxHP()*.05);
 				store16 = SceneLib.combat.doDamage(store16);
-				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your vine thorns left behind. ");
+				if(plural) outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
+			}
+			if(hasStatusEffect(StatusEffects.Rosethorn)) {
+				if (statusEffectv1(StatusEffects.Rosethorn) <= 0) {
+					removeStatusEffect(StatusEffects.Rosethorn);
+					outputText("<b>Bleeding cause by deep wounds your rose thorns left behind stopped!</b>[pg]");
+				} else {
+					var store17:Number = (player.str + player.spe);
+					var store17a:Number = SceneLib.combat.BleedDamageBoost() *
+							statusEffectv1(StatusEffects.Rosethorn)*0.1;
+					store17 *= store17a;
+					store17 += maxHP()*0.01;
+					store17 = boundInt(1, store17, maxHP()*.05);
+					store17 = SceneLib.combat.doDamage(store17);
+					if(plural) outputText("[Themonster] bleed profusely from the deep wounds your rose thorns left behind. ");
+					else outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");
+					SceneLib.combat.CommasForDigits(store17);
+					outputText("[pg]");
+					changeStatusValue(StatusEffects.Rosethorn, 1, 0);
+				}
 			}
 			if (hasStatusEffect(StatusEffects.DeathBlossom)) {
 				if (statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
@@ -3182,6 +3244,15 @@ import flash.utils.getQualifiedClassName;
 				//Damage = 5 + bonus score minus
 				//Reduced by lust vuln of course
 				lust += Math.round(lustVuln * (5 + statusEffectv2(StatusEffects.LustStick)));
+			}
+			if (hasStatusEffect(StatusEffects.Swallowed)) {
+				if (rand(3)) {
+					outputText("The many fleshy tentacles lining your inner walls slither around [themonster], seeking out and caressing [monster his] vulnerable endowments as you insidiously try to draw [monster him] closer to cumming.\n\n");
+					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(7)));
+				}
+				if (!hasStatusEffect(StatusEffects.SandWormAcid))
+					createStatusEffect(StatusEffects.SandWormAcid, 1, 0, 0, 0);
+				addStatusValue(StatusEffects.SandWormAcid, 1, 1);
 			}
 			if(hasStatusEffect(StatusEffects.PCTailTangle)) {
 				//when Entwined
@@ -3280,9 +3351,30 @@ import flash.utils.getQualifiedClassName;
 					store15 = Math.round(store15 * SceneLib.combat.poisonDamageBoostedByDao());
 					store15 += maxHP() * statusEffectv2(StatusEffects.AntAcid);
 					store15 = SceneLib.combat.fixPercentDamage(store15);
-					store15 = SceneLib.combat.doAcidDamage(store15);
-					if(plural) outputText(capitalA + short + " burn from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
-					else outputText(capitalA + short + " burns from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
+					if(plural) outputText(capitalA + short + " burn from lingering formic acid.");
+					else outputText(capitalA + short + " burns from lingering formic acid.");
+					store15 = SceneLib.combat.doAcidDamage(store15, true, true);
+					outputText("\n\n");
+				}
+			}
+			//Sandworm Acid DoT
+			if (hasStatusEffect(StatusEffects.SandWormAcid)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.SandWormAcid,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.SandWormAcid) <= 0) {
+					outputText("The acid burning [themonster] finally wore out.\n\n");
+					removeStatusEffect(StatusEffects.SandWormAcid);
+				}
+				//Deal damage if still wounded.
+				else {
+					outputText("Your lewd dissolving acid causes [themonster] to flush hotly with arousal.");
+					var store18:Number = (player.str + player.spe + player.tou) * 0.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store18 *= 1.2;
+					store18 = SceneLib.combat.fixPercentDamage(store18);
+					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
+					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(3)));
+					outputText("\n\n");
 				}
 			}
 			//Burn DoT
@@ -3718,7 +3810,7 @@ import flash.utils.getQualifiedClassName;
 				armorDef += Math.round(armorDef * 0.5);
 				armorMDef += Math.round(armorMDef * 0.5);
 			}
-			if (level < 6) {
+			if (level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) this.lust *= 0.1;
 				else this.lust *= 0.6;
 				this.lust = Math.round(this.lust);

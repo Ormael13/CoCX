@@ -724,7 +724,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
-				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DEMONIC));
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.AZAZEL));
 			},
 			// is present
 			function (): Boolean {
@@ -834,6 +834,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.RABBIT));
 			},
 			// is present
 			function (): Boolean {
@@ -865,6 +866,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.AVIAN));
 			},
 			// is present
 			function (): Boolean {
@@ -887,6 +889,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.GRIFFIN));
 			},
 			// is present
 			function (): Boolean {
@@ -916,6 +919,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KANGAROO));
 			},
 			// is present
 			function (): Boolean {
@@ -939,6 +943,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.THUNDERBIRD));
 			},
 			// is present
 			function (): Boolean {
@@ -962,6 +967,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SQUIRREL));
 			},
 			// is present
 			function (): Boolean {
@@ -1097,6 +1103,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FERRET));
 			},
 			// is present
 			function (): Boolean {
@@ -1122,6 +1129,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.BEAR));
 			},
 			// is present
 			function (): Boolean {
@@ -1145,6 +1153,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.USHI_ONI));
 			},
 			// is present
 			function (): Boolean {
@@ -1439,6 +1448,59 @@ public class TailTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.tailType === Tail.ANT_ABDOMEN;
+			}
+	);
+
+	public const TailDeer: Transformation = new SimpleTransformation("Deer Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "You feel a tightening just above your ass, as if a massive hand was pinching you.  It releases with a curious \"pomf\"-ing noise.  You turn this way and that, finally managing to crane your neck to see your <b>fluffy, flicking deer tail.</b>";
+				player.tailType = Tail.DEER;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DEER));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.DEER;
+			}
+	);
+
+	public const TailYgddrasil: Transformation = new SimpleTransformation("Ygddrasil Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "You feel a weird sensation in your ";
+				if (player.tailType > Tail.NONE) {
+					desc += "tail";
+					if (player.tailCount > 1) desc += "s";
+				}
+				else desc += "tailbone";
+				desc += ". It kind of feels cool, pleasurable and makes you queasy all at once. Suddenly, ";
+				if (player.tailType > Tail.NONE) desc += "it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage";
+				else desc += "your tailbone erupts and elongates into a new limb, your new tail";
+				desc += ". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>";
+				player.tailType = Tail.YGGDRASIL;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.YGGDRASIL));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.YGGDRASIL;
 			}
 	);
 	/*

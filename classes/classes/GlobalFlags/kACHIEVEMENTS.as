@@ -9,7 +9,7 @@ package classes.GlobalFlags
 		public static const STORY_MARAE_SAVIOR:int				=   1; //Complete Marae’s quest.
 		public static const STORY_ZETAZ_REVENGE:int				=   2; //Defeat Zetaz and obtain the map.
 		public static const STORY_FINALBOSS:int					=   3; //Defeat Lethice.
-		public static const UNKNOWN_ACHIEVEMENT_004:int			=   4;
+		public static const STORY_CHIMERA_SQUAD:int				=   4; //Clean up demons secret laboratory.
 		public static const UNKNOWN_ACHIEVEMENT_005:int			=   5;
 		public static const UNKNOWN_ACHIEVEMENT_006:int			=   6;
 		public static const UNKNOWN_ACHIEVEMENT_007:int			=   7;
@@ -22,7 +22,7 @@ package classes.GlobalFlags
 		public static const ZONE_WHERE_AM_I:int					=  12; //Explore for the first time.
 		public static const ZONE_FOREST_RANGER:int				=  13; //Explore the forest 100 times.
 		public static const ZONE_VACATIONER:int					=  14; //Explore the lake 100 times.
-		public static const ZONE_DEHYDRATED:int					=  15; //Explore the desert 100 times.
+		public static const ZONE_DEHYDRATED:int					=  15; //Explore the outer desert 100 times.
 		public static const ZONE_MOUNTAINEER:int				=  16; //Explore the mountain 100 times.
 		public static const ZONE_WE_NEED_TO_GO_DEEPER:int		=  17; //Explore the deepwoods 100 times.
 		public static const ZONE_ROLLING_HILLS:int				=  18; //Explore the plains 100 times.
@@ -331,13 +331,13 @@ package classes.GlobalFlags
 		public static const GENERAL_PLAY_DEAD_FIDO_3_IM_BACK:int				= 286;
 		
 		public static const ZONE_CAVEMAN:int						= 287; //100 exploration of Caves
-		public static const ZONE_288:int		= 288;//100 exploration of Desert (Inner)
+		public static const ZONE_BEDOUIN:int						= 288; //100 exploration of Desert (Inner)
 		public static const ZONE_289:int		= 289;//100 exploration of Inner Battlefield (Warmoger lub dla 3 obszaru battlefield-a)
 		public static const ZONE_DEFILED:int						= 290;//100 exploration of Defiled Ravine
 		public static const ZONE_291:int		= 291;//100 exploration of Marsh
 		public static const ZONE_292:int		= 292;//100 exploration of Deep Caves
-		public static const ZONE_SUB_ZERO:int						= 293;//100 exploration of Tundra
-		public static const ZONE_ASHES_TO_ASHES_DUST_TO_DUST:int	= 294;//100 exploration of Ashlands
+		public static const ZONE_SUB_ZERO:int						= 293; //100 exploration of Tundra
+		public static const ZONE_ASHES_TO_ASHES_DUST_TO_DUST:int	= 294; //100 exploration of Ashlands
 		public static const ZONE_295:int		= 295;//100 exploration of Outer Plateau
 		public static const ZONE_296:int		= 296;//100 exploration of Inner Plateau
 		public static const ZONE_297:int		= 297;//100 exploration of 3rd forest related area (jungle?) ZONE_JUMANJI?

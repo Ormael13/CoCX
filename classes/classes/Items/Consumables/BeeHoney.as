@@ -70,7 +70,7 @@ public class BeeHoney extends Consumable
 				outputText("Opening the crystal vial, you are greeted by a super-concentrated wave of sweet honey-scent.  It makes you feel lightheaded.  You giggle and lick the honey from your lips, having drank down the syrupy elixir without a thought.");
 			}
 			player.refillHunger(15);
-			if ((pure || special) && player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) { //Pure or special honey can reduce the corruption of a phouka baby
+			if ((pure || special) && (player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE || player.pregnancy2Type == PregnancyStore.PREGNANCY_FAERIE)) { //Pure or special honey can reduce the corruption of a phouka baby
                 if (CoC.instance.flags[kFLAGS.PREGNANCY_CORRUPTION] > 1) { //Child is phouka, hates pure honey
                     outputText("\n\nYou feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.  Then again, maybe pure honey is good for it.");
 				}
@@ -218,7 +218,7 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//Melt demon wings!
-			if (changes < changeLimit && player.wings.type != Wings.BEE_SMALL && player.wings.type != Wings.BEE_LARGE) {
+			if (changes < changeLimit && player.wings.type == Wings.NONE && player.wings.type != Wings.BEE_SMALL && player.wings.type != Wings.BEE_LARGE) {
 				changes++;
 				outputText("\n\nYour wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
 				outputText("\n\n");

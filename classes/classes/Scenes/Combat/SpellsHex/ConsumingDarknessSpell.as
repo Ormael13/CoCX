@@ -39,12 +39,13 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 	}
 	
 	public function calcDuration():int {
-		return 7
+		return 7;
 	}
 	
 	override public function calcCooldown():int {
 		var calcC:int = 12;
 		calcC += spellGenericCooldown();
+		if (player.hasPerk(PerkLib.Necromancy)) calcC -= 1;
 		return calcC;
 	}
 	
@@ -59,6 +60,7 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 			var store11:Number = 0;
 			store11 += monster.statusEffectv2(StatusEffects.ConsumingDarkness);
 			store11 *= 0.2;
+			if (player.hasPerk(PerkLib.Necromancy)) store11 *= 1.5;
 			combat.doDarknessDamage(store11, true, display);
 			if (display) {
 				outputText(" damage.\n\n");

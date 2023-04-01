@@ -5,6 +5,7 @@ package classes.Scenes.Dungeons.DemonLab {
  */
 
 import classes.*;
+import classes.BodyParts.Horns;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -16,29 +17,31 @@ public class ProjectTyrant extends Monster {
         this.long = "Facing you is a creature vaguely resembling a Drider. Easily seventeen feet tall and thirty feet long, the creature turns to face you, six crimson eyes gleaming. Its naked form is built like a tank, masculine, with no genitals to be seen. Twin horns poke through the chitin covering its forehead. It breathes heavily, and as it takes a step, the spikes on its legs clank against the stone floor below. Corruption oozes from this creature in a sickening aura. It holds no weapons, but the massive muscles sloping down the creature’s arms leave little doubt that this creature doesn’t need a weapon to crush its foes. ";
         this.plural = false;
         this.tallness = 104;
+        initGenderless();
+        createBreastRow(0);
+		this.horns.type = Horns.DEMON;
         this.horns.count = 4;
-        initStrTouSpeInte(575, 400, 190, 130);
+        initStrTouSpeInte(575, 400, 210, 130);
         initWisLibSensCor(140, 345, 150, 100);
         this.weaponName = "fists";
         this.weaponVerb = "punch";
-        this.weaponAttack = 80;
+        this.weaponAttack = 180;
         this.armorName = "chitin";
-        this.armorDef = 101;
-        this.armorMDef = 139;
-        this.bonusHP = 300;
-        this.bonusLust = 200;
+        this.armorDef = 201;
+        this.armorMDef = 239;
+        this.bonusHP = 12000;
+        this.bonusLust = 555;
         this.lust = 50;
-        this.level = 45;
+        this.level = 60;
         this.gems = rand(550) + 175;
-
-        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.T_SSILK, 5).add(consumables.LETHITE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
         this.createPerk(PerkLib.Brawler, 0, 0, 0, 0);
         this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
-        this.createPerk(PerkLib.GoliathII, 0, 0, 0, 0);
-
+        this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+        if (inDungeon) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
 
@@ -67,7 +70,7 @@ public class ProjectTyrant extends Monster {
     }
 
     private function TackleGrapple():void {
-        outputText("The Drider-monster charges again. You ready yourself to dodge the meaty fists, but instead, it charges head-on into you, shoulder first. You’re thrown back by the impact, but as you hit the ground, you feel an immense weight press down on you. You are pinned underneath the Drider-beast’s weight, and it begins to crush you! \n\n");
+        outputText("The Drider-monster charges again. You ready yourself to dodge the meaty fists, but instead, it charges head-on into you, shoulder first. You’re thrown back by the impact, but as you hit the ground, you feel an immense weight press down on you. You are pinned underneath the Drider-beast’s weight, and it begins to crush you!\n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
         player.createStatusEffect(StatusEffects.Pounced, 5, 0, 0, 0);
@@ -80,25 +83,21 @@ public class ProjectTyrant extends Monster {
     }
 
     public function TackleGrappleWait():void {
-        clearOutput();
         TackleGrappleFail();
         SceneLib.combat.enemyAIImpl();
     }
 
     public function TackleGrappleFail():void {
         player.addStatusValue(StatusEffects.Pounced, 1, -1);
-        if (player.getStatusValue(StatusEffects.Pounced, 1) == 0)
-            player.removeStatusEffect(StatusEffects.Pounced);
-        outputText("The Drider-thing’s bulk presses down on you, crushing your body. You can feel your bones beginning to crack! \n\n");
-        outputText(" \n\n");
+        if (player.getStatusValue(StatusEffects.Pounced, 1) == 0) player.removeStatusEffect(StatusEffects.Pounced);
+        outputText("The Drider-thing’s bulk presses down on you, crushing your body. You can feel your bones beginning to crack!\n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
         if (HP >= 0.7 * maxHP()) {
             var dmg0:Number = 0;
-            dmg0 += this.spe * 2;
-            dmg0 += eBaseSpeedDamage() * 2;
-            dmg0 += this.weaponAttack * 1;
-            outputText("As you struggle with the creature, the Incubus on top of it cackles, shooting at your exposed upper body! \n\n");
+            dmg0 += this.spe + this.weaponAttack + eBaseSpeedDamage();
+			dmg0 *= 2;
+            outputText("As you struggle with the creature, the Incubus on top of it cackles, shooting at your exposed upper body!\n\n");
             player.takePhysDamage(dmg0, true);
             player.takePhysDamage(dmg0, true);
             player.takePhysDamage(dmg0, true);
@@ -116,10 +115,10 @@ public class ProjectTyrant extends Monster {
 
     public function BlackMortar():void {
         var dmg1:Number;
-        outputText("The demon on top grins, whistling, and you see the unholy mount tense up. A massive glob of black goop is launched from the Drider’s backside like a mortar shell. \n\n");
+        outputText("The demon on top grins, whistling, and you see the unholy mount tense up. A massive glob of black goop is launched from the Drider’s backside like a mortar shell.\n\n");
         if (player.getEvasionRoll()) {
             outputText("You break into a sweat as you throw yourself to the side. You evade the worst of the acidic goop, but a bit still splashes you.");
-            dmg1 = this.inte * 0.2;
+            dmg1 = this.inte * 0.1;
             dmg1 += eBaseIntelligenceDamage() * 0.1;
             dmg1 = Math.round(dmg1);
             player.takeAcidDamage(dmg1, true);
@@ -136,13 +135,11 @@ public class ProjectTyrant extends Monster {
     }
 
     override protected function performCombatAction():void {
-        clearOutput();
         CorruptionAura();
         var dmg0:Number = 0;
-        dmg0 += this.spe * 2;
-        dmg0 += eBaseSpeedDamage() * 2;
-        dmg0 += this.weaponAttack * 1;
-        outputText("The Incubus fires a shot at you! \n\n");
+        dmg0 += this.spe + this.weaponAttack + eBaseSpeedDamage();
+        dmg0 *= 2;
+        outputText("The Incubus fires a shot at you!\n\n");
         player.takePhysDamage(dmg0, true);
         var choice0:Number = rand(3);
         if (choice0 == 1 && player.hasStatusEffect(StatusEffects.Pounced)) SlamTrample();
@@ -160,11 +157,13 @@ public class ProjectTyrant extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.PrTyrantVictory();
+        if (inDungeon) SceneLib.dungeons.demonLab.PrTyrantVictory();
+        else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        SceneLib.dungeons.demonLab.BadEndExperiment();
+        if (inDungeon) SceneLib.dungeons.demonLab.BadEndExperiment();
+        else cleanupAfterCombat();
     }
 }
 

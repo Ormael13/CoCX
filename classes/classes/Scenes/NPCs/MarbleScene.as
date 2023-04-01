@@ -2950,7 +2950,7 @@ public function marblePoopsBaybees():void {
 public function marbleNightSleepFlavor():Boolean {
 	marbleSprite();
 	//If player is marble-preggo, she builds nursery
-	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && (player.pregnancyIncubation <= 128)) {
+	if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && ((player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= 128) || (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= 128))) {
 		outputText("<b>Citing your pregnant belly, Marble informs you she'll be getting to work on building a nursery for your coming cow-child soon.</b>\n\n");
 		flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 	}
@@ -3055,7 +3055,8 @@ public function marbleNightSleepFlavor():Boolean {
 }
 
 private function pcPregWithMarblesKids():Boolean {
-	return player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= 280;
+	return (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE && player.pregnancyIncubation <= 280) ||
+            (player.pregnancy2Type == PregnancyStore.PREGNANCY_MARBLE && player.pregnancy2Incubation <= 280);
 
 }
 private function marblePregWithPCKids():Boolean {
@@ -3377,6 +3378,7 @@ private function marblePreggoChance(preggerMult:Number):void {
 			trace("Marble got PREGNANT!");
 			//SHE IS NAU!
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 720);
+            if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Marble is pregnant!</b>");
 		}
 	}
 	else

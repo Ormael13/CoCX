@@ -202,6 +202,7 @@ public class HairTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.SNOWY;
+				Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.SNOWY));
 			},
 			// is present
 			function (): Boolean {
@@ -216,6 +217,7 @@ public class HairTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.LEAF;
+				Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.LEAF));
 			},
 			// is present
 			function (): Boolean {
@@ -230,6 +232,7 @@ public class HairTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.GRASS;
+				Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.GRASS));
 			},
 			// is present
 			function (): Boolean {
@@ -302,7 +305,7 @@ public class HairTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.RATATOSKR;
-                //Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.RATATOSKR));
+                Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.RATATOSKR));
 			},
 			// is present
 			function (): Boolean {
@@ -324,6 +327,23 @@ public class HairTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.hairType === Hair.WINDSWEPT;
+			}
+	);
+
+	public const HairWild: Transformation = new SimpleTransformation("Wild Hair",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "Your hair stands in all directions as though you have just been through a windstorm. <b>You now have wild hair!</b>";
+
+				player.hairLength = 5;
+
+				if (doOutput) outputText(desc);
+				player.hairType = Hair.NORMAL;
+				player.hairStyle = Hair.WILD;
+			},
+			// is present
+			function (): Boolean {
+				return player.hairStyle === Hair.WILD;
 			}
 	);
 
@@ -355,6 +375,7 @@ public class HairTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.FLUFFY;
+                Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.FLUFFY));
 			},
 			// is present
 			function (): Boolean {
@@ -376,6 +397,7 @@ public class HairTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.CRAZY;
+                Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.CRAZY));
 			},
 			// is present
 			function (): Boolean {
@@ -425,7 +447,7 @@ public class HairTransformations extends MutationsHelper {
 			}
 	);
 
-	public const HairCow: Transformation = new SimpleTransformation("Fairy Hair",
+	public const HairCow: Transformation = new SimpleTransformation("Cow Hair",
 			// apply effect
 			function (doOutput: Boolean): void {
 				var desc: String = "You feel an itch in your hair and frustratedly go check on what is going on. To your surprise your hair took on a striped pattern" + " <b>like those of a cow.</b>";
@@ -436,6 +458,20 @@ public class HairTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.hairType === Hair.COW;
+			}
+	);
+
+	public const HairDripping: Transformation = new SimpleTransformation("Driping Hair",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (doOutput) outputText(desc);
+				player.hairType = Hair.DRIPPING;
+			},
+			// is present
+			function (): Boolean {
+				return player.hairType === Hair.DRIPPING;
 			}
 	);
 

@@ -32,7 +32,7 @@ public class PerkMenu extends BaseContent {
 	}
 	public function displayPerks():void {
 		clearOutput();
-		displayHeader("Perks (Total: " + player.perks.length + ")");
+		displayHeader("Perks (Total: " + (player.perks.length + player.perksCountForMergedOnes()) + " / Merged: " + player.perksCountForMergedOnes() + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}
@@ -81,7 +81,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",meleeOptions);
 		}
-		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.AmateurGunslinger)) {
+		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.hasPerk(PerkLib.AmateurGunslinger)) {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",rangedOptions);
 		}
@@ -97,9 +97,9 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(10, "Elementals",summonsbehaviourOptions);
 		}
-		if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
-			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
-			addButton(11, "P.Golems",golemsbehaviourOptions);
+		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
+			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
+			addButton(11, "Golems/Skeletons",golemsskeletonsbehaviourOptions);
 		}
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
@@ -226,7 +226,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Req. to have natural attacks or a gaunlet type weapon with claws to enable feral mode)");
 			outputText("\nFighting Style: <b>" + (flags[kFLAGS.FERAL_COMBAT_MODE] ? "Feral" : "Normal") + "</b>");
 			bd.add("Normal/Feral", curry(toggleFlagMelee, kFLAGS.FERAL_COMBAT_MODE))
-				.disableIf(!(player.weaponName == "fists" && player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()), "You need to be unarmed and possess a natural weapon OR to have equipped gaunlets with any type of artifical claws.");
+				.disableIf(!((player.weaponName == "fists" || player.haveWeaponAllowingClaws()) && player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()), "You need to be unarmed and possess a natural weapon OR to have equipped gaunlets with any type of artifical claws.");
 		}
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) {
 			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
@@ -276,7 +276,8 @@ public class PerkMenu extends BaseContent {
 			|| player.tailType == Tail.SCORPION
 			|| player.tailType == Tail.MANTICORE_PUSSYTAIL
 			|| player.faceType == Face.SNAKE_FANGS
-			|| player.faceType == Face.SPIDER_FANGS;
+			|| player.faceType == Face.SPIDER_FANGS
+			|| player.hasKeyItem("Sky Poison Pearl") >= 0;
 	}
 
 	private function get elementalArr():Array {
@@ -348,18 +349,28 @@ public class PerkMenu extends BaseContent {
 				.disableIf(currentProj == atk, "Already selected");
 			atk++;
 		}
-		addButton(14, "Back", meleeOptions);
+		addButton(14, "Back", rangedOptions);
 	}
 
 	public function rangedOptions():void {
 		var bd:ButtonDataList = new ButtonDataList();
 		var currentProj:int = flags[kFLAGS.MULTISHOT_STYLE];
 		var toggleFlagRanged:Function = curry(toggleFlag, rangedOptions);
-
+		currentProj *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
 		clearOutput();
 		outputText("You will always shoot " + NUMBER_WORDS_NORMAL[currentProj + 1] + " projectiles."
 			+ "\nYou can change it to a different amount of projectiles.");
 		bd.add("MultiShot", pickMultishot).hint("Change your amount of projectiles.");
+		if (player.hasPerk(PerkLib.ELFThornShot)) {
+			outputText("\n\nAs a Wood Elf you can grow Rose thorns on your shafts, inducing a lust poison and bleed effect. (Works only with bows and crosbows)"
+				+ "\nThorn shot active: <b>" + (flags[kFLAGS.ELVEN_THORNSHOT_ENABLED] ? "Yes" : "No") + "</b>");
+			bd.add("Thorn shot", curry(toggleFlagRanged, kFLAGS.ELVEN_THORNSHOT_ENABLED));
+		}
+		if (player.hasPerk(PerkLib.ELFTwinShot)) {
+			outputText("\n\nThanks to your elven training, you can shoot twice as many arrows as normal (Works only with bows)"
+					+ "\nTwin shot active: <b>" + (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? "Yes" : "No") + "</b>");
+			bd.add("Twin shot", curry(toggleFlagRanged, kFLAGS.ELVEN_TWINSHOT_ENABLED));
+		}
 		if (player.hasPerk(PerkLib.ElementalArrows)) {
 			outputText("\n\nIf you know specific spells, you can add some magical effects to the projectiles. (Works only with bows and crosbows)");
 			outputText("\n\nElemental effect added: <b>" + elementalArr[flags[kFLAGS.ELEMENTAL_ARROWS]][0] + "</b>");
@@ -524,10 +535,10 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
-	public function golemsbehaviourOptions():void {
+	public function golemsskeletonsbehaviourOptions():void {
 		clearOutput();
 		menu();
-		outputText("You can choose how your permanent golems will behave during each fight.\n\n");
+		outputText("You can choose how your permanent golems will behave during each fight."+(player.hasPerk(PerkLib.FirstAttackSkeletons)?" Or skeletons if you rised any.":"")+"\n\n");
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
 			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
 				var element:Number = player.statusEffectv3(StatusEffects.GolemUpgrades1);
@@ -572,21 +583,31 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
-
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking, true);
+		if (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) {
+			outputText("\n\n<b>Skeletons attack pattern behavious:</b>\n");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("Attacking at the begining of each turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(10, "Waiting", skeletonsAttacking,false);
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(11, "Attacking", skeletonsAttacking, true);
+		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
 		function golemsElementaryWeaponMode(elementalMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,3,elementalMode);
-			golemsbehaviourOptions();
+			golemsskeletonsbehaviourOptions();
 		}
 		function golemsPoisonedWeaponMode(poisonedMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,4,poisonedMode);
-			golemsbehaviourOptions();
+			golemsskeletonsbehaviourOptions();
 		}
         function golemsAttacking(attacking:Boolean):void {
             flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
-            golemsbehaviourOptions();
+            golemsskeletonsbehaviourOptions();
+        }
+        function skeletonsAttacking(attacking:Boolean):void {
+            flags[kFLAGS.NECROMANCER_SKELETONS] = (attacking)?1:0;
+            golemsskeletonsbehaviourOptions();
         }
 	}
 
@@ -770,9 +791,7 @@ public class PerkMenu extends BaseContent {
 			//Heart Mutations
 			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
 			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
-			mutationsDatabase(pageAdd);
-			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, curry(mutationsDBSlot, slot, pageAdd))
-				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
+			mutationsDatabase(pageAdd, false);
 		}
 
 		function mutationsDBDragon():void{
@@ -782,9 +801,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
 			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
-			mutationsDatabase(1);
-			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, mutationsDBDragon)
-				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
+			mutationsDatabase(1, false);
 		}
 
 		function mutationsDBKitsune():void{
@@ -793,9 +810,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
-			mutationsDatabase(1);
-			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, mutationsDBKitsune)
-				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
+			mutationsDatabase(1, false);
 		}
 
 		var bd:ButtonDataList = new ButtonDataList();
@@ -818,13 +833,7 @@ public class PerkMenu extends BaseContent {
 		bd.add("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		bd.add("Dragons", mutationsDBDragon, "Dragon Mutations");
 		bd.add("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		submenu(bd, displayPerks, page, false, 11); // reserving 11 for the switch
-	}
-
-	private var moreInfo:Boolean = false; //no need to save, so keep it here
-	private function moreInfoSwitch(callAfter:Function):void {
-		moreInfo = !moreInfo;
-		callAfter(); //update text and buttons
+		submenu(bd, displayPerks, page, false);
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
@@ -862,6 +871,8 @@ public class PerkMenu extends BaseContent {
 				}
 				outputText("\nRequirements for next tier: " + reqs.join(", "));
 
+				if (player.perkv3(mutation) == 1) outputText(" Your Mutation is empowered, and provides you with a much greater buff!\n");
+
 				if (pMutateLvl > 0) {
 					outputText("\nCurrent Tier Description: ");
 					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
@@ -871,7 +882,7 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 
-				if (moreInfo) {
+				if (flags[kFLAGS.IMDB_DETAILS]) {
 					outputText("\nAll Tier Descriptions:");
 					for (var tier:int = 1; tier <= mutation.maxLvl; ++tier)
 						outputText("\n" + tier + ": " + mutation.mDesc(player.getPerk(mutation), tier) + "; " + mutation.explainBuffs(tier));
@@ -964,6 +975,7 @@ public class PerkMenu extends BaseContent {
 		}
 		allPerks = temp;
 		clearOutput();
+		menu(); //Clear the other buttons out the way
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
 					  "/"+allPerks.length+")");
@@ -1378,12 +1390,16 @@ public class PerkMenu extends BaseContent {
 							change = true;
 						}
 					}
+					else if (cond.type == "noperks"){
+						continue;
+					}
 					else {	//The effect from this cause should never occur, as all these in masterlist should have a perk requirement of some sort.
 						requirelen++
 					}
-				}
+				}//Why is this suddenly triggering now? Could it be due to whatever changes were recently added in regards to Orm "merging" perks?
 				if (requirelen == pPerk.requirements.length){
 					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
+					trace("pPerk.name() + \"shouldn't be here. This is a bug. Trace is in repPerkClr.");
 				}
 			}
 			if (change){

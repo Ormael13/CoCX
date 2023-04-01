@@ -26,32 +26,41 @@ public class RaceTfEnchantmentType extends EnchantmentType {
 	 * - race:Race
 	 * - tfs:Transformation[]
 	 */
-	public const RaceGen:Array = [{
-		chance: 1.0,
-		race: Races.BEE,
-		tfs: Races.BEE.TfList,
-		tfPerm: false 
-	}, {
-		chance: 1.0,
-		race: Races.CAT,
-		tfs: Races.CAT.TfList,
-		tfPerm: false 
-	}, {
-		chance: 1.0,
-		race: Races.FOX,
-		tfs: Races.FOX.TfList,
-		tfPerm: false 
-	}, {
-		chance: 1.0,
-		race: Races.GOBLIN,
-		tfs: Races.GOBLIN.TfList,
-		tfPerm: false 
-	}, {
-		chance: 0.5,
-		race: Races.KITSUNE,
-		tfs: Races.KITSUNE.TfList,
-		tfPerm: false 
-	}];
+	private var RaceGen_field:Array = null;
+	public function get RaceGen():Array {
+		if (!RaceGen_field) RaceGen_field = [{
+				chance: 1.0,
+				race: Races.BEE,
+				tfs: Races.BEE.TfList,
+				tfPerm: false
+			}, {
+				chance: 1.0,
+				race: Races.CAT,
+				tfs: Races.CAT.TfList,
+				tfPerm: false
+			}, {
+				chance: 1.0,
+				race: Races.FOX,
+				tfs: Races.FOX.TfList,
+				tfPerm: false
+			}, {
+				chance: 1.0,
+				race: Races.GOBLIN,
+				tfs: Races.GOBLIN.TfList,
+				tfPerm: false
+			}, {
+				chance: 0.5,
+				race: Races.KITSUNE,
+				tfs: Races.KITSUNE.TfList,
+				tfPerm: false
+			}, {
+				chance: 0.1,
+				race: Races.IMP,
+				tfs: Races.IMP.TfList,
+				tfPerm: false
+			}];
+		return RaceGen_field;
+	}
 	private static var instance:RaceTfEnchantmentType;
 	
 	public static function hoursBetweenTf(power:int):int {

@@ -85,8 +85,8 @@ public class CouatlRace extends Race {
 	}
 	
 	public static function isCouatlLike(body:BodyData):Boolean {
-		return body.hairType == Hair.FEATHER
-				|| body.armType == Arms.HARPY
+		return (body.hairType == Hair.FEATHER
+				&& body.armType == Arms.HARPY)
 				|| body.wingType == Wings.COUATL;
 	}
 }

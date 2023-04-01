@@ -173,6 +173,7 @@ public class UniqueSexScenes extends BaseContent
 				USSGobMech(),
 				USSBrainMlt(),
 				USSAlrauneSS(),
+				USSWoodElf(),
 				USSEastrBny(),
 				USSTentRape(),
 				USSLiveDildo(),
@@ -275,8 +276,8 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSVoltTsf():Array{
             var btnSet:Array = ["Volt Transfer"];
-            if ((player.isRace(Races.RAIJU, 1, false) || player.isRace(Races.THUNDERBIRD, 1, false)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
-            else btnSet.push(false, "Req. to be Raiju and enemy must be non-gigant humanoid.");
+            if ((player.isRace(Races.RAIJU, 1, false) || player.isRace(Races.THUNDERBIRD, 1, false) || player.isRace(Races.KIRIN, 1, false)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
+            else btnSet.push(false, "Req. species with electrified desire and enemy must be non-gigant humanoid.");
             return btnSet;
         }
         //OverHeat Species (?)
@@ -331,9 +332,18 @@ public class UniqueSexScenes extends BaseContent
                 }
                 if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) btnSet.push("Convert", Convert, "");
                 else btnSet.push("Convert", false, "You need to be a very corrupted alraune against a non unique female character to use this scene.");
-            }
+				}
             else btnSet.push("Alraune", false, "You need to be an Alraune.");
             return btnSet;
+        }
+        //wood elf
+        private function USSWoodElf():Array{
+            var btnSet:Array = ["Convert Elf"];
+			if (player.isWoodElf() && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) btnSet.push(SceneLib.woodElves.CaptureANewSister, "")
+			else if (player.isWoodElf() && monster.hasCock() && monster.cocks[0].cockType === CockTypesEnum.HORSE && !monster.hasPerk(PerkLib.UniqueNPC)) btnSet.push(SceneLib.woodElves.CaptureMinotaur, "")
+			else btnSet.push(false, "Wood elves only!");
+
+			return btnSet;
         }
         //easter bunneh
         private function USSEastrBny():Array{
@@ -380,10 +390,33 @@ public class UniqueSexScenes extends BaseContent
 			function dickF():void {
 				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [cock] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
 						"[monster He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
-						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n" +
-						"Before [monster he] can make any further protest, you plug yourself into [monster his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
-						"Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
-						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [monster him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses, and your erection deflates.\n\n" +
+						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n");
+				if(player.isTaur()){
+					outputText("You trot toward your opponent your ");
+					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" bestial equine");
+					outputText("shaft dripping plasma on the ground as your dreamily think of the of the hole you're about to plow." +
+							" This terrifying and arousing sight is enought to cause your victim to a last ditch effort to try and slowly crawl away from you on all four but soon enought the looming shadow of your throbbing [cock] is already looming over [monster his] exposed ass, dripping plasma on [monster name] back." +
+							" No longuer able to wait you plunge your ");
+					if (player.cocks[0].cockLength >= 15) outputText("massive");
+					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" horse");
+					outputText("cock into [monster his] exposed "+monster.assholeOrPussy()+" clenching your teeth and foaming at the mouth in pleasure");
+					if (player.cocks[0].cockLength >= 15){
+						outputText("as your force inches after inches of your bouncy");
+						if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" horse");
+						outputText(" cock into your the your victims warm passage, [monster his] belly deforming to the shape of your enormous shaft");
+					}
+						outputText(". Now fully sheated into your newest plug thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them." +
+							" The air crackles around you with latent, lustful shocks. You can't help but ");
+							if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText("whinny");
+							else outputText("growl");
+					outputText(" in pleasure");
+					if (player.cocks[0].cockLength >= 15) outputText(" as you plow [monster his] hole with your massive bitch breaker, the shape of your distended cock visible on [monster his] belly");
+					outputText(".\n\n");
+				}
+				else outputText("Before [monster he] can make any further protest, you plug yourself into [monster his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n");
+
+				outputText("Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [monster him]. Shot after shot of plasma fills up your hapless victim as you steadily regain your senses, and your erection deflates.\n\n" +
 						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left [themonster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
 						"You no longer have any need to stick around now that your vision is cleared, and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
 				if (monster.hasVagina())
@@ -407,7 +440,7 @@ public class UniqueSexScenes extends BaseContent
 							"Your poor victim's cock reflexively twitches around your walls as you continue pumping it eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence." +
 							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
 							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
-							"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's dick as a pool of raiju plasma floods beneath you." +
+							"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's dick as a pool of plasma floods beneath you." +
 							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down.\n\n" +
 							"Finally, you slowly unplug yourself from them, cum mixed with plasma slowly seeping out of your outlet as you give one last glance at the broken, twitching mess you've left [themonster] in." +
 							" Your unwilling partner will be a fumbling mess for a while with all that lingering charge in them." +
@@ -424,7 +457,7 @@ public class UniqueSexScenes extends BaseContent
 							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
 							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
 							"[themonster] continues flailing randomly as a familiar pressure and heat builds up within your loins." +
-							" You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's body as a pool of raiju plasma floods into [his] open mouth." +
+							" You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's body as a pool of plasma floods into [his] open mouth." +
 							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down and that of your victim heads up.\n\n" +
 							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left [themonster] in." +
 							" Your unfortunate partner will be a fumbling mess for a while with all that lingering charge in them, let alone you're not sure they are going to be able to speak again for a while." +

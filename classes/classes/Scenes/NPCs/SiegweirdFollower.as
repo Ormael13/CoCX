@@ -77,7 +77,8 @@ public function siegweirdFirstEncounterPostFightJoinYes():void
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
 	outputText("\n\n<b>Before fully settling in your camp as if remembering something Siegweird pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
-	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
+	if (!SceneLib.alvinaFollower.AlvinaPurified)
+		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) {
 		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 4;
 		doNext(camp.returnToCampUseOneHour);
@@ -129,7 +130,7 @@ public function siegweirdFirstEncounterPostFightAnotherFightLost():void
 public function siegweirdRepeatEncounterPostFight():void
 {
 	clearOutput();
-	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
+	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && !SceneLib.alvinaFollower.AlvinaPurified) {
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
 		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\" He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
@@ -138,7 +139,7 @@ public function siegweirdRepeatEncounterPostFight():void
 		outputText("\"<i>You’re going to have to pry it from my cold, dead hands, fiend.</i>\"\n\n");
 		startCombat(new Siegweird());
 	}
-	else if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) {
+	else if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && !SceneLib.alvinaFollower.AlvinaPurified) {
 		outputText("It may not be the best to have such a luminous beacon marching in your camp. Not only does his armor cause a ludicrous amount of noise, his powerful aura will surely illuminate your camp for anyone who wants to corrupt the pure. Is he really versed well enough in magic to be worth recruitment?\n\n");
 		outputText("Before you can weigh your options, he speaks up, \"<i>I would love to spend more time with you, but alas, my quarry vanished from her lair recently. I cannot settle down while evil runs rampant. I must say farewell to you, brave hero, may luck always be on your path. Perhaps one day long from now we will meet again...</i>\"\n\n");
 		outputText("He leaves without another word.\n\n");
@@ -397,11 +398,16 @@ public function siegweirdAdvancedStudy_1(usePearl:Boolean):void {
     player.destroyItems(useables.DIAMOND, 1);
     player.destroyItems(useables.S_INGOT, 1);
     outputText("You bring the ingredients to Siegweird, he inspects them carefully before nodding his head,");
-    outputText("\"<i>Amazing! This’ll take me about a day to complete... I need you to do a favor for me in the meantime. See, I wasn’t wandering the blight ridges for no reason, I was hunting a very specific demoness.</i>\"\n\n");
-    outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption, but these are only rumors. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
-    outputText("Seigweird pauses for a moment before inspecting all of the ingredients within his paw before setting it on the ground.\n\n");
-    outputText("\"<i>Hmm, this’ll be a little more difficult than I thought… You go ahead, [name]...</i>\"\n\n");
-    outputText("His hands begin glowing as he gets to work with making you the holy amulet.\n\n");
+	if (SceneLib.alvinaFollower.AlvinaPurified) {
+		outputText("“<i>Good! I will forge this item for you right now and hand it over in a day. </i> he says, pulling out a portable anvil as he starts working, waving you off.\n\n");
+		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 9;
+	} else {
+		outputText("\"<i>Amazing! This’ll take me about a day to complete... I need you to do a favor for me in the meantime. See, I wasn’t wandering the blight ridges for no reason, I was hunting a very specific demoness.</i>\"\n\n");
+		outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption, but these are only rumors. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
+		outputText("Seigweird pauses for a moment before inspecting all of the ingredients within his paw before setting it on the ground.\n\n");
+		outputText("\"<i>Hmm, this’ll be a little more difficult than I thought… You go ahead, [name]...</i>\"\n\n");
+		outputText("His hands begin glowing as he gets to work with making you the holy amulet.\n\n");
+	}
     player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
     doNext(camp.campFollowers);
     eachMinuteCount(5);
@@ -411,9 +417,9 @@ public function siegweirdAdvancedStudy_1(usePearl:Boolean):void {
 public function siegweirdAdvancedStudy_2():void {
     clearOutput();
     outputText("Siegweird notices your presence and stops hammering on his portable anvil to look at you with a cheerful smile… or at least what you can see through the small hole in his helmet.\n\n");
-    outputText("\"<i>Hey hello [name]!I finished your holy symbol, it should empower your white magic ability further. Consider this your graduation gift.</i>\"\n\n");
+    outputText("\"<i>Hey hello [name]! I finished your holy symbol, it should empower your white magic ability further. Consider this your graduation gift.</i>\"\n\n");
     outputText("He brings over the fruits of his labor and hands it to you. The holy symbol shines with an inner light that simply cannot be snuffed out. You feel serene and safe with this item on you and thank Siegweird for it.\n\n");
-    outputText("\"<i>No need to thank me friend. Say I think I will stay in your camp a little longer. There's enough imps around here to keep me working for weeks! Also I will prepare a curative soup every day, so feel free to come by and take a bowl.</i>\"\n\n");
+    outputText("\"<i>No need to thank me friend. Say, I think I will stay in your camp a little longer. There's enough imps around here to keep me working for weeks! Also I will prepare a curative soup every day, so feel free to come by and take a bowl.</i>\"\n\n");
     outputText("<b>You gained a Holy Symbol. +20% to white spells and white healing magic spellpower.</b>\n\n");
     player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
     player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
@@ -425,14 +431,14 @@ public function siegweirdAdvancedStudy_2():void {
 public function siegweirdAdvancedStudy_3():void {
     clearOutput();
 	if (SceneLib.alvinaFollower.AlvinaPurified) {
-		outputText("Siegweird notices the presence of the purified Alvina and looks at her askance. \"<i>She... she doesnt appear to be corrupt anymore? How on earth you managed to pull that off I can never begin to imagine... I still dont know if she can be trusted or might one day fall to her old ways, but for now I shall wait and see.</i>\"\n\n");
+		outputText("\"<i>Oh this reminds, me I found a magic tome in some ruins containing a very powerful white magic spell to reward you with for handling a tiny job for me, but seeing as the target mysteriously vanished from the face of Mareth a while ago</i>\" he says, glancing at Alvina, \"<i>I think you would make good use of it. At least better than I do, I barely know how to use paladin magic as is.</i>\"\n\n");
 	} else {
 		player.removeKeyItem("Alvina's Shattered Phylactery");
 		outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
+		outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
+		outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
+		outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
 	}
-    outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
-    outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
-    outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
     outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");
     player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
     inventory.takeItem(consumables.MET_SHO, camp.campFollowers);

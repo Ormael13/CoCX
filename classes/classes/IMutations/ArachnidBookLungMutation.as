@@ -46,10 +46,15 @@ import classes.Races;
             return mName + sufval;
         }
 
+        override public function evolveText():String {
+            var descS:String = "\nYou feel change overcoming your body. It would seem your symbiotic relationship with your err… was it your upper or lower half… has improved? Your webs are more voluminous while your venom is thicker and more potent. You could bite and weave for days right now.";
+            return descS;
+        }
+
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -68,7 +73,7 @@ import classes.Races;
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             else if (pTier == 2) pBuffs['int.mult'] = 0.15;

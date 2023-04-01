@@ -101,7 +101,7 @@ import classes.display.SpriteDb;
 				else outputText("hair ");
 				outputText("pulls you back halfway, but as you open your mouth to yell, the ground gives a quiet thump.  Just barely in your periphery, you see a white apparition with a yawning mouth stretching out to bite, and your reflexes take over, dropping your weight and rolling you away from it.\n\n");
 				outputText("\"<i>Clever little pet,</i>\" the phantom spits, resolving into the shape of a drider as your eyes focus and your adrenaline haze clears.  Raising a cupped hand to her ghoulishly grinning mouth, she laughs into it; a minute shivering in the air reveals the taut threads of silk attached to her finger.  The vibrations travel down them, shaking several silk-tied leaves and producing the raspy, laughing audience from before.  \"<i>It'd be so much easier on you if you'd just walked into the trap, sweetness.</i>\"\n\n");
-				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and Lily looks to be no different.");
+				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and "+(LilyTalked > 0 ? "Lily":"this one")+" looks to be no different.");
 			}
 			else {
 				LilyHairColor = randomChoice("red", "orange", "green");
@@ -517,7 +517,7 @@ import classes.display.SpriteDb;
 			outputText("<i>\"[master]! I want your seed, [Master]! Fill me up! Make me your little spider-bitch! I want your eggs, your-Ahhh!\"</i> Her orgasm tightens, even harder than the last, and you finally give out, unable to keep your own lust down as your [cock] twitches, blasting load after suppressed load into your spider lover’s quivering pussy. <i>\"So...Warm…\"</i>\n\n");
 			outputText("Lily orgasms again, shameless as her walls milk your [cock] for all they’re worth. You ride out your high, then pull out. Lily’s stomach is slightly bigger than before, and the way her eyes are rolled back, leave little doubt in your mind that she thoroughly enjoyed this. Your spooge trickles out from Lily’s well-fucked hole, and the insensate Drider’s legs fold, dropping her to the ground.\n\n");
 			outputText("You look at the back of your cabin. The entire back wall is covered with strands of Drider-silk, fresh from Lily’s hole. Deciding that your cabin should be clean, you scrape the silk off the wall before you leave.\n\n");
-			if (LilyFollowerState && DriderTown.LilyKidsPCPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.LilyKidsPCPregnancy = 72;
+			knockUpLily();
 			lilySubmissiveness(5);
 			lilyAffection(5);
 			player.sexReward("vaginalFluids","Dick");
@@ -798,6 +798,12 @@ import classes.display.SpriteDb;
 			chance += Math.min(player.cumQ() / 25,40);
 			chance += Math.min(player.virilityQ() * 100, 50);
 			return chance;
+		}
+		private function knockUpLily():void {
+			if (LilyFollowerState && DriderTown.LilyKidsPCPregnancy == 0 && rand(100) < chanceToFail()) {
+				DriderTown.LilyKidsPCPregnancy = 72;
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Lily is pregnant!</b>");
+			}
 		}
 		
 		public function LilyCampFollower(back:Boolean = false):void {

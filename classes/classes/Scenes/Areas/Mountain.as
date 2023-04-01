@@ -14,9 +14,10 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
-import classes.Scenes.Holidays;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
@@ -63,7 +64,7 @@ public class Mountain extends BaseContent
 				name: "common",
 				chance: 0.8,
 				call: function ():void{
-					if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+					if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
 					else SceneLib.exploration.genericGolGobImpEncounters();
 				}
 			}, {
@@ -76,7 +77,7 @@ public class Mountain extends BaseContent
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
@@ -85,6 +86,28 @@ public class Mountain extends BaseContent
 					if (flags[kFLAGS.ETNA_AFFECTION] < 2) SceneLib.etnaScene.firstEnc();
 					else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) SceneLib.etnaScene.repeatYandereEnc();
 					else SceneLib.etnaScene.repeatEnc();
+				}
+			}, {
+				name  : "etna1",
+				when  : function():Boolean {
+					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 0)
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
+						   && (player.level >= 20);
+				},
+				chance: 0.5,
+				call  : function ():void {
+					 SceneLib.etnaScene.etnaInfidelityEncounter();
+				}
+			}, {
+				name  : "etna2",
+				when  : function():Boolean {
+					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 1)
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
+						   && (player.level >= 20);
+				},
+				chance: 0.1,
+				call  : function ():void {
+					 SceneLib.etnaScene.etnaInfidelityEncounterRepeat();
 				}
 			}, {
 				name  : "alvina1",
@@ -133,7 +156,7 @@ public class Mountain extends BaseContent
 			},{
 				name:"factory",
 				when:function():Boolean {
-					return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
+					return flags[kFLAGS.MARAE_QUEST_START] >= 0.5 && flags[kFLAGS.FACTORY_FOUND] <= 0;
 				},
 				call: SceneLib.dungeons.factory.enterDungeon
 			},{
@@ -172,7 +195,14 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			});
+			}/*, {
+				name: "demonProjects",
+						chance: 0.2,
+						when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			}*/);
 			_lowmountainEncounter = Encounters.group("low mountains", {
 				//General Angels, Goblin and Imp Encounters
 				name: "common",
@@ -256,7 +286,7 @@ public class Mountain extends BaseContent
 					//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
 					var check1:Boolean = player.faceType == Face.DOG && player.cor >= 60;
 					var check2:Boolean = player.dogCocks() >= 2
-										 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND);
+										 || (player.hasVagina() && (player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND || player.pregnancy2Type == PregnancyStore.PREGNANCY_HELL_HOUND));
 					var check3:int = (player.tail.type == Tail.DOG ? 1 : 0) +
 									 (player.lowerBody == LowerBody.DOG ? 1 : 0) +
 									 (player.hairColor == "midnight black" ? 1 : 0);
@@ -317,14 +347,14 @@ public class Mountain extends BaseContent
 				call  : SceneLib.mindbreaker.findMindbreaker,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
-					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
+					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && !player.blockingBodyTransformations()
 				}
 			}, {
 				name  : "mindbreaker",
 				call  : SceneLib.mindbreaker.findMindbreakerAgain,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
-					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
+					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && !player.blockingBodyTransformations()
 				}
 			}, {
 				name:"hike",
@@ -335,8 +365,21 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			});
-			_mountainEncounter = Encounters.group("mountain", {/*
+			}/*, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			}*/);
+			_mountainEncounter = Encounters.group("mountain", {
+				name: "demonlab",
+				when: function ():Boolean {
+					return flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
+				},
+				call: SceneLib.dungeons.demonLab.discoverDemonLab
+			},{/*
 				//General Angels, Golems, Goblin and Imp Encounters
 				name: "common",
 				chance: 0.8,
@@ -425,7 +468,7 @@ public class Mountain extends BaseContent
 			}, {
 				name: "darkelf",
 				call: darkelfScene.introDarkELfRanger
-			},{/*
+			}, {/*
 				name: "lactoblasters",
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Lactoblasters") < 0;
@@ -445,7 +488,14 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			});
+			}/*, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			}*/);
 		}
 		public function findMindbreakerChance():Number {
 			var fMC:Number = 5;
@@ -570,7 +620,12 @@ public class Mountain extends BaseContent
 				}
 				//Rare Minotaur Lord
 				if (rand(5) == 0 && player.level >= 10) {
+					if (player.isRaceCached(Races.CERBERUS)) {
+						minotaurScene.minotaurEncounterAsCerberus(true);
+						return;
+					}
 					clearOutput();
+					sceneHunter.print("Check failed: Cerberus race.");
 					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!");
 					startCombat(new MinotaurLord());
 					return;

@@ -58,21 +58,21 @@ public class AntRace extends Race {
         addMutation(IMutationsLib.TrachealSystemIM);
 				
 		
-		buildTier(8, "ant-morph")
+		buildTier(10, "ant-morph")
 				.buffs({
-					"str.mult": +1.00,
+					"str.mult": +1.40,
                     "tou.mult": +0.70,
-					"int.mult": -0.70,
-                    "wis.mult": -0.60
+					"int.mult": -0.30,
+                    "wis.mult": -0.30
 				})
 				.end();
 		
-		buildTier(12, "formicidian")
+		buildTier(14, "formicidian")
 				.buffs({
-					"str.mult": +1.5,
-					"tou.mult": +1.20,
-					"int.mult": -0.70,
-                    "wis.mult": -0.60
+					"str.mult": +2.00,
+					"tou.mult": +0.90,
+					"int.mult": -0.40,
+                    "wis.mult": -0.40
 				})
 				.end();
 	}

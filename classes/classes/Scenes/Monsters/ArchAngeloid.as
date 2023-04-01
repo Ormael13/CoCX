@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
+	import classes.internals.ChainedDrop;
 	
 	public class ArchAngeloid extends AbstractAngel
 	{
@@ -160,12 +161,14 @@ package classes.Scenes.Monsters
 				this.short = "high-rank archangeloid";
 			}
 			this.tallness = 30;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop()
+					.add(useables.SRESIDUE, 1);
 			this.level = 12;
 			this.weaponName = "energy blast";
 			this.weaponVerb = "shoot";
 			this.armorName = "skin";
 			this.wings.type = Wings.FEATHERED_AVIAN;
+			if (player.cor < 67) this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 9, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			checkMonster();

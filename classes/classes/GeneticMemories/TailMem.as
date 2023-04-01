@@ -73,6 +73,28 @@ import classes.CoC;
 			}
 		});
 
+		public static const AVIAN:int = _partid++;
+		EnumValue.add(Memories, AVIAN, "AVIAN", {
+			id: "Avian Tail",
+			name: "Avian Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Avian",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailAvian;
+			}
+		});
+
+		public static const AZAZEL:int = _partid++;
+		EnumValue.add(Memories, AZAZEL, "AZAZEL", {
+			id: "Azazel Tail",
+			name: "Azazel Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Azazel",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailAzazel;
+			}
+		});
+
 		public static const BEE_ABDOMEN:int = _partid++;
 		EnumValue.add(Memories, BEE_ABDOMEN, "BEE_ABDOMEN", {
 			id: "Bee Tail",
@@ -81,6 +103,17 @@ import classes.CoC;
 			title: "Bee",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailBee;
+			}
+		});
+
+		public static const BEAR:int = _partid++;
+		EnumValue.add(Memories, BEAR, "BEAR", {
+			id: "Bear Tail",
+			name: "Bear Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Bear",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailBear;
 			}
 		});
 
@@ -151,6 +184,17 @@ import classes.CoC;
 			}
 		});
 
+		public static const DEER:int = _partid++;
+		EnumValue.add(Memories, DEER, "DEER", {
+			id: "Deer Tail",
+			name: "Deer Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Deer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailDeer;
+			}
+		});
+
 		public static const DOG:int = _partid++;
 		EnumValue.add(Memories, DOG, "DOG", {
 			id: "Dog Tail",
@@ -181,6 +225,17 @@ import classes.CoC;
 			title: "Fey Draconic",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailFeyDraconic;
+			}
+		});
+
+		public static const FERRET:int = _partid++;
+		EnumValue.add(Memories, FERRET, "FERRET", {
+			id: "Ferret Tail",
+			name: "Ferret Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Ferret",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailFerret;
 			}
 		});
 
@@ -305,6 +360,17 @@ import classes.CoC;
 			}
 		});
 
+		public static const GRIFFIN:int = _partid++;
+		EnumValue.add(Memories, GRIFFIN, "GRIFFIN", {
+			id: "Griffin Tail",
+			name: "Griffin Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Griffin",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailGriffin;
+			}
+		});
+
 		public static const HARPY:int = _partid++;
 		EnumValue.add(Memories, HARPY, "HARPY", {
 			id: "Harpy Tail",
@@ -348,6 +414,17 @@ import classes.CoC;
 			info: "Add a Hydra tail-head",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailHydra;
+			}
+		});
+
+		public static const KANGAROO:int = _partid++;
+		EnumValue.add(Memories, KANGAROO, "KANGAROO", {
+			id: "Kangaroo Tail",
+			name: "Kangaroo Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Kangaroo",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailKangaroo;
 			}
 		});
 
@@ -560,6 +637,17 @@ import classes.CoC;
 			}
 		});
 
+		public static const RABBIT:int = _partid++;
+		EnumValue.add(Memories, RABBIT, "RABBIT", {
+			id: "Rabbit Tail",
+			name: "Rabbit Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Rabbit",
+			info: "Add a Rabbit tail",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailRabbit;
+			}
+		});
 
 		public static const RACCOON:int = _partid++;
 		EnumValue.add(Memories, RACCOON, "RACCOON", {
@@ -639,6 +727,28 @@ import classes.CoC;
 			}
 		});
 
+		public static const SQUIRREL:int = _partid++;
+		EnumValue.add(Memories, SQUIRREL, "SQUIRREL", {
+			id: "Squirrel Tail",
+			name: "Squirrel Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Squirrel",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailSquirrel;
+			}
+		});
+
+		public static const THUNDERBIRD:int = _partid++;
+		EnumValue.add(Memories, THUNDERBIRD, "THUNDERBIRD", {
+			id: "Thunderbird Tail",
+			name: "Thunderbird Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Thunderbird",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailThunderbird;
+			}
+		});
+
 		public static const TWINKASKA:int = _partid++;
 		EnumValue.add(Memories, TWINKASKA, "TWINKASKA", {
 			id: "Twin Burning Tail",
@@ -647,6 +757,17 @@ import classes.CoC;
 			title: "Twin Burning",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailTwinkasha;
+			}
+		});
+
+		public static const USHI_ONI:int = _partid++;
+		EnumValue.add(Memories, USHI_ONI, "USHI_ONI", {
+			id: "Ushi Oni Tail",
+			name: "Ushi Oni Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Ushi Oni",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailUshiOni;
 			}
 		});
 
@@ -669,6 +790,17 @@ import classes.CoC;
 			title: "Wolf",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.TailWolf;
+			}
+		});
+
+		public static const YGGDRASIL:int = _partid++;
+		EnumValue.add(Memories, YGGDRASIL, "YGGDRASIL", {
+			id: "Ygddrasil Tail",
+			name: "Ygddrasil Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Ygddrasil",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailYgddrasil;
 			}
 		});
 

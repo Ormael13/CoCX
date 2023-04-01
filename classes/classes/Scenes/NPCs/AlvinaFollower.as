@@ -10,6 +10,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
+import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.Holidays;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -33,9 +34,11 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public var SecondDateSuccess:Boolean;
 	public var FightForAlvina:Boolean;
 	public var AlvinaFightingToCorruptYou:Boolean;
+	public var AlvinaDied:Boolean;
 	public var AlvinaPurified:Boolean;
 	public var AlvinaInfernalOilAsked:Boolean;
 	public var AlvinaInfernalOilCooldown:int;
+	public var AlvinaGaveScroll:Boolean;
 
 	public function stateObjectName():String {
 		return "AlvinaFollower";
@@ -56,31 +59,35 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 		SecondDateSuccess = false;
 		FightForAlvina = false;
 		AlvinaFightingToCorruptYou = false;
+		AlvinaDied = false;
 		AlvinaPurified = false;
 		AlvinaInfernalOilAsked = false;
 		AlvinaInfernalOilCooldown = 0;
+		AlvinaGaveScroll = false;
 	}
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 		if (o) {
-			JojoDevilPurification = "JojoDevilPurification" in o ? o["JojoDevilPurification"] : 0;
-			DefeatedAlvinaFirstStage = "DefeatedAlvinaFirstStage" in o ? o["DefeatedAlvinaFirstStage"] : false;
-			GaveAlvinaFafnirTear = "GaveAlvinaFafnirTear" in o ? o["GaveAlvinaFafnirTear"] : false;
-			GaveAlvinaFlowers = "GaveAlvinaFlowers" in o ? o["GaveAlvinaFlowers"] : false;
-			GaveAlvinaChocolate = "GaveAlvinaChocolate" in o ? o["GaveAlvinaChocolate"] : false;
-			GaveAlvinaMrPaw = "GaveAlvinaMrPaw" in o ? o["GaveAlvinaMrPaw"] : false;
-			GaveAlvinaWand = "GaveAlvinaWand" in o ? o["GaveAlvinaWand"] : false;
-			MetAlvinaAtBar = "MetAlvinaAtBar" in o ? o["MetAlvinaAtBar"] : false;
-			GiftCooldown = "GiftCooldown" in o ? o["GiftCooldown"] : 0;
-			WandCooldown = "WandCooldown" in o ? o["WandCooldown"] : 0;
-			DateFailed = "DateFailed" in o ? o["DateFailed"] : false;
-			FirstDateSuccess = "FirstDateSuccess" in o ? o["FirstDateSuccess"] : false;
-			SecondDateSuccess = "SecondDateSuccess" in o ? o["SecondDateSuccess"] : false;
-			FightForAlvina = "FightForAlvina" in o ? o["FightForAlvina"] : false;
-			AlvinaFightingToCorruptYou = "AlvinaFightingToCorruptYou" in o ? o["AlvinaFightingToCorruptYou"] : false;
-			AlvinaPurified = "AlvinaPurified" in o ? o["AlvinaPurified"] : false;
-			AlvinaInfernalOilAsked = "AlvinaInfernalOilAsked" in o ? o["AlvinaInfernalOilAsked"] : false;
-			AlvinaInfernalOilCooldown = "AlvinaInfernalOilCooldown" in o ? o["AlvinaInfernalOilCooldown"] : 0;
+			JojoDevilPurification = valueOr(o["JojoDevilPurification"], 0);
+			DefeatedAlvinaFirstStage = valueOr(o["DefeatedAlvinaFirstStage"], false);
+			GaveAlvinaFafnirTear = valueOr(o["GaveAlvinaFafnirTear"], false);
+			GaveAlvinaFlowers = valueOr(o["GaveAlvinaFlowers"], false);
+			GaveAlvinaChocolate = valueOr(o["GaveAlvinaChocolate"], false);
+			GaveAlvinaMrPaw = valueOr(o["GaveAlvinaMrPaw"], false);
+			GaveAlvinaWand = valueOr(o["GaveAlvinaWand"],false);
+			MetAlvinaAtBar = valueOr(o["MetAlvinaAtBar"], false);
+			GiftCooldown = valueOr(o["GiftCooldown"], 0);
+			WandCooldown = valueOr(o["WandCooldown"], 0);
+			DateFailed = valueOr(o["DateFailed"], false);
+			FirstDateSuccess = valueOr(o["FirstDateSuccess"], false);
+			SecondDateSuccess = valueOr(o["SecondDateSuccess"], false);
+			FightForAlvina = valueOr(o["FightForAlvina"], false);
+			AlvinaFightingToCorruptYou = valueOr(o["AlvinaFightingToCorruptYou"], false);
+			AlvinaDied = valueOr(o["AlvinaDied"], false);
+			AlvinaPurified = valueOr(o["AlvinaPurified"], false);
+			AlvinaInfernalOilAsked = valueOr(o["AlvinaInfernalOilAsked"], false);
+			AlvinaInfernalOilCooldown = valueOr(o["AlvinaInfernalOilCooldown"], 0);
+			AlvinaGaveScroll = valueOr(o["AlvinaGaveScroll"],false);
 		} else resetState();
 	}
 
@@ -101,9 +108,11 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 			"SecondDateSuccess": SecondDateSuccess,
 			"FightForAlvina": FightForAlvina,
 			"AlvinaFightingToCorruptYou": AlvinaFightingToCorruptYou,
+			"AlvinaDied" : AlvinaDied,
 			"AlvinaPurified": AlvinaPurified,
 			"AlvinaInfernalOilAsked": AlvinaInfernalOilAsked,
-			"AlvinaInfernalOilCooldown": AlvinaInfernalOilCooldown
+			"AlvinaInfernalOilCooldown": AlvinaInfernalOilCooldown,
+			"AlvinaGaveScroll": AlvinaGaveScroll
 		}
 	}
 
@@ -215,7 +224,7 @@ public function alvinaThirdEncounter():void
 {
 	clearOutput();
 	outputText("As you wander the blight ridges, you stumble upon what looks to be a cave. Bright purple lights flash in its depths and various magical runes are etched onto the entrance. Do you dare enter? It looks like whatever lies in this cave is extremely dangerous.\n\n");
-	if (SecondDateSuccess) outputText("If you plan to save Alvina from herself, make sure to have the Pure Pearl on you.")
+	if (SecondDateSuccess) outputText("You have a feling Marae's Pure Pearl could be useful here.")
 	menu();
 	addButton(0, "No", alvinaThirdEncounterNo);
 	addButton(4, "Yes", alvinaThirdEncounterYes);
@@ -228,6 +237,7 @@ public function alvinaThirdEncounterNo():void
 }
 public function alvinaThirdEncounterYes():void
 {
+	clearOutput();
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	outputText("Against your better judgment, you enter the cave. You proceed down into the depths, getting ever closer to the source of the lights.\n\nYou finally reach a large room filled with what looks to be various magical implements. ");
 	outputText("This is clearly the laboratory of a wizard and not the good kind. Pentagrams are etched everywhere. There's clearly humanoid bones on a table, and the room itself is decorated with quite a few Lethicite crystals -- proof of its owner's fiendish successes. You turn to leave the room, having seen more than enough, when you bump into a wall that wasn’t there earlier.\n\n");
@@ -268,7 +278,7 @@ public function alvinaThirdEncounterYesContinue():void
 	menu();
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 4) addButtonDisabled(0, "Sure", "There's no way you would be able to have HER in your camp at the same time as Siegweird. He'd kill her or she'd kill him.");
 	else addButton(0, "Sure", alvinaThirdEncounterYesSure);
-	//if (SecondDateSuccess) addButton(3, "Stop It!", alvinaDontFight);
+	if (SecondDateSuccess) addButton(3, "Stop It!", alvinaDontFight);
 	addButton(4, "Never", alvinaThirdEncounterYesNever);
 }
 public function alvinaThirdEncounterYesSure():void
@@ -333,8 +343,6 @@ public function alvinaThirdEncounterYesNeverWon():void
 		outputText("“<i>Checkmates uh… I guess that's just what I deserve for all the things I've done... tsk some justice this world has. Mother... Dad... I'm coming home at last.\"</i>\n\n");
 		outputText("Her shape starts to bloat with light as the immense powers she used to control overwhelms her. Alvina seems to silently accept death before exploding in a conflagration of arcane magic turning to ashes.\n\n");
 		outputText("You turn your eyes away, nauseated at the scene… This is what happens to those who play with forbidden powers, quite a fitting end. You prepare to leave the cave feeling like you have rid Mareth of a powerful villain but before you do you grab the shattered remains of Alvina phylactery with you. Someone is bound to know what to do with this.\n\n");
-		awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
-		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 		alvinaDies(camp.returnToCampUseSixHours);
 	}
 }
@@ -342,6 +350,10 @@ private function alvinaDies(next:Function):void {
 	outputText("\n<b>Found Alvina's Shattered Phylactery</b>\n\n");
 	player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
 	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
+	AlvinaDied = true;
+	awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
+	if (flags[kFLAGS.GAME_DIFFICULTY] >= 4)
+		awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 	if (flags[kFLAGS.GAME_DIFFICULTY] >= 2)
 		inventory.takeItem(weapons.ATWINSCY, next);
 	else doNext(next);
@@ -377,9 +389,7 @@ public function alvinaThirdEncounterYesNeverLostNightmare():void
 public function alvinaThirdEncounterPutHerOutOfHerMisery():void
 {
 	outputText("With one decisive strike you stomp on Alvina's chest causing the pendant at her neck to crack and break into so many shards of purple crystals. Alvina's body, as if unable to sustain further damage, simply explodes into a shower of ashes and embers. You prepare to leave the cave feeling like you have rid Mareth of a powerful villain but before you do you grab the shattered remains of Alvina phylactery with you. Someone is bound to know what to do with this.");
-	player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
-	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
-	doNext(camp.returnToCampUseSixHours);
+	alvinaDies(camp.returnToCampUseSixHours);
 }
 public function alvinaThirdEncounterTakeHer():void
 {
@@ -389,7 +399,19 @@ public function alvinaThirdEncounterTakeHer():void
 
 	//Bar enconuter scenes
 	public function alvinaCanMeetAtBar():Boolean {
-		return GiftCooldown <= 0 && !DateFailed && flags[kFLAGS.ALVINA_FOLLOWER] >= 1 && flags[kFLAGS.ALVINA_FOLLOWER] < 12;
+		return GiftCooldown <= 0 && !DateFailed && !SecondDateSuccess && flags[kFLAGS.ALVINA_FOLLOWER] >= 1 && flags[kFLAGS.ALVINA_FOLLOWER] < 13 && !AlvinaDied;
+	}
+	public function alvinaOnGiftCooldown():Boolean {
+		return (GiftCooldown > 0);
+	}
+	public function alvinaGiftCooldownDescription():void {
+		outputText("\n\nYou wonder why Alvna ran out of the bar like she did and when you will see her again.")
+	}
+	public function alvinaWaitingAtRavine():Boolean {
+		return SecondDateSuccess && !AlvinaPurified && flags[kFLAGS.ALVINA_FOLLOWER] == 12;
+	}
+	public function alvinaWaitingAtRavineDescription():void {
+		outputText("\n\nAlvina told you to find her at the Defiled Ravine, yuo suppose tht means the end of her meeting you here at the bar.")
 	}
 	public function alvinaBarDescription():void {
 		if (!MetAlvinaAtBar) outputText("\n\nA tall but slim figure in a hooded robe sits by the bar reading a book while nursing a mug of ale.");
@@ -398,7 +420,6 @@ public function alvinaThirdEncounterTakeHer():void
 	public function alvinaMeetAtBar():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
-		outputText("You sit right next to her, and she closes her book in response, turning to you.\n\n");
 		if (!MetAlvinaAtBar){
 			MetAlvinaAtBar = true;
 			outputText("You approach the cloaked figure and recognise her from before. It's Alvina the wanderer you met out in the wild. She is currently busy reading a book but is swift to acknowledge your presence when you sit right next to her. Adjusting her glasses and turning her green gaze toward you with an amused smile.[pg]");
@@ -406,6 +427,8 @@ public function alvinaThirdEncounterTakeHer():void
 			outputText("You provide Alvina with all the details of your recent exploration.[pg]");
 			outputText("\"<i>Not bad, you might just make it out there. So [name], anything I can do for you today?</i>\"[pg]");
 		}
+		else
+			outputText("You sit right next to her, and she closes her book in response, turning to you.\n\n");
 		if (gaveAnyPresent()) outputText("\"<i>Ah [name], how nice to see you. ");
 		else outputText("\"Ah [name], a welcome sight indeed. ");
 		outputText("What can I do for you today?</i>\"\n\n");
@@ -545,7 +568,7 @@ public function alvinaThirdEncounterTakeHer():void
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
 		outputText("You ask out Alvina for a date.\n\n");
-		outputText("\"<i>>hat the? Are you sure you are interested in me? I mean I'm a shut in goggle eyed wizard nothing else surely there's plenty of others around you could fancy?</i>\"\n\n");
+		outputText("\"<i>What the? Are you sure you are interested in me? I mean I'm a shut in goggle eyed wizard nothing else surely there's plenty of others around you could fancy?</i>\"\n\n");
 		outputText("No, you indeed are asking HER out. Is there a problem with that?\n\n");
 		outputText("Alvina is shocked and confused but decides to nod to your invitation regardless. The two of you go out sightseeing the entire city for the next few hours and even stop at the bakery to share desserts. At the end of the day you climb up a building and take a look at the sky.\n\n");
 		outputText("\"<i>Well I had forgotten how beautiful the stars are with the clouds covering the sky and what not. You clearing the factory that was spraying cloudy fumes all over the place is a blessing.</i>\"\n\n");
@@ -600,7 +623,7 @@ public function alvinaThirdEncounterTakeHer():void
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
 		outputText("You ask Alvina out for a date.\n\n");
-		outputText("\"<i>The savior of Mareth and slayer of Lethice her/himself ask me out on a date? Are you sure you're not trying to drive all the free partners in Tel'adre red with jealousy? Wh am I kidding, sure ill accept.</i>\"\n\n");
+		outputText("\"<i>The savior of Mareth and slayer of Lethice [herself] ask me out on a date? Are you sure you're not trying to drive all the free partners in Tel'adre red with jealousy? Wh am I kidding, sure ill accept.</i>\"\n\n");
 		outputText("The two of you go out sightseeing the entire city for the next few hours and even stop at the bakery to share desserts. At the end of the day you climb up a building and take a look at the sky while holding her hand.\n\n");
 		outputText("\"<i>I still remember the last time we climbed this building… You showed me the stars and we talked about philosophy of all things. After all this adventure, you still came back to me, the goggles eyed shut in. Why?</i>\"\n\n");
 
@@ -633,21 +656,41 @@ public function alvinaThirdEncounterTakeHer():void
 	public function alvinaDontFight():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
-		outputText("You tell her to stop it. Drop the act. Alvina is lying to herself trying to act tough right now but in reality you already know on what soil she bases her conviction. She can feel like you, think like you! She also has a soul like you.");
-		//outputText("(not included pre crammed school dungeon)You've been to the crammed school you've seen everything she's lived through.(end of cut)");	//TODO Cram school?
-		outputText(" You also saw her reactions to the flower and the teddy bear. Why is she still trying to pretend she's the villain in the story?!\n\n");
-		outputText("\"<i>You idiot! I killed and manipulated hundreds of people for my goals, made pacts with fiends and did unethical experiments on folks in my pursuit for immortality and power. My quest gave birth to black magic and even the demon's. I was the one who advised Lethice into researching it in the first place yet YOU still can't see all the blood dripping from my clawed hands?! I'm far from a good person [name] but I transcended death and mortality so that I could set everything in this messed up world right! I am PERFECT and you COULD be too! Just become my apprentice and live forever at my side! You won't even need to feel, those feelings make you imperfect, they make you weak like all those sex crazed demons out there! My perfect [name] would never be like that!</i>\"\n\n");
-		outputText("Is this really what she wants? She can't possibly think that even now. Not after she recoiled when you told her the beauty of impermanence and living like every day was your last. What about her feelings. She pretends she can't feel but clearly she likes you and that's a feeling in itself heck come to think of it, hasn't she been shadowing you this whole time for this very reason? Everytime you hit a wall in your search she was there to give you hints.\n\n");
-		outputText("\"<i>That's because I needed you to take Lethice down! With that moron out of the picture I can finally proceed toward phase two of my plan for a perfect world. A world of immortal beings that need not to love nor hate! A world without death or pain!</i>\"\n\n");
-		outputText("Does she truly believe that? You can tell her whole argument is self contradictory and flawed. Who is she even trying to convince anymore? A world without emotion would be no better than dead. You know that, and most of all she knows that.\n\n");
-		outputText("She laughs but it sounds hollow… empty like all strength and will to argue has left her.\n\n");
-		outputText("\"<i>You are right indeed, however I am the beginning and the end of your quest [name], the one who started it all… you're right, I have been lying so hard to myself, desperately clinging to this final escape to my reality… I'm far too tired of this existence [name]… I've just been desperately trying to delude myself into believing that I'm not… those past two hundred years… my only remaining sibling was the price for them and only now do I truly regret everything. I may as well have spent that time in hell. This pendant right here is all that ties me to this world.</i>\"\n\n");
-		outputText("Alvina clutches her necklace firmly, then staring at you with determination, grabbs her weapon.\n\n");
-		outputText("\"<i>I'm too far gone to go back on my ways now [name]. If your ideals are worth dying for… then fight for them. I would hate to put you down, but for the sake of my own goals I have to put you to the test. Show me the strength of your resolve and the power of all that which you believe in! If your ideals are so great that you are willing to die for them then back up your words with actions!</i>\"\n\n");
-		outputText("On these words Alvina aura flares with a pillar of raw magic power transforming into a whole new form easily over 10 ft tall her wings unfold as the magic from her aura spreads to the ground beneath her and catches fire setting the whole room ablaze. Amidst this vision of hell Alvina stands proudly, her weapon split into a pair of battle scythes which she holds in each hand.");
-		outputText(player.tallness < 9*12 ? " She's practically towering above you.\n\n":"\n\n");
-		outputText("\"<i>Come -pcname- let us settle this debate once and for all...</i>\"\n\n");
-		outputText("She might be the strongest opponent you've faced yet but for your and her sake you have to stop her.\n\n\n");
+		if (flags[kFLAGS.ALVINA_DIARY] >= 4) {
+			outputText("You tell her to stop it. Drop the act. Alvina is lying to herself trying to act tough right now but in reality you already know on what soil she bases her conviction. She can feel like you, think like you! She also has a soul like you.");
+			//outputText("(not included pre crammed school dungeon)You've been to the crammed school you've seen everything she's lived through.(end of cut)");	//TODO Cram school?
+			if (FirstDateSuccess) outputText(" You also saw her reactions to the flower and the teddy bear. ");
+			outputText("Why is she still trying to pretend she's the villain in the story?!\n\n");
+			outputText("\"<i>You idiot! I killed and manipulated hundreds of people for my goals, made pacts with fiends and did unethical experiments on folks in my pursuit for immortality and power. My quest gave birth to black magic and even the demon's. I was the one who advised Lethice into researching it in the first place yet YOU still can't see all the blood dripping from my clawed hands?! I'm far from a good person [name] but I transcended death and mortality so that I could set everything in this messed up world right! I am PERFECT and you COULD be too! Just become my apprentice and live forever at my side! You won't even need to feel, those feelings make you imperfect, they make you weak like all those sex crazed demons out there! My perfect [name] would never be like that!</i>\"\n\n");
+			outputText("Is this really what she wants? She can't possibly think that even now. ");
+			if (SecondDateSuccess) outputText("Not after she recoiled when you told her the beauty of impermanence and living like every day was your last. ");
+			outputText("What about her feelings? She pretends she can't feel but clearly she likes you and that's a feeling in itself; heck come to think of it, hasn't she been shadowing you this whole time for this very reason? Everytime you hit a wall in your search she was there to give you hints.\n\n");
+			outputText("\"<i>That's because I needed you to take Lethice down! With that moron out of the picture I can finally proceed toward phase two of my plan for a perfect world. A world of immortal beings that need not to love nor hate! A world without death or pain!</i>\"\n\n");
+			outputText("Does she truly believe that? You can tell her whole argument is self contradictory and flawed. Who is she even trying to convince anymore? A world without emotion would be no better than dead. You know that, and most of all she knows that.\n\n");
+			outputText("She laughs but it sounds hollow… empty like all strength and will to argue has left her.\n\n");
+			outputText("\"<i>You are right indeed, however I am the beginning and the end of your quest [name], the one who started it all… you're right, I have been lying so hard to myself, desperately clinging to this final escape to my reality… I'm far too tired of this existence [name]… I've just been desperately trying to delude myself into believing that I'm not… those past two hundred years… my only remaining sibling was the price for them and only now do I truly regret everything. I may as well have spent that time in hell. This pendant right here is all that ties me to this world.</i>\"\n\n");
+			outputText("Alvina clutches her necklace firmly, then staring at you with determination, grabs her weapon.\n\n");
+			outputText("\"<i>I'm too far gone to go back on my ways now [name]. If your ideals are worth dying for… then fight for them. I would hate to put you down, but for the sake of my own goals I have to put you to the test. Show me the strength of your resolve and the power of all that which you believe in! If your ideals are so great that you are willing to die for them then back up your words with actions!</i>\"\n\n");
+			outputText("On these words Alvina's aura flares with a pillar of raw magic power, transforming into a whole new form easily over 10 ft tall, her wings unfold as the magic from her aura spreads to the ground beneath her and catches fire setting the whole room ablaze. Amidst this vision of hell, Alvina stands proudly, her weapon split into a pair of battle scythes which she holds in each hand.");
+			outputText(player.tallness < 9*12 ? " She's practically towering above you.\n\n":"\n\n");
+			outputText("\"<i>Come [name] let us settle this debate once and for all...</i>\"\n\n");
+			outputText("She might be the strongest opponent you've faced yet but for your and her sake you have to stop her.\n\n\n");
+		} else {
+			outputText("You tell her to stop it. Drop the act. Alvina is lying to herself trying to act tough right now but in reality you already know on what soil she bases her conviction. She can feel like you, think like you! She also has a soul like you.");
+			outputText(" You also saw her reactions to the flower and the teddy bear. Why is she still trying to pretend she's the villain in the story?!\n\n");
+			outputText("\"<i>You idiot! I'm a demon, clearly the very thing you've been fighting against this whole time. The only thing you know about me is the girl you met at the bar in Tel Adre' yet still claims to know me? You fool, don't you realize I've literally used you all this time to my benefits? I'm far from the good person [name] you depict me as. I transcended death and mortality so that I could set everything in this messed up world right! I am PERFECT and you COULD be too! Just become my apprentice and I will make sure that you live forever at my side! You won't even need to feel, those feelings make you imperfect, they make you weak like all those sex crazed demons out there! My perfect [name], would never be like that!</i>\"\n\n");
+			outputText("Is this really what she wants? She can't just pretend she has no feelings. Not after she recoiled when you told her the beauty of impermanence and living like every day was your last. What about her feelings? As much as she wanted to hide them clearly she felt something. She pretends she can't feel but clearly she likes you, and that's a feeling in itself; heck come to think of it, hasn't she been shadowing you this whole time for this very reason? Everytime you hit a wall in your search she was there to give you hints.\n\n");
+			outputText("\"<i>That's because I needed you to take Lethice down! With that moron out of the picture I can finally proceed toward phase two of my plan for a perfect world. A world of immortal beings that need not to love nor hate! A world without death or pain!</i>\"\n\n");
+			outputText("Does she truly believe that? You can tell her whole argument is self contradictory and flawed. Who is she even trying to convince anymore? A world without emotion would be no better than dead. You know that, and most of all she knows that. Every sentence she spills betrays her feelings for you, let alone that obvious possessiveness of hers.\n\n");
+			outputText("She laughs but it sounds hollow… empty like all strength and will to argue has left her.\n\n");
+			outputText("\"<i>You are right indeed, however I am the beginning and the end of your quest [name], the one who started it allll. I'm not just any demon [name], I'm the fool who created them in the first place and thus the responsibility of every single hardship that befell you is mine to bear. You're right, I have been lying so hard to myself, desperately clinging to this final escape to my reality… I'm far too tired of this existence [name]… I've just been desperately trying to delude myself into believing that I'm not… those past two hundred years… my only remaining sibling was the price for them and only now do I truly regret everything. I may as well have spent that time in hell. This pendant right here is all that ties me to this world.</i>\"\n\n");
+			outputText("Alvina clutches her necklace firmly, then staring at you with determination, grabs her weapon.\n\n");
+			outputText("\"<i>I'm too far gone to go back on my ways now [name]. If your ideals are worth dying for… then fight for them. I would hate to put you down, but for the sake of my own goals I have to put you to the test. Show me the strength of your resolve and the power of all that which you believe in! If your ideals are so great that you are willing to die for them then back up your words with actions!</i>\"\n\n");
+			outputText("On these words Alvina's aura flares with a pillar of raw magic power, transforming into a whole new form easily over 10 ft tall, her wings unfold as the magic from her aura spreads to the ground beneath her and catches fire setting the whole room ablaze. Amidst this vision of hell, Alvina stands proudly, her weapon split into a pair of battle scythes which she holds in each hand.");
+			outputText(player.tallness < 9*12 ? " She's practically towering above you.\n\n":"\n\n");
+			outputText("\"<i>Come [name] let us settle this debate once and for all, just you and me, champion and demon; this is as it was meant to be.</i>\"\n\n");
+			outputText("She might be the strongest opponent you've faced yet but for your and her sake you have to stop her.\n\n\n");
+		}
 		FightForAlvina = true;
 		startCombat(new Alvina());
 	}
@@ -682,7 +725,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"<i>The very notion is ludicrous, absurd. You're telling me that if I reject my own corrupted nature hard enough it will just work? What kind of whimsical way of thinking is that?! Do you hear yourself talk here?! Well know what, just to humor you I'll try, and if I fail I can always just off myself as I had originally planned.</i>\"\n\n");
 		outputText("Alvina grabs the pearl from your hands, her fell eyes reflecting on the surface before she gulps it down. She begin to focus, closing her eyes and at first nothing seems to happen. You're about to sigh in disappointment when the tips of her pitch black hair strands begin to bleach, growing increasingly pale. At first the white gains a few centimeters before the black slightly swallows it back, but it is like pushing back against a tidal wave as the white begins creeping all the way up to the root. While she doesn't exactly become human again, many of her fiendish traits are revised into something more natural and noble, turning her into some kind of new chimeric hybrid. Her demon tail writhes and changes shape before covering in immaculate white fur and draconic scales. Finally Alvina's skin tone lightens up slightly as her fleshy wings membranes melt and change, covered with feathers of pure white. Alvina opens her formerly embery, now golden horizontal slitted eyes in absolute confusion marveling as her entire body is reshaped.\n\n");
 		outputText("\"<i>I… I am one with myself and the world, I've seen the depths of wants but also acquired the understanding. This feeling [name], it's like staring at the world first the first time, a dimension beneath the dimensions where all rules of creation converge. It's like I stand as a grain of sand in the middle of everything so small but capable of altering the fabrics of reality so long as it keep flowing harmoniously with the natural order. Is this godhood? No it is not… gods are limited in what they can do… their wants are restrained by their own petty desires and lack of imagination. To see what I see right now [name]. I have to concentrate not to lose myself into the sea of possible past futures and alternatives. It is as you first said, Mareth is damaged… wounded but not beyond repair. The gods can't fix this, heck if no one does anything the wound will only get worse. But I can… I and my descendents can fix this wound caused by the corruption. </i>\"\n\n");
-		outputText("\"<i>Removing the demon's will not fix Mareth; the corruption has run too deep; it's literally in the mind of the denizens now. Even if we remove the plant and kill all the demon's new demons could easily arise from the remaining corrupted roots. All it takes is for a particularly lusty mortal to go on a lust craze and spontaneously lose their soul and we will be back to square one. As for you [name], you may think you are but a huma,n but within you rest a spark capable of rewriting history as we see it.</i>\"\n\n");
+		outputText("\"<i>Removing the demon's will not fix Mareth; the corruption has run too deep; it's literally in the mind of the denizens now. Even if we remove the plant and kill all the demon's new demons could easily arise from the remaining corrupted roots. All it takes is for a particularly lusty mortal to go on a lust craze and spontaneously lose their soul and we will be back to square one. As for you [name], you may think you are but a human, but within you rests a spark capable of rewriting history as we see it.</i>\"\n\n");
 		outputText("\"<i>The power to beat impossible odds and change yourself infinitely, to rewrite your own mistakes into success to the desired outcome and change the future… only… are you even aware of your own power? Maybe you use it subconsciously to begin with. You are an anomaly [name], one of the few beings capable of changing their own fates and that of others at will. I see now what I must do, and it starts by pledging my body and souls to you so as to ensure that you may accomplish everything you set your goals upon. Undo past mistakes and put Mareth onto the right track. You embody everything I've worked so hard to see.</i>\"\n\n");
 		outputText("She kneels in front of you, her golden eyes staring directly into yours, you see her unshakable determination firsthand. However you didn't wan't Alvina to be your servant, what you did was out of love for her.\n\n");
 		outputText("\"<i>I am unworthy of your praise [name], this form I have now is but the fruit of your own labor to unshackle me from my mistakes and free me from my torment. I just know it… I have seen all the alternatives and where they inevitably lead. If anything, it's possible you have threaded them all already, you just don't remember it.</i>\"\n\n");
@@ -730,11 +773,11 @@ public function alvinaMainCampMenu():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");/*
+	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");
 	if (player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
 		alvinaFreaksDevilPurification();
 		return;
-	}*/
+	}
 	outputText("\"<i>Well hello [name], what brings you to me today?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");
@@ -788,12 +831,12 @@ public function alvinaMainCampMenuAppearance():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	outputText("From your knowledge Alvina is of a rare demonic offshoot known as devils. While you are aware that, like most demons, she has advanced shapeshifting abilities, Alvina favors the appearance of a little girl several centuries younger than her true age, mostly for convenience. Alvina’s raven black hair are parted by two heavy goat horns and small furry ears, you ponder at the time why ");
+	outputText("From your knowledge Alvina is of a rare demonic offshoot known as devils. While you are aware that, like most demons, she has advanced shapeshifting abilities, Alvina favors the appearance of a little girl several centuries younger than her true age, mostly for convenience. Alvina’s raven black hair is parted by two heavy goat horns and small furry ears, you ponder at the time why ");
 	outputText("demons and devils develop such variants in their physiognomy. Beneath her hair, two pupils glowing like molten embers stare back at you from behind a pair of glasses, or at least they do when she's not busy reading some dusty arcane text. Her smug, playful lips hides fangs better suited to a beast than a human and a practiced tongue who has spent centuries wording out some of the most powerful incantations in the realm. \n\n");
 	outputText("Beneath her neck Alvina’s body is somewhat human-like however her forearms ends in furry four fingered claws while her legs are those of a goat. On her back rests a pair of folded demon wings she doesn't use that often, mainly because flying magically or levitating is, as a general rule more convenient. Beneath her wings is her tail, unlike demons, ");
 	outputText("devils tend to have goat tails instead of the sinuous spade and Alvina’s own goat tail motion reflects her state of mind, becoming agitated during unrest or when she loses her patience.\n\n");
 	outputText("Alvina’s breasts are, surprisingly for a female demon, only an A cup. Anytime you would ask her why she keeps them so small she replies it's because, while a prodigious chest assist in the powers of lust and temptation based spells, a smaller chest is more practical both for the body and the spirit as a larger pair tend to obscure view, ");
-	outputText("weighs the body down and consume an excess amount of energy maintenance she has no interest in spending. Mirroring this, her ass only has the bare minimum size to denote her as a female.\n\n");
+	outputText("weighs the body down and consume an excess amount of energy, maintenance she has no interest in spending. Mirroring this, her ass only has the bare minimum size to denote her as a female.\n\n");
 	outputText("Between those goat legs of hers is her vagina which, like most demon can likely wrinkle a cock dry within seconds if she decides to use it. This said, Alvina is as a general rule more interested in magic than sex and, unlike most succubi that are natural squirters, Alvina’s vagina looks about as standard as one of a human woman would be, both in the moistness and size.\n\n");
 	outputText("Alvina is perfectly aware that you are analysing her, but, as usual, is more concerned about whatever lecture she is on than about you sizing her up.\n\n");
 	outputText("\"<i>Well then, when you are done sizing my body up, maybe you can tell me what you are here for?");
@@ -1362,6 +1405,7 @@ public function alvinaCampAdvancedStudy():void
 		outputText("<b>You gained a scroll of Polar Midnight.</b>\n\n");
 		player.addStatusValue(StatusEffects.AlvinaTraining2, 1, 1);
 		inventory.takeItem(consumables.POL_MID, camp.campFollowers);
+		AlvinaGaveScroll = true;
 		eachMinuteCount(5);
 	}
 	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
@@ -1395,18 +1439,22 @@ public function alvinaCampAdvancedStudy():void
 		doNext(camp.returnToCampUseSixHours);
 	}
 	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 1) {
-		if (player.isRace(Races.DEVIL, 1, false) || (player.isRace(Races.DEMON, 1, false) && player.gender > 0)) {
+		if (player.isRace(Races.DEVIL, 1, false) || ((player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)) && player.gender > 0)) {
 			if (player.isRace(Races.DEVIL, 1, false)) {
 				outputText("You ask Alvina if this form will work, and she looks at you, amused.\n\n");
 				outputText("\"<i>Well, I didn't expect you to like my form that much. How flattering. I guess you didn’t want to be part of the common rabble, did you? You just had to go a special path? Oh well, like apprentice like master I guess?</i>\"\n\n");
 			}
-			else if (player.isRace(Races.DEMON, 1, false) && player.gender == 1) {
+			else if ((player.isRace(Races.DEMON, 1, false)) && player.gender == 1) {
 				outputText("You ask Alvina if this form will work, swinging your [cock] for her to admire.\n\n");
 				outputText("\"<i>A slavering incubus fits you perfectly.</i>\"\n\n");
 			}
 			else if (player.isRace(Races.DEMON, 1, false) && player.gender == 2) {
 				outputText("You ask Alvina if this form will work, giving her a nice view, putting your [chest] and your [pussy] on display.\n\n");
 				outputText("\"<i>A slutty succubus fits you perfectly.</i>\"\n\n");
+			}
+			else if (player.isRace(Races.IMP, 1, false) ) {
+				outputText("You ask Alvina if this form will work, giving her a nice view of your impish body.\n\n");
+				outputText("\"<i>Not my first choice, though I suppose an imp qualifies.</i>\"\n\n");
 			}
 			else {
 				outputText("You ask Alvina if this form will work, giving her a nice look, putting your [chest] on display and swinging your [cock] above your [pussy] around so she can admire both.\n\n");
@@ -1662,6 +1710,25 @@ public function postMarriageSleep():void {
 			"Through her sheer presence Alvina helps alleviate the ambiant corruption which is slowly burnt away from you and others near you.\n\n");
 	}
 
+	public function alvinaPureMainCampMenuAppearance():void
+	{
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+		clearOutput();
+		outputText("From your knowledge Alvina is of a rare demonic offshoot known as devils, though she has now been puified. While you are aware that, like most demons, she has advanced shapeshifting abilities, Alvina favors the appearance of a little girl several centuries younger than her true age, mostly for convenience. Alvina’s immaculate white hair is parted by two heavy goat horns and small furry ears, you ponder at the time why ");
+		outputText("demons and devils develop such variants in their physiognomy. Beneath her hair, seeming like liquid gold stare back at you from behind a pair of glasses, or at least they do when she's not busy reading some dusty arcane text. Her innocent-looking face brings you joy every time she smiles, as though peace radiates from her.\n\n");
+		outputText("Beneath her neck Alvina’s body is somewhat human-like however her forearms ends in furry four fingered claws while her legs are those of a goat. On her back rests a pair of folded white-feathered wings she doesn't use that often, mainly because flying magically or levitating is, as a general rule more convenient. Beneath her wings is her tail, having changed from her old goat-like tail, ");
+		outputText("instead becoming longer and covered with immaculate white fur and draconic scales, her tail motion reflecting her state of mind, becoming agitated during unrest or when she loses her patience.\n\n");
+		outputText("Alvina’s breasts are, surprisingly for a female demon, only an A cup. Anytime you would ask her why she keeps them so small she replies it's because, while a prodigious chest assist in the powers of lust and temptation based spells, a smaller chest is more practical both for the body and the spirit as a larger pair tend to obscure view, ");
+		outputText("weighs the body down and consume an excess amount of energy, maintenance she has no interest in spending. Mirroring this, her ass only has the bare minimum size to denote her as a female.\n\n");
+		outputText("Between those goat legs of hers is her vagina, though Alvina is, as a general rule more interested in magic than sex and Alvina’s vagina looks about as standard as one of a human woman would be, both in the moistness and size.\n\n");
+		outputText("Alvina is perfectly aware that you are analysing her, but, as usual, is more concerned about whatever lecture she is on than about you sizing her up.\n\n");
+		outputText("\"<i>Well then, when you are done sizing my body up, maybe you can tell me what you are here for?");
+		if (flags[kFLAGS.ALVINA_FOLLOWER] < 19) outputText(" I have little time for games as you know all too well.");
+		outputText("</i>\"\n\n");
+		menu();
+		addButton(14, "Back", alvinaPureMainCampMenu);
+	}
+
 	public function alvinaPureMainCampMenu():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
@@ -1673,11 +1740,13 @@ public function postMarriageSleep():void {
 		outputText("\"<i>Well hello [name], what brings you to me today?</i>\"\n\n")
 
 		menu();
-		addButton(0, "Infernal Oil", alvinaPureInfernalOil)
+		addButton(0, "Appearance", alvinaPureMainCampMenuAppearance);
+		addButton(1, "Talk", alvinaPureTalkOptions);
+		addButton(2, "Infernal Oil", alvinaPureInfernalOil)
 			//.disableIf(!player.hasPerk(PerkLib.Phylactery) || !player.hasPerk(PerkLib.Soulless), "Requires you to be soulless")
-			.disableIf(!player.hasItem(consumables.INFWINE), "You need this item to ask her about it DUH...")
-			.disableIf(AlvinaInfernalOilCooldown > 0);
-		addButton(1, "Sex", alvinaPureSexMenu);
+			.disableIf(!player.hasItem(consumables.INFWINE) && !AlvinaInfernalOilAsked, "You need this item to ask her about it DUH...")
+			.disableIf(AlvinaInfernalOilCooldown > 0, "Alvina is stll busy making the potion");
+		addButton(3, "Sex", alvinaPureSexMenu);
 		addButton(14, "Back", camp.campLoversMenu);
 	}
 
@@ -1696,14 +1765,43 @@ public function postMarriageSleep():void {
 			AlvinaInfernalOilAsked = true;
 			eachMinuteCount(15);
 			doNext(playerMenu);
+			return;
 		}
 		outputText("You ask Alvina about her progress with the potion.\n\n");
 		outputText("\"<i>All finished, It took some effort but just like my form the reagent can be purified. Took me some great effort though, you wouldn't believe the places I had to go to get the reagents!</i>\"\n\n");
 		outputText("She hands you the bottle.\n\n");
 		outputText("\"<i>Don't abuse it… wouldn't want to get side effects or something... not that id know them. If anything I'm just telling you what my sister used to say all the time about medicine and its that too much of a good thing is a bad thing.</i>\"\n\n");
-		AlvinaInfernalOilCooldown = -1;
+		AlvinaInfernalOilCooldown = 0;
+		AlvinaInfernalOilAsked = false;
 		eachMinuteCount(15);
 		inventory.takeItem(consumables.SAGEMED, playerMenu);	//Sage Medicine	//Azazel TF from
+	}
+
+	public function alvinaPureTalkOptions():void {
+		menu();
+		addButton(0, "Magic", alvinaTalkMagic);
+		addButton(14, "Back", alvinaPureMainCampMenu);
+	}
+
+	private function alvinaTalkMagic():void {
+		clearOutput();
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		outputText("You ask Alvina if there's anything useful she could teach you.[pg]");
+		outputText("Alvina lights up at your question and searches her belongings for something before answering \"<i>While most of my research is on the topic of black magic, something I wish you to use carefully and with restraints, I did devise a few powerful spells, though learning them requires an immense amount of talent.</i>\" [pg]");
+		if (AlvinaGaveScroll) {
+			outputText("\"<i>Although I have given you the only one I had on hand. I had another spell scroll called Meteor Storm but a thief stole it from me while I wasn't home. I could make a new scroll seeing as I know the spell but it would take a lot of time to transcribe. </i>\"");
+		} else {
+			outputText("She produces a scroll, handing it to you \"This here is Polar Midnight, one of my signature spells. It wasn't made to be handled by common mages and could very well kill you if misused, but seeing as you defeated me in combat, I believe you can handle it just fine. I had another spell scroll called Meteor Storm but a thief stole it from me while I wasn't home. I could make a new scroll seeing as I know the spell but it would take a lot of time to transcribe.</i>\"[pg]");
+			if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
+				outputText("You tell her that you already know this spell... \"<i>Oh, ahh I see, yes thats right I gave it to you sometime before our fight... How could I forget?</i>\"[pg]")
+				doNext(camp.campFollowers);
+			} else {
+				outputText("<b>You gained a scroll of Polar Midnight.</b>\n\n");
+				inventory.takeItem(consumables.POL_MID, camp.campFollowers);
+			}
+			AlvinaGaveScroll = true;
+		}
+		doNext(alvinaPureMainCampMenu);
 	}
 
 	public function alvinaPureSexMenu():void {
@@ -1721,9 +1819,9 @@ public function postMarriageSleep():void {
 		alvinaMakeLovePure();
 	}
 
-	public function alvinaPureTakeHer(x:int):void
+	private function alvinaPureTakeHer(x:int):void
 	{  //Male or Herm
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
 		outputText("You proceed to remove your gear and ");
 		if (player.cocks[x].cockLength > 20) remarkTooBigCock();
@@ -1749,9 +1847,9 @@ public function postMarriageSleep():void {
 			outputText("Alvina sighs in relief as she takes in the size of your cock \"<i>Truth be told, with the craziness going around here I was worried I'd end up being pierced by a minotaur sized monster, you having a normal sized penis is the most relieving and cute thing ive seen in a long while. Don't you worry I can adapt my vagina to fit you just right, call it a vestige of my demonic shapeshifting powers if you will.</i>\"\n\n");
 		}
 	}
-	public function alvinaPureLetHerTakeYou():void
+	private function alvinaPureLetHerTakeYou():void
 	{  //Female or Herm
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
 		outputText("At the suggestion Alvina makes an mischievous smile.\n\n");
 		outputText("\"<i>Well under all normal law of reality, a girl cannot fuck another girl with a penis she outright lacks. Fortunately for us I happen to disagree with this, so with a little effort I can get us just the thing down here, though you will have to coax it out.</i>\"\n\n");
@@ -1767,15 +1865,15 @@ public function postMarriageSleep():void {
 		alvinaPureSexFertilityComment();
 		doNext(camp.returnToCampUseOneHour);
 	}
-	public function alvinaPureSexFertilityComment():void
+	private function alvinaPureSexFertilityComment():void
 	{
 		outputText("\"<i>You know I'm no longer a soulless body. Perhaps with a little luck we might even have a human child.</i>\"\n\n");
 		outputText("The thought makes you smile, a new human generation in Mareth after all these years might not be a bad thing, at least not the way Marae made it out to sound. And with you two there to teach them, you could even rebuild them from scratch.\n\n");
 		outputText("Spent, the two of you lie down next to one another, hugging tightly for a few minutes and whispering sweet nothings. It would be so easy to stay there with her forever, but you have things to do and Alvina understands that too.\n\n");
 	}
-	public function alvinaPureMakeOut():void
+	private function alvinaPureMakeOut():void
 	{  //Girl on Girl
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		clearOutput();
 		outputText("Pending scene text");
 		doNext(camp.returnToCampUseOneHour);

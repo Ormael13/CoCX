@@ -210,9 +210,9 @@ public class Enigmanium extends Consumable {
             dynStats("sen", 1, "lus", 10);
 
             outputText("[pg]");
-            if (temp2 > 2) outputText("Your [cock "+(temp2+1)+"] tightens painfully, inches of taut flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
-            if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged [cock "+(temp2+1)+"] from the pleasure of the growth.");
-            if (temp2 <= 1) outputText("A slight pressure builds and releases as your [cock "+(temp2+1)+"] pushes a bit further out of your sheath.");
+            if (temp2 > 2) outputText("Your [cock "+(temp+1)+"] tightens painfully, inches of taut flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+            if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged [cock "+(temp+1)+"] from the pleasure of the growth.");
+            if (temp2 <= 1) outputText("A slight pressure builds and releases as your [cock "+(temp+1)+"] pushes a bit further out of your sheath.");
             changes++;
           }
         }

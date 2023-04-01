@@ -18,6 +18,7 @@ import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Beach.CancerAttack;
 import classes.Scenes.Areas.Desert.SandTrap;
+import classes.Scenes.Areas.Desert.SandWorm;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
@@ -387,6 +388,11 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.SlimeInsert)) {
 			menu();
 			addButton(0, "Rape", combat.SlimeRapeFeed).hint("Violate your opponent from the inside!");
+		} else if (monster.hasStatusEffect(StatusEffects.Swallowed)) {
+			menu();
+			addButton(0, "Tease", combat.SwallowTease).hint("Use a powerful teasing attack").icon("I_tease id");
+			if (monster.lustVuln != 0 && player.hasPerk(PerkLib.Straddle) && monster.hasStatusEffect(StatusEffects.Stunned)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance").icon("I_tease id");
+			addButton(4, "Release", combat.SwallowLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			menu();
 			if (monster.statusEffectv1(StatusEffects.Dig) > 0){
@@ -394,6 +400,10 @@ public class CombatUI extends BaseCombatContent {
 				if (player.arms.type == Arms.FROSTWYRM) {
 					if (!player.hasStatusEffect(StatusEffects.CooldownTremor)) addButton(1, "Tremor", combat.Tremor).hint("Cause seismic activity beneath your foes in an attempt to stun them");
 					if (player.lowerBody == LowerBody.FROSTWYRM) addButton(0, "Grab", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Surge out of the ground and coil around your opponent!");
+				}
+				if (player.lowerBody == LowerBody.SANDWORM) {
+					if (!player.hasStatusEffect(StatusEffects.CooldownTremor)) addButton(1, "Tremor", combat.Tremor).hint("Cause seismic activity beneath your foes in an attempt to stun them");
+					addButton(0, "Swallow", combat.SwallowWhole).hint("Leap out of the ground and attempt to swallow your enemy whole for sticky pleasure time.");
 				}
 				addButton(4, "Wait", combat.wait);
 				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
@@ -481,6 +491,37 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.BearLeggoMyEggo);
 		}
 		else playerBusy = false;
+		if (player.hasStatusEffect(StatusEffects.CallOutKiha)) {
+			if (!InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_1], flags[kFLAGS.PLAYER_COMPANION_2], flags[kFLAGS.PLAYER_COMPANION_3])) {
+				outputText("You hear a roar of rage from the sky. [Themonster] peers skyward, but even though you can feel your wedding band tugging, Kiha passing overhead, even you can barely see your naked wife as she comes screaming in, fire trailing from her maw. Her massive axe comes down like a guillotine, and [themonster] falls back from the sheer force of the blow. Kiha jumps back, placing herself firmly between you and [themonster].[pg]");
+				outputText("“<i>Are you okay?</i>” Kiha gasps, her chest heaving. “<i>I got here as fast as I could...My idiot.</i>”");
+				outputText("You assure Kiha that you’re fine now...and that you should focus on the enemy in front of you. You feel nagging doubt, annoyance, and rage flash up from your ring, but Kiha clamps down on her emotions, letting out a low growl.[pg]");
+				outputText("“<i>This idiot is mine!</i>” She declares. “<i>MY idiot! You don’t get to hurt them!</i>” You feel affection rise in your chest, and you don’t even know whose emotions they are.[pg]");
+				outputText("<b>Kiha will fight beside you!</b>[pg]");
+				player.removeStatusEffect(StatusEffects.CallOutKiha);
+				var nextCompanion:int = flags[kFLAGS.PLAYER_COMPANION_0] == "" ? kFLAGS.PLAYER_COMPANION_0 :
+						flags[kFLAGS.PLAYER_COMPANION_1] == "" ? kFLAGS.PLAYER_COMPANION_1 :
+								flags[kFLAGS.PLAYER_COMPANION_2] == "" ? kFLAGS.PLAYER_COMPANION_2 :
+										kFLAGS.PLAYER_COMPANION_3;
+
+				var strKiha:Number = 85;
+				var meleeAtkKiha:Number = 28
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
+					strKiha += 25 * flags[kFLAGS.KIHA_LVL_UP];
+					meleeAtkKiha += 10 * flags[kFLAGS.KIHA_LVL_UP];
+				}
+				strKiha *= (1 + (0.2 * player.newGamePlusMod()));
+				strKiha = Math.round(strKiha);
+				meleeAtkKiha += (1 + (int)(meleeAtkKiha / 5)) * player.newGamePlusMod();
+				player.createStatusEffect(StatusEffects.CombatFollowerKiha, strKiha, meleeAtkKiha, 0, 0);
+				flags[nextCompanion] = "Kiha";
+			} else {
+				outputText("As you call out, you can feel the heat rising around you. Kiha breathes fire with each exhale, and you can see steam rising from her body. Your dragon-wife is FURIOUS, and you almost feel a little sorry for your foe as Kiha flaps her wings, her axe a blur of motion. You mentally recoil from your ring, as Kiha’s red-hot fury spreads up your arm.[pg]");
+				outputText("<b>Kiha’s attacks have grown frenzied.</b> [pg]");
+				player.removeStatusEffect(StatusEffects.CallOutKiha);
+				player.createOrAddStatusEffect(StatusEffects.FrenziedKiha, 1, 1);
+			}
+		}
 		//ALLIES - 'stupid' ones (elem & golems). Requires PC to NOT be stunned or channel anything.
 		if (!playerBusy) {
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
@@ -488,6 +529,8 @@ public class CombatUI extends BaseCombatContent {
 			//again, no else after - ally turns SHOULD be disabled.
 			if (isGolemTurn())
 				doGolemTurn();
+			if (isSkeletonsTurn())
+				combat.sendSkeletonToFight();
 			else if (isEpicElementalTurn())
 				doEpicElementalTurn();
 			else if (isElementalTurn())
@@ -524,7 +567,8 @@ public class CombatUI extends BaseCombatContent {
 					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
 					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
 				}
-				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || ((player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 10)) {
+				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || ((player.weaponRange == weaponsrange.ATKNIFE || player.weaponRange == weaponsrange.RTKNIFE || player.weaponRange == weaponsrange.STKNIFE || player.weaponRange == weaponsrange.TTKNIFE) && player.ammo <= 10)
+				|| ((player.weaponRange == weaponsrange.GTHRAXE || player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 5)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
 				}
 			}
@@ -584,9 +628,37 @@ public class CombatUI extends BaseCombatContent {
 			}
 		}
 		if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1).hint("Mana cost of sending 1 permanent steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
-			else addButtonDisabled(2, "Send S.Gol/1", "Not enough mana.");
+			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem, 1).hint("Mana cost of sending 1 permanent steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
+			else addButtonDisabled(3, "Send S.Gol/1", "Not enough mana.");
+			if (monster.plural) {
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(8, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 3 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3) + "</b>");
+					else addButtonDisabled(8, "Send I.P.Gol/3", "Not enough mana.");
+				}
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(13, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 5 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5) + "</b>");
+					else addButtonDisabled(13, "Send I.P.Gol/5", "Not enough mana.");
+				}
+			}
 		}
+		if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) {
+			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(4, "Send I.S.Gol/1", combat.pspecials.sendPermanentImprovedSteelGolem, 1).hint("Mana cost of sending 1 permanent improved steel golem: "+combat.pspecials.permanentimprovedsteelgolemsendcost());
+			else addButtonDisabled(4, "Send I.S.Gol/1", "Not enough mana.");
+			if (monster.plural) {
+				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 3) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(9, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 3 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3) + "</b>");
+					else addButtonDisabled(9, "Send I.P.Gol/3", "Not enough mana.");
+				}
+				if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 5) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(14, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 5 improved permanent golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5) + "</b>");
+					else addButtonDisabled(14, "Send I.P.Gol/5", "Not enough mana.");
+				}
+			}
+		}
+	}
+
+	public function isSkeletonsTurn():Boolean {
+		return (player.hasPerk(PerkLib.FirstAttackSkeletons) && ((player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 && !monster.isFlying()) || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) && flags[kFLAGS.NECROMANCER_SKELETONS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] != 1;
 	}
 
 	public function isEpicElementalTurn():Boolean {
@@ -676,10 +748,12 @@ public class CombatUI extends BaseCombatContent {
 				: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
 					: companionName == "Etna" ? combat.comfoll.etnaCombatActions
 						: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
-							: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
-								: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
-									: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
-										: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
+							: companionName == "Kiha" ? combat.comfoll.kihaCombatActions
+								: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
+									: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
+										: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
+											: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
+												: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
 		//do action
 		if (clearAndNext) {
 			clearOutput();
@@ -801,6 +875,10 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
 			btnStruggle.call((monster as Izumi).chokeSlamStruggle);
 			btnBoundWait.call((monster as Izumi).chokeSlamWait);
+		}
+		if (player.hasStatusEffect(StatusEffects.Devoured)) {
+			btnStruggle.call((monster as SandWorm).sandWormDevourStruggle);
+			btnBoundWait.call((monster as SandWorm).sandWormDevourWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
 			btnStruggle.call((monster as Izumi).titSmotherStruggle);

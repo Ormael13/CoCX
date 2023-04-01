@@ -143,7 +143,9 @@ import classes.internals.*;
 			this.lust = 30;
 			this.level = 18;
 			this.gems = rand(15) + 10;
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop()
+					.add(null, 2)
+					.add(useables.SRESIDUE, 1);
 			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);

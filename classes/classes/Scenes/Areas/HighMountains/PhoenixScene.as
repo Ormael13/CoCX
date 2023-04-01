@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.HighMountains 
 {
 import classes.*;
+import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Areas.Ashlands.PhoenixSquadAshland;
@@ -158,7 +159,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\n\"<i>Heeeey,</i>\" the quasi-phoenix whines squirming to get out of your grip.");
 			outputText("\n\nYou maintain your grasp on her long, purple lizard dick and tell her that you’re doing her a favor: you’re going to let her fuck your " + vaginaDescript() + ". She stops struggling at the invitation.");
 			outputText("\n\n\"<i>Oh. Well,</i>\" she says, smirking slightly. \"<i>If you want a bit of phoenix seed... I guess I wouldn’t mind a chance at being a daddy.</i>\"\n\n");
-			if (player.hasPerk(PerkLib.BroodMother) && player.pregnancyType > 0) outputText("You assure her she will be soon");
+			if (player.hasPerk(PerkLib.BroodMother) && player.canGetPregnant()) outputText("You assure her she will be soon");
 			else outputText("You grin at her");
 			outputText(" and strip out of your [armor]. The quasi-phoenix, a bit more dominant than you might have liked, roughly grabs your [chest], pinching your nipples as she takes over wringing her cock from you. Oh well. You decide to roll with it and slide a hand down to your [vagina], stroking your pussy as your lover warms up.");
 			outputText("\n\nWhen she’s nice and hard, you give the quasi-phoenix a little push onto her back and clamber into her lap, lining her lizard prick up with your [vagina]. Before you can get properly situated, though, the girl pulls you down onto her cock, impaling you up to her hilt in one massive thrust. You roll your head back and scream, a mix of pleasure and burning pain shooting through you as her white-hot rod slams into your innermost depths.");
@@ -168,6 +169,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nUnable to take the cumulative pleasure, the quasi-phoenix cums. You go wide-eyed as her burning-hot cum pours into your waiting womb, scalding your depths with her sizzling, potent seed. You can only keep riding her, letting her jizz flow into you until the heat and pleasure sends you over the edge too. You hug the quasi-phoenix tight as orgasm hits you, shuddering and gasping as ecstasy threatens to overwhelm you. Your [vagina] milks your lover for every last drop until, breathless, you release your death-hold on your lover, letting her flop insensate to the ground.");
 			outputText("\n\nYou stand, a bit bow-legged, and watch as a bucket’s worth of her extra seed pours out of your sodden twat, pooling on the quasi-phoenix’s breasts and belly. Giggling, you stumble off her and collect your [armor].");
 			player.sexReward("cum","Vaginal");
+			player.knockUp(PregnancyStore.PREGNANCY_QUASI_PHOENIX, PregnancyStore.INCUBATION_QUASI_PHOENIX);
 			cleanupAfterCombat();
 		}
 		
@@ -303,6 +305,29 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\n\"<i>Hasta la vista, baby!</i>\" These are the last words you hear as the speeding scimitar finally makes contact with your neck.");
 			rawOutputText("\n\n[DATA EXPUNGED]");
 			EventParser.gameOver();
+		}
+
+		public function phoenixBirth(womb:int = 0):void {
+			clearOutput();
+			outputText("A sudden intense spike of pressure from inside you jolts you from your slumber. The sensations make you thrash your way clear of your bedding, awkward and clumsy with your massively gravid womb. Stumbling out of your tent, you hastily pull off your clothes, casting them aside; it’s time to lay your egg.[pg]");
+			outputText("Pain grips you, followed by a wave of heat that weakens the pain and sears your muscles clean. Your distended abdominal muscles flex and writhe under your skin, straining to move the heavy thing, impaired by the sheer size of it. You grit your teeth and wrap your hands around your midriff, forcibly trying to push the egg down so it can leave your body at last.[pg]");
+			outputText("You strain in cycles, feeling the pain as your muscles ripple then release as the tension eases, allowing you to suck in needed breaths of cool night air. Your hands grip and squeeze your bloated abdomen, impatiently pushing and massaging in an effort to coax this stubborn egg out of your abused guts. You dimly realise you are being surrounded by a corona of steam; the heat of the egg inside you is causing your sweat to literally boil away on your skin![pg]");
+			outputText("You aren’t certain of how long you labor, but, little by little, your midriff shrinks, stretching your birth canal as the egg slowly makes its way out of you. You groan in pain, feeling your pelvis being gradually forced apart as the huge egg is pushed from your body; how does even a harpy bear to do this? The heat and the pain just keep growing and growing, your strength ebbing away, but you soldier on - you <b>have</b> to get this egg out![pg]");
+			outputText("Finally, blessedly, you realise that the stretching is at its maximum... just one more good push... Heaving with all your might, you scream in defiance and pain to the uncaring night sky above - there is a sensation of being turned inside out, followed instantly by blessed, blissful release. You collapse flat on your back, [if (haswings)indifferent to the protests of your [wings] as you land on them,] heaving for lungfuls of cool air, steam still billowing from your abused body. Eventually, a measure of strength returns to your limbs and, still shaky from exertion, you manage to get up and see what you have delivered.[pg]");
+			outputText("The egg is absolutely huge - even bigger now than it was inside of you, you think - and you find yourself dumbstruck that you were able to deliver such a monstrous offspring. The egg is the deep glossy black of obsidian, radiating heat like a coal fire. A loud cracking sound suddenly fills the air, a jagged crack racing down one side of the egg; it glows with brilliant red-orange light, crimson fluid seeping from it as whatever is inside starts to force its way into the real world. More cracks split the shell, letting boiling hot embryonic fluid spill everywhere, before it finally shatters as the infant inside forces its way free with a high-pitched roar of triumph.[pg]");
+			outputText("Your new child is quite obviously a phoenix, already the size of a toddler. Her features are human, though tan-skinned, with the distinctive fin-like ears of a salamander on each side of her head. Eyes the orange of a warm fire stare up at you, open and affectionate, in a girlish little face, under a messy mop of flame-red hair. She reaches up for you with her little hands, claw-tipped little fingers wiggling, flame-red scales forming sleeve-like arrays on her arms, and stands up, shakily at first. She spreads harpy wings covered in flame-red feathers, and lashes a lizard-like tail, covered in fiery-hued scales, and with a small flame already burning at the tip, in order to aid her balance. Her legs are human-like, but covered in the same crimson scales as her tail, and ending in clawed toes. Between her legs is a mixture of sexes; a single reptilian penis, sans testes, dangling over a vagina - just like her “father”.[pg]");
+			outputText("Moved by instinct, you pick up the young phoenix and hold her close. She’s so warm, and she clearly recognizes you, eagerly snuggling into you, safe and close. You hold her close, until she starts to wriggle; she’s evidently hungry, and she can smell your milk. Eagerly she nuzzles at your [allbreasts], and latches onto the nearest [nipple], one little hand cupping your [breasts] to help her hold in her mouth and coax your warm, sweet milk into her hungry tummy.[pg]");
+			outputText("Maternal bliss fills you and you find a comfortable seat so you can allow her to nurse. Vague memories of nursing mothers back in Ingnam come to you and you use a free hand to start stroking her hair, crooning snatches of lullabies and nursery songs in meandering ballard to your herm daughter.[pg]");
+			outputText("You aren’t sure how long you sit there, holding her, but eventually your little girl-boy decides she’s had enough. It’s at this point you realise how heavy she’s grown; like most of the tainted beings in this land, her growth has been accelerated; she’s gone from a toddler to a young adult, all in the span of one feeding. She gently pushes her way out of your arms, standing on her new strong legs, admiring how she’s grown - her developed muscles, widened hips, filled out butt and breasts, elongated cock. She pauses, and then lets out a huge burp, loud enough to startle sleeping birds from a nearby tree and send them flying off in a panic. She looks proud of herself for that, then spreads her wings experimentally. After a few flaps, she stops, looking at you. She kneels by your side and gives you a loving, gentle kiss on the cheek, then gets back to her feet and flies away - unsteadily at first, but improving well before she’s vanished into the night.[pg]");
+			outputText("You watch her as she leaves, and a sinking feeling in your heart means you’re sure she won’t ever come back to you. Sighing softly, you gather your clothes and try and get back to sleep, feeling strangely... empty.[pg]");
+			if(player.hips.type < Hips.RATING_FERTILE) {
+				player.hips.type++;
+				EngineCore.outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your [hips].");
+			}
+			player.cuntChange(20, true, false, true, womb);
+
+			player.removeCurse("spe", 3, 2);
+
 		}
 	}
 }

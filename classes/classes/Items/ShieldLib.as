@@ -5,8 +5,10 @@ package classes.Items
 	 * @author Kitteh6660
 	 */
 
+import classes.Items.Dynamic.DynamicShield;
 import classes.Items.Shields.*;
 import classes.PerkLib;
+import classes.Races;
 
 public final class ShieldLib extends ItemConstants
 	{
@@ -35,6 +37,7 @@ public final class ShieldLib extends ItemConstants
 		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 250, "A simple wooden rounded shield.");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const GREATSH:GreatShield = new GreatShield();
+		public const IMPTOME:DynamicShield = ItemTemplateLib.instance.createShield("tome", ItemConstants.RARITY_MAGICAL, 0, ItemConstants.CS_HIDDEN_CURSED, [EnchantmentLib.RaceSpellPowerDoubled.spawn2(true, 1, Races.IMP)]);
 		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 14, 700, "An average-sized kite shield.");
 		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 200,
 				"Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.",

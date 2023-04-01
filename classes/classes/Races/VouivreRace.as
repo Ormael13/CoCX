@@ -97,12 +97,12 @@ public class VouivreRace extends Race {
 	}
 	
 	public static function isVouivreLike(body:BodyData):Boolean {
-		return body.hornType == Horns.DRACONIC_X4_12_INCH_LONG
-				|| body.hornType == Horns.DRACONIC_X2
-				|| body.tongueType == Tongue.DRACONIC
-				|| body.wingType == Wings.DRACONIC_SMALL
-				|| body.wingType == Wings.DRACONIC_LARGE
-				|| body.wingType == Wings.DRACONIC_HUGE
+		return (body.hornType == Horns.DRACONIC_X4_12_INCH_LONG
+					|| body.hornType == Horns.DRACONIC_X2)
+				&& body.tongueType == Tongue.DRACONIC
+				&& (body.wingType == Wings.DRACONIC_SMALL
+					|| body.wingType == Wings.DRACONIC_LARGE
+					|| body.wingType == Wings.DRACONIC_HUGE)
 	}
 }
 }

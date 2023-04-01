@@ -422,8 +422,8 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
                 fatigue(minlimit1);
                 outputText("\n\n");
                 if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
-                if (player.statusEffectv1(StatusEffects.ResourceNode1) < 15) {
-                    if (player.statusEffectv1(StatusEffects.ResourceNode1) == 14) outputText("You have found this type of logging area enough times to be able to find them in the future without trouble. ('Woodcutting' option has been unlocked in Places menu)\n\n");
+                if (player.statusEffectv1(StatusEffects.ResourceNode1) < 5) {
+                    if (player.statusEffectv1(StatusEffects.ResourceNode1) == 4) outputText("You have found this type of logging area enough times to be able to find them in the future without trouble. ('Woodcutting' option has been unlocked in Places menu)\n\n");
                     player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
                 }
                 break;
@@ -460,6 +460,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 50) outputText("\n\nYou have a feeling you'll see the glades less often.");
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 75) outputText("\n\nYou have a feeling you'll see the glades much less often.");
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 100) outputText("\n\nThat should be the last of the glades! <b>Corrupted Glades are now extinct.</b>");
+        if (player.hasPerk(PerkLib.QueenOfTheFairies)) player.QueenOfTheForestGladeBonus();
         doNext(camp.returnToCampUseOneHour);
     }
 }

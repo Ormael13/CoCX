@@ -52,15 +52,15 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.CENTAUR) || player.isRace(Races.UNICORN, 2) || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
+                        return player.isRace(Races.CENTAUR) || player.isRace(Races.UNICORN, 2) || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isRace(Races.SANDWORM) || player.isTaur() || player.isDrider();
                     }, "Taur/Drider or Unicorn/Bicorn race");
                 }
                 else{
@@ -73,7 +73,7 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;

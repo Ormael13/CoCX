@@ -2,7 +2,6 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.*;
-import classes.Items.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.lists.BreastCup;
@@ -554,6 +553,7 @@ import classes.lists.Gender;
 					outputText("\"<i>Well, you're a shark. You should be splashing around in the lake; what are you doing on dry land? Always want to be a fish out of water?</i>\"");
 					break;
 				case Races.DEMON:
+				case Races.IMP:
 					outputText("\"<i>Well, to be honest, you look like a demon... And that's terrible! Demons are nasty! People will be scared of you if you look like that.</i>\"");
 					break;
 				case Races.SIREN:
@@ -603,7 +603,7 @@ import classes.lists.Gender;
 				outputText("\"<i>There's this funny green light shining from your [cock]... I feel funny just looking at it. My belly starts to get all cramped up, and I wanna have babies. I just wanna make babies with you all day long.</i>\"");
 			}
 			//Pregnancy check
-			if (player.isPregnant()) {
+			if (player.pregnancyIncubation > 0) {
 				outputText("\n\nThe mouse suddenly stares at your belly, looking at you very intensely. \"<i>You're, like, gonna have a baby!</i>\" She grins. \"<i>Ooh, let's see what you're gonna have here...</i>\" She closes her eyes and focuses on the aura emanating from your unborn babies. \"<i>It's ");
 				switch(player.pregnancyType) {
 					case PregnancyStore.PREGNANCY_IMP:
@@ -2168,7 +2168,6 @@ import classes.lists.Gender;
 			}
 			outputText(".</i>\" Joy notes. She gently reaches out to stroke the nearest one's ear.");
 			outputText("\n\nYou barely register Joy's comment though, the feeling of your breasts being slowly drained of their milk feels so nice, you can't help but fall asleep...");
-			player.knockUpForce(); //Clear pregnancy
 			player.cuntChange(60, true,true,false);
 			if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 			player.sexReward("cum");

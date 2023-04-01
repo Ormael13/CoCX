@@ -8,7 +8,7 @@ import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
-import classes.Scenes.Camp.CampMakeWinions;
+import classes.Scenes.Camp.*;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
@@ -22,12 +22,15 @@ import classes.Scenes.Places.*;
 import classes.Scenes.Places.Boat.SharkGirlScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
+import classes.Scenes.Places.TelAdre.Loppe;
 import classes.Scenes.Quests.UrtaQuest;
 
 public class SceneLib {
     public static var camp:Camp = new Camp(/*campInitialize*/);
 	
 	public static var campMakeWinions:CampMakeWinions = new CampMakeWinions();
+	
+	public static var campUpgrades:CampUpgrades = new CampUpgrades();
 
     public static var combat:Combat = new Combat();
 
@@ -139,6 +142,8 @@ public class SceneLib {
 
     public static var etnaScene:EtnaFollower = new EtnaFollower();
 
+    public static var etnaDaughterScene:EtnaDaughterScene = new EtnaDaughterScene();
+
     public static var evangelineFollower:EvangelineFollower = new EvangelineFollower();
 
     public static var excelliaFollower:ExcelliaFollower = new ExcelliaFollower();
@@ -189,6 +194,8 @@ public class SceneLib {
 
     public static var michikoFollower:Michiko = new Michiko();
 
+    public static var midokaScene:MidokaScene = new MidokaScene();
+
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
 
     public static var neisaFollower:NeisaFollower = new NeisaFollower();
@@ -226,6 +233,8 @@ public class SceneLib {
     public static var tifaFollower:TifaFollower = new TifaFollower();
 
     public static var tyrantia:TyrantiaFollower = new TyrantiaFollower();
+
+    public static var loppe:Loppe = new Loppe();
 
     public static var urta:Urta = new Urta();
 
@@ -286,6 +295,8 @@ public class SceneLib {
     public static var metamorph:Metamorph = new Metamorph();
 
     public static var crafting:Crafting = new Crafting();
+
+    public static var garden:Garden = new Garden();
 
     public static var aikoScene:AikoScene = new AikoScene();
 	

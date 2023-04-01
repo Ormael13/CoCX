@@ -28,6 +28,11 @@ public class Questlog extends BaseContent
 			else if (SceneLib.dungeons.checkDeepCaveClear()) outputText("Completed");
 			else if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) outputText("In Progress");
 			else outputText("Not Started");
+			outputText("\n<b>Chimera Squad:</b> ");
+			if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 1) outputText("Completed (Reward taken)");
+			else if (SceneLib.dungeons.checkDemonLaboratoryClear()) outputText("Completed");
+			else if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 1) outputText("In Progress");
+			else outputText("Not Started");
 			outputText("\n<b>End of Reign:</b> ");
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 1) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkLethiceStrongholdClear()) outputText("Completed");
@@ -129,9 +134,9 @@ public class Questlog extends BaseContent
 			menu();
 			if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] < 2) addButton(0, "Factory", takeRewardForFactory);
 			if (SceneLib.dungeons.checkDeepCaveClear() && flags[kFLAGS.DEFEATED_ZETAZ] < 2) addButton(1, "Deep Cave", takeRewardForDeepCave);
-			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(2, "Stronghold", takeRewardForStronghold);
-			//button 3 - ?Demon Mine? czy też przesunąc Lethice Stronghold niżej z 2 przycisku jak dodam lochy w main storyline przed D3?
-			//button 4 - ?Demon Secret Lab?
+			if (SceneLib.dungeons.checkDemonLaboratoryClear() && flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] < 2) addButton(2, "Demon Laboratory", takeRewardForDemonLaboratory);
+			//button 4 - ?Demon Mine?
+			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(3, "Stronghold", takeRewardForStronghold);
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
 			if (SceneLib.dungeons.checkBeeHiveClear() && flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 3) addButton(7, "Bee Hive", takeRewardForBeeHive);
@@ -155,14 +160,18 @@ public class Questlog extends BaseContent
 			addButton(14, "Back", playerMenu);
 		}
 
-        public function reward(perkPoints:int = 0, statPoints:int = 0):void {
+        public function reward(perkPoints:int = 0, statPoints:int = 0, bonusReward:Boolean = false):void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
 			outputText("<b>Gained");
-            if (perkPoints > 0) outputText(" " + perkPoints + "perk point" + (perkPoints > 1 ? "s" : ""));
+            if (perkPoints > 0) outputText(" " + perkPoints + " perk point" + (perkPoints > 1 ? "s" : ""));
             if (perkPoints > 0 && statPoints > 0) outputText(" and");
-            if (statPoints > 0) outputText(" " + statPoints + "stat point" + (statPoints > 1 ? "s" : ""));
+            if (statPoints > 0) outputText(" " + statPoints + " stat point" + (statPoints > 1 ? "s" : ""));
             outputText((perkPoints == 0 && statPoints == 0) ? " nothing.</b>" : ".</b>");
+			if (bonusReward) {
+				outputText("\n\n<b>Additional reward for progressing main storyline - 1 super perk point</b>");
+				player.superPerkPoints++;
+			}
             player.perkPoints += perkPoints;
             player.statPoints += statPoints;
 			statScreenRefresh();
@@ -172,16 +181,21 @@ public class Questlog extends BaseContent
 
 		public function takeRewardForFactory():void {
 			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 2;
-            reward(2, 10);
+            reward(2, 10, true);
 		}
 		public function takeRewardForDeepCave():void {
 			clearOutput();
 			flags[kFLAGS.DEFEATED_ZETAZ] = 2;
-            reward(4, 20);
+            reward(4, 20, true);
+		}
+		public function takeRewardForDemonLaboratory():void {
+			clearOutput();
+			flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] = 2;
+            reward(6, 30, true);
 		}
 		public function takeRewardForStronghold():void {
 			flags[kFLAGS.LETHICE_DEFEATED] = 2;
-            reward(6, 30);
+            reward(8, 40, true);
 		}
 		public function takeRewardForSandCave():void {
 			flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] = 2;

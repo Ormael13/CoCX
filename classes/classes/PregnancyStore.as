@@ -40,7 +40,7 @@ public class PregnancyStore extends Object
 																	   //pregnancy from taking hold. Does not respond to ovielixirs.
 		public static const PREGNANCY_MINERVA:int				=  34;
 		public static const PREGNANCY_BEHEMOTH:int				=  35;
-		public static const PREGNANCY_PHOENIX:int				=  36;
+		public static const PREGNANCY_QUASI_PHOENIX:int			=  36;
 		public static const PREGNANCY_ANDY:int                  =  37; //This is functionally the same as Satyr but less corrupt. 10% chance of fauns, if ever implemented.
 		public static const PREGNANCY_ALRAUNE:int				=  38;
 		public static const PREGNANCY_CELESS:int				=  39;
@@ -51,7 +51,8 @@ public class PregnancyStore extends Object
 		public static const PREGNANCY_MANTIS_EGGS:int			=  44;
 		public static const PREGNANCY_HARPY_EGGS:int        	=  45; //All Harpy eggs
 		public static const PREGNANCY_HARPY_HATCHING:int        =  46;
-		
+		public static const PREGNANCY_LOPPE:int                 =  47;
+
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
 		public static const PREG_NO_SIGNS_KNOWN:int             =   2; //NPC is in the first trimester, knows she’s pregnant
@@ -98,7 +99,7 @@ public class PregnancyStore extends Object
 		public static const INCUBATION_SALAMANDER:int           = 336;
 		public static const INCUBATION_MINERVA:int           	= 216; 
 		public static const INCUBATION_BEHEMOTH:int           	=1440; //Sorry Behemoth, but Isabella wins.
-		public static const INCUBATION_PHOENIX:int           	= 168; 
+		public static const INCUBATION_QUASI_PHOENIX:int       	= 192;
 		public static const INCUBATION_KIHA:int                 = 384;
 		public static const INCUBATION_ISABELLA:int             =2160; //Longest pregnancy ever.
 		public static const INCUBATION_ALRAUNE:int              = 168;
@@ -108,12 +109,13 @@ public class PregnancyStore extends Object
 		public static const INCUBATION_EXCELLIA:int				= 480;
 		public static const INCUBATION_ZENJI:int                = 720;
 		public static const INCUBATION_AYANE:int				= 336;
+		public static const INCUBATION_ETNA:int					= 300;
+		public static const INCUBATION_CHI_CHI:int				= 300;
 		/*public static const INCUBATION_BELISA:int				= 300;
 		public static const INCUBATION_LILY:int					= 300;
-		public static const INCUBATION_TYRANTIA:int				= 300;
-		public static const INCUBATION_ETNA:int					= 300;
-		public static const INCUBATION_CHI_CHI:int				= 300;*/
-		
+		public static const INCUBATION_TYRANTIA:int				= 300;*/
+		public static const INCUBATION_LOPPE:int				= 200;
+
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types
 		private static const PREG_NOTICE_MASK:int               = 0x7FFF0000; //Use upper half to store the latest stages of pregnancy the player has noticed

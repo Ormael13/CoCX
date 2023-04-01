@@ -10,9 +10,11 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.WoodElves;
@@ -95,7 +97,7 @@ use namespace CoC;
 						chance: 0.8,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+							if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
 							else SceneLib.exploration.genericGolGobImpEncounters();
 						}
 					}, {
@@ -160,6 +162,7 @@ use namespace CoC;
 					}, {
 						name  : "werewolfFemale",
 						day : false,
+						when: fn.ifLevelMin(12),
 						call  : function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.werewolfFemaleScene.introWerewolfFemale();
@@ -226,7 +229,14 @@ use namespace CoC;
 							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
 						},
 						chance: 2
-					});
+					}/*, {
+						name: "demonProjects",
+						chance: 0.2,
+						when: function ():Boolean {
+							return DemonLab.MainAreaComplete >= 4;
+						},
+						call: SceneLib.exploration.demonLabProjectEncounters
+					}*/);
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
@@ -288,10 +298,10 @@ use namespace CoC;
 						name  : "Jojo",
 						night : false,
 						when  : function ():Boolean {
-							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
+							return (!player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
-								   && (JojoScene.monk < 2 || rand(2) == 0)
+								   && (JojoScene.monk < 2 || rand(2) == 0))
 								   || SceneLib.alvinaFollower.JojoDevilPurification == 1;
 						},
 						mods  : [fn.ifLevelMin(4)],
@@ -442,7 +452,7 @@ use namespace CoC;
 						when: fn.ifLevelMin(3),
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							curry(SceneLib.mimicScene.mimicTentacleStart, 3);
+							SceneLib.mimicScene.mimicTentacleStart(3);
 						},
 						chance: 0.25
 					}, {
@@ -453,12 +463,20 @@ use namespace CoC;
 					}, {
 						name  : "werewolfFemale",
 						day : false,
+						when: fn.ifLevelMin(12),
 						call  : function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.werewolfFemaleScene.introWerewolfFemale();
 						},
 						chance: 0.50
-					});
+					}/*, {
+						name: "demonProjects",
+						chance: 0.2,
+						when: function ():Boolean {
+							return DemonLab.MainAreaComplete >= 4;
+						},
+						call: SceneLib.exploration.demonLabProjectEncounters
+					}*/);
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
 				name: "shrine",
 				when: function():Boolean {
@@ -484,7 +502,7 @@ use namespace CoC;
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
@@ -528,7 +546,7 @@ use namespace CoC;
 					nightmareScene.nightmareIntro();
 				},
 				when: function():Boolean {
-					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && player.pregnancyIncubation == 0;
+					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && (player.canGetPregnant());
 				}
 			},/*{ // [INTERMOD:8chan]
 			 name: "dullahan",
@@ -705,7 +723,14 @@ use namespace CoC;
 				name  : "healpill",
 				call  : findHPill,
 				chance: 0.20
-			});
+			}/*, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			}*/);
 		}
 
 		public function exploreDeepwoods():void {
@@ -761,7 +786,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
 			outputText(images.showImage("monster-marble"));
-			outputText("\n\nShe goes up to the imp, and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large pile of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
+			outputText("\n\nShe goes up to the imp and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large bundles of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
 			outputText("\n\nShe gives a wistful sigh. \"<i>I haven't really explored much since getting to the farm.  Between the jobs Whitney gives me, keeping in practice with my hammer, milking to make sure I don't get too full, cooking, and beauty sleep, I don't get a lot of free time to do much else.</i>\"  She sighs again.  \"<i>Well, I need to get this back, so I'll see you later!</i>\"");
 			//end event
 			doNext(camp.returnToCampUseOneHour);
@@ -788,7 +813,7 @@ use namespace CoC;
 		}
 		//[FOREST]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
-		internal function bigJunkForestScene(lake:Boolean = false):void
+		public function bigJunkForestScene(lake:Boolean = false):void
 		{
 			clearOutput();
 			var x:Number = player.longestCock();

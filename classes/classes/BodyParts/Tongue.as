@@ -94,6 +94,11 @@ public class Tongue extends BodyPart{
 		name:"bee",
 		appearanceDesc: "Your long black proboscis-like tongue allows you to lick just anything clean."
 	});
+	public static const IMPISH: int = 16;
+	EnumValue.add(Types, IMPISH, "IMPISH", {
+		name:"impish",
+		appearanceDesc: "Your voice is far higher pitched than your old human one possibly because it's fit to a small imp body."
+	});
 
 	public function Tongue(creature:Creature) {
 		super(creature, null);

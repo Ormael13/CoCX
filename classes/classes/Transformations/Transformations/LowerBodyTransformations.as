@@ -1,6 +1,7 @@
 package classes.Transformations.Transformations {
 import classes.BodyParts.*;
 import classes.GeneticMemories.LowerBodyMem;
+import classes.GeneticMemories.TailMem;
 import classes.Items.MutationsHelper;
 import classes.PerkLib;
 import classes.Scenes.Metamorph;
@@ -66,7 +67,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.HOOFED ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -106,7 +108,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.KIRIN ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -146,7 +149,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CAT ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				var desc: String = "";
 
@@ -204,7 +208,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LIZARD ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -253,7 +258,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.FOX ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				if (legCount == 2 && player.lowerBody !== LowerBody.FOX) {
@@ -308,7 +314,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.DRAGON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				desc += "\n\n";
@@ -452,12 +459,14 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CLOVEN_HOOFED ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
 					desc += "You feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of cloven hoofed legs</b>.";
+					legCount = 4
 				}
 				// Case 2: Bipedal TF
 				else if (legCount === 2) {
@@ -503,7 +512,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SALAMANDER ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -552,7 +562,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.MANTIS ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -593,7 +604,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SHARK ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -634,7 +646,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LION ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -675,7 +688,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.ORCA ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -716,7 +730,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.RAIJU ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -793,7 +808,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.DOG;
 				player.legCount = legCount;
-					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DOG));
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DOG));
 			},
 			// is present
 			function (): Boolean {
@@ -859,7 +874,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.WEASEL ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -903,7 +919,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.BEAR ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -927,8 +944,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.BEAR;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEAR));
 				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEAR));
 			},
 			// is present
 			function (): Boolean {
@@ -946,7 +963,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.SEA_DRAGON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -970,8 +988,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.SEA_DRAGON;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SEA_DRAGON));
 				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SEA_DRAGON));
 			},
 			// is present
 			function (): Boolean {
@@ -988,7 +1006,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(player.lowerBody == LowerBody.GRYPHON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 					
 				// Case 1: Morph Taur legs without changing leg count
@@ -1011,8 +1030,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.GRYPHON;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GRYPHON));
 				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GRYPHON));
 			},
 			// is present
 			function (): Boolean {
@@ -1588,6 +1607,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			player.legCount = 2;
 			player.lowerBody = LowerBody.HYDRA;
 			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HYDRA));
+			Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.HYDRA));
 		},
 		// is present
 		function (): Boolean {
@@ -1601,19 +1621,19 @@ public class LowerBodyTransformations extends MutationsHelper {
 			var desc: String = "";
 
 			if (player.isGoo()) {
-				desc += "Trying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+				desc += "Trying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 			} else if (player.isTaur()) {
-				desc += "An strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
+				desc += "An strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
 						"The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>\n\nYour tail splits in two, and eventually reshapes into the more familiar form of two legs. These are far different from the ones that you expected, however; instead of the usual human legs, these have an array of small, shiny golden scales from the knee down, with [feather color]-colored feathers taking over the area between your knees and crotch, looking not unlike a bird’s.\n\nYour toes are unusually shaped, too; four of them are in the front, and one of them is on the back of each foot. The toenails have become sharp, menacing talons, best used for snatching prey and the occasional unwilling partner. Looks like <b>you have a new set of avian legs!</b>";
 			} else if (player.lowerBody == LowerBody.MELKIE) desc += "Your body straightens and telescopes suddenly and without the length of your seal half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated. As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new bird like legs wish sharp claws! Looks like <b>you have a new set of avian legs!</b";
 			else if (player.isScylla()) {
-				desc += "An strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
+				desc += "An strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
 						"The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 			} else if (player.isAlraune()) {
-				desc += "Trying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
+				desc += "Trying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\n"+
 						"The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 			} else if (player.lowerBody == LowerBody.HOOFED) {
-				desc += "Your feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+				desc += "Your feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 			} else if (player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS) {
 				desc += "Your feet feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The skin below your knees grows an array of small, shiny golden scales and your demonic high-heels recede into your body. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers sprouting all over the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>";
 			} else {
@@ -1701,8 +1721,6 @@ public class LowerBodyTransformations extends MutationsHelper {
 			var desc: String = "";
 
 			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyMouse, doOutput);
-
-			TransformationUtils.applyTFIfNotPresent(transformations.TailHinezumi, doOutput);
 
 			desc += "Your legs grow increasingly hot until suddenly they light up and start blazing, just like your tail. Well wow! Kicking with these is sure to pack an extra punch. The fur under your fiery coat doesn’t seem to burn either, but you're pretty sure anything that gets a kick from your legs is in for a painful experience. <b>You now have blazing mouse legs!</b>";
 
@@ -2035,7 +2053,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			if (doOutput) outputText(desc);
 			player.legCount = 2;
 			player.lowerBody = LowerBody.JABBERWOCKY;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.JABBERWOCKY));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.JABBERWOCKY));
 		},
 		// is present
 		function (): Boolean {
@@ -2056,7 +2074,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			player.coatColor = "reddish-orange";
 			player.legCount = 2;
 			player.lowerBody = LowerBody.CRAB;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CRAB));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CRAB));
 		},
 		// is present
 		function (): Boolean {
@@ -2074,7 +2092,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			if (doOutput) outputText(desc);
 			player.legCount = 6;
 			player.lowerBody = LowerBody.CANCER;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CANCER));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CANCER));
 		},
 		// is present
 		function (): Boolean {
@@ -2107,7 +2125,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				// No special text outside the event
 			}
 			player.lowerBody = LowerBody.ATLACH_NACHA;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ATLACH_NACHA));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ATLACH_NACHA));
 		},
 		// is present
 		function (): Boolean {
@@ -2132,6 +2150,65 @@ public class LowerBodyTransformations extends MutationsHelper {
 		// is present
 		function (): Boolean {
 			return player.lowerBody === LowerBody.ANT && player.legCount === 2;
+		}
+	);
+
+	public const LowerBodyTiny: Transformation = new SimpleTransformation("Tiny Lower Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+				desc += "Your legs and feet shrink till they are almost comically small and can barely support your frame";
+
+				if (doOutput) outputText(desc);
+				player.legCount = 2;
+				player.lowerBody = LowerBody.TINY;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.TINY));
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.TINY && player.legCount === 2;
+			}
+	);
+
+	public const LowerBodyWorm: Transformation = new SimpleTransformation("Worm Lower Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				// Doesn't support tails
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				player.chitinColor = "pink";
+
+				if (doOutput) outputText(desc);
+				player.legCount = 1;
+				player.lowerBody = LowerBody.SANDWORM;
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.SANDWORM;
+			}
+	);
+	
+	public const LowerBodyYgddrasilRootClaws: Transformation = new SimpleTransformation("Ygddrasil Root Claws Lower Body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
+			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+			desc += "You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>";
+
+			if (doOutput) outputText(desc);
+			player.lowerBody = LowerBody.YGG_ROOT_CLAWS;
+			player.legCount = 2;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.YGG_ROOT_CLAWS));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.YGG_ROOT_CLAWS && player.legCount === 2;
 		}
 	);
 	

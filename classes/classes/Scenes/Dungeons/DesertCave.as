@@ -6,7 +6,6 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Desert.CumWitch;
 import classes.Scenes.Dungeons.DesertCave.*;
-import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -625,7 +624,7 @@ public class DesertCave extends DungeonAbstractContent
 			else {
 				outputText("The Cum Sorceress smiles and giggles, \"<i>So you want to become a Sand Witch?  Good, we need more.  Now, ");
 			}
-			if(player.pregnancyType == 0) outputText("let's go ahead and get your first daughter inside you, shall we?");
+			if(player.canGetPregnant()) outputText("let's go ahead and get your first daughter inside you, shall we?");
 			else outputText("let's go ahead and have some fun, shall we?  We'll have to wait until you pop out whatever's in your womb before I give you your first witch child.");
 			outputText("  There will be plenty of time to make you one of us while we're waiting.</i>\"");
 			
@@ -659,7 +658,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText(" or to get your first proper administration of witch-cum.");
 			
 			outputText("\n\nGiggling, you agree wholeheartedly and ask her to help you up onto a bench, so you can be properly bred.  Getting one in the oven now will give you a headstart on getting both your wombs pregnant - you just need to get them to give you a second cunt after this.");
-			if(player.pregnancyIncubation > 0) outputText("  It seems you've somehow managed to forget that you're already pregnant, and the Cum Witch doesn't seem keen to remind you.");
+			if(player.isPregnant()) outputText("  It seems you've somehow managed to forget that you're already pregnant, and the Cum Witch doesn't seem keen to remind you.");
 			outputText("  Just thinking about her gets you wet, wetter than you were already, and you were already so hot and moist from earlier.  Your legs spread of their own accord as she lifts you onto a waist-high bench, your cunt-juices drooling down the jizz-polished hardwood, your head swimming from the potent smells of sex that saturate this room.  Wiggling your bottom, you move your [butt] back and forth enticingly, shaking it in front of your partner's leaky tool, your eyes locking onto that messy implement as if it were going to save your life somehow.");
 			
 			outputText("\n\nThe cum witch gives your impertinent bottom a slap to steady it, bursting an exclamation of pain from your mouth at the sudden rough treatment.  'She's so rough,' you mentally whine, but another voice answers, 'But she'll be so good to you!'  Sighing contently, you listen to that second, louder thought and lie there, watching your lover slowly line herself with your entrance.  When her cock's oozing tip first brushes your folds, an electric bolt of raw pleasure runs through your body, drawing out a slippery spurt of lady-spunk just from that touch.  Gods above and below, it's so hot, just touching it seems to make your pussy wetter.  If you didn't know better, you'd swear your pussy was boiling over with lust and frothing with need.");
@@ -2234,14 +2233,15 @@ public class DesertCave extends DungeonAbstractContent
 		}
 
 		public function sexWithFriendlySandMother():void {
+			monster = new SandMother();
 			menu();
 			//friendly cunt fuck:
-			addButtonIfTrue(0, "GetMilkFill", lesboMilkFilling, "Req. a vagina",player.hasVagina(),
-				"Get into female sex with the Sand Mother and get your vagina stuffed with milk!");
-			addButtonIfTrue(1, "Vaginal", friendlySandMotherFuck,
-				"Req. a cock with area smaller than " + monster.vaginalCapacity(),
-				player.cockThatFits(monster.vaginalCapacity()) >= 0,
-				"Penetrate her pussy with your penis.");
+			addButton(0, "GetMilkFill", lesboMilkFilling)
+				.hint("Get into female sex with the Sand Mother and get your vagina stuffed with milk!")
+				.disableIf(player.cockThatFits(monster.vaginalCapacity()) < 0, "Req. a cock with area smaller than " + monster.vaginalCapacity());
+			addButton(1, "Vaginal", friendlySandMotherFuck)
+				.hint("Penetrate her pussy with your penis.")
+				.disableIf(!player.hasVagina(), "Req. a vagina");
 			addButton(4,"Back",sandWitchMotherFriendlyMenu);
 		}
 		
@@ -3023,7 +3023,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(!player.isTaur()) outputText("  Somehow, she's able to pull her hand away from your hip while still holding you aloft.  A glowing, arm-shaped silhouette remains, even as she diverts her attention elsewhere.");
 			outputText("  'Schluck-schluck-schluck.'  You can hear her pushing her fingers deep into her neglected womanhoods, and judging by the doubled, wet sounds of penetration, she must be jamming two fingers in her doubled cunts.");
 			outputText("\n\n\"<i>Ooohh yes, Champion, this IS what I needed,</i>\" she purrs, accompanied by the lewd sounds of her own self-pleasure.  A second, three-inch, mock-phallus starts to prod at your milky slit along with its brother, and with a pleasured moan, you feel it slide inside, stretching you twice as wide and wet.  Alternating back and forth, hot jets of alabaster cream lance deep inside you, one after another.  You can see the witch using her free hand to compress her breasts in turn, milking her gushing, over-productive breasts again and again.  ");
-			if(player.pregnancyIncubation == 0) outputText("Your poor womb is flooding with the stuff.  It's getting so full that you're starting to feel like you should be labelled 'cream-filled', and a tiny bump has begun to swell on your midsection in response.");
+			if(player.canGetPregnant()) outputText("Your poor womb is flooding with the stuff.  It's getting so full that you're starting to feel like you should be labelled 'cream-filled', and a tiny bump has begun to swell on your midsection in response.");
 			else outputText("Your poor pregnant womb is battered with the stuff, but since you're already full, jets of hot cream are spraying out from your [vagina] around nipple-shaped milk-injectors.");
 			//CuntChange 6
 			player.cuntChange(6,true,true,false);
@@ -3035,7 +3035,7 @@ public class DesertCave extends DungeonAbstractContent
 			player.cuntChange(9,true,true,false);
 			outputText("\n\nThe Sand Mother gasps, \"<i>So good.  How's the milk, Champion?  Is it good?  Your pussy is slurping it down so well!</i>\"");
 			outputText("\n\nIt IS good.  You nod to her, noting the way her tongue is lolling out and the rapidly increasing pace of her mastubatory noises.  She's going to cum soon and probably fountain from her nipples just as hard as she will from her two twats.  Your thoughts are interrupted by a sudden intrusion in your packed delta - is that... is that a FOURTH nipple inside you?  The answering injection of cream confirms what your startled consciousness is struggling to come to terms with.  Four nipples are spraying almost continually into you.  Gods, you're getting so full!  ");
-			if(player.pregnancyIncubation == 0) outputText("You can feel your midsection going round, wobbling wildly.  POP!  Your belly-button has turned into an outie, accompanied by a wobbling, comforting weight inside you.  Four months... five, no - six... you give up on counting, but with every second that passes, you're getting bigger and bigger, visually matching any of the pregnant women you saw growing up.");
+			if(player.canGetPregnant() && !player.hasVisiblePregnancy()) outputText("You can feel your midsection going round, wobbling wildly.  POP!  Your belly-button has turned into an outie, accompanied by a wobbling, comforting weight inside you.  Four months... five, no - six... you give up on counting, but with every second that passes, you're getting bigger and bigger, visually matching any of the pregnant women you saw growing up.");
 			else outputText("You can feel it fountaining out of you, backwashing out to splatter the witch with wetness, her skin going glossy under the tide of white.  If you weren't already pregnant, you'd probably be ballooning up with her lactic cargo, a rounded, milk-filled cream-balloon.");
 			
 			outputText("\n\n\"<i>Ungh, uhh... gonna c-c-u-uuuhhhhhhh!</i>\" the Sand Mother babbles, splattering wetness from her pussies onto your [butt] in a shower of girl-goo.  She screeches, \"<i>FUCK YES!  SO GOOD!</i>\" before shutting down.  with her four tits cradled in her arm, she squeezes all of them at once, and you're suddenly stuffed with what feels like gallons of gushing pleasure.  Your body was climbing towards orgasm already, but the explosive injection is just too potent for your ecstatic, quivering pussy-lips to endure.  You groan as orgasmic heat radiates through you, culminating in a cunt-clenching squeeze so strong that the nipples are forced to empty inside you a moment before they're popped out.  A milky creampie drips down your [legs] as your twitching [butt] falls into the witch's lap, leaking all over her.");
@@ -3397,7 +3397,7 @@ public class DesertCave extends DungeonAbstractContent
 			//{TAKE DAT SHIT YO}
 			else {
 				outputText("You figure one of these brown pills should render you barren, and you pop it into your mouth, not wanting to be impregnated.");
-				if(player.pregnancyIncubation > 0) outputText("  Of course, you're already pregnant, and this doesn't seem to be doing anything about THAT.");
+				if(player.isPregnant()) outputText("  Of course, you're already pregnant, and this doesn't seem to be doing anything about THAT.");
 				outputText("  You do feel an emptiness in your midsection, reassuring you that the pill did its job.");
 				if(!player.hasVagina()) outputText("  Now if you ever re-grow a vagina, you should be fine.");
 				player.createStatusEffect(StatusEffects.Contraceptives,0,0,0,0);
@@ -3572,7 +3572,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.biggestTitSize() >= 4 && player.biggestTitSize() < 15) {
 				outputText("\n\nYour breasts bounce up and down as you get in to the groove of fucking your pregnant playtoy.");
 				//{if player is largely pregnant and has large breasts.}
-				if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200) outputText("  Each time it does so your own breasts slap against your swollen midsection.");
+				if(player.hasVisiblePregnancy()) outputText("  Each time it does so your own breasts slap against your swollen midsection.");
 				//{if player has four or more large breasts and is not pregnant}
 				else if(player.bRows() >= 2) outputText("  Your lower pair of breasts slap against the pregnant girl's belly with each thrust.");
 			}
@@ -3662,7 +3662,7 @@ public class DesertCave extends DungeonAbstractContent
 			//{for small or non-breasted characters}
 			else outputText("rest against your torso and shoulders");
 			outputText(".");
-			if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200) outputText("  Each of these raised legs carefully bend at the knee to accomodate your own pregnant belly that looms over their prone figures.");
+			if(player.hasVisiblePregnancy()) outputText("  Each of these raised legs carefully bend at the knee to accomodate your own pregnant belly that looms over their prone figures.");
 			outputText("  As each witch lies on her side, both of them begin feeling your stiff cocks slap against their multiple pussies.  They moan as their four pairs of labia bloom in anticipation of the fucking to come.  Each set of nether lips are dark and dripping with gobs of desperation, but on each girl there's one set that looks particularly gaping as if the pressure inside was forcing it open.  It isn't difficult to figure out that those are the ones that lead to their already occupied wombs, while the other sets are the ones eagerly awaiting a fresh deposit of baby batter.");
 				
 			outputText("\n\nYou feel supremely ready to fulfill those cum craving needs and you carefully align your cocks for the purpose.");
@@ -4087,14 +4087,14 @@ public class DesertCave extends DungeonAbstractContent
 		120 == impossible to conceal
 		72 == painfully distended
 		48 == bulges with unclean spawn..blahblahblah*/
-		public function sandPregUpdate():Boolean {
+		public function sandPregUpdate(womb:Object):Boolean {
 			//1: 
-			if(player.pregnancyIncubation == 336) {
+			if(womb["incubation"] == 336) {
 				outputText("\nYour breasts have felt unusually heavy recently, and a strange pulsing sensation occasionally emanates from them.  Your appetite is a little off; you could really go for some milk...\n");
 				return true;
 			}
 			//2:
-			if(player.pregnancyIncubation == 280) {
+			if(womb["incubation"] == 280) {
 				outputText("\nYou've been having strange dreams recently, about seeds growing before your eyes into beautiful flowers; what's really weird is the sense of pride and maternal contentment that seeing them bloom makes you feel.  Your breasts are definitely heavier than normal, and sometimes you wake up to find them damp; are you ");
 				if(player.biggestLactation() < 1) outputText("starting to lactate");
 				else outputText("lactating more");
@@ -4111,7 +4111,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//3:
-			if(player.pregnancyIncubation == 216) {
+			if(womb["incubation"] == 216) {
 				outputText("\nYour breasts have definitely grown bigger, and they occasionally trickle milk.  More importantly than that, your stomach is bulging out in a small but unquestionable pot-belly.  You're definitely pregnant.\n");
 				i = player.bRows();
 				while(i > 0) {
@@ -4125,7 +4125,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//4:
-			if(player.pregnancyIncubation == 180) {
+			if(womb["incubation"] == 180) {
 				outputText("\nYour belly continues to grow, the hormones triggering your milk's production to kick it up a notch.  Your breasts are so heavy and sensitive, aching to be used to feed life-giving milk to something.\n");
 				while(player.biggestLactation() < 2) {
 					player.boostLactation(.5);
@@ -4133,7 +4133,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//5:
-			if(player.pregnancyIncubation == 120) {
+			if(womb["incubation"] == 120) {
 				outputText("\nYou sometimes catch yourself humming to your unborn child, stroking your belly like a contented mother.  At other times, you catch yourself proudly stroking your swollen breasts, admiring the way it makes the milk spurt and flow.");
 				while(player.biggestLactation() < 3) {
 					player.boostLactation(.5);
@@ -4141,7 +4141,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//6:
-			if(player.pregnancyIncubation == 72) {
+			if(womb["incubation"] == 72) {
 				outputText("\nMilk dribbles constantly out of your nipples now, in many ways being harder to deal with than the ever-increasing swell of your midriff.  The scent of milk hangs in the air around you constantly, giving you a craving to suckle almost as bad as your breasts' need to be suckled from.\n");
 				while(player.biggestLactation() < 4.5) {
 					player.boostLactation(.5);
@@ -4149,7 +4149,7 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 			//7:
-			if(player.pregnancyIncubation == 48) {
+			if(womb["incubation"] == 48) {
 				outputText("\nYour stomach hangs out, heavy and round as any full-term mother's back in Ingnam, your breasts feeling almost as taut and swollen, as if jealous of the life nearly grown inside your womb.  At morning, you find yourself milking your breasts until the cascading fluid ends up glazing your engorged stomach in a beautiful liquid white sheen, not that it seems to make much difference to your production.  You can only hope whatever's growing inside you will be hungry enough to keep up with all the food you'll have for it...");
 				while(player.biggestLactation() < 5.5) {
 					player.boostLactation(.5);
@@ -4162,10 +4162,6 @@ public class DesertCave extends DungeonAbstractContent
 		//*Witch Birth Scene:
 		public function birthAWitch():void {
 			outputText("\n<b><u>Something amazing happens...</u></b>\n");
-			if(player.vaginas.length == 0) {
-				outputText("You feel a terrible pressure in your groin... then an incredible discomfort accompanied by the rending of flesh.  You look down and behold a vagina.  ");
-				player.createVagina();
-			}
 			outputText("You moan in pain as a sudden sharp spike ripples through your distended midriff.  You clumsily haul yourself upright and waddle out into camp, collapsing as you hear your water break, soaking the dry earth of the wasteland below you.  Placing yourself in the most comfortable position you can manage, you grit your teeth and start to push...");
 			outputText("\n\nYour world fades away to the demands of your body; the cycle of painful pushing and exhausted relaxation.  Time ceases to exist, but, finally, inevitably, your body thrusts its squalling intruder into the outside world.  You collapse, heaving in lungfuls of air, as the pain in your body fades away to a dull throbbing ache.  When you feel like you can move without breaking, you pick yourself up and investigate your howling, healthy offspring.");
 			

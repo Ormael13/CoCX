@@ -23,7 +23,6 @@ import classes.Scenes.SceneLib;
 public class HeXinDao extends BaseContent
 {
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
-    public var chichiScene:ChiChiFollower = new ChiChiFollower();
     public var riverdungeon:RiverDungeon = new RiverDungeon();
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
 
@@ -57,7 +56,7 @@ public class HeXinDao extends BaseContent
 		addButton(2, "Clothing", riverislandVillageStuffLunarClothing);
 		if (model.time.hours > 19) addButton(3, "Fireworks", riverislandVillageStuffLunarFireworks);
 		else addButtonDisabled(3, "Fireworks", "You need to wait till 8 PM for that.");
-		if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && model.time.hours > 17) addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && !SceneLib.chichiScene.ChiChiKickedOut && model.time.hours > 17) addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
 		else addButtonDisabled(4, "Chi Chi", "You need to wait until it's 6 PM or later for that.");
 		addButton(14, "Back", riverislandVillageStuff1).hint("Leave the festival.");
 	}
@@ -124,7 +123,7 @@ public class HeXinDao extends BaseContent
 			outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 50 gems! C'mon and buy while there's some left!</i>\"");
 			outputText("\n\nYou put the dress in your bag for now. Now to put it on.");
 		}
-		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
+		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && !SceneLib.chichiScene.ChiChiKickedOut) {
 			outputText("\n\n\"<i>Hey, Baka! I thought you'd never join in. I waited for you here all day, you know! Sit next to me and hold my hand, I want the folks out there to know we're together.</i>\"");
 			outputText("\n\nTogether as in a couple? Is she opening up or something? Your comment makes her light red cheeks even redder.");
 			outputText("\n\n\"<i>N..no! Nothing of the sort! I don't care if all the other girls look at you right now. I’m just preventing you from flirting with half of the women in town!</i>\"");
@@ -175,7 +174,7 @@ public class HeXinDao extends BaseContent
 		addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
 		addButton(11, "Orsbulg", eraendirorsbulg.OrsbulgMainMenu);
 		addButton(12, "Golemancer", golemancershop);
-        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && !SceneLib.chichiScene.ChiChiKickedOut) addButton(13, "Chi Chi", SceneLib.chichiScene.MeetingChiChiInHeXinDao);
         addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
     public function golemmerchant():void {
@@ -214,19 +213,16 @@ public class HeXinDao extends BaseContent
             buyItem1 = curry(confirmBuy1,Tier0,"Golem",1);
             buyItem2 = curry(confirmBuy2,Tier0,"Golem",0.2);
             menu();
-             addButton(0, "LowSFRPill", buyItem2,consumables.LG_SFRP, sayLine2(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Low-grade Soulforce Recovery Pill.");
-             addButton(1, "MidSFRPill", buyItem2,consumables.MG_SFRP, sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.").disableIf(!hasSoulPersonage);
-             addButton(2, "HighSFRPil", buyItem2,consumables.HG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
-             addButton(3, "SupSFRPill", buyItem2,consumables.SG_SFRP, sayLine2(consumables.SG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
-
-             addButton(5, "LowSFRBotl", buyItem2,consumables.LGSFRPB, sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Bottle of Low-grade Soulforce Recovery Pills.")
-             addButton(6, "MidSFRBotl", buyItem2,consumables.MGSFRPB, sayLine2(consumables.MGSFRPB,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Bottle of Mid-grade Soulforce Recovery Pills.").disableIf(!hasSoulPersonage);
-             addButton(7, "HighSFRBot", buyItem2,consumables.HGSFRPB, sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
-             addButton(8, "SupSFRBotl", buyItem2,consumables.SGSFRPB, sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
-
-             addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pill Bottle.");
-
-             addButton(14, "Back", golemmerchant);
+            addButton(0, "LowSFRPill", buyItem2,consumables.LG_SFRP, sayLine2(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Low-grade Soulforce Recovery Pill.");
+            addButton(1, "MidSFRPill", buyItem2,consumables.MG_SFRP, sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.").disableIf(!hasSoulPersonage);
+            addButton(2, "HighSFRPil", buyItem2,consumables.HG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
+            addButton(3, "SupSFRPill", buyItem2,consumables.SG_SFRP, sayLine2(consumables.SG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
+            addButton(5, "LowSFRBotl", buyItem2,consumables.LGSFRPB, sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Bottle of Low-grade Soulforce Recovery Pills.")
+            addButton(6, "MidSFRBotl", buyItem2,consumables.MGSFRPB, sayLine2(consumables.MGSFRPB,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Bottle of Mid-grade Soulforce Recovery Pills.").disableIf(!hasSoulPersonage);
+            addButton(7, "HighSFRBot", buyItem2,consumables.HGSFRPB, sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
+            addButton(8, "SupSFRBotl", buyItem2,consumables.SGSFRPB, sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
+            addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pill Bottle.");
+            addButton(14, "Back", golemmerchant);
             statScreenRefresh();
         }
         function TierI():void {
@@ -235,8 +231,7 @@ public class HeXinDao extends BaseContent
 			menu();
             addButton(2, "Bag of Cosmos", buyItem2,consumables.BAGOCOS, sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
 			addButton(3, "BT.Solution", buyItem2,useables.BTSOLUTION, sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death.")).hint("Vial of Body Tempering Solution.");
-
-			addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL, sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.").disableIf(flags[kFLAGS.HUNGER_ENABLED] > 0);
+			addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL, sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.").disableIf(flags[kFLAGS.HUNGER_ENABLED] == 0);
             addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN, sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust. This very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like even the name of the manual could have been influenced by this realm's nature... either that or it's just a coincidence.").hint("Triple Thrust Manual.").disableIf(!hasSoulCultivator);
             addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN, sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  ").hint("Draco Sweep Manual.").disableIf(!hasSoulCultivator);
             addButton(7, "Many Birds", buyItem2,consumables.MABIMAN, sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ").hint("Many Birds Manual.").disableIf(!hasSoulCultivator);
@@ -414,13 +409,17 @@ public class HeXinDao extends BaseContent
         if (player.gems >= 20) addButton(0, "20 Gems", exchange,1).hint("Exchange 20 gems for 1 spirit stone.");
         if (player.gems >= 100) addButton(1, "100 Gems", exchange,5).hint("Exchange 100 gems for 5 spirit stones.");
         if (player.gems >= 200) addButton(2, "200 Gems", exchange,10).hint("Exchange 200 gems for 10 spirit stones.");
-        if (player.gems >= 1000) addButton(3, "1000 Gems", exchange,50).hint("Exchange 1000 gems for 50 spirit stones.");
-        if (player.gems >= 2000) addButton(4, "2000 Gems", exchange, 100).hint("Exchange 2000 gems for 100 spirit stones.");
+        if (player.gems >= 1000) addButton(3, "1000 Gems", exchange,50).hint("Exchange 1,000 gems for 50 spirit stones.");
+        if (player.gems >= 2000) addButton(4, "2000 Gems", exchange,100).hint("Exchange 2,000 gems for 100 spirit stones.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 1) addButton(5, "1 SS", exchange,1,false).hint("Exchange 1 spirit stone for 5 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 5) addButton(6, "5 SS", exchange,5,false).hint("Exchange 5 spirit stones for 25 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(7, "10 SS", exchange,10,false).hint("Exchange 10 spirit stones for 50 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 50) addButton(8, "50 SS", exchange,50,false).hint("Exchange 50 spirit stones for 250 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 100) addButton(9, "100 SS", exchange,100,false).hint("Exchange 100 spirit stones for 500 gems.");
+        if (player.gems >= 10000) addButton(10, "10000 Gems", exchange,500).hint("Exchange 10,000 gems for 500 spirit stones.");
+        if (player.gems >= 20000) addButton(11, "20000 Gems", exchange,1000).hint("Exchange 20,000 gems for 1,000 spirit stones.");
+        if (flags[kFLAGS.SPIRIT_STONES] >= 500) addButton(12, "500 SS", exchange,500,false).hint("Exchange 500 spirit stones for 2,500 gems.");
+        if (flags[kFLAGS.SPIRIT_STONES] >= 1000) addButton(13, "1000 SS", exchange,1000,false).hint("Exchange 1,000 spirit stones for 5,000 gems.");
         addButton(14, "Back", mogahenmerchant);
     }
     private function exchange(value:int,toStones:Boolean=true):void{
@@ -432,6 +431,8 @@ public class HeXinDao extends BaseContent
                 case 10:outputText("He finishes the transaction, giving you ten spirit stones.");break;
                 case 50:outputText("With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
                 case 100:outputText("With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
+                case 500:outputText("With great haste, he finishes the transaction, giving you five hundred spirit stones.");break;
+                case 1000:outputText("With utter haste, he finishes the transaction, giving you a thousand spirit stones.");break;
             }
             player.gems -= 20*value;
             flags[kFLAGS.SPIRIT_STONES]+=value;
@@ -441,7 +442,9 @@ public class HeXinDao extends BaseContent
                 case 5:outputText("You hand over five stones to the merchant. With barely noticable mumbling about the customer being stingy he slowly counts out and hands over your gems.");break;
                 case 10:outputText("You hand over ten stones to the merchant. He finishes the transaction without fuss, giving you your gems.");break;
                 case 50:outputText("You hand over fifty stones to the merchant. He finishes the transaction a bit faster than normal, giving you your gems.");break;
-                case 100:outputText("You hand over a hundred stones to the merchant. With a smile on his face, he swiftly counts up your gems, handing them over.");break;
+                case 100:outputText("You hand over a hundred stones to the merchant. He finishes the transaction faster than normal, giving you your gems.");break;
+                case 500:outputText("You hand over five hundred stones to the merchant. With a smile on his face, he swiftly counts up your gems, handing them over.");break;
+                case 1000:outputText("You hand over a thousand stones to the merchant. With a large smile on his face, he swiftly counts up your gems, handing them over.");break;
             }
             player.gems += 5*value;
             flags[kFLAGS.SPIRIT_STONES]-=value;
@@ -456,13 +459,19 @@ public class HeXinDao extends BaseContent
         outputText("\"<i>Let me look over what you have for sale. I promise I will give you a 'fair' price for them,</i>\" With this said, the merchant calmly awaits what you will take out.");
         menu();
         if (player.hasItem(useables.GOLCORE, 1)) addButton(0, "Sell 1", sellOneGolemCore).hint("Sell 1 golem core.");
-        if (player.hasItem(useables.GOLCORE, 5)) addButton(1, "Sell 5", sellFiveGolemCores).hint("Sell 5 golem cores.");
-        if (player.hasItem(useables.PCSHARD, 1)) addButton(5, "Sell 1", sellOnePurpleCrystalShard).hint("Sell 1 purple crystal shard.");
-        if (player.hasItem(useables.PCSHARD, 5)) addButton(6, "Sell 5", sellFivePurpleCrystalShards).hint("Sell 5 purple crystal shards.");
-        if (player.hasItem(useables.ELSHARD, 1)) addButton(7, "Sell 1", sellOneElementalShard).hint("Sell 1 elemental shard.");
-        if (player.hasItem(useables.ELSHARD, 5)) addButton(8, "Sell 5", sellFiveElementalShards).hint("Sell 5 elemental shards.");
+        if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Sell 1", sellOneElementalShard).hint("Sell 1 elemental shard.");
+        if (player.hasItem(useables.LELSHARD, 1)) addButton(2, "Sell 1", sellOneLargeElementalShard).hint("Sell 1 large elemental shard.");
+        if (player.hasItem(useables.ELCRYST, 1)) addButton(3, "Sell 1", sellOneElementalCrystal).hint("Sell 1 elemental crystal.");
+        if (player.hasItem(useables.EL_CORE, 1)) addButton(4, "Sell 1", sellOneElementalCore).hint("Sell 1 elemental core.");
+        if (player.hasItem(useables.GOLCORE, 5)) addButton(5, "Sell 5", sellFiveGolemCores).hint("Sell 5 golem cores.");
+        if (player.hasItem(useables.ELSHARD, 5)) addButton(6, "Sell 5", sellFiveElementalShards).hint("Sell 5 elemental shards.");
+        if (player.hasItem(useables.LELSHARD, 5)) addButton(7, "Sell 5", sellFiveLargeElementalShards).hint("Sell 5 large elemental shards.");
+        if (player.hasItem(useables.ELCRYST, 5)) addButton(8, "Sell 5", sellFiveElementalCrystals).hint("Sell 5 elemental crystals.");
+        if (player.hasItem(useables.EL_CORE, 5)) addButton(9, "Sell 5", sellFiveElementalCores).hint("Sell 5 elemental cores.");
         if (player.hasItem(useables.E_ICHOR, 1)) addButton(10, "Sell 1", sellOneEIchorVial).hint("Sell 1 vial of E-Ichor.");
         if (player.hasItem(useables.E_ICHOR, 5)) addButton(11, "Sell 5", sellFiveEIchorVials).hint("Sell 5 vials of E-Ichor.");
+        if (player.hasItem(useables.PCSHARD, 1)) addButton(12, "Sell 1", sellOnePurpleCrystalShard).hint("Sell 1 purple crystal shard.");
+        if (player.hasItem(useables.PCSHARD, 5)) addButton(13, "Sell 5", sellFivePurpleCrystalShards).hint("Sell 5 purple crystal shards.");
         addButton(14, "Back", mogahenmerchant);
     }
 
@@ -473,27 +482,6 @@ public class HeXinDao extends BaseContent
         flags[kFLAGS.SPIRIT_STONES]++;
         doNext(sellItemsForSpiritStones);
     }
-    public function sellFiveGolemCores():void {
-        clearOutput();
-        outputText("\"<i>Golem cores. Let me check...Hm...They seem to be in decent shape,</i>\" after the examination he walks away and return shortly. \"<i> Five stones for them.</i>\"");
-        player.destroyItems(useables.GOLCORE, 5);
-        flags[kFLAGS.SPIRIT_STONES] += 5;
-        doNext(sellItemsForSpiritStones);
-    }
-    public function sellOnePurpleCrystalShard():void {
-        clearOutput();
-        outputText("\"<i>A single purple crystal shard. It's still glowing. Two spirit stones for it,</i>\" he states after examining the shard. Moga takes your crystal shard in back, and returns a second later with your stones.");
-        player.destroyItems(useables.PCSHARD, 1);
-        flags[kFLAGS.SPIRIT_STONES] += 2;
-        doNext(sellItemsForSpiritStones);
-    }
-    public function sellFivePurpleCrystalShards():void {
-        clearOutput();
-        outputText("\"<i>Purple crystal shards. Let me check...yeah, all of them seem to be intact,</i>\" after examination he walks away and return shortly. \"<i>Here you go. Ten spirit stones.</i>\"");
-        player.destroyItems(useables.PCSHARD, 5);
-        flags[kFLAGS.SPIRIT_STONES] += 10;
-        doNext(sellItemsForSpiritStones);
-    }
     public function sellOneElementalShard():void {
         clearOutput();
         outputText("\"<i>A single elemental shard. It still possesses a lot of energy...I can give you three spirit stones for it.</i>\" He takes the shard, going into the back. Moga returns and gives you three stones.");
@@ -501,11 +489,60 @@ public class HeXinDao extends BaseContent
         flags[kFLAGS.SPIRIT_STONES] += 3;
         doNext(sellItemsForSpiritStones);
     }
+    public function sellOneLargeElementalShard():void {
+        clearOutput();
+        outputText("\"<i>A single large elemental shard. It still possesses a lot of energy...I can give you nine spirit stones for it.</i>\" He takes the large shard, going into the back. Moga returns and gives you nine stones.");
+        player.destroyItems(useables.LELSHARD, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 9;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOneElementalCrystal():void {
+        clearOutput();
+        outputText("\"<i>A single elemental crystal. Not so common find...I can give you thirty spirit stones for it.</i>\" He takes the crystal, going into the back. Moga returns and gives you thirty stones.");
+        player.destroyItems(useables.ELCRYST, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 30;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOneElementalCore():void {
+        clearOutput();
+        outputText("\"<i>A single elemental core. Nearly priceless treasure but...I would give you, <b>with great pain of stones that i must part with</b> a whole one hundred of spirit stones.</i>\" He takes the core, going into the back. Moga returns and gives you one hundred stones.");
+        player.destroyItems(useables.EL_CORE, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 100;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveGolemCores():void {
+        clearOutput();
+        outputText("\"<i>Golem cores. Let me check...Hm...They seem to be in decent shape,</i>\" after the examination he walks away and return shortly. \"<i>Five stones for them.</i>\"");
+        player.destroyItems(useables.GOLCORE, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 5;
+        doNext(sellItemsForSpiritStones);
+    }
     public function sellFiveElementalShards():void {
         clearOutput();
-        outputText("\"<i>Elemental shards. Let me check...yes all of them seems to be in a decent state,</i>\" after the examination he walks away and returns shortly. \"<i>Twenty five stones for them.</i>\"");
+        outputText("\"<i>Elemental shards. Let me check...yes all of them seems to be in a decent state,</i>\" after the examination he walks away and returns shortly. \"<i>Fifteen stones for them.</i>\"");
         player.destroyItems(useables.ELSHARD, 5);
         flags[kFLAGS.SPIRIT_STONES] += 15;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveLargeElementalShards():void {
+        clearOutput();
+        outputText("\"<i>Large elemental shards. Let me check...yes all of them seems to be in a decent state,</i>\" after the examination he walks away and returns shortly. \"<i>Fourty five stones for them.</i>\"");
+        player.destroyItems(useables.LELSHARD, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 45;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveElementalCrystals():void {
+        clearOutput();
+        outputText("\"<i>Elemental crystals. Just what luck you have to gather five of them,</i>\" after the examination he walks away and returns shortly. \"<i>One Hundred and fifty stones for them.</i>\"");
+        player.destroyItems(useables.ELCRYST, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 150;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveElementalCores():void {
+        clearOutput();
+        outputText("\"<i>Elemental cores? FIVE ELEMENTAL CORES?</i>\" for a moment he's silently breathing until reasuming. \"<i>It's good you came to me. Five hundred stones,</i>\" he exclaims and with haste walks away and returns much sooner than usualy. \"<i>Five hundred stones for them.</i>\"");
+        player.destroyItems(useables.EL_CORE, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 500;
         doNext(sellItemsForSpiritStones);
     }
     public function sellOneEIchorVial():void {
@@ -520,6 +557,20 @@ public class HeXinDao extends BaseContent
         outputText("\"<i>Vials of E-Ichor. Let me check...yes all of them seems to be well-preserved,</i>\" after long examination he walks away and return after even longer time. \"<i>Here are your hun... hundred stones for them...</i>\"");
         player.destroyItems(useables.E_ICHOR, 5);
         flags[kFLAGS.SPIRIT_STONES] += 100;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOnePurpleCrystalShard():void {
+        clearOutput();
+        outputText("\"<i>A single purple crystal shard. It's still glowing. Two spirit stones for it,</i>\" he states after examining the shard. Moga takes your crystal shard in back, and returns a second later with your stones.");
+        player.destroyItems(useables.PCSHARD, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 2;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFivePurpleCrystalShards():void {
+        clearOutput();
+        outputText("\"<i>Purple crystal shards. Let me check...yeah, all of them seem to be intact,</i>\" after examination he walks away and return shortly. \"<i>Here you go. Ten spirit stones.</i>\"");
+        player.destroyItems(useables.PCSHARD, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 10;
         doNext(sellItemsForSpiritStones);
     }
 
@@ -872,7 +923,7 @@ public class HeXinDao extends BaseContent
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: ?weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
-	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) chichiScene.EnterOfTheChiChi();
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && !SceneLib.chichiScene.ChiChiKickedOut) SceneLib.chichiScene.EnterOfTheChiChi();
 	else {
 		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by. Moments after you enter, a tall, slightly muscular cat-morph approaches you. Most of his body is covered by armor, yet two long tails wave behind him.");//osoba zarządzająca areną bedzie male nekomanta npc
 		outputText("\n\n\"<i>Welcome to the Soul Arena. Don't start fights outside of the proper place or you will be thrown out. We have training facilities, and fights you can enter. Fights cost spirit stones. Make sure you have enough of them. We aren't a charity.</i>\"");
@@ -1188,7 +1239,7 @@ public function soularena():void {
 		outputText("\"<i>Our bovine friend here decided to focus on her body instead. This path doesn't focus on manipulation, like the Daoists. Her energy isn't as fluid, or controlled... but instead, she draws the energy in, focusing it into her body. </i>\" Ms Shigure motions again, and two assistants drag a stone pillar in, placing it in front of the bovine. \"<i>This, of course, allows for physical abilities that the Daoists couldn't hope to match.</i>\" The bovine woman grins, bringing her hand down upon the top of the stone pillar. The rock splinters, shards of stone showering the stage with shards. The muscular woman doesn't seem effected in the slightest by the stone shards now embedded in her kimono, and as another round of applause breaks out, she chuckles and grins, scratching the back of her head. Ms Shigure looks out at the assembled students, motioning to her assistant. \"<i>This is the path of Body Cultivation. It tends to be popular among races with already impressive physicality, such as the Oni, Minotaur, Lacta-Bovine and Orca races.</i>\" The Lacta Bovina steps back, leaving the last assistant standing with Ms. Shigure.\n\n");
 		outputText("\"<i>This cultivator didn't pick the previous paths. Scholars have been arguing for centuries, as to which path is more demanding, this, or the Body Cultivator's path. He's developing heartforce, focusing on the mind and mental state. Some say it's pure willpower, unlike the esoteric nature of daoist magic or body cultivators raw physicality. Such cultivators we calls Heartforce Cultivators.</i>\" She motions, and an etherial white tiger forms around the raccoon-morph. He grins as several snakes erupt from his arms, sending a slight shock through the crowd. The animals bare their fangs, before fading away.\n\n");
 		outputText("With all three introduced, ms Shigure spends the next ten or so minutes explaining each path a little more in-depth, going over each path's basic strengths and weaknesses.\n\n");
-		outputText("\"<i>Now that we all should have a decent grasp of the basics, after this lecture you can buy manuals. These study guides will help you take the first steps along your path.</i>\" She then points to the young kitsune that sits at a small table in the back of the hall. \"<i>Miss Kyiana will be happy to sell you the study materials you need. Good luck on your chosen paths.</i>\"\n\n");
+		outputText("\"<i>Now that we all should have a decent grasp of the basics, after this lecture you can buy manuals. These study guides will help you take the first steps along your path.</i>\" She then points to the young kitsune that sits at a small table in the back of the hall. \"<i>Miss Akemi will be happy to sell you the study materials you need. Good luck on your chosen paths.</i>\"\n\n");
 		outputText("\"<i>Let get to the last part of today's lecture.</i>\" Shigure claps her hands, waiting for a moment as the students focus back on her. She gives a few Kitsune in the crowd small glances, her tails flicking as she burns her gaze in, licking her lips hungrily before moving to the next.\n\n");
 		outputText("\"<i>No matter which path you walk, there are some basics that every cultivator should know. Each of us have special regions in our bodies where soulforce gathers. We call such regions dantian. We shall now learn simple techniques to allow you all to feel your Dantain, and start to tap into the flow of your SoulForce.</i>\"\n\n");
 		outputText("Few next minutes she goes over the Dantain regions, and where they tend to be on different races. With a single warning of the dangers of overusing SoulForce, she steps down from the podium, telling the assembled students to tap into their Dantain. For two hours she slides gracefully from student to student, correcting postures, massaging temples, and demonstrating the technique for small groups of students. She sighs at the end of the two hours,taking the podium and clearing her throat. It takes mere seconds for attention to focus back on her, and she smiles.\n\n");
@@ -1237,7 +1288,7 @@ public function soularena():void {
 		outputText("\"<i>Congratulations everyone! From the feel of you, everyone here has survived your first tribulation.</i>\" She gives you a few claps, and some students join in, a small token applause echoing around the lecture hall. She sternly stares at those clapping, flicking her tails as a small scowl forms on her face. \"<i>Don't let it go to your heads. This was by far the easiest trial, and there will be more.</i>\" She inhales deeply, nodding sagely.  \"<i>After each of the three major levels of Cultivation, there will be another trial.</i>\" There are a few gasps, some groans, and she stares those students down, golden eyes deadly serious. \"<i> Three heavenly trials to pass, getting stronger as you do. No matter how powerful you feel, remember that your Tribulation will rise to meet you, no matter what.</i>\"\n\n");
 		outputText("\"<i>Now some of you may feel a stronger connection to some of the world's energies. We call such energy Dao, and you can find it in nearly anything. From the sky, the ground or even living beings, almost everything has a Dao. Some races, such as the Salamanders or Ice Wolves, have a natural affinity to their element. This makes it easier to comprehend, and makes that form of elemental dao easier for them to work with. So, for those of you without such natural advantages, don't be afraid to spend some time working with elemental energies. Such efforts can give you increased damage with that element, and");
 		outputText(" even some minor protection from it. But the last part may be not noticable until ending early stages of comprehension.</i>\" She continue her explanations on elemental daos giving even some examples.\n\n");
-		outputText("\"<i>Second matter I would like to mention is sects. Some maybe heard about them or maybe not. In simpler words it's groups of similar minded cultivators with patriarch leader, it direct subordinates like elders and common members been disciplines. Now that you all have passed your first major trial, you could try joining a cultivator sect. Naturally, joining one would reduce the freedom you enjoy now as rogue cultivators but there are benefits to membership. Joining a sect will give access to better materials or");
+		outputText("\"<i>Second matter I would like to mention is sects. Some maybe heard about them or maybe not. In simpler words it's groups of similar minded cultivators with patriarch leader, it direct subordinates like elders and common members been disciplines. Now that you all have passed your first major trial, you could try joining a cultivator sect. Naturally, joining one would reduce the freedom you enjoy now as rogue cultivators but there are benefits to membership. Joining a sect will give access to better materials or ");
 		outputText("various manuals. Some will even fight alongside their members, granting some measure of protection. I must warn you, however, of some of the dangers of being in such an alliance.</i>\" The busty kitsune sighs, leaning on her podium. \"<i> While we cultivators are wiser than most...or so we like to think</i>\". This gets a few chuckles. \"<i>Unfortunately, we fight like any other mortals. Many sects have rivalries, alliances or even hatred, bad blood that only gets put aside when everything we all love is at stake.</i>\" She lowers her head, and drops her voice, closing her golden eyes. \"<i>One of the only times we've ever united the sects...Was the war that shall not be named.</i>\" Shigure visibly shivers, revealing a vulnerable side for the first time. \"<i> As cultivators, we can draw power from our surroundings, strength from the earth itself, and take to the sky...But even the mightiest of us can be felled by numbers. As it was against the demons.</i>\" She opens her eyes, tails glowing orange. \"<i>After the goblin city fell, the council of the State of Azoh called for us, everyone who could fight...and we answered, souls blazing. While we were outnumbered, hundreds to one, the demons were not strong individually, and our Dao hearts were firm.</i>\" Ms. Shigure inhales, shaking her head. \"<i>...Too firm. We were so focused on the battle, on stopping those monstrosities...that we drew power from the land, more than it could sustain. Inch by inch, the land was robbed of power, of the SoulForce around it...To say nothing of what the demons did.\"</i> Ms. Shigure grips the podium with both hands, her golden tails limp. \"<i> You younger ones likely know this blighted place only as 'The Battlefield'...But now you know of its true story...And hopefully, you learn from our mistakes.</i>\" The younger Kitsune assistant puts a hand on Ms. Shigure's shoulder, and she shudders, visibly pulling herself back together. \"<i>Anyways, let's get into more lighthearted topics, shall we?</i>\" She goes on for another ten to twenty minutes talking about the various benefits or obligations that comes with several different sects of cultivators.\n\n");
 		outputText("\"<i>As a parting gift, since this is our last lecture, I would like to give you all this small booklet. Inside is a pamphlet for most of our local sects. And if fate allows, we may meet again somewhere in State of Azoh. May your dao be endless,</i>\" with this she ends lecture and leaves, waving goodbye.\n\n");
 		outputText("<b>Gained Key Item: A summary of Marethian Sects</b>");
@@ -1318,7 +1369,7 @@ public function soularena():void {
 		addButton(6, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
 		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			if (player.hasKeyItem("Golems, Animation and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animation and You' manual.");
+			if (player.hasKeyItem("Golems, Animations and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animation and You' manual.");
 			else addButton(12, "G,A&Y Man.", golemancershopPermGolemsUpgradesGuide).hint("Buy 'Golems, Animation and You' manual to make golems great again.");
 		}
 		else addButtonDisabled(12, "???", "Req. Master Golem Maker perk.");
@@ -1371,7 +1422,8 @@ public function soularena():void {
 	}
 	private function buyItemEnergyCore():void {
 		clearOutput();
-		var cost:int = 1015 / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = 520 / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1380,7 +1432,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemEnergyCoreYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 1015 / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= 520 / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1389,7 +1441,8 @@ public function soularena():void {
 	}
 	private function buyItemMechanism():void {
 		clearOutput();
-		var cost:int = 1200 / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = 700 / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1398,7 +1451,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemMechanismYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 1200 / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= 700 / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1407,7 +1460,8 @@ public function soularena():void {
 	}	
 	private function buyItem(odd:ItemType):void {
 		clearOutput();
-		var cost:int = odd.value / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = odd.value / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1415,7 +1469,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemYes(odd:ItemType):void {
-		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business: Anything else you want to buy?</i>\"\n\n");
@@ -1442,10 +1496,10 @@ public function soularena():void {
         }
         clearOutput();
         outputText("You take a seat and look at the menu. ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("A dog morph that looks like a pekinese comes over to take your order.");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff) || SceneLib.chichiScene.ChiChiKickedOut) outputText("A dog morph that looks like a pekinese comes over to take your order.");
         else outputText("A literally blazing mouse girl come over to take your order. Her arms, legs and even her tail are on fire. ");
         outputText("\n\n\"<i>Hello my name is ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("Rin");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff) || SceneLib.chichiScene.ChiChiKickedOut) outputText("Rin");
         else outputText("Chi Chi");
         outputText(" and I will be your waitress today. We have dumplings, Won ton soup and ramen, offered in mild, spicy and inferno versions of the dishes. What will it be?</i>\"");
         menu();
@@ -1471,7 +1525,7 @@ public function soularena():void {
 
     private function restaurantSpicing(level:String):void{
         outputText("\n\nShe finishs noting your order, bows graciously then heads to the kitchen. ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("The waitress");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff) || SceneLib.chichiScene.ChiChiKickedOut) outputText("The waitress");
         else outputText("Chi Chi");
         outputText(" comes back with your order a few minutes later.");
         switch(level){

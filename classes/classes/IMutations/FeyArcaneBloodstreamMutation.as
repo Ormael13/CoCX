@@ -25,6 +25,9 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
             if (pTier >= 3){
                 descS += ", and increase said damage by 50%";
             }
+            if (pTier >= 4){
+                descS += ". When using an ability with random effects the spell now attempts to activate each effect twice";
+            }
             if (descS != "")descS += ".";
             return descS;
         }
@@ -39,16 +42,24 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 case 3:
                     sufval = "(Evolved)";
                     break;
+                case 4:
+                    sufval = "(Final Form)";
+                    break;
                 default:
                     sufval = "";
             }
             return mName + sufval;
         }
 
+        override public function evolveText():String {
+            var descS:String = "\nYou feel quite energetic and particularly happy today. Maybe it's just your optimistic view of life or maybe it has more to do with your fae blood having increased in potency. You feel if you wanted you could turn the world up on its head with a single spell!";
+            return descS;
+        }
+
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -65,7 +76,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             if (pTier == 2) pBuffs['int.mult'] = 0.15;
@@ -74,7 +85,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         public function FeyArcaneBloodstreamMutation() {
-            super(mName + " IM", mName, SLOT_BLOODSTREAM, 3);
+            super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
         }
 
     }

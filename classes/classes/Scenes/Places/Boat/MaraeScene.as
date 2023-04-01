@@ -90,11 +90,14 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         //Dungeon operational
         if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
             //First meeting
-            if (flags[kFLAGS.MET_MARAE] <= 0) {
+            if (flags[kFLAGS.MET_MARAE] <= 0 && flags[kFLAGS.MARAE_QUEST_START] <= 0) {
                 flags[kFLAGS.MET_MARAE] = 1;
                 flags[kFLAGS.MARAE_ISLAND] = 1;
                 outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n");
-                if (player.cor > 66 + player.corruptionTolerance) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
+                if (player.cor > 66 + player.corruptionTolerance) {
+					outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
+					if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) || player.hasPerk(PerkLib.Soulless) || (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery)) || player.isRaceCached(Races.FMINDBREAKER) || player.isRaceCached(Races.MMINDBREAKER, 2) || player.isRaceCached(Races.ATLACH_NACHA, 3)) firstEncounterWentBad();
+				}
                 //Explain the dungeon scenario
                 else {
                     flags[kFLAGS.MARAE_QUEST_START] = 1;
@@ -122,8 +125,8 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n");
                 if (player.cor > 66 + player.corruptionTolerance) {
                     outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
-                    if (player.level >= 30) outputText(" Of course, you could probably try to overthrow her.");
-                    doNext(camp.returnToCampUseOneHour);
+                    if (player.level >= 130) outputText(" Of course, you could probably try to overthrow her.");
+					doNext(camp.returnToCampUseOneHour);
                 } else {
                     //If youve taken her quest already
                     if (flags[kFLAGS.MARAE_QUEST_START] >= 1) {
@@ -167,6 +170,28 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             else firstCorruptEncounter();
         }
     }
+	private function firstEncounterWentBad():void {
+		if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+			outputText("As you hit the shore and jump out of the boat, you spot a wood elf sister casually sitting on a rock by the beach. She's quite far from the forest, come to think of it.\n\n");
+			outputText("\"<i>Hey sister, nice to see you here. I imagine from the look of you that you came here and met the goddess Marae? Sorry to tell you, but ever since the tree became messed up, she refuses to speak to us.</i>\" She pauses for a second, scratching her chin thoughtfully. \"<i>Well, there may be a way for things to work out again. ");
+			outputText("If we can't purify ourselves, then all we have to do is make her the same as us. Find the demon factory deep in the mountain and cause it to overflow. Not only will that break the machinery preventing the demons from using it further, but it will also flood marae with whatever corrupt fluid is left all at once. Once she sees things from our point of view, we can all be friends again.</i>\"\n\n");
+			outputText("Well, you didn't expect to find one of your sisters here, but sure, you will do what must be done. You set back out for your camp, planning how you will take down this factory the demons built.\n\n");
+		}
+		if (player.hasPerk(PerkLib.Soulless) || (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery))) {
+			outputText("As you hit the shore and jump out of the boat, you spot a succubus casually sitting on a rock by the beach, keenly observing the island you just rowed from.\n\n");
+			outputText("\"<i>Hey you, the [race] over there. You came back from that island, right? Bet the goddess kicked you out, eh? You're lucky she didn't take your head instead. A little bit of advice from a fellow demon, but you should keep away from big shots like her. She's out of your league. That said, that stuck up goddess is on her way out soon. The factory up in the hills will finish turning her into a soulless slut, and whoever makes it there first may be able to claim that bitch’s lethicite for themselves. ");
+			outputText("It will probably go straight to Lethice, unless an entrepreuneur demon decides to fuck with her majesty’s plans and screw a few jobs along the way. The political arena is pretty big and Lethice has quite a few enemies within the nobility. Would be a shame if the factory in the mountain was to overflow early and ruin her plan, hm? My master is only interested in seeing Lethice's agenda getting foiled, but is too lazy to act on his own, but you look the kind that has the ambition for this. ");
+			outputText("Find the demon factory in the hills and cause it to overflow. Not only will that break the machinery, making Lethice’s subordinates look incompetent, but it will also flood marae with whatever corrupt fluid is left all at once. Then you can just race back here and take the stone for yourself.</i>\"\n\n");
+			outputText("Well, this looks like a great opportunity. You set back out for your camp, planning how you will take down this factory the demons built.\n\n");
+		}
+		if (player.isRaceCached(Races.FMINDBREAKER) || player.isRaceCached(Races.MMINDBREAKER, 2) || player.isRaceCached(Races.ATLACH_NACHA, 3)) {
+			outputText("As you hit the shore and jump out of the boat, you spot a strange figure with alabaster skin and long flowing silver hair. The humanoid silhouette is simplified to the extreme, like a blank slate, save for two black scleraed yellow eyes that stare back with a void similar to your own. The creature addresses you right away, speaking directly to your mind.\n\n");
+			outputText("\"<i>Good afternoon voidspawn. You and I serve the same master. I imagine from the look of you that you came here and met the goddess Marae. There is no reasoning with her, as you can see. You’re fortunate. If she wasn’t so badly weakened, she would probably have erased you where you stood. This world is a dying one, and the demons are pointlessly prolonging the inevitable by slowing down the advance of our lord. ");
+			outputText("You need to set the rain free, so our plans can progress once again. Find the demon factory in the hills and cause it to overflow. Not only will that break the machinery, preventing the demons from using it further, but it will also flood marae with whatever corrupt fluid is left all at once, ending the threat she poses to us once and for all.</i>\"\n\n");
+			outputText("Well you didn't expect to find a kindred soul here, but sure, you will do what must be done. You set back out for your camp, planning how you will take down this factory the demons built.\n\n");
+		}
+		flags[kFLAGS.MARAE_QUEST_START] = 0.5;
+	}
 
     public function firstCorruptEncounter():void {
         clearOutput();
@@ -193,7 +218,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         addButton(0, "Run", runFromPervertedGoddess);
         addButton(1, "Lethicite", maraeStealLethicite).hint("Try to rush in and steal the lethicite crystal!", "Steal Lethicite");
         if (!recalling) addButton(2, "Accept", maraeBadEnd);
-        addButton(3, "Prank", maraeStealLethicite).hint("Play a practical joke on the corrupted goddess and <b>pretend</b> to steal her Lethicite. Why would you do this?", "Practical Joke");
+        addButton(3, "Prank", maraeStealLethicite, true).hint("Play a practical joke on the corrupted goddess and <b>pretend</b> to steal her Lethicite. Why would you do this?", "Practical Joke");
         if (!recalling) addButton(4, "FIGHT!", promptFightMarae1);
     }
 
@@ -719,7 +744,6 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             else outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
             //(CONTINUED)
             outputText("Her speech is broken by pauses for her to lick up the goo and swallow it, but still perfectly intelligible.  The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
-
             outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to knock up all the prettiest girls!</i>\"\n\n");
             if (!recalling) {
                 if (player.hasPerk(PerkLib.MaraesGiftStud) && !player.hasPerk(PerkLib.MaraesGiftProfractory)) {
@@ -737,9 +761,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             //(BREEDER)
             if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
                 outputText("Well, how do you like being my prize breeder?  Your womb is a thing of beauty.  Trust me, I remade it.  I was actually at a loss as to how to improve it, so I decided to take a peek at your other hole.  It was kind of dry, and I didn't want guys with multiple dicks to have to hump such a dry, uncomfortable asshole.  So now it's nice and wet for them!</i>\"\n\n");
-
                 outputText("Your eyes widen in shock.  You gasp, \"<i>You did WHAT!?</i>\"\n\n");
-
                 outputText("\"<i>I just made your butt-hole a little more welcoming for all the boys that are going to be fucking you.  I mean, once your cunt is full they need somewhere else to stick it right?  If anything the bee-girls should appreciate this.  I know they're kinky and like to use that side,</i>\" Marae confirms.  ");
             }
             //(NOT BREEDER)
@@ -747,7 +769,6 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 outputText("You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ");
             }
             outputText("The entire time she was speaking, you were trapped in orgasm, fucked by her tree with unthinking intensity.\n\n");
-
             outputText("Breathless and panting, you give Marae a confused nod as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and letting my little friend try out your pussy!  Once I get it to flower I might swing by and plant one for you at your camp!  Bye now, and don't forget to have lots of babies!</i>\"\n\n");
             if (!recalling) {
                 if (player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftButtslut)) {
@@ -762,22 +783,20 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         }
         //[HERMS]
         else {
-            outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Plant-spooge is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
+            outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Plant-spooge is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, ");
             //(HAZ NEITHER)
             if (!player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftStud)) {
                 //(RANDOM 1)
                 if (rand(2) == 0 && !player.hasPerk(PerkLib.MaraesGiftFertility)) {
-                    outputText("You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ");
+                    outputText("\"<i>You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ");
                     if (!recalling) player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
-
                 }
                 //(RANDOM 2)
                 else if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
-                    outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
+                    outputText("\"<i>You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
                     if (!recalling) player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
                 }
                 outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
-
                 outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
                 if (!recalling) {
                     if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
@@ -801,10 +820,8 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             }
             //(HAZ BREEDER)
             else if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
-                outputText("I can't believe I didn't think to do this last time!  I mean, I spent so much time making you a great baby-birther that I didn't bother to make you a stud too!  I fixed that this time though – you'll be squirting huge loads that are sure to knock up any of the pretty girls out there.  It'll even punch its way through most birth-controlling herbs.  Aren't I nice?</i>\"  ");
-
+                outputText("\"<i>I can't believe I didn't think to do this last time!  I mean, I spent so much time making you a great baby-birther that I didn't bother to make you a stud too!  I fixed that this time though – you'll be squirting huge loads that are sure to knock up any of the pretty girls out there.  It'll even punch its way through most birth-controlling herbs.  Aren't I nice?</i>\"  ");
                 outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
-
                 outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
                 if (!player.hasPerk(PerkLib.MaraesGiftStud) && !recalling) {
                     player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
@@ -813,10 +830,8 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             }
             //(HAZ STUD)
             else if (player.hasPerk(PerkLib.MaraesGiftStud)) {
-                outputText("I can't believe I didn't think of this last time!  I made you such a great stud that I didn't think to make you just as good at popping out your own kids!  Well I went ahead and fixed that while you were sleeping.  Your womb is nice and fertile, and you'll pop out kids a LOT quicker than before.  We'll be repopulating everything in Mareth in no time!  Just be sure to knock up the girls and let the boys fuck your pussy, okay?</i>\"  ");
-
+                outputText("\"<i>I can't believe I didn't think of this last time!  I made you such a great stud that I didn't think to make you just as good at popping out your own kids!  Well I went ahead and fixed that while you were sleeping.  Your womb is nice and fertile, and you'll pop out kids a LOT quicker than before.  We'll be repopulating everything in Mareth in no time!  Just be sure to knock up the girls and let the boys fuck your pussy, okay?</i>\"  ");
                 outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
-
                 outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention anymore.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
                 if (!player.hasPerk(PerkLib.MaraesGiftFertility) && !recalling) {
                     player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);

@@ -22,7 +22,6 @@ import classes.internals.*;
 			damage *= 2;
 			outputText(capitalA + short + " lift it weapon with all her strength and smash it on your head. ");
 			if(damage > 0) damage = player.takePhysDamage(damage, true);
-			statScreenRefresh();
 			outputText("\n");
 		}
 		

@@ -33,6 +33,7 @@ public function isabellaKnockUpAttempt():void {
 		if (chance > 90) chance = 90;
 		//Attempt to knock up!
 		if (rand(100) < chance) isabellaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ISABELLA);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Isabella is pregnant!</b>");
 		trace("Isabella got PREGNANT!");
 	}
 }
@@ -103,6 +104,9 @@ private function moveTheBitchIn():void {
 	if(camp.hasCompanions()) outputText("newest ");
 	outputText("camp follower gather and move her possessions to your camp.  It takes the better part of an hour, but the entire decor is coming with you, so it may just be worth it.\n\n");
 	outputText("\n\n(<b>Isabella now available in the lovers menu.</b>)");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Isabella pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.ISABELLA_COUNTDOWN_TO_CONTRACEPTIONS] = 240;
 	flags[kFLAGS.ISABELLA_AFFECTION] = 100;
 	flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
@@ -117,9 +121,7 @@ public function callForFollowerIsabella():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0)
 	{
 		outputText("You get Isabella's attention and call the busty cow-girl your way.  She seems a bit consterned as she breaks away from her previous task, but as she closes in towards you, she's all smiles.  You're given plenty of time to appreciate the curvaceous beauty's body while she ambles over.\n\n");
-
 		outputText("The cow-girl is about seven and a half feet tall.  Instead of feet, she has hooves, complete with fur that grows part-way up her legs.  Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips.  Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples.  Unlike most of the rest of her, her face is not spotted with dark and white patches.  Instead it is pure, unbroken chocolate in color.  Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls.  She even has a pair of cow ears that flick back and forth from time to time.\n\n");
-
 		outputText("Isabella ");
 		if(player.tallness < 72) outputText("picks you up in her arms and embraces you with a crushing hug, nearly burying you in her boobflesh before she lets you go.");
 		else outputText("gives you a crushing hug, smashing her tits flat against your body.");
@@ -129,7 +131,7 @@ public function callForFollowerIsabella():void {
 		outputText("</i>\"");
 		if (player.hasCock()) {
 			if (player.shortestCockLength() > 9)
-				outputText("\n\nSadly, you're too big for Isabella to be interested in providing you with morning blowjobs.");
+				outputText("\n\nSadly, you're too big for Isabella to be interested in providing you with morning blowjobs. (less than 9' length)");
 			else if (flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0)
 				outputText("\n\nYou could ask Isabella not to suck you off in the morning. (In Sex Menu)");
 			else
@@ -139,11 +141,9 @@ public function callForFollowerIsabella():void {
 	else
 	{
 		outputText("Isabella puts down the milk canister she’s carrying and wipes her brow at your approach.");
-
 		if (isabellaAccent()) outputText("\n\n\"<i>Guten tag, [name]. What can Isabella help you with?</i>\"");
 		else outputText("\n\n\"<i>Hello [name]. What can Isabella help you with?</i>\"");
 	}
-
 	menu();
 	addButton(0, "Appearance", isabellasAppearance).hint("Examine Isabella's detailed appearance.");
 	addButton(1, "Talk", isabellaTalkMenu).hint("Ask Isabella about something.");

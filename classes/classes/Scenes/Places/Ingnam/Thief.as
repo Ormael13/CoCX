@@ -32,25 +32,24 @@ public class Thief extends Monster
 			this.bodyColor = "light";
 			this.hairColor = "brown";
 			this.hairLength = 4;
-			initStrTouSpeInte(11, 9, 9, 11);
-			initWisLibSensCor(11, 18, 14, 20);
+			initStrTouSpeInte(7, 5, 5, 8);
+			initWisLibSensCor(8, 7, 9, 20);
 			this.weaponName = "knife";
 			this.weaponVerb = "slash";
-			this.weaponAttack = 3;
+			this.weaponAttack = 2;
 			this.armorName = "leather armor";
-			this.armorDef = 3;
+			this.armorDef = 2;
 			this.armorMDef = 0;
-			this.bonusLust = 33;
-			this.lust = 25;
+			this.bonusLust = 24;
+			this.lust = 17;
 			this.level = 1;
-			this.gems = 15+rand(5);
-			this.drop = new WeightedDrop().add(weapons.DAGGER,1)
+			this.gems = 10+rand(5);
+			this.drop = new WeightedDrop()
 					.add(armors.LEATHRA,1)
+					.add(weapons.DAGGER,2)
 					.add(null,8);
 			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
 	}
-
 }

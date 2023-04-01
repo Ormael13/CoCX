@@ -289,6 +289,7 @@ private function breedayaneweneedallthefoxes():void
 		trace("Ayane got random chance PREGNANT!");
 		if (debug) outputText("\n\n<b>DEBUG: Ayane chance pregcheck returned good.</b>");
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_AYANE); //Will always impregnate unless contraceptives are in use
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Ayane is pregnant!</b>");
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {

@@ -611,14 +611,11 @@ public class CockatriceScene extends BaseContent {
         cleanupAfterCombat();
     }
 
-    public function cockatriceBirth():void {
+    public function cockatriceBirth(womb:int = 0):void {
         outputText(images.showImage("birth-cockatrice"));
-        if (player.vaginas.length == 0) {
-            outputText("You feel a terrible pressure in your groin... then a sharp pain accompanied by the rending of flesh. <b>You look down and behold a new vagina</b>.\n\n");
-            player.createVagina();
-        }
-        outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees. You realize something is about to be birthed, and you shed your " + player.armorName + " before it can be ruined by what's coming. "
-            + "A contraction pushes violently through your midsection, stretching your " + player.vaginaDescript() + " painfully, the lips opening wide as something begins sliding down your passage. "
+        var kids:int = Math.floor(player.totalFertility() / 7);
+        outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees. You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming. "
+            + "A contraction pushes violently through your midsection, stretching your " + player.vaginaDescript(womb) + " painfully, the lips opening wide as something begins sliding down your passage. "
             + "A burst of pink slime soaks the ground below as the birthing begins in earnest, and the white chicken egg peaks between your lips. You push hard and the medium egg pops free at last, making you sigh with relief as it drops into the pool of slime. ");
         player.cuntChange(15, true, true, false);
         outputText("The experience definitely turns you on, and you feel your clit growing free of its hood as another medium egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably. "
@@ -628,13 +625,13 @@ public class CockatriceScene extends BaseContent {
         player.orgasm('Vaginal');
         player.addCurse("sen", 3, 2);
         //(eggCounter)
-        outputText("When you find yourself able to stand, you examine what it is you have birthed; " + num2Text(Math.floor(player.totalFertility() / 7)) + " medium, white eggs, the unmistakable shape of hen eggs. "
+        outputText("When you find yourself able to stand, you examine what it is you have birthed; " + num2Text(kids) + " medium, white eggs, the unmistakable shape of hen eggs. "
             + "You pick up one and hold it gently against your ear; inside, you can hear a tiny heart, beating so fast. "
             + "You put it down carefully with his fellows and stare at your clutch, a queasy tangle of emotions tugging at you. "
             + "There is nothing else to be done: you will have to take this clatch to your camp\n\n");
         outputText("When the light of day breaks, you wake up and see a clutch of eggs still resting in a puddle of pink slime. All are empty, and tiny cocks against it. They have pink chests, flanks, front legs, heads, necks, and a long stretch of their backs. "
             + "You slowly drag yourself into a sitting position, in front of you finally are a dozen newly hatched cockatrices, crawling around on all fours, the wetness of their eggs slowly drying on their feathers, licking each other, flicking their cock tails around and blinking at their surroundings with eyeballs huge in their tiny heads as interest in the wider world takes hold. "
-            + "You can't say whether you find the sight insanely cute or utterly disgusting, and you don't know whether the reason you can't look away is because you are fascinated by the creatures you have brought into this world, or because of the effect of " + (num2Text(Math.floor(player.totalFertility() / 7))) + " baby cockatrice eyes on you. "
+            + "You can't say whether you find the sight insanely cute or utterly disgusting, and you don't know whether the reason you can't look away is because you are fascinated by the creatures you have brought into this world, or because of the effect of " + (num2Text(kids)) + " baby cockatrice eyes on you. "
             + "You suspect in either case the answer is a bit of both.\n\n");
         outputText("They seem to quickly adapt to where they have found themselves, running around each other with increasing confidence, and you can see even in the short time you have been watching they have grown, their tender feathers hardening as the sun and air beats down on them. "
             + "One of them suddenly scuttles like the cock it is for cover, and you lose it from view behind bushes. They are quickly all at it, one after the other dashing and slipping from view. "

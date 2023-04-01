@@ -32,7 +32,7 @@ public class DarkElfSlaver extends DarkElfScout
 			this.a = "the ";
 			this.short = "dark elf slaver";
 			this.imageName = "dark elf";
-			this.long = "This woman with dark skin has long pointed ears. You suspect her to be a dark elf, though why she’s here on the surface, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
+			this.long = "This lightly armored woman is a Dark elf. She's slender and elegant, with dark skin and long pointed ears. The look in her eyes, a mixture of bloodlust and greed, give her intentions away...as does her equipment. Ropes, poisoned arrows, she's come to the surface to capture slaves. You can hear faint voices from somewhere nearby. Has she already captured people today?";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));

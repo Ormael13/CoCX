@@ -62,7 +62,7 @@ public class AtlachNachaRace extends Race{
 				.corruption(AT_LEAST(50), +1)
 				.hasPerk(PerkLib.Insanity, +1)
 				.hasPerk(PerkLib.SpiderOvipositor, +1)
-				.hasPerk(PerkLib.TransformationImmunityAtlach, +3);
+				.hasPerk(PerkLib.TransformationImmunity2, +3);
 		
 		addMutation(IMutationsLib.ArachnidBookLungIM)
 		addMutation(IMutationsLib.TrachealSystemIM);
@@ -96,8 +96,9 @@ public class AtlachNachaRace extends Race{
 					"wis.mult": -0.50,
 					"sens": +90
 				})
+				.requireLegType(LowerBody.ATLACH_NACHA)
 				.requirePerk(PerkLib.Insanity)
-				.requirePerk(PerkLib.TransformationImmunityAtlach)
+				.requirePerk(PerkLib.TransformationImmunity2)
 				.end()
 		
 		buildTier(30, "Greater Atlach Nacha")

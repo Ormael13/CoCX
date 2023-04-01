@@ -516,6 +516,17 @@ public class RaceScoreBuilder {
 				failScore
 				);
 	}
+	public function givePerkV2(perk:PerkType, score:int=0,failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		return customScoreRequirement(
+				"perk",
+				customName || (perk.name()+" perk"),
+				RaceUtils.hasPerkFn(perk),
+				function(body:BodyData):int {
+					return score + body.player.perkv2(perk);
+				},
+				failScore
+				);
+	}
 	public function hasAllPerks(perks:/*PerkType*/Array, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"perk",

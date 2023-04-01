@@ -91,6 +91,7 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 			if (rand(100) < chance && !pregnancy.isPregnant) {
 				trace("Minerva got PREGNANT!");
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Minerva is pregnant!</b>");
 			}
 		}
 		
@@ -181,7 +182,7 @@ private function takeMinervasPath():void {
 	//High corruption:
 	else outputText("  \"<i>All right, you corrupted beast!  Who are you and what are you doing here?  Your presence is not welcome in this sanctuary... answer quickly, or I'll drop you to your death!");
 	//Demon Score=3>:
-	if(player.isRace(Races.DEMON, 1, false)) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
+	if(player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
 	outputText("</i>\" the creature demands, clearly threatening to drop you if you don't answer to her liking.");
 	
 	//Goo:

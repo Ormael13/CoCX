@@ -313,7 +313,7 @@ public class Horns extends BodyPart {
 
 	public static const KIRIN: int = 23;
 	EnumValue.add(Types, KIRIN, "KIRIN", {
-		name:"unicorn",
+		name:"kirin",
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
 
@@ -326,6 +326,18 @@ public class Horns extends BodyPart {
 			return desc;
 		},
 		gore: true
+	});
+
+	public static const ARCH_IMP: int = 24;
+	EnumValue.add(Types, ARCH_IMP, "ARCH_IMP", {
+		name:"arch-imp",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if (player.horns.count > 0) desc += "A pair of large thick demonic horns sprout through your skin. They stand at nearly "+Measurements.inchesOrCentimetres(player.horns.count,0)+" . Arcane carvings decorate your horns though only a close look would reveal them to an observer, raising the potency of your spells."
+
+			return desc;
+		}
 	});
 
 	public function Horns(creature:Creature) {

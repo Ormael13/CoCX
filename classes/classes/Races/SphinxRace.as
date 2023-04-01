@@ -49,7 +49,7 @@ public class SphinxRace extends Race {
 				.armType(Arms.SPHINX, +1, -1000)
 				.customRequirement("","cat cock or have a vagina",
 						function (body:BodyData):Boolean {
-							return body.player.catCocks() > 0 && body.hasVagina;
+							return body.player.catCocks() > 0 || body.hasVagina;
 						}, +1)
 				.customRequirement("","fur or plain skin",
 						function (body:BodyData):Boolean {

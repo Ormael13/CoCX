@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.Beach 
+package classes.Scenes.Areas.Desert 
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -36,33 +36,29 @@ public class Gorgon extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(5);
-			if (choice == 0) eAttack();
-			if (choice == 1) gorgonPoisonBiteAttack();
-			if (choice == 2) {
-				if (player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.Stunned)) TailWhip();
-				else gorgonConstrict();
-			}
-			if (choice == 3) {
-				if (player.hasStatusEffect(StatusEffects.Stunned)) eAttack();
-				else if (player.hasStatusEffect(StatusEffects.NagaBind)) gorgonPoisonBiteAttack();
-				else TailWhip();
-			}
-			if (choice == 4) {
-				if (player.hasStatusEffect(StatusEffects.Stunned)) eAttack();
-				else if (player.hasStatusEffect(StatusEffects.NagaBind)) {
-					if (rand(2) == 0) gorgonPoisonBiteAttack();
+			if (player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.Stunned)) {
+				if (player.hasStatusEffect(StatusEffects.Stunned)) {
+					if (rand(2) == 0) eAttack();
 					else TailWhip();
 				}
 				else {
-					if (hasStatusEffect(StatusEffects.AbilityCooldown1)) {
-						if (rand(2) == 0) gorgonPoisonBiteAttack();
-						else TailWhip();
-					}
+					if (hasStatusEffect(StatusEffects.AbilityCooldown1)) gorgonPoisonBiteAttack();
 					else {
 						if (hasStatusEffect(StatusEffects.Blind)) eAttack();
 						else petrify();
 					}
+				}
+			}
+			else {
+				var choice:Number = rand(5);
+				if (choice == 0) eAttack();
+				if (choice == 1) gorgonPoisonBiteAttack();
+				if (choice == 2) gorgonConstrict();
+				if (choice == 3) TailWhip();
+				if (choice == 4) {
+					if (hasStatusEffect(StatusEffects.AbilityCooldown1)) gorgonConstrict();
+					else if (hasStatusEffect(StatusEffects.Blind)) eAttack();
+					else petrify();
 				}
 			}
 		}
@@ -73,12 +69,12 @@ public class Gorgon extends Monster
 			outputText("The " + this.short + " strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.");
-				if(player.spe > 6) {
-					player.buff("Poison").addStats({"spe":-5}).withText("Poisoned!").forHours(4);
+				if(player.spe > 8) {
+					player.buff("Poison").addStats({"spe":-7}).withText("Poisoned!").forHours(4);
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
-					player.createStatusEffect(StatusEffects.NagaVenom,5,0,0,0);
+					player.createStatusEffect(StatusEffects.NagaVenom,7,0,0,0);
 				}
 				else {
 					player.createStatusEffect(StatusEffects.NagaVenom,0,0,0,0);
@@ -88,13 +84,13 @@ public class Gorgon extends Monster
 			}
 			else {
 				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
-				if(player.spe > 5) {
+				if(player.spe > 7) {
 					//stats(0,0,-2,0,0,0,0,0);
-					player.buff("Poison").addStats({"spe":-4}).withText("Poisoned!").forHours(4);
+					player.buff("Poison").addStats({"spe":-6}).withText("Poisoned!").forHours(4);
 					showStatDown( 'spe' );
 					// speUp.visible = false;
 					// speDown.visible = true;
-					player.addStatusValue(StatusEffects.NagaVenom,1,4);
+					player.addStatusValue(StatusEffects.NagaVenom,1,6);
 				}
 				else player.takePhysDamage(15+rand(15));
 				player.takePhysDamage(15+rand(15));
@@ -120,6 +116,7 @@ public class Gorgon extends Monster
 				var damage:Number = str;
 				if(player.armorDef < 50) damage += 50 - player.armorDef;
 				damage += rand(25);
+				damage *= 10;
 				damage = player.takePhysDamage(damage, true);
 			}
 		}
@@ -166,8 +163,8 @@ public class Gorgon extends Monster
 			this.gems = rand(16) + 30;
 			this.drop = new WeightedDrop().
 					add(null,1).
-					add(consumables.REPTLUM,5).
-					add(consumables.GORGOIL,4);
+					add(consumables.REPTLUM,2).
+					add(consumables.GORGOIL,5);
 			this.faceType = Face.SNAKE_FANGS;
 			checkMonster();
 		}

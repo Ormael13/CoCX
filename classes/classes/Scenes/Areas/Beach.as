@@ -13,7 +13,9 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.CeaniScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -36,7 +38,6 @@ import classes.Scenes.SceneLib;
 
 		private var _beachEncounters:GroupEncounter = null;
 		private function init():void {
-			const game:CoC = CoC.instance;
 			_beachEncounters = Encounters.group("beach",{
 				name: "harpoonGun",
 				when: function():Boolean {
@@ -60,7 +61,7 @@ import classes.Scenes.SceneLib;
 				},
 				chance: 0.2,
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && (player.level >= 20);
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && (player.level >= 20);
 				}
 			}, {
 				// Ceani
@@ -164,12 +165,22 @@ import classes.Scenes.SceneLib;
 					return (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained);
 				},
 				chance: 1
-			});
+			}/*, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			}*/);
 		}
 
 		public function exploreBeach():void {
+			clearOutput();
 			flags[kFLAGS.DISCOVERED_BEACH]++;
+			doNext(camp.returnToCampUseOneHour);
 			_beachEncounters.execEncounter();
+			flushOutputTextToGUI();
 		}
 
 		public function orcaSunscreenFound():void {
@@ -238,7 +249,7 @@ import classes.Scenes.SceneLib;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);
-				player.mineXP(1);
+				player.mineXP(player.MiningMulti());
 				findGem();
 				doNext(camp.returnToCampUseTwoHours);
 			}
@@ -248,7 +259,7 @@ import classes.Scenes.SceneLib;
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.EMDGEM, camp.returnToCampUseTwoHours);
-					player.mineXP(2);
+					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Emeralds you ended with unusable piece.");

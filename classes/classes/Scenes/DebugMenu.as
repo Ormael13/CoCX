@@ -672,6 +672,7 @@ public class DebugMenu extends BaseContent
 			consumableArray.push(consumables.WHITEEG);
 			consumableArray.push(consumables.L_WHTEG);
 			consumableArray.push(consumables.AMBROSA);
+			consumableArray.push(consumables.LETHITE);
 
 			//------------
 			// Dyes
@@ -701,7 +702,6 @@ public class DebugMenu extends BaseContent
 			materialArray.push(useables.T_SSILK);
 			materialArray.push(useables.D_SCALE);
 			materialArray.push(useables.IMPSKLL);
-			materialArray.push(useables.LETHITE);
 			materialArray.push(null);
 			materialArray.push(null);
 			materialArray.push(null);
@@ -1155,7 +1155,7 @@ public class DebugMenu extends BaseContent
 		private static const COLOR_CONSTANTS:Array = [
 			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blood-red", "blue", "bronzed", "brown", "caramel",
 			"cerulean", "chocolate", "crimson", "crystal", "dark", "dusky", "ebony", "emerald", "fair",
-			"golden", "gray", "green", "indigo", "light", "mahogany", "metallic", "midnight", "olive", "orange",
+			"golden", "gray", "green", "indigo", "light", "light pink", "mahogany", "metallic", "midnight", "olive", "orange",
 			"peach", "pink", "purple", "red", "russet", "sable", "sanguine", "silky", "silver",
 			"tan", "tawny", "turquoise", "white", "yellow",
 			"aphotic blue-black", "ashen grayish-blue", "creamy-white", "crimson platinum",
@@ -1164,9 +1164,9 @@ public class DebugMenu extends BaseContent
 			"leaf green", "light blonde", "light blue", "light gray", "light green", "light grey", "light purple", "lime green",
 			"mediterranean-toned", "metallic golden", "metallic silver", "midnight black", "milky white",
 			"pale white", "pale yellow", "platinum blonde", "platinum crimson", "platinum-blonde", "purplish-black",
-			"quartz white", "reddish-orange", "rough gray",
-			"sandy blonde", "sandy brown", "sandy-blonde", "shiny black", "silver blonde", "silver-white", "snow white",
-			"yellowish-green", "black and yellow", "white and black"
+			"quartz white", "reddish-orange", "rough gray", "immaculate white", "royal purple",
+			"sandy blonde", "sandy brown", "sandy-blonde", "shiny black", "silver blonde", "silver-white", "snow white", "blazing red",
+			"yellowish-green", "black and yellow", "white and black", "pure blue", "neon blue", "pale purple", "eldritch green"
 		];
 
 		private static const SKIN_ADJ_CONSTANTS:Array = [
@@ -1570,6 +1570,7 @@ public class DebugMenu extends BaseContent
 			clearOutput();
 			outputText("You feel as if something's dissolving inside your womb. Liquid flows out of your [vagina] and your womb feels empty now. <b>You are no longer pregnant!</b>");
 			player.knockUpForce();
+			player.knockUpForce(0, 0, 1);
 			doNext(accessDebugMenu);
 		}
 

@@ -13,8 +13,8 @@ public class ShatterstoneSpell extends AbstractGreySpell {
 		super(
 			ex ? "Shatterstone (Ex)" : "Shatterstone",
 			ex ?
-				"Harden part of the the ground into many wrath-enpowered earth spike to attack your enemies."
-				: "Harden part of the the ground into many earth spike to attack your enemies.",
+				"Harden part of the ground into many wrath-empowered earth spikes to attack your enemies."
+				: "Harden part of the ground into many earth spikes to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_EARTH, TAG_AOE, TAG_TIER1]

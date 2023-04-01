@@ -5,6 +5,7 @@ import classes.BaseContent;
 import classes.GeneticMemories.LowerBodyMem;
 import classes.GeneticMemories.TailMem;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Player;
 import classes.Races;
 import classes.Races.AtlachNachaRace;
@@ -22,7 +23,7 @@ public class AtlachNachaScene extends BaseContent {
     public function encounter():void {
         clearOutput();
         spriteSelect(SpriteDb.s_Atlach_16bit);
-        if (player.hasPerk(PerkLib.TransformationImmunityAtlach)){
+        if (player.hasPerk(PerkLib.TransformationImmunity2) && player.perkv1(PerkLib.TransformationImmunity2) == 1){
             outputText("By luck or by sheer irony you stumble upon your old nest. It's been empty for a while now and hasn't been used ever since you left." +
                     " This said some of your old minions came over and paid tribute leaving some treasure by your web. You take the gems and leave back for the labyrinth.");
             player.gems += 500;
@@ -83,13 +84,16 @@ public class AtlachNachaScene extends BaseContent {
         player.vaginaType(5);
         if (player.tailRecharge < 15) player.tailRecharge = 15;
         player.createPerk(PerkLib.SpiderOvipositor,0,0,0,0);
-        player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
+        player.createPerk(PerkLib.TransformationImmunity2,1,0,0,0);
         if (player.hasPerk(PerkLib.RacialParagon))
             flags[kFLAGS.APEX_SELECTED_RACE] = Races.ATLACH_NACHA;
         player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
 		outputText("\n\nEverything makes so much sense now. You were blind to the truth but thanks to the voice of the master in your head your eyes are now open. You have access to knowledge you thought you didn't possess about your reality and the reality between the reality. ");
 		outputText("Such knowledge is not for your mind alone though you want to share it with the world. Their blindness and mind untouched by him is a disease and you just happen to have the cure.  (<b>Gained Perk: Insanity!</b>)");
         player.createPerk(PerkLib.Insanity,0,0,0,0);
+        IMutationsLib.TrachealSystemIM.trueMutation = true;
+        IMutationsLib.ArachnidBookLungIM.trueMutation = true;
+        IMutationsLib.VenomGlandsIM.trueMutation = true;
         player.removeAllRacialMutation();
         doNext(playerMenu);
     }

@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
+	import classes.internals.ChainedDrop;
 	
 	public class Angeloid extends AbstractAngel
 	{
@@ -171,6 +172,7 @@ package classes.Scenes.Monsters
 				this.armorDef = 6;
 				this.armorMDef = 6;
 				this.createPerk(PerkLib.DieHardHP, 3, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			}
 			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 2) {
 				this.short = "mid-rank angeloid";
@@ -203,11 +205,13 @@ package classes.Scenes.Monsters
 				this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			}
 			this.tallness = 30;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop()
+					.add(useables.SRESIDUE, 1);
 			this.weaponName = "energy blast";
 			this.weaponVerb = "shoot";
 			this.armorName = "skin";
 			this.wings.type = Wings.FEATHERED_AVIAN;
+			if (player.cor < 67) this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 9, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			checkMonster();

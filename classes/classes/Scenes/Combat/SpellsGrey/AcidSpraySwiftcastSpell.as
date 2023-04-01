@@ -12,7 +12,7 @@ public class AcidSpraySwiftcastSpell extends AbstractGreySpell {
 	{
 		super(
 			"Acid Spray (S)",
-			"Condense part of the the ambivalent moisture into acid droplets to attack your enemy.",
+			"Condense part of the ambient moisture into acid droplets to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ACID, TAG_TIER1]
@@ -32,6 +32,7 @@ public class AcidSpraySwiftcastSpell extends AbstractGreySpell {
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 0.4 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
+		if (player.armorName == "FrancescaCloak") baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.ACID, CAT_SPELL_GREY, monster, true, casting);
 	}
 	

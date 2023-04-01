@@ -7,8 +7,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
-import classes.Scenes.Holidays;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -18,6 +19,7 @@ public class HighMountains extends BaseContent {
     public var phoenixScene:PhoenixScene = new PhoenixScene();
     public var darkelfScene:DarkElfScene = new DarkElfScene();
     public var cockatriceScene:CockatriceScene = new CockatriceScene();
+    public var nekobakeInn:NekobakeInn = new NekobakeInn();
 
     public function HighMountains() {
         onGameInit(init);
@@ -33,7 +35,7 @@ public class HighMountains extends BaseContent {
         _highMountainsEncounter = Encounters.group("highmountains", {
             name: "d3",
             when: function ():Boolean {
-                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && rand(5) == 0;
+                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0;
             },
             call: SceneLib.d3.discoverD3
         }, {
@@ -56,7 +58,7 @@ public class HighMountains extends BaseContent {
         }, {
             name: "etna",
             when: function ():Boolean {
-                return flags[kFLAGS.ETNA_FOLLOWER] < 1
+                return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
                     && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
                     && !player.hasStatusEffect(StatusEffects.EtnaOff)
                     && (player.level >= 20);
@@ -102,7 +104,21 @@ public class HighMountains extends BaseContent {
             name: "darkelf",
             chance: 0.5,
             call: darkelfScene.introDarkELfSniper
-        });
+        }, {
+            name: "nekobakeInn",
+            chance: 0.2,
+            when: function ():Boolean {
+                return !player.blockingBodyTransformations();
+            },
+            call: nekobakeInn.encounterNekobakeInn
+        }/*, {
+            name: "demonProjects",
+            chance: 0.2,
+            when: function ():Boolean {
+                return DemonLab.MainAreaComplete >= 4;
+            },
+            call: SceneLib.exploration.demonLabProjectEncounters
+        }*/);
     }
 
     public function isDiscovered():Boolean {

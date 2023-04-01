@@ -643,6 +643,23 @@ public class ArmsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const ArmsPlant2: Transformation = new SimpleTransformation("Plant Arms 2",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>";
+
+				player.arms.type = Arms.PLANT2;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.PLANT_2));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.PLANT2;
+			}
+	);
+
 	public const ArmsCentipede: Transformation = new SimpleTransformation("Centipede Arms",
 			// apply effect
 			function (doOutput: Boolean): void {
@@ -725,6 +742,23 @@ public class ArmsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.arms.type === Arms.WOLF;
+			}
+	);
+
+	public const ArmsHound: Transformation = new SimpleTransformation("Hound Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+
+				player.arms.type = Arms.HOUND;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.HOUND));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.HOUND;
 			}
 	);
 
@@ -1139,6 +1173,25 @@ public class ArmsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.arms.type === Arms.ANT;
+			}
+	);
+
+	public const ArmsTiny: Transformation = new SimpleTransformation("Tiny Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+				desc += " Your arms shrink to almost comical proportions as your hands morph to tiny clawed imp hands.";
+				desc += " You now have <b>tiny arms</b>!";
+
+				player.arms.type = Arms.TINY;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.TINY));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.TINY;
 			}
 	);
 	/*

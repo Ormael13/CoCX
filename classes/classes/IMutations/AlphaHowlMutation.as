@@ -28,7 +28,7 @@ public class AlphaHowlMutation extends IMutationPerkType
                 descS += "Each additional pack member helps coordinate your offense, increasing your feral damage by 2% per member. ";
             }
             if (pTier >= 4){
-                descS += "Raise the bonus from Evolved to 5% and grants an while a canine increase to all stat of 5% per pack member. ";
+                descS += "Raise the bonus from Evolved to 5% and while a canine grants anr increase to all stat of 5% per pack member. ";
             }
             descS += "You may have up to " + 5 * pTier + " pack members";
             if (descS != "")descS += ".";
@@ -55,16 +55,16 @@ public class AlphaHowlMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireLungsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.WEREWOLF,1);
-                    }, "Werewolf race");
+                        return player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS);
+                    }, "Werewolf/Cerberus race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -76,26 +76,28 @@ public class AlphaHowlMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
+            var packMembers:Number = LunaFollower.WerewolfPackMember;
+            if (target.hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
+
             if (pTier == 1) pBuffs['str.mult'] = 0.05;
             else if (pTier == 2) pBuffs['str.mult'] = 0.15;
             else if (pTier == 3) pBuffs['str.mult'] = 0.30;
             else if (pTier == 4) pBuffs['str.mult'] = 0.45;
-            if (pTier == 4 && (player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.DOG) || player.isRaceCached(Races.WOLF))){
-                pBuffs['str.mult'] += 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['spe.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['tou.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['int.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['wis.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['lib.mult'] = 0.05*LunaFollower.WerewolfPackMember;
+            if (pTier == 4 && (player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.DOG) || player.isRaceCached(Races.WOLF) || player.isRaceCached(Races.CERBERUS))){
+                pBuffs['str.mult'] += 0.05*packMembers;
+                pBuffs['spe.mult'] = 0.05*packMembers;
+                pBuffs['tou.mult'] = 0.05*packMembers;
+                pBuffs['int.mult'] = 0.05*packMembers;
+                pBuffs['wis.mult'] = 0.05*packMembers;
+                pBuffs['lib.mult'] = 0.05*packMembers;
             }
             return pBuffs
         }
 
         public function AlphaHowlMutation() {
-            super(mName + " IM", mName, SLOT_LUNGS, 4);
+            super(mName + " IM", mName, SLOT_LUNGS, 4, false);
         }
-        
     }
 }

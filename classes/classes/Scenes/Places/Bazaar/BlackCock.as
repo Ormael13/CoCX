@@ -364,7 +364,7 @@ import classes.lists.Gender;
 			addButtonIfTrue(0, "Eagle Fuck", eagleFuckAnita, !player.canFly() ? "You'll need wings for that." : "You need either a penis or a vagina to do that.",
 				player.canFly() && player.gender > 0, "Take a wild trip in the skies with Anita and fuck her!");
 			addButtonIfTrue(1, "Vaginal", vaginalFuckAnita, "You'll need a penis for that.", player.hasCock());
-			addButtonIfTrue(2, "Sixty Nine", sex69Anita, "You won't be able to do this with your unusual body shape.", player.isBiped() || player.isNaga() || player.isGoo());
+			addButtonIfTrue(2, "Sixty Nine", sex69Anita, "You won't be able to do this with your taur body shape.", !player.isTaur());
 		}
 
 		private function eagleFuckAnita():void { //Eagle fuck, must have wings
@@ -1326,7 +1326,7 @@ import classes.lists.Gender;
 		private function letTheSatyrsHaveTheirWayWithYou():void {
 			clearOutput();
 			outputText(images.showImage("satyr-gang-bang"));
-			outputText("Greedy hands yank you back first over the table. The rough satyrs position you so your [ass][if (hasTail = true) \" and tail\"] hang off the edge of the table. Immediately they begin pulling off your [armor]. As your body comes into view they make grunts of approval; they all begin high fiving and you hear several brash comments about your body including, \"<i>[He]'s a beaut isn't [he]?</i>\" and \"<i>SKULLFUCK, SKULLFUCK, SKULLFUCK.</i>\"");
+			outputText("Greedy hands yank you back first over the table. The rough satyrs position you so your [ass][if (hasTail = true) and tail] hang off the edge of the table. Immediately they begin pulling off your [armor]. As your body comes into view they make grunts of approval; they all begin high fiving and you hear several brash comments about your body including, \"<i>[He]'s a beaut isn't [he]?</i>\" and \"<i>SKULLFUCK, SKULLFUCK, SKULLFUCK.</i>\"");
 			outputText("\n\nThe other patrons in the tent merely glance over and give a little shrug, not caring that you're about to be gang banged by a bunch of horny satyrs.");
 			outputText("\n\nOne of the satyrs holds up a beer and yells something about a toast in your name. Cold beer splashes down your [fullChest] as the group of drunk satyrs give a barely audible toast as they all whip out their human dicks, already dripping with need.");
 			outputText("\n\nA burly satyr hops on the table, straddling your face. He gives a bleat of pure joy as he swings apple sized balls around before smashing them against your [face]. You chuckle against the hot orbs as hands tug and yank you in different directions. You open your mouth and slather those swollen orbs with your tongue. The mind numbing scent of arousal is heavy in the air. You're surrounded by satyrs wrestling to get into position around you; you catch one being forced to his knees by another before a thick dick dripping with need is shoved into his throat.");

@@ -275,6 +275,12 @@ public class Skin extends SaveableBodyPart {
 		appearanceDesc: "An underbelly colored [skin base.color2] runs on the underside of your limbs bearing a glossy shine, on top of being lined up with bioluminescent dots like those of a deep sea fish.",
 		base:true
 	});
+	public static const PATTERN_ARCH_IMP_RUNIC_TATTOO: int = 16;
+	EnumValue.add(PatternTypes, PATTERN_ARCH_IMP_RUNIC_TATTOO, "ARCH_IMP_RUNIC_TATTOO", {
+		name:"arch imp runic tattoo",
+		appearanceDesc: "Your body is covered with glowing runic tattoos.",
+		base:true
+	});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 
 	public var base:SkinLayer;

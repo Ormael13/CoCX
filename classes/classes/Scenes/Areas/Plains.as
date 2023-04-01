@@ -10,6 +10,8 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
+import classes.Scenes.Dungeons.DemonLab;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -42,7 +44,7 @@ use namespace CoC;
 				chance: 0.8,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-					if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+					if (rand(10) == 0) SceneLib.exploration.genericAngelsEncounters();
 					else SceneLib.exploration.genericGolGobImpEncounters();
 				}
 			}, {
@@ -58,7 +60,7 @@ use namespace CoC;
 			}, {
 				name: "etna",
 				when: function ():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
@@ -225,6 +227,12 @@ use namespace CoC;
 				chance: 0.3,
 				call: bunnyGirl.bunnbunbunMeet
 			}, {
+				name: "usagi",
+				night : false,
+				when: function ():Boolean { return SceneLib.loppe.canEncounterUsagi() },
+				chance: 0.3,
+				call: SceneLib.loppe.encounterUsagi
+			}, {
 				name: "isabella",
 				night : false,
 				when: function ():Boolean {
@@ -279,12 +287,21 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.sheilaScene.sheilaEncounterRouter();
 				}
-			});
+			}/*, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			}*/);
 		}
 		public function explorePlains():void {
 			clearOutput();
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
+			doNext(camp.returnToCampUseOneHour);
 			explorationEncounter.execEncounter();
+			flushOutputTextToGUI();
 		}
 		public function partsofSnippler():void {
 			clearOutput();

@@ -86,12 +86,38 @@ public class VaginaTransformations extends MutationsHelper {
 
 	public function GrowVaginaGenericText(): String {
 		var desc:String = "";
-		if (player.hasBalls()) desc += "An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
-		else if (player.hasCock()) desc += "An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as your skin splits to give you a new vagina, complete with a tiny clit. ";
-		else desc += "An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit. " ;
-		player.createVagina();
-		player.clitLength = .25;
+		if (!player.hasVagina()) {
+			if (player.hasBalls()) desc += "An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
+			else if (player.hasCock()) desc += "An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as your skin splits to give you a new vagina, complete with a tiny clit. ";
+			else desc += "An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit. " ;
+			player.createVagina();
+			player.clitLength = .25;
+		} else {
+			desc += "An itch starts in your [vagina] and it grows heated, almost bringing you to orgasm until suddenly you feel a doubling of sensation which sends you to your knees due to the sudden increase in pleasure. ";
+			if (player.hasBalls()) desc += "You feel behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, you lift up your balls to reveal your new vagina. ";
+			else if (player.hasCock()) desc += "An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as your skin splits to give you a new vagina, complete with a tiny clit. ";
+			else desc += "An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit. " ;
+			player.createVagina(true, player.vaginas[0].vaginalWetness, player.vaginas[0].vaginalLooseness);
+			player.vaginaType(player.vaginaType(), 1);
+		}
 		return desc;
+	}
+
+	public function SecondVagina(): Transformation {
+		return new SimpleTransformation("Human Vagina",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "";
+
+					desc += GrowVaginaGenericText();
+					transformations.UnlockVagina();
+					if (doOutput) outputText(desc);
+				},
+				// is present
+				function ():Boolean {
+					return player.vaginas.length == 2;
+				}
+		);
 	}
 
 	public function VaginaHuman(vagina:int = 0): Transformation {
@@ -100,7 +126,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your [vagina "+(vagina+1)+"] and see it changing back to its ";
 						if (player.vaginaType() == 5 || player.vaginaType() == 6)
 							desc +="natural flesh colour.";
@@ -118,7 +144,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.HUMAN;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.HUMAN;
 				}
 		);
 	}
@@ -129,7 +155,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "You grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina "+(vagina+1)+"] has grown larger, in depth AND size. To your absolute surprise, it suddenly resume deepening inside your body. " +
 								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 								"<b>  You now have an equine vagina!</b>";
@@ -149,7 +175,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.EQUINE;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.EQUINE;
 				}
 		);
 	}
@@ -160,7 +186,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "You grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina "+(vagina+1)+"] has grown larger, in depth AND size. To your absolute surprise, it suddenly resume deepening inside your body. " +
 								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 								"Just as you thought the change was over you jump in surprise as a short static shock cause your clit to rise right out of its hood as your cunt begins changing color too!";
@@ -192,7 +218,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.KIRIN;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.KIRIN;
 				}
 		);
 	}
@@ -203,7 +229,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "Your [vagina] feels... odd.  You undo your clothes and gingerly inspect your nether regions.  The tender pink color of your sex has disappeared, replaced with smooth, marble blackness starting at your lips and working inwards.";
 						//(Wet:
 						if (player.wetness() >= 3) desc += "  Your natural lubrication makes it gleam invitingly.";
@@ -226,7 +252,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.BLACK_SAND_TRAP;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.BLACK_SAND_TRAP;
 				}
 		);
 	}
@@ -237,7 +263,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "You feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue fluids. Wait, what? When you inspect your [vagina] you discover it too has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  <b>You now have a neon blue pussy that glow in the dark.</b>";
 					}
 					else {
@@ -253,7 +279,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.CAVE_WYRM;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.CAVE_WYRM;
 				}
 		);
 	}
@@ -264,7 +290,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "You double over as an overwhelming heat pools in your groin ";
 						if (player.vaginaType() != VaginaClass.VENOM_DRIPPING && player.vaginaType() != VaginaClass.HUMAN)
 							desc +="as your vagina returns back to a human one, at least in appearance."+
@@ -290,7 +316,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.VENOM_DRIPPING;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.VENOM_DRIPPING;
 				}
 		);
 	}
@@ -301,7 +327,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc +="You suddenly became exceedingly aware of your surroundings, feeling the caress of the wind on your skin and especially its passage next to your [pussy]. " +
 								"Out of curiosity you slide a single digit inside your pussy to test your new sensitivity and yelp a sound not unlike singing. " +
 								"Your pussy has reached the sensitiveness of a manticore and the mere act of touching it will now cause you to moan an entire partition! " +
@@ -321,7 +347,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.MANTICORE;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.MANTICORE;
 				}
 		);
 	}
@@ -332,7 +358,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "Your pussy starts foaming bubbles for a few seconds, juice slowly flowing out. You cannot resist as your hands dive into your [vagina]. Your pussy gushes, foaming more and more bubbles until you suddenly shoot a powerful bubble jet. You make a dopey smile at the many uses of this you can already think of. <b>You now have an cancer vagina</b>.";
 					}
 					else {
@@ -354,7 +380,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.CANCER;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.CANCER;
 				}
 		);
 	}
@@ -365,7 +391,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()) {
+					if (player.vaginas.length > vagina) {
 					}
 					else {
 						desc += GrowVaginaGenericText();
@@ -381,7 +407,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.DEMONIC;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.DEMONIC;
 				}
 		);
 	}
@@ -392,7 +418,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. "+
 								"Intrigued you shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. "+
 								"<b>Your vagina is now like that of a scylla and can take in lenghtier insertions.</b>";
@@ -412,7 +438,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.SCYLLA;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.SCYLLA;
 				},
 				function ():Boolean {
 					return player.lowerBody == LowerBody.SCYLLA;
@@ -426,7 +452,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()) {
+					if (player.vaginas.length > vagina) {
 						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail.  "+
 								"Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. "+
 								"<b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>";
@@ -446,7 +472,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.NAGA;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.NAGA;
 				},
 				// is possible
 				function ():Boolean {
@@ -461,7 +487,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "Something invisible brushes against your sex, making you twinge. Undoing your clothes, you take a look at your vagina. It looks normal at a first glance despite the odd sensation but inserting your fingers inside reveals that your walls are now covered with small sensitive tendril-like feelers. " +
 								"You blush as they instinctively drive your digits further in, attempting to milk them like they would a penis. " +
 								"<b>It looks like your vagina has turned into that of a shark girl.</b>";
@@ -481,7 +507,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.SHARK;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.SHARK;
 				}
 		);
 	}
@@ -492,7 +518,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "You feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue plasma. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  "+
 								"<b>You now have a neon blue raiju pussy that glow in the dark.</b>";
 					}
@@ -509,7 +535,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.RAIJU;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.RAIJU;
 				}
 		);
 	}
@@ -520,7 +546,7 @@ public class VaginaTransformations extends MutationsHelper {
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
 
-					if (player.hasVagina()){
+					if (player.vaginas.length > vagina){
 						desc += "Insert Text for Alraune Vagina TF";
 					}
 					else {
@@ -535,7 +561,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.ALRAUNE;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.ALRAUNE;
 				}
 		);
 	}

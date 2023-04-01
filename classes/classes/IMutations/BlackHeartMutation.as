@@ -46,16 +46,22 @@ public class BlackHeartMutation extends IMutationPerkType
             return mName + sufval;
         }
 
+        override public function evolveText():String {
+            var descS:String = "\nAs you acclimate further to your new life as a fiend you find your thought and morality slowly sinking deeper and deeper into the abyss of corruption. Betraying someone who trusted and loved you would be so easy now if it could further your growing ambitions.";
+            return descS;
+        }
+
+
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
                     .requirePerk(PerkLib.DarkCharm).requireCor(100)
-                    .requireRace(Races.DEMON)
+                    .requireAnyRace(Races.DEMON, Races.IMP)
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -67,7 +73,7 @@ public class BlackHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['lib.mult'] = 0.05;
             else if (pTier == 2) pBuffs['lib.mult'] = 0.15;

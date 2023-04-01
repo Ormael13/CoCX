@@ -18,7 +18,9 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
 import classes.Scenes.Areas.Tundra.Valkyrie;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Valeria;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -62,7 +64,7 @@ use namespace CoC;
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
@@ -156,7 +158,14 @@ use namespace CoC;
 				//Find nothing!
 				name: "nothing",
 				call: encounterNothing
-			})
+			}/*, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			}*/);
 		}
 		
 		public function exploreGlacialRift():void {
@@ -192,8 +201,6 @@ use namespace CoC;
 			} else {
 				if (rand(2) == 0) {
 					var stonesHarvested:Number = 10;
-					var stonesCapacity:Number  = 300;
-					if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) stonesCapacity += 600;
 					outputText("You find a big amount of stone rubble in the rift and begin to harvest them for your constructions. ");
 					if (SceneLib.emberScene.followerEmber() || SceneLib.kihaFollower.followerKiha()) {
 						stonesHarvested += 10;
@@ -206,8 +213,8 @@ use namespace CoC;
 						} else outputText("Kiha");
 						outputText(" assist you into bringing as many as possible back to camp. ");
 					}
-					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < stonesCapacity) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
-					else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = stonesCapacity;
+					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < SceneLib.campUpgrades.checkMaterialsCapStones()) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
+					else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
 				} else {
 					var gemsFound2:int = 40 + rand(160);
 					outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\n Inside was " + String(gemsFound) + " gems! ");

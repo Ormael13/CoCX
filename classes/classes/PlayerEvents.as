@@ -18,6 +18,7 @@ import classes.Items.*;
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
@@ -47,14 +48,125 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var campUniqueScene:UniqueCampScenes = new UniqueCampScenes();
 		private var campScenes:CampScenes = new CampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
+		private var checkedHellhound:int; //Make sure we test each of these events just once in timeChangeLarge
+		private var checkedImp:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
+
+		private var LunaFullMoonScene: Boolean = false;
 		private var dreams:Dreams = new Dreams();
 
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
-			var needNext:Boolean;
+			var needNext:Boolean = false;
 			checkedTurkey = 0;
+			checkedHellhound = 0;
+			checkedImp = 0;
 			checkedDream = 0;
+
+			//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
+			Begin("PlayerEvents","hourlyHunger");
+			hourlyHunger();
+			End("PlayerEvents","hourlyHunger");
+
+			//hourly timers, statusEffect and stat adjustments
+			Begin("PlayerEvents","hourlyTimersProc");
+			hourlyTimersProc();
+			End("PlayerEvents","hourlyTimersProc");
+
+			Begin("PlayerEvents","hourlyCheckEvents");
+			needNext ||= hourlyCheckEvents();
+			End("PlayerEvents","hourlyCheckEvents");
+			Begin("PlayerEvents","hourlyCheckRacialPerks");
+			needNext ||= hourlyCheckRacialPerks();
+			End("PlayerEvents","hourlyCheckRacialPerks");
+
+			if (needNext) mainViewManager.updateCharviewIfNeeded();
+			return needNext;
+		}
+
+		private function hourlyHunger():Boolean {
+			var needNext:Boolean = false;
+			var hungerActive:Boolean = false;
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || player.hasPerk(PerkLib.EndlessHunger)) hungerActive = true;
+			if (hungerActive) {
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
+				else if (player.hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
+			}
+			if (hungerActive) {
+				var multiplier:Number = 1.0;
+				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.Survivalist3)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.HighlyVenomousDiet) && player.tailVenom < player.maxVenom()) {
+					if (player.maxHunger() > 1600) multiplier += 0.25;
+					else if (player.maxHunger() > 800) multiplier += 0.25;
+					else if (player.maxHunger() > 400) multiplier += 0.25;
+					else if (player.maxHunger() > 200) multiplier += 0.25;
+					else if (player.maxHunger() > 100) multiplier += 0.25;
+					else multiplier += 0.25;
+				}
+				if (player.hasPerk(PerkLib.ManticoreCumAddict)) multiplier *= 2;
+				if (player.hasPerk(PerkLib.HydraRegeneration)) multiplier *= 2;
+				if (player.hasPerk(PerkLib.AxillaryVenomGlands) && player.tailVenom < player.maxVenom()) multiplier *= 2;
+				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
+				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 and 250 hours with Survivalist perks.
+				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 1;
+				if (player.internalChimeraRating() >= 1) player.hunger -= (0.5 * player.internalChimeraRating());
+				if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
+				if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
+				if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
+				if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
+				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = player.maxHunger(); //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
+				if (player.hunger < 50 && player.hasPerk(PerkLib.MagicMetabolism)) {
+					var manaDrain:Number = 0;
+					manaDrain += 50 - player.hunger;
+					if (player.mana >= (manaDrain * 5)) {
+						player.mana -= (manaDrain * 5);
+						player.hunger = 50;
+					}
+				}
+				if (player.hunger <= 0) {
+					if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
+					else {
+						//Lose HP and makes fatigue go up. Lose body weight and muscles.
+						if (player.thickness < 25) {
+							player.takePhysDamage(player.maxHP() / 25);
+							fatigue(2);
+							dynStats("tou", -0.5);
+							dynStats("str", -0.5);
+						}
+						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
+							player.modThickness(1, 1);
+							player.modTone(1, 1);
+						}
+					}
+					player.hunger = 0; //Prevents negative
+				}
+				if (player.hunger < 10 && model.time.hours % 4 == 0) {
+					player.modThickness(1, 1);
+					player.modTone(1, 1);
+				}
+				if (player.hunger < 25) {
+					if (player.hunger > 0) flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING]++;
+					else flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] = 0;
+				}
+				else flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] = 0;
+				//Goo armor prevents starvation completely!
+				if (player.armor == armors.GOOARMR)
+				{
+					if (player.hunger < 15)
+					{
+						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your " + player.skinFurScales() + ".");
+						player.hunger = 20;
+					}
+					if (player.hunger < 20) player.hunger = 20;
+				}
+				if (player.hunger > player.maxHunger()) player.hunger = player.maxHunger();
+			}
+			return needNext;
+		}
+		private function hourlyTimersProc():Boolean {
+			var needNext:Boolean = false;
 
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
@@ -95,34 +207,24 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.Lusty)) dynStats("lus", player.libStat.totalCore * 0.005, "scale", false); //Double lust rise if lusty.
 			}
 			//Jewelry effect
-			if (player.jewelryEffectId == JewelryLib.CORRUPTION)
-			{
+			if (player.jewelryEffectId == JewelryLib.CORRUPTION) {
 				if (player.cor < 80) dynStats("cor", (player.jewelryEffectMagnitude/10));
 			}
-			if (player.jewelryEffectId == JewelryLib.PURITY)
-			{
+			if (player.jewelryEffectId == JewelryLib.PURITY) {
 				dynStats("cor", -0.1);
 			}
 			//Armor
-			if (player.armor == armors.LTHCARM)
-			{
+			if (player.armor == armors.LTHCARM) {
 				if (player.cor < 50) dynStats("cor", 0.05);
 				if (player.cor < 80) dynStats("cor", 0.05);
 			}
-			//Armor
-			if (player.armor == armors.LTHCARM)
-			{
+			if (player.armor == armors.LTHCARM) {
 				if (player.cor < 50) dynStats("cor", 0.05);
 				if (player.cor < 80) dynStats("cor", 0.05);
 			}
-			if (player.armor == armors.DBARMOR)
-			{
+			if (player.armor == armors.DBARMOR) {
 				dynStats("cor", -0.1);
 			}
-			//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
-			Begin("PlayerEvents","hourlyHunger");
-			hourlyHunger();
-			End("PlayerEvents","hourlyHunger");
 			//Evangeline went out for the items counter
 			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS]--;
 			//cumOmeter dropping down
@@ -150,7 +252,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else if (player.armor == armors.GOOARMR) {
 					dynStats("lus", 2 + (player.lib / 10), "scale", false);
-					needNext = true;
 				}
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 100) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
@@ -231,6 +332,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			//Konstantin buffs to equipment
+			if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) {
+				if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) <= 0) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
+				else player.addStatusValue(StatusEffects.KonstantinArmorPolishing, 1, -1);
+			}
+			if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) {
+				if (player.statusEffectv1(StatusEffects.KonstantinWeaponSharpening) <= 0) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
+				else player.addStatusValue(StatusEffects.KonstantinWeaponSharpening, 1, -1);
+			}
+			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) player.removeStatusEffect(StatusEffects.AlchemicalThunderBuff);
 			//Sidonie checks
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
 			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
@@ -242,24 +353,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (ZenjiScenes.isLover()) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
 			//Tripxi firearms restoration progress
 			if (player.statusEffectv3(StatusEffects.TelAdreTripxi) > 0) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, -1);
-			//
 			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis)) {
 				player.addStatusValue(StatusEffects.WendigoPsychosis, 1, -1);
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			}
-			//
-			for each (var clone:StatusEffectType in Soulforce.clones) {
-				if (player.hasStatusEffect(clone)) {
-					var cloneDao:int = player.statusEffectv1(clone);
-					if (cloneDao > 10 && cloneDao < 21) {
-						for (var i:int = 0; i < Soulforce.daos.length; ++i) {
-							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension())
-								SceneLib.soulforce.daoContemplationsEffect(Soulforce.daos[i][1], Soulforce.daos[i][0], true);
-						}
-					}
-				}
-			}
-			//
 			if (player.hasStatusEffect(StatusEffects.DinahGift)) {
 				if (player.statusEffectv1(StatusEffects.DinahGift) <= 0) player.removeStatusEffect(StatusEffects.DinahGift);
 				else player.addStatusValue(StatusEffects.DinahGift, 1, -1);
@@ -277,9 +374,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (DriderTown.TyrantiaKidsEggsHatching > 1) DriderTown.TyrantiaKidsEggsHatching -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching1 > 1) DriderTown.TyrantiaKidsEggsHatching1 -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching2 > 1) DriderTown.TyrantiaKidsEggsHatching2 -= 1;
+			//Gardening
+			if (Garden.GardenSlot01Time > 0) Garden.GardenSlot01Time -= 1;
+			if (Garden.GardenSlot02Time > 0) Garden.GardenSlot02Time -= 1;
+			if (Garden.GardenSlot03Time > 0) Garden.GardenSlot03Time -= 1;
+			if (Garden.GardenSlot04Time > 0) Garden.GardenSlot04Time -= 1;
+			if (Garden.GardenSlot05Time > 0) Garden.GardenSlot05Time -= 1;
+			if (Garden.GardenSlot06Time > 0) Garden.GardenSlot06Time -= 1;
+			if (Garden.GardenSlot07Time > 0) Garden.GardenSlot07Time -= 1;
+			if (Garden.GardenSlot08Time > 0) Garden.GardenSlot08Time -= 1;
+			if (Garden.GardenSlot09Time > 0) Garden.GardenSlot09Time -= 1;
+			if (Garden.GardenSlot10Time > 0) Garden.GardenSlot10Time -= 1;
+			if (Garden.GardenSlot11Time > 0) Garden.GardenSlot11Time -= 1;
+			if (Garden.GardenSlot12Time > 0) Garden.GardenSlot12Time -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
-			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
-			{
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 				//Balls
 				var tempSpeedPenalty:Number = 0;
 				var lim:int = player.isTaur() ? 9 : 4;
@@ -301,9 +410,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			else{
 				player.buff("RealisticMode").remove();
 			}
-			Begin("PlayerEvents","hourlyCheckRacialPerks");
-			if (!needNext) needNext = hourlyCheckRacialPerks();
-			End("PlayerEvents","hourlyCheckRacialPerks");
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
 					outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n");
@@ -320,8 +426,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.addStatusValue(StatusEffects.Feeder, 2, 1); //Increase 'time since breastfed'
 					//trace("Feeder status: " + player.statusEffectv2(StatusEffects.Feeder) + " (modded " + ((player.statusEffectv2(StatusEffects.Feeder)) - 70) + ")");
 					//After 3 days without feeding someone sensitivity jumps.
-                    if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && CoC.instance.model.time.hours == 14 && player.weaponRange != weaponsrange.LBLASTR) {
-                        outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
+					if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && CoC.instance.model.time.hours == 14 && player.weaponRange != weaponsrange.LBLASTR) {
+						outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
 						player.dynStats("sen", 2 + (((player.statusEffectv2(StatusEffects.Feeder)) - 70) / 20));
 						needNext = true;
 					}
@@ -338,13 +444,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						if (player.statusEffectv1(StatusEffects.WormPlugged) <= 0) { //Remove if too low
 							player.removeStatusEffect(StatusEffects.WormPlugged);
 							player.knockUpForce(); //Clear worm 'pregnancy'
+							player.knockUpForce(0,0,1); //Clear worm 'pregnancy'
 						}
 						needNext = true;
 					}
 				}
 				else { //Non cunts lose worm plugged
 					player.removeStatusEffect(StatusEffects.WormPlugged);
-					player.knockUpForce(); //Clear worm 'pregnancy'
+					player.buttKnockUpForce(); //Clear worm 'pregnancy'
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Milked)) { //"Milked"
@@ -369,42 +476,48 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else player.addStatusValue(StatusEffects.Dysfunction, 1, -1);
 			}
-            //Lactation reduction
-            if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && player.pregnancyIncubation == 0) {
-                if (!player.hasStatusEffect(StatusEffects.LactationReduction))
-                    player.createStatusEffect(StatusEffects.LactationReduction, 0, 0, 0, 0);
-                else {//reduction effect
-                    player.addStatusValue(StatusEffects.LactationReduction, 1, 1); //increase timer
-                    //first warning
-                    if (player.statusEffectv1(StatusEffects.LactationReduction) == 48 && player.biggestLactation() >= 1)
-                        outputText("\n<b>Your " + Appearance.nippleDescription(player, 0) + "s feel swollen and bloated, needing to be milked.</b>\n");
-                    if (player.statusEffectv1(StatusEffects.LactationReduction) > 48) {
-                        var before:Number = player.biggestLactation();
-                        player.boostLactation(-0.5 * player.breastRows.length / 24); //decrease by 0.5 each day
-                        var after:Number = player.biggestLactation();
-                        //compare and show message
-                        if (before > 2.5 && after <= 2.5) {
-						    outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n");
-						    needNext = true;
-                        }
-                        if (before > 1.5 && after <= 1.5) {
-						    outputText("\n<b>Your body's milk output drops down to what would be considered 'normal' for a pregnant woman.</b>\n");
-						    needNext = true;
-                        }
-                        if (before > 1.0 && after <= 1.0) {
-						    outputText("\n<b>Your body no longer produces any milk.</b>\n");
-						    needNext = true;
-                        }
-                    }
-                }
-            }
+			if (player.pregnancyIncubation <= 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
+				player.knockUpForce(); //Clear Pregnancy
+			}
+			if (player.pregnancy2Incubation <= 0 && player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
+				player.knockUpForce(0, 0 ,1); //Clear Pregnancy
+			}
+			//Lactation reduction
+			if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && !player.isPregnant()) {
+				if (!player.hasStatusEffect(StatusEffects.LactationReduction))
+					player.createStatusEffect(StatusEffects.LactationReduction, 0, 0, 0, 0);
+				else {//reduction effect
+					player.addStatusValue(StatusEffects.LactationReduction, 1, 1); //increase timer
+					//first warning
+					if (player.statusEffectv1(StatusEffects.LactationReduction) == 48 && player.biggestLactation() >= 1)
+						outputText("\n<b>Your " + Appearance.nippleDescription(player, 0) + "s feel swollen and bloated, needing to be milked.</b>\n");
+					if (player.statusEffectv1(StatusEffects.LactationReduction) > 48) {
+						var before:Number = player.biggestLactation();
+						player.boostLactation(-0.5 * player.breastRows.length / 24); //decrease by 0.5 each day
+						var after:Number = player.biggestLactation();
+						//compare and show message
+						if (before > 2.5 && after <= 2.5) {
+							outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n");
+							needNext = true;
+						}
+						if (before > 1.5 && after <= 1.5) {
+							outputText("\n<b>Your body's milk output drops down to what would be considered 'normal' for a pregnant woman.</b>\n");
+							needNext = true;
+						}
+						if (before > 1.0 && after <= 1.0) {
+							outputText("\n<b>Your body no longer produces any milk.</b>\n");
+							needNext = true;
+						}
+					}
+				}
+			}
 			if (player.hasStatusEffect(StatusEffects.CuntStretched)) { //Cunt stretching stuff
 				player.addStatusValue(StatusEffects.CuntStretched, 1, 1);
 				if (player.vaginas.length > 0) {
 					if (!player.hasPerk(PerkLib.FerasBoonWideOpen)) {
 						if ((player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE && player.statusEffectv1(StatusEffects.CuntStretched) >= 200) ||
-							(player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) ||
-							(player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70)) {
+								(player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) ||
+								(player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70)) {
 							outputText("\nYour [vagina] recovers from your ordeals and becomes tighter.\n");
 							player.vaginas[0].vaginalLooseness--;
 							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
@@ -422,169 +535,130 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasStatusEffect(StatusEffects.ButtStretched)) { //Butt stretching stuff
 				player.addStatusValue(StatusEffects.ButtStretched, 1, 1);
 				if ((player.ass.analLooseness == 2 && player.statusEffectv1(StatusEffects.ButtStretched) >= 72) ||
-					(player.ass.analLooseness == 3 && player.statusEffectv1(StatusEffects.ButtStretched) >= 48) ||
-					(player.ass.analLooseness == 4 && player.statusEffectv1(StatusEffects.ButtStretched) >= 24) ||
-					(player.ass.analLooseness == 5 && player.statusEffectv1(StatusEffects.ButtStretched) >= 12)) {
+						(player.ass.analLooseness == 3 && player.statusEffectv1(StatusEffects.ButtStretched) >= 48) ||
+						(player.ass.analLooseness == 4 && player.statusEffectv1(StatusEffects.ButtStretched) >= 24) ||
+						(player.ass.analLooseness == 5 && player.statusEffectv1(StatusEffects.ButtStretched) >= 12)) {
 					outputText("\n<b>Your [asshole] recovers from the brutal stretching it has received and tightens up.</b>\n");
 					player.ass.analLooseness--;
 					player.changeStatusValue(StatusEffects.ButtStretched, 1, 0);
 					needNext = true;
 				}
 			}
-			//Salamander bullshit
-			if (player.isRaceCached(Races.SALAMANDER,2) && !player.hasPerk(PerkLib.LustingWarrior) && player.hasStatusEffect(StatusEffects.Overheat))
-			{
 
-				outputText("\n\nYour so horny right now... so damn horny, you would beat up someone if only for something to blow up the steam." +
-						" As the thought rush to your mind your body react strangely it would seem your overwelming need as a salamander and your ability to lustzerk has actualy unlocked some form of new power within you." +
-						" You feel newfound strength, the strength required to defeat any adversary if only for a chance to fuck and you are very keen on using it right about now.");
-				player.createPerk(PerkLib.LustingWarrior, 0, 0, 0,0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.SALAMANDER, 2) && player.hasPerk(PerkLib.LustingWarrior))
-			{
-				outputText("\n\nAs you become less of a salamander the prodigious strength granted to you by your incontrollable libido recedes.");
-				player.removePerk(PerkLib.LustingWarrior);
-				needNext = true;
+			//Improved venom gland
+			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGland, flags[kFLAGS.VENOM_TIMES_USED] >= 50, "You feel wonderfully healthy. After using your venom so many times your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production.");
+			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGlandEx, flags[kFLAGS.VENOM_TIMES_USED] >= 125, "You feel wonderfully healthy. After using your venom so many times your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom.");
+			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGlandSu, flags[kFLAGS.VENOM_TIMES_USED] >= 375, "You feel wonderfully healthy. After using your venom so many times your venom gland started to produce more potent venom. Allowing for increased capacity, production and increased effects of venom.");
+
+			needNext ||= player.gainPerk(PerkLib.GeneticMemory, flags[kFLAGS.TIMES_TRANSFORMED] >= 25, "Your body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed genetic memory!");
+			needNext ||= player.gainPerk(PerkLib.TransformationResistance, flags[kFLAGS.TIMES_TRANSFORMED] >= 100, "You feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate.");
+			needNext ||= player.gainPerk(PerkLib.TransformationAcclimation, flags[kFLAGS.TIMES_TRANSFORMED] >= 200, "Due to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth.");
+			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
+			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
+				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
+					player.removeStatusEffect(StatusEffects.Heat); //remove heat
+					EngineCore.statScreenRefresh();
+					outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.Heat, 3, -1);
 			}
 
-			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.KITSHOO) || player.isRaceCached(Races.HELLCAT) || player.hasStatusEffect(StatusEffects.HinezumiCoat)))
-			{
-				//Argument 1 is weither pc is in heat stage or not 1 means active
-				//Argument 2 is how many day left before player enter heats again typicaly 3;
-				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
-				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
-				if (player.isRaceCached(Races.SALAMANDER)) outputText(" salamander");
-				else if (player.isRaceCached(Races.KITSHOO)) outputText(" kitshoo");
-				else if (player.isRaceCached(Races.HELLCAT)) outputText(" hellcat");
-				else outputText(" hinezumi");
-				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enough not to jump on everything that moves.");
-				player.createStatusEffect(StatusEffects.Overheat, 1, 0, 0,0);
-				if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
-				else if (player.hasVagina()) player.goIntoHeat(false);
-				needNext = true;
+			if (player.inRut) { //Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
+				trace("RUT:" + player.statusEffectv3(StatusEffects.Rut));
+				if (player.statusEffectv3(StatusEffects.Rut) <= 1 || player.cockTotal() == 0) { //Remove bonus libido from rut
+					player.removeStatusEffect(StatusEffects.Rut); //remove heat
+					EngineCore.statScreenRefresh();
+					outputText("\n<b>Your body calms down, at last getting over your rut.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.Rut, 3, -1);
 			}
-			if (player.hasStatusEffect(StatusEffects.Overheat) && (!player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.KITSHOO) && !player.isRaceCached(Races.HELLCAT) && !player.hasStatusEffect(StatusEffects.HinezumiCoat)))
-			{
-				outputText("\n\nYour body finally calms down. It would seem you are no longer as hot as you used to be, which might be a good thing as you won't have to deal with heat problems... for now.");
-				player.removeStatusEffect(StatusEffects.Overheat);
-				player.removeStatusEffect(StatusEffects.Heat);
-				player.removeStatusEffect(StatusEffects.Rut);
-				player.statStore.removeBuffs("Overheat");
-				needNext = true;
+			if (player.statusEffectv1(StatusEffects.BathedInHotSpring) >= 1) {
+				if (player.statusEffectv1(StatusEffects.BathedInHotSpring) == 1) {
+					player.removeStatusEffect(StatusEffects.BathedInHotSpring);
+					outputText("\n<b>Effect of Hot Spring bath wears off.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.BathedInHotSpring, 1, -1);
 			}
-			//Player overheat was cleaned by sex!
-			if (player.statusEffectv1(StatusEffects.Overheat) == 1 && player.statusEffectv3(StatusEffects.Overheat) == 1) {
-				player.addStatusValue(StatusEffects.Overheat, 1, -1);
-				player.addStatusValue(StatusEffects.Overheat, 2, 3);
-				player.addStatusValue(StatusEffects.Overheat, 3, -1);
-				player.statStore.removeBuffs("Overheat");
-				player.removeStatusEffect(StatusEffects.Heat);
-				player.removeStatusEffect(StatusEffects.Rut);
-				needNext = true;
+			if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) >= 1) {
+				if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) == 1) {
+					player.buff("ShiraOfTheEastFoodBuff").remove();
+					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
+					outputText("\n<b>Effect of eating in 'Shira of the east' restaurant wears off.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 1, -1);
 			}
-			if (player.hasPerk(PerkLib.SlimeCore)) { //Lose slime core perk
-				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
-                    outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
-                    outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
-					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
-					player.removePerk(PerkLib.SlimeCore);
+			if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) >= 1) {
+				if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) == 1) {
+					player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
+					outputText("\n<b>Effect of Raiju Lightning wears off.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, -1);
+			}
+			if (player.statusEffectv1(StatusEffects.SoulGemCrafting) >= 1) player.addStatusValue(StatusEffects.SoulGemCrafting, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
+				if (rand(5) == 0) {
+					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");
+					player.dynStats("lus", 2 + rand(15), "scale", false);
+					if (player.lust >= player.maxOverLust()) {
+						outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.");
+						player.orgasm();
+						player.dynStats("sen", 2);
+						player.changeStatusValue(StatusEffects.LustyTongue, 1, player.statusEffectv1(StatusEffects.LustyTongue) + 10); //Tongue orgasming makes it last longer.
+
+					}
+					outputText("\n");
+					needNext = true;
+				}
+				player.changeStatusValue(StatusEffects.LustyTongue, 1, player.statusEffectv1(StatusEffects.LustyTongue) - 1); //Decrement
+				if (player.statusEffectv1(StatusEffects.LustyTongue) <= 0) {
+					player.removeStatusEffect(StatusEffects.LustyTongue);
+					outputText("\nYour mouth and tongue return to normal.\n");
 					needNext = true;
 				}
 			}
-			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO) {
-					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
-					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
-					//(Reduces Fluid Addiction to a 24 hour intake requirement).
-					outputText("(<b>Gained New Perk: Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
-					player.createPerk(PerkLib.SlimeCore, 0, 0, 0, 0);
-					player.removeKeyItem("Ruby Heart");
-					needNext = true;
+			if (player.hasStatusEffect(StatusEffects.Bammed1)) {
+				if (player.statusEffectv3(StatusEffects.Bammed1) > 0 && (player.statusEffectv1(StatusEffects.Bammed1) == 1 || player.statusEffectv1(StatusEffects.Bammed1) == 2)) {
+					player.addStatusValue(StatusEffects.Bammed1, 3, -1);
+					if (player.statusEffectv3(StatusEffects.Bammed1) <= 0) {
+						if (player.statusEffectv4(StatusEffects.Bammed1) <= 0 && player.statusEffectv2(StatusEffects.Bammed1) < 3) player.removeStatusEffect(StatusEffects.Bammed1);
+						outputText("\n<b>Your ability to use melee attacks was restored after Bam effect on it expired!</b>\n");
+						needNext = true;
+					}
 				}
-			}
-			if (player.hasPerk(PerkLib.DarkSlimeCore)) { //Lose DARK slime core perk
-				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
-					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
-					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
-					player.createKeyItem("Ruby Orb", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
-					player.removePerk(PerkLib.DarkSlimeCore);
-					needNext = true;
-				}
-			}
-			if (player.hasKeyItem("Ruby Orb") >= 0) { //Regain DARK slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
-					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
-					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
-					//(Reduces Fluid Addiction to a 24 hour intake requirement).
-					outputText("(<b>Gained New Perk: Dark Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
-					player.createPerk(PerkLib.DarkSlimeCore, 0, 0, 0, 0);
-					player.removeKeyItem("Ruby Orb");
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
-				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
-					outputText("\n<b>You no longer feel the need to stockpile fluids in your body. Geeze just how much of a slut did this make you?</b>\n");
-					player.removeStatusEffect(StatusEffects.SlimeCraving);
-					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
-					player.buff("Fluid Growth").remove();
-					needNext = true;
-				}
-				else { //Slime core reduces fluid need rate
-					if (player.isSlime())
-						player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
-					else player.addStatusValue(StatusEffects.SlimeCraving, 1, 1);
-					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
-						if (!player.hasStatusEffect(StatusEffects.SlimeCravingOutput)) { //Protects against this warning appearing multiple times in the output
-							player.createStatusEffect(StatusEffects.SlimeCravingOutput, 0, 0, 0, 0);
-							outputText("\n<b>Bigger... stronger, each intake of fluid you take only makes you more starved for the next as you grow in power each time, the need to fuck and feed slowly overwriting any other desire you may have.</b>\n");
-							needNext = true;
-						}
-						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
-						player.dynStats("str",-1,"spe", -0.1, "lus", 2);
-						player.buff("Fluid Growth").addStat("tou.mult",-0.04,0).withText("Fluid Growth!");
-						player.buff("Fluid Growth").addStat("int.mult",-0.04,0).withText("Fluid Growth!");
-						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
+				if (player.statusEffectv4(StatusEffects.Bammed1) > 0 && (player.statusEffectv2(StatusEffects.Bammed1) == 1 || player.statusEffectv2(StatusEffects.Bammed1) == 2)) {
+					player.addStatusValue(StatusEffects.Bammed1, 4, -1);
+					if (player.statusEffectv4(StatusEffects.Bammed1) <= 0) {
+						if (player.statusEffectv3(StatusEffects.Bammed1) <= 0 && player.statusEffectv1(StatusEffects.Bammed1) < 3) player.removeStatusEffect(StatusEffects.Bammed1);
+						outputText("\n<b>Your ability to use range attacks was restored after Bam effect on it expired!</b>\n");
+						needNext = true;
 					}
 				}
 			}
-			if (player.hasStatusEffect(StatusEffects.SlimeCravingFeed)) { //Slime feeding stuff
-				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
-				player.dynStats( "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
-				player.removeStatusEffect(StatusEffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
-				player.removeCurse("str",1, 2);
-				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
-				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.FluidBody) && player.isGoo() && (player.isAnyRace(Races.SLIME, Races.MAGMASLIME, Races.DARKSLIME))) {
-				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>)\n");
-				player.createPerk(PerkLib.FluidBody, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.hasPerk(PerkLib.FluidBody) && !player.isGoo() && (!player.isAnyRace(Races.SLIME, Races.MAGMASLIME, Races.DARKSLIME))) {
-				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>)\n");
-				player.removePerk(PerkLib.FluidBody);
-				needNext = true;
-			}
-			if (player.rearBody.type == RearBody.METAMORPHIC_GOO && !LowerBody.isGoo(player)) {
-				outputText("\n<b>Your body becomes way less malleable due to being less slime like.</b>\n");
-				player.rearBody.type = RearBody.NONE;
-				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.isRace(Races.DARKSLIME, 2) || player.isRace(Races.SLIME,2) || player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
-				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
-				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
-			}
-			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
-				player.removePerk(PerkLib.MorphicWeaponry);
-				if((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME,2))){
-					outputText("\nAs you are mo longer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+			if (player.hasStatusEffect(StatusEffects.Bammed2)) {
+				if (player.statusEffectv3(StatusEffects.Bammed2) > 0 && (player.statusEffectv1(StatusEffects.Bammed2) == 1 || player.statusEffectv1(StatusEffects.Bammed2) == 2)) {
+					player.addStatusValue(StatusEffects.Bammed2, 3, -1);
+					if (player.statusEffectv3(StatusEffects.Bammed2) <= 0) {
+						if (player.statusEffectv4(StatusEffects.Bammed2) <= 0 && player.statusEffectv2(StatusEffects.Bammed2) < 3) player.removeStatusEffect(StatusEffects.Bammed2);
+						outputText("\n<b>Your ability to use physical specials was restored after Bam effect on it expired!</b>\n");
+						needNext = true;
+					}
 				}
-				else{
-					outputText("\nHaving lost fluids, you no longer have enough body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				if (player.statusEffectv4(StatusEffects.Bammed2) > 0 && (player.statusEffectv2(StatusEffects.Bammed2) == 1 || player.statusEffectv2(StatusEffects.Bammed2) == 2)) {
+					player.addStatusValue(StatusEffects.Bammed2, 4, -1);
+					if (player.statusEffectv4(StatusEffects.Bammed2) <= 0) {
+						if (player.statusEffectv3(StatusEffects.Bammed2) <= 0 && player.statusEffectv1(StatusEffects.Bammed2) < 3) player.removeStatusEffect(StatusEffects.Bammed2);
+						outputText("\n<b>Your ability to use magical specials was restored after Bam effect on it expired!</b>\n");
+						needNext = true;
+					}
 				}
 			}
+			if (player.statusEffectv2(StatusEffects.Kelt) > 0) player.addStatusValue(StatusEffects.Kelt, 2, -0.15); //Reduce kelt submissiveness by 1 every 5 hours
+			//Mino cum update.
 			if (player.hasStatusEffect(StatusEffects.Fullness)) {
 				player.addStatusValue(StatusEffects.Fullness, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Fullness) <= 0) player.removeStatusEffect(StatusEffects.Fullness);
@@ -616,57 +690,227 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-            if (camp.IsSleeping && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
-                outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
-				player.growTits(1, player.bRows(), false, 2);
-				player.dynStats("lus", 10, "scale", false);
+			//Decrement mino withdrawal symptoms display cooldown
+			//flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] prevents PC getting two of the same notices overnite
+			else if (flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] > 0) flags[kFLAGS.MINOCUM_WARNING_COOLDOWN]--;
+			if (player.statusEffectv1(StatusEffects.Airweed) >= 1) {
+				if (player.statusEffectv1(StatusEffects.Airweed) == 1) {
+					player.removeStatusEffect(StatusEffects.Airweed);
+					outputText("\n<b>Effect of Airweed wears off.</b>\n");
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.Airweed, 1, -1);
+			}
+
+			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) { //Lust stick!
+				player.addStatusValue(StatusEffects.LustStickApplied, 1, -1); //Decrement!
+				if (player.statusEffectv1(StatusEffects.LustStickApplied) <= 0) {
+					player.removeStatusEffect(StatusEffects.LustStickApplied);
+					outputText("<b>\nYour drugged lipstick fades away, leaving only the faintest residue on your lips.  You'll have to put on more if you want to be able to kiss your foes into submission!</b>\n");
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.Luststick)) { //Luststic countdown
+				player.addStatusValue(StatusEffects.Luststick, 1, -1);
+				if (rand(2) == 0 && player.hasCock()) { //50% chance to lust spike
+					//Display if haven't displayed
+					if (player.flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED] == 0) {
+						outputText("\nYour body tingles, practically a slave to the effects of harpy lipstick.  Blood surges to [eachcock], making you groan out loud with forced pleasure.  Unasked-for fantasies assault you, and you spend a few moments fantasizing about fucking feathery women before you come to your senses.\n");
+						flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
+						needNext = true;
+					}
+					player.dynStats("lus", 20, "scale", false);
+					if (player.lust > player.maxOverLust()) player.lust = player.maxOverLust();
+				}
+				if (player.statusEffectv1(StatusEffects.Luststick) <= 0) {
+					player.removeStatusEffect(StatusEffects.Luststick);
+					dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
+					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
+					needNext = true;
+				}
+			}
+			if (player.flags[kFLAGS.LUSTSTICK_RESISTANCE] >= 50 && !player.hasPerk(PerkLib.LuststickAdapted)) { //Luststick resistance unlock
+				SceneLib.sophieBimbo.unlockResistance();
+				if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
 				needNext = true;
 			}
+			if (player.hasStatusEffect(StatusEffects.ArousalPotion)) {
+				player.addStatusValue(StatusEffects.ArousalPotion, 2, -1);
+				if (player.statusEffectv2(StatusEffects.ArousalPotion) <= 0) {
+					outputText("\n<b>Alraune perfume effect expired.</b>");
+					player.removeStatusEffect(StatusEffects.ArousalPotion);
+					needNext = true;
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.Eggchest)) { //Eggs in tits!
+				player.addStatusValue(StatusEffects.Eggchest, 1, -1);
+				if (player.statusEffectv1(StatusEffects.Eggchest) <= 0) {
+					outputText("\n<b>You feel the rounded eggs within your [fullChest] vanishing, absorbed into your body.  </b>");
+					player.growTits(player.statusEffectv2(StatusEffects.Eggchest), player.bRows(), true, 2);
+					outputText("\n");
+					player.removeStatusEffect(StatusEffects.Eggchest);
+					needNext = true;
+				}
+			}
+			if (player.hasPerk(PerkLib.WetPussy) && player.hasVagina()) {
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) {
+					outputText("\n<b>Your " + player.vaginaDescript(0) + " returns to its normal, wet state.</b>\n");
+					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
+					needNext = true;
+				}
+			}
+			if (player.hasPerk(PerkLib.MaraesGiftButtslut) && player.ass.analWetness < 2) { //Prevent Buttsluts from getting dry backdoors
+				outputText("\n<b>Your " + Appearance.assholeDescript(player) + " quickly re-moistens.  It looks like Marae's 'gift' can't be removed.</b>\n");
+				player.ass.analWetness = 2;
+				needNext = true;
+			}
+			var textHolder:String;
+			textHolder = player.fixFemininity();
+			if (textHolder != "") {
+				outputText(textHolder);
+				needNext = true;
+			}
+
 			if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
 				if (player.armorName == "lusty maiden's armor") {
-                    if (CoC.instance.model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
-                    if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
+					if (CoC.instance.model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
+					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 				}
 				else flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
-			}
-			if (player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
-				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
-				var bonusStats:Number = 0;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
-				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
-				player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
-				player.removePerk(PerkLib.LycanthropyDormant);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.Lycanthropy)) {
-				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
-				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
-				player.statStore.removeBuffs("Lycanthropy");
-				player.removePerk(PerkLib.Lycanthropy);
-				needNext = true;
-			}
-			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou lose your sence of invulnerability as you are no longer an Azazel.\n");
-				player.removePerk(PerkLib.Immortality);
-				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou regain your sence of invulnerability as you are now an Azazel.\n");
-				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
-				needNext = true;
 			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 			if (player.statStore.hasBuff("Crossed Holy Band") && player.cor > 0) player.cor -= 1;
+
+			//Recharge venom/web pool
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA || player.lowerBody == LowerBody.SANDWORM
+					|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 2 || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue) || (player.hasKeyItem("Sky Poison Pearl") >= 0)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
+				var venomHRecharge:Number = 0;
+				venomHRecharge += combat.venomCombatRecharge2();
+				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
+					if (player.maxHunger() > 1600) venomHRecharge += 27.5;
+					else if (player.maxHunger() > 800) venomHRecharge += 22.5;
+					else if (player.maxHunger() > 400) venomHRecharge += 17.5;
+					else if (player.maxHunger() > 200) venomHRecharge += 12.5;
+					else if (player.maxHunger() > 100) venomHRecharge += 7.5;
+					else venomHRecharge += 2.5;
+				}
+				player.tailVenom += venomHRecharge;
+				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
+			}
+
+			//QUEST AREA
+			//Vala Gathering Quest
+			if (player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED) {
+				outputText("\n<b>You now have enough scepter shards to repair the fairy queen scepter! Go turn this to Vala in Tel Adre.</b>\n");
+				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_ITEM_GATHERED;
+				needNext = true;
+			}
+			if (!player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) {
+				outputText("\n<b>Oops you seem to have forgot that Vala needs those items to repair the royal scepter and parted way with them! Well its fine you can always go beat some more Phouka for extras.</b>\n");
+				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_STARTED;
+				needNext = true;
+			}
+			//Other removeCurse cooldowns
+			if (flags[kFLAGS.AYANE_CURE_COOLDOWN] > 0) --flags[kFLAGS.AYANE_CURE_COOLDOWN];
+			if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) --flags[kFLAGS.DIANA_CURE_COOLDOWN];
+			//Luna nursing reset
+			if (LunaFollower.Nursed) {
+				LunaFollower.NursedCooldown -= 1
+				if (LunaFollower.NursedCooldown == 0)
+					LunaFollower.Nursed = false;
+			}
+			//Luna mooning reset
+			if (LunaFollower.Sated) {
+				LunaFollower.SatedCooldown -= 1
+				if (LunaFollower.SatedCooldown == 0)
+					LunaFollower.Sated = false;
+			}
+			if (isNightTime && !camp.IsWaitingResting && !LunaFollower.Sated) {
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
+					LunaFullMoonScene = true;
+					return true;
+				}
+			}
+			//Cow bell
+			if (player.necklace == necklaces.COWBELL && player.isRaceCached(Races.COW) && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
+			if (!player.isRaceCached(Races.COW) && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
+			//Jiangshi cursed tag
+			if (player.headJewelry == headjewelries.JIANGCT && player.isRaceCached(Races.JIANGSHI) && !player.statStore.hasBuff('Jiangshi Curse Tag')) player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
+			//Reset bad end warning
+			if (player.hasStatusEffect(StatusEffects.TFWarning)) {
+				player.addStatusValue(StatusEffects.TFWarning, 3, -1);
+				if (player.getStatusValue(StatusEffects.TFWarning, 3) <= 0) player.removeStatusEffect(StatusEffects.TFWarning);
+			}
+
+			if (CoC.instance.model.time.hours == 6) {
+				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+				if (vthirst != null) {
+					if (vthirst.value2 > 0) vthirst.value2--;
+					if (vthirst.value2 <= 0) {
+						if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) vthirst.value2 = 3;
+						else if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2) vthirst.value2 = 2;
+						else vthirst.value2 = 1;
+						vthirst.modSatiety(-1);
+					}
+				}
+				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
+					var protection:Number = 0;
+					if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] <= 25) protection = 25;
+					else if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] <= 50) protection = 50;
+					else if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] <= 75) protection = 75;
+					else protection += flags[kFLAGS.PC_GOBLIN_DAUGHTERS];
+					var nails:Number = 0;
+					if (protection > rand(100)) nails += 5 + rand(11);
+					if (protection > rand(100)) nails += 5 + rand(11);
+					if (protection > rand(100)) nails += 5 + rand(11);
+					if (protection > rand(100)) nails += 5 + rand(11);
+					if (protection > rand(100)) nails += 5 + rand(11);
+					if (protection > rand(100)) nails += 5 + rand(11);
+					var metalpieces:Number = 0;
+					if (protection > rand(100)) metalpieces += 1;
+					if (protection > rand(100)) metalpieces += 1;
+					if (protection > rand(100)) metalpieces += 1;
+					if (protection > rand(100)) metalpieces += 1;
+					if (protection > rand(100)) metalpieces += 1;
+					var mechanism:Number = 0;
+					if (protection > rand(100)) mechanism += 1;
+					var energycore:Number = 0;
+					if (protection > rand(100)) energycore += 1;
+					if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts)) {
+						if (nails > 0) {
+							if (player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts) + nails > 300) nails = 300 - player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
+							player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 1, nails);
+						}
+						if (metalpieces > 0) {
+							if (player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts) + metalpieces > 15) metalpieces = 15 - player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
+							player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 2, metalpieces);
+						}
+						if (mechanism > 0 && player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts) + mechanism < 4) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 3, mechanism);
+						if (energycore > 0 && player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) + energycore < 4) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 4, energycore);
+					}
+					else {
+						nails += 1;
+						player.createStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts,nails,metalpieces,mechanism,energycore);
+					}
+				}
+
+				for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
+					if (pPerks.trueMutation){
+						pPerks.pReqs();
+						if (pPerks.available(player) && (pPerks.maxLvl > player.perkv1(pPerks))){
+							pPerks.acquireMutation(player, "none", 1);
+							player.setPerkValue(pPerks, 3, 1);
+							needNext = true;
+						}
+					}
+				}
+			}
 			if (CoC.instance.model.time.hours > 23) { //Once per day
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
-                if (CoC.instance.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
-                    flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
+				if (CoC.instance.model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
+					flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 					if (flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 				}
 				flags[kFLAGS.GILDED_JERKED] = 0;
@@ -674,8 +918,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] = 0;
 				if (flags[kFLAGS.RUBI_PROSTITUTION] > 0) flags[kFLAGS.RUBI_PROFIT] += 2 + rand(4);
 				flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
-                SceneLib.bazaar.benoit.updateBenoitInventory();
-                flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
+				SceneLib.bazaar.benoit.updateBenoitInventory();
+				flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
 				if (flags[kFLAGS.LUSTSTICK_RESISTANCE] > 0) flags[kFLAGS.LUSTSTICK_RESISTANCE]--; //Reduce lust-stick resistance building
 				if (flags[kFLAGS.DOMINIKA_MAGIC_COOLDOWN] > 0) { //Dominika fellatrix countdown
 					flags[kFLAGS.DOMINIKA_MAGIC_COOLDOWN]--;
@@ -689,17 +933,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
 					if (flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] < 0) flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 0;
 				}
-                if (CoC.instance.model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
-                flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
-                if (SceneLib.latexGirl.latexGooFollower()) { //Latex goo follower daily updates
-                    SceneLib.latexGirl.gooFluid(-2, false);
-                    if (SceneLib.latexGirl.gooFluid() < 50) SceneLib.latexGirl.gooHappiness(-1, false);
-                    if (SceneLib.latexGirl.gooFluid() < 25) SceneLib.latexGirl.gooHappiness(-1, false);
-                    if (SceneLib.latexGirl.gooHappiness() < 75) SceneLib.latexGirl.gooObedience(-1, false);
-                    if (SceneLib.latexGirl.gooHappiness() >= 90) SceneLib.latexGirl.gooObedience(1, false);
-                }
-                SceneLib.farm.farmCorruption.updateFarmCorruption(); //Farm Corruption updating
-                if (player.hasStatusEffect(StatusEffects.Contraceptives)) { // Herbal contraceptives countdown
+				if (CoC.instance.model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
+				flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
+				if (SceneLib.latexGirl.latexGooFollower()) { //Latex goo follower daily updates
+					SceneLib.latexGirl.gooFluid(-2, false);
+					if (SceneLib.latexGirl.gooFluid() < 50) SceneLib.latexGirl.gooHappiness(-1, false);
+					if (SceneLib.latexGirl.gooFluid() < 25) SceneLib.latexGirl.gooHappiness(-1, false);
+					if (SceneLib.latexGirl.gooHappiness() < 75) SceneLib.latexGirl.gooObedience(-1, false);
+					if (SceneLib.latexGirl.gooHappiness() >= 90) SceneLib.latexGirl.gooObedience(1, false);
+				}
+				SceneLib.farm.farmCorruption.updateFarmCorruption(); //Farm Corruption updating
+				if (player.hasStatusEffect(StatusEffects.Contraceptives)) { // Herbal contraceptives countdown
 					if (player.statusEffectv1(StatusEffects.Contraceptives) == 1) {
 						player.addStatusValue(StatusEffects.Contraceptives, 2, -1);
 						if (player.statusEffectv1(StatusEffects.Contraceptives) < 0) player.removeStatusEffect(StatusEffects.Contraceptives);
@@ -768,6 +1012,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Elf training reset
 				WoodElves.hasTrainedToday = false;
+				if (player.isWoodElf()) if (SceneLib.woodElves.ConvertNewSisters()) needNext = true;
 				//Reset Chi Chi Training daily limit
 				flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Luna Meal CD
@@ -790,13 +1035,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				//Daily Fishery production
-				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
-					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
-						flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
-						if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 2;
-					}
-					if (flags[kFLAGS.CEANI_FOLLOWER] > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 5;
-				}
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0 && camp.FisheryDailyProduction() > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += camp.FisheryDailyProduction();
 				//Daily barrels refill
 				if (player.hasStatusEffect(StatusEffects.MitziDaughtersBarrels)) {
 					if (rand(3) == 0) player.addStatusValue(StatusEffects.MitziDaughtersBarrels, 1, 5);
@@ -837,6 +1076,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Siegweird
 				if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 10) flags[kFLAGS.SIEGWEIRD_FOLLOWER]++;
 				if (player.statusEffectv1(StatusEffects.SiegweirdSoup) == 1) player.addStatusValue(StatusEffects.SiegweirdSoup, 1, -1);
+				//Dominant Alpha buff
+				if (player.statusEffectv1(StatusEffects.DominantAlpha) >= 1) {
+					player.addStatusValue(StatusEffects.DominantAlpha, 1, -1);
+					if (player.statusEffectv1(StatusEffects.DominantAlpha) == 0) {
+						player.removeStatusEffect(StatusEffects.DominantAlpha);
+						player.buff("Dominant Alpha").removeFromStat("str");
+					}
+				}
 				//Mishaps reset
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.removeStatusEffect(StatusEffects.CampLunaMishaps1);
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.removeStatusEffect(StatusEffects.CampLunaMishaps2);
@@ -1008,37 +1255,67 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Reset clone creation tracker
 				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) == 0 && player.statusEffectv4(StatusEffects.PCClone) == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
-			//Easter bunny egg balls Loosing
-			if (!player.isRaceCached(Races.EASTERBUNNY) && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1) {
-				outputText("\nSomething changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.\n\n");
-				player.removePerk(PerkLib.EasterBunnyBalls)
+			//Process crops harvest moon
+			if (CoC.instance.model.time.hours == 24){
+				if (HarvestMoonScenes.harvestmoonstageHH < 7 && HarvestMoonScenes.harvestmoonstageHH > 0) {
+					HarvestMoonScenes.harvestmoonstageHH += 1;
+				}
+				if (HarvestMoonScenes.harvestmoonstageMG < 7 && HarvestMoonScenes.harvestmoonstageMG > 0) {
+					HarvestMoonScenes.harvestmoonstageMG += 1;
+				}
+				if (HarvestMoonScenes.harvestmoonstageSB < 7 && HarvestMoonScenes.harvestmoonstageSB > 0) {
+					HarvestMoonScenes.harvestmoonstageSB += 1;
+				}
+				if (HarvestMoonScenes.harvestmoonstageIW < 7 && HarvestMoonScenes.harvestmoonstageIW > 0) {
+					HarvestMoonScenes.harvestmoonstageIW += 1;
+				}
+				if (HarvestMoonScenes.harvestmoonstageBF < 7 && HarvestMoonScenes.harvestmoonstageBF > 0) {
+					HarvestMoonScenes.harvestmoonstageBF += 1;
+				}
 			}
-			//Easter bunny egg balls Cumming the eggs out
-			if (player.hasStatusEffect(StatusEffects.EasterBunnyCame)) { //Easter bunny cumming its eggs out
-				if (player.balls == 2)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock two new way smaller eggs sliding " +
-						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
-				if (player.balls == 4)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock four new way smaller eggs sliding " +
-						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
-				player.ballSize = 1;
-				var changeLib1:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
-				player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib1).withText("Easter Bunny Balls");
-				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
-				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
-				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
-				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>\n");
+
+			return needNext;
+		}
+
+		private function hourlyCheckEvents():Boolean {
+			var needNext:Boolean = false;
+
+			//Soul Sense
+			if (!player.hasPerk(PerkLib.SoulSense) && player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage)) {
+				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
+				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that Mrs. Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
+				player.removeKeyItem("'Soul Sense and You' Manual");
+				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
+				needNext = true;
+			}
+
+			//
+			for each (var clone:StatusEffectType in Soulforce.clones) {
+				if (player.hasStatusEffect(clone)) {
+					var cloneDao:int = player.statusEffectv1(clone);
+					if (cloneDao > 10 && cloneDao < 21) {
+						for (var i:int = 0; i < Soulforce.daos.length; ++i) {
+							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension())
+								SceneLib.soulforce.daoContemplationsEffect(Soulforce.daos[i][1], Soulforce.daos[i][0], true);
+						}
+					}
+				}
+			}
+			if (InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_2], flags[kFLAGS.PLAYER_COMPANION_3])) {
+				outputText("\nKiha waves to you as she leaves your side. You can call her to battle again next time, or ask her to be your main combat companion.\n");
+				if (flags[kFLAGS.PLAYER_COMPANION_0] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_0] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+				player.removeStatusEffect(StatusEffects.CombatFollowerKiha);
+				needNext = true;
+			}
+			if (camp.IsSleeping && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
+				outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
+				player.growTits(1, player.bRows(), false, 2);
+				player.dynStats("lus", 10, "scale", false);
 				needNext = true;
 			}
 			if (CoC.instance.model.time.hours == 6) {
-				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-				if (vthirst != null) {
-					if (vthirst.value2 > 0) vthirst.value2--;
-					if (vthirst.value2 <= 0) {
-						if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) vthirst.value2 = 3;
-						else if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2) vthirst.value2 = 2;
-						else vthirst.value2 = 1;
-						vthirst.modSatiety(-1);
-					}
-				}
 				//Getting chrismas tree
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) {
 					outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves. Looks like the seed was able to take root in the barren land after all.\n");
@@ -1049,46 +1326,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && !player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
 					campScenes.PCGoblinDaughtersBuilingWorkshop();
 					needNext = true;
-				}
-				if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
-					var protection:Number = 0;
-					if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] <= 25) protection = 25;
-					else if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] <= 50) protection = 50;
-					else if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] <= 75) protection = 75;
-					else protection += flags[kFLAGS.PC_GOBLIN_DAUGHTERS];
-					var nails:Number = 0;
-					if (protection > rand(100)) nails += 5 + rand(11);
-					if (protection > rand(100)) nails += 5 + rand(11);
-					if (protection > rand(100)) nails += 5 + rand(11);
-					if (protection > rand(100)) nails += 5 + rand(11);
-					if (protection > rand(100)) nails += 5 + rand(11);
-					if (protection > rand(100)) nails += 5 + rand(11);
-					var metalpieces:Number = 0;
-					if (protection > rand(100)) metalpieces += 1;
-					if (protection > rand(100)) metalpieces += 1;
-					if (protection > rand(100)) metalpieces += 1;
-					if (protection > rand(100)) metalpieces += 1;
-					if (protection > rand(100)) metalpieces += 1;
-					var mechanism:Number = 0;
-					if (protection > rand(100)) mechanism += 1;
-					var energycore:Number = 0;
-					if (protection > rand(100)) energycore += 1;
-					if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts)) {
-						if (nails > 0) {
-							if (player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts) + nails > 300) nails = 300 - player.statusEffectv1(StatusEffects.PCDaughtersWorkshopSpareParts);
-							player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 1, nails);
-						}
-						if (metalpieces > 0) {
-							if (player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts) + metalpieces > 15) metalpieces = 15 - player.statusEffectv2(StatusEffects.PCDaughtersWorkshopSpareParts);
-							player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 2, metalpieces);
-						}
-						if (mechanism > 0 && player.statusEffectv3(StatusEffects.PCDaughtersWorkshopSpareParts) + mechanism < 4) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 3, mechanism);
-						if (energycore > 0 && player.statusEffectv4(StatusEffects.PCDaughtersWorkshopSpareParts) + energycore < 4) player.addStatusValue(StatusEffects.PCDaughtersWorkshopSpareParts, 4, energycore);
-					}
-					else {
-						nails += 1;
-						player.createStatusEffect(StatusEffects.PCDaughtersWorkshopSpareParts,nails,metalpieces,mechanism,energycore);
-					}
 				}
 				if (flags[kFLAGS.SLEEP_WITH] == "Zenji") {
 					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 0) SceneLib.zenjiScene.loverZenjiSleepWithMorning();
@@ -1122,92 +1359,31 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
-			if (needNext) mainViewManager.updateCharviewIfNeeded();
+			if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
+				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
+				needNext = true;
+			}
+			if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
+				needNext = true;
+			}
+			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] == 0) { //Repeated warnings!
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
+					outputText("\n<b>You shiver, feeling a little cold. Maybe you ought to get some more minotaur cum? You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
+				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
+					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head. You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
+				needNext = true;
+			}
+			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
+				flags[kFLAGS.DICK_EGG_INCUBATION]--;
+				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
+				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
+					SceneLib.masturbation.birthBeeEggsOutYourWang();
+					needNext = true;
+				}
+			}
+
 			return needNext;
 		}
-
-		private function hourlyHunger():Boolean {
-			var needNext:Boolean = false;
-			var hungerActive:Boolean = false;
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || player.hasPerk(PerkLib.EndlessHunger)) hungerActive = true;
-			if (hungerActive) {
-				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
-				else if (player.hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
-			}
-			if (hungerActive) {
-				var multiplier:Number = 1.0;
-				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
-				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
-				if (player.hasPerk(PerkLib.Survivalist3)) multiplier -= 0.2;
-				if (player.hasPerk(PerkLib.HighlyVenomousDiet) && player.tailVenom < player.maxVenom()) {
-					if (player.maxHunger() > 1600) multiplier += 0.25;
-					else if (player.maxHunger() > 800) multiplier += 0.25;
-					else if (player.maxHunger() > 400) multiplier += 0.25;
-					else if (player.maxHunger() > 200) multiplier += 0.25;
-					else if (player.maxHunger() > 100) multiplier += 0.25;
-					else multiplier += 0.25;
-				}
-				if (player.hasPerk(PerkLib.ManticoreCumAddict)) multiplier *= 2;
-				if (player.hasPerk(PerkLib.HydraRegeneration)) multiplier *= 2;
-				if (player.hasPerk(PerkLib.AxillaryVenomGlands) && player.tailVenom < player.maxVenom()) multiplier *= 2;
-				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
-				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 and 250 hours with Survivalist perks.
-				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 1;
-				if (player.internalChimeraRating() >= 1) player.hunger -= (0.5 * player.internalChimeraRating());
-				if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
-				if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
-				if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
-				if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
-				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = player.maxHunger(); //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
-				if (player.hunger < 50 && player.hasPerk(PerkLib.MagicMetabolism)) {
-					var manaDrain:Number = 0;
-					manaDrain += 50 - player.hunger;
-					if (player.mana >= (manaDrain * 5)) {
-						player.mana -= (manaDrain * 5);
-						player.hunger = 50;
-					}
-				}
-				if (player.hunger <= 0) {
-					if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
-					else {
-						//Lose HP and makes fatigue go up. Lose body weight and muscles.
-						if (player.thickness < 25) {
-							player.takePhysDamage(player.maxHP() / 25);
-							fatigue(2);
-							dynStats("tou", -0.5);
-							dynStats("str", -0.5);
-						}
-						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
-							player.modThickness(1, 1);
-							player.modTone(1, 1);
-						}
-					}
-					player.hunger = 0; //Prevents negative
-				}
-				if (player.hunger < 10 && model.time.hours % 4 == 0) {
-					player.modThickness(1, 1);
-					player.modTone(1, 1);
-				}
-				if (player.hunger < 25) {
-					if (player.hunger > 0) flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING]++;
-					else flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] = 0;
-				}
-				else flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] = 0;
-				//Goo armor prevents starvation completely!
-				if (player.armor == armors.GOOARMR)
-				{
-					if (player.hunger < 15)
-					{
-						outputText("Sensing that you're hungry as indicated by your growling stomach, the armor-goo stuffs some blue goo into your mouth. You swallow the goo and it makes its way into your stomach. You also can feel some goo being absorbed into your " + player.skinFurScales() + ".");
-						player.hunger = 20;
-					}
-					if (player.hunger < 20) player.hunger = 20;
-				}
-				if (player.hunger > player.maxHunger()) player.hunger = player.maxHunger();
-			}
-			return needNext;
-		}
-
 		private function hourlyCheckRacialPerks():Boolean {
 			var needNext:Boolean = false;
 			// RaceTf itemeffect
@@ -1230,22 +1406,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
-
-			player.updateRacialCache();
+			if (player.needToUpdateRacialCache())
+				player.updateRacialCache();
 			//Demonic hunger perk
-			if (player.isRaceCached(Races.DEMON) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
-				if (!player.hasPerk(PerkLib.DemonEnergyThirst)) {
-					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
-					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
-					needNext = true;
-				}
-			} else { //Check for being a demon enough
-				if (player.hasPerk(PerkLib.DemonEnergyThirst)) {
-					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
-					player.removePerk(PerkLib.DemonEnergyThirst);
-					needNext = true;
-				}
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL) || player.hasPerk(PerkLib.Phylactery), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
+			needNext ||= player.gainOrLosePerk(PerkLib.SoulEater, player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery), "You begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power!", "Due to your miraculous soul recovery you have lost the ability to consume souls!");
+
+
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) player.refillHunger(10, false);
@@ -1255,83 +1422,155 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
 			}
+			//DarkCharm
+			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.", player.perkv4(PerkLib.DarkCharm) == 0);
 			//Flexibility perk
-			if ((Tail.hasFelineTail(player)) && (LowerBody.hasFelineLegs(player)) && (Arms.hasFelineArms(player))) { //Check for gain of cat agility - requires legs, tail, and arms
-				if (!player.hasPerk(PerkLib.Flexibility)) {
-					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
-					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
-					needNext = true;
-				}
-			}
-			else if (player.hasPerk(PerkLib.Flexibility) && player.perkv4(PerkLib.Flexibility) == 0 && !player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) { //Remove flexibility perk if not meeting requirements
-				outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.\n\n(<b>Lost Perk: Flexibility</b>)\n");
-				player.removePerk(PerkLib.Flexibility);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.Flexibility, (Tail.hasFelineTail(player) && LowerBody.hasFelineLegs(player) && Arms.hasFelineArms(player)) || player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1, "While stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?", "You notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.", player.perkv4(PerkLib.Flexibility) == 0);
+
 			//Ghost-slinger perk
-			if (player.isRaceCached(Races.POLTERGEIST, 2) && !player.hasPerk(PerkLib.Ghostslinger)) {
-				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)\n\n(<b>Gained Perk: Telekinesis</b>)");
-				player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);
-				player.createPerk(PerkLib.Telekinesis, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (!player.isRaceCached(Races.POLTERGEIST, 2) && player.hasPerk(PerkLib.Ghostslinger)) {// && !player.perkv1(IMutationsLib.LizanMarrowIM) >= 1
-				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)\n\n(<b>Lost Perk: Telekinesis</b>)");
-				player.removePerk(PerkLib.Ghostslinger);
-				player.removePerk(PerkLib.Telekinesis);
+			needNext ||= player.gainOrLosePerk(PerkLib.Ghostslinger, player.isRaceCached(Races.POLTERGEIST, 2), "Your head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.", "Your supernatural knowledge fades along with the abilities that came with it as you become more corporeal.");
+			needNext ||= player.gainOrLosePerk(PerkLib.Telekinesis, player.isRaceCached(Races.POLTERGEIST, 2));
+			//Phantom Shooting perk
+			needNext ||= player.gainOrLosePerk(PerkLib.PhantomShooting, player.isRaceCached(Races.POLTERGEIST), (player.weaponRangePerk == "Throwing" || player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle")? "With your expanded otherworldly knowledge, a thought comes to mind. You apply your ghostly abilities to your " + player.weaponRangeName + " then "+(player.weaponRangePerk == "Throwing" ? "throw it":"shoot")+" at a nearby rock. You can feel a small piece of yourself leave, but the impact of your weapon all but shatters the rock. Using a bit of your ectoplasm instead of basic ammunition definitely made your " + player.weaponRangeName + " stronger.":"With your expanded otherworldly knowledge, a thought comes to mind. If you used some of your ectoplasm instead of basic ammunition for a firearm or throwing weapon, perhaps your weapons will have more of an impact.", "As you become more corporeal again, the otherworldly knowledge you once held begins to fade along with your ectoplasm. Looks like it's back to using normal ammunition for your firearms and throwing weapons again...");
+
+			//Easter bunny egg balls Loosing
+			needNext ||= player.gainOrLosePerk(PerkLib.EasterBunnyBalls, player.isRaceCached(Races.EASTERBUNNY) || player.perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1, "", "Something changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.");
+			//Easter bunny egg balls Cumming the eggs out
+			if (player.hasStatusEffect(StatusEffects.EasterBunnyCame)) { //Easter bunny cumming its eggs out
+				if (player.balls == 2)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock two new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				if (player.balls == 4)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock four new way smaller eggs sliding " +
+						"inside to fill the void in them. Of course you also collected those that you shot out, never know when these can come in handy.\n");
+				player.ballSize = 1;
+				var changeLib1:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
+				player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib1).withText("Easter Bunny Balls");
+				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
+				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
+				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>\n");
 				needNext = true;
 			}
 			//Hydra Regeneration and Hydra acid breath perk
-			if (player.hasPerk(PerkLib.HydraRegeneration) && player.lowerBody != LowerBody.HYDRA) { //Remove hydra regeneration perk if not meeting requirements
-				outputText("\nYou accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.\n\n(<b>Lost Perk: Hydra Regeneration</b>)");
-				player.removePerk(PerkLib.HydraRegeneration);
+			needNext ||= player.gainOrLosePerk(PerkLib.HydraRegeneration, player.lowerBody == LowerBody.HYDRA, "", "You accidentally cut yourself but to your stupor the wound does not close as fast as it should. Guess you are no longer a hydra enough to benefit from superior regeneration.");
+			needNext ||= player.gainOrLosePerk(PerkLib.HydraAcidBreath, player.lowerBody == LowerBody.HYDRA, "", "As your lead hydra head vanishes so do your ability to belch acid.");
+
+			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isAnyRaceCached(Races.SALAMANDER, Races.KITSHOO, Races.HELLCAT) || player.hasStatusEffect(StatusEffects.HinezumiCoat))) {
+				//Argument 1 is weither pc is in heat stage or not 1 means active
+				//Argument 2 is how many day left before player enter heats again typicaly 3;
+				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
+				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
+				if (player.isRaceCached(Races.SALAMANDER)) outputText(" salamander");
+				else if (player.isRaceCached(Races.KITSHOO)) outputText(" kitshoo");
+				else if (player.isRaceCached(Races.HELLCAT)) outputText(" hellcat");
+				else outputText(" hinezumi");
+				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enough not to jump on everything that moves.");
+				player.createStatusEffect(StatusEffects.Overheat, 1, 0, 0,0);
+				if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+				else if (player.hasVagina()) player.goIntoHeat(false);
 				needNext = true;
 			}
-			if (player.hasPerk(PerkLib.HydraAcidBreath) && player.lowerBody != LowerBody.HYDRA) { //Remove hydra acid breath perk if not meeting requirements
-				outputText("\nAs your lead hydra head vanishes so do your ability to belch acid.\n\n(<b>Lost Perk: Hydra Acid Breath</b>)");
-				player.removePerk(PerkLib.HydraAcidBreath);
+			if (player.hasStatusEffect(StatusEffects.Overheat) && (!player.isAnyRaceCached(Races.SALAMANDER, Races.KITSHOO, Races.HELLCAT) && !player.hasStatusEffect(StatusEffects.HinezumiCoat))) {
+				outputText("\n\nYour body finally calms down. It would seem you are no longer as hot as you used to be, which might be a good thing as you won't have to deal with heat problems... for now.");
+				player.removeStatusEffect(StatusEffects.Overheat);
+				player.removeStatusEffect(StatusEffects.Heat);
+				player.removeStatusEffect(StatusEffects.Rut);
+				player.statStore.removeBuffs("Overheat");
+				needNext = true;
+			}
+			//Player overheat was cleaned by sex!
+			if (player.statusEffectv1(StatusEffects.Overheat) == 1 && player.statusEffectv3(StatusEffects.Overheat) == 1) {
+				player.addStatusValue(StatusEffects.Overheat, 1, -1);
+				player.addStatusValue(StatusEffects.Overheat, 2, 3);
+				player.addStatusValue(StatusEffects.Overheat, 3, -1);
+				player.statStore.removeBuffs("Overheat");
+				player.removeStatusEffect(StatusEffects.Heat);
+				player.removeStatusEffect(StatusEffects.Rut);
+			}
+			if (player.hasPerk(PerkLib.SlimeCore)) { //Lose slime core perk
+				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
+					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
+					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
+					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
+					player.removePerk(PerkLib.SlimeCore);
+					needNext = true;
+				}
+			}
+			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO) {
+					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
+					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
+					//(Reduces Fluid Addiction to a 24 hour intake requirement).
+					outputText("(<b>Gained New Perk: Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
+					player.createPerk(PerkLib.SlimeCore, 0, 0, 0, 0);
+					player.removeKeyItem("Ruby Heart");
+					needNext = true;
+				}
+			}
+			if (player.hasPerk(PerkLib.DarkSlimeCore)) { //Lose DARK slime core perk
+				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
+					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
+					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
+					player.createKeyItem("Ruby Orb", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
+					player.removePerk(PerkLib.DarkSlimeCore);
+					needNext = true;
+				}
+			}
+			if (player.hasKeyItem("Ruby Orb") >= 0) { //Regain DARK slime core
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
+					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
+					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
+					//(Reduces Fluid Addiction to a 24 hour intake requirement).
+					outputText("(<b>Gained New Perk: Dark Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
+					player.createPerk(PerkLib.DarkSlimeCore, 0, 0, 0, 0);
+					player.removeKeyItem("Ruby Orb");
+					needNext = true;
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
+				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
+					outputText("\n<b>You no longer feel the need to stockpile fluids in your body. Geeze just how much of a slut did this make you?</b>\n");
+					player.removeStatusEffect(StatusEffects.SlimeCraving);
+					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
+					player.buff("Fluid Growth").remove();
+					needNext = true;
+				}
+				else { //Slime core reduces fluid need rate
+					if (player.isSlime())
+						player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
+					else player.addStatusValue(StatusEffects.SlimeCraving, 1, 1);
+					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
+						if (!player.hasStatusEffect(StatusEffects.SlimeCravingOutput)) { //Protects against this warning appearing multiple times in the output
+							player.createStatusEffect(StatusEffects.SlimeCravingOutput, 0, 0, 0, 0);
+							outputText("\n<b>Bigger... stronger, each intake of fluid you take only makes you more starved for the next as you grow in power each time, the need to fuck and feed slowly overwriting any other desire you may have.</b>\n");
+							needNext = true;
+						}
+						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
+						player.dynStats("str",-1,"spe", -0.1, "lus", 2);
+						player.buff("Fluid Growth").addStat("tou.mult",-0.04,0).withText("Fluid Growth!");
+						player.buff("Fluid Growth").addStat("int.mult",-0.04,0).withText("Fluid Growth!");
+						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
+					}
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.SlimeCravingFeed)) { //Slime feeding stuff
+				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
+				player.dynStats( "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
+				player.removeStatusEffect(StatusEffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
+				player.removeCurse("str",1, 2);
+				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
+				needNext = true;
+			}
+			if (player.rearBody.type == RearBody.METAMORPHIC_GOO && !LowerBody.isGoo(player)) {
+				outputText("\n<b>Your body becomes way less malleable due to being less slime like.</b>\n");
+				player.rearBody.type = RearBody.NONE;
 				needNext = true;
 			}
 			//Knowledge is power
-			if (player.isRaceCached(Races.RATATOSKR) && !player.hasPerk(PerkLib.KnowledgeIsPower)) {
-				outputText("\nBecoming more of a Ratatoskr your memory seems to have grown and as such the ability the analyze and properly catalogue your opponents many weaknesses as well as new fighting skills you gained the Knowledge is Power perk!\n\n(<b>Gained Perk: Knowledge is power</b>)");
-				player.createPerk(PerkLib.KnowledgeIsPower, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (!player.isRaceCached(Races.RATATOSKR) && player.hasPerk(PerkLib.KnowledgeIsPower)) {// && !player.perkv1(IMutationsLib.LizanMarrowIM) >= 1
-				outputText("\nBecoming less of a Ratatoskr your memory has become hazy, your wits slowing down to that of a standard human.\n\n(<b>Lost Perk: Knowledge is power</b>)");
-				player.removePerk(PerkLib.KnowledgeIsPower);
-				needNext = true;
-			}
-			//Improved venom gland
-			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && !player.hasPerk(PerkLib.ImprovedVenomGland)) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many times your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
-				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
-			}
-			if (flags[kFLAGS.VENOM_TIMES_USED] >= 125 && !player.hasPerk(PerkLib.ImprovedVenomGlandEx)) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many times your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom. \n\n(<b>Gained Perk: Improved venom gland (Ex)</b>)\n");
-				player.createPerk(PerkLib.ImprovedVenomGlandEx, 0, 0, 0, 0);
-			}
-			if (flags[kFLAGS.VENOM_TIMES_USED] >= 375 && !player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many times your venom gland started to produce more potent venom. Allowing for increased capacity, production and increased effects of venom. \n\n(<b>Gained Perk: Improved venom gland (Su)</b>)\n");
-				player.createPerk(PerkLib.ImprovedVenomGlandSu, 0, 0, 0, 0);
-			}
-			//Kitsune hunger perk
-			if (player.isRaceCached(Races.KITSUNE) || player.isRaceCached(Races.KITSHOO)) { //Check for being a kitsune enough
-				if (!player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
-					outputText("\nYou begin fantasizing about pussies and cocks, foaming at the idea of fucking or getting fucked. It looks like you acquired the kitsune's hunger for sex and can now feed off the life force extracted from the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
-					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
-					needNext = true;
-				}
-			}
-			if (!player.isRaceCached(Races.KITSUNE) && !player.isRaceCached(Races.KITSHOO)) { //Check for being a kitsune enough
-				if (player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
-					outputText("\nYour mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
-					player.removePerk(PerkLib.KitsuneEnergyThirst);
-					needNext = true;
-				}
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.KnowledgeIsPower, player.isRaceCached(Races.RATATOSKR), "Becoming more of a Ratatoskr your memory seems to have grown and as such the ability the analyze and properly catalogue your opponents many weaknesses as well as new fighting skills.", "Becoming less of a Ratatoskr your memory has become hazy, your wits slowing down to that of a standard human.");
+
+
 			//Kitsune energy thirst
+			needNext ||= player.gainOrLosePerk(PerkLib.KitsuneEnergyThirst, player.isAnyRaceCached(Races.KITSUNE, Races.KITSHOO), "You begin fantasizing about pussies and cocks, foaming at the idea of fucking or getting fucked. It looks like you acquired the kitsune's hunger for sex and can now feed off the life force extracted from the orgasms of your partners.", "Your mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you.")
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) {
 					player.refillHunger(10, false);
@@ -1352,115 +1591,43 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lizan Regeneration perk
-			if ((!player.hasPerk(PerkLib.LizanRegeneration) && player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) || (player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD)) { //Check for gain of lizan regeneration - requires legs, arms and tail
-				if (!player.hasPerk(PerkLib.LizanRegeneration)) {
-					outputText("\nYou start to feel an unusual feeling somewhere within your body. Like tiny ripples moving inside your veins, making you feel so much more refreshed than a moment ago. Considering the fact that lizans are so much like lizards and that they usually possess a natural talent to regenerate from even severe injuries, you wonder if it could be that. [pg](Gained Perk: Lizan Regeneration)");
-					player.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-					needNext = true;
-				}
-			}
-			else if (player.hasPerk(PerkLib.LizanRegeneration) && player.tailType != Tail.LIZARD && player.lowerBody != LowerBody.LIZARD && player.arms.type != Arms.LIZARD && player.perkv4(PerkLib.LizanRegeneration) == 0 && !player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) { //Remove lizan regeneration perk if not meeting requirements && !player.hasPerk(PerkLib.HydraRegeneration)
-				outputText("\nAll of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that refreshing feeling inside your body anymore, meaning your recovery rate has reverted back to normal. [pg](Lost Perk: Lizan Regeneration)");
-				player.removePerk(PerkLib.LizanRegeneration);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.LizanRegeneration, player.perkv1(IMutationsLib.LizanMarrowIM) >= 1 || (player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD), "You start to feel an unusual feeling somewhere within your body. Like tiny ripples moving inside your veins, making you feel so much more refreshed than a moment ago. Considering the fact that lizans are so much like lizards and that they usually possess a natural talent to regenerate from even severe injuries, you wonder if it could be that.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that refreshing feeling inside your body anymore, meaning your recovery rate has reverted back to normal.", player.perkv4(PerkLib.LizanRegeneration) == 0);
 			//Lustzerker perk
-			if (!player.hasPerk(PerkLib.Lustzerker) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.KITSHOO))) { //Check for gain of lustzerker - requires legs, arms and tail
-				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it. [pg](Gained Perk: Lustzerker)");
-				player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (player.hasPerk(PerkLib.Lustzerker) && !player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.KITSHOO) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
-				outputText("\nAll of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking. [pg](Lost Perk: Lustzerker)");
-				player.removePerk(PerkLib.Lustzerker);
-				needNext = true;
-			}
-			//Phantom Shooting perk
-			if (player.isRaceCached(Races.POLTERGEIST, 2) && !player.hasPerk(PerkLib.PhantomShooting)) {
-				outputText("\n");
-				if (player.weaponRangePerk == "Throwing" || player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") outputText("With your expanded otherworldly knowledge, a thought comes to mind. You apply your ghostly abilities to your " + player.weaponRangeName + " then "+(player.weaponRangePerk == "Throwing" ? "throw it":"shoot")+" at a nearby rock. You can feel a small piece of yourself leave, but the impact of your weapon all but shatters the rock. Using a bit of your ectoplasm instead of basic ammunition definitely made your " + player.weaponRangeName + " stronger.");
-				else outputText("With your expanded otherworldly knowledge, a thought comes to mind. If you used some of your ectoplasm instead of basic ammunition for a firearm or throwing weapon, perhaps your weapons will have more of an impact.");
-				outputText("\n\n(<b>Gained Perk: Phantom Shooting</b>)");
-				player.createPerk(PerkLib.PhantomShooting, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (!player.isRaceCached(Races.POLTERGEIST, 2) && player.hasPerk(PerkLib.PhantomShooting)) {// && !player.perkv1(IMutationsLib.LizanMarrowIM) >= 1
-				outputText("\nAs you become more corporeal again, the otherworldly knowledge you once held begins to fade along with your ectoplasm. Looks like it's back to using normal ammunition for your firearms and throwing weapons again...\n\n(<b>Lost Perk: Phantom Shooting</b>)");
-				player.removePerk(PerkLib.PhantomShooting);
-				needNext = true;
-			}
-			//Recharge venom/web pool
-			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA
-			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 2 || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
-				var venomHRecharge:Number = 0;
-				venomHRecharge += combat.venomCombatRecharge2();
-				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
-					if (player.maxHunger() > 1600) venomHRecharge += 27.5;
-					else if (player.maxHunger() > 800) venomHRecharge += 22.5;
-					else if (player.maxHunger() > 400) venomHRecharge += 17.5;
-					else if (player.maxHunger() > 200) venomHRecharge += 12.5;
-					else if (player.maxHunger() > 100) venomHRecharge += 7.5;
-					else venomHRecharge += 2.5;
-				}
-				player.tailVenom += venomHRecharge;
-				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
-			}
-			//DarkCharm
-			if (player.isRaceCached(Races.DEMON)) {
-				if (!player.hasPerk(PerkLib.DarkCharm)) {
-					outputText("\nYou feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!\n\n(<b>Gained Perk: Dark Charm</b>)\n");
-					player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
+			needNext ||= player.gainOrLosePerk(PerkLib.Lustzerker, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO), "You start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking.", player.perkv4(PerkLib.Lustzerker) == 0);
+			//Jungle’s Wanderer
+			needNext ||= player.gainOrLosePerk(PerkLib.JunglesWanderer, player.isRaceCached(Races.REDPANDA), "Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch.", "You notice that you aren't as adept at manuevering through the jungle anymore.");
+
+			if (player.hasKeyItem("Gleipnir Collar") >= 0) {
+				//Freezing Breath
+				if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FreezingBreath)) {
+					outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");
+					player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
+					needNext = true;
+				} else if (player.faceType != Face.WOLF && player.hasPerk(PerkLib.FreezingBreath)) {
+					outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freezes the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
+					player.removePerk(PerkLib.FreezingBreath);
 					needNext = true;
 				}
-			}
-			else if (player.hasPerk(PerkLib.DarkCharm) && player.perkv4(PerkLib.DarkCharm) == 0 && player.perkv1(IMutationsLib.BlackHeartIM) == 0) {
-				outputText("\nWith some of your demon-like traits gone, so does your ability to use charm attacks.\n\n(<b>Lost Perk: Dark Charm</b>)\n");
-				player.removePerk(PerkLib.DarkCharm);
-				needNext = true;
-			}
-			//Jungle’s Wanderer
-			if (player.isRaceCached(Races.REDPANDA)) {
-				if (!player.hasPerk(PerkLib.JunglesWanderer)) {
-					//outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  \n\n(<b>Gained Perk: Jungle’s Wanderer</b>)\n");
-					player.createPerk(PerkLib.JunglesWanderer, 0, 0, 0, 0);
-					//needNext = true;
+				//Fenrir Soulbite
+				if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FenrirSpiritstrike)) {
+					outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
+					player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
+					needNext = true;
 				}
-			}
-			else if (player.hasPerk(PerkLib.JunglesWanderer) && !player.isRaceCached(Races.REDPANDA)) {
-				//outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  \n\n(<b>Lost Perk: Jungle’s Wanderer</b>)\n");
-				player.removePerk(PerkLib.JunglesWanderer);
-				//needNext = true;
-			}
-			//Freezing Breath
-			if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FreezingBreath) && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");
-				player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (player.faceType != Face.WOLF && player.hasPerk(PerkLib.FreezingBreath) && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freezes the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
-				player.removePerk(PerkLib.FreezingBreath);
-				needNext = true;
-			}
-			//Fenrir Soulbite
-			if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FenrirSpiritstrike) && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
-				player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
-				needNext = true;
-			}
-			//Fenrir Eyes
-			if (CoC.instance.transformations.EyesFenrir.isPossible() && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\n");
-				CoC.instance.transformations.EyesFenrir.applyEffect();
-				outputText("\n");
-				needNext = true;
-			}
-			//Fenrir Back Ice Shards
-			if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
-				outputText("\n\nYou double over as ice once more bursts from your skin down your spine, covering your back in frozen spikes.\"<b>Your back is now covered with sharp ice spike, constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
-				player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
-				needNext = true;
+				//Fenrir Eyes
+				if (CoC.instance.transformations.EyesFenrir.isPossible()) {
+					outputText("\n");
+					CoC.instance.transformations.EyesFenrir.applyEffect();
+					outputText("\n");
+					needNext = true;
+				}
+				//Fenrir Back Ice Shards
+				if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES) {
+					outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
+					outputText("\n\nYou double over as ice once more bursts from your skin down your spine, covering your back in frozen spikes.\"<b>Your back is now covered with sharp ice spike, constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
+					player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
+					needNext = true;
+				}
 			}
 			//Cold Affinity
 			if (player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && !player.hasPerk(PerkLib.ColdAffinity)) {
@@ -1489,34 +1656,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(")</b>\n");
 				needNext = true;
 			}
-			//Dark Affinity
-			if ((player.racialScoreCached(Races.VAMPIRE) >= 15 || player.isRaceCached(Races.APOPHIS)) && (!player.hasPerk(PerkLib.DarknessAffinity))) {
-				outputText("\nYou at home in darkness seeing as clearly in the shadows wich you find comforting as in broad daylight.\n\n(<b>Gained Perks: Darkness Affinity</b>)\n");
-				player.createPerk(PerkLib.DarknessAffinity, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (player.racialScoreCached(Races.VAMPIRE) < 15 && !player.isRaceCached(Races.APOPHIS) && player.hasPerk(PerkLib.DarknessAffinity)) {
-				outputText("\nThe pitch black darkness becomes hostile toward you again as you lose your affinity toward it.\n\n<b>(Lost Perks: Darkness Affinity");
-				player.removePerk(PerkLib.DarknessAffinity);
-				outputText(")</b>\n");
-				needNext = true;
-			}
-			if ((player.isRaceCached(Races.SIREN) || player.isRaceCached(Races.HARPY) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.THUNDERBIRD)) && !player.hasPerk(PerkLib.HarpySong)) {
-				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
-				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
-				needNext = true;
-			}
-			//Compelling Aria
-			if (player.tongue.type != Tongue.MELKIE && player.hasPerk(PerkLib.MelkieSong) && !player.perkv1(IMutationsLib.MelkieLungIM) >= 1) {
-				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Melkie Song</b>)\n");
-				player.removePerk(PerkLib.MelkieSong);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.SIREN) && !player.isRaceCached(Races.HARPY) && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.HarpySong) && !player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) {
-				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
-				player.removePerk(PerkLib.HarpySong);
-				needNext = true;
-			}
 			//Icy flesh
 			if (!player.isRaceCached(Races.YUKIONNA) && player.hasPerk(PerkLib.IcyFlesh)) {
 				outputText("\nYour body slowly comes back to life as if it has been hibernating for a long time. You feel sickly as if dying, hungry as if you'd been starving for weeks and thirstier than if you'd been wandering the desert without drinks for about half as much.\n\n(<b>Lost Perks: "+((player.hasPerk(PerkLib.ColdAffinity) && !player.isRaceCached(Races.YETI)) ? "Cold Affinity, ":"")+"Dead metabolism and Icy flesh</b>)\n");
@@ -1525,85 +1664,48 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.IcyFlesh);
 				needNext = true;
 			}
+			//Dark Affinity
+			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.racialScoreCached(Races.VAMPIRE) >= 15 || player.isRaceCached(Races.APOPHIS), "You are at home in darkness, seeing as clearly in the shadows wich you find as comforting as broad daylight.", "The pitch black darkness becomes hostile toward you again as you lose your affinity toward it.");
+			//Compelling Aria
+			needNext ||= player.gainOrLosePerk(PerkLib.HarpySong, player.isAnyRaceCached(Races.SIREN, Races.HARPY, Races.PHOENIX, Races.THUNDERBIRD) || player.hasMutation(IMutationsLib.HarpyHollowBonesIM), "Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.");
+			needNext ||= player.gainOrLosePerk(PerkLib.MelkieSong, player.tongue.type == Tongue.MELKIE || player.hasMutation(IMutationsLib.MelkieLungIM), "Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of a Melkie adapting even your tongue and voice. Well you could always go sit on a rock and sing in case some sailor came by.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.")
+
 			//Alraune perks
-			if (player.isAlraune() && (!player.hasPerk(PerkLib.AlrauneNectar) || player.vaginaType() != VaginaClass.ALRAUNE)){
-				if (player.vaginaType() != VaginaClass.ALRAUNE){
-					player.vaginaType(VaginaClass.ALRAUNE);
-					outputText("\nYour flower now produces a delicious nectar the scent of wich is sure to draw in partners.");
-				}
-				if (!player.hasPerk(PerkLib.AlrauneNectar)){
-					outputText(" <b>Gained Perk: Alraune Nectar</b>");
-					player.createPerk(PerkLib.AlrauneNectar, 0,0,0,0);
-				}
-				outputText("\n");
-				needNext = true;
-			}
-			if (player.isAlraune() && !player.hasPerk(PerkLib.PlantKnowledge)){
-				outputText("\nIt would seem you aquired additionnal skills in herbalism thanks to behing a plant yourself. <b>Gained Perk: Plant Knowledge</b>\n");
-				player.createPerk(PerkLib.PlantKnowledge, 0,0,0,0);
-				needNext = true;
-			}
-			if (!player.isAlraune() && player.hasPerk(PerkLib.AlrauneNectar)){
-				outputText("\nAs you no longer have a pitcher to produce nectar your scent has became more like that of an ordinary human. <b>Lost Perk: Alraune Nectar</b>\n");
-				player.removePerk(PerkLib.AlrauneNectar);
-				player.vaginaType(VaginaClass.HUMAN);
-				needNext = true;
-			}
-			if (!player.isAlraune() && player.hasPerk(PerkLib.PlantKnowledge)){
-				outputText("\nNo longer a plant you lost some of your innate floral knowledge. <b>Lost Perk: Plant Knowledge</b>\n");
-				player.removePerk(PerkLib.PlantKnowledge);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.AlrauneNectar, player.isAlraune(), "Your flower now produces a delicious nectar the scent of wich is sure to draw in partners.", "As you no longer have a pitcher to produce nectar your scent has became more like that of an ordinary human.", function():void {
+						player.vaginaType(VaginaClass.ALRAUNE);
+					}, function():void {
+						player.vaginaType(VaginaClass.HUMAN);
+					});
+			needNext ||= player.gainOrLosePerk(PerkLib.PlantKnowledge, player.isAlraune(), "It would seem you aquired additionnal skills in herbalism thanks to behing a plant yourself.", "No longer a plant you lost some of your innate floral knowledge.");
 			//Kamaitachi perks
-			if (player.arms.type == Arms.KAMAITACHI && !player.hasPerk(PerkLib.CursedWound)){
-				outputText("\nYour kamaitachi blades shines with a sharp, deadly glow. Those will clearly leaves deadly wounds. <b>Gained Perk: Cursed Wound</b>\n");
-				player.createPerk(PerkLib.CursedWound, 0,0,0,0);
-				needNext = true;
-			}
-			if (player.arms.type != Arms.KAMAITACHI && player.hasPerk(PerkLib.CursedWound)){
-				outputText("\nLacking a pair of kamaitachi scythe you can no longer inflict your trademark cursed kamaitachi wounds. <b>Lost Perk: Cursed Wound</b>\n");
-				player.removePerk(PerkLib.CursedWound);
-				needNext = true;
-			}
-			if (player.isRaceCached(Races.KAMAITACHI) && !player.hasPerk(PerkLib.NaturalHerbalism)){
-				outputText("\nGreat knowledges flows throught you mind as you become more Kamaitachi like. " +
-						"It dawns on you that you have aquired a natural affinity for medicine and herbalism, " +
-						"something your species is famous for, heck you can identify every single plant near your camp by name and species now. " +
-						"<b>Gained Perk: Natural Herbalism</b>\n");
-				player.createPerk(PerkLib.NaturalHerbalism, 0,0,0,0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.KAMAITACHI) && player.hasPerk(PerkLib.NaturalHerbalism)){
-				outputText("\nNo longer a Kamaitachi, you seem to have lost your knack for herbs and medicines. <b>Lost Perks: Natural Herbalism</b>)\n");
-				player.removePerk(PerkLib.NaturalHerbalism);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.CursedWound, player.arms.type == Arms.KAMAITACHI, "Your kamaitachi blades shines with a sharp, deadly glow. Those will clearly leaves deadly wounds.", "Lacking a pair of kamaitachi scythe you can no longer inflict your trademark cursed kamaitachi wounds.");
+			needNext ||= player.gainOrLosePerk(PerkLib.NaturalHerbalism, player.isRaceCached(Races.KAMAITACHI), "Great knowledges flows through your mind as you become more Kamaitachi like. It dawns on you that you have aquired a natural affinity for medicine and herbalism, something your species is famous for, heck you can identify every single plant near your camp by name and species now.", "No longer a Kamaitachi, you seem to have lost your knack for herbs and medicines.");
 			//Aquatic Affinity
-			if (InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEA_DRAGON) && InCollection(player.arms.type,Arms.ORCA,Arms.SEA_DRAGON) && player.tailType == Tail.ORCA && InCollection(player.ears.type,Ears.ORCA,Ears.ORCA) && !player.hasPerk(PerkLib.AquaticAffinity)) {
-				outputText("\nYou suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp.\n");
-				if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
-				outputText("\n(<b>Gained Perk: Aquatic Affinity</b>)\n");
-				player.createPerk(PerkLib.AquaticAffinity, 0, 0, 0, 0);
-				needNext = true;
+			needNext ||= player.gainOrLosePerk(PerkLib.AquaticAffinity, InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEA_DRAGON) && InCollection(player.arms.type,Arms.ORCA,Arms.SEA_DRAGON) && player.tailType == Tail.ORCA && InCollection(player.ears.type,Ears.ORCA,Ears.ORCA),
+					"You suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp." +(player.rearBody.type == RearBody.ORCA_BLOWHOLE ? "\nIt dawns on you that you didn't breathe for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your breath for very lengthy periods. This will be perfect for underwater exploration.":""),
+					"As you lose the respiratory organ to breath underwater it also becomes obvious that you will drown if attempting to breath water in. You will need to get items or transform to breath underwater again."+(player.rearBody.type == RearBody.ORCA_BLOWHOLE ? "\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.":""));
+
+			//Salamander bullshit
+			needNext ||= player.gainOrLosePerk(PerkLib.LustingWarrior, player.isRaceCached(Races.SALAMANDER,2) && player.hasStatusEffect(StatusEffects.Overheat),
+					"You're so horny right now... so damn horny, you would beat up someone if only for something to blow up the steam. As the thought rush to your mind your body react strangely it would seem your overwelming need as a salamander and your ability to lustzerk has actualy unlocked some form of new power within you. You feel newfound strength, the strength required to defeat any adversary if only for a chance to fuck and you are very keen on using it right about now.",
+					"As you become less of a salamander, the prodigious strength granted to you by your uncontrollable libido recedes.");
+			needNext ||= player.gainOrLosePerk(PerkLib.FluidBody, player.isGoo() && (player.isAnyRace(Races.SLIME, Races.MAGMASLIME, Races.DARKSLIME)), "Whoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.", "Your body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.");
+
+			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.isRace(Races.DARKSLIME, 2) || player.isRace(Races.SLIME,2) || player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
+				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
+				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
 			}
-			else if ((!InCollection(player.lowerBody,LowerBody.ORCA,LowerBody.SEA_DRAGON) || !InCollection(player.arms.type,Arms.ORCA,Arms.SEA_DRAGON) || player.tailType != Tail.ORCA || !InCollection(player.ears.type,Ears.ORCA,Ears.ORCA)) && player.hasPerk(PerkLib.AquaticAffinity)) {
-				outputText("\nAs you lose the respiratory organ to breath underwater it also becomes obvious that you will drown if attempting to breath water in. You will need to get items or transform to breath underwater again.\n");
-				if (player.rearBody.type == RearBody.ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
-				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");
-				player.removePerk(PerkLib.AquaticAffinity);
-				needNext = true;
+			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
+				player.removePerk(PerkLib.MorphicWeaponry);
+				if((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME,2))){
+					outputText("\nAs you are mo longer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				}
+				else{
+					outputText("\nHaving lost fluids, you no longer have enough body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				}
 			}
 			//Fire Affinity
-			if ((player.racialScoreCached(Races.SALAMANDER) >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2)) || player.isRaceCached(Races.KITSHOO)) && !player.hasPerk(PerkLib.FireAffinity)) {
-				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
-				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if ((player.racialScoreCached(Races.SALAMANDER) < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRaceCached(Races.MOUSE, 2) && !player.isRaceCached(Races.KITSHOO)) && player.hasPerk(PerkLib.FireAffinity)) {
-				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
-				player.removePerk(PerkLib.FireAffinity);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.FireAffinity, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.HELLCAT, Races.FIRESNAILS, Races.KITSHOO, Races.CERBERUS) || player.isRaceCached(Races.MOUSE, 2), "You suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.", "You suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.");
 			//Lightning Affinity
 			if ((player.isRaceCached(Races.SEA_DRAGON)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your biolight goes crazy! It would seem you gained the ability to generate and control electricity not unlike an electric eel or more specificaly a sea dragon\n");
@@ -1613,7 +1715,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if ((player.isRaceCached(Races.RAIJU) || player.isRaceCached(Races.THUNDERBIRD) || player.isRaceCached(Races.KIRIN)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
-				if (player.isRaceCached(Races.THUNDERBIRD)) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
+				if (player.isRaceCached(Races.THUNDERBIRD)){
+					player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
+					player.createPerk(PerkLib.Supercharged,0,0,0,0);
+				}
 				if (player.isRaceCached(Races.RAIJU)) {
 					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
@@ -1651,6 +1756,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.IsThunderbird);
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
+				player.removePerk(PerkLib.Supercharged);
 				needNext = true;
 			}
 			else if (!player.isRaceCached(Races.SEA_DRAGON) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsKirin) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
@@ -1689,41 +1795,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}*/
 			//Yeti stuff
-			if (player.rearBody.type == RearBody.YETI_FUR && !player.hasStatusEffect(StatusEffects.YetiScarf)) {
-				player.createStatusEffect(StatusEffects.YetiScarf,0,0,0,0);
-			}
-			if (player.rearBody.type != RearBody.YETI_FUR && player.hasStatusEffect(StatusEffects.YetiScarf)) {
-				player.removeStatusEffect(StatusEffects.YetiScarf);
-			}
-			if (player.lowerBody == LowerBody.YETI && player.arms.type == Arms.YETI && !player.hasPerk(PerkLib.BigHandAndFeet)) {
-				outputText("\nGeeze, with those oversized hands and feet you should just drop your weapon and punch things out cold. Why do you even need a weapon for anyway?\n\n<b>(Gained the Big hand and feet perk!)</b>\n");
-				player.createPerk(PerkLib.BigHandAndFeet, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.hasPerk(PerkLib.BigHandAndFeet) && (player.lowerBody != LowerBody.YETI || player.arms.type != Arms.YETI)) {
-				outputText("\nYour limbs are now back to their normal size, it might be smart to use a weapon over your bare hands and feet for fighting.\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
-				player.removePerk(PerkLib.BigHandAndFeet);
-				needNext = true;
-			}
-			//Levitation wing slot
-			if (player.wings.type == Wings.LEVITATION && player.rearBody.type != RearBody.GLACIAL_AURA && player.lowerBody != LowerBody.WENDIGO && player.lowerBody != LowerBody.GAZER) {
-				outputText("\nAs you do not meet the requirements, you also lose the knowledge on how to levitate!\nHint: Aura of the Yuki Onna or legs of the Wendigo or Gazer");
-				player.wings.type = Wings.NONE;
-				needNext = true;
-			}
-			//Wendigo stuff
-			if (!player.blockingBodyTransformations() && player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxOverLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			//if (player.rearBody.type == RearBody.YETI_FUR && !player.hasStatusEffect(StatusEffects.YetiScarf)) {
+			//	player.createStatusEffect(StatusEffects.YetiScarf,0,0,0,0);
+			//}
+			//if (player.rearBody.type != RearBody.YETI_FUR && player.hasStatusEffect(StatusEffects.YetiScarf)) {
+			//	player.removeStatusEffect(StatusEffects.YetiScarf);
+			//}
+			needNext ||= player.gainOrLosePerk(PerkLib.BigHandAndFeet, player.lowerBody == LowerBody.YETI && player.arms.type == Arms.YETI, "Geeze, with those oversized hands and feet you should just drop your weapon and punch things out cold. Why do you even need a weapon for anyway?", "Your limbs are now back to their normal size, it might be smart to use a weapon over your bare hands and feet for fighting.");
 			//Gazer perks
-			if (player.eyes.type == Eyes.MONOEYE && !player.hasPerk(PerkLib.TrueSeeing)) {
-				outputText("\nAs part of acquiring an all seeing eye your sight has improved greatly. It would seem you now possess the innate ability to dismiss illusions and falsehood seeing the world as it truly is. <b>You acquired True Seeing.</b> \n\n(<b>Gained Perk: True seeing</b>)");
-				player.createPerk(PerkLib.TrueSeeing, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.eyes.type != Eyes.MONOEYE && player.hasPerk(PerkLib.TrueSeeing) && !player.perkv1(IMutationsLib.GazerEyesIM) >= 1) {
-				outputText("\nYour sigh is not what it used to be. No longer having a cyclopean vision you have lost the power of true sight. \n\n(<b>Lost Perk: True seeing</b>)");
-				player.removePerk(PerkLib.TrueSeeing);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.TrueSeeing, player.eyes.type == Eyes.MONOEYE || player.hasMutation(IMutationsLib.GazerEyesIM), "As part of acquiring an all seeing eye your sight has improved greatly. It would seem you now possess the innate ability to dismiss illusions and falsehood, seeing the world as it truly is.", "Your sight is not what it used to be. No longer having a cyclopean vision you have lost the power of true sight.");
 			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6 && !player.hasPerk(PerkLib.Omnicaster)) {
 				outputText("\nSomething weird is happening with your magic! Just to confirm you use a standard magic bolt and watch in surprise as you instinctively split the spell using your eyes to launch multiple projectiles at once. <b>It would seem you acquired the ability to omnicast!</b> \n\n(<b>Gained Perk: Omnicaster</b>)");
 				player.createPerk(PerkLib.Omnicaster, 0, 0, 0, 0);
@@ -1736,16 +1816,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Necromancy perk
-			if (((player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3) && !player.hasPerk(PerkLib.Necromancy)) {
-				outputText("\nYou feel tremendous fell powers investing your being. You blink and almost jump as you realise you can literally can see the souls of the dead as well as those of the living now. Your powers over life and death have grown as <b>you seem to have acquired a natural talents for the darker arts.</b>\n\n(<b>Gained Perk: Necromancy</b>)\n");
-				player.createPerk(PerkLib.Necromancy, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (player.hasPerk(PerkLib.Necromancy) && player.perkv4(PerkLib.Necromancy) == 0 && player.tailCount != 2 && player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.NEKOMATA_FORKED_1_3) { //Remove Necromancy perk if not meeting requirements
-				outputText("\nHaving lost the source of your nekomata powers the fell energy in your body seems to recede and vanish completely.\n\n(<b>Lost Perk: Necromancy</b>)\n");
-				player.removePerk(PerkLib.Necromancy);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.Necromancy, (player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3, "You feel tremendous fell powers investing your being. You blink and almost jump as you realise you can literally can see the souls of the dead as well as those of the living now. Your powers over life and death have grown as you seem to have acquired a natural talents for the darker arts.", "Having lost the source of your nekomata powers the fell energy in your body seems to recede and vanish completely.", player.perkv4(PerkLib.Necromancy) == 0);
 			//Cancer stance
 			if (player.arms.type == Arms.HUMAN && player.lowerBody == LowerBody.CANCER && !player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
 				outputText("\n\nEver since your lower body became that of a crab you began instinctively folding your arms and hands like those of a mantis or rather, the pincers of a crab. " +
@@ -1754,18 +1825,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createStatusEffect(StatusEffects.CancerCrabStance,0,0,0,0);
 				needNext = true;
 			}
-			//Cancer stance
 			if ((player.arms.type != Arms.HUMAN || player.lowerBody != LowerBody.CANCER) && player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
 				outputText("\nYour body is now less crab-like, you have stopped folding your arms like one would.\n");
 				player.removeStatusEffect(StatusEffects.CancerCrabStance);
 				needNext = true;
 			}
 			//Elven Sense
-			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.hasPerk(PerkLib.ElvenSense) && !player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 1 && !player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
-				outputText("\nYou feels yourself less aware of your surroundings. Heck your vision seems less keen then it used to be. Most likely because you no longer possess the senses of an elf.\n\n<b>(Lost the Elven Sense perk!)</b>\n");
-				player.removePerk(PerkLib.ElvenSense);
-				needNext = true;
-			}
+			needNext ||= player.losePerk(PerkLib.ElvenSense, (player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.hasPerk(PerkLib.ElvenSense) && !player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 1 && !player.hasPerk(PerkLib.BlessingOfTheAncestorTree), "You feels yourself less aware of your surroundings. Heck your vision seems less keen then it used to be. Most likely because you no longer possess the senses of an elf.");
 			//Wood elf fixed by blessing of the ancestor tree
 			if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
 				if (!player.hasPerk(PerkLib.ElvenSense)) {
@@ -1799,34 +1865,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Acid Spit and Azureflame Breath
-			if (player.racialScore(Races.CAVEWYRM) < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath)) {// && !player.hasPerk(PerkLib.)
+			if (player.racialScore(Races.CAVEWYRM) < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath) && !player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
 				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic properties until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
 				player.removePerk(PerkLib.AcidSpit);
 				player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
 			}
 			//Titan Might
-			if (player.tallness >= 80 &&
-				(player.isRaceCached(Races.HYDRA)
-					|| player.isRaceCached(Races.SCYLLA, 2)
-					|| player.isRaceCached(Races.FROSTWYRM))) {
-				if (!player.hasPerk(PerkLib.TitanicSize)) {
-					outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Size perk!)</b>\n");
-					player.createPerk(PerkLib.TitanicSize, 0, 0, 0, 0);
-					needNext = true;
-				}
-			} else {
-				if (player.hasPerk(PerkLib.TitanicSize)) {
-					if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Size perk!)</b>\n");
-					else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Size perk!)</b>\n");
-					player.removePerk(PerkLib.TitanicSize);
-					needNext = true;
-				}
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
+					(player.tallness < 80) ? "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size." : "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.");
 			//Oni Might
 			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA) || player.isRaceCached(Races.SEA_DRAGON)) {
 				if (!player.hasPerk(PerkLib.GiantMight)) {
-					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strenght. That must be the so called fabled strenght of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
+					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strength. That must be the so called fabled strength of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
 					player.createPerk(PerkLib.GiantMight, 0, 0, 0, 0);
 					needNext = true;
 				}
@@ -1838,27 +1889,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//VerdantMight
-			if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.ALRAUNE)) && !player.hasPerk(PerkLib.VerdantMight)) {
-				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows.\n\n<b>(gained the Verdant Might perk!)</b>\n");
-				player.createPerk(PerkLib.VerdantMight,0,0,0,0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.PLANT) && !player.isRaceCached(Races.ALRAUNE) && player.hasPerk(PerkLib.VerdantMight)) {
-				outputText("\nBeing less of a plant you loose the ability to add your own sturdyness to your attacks.\n\n<b>(Lost the Verdant Might perk!)</b>\n");
-				player.removePerk(PerkLib.VerdantMight);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.VerdantMight, player.isAnyRaceCached(Races.PLANT, Races.ALRAUNE), "Raw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows.", "Being less of a plant you loose the ability to add your own sturdyness to your attacks.");
 			//Enigma
-			if (player.isRaceCached(Races.SPHINX) && !player.hasPerk(PerkLib.Enigma)) {
-				outputText("\nBeing a sphinx has granted you insight on many things including various secrets to martial combat, guess this is what they mean about using your smarts before your brawn.\n\n<b>(Gained Enigma perk!)</b>\n");
-				player.createPerk(PerkLib.Enigma, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.SPHINX) && player.hasPerk(PerkLib.Enigma)) {
-				outputText("\nAs you no longer possess the insight of a sphinx you no longer have the ability to fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Enigma perk!)</b>\n");
-				player.removePerk(PerkLib.Enigma);
-				needNext = true;
-			}/*
+			needNext ||= player.gainOrLosePerk(PerkLib.Enigma, player.isRaceCached(Races.SPHINX), "Being a sphinx has granted you insight on many things including various secrets to martial combat, guess this is what they mean about using your smarts before your brawn.", "As you no longer possess the insight of a sphinx you no longer have the ability to fully use your smarts to improve your martial prowess.");
+			/*
 			//Rampant Might & Wisdom of the Ages
 			if (player.isRaceCached(Races.YGGDRASIL) && !player.hasPerk(PerkLib.VerdantMight) && !player.hasPerk(PerkLib.VerdantMight)) {
 				outputText("\nRaw green power flows throught your veins while being a partialy plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness supplementing your strength when delivering blows. Becoming member of yggdrasil race also granted you insight on many things, which you could use in combat. ");
@@ -1874,50 +1908,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}*/
 			//Vegetal Affinity
-			if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.YGGDRASIL) || player.isRaceCached(Races.WOODELF)) && !player.hasPerk(PerkLib.VegetalAffinity)) {
-				outputText("\nWith your connection to the natural flora growing stronger you gained an affinity with plantlife.\n\n<b>(gained the Vegetal Affinity perk!)</b>\n");
-				player.createPerk(PerkLib.VegetalAffinity,0,0,0,0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.PLANT) && !player.isRaceCached(Races.ALRAUNE) && !player.isRaceCached(Races.YGGDRASIL) && !player.isRaceCached(Races.WOODELF) && player.hasPerk(PerkLib.VegetalAffinity)) {
-				outputText("\nWith your connection to the natural world growing weaker you lose your affinity with plantlife.\n\n<b>(Lost the Vegetal Affinity perk!)</b>\n");
-				player.removePerk(PerkLib.VegetalAffinity);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.VegetalAffinity, player.isAnyRaceCached(Races.PLANT, Races.ALRAUNE, Races.YGGDRASIL, Races.WOODELF), "With your connection to the natural flora growing stronger you gained an affinity with plantlife.", "With your connection to the natural world growing weaker you lose your affinity with plantlife.");
 			//Lacta bovine immunities
-			if (player.isRaceCached(Races.COW) && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
-				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");
-				outputText(".\n\n<b>(Gained the Lacta Bovine Immunity perk!)</b>\n");
-				player.createPerk(PerkLib.LactaBovineImmunity, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.COW) && player.hasPerk(PerkLib.LactaBovineImmunity)) {
-				outputText("\nYour mind clears up as you cease to obsess over minotaur dicks. This is also a sign that you are no longer considered a cow enough to be immune to the addictive effects of minotaur cum.\n\n<b>(Lost the Lacta Bovine Immunity perk!)</b>\n");
-				player.removePerk(PerkLib.LactaBovineImmunity);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.LactaBovineImmunity, player.isRaceCached(Races.COW), "As you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.", "Your mind clears up as you cease to obsess over minotaur dicks. This is also a sign that you are no longer considered a cow enough to be immune to the addictive effects of minotaur cum.");
 			//Bull Strength
-			if ((player.isRaceCached(Races.MINOTAUR, 2) || player.isRaceCached(Races.COW, 2)) && !player.hasPerk(PerkLib.BullStrength)) {
-				outputText("\nWhoa, you feel tremendous power accumulate in ");
-				if (player.isRaceCached(Races.MINOTAUR, 2)) outputText("your balls. It fills your body with bovine strength, nourishing your muscles with manly power. They say having big balls makes you stronger... Well its not like you can deny the correlation anymore!");
-				if (player.isRaceCached(Races.COW, 2)) outputText("your mammaries. It fills your body with bovine strength, nourishing your muscles with milky power. Talk about storing all your might into your jugs!");
-				outputText(".\n\n<b>(Gained Bull Strength perk!)</b>\n");
-				player.createPerk(PerkLib.BullStrength, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if ((!player.isRaceCached(Races.MINOTAUR, 2) && !player.isRaceCached(Races.COW, 2)) && player.hasPerk(PerkLib.BullStrength)) {
-				outputText("\nYou feel weaker, it looks like you lost the benefit of your bull strength. Probably because you are no longer bovine enough.\n\n<b>(Lost the Bull Strength perk!)</b>\n");
-				player.removePerk(PerkLib.BullStrength);
-				needNext = true;
-			}
-			//Soul Sense
-			if (!player.hasPerk(PerkLib.SoulSense) && player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage)) {
-				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
-				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that Mrs. Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
-				player.removeKeyItem("'Soul Sense and You' Manual");
-				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.BullStrength, player.isRaceCached(Races.MINOTAUR, 2) || player.isRaceCached(Races.COW, 2), "Whoa, you feel tremendous power accumulate in "+(player.isRaceCached(Races.MINOTAUR, 2)? "your balls. It fills your body with bovine strength, nourishing your muscles with manly power. They say having big balls makes you stronger... Well its not like you can deny the correlation anymore!" : "your mammaries. It fills your body with bovine strength, nourishing your muscles with milky power. Talk about storing all your might into your jugs!"), "You feel weaker, it looks like you lost the benefit of your bull strength. Probably because you are no longer bovine enough.");
 			//Hinezumi Coat
 			if (player.isRaceCached(Races.MOUSE, 2) && !player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				outputText("\nYour body suddenly coats itself with fire turning incandescent as your lust and body heat spikes up reaching a critical point, this must be the infamous hinezumi coat. You gasp as your lust begins to overwelm you, the flare of desire burns in you and you need to vent it one way or another. ");
@@ -1969,7 +1964,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) < 3) {
+			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && (player.perkv1(IMutationsLib.NaturalPunchingBagIM) < 3 || player.tallness > 12*4)) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
@@ -2066,11 +2061,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 			}
-			//Cow bell
-			if (player.necklace == necklaces.COWBELL && player.isRaceCached(Races.COW) && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
-			if (!player.isRaceCached(Races.COW) && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
-			//Jiangshi cursed tag
-			if (player.headJewelry == headjewelries.JIANGCT && player.isRaceCached(Races.JIANGSHI) && !player.statStore.hasBuff('Jiangshi Curse Tag')) player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {
 				outputText("\nWhile wandering around the border of your camp, you randomly kick a rock and a stream of water sprays out. Surprised, you touch the water, discovering it to be startlingly hot. An idea comes to your mind. You get a shovel, digging around the fountaining water which soon turns into a small pool. This is the perfect place to build a hot spring. You smile, delighted at the idea of being able to take frequent baths in it! You resolve to get to work as soon as possible.");
@@ -2085,29 +2075,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Tail Hunger
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && !player.hasPerk(PerkLib.ManticoreCumAddict)) {
-				outputText("\nYou suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!\n");
-				flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50;
-				player.createPerk(PerkLib.ManticoreCumAddict, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.tailType != Tail.MANTICORE_PUSSYTAIL && player.hasPerk(PerkLib.ManticoreCumAddict)) {
-				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
-				player.removePerk(PerkLib.ManticoreCumAddict);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.ManticoreCumAddict, player.tailType == Tail.MANTICORE_PUSSYTAIL, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.", function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
 			//Milk Hunger
-			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && !player.hasPerk(PerkLib.DisplacerMilkAddict)) {
-				outputText("\nYou suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!\n");
-				flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50;
-				player.createPerk(PerkLib.DisplacerMilkAddict, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && player.hasPerk(PerkLib.DisplacerMilkAddict)) {
-				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
-				player.removePerk(PerkLib.DisplacerMilkAddict);
-				needNext = true;
-			}
+			needNext ||= player.gainOrLosePerk(PerkLib.DisplacerMilkAddict, player.rearBody.type == RearBody.DISPLACER_TENTACLES, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.", function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
 			//Vampire Thirst
 			if (player.faceType == Face.VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood... how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");
@@ -2119,63 +2089,54 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.VampireThirst);
 				needNext = true;
 			}
-			//Loosing hellcat body parts
-			if (player.isRaceCached(Races.HELLCAT) && flags[kFLAGS.WITCHES_SABBATH] > 1) {
-				var hellcatparts:Number = 3;
-				if (player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
-				if (player.hairType != Hair.BURNING) hellcatparts -= 1;
-				if (player.eyes.type != Eyes.INFERNAL) hellcatparts -= 1;
-				if (hellcatparts < 3) {
-					outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
-					if (player.tailType == Tail.BURNING || player.tailType == Tail.TWINKASHA) player.tailType = Tail.CAT;
-					if (player.hairType == Hair.BURNING) transformations.HairHuman.applyEffect(false);
-					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT;
-					if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
-					needNext = true;
-				}
-			}
-			//Reset bad end warning
-			if (player.hasStatusEffect(StatusEffects.TFWarning)) {
-				player.addStatusValue(StatusEffects.TFWarning, 3, -1);
-				if (player.getStatusValue(StatusEffects.TFWarning, 3) <= 0) player.removeStatusEffect(StatusEffects.TFWarning);
-			}
 			//ABOBA
-			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100 && !player.hasPerk(PerkLib.BasiliskResistance)) {
-				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - You are now immune to the basilisk's gaze!</b>)\n");
-				else outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
-				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
+			needNext ||= player.gainPerk(PerkLib.BasiliskResistance, flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100, (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1)? "You notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! ":"You notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks!");
+			needNext ||= player.losePerk(PerkLib.EnlightenedNinetails, player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9), "Without your tails, the magic power they once granted withers and dies, vanishing completely.");
+			needNext ||= player.losePerk(PerkLib.CorruptedNinetails, player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9), "Without your tails, the magic power they once granted withers and dies, vanishing completely.");
+			needNext ||= player.gainOrLosePerk(PerkLib.NinetailsKitsuneOfBalance, player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == Tail.FOX && player.tailCount == 9,
+					"With your nine tails you suddenly feel something beyond merely two paths of corruption and true enlightenment. A third way, the way of treading a fragile path of balance between other two paths.",
+					"Without your tails, the balance is disturbed and you lose your insights into the third path.", player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0);
+			needNext ||= player.losePerk(PerkLib.Diapause, !player.hasVagina(), "With the loss of your womb, you lose your kangaroo-like diapause ability.");
+			//Small Frame perk
+			needNext ||= player.gainOrLosePerk(PerkLib.SmallFrame, player.isAnyRaceCached(Races.IMP, Races.MOUSE, Races.DEVIL, Races.AZAZEL) && player.effectiveTallness <= 60, "Due to your small build you have become harder to hit.", "Due to being too tall you no longer qualify.");
+			//Small Caster perk
+			needNext ||= player.gainOrLosePerk(PerkLib.SmallCaster, player.isAnyRaceCached(Races.IMP, Races.DEVIL, Races.AZAZEL) && player.effectiveTallness <= 60, "Your magic becomes more concentrated in your smaller body.", "Your racial alignment does not meet the conditions and as such, the high concentration of mana in your body disperses.");
+			needNext ||= player.gainOrLosePerk(PerkLib.Immortality, player.isRaceCached(Races.AZAZEL), "You gain a sense of invulnerability as you are now an Azazel.", "You lose your sense of invulnerability as you are no longer an Azazel.");
+			needNext ||= player.gainOrLosePerk(PerkLib.Purifier, player.isRaceCached(Races.AZAZEL), "You gain a sense of conviction as you are now an Azazel.", "You lose your sense of conviction as you are no longer an Azazel.");
+			needNext ||= player.gainOrLosePerk(PerkLib.QueenOfTheFairies, player.isRaceCached(Races.FAIRY, 2), "You sense a change in yourself, a faint calling from the forrest. "+PerkLib.QueenOfTheFairies.desc());
+			needNext ||= player.gainOrLosePerk(PerkLib.WhatIsReality, player.isRaceCached(Races.CHESHIRE), "You gain a sence of invulnerability as you are now an Cheshire.", "You lose your sense of invulnerability as you are no longer an Cheshire.");
+			needNext ||= player.gainOrLosePerk(PerkLib.VorpalClaw, player.isRaceCached(Races.CHESHIRE));
+			//Gain venomancy if utherly toxic
+			needNext ||= player.gainPerk(PerkLib.Venomancy, player.isRaceCached(Races.APOPHIS) && player.cor > 50, "Your inborn toxicity has reached such a peak that even your spells are now charged with venom.");
+			needNext ||= player.losePerk(PerkLib.Venomancy, !player.isRaceCached(Races.APOPHIS) && player.cor < 89, "Your mystical powers over poison and toxins have waned.");
+
+			//Pregomania
+			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm()) && !player.statStore.hasBuff("Pregomania")){
+				player.statStore.removeBuffs("Impregnate me!!!");
+				player.statStore.addBuffObject({"tou.mult":0.20,"lib.mult":0.20}, "Pregomania",{text:"Your motherly instincs gives you increased resiliance and resolve."});
+				outputText("\nYou pat your belly in motherly delight instinctively knowing that you have been impregnated. Your body seldom radiates motherly wellbeing making you hardyer in order to protect your beloved children to be.\n");
 			}
-			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 25 && !player.hasPerk(PerkLib.GeneticMemory)) {
-				outputText("\nYour body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed genetic memory! \n\n(<b>Gained Perk: Genetic Memory</b>)\n");
-				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
+			if(!player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm()) && player.statStore.hasBuff("Pregomania")){
+				player.statStore.removeBuffs("Pregomania");
+				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
+				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});
+
 			}
-			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 100 && !player.hasPerk(PerkLib.TransformationResistance)) {
-				outputText("\nYou feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate. \n\n(<b>Gained Perk: Transformation Resistance - Transformative items now have less chance to transform you. In addition, any Bad Ends related to overdose of certain transformative items are now disabled.</b>)\n");
-				player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);
+			if(SophieFollowerScene.HarpyKids >= 21 && !player.hasPerk(PerkLib.HarpyQueen)){
+				outputText("\nOverflowing with motherly pride you count your many grown daughters. There's more than twenty of them roosting all around your camp now." +
+						" This is proof of your hard work as a mother as are your wide motherly hips a testament to the many eggs you've hatched." +
+						" You are no longer a mere harpy now but a harpy queen in your own right living with her own flock of loyal daughters.\n");
+				player.createPerk(PerkLib.HarpyQueen,0,0,0,0);
 			}
-			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 200 && !player.hasPerk(PerkLib.TransformationAcclimation)) {
-				outputText("\nDue to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth. \n\n(<b>Gained Perk: Transformation Acclimation - Transformative items now have double the chance to transform you.</b>)\n");
-				player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
-				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
-				player.removePerk(PerkLib.EnlightenedNinetails);
+
+			//Levitation wing slot
+			if (player.wings.type == Wings.LEVITATION && player.rearBody.type != RearBody.GLACIAL_AURA && player.lowerBody != LowerBody.WENDIGO && player.lowerBody != LowerBody.GAZER) {
+				outputText("\nAs you do not meet the requirements, you also lose the knowledge on how to levitate!\nHint: Aura of the Yuki Onna or legs of the Wendigo or Gazer");
+				player.wings.type = Wings.NONE;
 				needNext = true;
 			}
-			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
-				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
-				player.removePerk(PerkLib.CorruptedNinetails);
-				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == Tail.FOX && player.tailCount == 9) {
-				outputText("\n<b>With your nine tails you suddenly feel something beyond merely two paths of corruption and true enlightenment. A third way, the way of treading a fragile path of balance between other two paths. \n\n(Gained Perk: Nine-tails Kitsune of Balance)</b>\n");
-				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) {
-				outputText("\n<b>Without your tails, the balance is disturbed and you lose your insights into the third path.</b>\n");
-				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
-				needNext = true;
-			}
+			//Wendigo stuff
+			if (!player.blockingBodyTransformations() && player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxOverLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
 
 			//Turn to Bicorn
 			var CurentColor:String;
@@ -2228,6 +2189,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
 				CoC.instance.transformations.WingsNightmare.applyEffect();
 				needNext = true;
+			}
+			//Loosing hellcat body parts
+			if (player.isRaceCached(Races.HELLCAT) && flags[kFLAGS.WITCHES_SABBATH] > 1) {
+				var hellcatparts:Number = 3;
+				if (player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
+				if (player.hairType != Hair.BURNING) hellcatparts -= 1;
+				if (player.eyes.type != Eyes.INFERNAL) hellcatparts -= 1;
+				if (hellcatparts < 3) {
+					outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
+					if (player.tailType == Tail.BURNING || player.tailType == Tail.TWINKASHA) player.tailType = Tail.CAT;
+					if (player.hairType == Hair.BURNING) transformations.HairHuman.applyEffect(false);
+					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT;
+					if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
+					needNext = true;
+				}
 			}
 			//Losing horn
 			if (player.hasPerk(PerkLib.AvatorOfCorruption) && player.cor > 10 && player.horns.type != Horns.BICORN) {
@@ -2316,44 +2292,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.AuraOfCorruption);
 				needNext = true;
 			}
-			//Gain venomancy if utherly toxic
-			if ((player.isRaceCached(Races.APOPHIS)) && player.cor > 50 && !player.hasPerk(PerkLib.Venomancy)) {
-				outputText("\nYour inborn toxicity has reached such a peak that even your spells are now charged with venom. \n\n(<b>Gained Perk: Venomancy</b>)\"");
-				player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
-				needNext = true;
-			}
-			//Lose venomancy if not toxic
-			if (!player.isRaceCached(Races.APOPHIS) && player.cor < 89 && player.hasPerk(PerkLib.Venomancy)) {
-				outputText("\nYour mystical powers over poison and toxins have waned. \n\n(<b>Lost Perk: Venomancy</b>)\"");
-				player.removePerk(PerkLib.Venomancy);
-				needNext = true;
-			}
-			//Harpy
-			if (LowerBody.canLayEggs(player) && player.hasPerk(PerkLib.HarpyWomb)) { //Make eggs big if harpied!
-				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
-					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
-					outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n");
-					needNext = true;
-				}
-			}
-			//Pregomania
-			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune()) && !player.statStore.hasBuff("Pregomania")){
-				player.statStore.removeBuffs("Impregnate me!!!");
-				player.statStore.addBuffObject({"tou.mult":0.20,"lib.mult":0.20}, "Pregomania",{text:"Your motherly instincs gives you increased resiliance and resolve."});
-				outputText("\nYou pat your belly in motherly delight instinctively knowing that you have been impregnated. Your body seldom radiates motherly wellbeing making you hardyer in order to protect your beloved children to be.\n");
-			}
-			if(!player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune()) && player.statStore.hasBuff("Pregomania")){
-				player.statStore.removeBuffs("Pregomania");
-				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
-				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});
-
-			}
-			if(SophieFollowerScene.HarpyKids >= 21 && !player.hasPerk(PerkLib.HarpyQueen)){
-				outputText("\nOverflowing with motherly pride you count your many grown daughters. There's more than twenty of them roosting all around your camp now." +
-						" This is proof of your hard work as a mother as are your wide motherly hips a testament to the many eggs you've hatched." +
-						" You are no longer a mere harpy now but a harpy queen in your own right living with her own flock of loyal daughters.\n");
-				player.createPerk(PerkLib.HarpyQueen,0,0,0,0);
-			}
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) { //All the hourly bee cock checks except the 'seek out the bee girl' check. That's in timeChangeLarge
 				if (player.cocks.length > 1) {
 					outputText("\nYou feel a stickiness and some stinging from your cocks.  It seems your bee cock has absorbed your new addition, leaving no trace of it.\n");
@@ -2372,11 +2310,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else dynStats("lust", 10); //Always gain 10 lust each hour
 				needNext = true;
 			}
-			if (!player.hasVagina() && player.hasPerk(PerkLib.Diapause)) { //Lose diapause
-				outputText("\n<b>With the loss of your womb, you lose your kangaroo-like diapause ability.</b>\n");
-				player.removePerk(PerkLib.Diapause);
-				needNext = true;
-			}
 			//tail absorb section
 			if (player.lowerBody == LowerBody.NAGA) {
 				if (player.tailType > Tail.NONE) {
@@ -2392,90 +2325,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.hasPerk(PerkLib.WetPussy) && player.hasVagina()) {
-				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) {
-					outputText("\n<b>Your " + player.vaginaDescript(0) + " returns to its normal, wet state.</b>\n");
-					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
-					needNext = true;
-				}
-			}
-			if (player.hasPerk(PerkLib.MaraesGiftButtslut) && player.ass.analWetness < 2) { //Prevent Buttsluts from getting dry backdoors
-				outputText("\n<b>Your " + Appearance.assholeDescript(player) + " quickly re-moistens.  It looks like Marae's 'gift' can't be removed.</b>\n");
-				player.ass.analWetness = 2;
-				needNext = true;
-			}
-			if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
-				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
-				needNext = true;
-			}
-			if (player.pregnancyIncubation <= 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
-				player.knockUpForce(); //Clear Pregnancy
-			}
 			if (player.hasStatusEffect(StatusEffects.Uniball) && player.ballSize > 1 && player.hasBalls()) { //Testicles Normalise:
 				outputText("\nYou feel a deep sensation of release around your genitals.  You sigh with relief and contentment as your testicles drop downwards and bloom outwards, heat throbbing within them as they split and form a proper ballsack.\n");
 				player.removeStatusEffect(StatusEffects.Uniball);
 				needNext = true;
 			}
-			var textHolder:String;
-			textHolder = player.fixFemininity();
-			if (textHolder != "") {
-				outputText(textHolder);
-				needNext = true;
-			}
-			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) { //Lust stick!
-				player.addStatusValue(StatusEffects.LustStickApplied, 1, -1); //Decrement!
-				if (player.statusEffectv1(StatusEffects.LustStickApplied) <= 0) {
-					player.removeStatusEffect(StatusEffects.LustStickApplied);
-					outputText("<b>\nYour drugged lipstick fades away, leaving only the faintest residue on your lips.  You'll have to put on more if you want to be able to kiss your foes into submission!</b>\n");
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.Luststick)) { //Luststic countdown
-				player.addStatusValue(StatusEffects.Luststick, 1, -1);
-				if (rand(2) == 0 && player.hasCock()) { //50% chance to lust spike
-					//Display if haven't displayed
-					if (player.flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED] == 0) {
-						outputText("\nYour body tingles, practically a slave to the effects of harpy lipstick.  Blood surges to [eachcock], making you groan out loud with forced pleasure.  Unasked-for fantasies assault you, and you spend a few moments fantasizing about fucking feathery women before you come to your senses.\n");
-						flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
-						needNext = true;
-					}
-					player.dynStats("lus", 20, "scale", false);
-					if (player.lust > player.maxOverLust()) player.lust = player.maxOverLust();
-				}
-				if (player.statusEffectv1(StatusEffects.Luststick) <= 0) {
-					player.removeStatusEffect(StatusEffects.Luststick);
-					dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
-					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
-					needNext = true;
-				}
-			}
-			if (player.flags[kFLAGS.LUSTSTICK_RESISTANCE] >= 50 && !player.hasPerk(PerkLib.LuststickAdapted)) { //Luststick resistance unlock
-                SceneLib.sophieBimbo.unlockResistance();
-                if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
-				needNext = true;
-			}
-			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
-				flags[kFLAGS.DICK_EGG_INCUBATION]--;
-				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
-				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
-                    SceneLib.masturbation.birthBeeEggsOutYourWang();
-                    needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.ArousalPotion)) {
-				player.addStatusValue(StatusEffects.ArousalPotion, 2, -1);
-				if (player.statusEffectv2(StatusEffects.ArousalPotion) <= 0) {
-					outputText("\n<b>Alraune perfume effect expired.</b>");
-					player.removeStatusEffect(StatusEffects.ArousalPotion);
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.Eggchest)) { //Eggs in tits!
-				player.addStatusValue(StatusEffects.Eggchest, 1, -1);
-				if (player.statusEffectv1(StatusEffects.Eggchest) <= 0) {
-					outputText("\n<b>You feel the rounded eggs within your [fullChest] vanishing, absorbed into your body.  </b>");
-					player.growTits(player.statusEffectv2(StatusEffects.Eggchest), player.bRows(), true, 2);
-					outputText("\n");
-					player.removeStatusEffect(StatusEffects.Eggchest);
+			//Harpy
+			if (LowerBody.canLayEggs(player) && player.hasPerk(PerkLib.HarpyWomb)) { //Make eggs big if harpied!
+				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
+					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
+					outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n");
 					needNext = true;
 				}
 			}
@@ -2546,7 +2405,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;
 				}
-                else if (player.pregnancyIncubation < 1 && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
+                else if (!player.isPregnant() && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
                     if ((player.totalFertility() > 50 && CoC.instance.model.time.days % 15 == 0) || CoC.instance.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
                         outputText("\n<b>Somehow you know that eggs have begun to form inside you. You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
@@ -2556,142 +2415,27 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 			}
-			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
-				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
-					player.removeStatusEffect(StatusEffects.Heat); //remove heat
-					EngineCore.statScreenRefresh();
-					outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.Heat, 3, -1);
-			}
 
-			if (player.inRut) { //Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
-				trace("RUT:" + player.statusEffectv3(StatusEffects.Rut));
-				if (player.statusEffectv3(StatusEffects.Rut) <= 1 || player.cockTotal() == 0) { //Remove bonus libido from rut
-					player.removeStatusEffect(StatusEffects.Rut); //remove heat
-                    EngineCore.statScreenRefresh();
-					outputText("\n<b>Your body calms down, at last getting over your rut.</b>\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.Rut, 3, -1);
-			}
-			if (player.statusEffectv1(StatusEffects.BathedInHotSpring) >= 1) {
-				if (player.statusEffectv1(StatusEffects.BathedInHotSpring) == 1) {
-					player.removeStatusEffect(StatusEffects.BathedInHotSpring);
-					outputText("\n<b>Effect of Hot Spring bath wears off.</b>\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.BathedInHotSpring, 1, -1);
-			}
-			if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) >= 1) {
-				if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) == 1) {
-					player.buff("ShiraOfTheEastFoodBuff").remove();
-					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
-					outputText("\n<b>Effect of eating in 'Shira of the east' restaurant wears off.</b>\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.ShiraOfTheEastFoodBuff1, 1, -1);
-			}
-			if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) >= 1) {
-				if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) == 1) {
-					player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-					outputText("\n<b>Effect of Raiju Lightning wears off.</b>\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, -1);
-			}
-			if (player.statusEffectv1(StatusEffects.SoulGemCrafting) >= 1) player.addStatusValue(StatusEffects.SoulGemCrafting, 1, -1);
-			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
-				if (rand(5) == 0) {
-					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");
-					player.dynStats("lus", 2 + rand(15), "scale", false);
-					if (player.lust >= player.maxOverLust()) {
-						outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.");
-						player.orgasm();
-						player.dynStats("sen", 2);
-						player.changeStatusValue(StatusEffects.LustyTongue, 1, player.statusEffectv1(StatusEffects.LustyTongue) + 10); //Tongue orgasming makes it last longer.
-
-					}
-					outputText("\n");
-					needNext = true;
-				}
-				player.changeStatusValue(StatusEffects.LustyTongue, 1, player.statusEffectv1(StatusEffects.LustyTongue) - 1); //Decrement
-				if (player.statusEffectv1(StatusEffects.LustyTongue) <= 0) {
-					player.removeStatusEffect(StatusEffects.LustyTongue);
-					outputText("\nYour mouth and tongue return to normal.\n");
-					needNext = true;
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.Bammed1)) {
-				if (player.statusEffectv3(StatusEffects.Bammed1) > 0 && (player.statusEffectv1(StatusEffects.Bammed1) == 1 || player.statusEffectv1(StatusEffects.Bammed1) == 2)) {
-					player.addStatusValue(StatusEffects.Bammed1, 3, -1);
-					if (player.statusEffectv3(StatusEffects.Bammed1) <= 0) {
-						if (player.statusEffectv4(StatusEffects.Bammed1) <= 0 && player.statusEffectv2(StatusEffects.Bammed1) < 3) player.removeStatusEffect(StatusEffects.Bammed1);
-						outputText("\n<b>Your ability to use melee attacks was restored after Bam effect on it expired!</b>\n");
-						needNext = true;
-					}
-				}
-				if (player.statusEffectv4(StatusEffects.Bammed1) > 0 && (player.statusEffectv2(StatusEffects.Bammed1) == 1 || player.statusEffectv2(StatusEffects.Bammed1) == 2)) {
-					player.addStatusValue(StatusEffects.Bammed1, 4, -1);
-					if (player.statusEffectv4(StatusEffects.Bammed1) <= 0) {
-						if (player.statusEffectv3(StatusEffects.Bammed1) <= 0 && player.statusEffectv1(StatusEffects.Bammed1) < 3) player.removeStatusEffect(StatusEffects.Bammed1);
-						outputText("\n<b>Your ability to use range attacks was restored after Bam effect on it expired!</b>\n");
-						needNext = true;
-					}
-				}
-			}
-			if (player.hasStatusEffect(StatusEffects.Bammed2)) {
-				if (player.statusEffectv3(StatusEffects.Bammed2) > 0 && (player.statusEffectv1(StatusEffects.Bammed2) == 1 || player.statusEffectv1(StatusEffects.Bammed2) == 2)) {
-					player.addStatusValue(StatusEffects.Bammed2, 3, -1);
-					if (player.statusEffectv3(StatusEffects.Bammed2) <= 0) {
-						if (player.statusEffectv4(StatusEffects.Bammed2) <= 0 && player.statusEffectv2(StatusEffects.Bammed2) < 3) player.removeStatusEffect(StatusEffects.Bammed2);
-						outputText("\n<b>Your ability to use physical specials was restored after Bam effect on it expired!</b>\n");
-						needNext = true;
-					}
-				}
-				if (player.statusEffectv4(StatusEffects.Bammed2) > 0 && (player.statusEffectv2(StatusEffects.Bammed2) == 1 || player.statusEffectv2(StatusEffects.Bammed2) == 2)) {
-					player.addStatusValue(StatusEffects.Bammed2, 4, -1);
-					if (player.statusEffectv4(StatusEffects.Bammed2) <= 0) {
-						if (player.statusEffectv3(StatusEffects.Bammed2) <= 0 && player.statusEffectv1(StatusEffects.Bammed2) < 3) player.removeStatusEffect(StatusEffects.Bammed2);
-						outputText("\n<b>Your ability to use magical specials was restored after Bam effect on it expired!</b>\n");
-						needNext = true;
-					}
-				}
-			}
-			if (player.statusEffectv2(StatusEffects.Kelt) > 0) player.addStatusValue(StatusEffects.Kelt, 2, -0.15); //Reduce kelt submissiveness by 1 every 5 hours
-			//Mino cum update.
-            if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
-                needNext = true;
-			}
-            else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] == 0) { //Repeated warnings!
-                if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
-					outputText("\n<b>You shiver, feeling a little cold. Maybe you ought to get some more minotaur cum? You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
-				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
-					outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head. You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
+			if (player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
+				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
+				var bonusStats:Number = 0;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
+				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+				player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
+				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
 			}
-			//Decrement mino withdrawal symptoms display cooldown
-			//flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] prevents PC getting two of the same notices overnite
-			else if (flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] > 0) flags[kFLAGS.MINOCUM_WARNING_COOLDOWN]--;
-			if (player.statusEffectv1(StatusEffects.Airweed) >= 1) {
-				if (player.statusEffectv1(StatusEffects.Airweed) == 1) {
-					player.removeStatusEffect(StatusEffects.Airweed);
-					outputText("\n<b>Effect of Airweed wears off.</b>\n");
-					needNext = true;
-				}
-				else player.addStatusValue(StatusEffects.Airweed, 1, -1);
+			if (!player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.Lycanthropy)) {
+				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
+				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
+				player.statStore.removeBuffs("Lycanthropy");
+				player.removePerk(PerkLib.Lycanthropy);
+				needNext = true;
 			}
-			//Konstantin buffs to equipment
-			if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) {
-				if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) <= 0) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
-				else player.addStatusValue(StatusEffects.KonstantinArmorPolishing, 1, -1);
-			}
-			if (player.hasStatusEffect(StatusEffects.KonstantinWeaponSharpening)) {
-				if (player.statusEffectv1(StatusEffects.KonstantinWeaponSharpening) <= 0) player.removeStatusEffect(StatusEffects.KonstantinWeaponSharpening);
-				else player.addStatusValue(StatusEffects.KonstantinWeaponSharpening, 1, -1);
-			}
-			if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) player.removeStatusEffect(StatusEffects.AlchemicalThunderBuff);
+
 			if (player.hasPerk(PerkLib.FutaForm)) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
@@ -2797,67 +2541,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			if (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") {
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMP_TOME);
+				if (!camp.IsSleeping && !player.isRaceCached(Races.IMP, 3) && rand(3) < 2) {
+					CoC.instance.mutations.impTFgradual(player);
+					needNext = true;
+				}
+			}
 
-			//QUEST AREA
-			//Vala Gathering Quest
-			if (player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED) {
-				outputText("\n<b>You now have enough scepter shards to repair the fairy queen scepter! Go turn this to Vala in Tel Adre.</b>\n");
-				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_ITEM_GATHERED;
-				needNext = true;
-			}
-			if (!player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) {
-				outputText("\n<b>Oops you seem to have forgot that Vala needs those items to repair the royal scepter and parted way with them! Well its fine you can always go beat some more Phouka for extras.</b>\n");
-				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_STARTED;
-				needNext = true;
-			}
-			//Other removeCurse cooldowns
-			if (flags[kFLAGS.AYANE_CURE_COOLDOWN] > 0) --flags[kFLAGS.AYANE_CURE_COOLDOWN];
-			if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) --flags[kFLAGS.DIANA_CURE_COOLDOWN];
-			//Luna nursing reset
-			if (LunaFollower.Nursed) {
-				LunaFollower.NursedCooldown -= 1
-				if (LunaFollower.NursedCooldown == 0)
-				{
-					LunaFollower.Nursed = false;
-				}
-			}
-			//Luna mooning reset
-			if (LunaFollower.Sated) {
-				LunaFollower.SatedCooldown -= 1
-				if (LunaFollower.SatedCooldown == 0)
-				{
-					LunaFollower.Sated = false;
-				}
-			}
-			if (isNightTime && !camp.IsWaitingResting && !LunaFollower.Sated){
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
-					LunaFullMoonScene = true;
-					return true;
-				}
-			}
-			//Process crops harvest moon
-			if (CoC.instance.model.time.hours == 24){
-				if (HarvestMoonScenes.harvestmoonstageHH < 7 && HarvestMoonScenes.harvestmoonstageHH > 0) {
-					HarvestMoonScenes.harvestmoonstageHH += 1;
-				}
-				if (HarvestMoonScenes.harvestmoonstageMG < 7 && HarvestMoonScenes.harvestmoonstageMG > 0) {
-					HarvestMoonScenes.harvestmoonstageMG += 1;
-				}
-				if (HarvestMoonScenes.harvestmoonstageSB < 7 && HarvestMoonScenes.harvestmoonstageSB > 0) {
-					HarvestMoonScenes.harvestmoonstageSB += 1;
-				}
-				if (HarvestMoonScenes.harvestmoonstageIW < 7 && HarvestMoonScenes.harvestmoonstageIW > 0) {
-					HarvestMoonScenes.harvestmoonstageIW += 1;
-				}
-				if (HarvestMoonScenes.harvestmoonstageBF < 7 && HarvestMoonScenes.harvestmoonstageBF > 0) {
-					HarvestMoonScenes.harvestmoonstageBF += 1;
-				}
-			}
 			//Wrap it up
 			return needNext;
 		}
-
-		private var LunaFullMoonScene: Boolean = false;
 
 		public function timeChangeLarge():Boolean {
             if (!ingnam.inIngnam) {
@@ -2873,6 +2567,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }
+				if (checkedHellhound++ == 0 && rand(2) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
+						&& player.keyItemvX("Marae's Lethicite", 1) > 0 && !player.blockingBodyTransformations()) {
+					SceneLib.camp.campUniqueScenes.hellhoundCapture();
+					return true;
+				}
+				if (checkedImp++ == 0 && (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp")) {
+					if (!camp.IsSleeping && rand(2) == 0 && player.isRaceCached(Races.IMP, 2) && !player.hasPerk(PerkLib.ImpNobility) && player.perkv1(PerkLib.DemonEnergyThirst) > 25) {
+						SceneLib.camp.campUniqueScenes.impTomeScene();
+						return true;
+					}
+				}
 
                 if (LunaFullMoonScene){
                     if (camp.IsSleeping)
@@ -3020,3 +2725,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
+

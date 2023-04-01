@@ -10,12 +10,15 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.NPCs.KihaFollower;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 	public class Magnar extends Monster
 	{
 		public var maxDominationLevel: int = 0;
+		public var halfBlind: Boolean = false;
+		public var cantFly: Boolean = false;
 
 		public function heatWave():void {
 			outputText("The blue flame from the massive demon’s maw vanishes… but you can feel the heat rising.  ");
@@ -241,6 +244,10 @@ import classes.internals.*;
 				searingSpurn();
 				return;
 			}
+			if (halfBlind && rand(3) == 0) {
+				outputText("[Themonster] seems to have trouble finding you, putting one hand over his injured eye, resting the other on his massive hammer.");
+				return;
+			}
 
 			if (choice == 0) eAttack();
 			if (choice == 1) darkMaul();
@@ -256,7 +263,11 @@ import classes.internals.*;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			finalDominationScore();
-			SceneLib.kihaFollower.KihaWeddingVictory();
+			if (KihaFollower.DergKidnapped == 1) {
+				SceneLib.kihaFollower.KihaRescueVictory();
+			} else {
+				SceneLib.kihaFollower.KihaWeddingVictory();
+			}
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -279,6 +290,24 @@ import classes.internals.*;
 			this.bonusHP = 2000;
 			this.bonusLust = 800;
 			this.level = 100;
+			if (KihaFollower.DergKidnapped == 1) {
+				if (KihaFollower.MagnarState == 1) {
+					cantFly = true;
+					this.long += " You managed to cut off one of his wings before the fight started, putting him off balance and preventing him from flying.";
+				}
+				else if (KihaFollower.MagnarState == 2) {
+					halfBlind = true;
+					this.long += " You managed to sneak in some poisoned wine and even stabbed out one of his eyes before the fight started, it should be much easier than last time!";
+					this.createStatusEffect(StatusEffects.PoisonDoT, 3, 0, 0, 0);
+				}
+				this.weaponAttack = 200;
+				this.armorDef = 100;
+				this.armorMDef = 750;
+				this.bonusHP = 1700;
+				this.bonusLust = 600;
+				this.level = 85;
+
+			}
 			this.additionalXP = 300;
 			this.createPerk(PerkLib.OverMaxHP, 60, 0, 0, 0);
 			this.createCock(24,4);

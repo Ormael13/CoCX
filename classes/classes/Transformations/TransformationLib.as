@@ -273,6 +273,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsPhoenix: Transformation 			= arms.ArmsPhoenix;
 	public const ArmsPig: Transformation 				= arms.ArmsPig;
 	public const ArmsPlant: Transformation 				= arms.ArmsPlant;
+	public const ArmsPlant2: Transformation 			= arms.ArmsPlant2;
 	public const ArmsRaccoon: Transformation 			= arms.ArmsRaccoon;
 	public const ArmsRaiju: Transformation 				= arms.ArmsRaiju;
 	public const ArmsRaijuPaws: Transformation 			= arms.ArmsRaijuPaws;
@@ -287,8 +288,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsWeasel: Transformation 			= arms.ArmsWeasel;
 	public const ArmsWendigo: Transformation 			= arms.ArmsWendigo;
 	public const ArmsWolf: Transformation 				= arms.ArmsWolf;
+	public const ArmsHound: Transformation 				= arms.ArmsHound;
 	public const ArmsYeti: Transformation 				= arms.ArmsYeti;
 	public const ArmsYukiOnna: Transformation 			= arms.ArmsYukiOnna;
+	public const ArmsTiny: Transformation 			    = arms.ArmsTiny;
 
 
 //ASS
@@ -467,6 +470,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsPanda: Transformation 		= ears.EarsPanda;
 	public const EarsMelkie: Transformation 	= ears.EarsMelkie;
 	public const EarsDeer: Transformation 		= ears.EarsDeer;
+	public const EarsBig: Transformation        = ears.EarsBig;
 
 
 //EYES
@@ -557,6 +561,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public var face:FaceTransformations = new FaceTransformations();
     public const FaceHuman: Transformation 				= face.FaceHuman;
     public const FaceHorse: Transformation 				= face.FaceHorse;
+    public const FaceCerberus: Transformation 			= face.FaceCerberus;
     public const FaceDog: Transformation 				= face.FaceDog;
     public const FaceCowMinotaur: Transformation 		= face.FaceCowMinotaur;
     public const FaceSharkTeeth: Transformation 		= face.FaceSharkTeeth;
@@ -658,6 +663,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HairGhost: Transformation 		= hair.HairGhost;
     public const HairRatatoskr: Transformation 	= hair.HairRatatoskr;
     public const HairWindswept: Transformation 	= hair.HairWindswept;
+    public const HairWild: Transformation 		= hair.HairWild;
     public const HairAnemone: Transformation 	= hair.HairAnemone;
     public const HairFluffy: Transformation 	= hair.HairFluffy;
     public const HairCrazy: Transformation 		= hair.HairCrazy;
@@ -665,6 +671,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HairQuill: Transformation 		= hair.HairQuill;
     public const HairFairy: Transformation 		= hair.HairFairy;
     public const HairCow: Transformation 		= hair.HairCow;
+    public const HairDripping: Transformation 	= hair.HairDripping;
     public function HairChangeColor(colors: /*String*/ Array): Transformation { return hair.HairChangeColor(colors); }
 
 
@@ -702,6 +709,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HornsJabberwocky: Transformation 			= horns.HornsJabberwocky;
     public const HornsUshiOni: Transformation 				= horns.HornsUshiOni;
     public const HornsJiangshi: Transformation 				= horns.HornsJiangshi;
+    public const HornsArchImp: Transformation 				= horns.HornsArchImp;
 
 
 //LOWER BODY ( LEGS )
@@ -804,6 +812,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const LowerBodyCrab: Transformation 				= lowerBody.LowerBodyCrab;
     public const LowerBodyCancer: Transformation 			= lowerBody.LowerBodyCancer;
     public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake;
+    public const LowerBodyTiny: Transformation 			    = lowerBody.LowerBodyTiny;
+    public const LowerBodyWorm: Transformation 			    = lowerBody.LowerBodyWorm;
+    public const LowerBodyYgddrasilRootClaws: Transformation 	= lowerBody.LowerBodyYgddrasilRootClaws;
 
 
 
@@ -862,6 +873,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const RearBodyAtlachNacha: Transformation 		= rearBody.RearBodyAtlachNacha;
 	public const RearBodyCobraHood: Transformation 			= rearBody.RearBodyCobraHood;
 	public const RearBodyWolfCollar: Transformation 		= rearBody.RearBodyWolfCollar;
+	public const RearBodyHellhoundCollar: Transformation 	= rearBody.RearBodyHellhoundCollar;
 
 
 //SKIN
@@ -916,6 +928,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const SkinPatternTigerSharkStripes:Transformation 	= skin.SkinPatternTigerSharkStripes;
     public const SkinPatternOrca:Transformation 				= skin.SkinPatternOrca;
     public const SkinPatternSeaDragon:Transformation 			= skin.SkinPatternSeaDragon;
+    public const SkinPatternArchImp:Transformation 			    = skin.SkinPatternArchImp;
 
 
 //TAIL
@@ -976,6 +989,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailWendigo: Transformation 					= tail.TailWendigo;
 	public const TailHydra: Transformation 						= tail.TailHydra;
 	public const TailSpinneretAtlach: Transformation 			= tail.TailSpinneretAtlach;
+	public const TailDeer: Transformation 						= tail.TailDeer;
+	public const TailYgddrasil: Transformation 					= tail.TailYgddrasil;
 	/**
 	 * @param tailCount target tail count
 	 * @param magnitude max. number of added/removed tails
@@ -1009,6 +1024,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TongueGhost: Transformation 		= tongue.TongueGhost;
 	public const TongueRatatoskr: Transformation 	= tongue.TongueRatatoskr;
 	public const TongueMelkie: Transformation 		= tongue.TongueMelkie;
+	public const TongueImp: Transformation 			= tongue.TongueImp;
 
 
 //VAGINA
@@ -1025,6 +1041,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
     public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
     public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
+    public function SecondVagina(): Transformation { return vaginas.SecondVagina(); }
     public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
     public function VaginaHorse(vagina:int = 0): Transformation { return vaginas.VaginaHorse(vagina); }
     public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }

@@ -58,6 +58,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lifesiphon = Math.round(lifesiphon * 1.2);
 			lifesiphon *= corruptMagicPerkFactor(monster);
 		}
+		if (player.hasPerk(PerkLib.Necromancy)) lifesiphon *= 1.5;
 		if (player.hasPerk(PerkLib.CorruptMagic) && player.hasStatusEffect(StatusEffects.DarkRitual)) lifesiphon *= 2;
 		return Math.round(lifesiphon);
 	}

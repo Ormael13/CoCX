@@ -12,6 +12,10 @@ import classes.IMutationPerkType;
 /**
  * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
  *
+ * Addendum: The fundamental reason for Mutations3.0 is to clearly define the "perks" that are limited by the organ slots, as well as being obtained by Evangeline only.
+ * PermTF, or PermTF Adjacent races, with mutations such as Mindbreaker/HellhoundFireBalls/FeyArcaneBloodstream, have a "True" Variant, in which their buffs are significantly stronger,
+ * to offset the penalty of not being able to obtain other mutations form other races.
+ *
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
  *
  * First, .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
@@ -20,6 +24,8 @@ import classes.IMutationPerkType;
  * These can be checked seperately, or when sent to createDynamicPerks, will handle it as well.
  *
  * Mutations are themselves handling their iterations via v1 checks.
+ * V2 is used for the Mutations to track any special conditions for upgrading, as in cases such as HellHoundFireBalls.
+ * V3 is used to track if the user has the regular (0) or the True (1) variant of the Mutation.
  *
  * Refer to Basecontent's createDynamicPerk function to see how they are used.
  *
@@ -37,12 +43,12 @@ public class IMutationsLib
 		public static const SlimeMetabolismIM:IMutationPerkType = new SlimeMetabolismMutation();
 		public static const NekomataThyroidGlandIM:IMutationPerkType = new NekomataThyroidGlandMutation();
 		public static const HellcatParathyroidGlandsIM:IMutationPerkType = new HellcatParathyroidGlandMutation();
-		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();
 		//Mutations start here.
 		public static const AlphaHowlIM:IMutationPerkType = new AlphaHowlMutation();
 		public static const ArachnidBookLungIM:IMutationPerkType = new ArachnidBookLungMutation();
 		public static const BlackHeartIM:IMutationPerkType = new BlackHeartMutation();
 		public static const CatLikeNimblenessIM:IMutationPerkType = new CatLikeNimblenessMutation();
+		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();
 		public static const DiamondHeartIM:IMutationPerkType = new DiamondHeartMutation();
 		public static const DisplacerMetabolismIM:IMutationPerkType = new DisplacerMetabolismMutation();
 		public static const DraconicBonesIM:IMutationPerkType = new DraconicBonesMutation();
@@ -52,15 +58,25 @@ public class IMutationsLib
 		public static const EasterBunnyEggBagIM:IMutationPerkType = new EasterBunnyEggBagMutation();
 		public static const EclipticMindIM:IMutationPerkType = new EclipticMindMutation();
 		public static const ElvishPeripheralNervSysIM:IMutationPerkType = new ElvishPeripheralNervSysMutation();
+		public static const EyeOfTheTigerIM:IMutationPerkType = new EyeOfTheTigerMutation();
 		public static const FeyArcaneBloodstreamIM:IMutationPerkType = new FeyArcaneBloodstreamMutation();
 		public static const FloralOvariesIM:IMutationPerkType = new FloralOvariesMutation();
 		public static const FrozenHeartIM:IMutationPerkType = new FrozenHeartMutation();
 		public static const GazerEyesIM:IMutationPerkType = new GazerEyesMutation();
 		public static const GorgonEyesIM:IMutationPerkType = new GorgonEyesMutation();
 		public static const HarpyHollowBonesIM:IMutationPerkType = new HarpyHollowBonesMutation();
+		public static const HellhoundFireBallsIM:IMutationPerkType = new HellHoundFireBallsMutation();
 		public static const HeartOfTheStormIM:IMutationPerkType = new HeartOfTheStormMutation();
 		public static const HinezumiBurningBloodIM:IMutationPerkType = new HinezumiBurningBloodMutation();
 		public static const HollowFangsIM:IMutationPerkType = new HollowFangsMutation();
+		public static const HumanAdrenalGlandsIM:IMutationPerkType = new HumanAdrenalGlandsMutation();
+		public static const HumanFatIM:IMutationPerkType = new HumanFatMutation();
+		public static const HumanMusculatureIM:IMutationPerkType = new HumanMusculatureMutation();
+		public static const HumanOvariesIM:IMutationPerkType = new HumanOvariesMutation();
+		public static const HumanParathyroidGlandIM:IMutationPerkType = new HumanParathyroidGlandMutation();
+		public static const HumanTesticlesIM:IMutationPerkType = new HumanTesticlesMutation();
+		public static const HumanThyroidGlandIM:IMutationPerkType = new HumanThyroidGlandMutation();
+		public static const HumanVersatilityIM:IMutationPerkType = new HumanVersatilityMutation();
 		public static const KitsuneParathyroidGlandsIM:IMutationPerkType = new KitsuneParathyroidGlandMutation();
 		public static const KitsuneThyroidGlandIM:IMutationPerkType = new KitsuneThyroidGlandMutation();
 		public static const LactaBovinaOvariesIM:IMutationPerkType = new LactaBovinaOvariesMutation();

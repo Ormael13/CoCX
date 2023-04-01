@@ -393,7 +393,8 @@ public class Creature extends Utils
 		public var msoulskillPowerStat: BuffableStat; // multiplier (1pt = 100%)
 		public var soulskillcostStat: BuffableStat; // multiplier (1pt = 100%)
 		public var teaseDmgStat: BuffableStat; // raw values (1pt = 2 tease base lust damage)
-		
+		public var evadeStat: BuffableStat; // raw values (1pt = 1 evasion chance)
+
 		public var resPhysicalStat: BuffableStat;
 		public var resMagicStat: BuffableStat;
 		public var resLustStat: BuffableStat;
@@ -849,9 +850,9 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				max2 += (0.01 * bonus);
 			}
-			max1 *= max2;//~150%
+			max1 *= max2;//~170%
 			max1 = Math.round(max1);
-			return Math.min(299999,max1);
+			return Math.min(339999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;
@@ -1477,7 +1478,8 @@ public class Creature extends Utils
 			msoulskillPowerStat = new BuffableStat(this, 'msoulskillpower', {base:1});
 			soulskillcostStat = new BuffableStat(this, 'soulskillcost', {base:1});
 			teaseDmgStat = new BuffableStat(this, 'teasedmg', {base:0});
-			
+			evadeStat = new BuffableStat(this, 'evade', {base:0});
+
 			resPhysicalStat = new BuffableStat(this, 'res_physical', {base:0});
 			resMagicStat = new BuffableStat(this, 'res_magic', {base:0});
 			resLustStat = new BuffableStat(this, 'res_lust', {base:0});
@@ -1535,6 +1537,7 @@ public class Creature extends Utils
 				msoulskillPowerStat,
 				soulskillcostStat,
 				teaseDmgStat,
+				evadeStat,
 				
 				resPhysicalStat,
 				resMagicStat,
@@ -1734,6 +1737,41 @@ public class Creature extends Utils
 		}
 
 		//Functions
+		public function gainOrLosePerk(ptype:PerkType, condition:Boolean, gainText:String = "", loseText:String = "", addLossCondition:Boolean = false, gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
+			if (!hasPerk(ptype) && condition) {
+				createPerk(ptype, value1, value2, value3, value4);
+				if (doOutput) EngineCore.outputText("\n" + gainText + "\n\n(<b>Gained Perk: "+ptype.name()+"</b> - " + ptype.desc() + ")\n");
+				if (gainFunct != null) gainFunct();
+				return true;
+			}
+			if (hasPerk(ptype) && !condition && addLossCondition) {
+				removePerk(ptype);
+				if (doOutput) EngineCore.outputText("\n" + loseText + "\n\n(<b>Lost Perk: "+ptype.name()+"</b>)\n");
+				if (loseFunct != null) loseFunct();
+				return true;
+			}
+			return false;
+		}
+
+		public function gainPerk(ptype:PerkType, condition:Boolean, gainText:String = "", gainFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
+			if (!hasPerk(ptype) && condition) {
+				createPerk(ptype, value1, value2, value3, value4);
+				if (doOutput) EngineCore.outputText("\n" + gainText + "\n\n(<b>Gained Perk: "+ptype.name()+"</b> - " + ptype.desc() + ")\n");
+				if (gainFunct != null) gainFunct();
+				return true;
+			}
+			return false;
+		}
+
+		public function losePerk(ptype:PerkType, losecondition:Boolean,loseText:String = "", loseFunct:Function = null, doOutput:Boolean = true):Boolean {
+			if (hasPerk(ptype) && losecondition) {
+				removePerk(ptype);
+				if (doOutput) EngineCore.outputText("\n" + loseText + "\n\n(<b>Lost Perk: "+ptype.name()+"</b>)\n");
+				if (loseFunct != null) loseFunct();
+				return true;
+			}
+			return false;
+		}
 
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void
@@ -1836,7 +1874,6 @@ public class Creature extends Utils
 					if (hasMutation(iMutate)) total++;
 				}
 			if (invert) total = IMutationsLib.mutationsArray("").length - total;
-
 			return total;
 		}
 
@@ -1895,6 +1932,10 @@ public class Creature extends Utils
 		public function addStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
 			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
+		}
+		public function createOrAddStatusEffect(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
+		{
+			return this._statusEffects.createOrAddStatusEffect(stype, statusValueNum, bonus);
 		}
 
 		public function getStatusValue(stype:StatusEffectType, statusValueNum:int):Number
@@ -2274,11 +2315,11 @@ public class Creature extends Utils
 			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
-		public function wetness():Number {
+		public function wetness(vagNum:int = 0):Number {
 			if (vaginas.length == 0)
 				return 0;
 			else
-				return vaginas[0].vaginalWetness;
+				return vaginas[vagNum].vaginalWetness;
 		}
 
 		public function vaginaType(newType:int = -1, vagNum:int = 0):int {
@@ -2291,13 +2332,13 @@ public class Creature extends Utils
 			return vaginas[vagNum].type;
 		}
 
-		public function looseness(vag:Boolean = true):Number {
-			if (vag)
+		public function looseness(isVag:Boolean = true, vagNum:int = 0):Number {
+			if (isVag)
 			{
 				if (vaginas.length == 0)
 					return 0;
 				else
-					return vaginas[0].vaginalLooseness;
+					return vaginas[vagNum].vaginalLooseness;
 			}
 			else
 			{
@@ -2305,7 +2346,7 @@ public class Creature extends Utils
 			}
 		}
 
-		public function vaginalCapacity():int {
+		public function vaginalCapacity(vagNum:int = 0):int {
 			//If the player has no vaginas
 			if (vaginas.length == 0)
 				return 0;
@@ -2336,7 +2377,7 @@ public class Creature extends Utils
 				bonus += 25;
 			if(hasPerk(PerkLib.FerasBoonMilkingTwat))
 				bonus += 40;
-			return Math.floor((bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10));
+			return Math.floor((bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[vagNum].vaginalLooseness * vaginas[vagNum].vaginalLooseness) * (1 + vaginas[vagNum].vaginalWetness / 10));
 		}
 
 		public function analCapacity():int {
@@ -2526,6 +2567,8 @@ public class Creature extends Utils
 				percent += 0.03;
 			if (hasPerk(PerkLib.MagicalVirility))
 				percent += 0.05 + (perkv1(PerkLib.MagicalVirility) * 0.01);
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
+				percent += (0.05 * perkv1(IMutationsLib.HumanTesticlesIM));
 			//Messy Orgasms?
 			if (hasPerk(PerkLib.MessyOrgasms))
 				percent += 0.06;
@@ -2583,6 +2626,8 @@ public class Creature extends Utils
 				quantity *= 2;
 			if (hasPerk(PerkLib.OneTrackMind))
 				quantity *= 1.1;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17)
+				quantity *= 2;
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3)
 				quantity *= 2.5;
 			if (hasPerk(PerkLib.MaraesGiftStud))
@@ -2605,6 +2650,13 @@ public class Creature extends Utils
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
+			if (hasMutation(IMutationsLib.HellhoundFireBallsIM))
+				switch (perkv1(IMutationsLib.HellhoundFireBallsIM)) {
+					case 1:
+					case 2:
+					case 3: quantity *= 1.25; break;
+					case 4: quantity *= 2; break;
+				}
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (hasPerk(PerkLib.BroBody))
@@ -2822,6 +2874,10 @@ public class Creature extends Utils
 		{
 			return (cocks.length);
 		}
+		public function vagTotal():Number
+		{
+			return (vaginas.length);
+		}
 
 		//Boolean alternate
 		public function hasCock():Boolean
@@ -2891,7 +2947,11 @@ public class Creature extends Utils
 		}
 		public function hasPhysicalWings():Boolean
 		{
-			return (Wings.Types[wings.type].physical ) ;
+			return (Wings.Types[wings.type].physical) ;
+		}
+		public function hasTail():Boolean
+		{
+			return (tailType > Tail.NONE) ;
 		}
 
 		public function canPounce():Boolean
@@ -2941,16 +3001,16 @@ public class Creature extends Utils
 		//Crit immunity
 		public function isImmuneToCrits():Boolean
 		{
-			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
-				return true;//dodać inne typy wrogów: nieumarli
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType))
+				return true;
 			return false;
 		}
 
 		//Bleed immunity
 		public function isImmuneToBleed():Boolean
 		{
-			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
-				return true;//dodać inne typy wrogów: nieumarli?
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType))
+				return true;
 			return false;
 		}
   
@@ -3135,7 +3195,7 @@ public class Creature extends Utils
 		//create vagoo
 		public function createVagina(virgin:Boolean = true, vaginalWetness:Number = 1, vaginalLooseness:Number = 0):Boolean
 		{
-			if (vaginas.length >= 1)
+			if (vaginas.length >= 2)
 				return false;
 			var newVagina:VaginaClass = new VaginaClass(vaginalWetness,vaginalLooseness,virgin);
 			newVagina.host = this;
@@ -3376,6 +3436,8 @@ public class Creature extends Utils
 				counter += 30;
 			if (hasPerk(PerkLib.MagicalFertility))
 				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17)
+				counter += (15 * perkv1(IMutationsLib.HumanOvariesIM));
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
@@ -3427,6 +3489,7 @@ public class Creature extends Utils
 		public function isTaur():Boolean { return lowerBodyPart.isTaur(); }
 		public function canTaur():Boolean { return lowerBodyPart.canTaur(); }
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
+		public function isSandWorm():Boolean { return lowerBodyPart.type == LowerBody.SANDWORM; }
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
@@ -3434,6 +3497,11 @@ public class Creature extends Utils
 			return perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3 || game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF);
 		}
 		public function isWoodElf():Boolean { return  game.player.isRace(Races.WOODELF); }
+		public function isHellHound():Boolean { return ((faceType == Face.DOG && cor >= 60) && dogCocks() >= 2 && ((tail.type == Tail.DOG ? 1 : 0) ||
+				(lowerBody == LowerBody.DOG) ||
+				(hairColor == "midnight black") ||
+				(furColor == "midnight black")
+		))}
 
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);
@@ -3837,7 +3905,7 @@ public class Creature extends Utils
 
 		public function vaginaDescript(idx:int = 0):String
 		{
-			return Appearance.vaginaDescript(this, 0);
+			return Appearance.vaginaDescript(this, idx);
 		}
 		public function assholeDescript():String{
 			return Appearance.assholeDescript(this);
@@ -4182,6 +4250,7 @@ public class Creature extends Utils
 				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
 			}
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
+			if (hasPerk(PerkLib.SmallFrame)) chance += 6;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) chance += 5;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) chance += 5;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) chance += 10;
@@ -4218,6 +4287,7 @@ public class Creature extends Utils
 				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
 				else chance -= 30;
 			}
+			chance += evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1);
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasPerk(PerkLib.ElementalBody)) {
 				switch (ElementalRace.getElementAndTier(this)) {
@@ -4271,6 +4341,7 @@ public class Creature extends Utils
 	    */
 		public function getEvasionReason(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):String
 		{
+			var evasionReason:String;
 			if (this is Player && Combat.autoHitPlayer()) return null;
 			if (useMonster && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) return "Blind"; //first, handle blind
 			if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
@@ -4286,6 +4357,7 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) generalevasion += 10;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) generalevasion += 15;
 			if (hasPerk(PerkLib.Flexibility)) generalevasion += 6;
+			if (hasPerk(PerkLib.SmallFrame)) generalevasion += 6;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) generalevasion += 5;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) generalevasion += 5;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) generalevasion += 10;
@@ -4296,20 +4368,23 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 20;
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
+			generalevasion += (evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1));
 			// perks
-			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (rand(100) < generalevasion)) return "Evade";
-			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (rand(100) < 6)) return "Flexibility";
-			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (rand(100) < 10)) return "Misdirection";
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (rand(100) < 10)) return "Unhindered";
-			if (hasPerk(PerkLib.JunglesWanderer) && (rand(100) < 35)) return "Jungle's Wanderer";
-			if (hasStatusEffect(StatusEffects.Illusion) && rand(100) < (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 ? 30 : 10)) return "Illusion";
-			if (hasStatusEffect(StatusEffects.Flying) && (rand(100) < flyeavsion)) return "Flying";
-			if (hasStatusEffect(StatusEffects.HurricaneDance) && (rand(100) < 25)) return "Hurricane Dance";
-			if (hasStatusEffect(StatusEffects.BladeDance) && (rand(100) < 30)) return "Blade Dance";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) return "Minimise";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) return "Phasing";
-			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) return "Displacing";
-			return null;
+			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (rand(100) < generalevasion)) evasionReason = "Evade";
+			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (rand(100) < 6)) evasionReason = "Flexibility";
+			if ((hasPerk(PerkLib.SmallFrame) && (rand(100) < 6))) evasionReason = "Small frame";
+			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (rand(100) < 10)) evasionReason = "Misdirection";
+			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (rand(100) < 10)) evasionReason = "Unhindered";
+			if (hasPerk(PerkLib.JunglesWanderer) && (rand(100) < 35)) evasionReason = "Jungle's Wanderer";
+			if (hasStatusEffect(StatusEffects.Illusion) && rand(100) < (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 ? 30 : 10)) evasionReason = "Illusion";
+			if (hasStatusEffect(StatusEffects.Flying) && (rand(100) < flyeavsion)) evasionReason = "Flying";
+			if (hasStatusEffect(StatusEffects.HurricaneDance) && (rand(100) < 25)) evasionReason = "Hurricane Dance";
+			if (hasStatusEffect(StatusEffects.BladeDance) && (rand(100) < 30)) evasionReason = "Blade Dance";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Minimise";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Phasing";
+			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) evasionReason = "Displacing";
+			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) SceneLib.combat.teases.tease();
+			return evasionReason;
 		}
 
 		/**

@@ -29,6 +29,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Camp.Garden;
 import classes.display.SpriteDb;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
@@ -162,7 +163,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(8, "Red Manuscript", pitchRedManuscript);
 			addButton(9, "Crimson Jade", pitchCrimsonJade);
 			addButton(10, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
-			addButton(11, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
+			addButton(11, "TelAdreMagI8", pitchTelAdreMagazineIssue8).hint("Tel'Adre Magazine Issue 8");
+			addButton(12, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -188,6 +190,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
+			if (Garden.IngrediantBagSlot01Cap == 0) addButton(8, "Herb Bag (LowG)", pitchHerbsBag).hint("Herbs Bag (Lowest Grade)");
+			if (Garden.PotionsBagSlot01Cap == 0) addButton(9, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
 			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
@@ -215,7 +219,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				player.gems -= 15;
 				inventory.takeItem(consumables.MANUP_B, potionMenu);
-				statScreenRefresh();
 			}
 		}
 		
@@ -236,7 +239,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				player.gems -= 15;
 				inventory.takeItem(consumables.VITAL_T, potionMenu);
-				statScreenRefresh();
 			}
 		}
 		
@@ -257,7 +259,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				player.gems -= 15;
 				inventory.takeItem(consumables.SMART_T, potionMenu);
-				statScreenRefresh();
 			}
 		}
 		
@@ -278,7 +279,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				inventory.takeItem(consumables.CERUL_P, potionMenu);
 				player.gems -= 75;
-				statScreenRefresh();
 			}
 		}
 		
@@ -319,7 +319,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			{
 				player.gems -= 10;
 				inventory.takeItem(useables.CONDOM, eroticaMenu);
-				statScreenRefresh();
 			}
 		}
 		
@@ -347,7 +346,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				player.gems -= 10;
 				player.createKeyItem("Dangerous Plants", 0, 0, 0, 0);
-				statScreenRefresh();
 			}
 		}
 		
@@ -375,7 +373,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				player.gems -= 1;
 				player.createKeyItem("Traveler's Guide", 0, 0, 0, 0);
-				statScreenRefresh();
 			}
 		}
 		
@@ -405,7 +402,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				player.gems -= 10;
 				dynStats("lib", 2, "lus", 20);
 				player.createKeyItem("Hentai Comic", 0, 0, 0, 0);
-				statScreenRefresh();
 			}
 		}
 		
@@ -428,7 +424,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("You exchange 100 gems for the tome.  Now you can finally enjoy a workout with Cotton!");
 				player.createKeyItem("Yoga Guide", 0, 0, 0, 0);
 				player.gems -= 100;
-				statScreenRefresh();
 			}
 			doNext(bookMenu);
 		}
@@ -457,7 +452,33 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				player.gems -= 100;
 				player.createKeyItem("Tel'Adre Magazine Issue 5", 0, 0, 0, 0);
-				statScreenRefresh();
+			}
+		}
+		
+		private function pitchTelAdreMagazineIssue8():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 8") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 8'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 8th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... err well sometimes just eight to hold your farming tools.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your farming horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue8, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue8():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("Giacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("You consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in.... not cutting any of your fingers when you try to use farming tools. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 8", 0, 0, 0, 0);
 			}
 		}
 		
@@ -485,7 +506,62 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				player.gems -= 100;
 				player.createKeyItem("Tel'Adre Magazine Issue 10", 0, 0, 0, 0);
-				statScreenRefresh();
+			}
+		}
+		
+		private function pitchHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep herbs between your other stuff. Why not you buy this one bag that is much better to keep them in one place? Only 300 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyHerbsBag, miscMenu);
+		}
+		
+		private function buyHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 300) {
+				outputText("\n\nGiacomo sighs, indicating you need 300 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Herbs Bag (Lowest grade).</b>");
+				player.gems -= 300;
+				player.createKeyItem("Herbs Bag (Lowest grade)", 0, 0, 0, 0);
+				Garden.IngrediantBagSlot01Cap = 5;
+				Garden.IngrediantBagSlot02Cap = 5;
+				Garden.IngrediantBagSlot03Cap = 5;
+				Garden.IngrediantBagSlot04Cap = 5;
+				Garden.IngrediantBagSlot05Cap = 5;
+				Garden.IngrediantBagSlot06Cap = 5;
+				doNext(miscMenu);
+			}
+		}
+		
+		private function pitchPotionsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep potions between your other stuff. Why not you buy this one bag that is much better to organize them? Only 300 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyPotionsBag, miscMenu);
+		}
+		
+		private function buyPotionsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 300) {
+				outputText("\n\nGiacomo sighs, indicating you need 300 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Potions Bag (Lowest grade).</b>");
+				player.gems -= 300;
+				player.createKeyItem("Potions Bag (Lowest grade)", 0, 0, 0, 0);
+				Garden.PotionsBagSlot01Cap = 5;
+				Garden.PotionsBagSlot02Cap = 5;
+				Garden.PotionsBagSlot03Cap = 5;
+				Garden.PotionsBagSlot04Cap = 5;
+				Garden.PotionsBagSlot05Cap = 5;
+				Garden.PotionsBagSlot06Cap = 5;
+				doNext(miscMenu);
 			}
 		}
 		
@@ -506,7 +582,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("\n\nYou decided to buy the bag. It looking much better the one you had and checking inside it appears to have bit more space. As part of the deal you hand over current one to Giacomo. <b>You acquired Ore Bag (Lowest grade).</b>");
 				player.gems -= 600;
-				statScreenRefresh();
 				player.removeKeyItem("Tarnished Ore Bag (Lowest grade)");
 				player.createKeyItem("Ore Bag (Lowest grade)", 0, 0, 0, 0);
 				Crafting.BagSlot01Cap = 10;
@@ -536,7 +611,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow into. <b>You acquired the Mysterious Seed.</b>");
 				player.gems -= 30;
-				statScreenRefresh();
 				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 1;
 				player.createKeyItem("Mysterious Seed", 0, 0, 0, 0);
 				doNext(miscMenu);
@@ -560,7 +634,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow intoYou buy the package filled with holiday decorations. Inside are shiny, colorful ornaments, garland, and lights. You can't help but think this will be perfect for decorating the tree back at camp. <b>You acquired Holiday Decorations.</b>");
 				player.gems -= 100;
-				statScreenRefresh();
 				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 7;
 				player.createKeyItem("Decorations", 0, 0, 0, 0);
 				doNext(miscMenu);
@@ -589,7 +662,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over hundred gems and in exchange gives you a torch.");
 				player.gems -= 100;
-				statScreenRefresh();
 				player.createKeyItem("Torch", 0, 0, 0, 0);
 				doNext(miscMenu);
 			}
@@ -612,7 +684,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
 				player.gems -= 100;
-				statScreenRefresh();
 				inventory.takeItem(consumables.W__BOOK, bookMenu);
 			}
 		}
@@ -634,7 +705,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over five hundred gems and in exchange gives you a grey book.");
 				player.gems -= 500;
-				statScreenRefresh();
 				inventory.takeItem(consumables.G__BOOK, bookMenu);
 			}
 		}
@@ -656,7 +726,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a black book.");
 				player.gems -= 100;
-				statScreenRefresh();
 				inventory.takeItem(consumables.B__BOOK, bookMenu);
 			}
 		}
@@ -678,7 +747,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
 				player.gems -= 125;
-				statScreenRefresh();
 				inventory.takeItem(consumables.RMANUSC, bookMenu);
 			}
 		}
@@ -700,7 +768,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a Crimson Jade.");
 				player.gems -= 125;
-				statScreenRefresh();
 				inventory.takeItem(consumables.CRIMS_J, bookMenu);
 			}
 		}
@@ -722,7 +789,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over thousand gems and in exchange gives you an Elementalist’s Tome.");
 				player.gems -= 1000;
-				statScreenRefresh();
 				inventory.takeItem(weaponsrange.E_TOME_, bookMenu);
 			}
 		}
@@ -751,7 +817,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(eroticaMenu);
 				player.gems -= 20;
 				player.createKeyItem("Dildo", 0, 0, 0, 0);
-				statScreenRefresh();
 			}
 		}
 		
@@ -779,7 +844,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.createKeyItem("Self-Stimulation Belt", 0, 0, 0, 0);
 			doNext(eroticaMenu);
 			player.gems -= 30;
-			statScreenRefresh();
 		}
 		
 		private function pitchAllNaturalSelfStimulationBelt():void {
@@ -816,7 +880,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.createKeyItem("All-Natural Self-Stimulation Belt", 0, 0, 0, 0);
 			doNext(eroticaMenu);
 			player.gems -= 40;
-			statScreenRefresh();
 		}
 
 		private function pitchOnahole():void {
@@ -843,7 +906,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.createKeyItem("Plain Onahole", 0, 0, 0, 0);
 			doNext(eroticaMenu);
 			player.gems -= 20;
-			statScreenRefresh();
 		}
 
 		private function pitchDeluxeOnahole():void {
@@ -870,7 +932,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.createKeyItem("Deluxe Onahole", 0, 0, 0, 0);
 			doNext(eroticaMenu);
 			player.gems -= 50;
-			statScreenRefresh();
 		}
 		
 		private function pitchAllNaturalOnahole():void {
@@ -904,7 +965,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.createKeyItem("All-Natural Onahole", 0, 0, 0, 0);
 			doNext(eroticaMenu);
 			player.gems -= 150;
-			statScreenRefresh();
 		}
 		
 		private function pitchDualStimulationBelt():void {
@@ -931,7 +991,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("You are a bit dubious at the pleasure it could offer you, but it would be better than being raped by the creatures constantly... maybe to even work out some excess lusts... hesitantly, you reach into your bag and grab 50 gems, handing it to him.  He greedily snatches it from your palm and hands you with the belt with a smile.  \"<i>I promise you won't be disappointed.</i>\"  He counts the gems and waves goodbye.\n\n(<b>Dual Belt acquired!</b>)");
 				player.createKeyItem("Dual Belt", 0, 0, 0, 0);
 				player.gems -= 50;
-				statScreenRefresh();
 			}
 			doNext(eroticaMenu);
 		}
@@ -951,7 +1010,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.removeStatusEffect(StatusEffects.Infested);
 			dynStats("lus", -99, "cor", -4);
 			player.gems -= 175;
-			statScreenRefresh();
 			inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
 		}
 		

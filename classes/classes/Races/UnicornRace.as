@@ -120,7 +120,7 @@ public class UnicornRace extends Race{
 				.withExtraBonuses(
 						"Mana & SF recovery +5%",
 						"Combat HP regen +150",
-						"Regenerate Spell +200%"
+						"Healing / Regenerate Spell +200% for Alicorn / Nightmare"
 				)
 				.end()
 		
@@ -138,7 +138,7 @@ public class UnicornRace extends Race{
 				.withExtraBonuses(
 					"Mana & SF recovery +5%",
 					"Combat HP regen +150",
-					"Regenerate Spell +200%"
+					"Healing / Regenerate Spell +200% for Alicorn / Nightmare"
 				)
 				.end()
 	}

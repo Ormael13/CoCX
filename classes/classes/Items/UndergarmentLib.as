@@ -15,6 +15,8 @@ public final class UndergarmentLib extends ItemConstants
 		public static const NOTHING:Undergarment = new Nothing();
 		
 		//Upper
+		public const BN_TOP:Undergarment = new Undergarment("BN. Top", "Neko Top", "black Neko leather top", "a black neko leather top", UT_TOP, 500, 0, 0, 2, "A bra made of leather black as night. Makes one slimmer than it appears, increasing evasion. Stronger at night. \n\nType: Undergarment (Upper)")
+				.withBuffs({'evade': +2}) as Undergarment;
 		public const C_BRA  :Undergarment = new Undergarment("C. Bra ", "C. Bra", "comfortable bra", "a pair of comfortable bra", UT_TOP, DEFAULT_VALUE, 0, 0, 0, "A generic pair of bra. \n\nType: Undergarment (Upper)");
 		public const C_SHIRT:Undergarment = new Undergarment("C.Shirt", "C. Shirt", "comfortable shirt", "a comfortable shirt", UT_TOP, DEFAULT_VALUE, 0, 0, 0, "A generic shirt. \n\nType: Undergarment (Upper)");
 		public const COW_BRA:Undergarment = new Undergarment("Cow Bra", "Cow Bra", "cow girl bra", "a cow girl bra", UT_TOP, 1000, 1, 1, 3, "This bra look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate as well as the efficiency of Milk blast. Comes with the bonus of accomodating just any breast size and letting milk flow through! \n\nType: Undergarment (Upper)");
@@ -32,6 +34,8 @@ public final class UndergarmentLib extends ItemConstants
 		public const STSHIRT:Undergarment = new Undergarment("STShirt", "S.T.Shirt", "soul training shirt", "a soul training shirt", UT_TOP, 200, 0, 0, 0, "A shirt made from fabric capable to help train soulforce. \n\nType: Undergarment (Upper)");
 		public const TECHBRA:TechnomancerBra = new TechnomancerBra();
 		//Lower
+		public const BN_SKIRT:Undergarment = new Undergarment("BN. SKIRT", "Neko Bottom", "black Neko bottom", "a black Neko leather panty", UT_BOTTOM, 500, 0, 0, 2, "A panty made of leather black as night. Makes one slimmer than it appears, increasing evasion. Stronger at night. \n\nType: Undergarment (Lower)")
+				.withBuffs({'evade': +2}) as Undergarment;
 		public const C_LOIN :Undergarment = new Undergarment("C. Loin", "C. Loin", "comfortable loincloth", "a pair of comfortable loincloth", UT_BOTTOM, DEFAULT_VALUE, 0, 0, 0, "A generic pair of loincloth. \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const C_PANTY:Undergarment = new Undergarment("C.Panty", "C. Panties", "comfortable panties", "a pair of comfortable panties", UT_BOTTOM, DEFAULT_VALUE, 0, 0, 0, "A generic pair of panties. \n\nType: Undergarment (Lower)");
 		public const COW_PANTY:Undergarment = new Undergarment("Cow Panty", "Cow Panty", "cow girl panties", "a pair of Cow girl panties", UT_BOTTOM, 1000, 1, 1, 3, "These panties look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate. \n\nType: Undergarment (Lower)");

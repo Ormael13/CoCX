@@ -59,7 +59,6 @@ public class YourCabin extends DungeonAbstractContent
 				if (player.hasKeyItem("Hentai Comic") >= 0) books++;
 				if (player.hasKeyItem("Yoga Guide") >= 0) books++;
 				if (player.hasKeyItem("Carpenter's Toolbox") >= 0) books++; //Carpenter's Guide is bundled in your toolbox!
-				if (player.hasKeyItem("Stone Building Guide") >= 0) books++;
 				if (player.hasKeyItem("Izma's Book - Combat Manual") >= 0) books++;
 				if (player.hasKeyItem("Izma's Book - Etiquette Guide") >= 0) books++;
 				if (player.hasKeyItem("Izma's Book - Porn") >= 0) books++;
@@ -184,7 +183,7 @@ public class YourCabin extends DungeonAbstractContent
 			menu();
 			clearOutput();
 			outputText("What furniture would you like to construct?\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] == 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] == 0)
 			{
 				outputText("<b>Your cabin is empty.</b>\n\n");
@@ -209,7 +208,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureBedPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a bed? (Cost: 45 nails and 25 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 40) {
@@ -252,7 +251,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureNightstandPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a nightstand? (Cost: 20 nails and 10 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
@@ -295,7 +294,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureDresserPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a dresser? (Cost: 50 nails and 30 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 60) {
@@ -339,7 +338,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureTablePrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a table? (Cost: 20 nails and 15 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 50) {
@@ -382,7 +381,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureChairPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a chair? (Cost: 40 nails and 10 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {
@@ -433,7 +432,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureBookshelfPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a bookshelf? (Cost: 75 nails and 25 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 50) {
@@ -479,7 +478,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureDeskPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a desk? (Cost: 60 nails and 20 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 60) {
@@ -523,7 +522,7 @@ public class YourCabin extends DungeonAbstractContent
 		private function constructFurnitureChairForDeskPrompt():void {
 			clearOutput();
 			outputText("Would you like to construct a chair? (Cost: 40 nails and 10 wood.)\n\n");
-			camp.campUpgrades.checkMaterials();
+			SceneLib.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (player.fatigue <= player.maxFatigue() - 20) {

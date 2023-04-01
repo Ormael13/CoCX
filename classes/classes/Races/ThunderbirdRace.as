@@ -44,6 +44,8 @@ public class ThunderbirdRace extends Race {
 				.wingType(Wings.FEATHERED_LARGE, +4)
 				.legType(LowerBody.HARPY, +1)
 				.tailType(Tail.THUNDERBIRD, +1, -1000)
+				.tailType(NOT(Tail.KIRIN), 0, -1000)
+				.tailType(NOT(Tail.RAIJU), 0, -1000)
 				.rearType(RearBody.RAIJU_MANE, +1)
 				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO, +1)
 				.hairType(Hair.STORM, +1, -1000)
@@ -54,6 +56,7 @@ public class ThunderbirdRace extends Race {
 		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		
 		buildTier(16, "thunderbird")
+				.requireWingType(Wings.FEATHERED_LARGE)
 				.buffs({
 					"tou.mult": -0.20,
 					"spe.mult": +1.20,
@@ -62,6 +65,7 @@ public class ThunderbirdRace extends Race {
 				.end();
 		
 		buildTier(21, "greater thunderbird")
+				.requirePreviousTier()
 				.buffs({
 					"tou.mult": -0.25,
 					"spe.mult": +1.55,

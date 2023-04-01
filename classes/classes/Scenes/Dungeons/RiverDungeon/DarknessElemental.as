@@ -188,8 +188,6 @@ public class DarknessElemental extends Monster
 			this.a = "the ";
 			this.plural = false;
 			this.lustVuln = 0;
-			this.drop = new ChainedDrop()
-					.add(useables.ELSHARD, 1);
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.weaponName = "fists";
@@ -197,6 +195,17 @@ public class DarknessElemental extends Monster
 			this.armorName = "skin of the darkness";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DarknessNature, 0, 0, 0, 0);
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+				this.drop = new WeightedDrop()
+					.add(useables.ELCRYST, 3)
+					.add(useables.LELSHARD, 1);
+			}
+			else {
+				this.drop = new WeightedDrop()
+					.add(useables.ELSHARD, 3)
+					.add(useables.LELSHARD, 1);
+			}
 			checkMonster();
 		}
 		

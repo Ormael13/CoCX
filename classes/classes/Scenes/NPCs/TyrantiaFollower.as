@@ -762,6 +762,7 @@ public function AmilyAnger():void {
 	flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+	if (player.pregnancy2Type == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancy2Incubation, 1);
 	doNext(TyrantiaReactions2);
 }
 public function AmilyExplain():void {
@@ -1079,12 +1080,7 @@ public function TyrantiaFuck():void {
 	outputText("You gather up the pieces of your [armor] scattered around the cave, and turn back to watch as you dress. You watch as Tyrantia slowly, methodically slides the steel plates over her spider half, then covers herself. You watch as the gentle giant of a lover you know slowly covers herself back up, becoming the imposing, frankly terrifying figure you saw on the battlefield.\n\n");
 	outputText("<i>“I know, I like this less, too.”</i> Comes her low voice, her fangs menacingly poking out from her helm. <i>“But it’s more practical, these days.”</i> You pull yourself from the cave, waving goodbye to the Drider woman. You roll your shoulders, forcing your aching legs to work as you head back to camp.\n\n");
 	if (TyrantiaFollowerStage >= 6) {
-		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
-		else {
-			TyrantiaFollowerStage = 7;
-			DriderTown.TyrantiaPregnancy = 0;
-			if (rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
-		}
+		knockUpTyrantia();
 	}
 	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
@@ -1132,12 +1128,7 @@ public function TyrantiaHugFuck():void {
 	outputText("<i>“Umm...I just realized something.”</i> She says, blushing. You tilt your head, confused, and she scratches her head. <i>“...We left our clothes back at camp.\" </i> You facepalm, realizing that neither of you thought about the aftermath of your little sexcapade.\n\n");
 	outputText("<i>“Well...I know how we could keep ourselves...Kind of covered.”</i> She grins, putting you down. <i>“But it might be a bit...Stimulating.”</i>\n\n");
 	if (TyrantiaFollowerStage >= 6) {
-		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
-		else {
-			TyrantiaFollowerStage = 7;
-			DriderTown.TyrantiaPregnancy = 0;
-			if (rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
-		}
+		knockUpTyrantia();
 	}
 	menu();
 	addButton(1, "Yes", TyrantiaHugFuckCover);
@@ -1167,7 +1158,7 @@ public function TyrantiaCavFuck():void {
 	outputText("You smile up at the giant Drider, telling her that you remember a particular fun fact about Drider Biology, and you’re curious about how she’d handle it. <i>“Oh yeah?”</i> She tilts her head. <i>“Well, you’ve got me curious, [name], so why don’t you tell me what your idea is?”</i>\n\n");
 	outputText("You ask her if she trusts you, and she gives you an almost insulted look back. <i>“[name], if I didn’t trust you, I wouldn’t keep your [ass] around.”</i> She leans down, patting you on the head. <i>“Come on, what’s your idea?”</i>\n\n");
 	outputText("You tell her it’d be easier to show her, and you ask her to lower her Drider body to the ground. She complies, still watching you as you climb onto her Drider half. You gently shift your weight on her, shimmying forward so you’re sitting right behind her upper body.\n\n");
-	outputText("You wrap your arms around her waist, pulling yourself in, and she hums, apparently not minding the feeling of you on her like this. You slide your [cock] out of your [lowergarment], and apparently she hasn’t noticed yet. She stands slowly, letting you adjust, and she chuckles, a little <i>“Tk-tk-tk”</i> sound escaping her lips.\n\n");
+	outputText("You wrap your arms around her waist, pulling yourself in, and she hums, apparently not minding the feeling of you on her like this. You slide your [cock] out, and apparently she hasn’t noticed yet. She stands slowly, letting you adjust, and she chuckles, a little <i>“Tk-tk-tk”</i> sound escaping her lips.\n\n");
 	outputText("<i>“Was that all, [name]? Did you just want a ride on the spider express-?!”</i> You slide your [cock] forward, into the plump curves of ass where her womanly half meets the Drider, and without warning, you prod at the entrance of her rear.\n\n");
 	outputText("<i>“...Fucking...Cavalry.”</i> She turns her upper body to face you, and her five working eyes are lit up. <i>“Why the fuck didn’t I think of that?!”</i> You smile, bringing a palm to her cheek, and you propose a game. She raises an eyebrow, and you continue. You want her to run, to leap and jump as much as she can...and you’ll be on her back, your dick inside her ass. For emphasis, you wrap your legs around her womanly waist, sinking your [cock] an inch or so into her warm, somewhat moist asshole.\n\n");
 	outputText("<i>“Hooooly...Fuuuck.”</i> She moans. <i>“That’s...That’s a feeling, alright.”</i> You jokingly tell her that you should make it a contest. You get to tease her, your cock in her ass, and she can’t stop running, but can make it as rough on your ass as she wants. Whoever lasts longer wins.\n\n");
@@ -1227,6 +1218,13 @@ private function chanceToFail():Number {
 	chance += Math.min(player.cumQ() / 25,40);
 	chance += Math.min(player.virilityQ() * 100, 50);
 	return chance;
+}
+private function knockUpTyrantia():void {
+	if (DriderTown.TyrantiaPregnancy == 0 && rand(100) < chanceToFail()) {
+		DriderTown.TyrantiaPregnancy = 72;
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Tyrantia is pregnant!</b>");
+	}
+	if (TyrantiaFollowerStage >= 7) TyrantiaFollowerStage = 7;
 }
 
 public function TyrantiaAtCamp():void {
@@ -1290,6 +1288,7 @@ public function itemImproveMenuCorrupt():void {
 		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
+		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
 		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
 		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
 		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],

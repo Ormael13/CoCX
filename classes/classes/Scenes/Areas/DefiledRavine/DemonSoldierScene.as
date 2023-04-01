@@ -6,6 +6,8 @@ package classes.Scenes.Areas.DefiledRavine {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
+import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Races;
 
@@ -16,7 +18,7 @@ public class DemonSoldierScene extends BaseContent {
         if (flags[kFLAGS.DEMON_SOLDIERS_ENCOUNTERED] < 1) {
             outputText("As you pick your way through the terrain a shadow passes overhead, looking up you spot a large flying shape silhouetted against the sun. At first you think it might be some sort of bird, but as the shape swoops closer you see that the wings are more like those of a bat, with a long, spaded tail trailing out behind. Uh-oh...");
             outputText("\n\nThe Demon lands in front of you with an almost liquid grace. [monster He] folds [monster his] wings behind [monster his] back, and [monster his] tail whips back and forth as a truly malevolent grin splits the infernal creature's face.");
-            if (!player.isRace(Races.DEMON, 1)) outputText("<i>\"Well well, it looks like I've found some sport to liven up a dull patrol!\"</i>");
+            if (!player.isAnyRaceCached(Races.DEMON, Races.IMP)) outputText("<i>\"Well well, it looks like I've found some sport to liven up a dull patrol!\"</i>");
             else outputText("\"<i>Hmm... you may look like one of us, but I can smell your soul from here; I shall enjoy fucking it out of you!\"</i>");
             outputText(" The " + (monster as DemonSoldier).demonTitle(0) + " purrs. \n\nThe demon draws [monster his] wickedly serrated scimitar and adopts an aggressive combat stance. It's a fight! ");
             flags[kFLAGS.DEMON_SOLDIERS_ENCOUNTERED] = 1;
@@ -189,17 +191,28 @@ public class DemonSoldierScene extends BaseContent {
     private function killTheSoldier():void {
         clearOutput();
         outputText("You make quick work of the demon before hauling the now-lifeless corpse away.");
+        if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
         flags[kFLAGS.DEMON_SOLDIERS_KILLED]++;
         monster.additionalXP += 100; //YOU WON! You earned 20 EXP. Your LOVE increased.
         player.dynStats("cor", -1);
-        //Additional loot!
+		menu();
+		addButton(1, "Leave", killTheSoldierLeave);
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", killTheSoldierHarvest);
+		else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
+    }
+	private function killTheSoldierLeave():void {
+		//Additional loot!
         if (rand(8) == 0) {
             outputText("\n\nAs you're about to " + (player.isNaga() ? "slither" : "walk") + " away in satisfaction, you spot a glowing, pink crystal and a closer examination reveals it to be a lethicite. Why the demon hasn't even eaten it remains a mystery but either way, you're in luck to have recovered it before it gets eaten (and irreversibly absorbed) and you pocket it. ");
-            inventory.takeItem(useables.LETHITE, cleanupAfterCombat);
+            inventory.takeItem(consumables.LETHITE, cleanupAfterCombat);
         }
         cleanupAfterCombat();
-    }
-
+	}
+	private function killTheSoldierHarvest():void {
+		SceneLib.defiledravine.demonScene.harvestDemonBones();
+		killTheSoldierLeave();
+	}
+	
     public function defeatedBySoldier(hpVictory:Boolean):void {
         clearOutput();
         outputText("Lying prostrate at the Demon Soldier's feet, you are barely even aware of the " + (monster as DemonSoldier).demonTitle() + player.clothedOrNakedLower("stripping off your " + player.armorDescript(), "looming even closer") + ". [monster He] takes the opportunity to run [monster his] hands across your helpless body, murmuring to [monster him]self, \"<i>Very nice, I can certainly work with this...</i>\"");

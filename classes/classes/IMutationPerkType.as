@@ -84,11 +84,13 @@ public class IMutationPerkType extends PerkType
 		private var _maxLvl:int;
 		private var _slot:String;
 		private var _pBuffs:Object;
+		private var _trueVariant:Boolean;
 
-		public function IMutationPerkType(id:String, name:String, slot:String, maxLvl:int) {
+		public function IMutationPerkType(id:String, name:String, slot:String, maxLvl:int, trueVariant:Boolean = false) {
 			super(id, name, name, name, false);
 			this._maxLvl = maxLvl;
 			this._slot = slot;
+			this._trueVariant = trueVariant;
 			(MutationsBySlot[slot] ||= []).push(this);
 		}
 
@@ -100,15 +102,26 @@ public class IMutationPerkType extends PerkType
 			return _slot;
 		}
 
-		public function pReqs():void{
+		public function pReqs(pCheck:int = -1):void{
 		}
 
-		public function buffsForTier(pTier:int):Object {
+		public function buffsForTier(pTier:int, target:Creature):Object {
 			return _pBuffs;
 		}
 
+		public function get trueMutation():Boolean{
+			return _trueVariant;
+		}
+		public function set trueMutation(isTrue:Boolean):void{
+			_trueVariant = isTrue;
+		}
+		public function evolveText():String {
+			var descS:String = "";
+			return descS;
+		}
+
 		public function explainBuffs(pTier:int):String {
-			var tempObj:Object = buffsForTier(pTier);
+			var tempObj:Object = buffsForTier(pTier, player);
 			var res:String = "";
 			for (var key:String in tempObj)
 				res += StatUtils.explainBuff(key, tempObj[key]);
@@ -116,7 +129,14 @@ public class IMutationPerkType extends PerkType
 		}
 
 		public function pBuffs(target:Creature = null):Object{
-			return buffsForTier(currentTier(this, (target == null) ? player : target));
+			var target2:Creature =(target == null) ? player : target;
+			return buffsForTier(currentTier(this, target2), target2);
+		}
+
+		public function trueMutationBuffs(statStr:String, pTier:int, racePoint:int):Object{ //Probably wanna pass "xxx.bonus"
+			var pBuffs:Object = {};
+			pBuffs[statStr] = ((30 + pTier*15)*racePoint)
+			return pBuffs
 		}
 
 		/**
@@ -143,6 +163,7 @@ public class IMutationPerkType extends PerkType
 		 * @param target	Type: Creature. 					Takes Player/enemy class as arg. Indicates if the mutation goes to Player or to an NPC.
 		 * @param nextFunc	Type: *(String/function). 			Takes "none"/ function as arg. If NPC, put "none", else put in next function it should go to.
 		 * @param pTier		Type:Int. Takes perkTier as arg. 	If target is NPC, you can also directly assign a tier to them, to skip having to add the perk in x times.
+		 * Note: V1 is used to track Mutation Level, V2 has been taken for mutation self-evolution tracking, V3 is used for verifying if player has the true variant of the Mutation.
 		 */
 		public function acquireMutation(target:Creature, nextFunc:*, pTier:int = 1):void{
 			var mutations:IMutationPerkType = this;
@@ -161,10 +182,18 @@ public class IMutationPerkType extends PerkType
 				}
 				if (!target.hasPerk(mutations)) {	//No Perk, set to 1 or pTier.
 					target.createPerk(mutations, pTier,0,0,0);
+					if (target == player) {
+						if (mutations.trueMutation) EngineCore.outputText(mutations.evolveText());
+						EngineCore.outputText(" <b>Acquired " + mutations.name() + "!</b>");
+					}
 				} else if (pTier > 1) {				//Perk exists, but pTier is > 1.
 					target.setPerkValue(mutations, 1, pTier);
 				} else {							//Perk is incremented by 1.
 					target.setPerkValue(mutations,1,target.perkv1(mutations) + 1);
+					if (target == player) {
+						if (mutations.trueMutation) EngineCore.outputText(mutations.evolveText());
+						EngineCore.outputText(" <b>Acquired " + mutations.name() + "!</b>");
+					}
 				}
 				setBuffs();
 				//trace("Perk applied.");

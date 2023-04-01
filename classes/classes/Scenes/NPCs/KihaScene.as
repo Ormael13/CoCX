@@ -548,8 +548,7 @@ private function victoryDickKiha():void {
 
 	outputText("You advance on her helpless form and repeat your actions, raising her leg and shoving her tail aside.  She resists, but not as fiercely as before.  Her tail is easily kept at bay while you lower yourself to align your " + hipDescript() + " with the Kiha's moist cunt.  The heat rolling out of her loins is unreal.  Her pussy seems to fog the air with its combination of warmth and wetness, and as you press your " + cockDescript(x) + " closer, it feels almost like a woman is about to give you head, with her hot breath washing over your genitals.\n\n");
 	if (sceneHunter.dickSelect) {
-		outputText("<b>You could try to fuck her ass too. ")
-		menu();
+		outputText("<b>You could try to fuck her ass too.</b>>")
 	}
 	sceneHunter.selectSingleMulti(singleF, multiF, "area", monster.vaginalCapacity(), monster.analCapacity());
 

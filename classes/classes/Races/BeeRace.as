@@ -7,6 +7,7 @@ import classes.PerkLib;
 import classes.Race;
 import classes.StatusEffects;
 import classes.Transformations.GradualTransformation;
+import classes.VaginaClass;
 
 public class BeeRace extends Race {
 	public static const BeeHairColors:/*String*/Array = ["shiny black", "brown", "yellow"];
@@ -36,27 +37,29 @@ public class BeeRace extends Race {
         /*Perks*/		"Human"];
 
 
-    public const TfList:/*PossibleEffect*/Array = [
-		game.transformations.HairChangeColor(BeeHairColors),
-		game.transformations.BreastRowsRemoveToOne,
-		game.transformations.AntennaeBee,
-		game.transformations.EyesSandTrap,
-		game.transformations.HornsNone,
-		game.transformations.SkinPatternBeeStripes,
-		game.transformations.LowerBodyBee,
-		game.transformations.ArmsBee,
-		game.transformations.NipplesPerBreastOne,
-		game.transformations.OvipositorBee,
-		game.transformations.TailBee,
-		new GradualTransformation("BeeWings", [
+    public function get TfList():/*PossibleEffect*/Array {
+		return [
+			game.transformations.HairChangeColor(BeeHairColors),
+			game.transformations.BreastRowsRemoveToOne,
+			game.transformations.AntennaeBee,
+			game.transformations.EyesSandTrap,
+			game.transformations.HornsNone,
+			game.transformations.SkinPatternBeeStripes,
+			game.transformations.LowerBodyBee,
+			game.transformations.ArmsBee,
+			game.transformations.NipplesPerBreastOne,
+			game.transformations.OvipositorBee,
+			game.transformations.TailBee,
+			new GradualTransformation("BeeWings", [
 				game.transformations.WingsNone,
 				game.transformations.WingsBeeSmall,
 				game.transformations.WingsBeeLarge
-		]),
-		game.transformations.GillsNone,
-		game.transformations.CockChangeType(CockTypesEnum.BEE, false),
-		game.transformations.RearBodyNone
-	];
+			]),
+			game.transformations.GillsNone,
+			game.transformations.CockChangeType(CockTypesEnum.BEE, false),
+			game.transformations.RearBodyNone
+		];
+	}
 	
 	public function BeeRace(id:int) {
 		super("Bee", id, []);//RaceBody);
@@ -86,10 +89,7 @@ public class BeeRace extends Race {
 				.noRearBody(+1)
 				.skinCoatPattern(Skin.PATTERN_BEE_STRIPES, +1)
 				.hasPerk(PerkLib.BeeOvipositor, +1)
-				.customRequirement("","vagina or bee cock",
-						function (body:BodyData):Boolean {
-							return body.hasVagina || body.player.beeCocks() > 0
-						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.BEE, VaginaClass.BEE,1)
 				.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden, +2);
 		addConditionedScores(
 				function(body:BodyData):Boolean {

@@ -20,7 +20,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
                 descS += "Your agility is increased, and can be even further boosted if you have natural armour or thick skin";
             }
             if (pTier >= 3){
-                descS += ", (+30% max core spe as phantom spe)";
+                descS += ", +30% max core spe as phantom spe";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -43,9 +43,9 @@ public class MantislikeAgilityMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -63,7 +63,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             return pBuffs;
         }

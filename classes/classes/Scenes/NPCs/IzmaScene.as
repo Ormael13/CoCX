@@ -1275,10 +1275,10 @@ private function submitToLakeIzma():void {
 		if (voluntary) {
 			outputText("Leaning down, she gives you a small peck on the lips, then flops down beside you.  She reaches over and pulls you over, letting you rest your head against her pillow-like DD-cup breasts. When you are recovered, she helps you up.  \"<i>You're too good to your inferior, [name]... but that's what I love about you so much.</i>\"  She smirks, giving you a decidedly unchaste kiss and a smack on the ass before opening her locker.\n\n");
 			//180 for "not visible", I assume. -SH
-			if (player.pregnancyIncubation == 00 || player.pregnancyIncubation > 180) outputText("Hauling out a plant, she gingerly removes a leaf and offers it to you.  \"<i>Could you take this please?  It's an anti-pregnancy herb.  I'd be happy to have babies with you someday... but I want to earn your acknowledgment as a mate first.</i>\"  Smiling a bit at how old-fashioned she seems, you take the leaf out of her hands and eat it.");
+			if (!player.isPregnant() || player.hasNonVisiblePregnancy()) outputText("Hauling out a plant, she gingerly removes a leaf and offers it to you.  \"<i>Could you take this please?  It's an anti-pregnancy herb.  I'd be happy to have babies with you someday... but I want to earn your acknowledgment as a mate first.</i>\"  Smiling a bit at how old-fashioned she seems, you take the leaf out of her hands and eat it.");
 		} else {
 			outputText("\"<i>That's how shark people have sex,</i>\" she tells you.  \"<i>Of course, it's different if you're the one who won... but you'll need to come back again and beat me if you want to see what that's like.</i>\"  She leans down and gives you a small peck on the lips, then drops the tigershark tooth beside you.");
-			if(player.pregnancyIncubation == 0 || player.pregnancyIncubation > 180) outputText("  From her oak chest she fetches an odd leaf, which she pushes past your lips.  \"<i>Birth control herbs.  No way I'm giving kids to someone who's not my mate,</i>\" Izma says, making sure you swallow the plant before diving into the water, most likely to clean herself off.\n\n");
+			if(!player.isPregnant() || player.hasNonVisiblePregnancy()) outputText("  From her oak chest she fetches an odd leaf, which she pushes past your lips.  \"<i>Birth control herbs.  No way I'm giving kids to someone who's not my mate,</i>\" Izma says, making sure you swallow the plant before diving into the water, most likely to clean herself off.\n\n");
 
 			outputText("You remain where you are, waiting for the strength to flow into your limbs and for some of the abundance of sexual fluids to vacate your " + vaginaDescript(0) + " before you dress yourself and leave.  You had no idea that Izma could take charge in such a fierce manner... but, at the same time, you find yourself actually liking it.  A part of you wonders if you could see her that way again...");
 			sharedSubmissionEnding();
@@ -1320,7 +1320,7 @@ private function submitToLakeIzma():void {
 		outputText("Within minutes, Izma gives one final, powerful thrust and roars loudly, cum pumping into your womb and spraying out onto the sands.  " + SMultiCockDesc() + " twitches and pulses, ready to blow.  Izma quickly takes hold and points " + (player.cockTotal() == 1 ? "it" : "them") + " toward your face, stroking you to your own climax.  Jets of your own cum splatter across your face and body as you writhe, protesting. \"<i>Tch, you really thought I'd let you cum on ME?  Maybe if you actually managed to beat me I'd give you the honor,</i>\" Izma says, pulling free with a loud *SCHLICK* sound.  ");
 		player.sexReward("cum","Vaginal");
 		if (voluntary) {
-			if(player.pregnancyIncubation == 0 || player.pregnancyIncubation > 150) {
+			if(!player.isPregnant() || player.hasNonVisiblePregnancy()) {
 				outputText("She releases your [feet], allowing your [butt] to hit the sand with a plop, and gets to work redressing while you lie still.  She returns with an anti-pregnancy herb in her hands, and then flips a leaf into her mouth. Before you can wonder why she did that, she bends down and kisses you fiercely, her tongue pushing it past your lips and down your throat.");
 
 				outputText("\"<i>I'd be happy to make some babies with you... but <b>after</b> you accept me as a mate.\"</i>  She smirks, giving you a second, decidedly unchaste kiss before she helps you up.  You dress yourself and head back to camp feeling very sated.");
@@ -1329,7 +1329,7 @@ private function submitToLakeIzma():void {
 			doNext(camp.returnToCampUseOneHour);
 		} else {
 			outputText("She releases your [feet], allowing your [butt] to hit the sand with a plop, and gets to work redressing while you lie still.");
-			if(player.pregnancyIncubation == 0 || player.pregnancyIncubation > 150) {
+			if(!player.isPregnant() || player.hasNonVisiblePregnancy()) {
 				outputText("  Moving over to her oak chest, she returns with a strange leaf in her hands, which she pushes past your lips.\n\n");
 
 				outputText("\"<i>Anti-pregnancy herb.  Can't have someone bearing my litter if they're not my mate, can I?</i>\"  Izma explains, moving over to the shoreline.  ");
@@ -1349,8 +1349,7 @@ public function izmaFollowerMenu():void {
 		mishapsLunaIzma();
 		return;
 	}
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
-	{
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 	//Izma pops 'em out!
 		if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 			IzmaPoopsBabies();
@@ -1378,10 +1377,8 @@ public function izmaFollowerMenu():void {
 			default:
 		}
 	}
-	else
-	{
+	else {
 		outputText("Izma smiles and puts away her book at your approach.");
-
 		outputText("\n\n\"<i>What can I do for you, Alpha?</i>\"");
 	}
 	if (flags[kFLAGS.IZMA_BROFIED] > 0) {
@@ -1421,14 +1418,19 @@ public function izmaFollowerMenu():void {
 			.disableIf(flags[kFLAGS.IZMA_BROFIED] == -1 && !sceneHunter.other,
 				"You can't do that again.\n\n<b>Unless you enable something in SceneHunter.</b>");
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) {
-		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant) addButton(10, "Farm Work", sendToFarm);
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "Izma" && flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "Izma" && flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "Izma") addButton(10, "Farm Work", sendToFarm);
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(10, "Go Camp", backToCamp);
 	}
-	addButton(11,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu)
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
+		if (camp.FisheryWorkersCount() < camp.FisheryMaxWorkersCount() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) addButton(11, "Fishery Work", sendToFishery);
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Izma" || flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Izma" || flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Izma") addButton(11, "Stop Work", backFromFishery);
+	}
+	else addButtonDisabled(11, "???", "You need to have functional fishery first.");
+	addButton(12,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu)
 		.disableIf(flags[kFLAGS.IZMA_NO_COCK], "She needs a cock for this!")
 		.disableIf(!latexGirl.latexGooFollower() || flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0, "", "???");
 	if (valeria.valeriaFluidsEnabled())
-		addButton(12,"Valeria",izmaValeriaSubmenu)
+		addButton(13,"Valeria",izmaValeriaSubmenu)
 			.disableIf(flags[kFLAGS.IZMA_NO_COCK], "She needs a cock for this!");
 	addButton(14, "Back", flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] ? SceneLib.farm.farmCorruption.rootScene : camp.campLoversMenu);
 }
@@ -1437,15 +1439,10 @@ private function sendToFarm():void
 {
 	clearOutput();
 	izmaSprite();
-
 	outputText("You tell your beta that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Izma’s brow furrows as she takes this in.");
-
 	outputText("\n\n\"<i>If you say so, alpha. It’ll be nice to be near the lake again, but... have I done something wrong?</i>\"");
-
 	outputText("\n\n\"<i>Not at all,</i>\" you reply. \"<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>\" This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
-
 	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labor and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
-
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 1;
 	doNext(playerMenu);
 }
@@ -1454,14 +1451,32 @@ private function backToCamp():void
 {
 	clearOutput();
 	izmaSprite();
-
 	outputText("You tell her to head back to camp; she will be more use to her alpha there.");
-
 	outputText("\n\n\"<i>Whatever you say.</i>\" She grins and wrinkles her nose. \"<i>It was nice to be by the lake again, but I’m glad to get out of here: farm work isn't exactly stimulating.</i>\" You leave Izma to pack up her things and go.");
-
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
-
 	doNext(SceneLib.farm.farmCorruption.rootScene);
+}
+
+private function sendToFishery():void
+{
+	clearOutput();
+	izmaSprite();
+	outputText("Information Noona here: So you bossy today and asked Izma to work at fishery.... very clever.");
+	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "Izma";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "Izma";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "Izma";
+	doNext(izmaFollowerMenu);
+}
+
+private function backFromFishery():void
+{
+	clearOutput();
+	izmaSprite();
+	outputText("Information Noone reminds your sub tigershark no longer work at fishery.");
+	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "";
+	doNext(izmaFollowerMenu);
 }
 
 //Get a tiger shark tooth
@@ -1605,6 +1620,7 @@ private function izmaPreg():void {
 	//PREGGO CHANCES
 	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 && !pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_IZMA);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Izma is pregnant!</b>");
 	}
 }
 
@@ -2252,7 +2268,7 @@ private function IzmaPoopsBabies():void {
 }
 
 //PC gives birth (alone): used if PC gets pregnant from vaginal and refusing herbs before recruiting Izma or possibly later if a way to force her out is written
-public function pcPopsOutASharkTot():void {
+public function pcPopsOutASharkTot(womb:int = 0):void {
 	outputText("\n");
 	//If Izma is NOT a follower
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] != 1) {
@@ -2293,7 +2309,7 @@ public function pcPopsOutASharkTot():void {
 
 		outputText("You point out it's the least she can do, seeing as how she's the one who put this thing in you in the first place, then turn your attention back fully to the task of bringing your offspring into the world.\n\n");
 
-		outputText("Time slips away; you're too overwhelmed by the pain of your womb contracting and the pleasure as Izma ministers to your " + vaginaDescript());
+		outputText("Time slips away; you're too overwhelmed by the pain of your womb contracting and the pleasure as Izma ministers to your " + vaginaDescript(womb));
 		if(player.hasCock()) outputText(" and " + multiCockDescriptLight());
 		outputText(", which makes the birth pangs become less painful and more orgasmic. You lose yourself in the haze to the point you're barely aware when the birth finally comes to an end; you feel a great pressure welling up inside you, an overwhelming urge to push, and then, the next thing you know, relief washes over you as your stomach deflates.");
 		player.cuntChange(100,true,true,false);
@@ -2906,7 +2922,6 @@ private function radarFucksIzmasAss():void {
 	menu();
 	addButton(0, "Internal", internalIzmaAnalCumShot);
 	addButton(1, "External", backJizzShot);
-	simpleChoices("Internal", null, "External", null, "", null, "", null, "", null);
 }
 
 private function radarTentacleAnal():void {

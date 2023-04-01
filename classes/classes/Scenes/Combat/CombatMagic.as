@@ -49,6 +49,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.removeStatusEffect(StatusEffects.CounterGlacialStorm);
 		if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.removeStatusEffect(StatusEffects.CounterHighVoltage);
 		if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.removeStatusEffect(StatusEffects.CounterEclipsingShadow);
+		if (player.hasStatusEffect(StatusEffects.CounterHighTide)) player.removeStatusEffect(StatusEffects.CounterHighTide);
 	}
 
 	internal function costChange_all():Number {
@@ -211,6 +212,9 @@ public class CombatMagic extends BaseCombatContent {
 		for each (var e:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerBonus)) {
 			mod += 0.02 * e.power * player.racialTier(e.race);
 		}
+		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
+			mod += f.power * (player.isRaceCached(f.race)? 2:1);
+		}
         return mod;
     }
 
@@ -225,12 +229,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.TraditionalMageI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageVI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageI) && ((player.isUsingStaff() || player.isPartiallyStaffTypeWeapon() || player.isUsingWand()) && player.isUsingTome())) {
+			var tmb:Number = 1;
+			if (player.hasPerk(PerkLib.TraditionalMageII)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageIII)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageIV)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageV)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageVI)) tmb += 1;
+			if (player.isPartiallyStaffTypeWeapon()) tmb *= 0.5;
+			mod += tmb;
+		}
         if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
@@ -529,6 +537,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.Necromancy)) mod -= 1;
 		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
@@ -541,6 +550,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.Necromancy)) mod -= 1;
 		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
@@ -553,6 +563,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.Necromancy)) mod -= 1;
 		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 4;
 		if (mod < 0) mod = 0;
 		return mod;
@@ -754,6 +765,9 @@ public class CombatMagic extends BaseCombatContent {
 				outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
 				outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 			}
+			if (player.perkv1(PerkLib.ImpNobility) > 0) {
+				outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+			}
 			var damage:Number = 0;
 			var damagemultiplier:Number = 1;
 			damage += combat.teases.teaseBaseLustDamage();
@@ -791,7 +805,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 
-	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
+	//THIS FEATURE GOVERNS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
 	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 			if (player.tailVenom >= player.VenomWebCost()) {
@@ -868,6 +882,7 @@ public class CombatMagic extends BaseCombatContent {
 			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) damage *= 1.25;
+		if (player.armorName == "FrancescaCloak") damage *= 2;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -913,6 +928,11 @@ public class CombatMagic extends BaseCombatContent {
 				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 3);
 				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
 			}
+			if (player.hasStatusEffect(StatusEffects.CounterHighTide)) {
+				if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 2);
+				else if (player.hasPerk(PerkLib.HighTideEx)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 3);
+				player.addStatusValue(StatusEffects.CounterHighTide, 1, 4);
+			}
 		}
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else
@@ -928,7 +948,7 @@ public class CombatMagic extends BaseCombatContent {
 	
 	public function spellGreenCovenantOff():void {
 		clearOutput();
-		outputText("Information Noona Warning:\n\n\<b>Your Green Covenant is deactivated now.</b>");
+		outputText("Information Noona Warning:\n\n<b>Your Green Covenant is deactivated now.</b>");
 		player.removeStatusEffect(StatusEffects.GreenCovenant);
 		enemyAI();
 	}

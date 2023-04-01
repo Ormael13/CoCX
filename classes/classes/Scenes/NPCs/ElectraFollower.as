@@ -51,13 +51,19 @@ public function repeatDeepwoodsEnc():void {
 	outputText("As you wander the woods you hear the sound of echoing thunder...But the rains have long since been stopped here. You see multiple imps and even a satyr run away from the spot where the sound was heard. ");
 	repeatElectraEnc();
 }
+public function repeatDesertEnc():void {
+	spriteSelect(SpriteDb.s_electra);
+	clearOutput();
+	outputText("As you wander the desert you hear the sound of echoing thunder...But the rains have long since been stopped here. You see multiple imps and even an apophis run away from the spot where the sound was heard. ");
+	repeatElectraEnc();
+}
 public function repeatElectraEnc():void {
 	outputText("As you go to see what’s going on you come upon ");
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("the Raiju girl");
 	outputText(" again. She's panting on the ground with a hand under her dress and masturbating like there is no tomorrow.\n\n");
 	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me I don’t care how you do it. Gah, why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
-	if (player.isRace(Races.RAIJU, 1, false)) repeatEncAsRaijuPC();
+	if (player.isRace(Races.RAIJU, 1, false) || player.isRace(Races.THUNDERBIRD, 1, false) || player.isRace(Races.KIRIN, 1, false)) repeatEncAsRaijuPC();
 	else {
 		outputText("Shit! If she sees you now she will definitely attack. Just as you are about to leave, she realizes you're there and her eyes glimmer with a hint of barely contained madness. She stands up, still playing with her pussy, and eyes you up with a manic smile on her face as electricity starts to dance in the air around her.\n\n");
 		outputText("\"<i>Just who I need for relief!  Now stay still, I will make it short!!!</i>\"");
@@ -71,7 +77,11 @@ public function repeatElectraEnc():void {
 }
 public function repeatEncAsRaijuPC():void {
 	outputText("Not having made any effort to hide from her, she swiftly notices you. She stands up, still playing with her pussy, and eyes you up for a second before sighing.\n\n");
-	outputText("\"<i>I just can’t find anyone to fuck the voltage out of me. And of course the only person that’d be willing to make out is another Raiju. Neither of us are discharging today.</i>\"");
+	outputText("\"<i>I just can’t find anyone to fuck the voltage out of me. And of course the only person that’d be willing to make out is");
+	if (player.isRace(Races.RAIJU, 1, false))outputText(" another Raiju.");
+	if (player.isRace(Races.THUNDERBIRD, 1, false))outputText(" a Thunderbird.");
+	if (player.isRace(Races.KIRIN, 1, false))outputText(" a Kirin.");
+	outputText(" Neither of us are discharging today.</i>\"");
 	menu();
 	addButton(1, "Relieve her", repeatEncAsRaijuPCRelieveHer);
 	addButton(3, "No, thanks", repeatEncAsRaijuPCNoThanks);

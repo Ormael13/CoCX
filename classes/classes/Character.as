@@ -26,11 +26,19 @@ import classes.Scenes.NPCs.Forgefather;
 		private var _pregnancyType:int = 0;
 		public function get pregnancyType():int { return _pregnancyType; }
 
-		private var _pregnancyTypeList:Array = ['NONE','PREGNANCY_IMP','PREGNANCY_MINOTAUR','PREGNANCY_COCKATRICE','PREGNANCY_MOUSE','PREGNANCY_OVIELIXIR_EGGS','PREGNANCY_HELL_HOUND','PREGNANCY_CENTAUR','PREGNANCY_MARBLE','PREGNANCY_BUNNY','PREGNANCY_ANEMONE','PREGNANCY_AMILY','PREGNANCY_IZMA','PREGNANCY_SPIDER','PREGNANCY_BASILISK','PREGNANCY_DRIDER_EGGS','PREGNANCY_GOO_GIRL','PREGNANCY_EMBER','PREGNANCY_BENOIT','PREGNANCY_SATYR','PREGNANCY_COTTON','PREGNANCY_URTA','PREGNANCY_SAND_WITCH','PREGNANCY_FROG_GIRL','PREGNANCY_FAERIE','PREGNANCY_PLAYER','PREGNANCY_BEE_EGGS','PREGNANCY_SANDTRAP_FERTILE','PREGNANCY_SANDTRAP','PREGNANCY_JOJO','PREGNANCY_KELT','PREGNANCY_TAOTH','PREGNANCY_GOO_STUFFED','PREGNANCY_WORM_STUFFED','PREGNANCY_MINERVA','PREGNANCY_BEHEMOTH','PREGNANCY_PHOENIX','PREGNANCY_ANDY','PREGNANCY_ALRAUNE','PREGNANCY_CELESS','PREGNANCY_GOBLIN','PREGNANCY_ZENJI','PREGNANCY_AYANE','PREGNANCY_ANT_EGGS','PREGNANCY_MANTIS_EGGS','PREGNANCY_HARPY_EGGS','PREGNANCY_HARPY_HATCHING'];
+		private var _pregnancyTypeList:Array = ['None','Imp','Minotaur','Cockatrice','Mouse','Ovielixer eggs','Hellhound','Centaur','Marble','Bunny','Anemone','Amily','Izma','Spider eggs','Basilisk','Drider eggs','Goo girl','Ember','Benoit Eggs','Satyr','Cotton','Urta','Sand Witch','Frog girl','Faerie','Player','Bee Eggs','Sandtrap Fertilized','Sandtrap','Jojo','Kelt','Taoth','Goo Stuffed','Worm Stuffed','Minerva','Behemoth','Quasi Phoenix','Andy (Satyr)','Alraune','Celess','Goblin','Zenji','Ayane','Ant Eggs','Mantis Eggs','Harpy Eggs','Harpy Egg Hatching','Loppe'];
 		public function get pregnancyTypeText():String { return _pregnancyTypeList[_pregnancyType]; }
 
 		private var _pregnancyIncubation:int = 0;
 		public function get pregnancyIncubation():int { return _pregnancyIncubation; }
+
+		private var _pregnancy2Type:int = 0;
+		public function get pregnancy2Type():int { return _pregnancy2Type; }
+
+		public function get pregnancy2TypeText():String { return _pregnancyTypeList[_pregnancy2Type]; }
+
+		private var _pregnancy2Incubation:int = 0;
+		public function get pregnancy2Incubation():int { return _pregnancy2Incubation; }
 
 		private var _buttPregnancyType:int = 0;
 		public function get buttPregnancyType():int { return _buttPregnancyType; }
@@ -130,7 +138,11 @@ import classes.Scenes.NPCs.Forgefather;
 	public function faceDescArticle():String { return facePart.describeMF(true); }
 	public function hasLongTail():Boolean { return tail.isLong(); }
 
-		public function isPregnant():Boolean { return _pregnancyType != 0; }
+		public function isPregnant():Boolean { return _pregnancyType > 0 || _pregnancy2Type > 0; }
+		public function canGetPregnant():Boolean { return (vaginas.length > 0 && _pregnancyType == 0) || (vaginas.length > 1 && _pregnancy2Type == 0); }
+		public function hasVisiblePregnancy():Boolean { return ((pregnancyIncubation > 0 && pregnancyIncubation <= 180) || (pregnancy2Incubation > 0 && pregnancy2Incubation <= 180))}
+		public function hasVeryVisiblePregnancy():Boolean { return ((pregnancyIncubation > 0 && pregnancyIncubation <= 100) || (pregnancy2Incubation > 0 && pregnancy2Incubation <= 100))}
+		public function hasNonVisiblePregnancy():Boolean { return ((pregnancyIncubation > 180) && (pregnancy2Incubation > 180)) || ((pregnancyIncubation > 180) && (pregnancy2Incubation == 0)) || ((pregnancyIncubation == 0) && (pregnancy2Incubation > 180)) }
 
 		public function isButtPregnant():Boolean { return _buttPregnancyType != 0; }
 
@@ -151,10 +163,12 @@ import classes.Scenes.NPCs.Forgefather;
 			if (arg <= -1)
 				bonus = -9000;
 			//If unpregnant and fertility wins out:
-			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
+			if (canGetPregnant() && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
 			{
-				knockUpForce(type, incubation);
+				var womb:int = (pregnancyIncubation == 0 ? 0:1);
+				knockUpForce(type, incubation, womb);
 				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) EngineCore.outputText("\n<b>You are pregnant from "+(womb == 0? pregnancyTypeText:pregnancy2TypeText)+"!</b>");
 			}
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
 			if (type != PregnancyStore.PREGNANCY_IMP && type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && type != PregnancyStore.PREGNANCY_ANEMONE)
@@ -171,10 +185,15 @@ import classes.Scenes.NPCs.Forgefather;
 
 		//The more complex knockUp function used by the player is defined above
 		//The player doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore
-		public function knockUpForce(type:int = 0, incubation:int = 0):void
+		public function knockUpForce(type:int = 0, incubation:int = 0, womb:int = 0):void
 		{
-			_pregnancyType = type;
-			_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
+			if (womb == 0) {
+				_pregnancyType = type;
+				_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
+			} else {
+				_pregnancy2Type = type;
+				_pregnancy2Incubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
+			}
 		}
 
 		//fertility must be >= random(0-beat)
@@ -210,6 +229,8 @@ import classes.Scenes.NPCs.Forgefather;
 		public function pregnancyAdvance():Boolean {
 			if (_pregnancyIncubation > 0) _pregnancyIncubation--;
 			if (_pregnancyIncubation < 0) _pregnancyIncubation = 0;
+			if (_pregnancy2Incubation > 0) _pregnancy2Incubation--;
+			if (_pregnancy2Incubation < 0) _pregnancy2Incubation = 0;
 			if (_buttPregnancyIncubation > 0) _buttPregnancyIncubation--;
 			if (_buttPregnancyIncubation < 0) _buttPregnancyIncubation = 0;
 			return pregnancyUpdate();
@@ -464,6 +485,10 @@ import classes.Scenes.NPCs.Forgefather;
 				min -= maxHP() * 0.06;
 				min -= (1800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
+			if (hasPerk(PerkLib.GreaterDiehardEx)) {
+				min -= maxHP() * 0.18;
+				min -= (5400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
 			if (hasPerk(PerkLib.EpicDiehard)) {
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -473,6 +498,12 @@ import classes.Scenes.NPCs.Forgefather;
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
+				//if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4) min -= maxHP() * 0.05;
+			}
+			if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17) {
+				min -= maxHP() * 0.05;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 2) min -= maxHP() * 0.05;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3) min -= maxHP() * 0.15;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
@@ -816,6 +847,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (game.player.tailType == Tail.SCORPION) maxven += 300;
 			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 400;
 			if (game.player.lowerBody == LowerBody.HYDRA) maxven += 400;
+			if (game.player.lowerBody == LowerBody.SANDWORM) maxven += 400;
 			if (game.player.lowerBody == LowerBody.ATLACH_NACHA) maxven += 1200;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
@@ -901,6 +933,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) max += 5;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) max += 10;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) max += 20;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17) max += 50;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

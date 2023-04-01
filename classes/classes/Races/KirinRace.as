@@ -48,6 +48,8 @@ public class KirinRace extends Race {
 				.hairColor1(ANY(KirinHairColors), +1)
 				.rearType(RearBody.RAIJU_MANE, +1)
 				.tailType(Tail.KIRIN, +1)
+				.tailType(NOT(Tail.THUNDERBIRD), 0, -1000)
+				.tailType(NOT(Tail.RAIJU), 0, -1000)
 				.legType(LowerBody.KIRIN, +2)
 				.eyeColor(ANY(KirinEyeColors), +1)
 				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO,+1)
@@ -70,6 +72,8 @@ public class KirinRace extends Race {
 		addMutation(IMutationsLib.DraconicBonesIM, +1);
 		
 		buildTier(23, "Kirin")
+				.requireLegType(LowerBody.KIRIN)
+				.requireHornType(Horns.KIRIN)
 				.buffs({
 					"tou.mult": +0.45,
 					"spe.mult": +1.50,
@@ -79,6 +83,7 @@ public class KirinRace extends Race {
 				.end();
 		
 		buildTier(32, "elder Kirin")
+				.requirePreviousTier()
 				.buffs({
 					"tou.mult": +0.80,
 					"spe.mult": +2.00,
