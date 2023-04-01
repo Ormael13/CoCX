@@ -8,6 +8,7 @@ package classes.Items.Armors
 	import classes.ItemType;
 	import classes.Items.Armor;
 	import classes.Player;
+	import classes.EngineCore;
 
 	public class HBArmor extends Armor {
 		
@@ -26,9 +27,12 @@ package classes.Items.Armors
 		}
 
 		override public function afterEquip(doOutput:Boolean):void {
+			var oldHPratio:Number = game.player.hp100/100;
 			game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 			game.player.buff("Ayo Armor").remove();
-			game.player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
+			game.player.buff("Ayo Armor").addStats( {"str.mult":-0.18, "spe.mult":-0.60} );
+			game.player.HP = oldHPratio*game.player.maxHP();
+			EngineCore.statScreenRefresh();
 			super.afterEquip(doOutput);
 		}
 		

@@ -67,7 +67,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s7";
+    public var debugGameVer:String = "v0.8t.00";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.055;
@@ -282,7 +282,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>Demon Laboratory MQ dungeon, Human internal mutations (part 1), minions/gunslinger jobs improvements, Set items bonuses, Inner Desert area, Azazel/Cerberus/Imp perm tf's, Garden rework and many QoL changes</b>)";
+			ver += " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
