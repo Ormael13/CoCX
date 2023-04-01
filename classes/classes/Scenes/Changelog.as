@@ -253,7 +253,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog45():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8s7:</b>\n\n");// ()
+			outputText("(Part 2/2) <b>Version 0.8s7:</b>\n\n");// (Demon Laboratory MQ dungeon, Human internal mutations (part 1), minions/gunslinger jobs improvements, Set items bonuses, Inner Desert area, Azazel/Cerberus/Imp perm tf's, Garden rework and many QoL changes)
 			outputText("-Added to unlockable options in metamorph menu: Plant Arms v2 (tentacle covered one); Leaf, Grass and Snowy Hairs; Oak Horns, Orchid Flowers; Ygddrasil Root Claws, Tail, Face; Squirrel Smug Face; Gremlin Crazy Face, Hair; Avian Face; Yeti Fluffy Hair; Bark Skin\n");
 			outputText("-Green Covenant req. to be Wood Elf or one of Plant races to cast. It also becomes magical special insted of a spell.\n");
 			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.\n");
@@ -412,7 +412,7 @@ public class Changelog extends BaseContent
 			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
 			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n\n");
-			outputText("(Part 1/2) <b>Version 0.8s7:</b>\n\n");// ()
+			outputText("(Part 1/2) <b>Version 0.8s7:</b>\n\n");// (Demon Laboratory MQ dungeon, Human internal mutations (part 1), minions/gunslinger jobs improvements, Set items bonuses, Inner Desert area, Azazel/Cerberus/Imp perm tf's, Garden rework and many QoL changes)
 			outputText("-New tier 0 misc lvl-up perk: Skilled Fighter. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 1 misc lvl-up perk: Skilled Gunslinger. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 30+ str/tou/spe. Effect: +10% firearms attacks multiplier and then adds 50% on top of final result.\n");
