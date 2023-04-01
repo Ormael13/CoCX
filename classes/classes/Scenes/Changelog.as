@@ -482,7 +482,7 @@ public class Changelog extends BaseContent
 			outputText("-New material: Elemental Core. Cost 20 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 2 times more elemental energy than Elemental Crystal)\n");
 			outputText("-New material: a Soul Residue. Cost 1 gem. Could drop after beating angel type enemies.\n");
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 8 - Increase 2x Farming EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
-			outputText("-New main story dungeon: Demon Laboratory. Found in Mountains and need to finish Zetaz Cave to find it. If PC would have in camp Dive, Kiha or Tyrantia they will join PC and help block some of enemy attacks in the laboratory.\n");
+			outputText("-New main story dungeon: Demon Laboratory. All texts written by Canadian Snas. Found in Mountains and need to finish Zetaz Cave to find it. If PC would have in camp Dive, Kiha or Tyrantia they will join PC and help block some of enemy attacks in the laboratory.\n");
 			outputText("-New Sand worm encounter and opening previously hidden Inner Desert area for exploration! (EragonX)\n");
 			outputText("-New enemy: Gorgon - lvl 24. Encounterable in inner desert from lvl 14+.\n");
 			outputText("-New enemies (by Liadri with slight modification to be group enemy): Zombies - lvl 25. Encounterable in Boundary/Outer Battlefield as long PC isn't Jiangshi. They have Undead enemy type perk.\n");
