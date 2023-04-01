@@ -661,6 +661,7 @@
         <cell rect="2247,216,80,108" name="clothe/IceQueenKimonoTop" dx="65" dy="63"/>
         <cell rect="2329,216,80,108" name="clothe/IceQueenKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
+		<cell rect="1017,325,80,104" name="clotheBehindBreast/goblinTechnomancerClothe" dx="64" dy="55"/>
         <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>
         <cell rect="935,434,80,104" name="clothe/qipaoPurpleClothe" dx="64" dy="55"/>
@@ -691,6 +692,7 @@
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
         <cell rect="1099,325,80,104" name="clotheLegs/goblinTechnomancerClotheBoots" dx="64" dy="72"/>
+		<cell rect="1591,543,80,104" name="clotheLegs/goblinTechnomancerClotheBootsBaggy" dx="64" dy="72"/>
         <cell rect="1066,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegs" dx="85" dy="120"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothinglegsLewd" dx="80" dy="119"/>
         <cell rect="1108,158,40,55" name="clotheLegs/scandalousSuccubusClothingTaurTODO" dx="72" dy="96"/>
@@ -1083,8 +1085,8 @@
         <cell rect="861,320,49,29" name="fullbodyBalls/sylphlarge" dx="79" dy="104"/>
         <cell rect="861,350,49,29" name="fullbodyBalls/sylphhuge" dx="79" dy="105"/>
         <cell rect="861,380,49,29" name="fullbodyBalls/sylphsillyhuge" dx="79" dy="106"/>
-		<cell rect="961,200,49,29" name="fullbodyPenisFg/demon" dx="76" dy="86"/>
-        <cell rect="961,230,49,58" name="fullbodyPenisFg/demonbig" dx="74" dy="64"/>
+		<cell rect="961,200,49,29" name="fullbodyPenisFg/imp" dx="76" dy="86"/>
+        <cell rect="961,230,49,58" name="fullbodyPenisFg/impbig" dx="74" dy="64"/>
 		<cell rect="11,290,49,29" name="fullbodyBalls/Bimpsmall" dx="80" dy="99"/>
         <cell rect="11,320,49,29" name="fullbodyBalls/Bimplarge" dx="80" dy="100"/>
         <cell rect="11,350,49,29" name="fullbodyBalls/Bimphuge" dx="80" dy="100"/>
@@ -1192,6 +1194,8 @@
         <cell rect="661,230,49,58" name="penis/raijubig" dx="77" dy="103"/>
 		<cell rect="911,290,49,58" name="penis/kirin" dx="77" dy="103"/>
         <cell rect="911,350,49,58" name="penis/kirinbig" dx="77" dy="103"/>
+		<cell rect="1011,200,49,29" name="penis/demon" dx="76" dy="107"/>
+        <cell rect="1011,230,49,58" name="penis/demonbig" dx="74" dy="99"/>
 		<cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -1670,6 +1674,7 @@
 		<layer name="overskin"/>
 		<layer name="breasts_pattern"/>
         <layer name="breasts"/>
+		<layer name="clotheBehindBreast"/>
 		<layer name="clothRightArm"/>
 		<layer name="clothLeftArm"/>
 		<layer name="overhands"/>
@@ -4793,9 +4798,9 @@
 					<if test="isTaur()">
 						<if test="isDrider()">
 							<if test="big">
-								<show part="fullbodyPenisFg/demonbig"/>
+								<show part="penis/demonbig"/>
 								<else>
-									<show part="fullbodyPenisFg/demon"/>
+									<show part="penis/demon"/>
 								</else>
 							</if>
 							<else>
@@ -5451,9 +5456,19 @@
 				<show part="clothe/goblinTechnomancerClothe"/>
 				<if test="showArmClothing">
 					<show part="clothe/goblinTechnomancerClotheArms"/>
+					<else>
+						<hide part="clothe/goblinTechnomancerClothe"/>
+						<show part="clotheBehindBreast/goblinTechnomancerClothe"/>
+					</else>
 				</if>
 				<if test="showLegClothing">
 					<show part="clotheLegs/goblinTechnomancerClotheBoots"/>
+					<else>
+						<if test="lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
+							<hide part="clotheLegs/goblinTechnomancerClotheBoots"/>
+							<show part="clotheLegs/goblinTechnomancerClotheBootsBaggy"/>
+						</if>
+					</else>
 				</if>
 			</if>
 		</if>
@@ -6712,9 +6727,9 @@
 			<show part="wings_bg/imp"/>
 			<if test="hasCock()">
 				<if test="big">
-                    <show part="fullbodyPenisFg/demonbig"/>
+                    <show part="fullbodyPenisFg/impbig"/>
                     <else>
-						<show part="fullbodyPenisFg/demon"/>
+						<show part="fullbodyPenisFg/imp"/>
                     </else>
                 </if>
 			</if>
