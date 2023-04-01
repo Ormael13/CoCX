@@ -32,12 +32,12 @@ public class Changelog extends BaseContent
 		private function Changelog46():void {
 			clearOutput();
 			//0 of 11 pages
-			/*ostatni punkt changelogu
+			outputText("<b>Version 0.8t:</b>\n\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: \n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -56,6 +56,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			/*ostatni punkt changelogu
+			outputText("<b>Version 0.8u:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
@@ -169,8 +172,6 @@ public class Changelog extends BaseContent
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
 			outputText("\n");
-			outputText("<b>Version 0.8t:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
@@ -253,7 +254,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog45():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8s7:</b>\n\n");// (Demon Laboratory MQ dungeon, Human internal mutations (part 1), minions/gunslinger jobs improvements, Set items bonuses, Inner Desert area, Azazel/Cerberus/Imp perm tf's, Garden rework and many QoL changes)
+			outputText("(Part 2/2) <b>Version 0.8s7: (Demon Laboratory MQ dungeon, Human internal mutations (part 1), minions/gunslinger jobs improvements, Set items bonuses, Inner Desert area, Azazel/Cerberus/Imp perm tf's, Garden rework and many QoL changes)</b>\n\n");
 			outputText("-Added to unlockable options in metamorph menu: Plant Arms v2 (tentacle covered one); Leaf, Grass and Snowy Hairs; Oak Horns, Orchid Flowers; Ygddrasil Root Claws, Tail, Face; Squirrel Smug Face; Gremlin Crazy Face, Hair; Avian Face; Yeti Fluffy Hair; Bark Skin\n");
 			outputText("-Green Covenant req. to be Wood Elf or one of Plant races to cast. It also becomes magical special insted of a spell.\n");
 			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.\n");
@@ -412,7 +413,7 @@ public class Changelog extends BaseContent
 			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
 			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n\n");
-			outputText("(Part 1/2) <b>Version 0.8s7:</b>\n\n");// (Demon Laboratory MQ dungeon, Human internal mutations (part 1), minions/gunslinger jobs improvements, Set items bonuses, Inner Desert area, Azazel/Cerberus/Imp perm tf's, Garden rework and many QoL changes)
+			outputText("(Part 1/2) <b>Version 0.8s7 (Demon Laboratory MQ dungeon, Human internal mutations (part 1), minions/gunslinger jobs improvements, Set items bonuses, Inner Desert area, Azazel/Cerberus/Imp perm tf's, Garden rework and many QoL changes):</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Skilled Fighter. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 1 misc lvl-up perk: Skilled Gunslinger. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 30+ str/tou/spe. Effect: +10% firearms attacks multiplier and then adds 50% on top of final result.\n");
