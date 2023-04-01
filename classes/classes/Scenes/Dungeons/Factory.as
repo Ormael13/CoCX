@@ -1832,7 +1832,7 @@ use namespace CoC;
 			dungeons.setDungeonButtons(null, null, roomForemanOffice, null);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				addButton(0, "Valves", factoryOverload).hint("Overload the valves. This may have unintended consequences but the factory will suffer catastrophe and shut down forever.");
-				if (flags[kFLAGS.MARAE_QUEST_START] == 0.5) addButtonDisabled(1, "Shutdown", "");
+				if (flags[kFLAGS.MARAE_QUEST_START] == 0.5) addButtonDisabled(1, "Shutdown", "She kicked you out of her island and you still as corrupted as you're still save her? BLASPHEMY!!! HERESY!!!");
 				else addButton(1, "Shutdown", factoryShutdown).hint("Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
 			}
 		}
