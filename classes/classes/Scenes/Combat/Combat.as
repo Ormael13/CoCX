@@ -4017,7 +4017,9 @@ public class Combat extends BaseContent {
 				if (player.weaponRange == weaponsrange.M1CERBE) player.takePhysDamage(150);
 				else player.takePhysDamage(25);
 			}
-			else player.ammo--;
+			else {
+				if (player.miscJewelry1 != miscjewelries.BAMOBAG && player.miscJewelry2 != miscjewelries.BAMOBAG) player.ammo--;
+			}
 		}
         var ammoWord:String = weaponRangeAmmo;
         if (rand(100) < accRange) {

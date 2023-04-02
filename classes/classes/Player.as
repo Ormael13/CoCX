@@ -1924,7 +1924,9 @@ use namespace CoC;
 				if (returnItem == null) return null;
 			}
 			saveHPRatio();
-			var actualItem:Equipable = newItem.beforeEquip(doOutput);
+			var actualItem:Equipable;
+			if (game.isLoadingSave) actualItem = newItem;
+			else actualItem = newItem.beforeEquip(doOutput);
 			if (actualItem && !actualItem.isNothing) {
 				_equipment[slot] = actualItem;
 				actualItem.afterEquip(doOutput);
