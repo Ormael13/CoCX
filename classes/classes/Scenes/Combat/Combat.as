@@ -15006,8 +15006,8 @@ public function attackFlyingSword():void {
 	damage *= fspm;
 	//Weapon addition!
     damage = flyingSwordAttackModifier(damage);
-    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") damage *= 1.4;
-    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") damage *= 2;
+    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") damage *= 4;
+    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") damage *= 10;
     //if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
 	var sizeMatters:Number = 1;
     sizeMatters += (0.01 * masterySwordLevel());
@@ -16202,11 +16202,11 @@ public function flyingSwordAttackCost():Number {
         if (player.perkv1(PerkLib.Dantain) > 1) fsac -= 5;
         if (player.perkv1(PerkLib.Dantain) > 2) fsac -= 5;
     }
-	if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Small Two") fsac *= 2;
-	if (player.weaponFlyingSwordsPerk == "Massive") fsac *= 3;
-	if (player.weaponFlyingSwordsPerk == "Large Two") fsac *= 4;
-	if (player.weaponFlyingSwordsPerk == "Massive Two" || player.weaponFlyingSwordsPerk == "Small Six") fsac *= 6;
-    if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.8;
+	if (player.weaponFlyingSwordsPerk == "Small Two") fsac *= 2;
+	if (player.weaponFlyingSwordsPerk == "Large") fsac *= 3;
+	if (player.weaponFlyingSwordsPerk == "Large Two" || player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Small Six") fsac *= 6;
+	if (player.weaponFlyingSwordsPerk == "Massive Two") fsac *= 12;
+    if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.6;
     return fsac;
 }
 

@@ -6,6 +6,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.FlyingSwords;
 import classes.Scenes.Areas.Desert.NagaScene;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
@@ -76,8 +77,11 @@ public class Soulforce extends BaseContent
 			addButtonDisabled(4, "Adj. Corr.", "Wait till new day arrive to use this option again.");
 		}
 		//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
+		if (player.hasPerk(PerkLib.FlyingSwordPath)) addButton(6, "Imprinting", ImprintingSF).hint("Imprint your SF to combine or seperate sets of flying swords.");
+		else addButtonDisabled(6, "???", "Req. Flying Sword Path.");
 		if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
 		else addButtonDisabled(7, "???", "Req. Soul Sense.");
+		//button 8 - ?
 		if (player.hasPerk(PerkLib.SoulApprentice)) {
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(9, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 			else addButtonDisabled(9, "Mana", "Wait till new day arrive to use this option again.");
@@ -89,6 +93,8 @@ public class Soulforce extends BaseContent
 			else addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 		}
 		else addButtonDisabled(10, "???", "Req. Metamorph.");
+		//button 11 - ?
+		//button 12 - ?
 		addButton(13, "Cultivation", Contemplations).hint("Contemplate mysteries of the world in attempt to progress your soul cultivation path.");
 		addButton(14, "Back", playerMenu);
 	}
@@ -865,6 +871,40 @@ public class Soulforce extends BaseContent
 			outputText("Your current soulforce is too low.");
 			doNext(CorruptionAndSoulforce);
 		}
+	}
+	
+	public function ImprintingSF():void {
+		clearOutput();
+		outputText("");
+		menu();
+		var btn:int = 0;
+		if (player.itemCount(weaponsflyingswords.W_HALFM) > 1) addButton(btn++, "W.HalfM2", ImprintingSFCombine, weaponsflyingswords.W_HALFM, weaponsflyingswords.W_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.W_HALFM2) > 0) addButton(btn++, "W.HalfM", ImprintingSFSeperate1, weaponsflyingswords.W_HALFM2, weaponsflyingswords.W_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.B_HALFM) > 1) addButton(btn++, "B.HalfM2", ImprintingSFCombine, weaponsflyingswords.B_HALFM, weaponsflyingswords.B_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.B_HALFM2) > 0) addButton(btn++, "B.HalfM", ImprintingSFSeperate1, weaponsflyingswords.B_HALFM2, weaponsflyingswords.B_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.S_HALFM) > 1) addButton(btn++, "S.HalfM2", ImprintingSFCombine, weaponsflyingswords.S_HALFM, weaponsflyingswords.S_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.S_HALFM2) > 0) addButton(btn++, "S.HalfM", ImprintingSFSeperate1, weaponsflyingswords.S_HALFM2, weaponsflyingswords.S_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.E_HALFM) > 1) addButton(btn++, "E.HalfM2", ImprintingSFCombine, weaponsflyingswords.E_HALFM, weaponsflyingswords.E_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.E_HALFM2) > 0) addButton(btn++, "E.HalfM", ImprintingSFSeperate1, weaponsflyingswords.E_HALFM2, weaponsflyingswords.E_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		addButton(14, "Back", accessSoulforceMenu);
+	}
+	public function ImprintingSFCombine(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords):void {
+		clearOutput();
+		outputText("Combining.\n\n");
+		player.soulforce -= 100;
+		player.destroyItems(flyingsword1, 2);
+		inventory.takeItem(flyingsword2, ImprintingSF);
+	}
+	public function ImprintingSFSeperate1(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords):void {
+		clearOutput();
+		outputText("Seperating.\n\n");
+		player.soulforce -= 100;
+		player.destroyItems(flyingsword1, 1);
+		inventory.takeItem(flyingsword2, curry(ImprintingSFSeperate1a, flyingsword2));
+	}
+	public function ImprintingSFSeperate1a(flyingsword2: FlyingSwords):void {
+		outputText("\n\n");
+		inventory.takeItem(flyingsword2, ImprintingSF);
 	}
 
 	private function addSSButton(btn:int, name:String, func:Function, sfCost:int):CoCButton {

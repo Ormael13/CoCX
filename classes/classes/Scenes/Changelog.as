@@ -33,28 +33,28 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.8t:</b>\n\n");
+			outputText("-New misc accesory: Boundless Ammo Bag - buyable at Tripxi shop in Tel'Adre. Cost 1,600 gems. It makes firearms never run out of ammo in middle of multishooting nor never needing to reload.\n");
 			outputText("-Ayo armor bonuses no longer give either flat bonus to stat or multi to stat. They would now give bonus or penalty to stat multi.\n");
 			outputText("-Minor fixes to taur and stuff (Liadri)\n");
+			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
-			outputText("-New misc accesory: Boundless Ammo Bag - buyable at Tripxi shop in Tel'Adre. Cost 1,600 gems. It makes firearms never run out of ammo in middle of multishooting nor never needing to reload.\n");
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
 			outputText("-New mutation perk: Human Versatility (Primitive). Req. Human Versatility and lvl 30+. Effects: Mastery gains increased by 2 point or in case of multtiplier +2 to multiplier. Decrease a bit needed exp to lvl up weapon/lifeskill masteries.\n");
-			outputText("-Flying swords base dmg scaling (on wisdom and weapon atk value) increased by 250%. Bonus dmg for size of flying sword increased to 200% for massive ones and added 140% for large ones. Sword type weapons mastery and weapon size mastery (small/large/massive) now apply it dmg boost to their attacks and they can be coated with fire from foxflame pelt. They also can gain exp toward matching masteries.\n");
+			outputText("-Flying swords base dmg scaling (on wisdom and weapon atk value) increased by 250%. Bonus dmg for size of flying sword increased to 1000% for massive ones and added 400% for large ones. Sword type weapons mastery and weapon size mastery (small/large/massive) now apply it dmg boost to their attacks and they can be coated with fire from foxflame pelt. They also can gain exp toward matching masteries.\n");
 			outputText("-Flying swords was moved from 'Soul Equipment' shop into nearby one shop that deal only with flying swords and teaching techniques to make better use of them run by ......\n");
 			outputText("-New mutation perk: Human Eyes. Req. having free eyes mutation slot, human race (17+). Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 5 lvl's.\n");
 			outputText("-Added to stats (combat subpage) tracking how much higher lvl enemies pc can fight without loosing dmg.\n");
 			outputText("-New mutation perk: Human Eyes (Primitive). Req. Human Eyes and lvl 30+. Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 10 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Evolved). Req. Human Eyes (Primitive) and lvl 60+. Effects: Increase precision of all attacks by 10%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 30 lvl's. 5% less penalty to acc per each next attack during multiattack.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Asauchi flying sword SF use cost is decreased from 80% to 60% of massive flying swords default cost.\n");
+			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
+			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
+			outputText("-New flying sword: Scarlet Half-Moon Duo - combined from two Scarlet Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal lightning damage instead of physical damage.\n");
+			outputText("-New flying sword: Ebon Half-Moon Duo - combined from two Ebon Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal darkness damage instead of physical damage.\n");
+			outputText("-Flying Sword Path perk would enable option to seperate sets or combine into sets specific flying swords. It cost a bit of SF to perform.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -79,7 +79,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: \n");
+			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -1459,7 +1459,7 @@ public class Changelog extends BaseContent
 			outputText("-New Necromancy spell: Boneshatter. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only, monster take 10-60(20)% strength drain from this (not work on boneless creatures: construct, elemental, ghost, goo, plant). Cooldown: 3 turns\n");
 			outputText("-New gray spell: Clear Mind. It can be learned by using grey book. Effect: Clear some lust by taking physical wounds. Allows you to break out of charm and ignore stun. (Available while stunned) Cost 100 mana. (5 turns cooldown)\n");
 			outputText("-New gray spell: Balance of Life. It can be learned by using grey book. Effect: Heals for 5% of your hp when dealing spell damage.\n");
-			outputText("-New gray spell: Energy Drain. It can be learned by using grey book. Effect: Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost). Cost 350 mana. (7 turns cooldown)\n");//
+			outputText("-New gray spell: Energy Drain. It can be learned by using grey book. Effect: Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost). Cost 350 mana. (7 turns cooldown)\n");
 			outputText("-New gray spell: Restore. It can be learned by using grey book. Effect: Heal for a decent amount of health and regenerate a little over time. Cost 80 mana. (8 turns cooldown)\n");
 			outputText("-New Blood Spell: Blood Shield - learned from Red Manuscript. Cost 20% of max Over HP. Would create crimson shield that will absorb dmg equal to cost of cast multiplied by blood spells power multiplier. In case caster already have other shields active it will the last shield that absorb the damage.\n");
 			outputText("-New Blood Spell: Blood Chains - learned from Red Manuscript. Cost 100 health. Would immobilize enemy (stun effect) for 2 turns and have cooldown of 3 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
