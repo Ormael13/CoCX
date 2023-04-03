@@ -18,18 +18,18 @@ public class HumanEyesMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
 			var pAcc:int = 5;
+			if (pTier >= 2) pAcc += 5;
 			if (pTier >= 1){
                 descS = "Increase precision of all attacks by " + pAcc + "%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to ";
             }
 			if (pTier == 1){
-                descS = "5 lvl's.";//-x% penatly to acc for attacks? or for tier 3
+                descS += "5 lvl's.";
             }
 			if (pTier == 2){
-                descS = "10 lvl's.";
+                descS += "10 lvl's.";
             }
-            if (pTier >= 3){
-				pAcc += 5;
-                descS = "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
+            if (pTier == 3){
+				descS += "30 lvl's. 5% less penalty to acc per each next attack during multiattack.";
             }
             return descS;
         }
@@ -91,7 +91,7 @@ public class HumanEyesMutation extends IMutationPerkType
 
         public function HumanEyesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_EYES, 1);
+			super(mName + " IM", mName, SLOT_EYES, 3);
         }
 
     }

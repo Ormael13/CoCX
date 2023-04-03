@@ -2638,7 +2638,10 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
         if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
-        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) accmod += 5;
+        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
+			accmod += 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) accmod += 5;
+		}
 		if (player.isFistOrFistWeapon()) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
 			else {
@@ -2660,7 +2663,6 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Massive")) accmod += Math.round((dualWMLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive")) accmod += meleeDualWieldAccuracyPenalty();
-
         var weaponSize:Number = 1;
         if( player.weaponSpecials("Small") ) weaponSize = 0;
         if( player.weaponSpecials("Large") ) weaponSize = 2;
@@ -2669,16 +2671,13 @@ public class Combat extends BaseContent {
         if (weaponSize == 1) accmod += Math.round((weaponSizeNormal() - 1) / 2);
         if (weaponSize == 2) accmod += Math.round((weaponSizeLarge() - 1) / 2);
         if (weaponSize == 3) accmod += Math.round((weaponSizeMassive() - 1) / 2);
-
-
-
-
         return accmod;
     }
 
     public function meleeAccuracyPenalty():Number {
         var accmmodpenalty:Number = 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accmmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accmmodpenalty -= 5;
 		//if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.)) accmmodpenalty -= 5;
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
@@ -2757,7 +2756,10 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) baccmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) baccmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of deadeye aim") baccmod += 40;
-        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) baccmod += 10;
+        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
+			baccmod += 10;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) baccmod += 10;
+		}
 		return baccmod;
 	}
 
@@ -2772,6 +2774,7 @@ public class Combat extends BaseContent {
         var accrmodpenalty:Number = 15;
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) accrmodpenalty -= 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accrmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accrmodpenalty -= 5;
         if (player.weaponRangeName == "Avelynn") accrmodpenalty -= 5;
         if (accrmodpenalty < 0) accrmodpenalty = 0;
         return accrmodpenalty;
@@ -2795,14 +2798,13 @@ public class Combat extends BaseContent {
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
-
-
         return faccmod;
     }
 
     public function firearmsAccuracyPenalty():Number {
         var accfmodpenalty:Number = 10;
 		if (player.hasPerk(PerkLib.LockAndLoad)) accfmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accfmodpenalty -= 5;
         if (accfmodpenalty < 0) accfmodpenalty = 0;
         return accfmodpenalty;
     }
@@ -5795,12 +5797,10 @@ public class Combat extends BaseContent {
 			baseMasteryXP *= bMXPMulti;
         }
         if (player.weapon == weapons.CHAOSEA) baseMasteryXP *= 3;
-
         var masteryXPCrit:Number = baseMasteryXP * crit * 2;
         if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) masteryXPCrit *= 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
-
         if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
         if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
         if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -5815,7 +5815,6 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Massive")) dualWieldMassiveXP(meleeMasteryEXPgains);
-
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
@@ -5856,15 +5855,12 @@ public class Combat extends BaseContent {
         var critChance:Number = calculateCrit();
         var critDamage:Number = calculateCritDamage();
         var hitCounter:int = 0;
-
         var damageMultBase:Number = calculateDamageMultiplier();
         var damageMult:Number = damageMultBase;
-
         var fireDamage:Number = fireDamageBoostedByDao();
         var iceDamage:Number = iceDamageBoostedByDao();
         var lightningDamage:Number = lightningDamageBoostedByDao();
         var darkDamage:Number = darknessDamageBoostedByDao();
-
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
         for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
             damageMult = damageMultBase * (monster.damagePercent() / 100);
@@ -5879,15 +5875,11 @@ public class Combat extends BaseContent {
                 }
                 //ANEMONE SHIT
                 if(anemoneCheck()) return;
-
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
-
                 hitCounter++;
                 damage *= damageMult;
                 damage = Math.round(damage);
-
-
                 // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
                 if (monster is Doppleganger) {
                     if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -6007,7 +5999,6 @@ public class Combat extends BaseContent {
                     else if (!MSGControll) {
                         outputText("You "+player.weaponVerb+" [themonster]! "); // for not displaying the same msg a lot of times.
                     }
-
                     // If Crit... do this thing here
                     if (crit) {
                         critCounter++;
@@ -6018,7 +6009,6 @@ public class Combat extends BaseContent {
                         if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
                         else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                     }
-
                     //Damage is delivered HERE
                     if (isFireTypeWeapon()) {
                         damage = Math.round(damage * fireDamage);
@@ -6563,7 +6553,6 @@ public class Combat extends BaseContent {
                 if (monster is DisplacerBeast) outputText("The displacer beast teleports, dodging your attack.\n");
                 else outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In your confidence, you focus too much on force, and not where your swing is headed. You miss, your enemy barely needing to move to evade your blow.\n");
             }
-
             if (monster.HP <= monster.minHP()) {
                 doNext(endHpVictory);
                 meleeMasteryGain(hitCounter, critCounter);
@@ -7874,6 +7863,8 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17 && player.sens >= 25) {
 			var maxSens:Number = 125;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 2) maxSens += 125;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) maxSens += 500;
 			if (player.sens >= maxSens) playerLevelAdjustment += 5;
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
@@ -15018,7 +15009,11 @@ public function attackFlyingSword():void {
     if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") damage *= 1.4;
     if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") damage *= 2;
     //if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
-    damage *= (1 + (0.01 * masterySwordLevel()));
+	var sizeMatters:Number = 1;
+    sizeMatters += (0.01 * masterySwordLevel());
+    if (player.weaponFlyingSwordsPerk == "Small" || player.weaponFlyingSwordsPerk == "Small Two" && player.weaponFlyingSwordsPerk == "Small Six") sizeMatters += 0.01 * weaponSizeSmall();
+    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") sizeMatters += 0.01 * weaponSizeLarge();
+    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") sizeMatters += 0.01 * weaponSizeMassive();
 	//Determine if critical hit!
     var crit:Boolean = false;
     var critChance:int = 25;
@@ -15050,11 +15045,14 @@ public function attackFlyingSword():void {
 		doPhysicalDamage(damage, true, true);
 		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 	}
+	var hitCounter:int = 1;
     if (player.weaponFlyingSwordsPerk == "Small Two") {
+		hitCounter++;
 		doPhysicalDamage(damage, true, true);
 		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 	}
     if (player.weaponFlyingSwordsPerk == "Small Six") {
+		hitCounter += 5;
 		doPhysicalDamage(damage, true, true);
 		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 		doPhysicalDamage(damage, true, true);
@@ -15067,15 +15065,38 @@ public function attackFlyingSword():void {
 		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 	}
     if (player.weaponFlyingSwordsPerk == "Large Two") {
+		hitCounter++;
 		doPhysicalDamage(damage, true, true);
 		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 	}
     if (player.weaponFlyingSwordsPerk == "Massive Two") {
+		hitCounter++;
 		doPhysicalDamage(damage, true, true);
 		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 	}
     if (crit) outputText(" <b>*Critical Hit!*</b>");
     WeaponFlyingSwordsStatusProcs();
+	var baseMasteryXP:Number = 1;
+    if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
+    if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
+        var bMXPMulti:Number = 1;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) bMXPMulti += 2;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 4) bMXPMulti += 2.5;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 5) bMXPMulti += 3;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 6) bMXPMulti += 5;
+		baseMasteryXP *= bMXPMulti;
+    }
+	var critCounter:int = 1;
+	if (crit) {
+		critCounter++;
+		if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) critCounter *= 2;
+	}
+    var meleeMasteryEXPgains:Number = baseMasteryXP * hitCounter * critCounter;
+	swordXP(meleeMasteryEXPgains);
+	if (player.weaponFlyingSwordsPerk == "Small" || player.weaponFlyingSwordsPerk == "Small Two" && player.weaponFlyingSwordsPerk == "Small Six") weaponSmallMastery(meleeMasteryEXPgains);
+    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") weaponLargeMastery(meleeMasteryEXPgains);
+    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") weaponMassiveMastery(meleeMasteryEXPgains);
     outputText("\n\n");
     enemyAI();
 }
