@@ -73,6 +73,7 @@ public class HumanRace extends Race {
 				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
+		addMutation(IMutationsLib.HumanEyesIM);
 		addMutation(IMutationsLib.HumanFatIM);
 		addMutation(IMutationsLib.HumanMusculatureIM);
 		addMutation(IMutationsLib.HumanOvariesIM);

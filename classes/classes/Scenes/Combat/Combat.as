@@ -2638,6 +2638,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
         if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
+        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) accmod += 5;
 		if (player.isFistOrFistWeapon()) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
 			else {
@@ -2756,6 +2757,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) baccmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) baccmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of deadeye aim") baccmod += 40;
+        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) baccmod += 10;
 		return baccmod;
 	}
 
@@ -7866,9 +7868,14 @@ public class Combat extends BaseContent {
 
     public function playerLevelAdjustment():Number {
         var playerLevelAdjustment:Number = 0;
-		if (player.hasPerk(PerkLib.EyesOfTheHunterEx) && player.sens >= 30) {
-			if (player.sens >= 450) playerLevelAdjustment += 30;
-			else playerLevelAdjustment += 1 * Math.round((player.sens - 25) / 25);
+		if (player.hasPerk(PerkLib.EyesOfTheHunterEx) && player.sens >= 25) {
+			if (player.sens >= 750) playerLevelAdjustment += 30;
+			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
+		}
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17 && player.sens >= 25) {
+			var maxSens:Number = 125;
+			if (player.sens >= maxSens) playerLevelAdjustment += 5;
+			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
         return playerLevelAdjustment;
     }
@@ -14992,14 +14999,27 @@ public function attackFlyingSword():void {
     clearOutput();
     player.soulforce -= flyingSwordAttackCost();
     var damage:Number = 0;
-    damage += player.weaponFlyingSwordsAttack * 10;
-    damage += scalingBonusWisdom() * 0.2;
-    //Weapon addition!
+	var fspm:Number = 1 + player.perkv1(PerkLib.FlyingSwordPath);
+    damage += player.weaponFlyingSwordsAttack * 25;
+    damage += scalingBonusWisdom() * 0.5;
+	if (player.hasPerk(PerkLib.FlyingSwordPath) && player.perkv1(PerkLib.FlyingSwordPath) > 0) {
+		if (player.hasPerk(PerkLib.SpeedDemon) && player.weaponFlyingSwordsPerk != "Large" && player.weaponFlyingSwordsPerk != "Large Two" && player.weaponFlyingSwordsPerk != "Massive" && player.weaponFlyingSwordsPerk != "Massive Two") {
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.2;
+		}
+		if (player.hasPerk(PerkLib.QuickStrike) && player.weaponFlyingSwordsPerk == "Small") {
+			damage += (player.spe / 2);
+			damage += scalingBonusSpeed() * 0.1;
+		}
+	}
+	damage *= fspm;
+	//Weapon addition!
     damage = flyingSwordAttackModifier(damage);
-    if (player.weaponFlyingSwordsPerk == "Massive") damage *= 1.5;
+    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") damage *= 1.4;
+    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") damage *= 2;
     //if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
-    //damage *= (1 + (0.01 * masteryArcheryLevel()));
-    //Determine if critical hit!
+    damage *= (1 + (0.01 * masterySwordLevel()));
+	//Determine if critical hit!
     var crit:Boolean = false;
     var critChance:int = 25;
     critChance += combatPhysicalCritical();
@@ -15010,12 +15030,50 @@ public function attackFlyingSword():void {
     }
     damage = Math.round(damage);
     outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and direct it towards [themonster]. "+(player.usingSingleFlyingSword()?"It slashes":"They slash")+" the target, leaving minor wound"+(player.usingSingleFlyingSword()?"":"s")+". ");
-    if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) doFireDamage(damage, true, true);
-    else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) doIceDamage(damage, true, true);
-    else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) doLightingDamage(damage, true, true);
-    else if (player.weaponFlyingSwords == weaponsflyingswords.E_HALFM) doDarknessDamage(damage, true, true);
-    else doPhysicalDamage(damage, true, true);
-    if (player.weaponFlyingSwordsPerk == "Large Two") doPhysicalDamage(damage, true, true);
+    if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) {
+		doFireDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) {
+		doIceDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) {
+		doLightingDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else if (player.weaponFlyingSwords == weaponsflyingswords.E_HALFM) {
+		doDarknessDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else {
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    if (player.weaponFlyingSwordsPerk == "Small Two") {
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    if (player.weaponFlyingSwordsPerk == "Small Six") {
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    if (player.weaponFlyingSwordsPerk == "Large Two") {
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    if (player.weaponFlyingSwordsPerk == "Massive Two") {
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
     if (crit) outputText(" <b>*Critical Hit!*</b>");
     WeaponFlyingSwordsStatusProcs();
     outputText("\n\n");
@@ -16123,8 +16181,10 @@ public function flyingSwordAttackCost():Number {
         if (player.perkv1(PerkLib.Dantain) > 1) fsac -= 5;
         if (player.perkv1(PerkLib.Dantain) > 2) fsac -= 5;
     }
-    if (player.weaponFlyingSwordsPerk == "Large") fsac *= 2;
-    if (player.weaponFlyingSwordsPerk == "Massive") fsac *= 3;
+	if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Small Two") fsac *= 2;
+	if (player.weaponFlyingSwordsPerk == "Massive") fsac *= 3;
+	if (player.weaponFlyingSwordsPerk == "Large Two") fsac *= 4;
+	if (player.weaponFlyingSwordsPerk == "Massive Two" || player.weaponFlyingSwordsPerk == "Small Six") fsac *= 6;
     if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.8;
     return fsac;
 }

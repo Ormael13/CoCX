@@ -16,19 +16,16 @@ public class WhaleFatMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            var pHunger:int = 0;
-            if (pTier >= 1) descS += "Increased damage reduction against physical damage and grants cold resistance permanently";
+            if (pTier >= 1) descS += "Increased damage reduction and grants cold resistance permanently";
             if (pTier == 2){
-                descS += ", juggle duration is increased by 1";
+                descS += ", increase max hunger cap by 5";
+            }
+            if (pTier == 2){
+                descS += ", juggle duration is increased by 1, increase max hunger cap by 10";
             }
             if (pTier == 3){
-                descS += ", juggle duration is increased by 2";
+                descS += ", +10% to ice/water damage resistance, juggle duration is increased by 2, increase max hunger cap by 20";
             }
-            while (pTier != 0){
-                pHunger += 5*pTier;
-                pTier--;
-            }
-            if (pTier >= 1) descS += ", Increase max hunger cap by " + pHunger + "";
             if (descS != "")descS += ".";
             return descS;
         }

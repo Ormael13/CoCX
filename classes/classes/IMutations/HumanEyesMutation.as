@@ -2,34 +2,34 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations
+package classes.IMutations 
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
-public class EyeOfTheTigerMutation extends IMutationPerkType
+public class HumanEyesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Eye Of The Tiger";
+        private static const mName:String = "Human Eyes";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS = "Increase precision of all attacks by 5%";
+			var pAcc:int = 5;
+			if (pTier >= 1){
+                descS = "Increase precision of all attacks by " + pAcc + "%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to ";
             }
-           if (pTier >= 2){
-                descS += " and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%.";
+			if (pTier == 1){
+                descS = "5 lvl's.";//-x% penatly to acc for attacks? or for tier 3
             }
-             if (pTier == 1){
-                descS += ". Increase Rake and Claw attack damage by 50%.";
+			if (pTier == 2){
+                descS = "10 lvl's.";
             }
-            if (pTier == 3){
-                descS += " Critical strikes from claw attacks inflict bleed damage.";
-            }
-            if (pTier == 4){
-                descS += " Critical strikes from claw attacks inflict bleed damage. Increase Natural weapon critical damage by 50%.";
+            if (pTier >= 3){
+				pAcc += 5;
+                descS = "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
             }
             return descS;
         }
@@ -43,9 +43,6 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -61,7 +58,9 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireEyesMutationSlot()
-                        .requireAnyRace(Races.CatlikeRaces);
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.racialScore(Races.HUMAN) > 16;
+                    }, "Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -71,30 +70,28 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
                 trace(e.getStackTrace());
             }
         }
-        
+
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1){
-                pBuffs['int.mult'] = 0.05;
-            }
-            if (pTier == 2){
-                pBuffs['int.mult'] = 0.15;
-                pBuffs['lib.mult'] = 0.05;
-            }
-            if (pTier == 3){
-                pBuffs['int.mult'] = 0.25;
-                pBuffs['lib.mult'] = 0.10;
-            }
-            if (pTier == 3){
-                pBuffs['int.mult'] = 0.35;
-                pBuffs['lib.mult'] = 0.15;
-            }
+            if (pTier == 1) {
+				pBuffs['spe.mult'] = 0.15;
+                pBuffs['sens'] = 15;
+			}
+            if (pTier == 2) {
+				pBuffs['spe.mult'] = 0.45;
+                pBuffs['sens'] = 45;
+			}
+            if (pTier == 3) {
+				pBuffs['spe.mult'] = 1.5;
+                pBuffs['sens'] = 150;
+			}
             return pBuffs;
         }
 
-        public function EyeOfTheTigerMutation() {
-            super(mName + " IM", mName, SLOT_EYES, 4);
+        public function HumanEyesMutation() 
+		{
+			super(mName + " IM", mName, SLOT_EYES, 1);
         }
 
     }
