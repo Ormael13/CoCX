@@ -4814,9 +4814,9 @@
 						</if>		
 						<else>
 							<if test="big">
-								<show part="fullbodyPenisFg/demonbig"/>
+								<show part="penis/demonbig"/>
 								<else>
-									<show part="fullbodyPenisFg/demon"/>
+									<show part="penis/demon"/>
 								</else>
 							</if>	
 						</else>

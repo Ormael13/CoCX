@@ -392,18 +392,18 @@ public class UniqueSexScenes extends BaseContent
 						"[monster He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
 						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n");
 				if(player.isTaur()){
-					outputText("You trot toward your opponent your ");
+					outputText("You trot toward your opponent your");
 					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" bestial equine");
-					outputText("shaft dripping plasma on the ground as your dreamily think of the of the hole you're about to plow." +
+					outputText(" shaft dripping plasma on the ground as your dreamily think of the of the hole you're about to plow." +
 							" This terrifying and arousing sight is enought to cause your victim to a last ditch effort to try and slowly crawl away from you on all four but soon enought the looming shadow of your throbbing [cock] is already looming over [monster his] exposed ass, dripping plasma on [monster name] back." +
 							" No longuer able to wait you plunge your ");
-					if (player.cocks[0].cockLength >= 15) outputText("massive");
-					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" horse");
+					if (player.cocks[0].cockLength >= 15) outputText("massive ");
+					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText("horse");
 					outputText("cock into [monster his] exposed "+monster.assholeOrPussy()+" clenching your teeth and foaming at the mouth in pleasure");
 					if (player.cocks[0].cockLength >= 15){
-						outputText("as your force inches after inches of your bouncy");
-						if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" horse");
-						outputText(" cock into your the your victims warm passage, [monster his] belly deforming to the shape of your enormous shaft");
+						outputText(" as your force inches after inches of your bouncy");
+						if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" equine");
+						outputText(" dick into your the your victims warm passage, [monster his] belly deforming to the shape of your enormous shaft");
 					}
 						outputText(". Now fully sheated into your newest plug thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them." +
 							" The air crackles around you with latent, lustful shocks. You can't help but ");
