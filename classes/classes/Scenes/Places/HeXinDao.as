@@ -615,13 +615,13 @@ public class HeXinDao extends BaseContent
         addButton(4, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
         addButton(5, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
         addButton(6, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
-        addButton(7, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
+        addButton(7, weapons.DNODACHI.shortName, weaponBuy2, weapons.DNODACHI);
         addButton(8, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
         addButton(9, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
-        addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
-        addButton(13, weapons.A_WAND.shortName, weaponBuy2, weapons.A_WAND);
+        addButton(12, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
+        addButton(13, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
@@ -665,6 +665,7 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf5():void {
         menu();
+        addButton(0, weapons.A_WAND.shortName, weaponBuy5, weapons.A_WAND);
 		addButton(1, weapons.W_STAFF.shortName, weaponBuy5, weapons.W_STAFF);
 		addButton(2, weapons.AWL_.shortName, weaponBuy5, weapons.AWL_);
 		addButton(3, weapons.RULER.shortName, weaponBuy5, weapons.RULER);

@@ -86,7 +86,7 @@ public class Weapon extends Equipable
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if ((InCollection(WP_LARGE, _perks ) && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (InCollection(WP_MASSIVE, _perks ) && !game.player.shield.isNothing) && !game.player.hasPerk(PerkLib.GigantGripSu)) {
+			if ((InCollection(WP_LARGE, _perks ) && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || ((InCollection(WP_MASSIVE, _perks ) && !game.player.shield.isNothing) && (!game.player.hasPerk(PerkLib.GigantGripSu) || !game.player.hasPerk(PerkLib.TitanGrip)))) {
 				if (!game.player.shield.canUnequip(doOutput)) {
 					if (doOutput) {
 						outputText("You currently cannot remove your [shield].");
@@ -122,9 +122,14 @@ public class Weapon extends Equipable
 				if (temp.indexOf(temp3) >= 0 && !game.player.shield.isNothing){
 					if (temp3 == WP_LARGE) {
 						if (game.player.hasPerk(PerkLib.GigantGrip)){
-								break;
-							}
+							break;
 						}
+					}
+					if (temp3 == WP_MASSIVE) {
+						if (game.player.hasPerk(PerkLib.TitanGrip)){
+							break;
+						}
+					}
 					SceneLib.inventory.unequipShield();
 				}
 			}/*

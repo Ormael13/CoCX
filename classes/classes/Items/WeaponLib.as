@@ -99,6 +99,7 @@ public final class WeaponLib extends ItemConstants
 		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption.", "Large, Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
 		public const DKATANA:DualKatana = new DualKatana();
+		public const DNODACHI:DualNodachi = new DualNodachi();
 		public const DORSOUL:DorcSouls = new DorcSouls();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
