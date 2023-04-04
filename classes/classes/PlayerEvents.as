@@ -321,13 +321,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
 				}
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
+					var oldHPratio:Number = player.hp100/100;
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
-					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
-					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str": -20, "spe": -20} );
-					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str": -50, "spe": -50} );
-					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
+					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":-0.10, "spe.mult":-0.10} );
+					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":-0.20, "spe.mult":-0.20} );
+					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":-0.40, "spe.mult":-0.30, "tou.mult":-0.10} );
+					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str.mult":-0.18, "spe.mult":-0.60} );
+					player.HP = oldHPratio*player.maxHP();
 					EngineCore.statScreenRefresh();
 					needNext = true;
 				}

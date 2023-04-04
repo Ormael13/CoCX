@@ -1514,7 +1514,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			addButton(0, "EroMassage", sexEroticMassage);
 			addButton(1, "Eat Her Out", sexEatHerOut);
-			addButton(2, "Fingerbang", sexGetFingered).disableIf(player.hasVagina() && !player.isTaur(), "Req. a vagina and non-taur lower body.");
+			addButton(2, "Fingerbang", sexGetFingered).disableIf(!player.hasVagina() && !player.isTaur(), "Req. a vagina and non-taur lower body.");
 			addButton(3, "Handjob", sexHandjob).disableIf( player.hasCock(), "Req. a cock.");
 			addButton(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut).disableIf( player.hasCock(), "Req. a cock");
 			addButton(14,"Back",buildCoreMenu);

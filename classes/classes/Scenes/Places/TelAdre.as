@@ -1294,36 +1294,37 @@ public function tripxiShopMainMenu2a():void {
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Caves.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(9, weaponsrange.TWINGRA.shortName, buyItemT1, weaponsrange.TWINGRA);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(9, "???", "Search the Battlefield(B).");
-	addButtonDisabled(10, "-1-", "Shelf 1");
-	addButton(11, "-2-", tripxiShopMainMenu2b);
-	addButton(12, "-3-", tripxiShopMainMenu2c);
-	addButton(13, "Talk", tripxiShopTalk);
+	addButton(10, "Talk", tripxiShopTalk);
+	addButtonDisabled(11, "-1-", "Shelf 1");
+	addButton(12, "-2-", tripxiShopMainMenu2b);
+	addButton(13, "-3-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
 public function tripxiShopMainMenu2b():void {
 	menu();
-	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT1, weaponsrange.ADBSHOT);
-	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT1, weaponsrange.ADBSCAT);
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
+	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT2, weaponsrange.ADBSHOT, false);
+	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT2, weaponsrange.ADBSCAT, false);
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL, false);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Blight Ridge.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO, false);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Defiled Ravine.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN, false);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Beach.");
 	//7 - Sakuno M2
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU, false);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Low Mountains.");
 	//9 - Tediore pistol
-	addButton(10, "-1-", tripxiShopMainMenu2a);
-	addButtonDisabled(11, "-2-", "Shelf 2");
-	addButton(12, "-3-", tripxiShopMainMenu2c);
+	addButton(10, miscjewelries.BAMOBAG.shortName, buyItemT2, miscjewelries.BAMOBAG, true);
+	addButton(11, "-1-", tripxiShopMainMenu2a);
+	addButtonDisabled(12, "-2-", "Shelf 2");
+	addButton(13, "-3-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
 
 public function tripxiShopMainMenu2c():void {
 	menu();
-	addButton(0, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
-	addButton(1, weaponsrange.HARKON1.shortName, buyItemT1, weaponsrange.HARKON1);
+	addButton(0, weaponsrange.IVIARG_.shortName, buyItemT3, weaponsrange.IVIARG_);
+	addButton(1, weaponsrange.HARKON1.shortName, buyItemT3, weaponsrange.HARKON1);
 	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
 	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
@@ -1332,9 +1333,9 @@ public function tripxiShopMainMenu2c():void {
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 
-	addButton(10, "-1-", tripxiShopMainMenu2a);
-	addButton(11, "-2-", tripxiShopMainMenu2b);
-	addButtonDisabled(12, "-3-", "Shelf 3");
+	addButton(11, "-1-", tripxiShopMainMenu2a);
+	addButton(12, "-2-", tripxiShopMainMenu2b);
+	addButtonDisabled(13, "-3-", "Shelf 3");
 	addButton(14, "Leave", telAdreMenu);
 }
 
@@ -1348,7 +1349,7 @@ public function tripxiShopInside():void {
 private function buyItemT1(odd:ItemType, page:int = 1):void{
 	clearOutput();
 	var cost:int = odd.value;
-	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. hope you got the money on you.</i>\"\n\n");
+	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. Hope you got the money on you.</i>\"\n\n");
 	if (player.gems < cost){
 		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
 		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
@@ -1368,22 +1369,22 @@ private function buyItemT1No():void {
 	outputText("\"<i>Fine no skin of my back it's not like the city has me paying a rent for this shop anyway since I provide them with weapons.</i>\"\n\n");
 	doNext(tripxiShopMainMenu2a);
 }
-private function buyItemT2(odd:ItemType):void{
+private function buyItemT2(odd:ItemType, nonweapon:Boolean):void{
 	clearOutput();
 	var cost:int = odd.value;
-	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. hope you got the money on you.</i>\"\n\n");
+	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. Hope you got the money on you.</i>\"\n\n");
 	if (player.gems < cost){
 		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
 		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
 		doNext(tripxiShopMainMenu2b);
 	}
-	else doYesNo(curry(buyItemT2Yes,odd), buyItemT2No);
+	else doYesNo(curry(buyItemT2Yes,odd,nonweapon), buyItemT2No);
 }
-private function buyItemT2Yes(odd:ItemType):void {
+private function buyItemT2Yes(odd:ItemType, nonweapon:Boolean):void {
 	player.gems -= odd.value;
 	statScreenRefresh();
-	outputText("You pass on the gems to Tripxi who hands you the weapon over.\n\n");
-	outputText("\"<i>Kill some demons with this baby will you. I'd like to think that my tools help clean the place some of my peers are busy dirtying with stupid sex toys.</i>\"\n\n");
+	outputText("You pass on the gems to Tripxi who hands you the "+(nonweapon?"item":"weapon")+" over.\n\n");
+	outputText("\"<i>Kill some demons with this"+(nonweapon?"":" baby will you")+". I'd like to think that my tools help clean the place some of my peers are busy dirtying with stupid sex toys.</i>\"\n\n");
 	inventory.takeItem(odd, tripxiShopMainMenu2b);
 }
 private function buyItemT2No():void {
@@ -1394,7 +1395,7 @@ private function buyItemT2No():void {
 private function buyItemT3(odd:ItemType):void{
 	clearOutput();
 	var cost:int = odd.value;
-	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. hope you got the money on you.</i>\"\n\n");
+	outputText("You point at the " + odd.longName + " and Tripxi put it on the counter.\n\n\"<i>Yea sure this thing will only be " + odd.value + " gems. Hope you got the money on you.</i>\"\n\n");
 	if (player.gems < cost){
 		outputText("Sadly no you don't and Tripxi put back the thing in its display case.\n\n");
 		outputText("\"<i>Anything else I can do for you then?</i>\"\n\n");
@@ -1807,4 +1808,4 @@ public function meetingLunaCamp():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

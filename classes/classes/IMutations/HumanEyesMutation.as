@@ -2,33 +2,35 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations
+package classes.IMutations 
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
-public class YetiFatMutation extends IMutationPerkType
+public class HumanEyesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Yeti Fat";
+        private static const mName:String = "Human Eyes";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-			var pDR:int = 5;
-			if (pTier >= 2) pDR += 10;
-			if (pTier >= 3) pDR += 20;
-            if (pTier >= 1){
-                descS += "Gain damage reduction (" + pDR + "%) against attacks, increase strength of yeti ice breath by 50%";
+			var pAcc:int = 5;
+			if (pTier >= 2) pAcc += 5;
+			if (pTier >= 1){
+                descS = "Increase precision of all attacks by " + pAcc + "%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to ";
             }
-            if (pTier >= 2){
-                descS += ", potency of Big Hand and Feet by 50%";
+			if (pTier == 1){
+                descS += "5 lvl's.";
             }
-            if (pTier >= 3){
-                descS += ", duration of yeti breath stun by 1 round and reduce cooldown by 3 rounds.";
+			if (pTier == 2){
+                descS += "10 lvl's.";
             }
-            if (descS != "")descS += ".";
+            if (pTier == 3){
+				descS += "30 lvl's. 5% less penalty to acc per each next attack during multiattack.";
+            }
             return descS;
         }
 
@@ -55,8 +57,10 @@ public class YetiFatMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireFatTissueMutationSlot()
-                    .requireRace(Races.YETI);
+                    this.requireEyesMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.racialScore(Races.HUMAN) > 16;
+                    }, "Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -70,14 +74,25 @@ public class YetiFatMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
-            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
-            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
+            if (pTier == 1) {
+				pBuffs['spe.mult'] = 0.15;
+                pBuffs['sens'] = 15;
+			}
+            if (pTier == 2) {
+				pBuffs['spe.mult'] = 0.45;
+                pBuffs['sens'] = 45;
+			}
+            if (pTier == 3) {
+				pBuffs['spe.mult'] = 1.5;
+                pBuffs['sens'] = 150;
+			}
             return pBuffs;
         }
 
-        public function YetiFatMutation() {
-            super(mName + " IM", mName, SLOT_FAT, 3);
+        public function HumanEyesMutation() 
+		{
+			super(mName + " IM", mName, SLOT_EYES, 3);
         }
+
     }
 }

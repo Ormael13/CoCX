@@ -1288,6 +1288,7 @@ public function itemImproveMenuCorrupt():void {
 		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
+		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
 		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
 		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
 		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],

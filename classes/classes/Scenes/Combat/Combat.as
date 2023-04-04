@@ -717,6 +717,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
+			if (player.hasPerk(PerkLib.FirstAttackSkeletons)) flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
@@ -793,8 +794,8 @@ public class Combat extends BaseContent {
         if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
             buttons.add("Elementals", CoC.instance.perkMenu.summonsbehaviourOptions, "You can adjust how your elemental summons act during combat.");
         }
-        if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) {
-            buttons.add("P.Golems", CoC.instance.perkMenu.golemsbehaviourOptions, "You can adjust your permanent golems behaviour during combat.");
+        if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
+            buttons.add("Golems/Skeletons", CoC.instance.perkMenu.golemsskeletonsbehaviourOptions, "You can adjust your permanent golems (or skeletons) behaviour during combat.");
         }
         if (CoC_Settings.debugBuild && !debug) {
             buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
@@ -881,7 +882,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) bd = buttons.add("Elem.Asp", ElementalAspectsMenu);
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
 			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
-			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || player.perkv1(PerkLib.GreaterHarvest) == 0)) {
+			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || (player.perkv1(PerkLib.GreaterHarvest) == 0 && player.perkv2(PerkLib.GreaterHarvest) == 0))) {
 				bd.disable("None of your skeletons can attack airborn enemies.");
 			}
 			if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 5) {
@@ -2637,6 +2638,10 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
         if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
+        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
+			accmod += 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) accmod += 5;
+		}
 		if (player.isFistOrFistWeapon()) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
 			else {
@@ -2658,7 +2663,6 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Massive")) accmod += Math.round((dualWMLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive")) accmod += meleeDualWieldAccuracyPenalty();
-
         var weaponSize:Number = 1;
         if( player.weaponSpecials("Small") ) weaponSize = 0;
         if( player.weaponSpecials("Large") ) weaponSize = 2;
@@ -2667,16 +2671,13 @@ public class Combat extends BaseContent {
         if (weaponSize == 1) accmod += Math.round((weaponSizeNormal() - 1) / 2);
         if (weaponSize == 2) accmod += Math.round((weaponSizeLarge() - 1) / 2);
         if (weaponSize == 3) accmod += Math.round((weaponSizeMassive() - 1) / 2);
-
-
-
-
         return accmod;
     }
 
     public function meleeAccuracyPenalty():Number {
         var accmmodpenalty:Number = 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accmmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accmmodpenalty -= 5;
 		//if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.)) accmmodpenalty -= 5;
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
@@ -2755,6 +2756,10 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) baccmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) baccmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of deadeye aim") baccmod += 40;
+        if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
+			baccmod += 10;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) baccmod += 10;
+		}
 		return baccmod;
 	}
 
@@ -2769,6 +2774,7 @@ public class Combat extends BaseContent {
         var accrmodpenalty:Number = 15;
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) accrmodpenalty -= 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accrmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accrmodpenalty -= 5;
         if (player.weaponRangeName == "Avelynn") accrmodpenalty -= 5;
         if (accrmodpenalty < 0) accrmodpenalty = 0;
         return accrmodpenalty;
@@ -2792,14 +2798,13 @@ public class Combat extends BaseContent {
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
-
-
         return faccmod;
     }
 
     public function firearmsAccuracyPenalty():Number {
         var accfmodpenalty:Number = 10;
 		if (player.hasPerk(PerkLib.LockAndLoad)) accfmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accfmodpenalty -= 5;
         if (accfmodpenalty < 0) accfmodpenalty = 0;
         return accfmodpenalty;
     }
@@ -2930,6 +2935,13 @@ public class Combat extends BaseContent {
 			}
 			else if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+			else if (player.weaponRange == weaponsrange.GOODSAM || player.weaponRange == weaponsrange.BADOMEN) {
+				var recoil:Number = 1;
+				if (player.str >= 50) recoil += 1;
+				if (player.str >= 100) recoil += 1;
+				if (player.str >= 200) recoil += 1;
+				flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = recoil;
+			}
             else if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) {
 				if (flags[kFLAGS.MULTISHOT_STYLE] >= 1 && player.hasPerk(PerkLib.PrimedClipWarp)) {
 					if (flags[kFLAGS.MULTISHOT_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
@@ -3769,10 +3781,10 @@ public class Combat extends BaseContent {
 				damage *= 1.5;
                 //Weapon addition!
                 damage = rangeAttackModifier(damage);
-                if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
+                if (player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.GOODSAM || Forgefather.purePearlEaten) {
                     damage = monsterPureDamageBonus(damage);
                 }
-                if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
+                if (player.weaponRange == weaponsrange.LEVHARP || player.weaponRange == weaponsrange.BADOMEN || Forgefather.lethiciteEaten) {
                     damage = monsterCorruptDamageBonus(damage);
                 }
 				if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
@@ -3914,10 +3926,10 @@ public class Combat extends BaseContent {
             }
             //Weapon addition!
             damage = rangeAttackModifier(damage);
-            if (player.weaponRange == weaponsrange.KSLHARP || Forgefather.purePearlEaten) {
+            if (player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.GOODSAM || Forgefather.purePearlEaten) {
                 damage = monsterPureDamageBonus(damage);
             }
-            if (player.weaponRange == weaponsrange.LEVHARP || Forgefather.lethiciteEaten) {
+            if (player.weaponRange == weaponsrange.LEVHARP || player.weaponRange == weaponsrange.BADOMEN || Forgefather.lethiciteEaten) {
                 damage = monsterCorruptDamageBonus(damage);
             }
             damage *= (1 + (0.01 * masteryThrowingLevel()));
@@ -4009,7 +4021,9 @@ public class Combat extends BaseContent {
 				if (player.weaponRange == weaponsrange.M1CERBE) player.takePhysDamage(150);
 				else player.takePhysDamage(25);
 			}
-			else player.ammo--;
+			else {
+				if (player.miscJewelry1 != miscjewelries.BAMOBAG && player.miscJewelry2 != miscjewelries.BAMOBAG) player.ammo--;
+			}
 		}
         var ammoWord:String = weaponRangeAmmo;
         if (rand(100) < accRange) {
@@ -4453,6 +4467,8 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
+        if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
+        if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
@@ -5781,12 +5797,10 @@ public class Combat extends BaseContent {
 			baseMasteryXP *= bMXPMulti;
         }
         if (player.weapon == weapons.CHAOSEA) baseMasteryXP *= 3;
-
         var masteryXPCrit:Number = baseMasteryXP * crit * 2;
         if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) masteryXPCrit *= 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
-
         if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
         if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
         if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -5801,7 +5815,6 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Massive")) dualWieldMassiveXP(meleeMasteryEXPgains);
-
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
@@ -5842,15 +5855,12 @@ public class Combat extends BaseContent {
         var critChance:Number = calculateCrit();
         var critDamage:Number = calculateCritDamage();
         var hitCounter:int = 0;
-
         var damageMultBase:Number = calculateDamageMultiplier();
         var damageMult:Number = damageMultBase;
-
         var fireDamage:Number = fireDamageBoostedByDao();
         var iceDamage:Number = iceDamageBoostedByDao();
         var lightningDamage:Number = lightningDamageBoostedByDao();
         var darkDamage:Number = darknessDamageBoostedByDao();
-
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
         for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
             damageMult = damageMultBase * (monster.damagePercent() / 100);
@@ -5865,15 +5875,11 @@ public class Combat extends BaseContent {
                 }
                 //ANEMONE SHIT
                 if(anemoneCheck()) return;
-
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
-
                 hitCounter++;
                 damage *= damageMult;
                 damage = Math.round(damage);
-
-
                 // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
                 if (monster is Doppleganger) {
                     if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -5993,7 +5999,6 @@ public class Combat extends BaseContent {
                     else if (!MSGControll) {
                         outputText("You "+player.weaponVerb+" [themonster]! "); // for not displaying the same msg a lot of times.
                     }
-
                     // If Crit... do this thing here
                     if (crit) {
                         critCounter++;
@@ -6004,7 +6009,6 @@ public class Combat extends BaseContent {
                         if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
                         else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                     }
-
                     //Damage is delivered HERE
                     if (isFireTypeWeapon()) {
                         damage = Math.round(damage * fireDamage);
@@ -6549,7 +6553,6 @@ public class Combat extends BaseContent {
                 if (monster is DisplacerBeast) outputText("The displacer beast teleports, dodging your attack.\n");
                 else outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In your confidence, you focus too much on force, and not where your swing is headed. You miss, your enemy barely needing to move to evade your blow.\n");
             }
-
             if (monster.HP <= monster.minHP()) {
                 doNext(endHpVictory);
                 meleeMasteryGain(hitCounter, critCounter);
@@ -6774,6 +6777,8 @@ public class Combat extends BaseContent {
 
     public function perkBonusDamage(damage:Number):Number {
         if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
+        if (player.weaponRange == weaponsrange.BADOMEN && monster.hasPerk(PerkLib.EnemyTrueAngel)) damage *= 1.25;
+        if (player.weaponRange == weaponsrange.GOODSAM && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.25;
         if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
         if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
         if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
@@ -6862,20 +6867,22 @@ public class Combat extends BaseContent {
 	}
 
     public function monsterPureDamageBonus(damage:Number):Number {
-        if (monster.cor < 33) damage = Math.round(damage * 1.0);
-        else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-        else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-        else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-        else damage = Math.round(damage * 1.4);//30% more damage against very high corruption.
+        if (monster.cor <= 33) damage = Math.round(damage * 1.0);
+        else if (monster.cor <= 50) damage = Math.round(damage * 1.2);
+        else if (monster.cor <= 70) damage = Math.round(damage * 1.6);
+        else if (monster.cor <= 90) damage = Math.round(damage * 2.2);
+        else if (monster.cor <= 99) damage = Math.round(damage * 3);//200% more damage against very high corruption.
+        else damage = Math.round(damage * 5);//400% more damage against full corruption.
         return damage;
     }
 
     public function monsterCorruptDamageBonus(damage:Number):Number {
         if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-        else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-        else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-        else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-        else damage = Math.round(damage * 1.4);
+        else if (monster.cor >= 50) damage = Math.round(damage * 1.2);
+        else if (monster.cor >= 30) damage = Math.round(damage * 1.6);
+        else if (monster.cor >= 10) damage = Math.round(damage * 2.2);
+        else if (monster.cor >= 1) damage = Math.round(damage * 3);
+        else damage = Math.round(damage * 5);
         return damage;
     }
 
@@ -7850,9 +7857,16 @@ public class Combat extends BaseContent {
 
     public function playerLevelAdjustment():Number {
         var playerLevelAdjustment:Number = 0;
-		if (player.hasPerk(PerkLib.EyesOfTheHunterEx) && player.sens >= 30) {
-			if (player.sens >= 450) playerLevelAdjustment += 30;
-			else playerLevelAdjustment += 1 * Math.round((player.sens - 25) / 25);
+		if (player.hasPerk(PerkLib.EyesOfTheHunterEx) && player.sens >= 25) {
+			if (player.sens >= 750) playerLevelAdjustment += 30;
+			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
+		}
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17 && player.sens >= 25) {
+			var maxSens:Number = 125;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 2) maxSens += 125;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) maxSens += 500;
+			if (player.sens >= maxSens) playerLevelAdjustment += 5;
+			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
         return playerLevelAdjustment;
     }
@@ -11503,6 +11517,8 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
+        if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
+        if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
@@ -14974,14 +14990,31 @@ public function attackFlyingSword():void {
     clearOutput();
     player.soulforce -= flyingSwordAttackCost();
     var damage:Number = 0;
-    damage += player.weaponFlyingSwordsAttack * 10;
-    damage += scalingBonusWisdom() * 0.2;
-    //Weapon addition!
+	var fspm:Number = 1 + player.perkv1(PerkLib.FlyingSwordPath);
+    damage += player.weaponFlyingSwordsAttack * 25;
+    damage += scalingBonusWisdom() * 0.5;
+	if (player.hasPerk(PerkLib.FlyingSwordPath) && player.perkv1(PerkLib.FlyingSwordPath) > 0) {
+		if (player.hasPerk(PerkLib.SpeedDemon) && player.weaponFlyingSwordsPerk != "Large" && player.weaponFlyingSwordsPerk != "Large Two" && player.weaponFlyingSwordsPerk != "Massive" && player.weaponFlyingSwordsPerk != "Massive Two") {
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.2;
+		}
+		if (player.hasPerk(PerkLib.QuickStrike) && player.weaponFlyingSwordsPerk == "Small") {
+			damage += (player.spe / 2);
+			damage += scalingBonusSpeed() * 0.1;
+		}
+	}
+	damage *= fspm;
+	//Weapon addition!
     damage = flyingSwordAttackModifier(damage);
-    if (player.weaponFlyingSwordsPerk == "Massive") damage *= 1.5;
+    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") damage *= 4;
+    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") damage *= 10;
     //if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
-    //damage *= (1 + (0.01 * masteryArcheryLevel()));
-    //Determine if critical hit!
+	var sizeMatters:Number = 1;
+    sizeMatters += (0.01 * masterySwordLevel());
+    if (player.weaponFlyingSwordsPerk == "Small" || player.weaponFlyingSwordsPerk == "Small Two" && player.weaponFlyingSwordsPerk == "Small Six") sizeMatters += 0.01 * weaponSizeSmall();
+    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") sizeMatters += 0.01 * weaponSizeLarge();
+    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") sizeMatters += 0.01 * weaponSizeMassive();
+	//Determine if critical hit!
     var crit:Boolean = false;
     var critChance:int = 25;
     critChance += combatPhysicalCritical();
@@ -14992,14 +15025,78 @@ public function attackFlyingSword():void {
     }
     damage = Math.round(damage);
     outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and direct it towards [themonster]. "+(player.usingSingleFlyingSword()?"It slashes":"They slash")+" the target, leaving minor wound"+(player.usingSingleFlyingSword()?"":"s")+". ");
-    if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) doFireDamage(damage, true, true);
-    else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) doIceDamage(damage, true, true);
-    else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) doLightingDamage(damage, true, true);
-    else if (player.weaponFlyingSwords == weaponsflyingswords.E_HALFM) doDarknessDamage(damage, true, true);
-    else doPhysicalDamage(damage, true, true);
-    if (player.weaponFlyingSwordsPerk == "Large Two") doPhysicalDamage(damage, true, true);
+    if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) {
+		doFireDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) {
+		doIceDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) {
+		doLightingDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else if (player.weaponFlyingSwords == weaponsflyingswords.E_HALFM) {
+		doDarknessDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    else {
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+	var hitCounter:int = 1;
+    if (player.weaponFlyingSwordsPerk == "Small Two") {
+		hitCounter++;
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    if (player.weaponFlyingSwordsPerk == "Small Six") {
+		hitCounter += 5;
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    if (player.weaponFlyingSwordsPerk == "Large Two") {
+		hitCounter++;
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
+    if (player.weaponFlyingSwordsPerk == "Massive Two") {
+		hitCounter++;
+		doPhysicalDamage(damage, true, true);
+		if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+	}
     if (crit) outputText(" <b>*Critical Hit!*</b>");
     WeaponFlyingSwordsStatusProcs();
+	var baseMasteryXP:Number = 1;
+    if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) baseMasteryXP += 2;
+    if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
+        var bMXPMulti:Number = 1;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) bMXPMulti += 2;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 4) bMXPMulti += 2.5;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 5) bMXPMulti += 3;
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 6) bMXPMulti += 5;
+		baseMasteryXP *= bMXPMulti;
+    }
+	var critCounter:int = 1;
+	if (crit) {
+		critCounter++;
+		if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) critCounter *= 2;
+	}
+    var meleeMasteryEXPgains:Number = baseMasteryXP * hitCounter * critCounter;
+	swordXP(meleeMasteryEXPgains);
+	if (player.weaponFlyingSwordsPerk == "Small" || player.weaponFlyingSwordsPerk == "Small Two" && player.weaponFlyingSwordsPerk == "Small Six") weaponSmallMastery(meleeMasteryEXPgains);
+    if (player.weaponFlyingSwordsPerk == "Large" || player.weaponFlyingSwordsPerk == "Large Two") weaponLargeMastery(meleeMasteryEXPgains);
+    if (player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Massive Two") weaponMassiveMastery(meleeMasteryEXPgains);
     outputText("\n\n");
     enemyAI();
 }
@@ -15546,7 +15643,7 @@ public function asurasXFingersOfDestruction(fingercount:String):void {
 
 public function sendSkeletonToFight():void {
     clearOutput();
-    outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "they're":"his")+" blade arounds. ");
+    if (!monster.isFlying()) outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "they're":"his")+" blade arounds. ");
     var damage:Number = 0;
     var dmgamp:Number = 1;
     damage += 500 + rand(151);
@@ -15575,20 +15672,35 @@ public function sendSkeletonToFight():void {
 	var sSWTF:Number = player.perkv2(PerkLib.PrestigeJobNecromancer);
 	while (sSWTF-->0) doMinionPhysDamage(damage, true, true);
     if (player.hasPerk(PerkLib.GreaterHarvest) && player.perkv1(PerkLib.GreaterHarvest) > 0) {
-        outputText("Your archer"+(player.perkv1(PerkLib.GreaterHarvest) > 1 ? "s":"")+" fellow suit unleashing a volley of arrows. ");
-        var sSATF:Number = player.perkv1(PerkLib.GreaterHarvest);
+		outputText("Your archer"+(player.perkv1(PerkLib.GreaterHarvest) > 1 ? "s":"")+" "+(monster.isFlying()?"":"fellow suit ")+"unleashing a volley of arrows. ");
+		var sSATF:Number = player.perkv1(PerkLib.GreaterHarvest);
 		while (sSATF-->0) doMinionPhysDamage(damage, true, true);
         if (player.perkv2(PerkLib.GreaterHarvest) > 0) {
-            outputText("Finally the skeletal mage"+(player.perkv2(PerkLib.GreaterHarvest) > 1 ? "s":"")+" unleash a barrage of magic missles. ");
-            var sSMTF:Number = player.perkv2(PerkLib.GreaterHarvest);
+			outputText((monster.isFlying()?"S":"Finally the s")+"keletal mage"+(player.perkv2(PerkLib.GreaterHarvest) > 1 ? "s":"")+" unleash a barrage of magic missles. ");
+			var sSMTF:Number = player.perkv2(PerkLib.GreaterHarvest);
 			while (sSMTF-->0) doMinionPhysDamage(damage, true, true);
         }
     }
     outputText("\n\n");
     //checkAchievementDamage(damage);
     statScreenRefresh();
-    if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-    else enemyAI();
+	if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+    else {
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] < 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		} else {
+			wrathregeneration1();
+			fatigueRecovery1();
+			manaregeneration1();
+			soulforceregeneration1();
+			venomCombatRecharge1();
+			enemyAI();
+		}
+	}
 }
 public function skeletonSmash():void {
     clearOutput();
@@ -15624,7 +15736,14 @@ public function skeletonSmash():void {
     //checkAchievementDamage(damage);
     outputText("\n\n");
     if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-    else enemyAI();
+    else {
+		wrathregeneration1();
+		fatigueRecovery1();
+		manaregeneration1();
+		soulforceregeneration1();
+		venomCombatRecharge1();
+		enemyAI();
+	}
 }
 
 public function noLimiterState():void {
@@ -16083,9 +16202,11 @@ public function flyingSwordAttackCost():Number {
         if (player.perkv1(PerkLib.Dantain) > 1) fsac -= 5;
         if (player.perkv1(PerkLib.Dantain) > 2) fsac -= 5;
     }
-    if (player.weaponFlyingSwordsPerk == "Large") fsac *= 2;
-    if (player.weaponFlyingSwordsPerk == "Massive") fsac *= 3;
-    if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.8;
+	if (player.weaponFlyingSwordsPerk == "Small Two") fsac *= 2;
+	if (player.weaponFlyingSwordsPerk == "Large") fsac *= 3;
+	if (player.weaponFlyingSwordsPerk == "Large Two" || player.weaponFlyingSwordsPerk == "Massive" || player.weaponFlyingSwordsPerk == "Small Six") fsac *= 6;
+	if (player.weaponFlyingSwordsPerk == "Massive Two") fsac *= 12;
+    if (player.weaponFlyingSwords == weaponsflyingswords.ASAUCHI) fsac *= 0.6;
     return fsac;
 }
 

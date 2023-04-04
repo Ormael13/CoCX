@@ -16,17 +16,20 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier == 1){
-                descS = " Increase precision of all attacks by 5%. Increase Rake and Claw attack damage by 50%.";
+            if (pTier >= 1){
+                descS = "Increase precision of all attacks by 5%";
             }
-            if (pTier == 2){
-                descS = "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%.";
+           if (pTier >= 2){
+                descS += " and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%.";
+            }
+             if (pTier == 1){
+                descS += ". Increase Rake and Claw attack damage by 50%.";
             }
             if (pTier == 3){
-                descS += "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%. Critical strikes from claw attacks inflict bleed damage.";
+                descS += " Critical strikes from claw attacks inflict bleed damage.";
             }
             if (pTier == 4){
-                descS += "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%. Critical strikes from claw attacks inflict bleed damage. Increase Natural weapon critical damage by 50%.";
+                descS += " Critical strikes from claw attacks inflict bleed damage. Increase Natural weapon critical damage by 50%.";
             }
             return descS;
         }
@@ -82,6 +85,10 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
             if (pTier == 3){
                 pBuffs['int.mult'] = 0.25;
                 pBuffs['lib.mult'] = 0.10;
+            }
+            if (pTier == 3){
+                pBuffs['int.mult'] = 0.35;
+                pBuffs['lib.mult'] = 0.15;
             }
             return pBuffs;
         }

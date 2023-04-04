@@ -97,9 +97,9 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(10, "Elementals",summonsbehaviourOptions);
 		}
-		if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
-			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
-			addButton(11, "P.Golems",golemsbehaviourOptions);
+		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
+			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
+			addButton(11, "Golems/Skeletons",golemsskeletonsbehaviourOptions);
 		}
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
@@ -535,10 +535,10 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
-	public function golemsbehaviourOptions():void {
+	public function golemsskeletonsbehaviourOptions():void {
 		clearOutput();
 		menu();
-		outputText("You can choose how your permanent golems will behave during each fight.\n\n");
+		outputText("You can choose how your permanent golems will behave during each fight."+(player.hasPerk(PerkLib.FirstAttackSkeletons)?" Or skeletons if you rised any.":"")+"\n\n");
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
 			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
 				var element:Number = player.statusEffectv3(StatusEffects.GolemUpgrades1);
@@ -583,21 +583,31 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
-
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking, true);
+		if (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) {
+			outputText("\n\n<b>Skeletons attack pattern behavious:</b>\n");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("Attacking at the begining of each turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(10, "Waiting", skeletonsAttacking,false);
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(11, "Attacking", skeletonsAttacking, true);
+		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
 		function golemsElementaryWeaponMode(elementalMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,3,elementalMode);
-			golemsbehaviourOptions();
+			golemsskeletonsbehaviourOptions();
 		}
 		function golemsPoisonedWeaponMode(poisonedMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,4,poisonedMode);
-			golemsbehaviourOptions();
+			golemsskeletonsbehaviourOptions();
 		}
         function golemsAttacking(attacking:Boolean):void {
             flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
-            golemsbehaviourOptions();
+            golemsskeletonsbehaviourOptions();
+        }
+        function skeletonsAttacking(attacking:Boolean):void {
+            flags[kFLAGS.NECROMANCER_SKELETONS] = (attacking)?1:0;
+            golemsskeletonsbehaviourOptions();
         }
 	}
 
