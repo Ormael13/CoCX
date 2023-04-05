@@ -4623,7 +4623,7 @@ public class PerkLib
             GreaterBrawn.requireLevel(36)
                     .requireStr(135)
                     .requirePerks(ImprovedBrawn, ImprovedBrute);
-            TitanGrip.requireLevel(18)
+            TitanGrip.requireLevel(36)
                     .requirePerks(GigantGripEx, EpicStrength)
                     .requireStr(200);
             //HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)

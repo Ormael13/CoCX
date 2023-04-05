@@ -1360,7 +1360,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.WeaponGrandMastery) && weaponSpecials("Dual Large") && str >= 140) {
 				attack *= 2;
 			}
-			if (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive")) {
+			if (hasPerk(PerkLib.GigantGripEx) && (weaponSpecials("Massive") || weaponSpecials("Dual Massive"))) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
@@ -1372,8 +1372,11 @@ use namespace CoC;
 			}//30-70-110
 			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponSpecials("Dual Large") && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
+			}
+			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Dual Massive") && str >= 150 && spe >= 100) {
+				attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Massive") || !weaponSpecials("Large") || !weaponSpecials("Dual Large") || !weaponSpecials("Small") || !weaponSpecials("Dual Small") || !isFistOrFistWeapon())) {
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Dual Massive") || !weaponSpecials("Massive") || !weaponSpecials("Large") || !weaponSpecials("Dual Large") || !weaponSpecials("Small") || !weaponSpecials("Dual Small") || !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
 			if (weaponSpecials("Hybrid") && shieldName == "nothing"){
