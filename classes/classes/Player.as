@@ -6801,4 +6801,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}
