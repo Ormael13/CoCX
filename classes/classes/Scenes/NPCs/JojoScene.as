@@ -78,7 +78,7 @@ public function jojoSprite():void {
 		if (tentacleJojo()) spriteSelect(SpriteDb.s_jojoTentacle);
 		else spriteSelect(SpriteDb.s_jojo);
 	}
-	//No Joy sprite yet.
+	else spriteSelect(SpriteDb.s_joy);
 }
 
 private function assholeOrDP():String {

@@ -2,25 +2,26 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Weapons
+package classes.Items.Weapons 
 {
 	import classes.Items.Weapon;
-	import classes.PerkLib;
 	import classes.Player;
+	import classes.PerkLib;
+	import classes.StatusEffects;
 
-	public class DualBFTHSword extends Weapon {
+	public class DualNodachi extends Weapon {
 		
-		public function DualBFTHSword() 
+		public function DualNodachi() 
 		{
-			super("DBFTHSwo", "DBFTHSword", "dual big fucking two-handed swords", "a pair of big fucking two-handed swords", "slash", 100, 8000, "Big Fucking Two-Handed Swords - if the best solution for a tiny e-pen complex at this side of the Mareth not work take this one! This pair of 2H 4 meters long swords requires 250 strength to fully unleash their power.", "Dual Massive, LGWrath", "Sword");
+			super("DNodachi","DualNodachi","dual nodachi","a dual nodachi","keen cut",65,5200,"Pair of curved over 3m long bladed weapons that cuts through flesh with the greatest of ease.", "Dual Massive", "Dueling");
 		}
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (game.player.str >= 250) boost += 40;
-			if (game.player.str >= 200) boost += 30;
-			if (game.player.str >= 150) boost += 20;
-			return (10 + boost);
+			if (game.player.str >= 250) boost += 30;
+			if (game.player.str >= 200) boost += 20;
+			if (game.player.str >= 150) boost += 10;
+			return (5 + boost);
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {

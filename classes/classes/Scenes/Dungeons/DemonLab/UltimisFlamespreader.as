@@ -28,14 +28,12 @@ public class UltimisFlamespreader extends Monster {
 
     private function swipe():void {
         outputText("The creature swoops down, and you brace yourself for fire, dodging to one side as it opens its massive maw. However, that was a feint, and the giant being instead adjusts to your dodge, its massive front limb swinging down and raking its massive claws across your entire body.");
-
         var damage:Number = ((str + tou) * 1.5);
         player.takePhysDamage(damage, true);
     }
 
     private function nom():void {
         var damage:Number = ((str + tou) * 1.5);
-
         outputText("Still engulfed in the fire, you are distracted enough for the dragon to land, FAR closer than you want.\n\n");
         if (player.getEvasionRoll()) {
             outputText("You throw yourself to the ground, narrowly avoiding a claw, but the creature still has one limb with easy access. Just in time you see the teeth come flashing down and roll out of the way, but still get bached by [themonster]'s snout.");
@@ -56,11 +54,9 @@ public class UltimisFlamespreader extends Monster {
                 player.takePhysDamage(200, true);
             }
             player.removeStatusEffect(StatusEffects.DragonsNom);
-
         } else {
             if (!wait) outputText("You struggle, slamming your [weapon] into the creature’s snout, but it doesn’t let go. ");
             outputText("It lets out a mighty roar through its still clenching teeth, the intensity of its fire breath solely focused on your body. Your [armor] is breaking, and you can smell your own flesh burning!");
-
             var damage:Number = ((str + tou) * 1.5);
             player.createOrAddStatusEffect(StatusEffects.OnFire, 1, 2);
             player.takeFireDamage(damage, true);
@@ -76,7 +72,6 @@ public class UltimisFlamespreader extends Monster {
 
     override protected function performCombatAction():void {
         if (gunner1Alive) gunnersAttack();
-
         if (HP < maxHP()*.5 && gunner2Alive) {
             outputText("\nYou smirk a little as one of the demons’ eyes widen, the gun mounted next to him smoking. Suddenly, it explodes, sending a wave of shrapnel and debris tumbling off the makeshift platform.\n");
             gunner2Alive = false;
@@ -86,7 +81,6 @@ public class UltimisFlamespreader extends Monster {
             outputText("[Themonster] shakes the platform free from its shoulders now that it is empty. <b>The dragon’s scales harden, moving closer together with an odd clicking noise.</b>\n");
             this.armorDef *= 2;
         }
-
         randomiseAction();
     }
 
@@ -119,7 +113,6 @@ public class UltimisFlamespreader extends Monster {
         outputText("“<i>Idiot, there is no way I’m trying to bury that.</i>” You ask her if the great warrior Kiha has finally met a task too much for her, and her mouth twitches, briefly forming a small smile. “<i>Please. That’s how the village elders tried to get us to do extra chores. You’ll need to try harder than that.</i>” [pg]");
         outputText("The two of you head back to camp, leaving the draconic beast behind. Kiha seems distracted, looking up at the sky as if a second one could pop out of thin air. You tell Kiha that the beast you killed must have taken a lot of resources. You doubt they’d try it again, considering how easily the two of you killed it.[pg]");
         outputText("“<i>Always looking up, aren’t you?</i>” Kiha shakes her head. “<i>Come on, let’s go home.</i>”[pg]");
-
         KihaFollower.FlameSpreaderBossKilled = true;
         cleanupAfterCombat();
     }

@@ -2884,14 +2884,14 @@ public class PerkLib
 				"+20% 'Attack' damage while strength is at or above 80. (+5% melee physical attacks multiplier)",
 				"You've chosen the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80. (+5% melee physical attacks multiplier)");
 		public static const TitanGrip:PerkType = mk("Titan's Grip", "Titan's Grip",
-				"Gain an ability to wield massive weapons in one hand. (+5 to max Str)",
-				"You've chosen the 'Titan's Grip' perk, gaining an ability to wield large weapons in one hand. (+5 to max Str)").withBuffs({'str.mult':0.5});
+				"Gain an ability to wield massive weapons in one hand. (+25% melee physical attacks multiplier)",
+				"You've chosen the 'Titan's Grip' perk, gaining an ability to wield massive weapons in one hand. (+25% melee physical attacks multiplier)").withBuffs({'str.mult':1.0});
 		public static const TitanGripEx:PerkType = mk("Titan's Grip (Ex)", "Titan's Grip (Ex)",
 				"Gain an ability to wield four large weapons as long you have four arms. (+5 to max Str/Tou)",
-				"You've chosen the 'Titan's Grip (Ex)' perk, gaining an ability to wield four large weapons as long you have four arms. (+5 to max Str/Tou)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
+				"You've chosen the 'Titan's Grip (Ex)' perk, gaining an ability to wield four large weapons as long you have four arms. (+5 to max Str/Tou)").withBuffs({'str.mult':1.0,'tou.mult':1.0});
 		public static const TitanGripSu:PerkType = mk("Titan's Grip (Su)", "Titan's Grip (Su)",
 				"Gain an ability to wield large weapons in one hand. (+5 to max Str/Tou/Spe)",
-				"You've chosen the 'Titan's Grip (Su)' perk, gaining an ability to wield large weapons in one hand. (+5 to max Str/Tou/Spe)").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
+				"You've chosen the 'Titan's Grip (Su)' perk, gaining an ability to wield large weapons in one hand. (+5 to max Str/Tou/Spe)").withBuffs({'str.mult':1.0,'tou.mult':1.0,'spe.mult':1.0});
 		public static const Tongs:PerkType = mk("Tongs", "Tongs",
 				"You no longer burn your hands when forging, allowing you to actually get work done! This increases armor proficiency. (+5% phys/mag resistance)",
 				"You've chosen the 'Tongs' perk, increasing armor proficiency. (+5% phys/mag resistance)");
@@ -4591,7 +4591,8 @@ public class PerkLib
             UnlockId2ndStage.requirePerk(UnlockId)
                     .requireStr(125)
                     .requireLevel(30);
-            DualWieldMassive.requirePerks(DualWield, GigantGripSu)
+            DualWieldMassive.requirePerk(DualWield)
+					.requireAnyPerk(TitanGrip, GigantGripSu)
                     .requireStr(150)
                     .requireLevel(30);
             GigantGripSu.requireLevel(30)
@@ -4622,6 +4623,9 @@ public class PerkLib
             GreaterBrawn.requireLevel(36)
                     .requireStr(135)
                     .requirePerks(ImprovedBrawn, ImprovedBrute);
+            TitanGrip.requireLevel(36)
+                    .requirePerks(GigantGripEx, EpicStrength)
+                    .requireStr(200);
             //HiddenDualMomentum.requirePerk(HiddenMomentum).requireStr(175).requireSpe(100).requireLevel(30);	//herculanmight - perk dodający limit do str cap (i może do max tone też)
             //a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
             //Tier 7 Strength Perks
