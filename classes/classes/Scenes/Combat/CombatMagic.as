@@ -121,8 +121,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) costPercent -= 5;
+		//
 		if (player.hasPerk(PerkLib.BloodDemonWisdom)) costPercent -= 5;
+		//
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) costPercent -= 5;
+		//
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
 		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
@@ -335,9 +338,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .25;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .3;
 		//
-		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .3;
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .4;
 		//
-		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .3;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .5;
         //
 		mod = Math.round(mod * 100) / 100;
 		return mod;

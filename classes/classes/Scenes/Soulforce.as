@@ -288,7 +288,7 @@ public class Soulforce extends BaseContent
 		outputText("\n\n<b>Gained perk - " + perk.name() + "</b>");
 		doNext(camp.returnToCampUseFourHours);
 	}
-
+/*
 	public function bodycultivationSubPath():void {
 		var stages:Array = [
 			["Apprentice", PerkLib.FleshBodyApprenticeStage, consumables.LGSFRPB, PerkLib.SoulApprentice],
@@ -311,6 +311,33 @@ public class Soulforce extends BaseContent
 	private function bodycultivationSubPathChosen(perk:PerkType, bottle:ItemType, btcnt:int):void {
 		player.destroyItems(bottle, 2);
 		player.destroyItems(useables.BTSOLUTION, btcnt);
+		player.createPerk(perk, 0, 0, 0, 0);
+		outputText("\n\n<b>Gained perk - " + perk.name() + "</b>");
+		doNext(camp.returnToCampUseFourHours);
+	}
+*/
+	public function bodycultivationSubPath():void {
+		var stages:Array = [
+			["Apprentice", PerkLib.FleshBodyApprenticeStage, consumables.LGSFRPB, PerkLib.SoulApprentice],
+			["Warrior", PerkLib.FleshBodyWarriorStage, consumables.MGSFRPB, PerkLib.SoulSprite],
+			["Elder", PerkLib.FleshBodyElderStage, consumables.HGSFRPB, PerkLib.SoulExalt],
+			["Overlord", PerkLib.FleshBodyOverlordStage, consumables.SGSFRPB, PerkLib.SoulKing],
+		];
+		menu();
+		var i:int;
+		for (i = 0; i < stages.length; ++i)
+			addButton(i, stages[i][0], bodycultivationSubPathChosen, stages[i][1], stages[i][2])
+				.disableIf(!player.hasItem(stages[i][2], 1) || !player.hasItem(useables.BTSOLUTION, 1),
+					"Requires 1 bottle of " + (stages[i][2] as ItemType).longName
+					+ " and 1 vial of " + useables.BTSOLUTION.longName)
+				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
+				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
+		addButton(14, "Back", SubPaths);
+	}
+
+	private function bodycultivationSubPathChosen(perk:PerkType, bottle:ItemType):void {
+		player.destroyItems(bottle, 1);
+		player.destroyItems(useables.BTSOLUTION, 1);
 		player.createPerk(perk, 0, 0, 0, 0);
 		outputText("\n\n<b>Gained perk - " + perk.name() + "</b>");
 		doNext(camp.returnToCampUseFourHours);

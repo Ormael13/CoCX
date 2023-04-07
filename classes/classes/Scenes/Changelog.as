@@ -60,7 +60,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 6 strength lvl-up perk: Titan's Grip. Req. Gigant's Grip (Ex) and Epic Strength perks, 200+ str. Effect: Gain an ability to wield massive weapons in one hand. (+25% melee physical attacks multiplier)\n");
 			outputText("-Dual Wield (Massive) perk can be picked when having Dual Wield perk and one of two other perks: Titan's Grip or Gigant's Grip (Su).\n");
 			outputText("-New melee weapon (by Ormael): Dual Nodachi - buyable at Orsbulg shop. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
-			outputText("-\n");
+			outputText("-Body Cultivation progress req. now only 1 body temperiong solution and one bottle of pills. There would be better body cultivation options in future that would req. larger investments.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -80,7 +80,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought\n");
+			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
