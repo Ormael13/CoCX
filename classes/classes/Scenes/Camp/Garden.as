@@ -653,6 +653,7 @@ import classes.Scenes.SceneLib;
 		outputText("Snakebane flower: "+IngrediantBagSlot03+"/"+IngrediantBagSlot03Cap+"\n");
 		outputText("Ironweed: "+IngrediantBagSlot04+"/"+IngrediantBagSlot04Cap+"\n");
 		outputText("Blade fern: "+IngrediantBagSlot05+"/"+IngrediantBagSlot05Cap+"\n");
+		outputText("Alraune nectar: "+IngrediantBagSlot06+"/"+IngrediantBagSlot06Cap+"\n");
 		outputText("\n<b>Fields</b>\n");
 		outputText("-01-: "+(GardenSlot01 != "" ? ""+GardenSlot01+" (Time until harvest: "+GardenSlot01Time+" hours)":"empty")+"");
 		outputText("\n-02-: "+(GardenSlot02 != "" ? ""+GardenSlot02+" (Time until harvest: "+GardenSlot02Time+" hours)":"empty")+"");
