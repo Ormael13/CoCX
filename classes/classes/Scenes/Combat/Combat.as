@@ -2950,7 +2950,7 @@ public class Combat extends BaseContent {
 				else if (flags[kFLAGS.MULTISHOT_STYLE] >= 1 && player.hasPerk(PerkLib.TaintedMagazine)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
 			}
-            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
+            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.ALAKABL || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
 				if (flags[kFLAGS.MULTISHOT_STYLE] >= 3 && player.hasPerk(PerkLib.PrimedClipWarp)) {
 					if (flags[kFLAGS.MULTISHOT_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
 					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.MULTISHOT_STYLE];
@@ -4261,8 +4261,34 @@ public class Combat extends BaseContent {
 							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doTrueDamage(damage, true, true);
 								doMagicDamage(Math.round(damage * 0.2), true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
 							}
-							else doTrueDamage(damage, true, true);
+							else {
+								doTrueDamage(damage, true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
+							}
+						}
+						else if (player.weaponRange == weaponsrange.ALAKABL) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doMagicDamage(Math.round(damage * 1.2), true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
+							}
+							else {
+								doMagicDamage(damage, true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
+							}
 						}
 						else {
                             if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
@@ -4471,6 +4497,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
+        if (player.weaponRange == weaponsrange.ALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
 		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
@@ -11521,6 +11548,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
+        if (player.weaponRange == weaponsrange.ALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
