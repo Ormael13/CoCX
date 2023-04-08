@@ -2923,6 +2923,9 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 3) {
 				mult -= 15;
 			}
+			if (hasPerk(PerkLib.GreySageWisdom)) {
+				mult -= 20;
+			}
 			//--STATUS AFFECTS--
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				mult -= 20;

@@ -11242,7 +11242,9 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageExpert)) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageMaster)) manaregen += Math.round(player.maxMana() * 0.01);
-		if (player.hasPerk(PerkLib.GreySageIntelligence)) manaregen += Math.round(player.maxMana() * player.intStat.core.value * 0.001);
+		if (player.hasPerk(PerkLib.GreySageIntelligence)) manaregen += Math.round(player.maxMana() * 0.005);
+		if (player.hasPerk(PerkLib.WellOfMana)) manaregen += Math.round(player.maxMana() * player.intStat.core.value * 0.001);
+		if (player.hasPerk(PerkLib.GreySageWisdom)) manaregen += Math.round(player.maxMana() * 0.005);
         if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana() * 0.02);
         return manaregen;
     }
@@ -15569,6 +15571,7 @@ public function assumeAsuraForm007():void {
 public function returnToNormalShape():void {
     clearOutput();
     outputText("Gathering all you willpower you forcefully subduing your inner rage and returning to your normal shape.");
+	//if (perkBonusDamage po asura toughness) 
     player.statStore.removeBuffs("AsuraForm");
     enemyAI();
 }
@@ -15586,10 +15589,17 @@ public function asurasHowl():void {
         if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 4;
         else heal *= 2;
     }
-    if (player.hasPerk(PerkLib.AbsoluteStrength)) heal *= 1.2;
-    if (player.hasPerk(PerkLib.AsuraStrength)) heal *= 1.4;
-    if (player.hasPerk(PerkLib.ICastAsuraFist)) heal *= 1.6;
-    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) heal *= 1.8;
+    if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+		var add:Number = 1.2;
+		if (player.hasPerk(PerkLib.AsuraStrength)) add += 0.4;
+		if (player.hasPerk(PerkLib.ICastAsuraFist)) add += 0.6;
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) add += 0.8;
+		if (player.hasPerk(PerkLib.AsuraToughness)) add += 1;
+		//
+		//
+		if (player.hasPerk(PerkLib.AsuraSpeed)) add += 1.6;
+		heal *= add;
+	}
     //Determine if critical heal!
     var crit:Boolean = false;
     var critHeal:int = 5;

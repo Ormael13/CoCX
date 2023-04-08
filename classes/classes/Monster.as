@@ -2741,10 +2741,12 @@ import flash.utils.getQualifiedClassName;
 				manaRecovery *= manaRecoveryMulti;
 				if (hasPerk(PerkLib.WarMageExpert)) manaRecovery += Math.round(maxMana() * 0.005);
 				if (hasPerk(PerkLib.WarMageMaster)) manaRecovery += Math.round(maxMana() * 0.01);
+				if (hasPerk(PerkLib.GreySageIntelligence)) manaRecovery += Math.round(maxMana() * 0.005);
 				if (hasPerk(PerkLib.WellOfMana)) {
 					if (this.inte >= (100 * (1 + (0.2 * (1 + newGamePlusMod()))))) manaRecovery += Math.round(maxMana() * 0.1);
 					else manaRecovery += Math.round(maxMana() * this.inte * 0.001);
 				}
+				if (hasPerk(PerkLib.GreySageWisdom)) manaRecovery += Math.round(maxMana() * 0.005);
 				addMana(manaRecovery);
 			}
 

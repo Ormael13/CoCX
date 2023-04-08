@@ -891,7 +891,7 @@ public class MinervaPurification extends BaseContent
 			outputText("and you leave the tower to return to your camp. \n\n");
 			awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 			dynStats("cor", -4);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(playerMenu);
 		}
 		private function sleepWithMinervaPostBirthing():void {
 			clearOutput();
@@ -902,7 +902,7 @@ public class MinervaPurification extends BaseContent
 			outputText("\"<i>Come back any time, love,</i>\" she says before she kisses you on your cheek. You finlly set your way back to your camp.");
 			awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 			dynStats("cor", -4);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(playerMenu);
 		}
 		
 		private function minervaACapacity():Number {

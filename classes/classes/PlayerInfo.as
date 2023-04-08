@@ -2086,7 +2086,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 30) {
 					if (player.hasPerk(PerkLib.BloodDemonToughness)) addButtonDisabled(2, "BDT", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.WayOfTheBlood)) addButton(2, "BDT", perkBloodDemonToughness).hint("Choose the 'Blood Demon Toughness' super perk. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10% of OverMax HP, -5% blood spells/soulskills cost, +20% blood spells/soulskills power, +10% Base TOU Cap, +0,5% HP regen)");
+						if (player.hasPerk(PerkLib.WayOfTheBlood)) addButton(2, "BDT", perkBloodDemonToughness).hint("Choose the 'Blood Demon Toughness' super perk. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10% of OverMax HP/Base TOU Cap, -5% blood spells/soulskills cost, +20% blood spells/soulskills power, +0,5% HP regen)");
 						else addButtonDisabled(2, "BDT", "You need to first have the 'Way of the Blood' super perk.");
 					}
 				}
@@ -2204,7 +2204,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 30) {
 					if (player.hasPerk(PerkLib.GreySageIntelligence)) addButtonDisabled(2, "GSI", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.Equilibrium)) addButton(2, "GSI", perkGreySageIntelligence).hint("Choose the 'Grey Sage Intelligence' super perk. When using Mana Shield during Defend command it woulkd fully absorb attacks no matter how strong. (+10% of OverMax Mana/Base INT Cap)");
+						if (player.hasPerk(PerkLib.Equilibrium)) addButton(2, "GSI", perkGreySageIntelligence).hint("Choose the 'Grey Sage Intelligence' super perk. When using Mana Shield during Defend command it would fully absorb attacks no matter how strong. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)");
 						else addButtonDisabled(2, "GSI", "You need to first have the 'Equilibrium' super perk.");
 					}
 				}
@@ -2220,11 +2220,19 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 50) {
 					if (player.hasPerk(PerkLib.WellOfMana)) addButtonDisabled(4, "WoM", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.HyperCasting)) addButton(4, "WoM", perkHyperCasting).hint("Choose the 'WellOfMana' super perk. Mana recovery increased by (0,1% * core int value) of max mana. When using Wait or Defend move mana recovery doubled. (+10% of OverMax Mana)");
+						if (player.hasPerk(PerkLib.HyperCasting)) addButton(4, "WoM", perkWellOfMana).hint("Choose the 'Well of Mana' super perk. Mana recovery increased by (0,1% * core int value) of max mana. When using Wait or Defend move mana recovery doubled. (+10% of OverMax Mana)");
 						else addButtonDisabled(4, "WoM", "You need to first have the 'Hyper Casting' super perk.");
 					}
 				}
-				else addButtonDisabled(4, "WoM", "You need to reach level 40 first.");
+				else addButtonDisabled(4, "WoM", "You need to reach level 50 first.");
+				if (player.level >= 60) {
+					if (player.hasPerk(PerkLib.GreySageWisdom)) addButtonDisabled(5, "GSW", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.WellOfMana)) addButton(5, "GSW", perkGreySageWisdom).hint("Choose the 'Grey Sage Wisdom' super perk. Increase damage reduction against spells by 20%. (+10% of OverMax Mana/Base WIS Cap, +0,5% Mana regen)");
+						else addButtonDisabled(5, "GSW", "You need to first have the 'Well of Mana' super perk.");
+					}
+				}
+				else addButtonDisabled(5, "GSW", "You need to reach level 60 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButtonDisabled(0, "HJ:GS", "You already have this perk.");
@@ -2237,6 +2245,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(3, "HC", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.WellOfMana)) addButtonDisabled(4, "WoM", "You already have this perk.");
 				else addButtonDisabled(4, "WoM", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.GreySageWisdom)) addButtonDisabled(5, "GSW", "You already have this perk.");
+				else addButtonDisabled(5, "GSW", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
@@ -2440,6 +2450,20 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.HyperCasting,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Hyper Casting' super perk.");
+		doNext(superPerkBuyMenu, 4);
+	}
+	private function perkWellOfMana():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.WellOfMana,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Well of Mana' super perk.");
+		doNext(superPerkBuyMenu, 4);
+	}
+	private function perkGreySageWisdom():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.GreySageWisdom,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Grey Sage Wisdom' super perk.");
 		doNext(superPerkBuyMenu, 4);
 	}
 	private function perkDeityJobMunchkin():void {
