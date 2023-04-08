@@ -4688,7 +4688,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //2.Goopy skin
-        if (!player.isGooSkin() && rand(3) == 0 && changes < changeLimit) {
+        if ((!player.isGooSkin() || player.isGooSkin() && !colourmatch()) && rand(3) == 0 && changes < changeLimit) {
             transformations.SkinGoo(Skin.COVERAGE_COMPLETE, type).applyEffect();
             changes++;
         }
@@ -4744,6 +4744,22 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) outputText(player.modThickness(20, 3));
         if (rand(2) == 0) outputText(player.modTone(15, 5));
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+
+        function colourmatch():Boolean{
+            var check:Boolean = false;
+            switch (type){
+                case 0:
+                    check = (InCollection(player.skinColor, SlimeRace.SlimeSkinColors));
+                    break;
+                case 1:
+                    check = (InCollection(player.skinColor, MagmaSlimeRace.MagmaSlimeSkinColors));
+                    break;
+                case 2:
+                    check = (InCollection(player.skinColor, DarkSlimeRace.DarkSlimeSkinColors));
+                    break;
+            }
+            return check;
+        }
     }
 
     public function sharkTooth(type:Number, player:Player):void {
