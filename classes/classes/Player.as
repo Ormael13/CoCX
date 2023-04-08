@@ -2576,8 +2576,9 @@ use namespace CoC;
 			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
-			if (damage * magicmult <= mana) {
-				mana -= (damage * magicmult);
+			if ((damage * magicmult <= mana) || (hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))) {
+				if (damage * magicmult > mana) mana = 0;
+				else mana -= (damage * magicmult);
 				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.

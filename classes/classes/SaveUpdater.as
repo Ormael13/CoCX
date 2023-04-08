@@ -2106,11 +2106,55 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.055) {
 				player.buff("Curse").remove();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.055;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.056) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.056;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.056) {
+				var refound:Number = 0;
+				if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
+					refound += 21;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
+					refound += 91;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
+					refound += 411;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+					refound += 2231;
+				}
+				if (refound > 0) {
+					player.flags[kFLAGS.SPIRIT_STONES] += refound;
+					outputText("\n\nReally smol refound ("+refound+" SS) for those that went into body cultivation path. ^^");
+				}
+				if (player.hasPerk(PerkLib.ICastAsuraFist) && !player.hasPerk(PerkLib.AsuraStrength)) {
+					player.removePerk(PerkLib.ICastAsuraFist);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.AsuraStrength)) {
+					player.removePerk(PerkLib.AsuraStrength);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+					player.removePerk(PerkLib.LikeAnAsuraBoss);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.YourPainMyPower)) {
+					player.removePerk(PerkLib.YourPainMyPower);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+					player.removePerk(PerkLib.MyBloodForBloodPuppies);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.BloodDemonToughness)) {
+					player.removePerk(PerkLib.BloodDemonToughness);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.HyperCasting)) {
+					player.removePerk(PerkLib.HyperCasting);
+					player.superPerkPoints += 1;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.056;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.057) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.057;

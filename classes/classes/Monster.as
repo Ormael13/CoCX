@@ -345,9 +345,9 @@ import flash.utils.getQualifiedClassName;
 			var maxOver2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
 			//
 			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//
@@ -764,9 +764,9 @@ import flash.utils.getQualifiedClassName;
 			var temp2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobAsura)) temp2 += 0.1;
 			if (hasPerk(PerkLib.AbsoluteStrength)) temp2 += 0.1;
-			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
-			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
 			//
@@ -845,7 +845,10 @@ import flash.utils.getQualifiedClassName;
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
 			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
+			if (hasPerk(PerkLib.GreySageIntelligence)) max2 += 0.1;
+			if (hasPerk(PerkLib.HyperCasting)) max2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.WellOfMana)) max2 += 0.1;
 			max1 *= max2;//~130%
 			max1 = Math.round(max1);
 			return max1;
@@ -2729,8 +2732,6 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) manaRecovery += 5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) manaRecovery += 5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) manaRecovery += 5;
-				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
-				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
@@ -2738,6 +2739,12 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) manaRecoveryMulti += 1.5;
 				if (hasPerk(PerkLib.ManaAffinityI)) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
 				manaRecovery *= manaRecoveryMulti;
+				if (hasPerk(PerkLib.WarMageExpert)) manaRecovery += Math.round(maxMana() * 0.005);
+				if (hasPerk(PerkLib.WarMageMaster)) manaRecovery += Math.round(maxMana() * 0.01);
+				if (hasPerk(PerkLib.WellOfMana)) {
+					if (this.inte >= (100 * (1 + (0.2 * (1 + newGamePlusMod()))))) manaRecovery += Math.round(maxMana() * 0.1);
+					else manaRecovery += Math.round(maxMana() * this.inte * 0.001);
+				}
 				addMana(manaRecovery);
 			}
 
@@ -3817,4 +3824,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

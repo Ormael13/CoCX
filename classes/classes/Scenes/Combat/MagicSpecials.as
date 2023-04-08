@@ -299,20 +299,20 @@ public class MagicSpecials extends BaseCombatContent {
 						bd.disable("Your wrath is too low to unleash howl!");
 					}
 					if (player.hasPerk(PerkLib.AbsoluteStrength)) {
-						if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
-						else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("EFoD", combat.asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+						if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+						else if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("EFoD", combat.asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 						else bd = buttons.add("SFoD", combat.asuras6FingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 						if (player.wrath < (player.maxWrath() * 0.5)) {
 							bd.disable("Your wrath is too low to poke your enemies Asura Style!");
 						}
 					}
-					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+					if (player.hasPerk(PerkLib.AsuraStrength)) {
 
 					}
 					if (player.hasPerk(PerkLib.ICastAsuraFist)) {
 
 					}
-					if (player.hasPerk(PerkLib.AsuraStrength)) {
+					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 
 					}
 				} else {

@@ -763,9 +763,9 @@ public class Creature extends Utils
 			var maxOver2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
 			//
 			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//

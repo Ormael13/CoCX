@@ -22,8 +22,10 @@ public class CoreStat extends RawStat{
 			case 'tou.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismTou);
 				base += host.perkv1(PerkLib.BodyTempering);
-				if (host.hasPerk(PerkLib.AsuraToughness)) base *= 1.1;
-				if (host.hasPerk(PerkLib.BloodDemonToughness)) base *= 1.1;
+				var tou:Number = 1;
+				if (host.hasPerk(PerkLib.AsuraToughness)) tou += 0.1;
+				if (host.hasPerk(PerkLib.BloodDemonToughness)) tou += 0.1;
+				base *= tou;
 				base = Math.round(base);
 				break;
 			case 'spe.core':
@@ -35,13 +37,19 @@ public class CoreStat extends RawStat{
 			case 'int.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismInt);
 				base += host.perkv1(PerkLib.SoulTempering);
-				if (host.hasPerk(PerkLib.BloodDemonIntelligence)) base *= 1.1;
+				var inte:Number = 1;
+				if (host.hasPerk(PerkLib.BloodDemonIntelligence)) inte += 0.1;
+				if (host.hasPerk(PerkLib.GreySageIntelligence)) inte += 0.1;
+				base *= inte;
 				base = Math.round(base);
 				break;
 			case 'wis.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismWis);
 				base += host.perkv1(PerkLib.SoulTempering);
-				if (host.hasPerk(PerkLib.BloodDemonWisdom)) base *= 1.1;
+				var wis:Number = 1;
+				if (host.hasPerk(PerkLib.BloodDemonWisdom)) wis += 0.1;
+				if (host.hasPerk(PerkLib.GreySageWisdom)) wis += 0.1;
+				base *= wis;
 				base = Math.round(base);
 				break;
 			case 'lib.core':
