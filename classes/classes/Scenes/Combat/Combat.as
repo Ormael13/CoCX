@@ -10048,6 +10048,7 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("AsuraForm")) {
             if (player.wrath < asuraformCost()) {
                 player.statStore.removeBuffs("AsuraForm");
+				if (player.buff("WarriorsRage").getRemainingTicks() > 9000) player.statStore.removeBuffs("WarriorsRage");
                 outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  Your Asura form slowly fades away, leaving you in your normal form.</b>\n\n");
             }
             //	else {
@@ -10979,6 +10980,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) maxPercentRegen += 0.5;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) maxPercentRegen += 0.5;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) maxPercentRegen += 0.5;
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
@@ -11351,6 +11354,8 @@ public class Combat extends BaseContent {
         if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry1 == jewelries.UNDKINS) wrathregen += 3;
+		if (player.hasPerk(PerkLib.AsuraStrength)) wrathregen += Math.round(player.maxWrath() * 0.005);
+		if (player.hasPerk(PerkLib.AsuraToughness)) wrathregen += Math.round(player.maxWrath() * 0.005);
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
 		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) BonusWrathMult += 1;
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
@@ -15516,6 +15521,10 @@ public function asuraformCost():Number {
     var modcsc:Number = 25;
     if (player.hasPerk(PerkLib.AsuraStrength)) modcsc += 25;
     if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 25;
+	if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) {
+		if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) modcsc += 2;
+		else modcsc += 5;
+	}
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     return modcsc;
@@ -15532,6 +15541,7 @@ public function assumeAsuraForm():void {
     }
     outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
     assumeAsuraForm007();
+	if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) mspecials.warriorsrage007();
     statScreenRefresh();
     enemyAI();
 }
@@ -15573,6 +15583,7 @@ public function returnToNormalShape():void {
     outputText("Gathering all you willpower you forcefully subduing your inner rage and returning to your normal shape.");
 	//if (perkBonusDamage po asura toughness) 
     player.statStore.removeBuffs("AsuraForm");
+	if (player.buff("WarriorsRage").getRemainingTicks() > 9000) player.statStore.removeBuffs("WarriorsRage");
     enemyAI();
 }
 

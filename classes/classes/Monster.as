@@ -348,10 +348,10 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
+			//
 			//
 			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
-			//
-			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.OverMaxHP)) {
 				if (hasPerk(PerkLib.Enemy300Type)) maxOver2 += (0.15 * perkv1(PerkLib.OverMaxHP));
@@ -2636,6 +2636,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.FleshBodyElderStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyOverlordStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyTyrantStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonToughness)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonIntelligence)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonWisdom)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) healingPercent += 0.5;

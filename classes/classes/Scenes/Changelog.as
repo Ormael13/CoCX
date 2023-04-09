@@ -68,6 +68,16 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Grey Sage Intelligence. Gained by spending 1 super perk point and having 'Equilibrium' super perk. Effects: Gain Grey Sage Intelligence. When using Mana Shield during Defend command it woulkd fully absorb attacks no matter how strong. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
 			outputText("-New event perk: Well of Mana. Gained by spending 1 super perk point and having 'Hyper Casting' super perk. Effects: Mana recovery increased by (0,1% * core int value) of max mana. When using Wait or Defend move mana recovery doubled. (+10% to OverMax Mana)\n");
 			outputText("-New event perk: Grey Sage Wisdom. Gained by spending 1 super perk point and having 'Well of Mana' super perk. Effects: Gain Grey Sage Wisdom. Increase damage reduction against spells by 20%. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
+			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
+			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
+			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -89,15 +99,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour\n");
 			/*ostatni punkt changelogu
@@ -110,7 +111,6 @@ public class Changelog extends BaseContent
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
-			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
@@ -457,7 +457,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Testicles (Evolved). Req. Human Testicles (Primitive) and lvl 60+. Effects: Increases virility rating by 45, +15% to lust resistance, increase cum production by ~100%, +200 to max lust and allow to use Cum Cannon once per fight.\n");
 			outputText("-New mutation perk: Human Musculature. Req. having free musculature mutation slot, 100+ tone, human race (17+). Effects: Your altered musculature allows to increase your natural strength and tone.\n");
 			outputText("-New mutation perk: Human Musculature (Primitive). Req. Human Musculature and lvl 30+. Effects: Your musculature continue to increase your natural strength and tone gained from previous change. (+15% of max core Str as phantom Str)\n");
-			outputText("-New mutation perk: Human Musculature (Evolved). Req. Human Musculature (Primitive) and lvl 60+. Effects: Your musculature increased again your natural strength and tone limit. Boost Warrior's Rage effect (+1 per 10 pts of core stat value) and duration by 5 turns. (+45%/+15% of max core Str/Spe as phantom Str/Spe)\n");
+			outputText("-New mutation perk: Human Musculature (Evolved). Req. Human Musculature (Primitive) and lvl 60+. Effects: Your musculature increased again your natural strength and tone limit. Boost Warrior's Rage effect (+1 per 10 pts of core stat value) and duration by 6 turns. (+45%/+15% of max core Str/Spe as phantom Str/Spe)\n");
 			outputText("-New mutation perk: Human Fat. Req. having free fat tissue mutation slot, 100+ thickness, human race (17+). Effects: Your altered fat tissue allows to increase your natural toughness and thickness.\n");
 			outputText("-New mutation perk: Human Fat (Primitive). Req. Human Fat and lvl 30+. Effects: Your fat tissue continue to increase your natural toughness and thickness gained from previous change. (+15% of max core Tou as phantom Tou)\n");
 			outputText("-New mutation perk: Human Fat (Evolved). Req. Human Fat (Primitive) and lvl 60+. Effects: Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)\n");

@@ -3152,6 +3152,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.JobBrawler)) WarriorsRageBoost += 15;
 		if (player.hasPerk(PerkLib.Berzerker)) WarriorsRageBoost += 20;
 		if (player.hasPerk(PerkLib.Lustzerker)) WarriorsRageBoost += 20;
+		if (player.hasPerk(PerkLib.AsuraToughness)) WarriorsRageBoost += 20;
 		var oldHPratio:Number = player.hp100/100;
 		temp = WarriorsRageBoost;
 		tempStr = temp;
@@ -3166,7 +3167,12 @@ public class MagicSpecials extends BaseCombatContent {
 			tempStr += Math.round(player.strStat.core.value * 0.1);
 			tempTou += Math.round(player.touStat.core.value * 0.1);
 			tempSpe += Math.round(player.speStat.core.value * 0.1);
-			warriorsrageDuration += 5;
+			warriorsrageDuration += 6;
+		}
+		if (player.hasPerk(PerkLib.AsuraToughness)) {
+			tempStr += Math.round(player.strStat.core.value * 0.1);
+			tempTou += Math.round(player.touStat.core.value * 0.1);
+			tempSpe += Math.round(player.speStat.core.value * 0.1);
 		}
 		tempStr *= 2;
 		mainView.statsView.showStatUp('str');
@@ -3184,7 +3190,8 @@ public class MagicSpecials extends BaseCombatContent {
 				tempSpe = tempSpe*1.5;
 			}
 		}
-		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
+		if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatPermanent();
+		else player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
 		player.HP = oldHPratio*player.maxHP();
 	}
 

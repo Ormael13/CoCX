@@ -648,7 +648,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
 			if (player.HP <= player.minHP()) {
-				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>[name]... Are you okay..? Would it help if I went easier? You don’ have ta fight me if you aren’t ready… Please, get some rest./i>\"\n\n");
+				if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 30) outputText("\"<i>[name]... Are you okay..? Would it help if I went easier? You don’ have ta fight me if you aren’t ready… Please, get some rest.</i>\"\n\n");
 				else outputText("\"<i>Das all ya got?</i>\" Zenji shakes his head, \"<i>Ya gotta try harder dan dat next time. Ya be safe out dere now.</i>\"\n\n");
 				zenjiPerspectiveOnPlayer(-4);
 			}

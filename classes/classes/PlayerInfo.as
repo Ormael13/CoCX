@@ -2107,6 +2107,14 @@ public class PlayerInfo extends BaseContent {
 					}
 				}
 				else addButtonDisabled(4, "YPMP", "You need to reach level 50 first.");
+				if (player.level >= 60) {
+					if (player.hasPerk(PerkLib.BloodDemonIntelligence)) addButtonDisabled(5, "BDI", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.YourPainMyPower)) addButton(5, "BDI", perkBloodDemonIntelligence).hint("Choose the 'Blood Demon Intelligence' super perk. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)");
+						else addButtonDisabled(5, "BDI", "You need to first have the 'Your Pain My Power' super perk.");
+					}
+				}
+				else addButtonDisabled(5, "BDI", "You need to reach level 60 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
@@ -2119,6 +2127,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(3, "MBFBP", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(4, "YPMP", "You already have this perk.");
 				else addButtonDisabled(4, "YPMP", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.BloodDemonIntelligence)) addButtonDisabled(5, "BDI", "You already have this perk.");
+				else addButtonDisabled(5, "BDI", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
@@ -2145,7 +2155,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 30) {
 					if (player.hasPerk(PerkLib.AsuraStrength)) addButtonDisabled(2, "ASTR", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.AbsoluteStrength)) addButton(2, "ASTR", perkAsuraStrength).hint("Choose the 'Asura Strength' super perk. Asura Form increase to physical might rise to 120%/60%/40% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath/Base STR Cap)");
+						if (player.hasPerk(PerkLib.AbsoluteStrength)) addButton(2, "ASTR", perkAsuraStrength).hint("Choose the 'Asura Strength' super perk. Asura Form increase to physical might rise to 120%/60%/40% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath/Base STR Cap, +0,5% Wrath generated)");
 						else addButtonDisabled(2, "ASTR", "You need to first have the 'Absolute Strength' super perk.");
 					}
 				}
@@ -2166,6 +2176,14 @@ public class PlayerInfo extends BaseContent {
 					}
 				}
 				else addButtonDisabled(4, "LAB", "You need to reach level 50 first.");
+				if (player.level >= 60) {
+					if (player.hasPerk(PerkLib.AsuraToughness)) addButtonDisabled(5, "AT", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButton(5, "AT", perkAsuraToughness).hint("Choose the 'Asura Toughness' super perk. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)");
+						else addButtonDisabled(5, "AT", "You need to first have the 'Like A-sura Boss' super perk.");
+					}
+				}
+				else addButtonDisabled(5, "AT", "You need to reach level 60 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this perk.");
@@ -2178,6 +2196,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(3, "ICAF", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButtonDisabled(4, "LAB", "You already have this perk.");
 				else addButtonDisabled(4, "LAB", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.AsuraToughness)) addButtonDisabled(5, "AT", "You already have this perk.");
+				else addButtonDisabled(5, "AT", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
@@ -2389,6 +2409,13 @@ public class PlayerInfo extends BaseContent {
 		outputText("You gained 'Your Pain My Power' super perk.");
 		doNext(superPerkBuyMenu, 2);
 	}
+	private function perkBloodDemonIntelligence():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.BloodDemonIntelligence,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Blood Demon Intelligence' super perk.");
+		doNext(superPerkBuyMenu, 2);
+	}
 	private function perkHiddenJobAsura():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.HiddenJobAsura,0,0,0,0);
@@ -2422,6 +2449,13 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.LikeAnAsuraBoss,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Like A-sura Boss' super perk.");
+		doNext(superPerkBuyMenu, 3);
+	}
+	private function perkAsuraToughness():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.AsuraToughness,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Asura Toughness' super perk.");
 		doNext(superPerkBuyMenu, 3);
 	}
 	private function perkHiddenJobGreySage():void {
@@ -2488,4 +2522,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(superPerkBuyMenu, 5);
 	}
 }
-}
+}

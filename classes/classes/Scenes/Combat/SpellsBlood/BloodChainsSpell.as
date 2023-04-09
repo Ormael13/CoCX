@@ -36,7 +36,9 @@ public class BloodChainsSpell extends AbstractBloodSpell {
 	}
 	
 	public function calcDuration():int {
-		return 2;
+		var calcD:int = 2;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) calcD *= 2;
+		return calcD;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
