@@ -750,19 +750,19 @@ public class Combat extends BaseContent {
             addButton(1, "Stop", stopChanneledSpecial);
         }
         /*
-	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
-		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
-			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
-			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+				addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+				addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+			}
 		}
-	}
-	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
-		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
-			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
-			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
+			if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+				addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+				addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+			}
 		}
-	}
-	*/
+		*/
         if (monster.hasStatusEffect(StatusEffects.AttackDisabled)) {
             if (monster is Lethice) {
                 outputText("\n<b>With Lethice up in the air, you've got no way to reach her with your attacks!</b>");
@@ -7892,7 +7892,7 @@ public class Combat extends BaseContent {
 			var maxSens:Number = 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 2) maxSens += 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) maxSens += 500;
-			if (player.sens >= maxSens) playerLevelAdjustment += 5;
+			if (player.sens >= maxSens) playerLevelAdjustment += (maxSens * 0.04);
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
         return playerLevelAdjustment;
