@@ -1090,7 +1090,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
 			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
-			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly cursed magical axes rumored to be the artefact of the fallen war deity Asterius.");
+			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly evil magical axes rumored to be the artefact of the fallen war deity Asterius.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);

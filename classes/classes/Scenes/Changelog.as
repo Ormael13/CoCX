@@ -71,9 +71,9 @@ public class Changelog extends BaseContent
 			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
 			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Urta Quest would temporaly reset to NG 0 settings if PC is already on NG 1 or higher. ALso fixing error with wrong resetting secondary stats scaling post urta quest.\n");
+			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the same amount nonlust/lust dmg pc deal to enemy/ies.\n");
+			outputText("-Armor and Magic Defense of armor items would now matter more for higher values (especialy post 80). Instead of adding coresponding type of damage reduction by 1% until reaching 80 it will add 1% until 50. Any additional point of armor/mdef above 50 would apply DR based on this formula: dmg * (1 / square of (armor/mdef - 50)).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -98,6 +98,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour\n");
@@ -174,13 +186,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -212,12 +218,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

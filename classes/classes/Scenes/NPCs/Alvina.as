@@ -273,7 +273,6 @@ public class Alvina extends Monster
 				alvinaMeteorStorm();
 				return;
 			}
-
 			RandomiseAction();
 		}
 
@@ -325,8 +324,6 @@ public class Alvina extends Monster
 					alvinaInfernalFlare();
 			}
 		}
-
-
 
 		override public function defeated(hpVictory:Boolean):void
 		{

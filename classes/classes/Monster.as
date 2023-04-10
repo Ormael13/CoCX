@@ -868,10 +868,6 @@ import flash.utils.getQualifiedClassName;
 			if (this.level >= 175) temp *= 8;
 			if (this.level >= 200) temp *= 9;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.1;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 1.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
@@ -884,10 +880,6 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 2.2;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			}
 			else {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 2;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
 				if (hasPerk(PerkLib.EnemyBossType)) {
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
@@ -916,6 +908,23 @@ import flash.utils.getQualifiedClassName;
 			var cFDR:Number = 20;
 			if (hasPerk(PerkLib.EnemyUndeadType)) cFDR -= 15;
 			return cFDR;
+		}
+
+		public function damageReductionBasedOnDifficulty():Number {
+			var dRBOD:Number = 1;
+			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.1;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 2;
+			}
+			else {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 2;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 10;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 25;
+			}
+			return dRBOD;
 		}
 
 		public override function damagePercent():Number {
@@ -2446,8 +2455,9 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		protected function applyTease(lustDelta:Number):void{
+			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
+			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				outputText(" You cool down a little bit ");

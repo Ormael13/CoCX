@@ -2094,8 +2094,8 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 40) {
 					if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.YourPainMyPower)) addButton(3, "MBFBP", perkMyBloodForBloodPuppies).hint("Choose the 'My Blood for Blood Puppies' super perk. During fight small part of your blood from into blood puppies that can attack on your behalf with blood magic/soulskills. When you grow in mastery of blood they would grow stronger with you. (+10% of OverMax HP, -5% blood spells/soulskills cost, +25% blood spells/soulskills power)");
-						else addButtonDisabled(3, "MBFBP", "You need to first have the 'Your Pain My Power' super perk.");
+						if (player.hasPerk(PerkLib.BloodDemonToughness)) addButton(3, "MBFBP", perkMyBloodForBloodPuppies).hint("Choose the 'My Blood for Blood Puppies' super perk. During fight small part of your blood from into blood puppies that can attack on your behalf with blood magic/soulskills. When you grow in mastery of blood they would grow stronger with you. (+10% of OverMax HP, -5% blood spells/soulskills cost, +25% blood spells/soulskills power)");
+						else addButtonDisabled(3, "MBFBP", "You need to first have the 'Blood Demon Toughness' super perk.");
 					}
 				}
 				else addButtonDisabled(3, "MBFBP", "You need to reach level 40 first.");
