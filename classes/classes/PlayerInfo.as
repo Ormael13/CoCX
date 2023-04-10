@@ -413,6 +413,9 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Resistance (Acid):</i> " + (100 - Math.round(player.damageAcidPercent())) + "%\n";
 		combatStats += "<b>Resistance (Lust):</b> " + (100 - Math.round(CoC.instance.player.lustPercent())) + "%\n";
 		combatStats += "\n";
+		combatStats += "<b>Physical DR from armor:</b> 1 / " + round(player.damagePercentArmor(), 2) + "\n";
+		combatStats += "<b>Magical DR from armor:</b> 1 / " + round(player.damagePercentMRes(), 2) + "\n";
+		combatStats += "\n";
 		combatStats += "<b>Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
 		combatStats += "<b>Spells Cost:</b> " + combat.spellCost(100) + "%\n";
 		combatStats += "<b>White Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";

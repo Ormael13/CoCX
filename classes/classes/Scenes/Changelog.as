@@ -74,6 +74,15 @@ public class Changelog extends BaseContent
 			outputText("-Urta Quest would temporaly reset to NG 0 settings if PC is already on NG 1 or higher. ALso fixing error with wrong resetting secondary stats scaling post urta quest.\n");
 			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the same amount nonlust/lust dmg pc deal to enemy/ies.\n");
 			outputText("-Armor and Magic Defense of armor items would now matter more for higher values (especialy post 80). Instead of adding coresponding type of damage reduction by 1% until reaching 80 it will add 1% until 50. Any additional point of armor/mdef above 50 would apply DR based on this formula: dmg * (1 / square of (armor/mdef - 50)).\n");
+			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -98,15 +107,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

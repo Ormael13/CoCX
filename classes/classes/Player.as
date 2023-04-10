@@ -2949,6 +2949,24 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 3) {
 				mult -= 15;
 			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) {
+				mult -= 5;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) {
+				mult -= 10;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) {
+				mult -= 20;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 1) {
+				mult -= 5;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 2) {
+				mult -= 10;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 3) {
+				mult -= 20;
+			}
 			if (hasPerk(PerkLib.GreySageWisdom)) {
 				mult -= 20;
 			}
