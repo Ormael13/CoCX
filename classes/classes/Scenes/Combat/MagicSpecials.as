@@ -77,7 +77,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
 
 		}
-		if (player.wrath >= 50 && flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1) {
+		if (player.wrath >= 50 && flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1 && !player.statStore.hasBuff("WarriorsRage")) {
 			player.wrath -= 50;
 			outputText("<b>Warrior's rage was used successfully.</b>\n\n");
 			warriorsrage007();
@@ -299,20 +299,20 @@ public class MagicSpecials extends BaseCombatContent {
 						bd.disable("Your wrath is too low to unleash howl!");
 					}
 					if (player.hasPerk(PerkLib.AbsoluteStrength)) {
-						if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
-						else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("EFoD", combat.asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+						if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+						else if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("EFoD", combat.asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 						else bd = buttons.add("SFoD", combat.asuras6FingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 						if (player.wrath < (player.maxWrath() * 0.5)) {
 							bd.disable("Your wrath is too low to poke your enemies Asura Style!");
 						}
 					}
-					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+					if (player.hasPerk(PerkLib.AsuraStrength)) {
 
 					}
 					if (player.hasPerk(PerkLib.ICastAsuraFist)) {
 
 					}
-					if (player.hasPerk(PerkLib.AsuraStrength)) {
+					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 
 					}
 				} else {
@@ -3152,6 +3152,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.JobBrawler)) WarriorsRageBoost += 15;
 		if (player.hasPerk(PerkLib.Berzerker)) WarriorsRageBoost += 20;
 		if (player.hasPerk(PerkLib.Lustzerker)) WarriorsRageBoost += 20;
+		if (player.hasPerk(PerkLib.AsuraToughness)) WarriorsRageBoost += 20;
 		var oldHPratio:Number = player.hp100/100;
 		temp = WarriorsRageBoost;
 		tempStr = temp;
@@ -3166,7 +3167,12 @@ public class MagicSpecials extends BaseCombatContent {
 			tempStr += Math.round(player.strStat.core.value * 0.1);
 			tempTou += Math.round(player.touStat.core.value * 0.1);
 			tempSpe += Math.round(player.speStat.core.value * 0.1);
-			warriorsrageDuration += 5;
+			warriorsrageDuration += 6;
+		}
+		if (player.hasPerk(PerkLib.AsuraToughness)) {
+			tempStr += Math.round(player.strStat.core.value * 0.1);
+			tempTou += Math.round(player.touStat.core.value * 0.1);
+			tempSpe += Math.round(player.speStat.core.value * 0.1);
 		}
 		tempStr *= 2;
 		mainView.statsView.showStatUp('str');
@@ -3184,7 +3190,8 @@ public class MagicSpecials extends BaseCombatContent {
 				tempSpe = tempSpe*1.5;
 			}
 		}
-		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
+		if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatPermanent();
+		else player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
 		player.HP = oldHPratio*player.maxHP();
 	}
 
@@ -6483,4 +6490,4 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 }
-}
+}

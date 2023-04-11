@@ -69,19 +69,19 @@ public class GameSettings extends BaseContent {
 		else outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
 		outputText("\n\n");
 		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
-			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath.");
+			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent(s) stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 20% more damage and gives ~10% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game.");
+			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent(s) take 2x less HP/Lust dmg, deal 20% more damage and gives ~10% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 50% more damage and gives ~30% more EXP.");
+			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent(s) take 5x less HP/Lust dmg, deal 50% more damage and gives ~30% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and gives ~60% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent(s) take 10x less HP/Lust dmg, deal more 100% damage and gives ~60% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia MC</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 250% damage and gives ~100% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia MC</font></b>\n Opponent(s) take 25x less HP/Lust dmg, deal more 250% damage and gives ~100% more EXP.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {

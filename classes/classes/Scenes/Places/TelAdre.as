@@ -1090,7 +1090,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
 			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
-			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly cursed magical axes rumored to be the artefact of the fallen war deity Asterius.");
+			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly evil magical axes rumored to be the artefact of the fallen war deity Asterius.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);
@@ -1251,6 +1251,7 @@ public function tripxiShopMainMenu():void {
 			["Derpnade Launcher", StatusEffects.TelAdreTripxiGuns5, 2],
 			["Double barreled dragon gun", StatusEffects.TelAdreTripxiGuns1, 3],
 			["Lactoblasters", StatusEffects.TelAdreTripxiGuns2, 3],
+			["Alakablam", StatusEffects.TelAdreTripxiGuns4, 3],
 		];
 		for each (var gun:Array in guns) {
 			if (player.hasKeyItem(gun[0]) >= 0) {
@@ -1282,6 +1283,7 @@ public function tripxiShopMainMenu2a():void {
 	addButton(0, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.FLINTLK);
 	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
 	addButton(2, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
+	//3
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Desert(O). (lvl 6+)");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
@@ -1304,6 +1306,8 @@ public function tripxiShopMainMenu2b():void {
 	menu();
 	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT2, weaponsrange.ADBSHOT, false);
 	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT2, weaponsrange.ADBSCAT, false);
+	//2
+	//3
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL, false);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Blight Ridge.");
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO, false);
@@ -1325,13 +1329,17 @@ public function tripxiShopMainMenu2c():void {
 	menu();
 	addButton(0, weaponsrange.IVIARG_.shortName, buyItemT3, weaponsrange.IVIARG_);
 	addButton(1, weaponsrange.HARKON1.shortName, buyItemT3, weaponsrange.HARKON1);
+	//2
+	//3
 	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
 	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Hills.");
-	//6 lub 7 - Harkonnen II - BP req. from some dark place/area?
-	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
-	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
+	//6 - Harkonnen II - BP req. from some dark place/area?
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(7, weaponsrange.ALAKABL.shortName, buyItemT3, weaponsrange.ALAKABL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(7, "???", "Search the Forest(I).");
+	//addButton(8, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
+	//addButton(9, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 
 	addButton(11, "-1-", tripxiShopMainMenu2a);
 	addButton(12, "-2-", tripxiShopMainMenu2b);
@@ -1808,4 +1816,4 @@ public function meetingLunaCamp():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

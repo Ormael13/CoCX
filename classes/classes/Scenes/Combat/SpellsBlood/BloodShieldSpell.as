@@ -36,7 +36,9 @@ public class BloodShieldSpell extends AbstractBloodSpell {
 		return spellCostBlood(calcBasePower());
 	}
 	public function calcPower():Number {
-		return Math.round(calcBasePower()*spellModBlood());
+		var cP:Number = calcBasePower() * spellModBlood();
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) cP *= 2;
+		return Math.round(cP);
 	}
 	public function calcBasePower():Number {
 		var shieldcost:Number = 0;

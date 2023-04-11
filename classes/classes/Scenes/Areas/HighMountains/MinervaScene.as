@@ -1548,7 +1548,7 @@ private function sleepWithMinervaII():void {
 	else outputText("You get re-dressed in your [armor] ");
 	outputText("and you leave the tower to return to your camp. \n\n");
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
-	doNext(camp.returnToCampUseOneHour);
+	doNext(playerMenu);
 }
 
 }

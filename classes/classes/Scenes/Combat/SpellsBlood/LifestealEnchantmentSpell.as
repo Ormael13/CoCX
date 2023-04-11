@@ -34,9 +34,10 @@ public class LifestealEnchantmentSpell extends AbstractBloodSpell {
 	}
 	
 	public function calcDuration():int {
-		var calcC:int = 2;
-		calcC += spellGenericCooldown();
-		return calcC;
+		var calcD:int = 2;
+		calcD += (3 - spellGenericCooldown());
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) calcD *= 2;
+		return calcD;
 	}
 	
 	override public function advance(display:Boolean):void {

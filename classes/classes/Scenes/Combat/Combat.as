@@ -750,19 +750,19 @@ public class Combat extends BaseContent {
             addButton(1, "Stop", stopChanneledSpecial);
         }
         /*
-	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
-		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
-			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
-			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
+			if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+				addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+				addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+			}
 		}
-	}
-	if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
-		if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
-			addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
-			addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
+			if (player.statusEffectv1(StatusEffects.ChanneledAttackType) == 3) {
+				addButton(0, "Continue", mspecials.OrgasmicLightningStrike).hint("Continue charging Orgasmic Lightning Strike.");
+				addButton(1, "Stop", stopChanneledSpecial).hint("Stop charging Orgasmic Lightning Strike.");
+			}
 		}
-	}
-	*/
+		*/
         if (monster.hasStatusEffect(StatusEffects.AttackDisabled)) {
             if (monster is Lethice) {
                 outputText("\n<b>With Lethice up in the air, you've got no way to reach her with your attacks!</b>");
@@ -924,17 +924,17 @@ public class Combat extends BaseContent {
 					bd.disable("Your wrath is too low to unleash your howl!");
 				}
 				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
-					if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("TFoD", asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
-					else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("EFoD", asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					else if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("EFoD", asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					else bd = buttons.add("SFoD", asuras6FingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					if (player.wrath < (player.maxWrath() * 0.5)) {
 						bd.disable("Your wrath is too low to poke your enemies Asura Style!");
 					}
 				}
-				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+				if (player.hasPerk(PerkLib.AsuraStrength)) {
 				
 				}
-				if (player.hasPerk(PerkLib.AsuraStrength)) {
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 				
 				}
 			} else {
@@ -2950,7 +2950,7 @@ public class Combat extends BaseContent {
 				else if (flags[kFLAGS.MULTISHOT_STYLE] >= 1 && player.hasPerk(PerkLib.TaintedMagazine)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
 			}
-            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
+            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.ALAKABL || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
 				if (flags[kFLAGS.MULTISHOT_STYLE] >= 3 && player.hasPerk(PerkLib.PrimedClipWarp)) {
 					if (flags[kFLAGS.MULTISHOT_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
 					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.MULTISHOT_STYLE];
@@ -4261,8 +4261,34 @@ public class Combat extends BaseContent {
 							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doTrueDamage(damage, true, true);
 								doMagicDamage(Math.round(damage * 0.2), true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
 							}
-							else doTrueDamage(damage, true, true);
+							else {
+								doTrueDamage(damage, true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
+							}
+						}
+						else if (player.weaponRange == weaponsrange.ALAKABL) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doMagicDamage(Math.round(damage * 1.2), true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
+							}
+							else {
+								doMagicDamage(damage, true, true);
+								if (player.statStore.hasBuff("FoxflamePelt")) {
+									doFireDamage((damage * 2), true, true);
+									monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
+								}
+							}
 						}
 						else {
                             if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
@@ -4471,6 +4497,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
+        if (player.weaponRange == weaponsrange.ALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
 		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
@@ -5617,8 +5644,8 @@ public class Combat extends BaseContent {
 		}
         if (player.statStore.hasBuff("AsuraForm")) {
 			var AFAAM:Number = 3;
-			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) AFAAM += 1;
             if (player.hasPerk(PerkLib.AsuraStrength)) AFAAM += 1;
+			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) AFAAM += 1;
 			if (player.isUnarmedCombat() && player.playerHasFourArms()) AFAAM *= 0.5;
             damage *= AFAAM;
         }
@@ -7865,7 +7892,7 @@ public class Combat extends BaseContent {
 			var maxSens:Number = 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 2) maxSens += 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) maxSens += 500;
-			if (player.sens >= maxSens) playerLevelAdjustment += 5;
+			if (player.sens >= maxSens) playerLevelAdjustment += (maxSens * 0.04);
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
         return playerLevelAdjustment;
@@ -7939,6 +7966,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
+		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
@@ -8042,6 +8070,7 @@ public class Combat extends BaseContent {
     public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
@@ -8104,6 +8133,7 @@ public class Combat extends BaseContent {
 
     private function doElementalDamageMultiplier(damage:Number):Number {
         if (damage < 1) damage = 1;
+		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
@@ -8535,6 +8565,7 @@ public class Combat extends BaseContent {
 	public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         if (damage < 1) damage = 1;
+		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
@@ -10021,6 +10052,7 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("AsuraForm")) {
             if (player.wrath < asuraformCost()) {
                 player.statStore.removeBuffs("AsuraForm");
+				if (player.buff("WarriorsRage").getRemainingTicks() > 9000) player.statStore.removeBuffs("WarriorsRage");
                 outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  Your Asura form slowly fades away, leaving you in your normal form.</b>\n\n");
             }
             //	else {
@@ -10952,6 +10984,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) maxPercentRegen += 0.5;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) maxPercentRegen += 0.5;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) maxPercentRegen += 0.5;
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
@@ -11099,7 +11133,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedsoulforce *= 1.2;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedsoulforce *= 1.4;
             gainedsoulforce *= soulforceRecoveryMultiplier();
-            if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
+            if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) gainedsoulforce *= 2;
             gainedsoulforce = Math.round(gainedsoulforce);
             EngineCore.SoulforceChange(gainedsoulforce);
         }
@@ -11167,7 +11201,10 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana *= 1.4;
             if (player.statStore.hasBuff("DMorada")) gainedmana *= 1.25;
             gainedmana *= manaRecoveryMultiplier();
-            if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
+            if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) {
+				gainedmana *= 2;
+				if (player.hasPerk(PerkLib.WellOfMana)) gainedmana *= 2;
+			}
             gainedmana = Math.round(gainedmana);
             EngineCore.ManaChange(gainedmana);
         }
@@ -11212,6 +11249,9 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageExpert)) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageMaster)) manaregen += Math.round(player.maxMana() * 0.01);
+		if (player.hasPerk(PerkLib.GreySageIntelligence)) manaregen += Math.round(player.maxMana() * 0.005);
+		if (player.hasPerk(PerkLib.WellOfMana)) manaregen += Math.round(player.maxMana() * player.intStat.core.value * 0.001);
+		if (player.hasPerk(PerkLib.GreySageWisdom)) manaregen += Math.round(player.maxMana() * 0.005);
         if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) manaregen += Math.round(player.maxMana() * 0.02);
         return manaregen;
     }
@@ -11268,8 +11308,8 @@ public class Combat extends BaseContent {
             }
 			if (player.statStore.hasBuff("AsuraForm")) {
 				gainedwrath += 2 * BonusWrathMult;
-                if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) gainedwrath += 2 * BonusWrathMult;
 				if (player.hasPerk(PerkLib.AsuraStrength)) gainedwrath += 2 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) gainedwrath += 2 * BonusWrathMult;
 			}
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
             EngineCore.WrathChange(gainedwrath);
@@ -11318,6 +11358,8 @@ public class Combat extends BaseContent {
         if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry1 == jewelries.UNDKINS) wrathregen += 3;
+		if (player.hasPerk(PerkLib.AsuraStrength)) wrathregen += Math.round(player.maxWrath() * 0.005);
+		if (player.hasPerk(PerkLib.AsuraToughness)) wrathregen += Math.round(player.maxWrath() * 0.005);
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
 		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) BonusWrathMult += 1;
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
@@ -11521,6 +11563,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
+        if (player.weaponRange == weaponsrange.ALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
@@ -15480,8 +15523,12 @@ public function bloodDewdropsBloodPuppies():void {
 
 public function asuraformCost():Number {
     var modcsc:Number = 25;
-    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 25;
     if (player.hasPerk(PerkLib.AsuraStrength)) modcsc += 25;
+    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 25;
+	if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) {
+		if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) modcsc += 2;
+		else modcsc += 5;
+	}
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     return modcsc;
@@ -15490,14 +15537,15 @@ public function assumeAsuraForm():void {
     clearOutput();
     player.wrath -= asuraformCost();
     outputText("As you starts to unleash your inner wrath two additional faces emerge from head"+(player.faceType == Face.CERBERUS?"s":"")+" on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
-    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+    if (player.hasPerk(PerkLib.AsuraStrength)) {
         outputText("Additionaly from your back emerge ");
-		if (player.hasPerk(PerkLib.AsuraStrength)) outputText("two ");
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) outputText("two ");
         outputText("pair ");
         outputText("of semi-transparent arms. ");
     }
     outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
     assumeAsuraForm007();
+	if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) mspecials.warriorsrage007();
     statScreenRefresh();
     enemyAI();
 }
@@ -15511,12 +15559,12 @@ public function assumeAsuraForm007():void {
     temp1 += player.strStat.core.value * 0.6;
     temp2 += player.touStat.core.value * 0.3;
     temp3 += player.speStat.core.value * 0.2;
-    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+    if (player.hasPerk(PerkLib.AsuraStrength)) {
         temp1 += player.strStat.core.value * 0.6;
         temp2 += player.touStat.core.value * 0.3;
         temp3 += player.speStat.core.value * 0.2;
     }
-    if (player.hasPerk(PerkLib.AsuraStrength)) {
+    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
         temp1 += player.strStat.core.value * 0.6;
         temp2 += player.touStat.core.value * 0.3;
         temp3 += player.speStat.core.value * 0.2;
@@ -15537,7 +15585,9 @@ public function assumeAsuraForm007():void {
 public function returnToNormalShape():void {
     clearOutput();
     outputText("Gathering all you willpower you forcefully subduing your inner rage and returning to your normal shape.");
+	//if (perkBonusDamage po asura toughness) 
     player.statStore.removeBuffs("AsuraForm");
+	if (player.buff("WarriorsRage").getRemainingTicks() > 9000) player.statStore.removeBuffs("WarriorsRage");
     enemyAI();
 }
 
@@ -15554,10 +15604,17 @@ public function asurasHowl():void {
         if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 4;
         else heal *= 2;
     }
-    if (player.hasPerk(PerkLib.AbsoluteStrength)) heal *= 1.2;
-    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) heal *= 1.4;
-    if (player.hasPerk(PerkLib.ICastAsuraFist)) heal *= 1.6;
-    if (player.hasPerk(PerkLib.AsuraStrength)) heal *= 1.8;
+    if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+		var add:Number = 1.2;
+		if (player.hasPerk(PerkLib.AsuraStrength)) add += 0.4;
+		if (player.hasPerk(PerkLib.ICastAsuraFist)) add += 0.6;
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) add += 0.8;
+		if (player.hasPerk(PerkLib.AsuraToughness)) add += 1;
+		//
+		//
+		if (player.hasPerk(PerkLib.AsuraSpeed)) add += 1.6;
+		heal *= add;
+	}
     //Determine if critical heal!
     var crit:Boolean = false;
     var critHeal:int = 5;

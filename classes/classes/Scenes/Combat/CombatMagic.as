@@ -118,11 +118,14 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.BloodDemonWisdom)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) costPercent -= 5;
+		//
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) costPercent -= 5;
+		//
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
 		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
@@ -331,14 +334,14 @@ public class CombatMagic extends BaseCombatContent {
 		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .1;
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .15;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .2;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .2;
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .25;
-		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .3;
-		//
-		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .3;
-		//
-		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .3;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .3;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .35;
         //
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .5;
+		//
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}

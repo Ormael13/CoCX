@@ -282,7 +282,7 @@ private function HaveAHellKidPartII():void {
 	
 	outputText("\n\nYou give your lover one last kiss before taking her back to camp proper, never letting her hand slip from yours all the way.");
 	//[Back to Camp menu]
-	doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+	doNext(recalling ? recallWakeUp : playerMenu);
 }
 
 private function getAnotherDad():void {

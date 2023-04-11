@@ -2576,8 +2576,9 @@ use namespace CoC;
 			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
-			if (damage * magicmult <= mana) {
-				mana -= (damage * magicmult);
+			if ((damage * magicmult <= mana) || (hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))) {
+				if (damage * magicmult > mana) mana = 0;
+				else mana -= (damage * magicmult);
 				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
@@ -2609,7 +2610,7 @@ use namespace CoC;
 		}
 		public function difficultyDamageMultiplier(damage:Number):Number{
 			var damageMultiplier:Number = 1;
-			//EZ MOAD half damage
+			//EZ MOAD 1/10th damage
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damageMultiplier *= 0.1;
 			//Difficulty modifier flags.
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damageMultiplier *= 1.2;
@@ -2655,49 +2656,64 @@ use namespace CoC;
 				if (damage > 0) {
 					switch (damagetype) {
 						case 0: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 1: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 2: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 3: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 4: // magical
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceMagicDamage(damage);
 							break;
 						case 5: // fire
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/4*3;
 							damage = reduceFireDamage(damage);
 							break;
 						case 6: // ice
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceIceDamage(damage);
 							break;
 						case 7: // lightning
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceLightningDamage(damage);
 							break;
 						case 8: // darkness
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceDarknessDamage(damage);
 							break;
 						case 9: // poison
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reducePoisonDamage(damage);
 							break;
 						case 10: // wind
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceWindDamage(damage);
 							break;
 						case 11: // water
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceWaterDamage(damage);
 							break;
 						case 12: // earth
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceEarthDamage(damage);
 							break;
 						case 13: // acid
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reducePoisonDamage(damage);
 							break;
 						default:
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 					}
 					//Wrath
@@ -2725,12 +2741,18 @@ use namespace CoC;
 			}
 			return returnDamage;
 		}
+		public function damagePercentArmor():Number {
+			var percent:Number = 1;
+			var armorMod:Number = armorDef;
+			if (armorMod > 50) percent += Math.sqrt(armorMod - 50);
+			return percent;
+		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			mult -= armorMod;
-			if (mult < 20) mult = 20;
+			if (mult < 50) mult = 50;
 			//--PERKS--
 			//Take damage you masochist!
 			if (hasPerk(PerkLib.Masochist) && lib >= 60) {
@@ -2896,13 +2918,18 @@ use namespace CoC;
 			damage *= damagePercent() / 100;
 			return damage;
 		}
-
+		public function damagePercentMRes():Number {
+			var percent:Number = 1;
+			var armorMMod:Number = armorMDef;
+			if (armorMMod > 50) percent += Math.sqrt(armorMMod - 50);
+			return percent;
+		}
 		public override function damageMagicalPercent():Number {
 			var mult:Number = 100;
 			var armorMMod:Number = armorMDef;
 			//--BASE--
 			mult -= armorMMod;
-			if (mult < 20) mult = 20;
+			if (mult < 50) mult = 50;
 			//--PERKS--
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
 				mult -= 10;
@@ -2921,6 +2948,27 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 3) {
 				mult -= 15;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) {
+				mult -= 5;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) {
+				mult -= 10;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) {
+				mult -= 20;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 1) {
+				mult -= 5;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 2) {
+				mult -= 10;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 3) {
+				mult -= 20;
+			}
+			if (hasPerk(PerkLib.GreySageWisdom)) {
+				mult -= 20;
 			}
 			//--STATUS AFFECTS--
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
@@ -3290,7 +3338,7 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
+			//Apply wind damage resistance percentage.
 			damage *= damageWindPercent() / 100;
 			return damage;
 		}
@@ -3339,8 +3387,8 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
-			damage *= damagePoisonPercent() / 100;
+			//Apply water damage resistance percentage.
+			damage *= damageWaterPercent() / 100;
 			return damage;
 		}
 
@@ -3385,8 +3433,8 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
-			damage *= damagePoisonPercent() / 100;
+			//Apply earth damage resistance percentage.
+			damage *= damageEarthPercent() / 100;
 			return damage;
 		}
 
@@ -3431,8 +3479,8 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
-			damage *= damagePoisonPercent() / 100;
+			//Apply acid damage resistance percentage.
+			damage *= damageAcidPercent() / 100;
 			return damage;
 		}
 
@@ -6801,4 +6849,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}
