@@ -116,7 +116,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
 					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE,
 
-					PlayerHasNodachi: weaponSubtype == "katana" || weaponSubtype != "uchigatana" || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.DNODACHI || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasNodachi: (weaponSubtype == "katana" && weaponSubtype != "uchigatana") || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.DNODACHI || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
 					PlayerHasNodachiHoly:player.weapon == game.weapons.MASAMUN,
 					PlayerHasNodachiUnholy:player.weapon == game.weapons.BLETTER,
 
