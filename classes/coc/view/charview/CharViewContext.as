@@ -112,9 +112,13 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
 
-					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA  || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
-					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.MASAMUN,
-					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER,
+					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE,
+					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
+					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE,
+
+					PlayerHasNodachi: weaponSubtype == "katana" || weaponSubtype != "uchigatana" || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.DNODACHI || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasNodachiHoly:player.weapon == game.weapons.MASAMUN,
+					PlayerHasNodachiUnholy:player.weapon == game.weapons.BLETTER,
 
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,

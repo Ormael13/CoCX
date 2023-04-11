@@ -636,6 +636,7 @@
         <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="84" dy="32"/>
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
+		<cell rect="201,242,50,31" name="clotheHead/CowGirl" dx="77" dy="26"/>
         <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
 		<cell rect="150,187,49,25" name="clotheHead_behindHorns/darkPriest" dx="79" dy="33"/>
 		<cell rect="201,210,49,25" name="clotheHead_behindHorns/priest" dx="79" dy="33"/>
@@ -662,6 +663,7 @@
         <cell rect="2329,216,80,108" name="clothe/IceQueenKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
 		<cell rect="1017,325,80,104" name="clotheBehindBreast/goblinTechnomancerClothe" dx="64" dy="55"/>
+		<cell rect="1919,325,80,108" name="clotheBehindBreast/cowgirlClothe" dx="63" dy="42"/>
         <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>
         <cell rect="935,434,80,104" name="clothe/qipaoPurpleClothe" dx="64" dy="55"/>
@@ -711,6 +713,7 @@
 		<cell rect="1591,434,80,104" name="clotheLegs/priestSkirt" dx="65" dy="64"/>
 		<cell rect="1673,434,80,104" name="clotheLegs/priestBoots" dx="66" dy="73"/>
 		<cell rect="2242,158,40,55" name="clotheLegs/francescaBoots" dx="85" dy="121"/>
+		<cell rect="2284,158,40,55" name="clotheLegs/cowgirlClothe" dx="86" dy="111"/>
         <cell rect="776,12,45,27" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="728,12,45,27" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="833,12,45,27" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
@@ -727,6 +730,7 @@
         <cell rect="1969,158,20,25" name="armorNeck/elfClotheCape_fg" dx="94" dy="62"/>
         <cell rect="579,1550,30,23" name="armorNeck/alraunedress" dx="86" dy="60"/>
         <cell rect="548,1550,30,23" name="armorNeck/alraunedressLili" dx="55" dy="60"/>
+		<cell rect="2083,325,80,108" name="armorNeck/CowgirlClothe" dx="63" dy="42"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="1161,42,45,58" name="armorChest/blackFullplatebottom" dx="82" dy="75"/>
 		<cell rect="1446,42,45,58" name="armorChest/gooplatebottom" dx="82" dy="75"/>
@@ -775,6 +779,7 @@
 		<cell rect="2053,158,20,55" name="clothRightArm/darkPriestPrayer" dx="105" dy="53"/>
 		<cell rect="2137,158,20,55" name="clothRightArm/priestPrayer" dx="105" dy="53"/>
 		<cell rect="2221,158,20,55" name="clothRightArm/francesca" dx="111" dy="70"/>
+		<cell rect="2001,325,80,108" name="clothRightArm/CowgirlClothe" dx="63" dy="49"/>
         <cell rect="818,798,173,156" name="clothCape/walpurgisClothesBack" dx="19" dy="12"/>
         <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
@@ -792,6 +797,7 @@
         <cell rect="1166,641,173,156" name="clothCape_bg/mindbreaker" dx="20" dy="29"/>
 		<cell rect="1509,325,80,108" name="clothCape_fg/darkPriestSkirt" dx="63" dy="55"/>
 		<cell rect="1509,434,80,108" name="clothCape_fg/priestSkirt" dx="63" dy="55"/>
+		<cell rect="2165,325,80,108" name="clothCape_fg/cowgirlClothe" dx="63" dy="42"/>
         <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
@@ -850,6 +856,15 @@
         <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
         <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
 		
+		<cell rect="1472,1620,80,90" name="weapon/nodachiGeneric" dx="38" dy="55"/>
+		<cell rect="1472,1726,80,90" name="weapon/nodachiHoly" dx="38" dy="55"/>
+        <cell rect="1472,1726,80,90" name="weapon/nodachiUnholy" dx="38" dy="55"/>
+		<cell rect="1472,1938,80,90" name="weaponBuff/nodachiFireBuff" dx="27" dy="35"/>
+        <cell rect="1562,1620,80,90" name="weapon/nodachiGenericOH" dx="82" dy="55"/>
+        <cell rect="1562,1726,80,90" name="weapon/nodachiHolyOH" dx="82" dy="55"/>
+        <cell rect="1562,1832,80,90" name="weapon/nodachiUnholyOH" dx="82" dy="55"/>
+		<cell rect="1562,1938,80,90" name="weaponBuff/nodachiFireBuffOH" dx="92" dy="38"/>
+		
 		<cell rect="1292,1620,87,107" name="weapon/scytheShaftGeneric" dx="39" dy="53"/>
         <cell rect="1292,1729,87,107" name="weapon/scytheShaftHoly" dx="39" dy="53"/>
         <cell rect="1292,1838,87,107" name="weapon/scytheShaftUnholy" dx="39" dy="53"/>
@@ -883,9 +898,10 @@
         <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
         <cell rect="572,1726,80,90" name="shield/shieldHoly" dx="66" dy="60"/>
         <cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
-        <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="34"/>
+        <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="32"/>
         <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
         <cell rect="1022,1776,80,45" name="weapon/LactoblasterMilker" dx="59" dy="62"/>
+		<cell rect="1022,2044,80,45" name="weapon/LactoblasterMilkerMega" dx="59" dy="62"/>
         <cell rect="842,1938,80,90" name="backAccessory/oniGourd" dx="74" dy="52"/>
         <cell rect="9,471,100,100" name="overGenitals/atlach" dx="54" dy="70"/>
     </spritemap>
@@ -1391,7 +1407,7 @@
 		<cell rect="1161,410,49,29" name="bra/cowBraSmall" dx="79" dy="68"/>
         <cell rect="1161,440,49,29" name="bra/cowBraMedium" dx="79" dy="68"/>
         <cell rect="1161,470,49,29" name="bra/cowBraLarge" dx="79" dy="68"/>
-		<cell rect="1161,530,49,29" name="bra/cowBraMega" dx="79" dy="69"/>
+		<cell rect="1161,530,49,29" name="bra/cowBraMega" dx="80" dy="68"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -1648,10 +1664,6 @@
 		<layer name="overpussy"/> <!-- should never show if pc wears a panty -->
 		<layer name="pussy"/> <!-- should never show if pc wears a panty -->
 
-		<layer name="clotheLegs"/>
-		<layer name="armorLegs"/>
-		<layer name="panty"/>
-
         <layer name="antennae"/>
         <layer name="horns"/>
         <layer name="ears"/>
@@ -1677,6 +1689,9 @@
 		<layer name="clotheBehindBreast"/>
 		<layer name="clothRightArm"/>
 		<layer name="clothLeftArm"/>
+		<layer name="clotheLegs"/>
+		<layer name="armorLegs"/>
+		<layer name="panty"/>
 		<layer name="overhands"/>
         <layer name="hands"/>
 		<layer name="arms_pattern"/>
@@ -1941,21 +1956,63 @@
 						</if>
 					</if>
 
-					<!-- Katana -->
+					<!-- Katana -->							
 					<if test="PlayerHasKatana">
 						<if test="PlayerHasKatanaHoly or PlayerHasKatanaUnholy">
 							<if test="PlayerHasKatanaHoly">
 								<show part="weapon/katanaHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/katanaHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasKatanaUnholy">
 								<show part="weapon/katanaUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/katanaUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/katanaGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/katanaGenericOH"/>
+								</if>
 							</else>
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff/katanaFireBuff"/>
+							<if test="PlayerHasADualWeapon">
+								<show part="weapon/katanaFireBuffOH"/>
+							</if>
+						</if>
+					</if>
+					
+					<!-- Nodachi -->
+					<if test="PlayerHasNodachi">
+						<if test="PlayerHasNodachiHoly or PlayerHasNodachiUnholy">
+							<if test="PlayerHasNodachiHoly">
+								<show part="weapon/nodachiHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/nodachiHolyOH"/>
+								</if>
+							</if>
+							<if test="PlayerHasNodachiUnholy">
+								<show part="weapon/nodachiUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/nodachiUnholyOH"/>
+								</if>
+							</if>
+							<else>
+								<show part="weapon/nodachiGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/nodachiGenericOH"/>
+								</if>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff/nodachiFireBuff"/>
+							<if test="PlayerHasADualWeapon">
+								<show part="weapon/nodachiFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 
@@ -2093,6 +2150,26 @@
 							<show part="backAccessory/LactoblasterTank"/>
 							<show part="weapon/LactoblasterGun"/>
 							<show part="weapon/LactoblasterMilker"/>
+							<if test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+								<if test="BoobDisplay == 0">
+									<if test="PlayerHasViewableOutfit == false">
+										<if test="PlayerHasABra == false">
+											<show part="weapon/LactoblasterMilkerMega"/>
+											<else>
+												<if test="cowBra">
+													<show part="weapon/LactoblasterMilkerMega"/>
+													<else>
+														<show part="weapon/LactoblasterMilker"/>
+													</else>
+												</if>
+											</else>
+										</if>
+										<else>
+											<show part="weapon/LactoblasterMilker"/>
+										</else>
+									</if>
+								</if>
+							</if>
 						</if>
 
 					</if>
