@@ -670,7 +670,10 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 				bd.disable("You're already pretty goddamn mad!");
-			}
+			}/*
+			if () {
+				bd = buttons.add("Berserk G1+2", berzerk);
+			}*/
 		}
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Berzerking)) {
 			bd = buttons.add("Berserk G2", berzerkG2);
@@ -712,7 +715,10 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
 				bd.disable("You're already pretty goddamn mad & lustfull!");
-			}
+			}/*
+			if () {
+				bd = buttons.add("Lustserk G1+2", lustzerk);
+			}*/
 		}
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Lustzerking)) {
 			bd = buttons.add("Lustserk G2", lustzerkG2);
@@ -3162,6 +3168,11 @@ public class MagicSpecials extends BaseCombatContent {
 			tempStr += Math.round(player.strStat.core.value * 0.1);
 			tempTou += Math.round(player.touStat.core.value * 0.1);
 			tempSpe += Math.round(player.speStat.core.value * 0.1);
+		}
+		if (player.hasPerk(PerkLib.EnchancedWarriorsRage)) {
+			tempStr += Math.round(player.strStat.core.value * 0.2);
+			tempTou += Math.round(player.touStat.core.value * 0.2);
+			tempSpe += Math.round(player.speStat.core.value * 0.2);
 		}
 		if (player.perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
 			tempStr += Math.round(player.strStat.core.value * 0.1);

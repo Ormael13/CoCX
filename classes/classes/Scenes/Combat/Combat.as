@@ -1304,18 +1304,9 @@ public class Combat extends BaseContent {
     }
     public function Cure():void {
         clearOutput();
-		var uses:Number = 0;
-		for each (var buff:String in CurableBuffs) {
-			player.buff(buff).remove();
-			uses += 1;
-		}
-		for each (var type:StatusEffectType in CurableEffects) {
-			if (uses == 0) {
-				player.removeStatusEffect(type);
-				uses += 1;
-			}
-		}
-		if ((player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained")) && uses == 0) {
+		for each (var buff:String in CurableBuffs) player.buff(buff).remove();
+		for each (var type:StatusEffectType in CurableEffects) player.removeStatusEffect(type);
+		if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained")) {
 			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 				player.removeCurse(stat, 6,1);
 				player.removeCurse(stat, 3,2);
@@ -12093,7 +12084,11 @@ public function combatRoundOver():void {
     player.statStore.advanceTime(Buff.RATE_ROUNDS,1);
     monster.statStore.advanceTime(Buff.RATE_ROUNDS,1);
     if (player.statStore.recentlyRemovedTags["WarriorsRage"]){
-        EngineCore.outputText("\nYour warriors rage has ended.\n");
+		if (player.hasPerk(PerkLib.EnchancedWarriorsRage) && player.wrath >= 50) {
+			player.wrath -= 50;
+			mspecials.warriorsrage007();
+		}
+        else EngineCore.outputText("\nYour warriors rage has ended.\n");
     }
     if (player.statStore.recentlyRemovedTags["Might"]){
         if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.Might.manaCost()) CombatAbilities.Might.autocast();

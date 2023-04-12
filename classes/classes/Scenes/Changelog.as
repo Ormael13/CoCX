@@ -76,6 +76,15 @@ public class Changelog extends BaseContent
 			outputText("-Armor and Magic Defense of armor items would now matter more for higher values (especialy post 80). Instead of adding coresponding type of damage reduction by 1% until reaching 80 it will add 1% until 50. Any additional point of armor/mdef above 50 would apply DR based on this formula: dmg * (1 / square of (armor/mdef - 50)).\n");
 			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
 			outputText("-Adding nodachi sprites to the game. (Liadri)\n");
+			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
+			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
+			outputText("-New tier 4 strength lvl-up perk: Enchanced Warrior's Rage. Req. Way of the Warrior perk. Effect: Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -111,17 +120,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
-			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour\n");
+			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
