@@ -1021,7 +1021,7 @@ import classes.Scenes.SceneLib;
 		switch (plot) {
 			case 0:
 				outputText("<b>You can't store all seeds in bag. Harvest this plot when you have enough space for storing this herb.</b>");
-				doNext(playerMenu);
+				break;
 			case 1:
 				GardenSlot01 = "";
 				break;
@@ -1062,10 +1062,12 @@ import classes.Scenes.SceneLib;
 				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
 				doNext(playerMenu);
 		}
-		outputText("Youve collected all of the ingredients.");
-		var FE:Number = 20 + player.level;
-		FE *= player.FarmingMulti();
-		player.farmXP(FE);
+		if (plot > 0) {
+			outputText("You've collected all of the ingredients.");
+			var FE:Number = 20 + player.level;
+			FE *= player.FarmingMulti();
+			player.farmXP(FE);
+		}
 		doNext(Harvest);
 	}
 

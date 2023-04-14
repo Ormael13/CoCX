@@ -35,7 +35,9 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			addButton(8, weapons.TODAGGER.shortName, itemBuy1, weapons.TODAGGER);
 			addButton(9, weapons.ANGSTD.shortName, itemBuy1, weapons.ANGSTD);
 			addButton(10, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
-			addButton(11, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
+			addButton(11, weapons.KAMAWHIP.shortName, itemBuy1, weapons.KAMAWHIP);
+			//12
+			addButton(13, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
 			addButton(14, "Back", EraendirMainMenu);
 		}
 		private function itemBuy1(itype:ItemType):void {

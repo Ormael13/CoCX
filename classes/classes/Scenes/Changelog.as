@@ -33,6 +33,7 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.8t:</b>\n\n");
+			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New mutation perk: Human Versatility (Primitive). Req. Human Versatility and lvl 30+. Effects: Mastery gains increased by 2 point or in case of multtiplier +2 to multiplier. Decrease a bit needed exp to lvl up weapon/lifeskill masteries.\n");
 			outputText("-New mutation perk: Human Eyes. Req. having free eyes mutation slot, human race (17+). Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 5 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Primitive). Req. Human Eyes and lvl 30+. Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 10 lvl's.\n");
@@ -48,6 +49,7 @@ public class Changelog extends BaseContent
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
 			outputText("-Flying swords base dmg scaling (on wisdom and weapon atk value) increased by 250%. Bonus dmg for size of flying sword increased to 1000% for massive ones and added 400% for large ones. Sword type weapons mastery and weapon size mastery (small/large/massive) ");
 			outputText("now apply it dmg boost to their attacks and they can be coated with fire from foxflame pelt. They also can gain exp toward matching masteries.\n");
+			outputText("-Adding nodachi sprites to the game. (Liadri)\n");
 			outputText("-Minor fixes to taur and stuff (Liadri)\n");
 			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -68,18 +70,16 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Grey Sage Intelligence. Gained by spending 1 super perk point and having 'Equilibrium' super perk. Effects: Gain Grey Sage Intelligence. When using Mana Shield during Defend command it woulkd fully absorb attacks no matter how strong. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
 			outputText("-New event perk: Well of Mana. Gained by spending 1 super perk point and having 'Hyper Casting' super perk. Effects: Mana recovery increased by (0,1% * core int value) of max mana. When using Wait or Defend move mana recovery doubled. (+10% to OverMax Mana)\n");
 			outputText("-New event perk: Grey Sage Wisdom. Gained by spending 1 super perk point and having 'Well of Mana' super perk. Effects: Gain Grey Sage Wisdom. Increase damage reduction against spells by 20%. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
-			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
 			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
 			outputText("-Urta Quest would temporaly reset to NG 0 settings if PC is already on NG 1 or higher. ALso fixing error with wrong resetting secondary stats scaling post urta quest.\n");
-			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the same amount nonlust/lust dmg pc deal to enemy/ies.\n");
+			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the half amount of nonlust/lust dmg pc deal to enemy/ies. (old 10x monster stat increase -> 5x decrease of dmg dealt to monster)\n");
 			outputText("-Armor and Magic Defense of armor items would now matter more for higher values (especialy post 80). Instead of adding coresponding type of damage reduction by 1% until reaching 80 it will add 1% until 50. Any additional point of armor/mdef above 50 would apply DR based on this formula: dmg * (1 / square of (armor/mdef - 50)).\n");
 			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
-			outputText("-Adding nodachi sprites to the game. (Liadri)\n");
 			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
 			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
 			outputText("-New tier 4 strength lvl-up perk: Enchanced Warrior's Rage. Req. Way of the Warrior perk. Effect: Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
