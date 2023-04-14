@@ -132,6 +132,7 @@ public final class WeaponLib extends ItemConstants
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
+		public const KAMAWHIP:Weapon = new Weapon("KamaWhip","KamaWhip","kama whip","a kama whip","whip-like slash",3,240,"A small kama-like weapon with two scythe blades that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping, Bleed10", "Scythe, Thrown").withBuffs({'teasedmg': 30}) as Weapon;
 		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun25", WT_GAUNTLET).withBuffs({
 			'psoulskillpower': +0.5
 		}) as Weapon;

@@ -423,6 +423,9 @@ public class PerkLib
 		public static const HumanSupremacyAdvanced:PerkType = mk("Human Supremacy (Advanced)", "Human Supremacy (Advanced)",
 				"Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))",
 				"You've chosen the 'Human Supremacy (Advanced)' perk. Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))");
+		public static const EnchancedWarriorsRage:PerkType = mk("Enchanced Warrior's Rage", "Enchanced Warrior's Rage",
+				"Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)",
+				"You've chosen the 'Enchanced Warrior's Rage' perk. Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced.");
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -430,9 +433,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -4569,6 +4569,8 @@ public class PerkLib
             ImprovedAdrenaline.requireLevel(24)
                     .requireStr(110)
                     .requirePerk(UnlimitedRage);
+            EnchancedWarriorsRage.requireLevel(24)
+                    .requirePerk(WayOfTheWarrior);
             DualWieldLarge.requirePerks(DualWield, GigantGrip)
                     .requireStr(125)
                     .requireLevel(24);

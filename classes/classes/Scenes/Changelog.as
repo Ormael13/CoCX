@@ -33,15 +33,23 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.8t:</b>\n\n");
+			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New mutation perk: Human Versatility (Primitive). Req. Human Versatility and lvl 30+. Effects: Mastery gains increased by 2 point or in case of multtiplier +2 to multiplier. Decrease a bit needed exp to lvl up weapon/lifeskill masteries.\n");
 			outputText("-New mutation perk: Human Eyes. Req. having free eyes mutation slot, human race (17+). Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 5 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Primitive). Req. Human Eyes and lvl 30+. Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 10 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Evolved). Req. Human Eyes (Primitive) and lvl 60+. Effects: Increase precision of all attacks by 10%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 30 lvl's. 5% less penalty to acc per each next attack during multiattack.\n");
+			outputText("-New melee weapon (by Ormael): Dual Nodachi - buyable at Orsbulg shop. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
+			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
+			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
+			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
+			outputText("-New flying sword: Scarlet Half-Moon Duo - combined from two Scarlet Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal lightning damage instead of physical damage.\n");
+			outputText("-New flying sword: Ebon Half-Moon Duo - combined from two Ebon Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal darkness damage instead of physical damage.\n");
 			outputText("-New misc accesory: Boundless Ammo Bag - buyable at Tripxi shop in Tel'Adre. Cost 1,600 gems. It makes firearms never run out of ammo in middle of multishooting nor never needing to reload.\n");
 			outputText("-Ayo armor bonuses no longer give either flat bonus to stat or multi to stat. They would now give bonus or penalty to stat multi.\n");
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
 			outputText("-Flying swords base dmg scaling (on wisdom and weapon atk value) increased by 250%. Bonus dmg for size of flying sword increased to 1000% for massive ones and added 400% for large ones. Sword type weapons mastery and weapon size mastery (small/large/massive) ");
 			outputText("now apply it dmg boost to their attacks and they can be coated with fire from foxflame pelt. They also can gain exp toward matching masteries.\n");
+			outputText("-Adding nodachi sprites to the game. (Liadri)\n");
 			outputText("-Minor fixes to taur and stuff (Liadri)\n");
 			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -51,30 +59,31 @@ public class Changelog extends BaseContent
 			outputText("-Flying swords was moved from 'Soul Equipment' shop into nearby one shop that deal only with flying swords and teaching techniques to make better use of them run by ......\n");
 			outputText("-Added to stats (combat subpage) tracking how much higher lvl enemies pc can fight without loosing dmg.\n");
 			outputText("-Asauchi flying sword SF use cost is decreased from 80% to 60% of massive flying swords default cost.\n");
-			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
-			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
-			outputText("-New flying sword: Scarlet Half-Moon Duo - combined from two Scarlet Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal lightning damage instead of physical damage.\n");
-			outputText("-New flying sword: Ebon Half-Moon Duo - combined from two Ebon Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal darkness damage instead of physical damage.\n");
 			outputText("-Flying Sword Path perk would enable option to seperate sets or combine into sets specific flying swords. It cost a bit of SF to perform.\n");
 			outputText("-Asterius Rage str that is req. to reach fully atk is increased from 1,000+ to 1,300+. Until 100+ str atk increase is very minimal. Max atk itself is also increased from 176 to 200.\n");
 			outputText("-New tier 6 strength lvl-up perk: Titan's Grip. Req. Gigant's Grip (Ex) and Epic Strength perks, 200+ str. Effect: Gain an ability to wield massive weapons in one hand. (+25% melee physical attacks multiplier)\n");
 			outputText("-Dual Wield (Massive) perk can be picked when having Dual Wield perk and one of two other perks: Titan's Grip or Gigant's Grip (Su).\n");
-			outputText("-New melee weapon (by Ormael): Dual Nodachi - buyable at Orsbulg shop. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
 			outputText("-Body Cultivation progress req. now only 1 body temperiong solution and one bottle of pills. There would be better body cultivation options in future that would req. larger investments.\n");
 			outputText("-Invert metamorph for magma/dark slime skin, allows slime-tfs to convert skin colours if player already has the skintype. say, after Urta's slime event. (Jtecx)\n");
-			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-Blood Demon Toughness & Your Pain My Power super perks  was switched places in order of getting super perks for Blood Demon hidden job. Your Pain My Power super perk got additional minor effect: Casting spells using HP make them no longer limited by too high wrath.\n");
 			outputText("-Asura Strength & Like A-sura Boss super perks was switched places in order of getting super perks for Asura  hidden job. Hyper Casting super perk now require Grey Sage Intelligence super perk and due to adding meantioned super perk would be possible to gain 10 levels later than before.\n");
 			outputText("-New event perk: Grey Sage Intelligence. Gained by spending 1 super perk point and having 'Equilibrium' super perk. Effects: Gain Grey Sage Intelligence. When using Mana Shield during Defend command it woulkd fully absorb attacks no matter how strong. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
 			outputText("-New event perk: Well of Mana. Gained by spending 1 super perk point and having 'Hyper Casting' super perk. Effects: Mana recovery increased by (0,1% * core int value) of max mana. When using Wait or Defend move mana recovery doubled. (+10% to OverMax Mana)\n");
 			outputText("-New event perk: Grey Sage Wisdom. Gained by spending 1 super perk point and having 'Well of Mana' super perk. Effects: Gain Grey Sage Wisdom. Increase damage reduction against spells by 20%. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
-			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
 			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
 			outputText("-Urta Quest would temporaly reset to NG 0 settings if PC is already on NG 1 or higher. ALso fixing error with wrong resetting secondary stats scaling post urta quest.\n");
-			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the same amount nonlust/lust dmg pc deal to enemy/ies.\n");
+			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the half amount of nonlust/lust dmg pc deal to enemy/ies. (old 10x monster stat increase -> 5x decrease of dmg dealt to monster)\n");
 			outputText("-Armor and Magic Defense of armor items would now matter more for higher values (especialy post 80). Instead of adding coresponding type of damage reduction by 1% until reaching 80 it will add 1% until 50. Any additional point of armor/mdef above 50 would apply DR based on this formula: dmg * (1 / square of (armor/mdef - 50)).\n");
 			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
+			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
+			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
+			outputText("-New tier 4 strength lvl-up perk: Enchanced Warrior's Rage. Req. Way of the Warrior perk. Effect: Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)\n");
+			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -112,7 +121,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
-			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, Human Eyes I. Mutations tier 2 and 3 not increasing max lvl diff to still deal 100% dmg to enemy\n");
+			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -183,13 +192,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -218,9 +221,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

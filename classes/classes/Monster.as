@@ -913,16 +913,16 @@ import flash.utils.getQualifiedClassName;
 		public function damageReductionBasedOnDifficulty():Number {
 			var dRBOD:Number = 1;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.1;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 2;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.05;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.125;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 1.5;
 			}
 			else {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 2;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 10;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 2.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 12.5;
 			}
 			return dRBOD;
 		}

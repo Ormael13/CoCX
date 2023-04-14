@@ -206,7 +206,7 @@ import classes.display.SpriteDb;
 		public function LilyTalkDriderPods():void {
 			clearOutput();
 			outputText("You ask Lily what she means by ‘pod mates’. You tell her that you understand that it’s the Drider equivalent of siblings, but you want her to go into more detail.\n\n");
-			outputText("\"<i>Ah, yes. I suppose you being human "+(player.isRace(Races.HUMAN, 1, false) ? "once ":"")+"would leave you a little confused on the matter.”</i> Lily crosses her arms in front of her top pair of breasts. <i>“Well, to be precise, Driders lay eggs, rather than live birth like those who have more mammalian roots. those born in different clutches, but to the same parents, rarely have the same sense of “family” as those born in the same clutch of eggs.</i>\" ");
+			outputText("\"<i>Ah, yes. I suppose you being human "+(player.isRace(Races.HUMAN, 1, false) ? "once ":"")+"would leave you a little confused on the matter.”</i> Lily crosses her arms in front of her top pair of breasts. <i>“Well, to be precise, Driders lay eggs, rather than live birth like those who have more mammalian roots. Those born in different clutches, but to the same parents, rarely have the same sense of “family” as those born in the same clutch of eggs.</i>\" ");
 			outputText("She rolls a hand. \"<i>Otherwise, most Driders would share familial feelings with half the village, being half-siblings, or whatnot.</i>\"\n\n");
 			outputText("This makes sense to you, and you thank your kinky drider for clarifying.\n\n");
 			outputText("\"<i>Oh, it’s no problem.</i>\" She gives you a little smirk. \"<i>Besides, there’s only a few reasons you’d be asking about such a topic, after all.</i>\" She gives you a knowing smile, running her finger from her hip down to her moist muff. She catches you looking, and her smile grows, showing her fangs. \"<i>Interested in making some, I assume?</i>\"\n\n");
@@ -574,7 +574,7 @@ import classes.display.SpriteDb;
 			menu();
 			//addButton(1, "LilySpit",LilySpitRoast );
 			addButton(0, "S.Sandwich", SandwichSidonie).disableIf(!player.hasCock(), "Req. a cock!");
-			addButton(1, "S.Dom", SidonieDom );
+			addButton(1, "S.Dom", SidonieDom);
 		}
 		
 		public function LilySpitRoast():void {
