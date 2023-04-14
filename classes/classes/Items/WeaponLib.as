@@ -205,11 +205,12 @@ public final class WeaponLib extends ItemConstants
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
 		public const T_HEART:TrullHeart = new TrullHeart();
 		public const T_STAFF:Weapon = new Weapon("T.Staff", "T. Staff", "topaz staff", "a topaz staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has topaz embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
+		public const TB_SCYT:Weapon = new Weapon("TBScyt", "T.B.Scythe", "two bladed scythe", "a two bladed scythe", "slash", 30, 2400, "The Two Bladed Scythe resembles a scythe with a long thin blue grip, and two blades at the tip.", "Large, Whirlwind, Bleed25", "Scythe");
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
+		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
 		public const TIDAR:Tidarion = new Tidarion();
 		public const TKNIVES:TaintlessKnives = new TaintlessKnives();
 		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","a topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");
-		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
 		public const TRIDAG :Weapon = new Weapon("TriDag ","TriDagger","tri-dagger","a tri-dagger","stab",4,320,"A dagger whose blade is shaped like a perfect equilateral triangle.  It has chance to leave bleeding wounds.", "Small, Bleed25", "Dagger");
 		public const TRASAXE:Weapon = new Weapon("TraSAxe","Train.S.Axe", "training soul axe", "a training soul axe", "cleave", 1, 80, "This axe was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal weapon.", "", "Axe");
 		public const TRIDENT:Trident = new Trident();
