@@ -38,7 +38,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Eyes. Req. having free eyes mutation slot, human race (17+). Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 5 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Primitive). Req. Human Eyes and lvl 30+. Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 10 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Evolved). Req. Human Eyes (Primitive) and lvl 60+. Effects: Increase precision of all attacks by 10%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 30 lvl's. 5% less penalty to acc per each next attack during multiattack.\n");
-			outputText("-New melee weapon (by Ormael): Dual Nodachi - buyable at Orsbulg shop. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
+			outputText("-New melee weapon (by Ormael): Dual Nodachi - can be gained by combining 2x Kama weapon. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
 			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
@@ -49,7 +49,7 @@ public class Changelog extends BaseContent
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
 			outputText("-Flying swords base dmg scaling (on wisdom and weapon atk value) increased by 250%. Bonus dmg for size of flying sword increased to 1000% for massive ones and added 400% for large ones. Sword type weapons mastery and weapon size mastery (small/large/massive) ");
 			outputText("now apply it dmg boost to their attacks and they can be coated with fire from foxflame pelt. They also can gain exp toward matching masteries.\n");
-			outputText("-Adding nodachi sprites to the game. (Liadri)\n");
+			outputText("-Adding nodachi sprites (drawn by Mister GRaM) to the game. (Liadri)\n");
 			outputText("-Minor fixes to taur and stuff (Liadri)\n");
 			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -84,9 +84,10 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-In Camp Actions > Misc menu added option to combine or separate specific weapons. For example 2 Kama weapons combine into 1 Dual Kama weapon or separate 1 Dual Kama into 2 Kama weapons.\n");
-			outputText("-Added imp female sprite. (Liadri)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
+			outputText("-Dual Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
+			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
+			outputText("-To better match their status as legendary items: Artemis & Wild Hunt atk increased (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons atk increased (40 > 140 (at 100+ spe)). In cases when there wasn't level req. it was added.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

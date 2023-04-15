@@ -36,7 +36,7 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			addButton(9, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
 			addButton(10, weapons.KAMA.shortName, itemBuy1, weapons.KAMA);
 			addButton(11, weapons.KAMAWHIP.shortName, itemBuy1, weapons.KAMAWHIP);
-			addButton(12, weapons.DDAGGER.shortName, itemBuy1, weapons.DDAGGER);
+			//12
 			addButton(13, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
 			addButton(14, "Back", EraendirMainMenu);
 		}
@@ -73,14 +73,14 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			addButton(2, weapons.BFWHIP.shortName, itemBuy2, weapons.BFWHIP);
 			addButton(3, weapons.OTETSU.shortName, itemBuy2, weapons.OTETSU);
 			addButton(4, weapons.DWARWA.shortName, itemBuy2, weapons.DWARWA);
-			addButton(5, weapons.DBFSWO.shortName, itemBuy2, weapons.DBFSWO);
-			addButton(6, weapons.DBFTHSWO.shortName, itemBuy2, weapons.DBFTHSWO);
-			addButton(7, weapons.DBFWHIP.shortName, itemBuy2, weapons.DBFWHIP);
-			addButton(8, weapons.SKYPIER.shortName, itemBuy2, weapons.SKYPIER);
-			addButton(9, weapons.TB_SCYT.shortName, itemBuy2, weapons.TB_SCYT);
-			addButton(10, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
-			addButton(11, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
-			addButton(12, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
+			addButton(5, weapons.SKYPIER.shortName, itemBuy2, weapons.SKYPIER);
+			addButton(6, weapons.TB_SCYT.shortName, itemBuy2, weapons.TB_SCYT);
+			addButton(7, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
+			addButton(8, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
+			addButton(9, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
+			//10
+			//11
+			//12
 			//13
 			addButton(14, "Back", OrsbulgMainMenu);
 		}
