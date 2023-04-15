@@ -132,6 +132,7 @@ public final class WeaponLib extends ItemConstants
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
+		public const KAMA   :Weapon = new Weapon("kama","kama", "kama", "a kama", "slash", 4,320, "The kama is a simple and elegant hand scythe weapon. Preferred weapon for the ninja fans.", "Small, Bleed10", "Scythe");
 		public const KAMAWHIP:Weapon = new Weapon("KamaWhip","KamaWhip","kama whip","a kama whip","whip-like slash",3,240,"A small kama-like weapon with two scythe blades that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping, Bleed10", "Scythe, Thrown").withBuffs({'teasedmg': 30}) as Weapon;
 		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun25", WT_GAUNTLET).withBuffs({
 			'psoulskillpower': +0.5
@@ -207,7 +208,7 @@ public final class WeaponLib extends ItemConstants
 		public const T_STAFF:Weapon = new Weapon("T.Staff", "T. Staff", "topaz staff", "a topaz staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has topaz embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
 		public const TB_SCYT:Weapon = new Weapon("TBScyt", "T.B.Scythe", "two bladed scythe", "a two bladed scythe", "slash", 30, 2400, "The Two Bladed Scythe resembles a scythe with a long thin blue grip, and two blades at the tip.", "Large, Whirlwind, Bleed25", "Scythe");
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
-		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
+		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown. Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
 		public const TIDAR:Tidarion = new Tidarion();
 		public const TKNIVES:TaintlessKnives = new TaintlessKnives();
 		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","a topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");

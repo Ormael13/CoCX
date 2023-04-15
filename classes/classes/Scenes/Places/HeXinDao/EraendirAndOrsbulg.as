@@ -25,18 +25,18 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			outputText("The elf gives you a wide display of his many knife and swords. Small blades indeed but sharp and light, ideal to deliver many cuts in the time it normaly takes to deliver 1 strike.");
 			menu();
 			addButton(0, weapons.DAGGER.shortName, itemBuy1, weapons.DAGGER);
-			addButton(1, weapons.DDAGGER.shortName, itemBuy1, weapons.DDAGGER);
-			addButton(2, weapons.TRIDAG.shortName, itemBuy1, weapons.TRIDAG);
-			addButton(3, weapons.TDAGGER.shortName, itemBuy1, weapons.TDAGGER);
-			addButton(4, weapons.DAGWHIP.shortName, itemBuy1, weapons.DAGWHIP);
+			addButton(1, weapons.TRIDAG.shortName, itemBuy1, weapons.TRIDAG);
+			addButton(2, weapons.TDAGGER.shortName, itemBuy1, weapons.TDAGGER);
+			addButton(3, weapons.DAGWHIP.shortName, itemBuy1, weapons.DAGWHIP);
+			addButton(4, weapons.ANGSTD.shortName, itemBuy1, weapons.ANGSTD);
 			addButton(5, weapons.ADAGGER.shortName, itemBuy1, weapons.ADAGGER);
 			addButton(6, weapons.RDAGGER.shortName, itemBuy1, weapons.RDAGGER);
 			addButton(7, weapons.SDAGGER.shortName, itemBuy1, weapons.SDAGGER);
 			addButton(8, weapons.TODAGGER.shortName, itemBuy1, weapons.TODAGGER);
-			addButton(9, weapons.ANGSTD.shortName, itemBuy1, weapons.ANGSTD);
-			addButton(10, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
+			addButton(9, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
+			addButton(10, weapons.KAMA.shortName, itemBuy1, weapons.KAMA);
 			addButton(11, weapons.KAMAWHIP.shortName, itemBuy1, weapons.KAMAWHIP);
-			//12
+			addButton(12, weapons.DDAGGER.shortName, itemBuy1, weapons.DDAGGER);
 			addButton(13, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
 			addButton(14, "Back", EraendirMainMenu);
 		}
