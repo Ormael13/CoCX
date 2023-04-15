@@ -2218,6 +2218,7 @@ public class Camp extends NPCAwareContent{
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
 		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
+		addButton(13, "C & S", menuForCombiningAndSeperating).hint("Combining & Seperating");
 		addButton(14, "Back", campActions);
 	}
 	private function convertingEnergyCoreIntoFlagValue():void {
@@ -2233,6 +2234,32 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(useables.MECHANI, 1);
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		doNext(campMiscActions);
+	}
+	
+	public function menuForCombiningAndSeperating():void {
+		clearOutput();
+		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons.");
+		menu();
+		var btn:int = 0;
+		if (player.itemCount(weapons.KAMA) > 1) addButton(btn++, "D.Kama", menuCombining, weapons.KAMA, weapons.D_KAMA).hint("Combine 2 Kama into Dual Kama");
+		if (player.itemCount(weapons.D_KAMA) > 0) addButton(btn++, "Kama", menuSeparating, weapons.D_KAMA, weapons.KAMA).hint("Separate Dual Kama into 2 Kama");
+		addButton(14, "Back", campMiscActions);
+	}
+	public function menuCombining(weapon1: Weapon, weapon2: Weapon):void {
+		clearOutput();
+		outputText("Combining.\n\n");
+		player.destroyItems(weapon1, 2);
+		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
+	}
+	public function menuSeparating(weapon1: Weapon, weapon2: Weapon):void {
+		clearOutput();
+		outputText("Separating.\n\n");
+		player.destroyItems(weapon1, 1);
+		inventory.takeItem(weapon2, curry(menuSeparating1a, weapon2));
+	}
+	public function menuSeparating1a(weapon2: Weapon):void {
+		outputText("\n\n");
+		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}
 	
 	public function mainPagePocketWatch(page:int = 1):void {
@@ -4778,4 +4805,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

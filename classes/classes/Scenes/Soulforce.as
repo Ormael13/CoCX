@@ -906,13 +906,13 @@ public class Soulforce extends BaseContent
 		menu();
 		var btn:int = 0;
 		if (player.itemCount(weaponsflyingswords.W_HALFM) > 1) addButton(btn++, "W.HalfM2", ImprintingSFCombine, weaponsflyingswords.W_HALFM, weaponsflyingswords.W_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.W_HALFM2) > 0) addButton(btn++, "W.HalfM", ImprintingSFSeperate1, weaponsflyingswords.W_HALFM2, weaponsflyingswords.W_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.W_HALFM2) > 0) addButton(btn++, "W.HalfM", ImprintingSFSeparate1, weaponsflyingswords.W_HALFM2, weaponsflyingswords.W_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
 		if (player.itemCount(weaponsflyingswords.B_HALFM) > 1) addButton(btn++, "B.HalfM2", ImprintingSFCombine, weaponsflyingswords.B_HALFM, weaponsflyingswords.B_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.B_HALFM2) > 0) addButton(btn++, "B.HalfM", ImprintingSFSeperate1, weaponsflyingswords.B_HALFM2, weaponsflyingswords.B_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.B_HALFM2) > 0) addButton(btn++, "B.HalfM", ImprintingSFSeparate1, weaponsflyingswords.B_HALFM2, weaponsflyingswords.B_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
 		if (player.itemCount(weaponsflyingswords.S_HALFM) > 1) addButton(btn++, "S.HalfM2", ImprintingSFCombine, weaponsflyingswords.S_HALFM, weaponsflyingswords.S_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.S_HALFM2) > 0) addButton(btn++, "S.HalfM", ImprintingSFSeperate1, weaponsflyingswords.S_HALFM2, weaponsflyingswords.S_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.S_HALFM2) > 0) addButton(btn++, "S.HalfM", ImprintingSFSeparate1, weaponsflyingswords.S_HALFM2, weaponsflyingswords.S_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
 		if (player.itemCount(weaponsflyingswords.E_HALFM) > 1) addButton(btn++, "E.HalfM2", ImprintingSFCombine, weaponsflyingswords.E_HALFM, weaponsflyingswords.E_HALFM2).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
-		if (player.itemCount(weaponsflyingswords.E_HALFM2) > 0) addButton(btn++, "E.HalfM", ImprintingSFSeperate1, weaponsflyingswords.E_HALFM2, weaponsflyingswords.E_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
+		if (player.itemCount(weaponsflyingswords.E_HALFM2) > 0) addButton(btn++, "E.HalfM", ImprintingSFSeparate1, weaponsflyingswords.E_HALFM2, weaponsflyingswords.E_HALFM).disableIf(player.soulforce < 100, "Req. 100 soulforce.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 	public function ImprintingSFCombine(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords):void {
@@ -922,14 +922,14 @@ public class Soulforce extends BaseContent
 		player.destroyItems(flyingsword1, 2);
 		inventory.takeItem(flyingsword2, ImprintingSF);
 	}
-	public function ImprintingSFSeperate1(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords):void {
+	public function ImprintingSFSeparate1(flyingsword1: FlyingSwords, flyingsword2: FlyingSwords):void {
 		clearOutput();
-		outputText("Seperating.\n\n");
+		outputText("Separating.\n\n");
 		player.soulforce -= 100;
 		player.destroyItems(flyingsword1, 1);
-		inventory.takeItem(flyingsword2, curry(ImprintingSFSeperate1a, flyingsword2));
+		inventory.takeItem(flyingsword2, curry(ImprintingSFSeparate1a, flyingsword2));
 	}
-	public function ImprintingSFSeperate1a(flyingsword2: FlyingSwords):void {
+	public function ImprintingSFSeparate1a(flyingsword2: FlyingSwords):void {
 		outputText("\n\n");
 		inventory.takeItem(flyingsword2, ImprintingSF);
 	}
