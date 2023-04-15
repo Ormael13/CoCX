@@ -858,7 +858,7 @@
 		
 		<cell rect="1472,1620,80,90" name="weapon/nodachiGeneric" dx="38" dy="55"/>
 		<cell rect="1472,1726,80,90" name="weapon/nodachiHoly" dx="38" dy="55"/>
-        <cell rect="1472,1726,80,90" name="weapon/nodachiUnholy" dx="38" dy="55"/>
+        <cell rect="1472,1832,80,90" name="weapon/nodachiUnholy" dx="38" dy="55"/>
 		<cell rect="1472,1938,80,90" name="weaponBuff/nodachiFireBuff" dx="27" dy="35"/>
         <cell rect="1562,1620,80,90" name="weapon/nodachiGenericOH" dx="82" dy="55"/>
         <cell rect="1562,1726,80,90" name="weapon/nodachiHolyOH" dx="82" dy="55"/>
@@ -5668,7 +5668,7 @@
 			</if>
 		</if>
 
-		<!--Dragonscale set -->
+		<!--Dragonscales set -->
 		<if test="dragonscaleBikiniBra">
 			<if test="breastRows.length gt 0">
 				<switch>
