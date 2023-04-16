@@ -1274,30 +1274,30 @@ public function unlockingCorruptLegendariesOption():void {
 }
 public function itemImproveMenuCorrupt():void {
 	var improvableItems:Array = [
-		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
-		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
-		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
-		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
-		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
+		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],//
+		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],//
+		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],//
+		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],//
+		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],//
 		[weapons.DEMSCYT, weapons.LHSCYTH, null],
-		[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
+		[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],//
 		[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
 		[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
-		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
+		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],//
 		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
-		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
+		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],//
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
-		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
-		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
-		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
-		[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
-		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
-		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
-		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
-		[armors.CTPALAD, null, armors.CTBGUAR]
+		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],//
+		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],//
+		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],//
+		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],//
+		[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],//
+		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],//
+		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],//
+		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],//
+		[armors.CTPALAD, null, armors.CTBGUAR]//
 	];
 	clearOutput();
 	outputText("You ask your Drider lover if she’d be willing to upgrade a piece of your gear. She nods simply, bringing out a trough on wheels, filled with ebony liquid that bubbles, despite being under no heat.\n\n");// legendary

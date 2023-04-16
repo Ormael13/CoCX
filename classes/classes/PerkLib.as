@@ -4160,6 +4160,10 @@ public class PerkLib
 				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power, +10% Base WIS Cap)");
 		public static const AsuraSpeed:PerkType = mk("Asura Speed", "Asura Speed",
 				"X th Asura super perk. (+10% of OverMax Wrath/Base SPE Cap)");
+		public static const HiddenJobShapeshifter:PerkType = mk("Hidden Job: Shapeshifter", "Hidden Job: Shapeshifter",
+				". (+10% of OverMax )");
+		public static const HiddenJobDemonSovereign:PerkType = mk("Hidden Job: Demon Sovereign", "Hidden Job: Demon Sovereign",
+				". (+10% of OverMax )");
 		public static const HiddenJob2:PerkType = mk("Hidden Job: 2", "Hidden Job: 2",
 				".");
 		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",

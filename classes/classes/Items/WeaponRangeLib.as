@@ -22,7 +22,8 @@ public final class WeaponRangeLib extends ItemConstants
 		public function LegendaryCorrupt():Array {
 			return [
 				WILDHUN,
-				LEVHARP
+				LEVHARP,
+				BADOMEN
 			];
 		}
 

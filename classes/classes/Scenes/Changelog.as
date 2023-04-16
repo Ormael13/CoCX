@@ -87,8 +87,9 @@ public class Changelog extends BaseContent
 			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
 			outputText("-Dual Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
 			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
-			outputText("-To better match their status as legendary items: Artemis & Wild Hunt atk increased (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons atk increased (40 > 140 (at 100+ spe)). In cases when there wasn't level req. it was added.\n");
-			outputText("-\n");
+			outputText("-To better match their status as legendary items: Artemis & Wild Hunt atk increased (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons atk increased (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer atk increased (60 > 210 (at 270+ str)), Lifehunt Scythe atk increased (25 > 90 (at 100+ str)), ");
+			outputText("Seraph Spear & Demon Snake Spear atk increased (20 > 60 (at 100+ spe)), Winged Greataxe & Demonic Greataxe atk increased (28 > 100 (at 100+ str)). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
+			outputText("-Demonic Scythe & Alvina's Twin Scythes have now 10% chance to proc bleed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
