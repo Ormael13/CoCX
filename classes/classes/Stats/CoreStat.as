@@ -25,6 +25,7 @@ public class CoreStat extends RawStat{
 				var tou:Number = 1;
 				if (host.hasPerk(PerkLib.AsuraToughness)) tou += 0.1;
 				if (host.hasPerk(PerkLib.BloodDemonToughness)) tou += 0.1;
+				if (host.hasPerk(PerkLib.DemonSovereignToughnessAndLibido)) wis += 0.05;
 				base *= tou;
 				base = Math.round(base);
 				break;
@@ -55,6 +56,7 @@ public class CoreStat extends RawStat{
 			case 'lib.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismLib);
 				base += host.perkv1(PerkLib.SoulTempering);
+				if (host.hasPerk(PerkLib.DemonSovereignToughnessAndLibido)) wis += 0.05;
 				break;
 		}
 		return base;

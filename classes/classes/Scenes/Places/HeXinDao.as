@@ -906,7 +906,7 @@ public class HeXinDao extends BaseContent
 		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingswordBuy, weaponsflyingswords.MOONLGT);
 		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingswordBuy, weaponsflyingswords.S_TWINS);
 		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingswordBuy, weaponsflyingswords.ASAUCHI);
-        addButtonDisabled(13, "Training", "Not available until owner of the shop return.");//.hint("Flying Sword training.")
+        addButtonDisabled(13, "Training", "The owner of the shop isn't here, currently. There's nobody to train you.");//.hint("Flying Sword training.")
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
@@ -1559,4 +1559,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

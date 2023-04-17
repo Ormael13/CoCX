@@ -90,7 +90,7 @@ public class Changelog extends BaseContent
 			outputText("-To better match their status as legendary items: Artemis & Wild Hunt atk increased (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons atk increased (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer atk increased (60 > 210 (at 270+ str)), Lifehunt Scythe atk increased (25 > 90 (at 100+ str)), ");
 			outputText("Seraph Spear & Demon Snake Spear atk increased (20 > 60 (at 100+ spe)), Winged Greataxe & Demonic Greataxe atk increased (28 > 100 (at 100+ str)). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
 			outputText("-Demonic Scythe & Alvina's Twin Scythes have now 10% chance to proc bleed.\n");
-			outputText("-\n");
+			outputText("-Training Dummy/Dummies would let Supercharged PC run away.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -123,7 +123,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
-			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor\n");
+			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

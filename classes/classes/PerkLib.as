@@ -4164,6 +4164,8 @@ public class PerkLib
 				". (+10% of OverMax )");
 		public static const HiddenJobDemonSovereign:PerkType = mk("Hidden Job: Demon Sovereign", "Hidden Job: Demon Sovereign",
 				". (+10% of OverMax )");
+		public static const DemonSovereignToughnessAndLibido:PerkType = mk("Demon Sovereign Toughness & Libido", "Demon Sovereign Toughness & Libido",
+				". (+10% of OverMax , +5% Base TOU/LIB Cap)");
 		public static const HiddenJob2:PerkType = mk("Hidden Job: 2", "Hidden Job: 2",
 				".");
 		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",

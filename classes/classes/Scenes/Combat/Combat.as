@@ -14630,7 +14630,7 @@ public function runAway(callHook:Boolean = true):void {
         addButton(0, "Next", combatMenu, false);
         return;
     }
-    if (player.statStore.hasBuff("Supercharged")) {
+    if (player.statStore.hasBuff("Supercharged") && monster.short != "training dummy" && monster.short != "training dummies") {
         outputText("Run...SERIOUSLY? There is no way you could run! You need to discharge NOW! Your genitals are glistening with dripping plasma. You need to FUCK!");
         if (monster.isHerm() && player.isHerm()) outputText(" Cock or cunt you don't even care! All you WANT is for that herm to fuck you wildly until your charge is gone!");
         else{
@@ -14857,7 +14857,7 @@ public function runAway(callHook:Boolean = true):void {
         }
         //Non-fliers flee
         else {
-            if (monster.short == "training dummy") outputText("When you look back you see it's still in the same spot seemly grinning at you.");
+            if (monster.short == "training dummy" || monster.short == "training dummies") outputText("When you look back you see "+(monster.short == "training dummies" ? "they're" : "it's")+" still in the same spot seemly grinning at you.");
             else outputText("[Themonster] rapidly disappears into the shifting landscape behind you.");
         }
         if (monster is Izma) {
