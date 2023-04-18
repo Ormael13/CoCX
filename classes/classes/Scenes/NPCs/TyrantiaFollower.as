@@ -1274,39 +1274,39 @@ public function unlockingCorruptLegendariesOption():void {
 }
 public function itemImproveMenuCorrupt():void {
 	var improvableItems:Array = [
-		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],//
-		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],//
-		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],//
-		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],//
-		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],//
+		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],//--//
+		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],//--//
+		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],//--//
+		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
+		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],//--//
 		[weapons.DEMSCYT, weapons.LHSCYTH, null],
-		[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],//
+		[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
 		[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
 		[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
-		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],//
+		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
 		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
-		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],//
+		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],//--//
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
-		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],//
-		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],//
-		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],//
-		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],//
-		[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],//
-		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],//
-		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],//
-		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],//
-		[armors.CTPALAD, null, armors.CTBGUAR]//
+		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],//--//
+		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],//--//
+		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
+		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
+		[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
+		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
+		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
+		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],//--//
+		[armors.CTPALAD, null, armors.CTBGUAR]//--//
 	];
 	clearOutput();
 	outputText("You ask your Drider lover if she’d be willing to upgrade a piece of your gear. She nods simply, bringing out a trough on wheels, filled with ebony liquid that bubbles, despite being under no heat.\n\n");// legendary
 	outputText("\"<i>If you want this.</i>\" She says simply. \"<i>I will enchant something for you…But in order to do it right, I’ll need some materials.</i>\" She idly chews a nail, pointing at the vat. ");
 	if (TyraniaCorrupteedLegendaries == 2) {
-		outputText("\"<i>But I’ll need three 'Radiant Shards' and 20000 Gems.</i>\"");
+		outputText("\"<i>But I’ll need three 'Radiant Shards' and 20,000 Gems.</i>\"");
 	}
 	else {
-		outputText("\"<i>But I’ll need something called a 'Radiant Shard'.</i>\" She stops chewing, then blinks. \"<i>No, I’ll need three of them, and 20000 Gems.</i>\" You give Tyrantia a shocked look, and she shrugs. \"<i>I’m going off some kind of residual species memory right now.</i>\"");
+		outputText("\"<i>But I’ll need something called a 'Radiant Shard'.</i>\" She stops chewing, then blinks. \"<i>No, I’ll need three of them, and 20,000 Gems.</i>\" You give Tyrantia a shocked look, and she shrugs. \"<i>I’m going off some kind of residual species memory right now.</i>\"");
 		TyraniaCorrupteedLegendaries = 2;
 	}
 	outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
@@ -1353,3 +1353,4 @@ doNext(camp.returnToCamp);
 }*/
 }
 }
+
