@@ -87,12 +87,13 @@ public class Changelog extends BaseContent
 			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
 			outputText("-Dual Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
 			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
-			outputText("-To better match their status as legendary items their atk been increased: Artemis & Wild Hunt (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer (60 > 210 (at 270+ str)), Lifehunt Scythe (25 > 90 (at 100+ str)), Seraph Spear & Demon Snake Spear (20 > 60 (at 100+ spe)), ");
+			outputText("-To better match their status as legendary weapons their atk been increased: Artemis & Wild Hunt (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer (60 > 210 (at 270+ str)), Lifehunt Scythe (25 > 90 (at 100+ str)), Seraph Spear & Demon Snake Spear (20 > 60 (at 100+ spe)), ");
 			outputText("Winged Greataxe & Demonic Greataxe (28 > 100 (at 100+ str)), Moonlit Snow (40 > 115 (at 100+ spe)), Chaos Blade (45 > 135 (at 100+ spe)), Masamune Katana (32 > 112 (at 100+ spe)), Blood Letter katana (42 > 132 (at 100+ spe)), Queen's Guard Rapier (27,5 > 80 (at 100+ spe)), Black Widow Rapier (27,5 > 80 (at 100+ spe)). ");
 			outputText("In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
 			outputText("-Demonic Scythe & Alvina's Twin Scythes have now 10% chance to proc bleed.\n");
 			outputText("-Training Dummy/Dummies would let Supercharged PC run away.\n");
-			outputText("-\n");
+			outputText("-To better match their status as legendary armors their stats been increased: Inari Blessed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on purity cap 50% > 100%), Tamamo no Mae Cursed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on corruption cap 50% > 100%), ");
+			outputText("Oni Enlightened Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 10, dmg multi during rampage 40% > 50%), Oni Tyrant Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 5, dmg multi during rampage 40% > 100%). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

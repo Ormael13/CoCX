@@ -1291,12 +1291,12 @@ public function itemImproveMenuCorrupt():void {
 		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
 		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],//--//
 		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],//--//
-		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
-		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
-		[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
-		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
-		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],//--//
-		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],//--//
+		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
 		[armors.CTPALAD, null, armors.CTBGUAR]//--//
 	];
 	clearOutput();

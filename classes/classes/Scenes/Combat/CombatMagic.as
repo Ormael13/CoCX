@@ -251,7 +251,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01);
+		if (player.hasPerk(PerkLib.InariBlessedKimono)) mod += ((100 - player.cor) * .01);
         return mod;
     }
 
@@ -270,12 +271,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
-		}
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 100;
-			if (mod2 < 0.1) mod2 = 0.1;
-			mod += mod2;
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
@@ -429,14 +424,9 @@ public class CombatMagic extends BaseCombatContent {
 		var mod:Number = 1 + modChange_all() + modChange_heal();
 		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
 		if (player.hasPerk(PerkLib.Ambition)) mod += player.perkv1(PerkLib.Ambition);
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 100;
-			if (mod2 < 0.1) mod2 = 0.1;
-			mod += mod2;
-		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)) mod += ((100 - player.cor) * .01);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;

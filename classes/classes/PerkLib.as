@@ -3205,9 +3205,9 @@ public class PerkLib
 		public static const OniDrinkingJug:PerkType = mk("Oni enchanted drinking jug", "Oni enchanted drinking jug",
 				"Grant an infinite supply of non transformative alcohol. Furthermore drunken power duration is doubled.");
 		public static const OniEnlightenedKimono:PerkType = mk("Oni Noble Kimono", "Oni Noble Kimono",
-				"Increase rampage duration by 4 rounds and add +40% to melee physical damage.");
+				"Increase rampage duration by 10 rounds and add +50% to melee physical damage.");
 		public static const OniTyrantKimono:PerkType = mk("Oni Tyrant Kimono", "Oni Tyrant Kimono",
-				"Increase rampage duration by 4 rounds and add +40% to melee physical damage.");
+				"Increase rampage duration by 5 rounds and add +100% to melee physical damage.");
 		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates up to 1% of HP scaling on purity.");
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
@@ -3251,13 +3251,13 @@ public class PerkLib
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
-				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
+				"Increase the potency of all spells and soulskills by up to 100% based on purity and empower all enlighted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
 		public static const MageWarden:PerkType = mk("Mage-Warden", "Mage-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
 		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
-				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
+				"Increase the potency of all spells and soulskills by up to 100% based on corruption and empower all corrupted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
 		public static const WildWarden:PerkType = mk("Wild-Warden", "Wild-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 

@@ -1938,7 +1938,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		lustDmg *= 0.1;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) lustDmg *= 2;
+		if (player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		return lustDmg;
@@ -3084,7 +3085,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3166,7 +3168,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3245,7 +3248,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3326,7 +3330,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3398,7 +3403,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3960,7 +3966,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -4058,7 +4065,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
-			if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+			if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+			if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -6469,4 +6477,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

@@ -1851,7 +1851,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 	 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 	 if (player.armor == armors.SPKIMO) damage *= 1.2;
-	 if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+	 if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //Determine if critical hit!
 	 var crit:Boolean = false;
@@ -1954,7 +1955,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 	 if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 	if (player.armor == armors.SPKIMO) damage *= 1.2;
-	if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+	if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+	if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 	if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //triple strike bonus
 	 damage *= 3;
