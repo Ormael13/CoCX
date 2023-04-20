@@ -685,10 +685,10 @@ use namespace CoC;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
-				if (armor.name == "some taur blackguard armor") {
+				if (armor.name == "some taur paladin armor" || armor.name == "some taur blackguard armor") {
 					speedBonus += Math.round(spe / 5);
 				}
-				else if (armorPerk == "Light" || armor.name == "some taur paladin armor") {
+				else if (armorPerk == "Light" || armor.name == "some taur armor") {
 					speedBonus += Math.round(spe / 10);
 				}
 				else if (armorPerk == "Medium") {
@@ -898,10 +898,10 @@ use namespace CoC;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
-				if (armor.name == "some taur blackguard armor") {
+				if (armor.name == "some taur paladin armor" || armor.name == "some taur blackguard armor") {
 					speedBonus += Math.round(spe / 5);
 				}
-				else if (armorPerk == "Light" || armor.name == "some taur paladin armor") {
+				else if (armorPerk == "Light" || armor.name == "some taur armor") {
 					speedBonus += Math.round(spe / 10);
 				}
 				else if (armorPerk == "Medium") {

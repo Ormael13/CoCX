@@ -48,6 +48,7 @@ public final class WeaponLib extends ItemConstants
 				YAMARG,
 				BLETTER,
 				N_STAFF,
+				HELRAIS,
 				C_BLADE,
 				DE_GAXE,
 				DSSPEAR,
@@ -130,6 +131,7 @@ public final class WeaponLib extends ItemConstants
 		public const G_SPEAR:Weapon = new Weapon("G.Spear", "G.Spear", "Guard's Spear", "a guard's spear", "thrust", 16,450,"A very sturdy and well-made spear\n", WP_AP45, WT_SPEAR);
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.","Bleed25","Gauntlet");
 		public const HALBERD:Halberd = new Halberd();
+		public const HELRAIS:Hellraiser = new Hellraiser();
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();

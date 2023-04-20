@@ -373,17 +373,17 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.weapons.MASTGLO, CoC.instance.weapons.KARMTOU, CoC.instance.weapons.YAMARG],
 			[CoC.instance.weapons.KATANA, CoC.instance.weapons.MASAMUN, CoC.instance.weapons.BLETTER],
 			[CoC.instance.weapons.W_STAFF, CoC.instance.weapons.U_STAFF, CoC.instance.weapons.N_STAFF],
-			[CoC.instance.weapons.DEMSCYT, CoC.instance.weapons.LHSCYTH, null],
+			[CoC.instance.weapons.DEMSCYT, CoC.instance.weapons.LHSCYTH, CoC.instance.weapons.HELRAIS],
 			[CoC.instance.weapons.UGATANA, CoC.instance.weapons.MOONLIT, CoC.instance.weapons.C_BLADE],
 			[CoC.instance.weapons.L__AXE, CoC.instance.weapons.WG_GAXE, CoC.instance.weapons.DE_GAXE],
 			[CoC.instance.weapons.SPEAR, CoC.instance.weapons.SESPEAR, CoC.instance.weapons.DSSPEAR],
 			[CoC.instance.weapons.JRAPIER, CoC.instance.weapons.Q_GUARD, CoC.instance.weapons.B_WIDOW],
 			[CoC.instance.weapons.OTETSU, CoC.instance.weapons.POCDEST, CoC.instance.weapons.DOCDEST],
 			[CoC.instance.weapons.BFTHSWORD, CoC.instance.weapons.ARMAGED, CoC.instance.weapons.CHAOSEA],
+			[CoC.instance.weapons.A_WAND, CoC.instance.weapons.OCCULUS, CoC.instance.weapons.ECLIPSE],
 			[CoC.instance.weaponsrange.BOWLONG, CoC.instance.weaponsrange.ARTEMIS, CoC.instance.weaponsrange.WILDHUN],
 			[CoC.instance.weaponsrange.SHUNHAR, CoC.instance.weaponsrange.KSLHARP, CoC.instance.weaponsrange.LEVHARP],
 			[CoC.instance.weaponsrange.DESEAGL, CoC.instance.weaponsrange.GOODSAM, CoC.instance.weaponsrange.BADOMEN],
-			[CoC.instance.weapons.A_WAND, CoC.instance.weapons.OCCULUS, CoC.instance.weapons.ECLIPSE],
 			[CoC.instance.shields.SANCTYN, CoC.instance.shields.SANCTYL, CoC.instance.shields.SANCTYD],
 			[CoC.instance.armors.LMARMOR, CoC.instance.armors.BMARMOR, CoC.instance.armors.S_ARMOR],
 			[CoC.instance.armors.BLKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
@@ -392,7 +392,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.armors.RKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
 			[CoC.instance.armors.WKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
 			[CoC.instance.armors.SPKIMO, CoC.instance.armors.OEKIMO, CoC.instance.armors.OTKIMO],
-			[CoC.instance.armors.CTPALAD, null, CoC.instance.armors.CTBGUAR]
+			[CoC.instance.armors.CTPALAD, CoC.instance.armors.CTHPALA, CoC.instance.armors.CTBGUAR]
 		];
 		var selectfrom:int = corrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
