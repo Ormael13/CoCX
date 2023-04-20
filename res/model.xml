@@ -2369,9 +2369,15 @@
                 <show part="ears/caveWyrm"/>
                 <show part="ears_bg/caveWyrm"/>
             </case>
-			  <case values="Ears.SQUIRREL">
+			<case values="Ears.SQUIRREL">
                 <show part="ears_bg/ratatoskr"/>
                 <show part="ears_bg/ratatoskrRight"/>
+            </case>
+			<case values="Ears.BIG">
+				<show part="ears_fg/impBigEars"/>
+                <show part="ears_fg/impBigEarsRight"/>
+                <show part="ears_bg/impBigEars"/>
+                <show part="ears_bg/impBigEarsRight"/>
             </case>
             <default> <!-- TODO AVIAN, GRYPHON -->
                 <show part="ears_bg/human"/>
@@ -6848,8 +6854,16 @@
 			<show part="fullbodyBg/imp"/>
 			<show part="face/human_fang"/>
 			<show part="eyes/cat"/>
-			<show part="ears_bg/elfin"/>
-			<show part="ears/elfin"/>
+			<if test="ears.type==Ears.ELFIN">
+				<show part="ears/elfin"/>
+				<show part="ears_bg/elfin"/>
+            </if>
+			<if test="ears.type==Ears.BIG">
+				<show part="ears_fg/impBigEars"/>
+                <show part="ears_fg/impBigEarsRight"/>
+                <show part="ears_bg/impBigEars"/>
+                <show part="ears_bg/impBigEarsRight"/>
+            </if>
 			<show part="wings_bg/imp"/>
 			<if test="hasCock()">
 				<if test="big">
