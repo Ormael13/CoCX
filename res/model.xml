@@ -6851,10 +6851,11 @@
 		<if test="horns.type == Horns.ARCH_IMP">
 			<!-- Hide everything else -->
 			<hide part="*"/>
+			<show part="shield/CasterTomeOfImps"/>
 			<show part="fullbodyBg/imp"/>
 			<show part="face/human_fang"/>
 			<show part="eyes/cat"/>
-			<if test="ears.type == Ears.ELFIN">
+            <if test="ears.type == Ears.ELFIN">
 				<show part="ears/elfin"/>
 				<show part="ears_bg/elfin"/>
             </if>
