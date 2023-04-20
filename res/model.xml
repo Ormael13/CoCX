@@ -6854,11 +6854,11 @@
 			<show part="fullbodyBg/imp"/>
 			<show part="face/human_fang"/>
 			<show part="eyes/cat"/>
-			<if test="ears.type==Ears.ELFIN">
+			<if test="ears.type == Ears.ELFIN">
 				<show part="ears/elfin"/>
 				<show part="ears_bg/elfin"/>
             </if>
-			<if test="ears.type==Ears.BIG">
+			<if test="ears.type == Ears.BIG">
 				<show part="ears_fg/impBigEars"/>
                 <show part="ears_fg/impBigEarsRight"/>
                 <show part="ears_bg/impBigEars"/>
