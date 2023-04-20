@@ -56,13 +56,14 @@ public function itemImproveMenuPure():void {
 		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
 		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
-		[weapons.DEMSCYT, weapons.LHSCYTH, null],
+		[weapons.DEMSCYT, weapons.LHSCYTH, weapons.HELRAIS],
 		[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
 		[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
 		[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
 		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
 		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
 		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
+		[weapons.A_WAND, weapons.OCCULUS, weapons.ECLIPSE],
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
@@ -74,7 +75,7 @@ public function itemImproveMenuPure():void {
 		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
 		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
 		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
-		[armors.CTPALAD, null, armors.CTBGUAR]
+		[armors.CTPALAD, armors.CTHPALA, armors.CTBGUAR]
 	];
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");

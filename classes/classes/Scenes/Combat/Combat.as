@@ -719,7 +719,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.FirstAttackSkeletons)) flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
-			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
+			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.FieryRage)) {
@@ -6811,7 +6811,8 @@ public class Combat extends BaseContent {
     public function itemsBonusDamageDamage(damage:Number):Number {
         damage = perkBonusDamage(damage);
         if (player.armor == armors.SPKIMO) damage *= 1.2;
-        if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+        if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+        if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
         if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
         damage *= player.jewelryAttackModifier();
@@ -14630,7 +14631,7 @@ public function runAway(callHook:Boolean = true):void {
         addButton(0, "Next", combatMenu, false);
         return;
     }
-    if (player.statStore.hasBuff("Supercharged")) {
+    if (player.statStore.hasBuff("Supercharged") && monster.short != "training dummy" && monster.short != "training dummies") {
         outputText("Run...SERIOUSLY? There is no way you could run! You need to discharge NOW! Your genitals are glistening with dripping plasma. You need to FUCK!");
         if (monster.isHerm() && player.isHerm()) outputText(" Cock or cunt you don't even care! All you WANT is for that herm to fuck you wildly until your charge is gone!");
         else{
@@ -14857,7 +14858,7 @@ public function runAway(callHook:Boolean = true):void {
         }
         //Non-fliers flee
         else {
-            if (monster.short == "training dummy") outputText("When you look back you see it's still in the same spot seemly grinning at you.");
+            if (monster.short == "training dummy" || monster.short == "training dummies") outputText("When you look back you see "+(monster.short == "training dummies" ? "they're" : "it's")+" still in the same spot seemly grinning at you.");
             else outputText("[Themonster] rapidly disappears into the shifting landscape behind you.");
         }
         if (monster is Izma) {
@@ -16102,13 +16103,8 @@ public function soulskillMod():Number {
     if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modss += .7;
     if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
-    if (player.hasPerk(PerkLib.InariBlessedKimono)){
-        var mod1:Number = 0.5;
-        mod1 -= player.cor / 100;
-        if (mod1 < 0.1) mod1 = 0.1;
-        modss += mod1;
-    }
-    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modss += (player.cor * .01)/2;
+    if (player.hasPerk(PerkLib.InariBlessedKimono)) modss += ((100 - player.cor) * .01);
+    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modss += (player.cor * .01);
     if (player.necklaceName == "Yin Yang Amulet") modss += .15;
     if (player.armorName == "Traditional clothes") modss += .4;
     if (player.hasPerk(PerkLib.ElementalBody)) {
@@ -16137,13 +16133,8 @@ public function soulskillPhysicalMod():Number {
     if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssp += .6;
     if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .7;
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
-    if (player.hasPerk(PerkLib.InariBlessedKimono)){
-        var mod1:Number = 0.5;
-        mod1 -= player.cor / 100;
-        if (mod1 < 0.1) mod1 = 0.1;
-        modssp += mod1;
-    }
-    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssp += (player.cor * .01)/2;
+    if (player.hasPerk(PerkLib.InariBlessedKimono)) modssp += ((100 - player.cor) * .01);
+    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssp += (player.cor * .01);
     if (player.necklaceName == "Yin Yang Amulet") modssp += .15;
     if (player.armorName == "Traditional clothes") modssp += .4;
     if (player.hasPerk(PerkLib.ElementalBody)) {
@@ -16194,13 +16185,8 @@ public function soulskillMagicalMod():Number {
     if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssm += .7;
     if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
-    if (player.hasPerk(PerkLib.InariBlessedKimono)){
-        var mod1:Number = 0.5;
-        mod1 -= player.cor / 100;
-        if (mod1 < 0.1) mod1 = 0.1;
-        modssm += mod1;
-    }
-    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssm += (player.cor * .01)/2;
+    if (player.hasPerk(PerkLib.InariBlessedKimono)) modssm += ((100 - player.cor) * .01);
+    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssm += (player.cor * .01);
     if (player.necklaceName == "Yin Yang Amulet") modssm += .15;
     if (player.shieldName == "spirit focus") modssm += .25;
     if (player.armorName == "Traditional clothes") modssm += .4;
@@ -16568,4 +16554,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

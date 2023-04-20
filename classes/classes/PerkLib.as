@@ -517,8 +517,8 @@ public class PerkLib
 				"You understand the properties of wind resistance and aerodynamics and how to optimize your situation in the air. (increase accuracy to melee/range attacks by 20% when flying)",
 				"You've chosen the 'Aerobatics' perk. You understand the properties of wind resistance and aerodynamics and how to optimize your situation in the air.");
 		public static const Agility:PerkType = mk("Agility", "Agility",
-				"Boosts armor points by a portion of your speed on light/medium armors.",
-				"You've chosen the 'Agility' perk, increasing the effectiveness of light/medium armor by a portion of your speed.");
+				"Boosts physical defense or armor by a portion of your speed on light/medium armors.",
+				"You've chosen the 'Agility' perk, increasing the effectiveness (physical defense) of light/medium armor by a portion of your speed.");
 		public static const AlchemicalCartridge:PerkType = mk("Alchemical cartridge", "Alchemical cartridge",
 				"Add your intelligence to gun damage as a modifier. (+5% firearms attacks multiplier)",
 				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage. (+5% firearms attacks multiplier)");
@@ -3205,9 +3205,9 @@ public class PerkLib
 		public static const OniDrinkingJug:PerkType = mk("Oni enchanted drinking jug", "Oni enchanted drinking jug",
 				"Grant an infinite supply of non transformative alcohol. Furthermore drunken power duration is doubled.");
 		public static const OniEnlightenedKimono:PerkType = mk("Oni Noble Kimono", "Oni Noble Kimono",
-				"Increase rampage duration by 4 rounds and add +40% to melee physical damage.");
+				"Increase rampage duration by 10 rounds and add +50% to melee physical damage.");
 		public static const OniTyrantKimono:PerkType = mk("Oni Tyrant Kimono", "Oni Tyrant Kimono",
-				"Increase rampage duration by 4 rounds and add +40% to melee physical damage.");
+				"Increase rampage duration by 5 rounds and add +100% to melee physical damage.");
 		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates up to 1% of HP scaling on purity.");
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
@@ -3251,13 +3251,13 @@ public class PerkLib
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
-				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
+				"Increase the potency of all spells and soulskills by up to 100% based on purity and empower all enlighted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
 		public static const MageWarden:PerkType = mk("Mage-Warden", "Mage-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
 		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
-				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
+				"Increase the potency of all spells and soulskills by up to 100% based on corruption and empower all corrupted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
 		public static const WildWarden:PerkType = mk("Wild-Warden", "Wild-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 
@@ -4160,6 +4160,12 @@ public class PerkLib
 				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power, +10% Base WIS Cap)");
 		public static const AsuraSpeed:PerkType = mk("Asura Speed", "Asura Speed",
 				"X th Asura super perk. (+10% of OverMax Wrath/Base SPE Cap)");
+		public static const HiddenJobShapeshifter:PerkType = mk("Hidden Job: Shapeshifter", "Hidden Job: Shapeshifter",
+				". (+10% of OverMax )");
+		public static const HiddenJobDemonSovereign:PerkType = mk("Hidden Job: Demon Sovereign", "Hidden Job: Demon Sovereign",
+				". (+10% of OverMax )");
+		public static const DemonSovereignToughnessAndLibido:PerkType = mk("Demon Sovereign Toughness & Libido", "Demon Sovereign Toughness & Libido",
+				". (+10% of OverMax , +5% Base TOU/LIB Cap)");
 		public static const HiddenJob2:PerkType = mk("Hidden Job: 2", "Hidden Job: 2",
 				".");
 		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",

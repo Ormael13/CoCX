@@ -38,7 +38,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Eyes. Req. having free eyes mutation slot, human race (17+). Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 5 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Primitive). Req. Human Eyes and lvl 30+. Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 10 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Evolved). Req. Human Eyes (Primitive) and lvl 60+. Effects: Increase precision of all attacks by 10%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 30 lvl's. 5% less penalty to acc per each next attack during multiattack.\n");
-			outputText("-New melee weapon (by Ormael): Dual Nodachi - buyable at Orsbulg shop. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
+			outputText("-New melee weapon (by Ormael): Dual Nodachi - can be gained by combining 2x Kama weapon. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
 			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
@@ -49,7 +49,7 @@ public class Changelog extends BaseContent
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
 			outputText("-Flying swords base dmg scaling (on wisdom and weapon atk value) increased by 250%. Bonus dmg for size of flying sword increased to 1000% for massive ones and added 400% for large ones. Sword type weapons mastery and weapon size mastery (small/large/massive) ");
 			outputText("now apply it dmg boost to their attacks and they can be coated with fire from foxflame pelt. They also can gain exp toward matching masteries.\n");
-			outputText("-Adding nodachi sprites to the game. (Liadri)\n");
+			outputText("-Adding nodachi sprites (drawn by Mister GRaM) to the game. (Liadri)\n");
 			outputText("-Minor fixes to taur and stuff (Liadri)\n");
 			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -80,20 +80,25 @@ public class Changelog extends BaseContent
 			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
 			outputText("-New tier 4 strength lvl-up perk: Enchanced Warrior's Rage. Req. Way of the Warrior perk. Effect: Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)\n");
 			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Ormael): Two Bladed Scythe - buyable at Orsbulg shop. Cost 2,400 gems. Base atk is 30. It's large weapon belonging to (scythe) exotic type, can be used in whirlwind specials. Have 25% chance to proc bleed.\n");
+			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
+			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
+			outputText("-In Camp Actions > Misc menu added option to combine or separate specific weapons. For example 2 Kama weapons combine into 1 Dual Kama weapon or separate 1 Dual Kama into 2 Kama weapons.\n");
+			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
+			outputText("-Dual Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
+			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
+			outputText("-To better match their status as legendary weapons their atk been increased: Artemis & Wild Hunt (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer (60 > 210 (at 270+ str)), Lifehunt Scythe (25 > 90 (at 100+ str)), Seraph Spear & Demon Snake Spear (20 > 60 (at 100+ spe)), ");
+			outputText("Winged Greataxe & Demonic Greataxe (28 > 100 (at 100+ str)), Moonlit Snow (40 > 115 (at 100+ spe)), Chaos Blade (45 > 135 (at 100+ spe)), Masamune Katana (32 > 112 (at 100+ spe)), Blood Letter katana (42 > 132 (at 100+ spe)), Queen's Guard Rapier (27,5 > 80 (at 100+ spe)), Black Widow Rapier (27,5 > 80 (at 100+ spe)). ");
+			outputText("In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
+			outputText("-Demonic Scythe & Alvina's Twin Scythes have now 10% chance to proc bleed.\n");
+			outputText("-Training Dummy/Dummies would let Supercharged PC run away.\n");
+			outputText("-To better match their status as legendary armors their stats been increased: Inari Blessed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on purity cap 50% > 100%), Tamamo no Mae Cursed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on corruption cap 50% > 100%), ");
+			outputText("Oni Enlightened Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 10, dmg multi during rampage 40% > 50%), Oni Tyrant Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 5, dmg multi during rampage 40% > 100%), Taur Blackguard Armor (armor 23 > 40, m.res 0 > 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg), ");
+			outputText("Battle Maiden Armor (armor 40 > 80, m.res 0 > 40, lust reducting effect per turn 2% > 5%), Succubus Armor (armor 20 > 50, m.res 0 > 25, increase max possible to reach tease bonus 26 > 100). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
+			outputText("-Lusty Maiden's Armor max bonus from paizuri scenes to stats increased from 8 to 10. Tentacled Bark Armor & Divine Bark Armor phys and magical defense values been increased 2x.\n");
+			outputText("-New armor (by Liadri): Centaur Paladin Armor - obtainable by giving Centaur Armor to Pure Celess to purify. Armor 40, m.res 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg.\n");
+			outputText("-New melee weapon (by Liadri): Hellraiser - obtainable by giving Demonic Scythe to Corrupted Celess to corrupt. Atk value 90 (at 100+str), can apply bleed (100%), used with whirlwind special, 200% to spellpower.\n");
+			outputText("-Izma 'Combat Manual' got 4th possible effect (speed knowledge bonus).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -121,7 +126,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
-			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion\n");
+			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

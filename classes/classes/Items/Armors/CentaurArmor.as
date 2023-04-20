@@ -15,11 +15,11 @@ package classes.Items.Armors
 		
 		public function CentaurArmor()
 		{
-			super("TaurPAr","Taur P. Armor","some taur paladin armor","a set of taur paladin armor",23,0,1698,"A suit of paladin's armor for centaurs.","Heavy")
+			super("TaurPAr","Taur P. Armor","some taur armor","a set of taur armor",23,0,1698,"A suit of armor for centaurs.","Heavy")
 		}
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.isTaur()) return super.canEquip(doOutput);
-			if (doOutput) outputText("The paladin armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory.");
+			if (doOutput) outputText("This armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory.");
 			return false;
 		}
 		

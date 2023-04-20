@@ -86,6 +86,7 @@ import classes.PerkLib;
 		public const RINGTOU:Jewelry = new Jewelry("RingTou", "RingOfToughness", "Ring of Toughness", "a Ring of Toughness", 0, 0, 800, "A simple ring to boost toughness.").withBuffs({'tou.mult':0.05}) as Jewelry;
 		public const RINGWIS:Jewelry = new Jewelry("RingWis", "RingOfWisdom", "Ring of Wisdom", "a Ring of Wisdom", 0, 0, 800, "A simple ring to boost wisdom.").withBuffs({'wis.mult':0.05}) as Jewelry;
 		public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Signet", 0, 0, 100, "A signet rumored to be blessed by the Ezekiel himself. Is that real one or just another fake signet merchant sold you?");
+		public const CHIMEMBR:Jewelry = new Jewelry("ChimEmbr", "ChimericEmbrace", "Chimeric Embrace", "a Chimeric Embrace", 0, 0, 400, "This shining ring is made of gold.");
 		//public const RINGWIS:Bullseye = new RingWisdom();
 
 		public const STARBAND:Jewelry = new StarfireBand();

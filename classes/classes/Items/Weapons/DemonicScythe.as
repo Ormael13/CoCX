@@ -11,7 +11,7 @@ package classes.Items.Weapons
 		
 		public function DemonicScythe()
 		{
-			super("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,2000,"A magic catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large, Whirlwind", "Scythe, StaffPart");
+			super("DemScyt","D.Scythe","demonic scythe","a demonic scythe","slash",25,4000,"A magic catalyst of unknown origin ornamented with a blade mounted on a skull. This magical scythe is both charged with powerful energy and extremely sharp. The letters A.S are engraved in the weapon.", "Large, Whirlwind, Bleed10", "Scythe, StaffPart");
 			withBuff('spellpower', +1.0);
 		}
 		

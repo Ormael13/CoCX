@@ -229,22 +229,25 @@ private function readSharkCuntManual2():void {
 	statScreenRefresh();
 
 	//(One of the following random effects happens)
-	var choice:Number = rand(3);
+	var choice:Number = rand(4);
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.");
-		//(+2 Toughness)
 		dynStats("tou", 2);
 		player.KnowledgeBonus("tou",2);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
-		//(+2 Intelligence)
 		dynStats("int", 2);
 		KnowledgeBonus("int",2);
 	}
+	
+	else if(choice == 2) {
+		outputText("You learn a few new fast striking stances that seem decent.");
+		dynStats("spe", 2);
+		KnowledgeBonus("spe",2);
+	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
-		//(+2 Strength)
 		dynStats("str", 2);
 		player.KnowledgeBonus("str",2);
 	}
@@ -2550,7 +2553,7 @@ private function campCuntManual():void {
 	clearOutput();
 	outputText("You ask Izma if she'd like to read one of the many issues of the 'Combat Manual' with you.  She gives a snigger and grabs a random issue. \"<i>Of course.  But I honestly never thought someone as good as you would need any more tips in combat,</i>\" she teases, getting comfy on a rock.  You sit beside her to read, and retort that, if anything, you're using the chance to give her combat tips.  Izma shoots you a half-hearted dirty look in response, but you think she knows you're teasing her.\n\n");
  	flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] = 11;
-	var choice:Number = rand(3);
+	var choice:Number = rand(4);
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.");
 		player.KnowledgeBonus("tou",2);
@@ -2558,6 +2561,10 @@ private function campCuntManual():void {
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 		player.KnowledgeBonus("int",2);
+	}
+	else if(choice == 2) {
+		outputText("You learn a few new fast striking stances that seem decent.");
+		player.KnowledgeBonus("spe",2);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");

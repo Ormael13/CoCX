@@ -48,6 +48,7 @@ public final class WeaponLib extends ItemConstants
 				YAMARG,
 				BLETTER,
 				N_STAFF,
+				HELRAIS,
 				C_BLADE,
 				DE_GAXE,
 				DSSPEAR,
@@ -88,6 +89,7 @@ public final class WeaponLib extends ItemConstants
 		public const CLAYMOR:LargeClaymore = new LargeClaymore();
 		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
 		public const C_BLADE:ChaosBlade = new ChaosBlade();
+		public const D_KAMA :DualKama = new DualKama();
 		public const DAGGER :DynamicWeapon = findCommonDynamicWeapon("dagger");
 		public const DAGWHIP:Weapon = new Weapon("DagWhip","DaggerWhip","dagger whip","a dagger whip","whip-like slash",5,200,"A small blade that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping", WT_DAGGER).withBuffs({'teasedmg': 30}) as Weapon;
 		public const DAISHO :Daisho = new Daisho();
@@ -129,9 +131,11 @@ public final class WeaponLib extends ItemConstants
 		public const G_SPEAR:Weapon = new Weapon("G.Spear", "G.Spear", "Guard's Spear", "a guard's spear", "thrust", 16,450,"A very sturdy and well-made spear\n", WP_AP45, WT_SPEAR);
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.","Bleed25","Gauntlet");
 		public const HALBERD:Halberd = new Halberd();
+		public const HELRAIS:Hellraiser = new Hellraiser();
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
+		public const KAMA   :Weapon = new Weapon("Kama","Kama", "kama", "a kama", "slash", 4,320, "The kama is a simple and elegant hand scythe weapon. Preferred weapon for the ninja fans.", "Small, Bleed10", "Scythe");
 		public const KAMAWHIP:Weapon = new Weapon("KamaWhip","KamaWhip","kama whip","a kama whip","whip-like slash",3,240,"A small kama-like weapon with two scythe blades that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping, Bleed10", "Scythe, Thrown").withBuffs({'teasedmg': 30}) as Weapon;
 		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun25", WT_GAUNTLET).withBuffs({
 			'psoulskillpower': +0.5
@@ -205,11 +209,12 @@ public final class WeaponLib extends ItemConstants
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
 		public const T_HEART:TrullHeart = new TrullHeart();
 		public const T_STAFF:Weapon = new Weapon("T.Staff", "T. Staff", "topaz staff", "a topaz staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has topaz embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
+		public const TB_SCYT:Weapon = new Weapon("TBScyt", "T.B.Scythe", "two bladed scythe", "a two bladed scythe", "slash", 30, 2400, "The Two Bladed Scythe resembles a scythe with a long thin blue grip, and two blades at the tip.", "Large, Whirlwind, Bleed25", "Scythe");
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
+		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown. Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
 		public const TIDAR:Tidarion = new Tidarion();
 		public const TKNIVES:TaintlessKnives = new TaintlessKnives();
 		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","a topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");
-		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
 		public const TRIDAG :Weapon = new Weapon("TriDag ","TriDagger","tri-dagger","a tri-dagger","stab",4,320,"A dagger whose blade is shaped like a perfect equilateral triangle.  It has chance to leave bleeding wounds.", "Small, Bleed25", "Dagger");
 		public const TRASAXE:Weapon = new Weapon("TraSAxe","Train.S.Axe", "training soul axe", "a training soul axe", "cleave", 1, 80, "This axe was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal weapon.", "", "Axe");
 		public const TRIDENT:Trident = new Trident();

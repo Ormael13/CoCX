@@ -85,7 +85,7 @@ public class GameSettings extends BaseContent {
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
-			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can't breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
 		}
 		else {
 			outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is back to what it should be.");

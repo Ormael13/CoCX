@@ -668,6 +668,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
 		if (player.haveWeaponForJouster()) {
+			//if (player.isPolearmTypeWeapon()) damage *= 0.75;
+			if (player.isTaur() || player.isDrider()) damage *= 2;
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
 		}
@@ -701,6 +703,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.weapon.isNothing && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
 		damage = combat.itemsBonusDamageDamage(damage);
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1851,7 +1854,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 	 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 	 if (player.armor == armors.SPKIMO) damage *= 1.2;
-	 if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+	 if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //Determine if critical hit!
 	 var crit:Boolean = false;
@@ -1954,7 +1958,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 	 if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 	if (player.armor == armors.SPKIMO) damage *= 1.2;
-	if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+	if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+	if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 	if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //triple strike bonus
 	 damage *= 3;

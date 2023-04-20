@@ -1,21 +1,21 @@
-package classes.Items.Weapons
+package classes.Items.Weapons 
 {
 	import classes.Items.Weapon;
 	import classes.PerkLib;
 	/**
 	 * ...
-	 * @author Oxdeception
+	 * @author Liadri
 	 */
-	public class LifehuntScythe extends Weapon
+	public class Hellraiser extends Weapon
 	{
 		
-		public function LifehuntScythe()
+		public function Hellraiser() 
 		{
-			super("LifScyt", "L.Scythe", "lifehunt scythe", "a lifehunt scythe", "slash", 90, 14400,
-					"This enchanted scythe is made of a white metal, and its surface is decorated with ruby gemstones and silver engravings depicting dragons. It seems to drink in the opponents blood use it to heal its user’s wounds.",
-					"Large, Whirlwind, Bleed25", "Scythe, StaffPart"
+			super("Helrais", "Hellraiser", "Hellraiser", "a Hellraiser", "slash", 90, 14400,
+					"An infamous weapon not from this world. Rumors has it that fiends from the void forged it. Many unscruppulous spellcaster used this unholy weapon through the ages.",
+					"Large, Whirlwind, Bleed10", "Scythe, StaffPart"
 			);
-			withBuff('spellpower', +1.0);
+			withBuff('spellpower', +2);
 		}
 		
 		override public function get attack():Number {
@@ -29,7 +29,7 @@ package classes.Items.Weapons
 				boost += 20;
 				scal -= 5;
 			}
-			boost += Math.round((100 - game.player.cor) / scal);
+			boost += Math.round(game.player.cor / scal);
 			return (40 + boost);
 		}
 		override public function canEquip(doOutput:Boolean):Boolean {

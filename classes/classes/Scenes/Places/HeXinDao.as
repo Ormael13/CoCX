@@ -611,17 +611,17 @@ public class HeXinDao extends BaseContent
         addButton(0, weapons.UGATANA.shortName, weaponBuy2, weapons.UGATANA);
         addButton(1, weapons.KATANA.shortName, weaponBuy2, weapons.KATANA);
         addButton(2, weapons.NODACHI.shortName, weaponBuy2, weapons.NODACHI);
-        addButton(3, weapons.RCLAYMO.shortName, weaponBuy2, weapons.RCLAYMO);
-        addButton(4, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
-        addButton(5, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
-        addButton(6, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
-        addButton(7, weapons.DNODACHI.shortName, weaponBuy2, weapons.DNODACHI);
-        addButton(8, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
-        addButton(9, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
+        addButton(3, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
+        addButton(4, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
+        addButton(5, weapons.RCLAYMO.shortName, weaponBuy2, weapons.RCLAYMO);
+        addButton(6, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
+        addButton(7, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
+        addButton(8, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
+        //9
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
-        addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
-        addButton(12, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
-        addButton(13, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
+        addButton(11, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
+        addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
+        //13
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
@@ -906,7 +906,7 @@ public class HeXinDao extends BaseContent
 		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingswordBuy, weaponsflyingswords.MOONLGT);
 		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingswordBuy, weaponsflyingswords.S_TWINS);
 		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingswordBuy, weaponsflyingswords.ASAUCHI);
-        addButtonDisabled(13, "Training", "Not available until owner of the shop return.");//.hint("Flying Sword training.")
+        addButtonDisabled(13, "Training", "The owner of the shop isn't here, currently. There's nobody to train you.");//.hint("Flying Sword training.")
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
@@ -1559,4 +1559,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}
