@@ -719,7 +719,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.FirstAttackSkeletons)) flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
-			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
+			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.FieryRage)) {

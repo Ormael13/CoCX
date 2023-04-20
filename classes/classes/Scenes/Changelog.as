@@ -93,8 +93,9 @@ public class Changelog extends BaseContent
 			outputText("-Demonic Scythe & Alvina's Twin Scythes have now 10% chance to proc bleed.\n");
 			outputText("-Training Dummy/Dummies would let Supercharged PC run away.\n");
 			outputText("-To better match their status as legendary armors their stats been increased: Inari Blessed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on purity cap 50% > 100%), Tamamo no Mae Cursed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on corruption cap 50% > 100%), ");
-			outputText("Oni Enlightened Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 10, dmg multi during rampage 40% > 50%), Oni Tyrant Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 5, dmg multi during rampage 40% > 100%). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
-			outputText("-\n");
+			outputText("Oni Enlightened Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 10, dmg multi during rampage 40% > 50%), Oni Tyrant Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 5, dmg multi during rampage 40% > 100%), Taur Blackguard Armor (armor 23 > 40, m.res 0 > 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg), ");
+			outputText("Battle Maiden Armor (armor 40 > 80, m.res 0 > 40, lust reducting effect per turn 2% > 5%), Succubus Armor (armor 20 > 50, m.res 0 > 25, increase max possible to reach tease bonus 26 > 100). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
+			outputText("-Lusty Maiden's Armor max bonus from paizuri scenes to stats increased from 8 to 10. Tentacled Bark Armor & Divine Bark Armor phys and magical defense values been increased 2x.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

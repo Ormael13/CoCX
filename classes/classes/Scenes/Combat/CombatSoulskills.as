@@ -668,6 +668,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
 		if (player.haveWeaponForJouster()) {
+			//if (player.isPolearmTypeWeapon()) damage *= 0.75;
+			if (player.isTaur() || player.isDrider()) damage *= 2;
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
 		}
@@ -701,6 +703,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.weapon.isNothing && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+		if (player.armor.name == "some taur blackguard armor") damage *= 2;
 		damage = combat.itemsBonusDamageDamage(damage);
 		var crit:Boolean = false;
 		var critChance:int = 5;

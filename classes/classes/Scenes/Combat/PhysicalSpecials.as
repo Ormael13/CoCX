@@ -1424,6 +1424,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.DevastatingCharge)) damage *= 1.5;
+		if (player.armor.name == "some taur blackguard armor") damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		damage *= PAM2;
 		var crit:Boolean = false;
