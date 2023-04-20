@@ -898,6 +898,7 @@
         <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
         <cell rect="572,1726,80,90" name="shield/shieldHoly" dx="66" dy="60"/>
         <cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
+		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="10"/>
         <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="32"/>
         <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
         <cell rect="1022,1776,80,45" name="weapon/LactoblasterMilker" dx="59" dy="62"/>
@@ -1042,6 +1043,10 @@
         <cell rect="721,223,59,32" name="ears/caveWyrm" dx="76" dy="38"/>
         <cell rect="61,256,29,32" name="ears_bg/ratatoskr" dx="86" dy="27"/>
         <cell rect="61,289,29,32" name="ears_bg/ratatoskrRight" dx="93" dy="27"/>
+		<cell rect="1,256,29,32" name="ears_fg/impBigEars" dx="77" dy="37"/>
+        <cell rect="1,289,29,32" name="ears_fg/impBigEarsRight" dx="104" dy="38"/>
+		<cell rect="31,256,29,32" name="ears_bg/impBigEars" dx="77" dy="37"/>
+        <cell rect="31,289,29,32" name="ears_bg/impBigEarsRight" dx="104" dy="38"/>
         <cell rect="541,330,87,97" name="ears_truebg/melkie" dx="60" dy="36"/>
         <cell rect="1,396,59,65" name="horns/orchid" dx="73" dy="4"/>
         <cell rect="61,396,59,65" name="horns/devil" dx="72" dy="4"/>
@@ -1623,6 +1628,8 @@
 		<layer name="hairFrontFullBody"/>
 		<layer name="full_pattern"/>
 		<layer name="fullbodyPenisFg"/>
+		<layer name="ears_fg"/>
+		<layer name="hairFront"/>
 		<layer name="fullbodyBreast"/>
 		<layer name="fullbodyMuscle"/>
 		<layer name="fullbodyPenis"/>
@@ -1630,7 +1637,6 @@
 		<layer name="full_patternUnder"/>
 		<layer name="fullbody"/>
 		<layer name="horns_overclothe"/>
-		<layer name="hairFront"/>
 		<layer name="overclothe"/>
 		<layer name="shield"/>
 		<layer name="weapon"/>
@@ -2101,7 +2107,12 @@
 							</else>
 						</if>
 						<else>
-							<show part="shield/shieldGeneric"/>
+							<if test="PlayerHasACasterTome">
+								<show part="shield/CasterTomeOfImps"/>
+								<else>
+									<show part="shield/shieldGeneric"/>
+								</else>
+							</if>
 						</else>
 					</if>
 				</if>
@@ -6329,6 +6340,44 @@
 				</if>
 			</if>
         </if>
+		
+		<!--Nurse set -->
+		<if test="nurseClothing">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra_fg/nurseClothingBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra_fg/nurseClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra_fg/nurseClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra_fg/nurseClothingBraLarge"/>
+					</case>
+					<default>
+						<show part="bra_fg/nurseClothingBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showClothing">
+				<show part="clothe/nurseClothing"/>
+				<show part="clothe/nurseClothingSkirt"/>
+				<show part="clotheHead/nurseClothingHat"/>
+				<show part="clotheUnderAmulet/nurseClothingNeck"/>
+				<if test="showArmClothing">
+					<show part="clothLeftArm/nurseClothingleftArm"/>
+					<show part="clothRightArm/nurseClothingRightArm"/>
+				</if>
+				<if test="showLegClothing">
+					<show part="clotheLegs/nurseClothinglegs"/>
+				</if>
+			</if>
+		</if>
 
         <if test="scandalousSuccubusClothing">
 			<if test="breastRows.length gt 0">
