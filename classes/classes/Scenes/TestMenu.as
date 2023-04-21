@@ -296,13 +296,13 @@ public class TestMenu extends BaseContent
     }
 	public function giveNekoItems():void {
 		outputText("\n\n<b>(Gained " + weapons.CATGLOV.longName + "!)</b>\n\n");
-		outputText("\n\n<b>(Gained " + weaponsrange.NEKONOM.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + shields.NEKONOM.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + armors.FCLOAK.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + undergarments.BN_TOP.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + undergarments.BN_SKIRT.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + necklaces.CATBELL.longName + "!)</b>\n\n");
 		inventory.takeItem(weapons.CATGLOV, curry(NonEquipmentMenu, 2));
-		inventory.takeItem(weaponsrange.NEKONOM, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(shields.NEKONOM, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(armors.FCLOAK, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(undergarments.BN_TOP, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(undergarments.BN_SKIRT, curry(NonEquipmentMenu, 2));
