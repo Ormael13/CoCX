@@ -6855,4 +6855,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

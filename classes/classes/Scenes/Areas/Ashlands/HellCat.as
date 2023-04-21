@@ -126,7 +126,7 @@ import classes.internals.*;
 					consumables.W_FRUIT,
 					weapons.H_WAND,
 					null)
-					.add(weaponsrange.NEKONOM, 1);
+					.add(shields.NEKONOM, 1);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			checkMonster();
 		}

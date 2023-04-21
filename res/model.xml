@@ -2182,6 +2182,11 @@
 								</if>
 							</if>
 						</if>
+						
+						<!-- Ranged Tome -->
+						<if test="PlayerHasARangedBook">
+							<show part="shield/CasterTomeOfImps"/>
+						</if>
 
 					</if>
 

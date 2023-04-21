@@ -137,11 +137,13 @@ public class CharViewContext extends ExecContext {
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
 					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
 					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
-					PlayerhasACasterTome:player.shield == game.shields.IMPTOME,
+					PlayerhasACasterTome:player.shield == game.shields.IMPTOME || player.shield == game.shields.NEKONOM,
 
 					PlayerHasABow: player.isBowTypeWeapon(),
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
+
+					PlayerHasARangedBook:player.weaponRange == game.weaponsrange.E_TOME_ || player.weaponRange == game.weaponsrange.G_E_MAN || player.weaponRange == game.weaponsrange.G_E_MAN || player.weaponRange == game.weaponsrange.I_TOME_ || player.weaponRange == game.weaponsrange.SSKETCH,
 
 					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
 					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.O_JAVEL || player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
