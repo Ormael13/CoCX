@@ -1278,7 +1278,7 @@ public function itemImproveMenuCorrupt():void {
 		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],//--//
 		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],//--//
 		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
-		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],//--//
+		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
 		[weapons.DEMSCYT, weapons.LHSCYTH, weapons.HELRAIS],
 		[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
 		[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
@@ -1290,7 +1290,7 @@ public function itemImproveMenuCorrupt():void {
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],
-		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],//--//
+		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
 		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
 		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
 		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],

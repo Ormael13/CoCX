@@ -3208,7 +3208,7 @@ public class PerkLib
 				"Increase rampage duration by 10 rounds and add +50% to melee physical damage.");
 		public static const OniTyrantKimono:PerkType = mk("Oni Tyrant Kimono", "Oni Tyrant Kimono",
 				"Increase rampage duration by 5 rounds and add +100% to melee physical damage.");
-		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates up to 1% of HP scaling on purity.");
+		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates 1% of HP.");
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
 				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",null,true);
