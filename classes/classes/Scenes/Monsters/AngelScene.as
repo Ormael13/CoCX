@@ -23,5 +23,13 @@ use namespace CoC;
 			doNext(playerMenu);
 		}
 		
+		public function angelEncounter():void {
+			clearOutput();
+			outputText("");
+			startCombat(new AngelLR());
+			//camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
+			doNext(playerMenu)
+		}
+		
 	}
 }

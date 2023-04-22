@@ -2,6 +2,7 @@ package classes.Stats {
 import classes.Creature;
 import classes.PerkLib;
 import classes.Monster;
+import classes.IMutations.IMutationsLib;
 
 public class CoreStat extends RawStat{
 	public function CoreStat(host:Creature, name:String) {
@@ -16,12 +17,14 @@ public class CoreStat extends RawStat{
 			case 'str.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismStr);
 				base += host.perkv1(PerkLib.BodyTempering);
+				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 1) base += 5;
 				if (host.hasPerk(PerkLib.AsuraStrength)) base *= 1.1;
 				base = Math.round(base);
 				break;
 			case 'tou.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismTou);
 				base += host.perkv1(PerkLib.BodyTempering);
+				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 1) base += 5;
 				var tou:Number = 1;
 				if (host.hasPerk(PerkLib.AsuraToughness)) tou += 0.1;
 				if (host.hasPerk(PerkLib.BloodDemonToughness)) tou += 0.1;
@@ -38,6 +41,7 @@ public class CoreStat extends RawStat{
 			case 'int.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismInt);
 				base += host.perkv1(PerkLib.SoulTempering);
+				if (host.perkv1(IMutationsLib.HumanSmartsIM) >= 1) base += 5;
 				var inte:Number = 1;
 				if (host.hasPerk(PerkLib.BloodDemonIntelligence)) inte += 0.1;
 				if (host.hasPerk(PerkLib.GreySageIntelligence)) inte += 0.1;
@@ -47,6 +51,7 @@ public class CoreStat extends RawStat{
 			case 'wis.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismWis);
 				base += host.perkv1(PerkLib.SoulTempering);
+				if (host.perkv1(IMutationsLib.HumanSmartsIM) >= 1) base += 5;
 				var wis:Number = 1;
 				if (host.hasPerk(PerkLib.BloodDemonWisdom)) wis += 0.1;
 				if (host.hasPerk(PerkLib.GreySageWisdom)) wis += 0.1;

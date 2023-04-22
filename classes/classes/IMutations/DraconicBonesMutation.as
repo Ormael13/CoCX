@@ -24,10 +24,10 @@ public class DraconicBonesMutation extends IMutationPerkType
                 descS = "Increases toughness, increases unarmed attack damage by 10";
             }
             if (pTier >= 2){
-                descS = "Increases toughness further, increases unarmed attack damage by 20,  5% damage reduction from physical and magical attacks, +5% phantom toughness";
+                descS = "Increases toughness further, increases unarmed attack damage by 20, 5% damage reduction from physical and magical attacks, +5% phantom toughness";
             }
             if (pTier >= 3){
-                descS = "Increases toughness even further, increases unarmed attack damage by 40 + an additional 50%,  10% physical and magical damage reduction, +15% phantom toughness";
+                descS = "Increases toughness even further, increases unarmed attack damage by 40 + an additional 50%, 10% physical and magical damage reduction, +15% phantom toughness";
             }
             if (descS != "")descS += ".";
             return descS;
