@@ -813,6 +813,15 @@ public class PerkMenu extends BaseContent {
 			mutationsDatabase(1, false);
 		}
 
+		function mutationsDBHuman():void{
+			clearOutput();
+			//Kitsune Mutations
+			displayHeader("Human Mutations");
+			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
+			mutationsDatabaseVerify([IMutationsLib.HumanAdrenalGlandsIM, IMutationsLib.HumanBonesIM,IMutationsLib.HumanEyesIM, IMutationsLib.HumanFatIM, IMutationsLib.HumanMusculatureIM, IMutationsLib.HumanOvariesIM, IMutationsLib.HumanParathyroidGlandIM, IMutationsLib.HumanSmartsIM, IMutationsLib.HumanTesticlesIM, IMutationsLib.HumanThyroidGlandIM, IMutationsLib.HumanVersatilityIM]);
+			mutationsDatabase(1, false);
+		}
+
 		var bd:ButtonDataList = new ButtonDataList();
 		//This was originally hard coded buttons. Which it can still be, I suppose.
 		bd.add("Heart",  curry(mutationsDBSlot, IMutationPerkType.SLOT_HEART), "Heart Mutations");
@@ -833,6 +842,7 @@ public class PerkMenu extends BaseContent {
 		bd.add("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		bd.add("Dragons", mutationsDBDragon, "Dragon Mutations");
 		bd.add("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
+		bd.add("Humans", mutationsDBHuman,"Human Mutations");
 		submenu(bd, displayPerks, page, false);
 	}
 
