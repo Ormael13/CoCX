@@ -47,7 +47,7 @@ public class CampUpgrades extends BaseContent {
     flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE]:
     1 - mark the spot
     2 - build structure
-    3 - build altair
+    3 - build altar
     4 - get Taoth statue
 
     flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS]:
@@ -437,7 +437,7 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1) findSpotForShrine();
         else if (player.fatigue <= player.maxFatigue() - usedFatigue(300) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1) buildStructure();
-        else if (player.fatigue <= player.maxFatigue() - usedFatigue(200) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) buildAltair();
+        else if (player.fatigue <= player.maxFatigue() - usedFatigue(200) && flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2) buildAltar();
         else {
             outputText("You are too exhausted to work on constructing shrine!");
             doNext(playerMenu);
@@ -472,18 +472,18 @@ public class CampUpgrades extends BaseContent {
         buildWithHelpers(300, 8, 4, 2);
     }
 
-    public function buildAltair():void {
+    public function buildAltar():void {
         outputText("Do you start work on building the structure? (Cost: 200 wood and 100 nails)\n");
         checkMaterials();
         if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 200) {
-            doYesNo(doBuildAltair, noThanks);
+            doYesNo(doBuildAltar, noThanks);
         } else {
             errorNotEnough();
             doNext(playerMenu);
         }
     }
 
-    private function doBuildAltair():void {
+    private function doBuildAltar():void {
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
         flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 200;
         clearOutput();
