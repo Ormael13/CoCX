@@ -70,6 +70,7 @@ public class IMutationsLib
 		public static const HinezumiBurningBloodIM:IMutationPerkType = new HinezumiBurningBloodMutation();
 		public static const HollowFangsIM:IMutationPerkType = new HollowFangsMutation();
 		public static const HumanAdrenalGlandsIM:IMutationPerkType = new HumanAdrenalGlandsMutation();
+		public static const HumanBloodstreamIM:IMutationPerkType = new HumanBloodstreamMutation();
 		public static const HumanBonesIM:IMutationPerkType = new HumanBonesMutation();
 		public static const HumanEyesIM:IMutationPerkType = new HumanEyesMutation();
 		public static const HumanFatIM:IMutationPerkType = new HumanFatMutation();

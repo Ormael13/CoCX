@@ -655,24 +655,24 @@ use namespace CoC;
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 4 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulScholar)) armorDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 6 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulExalt)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulExalt)) armorDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 8 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulKing)) armorDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 0 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulKing)) armorDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 0 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
 				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 12 * newGamePlusMod;
@@ -868,27 +868,27 @@ use namespace CoC;
 			//}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 4 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 6 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) armorMDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorMDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 8 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) armorMDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorMDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 10 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
-				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 12 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 12 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorMDef += 4 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorMDef += 6 * newGamePlusMod;
@@ -2364,6 +2364,12 @@ use namespace CoC;
 		 */
 		public function unequipVehicle(doOutput:Boolean = true, force:Boolean = false):Vehicles {
 			return internalUnequipItem(ItemConstants.SLOT_VEHICLE, doOutput, force) as Vehicles;
+		}
+		
+		public function humanBodyCultivators():Number {
+			var hBC:Number = 1;
+			if (perkv1(IMutationsLib.HumanBonesIM) >= 2 && racialScore(Races.HUMAN) > 17) hBC += 0.5;
+			return hBC;
 		}
 
 		// Potions
@@ -3874,17 +3880,18 @@ use namespace CoC;
 		public function internalHumanScore():Number {
 			Begin("Player","racialScore","internalHumanScore");
 			var internalHumanCounter:Number = 0;
-			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);
-			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);
-			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);
-			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);
-			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);
-			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);
-			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);
-			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);
-			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);
-			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);
-			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//3
+			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//2
+			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//2
+			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//3
+			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);//3
+			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//3
+			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//3
+			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);//3
+			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//2
+			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//3
+			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//2
 			End("Player","racialScore");
 			return internalHumanCounter;
 		}
@@ -4832,8 +4839,8 @@ use namespace CoC;
 				if (this.hasKeyItem("Powboy") >= 0) minSen += 10;
 				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
 			}
-			if (hasPerk(PerkLib.Soulless) || hasPerk(PerkLib.Phylactery) minCor = 100;
-			if (hasPerk(PerkLib.HellfireCoat)) || hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
+			if (hasPerk(PerkLib.Soulless) || hasPerk(PerkLib.Phylactery)) minCor = 100;
+			if (hasPerk(PerkLib.HellfireCoat) || hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
@@ -6858,3 +6865,4 @@ use namespace CoC;
 		}
 	}
 }
+

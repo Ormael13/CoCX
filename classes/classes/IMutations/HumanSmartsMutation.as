@@ -22,10 +22,10 @@ public class HumanSmartsMutation extends IMutationPerkType
                 descS += "5.";
             }
             if (pTier == 2){
-                descS += "10. ?Allow to use technical solutions like a goblins.?";
+                descS += "10. Allow to use options requiring to have technical knowledge.";
             }
             if (pTier == 3){
-                descS += "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
+                descS += "10. Allow to use options requiring to have technical knowledge.";
             }
             return descS;
         }
@@ -87,7 +87,7 @@ public class HumanSmartsMutation extends IMutationPerkType
 
         public function HumanSmartsMutation() 
 		{
-			super(mName + " IM", mName, SLOT_NERVSYS, 1);
+			super(mName + " IM", mName, SLOT_NERVSYS, 2);
 		}
 		
 	}

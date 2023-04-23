@@ -71,8 +71,8 @@ public class Changelog extends BaseContent
 			outputText("-Dual Wield (Massive) perk can be picked when having Dual Wield perk and one of two other perks: Titan's Grip or Gigant's Grip (Su).\n");
 			outputText("-Body Cultivation progress req. now only 1 body temperiong solution and one bottle of pills. There would be better body cultivation options in future that would req. larger investments.\n");
 			outputText("-Invert metamorph for magma/dark slime skin, allows slime-tfs to convert skin colours if player already has the skintype. say, after Urta's slime event. (Jtecx)\n");
-			outputText("-Blood Demon Toughness & Your Pain My Power super perks  was switched places in order of getting super perks for Blood Demon hidden job. Your Pain My Power super perk got additional minor effect: Casting spells using HP make them no longer limited by too high wrath.\n");
-			outputText("-Asura Strength & Like A-sura Boss super perks was switched places in order of getting super perks for Asura  hidden job. Hyper Casting super perk now require Grey Sage Intelligence super perk and due to adding meantioned super perk would be possible to gain 10 levels later than before.\n");
+			outputText("-Blood Demon Toughness & Your Pain My Power super perks was switched places in order of getting super perks for Blood Demon hidden job. Your Pain My Power super perk got additional minor effect: Casting spells using HP make them no longer limited by too high wrath.\n");
+			outputText("-Asura Strength & Like A-sura Boss super perks was switched places in order of getting super perks for Asura hidden job. Hyper Casting super perk now require Grey Sage Intelligence super perk and due to adding meantioned super perk would be possible to gain 10 levels later than before.\n");
 			outputText("-Urta Quest would temporaly reset to NG 0 settings if PC is already on NG 1 or higher. ALso fixing error with wrong resetting secondary stats scaling post urta quest.\n");
 			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the half amount of nonlust/lust dmg pc deal to enemy/ies. (old 10x monster stat increase -> 5x decrease of dmg dealt to monster)\n");
 			outputText("-Armor and Magic Defense of armor items would now matter more for higher values (especialy post 80). Instead of adding coresponding type of damage reduction by 1% until reaching 80 it will add 1% until 50. Any additional point of armor/mdef above 50 would apply DR based on this formula: dmg * (1 / square of (armor/mdef - 50)).\n");
@@ -104,7 +104,14 @@ public class Changelog extends BaseContent
 			outputText("-Added to Ascensus, Depravatio, Puritas tooltips previously mysterious hidden bonuses ;) Also each weapon atk/price been slight increased.\n");
 			outputText("-CasterTome recognition for imp tome. Goblins and Elfin ears updates. Ranged Tome are now also sprited as well as shielder tome. (Liadri)\n");
 			outputText("-New mutation perk: Human Smarts. Req. having free nerv system mutation slot, human race (17+). Effects: Increases maximum base/core Int/Wis by 5.\n");
-			outputText("-New mutation perk: Human Bones. Req. having free bones and marrow mutation slot, human race (17+). Effects: Increases maximum base/core Int/Wis by 5.\n");
+			outputText("-New mutation perk: Human Bones. Req. having free bones and marrow mutation slot, human race (17+). Effects: Increases maximum base/core Str/Tou by 5.\n");
+			outputText("-Vampiric Bloodstream (Final Form) have additional effect of double increase of Vampire Thirst stacks. 3rd and 4th stage of Vampiric Bloodstream have increased max cap of Vampire Thirst stack: 3rd - 105 > 120 and 4th - 225 > 300. Hollow Fangs (Final Form) increase by 5 not 3 Vampire Thirst stacks gained from using Vampire Feed.\n");
+			outputText("-New mutation perk: Human Bloodstream. Req. having free bloodstream mutation slot, human race (17+). Effects: Increases maximum base/core Spe/Lib by 5.\n");
+			outputText("-New mutation perk: Human Smarts (Primitive). Req. Human Smarts and lvl 30+. Effects: Increases maximum base/core Int/Wis by 10. Allow to use options requiring to have technical knowledge.\n");
+			outputText("-New mutation perk: Human Bones (Primitive). Req. Human Bones and lvl 30+. Effects: Increases maximum base/core Str/Tou by 10. Increase effects of body cultivation by 50%.\n");
+			outputText("-New mutation perk: Human Bloodstream (Primitive). Req. Human Bloodstream and lvl 30+. Effects: Increases maximum base/core Spe/Lib by 10. Increase a bit fatigue recovery and wrath generation.\n");
+			outputText("-Fix wood elves have 100 min corruption instead of 50. (Wisarddd)\n");
+			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -115,21 +122,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check\n");

@@ -18,6 +18,7 @@ public class CoreStat extends RawStat{
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismStr);
 				base += host.perkv1(PerkLib.BodyTempering);
 				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 1) base += 5;
+				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 2) base += 5;
 				if (host.hasPerk(PerkLib.AsuraStrength)) base *= 1.1;
 				base = Math.round(base);
 				break;
@@ -25,16 +26,19 @@ public class CoreStat extends RawStat{
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismTou);
 				base += host.perkv1(PerkLib.BodyTempering);
 				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 1) base += 5;
+				if (host.perkv1(IMutationsLib.HumanBonesIM) >= 2) base += 5;
 				var tou:Number = 1;
 				if (host.hasPerk(PerkLib.AsuraToughness)) tou += 0.1;
 				if (host.hasPerk(PerkLib.BloodDemonToughness)) tou += 0.1;
-				if (host.hasPerk(PerkLib.DemonSovereignToughnessAndLibido)) wis += 0.05;
+				if (host.hasPerk(PerkLib.DemonSovereignToughnessAndLibido)) tou += 0.05;
 				base *= tou;
 				base = Math.round(base);
 				break;
 			case 'spe.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismSpe);
 				base += host.perkv1(PerkLib.BodyTempering);
+				if (host.perkv1(IMutationsLib.HumanBloodstreamIM) >= 1) base += 5;
+				if (host.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2) base += 5;
 				if (host.hasPerk(PerkLib.AsuraSpeed)) base *= 1.1;
 				base = Math.round(base);
 				break;
@@ -42,6 +46,7 @@ public class CoreStat extends RawStat{
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismInt);
 				base += host.perkv1(PerkLib.SoulTempering);
 				if (host.perkv1(IMutationsLib.HumanSmartsIM) >= 1) base += 5;
+				if (host.perkv1(IMutationsLib.HumanSmartsIM) >= 2) base += 5;
 				var inte:Number = 1;
 				if (host.hasPerk(PerkLib.BloodDemonIntelligence)) inte += 0.1;
 				if (host.hasPerk(PerkLib.GreySageIntelligence)) inte += 0.1;
@@ -52,6 +57,7 @@ public class CoreStat extends RawStat{
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismWis);
 				base += host.perkv1(PerkLib.SoulTempering);
 				if (host.perkv1(IMutationsLib.HumanSmartsIM) >= 1) base += 5;
+				if (host.perkv1(IMutationsLib.HumanSmartsIM) >= 2) base += 5;
 				var wis:Number = 1;
 				if (host.hasPerk(PerkLib.BloodDemonWisdom)) wis += 0.1;
 				if (host.hasPerk(PerkLib.GreySageWisdom)) wis += 0.1;
@@ -61,7 +67,9 @@ public class CoreStat extends RawStat{
 			case 'lib.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismLib);
 				base += host.perkv1(PerkLib.SoulTempering);
-				if (host.hasPerk(PerkLib.DemonSovereignToughnessAndLibido)) wis += 0.05;
+				if (host.perkv1(IMutationsLib.HumanBloodstreamIM) >= 1) base += 5;
+				if (host.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2) base += 5;
+				if (host.hasPerk(PerkLib.DemonSovereignToughnessAndLibido)) base *= 1.05;
 				break;
 		}
 		return base;

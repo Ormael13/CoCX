@@ -818,7 +818,7 @@ public class PerkMenu extends BaseContent {
 			//Kitsune Mutations
 			displayHeader("Human Mutations");
 			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-			mutationsDatabaseVerify([IMutationsLib.HumanAdrenalGlandsIM, IMutationsLib.HumanBonesIM,IMutationsLib.HumanEyesIM, IMutationsLib.HumanFatIM, IMutationsLib.HumanMusculatureIM, IMutationsLib.HumanOvariesIM, IMutationsLib.HumanParathyroidGlandIM, IMutationsLib.HumanSmartsIM, IMutationsLib.HumanTesticlesIM, IMutationsLib.HumanThyroidGlandIM, IMutationsLib.HumanVersatilityIM]);
+			mutationsDatabaseVerify([IMutationsLib.HumanAdrenalGlandsIM, IMutationsLib.HumanBloodstreamIM, IMutationsLib.HumanBonesIM,IMutationsLib.HumanEyesIM, IMutationsLib.HumanFatIM, IMutationsLib.HumanMusculatureIM, IMutationsLib.HumanOvariesIM, IMutationsLib.HumanParathyroidGlandIM, IMutationsLib.HumanSmartsIM, IMutationsLib.HumanTesticlesIM, IMutationsLib.HumanThyroidGlandIM, IMutationsLib.HumanVersatilityIM]);
 			mutationsDatabase(1, false);
 		}
 

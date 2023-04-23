@@ -671,27 +671,27 @@ public class Creature extends Utils
 			}
 			if (hasPerk(PerkLib.JobGuardian)) max += 120;
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulPersonage)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulWarrior)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulApprentice)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulPersonage)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulWarrior)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulScholar)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulGrandmaster)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulSprite)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulScholar)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulGrandmaster)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulExalt)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulOverlord)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulElder)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulExalt)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulOverlord)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulTyrant)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulKing)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulEmperor)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulTyrant)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulKing)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
+				if (hasPerk(PerkLib.SoulEmperor)) max += (1600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
 			}
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
-				if (hasPerk(PerkLib.SoulAncestor)) max += (2000 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulAncestor)) max += (2000 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]) * game.player.humanBodyCultivators());
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

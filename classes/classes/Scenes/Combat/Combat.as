@@ -6638,27 +6638,27 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.JobMonk) && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.PrestigeJobSoulArtMaster) && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 6 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 6 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 6 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 6 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 6 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 10 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 10 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 10 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 10 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 10 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 10 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 14 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 14 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 14 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 14 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 14 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 18 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 18 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 18 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 18 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 18 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 18 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) {
-            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 22 * (1 + player.newGamePlusMod());
+            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 22 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
@@ -10971,11 +10971,11 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
-        if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5;
-        if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) maxPercentRegen += 0.5;
-        if (player.hasPerk(PerkLib.FleshBodyElderStage)) maxPercentRegen += 0.5;
-        if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) maxPercentRegen += 0.5;
-        if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) maxPercentRegen += 0.5;
+        if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
+        if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
+        if (player.hasPerk(PerkLib.FleshBodyElderStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
+        if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
+        if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) maxPercentRegen += 0.5 * player.humanBodyCultivators();
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) maxPercentRegen += 0.5;
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) maxPercentRegen += 0.5;
 		if (player.hasPerk(PerkLib.BloodDemonWisdom)) maxPercentRegen += 0.5;
@@ -11072,6 +11072,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) fatiguecombatrecovery += 1;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) fatiguecombatrecovery += 5;
 		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 10;
+		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) fatiguecombatrecovery += 1;
@@ -11333,6 +11334,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) wrathregen += 1;
         if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) wrathregen += 4;
         if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) wrathregen += 4;
+		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) wrathregen += 2;
         if (player.necklace == necklaces.CSNECK) {
             var csneckb:Number = 2;
             if (player.wrath >= player.wrath100 * 0.2) csneckb += 2;
@@ -14286,9 +14288,11 @@ public function VampiricBite():void {
     EngineCore.HPChange(damage, false);
     outputText(" damage. You feel yourself grow stronger with each drop. ");
     var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-    if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) thirst.drink(3);
-    else if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) thirst.drink(2);
-    else thirst.drink(1);
+	var drinked:Number = 1;
+    if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) drinked += 1;
+    if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) drinked += 3;
+    if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) drinked *= 2;
+    thirst.drink(drinked);
     if (monster.gender != 0 && monster.lustVuln != 0) {
         var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
         if (player.perkv1(IMutationsLib.HollowFangsIM) == 3) lustDmg *= 1.5;
