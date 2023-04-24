@@ -2,7 +2,7 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.IMutations
+package classes.IMutations 
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
@@ -10,29 +10,23 @@ import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class HollowFangsMutation extends IMutationPerkType
+public class HumanBonesMutation extends IMutationPerkType
     {
-        private static const mName:String = "Hollow Fangs";
+        private static const mName:String = "Human Bones";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
+			if (pTier >= 1) descS += "Increases maximum base/core Str/Tou by ";
             if (pTier == 1){
-                descS = "Your fangs and mouth started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)";
+                descS += "5.";
             }
             if (pTier == 2){
-                descS = "Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +2% more healed from Vampire Bite)";
+                descS += "10. Increase effects of body cultivation by 50%.";
             }
-			if (pTier >= 3){
-				descS = "You can now freely feed on blood and other atypical fluids. (+10 max stack of Vampire Thirst, ";
-			}
             if (pTier == 3){
-                descS = "+8% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)";
+                descS += "10. Increase effects of body cultivation by 50%. ";
             }
-            if (pTier == 4){
-                descS = "+20% more healed from Vampire Bite, each Vampire Bite giving 5 stacks and deal +100% lust dmg)";
-            }
-            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -45,9 +39,6 @@ public class HollowFangsMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
-                    break;
-                case 4:
-                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -62,12 +53,10 @@ public class HollowFangsMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireMouthMutationSlot()
-                    .requireMutation(IMutationsLib.VampiricBloodstreamIM)
+                    this.requireBonesAndMarrowMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
-                    }, "Vampire fangs")
-                    .requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
+                        return player.racialScore(Races.HUMAN) > 16;
+                    }, "Human race (17+)");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -81,16 +70,26 @@ public class HollowFangsMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
-            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
-            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
-            if (pTier == 4) pBuffs['tou.mult'] = 0.6;
+            if (pTier == 1) {
+				pBuffs['str.mult'] = 0.1;
+				pBuffs['tou.mult'] = 0.1;
+			}
+            if (pTier == 2) {
+				pBuffs['str.mult'] = 0.2;
+				pBuffs['tou.mult'] = 0.2;
+			}
+            if (pTier == 3) {
+				pBuffs['str.mult'] = 0.4;
+				pBuffs['tou.mult'] = 0.4;
+			}
             return pBuffs;
         }
 
-        public function HollowFangsMutation() {
-            super(mName + " IM", mName, SLOT_MOUTH, 4);
-        }
-        
-    }
+        public function HumanBonesMutation() 
+		{
+			super(mName + " IM", mName, SLOT_BONE, 2);
+		}
+		
+	}
+
 }

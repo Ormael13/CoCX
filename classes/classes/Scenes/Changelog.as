@@ -33,11 +33,18 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.8t:</b>\n\n");
+			outputText("-New tier 4 strength lvl-up perk: Enchanced Warrior's Rage. Req. Way of the Warrior perk. Effect: Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)\n");
+			outputText("-New tier 6 strength lvl-up perk: Titan's Grip. Req. Gigant's Grip (Ex) and Epic Strength perks, 200+ str. Effect: Gain an ability to wield massive weapons in one hand. (+25% melee physical attacks multiplier)\n");
 			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			outputText("-New mutation perk: Human Versatility (Primitive). Req. Human Versatility and lvl 30+. Effects: Mastery gains increased by 2 point or in case of multtiplier +2 to multiplier. Decrease a bit needed exp to lvl up weapon/lifeskill masteries.\n");
 			outputText("-New mutation perk: Human Eyes. Req. having free eyes mutation slot, human race (17+). Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 5 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Primitive). Req. Human Eyes and lvl 30+. Effects: Increase precision of all attacks by 5%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 10 lvl's.\n");
 			outputText("-New mutation perk: Human Eyes (Evolved). Req. Human Eyes (Primitive) and lvl 60+. Effects: Increase precision of all attacks by 10%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 30 lvl's. 5% less penalty to acc per each next attack during multiattack.\n");
+			outputText("-New event perk: Grey Sage Intelligence. Gained by spending 1 super perk point and having 'Equilibrium' super perk. Effects: Gain Grey Sage Intelligence. When using Mana Shield during Defend command it woulkd fully absorb attacks no matter how strong. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
+			outputText("-New event perk: Well of Mana. Gained by spending 1 super perk point and having 'Hyper Casting' super perk. Effects: Mana recovery increased by (0,1% * core int value) of max mana. When using Wait or Defend move mana recovery doubled. (+10% to OverMax Mana)\n");
+			outputText("-New event perk: Grey Sage Wisdom. Gained by spending 1 super perk point and having 'Well of Mana' super perk. Effects: Gain Grey Sage Wisdom. Increase damage reduction against spells by 20%. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
+			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
+			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
 			outputText("-New melee weapon (by Ormael): Dual Nodachi - can be gained by combining 2x Kama weapon. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
 			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
@@ -61,24 +68,17 @@ public class Changelog extends BaseContent
 			outputText("-Asauchi flying sword SF use cost is decreased from 80% to 60% of massive flying swords default cost.\n");
 			outputText("-Flying Sword Path perk would enable option to seperate sets or combine into sets specific flying swords. It cost a bit of SF to perform.\n");
 			outputText("-Asterius Rage str that is req. to reach fully atk is increased from 1,000+ to 1,300+. Until 100+ str atk increase is very minimal. Max atk itself is also increased from 176 to 200.\n");
-			outputText("-New tier 6 strength lvl-up perk: Titan's Grip. Req. Gigant's Grip (Ex) and Epic Strength perks, 200+ str. Effect: Gain an ability to wield massive weapons in one hand. (+25% melee physical attacks multiplier)\n");
 			outputText("-Dual Wield (Massive) perk can be picked when having Dual Wield perk and one of two other perks: Titan's Grip or Gigant's Grip (Su).\n");
 			outputText("-Body Cultivation progress req. now only 1 body temperiong solution and one bottle of pills. There would be better body cultivation options in future that would req. larger investments.\n");
 			outputText("-Invert metamorph for magma/dark slime skin, allows slime-tfs to convert skin colours if player already has the skintype. say, after Urta's slime event. (Jtecx)\n");
-			outputText("-Blood Demon Toughness & Your Pain My Power super perks  was switched places in order of getting super perks for Blood Demon hidden job. Your Pain My Power super perk got additional minor effect: Casting spells using HP make them no longer limited by too high wrath.\n");
-			outputText("-Asura Strength & Like A-sura Boss super perks was switched places in order of getting super perks for Asura  hidden job. Hyper Casting super perk now require Grey Sage Intelligence super perk and due to adding meantioned super perk would be possible to gain 10 levels later than before.\n");
-			outputText("-New event perk: Grey Sage Intelligence. Gained by spending 1 super perk point and having 'Equilibrium' super perk. Effects: Gain Grey Sage Intelligence. When using Mana Shield during Defend command it woulkd fully absorb attacks no matter how strong. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
-			outputText("-New event perk: Well of Mana. Gained by spending 1 super perk point and having 'Hyper Casting' super perk. Effects: Mana recovery increased by (0,1% * core int value) of max mana. When using Wait or Defend move mana recovery doubled. (+10% to OverMax Mana)\n");
-			outputText("-New event perk: Grey Sage Wisdom. Gained by spending 1 super perk point and having 'Well of Mana' super perk. Effects: Gain Grey Sage Wisdom. Increase damage reduction against spells by 20%. (+10% of OverMax Mana/Base INT Cap, +0,5% Mana regen)\n");
-			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
-			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
+			outputText("-Blood Demon Toughness & Your Pain My Power super perks was switched places in order of getting super perks for Blood Demon hidden job. Your Pain My Power super perk got additional minor effect: Casting spells using HP make them no longer limited by too high wrath.\n");
+			outputText("-Asura Strength & Like A-sura Boss super perks was switched places in order of getting super perks for Asura hidden job. Hyper Casting super perk now require Grey Sage Intelligence super perk and due to adding meantioned super perk would be possible to gain 10 levels later than before.\n");
 			outputText("-Urta Quest would temporaly reset to NG 0 settings if PC is already on NG 1 or higher. ALso fixing error with wrong resetting secondary stats scaling post urta quest.\n");
 			outputText("-Increase to HP/Lust/Fatigue/Wrath/SF/Mana from difficulty setting was changed to decrease by the half amount of nonlust/lust dmg pc deal to enemy/ies. (old 10x monster stat increase -> 5x decrease of dmg dealt to monster)\n");
 			outputText("-Armor and Magic Defense of armor items would now matter more for higher values (especialy post 80). Instead of adding coresponding type of damage reduction by 1% until reaching 80 it will add 1% until 50. Any additional point of armor/mdef above 50 would apply DR based on this formula: dmg * (1 / square of (armor/mdef - 50)).\n");
 			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
 			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
 			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
-			outputText("-New tier 4 strength lvl-up perk: Enchanced Warrior's Rage. Req. Way of the Warrior perk. Effect: Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)\n");
 			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Two Bladed Scythe - buyable at Orsbulg shop. Cost 2,400 gems. Base atk is 30. It's large weapon belonging to (scythe) exotic type, can be used in whirlwind specials. Have 25% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
@@ -88,8 +88,8 @@ public class Changelog extends BaseContent
 			outputText("-Dual Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
 			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
 			outputText("-To better match their status as legendary weapons their atk been increased: Artemis & Wild Hunt (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer (60 > 210 (at 270+ str)), Lifehunt Scythe (25 > 90 (at 100+ str)), Seraph Spear & Demon Snake Spear (20 > 60 (at 100+ spe)), ");
-			outputText("Winged Greataxe & Demonic Greataxe (28 > 100 (at 100+ str)), Moonlit Snow (40 > 115 (at 100+ spe)), Chaos Blade (45 > 135 (at 100+ spe)), Masamune Katana (32 > 112 (at 100+ spe)), Blood Letter katana (42 > 132 (at 100+ spe)), Queen's Guard Rapier (27,5 > 80 (at 100+ spe)), Black Widow Rapier (27,5 > 80 (at 100+ spe)). ");
-			outputText("In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
+			outputText("Winged Greataxe & Demonic Greataxe (28 > 100 (at 100+ str)), Moonlit Snow (40 > 115 (at 100+ spe)), Chaos Blade (45 > 135 (at 100+ spe)), Masamune Katana (32 > 112 (at 100+ spe)), Blood Letter katana (42 > 132 (at 100+ spe)), Queen's Guard Rapier (27,5 > 80 (at 100+ spe)), Black Widow Rapier (27,5 > 80 (at 100+ spe)), Unicorn Staff (10 > 23 (at 50+ str), spellpower bonus based on purity 400% > 600%), ");
+			outputText("Nocturnus Staff (10 > 23 (at 50+ str), spellpower bonus based on corruption 560% > 1000%). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
 			outputText("-Demonic Scythe & Alvina's Twin Scythes have now 10% chance to proc bleed.\n");
 			outputText("-Training Dummy/Dummies would let Supercharged PC run away.\n");
 			outputText("-To better match their status as legendary armors their stats been increased: Inari Blessed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on purity cap 50% > 100%), Tamamo no Mae Cursed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on corruption cap 50% > 100%), ");
@@ -99,6 +99,19 @@ public class Changelog extends BaseContent
 			outputText("-New armor (by Liadri): Centaur Paladin Armor - obtainable by giving Centaur Armor to Pure Celess to purify. Armor 40, m.res 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg.\n");
 			outputText("-New melee weapon (by Liadri): Hellraiser - obtainable by giving Demonic Scythe to Corrupted Celess to corrupt. Atk value 90 (at 100+str), can apply bleed (100%), used with whirlwind special, 200% to spellpower.\n");
 			outputText("-Izma 'Combat Manual' got 4th possible effect (speed knowledge bonus).\n");
+			outputText("-To better match their status as legendary shields their stats been increased: Sanctuary shield (L) (block 29 > 55, regeneration effect max cap increased 1% > 5%) and Dark Aegis (block 29 > 55, regeneration effect max cap increased 1% > 5%). Both shields get added req. to be lvl 54+ to use them.\n");
+			outputText("-Sanctuary shield (not legendary) gained 1% HP regeneration effect.\n");
+			outputText("-Added to Ascensus, Depravatio, Puritas tooltips previously mysterious hidden bonuses ;) Also each weapon atk/price been slight increased.\n");
+			outputText("-CasterTome recognition for imp tome. Goblins and Elfin ears updates. Ranged Tome are now also sprited as well as shielder tome. (Liadri)\n");
+			outputText("-New mutation perk: Human Smarts. Req. having free nerv system mutation slot, human race (17+). Effects: Increases maximum base/core Int/Wis by 5.\n");
+			outputText("-New mutation perk: Human Bones. Req. having free bones and marrow mutation slot, human race (17+). Effects: Increases maximum base/core Str/Tou by 5.\n");
+			outputText("-Vampiric Bloodstream (Final Form) have additional effect of double increase of Vampire Thirst stacks. 3rd and 4th stage of Vampiric Bloodstream have increased max cap of Vampire Thirst stack: 3rd - 105 > 120 and 4th - 225 > 300. Hollow Fangs (Final Form) increase by 5 not 3 Vampire Thirst stacks gained from using Vampire Feed.\n");
+			outputText("-New mutation perk: Human Bloodstream. Req. having free bloodstream mutation slot, human race (17+). Effects: Increases maximum base/core Spe/Lib by 5.\n");
+			outputText("-New mutation perk: Human Smarts (Primitive). Req. Human Smarts and lvl 30+. Effects: Increases maximum base/core Int/Wis by 10. Allow to use options requiring to have technical knowledge.\n");
+			outputText("-New mutation perk: Human Bones (Primitive). Req. Human Bones and lvl 30+. Effects: Increases maximum base/core Str/Tou by 10. Increase effects of body cultivation by 50%.\n");
+			outputText("-New mutation perk: Human Bloodstream (Primitive). Req. Human Bloodstream and lvl 30+. Effects: Increases maximum base/core Spe/Lib by 10. Increase a bit fatigue recovery and wrath generation.\n");
+			outputText("-Fix wood elves have 100 min corruption instead of 50. (Wisarddd)\n");
+			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -109,21 +122,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check\n");
@@ -197,7 +203,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -226,6 +238,12 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1337,7 +1355,7 @@ public class Changelog extends BaseContent
 			outputText("-After fight boss in River Dungeon it should no longer have chance to spawn normal mob in room unless PC leave and reeneter room then it would normaly have chance to spawn. Excellia and JoJo event will be one time off event now. In case of saves where it get reset after another proc it will be last time seen until ascension.\n");
 			outputText("-Soul Sense option for Tamani daughters recieved same limitation as for encounters that PC could trigger before having option to find them with soul sense. Also some of tamani encounters that would proc her daughters meeting instead been changed to take into account unlocking or not them in soul sense.\n");
 			outputText("-Lifesteal effects from weapons won't work on construct enemies (they not have much of 'blood' to suck out) and Venoclaw will not 'poison' lust resistant enemies.\n");
-			outputText("-Places menu got hints on ??? options. Temple of the Divine praying menu got added ??? options for not yet restored altairs.\n");
+			outputText("-Places menu got hints on ??? options. Temple of the Divine praying menu got added ??? options for not yet restored Altars.\n");
 			outputText("-Mind over Body I perk req. updated to include in one of job perks that allow to pick it include also job: Golemancer and Job: Healer. Arcane Regeneration (Minor) req. of perk mage been replaced with req. one of four job perks: Sorcerer, Healer, Elemental Conjuer, Golemancer.\n");
 			outputText("-Job: Healer, Elemental Conjuer, Golemancer, Enchanter and Eromancer mana regeneration bonus been increased to 10 pts from 5 pts.\n");
 			outputText("-Earth / Wood elementals dmg bonus been decreased to 100% and Metal to 30%. Purity/Corruption elementals got much better scaling increasing dmg based on enemy corruption from 100%-140% to 60%-300%.\n");

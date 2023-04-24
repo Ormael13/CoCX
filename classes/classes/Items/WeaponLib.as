@@ -70,7 +70,7 @@ public final class WeaponLib extends ItemConstants
 		public const ATWINSCY:AlvinaTwinScythe = new AlvinaTwinScythe();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
 		public const ARMAGED:ArmageddonBlade = new ArmageddonBlade();
-		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 15, 2400, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt.", "Large, Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
+		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 30, 4800, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt. (-25% spell cost, x6.5 spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
 		public const ASTERIUS:AsteriusRage = new AsteriusRage();
 		public const AWL_   :Weapon = new Weapon("Awl    ","Awl","awl","an awl","pierce",3,240,"A typical awl used to pierce magic hides when making magic armors or... to pierce organic object ;)", "Small, Bleed45", "Exotic");
 		public const B_STAFF:BeautifulStaff = new BeautifulStaff();
@@ -98,7 +98,7 @@ public final class WeaponLib extends ItemConstants
 		public const DBFWHIP:DualBFWhip = new DualBFWhip();
 		public const DDAGGER:DualDaggers = new DualDaggers();
 		public const DEMSCYT:DemonicScythe = new DemonicScythe();
-		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption.", "Large, Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
+		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 12, 1920, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption. (-15% spell cost, x2.5 black spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
 		public const DKATANA:DualKatana = new DualKatana();
 		public const DNODACHI:DualNodachi = new DualNodachi();
@@ -175,7 +175,7 @@ public final class WeaponLib extends ItemConstants
 		public const PSWHIP :DualSuccubiWhip = new DualSuccubiWhip();
 		public const PTCHFRK:Weapon = new Weapon("PtchFrk","Pitchfork","pitchfork","a pitchfork","stab",10,400,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon.", "", "Spear");
 		public const PWHIP  :DualWhip = new DualWhip();
-		public const PURITAS:Weapon = new Weapon("Puritas", "Puritas", "Puritas", "Puritas, Element of Purity", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Vines run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff glows with power, radiating purity.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
+		public const PURITAS:Weapon = new Weapon("Puritas", "Puritas", "Puritas", "Puritas, Element of Purity", "smack", 12, 1920, "This staff is made from sacred wood, infused with Marae’s bark. Vines run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff glows with power, radiating purity. (-15% spell cost, x2.5 white spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
 		public const Q_GUARD:QueensGuard = new QueensGuard();
 		public const R_STAFF:Weapon = new Weapon("R.Staff", "R. Staff", "ruby staff", "a ruby staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has ruby embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
 		public const RCLAYMO:RubyClaymore = new RubyClaymore();

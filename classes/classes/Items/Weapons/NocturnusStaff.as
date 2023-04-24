@@ -23,17 +23,16 @@ public class NocturnusStaff extends Weapon implements TimeAwareInterface
         //Normal weapon stuff
 		public function NocturnusStaff()
 		{
-			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "bonk", 10, 1600,
+			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "bonk", 23, 3680,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
 					"Large, Staff, +200% Spell cost, Spellpower bonus for corruption", WT_STAFF);
-			withBuff('spellpower', +0.6);
+			withBuff('spellpower', +1.0);
 			EventParser.timeAwareClassAdd(this);
 		}
 		
 		public function calcWizardsMult():Number {
-			var multadd:Number = 0.6;
-            if (game && game.player)
-                multadd += game.player.cor * 0.05;
+			var multadd:Number = 1.0;
+            if (game && game.player) multadd += game.player.cor * 0.09;
 			return multadd;
 		}
 
@@ -51,6 +50,21 @@ public class NocturnusStaff extends Weapon implements TimeAwareInterface
             lastCor = game.player.cor;
         }
 
+		override public function get attack():Number {
+			var boost:int = 0;
+			var scal:Number = 20;
+			if (game.player.str >= 50) {
+				boost += 5;
+				scal -= 5;
+			}
+			if (game.player.str >= 25) {
+				boost += 5;
+				scal -= 5;
+			}
+			boost += Math.round(game.player.cor / scal);
+			return (3 + boost); 
+		}
+
         override public function get descBase():String {
             if (game && game.player)
                 return _description + (
@@ -63,7 +77,7 @@ public class NocturnusStaff extends Weapon implements TimeAwareInterface
         }
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (game.player.level >= 54) return super.canEquip(doOutput);
 			if(doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}

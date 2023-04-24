@@ -1103,7 +1103,18 @@ public class Exploration extends BaseContent
 		//Temporaly place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
-			if (rand(3) == 0) {
+			if (rand(4) == 0) {
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot him/her/it/them\n\n");
+                }
+				outputText("<b>A Low-Rank Angel...</b>");
+				startCombat(new AngelLR());//lvl 15
+				return;
+			}
+			else if (rand(3) == 0) {
                 if (silly()) {
                     outputText("You're walking in the woods\n\n");
                     outputText("There's no one around\n\n");
@@ -1397,4 +1408,4 @@ public class Exploration extends BaseContent
 		}
 
 	}
-}
+}

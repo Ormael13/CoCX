@@ -5,13 +5,16 @@
 package classes.Items.Shields 
 {
 	import classes.Items.Shield;
+	import classes.PerkLib;
 
 	public class SanctuaryN extends Shield
 	{
 		
 		public function SanctuaryN()
 		{
-			super("SanctN", "SanctuaryN", "Sanctuary shield (N)", "a Sanctuary shield (N)", 21, 1050, "The legendary shield sanctuary. Its power is currently dormant and would require a powerful source of magic to fully unlock.", "Large");
+			super("SanctN", "SanctuaryN", "Sanctuary shield (N)", "a Sanctuary shield (N)", 21, 1050, "The legendary shield sanctuary. Its power is currently dormant and would require a powerful source of magic to fully unlock.",
+					"Large");
+					withPerk(PerkLib.Sanctuary, 0, 0, 0, 0);
 		}
 		
 		override public function get block():Number {
