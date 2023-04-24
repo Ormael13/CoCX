@@ -698,7 +698,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
 		addButton(2, "Video Log", VideoLog);
-		addButtonIfTrue(5, "GoblinHaxxors", GoblinHaxxors, "Req. to be Goblin or Gremlin.", (player.isRaceCached(Races.GOBLIN) || player.isRaceCached(Races.GREMLIN) || (player.hasMutation(IMutationsLib.HumanSmartsIM) && player.perkv1(IMutationsLib.HumanSmartsIM) > 1)));
+		addButtonIfTrue(5, "GoblinHaxxors", GoblinHaxxors, "Req. to be Goblin, Gremlin, 'Smart' Human.", (player.isRaceCached(Races.GOBLIN) || player.isRaceCached(Races.GREMLIN) || (player.hasMutation(IMutationsLib.HumanSmartsIM) && player.perkv1(IMutationsLib.HumanSmartsIM) > 1)));
         addButton(6, "CAVEMAN!!!", WEHAVETECHNOLOGY);
         addButton(14, "Leave", PanicRoom);
     }

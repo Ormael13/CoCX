@@ -426,6 +426,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.InariBlessedKimono)) mod += ((100 - player.cor) * .01);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.ASCENSU) mod *= 6.5;
+		if (player.weapon == weapons.ECLIPSE) mod *= 0.2;
+		if (player.weapon == weapons.OCCULUS) mod *= 5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}

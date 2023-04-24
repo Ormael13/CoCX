@@ -89,7 +89,8 @@ public class Changelog extends BaseContent
 			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
 			outputText("-To better match their status as legendary weapons their atk been increased: Artemis & Wild Hunt (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer (60 > 210 (at 270+ str)), Lifehunt Scythe (25 > 90 (at 100+ str)), Seraph Spear & Demon Snake Spear (20 > 60 (at 100+ spe)), ");
 			outputText("Winged Greataxe & Demonic Greataxe (28 > 100 (at 100+ str)), Moonlit Snow (40 > 115 (at 100+ spe)), Chaos Blade (45 > 135 (at 100+ spe)), Masamune Katana (32 > 112 (at 100+ spe)), Blood Letter katana (42 > 132 (at 100+ spe)), Queen's Guard Rapier (27,5 > 80 (at 100+ spe)), Black Widow Rapier (27,5 > 80 (at 100+ spe)), Unicorn Staff (10 > 23 (at 50+ str), spellpower bonus based on purity 400% > 600%), ");
-			outputText("Nocturnus Staff (10 > 23 (at 50+ str), spellpower bonus based on corruption 560% > 1000%). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
+			outputText("Nocturnus Staff (10 > 23 (at 50+ str), spellpower bonus based on corruption 560% > 1000%), Occulus (1 > 10 (at 50+ str), greatly empowers healing spells x1 > x5, spellpower bonus based on purity 400% > 500%), Eclipse (1 > 10 (at 50+ str), Weakens healing spell x1 > x0.2, spellpower bonus based on corruption 560% > 800%), Karmic Touch gloves (Physical Soulskill Multiplier 50% > 150%, stun chance 25% > 50%), ");
+			outputText("Yama-Raja Grasp gloves (Physical Soulskill Multiplier 50% > 150%, Crit chance when enemy is below 33 corruption 10% > 20%). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
 			outputText("-Demonic Scythe & Alvina's Twin Scythes have now 10% chance to proc bleed.\n");
 			outputText("-Training Dummy/Dummies would let Supercharged PC run away.\n");
 			outputText("-To better match their status as legendary armors their stats been increased: Inari Blessed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on purity cap 50% > 100%), Tamamo no Mae Cursed Kimono (armor 0 > 10, m.res 30 > 60, increase spell/soulpower bonus based on corruption cap 50% > 100%), ");
@@ -112,7 +113,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Bloodstream (Primitive). Req. Human Bloodstream and lvl 30+. Effects: Increases maximum base/core Spe/Lib by 10. Increase a bit fatigue recovery and wrath generation.\n");
 			outputText("-Fix wood elves have 100 min corruption instead of 50. (Wisarddd)\n");
 			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
-			outputText("-\n");
+			outputText("-Fixed forest mage arms. Added Forest mage dress to Kaiba temporarily. (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

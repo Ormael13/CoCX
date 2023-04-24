@@ -10,7 +10,7 @@ public class Masamune extends Weapon
 			super(
 				"masamune","Masamune","masamune katana","a masamune katana","slash",112,8960,
 				"This blessed katana is made in shining steel and heavily decorated with silver and blue sapphires. When used by a pure-hearted knight, the divine will within guides each strike, making it much deadlier.", "Large", "Dueling"
-			);17
+			);
 		}
 		override public function get attack():Number {
 			var boost:int = 0;

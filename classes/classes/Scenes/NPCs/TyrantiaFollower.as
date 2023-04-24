@@ -1286,7 +1286,7 @@ public function itemImproveMenuCorrupt():void {
 		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
 		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
 		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],//--//
-		[weapons.A_WAND, weapons.OCCULUS, weapons.ECLIPSE],//--//
+		[weapons.A_WAND, weapons.OCCULUS, weapons.ECLIPSE],
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[weaponsrange.DESEAGL, weaponsrange.GOODSAM, weaponsrange.BADOMEN],

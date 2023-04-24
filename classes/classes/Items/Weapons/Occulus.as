@@ -23,18 +23,17 @@ public class Occulus extends Weapon implements TimeAwareInterface
         //Normal weapon stuff
 		public function Occulus()
 		{
-			super("Occulus", "Occulus", "Occulus", "an Occulus", "bonk", 5, 1600,
+			super("Occulus", "Occulus", "Occulus", "an Occulus", "bonk", 10, 1600,
 					"A wand rumored to have been the favorite catalyst of the now missing in action god of magic. The Occulus is rumored to have been seen and used as early as the genesis of Mareth. Occulus was made to create not to destroy and thus perform best when used to cast restorative magic",
 					"Wand, greatly empowers healing spells, increases Spellpower based on purity", WT_WAND
 			);
-			withBuff('spellpower', +0.6);
+			withBuff('spellpower', +1.0);
 			EventParser.timeAwareClassAdd(this);
 		}
 
 		public function calcWizardsMult():Number {
-			var multadd:Number = 0.6;
-            if (game && game.player)
-                multadd += (100 - game.player.cor) * 0.034;
+			var multadd:Number = 1.0;
+            if (game && game.player) multadd += (100 - game.player.cor) * 0.04;
 			return multadd;
 		}
 
@@ -63,8 +62,19 @@ public class Occulus extends Weapon implements TimeAwareInterface
                 return _description;
         }
 		
+		override public function get attack():Number {
+			var boost:int = 0;
+			var scal:Number = 25;
+			if (game.player.str >= 50) {
+				boost += 4;
+				scal -= 5;
+			}
+			boost += Math.round(game.player.cor / scal);
+			return (1 + boost); 
+		}
+		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (game.player.level >= 54) return super.canEquip(doOutput);
 			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}
