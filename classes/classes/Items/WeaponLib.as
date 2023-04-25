@@ -137,7 +137,7 @@ public final class WeaponLib extends ItemConstants
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
 		public const KAMA   :Weapon = new Weapon("Kama","Kama", "kama", "a kama", "slash", 4,320, "The kama is a simple and elegant hand scythe weapon. Preferred weapon for the ninja fans.", "Small, Bleed10", "Scythe");
 		public const KAMAWHIP:Weapon = new Weapon("KamaWhip","KamaWhip","kama whip","a kama whip","whip-like slash",3,240,"A small kama-like weapon with two scythe blades that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping, Bleed10", "Scythe, Thrown").withBuffs({'teasedmg': 30}) as Weapon;
-		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun25", WT_GAUNTLET).withBuffs({
+		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun50", WT_GAUNTLET).withBuffs({
 			'psoulskillpower': +1.5
 		}) as Weapon;
 		public const KATANA :DynamicWeapon = findCommonDynamicWeapon("katana");

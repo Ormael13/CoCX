@@ -53,7 +53,7 @@ public class HumanBloodstreamMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requirePeripheralNervSysMutationSlot()
+                    this.requireBloodsteamMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.racialScore(Races.HUMAN) > 16;
                     }, "Human race (17+)");
