@@ -2106,16 +2106,15 @@
 								<show part="shield/shieldGeneric"/>
 							</else>
 						</if>
-						<else>
-							<if test="PlayerHasACasterTome">
-								<show part="shield/CasterTomeOfImps"/>
-								<else>
-									<show part="shield/shieldGeneric"/>
-								</else>
-							</if>
-						</else>
 					</if>
 				</if>
+				
+				<!-- Tomes -->
+				<if test="PlayerhasACasterTome">
+					<hide part="shield/shieldGeneric"/>
+					<show part="shield/CasterTomeOfImps"/>
+				</if>
+				
 				<else>
 				<!-- RANGED WEAPON -->
 					<if test="playerHasWeaponWings">
