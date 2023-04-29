@@ -115,6 +115,15 @@ public class Changelog extends BaseContent
 			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
 			outputText("-Fixed forest mage arms. Added Forest mage dress to Kaiba temporarily. (Liadri)\n");
 			outputText("-Job: Rogue was changed from Advanced type into Basic Job (speed based similary as Ranger job). That made it moved from tier 1 to tier 0. Sneak attack perk also been moved from tier 1 to 0 with added req. to have 15+ speed. Improved Evade perk req. 'to have job: ranger' changed to 'to have either job: ranger or job: rogue'.\n");
+			outputText("-Minotaurs if they would have axe it would drop after fight and not have chance (like 100% recently) to be broken.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -144,17 +153,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
-			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check\n");
+			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check, special names that was giving previous ears type used by goblins\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
