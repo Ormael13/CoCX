@@ -3988,6 +3988,9 @@ public class PerkLib
 		public static const JobWarrior:PerkType = mk("Job: Warrior", "Job ( Basic ): Warrior",
 				"You've trained in melee combat.",
 				"You chose 'Job ( Basic ): Warrior' perk, training yourself to become a(n) Warrior.").withBuffs({'str.mult':0.05,'maxwrath_base':+50});
+		public static const JobRogue:PerkType = mk("Job: Rogue", "Job ( Basic ): Rogue",
+				"You've trained in how to strike at your opponent's vital points and use various deadly tricks.",
+				"You chose 'Job ( Basic ): Rogue' perk, training yourself to become a(n) Rogue.").withBuffs({'spe.mult':0.05});
 		public static const JobSoulArcher:PerkType = mk("Job: Soul Archer", "Job ( Basic ): Soul Archer",
 				"You've trained in art of combining soulforce and arrows.",
 				"You chose 'Job ( Basic ): Soul Archer' perk, training yourself to become a Soul Archer.").withBuffs({'spe.mult':0.60,'wis.mult':0.20});
@@ -4046,9 +4049,6 @@ public class PerkLib
 		public static const JobMonk:PerkType = mk("Job: Monk", "Job ( Advanced ): Monk",
 				"You've trained in unarmed combat.",
 				"You chose 'Job ( Advanced ): Monk' perk, training yourself to become a(n) Monk.").withBuffs({'wis.mult':0.15});
-		public static const JobRogue:PerkType = mk("Job: Rogue", "Job ( Advanced ): Rogue",
-				"You've trained in how to strike at your opponent's vital points and use various deadly tricks. (+5 to max str/spe - scalable)",
-				"You chose 'Job ( Advanced ): Rogue' perk, training yourself to become a(n) Rogue.").withBuffs({'str.mult':0.05,'spe.mult':0.05});
 		public static const JobSwordsman:PerkType = mk("Job: Swordsman", "Job ( Advanced ): Swordsman",
 				"You've trained in using large weapons in fights.",
 				"You chose 'Job ( Advanced ): Swordsman' perk, training yourself to become a(n) Swordsman.").withBuffs({'str.mult':0.10,'maxwrath_base':+100});
@@ -5082,6 +5082,10 @@ public class PerkLib
                     .requireSpe(30);
             Sharpshooter.requirePerk(JobRanger);
             PowerShot.requirePerk(JobRanger);
+            JobRogue.requireSpe(10)
+                    .requireStr(5);
+            SneakyAttack.requireSpe(15)
+                    .requirePerk(JobRogue);
             NaturesSpringI.requirePerk(ArchersStaminaI)
                     .requireSpe(30);
             NaturesSpringII.requirePerk(NaturesSpringI)
@@ -5126,7 +5130,7 @@ public class PerkLib
                     .requireLevel(10)
                     .requireNGPlus(5);
             JobDervish.requireAdvancedJobSlot()
-					.requireAnyPerk(JobRanger, JobWarrior)
+					.requireAnyPerk(JobRogue, JobWarrior)
                     .requireSpe(30)
                     .requireStr(20)
                     .requireLevel(6);
@@ -5142,14 +5146,7 @@ public class PerkLib
                     .requireSpe(130)
                     .requireLevel(10)
                     .requireNGPlus(5);
-            JobRogue.requireAdvancedJobSlot()
-					.requirePerks(JobRanger, Evade)
-                    .requireSpe(25)
-                    .requireStr(25)
-                    .requireLevel(6);
             DualWieldSmall.requirePerks(DualWield, JobRogue)
-                    .requireLevel(6);
-            SneakyAttack.requirePerk(JobRogue)
                     .requireLevel(6);
             StarlightStrikes.requirePerk(JobRogue)
                     .requireSpe(60)
@@ -5206,7 +5203,8 @@ public class PerkLib
             Feint.requireAnyPerk(SneakyAttack, MarkedForDeath)
                     .requireSpe(50)
                     .requireLevel(12);
-            ImprovedEvade.requirePerks(JobRanger, Evade)
+            ImprovedEvade.requireAnyPerk(JobRanger, JobRogue)
+					.requirePerk(Evade)
                     .requireSpe(60)
                     .requireLevel(12);
             PracticedShot.requirePerk(JobRanger)
@@ -7096,7 +7094,7 @@ public class PerkLib
                         return player.internalChimeraScore() >= 12;
                     }, "Twelve of any race internal mutations");
 			JobAllRounder.requireLevel(24)
-                    .requirePerks(JobBeastWarrior, JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobWarrior)
+                    .requirePerks(JobBeastWarrior, JobGuardian, JobLeader, JobRanger, JobRogue, JobSeducer, JobSorcerer, JobWarrior)
                     .requireStr(75)
                     .requireTou(75)
                     .requireSpe(75)
