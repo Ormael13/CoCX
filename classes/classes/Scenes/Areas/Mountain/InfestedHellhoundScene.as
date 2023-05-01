@@ -149,7 +149,8 @@ public class InfestedHellhoundScene extends BaseContent
 					if (player.hasStatusEffect(StatusEffects.WormPlugged)) player.addStatusValue(StatusEffects.WormPlugged, 1, 1 + rand(5));
 					else player.createStatusEffect(StatusEffects.WormPlugged, 1 + rand(5), 0, 0, 0);
 					player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged)); //Will be cleared when the WormPlugged effect ends
-					player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged),1); //Will be cleared when the WormPlugged effect ends
+					if (player.vaginas.length > 1)
+						player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged),1); //Will be cleared when the WormPlugged effect ends
 				}
 				player.sexReward("cum","Vaginal");
 				player.sexReward("cum","Anal");

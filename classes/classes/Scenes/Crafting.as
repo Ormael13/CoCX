@@ -610,6 +610,18 @@ private function craftingMaterialsMoonstone1Down():void {
 		}*/
 
 
+		public function feedAetherTwinsMaterialFromOreBad(itype:ItemType):void {
+			switch (itype) {
+				case useables.COP_ORE: BagSlot01 -= 1;
+					break;
+				case useables.TIN_ORE: BagSlot02 -= 1;
+					break;
+				//case useables.BRONZEB: return BagSlot03;
+				case useables.IRONORE: BagSlot04 -= 1;
+					break;
+			}
+			return;
+		}
 		public function roomForMaterial(itype:ItemType):Number {
 			switch (itype) {
 				case useables.COP_ORE: if (BagSlot01 < BagSlot01Cap) return BagSlot01;

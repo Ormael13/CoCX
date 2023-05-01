@@ -85,7 +85,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-In Camp Actions > Misc menu added option to combine or separate specific weapons. For example 2 Kama weapons combine into 1 Dual Kama weapon or separate 1 Dual Kama into 2 Kama weapons.\n");
 			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
-			outputText("-Dual Daggers, ANgst Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
+			outputText("-Dual Daggers, Angst Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
 			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
 			outputText("-To better match their status as legendary weapons their atk been increased: Artemis & Wild Hunt (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer (60 > 210 (at 270+ str)), Lifehunt Scythe (25 > 90 (at 100+ str)), Seraph Spear & Demon Snake Spear (20 > 60 (at 100+ spe)), ");
 			outputText("Winged Greataxe & Demonic Greataxe (28 > 100 (at 100+ str)), Moonlit Snow (40 > 115 (at 100+ spe)), Chaos Blade (45 > 135 (at 100+ spe)), Masamune Katana (32 > 112 (at 100+ spe)), Blood Letter katana (42 > 132 (at 100+ spe)), Queen's Guard Rapier (27,5 > 80 (at 100+ spe)), Black Widow Rapier (27,5 > 80 (at 100+ spe)), Unicorn Staff (10 > 23 (at 50+ str), spellpower bonus based on purity 400% > 600%), ");
@@ -121,7 +121,7 @@ public class Changelog extends BaseContent
 			outputText("-Desert Eagle was replaced by Six shooter as firearm needed to make legendary firearm Good Samaritan / Blood Omen.\n");
 			outputText("-Many fixes to gargoyle. (Liadri)\n");
 			outputText("-Poultice super potent healing was brought to more realistic amounts with HP scaling increased from 15% to 20%. And scaling would be based on max Over HP so all those bloody PC's wouldn't find this useless now ;)\n");
-			outputText("-Demon Scythe will no longer corrupt PC as it will be effect on Hellraizer now. Also selfcorrupt and selfpurify effects would be made ~3x stronger.\n");
+			outputText("-Demon Scythe will no longer corrupt PC as it will be effect on Hellraizer now. Also selfcorrupt and selfpurify effects would be ~3x stronger.\n");
 			outputText("-New melee weapon (by Ormael): Angst dagger - buyable at Eraendir shop. Cost 1680 gems. Base atk is 21, Low grade wrath weapon (small), increase damage multiplier on sneak attacks by 200% of base value, max base atk value reached at 300+ speed and 60+ strength.\n");
 			outputText("-\n");
 			outputText("-\n");

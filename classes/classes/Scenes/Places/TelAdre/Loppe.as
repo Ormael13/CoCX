@@ -2406,16 +2406,20 @@ private function loppePregMenu():void {
 	addButton(2,"Sex",loppePreggoSexChoice)
 			.disable("Scenes not yet written but placeholders to give ideas. Please contribute if you can");
 	 addButton(3, "Contraception", toggleContraception).hint("Currently: "+(flags[kFLAGS.LOPPE_FERTILE] == 1?"Off":"On"), "Contraceptives");
-	addButton(4,"Leave",telAdre.telAdreMenu);
-	//Leave (Return to Tel'Adre menu)
+	addButton(4,"Leave",telAdre.telAdreMenu);	//Leave (Return to Tel'Adre menu)
+	addButton(5, "Snuggle", loppePreggoSnuggle);
+	addButton(6, "Massage", loppePreggoMassage)
+			.disable("Scenes not yet written but placeholders to give ideas. Please contribute if you can");
 }
+
 private function loppePreggoSexChoice():void {
+	clearOutput();
+	outputText("You look down at the bunny-girl’s splayed form. Your eyes gravitate to her large equine member, barely covered by her kimono now that her pregnant belly is taking most of it. You do not know why, but you can’t help but find this situation somewhat arousing. When Loppe notices you staring, she gives you a coy smile. “<i>You know, I might not be as energetic as before,</i>” she lifts her legs, giving you a nice view of her awaiting box and stiffening member, “<i>but if you’re offering, I won’t say no.</i>” You give a sultry smile and approach the awaiting bunny-girl.[pg]")
+	outputText("How do you want to take her?")
 	menu();
-	addButton(0, "Snuggle", loppePreggoSnuggle);
-	addButton(1, "Massage", loppePreggoMassage);
-	addButton(2, "Fuck Her", loppePreggoGetFucked).disableIf(!player.hasCock(), "You need a dick to do this");
-	addButton(3, "Get Fucked", loppePreggoFuckPC).disableIf(!player.hasVagina(), "You need a vagina to do this");
-	addButton(4, "Not now", loppePregMenu);
+	addButton(0, "Fuck Her", loppePreggoGetFucked).disableIf(!player.hasCock(), "You need a dick to do this");
+	addButton(1, "Loppe Leads", loppePreggoFuckPC).disableIf(!player.hasVagina(), "You need a vagina to do this");
+	addButton(2, "Not now", loppePregMenu);
 }
 
 private function loppeGivesBirth():void {	//TODO
@@ -2424,6 +2428,7 @@ private function loppeGivesBirth():void {	//TODO
 	flags[kFLAGS.LOPPE_KIDS] += 2;
 	doNext(playerMenu);
 }
+
 public function loppePregAppearance():void {
 	switch (pregnancy.event) {
 		case 1:
@@ -2439,6 +2444,7 @@ public function loppePregAppearance():void {
 		case 9: outputText("Loppe's pregnancy has caused her to seek out a bench, apparently for the comfort of its padded seats..  Looking at the sheer size of her, she's doubtlessly going to pop any day now.");
 	}
 }
+
 public function loppePreggoApproached():void {
 	clearOutput();
 	switch (pregnancy.event) {
@@ -2451,24 +2457,53 @@ public function loppePreggoApproached():void {
 			break;
 		case 4:
 		case 5:
-		case 6: outputText("Loppe smiles as you approach her on the bench.  Her belly now bulges forward, unmistakably pregnant. She has started wearing a midriff-baring t-shirt, which accentuates her belly all the more, looking quite sexy.  \"<i>Hey there, [name], nice seeing you around here.  So... do you want to do something?  Talk, maybe?  This kits are taking quite a lot out of me so Im not feeling mush up to our usual 'workout', but if you wanna have a snuggle I could be up for it.</i>\" she says with a lazy grin.");
+		case 6: outputText("Loppe looks at you and gives you a lazy but cute smile.  Her belly now bulges forward, unmistakably pregnant. She has started wearing a midriff-baring t-shirt, which accentuates her belly all the more, looking quite sexy.  \"<i>Hey, [name], nice seeing you again... do you want to do something or…</i>\". She suddenly stops and looks around before continuing. “<i>You know what, I’ve been feeling pretty burnt out ever since you put this little guy in me,</i>” she says while massaging her belly, “<i>why don’t we continue this at my place, I could use some company.</i>” You smile and happily agree, to which Loppe seems overjoyed. She quickly goes to clocks out before rejoining you as the two of you leave the gym and make your way to her home.\n\nLoppe, clearly exhausted from the relatively short journey, immediately drops her full weight on her bed. She lays there, arms out, and lets loose a long sigh. “<i>So, where were we?</i>”");
 			loppePregMenu();
 			break;
 		case 7:
-		case 8: outputText("Loppe smiles as you approach her on the bench.  Her belly is looking positively gravid and your bunny-girl has such a serene, almost sleepy expression she might just doze off where she sits on the padded bench. You can see the occasional bulge or ripple as your child kicks in her womb, rather to be expected of bunny kits, growing strong and healthy.  Damp spots have grown on her t-shirt from her budding milk supply, though she seems oblivious to it as of yet.  \"<i>Hey there, [name], nice seeing you around here.  So... do you maybe feel up to a nice snooze with me or a cuddle?  Talk, maybe?  This kits are taking so much out of me that I barely feel like doing anything lately.</i>\" she says with a lazy grin.");
+		case 8: outputText("Loppe looks at you and gives you a lazy but cute smile as you approach her on the bench.  Her belly is looking positively gravid and your bunny-girl has such a serene, almost sleepy expression she might just doze off where she sits on the padded bench. You can see the occasional bulge or ripple as your kits kick in her womb, rather to be expected of bunny kits, growing strong and healthy.  Damp spots have grown on her t-shirt from her budding milk supply, though she seems oblivious to it as of yet.  \"<i>Hey there, [name], nice seeing you around here.  So... do you maybe feel up to a nice snooze with me or a cuddle? This kits are taking so much out of me that I barely feel like doing anything lately.</i>\" she says with a lazy grin. “<i>Why don’t we continue this at my place, I could use some company.</i>” You smile and happily agree, to which Loppe seems overjoyed. She quickly goes to clocks out before rejoining you as the two of you leave the gym and make your way to her home.\n\nLoppe, clearly exhausted from the relatively short journey, immediately drops her full weight on her bed. She lays there, arms out, and lets loose a long sigh. “<i>So, where were we?</i>”");
 			loppePregMenu();
 			break;
 		case 9:
 			loppeGivesBirth();
+			pregnancy.knockUpForce(); //Clear Pregnancy
 			break;
 	}
 }
 
 private function loppePreggoSnuggle():void {
+	clearOutput();	//Basic idea is Loppe and PC go back to Loppes house and snuggle on the bed with some belly rubs (for whoever is pregnant), if Loppe and PC preg at same time with Loppe kits, do some mutual belly rubs, and fall alseep together for an hour
+	outputText("You look over Loppe as she is splayed open on her bed. Her kimono is draped over her very pregnant stomach, leaving barely anything left to cover her massive equine member. You approach her bed and lay down next to her. She turns to face you, and the two of you lay there for a while, staring into each other’s eyes.");
+	if (player.tallness >= 74) {
+		outputText("You say nothing as you reach out and pull her small body on top of you, shoving her face in your [fullchest]. Loppe is surprised and even makes a small peep, but shows little resistance. Soon, she wraps her arms around you and rubs her face on you. The two of you close your eyes and start cuddling. You feel relaxed, reminded of the feeling of cuddling a child. Slowly, you begin to unwrap your arms from her and reach down. You caress her baby bump, feeling the smoothness of her olive skin.[pg]");
+	} else {
+		outputText("You approach the splayed bunny-girl and climb into bed beside her. Before you could even lay down next to her, you suddenly feel yourself getting pulled, and your face gets buried in Loppe’s supple C-cup breasts. You feel her hands pressing your face into her to the point where you feel as if you would suffocate. You quickly give her arms a few quick pats, almost as if you were surrendering a fight you didn’t know you were having after getting caught in a chokehold. “<i>Oh, sorry sweety</i>” you hear her say as she loosens her grip. You quickly face upwards, gasping for air, and when you do, your eyes meet Loppe’s. She gives you a coy smirk as she rests her hands on your head and begins massaging your scalp. You feel like a small stuffed toy being lovingly cudled by a child. It feels good, by Mareth it feels good.[pg]");
+		outputText("You reach one of your arms down, feeling her baby bump and you slowly start massaging her. The bunny-girl exposes a comforting look and closes her eyes in relaxation.[pg]")
+	}
+	menu();
+	addButton(0, "Take a nap", snuggleNap);
+	addButton(0, "Lewd it up", snuggleLewds)
+			.disable("Scenes written but not yet added");
+}
+
+private function snuggleNap():void {
 	clearOutput();
-	outputText("SCENE NEEDS WRITING[pg]");
-	outputText("Basic idea is Loppe and PC go back to Loppes house and snuggle on the bed with some belly rubs (for whoever is pregnant), if Loppe and PC preg at same time with Loppe kits, do some mutual belly rubs, and fall alseep together for an hour");
-	doNext(camp.returnToCampUseOneHour);
+	outputText("The two of you drift off to dreamland, still holding tightly to one another, dreaming of the little bunny babies soon to be brought into this world.[pg]");
+	outputText("You wake slowly after about two hours to yourself lying next to Loppe, being cuddled by her. You feel a soft kick from her belly pressed against you and realise that must be what woke you. You look over at your lover, still snoozing like a baby. Weird, usually she wakes up before you. You slowly get up from her bed, careful not to wake your slumbering soulmate and get ready to leave. Bewfore you do, you watch her sleep with such a dreamy look on her face, as one of her hands unconsciously rubs her baby bump. The normally lust-driven bunny-girl, now reduced to the sleeping beauty before your eyes. You can’t help but feel proud of your handy work. You reach down and feel her pregnant belly, rubbing it softly. [pg]");
+	outputText("Suddenly, Loppe’s eyelids begin to flutter open. You are startled as she suddenly begins moving, trying to sit up. “Hmm... hello?” she says, clearly still half-asleep. You chuckle, helping her up, telling her you’re still here. She wipes the rheum from her eyes and turns to face you before a smile breaks across her face. “<i>Oh [name], I didn’t expect you to... yawns... still be here</i>”. She wraps her arms around you, pulling you in for a deep kiss. The two of you hold that kiss for a good long while before finally breaking it.[pg]");
+	outputText("“<i>Today was lovely, please, feel free to make this a habit.</i>” she says with a lazy smile. You thank her and tell her to take care of herself. At this, you bid your farewell and finally depart.")
+	doNext(camp.returnToCampUseTwoHours);
+}
+
+private function snuggleLewds():void {
+	clearOutput();
+	outputText("");
+
+	snuggleEndLewd();
+}
+
+private function snuggleEndLewd():void {
+
 }
 
 private function loppePreggoMassage():void {
