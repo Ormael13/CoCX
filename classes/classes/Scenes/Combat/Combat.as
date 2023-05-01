@@ -1287,7 +1287,7 @@ public class Combat extends BaseContent {
 	public function Poultice():void {
         clearOutput();
         var power:Number = CalcAlchemyPower();
-        power += (player.maxHP()*0.15)+(power*0.01*player.maxHP());
+        power += (player.maxOverHP()*0.2);
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         Math.round(power);
         HPChange(power,false);
@@ -4483,6 +4483,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
+        if (player.weaponRange == weaponsrange.SIXSHOT) player.ammo = 6;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
         if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
@@ -5612,7 +5613,7 @@ public class Combat extends BaseContent {
 		if (player.weapon == weapons.BFGAUNT || player.hasAetherTwinsTier2()) damage *= 2;
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 		if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
-		if (player.weapon is ArmageddonBlade) damage *= 1.25;
+		if (player.weapon == weapons.ARMAGED) damage *= 1.5;
         if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
             if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) damage *= 1.1;
             else damage *= 1.05;
@@ -5815,7 +5816,7 @@ public class Combat extends BaseContent {
             if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 6) bMXPMulti += 5;
 			baseMasteryXP *= bMXPMulti;
         }
-        if (player.weapon == weapons.CHAOSEA) baseMasteryXP *= 3;
+        if (player.weapon == weapons.CHAOSEA) baseMasteryXP *= 4;
         var masteryXPCrit:Number = baseMasteryXP * crit * 2;
         if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) masteryXPCrit *= 2;
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
@@ -6241,9 +6242,9 @@ public class Combat extends BaseContent {
                         }
                     }
                     //Selfcorrupting weapons
-                    if ((player.weapon == weapons.DEMSCYT || player.weapon == weapons.EBNYBLD) && player.cor < 90) dynStats("cor", 0.3);
+                    if ((player.weapon == weapons.HELRAIS || player.weapon == weapons.EBNYBLD) && player.cor < 90) dynStats("cor", 1);
                     //Selfpurifying and Lust lowering weapons
-                    if ((player.weapon == weapons.LHSCYTH || player.weapon == weapons.NPHBLDE) && player.cor > 10) dynStats("cor", -0.3);
+                    if ((player.weapon == weapons.LHSCYTH || player.weapon == weapons.NPHBLDE) && player.cor > 10) dynStats("cor", -1);
                     if (player.weapon == weapons.EXCALIB) {
                         if (player.cor > 10) dynStats("cor", -0.3);
                         var excaliburLustSelf:Number;
@@ -7435,7 +7436,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
 			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) restoreamount += 1;
 			if (player.weapon == weapons.LHSCYTH) restoreamount += 1;
-			if (player.weapon == weapons.T_HEART || player.weapon == weapons.DORSOUL || player.weapon == weapons.ARMAGED) restoreamount += 0.5;
+			if (player.weapon == weapons.T_HEART || player.weapon == weapons.DORSOUL || player.weapon == weapons.ARMAGED) restoreamount += 1;
             if (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small")) HPChange(Math.round(player.maxHP() * restoreamount * 0.005), false);
             else if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) HPChange(Math.round(player.maxHP() * restoreamount * 0.02), false);
             else if (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Massive")) HPChange(Math.round(player.maxHP() * restoreamount * 0.04), false);
@@ -7461,9 +7462,9 @@ public class Combat extends BaseContent {
 			var transferedWrath:Number = 0;
 			var devouredMana:Number = 0;
 			var transferedMana:Number = 0;
-			if (monster.wrath > 400) {
-				monster.wrath -= 400;
-				transferedWrath += 200;
+			if (monster.wrath > 1000) {
+				monster.wrath -= 1000;
+				transferedWrath += 500;
 			} else {
 				devouredWrath = monster.wrath;
 				monster.wrath = 0;
@@ -7473,9 +7474,9 @@ public class Combat extends BaseContent {
 				outputText("(+" + transferedWrath + " wrath)");
 				player.wrath += transferedWrath;
 			}
-			if (monster.mana > 400) {
-				monster.mana -= 400;
-				transferedMana += 200;
+			if (monster.mana > 1000) {
+				monster.mana -= 1000;
+				transferedMana += 500;
 			} else {
 				devouredMana = monster.mana;
 				monster.mana = 0;
@@ -11554,6 +11555,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
+        if (player.weaponRange == weaponsrange.SIXSHOT) player.ammo = 6;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
         if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;

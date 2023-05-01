@@ -19,10 +19,12 @@ public class Pregnancy extends NPCAwareContent {
     public function updatePregnancy():Boolean {
         var displayedUpdate:Boolean = false;
         var pregText:String = "";
-        if((player.pregnancyIncubation <= 0 && player.pregnancy2Incubation <= 0 && player.buttPregnancyIncubation <= 0) ||
-                (player.pregnancyType == 0 && player.pregnancy2Type == 0 && player.buttPregnancyType == 0)) {
+        if(player.pregnancyType == 0 && player.pregnancy2Type == 0 && player.buttPregnancyType == 0) {
             return false;
         }
+        if (player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
+        if (player.pregnancy2Incubation < 2) player.knockUpForce(player.pregnancy2Type, 1, 1);
+        if (player.buttPregnancyIncubation < 2) player.buttKnockUpForce(player.buttPregnancyType, 1);
         //Cancel Heat
         if(player.inHeat) {
             EngineCore.outputText("\nYou calm down a bit and realize you no longer fantasize about getting fucked constantly.  It seems your heat has ended.\n");
@@ -1480,9 +1482,7 @@ public class Pregnancy extends NPCAwareContent {
                 }
             }
         }
-        if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
-        if (player.pregnancy2Incubation > 0 && player.pregnancy2Incubation < 2) player.knockUpForce(player.pregnancy2Type, 1, 1);
-        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) {
+        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT && player.pregnancyType != PregnancyStore.PREGNANCY_HARPY_HATCHING) {
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -2133,7 +2133,7 @@ public class Pregnancy extends NPCAwareContent {
                 displayedUpdate = true;
             }
         }
-        if(player.pregnancy2Incubation == 1 && player.pregnancy2Type != PregnancyStore.PREGNANCY_BENOIT) {
+        if(player.pregnancy2Incubation == 1 && player.pregnancy2Type != PregnancyStore.PREGNANCY_BENOIT && player.pregnancy2Type != PregnancyStore.PREGNANCY_HARPY_HATCHING) {
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -2572,7 +2572,7 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("Pain shoots through you as they pull open your cervix forcefully. You grip the ground and pant and push as the pains of labor overwhelm you. You feel your hips being forceably widened by the collective mass of the creatures moving down your birth canal. You spread your legs wide, laying your head back with groans and cries of agony as little white figures begin to emerge from between the lips of your abused pussy. Large innocent eyes, even larger ears, cute little muzzles, long slender pink tails all appear as the figures emerge. Each could be no larger than six inches tall, but they seem as active and curious as if they were already developed children. \n\n");
                     EngineCore.outputText("Two emerge, then four, eight... you lose track. They swarm your body, scrambling for your chest, and take turns suckling at your nipples. Milk does their bodies good, making them grow rapidly, defining their genders as the girls grow cute little breasts and get broader hips and the boys develop their little mouse cocks and feel their balls swell. Each stops suckling when they reach two feet tall, and once every last one of them has departed your sore, abused cunt and drunk their fill of your milk, they give you a few grateful nuzzles, then run off towards the forest, leaving you alone to recover.\n");
                 }
-                player.knockUpForce(); //Clear Pregnancy
+                player.knockUpForce(0, 0, 1); //Clear Pregnancy
                 if(player.averageLactation() > 0 && player.averageLactation() < 5) {
                     EngineCore.outputText("Your [chest] won't seem to stop dribbling milk, lactating more heavily than before.");
                     player.boostLactation(.5);
@@ -3011,7 +3011,7 @@ public class Pregnancy extends NPCAwareContent {
         }
         if (player.pregnancy2Type == PregnancyStore.PREGNANCY_BENOIT && player.pregnancy2Incubation <= 2) {
             if(model.time.hours != 5 && model.time.hours != 6) {
-                player.knockUpForce(player.pregnancyType, 3, 1); //Make sure eggs are only birthed early in the morning
+                player.knockUpForce(player.pregnancy2Type, 3, 1); //Make sure eggs are only birthed early in the morning
             }
             else {
                 player.knockUpForce(0,0,1); //Clear Pregnancy
@@ -3019,12 +3019,13 @@ public class Pregnancy extends NPCAwareContent {
                 SceneLib.bazaar.benoit.popOutBenoitEggs();
             }
         }
-        if (((player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) ||(player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING)) && SophieFollowerScene.HarpyEggReady) {
+        if ((player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING && player.pregnancyIncubation <= 2) ||
+            (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING && player.pregnancy2Incubation <= 2)) {
             if(model.time.hours != 5 && model.time.hours != 6) {
                 if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
-                if (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancyType, 3, 1); //Make sure eggs are only birthed early in the morning
+                if (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancy2Type, 3, 1); //Make sure eggs are only birthed early in the morning
             }
-            else {
+            else if (SophieFollowerScene.HarpyEggReady) {
                 if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) {
                     SophieFollowerScene.HarpyKids += 1;
                     player.knockUpForce(); //Clear Pregnancy
@@ -3048,6 +3049,10 @@ public class Pregnancy extends NPCAwareContent {
                         " Guess it's back to milking males of their semens for you.");
                 SophieFollowerScene.HarpyEggReady = false
                 displayedUpdate = true;
+            }
+            else {
+                if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
+                if (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancy2Type, 3, 1); //Make sure eggs are only birthed early in the morning
             }
         }
         return displayedUpdate;
