@@ -1056,7 +1056,7 @@ use namespace CoC;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("LGWrath") || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
+			return weaponSpecials("LGWrath") || weapon == game.weapons.ANGSTD1 || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -5123,8 +5123,7 @@ use namespace CoC;
 
 		public function removeAllRacialMutation():void {
 			updateRacialCacheIfNeeded();
-			PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
-
+			PermTFTrueMutations();
 			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
 				if (hasPerk(pPerks) && !pPerks.trueMutation){
 					removePerk(pPerks);

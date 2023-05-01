@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DesertCave.SandMother;
@@ -2096,8 +2097,10 @@ public class TestMenu extends BaseContent
 
 	public function FightTheDummy():void {
 		clearOutput();
-		outputText("Entering battle with The Dummy! Enjoy ^^");
-		startCombat(new TheDummy());
+		//outputText("Entering battle with The Dummy! Enjoy ^^");
+		//startCombat(new TheDummy());
+		outputText("Entering battle with Minotaur! Enjoy ^^");
+		startCombat(new Minotaur());
 	}
 	public function FightSuccubusGardener():void {
 		clearOutput();

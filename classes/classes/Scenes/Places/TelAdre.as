@@ -1309,7 +1309,7 @@ public function tripxiShopMainMenu2b():void {
 	menu();
 	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT2, weaponsrange.ADBSHOT, false);
 	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT2, weaponsrange.ADBSCAT, false);
-	//2
+	addButton(2, weaponsrange.SIXSHOT.shortName, buyItemT2, weaponsrange.SIXSHOT, false);
 	//3
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL, false);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Blight Ridge.");
@@ -1819,4 +1819,4 @@ public function meetingLunaCamp():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

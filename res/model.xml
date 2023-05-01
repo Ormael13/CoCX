@@ -1595,10 +1595,13 @@
         <cell rect="170,210,168,139" name="wings/bee" dx="20" dy="20"/>
         <cell rect="1,350,84,139" name="wings_bg/demon" dx="20" dy="20"/>
         <cell rect="86,350,83,139" name="wings/demon" dx="105" dy="20"/>
-        <cell rect="86,490,83,139" name="wings_front/demon" dx="105" dy="20"/>
+        <cell rect="86,490,83,139" name="wings_front/demon" dx="105" dy="20"/>		
         <cell rect="339,210,84,139" name="wings_bg/nightmare" dx="20" dy="20"/>
         <cell rect="424,210,83,139" name="wings/nightmare" dx="105" dy="20"/>
-        <cell rect="423,490,83,139" name="wings_front/nightmare" dx="105" dy="20"/>
+        <cell rect="423,490,83,139" name="wings_front/nightmare" dx="105" dy="20"/>		
+		<cell rect="1184,350,84,139" name="wings_bg/gargoyle" dx="20" dy="20"/>
+        <cell rect="1269,350,83,139" name="wings/gargoyle" dx="105" dy="20"/>
+        <cell rect="675,490,83,139" name="wings_front/gargoyle" dx="105" dy="20"/>
 		<cell rect="846,350,84,139" name="wings_bg/blackOracle" dx="20" dy="20"/>
         <cell rect="931,350,83,139" name="wings/blackOracle" dx="105" dy="20"/>
         <cell rect="507,490,83,139" name="wings_front/blackOracle" dx="105" dy="20"/>
@@ -4285,11 +4288,18 @@
 					<show part="wings_front/couatl_large"/>
 				</if>
             </case>
-            <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
+            <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2"><!--TODO sizes -->
                 <show part="wings/demon"/>
                 <show part="wings_bg/demon"/>
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/demon"/>
+				</if>
+            </case>
+			<case values="Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
+                <show part="wings/gargoyle"/>
+                <show part="wings_bg/gargoyle"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/gargoyle"/>
 				</if>
             </case>
 			<case values="Wings.NIGHTMARE">

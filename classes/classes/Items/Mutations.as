@@ -2378,7 +2378,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (rand(10) == 0 && changes < changeLimit) {
+        if (rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             if (rand(2) == 0 && player.ears.type != Ears.ELFIN) transformations.EarsElfin.applyEffect();
             else transformations.EarsBig.applyEffect();
@@ -4605,9 +4605,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears!
-        if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.BIG && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-			transformations.EarsElfin.applyEffect();
+			transformations.EarsBig.applyEffect();
             changes++;
         }
         // Remove gills
