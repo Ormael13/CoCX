@@ -80,13 +80,13 @@ package classes.Scenes.Areas.Forest
 						outputText("Using your superior combat skills you manage to avoid attack completely. ");
 						break;
 					case EVASION_EVADE:
-						outputText("Using your skills at evading attacks, you anticipate and sidestep wendigo attack. ");
+						outputText("Using your skills at evading attacks, you anticipate and sidestep nightmare attack. ");
 						break;
 					case EVASION_MISDIRECTION:
-						outputText("Using Raphael's teachings, you anticipate and sidestep wendigo attacks. ");
+						outputText("Using Raphael's teachings, you anticipate and sidestep nightmare attacks. ");
 						break;
 					case EVASION_FLEXIBILITY:
-						outputText("With your incredible flexibility, you squeeze out of the way of wendigo's attack. ");
+						outputText("With your incredible flexibility, you squeeze out of the way of nightmare's attack. ");
 						break;
 					case EVASION_UNHINDERED:
 						outputText("Using your superior combat skills you manage to avoid attack completely. ");

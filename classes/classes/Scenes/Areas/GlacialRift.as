@@ -201,8 +201,6 @@ use namespace CoC;
 			} else {
 				if (rand(2) == 0) {
 					var stonesHarvested:Number = 10;
-					var stonesCapacity:Number  = 300;
-					if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) stonesCapacity += 600;
 					outputText("You find a big amount of stone rubble in the rift and begin to harvest them for your constructions. ");
 					if (SceneLib.emberScene.followerEmber() || SceneLib.kihaFollower.followerKiha()) {
 						stonesHarvested += 10;
@@ -215,8 +213,8 @@ use namespace CoC;
 						} else outputText("Kiha");
 						outputText(" assist you into bringing as many as possible back to camp. ");
 					}
-					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < stonesCapacity) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
-					else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = stonesCapacity;
+					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < SceneLib.campUpgrades.checkMaterialsCapStones()) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
+					else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
 				} else {
 					var gemsFound2:int = 40 + rand(160);
 					outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\n Inside was " + String(gemsFound) + " gems! ");

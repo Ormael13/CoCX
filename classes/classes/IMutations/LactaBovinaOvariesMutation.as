@@ -24,7 +24,7 @@ public class LactaBovinaOvariesMutation extends IMutationPerkType
                 descS += ", +5% to lust resistance, increase lactation output by 200 mLs";
             }
             if (pTier >= 3){
-                descS += ", +5 to max tou an +10 to max str/lib, increase milk production by ~100%, +90 to max lust and Milk Blast cost is increaed to 200 lust but can be used more than once per fight";
+                descS += ", +5 to max tou an +10 to max str/lib, increase milk production by ~150%, +90 to max lust and Milk Blast cost is increased to 200 lust but can be used more than once per fight";
             }
             if (descS != "")descS += ".";
             return descS;

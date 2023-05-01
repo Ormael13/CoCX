@@ -884,6 +884,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Mining
 		saveFile.data.miningLevel = player.miningLevel;
 		saveFile.data.miningXP = player.miningXP;
+		//Farming
+		saveFile.data.farmingLevel = player.farmingLevel;
+		saveFile.data.farmingXP = player.farmingXP;
 		//Herbalism
 		saveFile.data.herbalismLevel = player.herbalismLevel;
 		saveFile.data.herbalismXP = player.herbalismXP;
@@ -1700,6 +1703,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.miningLevel = 0;
 		else
 			player.miningLevel = saveFile.data.miningLevel;
+		//Farming
+		if (saveFile.data.farmingXP == undefined)
+			player.farmingXP = 0;
+		else
+			player.farmingXP = saveFile.data.farmingXP;
+		if (saveFile.data.farmingLevel == undefined)
+			player.farmingLevel = 0;
+		else
+			player.farmingLevel = saveFile.data.farmingLevel;
 		//Herbalism
 		if (saveFile.data.herbalismXP == undefined)
 			player.herbalismXP = 0;

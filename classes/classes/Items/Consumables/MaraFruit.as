@@ -247,8 +247,8 @@ public class MaraFruit extends Consumable{
 		//Face
 		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
 			changes++;
-      outputText("\n\n");
-      CoC.instance.transformations.FaceHuman.applyEffect(false);
+			outputText("\n\n");
+			CoC.instance.transformations.FaceHuman.applyEffect(false);
 			outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look. <b>You have a human looking face again!</b>");
 		}
 		//Leaf Hair

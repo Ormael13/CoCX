@@ -171,7 +171,7 @@ use namespace CoC;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementAlabasterSupply(minedStones);
-				player.mineXP(1);
+				player.mineXP(player.MiningMulti());
 				findGem();
 				doNext(camp.returnToCampUseTwoHours);
 			}
@@ -186,7 +186,7 @@ use namespace CoC;
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.SAPPGEM, camp.returnToCampUseTwoHours);
-					player.mineXP(2);
+					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Sapphires you ended with unusable piece.");

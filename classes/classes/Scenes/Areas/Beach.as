@@ -249,7 +249,7 @@ import classes.Scenes.SceneLib;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);
-				player.mineXP(1);
+				player.mineXP(player.MiningMulti());
 				findGem();
 				doNext(camp.returnToCampUseTwoHours);
 			}
@@ -259,7 +259,7 @@ import classes.Scenes.SceneLib;
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.EMDGEM, camp.returnToCampUseTwoHours);
-					player.mineXP(2);
+					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Emeralds you ended with unusable piece.");

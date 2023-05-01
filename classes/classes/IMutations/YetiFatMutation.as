@@ -16,8 +16,11 @@ public class YetiFatMutation extends IMutationPerkType
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
+			var pDR:int = 5;
+			if (pTier >= 2) pDR += 10;
+			if (pTier >= 3) pDR += 20;
             if (pTier >= 1){
-                descS += "Gain damage reduction against attacks, increase strength of yeti ice breath by 50%";
+                descS += "Gain damage reduction (" + pDR + "%) against attacks, increase strength of yeti ice breath by 50%";
             }
             if (pTier >= 2){
                 descS += ", potency of Big Hand and Feet by 50%";
@@ -67,6 +70,9 @@ public class YetiFatMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
             return pBuffs;
         }
 

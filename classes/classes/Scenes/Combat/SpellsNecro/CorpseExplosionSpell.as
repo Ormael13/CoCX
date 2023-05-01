@@ -43,7 +43,7 @@ public class CorpseExplosionSpell extends AbstractNecroSpell {
 	
 	public function calcDebuffPower(monster:Monster, randomize:Boolean=true):Number {
 		var shatterIt:Number = 0.2;
-		shatterIt *= boneSoulBonus(demonBonesCost())
+		shatterIt *= boneSoulBonus(demonBonesCost());
 		return shatterIt;
 	}
 	

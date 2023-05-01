@@ -45,7 +45,7 @@ public class GoblinRace extends Race {
 				game.transformations.FaceHuman,
 				game.transformations.FaceAnimalTeeth
 			]),
-			game.transformations.EarsElfin,
+			game.transformations.EarsBig,
 			game.transformations.SkinPlain,
 			game.transformations.SkinColor(GoblinSkinColors),
 			game.transformations.EyesHuman,
@@ -65,7 +65,7 @@ public class GoblinRace extends Race {
 		
 		addScores()
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS), +1)
-				.earType(Ears.ELFIN, +1, -1000)
+				.earType(Ears.BIG, +1, -1000)
 				.height(LESS_THAN(48), +1)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)

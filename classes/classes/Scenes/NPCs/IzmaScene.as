@@ -229,22 +229,25 @@ private function readSharkCuntManual2():void {
 	statScreenRefresh();
 
 	//(One of the following random effects happens)
-	var choice:Number = rand(3);
+	var choice:Number = rand(4);
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.");
-		//(+2 Toughness)
 		dynStats("tou", 2);
 		player.KnowledgeBonus("tou",2);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
-		//(+2 Intelligence)
 		dynStats("int", 2);
 		KnowledgeBonus("int",2);
 	}
+	
+	else if(choice == 2) {
+		outputText("You learn a few new fast striking stances that seem decent.");
+		dynStats("spe", 2);
+		KnowledgeBonus("spe",2);
+	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
-		//(+2 Strength)
 		dynStats("str", 2);
 		player.KnowledgeBonus("str",2);
 	}
@@ -1349,8 +1352,7 @@ public function izmaFollowerMenu():void {
 		mishapsLunaIzma();
 		return;
 	}
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
-	{
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 	//Izma pops 'em out!
 		if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 			IzmaPoopsBabies();
@@ -1378,10 +1380,8 @@ public function izmaFollowerMenu():void {
 			default:
 		}
 	}
-	else
-	{
+	else {
 		outputText("Izma smiles and puts away her book at your approach.");
-
 		outputText("\n\n\"<i>What can I do for you, Alpha?</i>\"");
 	}
 	if (flags[kFLAGS.IZMA_BROFIED] > 0) {
@@ -1421,14 +1421,19 @@ public function izmaFollowerMenu():void {
 			.disableIf(flags[kFLAGS.IZMA_BROFIED] == -1 && !sceneHunter.other,
 				"You can't do that again.\n\n<b>Unless you enable something in SceneHunter.</b>");
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) {
-		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant) addButton(10, "Farm Work", sendToFarm);
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "Izma" && flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "Izma" && flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "Izma") addButton(10, "Farm Work", sendToFarm);
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(10, "Go Camp", backToCamp);
 	}
-	addButton(11,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu)
+	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
+		if (camp.FisheryWorkersCount() < camp.FisheryMaxWorkersCount() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) addButton(11, "Fishery Work", sendToFishery);
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Izma" || flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Izma" || flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Izma") addButton(11, "Stop Work", backFromFishery);
+	}
+	else addButtonDisabled(11, "???", "You need to have functional fishery first.");
+	addButton(12,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu)
 		.disableIf(flags[kFLAGS.IZMA_NO_COCK], "She needs a cock for this!")
 		.disableIf(!latexGirl.latexGooFollower() || flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] == 0, "", "???");
 	if (valeria.valeriaFluidsEnabled())
-		addButton(12,"Valeria",izmaValeriaSubmenu)
+		addButton(13,"Valeria",izmaValeriaSubmenu)
 			.disableIf(flags[kFLAGS.IZMA_NO_COCK], "She needs a cock for this!");
 	addButton(14, "Back", flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] ? SceneLib.farm.farmCorruption.rootScene : camp.campLoversMenu);
 }
@@ -1437,15 +1442,10 @@ private function sendToFarm():void
 {
 	clearOutput();
 	izmaSprite();
-
 	outputText("You tell your beta that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Izma’s brow furrows as she takes this in.");
-
 	outputText("\n\n\"<i>If you say so, alpha. It’ll be nice to be near the lake again, but... have I done something wrong?</i>\"");
-
 	outputText("\n\n\"<i>Not at all,</i>\" you reply. \"<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>\" This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
-
 	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labor and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
-
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 1;
 	doNext(playerMenu);
 }
@@ -1454,14 +1454,32 @@ private function backToCamp():void
 {
 	clearOutput();
 	izmaSprite();
-
 	outputText("You tell her to head back to camp; she will be more use to her alpha there.");
-
 	outputText("\n\n\"<i>Whatever you say.</i>\" She grins and wrinkles her nose. \"<i>It was nice to be by the lake again, but I’m glad to get out of here: farm work isn't exactly stimulating.</i>\" You leave Izma to pack up her things and go.");
-
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
-
 	doNext(SceneLib.farm.farmCorruption.rootScene);
+}
+
+private function sendToFishery():void
+{
+	clearOutput();
+	izmaSprite();
+	outputText("Information Noona here: So you bossy today and asked Izma to work at fishery.... very clever.");
+	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "Izma";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "Izma";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "Izma";
+	doNext(izmaFollowerMenu);
+}
+
+private function backFromFishery():void
+{
+	clearOutput();
+	izmaSprite();
+	outputText("Information Noone reminds your sub tigershark no longer work at fishery.");
+	if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_1] = "";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_2] = "";
+	else if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Izma") flags[kFLAGS.FOLLOWER_AT_FISHERY_3] = "";
+	doNext(izmaFollowerMenu);
 }
 
 //Get a tiger shark tooth
@@ -2535,7 +2553,7 @@ private function campCuntManual():void {
 	clearOutput();
 	outputText("You ask Izma if she'd like to read one of the many issues of the 'Combat Manual' with you.  She gives a snigger and grabs a random issue. \"<i>Of course.  But I honestly never thought someone as good as you would need any more tips in combat,</i>\" she teases, getting comfy on a rock.  You sit beside her to read, and retort that, if anything, you're using the chance to give her combat tips.  Izma shoots you a half-hearted dirty look in response, but you think she knows you're teasing her.\n\n");
  	flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] = 11;
-	var choice:Number = rand(3);
+	var choice:Number = rand(4);
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.");
 		player.KnowledgeBonus("tou",2);
@@ -2543,6 +2561,10 @@ private function campCuntManual():void {
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.");
 		player.KnowledgeBonus("int",2);
+	}
+	else if(choice == 2) {
+		outputText("You learn a few new fast striking stances that seem decent.");
+		player.KnowledgeBonus("spe",2);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");

@@ -766,10 +766,12 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There are two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			outputText("Some of your friends are currently sparring at the ");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) outputText("massive");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 7) outputText("massive");
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) outputText("large");
 			else outputText("small");
-			outputText(" ring toward side of your [camp].");
+			outputText(" ring");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 5) outputText(" with wooden floor");
+			outputText(" toward side of your [camp].");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring, maybe it's a little excessive for even the largest of people around.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" A small stand rests adjacent, allowing spectators to cheer on any duels taking place.");
 			outputText("\n\n");
@@ -782,22 +784,22 @@ public class Camp extends NPCAwareContent{
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) outputText("Four large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("Three large arcane circles are");
 			else if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("Two large arcane circles are");
-			else outputText("A large arcane circle is");
+			else outputText("Large arcane circle is");
 			outputText(" written at the edge of your [camp]. Their runes regularly glow with impulse of power.\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
-			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
-			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("A wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
-			else outputText("A small wooden dam drapes across the stream, slowing the passage of water");
+			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("Big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("Wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
+			else outputText("Small wooden dam drapes across the stream, slowing the passage of water");
 			outputText(".\n\n");
-		}
-		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
-			outputText("Not so far from it is your ");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
-			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
-			outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
+				outputText("Not so far from it is your ");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 1) outputText("small");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
+				outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
+			}
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
 			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) outputText("At the corner of camp where you planted a seed, a sapling has grown. It has dozens of branches and bright green leaves.\n\n");
@@ -1130,6 +1132,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) counter++;
 		if (flags[kFLAGS.TIFA_FOLLOWER] > 5) counter++;
+		if (etnaScene().etnaTotalKids() > 0) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.FOLLOWER)) {
 				counter++;
@@ -1297,6 +1300,7 @@ public class Camp extends NPCAwareContent{
 
 	public function nightTimeActiveLovers():Number {
 		var counter:Number = 0;
+		if (DivaScene.instance.isCompanion()) counter++;
 		return counter;
 	}
 
@@ -2113,13 +2117,16 @@ public class Camp extends NPCAwareContent{
 		addButton(3, "Spend Time", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
 		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
-		addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
+		//addButtonDisabled(6, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
+		if (SceneLib.garden.canAccessGarden()) addButton(6, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants.");
+		else addButtonDisabled(6, "Garden", "Req. to have Herb bag of any sort.");
+		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
 		addButton(8, "Materials", SceneLib.crafting.accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(Crafting.BagSlot01Cap <= 0, "You'll need a bag to do that.");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(AdventurerGuild.Slot01Cap <= 0, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
-		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
+		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -2142,7 +2149,7 @@ public class Camp extends NPCAwareContent{
 		addButton(14, "Back", campActions);
 	}
 
-	private function campBuildingSim():void {
+	public function campBuildingSim():void {
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
@@ -2211,6 +2218,7 @@ public class Camp extends NPCAwareContent{
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
 		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
+		addButton(13, "C & S", menuForCombiningAndSeperating).hint("Combining & Seperating");
 		addButton(14, "Back", campActions);
 	}
 	private function convertingEnergyCoreIntoFlagValue():void {
@@ -2226,6 +2234,48 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(useables.MECHANI, 1);
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		doNext(campMiscActions);
+	}
+	
+	public function menuForCombiningAndSeperating():void {
+		clearOutput();
+		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons.");
+		menu();
+		var btn:int = 0;
+		if (player.itemCount(weapons.KAMA) > 1) addButton(btn++, "D.Kama", menuCombining, weapons.KAMA, weapons.D_KAMA).hint("Combine 2 Kama into Dual Kama");
+		if (player.itemCount(weapons.D_KAMA) > 0) addButton(btn++, "Kama", menuSeparating, weapons.D_KAMA, weapons.KAMA).hint("Separate Dual Kama into 2 Kama");
+		if (player.itemCount(weapons.DAGGER) > 1) addButton(btn++, "D.Daggers", menuCombining, weapons.DAGGER, weapons.DDAGGER).hint("Combine 2 Daggers into Dual Daggers");
+		if (player.itemCount(weapons.DDAGGER) > 0) addButton(btn++, "Dagger", menuSeparating, weapons.DDAGGER, weapons.DAGGER).hint("Separate Dual Daggers into 2 Daggers");
+		if (player.itemCount(weapons.BFSWORD) > 1) addButton(btn++, "D.BF Swords", menuCombining, weapons.BFSWORD, weapons.DBFSWO).hint("Combine 2 BF Swords into Dual BF Swords");
+		if (player.itemCount(weapons.DBFSWO) > 0) addButton(btn++, "BF Sword", menuSeparating, weapons.DBFSWO, weapons.BFSWORD).hint("Separate Dual BF Swords into 2 BF Swords");
+		if (player.itemCount(weapons.BFTHSWORD) > 1) addButton(btn++, "D.BFTH Swords", menuCombining, weapons.BFTHSWORD, weapons.DBFTHSWO).hint("Combine 2 BF Two-Handed Swords into Dual BF Two-Handed Swords");
+		if (player.itemCount(weapons.DBFTHSWO) > 0) addButton(btn++, "BFTH Sword", menuSeparating, weapons.DBFTHSWO, weapons.BFTHSWORD).hint("Separate Dual BF Two-Handed Swords into 2 BF Two-Handed Swords");
+		if (player.itemCount(weapons.BFWHIP) > 1) addButton(btn++, "D.BF Whips", menuCombining, weapons.BFWHIP, weapons.DBFWHIP).hint("Combine 2 BF Whips into Dual BF Whips");
+		if (player.itemCount(weapons.DBFWHIP) > 0) addButton(btn++, "BF Whip", menuSeparating, weapons.DBFWHIP, weapons.BFWHIP).hint("Separate Dual BF Whips into 2 BF Whips");
+		if (player.itemCount(weapons.NODACHI) > 1) addButton(btn++, "D.Nodachi", menuCombining, weapons.NODACHI, weapons.DNODACHI).hint("Combine 2 Nodachi into Dual Nodachi");
+		if (player.itemCount(weapons.DNODACHI) > 0) addButton(btn++, "Nodachi", menuSeparating, weapons.DNODACHI, weapons.NODACHI).hint("Separate Dual Nodachi into 2 Nodachi");
+		if (player.itemCount(weapons.WHIP) > 1) addButton(btn++, "D. Whip", menuCombining, weapons.WHIP, weapons.PWHIP).hint("Combine 2 Whip into Dual Whip");
+		if (player.itemCount(weapons.PWHIP) > 0) addButton(btn++, "Whip", menuSeparating, weapons.PWHIP, weapons.WHIP).hint("Separate Dual Whip into 2 Whips");
+		if (player.itemCount(weapons.WARHAMR) > 1) addButton(btn++, "D.HWhamm", menuCombining, weapons.WARHAMR, weapons.D_WHAM_).hint("Combine 2 Huge Warahmmers into Dual Huge Warahmmer");
+		if (player.itemCount(weapons.D_WHAM_) > 0) addButton(btn++, "HWhamm", menuSeparating, weapons.D_WHAM_, weapons.WARHAMR).hint("Separate Dual Huge Warahmmer into 2 Huge Warahmmers");
+		if (player.itemCount(weapons.SUCWHIP) > 1) addButton(btn++, "P.S.Whips", menuCombining, weapons.SUCWHIP, weapons.PSWHIP).hint("Combine 2 Succubi Whips into Pair of Succubi Whips");
+		if (player.itemCount(weapons.PSWHIP) > 0) addButton(btn++, "S.Whips", menuSeparating, weapons.PSWHIP, weapons.SUCWHIP).hint("Separate Pair of Succubi Whips into 2 Succubi Whips");
+		addButton(14, "Back", campMiscActions);
+	}
+	public function menuCombining(weapon1: Weapon, weapon2: Weapon):void {
+		clearOutput();
+		outputText("Combining.\n\n");
+		player.destroyItems(weapon1, 2);
+		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
+	}
+	public function menuSeparating(weapon1: Weapon, weapon2: Weapon):void {
+		clearOutput();
+		outputText("Separating.\n\n");
+		player.destroyItems(weapon1, 1);
+		inventory.takeItem(weapon2, curry(menuSeparating1a, weapon2));
+	}
+	public function menuSeparating1a(weapon2: Weapon):void {
+		outputText("\n\n");
+		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}
 	
 	public function mainPagePocketWatch(page:int = 1):void {
@@ -2616,231 +2666,6 @@ public class Camp extends NPCAwareContent{
 		return dmSPPC;
 	}
 
-	private function HerbalismMenu():void {
-		hideMenus();
-		clearOutput();
-		menu();
-		outputText("You move to Rathazul’s side alchemy equipment. Using these tools you can process raw natural materials into poultices and medicines.\n\nWhat would you like to craft?");
-		//Poultrice
-		addButton(0, "Poultice", HerbalismCraftItem,CoC.instance.consumables.HEALHERB, "healing herb", PotionType.POULTICE).hint("Craft a Poultrice using healing herb.\n\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"")
-				.disableIf(player.itemCount(CoC.instance.consumables.HEALHERB) == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"");
-		//Energy drink
-		addButton(1, "Energy drink", HerbalismCraftItem,CoC.instance.consumables.MOONGRASS, "moon grass", PotionType.ENERGYDRINK).hint("Craft a Energy drink using moon grass.\n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
-		if (player.herbalismLevel < 2) button(1).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 2");
-		if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) button(1).disable("You lack the ingrediants to craft this item. \n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
-		//Cure
-		addButton(2, "Cure", HerbalismCraftItem,CoC.instance.consumables.SNAKEBANE, "snakebane flower", PotionType.CURE).hint("Craft a Cure using snakebane flower.\n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
-		if (player.herbalismLevel < 4) button(2).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 4");
-		if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) button(2).disable("You lack the ingrediants to craft this item. \n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
-		//Painkiller
-		addButton(3, "Painkiller", HerbalismCraftItem,CoC.instance.consumables.IRONWEED, "ironweed", PotionType.PAINKILLER).hint("Craft a Painkiller using ironweed.\n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
-		if (player.herbalismLevel < 6) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 6");
-		if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) button(3).disable("You lack the ingrediants to craft this item. \n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
-		//Stimulant
-		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.BLADEFERN, "blade ferns", PotionType.STIMULANT).hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
-		if (player.herbalismLevel < 8) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 8");
-		if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) button(4).disable("You lack the ingrediants to craft this item. \n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
-		//Perfume
-		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", PotionType.PERFUME).hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
-		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
-		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
-		//THE GARDEN!
-		addButton(10, "Garden", Garden).hint("Manage your garden of medicinal plants")
-		//.disableIf(1!=1, "You haven't built a garden yet."); //TO DO
-		addButton(14, "Back", campActions);
-	}
-
-	private function Garden():void{
-		hideMenus();
-		clearOutput();
-		menu();
-		//Checks if pc has this ingrediant growing
-		outputText("You move over to your gardening fields. You can plant and grow herbs here.");
-		//plants typicaly takes 1 week to grow from a single ingrediant into 5 new ingrediants sample player can use this button to go to the harvest selection
-		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingrediants.");
-		addFiveArgButton(2, "Harvest", Harvest, HarvestMoonScenes.harvestmoonstageHH >= 1, HarvestMoonScenes.harvestmoonstageMG >= 1, HarvestMoonScenes.harvestmoonstageSB >= 1, HarvestMoonScenes.harvestmoonstageIW >= 1, HarvestMoonScenes.harvestmoonstageBF >= 1).hint("Check your harvests.")
-		addButton(14, "Back", HerbalismMenu);
-	}
-
-	private function Seed():void{
-		hideMenus();
-		clearOutput();
-		menu();
-		outputText("What kind of herb would you like to grow?");
-		addButton(0, "Healing herb", Seed2,CoC.instance.consumables.HEALHERB).hint("Plant new seeds.");
-		if (HarvestMoonScenes.harvestmoonstageHH >= HarvestMoonScenes.HARVESTMOONPENDINGHH) addButtonDisabled(0,"Healing herb", "You already got crops growing.");
-		else if (player.itemCount(CoC.instance.consumables.HEALHERB) == 0) addButtonDisabled(0,"Healing herb", "You lack a plant sample to get seeds from.");
-		addButton(1, "Moon grass", Seed2,CoC.instance.consumables.MOONGRASS).hint("Harvest your ingrediants.");
-		if (HarvestMoonScenes.harvestmoonstageMG >= HarvestMoonScenes.HARVESTMOONPENDINGMG) addButtonDisabled(1,"Moon grass", "You already got crops growing.");
-		else if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) addButtonDisabled(1,"Moon grass", "You lack a plant sample to get seeds from.");
-		addButton(2, "Snakebane", Seed2,CoC.instance.consumables.SNAKEBANE).hint("Harvest your ingrediants.");
-		if (HarvestMoonScenes.harvestmoonstageSB >= HarvestMoonScenes.HARVESTMOONPENDINGSB) addButtonDisabled(2,"Snakebane", "You already got crops growing.");
-		else if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) addButtonDisabled(2,"Snakebane", "You lack a plant sample to get seeds from.");
-		addButton(3, "Ironweed", Seed2,CoC.instance.consumables.IRONWEED).hint("Harvest your ingrediants.");
-		if (HarvestMoonScenes.harvestmoonstageIW >= HarvestMoonScenes.HARVESTMOONPENDINGIW) addButtonDisabled(3,"Ironweed", "You already got crops growing.");
-		else if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) addButtonDisabled(3, "Ironweed","You lack a plant sample to get seeds from.");
-		addButton(4, "Blade fern", Seed2,CoC.instance.consumables.BLADEFERN).hint("Harvest your ingrediants.");
-		if (HarvestMoonScenes.harvestmoonstageBF >= HarvestMoonScenes.HARVESTMOONPENDINGBF) addButtonDisabled(4,"Blade fern", "You already got crops growing.");
-		else if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) addButtonDisabled(4,"Blade fern", "You lack a plant sample to get seeds from.");
-		addButton(14, "Back", Garden).hint("Go back to garden menu.");
-	}
-
-	public function Seed2(ItemID:SimpleConsumable):void{
-		hideMenus();
-		clearOutput();
-		outputText("Planting a new herb will consume one of your herb items, proceed anyway?");
-		doYesNo(curry(Seed3,ItemID), Seed);
-	}
-
-	public function Seed3(ItemID:SimpleConsumable):void{
-		clearOutput();
-		outputText("You begin carefully planting the");
-		player.destroyItems(ItemID, 1);
-		if (ItemID == CoC.instance.consumables.HEALHERB){
-			HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
-			outputText("healing herb");
-		}
-		if (ItemID == CoC.instance.consumables.MOONGRASS){
-			HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
-			outputText("moon grass");
-		}
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) {
-			HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
-			outputText("snakebane");
-		}
-		if (ItemID == CoC.instance.consumables.IRONWEED){
-			HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
-			outputText("ironweed");
-		}
-		if (ItemID == CoC.instance.consumables.BLADEFERN){
-			HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
-			outputText("bladefern");
-		}
-		outputText("into the fertile soil. It should grow back into several or more plants within a few days." +
-				" Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
-		var HE:Number = 20 + player.level;
-		HE *= player.HerbalismMulti();
-		player.herbXP(HE);
-		doNext(Seed);
-	}
-
-	private function Harvest(HealingHerb:Boolean = false, MoonGrass:Boolean = false, Snakebane:Boolean = false, Ironweed:Boolean = false, BladeFern:Boolean = false):void{
-		hideMenus();
-		clearOutput();
-		menu();
-		outputText("You take a tour of your garden and survey your crops for readied harvests.");
-		if (!HealingHerb && !MoonGrass && !Snakebane && !Ironweed && !BladeFern) outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
-		if (HealingHerb)
-		{
-			addButton(0, "Healing herb", Harvest2,CoC.instance.consumables.HEALHERB,"Healing herbs").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageHH != HarvestMoonScenes.HARVESTMOONREADYHH) addButtonDisabled(0,"Healing herb","Your crops are still growing.");
-		}
-		if (MoonGrass)
-		{
-			addButton(1, "Moon grass", Harvest2,CoC.instance.consumables.MOONGRASS,"Moongrass").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageMG != HarvestMoonScenes.HARVESTMOONREADYMG) addButtonDisabled(1,"Moon grass","Your crops are still growing.");
-		}
-		if (Snakebane)
-		{
-			addButton(2, "Snakebane", Harvest2,CoC.instance.consumables.SNAKEBANE,"Snakebane").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageSB != HarvestMoonScenes.HARVESTMOONREADYSB) addButtonDisabled(2,"Snakebane","Your crops are still growing.");
-		}
-		if (Ironweed)
-		{
-			addButton(3, "Ironweed", Harvest2,CoC.instance.consumables.IRONWEED,"Ironweed").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageIW != HarvestMoonScenes.HARVESTMOONREADYIW) addButtonDisabled(3,"Ironweed","Your crops are still growing.");
-		}
-		if (BladeFern)
-		{
-			addButton(4, "Blade fern", Harvest2,CoC.instance.consumables.BLADEFERN,"Blade ferns").hint("Harvest your ingrediants.");
-			if (HarvestMoonScenes.harvestmoonstageBF != HarvestMoonScenes.HARVESTMOONREADYBF) addButtonDisabled(4,"Blade fern","Your crops are still growing.");
-		}
-		addButton(14, "Back", Garden).hint("Go back to garden menu.")
-	}
-
-	public function Harvest2(ItemID:SimpleConsumable,IngrediantName:String):void{
-		hideMenus();
-		clearOutput();
-		menu();
-		if (ItemID == CoC.instance.consumables.HEALHERB) HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONNOTSTARTEDHH;
-		if (ItemID == CoC.instance.consumables.MOONGRASS) HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONNOTSTARTEDMG;
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONNOTSTARTEDSB;
-		if (ItemID == CoC.instance.consumables.IRONWEED) HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONNOTSTARTEDIW;
-		if (ItemID == CoC.instance.consumables.BLADEFERN) HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONNOTSTARTEDBF;
-		outputText("Click to collect your "+IngrediantName+".");
-		addButton(0, "Collect", curry(recoverHerbLoot,ItemID)).hint("Click to collect your "+IngrediantName+".");
-	}
-
-	public function recoverHerbLoot(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot2,ItemID));
-	}
-	public function recoverHerbLoot2(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot3,ItemID));
-	}
-	public function recoverHerbLoot3(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot4,ItemID));
-	}
-	public function recoverHerbLoot4(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,curry(recoverHerbLoot5,ItemID));
-	}
-	public function recoverHerbLoot5(ItemID:SimpleConsumable):void{
-		clearOutput();
-		inventory.takeItem(ItemID,recoverHerbLoot6);
-	}
-	public function recoverHerbLoot6():void{
-		clearOutput();
-		outputText("Youve collected all of the ingrediants.");
-		doNext(Harvest, HarvestMoonScenes.harvestmoonstageHH >= 1, HarvestMoonScenes.harvestmoonstageMG >= 1, HarvestMoonScenes.harvestmoonstageSB >= 1, HarvestMoonScenes.harvestmoonstageIW >= 1, HarvestMoonScenes.harvestmoonstageBF >= 1);
-	}
-
-	private function HerbalismCraftItem(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
-		clearOutput();
-		menu();
-		outputText("Refine "+IngrediantName+" into a "+CraftingResult.name+"?");
-		addButton(0, "Craft", HerbalismCraftItem2, ItemID, IngrediantName, CraftingResult);
-		addButton(1, "Craft All", HerbalismCraftItem3, ItemID, IngrediantName, CraftingResult);
-		addButton(2, "Cancel", HerbalismMenu);
-	}
-
-	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
-		clearOutput();
-		player.changeNumberOfPotions(CraftingResult,+1);
-		if (player.hasPerk(PerkLib.NaturalHerbalism)){
-			player.changeNumberOfPotions(CraftingResult,+2);
-		}
-		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+CraftingResult.name+" adding it to your bag.");
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
-			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal "+CraftingResult.name+".");
-		}
-		player.destroyItems(ItemID, 1);
-		var HE:Number = 20 + player.level;
-		HE *= player.HerbalismMulti();
-		player.herbXP(HE);
-		doNext(HerbalismMenu);
-	}
-
-	public function HerbalismCraftItem3(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
-		clearOutput();
-
-		player.changeNumberOfPotions(CraftingResult,player.itemCount(ItemID));
-		if (player.hasPerk(PerkLib.NaturalHerbalism)){
-			player.changeNumberOfPotions(CraftingResult,2*player.itemCount(ItemID));
-		}
-		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into multiple "+CraftingResult.name+" adding them to your bag.");
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
-			outputText("Your natural knowledge of herbalism allowed you to craft tice as many "+CraftingResult.name+".");
-		}
-		player.destroyItems(ItemID, player.itemCount(ItemID));
-		var HE:Number = (20 + player.level)*player.itemCount(ItemID);
-		HE *= player.HerbalismMulti();
-		player.herbXP(HE);
-		doNext(HerbalismMenu);
-	}
-
 	private function VisitFishery():void {
 		outputText("\n\nYou go check at the barrels for food.");
 		if (flags[kFLAGS.FISHES_STORED_AT_FISHERY] > 0) outputText(" There is currently " + flags[kFLAGS.FISHES_STORED_AT_FISHERY] + " fish in the barrel.");
@@ -2865,6 +2690,37 @@ public class Camp extends NPCAwareContent{
 			outputText("\n\nYou need more fish to bag out a bundle.");
 			doNext(VisitFishery);
 		}
+	}
+	
+	public function FisheryDailyProduction():Number {
+		var fishproduction:Number = 0;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "") {
+			fishproduction += 5;
+			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fishproduction += 1;
+		}
+		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) fishproduction -= 5;
+		return fishproduction;
+	}
+	public function FisheryWorkersCount():Number {
+		var fisheryworkers:Number = 0;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") fisheryworkers += 1;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "") fisheryworkers += 1;
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "") fisheryworkers += 1;
+		return fisheryworkers;
+	}
+	public function FisheryMaxWorkersCount():Number {
+		var fisherymaxworkers:Number = 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) fisherymaxworkers += 1;
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 3) fisherymaxworkers += 1;
+		return fisherymaxworkers;
 	}
 
 	private function MagicWardMenu():void {
@@ -3620,10 +3476,18 @@ public class Camp extends NPCAwareContent{
 		if (CoC.instance.timeQ == 0) {
 			CanDream = true;
 			model.time.minutes = 0;
-			if (model.time.hours >= 21)
-				CoC.instance.timeQ += 24-model.time.hours +6;
-			if (model.time.hours < 6)
-				CoC.instance.timeQ += 6-model.time.hours;
+			if (player.isNightCreature() == true)
+			{
+				if (model.time.hours >= 6 && model.time.hours <=21)
+						CoC.instance.timeQ += 15 - model.time.hours + 7;
+			}
+			else
+			{
+				if (model.time.hours >= 21)
+					CoC.instance.timeQ += 24-model.time.hours +6;
+				if (model.time.hours < 6)
+					CoC.instance.timeQ += 6-model.time.hours;
+			}
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
 				CoC.instance.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			}
@@ -4132,8 +3996,8 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
 		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
 				.hint("You need to explore Forest more to unlock this place.")
-				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
-				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
+				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Forest more to unlock this place.", null, "???")
+				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the forest.", null, "???");
 		bd.add("Quarry", camp.cabinProgress.quarrySite)
 				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
 				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
@@ -4714,6 +4578,7 @@ public function rebirthFromBadEnd():void {
 		var performancePointsPrediction:Number = 0;
 		//Companions
 		performancePointsPrediction += companionsCount();
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) performancePointsPrediction--;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] == 12) performancePointsPrediction++;
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePointsPrediction++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5 || player.hasStatusEffect(StatusEffects.ChiChiOff)) performancePointsPrediction++;
@@ -4767,17 +4632,15 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
 		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPrediction += 2;
 		//Children
-		var childPerformance:int = 0;
-		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
-		childPerformance += (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
-		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4) + (etnaScene().etnaTotalKids()));
-		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4) + flags[kFLAGS.AYANE_CHILDREN_MALES] + flags[kFLAGS.AYANE_CHILDREN_FEMALES] + flags[kFLAGS.AYANE_CHILDREN_HERMS] + flags[kFLAGS.LOPPE_KIDS]);
-		performancePointsPrediction += Math.sqrt(childPerformance);
+		possibleToGainAscensionPointsChildren();
 		//Various Level trackers
 		performancePointsPrediction += player.level;
 		if (player.level >= 42) performancePointsPrediction += (player.level - 41);
 		if (player.level >= 102) performancePointsPrediction += (player.level - 101);
 		if (player.level >= 180) performancePointsPrediction += (player.level - 179);
+		performancePointsPrediction += player.herbalismLevel;
+		performancePointsPrediction += player.miningLevel;
+		performancePointsPrediction += player.farmingLevel;
 		if (player.teaseLevel >= 25) {
 			performancePointsPrediction += 25;
 		}
@@ -4785,6 +4648,16 @@ public function rebirthFromBadEnd():void {
         performancePointsPrediction += getTotalWeaponMasteryLevels();
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
+	}
+	public function possibleToGainAscensionPointsChildren():Number {
+		var performancePointsPredictionChildren:Number = 0;
+		var childPerformance:int = 0;
+		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
+		childPerformance += (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
+		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4) + (etnaScene().etnaTotalKids()));
+		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4) + SceneLib.ayaneFollower.ayaneChildren() + flags[kFLAGS.LOPPE_KIDS]);
+		performancePointsPredictionChildren += Math.sqrt(childPerformance);
+		return performancePointsPredictionChildren;
 	}
 
     public static function getTotalWeaponMasteryLevels():Number{
@@ -4899,25 +4772,28 @@ public function rebirthFromBadEnd():void {
 		var pop:int = 0; //Once you enter Mareth, this will increase to 1.
 		if (!flags[kFLAGS.IN_INGNAM]) pop++; //You count toward the population!
 		pop += companionsCount();
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) pop--;
 		//------------
 		//Misc check!
 		if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
 		if (player.armor == armors.GOOARMR) pop++; //Include Valeria if you're wearing her.
+		if (player.weapon == weapons.AETHERD) pop++; //Include Aether D twin if you're wearing her.
+		if (player.shield == shields.AETHERS) pop++; //Include Aether S twin if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
 		//------------
 		//Children check!
 		//Followers
 		if (followerEmber() && emberScene.emberChildren() > 0) pop += emberScene.emberChildren();
+		if (flags[kFLAGS.MITZI_DAUGHTERS] > 0) pop += flags[kFLAGS.MITZI_DAUGHTERS];
 		if (SceneLib.ayaneFollower.ayaneChildren() > 0) pop += SceneLib.ayaneFollower.ayaneChildren();
 		//Jojo's offsprings don't stay in your camp; they will join with Amily's litters as well.
 		if (sophieFollower()) {
 			if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT]) pop += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
 		}
-
 		//Lovers
 		//Amily's offsprings don't stay in your camp.
-		//Helia can only have 1 child: Helspawn. She's included in companions count.
+		//Helia can only have 1 child: Helspawn. She's included in companions count. The same with Etna child.
 		if (isabellaFollower() && isabellaScene.totalIsabellaChildren() > 0) pop += isabellaScene.totalIsabellaChildren();
 		if (izmaFollower() && izmaScene.totalIzmaChildren() > 0) pop += izmaScene.totalIzmaChildren();
 		if (followerKiha() && kihaFollower.totalKihaChildren() > 0) pop += kihaFollower.totalKihaChildren();
@@ -4925,6 +4801,12 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
 		if (flags[kFLAGS.ZENJI_KIDS] > 0) pop += flags[kFLAGS.ZENJI_KIDS];
 		if (DriderTown.BelisaKids > 0) pop += DriderTown.BelisaKids;
+		if (DriderTown.LilyKidsPC > 0) pop += DriderTown.LilyKidsPC;
+		if (DriderTown.TyrantiaFemaleKids > 0) pop += DriderTown.TyrantiaFemaleKids;
+		if (DriderTown.TyrantiaMaleKids > 0) pop += DriderTown.TyrantiaMaleKids;
+		if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 0) pop += flags[kFLAGS.PC_GOBLIN_DAUGHTERS];
+		//From npcs that can be in more than one tab
+		if (SceneLib.excelliaFollower.totalExcelliaChildren() > 0) pop += SceneLib.excelliaFollower.totalExcelliaChildren();
 		//------------
 		//Return number!
 		return pop;
@@ -4939,4 +4821,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

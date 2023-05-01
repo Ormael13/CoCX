@@ -2532,7 +2532,7 @@ public function pcGivesBirthToLoppeKits(womb:int = 0):void {
 		player.addStatusValue(StatusEffects.BonusVCapacity, 1, 10);
 	}
 	camp.cheatSleepUntilMorning();
-	doNext(camp.returnToCampUseOneHour);
+	doNext(playerMenu);
 }
 }
 }

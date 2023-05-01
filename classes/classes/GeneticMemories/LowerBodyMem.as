@@ -514,6 +514,13 @@ package classes.GeneticMemories {
           title: "YukiOnna",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyYukiOnna}});
 
+      public static const YGG_ROOT_CLAWS: int = _partid++;
+      EnumValue.add(Memories, YGG_ROOT_CLAWS, "YGG_ROOT_CLAWS", {
+          id: "YggRootClaws Lower Body",name: "YggRootClaws Legs",
+          cost: 200,
+          title: "YggdrasilRootClaws",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyYgddrasilRootClaws}});
+
 
 
 

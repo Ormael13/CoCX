@@ -1899,6 +1899,7 @@ public class Pregnancy extends NPCAwareContent {
             if (player.pregnancyType == PregnancyStore.PREGNANCY_GOBLIN) {
                 player.boostLactation(.01);
                 player.knockUpForce(); //Clear Pregnancy
+				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;//Do not doNext to camp, pregnancy event set ups menu - also if this flag is used can skip adding "return false/true;"
                 SceneLib.camp.campScenes.goblinsBirthScene();
                 return false;
             }
@@ -2548,6 +2549,7 @@ public class Pregnancy extends NPCAwareContent {
             if (player.pregnancy2Type == PregnancyStore.PREGNANCY_GOBLIN) {
                 player.boostLactation(.01);
                 player.knockUpForce(0, 0, 1); //Clear Pregnancy
+				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;//Do not doNext to camp, pregnancy event set ups menu - also if this flag is used can skip adding "return false/true;"
                 SceneLib.camp.campScenes.goblinsBirthScene(1);
                 return false;
             }

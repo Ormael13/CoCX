@@ -2116,7 +2116,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.beardLength = 0;
 			player.beardStyle  = 0;
 			player.faceType = Face.ANIMAL_TOOTHS;
-			player.ears.type = Ears.ELFIN;
+			player.ears.type = Ears.BIG;
 			player.arms.type = Arms.WOLF;
 			player.lowerBody = LowerBody.WOLF;
 			player.legCount = 2;

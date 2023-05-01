@@ -6,6 +6,7 @@ package classes.Scenes.Areas.DefiledRavine {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.SceneLib;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Races;
@@ -191,18 +192,27 @@ public class DemonSoldierScene extends BaseContent {
         clearOutput();
         outputText("You make quick work of the demon before hauling the now-lifeless corpse away.");
         if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
-
         flags[kFLAGS.DEMON_SOLDIERS_KILLED]++;
         monster.additionalXP += 100; //YOU WON! You earned 20 EXP. Your LOVE increased.
         player.dynStats("cor", -1);
-        //Additional loot!
+		menu();
+		addButton(1, "Leave", killTheSoldierLeave);
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", killTheSoldierHarvest);
+		else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
+    }
+	private function killTheSoldierLeave():void {
+		//Additional loot!
         if (rand(8) == 0) {
             outputText("\n\nAs you're about to " + (player.isNaga() ? "slither" : "walk") + " away in satisfaction, you spot a glowing, pink crystal and a closer examination reveals it to be a lethicite. Why the demon hasn't even eaten it remains a mystery but either way, you're in luck to have recovered it before it gets eaten (and irreversibly absorbed) and you pocket it. ");
             inventory.takeItem(consumables.LETHITE, cleanupAfterCombat);
         }
         cleanupAfterCombat();
-    }
-
+	}
+	private function killTheSoldierHarvest():void {
+		SceneLib.defiledravine.demonScene.harvestDemonBones();
+		killTheSoldierLeave();
+	}
+	
     public function defeatedBySoldier(hpVictory:Boolean):void {
         clearOutput();
         outputText("Lying prostrate at the Demon Soldier's feet, you are barely even aware of the " + (monster as DemonSoldier).demonTitle() + player.clothedOrNakedLower("stripping off your " + player.armorDescript(), "looming even closer") + ". [monster He] takes the opportunity to run [monster his] hands across your helpless body, murmuring to [monster him]self, \"<i>Very nice, I can certainly work with this...</i>\"");

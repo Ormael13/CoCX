@@ -17,7 +17,7 @@ package classes.Scenes.Monsters
 		public function introBasicFleshGolemS():void {
 			clearOutput();
 			if (rand(2) == 0) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
+				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several crude-looking figures rise, hidden among the bodies. They look too crude to be permanent, probably left behind by a depraved golemmancer. You ready your [weapon] for a fight!");
 				startCombat(new GolemsDummyImproved());
 			}
 			else {
@@ -27,7 +27,7 @@ package classes.Scenes.Monsters
 		public function introImprovedFleshGolemS():void {
 			clearOutput();
 			if (rand(2) == 0) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
+				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several disgusting, fleshy figures rise, hidden among the bodies. They look rushed, probably left behind by a novice golemmancer. You ready your [weapon] for a fight!");
 				startCombat(new GolemsDummyImproved());
 			}
 			else {
@@ -37,7 +37,7 @@ package classes.Scenes.Monsters
 		public function introAdvancedFleshGolemS():void {
 			clearOutput();
 			if (rand(2) == 0) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
+				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several fleshy figures rise, hidden among the bodies. These ones are more advanced, the work of a seasoned golemmancer. You ready your [weapon] for a fight!");
 				startCombat(new GolemsDummyImproved());
 			}
 			else {
@@ -47,7 +47,7 @@ package classes.Scenes.Monsters
 		public function introSuperiorFleshGolemS():void {
 			clearOutput();
 			if (rand(2) == 0) {
-				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
+				outputText("You pass several bodies, strewn throughout your path. You look away, but as you turn, several lifelike figures rise, hidden among the bodies. They're reinforced with heavy bone and grafted muscle. Someone put effort into these monstrous creations. You ready your [weapon] for a fight!");
 				startCombat(new GolemsDummyImproved());
 			}
 			else {
@@ -58,22 +58,22 @@ package classes.Scenes.Monsters
 		public function introCorruptedBasicFleshGolemS():void {
 			clearOutput();
 			if (rand(2) == 0) {
-				outputText("As you take a stroll, from behind of nearby remains emerge golem. It isn't typical one with what looks like skin seen between pieces of white armor she's wearing. Looks like you have encountered corrupted basic flesh golem! You ready your [weapon] for a fight!");
+        outputText("Your wanderings bring you past an old outpost. Several tents, canvas rotten and wood splintered, sit around a broken flagpole. As you stop, this sight catching your attention, a single mount of dirt erupts. A single golem claws its way out from the ground, odd-colored flesh partly covered by white shards, bits of armour either hanging from, or embedded into the creature's flesh. It looks straight at you, and to your disgust, the creation has genitalia, and functioning ones at that! You ready your [weapon] for a fight, as the creature lumbers towards you.");
 				startCombat(new CorruptedFleshGolemBasic());
 			}
 			else {
-				outputText("As you take a stroll, from behind of nearby remains emerge group of golems. They aren't typical ones with what looks like skin seen between pieces of white armors they're wearing. Looks like you have encountered corrupted basic flesh golems! You ready your [weapon] for a fight!");
+				outputText("Your wanderings bring you past an old outpost. Several old wooden buildings, long-since broken, burnt or destroyed, sit inside what was once a trench. In the center, a broken flagpole stands, a tattered, half-burnt flag still waving in the breeze. As you stop, this sight catching your attention, several mounds nearby erupt, tossing dirt every which way. Golems force their way out from the ground, odd-colored flesh mostly covered by white shards, bits of what once had been armour either hanging from, or embedded into the creatures' flesh. They turn towards you, and to your disgust, they have genitalia, and functioning ones at that! They lumber towards you, and you ready your [weapon] for a fight!");
 				startCombat(new CorruptedFleshGolemsBasic());
 			}
 		}
 		public function introCorruptedImprovedFleshGolemS():void {
 			clearOutput();
 			if (rand(2) == 0) {
-				outputText("As you take a stroll, from behind of nearby remains emerge golem. It isn't typical one with what looks like skin seen between pieces of white armor she's wearing. Looks like you have encountered corrupted improved flesh golem! You ready your [weapon] for a fight!");
+				outputText("Your wanderings bring you past an old outpost. Several old wooden buildings, long-since broken, burnt or destroyed, sit inside what was once a trench, lined with now-rotten stakes. There once was a small wooden wall, but there was a clear fight here, and most of the wall now sits in pieces, strewn throughout this former outpost. In the center, a broken flagpole stands, a tattered, half-burnt flag still waving in the breeze. As you stop, this sight catching your attention, the ground begins to shake underneath you. You leap forward, and a crude hand barely misses you. You turn to face it, and as you watch, a golem begins to claw its way from the ground, its odd-colored flesh mostly covered by white shards, bits of what once had been armour either hanging from, or embedded into the creatures' flesh. To your disgust, the thing has genitalia, and functioning ones at that! The golem lumbers towards you, and you ready your [weapon] for a fight!");
 				startCombat(new CorruptedFleshGolemImproved());
 			}
 			else {
-				outputText("As you take a stroll, from behind of nearby remains emerge group of golems. They aren't typical ones with what looks like skin seen between pieces of white armors they're wearing. Looks like you have encountered corrupted improved flesh golems! You ready your [weapon] for a fight!");
+				outputText("Your wanderings bring you past an old outpost. Several old wooden buildings, long-since broken, burnt or destroyed, sit inside what was once a trench. In the center, a broken flagpole stands, a tattered, half-burnt flag still waving in the breeze. As you stop, this sight catching your attention, several mounds nearby erupt, tossing dirt every which way. Golems force their way out from the ground, odd-colored flesh mostly covered by white shards, bits of what once had been armour either hanging from, or embedded into the creatures' flesh. They turn towards you, and to your disgust, they have genitalia, and functioning ones at that! They lumber towards you, and you ready your [weapon] for a fight!");
 				startCombat(new CorruptedFleshGolemsImproved());
 			}
 		}

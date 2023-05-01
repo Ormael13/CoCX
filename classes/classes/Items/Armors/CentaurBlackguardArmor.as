@@ -11,12 +11,12 @@ package classes.Items.Armors
 		
 		public function CentaurBlackguardArmor()
 		{
-			super("TaurBAr","Taur B. Armor","some taur blackguard armor","a set of taur blackguard armor",23,0,1698,"A suit of blackguard's armor for centaurs.","Heavy")
+			super("TaurBAr","Taur B. Armor","some taur blackguard armor","a set of taur blackguard armor",40,20,1698,"A suit of blackguard's armor for centaurs.","Heavy")
 		}
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.isTaur() && game.player.level >= 40) return super.canEquip(doOutput)
+			if (game.player.isTaur() && game.player.level >= 54) return super.canEquip(doOutput)
 			if (doOutput) {
-				if (game.player.level >= 40) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+				if (game.player.level >= 54) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
 				else outputText("The blackguard's armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory");
 			}
 			return false;
@@ -31,8 +31,12 @@ package classes.Items.Armors
 		}
 		
 		override public function get def():Number{
+			var mod:int = game.player.cor/5;
+			return 20 + mod;
+		}
+		override public function get mdef():Number{
 			var mod:int = game.player.cor/10;
-			return 13 + mod;
+			return 10 + mod;
 		}
 	}
 

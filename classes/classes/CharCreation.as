@@ -1449,7 +1449,7 @@ import coc.view.MainView;
 					outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?");
 					break;
 				case PerkLib.HistoryScholar:
-					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, your mana cap increased by 10% and will start with Job: Sorcerer perk.  Is this your history?");
+					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, your mana cap increased by 10%, start out with 150 gems and will start with Job: Sorcerer perk.  Is this your history?");
 					break;
 				case PerkLib.HistoryScout:
 					outputText("You spent much of your time learning how to use ranged weapons, and you had plans to find work as a hunter when you grew up.  You do 10% more damage with physical range attacks and +20% accuracy.  You will also start out with 50 gems and Job: Ranger perk.  Is this your history?");
@@ -1486,8 +1486,17 @@ import coc.view.MainView;
 				}
 				player.ass.analLooseness = 1;
 			}
-			if (choice == PerkLib.HistoryFighter || choice == PerkLib.HistoryWhore || choice == PerkLib.HistoryScout) {
+			if (choice == PerkLib.HistoryFighter) {
 				player.gems += 50;
+			}
+			if (choice == PerkLib.HistoryWhore) {
+				player.gems += 50;
+			}
+			if (choice == PerkLib.HistoryScout) {
+				player.gems += 50;
+			}
+			if (choice == PerkLib.HistoryScholar) {
+				player.gems += 150;
 			}
 			if (choice == PerkLib.HistoryFortune) {
 				player.gems += 250;
@@ -3132,6 +3141,10 @@ import coc.view.MainView;
 			player.initCombatMastery();
 			player.teaseLevel = 0;
 			player.teaseXP = 0;
+			player.miningLevel = 0;
+			player.miningXP = 0;
+			player.farmingLevel = 0;
+			player.farmingXP = 0;
 			player.herbalismLevel = 0;
 			player.herbalismXP = 0;
 			player.statPoints = 0;

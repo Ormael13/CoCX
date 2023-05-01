@@ -64,7 +64,7 @@ public class Mountain extends BaseContent
 				name: "common",
 				chance: 0.8,
 				call: function ():void{
-					if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+					if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
 					else SceneLib.exploration.genericGolGobImpEncounters();
 				}
 			}, {
@@ -156,7 +156,7 @@ public class Mountain extends BaseContent
 			},{
 				name:"factory",
 				when:function():Boolean {
-					return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
+					return flags[kFLAGS.MARAE_QUEST_START] >= 0.5 && flags[kFLAGS.FACTORY_FOUND] <= 0;
 				},
 				call: SceneLib.dungeons.factory.enterDungeon
 			},{
@@ -347,14 +347,14 @@ public class Mountain extends BaseContent
 				call  : SceneLib.mindbreaker.findMindbreaker,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
-					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
+					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && !player.blockingBodyTransformations()
 				}
 			}, {
 				name  : "mindbreaker",
 				call  : SceneLib.mindbreaker.findMindbreakerAgain,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
-					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
+					return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && !player.blockingBodyTransformations()
 				}
 			}, {
 				name:"hike",

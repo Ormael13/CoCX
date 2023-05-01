@@ -15,13 +15,15 @@ public final class WeaponRangeLib extends ItemConstants
 		public function LegendaryPure():Array {
 			return [
 				ARTEMIS,
-				KSLHARP
+				KSLHARP,
+				GOODSAM
 			]
 		}
 		public function LegendaryCorrupt():Array {
 			return [
 				WILDHUN,
-				LEVHARP
+				LEVHARP,
+				BADOMEN
 			];
 		}
 
@@ -33,9 +35,11 @@ public final class WeaponRangeLib extends ItemConstants
 		//pump action shotgun, Lawgiver (wzorowany na broni z Judge Dreed xD), x
 		public const ADBSCAT:WeaponRange = new WeaponRange("DBScatt", "A.D.B.Scattergun", "antique double barrel scattergun", "an antique double barrel scattergun", "shot", 28, 920, "This is a double barrel scattergun. It's effective at short range but poor at long range. When fighting multiple enemies it bullet splitting after leaving muzzle cause to deal a bit more damage to enemies.", WT_RIFLE).withBuffs({'rangedaccuracy':-60}) as WeaponRange;
 		public const ADBSHOT:WeaponRange = new WeaponRange("DBShot", "A.D.B.Shotgun", "antique double barrel shotgun", "an antique double barrel shotgun", "shot", 26, 880, "This is a double barrel shotgun. It slug not fracture on many fragmetns after leaving muzzle but it's still not the most accurate weapon. Which it make up by high damage of each slug.", WT_RIFLE).withBuffs({'rangedaccuracy':-20}) as WeaponRange;
+		public const ALAKABL:WeaponRange = new WeaponRange("Alakabl", "Alakablam", "Alakablam", "an Alakablam", "shot", 20, 760, "This is a double barrel shotgun. Not the most accurate weapon but each slug deal magical damege.", WT_RIFLE).withBuffs({'rangedaccuracy':-20}) as WeaponRange;
 		public const ARTEMIS:Artemis = new Artemis();
 		public const ATKNIFE:WeaponRange = new WeaponRange("ATKnife", "A.ThrowingKnife", "amethyst throwing knife", "an amethyst throwing knife", "shot", 3, 300, "A small knife made of obsidian and grotesquely decorated with amethysts and lead engravings that could be thrown. The magic within this murky blade will bleed unnatural darkness when charged with magic. You can carry up to 15 on you and need to retrieve them after battles.", "Throwing");
 		public const AVELYNN:WeaponRange = new WeaponRange("Avelynn", "Avelynn", "Avelynn", "Avelynn", "shot", 40, 6000, "A marvel of goblin prehistory before the time the first firearms were created, Avelynn prototype 3.0 is designed with several chained mechanism in order to allow firing up to 3 bolts all at the same time. Despite being primitive by modern goblin design this exquisite tool of death does its job well.", WT_CROSSBOW).withBuffs({'rangedaccuracy':+60}) as WeaponRange;
+		public const BADOMEN:BadOmen = new BadOmen();
 		public const BEA_BOW:BeautifulBow = new BeautifulBow();
 		public const B_F_BOW:BFBow = new BFBow();
 		public const BFXBOW_:WeaponRange = new WeaponRange("BFXBow", "BFXBow", "big fucking crossbow", "a big fucking crossbow", "shot", 60, 3000, "Big Fucking Crossbow - the best solution for a tiny e-pen complex at this side of the Mareth!", WT_CROSSBOW).withBuffs({'rangedaccuracy':+60}) as WeaponRange;
@@ -50,10 +54,12 @@ public final class WeaponRangeLib extends ItemConstants
 		public const DBDRAGG:WeaponRange = new WeaponRange("DBDragG", "DoubleBarreledDragonGun", "Double barreled dragon gun", "a Double barreled dragon gun", "shot", 50, 1060, "Also called shotguns the dragon gun can hit multiple targets in a spray shot.", WT_2H_FIREARM);
 		public const DERPLAU:WeaponRange = new WeaponRange("DerpLau", "DerpnadeLauncher", "Derpnade Launcher", "a Derpnade Launcher", "shot", 100, 2030, "A firearm as deadly to others as it is to the user. Launches bouncing explosives which deals aoe damage but can also bounce back if not careful!", WT_2H_FIREARM);
 		public const DESEAGL:WeaponRange = new WeaponRange("DesEagl", "DesertEagle", "Desert Eagle", "a Desert Eagle", "shot", 25, 620, "A single hand firearm, the desert eagle has the largest bullets out of the pistol family. Its shots are deadly and precises through the gun has one hell of a recoil.", "Pistol");
+		public const SIXSHOT:WeaponRange = new WeaponRange("SixShot", "SixShooter", "Six shooter", "a Six shooter", "shot", 20, 580, "A revolver with six chambers. Its shots are deadly and precise.", "Pistol");
 		public const DPISTOL:WeaponRange = new WeaponRange("DPistol", "DartPistol", "Dart pistol", "a Dart pistol", "shot", 1, 120, "This weapon is not designed to wound but to deliver loads of chemical into the victim bloodstream.", "Pistol");
 		public const DUEL_P_:WeaponRange = new WeaponRange("DuelP", "DuelingP", "dueling pistol", "a dueling pistol", "shot", 20, 430, "A pistol for duels between gentelmen. Or just for shooting. Can shoot only once before it need reload.", "Pistol").withBuffs({'rangedaccuracy':-10}) as WeaponRange;
 		public const EVELYN_:WeaponRange = new WeaponRange("Evelyn", "Evelyn", "Evelyn", "Evelyn", "shot", 40, 6000, "A marvel of goblin prehistory before the time the first firearms were created, Avelynn prototype 3.0 is designed with several chained mechanism in order to allow firing up to 3 bolts all at the same time. Despite being primitive by modern goblin design this exquisite tool of death does its job well.", WT_CROSSBOW).withBuffs({'rangedaccuracy':+60}) as WeaponRange;
 		public const FLINTLK:WeaponRange = new WeaponRange("Flintlk", "Flintlock", "flintlock pistol", "a flintlock pistol", "shot", 14, 310, "A flintlock pistol. Pew pew pew. Can fire once before a reload is required.", "Pistol");
+		public const GOODSAM:GoodSamaritan = new GoodSamaritan();
 		public const GTHRAXE:WeaponRange = new WeaponRange("GThrAxe", "GThrowAxes", "gnoll throwing axes", "a gnoll throwing axes", "shot", 25, 1250, "A set of throwing axes made and used by the gnoll barbarian, they are actually heavier than standard throwing weapon but all the more effective. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const GTHRSPE:WeaponRange = new WeaponRange("GThrSpe", "GThrowSpear", "gnoll throwing spear", "a gnoll throwing spear", "shot", 18, 900, "A standard javelin for ranged combat made by the gnolls. You can carry up to 20 on you and need to retrieve them after battles.", "Throwing");
 		public const HARKON1:WeaponRange = new WeaponRange("Harkon1", "Harkonnen", "Harkonnen", "a Harkonnen", "shot", 160, 3230, "This 30 mm, single-shot breech loader cannon use 'true damage' shells.", WT_2H_FIREARM).withBuffs({'rangedaccuracy':-20}) as WeaponRange;
@@ -92,8 +98,9 @@ public final class WeaponRangeLib extends ItemConstants
 		public const E_TOME_:WeaponRange = new WeaponRange("E. Tome", "E. Tome", "Elementalist’s Tome", "an Elementalist's Tome", "nothing", 0, 500, "This ornate navy blue book is inscribed filled with magical glyphs and complicated diagrams, concealed within a detailed treatise on the nature of the world. The magic within this tome allows you to strengthen your connection with summoned elementals. (+50% to elementals damage)", "Tome");
 		public const G_E_MAN:WeaponRange = new WeaponRange("G.E.Book", "G.E.Book", "Golemancy Evocation Manuscript", "A bundle of pages haphazardly bound together within a worn-out leather book.", "nothing", 0, 200, "This black tome is filled with golemancy knowledge. The magic within this tome allows you to control your manufactured golems with greater control and precision. (+50% to golems damage)", "Tome");
 		public const I_TOME_:InquisitorsTome = new InquisitorsTome();
-		public const NEKONOM:WeaponRange = new WeaponRange("Nekonomicon", "Nekonomicon", "Nekonomicon", "a Nekonomicon", "nothing", 0, 500, "A copy of the unholy texts of the Hellcat sect. Rumor has it their blasphemous lord Abraxas wrote it himself. (+100% power to fire and dark spell)", "Tome");
 		public const SSKETCH:WeaponRange = new WeaponRange("SSketch", "S.Sketchbook", "Sage’s Sketchbook", "a Sage’s Sketchbook", "nothing", 0, 500, "Strangely, this ornate blue book is completely blank.  Yet, as you flip through it, you occasionally see magical glyphs and complicated diagrams out of the corner of your eye, only to disappear as you focus.  Still, the arcane energies within the book could augment your spellcraft.", "Tome").withBuffs({'spellpower': + 0.6}) as WeaponRange;
+
+		public const NEKONOM:WeaponRange = new WeaponRange("MissingNo", "MissingNo", "MissingNo", "MissingNo", "nothing", 0, 500, "This is a deprecated weapon no longer in use it will be removed from the game in a few version. Please remove it from your character and delete it for safety", "Tome");
 
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {

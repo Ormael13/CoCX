@@ -22,13 +22,11 @@ public class VampireThirstEffect extends StatusEffectClass {
 		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 1 && game.player.racialScore(Races.VAMPIRE) >= 10) {
 			maxThi += 15;
 			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2) maxThi += 30;
-			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3) maxThi += 60;
-			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) maxThi += 120;
+			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3) maxThi += 75;
+			if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) maxThi += 180;
 		}
 		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 1) maxThi += 5;
-		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 2) maxThi += 5;
 		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 3) maxThi += 10;
-		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 4) maxThi += 10;
 		return maxThi;
 	}
     public function modSatiety(delta:Number):void {

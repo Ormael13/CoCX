@@ -53,6 +53,7 @@ public class GremlinRace extends Race {
 				.corruption(AT_LEAST(20), +1)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
+				.hasPerk(PerkLib.Soulless, +1)
 		/*	if (hasPerk(MutationsLib.BlackHeart))
 				gremlinCounter++;
 			if (hasPerk(MutationsLib.BlackHeartPrimitive))

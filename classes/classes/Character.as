@@ -498,6 +498,12 @@ import classes.Scenes.NPCs.Forgefather;
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
+				//if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 4) min -= maxHP() * 0.05;
+			}
+			if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 1 && game.player.racialScore(Races.HUMAN) > 17) {
+				min -= maxHP() * 0.05;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 2) min -= maxHP() * 0.05;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3) min -= maxHP() * 0.15;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
@@ -704,9 +710,9 @@ import classes.Scenes.NPCs.Forgefather;
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobAsura)) max2 += 0.1;
 			if (hasPerk(PerkLib.AbsoluteStrength)) max2 += 0.1;
-			if (hasPerk(PerkLib.LikeAnAsuraBoss)) max2 += 0.1;
-			if (hasPerk(PerkLib.ICastAsuraFist)) max2 += 0.1;
 			if (hasPerk(PerkLib.AsuraStrength)) max2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) max2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) max2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
 			//
@@ -731,10 +737,10 @@ import classes.Scenes.NPCs.Forgefather;
 		}
 		public function maxSafeWrathSpellcasting():Number {
 			var max1:Number = 0;
-			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
+			if (hasPerk(PerkLib.ICastAsuraFist) || hasStatusEffect(StatusEffects.BloodMage)) max1 += maxOverWrath();
 			else max1 += maxWrath();
 			var max2:Number = 0.5;
-			if (flags[kFLAGS.GAME_DIFFICULTY] < 2) max2 += 0.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 || necklaceName == "Wrathless" || hasStatusEffect(StatusEffects.BloodMage)) max2 += 0.5;
 			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
 			if (hasPerk(PerkLib.MagesWrathEx)) max2 += 0.05;
 			if (hasPerk(PerkLib.WarMageNovice)) max2 += 0.05;
@@ -742,7 +748,6 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.WarMageAdept)) max2 += 0.05;
 			if (hasPerk(PerkLib.WarMageExpert)) max2 += 0.05;
 			if (hasPerk(PerkLib.WarMageMaster)) max2 += 0.05;
-			if (necklaceName == "Wrathless") max2 += 0.5;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;
@@ -822,6 +827,8 @@ import classes.Scenes.NPCs.Forgefather;
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
 			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
+			if (hasPerk(PerkLib.GreySageIntelligence)) max2 += 0.1;
+			if (hasPerk(PerkLib.HyperCasting)) max2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
 			max1 *= max2;//~130%
 			max1 = Math.round(max1);
@@ -927,6 +934,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) max += 5;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) max += 10;
 			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) max += 20;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17) max += 50;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

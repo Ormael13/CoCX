@@ -150,9 +150,9 @@ public class HeXinDao extends BaseContent
         outputText("Near one of major bridges is a wide variety of shops, ranging from a few shops with vicious-looking weapons, to one shop with a goblin out front, hawking what appears to be golem-making materials. On the opposite side of village, near other bridge is a medium-sized shop with a large \"Currency Transfer\" sign. A market chock-full of seemingly random items is in the same building, and as you get closer, you recognize several transformative items from your travels in this realm.");
         outputText("\n\nAt the West end of He'Xin'Dao you see one of the biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses.
         outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each.\n\n");
-	outputText("At first glance these people seem random. Some wield bows, others daggers, a few with no weapons at all... But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention.\n\n");
-	outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n"); 
-	//outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
+		outputText("At first glance these people seem random. Some wield bows, others daggers, a few with no weapons at all... But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention.\n\n");
+		outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n"); 
+		//outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
         riverislandMenuShow();
     }
 
@@ -162,16 +162,17 @@ public class HeXinDao extends BaseContent
         addButton(1, "TFspec/Exch", mogahenmerchant);
         addButton(2, "SoulEquip", serenamerchant);
         addButton(3, "SoulArrow", ermaswiftarrowmerchant);
-		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) addButton(4, "Dungeon", entranceToRiverDungeon);
-		else {
-			if (player.companionsInPCParty()) addButton(4, "Dungeon", entranceToRiverDungeon);
-			else addButtonDisabled(4, "Dungeon", "You need to find some backup if you wish to enter!");
-		}
-        //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
+		addButton(4, "FSAAWY", ermaswiftarrow2merchant).hint("Flying Swords are always with you!");
+		//addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
         addButton(6, "JourTTEast", SceneLib.journeyToTheEast.enteringInn);
         addButton(7, "Arena", soularena);
         addButton(8, "Restaurant", restaurantShiraOfTheEast);
-		addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
+		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) addButton(9, "Dungeon", entranceToRiverDungeon);
+		else {
+			if (player.companionsInPCParty()) addButton(9, "Dungeon", entranceToRiverDungeon);
+			else addButtonDisabled(9, "Dungeon", "You need to find some backup if you wish to enter!");
+		}
+        addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
 		addButton(11, "Orsbulg", eraendirorsbulg.OrsbulgMainMenu);
 		addButton(12, "Golemancer", golemancershop);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && !SceneLib.chichiScene.ChiChiKickedOut) addButton(13, "Chi Chi", SceneLib.chichiScene.MeetingChiChiInHeXinDao);
@@ -579,12 +580,11 @@ public class HeXinDao extends BaseContent
         outputText("After entering the shop with a sign saying 'Equipment' over the doors you see a few shelves filled with various weapons, shields, armors and even rarer items like rings and necklaces. Behind the desk in the middle of the shop you see a woman that has features from a variety of different races. A shark face and tail contrasts it's owner's feather covered arms, the fin from her tail bobbing, barely entering your field of view on each side of the desk. She's an odd mix of shark and bird.");
         outputText("\n\n\"<i>Greetings dear customer. I'm Serena and this is my humble shop. If something catches your eyes let me know,</i>\"");
         menu();
-        addButton(1, "Shelf 1", soulequipmentshelf1).hint("Soul Training Equipment");
-        addButton(2, "Shelf 2", soulequipmentshelf2).hint("Weapons");
-        addButton(3, "Shelf 3", soulequipmentshelf3).hint("Armors");
-        addButton(6, "Shelf 4", soulequipmentshelf4).hint("Flying Swords");
-        addButton(7, "Shelf 5", soulequipmentshelf5).hint("Consumables");
-        addButton(8, "Shelf 6", soulequipmentshelf6).hint("Misc");
+        addButton(0, "Shelf 1", soulequipmentshelf1).hint("Soul Training Equipment");
+        addButton(1, "Shelf 2", soulequipmentshelf2).hint("Weapons");
+        addButton(2, "Shelf 3", soulequipmentshelf3).hint("Armors");
+        addButton(3, "Shelf 4", soulequipmentshelf4).hint("Consumables");
+        addButton(4, "Shelf 5", soulequipmentshelf5).hint("Misc");
 		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//(?magically enchanced?) awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(12, "Talk", ).hint("Tak with .");
         addButton(14, "Back", riverislandVillageStuff);
@@ -611,17 +611,17 @@ public class HeXinDao extends BaseContent
         addButton(0, weapons.UGATANA.shortName, weaponBuy2, weapons.UGATANA);
         addButton(1, weapons.KATANA.shortName, weaponBuy2, weapons.KATANA);
         addButton(2, weapons.NODACHI.shortName, weaponBuy2, weapons.NODACHI);
-        addButton(3, weapons.RCLAYMO.shortName, weaponBuy2, weapons.RCLAYMO);
-        addButton(4, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
-        addButton(5, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
-        addButton(6, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
-        addButton(7, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
-        addButton(8, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
-        addButton(9, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
+        addButton(3, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
+        addButton(4, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
+        addButton(5, weapons.RCLAYMO.shortName, weaponBuy2, weapons.RCLAYMO);
+        addButton(6, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
+        addButton(7, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
+        addButton(8, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
+        //9
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
-        addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
+        addButton(11, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
         addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
-        addButton(13, weapons.A_WAND.shortName, weaponBuy2, weapons.A_WAND);
+        //13
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
@@ -637,29 +637,18 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf4():void {
         menu();
-		addButton(0, weaponsflyingswords.S_HALFM.shortName, weaponBuy4, weaponsflyingswords.S_HALFM);
-		addButton(1, weaponsflyingswords.E_HALFM.shortName, weaponBuy4, weaponsflyingswords.E_HALFM);
-		addButton(2, weaponsflyingswords.B_HALFM.shortName, weaponBuy4, weaponsflyingswords.B_HALFM);
-		addButton(3, weaponsflyingswords.W_HALFM.shortName, weaponBuy4, weaponsflyingswords.W_HALFM);
-		addButton(4, weaponsflyingswords.MOONLGT.shortName, weaponBuy4, weaponsflyingswords.MOONLGT);
-		addButton(5, weaponsflyingswords.S_TWINS.shortName, weaponBuy4, weaponsflyingswords.S_TWINS);
-		addButton(10, weaponsflyingswords.ASAUCHI.shortName, weaponBuy4, weaponsflyingswords.ASAUCHI);
-        addButton(14, "Back", serenamerchant);
-    }
-    public function soulequipmentshelf5():void {
-        menu();
-        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy5, consumables.BANGBM1);
+        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy4, consumables.BANGBM1);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
-        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy5, consumables.BANGBM2);
+        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy4, consumables.BANGBM2);
         else addButtonDisabled(6, "???", "Req. lvl 24+");
         if (player.level >= 42) {
-			addButton(0, consumables.BALLOFL.shortName, weaponBuy5, consumables.BALLOFL);
-			addButton(1, consumables.FROZENB.shortName, weaponBuy5, consumables.FROZENB);
-			addButton(2, consumables.THUNDBl.shortName, weaponBuy5, consumables.THUNDBl);
-			addButton(3, consumables.BALLOTD.shortName, weaponBuy5, consumables.BALLOTD);
-			addButton(4, consumables.POISONB.shortName, weaponBuy5, consumables.POISONB);
-			addButton(7, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
-			//addButton(8, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
+			addButton(0, consumables.BALLOFL.shortName, weaponBuy4, consumables.BALLOFL);
+			addButton(1, consumables.FROZENB.shortName, weaponBuy4, consumables.FROZENB);
+			addButton(2, consumables.THUNDBl.shortName, weaponBuy4, consumables.THUNDBl);
+			addButton(3, consumables.BALLOTD.shortName, weaponBuy4, consumables.BALLOTD);
+			addButton(4, consumables.POISONB.shortName, weaponBuy4, consumables.POISONB);
+			addButton(7, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
+			//addButton(8, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
 		}
         else {
 			addButtonDisabled(0, "???", "Req. lvl 42+");
@@ -670,25 +659,26 @@ public class HeXinDao extends BaseContent
 			addButtonDisabled(7, "???", "Req. lvl 42+");
 			//addButtonDisabled(8, "???", "Req. lvl 42+");
 		}
-        addButton(10, consumables.BANGB_M.shortName, weaponBuy5, consumables.BANGB_M);
-        addButton(11, consumables.W_STICK.shortName, weaponBuy5, consumables.W_STICK);
+        addButton(10, consumables.BANGB_M.shortName, weaponBuy4, consumables.BANGB_M);
+        addButton(11, consumables.W_STICK.shortName, weaponBuy4, consumables.W_STICK);
         addButton(14, "Back", serenamerchant);
     }
-    public function soulequipmentshelf6():void {
+    public function soulequipmentshelf5():void {
         menu();
-		addButton(1, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
-		addButton(2, weapons.AWL_.shortName, weaponBuy6, weapons.AWL_);
-		addButton(3, weapons.RULER.shortName, weaponBuy6, weapons.RULER);
-		addButton(4, weapons.NRSABER.shortName, weaponBuy6, weapons.NRSABER);
-		addButton(5, weapons.RIBBON.shortName, weaponBuy6, weapons.RIBBON);
-        addButton(6, weapons.GUANDAO.shortName, weaponBuy6, weapons.GUANDAO);
-        addButton(7, weapons.HSWORDS.shortName, weaponBuy6, weapons.HSWORDS);
-		addButton(8, weapons.SNAKESW.shortName, weaponBuy6, weapons.SNAKESW);
+        addButton(0, weapons.A_WAND.shortName, weaponBuy5, weapons.A_WAND);
+		addButton(1, weapons.W_STAFF.shortName, weaponBuy5, weapons.W_STAFF);
+		addButton(2, weapons.AWL_.shortName, weaponBuy5, weapons.AWL_);
+		addButton(3, weapons.RULER.shortName, weaponBuy5, weapons.RULER);
+		addButton(4, weapons.NRSABER.shortName, weaponBuy5, weapons.NRSABER);
+		addButton(5, weapons.RIBBON.shortName, weaponBuy5, weapons.RIBBON);
+        addButton(6, weapons.GUANDAO.shortName, weaponBuy5, weapons.GUANDAO);
+        addButton(7, weapons.HSWORDS.shortName, weaponBuy5, weapons.HSWORDS);
+		addButton(8, weapons.SNAKESW.shortName, weaponBuy5, weapons.SNAKESW);
 		//addButton(9, Changdao
-        addButton(10, weapons.FLYWHIS.shortName, weaponBuy6, weapons.FLYWHIS);
-        addButton(11, weapons.PRURUMI.shortName, weaponBuy6, weapons.PRURUMI);
-        addButton(12, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
-        addButton(13, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
+        addButton(10, weapons.FLYWHIS.shortName, weaponBuy5, weapons.FLYWHIS);
+        addButton(11, weapons.PRURUMI.shortName, weaponBuy5, weapons.PRURUMI);
+        addButton(12, weapons.CHAKRAM.shortName, weaponBuy5, weapons.CHAKRAM);
+        addButton(13, shields.MABRACE.shortName, weaponBuy5, shields.MABRACE);
         addButton(14, "Back", serenamerchant);
     }
 
@@ -772,22 +762,6 @@ public class HeXinDao extends BaseContent
         statScreenRefresh();
         inventory.takeItem(itype, soulequipmentshelf5);
     }
-    private function weaponBuy6(itype:ItemType):void {
-        clearOutput();
-        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
-            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
-            doNext(soulequipmentshelf6);
-            return;
-        }
-        else outputText("\n\nDo you buy it?\n\n");
-        doYesNo(curry(debitWeapon6,itype), soulequipmentshelf6);
-    }
-    private function debitWeapon6(itype:ItemType):void {
-        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
-        statScreenRefresh();
-        inventory.takeItem(itype, soulequipmentshelf6);
-    }
 	
 	public function entranceToRiverDungeon():void {
 		clearOutput();
@@ -817,8 +791,6 @@ public class HeXinDao extends BaseContent
         menu();
         addButton(1, "Shelf 1", ermaswiftarrowmerchantshelf1).hint("Bows and Crossbows");
         addButton(3, "Shelf 2", ermaswiftarrowmerchantshelf2).hint("Other types");
-        //addButton(4, weapons.MACE.shortName, weaponBuy, weapons.MACE);
-        //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         addButton(13, "Training", ermaswiftarrowmerchantarcherytraining).hint("Archery training.");
         addButton(14, "Back", riverislandVillageStuff);
@@ -920,6 +892,43 @@ public class HeXinDao extends BaseContent
 			}
 		}
 	}
+	
+	public function ermaswiftarrow2merchant():void {
+        clearOutput();
+        outputText("After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. ");
+        outputText("Behind the desk in the central point of the shop you see a flesh golem on unidentified gender.");
+        outputText("\n\n\"<i>Greetings, customer. Go ahead and look around, if something catches your eye, simply let me know,</i>\" it say all that almost entirely in one breath after noticing your presence.");
+        menu();
+		addButton(0, weaponsflyingswords.S_HALFM.shortName, flyingswordBuy, weaponsflyingswords.S_HALFM);
+		addButton(1, weaponsflyingswords.E_HALFM.shortName, flyingswordBuy, weaponsflyingswords.E_HALFM);
+		addButton(2, weaponsflyingswords.B_HALFM.shortName, flyingswordBuy, weaponsflyingswords.B_HALFM);
+		addButton(3, weaponsflyingswords.W_HALFM.shortName, flyingswordBuy, weaponsflyingswords.W_HALFM);
+		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingswordBuy, weaponsflyingswords.MOONLGT);
+		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingswordBuy, weaponsflyingswords.S_TWINS);
+		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingswordBuy, weaponsflyingswords.ASAUCHI);
+        addButtonDisabled(13, "Training", "The owner of the shop isn't here, currently. There's nobody to train you.");//.hint("Flying Sword training.")
+        addButton(14, "Back", riverislandVillageStuff);
+        statScreenRefresh();
+    }
+	
+    private function flyingswordBuy(itype:ItemType):void {
+        clearOutput();
+        outputText("The flesh golem nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            //Goto shop main menu
+            doNext(ermaswiftarrow2merchant);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        //Go to debit/update function or back to shop window
+        doYesNo(curry(debitFlyingSword,itype), ermaswiftarrow2merchant);
+    }
+    private function debitFlyingSword(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, ermaswiftarrow2merchant);
+    }
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: ?weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
@@ -1422,7 +1431,8 @@ public function soularena():void {
 	}
 	private function buyItemEnergyCore():void {
 		clearOutput();
-		var cost:int = 1015 / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = 520 / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1431,7 +1441,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemEnergyCoreYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 1015 / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= 520 / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1440,7 +1450,8 @@ public function soularena():void {
 	}
 	private function buyItemMechanism():void {
 		clearOutput();
-		var cost:int = 1200 / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = 700 / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1449,7 +1460,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemMechanismYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 1200 / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= 700 / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1458,7 +1469,8 @@ public function soularena():void {
 	}	
 	private function buyItem(odd:ItemType):void {
 		clearOutput();
-		var cost:int = odd.value / 5;//zmniejszane do /10 dla golemancer pc?
+		var cost:int = odd.value / 5;
+		if (player.hasPerk(PerkLib.MasterGolemMaker)) cost *= 0.5;
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
@@ -1466,7 +1478,7 @@ public function soularena():void {
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
 	private function buyItemYes(odd:ItemType):void {
-		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;// * 3
+		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business: Anything else you want to buy?</i>\"\n\n");

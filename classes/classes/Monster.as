@@ -32,6 +32,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
+import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
@@ -268,9 +269,18 @@ import flash.utils.getQualifiedClassName;
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
-			if (hasPerk(PerkLib.TankI)) temp += ((baseStat*12) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.GoliathI)) temp += ((this.str*8) * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.CheetahI)) temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.TankI)) {
+				if (this is TrainingDummy) temp += ((baseStat*6000) * (1 + newGamePlusMod()));
+				else temp += ((baseStat*12) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.GoliathI)) {
+				if (this is TrainingDummy) temp += ((this.str*4000) * (1 + newGamePlusMod()));
+				else temp += ((this.str*8) * (1 + newGamePlusMod()));
+			}
+			if (hasPerk(PerkLib.CheetahI)) {
+				if (this is TrainingDummy) temp += ((this.spe*2000) * (1 + newGamePlusMod()));
+				else temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			}
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) temp += (400 * (1 + newGamePlusMod()));
@@ -308,7 +318,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) {
+			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
 				else temp *= 0.6;
 			}
@@ -335,13 +345,13 @@ import flash.utils.getQualifiedClassName;
 			var maxOver2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
+			//
 			//
 			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
-			//
-			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.OverMaxHP)) {
 				if (hasPerk(PerkLib.Enemy300Type)) maxOver2 += (0.15 * perkv1(PerkLib.OverMaxHP));
@@ -352,7 +362,13 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyEliteType)) maxOver2 += 0.05;
 			if (hasPerk(PerkLib.EnemyChampionType)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.EnemyBossType)) maxOver2 += 0.15;
-			maxOver *= maxOver2;//~180%
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				maxOver2 += (maxHP() * 0.01 * bonus);
+			}
+			maxOver *= maxOver2;//~240%
 			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -488,6 +504,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyGroupType)) anotherOne *= 5;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) anotherOne *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) anotherOne *= 15;
+			if (this is TrainingDummy) anotherOne *= 500;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
@@ -500,7 +517,7 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) {
+			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
 				else temp *= 0.6;
 			}
@@ -512,6 +529,15 @@ import flash.utils.getQualifiedClassName;
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.OverMaxLust)) {
+				if (hasPerk(PerkLib.Enemy300Type)) max2 += (0.15 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) max2 += (0.1 * perkv1(PerkLib.OverMaxLust));
+				else if (hasPerk(PerkLib.EnemyGroupType)) max2 += (0.05 * perkv1(PerkLib.OverMaxLust));
+				else max2 += (0.01 * perkv1(PerkLib.OverMaxLust));
+			}
+			if (hasPerk(PerkLib.EnemyEliteType)) max2 += 0.05;
+			if (hasPerk(PerkLib.EnemyChampionType)) max2 += 0.1;
+			if (hasPerk(PerkLib.EnemyBossType)) max2 += 0.15;
 			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
 				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
 				var bonus:Number = Math.round((level - 1) / 3);
@@ -738,9 +764,9 @@ import flash.utils.getQualifiedClassName;
 			var temp2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobAsura)) temp2 += 0.1;
 			if (hasPerk(PerkLib.AbsoluteStrength)) temp2 += 0.1;
-			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
-			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
 			//
@@ -819,7 +845,10 @@ import flash.utils.getQualifiedClassName;
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
 			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
+			if (hasPerk(PerkLib.GreySageIntelligence)) max2 += 0.1;
+			if (hasPerk(PerkLib.HyperCasting)) max2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.WellOfMana)) max2 += 0.1;
 			max1 *= max2;//~130%
 			max1 = Math.round(max1);
 			return max1;
@@ -839,10 +868,6 @@ import flash.utils.getQualifiedClassName;
 			if (this.level >= 175) temp *= 8;
 			if (this.level >= 200) temp *= 9;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.1;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 1.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
@@ -855,10 +880,6 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 2.2;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			}
 			else {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 2;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
 				if (hasPerk(PerkLib.EnemyBossType)) {
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
@@ -887,6 +908,23 @@ import flash.utils.getQualifiedClassName;
 			var cFDR:Number = 20;
 			if (hasPerk(PerkLib.EnemyUndeadType)) cFDR -= 15;
 			return cFDR;
+		}
+
+		public function damageReductionBasedOnDifficulty():Number {
+			var dRBOD:Number = 1;
+			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.05;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.125;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 1.5;
+			}
+			else {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 2.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 12.5;
+			}
+			return dRBOD;
 		}
 
 		public override function damagePercent():Number {
@@ -2417,8 +2455,9 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		protected function applyTease(lustDelta:Number):void{
+			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
+			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				outputText(" You cool down a little bit ");
@@ -2537,14 +2576,14 @@ import flash.utils.getQualifiedClassName;
 		public function dropLoot():ItemType
 		{
 			//Chance of armor if at level 1 pierce fetish
-			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
+			if (!CoC.instance.plotFight && !this.noFetishDrop && flags[kFLAGS.PC_FETISH] == 1 && !hasPerk(PerkLib.NoItemsGained) && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
 				return armors.SEDUCTA;
 			}
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BROBREW;
-			if (!game.plotFight && rand(200) == 0 && player.level >= 7) return consumables.BIMBOLQ;
-			if (!game.plotFight && rand(1000) == 0 && player.level >= 7) return consumables.RAINDYE;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BROBREW;
+			if (!game.plotFight && rand(200) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.BIMBOLQ;
+			if (!game.plotFight && rand(1000) == 0 && !hasPerk(PerkLib.NoItemsGained) && player.level >= 7) return consumables.RAINDYE;
 			//Chance of eggs if Easter!
-			if (!game.plotFight && rand(6) == 0 && SceneLib.holidays.isEaster()) {
+			if (!game.plotFight && rand(6) == 0 && !hasPerk(PerkLib.NoItemsGained) && SceneLib.holidays.isEaster()) {
 				return randomChoice(
 						consumables.BROWNEG,
 						consumables.L_BRNEG,
@@ -2607,6 +2646,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.FleshBodyElderStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyOverlordStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyTyrantStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonToughness)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonIntelligence)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonWisdom)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) healingPercent += 0.5;
@@ -2703,8 +2745,6 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) manaRecovery += 5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) manaRecovery += 5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) manaRecovery += 5;
-				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
-				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
@@ -2712,6 +2752,14 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) manaRecoveryMulti += 1.5;
 				if (hasPerk(PerkLib.ManaAffinityI)) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
 				manaRecovery *= manaRecoveryMulti;
+				if (hasPerk(PerkLib.WarMageExpert)) manaRecovery += Math.round(maxMana() * 0.005);
+				if (hasPerk(PerkLib.WarMageMaster)) manaRecovery += Math.round(maxMana() * 0.01);
+				if (hasPerk(PerkLib.GreySageIntelligence)) manaRecovery += Math.round(maxMana() * 0.005);
+				if (hasPerk(PerkLib.WellOfMana)) {
+					if (this.inte >= (100 * (1 + (0.2 * (1 + newGamePlusMod()))))) manaRecovery += Math.round(maxMana() * 0.1);
+					else manaRecovery += Math.round(maxMana() * this.inte * 0.001);
+				}
+				if (hasPerk(PerkLib.GreySageWisdom)) manaRecovery += Math.round(maxMana() * 0.005);
 				addMana(manaRecovery);
 			}
 
@@ -3784,11 +3832,11 @@ import flash.utils.getQualifiedClassName;
 				armorDef += Math.round(armorDef * 0.5);
 				armorMDef += Math.round(armorMDef * 0.5);
 			}
-			if (level < 6) {
+			if (level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) this.lust *= 0.1;
 				else this.lust *= 0.6;
 				this.lust = Math.round(this.lust);
 			}
 		}
 	}
-}
+}

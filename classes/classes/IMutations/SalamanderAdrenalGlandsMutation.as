@@ -22,10 +22,10 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
                 descS += " and libido";
             }
             if (pTier == 2){
-                descS += ", stamina, speed, libido and extend lustzerker and berserker duration by 2 turns";
+                descS += ", strength, speed, libido and extend lustzerker and berserker duration by 2 turns";
             }
             if (pTier == 3){
-                descS += ", stamina, speed and libido, extend lustzerker and berserker duration by 8 turns, allows for either or both to trigger on combat start, double bonus to attack, boost slight natural wrath generation rate";
+                descS += ", strength, speed and libido, extend lustzerker and berserker duration by 8 turns, allows for either or both to trigger on combat start, double bonus to attack, boost slight natural wrath generation rate";
             }
             if (descS != "")descS += ".";
             return descS;

@@ -86,10 +86,10 @@ public class Weapon extends Equipable
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if ((InCollection(WP_LARGE, _perks ) && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == WP_MASSIVE && !game.player.shield.isNothing)) {
+			if ((InCollection(WP_LARGE, _perks ) && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || ((InCollection(WP_MASSIVE, _perks ) && !game.player.shield.isNothing) && (!game.player.hasPerk(PerkLib.GigantGripSu) || !game.player.hasPerk(PerkLib.TitanGrip)))) {
 				if (!game.player.shield.canUnequip(doOutput)) {
 					if (doOutput) {
-						outputText("Y ou currently cannot remove your [shield].");
+						outputText("You currently cannot remove your [shield].");
 					}
 				} else if (doOutput) {
 					outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
@@ -97,7 +97,7 @@ public class Weapon extends Equipable
 				}
 				return false;
 			}
-			if ((perk == WP_DUAL_LARGE || perk == WP_DUAL || perk == WP_DUAL_SMALL) && !game.player.shield.isNothing) {
+			if ((perk == WP_DUAL_MASSIVE || perk == WP_DUAL_LARGE || perk == WP_DUAL || perk == WP_DUAL_SMALL) && !game.player.shield.isNothing) {
 				if (!game.player.shield.canUnequip(doOutput)) {
 					if (doOutput) {
 						outputText(" You currently cannot remove your [shield].");
@@ -117,14 +117,19 @@ public class Weapon extends Equipable
 		
 		override public function beforeEquip(doOutput:Boolean):Equipable {
 			var temp:Array = perk.split(", ");
-			var temp2:Array = [WP_LARGE, WP_MASSIVE, WP_DUAL, WP_DUAL_LARGE, WP_DUAL_SMALL]
+			var temp2:Array = [WP_LARGE, WP_MASSIVE, WP_DUAL, WP_DUAL_LARGE, WP_DUAL_SMALL, WP_DUAL_MASSIVE]
 			for each (var temp3:String in temp2){
 				if (temp.indexOf(temp3) >= 0 && !game.player.shield.isNothing){
 					if (temp3 == WP_LARGE) {
 						if (game.player.hasPerk(PerkLib.GigantGrip)){
-								break;
-							}
+							break;
 						}
+					}
+					if (temp3 == WP_MASSIVE) {
+						if (game.player.hasPerk(PerkLib.TitanGrip)){
+							break;
+						}
+					}
 					SceneLib.inventory.unequipShield();
 				}
 			}/*

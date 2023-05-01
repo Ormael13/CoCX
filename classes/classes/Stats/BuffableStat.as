@@ -239,6 +239,7 @@ public class BuffableStat implements IStat, Jsonable {
 		recentlyRemovedTags = {};
 		for (var i:int = _buffs.length-1; i>=0; i--) {
 			var buff:Buff = _buffs[i];
+			if (buff.rate == Buff.RATE_ROUNDS && buff.tick == 9999) continue;
 			if (buff.rate == rate) {
 				buff.tick-=tick;
 				if (buff.tick <= 0) {

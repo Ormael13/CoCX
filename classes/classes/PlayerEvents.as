@@ -18,6 +18,7 @@ import classes.Items.*;
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
@@ -320,13 +321,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
 				}
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
+					var oldHPratio:Number = player.hp100/100;
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
-					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
-					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str": -20, "spe": -20} );
-					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str": -50, "spe": -50} );
-					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
+					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":-0.10, "spe.mult":-0.10} );
+					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":-0.20, "spe.mult":-0.20} );
+					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":-0.40, "spe.mult":-0.30, "tou.mult":-0.10} );
+					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str.mult":-0.18, "spe.mult":-0.60} );
+					player.HP = oldHPratio*player.maxHP();
 					EngineCore.statScreenRefresh();
 					needNext = true;
 				}
@@ -373,6 +376,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (DriderTown.TyrantiaKidsEggsHatching > 1) DriderTown.TyrantiaKidsEggsHatching -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching1 > 1) DriderTown.TyrantiaKidsEggsHatching1 -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching2 > 1) DriderTown.TyrantiaKidsEggsHatching2 -= 1;
+			//Gardening
+			if (Garden.GardenSlot01Time > 0) Garden.GardenSlot01Time -= 1;
+			if (Garden.GardenSlot02Time > 0) Garden.GardenSlot02Time -= 1;
+			if (Garden.GardenSlot03Time > 0) Garden.GardenSlot03Time -= 1;
+			if (Garden.GardenSlot04Time > 0) Garden.GardenSlot04Time -= 1;
+			if (Garden.GardenSlot05Time > 0) Garden.GardenSlot05Time -= 1;
+			if (Garden.GardenSlot06Time > 0) Garden.GardenSlot06Time -= 1;
+			if (Garden.GardenSlot07Time > 0) Garden.GardenSlot07Time -= 1;
+			if (Garden.GardenSlot08Time > 0) Garden.GardenSlot08Time -= 1;
+			if (Garden.GardenSlot09Time > 0) Garden.GardenSlot09Time -= 1;
+			if (Garden.GardenSlot10Time > 0) Garden.GardenSlot10Time -= 1;
+			if (Garden.GardenSlot11Time > 0) Garden.GardenSlot11Time -= 1;
+			if (Garden.GardenSlot12Time > 0) Garden.GardenSlot12Time -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 				//Balls
@@ -1021,13 +1037,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				//Daily Fishery production
-				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
-					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
-						flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 5;
-						if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 2) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += 2;
-					}
-					if (flags[kFLAGS.CEANI_FOLLOWER] > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] -= 5;
-				}
+				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0 && camp.FisheryDailyProduction() > 0) flags[kFLAGS.FISHES_STORED_AT_FISHERY] += camp.FisheryDailyProduction();
 				//Daily barrels refill
 				if (player.hasStatusEffect(StatusEffects.MitziDaughtersBarrels)) {
 					if (rand(3) == 0) player.addStatusValue(StatusEffects.MitziDaughtersBarrels, 1, 5);
@@ -1857,7 +1867,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Acid Spit and Azureflame Breath
-			if (player.racialScore(Races.CAVEWYRM) < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath)) {// && !player.hasPerk(PerkLib.)
+			if (player.racialScore(Races.CAVEWYRM) < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath) && !player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
 				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic properties until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
 				player.removePerk(PerkLib.AcidSpit);
 				player.removePerk(PerkLib.AzureflameBreath);
@@ -1869,7 +1879,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Oni Might
 			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA) || player.isRaceCached(Races.SEA_DRAGON)) {
 				if (!player.hasPerk(PerkLib.GiantMight)) {
-					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strenght. That must be the so called fabled strenght of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
+					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strength. That must be the so called fabled strength of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
 					player.createPerk(PerkLib.GiantMight, 0, 0, 0, 0);
 					needNext = true;
 				}
@@ -2706,6 +2716,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\nYou can't help it anymore. Thankfully, you have the honey in your pouch so you pull out a vial of honey. You're definitely going to masturbate with honey covering your bee-cock.");
                     doNext(SceneLib.masturbation.masturbateGo);
+					round(223.232,2)
                     return true;
 				}
 				outputText("\nYou can’t help it anymore, you need to find the bee girl right now.  You rush off to the forest to find the release that you absolutely must have.  Going on instinct you soon find the bee girl's clearing and her in it.\n\n");

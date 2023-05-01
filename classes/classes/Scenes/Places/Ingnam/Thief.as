@@ -32,8 +32,8 @@ public class Thief extends Monster
 			this.bodyColor = "light";
 			this.hairColor = "brown";
 			this.hairLength = 4;
-			initStrTouSpeInte(9, 7, 7, 8);
-			initWisLibSensCor(8, 10, 14, 20);
+			initStrTouSpeInte(7, 5, 5, 8);
+			initWisLibSensCor(8, 7, 9, 20);
 			this.weaponName = "knife";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 2;
@@ -41,8 +41,8 @@ public class Thief extends Monster
 			this.armorDef = 2;
 			this.armorMDef = 0;
 			this.bonusLust = 24;
-			this.lust = 25;
-			this.level = 0;
+			this.lust = 17;
+			this.level = 1;
 			this.gems = 10+rand(5);
 			this.drop = new WeightedDrop()
 					.add(armors.LEATHRA,1)

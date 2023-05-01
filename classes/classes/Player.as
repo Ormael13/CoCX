@@ -137,7 +137,8 @@ use namespace CoC;
         /*20*/	{combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
         /*21*/	{combat: "Massive", 	level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Massive</b>"},
         /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"},
-        /*23*/	{combat: "Unarmed", 	level:0, experience:0, melee: true, desc:"<b>Dao of Fists</b>"}
+        /*23*/	{combat: "Unarmed", 	level:0, experience:0, melee: true, desc:"<b>Dao of Fists</b>"},
+        /*24*/	{combat: "DualMassive", level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Massive</b>"}
 		];
 
         public function initCombatMastery():void{
@@ -160,6 +161,10 @@ use namespace CoC;
 		//Mining attributes
 		public var miningLevel:Number = 0;
 		public var miningXP:Number = 0;
+		
+		//Farming attributes
+		public var farmingLevel:Number = 0;
+		public var farmingXP:Number = 0;
 		
 		//Herbalism attributes
 		public var herbalismLevel:Number = 0;
@@ -650,24 +655,24 @@ use namespace CoC;
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 4 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulScholar)) armorDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 6 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulExalt)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulExalt)) armorDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 8 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulKing)) armorDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 0 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulKing)) armorDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 0 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
 				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 12 * newGamePlusMod;
@@ -680,7 +685,10 @@ use namespace CoC;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
-				if (armorPerk == "Light" || armor.name == "nothing" || armor.name == "some taur paladin armor" || armor.name == "some taur blackguard armor") {
+				if (armor.name == "some taur paladin armor" || armor.name == "some taur blackguard armor") {
+					speedBonus += Math.round(spe / 5);
+				}
+				else if (armorPerk == "Light" || armor.name == "some taur armor") {
 					speedBonus += Math.round(spe / 10);
 				}
 				else if (armorPerk == "Medium") {
@@ -719,6 +727,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) armorDef += (1 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) armorDef += (2 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) armorDef += (12 * newGamePlusMod);
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) armorDef += (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
 				if (hasKeyItem("Powboy") >= 0) {
@@ -767,6 +776,7 @@ use namespace CoC;
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColdFury)) armorDef = 0;
 			if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (hasStatusEffect(StatusEffects.ArmorPotion) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ArmorPotion));
 			if (hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) armorDef += (level * newGamePlusMod);
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (hasStatusEffect(StatusEffects.BarkSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
@@ -858,27 +868,27 @@ use namespace CoC;
 			//}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 4 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 4 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 6 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 6 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulElder)) armorMDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorMDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 8 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 8 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) armorMDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 10 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorMDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 10 * newGamePlusMod * humanBodyCultivators();
+				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 10 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
-				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 12 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 12 * newGamePlusMod * humanBodyCultivators();
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorMDef += 4 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorMDef += 6 * newGamePlusMod;
@@ -888,7 +898,10 @@ use namespace CoC;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
-				if (armorPerk == "Light" || _armor.name == "nothing") {
+				if (armor.name == "some taur paladin armor" || armor.name == "some taur blackguard armor") {
+					speedBonus += Math.round(spe / 5);
+				}
+				else if (armorPerk == "Light" || armor.name == "some taur armor") {
 					speedBonus += Math.round(spe / 10);
 				}
 				else if (armorPerk == "Medium") {
@@ -918,6 +931,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) armorMDef += (1 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) armorMDef += (2 * newGamePlusMod);
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) armorMDef += (12 * newGamePlusMod);
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) armorMDef += (15 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
 				if (hasKeyItem("Powboy") >= 0) {
@@ -1032,12 +1046,12 @@ use namespace CoC;
 		//1H Weapons
 		public function isOneHandedWeapons():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") &&!weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
+			return (!weaponSpecials("Dual Large") && !weaponSpecials("Dual") && !weaponSpecials("Dual Small") && !weaponSpecials("Dual Massive") && !weaponSpecials("Staff") && !weaponSpecials("Large") && !weaponSpecials("Massive") && weapon != game.weapons.DAISHO);
 		}
 		//Non Large/Massive weapons
 		public function isNoLargeNoStaffWeapon():Boolean
 		{
-			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
+			return (!weaponSpecials("Dual Large") && !weaponSpecials("Large") && !weaponSpecials("Dual Massive") && !weaponSpecials("Massive") && !isStaffTypeWeapon());
 		}
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
@@ -1206,7 +1220,7 @@ use namespace CoC;
 		//Flying swords related checks
 		public function canFlyOnFlyingSwords():Boolean
 		{
-			return weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Large Two" || weaponFlyingSwordsPerk == "Massive";
+			return weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Large Two" || weaponFlyingSwordsPerk == "Massive" || weaponFlyingSwordsPerk == "Massive Two";
 		}
 		public function usingSingleFlyingSword():Boolean
 		{
@@ -1352,7 +1366,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.WeaponGrandMastery) && weaponSpecials("Dual Large") && str >= 140) {
 				attack *= 2;
 			}
-			if (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive")) {
+			if (hasPerk(PerkLib.GigantGripEx) && (weaponSpecials("Massive") || weaponSpecials("Dual Massive"))) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
@@ -1364,8 +1378,11 @@ use namespace CoC;
 			}//30-70-110
 			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponSpecials("Dual Large") && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.2);
+			}
+			if (hasPerk(PerkLib.HiddenDualMomentum) && hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Dual Massive") && str >= 150 && spe >= 100) {
+				attack += (((str + spe) - 200) * 0.2);
 			}//20-60-100
-			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Massive") || !weaponSpecials("Large") || !weaponSpecials("Dual Large") || !weaponSpecials("Small") || !weaponSpecials("Dual Small") || !isFistOrFistWeapon())) {
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && (!weaponSpecials("Dual Massive") || !weaponSpecials("Massive") || !weaponSpecials("Large") || !weaponSpecials("Dual Large") || !weaponSpecials("Small") || !weaponSpecials("Dual Small") || !isFistOrFistWeapon())) {
 				attack += ((spe - 50) * 0.3);
 			}//45-105-165
 			if (weaponSpecials("Hybrid") && shieldName == "nothing"){
@@ -1452,6 +1469,10 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
 				else attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+			}
+			if (hasStatusEffect(StatusEffects.AttackPotion)) {
+				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
+				else attack += Math.round(statusEffectv1(StatusEffects.AttackPotion));
 			}
 			attack = Math.round(attack);
 			return attack;
@@ -1912,7 +1933,9 @@ use namespace CoC;
 				if (returnItem == null) return null;
 			}
 			saveHPRatio();
-			var actualItem:Equipable = newItem.beforeEquip(doOutput);
+			var actualItem:Equipable;
+			if (game.isLoadingSave) actualItem = newItem;
+			else actualItem = newItem.beforeEquip(doOutput);
 			if (actualItem && !actualItem.isNothing) {
 				_equipment[slot] = actualItem;
 				actualItem.afterEquip(doOutput);
@@ -2342,6 +2365,12 @@ use namespace CoC;
 		public function unequipVehicle(doOutput:Boolean = true, force:Boolean = false):Vehicles {
 			return internalUnequipItem(ItemConstants.SLOT_VEHICLE, doOutput, force) as Vehicles;
 		}
+		
+		public function humanBodyCultivators():Number {
+			var hBC:Number = 1;
+			if (perkv1(IMutationsLib.HumanBonesIM) >= 2 && racialScore(Races.HUMAN) > 17) hBC += 0.5;
+			return hBC;
+		}
 
 		// Potions
 		/**
@@ -2407,6 +2436,8 @@ use namespace CoC;
 			if(hasPerk(PerkLib.Pope)) lust -= 5;
 			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 2) lust -= 5;
 			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2) lust -= 5;
+			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanOvariesIM));
+			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanTesticlesIM));
 			if((hasPerk(PerkLib.UnicornBlessing) && cor <= 20) || (hasPerk(PerkLib.BicornBlessing) && cor >= 80)) lust -= 10;
 			if(hasPerk(PerkLib.ChiReflowLust)) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
@@ -2557,8 +2588,9 @@ use namespace CoC;
 			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
-			if (damage * magicmult <= mana) {
-				mana -= (damage * magicmult);
+			if ((damage * magicmult <= mana) || (hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))) {
+				if (damage * magicmult > mana) mana = 0;
+				else mana -= (damage * magicmult);
 				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
@@ -2590,7 +2622,7 @@ use namespace CoC;
 		}
 		public function difficultyDamageMultiplier(damage:Number):Number{
 			var damageMultiplier:Number = 1;
-			//EZ MOAD half damage
+			//EZ MOAD 1/10th damage
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damageMultiplier *= 0.1;
 			//Difficulty modifier flags.
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damageMultiplier *= 1.2;
@@ -2636,49 +2668,64 @@ use namespace CoC;
 				if (damage > 0) {
 					switch (damagetype) {
 						case 0: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 1: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 2: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 3: // physical
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 4: // magical
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceMagicDamage(damage);
 							break;
 						case 5: // fire
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							if (hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage/4*3;
 							damage = reduceFireDamage(damage);
 							break;
 						case 6: // ice
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceIceDamage(damage);
 							break;
 						case 7: // lightning
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceLightningDamage(damage);
 							break;
 						case 8: // darkness
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceDarknessDamage(damage);
 							break;
 						case 9: // poison
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reducePoisonDamage(damage);
 							break;
 						case 10: // wind
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceWindDamage(damage);
 							break;
 						case 11: // water
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceWaterDamage(damage);
 							break;
 						case 12: // earth
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reduceEarthDamage(damage);
 							break;
 						case 13: // acid
+							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
 							damage = reducePoisonDamage(damage);
 							break;
 						default:
+							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 					}
 					//Wrath
@@ -2706,12 +2753,18 @@ use namespace CoC;
 			}
 			return returnDamage;
 		}
+		public function damagePercentArmor():Number {
+			var percent:Number = 1;
+			var armorMod:Number = armorDef;
+			if (armorMod > 50) percent += Math.sqrt(armorMod - 50);
+			return percent;
+		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			mult -= armorMod;
-			if (mult < 20) mult = 20;
+			if (mult < 50) mult = 50;
 			//--PERKS--
 			//Take damage you masochist!
 			if (hasPerk(PerkLib.Masochist) && lib >= 60) {
@@ -2750,6 +2803,9 @@ use namespace CoC;
 				var packMembers:Number = LunaFollower.WerewolfPackMember;
 				if (hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
 				mult -= (2*packMembers);
+			}
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3) {
+				mult -= 25;
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
@@ -2874,13 +2930,18 @@ use namespace CoC;
 			damage *= damagePercent() / 100;
 			return damage;
 		}
-
+		public function damagePercentMRes():Number {
+			var percent:Number = 1;
+			var armorMMod:Number = armorMDef;
+			if (armorMMod > 50) percent += Math.sqrt(armorMMod - 50);
+			return percent;
+		}
 		public override function damageMagicalPercent():Number {
 			var mult:Number = 100;
 			var armorMMod:Number = armorMDef;
 			//--BASE--
 			mult -= armorMMod;
-			if (mult < 20) mult = 20;
+			if (mult < 50) mult = 50;
 			//--PERKS--
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
 				mult -= 10;
@@ -2899,6 +2960,27 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.MelkieLungIM) >= 3) {
 				mult -= 15;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) {
+				mult -= 5;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) {
+				mult -= 10;
+			}
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) {
+				mult -= 20;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 1) {
+				mult -= 5;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 2) {
+				mult -= 10;
+			}
+			if (perkv1(IMutationsLib.YetiFatIM) >= 3) {
+				mult -= 20;
+			}
+			if (hasPerk(PerkLib.GreySageWisdom)) {
+				mult -= 20;
 			}
 			//--STATUS AFFECTS--
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
@@ -3045,6 +3127,9 @@ use namespace CoC;
 			}
 			if (hasStatusEffect(StatusEffects.DaoOfIce) && (statusEffectv2(StatusEffects.DaoOfIce) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfIce) - 3));
 			if (rearBody.type == RearBody.YETI_FUR) mult -= 20;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) {
+				mult -= 20;
+			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -3265,7 +3350,7 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
+			//Apply wind damage resistance percentage.
 			damage *= damageWindPercent() / 100;
 			return damage;
 		}
@@ -3280,6 +3365,9 @@ use namespace CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
 			if (hasStatusEffect(StatusEffects.DaoOfWater) && (statusEffectv2(StatusEffects.DaoOfWater) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfWater) - 3));
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) {
+				mult -= 20;
+			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -3311,8 +3399,8 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
-			damage *= damagePoisonPercent() / 100;
+			//Apply water damage resistance percentage.
+			damage *= damageWaterPercent() / 100;
 			return damage;
 		}
 
@@ -3357,8 +3445,8 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
-			damage *= damagePoisonPercent() / 100;
+			//Apply earth damage resistance percentage.
+			damage *= damageEarthPercent() / 100;
 			return damage;
 		}
 
@@ -3403,8 +3491,8 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
-			//Apply poison damage resistance percentage.
-			damage *= damagePoisonPercent() / 100;
+			//Apply acid damage resistance percentage.
+			damage *= damageAcidPercent() / 100;
 			return damage;
 		}
 
@@ -3755,6 +3843,14 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 18;
 			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx))//+2 racials
 				internalChimeraRatingCounter -= 56;
+			if (hasPerk(PerkLib.HumanSupremacyInitial))
+				internalChimeraRatingCounter -= 5;
+			if (hasPerk(PerkLib.HumanSupremacyBasic))
+				internalChimeraRatingCounter -= 5;
+			if (hasPerk(PerkLib.HumanSupremacyImproved))
+				internalChimeraRatingCounter -= 10;
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced))
+				internalChimeraRatingCounter -= 1;
 			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
@@ -3766,7 +3862,7 @@ use namespace CoC;
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
-		}//każdy nowy chimerical body perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle
+		}
 
 		//Determine Inner Chimera Score
 		public function internalChimeraScore():Number {
@@ -3778,6 +3874,26 @@ use namespace CoC;
 			}
 			End("Player","racialScore");
 			return internalChimeraCounter;
+		}
+
+		//Determine Inner Human Score
+		public function internalHumanScore():Number {
+			Begin("Player","racialScore","internalHumanScore");
+			var internalHumanCounter:Number = 0;
+			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//3
+			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//2
+			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//2
+			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//3
+			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);//3
+			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//3
+			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//3
+			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);//3
+			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//2
+			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//3
+			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
+			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//2
+			End("Player","racialScore");
+			return internalHumanCounter;
 		}
 
 		public function increaseFromBloodlinePerks():Number {
@@ -3869,11 +3985,11 @@ use namespace CoC;
 				basicJobs++;
 			if (hasPerk(PerkLib.JobRanger))
 				basicJobs++;
+			if (hasPerk(PerkLib.JobRogue))
+				basicJobs++;
 			if (hasPerk(PerkLib.JobSeducer))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobSorcerer))
-				basicJobs++;
-			if (hasPerk(PerkLib.JobSoulCultivator))
 				basicJobs++;
 			if (hasPerk(PerkLib.JobWarrior))
 				basicJobs++;
@@ -3906,8 +4022,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.JobKnight))
 				advancedJobs1++;
 			if (hasPerk(PerkLib.JobMonk))
-				advancedJobs1++;
-			if (hasPerk(PerkLib.JobRogue))
 				advancedJobs1++;
 			if (hasPerk(PerkLib.JobSwordsman))
 				advancedJobs1++;
@@ -4016,7 +4130,7 @@ use namespace CoC;
 		public function maxTotalMutationsInSlot(slot:String):int {
 			switch (slot) {
 				case IMutationPerkType.SLOT_ADAPTATIONS:
-					return 2 + maxAscensionBoost();
+					return 2 * (1 + maxHumanityBoost() + maxAscensionBoost());
 				case IMutationPerkType.SLOT_HEART:
 				case IMutationPerkType.SLOT_MUSCLE:
 				case IMutationPerkType.SLOT_MOUTH:
@@ -4033,7 +4147,7 @@ use namespace CoC;
 				case IMutationPerkType.SLOT_THYROID:
 				case IMutationPerkType.SLOT_PARATHYROID:
 				default:
-					return 1 + maxAscensionBoost();
+					return 1 + maxHumanityBoost() + maxAscensionBoost();
 			}
 		}
 		public function maxCurrentMutationsInSlot(slot:String):int {
@@ -4087,24 +4201,13 @@ use namespace CoC;
 		public function maxAdaptationsMutations():Number {
 			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
-		public function maxDragonMutations():Number {
-			var dragonMutations:Number = 1;
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 1) dragonMutations--;
-			if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) dragonMutations--;
-			if (perkv1(IMutationsLib.DraconicLungIM) >= 1) dragonMutations--;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) dragonMutations++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) dragonMutations++;
-			return dragonMutations;
-		}
-		public function maxKitsuneMutations():Number {
-			var kitsuneMutations:Number = 1;
-			if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) kitsuneMutations--;
-			if (perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) kitsuneMutations--;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) kitsuneMutations++;
-			return kitsuneMutations;
-		}
 		public function maxAscensionBoost():Number {
 			return perkv1(PerkLib.AscensionAdditionalOrganMutationX);
+		}
+		public function maxHumanityBoost():Number {
+			var mHB:Number = 0;
+			if (hasPerk(PerkLib.HumanSupremacyAdvanced)) mHB += 1;
+			return mHB;
 		}
 
 		public function lactationQ():Number
@@ -4127,6 +4230,8 @@ use namespace CoC;
 				total += (perkv3(PerkLib.ProductivityDrugs));
 			if (hasPerk(PerkLib.AscensionMilkFaucet))
 				total += (perkv1(PerkLib.AscensionMilkFaucet) * 200);
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17)
+				total *= 2;
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3)
 				total *= 2.5;
 			if (necklaceName == "Cow bell")
@@ -4734,10 +4839,8 @@ use namespace CoC;
 				if (this.hasKeyItem("Powboy") >= 0) minSen += 10;
 				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
 			}
-			if (hasPerk(PerkLib.Soulless)) minCor += 50;
-			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
-			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
-			if (hasPerk(PerkLib.HellfireCoat)) minCor = 50;
+			if (hasPerk(PerkLib.Soulless) || hasPerk(PerkLib.Phylactery)) minCor = 100;
+			if (hasPerk(PerkLib.HellfireCoat) || hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
@@ -4835,6 +4938,9 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 2) maxToneCap += 20;
 			if (perkv1(IMutationsLib.OniMusculatureIM) >= 3) maxToneCap += 30;
 			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) maxToneCap += 10;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 1 && racialScore(Races.HUMAN) > 17) maxToneCap += 5;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 2 && racialScore(Races.HUMAN) > 17) maxToneCap += 10;
+			if (perkv1(IMutationsLib.HumanMusculatureIM) >= 3 && racialScore(Races.HUMAN) > 17) maxToneCap += 15;
 			return maxToneCap;
 		}
 		public function maxThicknessCap():Number {
@@ -4843,6 +4949,9 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) maxThicknessCap += 20;
 			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) maxThicknessCap += 30;
 			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 1 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 5;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 2 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 10;
+			if (perkv1(IMutationsLib.HumanFatIM) >= 3 && racialScore(Races.HUMAN) > 17) maxThicknessCap += 15;
 			return maxThicknessCap;
 		}
 
@@ -5719,6 +5828,7 @@ use namespace CoC;
 			var baseXPtoLevel:Number = 10;
 			var WeaponMasteryModifier:Number = 5;
             if ((hasPerk(PerkLib.RangeWeaponsMastery) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMastery) && melee)) WeaponMasteryModifier -= 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) WeaponMasteryModifier -= 1;
 			var WeaponMasteryEXModifier:Number = masteryLevel + 1;
             if ((hasPerk(PerkLib.RangeWeaponsMasteryEx) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasteryEx) && melee)) WeaponMasteryEXModifier = Math.round(1 + (masteryLevel *.5));
 			var WeaponMasterySUModifier:Number = masteryLevel + 1;
@@ -5828,9 +5938,9 @@ use namespace CoC;
 			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}
-			// Flurry of Blows gets +1
+			// Flurry of Blows gets +2
 			if(isUnarmedCombat() && hasPerk(PerkLib.FlurryOfBlows)){
-                rval += 1;
+                rval += 2;
 			}
 			return rval;
 		}
@@ -5843,7 +5953,12 @@ use namespace CoC;
 			return rval;
 		}
 
-
+		public function MiningMulti():Number {
+			var mineMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) mineMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineMlt *= 2;
+			return mineMlt;
+		}
 
 		public function maxMiningLevel():Number {
 			var maxLevel:Number = 2;
@@ -5859,6 +5974,7 @@ use namespace CoC;
 			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
 			//-2;//4th
 			//-3;//6th
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
@@ -5886,6 +6002,57 @@ use namespace CoC;
 			}
 		}
 
+		public function maxFarmingLevel():Number {
+			var maxLevel:Number = 2;
+			if (level < 48) maxLevel += level;
+			else maxLevel += 48;
+			return maxLevel;
+		}
+		public function FarmExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = farmingLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = farmingLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function farmXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					farmingXP++;
+					XP--;
+				}
+				else {
+					farmingXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (farmingLevel < maxFarmingLevel() && farmingXP >= FarmExpToLevelUp()) {
+					outputText("\n\n<b>Farming skill leveled up to " + (farmingLevel + 1) + "!</b>");
+					farmingLevel++;
+					farmingXP = 0;
+				}
+			}
+		}
+
+		public function FarmingMulti():Number {
+			var farmMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) farmMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			//if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
+			//if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
+			if (hasKeyItem("Tel'Adre Magazine Issue 8") >= 0) farmMlt *= 2;
+			return farmMlt;
+		}
+
 		public function maxHerbalismLevel():Number {
 			var maxLevel:Number = 2;
 			//if (hasPerk(PerkLib.SuperSensual)) {
@@ -5906,6 +6073,7 @@ use namespace CoC;
 			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
 			//-2;//4th
 			//-3;//6th
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
@@ -5935,6 +6103,7 @@ use namespace CoC;
 
 		public function HerbalismMulti():Number {
 			var herbMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) herbMlt += perkv1(IMutationsLib.HumanVersatilityIM);
 			if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
 			if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
 			if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
@@ -5967,6 +6136,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
 			//-2;//4th
 			//-3;//6th
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && perkv1(IMutationsLib.HumanVersatilityIM) >= 2 && racialScore(Races.HUMAN) > 17) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
 			if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
@@ -6282,6 +6452,8 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && racialScore(Races.HUMAN) > 17) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			return max;
 		}
 
@@ -6693,3 +6865,4 @@ use namespace CoC;
 		}
 	}
 }
+

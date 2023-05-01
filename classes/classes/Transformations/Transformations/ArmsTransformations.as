@@ -643,6 +643,23 @@ public class ArmsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const ArmsPlant2: Transformation = new SimpleTransformation("Plant Arms 2",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You watch, spellbound, while your arms gradually change their entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.Looking over them you can see veined, vaguely phallic vines wrapping their way around your entire arm, in a manner that is decorative but oddly perverse. They remind you of the tentacle monsters in the forest...  <b>You now have tentacle-covered arms.</b>";
+
+				player.arms.type = Arms.PLANT2;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.PLANT_2));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.PLANT2;
+			}
+	);
+
 	public const ArmsCentipede: Transformation = new SimpleTransformation("Centipede Arms",
 			// apply effect
 			function (doOutput: Boolean): void {

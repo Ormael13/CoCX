@@ -14,7 +14,7 @@ import classes.display.SpriteDb;
 public class UnderwaterSharkGirlsPack extends Monster
 	{
 		private function sharkTease():void {
-			game.spriteSelect(SpriteDb.s_sharkgirl);
+			game.spriteSelect(SpriteDb.s_izma);
 			if(rand(2) == 0) {
 				outputText("You charge at the shark girls, prepared to strike again, but stop dead in your tracks when one of them turns around and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you. She coos, \"<i>Aw... You really do like me!</i>\" ");
 				//(Small health damage, medium lust build).
@@ -29,7 +29,7 @@ public class UnderwaterSharkGirlsPack extends Monster
 			}
 		}
 		private function sharkBiteAttack():void {
-			game.spriteSelect(SpriteDb.s_sharkgirl);
+			game.spriteSelect(SpriteDb.s_izma);
 			outputText("Your opponents takes a turn and charges at you at high speed, jaw open as they goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();

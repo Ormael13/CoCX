@@ -1155,7 +1155,7 @@ public class DebugMenu extends BaseContent
 		private static const COLOR_CONSTANTS:Array = [
 			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blood-red", "blue", "bronzed", "brown", "caramel",
 			"cerulean", "chocolate", "crimson", "crystal", "dark", "dusky", "ebony", "emerald", "fair",
-			"golden", "gray", "green", "indigo", "light", "mahogany", "metallic", "midnight", "olive", "orange",
+			"golden", "gray", "green", "indigo", "light", "light pink", "mahogany", "metallic", "midnight", "olive", "orange",
 			"peach", "pink", "purple", "red", "russet", "sable", "sanguine", "silky", "silver",
 			"tan", "tawny", "turquoise", "white", "yellow",
 			"aphotic blue-black", "ashen grayish-blue", "creamy-white", "crimson platinum",
@@ -1164,7 +1164,7 @@ public class DebugMenu extends BaseContent
 			"leaf green", "light blonde", "light blue", "light gray", "light green", "light grey", "light purple", "lime green",
 			"mediterranean-toned", "metallic golden", "metallic silver", "midnight black", "milky white",
 			"pale white", "pale yellow", "platinum blonde", "platinum crimson", "platinum-blonde", "purplish-black",
-			"quartz white", "reddish-orange", "rough gray", "immaculate white", "royal purple",
+			"quartz white", "reddish-orange", "rough gray", "immaculate white", "royal purple", "dark purple",
 			"sandy blonde", "sandy brown", "sandy-blonde", "shiny black", "silver blonde", "silver-white", "snow white", "blazing red",
 			"yellowish-green", "black and yellow", "white and black", "pure blue", "neon blue", "pale purple", "eldritch green"
 		];

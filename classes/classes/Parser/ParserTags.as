@@ -80,6 +80,7 @@ public class ParserTags {
         "font-water"            : function ():* { return '<font color="'+"#0000ff"+'">'; },
         "font-wind"             : function ():* { return '<font color="'+"#00af9a"+'">'; },
         "font-earth"            : function ():* { return '<font color="'+"#673b00"+'">'; },
+        "font-acid"           	: function ():* { return '<font color="'+"#00C80e"+'">'; },
         "font-poison"           : function ():* { return '<font color="'+"#00C80e"+'">'; },
         "font-true"             : function ():* { return '<font color="'+"#404040"+'">'; },
         "font-lust"             : function ():* { return '<font color="'+"#ff00ff"+'">'; },

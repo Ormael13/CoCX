@@ -1469,7 +1469,38 @@ public class TailTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.tailType === Tail.ANT_ABDOMEN;
+				return player.tailType === Tail.DEER;
+			}
+	);
+
+	public const TailYgddrasil: Transformation = new SimpleTransformation("Ygddrasil Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "You feel a weird sensation in your ";
+				if (player.tailType > Tail.NONE) {
+					desc += "tail";
+					if (player.tailCount > 1) desc += "s";
+				}
+				else desc += "tailbone";
+				desc += ". It kind of feels cool, pleasurable and makes you queasy all at once. Suddenly, ";
+				if (player.tailType > Tail.NONE) desc += "it begins to twist and writhe as the odd sensation intensifies.  Before your eyes, it twists into a reptilian appendage";
+				else desc += "your tailbone erupts and elongates into a new limb, your new tail";
+				desc += ". Long, thin, prehensile, good for maintaining your balance. As if in conclusion, a leaf suddenly sprouts from the tip of your tail. <b>You now have a leaf-tipped reptilian tail!</b>";
+				player.tailType = Tail.YGGDRASIL;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.YGGDRASIL));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.YGGDRASIL;
 			}
 	);
 	/*

@@ -11,7 +11,7 @@ package classes.Items.Weapons
 	public class DualBFSword extends Weapon {
 		
 		public function DualBFSword() {
-			super("DBFSwo", "D.B.F.Sword", "dual big fucking swords", "a pair of big fucking swords", "slash", 50, 4000, "Big Fucking Swords - the best solution for a tiny e-pen complex at this side of the Mareth!  This pair of 2H 2,5 meters long swords requires 150 strength to fully unleash it power.", "Dual Large, LGWrath", "Sword");
+			super("DBFSwo", "D.B.F.Sword", "dual big fucking swords", "a pair of big fucking swords", "slash", 50, 4000, "Big Fucking Swords - the best solution for a tiny e-pen complex at this side of the Mareth!  This pair of 2H 2,5 meters long swords requires 150 strength to fully unleash their power.", "Dual Large, LGWrath", "Sword");
 		}
 		
 		override public function get attack():Number {

@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DesertCave.SandMother;
@@ -48,6 +49,7 @@ public class TestMenu extends BaseContent
 		var bd:ButtonDataList = new ButtonDataList();
 		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
 		bd.add("P/G/XP/LvL", PerksGemsEXPLvL, "Adding/Removing perk points and adding gems/exp/lvl.");
+		bd.add("Quick Flags", modFlagsMenu, "Menu to edit some some flags quickly for debugging");
 		bd.add("Equip", EquipmentMenu, "For creating various equipment items for tests.");
 		bd.add("NonEquip", NonEquipmentMenu, "For creating various non-equipment items for tests.");
 		bd.add("Materials", MaterialMenu, "For creating various materials for tests.");
@@ -78,6 +80,7 @@ public class TestMenu extends BaseContent
 		bd.add("DebugMenu", SceneLib.debugMenu.accessDebugMenu, "The older debug menu. Who knows what it hides?");
 		bd.add("Bugfixes", cheatBugfixes, "Buttons or fixing some rare old bugs that can't be fixd with save-updater.");
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
+		bd.add("Bags expansion", SceneLib.garden.justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat, "Expand the bags. (If you not own any of them will not have any effect)");
 		submenu(bd, playerMenu, 0, false);
 	}
 
@@ -294,13 +297,13 @@ public class TestMenu extends BaseContent
     }
 	public function giveNekoItems():void {
 		outputText("\n\n<b>(Gained " + weapons.CATGLOV.longName + "!)</b>\n\n");
-		outputText("\n\n<b>(Gained " + weaponsrange.NEKONOM.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + shields.NEKONOM.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + armors.FCLOAK.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + undergarments.BN_TOP.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + undergarments.BN_SKIRT.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + necklaces.CATBELL.longName + "!)</b>\n\n");
 		inventory.takeItem(weapons.CATGLOV, curry(NonEquipmentMenu, 2));
-		inventory.takeItem(weaponsrange.NEKONOM, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(shields.NEKONOM, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(armors.FCLOAK, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(undergarments.BN_TOP, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(undergarments.BN_SKIRT, curry(NonEquipmentMenu, 2));
@@ -1173,7 +1176,18 @@ public class TestMenu extends BaseContent
 		addButton(9, "AscenPerks100", AddAscenionPerkPoints, 100).hint("Add 100 ascension perk points for use during ascending to the next NG+ tier.");
 		addButton(14, "Back", StatsAscensionMenu);
 	}
-
+	public function modFlagsMenu():void
+	{
+		menu();
+		clearOutput();
+		outputText("A menu where you can edit some flags that are useful for debugging.");
+		outputText("\n\nTotal Times Transformed: " + flags[kFLAGS.TIMES_TRANSFORMED] + "");
+		addButton(0, "T Add 1", modStatFlags, "timesTransformed", 1).hint("Add 1 to times transformed");
+		addButton(1, "T Add 10", modStatFlags, "timesTransformed", 10).hint("Add 10 to times transformed");
+		addButton(5, "T Sub 1", modStatFlags, "timesTransformed", -1).hint("Subtract 1 from times transformed");
+		addButton(6, "T Sub 10", modStatFlags, "timesTransformed", -10).hint("Subtract 10 from times transformed");
+		addButton(14, "Back", SoulforceCheats);
+	}
 	public function StatsMenuCore(type:String = "Str"):void{
 		menu();
 		addButton(0, "Inc +1", ModCoreStats,type,1).hint("Add 1 to " + type +".");
@@ -2083,8 +2097,10 @@ public class TestMenu extends BaseContent
 
 	public function FightTheDummy():void {
 		clearOutput();
-		outputText("Entering battle with The Dummy! Enjoy ^^");
-		startCombat(new TheDummy());
+		//outputText("Entering battle with The Dummy! Enjoy ^^");
+		//startCombat(new TheDummy());
+		outputText("Entering battle with Minotaur! Enjoy ^^");
+		startCombat(new Minotaur());
 	}
 	public function FightSuccubusGardener():void {
 		clearOutput();
@@ -2177,6 +2193,17 @@ public class TestMenu extends BaseContent
 		outputText("\n\n<b>You have gained " + incAmt + " Ascension perk points!</b>");
 		player.ascensionPerkPoints += incAmt;
 		doNext(StatsAscensionMenu2);
+	}
+
+	public function modStatFlags(flagName:String, changeAmt:int):void
+	{
+		switch(flagName)
+		{
+			case "timesTransformed":
+					flags[kFLAGS.TIMES_TRANSFORMED] += changeAmt;
+					break;
+		}
+		modFlagsMenu();
 	}
 
 	public function ModCoreStats(core:String, incAmt:int):void{

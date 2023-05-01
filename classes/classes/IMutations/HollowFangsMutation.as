@@ -30,7 +30,7 @@ public class HollowFangsMutation extends IMutationPerkType
                 descS = "+8% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)";
             }
             if (pTier == 4){
-                descS = "+20% more healed from Vampire Bite, each Vampire Bite giving 3 stacks and deal +100% lust dmg)";
+                descS = "+20% more healed from Vampire Bite, each Vampire Bite giving 5 stacks and deal +100% lust dmg)";
             }
             if (descS != "")descS += ".";
             return descS;

@@ -5,9 +5,9 @@
 package classes.Scenes {
 	import classes.*;
 	import classes.GeneticMemories.VaginaCountMem;
-import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Areas.Ocean.Scylla;
-import classes.internals.SaveableState;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.Ocean.Scylla;
+	import classes.internals.SaveableState;
 	import classes.BodyParts.Hair;
 	import classes.BodyParts.Antennae;
 	import classes.BodyParts.Arms;
@@ -801,7 +801,7 @@ import classes.internals.SaveableState;
 
 			outputText(Hair.getAppearanceDescription(player) + "[pg]Perhaps you'd like to change this?");
 
-			openPaginatedMenu(title, accessLowerBodyMenu, currentPage, HairMem.Memories);
+			openPaginatedMenu(title, accessHairMenu, currentPage, HairMem.Memories);
 		}
 
 		private function accessFaceMenu(currentPage: int = 0): void {

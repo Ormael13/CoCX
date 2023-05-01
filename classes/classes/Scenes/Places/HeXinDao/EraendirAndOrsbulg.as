@@ -25,17 +25,19 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			outputText("The elf gives you a wide display of his many knife and swords. Small blades indeed but sharp and light, ideal to deliver many cuts in the time it normaly takes to deliver 1 strike.");
 			menu();
 			addButton(0, weapons.DAGGER.shortName, itemBuy1, weapons.DAGGER);
-			addButton(1, weapons.DDAGGER.shortName, itemBuy1, weapons.DDAGGER);
-			addButton(2, weapons.TRIDAG.shortName, itemBuy1, weapons.TRIDAG);
-			addButton(3, weapons.TDAGGER.shortName, itemBuy1, weapons.TDAGGER);
-			addButton(4, weapons.DAGWHIP.shortName, itemBuy1, weapons.DAGWHIP);
+			addButton(1, weapons.TRIDAG.shortName, itemBuy1, weapons.TRIDAG);
+			addButton(2, weapons.TDAGGER.shortName, itemBuy1, weapons.TDAGGER);
+			addButton(3, weapons.DAGWHIP.shortName, itemBuy1, weapons.DAGWHIP);
+			addButton(4, weapons.ANGSTD.shortName, itemBuy1, weapons.ANGSTD);
 			addButton(5, weapons.ADAGGER.shortName, itemBuy1, weapons.ADAGGER);
 			addButton(6, weapons.RDAGGER.shortName, itemBuy1, weapons.RDAGGER);
 			addButton(7, weapons.SDAGGER.shortName, itemBuy1, weapons.SDAGGER);
 			addButton(8, weapons.TODAGGER.shortName, itemBuy1, weapons.TODAGGER);
-			addButton(9, weapons.ANGSTD.shortName, itemBuy1, weapons.ANGSTD);
-			addButton(10, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
-			addButton(10, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
+			addButton(9, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
+			addButton(10, weapons.KAMA.shortName, itemBuy1, weapons.KAMA);
+			addButton(11, weapons.KAMAWHIP.shortName, itemBuy1, weapons.KAMAWHIP);
+			//12
+			addButton(13, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
 			addButton(14, "Back", EraendirMainMenu);
 		}
 		private function itemBuy1(itype:ItemType):void {
@@ -67,16 +69,19 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			menu();
 			outputText("\"<i>Only the biggest deadliest weapon right here!</i>\"");
 			addButton(0, weapons.BFSWORD.shortName, itemBuy2, weapons.BFSWORD);
-			addButton(1, weapons.DBFSWO.shortName, itemBuy2, weapons.DBFSWO);
-			addButton(2, weapons.BFTHSWORD.shortName, itemBuy2, weapons.BFTHSWORD);
-			addButton(3, weapons.BFWHIP.shortName, itemBuy2, weapons.BFWHIP);
-			addButton(4, weapons.DBFWHIP.shortName, itemBuy2, weapons.DBFWHIP);
-			addButton(5, weapons.OTETSU.shortName, itemBuy2, weapons.OTETSU);
-			addButton(6, weapons.DWARWA.shortName, itemBuy2, weapons.DWARWA);
+			addButton(1, weapons.BFTHSWORD.shortName, itemBuy2, weapons.BFTHSWORD);
+			addButton(2, weapons.BFWHIP.shortName, itemBuy2, weapons.BFWHIP);
+			addButton(3, weapons.OTETSU.shortName, itemBuy2, weapons.OTETSU);
+			addButton(4, weapons.DWARWA.shortName, itemBuy2, weapons.DWARWA);
+			addButton(5, weapons.SKYPIER.shortName, itemBuy2, weapons.SKYPIER);
+			addButton(6, weapons.TB_SCYT.shortName, itemBuy2, weapons.TB_SCYT);
 			addButton(7, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
-			addButton(8, weapons.SKYPIER.shortName, itemBuy2, weapons.SKYPIER);
-			addButton(10, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
-			addButton(11, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
+			addButton(8, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
+			addButton(9, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
+			//10
+			//11
+			//12
+			//13
 			addButton(14, "Back", OrsbulgMainMenu);
 		}
 		private function itemBuy2(itype:ItemType):void {

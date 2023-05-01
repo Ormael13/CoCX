@@ -29,10 +29,10 @@ import classes.internals.WeightedDrop;
 		public function phoenixSquadFireBreath():void {
 			//(Effect: One heavy-damage attack)
 			var damage:Number = ((inte + wis) * 1.2) + rand(80);
-			outputText("Suddenly, the shield wall parts, revealing two members of the platoon, a particularly muscular girls with a raging erections.  Before you can consider what's going on, they rears back and huffs at you.  To your horror, a great gout of fire erupts from their mouths, rolling towards you.  You dive, but are still caught partially in the inferno.");
+			outputText("Suddenly, the shield wall parts, revealing two members of the platoon, two particularly muscular girls with raging erections.  Before you can consider what's going on, they rear back, light erupting from their throats as they unleash a burst of fire-breath right at you.  You dive, but are still caught partially in the inferno.");
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-				outputText("  Luckly blizzard still surrounding you lowering amount of fire that pass throu it.");
+				outputText("Luckily, you still have your blizzard spell active, the whirling snow mitigating the phoenix's flame somewhat");
 				damage *= 0.2;
 			}
 			damage = Math.round(damage);
@@ -41,7 +41,7 @@ import classes.internals.WeightedDrop;
 		}
 		//ATTACK THREE: LUSTBANG GRENADE
 		public function phoenixSquadLustbang():void {
-			outputText("\"<i>LUSTBANGS OUT!</i>\" one of the rear-most quasi-phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  Few large glass spheres rolls out from the shield wall, and immediately explodes in a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and lusty, barely able to resist the urge to throw yourself at the quasi-phoenixes and beg for their cocks and cunts.");
+			outputText("\"<i>LUSTBANGS OUT!</i>\" one of the rear-most quasi-phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  Several large glass spheres are thrown out from behind the shield wall, immediately exploding into a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and horny. Despite yourself...Those quasi-Phoenixes aren't bad looking... and their cocks and cunts are tempting.");
 			//(Effect: Large lust increase)
 			player.takeLustDamage(Math.round(75+(player.lib*1.2)), true);
 		}

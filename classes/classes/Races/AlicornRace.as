@@ -128,7 +128,7 @@ public class AlicornRace extends Race {
 				.withExtraBonuses(
 						"Mana & SF recovery +10%",
 						"Combat HP regen +200",
-						"Regenerate Spell +300%"
+						"Healing / Regenerate Spell +300% for Alicorn / Nightmare"
 				)
 				.end()
 		
@@ -146,7 +146,7 @@ public class AlicornRace extends Race {
 				.withExtraBonuses(
 					"Mana & SF recovery +10%",
 					"Combat HP regen +200",
-					"Regenerate Spell +300%"
+					"Healing / Regenerate Spell +300% for Alicorn / Nightmare"
 				)
 				.end()
 	}

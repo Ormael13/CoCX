@@ -152,6 +152,61 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const LEAF:int = _partid++;
+		EnumValue.add(Memories, LEAF, "LEAF", {
+			id: "Leaf Hair",
+			name: "Leaf Hair",
+			cost: 100,
+			title: "Leaf",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairLeaf;
+			}
+		});
+
+		public static const GRASS:int = _partid++;
+		EnumValue.add(Memories, GRASS, "GRASS", {
+			id: "Grass Hair",
+			name: "Grass Hair",
+			cost: 100,
+			title: "Grass",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairGrass;
+			}
+		});
+
+		public static const SNOWY:int = _partid++;
+		EnumValue.add(Memories, SNOWY, "SNOWY", {
+			id: "Snowy Hair",
+			name: "Snowy Hair",
+			cost: 100,
+			title: "Snowy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairSnowy;
+			}
+		});
+
+		public static const FLUFFY:int = _partid++;
+		EnumValue.add(Memories, FLUFFY, "FLUFFY", {
+			id: "Fluffy Hair",
+			name: "Fluffy Hair",
+			cost: 100,
+			title: "Fluffy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairFluffy;
+			}
+		});
+
+		public static const CRAZY:int = _partid++;
+		EnumValue.add(Memories, CRAZY, "CRAZY", {
+			id: "Crazy Hair",
+			name: "Crazy Hair",
+			cost: 100,
+			title: "Crazy",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairCrazy;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

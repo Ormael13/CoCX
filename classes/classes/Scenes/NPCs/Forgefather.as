@@ -267,11 +267,12 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 			player.knockUpForce(0, 0, 1); //reset any pregnancies
 			player.skin.setBaseOnly({type:Skin.STONE});
 			player.skinColor = "dark gray";
+			player.skinColor2 = "dark gray";
 			player.hairColor = "dark gray";
 			material = "stone";
 			player.hairType = Hair.NORMAL;
 			player.faceType = Face.DEVIL_FANGS;
-			player.tongue.type = Tongue.DEMONIC;
+			CoC.instance.transformations.TongueDemonic.applyEffect(false);
 			player.horns.type = Horns.GARGOYLE;
 			player.horns.count = 12 + rand(4);
 			player.beardLength = 0;

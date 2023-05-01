@@ -276,6 +276,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BlowjobOn:StatusEffectType                      = mk("BlowjobOn");
 		public static const BoatDiscovery:StatusEffectType                  = mk("Boat Discovery");
 		public static const BonusACapacity:StatusEffectType                 = mk("Bonus aCapacity");
+		public static const BonusEffectsNecroSet:StatusEffectType           = mk("Bonus Effects: Necro Set");
 		public static const BonusVCapacity:StatusEffectType                 = mk("Bonus vCapacity");
 		public static const BottledMilk:StatusEffectType                    = mk("Bottled Milk");
 		public static const BreastsMilked:StatusEffectType                  = mk("Breasts Milked");
@@ -568,6 +569,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");
 		public static const PlainOnaholeUsed:StatusEffectType               = mk("plain onahole used");
 		public static const PhoukaWhiskeyAffect:StatusEffectType            = mk("PhoukaWhiskeyAffect");
+		public static const PocketWatch:StatusEffectType                   	= mk("PocketWatch");
 		public static const PostAkbalSubmission:StatusEffectType            = mk("Post Akbal Submission");
 		public static const PostAnemoneBeatdown:StatusEffectType            = mk("Post Anemone Beatdown");
 		public static const PureCampJojo:StatusEffectType                   = mk("PureCampJojo");
@@ -858,9 +860,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		//Alchemical stuff
 		public static const AlchIronweed:StatusEffectType		= mk("IronweedEffect");
 		public static const AlchBladeFerns:StatusEffectType		= mk("BladeFernsEffect");
-		public static const ArmorPotion:StatusEffectType        = mk("Painkiller");
+		public static const ArmorPotion:StatusEffectType        = mkCombat("Painkiller");
 		public static const ArousalPotion:StatusEffectType      = mk("Perfume");
-		public static const AttackPotion:StatusEffectType       = mk("Stimulant");
+		public static const AttackPotion:StatusEffectType       = mkCombat("Stimulant");
 
 		// combat
 		public static const AcidDoT:StatusEffectType                   = mkCombat("Acid DoT");
@@ -1098,6 +1100,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CounterGlacialStorm:StatusEffectType       = mkCombat("Counter Glacial Storm");
 		public static const CounterHighVoltage:StatusEffectType        = mkCombat("Counter High Voltage");
 		public static const CounterRagingInferno:StatusEffectType      = mkCombat("Counter Raging Inferno");
+		public static const CounterHighTide:StatusEffectType           = mkCombat("Counter High Tide");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");
@@ -1222,6 +1225,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PigbysHands:StatusEffectType           = mkCombat("Pigbys Hands");
 		public static const SoulArena:StatusEffectType             = mkCombat("Soul Arena");
 		public static const SoulArenaGaunlet:StatusEffectType      = mkCombat("Soul Arena Gaunlet");
+		public static const Blacken:StatusEffectType               = mkCombat("Blacken");
+		public static const MutantIncubusVenom:StatusEffectType    = mkCombat("Mutant Incubus Venom");
 		public static const AikoLightningArrow:StatusEffectType    = mkCombat("Aiko Lightning Arrow");
 		public static const YamataEntwine:StatusEffectType 		   = mkCombat("Yamata Entwine");
 		public static const BerzerkingSiegweird:StatusEffectType   = mkCombat("Berzerking Siegweird");

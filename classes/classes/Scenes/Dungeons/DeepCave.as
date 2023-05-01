@@ -112,14 +112,16 @@ use namespace CoC;
 			addButton(1, consumables.SENSDRF.shortName, buyItem, 1);
 			addButton(2, consumables.REDUCTO.shortName, buyItem, 2);
 			addButton(3, consumables.AGILI_E.shortName, buyItem, 3);
+			addButton(4, consumables.VIXEN_T.shortName, buyItem, 4);
 			addButton(5, consumables.CFISHS.shortName, buyItem, 5);
-			addButton(6, consumables.VIXEN_T.shortName, buyItem, 6);
-			addButton(8, weaponsrange.SSKETCH.shortName, buyItem, 8);
-			addButton(9, weapons.H_GAUNT.shortName, buyItem, 9);
-			addButton(10, weapons.L_CLAWS.shortName, buyItem, 10);
-			addButton(11, weapons.LRAPIER.shortName, buyItem, 11);
-			addButton(12, weapons.SUCWHIP.shortName, buyItem, 12);
-			addButton(13, weapons.PSWHIP.shortName, buyItem, 13);
+			addButton(6, weaponsrange.SSKETCH.shortName, buyItem, 6);
+			addButton(7, weapons.SUCWHIP.shortName, buyItem, 7);
+			addButton(8, weapons.L_CLAWS.shortName, buyItem, 8);
+			//9
+			addButton(10, weapons.LRAPIER.shortName, buyItem, 10);
+			addButton(11, weapons.H_GAUNT.shortName, buyItem, 11);
+			//12
+			//addButton(13, weapons..shortName, buyItem, 13);
 			addButton(14, "Leave", roomEntrance);
 		}
 
@@ -130,14 +132,16 @@ use namespace CoC;
 			if (item == 1) incubusBuy(consumables.SENSDRF);
 			if (item == 2) incubusBuy(consumables.REDUCTO);
 			if (item == 3) incubusBuy(consumables.AGILI_E);
+			if (item == 4) incubusBuy(consumables.VIXEN_T);
 			if (item == 5) incubusBuy(consumables.CFISHS);
-			if (item == 6) incubusBuy(consumables.VIXEN_T);
-			if (item == 8) incubusBuy(weaponsrange.SSKETCH);
-			if (item == 9) incubusBuy(weapons.H_GAUNT);
-			if (item == 10) incubusBuy(weapons.L_CLAWS);
-			if (item == 11) incubusBuy(weapons.LRAPIER);
-			if (item == 12) incubusBuy(weapons.SUCWHIP);
-			if (item == 13) incubusBuy(weapons.PSWHIP);
+			if (item == 6) incubusBuy(weaponsrange.SSKETCH);
+			if (item == 7) incubusBuy(weapons.SUCWHIP);
+			if (item == 8) incubusBuy(weapons.L_CLAWS);
+			//9
+			if (item == 10) incubusBuy(weapons.LRAPIER);
+			if (item == 11) incubusBuy(weapons.H_GAUNT);
+			//12
+			//if (item == 13) incubusBuy(weapons.);
 		}
 
 		public function incubusBuy(itype:ItemType):void {

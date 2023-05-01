@@ -11,7 +11,7 @@ package classes.Items.Weapons
 		
 		public function AlvinaTwinScythe()
 		{	//Effect: Magic catalyst 180%, Count as a dual weapon this item also damage enemies mana on each successful swing. Also cause the burn status for 3 rounds.
-			super("ATWINSCY","A.TwinScythe","twin scythe","Alvina's Twin Scythes","slash",20,12000,"Alvina’s beloved weapons. These pair of scythes were used to slay rival mages. The black flame which blaze along this cursed item’s blade burns the victim’s magic like fuel. Alvina rarely ever used this item to its full extent, only pulling it out as a trump card against her deadliest opponents when magic alone proved insufficient.", "Dual Large, Whirlwind", "Scythe, StaffPart");
+			super("ATWINSCY","A.TwinScythe","twin scythe","Alvina's Twin Scythes","slash",20,12000,"Alvina’s beloved weapons. These pair of scythes were used to slay rival mages. The black flame which blaze along this cursed item’s blade burns the victim’s magic like fuel. Alvina rarely ever used this item to its full extent, only pulling it out as a trump card against her deadliest opponents when magic alone proved insufficient.", "Dual Large, Whirlwind, Bleed10", "Scythe, StaffPart");
 			withBuff('spellpower', +1.8);
 		}
 		

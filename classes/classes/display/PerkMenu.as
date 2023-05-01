@@ -97,9 +97,9 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(10, "Elementals",summonsbehaviourOptions);
 		}
-		if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
-			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
-			addButton(11, "P.Golems",golemsbehaviourOptions);
+		if ((flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0 || flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) || (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0))) {
+			outputText("\n<b>You can adjust your permanent golems (or skeletons) behaviour during combat.</b>");
+			addButton(11, "Golems/Skeletons",golemsskeletonsbehaviourOptions);
 		}
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
@@ -535,10 +535,10 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
-	public function golemsbehaviourOptions():void {
+	public function golemsskeletonsbehaviourOptions():void {
 		clearOutput();
 		menu();
-		outputText("You can choose how your permanent golems will behave during each fight.\n\n");
+		outputText("You can choose how your permanent golems will behave during each fight."+(player.hasPerk(PerkLib.FirstAttackSkeletons)?" Or skeletons if you rised any.":"")+"\n\n");
 		if (player.hasStatusEffect(StatusEffects.GolemUpgrades1)) {
 			if (player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0) {
 				var element:Number = player.statusEffectv3(StatusEffects.GolemUpgrades1);
@@ -583,21 +583,31 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking,true);
-
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking, true);
+		if (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) {
+			outputText("\n\n<b>Skeletons attack pattern behavious:</b>\n");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("Attacking at the begining of each turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(10, "Waiting", skeletonsAttacking,false);
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(11, "Attacking", skeletonsAttacking, true);
+		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);
 		function golemsElementaryWeaponMode(elementalMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,3,elementalMode);
-			golemsbehaviourOptions();
+			golemsskeletonsbehaviourOptions();
 		}
 		function golemsPoisonedWeaponMode(poisonedMode:Number):void {
 			player.changeStatusValue(StatusEffects.GolemUpgrades1,4,poisonedMode);
-			golemsbehaviourOptions();
+			golemsskeletonsbehaviourOptions();
 		}
         function golemsAttacking(attacking:Boolean):void {
             flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] = (attacking)?1:0;
-            golemsbehaviourOptions();
+            golemsskeletonsbehaviourOptions();
+        }
+        function skeletonsAttacking(attacking:Boolean):void {
+            flags[kFLAGS.NECROMANCER_SKELETONS] = (attacking)?1:0;
+            golemsskeletonsbehaviourOptions();
         }
 	}
 
@@ -803,6 +813,15 @@ public class PerkMenu extends BaseContent {
 			mutationsDatabase(1, false);
 		}
 
+		function mutationsDBHuman():void{
+			clearOutput();
+			//Kitsune Mutations
+			displayHeader("Human Mutations");
+			//if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
+			mutationsDatabaseVerify([IMutationsLib.HumanAdrenalGlandsIM, IMutationsLib.HumanBloodstreamIM, IMutationsLib.HumanBonesIM,IMutationsLib.HumanEyesIM, IMutationsLib.HumanFatIM, IMutationsLib.HumanMusculatureIM, IMutationsLib.HumanOvariesIM, IMutationsLib.HumanParathyroidGlandIM, IMutationsLib.HumanSmartsIM, IMutationsLib.HumanTesticlesIM, IMutationsLib.HumanThyroidGlandIM, IMutationsLib.HumanVersatilityIM]);
+			mutationsDatabase(1, false);
+		}
+
 		var bd:ButtonDataList = new ButtonDataList();
 		//This was originally hard coded buttons. Which it can still be, I suppose.
 		bd.add("Heart",  curry(mutationsDBSlot, IMutationPerkType.SLOT_HEART), "Heart Mutations");
@@ -823,6 +842,7 @@ public class PerkMenu extends BaseContent {
 		bd.add("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		bd.add("Dragons", mutationsDBDragon, "Dragon Mutations");
 		bd.add("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
+		bd.add("Humans", mutationsDBHuman,"Human Mutations");
 		submenu(bd, displayPerks, page, false);
 	}
 
@@ -965,6 +985,7 @@ public class PerkMenu extends BaseContent {
 		}
 		allPerks = temp;
 		clearOutput();
+		menu(); //Clear the other buttons out the way
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
 					  "/"+allPerks.length+")");
@@ -1379,12 +1400,16 @@ public class PerkMenu extends BaseContent {
 							change = true;
 						}
 					}
+					else if (cond.type == "noperks"){
+						continue;
+					}
 					else {	//The effect from this cause should never occur, as all these in masterlist should have a perk requirement of some sort.
 						requirelen++
 					}
-				}
+				}//Why is this suddenly triggering now? Could it be due to whatever changes were recently added in regards to Orm "merging" perks?
 				if (requirelen == pPerk.requirements.length){
 					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
+					trace("pPerk.name() + \"shouldn't be here. This is a bug. Trace is in repPerkClr.");
 				}
 			}
 			if (change){

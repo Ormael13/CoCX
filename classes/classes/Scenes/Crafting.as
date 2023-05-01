@@ -15,17 +15,17 @@ package classes.Scenes
 		public static var BagSlot04:Number;
 		public static var BagSlot04Cap:Number;//Iron Ore
 		public static var BagSlot05:Number;
-		public static var BagSlot05Cap:Number;//Ebonbloom
+		public static var BagSlot05Cap:Number;//Ebonbloom - not yet storable with current best bag
 		public static var BagSlot06:Number;
 		public static var BagSlot06Cap:Number;//Ebon Ingot
 		public static var BagSlot07:Number;
 		public static var BagSlot07Cap:Number;//Moonstone
 		public static var BagSlot08:Number;
-		public static var BagSlot08Cap:Number;//Skymetal
+		public static var BagSlot08Cap:Number;//Skymetal - not yet storable with current best bag
 		public static var BagSlot09:Number;
-		public static var BagSlot09Cap:Number;//Divine Ice
+		public static var BagSlot09Cap:Number;//Divine Ice - not yet storable with current best bag
 		public static var BagSlot10:Number;
-		public static var BagSlot10Cap:Number;//Orichalcum
+		public static var BagSlot10Cap:Number;//Orichalcum - not yet storable with current best bag
 		public static var BagSlot11:Number;
 		public static var BagSlot11Cap:Number;
 		public static var BagSlot12:Number;

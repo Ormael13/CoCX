@@ -485,9 +485,9 @@ public class SkinTransformations extends MutationsHelper {
 					switch (type) {
 						case 0: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.SLIME));
 							break;
-						case 1: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DARK_SLIME));
+						case 1: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.MAGMA_SLIME));
 							break;
-						case 2: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.MAGMA_SLIME));
+						case 2: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DARK_SLIME));
 							break;
 					}
 				},
@@ -508,7 +508,7 @@ public class SkinTransformations extends MutationsHelper {
 					desc += "Thick bark, not unlike that of the world tree’s, now covers your entire body. The iron-hard, rough wood is surprisingly flexible, but you notice that you can’t feel as much through this new, natural armour. <b>You are now covered by [skin color] bark from head to toe.</b>";
 					player.skin.setBaseOnly({type: Skin.BARK, adj: "bark-like", pattern: Skin.PATTERN_NONE});
 					if (doOutput) outputText(desc);
-					//Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.));
+					Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.BARK));
 				},
 				// is present
 				function (): Boolean {

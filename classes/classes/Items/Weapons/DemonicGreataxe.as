@@ -10,19 +10,27 @@ package classes.Items.Weapons
 		
 		public function DemonicGreataxe()
 		{
-			super("D.GAXE", "Demon G.Axe", "demonic greataxe", "a demonic greataxe", "cleave", 28, 1280,
+			super("D.GAXE", "Demon G.Axe", "demonic greataxe", "a demonic greataxe", "cleave", 100, 8000,
 					"A greataxe made in black metal and imbued with unholy power. Its shaft is wrapped in bat wings made of darkened bronze. Its deadly blade seems to always aim for the enemy necks.",
 					"Large", "Axe"
 			);
 		}
 		override public function get attack():Number{
 			var boost:int = 0;
-			if (game.player.str >= 100) boost += 9;
-			boost += Math.round(game.player.cor / 10);
-			return (9 + boost);
+			var scal:Number = 10;
+			if (game.player.str >= 100) {
+				boost += 30;
+				scal -= 3;
+			}
+			if (game.player.str >= 50) {
+				boost += 30;
+				scal -= 2;
+			}
+			boost += Math.round(game.player.cor / scal);
+			return (20 + boost);
 		}
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (game.player.level >= 54) return super.canEquip(doOutput);
 			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}

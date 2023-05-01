@@ -565,13 +565,15 @@ public function come2campCeani():void
 	outputText("\"<i>I...Sure [name] we could both live together at the sea I would really be happy to share life with you.</i>\"\n\n");
 	outputText("Actually... you meant it at your camp. The orca morph takes the time to evaluate her reply then ask an important question.\n\n");
 	outputText("\"<i>Well I would not mind but I need an ample supply of fish to avoid starvation. Don’t take it the wrong way but the reason I’m at sea is so I fill my daily needs in fishes. I can’t just choose to live with you and starve to death.</i>\"\n\n");
-	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {	// || flaga dla Ari
+	if (camp.FisheryWorkersCount() > 0) {
 		outputText("You just so happen to conveniently have a fishery back at the camp from which ");
-		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("Izma");//Izmael
-		//outputText("(if more than one npc) and ");
-		//outputText("(Aria)Aria(end of cut)");
+		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") outputText("" + flags[kFLAGS.FOLLOWER_AT_FISHERY_1] + "");
+		if (camp.FisheryWorkersCount() > 1) {
+			if (flags[kFLAGS.FOLLOWER_AT_FISHERY_2] != "") outputText(", "+flags[kFLAGS.FOLLOWER_AT_FISHERY_2]+"");
+			if (flags[kFLAGS.FOLLOWER_AT_FISHERY_3] != "") outputText(", "+flags[kFLAGS.FOLLOWER_AT_FISHERY_3]+"");
+		}
 		outputText(" regularly catch");
-		//outputText("es");jak dwa npc-e
+		if (camp.FisheryWorkersCount() > 1) outputText("es");
 		outputText(" a pretty good supply of food. Ceani look at you like it's a dream come true.\n\n");
 		outputText("\"<i>So that's it then let's live together! Ohhh I can’t wait!</i>\"\n\n");
 		outputText("She’s enthusiastically shaking both of your hands and jumping around in excitement causing quaking sounds. You stop her before she changes the landscape.\n\n");

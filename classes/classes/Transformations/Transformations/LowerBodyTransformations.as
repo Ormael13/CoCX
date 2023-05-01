@@ -2193,6 +2193,25 @@ public class LowerBodyTransformations extends MutationsHelper {
 			}
 	);
 	
+	public const LowerBodyYgddrasilRootClaws: Transformation = new SimpleTransformation("Ygddrasil Root Claws Lower Body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
+			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+			desc += "You lose your balance and fall to the ground as your feet begin to contort. You watch as your roots rearrange into a more solid configuration. <b>Your roots have assumed the form of three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.</b>";
+
+			if (doOutput) outputText(desc);
+			player.lowerBody = LowerBody.YGG_ROOT_CLAWS;
+			player.legCount = 2;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.YGG_ROOT_CLAWS));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.YGG_ROOT_CLAWS && player.legCount === 2;
+		}
+	);
+	
 	/*
   */
 }

@@ -421,28 +421,6 @@ public class PerkType extends BaseContent
 		public function requireAdaptationsMutationSlot():PerkType {
 			return requireMutationSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
-		public function requireDragonMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxDragonMutations() > 0;
-				},
-				text: "Free Dragon Mutation Slot",
-				type: "dragonmutation",
-				distance: DISTANCE_DEFAULT
-			});
-			return this;
-		}
-		public function requireKitsuneMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxKitsuneMutations() > 0;
-				},
-				text: "Free Kitsune Mutation Slot",
-				type: "kitsunemutation",
-				distance: DISTANCE_DEFAULT
-			});
-			return this;
-		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
