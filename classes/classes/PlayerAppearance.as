@@ -508,7 +508,10 @@ public class PlayerAppearance extends BaseContent {
 		var specialCasesDesc: String = "";
 
 		if (player.hasStatusEffect(StatusEffects.GooStuffed)) {
-			specialCasesDesc += "[pg]<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>[pg]";
+			specialCasesDesc += "<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>[pg]";
+		}
+		if (player.hasStatusEffect(StatusEffects.WormPlugged)) {
+			specialCasesDesc += "<b>Your belly is a bit pudgy and your vagina is inflamed from constant stimulation, and the reason becomes apparent when some of the worms that infest your womb momentarily peek outside. There is no way you are getting pregnant until you get rid of these worms!</b>";
 		}
 
 		return specialCasesDesc;
@@ -533,7 +536,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 
-		if ((player.isButtPregnant() || player.isPregnant()) && !player.hasStatusEffect(StatusEffects.GooStuffed)) {
+		if ((player.isButtPregnant() || player.isPregnant()) && !player.hasStatusEffect(StatusEffects.GooStuffed) && !player.hasStatusEffect(StatusEffects.WormPlugged)) {
 			if (womb["type"] == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 				pregnancyDesc += "<b>";
 				//Compute size
