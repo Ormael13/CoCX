@@ -43,7 +43,7 @@ public class RedPandaRace extends Race{
 				.armType(Arms.RED_PANDA, +1)
 				.legType(LowerBody.RED_PANDA, +1);
 		addScoresAfter(2)
-				.skinBasePattern(Skin.PATTERN_RED_PANDA_UNDERBODY, +1)
+				.skinCoatPattern(Skin.PATTERN_RED_PANDA_UNDERBODY, +1)
 				.skinCoatType(Skin.FUR, +1);
 		
 		buildTier(8, "red panda")
