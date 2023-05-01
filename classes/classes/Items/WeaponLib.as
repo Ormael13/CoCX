@@ -69,6 +69,7 @@ public final class WeaponLib extends ItemConstants
 		public const AETHERD:AetherD = new AetherD();
 		public const ATWINSCY:AlvinaTwinScythe = new AlvinaTwinScythe();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
+		public const ANGSTD1:AngstDagger = new AngstDagger();
 		public const ARMAGED:ArmageddonBlade = new ArmageddonBlade();
 		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 30, 4800, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt. (-25% spell cost, x6.5 spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
 		public const ASTERIUS:AsteriusRage = new AsteriusRage();

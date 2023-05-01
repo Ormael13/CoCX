@@ -1274,8 +1274,8 @@ public function unlockingCorruptLegendariesOption():void {
 }
 public function itemImproveMenuCorrupt():void {
 	var improvableItems:Array = [
-		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],//--//
-		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],//--//
+		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
+		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
 		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
 		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
@@ -1285,7 +1285,7 @@ public function itemImproveMenuCorrupt():void {
 		[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
 		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
 		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
-		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],//--//
+		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
 		[weapons.A_WAND, weapons.OCCULUS, weapons.ECLIPSE],
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
