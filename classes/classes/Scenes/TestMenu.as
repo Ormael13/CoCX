@@ -1745,7 +1745,7 @@ public class TestMenu extends BaseContent
 			addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 			addButton(11, "HEALHERB", AddHerb).hint("Add 1 HEALHERB.");
-			addButton(12, "Copp+Tin", AddCooperTinOre).hint("Add 1 Cooper and Tin ore.");
+			addButton(12, "Copp+Tin", AddCooperTinIronOre).hint("Add 1 Cooper, Tin and Iron ore.");
 			addButton(13, "-2-", MaterialMenu, page + 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -2038,13 +2038,17 @@ public class TestMenu extends BaseContent
 		outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
 		inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
 	}
-	public function AddCooperTinOre():void {
+	public function AddCooperTinIronOre():void {
 		outputText("\n\n<b>(Gained 1 Copper Ore!)</b>\n\n");
-		inventory.takeItem(useables.COP_ORE, AddCooperTinOre1);
+		inventory.takeItem(useables.COP_ORE, AddCooperTinIronOre1);
 	}
-	public function AddCooperTinOre1():void {
+	public function AddCooperTinIronOre1():void {
 		outputText("\n\n<b>(Gained 1 Tin Ore!)</b>\n\n");
-		inventory.takeItem(useables.TIN_ORE, curry(MaterialMenu, 1));
+		inventory.takeItem(useables.TIN_ORE, AddCooperTinIronOre2);
+	}
+	public function AddCooperTinIronOre2():void {
+		outputText("\n\n<b>(Gained 1 Irno Ore!)</b>\n\n");
+		inventory.takeItem(useables.IRONORE, curry(MaterialMenu, 1));
 	}
 	public function AddEnergyCore():void {
 		outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
