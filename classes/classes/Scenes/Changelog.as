@@ -116,10 +116,10 @@ public class Changelog extends BaseContent
 			outputText("-Fixed forest mage arms. Added Forest mage dress to Kaiba temporarily. (Liadri)\n");
 			outputText("-Job: Rogue was changed from Advanced type into Basic Job (speed based similary as Ranger job). That made it moved from tier 1 to tier 0. Sneak attack perk also been moved from tier 1 to 0 with added req. to have 15+ speed. Improved Evade perk req. 'to have job: ranger' changed to 'to have either job: ranger or job: rogue'.\n");
 			outputText("-Minotaurs if they would have axe it would drop after fight and not have chance (like 100% recently) to be broken.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New range weapon (by Ormael): Six shooter - buyable at Tripxi shop in Tel'Adre. Cost 580 gems. Base atk is 20 and ammo clip size 6.\n");
+			outputText("-Desert Eagle was replaced by Six shooter as firearm needed to make legendary firearm Good Samaritan / Blood Omen.\n");
+			outputText("-Many fixes to gargoyle. (Liadri)\n");
+			outputText("-Poultice super potent healing was brought to more realistic amounts with HP scaling increased from 15% to 20%. And scaling would be based on max Over HP so all those bloody PC's wouldn't find this useless now ;)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
