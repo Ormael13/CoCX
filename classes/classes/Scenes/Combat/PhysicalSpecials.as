@@ -1028,7 +1028,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You strike [themonster] vitals with your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
-		if (player.weapon == weapons.ANGSTD) SAMulti += 2;
+		if (player.weapon == weapons.ANGSTD1 || player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
 		if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) SAMulti *= 2;
