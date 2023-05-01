@@ -1482,7 +1482,7 @@ public class Pregnancy extends NPCAwareContent {
         }
         if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
         if (player.pregnancy2Incubation > 0 && player.pregnancy2Incubation < 2) player.knockUpForce(player.pregnancy2Type, 1, 1);
-        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) {
+        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT && player.pregnancyType != PregnancyStore.PREGNANCY_HARPY_HATCHING) {
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -2133,7 +2133,7 @@ public class Pregnancy extends NPCAwareContent {
                 displayedUpdate = true;
             }
         }
-        if(player.pregnancy2Incubation == 1 && player.pregnancy2Type != PregnancyStore.PREGNANCY_BENOIT) {
+        if(player.pregnancy2Incubation == 1 && player.pregnancy2Type != PregnancyStore.PREGNANCY_BENOIT && player.pregnancy2Type != PregnancyStore.PREGNANCY_HARPY_HATCHING) {
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -3011,7 +3011,7 @@ public class Pregnancy extends NPCAwareContent {
         }
         if (player.pregnancy2Type == PregnancyStore.PREGNANCY_BENOIT && player.pregnancy2Incubation <= 2) {
             if(model.time.hours != 5 && model.time.hours != 6) {
-                player.knockUpForce(player.pregnancyType, 3, 1); //Make sure eggs are only birthed early in the morning
+                player.knockUpForce(player.pregnancy2Type, 3, 1); //Make sure eggs are only birthed early in the morning
             }
             else {
                 player.knockUpForce(0,0,1); //Clear Pregnancy
@@ -3019,12 +3019,13 @@ public class Pregnancy extends NPCAwareContent {
                 SceneLib.bazaar.benoit.popOutBenoitEggs();
             }
         }
-        if (((player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) ||(player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING)) && SophieFollowerScene.HarpyEggReady) {
+        if ((player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING && player.pregnancyIncubation <= 2) ||
+            (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING && player.pregnancy2Incubation <= 2)) {
             if(model.time.hours != 5 && model.time.hours != 6) {
                 if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
-                if (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancyType, 3, 1); //Make sure eggs are only birthed early in the morning
+                if (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancy2Type, 3, 1); //Make sure eggs are only birthed early in the morning
             }
-            else {
+            else if (SophieFollowerScene.HarpyEggReady) {
                 if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) {
                     SophieFollowerScene.HarpyKids += 1;
                     player.knockUpForce(); //Clear Pregnancy
@@ -3048,6 +3049,10 @@ public class Pregnancy extends NPCAwareContent {
                         " Guess it's back to milking males of their semens for you.");
                 SophieFollowerScene.HarpyEggReady = false
                 displayedUpdate = true;
+            }
+            else {
+                if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
+                if (player.pregnancy2Type == PregnancyStore.PREGNANCY_HARPY_HATCHING) player.knockUpForce(player.pregnancy2Type, 3, 1); //Make sure eggs are only birthed early in the morning
             }
         }
         return displayedUpdate;

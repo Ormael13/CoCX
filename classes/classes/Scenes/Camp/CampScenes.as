@@ -542,10 +542,6 @@ public function EclassHTsurvived():void {
 public function goblinsBirthScene(womb:int = 0):void {
 	daughtersCount += 1 + rand(5);
 	outputText("\n");
-	if(player.vaginas.length == (womb+1)) {
-		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ");
-		player.createVagina();
-	}
 	outputText("A sudden gush of fluids erupts from your vagina - your water just broke. You moan in pleasure as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.\n\n");
 	outputText("The pleasure only increase as your delivery continues... Arousal spikes through you as the contractions intensify, and as you feel something begin to pass you have a tiny orgasm. Yet this is only the beginning, and the contractions spike again, pushing you to orgasm as your daughter keeps moving forward. It repeats, over and over, nearly a dozen times she causes you to orgasm... this is even better then getting fucked! ");
 	if (daughtersCount > 1) outputText("Each new baby you pop is a new orgasm and by the end of it your tongue is panting out from pleasure. ");

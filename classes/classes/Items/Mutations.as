@@ -15795,9 +15795,9 @@ public final class Mutations extends MutationsHelper {
             transformations.TailRedPanda.applyEffect();
             changes++;
         }
-        if (rand(3) == 0 && changes < changeLimit && !player.isFurCovered()) {
+        if (rand(3) == 0 && changes < changeLimit && (!player.isFurCovered() || player.skin.pattern != Skin.PATTERN_RED_PANDA_UNDERBODY)) {
             outputText("[pg]");
-            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet-red", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet2", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
             changes++;
         }
         player.refillHunger(20);

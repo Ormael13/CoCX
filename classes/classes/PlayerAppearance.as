@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Races.ElementalRace;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.internals.Utils;
 
 public class PlayerAppearance extends BaseContent {
@@ -518,13 +519,13 @@ public class PlayerAppearance extends BaseContent {
 		var pregnancyDesc: String = "";
 		var womb:Object;
 		if (player.isPregnant()) {
-			if (player.pregnancyIncubation > 0) {
+			if (player.pregnancyType > 0) {
 				womb = {};
 				womb["womb"] = 0
 				womb["type"] = player.pregnancyType;
 				womb["incubation"] = player.pregnancyIncubation;
 			}
-			if (player.pregnancy2Incubation > 0 && (player.pregnancyIncubation == 0 || (player.pregnancyIncubation > 0 && player.pregnancy2Incubation < player.pregnancyIncubation))) {
+			if (player.pregnancy2Type > 0 && (player.pregnancyType == 0 || (player.pregnancyIncubation > 0 && player.pregnancy2Incubation < player.pregnancyIncubation))) {
 				womb = {};
 				womb["womb"] = 1
 				womb["type"] = player.pregnancy2Type;
@@ -609,6 +610,10 @@ public class PlayerAppearance extends BaseContent {
 				else if (womb["incubation"] <= 140)
 					pregnancyDesc += "It feels like it’s full of thick syrup or jelly.</b>";
 				else pregnancyDesc += "It still feels like there’s a solid ball inside your womb.</b>";
+			} else if (womb["type"] == PregnancyStore.PREGNANCY_HARPY_HATCHING) {
+				pregnancyDesc += "You eagerly await the hatching of your harpy egg at camp. You feel it should hatch ";
+				if (7 - SophieFollowerScene.HarpyEggDay > 0)  pregnancyDesc += "in " + (7 - SophieFollowerScene.HarpyEggDay) + " days.";
+				else pregnancyDesc += "tomorrow.";
 			} else {
 				if (womb["incubation"] <= 336 && womb["incubation"] > 280) {
 					pregnancyDesc += "<b>Your belly is larger than it used to be.</b>";
@@ -631,8 +636,10 @@ public class PlayerAppearance extends BaseContent {
 				else { //Surely Benoit and Cotton deserve their place in this list
 					if (womb["type"] == PregnancyStore.PREGNANCY_MARBLE)
 						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>";
-					else if (InCollection(womb["type"], PregnancyStore.PREGNANCY_IZMA, PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.PREGNANCY_AMILY, PregnancyStore.PREGNANCY_EMBER, PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.PREGNANCY_COTTON, PregnancyStore.PREGNANCY_URTA, PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.PREGNANCY_ZENJI) || (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (JojoScene.monk <= 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3)))
+					else if (InCollection(womb["type"], PregnancyStore.PREGNANCY_IZMA, PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.PREGNANCY_AMILY, PregnancyStore.PREGNANCY_EMBER, PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.PREGNANCY_COTTON, PregnancyStore.PREGNANCY_URTA, PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.PREGNANCY_ZENJI) || (womb["type"] == PregnancyStore.PREGNANCY_JOJO && (JojoScene.monk <= 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3)))
 						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>";
+					else if (womb["type"] == PregnancyStore.PREGNANCY_HARPY_EGGS)
+						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with your harpy eggs.</b>";
 					else pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>";
 				}
 			}
