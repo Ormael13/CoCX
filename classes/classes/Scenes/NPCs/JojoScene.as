@@ -740,6 +740,11 @@ public function milkJojoFirst():void {
 
 	outputText("Bouncing up, down, back, and forth, the milker twitches with every change of pressure and beat of Jojo's furiously pounding heart.  He whines pitifully, the sound a mix of begging and intense, erotic pleasure.  You gently caress his twitching sack, letting the heavy orbs roll back and forth between your fingers.  They even bounce from time to time, drawn tight every time the machine edges him closer to orgasm.  What an absolute marvel of demon technology.  It's able to take a body to the very brink of release and then back off.  It keeps the victim on edge as long as possible in order to maximize the user's (or victim's?) eventual 'output'.\n\n");
 
+	sceneHunter.passCheckOnce();
+	sceneHunter.selectGender(dickF, vagF, ["Watch", glessF], null, 0,
+			player.hasCock(),
+			"Need a penis");
+
 	function dickF():void {
 		//(Cock - too big!)
 		if(x < 0) {
@@ -761,6 +766,7 @@ public function milkJojoFirst():void {
 			outputText(".  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  You smile and push forward, sheathing yourself inside Jojo's spasming asshole.  His happily convulsing muscles clamp tight around you, seizing your " + cockDescript(x) + " in his hot innards.  Swatting his plump, furry cheeks, you start to fuck him, noting that the machine all but stops its rhythmic motions.  It seems pounding Jojo's prostate into mush is as effective at milking his dick as the unholy semen-seeking machinery.\n\n");
 		}
 		if (!recalling) player.sexReward("no", "Dick");
+		sharedEnd(true);
 	}
 	function vagF():void {
 		if(flags[kFLAGS.TIMES_COCK_MILKED] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release");
@@ -769,15 +775,17 @@ public function milkJojoFirst():void {
 		if(player.clitLength > 3) outputText("Your other hand grabs your penis-sized 'button' and begins to jack it, the action sending tremors of sensation through your " + hipDescript() + ".  ");
 		outputText("Feeling naughty, you sit up straight and lick at Jojo's twitching balls, observing his shame as he squirms on your nose.\n\n");
 		if (!recalling) player.sexReward("no", "Vaginal");
+		sharedEnd();
 	}
 	function glessF():void {
 		if(flags[kFLAGS.TIMES_COCK_MILKED] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release");
 		else outputText("You figure the machine will probably pump him for quite a while before it allows release");
 		outputText(", and while you're getting quite turned on from the show, you lack the equipment to take care of your lusts in a satisfactory way.  Meanwhile, Jojo is just moaning, squirming, and twitching each time he's brought close to orgasm.  You sit down and watch the machinery take your mouse-toy to task, wishing you had similar endowments you could be taking care of right now.\n\n");
 		if (!recalling) dynStats("lus", 50, "scale", false);
+		sharedEnd();
 	}
 
-	function sharedEnd(cock:Boolean):void {
+	function sharedEnd(cock:Boolean = false):void {
 		outputText("At long last, the appointed time has come, and Jojo lets out the most lewd-sounding squeak you've ever heard come from his mouth.  His ass-cheeks and legs clench and flex against their restraints");
 		if (cock) outputText(", squeezing your " + cockDescript(x) + " with agonizingly pleasurable pressure");
 		outputText(".  His back arches in ecstasy.  Most noticeably, the tube slurping on his cock is suddenly distorting as thick, round globules of mousey seed are sucked towards the wall.  The bulges are quickly smoothed out into one long, hose-dilating river of rodent-spooge.");

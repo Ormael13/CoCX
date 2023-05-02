@@ -1666,7 +1666,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		}
 		
 		//Player gives birth!
-		public function playerGivesBirth(womb:int = 1):void {
+		public function playerGivesBirth(womb:int = 0):void {
 			minervaScene.minervaSprite();
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) outputText("<b>No scene for corrupted Minerva yet, so just take this one for now.</b>");
 			outputText("A pain develops in your abdomen. You realize it's time to give birth to the sirens! You set foot on the high mountains path and hurry to the tower.");
