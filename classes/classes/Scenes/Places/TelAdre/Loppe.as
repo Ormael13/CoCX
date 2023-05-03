@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places.TelAdre {
+package classes.Scenes.Places.TelAdre {
 import classes.BodyParts.Tongue;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
@@ -2498,7 +2498,13 @@ private function snuggleNap():void {
 private function snuggleLewds():void {
 	clearOutput();
 	outputText("");
-
+	if (player.tallness >= 74 || player.isTaur()) {
+		outputText("Suddenly, you feel something flat poking against one of your hands. You open your eyes to look down and see the flared tip of her horse cock. You look back at Loppe and see her shy smile, trying to hide her blush. You smile, slowly taking one hand and massaging the back of her head. Meanwhile, your other hand travels down. Taking two fingers, you gently caress the length of her member. The bunny-girl’s legs quiver and she lets out a short but soft moan. You continue with your gentle treatments, and slowly, you begin to wrap your fingers around her dick. You slowly begin stroking her, all while continuing to massage her scalp, and eventually, you shift your attention to her ears, scratching them like you would a small pet. She buries her face in your chest/breasts in pleasurable embarrassment and wraps her legs around your body. " +
+				"Her gentle coos quickly escalate to sensual moans. She even begins to slowly move her hips in tandem with your hand pumps. Her movements eventually speed up to the point where if someone were to walk in, they’d be forgiven for mistaking her for a dog humping your leg. Eventually, you feel her member becoming rock hard, before Loppe, still snuggling against you, whispers “cumming”. Suddenly, with a loud moan, her dick explodes, jizz shooting up with such strength that most of it ends up on her ceiling and wall. Your hand very quickly gets a nice coating of her baby batter, and all the while, Loppe continues to hold on to you like her life depends on it.[pg]");
+	} else {
+		outputText("Suddenly, you feel a small moment of clarity. You’re the champion of Ignam, you can’t be beaten, even if it’s in something as inconsequential as cuddling. You’re the one who knocked up Loppe in the first place. Even if you’re smaller than her doesn’t mean she can suddenly baby you. You ponder how you will turn this situation around in your favor. Suddenly a very lusty idea manifested in your head and your face shifted to a very mischievous smile. Loppe sees this, and a mild look of confusion washes over her. You continue with your belly rub but keep going lower down, for your true target is not her pregnant belly. Eventually, you feel it. Her well-endowed horse rod suddenly pokes you, and you take advantage of this opportunity and grab it. You try to stroke her cock, but suddenly, you realize that your height has once again betrayed you. " +
+				"With her pregnant belly in the way, you struggle to reach any further than your hand’s length down her shaft. Frustrated, you ponder how you will make this work.[pg]");
+	}
 	snuggleEndLewd();
 }
 
@@ -2544,7 +2550,7 @@ public function pcGivesBirthToLoppeKits(womb:int = 0):void {
 			(kidType == 1 ?"Only one of them has their “father’s” horse-tail, with the other having a bunny tail instead" :
 			"Both of them actually have rabbit’s tails rather than the horse tail that Loppe herself has")) +
 			".  A closer look confirms that, just like “daddy”, they’re both herms, though you promptly find yourself more concerned with feeding your little monsters as they grab hungrily onto your [nipples] with their little hands and start suckling nosily. You smile at your daughters and hold them close, then allow yourself to drift back to sleep - you’ll take care of them in the morning...[pg]");
-	outputText("When dawn comes, the two laquine kittens are curled happily into your [chest], fast asleep and clutching onto you and each other for comfort.  Gently you lift them off of you and place them together on your bedding - at once they curl back together, snuggling as close to each other as possible, and you can’t resist a small grin as you wonder if that closeness will linger into their teens - and if they’ll want to “share” the same boyfriend or girlfriend as a result.  You quietly grab a quick breakfast and some clean clothes, through which the two laquines sleep soundly.  Then, fed and dressed, you carefully pick them up and head off towards the city in the desert; you can’t keep them yourself, so they’ll have to stay with Loppe where it’s safe.[pg]");
+	outputText("When dawn comes, the two laquine kits are curled happily into your [chest], fast asleep and clutching onto you and each other for comfort.  Gently you lift them off of you and place them together on your bedding - at once they curl back together, snuggling as close to each other as possible, and you can’t resist a small grin as you wonder if that closeness will linger into their teens - and if they’ll want to “share” the same boyfriend or girlfriend as a result.  You quietly grab a quick breakfast and some clean clothes, through which the two laquines sleep soundly.  Then, fed and dressed, you carefully pick them up and head off towards the city in the desert; you can’t keep them yourself, so they’ll have to stay with Loppe where it’s safe.[pg]");
 	outputText("The babies are good and sleep all through the long trek to Tel’Adre, only starting to stir and babble meaningless noises to each other and to you after you make your way through the gate, the surprised guardsman seeming very astonished at the sight of a lone "+player.mf("man","woman")+" wandering in out of the wasteland with two babes in her arms.  You quickly make your way to Loppe’s home, and knock insistently at the door.[pg]");
 	if (pcFirstLoppeKits){
 		outputText("It’s Uma who opens the door with a yawn, wearing a bathrobe that just manages to cover her nipples while still baring most of her breasts" +

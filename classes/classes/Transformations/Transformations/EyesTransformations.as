@@ -813,7 +813,7 @@ public class EyesTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return InCollection(player.eyes.colour, ["blue", "green", "turquoise", "light green"]);
+				return player.eyes.type === Eyes.RAIJU && InCollection(player.eyes.colour, ["blue", "green", "turquoise", "light green"]);
 			}
 	);
 
