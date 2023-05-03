@@ -123,8 +123,8 @@ public class Changelog extends BaseContent
 			outputText("-Poultice super potent healing was brought to more realistic amounts with HP scaling increased from 15% to 20%. And scaling would be based on max Over HP so all those bloody PC's wouldn't find this useless now ;)\n");
 			outputText("-Demon Scythe will no longer corrupt PC as it will be effect on Hellraizer now. Also selfcorrupt and selfpurify effects would be ~3x stronger.\n");
 			outputText("-New melee weapon (by Ormael): Angst dagger - buyable at Eraendir shop. Cost 1680 gems. Base atk is 21, Low grade wrath weapon (small), increase damage multiplier on sneak attacks by 200% of base value, max base atk value reached at 300+ speed and 60+ strength.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fix imp balls missing. (Liadri)\n");
+			outputText("-Fix Minerva pregnancy, Ayo armors will keep their energy after loading, Jojo Milking scene has been wired up again after 8 months, Raiju eye colot tf fix. (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
