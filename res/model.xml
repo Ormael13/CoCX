@@ -1108,10 +1108,10 @@
         <cell rect="861,380,49,29" name="fullbodyBalls/sylphsillyhuge" dx="79" dy="106"/>
 		<cell rect="961,200,49,29" name="fullbodyPenisFg/imp" dx="76" dy="86"/>
         <cell rect="961,230,49,58" name="fullbodyPenisFg/impbig" dx="74" dy="64"/>
-		<cell rect="11,290,49,29" name="fullbodyBalls/Bimpsmall" dx="80" dy="99"/>
-        <cell rect="11,320,49,29" name="fullbodyBalls/Bimplarge" dx="80" dy="100"/>
-        <cell rect="11,350,49,29" name="fullbodyBalls/Bimphuge" dx="80" dy="100"/>
-        <cell rect="11,380,49,29" name="fullbodyBalls/Bimpsillyhuge" dx="80" dy="101"/>
+		<cell rect="11,290,49,29" name="fullbodyBalls/impsmall" dx="80" dy="99"/>
+        <cell rect="11,320,49,29" name="fullbodyBalls/implarge" dx="80" dy="100"/>
+        <cell rect="11,350,49,29" name="fullbodyBalls/imphuge" dx="80" dy="100"/>
+        <cell rect="11,380,49,29" name="fullbodyBalls/impsillyhuge" dx="80" dy="101"/>
         <cell rect="11,80,49,29" name="breasts/0" dx="79" dy="68"/>
         <cell rect="711,80,49,29" name="fullbodyBreast/gnome0" dx="79" dy="68"/>
         <cell rect="761,80,49,29" name="fullbodyBreast/ignis0" dx="79" dy="68"/>
