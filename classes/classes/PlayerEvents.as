@@ -1297,8 +1297,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var cloneDao:int = player.statusEffectv1(clone);
 					if (cloneDao > 10 && cloneDao < 21) {
 						for (var i:int = 0; i < Soulforce.daos.length; ++i) {
-							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension())
+							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension()) {
 								SceneLib.soulforce.daoContemplationsEffect(Soulforce.daos[i][1], Soulforce.daos[i][0], true);
+								needNext = true;
+							}
 						}
 					}
 				}
