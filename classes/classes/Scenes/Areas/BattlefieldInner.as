@@ -43,7 +43,7 @@ public class BattlefieldInner extends BaseContent
 			name: "helcommon",
 			night : false,
 			call: SceneLib.helScene.helSexualAmbush,
-			chance: 0.2,
+			chance: battlefieldInnerChance,
 			when: SceneLib.helScene.helSexualAmbushCondition
 		}, {
 			name: "etna",
@@ -53,7 +53,7 @@ public class BattlefieldInner extends BaseContent
 						&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 						&& (player.level >= 20);
 			},
-			chance: 0.5,
+			chance: battlefieldInnerChance,
 			call: SceneLib.etnaScene.repeatYandereEnc
 		},  {
 			name: "diana",
@@ -61,7 +61,7 @@ public class BattlefieldInner extends BaseContent
 			when: function():Boolean {
 				return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 			},
-			chance: 0.5,
+			chance: battlefieldInnerChance,
 			call: SceneLib.dianaScene.repeatEnc
 		}, {
 			name: "dianaName",
@@ -69,7 +69,7 @@ public class BattlefieldInner extends BaseContent
 			when: function():Boolean {
 				return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 			},
-			chance: 0.5,
+			chance: battlefieldInnerChance,
 			call: SceneLib.dianaScene.postNameEnc
 		}, {
 			name: "ted",
@@ -108,6 +108,12 @@ public class BattlefieldInner extends BaseContent
 		doNext(camp.returnToCampUseOneHour);
 		battlefieldInnerEncounter.execEncounter();
 		flushOutputTextToGUI();
+	}
+	
+	public function battlefieldInnerChance():Number {
+		var temp:Number = 0.5;
+		if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+		return temp;
 	}
 
 	private function findNothing():void {

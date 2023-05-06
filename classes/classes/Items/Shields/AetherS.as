@@ -26,12 +26,19 @@ import classes.StatusEffects;
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Weapon (Gauntlet)";
+			desc += "\n\nType: Weapon ("+formDesc+")";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value
 			desc += "\nBase value: 0";
 			return desc;
+		}
+		private function formDesc():String {
+			var fd:String = "";
+			if (game.player.hasAetherTwinsTierS2()) fd = "Dagger";
+			else if (game.player.hasAetherTwinsTierS1()) fd = "Small Shield";
+			else fd = "Gauntlet";
+			return fd;
 		}
 		
 		override public function equipText():void {

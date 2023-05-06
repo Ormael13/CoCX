@@ -1026,6 +1026,8 @@ use namespace CoC;
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack() || hasTentacleAttacks() || isAlraune() || isTaur());}
 		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
 		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
+		public function hasAetherTwinsTierS1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"; }
+		public function hasAetherTwinsTierS2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"; }
 		//Some other checks
 		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -1058,7 +1060,7 @@ use namespace CoC;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("LGWrath") || weapon == game.weapons.ANGSTD1 || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
+			return weaponSpecials("LGWrath") || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1066,11 +1068,11 @@ use namespace CoC;
 		}
 		public function isMidGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("MGWrath") || weapon == game.weapons.NTWHIP;
+			return weaponSpecials("MGWrath") || weapon == game.weapons.ANGSTD1 || weapon == game.weapons.NTWHIP || hasAetherTwinsTierS1();
 		}
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
-			return weapon == game.weapons.ASTERIUS;
+			return weapon == game.weapons.ASTERIUS || hasAetherTwinsTierS2();
 		}/*
 		public function isHighGradeWrathWeapon():Boolean
 		{
@@ -1155,7 +1157,7 @@ use namespace CoC;
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
+			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -1170,7 +1172,7 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return (weaponClass("Thrown"));//wrath large weapon that can be throwed or used in melee xD
+			return (weaponClass("Thrown")) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
@@ -1791,7 +1793,7 @@ use namespace CoC;
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || hasAetherTwinsTierS1());
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -1804,11 +1806,9 @@ use namespace CoC;
 				else if (shieldPerk == "Large") block += 2;
 				else block += 1;
 			}
-			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) {
-				if (AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") block += 4;
-				else if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets") block += 2;
-				block += 1;
-			}
+			if (hasAetherTwinsTier2() || hasAetherTwinsTierS1()) block += 4;
+			else if (hasAetherTwinsTier1() || hasAetherTwinsTierS2()) block += 2;
+			else if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) block += 1;
 			if (hasPerk(PerkLib.PrestigeJobSentinel)) {
 				if (shieldPerk == "Massive") block += 3;
 				else if (shieldPerk == "Large") block += 2;
@@ -6485,7 +6485,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
-			
 			return additionalTransformationChancesCounter;
 		}
 
@@ -6548,6 +6547,11 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
+		}
+
+		public function npcChanceToEncounter():Number {
+			if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) return 200;
+			else return 1;
 		}
 
 		public function BrainMeltBonus():void

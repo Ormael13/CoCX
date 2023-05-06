@@ -119,14 +119,14 @@ use namespace CoC;
 				when: function ():Boolean {
 					return player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && player.exploredLake >= 10 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
 				},
-				chance: 0.15,
+				chance: lakeChance,
 				call: SceneLib.izmaScene.meetIzmaAtLake
 			}, {
 				name: "belisa",
 				when: function ():Boolean {
 					return BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 2
 				},
-				chance: 0.2,
+				chance: lakeChance,
 				call: SceneLib.belisa.subsequentEncounters
 			}, {
 				name: "callu",
@@ -141,13 +141,14 @@ use namespace CoC;
 				when: function ():Boolean {
 					return flags[kFLAGS.GOO_TFED_MEAN] + flags[kFLAGS.GOO_TFED_NICE] > 0 && flags[kFLAGS.GOO_SLAVE_RECRUITED] == 0
 				},
-				chance: 1/15,
+				chance: lakeChance,
 				call: SceneLib.latexGirl.encounterLeftBehindGooSlave
 			}, {
 				name: "rathazul",
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.CampRathazul)
 				},
+				chance: lakeChance,
 				night: false,
 				call: SceneLib.rathazul.encounterRathazul
 			}, {
@@ -168,7 +169,7 @@ use namespace CoC;
 				name: "helcommon",
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
-				chance: 0.4,
+				chance: lakeChance,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
@@ -178,7 +179,7 @@ use namespace CoC;
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: lakeChance,
 				call: SceneLib.etnaScene.repeatYandereEnc
 			},  {
 				name: "diana",
@@ -186,7 +187,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 				},
-				chance: 0.5,
+				chance: lakeChance,
 				call: SceneLib.dianaScene.repeatEnc
 			}, {
 				name: "dianaName",
@@ -194,7 +195,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
-				chance: 0.5,
+				chance: lakeChance,
 				call: SceneLib.dianaScene.postNameEnc
 			}/*, {
 				name: "demonProjects",
@@ -222,6 +223,12 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 			lakeEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+
+		public function lakeChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function slimeOozeEncounterFn():void {

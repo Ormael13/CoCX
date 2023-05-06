@@ -55,6 +55,7 @@ use namespace CoC;
 				}, {
 					name: "naga",
 					when: fn.ifLevelMin(4),
+					chance: nagaChance,
 					call: nagaScene.nagaEncounter
 				}, {
 					name  : "sandtrap",
@@ -170,7 +171,7 @@ use namespace CoC;
 					call  : oasis.oasisEncounter
 				}, {
 					name: "etna",
-					chance: 0.2,
+					chance: desertChance,
 					when: function ():Boolean
 					{
 						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
@@ -181,7 +182,7 @@ use namespace CoC;
 					name  : "helcommon",
 					night : false,
 					call  : SceneLib.helScene.helSexualAmbush,
-					chance: 0.2,
+					chance: desertChance,
 					when  : SceneLib.helScene.helSexualAmbushCondition
 				}, {
 					name: "mimic",
@@ -211,7 +212,7 @@ use namespace CoC;
 					call: sandWormScene.SandWormEncounter
 				}, {
 					name: "etna",
-					chance: 0.2,
+					chance: desertChance,
 					when: function ():Boolean
 					{
 						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && (player.level >= 20));
@@ -222,7 +223,7 @@ use namespace CoC;
 					name  : "helcommon",
 					night : false,
 					call  : SceneLib.helScene.helSexualAmbush,
-					chance: 0.2,
+					chance: desertChance,
 					when  : SceneLib.helScene.helSexualAmbushCondition
 				},{
 					name: "electra",
@@ -230,7 +231,7 @@ use namespace CoC;
 					when: function():Boolean {
 						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 					},
-					chance:0.5,
+					chance: desertChance,
 					call: function ():void {
 						if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
 							if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
@@ -276,6 +277,12 @@ use namespace CoC;
 			innerdesertEncounter.execEncounter();
 			flushOutputTextToGUI();
 		}
+	
+		public function desertChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
 
 		private function discoverInnerDesert():void {
 			clearOutput();
@@ -304,11 +311,18 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		public function nagaChance():Number {
+			var temp:Number = 1;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
+		
 		public function phyllaAnthillChance():Number {
 			var temp:Number = 1.5;
 			if (flags[kFLAGS.PHYLLA_SAVED] == 1) temp += 1.5;
 			if (flags[kFLAGS.PC_READY_FOR_ANT_COLONY_CHALLENGE] == 1) temp += 1.5;
 			if (flags[kFLAGS.ANT_ARENA_WINS] > 0) temp += flags[kFLAGS.ANT_ARENA_WINS] * 1.5;
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 

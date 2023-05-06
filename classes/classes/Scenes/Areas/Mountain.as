@@ -72,7 +72,7 @@ public class Mountain extends BaseContent
 				name  : "helcommon",
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
-				chance: 0.2,
+				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
@@ -81,7 +81,7 @@ public class Mountain extends BaseContent
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: mountainChance,
 				call  : function ():void {
 					if (flags[kFLAGS.ETNA_AFFECTION] < 2) SceneLib.etnaScene.firstEnc();
 					else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) SceneLib.etnaScene.repeatYandereEnc();
@@ -94,7 +94,7 @@ public class Mountain extends BaseContent
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: mountainChance,
 				call  : function ():void {
 					 SceneLib.etnaScene.etnaInfidelityEncounter();
 				}
@@ -105,7 +105,7 @@ public class Mountain extends BaseContent
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: 0.1,
+				chance: mountainChance,
 				call  : function ():void {
 					 SceneLib.etnaScene.etnaInfidelityEncounterRepeat();
 				}
@@ -114,7 +114,7 @@ public class Mountain extends BaseContent
 				when  : function():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] == 8;
 				},
-				chance: 0.5,
+				chance: mountainChance,
 				call  : SceneLib.alvinaFollower.alvinaSecondEncounter
 			}, {
 				name  : "alvina2",
@@ -123,7 +123,7 @@ public class Mountain extends BaseContent
 						   && flags[kFLAGS.LETHICE_DEFEATED] > 0
 						   && !player.hasStatusEffect(StatusEffects.LethiceRedemed);
 				},
-				chance: 0.5,
+				chance: mountainChance,
 				call  : SceneLib.alvinaFollower.alvinaSecondBonusEncounter
 			}, {
 				name: "lowmountains",
@@ -162,7 +162,7 @@ public class Mountain extends BaseContent
 			},{
 				name:"ceraph",
 				night : false,
-				chance:0.7,
+				chance: mountainChance,
 				when:function ():Boolean {
 					return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
 							/* [INTERMOD:8chan]
@@ -215,7 +215,7 @@ public class Mountain extends BaseContent
 				name  : "helcommon",
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
-				chance: 0.2,
+				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "salon",
@@ -304,7 +304,7 @@ public class Mountain extends BaseContent
 				when: function ():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 				},
-				chance:0.5,
+				chance: mountainChance,
 				call: function ():void {
 					if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
 					else {
@@ -320,6 +320,7 @@ public class Mountain extends BaseContent
 				when: function():Boolean {
 					return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0 && !player.hasStatusEffect(StatusEffects.DivaOff);
 				},
+				chance: mountainChance,
 				call: DivaScene.instance.encounter
 			},{
 				name: "quarry",
@@ -392,7 +393,7 @@ public class Mountain extends BaseContent
 				name  : "helcommon",
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
-				chance: 0.2,
+				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "highmountains",
@@ -425,7 +426,7 @@ public class Mountain extends BaseContent
 				when: function ():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 				},
-				chance:0.5,
+				chance: mountainChance,
 				call: function ():void {
 					if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
 					else {
@@ -464,6 +465,7 @@ public class Mountain extends BaseContent
 						&& flags[kFLAGS.SOPHIE_DISABLED] <= 0
 						&& !SceneLib.sophieFollowerScene.sophieFollower();
 				},
+				chance: mountainChance,
 				call: SceneLib.sophieScene.sophieRouter
 			}, {
 				name: "darkelf",
@@ -536,6 +538,11 @@ public class Mountain extends BaseContent
 			else SceneLib.ceraphScene.encounterCeraph();
 		}
 
+		public function mountainChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
 		public function minotaurChance():Number {
 			if (player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity)) return 3;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0) return 2;

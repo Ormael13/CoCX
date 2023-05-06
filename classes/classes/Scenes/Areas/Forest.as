@@ -105,7 +105,7 @@ use namespace CoC;
 						name  : "helcommon",
 						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
-						chance: 0.2,
+						chance: forestChance2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name  : "Tamani",
@@ -197,7 +197,7 @@ use namespace CoC;
 								   && player.hasStatusEffect(StatusEffects.Marble)
 								   && flags[kFLAGS.MARBLE_WARNING] == 0;
 						},
-						chance: 0.05
+						chance: forestChance3
 					}, {
 						name: "walk",
 						call: forestWalkFn
@@ -221,14 +221,14 @@ use namespace CoC;
 						when  : function():Boolean {
 							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
 						},
-						chance: 1.5
+						chance: forestChance4
 					}, {
 						name  : "luna",
 						call  : SceneLib.lunaFollower.fullMoonEventResistWinFireHerForest,
 						when  : function():Boolean {
 							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
 						},
-						chance: 2
+						chance: forestChance4
 					}/*, {
 						name: "demonProjects",
 						chance: 0.2,
@@ -253,7 +253,7 @@ use namespace CoC;
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.helScene.helSexualAmbush();
 						},
-						chance: 0.2,
+						chance: forestChance2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name  : "deepwoods",
@@ -315,7 +315,7 @@ use namespace CoC;
 							//Extra chance of Jojo encounter.
 							return (player.hasPerk(PerkLib.PiercedFurrite)
 									&& rand(5) == 0
-									&& (player.cor > 25 || JojoScene.monk > 0)) ? 2.4 : 2;
+									&& (player.cor > 25 || JojoScene.monk > 0)) ? (2.4 * player.npcChanceToEncounter()) : (2 * player.npcChanceToEncounter());
 						},
 						call  : jojoEncounter
 					}, {
@@ -391,14 +391,14 @@ use namespace CoC;
 								   && player.hasStatusEffect(StatusEffects.Marble)
 								   && flags[kFLAGS.MARBLE_WARNING] == 0;
 						},
-						chance: 0.05
+						chance: forestChance3
 					}, {
 						name: "diana",
 						night : false,
 						when: function():Boolean {
 							return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 						},
-						chance: 0.5,
+						chance: forestChance,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.dianaScene.repeatEnc();
@@ -409,7 +409,7 @@ use namespace CoC;
 						when: function():Boolean {
 							return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 						},
-						chance: 0.5,
+						chance: forestChance,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.dianaScene.postNameEnc();
@@ -433,7 +433,8 @@ use namespace CoC;
 						chance: bigJunkChance
 					}, {
 						name: "celess-unicorn",
-						call: function():*{return CelessScene.instance.celessUnicornIntro();},
+						call: function():*{return CelessScene.instance.celessUnicornIntro(); },
+						chance: forestChance,
 						when: CelessScene.canMeetUnicorn
 					}, {
 						name: "celess-armor",
@@ -445,14 +446,14 @@ use namespace CoC;
 						when  : function():Boolean {
 							return (flags[kFLAGS.PATCHOULI_FOLLOWER] < 3 || flags[kFLAGS.PATCHOULI_FOLLOWER] == 4);
 						},
-						chance: 0.7
+						chance: forestChance4
 					}, {
 						name  : "luna",
 						call  : SceneLib.lunaFollower.fullMoonEventResistWinFireHerForest,
 						when  : function():Boolean {
 							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
 						},
-						chance: 2
+						chance: forestChance4
 					}, {
 						name: "mimic",
 						when: fn.ifLevelMin(3),
@@ -494,6 +495,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return flags[kFLAGS.AYANE_FOLLOWER] < 2 && player.level >= 20 && !player.isRace(Races.KITSUNE) && !player.isRace(Races.KITSHOO);
 				},
+				chance: forestChance,
 				call: SceneLib.ayaneFollower.randomEncounter
 			}, {
 				//Helia monogamy fucks
@@ -503,7 +505,7 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.helScene.helSexualAmbush();
 				},
-				chance: 0.2,
+				chance: forestChance2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
@@ -526,7 +528,7 @@ use namespace CoC;
 						   && !player.hasStatusEffect(StatusEffects.ElectraOff)
 						   && (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: forestChance,
 				call  : function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
@@ -551,6 +553,7 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					nightmareScene.nightmareIntro();
 				},
+				chance: forestChance,
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && (player.canGetPregnant());
 				}
@@ -744,6 +747,27 @@ use namespace CoC;
 			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
 			//player.createStatusEffect(StatusEffects.GnomeHomeBuff,1,0,0,0);
 			deepwoodsEncounter.execEncounter();
+		}
+
+		public function forestChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
+		public function forestChance2():Number {
+			var temp:Number = 0.2;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
+		public function forestChance3():Number {
+			var temp:Number = 0.05;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
+		public function forestChance4():Number {
+			var temp:Number = 1.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		public function tripOnARoot():void {
