@@ -408,7 +408,8 @@ public class Soulforce extends BaseContent
 	}
 
 	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false):void {
-		clearOutput();
+		if (!clone)
+			clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		var dao:int;
 		if (clone) dao = 1;
