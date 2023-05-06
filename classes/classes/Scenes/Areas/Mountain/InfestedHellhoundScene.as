@@ -102,6 +102,7 @@ public class InfestedHellhoundScene extends BaseContent
 				}
 				//(+infested)
 				player.createStatusEffect(StatusEffects.Infested, 0, 0, 0, 0);
+				player.buff("Infested").setStat("minlustx", 0.5).withText("Worm Infested");
 				player.sexReward("Default","Default",true,false);
 				dynStats("lib", 1, "sen", 1, "cor", 1);
 				player.cumMultiplier += .2;

@@ -1737,7 +1737,7 @@ public class Creature extends Utils
 		}
 
 		//Functions
-		public function gainOrLosePerk(ptype:PerkType, condition:Boolean, gainText:String = "", loseText:String = "", addLossCondition:Boolean = false, gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
+		public function gainOrLosePerk(ptype:PerkType, condition:Boolean, gainText:String = "", loseText:String = "", addLossCondition:Boolean = true, gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
 			if (!hasPerk(ptype) && condition) {
 				createPerk(ptype, value1, value2, value3, value4);
 				if (doOutput) EngineCore.outputText("\n" + gainText + "\n\n(<b>Gained Perk: "+ptype.name()+"</b> - " + ptype.desc() + ")\n");
@@ -3555,34 +3555,14 @@ public class Creature extends Utils
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
-				return -1;
-			else {
-				if (hasPerk(PerkLib.SpiderOvipositor)) {
-					addPerkValue(PerkLib.SpiderOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
-					return perkv1(PerkLib.SpiderOvipositor);
-				}
-				else if (hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-					addPerkValue(PerkLib.BeeOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
-					return perkv1(PerkLib.BeeOvipositor);
-				}
-				else if (hasPerk(PerkLib.MantisOvipositor)) {
-					addPerkValue(PerkLib.MantisOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
-					return perkv1(PerkLib.MantisOvipositor);
-				}
-				else {
-					addPerkValue(PerkLib.AntOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.AntOvipositor, 1, 50);
-					return perkv1(PerkLib.AntOvipositor);
-				}
-			}
+			var oviPerk:PerkType = getOviPerk();
+			if (oviPerk == null) return -1;
+			addPerkValue(oviPerk, 1, arg);
+			if (eggs() > maxEggs) setPerkValue(oviPerk, 1, maxEggs);
+
+			if(eggs() >= 40) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+			else if(eggs() >= 20) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+			return eggs();
 		}
 
 		public function dumpEggs():void {
@@ -3613,6 +3593,8 @@ public class Creature extends Utils
 			if (oviPerk == null) return -1;
 			setPerkValue(oviPerk, 1, arg);
 			if (eggs() > maxEggs) setPerkValue(oviPerk, 1, maxEggs);
+			if(eggs() >= 40) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+			else if(eggs() >= 20) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
 			return perkv1(oviPerk);
 		}
 

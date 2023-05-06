@@ -2741,6 +2741,7 @@ public function wormRemoval():void {
 	if (player.HP > int(player.maxHP() * .5)) player.HP = int(player.maxHP() * .5);
 	player.damageHunger(30);
 	player.removeStatusEffect(StatusEffects.Infested);
+	player.buff("Infested").remove();
 	dynStats("lus", -99, "cor", -15);
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);

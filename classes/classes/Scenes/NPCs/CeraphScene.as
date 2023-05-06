@@ -1093,7 +1093,10 @@ public class CeraphScene extends NPCAwareContent
 					player.balls = 0;
 					player.ballSize = 1;
 				}
-				if (player.cockTotal() == 1) player.removeStatusEffect(StatusEffects.Infested);
+				if (player.cockTotal() == 1) {
+					player.removeStatusEffect(StatusEffects.Infested);
+					player.buff("Infested").remove();
+				}
 				outputText(" in her hand!  At the base there's smooth flesh and an arcane mark, somehow keeping the disembodied dick alive to pulse and squirm in her grasp.  The place on your groin is left completely smooth and featureless, as if it had never been there at all.\n\n");
 
 				outputText("Ceraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, you won't feel the sensations constantly once I bond it elsewhere, though you may get a hint of feeling when unconscious.  For now, enjoy the pleasure!  Oh, I packed that tasty fetish into the cock for later.  Ta-ta, my pet!  Now go find me some more delicious dicks!</i>\"\n\n");

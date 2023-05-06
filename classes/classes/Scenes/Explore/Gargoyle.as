@@ -658,6 +658,7 @@ private function banishmentGargoyleRitual():void {
 	if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.leaveDick();
     else if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
 	else player.removeStatusEffect(StatusEffects.Infested);
+	player.buff("Infested").remove();
 	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
@@ -825,6 +826,7 @@ private function banishPervRitual():void {
 	if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.leaveDick();
     else if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.leaveBoobs();
 	else player.removeStatusEffect(StatusEffects.Infested);
+	player.buff("Infested").remove();
 	player.takePhysDamage(Math.round(player.maxHP()/3));
 	fatigue(10);
 	gargoyleConfidence(2);

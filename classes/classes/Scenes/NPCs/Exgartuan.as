@@ -719,6 +719,7 @@ public function exgartuanWormCure():void {
 	outputText(" begins to grow warm... no, hot.  You feel it moving and squirming with discomfort as the worms inside you wriggle about, agitated by something.  The heat intensifies and you watch in a mixture of shock and horror as they start crawling out your urethra, sliding down to the ground on a river of thick seminal fluid.  You double over in pain as something stretches you wide, and you feel the main worm pushing itself through your [cock], desperate to escape.  It crests the tip, wiggling and stuck for a moment as it struggles to pull free.  At last it pops out and drops to the ground, crawling away.  Exgartuan roars, \"<i>AND STAY OUT!</i>\"");
 	outputText("\n\n<b>You guess there was only enough room for one...</b>\n");
 	player.removeStatusEffect(StatusEffects.Infested);
+	player.buff("Infested").remove();
 }
 
 public function caressYourself():void {

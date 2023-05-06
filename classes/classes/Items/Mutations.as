@@ -40,7 +40,8 @@ public final class Mutations extends MutationsHelper {
             str: bonusempower,
             spe: -bonusdepower,
             inte: -bonusdepower,
-            lib: bonusempower
+            lib: bonusempower,
+            minlustx: 0.5
         }, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
     }
 	
@@ -5028,6 +5029,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
             outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
             player.removeStatusEffect(StatusEffects.Infested);
+            player.buff("Infested").remove();
             changes++;
         }
 
@@ -5255,6 +5257,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
             outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
             player.removeStatusEffect(StatusEffects.Infested);
+            player.buff("Infested").remove();
             changes++;
         }
 
@@ -7163,6 +7166,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
             outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
             player.removeStatusEffect(StatusEffects.Infested);
+            player.buff("Infested").remove();
             changes++;
         }
         //-Breasts vanish to 0 rating if male

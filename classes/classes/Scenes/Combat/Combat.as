@@ -9655,6 +9655,7 @@ public class Combat extends BaseContent {
             if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You manage to cleanse the harpy lip-gloss from your system with your knowledge of medicine!\n\n");
                 player.removeStatusEffect(StatusEffects.Luststick);
+                player.minLustXStat.removeBuff("Luststick");
             } else if (rand(5) == 0) {
                 if (rand(2) == 0) outputText("A fantasy springs up from nowhere, dominating your thoughts for a few moments.  In it, you're lying down in a soft nest.  Gold-rimmed lips are noisily slurping around your [cock], smearing it with her messy aphrodisiac until you're completely coated in it.  She looks up at you knowingly as the two of you get ready to breed the night away...\n\n");
                 else outputText("An idle daydream flutters into your mind.  In it, you're fucking a harpy's asshole, clutching tightly to her wide, feathery flanks as the tight ring of her pucker massages your [cock].  She moans and turns around to kiss you on the lips, ensuring your hardness.  Before long her feverish grunts of pleasure intensify, and you feel the egg she's birthing squeezing against you through her internal walls...\n\n");
