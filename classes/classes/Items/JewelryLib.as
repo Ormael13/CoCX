@@ -50,9 +50,9 @@ import classes.PerkLib;
 		public static const NOTHING:Nothing = new Nothing();
 		
 		//Pre-Enchanted rings
-		public const CRIMRNG:Jewelry = new Jewelry("CrimRng", "Crimst.Ring", "crimstone ring", "an enchanted crimstone ring", RINGEFF_MINLUST, 10, 1000, "This ring is topped with crimstone. It is said that this will help to keep your desires burning.");
+		public const CRIMRNG:Jewelry = new Jewelry("CrimRng", "Crimst.Ring", "crimstone ring", "an enchanted crimstone ring", RINGEFF_MINLUST, 10, 1000, "This ring is topped with crimstone. It is said that this will help to keep your desires burning.").withBuffs({'minlust':10}) as Jewelry;
 		public const FERTRNG:Jewelry = new Jewelry("FertRng", "FertiteRing", "fertite ring", "an enchanted fertite ring", MODIFIER_FERTILITY, 20, 1000, "This ring is topped with fertite. It is said that this will make you more virile and fertile.");
-		public const ICE_RNG:Jewelry = new Jewelry("Ice_Rng", "Icestn.Ring", "icestone ring", "an enchanted icestone ring", RINGEFF_MINLUST, -10, 2000, "This ring is topped with icestone. It is said that this will counter ever-burning desires.");
+		public const ICE_RNG:Jewelry = new Jewelry("Ice_Rng", "Icestn.Ring", "icestone ring", "an enchanted icestone ring", RINGEFF_MINLUST, -10, 2000, "This ring is topped with icestone. It is said that this will counter ever-burning desires.").withBuffs({'minlust':-10}) as Jewelry;
 		public const SOULRNG:Jewelry = new Jewelry("SoulRng", "Soul Ring", "soulmetal ring", "a soulmetal ring", MODIFIER_SF, 100, 1250, "This simple ring is made from low quality soulmetal. Despite it seemly simplicity it allow for slight compresion of it weaver soulforce allowing storing a little bit more of it.");
 		public const MANARNG:Jewelry = new Jewelry("ManaRng", "Mana Ring", "ring of mana", "an enchanted alexandrite ring of mana", MODIFIER_MP, 200, 1250, "This ring is topped with alexandrite gemstone. It is said that this will make you feel having more mana.");
 		public const LIFERNG:Jewelry = new Jewelry("LifeRng", "Life Ring", "ring of life", "an enchanted emerald ring of life force", MODIFIER_HP, 350, 1000, "This ring is topped with emerald gemstone. It is said that this will make you feel healthier.");

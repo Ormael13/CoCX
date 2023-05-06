@@ -449,6 +449,7 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 	}
 	else {
 		player.createStatusEffect(StatusEffects.BimboChampagne,8,0,0,0);
+		player.buff("BimboChampagne").setStat("minlustx", 0.1).forHours(8).withText("Bimbo Champagne");
 		//(Player has breasts smaller than DD-cup:
 		if(player.breastRows[0].breastRating < 5) {
 			outputText("\n\nYou feel this, like, totally sweet tingling in your boobies... And then your [armor] gets, like, tighter; wow, it seems like Niamh's booze is making your boobies grow!  That's so awesome!  You giggle and gulp down as much as you can... Aw; your boobies are <b>kinda</b> big now, but, like, you wanted great big bouncy sloshy boobies like Niamh has.  That'd be so hot!");
@@ -492,6 +493,7 @@ public function removeBimboChampagne():void {
 		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
 	}
 	player.removeStatusEffect(StatusEffects.BimboChampagne);
+	player.minLustXStat.removeBuff("BimboChampagne");
 	outputText("\n");
 }
 

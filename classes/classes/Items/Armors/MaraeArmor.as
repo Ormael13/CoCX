@@ -15,6 +15,7 @@ import classes.ItemType;
 		public function MaraeArmor()
 		{
 			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",110,110,26400,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though.","Heavy");
+			withBuffs({'minlustx': 0.2});
 		}
 		//każde 1 armor point kosztuje 120
 		override public function get supportsBulge():Boolean { return true; }

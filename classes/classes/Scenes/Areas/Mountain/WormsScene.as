@@ -132,6 +132,7 @@ package classes.Scenes.Areas.Mountain
 			else {
 				if(flags[kFLAGS.EVER_INFESTED] == 0) flags[kFLAGS.EVER_INFESTED] = 1;
 				player.createStatusEffect(StatusEffects.Infested,0,0,0,0);
+				player.buff("Infested").setStat("minlustx", 0.5).withText("Worm Infested");
 				dynStats("cor", 0);
 			}
 			cleanupAfterCombat();
@@ -285,6 +286,7 @@ package classes.Scenes.Areas.Mountain
 			if(player.hasStatusEffect(StatusEffects.Infested)) {trace("BWUH?");}
 			else {
 				player.createStatusEffect(StatusEffects.Infested,0,0,0,0);
+				player.buff("Infested").setStat("minlustx", 0.5).withText("Worm Infested");
 				dynStats("cor", 0);
 			}
 			if(player.cor < 25) {

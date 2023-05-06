@@ -748,6 +748,7 @@ private function browseDemSocksSon():void {
 		if(cockSocksVariant[type] == "cockring") {
 			if(!player.hasPerk(PerkLib.PentUp)) player.createPerk(PerkLib.PentUp,10,0,0,0);
 			else player.addPerkValue(PerkLib.PentUp,1,5);
+			player.buff("PentUp").setStat("minlustx", player.perkv1(PerkLib.PentUp)*0.01).withText("Pent up");
 		}
 		outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(cockChosen) + ", and she licks her lips.  ");
 		player.gems -= cost;
@@ -816,6 +817,7 @@ private function removeTargettedSock(index:int):void {
 	if(extra && storage == "cockring") {
 		if(player.perkv1(PerkLib.PentUp) >= 10) player.addPerkValue(PerkLib.PentUp,1,-5);
 		else player.setPerkValue(PerkLib.PentUp,1,10);
+		player.minLustXStat.addOrReplaceBuff("Pent up", player.perkv1(PerkLib.PentUp)*0.01);
 	}
 	else {
 		if(storage == "gilded") {
@@ -832,6 +834,7 @@ private function removeTargettedSock(index:int):void {
 		}
 		if(storage == "cockring") {
 			player.removePerk(PerkLib.PentUp);
+			player.minLustXStat.removeBuff("PentUp");
 		}
 	}
 	outputText("\n\n\"<i>If you need another one, we've got plenty more for sale.</i>\"");

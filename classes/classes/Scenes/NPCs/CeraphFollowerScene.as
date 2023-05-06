@@ -1458,7 +1458,10 @@ public class CeraphFollowerScene extends NPCAwareContent
 				player.balls = 0;
 				player.ballSize = 1;
 			}
-			if (player.cockTotal() == 1) player.removeStatusEffect(StatusEffects.Infested);
+			if (player.cockTotal() == 1) {
+				player.removeStatusEffect(StatusEffects.Infested);
+				player.buff("Infested").remove();
+			}
 			outputText(" in her hand!  At the base there's smooth flesh and an arcane mark, somehow keeping the disembodied dick alive to pulse and squirm in her grasp.  The place on your groin is left completely smooth and featureless, as if it had never been there at all.");
 			outputText("\n\nCeraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, that will fade once I get it further away, though you know what to expect at night, right?  For now, enjoy the pleasure!  Oh, and thank you again for this, you won't regret it.  If you do, no refunds.</i>\"");
 			outputText("\n\nShe pirouettes away, practically dancing into the sky while she strokes and teases the cock you just lost.  You shudder and shake as orgasm wracks your body, your cum falling like rain thousands of feet away.  You swear, you can hear your pet laughing.");
