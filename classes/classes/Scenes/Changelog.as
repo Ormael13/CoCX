@@ -125,6 +125,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Angst dagger - buyable at Eraendir shop. Cost 1680 gems. Base atk is 21, Low grade wrath weapon (small), increase damage multiplier on sneak attacks by 200% of base value, max base atk value reached at 300+ speed and 60+ strength.\n");
 			outputText("-Fix imp balls missing. (Liadri)\n");
 			outputText("-Fix Minerva pregnancy, Ayo armors will keep their energy after loading, Jojo Milking scene has been wired up again after 8 months, Raiju eye colot tf fix. (EragonX)\n");
+			outputText("-Golem core can be extracted with 100% success not only by golemancers but also by tech smart races (goblins, gremlins, humans with human smart i.mutation at tier 2+).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -142,8 +143,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -151,8 +151,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check, special names that was giving previous ears type used by goblins\n");

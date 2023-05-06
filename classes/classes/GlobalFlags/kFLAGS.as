@@ -1928,7 +1928,7 @@ public static const UNKNOWN_FLAG_NUMBER_01919:int                               
 public static const UNKNOWN_FLAG_NUMBER_01920:int                                 	= 1920;
 public static const UNKNOWN_FLAG_NUMBER_01921:int                                   = 1921;
 public static const UNKNOWN_FLAG_NUMBER_01922:int                                   = 1922;
-public static const UNKNOWN_FLAG_NUMBER_01923:int                                   = 1923;
+public static const GOTTA_CAMP_THEM_ALL_MODE:int                                   	= 1923;
 public static const DEMON_SOLDIERS_ENCOUNTERED:int                                  = 1924;
 public static const DEMON_SOLDIERS_KILLED:int                                   	= 1925;
 public static const BELISA_DEFEATS_COUNTER:int                                   	= 1926;
