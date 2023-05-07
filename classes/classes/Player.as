@@ -51,6 +51,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.RutEffect;
@@ -1025,6 +1026,8 @@ use namespace CoC;
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack() || hasTentacleAttacks() || isAlraune() || isTaur());}
 		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
 		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
+		public function hasAetherTwinsTierS1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"; }
+		public function hasAetherTwinsTierS2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"; }
 		//Some other checks
 		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -1033,6 +1036,7 @@ use namespace CoC;
 		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || isRace(Races.BAT) || isRace(Races.JIANGSHI)); }
 		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
+		public function isTechSavvyPC():Boolean { return (isGoblinoid() || (hasPerk(IMutationsLib.HumanSmartsIM) && perkv1(IMutationsLib.HumanSmartsIM) >= 2)); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -1056,7 +1060,7 @@ use namespace CoC;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("LGWrath") || weapon == game.weapons.ANGSTD1 || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
+			return weaponSpecials("LGWrath") || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1064,11 +1068,11 @@ use namespace CoC;
 		}
 		public function isMidGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("MGWrath") || weapon == game.weapons.NTWHIP;
+			return weaponSpecials("MGWrath") || weapon == game.weapons.ANGSTD1 || weapon == game.weapons.NTWHIP || hasAetherTwinsTierS1();
 		}
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
-			return weapon == game.weapons.ASTERIUS;
+			return weapon == game.weapons.ASTERIUS || hasAetherTwinsTierS2();
 		}/*
 		public function isHighGradeWrathWeapon():Boolean
 		{
@@ -1153,7 +1157,7 @@ use namespace CoC;
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
+			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -1168,7 +1172,7 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return (weaponClass("Thrown"));//wrath large weapon that can be throwed or used in melee xD
+			return (weaponClass("Thrown")) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
@@ -1789,7 +1793,7 @@ use namespace CoC;
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || hasAetherTwinsTierS1());
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -1802,11 +1806,9 @@ use namespace CoC;
 				else if (shieldPerk == "Large") block += 2;
 				else block += 1;
 			}
-			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) {
-				if (AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") block += 4;
-				else if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets") block += 2;
-				block += 1;
-			}
+			if (hasAetherTwinsTier2() || hasAetherTwinsTierS1()) block += 4;
+			else if (hasAetherTwinsTier1() || hasAetherTwinsTierS2()) block += 2;
+			else if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) block += 1;
 			if (hasPerk(PerkLib.PrestigeJobSentinel)) {
 				if (shieldPerk == "Massive") block += 3;
 				else if (shieldPerk == "Large") block += 2;
@@ -4864,24 +4866,6 @@ use namespace CoC;
 		{
 			var minCap:Number = maxLust();
 			var min:Number = minLustStat.value + minCap*minLustXStat.value;
-			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.1);
-			//Easter bunny eggballs
-			if (hasPerk(PerkLib.EasterBunnyBalls)) min += 10*ballSize;
-			//Fera Blessing
-			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += Math.round(minCap * 0.15);
-			//Nymph perk raises to 30
-			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.15);
-			//Oh noes anemone!
-			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += Math.round(minCap * 0.3);
-			if (hasStatusEffect(StatusEffects.Infested)) min += Math.round(minCap * 0.5);
-			//Add points for Crimstone
-			min += Math.round(minCap * perkv1(PerkLib.PiercedCrimstone) * 0.01);
-			//Subtract points for Icestone!
-			min -= Math.round(minCap * perkv1(PerkLib.PiercedIcestone) * 0.01);
-			min += Math.round(minCap * perkv1(PerkLib.PentUp) * 0.01);
-			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
-			if(hasStatusEffect(StatusEffects.Luststick)) min += Math.round(minCap * 0.5);
-			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += Math.round(minCap * 0.5);
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
@@ -4891,29 +4875,22 @@ use namespace CoC;
 			}
 			//cumOmeter
 			if (tailType == Tail.MANTICORE_PUSSYTAIL && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.05);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.1);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.15);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.2);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.25);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.05);
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.1);
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.15);
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.2);
+				else min += Math.round(minCap * 0.25);
 			}
 			//MilkOMeter
 			if (rearBody.type == RearBody.DISPLACER_TENTACLES && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.05);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.1);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.15);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.2);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.25);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.05);
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.1);
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.15);
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.2);
+				else min += Math.round(minCap * 0.25);
 			}
-			//SPOIDAH BOOSTS
-			if(eggs() >= 20) {
-				min += Math.round(minCap * 0.1);
-				if(eggs() >= 40) min += Math.round(minCap * 0.1);
-			}
-			//Werebeast
-			if (hasPerk(PerkLib.Lycanthropy)) min += Math.round(minCap * perkv1(PerkLib.Lycanthropy) * 0.01);
 			//Jewelry effects
-			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST) {
+			/*if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST) {
 				min += jewelryEffectMagnitude;
 			}
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_MINIMUM_LUST) {
@@ -4924,12 +4901,41 @@ use namespace CoC;
 			}
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MINIMUM_LUST) {
 				min += jewelryEffectMagnitude4;
-			}
-			if (armorName == "lusty maiden's armor" || armorName == "Succubus armor") min += Math.round(minCap * 0.3);
-			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
+			}*/
 			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
 			return boundFloat(0, min, minCap);
+		}
+
+		public function listMinLustMultiBuffs():void {
+			//SHOULDRA BOOSTS
+			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
+				var shouldra: Number = 0.1;
+				if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
+					shouldra = 0.25
+				minLustXStat.addOrReplaceBuff("Shouldra", shouldra, { rate: Buff.RATE_ROUNDS });
+			}
+			//cumOmeter
+			if (tailType == Tail.MANTICORE_PUSSYTAIL && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
+				var mantithirst: Number;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) mantithirst = 0.05;
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) mantithirst = 0.1;
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) mantithirst = 0.15;
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) mantithirst = 0.2;
+				else  mantithirst = 0.25;
+				minLustXStat.addOrReplaceBuff("Manticore thirst", mantithirst, { rate: Buff.RATE_ROUNDS });
+			}
+			//MilkOMeter
+			if (rearBody.type == RearBody.DISPLACER_TENTACLES && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
+				var dispthirst: Number;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) dispthirst = 0.05;
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) dispthirst = 0.1;
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) dispthirst = 0.15;
+				else if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) dispthirst = 0.2;
+				else dispthirst = 0.25;
+				minLustXStat.addOrReplaceBuff("Displacer thirst", dispthirst, { rate: Buff.RATE_ROUNDS });
+			}
+			if (hasPerk(PerkLib.HotNCold)) minLustXStat.addOrReplaceBuff("Hot N Cold Cap", -0.25, { rate: Buff.RATE_ROUNDS });
 		}
 
 		public function maxToneCap():Number {
@@ -5690,7 +5696,10 @@ use namespace CoC;
 				}
 			}
 			//remove infestation if cockless
-			if (cocks.length == 0) removeStatusEffect(StatusEffects.Infested);
+			if (cocks.length == 0) {
+				removeStatusEffect(StatusEffects.Infested);
+				buff("Infested").remove();
+			}
 			if (cocks.length == 0 && balls > 0) {
 				if (doOutput) outputText(" <b>Your " + sackDescript() + " and [balls] shrink and disappear, vanishing into your groin.</b>");
 				balls = 0;
@@ -6476,7 +6485,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
-			
 			return additionalTransformationChancesCounter;
 		}
 
@@ -6539,6 +6547,11 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
+		}
+
+		public function npcChanceToEncounter():Number {
+			if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) return 200;
+			else return 1;
 		}
 
 		public function BrainMeltBonus():void
@@ -6864,4 +6877,3 @@ use namespace CoC;
 		}
 	}
 }
-

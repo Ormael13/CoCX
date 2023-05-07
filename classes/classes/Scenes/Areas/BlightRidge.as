@@ -72,6 +72,7 @@ use namespace CoC;
 					var proc2c:Boolean = (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 2 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 4 && SceneLib.alvinaFollower.AlvinaPurified);
 					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2 && !(player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && !SceneLib.alvinaFollower.AlvinaPurified)
 				},
+				chance: blightRidgeChance,
 				night: false,
 				call: SceneLib.siegweirdFollower.siegweirdFirstEncounter
 			}, {
@@ -81,6 +82,7 @@ use namespace CoC;
 							|| (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 3)
 							|| (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 2 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 4 && SceneLib.alvinaFollower.AlvinaPurified)
 				},
+				chance: blightRidgeChance,
 				night: false,
 				call: SceneLib.siegweirdFollower.siegweirdRepeatEncounterPostFight
 			}, {
@@ -88,6 +90,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2
 				},
+				chance: blightRidgeChance,
 				night: false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.SiegweirdImp,0,0,0,0);
@@ -132,6 +135,12 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 			blightRidgeEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+	
+		public function blightRidgeChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function findNothing():void {

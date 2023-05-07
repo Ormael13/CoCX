@@ -681,6 +681,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.BlessingOfDivineFera) <= 0) {
 					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
 					player.removeStatusEffect(StatusEffects.BlessingOfDivineFera);
+					player.buff("FerasBlessing").remove();
 					needNext = true;
 				}
 			}
@@ -725,6 +726,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.statusEffectv1(StatusEffects.Luststick) <= 0) {
 					player.removeStatusEffect(StatusEffects.Luststick);
+					player.buff("Luststick").remove();
 					dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
 					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
 					needNext = true;
@@ -1135,7 +1137,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							else if (player.hasVagina()) player.goIntoHeat(false);
 							break;
 					}
-					player.statStore.replaceBuffObject({ 'str': changeV*ngMult,'tou': changeV*ngMult,'spe': changeV*ngMult}, 'Lycanthropy', { text: 'Lycanthropy'});
+					player.statStore.replaceBuffObject({ 'str': changeV*ngMult,'tou': changeV*ngMult,'spe': changeV*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 					player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
 					needNext = true;
 				}
@@ -1247,6 +1249,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.ballSize > 4) {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.\n");
 					}
+					player.buff("EasterBunnyBalls").setStat("minlust", 0.1 * player.ballSize).withText("Easter Bunny Balls");
 				}
 				//Armor daily event
 				//Scandalous succubus armor and other corruption updates
@@ -1297,8 +1300,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var cloneDao:int = player.statusEffectv1(clone);
 					if (cloneDao > 10 && cloneDao < 21) {
 						for (var i:int = 0; i < Soulforce.daos.length; ++i) {
-							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension())
+							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension()) {
 								SceneLib.soulforce.daoContemplationsEffect(Soulforce.daos[i][1], Soulforce.daos[i][0], true);
+								needNext = true;
+							}
 						}
 					}
 				}
@@ -1446,6 +1451,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.ballSize = 1;
 				var changeLib1:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
 				player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib1).withText("Easter Bunny Balls");
+				player.buff("EasterBunnyBalls").setStat("minlust", 0.1 * player.ballSize).withText("Easter Bunny Balls");
 				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
 				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
 				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
@@ -2077,9 +2083,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Tail Hunger
-			needNext ||= player.gainOrLosePerk(PerkLib.ManticoreCumAddict, player.tailType == Tail.MANTICORE_PUSSYTAIL, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.", function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
+			needNext ||= player.gainOrLosePerk(PerkLib.ManticoreCumAddict, player.tailType == Tail.MANTICORE_PUSSYTAIL, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.", true, function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
 			//Milk Hunger
-			needNext ||= player.gainOrLosePerk(PerkLib.DisplacerMilkAddict, player.rearBody.type == RearBody.DISPLACER_TENTACLES, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.", function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
+			needNext ||= player.gainOrLosePerk(PerkLib.DisplacerMilkAddict, player.rearBody.type == RearBody.DISPLACER_TENTACLES, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.", true, function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
 			//Vampire Thirst
 			if (player.faceType == Face.VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood... how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");

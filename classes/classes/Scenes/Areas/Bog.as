@@ -84,7 +84,7 @@ public class Bog extends BaseContent
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: bogChance,
 				call: SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name: "zenji",
@@ -92,6 +92,7 @@ public class Bog extends BaseContent
 				when: function ():Boolean {
 					return flags[kFLAGS.ZENJI_PROGRESS] != -1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)
 				},
+				chance: bogChance,
 				call: zenjiEncounterFn
 			}/*, {
 				name: "demonProjects",
@@ -117,6 +118,12 @@ public class Bog extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 			bogEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+	
+		public function bogChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function findNothing():void {

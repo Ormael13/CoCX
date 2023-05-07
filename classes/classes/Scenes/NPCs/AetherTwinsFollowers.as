@@ -40,6 +40,10 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 		public static var AetherTwinsFoodMenuAdamantineCap:Number;
 		public static var AetherTwinsFoodMenuOrichalcum:Number;
 		public static var AetherTwinsFoodMenuOrichalcumCap:Number;
+		public static var AetherTwinsFoodMenuBronze:Number;
+		public static var AetherTwinsFoodMenuBronzeCap:Number;
+		public static var AetherTwinsFoodMenuEbonIngot:Number;
+		public static var AetherTwinsFoodMenuEbonIngotCap:Number;
 		public static var AetherTwinsFoodMenu:Boolean;
 		public static var AetherTwinsFoodMenuBuckler:Boolean;
 		public static var AetherTwinsFoodMenuSpikeLShield:Boolean;
@@ -93,6 +97,10 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 			AetherTwinsFoodMenuAdamantineCap = 0;
 			AetherTwinsFoodMenuOrichalcum = 0;
 			AetherTwinsFoodMenuOrichalcumCap = 0;
+			AetherTwinsFoodMenuBronze = 0;
+			AetherTwinsFoodMenuBronzeCap = 0;
+			AetherTwinsFoodMenuEbonIngot = 0;
+			AetherTwinsFoodMenuEbonIngotCap = 0;
 			AetherTwinsFoodMenu = false;
 			AetherTwinsFoodMenuBuckler = false;
 			AetherTwinsFoodMenuSpikeLShield = false;
@@ -141,6 +149,10 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 				"AetherTwinsFoodMenuAdamantineCap": AetherTwinsFoodMenuAdamantineCap,
 				"AetherTwinsFoodMenuOrichalcum": AetherTwinsFoodMenuOrichalcum,
 				"AetherTwinsFoodMenuOrichalcumCap": AetherTwinsFoodMenuOrichalcumCap,
+				"AetherTwinsFoodMenuBronze": AetherTwinsFoodMenuBronze,
+				"AetherTwinsFoodMenuBronzeCap": AetherTwinsFoodMenuBronzeCap,
+				"AetherTwinsFoodMenuEbonIngot": AetherTwinsFoodMenuEbonIngot,
+				"AetherTwinsFoodMenuEbonIngotCap": AetherTwinsFoodMenuEbonIngotCap,
 				"AetherTwinsFoodMenu": AetherTwinsFoodMenu,
 				"AetherTwinsFoodMenuBuckler": AetherTwinsFoodMenuBuckler,
 				"AetherTwinsFoodMenuSpikeLShield": AetherTwinsFoodMenuSpikeLShield,
@@ -190,6 +202,10 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 				AetherTwinsFoodMenuAdamantineCap = o["AetherTwinsFoodMenuAdamantineCap"];
 				AetherTwinsFoodMenuOrichalcum = o["AetherTwinsFoodMenuOrichalcum"];
 				AetherTwinsFoodMenuOrichalcumCap = o["AetherTwinsFoodMenuOrichalcumCap"];
+				AetherTwinsFoodMenuBronze = valueOr(o["AetherTwinsFoodMenuBronze"], 0);
+				AetherTwinsFoodMenuBronzeCap = valueOr(o["AetherTwinsFoodMenuBronzeCap"], 0);
+				AetherTwinsFoodMenuEbonIngot = valueOr(o["AetherTwinsFoodMenuEbonIngot"], 0);
+				AetherTwinsFoodMenuEbonIngotCap = valueOr(o["AetherTwinsFoodMenuEbonIngotCap"], 0);
 				AetherTwinsFoodMenu = o["AetherTwinsFoodMenu"];
 				AetherTwinsFoodMenuBuckler = o["AetherTwinsFoodMenuBuckler"];
 				AetherTwinsFoodMenuSpikeLShield = o["AetherTwinsFoodMenuSpikeLShield"];
@@ -332,11 +348,13 @@ public function aethertwinsFollowersFeed():void {
 	if (AetherTwinsFoodMenu1) {
 		outputText("\n-Amethyst ("+AetherTwinsFoodMenuAmethyst+"/"+AetherTwinsFoodMenuAmethystCap+")");
 		outputText("\n-Diamond ("+AetherTwinsFoodMenuDiamond+"/"+AetherTwinsFoodMenuDiamondCap+")");
-	}/*
+	}
 	if (AetherTwinsFoodMenu2) {
-		outputText("\n- ("+AetherTwinsFoodMenuAmethyst+"/"+AetherTwinsFoodMenuAmethystCap+")");
-		outputText("\n- ("+AetherTwinsFoodMenuDiamond+"/"+AetherTwinsFoodMenuDiamondCap+")");
-	}*/
+		outputText("\n-World Tree Branch ("+AetherTwinsFoodMenuWorldTreeBranch+"/"+AetherTwinsFoodMenuWorldTreeBranchCap+")");
+		outputText("\n-Bronze bar ("+AetherTwinsFoodMenuBronze+"/"+AetherTwinsFoodMenuBronzeCap+")");
+		outputText("\n-Moonstone ("+AetherTwinsFoodMenuMoonstone+"/"+AetherTwinsFoodMenuMoonstoneCap+")");
+		outputText("\n-Ebon ingot ("+AetherTwinsFoodMenuEbonIngot+"/"+AetherTwinsFoodMenuEbonIngotCap+")");
+	}
 	outputText("\n\nEaten equipment:");
 	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");
 	if (AetherTwinsFoodMenuSpikeLShield) outputText("\n-Spiked Light Shield");
@@ -357,7 +375,7 @@ public function aethertwinsFollowersFeed():void {
 	if (player.hasItem(useables.S_INGOT, 1)) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuSilver < AetherTwinsFoodMenuSilverCap) addButton(btn, useables.S_INGOT.shortName, aethertwinsFollowersFeedMaterial, useables.S_INGOT);
-			else addButtonDisabled(btn, useables.S_INGOT.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+			else addButtonDisabled(btn, useables.S_INGOT.shortName, "They can't eat more of this type of metal without undergoing next evolution.");
 		}
 		else addButtonDisabled(btn, useables.S_INGOT.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
@@ -365,7 +383,7 @@ public function aethertwinsFollowersFeed():void {
 	if (player.hasItem(useables.G_INGOT, 1)) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuGold < AetherTwinsFoodMenuGoldCap) addButton(btn, useables.G_INGOT.shortName, aethertwinsFollowersFeedMaterial, useables.G_INGOT);
-			else addButtonDisabled(btn, useables.G_INGOT.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+			else addButtonDisabled(btn, useables.G_INGOT.shortName, "They can't eat more of this type of metal without undergoing next next evolution.");
 		}
 		else addButtonDisabled(btn, useables.G_INGOT.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
@@ -373,7 +391,7 @@ public function aethertwinsFollowersFeed():void {
 	if (player.hasItem(useables.TIN_ORE, 1) || SceneLib.crafting.hasMaterial(useables.TIN_ORE) > 0) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuTin < AetherTwinsFoodMenuTinCap) addButton(btn, useables.TIN_ORE.shortName, aethertwinsFollowersFeedMaterial, useables.TIN_ORE);
-			else addButtonDisabled(btn, useables.TIN_ORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+			else addButtonDisabled(btn, useables.TIN_ORE.shortName, "They can't eat more of this type of metal without undergoing next evolution.");
 		}
 		else addButtonDisabled(btn, useables.TIN_ORE.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
@@ -381,7 +399,7 @@ public function aethertwinsFollowersFeed():void {
 	if (player.hasItem(useables.COP_ORE, 1) || SceneLib.crafting.hasMaterial(useables.COP_ORE) > 0) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuCopper < AetherTwinsFoodMenuCopperCap) addButton(btn, useables.COP_ORE.shortName, aethertwinsFollowersFeedMaterial, useables.COP_ORE);
-			else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+			else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat more of this type of metal without undergoing next evolution.");
 		}
 		else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
@@ -389,7 +407,7 @@ public function aethertwinsFollowersFeed():void {
 	if (player.hasItem(useables.IRONORE, 1) || SceneLib.crafting.hasMaterial(useables.IRONORE) > 0) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuIron < AetherTwinsFoodMenuIronCap) addButton(btn, useables.IRONORE.shortName, aethertwinsFollowersFeedMaterial, useables.IRONORE);
-			else addButtonDisabled(btn, useables.IRONORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+			else addButtonDisabled(btn, useables.IRONORE.shortName, "They can't eat more of this type of metal without undergoing next evolution.");
 		}
 		else addButtonDisabled(btn, useables.IRONORE.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
@@ -397,7 +415,7 @@ public function aethertwinsFollowersFeed():void {
 	if (player.hasItem(useables.AMETIST, 1)) {
 		if (AetherTwinsFoodMenu1) {
 			if (AetherTwinsFoodMenuAmethyst < AetherTwinsFoodMenuAmethystCap) addButton(btn, useables.AMETIST.shortName, aethertwinsFollowersFeedMaterial, useables.AMETIST);
-			else addButtonDisabled(btn, useables.AMETIST.shortName, "They can't eat more of this type of mineral without undergoing second evolution.");
+			else addButtonDisabled(btn, useables.AMETIST.shortName, "They can't eat more of this type of mineral without undergoing next evolution.");
 		}
 		else addButtonDisabled(btn, useables.AMETIST.shortName, "They can't eat this type of mineral before second evolution.");
 		btn++;
@@ -405,9 +423,41 @@ public function aethertwinsFollowersFeed():void {
 	if (player.hasItem(useables.DIAMOND, 1)) {
 		if (AetherTwinsFoodMenu1) {
 			if (AetherTwinsFoodMenuDiamond < AetherTwinsFoodMenuDiamondCap) addButton(btn, useables.DIAMOND.shortName, aethertwinsFollowersFeedMaterial, useables.DIAMOND);
-			else addButtonDisabled(btn, useables.DIAMOND.shortName, "They can't eat more of this type of mineral without undergoing second evolution.");
+			else addButtonDisabled(btn, useables.DIAMOND.shortName, "They can't eat more of this type of mineral without undergoing next evolution.");
 		}
 		else addButtonDisabled(btn, useables.DIAMOND.shortName, "They can't eat this type of mineral before second evolution.");
+		btn++;
+	}
+	if (player.hasItem(useables.WT_BRAN, 1)) {
+		if (AetherTwinsFoodMenu2) {
+			if (AetherTwinsFoodMenuWorldTreeBranch < AetherTwinsFoodMenuWorldTreeBranchCap) addButton(btn, useables.WT_BRAN.shortName, aethertwinsFollowersFeedMaterial, useables.WT_BRAN);
+			else addButtonDisabled(btn, useables.WT_BRAN.shortName, "They can't eat more of this type of mineral without undergoing next evolution.");
+		}
+		else addButtonDisabled(btn, useables.WT_BRAN.shortName, "They can't eat this type of mineral before third evolution.");
+		btn++;
+	}
+	if (player.hasItem(useables.BRONZEB, 1) || SceneLib.crafting.hasMaterial(useables.BRONZEB) > 0) {
+		if (AetherTwinsFoodMenu2) {
+			if (AetherTwinsFoodMenuBronze < AetherTwinsFoodMenuBronzeCap) addButton(btn, useables.BRONZEB.shortName, aethertwinsFollowersFeedMaterial, useables.BRONZEB);
+			else addButtonDisabled(btn, useables.BRONZEB.shortName, "They can't eat more of this type of mineral without undergoing next evolution.");
+		}
+		else addButtonDisabled(btn, useables.BRONZEB.shortName, "They can't eat this type of mineral before third evolution.");
+		btn++;
+	}
+	if (player.hasItem(useables.MOONSTO, 1) || SceneLib.crafting.hasMaterial(useables.MOONSTO) > 0) {
+		if (AetherTwinsFoodMenu2) {
+			if (AetherTwinsFoodMenuMoonstone < AetherTwinsFoodMenuMoonstoneCap) addButton(btn, useables.MOONSTO.shortName, aethertwinsFollowersFeedMaterial, useables.MOONSTO);
+			else addButtonDisabled(btn, useables.MOONSTO.shortName, "They can't eat more of this type of mineral without undergoing next evolution.");
+		}
+		else addButtonDisabled(btn, useables.MOONSTO.shortName, "They can't eat this type of mineral before third evolution.");
+		btn++;
+	}
+	if (player.hasItem(useables.EBONING, 1) || SceneLib.crafting.hasMaterial(useables.EBONING) > 0) {
+		if (AetherTwinsFoodMenu2) {
+			if (AetherTwinsFoodMenuEbonIngot < AetherTwinsFoodMenuEbonIngotCap) addButton(btn, useables.EBONING.shortName, aethertwinsFollowersFeedMaterial, useables.EBONING);
+			else addButtonDisabled(btn, useables.EBONING.shortName, "They can't eat more of this type of mineral without undergoing next evolution.");
+		}
+		else addButtonDisabled(btn, useables.EBONING.shortName, "They can't eat this type of mineral before third evolution.");
 		btn++;
 	}
 	if (player.hasItem(shields.BUCKLER, 1) && !AetherTwinsFoodMenuBuckler) {
@@ -485,13 +535,17 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 	outputText("Before long the now fluid "+itype.shortName+" is coating them entirely. A few seconds later you are done and the "+itype.shortName+" is fully absorbed into the twins.\n\n");
 	outputText("\"<i>Thank you for the meal.</i>\" they grins.\n\n");
 	switch (itype) {
-		case useables.TIN_ORE: AetherTwinsFoodMenuTin += 1;			break;
-		case useables.COP_ORE: AetherTwinsFoodMenuCopper += 1;		break;
-		case useables.IRONORE: AetherTwinsFoodMenuIron += 1;		break;
-		case useables.S_INGOT: AetherTwinsFoodMenuSilver += 1;		break;
-		case useables.G_INGOT: AetherTwinsFoodMenuGold += 1;		break;
-		case useables.AMETIST: AetherTwinsFoodMenuAmethyst += 1;	break;
-		case useables.DIAMOND: AetherTwinsFoodMenuDiamond += 1;		break;
+		case useables.TIN_ORE: AetherTwinsFoodMenuTin += 1;				break;
+		case useables.COP_ORE: AetherTwinsFoodMenuCopper += 1;			break;
+		case useables.IRONORE: AetherTwinsFoodMenuIron += 1;			break;
+		case useables.S_INGOT: AetherTwinsFoodMenuSilver += 1;			break;
+		case useables.G_INGOT: AetherTwinsFoodMenuGold += 1;			break;
+		case useables.AMETIST: AetherTwinsFoodMenuAmethyst += 1;		break;
+		case useables.DIAMOND: AetherTwinsFoodMenuDiamond += 1;			break;
+		case useables.WT_BRAN: AetherTwinsFoodMenuWorldTreeBranch += 1;	break;
+		case useables.BRONZEB: AetherTwinsFoodMenuBronze += 1;			break;
+		case useables.MOONSTO: AetherTwinsFoodMenuMoonstone += 1;		break;
+		case useables.EBONING: AetherTwinsFoodMenuEbonIngot += 1;		break;
 	}
 	if (!(SceneLib.crafting.hasMaterial(itype) && SceneLib.crafting.useMaterial(itype))) player.destroyItems(itype, 1);
 	else SceneLib.crafting.feedAetherTwinsMaterialFromOreBad(itype);
@@ -531,6 +585,16 @@ public function aethertwinsFollowersMorphMain():void {
 	else addButton(0, "HtGauntl", aethertwinsFollowersMorphMainHumanTierGaunlets);
 	if (AetherTwinsShape == "Sky-tier Gaunlets") addButtonDisabled(1, "StGauntl", "They are curretly in Sky-tier Gauntlets form.");
 	else addButton(1, "StGauntl", aethertwinsFollowersMorphMainSkyTierGaunlets);
+	if (AetherTwinsFoodMenu2) {
+		if (AetherTwinsShape == "Human-tier Dagger and Shield") addButtonDisabled(2, "HtDagger&Shield", "They are curretly in Human-tier Dagger and Shield form.");
+		else addButton(2, "HtDagger&Shield", aethertwinsFollowersMorphMainHumanTierSmallWeapons);
+		if (AetherTwinsShape == "Human-tier Dual Daggers") addButtonDisabled(3, "HtDualDaggers", "They are curretly in Human-tier Dual Daggers form.");
+		else addButton(3, "HtDualDaggers", aethertwinsFollowersMorphMainHumanTierDualSmallWeapons);
+	}
+	else {
+		addButtonDisabled(2, "???", "After twins third evolution.");
+		addButtonDisabled(3, "???", "After twins third evolution.");
+	}
 	addButton(14, "Back", aethertwinsFollowers);
 }
 public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
@@ -550,7 +614,7 @@ public function aethertwinsFollowersMorphMainHumanTierGaunlets():void {
 }
 public function aethertwinsFollowersMorphMainSkyTierGaunlets():void {
 	clearOutput();
-	outputText("\"<i>So you liked our Human-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a bit larger than BF gauntelrs with much sharper claws and spiked similar to those on spiked shield growing all over upper section of gauntlets.\n\n");
+	outputText("\"<i>So you liked our Sky-tier gauntlets form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a bit larger than BF gauntelrs with much sharper claws and spiked similar to those on spiked shield growing all over upper section of gauntlets.\n\n");
 	AetherTwinsShape = "Sky-tier Gaunlets";
 	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 0) {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);
@@ -559,6 +623,36 @@ public function aethertwinsFollowersMorphMainSkyTierGaunlets():void {
 	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 15) {
 		two = player.statusEffectv2(StatusEffects.AetherTwins1);
 		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 15));
+	}
+	doNext(aethertwinsFollowersMorphMain);
+	cheatTime(1/6);
+}
+public function aethertwinsFollowersMorphMainHumanTierSmallWeapons():void {
+	clearOutput();
+	outputText("\"<i>So you liked our Human-tier dagger and shield form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a medium sized dagger and small shield.\n\n");
+	AetherTwinsShape = "Human-tier Dagger and Shield";
+	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 20) {
+		one = player.statusEffectv1(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 1, -(one - 19));
+	}
+	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 15) {
+		two = player.statusEffectv2(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 15));
+	}
+	doNext(aethertwinsFollowersMorphMain);
+	cheatTime(1/6);
+}
+public function aethertwinsFollowersMorphMainHumanTierDualSmallWeapons():void {
+	clearOutput();
+	outputText("\"<i>So you liked our Human-tier dual dagger form? It may be not as much fun as other forms but we can asume this one,</i>\" they reply. After a moment both of them shape become less defined and more fluid. Slowly they become a pair of medium sized daggers.\n\n");
+	AetherTwinsShape = "Human-tier Dual Daggers";
+	if (player.statusEffectv1(StatusEffects.AetherTwins1) != 20) {
+		one = player.statusEffectv1(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 1, -(one - 19));
+	}
+	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 5) {
+		two = player.statusEffectv2(StatusEffects.AetherTwins1);
+		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 5));
 	}
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
@@ -572,7 +666,10 @@ public function aethertwinsFollowersEvolutionsMain():void {
 	if (AetherTwinsFoodMenuSpikeLShield && AetherTwinsFoodMenuHGaunt && AetherTwinsFoodMenuBFGauntlets && AetherTwinsFoodMenuLustyClaws && AetherTwinsFoodMenuTin == 2 && AetherTwinsFoodMenuCopper == 2 && AetherTwinsFoodMenuIron == 2 && AetherTwinsFoodMenuSilver == 2 && AetherTwinsFoodMenuGold == 2 && !AetherTwinsFoodMenu1) addButton(1, "StGauntl", aethertwinsFollowersEvolutionsToSkyTierGaunlets);
 	else if (AetherTwinsFoodMenu1) addButtonDisabled(1, "StGauntl", "They already unlocked Sky-tier Gauntlets form.");
 	else addButtonDisabled(1, "StGauntl", "They not yet ate enough nutriments to evolve into this shape.");
-	addButtonDisabled(2, "???", "Later this month.");
+	if (AetherTwinsFoodMenuManaBracer && AetherTwinsFoodMenuDualDaggers && AetherTwinsFoodMenuThrowingDagger && AetherTwinsFoodMenuTriDagger && AetherTwinsFoodMenuLustyDagger && AetherTwinsFoodMenuWitchDagger && AetherTwinsFoodMenuAngstDagger
+	&& AetherTwinsFoodMenuTin == 4 && AetherTwinsFoodMenuCopper == 4 && AetherTwinsFoodMenuIron == 4 && AetherTwinsFoodMenuSilver == 4 && AetherTwinsFoodMenuGold == 4 && AetherTwinsFoodMenuAmethyst == 2 && AetherTwinsFoodMenuDiamond == 2 && !AetherTwinsFoodMenu2) addButton(2, "HtDagger&Shield", aethertwinsFollowersEvolutionsToHumanTierSmallWeapons);
+	else if (AetherTwinsFoodMenu2) addButtonDisabled(2, "HtDagger&Shield", "They already unlocked Human-tier Dagger and Shield form.");
+	else addButtonDisabled(2, "HtDagger&Shield", "They not yet ate enough nutriments to evolve into this shape.");
 	addButton(14, "Back", aethertwinsFollowers);
 }
 private function aethertwinsFollowersEvolutionsToHumanTierGaunlets():void {
@@ -622,25 +719,31 @@ private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
 private function aethertwinsFollowersEvolutionsToHumanTierSmallWeapons():void {
 	clearOutput();
 	outputText("\"<i>Woohoo it's happening feeling again... We're evolving once more...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Sharper!!!</i>\"\n\n");
-	player.addStatusValue(StatusEffects.AetherTwins1, 2, 10);
+	player.addStatusValue(StatusEffects.AetherTwins1, 1, 19);
 	AetherTwinsShape = "Human-tier Dagger and Shield";
 	AetherTwinsFoodMenu2 = true;
 	AetherTwinsFoodMenuTin -= 4;
-	AetherTwinsFoodMenuTinCap += 4;
+	AetherTwinsFoodMenuTinCap += 8;
 	AetherTwinsFoodMenuCopper -= 4;
-	AetherTwinsFoodMenuCopperCap += 4;
+	AetherTwinsFoodMenuCopperCap += 8;
 	AetherTwinsFoodMenuIron -= 4;
-	AetherTwinsFoodMenuIronCap += 4;
+	AetherTwinsFoodMenuIronCap += 8;
 	AetherTwinsFoodMenuSilver -= 4;
-	AetherTwinsFoodMenuSilverCap += 4;
+	AetherTwinsFoodMenuSilverCap += 8;
 	AetherTwinsFoodMenuGold -= 4;
-	AetherTwinsFoodMenuGoldCap += 4;
+	AetherTwinsFoodMenuGoldCap += 8;
 	AetherTwinsFoodMenuAmethyst -= 2;
 	AetherTwinsFoodMenuAmethystCap += 2;
 	AetherTwinsFoodMenuDiamond -= 2;
 	AetherTwinsFoodMenuDiamondCap += 2;
-	//AetherTwinsFoodMenuAmethyst = 0;
-	//AetherTwinsFoodMenuAmethystCap = 2;
+	AetherTwinsFoodMenuWorldTreeBranch = 0;
+	AetherTwinsFoodMenuWorldTreeBranchCap = 4;
+	AetherTwinsFoodMenuBronze = 0;
+	AetherTwinsFoodMenuBronzeCap = 4;
+	AetherTwinsFoodMenuMoonstone = 0;
+	AetherTwinsFoodMenuMoonstoneCap = 4;
+	AetherTwinsFoodMenuEbonIngot = 0;
+	AetherTwinsFoodMenuEbonIngotCap = 4;
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
 }/*

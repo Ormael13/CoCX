@@ -24,7 +24,7 @@ public final class LustyMaidensArmor extends Armor {
 		
 		public function LustyMaidensArmor() {
 			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 10, 0, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\" \nRequirements: breast size of at least DD-cups and be a female.", "Light", false, false);
-			withBuffs({'teasedmg':6});
+			withBuffs({'teasedmg':6, 'minlustx': 0.3});
 			withTag(ItemTags.A_REVEALING);
 		}
 		

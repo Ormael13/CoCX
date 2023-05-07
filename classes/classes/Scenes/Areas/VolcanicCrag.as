@@ -104,7 +104,7 @@ public class VolcanicCrag extends BaseContent
 					VolcanicCragConditions();
 					SceneLib.helScene.helSexualAmbush();
 				},
-				chance: 0.2,
+				chance: volcanicCragChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
@@ -114,7 +114,7 @@ public class VolcanicCrag extends BaseContent
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: volcanicCragChance,
 				call: function ():void {
 					VolcanicCragConditions();
 					SceneLib.etnaScene.repeatYandereEnc();
@@ -138,6 +138,12 @@ public class VolcanicCrag extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 			volcanicCragEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+
+		public function volcanicCragChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function findNothing():void {

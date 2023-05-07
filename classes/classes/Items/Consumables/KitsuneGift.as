@@ -81,7 +81,9 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune's familiar has stolen your gems!</b>");
 				// Lose X gems as though losing in battle to a kitsune
-				game.player.gems -= 20 + Utils.rand(10);
+				var stolen:Number = 20 + Utils.rand(10);
+				if (game.player.gems - stolen < 0) stolen = game.player.gems;
+				game.player.gems -= stolen;
 				EngineCore.statScreenRefresh();
 				break;
 

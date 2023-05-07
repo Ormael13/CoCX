@@ -3011,7 +3011,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
-			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(10, "Relax", NPCsRelax);
 		}
 		addButton(0, "Chi Chi", toggleNPCStatus, StatusEffects.ChiChiOff).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(1, "Diana", toggleNPCStatus, StatusEffects.DianaOff).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
@@ -3021,6 +3021,8 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
+		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] < 2) addButton(11, "Activate", GottaCampThemALLOn).hint("Turn on 'Gotta Camp them ALL' Mode.");
+		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) addButton(11, "Deactivate", GottaCampThemALLOff).hint("Turn off 'Gotta Camp them ALL' Mode.");
         addButton(12, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
@@ -3042,6 +3044,16 @@ public class Camp extends NPCAwareContent{
 	private function NPCsRelax():void {
 		outputText("\n\nPlaceholder text about telling NPC's to relax.");
 		flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
+		doNext(SparrableNPCsMenu);
+	}
+	private function GottaCampThemALLOn():void {
+		outputText("\n\nPlaceholder text about turning on 'Gotta Camp them ALL' mode.");
+		flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] = 2;
+		doNext(SparrableNPCsMenu);
+	}
+	private function GottaCampThemALLOff():void {
+		outputText("\n\nPlaceholder text about turning off 'Gotta Camp them ALL' mode.");
+		flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] = 1;
 		doNext(SparrableNPCsMenu);
 	}
 

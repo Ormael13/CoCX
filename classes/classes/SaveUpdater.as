@@ -17,7 +17,6 @@ import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
-import classes.StatusEffects;
 
 use namespace CoC;
 
@@ -2154,11 +2153,32 @@ public class SaveUpdater extends NPCAwareContent {
 					player.superPerkPoints += 1;
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.056;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.057) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.057;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.057) {
+				if (player.hasPerk(PerkLib.PiercedIcestone))
+					player.buff("PiercedIcestone").setStat("minlustx", player.perkv1(PerkLib.PiercedIcestone)*-0.01).withText("Icestone piercing");
+				if (player.hasPerk(PerkLib.PiercedCrimstone))
+					player.buff("PiercedCrimstone").setStat("minlustx", player.perkv1(PerkLib.PiercedCrimstone)*0.01).withText("Crimstone piercing");
+				if (player.hasPerk(PerkLib.PentUp))
+					player.buff("PentUp").setStat("minlustx", player.perkv1(PerkLib.PentUp)*0.01).withText("Pent up");
+				if (player.hasStatusEffect(StatusEffects.AnemoneArousal))
+					player.buff("AnemoneArousal").setStat("minlustx", 0.3).withText("Anemone parasite");
+				if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFera))
+					player.buff("FerasBlessing").setStat("minlustx", 0.15).forHours(player.statusEffectv1(StatusEffects.BlessingOfDivineFera)).withText("Fera's Blessing");
+				if (player.hasStatusEffect(StatusEffects.BimboChampagne))
+					player.buff("BimboChampagne").setStat("minlustx", 0.1).forHours(player.statusEffectv1(StatusEffects.BimboChampagne)).withText("Bimbo Champagne");
+				if (player.hasStatusEffect(StatusEffects.Infested))
+					player.buff("Infested").setStat("minlustx", 0.5).withText("Worm Infested");
+				if (player.hasStatusEffect(StatusEffects.Luststick))
+					player.buff("Luststick").setStat("minlustx", 0.5).forHours(player.statusEffectv1(StatusEffects.Luststick));
+				if (player.hasPerk(PerkLib.Lycanthropy))
+					player.buff("Lycanthropy").setStat("minlustx", player.perkv1(PerkLib.Lycanthropy)*0.01);
+				if (player.statStore.hasBuff("DrunkenPowerEmpower"))
+					player.buff("DrunkenPowerEmpower").setStat("minlust", 0.5).withText("Easter Bunny Balls");
+				if(player.eggs() >= 40) player.buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+				else if(player.eggs() >= 20) player.buff("EggFever").setStat("minlust", 0.1).withText("Egg Fever");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.057;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.058) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;

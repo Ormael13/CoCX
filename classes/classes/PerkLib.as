@@ -2032,11 +2032,11 @@ public class PerkLib
 				.withBuffs({'maxfatigue_base':+60});
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
-						"Increases the attack damage for non-heavy/non-small melee weapons.</b>" +
+						"Increases the attack damage for normal sized melee weapons.</b>" +
 						"|" +
 						"<b>You are too slow to benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Lightning Strikes' perk, increasing the attack damage for non-heavy/non-small melee weapons.</b>");
+				"You've chosen the 'Lightning Strikes' perk, increasing the attack damage for normal sized melee weapons.</b>");
 		public static const LimitBreakerBody1stStage:PerkType = mk("Limit Breaker: Body (1st stage)", "Limit Breaker: Body (1st stage)",
 				"Breaking your limits for 'body' for the first time grants you +5% max HP and Wrath.",
 				"You've chosen the 'Limit Breaker: Body (1st stage)' perk, breaking your limits for 'body' for the first time. (+5% max HP and Wrath)")

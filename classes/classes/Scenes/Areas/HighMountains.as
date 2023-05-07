@@ -53,7 +53,7 @@ public class HighMountains extends BaseContent {
             name: "helcommon",
             night : false,
             call: SceneLib.helScene.helSexualAmbush,
-            chance: 0.2,
+            chance: highMountainsChance,
             when: SceneLib.helScene.helSexualAmbushCondition
         }, {
             name: "etna",
@@ -63,7 +63,7 @@ public class HighMountains extends BaseContent {
                     && !player.hasStatusEffect(StatusEffects.EtnaOff)
                     && (player.level >= 20);
             },
-            chance: 0.5,
+            chance: highMountainsChance,
             call: SceneLib.etnaScene.repeatYandereEnc
         }, {
             name: "templeofthediving",
@@ -140,6 +140,12 @@ public class HighMountains extends BaseContent {
         highMountainsEncounter.execEncounter();
         flushOutputTextToGUI();
     }
+
+	public function highMountainsChance():Number {
+		var temp:Number = 0.5;
+		if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+		return temp;
+	}
 
     //\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING
     //Initial Intro

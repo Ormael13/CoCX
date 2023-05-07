@@ -23,19 +23,25 @@ import classes.PerkLib;
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Weapon (Gauntlet)";
+			desc += "\n\nType: Weapon ("+formDesc+")";
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value
 			desc += "\nBase value: 0";
 			return desc;
 		}
-		/*
+		private function formDesc():String {
+			var fd:String = "";
+			if (game.player.hasAetherTwinsTierS1() || game.player.hasAetherTwinsTierS2()) fd = "Dagger";
+			else fd = "Gauntlet";
+			return fd;
+		}
+		
 		override public function get verb():String {
-			if (AetherTwinsFollowers.AetherTwinsShape == "insert shape name") return "?";
+			if (game.player.hasAetherTwinsTierS1() || game.player.hasAetherTwinsTierS2()) return "stab";
 			else return "punch";
 		}
-		*/
+		
 		override public function get attack():Number {
 			var boost:int = 0;
 			boost += game.player.statusEffectv1(StatusEffects.AetherTwins1);

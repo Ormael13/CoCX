@@ -59,7 +59,7 @@ use namespace CoC;
 					GlacialRiftConditions();
 					SceneLib.helScene.helSexualAmbush();
 				},
-				chance: 0.2,
+				chance: glacialRiftChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
@@ -69,6 +69,7 @@ use namespace CoC;
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
 				},
+				chance: glacialRiftChance,
 				call  : function():void {
 					GlacialRiftConditions();
 					SceneLib.etnaScene.repeatYandereEnc();
@@ -143,6 +144,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALERIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR;
 				},
+				chance: glacialRiftChance,
 				call: encounterValeria
 			}, {
 				//Freebie items!
@@ -174,6 +176,12 @@ use namespace CoC;
 			clearOutput();
 			glacialRiftEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+
+		public function glacialRiftChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 		
 		public function encounterNothing():void {

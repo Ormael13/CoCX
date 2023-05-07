@@ -55,7 +55,7 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.helScene.helSexualAmbush();
 				},
-				chance: 0.2,
+				chance: plainsChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
@@ -65,7 +65,7 @@ use namespace CoC;
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: plainsChance,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.etnaScene.repeatYandereEnc();
@@ -76,7 +76,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: plainsChance,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
@@ -100,6 +100,7 @@ use namespace CoC;
 					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
 						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 1;
 				},
+				chance: plainsChance,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.sidonieFollower.meetingSidonieAtPlains();
@@ -110,6 +111,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 				},
+				chance: plainsChance,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.dianaScene.repeatEnc();
@@ -120,6 +122,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
+				chance: plainsChance,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.dianaScene.postNameEnc();
@@ -238,6 +241,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0
 				},
+				chance: plainsChance,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.isabellaScene.isabellaGreeting();
@@ -246,7 +250,7 @@ use namespace CoC;
 				name  : "helia",
 				night : false,
 				chance: function ():Number {
-					return flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] ? 0.75 : 1.5;
+					return flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] ? (0.75 * player.npcChanceToEncounter()) : (1.5 * player.npcChanceToEncounter());
 				},
 				when  : function ():Boolean {
 					return !SceneLib.helScene.followerHel();
@@ -302,6 +306,11 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 			explorationEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+		public function plainsChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 		public function partsofSnippler():void {
 			clearOutput();

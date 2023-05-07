@@ -1486,7 +1486,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
         var dualWeapon:Boolean = false;
-        if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual")){
+        if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.hasAetherTwinsTierS2()){
             dualWeapon = true;
         }
         if (flags[kFLAGS.MULTIATTACK_STYLE] >= 0) {
@@ -6202,9 +6202,9 @@ public class Combat extends BaseContent {
                     }
                     //Lust raising weapon bonuses
                     if (monster.lustVuln > 0) {
-                        if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.L_DAGGR || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU || player.hasAetherTwinsTier2()) {
+                        if (player.weapon == weapons.L_CLAWS || player.weapon == weapons.L_DAGGR || player.weapon == weapons.LRAPIER || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU || player.hasAetherTwinsTier2() || player.hasAetherTwinsTierS1() || player.hasAetherTwinsTierS2()) {
                             outputText("\n[Themonster] shivers as your weapon's 'poison' goes to work.");
-                            if (player.weapon == weapons.L_DAGGR) monster.teased(monster.lustVuln * (5 + player.cor / 10));
+                            if (player.weapon == weapons.L_DAGGR || player.hasAetherTwinsTierS1() || player.hasAetherTwinsTierS2()) monster.teased(monster.lustVuln * (5 + player.cor / 10));
                             else monster.teased(monster.lustVuln * (10 + player.cor / 8));
                         }
                         var whipLustDmg:Number = 0;
@@ -7380,7 +7380,7 @@ public class Combat extends BaseContent {
         if (player.isMaceHammerTypeWeapon()) stunChance += 10;
         if (player.isAxeTypeWeapon()) bleedChance += 25;
         //10% Stun chance
-        if (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist) || player.weaponSpecials("Stun10") || (player.hasAetherTwinsTier1())) stunChance += 10;
+        if (player.weapon == weapons.S_GAUNT && player.hasPerk(PerkLib.MightyFist) || player.weaponSpecials("Stun10") || player.hasAetherTwinsTier1()) stunChance += 10;
         //15% Stun Chance
         if (player.weaponSpecials("Stun15")) stunChance += 15;
         //20% Stun chance
@@ -7405,7 +7405,7 @@ public class Combat extends BaseContent {
         //10% Bleed chance
         if (player.weaponSpecials("Bleed10") || player.hasAetherTwinsTier1()) bleedChance += 10;
         //25% Bleed chance
-        if (player.weaponSpecials("Bleed25")) bleedChance += 25;
+        if (player.weaponSpecials("Bleed25") || player.hasAetherTwinsTierS1() || player.hasAetherTwinsTierS2()) bleedChance += 25;
 		//45% Bleed chance
         if (player.weaponSpecials("Bleed45") || player.hasAetherTwinsTier2()) bleedChance += 45;
         //100% Bleed chance
@@ -9655,6 +9655,7 @@ public class Combat extends BaseContent {
             if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You manage to cleanse the harpy lip-gloss from your system with your knowledge of medicine!\n\n");
                 player.removeStatusEffect(StatusEffects.Luststick);
+                player.minLustXStat.removeBuff("Luststick");
             } else if (rand(5) == 0) {
                 if (rand(2) == 0) outputText("A fantasy springs up from nowhere, dominating your thoughts for a few moments.  In it, you're lying down in a soft nest.  Gold-rimmed lips are noisily slurping around your [cock], smearing it with her messy aphrodisiac until you're completely coated in it.  She looks up at you knowingly as the two of you get ready to breed the night away...\n\n");
                 else outputText("An idle daydream flutters into your mind.  In it, you're fucking a harpy's asshole, clutching tightly to her wide, feathery flanks as the tight ring of her pucker massages your [cock].  She moans and turns around to kiss you on the lips, ensuring your hardness.  Before long her feverish grunts of pleasure intensify, and you feel the egg she's birthing squeezing against you through her internal walls...\n\n");
