@@ -3420,11 +3420,11 @@ public class PerkLib
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
 				"Your reached first stage of body cultivating. (+6 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Apprentice, S.Personage, S.Warrior stages; +0.5% HP regen)");
 		public static const FleshBodyElderStage:PerkType = mk("Flesh Body: Elder Stage", "Flesh Body: Elder Stage",
-				"Your reached third stage of body cultivating. (+14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages)");
+				"Your reached third stage of body cultivating. (+14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages; +0.5% HP regen)");
 		public static const FleshBodyOverlordStage:PerkType = mk("Flesh Body: Overlord Stage", "Flesh Body: Overlord Stage",
-				"Your reached fourth stage of body cultivating. (+18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages)");
+				"Your reached fourth stage of body cultivating. (+18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages; +0.5% HP regen)");
 		public static const FleshBodyTyrantStage:PerkType = mk("Flesh Body: Tyrant Stage", "Flesh Body: Tyrant Stage",
-				"Your reached fifth stage of body cultivating. (+22 to unarmed attack, +12 to armor / magic resistance, +2000 max HP at S.Ancestor, S.Sage stages)");
+				"Your reached fifth stage of body cultivating. (+22 to unarmed attack, +12 to armor / magic resistance, +2000 max HP at S.Ancestor, S.Sage stages; +0.5% HP regen)");
 		public static const FleshBodyWarriorStage:PerkType = mk("Flesh Body: Warrior Stage", "Flesh Body: Warrior Stage",
 				"Your reached second stage of body cultivating. (+10 to unarmed attack, +6 to armor / magic resistance, +800 max HP at S.Sprite, S.Scholar, S.Grandmaster stages; +0.5% HP regen)");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",

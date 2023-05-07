@@ -2649,16 +2649,16 @@ public class Combat extends BaseContent {
 		if (player.isDaggerTypeWeapon()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
 		if (player.isWhipTypeWeapon()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
 		if (player.isExoticTypeWeapon()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
-		if (player.weaponSpecials("Dual Small")) accmod += Math.round((dualWSLevel() - 1) / 2);
+		if (player.weaponSpecials("Dual Small") || player.hasAetherTwinsTierS2()) accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual")) accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Massive")) accmod += Math.round((dualWMLevel() - 1) / 2);
-		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive")) accmod += meleeDualWieldAccuracyPenalty();
+		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive") || player.hasAetherTwinsTierS2()) accmod += meleeDualWieldAccuracyPenalty();
         var weaponSize:Number = 1;
-        if( player.weaponSpecials("Small") ) weaponSize = 0;
-        if( player.weaponSpecials("Large") ) weaponSize = 2;
-        if( player.weaponSpecials("Massive") ) weaponSize = 3;
-        if (weaponSize == 0) accmod += Math.round((weaponSizeSmall() - 1) / 2);
+        if (player.weaponSpecials("Small")) weaponSize = 0;
+        if (player.weaponSpecials("Large")) weaponSize = 2;
+        if (player.weaponSpecials("Massive")) weaponSize = 3;
+        if (weaponSize == 0 || player.hasAetherTwinsTierS1() || player.hasAetherTwinsTierS2()) accmod += Math.round((weaponSizeSmall() - 1) / 2);
         if (weaponSize == 1) accmod += Math.round((weaponSizeNormal() - 1) / 2);
         if (weaponSize == 2) accmod += Math.round((weaponSizeLarge() - 1) / 2);
         if (weaponSize == 3) accmod += Math.round((weaponSizeMassive() - 1) / 2);
@@ -16083,7 +16083,7 @@ public function firearmsForce():Number {
 }
 
 public function soulskillMod():Number {
-    var modss:Number = Math.max(player.psoulskillPowerStat.value, player.msoulskillPowerStat.value);
+    var modss:Number = 1;
     if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
         if (player.hasPerk(PerkLib.SoulApprentice)) modss += .3;
         if (player.hasPerk(PerkLib.SoulPersonage)) modss += .3;
@@ -16136,36 +16136,14 @@ public function soulskillMod():Number {
 
 public function soulskillPhysicalMod():Number {
     var modssp:Number = player.psoulskillPowerStat.value;
-    if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssp += .3;
-    if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssp += .4;
-    if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssp += .5;
-    if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssp += .6;
-    if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .7;
-    if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
-    if (player.hasPerk(PerkLib.InariBlessedKimono)) modssp += ((100 - player.cor) * .01);
-    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssp += (player.cor * .01);
-    if (player.necklaceName == "Yin Yang Amulet") modssp += .15;
-    if (player.armorName == "Traditional clothes") modssp += .4;
-    if (player.hasPerk(PerkLib.ElementalBody)) {
-        if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssp += .05;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssp += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssp += .15;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssp += .2;
-        }
-        else {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssp += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssp += .2;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssp += .3;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssp += .4;
-        }
-    }
+	if (soulskillMod() > 1) modssp += soulskillMod() - 1;
     modssp = Math.round(modssp * 100) / 100;
     return modssp;
 }
 
 public function soulskillMagicalMod():Number {
     var modssm:Number = player.msoulskillPowerStat.value;
+	if (soulskillMod() > 1) modssm += soulskillMod() - 1;
     if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
         if (player.hasPerk(PerkLib.SoulApprentice)) modssm += .3;
         if (player.hasPerk(PerkLib.SoulPersonage)) modssm += .3;
@@ -16187,32 +16165,7 @@ public function soulskillMagicalMod():Number {
         if (player.hasPerk(PerkLib.SoulEmperor)) modssm += 1.4;
         //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 1.4;
     }
-    if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
-    if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;
-    if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssm += .5;
-    if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssm += .6;
-    if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssm += .7;
-    if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
-    if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
-    if (player.hasPerk(PerkLib.InariBlessedKimono)) modssm += ((100 - player.cor) * .01);
-    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssm += (player.cor * .01);
-    if (player.necklaceName == "Yin Yang Amulet") modssm += .15;
     if (player.shieldName == "spirit focus") modssm += .25;
-    if (player.armorName == "Traditional clothes") modssm += .4;
-    if (player.hasPerk(PerkLib.ElementalBody)) {
-        if (player.perkv1(PerkLib.ElementalBody) < 4) {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssm += .05;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssm += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssm += .15;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssm += .2;
-        }
-        else {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssm += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssm += .2;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssm += .3;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssm += .4;
-        }
-    }
     modssm = Math.round(modssm * 100) / 100;
     return modssm;
 }
@@ -16234,7 +16187,6 @@ public function soulskillCost():Number {
     if (player.hasPerk(PerkLib.DaoistWarriorStage)) modssc -= .1;
     if (player.hasPerk(PerkLib.DaoistElderStage)) modssc -= .1;
     if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
-    if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
     if (player.jewelryName == "fox hairpin") modssc -= .2;
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.2);
     if (modssc < 0.1) modssc = 0.1;

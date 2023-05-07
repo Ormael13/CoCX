@@ -957,6 +957,7 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
 		}
+		if (flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] == 0) flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
 		doNext(SoulforceCheats);
 	}
 	public function PerkGalore2():void {

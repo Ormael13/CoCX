@@ -1026,6 +1026,8 @@ use namespace CoC;
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack() || hasTentacleAttacks() || isAlraune() || isTaur());}
 		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
 		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
+		public function hasAetherTwinsTierWeapon():Boolean { return weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"); }
+		public function hasAetherTwinsTierShield():Boolean { return shield == game.shields.AETHERS && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"); }
 		public function hasAetherTwinsTierS1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"; }
 		public function hasAetherTwinsTierS2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"; }
 		//Some other checks
@@ -1089,7 +1091,7 @@ use namespace CoC;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
-			return shield.isNothing || shield == game.shields.AETHERS;
+			return shield.isNothing || (shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield");
 		}
 
 		//weaponType check. Make sure weapon has the type filled in. Currently, Type is the last parameter in Weapon().
@@ -1133,7 +1135,7 @@ use namespace CoC;
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_DAGGER));
+			return (weaponClass(ItemConstants.WT_DAGGER)) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
@@ -1157,7 +1159,7 @@ use namespace CoC;
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
+			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -1793,7 +1795,7 @@ use namespace CoC;
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || hasAetherTwinsTierS1());
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || (shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"));
 		}
 		//override public function get shields
 		override public function get shieldName():String {

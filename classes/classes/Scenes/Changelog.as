@@ -131,7 +131,7 @@ public class Changelog extends BaseContent
 			outputText("-Angst Dagger max atk was decreased to 20 and they now classified as mid tier wrath weapons.\n");
 			outputText("-Fix SandMother sex scenes. Fix clones dao contemplation clearing screen on time change. (EragonX)\n");
 			outputText("-Add hover tooltip for minimum lust. (EragonX)\n");
-			outputText("-\n");
+			outputText("-Physical & Magical Soulpower values would now be added on top of base value of Soulpower.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
