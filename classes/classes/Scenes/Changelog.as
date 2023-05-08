@@ -46,6 +46,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
 			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
 			outputText("-New melee weapon (by Ormael): Dual Nodachi - can be gained by combining 2x Kama weapon. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
+			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
 			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
@@ -79,7 +80,6 @@ public class Changelog extends BaseContent
 			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
 			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
 			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
-			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Two Bladed Scythe - buyable at Orsbulg shop. Cost 2,400 gems. Base atk is 30. It's large weapon belonging to (scythe) exotic type, can be used in whirlwind specials. Have 25% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
@@ -132,7 +132,7 @@ public class Changelog extends BaseContent
 			outputText("-Fix SandMother sex scenes. Fix clones dao contemplation clearing screen on time change. (EragonX)\n");
 			outputText("-Add hover tooltip for minimum lust. (EragonX)\n");
 			outputText("-Physical & Magical Soulpower values would now be added on top of base value of Soulpower.\n");
-			outputText("-\n");
+			outputText("-Daoist: ... Stage perks desc was updated and effect of inc soulskill power increased but only affect magical soulskill power only. Flesh Body: ... Stage perks bonus to unarmed atk was lowered to 50% of previous values but they now add 25% * stage % ot physical soulskill power. Heaven Tribulation Survivor perks bonus to soulskill power was changed from 30/40/50/60% to 25/50/75/100%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -153,6 +153,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check, special names that was giving previous ears type used by goblins\n");
@@ -225,11 +231,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -257,8 +259,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
