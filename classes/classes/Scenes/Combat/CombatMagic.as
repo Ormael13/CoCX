@@ -207,7 +207,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.necklaceEffectId == NecklaceLib.MODIFIER_SPELL_POWER) mod += (player.necklaceEffectMagnitude / 100);
 		if (player.armor == armors.DWARMOR) mod += 0.3;
-		if (player.hasAetherTwinsTierS1() || player.hasAetherTwinsTierS2()) mod += 0.7;
+		if (player.hasAetherTwinsTierWeapon()) mod += 0.2;
+		if (player.hasAetherTwinsTierShield()) mod += 0.5;
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		// hope it doesn't lag too much

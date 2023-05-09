@@ -5,13 +5,11 @@
 package classes.Items.Weapons
 {
 import classes.ItemType;
+import classes.StatusEffects;
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
-import classes.PerkLib;
-	import classes.Player;
-	import classes.GlobalFlags.kFLAGS;
-	//import classes.Scenes.NPCs.AetherTwinsFollowers;
-	import classes.StatusEffects;
+import classes.Scenes.NPCs.AetherTwinsFollowers;
 	
 	public class AetherD extends Weapon {
 		
@@ -23,18 +21,15 @@ import classes.PerkLib;
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Weapon ("+formDesc+")";
+			desc += "\n\nType: Weapon (";
+			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") desc += "Dagger";
+			else desc += "Gauntlet";
+			desc += ")";
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value
 			desc += "\nBase value: 0";
 			return desc;
-		}
-		private function formDesc():String {
-			var fd:String = "";
-			if (game.player.hasAetherTwinsTierS1() || game.player.hasAetherTwinsTierS2()) fd = "Dagger";
-			else fd = "Gauntlet";
-			return fd;
 		}
 		
 		override public function get verb():String {

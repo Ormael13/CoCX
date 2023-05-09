@@ -2649,16 +2649,16 @@ public class Combat extends BaseContent {
 		if (player.isDaggerTypeWeapon()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
 		if (player.isWhipTypeWeapon()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
 		if (player.isExoticTypeWeapon()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
-		if (player.weaponSpecials("Dual Small")) accmod += Math.round((dualWSLevel() - 1) / 2);
+		if (player.weaponSpecials("Dual Small") || player.hasAetherTwinsTierS2()) accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual")) accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Massive")) accmod += Math.round((dualWMLevel() - 1) / 2);
-		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive")) accmod += meleeDualWieldAccuracyPenalty();
+		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive") || player.hasAetherTwinsTierS2()) accmod += meleeDualWieldAccuracyPenalty();
         var weaponSize:Number = 1;
-        if( player.weaponSpecials("Small") ) weaponSize = 0;
-        if( player.weaponSpecials("Large") ) weaponSize = 2;
-        if( player.weaponSpecials("Massive") ) weaponSize = 3;
-        if (weaponSize == 0) accmod += Math.round((weaponSizeSmall() - 1) / 2);
+        if (player.weaponSpecials("Small")) weaponSize = 0;
+        if (player.weaponSpecials("Large")) weaponSize = 2;
+        if (player.weaponSpecials("Massive")) weaponSize = 3;
+        if (weaponSize == 0 || player.hasAetherTwinsTierS1() || player.hasAetherTwinsTierS2()) accmod += Math.round((weaponSizeSmall() - 1) / 2);
         if (weaponSize == 1) accmod += Math.round((weaponSizeNormal() - 1) / 2);
         if (weaponSize == 2) accmod += Math.round((weaponSizeLarge() - 1) / 2);
         if (weaponSize == 3) accmod += Math.round((weaponSizeMassive() - 1) / 2);
@@ -6640,27 +6640,27 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.JobMonk) && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.PrestigeJobSoulArtMaster) && player.wis >= 200) unarmed += 10 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 6 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 6 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 6 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulApprentice)) unarmed += 3 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulPersonage)) unarmed += 3 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulWarrior)) unarmed += 3 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 10 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 10 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 10 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulSprite)) unarmed += 5 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulScholar)) unarmed += 5 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulGrandmaster)) unarmed += 5 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 14 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 14 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 14 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulElder)) unarmed += 7 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulExalt)) unarmed += 7 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulOverlord)) unarmed += 7 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 18 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 18 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
-            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 18 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulTyrant)) unarmed += 9 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulKing)) unarmed += 9 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulEmperor)) unarmed += 9 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.FleshBodyTyrantStage)) {
-            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 22 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
+            if (player.hasPerk(PerkLib.SoulAncestor)) unarmed += 11 * (1 + player.newGamePlusMod()) * player.humanBodyCultivators();
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) unarmed += 18 * (1 + player.newGamePlusMod());
@@ -16083,33 +16083,12 @@ public function firearmsForce():Number {
 }
 
 public function soulskillMod():Number {
-    var modss:Number = Math.max(player.psoulskillPowerStat.value, player.msoulskillPowerStat.value);
-    if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
-        if (player.hasPerk(PerkLib.SoulApprentice)) modss += .3;
-        if (player.hasPerk(PerkLib.SoulPersonage)) modss += .3;
-        if (player.hasPerk(PerkLib.SoulWarrior)) modss += .3;
-    }
-    if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
-        if (player.hasPerk(PerkLib.SoulSprite)) modss += .6;
-        if (player.hasPerk(PerkLib.SoulScholar)) modss += .6;
-        if (player.hasPerk(PerkLib.SoulGrandmaster)) modss += .6;
-    }
-    if (player.hasPerk(PerkLib.DaoistElderStage)) {
-        if (player.hasPerk(PerkLib.SoulElder)) modss += 1;
-        if (player.hasPerk(PerkLib.SoulExalt)) modss += 1;
-        if (player.hasPerk(PerkLib.SoulOverlord)) modss += 1;
-    }
-    if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-        if (player.hasPerk(PerkLib.SoulTyrant)) modss += 1.4;
-        if (player.hasPerk(PerkLib.SoulKing)) modss += 1.4;
-        if (player.hasPerk(PerkLib.SoulEmperor)) modss += 1.4;
-        //if (player.hasPerk(PerkLib.SoulAncestor)) modss += 1.4;
-    }
-    if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .3;
-    if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .4;
-    if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .5;
-    if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modss += .6;
-    if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modss += .7;
+    var modss:Number = 1;
+    if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .25;
+    if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .5;
+    if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .75;
+    if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modss += 1;
+    if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modss += 1.25;
     if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
     if (player.hasPerk(PerkLib.InariBlessedKimono)) modss += ((100 - player.cor) * .01);
@@ -16136,29 +16115,27 @@ public function soulskillMod():Number {
 
 public function soulskillPhysicalMod():Number {
     var modssp:Number = player.psoulskillPowerStat.value;
-    if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssp += .3;
-    if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssp += .4;
-    if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssp += .5;
-    if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssp += .6;
-    if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .7;
-    if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
-    if (player.hasPerk(PerkLib.InariBlessedKimono)) modssp += ((100 - player.cor) * .01);
-    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssp += (player.cor * .01);
-    if (player.necklaceName == "Yin Yang Amulet") modssp += .15;
-    if (player.armorName == "Traditional clothes") modssp += .4;
-    if (player.hasPerk(PerkLib.ElementalBody)) {
-        if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssp += .05;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssp += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssp += .15;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssp += .2;
-        }
-        else {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssp += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssp += .2;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssp += .3;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssp += .4;
-        }
+	if (soulskillMod() > 1) modssp += soulskillMod() - 1;
+    if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
+        if (player.hasPerk(PerkLib.SoulApprentice)) modssp += .25;
+        if (player.hasPerk(PerkLib.SoulPersonage)) modssp += .25;
+        if (player.hasPerk(PerkLib.SoulWarrior)) modssp += .25;
+    }
+    if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
+        if (player.hasPerk(PerkLib.SoulSprite)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulScholar)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulGrandmaster)) modssp += .5;
+    }
+    if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
+        if (player.hasPerk(PerkLib.SoulElder)) modssp += .75;
+        if (player.hasPerk(PerkLib.SoulExalt)) modssp += .75;
+        if (player.hasPerk(PerkLib.SoulOverlord)) modssp += .75;
+    }
+    if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+        if (player.hasPerk(PerkLib.SoulTyrant)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulKing)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulEmperor)) modssp += 1;
+        //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
     modssp = Math.round(modssp * 100) / 100;
     return modssp;
@@ -16166,53 +16143,29 @@ public function soulskillPhysicalMod():Number {
 
 public function soulskillMagicalMod():Number {
     var modssm:Number = player.msoulskillPowerStat.value;
+	if (soulskillMod() > 1) modssm += soulskillMod() - 1;
     if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
-        if (player.hasPerk(PerkLib.SoulApprentice)) modssm += .3;
-        if (player.hasPerk(PerkLib.SoulPersonage)) modssm += .3;
-        if (player.hasPerk(PerkLib.SoulWarrior)) modssm += .3;
+        if (player.hasPerk(PerkLib.SoulApprentice)) modssm += .5;
+        if (player.hasPerk(PerkLib.SoulPersonage)) modssm += .5;
+        if (player.hasPerk(PerkLib.SoulWarrior)) modssm += .5;
     }
     if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
-        if (player.hasPerk(PerkLib.SoulSprite)) modssm += .6;
-        if (player.hasPerk(PerkLib.SoulScholar)) modssm += .6;
-        if (player.hasPerk(PerkLib.SoulGrandmaster)) modssm += 0.6;
+        if (player.hasPerk(PerkLib.SoulSprite)) modssm += 1;
+        if (player.hasPerk(PerkLib.SoulScholar)) modssm += 1;
+        if (player.hasPerk(PerkLib.SoulGrandmaster)) modssm += 1;
     }
     if (player.hasPerk(PerkLib.DaoistElderStage)) {
-        if (player.hasPerk(PerkLib.SoulElder)) modssm += 1;
-        if (player.hasPerk(PerkLib.SoulExalt)) modssm += 1;
-        if (player.hasPerk(PerkLib.SoulOverlord)) modssm += 1;
+        if (player.hasPerk(PerkLib.SoulElder)) modssm += 1.5;
+        if (player.hasPerk(PerkLib.SoulExalt)) modssm += 1.5;
+        if (player.hasPerk(PerkLib.SoulOverlord)) modssm += 1.5;
     }
     if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-        if (player.hasPerk(PerkLib.SoulTyrant)) modssm += 1.4;
-        if (player.hasPerk(PerkLib.SoulKing)) modssm += 1.4;
-        if (player.hasPerk(PerkLib.SoulEmperor)) modssm += 1.4;
-        //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 1.4;
+        if (player.hasPerk(PerkLib.SoulTyrant)) modssm += 2;
+        if (player.hasPerk(PerkLib.SoulKing)) modssm += 2;
+        if (player.hasPerk(PerkLib.SoulEmperor)) modssm += 2;
+        //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
-    if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
-    if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;
-    if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssm += .5;
-    if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) modssm += .6;
-    if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssm += .7;
-    if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
-    if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
-    if (player.hasPerk(PerkLib.InariBlessedKimono)) modssm += ((100 - player.cor) * .01);
-    if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssm += (player.cor * .01);
-    if (player.necklaceName == "Yin Yang Amulet") modssm += .15;
     if (player.shieldName == "spirit focus") modssm += .25;
-    if (player.armorName == "Traditional clothes") modssm += .4;
-    if (player.hasPerk(PerkLib.ElementalBody)) {
-        if (player.perkv1(PerkLib.ElementalBody) < 4) {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssm += .05;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssm += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssm += .15;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssm += .2;
-        }
-        else {
-            if (player.perkv2(PerkLib.ElementalBody) == 1) modssm += .1;
-            if (player.perkv2(PerkLib.ElementalBody) == 2) modssm += .2;
-            if (player.perkv2(PerkLib.ElementalBody) == 3) modssm += .3;
-            if (player.perkv2(PerkLib.ElementalBody) == 4) modssm += .4;
-        }
-    }
     modssm = Math.round(modssm * 100) / 100;
     return modssm;
 }
@@ -16234,7 +16187,6 @@ public function soulskillCost():Number {
     if (player.hasPerk(PerkLib.DaoistWarriorStage)) modssc -= .1;
     if (player.hasPerk(PerkLib.DaoistElderStage)) modssc -= .1;
     if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
-    if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
     if (player.jewelryName == "fox hairpin") modssc -= .2;
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.2);
     if (modssc < 0.1) modssc = 0.1;

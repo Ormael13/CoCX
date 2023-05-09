@@ -48,6 +48,7 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 		public static var AetherTwinsFoodMenuBuckler:Boolean;
 		public static var AetherTwinsFoodMenuSpikeLShield:Boolean;
 		public static var AetherTwinsFoodMenuManaBracer:Boolean;
+		//public static var AetherTwinsFoodMenuKiteShield:Boolean;
 		public static var AetherTwinsFoodMenuSGauntlet:Boolean;
 		public static var AetherTwinsFoodMenuClaws:Boolean;
 		public static var AetherTwinsFoodMenuHGaunt:Boolean;
@@ -59,8 +60,14 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 		public static var AetherTwinsFoodMenuLustyDagger:Boolean;
 		public static var AetherTwinsFoodMenuWitchDagger:Boolean;
 		public static var AetherTwinsFoodMenuAngstDagger:Boolean;
+		public static var AetherTwinsFoodMenuMace:Boolean;
+		public static var AetherTwinsFoodMenuSpear:Boolean;
+		public static var AetherTwinsFoodMenuWhip:Boolean;
+		public static var AetherTwinsFoodMenuWardensBlade:Boolean;
+		public static var AetherTwinsFoodMenuKatana:Boolean;
 		public static var AetherTwinsFoodMenu1:Boolean;
 		public static var AetherTwinsFoodMenu2:Boolean;
+		public static var AetherTwinsFoodMenu3:Boolean;
 		
 		private var one:Number = 0;
 		private var two:Number = 0;
@@ -105,6 +112,7 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 			AetherTwinsFoodMenuBuckler = false;
 			AetherTwinsFoodMenuSpikeLShield = false;
 			AetherTwinsFoodMenuManaBracer = false;
+			//AetherTwinsFoodMenuKiteShield = false;
 			AetherTwinsFoodMenuSGauntlet = false;
 			AetherTwinsFoodMenuClaws = false;
 			AetherTwinsFoodMenuHGaunt = false;
@@ -116,8 +124,14 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 			AetherTwinsFoodMenuLustyDagger = false;
 			AetherTwinsFoodMenuWitchDagger = false;
 			AetherTwinsFoodMenuAngstDagger = false;
+			AetherTwinsFoodMenuMace = false;
+			AetherTwinsFoodMenuSpear = false;
+			AetherTwinsFoodMenuWhip = false;
+			AetherTwinsFoodMenuWardensBlade = false;
+			AetherTwinsFoodMenuKatana = false;
 			AetherTwinsFoodMenu1 = false;
 			AetherTwinsFoodMenu2 = false;
+			AetherTwinsFoodMenu3 = false;
 		}
 		
 		public function saveToObject():Object {
@@ -157,6 +171,7 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 				"AetherTwinsFoodMenuBuckler": AetherTwinsFoodMenuBuckler,
 				"AetherTwinsFoodMenuSpikeLShield": AetherTwinsFoodMenuSpikeLShield,
 				"AetherTwinsFoodMenuManaBracer": AetherTwinsFoodMenuManaBracer,
+				//"AetherTwinsFoodMenuKiteShield": AetherTwinsFoodMenuKiteShield,
 				"AetherTwinsFoodMenuSGauntlet": AetherTwinsFoodMenuSGauntlet,
 				"AetherTwinsFoodMenuClaws": AetherTwinsFoodMenuClaws,
 				"AetherTwinsFoodMenuHGaunt": AetherTwinsFoodMenuHGaunt,
@@ -168,8 +183,14 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 				"AetherTwinsFoodMenuLustyDagger": AetherTwinsFoodMenuLustyDagger,
 				"AetherTwinsFoodMenuWitchDagger": AetherTwinsFoodMenuWitchDagger,
 				"AetherTwinsFoodMenuAngstDagger": AetherTwinsFoodMenuAngstDagger,
+				"AetherTwinsFoodMenuMace": AetherTwinsFoodMenuMace,
+				"AetherTwinsFoodMenuSpear": AetherTwinsFoodMenuSpear,
+				"AetherTwinsFoodMenuWhip": AetherTwinsFoodMenuWhip,
+				"AetherTwinsFoodMenuWardensBlade": AetherTwinsFoodMenuWardensBlade,
+				"AetherTwinsFoodMenuKatana": AetherTwinsFoodMenuKatana,
 				"AetherTwinsFoodMenu1": AetherTwinsFoodMenu1,
-				"AetherTwinsFoodMenu2": AetherTwinsFoodMenu2
+				"AetherTwinsFoodMenu2": AetherTwinsFoodMenu2,
+				"AetherTwinsFoodMenu3": AetherTwinsFoodMenu3
 			};
 		}
 		
@@ -210,6 +231,7 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 				AetherTwinsFoodMenuBuckler = o["AetherTwinsFoodMenuBuckler"];
 				AetherTwinsFoodMenuSpikeLShield = o["AetherTwinsFoodMenuSpikeLShield"];
 				AetherTwinsFoodMenuManaBracer = valueOr(o["AetherTwinsFoodMenuManaBracer"], false);
+				//AetherTwinsFoodMenuKiteShield = valueOr(o["AetherTwinsFoodMenuKiteShield"], false);
 				AetherTwinsFoodMenuSGauntlet = o["AetherTwinsFoodMenuSGauntlet"];
 				AetherTwinsFoodMenuClaws = o["AetherTwinsFoodMenuClaws"];
 				AetherTwinsFoodMenuHGaunt = o["AetherTwinsFoodMenuHGaunt"];
@@ -221,8 +243,14 @@ public class AetherTwinsFollowers extends NPCAwareContent implements SaveableSta
 				AetherTwinsFoodMenuLustyDagger = valueOr(o["AetherTwinsFoodMenuLustyDagger"], false);
 				AetherTwinsFoodMenuWitchDagger = valueOr(o["AetherTwinsFoodMenuWitchDagger"], false);
 				AetherTwinsFoodMenuAngstDagger = valueOr(o["AetherTwinsFoodMenuAngstDagger"], false);
+				AetherTwinsFoodMenuMace = valueOr(o["AetherTwinsFoodMenuMace"], false);
+				AetherTwinsFoodMenuSpear = valueOr(o["AetherTwinsFoodMenuSpear"], false);
+				AetherTwinsFoodMenuWhip = valueOr(o["AetherTwinsFoodMenuWhip"], false);
+				AetherTwinsFoodMenuWardensBlade = valueOr(o["AetherTwinsFoodMenuWardensBlade"], false);
+				AetherTwinsFoodMenuKatana = valueOr(o["AetherTwinsFoodMenuKatana"], false);
 				AetherTwinsFoodMenu1 = o["AetherTwinsFoodMenu1"];
 				AetherTwinsFoodMenu2 = o["AetherTwinsFoodMenu2"];
+				AetherTwinsFoodMenu3 = valueOr(o["AetherTwinsFoodMenu3"], false);
 			} else {
 				// loading from old save
 				resetState();
@@ -359,6 +387,7 @@ public function aethertwinsFollowersFeed():void {
 	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");
 	if (AetherTwinsFoodMenuSpikeLShield) outputText("\n-Spiked Light Shield");
 	if (AetherTwinsFoodMenuManaBracer) outputText("\n-Mana Bracer");
+	//if (AetherTwinsFoodMenuKiteShield) outputText("\n-");
 	if (AetherTwinsFoodMenuSGauntlet) outputText("\n-Spiked Gauntlet");
 	if (AetherTwinsFoodMenuClaws) outputText("\n-Claws");
 	if (AetherTwinsFoodMenuHGaunt) outputText("\n-Hooked Gauntlets");
@@ -370,6 +399,11 @@ public function aethertwinsFollowersFeed():void {
 	if (AetherTwinsFoodMenuLustyDagger) outputText("\n-Lusty Dagger");
 	if (AetherTwinsFoodMenuWitchDagger) outputText("\n-Witch Dagger");
 	if (AetherTwinsFoodMenuAngstDagger) outputText("\n-Angst Dagger");
+	if (AetherTwinsFoodMenuMace) outputText("\n-Mace");
+	if (AetherTwinsFoodMenuSpear) outputText("\n-Spear");
+	if (AetherTwinsFoodMenuWhip) outputText("\n-Whip");
+	if (AetherTwinsFoodMenuWardensBlade) outputText("\n-Warden's Blade");
+	if (AetherTwinsFoodMenuKatana) outputText("\n-Katana");
 	menu();
 	var btn:int = 0;
 	if (player.hasItem(useables.S_INGOT, 1)) {
@@ -526,6 +560,36 @@ public function aethertwinsFollowersFeed():void {
 		if (AetherTwinsFoodMenu1) addButton(btn, weapons.ANGSTD1.shortName, aethertwinsFollowersFeedEquipment, weapons.ANGSTD1);
 		else addButtonDisabled(btn, weapons.ANGSTD1.shortName, "They can't eat this weapon before second evolution.");
 		btn++;
+	}/*
+	if (player.hasItem(shields.KITE_SH, 1) && !AetherTwinsFoodMenuKiteShield) {
+		if (AetherTwinsFoodMenu2) addButton(btn, shields.KITE_SH.shortName, aethertwinsFollowersFeedEquipment, shields.KITE_SH);
+		else addButtonDisabled(btn, shields.KITE_SH.shortName, "They can't eat this weapon before third evolution.");
+		btn++;
+	}*/
+	if (player.hasItem(weapons.MACE, 1) && !AetherTwinsFoodMenuMace) {
+		if (AetherTwinsFoodMenu2) addButton(btn, weapons.MACE.shortName, aethertwinsFollowersFeedEquipment, weapons.MACE);
+		else addButtonDisabled(btn, weapons.MACE.shortName, "They can't eat this weapon before third evolution.");
+		btn++;
+	}
+	if (player.hasItem(weapons.SPEAR, 1) && !AetherTwinsFoodMenuSpear) {
+		if (AetherTwinsFoodMenu2) addButton(btn, weapons.SPEAR.shortName, aethertwinsFollowersFeedEquipment, weapons.SPEAR);
+		else addButtonDisabled(btn, weapons.SPEAR.shortName, "They can't eat this weapon before third evolution.");
+		btn++;
+	}
+	if (player.hasItem(weapons.WHIP, 1) && !AetherTwinsFoodMenuWhip) {
+		if (AetherTwinsFoodMenu2) addButton(btn, weapons.WHIP.shortName, aethertwinsFollowersFeedEquipment, weapons.WHIP);
+		else addButtonDisabled(btn, weapons.WHIP.shortName, "They can't eat this weapon before third evolution.");
+		btn++;
+	}
+	if (player.hasItem(weapons.WDBLADE, 1) && !AetherTwinsFoodMenuWardensBlade) {
+		if (AetherTwinsFoodMenu2) addButton(btn, weapons.WDBLADE.shortName, aethertwinsFollowersFeedEquipment, weapons.WDBLADE);
+		else addButtonDisabled(btn, weapons.WDBLADE.shortName, "They can't eat this weapon before third evolution.");
+		btn++;
+	}
+	if (player.hasItem(weapons.KATANA, 1) && !AetherTwinsFoodMenuKatana) {
+		if (AetherTwinsFoodMenu3) addButton(btn, weapons.KATANA.shortName, aethertwinsFollowersFeedEquipment, weapons.KATANA);
+		else addButtonDisabled(btn, weapons.KATANA.shortName, "They can't eat this weapon before fourth evolution.");
+		btn++;
 	}
 	addButton(14, "Back", aethertwinsFollowers);
 }
@@ -560,6 +624,7 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 		case shields.BUCKLER:	AetherTwinsFoodMenuBuckler = true;			break;
 		case shields.SPIL_SH:	AetherTwinsFoodMenuSpikeLShield = true;		break;
 		case shields.MABRACE:	AetherTwinsFoodMenuManaBracer = true;		break;
+		//case shields.KITE_SH:	AetherTwinsFoodMenuKiteShield = true;		break;
 		case weapons.S_GAUNT:	AetherTwinsFoodMenuSGauntlet = true;		break;
 		case weapons.CLAWS:		AetherTwinsFoodMenuClaws = true;			break;
 		case weapons.H_GAUNT:	AetherTwinsFoodMenuHGaunt = true;			break;
@@ -571,6 +636,11 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 		case weapons.L_DAGGR:	AetherTwinsFoodMenuLustyDagger = true;		break;
 		case weapons.WDAGGER:	AetherTwinsFoodMenuWitchDagger = true;		break;
 		case weapons.ANGSTD1:	AetherTwinsFoodMenuAngstDagger = true;		break;
+		case weapons.MACE:		AetherTwinsFoodMenuMace = true;				break;
+		case weapons.SPEAR:		AetherTwinsFoodMenuSpear = true;			break;
+		case weapons.WHIP:		AetherTwinsFoodMenuWhip = true;				break;
+		case weapons.WDBLADE:	AetherTwinsFoodMenuWardensBlade = true;		break;
+		case weapons.KATANA:	AetherTwinsFoodMenuKatana = true;			break;
 	}
 	player.destroyItems(itype, 1);
 	doNext(aethertwinsFollowersFeed);
@@ -589,7 +659,10 @@ public function aethertwinsFollowersMorphMain():void {
 		if (AetherTwinsShape == "Human-tier Dagger and Shield") addButtonDisabled(2, "HtDagger&Shield", "They are curretly in Human-tier Dagger and Shield form.");
 		else addButton(2, "HtDagger&Shield", aethertwinsFollowersMorphMainHumanTierSmallWeapons);
 		if (AetherTwinsShape == "Human-tier Dual Daggers") addButtonDisabled(3, "HtDualDaggers", "They are curretly in Human-tier Dual Daggers form.");
-		else addButton(3, "HtDualDaggers", aethertwinsFollowersMorphMainHumanTierDualSmallWeapons);
+		else {
+			if (player.hasPerk(PerkLib.DualWield)) addButton(3, "HtDualDaggers", aethertwinsFollowersMorphMainHumanTierDualSmallWeapons);
+			else addButtonDisabled(3, "HtDualDaggers", "Without knowing how to Dual Wield weapons you wouldn't be able to use this form of their.");
+		}
 	}
 	else {
 		addButtonDisabled(2, "???", "After twins third evolution.");
@@ -635,9 +708,9 @@ public function aethertwinsFollowersMorphMainHumanTierSmallWeapons():void {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);
 		player.addStatusValue(StatusEffects.AetherTwins1, 1, -(one - 19));
 	}
-	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 15) {
+	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 17) {
 		two = player.statusEffectv2(StatusEffects.AetherTwins1);
-		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 15));
+		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 17));
 	}
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
@@ -650,9 +723,9 @@ public function aethertwinsFollowersMorphMainHumanTierDualSmallWeapons():void {
 		one = player.statusEffectv1(StatusEffects.AetherTwins1);
 		player.addStatusValue(StatusEffects.AetherTwins1, 1, -(one - 19));
 	}
-	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 5) {
+	if (player.statusEffectv2(StatusEffects.AetherTwins1) != 7) {
 		two = player.statusEffectv2(StatusEffects.AetherTwins1);
-		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 5));
+		player.addStatusValue(StatusEffects.AetherTwins1, 2, -(two - 7));
 	}
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
@@ -720,6 +793,7 @@ private function aethertwinsFollowersEvolutionsToHumanTierSmallWeapons():void {
 	clearOutput();
 	outputText("\"<i>Woohoo it's happening feeling again... We're evolving once more...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Sharper!!!</i>\"\n\n");
 	player.addStatusValue(StatusEffects.AetherTwins1, 1, 19);
+	player.addStatusValue(StatusEffects.AetherTwins1, 2, 2);
 	AetherTwinsShape = "Human-tier Dagger and Shield";
 	AetherTwinsFoodMenu2 = true;
 	AetherTwinsFoodMenuTin -= 4;
@@ -751,6 +825,7 @@ private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
 	clearOutput();
 	outputText("\"<i>Woohoo it's happening feeling again... We're evolving once more...</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Sharper Bigger!!!</i>\"\n\n");
 	evo to normal sized weapon(s) form(s)
+	AetherTwinsFoodMenu3 = true;
 	doNext(aethertwinsFollowersMorphMain);
 	cheatTime(1/6);
 }
