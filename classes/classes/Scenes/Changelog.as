@@ -132,8 +132,9 @@ public class Changelog extends BaseContent
 			outputText("-Fix SandMother sex scenes. Fix clones dao contemplation clearing screen on time change. (EragonX)\n");
 			outputText("-Add hover tooltip for minimum lust. (EragonX)\n");
 			outputText("-Physical & Magical Soulpower values would now be added on top of base value of Soulpower.\n");
-			outputText("-Daoist: ... Stage perks desc was updated and effect of inc soulskill power increased but only affect magical soulskill power only. Flesh Body: ... Stage perks bonus to unarmed atk was lowered to 50% of previous values but they now add 25% * stage % ot physical soulskill power. Heaven Tribulation Survivor perks bonus to soulskill power was changed from 30/40/50/60% to 25/50/75/100%.\n");
-			outputText("-\n");
+			outputText("-Daoist: ... Stage perks desc was updated and effect of inc soulskill power increased but only affect magical soulskill power only and it will grant +0.5% of max SF recovery per hour instead of increasing recoverey by 50/100%. ");
+			outputText("Flesh Body: ... Stage perks bonus to unarmed atk was lowered to 50% of previous values but they now add 50% * stage % ot physical soulskill power. Heaven Tribulation Survivor perks bonus to soulskill power was changed from 30/40/50/60% to 25/50/75/100%.\n");
+			outputText("-New jewelery (by Ormael): Spiritual Ring - buyable at Jewelry shop in Tel'Adre. Cost 1,500 gems. Increase soulskill power by 25%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

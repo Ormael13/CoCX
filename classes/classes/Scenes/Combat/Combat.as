@@ -12,6 +12,7 @@ import classes.ItemType;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.ItemTags;
+import classes.Items.JewelryLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -11166,6 +11167,10 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
+		if (player.hasPerk(PerkLib.DaoistWarriorStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
+		if (player.hasPerk(PerkLib.DaoistElderStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
+		if (player.hasPerk(PerkLib.DaoistOverlordStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
         if (player.hasPerk(PerkLib.EnergyDependent)) soulforceregen = 0;
@@ -11174,10 +11179,6 @@ public class Combat extends BaseContent {
 
     public function soulforceRecoveryMultiplier():Number {
         var multi:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistApprenticeStage)) multi += 0.5;
-        if (player.hasPerk(PerkLib.DaoistWarriorStage)) multi += 0.5;
-        if (player.hasPerk(PerkLib.DaoistElderStage)) multi += 1;
-        if (player.hasPerk(PerkLib.DaoistOverlordStage)) multi += 1;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         multi += SceneLib.soulforce.sfRegenRacialMult();
         return multi;
@@ -16084,6 +16085,10 @@ public function firearmsForce():Number {
 
 public function soulskillMod():Number {
     var modss:Number = 1;
+	if (player.jewelryEffectId == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
     if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .25;
     if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .5;
     if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .75;
@@ -16117,24 +16122,24 @@ public function soulskillPhysicalMod():Number {
     var modssp:Number = player.psoulskillPowerStat.value;
 	if (soulskillMod() > 1) modssp += soulskillMod() - 1;
     if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-        if (player.hasPerk(PerkLib.SoulApprentice)) modssp += .25;
-        if (player.hasPerk(PerkLib.SoulPersonage)) modssp += .25;
-        if (player.hasPerk(PerkLib.SoulWarrior)) modssp += .25;
+        if (player.hasPerk(PerkLib.SoulApprentice)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulPersonage)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulWarrior)) modssp += .5;
     }
     if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-        if (player.hasPerk(PerkLib.SoulSprite)) modssp += .5;
-        if (player.hasPerk(PerkLib.SoulScholar)) modssp += .5;
-        if (player.hasPerk(PerkLib.SoulGrandmaster)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulSprite)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulScholar)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulGrandmaster)) modssp += 1;
     }
     if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-        if (player.hasPerk(PerkLib.SoulElder)) modssp += .75;
-        if (player.hasPerk(PerkLib.SoulExalt)) modssp += .75;
-        if (player.hasPerk(PerkLib.SoulOverlord)) modssp += .75;
+        if (player.hasPerk(PerkLib.SoulElder)) modssp += 1.5;
+        if (player.hasPerk(PerkLib.SoulExalt)) modssp += 1.5;
+        if (player.hasPerk(PerkLib.SoulOverlord)) modssp += 1.5;
     }
     if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-        if (player.hasPerk(PerkLib.SoulTyrant)) modssp += 1;
-        if (player.hasPerk(PerkLib.SoulKing)) modssp += 1;
-        if (player.hasPerk(PerkLib.SoulEmperor)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulTyrant)) modssp += 2;
+        if (player.hasPerk(PerkLib.SoulKing)) modssp += 2;
+        if (player.hasPerk(PerkLib.SoulEmperor)) modssp += 2;
         //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
     modssp = Math.round(modssp * 100) / 100;
