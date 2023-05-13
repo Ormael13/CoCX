@@ -25,7 +25,7 @@ public class HumanSmartsMutation extends IMutationPerkType
                 descS += "10. Allow to use options requiring to have technical knowledge.";
             }
             if (pTier == 3){
-                descS += "10. Allow to use options requiring to have technical knowledge.";
+                descS += "10, maximum trainable Int/Wis by 20%. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana. Allow to use options requiring to have technical knowledge.";
             }
             return descS;
         }
@@ -87,7 +87,7 @@ public class HumanSmartsMutation extends IMutationPerkType
 
         public function HumanSmartsMutation() 
 		{
-			super(mName + " IM", mName, SLOT_NERVSYS, 2);
+			super(mName + " IM", mName, SLOT_NERVSYS, 3);
 		}
 		
 	}
