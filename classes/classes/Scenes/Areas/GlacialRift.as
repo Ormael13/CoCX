@@ -187,9 +187,9 @@ use namespace CoC;
 		public function encounterNothing():void {
 			clearOutput();
 			outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. ");
-			if (player.canTrain('tou', 50)) {
+			if (player.canTrain('tou', player.trainStatCap("tou",50))) {
 				outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
-				player.trainStat("tou", +1, 50);
+				player.trainStat("tou", +1, player.trainStatCap("tou",50));
 			}
 			dynStats("tou", .5);
 			doNext(camp.returnToCampUseOneHour);

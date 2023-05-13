@@ -26,15 +26,15 @@ public class HoneydewCake extends Consumable {
 		clearOutput();
 		outputText("You scarf down the sweet cake, feeling a bit of a sugar high.");
 		//Strength up to 125
-		if (player.canTrain('str',100)&& (changes < changeLimit && rand(3) == 0)) {
+		if (player.canTrain('str',player.trainStatCap("str",100))&& (changes < changeLimit && rand(3) == 0)) {
 			changes++;
-            player.trainStat("str", +1, 100);
+            player.trainStat("str", +1, player.trainStatCap("str",100));
 			outputText("\n\nAfter eating the cake, your muscles suddenly feel sore, as though you just lifted heavy weights. You're probably stronger.");
 		}
 		//Toughness up to 125
-		if (player.canTrain('tou', 100) && (changes < changeLimit && rand(3) == 0)) {
+		if (player.canTrain('tou', player.trainStatCap("tou",100)) && (changes < changeLimit && rand(3) == 0)) {
 			outputText("\n\nAfter eating the cake, a soreness starts building up in your arms, as though you just blocked a boxer's punches. As it goes away, you feel like you've gotten tougher.");
-            player.trainStat("tou", +1, 100);
+            player.trainStat("tou", +1, player.trainStatCap("tou",100));
 			changes++;
 		}
         if (player.inte > 50 && changes < changeLimit && rand(3) == 0) {

@@ -1102,9 +1102,9 @@ private function sexBuffs():void {
 	dynStats("lib", 2 + rand(3));
 	dynStats("str", 2 + rand(3));
 	dynStats("inte", 2 + rand(3));
-	player.trainStat("str",2,100);
-	player.trainStat("int",2,100);
-	player.trainStat("lib",2,100);
+	player.trainStat("str",2,player.trainStatCap("str",100));
+	player.trainStat("int",2,player.trainStatCap("int",100));
+	player.trainStat("lib",2,player.trainStatCap("lib",100));
 	++flags[kFLAGS.ALVINA_TIMES_FUCKED];
 }
 
@@ -1176,9 +1176,9 @@ public function alvinaMainCampSexMenuGreedOfMammon():void
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
 	outputText("TOO DO\n\n");
-	player.trainStat("str",2,100)
-	player.trainStat("int",2,100)
-	player.trainStat("lib",2,100)
+	player.trainStat("str",2,player.trainStatCap("str",100))
+	player.trainStat("int",2,player.trainStatCap("int",100))
+	player.trainStat("lib",2,player.trainStatCap("lib",100))
 	alvinaMainCampSexMenu3();
 }
 */
@@ -1371,22 +1371,22 @@ public function alvinaCampStudy():void
 			outputText("\"<i>Very good [name], you finally achieved mastery of the theory. Tomorrow we will discuss more advanced principles.</i>\" She dismisses you with these congratulations as you head back to camp feeling both sexy and powerful.\n\n");
 			player.createStatusEffect(StatusEffects.AlvinaTraining, 0, 0, 0, 0);
 			dynStats("inte", 4, "lib", 4, "cor", 3);
-			player.trainStat("int",4,100)
-			player.trainStat("lib",4,100)
+			player.trainStat("int",4,player.trainStatCap("int",100))
+			player.trainStat("lib",4,player.trainStatCap("lib",100))
 			flags[kFLAGS.ALVINA_FOLLOWER] = 16;
 		} else if (player.intStat.train.value > 50 && player.libStat.train.value > 50 && flags[kFLAGS.ALVINA_FOLLOWER] == 14) {
 			outputText("Against all odds, you manage to hold your lust in check and cast the spells properly.\n\n");
 			outputText("\"<i>That will be all for today [name], we will continue tomorrow.</i>\" You head back to camp feeling extremely pent-up, but also smarter.\n\n");
 			dynStats("inte", 7, "lib", 7, "cor", 2);
-			player.trainStat("int",7,100)
-			player.trainStat("lib",7,100)
+			player.trainStat("int",7,player.trainStatCap("int",100))
+			player.trainStat("lib",7,player.trainStatCap("lib",100))
 			flags[kFLAGS.ALVINA_FOLLOWER] = 15;
 		} else {
 			outputText("Unable to hold back any longer, you orgasm as you cast the spell. Alvina is amused by your lack of endurance.\n\n");
 			outputText("\"<i>Well aren’t you the lewd student. Regardless, you will need to practice until you develop some resilience. Come back tomorrow to resume your training.</i>\" She dismisses you, leaving you to clean up your mess. At least you learned a few new things.\n\n");
 			dynStats("inte", 10, "lib", 10, "cor", 10);
-			player.trainStat("int",10,100)
-			player.trainStat("lib",10,100)
+			player.trainStat("int",10,player.trainStatCap("int",100))
+			player.trainStat("lib",10,player.trainStatCap("lib",100))
 			flags[kFLAGS.ALVINA_FOLLOWER] = 14;
 		}
 		doNext(camp.returnToCampUseSixHours);

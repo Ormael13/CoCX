@@ -19,74 +19,37 @@ use namespace CoC;
 
 public class RuinedTownRebuilt extends BaseContent extends NPCAwareContent implements TimeAwareInterface implements SaveableState
 {
-	public static var RebuildState: int; //0 for uninitiated, 1 for Waiting, 2 for denied, 3 for started
-	public static var ShouldraTownState:int; //0 for unseen, 1 for seen, but not introduced, 2 for introductions and excorcized, 3 for accepted Shouldra, 4 for Guardian Spirit Shouldra. 
-	public static var HouseNumber:int; //The more houses, the more the town can grow
-	public static var Housecap:int; //How many houses the town can safely have. Equal to Wallnumber*2+5
-	public static var YourHouse:Boolean; //whether or not the mouselets have built you a house
-	public static var WellBuilt:Boolean;
-	public static var ShopBuilt:int;
-	public static var SmithBuilt:Boolean;
-	public static var TrainingGroundsBuilt:Boolean;
-	public static var MousetownPopulation:int; //Grows weekly, depending on how many mouselets you have, and the state of the town.
-	public static var TelAdreScouts:int; //0 for unseen, 1 for seen and accepted, 2 for seen and unaccepted
-	public static var InvasionCounter:int; //how many times the mouse-town's been invaded. 
-	public static var JojoyLitters:Boolean; //whether or not Jojo/Joy has children living in the town. Affects Growth rate.
-	public static var ChiChiSeenHere:Boolean;
-	public static var ChiChiLitters:Boolean; //same as above, but Chi Chi. 
-	public static var GrowthRate:int; //how many new mouselets will be born in town each week. 
-	public static var MouseTownPopCap; //Each house adds 15
-	public static var WallNumber; //Determines HouseCap
-	public static var MiceArcherySessions:int;
-	public static var logbuilt:Boolean;
-	public static var AmilyAtWetBitch:Boolean;
-	public static var AmilyAngerCooldown:int;
-	public static var WeeklyGemTax:int;
-	public static var WeeklyWoodGain:int;
-	public static var prosperityvar:int;
-	public static var OwcaSeen:Boolean;
-	public static var FarmSeen:Boolean;
-	public static var EdrynTownState:int; //0 for unseen, 1 for been, 2 if you've talked about bringing the foals, 3 if you've brought them. 
-	public static var TelAdreSuppliesBought:Boolean;
-	public static var ReapercheepBought:Boolean;
-	public static var SeenBakery:Boolean;
-	public static var SeenMatShop:Boolean;
-	public static var SeenQuarryCorps:Boolean;
-	public static var SeenStreaker:Boolean;
-	public static var SeenMMelee:Boolean;
-	public static var SeenAArmors:Boolean;
-	public static var Intown:Boolean;
 
-	public function resetState():void {
-RebuildState = 0
-ShouldraTownState = 0;
-HouseNumber = 0;
-Housecap = 5;
-YourHouse = false;
-WellBuilt = false;
-ShopBuilt = 0;
-SmithBuilt = false;
-TrainingGroundsBuilt = false;
-MousetownPopulation = 60;
-TelAdreScouts = 0;
-InvasionCounter = 0;
-JojoyLitters = 0;
-ChiChiSeenHere = false;
-ChiChiLitters = 0;
-GrowthRate = 1;
-MouseTownPopCap = 70;
-WallNumber = 0;
-MiceArcherySessions = 0;
-logbuilt = false;
-AmilyAtWetBitch = false;
-AmilyAngerCooldown = 0;
-WeeklyGemTax = 0;
-WeeklyWoodGain = 0;
-prosperityvar = 1;
-OwcaSeen = false;
-Farmseen = false;
-TelAdreSuppliesBought = false;
-ReapercheepBought = false;
+public function resetState():void {
+	RebuildState = 0
+	ShouldraTownState = 0;
+	HouseNumber = 0;
+	Housecap = 5;
+	YourHouse = false;
+	WellBuilt = false;
+	ShopBuilt = 0;
+	SmithBuilt = false;
+	TrainingGroundsBuilt = false;
+	MousetownPopulation = 60;
+	TelAdreScouts = 0;
+	InvasionCounter = 0;
+	JojoyLitters = 0;
+	ChiChiSeenHere = false;
+	ChiChiLitters = 0;
+	GrowthRate = 1;
+	MouseTownPopCap = 70;
+	WallNumber = 0;
+	MiceArcherySessions = 0;
+	logbuilt = false;
+	AmilyAtWetBitch = false;
+	AmilyAngerCooldown = 0;
+	WeeklyGemTax = 0;
+	WeeklyWoodGain = 0;
+	prosperityvar = 1;
+	OwcaSeen = false;
+	Farmseen = false;
+	TelAdreSuppliesBought = false;
+	ReapercheepBought = false;
 	SeenBakery = false;
 	SeenMatShop = false;
 	SeenQuarryCorps = false;
@@ -94,106 +57,7 @@ ReapercheepBought = false;
 	SeenMMelee = false;
 	SeenAArmors = false;
 	Intown = false;
-		}
-		
-public function saveToObject():Object {
-			return {
-"RebuildState":RebuildState,
-"ShouldraTownState":ShouldraTownState,
-	"HouseNumber":HouseNumber,
-	"Housecap":Housecap,
-	"YourHouse":YourHouse,
-	"WellBuilt":WellBuilt,
-	"ShopBuilt":ShopBuilt,
-	"SmithBuilt":SmithBuilt,
-	"TrainingGroundsBuilt":TrainingGroundsBuilt,
-	"MousetownPopulation":MousetownPopulation,
-	"TelAdreScouts":TelAdreScouts,
-	"InvasionCounter":InvasionCounter,
-	"JojoyLitters":JojoyLitters,
-	"ChiChiSeenHere": ChiChiSeenHere,
-	"ChiChiLitters":ChiChiLitters,
-	"GrowthRate":GrowthRate,
-	"MouseTownPopCap":MouseTownPopCap,
-	"WallNumber":WallNumber,
-	"MiceArcherySessions":MiceArcherySessions,
-	"logbuilt":logbuilt,
-	"AmilyAtWetBitch":AmilyAtWetBitch,
-	"AmilyAngerCooldown":AmilyAngerCooldown,
-	"WeeklyGemTax":WeeklyGemTax,
-	"WeeklyWoodGain":WeeklyWoodGain,
-	"prosperityvar":prosperityvar,
-	"OwcaSeen":OwcaSeen,
-	"FarmSeen":FarmSeen,
-	"TelAdreSuppliesBought":TelAdreSuppliesBought,
-	"ReapercheepBought":ReapercheepBought,
-	"SeenBakery":SeenBakery,
-	"SeenMatShop":SeenMatShop,
-	"SeenQuarryCorps":SeenQuarryCorps,
-	"SeenStreaker":SeenStreaker,
-	"SeenMMelee":SeenMMelee,
-	"SeenAArmors":SeenAArmors,
-	"Intown":Intown,
-			};
 }
-		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
-			if (o) {
-			RebuildState=o ["RebuildState"];
-			ShouldraTownState=o ["ShouldraTownState"];
-			HouseNumber=o ["HouseNumber"];
-			Housecap=o ["Housecap"];
-			YourHouse=o ["YourHouse"];
-			WellBuilt=o ["WellBuilt"];
-			ShopBuilt=o ["ShopBuilt"];
-			TrainingGroundsBuilt=o ["TrainingGroundsBuilt"];
-			MousetownPopulation=o ["MousetownPopulation"];
-			TelAdreScouts=o ["TelAdreScouts"];
-			InvasionCounter=o ["InvasionCounter"];
-			JojoyLitters = o ["JojoyLitters"];
-			ChiChiSeenHere = o [" ChiChiSeenHere"];
-			ChiChiLitters=o ["ChiChiLitters"];
-			GrowthRate=o ["GrowthRate"];
-			MouseTownPopCap=o ["MouseTownPopCap"];
-			WallNumber=o ["WallNumber"];
-			MiceArcherySessions=o ["MiceArcherySessions"];
-			logbuilt=o ["logbuilt"];
-			AmilyAtWetBitch=o ["AmilyAtWetBitch"];
-			AmilyAngerCooldown=o ["AmilyAngerCooldown"];
-			WeeklyGemTax=o ["WeeklyGemTax"];
-			WeeklyWoodGain=o ["WeeklyWoodGain"];
-			prosperityvar=o ["prosperityvar"];
-			OwcaSeen=o ["OwcaSeen"];
-			FarmSeen=o ["FarmSeen"];
-			TelAdreSuppliesBought=o ["TelAdreSuppliesBought"];
-			ReapercheepBought=o["ReapercheepBought"];
-			SeenBakery=o["SeenBakery"];
-			SeenMatShop=o["SeenMatShop"];
-			SeenQuarryCorps=o["SeenQuarryCorps"];
-			SeenStreaker=o["SeenStreaker"];
-			SeenMMelee=o["SeenMMelee"];
-			SeenAArmors=o["SeenAArmors"];
-			Intown=o["Intown"];
-			} else {
-				// loading from old save
-				resetState();
-			}
-		}
-		public function RuinedTownRebuilt() 
-		{
-			Saves.registerSaveableState(this);
-		}
-
-		public function WeeklyPopAdjustment():void {
-			GrowthRate = MousetownPopulation / ((JojoyLitters = true)? 10 : 8);
-			MousetownPopulation = (MousetownPopulation + GrowthRate);
-			if MousetownPopulation > MouseTownPopCap {
-				MousetownPopulation == MouseTownPopCap;
-			}
-			prosperityvar = (1+ ((JojoyLitters = true)? 1 : 0 + (MousetownPopulation / 10) + (WellBuilt = true)? 1 : 0 + (logbuilt = true)? 1 : 0) + (Shopbuilt) +((HouseNumber < (Wallnumber * 2) + 5)? 3 : 0) + ((TelAdreScouts = 1)? 1 : 0) + (FarmSeen = true)? 1 : 0 + (OwcaSeen = true)? 1 : 0 +(TrainingGroundsBuilt = true)? 2 : 0);
-			WeeklyGemTax = ((MousetownPopulation * prosperityvar )  / 2);
-			WeeklyWoodGain = (0+ (logbuilt = true)? 5 : 0 * (MousetownPopulation / 50)) * (prosperityvar / 2);
-			DoNext: (MouseTownWeeklyUpdate);
-		}
 public function MouseTownWeeklyUpdate():void {
 	clearOutput();
 	if MousetownPopulation == MouseTownPopCap {
@@ -908,49 +772,11 @@ addButton (2, "Delay", AmilyRebuildNotNow);
 addButton (3, "No", AmilyGoAway);
 }
 
-public function AmilyRebuildInit():void {
-		clearOutput();
-		outputText("You tell Amily that you’ll be there for your kids. Her face brightens, her whiskers twitching happily and she all but tackles you in a warm, fuzzy hug. <i>“Well, no time like the present, right?</i>” She gently pulls you away from the camp, and you find yourself gently amused as she leads you back to the Old Town Ruins. As you near it, she wipes tears from her eyes. You stop, asking her if she’s alright, and she nods.  \n\n");
-		outputText("<i>“Just some mixed feelings, you know? It’s...hard to be back here again, but...We’re rebuilding. It’s everything I've thought about...For years.</i>” She wipes her tears on your shoulder, and as you get closer to the ruins, you notice your kids already hard at work. Amily picks herself up, and the two of you walk over. Your older kids nod respectfully, and make a spot for you as they divvy up tasks. You throw your back into it, gathering stones for a fireplace, setting up tents and carting water alongside your kids. \n\n"); 
-		outputText("Soon enough, most of the day has passed, but every kid has a tent or A-frame to share. It’s not much, but it’s a start. Amily joins you and you head back to camp together, exhausted, but the tired joy on her face makes it worthwhile. The poor woman’s nearly dead on her feet and by the time you get back to camp. She dives into her bedroll, falling asleep almost instantly. \n\n"); 
-	RebuildStarted = true;
-	DoNext(camp.returnToCampUseFourHours)
-}
-
 public function AmilyRebuildNotNow():void {
 		clearOutput();
 		outputText("You tell Amily that you will help, but you need time since you’re pretty busy right now. She nods, giving you a hug, but the look on her face is pure disappointment. She walks away, to her usual spot at camp.\n\n"); 
 //Make a button in Amily talk to start the thing
 doNext(camp.returnToCamp);
-}
-
-public function AmilyGoAway():void {
-		clearOutput();
-		outputText("You flatly deny her request, saying that as the champion, your first priority is the portal and that nothing is more important than that. This seems to anger Amily, and she begins berating you furiously. You turn your back and begin to leave the camp. Amily seems to deflate as you walk away, and you hear the sound of the mouse-girl crying behind you. Do you keep walking, or do you turn around and try to salvage the situation? \n\n"); 
-menu();
-addButton (1, "Turn Around", AmilyReassure);
-addButton (2, "Walk Away", AmilyWalkAway);
-}
-
-public function AmilyReassure():void {
-		clearOutput();
-		outputText("You turn back around, kneeling down beside the crying woman. She raises her head and you wrap your arms around her. As she cries into your shoulder, you explain that you really do care about the family you started together, but that your entire village back home is depending on you as well. She seems to understand, but when you pull back, she seems despondent. As you back away, she looks up at you. <i>“I’m sorry</i>”, she says simply. You apologise too, but she shakes her head. <i>“I’m heading to Tel’adre for a while. Don’t come looking for me, please</i>”. \n\n"); 
-		AmilyAtWetBitch = true;
-		AmilyAngerCooldown = 168; //Haven't added the time function yet
-doNext(camp.returnToCampUseOneHour);
-//(Amily will be in the Wet Bitch and will talk to you again after a week ingame. You have the option to salvage your relationship with her, or lose her forever if you refuse to help a second time).
-}
-
-public function AmilyWalkAway():void {
-		clearOutput();
-		outputText("Amily’s been too needy lately. You need some space. When you get back to your camp, her bedroll is gone. You have the feeling that she left to be with your kids, but you don’t really know.\n\n"); 
-flags[kFLAGS.AMILY_FOLLOWER] == 0;
-
-}
-public function AmilyMadBar():void {
-		clearOutput();
-		outputText("You notice Amily sitting down in front of the bar, nursing a drink. You sit down wordlessly beside her, but as Amily looks over at you, her eyes burn, red from crying. She doesn’t say anything, but she clenches her fists, clearly still mad at you. You decide to leave your angry mouse-morph alone, especially since some of the bar’s patrons are giving you the stink-eye. You leave the bar and head back to camp. \n\n"); 
-doNext(camp.returnToCampUseOneHour);
 }
 
 public function AmilyBarTalk():void {

@@ -1070,12 +1070,12 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 		else if (player.cor > 40)
 			cleanse -= 1;
 		dynStats("cor", cleanse - player.countCockSocks("alabaster"));
-		player.trainStat("str", +1, 50);
-		player.trainStat("tou", +1, 50);
-		player.trainStat("spe", +1, 50);
-		player.trainStat("int", +1, 50);
-		player.trainStat("wis", +1, 50);
-		player.trainStat("wis", +1, 100);
+		player.trainStat("str", +1, player.trainStatCap("str",50));
+		player.trainStat("tou", +1, player.trainStatCap("tou",50));
+		player.trainStat("spe", +1, player.trainStatCap("spe",50));
+		player.trainStat("int", +1, player.trainStatCap("int",50));
+		player.trainStat("wis", +1, player.trainStatCap("wis",50));
+		player.trainStat("wis", +1, player.trainStatCap("wis",100));
 		flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 		player.addStatusValue(StatusEffects.JojoMeditationCount, 1, 1);
 	}
@@ -2700,29 +2700,29 @@ public function apparantlyJojoDOESlift():void
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
-	if (player.canTrain('str', 50)) {
+	if (player.canTrain('str', player.trainStatCap("str",50))) {
 		dynStats("str", 1); //Str boost to 45
-		player.trainStat('str', .5, 50);
+		player.trainStat("str", .5, player.trainStatCap("str",50));
 	}
-	if (player.canTrain('str', 80)) {
+	if (player.canTrain('str', player.trainStatCap("str",80))) {
 		dynStats("str", 1); //Str boost to 45
-		player.trainStat('str', .5, 80);
+		player.trainStat("str", .5, player.trainStatCap("str",80));
 	}
-	if (player.canTrain('int', 50)){
+	if (player.canTrain('int', player.trainStatCap("int",80))){
 		dynStats("int", 1); //Int boost to 80
-		player.trainStat('int', .5, 80);
+		player.trainStat("int", .5, player.trainStatCap("int",80));
 	}
-	if (player.canTrain('int', 80)){
+	if (player.canTrain('int', player.trainStatCap("int",80))){
 		dynStats("int", 1); //Int boost to 80
-		player.trainStat('int', .5, 80);
+		player.trainStat("int", .5, player.trainStatCap("int",80));
 	}
-	if (player.canTrain('wis', 50)){
+	if (player.canTrain('wis', player.trainStatCap("wis",50))){
 		dynStats("wis", 1); //Wisdom boost to 100
-		player.trainStat('wis', .5, 50);
+		player.trainStat("wis", .5, player.trainStatCap("wis",50));
 	}
-	if (player.canTrain('wis', 100)){
+	if (player.canTrain('wis', player.trainStatCap("wis",100))){
 		dynStats("wis", 1); //Wisdom boost to 100
-		player.trainStat('wis', .5, 100);
+		player.trainStat("wis", .5, player.trainStatCap("wis",100));
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3086,3 +3086,4 @@ public function afterDebimboTalk():void {
 }
 }
 }
+

@@ -245,7 +245,7 @@ public function tamaniFirstTimeConsentual():void {
 			outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
 			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", .5, "sen", -1, "cor", .5);
-			player.trainStat("lib", 2, 100);
+			player.trainStat("lib", 2, player.trainStatCap("lib",100));
 			doNext(camp.returnToCampUseOneHour);
 		}
 		else doNext(recallWakeUp);
@@ -630,7 +630,7 @@ internal function tamaniSexWon():void {
 		outputText("any more cream to give to me?</i>\"\n\n");
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n");
 		player.sexReward("vaginalFluids","Dick");
-		player.trainStat("lib",2,100);
+		player.trainStat("lib",2,player.trainStatCap("lib",100));
         if (CoC.instance.inCombat) cleanupAfterCombat();
         else doNext(camp.returnToCampUseOneHour);
 	}

@@ -149,9 +149,9 @@ public class VolcanicCrag extends BaseContent
 		private function findNothing():void {
 			clearOutput();
 			outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.");
-			if (player.canTrain('spe', 50)) {
+			if (player.canTrain('spe', player.trainStatCap("spe",50))) {
 				outputText(" Despite this you this time you managed walk a little further inside this place than the last time.");
-				player.trainStat("spe", +1, 50);
+				player.trainStat("spe", +1, player.trainStatCap("spe",50));
 			}
 			dynStats("spe", .5);
 			doNext(camp.returnToCampUseOneHour);

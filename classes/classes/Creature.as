@@ -447,6 +447,45 @@ public class Creature extends Utils
 			}
 			return false;
 		}
+		public function trainStatCap(statName: String, limit: Number):Number {
+			var cap:Number = limit;
+			switch (statName) {
+				case "str":
+					var str:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 3) str += 0.2;
+					cap *= str;
+					break;
+				case "tou":
+					var tou:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 3) tou += 0.2;
+					cap *= tou;
+					break;
+				case "spe":
+					var spe:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3) spe += 0.2;
+					cap *= spe;
+					break;
+				case "int":
+					var inte:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 3) inte += 0.2;
+					cap *= inte;
+					break;
+				case "wis":
+					//cap += 16 * host.perkv1(PerkLib.AscensionTranshumanismWis);
+					//cap += host.perkv1(PerkLib.SoulTempering);
+					var wis:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 3) wis += 0.2;
+					cap *= wis;
+					break;
+				case "lib":
+					var lib:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3) lib += 0.2;
+					cap *= lib;
+					break;
+			}
+			cap = Math.round(cap);
+			return cap;
+		}
 
 		/**
 		 * Adds a curse effect to the creature.
@@ -4688,3 +4727,4 @@ public class Creature extends Utils
 		}
 	}
 }
+

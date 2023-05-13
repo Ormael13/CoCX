@@ -1226,8 +1226,8 @@ private function arianMagicLessons():void {
 	}
 	flags[kFLAGS.ARIAN_LESSONS]++;
 	dynStats("int", 1);
-	player.trainStat("int", +2, 50);
-	player.trainStat("int", +1, 75);
+	player.trainStat("int", +2, player.trainStatCap("int",50));
+	player.trainStat("int", +1, player.trainStatCap("int",75));
 	doNext(camp.returnToCampUseOneHour);
 }
 //Sex:

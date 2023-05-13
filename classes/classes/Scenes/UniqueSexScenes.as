@@ -764,7 +764,7 @@ public class UniqueSexScenes extends BaseContent
 			EngineCore.ManaChange(Math.round(player.maxMana() * 0.1));
 			player.fatigue -= Math.round(player.maxFatigue() * 0.1);
 			if (player.fatigue < 0) player.fatigue = 0;
-			player.trainStat("lib", 1, 50);
+			player.trainStat("lib", 1, player.trainStatCap("lib",50));
 			dynStats("cor", 1);
 			player.sexReward("cum", "Oral");
 			cleanupAfterCombat();
