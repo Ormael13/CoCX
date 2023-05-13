@@ -1754,7 +1754,7 @@ public class TestMenu extends BaseContent
 			addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 			addButton(11, "HEALHERB", AddHerb).hint("Add 1 HEALHERB.");
-			addButton(12, "Copp+Tin", AddCooperTinIronOre).hint("Add 1 Cooper, Tin and Iron ore.");
+			addButton(12, "Copp/Tin/Iron", AddCooperTinIronOre).hint("Add 1 Cooper, Tin and Iron ore.");
 			addButton(13, "-2-", MaterialMenu, page + 1);
 			addButton(14, "Back", SoulforceCheats);
 		}

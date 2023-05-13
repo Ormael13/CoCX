@@ -359,10 +359,43 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		addButton(13, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		if (inventory.getMaxSlots() > 20) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+	}
+	if (page == 3) {
+		for (slot = 20; slot < 30; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-20, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		if (inventory.getMaxSlots() > 30) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+	}
+	if (page == 4) {
+		for (slot = 30; slot < 340; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-30, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		if (inventory.getMaxSlots() > 40) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+	}
+	if (page == 5) {
+		for (slot = 40; slot < 50; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-40, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
 	}
 	addButton(10, "Misc", oswaldPawnMenu2);
-	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
+	if (totalItems > 1) addButton(11, "Sell All", oswaldPawnSellAll);
 	addButton(14, "Back", telAdreMenu);
 }
 private function oswaldPawnMenu2():void {
@@ -411,7 +444,7 @@ private function oswaldPawnSellAll():void {
 	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = 0;
 	clearOutput();
-	for (var slot:int = 0; slot < 20; slot++) {
+	for (var slot:int = 0; slot < 50; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
 			player.itemSlots[slot].quantity = 0;
@@ -1819,4 +1852,4 @@ public function meetingLunaCamp():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

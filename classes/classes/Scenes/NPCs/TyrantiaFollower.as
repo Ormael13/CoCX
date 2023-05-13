@@ -1354,4 +1354,3 @@ doNext(camp.returnToCamp);
 }*/
 }
 }
-

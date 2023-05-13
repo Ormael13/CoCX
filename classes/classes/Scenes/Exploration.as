@@ -1408,4 +1408,4 @@ public class Exploration extends BaseContent
 		}
 
 	}
-}
+}

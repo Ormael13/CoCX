@@ -2820,14 +2820,14 @@ public class PerkLib
 				"Melee attacks with staffs would turn to ranged magic bolts. In additiona to hitting enemy next to you they would enable hitting enemies out of your reach (for ex. flying enemies).",
 				"You've chosen the 'Staff Channeling' perk. Melee attacks with staffs would turn to ranged magic bolts. In addition to hitting an enemy next to you, they would enable hitting enemies out of your reach (for ex. flying enemies).");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
-				"Enables sixth item slot.",
-				"You've chosen the 'Strong Back' perk, enabling a sixth item slot.");
+				"Enables additional item slots. (+50%)",
+				"You've chosen the 'Strong Back' perk, enabling additional item slots. (+50%)");
 		public static const StrongBack2:PerkType = mk("Strong Back 2: Strong Harder", "Strong Back 2: Strong Harder",
-				"Enables seventh item slot.",
-				"You've chosen the 'Strong Back 2: Strong Harder' perk, enabling a seventh item slot.");
+				"Enables additional item slots. (+100%)",
+				"You've chosen the 'Strong Back 2: Strong Harder' perk, enabling additional item slots. (+100%)");
 		public static const StrongBack3:PerkType = mk("Strong Back 3: Strong Hardest", "Strong Back 3: Strong Hardest",
-				"Enables eighth item slot.",
-				"You've chosen the 'Strong Back 3: Strong Hardest' perk, enabling a eighth item slot.");
+				"Enables additional item slots. (+150%)",
+				"You've chosen the 'Strong Back 3: Strong Hardest' perk, enabling additional item slots. (+150%)");
 		public static const SwiftCasting:PerkType = mk("Swift casting", "Swift casting",
 				"When attacking with melee using a one handed weapon with no shield equipped, pc can Chose the an available spell in combat options to cast during the round. It will be used at the end of the full attack.",
 				"You've chosen the 'Swift casting' perk, allowing you to cast one of simple spells after melee attack.");
