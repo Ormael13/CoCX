@@ -13,6 +13,7 @@ import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Places.RuinedTownRebuilt;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
 import classes.display.SpriteDb;
@@ -238,10 +239,11 @@ public class Camp extends NPCAwareContent{
 			SceneLib.tyrantia.unlockingCorruptLegendariesOption();
 			return;
 		}
-	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
-			//hideMenus();
-			// SceneLib.AbandonedTownRebuilt.AmilyRebuild();
-	//	}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && RuinedTownRebuilt.RebuildState == 0 && !RuinedTownRebuilt.AmilyAtWetBitch) {
+			hideMenus();
+			SceneLib.ruinedTown.amilyRebuild();
+			return;
+		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
 			//No corrupt: Jojo, Amily, or Vapula

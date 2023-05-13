@@ -32,6 +32,7 @@ import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.Places.RuinedTownRebuilt;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Soulforce;
@@ -418,6 +419,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (Garden.GardenSlot10Time > 0) Garden.GardenSlot10Time -= 1;
 			if (Garden.GardenSlot11Time > 0) Garden.GardenSlot11Time -= 1;
 			if (Garden.GardenSlot12Time > 0) Garden.GardenSlot12Time -= 1;
+			//Ruined Town
+			if (RuinedTownRebuilt.AmilyAngerCooldown > 0) RuinedTownRebuilt.AmilyAngerCooldown -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 				//Balls

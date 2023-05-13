@@ -75,7 +75,7 @@ use namespace CoC;
 			}, {
 				name: "walk",
 				when: function ():Boolean {
-					return player.level < 3 || player.canTrain('spe',50)
+					return player.level < 3 || player.canTrain('spe',player.trainStatCap("spe",50))
 				},
 				call: walkAroundLake
 			}, {
@@ -337,9 +337,9 @@ use namespace CoC;
 		private function walkAroundLake():void {
 			clearOutput();
 			outputText("Your quick walk along the lakeshore feels good.");
-			if (player.canTrain('spe', 50)) {
+			if (player.canTrain('spe', player.trainStatCap("spe",50))) {
 				outputText("  You bet you could cover the same distance even faster next time.\n");
-				player.trainStat("spe", +1, 50);
+				player.trainStat("spe", +1, player.trainStatCap("spe",50));
 			}
 			dynStats("spe", .75);
 			doNext(camp.returnToCampUseOneHour);

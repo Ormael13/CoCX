@@ -371,15 +371,15 @@ use namespace CoC;
 			//Chance of boost == 50%
 			if (rand(2) == 0) {
 				//50/50 strength/toughness
-				if (rand(2) == 0 && player.canTrain('str', 50)) {
+				if (rand(2) == 0 && player.canTrain('str', player.trainStatCap("str",50))) {
 					outputText("The effort of struggling with the uncertain footing has made you stronger.");
-					player.trainStat("str", 1, 50);
+					player.trainStat("str", 1, player.trainStatCap("str",50));
 					dynStats("str", .5);
 				}
 				//Toughness
-				else if (player.canTrain('tou', 50)) {
+				else if (player.canTrain('tou', player.trainStatCap("tou",50))) {
 					outputText("The effort of struggling with the uncertain footing has made you tougher.");
-					player.trainStat("tou", 1, 50);
+					player.trainStat("tou", 1, player.trainStatCap("tou",50));
 					dynStats("tou", .5);
 				}
 			}

@@ -731,7 +731,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.inte > 35) {
 			player.addCurse("int", 0.1, 2);
 		}
-		player.trainStat("lib", 1, 75);
+		player.trainStat("lib", 1, player.trainStatCap("lib",75));
 		outputText("\n\n");
 		//(Tits b' gone)
 		transformations.BreastsShrinkToNothing.applyEffect();

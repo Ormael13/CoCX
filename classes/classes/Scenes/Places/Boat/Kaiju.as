@@ -462,7 +462,7 @@ public class Kaiju extends AbstractLakeContent {
 			flags[kFLAGS.KAIJU_TALK_CYCLE] = 0;
 		}
 		doNext(camp.returnToCampUseOneHour);
-		player.trainStat("int", 1, 50);
+		player.trainStat("int", 1, player.trainStatCap("int",50));
 	}
 
 	//[If Peek]
