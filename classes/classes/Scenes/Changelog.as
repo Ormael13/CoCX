@@ -111,7 +111,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Bloodstream. Req. having free bloodstream mutation slot, human race (17+). Effects: Increases maximum base/core Spe/Lib by 5.\n");
 			outputText("-New mutation perk: Human Smarts (Primitive). Req. Human Smarts and lvl 30+. Effects: Increases maximum base/core Int/Wis by 10. Allow to use options requiring to have technical knowledge.\n");
 			outputText("-New mutation perk: Human Bones (Primitive). Req. Human Bones and lvl 30+. Effects: Increases maximum base/core Str/Tou by 10. Increase effects of body cultivation by 50%.\n");
-			outputText("-New mutation perk: Human Bloodstream (Primitive). Req. Human Bloodstream and lvl 30+. Effects: Increases maximum base/core Spe/Lib by 10. Increase a bit fatigue recovery and wrath generation.\n");
+			outputText("-New mutation perk: Human Bloodstream (Primitive). Req. Human Bloodstream and lvl 30+. Effects: Increases maximum base/core Spe/Lib by 10. Increase fatigue recovery (+5) and wrath generation (+2).\n");
 			outputText("-Fix wood elves have 100 min corruption instead of 50. (Wisarddd)\n");
 			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
 			outputText("-Fixed forest mage arms. Added Forest mage dress to Kaiba temporarily. (Liadri)\n");
@@ -132,7 +132,12 @@ public class Changelog extends BaseContent
 			outputText("-Fix SandMother sex scenes. Fix clones dao contemplation clearing screen on time change. (EragonX)\n");
 			outputText("-Add hover tooltip for minimum lust. (EragonX)\n");
 			outputText("-Physical & Magical Soulpower values would now be added on top of base value of Soulpower.\n");
-			outputText("-Daoist: ... Stage perks desc was updated and effect of inc soulskill power increased but only affect magical soulskill power only. Flesh Body: ... Stage perks bonus to unarmed atk was lowered to 50% of previous values but they now add 25% * stage % ot physical soulskill power. Heaven Tribulation Survivor perks bonus to soulskill power was changed from 30/40/50/60% to 25/50/75/100%.\n");
+			outputText("-Daoist: ... Stage perks desc was updated and effect of inc soulskill power increased but only affect magical soulskill power only and it will grant +0.5% of max SF recovery per hour instead of increasing recoverey by 50/100%. ");
+			outputText("Flesh Body: ... Stage perks bonus to unarmed atk was lowered to 50% of previous values but they now add 50% * stage % ot physical soulskill power. Heaven Tribulation Survivor perks bonus to soulskill power was changed from 30/40/50/60% to 25/50/75/100%.\n");
+			outputText("-New jewelery (by Ormael): Spiritual Ring - buyable at Jewelry shop in Tel'Adre. Cost 1,500 gems. Increase soulskill power by 25%.\n");
+			outputText("-New mutation perk: Human Smarts (Evolved). Req. Human Smarts (Primitive) and lvl 60+. Effects: Increases maximum base/core Int/Wis by 10, maximum trainable Int/Wis cap by 20%. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana. Allow to use options requiring to have technical knowledge.\n");
+			outputText("-New mutation perk: Human Bones (Evolved). Req. Human Bones (Primitive) and lvl 60+. Effects: Increases maximum base/core Str/Tou by 10, maximum trainable Str/Tou by 20%. Increase effects of body cultivation by 100%.\n");
+			outputText("-New mutation perk: Human Bloodstream (Evolved). Req. Human Bloodstream (Primitive) and lvl 60+. Effects: Increases maximum base/core Spe/Lib by 10, maximum trainable Spe/Lib by 20%. Increase fatigue recovery (+10) and wrath generation (+2).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -144,21 +149,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check, special names that was giving previous ears type used by goblins\n");

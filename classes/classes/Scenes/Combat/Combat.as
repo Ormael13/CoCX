@@ -12,6 +12,7 @@ import classes.ItemType;
 import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.ItemTags;
+import classes.Items.JewelryLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -11076,6 +11077,7 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) fatiguecombatrecovery += 5;
 		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 10;
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
+		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) fatiguecombatrecovery += 1;
@@ -11163,9 +11165,14 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
+		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
+		if (player.hasPerk(PerkLib.DaoistWarriorStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
+		if (player.hasPerk(PerkLib.DaoistElderStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
+		if (player.hasPerk(PerkLib.DaoistOverlordStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
         if (player.hasPerk(PerkLib.EnergyDependent)) soulforceregen = 0;
@@ -11174,10 +11181,6 @@ public class Combat extends BaseContent {
 
     public function soulforceRecoveryMultiplier():Number {
         var multi:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistApprenticeStage)) multi += 0.5;
-        if (player.hasPerk(PerkLib.DaoistWarriorStage)) multi += 0.5;
-        if (player.hasPerk(PerkLib.DaoistElderStage)) multi += 1;
-        if (player.hasPerk(PerkLib.DaoistOverlordStage)) multi += 1;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         multi += SceneLib.soulforce.sfRegenRacialMult();
         return multi;
@@ -11243,6 +11246,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
 		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
         if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
+		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageExpert)) manaregen += Math.round(player.maxMana() * 0.005);
 		if (player.hasPerk(PerkLib.WarMageMaster)) manaregen += Math.round(player.maxMana() * 0.01);
@@ -11338,6 +11342,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) wrathregen += 4;
         if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) wrathregen += 4;
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 2 && player.racialScore(Races.HUMAN) > 17) wrathregen += 2;
+		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3 && player.racialScore(Races.HUMAN) > 17) wrathregen += 2;
         if (player.necklace == necklaces.CSNECK) {
             var csneckb:Number = 2;
             if (player.wrath >= player.wrath100 * 0.2) csneckb += 2;
@@ -16084,6 +16089,10 @@ public function firearmsForce():Number {
 
 public function soulskillMod():Number {
     var modss:Number = 1;
+	if (player.jewelryEffectId == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
+	if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
     if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .25;
     if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .5;
     if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .75;
@@ -16117,24 +16126,24 @@ public function soulskillPhysicalMod():Number {
     var modssp:Number = player.psoulskillPowerStat.value;
 	if (soulskillMod() > 1) modssp += soulskillMod() - 1;
     if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-        if (player.hasPerk(PerkLib.SoulApprentice)) modssp += .25;
-        if (player.hasPerk(PerkLib.SoulPersonage)) modssp += .25;
-        if (player.hasPerk(PerkLib.SoulWarrior)) modssp += .25;
+        if (player.hasPerk(PerkLib.SoulApprentice)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulPersonage)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulWarrior)) modssp += .5;
     }
     if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-        if (player.hasPerk(PerkLib.SoulSprite)) modssp += .5;
-        if (player.hasPerk(PerkLib.SoulScholar)) modssp += .5;
-        if (player.hasPerk(PerkLib.SoulGrandmaster)) modssp += .5;
+        if (player.hasPerk(PerkLib.SoulSprite)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulScholar)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulGrandmaster)) modssp += 1;
     }
     if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-        if (player.hasPerk(PerkLib.SoulElder)) modssp += .75;
-        if (player.hasPerk(PerkLib.SoulExalt)) modssp += .75;
-        if (player.hasPerk(PerkLib.SoulOverlord)) modssp += .75;
+        if (player.hasPerk(PerkLib.SoulElder)) modssp += 1.5;
+        if (player.hasPerk(PerkLib.SoulExalt)) modssp += 1.5;
+        if (player.hasPerk(PerkLib.SoulOverlord)) modssp += 1.5;
     }
     if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-        if (player.hasPerk(PerkLib.SoulTyrant)) modssp += 1;
-        if (player.hasPerk(PerkLib.SoulKing)) modssp += 1;
-        if (player.hasPerk(PerkLib.SoulEmperor)) modssp += 1;
+        if (player.hasPerk(PerkLib.SoulTyrant)) modssp += 2;
+        if (player.hasPerk(PerkLib.SoulKing)) modssp += 2;
+        if (player.hasPerk(PerkLib.SoulEmperor)) modssp += 2;
         //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
     modssp = Math.round(modssp * 100) / 100;

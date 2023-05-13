@@ -36,6 +36,7 @@ import classes.PerkLib;
 		public static const CORRUPTION:int = 				RINGEFF_CORRUPTION;
 		public static const MODIFIER_WR:int = 				RINGEFF_WR;
 		public static const MODIFIER_R_ATTACK_POWER:int =	RINGEFF_R_ATTACK_POWER;
+		public static const MODIFIER_SOUL_POWER:int = 		RINGEFF_SOUL_POWER;
 //		public static const MODIFIER_FIRE_R:int = 			;// add 'res_fire' buff
 //		public static const MODIFIER_ICE_R:int = 			;// add 'res_ice' buff
 //		public static const MODIFIER_LIGH_R:int = 			;// add 'res_lightning' buff
@@ -58,6 +59,7 @@ import classes.PerkLib;
 		public const LIFERNG:Jewelry = new Jewelry("LifeRng", "Life Ring", "ring of life", "an enchanted emerald ring of life force", MODIFIER_HP, 350, 1000, "This ring is topped with emerald gemstone. It is said that this will make you feel healthier.");
 		public const WRATRNG:Jewelry = new Jewelry("WratRng", "Wrath Ring", "ring of wrath", "an enchanted peridot ring of wrath", MODIFIER_WR, 175, 1000, "This ring is topped with peridot gemstone. It is said that this will make you feel angrier.");
 		public const MYSTRNG:Jewelry = new Jewelry("MystRng", "Mystic Ring", "ring of mysticality", "an enchanted sapphire ring of mysticality", MODIFIER_SPELL_POWER, 25, 1500, "This ring is topped with sapphire gemstone. It is said that this will make your spells more powerful.");
+        public const SPIRRNG:Jewelry = new Jewelry("SpirRng", "Spiritual Ring", "ring of spiritual enlightenment", "an enchanted realgar ring of spiritual enlightenment", MODIFIER_SOUL_POWER, 25, 1500, "This ring is topped with realgar crystal. It is said that this will make your soulskills more powerful.");
         public const POWRRNG:Jewelry = new Jewelry("PowrRng", "Power Ring", "ring of power (M)", "an enchanted ruby ring of power (M)", MODIFIER_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your melee attacks feel a bit more powerful.");
 		public const RPOWRNG:Jewelry = new Jewelry("RPowRng", "R. Power Ring", "ring of power (R)", "an enchanted ruby ring of power (R)", MODIFIER_R_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your range attacks feel a bit more powerful.");
 		public const PURERNG:Jewelry = new Jewelry("PureRng", "Purity Ring", "purity ring", "an enchanted purity ring", PURITY, 10, 3000, "This ring symbolizes chastity and purity. When worn, it reduces minimum libido and makes it harder for you to get turned on.");
