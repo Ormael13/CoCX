@@ -167,7 +167,37 @@ use namespace CoC;
 						//foundItem = true;
 					}
 				}
-				addButton(13, "Prev", inventoryMenu, page - 1);
+				addButton(12, "Prev", inventoryMenu, page - 1);
+				if (getMaxSlots() > 20) addButton(13, "Next", inventoryMenu, page + 1);
+			}
+			if (page == 3) {
+				for (x = 20; x < 30; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
+						button(x-20).showForItemSlot(player.itemSlots[x], curry(doWhatWithItem, x));
+						//foundItem = true;
+					}
+				}
+				addButton(12, "Prev", inventoryMenu, page - 1);
+				if (getMaxSlots() > 30) addButton(13, "Next", inventoryMenu, page + 1);
+			}
+			if (page == 4) {
+				for (x = 30; x < 40; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
+						button(x-30).showForItemSlot(player.itemSlots[x], curry(doWhatWithItem, x));
+						//foundItem = true;
+					}
+				}
+				addButton(12, "Prev", inventoryMenu, page - 1);
+				if (getMaxSlots() > 40) addButton(13, "Next", inventoryMenu, page + 1);
+			}
+			if (page == 5) {
+				for (x = 40; x < 50; x++) {
+					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
+						button(x-40).showForItemSlot(player.itemSlots[x], curry(doWhatWithItem, x));
+						//foundItem = true;
+					}
+				}
+				addButton(12, "Prev", inventoryMenu, page - 1);
 			}
             if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);
@@ -180,7 +210,7 @@ use namespace CoC;
 			}
 			//Button for alchemical items during combat
 			if (CoC.instance.inCombat) {
-				addButton(12, "Potions", SceneLib.garden.PotionMenu).disableIf(Garden.PotionsBagSlot01Cap == 0, "You not have any potions bag.");
+				addButton(11, "Potions", SceneLib.garden.PotionMenu).disableIf(Garden.PotionsBagSlot01Cap == 0, "You not have any potions bag.");
 			}
             if (CoC.instance.inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
 				outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -852,14 +882,17 @@ use namespace CoC;
 		}
 
 		public function getMaxSlots():int {
-			var slots:int = 5;
-			if (player.hasPerk(PerkLib.StrongBack)) slots++;
-			if (player.hasPerk(PerkLib.StrongBack2)) slots++;
-			if (player.hasPerk(PerkLib.StrongBack3)) slots++;
+			var slots:int = 6;
 			if (player.hasKeyItem("Backpack") >= 0) slots += player.keyItemvX("Backpack", 1);
-			//Constrain slots to between 5 and 20.
-			if (slots < 5) slots = 5;
-			if (slots > 20) slots = 20;
+			if (player.hasPerk(PerkLib.StrongBack)) {
+				var bonus:Number = slots * 0.5;
+				slots += bonus;
+				if (player.hasPerk(PerkLib.StrongBack2)) slots += bonus;
+				if (player.hasPerk(PerkLib.StrongBack3)) slots += bonus;
+			}
+			//Constrain slots to between 6 and 50.
+			if (slots < 6) slots = 6;
+			if (slots > 50) slots = 50;
 			return slots;
 		}
 		public function getOccupiedSlots():int {
@@ -1033,7 +1066,7 @@ use namespace CoC;
 			}*/
 			if (source != null) {
 				currentItemSlot = source;
-				addButton(12, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
+				addButton(11, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
 			}
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
@@ -1047,7 +1080,31 @@ use namespace CoC;
 					if (player.itemSlots[x].unlocked)
 						button(x-10).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
 				}
-				addButton(13, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
+				addButton(12, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
+				if (getMaxSlots() > 20) addButton(13, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
+			}
+			if (page == 3) {
+				for (x = 20; x < 30; x++) {
+					if (player.itemSlots[x].unlocked)
+						button(x-20).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
+				}
+				addButton(12, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
+				if (getMaxSlots() > 30) addButton(13, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
+			}
+			if (page == 4) {
+				for (x = 30; x < 40; x++) {
+					if (player.itemSlots[x].unlocked)
+						button(x-30).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
+				}
+				addButton(12, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
+				if (getMaxSlots() > 40) addButton(13, "Next", curry(takeItemFull, itype, showUseNow, source, page + 1));
+			}
+			if (page == 5) {
+				for (x = 40; x < 50; x++) {
+					if (player.itemSlots[x].unlocked)
+						button(x-40).showForItemSlot(player.itemSlots[x], curry(replaceItem, itype, x));
+				}
+				addButton(12, "Prev", curry(takeItemFull, itype, showUseNow, source, page - 1));
 			}
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}

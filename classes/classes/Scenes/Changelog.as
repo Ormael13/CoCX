@@ -137,7 +137,7 @@ public class Changelog extends BaseContent
 			outputText("-New jewelery (by Ormael): Spiritual Ring - buyable at Jewelry shop in Tel'Adre. Cost 1,500 gems. Increase soulskill power by 25%.\n");
 			outputText("-New mutation perk: Human Smarts (Evolved). Req. Human Smarts (Primitive) and lvl 60+. Effects: Increases maximum base/core Int/Wis by 10, maximum trainable Int/Wis cap by 20%. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana. Allow to use options requiring to have technical knowledge.\n");
 			outputText("-New mutation perk: Human Bones (Evolved). Req. Human Bones (Primitive) and lvl 60+. Effects: Increases maximum base/core Str/Tou by 10, maximum trainable Str/Tou by 20%. Increase effects of body cultivation by 100%.\n");
-			outputText("-New mutation perk: Human Bloodstream (Evolved). Req. Human Bloodstream (Primitive) and lvl 60+. Effects: Increases maximum base/core Spe/Lib by 10, maximum trainable Spe/Lib by 20%. Increase fatigue recovery (+10) and wrath generation (+2).\n");
+			outputText("-New mutation perk: Human Bloodstream (Evolved). Req. Human Bloodstream (Primitive) and lvl 60+. Effects: Increases maximum base/core Spe/Lib by 10, maximum trainable Spe/Lib by 20%. Increase fatigue recovery (+10) and wrath generation (+4).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
