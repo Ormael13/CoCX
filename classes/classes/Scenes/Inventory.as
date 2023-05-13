@@ -167,8 +167,9 @@ use namespace CoC;
 						//foundItem = true;
 					}
 				}
-				addButton(12, "Prev", inventoryMenu, page - 1);
+				//addButton(12, "Prev", inventoryMenu, page - 1);
 				if (getMaxSlots() > 20) addButton(13, "Next", inventoryMenu, page + 1);
+				else addButton(13, "Next", inventoryMenu, page - 1);
 			}
 			if (page == 3) {
 				for (x = 20; x < 30; x++) {
@@ -177,8 +178,9 @@ use namespace CoC;
 						//foundItem = true;
 					}
 				}
-				addButton(12, "Prev", inventoryMenu, page - 1);
+				//addButton(12, "Prev", inventoryMenu, page - 1);
 				if (getMaxSlots() > 30) addButton(13, "Next", inventoryMenu, page + 1);
+				else addButton(13, "Next", inventoryMenu, page - 2);
 			}
 			if (page == 4) {
 				for (x = 30; x < 40; x++) {
@@ -187,8 +189,9 @@ use namespace CoC;
 						//foundItem = true;
 					}
 				}
-				addButton(12, "Prev", inventoryMenu, page - 1);
+				//addButton(12, "Prev", inventoryMenu, page - 1);
 				if (getMaxSlots() > 40) addButton(13, "Next", inventoryMenu, page + 1);
+				else addButton(13, "Next", inventoryMenu, page - 3);
 			}
 			if (page == 5) {
 				for (x = 40; x < 50; x++) {
@@ -197,7 +200,8 @@ use namespace CoC;
 						//foundItem = true;
 					}
 				}
-				addButton(12, "Prev", inventoryMenu, page - 1);
+				//addButton(12, "Prev", inventoryMenu, page - 1);
+				addButton(13, "Next", inventoryMenu, page - 4);
 			}
             if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);

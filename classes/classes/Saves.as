@@ -1186,13 +1186,15 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.itemSlot6 = [];
 		saveFile.data.itemSlot6.quantity = player.itemSlot6.quantity;
 		saveFile.data.itemSlot6.id = player.itemSlot6.itype.id;
-		saveFile.data.itemSlot6.unlocked = player.itemSlot6.unlocked;
+		saveFile.data.itemSlot6.unlocked = true;
 
 		saveFile.data.itemSlot7 = [];
 		saveFile.data.itemSlot7.quantity = player.itemSlot7.quantity;
 		saveFile.data.itemSlot7.id = player.itemSlot7.itype.id;
 		saveFile.data.itemSlot7.unlocked = player.itemSlot7.unlocked;
 
+		trace("slot 7 is unlocked: "+player.itemSlot7.unlocked);
+        trace("slot 7 has item: "+player.itemSlot7.itype.id);
 		saveFile.data.itemSlot8 = [];
 		saveFile.data.itemSlot8.quantity = player.itemSlot8.quantity;
 		saveFile.data.itemSlot8.id = player.itemSlot8.itype.id;
@@ -2579,16 +2581,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				saveFile.data.itemSlot6.quantity);
 		//Extra slots from the mod.
 		if (saveFile.data.itemSlot7 != undefined && saveFile.data.itemSlot8 != undefined && saveFile.data.itemSlot9 != undefined && saveFile.data.itemSlot10 != undefined && saveFile.data.itemSlot11 != undefined && saveFile.data.itemSlot12 != undefined && saveFile.data.itemSlot13 != undefined
-			 && saveFile.data.itemSlot14 != undefined && saveFile.data.itemSlot15 != undefined && saveFile.data.itemSlot16 != undefined && saveFile.data.itemSlot17 != undefined && saveFile.data.itemSlot18 != undefined && saveFile.data.itemSlot19 != undefined && saveFile.data.itemSlot20 != undefined && saveFile.data.itemSlot21 != undefined
-			 && saveFile.data.itemSlot22 != undefined && saveFile.data.itemSlot23 != undefined && saveFile.data.itemSlot24 != undefined && saveFile.data.itemSlot25 != undefined && saveFile.data.itemSlot26 != undefined && saveFile.data.itemSlot27 != undefined && saveFile.data.itemSlot28 != undefined && saveFile.data.itemSlot29 != undefined
-			 && saveFile.data.itemSlot30 != undefined && saveFile.data.itemSlot31 != undefined && saveFile.data.itemSlot32 != undefined && saveFile.data.itemSlot33 != undefined && saveFile.data.itemSlot34 != undefined && saveFile.data.itemSlot35 != undefined && saveFile.data.itemSlot36 != undefined && saveFile.data.itemSlot37 != undefined
-			 && saveFile.data.itemSlot38 != undefined && saveFile.data.itemSlot39 != undefined && saveFile.data.itemSlot40 != undefined && saveFile.data.itemSlot41 != undefined && saveFile.data.itemSlot42 != undefined && saveFile.data.itemSlot43 != undefined && saveFile.data.itemSlot44 != undefined && saveFile.data.itemSlot45 != undefined
-			 && saveFile.data.itemSlot46 != undefined && saveFile.data.itemSlot47 != undefined && saveFile.data.itemSlot48 != undefined && saveFile.data.itemSlot49 != undefined && saveFile.data.itemSlot50 != undefined) {
+			 && saveFile.data.itemSlot14 != undefined && saveFile.data.itemSlot15 != undefined && saveFile.data.itemSlot16 != undefined && saveFile.data.itemSlot17 != undefined && saveFile.data.itemSlot18 != undefined && saveFile.data.itemSlot19 != undefined && saveFile.data.itemSlot20 != undefined) {
 		player.itemSlot7.unlocked = saveFile.data.itemSlot7.unlocked;
 		player.itemSlot7.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot7.id || saveFile.data.itemSlot7.shortName),
 				saveFile.data.itemSlot7.quantity);
-		player.itemSlot8.unlocked = saveFile.data.itemSlot8.unlocked;
+        player.itemSlot8.unlocked = saveFile.data.itemSlot8.unlocked;
 		player.itemSlot8.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot8.id || saveFile.data.itemSlot8.shortName),
 				saveFile.data.itemSlot8.quantity);
@@ -2640,6 +2638,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.itemSlot20.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot20.id || saveFile.data.itemSlot20.shortName),
 				saveFile.data.itemSlot20.quantity);
+		}
+		if (saveFile.data.itemSlot21 != undefined && saveFile.data.itemSlot22 != undefined && saveFile.data.itemSlot23 != undefined && saveFile.data.itemSlot24 != undefined && saveFile.data.itemSlot25 != undefined
+		 && saveFile.data.itemSlot26 != undefined && saveFile.data.itemSlot27 != undefined && saveFile.data.itemSlot28 != undefined && saveFile.data.itemSlot29 != undefined && saveFile.data.itemSlot30 != undefined
+		 && saveFile.data.itemSlot31 != undefined && saveFile.data.itemSlot32 != undefined && saveFile.data.itemSlot33 != undefined && saveFile.data.itemSlot34 != undefined && saveFile.data.itemSlot35 != undefined
+		 && saveFile.data.itemSlot36 != undefined && saveFile.data.itemSlot37 != undefined && saveFile.data.itemSlot38 != undefined && saveFile.data.itemSlot39 != undefined && saveFile.data.itemSlot40 != undefined
+		 && saveFile.data.itemSlot41 != undefined && saveFile.data.itemSlot42 != undefined && saveFile.data.itemSlot43 != undefined && saveFile.data.itemSlot44 != undefined && saveFile.data.itemSlot45 != undefined
+		 && saveFile.data.itemSlot46 != undefined && saveFile.data.itemSlot47 != undefined && saveFile.data.itemSlot48 != undefined && saveFile.data.itemSlot49 != undefined && saveFile.data.itemSlot50 != undefined) {
 		player.itemSlot21.unlocked = saveFile.data.itemSlot21.unlocked;
 		player.itemSlot21.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot21.id || saveFile.data.itemSlot21.shortName),
@@ -3055,4 +3060,4 @@ public function unFuckSave():void
 	}
 
 }
-}
+}

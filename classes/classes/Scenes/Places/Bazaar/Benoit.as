@@ -353,7 +353,7 @@ public function benoitsBuyMenu():void {
 		outputText("\nFull list of armors & materials: ");
 		for each (item in armorShop) outputText(item.shortName + ", ");
 	}
-	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.keyItemvX("Backpack", 1) < 14) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Francisca t a", buyFranciscaThrowingAxe).hint("Francisca throwing axe");
 	addButton(14, "Back", benoitIntro);
@@ -1743,4 +1743,3 @@ public function femoitSexIntro():void
 	}
 }
 }
-
