@@ -141,7 +141,7 @@ public class Changelog extends BaseContent
 			outputText("-Inventory starting slots were increased from 5 to 6. Maximum capacity been increased from 20 to 50. Req. to have largest backpack and all 3 strong back perks but what it's for our resourcefull PC's, right?\n");
 			outputText("-Benoit felt that tripple X large backpack isn't enough for PC so he provide even larger one... 4XL one backpack for only 100 gems more and 2 more slots compared to 3XL one.\n");
 			outputText("-Strong Back perks won't add 1 slot per perk but instead increase current inventory slots by 50%. So all 3 would increase slots cap by 150%.\n");
-			outputText("-\n");
+			outputText("-Generic goblin/imp/golem/angel enc chances to meet each of 4 races been bit of tunned to stop making player see almost only goblins.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

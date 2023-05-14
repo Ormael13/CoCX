@@ -162,6 +162,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0
 				},
+				chance: 0.5,
 				night: false,
 				call: SceneLib.exploration.genericGolGobImpEncounters
 			}, {
