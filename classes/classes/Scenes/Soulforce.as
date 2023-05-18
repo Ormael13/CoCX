@@ -35,11 +35,11 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		SoulCultivationLvL();
 		var dailySoulforceUsesLimit:Number = 0;
-		if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulWarrior)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulGrandmaster)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulOverlord)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulEmperor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
+		if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit += 5;
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) dailySoulforceUsesLimit++;
+		if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) dailySoulforceUsesLimit++;
+		if (player.hasPerk(PerkLib.SoulOverlord)) dailySoulforceUsesLimit++;//heart cultivator path
+		//if (player.hasPerk(PerkLib.SoulEmperor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 		outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / "+Soulforce.cultivationBonusMaxSF_maxPossible+" %\n");
 		if (player.hasPerk(PerkLib.Dantain)) {
@@ -70,11 +70,13 @@ public class Soulforce extends BaseContent
 			addButton(2, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
 			addButton(3, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
 			addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
+			addButton(9, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 		}
 		else {
 			addButtonDisabled(2, "Self-sustain", "Wait till new day arrive to use this option again.");
 			addButtonDisabled(3, "Repres. Lust", "Wait till new day arrive to use this option again.");
 			addButtonDisabled(4, "Adj. Corr.", "Wait till new day arrive to use this option again.");
+			addButtonDisabled(9, "Mana", "Wait till new day arrive to use this option again.");
 		}
 		//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 		if (player.hasPerk(PerkLib.FlyingSwordPath)) addButton(6, "Imprinting", ImprintingSF).hint("Imprint your SF to combine or seperate sets of flying swords.");
@@ -82,11 +84,6 @@ public class Soulforce extends BaseContent
 		if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
 		else addButtonDisabled(7, "???", "Req. Soul Sense.");
 		//button 8 - ?
-		if (player.hasPerk(PerkLib.SoulApprentice)) {
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(9, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
-			else addButtonDisabled(9, "Mana", "Wait till new day arrive to use this option again.");
-		}
-		else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0 || player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0 || player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) addButton(12, "Sub-paths", SubPaths).hint("Contemplate mysteries on your choosen sub-path(s).");
 		if (player.hasPerk(PerkLib.Metamorph)) {
 			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
@@ -536,7 +533,7 @@ public class Soulforce extends BaseContent
 
 	//Calculates the limit from your items
 	public function cultivationBonusMaxSF_limit():int {
-		var maxForItems:Number = 0;//razem może mieć max 2330
+		var maxForItems:Number = 0;//razem może mieć max 2330%
 		if (player.weaponName == "training soul axe") maxForItems += 80;
 		if (player.weaponRangeName == "training soul crossbow") maxForItems += 50;
 		if (player.shieldName == "training soul buckler") maxForItems += 60;
@@ -568,12 +565,13 @@ public class Soulforce extends BaseContent
 		outputText("So what amount of your soulforce do you want to use?");
 		menu();
 		addButton(0, "V. Low", SelfSustain1).hint("Spend 50 soulforce for 10 hunger.");
-		if (player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "Low", SelfSustain2).hint("Spend 100 soulforce for 20 hunger.");
-		if (player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "Low-Med", SelfSustain3).hint("Spend 200 soulforce for 40 hunger.");
-		if (player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "Medium", SelfSustain4).hint("Spend 400 soulforce for 80 hunger.");
-		if (player.hasPerk(PerkLib.SoulSprite)) addButton(4, "High-Med", SelfSustain5).hint("Spend 800 soulforce for 160 hunger.");
-		if (player.hasPerk(PerkLib.SoulScholar)) addButton(5, "High", SelfSustain6).hint("Spend 1600 soulforce for 320 hunger.");
-		if (player.hasPerk(PerkLib.SoulElder)) addButton(6, "V. High", SelfSustain7).hint("Spend 3200 soulforce for 640 hunger.");
+		addButton(1, "Low", SelfSustain2).hint("Spend 100 soulforce for 20 hunger.");
+		addButton(2, "Low-Med", SelfSustain3).hint("Spend 200 soulforce for 40 hunger.");
+		addButton(3, "Medium", SelfSustain4).hint("Spend 400 soulforce for 80 hunger.");
+		addButton(4, "High-Med", SelfSustain5).hint("Spend 800 soulforce for 160 hunger.");
+		addButton(5, "High", SelfSustain6).hint("Spend 1600 soulforce for 320 hunger.");
+		addButton(6, "V. High", SelfSustain7).hint("Spend 3200 soulforce for 640 hunger.");
+		//50%? 100%? - condense all texts into one simpler?
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 	public function SelfSustain1():void {
@@ -694,12 +692,13 @@ public class Soulforce extends BaseContent
 		outputText("So what amount of your soulforce do you want to use?");
 		menu();
 		addButton(0, "V. Low", RepresLust1).hint("Spend 40 soulforce for 20 lust.");
-		if (player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "Low", RepresLust2).hint("Spend 80 soulforce for 40 lust.");
-		if (player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "Low-med", RepresLust3).hint("Spend 200 soulforce for 100 lust.");
-		if (player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "Medium", RepresLust4).hint("Spend 400 soulforce for 200 lust.");
-		if (player.hasPerk(PerkLib.SoulSprite)) addButton(4, "High-Med", RepresLust5).hint("Spend 800 soulforce for 400 lust.");
-		if (player.hasPerk(PerkLib.SoulScholar)) addButton(5, "High", RepresLust6).hint("Spend 1600 soulforce for 800 lust.");
-		if (player.hasPerk(PerkLib.SoulElder)) addButton(6, "V. High", RepresLust7).hint("Spend 3200 soulforce for 1600 lust.");
+		addButton(1, "Low", RepresLust2).hint("Spend 80 soulforce for 40 lust.");
+		addButton(2, "Low-med", RepresLust3).hint("Spend 200 soulforce for 100 lust.");
+		addButton(3, "Medium", RepresLust4).hint("Spend 400 soulforce for 200 lust.");
+		addButton(4, "High-Med", RepresLust5).hint("Spend 800 soulforce for 400 lust.");
+		addButton(5, "High", RepresLust6).hint("Spend 1600 soulforce for 800 lust.");
+		addButton(6, "V. High", RepresLust7).hint("Spend 3200 soulforce for 1600 lust.");
+		//50%? 100%? - condense all texts into one simpler?
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 	public function RepresLust1():void {
@@ -820,21 +819,21 @@ public class Soulforce extends BaseContent
 		outputText("So what amount of your soulforce/mana do you want to convert?");
 		menu();
 		addButton(0, "100", convertSoulforce, 100).hint("Convert 100 soulforce to 100 mana.");
-		if (player.hasPerk(PerkLib.SoulPersonage)) addButton(1, "200", convertSoulforce, 200).hint("Convert 200 soulforce to 200 mana.");
-		if (player.hasPerk(PerkLib.SoulWarrior)) addButton(2, "500", convertSoulforce, 500).hint("Convert 500 soulforce to 500 mana.");
-		if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "1000", convertSoulforce, 1000).hint("Convert 1000 soulforce to 1000 mana.");
-		if (player.hasPerk(PerkLib.SoulScholar)) addButton(4, "2000", convertSoulforce, 2000).hint("Convert 2000 soulforce to 2000 mana.");
+		addButton(1, "200", convertSoulforce, 200).hint("Convert 200 soulforce to 200 mana.");
+		addButton(2, "500", convertSoulforce, 500).hint("Convert 500 soulforce to 500 mana.");
+		addButton(3, "1000", convertSoulforce, 1000).hint("Convert 1000 soulforce to 1000 mana.");
+		addButton(4, "2000", convertSoulforce, 2000).hint("Convert 2000 soulforce to 2000 mana.");
 		//
 		addButton(5, "100", convertMana, 100).hint("Convert 100 mana to 50 soulforce.");
-		if (player.hasPerk(PerkLib.SoulPersonage)) addButton(6, "200", convertMana, 200).hint("Convert 200 mana to 100 soulforce.");
-		if (player.hasPerk(PerkLib.SoulWarrior)) addButton(7, "500", convertMana, 500).hint("Convert 500 mana to 250 soulforce.");
-		if (player.hasPerk(PerkLib.SoulSprite)) addButton(8, "1000", convertMana, 1000).hint("Convert 1000 mana to 500 soulforce.");
-		if (player.hasPerk(PerkLib.SoulScholar)) addButton(9, "2000", convertMana, 2000).hint("Convert 2000 mana to 1000 soulforce.");
+		addButton(6, "200", convertMana, 200).hint("Convert 200 mana to 100 soulforce.");
+		addButton(7, "500", convertMana, 500).hint("Convert 500 mana to 250 soulforce.");
+		addButton(8, "1000", convertMana, 1000).hint("Convert 1000 mana to 500 soulforce.");
+		addButton(9, "2000", convertMana, 2000).hint("Convert 2000 mana to 1000 soulforce.");
 		//
-		if (player.hasPerk(PerkLib.SoulElder)) addButton(10, "5000", convertSoulforce, 5000).hint("Convert 5000 soulforce to 5000 mana.");
-		if (player.hasPerk(PerkLib.SoulExalt)) addButton(11, "10000", convertSoulforce, 10000).hint("Convert 10000 soulforce to 10000 mana.");
-		if (player.hasPerk(PerkLib.SoulElder)) addButton(12, "5000", convertMana, 5000).hint("Convert 5000 mana to 2500 soulforce.");
-		if (player.hasPerk(PerkLib.SoulExalt)) addButton(13, "10000", convertMana, 10000).hint("Convert 10000 mana to 5000 soulforce.");
+		addButton(10, "5000", convertSoulforce, 5000).hint("Convert 5000 soulforce to 5000 mana.");
+		addButton(11, "10000", convertSoulforce, 10000).hint("Convert 10000 soulforce to 10000 mana.");
+		addButton(12, "5000", convertMana, 5000).hint("Convert 5000 mana to 2500 soulforce.");
+		addButton(13, "10000", convertMana, 10000).hint("Convert 10000 mana to 5000 soulforce.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 
@@ -872,15 +871,15 @@ public class Soulforce extends BaseContent
 		outputText("So what amount of your soulforce do you want to use?");
 		menu();
 		addButton(0, "V. Low -", corChange, -1).hint("Spend 100 soulforce for lowering corruption by 1.");
-		if (player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "Low -", corChange, -2).hint("Spend 200 soulforce for lowering corruption by 2.");
-		if (player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "Medium -", corChange, -5).hint("Spend 500 soulforce for lowering corruption by 5.");
-		if (player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "High -", corChange, -10).hint("Spend 1000 soulforce for lowering corruption by 10.");
-		if (player.hasPerk(PerkLib.SoulSprite)) addButton(4, "V. High -", corChange, -20).hint("Spend 2000 soulforce for lowering corruption by 20.");
+		addButton(1, "Low -", corChange, -2).hint("Spend 200 soulforce for lowering corruption by 2.");
+		addButton(2, "Medium -", corChange, -5).hint("Spend 500 soulforce for lowering corruption by 5.");
+		addButton(3, "High -", corChange, -10).hint("Spend 1000 soulforce for lowering corruption by 10.");
+		addButton(4, "V. High -", corChange, -20).hint("Spend 2000 soulforce for lowering corruption by 20.");
 		addButton(5, "V. Low +", corChange, 1).hint("Spend 50 soulforce for rising corruption by 1.");
-		if (player.hasPerk(PerkLib.SoulApprentice)) addButton(6, "Low +", corChange, 2).hint("Spend 100 soulforce for rising corruption by 2.");
-		if (player.hasPerk(PerkLib.SoulPersonage)) addButton(7, "Medium +", corChange, 5).hint("Spend 250 soulforce for rising corruption by 5.");
-		if (player.hasPerk(PerkLib.SoulWarrior)) addButton(8, "High +", corChange, 10).hint("Spend 500 soulforce for rising corruption by 10.");
-		if (player.hasPerk(PerkLib.SoulSprite)) addButton(9, "V. High +", corChange, 20).hint("Spend 1000 soulforce for rising corruption by 20.");
+		addButton(6, "Low +", corChange, 2).hint("Spend 100 soulforce for rising corruption by 2.");
+		addButton(7, "Medium +", corChange, 5).hint("Spend 250 soulforce for rising corruption by 5.");
+		addButton(8, "High +", corChange, 10).hint("Spend 500 soulforce for rising corruption by 10.");
+		addButton(9, "V. High +", corChange, 20).hint("Spend 1000 soulforce for rising corruption by 20.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 
