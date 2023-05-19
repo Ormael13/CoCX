@@ -1300,7 +1300,6 @@ public class TestMenu extends BaseContent
 	}
 	public function AddCockBalls():void {
 		player.createCock(4);
-		player.clitLength = .25;
 		if (player.balls <= 1) {
 			player.balls = 2;
 			player.ballSize = 1;

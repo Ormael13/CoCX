@@ -62,7 +62,7 @@ public class Mountain extends BaseContent
 			_hillsEncounter = Encounters.group("hills", {
 				//General Angels, Golems, Goblin and Imp Encounters
 				name: "common",
-				chance: 0.8,
+				chance: 0.5,
 				call: function ():void{
 					if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
 					else SceneLib.exploration.genericGolGobImpEncounters();
@@ -206,7 +206,7 @@ public class Mountain extends BaseContent
 			_lowmountainEncounter = Encounters.group("low mountains", {
 				//General Angels, Goblin and Imp Encounters
 				name: "common",
-				chance: 0.8,
+				chance: 0.5,
 				call: function ():void{
 					SceneLib.exploration.genericGobImpAngEncounters();
 				}
@@ -383,7 +383,7 @@ public class Mountain extends BaseContent
 			},{/*
 				//General Angels, Golems, Goblin and Imp Encounters
 				name: "common",
-				chance: 0.8,
+				chance: 0.5,
 				call: function ():void{
 					if (rand(2) == 0) SceneLib.exploration.genericGolGobImpEncounters();
 					else SceneLib.exploration.genericAngelsEncounters();

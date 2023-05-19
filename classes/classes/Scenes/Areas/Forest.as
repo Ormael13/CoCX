@@ -94,7 +94,7 @@ use namespace CoC;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
 						//General Golems, Goblin, Angels and Imp Encounters
 						name: "common",
-						chance: 0.8,
+						chance: 0.4,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();

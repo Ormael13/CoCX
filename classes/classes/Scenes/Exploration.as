@@ -456,28 +456,15 @@ public class Exploration extends BaseContent
 		}
 
 		public function genericGolGobImpEncounters(even:Boolean = false):void {
-			var impGobGol:Number = 5;
-			if (!even) {
-				if (player.cockTotal() > 0) impGobGol--;
-				if (player.hasVagina()) impGobGol++;
-				if (player.totalFertility() >= 30) impGobGol++;
-				if (player.cumQ() >= 200) impGobGol--;
-				if (player.hasPerk(PerkLib.PiercedLethite)) {
-					if (impGobGol <= 3) impGobGol += 2;
-					else if (impGobGol < 7) impGobGol = 7;
-				}
-			}
-			//Imptacular Encounter
-			if (rand(10) < impGobGol) {
-				var impChooser:int = rand(100);
-				//Level modifier
-				if (player.level < 20) impChooser += player.level;
-				else impChooser += 20;
-				//Limit chooser ranges
-				if (impChooser > 100) impChooser = 100;
-				if (player.level < 8 && impChooser >= 40) impChooser = 39;
-				else if (player.level < 12 && impChooser >= 60) impChooser = 59;
-				else if (player.level < 16 && impChooser >= 80) impChooser = 79;
+			var sss:Number = 3;
+			if (player.hasPerk(PerkLib.PiercedLethite)) sss += 1;
+			var ImpGobGol:Number = rand(sss);
+			if (ImpGobGol > 1) {
+				var ss:Number = 40;
+				if (player.level >= 8) ss += 20;
+				if (player.level >= 12) ss += 20;
+				if (player.level >= 16) ss += 20;
+				var impChooser:int = rand(ss);
 				//Imp Lord
 				if (impChooser >= 50 && impChooser < 70) {
 					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
@@ -542,116 +529,108 @@ public class Exploration extends BaseContent
 				}
 				return;
 			}
-			//Encounter Golemuuu!
-			//Encounter Gobbalin!
-			else {
-				if (player.level >= 6 && rand(10) >= 7) {
-					var golemChooser:int = rand(70);
-					//Limit chooser range
-					if (player.level < 12 && golemChooser >= 10) golemChooser = 9;
-					else if (player.level < 18 && golemChooser >= 20) golemChooser = 19;
-					else if (player.level < 24 && golemChooser >= 30) golemChooser = 29;
-					else if (player.level < 33 && golemChooser >= 40) golemChooser = 39;
-					else if (player.level < 42 && golemChooser >= 50) golemChooser = 49;
-					else if (player.level < 51 && golemChooser >= 60) golemChooser = 59;
-					clearOutput();
-					//Improved dummy golem
-					if (golemChooser >= 10 && golemChooser < 20) {
-						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
-						startCombat(new GolemDummyImproved());
+			else if (ImpGobGol == 1) {
+				var sg:Number = 10;
+				if (player.level >= 12) sg += 10;
+				if (player.level >= 18) sg += 10;
+				if (player.level >= 24) sg += 10;
+				if (player.level >= 33) sg += 10;
+				if (player.level >= 42) sg += 10;
+				if (player.level >= 51) sg += 10;
+				var golemChooser:int = rand(sg);
+				clearOutput();
+				//Improved dummy golem
+				if (golemChooser >= 10 && golemChooser < 20) {
+					outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
+					startCombat(new GolemDummyImproved());
+					return;
+				}
+				//Advanced dummy golem or golems
+				if (golemChooser >= 20 && golemChooser < 30) {
+					if (rand(4) == 0) {
+						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
+						startCombat(new GolemsDummyAdvanced());
 						return;
 					}
-					//Advanced dummy golem or golems
-					if (golemChooser >= 20 && golemChooser < 30) {
-						if (rand(4) == 0) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
-							startCombat(new GolemsDummyAdvanced());
-							return;
-						}
-						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your [weapon] for a fight!");
-							startCombat(new GolemDummyAdvanced());
-							return;
-						}
-					}
-					//Superior dummy golem or golems
-					if (golemChooser >= 30 && golemChooser < 40) {
-						if (rand(4) == 0) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
-							startCombat(new GolemsDummySuperior());
-							return;
-						}
-						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your [weapon] for a fight!");
-							startCombat(new GolemDummySuperior());
-							return;
-						}
-					}
-					//Basic true golem or golems
-					if (golemChooser >= 40 && golemChooser < 50) {
-						if (rand(4) == 0) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
-							startCombat(new GolemsTrueBasic());
-							return;
-						}
-						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your [weapon] for a fight!");
-							startCombat(new GolemTrueBasic());
-							return;
-						}
-					}
-					//Improved true golem or golems
-					if (golemChooser >= 50 && golemChooser < 60) {
-						if (rand(4) == 0) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
-							startCombat(new GolemsTrueImproved());
-							return;
-						}
-						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your [weapon] for a fight!");
-							startCombat(new GolemTrueImproved());
-							return;
-						}
-					}
-					//Advanced true golem or golems
-					if (golemChooser >= 60) {
-						if (rand(4) == 0) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your [weapon] for a fight!");
-							startCombat(new GolemsTrueAdvanced());
-							return;
-						}
-						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your [weapon] for a fight!");
-							startCombat(new GolemTrueAdvanced());
-							return;
-						}
-					}
-					//Dummy golem
 					else {
-						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
-						camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
-						startCombat(new GolemDummy());
+						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your [weapon] for a fight!");
+						startCombat(new GolemDummyAdvanced());
 						return;
 					}
 				}
-				else {
-					var goblinChooser:int = rand(100);
-					//Level modifier
-					if (player.level < 20) goblinChooser += player.level;
-					else goblinChooser += 20;
-					//Limit chooser range
-					if (goblinChooser > 100) goblinChooser = 100;
-					if (player.level < 8 && goblinChooser >= 20) goblinChooser = 29;
-					else if (player.level < 16 && goblinChooser >= 60) goblinChooser = 49;
-					else if (player.level < 24 && goblinChooser >= 80) goblinChooser = 79;
-					if (goblinChooser >= 30 && goblinChooser < 50) SceneLib.goblinScene.goblinAssassinEncounter();
-					else if (goblinChooser >= 50 && goblinChooser < 75) SceneLib.goblinScene.goblinWarriorEncounter();
-					else if (goblinChooser >= 75) {
-						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) SceneLib.priscillaScene.goblinElderEncounter(); //not yet imported
-						else SceneLib.goblinScene.goblinShamanEncounter();
+				//Superior dummy golem or golems
+				if (golemChooser >= 30 && golemChooser < 40) {
+					if (rand(4) == 0) {
+						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
+						startCombat(new GolemsDummySuperior());
+						return;
 					}
-					else SceneLib.goblinScene.goblinEncounter();
+					else {
+						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your [weapon] for a fight!");
+						startCombat(new GolemDummySuperior());
+						return;
+					}
 				}
+				//Basic true golem or golems
+				if (golemChooser >= 40 && golemChooser < 50) {
+					if (rand(4) == 0) {
+						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
+						startCombat(new GolemsTrueBasic());
+						return;
+					}
+					else {
+						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your [weapon] for a fight!");
+						startCombat(new GolemTrueBasic());
+						return;
+					}
+				}
+				//Improved true golem or golems
+				if (golemChooser >= 50 && golemChooser < 60) {
+					if (rand(4) == 0) {
+						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
+						startCombat(new GolemsTrueImproved());
+						return;
+					}
+					else {
+						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your [weapon] for a fight!");
+						startCombat(new GolemTrueImproved());
+						return;
+					}
+				}
+				//Advanced true golem or golems
+				if (golemChooser >= 60) {
+					if (rand(4) == 0) {
+						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your [weapon] for a fight!");
+						startCombat(new GolemsTrueAdvanced());
+						return;
+					}
+					else {
+						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your [weapon] for a fight!");
+						startCombat(new GolemTrueAdvanced());
+						return;
+					}
+				}
+				//Dummy golem
+				else {
+					outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
+					startCombat(new GolemDummy());
+					return;
+				}
+			}
+			else {
+				var gg:Number = 25;
+				if (player.level >= 8) gg += 25;
+				if (player.level >= 16) gg += 25;
+				if (player.level >= 24) gg += 25;
+				var goblinChooser:int = rand(gg);
+				if (goblinChooser >= 25 && goblinChooser < 50) SceneLib.goblinScene.goblinAssassinEncounter();
+				else if (goblinChooser >= 50 && goblinChooser < 75) SceneLib.goblinScene.goblinWarriorEncounter();
+				else if (goblinChooser >= 75) {
+					if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) SceneLib.priscillaScene.goblinElderEncounter();
+					else SceneLib.goblinScene.goblinShamanEncounter();
+				}
+				else SceneLib.goblinScene.goblinEncounter();
 			}
 		}
 		public function genericGobImpAngEncounters(even:Boolean = false):void {
@@ -665,14 +644,10 @@ public class Exploration extends BaseContent
 			}
 		}
 		public function genericImpEncounters2(even:Boolean = false):void {
+			var sss:Number = 75;
+			if (player.level >= 16) sss += 25;
 			//Imptacular Encounter
-			var impChooser:int = rand(100);
-			//Level modifier
-			if (player.level < 20) impChooser += player.level;
-			else impChooser += 20;
-			//Limit chooser ranges
-			if (impChooser > 100) impChooser = 100;
-			if (player.level < 16 && impChooser >= 75) impChooser = 74;
+			var impChooser:int = rand(sss);
 			//Imp Warlord
 			if (impChooser >= 50 && impChooser < 75) {
 				if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
@@ -713,12 +688,13 @@ public class Exploration extends BaseContent
 			}
 		}
 		public function genericGolemsEncounters1(even:Boolean = false):void {
-			var golemsChooser:int = rand(60);
+			var sss:Number = 10;
+			if (player.level >= 12) sss += 10;
+			if (player.level >= 18) sss += 10;
+			if (player.level >= 24) sss += 10;
+			if (player.level >= 33) sss += 10;
+			var golemsChooser:int = rand(sss);
 			//Limit chooser range
-			if (player.level < 12 && golemsChooser >= 10) golemsChooser = 9;
-			else if (player.level < 18 && golemsChooser >= 20) golemsChooser = 19;
-			else if (player.level < 24 && golemsChooser >= 30) golemsChooser = 29;
-			else if (player.level < 33 && golemsChooser >= 40) golemsChooser = 39;
 			clearOutput();
 			//Improved dummy golems
 			if (golemsChooser >= 10 && golemsChooser < 20) {
@@ -759,10 +735,11 @@ public class Exploration extends BaseContent
 			}
 		}
 		public function genericGobImpEncounters1(even:Boolean = false):void {
-			var gobimpChooser:int = rand(40);
+			var sss:Number = 20;
+			if (player.level >= 18) sss += 10;
+			if (player.level >= 30) sss += 10;
+			var gobimpChooser:int = rand(sss);
 			//Limit chooser range
-			if (player.level < 18 && gobimpChooser >= 20) gobimpChooser = 19;
-			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
 			clearOutput();
 			if (gobimpChooser >= 10 && gobimpChooser < 20) {
 				SceneLib.impScene.impPackEncounter2();
