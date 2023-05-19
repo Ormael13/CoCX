@@ -66,16 +66,17 @@ public class Soulforce extends BaseContent
 		else addButton(0, "Meditations", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(1, "Contemplate", DaoContemplations).hint("Dao Contemplations");
 		else addButtonDisabled(1, "???", "Req.  successfully surviving 1st Tribulation.");
+		//button 2 - ?
 		if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
-			addButton(2, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
-			addButton(3, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
-			addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
+			addButton(3, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
+			addButton(4, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
+			addButton(8, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
 			addButton(9, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 		}
 		else {
-			addButtonDisabled(2, "Self-sustain", "Wait till new day arrive to use this option again.");
-			addButtonDisabled(3, "Repres. Lust", "Wait till new day arrive to use this option again.");
-			addButtonDisabled(4, "Adj. Corr.", "Wait till new day arrive to use this option again.");
+			addButtonDisabled(3, "Self-sustain", "Wait till new day arrive to use this option again.");
+			addButtonDisabled(4, "Repres. Lust", "Wait till new day arrive to use this option again.");
+			addButtonDisabled(8, "Adj. Corr.", "Wait till new day arrive to use this option again.");
 			addButtonDisabled(9, "Mana", "Wait till new day arrive to use this option again.");
 		}
 		//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
@@ -83,7 +84,6 @@ public class Soulforce extends BaseContent
 		else addButtonDisabled(6, "???", "Req. Flying Sword Path.");
 		if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
 		else addButtonDisabled(7, "???", "Req. Soul Sense.");
-		//button 8 - ?
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0 || player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0 || player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) addButton(12, "Sub-paths", SubPaths).hint("Contemplate mysteries on your choosen sub-path(s).");
 		if (player.hasPerk(PerkLib.Metamorph)) {
 			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
@@ -563,255 +563,77 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Use some of your soulforce to partialy sate your hunger. The higher your cultivation is the more of the soulforce you could drawn without hurting yourself.\n\n");
 		outputText("So what amount of your soulforce do you want to use?");
+		var maxH:Number = player.maxHunger();
 		menu();
-		addButton(0, "V. Low", SelfSustain1).hint("Spend 50 soulforce for 10 hunger.");
-		addButton(1, "Low", SelfSustain2).hint("Spend 100 soulforce for 20 hunger.");
-		addButton(2, "Low-Med", SelfSustain3).hint("Spend 200 soulforce for 40 hunger.");
-		addButton(3, "Medium", SelfSustain4).hint("Spend 400 soulforce for 80 hunger.");
-		addButton(4, "High-Med", SelfSustain5).hint("Spend 800 soulforce for 160 hunger.");
-		addButton(5, "High", SelfSustain6).hint("Spend 1600 soulforce for 320 hunger.");
-		addButton(6, "V. High", SelfSustain7).hint("Spend 3200 soulforce for 640 hunger.");
-		//50%? 100%? - condense all texts into one simpler?
+		if (player.soulforce >= Math.round(maxH * 0.5)) addButton(0, "-10-", SelfSustain0, Math.round(maxH * 0.1)).hint("Spend soulforce to decrease hunger by 10%.");
+		else addButtonDisabled(0, "-10-", "Your current soulforce is too low.");
+		if (player.soulforce >= maxH) addButton(1, "-20-", SelfSustain0, Math.round(maxH * 0.2)).hint("Spend soulforce to decrease hunger by 20%.");
+		else addButtonDisabled(1, "-20-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 1.5)) addButton(2, "-30-", SelfSustain0, Math.round(maxH * 0.3)).hint("Spend soulforce to decrease hunger by 30%.");
+		else addButtonDisabled(2, "-30-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 2)) addButton(3, "-40-", SelfSustain0, Math.round(maxH * 0.4)).hint("Spend soulforce to decrease hunger by 40%.");
+		else addButtonDisabled(3, "-40-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 2.5)) addButton(4, "-50-", SelfSustain0, Math.round(maxH * 0.5)).hint("Spend soulforce to decrease hunger by 50%.");
+		else addButtonDisabled(4, "-50-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 3)) addButton(5, "-60-", SelfSustain0, Math.round(maxH * 0.6)).hint("Spend soulforce to decrease hunger by 60%.");
+		else addButtonDisabled(5, "-60-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 3.5)) addButton(6, "-70-", SelfSustain0, Math.round(maxH * 0.7)).hint("Spend soulforce to decrease hunger by 70%.");
+		else addButtonDisabled(6, "-70-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 4)) addButton(7, "-80-", SelfSustain0, Math.round(maxH * 0.8)).hint("Spend soulforce to decrease hunger by 80%.");
+		else addButtonDisabled(7, "-80-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 4.5)) addButton(8, "-90-", SelfSustain0, Math.round(maxH * 0.93)).hint("Spend soulforce to decrease hunger by 90%.");
+		else addButtonDisabled(8, "-90-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxH * 5)) addButton(9, "-100-", SelfSustain0, maxH).hint("Spend soulforce to decrease hunger by 00%.");
+		else addButtonDisabled(9, "-100-", "Your current soulforce is too low.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
-	public function SelfSustain1():void {
+	public function SelfSustain0(ratio:Number):void {
 		clearOutput();
-		if (player.soulforce >= 50) {
-			outputText("Consuming a little of soulforce you feel slightly less hungry.");
-			player.soulforce -= 50;
-			player.refillHunger(10);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(10);
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(SelfSustain);
-		}
-	}
-	public function SelfSustain2():void {
-		clearOutput();
-		if (player.soulforce >= 100) {
-			outputText("Consuming a little of soulforce you feel a little less hungry.");
-			player.soulforce -= 100;
-			player.refillHunger(20);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(SelfSustain);
-		}
-	}
-	public function SelfSustain3():void {
-		clearOutput();
-		if (player.soulforce >= 200) {
-			outputText("Consuming some of your soulforce you feel a little less hungry than before.");
-			player.soulforce -= 200;
-			player.refillHunger(40);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(40);
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(SelfSustain);
-		}
-	}
-	public function SelfSustain4():void {
-		clearOutput();
-		if (player.soulforce >= 400) {
-			outputText("Consuming some of your soulforce you feel your hungry decreasing slightly.");
-			player.soulforce -= 400;
-			player.refillHunger(80);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(80);
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(SelfSustain);
-		}
-	}
-	public function SelfSustain5():void {
-		clearOutput();
-		if (player.soulforce >= 800) {
-			outputText("Consuming not a small amount of your soulforce you feel your hungry decreasing noticable.");
-			player.soulforce -= 800;
-			player.refillHunger(160);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(160);
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(SelfSustain);
-		}
-	}
-	public function SelfSustain6():void {
-		clearOutput();
-		if (player.soulforce >= 1600) {
-			outputText("Consuming below averange amount of your soulforce you feel your hungry decreasing very noticable.");
-			player.soulforce -= 1600;
-			player.refillHunger(320);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(320);
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(SelfSustain);
-		}
-	}
-	public function SelfSustain7():void {
-		clearOutput();
-		if (player.soulforce >= 3200) {
-			outputText("Consuming a bit below averange amount of your soulforce you feel your hungry decreasing by large margin.");
-			player.soulforce -= 3200;
-			player.refillHunger(640);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(640);
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(SelfSustain);
-		}
+		outputText("Consuming some of your soulforce you feel your hungry decreasing.");
+		player.soulforce -= Math.round(ratio * 5);
+		player.refillHunger(ratio);
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(ratio);
+		statScreenRefresh();
+		flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+		doNext(SelfSustain);
 	}
 	public function RepresLust():void {
 		clearOutput();
 		outputText("Use some of your soulforce to partialy suppress your lust. The higher your cultivation is the more of the soulforce you could drawn without hurting yourself.\n\n");
 		outputText("So what amount of your soulforce do you want to use?");
+		var maxL:Number = player.maxLust();
 		menu();
-		addButton(0, "V. Low", RepresLust1).hint("Spend 40 soulforce for 20 lust.");
-		addButton(1, "Low", RepresLust2).hint("Spend 80 soulforce for 40 lust.");
-		addButton(2, "Low-med", RepresLust3).hint("Spend 200 soulforce for 100 lust.");
-		addButton(3, "Medium", RepresLust4).hint("Spend 400 soulforce for 200 lust.");
-		addButton(4, "High-Med", RepresLust5).hint("Spend 800 soulforce for 400 lust.");
-		addButton(5, "High", RepresLust6).hint("Spend 1600 soulforce for 800 lust.");
-		addButton(6, "V. High", RepresLust7).hint("Spend 3200 soulforce for 1600 lust.");
-		//50%? 100%? - condense all texts into one simpler?
+		if (player.soulforce >= Math.round(maxL * 0.2)) addButton(0, "-10-", RepresLust0, Math.round(maxL * 0.1)).hint("Spend soulforce to decrease lust by 10%.");
+		else addButtonDisabled(0, "-10-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 0.4)) addButton(1, "-20-", RepresLust0, Math.round(maxL * 0.2)).hint("Spend soulforce to decrease lust by 20%.");
+		else addButtonDisabled(1, "-20-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 0.6)) addButton(2, "-30-", RepresLust0, Math.round(maxL * 0.3)).hint("Spend soulforce to decrease lust by 30%.");
+		else addButtonDisabled(2, "-30-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 0.8)) addButton(3, "-40-", RepresLust0, Math.round(maxL * 0.4)).hint("Spend soulforce to decrease lust by 40%.");
+		else addButtonDisabled(3, "-40-", "Your current soulforce is too low.");
+		if (player.soulforce >= maxL) addButton(4, "-50-", RepresLust0, Math.round(maxL * 0.5)).hint("Spend soulforce to decrease lust by 50%.");
+		else addButtonDisabled(4, "-50-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 1.2)) addButton(5, "-60-", RepresLust0, Math.round(maxL * 0.6)).hint("Spend soulforce to decrease lust by 60%.");
+		else addButtonDisabled(5, "-60-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 1.4)) addButton(6, "-70-", RepresLust0, Math.round(maxL * 0.7)).hint("Spend soulforce to decrease lust by 70%.");
+		else addButtonDisabled(6, "-70-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 1.6)) addButton(7, "-80-", RepresLust0, Math.round(maxL * 0.8)).hint("Spend soulforce to decrease lust by 80%.");
+		else addButtonDisabled(7, "-80-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 1.8)) addButton(8, "-90-", RepresLust0, Math.round(maxL * 0.9)).hint("Spend soulforce to decrease lust by 90%.");
+		else addButtonDisabled(8, "-90-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxL * 2)) addButton(9, "-100-", RepresLust0, maxL).hint("Spend soulforce to decrease lust by 100%.");
+		else addButtonDisabled(9, "-100-", "Your current soulforce is too low.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
-	public function RepresLust1():void {
+	public function RepresLust0(ratio:Number):void {
 		clearOutput();
-		if (player.soulforce >= 40) {
-			outputText("Consuming a little of soulforce you lust lowered very slightly.");
-			player.soulforce -= 40;
-			player.lust -= 20;
-			if (player.lust < 0) player.lust = 0;
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(RepresLust);
-		}
-	}
-	public function RepresLust2():void {
-		clearOutput();
-		if (player.soulforce >= 80) {
-			outputText("Consuming a little of soulforce you lust lowered a little bit.");
-			player.soulforce -= 80;
-			player.lust -= 40;
-			if (player.lust < 0) player.lust = 0;
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(RepresLust);
-		}
-	}
-	public function RepresLust3():void {
-		clearOutput();
-		if (player.soulforce >= 200) {
-			outputText("Consuming some of your soulforce you lust noticable lowered.");
-			player.soulforce -= 200;
-			player.lust -= 100;
-			if (player.lust < 0) player.lust = 0;
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(RepresLust);
-		}
-	}
-	public function RepresLust4():void {
-		clearOutput();
-		if (player.soulforce >= 400) {
-			outputText("Consuming some of your soulforce medicore amount of lust are gone.");
-			player.soulforce -= 400;
-			player.lust -= 200;
-			if (player.lust < 0) player.lust = 0;
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(RepresLust);
-		}
-	}
-	public function RepresLust5():void {
-		clearOutput();
-		if (player.soulforce >= 800) {
-			outputText("Consuming not a small amount of your soulforce bit above averange amount of your lust is gone.");
-			player.soulforce -= 800;
-			player.lust -= 400;
-			if (player.lust < 0) player.lust = 0;
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(RepresLust);
-		}
-	}
-	public function RepresLust6():void {
-		clearOutput();
-		if (player.soulforce >= 1600) {
-			outputText("Consuming below averange amount of your soulforce high amount of your lust is gone.");
-			player.soulforce -= 1600;
-			player.lust -= 800;
-			if (player.lust < 0) player.lust = 0;
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(RepresLust);
-		}
-	}
-	public function RepresLust7():void {
-		clearOutput();
-		if (player.soulforce >= 3200) {
-			outputText("Consuming a bit below averange amount of your soulforce most of your lust is gone.");
-			player.soulforce -= 3200;
-			player.lust -= 1600;
-			if (player.lust < 0) player.lust = 0;
-			statScreenRefresh();
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(RepresLust);
-		}
+		outputText("Consuming some of your soulforce you lust lowered.");
+		player.soulforce -= Math.round(ratio * 2);
+		player.lust -= ratio;
+		if (player.lust < 0) player.lust = 0;
+		statScreenRefresh();
+		flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+		doNext(playerMenu);
 	}
 	public function ManaAndSoulforce():void {
 		clearOutput();

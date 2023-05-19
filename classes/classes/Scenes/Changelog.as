@@ -143,7 +143,7 @@ public class Changelog extends BaseContent
 			outputText("-Strong Back perks won't add 1 slot per perk but instead increase current inventory slots by 50%. So all 3 would increase slots cap by 150%.\n");
 			outputText("-Generic goblin/imp/golem/angel enc chances to meet each of 4 races been bit of tunned to stop making player see almost only goblins.\n");
 			outputText("-Options to use sf self-sustain, lowering lust, mana / SF conversions, adjust corruption would be usable now 5 times after getting job: soul cuiltivator and +1 more for starting on each of subpath. Mana / SF conversions will be accesable from the start instead after reaching Soul Apprentice stage.");
-			outputText("No longer req. to reach specific cultivation stage to used better/higher choices in those options like better SF for self-sustain or SF for lowering lust.\n");
+			outputText("No longer req. to reach specific cultivation stage to used better/higher choices in those options like better SF for self-sustain or SF for lowering lust. Options for self-sustain and lowering lust will be now from 10% to 100% with corresponding amount of SF needed to use each of them.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -161,6 +161,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check, special names that was giving previous ears type used by goblins\n");
@@ -233,7 +240,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -261,6 +275,16 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
