@@ -2008,8 +2008,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function milkBlast():void {
 		clearOutput();
 		if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) {
-			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownMilkBlast, 3, 0, 0, 0);
-			else player.createStatusEffect(StatusEffects.CooldownMilkBlast, 4, 0, 0, 0);
+			var cdd:Number = 4;
+			if (player.hasPerk(PerkLib.NaturalInstincts)) cdd -= 1;
+			if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) cdd -= 1;
+			player.createStatusEffect(StatusEffects.CooldownMilkBlast, cdd, 0, 0, 0);
 		}
 		else player.createStatusEffect(StatusEffects.CooldownMilkBlast, 0, 0, 0, 0);
 		outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam splashing [themonster] with a twin jet of milk so powerful it is blown away hitting the nearest obstacle. ");
@@ -2043,8 +2045,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function cumCannon():void {
 		clearOutput();
 		if (player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) {
-			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownCumCannon, 3, 0, 0, 0);
-			else player.createStatusEffect(StatusEffects.CooldownCumCannon, 4, 0, 0, 0);
+			var cdd:Number = 4;
+			if (player.hasPerk(PerkLib.NaturalInstincts)) cdd -= 1;
+			if (player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) cdd -= 1;
+			player.createStatusEffect(StatusEffects.CooldownCumCannon, cdd, 0, 0, 0);
 		}
 		else player.createStatusEffect(StatusEffects.CooldownCumCannon, 0, 0, 0, 0);
 		outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoot a massive jet of cum, projecting [themonster] away and knocking it prone. ");

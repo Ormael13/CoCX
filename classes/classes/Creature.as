@@ -889,6 +889,10 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				max2 += (0.01 * bonus);
 			}
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) max2 += 0.1;
 			max1 *= max2;//~170%
 			max1 = Math.round(max1);
 			return Math.min(339999,max1);
@@ -2667,8 +2671,10 @@ public class Creature extends Utils
 				quantity *= 1.1;
 			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17)
 				quantity *= 2;
-			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3)
-				quantity *= 2.5;
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) {
+				if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) quantity *= 3;
+				else quantity *= 2.5;
+			}
 			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
 			if (hasPerk(PerkLib.FerasBoonAlpha))
@@ -4726,5 +4732,4 @@ public class Creature extends Utils
 			}
 		}
 	}
-}
-
+}

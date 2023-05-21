@@ -1656,4 +1656,4 @@ import classes.Scenes.Crafting;
 			return needNext;
 		}
 	}
-}
+}
