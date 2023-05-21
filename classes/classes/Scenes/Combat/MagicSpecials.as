@@ -3189,16 +3189,14 @@ public class MagicSpecials extends BaseCombatContent {
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
 		if (player.hasPerk(PerkLib.BerserkerArmor) || (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) {
+			var tempB:Number = 1.5;
 			if (player.hasPerk(PerkLib.BerserkerArmor) && player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
-				tempStr = tempStr*2;
-				tempTou = tempTou*2;
-				tempSpe = tempSpe*2;
+				if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4) tempB += 1.5;
+				else tempB += 0.5;
 			}
-			else {
-				tempStr = tempStr*1.5;
-				tempTou = tempTou*1.5;
-				tempSpe = tempSpe*1.5;
-			}
+			tempStr = tempStr*tempB;
+			tempTou = tempTou*tempB;
+			tempSpe = tempSpe*tempB;
 		}
 		if (player.hasPerk(PerkLib.JobWarrior) && player.hasPerk(PerkLib.AsuraToughness)) player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatPermanent();
 		else player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
@@ -3252,16 +3250,14 @@ public class MagicSpecials extends BaseCombatContent {
 			temp3 += player.speStat.core.value * 0.2;
 		}
 		if (player.hasPerk(PerkLib.BerserkerArmor) || (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) {
+			var tempB:Number = 1.5;
 			if (player.hasPerk(PerkLib.BerserkerArmor) && player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
-				temp1 *= 2;
-				temp2 *= 2;
-				temp3 *= 2;
+				if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4) tempB += 1.5;
+				else tempB += 0.5;
 			}
-			else {
-				temp1 *= 1.5;
-				temp2 *= 1.5;
-				temp3 *= 1.5;
-			}
+			temp1 *= tempB;
+			temp2 *= tempB;
+			temp3 *= tempB;
 		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);

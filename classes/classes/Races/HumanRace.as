@@ -70,7 +70,8 @@ public class HumanRace extends Race {
 						}, +1)
 				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
 				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
-				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
+				.hasPerk(PerkLib.HumanSupremacyImproved, +2)
+				.hasPerk(PerkLib.HumanSupremacySuperior, +3);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
 		addMutation(IMutationsLib.HumanBloodstreamIM);

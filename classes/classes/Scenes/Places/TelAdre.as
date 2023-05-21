@@ -1849,4 +1849,4 @@ public function meetingLunaCamp():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

@@ -504,6 +504,7 @@ import classes.Scenes.NPCs.Forgefather;
 				min -= maxHP() * 0.05;
 				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 2) min -= maxHP() * 0.05;
 				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3) min -= maxHP() * 0.15;
+				if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4) min -= maxHP() * 0.25;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();

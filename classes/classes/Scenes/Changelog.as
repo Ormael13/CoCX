@@ -144,14 +144,14 @@ public class Changelog extends BaseContent
 			outputText("-Generic goblin/imp/golem/angel enc chances to meet each of 4 races been bit of tunned to stop making player see almost only goblins.\n");
 			outputText("-Options to use sf self-sustain, lowering lust, mana / SF conversions, adjust corruption would be usable now 6 times after getting job: soul cuiltivator and +1 more for starting on each of subpath. Mana / SF conversions will be accesable from the start instead after reaching Soul Apprentice stage.");
 			outputText("No longer req. to reach specific cultivation stage to used better/higher choices in those options like better SF for self-sustain or SF for lowering lust.\n");
-			outputText("-Options for self-sustain and lowering lust will be now from 10% to 100% with corresponding amount of SF needed to use each of them. SF to Mana/Mana to SF options would be now with more step up increasesd and two last options for each will be giving 25%/100% of max Mana/SF.\n");
+			outputText("-Options for self-sustain and lowering lust will be now from 10% to 100% with corresponding amount of SF needed to use each of them. SF to Mana/Mana to SF options would be now with more step up increases and two last options for each will be giving 25%/100% of max Mana/SF.\n");
 			outputText("-Souless PC (not devil/azazel PC) can't use/access Bag of Cosmos/Sky Poison Pearl unless they regain soul somehow.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Human Ovaries (Final Form). Req. Human Ovaries (Evolved) and lvl 90+. Effects: On top of previous bonuses adds 5% lust resistance, 15 to fertility, +10% of max overlust, negative effects of libido are reduced by 5%\n");
+			outputText("-New mutation perk: Human Testicles (Final Form). Req. Human Testicles (Evolved) and lvl 90+. Effects: On top of previous bonuses adds 5% lust resistance, 15 to virility, +10% of max overlust, negative effects of libido are reduced by 5%\n");
+			outputText("-New mutation perk: Lacta Bovina Ovaries (Final Form). Req. Lacta Bovina Ovaries (Evolved) and lvl 90+. Effects: On top of previous bonuses adds 10% lust resistance, +10% of max overlust, negative effects of libido are reduced by 5% and decrease Milk Blast cd by 1 turn.\n");
+			outputText("-New mutation perk: Minotaur Testicles (Final Form). Req. Minotaur Testicles (Evolved) and lvl 90+. Effects: On top of previous bonuses adds 10% lust resistance, +10% of max overlust, negative effects of libido are reduced by 5% and decrease Cum Cannon cd by 1 turn.\n");
+			outputText("-New tier 9 misc lvl-up perk: Human Supremacy (Superior). Req. Human Supremacy (Advanced) perk and 36+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+3 to human score)\n");
+			outputText("-New mutation perk: Human Adrenal Glands (Final Form). Req. Human Adrenal Glands (Evolved) and lvl 90+. Effects: Your human adrenal glands are giving you boost to your natural stamina, strength, speed; wrath gained naturaly and from taking damage or dealing damage increased; rising Diehard limit by 50%\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -164,6 +164,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -243,11 +249,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -275,8 +277,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -492,7 +492,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 9 misc lvl-up perk: First Attack: Skeletons. Req. First Attack: Golems & Prestige Job: Necromancer perks. Effect: Before your actions your skeletons will attack.\n");
 			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race (17+). Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 5%\n");
 			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 10%\n");
-			outputText("-New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 60+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed, wrath Gained from taking damage and dealing damage increased and rising Diehard limit by 25%\n");
+			outputText("-New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 60+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed, wrath gained naturaly and rising Diehard limit by 25%\n");
 			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race (17+). Effects: Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)\n");
 			outputText("-New mutation perk: Human Parathyroid Gland (Primitive). Req. Human Parathyroid Gland and lvl 30+. Effects: Increases self healing by 600 out of combat and by 300 in combat (using defend option will double it)\n");
 			outputText("-New mutation perk: Human Parathyroid Glands (Evolved). Req. Human Parathyroid Glands (Primitive) and lvl 60+. Effects: Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.\n");
