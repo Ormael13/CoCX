@@ -1289,6 +1289,8 @@ public class TestMenu extends BaseContent
 		BodyStateMenu();
 	}
 	public function AddCockLength():void {
+		outputText("\n\n");
+		player.cocks[0].cockLength += 1;
 		player.lengthChange(1, 1);
 		BodyStateMenu();
 	}
@@ -1327,6 +1329,8 @@ public class TestMenu extends BaseContent
 	}
 	public function SubCockLength():void {
 		var index:int = 0;
+		outputText("\n\n");
+		player.cocks[0].cockLength -= 1;
 		player.lengthChange(-1, 1);
 		if (player.cocks[index].cockLength < 2) {
 			outputText("  ");

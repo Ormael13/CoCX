@@ -35,11 +35,11 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		SoulCultivationLvL();
 		var dailySoulforceUsesLimit:Number = 0;
-		if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit += 5;
+		if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit += 6;
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) dailySoulforceUsesLimit++;
 		if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) dailySoulforceUsesLimit++;
-		if (player.hasPerk(PerkLib.SoulOverlord)) dailySoulforceUsesLimit++;//heart cultivator path
-		//if (player.hasPerk(PerkLib.SoulEmperor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
+		//if (player.hasPerk(PerkLib.)) dailySoulforceUsesLimit++;//heart cultivator path
+		//if (player.hasPerk(PerkLib.)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 		outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / "+Soulforce.cultivationBonusMaxSF_maxPossible+" %\n");
 		if (player.hasPerk(PerkLib.Dantain)) {
@@ -633,58 +633,62 @@ public class Soulforce extends BaseContent
 		if (player.lust < 0) player.lust = 0;
 		statScreenRefresh();
 		flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-		doNext(playerMenu);
+		doNext(RepresLust);
 	}
 	public function ManaAndSoulforce():void {
 		clearOutput();
 		outputText("Use some of your soulforce to slowly conver it into mana or some mana in soulforce. The higher your cultivation is the more you could convert without hurting yourself.\n\n");
 		outputText("So what amount of your soulforce/mana do you want to convert?");
+		var maxS:Number = player.maxSoulforce();
+		var maxM:Number = player.maxMana();
 		menu();
-		addButton(0, "100", convertSoulforce, 100).hint("Convert 100 soulforce to 100 mana.");
-		addButton(1, "200", convertSoulforce, 200).hint("Convert 200 soulforce to 200 mana.");
-		addButton(2, "500", convertSoulforce, 500).hint("Convert 500 soulforce to 500 mana.");
-		addButton(3, "1000", convertSoulforce, 1000).hint("Convert 1000 soulforce to 1000 mana.");
-		addButton(4, "2000", convertSoulforce, 2000).hint("Convert 2000 soulforce to 2000 mana.");
-		//
-		addButton(5, "100", convertMana, 100).hint("Convert 100 mana to 50 soulforce.");
-		addButton(6, "200", convertMana, 200).hint("Convert 200 mana to 100 soulforce.");
-		addButton(7, "500", convertMana, 500).hint("Convert 500 mana to 250 soulforce.");
-		addButton(8, "1000", convertMana, 1000).hint("Convert 1000 mana to 500 soulforce.");
-		addButton(9, "2000", convertMana, 2000).hint("Convert 2000 mana to 1000 soulforce.");
-		//
-		addButton(10, "5000", convertSoulforce, 5000).hint("Convert 5000 soulforce to 5000 mana.");
-		addButton(11, "10000", convertSoulforce, 10000).hint("Convert 10000 soulforce to 10000 mana.");
-		addButton(12, "5000", convertMana, 5000).hint("Convert 5000 mana to 2500 soulforce.");
-		addButton(13, "10000", convertMana, 10000).hint("Convert 10000 mana to 5000 soulforce.");
+		if (player.soulforce >= 100) addButton(0, "100", convertSoulforce, 100).hint("Convert 100 soulforce to 100 mana.");
+		else addButtonDisabled(0, "100", "Your current soulforce is too low.");
+		if (player.soulforce >= 500) addButton(1, "500", convertSoulforce, 500).hint("Convert 500 soulforce to 500 mana.");
+		else addButtonDisabled(1, "500", "Your current soulforce is too low.");
+		if (player.soulforce >= 1000) addButton(2, "1000", convertSoulforce, 1000).hint("Convert 1,000 soulforce to 1,000 mana.");
+		else addButtonDisabled(2, "1000", "Your current soulforce is too low.");
+		if (player.soulforce >= 5000) addButton(3, "5000", convertSoulforce, 5000).hint("Convert 5,000 soulforce to 5,000 mana.");
+		else addButtonDisabled(3, "5000", "Your current soulforce is too low.");
+		if (player.soulforce >= 10000) addButton(4, "10000", convertSoulforce, 10000).hint("Convert 10,000 soulforce to 10,000 mana.");
+		else addButtonDisabled(4, "10000", "Your current soulforce is too low.");
+		if (player.mana >= 200) addButton(5, "200", convertMana, 200).hint("Convert 200 mana to 100 soulforce.");
+		else addButtonDisabled(5, "200", "Your current mana is too low.");
+		if (player.mana >= 1000) addButton(6, "1000", convertMana, 1000).hint("Convert 1,000 mana to 500 soulforce.");
+		else addButtonDisabled(6, "1000", "Your current mana is too low.");
+		if (player.mana >= 2000) addButton(7, "2000", convertMana, 2000).hint("Convert 2,000 mana to 1,000 soulforce.");
+		else addButtonDisabled(7, "200", "Your current mana is too low.");
+		if (player.mana >= 10000) addButton(8, "10000", convertMana, 10000).hint("Convert 10,000 mana to 5,000 soulforce.");
+		else addButtonDisabled(8, "200", "Your current mana is too low.");
+		if (player.mana >= 20000) addButton(9, "20000", convertMana, 20000).hint("Convert 20,000 mana to 10,000 soulforce.");
+		else addButtonDisabled(9, "200", "Your current mana is too low.");
+		if (player.soulforce >= Math.round(maxM * 0.25)) addButton(10, "-25-", convertSoulforce, Math.round(maxM * 0.25)).hint("Convert "+Math.round(maxM * 0.25)+" soulforce to "+Math.round(maxM * 0.25)+" mana.");
+		else addButtonDisabled(10, "-25-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxM * 0.25)) addButton(11, "-100-", convertSoulforce, maxM).hint("Convert "+maxM+" soulforce to "+maxM+" mana.");
+		else addButtonDisabled(11, "-100-", "Your current soulforce is too low.");
+		if (player.soulforce >= Math.round(maxS * 0.5)) addButton(12, "-25-", convertMana, Math.round(maxS * 0.5)).hint("Convert "+Math.round(maxS * 0.5)+" mana to "+Math.round(maxS * 0.25)+" soulforce.");
+		else addButtonDisabled(12, "-25-", "Your current mana is too low.");
+		if (player.soulforce >= (maxS * 2)) addButton(13, "-100-", convertMana, (maxS * 2)).hint("Convert "+(maxS * 2)+" mana to "+maxS+" soulforce.");
+		else addButtonDisabled(13, "-100-", "Your current mana is too low.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
 
 	public function convertSoulforce(amount:int):void {
 		clearOutput();
-		if (player.soulforce >= amount) {
-			outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
-			EngineCore.SoulforceChange(-amount);
-			EngineCore.ManaChange(amount);
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		} else {
-			outputText("Your current soulforce is too low.");
-			doNext(ManaAndSoulforce);
-		}
+		outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
+		EngineCore.SoulforceChange(-amount);
+		EngineCore.ManaChange(amount);
+		flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+		doNext(ManaAndSoulforce);
 	}
 
 	public function convertMana(amount:int):void {
 		clearOutput();
-		if (player.mana >= amount) {
-			outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
-			EngineCore.ManaChange(-amount);
-			EngineCore.SoulforceChange(amount / 2);
-			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
-		} else {
-			outputText("Your current mana is too low.");
-			doNext(ManaAndSoulforce);
-		}
+		outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+		EngineCore.ManaChange(-amount);
+		EngineCore.SoulforceChange(amount / 2);
+		flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+		doNext(ManaAndSoulforce);
 	}
 
 	public function CorruptionAndSoulforce():void {
@@ -714,12 +718,9 @@ public class Soulforce extends BaseContent
 			player.dynStats("cor", change);
 			statScreenRefresh();
 			flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
-			doNext(playerMenu);
 		}
-		else {
-			outputText("Your current soulforce is too low.");
-			doNext(CorruptionAndSoulforce);
-		}
+		else outputText("Your current soulforce is too low.");
+		doNext(CorruptionAndSoulforce);
 	}
 	
 	public function ImprintingSF():void {

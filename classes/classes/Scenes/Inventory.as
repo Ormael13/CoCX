@@ -27,7 +27,8 @@ import coc.view.charview.DragButton;
 use namespace CoC;
 
 	public class Inventory extends BaseContent {
-		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"];
+		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth",
+		"21th", "22th", "23th", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31th", "32th", "33th", "34th", "35th", "36th", "37th", "38th", "39th", "40th", "41th", "42th", "43th", "44th", "45th", "46th", "47th", "48th", "49th", "50th"];
 
 		private var itemStorage:/*ItemSlotClass*/Array;
 		private var pearlStorage:/*ItemSlotClass*/Array;
@@ -206,10 +207,12 @@ use namespace CoC;
             if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
-					addButton(11, "Bag of Cosmos", BagOfCosmosMenuv2);
+					if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(11, "Bag of Cosmos", "Without soul nor SF you can'y open Bag of Cosmos.");
+					else addButton(11, "Bag of Cosmos", BagOfCosmosMenuv2);
 				}
 				if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
-					addButton(12, "Sky P. Pearl", SkyPoisonPearlMenuv2);
+					if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(12, "Sky P. Pearl", "Without soul nor SF you can't open Sky Poison Pearl.");
+					else addButton(12, "Sky P. Pearl", SkyPoisonPearlMenuv2);
 				}
 			}
 			//Button for alchemical items during combat
@@ -1261,8 +1264,6 @@ use namespace CoC;
 				addButton(3, "Accessory", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			}
 			zrobić sloty:
-			coś w stylu slotu na prawdziwe akcesoria
-			może coś na item związany z soulforce - ala latający miecz lub takie tam itemy ^^
 			na pas/belt?
 			2 bransolety/bracelets(on arm wrists)?
 			przy dodawaniu tych slotow popatrzec czy ktorys nie bedzie musial uzywac tego fragmentu kodu:

@@ -142,8 +142,10 @@ public class Changelog extends BaseContent
 			outputText("-Benoit felt that tripple X large backpack isn't enough for PC so he provide even larger one... 4XL one backpack for only 100 gems more and 2 more slots compared to 3XL one.\n");
 			outputText("-Strong Back perks won't add 1 slot per perk but instead increase current inventory slots by 50%. So all 3 would increase slots cap by 150%.\n");
 			outputText("-Generic goblin/imp/golem/angel enc chances to meet each of 4 races been bit of tunned to stop making player see almost only goblins.\n");
-			outputText("-Options to use sf self-sustain, lowering lust, mana / SF conversions, adjust corruption would be usable now 5 times after getting job: soul cuiltivator and +1 more for starting on each of subpath. Mana / SF conversions will be accesable from the start instead after reaching Soul Apprentice stage.");
-			outputText("No longer req. to reach specific cultivation stage to used better/higher choices in those options like better SF for self-sustain or SF for lowering lust. Options for self-sustain and lowering lust will be now from 10% to 100% with corresponding amount of SF needed to use each of them.\n");
+			outputText("-Options to use sf self-sustain, lowering lust, mana / SF conversions, adjust corruption would be usable now 6 times after getting job: soul cuiltivator and +1 more for starting on each of subpath. Mana / SF conversions will be accesable from the start instead after reaching Soul Apprentice stage.");
+			outputText("No longer req. to reach specific cultivation stage to used better/higher choices in those options like better SF for self-sustain or SF for lowering lust.\n");
+			outputText("-Options for self-sustain and lowering lust will be now from 10% to 100% with corresponding amount of SF needed to use each of them. SF to Mana/Mana to SF options would be now with more step up increasesd and two last options for each will be giving 25%/100% of max Mana/SF.\n");
+			outputText("-Souless PC (not devil/azazel PC) can't use/access Bag of Cosmos/Sky Poison Pearl unless they regain soul somehow.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -153,8 +155,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -162,8 +162,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
