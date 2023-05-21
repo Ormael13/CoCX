@@ -2056,4 +2056,4 @@ public function lottiesThirtyMinutePigGasm():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

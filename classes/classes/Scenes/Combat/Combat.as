@@ -7560,6 +7560,7 @@ public class Combat extends BaseContent {
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 3;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 3;
+		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4 && player.racialScore(Races.HUMAN) > 17) addedWrath *= 5;
 		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.02);
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) addedWrath += Math.round(player.maxWrath() * 0.01);
 		EngineCore.WrathChange(addedWrath);
@@ -7568,6 +7569,7 @@ public class Combat extends BaseContent {
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 3;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 3;
+		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4 && player.racialScore(Races.HUMAN) > 17) addedWrath *= 5;
 		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.02);
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) addedWrath += Math.round(player.maxWrath() * 0.01);
 		EngineCore.WrathChange(addedWrath);
@@ -11295,7 +11297,10 @@ public class Combat extends BaseContent {
         if (combat) {
             var BonusWrathMult:Number = 1;
             if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 0.2;
-			if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) BonusWrathMult += 0.2;
+			if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+				BonusWrathMult += 0.2;
+				if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4) BonusWrathMult += 0.4;
+			}
             gainedwrath += wrathregeneration2() * 2 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6 * BonusWrathMult;
@@ -11364,7 +11369,10 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.AsuraStrength)) wrathregen += Math.round(player.maxWrath() * 0.005);
 		if (player.hasPerk(PerkLib.AsuraToughness)) wrathregen += Math.round(player.maxWrath() * 0.005);
         if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
-		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) BonusWrathMult += 1;
+		if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			BonusWrathMult += 1;
+			if (player.perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4) BonusWrathMult += 2;
+		}
         //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
 		return wrathregen*BonusWrathMult;
     }
@@ -16524,4 +16532,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

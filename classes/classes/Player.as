@@ -2501,7 +2501,9 @@ use namespace CoC;
 			if(hasPerk(PerkLib.Cardinal)) lust -= 5;
 			if(hasPerk(PerkLib.Pope)) lust -= 5;
 			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 2) lust -= 5;
+			if(perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) lust -= 10;
 			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2) lust -= 5;
+			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) lust -= 10;
 			if(perkv1(IMutationsLib.HumanOvariesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanOvariesIM));
 			if(perkv1(IMutationsLib.HumanTesticlesIM) >= 1 && racialScore(Races.HUMAN) > 17) lust -= (5 * perkv1(IMutationsLib.HumanTesticlesIM));
 			if((hasPerk(PerkLib.UnicornBlessing) && cor <= 20) || (hasPerk(PerkLib.BicornBlessing) && cor >= 80)) lust -= 10;
@@ -2601,6 +2603,10 @@ use namespace CoC;
 			var mins:Object = getAllMinStats();
 			var baseLib:Number = lib;
 			var finalLib:Number = 1;
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) finalLib -= 0.05;
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) finalLib -= 0.05;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) finalLib -= 0.05;
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) finalLib -= 0.05;
 			if (finalLib < 0.05) finalLib = 0.05;
 			baseLib = Math.round(baseLib * finalLib);
 			if (baseLib < mins.lib) baseLib = mins.lib;
@@ -2633,6 +2639,7 @@ use namespace CoC;
 			var WHmulti:Number = 1;
 			WHmulti *= (effectiveSensitivity() * (1 / 100));
 			if (hasPerk(PerkLib.FuelForTheFire)) WHmulti *= 2;
+			if (perkv1(IMutationsLib.HumanAdrenalGlandsIM) >= 4) WHmulti *= 2;
 			return WHmulti;
 		}
 		public function wrathFromBeenPunchingBag(damage:Number):void {
@@ -3917,6 +3924,8 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 10;
 			if (hasPerk(PerkLib.HumanSupremacyAdvanced))
 				internalChimeraRatingCounter -= 1;
+			if (hasPerk(PerkLib.HumanSupremacySuperior))
+				internalChimeraRatingCounter -= 15;
 			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
@@ -3946,16 +3955,16 @@ use namespace CoC;
 		public function internalHumanScore():Number {
 			Begin("Player","racialScore","internalHumanScore");
 			var internalHumanCounter:Number = 0;
-			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//3
+			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//4
 			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//3
 			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//3
 			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//3
 			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);//3
 			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//3
-			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//3
+			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//4
 			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);//3
 			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//3
-			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//3
+			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//4
 			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
 			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//2
 			End("Player","racialScore");
@@ -4298,8 +4307,10 @@ use namespace CoC;
 				total += (perkv1(PerkLib.AscensionMilkFaucet) * 200);
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 3 && racialScore(Races.HUMAN) > 17)
 				total *= 2;
-			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3)
-				total *= 2.5;
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) {
+				if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) total *= 3;
+				else total *= 2.5;
+			}
 			if (necklaceName == "Cow bell")
 				total *= 1.5;
 			if (upperGarment == game.undergarments.COW_BRA)

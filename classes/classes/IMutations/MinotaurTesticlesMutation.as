@@ -16,15 +16,22 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
+			var maxL:Number = 10;
+			if (pTier >= 3) maxL += 90;
+			var res:Number = 5;
+			if (pTier >= 4) maxL += 10;
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Allows you to keep Cum Cannon special even if minotaur score is lower than 9, max Lust increased by 10.";
+                descS += "Allows you to keep Cum Cannon special even if minotaur score is lower than 9, max Lust increased by "+maxL+"";
             }
             if (pTier >= 2){
-                descS += ", +5% to lust resistance, increase cum output by 200 mLs";
+                descS += ", +"+res+"% to lust resistance, increase cum output by 200 mLs";
             }
-            if (pTier >= 3){
-                descS += ", +5 to max tou an +10 to max str/lib, increase cum production by ~150%, +90 to max lust and Cum Cannon cost rise to 200 lust but can be used more than once per fight";
+            if (pTier == 3){
+                descS += ", increase cum production by ~150% and Cum Cannon cost rise to 200 lust but can be used more than once per fight";
+            }
+            if (pTier == 4){
+                descS += ", increase cum production by ~200%, +10% to max overlust, negative effects of libido are reduced by 5% and Cum Cannon cost rise to 200 lust but can be used more than once per fight";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -39,6 +46,9 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -80,11 +90,16 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
                 pBuffs['tou.mult'] = 0.05;
                 pBuffs['lib.mult'] = 0.2;
             }
+            if (pTier == 4){
+                pBuffs['str.mult'] = 0.2;
+                pBuffs['tou.mult'] = 0.1;
+                pBuffs['lib.mult'] = 0.4;
+            }
             return pBuffs;
         }
 
         public function MinotaurTesticlesMutation() {
-            super(mName + " IM", mName, SLOT_TESTICLES, 3);
+            super(mName + " IM", mName, SLOT_TESTICLES, 4);
         }
 
     }
