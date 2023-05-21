@@ -46,6 +46,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Blood Demon Intelligence. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Gain Blood Demon Intelligence. Blood Spells duration/shielding effects are increased 2x. (+10% of OverMax HP/Base INT Cap, -5% blood spells/soulskills cost, +35% blood spells/soulskills power, +0,5% HP regen)\n");
 			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
 			outputText("-New melee weapon (by Ormael): Dual Nodachi - can be gained by combining 2x Kama weapon. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
+			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
 			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
@@ -79,7 +80,6 @@ public class Changelog extends BaseContent
 			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
 			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
 			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
-			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Two Bladed Scythe - buyable at Orsbulg shop. Cost 2,400 gems. Base atk is 30. It's large weapon belonging to (scythe) exotic type, can be used in whirlwind specials. Have 25% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
@@ -111,7 +111,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Bloodstream. Req. having free bloodstream mutation slot, human race (17+). Effects: Increases maximum base/core Spe/Lib by 5.\n");
 			outputText("-New mutation perk: Human Smarts (Primitive). Req. Human Smarts and lvl 30+. Effects: Increases maximum base/core Int/Wis by 10. Allow to use options requiring to have technical knowledge.\n");
 			outputText("-New mutation perk: Human Bones (Primitive). Req. Human Bones and lvl 30+. Effects: Increases maximum base/core Str/Tou by 10. Increase effects of body cultivation by 50%.\n");
-			outputText("-New mutation perk: Human Bloodstream (Primitive). Req. Human Bloodstream and lvl 30+. Effects: Increases maximum base/core Spe/Lib by 10. Increase a bit fatigue recovery and wrath generation.\n");
+			outputText("-New mutation perk: Human Bloodstream (Primitive). Req. Human Bloodstream and lvl 30+. Effects: Increases maximum base/core Spe/Lib by 10. Increase fatigue recovery (+5) and wrath generation (+2).\n");
 			outputText("-Fix wood elves have 100 min corruption instead of 50. (Wisarddd)\n");
 			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
 			outputText("-Fixed forest mage arms. Added Forest mage dress to Kaiba temporarily. (Liadri)\n");
@@ -122,19 +122,30 @@ public class Changelog extends BaseContent
 			outputText("-Many fixes to gargoyle. (Liadri)\n");
 			outputText("-Poultice super potent healing was brought to more realistic amounts with HP scaling increased from 15% to 20%. And scaling would be based on max Over HP so all those bloody PC's wouldn't find this useless now ;)\n");
 			outputText("-Demon Scythe will no longer corrupt PC as it will be effect on Hellraizer now. Also selfcorrupt and selfpurify effects would be ~3x stronger.\n");
-			outputText("-New melee weapon (by Ormael): Angst dagger - buyable at Eraendir shop. Cost 1680 gems. Base atk is 21, Low grade wrath weapon (small), increase damage multiplier on sneak attacks by 200% of base value, max base atk value reached at 300+ speed and 60+ strength.\n");
+			outputText("-New melee weapon (by Ormael): Angst dagger - buyable at Eraendir shop. Cost 1600 gems. Base atk is 20, Mid grade wrath weapon (small), increase damage multiplier on sneak attacks by 200% of base value, max base atk value reached at 300+ speed and 60+ strength.\n");
 			outputText("-Fix imp balls missing. (Liadri)\n");
 			outputText("-Fix Minerva pregnancy, Ayo armors will keep their energy after loading, Jojo Milking scene has been wired up again after 8 months, Raiju eye colot tf fix. (EragonX)\n");
 			outputText("-Golem core can be extracted with 100% success not only by golemancers but also by tech smart races (goblins, gremlins, humans with human smart i.mutation at tier 2+).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New toggle option in NPC's submenu in Camp Actions: 'Gotta Camp them ALL' mode. Turning it on would increase by large margin chance to proc encounter with recruitable to camp npc when exploring specific area.\n");
+			outputText("-Aether Twins can now after 2nd evolution eat new materials: Amethyst & Diamond. Also they can eat 1 new shield and 6 new small type melee weapons. After eating those and then all materials the can it would enable them evolving to small weapon 1st form. They could also assume one additional form in case PC learned Dual Wield. Both new forms are added to their morph menu.\n");
+			outputText("-Angst Dagger max atk was decreased to 20 and they now classified as mid tier wrath weapons.\n");
+			outputText("-Fix SandMother sex scenes. Fix clones dao contemplation clearing screen on time change. (EragonX)\n");
+			outputText("-Add hover tooltip for minimum lust. (EragonX)\n");
+			outputText("-Physical & Magical Soulpower values would now be added on top of base value of Soulpower.\n");
+			outputText("-Daoist: ... Stage perks desc was updated and effect of inc soulskill power increased but only affect magical soulskill power only and it will grant +0.5% of max SF recovery per hour instead of increasing recoverey by 50/100%. ");
+			outputText("Flesh Body: ... Stage perks bonus to unarmed atk was lowered to 50% of previous values but they now add 50% * stage % ot physical soulskill power. Heaven Tribulation Survivor perks bonus to soulskill power was changed from 30/40/50/60% to 25/50/75/100%.\n");
+			outputText("-New jewelery (by Ormael): Spiritual Ring - buyable at Jewelry shop in Tel'Adre. Cost 1,500 gems. Increase soulskill power by 25%.\n");
+			outputText("-New mutation perk: Human Smarts (Evolved). Req. Human Smarts (Primitive) and lvl 60+. Effects: Increases maximum base/core Int/Wis by 10, maximum trainable Int/Wis cap by 20%. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana. Allow to use options requiring to have technical knowledge.\n");
+			outputText("-New mutation perk: Human Bones (Evolved). Req. Human Bones (Primitive) and lvl 60+. Effects: Increases maximum base/core Str/Tou by 10, maximum trainable Str/Tou by 20%. Increase effects of body cultivation by 100%.\n");
+			outputText("-New mutation perk: Human Bloodstream (Evolved). Req. Human Bloodstream (Primitive) and lvl 60+. Effects: Increases maximum base/core Spe/Lib by 10, maximum trainable Spe/Lib by 20%. Increase fatigue recovery (+10) and wrath generation (+4).\n");
+			outputText("-Inventory starting slots were increased from 5 to 6. Maximum capacity been increased from 20 to 50. Req. to have largest backpack and all 3 strong back perks but what it's for our resourcefull PC's, right?\n");
+			outputText("-Benoit felt that tripple X large backpack isn't enough for PC so he provide even larger one... 4XL one backpack for only 100 gems more and 2 more slots compared to 3XL one.\n");
+			outputText("-Strong Back perks won't add 1 slot per perk but instead increase current inventory slots by 50%. So all 3 would increase slots cap by 150%.\n");
+			outputText("-Generic goblin/imp/golem/angel enc chances to meet each of 4 races been bit of tunned to stop making player see almost only goblins.\n");
+			outputText("-Options to use sf self-sustain, lowering lust, mana / SF conversions, adjust corruption would be usable now 6 times after getting job: soul cuiltivator and +1 more for starting on each of subpath. Mana / SF conversions will be accesable from the start instead after reaching Soul Apprentice stage.");
+			outputText("No longer req. to reach specific cultivation stage to used better/higher choices in those options like better SF for self-sustain or SF for lowering lust.\n");
+			outputText("-Options for self-sustain and lowering lust will be now from 10% to 100% with corresponding amount of SF needed to use each of them. SF to Mana/Mana to SF options would be now with more step up increasesd and two last options for each will be giving 25%/100% of max Mana/SF.\n");
+			outputText("-Souless PC (not devil/azazel PC) can't use/access Bag of Cosmos/Sky Poison Pearl unless they regain soul somehow.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -153,6 +164,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check, special names that was giving previous ears type used by goblins\n");
@@ -227,6 +242,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -257,6 +275,14 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

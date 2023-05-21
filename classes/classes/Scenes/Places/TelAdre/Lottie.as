@@ -1356,7 +1356,7 @@ private function sprintAndLeaveLottieBehind():void {
 	outputText("You don't want to lose the groove you've built up so far, so you decide to go all out and tear through the track, leaving Lottie in your dust. \"<i>Wha- hey! Wait; don't leave me behind, please!</i>\" She yells, running as fast as her chubby legs are willing to go. By the time you reach the end of the track, Lottie's already given up, waiting for you to finish at the gym entrance. You give her a thumbs up before proceeding to run another lap.\n\n");
 	outputText("A few rounds later, you've exhausted yourself so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.");
 	dynStats("tou", .2, "spe", .25);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, player.trainStatCap("tou",100));
 	lottieMorale(-3);
 	fatigue(10);
 	doNext(camp.returnToCampUseOneHour);
@@ -1368,7 +1368,7 @@ private function jogWithLottie():void {
 	clearOutput();
 	outputText("You decide that sprinting wouldn't really get either of you anywhere, though taking things a little faster wouldn't be any harm. You take the power walking to the next level with a quick jog, before reminding Lottie to take this as leisurely as possible - it isn't a race. Lottie quickly picks up the idea and starts to push herself further, trying her best to keep up with you, whilst maintaining a steady rhythm on the track. You both spend the good part of the evening jogging a fair distance, before deciding to retire for the night. You're both tired, but satisfied with today's efforts.\n\n");
 	dynStats("tou", .1, "spe", .1);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, player.trainStatCap("tou",100));
 	lottieMorale(2);
 	lottieTone(2);
 	fatigue(10);
@@ -1381,7 +1381,7 @@ private function sprintAndLeaveFitLottieBehind():void {
 	outputText("You don't want to lose the groove you've built up so far, so you decide to go all out and tear through the track, leaving Lottie in your dust. \"<i>Wha- hey! What's the big idea?!</i>\" She yells, trying to catch up to you. By the time you reach the end of the track, Lottie's already far behind though you can see her still trying to catch up. You give her a thumbs up before proceeding to run another lap.\n\n");
 	outputText("A few rounds later and you've exhausted yourself, so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.");
 	dynStats("tou", .2, "spe", .25);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("tou", +1, player.trainStatCap("tou",100));
 	lottieMorale(-3);
 	fatigue(10);
 	doNext(camp.returnToCampUseOneHour);
@@ -2056,4 +2056,4 @@ public function lottiesThirtyMinutePigGasm():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

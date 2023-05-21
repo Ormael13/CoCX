@@ -512,7 +512,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("\n-Multi Attacks (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+player.statusEffectv1(StatusEffects.GolemUpgrades1)+"":"0")+") (Passive)");
 			outputText("\n-Improved Mana Circuit (Rank: "+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC+"":"0")+") (-"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*15+"":"0")+"% req. mana for activation, +"+(player.hasStatusEffect(StatusEffects.GolemUpgrades1)?""+impMC*25+"":"0")+"% base dmg) (Passive)");
 			outputText("\n-Elemental Weaponry ("+element+")");
-			outputText("\n-Poisoned Weaponry ("+poison+")");
+			//outputText("\n-Poisoned Weaponry ("+poison+")");
 			menu();
 			addButton(0, "MultiAtks", upgradesForPermanentGolemsMultiAttacks);
 			addButton(1, "I.M.Circ.", upgradesForPermanentGolemsImprovedManaCircuit);

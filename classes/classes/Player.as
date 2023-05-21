@@ -92,7 +92,38 @@ use namespace CoC;
 			itemSlot18 = new ItemSlotClass();
 			itemSlot19 = new ItemSlotClass();
 			itemSlot20 = new ItemSlotClass();
-			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18, itemSlot19, itemSlot20];
+			itemSlot21 = new ItemSlotClass();
+			itemSlot22 = new ItemSlotClass();
+			itemSlot23 = new ItemSlotClass();
+			itemSlot24 = new ItemSlotClass();
+			itemSlot25 = new ItemSlotClass();
+			itemSlot26 = new ItemSlotClass();
+			itemSlot27 = new ItemSlotClass();
+			itemSlot28 = new ItemSlotClass();
+			itemSlot29 = new ItemSlotClass();
+			itemSlot30 = new ItemSlotClass();
+			itemSlot31 = new ItemSlotClass();
+			itemSlot32 = new ItemSlotClass();
+			itemSlot33 = new ItemSlotClass();
+			itemSlot34 = new ItemSlotClass();
+			itemSlot35 = new ItemSlotClass();
+			itemSlot36 = new ItemSlotClass();
+			itemSlot37 = new ItemSlotClass();
+			itemSlot38 = new ItemSlotClass();
+			itemSlot39 = new ItemSlotClass();
+			itemSlot40 = new ItemSlotClass();
+			itemSlot41 = new ItemSlotClass();
+			itemSlot42 = new ItemSlotClass();
+			itemSlot43 = new ItemSlotClass();
+			itemSlot44 = new ItemSlotClass();
+			itemSlot45 = new ItemSlotClass();
+			itemSlot46 = new ItemSlotClass();
+			itemSlot47 = new ItemSlotClass();
+			itemSlot48 = new ItemSlotClass();
+			itemSlot49 = new ItemSlotClass();
+			itemSlot50 = new ItemSlotClass();
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18, itemSlot19, itemSlot20, itemSlot21, itemSlot22, itemSlot23, itemSlot24, itemSlot25,
+				itemSlot26, itemSlot27, itemSlot28, itemSlot29, itemSlot30, itemSlot31, itemSlot32, itemSlot33, itemSlot34, itemSlot35, itemSlot36, itemSlot37, itemSlot38, itemSlot39, itemSlot40, itemSlot41, itemSlot42, itemSlot43, itemSlot44, itemSlot45, itemSlot46, itemSlot47, itemSlot48, itemSlot49, itemSlot50];
 			for each (var slot:EnumValue in ItemConstants.EquipmentSlots) {
 				_equipment[slot.value] = slot.nothing();
 			}
@@ -224,6 +255,36 @@ use namespace CoC;
 		public var itemSlot18:ItemSlotClass;
 		public var itemSlot19:ItemSlotClass;
 		public var itemSlot20:ItemSlotClass;
+		public var itemSlot21:ItemSlotClass;
+		public var itemSlot22:ItemSlotClass;
+		public var itemSlot23:ItemSlotClass;
+		public var itemSlot24:ItemSlotClass;
+		public var itemSlot25:ItemSlotClass;
+		public var itemSlot26:ItemSlotClass;
+		public var itemSlot27:ItemSlotClass;
+		public var itemSlot28:ItemSlotClass;
+		public var itemSlot29:ItemSlotClass;
+		public var itemSlot30:ItemSlotClass;
+		public var itemSlot31:ItemSlotClass;
+		public var itemSlot32:ItemSlotClass;
+		public var itemSlot33:ItemSlotClass;
+		public var itemSlot34:ItemSlotClass;
+		public var itemSlot35:ItemSlotClass;
+		public var itemSlot36:ItemSlotClass;
+		public var itemSlot37:ItemSlotClass;
+		public var itemSlot38:ItemSlotClass;
+		public var itemSlot39:ItemSlotClass;
+		public var itemSlot40:ItemSlotClass;
+		public var itemSlot41:ItemSlotClass;
+		public var itemSlot42:ItemSlotClass;
+		public var itemSlot43:ItemSlotClass;
+		public var itemSlot44:ItemSlotClass;
+		public var itemSlot45:ItemSlotClass;
+		public var itemSlot46:ItemSlotClass;
+		public var itemSlot47:ItemSlotClass;
+		public var itemSlot48:ItemSlotClass;
+		public var itemSlot49:ItemSlotClass;
+		public var itemSlot50:ItemSlotClass;
 		public var itemSlots:/*ItemSlotClass*/Array;
 
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
@@ -1026,6 +1087,10 @@ use namespace CoC;
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack() || hasTentacleAttacks() || isAlraune() || isTaur());}
 		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
 		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
+		public function hasAetherTwinsTierWeapon():Boolean { return weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"); }
+		public function hasAetherTwinsTierShield():Boolean { return shield == game.shields.AETHERS && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"); }
+		public function hasAetherTwinsTierS1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"; }
+		public function hasAetherTwinsTierS2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers"; }
 		//Some other checks
 		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -1058,7 +1123,7 @@ use namespace CoC;
 		//Wrath Weapons
 		public function isLowGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("LGWrath") || weapon == game.weapons.ANGSTD1 || weaponRange == game.weaponsrange.B_F_BOW || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets";
+			return weaponSpecials("LGWrath") || weaponRange == game.weaponsrange.B_F_BOW || hasAetherTwinsTier2();
 		}
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
@@ -1066,11 +1131,11 @@ use namespace CoC;
 		}
 		public function isMidGradeWrathWeapon():Boolean
 		{
-			return weaponSpecials("MGWrath") || weapon == game.weapons.NTWHIP;
+			return weaponSpecials("MGWrath") || weapon == game.weapons.ANGSTD1 || weapon == game.weapons.NTWHIP || hasAetherTwinsTierS1();
 		}
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
-			return weapon == game.weapons.ASTERIUS;
+			return weapon == game.weapons.ASTERIUS || hasAetherTwinsTierS2();
 		}/*
 		public function isHighGradeWrathWeapon():Boolean
 		{
@@ -1087,7 +1152,7 @@ use namespace CoC;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
-			return shield.isNothing || shield == game.shields.AETHERS;
+			return shield.isNothing || (shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape != "Human-tier Dagger and Shield");
 		}
 
 		//weaponType check. Make sure weapon has the type filled in. Currently, Type is the last parameter in Weapon().
@@ -1131,7 +1196,7 @@ use namespace CoC;
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
-			return (weaponClass(ItemConstants.WT_DAGGER));
+			return (weaponClass(ItemConstants.WT_DAGGER)) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
@@ -1155,7 +1220,7 @@ use namespace CoC;
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
+			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -1170,7 +1235,7 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return (weaponClass("Thrown"));//wrath large weapon that can be throwed or used in melee xD
+			return (weaponClass("Thrown")) || hasAetherTwinsTierS1() || hasAetherTwinsTierS2();//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
@@ -1791,7 +1856,7 @@ use namespace CoC;
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || (shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"));
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -1804,11 +1869,9 @@ use namespace CoC;
 				else if (shieldPerk == "Large") block += 2;
 				else block += 1;
 			}
-			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) {
-				if (AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets") block += 4;
-				else if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets") block += 2;
-				block += 1;
-			}
+			if (hasAetherTwinsTier2() || hasAetherTwinsTierS1()) block += 4;
+			else if (hasAetherTwinsTier1() || hasAetherTwinsTierS2()) block += 2;
+			else if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) block += 1;
 			if (hasPerk(PerkLib.PrestigeJobSentinel)) {
 				if (shieldPerk == "Massive") block += 3;
 				else if (shieldPerk == "Large") block += 2;
@@ -2371,6 +2434,7 @@ use namespace CoC;
 		public function humanBodyCultivators():Number {
 			var hBC:Number = 1;
 			if (perkv1(IMutationsLib.HumanBonesIM) >= 2 && racialScore(Races.HUMAN) > 17) hBC += 0.5;
+			if (perkv1(IMutationsLib.HumanBonesIM) >= 3 && racialScore(Races.HUMAN) > 17) hBC += 0.5;
 			return hBC;
 		}
 
@@ -3883,14 +3947,14 @@ use namespace CoC;
 			Begin("Player","racialScore","internalHumanScore");
 			var internalHumanCounter:Number = 0;
 			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//3
-			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//2
-			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//2
+			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//3
+			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//3
 			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//3
 			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);//3
 			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//3
 			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//3
 			if (hasMutation(IMutationsLib.HumanParathyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanParathyroidGlandIM);//3
-			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//2
+			if (hasMutation(IMutationsLib.HumanSmartsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanSmartsIM);//3
 			if (hasMutation(IMutationsLib.HumanTesticlesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanTesticlesIM);//3
 			if (hasMutation(IMutationsLib.HumanThyroidGlandIM)) internalHumanCounter += perkv1(IMutationsLib.HumanThyroidGlandIM);//3
 			if (hasMutation(IMutationsLib.HumanVersatilityIM)) internalHumanCounter += perkv1(IMutationsLib.HumanVersatilityIM);//2
@@ -6485,7 +6549,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
-			
 			return additionalTransformationChancesCounter;
 		}
 
@@ -6548,6 +6611,11 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
+		}
+
+		public function npcChanceToEncounter():Number {
+			if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) return 200;
+			else return 1;
 		}
 
 		public function BrainMeltBonus():void

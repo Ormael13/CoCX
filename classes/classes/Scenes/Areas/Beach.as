@@ -50,7 +50,7 @@ import classes.Scenes.SceneLib;
 				name  : "helcommon",
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
-				chance: 0.2,
+				chance: beachChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				// Etna
@@ -59,7 +59,7 @@ import classes.Scenes.SceneLib;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					SceneLib.etnaScene.repeatYandereEnc();
 				},
-				chance: 0.2,
+				chance: beachChance,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && (player.level >= 20);
 				}
@@ -76,7 +76,7 @@ import classes.Scenes.SceneLib;
 						ceaniScene.firstmeetingCeani();
 					}
 				},
-				chance: 1,
+				chance: beachChance2,
 				when: function():Boolean {
 					return flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_DAILY_TRAINING] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] < 4 && player.gems >= 50;
 				}
@@ -88,7 +88,7 @@ import classes.Scenes.SceneLib;
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					ceaniScene.beachInteractionsAfterArcheryTraining();
 				},
-				chance: 1,
+				chance: beachChance2,
 				when: function ():Boolean {
 					return (model.time.hours >= 6 && model.time.hours <= 11) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4;
 				}
@@ -181,6 +181,17 @@ import classes.Scenes.SceneLib;
 			doNext(camp.returnToCampUseOneHour);
 			_beachEncounters.execEncounter();
 			flushOutputTextToGUI();
+		}
+	
+		public function beachChance():Number {
+			var temp:Number = 0.2;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
+		public function beachChance2():Number {
+			var temp:Number = 1;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		public function orcaSunscreenFound():void {

@@ -104,7 +104,7 @@ public class VolcanicCrag extends BaseContent
 					VolcanicCragConditions();
 					SceneLib.helScene.helSexualAmbush();
 				},
-				chance: 0.2,
+				chance: volcanicCragChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
@@ -114,7 +114,7 @@ public class VolcanicCrag extends BaseContent
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: volcanicCragChance,
 				call: function ():void {
 					VolcanicCragConditions();
 					SceneLib.etnaScene.repeatYandereEnc();
@@ -140,12 +140,18 @@ public class VolcanicCrag extends BaseContent
 			flushOutputTextToGUI();
 		}
 
+		public function volcanicCragChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
+
 		private function findNothing():void {
 			clearOutput();
 			outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.");
-			if (player.canTrain('spe', 50)) {
+			if (player.canTrain('spe', player.trainStatCap("spe",50))) {
 				outputText(" Despite this you this time you managed walk a little further inside this place than the last time.");
-				player.trainStat("spe", +1, 50);
+				player.trainStat("spe", +1, player.trainStatCap("spe",50));
 			}
 			dynStats("spe", .5);
 			doNext(camp.returnToCampUseOneHour);

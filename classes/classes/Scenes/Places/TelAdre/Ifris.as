@@ -328,8 +328,8 @@ private function ifrisDP():void {
 
 private function ifrisEnd():void {
 	dynStats("str", .5, "tou", .5);
-	player.trainStat("str", +1, 100);
-	player.trainStat("tou", +1, 100);
+	player.trainStat("str", +1, player.trainStatCap("str",100));
+	player.trainStat("tou", +1, player.trainStatCap("tou",100));
 	outputText(player.modTone(85,5+rand(5)));
 	doNext(camp.returnToCampUseOneHour);
 

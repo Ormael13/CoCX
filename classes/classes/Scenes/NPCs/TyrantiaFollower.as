@@ -1170,9 +1170,9 @@ public function TyrantiaCavFuck():void {
 	outputText("<i>“...Wow...That was awesome.”</i> Your cum leaks out her asshole, and you give her butt a playful smack. <i>“Hmmm....You like it back there.”</i> You smile, informing her that she has a nice ass. <i>“Damn right I do.”</i>\n\n");
 	outputText("She breathes heavily, grinning as you get off her, walking around to her front. She leans her upper-half against a rock, resting against her hand, but as you come around, she takes you by the hand, pulling you into her twin pairs of massive mammaries. Her mouth is wide open, yours for the taking, and you french-kiss your drider lover, running your hands along the sensitive nubs and reveling in the moans you get from her. <i>“That was awesome [name], but I need more.”</i> You’re slightly taken aback, but she smiles, showing you her sopping cunt. <i>“Your fingers were great, but...I want a bit more, y’know?”</i>\n\n");
 	player.sexReward("Default","Dick");
-	player.trainStat("str",1,100);
-	player.trainStat("tou",1,100);
-	player.trainStat("lib",1,100);
+	player.trainStat("str",1,player.trainStatCap("str",100));
+	player.trainStat("tou",1,player.trainStatCap("tou",100));
+	player.trainStat("lib",1,player.trainStatCap("lib",100));
 	player.removeCurse("sens", 5, 2);
 	menu();
 	if (player.hasCock()) {
@@ -1354,4 +1354,3 @@ doNext(camp.returnToCamp);
 }*/
 }
 }
-

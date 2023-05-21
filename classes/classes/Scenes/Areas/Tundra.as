@@ -100,9 +100,9 @@ use namespace CoC;
 		public function nothingEncounter():void {
 			clearOutput();
 			outputText("You spend one hour exploring tundra but you don't manage to find anything interesting.");
-			if (player.canTrain('tou', 50)) {
+			if (player.canTrain('tou', player.trainStatCap("tou",50))) {
 				outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
-				player.trainStat("tou", +1, 50);
+				player.trainStat("tou", +1, player.trainStatCap("tou",50));
 			}
 			dynStats("tou", .5);
 			doNext(camp.returnToCampUseOneHour);

@@ -264,7 +264,7 @@ public function tifaMainMenuSexWithTheQueen():void {
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted and mushy from the ordeal. It's time to head out now and find someone to carry these.\n\n");
 	player.sexReward("no", "Vaginal");
 	player.setPerkValue(PerkLib.BeeOvipositor, 1, player.maxEggs); //get the eggs
-	player.trainStat("lib", +1, 100);
+	player.trainStat("lib", +1, player.trainStatCap("lib",100));
 	player.dynStats("cor", -10);
 	doNext(tifaMainMenuTalkReturn);
 }

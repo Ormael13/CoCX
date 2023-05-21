@@ -285,6 +285,7 @@ public class ItemConstants extends Utils {
 	public static const RINGEFF_CORRUPTION:int     = 9;
 	public static const RINGEFF_WR:int             = 10;
 	public static const RINGEFF_R_ATTACK_POWER:int = 11;
+	public static const RINGEFF_SOUL_POWER:int     = 12;
 	
 	////////////////
 	// Head jewelry

@@ -48,6 +48,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return (model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4
 				},
+				chance: oceanChance,
 				call: ceaniScene.oceanInteractionsAfterArcheryTraining
 			}, {
 				name: "seaanemone",
@@ -97,6 +98,12 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 			oceanEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+
+		public function oceanChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function findNothing():void {

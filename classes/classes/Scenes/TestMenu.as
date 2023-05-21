@@ -48,7 +48,8 @@ public class TestMenu extends BaseContent
 		outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
 		var bd:ButtonDataList = new ButtonDataList();
 		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
-		bd.add("P/G/XP/LvL", PerksGemsEXPLvL, "Adding/Removing perk points and adding gems/exp/lvl.");
+		bd.add("P/G/XP", PerksGemsEXP, "Adding/Removing perk points and adding gems/exp.");
+		bd.add("LvL/DLvL", LevelDeLevel, "Adding/Substracting levels.");
 		bd.add("Quick Flags", modFlagsMenu, "Menu to edit some some flags quickly for debugging");
 		bd.add("Equip", EquipmentMenu, "For creating various equipment items for tests.");
 		bd.add("NonEquip", NonEquipmentMenu, "For creating various non-equipment items for tests.");
@@ -957,6 +958,7 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
 		}
+		if (flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] == 0) flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
 		doNext(SoulforceCheats);
 	}
 	public function PerkGalore2():void {
@@ -1222,23 +1224,30 @@ public class TestMenu extends BaseContent
 		addButton(14, "Back", StatsAscensionMenu);
 	}
 
-	public function PerksGemsEXPLvL():void {
+	public function PerksGemsEXP():void {
 		statScreenRefresh();
 		menu();
 		addButton(0, "Add 1 PerkP", perkPointsCheat, 1).hint("Add 1 perk point.");
 		addButton(1, "Add 5 PerkP", perkPointsCheat, 5).hint("Add 5 perk points.");
 		addButton(2, "Sub 10 PerkP", perkPointsCheat, -10).hint("Substract 10 perk points.");
-		addButton(5, "Add Gems 1", addGemsXPLvl, "Gems", 100).hint("Add 100 gems.");
-		addButton(6, "Add Gems 2", addGemsXPLvl, "Gems", 1000).hint("Add 1,000 gems.");
-		addButton(7, "Add Gems 3", addGemsXPLvl, "Gems", 10000).hint("Add 10,000 gems.");
-		addButton(10, "Add EXP 1", addGemsXPLvl, "XP", 100).hint("Add 100 EXP.");
-		addButton(11, "Add EXP 2", addGemsXPLvl, "XP", 1000).hint("Add 1,000 EXP.");
-		addButton(12, "Add EXP 3", addGemsXPLvl, "XP", 10000).hint("Add 10,000 EXP.");
-		addButton(13, "Add EXP 4", addGemsXPLvl, "XP", 100000).hint("Add 100,000 EXP.");
-		if (player.hasPerk(PerkLib.SoulAncestor)) addButton(13, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
-		if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(14, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
-		if (player.level < CoC.instance.levelCap) addButton(8, "Add 1 LvL", addGemsXPLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
-		if (player.level < CoC.instance.levelCap - 9) addButton(9, "Add 10 LvL's", addGemsXPLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
+		addButton(5, "Add Gems 1", addGemsXP, "Gems", 100).hint("Add 100 gems.");
+		addButton(6, "Add Gems 2", addGemsXP, "Gems", 1000).hint("Add 1,000 gems.");
+		addButton(7, "Add Gems 3", addGemsXP, "Gems", 10000).hint("Add 10,000 gems.");
+		addButton(10, "Add EXP 1", addGemsXP, "XP", 100).hint("Add 100 EXP.");
+		addButton(11, "Add EXP 2", addGemsXP, "XP", 1000).hint("Add 1,000 EXP.");
+		addButton(12, "Add EXP 3", addGemsXP, "XP", 10000).hint("Add 10,000 EXP.");
+		addButton(13, "Add EXP 4", addGemsXP, "XP", 100000).hint("Add 100,000 EXP.");
+		if (player.hasPerk(PerkLib.SoulAncestor)) addButton(3, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
+		if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(8, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
+		addButton(14, "Back", SoulforceCheats);
+	}
+	public function LevelDeLevel():void {
+		statScreenRefresh();
+		menu();
+		if (player.level < CoC.instance.levelCap) addButton(0, "Add 1 LvL", addsubLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
+		if (player.level < CoC.instance.levelCap - 9) addButton(1, "Add 10 LvL's", addsubLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
+		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (with stat and perk points).");
+		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (with stat and perk points).");
 		addButton(14, "Back", SoulforceCheats);
 	}
 	public function BodyStateMenu():void {
@@ -1280,6 +1289,8 @@ public class TestMenu extends BaseContent
 		BodyStateMenu();
 	}
 	public function AddCockLength():void {
+		outputText("\n\n");
+		player.cocks[0].cockLength += 1;
 		player.lengthChange(1, 1);
 		BodyStateMenu();
 	}
@@ -1291,7 +1302,6 @@ public class TestMenu extends BaseContent
 	}
 	public function AddCockBalls():void {
 		player.createCock(4);
-		player.clitLength = .25;
 		if (player.balls <= 1) {
 			player.balls = 2;
 			player.ballSize = 1;
@@ -1319,6 +1329,8 @@ public class TestMenu extends BaseContent
 	}
 	public function SubCockLength():void {
 		var index:int = 0;
+		outputText("\n\n");
+		player.cocks[0].cockLength -= 1;
 		player.lengthChange(-1, 1);
 		if (player.cocks[index].cockLength < 2) {
 			outputText("  ");
@@ -1745,7 +1757,7 @@ public class TestMenu extends BaseContent
 			addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 			addButton(11, "HEALHERB", AddHerb).hint("Add 1 HEALHERB.");
-			addButton(12, "Copp+Tin", AddCooperTinIronOre).hint("Add 1 Cooper, Tin and Iron ore.");
+			addButton(12, "Copp/Tin/Iron", AddCooperTinIronOre).hint("Add 1 Cooper, Tin and Iron ore.");
 			addButton(13, "-2-", MaterialMenu, page + 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -2254,10 +2266,10 @@ public class TestMenu extends BaseContent
 		clearOutput();
 		player.perkPoints += cAmt;
 		outputText("\n\n<b>You now have " + player.perkPoints + " perk points!</b>");
-		doNext(PerksGemsEXPLvL);
+		doNext(PerksGemsEXP);
 	}
 
-	public function addGemsXPLvl(type:String, cAmt:int):void{
+	public function addGemsXP(type:String, cAmt:int):void{
 		clearOutput();
 		if (type == "Gems"){
 			player.gems += cAmt;
@@ -2267,13 +2279,24 @@ public class TestMenu extends BaseContent
 			player.XP += cAmt;
 			outputText("\n\n<b>You have gained " + cAmt + " XP!</b>");
 		}
-		else if (type == "Lvl"){
+		doNext(PerksGemsEXP);
+	}
+
+	public function addsubLvl(type:String, cAmt:int):void{
+		clearOutput();
+		if (type == "Lvl"){
 			player.level += cAmt;
 			player.statPoints += 5*cAmt;
 			player.perkPoints += cAmt;
 			outputText("\n\n<b>You now have " + player.level + " levels!</b>");
 		}
-		doNext(PerksGemsEXPLvL);
+		else if (type == "DLvl"){
+			player.level -= cAmt;
+			player.statPoints -= 5*cAmt;
+			player.perkPoints -= cAmt;
+			outputText("\n\n<b>You have lost " + cAmt + " levels!</b>");
+		}
+		doNext(LevelDeLevel);
 	}
 
 	public function Stage10to12SoulPerks():void {

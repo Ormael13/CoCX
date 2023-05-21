@@ -632,7 +632,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>“It’s best to learn in small doses.”</i> She says simply. <i>“I can’t risk either of us burning out, all things considered.”</i> You thank Belisa for her time, and she smiles happily. <i>“Oh, you’re welcome. It’s…nice to practice magic again like this.”</i>\n\n");
 		BelisaAffection(5);
 		dynStats("int", 1);
-		player.trainStat("int", 1, 80);
+		player.trainStat("int", 1, player.trainStatCap("int",80));
 		if(!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 			outputText("<b>New White Magic Spell Learned: Whitefire</b>");

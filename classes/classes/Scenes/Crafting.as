@@ -616,8 +616,13 @@ private function craftingMaterialsMoonstone1Down():void {
 					break;
 				case useables.TIN_ORE: BagSlot02 -= 1;
 					break;
-				//case useables.BRONZEB: return BagSlot03;
+				case useables.BRONZEB: BagSlot03 -= 1;
+					break;
 				case useables.IRONORE: BagSlot04 -= 1;
+					break;
+				case useables.EBONING: BagSlot06 -= 1;
+					break;
+				case useables.MOONSTO: BagSlot07 -= 1;
 					break;
 			}
 			return;
