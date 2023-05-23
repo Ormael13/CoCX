@@ -156,6 +156,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -164,15 +173,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
@@ -277,6 +277,22 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

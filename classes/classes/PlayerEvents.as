@@ -1373,6 +1373,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 3) SceneLib.zenjiScene.loverZenjiSleepWithNoSexMorning();
 					needNext = true;
 				}
+				if (SophieFollowerScene.HarpyEggHatching) { //Egg progression
+					if (SophieFollowerScene.HarpyEggDay <= 2) outputText(" The proximity of your egg is soothing to your motherly instincts.");
+					else if (SophieFollowerScene.HarpyEggDay <= 4) outputText(" Your egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
+					else if (SophieFollowerScene.HarpyEggDay <= 7) outputText(" Snuggling the egg you instinctively know your precious child is almost ready to be born.");
+					SophieFollowerScene.HarpyEggDay += 1;
+					if (SophieFollowerScene.HarpyEggDay == 7){
+						SophieFollowerScene.HarpyEggDay = 0;
+						SophieFollowerScene.HarpyEggHatching = false;
+						SophieFollowerScene.HarpyEggReady = true;
+					}
+				}
 			}
 			//Heaven Tribulations
 			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
