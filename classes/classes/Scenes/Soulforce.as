@@ -405,9 +405,10 @@ public class Soulforce extends BaseContent
 	}
 
 	public function daoContemplationsEffect(statusEffect:StatusEffectType, daoname:String, clone:Boolean = false):void {
-		if (!clone)
+		if (!clone) {
 			clearOutput();
-		outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
+			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
+		}
 		var dao:int;
 		if (clone) dao = 1;
 		else {
@@ -429,7 +430,7 @@ public class Soulforce extends BaseContent
 		}
 		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
-			outputText("After the session ends you managed to progress in Dao of "+daoname+".");
+			if (!clone) outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
 				var thres:Array = [20, 40, 60, 100, 140, 180, 220, 260, 300];
@@ -441,14 +442,13 @@ public class Soulforce extends BaseContent
 						outputText("\n\n<b>")
 						if (clone) outputText("Due to your clone contemplations your");
 						else outputText("Your");
-						outputText(" comprehension in Dao of "+daoname+" has reached the " + NUMBER_WORDS_POSITIONAL[curLevel+1] + " layer.</b>");
+						outputText(" comprehension in Dao of "+daoname+" has reached the " + NUMBER_WORDS_POSITIONAL[curLevel+1] + " layer.</b>\n\n");
 					}
 				}
 			} else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 		}
-		else outputText("After the session ends, you did not manage to progress in your comprehension.");
-		outputText("\n\n");
-		doNext(camp.returnToCampUseEightHours);
+		else outputText("After the session ends, you did not manage to progress in your comprehension.\n\n");
+		if (!clone) doNext(camp.returnToCampUseEightHours);
 	}
 
 	public function highestLayerOfDaoComprehension():Number {
