@@ -429,6 +429,18 @@ public class PerkLib
 		public static const EnchancedWarriorsRage:PerkType = mk("Enchanced Warrior's Rage", "Enchanced Warrior's Rage",
 				"Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)",
 				"You've chosen the 'Enchanced Warrior's Rage' perk. Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced.");
+		public static const DoorKnob:PerkType = mk("Door Knob", "Door Knob",
+				"+10% max lust.",
+				"You've chosen the 'Door Knob' perk. +10% max lust.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const Bicycle:PerkType = mk("Bicycle", "Bicycle",
+				"+10% max lust.",
+				"You've chosen the 'Bicycle' perk. +10% max lust.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const MeatHole:PerkType = mk("Meat Hole", "Meat Hole",
+				"+10% max lust.",
+				"You've chosen the 'Meat Hole' perk. +10% max lust.")
+				.withBuffs({'maxlust_mult':+0.1});
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -436,18 +448,21 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("Bed Warmer", "Bed Warmer",
+				".",
+				"You've chosen the '' perk. +10% max lust.");
+		public static const :PerkType = mk("Tension Tamer", "Tension Tamer",
+				".",
+				"You've chosen the '' perk. +10% max lust.");
+		public static const :PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
+				".",
+				"You've chosen the '' perk. +10% max lust.");
+		public static const :PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
+				".",
+				"You've chosen the '' perk. +10% max lust.");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk. +10% max lust.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -6892,7 +6907,8 @@ public class PerkLib
 					.requireAnyPerk(HistoryScout, PastLifeScout);
 			Whistles.requireLevel(6)
 					.requireAnyPerk(HistorySlacker, PastLifeSlacker);
-			//??Slut??
+			DoorKnob.requireLevel(6)
+					.requireAnyPerk(HistorySlut, PastLifeSlut);
 			Tongs.requireLevel(6)
 					.requireAnyPerk(HistorySmith, PastLifeSmith);
 			Amateur.requireLevel(6)
@@ -7168,7 +7184,8 @@ public class PerkLib
 					.requirePerk(SoldiersFriend);
 			LyingDown.requireLevel(24)
 					.requirePerk(Whistles);
-			//??Slut??
+			Bicycle.requireLevel(24)
+					.requirePerk(DoorKnob);
 			Bellows.requireLevel(24)
 					.requirePerk(Tongs);
 			Prostitute.requireLevel(24)
@@ -7300,7 +7317,8 @@ public class PerkLib
 					.requirePerk(PyrosFriend);
 			TakingABreak.requireLevel(42)
 					.requirePerk(LyingDown);
-			//??Slut??
+			MeatHole.requireLevel(42)
+					.requirePerk(Bicycle);
 			Furnace.requireLevel(42)
 					.requirePerk(Bellows);
 			Escort.requireLevel(42)
