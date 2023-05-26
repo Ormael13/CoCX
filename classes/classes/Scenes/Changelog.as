@@ -153,9 +153,12 @@ public class Changelog extends BaseContent
 			outputText("-New tier 9 misc lvl-up perk: Human Supremacy (Superior). Req. Human Supremacy (Advanced) perk and 36+ points in Internal Human Disposition score & 18+ points in Human score. Effect: Delay by 15 points appearing effect of negative HP regeneration. (+3 to human score)\n");
 			outputText("-New mutation perk: Human Adrenal Glands (Final Form). Req. Human Adrenal Glands (Evolved) and lvl 90+. Effects: Your human adrenal glands are giving you boost to your natural stamina, strength, speed; wrath gained naturaly and from taking damage or dealing damage increased; rising Diehard limit by 50%\n");
 			outputText("-Fix harpy egg laying & clone dao contemplation messages. (EragonX)\n");
-			outputText("-New tier 1 misc lvl-up perk: Door Knob. Req. History: Slut or Past Life: Slut perk. Effect: +10% max lust.\n");
-			outputText("-New tier 4 misc lvl-up perk: Bicycle. Req. Door Knob perk. Effect: +10% max lust.\n");
-			outputText("-New tier 7 misc lvl-up perk: Meat Hole. Req. Bicycle perk. Effect: +10% max lust.\n");
+			outputText("-New tier 1 misc lvl-up perk: Door Knob. Req. History: Slut or Past Life: Slut perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
+			outputText("-New tier 4 misc lvl-up perk: Bicycle. Req. Door Knob perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
+			outputText("-New tier 7 misc lvl-up perk: Meat Hole. Req. Bicycle perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
+			outputText("-New tier 12 misc lvl-up perk: Bed Warmer. Req. Meat Hole perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
+			outputText("-New tier 17 misc lvl-up perk: Tension Tamer. Req. Bed Warmer perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
+			outputText("-New tier 30 misc lvl-up perk: Party Boy/Girl. Req. Tension Tamer perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -224,13 +227,9 @@ public class Changelog extends BaseContent
 			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
 			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");
 			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
-			//slut line
+			outputText("-New tier ?? misc lvl-up perk: Mattress Actress/Actor. Req. Party Boy/Girl perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier 12 misc lvl-up perk: Bed Warmer. Req. Meat Hole perk. Effect: +10% max lust.\n");
-			outputText("-New tier 17 misc lvl-up perk: Tension Tamer. Req. Bed Warmer perk. Effect: +10% max lust.\n");
-			outputText("-New tier 30 misc lvl-up perk: Party Boy/Girl. Req. Tension Tamer perk. Effect: +10% max lust.\n");
-			outputText("-New tier ?? misc lvl-up perk: Mattress Actress/Actor. Req. Party Boy/Girl perk. Effect: +10% max lust.\n");
 			outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");.
 			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");

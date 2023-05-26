@@ -430,16 +430,32 @@ public class PerkLib
 				"Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)",
 				"You've chosen the 'Enchanced Warrior's Rage' perk. Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced.");
 		public static const DoorKnob:PerkType = mk("Door Knob", "Door Knob",
-				"+10% max lust.",
-				"You've chosen the 'Door Knob' perk. +10% max lust.")
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Door Knob' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const Bicycle:PerkType = mk("Bicycle", "Bicycle",
-				"+10% max lust.",
-				"You've chosen the 'Bicycle' perk. +10% max lust.")
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Bicycle' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const MeatHole:PerkType = mk("Meat Hole", "Meat Hole",
-				"+10% max lust.",
-				"You've chosen the 'Meat Hole' perk. +10% max lust.")
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Meat Hole' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const BedWarmer:PerkType = mk("Bed Warmer", "Bed Warmer",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Bed Warmer' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const TensionTamer:PerkType = mk("Tension Tamer", "Tension Tamer",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Tension Tamer' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const PartyBoyGirl:PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Party Boy/Girl' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const MattressActressActor:PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Mattress Actress/Actor' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
@@ -448,18 +464,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("Bed Warmer", "Bed Warmer",
-				".",
-				"You've chosen the '' perk. +10% max lust.");
-		public static const :PerkType = mk("Tension Tamer", "Tension Tamer",
-				".",
-				"You've chosen the '' perk. +10% max lust.");
-		public static const :PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
-				".",
-				"You've chosen the '' perk. +10% max lust.");
-		public static const :PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
-				".",
-				"You've chosen the '' perk. +10% max lust.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk. +10% max lust.");
@@ -7429,7 +7433,8 @@ public class PerkLib
 					.requirePerk(HeavysFriend);
 			SkippingWork.requireLevel(72)
 					.requirePerk(TakingABreak);
-			//??Slut??
+			BedWarmer.requireLevel(72)
+					.requirePerk(MeatHole);
 			Hammer.requireLevel(72)
 					.requirePerk(Furnace);
 			BrothelOwner.requireLevel(72)
@@ -7501,7 +7506,8 @@ public class PerkLib
 					.requirePerk(EngineersFriend);
 			Napping.requireLevel(102)
 					.requirePerk(SkippingWork);
-			//??Slut??
+			TensionTamer.requireLevel(102)
+					.requirePerk(BedWarmer);
 			Anvil.requireLevel(102)
 					.requirePerk(Hammer);
 			Pornstar.requireLevel(102)
@@ -7550,7 +7556,8 @@ public class PerkLib
 					.requirePerk(SnipersFriend);
 			ZZZ.requireLevel(180)
 					.requirePerk(Napping);
-			//??Slut??
+			PartyBoyGirl.requireLevel(180)
+					.requirePerk(TensionTamer);
 			Weap0n.requireLevel(180)
 					.requirePerk(Anvil);
 			SexChampion.requireLevel(180)
@@ -7592,4 +7599,4 @@ public class PerkLib
         }
 	}
 }
-}
+}
