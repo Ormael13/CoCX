@@ -79,6 +79,9 @@ public class Jewelry extends Equipable
 					case RINGEFF_R_ATTACK_POWER:
 						desc += "Increases range damage by " + effectMagnitude + " percent.";
 						break;
+					case RINGEFF_SOUL_POWER:
+						desc += "Increases soulskill power by " + effectMagnitude + " percent.";
+						break;
 				}
 				list.push([50, desc]);
 			}

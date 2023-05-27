@@ -67,6 +67,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return flags[kFLAGS.ETNA_AFFECTION] >= 5
 				},
+				chance: cavesChance,
 				call: manticoreEncounterFn
 			}/*, {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
@@ -132,13 +133,18 @@ use namespace CoC;
 			return flags[kFLAGS.DISCOVERED_CAVES];
 		}
 
-
 		public function exploreCaves():void {
 			clearOutput();
 			flags[kFLAGS.DISCOVERED_CAVES]++;
 			doNext(camp.returnToCampUseOneHour);
 			cavesEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+
+		public function cavesChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function discoverTundra():void {

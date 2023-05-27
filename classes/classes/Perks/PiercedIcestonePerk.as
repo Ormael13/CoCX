@@ -12,7 +12,7 @@ package classes.Perks
 		override public function desc(params:PerkClass = null):String
 		{
 			if (!player || !params) return _desc;
-			return "Reduces minimum lust by " + Math.round(params.value1) + ".";
+			return "Reduces minimum lust by " + Math.round(params.value1) + "%.";
 		}
 
 		public function PiercedIcestonePerk()

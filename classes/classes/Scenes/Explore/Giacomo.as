@@ -1008,6 +1008,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				player.HP = int(player.maxHP() * .15);
 			//Maybe add a random chance of losing a random transformation with a smaller chance of losing ALL transformations except gender changes. This will probably be a bitch to implement.
 			player.removeStatusEffect(StatusEffects.Infested);
+			player.buff("Infested").remove();
 			dynStats("lus", -99, "cor", -4);
 			player.gems -= 175;
 			inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);

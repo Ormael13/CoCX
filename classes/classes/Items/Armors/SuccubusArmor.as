@@ -14,7 +14,7 @@ import classes.PerkLib;
 		public function SuccubusArmor()
 		{
 			super("S.Armor", "S.Armor", "Succubus armor", "a Succubus armor", 50, 25, 3000, "The fully corrupted maiden armor became an armor fit for a succubus. It incite its owner to sex and rewards it for debauching herself. It's already suggestive design became downright obscene as the metal and clothes color turned black as night.", "Light", false, false);
-			withBuffs({'teasedmg':10});
+			withBuffs({'teasedmg':10, 'minlustx': 0.3});
 			withTag(ItemTags.A_REVEALING);
 		}
 		

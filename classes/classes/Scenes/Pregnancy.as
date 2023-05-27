@@ -1667,6 +1667,7 @@ public class Pregnancy extends NPCAwareContent {
                     player.orgasm();
                     player.dynStats("lib", 2, "sen", 5);
                     if(!player.hasStatusEffect(StatusEffects.AnemoneArousal)) player.createStatusEffect(StatusEffects.AnemoneArousal,0,0,0,0);
+                    player.buff("AnemoneArousal").setStat("minlustx", 0.3).withText("Anemone parasite");
                 }
                 player.knockUpForce(); //Clear Pregnancy
                 EngineCore.outputText("[pg]Exhausted by the 'birth' and the climax, you slip into a doze.\n");
@@ -2318,6 +2319,7 @@ public class Pregnancy extends NPCAwareContent {
                     player.orgasm();
                     player.dynStats("lib", 2, "sen", 5);
                     if(!player.hasStatusEffect(StatusEffects.AnemoneArousal)) player.createStatusEffect(StatusEffects.AnemoneArousal,0,0,0,0);
+                    player.buff("AnemoneArousal").setStat("minlustx", 0.3).withText("Anemone parasite");
                 }
                 player.knockUpForce(0, 0, 1); //Clear Pregnancy
                 EngineCore.outputText("Exhausted by the 'birth' and the climax, you slip into a doze.\n");

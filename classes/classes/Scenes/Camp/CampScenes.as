@@ -555,7 +555,7 @@ public function goblinsBirthScene(womb:int = 0):void {
 	}
 	else goblinsBirthScene2(womb);
 }
-private function nameEldestGobo(womb:int):void {
+private function nameEldestGobo(womb:int = 0):void {
 	if (mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must name her.</b>");
@@ -574,7 +574,7 @@ private function nameEldestGobo(womb:int):void {
 	outputText("" + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " now that's a name worthy of a future genius! ");
 	goblinsBirthScene2(womb);
 }
-private function goblinsBirthScene2(womb:int):void {
+private function goblinsBirthScene2(womb:int = 0):void {
 	outputText("That solved, you doze off with your daughter against you, supremely happy.");
 	player.cuntChange(60, true, true, false);
 	outputText("\n\nWhen you wake up you are no longer holding a baby but what looks like a teenage goblin.\n\n");

@@ -6,7 +6,6 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-//import classes.Scenes.Places.AbandonedTownRebuilt;
 
 /**
  * The lovely town of Tel Adre
@@ -359,10 +358,43 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		addButton(13, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		if (inventory.getMaxSlots() > 20) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+	}
+	if (page == 3) {
+		for (slot = 20; slot < 30; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-20, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		if (inventory.getMaxSlots() > 30) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+	}
+	if (page == 4) {
+		for (slot = 30; slot < 340; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-30, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
+		if (inventory.getMaxSlots() > 40) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+	}
+	if (page == 5) {
+		for (slot = 40; slot < 50; slot++) {
+			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+				addButton(slot-40, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				totalItems += player.itemSlots[slot].quantity;
+			}
+		}
+		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
 	}
 	addButton(10, "Misc", oswaldPawnMenu2);
-	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
+	if (totalItems > 1) addButton(11, "Sell All", oswaldPawnSellAll);
 	addButton(14, "Back", telAdreMenu);
 }
 private function oswaldPawnMenu2():void {
@@ -411,7 +443,7 @@ private function oswaldPawnSellAll():void {
 	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = 0;
 	clearOutput();
-	for (var slot:int = 0; slot < 20; slot++) {
+	for (var slot:int = 0; slot < 50; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
 			player.itemSlots[slot].quantity = 0;
@@ -510,13 +542,11 @@ public function barTelAdre():void {
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
-	}/*
-	if (RuinedTownRebuilt.AmilyAtWetBitch && AbandonedTownRebuilt.AmilyAngerCooldown > 0) {
-		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyMadBar);
 	}
-	if (RuinedTownRebuilt.AmilyAtWetBitch && RuinedTownRebuilt.AmilyAngerCooldown == 0) {
-		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyBarTalk);
-	}*/
+	if (RuinedTownRebuilt.AmilyAtWetBitch && RuinedTownRebuilt.AmilyAngerCooldown >= 0) {
+		if (RuinedTownRebuilt.AmilyAngerCooldown == 0) button = anotherButton(button, "AmilyTalk", SceneLib.ruinedTown.amilyBarTalk);
+		else button = anotherButton(button, "AmilyTalk", SceneLib.ruinedTown.amilyMadBar);
+	}
 
 	//DOMINIKA
 	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1 && flags[kFLAGS.DOMINIKA_COVENANT] < 3) {
@@ -1600,9 +1630,9 @@ private function weightLifting():void {
 	else outputText("This place barely has anything left to challenge you, but you take the heaviest weights you can get your mitts on and get to it.  By the time an hour has passed, you've worked up a good sweat, but without heavier weights you probably won't get any stronger.");
 	//Stat changes HERE!
 	dynStats("str", 5);
-	player.trainStat("str",1,75);
+	player.trainStat("str",1,player.trainStatCap("str",75));
 	dynStats("tou", 5);
-	player.trainStat("tou",1,75);
+	player.trainStat("tou",1,player.trainStatCap("tou",75));
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)));
@@ -1650,9 +1680,9 @@ private function goJogging():void {
 	else outputText("and it barely challenges you.  You run at a sprint half the time and still don't feel like you're improving in the slightest.  Still, you do manage to burn a lot of calories.");
 	//Stat changes HERE!
 	dynStats("spe", 5);
-	player.trainStat("spe",1,75);
+	player.trainStat("spe",1,player.trainStatCap("spe",75));
 	dynStats("tou", 5);
-	player.trainStat("tou",1,75);
+	player.trainStat("tou",1,player.trainStatCap("tou",75));
 
 	//If butt is over 15 guaranteed reduction
 	if(player.butt.type >= 15) {
@@ -1819,4 +1849,4 @@ public function meetingLunaCamp():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}

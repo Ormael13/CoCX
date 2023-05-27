@@ -19,16 +19,16 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS = "Increase Hellfire damage and Cum production by 25%. +"+(5*pTier)+" Lib.  ";
+                descS = "Increase Hellfire damage and Cum production by 25%. +"+(5*pTier)+" Lib. ";
             }
             if (pTier >= 2){
-                descS += "Increase fire damage by a percentage based on 0.5% of your cum production.  ";
+                descS += "Increase fire damage by a percentage based on 0.5% of your cum production. ";
             }
             if (pTier >= 3){
-                descS += "Double the fire damage percentage bonus from cum production.  ";
+                descS += "Double the fire damage percentage bonus from cum production. ";
             }
             if (pTier >= 4){
-                descS += "Double your cum production.  ";
+                descS += "Double your cum production. ";
             }
             if (pTier >= 4){
                 descS += "If you have the Alpha howl perk you may now forcibly recruit hellhounds into your pack equal to the number of werewolves you may control.";

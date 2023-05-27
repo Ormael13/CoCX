@@ -2238,10 +2238,10 @@ public class DesertCave extends DungeonAbstractContent
 			//friendly cunt fuck:
 			addButton(0, "GetMilkFill", lesboMilkFilling)
 				.hint("Get into female sex with the Sand Mother and get your vagina stuffed with milk!")
-				.disableIf(player.cockThatFits(monster.vaginalCapacity()) < 0, "Req. a cock with area smaller than " + monster.vaginalCapacity());
+				.disableIf(!player.hasVagina(), "Req. a vagina");
 			addButton(1, "Vaginal", friendlySandMotherFuck)
 				.hint("Penetrate her pussy with your penis.")
-				.disableIf(!player.hasVagina(), "Req. a vagina");
+				.disableIf(player.cockThatFits(monster.vaginalCapacity()) < 0, "Req. a cock with area smaller than " + monster.vaginalCapacity());
 			addButton(4,"Back",sandWitchMotherFriendlyMenu);
 		}
 		

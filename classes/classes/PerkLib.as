@@ -423,9 +423,40 @@ public class PerkLib
 		public static const HumanSupremacyAdvanced:PerkType = mk("Human Supremacy (Advanced)", "Human Supremacy (Advanced)",
 				"Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))",
 				"You've chosen the 'Human Supremacy (Advanced)' perk. Delay by 1 point appearing effect of negative HP regeneration. (+1 to internal mutations slots capacity (+2 for adaptation slots))");
+		public static const HumanSupremacySuperior:PerkType = mk("Human Supremacy (Superior)", "Human Supremacy (Superior)",
+				"Delay by 15 points appearing effect of negative HP regeneration. (+3 to human score)",
+				"You've chosen the 'Human Supremacy (Superior)' perk. Delay by 15 points appearing effect of negative HP regeneration. (+3 to human score)");
 		public static const EnchancedWarriorsRage:PerkType = mk("Enchanced Warrior's Rage", "Enchanced Warrior's Rage",
 				"Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)",
 				"You've chosen the 'Enchanced Warrior's Rage' perk. Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced.");
+		public static const DoorKnob:PerkType = mk("Door Knob", "Door Knob",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Door Knob' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const Bicycle:PerkType = mk("Bicycle", "Bicycle",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Bicycle' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const MeatHole:PerkType = mk("Meat Hole", "Meat Hole",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Meat Hole' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const BedWarmer:PerkType = mk("Bed Warmer", "Bed Warmer",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Bed Warmer' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const TensionTamer:PerkType = mk("Tension Tamer", "Tension Tamer",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Tension Tamer' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const PartyBoyGirl:PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Party Boy/Girl' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const MattressActressActor:PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Mattress Actress/Actor' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -435,19 +466,7 @@ public class PerkLib
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk. +10% max lust.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -2032,11 +2051,11 @@ public class PerkLib
 				.withBuffs({'maxfatigue_base':+60});
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
-						"Increases the attack damage for non-heavy/non-small melee weapons.</b>" +
+						"Increases the attack damage for normal sized melee weapons.</b>" +
 						"|" +
 						"<b>You are too slow to benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Lightning Strikes' perk, increasing the attack damage for non-heavy/non-small melee weapons.</b>");
+				"You've chosen the 'Lightning Strikes' perk, increasing the attack damage for normal sized melee weapons.</b>");
 		public static const LimitBreakerBody1stStage:PerkType = mk("Limit Breaker: Body (1st stage)", "Limit Breaker: Body (1st stage)",
 				"Breaking your limits for 'body' for the first time grants you +5% max HP and Wrath.",
 				"You've chosen the 'Limit Breaker: Body (1st stage)' perk, breaking your limits for 'body' for the first time. (+5% max HP and Wrath)")
@@ -2820,14 +2839,14 @@ public class PerkLib
 				"Melee attacks with staffs would turn to ranged magic bolts. In additiona to hitting enemy next to you they would enable hitting enemies out of your reach (for ex. flying enemies).",
 				"You've chosen the 'Staff Channeling' perk. Melee attacks with staffs would turn to ranged magic bolts. In addition to hitting an enemy next to you, they would enable hitting enemies out of your reach (for ex. flying enemies).");
 		public static const StrongBack:PerkType = mk("Strong Back", "Strong Back",
-				"Enables sixth item slot.",
-				"You've chosen the 'Strong Back' perk, enabling a sixth item slot.");
+				"Enables additional item slots. (+50%)",
+				"You've chosen the 'Strong Back' perk, enabling additional item slots. (+50%)");
 		public static const StrongBack2:PerkType = mk("Strong Back 2: Strong Harder", "Strong Back 2: Strong Harder",
-				"Enables seventh item slot.",
-				"You've chosen the 'Strong Back 2: Strong Harder' perk, enabling a seventh item slot.");
+				"Enables additional item slots. (+100%)",
+				"You've chosen the 'Strong Back 2: Strong Harder' perk, enabling additional item slots. (+100%)");
 		public static const StrongBack3:PerkType = mk("Strong Back 3: Strong Hardest", "Strong Back 3: Strong Hardest",
-				"Enables eighth item slot.",
-				"You've chosen the 'Strong Back 3: Strong Hardest' perk, enabling a eighth item slot.");
+				"Enables additional item slots. (+150%)",
+				"You've chosen the 'Strong Back 3: Strong Hardest' perk, enabling additional item slots. (+150%)");
 		public static const SwiftCasting:PerkType = mk("Swift casting", "Swift casting",
 				"When attacking with melee using a one handed weapon with no shield equipped, pc can Chose the an available spell in combat options to cast during the round. It will be used at the end of the full attack.",
 				"You've chosen the 'Swift casting' perk, allowing you to cast one of simple spells after melee attack.");
@@ -3402,15 +3421,15 @@ public class PerkLib
 				"You've chosen the 'Daoist Cultivator' perk, starting the journey on the daoist cultivators path! (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)")
 				.withBuffs({'maxsf_base':+25});
 		public static const DaoistApprenticeStage:PerkType = mk("Daoist: Apprentice Stage", "Daoist: Apprentice Stage",
-				"Your reached first stage of Daoist path. (+30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier)");
+				"Your reached first stage of Daoist path. (+50% m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages; +0.5% Soulforce regen)");
 		public static const DaoistElderStage:PerkType = mk("Daoist: Elder Stage", "Daoist: Elder Stage",
-				"Your reached third stage of Daoist path. (+100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Exalt, S.Overlord, S.Tyrant stages, +10% to max, +100% base soulforce recovery multiplier)");
+				"Your reached third stage of Daoist path. (+150% m.soulskill power, -10% soulskills cost, +200 max SF at S.Exalt, S.Overlord, S.Tyrant stages; +0.5% Soulforce regen)");
 		public static const DaoistOverlordStage:PerkType = mk("Daoist: Overlord Stage", "Daoist: Overlord Stage",
-				"Your reached fourth stage of Daoist path. (+140% soulskill/m.soulskill power, -10% soulskills cost, +300 max SF S.King, S.Emperor, S.Ancestor stages, +10% to max, +100% base soulforce recovery multiplier)");
+				"Your reached fourth stage of Daoist path. (+200% m.soulskill power, -10% soulskills cost, +300 max SF S.King, S.Emperor, S.Ancestor stages; +0.5% Soulforce regen)");
 		public static const DaoistTyrantStage:PerkType = mk("Daoist: Tyrant Stage", "Daoist: Tyrant Stage",
-				"Your reached fifth stage of Daoist path. (+150% soulskill/m.soulskill power, +70 max SF at )");
+				"Your reached fifth stage of Daoist path. (+250% m.soulskill power, +70 max SF at )");
 		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
-				"Your reached second stage of Daoist path. (+60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Sprite, S.Scholar, S.Elder stages, +5% to max, +50% base soulforce recovery multiplier)");
+				"Your reached second stage of Daoist path. (+100% m.soulskill power, -10% soulskills cost, +100 max SF at S.Sprite, S.Scholar, S.Elder stages; +0.5% Soulforce regen)");
 		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
 				"You have survived the fifth trial on cultivation path: E class Heaven Tribulation. +30% to all stats multi.").withBuffs({'str.mult':0.30,'tou.mult':0.30,'spe.mult':0.30,'int.mult':0.30,'wis.mult':0.30,'lib.mult':0.30,'sens':150}, false);
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
@@ -3418,15 +3437,15 @@ public class PerkLib
 		public static const FFclassHeavenTribulationSurvivor:PerkType = mk("FF class Heaven Tribulation Survivor", "FF class Heaven Tribulation Survivor",
 				"You have survived the fourth trial on cultivation path: FF class Heaven Tribulation. +25% to all stats multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
 		public static const FleshBodyApprenticeStage:PerkType = mk("Flesh Body: Apprentice Stage", "Flesh Body: Apprentice Stage",
-				"Your reached first stage of body cultivating. (+6 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Apprentice, S.Personage, S.Warrior stages; +0.5% HP regen)");
+				"Your reached first stage of body cultivating. (+50% p.soulskill power, +3 to unarmed attack, +4 to armor / magic resistance, +400 max HP at S.Apprentice, S.Personage, S.Warrior stages; +0.5% HP regen)");
 		public static const FleshBodyElderStage:PerkType = mk("Flesh Body: Elder Stage", "Flesh Body: Elder Stage",
-				"Your reached third stage of body cultivating. (+14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages)");
+				"Your reached third stage of body cultivating. (+150% p.soulskill power, +7 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages; +0.5% HP regen)");
 		public static const FleshBodyOverlordStage:PerkType = mk("Flesh Body: Overlord Stage", "Flesh Body: Overlord Stage",
-				"Your reached fourth stage of body cultivating. (+18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages)");
+				"Your reached fourth stage of body cultivating. (+200% p.soulskill power, +9 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages; +0.5% HP regen)");
 		public static const FleshBodyTyrantStage:PerkType = mk("Flesh Body: Tyrant Stage", "Flesh Body: Tyrant Stage",
-				"Your reached fifth stage of body cultivating. (+22 to unarmed attack, +12 to armor / magic resistance, +2000 max HP at S.Ancestor, S.Sage stages)");
+				"Your reached fifth stage of body cultivating. (+250% p.soulskill power, +11 to unarmed attack, +12 to armor / magic resistance, +2000 max HP at S.Ancestor, S.Sage stages; +0.5% HP regen)");
 		public static const FleshBodyWarriorStage:PerkType = mk("Flesh Body: Warrior Stage", "Flesh Body: Warrior Stage",
-				"Your reached second stage of body cultivating. (+10 to unarmed attack, +6 to armor / magic resistance, +800 max HP at S.Sprite, S.Scholar, S.Grandmaster stages; +0.5% HP regen)");
+				"Your reached second stage of body cultivating. (+100% p.soulskill power, +5 to unarmed attack, +6 to armor / magic resistance, +800 max HP at S.Sprite, S.Scholar, S.Grandmaster stages; +0.5% HP regen)");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
 				"You have survived the second trial on cultivation path: G class Heaven Tribulation. +15% to all stats multi.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':75}, false);
 		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
@@ -4329,7 +4348,7 @@ public class PerkLib
 			[GoliathI, GoliathII, GoliathIII, GoliathIV, GoliathV, GoliathVI], // systems functional
 			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
 			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
-			[HumanSupremacyInitial, HumanSupremacyBasic, HumanSupremacyImproved, HumanSupremacyAdvanced],//, CheetahV, CheetahVI
+			[HumanSupremacyInitial, HumanSupremacyBasic, HumanSupremacyImproved, HumanSupremacyAdvanced, HumanSupremacySuperior],//, CheetahVI
 			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
 			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
 				InsightfulResourcesV, InsightfulResourcesVI],
@@ -6892,7 +6911,8 @@ public class PerkLib
 					.requireAnyPerk(HistoryScout, PastLifeScout);
 			Whistles.requireLevel(6)
 					.requireAnyPerk(HistorySlacker, PastLifeSlacker);
-			//??Slut??
+			DoorKnob.requireLevel(6)
+					.requireAnyPerk(HistorySlut, PastLifeSlut);
 			Tongs.requireLevel(6)
 					.requireAnyPerk(HistorySmith, PastLifeSmith);
 			Amateur.requireLevel(6)
@@ -7168,7 +7188,8 @@ public class PerkLib
 					.requirePerk(SoldiersFriend);
 			LyingDown.requireLevel(24)
 					.requirePerk(Whistles);
-			//??Slut??
+			Bicycle.requireLevel(24)
+					.requirePerk(DoorKnob);
 			Bellows.requireLevel(24)
 					.requirePerk(Tongs);
 			Prostitute.requireLevel(24)
@@ -7300,7 +7321,8 @@ public class PerkLib
 					.requirePerk(PyrosFriend);
 			TakingABreak.requireLevel(42)
 					.requirePerk(LyingDown);
-			//??Slut??
+			MeatHole.requireLevel(42)
+					.requirePerk(Bicycle);
 			Furnace.requireLevel(42)
 					.requirePerk(Bellows);
 			Escort.requireLevel(42)
@@ -7324,10 +7346,15 @@ public class PerkLib
                     .requirePerk(ExpertAllRounderEducation);
             //Tier 9
             ChimericalBodySuperiorStage.requireAnyPerk(ChimericalBodySemiSuperiorStage, ChimericalBodySemiSuperiorStageEx)
-                    .requireLevel(48)
+                    .requireLevel(54)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 50;
                     }, "Fifty of any race internal mutations");
+            HumanSupremacySuperior.requirePerk(HumanSupremacyAdvanced)
+                    .requireLevel(54)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.internalHumanScore() >= 36 && player.racialScore(Races.HUMAN) > 17;
+                    }, "Thirty six human internal mutations & 18+ human score");
             GolemArmyCaptain.requireLevel(54)
                     .requireInt(160)
                     .requireWis(160)
@@ -7406,7 +7433,8 @@ public class PerkLib
 					.requirePerk(HeavysFriend);
 			SkippingWork.requireLevel(72)
 					.requirePerk(TakingABreak);
-			//??Slut??
+			BedWarmer.requireLevel(72)
+					.requirePerk(MeatHole);
 			Hammer.requireLevel(72)
 					.requirePerk(Furnace);
 			BrothelOwner.requireLevel(72)
@@ -7478,7 +7506,8 @@ public class PerkLib
 					.requirePerk(EngineersFriend);
 			Napping.requireLevel(102)
 					.requirePerk(SkippingWork);
-			//??Slut??
+			TensionTamer.requireLevel(102)
+					.requirePerk(BedWarmer);
 			Anvil.requireLevel(102)
 					.requirePerk(Hammer);
 			Pornstar.requireLevel(102)
@@ -7527,7 +7556,8 @@ public class PerkLib
 					.requirePerk(SnipersFriend);
 			ZZZ.requireLevel(180)
 					.requirePerk(Napping);
-			//??Slut??
+			PartyBoyGirl.requireLevel(180)
+					.requirePerk(TensionTamer);
 			Weap0n.requireLevel(180)
 					.requirePerk(Anvil);
 			SexChampion.requireLevel(180)
@@ -7569,4 +7599,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

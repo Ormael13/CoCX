@@ -447,6 +447,45 @@ public class Creature extends Utils
 			}
 			return false;
 		}
+		public function trainStatCap(statName: String, limit: Number):Number {
+			var cap:Number = limit;
+			switch (statName) {
+				case "str":
+					var str:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 3) str += 0.2;
+					cap *= str;
+					break;
+				case "tou":
+					var tou:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBonesIM) >= 3) tou += 0.2;
+					cap *= tou;
+					break;
+				case "spe":
+					var spe:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3) spe += 0.2;
+					cap *= spe;
+					break;
+				case "int":
+					var inte:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 3) inte += 0.2;
+					cap *= inte;
+					break;
+				case "wis":
+					//cap += 16 * host.perkv1(PerkLib.AscensionTranshumanismWis);
+					//cap += host.perkv1(PerkLib.SoulTempering);
+					var wis:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanSmartsIM) >= 3) wis += 0.2;
+					cap *= wis;
+					break;
+				case "lib":
+					var lib:Number = 1;
+					if (game.player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3) lib += 0.2;
+					cap *= lib;
+					break;
+			}
+			cap = Math.round(cap);
+			return cap;
+		}
 
 		/**
 		 * Adds a curse effect to the creature.
@@ -850,6 +889,10 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				max2 += (0.01 * bonus);
 			}
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 4) max2 += 0.1;
+			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) max2 += 0.1;
 			max1 *= max2;//~170%
 			max1 = Math.round(max1);
 			return Math.min(339999,max1);
@@ -1737,7 +1780,7 @@ public class Creature extends Utils
 		}
 
 		//Functions
-		public function gainOrLosePerk(ptype:PerkType, condition:Boolean, gainText:String = "", loseText:String = "", addLossCondition:Boolean = false, gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
+		public function gainOrLosePerk(ptype:PerkType, condition:Boolean, gainText:String = "", loseText:String = "", addLossCondition:Boolean = true, gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
 			if (!hasPerk(ptype) && condition) {
 				createPerk(ptype, value1, value2, value3, value4);
 				if (doOutput) EngineCore.outputText("\n" + gainText + "\n\n(<b>Gained Perk: "+ptype.name()+"</b> - " + ptype.desc() + ")\n");
@@ -2367,8 +2410,16 @@ public class Creature extends Utils
 			//Wet pussy provides 50 point boost
 			if (hasPerk(PerkLib.WetPussy))
 				bonus += 50;
-			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut))
+			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut)) {
 				bonus += 20;
+				if (hasPerk(PerkLib.DoorKnob)) bonus += 5;
+				if (hasPerk(PerkLib.Bicycle)) bonus += 5;
+				if (hasPerk(PerkLib.MeatHole)) bonus += 5;
+				if (hasPerk(PerkLib.BedWarmer)) bonus += 5;
+				if (hasPerk(PerkLib.TensionTamer)) bonus += 5;
+				if (hasPerk(PerkLib.PartyBoyGirl)) bonus += 5;
+				if (hasPerk(PerkLib.MattressActressActor)) bonus += 5;
+			}
 			if (hasPerk(PerkLib.OneTrackMind))
 				bonus += 10;
 			if (hasPerk(PerkLib.Cornucopia))
@@ -2388,8 +2439,16 @@ public class Creature extends Utils
 			// Goo body - "infinite"
 			if (isGoo())
 				bonus += 9000;
-			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut))
+			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut)) {
 				bonus += 20;
+				if (hasPerk(PerkLib.DoorKnob)) bonus += 5;
+				if (hasPerk(PerkLib.Bicycle)) bonus += 5;
+				if (hasPerk(PerkLib.MeatHole)) bonus += 5;
+				if (hasPerk(PerkLib.BedWarmer)) bonus += 5;
+				if (hasPerk(PerkLib.TensionTamer)) bonus += 5;
+				if (hasPerk(PerkLib.PartyBoyGirl)) bonus += 5;
+				if (hasPerk(PerkLib.MattressActressActor)) bonus += 5;
+			}
 			if (hasPerk(PerkLib.Cornucopia))
 				bonus += 30;
 			if (hasPerk(PerkLib.OneTrackMind))
@@ -2628,8 +2687,10 @@ public class Creature extends Utils
 				quantity *= 1.1;
 			if (perkv1(IMutationsLib.HumanTesticlesIM) >= 3 && game.player.racialScore(Races.HUMAN) > 17)
 				quantity *= 2;
-			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3)
-				quantity *= 2.5;
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) {
+				if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) quantity *= 3;
+				else quantity *= 2.5;
+			}
 			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
 			if (hasPerk(PerkLib.FerasBoonAlpha))
@@ -3555,34 +3616,14 @@ public class Creature extends Utils
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
-				return -1;
-			else {
-				if (hasPerk(PerkLib.SpiderOvipositor)) {
-					addPerkValue(PerkLib.SpiderOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
-					return perkv1(PerkLib.SpiderOvipositor);
-				}
-				else if (hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) {
-					addPerkValue(PerkLib.BeeOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
-					return perkv1(PerkLib.BeeOvipositor);
-				}
-				else if (hasPerk(PerkLib.MantisOvipositor)) {
-					addPerkValue(PerkLib.MantisOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
-					return perkv1(PerkLib.MantisOvipositor);
-				}
-				else {
-					addPerkValue(PerkLib.AntOvipositor, 1, arg);
-					if (eggs() > 50)
-						setPerkValue(PerkLib.AntOvipositor, 1, 50);
-					return perkv1(PerkLib.AntOvipositor);
-				}
-			}
+			var oviPerk:PerkType = getOviPerk();
+			if (oviPerk == null) return -1;
+			addPerkValue(oviPerk, 1, arg);
+			if (eggs() > maxEggs) setPerkValue(oviPerk, 1, maxEggs);
+
+			if(eggs() >= 40) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+			else if(eggs() >= 20) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+			return eggs();
 		}
 
 		public function dumpEggs():void {
@@ -3613,6 +3654,8 @@ public class Creature extends Utils
 			if (oviPerk == null) return -1;
 			setPerkValue(oviPerk, 1, arg);
 			if (eggs() > maxEggs) setPerkValue(oviPerk, 1, maxEggs);
+			if(eggs() >= 40) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+			else if(eggs() >= 20) buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
 			return perkv1(oviPerk);
 		}
 
@@ -4705,4 +4748,4 @@ public class Creature extends Utils
 			}
 		}
 	}
-}
+}

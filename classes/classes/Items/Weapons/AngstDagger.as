@@ -11,7 +11,7 @@ public class AngstDagger extends Weapon {
 		
 		public function AngstDagger() 
 		{
-			super("AngstD1","AngstDagger","Angst Dagger","an Angst Dagger","stab",21,1680,"A small blade filled with anger. To fully unleash potential of this deadly blade is required 300+ speed and 60+ strength.", WP_SMALL, WT_DAGGER);
+			super("AngstD1","AngstDagger","Angst Dagger","an Angst Dagger","stab",20,1600,"A small blade filled with anger. To fully unleash potential of this deadly blade is required 300+ speed and 60+ strength.", WP_SMALL, WT_DAGGER);
 		}
 		
 		override public function get attack():Number {
@@ -22,7 +22,7 @@ public class AngstDagger extends Weapon {
 			if (game.player.str >= 30 && game.player.spe >= 150) boost += 3;
 			if (game.player.str >= 20 && game.player.spe >= 100) boost += 3;
 			if (game.player.str >= 10 && game.player.spe >= 50) boost += 3;
-			return (3 + boost);
+			return (2 + boost);
 		}
 	}
 }

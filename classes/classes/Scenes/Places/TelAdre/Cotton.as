@@ -989,8 +989,8 @@ public function cottonTantricSex():void {
 	outputText("After a few minutes, you feel your strength ebbing back into you and you get up. Cotton does the same, and you both spend the time to clean the mat of the results of your escapades, before retreating to the showers to clean each other up. Once that's over, you both leave the gym hand-in-hand, with Cotton giving your hand a final squeeze before you depart to your camp.");
 	player.sexReward("cum", "VaginalAnal");
 	dynStats("tou", .25, "spe", .25, "lib", -.25, "sen", -.25);
-	player.trainStat("tou", +1, 75);
-	player.trainStat("spe", +1, 100);
+	player.trainStat("tou", +1, player.trainStatCap("tou",75));
+	player.trainStat("spe", +1, player.trainStatCap("spe",100));
 	if(player.hasVagina()) cottonPregPCChance();
 	doNext(camp.returnToCampUseOneHour);
 }

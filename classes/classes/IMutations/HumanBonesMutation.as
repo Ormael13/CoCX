@@ -25,7 +25,7 @@ public class HumanBonesMutation extends IMutationPerkType
                 descS += "10. Increase effects of body cultivation by 50%.";
             }
             if (pTier == 3){
-                descS += "10. Increase effects of body cultivation by 50%. ";
+                descS += "10, maximum trainable Int/Wis by 20%. Increase effects of body cultivation by 50%. ";
             }
             return descS;
         }
@@ -87,7 +87,7 @@ public class HumanBonesMutation extends IMutationPerkType
 
         public function HumanBonesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BONE, 2);
+			super(mName + " IM", mName, SLOT_BONE, 3);
 		}
 		
 	}

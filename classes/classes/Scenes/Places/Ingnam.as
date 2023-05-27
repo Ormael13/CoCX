@@ -270,9 +270,42 @@ public class Ingnam extends BaseContent
 						totalItems += player.itemSlots[slot].quantity;
 					}
 				}
-				addButton(13, "Prev", sellAtTradingPost, page - 1);
+				addButton(12, "Prev", sellAtTradingPost, page - 1);
+				if (inventory.getMaxSlots() > 20) addButton(13, "Next", sellAtTradingPost, page + 1);
 			}
-			if (totalItems > 1) addButton(12, "Sell All", shopTradingPostSellAll);
+			if (page == 3) {
+				for (slot = 20; slot < 30; slot++) {
+					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 3) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						addButton(slot-20, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
+						totalItems += player.itemSlots[slot].quantity;
+					}
+				}
+				addButton(12, "Prev", sellAtTradingPost, page - 1);
+				if (inventory.getMaxSlots() > 30) addButton(13, "Next", sellAtTradingPost, page + 1);
+			}
+			if (page == 4) {
+				for (slot = 30; slot < 40; slot++) {
+					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 3) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						addButton(slot-30, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
+						totalItems += player.itemSlots[slot].quantity;
+					}
+				}
+				addButton(12, "Prev", sellAtTradingPost, page - 1);
+				if (inventory.getMaxSlots() > 40) addButton(13, "Next", sellAtTradingPost, page + 1);
+			}
+			if (page == 5) {
+				for (slot = 40; slot < 50; slot++) {
+					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 3) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						addButton(slot-40, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
+						totalItems += player.itemSlots[slot].quantity;
+					}
+				}
+				addButton(12, "Prev", sellAtTradingPost, page - 1);
+			}
+			if (totalItems > 1) addButton(11, "Sell All", shopTradingPostSellAll);
 			addButton(14, "Back", shopTradingPost);
 		}
 		private function shopTradingPostSell(slot:int):void {
@@ -309,7 +342,7 @@ public class Ingnam extends BaseContent
 		private function shopTradingPostSellAll():void {
 			var itemValue:int = 0;
 			clearOutput();
-			for (var slot:int = 0; slot < 20; slot++) {
+			for (var slot:int = 0; slot < 50; slot++) {
 				if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 					itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
 					player.itemSlots[slot].quantity = 0;

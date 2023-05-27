@@ -175,6 +175,7 @@ public class TempleOfTheDivine extends BaseContent {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fera</b>\n");
 				player.removeStatusEffect(StatusEffects.BlessingOfDivineFera);
+				player.minLustXStat.removeBuff("FerasBlessing");
 			}
 		}
 
@@ -240,6 +241,7 @@ public class TempleOfTheDivine extends BaseContent {
 			loseBlessing("Fera");
 			outputText("<b>You gained the Blessing of Divine Agency - Fera for 7 days</b>");
 			player.createStatusEffect(StatusEffects.BlessingOfDivineFera, 169, 0, 0, 0);
+			player.buff("FerasBlessing").setStat("minlustx", 0.15).forHours(169).withText("Fera's Blessing");
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", 10);
 			doNext(camp.returnToCampUseOneHour);

@@ -32,6 +32,7 @@ import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.Places.RuinedTownRebuilt;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Soulforce;
@@ -171,7 +172,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
 			var maxSlots:int = inventory.getMaxSlots();
-			player.itemSlot6.unlocked = maxSlots >= 6;
 			player.itemSlot7.unlocked = maxSlots >= 7;
 			player.itemSlot8.unlocked = maxSlots >= 8;
 			player.itemSlot9.unlocked = maxSlots >= 9;
@@ -186,6 +186,36 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			player.itemSlot18.unlocked = maxSlots >= 18;
 			player.itemSlot19.unlocked = maxSlots >= 19;
 			player.itemSlot20.unlocked = maxSlots >= 20;
+			player.itemSlot21.unlocked = maxSlots >= 21;
+			player.itemSlot22.unlocked = maxSlots >= 22;
+			player.itemSlot23.unlocked = maxSlots >= 23;
+			player.itemSlot24.unlocked = maxSlots >= 24;
+			player.itemSlot25.unlocked = maxSlots >= 25;
+			player.itemSlot26.unlocked = maxSlots >= 26;
+			player.itemSlot27.unlocked = maxSlots >= 27;
+			player.itemSlot28.unlocked = maxSlots >= 28;
+			player.itemSlot29.unlocked = maxSlots >= 29;
+			player.itemSlot30.unlocked = maxSlots >= 30;
+			player.itemSlot31.unlocked = maxSlots >= 31;
+			player.itemSlot32.unlocked = maxSlots >= 32;
+			player.itemSlot33.unlocked = maxSlots >= 33;
+			player.itemSlot34.unlocked = maxSlots >= 34;
+			player.itemSlot35.unlocked = maxSlots >= 35;
+			player.itemSlot36.unlocked = maxSlots >= 36;
+			player.itemSlot37.unlocked = maxSlots >= 37;
+			player.itemSlot38.unlocked = maxSlots >= 38;
+			player.itemSlot39.unlocked = maxSlots >= 39;
+			player.itemSlot40.unlocked = maxSlots >= 40;
+			player.itemSlot41.unlocked = maxSlots >= 41;
+			player.itemSlot42.unlocked = maxSlots >= 42;
+			player.itemSlot43.unlocked = maxSlots >= 43;
+			player.itemSlot44.unlocked = maxSlots >= 44;
+			player.itemSlot45.unlocked = maxSlots >= 45;
+			player.itemSlot46.unlocked = maxSlots >= 46;
+			player.itemSlot47.unlocked = maxSlots >= 47;
+			player.itemSlot48.unlocked = maxSlots >= 48;
+			player.itemSlot49.unlocked = maxSlots >= 49;
+			player.itemSlot50.unlocked = maxSlots >= 50;
 			if (flags[kFLAGS.SOCK_COUNTER] > 0) {
 				flags[kFLAGS.SOCK_COUNTER]--;
 				if (flags[kFLAGS.SOCK_COUNTER] < 0) flags[kFLAGS.SOCK_COUNTER] = 0;
@@ -389,6 +419,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (Garden.GardenSlot10Time > 0) Garden.GardenSlot10Time -= 1;
 			if (Garden.GardenSlot11Time > 0) Garden.GardenSlot11Time -= 1;
 			if (Garden.GardenSlot12Time > 0) Garden.GardenSlot12Time -= 1;
+			//Ruined Town
+			if (RuinedTownRebuilt.AmilyAngerCooldown > 0) RuinedTownRebuilt.AmilyAngerCooldown -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
 				//Balls
@@ -681,6 +713,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.BlessingOfDivineFera) <= 0) {
 					outputText("\n<b>The divine blessing starts to fade. You think it’s high time you go back to the temple and pray.</b>\n");
 					player.removeStatusEffect(StatusEffects.BlessingOfDivineFera);
+					player.buff("FerasBlessing").remove();
 					needNext = true;
 				}
 			}
@@ -725,6 +758,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.statusEffectv1(StatusEffects.Luststick) <= 0) {
 					player.removeStatusEffect(StatusEffects.Luststick);
+					player.buff("Luststick").remove();
 					dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
 					outputText("\n<b>The lust-increasing effects of harpy lipstick have worn off!\n</b>");
 					needNext = true;
@@ -1135,7 +1169,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							else if (player.hasVagina()) player.goIntoHeat(false);
 							break;
 					}
-					player.statStore.replaceBuffObject({ 'str': changeV*ngMult,'tou': changeV*ngMult,'spe': changeV*ngMult}, 'Lycanthropy', { text: 'Lycanthropy'});
+					player.statStore.replaceBuffObject({ 'str': changeV*ngMult,'tou': changeV*ngMult,'spe': changeV*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 					player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
 					needNext = true;
 				}
@@ -1247,6 +1281,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.ballSize > 4) {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.\n");
 					}
+					player.buff("EasterBunnyBalls").setStat("minlust", 0.1 * player.ballSize).withText("Easter Bunny Balls");
 				}
 				//Armor daily event
 				//Scandalous succubus armor and other corruption updates
@@ -1297,8 +1332,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					var cloneDao:int = player.statusEffectv1(clone);
 					if (cloneDao > 10 && cloneDao < 21) {
 						for (var i:int = 0; i < Soulforce.daos.length; ++i) {
-							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension())
+							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension()) {
 								SceneLib.soulforce.daoContemplationsEffect(Soulforce.daos[i][1], Soulforce.daos[i][0], true);
+								needNext = true;
+							}
 						}
 					}
 				}
@@ -1335,6 +1372,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 2) SceneLib.zenjiScene.loverZenjiSleepWithCatchAnalMorning();
 					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 3) SceneLib.zenjiScene.loverZenjiSleepWithNoSexMorning();
 					needNext = true;
+				}
+				if (SophieFollowerScene.HarpyEggHatching) { //Egg progression
+					if (SophieFollowerScene.HarpyEggDay <= 2) outputText(" The proximity of your egg is soothing to your motherly instincts.");
+					else if (SophieFollowerScene.HarpyEggDay <= 4) outputText(" Your egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
+					else if (SophieFollowerScene.HarpyEggDay <= 7) outputText(" Snuggling the egg you instinctively know your precious child is almost ready to be born.");
+					SophieFollowerScene.HarpyEggDay += 1;
+					if (SophieFollowerScene.HarpyEggDay == 7){
+						SophieFollowerScene.HarpyEggDay = 0;
+						SophieFollowerScene.HarpyEggHatching = false;
+						SophieFollowerScene.HarpyEggReady = true;
+					}
 				}
 			}
 			//Heaven Tribulations
@@ -1446,6 +1494,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.ballSize = 1;
 				var changeLib1:Number = (player.ballSize*5/100)+1; //Exemple (1*5/100)+1= 1.05 wich is the modifier to libido
 				player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib1).withText("Easter Bunny Balls");
+				player.buff("EasterBunnyBalls").setStat("minlust", 0.1 * player.ballSize).withText("Easter Bunny Balls");
 				player.removeStatusEffect(StatusEffects.EasterBunnyCame); //Remove cumming status
 				flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
 				if (player.balls == 4)flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+=2;
@@ -2077,9 +2126,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Tail Hunger
-			needNext ||= player.gainOrLosePerk(PerkLib.ManticoreCumAddict, player.tailType == Tail.MANTICORE_PUSSYTAIL, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.", function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
+			needNext ||= player.gainOrLosePerk(PerkLib.ManticoreCumAddict, player.tailType == Tail.MANTICORE_PUSSYTAIL, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tail pussy is dying for a mans meat and you feel that as long as you don't sate it, you will only be getting hornier! Cum... You need cum, a lot of it. It’s obvious now why manticores are this crazy for sex as you feel the urge to pounce and feed on every single male in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.", true, function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
 			//Milk Hunger
-			needNext ||= player.gainOrLosePerk(PerkLib.DisplacerMilkAddict, player.rearBody.type == RearBody.DISPLACER_TENTACLES, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.", function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
+			needNext ||= player.gainOrLosePerk(PerkLib.DisplacerMilkAddict, player.rearBody.type == RearBody.DISPLACER_TENTACLES, "You suddenly feel a desire to eat, or rather, drink. It's like you have been thirsty for months, yet the thirst does not originate from your throat. Your tentacles are dying for milks and you feel that as long as you don't sate them, you will only be getting hornier! Milk... You need milk, a lot of it. It’s obvious now why displacer beasts are this crazy for sex as you feel the urge to pounce and feed on every single pair of breast in Mareth you can find!", "You suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.", true, function():void { flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 50; });
 			//Vampire Thirst
 			if (player.faceType == Face.VAMPIRE && !player.hasStatusEffect(StatusEffects.VampireThirst)) {
 				outputText("\nAn ominous thirst settle in your throat as you begin to hallucinate glasses of blood... how delicious it would feel on your palates. You realise you are salivating and do your best to control yourself. Still you now are clearly dependant on blood.\n");

@@ -11,7 +11,7 @@ public class AngstDaggers extends Weapon {
 		
 		public function AngstDaggers()
 		{
-			super("AngstD","AngstDaggers","Angst Daggers","a set of Angst Daggers","stab",21,3360,"A pair of small blades filled with anger. To fully unleash potential of those deadly blades is required 300+ speed and 60+ strength.", WP_DUAL_SMALL, WT_DAGGER);
+			super("AngstD","AngstDaggers","Angst Daggers","a set of Angst Daggers","stab",20,3200,"A pair of small blades filled with anger. To fully unleash potential of those deadly blades is required 300+ speed and 60+ strength.", WP_DUAL_SMALL, WT_DAGGER);
 		}
 		
 		override public function get attack():Number {
@@ -22,7 +22,7 @@ public class AngstDaggers extends Weapon {
 			if (game.player.str >= 30 && game.player.spe >= 150) boost += 3;
 			if (game.player.str >= 20 && game.player.spe >= 100) boost += 3;
 			if (game.player.str >= 10 && game.player.spe >= 50) boost += 3;
-			return (3 + boost);
+			return (2 + boost);
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {

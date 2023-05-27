@@ -17,7 +17,7 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
 		override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1) descS += "Your human adrenal glands are giving you slight boost to your natural stamina";
+            if (pTier >= 1) descS += "Your human adrenal glands are giving you "+(pTier >= 4 ? "" : "slight ")+"boost to your natural stamina";
             if (pTier == 1){
                 descS += " and increasing Diehard limit by 5%";
             }
@@ -25,7 +25,10 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
                 descS += ", strength, speed and increasing Diehard limit by 10%";
             }
             if (pTier == 3){
-                descS += ", strength, speed, wrath Gained from taking damage and dealing damage increased and rising Diehard limit by 25%";
+                descS += ", strength, speed, wrath gained naturaly increased and rising Diehard limit by 25%";
+            }
+            if (pTier == 4){
+                descS += ", strength, speed; wrath gained naturaly and from taking damage or dealing damage increased; rising Diehard limit by 50%";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -40,6 +43,9 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -85,13 +91,18 @@ public class HumanAdrenalGlandsMutation extends IMutationPerkType
 					pBuffs['str.mult'] = 0.7;
 					pBuffs['spe.mult'] = 0.7;
 				}
+				else if (pTier == 4) {
+					pBuffs['tou.mult'] = 1.8;
+					pBuffs['str.mult'] = 1.8;
+					pBuffs['spe.mult'] = 1.8;
+				}
 			}
             return pBuffs;
         }
 
         public function HumanAdrenalGlandsMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADRENALS, 3);
+			super(mName + " IM", mName, SLOT_ADRENALS, 4);
 		}
 		
 	}

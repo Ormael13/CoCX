@@ -13,6 +13,7 @@ import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Places.RuinedTownRebuilt;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
 import classes.display.SpriteDb;
@@ -238,10 +239,11 @@ public class Camp extends NPCAwareContent{
 			SceneLib.tyrantia.unlockingCorruptLegendariesOption();
 			return;
 		}
-	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
-			//hideMenus();
-			// SceneLib.AbandonedTownRebuilt.AmilyRebuild();
-	//	}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && RuinedTownRebuilt.RebuildState == 0 && !RuinedTownRebuilt.AmilyAtWetBitch) {
+			hideMenus();
+			SceneLib.ruinedTown.amilyRebuild();
+			return;
+		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
 			//No corrupt: Jojo, Amily, or Vapula
@@ -3011,7 +3013,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
-			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(10, "Relax", NPCsRelax);
 		}
 		addButton(0, "Chi Chi", toggleNPCStatus, StatusEffects.ChiChiOff).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(1, "Diana", toggleNPCStatus, StatusEffects.DianaOff).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
@@ -3021,6 +3023,8 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
+		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] < 2) addButton(11, "Activate", GottaCampThemALLOn).hint("Turn on 'Gotta Camp them ALL' Mode.");
+		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) addButton(11, "Deactivate", GottaCampThemALLOff).hint("Turn off 'Gotta Camp them ALL' Mode.");
         addButton(12, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
@@ -3042,6 +3046,16 @@ public class Camp extends NPCAwareContent{
 	private function NPCsRelax():void {
 		outputText("\n\nPlaceholder text about telling NPC's to relax.");
 		flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
+		doNext(SparrableNPCsMenu);
+	}
+	private function GottaCampThemALLOn():void {
+		outputText("\n\nPlaceholder text about turning on 'Gotta Camp them ALL' mode.");
+		flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] = 2;
+		doNext(SparrableNPCsMenu);
+	}
+	private function GottaCampThemALLOff():void {
+		outputText("\n\nPlaceholder text about turning off 'Gotta Camp them ALL' mode.");
+		flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] = 1;
 		doNext(SparrableNPCsMenu);
 	}
 
@@ -3665,17 +3679,6 @@ public class Camp extends NPCAwareContent{
 					outputText(" as you sleep for " + num2Text(timeQ) + " ");
 					if (timeQ == 1) outputText("hour.\n");
 					else outputText("hours.\n")
-					if (SophieFollowerScene.HarpyEggHatching) { //Egg progression
-						if (SophieFollowerScene.HarpyEggDay <= 7) outputText(" Snuggling the egg you instinctively know your precious child is almost ready to be born.");
-						else if (SophieFollowerScene.HarpyEggDay <= 4) outputText(" Your egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
-						else if (SophieFollowerScene.HarpyEggDay <= 2) outputText(" The proximity of your egg is soothing to your motherly instincts.");
-						SophieFollowerScene.HarpyEggDay += 1;
-						if (SophieFollowerScene.HarpyEggDay == 7){
-							SophieFollowerScene.HarpyEggDay = 0;
-							SophieFollowerScene.HarpyEggHatching = false;
-							SophieFollowerScene.HarpyEggReady = true;
-						}
-					}
 				}
 				else if (player.isRaceCached(Races.IMP, 3)) {
 					outputText("Done with your day you open the tome and dive into the security of your personal sanctuary. ");
@@ -4823,4 +4826,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
