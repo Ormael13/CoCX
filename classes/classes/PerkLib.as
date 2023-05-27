@@ -2441,7 +2441,7 @@ public class PerkLib
 				"You've chosen the 'Power Shot' perk. Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)");
 		public static const PowerSweep:PerkType = mk("Power Sweep", "Power Sweep",
 				"Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).",
-				"You've chosen the 'Power Sweep' perk.  This allows you to improve your Whirlwind attack.");
+				"You've chosen the 'Power Sweep' perk. Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).");
 		public static const PracticedShot:PerkType = mk("Practiced shot", "Practiced shot",
 				"Increase traditional range weapons (like bows) base attack by 50%. (+10% range physical attacks multiplier)",
 				"You've chosen the 'Practiced shot' perk, increasing traditional range weapons base attack. (+10% range physical attacks multiplier)");

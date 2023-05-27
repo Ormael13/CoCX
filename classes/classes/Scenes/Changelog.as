@@ -47,6 +47,9 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Asura Toughness. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Gain Asura Toughness. If you can use Warrior's Rage if would have increased boost and even could activate it with Asura Form for no additonal cost. (+10% of OverMax Wrath/Base TOU Cap, +0,5% Wrath generated)\n");
 			outputText("-New melee weapon (by Ormael): Dual Nodachi - can be gained by combining 2x Kama weapon. Cost 5200 gems. Base atk is 65. It's Dual Massive weapon belonging to dueling sword type, max base atk value reached at 250+ strength.\n");
 			outputText("-New melee weapon (by Ormael): Kama Whip - buyable at Eraendir shop. Cost 240 gems. Base atk is 2. It's small weapon belonging to (scythe) exotic type, can be thrown or used in whipping specials. Have 10% chance to proc bleed.\n");
+			outputText("-New melee weapon (by Ormael): Two Bladed Scythe - buyable at Orsbulg shop. Cost 2,400 gems. Base atk is 30. It's large weapon belonging to (scythe) exotic type, can be used in whirlwind specials. Have 25% chance to proc bleed.\n");
+			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
+			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
@@ -80,9 +83,6 @@ public class Changelog extends BaseContent
 			outputText("-Added to combat stats tracker how much armor reduce physical/magical dmg.\n");
 			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
 			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
-			outputText("-New melee weapon (by Ormael): Two Bladed Scythe - buyable at Orsbulg shop. Cost 2,400 gems. Base atk is 30. It's large weapon belonging to (scythe) exotic type, can be used in whirlwind specials. Have 25% chance to proc bleed.\n");
-			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
-			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-In Camp Actions > Misc menu added option to combine or separate specific weapons. For example 2 Kama weapons combine into 1 Dual Kama weapon or separate 1 Dual Kama into 2 Kama weapons.\n");
 			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
 			outputText("-Dual Daggers, Angst Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
@@ -159,7 +159,14 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 misc lvl-up perk: Bed Warmer. Req. Meat Hole perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-New tier 17 misc lvl-up perk: Tension Tamer. Req. Bed Warmer perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-New tier 30 misc lvl-up perk: Party Boy/Girl. Req. Tension Tamer perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
-			outputText("-\n");
+			outputText("-All inventory types slots capacity increased by 5. (Pearl 15 > 20, rest 5 > 10)\n");
+			/*outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -179,6 +186,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
@@ -230,13 +246,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier ?? misc lvl-up perk: Mattress Actress/Actor. Req. Party Boy/Girl perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");.
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -249,6 +259,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -276,11 +287,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

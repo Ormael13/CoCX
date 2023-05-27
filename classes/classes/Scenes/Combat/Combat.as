@@ -13104,8 +13104,9 @@ public function RandomTeaseLustStrike():void {
             "waving the demonic signs and delivering your unholy magic directly into your victim's endowment. [monster His] ");
     if (monster.hasCock() > 0) outputText("cock drools black precum, swelling in size");
     if (monster.hasCock() && monster.hasVagina()) outputText(" as [monster his] ");
-    if (monster.hasVagina()) outputText("pussy starts gushing like a fountain, lips swelling with arousal. ");
-    if (monster.hasCock() && monster.hasVagina()) outputText("They");
+    if (monster.hasVagina()) outputText("pussy starts gushing like a fountain, lips swelling with arousal");
+	outputText(". ");
+    if (monster.hasCock() && monster.hasVagina()) outputText(". They");
     else outputText("It");
     outputText(" pulse");
     if (monster.hasCock() && monster.hasVagina()) outputText("s");
