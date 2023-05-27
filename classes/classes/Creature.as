@@ -4748,4 +4748,4 @@ public class Creature extends Utils
 			}
 		}
 	}
-}
+}

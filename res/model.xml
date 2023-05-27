@@ -5238,6 +5238,11 @@
 		<if test="skullOrnament">
 			<show part="clotheHead_bg/warlockSkulls"/>
 		</if>
+		
+		<!-- Cow hat -->
+		<if test="CowGirlHat">
+			<show part="clotheHead/CowGirl"/>
+		</if>
 
 		<!-- Demon tail ring -->
 		<if test="demonTailRing">
@@ -5612,6 +5617,25 @@
 					<hide part="balls/*"/>
 					<hide part="pussy/*"/>
 					<hide part="overpussy/*"/>
+				</if>
+			</if>
+		</if>
+		
+		<if test="CowGirlOutfit">
+			<if test="showClothing">
+				<show part="clotheBehindBreast/cowgirlClothe"/>
+				<show part="armorNeck/CowgirlClothe"/>
+				<show part="clothCape_fg/cowgirlClothe"/>
+				<if test="showArmClothing">
+					<show part="clothRightArm/cowgirlClothe"/>
+				</if>
+				<if test="showLegClothing">
+					<show part="clotheLegs/cowgirlClothe"/>
+					<else>
+						<if test="lowerbody == LowerBody.HOOFED or lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
+							<show part="clotheLegs/cowgirlClothe"/>
+						</if>
+					</else>
 				</if>
 			</if>
 		</if>

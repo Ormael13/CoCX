@@ -16091,6 +16091,8 @@ public function firearmsForce():Number {
 		}
 		else mod *= 1.5;
 	}
+    if (player.hasPerk(PerkLib.CowGunslingerOutfit)) mod += .5;//125% up to here
+    if (player.jewelryName == "cow girl hat") mod += .25;
 	mod += rangePhysicalForce();
 	mod = Math.round(mod * 100) / 100;
     return mod;
@@ -16533,4 +16535,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

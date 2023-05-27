@@ -89,6 +89,7 @@ public final class ArmorLib extends ItemConstants
 				.withTag(ItemTags.A_REVEALING)
 				.withTag(ItemTags.A_AGILE) as Armor;
 		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 0, 40, "A set of classy suitclothes.", "Light");
+		public const CGUNSLI:CowGunslingerOutfit = new CowGunslingerOutfit();
 		public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
 		public const CTHPALA:CentaurPaladinArmor = new CentaurPaladinArmor();
 		public const CTPALAD:CentaurArmor = new CentaurArmor();

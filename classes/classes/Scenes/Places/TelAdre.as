@@ -1113,6 +1113,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(6, "I.Q.Gown", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "VladimirReg", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "Asterius", "You already bought item from Kaiba today.");
+			addButtonDisabled(9, "C.G Hat", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
@@ -1121,6 +1122,8 @@ public function kaibaShopMainMenu2():void {
 			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
 			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly evil magical axes rumored to be the artefact of the fallen war deity Asterius.");
+			addButton(9, "C.G Hat", buyItem, headjewelries.COWHAT).hint("Cow Girl Hat - This hat was retrieved from an offworld gunslinger who became a cow. As such aside from its powerful enchantment that increase firearms potency it also raise milk production by 25%.");
+
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);

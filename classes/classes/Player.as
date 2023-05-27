@@ -4313,6 +4313,10 @@ use namespace CoC;
 			}
 			if (necklaceName == "Cow bell")
 				total *= 1.5;
+			if (armor == game.armors.CGUNSLI)
+				total *= 1.5;
+			if (headJewelry == game.headjewelries.COWHAT)
+				total *= 1.25;
 			if (upperGarment == game.undergarments.COW_BRA)
 				total *= 1.5;
 			if (lowerGarment == game.undergarments.COW_PANTY)
