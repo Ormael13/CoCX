@@ -3267,6 +3267,10 @@ public class PerkLib
 		// Melee & Range weapon perks
 		public static const BladeWarden:PerkType = mk("Blade-Warden", "Blade-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
+		public static const CowGunslingerOutfit:PerkType = mk("Cow Gunslinger Outfit", "Cow Gunslinger Outfit",
+			"Increase the damage of all gun attack and increase milk production by 50%.",null,true);
+		public static const CowGunslingerHat:PerkType = mk("Cow Gunslinger Hat", "Cow Gunslinger Hat",
+			"Increase the damage of all gun attack by 25% and increase milk production by 25%.",null,true);
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
@@ -3276,7 +3280,9 @@ public class PerkLib
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
 		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
-				"Increase the potency of all spells and soulskills by up to 100% based on corruption and empower all corrupted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
+			"Increase the potency of all spells and soulskills by up to 100% based on corruption and empower all corrupted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
+
+
 		public static const WildWarden:PerkType = mk("Wild-Warden", "Wild-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 
@@ -7599,4 +7605,4 @@ public class PerkLib
         }
 	}
 }
-}
+}
