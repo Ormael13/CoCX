@@ -50,11 +50,13 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Two Bladed Scythe - buyable at Orsbulg shop. Cost 2,400 gems. Base atk is 30. It's large weapon belonging to (scythe) exotic type, can be used in whirlwind specials. Have 25% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Kama - buyable at Eraendir shop. Cost 320 gems. Base atk is 4. It's small weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
 			outputText("-New melee weapon (by Ormael): Dual Kama - can be gained by combining 2x Kama weapon. Cost 640 gems. Base atk is 4. It's small dual weapon belonging to (scythe) exotic type. Have 10% chance to proc bleed.\n");
+			outputText("-New melee weapon (by Liadri): Hellraiser - obtainable by giving Demonic Scythe to Corrupted Celess to corrupt. Atk value 90 (at 100+str), can apply bleed (100%), used with whirlwind special, 200% to spellpower.\n");
 			outputText("-New range weapon (by Shadeogorath): Alakablam - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from inner forest area. Cost 760 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 10%.\n");
 			outputText("-New flying sword: White Half-Moon Duo - combined from two White Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal fire damage instead of physical damage.\n");
 			outputText("-New flying sword: Black Half-Moon Duo - combined from two Black Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal ice damage instead of physical damage.\n");
 			outputText("-New flying sword: Scarlet Half-Moon Duo - combined from two Scarlet Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal lightning damage instead of physical damage.\n");
 			outputText("-New flying sword: Ebon Half-Moon Duo - combined from two Ebon Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal darkness damage instead of physical damage.\n");
+			outputText("-New armor (by Liadri): Centaur Paladin Armor - obtainable by giving Centaur Armor to Pure Celess to purify. Armor 40, m.res 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg.\n");
 			outputText("-New misc accesory: Boundless Ammo Bag - buyable at Tripxi shop in Tel'Adre. Cost 1,600 gems. It makes firearms never run out of ammo in middle of multishooting nor never needing to reload.\n");
 			outputText("-Ayo armor bonuses no longer give either flat bonus to stat or multi to stat. They would now give bonus or penalty to stat multi.\n");
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
@@ -98,8 +100,6 @@ public class Changelog extends BaseContent
 			outputText("Oni Enlightened Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 10, dmg multi during rampage 40% > 50%), Oni Tyrant Kimono (armor 23 > 30, m.res 20 > 50, oni rampage effect duration 4 > 5, dmg multi during rampage 40% > 100%), Taur Blackguard Armor (armor 23 > 40, m.res 0 > 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg), ");
 			outputText("Battle Maiden Armor (armor 40 > 80, m.res 0 > 40, lust reducting effect per turn 2% > 5%), Succubus Armor (armor 20 > 50, m.res 0 > 25, increase max possible to reach tease bonus 26 > 100). In cases when there wasn't level req. it was added and when it req. only 40 was increased to lvl 54.\n");
 			outputText("-Lusty Maiden's Armor max bonus from paizuri scenes to stats increased from 8 to 10. Tentacled Bark Armor & Divine Bark Armor phys and magical defense values been increased 2x.\n");
-			outputText("-New armor (by Liadri): Centaur Paladin Armor - obtainable by giving Centaur Armor to Pure Celess to purify. Armor 40, m.res 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg.\n");
-			outputText("-New melee weapon (by Liadri): Hellraiser - obtainable by giving Demonic Scythe to Corrupted Celess to corrupt. Atk value 90 (at 100+str), can apply bleed (100%), used with whirlwind special, 200% to spellpower.\n");
 			outputText("-Izma 'Combat Manual' got 4th possible effect (speed knowledge bonus).\n");
 			outputText("-To better match their status as legendary shields their stats been increased: Sanctuary shield (L) (block 29 > 55, regeneration effect max cap increased 1% > 5%) and Dark Aegis (block 29 > 55, regeneration effect max cap increased 1% > 5%). Both shields get added req. to be lvl 54+ to use them.\n");
 			outputText("-Sanctuary shield (not legendary) gained 1% HP regeneration effect.\n");
@@ -167,7 +167,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
-			outputText("-\n");
+			outputText("-New legendary corrupted armor (Liadri): Cow Gunslinger Outfit - made from heavy leather armor.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
