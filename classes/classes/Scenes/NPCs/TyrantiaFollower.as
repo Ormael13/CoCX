@@ -1299,7 +1299,7 @@ public function itemImproveMenuCorrupt():void {
 		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
 		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
 		[armors.CTPALAD, armors.CTHPALA, armors.CTBGUAR],
-		[armors.HLEATHR, null, armors.CGUNSLI]
+		[armors.LTHRPNT, null, armors.CGUNSLI]
 	];
 	clearOutput();
 	outputText("You ask your Drider lover if she’d be willing to upgrade a piece of your gear. She nods simply, bringing out a trough on wheels, filled with ebony liquid that bubbles, despite being under no heat.\n\n");// legendary

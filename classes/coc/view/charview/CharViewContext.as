@@ -128,7 +128,7 @@ public class CharViewContext extends ExecContext {
 					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
 					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasAScythe: player.isScytheTypeWeapon() || player.weapon == game.weapons.DEMSCYT,
+					PlayerHasAScythe: player.isScytheTypeWeapon() || player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.KAMA || player.weapon == game.weapons.KAMAWHIP || player.weapon == game.weapons.D_KAMA,
 					PlayerHasAScytheHoly:player.weapon == game.weapons.LHSCYTH,
 					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weapon == game.weapons.HELRAIS,
 
@@ -266,7 +266,7 @@ public class CharViewContext extends ExecContext {
 					sphinxRegalia: player.headJewelry == game.headjewelries.SPHINXAS,
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
-					cowgirlhat: player.headJewelry == game.headjewelries.COWHAT,
+					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
 
 					// Viewable amulet Accessory lists
 					GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||
