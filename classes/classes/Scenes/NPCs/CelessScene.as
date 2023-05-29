@@ -393,7 +393,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.armors.WKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
 			[CoC.instance.armors.SPKIMO, CoC.instance.armors.OEKIMO, CoC.instance.armors.OTKIMO],
 			[CoC.instance.armors.CTPALAD, CoC.instance.armors.CTHPALA, CoC.instance.armors.CTBGUAR],
-			[CoC.instance.armors.HLEATHR, null, CoC.instance.armors.CGUNSLI]
+			[CoC.instance.armors.SLEATHR, null, CoC.instance.armors.CGUNSLI]
 		];
 		var selectfrom:int = corrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
