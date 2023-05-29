@@ -322,9 +322,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if ((player.tailType == Tail.SALAMANDER || player.tailType == Tail.KITSHOO) && !player.hasPerk(PerkLib.ElementalBody)) {
-				var kitshoo:String = "";
-				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kitshoo = "s"
-				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail"+kitshoo+" to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+				var kitshoo1:String = "";
+				var kitshoo2:String = "it";
+				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) {
+					kitshoo1 = "s";
+					kitshoo2 = "them";
+				}
+				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail"+kitshoo1+" to whip your foe with "+kitshoo2+" to hurt and burn them!  \n\n<b>AoE attack.</b>");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -6482,4 +6486,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

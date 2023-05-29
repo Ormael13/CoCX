@@ -33,7 +33,8 @@ public final class ArmorLib extends ItemConstants
 				TCKIMO,
 				TCKIMO,
 				OTKIMO,
-				CTBGUAR
+				CTBGUAR,
+				CGUNSLI
 			];
 		}
 
