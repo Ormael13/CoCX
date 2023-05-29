@@ -266,7 +266,7 @@ public class CharViewContext extends ExecContext {
 					sphinxRegalia: player.headJewelry == game.headjewelries.SPHINXAS,
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
-					cowgirlhat: player.headJewelry == game.headjewelries.COWHAT,
+					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
 
 					// Viewable amulet Accessory lists
 					GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||
