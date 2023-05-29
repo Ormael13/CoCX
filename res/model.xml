@@ -3120,16 +3120,16 @@
 								</else>
 							</if>
 							<else>
-								<show part="breasts/F$skinx"/>
+								<if test="PlayerHasBreastViewOutfit == false">
+									<show part="breasts/F$skinx"/>
+									<else>
+										<show part="breasts/G$skinx"/>
+									</else>
+								</if>
 							</else>
 						</if>
 						<else>
-							<if test="PlayerHasBreastViewOutfit == false">
-								<show part="breasts/F$skinx"/>
-								<else>
-									<show part="breasts/G$skinx"/>
-								</else>
-							</if>
+							<show part="breasts/F$skinx"/>
 						</else>
 					</if>
                 </default>
