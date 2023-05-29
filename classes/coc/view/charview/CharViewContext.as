@@ -72,6 +72,7 @@ public class CharViewContext extends ExecContext {
 					showLegClothing: showLegClothing(),
 					showPanty: showPanty(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
+					PlayerHasBreastViewOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.armor == game.armors.CGUNSLI || player.armor == game.armors.GTECHC_,
 					PlayerHasABra: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingBra(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),

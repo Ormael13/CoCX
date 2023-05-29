@@ -779,7 +779,7 @@
 		<cell rect="2053,158,20,55" name="clothRightArm/darkPriestPrayer" dx="105" dy="53"/>
 		<cell rect="2137,158,20,55" name="clothRightArm/priestPrayer" dx="105" dy="53"/>
 		<cell rect="2221,158,20,55" name="clothRightArm/francesca" dx="111" dy="70"/>
-		<cell rect="2001,325,80,108" name="clothRightArm/CowgirlClothe" dx="63" dy="49"/>
+		<cell rect="2001,325,80,108" name="clothRightArm/cowgirlClothe" dx="63" dy="49"/>
         <cell rect="818,798,173,156" name="clothCape/walpurgisClothesBack" dx="19" dy="12"/>
         <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
@@ -2162,26 +2162,42 @@
 						<if test="PlayerHasLactoBlaster">
 							<show part="backAccessory/LactoblasterTank"/>
 							<show part="weapon/LactoblasterGun"/>
-							<if test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
-								<if test="BoobDisplay == 0">
-									<if test="PlayerHasViewableOutfit == false">
-										<if test="PlayerHasABra == false">
-											<show part="weapon/LactoblasterMilkerMega"/>
-											<else>
-												<if test="cowBra">						
-													<show part="weapon/LactoblasterMilkerMega"/>
-													<else>
-														<show part="weapon/LactoblasterMilker"/>
-													</else>
-												</if>
-											</else>
-										</if>
+							<switch>
+								<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+									<show part="weapon/LactoblasterMilker"/>
+								</case>
+								<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+									<if test="BoobDisplay == 0">
+                                        <if test="PlayerHasViewableOutfit == false">
+                                            <if test="PlayerHasABra == false">
+                                                <show part="weapon/LactoblasterMilkerMega"/>
+                                                <else>
+                                                    <if test="cowBra">
+                                                        <show part="weapon/LactoblasterMilkerMega"/>
+                                                        <else>
+                                                            <show part="weapon/LactoblasterMilker"/>
+                                                        </else>
+                                                    </if>
+                                                </else>
+                                            </if>
+                                            <else>
+                                                <show part="weapon/LactoblasterMilkerMega"/>
+                                            </else>
+                                        </if>
+                                        <else>
+                                            <show part="weapon/LactoblasterMilker"/>
+                                        </else>
+                                    </if>
+								</case>
+								<default>
+									<if test="BoobDisplay == 0">
+										<show part="weapon/LactoblasterMilkerMega"/>
 										<else>
 											<show part="weapon/LactoblasterMilker"/>
 										</else>
 									</if>
-								</if>
-							</if>
+								</default>
+							</switch>
 						</if>
 						
 						<!-- Ranged Tome -->
