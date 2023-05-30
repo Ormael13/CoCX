@@ -13104,8 +13104,9 @@ public function RandomTeaseLustStrike():void {
             "waving the demonic signs and delivering your unholy magic directly into your victim's endowment. [monster His] ");
     if (monster.hasCock() > 0) outputText("cock drools black precum, swelling in size");
     if (monster.hasCock() && monster.hasVagina()) outputText(" as [monster his] ");
-    if (monster.hasVagina()) outputText("pussy starts gushing like a fountain, lips swelling with arousal. ");
-    if (monster.hasCock() && monster.hasVagina()) outputText("They");
+    if (monster.hasVagina()) outputText("pussy starts gushing like a fountain, lips swelling with arousal");
+	outputText(". ");
+    if (monster.hasCock() && monster.hasVagina()) outputText(". They");
     else outputText("It");
     outputText(" pulse");
     if (monster.hasCock() && monster.hasVagina()) outputText("s");
@@ -16090,6 +16091,8 @@ public function firearmsForce():Number {
 		}
 		else mod *= 1.5;
 	}
+    if (player.hasPerk(PerkLib.CowGunslingerOutfit)) mod += .5;//125% up to here
+    if (player.jewelryName == "cow girl hat") mod += .25;
 	mod += rangePhysicalForce();
 	mod = Math.round(mod * 100) / 100;
     return mod;
@@ -16532,4 +16535,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

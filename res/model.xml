@@ -2162,14 +2162,13 @@
 						<if test="PlayerHasLactoBlaster">
 							<show part="backAccessory/LactoblasterTank"/>
 							<show part="weapon/LactoblasterGun"/>
-							<show part="weapon/LactoblasterMilker"/>
 							<if test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
 								<if test="BoobDisplay == 0">
 									<if test="PlayerHasViewableOutfit == false">
 										<if test="PlayerHasABra == false">
 											<show part="weapon/LactoblasterMilkerMega"/>
 											<else>
-												<if test="cowBra">
+												<if test="cowBra">						
 													<show part="weapon/LactoblasterMilkerMega"/>
 													<else>
 														<show part="weapon/LactoblasterMilker"/>
@@ -5238,6 +5237,11 @@
 		<if test="skullOrnament">
 			<show part="clotheHead_bg/warlockSkulls"/>
 		</if>
+		
+		<!-- Cow hat -->
+		<if test="cowGirlHat">
+			<show part="clotheHead/CowGirl"/>
+		</if>
 
 		<!-- Demon tail ring -->
 		<if test="demonTailRing">
@@ -5612,6 +5616,25 @@
 					<hide part="balls/*"/>
 					<hide part="pussy/*"/>
 					<hide part="overpussy/*"/>
+				</if>
+			</if>
+		</if>
+		
+		<if test="CowGirlOutfit">
+			<if test="showClothing">
+				<show part="clotheBehindBreast/cowgirlClothe"/>
+				<show part="armorNeck/CowgirlClothe"/>
+				<show part="clothCape_fg/cowgirlClothe"/>
+				<if test="showArmClothing">
+					<show part="clothRightArm/cowgirlClothe"/>
+				</if>
+				<if test="showLegClothing">
+					<show part="clotheLegs/cowgirlClothe"/>
+					<else>
+						<if test="lowerbody == LowerBody.HOOFED or lowerbody == LowerBody.BUNNY or lowerbody == LowerBody.JABBERWOCKY">
+							<show part="clotheLegs/cowgirlClothe"/>
+						</if>
+					</else>
 				</if>
 			</if>
 		</if>

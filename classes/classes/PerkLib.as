@@ -429,6 +429,34 @@ public class PerkLib
 		public static const EnchancedWarriorsRage:PerkType = mk("Enchanced Warrior's Rage", "Enchanced Warrior's Rage",
 				"Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)",
 				"You've chosen the 'Enchanced Warrior's Rage' perk. Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced.");
+		public static const DoorKnob:PerkType = mk("Door Knob", "Door Knob",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Door Knob' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const Bicycle:PerkType = mk("Bicycle", "Bicycle",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Bicycle' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const MeatHole:PerkType = mk("Meat Hole", "Meat Hole",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Meat Hole' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const BedWarmer:PerkType = mk("Bed Warmer", "Bed Warmer",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Bed Warmer' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const TensionTamer:PerkType = mk("Tension Tamer", "Tension Tamer",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Tension Tamer' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const PartyBoyGirl:PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Party Boy/Girl' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
+		public static const MattressActressActor:PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
+				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've chosen the 'Mattress Actress/Actor' perk. +10% max lust, +5 to anal/vaginal capacity.")
+				.withBuffs({'maxlust_mult':+0.1});
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -438,16 +466,7 @@ public class PerkLib
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
+				"You've chosen the '' perk. +10% max lust.");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -2422,7 +2441,7 @@ public class PerkLib
 				"You've chosen the 'Power Shot' perk. Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)");
 		public static const PowerSweep:PerkType = mk("Power Sweep", "Power Sweep",
 				"Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).",
-				"You've chosen the 'Power Sweep' perk.  This allows you to improve your Whirlwind attack.");
+				"You've chosen the 'Power Sweep' perk. Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).");
 		public static const PracticedShot:PerkType = mk("Practiced shot", "Practiced shot",
 				"Increase traditional range weapons (like bows) base attack by 50%. (+10% range physical attacks multiplier)",
 				"You've chosen the 'Practiced shot' perk, increasing traditional range weapons base attack. (+10% range physical attacks multiplier)");
@@ -3248,6 +3267,10 @@ public class PerkLib
 		// Melee & Range weapon perks
 		public static const BladeWarden:PerkType = mk("Blade-Warden", "Blade-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
+		public static const CowGunslingerOutfit:PerkType = mk("Cow Gunslinger Outfit", "Cow Gunslinger Outfit",
+			"Increase the damage of all gun attack and increase milk production by 50%.",null,true);
+		public static const CowGunslingerHat:PerkType = mk("Cow Gunslinger Hat", "Cow Gunslinger Hat",
+			"Increase the damage of all gun attack by 25% and increase milk production by 25%.",null,true);
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
@@ -3257,7 +3280,9 @@ public class PerkLib
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
 		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
-				"Increase the potency of all spells and soulskills by up to 100% based on corruption and empower all corrupted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
+			"Increase the potency of all spells and soulskills by up to 100% based on corruption and empower all corrupted kitsunes abilities. Reduce spellcasting cost by 60%.",null,true);
+
+
 		public static const WildWarden:PerkType = mk("Wild-Warden", "Wild-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 
@@ -6892,7 +6917,8 @@ public class PerkLib
 					.requireAnyPerk(HistoryScout, PastLifeScout);
 			Whistles.requireLevel(6)
 					.requireAnyPerk(HistorySlacker, PastLifeSlacker);
-			//??Slut??
+			DoorKnob.requireLevel(6)
+					.requireAnyPerk(HistorySlut, PastLifeSlut);
 			Tongs.requireLevel(6)
 					.requireAnyPerk(HistorySmith, PastLifeSmith);
 			Amateur.requireLevel(6)
@@ -7168,7 +7194,8 @@ public class PerkLib
 					.requirePerk(SoldiersFriend);
 			LyingDown.requireLevel(24)
 					.requirePerk(Whistles);
-			//??Slut??
+			Bicycle.requireLevel(24)
+					.requirePerk(DoorKnob);
 			Bellows.requireLevel(24)
 					.requirePerk(Tongs);
 			Prostitute.requireLevel(24)
@@ -7300,7 +7327,8 @@ public class PerkLib
 					.requirePerk(PyrosFriend);
 			TakingABreak.requireLevel(42)
 					.requirePerk(LyingDown);
-			//??Slut??
+			MeatHole.requireLevel(42)
+					.requirePerk(Bicycle);
 			Furnace.requireLevel(42)
 					.requirePerk(Bellows);
 			Escort.requireLevel(42)
@@ -7411,7 +7439,8 @@ public class PerkLib
 					.requirePerk(HeavysFriend);
 			SkippingWork.requireLevel(72)
 					.requirePerk(TakingABreak);
-			//??Slut??
+			BedWarmer.requireLevel(72)
+					.requirePerk(MeatHole);
 			Hammer.requireLevel(72)
 					.requirePerk(Furnace);
 			BrothelOwner.requireLevel(72)
@@ -7483,7 +7512,8 @@ public class PerkLib
 					.requirePerk(EngineersFriend);
 			Napping.requireLevel(102)
 					.requirePerk(SkippingWork);
-			//??Slut??
+			TensionTamer.requireLevel(102)
+					.requirePerk(BedWarmer);
 			Anvil.requireLevel(102)
 					.requirePerk(Hammer);
 			Pornstar.requireLevel(102)
@@ -7532,7 +7562,8 @@ public class PerkLib
 					.requirePerk(SnipersFriend);
 			ZZZ.requireLevel(180)
 					.requirePerk(Napping);
-			//??Slut??
+			PartyBoyGirl.requireLevel(180)
+					.requirePerk(TensionTamer);
 			Weap0n.requireLevel(180)
 					.requirePerk(Anvil);
 			SexChampion.requireLevel(180)

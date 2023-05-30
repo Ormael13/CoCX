@@ -116,8 +116,8 @@ public class ItemType extends ItemConstants
 		/**
 		 * Max stack size for items of that type
 		 */
-		public static var DEFAULT_STACK_SIZE:int = 5;
-		public static var DEFAULT_PEARL_STACK_SIZE:int = 15;
+		public static var DEFAULT_STACK_SIZE:int = 10;
+		public static var DEFAULT_PEARL_STACK_SIZE:int = 20;
 		public var stackSize:int = DEFAULT_STACK_SIZE;
 		public var pearlStackSize:int = DEFAULT_PEARL_STACK_SIZE;
 
