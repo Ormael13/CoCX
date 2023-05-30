@@ -2168,25 +2168,25 @@
 								</case>
 								<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
 									<if test="BoobDisplay == 0">
-                                        <if test="PlayerHasViewableOutfit == false">
-                                            <if test="PlayerHasABra == false">
-                                                <show part="weapon/LactoblasterMilkerMega"/>
-                                                <else>
-                                                    <if test="cowBra">
-                                                        <show part="weapon/LactoblasterMilkerMega"/>
-                                                        <else>
-                                                            <show part="weapon/LactoblasterMilker"/>
-                                                        </else>
-                                                    </if>
-                                                </else>
-                                            </if>                                           
-											<else>
-												<if test="PlayerHasBreastViewOutfit == false">
-													<show part="weapon/LactoblasterMilker"/>
+                                        <if test="PlayerHasViewableOutfit">										
+											<if test="PlayerHasBreastViewOutfit == false">												
+												<if test="PlayerHasABra == false">
+													<show part="weapon/LactoblasterMilkerMega"/>
 													<else>
-														<show part="weapon/LactoblasterMilkerMega"/>
+														<if test="cowBra">
+															<show part="weapon/LactoblasterMilkerMega"/>
+															<else>
+																<show part="weapon/LactoblasterMilker"/>
+															</else>
+														</if>
 													</else>
-												</if>
+												</if>        
+												<else>
+													<show part="weapon/LactoblasterMilkerMega"/>
+												</else>
+											</if>											                                                                              
+											<else>
+												<show part="weapon/LactoblasterMilker"/>    
 											</else>		                                                                                  
                                         </if>
                                         <else>
@@ -2506,20 +2506,32 @@
 						</case>
                         <case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
                             <if test="BoobDisplay == 0">
-                                <if test="PlayerHasViewableOutfit == false">
-                                    <if test="PlayerHasABra == false">
-                                        <show part="overskin/BHyeti"/>
-                                        <else>
-                                            <if test="cowBra">
-                                                <show part="overskin/BHyeti"/>
-                                                <else>
-                                                    <show part="overskin/Blyeti"/>
-                                                </else>
-											</if>
-										</else>
-									</if>
+                                <if test="PlayerHasViewableOutfit">
+									<if test="PlayerHasBreastViewOutfit == false">
+										<if test="PlayerHasABra == false">
+											<show part="overskin/BHyeti"/>
+											<else>
+												<if test="cowBra">
+													<show part="overskin/BHyeti"/>
+													<else>
+														<show part="overskin/Blyeti"/>
+													</else>
+												</if>
+											</else>
+										</if>
+									</if> 
 									<else>
-										<show part="overskin/Blyeti"/>
+										<if test="PlayerHasABra == false">
+											<show part="overskin/BHyeti"/>
+											<else>
+												<if test="cowBra">
+													<show part="overskin/BHyeti"/>
+													<else>
+														<show part="overskin/Blyeti"/>
+													</else>
+												</if>
+											</else>
+										</if>
 									</else>
 								</if>
                             </if>
@@ -3079,31 +3091,31 @@
                 </case>
                 <case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
                     <if test="BoobDisplay == 0">
-						<if test="PlayerHasViewableOutfit == false">
-							<if test="PlayerHasABra == false">
-								<show part="breasts/G$skinx"/>
+						<if test="PlayerHasViewableOutfit">
+							<if test="PlayerHasBreastViewOutfit == false">
+								<show part="breasts/F$skinx"/>
 								<else>
-									<if test="cowBra">
+									<if test="PlayerHasABra == false">
 										<show part="breasts/G$skinx"/>
 										<else>
-											<show part="breasts/F$skinx"/>
+											<if test="cowBra">
+												<show part="breasts/G$skinx"/>
+												<else>
+													<show part="breasts/F$skinx"/>
+												</else>
+											</if>
 										</else>
 									</if>
 								</else>
 							</if>
-							<else>
-								<if test="PlayerHasBreastViewOutfit == false">
-									<show part="breasts/F$skinx"/>
+							<else>							
+								<if test="PlayerHasABra == false">
+									<show part="breasts/G$skinx"/>
 									<else>
-										<if test="PlayerHasABra == false">
+										<if test="cowBra">
 											<show part="breasts/G$skinx"/>
 											<else>
-												<if test="cowBra">
-													<show part="breasts/G$skinx"/>
-													<else>
-														<show part="breasts/F$skinx"/>
-													</else>
-												</if>
+												<show part="breasts/F$skinx"/>
 											</else>
 										</if>
 									</else>
@@ -3117,31 +3129,31 @@
 				</case>
                 <default>
 					<if test="BoobDisplay == 0">
-						<if test="PlayerHasViewableOutfit == false">
-							<if test="PlayerHasABra == false">
-								<show part="breasts/G$skinx"/>
+						<if test="PlayerHasViewableOutfit">
+							<if test="PlayerHasBreastViewOutfit == false">
+								<show part="breasts/F$skinx"/>
 								<else>
-									<if test="cowBra">
+									<if test="PlayerHasABra == false">
 										<show part="breasts/G$skinx"/>
 										<else>
-											<show part="breasts/F$skinx"/>
+											<if test="cowBra">
+												<show part="breasts/G$skinx"/>
+												<else>
+													<show part="breasts/F$skinx"/>
+												</else>
+											</if>
 										</else>
 									</if>
 								</else>
 							</if>
-							<else>
-								<if test="PlayerHasBreastViewOutfit == false">
-									<show part="breasts/F$skinx"/>
+							<else>							
+								<if test="PlayerHasABra == false">
+									<show part="breasts/G$skinx"/>
 									<else>
-										<if test="PlayerHasABra == false">
+										<if test="cowBra">
 											<show part="breasts/G$skinx"/>
 											<else>
-												<if test="cowBra">
-													<show part="breasts/G$skinx"/>
-													<else>
-														<show part="breasts/F$skinx"/>
-													</else>
-												</if>
+												<show part="breasts/F$skinx"/>
 											</else>
 										</if>
 									</else>
@@ -3151,82 +3163,94 @@
 						<else>
 							<show part="breasts/F$skinx"/>
 						</else>
-					</if>
+                    </if>
                 </default>
             </switch>
         </if>
         <!-- nipple colors -->
 		<if test="breastRows.length gt 0">
 			<if test="CaveWyrmNipples">
-            <switch>
-                <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-                    <show part="overskin/BfcaveWyrm"/>
-                </case>
-                <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-                    <show part="overskin/BpcaveWyrm"/>
-                </case>
-				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-                    <show part="overskin/BcaveWyrm"/>
-                </case>
-				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-                    <show part="overskin/BcaveWyrm"/>
-                </case>
-				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-                    <show part="overskin/BlcaveWyrm"/>
-                </case>
-				<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
-                    <show part="overskin/BlcaveWyrm"/>
-                </case>
-				<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
-                    <if test="BoobDisplay == 0">
-						<if test="PlayerHasViewableOutfit == false">
-							<if test="PlayerHasABra == false">
-								<show part="overskin/BHcaveWyrm"/>
-								<else>
-									<if test="cowBra">
-										<show part="overskin/BHcaveWyrm"/>
-										<else>
-											<show part="overskin/BlcaveWyrm"/>
-										</else>
-									</if>
-								</else>
-							</if>
-							<else>
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="overskin/BfcaveWyrm"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="overskin/BpcaveWyrm"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="overskin/BcaveWyrm"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="overskin/BcaveWyrm"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="overskin/BlcaveWyrm"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+						<show part="overskin/BlcaveWyrm"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+						<if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit">
 								<if test="PlayerHasBreastViewOutfit == false">
 									<show part="overskin/BlcaveWyrm"/>
 									<else>
-										<show part="overskin/BHcaveWyrm"/>
+										<if test="cowBra">
+											<show part="overskin/BHcaveWyrm"/>
+											<else>
+												<show part="overskin/BlcaveWyrm"/>
+											</else>
+										</if>
 									</else>
 								</if>
-							</else>
-						</if>
-                    </if>
-				</case>
-                <default>
-					<if test="BoobDisplay == 0">
-						<if test="PlayerHasViewableOutfit == false">
-							<if test="PlayerHasABra == false">
-								<show part="overskin/BHcaveWyrm"/>
 								<else>
-									<if test="cowBra">
+									<if test="PlayerHasABra == false">
 										<show part="overskin/BHcaveWyrm"/>
 										<else>
-											<show part="overskin/BlcaveWyrm"/>
+											<if test="cowBra">
+												<show part="overskin/BHcaveWyrm"/>
+												<else>
+													<show part="overskin/BlcaveWyrm"/>
+												</else>
+											</if>
 										</else>
 									</if>
 								</else>
 							</if>
-							<else>
-								<show part="overskin/BlcaveWyrm"/>
-							</else>
 						</if>
-						<else>
-							<show part="overskin/BlcaveWyrm"/>
-						</else>
-					</if>
-                </default>
-            </switch>
-			 </if>
+					</case>
+					<default>
+						<if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit">
+								<if test="PlayerHasBreastViewOutfit == false">
+									<show part="overskin/BlcaveWyrm"/>
+									<else>
+										<if test="cowBra">
+											<show part="overskin/BHcaveWyrm"/>
+											<else>
+												<show part="overskin/BlcaveWyrm"/>
+											</else>
+										</if>
+									</else>
+								</if>
+								<else>
+									<if test="PlayerHasABra == false">
+										<show part="overskin/BHcaveWyrm"/>
+										<else>
+											<if test="cowBra">
+												<show part="overskin/BHcaveWyrm"/>
+												<else>
+													<show part="overskin/BlcaveWyrm"/>
+												</else>
+											</if>
+										</else>
+									</if>
+								</else>
+							</if>
+						</if>
+					</default>
+				</switch>
+			</if>
         </if>
 
 		<!-- ARMS AREA -->
@@ -4086,45 +4110,43 @@
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
                             <if test="BoobDisplay == 0">
-								<if test="PlayerHasViewableOutfit == false">
+								<if test="PlayerHasViewableOutfit">
 									<if test="PlayerHasABra == false">
-										<show part="breasts/Gliliraune"/>
-										<else>
-											<if test="cowBra">
-												<show part="breasts/Gliliraune"/>
-												<else>
-													<show part="breasts/Fliliraune"/>
-												</else>
-											</if>
-										</else>
-									</if>
-									<else>
 										<if test="PlayerHasBreastViewOutfit == false">
 											<show part="breasts/Fliliraune"/>
 											<else>
 												<show part="breasts/Gliliraune"/>
 											</else>
 										</if>
+									</if>
+									<else>
+                                        <if test="cowBra">
+											<show part="breasts/Gliliraune"/>
+											<else>
+                                                <show part="breasts/Fliliraune"/>
+											</else>
+                                        </if>
 									</else>								
 								</if>
                             </if>
 						</case>
 						<default>
 							<if test="BoobDisplay == 0">
-								<if test="PlayerHasViewableOutfit == false">
-									<if test="PlayerHasABra == false">
-										<show part="breasts/Gliliraune"/>
-										<else>
-											<if test="cowBra">
-												<show part="breasts/Gliliraune"/>
-												<else>
-													<show part="breasts/Fliliraune"/>
-												</else>
-											</if>
-										</else>
-									</if>
+								<if test="PlayerHasViewableOutfit">
+									<show part="breasts/Fliliraune"/>
 									<else>
 										<show part="breasts/Fliliraune"/>
+										<if test="PlayerHasABra == false">
+											<show part="breasts/Gliliraune"/>
+											<else>
+												<if test="cowBra">
+													<show part="breasts/Gliliraune"/>
+													<else>
+														<show part="breasts/Fliliraune"/>
+													</else>
+												</if>
+											</else>
+										</if>
 									</else>
 								</if>
 								<else>
@@ -4404,14 +4426,16 @@
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/fairy"/>
 				</if>
-				<if test="PlayerHasViewableOutfit == false">
-					<hide part="arms/*"/>
-					<show part="arms/demonlewd"/>
-					<show part="arms_fg/demonlewd"/>
-					<hide part="arms_bg/*"/>
-					<show part="arms_bg/human"/>
-					<hide part="legs/*"/>
-					<show part="legs/fairyFlying"/>
+				<if test="PlayerHasViewableOutfit">
+					<else>
+						<hide part="arms/*"/>
+						<show part="arms/demonlewd"/>
+						<show part="arms_fg/demonlewd"/>
+						<hide part="arms_bg/*"/>
+						<show part="arms_bg/human"/>
+						<hide part="legs/*"/>
+						<show part="legs/fairyFlying"/>
+					</else>	
 				</if>
             </case>
 			<case values="Wings.DEVILFEATHER">
@@ -6163,13 +6187,16 @@
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
                         <if test="BoobDisplay == 0">
-							<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasViewableOutfit">
 								<if test="PlayerHasBreastViewOutfit == false">
 									<show part="bra/cowBraLarge"/>
 									<else>
 										<show part="bra/cowBraMega"/>
 									</else>
-								</if>	
+								</if>
+								<else>
+									<show part="bra/cowBraMega"/>
+								</else>
 							</if>
                         </if>
 					</case>
