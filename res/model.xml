@@ -2085,7 +2085,7 @@
 								<show part="weapon_bg/scytheBladeUnholy"/>
 							</if>
 							<else>
-								<show part="weapon/scytheShaftGeneric="/>
+								<show part="weapon/scytheShaftGeneric"/>
 								<show part="weapon_bg/scytheBladeGeneric"/>
 							</else>
 						</if>
