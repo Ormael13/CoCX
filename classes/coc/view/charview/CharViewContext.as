@@ -72,6 +72,7 @@ public class CharViewContext extends ExecContext {
 					showLegClothing: showLegClothing(),
 					showPanty: showPanty(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
+					PlayerHasBreastViewOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.armor == game.armors.CGUNSLI || player.armor == game.armors.GTECHC_,
 					PlayerHasABra: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingBra(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -86,16 +87,16 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAWeapon: player.isDaggerTypeWeapon() || player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
 
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
-					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
-					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
+					PlayerHasAStaffHoly: player.weapon == game.weapons.U_STAFF,
+					PlayerHasAStaffUnholy: player.weapon == game.weapons.N_STAFF,
 
 					PlayerHasAWand: player.isWandTypeWeapon(),
-					PlayerHasAWandHoly:player.weapon == game.weapons.OCCULUS,
-					PlayerHasAWandUnholy:player.weapon == game.weapons.ECLIPSE,
+					PlayerHasAWandHoly: player.weapon == game.weapons.OCCULUS,
+					PlayerHasAWandUnholy: player.weapon == game.weapons.ECLIPSE,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
-					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
-					PlayerHasASwordunholy:player.weapon == game.weapons.EBNYBLD,
+					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
+					PlayerHasASwordunholy: player.weapon == game.weapons.EBNYBLD,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
