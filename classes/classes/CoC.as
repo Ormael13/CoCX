@@ -67,7 +67,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8t.58-59";
+    public var debugGameVer:String = "v0.8t.60-64f";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.057;
