@@ -59,7 +59,8 @@ public class Shield extends Equipable
 				if (doOutput) outputText("Your current range weapon requires two hands. Unequip your current range weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
-			else if ((game.player.weaponSpecials("Large") && !game.player.hasPerk(PerkLib.GigantGrip)) || game.player.weaponSpecials("Massive") || game.player.weaponSpecials("Dual Small") || game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large") || game.player.weaponName == "Daisho") {
+			else if ((game.player.weaponSpecials("Large") && !game.player.hasPerk(PerkLib.GigantGrip)) || (game.player.weaponSpecials("Massive") && !game.player.hasPerk(PerkLib.TitanGrip))
+					|| game.player.weaponSpecials("Dual Small") || game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large") || game.player.weaponSpecials("Dual Massive") || game.player.weaponName == "Daisho") {
 				if (doOutput) outputText("Your current melee weapon requires two hands. Unequip your current melee weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
@@ -78,10 +79,11 @@ public class Shield extends Equipable
 			if (!game.isLoadingSave) {
 				if ((perk == "Massive" && game.player.weapon != WeaponLib.FISTS && !game.player.hasPerk(PerkLib.GigantGrip))
 						|| (game.player.weaponSpecials("Large") && !game.player.hasPerk(PerkLib.GigantGrip))
-						|| game.player.weaponSpecials("Massive")
+						|| (game.player.weaponSpecials("Massive") && !game.player.hasPerk(PerkLib.TitanGrip))
 						|| game.player.weaponSpecials("Dual Small")
 						|| game.player.weaponSpecials("Dual")
-						|| game.player.weaponSpecials("Dual Large")) {
+						|| game.player.weaponSpecials("Dual Large")
+						|| game.player.weaponSpecials("Dual Massive")) {
 					SceneLib.inventory.unequipWeapon();
 				}
 				if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "2H Firearm") SceneLib.inventory.unequipWeaponRange();

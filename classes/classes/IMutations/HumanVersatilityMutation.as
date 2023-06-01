@@ -18,10 +18,10 @@ public class HumanVersatilityMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "Mastery gains increased by 1 point or in case of multtiplier +1 to multiplier.";
+                descS = "Mastery gains increased by 1 point or in case of multiplier +1 to multiplier.";
             }
             if (pTier == 2){
-                descS = "Your fat tissue continue to increase your natural toughness and thickness gained from previous change. (+15% of max core Tou as phantom Tou)";
+                descS = "Mastery gains increased by 2 point or in case of multiplier +2 to multiplier. Decrease a bit needed exp to lvl up weapon/lifeskill masteries.";
             }
             if (pTier == 3){
                 descS = "Your fat tissue increased again your natural toughness and thickness limit. Increased damage reduction against physical damage & increase natural resistance to damage, increase max Hunger cap by 50 (if PC have Hunger bar active) (+45% of max core Tou as phantom Tou)";
@@ -52,7 +52,7 @@ public class HumanVersatilityMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireFatTissueMutationSlot()
+                    this.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.racialScore(Races.HUMAN) > 16;
                     }, "Human race (17+)");
@@ -98,7 +98,7 @@ public class HumanVersatilityMutation extends IMutationPerkType
 
         public function HumanVersatilityMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADAPTATIONS, 1);
+			super(mName + " IM", mName, SLOT_ADAPTATIONS, 2);
         }
 
     }

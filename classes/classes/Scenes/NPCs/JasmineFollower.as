@@ -14,6 +14,6 @@ package classes.Scenes.NPCs
 		
 		
 		
-		//elf-orc mixed breed assassin using dual bf swords (potential henchman)
+		//elf-orc mixed breed assassin using dual massive bf swords or scythes (potential henchman)
 	}
 }

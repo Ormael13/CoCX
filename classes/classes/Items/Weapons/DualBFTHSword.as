@@ -24,8 +24,9 @@ package classes.Items.Weapons
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && game.player.hasPerk(PerkLib.GigantGripSu) && game.player.playerHasFourArms()) return super.canEquip(doOutput);
-			if (doOutput) {
+			if (game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.TitanGrip) || (game.player.hasPerk(PerkLib.GigantGripSu) && game.player.playerHasFourArms()))) return super.canEquip(doOutput);
+			if (!game.player.hasPerk(PerkLib.TitanGrip)) outputText("You aren't skilled enough to handle this pair of weapons with only two hands!  Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
+			else {
 				if (game.player.playerHasFourArms()) outputText("You aren't skilled enough to handle this pair of weapons!  Unless you want to hurt yourself instead of your enemies when trying to use them...  ");
 				else outputText("You lack second pair of arms!  ");
 			}

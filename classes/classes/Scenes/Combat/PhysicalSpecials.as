@@ -56,15 +56,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.wrath < 50) {
 					bd.disable("Your wrath is too low to unleash howl!");
 				}
-				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
-					else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("EFoD", combat.asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("TFoD", combat.asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					else if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("EFoD", combat.asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					else bd = buttons.add("SFoD", combat.asuras6FingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					if (player.wrath < (player.maxWrath() * 0.5)) {
 						bd.disable("Your wrath is too low to poke your enemies Asura Style!");
 					}
 				}
-				if (player.hasPerk(PerkLib.AsuraStrength)) {
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 				
 				}
 			}
@@ -322,9 +322,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if ((player.tailType == Tail.SALAMANDER || player.tailType == Tail.KITSHOO) && !player.hasPerk(PerkLib.ElementalBody)) {
-				var kitshoo:String = "";
-				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kitshoo = "s"
-				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail"+kitshoo+" to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+				var kitshoo1:String = "";
+				var kitshoo2:String = "it";
+				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) {
+					kitshoo1 = "s";
+					kitshoo2 = "them";
+				}
+				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail"+kitshoo1+" to whip your foe with "+kitshoo2+" to hurt and burn them!  \n\n<b>AoE attack.</b>");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -1028,7 +1032,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You strike [themonster] vitals with your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
-		if (player.weapon == weapons.ANGSTD) SAMulti += 2;
+		if (player.weapon == weapons.ANGSTD1 || player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
 		if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) SAMulti *= 2;
@@ -1424,6 +1428,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.DevastatingCharge)) damage *= 1.5;
+		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		damage *= PAM2;
 		var crit:Boolean = false;
@@ -1938,7 +1943,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		lustDmg *= 0.1;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) lustDmg *= 2;
+		if (player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		return lustDmg;
@@ -2006,8 +2012,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function milkBlast():void {
 		clearOutput();
 		if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) {
-			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownMilkBlast, 3, 0, 0, 0);
-			else player.createStatusEffect(StatusEffects.CooldownMilkBlast, 4, 0, 0, 0);
+			var cdd:Number = 4;
+			if (player.hasPerk(PerkLib.NaturalInstincts)) cdd -= 1;
+			if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 4) cdd -= 1;
+			player.createStatusEffect(StatusEffects.CooldownMilkBlast, cdd, 0, 0, 0);
 		}
 		else player.createStatusEffect(StatusEffects.CooldownMilkBlast, 0, 0, 0, 0);
 		outputText("You grab both of your udder smirking as you point them toward your somewhat confused target. You moan a pleasured Mooooooo as you open the dam splashing [themonster] with a twin jet of milk so powerful it is blown away hitting the nearest obstacle. ");
@@ -2041,8 +2049,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function cumCannon():void {
 		clearOutput();
 		if (player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) {
-			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownCumCannon, 3, 0, 0, 0);
-			else player.createStatusEffect(StatusEffects.CooldownCumCannon, 4, 0, 0, 0);
+			var cdd:Number = 4;
+			if (player.hasPerk(PerkLib.NaturalInstincts)) cdd -= 1;
+			if (player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 4) cdd -= 1;
+			player.createStatusEffect(StatusEffects.CooldownCumCannon, cdd, 0, 0, 0);
 		}
 		else player.createStatusEffect(StatusEffects.CooldownCumCannon, 0, 0, 0, 0);
 		outputText("You begin to masturbate fiercely, your [balls] expending with stacked semen as you ready to blow. Your cock shoot a massive jet of cum, projecting [themonster] away and knocking it prone. ");
@@ -3084,7 +3094,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3166,7 +3177,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3245,7 +3257,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3326,7 +3339,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3398,7 +3412,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -3960,7 +3975,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+		if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+		if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -4058,7 +4074,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
-			if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+			if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+			if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -6469,4 +6486,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

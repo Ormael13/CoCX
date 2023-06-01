@@ -148,6 +148,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public function EnterTheVillage(firsttime:Boolean = false):void{
         clearOutput();
         menu();
+        var lockVillage:Boolean = false;
         ZenjiFollowing = (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji");
         if (firsttime){
             outputText("You emerge at the troll village, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");
@@ -158,29 +159,32 @@ public class TrollVillage extends BaseContent implements SaveableState{
                         "\n" +
                         "Not wanting to provoke the wrath of the entire village, you decide that the best course of action is to leave.\n");
                 doNext(camp.returnToCampUseOneHour);
+                lockVillage = true;
             }
             else{
                 outputText("You emerge at the troll village once again, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");
             }
         }
-        if (ZenjiFollowing && (ZenjiVillageStage == 0 || ZenjiVillageStage == 0.5)){
-            SceneLib.trollVillage.jabala.MeetTheParents();
-        }
-        else{
-            outputText("You look around the troll village, it’s quiet and there’s a bunch of trolls conversing with each other, not paying too much attention to you.\n");
-            outputText("You look at the large hall with a Chimney on it, the smell of food emanating from it.\n");
-            outputText("The Elder’s hut stands tall, you can probably talk to someone there.\n");
-            if (JabalaUnlocked) outputText("You can meet with Jabala and her husband if you like.\n");
-            if (YenzaUnlocked > 0) outputText("You remember where Yenza’s hut is.\n");
-            if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
-            if (ZenjiVillageStage == 0) ZenjiVillageStage = 0.5;
-            var zenjiPreCheck:String = (ZenjiVillageStage < 1)?"Look for the nice couple":"Look for Zenji's Parents";
-            addButton(0,"Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat).hint("Catch a bite to eat.");
-            addButton(1,"Elder's Hut", SceneLib.trollVillage.elderstore.ElderShops).hint("Look for the elder of the village.");
-            addButton(2,(JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", SceneLib.trollVillage.jabala.JabalaHome).hint(zenjiPreCheck).disableIf((!JabalaUnlocked && ZenjiBerated),  "You don't want to disturb the nice couple.");
-            addButton(3,(YenzaUnlocked > 0)?"Yenza's Hut":"???", SceneLib.trollVillage.yenza.YenzaHome).hint("Look for Yenza").disableIf((YenzaUnlocked == 0),"You don't know who lives there.");
-            addButton(4,(KaljiUnlocked == 5)?"Kalji's Hut":"???", SceneLib.trollVillage.kalji.KaljiHome).disableIf(KaljiUnlocked != 5);
-            addButton(14, "Return", camp.returnToCampUseOneHour);
+        if (!lockVillage){
+            if (ZenjiFollowing && (ZenjiVillageStage == 0 || ZenjiVillageStage == 0.5)){
+                SceneLib.trollVillage.jabala.MeetTheParents();
+            }
+            else{
+                outputText("You look around the troll village, it’s quiet and there’s a bunch of trolls conversing with each other, not paying too much attention to you.\n");
+                outputText("You look at the large hall with a Chimney on it, the smell of food emanating from it.\n");
+                outputText("The Elder’s hut stands tall, you can probably talk to someone there.\n");
+                if (JabalaUnlocked) outputText("You can meet with Jabala and her husband if you like.\n");
+                if (YenzaUnlocked > 0) outputText("You remember where Yenza’s hut is.\n");
+                if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
+                if (ZenjiVillageStage == 0) ZenjiVillageStage = 0.5;
+                var zenjiPreCheck:String = (ZenjiVillageStage < 1)?"Look for the nice couple":"Look for Zenji's Parents";
+                addButton(0,"Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat).hint("Catch a bite to eat.");
+                addButton(1,"Elder's Hut", SceneLib.trollVillage.elderstore.ElderShops).hint("Look for the elder of the village.");
+                addButton(2,(JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", SceneLib.trollVillage.jabala.JabalaHome).hint(zenjiPreCheck).disableIf((!JabalaUnlocked && ZenjiBerated),  "You don't want to disturb the nice couple.");
+                addButton(3,(YenzaUnlocked > 0)?"Yenza's Hut":"???", SceneLib.trollVillage.yenza.YenzaHome).hint("Look for Yenza").disableIf((YenzaUnlocked == 0),"You don't know who lives there.");
+                addButton(4,(KaljiUnlocked == 5)?"Kalji's Hut":"???", SceneLib.trollVillage.kalji.KaljiHome).disableIf(KaljiUnlocked != 5);
+                addButton(14, "Return", camp.returnToCampUseOneHour);
+            }
         }
     }
     }

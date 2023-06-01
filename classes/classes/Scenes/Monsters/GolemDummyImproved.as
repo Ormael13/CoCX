@@ -68,8 +68,8 @@ package classes.Scenes.Monsters
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.a = "";
 				this.short = "Aether Golem";
-				if (flags[kFLAGS.AETHER_SINISTER_EVO] == 0.5) this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gaunlet on it left arm that it use to smash enemies.";
-				else this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gaunlet on it right arm that it use to smash enemies.";
+				if (flags[kFLAGS.AETHER_SINISTER_EVO] == 0.5) this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gauntlet on it left arm that it use to smash enemies.";
+				else this.long = "You're currently fighting guardian of the first floor - Aether Golem. It's around six feet tall without any sexual characteristics, it stone body covered in cracks, some of them are filled with goo-like substance and wearing gauntlet on it right arm that it use to smash enemies.";
 				initStrTouSpeInte(50, 50, 50, 20);
 				initWisLibSensCor(20, 10, 10, 50);
 				this.level = 11;

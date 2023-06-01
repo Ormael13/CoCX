@@ -20,7 +20,8 @@ public final class ArmorLib extends ItemConstants
 				IBKIMO,
 				IBKIMO,
 				IBKIMO,
-				OEKIMO
+				OEKIMO,
+				CTHPALA
 			];
 		}
 		public function LegendaryCorrupt():Array {
@@ -32,7 +33,8 @@ public final class ArmorLib extends ItemConstants
 				TCKIMO,
 				TCKIMO,
 				OTKIMO,
-				CTBGUAR
+				CTBGUAR,
+				CGUNSLI
 			];
 		}
 
@@ -88,8 +90,10 @@ public final class ArmorLib extends ItemConstants
 				.withTag(ItemTags.A_REVEALING)
 				.withTag(ItemTags.A_AGILE) as Armor;
 		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 0, 40, "A set of classy suitclothes.", "Light");
-		public const CTPALAD:CentaurArmor = new CentaurArmor();
+		public const CGUNSLI:CowGunslingerOutfit = new CowGunslingerOutfit();
 		public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
+		public const CTHPALA:CentaurPaladinArmor = new CentaurPaladinArmor();
+		public const CTPALAD:CentaurArmor = new CentaurArmor();
 		public const DBARMOR:Armor = new PureMaraeArmor();
 		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 10, 10, 800, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
 		public const DSCLROB:Armor = new Armor("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 0, 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light")

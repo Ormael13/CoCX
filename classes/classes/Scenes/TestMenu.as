@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DesertCave.SandMother;
@@ -47,7 +48,8 @@ public class TestMenu extends BaseContent
 		outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
 		var bd:ButtonDataList = new ButtonDataList();
 		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
-		bd.add("P/G/XP/LvL", PerksGemsEXPLvL, "Adding/Removing perk points and adding gems/exp/lvl.");
+		bd.add("P/G/XP", PerksGemsEXP, "Adding/Removing perk points and adding gems/exp.");
+		bd.add("LvL/DLvL", LevelDeLevel, "Adding/Substracting levels.");
 		bd.add("Quick Flags", modFlagsMenu, "Menu to edit some some flags quickly for debugging");
 		bd.add("Equip", EquipmentMenu, "For creating various equipment items for tests.");
 		bd.add("NonEquip", NonEquipmentMenu, "For creating various non-equipment items for tests.");
@@ -296,13 +298,13 @@ public class TestMenu extends BaseContent
     }
 	public function giveNekoItems():void {
 		outputText("\n\n<b>(Gained " + weapons.CATGLOV.longName + "!)</b>\n\n");
-		outputText("\n\n<b>(Gained " + weaponsrange.NEKONOM.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + shields.NEKONOM.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + armors.FCLOAK.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + undergarments.BN_TOP.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + undergarments.BN_SKIRT.longName + "!)</b>\n\n");
 		outputText("\n\n<b>(Gained " + necklaces.CATBELL.longName + "!)</b>\n\n");
 		inventory.takeItem(weapons.CATGLOV, curry(NonEquipmentMenu, 2));
-		inventory.takeItem(weaponsrange.NEKONOM, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(shields.NEKONOM, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(armors.FCLOAK, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(undergarments.BN_TOP, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(undergarments.BN_SKIRT, curry(NonEquipmentMenu, 2));
@@ -939,15 +941,15 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.ZZZ) && !player.hasPerk(PerkLib.Lazy)) {
 			player.createPerk(PerkLib.Lazy, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: LAZY!!!!)</b>");
-		}/*		Slut
-			if (player.hasPerk(PerkLib.) && !player.hasPerk(PerkLib.)) {
-				player.createPerk(PerkLib., 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: !)</b>");
-				player.createPerk(PerkLib., 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: !)</b>");
-				player.createPerk(PerkLib., 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: !)</b>");
-			}*/
+		}/*if (player.hasPerk(PerkLib.) && !player.hasPerk(PerkLib.)) {
+			player.createPerk(PerkLib., 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: !)</b>");
+			player.createPerk(PerkLib., 0, 0, 0, 0);
+		}*/
+		if (player.hasPerk(PerkLib.PartyBoyGirl) && !player.hasPerk(PerkLib.MattressActressActor)) {
+			player.createPerk(PerkLib.MattressActressActor, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Mattress Actress/Actor!)</b>");
+		}
 		if (player.hasPerk(PerkLib.Weap0n) && !player.hasPerk(PerkLib.Arm0r)) {
 			player.createPerk(PerkLib.Arm0r, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Armor!)</b>");
@@ -956,6 +958,7 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
 		}
+		if (flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] == 0) flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
 		doNext(SoulforceCheats);
 	}
 	public function PerkGalore2():void {
@@ -1221,23 +1224,30 @@ public class TestMenu extends BaseContent
 		addButton(14, "Back", StatsAscensionMenu);
 	}
 
-	public function PerksGemsEXPLvL():void {
+	public function PerksGemsEXP():void {
 		statScreenRefresh();
 		menu();
 		addButton(0, "Add 1 PerkP", perkPointsCheat, 1).hint("Add 1 perk point.");
 		addButton(1, "Add 5 PerkP", perkPointsCheat, 5).hint("Add 5 perk points.");
 		addButton(2, "Sub 10 PerkP", perkPointsCheat, -10).hint("Substract 10 perk points.");
-		addButton(5, "Add Gems 1", addGemsXPLvl, "Gems", 100).hint("Add 100 gems.");
-		addButton(6, "Add Gems 2", addGemsXPLvl, "Gems", 1000).hint("Add 1,000 gems.");
-		addButton(7, "Add Gems 3", addGemsXPLvl, "Gems", 10000).hint("Add 10,000 gems.");
-		addButton(10, "Add EXP 1", addGemsXPLvl, "XP", 100).hint("Add 100 EXP.");
-		addButton(11, "Add EXP 2", addGemsXPLvl, "XP", 1000).hint("Add 1,000 EXP.");
-		addButton(12, "Add EXP 3", addGemsXPLvl, "XP", 10000).hint("Add 10,000 EXP.");
-		addButton(13, "Add EXP 4", addGemsXPLvl, "XP", 100000).hint("Add 100,000 EXP.");
-		if (player.hasPerk(PerkLib.SoulAncestor)) addButton(13, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
-		if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(14, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
-		if (player.level < CoC.instance.levelCap) addButton(8, "Add 1 LvL", addGemsXPLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
-		if (player.level < CoC.instance.levelCap - 9) addButton(9, "Add 10 LvL's", addGemsXPLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
+		addButton(5, "Add Gems 1", addGemsXP, "Gems", 100).hint("Add 100 gems.");
+		addButton(6, "Add Gems 2", addGemsXP, "Gems", 1000).hint("Add 1,000 gems.");
+		addButton(7, "Add Gems 3", addGemsXP, "Gems", 10000).hint("Add 10,000 gems.");
+		addButton(10, "Add EXP 1", addGemsXP, "XP", 100).hint("Add 100 EXP.");
+		addButton(11, "Add EXP 2", addGemsXP, "XP", 1000).hint("Add 1,000 EXP.");
+		addButton(12, "Add EXP 3", addGemsXP, "XP", 10000).hint("Add 10,000 EXP.");
+		addButton(13, "Add EXP 4", addGemsXP, "XP", 100000).hint("Add 100,000 EXP.");
+		if (player.hasPerk(PerkLib.SoulAncestor)) addButton(3, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
+		if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(8, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
+		addButton(14, "Back", SoulforceCheats);
+	}
+	public function LevelDeLevel():void {
+		statScreenRefresh();
+		menu();
+		if (player.level < CoC.instance.levelCap) addButton(0, "Add 1 LvL", addsubLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
+		if (player.level < CoC.instance.levelCap - 9) addButton(1, "Add 10 LvL's", addsubLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
+		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (with stat and perk points).");
+		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (with stat and perk points).");
 		addButton(14, "Back", SoulforceCheats);
 	}
 	public function BodyStateMenu():void {
@@ -1279,6 +1289,8 @@ public class TestMenu extends BaseContent
 		BodyStateMenu();
 	}
 	public function AddCockLength():void {
+		outputText("\n\n");
+		player.cocks[0].cockLength += 1;
 		player.lengthChange(1, 1);
 		BodyStateMenu();
 	}
@@ -1290,7 +1302,6 @@ public class TestMenu extends BaseContent
 	}
 	public function AddCockBalls():void {
 		player.createCock(4);
-		player.clitLength = .25;
 		if (player.balls <= 1) {
 			player.balls = 2;
 			player.ballSize = 1;
@@ -1318,6 +1329,8 @@ public class TestMenu extends BaseContent
 	}
 	public function SubCockLength():void {
 		var index:int = 0;
+		outputText("\n\n");
+		player.cocks[0].cockLength -= 1;
 		player.lengthChange(-1, 1);
 		if (player.cocks[index].cockLength < 2) {
 			outputText("  ");
@@ -1744,7 +1757,7 @@ public class TestMenu extends BaseContent
 			addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 			addButton(11, "HEALHERB", AddHerb).hint("Add 1 HEALHERB.");
-			addButton(12, "Copp+Tin", AddCooperTinOre).hint("Add 1 Cooper and Tin ore.");
+			addButton(12, "Copp/Tin/Iron", AddCooperTinIronOre).hint("Add 1 Cooper, Tin and Iron ore.");
 			addButton(13, "-2-", MaterialMenu, page + 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -2037,13 +2050,17 @@ public class TestMenu extends BaseContent
 		outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
 		inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
 	}
-	public function AddCooperTinOre():void {
+	public function AddCooperTinIronOre():void {
 		outputText("\n\n<b>(Gained 1 Copper Ore!)</b>\n\n");
-		inventory.takeItem(useables.COP_ORE, AddCooperTinOre1);
+		inventory.takeItem(useables.COP_ORE, AddCooperTinIronOre1);
 	}
-	public function AddCooperTinOre1():void {
+	public function AddCooperTinIronOre1():void {
 		outputText("\n\n<b>(Gained 1 Tin Ore!)</b>\n\n");
-		inventory.takeItem(useables.TIN_ORE, curry(MaterialMenu, 1));
+		inventory.takeItem(useables.TIN_ORE, AddCooperTinIronOre2);
+	}
+	public function AddCooperTinIronOre2():void {
+		outputText("\n\n<b>(Gained 1 Irno Ore!)</b>\n\n");
+		inventory.takeItem(useables.IRONORE, curry(MaterialMenu, 1));
 	}
 	public function AddEnergyCore():void {
 		outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
@@ -2096,8 +2113,10 @@ public class TestMenu extends BaseContent
 
 	public function FightTheDummy():void {
 		clearOutput();
-		outputText("Entering battle with The Dummy! Enjoy ^^");
-		startCombat(new TheDummy());
+		//outputText("Entering battle with The Dummy! Enjoy ^^");
+		//startCombat(new TheDummy());
+		outputText("Entering battle with Minotaur! Enjoy ^^");
+		startCombat(new Minotaur());
 	}
 	public function FightSuccubusGardener():void {
 		clearOutput();
@@ -2247,10 +2266,10 @@ public class TestMenu extends BaseContent
 		clearOutput();
 		player.perkPoints += cAmt;
 		outputText("\n\n<b>You now have " + player.perkPoints + " perk points!</b>");
-		doNext(PerksGemsEXPLvL);
+		doNext(PerksGemsEXP);
 	}
 
-	public function addGemsXPLvl(type:String, cAmt:int):void{
+	public function addGemsXP(type:String, cAmt:int):void{
 		clearOutput();
 		if (type == "Gems"){
 			player.gems += cAmt;
@@ -2260,13 +2279,24 @@ public class TestMenu extends BaseContent
 			player.XP += cAmt;
 			outputText("\n\n<b>You have gained " + cAmt + " XP!</b>");
 		}
-		else if (type == "Lvl"){
+		doNext(PerksGemsEXP);
+	}
+
+	public function addsubLvl(type:String, cAmt:int):void{
+		clearOutput();
+		if (type == "Lvl"){
 			player.level += cAmt;
 			player.statPoints += 5*cAmt;
 			player.perkPoints += cAmt;
 			outputText("\n\n<b>You now have " + player.level + " levels!</b>");
 		}
-		doNext(PerksGemsEXPLvL);
+		else if (type == "DLvl"){
+			player.level -= cAmt;
+			player.statPoints -= 5*cAmt;
+			player.perkPoints -= cAmt;
+			outputText("\n\n<b>You have lost " + cAmt + " levels!</b>");
+		}
+		doNext(LevelDeLevel);
 	}
 
 	public function Stage10to12SoulPerks():void {
@@ -2629,4 +2659,4 @@ public class TestMenu extends BaseContent
 		else SceneLib.tyrantia.firstEncounter();
 	}
 	}
-}
+}

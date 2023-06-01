@@ -38,6 +38,8 @@ public final class ShieldLib extends ItemConstants
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const GREATSH:GreatShield = new GreatShield();
 		public const IMPTOME:DynamicShield = ItemTemplateLib.instance.createShield("tome", ItemConstants.RARITY_MAGICAL, 0, ItemConstants.CS_HIDDEN_CURSED, [EnchantmentLib.RaceSpellPowerDoubled.spawn2(true, 1, Races.IMP)]);
+		public const NEKONOM:Shield = new Shield("Nekonomicon", "Nekonomicon", "Nekonomicon", "a Nekonomicon", 0, 500,
+				"A copy of the unholy texts of the Hellcat sect. Rumor has it their blasphemous lord Abraxas wrote it himself. (+100% power to fire and dark spell)") as Shield;
 		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 14, 700, "An average-sized kite shield.");
 		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 200,
 				"Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.",

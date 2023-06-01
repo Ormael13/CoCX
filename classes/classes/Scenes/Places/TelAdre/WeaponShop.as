@@ -28,7 +28,7 @@ public class WeaponShop extends Shop {
 		addButton(8, weapons.HALBERD.shortName, confirmBuy, weapons.HALBERD);
 		addButton(9, weapons.G_SHURI.shortName, confirmBuy, weapons.G_SHURI);
 		addButton(10, weapons.DSWORD_.shortName, confirmBuy, weapons.DSWORD_);
-        addButton(11, weapons.D_WHAM_.shortName, confirmBuy, weapons.D_WHAM_);
+		//11
 		addButton(12, miscjewelries.ATLATL_.shortName, confirmBuy, miscjewelries.ATLATL_);
         if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
             addButton(13, "ScarBlade", forgeScarredBlade);

@@ -653,6 +653,7 @@ import classes.Scenes.SceneLib;
 		outputText("Snakebane flower: "+IngrediantBagSlot03+"/"+IngrediantBagSlot03Cap+"\n");
 		outputText("Ironweed: "+IngrediantBagSlot04+"/"+IngrediantBagSlot04Cap+"\n");
 		outputText("Blade fern: "+IngrediantBagSlot05+"/"+IngrediantBagSlot05Cap+"\n");
+		outputText("Alraune nectar: "+IngrediantBagSlot06+"/"+IngrediantBagSlot06Cap+"\n");
 		outputText("\n<b>Fields</b>\n");
 		outputText("-01-: "+(GardenSlot01 != "" ? ""+GardenSlot01+" (Time until harvest: "+GardenSlot01Time+" hours)":"empty")+"");
 		outputText("\n-02-: "+(GardenSlot02 != "" ? ""+GardenSlot02+" (Time until harvest: "+GardenSlot02Time+" hours)":"empty")+"");
@@ -667,8 +668,9 @@ import classes.Scenes.SceneLib;
 		if (player.farmingLevel >= 45) outputText("\n-11-: "+(GardenSlot11 != "" ? ""+GardenSlot11+" (Time until harvest: "+GardenSlot11Time+" hours)":"empty")+"");
 		if (player.farmingLevel >= 50) outputText("\n-12-: "+(GardenSlot12 != "" ? ""+GardenSlot12+" (Time until harvest: "+GardenSlot12Time+" hours)":"empty")+"");
 		addButton(0, "Put Herb In", putInHerbIntoHerbBag0);
-		addButton(1, "Seed", Seed).hint("Plant down some seeds sacrificing an ingredients.");
-		addButton(2, "Harvest", Harvest).hint("Check your harvests.")
+		addButton(1, "Put Herb Out", putOutHerbFromHerbBag0);
+		addButton(3, "Seed", Seed).hint("Plant down some seeds sacrificing an ingredients.");
+		addButton(4, "Harvest", Harvest).hint("Check your harvests.")
 		addButton(14, "Back", camp.campActions);
 	}
 	
@@ -711,6 +713,34 @@ import classes.Scenes.SceneLib;
 		if (ItemID == CoC.instance.consumables.BLADEFERN) IngrediantBagSlot05++;
 		if (ItemID == CoC.instance.consumables.RAUNENECT) IngrediantBagSlot06++;
 		doNext(putInHerbIntoHerbBag0);
+	}
+	
+	private function putOutHerbFromHerbBag0():void {
+		menu();
+		if (IngrediantBagSlot01 > 0) addButton(0, "Healing herb", putOutHerbFromHerbBag, CoC.instance.consumables.HEALHERB).hint("Make sure to have free space in backapck to put it in or it would be lost.");
+		else addButtonDisabled(0, "Healing herb", "You not have any herb of this type in herb bag.");
+		if (IngrediantBagSlot02 > 0) addButton(1, "Moon grass", putOutHerbFromHerbBag, CoC.instance.consumables.MOONGRASS).hint("Make sure to have free space in backapck to put it in or it would be lost.");
+		else addButtonDisabled(1, "Moon grass", "You not have any herb of this type in herb bag.");
+		if (IngrediantBagSlot03 > 0) addButton(2, "Snakebane", putOutHerbFromHerbBag, CoC.instance.consumables.SNAKEBANE).hint("Make sure to have free space in backapck to put it in or it would be lost.");
+		else addButtonDisabled(2, "Snakebane", "You not have any herb of this type in herb bag.");
+		if (IngrediantBagSlot04 > 0) addButton(3, "Ironweed", putOutHerbFromHerbBag, CoC.instance.consumables.IRONWEED).hint("Make sure to have free space in backapck to put it in or it would be lost.");
+		else addButtonDisabled(3, "Ironweed", "You not have any herb of this type in herb bag.");
+		if (IngrediantBagSlot05 > 0) addButton(4, "Blade fern", putOutHerbFromHerbBag, CoC.instance.consumables.BLADEFERN).hint("Make sure to have free space in backapck to put it in or it would be lost.");
+		else addButtonDisabled(4, "Blade fern", "You not have any herb of this type in herb bag.");
+		if (IngrediantBagSlot06 > 0) addButton(5, "Alraune nectar", putOutHerbFromHerbBag, CoC.instance.consumables.RAUNENECT).hint("Make sure to have free space in backapck to put it in or it would be lost.");
+		else addButtonDisabled(5, "Alraune nectar", "You not have any herb of this type in herb bag.");
+		addButton(14, "Back", accessGarden);
+	}
+	private function putOutHerbFromHerbBag(ItemID:SimpleConsumable):void {
+		clearOutput();
+		outputText("In order to have some free space in your bag you put one of the herbs into your backpack.\n\n");
+		if (ItemID == CoC.instance.consumables.HEALHERB) IngrediantBagSlot01--;
+		if (ItemID == CoC.instance.consumables.MOONGRASS) IngrediantBagSlot02--;
+		if (ItemID == CoC.instance.consumables.SNAKEBANE) IngrediantBagSlot03--;
+		if (ItemID == CoC.instance.consumables.IRONWEED) IngrediantBagSlot04--;
+		if (ItemID == CoC.instance.consumables.BLADEFERN) IngrediantBagSlot05--;
+		if (ItemID == CoC.instance.consumables.RAUNENECT) IngrediantBagSlot06--;
+		inventory.takeItem(ItemID, putOutHerbFromHerbBag0);
 	}
 	
 	private function timeUntilHarvest():Number {
@@ -955,25 +985,43 @@ import classes.Scenes.SceneLib;
 		clearOutput();
 		if (IngredientName == "healing herb") {
 			IngrediantBagSlot01 += 5;
-			if (IngrediantBagSlot01 > IngrediantBagSlot01Cap) IngrediantBagSlot01 = IngrediantBagSlot01Cap;
+			if (IngrediantBagSlot01 > IngrediantBagSlot01Cap) {
+				IngrediantBagSlot01 -= 5;
+				plot = 0;
+			}
 		}
 		if (IngredientName == "moon grass") {
 			IngrediantBagSlot02 += 5;
-			if (IngrediantBagSlot02 > IngrediantBagSlot02Cap) IngrediantBagSlot02 = IngrediantBagSlot02Cap;
+			if (IngrediantBagSlot02 > IngrediantBagSlot02Cap) {
+				IngrediantBagSlot02 -= 5;
+				plot = 0;
+			}
 		}
 		if (IngredientName == "snakebane") {
 			IngrediantBagSlot03 += 5;
-			if (IngrediantBagSlot03 > IngrediantBagSlot03Cap) IngrediantBagSlot03 = IngrediantBagSlot03Cap;
+			if (IngrediantBagSlot03 > IngrediantBagSlot03Cap) {
+				IngrediantBagSlot03 -= 5;
+				plot = 0;
+			}
 		}
 		if (IngredientName == "ironweed") {
 			IngrediantBagSlot04 += 5;
-			if (IngrediantBagSlot04 > IngrediantBagSlot04Cap) IngrediantBagSlot04 = IngrediantBagSlot04Cap;
+			if (IngrediantBagSlot04 > IngrediantBagSlot04Cap) {
+				IngrediantBagSlot04 -= 5;
+				plot = 0;
+			}
 		}
 		if (IngredientName == "bladefern") {
 			IngrediantBagSlot05 += 5;
-			if (IngrediantBagSlot05 > IngrediantBagSlot05Cap) IngrediantBagSlot05 = IngrediantBagSlot05Cap;
+			if (IngrediantBagSlot05 > IngrediantBagSlot05Cap) {
+				IngrediantBagSlot05 -= 5;
+				plot = 0;
+			}
 		}
 		switch (plot) {
+			case 0:
+				outputText("<b>You can't store all seeds in bag. Harvest this plot when you have enough space for storing this herb.</b>");
+				break;
 			case 1:
 				GardenSlot01 = "";
 				break;
@@ -1014,10 +1062,12 @@ import classes.Scenes.SceneLib;
 				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");
 				doNext(playerMenu);
 		}
-		outputText("Youve collected all of the ingredients.");
-		var FE:Number = 20 + player.level;
-		FE *= player.FarmingMulti();
-		player.farmXP(FE);
+		if (plot > 0) {
+			outputText("You've collected all of the ingredients.");
+			var FE:Number = 20 + player.level;
+			FE *= player.FarmingMulti();
+			player.farmXP(FE);
+		}
 		doNext(Harvest);
 	}
 
@@ -1348,21 +1398,27 @@ import classes.Scenes.SceneLib;
 		switch (slot) {
 			case 1:
 				PotionsBagSlot01 -= 1;
+				if (PotionsBagSlot01 == 0) PotionsBagSlot01Potion = "";
 				break;
 			case 2:
 				PotionsBagSlot02 -= 1;
+				if (PotionsBagSlot02 == 0) PotionsBagSlot02Potion = "";
 				break;
 			case 3:
 				PotionsBagSlot03 -= 1;
+				if (PotionsBagSlot03 == 0) PotionsBagSlot03Potion = "";
 				break;
 			case 4:
 				PotionsBagSlot04 -= 1;
+				if (PotionsBagSlot04 == 0) PotionsBagSlot04Potion = "";
 				break;
 			case 5:
 				PotionsBagSlot05 -= 1;
+				if (PotionsBagSlot05 == 0) PotionsBagSlot05Potion = "";
 				break;
 			case 6:
 				PotionsBagSlot06 -= 1;
+				if (PotionsBagSlot06 == 0) PotionsBagSlot06Potion = "";
 				break;
 			default:
 				outputText("<b>This text should not appear. Please let Ormael/Aimozg know.</b>");

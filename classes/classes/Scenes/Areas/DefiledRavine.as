@@ -46,12 +46,14 @@ use namespace CoC;
 				when: function ():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0 && ((rand(10) == 0) || (flags[kFLAGS.LETHICE_DEFEATED] > 0))
 				},
+				chance: defiledRavineChance,
 				call: SceneLib.alvinaFollower.alvinaThirdEncounter
 			}, {
 				name: "alvina2",
 				when: function ():Boolean {
 					return ((flags[kFLAGS.ALVINA_FOLLOWER] > 8 && flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0) || (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) || SceneLib.alvinaFollower.SecondDateSuccess) && !SceneLib.alvinaFollower.AlvinaDied && !SceneLib.alvinaFollower.AlvinaPurified
 				},
+				chance: defiledRavineChance,
 				call: SceneLib.alvinaFollower.alvinaThirdEncounter
 			}, {
 				name: "cowsuccubus",
@@ -94,6 +96,12 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 			defiledRavineEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+
+		public function defiledRavineChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function findNothing():void {

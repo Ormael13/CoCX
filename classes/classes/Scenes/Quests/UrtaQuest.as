@@ -57,6 +57,36 @@ public var urtaQItems17:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems18:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems19:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems20:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems21:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems22:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems23:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems24:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems25:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems26:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems27:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems28:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems29:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems30:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems31:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems32:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems33:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems34:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems35:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems36:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems37:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems38:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems39:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems40:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems41:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems42:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems43:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems44:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems45:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems46:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems47:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems48:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems49:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems50:ItemSlotClass = new ItemSlotClass();
 
 public function urtaBusy():Boolean {
 	return (telAdre.edryn.pregnancy.type == PregnancyStore.PREGNANCY_TAOTH || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
@@ -175,6 +205,7 @@ public function resetToPC():void {
 	if (player.hasStatusEffect(StatusEffects.UrtaQuestAdjusted)) {
 		if (player.statusEffectv1(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.GAME_DIFFICULTY] = player.statusEffectv1(StatusEffects.UrtaQuestAdjusted);
 		if (player.statusEffectv2(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.SECONDARY_STATS_SCALING] = player.statusEffectv2(StatusEffects.UrtaQuestAdjusted);
+		if (player.statusEffectv3(StatusEffects.UrtaQuestAdjusted) > 0) flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = player.statusEffectv3(StatusEffects.UrtaQuestAdjusted);
 		player.removeStatusEffect(StatusEffects.UrtaQuestAdjusted);
 	}
 	player = player2;
@@ -198,6 +229,36 @@ public function resetToPC():void {
 	player.itemSlot18 = urtaQItems18;
 	player.itemSlot19 = urtaQItems19;
 	player.itemSlot20 = urtaQItems20;
+	player.itemSlot21 = urtaQItems21;
+	player.itemSlot22 = urtaQItems22;
+	player.itemSlot23 = urtaQItems23;
+	player.itemSlot24 = urtaQItems24;
+	player.itemSlot25 = urtaQItems25;
+	player.itemSlot26 = urtaQItems26;
+	player.itemSlot27 = urtaQItems27;
+	player.itemSlot28 = urtaQItems28;
+	player.itemSlot29 = urtaQItems29;
+	player.itemSlot30 = urtaQItems30;
+	player.itemSlot31 = urtaQItems31;
+	player.itemSlot32 = urtaQItems32;
+	player.itemSlot33 = urtaQItems33;
+	player.itemSlot34 = urtaQItems34;
+	player.itemSlot35 = urtaQItems35;
+	player.itemSlot36 = urtaQItems36;
+	player.itemSlot37 = urtaQItems37;
+	player.itemSlot38 = urtaQItems38;
+	player.itemSlot39 = urtaQItems39;
+	player.itemSlot40 = urtaQItems40;
+	player.itemSlot41 = urtaQItems41;
+	player.itemSlot42 = urtaQItems42;
+	player.itemSlot43 = urtaQItems43;
+	player.itemSlot44 = urtaQItems44;
+	player.itemSlot45 = urtaQItems45;
+	player.itemSlot46 = urtaQItems46;
+	player.itemSlot47 = urtaQItems47;
+	player.itemSlot48 = urtaQItems48;
+	player.itemSlot49 = urtaQItems49;
+	player.itemSlot50 = urtaQItems50;
 	model.player = player;
 
 	// See called method comment.
@@ -231,6 +292,36 @@ public function startUrtaQuest():void {
 	urtaQItems18 = player.itemSlot18;
 	urtaQItems19 = player.itemSlot19;
 	urtaQItems20 = player.itemSlot20;
+	urtaQItems21 = player.itemSlot21;
+	urtaQItems22 = player.itemSlot22;
+	urtaQItems23 = player.itemSlot23;
+	urtaQItems24 = player.itemSlot24;
+	urtaQItems25 = player.itemSlot25;
+	urtaQItems26 = player.itemSlot26;
+	urtaQItems27 = player.itemSlot27;
+	urtaQItems28 = player.itemSlot28;
+	urtaQItems29 = player.itemSlot29;
+	urtaQItems30 = player.itemSlot30;
+	urtaQItems31 = player.itemSlot31;
+	urtaQItems32 = player.itemSlot32;
+	urtaQItems33 = player.itemSlot33;
+	urtaQItems34 = player.itemSlot34;
+	urtaQItems35 = player.itemSlot35;
+	urtaQItems36 = player.itemSlot36;
+	urtaQItems37 = player.itemSlot37;
+	urtaQItems38 = player.itemSlot38;
+	urtaQItems39 = player.itemSlot39;
+	urtaQItems40 = player.itemSlot40;
+	urtaQItems41 = player.itemSlot41;
+	urtaQItems42 = player.itemSlot42;
+	urtaQItems43 = player.itemSlot43;
+	urtaQItems44 = player.itemSlot44;
+	urtaQItems45 = player.itemSlot45;
+	urtaQItems46 = player.itemSlot46;
+	urtaQItems47 = player.itemSlot47;
+	urtaQItems48 = player.itemSlot48;
+	urtaQItems49 = player.itemSlot49;
+	urtaQItems50 = player.itemSlot50;
 	player.itemSlot1 = new ItemSlotClass();
 	player.itemSlot2 = new ItemSlotClass();
 	player.itemSlot3 = new ItemSlotClass();
@@ -251,6 +342,36 @@ public function startUrtaQuest():void {
 	player.itemSlot18 = new ItemSlotClass();
 	player.itemSlot19 = new ItemSlotClass();
 	player.itemSlot20 = new ItemSlotClass();
+	player.itemSlot21 = new ItemSlotClass();
+	player.itemSlot22 = new ItemSlotClass();
+	player.itemSlot23 = new ItemSlotClass();
+	player.itemSlot24 = new ItemSlotClass();
+	player.itemSlot25 = new ItemSlotClass();
+	player.itemSlot26 = new ItemSlotClass();
+	player.itemSlot27 = new ItemSlotClass();
+	player.itemSlot28 = new ItemSlotClass();
+	player.itemSlot29 = new ItemSlotClass();
+	player.itemSlot30 = new ItemSlotClass();
+	player.itemSlot31 = new ItemSlotClass();
+	player.itemSlot32 = new ItemSlotClass();
+	player.itemSlot33 = new ItemSlotClass();
+	player.itemSlot34 = new ItemSlotClass();
+	player.itemSlot35 = new ItemSlotClass();
+	player.itemSlot36 = new ItemSlotClass();
+	player.itemSlot37 = new ItemSlotClass();
+	player.itemSlot38 = new ItemSlotClass();
+	player.itemSlot39 = new ItemSlotClass();
+	player.itemSlot40 = new ItemSlotClass();
+	player.itemSlot41 = new ItemSlotClass();
+	player.itemSlot42 = new ItemSlotClass();
+	player.itemSlot43 = new ItemSlotClass();
+	player.itemSlot44 = new ItemSlotClass();
+	player.itemSlot45 = new ItemSlotClass();
+	player.itemSlot46 = new ItemSlotClass();
+	player.itemSlot47 = new ItemSlotClass();
+	player.itemSlot48 = new ItemSlotClass();
+	player.itemSlot49 = new ItemSlotClass();
+	player.itemSlot50 = new ItemSlotClass();
 	player2 = player;
 
 	player = new Player();
@@ -305,15 +426,19 @@ public function startUrtaQuest():void {
 	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
-	if (flags[kFLAGS.GAME_DIFFICULTY] > 0 || flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) {
+	if (flags[kFLAGS.GAME_DIFFICULTY] > 0 || flags[kFLAGS.SECONDARY_STATS_SCALING] > 0 || flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
 		player.createStatusEffect(StatusEffects.UrtaQuestAdjusted, 0, 0, 0, 0);
 		if (flags[kFLAGS.GAME_DIFFICULTY] > 0) {
 			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 1, flags[kFLAGS.GAME_DIFFICULTY]);
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 		}
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] > 0) {
-			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 1, flags[kFLAGS.SECONDARY_STATS_SCALING]);
+			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 2, flags[kFLAGS.SECONDARY_STATS_SCALING]);
 			flags[kFLAGS.SECONDARY_STATS_SCALING] = 0;
+		}
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
+			player.addStatusValue(StatusEffects.UrtaQuestAdjusted, 3, flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
 		}
 	}
 

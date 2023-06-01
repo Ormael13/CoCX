@@ -1009,7 +1009,7 @@ import classes.lists.Gender;
 				outputText("\n\nWatching her go, you redress yourself and then head your seperate ways.");
 			}
 			//Increase toughness
-			player.trainStat("tou", +1, 50);
+			player.trainStat("tou", +1, player.trainStatCap("tou",50));
 			dynStats("tou", 0.5);
 			fatigue(40);
 			doNext(camp.returnToCampUseOneHour);

@@ -63,25 +63,6 @@ import classes.internals.*;
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
 		
-		override public function handleAwardItemText(itype:ItemType):ItemType {
-			if (itype == weapons.L__AXE) {
-				//50% breakage!
-				if (rand(2) == 0) {
-					if (player.tallness < 78 && player.str < 90) {
-						outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ");
-						if (rand(2) == 0) return null;
-						else return consumables.SDELITE;
-					}
-					//Not too tall, dont rob of axe!
-					else CoC.instance.plotFight = true;
-				} else {
-					outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ");
-					return null;
-				}
-			}
-			return itype;
-		}
-		
 		public function Minotaur(axe:Boolean=false)
 		{
 			//Most times they dont have an axe
@@ -129,7 +110,7 @@ import classes.internals.*;
 				this.level = hasAxe?15:12;
 				if (hasAxe) {
 					this.bonusLust = 70 + this.ballSize * 4 + rand(this.ballSize * 3);
-					this.drop = new WeightedDrop(consumables.MINOBLO, 1);
+					this.drop = new WeightedDrop(weapons.L__AXE, 1);
 				} else {
 					this.bonusLust = 68 + this.ballSize * 4 + rand(this.ballSize * 3);
 					this.drop = new ChainedDrop().add(consumables.MINOCUM, 1 / 5)

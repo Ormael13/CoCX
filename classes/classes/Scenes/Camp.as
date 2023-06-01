@@ -13,6 +13,7 @@ import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Places.RuinedTownRebuilt;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
 import classes.display.SpriteDb;
@@ -238,10 +239,11 @@ public class Camp extends NPCAwareContent{
 			SceneLib.tyrantia.unlockingCorruptLegendariesOption();
 			return;
 		}
-	//	if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && AbandonedTownRebuilt.RebuildStarted = false && AbandonedTownRebuilt.AmilyAtWetBitch == false) {
-			//hideMenus();
-			// SceneLib.AbandonedTownRebuilt.AmilyRebuild();
-	//	}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && RuinedTownRebuilt.RebuildState == 0 && !RuinedTownRebuilt.AmilyAtWetBitch) {
+			hideMenus();
+			SceneLib.ruinedTown.amilyRebuild();
+			return;
+		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
 			//No corrupt: Jojo, Amily, or Vapula
@@ -2218,6 +2220,7 @@ public class Camp extends NPCAwareContent{
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
 		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
+		addButton(13, "C & S", menuForCombiningAndSeperating).hint("Combining & Seperating");
 		addButton(14, "Back", campActions);
 	}
 	private function convertingEnergyCoreIntoFlagValue():void {
@@ -2233,6 +2236,50 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(useables.MECHANI, 1);
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		doNext(campMiscActions);
+	}
+	
+	public function menuForCombiningAndSeperating():void {
+		clearOutput();
+		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons.");
+		menu();
+		var btn:int = 0;
+		if (player.itemCount(weapons.KAMA) > 1) addButton(btn++, "D.Kama", menuCombining, weapons.KAMA, weapons.D_KAMA).hint("Combine 2 Kama into Dual Kama");
+		if (player.itemCount(weapons.D_KAMA) > 0) addButton(btn++, "Kama", menuSeparating, weapons.D_KAMA, weapons.KAMA).hint("Separate Dual Kama into 2 Kama");
+		if (player.itemCount(weapons.DAGGER) > 1) addButton(btn++, "D.Daggers", menuCombining, weapons.DAGGER, weapons.DDAGGER).hint("Combine 2 Daggers into Dual Daggers");
+		if (player.itemCount(weapons.DDAGGER) > 0) addButton(btn++, "Dagger", menuSeparating, weapons.DDAGGER, weapons.DAGGER).hint("Separate Dual Daggers into 2 Daggers");
+		if (player.itemCount(weapons.ANGSTD1) > 1) addButton(btn++, "A.Daggers", menuCombining, weapons.ANGSTD1, weapons.ANGSTD).hint("Combine 2 Angst Dagger(s) into Angst Daggers");
+		if (player.itemCount(weapons.ANGSTD) > 0) addButton(btn++, "A.Dagger", menuSeparating, weapons.ANGSTD, weapons.ANGSTD1).hint("Separate Angst Daggers into 2 Angst Dagger(s)");
+		if (player.itemCount(weapons.BFSWORD) > 1) addButton(btn++, "D.BF Swords", menuCombining, weapons.BFSWORD, weapons.DBFSWO).hint("Combine 2 BF Swords into Dual BF Swords");
+		if (player.itemCount(weapons.DBFSWO) > 0) addButton(btn++, "BF Sword", menuSeparating, weapons.DBFSWO, weapons.BFSWORD).hint("Separate Dual BF Swords into 2 BF Swords");
+		if (player.itemCount(weapons.BFTHSWORD) > 1) addButton(btn++, "D.BFTH Swords", menuCombining, weapons.BFTHSWORD, weapons.DBFTHSWO).hint("Combine 2 BF Two-Handed Swords into Dual BF Two-Handed Swords");
+		if (player.itemCount(weapons.DBFTHSWO) > 0) addButton(btn++, "BFTH Sword", menuSeparating, weapons.DBFTHSWO, weapons.BFTHSWORD).hint("Separate Dual BF Two-Handed Swords into 2 BF Two-Handed Swords");
+		if (player.itemCount(weapons.BFWHIP) > 1) addButton(btn++, "D.BF Whips", menuCombining, weapons.BFWHIP, weapons.DBFWHIP).hint("Combine 2 BF Whips into Dual BF Whips");
+		if (player.itemCount(weapons.DBFWHIP) > 0) addButton(btn++, "BF Whip", menuSeparating, weapons.DBFWHIP, weapons.BFWHIP).hint("Separate Dual BF Whips into 2 BF Whips");
+		if (player.itemCount(weapons.NODACHI) > 1) addButton(btn++, "D.Nodachi", menuCombining, weapons.NODACHI, weapons.DNODACHI).hint("Combine 2 Nodachi into Dual Nodachi");
+		if (player.itemCount(weapons.DNODACHI) > 0) addButton(btn++, "Nodachi", menuSeparating, weapons.DNODACHI, weapons.NODACHI).hint("Separate Dual Nodachi into 2 Nodachi");
+		if (player.itemCount(weapons.WHIP) > 1) addButton(btn++, "D. Whip", menuCombining, weapons.WHIP, weapons.PWHIP).hint("Combine 2 Whip into Dual Whip");
+		if (player.itemCount(weapons.PWHIP) > 0) addButton(btn++, "Whip", menuSeparating, weapons.PWHIP, weapons.WHIP).hint("Separate Dual Whip into 2 Whips");
+		if (player.itemCount(weapons.WARHAMR) > 1) addButton(btn++, "D.HWhamm", menuCombining, weapons.WARHAMR, weapons.D_WHAM_).hint("Combine 2 Huge Warahmmers into Dual Huge Warahmmer");
+		if (player.itemCount(weapons.D_WHAM_) > 0) addButton(btn++, "HWhamm", menuSeparating, weapons.D_WHAM_, weapons.WARHAMR).hint("Separate Dual Huge Warahmmer into 2 Huge Warahmmers");
+		if (player.itemCount(weapons.SUCWHIP) > 1) addButton(btn++, "P.S.Whips", menuCombining, weapons.SUCWHIP, weapons.PSWHIP).hint("Combine 2 Succubi Whips into Pair of Succubi Whips");
+		if (player.itemCount(weapons.PSWHIP) > 0) addButton(btn++, "S.Whips", menuSeparating, weapons.PSWHIP, weapons.SUCWHIP).hint("Separate Pair of Succubi Whips into 2 Succubi Whips");
+		addButton(14, "Back", campMiscActions);
+	}
+	public function menuCombining(weapon1: Weapon, weapon2: Weapon):void {
+		clearOutput();
+		outputText("Combining.\n\n");
+		player.destroyItems(weapon1, 2);
+		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
+	}
+	public function menuSeparating(weapon1: Weapon, weapon2: Weapon):void {
+		clearOutput();
+		outputText("Separating.\n\n");
+		player.destroyItems(weapon1, 1);
+		inventory.takeItem(weapon2, curry(menuSeparating1a, weapon2));
+	}
+	public function menuSeparating1a(weapon2: Weapon):void {
+		outputText("\n\n");
+		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}
 	
 	public function mainPagePocketWatch(page:int = 1):void {
@@ -2966,7 +3013,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
-			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(10, "Relax", NPCsRelax);
 		}
 		addButton(0, "Chi Chi", toggleNPCStatus, StatusEffects.ChiChiOff).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(1, "Diana", toggleNPCStatus, StatusEffects.DianaOff).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
@@ -2976,6 +3023,8 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
+		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] < 2) addButton(11, "Activate", GottaCampThemALLOn).hint("Turn on 'Gotta Camp them ALL' Mode.");
+		if (flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] == 2) addButton(11, "Deactivate", GottaCampThemALLOff).hint("Turn off 'Gotta Camp them ALL' Mode.");
         addButton(12, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
@@ -2997,6 +3046,16 @@ public class Camp extends NPCAwareContent{
 	private function NPCsRelax():void {
 		outputText("\n\nPlaceholder text about telling NPC's to relax.");
 		flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
+		doNext(SparrableNPCsMenu);
+	}
+	private function GottaCampThemALLOn():void {
+		outputText("\n\nPlaceholder text about turning on 'Gotta Camp them ALL' mode.");
+		flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] = 2;
+		doNext(SparrableNPCsMenu);
+	}
+	private function GottaCampThemALLOff():void {
+		outputText("\n\nPlaceholder text about turning off 'Gotta Camp them ALL' mode.");
+		flags[kFLAGS.GOTTA_CAMP_THEM_ALL_MODE] = 1;
 		doNext(SparrableNPCsMenu);
 	}
 
@@ -3620,17 +3679,6 @@ public class Camp extends NPCAwareContent{
 					outputText(" as you sleep for " + num2Text(timeQ) + " ");
 					if (timeQ == 1) outputText("hour.\n");
 					else outputText("hours.\n")
-					if (SophieFollowerScene.HarpyEggHatching) { //Egg progression
-						if (SophieFollowerScene.HarpyEggDay <= 7) outputText(" Snuggling the egg you instinctively know your precious child is almost ready to be born.");
-						else if (SophieFollowerScene.HarpyEggDay <= 4) outputText(" Your egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
-						else if (SophieFollowerScene.HarpyEggDay <= 2) outputText(" The proximity of your egg is soothing to your motherly instincts.");
-						SophieFollowerScene.HarpyEggDay += 1;
-						if (SophieFollowerScene.HarpyEggDay == 7){
-							SophieFollowerScene.HarpyEggDay = 0;
-							SophieFollowerScene.HarpyEggHatching = false;
-							SophieFollowerScene.HarpyEggReady = true;
-						}
-					}
 				}
 				else if (player.isRaceCached(Races.IMP, 3)) {
 					outputText("Done with your day you open the tome and dive into the security of your personal sanctuary. ");
@@ -4778,4 +4826,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

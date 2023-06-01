@@ -72,6 +72,7 @@ public class CharViewContext extends ExecContext {
 					showLegClothing: showLegClothing(),
 					showPanty: showPanty(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
+					PlayerHasBreastViewOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.armor == game.armors.CGUNSLI || player.armor == game.armors.GTECHC_,
 					PlayerHasABra: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingBra(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -83,19 +84,19 @@ public class CharViewContext extends ExecContext {
 					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
 
 					//Detect Weapon Skins
-					PlayerHasAWeapon: player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+					PlayerHasAWeapon: player.isDaggerTypeWeapon() || player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
 
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
-					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
-					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
+					PlayerHasAStaffHoly: player.weapon == game.weapons.U_STAFF,
+					PlayerHasAStaffUnholy: player.weapon == game.weapons.N_STAFF,
 
 					PlayerHasAWand: player.isWandTypeWeapon(),
-					PlayerHasAWandHoly:player.weapon == game.weapons.OCCULUS,
-					PlayerHasAWandUnholy:player.weapon == game.weapons.ECLIPSE,
+					PlayerHasAWandHoly: player.weapon == game.weapons.OCCULUS,
+					PlayerHasAWandUnholy: player.weapon == game.weapons.ECLIPSE,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
-					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
-					PlayerHasASwordunholy:player.weapon == game.weapons.EBNYBLD,
+					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
+					PlayerHasASwordunholy: player.weapon == game.weapons.EBNYBLD,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
@@ -112,9 +113,13 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
 
-					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA  || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
-					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.MASAMUN,
-					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER,
+					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE,
+					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
+					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE,
+
+					PlayerHasNodachi: (weaponSubtype == "katana" && weaponSubtype != "uchigatana") || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.DNODACHI || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasNodachiHoly:player.weapon == game.weapons.MASAMUN,
+					PlayerHasNodachiUnholy:player.weapon == game.weapons.BLETTER,
 
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
@@ -124,19 +129,22 @@ public class CharViewContext extends ExecContext {
 					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
 					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasAScythe: player.isScytheTypeWeapon(),
+					PlayerHasAScythe: player.isScytheTypeWeapon() || player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.KAMA || player.weapon == game.weapons.KAMAWHIP || player.weapon == game.weapons.D_KAMA,
 					PlayerHasAScytheHoly:player.weapon == game.weapons.LHSCYTH,
-					PlayerHasAScytheUnholy:player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.ATWINSCY,
+					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weapon == game.weapons.HELRAIS,
 
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
 					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
 					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
+					PlayerhasACasterTome:player.shield == game.shields.IMPTOME || player.shield == game.shields.NEKONOM,
 
 					PlayerHasABow: player.isBowTypeWeapon(),
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
+
+					PlayerHasARangedBook:player.weaponRange == game.weaponsrange.E_TOME_ || player.weaponRange == game.weaponsrange.G_E_MAN || player.weaponRange == game.weaponsrange.G_E_MAN || player.weaponRange == game.weaponsrange.I_TOME_ || player.weaponRange == game.weaponsrange.SSKETCH,
 
 					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
 					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.O_JAVEL || player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
@@ -179,7 +187,7 @@ public class CharViewContext extends ExecContext {
 					StatusEffects: StatusEffects,
 
 					// Viewable Clothing lists
-					armStanceNonBannedList: player.armor == game.armors.SCANSC || player.armor == game.armors.ERA || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
+					armStanceNonBannedList: player.armor == game.armors.SCANSC || player.armor == game.armors.ERA || player.armor == game.armors.FMDRESS || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
 					sleevelessList: player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
 					playerWearsAStanceBannedDress: player.armor == game.armors.BLIZZ_K || player.armor == game.armors.SPKIMO || player.armor == game.armors.WKIMONO || player.armor == game.armors.BKIMONO || player.armor == game.armors.RKIMONO || player.armor == game.armors.PKIMONO || player.armor == game.armors.BLKIMONO || player.armor == game.armors.KBDRESS || player.armor == game.armors.GTECHC_ || player.armor == game.armors.IBKIMO || player.armor == game.armors.TCKIMO || player.armor == game.armors.OEKIMO || player.armor == game.armors.OTKIMO,
 					playerWearsAStanceBannedArmor: armorSubtype == "fullplate" || player.armor == game.armors.CTPALAD || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
@@ -225,6 +233,7 @@ public class CharViewContext extends ExecContext {
 					gooArmor: player.armor == game.armors.GOOARMR,
 					franRegalia: player.armor == game.armors.FCLOAK,
 					elfWizardDress: player.armor == game.armors.FMDRESS,
+					CowGirlOutfit: player.armor == game.armors.CGUNSLI,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
@@ -232,7 +241,6 @@ public class CharViewContext extends ExecContext {
 					comfyBikiniBra: player.upperGarment == game.undergarments.C_BRA,
 					cowBra: player.upperGarment == game.undergarments.COW_BRA,
 					blackCatBra: player.upperGarment == game.undergarments.BN_TOP,
-
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
@@ -259,6 +267,7 @@ public class CharViewContext extends ExecContext {
 					sphinxRegalia: player.headJewelry == game.headjewelries.SPHINXAS,
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
+					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
 
 					// Viewable amulet Accessory lists
 					GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||

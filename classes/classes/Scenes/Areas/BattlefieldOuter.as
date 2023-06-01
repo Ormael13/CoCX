@@ -61,6 +61,7 @@ public class BattlefieldOuter extends BaseContent
 			when: function ():Boolean {
 				return player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)
 			},
+			chance: battlefieldOuterChance,
 			call: tyrantiaEncounterFn
 		}, {
 			//Giant slayer mech
@@ -81,7 +82,7 @@ public class BattlefieldOuter extends BaseContent
 			name: "helcommon",
 			night : false,
 			call: SceneLib.helScene.helSexualAmbush,
-			chance: 0.2,
+			chance: battlefieldOuterChance,
 			when: SceneLib.helScene.helSexualAmbushCondition
 		}, {
 			name: "etna",
@@ -91,7 +92,7 @@ public class BattlefieldOuter extends BaseContent
 						&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 						&& (player.level >= 20);
 			},
-			chance: 0.5,
+			chance: battlefieldOuterChance,
 			call: SceneLib.etnaScene.repeatYandereEnc
 		},  {
 			name: "diana",
@@ -99,7 +100,7 @@ public class BattlefieldOuter extends BaseContent
 			when: function():Boolean {
 				return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 			},
-			chance: 0.5,
+			chance: battlefieldOuterChance,
 			call: SceneLib.dianaScene.repeatEnc
 		}, {
 			name: "dianaName",
@@ -107,7 +108,7 @@ public class BattlefieldOuter extends BaseContent
 			when: function():Boolean {
 				return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 			},
-			chance: 0.5,
+			chance: battlefieldOuterChance,
 			call: SceneLib.dianaScene.postNameEnc
 		}, {
 			name: "ted",
@@ -152,7 +153,12 @@ public class BattlefieldOuter extends BaseContent
 		battlefieldOuterEncounter.execEncounter();
 		flushOutputTextToGUI();
 	}
-
+	
+	public function battlefieldOuterChance():Number {
+		var temp:Number = 0.5;
+		if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+		return temp;
+	}
 
 	private function findItems():void {
 		clearOutput();

@@ -762,7 +762,7 @@ import classes.Scenes.Crafting;
 						"You drowsily agree, and stand yourself up despite the protest of your body against leaving its blissful perch on top of the lovely Elf woman. You offer her a hand and she gracefully pulls herself up as well," +
 						" and the two of you share one more sweet kiss before you wade back to your equipment and prepare to continue your day.");
 				player.sexReward("vaginalFluids", "Vaginal");
-				player.trainStat("lib", 4, 80);
+				player.trainStat("lib", 4, player.trainStatCap("lib",80));
 				CoC.instance.timeQ = 1;
 				player.buff("Sisterly bathing").addStats({int:20,wis:20}).withText("Sisterly bathing").forDays(1);
 			} else {
@@ -836,7 +836,7 @@ import classes.Scenes.Crafting;
 					" Alyssa is still asleep, hugging you. You give her a gentle kiss on her large forehead and carefully extract yourself to avoid waking her." +
 					" She mumbles a bit in her sleep as your warmth leaves her, but remains there as you dress yourself and exit the tent to continue your day.");
 			player.sexReward("vaginalFluids", "Vaginal");
-			player.trainStat("lib", +1, 80);
+			player.trainStat("lib", +1, player.trainStatCap("lib",80));
 			CoC.instance.timeQ = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1037,9 +1037,9 @@ import classes.Scenes.Crafting;
 			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) outputText("hit a bullseye, and Elenwen praises your efforts before you say your goodbyes.");
 			outputText("\n\nAs you leave for your camp Elenwen waves at you with a \"<i>See you later, sister. We can do something more fun next time~♥</i>\"" +
 					" With a hint of regret, you wave and head back home, seriously considering taking her up on the offer before the day is up.");
-			player.trainStat("tou", 4, 50);
-			player.trainStat("spe", 4, 100);
-			player.trainStat("int", 4, 80);
+			player.trainStat("tou", 4, player.trainStatCap("tou",50));
+			player.trainStat("spe", 4, player.trainStatCap("spe",100));
+			player.trainStat("int", 4, player.trainStatCap("int",80));
 			if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kelt) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING1;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Pin down ability! <b>Gained P.Ability: Pin Down</b>");
@@ -1143,9 +1143,9 @@ import classes.Scenes.Crafting;
 					"The two of you practice for a few more minutes before she nods respectfully, " +
 					"\"<i>I hope you now feel more comfortable about handling an Elven spear.</i>\"" +
 					"\n\nAs you leave, waving goodbye, the kiss resonates with you, perhaps there are many ways to think about how to handle melee combat.");
-			player.trainStat("str", 4, 80);
-			player.trainStat("spe", 4, 100);
-			player.trainStat("tou", 4, 80);
+			player.trainStat("str", 4, player.trainStatCap("str",80));
+			player.trainStat("spe", 4, player.trainStatCap("spe",100));
+			player.trainStat("tou", 4, player.trainStatCap("tou",80));
 			CoC.instance.timeQ = 1;
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
@@ -1336,7 +1336,7 @@ import classes.Scenes.Crafting;
 				outputText("You spend the 5 hour studying with Lutien and finish feeling far more confident in your ability to use magic.\n\n");
 				hasTrainedToday = true;
 			}
-			player.trainStat("int", 2 + rand(4), 100);
+			player.trainStat("int", 2 + rand(4), player.trainStatCap("int",100));
 			CoC.instance.timeQ = 3;
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -1461,7 +1461,7 @@ import classes.Scenes.Crafting;
 			outputText("On this you wave goodbye and head back to camp.[pg]");
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
-			player.trainStat("lib", 4, 100);
+			player.trainStat("lib", 4, player.trainStatCap("lib",100));
 			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING2;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1512,7 +1512,7 @@ import classes.Scenes.Crafting;
 			outputText("On this you wave goodbye and head back to camp.[pg]");
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
-			player.trainStat("lib", 4, 100);
+			player.trainStat("lib", 4, player.trainStatCap("lib",100));
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function ChelseaRandomTrain1():void {
@@ -1528,7 +1528,7 @@ import classes.Scenes.Crafting;
 			outputText("Later when you wake up Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more empathy training especially if you plan to take the demons down. Don't you worry sis I will train you until your senses are as sharp as the edge of an elven glaive.</i>\"[pg]");
 			outputText("On this you wave goodbye and head back to camp.[pg]");
 			player.SexXP((5+player.level) * 10);
-			player.trainStat("lib", 4, 100);
+			player.trainStat("lib", 4, player.trainStatCap("lib",100));
 			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && !hasTrainedToday && player.lib >= 200) {
 				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");

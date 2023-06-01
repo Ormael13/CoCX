@@ -76,13 +76,13 @@ public class TempleOfTheDivine extends BaseContent {
 			menu();
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
 				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altars.");
-				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Restore the temple.");
+				addButton(1, "Repair", TempleAltarsRebuildMenu).hint("Restore the temple.");
 			}
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1) { //req. PURE Marae
-				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
-				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(2, "Take Sword", takingExcaliburFromAltair);
-				if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
-				if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltair);
+				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltar);
+				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(2, "Take Sword", takingExcaliburFromAltar);
+				if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltar);
+				if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltar);
 			}
 			addButton(5, "Sapphire", sapphire.sapphiremenu).hint("Have a chat with the gargoyle.");
 			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "[onyx name]", onyx.krystalonyxmenu).hint("Have a sex with [onyx name].");
@@ -94,27 +94,27 @@ public class TempleOfTheDivine extends BaseContent {
 
 		public function PlayerPrayAtTemple():void {
 			clearOutput();
-			if (anyOfAltairsRepaired()) {
+			if (anyOfAltarsRepaired()) {
 				outputText("Would you like to pray, and if yes, to whom?");
 				menu();
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) //req. PURE Marae
-					addButtonIfTrue(0, "Marae", PlayerPrayAtTempleMaraeAltair,
+					addButtonIfTrue(0, "Marae", PlayerPrayAtTempleMaraeAltar,
 						"Marae can't help you anymore in her current condition...",
 						flags[kFLAGS.FACTORY_SHUTDOWN] == 1, "Pray to Marae for empowered white magic.");
-				else addButtonDisabled(0, "Marae", "You haven't restored this altair yet.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
-				else addButtonDisabled(1, "Taoth", "You haven't restored this altair yet.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(2, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
-				else addButtonDisabled(2, "Fera", "You haven't restored this altair yet.");
-				//addButtonDisabled(3, "E.e.ie.", "You haven't restored this altair yet.");
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(4, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
-				else addButtonDisabled(4, "Fenrir", "You haven't restored this altair yet.");//FUCK, STOP WRITING NYI OPTIONS, IT'S MISLEADING
-				/*addButtonDisabled(5, "???", "You not yet restored this altair.");//life godess
-				addButtonDisabled(6, "Krat..", "You not yet restored this altair.");
-				addButtonDisabled(7, "???", "You not yet restored this altair.");*///magic god
+				else addButtonDisabled(0, "Marae", "You haven't restored this altar yet.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltar).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
+				else addButtonDisabled(1, "Taoth", "You haven't restored this altar yet.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(2, "Fera", PlayerPrayAtTempleFeraAltar).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
+				else addButtonDisabled(2, "Fera", "You haven't restored this altar yet.");
+				//addButtonDisabled(3, "E.e.ie.", "You haven't restored this altar yet.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(4, "Fenrir", PlayerPrayAtTempleFenrirAltar).hint("Pray to the god sharing your body for an increase to your might.");
+				else addButtonDisabled(4, "Fenrir", "You haven't restored this altar yet.");//FUCK, STOP WRITING NYI OPTIONS, IT'S MISLEADING
+				/*addButtonDisabled(5, "???", "You not yet restored this altar.");//life godess
+				addButtonDisabled(6, "Krat..", "You not yet restored this altar.");
+				addButtonDisabled(7, "???", "You not yet restored this altar.");*///magic god
 				//Remove curses
-				if (anyOfAltairsRepaired() && player.gems >= 5000) addButton(13, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
-				else if (!anyOfAltairsRepaired()) addButtonDisabled(13, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
+				if (anyOfAltarsRepaired() && player.gems >= 5000) addButton(13, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
+				else if (!anyOfAltarsRepaired()) addButtonDisabled(13, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
 				else if (!player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drained") && !player.statStore.hasBuff("Damaged")) addButtonDisabled(13, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
 				else if (player.gems < 5000) addButtonDisabled(13, "Remove Curses", "You need at least 5000 gem in order to request deliverance from your maledictions and other status ailments.")
 				addButton(14, "Back", templeMainMenu);
@@ -125,7 +125,7 @@ public class TempleOfTheDivine extends BaseContent {
 			}
 		}
 
-		private function anyOfAltairsRepaired():Boolean {
+		private function anyOfAltarsRepaired():Boolean {
 			return flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1;
 		}
 
@@ -175,10 +175,11 @@ public class TempleOfTheDivine extends BaseContent {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fera</b>\n");
 				player.removeStatusEffect(StatusEffects.BlessingOfDivineFera);
+				player.minLustXStat.removeBuff("FerasBlessing");
 			}
 		}
 
-		public function PlayerPrayAtTempleMaraeAltair():void {
+		public function PlayerPrayAtTempleMaraeAltar():void {
 			clearOutput();
 			outputText("You pray to Marae. As you speak your prayer, you feel the warmth of the goddess' serenity flow through you, her motherly love for this land swaddling you; healing your wounds and washing away corrupt thoughts. You also feel the blessing of the deity empowering your white magic.\n");
 			loseBlessing("Marae");
@@ -199,7 +200,7 @@ public class TempleOfTheDivine extends BaseContent {
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function PlayerPrayAtTempleTaothAltair():void {
+		public function PlayerPrayAtTempleTaothAltar():void {
 			clearOutput();
 			outputText("You pray to the trickster patron Taoth. As you word out your prayer, suggestions of pranks flow into your mind, both playful and troublemaking, as you feel the laughter of the god cheer you up, healing your wounds and washing away corrupt thoughts. You also feel the blessing of the deity empowering your agility.\n");
 			loseBlessing("Taoth");
@@ -217,7 +218,7 @@ public class TempleOfTheDivine extends BaseContent {
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function PlayerPrayAtTempleFenrirAltair():void {
+		public function PlayerPrayAtTempleFenrirAltar():void {
 			clearOutput();
 			outputText("You pray to yourself. Truthfully, it's almost funny how you rebuilt your own altar just so you could be your own follower, but still, the altar functions as a catalyst for your power; and catalyze it, it does. As you word out your prayer, you feel the cold countenance of the magic of the god of winter filling you, healing your wounds and washing away corrupt thoughts. You also feel your boons empowering your might.\n");
 			loseBlessing("Fenrir");
@@ -234,24 +235,25 @@ public class TempleOfTheDivine extends BaseContent {
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function PlayerPrayAtTempleFeraAltair():void {
+		public function PlayerPrayAtTempleFeraAltar():void {
 			clearOutput();
 			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your \"talents\".\n");
 			loseBlessing("Fera");
 			outputText("<b>You gained the Blessing of Divine Agency - Fera for 7 days</b>");
 			player.createStatusEffect(StatusEffects.BlessingOfDivineFera, 169, 0, 0, 0);
+			player.buff("FerasBlessing").setStat("minlustx", 0.15).forHours(169).withText("Fera's Blessing");
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", 10);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function TempleAltairsRebuildMenu():void {
+		public function TempleAltarsRebuildMenu():void {
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 2) {
 				clearOutput();
 				outputText("Would you like to repair something in the temple?\n\n");
 				SceneLib.camp.campUpgrades.checkMaterials();
 				menu();
-				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
+				addButton(0, "Altars", rebuildGodsAltars).hint("Repair the altar.");
 				if ((flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 3 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 4) && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
 					else addButtonDisabled(1, "Statue of Marae", "You don't have enough stones. Required: 150");
@@ -284,23 +286,23 @@ public class TempleOfTheDivine extends BaseContent {
 			else addButton(btn, name, fun);
 		}
 
-		public function rebuildGodsAltairs():void {
+		public function rebuildGodsAltars():void {
 			menu();
-			addRebuildButton(0, "Marae", rebuildMaraeAltair,
+			addRebuildButton(0, "Marae", rebuildMaraeAltar,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1, true, "");
-			addRebuildButton(1, "Taoth", rebuildTaothAltair,
+			addRebuildButton(1, "Taoth", rebuildTaothAltar,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1, flags[kFLAGS.URTA_QUEST_STATUS] == 1,
 				"Urta might find out something about this one in the future. But you'll need to treat her VERY well and <b>often</b> for that...");
-			addRebuildButton(2, "Fenrir", rebuildFenrirAltair,
+			addRebuildButton(2, "Fenrir", rebuildFenrirAltar,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1, player.hasKeyItem("Gleipnir Collar") >= 0,
 				"There's a certain ice wolfie in a cold region. But don't think it's <b>easy</b> to earn his blessing.");
-			addRebuildButton(3, "Fera", rebuildFeraAltair,
+			addRebuildButton(3, "Fera", rebuildFeraAltar,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] < 1, flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] != 0 && player.cor >= 80 - player.corruptionTolerance,
 				"You need to fuck a pumpkin during the Halloween... no, really. Fuck a pumpkin. And you are required to be highly corrupted too.");
-			addButton(14, "Back", TempleAltairsRebuildMenu);
+			addButton(14, "Back", TempleAltarsRebuildMenu);
 		}
 
-		public function rebuildMaraeAltair():void {
+		public function rebuildMaraeAltar():void {
 			clearOutput();
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae.");
             if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText(" By the time you're done you can feel divine power amass around it anew.");
@@ -310,7 +312,7 @@ public class TempleOfTheDivine extends BaseContent {
 			doNext(camp.returnToCampUseEightHours);
 		}
 
-		public function rebuildTaothAltair():void {
+		public function rebuildTaothAltar():void {
 			clearOutput();
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Taoth. By the time you're done you can feel divine power amass around it anew.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
@@ -318,7 +320,7 @@ public class TempleOfTheDivine extends BaseContent {
 			doNext(camp.returnToCampUseEightHours);
 		}
 
-		public function rebuildFenrirAltair():void {
+		public function rebuildFenrirAltar():void {
 			clearOutput();
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Fenrir. By the time you're done you can feel a cold chilling aura amass around it. Was that really such a good idea?");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
@@ -326,7 +328,7 @@ public class TempleOfTheDivine extends BaseContent {
 			doNext(camp.returnToCampUseEightHours);
 		}
 
-		public function rebuildFeraAltair():void {
+		public function rebuildFeraAltar():void {
 			clearOutput();
 			outputText("You work for the entire day sculpting stone and repairing the altar of Fera. By the time you're done you can feel divine power albeit tainted amass around it anew.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
@@ -409,10 +411,10 @@ public class TempleOfTheDivine extends BaseContent {
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 8) {
 				outputText(" There are " + player.statusEffectv1(StatusEffects.TempleOfTheDivineTracker) + " benches in the temple for the worshipers to sit upon.");
 			}
-			doNext(TempleAltairsRebuildMenu);
+			doNext(TempleAltarsRebuildMenu);
 		}
 
-		public function puttingBSwordOrExcaliburOnAltair():void {
+		public function puttingBSwordOrExcaliburOnAltar():void {
 			clearOutput();
 			if (player.weapon == weapons.B_SWORD || player.hasItem(weapons.B_SWORD, 1)) {
 				outputText("You feel a weird resonance engulf you, as the power of the Altar of Marae echos with an item on your person.\n\n");
@@ -431,7 +433,7 @@ public class TempleOfTheDivine extends BaseContent {
 			doNext(templeMainMenu);
 		}
 
-		public function takingExcaliburFromAltair():void {
+		public function takingExcaliburFromAltar():void {
 			clearOutput();
 			outputText("You feel the power of the altar diminishing, however the weapon is stronger than ever and likely ready for its primary use, demon slaying.\n\n");
 			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 2, -2);
@@ -441,25 +443,25 @@ public class TempleOfTheDivine extends BaseContent {
 		private function havingOrUsingBSwordOrExcalibur():Boolean {
 			return player.weapon == weapons.B_SWORD || player.weapon == weapons.EXCALIB || player.hasItem(weapons.B_SWORD, 1) || player.hasItem(weapons.EXCALIB, 1);
 		}
-		public function puttingPurePearlOnAltair():void {
+		public function puttingPurePearlOnAltar():void {
 			clearOutput();
 			outputText("You pull out the Pure Pearl Marae gave you from your bag. Such a relic should rest in holy ground, and you indeed notice a slot in the altar for an orb like object such as the pearl. Will you place the Pure Pearl on the altar?");
 			menu();
-			addButton(0, "No", puttingPurePearlOnAltairNo);
-			addButton(1, "Yes", puttingPurePearlOnAltairYes);
+			addButton(0, "No", puttingPurePearlOnAltarNo);
+			addButton(1, "Yes", puttingPurePearlOnAltarYes);
 		}
-		public function puttingPurePearlOnAltairYes():void {
+		public function puttingPurePearlOnAltarYes():void {
 			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to destroy the holy energy. You prepare yourself for a fight, but as the corrupt beings enter the sacred grounds, they catch fire, flailing madly as their bodies burn from the inside with golden light. They disintegrate midair, ashes raining down onto the temple floor. It would seem the temple's divine protections have increased.");
 			player.destroyItems(consumables.P_PEARL, 1);
 			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 3, 2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 0, 0, 2, 0);
 			doNext(templeMainMenu);
 		}
-		public function puttingPurePearlOnAltairNo():void {
+		public function puttingPurePearlOnAltarNo():void {
 			outputText("\n\nWhile it seems a good idea at first, you think you would prefer to keep the pearl for now.");
 			doNext(templeMainMenu);
 		}
-		public function takingPurePearlFromAltair():void {
+		public function takingPurePearlFromAltar():void {
 			clearOutput();
 			outputText("You recover the pearl from the Altar. The temple's light dims.");
 			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 3, -2);

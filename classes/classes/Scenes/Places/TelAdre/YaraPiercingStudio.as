@@ -341,8 +341,10 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 shortP += "crimstone ";
                 if (player.hasPerk(PerkLib.PiercedIcestone)) {
                     player.addPerkValue(PerkLib.PiercedIcestone, 1, -5);
+                    player.buff("PiercedIcestone").setStat("minlustx", player.perkv1(PerkLib.PiercedIcestone)*-0.01).withText("Icestone piercing");
                     if (player.perkv1(PerkLib.PiercedIcestone) <= 0) {
                         player.removePerk(PerkLib.PiercedIcestone);
+                        player.buff("PiercedIcestone").remove();
                     }
                 }
                 else {
@@ -351,6 +353,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                     } else {
                         player.addPerkValue(PerkLib.PiercedCrimstone, 1, 5);
                     }
+                    player.buff("PiercedCrimstone").setStat("minlustx", player.perkv1(PerkLib.PiercedCrimstone)*0.01).withText("Crimstone piercing");
                 }
                 longP += "Crimstone ";
                 break;
@@ -358,8 +361,10 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 shortP += "icestone ";
                 if (player.hasPerk(PerkLib.PiercedCrimstone)) {
                     player.addPerkValue(PerkLib.PiercedCrimstone, 1, -5);
+                    player.buff("PiercedCrimstone").setStat("minlustx", player.perkv1(PerkLib.PiercedCrimstone)*0.01).withText("Crimstone piercing");
                     if (player.perkv1(PerkLib.PiercedCrimstone) <= 0) {
                         player.removePerk(PerkLib.PiercedCrimstone);
+                        player.buff("PiercedCrimstone").remove();
                     }
                 }
                 else {
@@ -368,6 +373,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                     } else {
                         player.addPerkValue(PerkLib.PiercedIcestone, 1, 5);
                     }
+                    player.buff("PiercedIcestone").setStat("minlustx", player.perkv1(PerkLib.PiercedIcestone)*-0.01).withText("Icestone piercing");
                 }
                 longP += "Icestone ";
                 break;

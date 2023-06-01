@@ -345,13 +345,13 @@ import flash.utils.getQualifiedClassName;
 			var maxOver2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
+			//
 			//
 			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
-			//
-			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.OverMaxHP)) {
 				if (hasPerk(PerkLib.Enemy300Type)) maxOver2 += (0.15 * perkv1(PerkLib.OverMaxHP));
@@ -764,9 +764,9 @@ import flash.utils.getQualifiedClassName;
 			var temp2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobAsura)) temp2 += 0.1;
 			if (hasPerk(PerkLib.AbsoluteStrength)) temp2 += 0.1;
-			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
-			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
 			//
@@ -845,7 +845,10 @@ import flash.utils.getQualifiedClassName;
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
 			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
+			if (hasPerk(PerkLib.GreySageIntelligence)) max2 += 0.1;
+			if (hasPerk(PerkLib.HyperCasting)) max2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.WellOfMana)) max2 += 0.1;
 			max1 *= max2;//~130%
 			max1 = Math.round(max1);
 			return max1;
@@ -865,10 +868,6 @@ import flash.utils.getQualifiedClassName;
 			if (this.level >= 175) temp *= 8;
 			if (this.level >= 200) temp *= 9;
 			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.1;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.25;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 1.5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 1.5;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 2;
 				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 3;
@@ -881,10 +880,6 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp *= 2.2;//dla gier powyżej obecnego ostatniego NG+ posiadającego nowe perki dla graczy
 			}
 			else {
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 2;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
 				if (hasPerk(PerkLib.EnemyBossType)) {
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
 					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
@@ -913,6 +908,23 @@ import flash.utils.getQualifiedClassName;
 			var cFDR:Number = 20;
 			if (hasPerk(PerkLib.EnemyUndeadType)) cFDR -= 15;
 			return cFDR;
+		}
+
+		public function damageReductionBasedOnDifficulty():Number {
+			var dRBOD:Number = 1;
+			if (hasPerk(PerkLib.EnemyForBeginnersType)) {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.05;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 1.125;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 1.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 1.5;
+			}
+			else {
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) dRBOD *= 1.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) dRBOD *= 2.5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) dRBOD *= 5;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) dRBOD *= 12.5;
+			}
+			return dRBOD;
 		}
 
 		public override function damagePercent():Number {
@@ -2443,8 +2455,9 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		protected function applyTease(lustDelta:Number):void{
+			if (damageReductionBasedOnDifficulty() > 1) lustDelta *= (1 / damageReductionBasedOnDifficulty());
+			lustDelta = Math.round(lustDelta);
 			lust += lustDelta;
-			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 && lustDelta >= 1) {
 				outputText(" You cool down a little bit ");
@@ -2633,6 +2646,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.FleshBodyElderStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyOverlordStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyTyrantStage)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonToughness)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonIntelligence)) healingPercent += 0.5;
+				if (hasPerk(PerkLib.BloodDemonWisdom)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) healingPercent += 0.5;
@@ -2707,10 +2723,10 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulKing)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 6;
-				if (hasPerk(PerkLib.DaoistApprenticeStage)) soulforceRecoveryMulti += 0.5;
-				if (hasPerk(PerkLib.DaoistWarriorStage)) soulforceRecoveryMulti += 0.5;
-				if (hasPerk(PerkLib.DaoistElderStage)) soulforceRecoveryMulti += 1;
-				if (hasPerk(PerkLib.DaoistOverlordStage)) soulforceRecoveryMulti += 1;
+				if (hasPerk(PerkLib.DaoistApprenticeStage)) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
+				if (hasPerk(PerkLib.DaoistWarriorStage)) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
+				if (hasPerk(PerkLib.DaoistElderStage)) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
+				if (hasPerk(PerkLib.DaoistOverlordStage)) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
@@ -2729,8 +2745,6 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) manaRecovery += 5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) manaRecovery += 5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) manaRecovery += 5;
-				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
-				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
@@ -2738,6 +2752,14 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) manaRecoveryMulti += 1.5;
 				if (hasPerk(PerkLib.ManaAffinityI)) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
 				manaRecovery *= manaRecoveryMulti;
+				if (hasPerk(PerkLib.WarMageExpert)) manaRecovery += Math.round(maxMana() * 0.005);
+				if (hasPerk(PerkLib.WarMageMaster)) manaRecovery += Math.round(maxMana() * 0.01);
+				if (hasPerk(PerkLib.GreySageIntelligence)) manaRecovery += Math.round(maxMana() * 0.005);
+				if (hasPerk(PerkLib.WellOfMana)) {
+					if (this.inte >= (100 * (1 + (0.2 * (1 + newGamePlusMod()))))) manaRecovery += Math.round(maxMana() * 0.1);
+					else manaRecovery += Math.round(maxMana() * this.inte * 0.001);
+				}
+				if (hasPerk(PerkLib.GreySageWisdom)) manaRecovery += Math.round(maxMana() * 0.005);
 				addMana(manaRecovery);
 			}
 

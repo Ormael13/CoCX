@@ -23,17 +23,16 @@ public class Eclipse extends Weapon implements TimeAwareInterface
         //Normal weapon stuff
 		public function Eclipse()
 		{
-			super("Eclipse", "Eclipse", "Eclipse", "an Eclipse", "bonk", 5, 1600,
+			super("Eclipse", "Eclipse", "Eclipse", "an Eclipse", "bonk", 10, 1600,
 					"Created using the blood and bones of a titan for material Eclipse as it is now called constantly craves for oblivion. As a corrupted sentient weapon it constantly craves death and suffering but more then anything the life of its owner for Eclipse obeys no master and seeks to destroy everything indescriminately. Due to its nature as an item infused with the essense of annihilation Eclipse weakens the power of healing spells.",
 					"Wand, Weakens healing spell, Spellpower bonus for corruption", WT_WAND);
-			withBuff('spellpower', +0.6);
+			withBuff('spellpower', +1.0);
 			EventParser.timeAwareClassAdd(this);
 		}
 		
 		public function calcWizardsMult():Number {
-			var multadd:Number = 0.6;
-            if (game && game.player)
-                multadd += game.player.cor * 0.05;
+			var multadd:Number = 1.0;
+            if (game && game.player) multadd += game.player.cor * 0.07;
 			return multadd;
 		}
 
@@ -62,8 +61,19 @@ public class Eclipse extends Weapon implements TimeAwareInterface
                 return _description;
         }
 		
+		override public function get attack():Number {
+			var boost:int = 0;
+			var scal:Number = 25;
+			if (game.player.str >= 50) {
+				boost += 4;
+				scal -= 5;
+			}
+			boost += Math.round((100 - game.player.cor) / scal);
+			return (1 + boost); 
+		}
+		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (game.player.level >= 54) return super.canEquip(doOutput);
 			if(doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}

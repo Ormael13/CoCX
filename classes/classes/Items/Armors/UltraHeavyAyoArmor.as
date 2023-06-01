@@ -8,6 +8,7 @@ package classes.Items.Armors
 	import classes.ItemType;
 	import classes.Items.Armor;
 	import classes.Player;
+	import classes.EngineCore;
 
 	public class UltraHeavyAyoArmor extends Armor {
 		
@@ -26,9 +27,14 @@ package classes.Items.Armors
 		}
 
 		override public function afterEquip(doOutput:Boolean):void {
-			game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
-			game.player.buff("Ayo Armor").remove();
-			game.player.buff("Ayo Armor").addStats( {"str": -50, "spe": -50} );
+			if (!game.isLoadingSave) {
+				var oldHPratio:Number = game.player.hp100/100;
+				game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
+				game.player.buff("Ayo Armor").remove();
+				game.player.buff("Ayo Armor").addStats( {"str.mult":-0.40, "spe.mult":-0.30, "tou.mult":-0.10} );
+				game.player.HP = oldHPratio*game.player.maxHP();
+				EngineCore.statScreenRefresh();
+			}
 			super.afterEquip(doOutput);
 		}
 		

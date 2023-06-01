@@ -70,13 +70,18 @@ public class HumanRace extends Race {
 						}, +1)
 				.hasPerk(PerkLib.HumanSupremacyInitial, +2)
 				.hasPerk(PerkLib.HumanSupremacyBasic, +2)
-				.hasPerk(PerkLib.HumanSupremacyImproved, +2);
+				.hasPerk(PerkLib.HumanSupremacyImproved, +2)
+				.hasPerk(PerkLib.HumanSupremacySuperior, +3);
 		
 		addMutation(IMutationsLib.HumanAdrenalGlandsIM);
+		addMutation(IMutationsLib.HumanBloodstreamIM);
+		addMutation(IMutationsLib.HumanBonesIM);
+		addMutation(IMutationsLib.HumanEyesIM);
 		addMutation(IMutationsLib.HumanFatIM);
 		addMutation(IMutationsLib.HumanMusculatureIM);
 		addMutation(IMutationsLib.HumanOvariesIM);
 		addMutation(IMutationsLib.HumanParathyroidGlandIM);
+		addMutation(IMutationsLib.HumanSmartsIM);
 		addMutation(IMutationsLib.HumanTesticlesIM);
 		addMutation(IMutationsLib.HumanThyroidGlandIM);
 		addMutation(IMutationsLib.HumanVersatilityIM);

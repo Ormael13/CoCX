@@ -5,10 +5,11 @@
 package classes.Items.Shields
 {
 import classes.ItemType;
-import classes.Items.Shield;
-	import classes.GlobalFlags.kFLAGS;
-import classes.Items.ShieldLib;
 import classes.StatusEffects;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Shield;
+import classes.Items.ShieldLib;
+import classes.Scenes.NPCs.AetherTwinsFollowers;
 
 	public class AetherS extends Shield {
 		
@@ -26,7 +27,11 @@ import classes.StatusEffects;
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Weapon (Gauntlet)";
+			desc += "\n\nType: Weapon (";
+			if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dual Daggers") desc += "Dagger";
+			else if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield") desc += "Small Shield";
+			else desc += "Gauntlet";
+			desc += ")";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value

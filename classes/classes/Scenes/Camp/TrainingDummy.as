@@ -77,17 +77,20 @@ package classes.Scenes.Camp
 			this.createPerk(PerkLib.NoExpGained, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxLust, 50, 0, 0, 0);
 			this.createPerk(PerkLib.NoItemsGained, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) {
 				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyChampionType, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) {
 				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 5) {
 				this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

@@ -30,7 +30,9 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 	}
 	
 	public function calcDuration():int {
-		return 3;
+		var calcD:int = 3;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) calcD *= 2;
+		return calcD;
 	}
 	
 	public function calcPower():Number {

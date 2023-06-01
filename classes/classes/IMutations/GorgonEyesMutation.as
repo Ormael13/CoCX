@@ -21,7 +21,7 @@ public class GorgonEyesMutation extends IMutationPerkType
                 descS += "Allows you to use Petrify with any type of eyes and improves your resistance to attacks that are related to sight";
             }
             if (pTier >= 2){
-                descS += ", increases your reactions, increases Petrify's duration, and inverts the negative effects of resistances against basilisk and similars";
+                descS += ", increases your reactions & Petrify's duration, and inverts the negative effects of resistances against basilisk and similars";
             }
             if (pTier >= 3){
                 descS += ", ";

@@ -17,7 +17,6 @@ import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
-import classes.StatusEffects;
 
 use namespace CoC;
 
@@ -2106,15 +2105,80 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.055) {
 				player.buff("Curse").remove();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.055;
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.056) {
-				
+				var refound:Number = 0;
+				if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
+					refound += 21;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
+					refound += 91;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
+					refound += 411;
+				}
+				if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+					refound += 2231;
+				}
+				if (refound > 0) {
+					player.flags[kFLAGS.SPIRIT_STONES] += refound;
+					outputText("\n\nReally smol refound ("+refound+" SS) for those that went into body cultivation path. ^^");
+				}
+				if (player.hasPerk(PerkLib.ICastAsuraFist) && !player.hasPerk(PerkLib.AsuraStrength)) {
+					player.removePerk(PerkLib.ICastAsuraFist);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.AsuraStrength)) {
+					player.removePerk(PerkLib.AsuraStrength);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+					player.removePerk(PerkLib.LikeAnAsuraBoss);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.YourPainMyPower)) {
+					player.removePerk(PerkLib.YourPainMyPower);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+					player.removePerk(PerkLib.MyBloodForBloodPuppies);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.BloodDemonToughness)) {
+					player.removePerk(PerkLib.BloodDemonToughness);
+					player.superPerkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.HyperCasting)) {
+					player.removePerk(PerkLib.HyperCasting);
+					player.superPerkPoints += 1;
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.056;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.057) {
-				
+				if (player.hasPerk(PerkLib.PiercedIcestone))
+					player.buff("PiercedIcestone").setStat("minlustx", player.perkv1(PerkLib.PiercedIcestone)*-0.01).withText("Icestone piercing");
+				if (player.hasPerk(PerkLib.PiercedCrimstone))
+					player.buff("PiercedCrimstone").setStat("minlustx", player.perkv1(PerkLib.PiercedCrimstone)*0.01).withText("Crimstone piercing");
+				if (player.hasPerk(PerkLib.PentUp))
+					player.buff("PentUp").setStat("minlustx", player.perkv1(PerkLib.PentUp)*0.01).withText("Pent up");
+				if (player.hasStatusEffect(StatusEffects.AnemoneArousal))
+					player.buff("AnemoneArousal").setStat("minlustx", 0.3).withText("Anemone parasite");
+				if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFera))
+					player.buff("FerasBlessing").setStat("minlustx", 0.15).forHours(player.statusEffectv1(StatusEffects.BlessingOfDivineFera)).withText("Fera's Blessing");
+				if (player.hasStatusEffect(StatusEffects.BimboChampagne))
+					player.buff("BimboChampagne").setStat("minlustx", 0.1).forHours(player.statusEffectv1(StatusEffects.BimboChampagne)).withText("Bimbo Champagne");
+				if (player.hasStatusEffect(StatusEffects.Infested))
+					player.buff("Infested").setStat("minlustx", 0.5).withText("Worm Infested");
+				if (player.hasStatusEffect(StatusEffects.Luststick))
+					player.buff("Luststick").setStat("minlustx", 0.5).forHours(player.statusEffectv1(StatusEffects.Luststick));
+				if (player.hasPerk(PerkLib.Lycanthropy))
+					player.buff("Lycanthropy").setStat("minlustx", player.perkv1(PerkLib.Lycanthropy)*0.01);
+				if (player.statStore.hasBuff("DrunkenPowerEmpower"))
+					player.buff("DrunkenPowerEmpower").setStat("minlust", 0.5).withText("Easter Bunny Balls");
+				if(player.eggs() >= 40) player.buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
+				else if(player.eggs() >= 20) player.buff("EggFever").setStat("minlust", 0.1).withText("Egg Fever");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.057;
-			}
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.058) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
@@ -2122,6 +2186,14 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.059;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.060) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.061) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.061;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

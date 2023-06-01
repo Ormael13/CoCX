@@ -1588,6 +1588,7 @@ private function kickOutWormiesForYourGhostPalPAL():void {
 	outputText("\n\nTaking great caution, the spirit falls you back onto your rump, still trembling from the horrifying ordeal.  With weary eyes, she stares at what was once her glorious salvation that had now become a drooping dick.");
 	outputText("\n\n\"<i>We are taking a bath first thing when we get to your camp, Champ,</i>\" Shouldra says by way of your mouth, your body still shuddering.");
 	player.removeStatusEffect(StatusEffects.Infested);
+	player.buff("Infested").remove();
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -161,6 +161,8 @@ public class StatsView extends Block {
 			hasMinBar  : true,
 			showMax    : true
 		}));
+		lustBar.addEventListener("rollOver",Utils.curry(hoverStat,'minlust'));
+		lustBar.addEventListener("rollOut",Utils.curry(hoverStat,'minlust'));
 		col2.addElement(wrathBar = new StatBar({
 			statName: "Wrath:",
 			showMax : true
@@ -413,8 +415,14 @@ public class StatsView extends Block {
 					if (!stat) return;
 					if (!bar) return;
 					CoC.instance.mainView.toolTipView.header = bar.statName;
-					if (statname == "sens" || statname == "cor") isPositiveStat = false;
-					CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
+					if (statname == "sens" || statname == "cor" || statname == "minlust") isPositiveStat = false;
+					if (statname == "minlust") {
+						CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
+						player.listMinLustMultiBuffs();
+						CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(player.minLustXStat, true, isPositiveStat);
+					}
+					else
+						CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
 					CoC.instance.mainView.toolTipView.showForElement(bar);
 					break;
 				} else if (astat is PrimaryStat) {
@@ -437,6 +445,10 @@ public class StatsView extends Block {
 				}
 			case MouseEvent.ROLL_OUT:
 				CoC.instance.mainView.toolTipView.hide();
+				if (statname == "minlust") {
+					player.minLustStat.removeCombatRoundTrackingBuffs();
+					player.minLustXStat.removeCombatRoundTrackingBuffs();
+				}
 				break;
 		}
 	}

@@ -550,7 +550,7 @@ public function minoPheromones():void {
 			outputText("You make a fearsome howl as you charge after him forcing the bull to fight and defend himself as best he can.");
 			if (isMonoLord)
 				startCombat(new MinotaurLord());
-			else startCombat(new Minotaur())
+			else startCombat(new Minotaur());
 		}
 	}
 

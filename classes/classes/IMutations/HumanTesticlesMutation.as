@@ -26,6 +26,9 @@ public class HumanTesticlesMutation extends IMutationPerkType
             if (pTier == 3){
                 descS += "Increases virility rating by 45, +15% to lust resistance, increase cum production by ~100%, +200 to max lust and allow to use Cum Cannon once per fight";
             }
+            if (pTier == 4){
+                descS += "Increases virility rating by 60, +20% to lust resistance, increase cum production by ~100%, +10% to max overlust, negative effects of libido are reduced by 5%, +200 to max lust and allow to use Cum Cannon once per fight";
+            }
             if (descS != "")descS += ".";
             return descS;
         }
@@ -39,6 +42,9 @@ public class HumanTesticlesMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -87,12 +93,17 @@ public class HumanTesticlesMutation extends IMutationPerkType
                 pBuffs['tou.mult'] = 0.4;
                 pBuffs['lib.mult'] = 0.8;
             }
+            if (pTier == 4){
+                pBuffs['str.mult'] = 1.4;
+                pBuffs['tou.mult'] = 1.0;
+                pBuffs['lib.mult'] = 1.8;
+            }
             return pBuffs;
         }
 
         public function HumanTesticlesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_TESTICLES, 3);
+			super(mName + " IM", mName, SLOT_TESTICLES, 4);
         }
 
     }

@@ -3326,7 +3326,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			addItemButton(7, consumables.REDUCTO, giveAmilySomeReducto);
 			if (flags[kFLAGS.AMILY_LACTATION_RATE] < 5)
 				addItemButton(12, consumables.LACTAID, makeTheMouseAMilkCowMoo);
-			if (!flags[kFLAGS.AMILY_CLOTHING])
+			if (flags[kFLAGS.AMILY_CLOTHING] != 1)
 				addItemButton(3, armors.C_CLOTH, giveAmilySomePants);
 			addButton(14, "Back", amilyFollowerEncounter);
 		}

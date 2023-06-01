@@ -66,6 +66,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
+		if (player.weapon == weapons.ASCENSU) costPercent -= 25;
         return costPercent;
     }
 
@@ -101,7 +102,6 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellCostImpl(mod:Number):Number {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell();
 		//Addiditive mods
-		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
 		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		//Limiting it and multiplicative mods
@@ -118,12 +118,14 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.BloodDemonToughness)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.BloodDemonWisdom)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) costPercent -= 5;
-		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+		//
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) costPercent -= 5;
+		//
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
 		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		//Limiting it and multiplicative mods
@@ -137,7 +139,7 @@ public class CombatMagic extends BaseCombatContent {
     internal function costChange_white():Number {
 		var costPercent:Number = 0;
         if (player.hasPerk(PerkLib.Ambition)) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
-		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.PURITAS) costPercent -= 15;
         return costPercent;
     }
 
@@ -159,7 +161,7 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 0;
         if (player.hasPerk(PerkLib.Obsession)) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
 		if (player.hasPerk(PerkLib.Necromancy)) costPercent -= 50;
-		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (player.weapon == weapons.DEPRAVA) costPercent -= 15;
         return costPercent;
     }
 
@@ -180,7 +182,6 @@ public class CombatMagic extends BaseCombatContent {
     internal function costChange_grey():Number {
 		var costPercent:Number = 0;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) costPercent -= 20;
-		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
         return costPercent;
     }
 
@@ -205,7 +206,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.necklaceEffectId == NecklaceLib.MODIFIER_SPELL_POWER) mod += (player.necklaceEffectMagnitude / 100);
-		if (player.upperGarmentName == "Drider-weave Armor") mod += 0.3;
+		if (player.armor == armors.DWARMOR) mod += 0.3;
+		if (player.hasAetherTwinsTierWeapon()) mod += 0.2;
+		if (player.hasAetherTwinsTierShield()) mod += 0.5;
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		// hope it doesn't lag too much
@@ -248,7 +251,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01);
+		if (player.hasPerk(PerkLib.InariBlessedKimono)) mod += ((100 - player.cor) * .01);
         return mod;
     }
 
@@ -267,12 +271,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
-		}
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 100;
-			if (mod2 < 0.1) mod2 = 0.1;
-			mod += mod2;
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
@@ -318,9 +316,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (Forgefather.refinement == 4) mod += (1);
 		}
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.PURITAS) mod *= 1.6;
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
+		if (player.weapon == weapons.ASCENSU) mod *= 6.5;
 		if (player.hasStatusEffect(StatusEffects.DarkRitual)) mod *= 3;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
@@ -331,14 +327,14 @@ public class CombatMagic extends BaseCombatContent {
 		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .1;
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .15;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .2;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .2;
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .25;
-		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .3;
-		//
-		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .3;
-		//
-		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .3;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .3;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .35;
         //
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .5;
+		//
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -371,6 +367,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.isElf()) mod += .2;
 			else mod += .1;
 		}
+		if (player.weapon == weapons.PURITAS) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -384,6 +381,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
 		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
+		if (player.weapon == weapons.DEPRAVA) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -391,7 +389,6 @@ public class CombatMagic extends BaseCombatContent {
 	internal function healCostImpl(mod:Number):Number {
 		var costPercent:Number = 100 + costChange_all() + costChange_heal();
 		//Addiditive mods
-		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
 		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		mod *= costPercent / 100;
@@ -426,18 +423,13 @@ public class CombatMagic extends BaseCombatContent {
 		var mod:Number = 1 + modChange_all() + modChange_heal();
 		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
 		if (player.hasPerk(PerkLib.Ambition)) mod += player.perkv1(PerkLib.Ambition);
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 100;
-			if (mod2 < 0.1) mod2 = 0.1;
-			mod += mod2;
-		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)) mod += ((100 - player.cor) * .01);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.PURITAS) mod *= 1.6;
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
+		if (player.weapon == weapons.ASCENSU) mod *= 6.5;
+		if (player.weapon == weapons.ECLIPSE) mod *= 0.2;
+		if (player.weapon == weapons.OCCULUS) mod *= 5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -452,8 +444,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.PURITAS) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
+		if (player.weapon == weapons.PURITAS) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -466,8 +457,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
+		if (player.weapon == weapons.DEPRAVA) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}

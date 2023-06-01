@@ -109,6 +109,7 @@ public class JewelryShop extends Shop {
         addButton(button++, jewelries.FERTRNG.shortName, confirmBuy, jewelries.FERTRNG);
         addButton(button++, jewelries.ICE_RNG.shortName, confirmBuy, jewelries.ICE_RNG);
         addButton(button++, jewelries.MYSTRNG.shortName, confirmBuy, jewelries.MYSTRNG);
+        addButton(button++, jewelries.SPIRRNG.shortName, confirmBuy, jewelries.SPIRRNG);
         addButton(button++, jewelries.POWRRNG.shortName, confirmBuy, jewelries.POWRRNG);
         addButton(button++, jewelries.RPOWRNG.shortName, confirmBuy, jewelries.RPOWRNG);
         addButton(button++, jewelries.LIFERNG.shortName, confirmBuy, jewelries.LIFERNG);

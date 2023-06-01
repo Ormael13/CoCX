@@ -23,18 +23,17 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
         //Normal weapon stuff
 		public function UnicornStaff()
 		{
-			super("U.Staff", "U. Staff", "unicorn staff", "a unicorn staff", "bonk", 10, 1600,
+			super("U.Staff", "U. Staff", "unicorn staff", "a unicorn staff", "bonk", 23, 3680,
 					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore, the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell.",
-					"Large, Staff, Spell Cost -50% increases Spellpower based on purity", WT_STAFF
+					"Large, Staff, Spell Cost -50%, increases Spellpower based on purity", WT_STAFF
 			);
-			withBuff('spellpower', +0.6);
+			withBuff('spellpower', +1.0);
 			EventParser.timeAwareClassAdd(this);
 		}
 
 		public function calcWizardsMult():Number {
-			var multadd:Number = 0.6;
-            if (game && game.player)
-                multadd += (100 - game.player.cor) * 0.034;
+			var multadd:Number = 1.0;
+            if (game && game.player) multadd += (100 - game.player.cor) * 0.05;
 			return multadd;
 		}
 
@@ -52,6 +51,21 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
             lastCor = game.player.cor;
         }
 
+		override public function get attack():Number {
+			var boost:int = 0;
+			var scal:Number = 20;
+			if (game.player.str >= 50) {
+				boost += 5;
+				scal -= 5;
+			}
+			if (game.player.str >= 25) {
+				boost += 5;
+				scal -= 5;
+			}
+			boost += Math.round((100 - game.player.cor) / scal);
+			return (3 + boost); 
+		}
+
         override public function get descBase():String {
             if (game && game.player)
                 return _description + (
@@ -64,7 +78,7 @@ public class UnicornStaff extends Weapon implements TimeAwareInterface
         }
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (game.player.level >= 54) return super.canEquip(doOutput);
 			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}

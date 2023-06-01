@@ -59,7 +59,7 @@ use namespace CoC;
 					GlacialRiftConditions();
 					SceneLib.helScene.helSexualAmbush();
 				},
-				chance: 0.2,
+				chance: glacialRiftChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
@@ -69,6 +69,7 @@ use namespace CoC;
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
 				},
+				chance: glacialRiftChance,
 				call  : function():void {
 					GlacialRiftConditions();
 					SceneLib.etnaScene.repeatYandereEnc();
@@ -143,6 +144,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALERIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR;
 				},
+				chance: glacialRiftChance,
 				call: encounterValeria
 			}, {
 				//Freebie items!
@@ -175,13 +177,19 @@ use namespace CoC;
 			glacialRiftEncounter.execEncounter();
 			flushOutputTextToGUI();
 		}
+
+		public function glacialRiftChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
 		
 		public function encounterNothing():void {
 			clearOutput();
 			outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. ");
-			if (player.canTrain('tou', 50)) {
+			if (player.canTrain('tou', player.trainStatCap("tou",50))) {
 				outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
-				player.trainStat("tou", +1, 50);
+				player.trainStat("tou", +1, player.trainStatCap("tou",50));
 			}
 			dynStats("tou", .5);
 			doNext(camp.returnToCampUseOneHour);

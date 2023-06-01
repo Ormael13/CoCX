@@ -1198,7 +1198,7 @@ use namespace CoC;
 			if (player.hunger < player.maxHunger() - 20) player.refillHunger(30);
 			else player.refillHunger(player.maxHunger() + 10 - player.hunger);
 			inDungeon = false;
-			doNext(camp.returnToCampUseOneHour);
+			doNext(playerMenu);
 		}
 		
 	}

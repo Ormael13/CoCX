@@ -117,7 +117,7 @@ public class Ashlands extends BaseContent
 	private function findNothing():void {
 		clearOutput();
 		outputText("You spend one hour exploring ashlands but you don't manage to find anything interesting.");
-		if (player.trainStat("tou", +1, 50)) {
+		if (player.trainStat("tou", +1, player.trainStatCap("tou",50))) {
 			outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
 		}
 		dynStats("tou", .5);

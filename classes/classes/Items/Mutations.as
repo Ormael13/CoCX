@@ -40,7 +40,8 @@ public final class Mutations extends MutationsHelper {
             str: bonusempower,
             spe: -bonusdepower,
             inte: -bonusdepower,
-            lib: bonusempower
+            lib: bonusempower,
+            minlustx: 0.5
         }, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
     }
 	
@@ -2378,7 +2379,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (rand(10) == 0 && changes < changeLimit) {
+        if (rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             if (rand(2) == 0 && player.ears.type != Ears.ELFIN) transformations.EarsElfin.applyEffect();
             else transformations.EarsBig.applyEffect();
@@ -4605,9 +4606,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears!
-        if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.BIG && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-			transformations.EarsElfin.applyEffect();
+			transformations.EarsBig.applyEffect();
             changes++;
         }
         // Remove gills
@@ -4688,7 +4689,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //2.Goopy skin
-        if (!player.isGooSkin() && rand(3) == 0 && changes < changeLimit) {
+        if ((!player.isGooSkin() || player.isGooSkin() && !colourmatch()) && rand(3) == 0 && changes < changeLimit) {
             transformations.SkinGoo(Skin.COVERAGE_COMPLETE, type).applyEffect();
             changes++;
         }
@@ -4744,6 +4745,22 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) outputText(player.modThickness(20, 3));
         if (rand(2) == 0) outputText(player.modTone(15, 5));
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+
+        function colourmatch():Boolean{
+            var check:Boolean = false;
+            switch (type){
+                case 0:
+                    check = (InCollection(player.skinColor, SlimeRace.SlimeSkinColors));
+                    break;
+                case 1:
+                    check = (InCollection(player.skinColor, MagmaSlimeRace.MagmaSlimeSkinColors));
+                    break;
+                case 2:
+                    check = (InCollection(player.skinColor, DarkSlimeRace.DarkSlimeSkinColors));
+                    break;
+            }
+            return check;
+        }
     }
 
     public function sharkTooth(type:Number, player:Player):void {
@@ -5012,6 +5029,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
             outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
             player.removeStatusEffect(StatusEffects.Infested);
+            player.buff("Infested").remove();
             changes++;
         }
 
@@ -5239,6 +5257,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
             outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
             player.removeStatusEffect(StatusEffects.Infested);
+            player.buff("Infested").remove();
             changes++;
         }
 
@@ -7147,6 +7166,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
             outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
             player.removeStatusEffect(StatusEffects.Infested);
+            player.buff("Infested").remove();
             changes++;
         }
         //-Breasts vanish to 0 rating if male
@@ -15779,9 +15799,9 @@ public final class Mutations extends MutationsHelper {
             transformations.TailRedPanda.applyEffect();
             changes++;
         }
-        if (rand(3) == 0 && changes < changeLimit && !player.isFurCovered()) {
+        if (rand(3) == 0 && changes < changeLimit && (!player.isFurCovered() || player.skin.pattern != Skin.PATTERN_RED_PANDA_UNDERBODY)) {
             outputText("[pg]");
-            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet-red", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet2", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
             changes++;
         }
         player.refillHunger(20);

@@ -542,10 +542,6 @@ public function EclassHTsurvived():void {
 public function goblinsBirthScene(womb:int = 0):void {
 	daughtersCount += 1 + rand(5);
 	outputText("\n");
-	if(player.vaginas.length == (womb+1)) {
-		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ");
-		player.createVagina();
-	}
 	outputText("A sudden gush of fluids erupts from your vagina - your water just broke. You moan in pleasure as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.\n\n");
 	outputText("The pleasure only increase as your delivery continues... Arousal spikes through you as the contractions intensify, and as you feel something begin to pass you have a tiny orgasm. Yet this is only the beginning, and the contractions spike again, pushing you to orgasm as your daughter keeps moving forward. It repeats, over and over, nearly a dozen times she causes you to orgasm... this is even better then getting fucked! ");
 	if (daughtersCount > 1) outputText("Each new baby you pop is a new orgasm and by the end of it your tongue is panting out from pleasure. ");
@@ -559,7 +555,7 @@ public function goblinsBirthScene(womb:int = 0):void {
 	}
 	else goblinsBirthScene2(womb);
 }
-private function nameEldestGobo(womb:int):void {
+private function nameEldestGobo(womb:int = 0):void {
 	if (mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must name her.</b>");
@@ -578,7 +574,7 @@ private function nameEldestGobo(womb:int):void {
 	outputText("" + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " now that's a name worthy of a future genius! ");
 	goblinsBirthScene2(womb);
 }
-private function goblinsBirthScene2(womb:int):void {
+private function goblinsBirthScene2(womb:int = 0):void {
 	outputText("That solved, you doze off with your daughter against you, supremely happy.");
 	player.cuntChange(60, true, true, false);
 	outputText("\n\nWhen you wake up you are no longer holding a baby but what looks like a teenage goblin.\n\n");

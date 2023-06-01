@@ -24,7 +24,7 @@ public final class LustyMaidensArmor extends Armor {
 		
 		public function LustyMaidensArmor() {
 			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 10, 0, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\" \nRequirements: breast size of at least DD-cups and be a female.", "Light", false, false);
-			withBuffs({'teasedmg':6});
+			withBuffs({'teasedmg':6, 'minlustx': 0.3});
 			withTag(ItemTags.A_REVEALING);
 		}
 		
@@ -132,7 +132,7 @@ public final class LustyMaidensArmor extends Armor {
 			EngineCore.outputText("\n\nYou seize [themonster] by [monster his] base and jerk [monster him] off with quick, sharp little strokes, commanding, \"<i>All of it!  Give me all of your lusts and cruel desires!</i>\".  [monster His] back arches as [monster his] orgasm redoubles, and fresh ropes begin to spout out again, ensuring your face and breasts are soaked with the sloppy spooge.  It runs in moist, warm rivulets into your concealing top, and what doesn't drip down, you compulsively rub into your skin, feeling a positively healthy glow from the feeling.  You don't free the [monster cockshort] from your chesty embrace until every single drop is splattered all over you, and when you do, you leave a thoroughly wiped-out [monster name] behind you.");
 			EngineCore.outputText("\n\nThe stink of sperm slowly fades as you move, almost seeming to absorb into your skin.  It leaves you with a healthy glow and a surety to your movements, sure that your revealing armor is going to protect you.");
 			CoC.instance.flags[kFLAGS.BIKINI_ARMOR_BONUS] += 2;
-			if(CoC.instance.flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) CoC.instance.flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
+			if(CoC.instance.flags[kFLAGS.BIKINI_ARMOR_BONUS] > 10) CoC.instance.flags[kFLAGS.BIKINI_ARMOR_BONUS] = 10;
 			player.sexReward("cum");
 			CoC.instance.player.dynStats("sen", 2);
 			if(player.hasVirginVagina()) CoC.instance.player.dynStats("cor", -1);

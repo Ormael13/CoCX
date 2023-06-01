@@ -437,9 +437,15 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.itemSlot2.setItemAndQty(consumables.GROPLUS,5);
 			player.itemSlot3.setItemAndQty(consumables.BIMBOLQ,1);
 			player.itemSlot4.setItemAndQty(armors.BIMBOSK,1);
-			player.itemSlot6.unlocked = true;
 			player.itemSlot7.unlocked = true;
 			player.itemSlot8.unlocked = true;
+			player.itemSlot9.unlocked = true;
+			player.itemSlot10.unlocked = true;
+			player.itemSlot11.unlocked = true;
+			player.itemSlot12.unlocked = true;
+			player.itemSlot13.unlocked = true;
+			player.itemSlot14.unlocked = true;
+			player.itemSlot15.unlocked = true;
 			outputText("You've got large breasts prone to lactation.  You aren't sure WHY you got chosen as a champion, but with your considerable strength, you're sure you'll do a good job protecting Ingnam.");
 		}
 
@@ -1430,9 +1436,15 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			flags[kFLAGS.VALERIA_AT_CAMP] = 1;
 			player.gems += 30000;
 			outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
-			player.itemSlot6.unlocked = true;
 			player.itemSlot7.unlocked = true;
 			player.itemSlot8.unlocked = true;
+			player.itemSlot9.unlocked = true;
+			player.itemSlot10.unlocked = true;
+			player.itemSlot11.unlocked = true;
+			player.itemSlot12.unlocked = true;
+			player.itemSlot13.unlocked = true;
+			player.itemSlot14.unlocked = true;
+			player.itemSlot15.unlocked = true;
 			player.itemSlot1.setItemAndQty(consumables.P_LBOVA, 5);
 			player.itemSlot2.setItemAndQty(consumables.L_PNKEG, 1);
 			player.itemSlot3.setItemAndQty(consumables.OVIELIX, 1);
@@ -1631,9 +1643,15 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.createPerk(PerkLib.StrongBack,0,0,0,0);
 			player.createPerk(PerkLib.StrongBack2,0,0,0,0);
 			player.createPerk(PerkLib.StrongBack3,0,0,0,0);
-			player.itemSlot6.unlocked = true;
 			player.itemSlot7.unlocked = true;
 			player.itemSlot8.unlocked = true;
+			player.itemSlot9.unlocked = true;
+			player.itemSlot10.unlocked = true;
+			player.itemSlot11.unlocked = true;
+			player.itemSlot12.unlocked = true;
+			player.itemSlot13.unlocked = true;
+			player.itemSlot14.unlocked = true;
+			player.itemSlot15.unlocked = true;
 			if (!player.hasPerk(PerkLib.PastLifeSlacker)) player.createPerk(PerkLib.HistorySlacker,0,0,0,0);
 			player.strStat.train.value += 4;
 			player.touStat.train.value += 4;
@@ -1763,9 +1781,24 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 				if (player.teaseLevel < 3) player.teaseLevel = 3; }
 
 			// almost compulsive hoarder, start with backpack, chests and racks... never enough storage space
-			if (!player.hasPerk(PerkLib.StrongBack)) { player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0); player.itemSlot6.unlocked = true; }
-			if (!player.hasPerk(PerkLib.StrongBack2)) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot7.unlocked = true; }
-			if (!player.hasPerk(PerkLib.StrongBack3)) { player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0); player.itemSlot8.unlocked = true; }
+			if (!player.hasPerk(PerkLib.StrongBack)) {
+				player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0);
+				player.itemSlot7.unlocked = true;
+				player.itemSlot8.unlocked = true;
+				player.itemSlot9.unlocked = true;
+			}
+			if (!player.hasPerk(PerkLib.StrongBack2)) {
+				player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0);
+				player.itemSlot10.unlocked = true;
+				player.itemSlot11.unlocked = true;
+				player.itemSlot12.unlocked = true;
+			}
+			if (!player.hasPerk(PerkLib.StrongBack3)) {
+				player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0);
+				player.itemSlot13.unlocked = true;
+				player.itemSlot14.unlocked = true;
+				player.itemSlot15.unlocked = true;
+			}
 			var i:int = 0;
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 6, 0, 0, 0);
 			if (player.hasKeyItem("Camp - Chest") < 0) { player.createKeyItem("Camp - Chest", 0, 0, 0, 0); for (i = 0; i < 6; i++) inventory.createStorage(); }
@@ -2116,7 +2149,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.beardLength = 0;
 			player.beardStyle  = 0;
 			player.faceType = Face.ANIMAL_TOOTHS;
-			player.ears.type = Ears.ELFIN;
+			player.ears.type = Ears.BIG;
 			player.arms.type = Arms.WOLF;
 			player.lowerBody = LowerBody.WOLF;
 			player.legCount = 2;

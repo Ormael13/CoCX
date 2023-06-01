@@ -4516,6 +4516,7 @@ private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	
 	//reduce lust to min and then take 20 libido-based lust damage, lower PC corruption by 10, remove dickworm infestation, set sheilapreg = -2 (yes, -2; in case I want to use Worm Sheila later)
 	player.removeStatusEffect(StatusEffects.Infested);
+	player.buff("Infested").remove();
 	player.sexReward("vaginalFluids");
 	dynStats("cor", 10);
 	dynStats("lus", player.lib/5, "scale", false);

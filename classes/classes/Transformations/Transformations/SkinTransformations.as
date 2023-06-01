@@ -485,9 +485,9 @@ public class SkinTransformations extends MutationsHelper {
 					switch (type) {
 						case 0: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.SLIME));
 							break;
-						case 1: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DARK_SLIME));
+						case 1: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.MAGMA_SLIME));
 							break;
-						case 2: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.MAGMA_SLIME));
+						case 2: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DARK_SLIME));
 							break;
 					}
 				},

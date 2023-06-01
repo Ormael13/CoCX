@@ -53,28 +53,28 @@ use namespace CoC;
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.SpoodersOff) && BelisaFollower.BelisaEncounternum == 0
 				},
-				chance: 5,
+				chance: swampChance2,
 				call: SceneLib.belisa.firstEncounter
 			}, {
 				name: "lily",
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.SpoodersOff) && !LilyFollower.LilyFollowerState
 				},
-				chance: 5,
+				chance: swampChance2,
 				call: SceneLib.lily.lilyEncounter
 			}, {
 				name: "kihaxhel",
 				when: function ():Boolean {
 					return !SceneLib.kihaFollower.followerKiha() && player.cor < 60 + player.corruptionTolerance && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0
 				},
-				chance: 5,
+				chance: swampChance2,
 				call: SceneLib.kihaFollower.kihaXSalamander
 			}, {
 				name: "emberegg",
 				when: function ():Boolean {
 					return flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0
 				},
-				chance: 1/20,
+				chance: swampChance,
 				call: SceneLib.emberScene.findEmbersEgg
 			}, {
 				name: "spidermale",
@@ -97,6 +97,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return SceneLib.kihaFollower.followerKiha()
 				},
+				chance: swampChance,
 				night: false,
 				call: SceneLib.kihaScene.kihaExplore
 			}, {
@@ -104,6 +105,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return !SceneLib.kihaFollower.followerKiha()
 				},
+				chance: swampChance,
 				night: false,
 				call: SceneLib.kihaScene.encounterKiha
 			}, {
@@ -111,7 +113,7 @@ use namespace CoC;
 				name: "helcommon",
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
-				chance: 0.2,
+				chance: swampChance,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
@@ -121,7 +123,7 @@ use namespace CoC;
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: swampChance,
 				call: SceneLib.etnaScene.repeatYandereEnc
 			}/*, {
 				name: "demonProjects",
@@ -140,6 +142,17 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 			swampEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+
+		public function swampChance():Number {
+			var temp:Number = 0.5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
+		}
+		public function swampChance2():Number {
+			var temp:Number = 5;
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			return temp;
 		}
 
 		private function discoverBog():void {
