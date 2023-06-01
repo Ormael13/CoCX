@@ -67,7 +67,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8t.60-64f";
+    public var debugGameVer:String = "v0.8t";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.057;
@@ -282,7 +282,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b></b>)";
+			ver += " (<b>Legendary items rebalance/empowering, Human internal mutations (part 2), Seperating/combining some of the items menu, Aether Twins 3rd evolution, increase to inventory space and capacity and many QoL/Bugfixing</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

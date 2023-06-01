@@ -25,6 +25,44 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog47():void {
 			clearOutput();
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
+			/*outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
 			menu();
 			addButton(0, "Next", Changelog46);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -82,25 +120,18 @@ public class Changelog extends BaseContent
 			outputText("-New armor (by Liadri): Centaur Paladin Armor - obtainable by giving Centaur Armor to Pure Celess to purify. Armor 40, m.res 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg.\n");
 			outputText("-New jewelery (by Ormael): Spiritual Ring - buyable at Jewelry shop in Tel'Adre. Cost 1,500 gems. Increase soulskill power by 25%.\n");
 			outputText("-New misc accesory: Boundless Ammo Bag - buyable at Tripxi shop in Tel'Adre. Cost 1,600 gems. It makes firearms never run out of ammo in middle of multishooting nor never needing to reload.\n");
+			outputText("-New legendary corrupted armor (Liadri): Cow Gunslinger Outfit - made from white silk shirt and tight leather pants.\n");
 			outputText("-Ayo armor bonuses no longer give either flat bonus to stat or multi to stat. They would now give bonus or penalty to stat multi.\n");
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
 			outputText("-Flying swords base dmg scaling (on wisdom and weapon atk value) increased by 250%. Bonus dmg for size of flying sword increased to 1000% for massive ones and added 400% for large ones. Sword type weapons mastery and weapon size mastery (small/large/massive) ");
 			outputText("now apply it dmg boost to their attacks and they can be coated with fire from foxflame pelt. They also can gain exp toward matching masteries.\n");
-			outputText("-Adding nodachi sprites (drawn by Mister GRaM) to the game. (Liadri)\n");
-			outputText("-Minor fixes to taur and stuff (Liadri)\n");
-			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-Flying swords was moved from 'Soul Equipment' shop into nearby one shop that deal only with flying swords and teaching techniques to make better use of them run by Qi (Raisune).\n");
+			outputText("-Flying swords moved from 'Soul Equipment' shop to a nearby one shop that deals only with flying swords and teaching techniques to make better use of them run by Qi (Raisune).\n");
 			outputText("-Added to stats (combat subpage) tracking how much higher lvl enemies pc can fight without loosing dmg.\n");
 			outputText("-Asauchi flying sword SF use cost is decreased from 80% to 60% of massive flying swords default cost.\n");
 			outputText("-Flying Sword Path perk would enable option to seperate sets or combine into sets specific flying swords. It cost a bit of SF to perform.\n");
 			outputText("-Asterius Rage str that is req. to reach fully atk is increased from 1,000+ to 1,300+. Until 100+ str atk increase is very minimal. Max atk itself is also increased from 176 to 200.\n");
 			outputText("-Dual Wield (Massive) perk can be picked when having Dual Wield perk and one of two other perks: Titan's Grip or Gigant's Grip (Su).\n");
 			outputText("-Body Cultivation progress req. now only 1 body temperiong solution and one bottle of pills. There would be better body cultivation options in future that would req. larger investments.\n");
-			outputText("-Invert metamorph for magma/dark slime skin, allows slime-tfs to convert skin colours if player already has the skintype. say, after Urta's slime event. (Jtecx)\n");
 			outputText("-Blood Demon Toughness & Your Pain My Power super perks was switched places in order of getting super perks for Blood Demon hidden job. Your Pain My Power super perk got additional minor effect: Casting spells using HP make them no longer limited by too high wrath.\n");
 			outputText("-Asura Strength & Like A-sura Boss super perks was switched places in order of getting super perks for Asura hidden job. Hyper Casting super perk now require Grey Sage Intelligence super perk and due to adding meantioned super perk would be possible to gain 10 levels later than before.\n");
 			outputText("-Urta Quest would temporaly reset to NG 0 settings if PC is already on NG 1 or higher. Also fixing error with wrong resetting secondary stats scaling post urta quest.\n");
@@ -110,7 +141,6 @@ public class Changelog extends BaseContent
 			outputText("-Added option to take out herbs from herb bag. Also when Harvest option would cause herbs back unable to store all 5 freshly harvested herbs game will instead abort harvesting.\n");
 			outputText("-When using Cure potion it will not give one of effect of Cure spell but have all the same effects as spell use.\n");
 			outputText("-In Camp Actions > Misc menu added option to combine or separate specific weapons. For example 2 Kama weapons combine into 1 Dual Kama weapon or separate 1 Dual Kama into 2 Kama weapons.\n");
-			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
 			outputText("-Dual Daggers, Angst Daggers was removed from Eraendir offer. Dual BF Swords, Dual BF Two-Handed Swords, Dual BF Whips was removed from Orsbulg offer. Dual Wip was removed from Soul Equipment shelf 2 offer. Dual Huge Warhammer was removed from Tel'Adre weapon shop offer. Pair of Succubi Whips was removed from Sean offer. ");
 			outputText("All those dual weapons can be now gained by combining two single weapons using new option in Camp Actions > Misc menu.\n");
 			outputText("-To better match their status as legendary weapons their atk been increased: Artemis & Wild Hunt (60 > 130 (at 100+ spe)), Kraken Slayer Harpoons & Leviathan Harpoons (40 > 140 (at 100+ spe)), Purified Oni Chieftain Destroyer & Defiled Oni Chieftain Destroyer (60 > 210 (at 270+ str)), Lifehunt Scythe (25 > 90 (at 100+ str)), Seraph Spear & Demon Snake Spear (20 > 60 (at 100+ spe)), ");
@@ -128,25 +158,16 @@ public class Changelog extends BaseContent
 			outputText("-To better match their status as legendary shields their stats been increased: Sanctuary shield (L) (block 29 > 55, regeneration effect max cap increased 1% > 5%) and Dark Aegis (block 29 > 55, regeneration effect max cap increased 1% > 5%). Both shields get added req. to be lvl 54+ to use them.\n");
 			outputText("-Sanctuary shield (not legendary) gained 1% HP regeneration effect.\n");
 			outputText("-Added to Ascensus, Depravatio, Puritas tooltips previously mysterious hidden bonuses ;) Also each weapon atk/price been slight increased.\n");
-			outputText("-CasterTome recognition for imp tome. Goblins and Elfin ears updates. Ranged Tome are now also sprited as well as shielder tome. (Liadri)\n");
 			outputText("-Vampiric Bloodstream (Final Form) have additional effect of double increase of Vampire Thirst stacks. 3rd and 4th stage of Vampiric Bloodstream have increased max cap of Vampire Thirst stack: 3rd - 105 > 120 and 4th - 225 > 300. Hollow Fangs (Final Form) increase by 5 not 3 Vampire Thirst stacks gained from using Vampire Feed.\n");
-			outputText("-Fix wood elves have 100 min corruption instead of 50. (Wisarddd)\n");
-			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
-			outputText("-Fixed forest mage arms. Added Forest mage dress to Kaiba temporarily. (Liadri)\n");
 			outputText("-Job: Rogue was changed from Advanced type into Basic Job (speed based similary as Ranger job). That made it moved from tier 1 to tier 0. Sneak attack perk also been moved from tier 1 to 0 with added req. to have 15+ speed. Improved Evade perk req. 'to have job: ranger' changed to 'to have either job: ranger or job: rogue'.\n");
 			outputText("-Minotaurs if they would have axe it would drop after fight and not have chance (like 100% recently) to be broken.\n");
 			outputText("-Desert Eagle was replaced by Six shooter as firearm needed to make legendary firearm Good Samaritan / Blood Omen.\n");
-			outputText("-Many fixes to gargoyle, lactoblasters, scythe sprites. (Liadri)\n");
 			outputText("-Poultice super potent healing was brought to more realistic amounts with HP scaling increased from 15% to 20%. And scaling would be based on max Over HP so all those bloody PC's wouldn't find this useless now ;)\n");
 			outputText("-Demon Scythe will no longer corrupt PC as it will be effect on Hellraizer now. Also selfcorrupt and selfpurify effects would be ~3x stronger.\n");
-			outputText("-Fix imp balls missing. (Liadri)\n");
-			outputText("-Fix Minerva pregnancy, Ayo armors will keep their energy after loading, Jojo Milking scene has been wired up again after 8 months, Raiju eye colot tf fix. (EragonX)\n");
 			outputText("-Golem core can be extracted with 100% success not only by golemancers but also by tech smart races (goblins, gremlins, humans with human smart i.mutation at tier 2+).\n");
 			outputText("-New toggle option in NPC's submenu in Camp Actions: 'Gotta Camp them ALL' mode. Turning it on would increase by large margin chance to proc encounter with recruitable to camp npc when exploring specific area.\n");
 			outputText("-Aether Twins can now after 2nd evolution eat new materials: Amethyst & Diamond. Also they can eat 1 new shield and 6 new small type melee weapons. After eating those and then all materials the can it would enable them evolving to small weapon 1st form. They could also assume one additional form in case PC learned Dual Wield. Both new forms are added to their morph menu.\n");
 			outputText("-Angst Dagger max atk was decreased to 20 and they now classified as mid tier wrath weapons.\n");
-			outputText("-Fix SandMother sex scenes. Fix clones dao contemplation clearing screen on time change. (EragonX)\n");
-			outputText("-Add hover tooltip for minimum lust. (EragonX)\n");
 			outputText("-Physical & Magical Soulpower values would now be added on top of base value of Soulpower.\n");
 			outputText("-Daoist: ... Stage perks desc was updated and effect of inc soulskill power increased but only affect magical soulskill power only and it will grant +0.5% of max SF recovery per hour instead of increasing recoverey by 50/100%. ");
 			outputText("Flesh Body: ... Stage perks bonus to unarmed atk was lowered to 50% of previous values but they now add 50% * stage % ot physical soulskill power. Heaven Tribulation Survivor perks bonus to soulskill power was changed from 30/40/50/60% to 25/50/75/100%.\n");
@@ -158,45 +179,24 @@ public class Changelog extends BaseContent
 			outputText("No longer req. to reach specific cultivation stage to used better/higher choices in those options like better SF for self-sustain or SF for lowering lust.\n");
 			outputText("-Options for self-sustain and lowering lust will be now from 10% to 100% with corresponding amount of SF needed to use each of them. SF to Mana/Mana to SF options would be now with more step up increases and two last options for each will be giving 25%/100% of max Mana/SF.\n");
 			outputText("-Souless PC (not devil/azazel PC) can't use/access Bag of Cosmos/Sky Poison Pearl unless they regain soul somehow.\n");
-			outputText("-Fix harpy egg laying & clone dao contemplation messages. (EragonX)\n");
 			outputText("-All inventory types slots capacity increased by 5. (Pearl 15 > 20, rest 5 > 10)\n");
-			/*outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
-			outputText("-New legendary corrupted armor (Liadri): Cow Gunslinger Outfit - made from white silk shirt and tight leather pants.\n");
+			outputText("-Adding nodachi sprites (drawn by Mister GRaM) to the game. (Liadri)\n");
+			outputText("-Minor fixes to taur and stuff (Liadri)\n");
+			outputText("-Added imp female sprite (drawn by Lord Anonymous) to the game. (Liadri)\n");
+			outputText("-CasterTome recognition for imp tome. Goblins and Elfin ears updates. Ranged Tome are now also sprited as well as shielder tome. (Liadri)\n");
+			outputText("-Fixed forest mage arms. Added Forest mage dress to Kaiba temporarily. (Liadri)\n");
+			outputText("-Many fixes to gargoyle, lactoblasters, scythe sprites. (Liadri)\n");
+			outputText("-Fix imp balls missing. (Liadri)\n");
 			outputText("-Studded Leather been added to Victoria Tailor Shop. (Liadri)\n");
 			outputText("-Add Cow Girl Hat to Kaiba shop. (Liadri)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Adds back in missing corrupt followers qualifiers to the farm corruption questline, fixes being able to access troll village while corrupt after first encounter. (Jtecx)\n");
+			outputText("-Invert metamorph for magma/dark slime skin, allows slime-tfs to convert skin colours if player already has the skintype. say, after Urta's slime event. (Jtecx)\n");
+			outputText("-Altar-altair changes and added muutationsdb tracking for humans-specifics. (Jtecx)\n");
+			outputText("-Fix Minerva pregnancy, Ayo armors will keep their energy after loading, Jojo Milking scene has been wired up again after 8 months, Raiju eye colot tf fix. (EragonX)\n");
+			outputText("-Fix SandMother sex scenes. Fix clones dao contemplation clearing screen on time change. (EragonX)\n");
+			outputText("-Add hover tooltip for minimum lust. (EragonX)\n");
+			outputText("-Fix harpy egg laying & clone dao contemplation messages. (EragonX)\n");
+			outputText("-Fix wood elves have 100 min corruption instead of 50. (Wisarddd)\n");
 			outputText("-Fixed bugs: Two of human mutations checking for wrong mutation slot, Sorcerer sword covering Flying Claw buy option in Eraendir shop, mining/farming level/current XP not reseting on ascension, Hidden Dual Momentum/Weapon Grandmastery not applying to Dual Massive weapons with Gigant's Grip (Ex) bought, not added tracker for Alraune nectar stored in herb bag, Harkonnen not have added dmg from foxflame pelt, ");
 			outputText("Hyper Casting not adding to overmax mana cap, defend move not doubling mana/SF recovery, some of the sleeping events ending after 1 hour, using last potion in potion bag slot not enabling it to store different type of potion, Agility perk affecting phys def bonus without wearing any armor, Bad Omen missing in corrupt legedaries check, special names that was giving previous ears type used by goblins, ");
 			outputText("Nightmare meeting in deepwoods not aviable for PC without pussy\n");
