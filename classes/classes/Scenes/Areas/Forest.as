@@ -555,7 +555,7 @@ use namespace CoC;
 				},
 				chance: forestChance,
 				when: function():Boolean {
-					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && (player.canGetPregnant());
+					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && !player.isPregnant();
 				}
 			},/*{ // [INTERMOD:8chan]
 			 name: "dullahan",

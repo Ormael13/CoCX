@@ -162,7 +162,7 @@ public class HeXinDao extends BaseContent
         addButton(1, "TFspec/Exch", mogahenmerchant);
         addButton(2, "SoulEquip", serenamerchant);
         addButton(3, "SoulArrow", ermaswiftarrowmerchant);
-		addButton(4, "FSAAWY", ermaswiftarrow2merchant).hint("Flying Swords are always with you!");
+		addButton(4, "FSAAWY", qimerchant).hint("Flying Swords are always with you!");
 		//addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
         addButton(6, "JourTTEast", SceneLib.journeyToTheEast.enteringInn);
         addButton(7, "Arena", soularena);
@@ -893,7 +893,7 @@ public class HeXinDao extends BaseContent
 		}
 	}
 	
-	public function ermaswiftarrow2merchant():void {
+	public function qimerchant():void {
         clearOutput();
         outputText("After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. ");
         outputText("Behind the desk in the central point of the shop you see a flesh golem on unidentified gender.");
@@ -906,7 +906,7 @@ public class HeXinDao extends BaseContent
 		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingswordBuy, weaponsflyingswords.MOONLGT);
 		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingswordBuy, weaponsflyingswords.S_TWINS);
 		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingswordBuy, weaponsflyingswords.ASAUCHI);
-        addButtonDisabled(13, "Training", "The owner of the shop isn't here, currently. There's nobody to train you.");//.hint("Flying Sword training.")
+        addButtonDisabled(13, "Training", "The shop owner, Qi, is in the middle of closed door cultivations. It shouldn't take longer than a few months for him to finish.");//.hint("Flying Sword training.")
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
@@ -917,17 +917,17 @@ public class HeXinDao extends BaseContent
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
             //Goto shop main menu
-            doNext(ermaswiftarrow2merchant);
+            doNext(qimerchant);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
         //Go to debit/update function or back to shop window
-        doYesNo(curry(debitFlyingSword,itype), ermaswiftarrow2merchant);
+        doYesNo(curry(debitFlyingSword,itype), qimerchant);
     }
     private function debitFlyingSword(itype:ItemType):void {
         flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
-        inventory.takeItem(itype, ermaswiftarrow2merchant);
+        inventory.takeItem(itype, qimerchant);
     }
 
 public function soularena():void {
