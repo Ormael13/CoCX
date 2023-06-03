@@ -34,9 +34,11 @@ import classes.internals.ChainedDrop;
 					//apply status here
 					player.buff("Basilisk Slow").addStats( {"spe":-20} ).withText("Basilisk Slow").combatPermanent();
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
-					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 6;
-					else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
-					else flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+					flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 3) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 4) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}
 			}
 			//Failure:

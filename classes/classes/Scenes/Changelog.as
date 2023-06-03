@@ -44,11 +44,12 @@ public class Changelog extends BaseContent
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
-			outputText("-Fixed bugs: \n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Gazer Eyes (Final Form). Req. Gazer Eyes (Evolved) and lvl 90+. Effects: Each seperated spell power increase from 50% to 100% of base spell, spell crit chance increase by 15% (25%).\n");
+			outputText("-New mutation perk: Human Eyes (Final Form). Req. Human Eyes (Evolved) and lvl 90+. Effects: Increase precision of all attacks by 20%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 60 lvl's. 10% less penalty to acc per each next attack during multiattack.\n");
+			outputText("-New mutation perk: Gorgon Eyes (Evolved). Req. Gorgon Eyes (Primitive) and lvl 60+. Effects: Increase duration of petrify on enemies by 1 turn (if PC have gorgon hair it add additional round and on single enemy it also add rounded up half of curent mutation tier), same bonus as Eyes of the Hunter (Ex) perk but with limit to 5(10 w/ gorgon hair) lvl's, ");
+			outputText("Petrify would work on any enemy even if they used invisibility ability (excluding been underground)\n");
+			outputText("-New mutation perk: Gorgon Eyes (Final Form). Req. Gorgon Eyes (Evolved) and lvl 90+. Effects: Increase duration of petrify on enemies by another 1 turn (if PC have gorgon hair it add one more round and on single enemy it also amount of additonal rounds equal to current mutation tier), same bonus as Eyes of the Hunter (Ex) perk but with limit to 15(30 w/ gorgon hair) lvl's, ");
+			outputText("Petrify would work on any enemy even if they used invisibility ability (excluding been underground), could use enhanced version of Petrification that is shorter but enemy HP/mana/SF recovery is fully stopped during it\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -71,6 +72,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
+			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
