@@ -430,33 +430,42 @@ public class PerkLib
 				"Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)",
 				"You've chosen the 'Enchanced Warrior's Rage' perk. Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced.");
 		public static const DoorKnob:PerkType = mk("Door Knob", "Door Knob",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"Everyone's had their turn with you. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Door Knob' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const Bicycle:PerkType = mk("Bicycle", "Bicycle",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've always been an easy ride. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Bicycle' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const MeatHole:PerkType = mk("Meat Hole", "Meat Hole",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"Having your holes filled is all you know or understand. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Meat Hole' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const BedWarmer:PerkType = mk("Bed Warmer", "Bed Warmer",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"No need to fear the despairing chill of an empty bed while you're around. You're an adept cuddler... and if they ask nicely, maybe you'll even hold their hand. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Bed Warmer' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const TensionTamer:PerkType = mk("Tension Tamer", "Tension Tamer",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You had something of a reputation back in Ingnam. If someone was feeling lonely, anxious, or sore (in whichever way), they knew who to call. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Tension Tamer' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const PartyBoyGirl:PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You're the life of the party, particularly the types of parties that happen in Mareth. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Party Boy/Girl' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const MattressActressActor:PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You know just how they like it, every time. No need for words; just lay back and let the fantasy come to life. Don't worry, you'll take good care of them. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Mattress Actress/Actor' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
+		public static const HistoryBuff:PerkType = mk("History Buff", "History Buff",
+				"History was written by the victors, and you've a mind to put their winning strategies to use. (+10% minions/pets damage)",
+				"You've chosen the 'History Buff' perk. (+10% minions/pets damage)");
+		public static const GuerrillaTactics:PerkType = mk("Guerrilla Tactics", "Guerrilla Tactics",
+				"No man is an island. Having companions around you, even if they're only familiars, puts your mind at ease. (+10% minions/pets damage)",
+				"You've chosen the 'Guerrilla Tactics' perk. (+10% minions/pets damage)");
+		public static const StrengthInNumbers:PerkType = mk("Strength in Numbers", "Strength in Numbers",
+				"No man is an island. Having companions around you, even if they're only familiars, puts your mind at ease. (+10% minions/pets damage)",
+				"You've chosen the 'Strength in Numbers' perk. (+10% minions/pets damage)");
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -465,20 +474,17 @@ public class PerkLib
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
 		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk. +10% max lust.");
+				". (+10% minions/pets damage)",
+				"You've chosen the '' perk. (+10% minions/pets damage)");
 		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
+				". (+10% minions/pets damage)",
+				"You've chosen the '' perk. (+10% minions/pets damage)");
 		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
+				". (+10% minions/pets damage)",
+				"You've chosen the '' perk. (+10% minions/pets damage)");
 		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
+				". (+10% minions/pets damage)",
+				"You've chosen the '' perk. (+10% minions/pets damage)");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -6921,6 +6927,8 @@ public class PerkLib
 					.requireAnyPerk(HistorySlut, PastLifeSlut);
 			Tongs.requireLevel(6)
 					.requireAnyPerk(HistorySmith, PastLifeSmith);
+			HistoryBuff.requireLevel(6)
+					.requireAnyPerk(HistoryTactician, PastLifeTactician);
 			Amateur.requireLevel(6)
 					.requireAnyPerk(HistoryWhore, PastLifeWhore);
             //Tier 2
@@ -7198,6 +7206,8 @@ public class PerkLib
 					.requirePerk(DoorKnob);
 			Bellows.requireLevel(24)
 					.requirePerk(Tongs);
+			GuerrillaTactics.requireLevel(24)
+					.requirePerk(HistoryBuff);
 			Prostitute.requireLevel(24)
 					.requirePerk(Amateur);
             BasicAllRounderEducation.requireLevel(24)
@@ -7331,6 +7341,8 @@ public class PerkLib
 					.requirePerk(Bicycle);
 			Furnace.requireLevel(42)
 					.requirePerk(Bellows);
+			StrengthInNumbers.requireLevel(42)
+					.requirePerk(GuerrillaTactics);
 			Escort.requireLevel(42)
 					.requirePerk(Prostitute);
 			LimitBreakerBody1stStage.requireLevel(42);
@@ -7605,4 +7617,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

@@ -29,10 +29,10 @@ public class MinotaurBlood extends Consumable {
 		//Changes done
 		var changes:Number = 0;
 		//Change limit
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
-		if (rand(3) == 0) changeLimit++;
-		if (rand(3) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
 		if (changeLimit == 1) changeLimit = 2;
 		changeLimit += player.additionalTransformationChances;
 		//Temporary storage

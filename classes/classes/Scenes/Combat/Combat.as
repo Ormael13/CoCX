@@ -1809,7 +1809,7 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
 		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
         if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
-        if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+        if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
             elementalamplification += 0.1;
             if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
             if (player.hasPerk(PerkLib.WispCaptain)) elementalamplification += 0.3;
@@ -6781,13 +6781,13 @@ public class Combat extends BaseContent {
 
     public function historyTacticianBonus():Number {
         var historyTacticianB:Number = 1.1;
-        /*if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;*/
+        if (player.hasPerk(PerkLib.HistoryBuff)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.GuerrillaTactics)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.StrengthInNumbers)) historyTacticianB += 0.1;
+		/*if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;*/
         return historyTacticianB;
     }
 
@@ -15745,11 +15745,12 @@ public function sendSkeletonToFight():void {
     damage += 500 + rand(151);
     damage += scalingBonusIntelligence() * 0.2;
     damage += scalingBonusWisdom() * 0.4;
+	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) damage *= historyTacticianBonus();
     if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-    if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+    if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
         if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
@@ -15806,11 +15807,12 @@ public function skeletonSmash():void {
     damage += 500 + rand(151);
     damage += scalingBonusIntelligence() * 0.2;
     damage += scalingBonusWisdom() * 0.4;
+	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) damage *= historyTacticianBonus();
     if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-    if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+    if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
         if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
