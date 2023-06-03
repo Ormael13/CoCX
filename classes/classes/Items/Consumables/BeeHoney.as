@@ -54,7 +54,7 @@ public class BeeHoney extends Consumable
             var pure:Boolean = (value == PURE_HONEY_VALUE);
 			var special:Boolean = (value == SPECIAL_HONEY_VALUE);
 			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			var changeLimit:Number = 2;
 			clearOutput();
 			player.slimeFeed();
 			//Chances of boosting the change limit.

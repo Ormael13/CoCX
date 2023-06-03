@@ -33,7 +33,7 @@ public class OnikiriSake extends Consumable {
 
 	override public function useItem():Boolean {
 		changes = 0;
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;

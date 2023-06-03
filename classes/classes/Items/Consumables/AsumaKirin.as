@@ -31,7 +31,7 @@ public class AsumaKirin extends Consumable {
 
 	public override function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		//Temporary storage

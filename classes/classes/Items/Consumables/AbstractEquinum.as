@@ -46,7 +46,7 @@ public class AbstractEquinum extends Consumable {
 		//Changes done
 		var changes:Number     = 0;
 		//Change limit
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		//Temporary storage
 		var temp:Number        = 0;
 		var temp2:Number       = 0;

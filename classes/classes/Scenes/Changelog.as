@@ -33,24 +33,24 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.8t2:</b>\n\n");
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			/*outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
-			outputText("-New mutation perk: Gazer Eyes (Final Form). Req. Gazer Eyes (Evolved) and lvl 90+. Effects: Each seperated spell power increase from 50% to 100% of base spell, spell crit chance increase by 15% (25%).\n");
-			outputText("-New mutation perk: Human Eyes (Final Form). Req. Human Eyes (Evolved) and lvl 90+. Effects: Increase precision of all attacks by 20%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 60 lvl's. 10% less penalty to acc per each next attack during multiattack.\n");
 			outputText("-New mutation perk: Gorgon Eyes (Evolved). Req. Gorgon Eyes (Primitive) and lvl 60+. Effects: Increase duration of petrify on enemies by 1 turn (if PC have gorgon hair it add additional round and on single enemy it also add rounded up half of curent mutation tier), same bonus as Eyes of the Hunter (Ex) perk but with limit to 5(10 w/ gorgon hair) lvl's, ");
 			outputText("Petrify would work on any enemy even if they used invisibility ability (excluding been underground)\n");
 			outputText("-New mutation perk: Gorgon Eyes (Final Form). Req. Gorgon Eyes (Evolved) and lvl 90+. Effects: Increase duration of petrify on enemies by another 1 turn (if PC have gorgon hair it add one more round and on single enemy it also amount of additonal rounds equal to current mutation tier), same bonus as Eyes of the Hunter (Ex) perk but with limit to 15(30 w/ gorgon hair) lvl's, ");
 			outputText("Petrify would work on any enemy even if they used invisibility ability (excluding been underground), could use enhanced version of Petrification that is shorter but enemy HP/mana/SF recovery is fully stopped during it\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Gazer Eyes (Final Form). Req. Gazer Eyes (Evolved) and lvl 90+. Effects: Each seperated spell power increase from 50% to 100% of base spell, spell crit chance increase by 15% (25%).\n");
+			outputText("-New mutation perk: Human Eyes (Final Form). Req. Human Eyes (Evolved) and lvl 90+. Effects: Increase precision of all attacks by 20%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 60 lvl's. 10% less penalty to acc per each next attack during multiattack.\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
+			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time).Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
+			outputText("-New tier 1 misc lvl-up perk: History Buff. Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 4 misc lvl-up perk: Guerrilla Tactics. Req. History Buff perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 7 misc lvl-up perk: Strength in Numbers. Req. Guerrilla Tactics perk. Effect: +10% minions/pets damage.\n");
+			/*outputText("-New tier 12 misc lvl-up perk: . Req. Strength in Numbers perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -72,7 +72,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
-			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones\n");
+			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
