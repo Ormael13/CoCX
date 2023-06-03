@@ -93,6 +93,7 @@ public class MagicSpecials extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
+		var isEnemyInvisibleButNotUnderground:Boolean = combat.isEnemyInvisibleButNotUnderground;
 		if (player.isRaceCached(Races.SPHINX)) {
 			bd = buttons.add("Cursed Riddle", CursedRiddle, "Weave a curse in the form of a magical riddle. If the victims fails to answer it, it will be immediately struck by the curse. Intelligence determines the odds and damage.");
 			bd.requireFatigue(spellCost(50));
@@ -333,11 +334,22 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 			}
 			if (((player.eyes.type == Eyes.GORGON && player.hairType == Hair.GORGON) || player.perkv1(IMutationsLib.GorgonEyesIM) >= 1)) {
-				bd = buttons.add("Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n");
+				bd = buttons.add("Petrify", curry(petrify, false)).hint("Use your gaze to temporally turn your enemy into a stone. \n");
 				bd.requireFatigue(spellCost(100), true);
-				if (monster is LivingStatue) {
+				if (monster is LivingStatue && player.perkv1(IMutationsLib.GorgonEyesIM) < 3) {
 					bd.disable("Your enemy seems to be immune to the petrify immobilizing effect.");
-				} else if (isEnemyInvisible) bd.disable("You cannot use a gaze attack against an opponent you cannot see or target.");
+				} else if (isEnemyInvisibleButNotUnderground && player.perkv1(IMutationsLib.GorgonEyesIM) < 3) {
+					bd.disable("You cannot use a gaze attack against an opponent you cannot see or target.");
+				} else if (isEnemyInvisible && player.hasStatusEffect(StatusEffects.MonsterDig)) {
+					bd.disable("You cannot use a gaze attack against an opponent you cannot see or target.");
+				}
+				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 4) {
+					bd = buttons.add("E. Petrify", curry(petrify, true)).hint("Use your enhanced gaze to temporally turn your enemy into a stone and even halt it recovery temporaly. \n");
+					bd.requireFatigue(spellCost(1000), true);
+					if (isEnemyInvisible && player.hasStatusEffect(StatusEffects.MonsterDig)) {
+						bd.disable("You cannot use a gaze attack against an opponent you cannot see or target.");
+					}
+				}
 			}
 			if (player.lowerBody == LowerBody.HYDRA) {
 				bd = buttons.add("Hydra acid breath", hydraAcidBreath).hint("Deal acid damage based on natural weapon damage and toughness modifier. Increase by 100% for each head and deals increased damage against groups. Increase damage taken from physical attacks by 10% for each heads for 6 rounds and stun for one round. \n\nWould go into cooldown after use for: " + (player.hasPerk(PerkLib.NaturalInstincts) ? "7" : "8") + " rounds \n");
@@ -3773,16 +3785,33 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 	}
 
-	public function petrify():void {
+	public function petrify(enhanced:Boolean = false):void {
 		clearOutput();
-		fatigue(100, USEFATG_MAGIC_NOBM);
+		var petrifycost:Number = 100;
+		if (enhanced) petrifycost *= 10;
+		var petrifyduration:Number = 1;
+		fatigue(petrifycost, USEFATG_MAGIC_NOBM);
 		if(monster.plural) {
 			outputText("With a moment of concentration you activating petrifying properties of your gaze");
 			if (player.hairType == Hair.GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss");
 			outputText(" and then casual glance at enemies. Due to many of them your petrifying power spread on too many targets to be much effective. Still few of them petrified for a short moment and rest scared or suprised by such turn of events also refrain from attacking you for a moment.\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
-				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-				else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				if (enhanced) {
+					petrifyduration += 1;
+					if (player.hairType == Hair.GORGON) petrifyduration += 1;
+				}
+				else {
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) petrifyduration += 1;
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 3) {
+						petrifyduration += 1;
+						if (player.hairType == Hair.GORGON) petrifyduration += 1;
+					}
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 4) {
+						petrifyduration += 1;
+						if (player.hairType == Hair.GORGON) petrifyduration += 1;
+					}
+				}
+				monster.createStatusEffect(StatusEffects.Stunned, petrifyduration, 0, 0, 0);
 			}
 		}
 		else {
@@ -3790,8 +3819,24 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hairType == Hair.GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss");
 			outputText(" and then casual glance at enemy. Caught off guard [themonster] petrify.\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
-				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
-				else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				petrifyduration += 1;
+				if (enhanced) {
+					petrifyduration += 2;
+					if (player.hairType == Hair.GORGON) petrifyduration += 2;
+				}
+				else {
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) petrifyduration += 1;
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) == 3) {
+						petrifyduration += 1;
+						if (player.hairType == Hair.GORGON) petrifyduration += Math.round(player.perkv1(IMutationsLib.GorgonEyesIM) * 0.5);
+					}
+					if (player.perkv1(IMutationsLib.GorgonEyesIM) == 4) {
+						petrifyduration += 2;
+						if (player.hairType == Hair.GORGON) petrifyduration += player.perkv1(IMutationsLib.GorgonEyesIM);
+					}
+				}
+				monster.createStatusEffect(StatusEffects.Stunned, petrifyduration, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.RegenInhibitorPetrify, petrifyduration, 0, 0, 0);
 			}
 		}
 		enemyAI();

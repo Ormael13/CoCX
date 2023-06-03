@@ -1045,6 +1045,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Rage:StatusEffectType                      = mkCombat("Rage");
 		public static const RaijuStaticDischarge:StatusEffectType      = mkCombat("Raiju Static Discharge");
 		public static const RegenInhibitor:StatusEffectType            = mkCombat("Regen Inhibitor");
+		public static const RegenInhibitorPetrify:StatusEffectType     = mkCombat("Regen Inhibitor (Petrify)");
 		public static const ResonanceVolley:StatusEffectType           = mkCombat("Resonance Volley");
 		public static const Rosethorn:StatusEffectType                 = mkCombat("Rosethorn Poison");
 		public static const Sandstorm:StatusEffectType                 = mkCombat("sandstorm");

@@ -601,6 +601,9 @@ public class Combat extends BaseContent {
     public function get isEnemyInvisible():Boolean {
         return player.hasStatusEffect(StatusEffects.MonsterInvisible);
     }
+    public function get isEnemyInvisibleButNotUnderground():Boolean {
+        return player.hasStatusEffect(StatusEffects.MonsterInvisible) && !player.hasStatusEffect(StatusEffects.MonsterDig);
+    }
 
     public function isPlayerSilenced():Boolean {
         var silenced:Boolean = false;
@@ -2633,6 +2636,7 @@ public class Combat extends BaseContent {
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
 			accmod += 5;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) accmod += 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accmod += 10;
 		}
 		if (player.isFistOrFistWeapon()) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
@@ -2669,7 +2673,10 @@ public class Combat extends BaseContent {
     public function meleeAccuracyPenalty():Number {
         var accmmodpenalty:Number = 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accmmodpenalty -= 5;
-		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accmmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			accmmodpenalty -= 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accmmodpenalty -= 5;
+		}
 		//if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.)) accmmodpenalty -= 5;
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
@@ -2751,6 +2758,7 @@ public class Combat extends BaseContent {
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
 			baccmod += 10;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) baccmod += 10;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) baccmod += 20;
 		}
 		return baccmod;
 	}
@@ -2766,7 +2774,10 @@ public class Combat extends BaseContent {
         var accrmodpenalty:Number = 15;
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) accrmodpenalty -= 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accrmodpenalty -= 5;
-		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accrmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			accrmodpenalty -= 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accrmodpenalty -= 5;
+		}
         if (player.weaponRangeName == "Avelynn") accrmodpenalty -= 5;
         if (accrmodpenalty < 0) accrmodpenalty = 0;
         return accrmodpenalty;
@@ -2796,7 +2807,10 @@ public class Combat extends BaseContent {
     public function firearmsAccuracyPenalty():Number {
         var accfmodpenalty:Number = 10;
 		if (player.hasPerk(PerkLib.LockAndLoad)) accfmodpenalty -= 5;
-		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accfmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			accfmodpenalty -= 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accfmodpenalty -= 5;
+		}
         if (accfmodpenalty < 0) accfmodpenalty = 0;
         return accfmodpenalty;
     }
@@ -7813,8 +7827,6 @@ public class Combat extends BaseContent {
 				else critMChance += 2 * Math.round((player.sens - 25) / 5);
 			}
 		}
-        if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critMChance += 5;
-        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 4) critMChance += 10;
         return critMChance;
     }
 
@@ -7885,10 +7897,18 @@ public class Combat extends BaseContent {
 			if (player.sens >= 750) playerLevelAdjustment += 30;
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
+		if (player.hasMutation(IMutationsLib.GorgonEyesIM) && player.perkv1(IMutationsLib.GorgonEyesIM) >= 3 && player.sens >= 25) {
+			var maxSensG:Number = 125;
+			if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 4) maxSensG += 250;
+			if (player.hairType == Hair.GORGON) maxSensG *= 2;
+			if (player.sens >= maxSensG) playerLevelAdjustment += (maxSensG * 0.04);
+			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
+		}
 		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17 && player.sens >= 25) {
 			var maxSens:Number = 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 2) maxSens += 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) maxSens += 500;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) maxSens += 750;
 			if (player.sens >= maxSens) playerLevelAdjustment += (maxSens * 0.04);
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}

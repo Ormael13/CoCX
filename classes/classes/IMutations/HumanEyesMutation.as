@@ -18,7 +18,8 @@ public class HumanEyesMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
 			var pAcc:int = 5;
-			if (pTier >= 2) pAcc += 5;
+			if (pTier >= 3) pAcc += 5;
+			if (pTier >= 4) pAcc += 10;
 			if (pTier >= 1){
                 descS = "Increase precision of all attacks by " + pAcc + "%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to ";
             }
@@ -30,6 +31,9 @@ public class HumanEyesMutation extends IMutationPerkType
             }
             if (pTier == 3){
 				descS += "30 lvl's. 5% less penalty to acc per each next attack during multiattack.";
+            }
+            if (pTier == 4){
+				descS += "60 lvl's. 10% less penalty to acc per each next attack during multiattack.";
             }
             return descS;
         }
@@ -43,6 +47,9 @@ public class HumanEyesMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -86,12 +93,16 @@ public class HumanEyesMutation extends IMutationPerkType
 				pBuffs['spe.mult'] = 1.5;
                 pBuffs['sens'] = 150;
 			}
+            if (pTier == 4) {
+				pBuffs['spe.mult'] = 4.5;
+                pBuffs['sens'] = 450;
+			}
             return pBuffs;
         }
 
         public function HumanEyesMutation() 
 		{
-			super(mName + " IM", mName, SLOT_EYES, 3);
+			super(mName + " IM", mName, SLOT_EYES, 4);
         }
 
     }
