@@ -6564,6 +6564,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
+			if (miscjewelryName == "Ezekiel's Seal") additionalTransformationChancesCounter += 3;
+			if (miscjewelryName2 == "Ezekiel's Seal") additionalTransformationChancesCounter += 3;
 			return additionalTransformationChancesCounter;
 		}
 

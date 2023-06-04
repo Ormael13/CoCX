@@ -145,6 +145,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN).hint("50 spirit stones");
 			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC).hint("40 spirit stones");
 			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS).hint("10 spirit stones");
+			//addButton(13, miscjewelries.EZEKIELSL.shortName, itemBuy, miscjewelries.EZEKIELSL).hint("80 spirit stones");
 			addButton(14, "Back", curry(enteringInn,false));
 			statScreenRefresh();
 		}

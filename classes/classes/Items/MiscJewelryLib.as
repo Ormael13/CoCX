@@ -17,6 +17,7 @@ public final class MiscJewelryLib extends ItemConstants
 		public const DMAGETO:DemonicMageTailOrnament = new DemonicMageTailOrnament();
 		public const ONI_GOURD:MiscJewelry = new MiscJewelry("OniDGou", "OniDGourd", "Oni enchanted drinking gourd", "an Oni enchanted drinking gourd", 0, 0, 1600, 0, "This gourd grants an infinite supply of non-transformative alcohol and greatly increases attack power. Furthermore, the drunken power duration is doubled when drinking from the gourd.","Gourd");
 		public const SNOWBOA:MiscJewelry = new MiscJewelry("Snowboa", "Snowboard", "Snowboard", "a Snowboard", 0, 0, 400, 0, "Allows for faster movement across the glacial wastes and helps escape from opponents.","Snowboard");
+		public const EZEKIELSL:MiscJewelry = new MiscJewelry("EzekielSl", "EzekielSeal", "Ezekiel's Seal", "an Ezekiel's Seal", 0, 0, 800, 0, "Seal containing tiny amount of Ezekiel power. Or so the rumors says.","Seal");
 		
 		public function MiscJewelryLib()
 		{
