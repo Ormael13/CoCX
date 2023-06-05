@@ -6784,10 +6784,10 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HistoryBuff)) historyTacticianB += 0.1;
 		if (player.hasPerk(PerkLib.GuerrillaTactics)) historyTacticianB += 0.1;
 		if (player.hasPerk(PerkLib.StrengthInNumbers)) historyTacticianB += 0.1;
-		/*if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-		if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-		if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-		if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;*/
+		if (player.hasPerk(PerkLib.General)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.SmallArmy)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.Fellowship)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.Alliance)) historyTacticianB += 0.1;
         return historyTacticianB;
     }
 

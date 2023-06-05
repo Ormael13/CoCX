@@ -39,19 +39,18 @@ public class Changelog extends BaseContent
 			outputText("Petrify would work on any enemy even if they used invisibility ability (excluding been underground), could use enhanced version of Petrification that is shorter but enemy HP/mana/SF recovery is fully stopped during it\n");
 			outputText("-New mutation perk: Gazer Eyes (Final Form). Req. Gazer Eyes (Evolved) and lvl 90+. Effects: Each seperated spell power increase from 50% to 100% of base spell, spell crit chance increase by 15% (25%).\n");
 			outputText("-New mutation perk: Human Eyes (Final Form). Req. Human Eyes (Evolved) and lvl 90+. Effects: Increase precision of all attacks by 20%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 60 lvl's. 10% less penalty to acc per each next attack during multiattack.\n");
+			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time).Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time).Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
 			outputText("-New tier 1 misc lvl-up perk: History Buff. Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 4 misc lvl-up perk: Guerrilla Tactics. Req. History Buff perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 7 misc lvl-up perk: Strength in Numbers. Req. Guerrilla Tactics perk. Effect: +10% minions/pets damage.\n");
-			/*outputText("-New tier 12 misc lvl-up perk: . Req. Strength in Numbers perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");*/
-			outputText("-\n");
+			outputText("-New tier 12 misc lvl-up perk: General. Req. Strength in Numbers perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 17 misc lvl-up perk: Small Army. Req. General perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 30 misc lvl-up perk: Fellowship. Req. Small Army perk. Effect: +10% minions/pets damage.\n");
+			//outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -71,6 +70,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician\n");
 			/*ostatni punkt changelogu
@@ -119,6 +127,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
 			outputText("-New tier ?? misc lvl-up perk: Mattress Actress/Actor. Req. Party Boy/Girl perk. Effect: +10% max lust, +5 to anal/vaginal capacity.\n");
 			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
+			outputText("-New tier ?? misc lvl-up perk: Alliance. Req. Fellowship perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -131,9 +140,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -161,13 +168,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -265,7 +265,7 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Ebon Half-Moon Duo - combined from two Ebon Half-Moon swords. Cost 120 spirit stones. Base atk is 6. It's classified as Small flying sword (set of 2). Deal darkness damage instead of physical damage.\n");
 			outputText("-New armor (by Liadri): Centaur Paladin Armor - obtainable by giving Centaur Armor to Pure Celess to purify. Armor 40, m.res 20, Agility perk effect is 2x better, charge attack/draco sweep deal 2x more dmg.\n");
 			outputText("-New jewelery (by Ormael): Spiritual Ring - buyable at Jewelry shop in Tel'Adre. Cost 1,500 gems. Increase soulskill power by 25%.\n");
-			outputText("-New misc accesory: Boundless Ammo Bag - buyable at Tripxi shop in Tel'Adre. Cost 1,600 gems. It makes firearms never run out of ammo in middle of multishooting nor never needing to reload.\n");
+			outputText("-New misc accesory (by Ormael): Boundless Ammo Bag - buyable at Tripxi shop in Tel'Adre. Cost 1,600 gems. It makes firearms never run out of ammo in middle of multishooting nor never needing to reload.\n");
 			outputText("-New legendary corrupted armor (Liadri): Cow Gunslinger Outfit - made from white silk shirt and tight leather pants.\n");
 			outputText("-Ayo armor bonuses no longer give either flat bonus to stat or multi to stat. They would now give bonus or penalty to stat multi.\n");
 			outputText("-Whale Fat (Evolved) would additionaly reduce ice/water type dmg by 10%. And desc for all this mutation been clasrified on which type damage they reduce (it was always both phys and mag not only phys ones).\n");
@@ -1565,9 +1565,9 @@ public class Changelog extends BaseContent
 			outputText("-New flying sword: Ebon Half-Moon - buyable at Soul Equipment shop in He'Xin'Dao. Cost 60 spirit stones. Base atk is 6. It's classified as Small flying sword. Deal darkness damage instead of physical damage.\n");
 			outputText("-New flying sword: Asauchi - buyable at Soul Equipment shop in He'Xin'Dao. Cost 160 spirit stones. Base atk is 32. It's classified as Massive flying sword. I have lowered by 5% chance to apply bleed effect and 15% lower base to deal crit damage. Soulforce cost of using it to fly or attack are lowered by 20%.\n");
 			outputText("-New flying sword: Sky Twins - buyable at Soul Equipment shop in He'Xin'Dao. Cost 120 spirit stones. Base atk is 12. It's classified as Large (set of 2) flying swords.\n");
-			outputText("-New misc accesory: Atlatl - buyable at weapon shop in Tel'Adre. Cost 800 gems. Increase accuracy of thrown range weapons by 25% and their damage by 25%.\n");
-			outputText("-New misc accesory: Snowboard - buyable at Yu shop. Cost 400 gems. Increase the odds of escaping in glacial rift (Due to the snow and blizzards hindering conventional escape using the run option will be 50% less effective in glacial rift from now on. The snowboard offset this penalty).\n");
-			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
+			outputText("-New misc accesory (by Ormael): Atlatl - buyable at weapon shop in Tel'Adre. Cost 800 gems. Increase accuracy of thrown range weapons by 25% and their damage by 25%.\n");
+			outputText("-New misc accesory (by Liadri): Snowboard - buyable at Yu shop. Cost 400 gems. Increase the odds of escaping in glacial rift (Due to the snow and blizzards hindering conventional escape using the run option will be 50% less effective in glacial rift from now on. The snowboard offset this penalty).\n");
+			outputText("-New misc accesory (by Liadri): Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
 			outputText("-New material: a vial of E-Ichor. Cost 500 gems. Could be gained from offering in one of shrines located in Dilapidated Shrine. Could be used for internal mutation.\n");
 			outputText("-New Area: Ashlands. Exploring caves allows now to find it (have similar lvl range for enemies as tundra and is much warmer place too). Exploring Ashlands leads to finding (Outer) Vulcanic Crag - it have enemies with level range like (Outer) Glacial Rift ones.\n");
 			outputText("-New Place to find: Dilapidated Shrine. Req. to have talked with Evangeline on 4th talk option and then explore (Outer) Battlefield.\n");

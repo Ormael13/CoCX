@@ -230,9 +230,9 @@ public class PerkLib
 		public static const PastLifeCultivator:PerkType = mk("Past Life: Cultivator", "Past Life: Cultivator",
 				"Soulforce is easier to keep giving you a 10% increase to your maximum amount.", null, true);
 		public static const HistoryFeral:PerkType = mk("History: Feral", "History: Feral",
-				"Being raised in the wilds allows your feral attacks to be 10% more effective. Plus one extra feral attack");
+				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack.");
 		public static const PastLifeFeral:PerkType = mk("Past Life: Feral", "Past Life: Feral",
-				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack", null, true);
+				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack.", null, true);
 		public static const HistoryFighter:PerkType = mk("History: Fighter", "History: Fighter",
 				"A past full of conflict increases physical melee damage dealt by 10% and acc by 20%.");
 		public static const PastLifeFighter:PerkType = mk("Past Life: Fighter", "Past Life: Fighter",
@@ -466,6 +466,18 @@ public class PerkLib
 		public static const StrengthInNumbers:PerkType = mk("Strength in Numbers", "Strength in Numbers",
 				"No man is an island. Having companions around you, even if they're only familiars, puts your mind at ease. (+10% minions/pets damage)",
 				"You've chosen the 'Strength in Numbers' perk. (+10% minions/pets damage)");
+		public static const General:PerkType = mk("General", "General",
+				"You've learned all that you could from those old history books, but now it's finally time to put your knowledge to the ultimate test. Inspire your comrades! Lead them to victory! (+10% minions/pets damage)",
+				"You've chosen the 'General' perk. (+10% minions/pets damage)");
+		public static const SmallArmy:PerkType = mk("Small Army", "Small Army",
+				"Nobody said that you had to save Mareth on your own. The more the merrier--and the easier you can sleep at night. (+10% minions/pets damage)",
+				"You've chosen the 'Small Army' perk. (+10% minions/pets damage)");
+		public static const Fellowship:PerkType = mk("Fellowship", "Fellowship",
+				". (+10% minions/pets damage)",
+				"You've chosen the 'Fellowship' perk. (+10% minions/pets damage)");
+		public static const Alliance:PerkType = mk("Alliance", "Alliance",
+				". (+10% minions/pets damage)",
+				"You've chosen the 'Alliance' perk. (+10% minions/pets damage)");
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -473,18 +485,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				". (+10% minions/pets damage)",
-				"You've chosen the '' perk. (+10% minions/pets damage)");
-		public static const :PerkType = mk("", "",
-				". (+10% minions/pets damage)",
-				"You've chosen the '' perk. (+10% minions/pets damage)");
-		public static const :PerkType = mk("", "",
-				". (+10% minions/pets damage)",
-				"You've chosen the '' perk. (+10% minions/pets damage)");
-		public static const :PerkType = mk("", "",
-				". (+10% minions/pets damage)",
-				"You've chosen the '' perk. (+10% minions/pets damage)");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -7455,6 +7455,8 @@ public class PerkLib
 					.requirePerk(MeatHole);
 			Hammer.requireLevel(72)
 					.requirePerk(Furnace);
+			General.requireLevel(72)
+					.requirePerk(StrengthInNumbers);
 			BrothelOwner.requireLevel(72)
 					.requirePerk(Escort);
 			LimitBreakerBody2ndStage.requireLevel(72)
@@ -7528,6 +7530,8 @@ public class PerkLib
 					.requirePerk(BedWarmer);
 			Anvil.requireLevel(102)
 					.requirePerk(Hammer);
+			SmallArmy.requireLevel(102)
+					.requirePerk(General);
 			Pornstar.requireLevel(102)
 					.requirePerk(BrothelOwner);
             //Tier 18
@@ -7557,7 +7561,8 @@ public class PerkLib
             //Tier 30
 			Perfection.requireLevel(180)
 					.requirePerk(Saturation);
-			Creationism.requirePerk(Perfection);
+			Creationism.requireLevel(180)
+					.requirePerk(Perfection);
 			SoulPowered.requireLevel(180)
 					.requirePerk(Metamorphable);
 			SoulOfSteel.requireLevel(180)
@@ -7578,6 +7583,8 @@ public class PerkLib
 					.requirePerk(TensionTamer);
 			Weap0n.requireLevel(180)
 					.requirePerk(Anvil);
+			Fellowship.requireLevel(180)
+					.requirePerk(SmallArmy);
 			SexChampion.requireLevel(180)
 					.requirePerk(Pornstar);
 			TransformationAcclimation.requirePerk(TransformationResistance);
