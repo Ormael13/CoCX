@@ -50,7 +50,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 misc lvl-up perk: General. Req. Strength in Numbers perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 17 misc lvl-up perk: Small Army. Req. General perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: Fellowship. Req. Small Army perk. Effect: +10% minions/pets damage.\n");
-			//outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
+			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
