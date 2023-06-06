@@ -33,6 +33,12 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.8t2:</b>\n\n");
+			outputText("-New tier 1 misc lvl-up perk: History Buff. Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 4 misc lvl-up perk: Guerrilla Tactics. Req. History Buff perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 7 misc lvl-up perk: Strength in Numbers. Req. Guerrilla Tactics perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 12 misc lvl-up perk: General. Req. Strength in Numbers perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 17 misc lvl-up perk: Small Army. Req. General perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 30 misc lvl-up perk: Fellowship. Req. Small Army perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New mutation perk: Gorgon Eyes (Evolved). Req. Gorgon Eyes (Primitive) and lvl 60+. Effects: Increase duration of petrify on enemies by 1 turn (if PC have gorgon hair it add additional round and on single enemy it also add rounded up half of curent mutation tier), same bonus as Eyes of the Hunter (Ex) perk but with limit to 5(10 w/ gorgon hair) lvl's, ");
 			outputText("Petrify would work on any enemy even if they used invisibility ability (excluding been underground)\n");
 			outputText("-New mutation perk: Gorgon Eyes (Final Form). Req. Gorgon Eyes (Evolved) and lvl 90+. Effects: Increase duration of petrify on enemies by another 1 turn (if PC have gorgon hair it add one more round and on single enemy it also amount of additonal rounds equal to current mutation tier), same bonus as Eyes of the Hunter (Ex) perk but with limit to 15(30 w/ gorgon hair) lvl's, ");
@@ -44,14 +50,8 @@ public class Changelog extends BaseContent
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-New tier 1 misc lvl-up perk: History Buff. Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 4 misc lvl-up perk: Guerrilla Tactics. Req. History Buff perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 7 misc lvl-up perk: Strength in Numbers. Req. Guerrilla Tactics perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 12 misc lvl-up perk: General. Req. Strength in Numbers perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 17 misc lvl-up perk: Small Army. Req. General perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 30 misc lvl-up perk: Fellowship. Req. Small Army perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
-			outputText("-\n");
+			outputText("-Fixing various text errors reported by people on discord.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
