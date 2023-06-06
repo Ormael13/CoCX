@@ -373,7 +373,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 		if (inventory.getMaxSlots() > 30) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
 	}
 	if (page == 4) {
-		for (slot = 30; slot < 340; slot++) {
+		for (slot = 30; slot < 40; slot++) {
 			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 				addButton(slot-30, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
