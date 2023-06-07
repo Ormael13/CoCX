@@ -52,6 +52,15 @@ public class Changelog extends BaseContent
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-Fixing various text errors reported by people on discord.\n");
+			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -70,15 +79,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician\n");
 			/*ostatni punkt changelogu

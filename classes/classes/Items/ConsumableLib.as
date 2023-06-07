@@ -209,7 +209,6 @@ public final class ConsumableLib extends Utils
 		public const BCHCAKE:SimpleConsumable = mk("BChCake", "BigChocolateCake", "a Big chocolate cake", 30, "A decadent-looking chocolate cake found primarily in wonderland.", m.bigChocolateCake);
 		public const BH_PILL:SimpleConsumable = mk("BH.Pill", "B.Heal Pill", "a big healing pill", 42, "A big healing pill that's guaranteed to heal you by a bit.", m.bighealpill);
 		public const C__MINT:Consumable       = new Mint();
-		public const C_VEMOM:CentipedeVenom   = new CentipedeVenom();
 		public const CERUL_P:Consumable       = new CeruleanPotion();
 		public const COAL___:Consumable       = new Coal();
 		public const CFISHS:SimpleConsumable  = mk("CFishS.", "Cold Fish S.", "a bowl of cold fish soup", 20, "A soup made with fishes from the glacial rift. It is served cold to preserve the flavor and supposed calming effect which act as a lustkiller.", m.coldFishSoup);
@@ -269,6 +268,7 @@ public final class ConsumableLib extends Utils
 		public const BOARTRU:SimpleConsumable = mk("BoarTru", "BoarTruffle", "a boar truffle", 6, "It’s clear where the pigtail truffle gets its name.  A small, curly sprig resembling a pig’s tail can be seen jutting out of it. Now that it’s been enhanced by Lumi, it’s larger and fuzzier than it was before, almost like a peach.", curry(m.pigTruffle, true));
 		public const BUBBLEG:SimpleConsumable = mk("B.Gum", "B.Gum", "a Bubblegum candy", 6, "A somewhat innocent pink spherical candy favored by cancers.", m.bubblegum);
 		public const BULBYPP:SimpleConsumable = mk("BulbyPp", "BulbyPp", "a bulbous pepper", 10, "This bulbous pepper has a slightly different shape than the other canine peppers, with two large orb-like protrusions at the base.", curry(m.caninePepper, 5));
+		public const C_VEMOM:CentipedeVenom   = new CentipedeVenom();
 		public const CANINEP:SimpleConsumable = mk("CanineP", "CanineP", "a Canine pepper", 6, "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.", curry(m.caninePepper, 0));
 		public const CENTARI:Centaurinum      = new Centaurinum();
 		public const CHILLYP:SimpleConsumable = mk("ChillyP", "ChillyPp", "a Chilly pepper", 10, "This pepper is positively shrouded with a thin layer of ice.", m.chillyPepper);
