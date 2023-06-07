@@ -436,7 +436,7 @@ use namespace CoC;
 			outputText("  Yet you are not denied the anal pleasure you crave, as the widening bands now filling you are each pushing out harder than the one before.  At the stimulation, her own demonic clit swells as if posessed, nodulates, and hardens into dick form, poking up from her pussy and drooling a slime of pre-cum onto her abdomen.  The second ring rolls over your anal g-spot and you gasp, nearly losing your grip.  The third knocks your [legs] out from under you, and you collapse atop your partner, squeezing oozing dick");
 			if (player.hasCock()) outputText("s");
 			outputText(" between you");
-			if (player.clitLength >= 4 && player.hasVagina()) outputText(", and pressing your monster chick-stick into it; the gooey heat sends a tingle of shock up your spine and your pussy convulses");
+			if (player.hasVagina() && player.clitLength >= 4) outputText(", and pressing your monster chick-stick into it; the gooey heat sends a tingle of shock up your spine and your pussy convulses");
 			outputText(".");
 			player.buttChange(50, true, true, false);
 			outputText("\n\n");
