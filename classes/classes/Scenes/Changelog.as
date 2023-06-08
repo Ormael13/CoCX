@@ -53,8 +53,8 @@ public class Changelog extends BaseContent
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-Fixing various text errors reported by people on discord.\n");
 			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
+			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf) and Cobra hood (rear body)(Apophis tf).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
