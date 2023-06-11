@@ -26,21 +26,21 @@ public class DarkElfScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_DarkElf);
 			outputText("As you explore the area an arrow passes by your elbow, and misses you by an inch. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently. A coiled rope sways, dangling from her ass.\n\n");
-			outputText("\"<i>Not bad. This one at least has some reflexes.</i>\" Her gaze rakes up and down your body. \"<i>I might just keep this one...</i>\" \n\n");
+			outputText("\"<i>Not bad. This one at least has some reflexes.</i>\" Her gaze rakes up and down your body. \"<i>I might just keep this one...</i>\"\n\n");
 			startCombat(new DarkElfSlaver);
 		}
 		public function introDarkELfRanger():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_DarkElf);
 			outputText("As you explore the area an arrow passes by your elbow, shaft scraping your [skin] as it passes. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
-			outputText("\"<i>Now, that's unusual. I missed?</i>\" She scowls, drawing another arrow. \"<i> Filthy [race], submit to serving your better...You'll grow to enjoy it.</i>\" \n\n");
+			outputText("\"<i>Now, that's unusual. I missed?</i>\" She scowls, drawing another arrow. \"<i> Filthy [race], submit to serving your better...You'll grow to enjoy it.</i>\"\n\n");
 			startCombat(new DarkElfRanger);
 		}
 		public function introDarkELfSniper():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_DarkElf);
 			outputText("As you explore the area an arrow passes by your elbow, missing you by a hair's width. You look for your aggressor and spot a dark-skinned woman with pointed ears, purple eyes, and a bow. Having realised her quarry spotted her, she jumps down from her hiding spot toward you and draws a few arrows, smiling malevolently.\n\n");
-			outputText("\"<i>So, you were able to see your mistress coming.</i>\" She smirks, looking you up and down. \"<i>Chains will suit you. Maybe I'll even keep you as my pet.<\i>\n\n");
+			outputText("\"<i>So, you were able to see your mistress coming.</i>\" She smirks, looking you up and down. \"<i>Chains will suit you. Maybe I'll even keep you as my pet.</i>\n\n");
 			startCombat(new DarkElfSniper);
 		}
 		public function introDarkELfRangerCaves():void {

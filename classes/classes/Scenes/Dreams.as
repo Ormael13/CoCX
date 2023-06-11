@@ -359,6 +359,27 @@ public class Dreams {
             EngineCore.doNext(EventParser.playerMenu);
             return true;
         }
+		else {
+			if(player.cor <= 33) {
+				if (Utils.rand(2) == 0) {
+                    EngineCore.outputText("tender sex with a sweetheart back home.  ");
+                } else {
+					EngineCore.outputText("beautiful nude ");
+					if (player.gender <= 1 || (player.gender == 3 && Utils.rand(2) == 0)) {
+						EngineCore.outputText("women ");
+					} else EngineCore.outputText("men ");
+					EngineCore.outputText("massaging you, slowly moving their hands over your most intimate places.  ");
+				}
+            }
+            if(player.cor > 33 && player.cor <= 66) {
+                EngineCore.outputText("being violently raped and used by demons.  ");
+            }
+            if(player.cor > 66) {
+                dreamtemp = Utils.rand(5);
+                if(dreamtemp <= 3) EngineCore.outputText("giving yourself to the demons fully, allowing yourself to be tied down and owned as your body is warped for their twisted pleasures.  ");
+                else EngineCore.outputText("being captured and taken to a rusted building with dark smokestacks that belch sweet purplish smoke.  Inside are rows of multi-dicked, huge breasted humans, approximately thirty of them.  Each is shackled with their legs spread and torso bent over, and each has tight fitting suction tubes fitting over their tits and cocks.  Every set of tubes is pulsing with suction, drawing rivers of sticky white fluids from its slave's over-endowed breasts and balls.  You shudder in horror and arousal as you realize the victims seem to be arranged by age, ending with an empty machine next to the youngest slut-cow.  The inhuman strength of your captors easily overpowers your struggles as you are forced into your shackles, the metal locks clicking with finality.  A funnel is forced into your mouth, force-feeding you slick corrupted fluids that taste like sex and make your head swim.  Your vision fades as you feel heat in your chest and groin, making you swoon from the drugged cocktail and pleasure of your new best friends – the suction tubes. All you can hear is your own desperate moans... no, wait... that was a dream... but it was so twisted and hot that you're still panting with lust.  ");
+            }
+		}
         return false;
     }
 
