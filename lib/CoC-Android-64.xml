@@ -4,7 +4,7 @@
   <name>Corruption of Champion X</name>
   <versionNumber>0.0.0</versionNumber>
   <initialWindow>
-    <content>CoC-Mobile.swf</content>
+    <content>CoC-Mobile-Beta-64bit.swf</content>
     <visible>true</visible>
     <autoOrients>true</autoOrients>
     <fullScreen>true</fullScreen>
@@ -22,11 +22,8 @@
                 &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.DISABLE_KEYGUARD&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot;/&gt;--&gt;
-                &lt;!--&lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;--&gt;
                 &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;--&gt;
 
