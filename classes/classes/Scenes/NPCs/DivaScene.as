@@ -293,6 +293,7 @@ public class DivaScene extends XXCNPC {
                 else
                     outputText("Diva prepares to leave again but gives you a last kiss, making you blush, and hands you over what looks like a strange red vial before flying through a hole in the roof.");
                 firstLoss = false;
+				flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.VAMPBLD.id;
                 cleanupAfterCombat();
             } else {
                 outputText("Diva regretfully breaks the embrace before going back to her coffin. Strangely, you don't feel tired from mating with her all night long.");

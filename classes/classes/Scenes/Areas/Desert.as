@@ -250,6 +250,10 @@ use namespace CoC;
 					name: "ted",
 					call: SceneLib.tedScene.introPostHiddenCave,
 					when: SceneLib.tedScene.canEncounterTed
+				}, {
+					name  : "desertloot",
+					chance: 0.3,
+					call  : findDesertLoot
 				}/*, {
 					name: "demonProjects",
 					chance: 0.2,
