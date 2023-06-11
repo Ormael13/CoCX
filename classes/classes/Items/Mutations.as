@@ -1637,6 +1637,7 @@ public final class Mutations extends MutationsHelper {
     //3-Black Pepper (Dark Fur, +corruption/libido)
     //4-Knotty Pepper (+Knot + Cum Multiplier)
     //5-Bulbous Pepper (+ball size or fresh balls)
+	//6-Wolf Pepper (Werewolf TF)
     public function caninePepper(type:Number, player:Player):void {
         var choice:int;
         var temp2:Number = 0;

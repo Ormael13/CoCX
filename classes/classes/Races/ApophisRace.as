@@ -3,6 +3,7 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
 
@@ -36,7 +37,6 @@ public class ApophisRace extends Race {
 
 	public function ApophisRace(id:int) {
 		super("Apophis", id, []);//RaceBody);
-		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;
         //tfRace = RaceMem.appendEnumVal("Apophis", CoC.instance.transformations.FullApophis);
@@ -55,11 +55,12 @@ public class ApophisRace extends Race {
 				.faceType(Face.SNAKE_FANGS, +1)
 				.eyeTypeAndColor(Eyes.SNAKEFIENDISH, "yellow", +2)
 				.earType(Ears.SNAKE, +1)
-				.rearType(RearBody.COBRA_HOOD, +1)
+				.rearType(RearBody.COBRA_HOOD, +2)
 				.noWings(+4)
 				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
-				.corruption(AT_LEAST(20), +1)
-				.corruption(AT_LEAST(50), +1)
+				.corruption(AT_LEAST(40), +1)
+				.corruption(AT_LEAST(60), +1)
+				.corruption(AT_LEAST(80), +1)
 				.corruption(AT_LEAST(100), +2)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
@@ -67,16 +68,17 @@ public class ApophisRace extends Race {
 									|| CouatlRace.isCouatlLike(body)
 									|| HydraRace.isHydraLike(body)
 									|| VouivreRace.isVouivreLike(body));
-						}, 0, -1000);
+						}, 0, -1000)
+				.hasPerk(PerkLib.Venomancy, +1);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
 		
-		buildTier(23, "apophis")
+		buildTier(20, "apophis")
 				.buffs({
-					"str.mult": +0.70,
-					"tou.mult": +0.70,
-					"spe.mult": +1.00,
-					"lib.mult": +1.05
+					"str.mult": +0.60,
+					"tou.mult": +0.60,
+					"spe.mult": +0.80,
+					"lib.mult": +1.00
 				})
 				.end();
 		
@@ -88,6 +90,11 @@ public class ApophisRace extends Race {
 					"lib.mult": +1.30
 				})
 				.end();
+	}
+	
+	public static function isApophisLike(body:BodyData):Boolean {
+		return body.rearType == RearBody.COBRA_HOOD
+				|| body.eyeType == Eyes.SNAKEFIENDISH;
 	}
 }
 }
