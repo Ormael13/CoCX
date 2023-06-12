@@ -463,7 +463,8 @@ public class Mountain extends BaseContent
 				when: function ():Boolean {
 					return flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] <= 0
 						&& flags[kFLAGS.SOPHIE_DISABLED] <= 0
-						&& !SceneLib.sophieFollowerScene.sophieFollower();
+						&& !SceneLib.sophieFollowerScene.sophieFollower()
+						&& !player.hasStatusEffect(StatusEffects.SophieOff);
 				},
 				chance: mountainChance,
 				call: SceneLib.sophieScene.sophieRouter

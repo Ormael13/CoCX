@@ -661,7 +661,7 @@ private function fuckHelAndKitsunesAsUrta():void {
 	//If PC has a cock:
 	if(player2.hasCock()) {
 		outputText("  \"<i>I've got a better one ");
-		if(helFollower.followerHel()) outputText("at home");
+		if(helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("at home");
 		else outputText("at my beck and call");
 		outputText(", you know...  But we've got that in common, don't we?  Mmm, maybe we can share it some day?  A horny girl like you'd just love that, woudn't you? Getting to worship " + player2.mf("his","her") + " cock beside me while my tail fills your ass so full you scream....</i>");
 	}
@@ -2518,8 +2518,8 @@ private function getKnockedUpWithGodChild():void {
 	var ballWorship:Array = [];
 	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && jojoScene.campCorruptJojo()) ballWorship[ballWorship.length] = 0;
 	if(xor(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2, jojoScene.campCorruptJojo())) ballWorship[ballWorship.length] = 1;
-	if(sophieBimbo.bimboSophie()) ballWorship[ballWorship.length] = 2;
-	if(helFollower.followerHel()) ballWorship[ballWorship.length] = 3;
+	if(sophieBimbo.bimboSophie() && !player.hasStatusEffect(StatusEffects.SophieOff)) ballWorship[ballWorship.length] = 2;
+	if(helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) ballWorship[ballWorship.length] = 3;
 	if(latexGirl.latexGooFollower()) ballWorship[ballWorship.length] = 4;
 	if(flags[kFLAGS.VALERIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
 	var choice:int;

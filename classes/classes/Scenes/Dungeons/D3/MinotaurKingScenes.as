@@ -25,7 +25,7 @@ public class MinotaurKingScenes extends BaseContent
 			outputText("\n\nA vision of curves and ripe sexuality emerges from the curtain of wet and wiggling flesh. She’s at least part cow, with upraised horns and a happily flicking tail - to say nothing of her egregiously supple breasts, still leaking milk from a recent suckle or their own overtly-abundant production. In her hands is a massive axe; it’s too large to be wielded by human hands.");
 			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] != 0) outputText(" Even Isabella would struggle to wield such a weapon.");
 			else if (player.hasStatusEffect(StatusEffects.CampMarble)) outputText(" Even Marble would struggle to wield such a weapon");
-            else if (SceneLib.helFollower.followerHel()) outputText(" Even Helia would struggle to wield such a weapon.");
+            else if (SceneLib.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) outputText(" Even Helia would struggle to wield such a weapon.");
             outputText(" This poor cow-slut, this ‘Excellia’ can barely to bring it to her lord without tipping forward onto her too-large tits.");
 			outputText("\n\nTaking the gleaming metal shaft from his smaller slave, the proud beast stamps the butt-end into the worked stone floor, creating a spiderweb of cracks from brute strength alone.");
 			outputText("\n\n<i>\"Careful not to damage my property, oh King of the Minotaurs. Remember within whose feast-hall you dwell,\"</i> a chilly, yet feminine voice calls.");
@@ -79,7 +79,7 @@ public class MinotaurKingScenes extends BaseContent
 				outputText("\n\nShouldra clearly doesn't want to leave you, but you insist - someone has to show the way to the poor cowgirl. And you obviously can't do it right now.\n\n");
 				if (SceneLib.marbleScene.marbleFollower())
 					outputText("\n\n<i>\"But... How will I explain this to Marble? 'Hey, look, there's another cow who will live here. And she's aso a mindless milk-leaking corrupted bitch. Deal with it.'\"</i> The ghost girl even exits your body to imitate your lover.");
-				else if (SceneLib.helScene.followerHel() || SceneLib.kihaScene.followerKiha())
+				else if ((SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) || SceneLib.kihaScene.followerKiha())
 					outputText("\n\n<i>\"But... I won't be able to even enter your camp without getting her killed! She smells of corruption for miles!\"</i>");
 				else if (camp.followersCount() > 1) {
 					outputText("\n\n<i>\"But... How will I explain this to others? You handle the talking most of the time, not me!\"</i>");

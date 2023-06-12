@@ -104,7 +104,7 @@ package classes.Scenes.NPCs
 					outputText(" to calm down, we finally could have a proper presentation. All in all, [arian ey]");
 					outputText(" seems like a fun person, albeit [arian ey] always seemed hesitant to look me in the eyes.</i>\"\n\n");
 				}
-				if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
+				if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && !player.hasStatusEffect(StatusEffects.SophieOff)) {
 					if (flags[kFLAGS.SOPHIE_RECRUITED_PURE] > 0) {
 						outputText("\"<i>The pink haired harpy on our camp, Sophie, is quite a piece of work,</i>\" the horse-girl says. ");
 						outputText("\"<i>She just saw me arriving and tried to hit on me. Little did she know that I’m not that into girls, so she was very disappointed when she found out. Still, she was kind enough to help me unpack my stuff, so I think that having her near will be nice.</i>\"\n\n");
@@ -206,7 +206,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>As I told you, I got acquainted of a tribe of gnolls, and often spent time on his village. Sadly, the rest of the hyena-like creatures weren’t as nice as my friends. Wandering across the plains, more often than not I encountered the hostile tribe of them, keen on raping me, or worse, not unlike those you beat when me met.</i>\"\n\n");
 			outputText("\"<i>There was also this red-head bitch, that tried to knock me down to steal a ride on my pole. Managed to get to it two times, the first one taking me by surprise when I was working on a lacquered chair, and a second time when she used that flaming tail of hers to burn my tail, and knocking me out with her scimitar while I was busy putting down the fire. ");
 			outputText("Bitch. Next time that I met that cunt I slapped so far that she didn’t come back in two weeks.");
-			if (followerHel()) outputText(" The redhead girl on your camp reminds me a bit of her, but since she hasn’t come yet to hit on me, I doubt that they’re the same person. Still gives off the ‘haughty slut’ vibe.");
+			if (followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) outputText(" The redhead girl on your camp reminds me a bit of her, but since she hasn’t come yet to hit on me, I doubt that they’re the same person. Still gives off the ‘haughty slut’ vibe.");
 			outputText("</i>\"\n\n\"<i>Ah, probably the most fun thing on the plains are those satyr boys.</i>\"\n\n");
 			outputText("The rapist satyrs wandering the grasslands? How that could be fun, you ask her.\n\n");
 			outputText("\"<i>You have to know, once you’re capable to beat a bunch of gnolls, those satyrs aren’t a menace anymore. To make everything better, they go alone most of the time, so I only needed a couple of well-placed hits to bring them down.</i>\"\n\n");

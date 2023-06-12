@@ -903,7 +903,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.biggestTitSize() > 3) {
 				outputText("or even between the two of you, to be frank, ");
 			}
-			else if (followerKiha() || isabellaFollower() || sophieFollower() || followerHel()) {
+			else if (followerKiha() || isabellaFollower() || (sophieFollower() && !player.hasStatusEffect(StatusEffects.SophieOff)) || (followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff))) {
 				outputText("or even in a hundred foot radius, really, ");
 			}
 			outputText("but even so you decide that right now they're ideal. As you quietly finish your lusty calculation, Luna tilts her head quizzically under your evaluating gaze. Having made up your mind, you ask her if she would be so kind as to stroke your cock to climax between her breasts.\n\n" +
