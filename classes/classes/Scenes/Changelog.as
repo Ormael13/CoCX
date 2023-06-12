@@ -81,7 +81,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
-			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion\n");
+			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
