@@ -2691,12 +2691,12 @@ public function apparantlyJojoDOESlift():void
 		if (flags[kFLAGS.AMILY_FOLLOWER] > 0) enlightenedBlurbs.push("You can hear Amily changing the bedding to her nest.");
 		if (SceneLib.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
-		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
+		if (sophieFollower() && !player.hasStatusEffect(StatusEffects.SophieOff)) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] > 0) {
 			if (flags[kFLAGS.IZMA_BROFIED] > 0) enlightenedBlurbs.push("You can hear Izmael doing push-ups to stay fit.");
 			else enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book.");
 		}
-		if (SceneLib.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
+		if (SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!

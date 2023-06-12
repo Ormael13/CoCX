@@ -170,7 +170,7 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>Well… what an awkward woman. So how can I help you lover?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && followerHel()) {
+	else if (rand(2) == 0 && followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 		outputText("You see Samirah about to pounce on Helia, but before you can warn the salamander, the naga already got her in a coil.\n\n");
 		outputText("\"<i>You are so warm, can we stay like this for a while?</i>\"\n\n");
 		outputText("That went better than you expected, and Helia seems to not care in the least to share her natural fire.\n\n");
@@ -199,7 +199,7 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>Why is that dragon so resistant? I just want to warm up. Did you call me for help by the way?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && (sophieFollower() || bimboSophie()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
+	else if (rand(2) == 0 && (sophieFollower() || bimboSophie()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && !player.hasStatusEffect(StatusEffects.SophieOff)) {
 		outputText("As you walk past the section your harpy lover chose for her nest, you suddenly hear screeching that promise bloody murder, so you rush over to see what happened. It seems that Samirah got too close for the harpy’s liking.\n\n");
 		outputText("\"<i>Stay away from my eggs! My chicks aren’t food!</i>\"\n\n");
 		outputText("Wow, it’s rare to see Sophie going ballistic, she keeps swooping in circles to make the naga retreat.\n\n");
