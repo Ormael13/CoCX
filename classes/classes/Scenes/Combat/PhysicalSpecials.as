@@ -1032,6 +1032,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You strike [themonster] vitals with your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
+		if (player.hasPerk(PerkLib.HistoryThief) || player.hasPerk(PerkLib.PastLifeThief)) SAMulti += 1;
 		if (player.weapon == weapons.ANGSTD1 || player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
@@ -4221,7 +4222,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 			//Check weither its snakebite or apophis
 			var venomType:StatusEffectType = StatusEffects.NagaVenom;
-			if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
+			if (player.racialScore(Races.APOPHIS) >= 20) venomType = StatusEffects.ApophisVenom;
 			if(monster.hasStatusEffect(venomType))
 			{
 				monster.addStatusValue(venomType,2,2);
@@ -6488,4 +6489,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

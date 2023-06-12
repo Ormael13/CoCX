@@ -273,6 +273,10 @@ public class PerkLib
 				"Tactical knowledge allows you to increase the effectiveness of your subordinates. (+10% to minions/pets damage).");
 		public static const PastLifeTactician:PerkType = mk("Past Life: Tactician", "Past Life: Tactician",
 				"Tactical knowledge allows you to increase the effectiveness of your subordinates. (+10% to minions/pets damage).", null, true);
+		public static const HistoryThief:PerkType = mk("History: Thief", "History: Thief",
+				"You spent much of your time in the lesser streets of Ignam, learning from your friends and peers how to steal and hide from guards to survive. (+1 to sneak attack dmg multiplier)");
+		public static const PastLifeThief:PerkType = mk("Past Life: Thief", "Past Life: Thief",
+				"You spent much of your time in the lesser streets of Ignam, learning from your friends and peers how to steal and hide from guards to survive. (+1 to sneak attack dmg multiplier)", null, true);
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
 		public static const PastLifeWhore:PerkType = mk("Past Life: Whore", "Past Life: Whore",
