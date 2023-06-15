@@ -1126,8 +1126,9 @@ public function kaibaShopMainMenu2():void {
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(12, "-2-", kaibaShopMainMenuPage2);
-		addButton(13, "-3-", kaibaShopMainMenuPage3);
+		addButton(11, "-2-", kaibaShopMainMenuPage2);
+		addButton(12, "-3-", kaibaShopMainMenuPage3);
+		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1153,8 +1154,9 @@ public function kaibaShopMainMenu2():void {
 			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(12, "-1-", kaibaShopMainMenuPage1);
-		addButton(13, "-3-", kaibaShopMainMenuPage3);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
+		addButton(12, "-3-", kaibaShopMainMenuPage3);
+		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1167,6 +1169,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "MoonClaws", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "Leaf Amulet", "You already bought item from Kaiba today.");
+			addButtonDisabled(9, "Kratia's Seal", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
@@ -1178,8 +1181,11 @@ public function kaibaShopMainMenu2():void {
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
 			addButton(7, "MoonClaws", buyItem, weapons.MCLAWS).hint("Moonlight Claws - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
 			addButton(8, "Leaf Amulet", buyItem, necklaces.LEAFAMU).hint("Leaf Amulet - Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf. This is a temporary sale.");
+			addButton(9, "Kratia's Seal", buyItem, miscjewelries.KRATIASL).hint("Kratia's Seal - Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);
 		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
@@ -1202,6 +1208,7 @@ public function kaibaShopMainMenu2():void {
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}

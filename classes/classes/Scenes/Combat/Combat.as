@@ -7917,6 +7917,14 @@ public class Combat extends BaseContent {
 
     public function monsterLevelAdjustment():Number {
         var monsterLvlAdjustment:Number = 0;
+		if (player.miscjewelryName == "Kratia's Seal") {
+			if (monster is TrainingDummy) monsterLvlAdjustment += 50;
+			monsterLvlAdjustment += 100;
+		}
+		if (player.miscjewelryName2 == "Kratia's Seal") {
+			if (monster is TrainingDummy) monsterLvlAdjustment += 50;
+			monsterLvlAdjustment += 100;
+		}
 		if (player.vehiclesName == "Giant Slayer Mech") {
 			if (monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType) || monster.hasPerk(PerkLib.EnemyGodType)) monsterLvlAdjustment -= 10;
 			else monsterLvlAdjustment += 10;
