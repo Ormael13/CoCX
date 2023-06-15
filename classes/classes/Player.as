@@ -6924,8 +6924,8 @@ use namespace CoC;
 					if(game.inCombat) outputText(" [themonster] gulps as [monster he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
 					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
 				}
-				if(lust100 >= 100){
-					lust = maxLust()*99/100
+				if ((lust100 >= 100) && !hasPerk(PerkLib.WhatIsReality)){
+					lust = maxLust() * 99 / 100;
 				}
 			}
 		}
