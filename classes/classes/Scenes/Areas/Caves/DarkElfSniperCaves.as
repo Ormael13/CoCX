@@ -8,10 +8,10 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.Scenes.Monsters.DarkElfSniper;
+import classes.Scenes.Monsters.DarkElfs;
 import classes.internals.*;
 
-public class DarkElfSniperCaves extends DarkElfSniper
+public class DarkElfSniperCaves extends DarkElfs
 	{
 		public function DarkElfSniperCaves()
 		{

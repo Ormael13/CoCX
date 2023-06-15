@@ -11,7 +11,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -36,7 +36,7 @@ use namespace CoC;
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
-		public var darkelfScene:DarkElfScene = new DarkElfScene();
+		public var lightelfScene:LightElfScene = new LightElfScene();
 		public var aikoScene:AikoScene = new AikoScene();
 		public var nightmareScene:NightmareScene = new NightmareScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
@@ -680,10 +680,10 @@ use namespace CoC;
 					return player.isAlraune();
 				}
 			}, {
-				name  : "dark_elf_scout",
+				name  : "light_elf_scout",
 				call  : function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-					darkelfScene.introDarkELfScout();
+					lightelfScene.introLightELfScout();
 				},
 				chance: 0.8
 			}, {
