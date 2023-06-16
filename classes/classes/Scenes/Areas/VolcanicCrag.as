@@ -142,7 +142,7 @@ public class VolcanicCrag extends BaseContent
 
 		public function volcanicCragChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 
