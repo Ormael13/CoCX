@@ -36,7 +36,7 @@ public class KitshooRace extends Race {
         /*Perks*/		"Kitsune"];
 	
 	public function KitshooRace(id:int) {
-		super("Kitshoo", id, RaceBody);
+		super("Kitsumori", id, RaceBody);
 		mutationThreshold = 6;
 	}
 	
