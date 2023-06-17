@@ -392,7 +392,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.armors.RKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
 			[CoC.instance.armors.WKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
 			[CoC.instance.armors.SPKIMO, CoC.instance.armors.OEKIMO, CoC.instance.armors.OTKIMO],
-			[CoC.instance.armors.CTPALAD, CoC.instance.armors.CTHPALA, CoC.instance.armors.CTBGUAR]
+			[CoC.instance.armors.CTPALAD, CoC.instance.armors.CTHPALA, CoC.instance.armors.CTBGUAR],
+			[CoC.instance.armors.LTHRPNT, null, CoC.instance.armors.CGUNSLI]
 		];
 		var selectfrom:int = corrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
@@ -1021,7 +1022,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		celessSprite();
 		mainView.nameBox.text = "";
 		clearOutput();
-		outputText("You wake up from a quiet rustle. Strange. " + (camp.followersCount() + camp.loversCount() + camp.slavesCount() > 0 ? "Your camp should be still sleeping, and a" : "A") + " ny invasion would sound much louder. When you go outside to check what is happening, a strange scene presents before your eyes. A unicorn child lies on a small blanket right near your " + (flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "cabin":"tent") + ". Inspecting the child more closely, you notice some resemblance to yourself... and to the unicorn you had sex in the forest with. The girl is very young: she can't be older than several days. Well, seems like damn horse wants you to take care of your child. First, however, comes an important question... how will you name her?");
+		outputText("You wake up from a quiet rustle. Strange. " + (camp.followersCount() + camp.loversCount() + camp.slavesCount() > 0 ? "Your camp should be still sleeping, and a" : "A") + "ny invasion would sound much louder. When you go outside to check what is happening, a strange scene presents before your eyes. A unicorn child lies on a small blanket right near your " + (flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "cabin":"tent") + ". Inspecting the child more closely, you notice some resemblance to yourself... and to the unicorn you had sex in the forest with. The girl is very young: she can't be older than several days. Well, seems like damn horse wants you to take care of your child. First, however, comes an important question... how will you name her?");
 		doNext(nameScene);
 	}
 }

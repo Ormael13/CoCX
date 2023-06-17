@@ -24,8 +24,8 @@ public class ManticoreVenom extends Consumable {
 
 	override public function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
-		if (rand(3) == 0) changeLimit++;
+		var changeLimit:Number = 2;
+		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();

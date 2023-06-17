@@ -72,6 +72,7 @@ public class CharViewContext extends ExecContext {
 					showLegClothing: showLegClothing(),
 					showPanty: showPanty(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
+					PlayerHasBreastViewOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.armor == game.armors.CGUNSLI || player.armor == game.armors.GTECHC_,
 					PlayerHasABra: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingBra(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -86,16 +87,16 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAWeapon: player.isDaggerTypeWeapon() || player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
 
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
-					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
-					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
+					PlayerHasAStaffHoly: player.weapon == game.weapons.U_STAFF,
+					PlayerHasAStaffUnholy: player.weapon == game.weapons.N_STAFF,
 
 					PlayerHasAWand: player.isWandTypeWeapon(),
-					PlayerHasAWandHoly:player.weapon == game.weapons.OCCULUS,
-					PlayerHasAWandUnholy:player.weapon == game.weapons.ECLIPSE,
+					PlayerHasAWandHoly: player.weapon == game.weapons.OCCULUS,
+					PlayerHasAWandUnholy: player.weapon == game.weapons.ECLIPSE,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
-					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
-					PlayerHasASwordunholy:player.weapon == game.weapons.EBNYBLD,
+					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
+					PlayerHasASwordunholy: player.weapon == game.weapons.EBNYBLD,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
@@ -128,7 +129,7 @@ public class CharViewContext extends ExecContext {
 					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
 					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasAScythe: player.isScytheTypeWeapon() || player.weapon == game.weapons.DEMSCYT,
+					PlayerHasAScythe: player.isScytheTypeWeapon() || player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.KAMA || player.weapon == game.weapons.KAMAWHIP || player.weapon == game.weapons.D_KAMA,
 					PlayerHasAScytheHoly:player.weapon == game.weapons.LHSCYTH,
 					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weapon == game.weapons.HELRAIS,
 
@@ -232,6 +233,7 @@ public class CharViewContext extends ExecContext {
 					gooArmor: player.armor == game.armors.GOOARMR,
 					franRegalia: player.armor == game.armors.FCLOAK,
 					elfWizardDress: player.armor == game.armors.FMDRESS,
+					CowGirlOutfit: player.armor == game.armors.CGUNSLI,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
@@ -239,7 +241,6 @@ public class CharViewContext extends ExecContext {
 					comfyBikiniBra: player.upperGarment == game.undergarments.C_BRA,
 					cowBra: player.upperGarment == game.undergarments.COW_BRA,
 					blackCatBra: player.upperGarment == game.undergarments.BN_TOP,
-
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
@@ -266,6 +267,7 @@ public class CharViewContext extends ExecContext {
 					sphinxRegalia: player.headJewelry == game.headjewelries.SPHINXAS,
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
+					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
 
 					// Viewable amulet Accessory lists
 					GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||

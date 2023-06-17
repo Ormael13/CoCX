@@ -373,7 +373,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 		if (inventory.getMaxSlots() > 30) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
 	}
 	if (page == 4) {
-		for (slot = 30; slot < 340; slot++) {
+		for (slot = 30; slot < 40; slot++) {
 			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 				addButton(slot-30, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
@@ -601,7 +601,7 @@ public function barTelAdre():void {
 	//trace("HEL FOLLOWER LEVEL: " + flags[kFLAGS.HEL_FOLLOWER_LEVEL] + " HEL FUCKBUDDY: " + flags[kFLAGS.HEL_FUCKBUDDY] + " HARPY QUEEN DEFEATED: " + flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]);
 	//trace("REDUCED ENCOUNTER RATE (DISPLINED): " + flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE]);
 	//HELIA
-//	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || CoC.instance.helFollower.followerHel()) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
+//	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || (CoC.instance.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff))) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
 	if (edryn.edrynHeliaThreesomePossible()) {
 		edryn.helAppearance();
 		button = anotherButton(button,"Helia",edryn.approachHelAtZeBitch);
@@ -1113,6 +1113,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(6, "I.Q.Gown", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "VladimirReg", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "Asterius", "You already bought item from Kaiba today.");
+			addButtonDisabled(9, "C.G Hat", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
@@ -1121,10 +1122,13 @@ public function kaibaShopMainMenu2():void {
 			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
 			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly evil magical axes rumored to be the artefact of the fallen war deity Asterius.");
+			addButton(9, "C.G Hat", buyItem, headjewelries.COWHAT).hint("Cow Girl Hat - This hat was retrieved from an offworld gunslinger who became a cow. As such aside from its powerful enchantment that increase firearms potency it also raise milk production by 25%.");
+
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(12, "-2-", kaibaShopMainMenuPage2);
-		addButton(13, "-3-", kaibaShopMainMenuPage3);
+		addButton(11, "-2-", kaibaShopMainMenuPage2);
+		addButton(12, "-3-", kaibaShopMainMenuPage3);
+		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1150,8 +1154,9 @@ public function kaibaShopMainMenu2():void {
 			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(12, "-1-", kaibaShopMainMenuPage1);
-		addButton(13, "-3-", kaibaShopMainMenuPage3);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
+		addButton(12, "-3-", kaibaShopMainMenuPage3);
+		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1164,6 +1169,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "MoonClaws", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "Leaf Amulet", "You already bought item from Kaiba today.");
+			addButtonDisabled(9, "Kratia's Seal", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
@@ -1175,8 +1181,11 @@ public function kaibaShopMainMenu2():void {
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
 			addButton(7, "MoonClaws", buyItem, weapons.MCLAWS).hint("Moonlight Claws - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
 			addButton(8, "Leaf Amulet", buyItem, necklaces.LEAFAMU).hint("Leaf Amulet - Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf. This is a temporary sale.");
+			addButton(9, "Kratia's Seal", buyItem, miscjewelries.KRATIASL).hint("Kratia's Seal - Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);
 		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
@@ -1199,6 +1208,7 @@ public function kaibaShopMainMenu2():void {
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}

@@ -86,7 +86,7 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
                 pBuffs['int.mult'] = 0.25;
                 pBuffs['lib.mult'] = 0.10;
             }
-            if (pTier == 3){
+            if (pTier == 4){
                 pBuffs['int.mult'] = 0.35;
                 pBuffs['lib.mult'] = 0.15;
             }

@@ -85,8 +85,7 @@ public class AtlachNachaScene extends BaseContent {
         if (player.tailRecharge < 15) player.tailRecharge = 15;
         player.createPerk(PerkLib.SpiderOvipositor,0,0,0,0);
         player.createPerk(PerkLib.TransformationImmunity2,1,0,0,0);
-        if (player.hasPerk(PerkLib.RacialParagon))
-            flags[kFLAGS.APEX_SELECTED_RACE] = Races.ATLACH_NACHA;
+        if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.ATLACH_NACHA;
         player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
 		outputText("\n\nEverything makes so much sense now. You were blind to the truth but thanks to the voice of the master in your head your eyes are now open. You have access to knowledge you thought you didn't possess about your reality and the reality between the reality. ");
 		outputText("Such knowledge is not for your mind alone though you want to share it with the world. Their blindness and mind untouched by him is a disease and you just happen to have the cure.  (<b>Gained Perk: Insanity!</b>)");

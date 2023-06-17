@@ -15,7 +15,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.Places.Mindbreaker;
@@ -31,7 +31,7 @@ public class Mountain extends BaseContent
 		public var lactabovinaScene:LactaBovinaScene = new LactaBovinaScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
-		public var darkelfScene:DarkElfScene = new DarkElfScene();
+		public var lightelfScene:LightElfScene = new LightElfScene();
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var minervaScene:MinervaScene = new MinervaScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
@@ -173,8 +173,8 @@ public class Mountain extends BaseContent
 				call:ceraphFn,
 				mods:[fn.ifLevelMin(2)]
 			},{
-				name: "darkelf",
-				call: darkelfScene.introDarkELfScout
+				name: "lightelf",
+				call: lightelfScene.introLightELfScout
 			}, {
 				name: "lactoblasters",
 				when: function ():Boolean {
@@ -330,8 +330,8 @@ public class Mountain extends BaseContent
 				chance: 4,
 				call: camp.cabinProgress.quarrySite
 			},{
-				name: "darkelf",
-				call: darkelfScene.introDarkELfSlaver
+				name: "lightelf",
+				call: lightelfScene.introLightELfSlaver
 			},{
 				name: "derpnade launcher",
 				when: function ():Boolean {
@@ -463,13 +463,14 @@ public class Mountain extends BaseContent
 				when: function ():Boolean {
 					return flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] <= 0
 						&& flags[kFLAGS.SOPHIE_DISABLED] <= 0
-						&& !SceneLib.sophieFollowerScene.sophieFollower();
+						&& !SceneLib.sophieFollowerScene.sophieFollower()
+						&& !player.hasStatusEffect(StatusEffects.SophieOff);
 				},
 				chance: mountainChance,
 				call: SceneLib.sophieScene.sophieRouter
 			}, {
-				name: "darkelf",
-				call: darkelfScene.introDarkELfRanger
+				name: "lightelf",
+				call: lightelfScene.introLightELfRanger
 			}, {/*
 				name: "lactoblasters",
 				when: function ():Boolean {
@@ -540,7 +541,7 @@ public class Mountain extends BaseContent
 
 		public function mountainChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function minotaurChance():Number {

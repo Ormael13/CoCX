@@ -224,7 +224,8 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 		}
 
 //[Give Weapon]
-		private function giveAnemoneWeapon():void {
+		private function giveAnemoneWeapon(page:int = 1):void {
+			var x:int;
 			clearOutput();
 			spriteSelect(SpriteDb.s_kida);
 			outputText("What do you want to give her?");
@@ -234,14 +235,56 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			menu();
 			EngineCore.hideUpDown();
 			var foundItem:Boolean = false;
-			for (var x:int = 0; x < 10; x++) {
-				if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
-					addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
-					foundItem = true;
+			if (page == 1) {
+				for (x = 0; x < 10; x++) {
+					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
+						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						foundItem = true;
+					}
 				}
+				if (inventory.getMaxSlots() > 10) addButton(13, "Next", giveAnemoneWeapon, page + 1);
+			}
+			if (page == 2) {
+				for (x = 10; x < 20; x++) {
+					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
+						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						foundItem = true;
+					}
+				}
+				addButton(12, "Prev", giveAnemoneWeapon, page - 1);
+				if (inventory.getMaxSlots() > 20) addButton(13, "Next", giveAnemoneWeapon, page + 1);
+			}
+			if (page == 3) {
+				for (x = 20; x < 30; x++) {
+					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
+						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						foundItem = true;
+					}
+				}
+				addButton(12, "Prev", giveAnemoneWeapon, page - 1);
+				if (inventory.getMaxSlots() > 30) addButton(13, "Next", giveAnemoneWeapon, page + 1);
+			}
+			if (page == 4) {
+				for (x = 30; x < 40; x++) {
+					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
+						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						foundItem = true;
+					}
+				}
+				addButton(12, "Prev", giveAnemoneWeapon, page - 1);
+				if (inventory.getMaxSlots() > 40) addButton(13, "Next", giveAnemoneWeapon, page + 1);
+			}
+			if (page == 5) {
+				for (x = 40; x < 50; x++) {
+					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
+						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						foundItem = true;
+					}
+				}
+				addButton(12, "Prev", giveAnemoneWeapon, page - 1);
 			}
 			if (!foundItem) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>");
-			addButton(9, "Back", inventory.stash);
+			addButton(14, "Back", inventory.stash);
 		}
 
 		private function placeInAnemone(slot:int):void {

@@ -941,18 +941,21 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.ZZZ) && !player.hasPerk(PerkLib.Lazy)) {
 			player.createPerk(PerkLib.Lazy, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: LAZY!!!!)</b>");
-		}/*		Slut
-			if (player.hasPerk(PerkLib.) && !player.hasPerk(PerkLib.)) {
-				player.createPerk(PerkLib., 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: !)</b>");
-				player.createPerk(PerkLib., 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: !)</b>");
-				player.createPerk(PerkLib., 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: !)</b>");
-			}*/
+		}/*if (player.hasPerk(PerkLib.) && !player.hasPerk(PerkLib.)) {
+			player.createPerk(PerkLib., 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: !)</b>");
+		}*/
+		if (player.hasPerk(PerkLib.PartyBoyGirl) && !player.hasPerk(PerkLib.MattressActressActor)) {
+			player.createPerk(PerkLib.MattressActressActor, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Mattress Actress/Actor!)</b>");
+		}
 		if (player.hasPerk(PerkLib.Weap0n) && !player.hasPerk(PerkLib.Arm0r)) {
 			player.createPerk(PerkLib.Arm0r, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Armor!)</b>");
+		}
+		if (player.hasPerk(PerkLib.Fellowship) && !player.hasPerk(PerkLib.Alliance)) {
+			player.createPerk(PerkLib.Alliance, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Alliance!)</b>");
 		}
 		if (player.hasPerk(PerkLib.SexChampion) && !player.hasPerk(PerkLib.SexDeity)) {
 			player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);

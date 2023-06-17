@@ -162,7 +162,7 @@ public class HeXinDao extends BaseContent
         addButton(1, "TFspec/Exch", mogahenmerchant);
         addButton(2, "SoulEquip", serenamerchant);
         addButton(3, "SoulArrow", ermaswiftarrowmerchant);
-		addButton(4, "FSAAWY", ermaswiftarrow2merchant).hint("Flying Swords are always with you!");
+		addButton(4, "FSAAWY", qimerchant).hint("Flying Swords are always with you!");
 		//addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
         addButton(6, "JourTTEast", SceneLib.journeyToTheEast.enteringInn);
         addButton(7, "Arena", soularena);
@@ -893,7 +893,7 @@ public class HeXinDao extends BaseContent
 		}
 	}
 	
-	public function ermaswiftarrow2merchant():void {
+	public function qimerchant():void {
         clearOutput();
         outputText("After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. ");
         outputText("Behind the desk in the central point of the shop you see a flesh golem on unidentified gender.");
@@ -906,7 +906,7 @@ public class HeXinDao extends BaseContent
 		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingswordBuy, weaponsflyingswords.MOONLGT);
 		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingswordBuy, weaponsflyingswords.S_TWINS);
 		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingswordBuy, weaponsflyingswords.ASAUCHI);
-        addButtonDisabled(13, "Training", "The owner of the shop isn't here, currently. There's nobody to train you.");//.hint("Flying Sword training.")
+        addButtonDisabled(13, "Training", "The shop owner, Qi, is in the middle of closed door cultivations. It shouldn't take longer than a few months for him to finish.");//.hint("Flying Sword training.")
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
@@ -917,17 +917,17 @@ public class HeXinDao extends BaseContent
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
             //Goto shop main menu
-            doNext(ermaswiftarrow2merchant);
+            doNext(qimerchant);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
         //Go to debit/update function or back to shop window
-        doYesNo(curry(debitFlyingSword,itype), ermaswiftarrow2merchant);
+        doYesNo(curry(debitFlyingSword,itype), qimerchant);
     }
     private function debitFlyingSword(itype:ItemType):void {
         flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
-        inventory.takeItem(itype, ermaswiftarrow2merchant);
+        inventory.takeItem(itype, qimerchant);
     }
 
 public function soularena():void {
@@ -1078,7 +1078,8 @@ public function soularena():void {
 		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
         outputText("\"<i>This contestant is smaller than the last two... She's smarter, and most of all, extremely deadly. She’s paid a handsome sack of gems to kick the ass of anyone who reaches this stage. This femme fatale is by far the deadliest combatant of her division. The crowd favorite huntress from the dark woods... Merisiel the dark elf!!!</i>\"\n\n");
         outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The dark elf readies her bow, smirking.\n\n");
-        startCombat(new DarkElfScout());
+        flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 10;
+		startCombat(new LightElfs());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
     public function gaunletchallange1postfight():void {

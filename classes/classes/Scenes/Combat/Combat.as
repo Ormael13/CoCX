@@ -601,6 +601,9 @@ public class Combat extends BaseContent {
     public function get isEnemyInvisible():Boolean {
         return player.hasStatusEffect(StatusEffects.MonsterInvisible);
     }
+    public function get isEnemyInvisibleButNotUnderground():Boolean {
+        return player.hasStatusEffect(StatusEffects.MonsterInvisible) && !player.hasStatusEffect(StatusEffects.MonsterDig);
+    }
 
     public function isPlayerSilenced():Boolean {
         var silenced:Boolean = false;
@@ -1806,7 +1809,7 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
 		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
         if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
-        if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+        if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
             elementalamplification += 0.1;
             if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
             if (player.hasPerk(PerkLib.WispCaptain)) elementalamplification += 0.3;
@@ -2633,6 +2636,7 @@ public class Combat extends BaseContent {
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
 			accmod += 5;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) accmod += 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accmod += 10;
 		}
 		if (player.isFistOrFistWeapon()) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
@@ -2669,7 +2673,10 @@ public class Combat extends BaseContent {
     public function meleeAccuracyPenalty():Number {
         var accmmodpenalty:Number = 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accmmodpenalty -= 5;
-		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accmmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			accmmodpenalty -= 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accmmodpenalty -= 5;
+		}
 		//if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.)) accmmodpenalty -= 5;
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
@@ -2751,6 +2758,7 @@ public class Combat extends BaseContent {
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
 			baccmod += 10;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) baccmod += 10;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) baccmod += 20;
 		}
 		return baccmod;
 	}
@@ -2766,7 +2774,10 @@ public class Combat extends BaseContent {
         var accrmodpenalty:Number = 15;
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) accrmodpenalty -= 10;
         if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accrmodpenalty -= 5;
-		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accrmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			accrmodpenalty -= 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accrmodpenalty -= 5;
+		}
         if (player.weaponRangeName == "Avelynn") accrmodpenalty -= 5;
         if (accrmodpenalty < 0) accrmodpenalty = 0;
         return accrmodpenalty;
@@ -2796,7 +2807,10 @@ public class Combat extends BaseContent {
     public function firearmsAccuracyPenalty():Number {
         var accfmodpenalty:Number = 10;
 		if (player.hasPerk(PerkLib.LockAndLoad)) accfmodpenalty -= 5;
-		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) accfmodpenalty -= 5;
+		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.perkv1(IMutationsLib.HumanEyesIM) >= 3 && player.racialScore(Races.HUMAN) > 17) {
+			accfmodpenalty -= 5;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) accfmodpenalty -= 5;
+		}
         if (accfmodpenalty < 0) accfmodpenalty = 0;
         return accfmodpenalty;
     }
@@ -6767,13 +6781,13 @@ public class Combat extends BaseContent {
 
     public function historyTacticianBonus():Number {
         var historyTacticianB:Number = 1.1;
-        /*if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;
-	if (player.hasPerk(PerkLib.)) historyTacticianB += 0.1;*/
+        if (player.hasPerk(PerkLib.HistoryBuff)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.GuerrillaTactics)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.StrengthInNumbers)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.General)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.SmallArmy)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.Fellowship)) historyTacticianB += 0.1;
+		if (player.hasPerk(PerkLib.Alliance)) historyTacticianB += 0.1;
         return historyTacticianB;
     }
 
@@ -7813,8 +7827,6 @@ public class Combat extends BaseContent {
 				else critMChance += 2 * Math.round((player.sens - 25) / 5);
 			}
 		}
-        if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critMChance += 5;
-        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 4) critMChance += 10;
         return critMChance;
     }
 
@@ -7885,10 +7897,18 @@ public class Combat extends BaseContent {
 			if (player.sens >= 750) playerLevelAdjustment += 30;
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
+		if (player.hasMutation(IMutationsLib.GorgonEyesIM) && player.perkv1(IMutationsLib.GorgonEyesIM) >= 3 && player.sens >= 25) {
+			var maxSensG:Number = 125;
+			if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 4) maxSensG += 250;
+			if (player.hairType == Hair.GORGON) maxSensG *= 2;
+			if (player.sens >= maxSensG) playerLevelAdjustment += (maxSensG * 0.04);
+			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
+		}
 		if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17 && player.sens >= 25) {
 			var maxSens:Number = 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 2) maxSens += 125;
 			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 3) maxSens += 500;
+			if (player.perkv1(IMutationsLib.HumanEyesIM) >= 4) maxSens += 750;
 			if (player.sens >= maxSens) playerLevelAdjustment += (maxSens * 0.04);
 			else playerLevelAdjustment += Math.round((player.sens - 12) / 25);
 		}
@@ -7897,6 +7917,14 @@ public class Combat extends BaseContent {
 
     public function monsterLevelAdjustment():Number {
         var monsterLvlAdjustment:Number = 0;
+		if (player.miscjewelryName == "Kratia's Seal") {
+			if (monster is TrainingDummy) monsterLvlAdjustment += 50;
+			monsterLvlAdjustment += 100;
+		}
+		if (player.miscjewelryName2 == "Kratia's Seal") {
+			if (monster is TrainingDummy) monsterLvlAdjustment += 50;
+			monsterLvlAdjustment += 100;
+		}
 		if (player.vehiclesName == "Giant Slayer Mech") {
 			if (monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType) || monster.hasPerk(PerkLib.EnemyGodType)) monsterLvlAdjustment -= 10;
 			else monsterLvlAdjustment += 10;
@@ -13104,8 +13132,9 @@ public function RandomTeaseLustStrike():void {
             "waving the demonic signs and delivering your unholy magic directly into your victim's endowment. [monster His] ");
     if (monster.hasCock() > 0) outputText("cock drools black precum, swelling in size");
     if (monster.hasCock() && monster.hasVagina()) outputText(" as [monster his] ");
-    if (monster.hasVagina()) outputText("pussy starts gushing like a fountain, lips swelling with arousal. ");
-    if (monster.hasCock() && monster.hasVagina()) outputText("They");
+    if (monster.hasVagina()) outputText("pussy starts gushing like a fountain, lips swelling with arousal");
+	outputText(". ");
+    if (monster.hasCock() && monster.hasVagina()) outputText(". They");
     else outputText("It");
     outputText(" pulse");
     if (monster.hasCock() && monster.hasVagina()) outputText("s");
@@ -15718,17 +15747,18 @@ public function asurasXFingersOfDestruction(fingercount:String):void {
 
 public function sendSkeletonToFight():void {
     clearOutput();
-    if (!monster.isFlying()) outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "they're":"his")+" blade arounds. ");
+    if (!monster.isFlying()) outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "their":"his")+" blade"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" around. ");
     var damage:Number = 0;
     var dmgamp:Number = 1;
     damage += 500 + rand(151);
     damage += scalingBonusIntelligence() * 0.2;
     damage += scalingBonusWisdom() * 0.4;
+	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) damage *= historyTacticianBonus();
     if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-    if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+    if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
         if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
@@ -15747,11 +15777,11 @@ public function sendSkeletonToFight():void {
 	var sSWTF:Number = player.perkv2(PerkLib.PrestigeJobNecromancer);
 	while (sSWTF-->0) doMinionPhysDamage(damage, true, true);
     if (player.hasPerk(PerkLib.GreaterHarvest) && player.perkv1(PerkLib.GreaterHarvest) > 0) {
-		outputText("Your archer"+(player.perkv1(PerkLib.GreaterHarvest) > 1 ? "s":"")+" "+(monster.isFlying()?"":"fellow suit ")+"unleashing a volley of arrows. ");
+		outputText("Your archer"+(player.perkv1(PerkLib.GreaterHarvest) > 1 ? "s":"")+" "+(monster.isFlying()?"":"follow suit ")+"unleashing a volley of arrows. ");
 		var sSATF:Number = player.perkv1(PerkLib.GreaterHarvest);
 		while (sSATF-->0) doMinionPhysDamage(damage, true, true);
         if (player.perkv2(PerkLib.GreaterHarvest) > 0) {
-			outputText((monster.isFlying()?"S":"Finally the s")+"keletal mage"+(player.perkv2(PerkLib.GreaterHarvest) > 1 ? "s":"")+" unleash a barrage of magic missles. ");
+			outputText((monster.isFlying()?"S":"Finally the s")+"keletal mage"+(player.perkv2(PerkLib.GreaterHarvest) > 1 ? "s":"")+" unleash a barrage of magic missiles. ");
 			var sSMTF:Number = player.perkv2(PerkLib.GreaterHarvest);
 			while (sSMTF-->0) doMinionPhysDamage(damage, true, true);
         }
@@ -15785,11 +15815,12 @@ public function skeletonSmash():void {
     damage += 500 + rand(151);
     damage += scalingBonusIntelligence() * 0.2;
     damage += scalingBonusWisdom() * 0.4;
+	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) damage *= historyTacticianBonus();
     if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
     if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
-    if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+    if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
         dmgamp += 0.1;
         if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
         if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
@@ -16090,6 +16121,8 @@ public function firearmsForce():Number {
 		}
 		else mod *= 1.5;
 	}
+    if (player.hasPerk(PerkLib.CowGunslingerOutfit)) mod += .5;//125% up to here
+    if (player.jewelryName == "cow girl hat") mod += .25;
 	mod += rangePhysicalForce();
 	mod = Math.round(mod * 100) / 100;
     return mod;
@@ -16532,4 +16565,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

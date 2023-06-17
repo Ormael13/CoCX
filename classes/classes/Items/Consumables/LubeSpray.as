@@ -30,7 +30,7 @@ public class LubeSpray extends Consumable {
         outputText("A strange dampness starts around your [asshole], you remove your lower garments and observe.  You clutch your [ass] as it starts drooling its own natural lubricant.  Almost as if in sympathy, your mouth starts feeling wet, and you find yourself hard-pressed to keep from drooling as your saliva glands kick into overdrive, making your mouth far wetter and slicker.\n");
         if (player.hasBalls()) {
             choices.push(2);
-            outputText("Your [multiCock] begin dripping clear looking pre on the floor, despite none of them being fully erect.\n")
+            outputText("Your [multiCock] begin dripping clear looking pre on the floor, despite none of "+(player.cocks.length > 1?"them":"it")+" being fully erect.\n")
         }
         if (player.hasVagina()) {
             if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) choices.push(3);

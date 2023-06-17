@@ -131,6 +131,8 @@ public class Races {
 	public static const CERBERUS:CerberusRace	           = new CerberusRace(108);
 	public static const IMP:ImpRace                        = new ImpRace(109);
 	public static const SANDWORM:SandWormRace              = new SandWormRace(110);
+	public static const RAISUNE:RaisuneRace                = new RaisuneRace(111);
+	public static const WEREFOX:WerefoxRace                = new WerefoxRace(112);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [

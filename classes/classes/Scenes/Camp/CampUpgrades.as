@@ -171,7 +171,7 @@ public class CampUpgrades extends BaseContent {
             helperArray[helperArray.length] = "Marble";
             helpers.count++;
         }
-        if (SceneLib.helFollower.followerHel()) {
+        if (SceneLib.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
             helperArray[helperArray.length] = "Helia";
             helpers.count++;
         }

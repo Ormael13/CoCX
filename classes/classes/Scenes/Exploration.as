@@ -881,7 +881,7 @@ public class Exploration extends BaseContent
 				ryubirepenc();
 				return;
 			}
-*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(5) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
+*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(5) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
@@ -1125,8 +1125,9 @@ public class Exploration extends BaseContent
 			clearOutput();
 			if (rand(4) == 0) {
 				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
-				outputText("\n\n<b>A wild Dark Elf Sniper Appears.</b>");
-				startCombat(new DarkElfSniper());//lvl 51
+				outputText("\n\n<b>A wild Light Elf Sniper Appears.</b>");
+				flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 13;
+				startCombat(new LightElfs());//lvl 51
 				return;
 			}
 			else if (rand(3) == 0) {
@@ -1385,4 +1386,4 @@ public class Exploration extends BaseContent
 		}
 
 	}
-}
+}

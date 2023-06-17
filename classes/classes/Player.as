@@ -3958,7 +3958,7 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//4
 			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//3
 			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//3
-			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//3
+			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//4
 			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);//3
 			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//3
 			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//4
@@ -4313,6 +4313,10 @@ use namespace CoC;
 			}
 			if (necklaceName == "Cow bell")
 				total *= 1.5;
+			if (armor == game.armors.CGUNSLI)
+				total *= 1.5;
+			if (headJewelry == game.headjewelries.COWHAT)
+				total *= 1.25;
 			if (upperGarment == game.undergarments.COW_BRA)
 				total *= 1.5;
 			if (lowerGarment == game.undergarments.COW_PANTY)
@@ -6560,6 +6564,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
+			if (miscjewelryName == "Ezekiel's Seal") additionalTransformationChancesCounter += 3;
+			if (miscjewelryName2 == "Ezekiel's Seal") additionalTransformationChancesCounter += 3;
 			return additionalTransformationChancesCounter;
 		}
 
@@ -6918,8 +6924,8 @@ use namespace CoC;
 					if(game.inCombat) outputText(" [themonster] gulps as [monster he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
 					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
 				}
-				if(lust100 >= 100){
-					lust = maxLust()*99/100
+				if ((lust100 >= 100) && !hasPerk(PerkLib.WhatIsReality)){
+					lust = maxLust() * 99 / 100;
 				}
 			}
 		}

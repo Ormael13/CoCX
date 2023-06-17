@@ -4001,7 +4001,8 @@ private function milkMarbleOnTheBar():void
 	if( player.cockThatFits(marbleCuntCapacity()) > 0 ) outputText( "[pg]You idly consider grabbing and pulling on her tail, so you could have a chance to take charge, though Marble would probably try and take control in that case for sure..." );
 	
 	menu();
-	addButton( 0, "Follow Tail", sceneHunter.callFitNofit, milkMarbleBarFollowTail, marbleCuntCapacity() );
+	//addButton( 0, "Follow Tail", sceneHunter.callFitNofit, milkMarbleBarFollowTail, marbleCuntCapacity() );
+    addButtonIfTrue(0, "Follow Tail", curry(sceneHunter.callFitNofit, milkMarbleBarFollowTail, marbleCuntCapacity()), "", player.hasCock())
 	addButton( 1, "Cunnilingus", milkMarbleBarCunnilingling );
 	addButton( 2, "Pull Tail", milkMarbleBarPullTail)
         .disableIf(player.cockThatFits(marbleCuntCapacity()) < 0, "Req. a cock fitting "+marbleCuntCapacity()+" area.");

@@ -1313,8 +1313,8 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         //Set up changes and changeLimit
         var changes:Number = 0;
-        var changeLimit:Number = 1;
-        if (rand(3) == 0) changeLimit++;
+        var changeLimit:Number = 2;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         player.slimeFeed();
         clearOutput();
@@ -1637,6 +1637,7 @@ public final class Mutations extends MutationsHelper {
     //3-Black Pepper (Dark Fur, +corruption/libido)
     //4-Knotty Pepper (+Knot + Cum Multiplier)
     //5-Bulbous Pepper (+ball size or fresh balls)
+	//6-Wolf Pepper (Werewolf TF)
     public function caninePepper(type:Number, player:Player):void {
         var choice:int;
         var temp2:Number = 0;
@@ -1644,7 +1645,7 @@ public final class Mutations extends MutationsHelper {
         var crit:Number = 1;
         //Set up changes and changeLimit
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
@@ -2246,7 +2247,7 @@ public final class Mutations extends MutationsHelper {
     public function impFood(player:Player):void {
         clearOutput();
 		var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
 		if (player.blockingBodyTransformations()) changeLimit = 0;
         if (player.cocks.length > 0) {
             outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.");
@@ -3238,10 +3239,10 @@ public final class Mutations extends MutationsHelper {
         //Changes done
         var changes:Number = 0;
         //Change limit
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         if (enhanced) changeLimit += 2;
         //Temporary storage
@@ -4209,11 +4210,11 @@ public final class Mutations extends MutationsHelper {
     public function gremlinBeer(player:Player):void {
         player.slimeFeed();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
-        if (rand(5) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
@@ -4423,11 +4424,11 @@ public final class Mutations extends MutationsHelper {
     public function goblinAle(player:Player):void {
         player.slimeFeed();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
-        if (rand(5) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
@@ -4634,11 +4635,11 @@ public final class Mutations extends MutationsHelper {
         //3 == ??? slime
         player.slimeFeed();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
-        if (rand(5) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         if (type == 0) outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your [skin.type] slowly.");
@@ -4951,7 +4952,7 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp:Number = 0;
         var temp2:Number = 0;
         var color:String;
@@ -5191,11 +5192,11 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp:Number = 0;
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         var colors: Array;
         if (type != 3) {
@@ -5651,7 +5652,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var heightGain:int;
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
@@ -5928,12 +5929,12 @@ public final class Mutations extends MutationsHelper {
     public function whiskerFruit(player:Player):void {
         var choice:int;
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         var temp3:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //Text go!
         clearOutput();
@@ -6228,12 +6229,12 @@ public final class Mutations extends MutationsHelper {
     public function ghastlyFruit(player:Player):void {
         var choice:int;
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         var temp3:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //Text go!
         clearOutput();
@@ -6510,12 +6511,12 @@ public final class Mutations extends MutationsHelper {
     public function wonderFruit(player:Player):void {
         var choice:int;
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         var temp3:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //Text go!
         clearOutput();
@@ -6806,12 +6807,12 @@ public final class Mutations extends MutationsHelper {
     public function displacementFruit(player:Player):void {
         var choice:int;
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         var temp3:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //Text go!
         clearOutput();
@@ -7081,12 +7082,12 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -7338,12 +7339,12 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -7529,12 +7530,12 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -7727,12 +7728,12 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -8406,7 +8407,7 @@ public final class Mutations extends MutationsHelper {
         //0 == standard.
         //1 == enhanced - increase change limit and no pre-reqs for TF
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
@@ -8692,7 +8693,7 @@ public final class Mutations extends MutationsHelper {
         //1 == Gryphon TF
         //2 == Peacock TF
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
@@ -8897,7 +8898,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You squeeze the pod around the middle, forcing the end open.  Scooping out a handful of the yeasty-smelling seeds, you shovel them in your mouth.  Blech!  Tastes like soggy burnt bread... and yet, you find yourself going for another handful...");
         //Used to track changes and the max
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
@@ -9094,7 +9095,7 @@ public final class Mutations extends MutationsHelper {
     public function sweetGossamer(type:Number, player:Player):void {
         clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
@@ -9298,7 +9299,7 @@ public final class Mutations extends MutationsHelper {
 
 	public function midnightGossamer(player:Player):void {
 		clearOutput();
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
@@ -9457,9 +9458,9 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You grimace and uncork the bottle, doing your best to ignore the unearthly smell drifting up your nostrils. Steeling yourself, you raise the container to your lips and chug the contents, shivering at the feel of the stuff sliding down your throat.  Its taste at least is unexpectedly pleasant.  Almost tastes like oranges.");
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //Effect script 1:  (higher intelligence)
         if (rand(3) == 0 && changes < changeLimit && MutagenBonus("int", 1)) {
@@ -9630,9 +9631,9 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
         //Stats
@@ -9799,9 +9800,9 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
 		DrunkenPowerEmpowerIfPossible();
@@ -9924,11 +9925,11 @@ public final class Mutations extends MutationsHelper {
     public function voltageTopaz(itemused:Boolean, player:Player):void {
         if (itemused) clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
-            if (rand(3) == 0) changeLimit++;
+            if (rand(2) == 0) changeLimit++;
             changeLimit += player.additionalTransformationChances;
             outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
@@ -10095,7 +10096,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 2;
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You eat up the seed and not to soon after let out a howling moan as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         //Stats
@@ -10246,7 +10247,7 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You apply the eyedrops to your eye"+(player.eyes.type == Eyes.MONOEYE ? "":"s")+" pointlessly hoping it can help you wash away all the dirty things you have seen on mareth. For a few seconds, your vision becomes… clearer? However this is not without other changes.");
         //Stats
@@ -10365,10 +10366,10 @@ public final class Mutations extends MutationsHelper {
     public function smartyNuts(player:Player):void {
         clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var Ratatoskr_Colour:Array = RatatoskrRace.RatatoskrHairColors;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You chew at the nuts and begin to shake as your body is overcome with changes...");
         //Stats
@@ -10493,11 +10494,11 @@ public final class Mutations extends MutationsHelper {
     public function windstormEmerald(itemused:Boolean, player:Player):void {
         if (itemused) clearOutput();
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var kamaitachi_hair:Array = ["blonde","yellow","caramel","brown","emerald"];
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
-            if (rand(3) == 0) changeLimit++;
+            if (rand(2) == 0) changeLimit++;
             changeLimit += player.additionalTransformationChances;
             outputText("As you admire the shiny jewel, the wind around you suddenly becomes stronger on sending debris around, before a sudden blade of winds runs through your body leaving a bleeding cut! Rather then pain the fresh wound begins to throb with increasing pleasure. You let out a howling moan, the jewel crumbles to dust before the feeling slowly subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
@@ -10719,9 +10720,9 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You chew on the rubbery tentacle; its texture and taste are somewhat comparable to squid, but the half-dormant nematocysts cause your mouth to tingle sensitively.");
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //possible use effects:
         //- toughess up, sensitivity down
@@ -11082,12 +11083,12 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -11815,8 +11816,8 @@ public final class Mutations extends MutationsHelper {
         var changes:int = 0;
         var changeLimit:int = 1;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You pour some of the oil onto your hands and ");
         if (player.cor < 30) outputText("hesitantly ");
@@ -12094,8 +12095,8 @@ public final class Mutations extends MutationsHelper {
         var changes:int = 0;
         var changeLimit:int = 1;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
         //stat gains:
@@ -12251,8 +12252,8 @@ public final class Mutations extends MutationsHelper {
         var changes:int = 0;
         var changeLimit:int = 1;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //use:
         if (type == 0) {
@@ -12571,7 +12572,7 @@ public final class Mutations extends MutationsHelper {
         var x:int = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //Ferret Fruit Effects
         //- + Thin:
@@ -12747,7 +12748,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:int = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         if (boar) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
@@ -12958,14 +12959,14 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp:Number = 0;
         var temp2:Number = 0;
         var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -13332,14 +13333,14 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp:Number = 0;
         var temp2:Number = 0;
         var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -13745,13 +13746,13 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp:Number = 0;
         var temp2:Number = 0;
         var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -13919,13 +13920,13 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp:Number = 0;
         var temp2:Number = 0;
         var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -14087,14 +14088,14 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //	var temp:Number = 0;
         //	var temp2:Number = 0;
         //	var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         //changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -14111,11 +14112,11 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -14379,14 +14380,14 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp:Number = 0;
         var wyrmCoatColor:Array = ["bluish black", "dark gray", "black", "midnight black", "midnight"];
         var wyrmHairColor:Array = ["white", "snow white", "glacial white", "silver", "platinum silver"];
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -14624,13 +14625,13 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         var temp2:Number = 0;
         var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -14844,14 +14845,14 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Temporary storage
         var temp2:Number = 0;
         //var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -15025,7 +15026,7 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Temporary storage
         var temp2:Number = 0;
         //var temp3:Number = 0;
@@ -15314,11 +15315,11 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //Temporary storage
         var temp:Number = 0;
@@ -15478,11 +15479,11 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
-        if (rand(3) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //clear screen
         clearOutput();
@@ -15574,14 +15575,14 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Temporary storage
         //var temp2:Number = 0;
         //var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("Having bought that odd-looking root on the bakery, you give it a try, only to face the mildly spicy taste of the transformative. Still, it has a rich flavour and texture, but soon that becomes secondary, as you realize that the foreign rhizome is changing your body!");
@@ -15801,7 +15802,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (rand(3) == 0 && changes < changeLimit && (!player.isFurCovered() || player.skin.pattern != Skin.PATTERN_RED_PANDA_UNDERBODY)) {
             outputText("[pg]");
-            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet2", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "russet", color2: "black", pattern: Skin.PATTERN_RED_PANDA_UNDERBODY}).applyEffect();
             changes++;
         }
         player.refillHunger(20);
@@ -15831,14 +15832,14 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;//Temporary storage
+        var changeLimit:Number = 2;//Temporary storage
         var temp:Number = 0;
         var temp2:Number = 0;
         var temp3:Number = 0;
         //Randomly choose affects limit
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
@@ -16283,11 +16284,11 @@ public final class Mutations extends MutationsHelper {
 		player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Randomly choose affects limit
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
@@ -16312,15 +16313,15 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Temporary storage
         var temp:Number = 0;
         var temp2:Number = 0;
         var temp3:Number = 0;
         //Randomly choose affects limit
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You eat the kelp and a deep chill runs across your body as something in you begins to change.");
@@ -16531,13 +16532,13 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
+        var changeLimit:Number = 2;
         //Temporary storage
         var temp2:Number = 0;
         //Randomly choose affects limit
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
-        if (rand(4) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You bite into the candy, your mouth foaming small sweet bubbles. Your body seems to react to it as you begin to change.");

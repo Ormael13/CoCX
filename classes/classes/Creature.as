@@ -2410,8 +2410,16 @@ public class Creature extends Utils
 			//Wet pussy provides 50 point boost
 			if (hasPerk(PerkLib.WetPussy))
 				bonus += 50;
-			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut))
+			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut)) {
 				bonus += 20;
+				if (hasPerk(PerkLib.DoorKnob)) bonus += 5;
+				if (hasPerk(PerkLib.Bicycle)) bonus += 5;
+				if (hasPerk(PerkLib.MeatHole)) bonus += 5;
+				if (hasPerk(PerkLib.BedWarmer)) bonus += 5;
+				if (hasPerk(PerkLib.TensionTamer)) bonus += 5;
+				if (hasPerk(PerkLib.PartyBoyGirl)) bonus += 5;
+				if (hasPerk(PerkLib.MattressActressActor)) bonus += 5;
+			}
 			if (hasPerk(PerkLib.OneTrackMind))
 				bonus += 10;
 			if (hasPerk(PerkLib.Cornucopia))
@@ -2431,8 +2439,16 @@ public class Creature extends Utils
 			// Goo body - "infinite"
 			if (isGoo())
 				bonus += 9000;
-			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut))
+			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut)) {
 				bonus += 20;
+				if (hasPerk(PerkLib.DoorKnob)) bonus += 5;
+				if (hasPerk(PerkLib.Bicycle)) bonus += 5;
+				if (hasPerk(PerkLib.MeatHole)) bonus += 5;
+				if (hasPerk(PerkLib.BedWarmer)) bonus += 5;
+				if (hasPerk(PerkLib.TensionTamer)) bonus += 5;
+				if (hasPerk(PerkLib.PartyBoyGirl)) bonus += 5;
+				if (hasPerk(PerkLib.MattressActressActor)) bonus += 5;
+			}
 			if (hasPerk(PerkLib.Cornucopia))
 				bonus += 30;
 			if (hasPerk(PerkLib.OneTrackMind))
@@ -4732,4 +4748,4 @@ public class Creature extends Utils
 			}
 		}
 	}
-}
+}

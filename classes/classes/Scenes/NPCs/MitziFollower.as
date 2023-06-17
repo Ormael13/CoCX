@@ -118,7 +118,7 @@ public function mitziCamp():void {
 		outputText("\"<i>I don't really see cow-girls too often but Isabella seems different somehow… Her milk's pretty tasty too. Maybe she'll let me have some more later.</i>\"\n\n");
 		outputText("She giggles to herself.\n\n");
 	}
-	if (followerHel()) {
+	if (followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 		outputText("\"<i>That rowdy salamander slut may be a bit of an annoyance but I've dealt with worse honestly. Would not recommend trying to entertain a group of Minotaurs. Get really rough and messy… Still hot though.</i>\"\n\n");
 		outputText("She shudders at the thought.\n\n");
 	}

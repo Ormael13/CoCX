@@ -11,17 +11,8 @@ import classes.Items.Shield;
 import classes.Items.Weapon;
 import classes.PerkLib;
 import classes.Scenes.Areas.GlacialRift.Yeti;
-import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.HellHound;
-import classes.Scenes.Dungeons.RiverDungeon.AirElemental;
-import classes.Scenes.Dungeons.RiverDungeon.DarknessElemental;
-import classes.Scenes.Dungeons.RiverDungeon.EarthElemental;
-import classes.Scenes.Dungeons.RiverDungeon.FireElemental;
-import classes.Scenes.Dungeons.RiverDungeon.IceElemental;
-import classes.Scenes.Dungeons.RiverDungeon.LightningElemental;
-import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
-import classes.Scenes.Dungeons.RiverDungeon.Vegot;
-import classes.Scenes.Dungeons.RiverDungeon.WaterElemental;
+import classes.Scenes.Dungeons.RiverDungeon.*;
 import classes.Scenes.Monsters.FeralImps;
 import classes.Scenes.Monsters.GolemDummyImproved;
 import classes.Scenes.NPCs.Electra;
@@ -76,9 +67,9 @@ public class RiverDungeon extends DungeonAbstractContent
 					startCombat(new FeralImps(), true);
 				}
 				if (choice == 1) {
-					spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
-					startCombat(new GreenSlime(), true);
+					//spriteSelect(SpriteDb.);
+					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous red mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
+					startCombat(new RedOoze(), true);
 				}
 				if (choice == 2) {
 					spriteSelect(SpriteDb.s_hellhound);
@@ -96,7 +87,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
 			cleanupAfterCombat();
 		}
-		public function defeatedByGreenSlime():void {
+		public function defeatedByRedOoze():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;

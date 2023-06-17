@@ -250,6 +250,10 @@ use namespace CoC;
 					name: "ted",
 					call: SceneLib.tedScene.introPostHiddenCave,
 					when: SceneLib.tedScene.canEncounterTed
+				}, {
+					name  : "desertloot",
+					chance: 0.3,
+					call  : findDesertLoot
 				}/*, {
 					name: "demonProjects",
 					chance: 0.2,
@@ -280,7 +284,7 @@ use namespace CoC;
 	
 		public function desertChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 

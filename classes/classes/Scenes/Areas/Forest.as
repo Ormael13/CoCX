@@ -11,7 +11,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -36,7 +36,7 @@ use namespace CoC;
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
-		public var darkelfScene:DarkElfScene = new DarkElfScene();
+		public var lightelfScene:LightElfScene = new LightElfScene();
 		public var aikoScene:AikoScene = new AikoScene();
 		public var nightmareScene:NightmareScene = new NightmareScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
@@ -555,7 +555,7 @@ use namespace CoC;
 				},
 				chance: forestChance,
 				when: function():Boolean {
-					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && (player.canGetPregnant());
+					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && !player.isPregnant();
 				}
 			},/*{ // [INTERMOD:8chan]
 			 name: "dullahan",
@@ -680,10 +680,10 @@ use namespace CoC;
 					return player.isAlraune();
 				}
 			}, {
-				name  : "dark_elf_scout",
+				name  : "light_elf_scout",
 				call  : function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-					darkelfScene.introDarkELfScout();
+					lightelfScene.introLightELfScout();
 				},
 				chance: 0.8
 			}, {
@@ -751,22 +751,22 @@ use namespace CoC;
 
 		public function forestChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function forestChance2():Number {
 			var temp:Number = 0.2;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function forestChance3():Number {
 			var temp:Number = 0.05;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function forestChance4():Number {
 			var temp:Number = 1.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 

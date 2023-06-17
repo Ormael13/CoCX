@@ -2760,7 +2760,7 @@ public class Holidays extends BaseContent {
         }
             //Helia
         //if she ain't a follower and is a lover, just have her visit.
-        else if (flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (SceneLib.helScene.fuckBuddyHel() || SceneLib.helFollower.followerHel())) {
+        else if (flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (SceneLib.helScene.fuckBuddyHel() || (SceneLib.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)))) {
 
             outputText("\"<i>Hey, champ, what's going on here?</i>\"  Helia calls as she sees you approach.  Gentle trails of steam are wafting from the salamander's body as her own internal heat melts any snow that builds up on her."
                 + "\n\nYou greet your salamander lover, telling her you found a way to make it snow on your camp... so you were just planning on having a snow-day play-day on your camp, while it lasts."
@@ -4216,4 +4216,4 @@ public class Holidays extends BaseContent {
         }
     }
 }
-}
+}

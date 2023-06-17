@@ -8,7 +8,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -17,7 +17,7 @@ use namespace CoC;
 
 public class HighMountains extends BaseContent {
     public var phoenixScene:PhoenixScene = new PhoenixScene();
-    public var darkelfScene:DarkElfScene = new DarkElfScene();
+    public var lightelfScene:LightElfScene = new LightElfScene();
     public var cockatriceScene:CockatriceScene = new CockatriceScene();
     public var nekobakeInn:NekobakeInn = new NekobakeInn();
 
@@ -101,9 +101,9 @@ public class HighMountains extends BaseContent {
             },
             call: cockatriceScene.greeting
         }, {
-            name: "darkelf",
+            name: "lightelf",
             chance: 0.5,
-            call: darkelfScene.introDarkELfSniper
+            call: lightelfScene.introLightELfSniper
         }, {
             name: "nekobakeInn",
             chance: 0.2,
@@ -143,7 +143,7 @@ public class HighMountains extends BaseContent {
 
 	public function highMountainsChance():Number {
 		var temp:Number = 0.5;
-		if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+		temp *= player.npcChanceToEncounter();
 		return temp;
 	}
 

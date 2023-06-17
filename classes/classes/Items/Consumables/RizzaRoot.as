@@ -13,10 +13,10 @@ package classes.Items.Consumables
         {
             clearOutput();
 			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			var changeLimit:Number = 2;
 			if (Utils.rand(2) == 0) changeLimit++;
-			if (Utils.rand(3) == 0) changeLimit++;
-			if (Utils.rand(4) == 0) changeLimit++;
+			if (Utils.rand(2) == 0) changeLimit++;
+			if (Utils.rand(2) == 0) changeLimit++;
 			changeLimit += player.additionalTransformationChances;
 			outputText("You chew on the thin red roots.  They have a rubbery texture and the taste is something like lemons and oranges mixed together.  The roots dry out your mouth as you chew them but at the same time they cause a cooling and numbing sensation that’s rather pleasant.");
 			if (player.blockingBodyTransformations()) changeLimit = 0;

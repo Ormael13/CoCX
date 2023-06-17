@@ -253,7 +253,7 @@ use namespace CoC;
 					return flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] ? (0.75 * player.npcChanceToEncounter()) : (1.5 * player.npcChanceToEncounter());
 				},
 				when  : function ():Boolean {
-					return !SceneLib.helScene.followerHel();
+					return !SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff);
 				},
 				call  : function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
@@ -309,7 +309,7 @@ use namespace CoC;
 		}
 		public function plainsChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function partsofSnippler():void {
