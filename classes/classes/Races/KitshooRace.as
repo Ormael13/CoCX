@@ -20,7 +20,7 @@ public class KitshooRace extends Race {
         /*Eyes*/		"Fox",
         /*Face*/		"Salamander",
         /*Gills*/		"Human",
-        /*Hair*/		"Kitshoo",
+        /*Hair*/		"Kitsumori",
         /*Horns*/		"Human",
         /*LowerBody*/	"Salamander",
         /*RearBody*/	"Human",
@@ -28,7 +28,7 @@ public class KitshooRace extends Race {
         /*Ovipositor*/	"Human",
         /*Oviposition*/	"Human",
         /*GlowingAss*/	"Human",
-        /*Tail*/		"Kitshoo",
+        /*Tail*/		"Kitsumori",
         /*Tongue*/		"Human",
         /*Wings*/		"Human",
         /*Penis*/		"Human",
@@ -69,8 +69,8 @@ public class KitshooRace extends Race {
 		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		addMutation(IMutationsLib.SalamanderAdrenalGlandsIM);
 		
-		buildTier(8, "kitshoo")
-				.namesTauric("kitshoo", "kitshoo-taur")
+		buildTier(8, "kitsumori")
+				.namesTauric("kitsumori", "kitsumori-taur")
 				.buffs({
 					"tou.mult": +0.15,
 					"spe.mult": +0.15,
@@ -85,8 +85,8 @@ public class KitshooRace extends Race {
 						"+30% SF Regeneration"
 				)
 				.end();
-		buildTier(16, "elder kitshoo")
-				.namesTauric("elder kitshoo", "elder kitshoo-taur")
+		buildTier(16, "elder kitsumori")
+				.namesTauric("elder kitsumori", "elder kitsumori-taur")
 				.requirePreviousTier()
 				.requireTailType(Tail.KITSHOO)
 				.requireTailCount(AT_LEAST(6))
@@ -105,8 +105,8 @@ public class KitshooRace extends Race {
 						"+40% SF Regeneration"
 				)
 				.end();
-		buildTier(24, "nine-tailed elder kitshoo")
-				.namesTauric("nine-tailed elder kitshoo", "nine-tailed elder kitshoo-taur")
+		buildTier(24, "nine-tailed elder kitsumori")
+				.namesTauric("nine-tailed elder kitsumori", "nine-tailed elder kitsumori-taur")
 				.requirePreviousTier()
 				.requireTailCount(9)
 				.buffs({
