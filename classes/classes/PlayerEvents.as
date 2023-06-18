@@ -1511,7 +1511,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
 				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
 				if (player.isRaceCached(Races.SALAMANDER)) outputText(" salamander");
-				else if (player.isRaceCached(Races.KITSHOO)) outputText(" kitshoo");
+				else if (player.isRaceCached(Races.KITSHOO)) outputText(" kitsumori");
 				else if (player.isRaceCached(Races.HELLCAT)) outputText(" hellcat");
 				else outputText(" hinezumi");
 				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enough not to jump on everything that moves.");

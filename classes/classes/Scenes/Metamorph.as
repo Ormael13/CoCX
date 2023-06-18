@@ -1672,7 +1672,7 @@ package classes.Scenes {
                 case "Gorgon": 		CoC.instance.transformations.HairGorgon.applyEffect();	    break;
                 case "Kitsune": 	CoC.instance.transformations.HairHuman.applyEffect();
                     CoC.instance.transformations.HairChangeColor(KitsuneRace.BasicKitsuneHairColors).applyEffect();	break;
-                case "Kitshoo": 	CoC.instance.transformations.HairHuman.applyEffect();
+                case "Kitsumori": 	CoC.instance.transformations.HairHuman.applyEffect();
                     CoC.instance.transformations.HairChangeColor(KitshooRace.KitshooHairColors).applyEffect();	break;
                 case "Plant": 		CoC.instance.transformations.HairLeaf.applyEffect();
                     CoC.instance.transformations.HairChangeColor(AlrauneRace.AlrauneHairColor).applyEffect();	break;
@@ -1866,7 +1866,7 @@ package classes.Scenes {
                     CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: KitsuneRace.BasicKitsuneFurColors}).applyEffect();
                     CoC.instance.transformations.SkinPatternKitsune.applyEffect();
                     break;
-                case "Kitshoo":
+                case "Kitsumori":
                     CoC.instance.transformations.SkinPlain.applyEffect();
                     CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: KitshooRace.KitshooFurColors}).applyEffect();
                     CoC.instance.transformations.SkinPatternKitsune.applyEffect();
@@ -1966,7 +1966,7 @@ package classes.Scenes {
 				case "Human":	    CoC.instance.transformations.TailNone.applyEffect();	        break;
                 case "Hydra":	    CoC.instance.transformations.TailHydra.applyEffect();			break;
 				case "Kitsune":	    CoC.instance.transformations.TailFox(9).applyEffect();	        break;
-				case "Kitshoo":	    CoC.instance.transformations.TailKitshoo(9).applyEffect();		break;
+				case "Kitsumori":	CoC.instance.transformations.TailKitshoo(9).applyEffect();		break;
 				case "Raccoon":	    CoC.instance.transformations.TailRaccoon.applyEffect();	        break;
 				case "Raiju": 	    CoC.instance.transformations.TailRaiju.applyEffect();	        break;
 				case "Salamander": 	CoC.instance.transformations.TailSalamander.applyEffect();	    break;
