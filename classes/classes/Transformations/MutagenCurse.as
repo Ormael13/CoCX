@@ -1,34 +1,34 @@
 package classes.Transformations {
-public class MutagenEffect extends PossibleEffect {
+public class MutagenCurse extends PossibleEffect {
 	public var statName:String;
-	public var buffAmount:Number;
+	public var curseAmount:Number;
 	public var text:String;
 	private var isPossibleFn:Function;
 	
-	public function MutagenEffect(
+	public function MutagenCurse(
 			effectName:String,
 			statName:String,
-			buffAmount:Number,
+			curseAmount:Number,
 			text:String,
 			isPossibleFn:Function = null
 	) {
 		super(effectName);
 		this.statName   = statName;
-		this.buffAmount = buffAmount;
+		this.curseAmount = curseAmount;
 		this.text       = text;
 		this.isPossibleFn = isPossibleFn;
 	}
 	
 	
 	override public function isPossible():Boolean {
-		return (isPossibleFn != null) ? isPossibleFn() && MutagenBonus(statName, buffAmount, false) : MutagenBonus(statName, buffAmount, false);
+		return (isPossibleFn != null) ? isPossibleFn() : true;
 	}
 	
 	override public function applyEffect(doOutput:Boolean = true):void {
 		if (doOutput) {
 			outputText(text);
 		}
-		MutagenBonus(statName, buffAmount);
+		player.addCurse(statName, curseAmount, 1);
 	}
 }
 }

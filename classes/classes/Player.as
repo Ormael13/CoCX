@@ -6569,7 +6569,7 @@ use namespace CoC;
 			return additionalTransformationChancesCounter;
 		}
 
-		public function MutagenBonus(statName: String, bonus: Number):Boolean
+		public function MutagenBonus(statName: String, bonus: Number, applyEffect: Boolean = true):Boolean
 		{
 			var cap:Number = 0.2;
 			if (hasPerk(PerkLib.Enhancement)) cap += 0.02;
@@ -6583,7 +6583,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
-            if (removeCurse(statName, bonus, 1) > 0)
+            if (applyEffect && removeCurse(statName, bonus, 1) > 0)
                 return false; //remove existing curses
             var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
             var bonus_sign:Number = (bonus > 0) ? 1 : -1;
@@ -6592,9 +6592,11 @@ use namespace CoC;
                 return false;
 
             var addBonus:Number = bonus_sign * Math.min(Math.abs(bonus_sign * cap - current), Math.abs(bonus * 0.01));
-            buff("Mutagen").addStat(statName + ".mult", addBonus);
-            CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-            CoC.instance.mainView.statsView.showStatUp(statName);
+            if (applyEffect) {
+                buff("Mutagen").addStat(statName + ".mult", addBonus);
+                CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+                CoC.instance.mainView.statsView.showStatUp(statName);
+            }
             return true;
 		}
 
