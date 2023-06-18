@@ -89,22 +89,6 @@ use namespace CoC;
 					},
 					call: sandWitchPregnancyEvent
 				}, {
-					name: "teladreDiscover",
-					when: function ():Boolean
-					{
-						return (!player.hasStatusEffect(StatusEffects.TelAdre)) && (player.exploredDesert >= 3);
-					},
-					chance: 30,
-					call: SceneLib.telAdre.discoverTelAdre
-				}, {
-					name: "teladreEncounter",
-					when: function ():Boolean
-					{
-						return player.statusEffectv1(StatusEffects.TelAdre) == 0;
-					},
-					chance: 5,
-					call: SceneLib.telAdre.discoverTelAdre
-				}, {
 					name  : "ants",
 					night : false,
 					when  : function ():Boolean {
