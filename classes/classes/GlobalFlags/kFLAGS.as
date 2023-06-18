@@ -2457,7 +2457,7 @@ public static const ONYX_PATH:int                                   				= 2448;/
 public static const UNKNOWN_FLAG_NUMBER_02449:int                                   = 2449;
 public static const ONYX_GENDER:int                                   				= 2450;
 public static const ONYX_02451:int                                                  = 2451; //Not Yet Used Flag
-public static const DARK_ELF_TYPE:int                     			                = 2452; //Not Yet Used Flag
+public static const UNKNOWN_FLAG_NUMBER_02452:int                     			    = 2452; //Not Yet Used Flag
 public static const SOULFORCE_STORED_IN_AYO_ARMOR:int           			        = 2453;
 public static const ANEMONE_OR_SEA_ANEMONE:int                                      = 2454;
 public static const SKY_POISON_PEARL:int                         		            = 2455;
@@ -2762,7 +2762,7 @@ public static const ASURA_FORM_COMBAT_MODE:int                                  
 public static const CRINOS_SHAPE_COMBAT_MODE:int                                   	= 2754;
 public static const WARRIORS_RAGE_COMBAT_MODE:int                                   = 2755;
 public static const MET_YETI_AS_A_GIRL_FIRST_TIME:int                               = 2756;
-public static const LIGHT_ELF_TYPE:int                                   			= 2757;
+public static const DARK_OR_LIGHT_ELF_SUBTYPE:int                                   = 2757;
 public static const TIMES_MINO_MUTUAL:int                                   		= 2758;
 public static const MET_FORGEFATHER:int                                             = 2759; //Met ForgeFather out in Volcanic Crag
 public static const FORGEFATHER_MOVED_TO_TEMPLE:int                                 = 2760; //ForgeFather has moved into Temple of The Divine
@@ -3016,3 +3016,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 ];
 	}
 }
+

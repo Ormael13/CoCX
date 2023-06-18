@@ -105,7 +105,7 @@ public class Mountain extends BaseContent
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: mountainChance,
+				chance: 0.5,
 				call  : function ():void {
 					 SceneLib.etnaScene.etnaInfidelityEncounterRepeat();
 				}
@@ -541,7 +541,7 @@ public class Mountain extends BaseContent
 
 		public function mountainChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function minotaurChance():Number {

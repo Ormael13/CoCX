@@ -1126,7 +1126,7 @@ public class Exploration extends BaseContent
 			if (rand(4) == 0) {
 				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
 				outputText("\n\n<b>A wild Light Elf Sniper Appears.</b>");
-				flags[kFLAGS.LIGHT_ELF_TYPE] = 13;
+				flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 13;
 				startCombat(new LightElfs());//lvl 51
 				return;
 			}

@@ -185,12 +185,12 @@ import classes.Scenes.SceneLib;
 	
 		public function beachChance():Number {
 			var temp:Number = 0.2;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function beachChance2():Number {
 			var temp:Number = 1;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 

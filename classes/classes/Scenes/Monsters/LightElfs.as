@@ -40,15 +40,15 @@ public class LightElfs extends Monster
 			else outputText("An arrow missed you.\n\n");
 			if (rand(100) < (80 + Acc)) PoisonedBowShoot();
 			else outputText("An arrow missed you.\n\n");
-			if (flags[kFLAGS.LIGHT_ELF_TYPE] == 11) {
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 11) {
 				if (rand(100) < (70 + Acc)) PoisonedBowShoot();
 				else outputText("An arrow missed you.\n\n");
 			}
-			if (flags[kFLAGS.LIGHT_ELF_TYPE] == 12) {
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 12) {
 				if (rand(100) < (60 + Acc)) PoisonedBowShoot();
 				else outputText("An arrow missed you.\n\n");
 			}
-			if (flags[kFLAGS.LIGHT_ELF_TYPE] == 13) {
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 13) {
 				if (rand(100) < (50 + Acc)) PoisonedBowShoot();
 				else outputText("An arrow missed you.\n\n");
 			}
@@ -123,7 +123,7 @@ public class LightElfs extends Monster
 		
 		public function LightElfs()
 		{
-			if (flags[kFLAGS.LIGHT_ELF_TYPE] == 10) {
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 10) {
 				this.short = "light elf scout";
 				this.long = "This woman with light skin has long pointed ears. You suspect her to be a light elf, though why she’s here, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
 				initStrTouSpeInte(30, 30, 90, 40);
@@ -135,7 +135,7 @@ public class LightElfs extends Monster
 				this.level = 14;
 				this.gems = rand(10) + 10;
 			}
-			if (flags[kFLAGS.LIGHT_ELF_TYPE] == 11) {
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 11) {
 				this.short = "light elf slaver";
 				this.long = "This lightly armored woman is a Light elf. She's slender and elegant, with light skin and long pointed ears. The look in her eyes, a mixture of bloodlust and greed, give her intentions away...as does her equipment. Ropes, poisoned arrows, she's come to capture slaves. You can hear faint voices from somewhere nearby. Has she already captured people today?";
 				initStrTouSpeInte(60, 80, 140, 70);
@@ -147,7 +147,7 @@ public class LightElfs extends Monster
 				this.level = 29;
 				this.gems = rand(10) + 15;
 			}
-			if (flags[kFLAGS.LIGHT_ELF_TYPE] == 12) {
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 12) {
 				this.short = "light elf ranger";
 				this.long = "This woman is a Light elf. She's slender and elegant, with light skin and long pointed ears. The look in her eyes, a mixture of bloodlust and greed, give her intentions away...as does her equipment. Ropes, poisoned arrows, she's come to capture slaves.";
 				initStrTouSpeInte(90, 130, 190, 100);
@@ -159,7 +159,7 @@ public class LightElfs extends Monster
 				this.level = 14;
 				this.gems = rand(10) + 20;
 			}
-			if (flags[kFLAGS.LIGHT_ELF_TYPE] == 13) {
+			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 13) {
 				this.short = "light elf sniper";
 				this.long = "This woman with light skin has long pointed ears. You suspect her to be a light elf, though why she’s here, you have no idea. Regardless, she’s dangerous and seems well equipped for kidnapping.";
 				initStrTouSpeInte(120, 190, 260, 130);
