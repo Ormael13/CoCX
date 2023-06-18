@@ -611,8 +611,10 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 		case useables.MOONSTO: AetherTwinsFoodMenuMoonstone += 1;		break;
 		case useables.EBONING: AetherTwinsFoodMenuEbonIngot += 1;		break;
 	}
-	if (!(SceneLib.crafting.hasMaterial(itype) && SceneLib.crafting.useMaterial(itype))) player.destroyItems(itype, 1);
-	else SceneLib.crafting.feedAetherTwinsMaterialFromOreBad(itype);
+	//if (!(SceneLib.crafting.hasMaterial(itype) && SceneLib.crafting.useMaterial(itype))) player.destroyItems(itype, 1);
+	//else SceneLib.crafting.feedAetherTwinsMaterialFromOreBag(itype);
+	if (SceneLib.crafting.hasMaterial(itype)) SceneLib.crafting.feedAetherTwinsMaterialFromOreBag(itype);
+	else player.destroyItems(itype, 1);
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);
 }

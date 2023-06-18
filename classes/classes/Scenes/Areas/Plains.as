@@ -182,12 +182,6 @@ use namespace CoC;
 					SceneLib.owca.gangbangVillageStuff();
 				}
 			}, {
-				name: "bazaar",
-				when: function ():Boolean {
-					return flags[kFLAGS.BAZAAR_ENTERED] == 0;
-				},
-				call: SceneLib.bazaar.findBazaar
-			}, {
 				name  : "helXizzy",
 				night : false,
 				chance: 0.2,

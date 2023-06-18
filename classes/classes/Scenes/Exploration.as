@@ -904,6 +904,14 @@ public class Exploration extends BaseContent
 				doNext(camp.returnToCampUseTwoHours);
 				return;
 			}
+			if (!player.hasStatusEffect(StatusEffects.TelAdre) && rand(4) == 0) {
+				SceneLib.telAdre.discoverTelAdre();
+				return;
+			}
+			if (flags[kFLAGS.BAZAAR_ENTERED] == 0 && rand(4) == 0) {
+				SceneLib.bazaar.findBazaar();
+				return;
+			}
 			if (player.explored > 1) {
 				clearOutput();
 				if (player.exploredForest <= 0) {
