@@ -1,10 +1,9 @@
 package classes.Transformations.Transformations {
 import classes.BodyParts.Tail;
 import classes.CockTypesEnum;
+import classes.Items.MutationsHelper;
 import classes.Races;
 import classes.Transformations.*;
-import classes.Items.MutationsHelper;
-import classes.Scenes.Metamorph;
 
 public class MutagenEffectTransformations extends MutationsHelper {
     /***
@@ -63,10 +62,18 @@ public class MutagenEffectTransformations extends MutationsHelper {
             }
     );
 
-    public const MutagenCurseStrSpider:PossibleEffect = new MutagenCurse("Mutagen Curse STR (spider)",
-            "str",
-            1,
-            "Lethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  " + (player.isRaceCached(Races.SPIDER, 1)? "Well, maybe you should put your nice, heavy abdomen to work." : "Wait, you're not a spider, that doesn't make any sense!"),
+    public const MutagenCurseStrSpider:PossibleEffect = new StatChangeEffect("Mutagen Curse STR (spider)",
+            function(doOutput: Boolean): void {
+                var desc: String = "";
+
+                desc += "Lethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  ";
+                if (player.isRace(Races.SPIDER, 1, false))
+                    desc += "Well, maybe you should put your nice, heavy abdomen to work.";
+                else desc += "Wait, you're not a spider, that doesn't make any sense!";
+
+                if (doOutput) outputText(desc);
+                player.addCurse("spe", 1, 1);
+            },
             function():Boolean {
                 return player.str100 > 70;
             }
@@ -179,6 +186,7 @@ public class MutagenEffectTransformations extends MutationsHelper {
             },
             function(): Boolean {
                 return MutagenBonus("lib", 1, false);
+            }
     );
 
     public const MutagenSpeKanga:PossibleEffect = new MutagenEffect("Mutagen Bonus SPE (kanga)",
@@ -190,13 +198,17 @@ public class MutagenEffectTransformations extends MutationsHelper {
             }
     );
 
-    public const MutagenCurseIntKanga:PossibleEffect = new MutagenCurse("Mutagen Curse Inte (Kanga)",
-            "inte",
-            1,
-            ((player.inte100 > 30) ? "You feel... antsy. You momentarily forget your other concerns as you look around you, trying to decide which direction you'd be most likely to find more food in.  You're about to set out on the search when your mind refocuses and you realize you already have some stored at camp." :
-                ((player.inte100 > 10) ? "Your mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start." :
-                    "You lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?")
-            )
+    public const MutagenCurseIntKanga:PossibleEffect = new StatChangeEffect("Mutagen Curse Inte (Kanga)",
+            function(doOutput: Boolean): void {
+                var desc: String = "";
+
+                if (player.inte100 > 30) desc += "You feel... antsy. You momentarily forget your other concerns as you look around you, trying to decide which direction you'd be most likely to find more food in.  You're about to set out on the search when your mind refocuses and you realize you already have some stored at camp.";
+                if (player.inte100 > 10) desc += "Your mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.";
+                else desc += "You lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?";
+
+                if (doOutput) outputText(desc);
+                player.addCurse("inte", 1, 1);
+            }
     );
 
 
