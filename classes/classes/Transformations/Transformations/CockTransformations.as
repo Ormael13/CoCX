@@ -1184,49 +1184,6 @@ public class CockTransformations extends MutationsHelper {
 		);
 	}
 
-	public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation { return new SimpleTransformation( "Grow knot of cock",
-			// apply effect
-			function (doOutput:Boolean): void {
-				var desc:String = "[pg]";
-
-				if (cock == -1) { //choose smallest dog knot if not specified
-					var choice:int = 0;
-					//set temp2 to first wolfdick for initialization
-					while (choice < player.cocks.length) {
-						if (player.isDogCock(choice)) {
-							cock = choice;
-							break;
-						} else choice++;
-					}
-					//Reset choice for nex tcheck
-					choice = player.cocks.length;
-					//Find smallest knot
-					while (choice > 0) {
-						choice--;
-						if (player.isDogCock(choice) && player.cocks[choice].knotMultiplier < player.cocks[cock].knotMultiplier) cock = choice;
-					}
-					//Have smallest knotted cock selected.
-				}
-
-				var knot:Number = (rand(2) + mod) / div * crit;
-				if (player.cocks[cock].knotMultiplier >= 1.5) knot /= 2;
-				if (player.cocks[cock].knotMultiplier >= 1.75) knot /= 2;
-				if (player.cocks[cock].knotMultiplier >= 2) knot /= 5;
-				player.cocks[cock].knotMultiplier += (knot);
-				if (knot < .06) desc +="Your " + cockDescript(cock) + " feels unusually tight in your sheath as your knot grows.";
-				else if (knot <= .12) desc += "Your " + cockDescript(cock) + " pops free of your sheath, thickening nicely into a bigger knot.";
-				else  desc +="Your " + cockDescript(cock) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.";
-				dynStats("lus", 5 * crit, "scale", false);
-				player.addCurse("sen", 1, 1);
-
-				if (doOutput) outputText(desc);
-			},
-			// is present
-			function (): Boolean {
-				return !player.isDogCock(cock);
-			}
-	);}
-
 	public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Insect Cock",
 				// apply effect
@@ -1262,6 +1219,49 @@ public class CockTransformations extends MutationsHelper {
 				}
 		);
 	}
+
+	public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation { return new SimpleTransformation( "Grow knot of cock",
+			// apply effect
+			function (doOutput:Boolean): void {
+				var desc:String = "[pg]";
+
+				if (cock == -1) { //choose smallest dog knot if not specified
+					var choice:int = 0;
+					//set temp2 to first wolfdick for initialization
+					while (choice < player.cocks.length) {
+						if (player.isDogCock(choice)) {
+							cock = choice;
+							break;
+						} else choice++;
+					}
+					//Reset choice for next check
+					choice = player.cocks.length;
+					//Find smallest knot
+					while (choice > 0) {
+						choice--;
+						if (player.isDogCock(choice) && player.cocks[choice].knotMultiplier < player.cocks[cock].knotMultiplier) cock = choice;
+					}
+					//Have smallest knotted cock selected.
+				}
+
+				var knot:Number = (rand(2) + mod) / div * crit;
+				if (player.cocks[cock].knotMultiplier >= 1.5) knot /= 2;
+				if (player.cocks[cock].knotMultiplier >= 1.75) knot /= 2;
+				if (player.cocks[cock].knotMultiplier >= 2) knot /= 5;
+				player.cocks[cock].knotMultiplier += (knot);
+				if (knot < .06) desc +="Your " + cockDescript(cock) + " feels unusually tight in your sheath as your knot grows.";
+				else if (knot <= .12) desc += "Your " + cockDescript(cock) + " pops free of your sheath, thickening nicely into a bigger knot.";
+				else  desc +="Your " + cockDescript(cock) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.";
+				dynStats("lus", 5 * crit, "scale", false);
+				player.addCurse("sen", 1, 1);
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return !player.isDogCock(cock);
+			}
+	);}
 
 	public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation {
 		return new SimpleTransformation("CockChangeType("+type.DisplayName+","+grow+","+oneByOne+")",

@@ -1,21 +1,20 @@
 package classes.Transformations {
-public class StatChangeEffect extends Transformation {
+public class StatChangeEffect extends PossibleEffect {
 	private var applyTfFn:Function;
+	private var isPossibleFn:Function;
 
 	public function StatChangeEffect(
 			name: String,
-			applyTfFn:Function
+			applyTfFn:Function,
+			isPossibleFn:Function = null
 	) {
 		super(name);
 		this.applyTfFn = applyTfFn;
-	}
-
-	override public function isPresent():Boolean {
-		return true;
+		this.isPossibleFn = isPossibleFn;
 	}
 
 	override public function isPossible():Boolean {
-		return true;
+		return (isPossibleFn != null) ? isPossibleFn() : true;
 	}
 
 	override public function applyEffect(doOutput:Boolean = true):void {
