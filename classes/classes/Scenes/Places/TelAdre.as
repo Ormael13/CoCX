@@ -216,7 +216,7 @@ public function telAdreMenu():void {
 					
 					break;
 				default:
-					
+				
 			}
 	}*/
 	telAdreMenuShow();
@@ -344,7 +344,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 		for (slot = 0; slot < 10; slot++) {
 			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
-				addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot).itemIcon(player.itemSlots[slot].itype);
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
