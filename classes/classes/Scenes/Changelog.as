@@ -64,6 +64,15 @@ public class Changelog extends BaseContent
 			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
 			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD.\n");
+			outputText("-Centipedes and oomukade races are now one race of oomukade with centipede been it lowest tier. Tracheal system i. mutation would be accessable by them too.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -79,15 +88,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest\n");

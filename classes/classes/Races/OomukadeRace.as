@@ -43,14 +43,24 @@ public class OomukadeRace extends Race {
 		addScores()
 				.faceType(Face.ANIMAL_TOOTHS, +1)
 				.eyeType(Eyes.CENTIPEDE, +1)
-				.legType(LowerBody.CENTIPEDE, +1)
+				.legType(LowerBody.CENTIPEDE, +2)
 				.skinPlainOnly(+1)
 				.armType(Arms.CENTIPEDE, +1)
 				.antennaeType(Antennae.CENTIPEDE, +1)
 				.rearType(RearBody.CENTIPEDE, +4)
 				.earType(Ears.ELFIN, +1)
 				.skinBasePattern(Skin.PATTERN_VENOMOUS_MARKINGS, +2)
-				.cockOrVaginaOfType(CockTypesEnum.OOMUKADE, VaginaClass.VENOM_DRIPPING,2);
+				.cockOrVaginaOfType(CockTypesEnum.OOMUKADE, VaginaClass.VENOM_DRIPPING, +2);
+		
+		addMutation(IMutationsLib.TrachealSystemIM);
+		
+		buildTier(8, "centipede")
+				.namesMaleFemale("centipede-man", "centipede-girl")
+				.buffs({
+					"str.mult": +0.60,
+					"spe.mult": +0.80
+				})
+				.end();
 		
 		buildTier(15, "oomukade")
 				.buffs({
