@@ -6,20 +6,20 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.Items.Consumable;
-import classes.PerkLib;
+import classes.Items.ItemTags;
 import classes.Races;
 import classes.StatusEffects;
 import classes.VaginaClass;
-import classes.CoC;
 
 public class MaraFruit extends Consumable{
 	public function MaraFruit() {
 		super("MaraFru", "MaraFruit", "an apple-shaped fruit", 10, "This green apple-shaped fruit that spread delicious scent around. You have second thoughts about eating it as this may alter your form in some way like many other fruits.");
+		withTag(ItemTags.U_TF);
 	}
 
 	override public function useItem():Boolean {

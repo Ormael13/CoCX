@@ -8,12 +8,14 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
-import classes.Items.Consumable;
 import classes.CoC;
+import classes.Items.Consumable;
+import classes.Items.ItemTags;
 
 public class CentipedeVenom extends Consumable {
 	public function CentipedeVenom() {
 		super("C.Venom", "C.Venom", "a vial of centipede venom", 50, "A small thin vial filled with a clear liquid produced by centipedes. If consumed, it may have a strange effect on you.");
+		withTag(ItemTags.U_TF);
 	}
 
 	override public function useItem():Boolean {

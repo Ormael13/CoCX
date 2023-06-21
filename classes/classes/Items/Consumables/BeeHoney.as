@@ -11,14 +11,15 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.Races;
-import classes.Races.BeeRace;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
 import classes.Items.Consumable;
+import classes.Items.ItemTags;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.Races;
+import classes.Races.BeeRace;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -39,6 +40,7 @@ public class BeeHoney extends Consumable
 					honeyValue,
 					honeyDesc
 			);
+			withTag(ItemTags.U_TF);
         }
 
 		override public function canUse():Boolean {

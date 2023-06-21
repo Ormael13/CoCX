@@ -57,31 +57,19 @@
              BagOCA4
              BagOCA5
              BagOCA6
-        "AjidAji" - pepper
         "BC Beer"
         "BhmtCum"
         "BimboCh"
         "ChocBox"
         "CCupcak"
         "D_Morad"
-        "ExcMilk"
-        "FishFil"
-        "FreFish"
         "Fr Beer"
         "GodMead"
-        "H.Bisct"
-        "IzyMilk"
-        "M. Milk"
-        "MinoCum"
-        "P.M.Cum"
         "P_Whsky"
         "ProMead"
-        "PurPeac"
-        "SheepMk"
         "S.Water"
         "TrailMx"
         "UrtaCum"
-        "W.Pddng"
         "Zenji H"
         "Airweed"
         "AkbalSl"
@@ -121,7 +109,7 @@
             <icon>F.Draft</icon>
 
         </row>
-        <row><!-- Row 3 - non-tf and rare potions -->
+        <row><!-- Row 3 - non-tf drinks and rare potions -->
             <icon>Cerul P</icon>
             <icon>BimboLq</icon>
             <icon>BroBrew</icon>
@@ -168,6 +156,13 @@
             <icon>S.Ingot</icon>
             <icon>BronzeB</icon>
             <icon>EbonIng</icon>
+            <icon>Amethyst</icon>
+            <icon>Diamond</icon>
+            <icon>Amet.Gem</icon>
+            <icon>TopzGem</icon>
+            <icon>RubyGem</icon>
+            <icon>Emd.Gem</icon>
+            <icon>Sap.Gem</icon>
         </row>
         <row><!-- Row 6 - eggs -->
             <icon>EggBig_Unknown</icon>
@@ -186,7 +181,7 @@
             <icon>L.WhtEg</icon>
             <icon>WhiteEg</icon>
         </row>
-        <row><!-- Row 7 - mutagens (food-like) -->
+        <row><!-- Row 7 - food -->
             <icon>Fruit_Unknown</icon>
             <icon>S.Gossr</icon>
             <icon>B.Gossr</icon>
@@ -200,7 +195,7 @@
             <icon>G.Fruit</icon>
             <icon>WoFruit</icon>
             <icon>KangaFt</icon>
-            <icon>MghtVg</icon>
+            <icon>MghtyVg</icon>
             <icon>FoxBery</icon>
             <icon>VixVigr</icon>
             <!--
@@ -213,13 +208,16 @@
             DblPepp (two red peppers)
             KnottyP (red pepper with knot)
             LargePp (large red pepper)
-
+            "FishFil"
+            "FreFish"
+            "H.Bisct"
+            "W.Pddng"
             -->
         </row>
-        <row><!-- Row 8 - mutagens (potion-like) -->
-            <icon><!--empty--></icon>
-            <icon>SucMilk</icon>
-            <icon>P.S.Mlk</icon>
+        <row><!-- Row 8 - liquid mutagens (1), cum and milk -->
+            <icon>LargeVial_Empty</icon>
+            <icon>MinoCum</icon>
+            <icon>P.M.Cum</icon>
             <icon>IncubiD</icon>
             <icon>P.Draft</icon>
             <icon>SDelite</icon>
@@ -227,6 +225,23 @@
             <icon>S.Dream</icon>
             <icon>RedVial</icon>
             <icon>VampBld</icon>
+            <icon>BeeHony</icon>
+            <icon>PurHony</icon>
+            <icon>SpHoney</icon>
+            <icon>Botle_Empty</icon>
+            <icon>SucMilk</icon>
+            <icon>P.S.Mlk</icon>
+            <icon>ExcMilk</icon>
+            <icon>IzyMilk</icon>
+            <icon>M. Milk</icon>
+            <icon>SheepMk</icon>
+            <icon>Lactaid</icon>
+            <icon>MilkPtn</icon><!--ProLactaid-->
+            <icon>LaBova </icon>
+            <icon>P.LBova</icon>
+            <icon>ProBova</icon>
+        </row>
+        <row><!-- Row 9 - liquid mutagens (2) -->
             <icon>SmallVial_Empty</icon>
             <icon>Equinum</icon>
             <icon>Unicorn</icon>
@@ -247,8 +262,6 @@
             <icon>GorgOil</icon>
             <icon>VouiOil</icon>
             <icon>TrapOil</icon>
-        </row>
-        <row><!-- Row 9 - reserved -->
         </row>
         <row><!-- Row 10 - books and scrolls -->
             <icon>Book_Unknown</icon>

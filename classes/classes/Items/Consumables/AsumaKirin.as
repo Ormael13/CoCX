@@ -13,20 +13,21 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
-import classes.CoC_Settings;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GeneticMemories.BallsMem;
 import classes.Items.Consumable;
+import classes.Items.ItemTags;
 import classes.Races.KirinRace;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.VaginaClass;
-import classes.CoC;
 
 public class AsumaKirin extends Consumable {
 	public function AsumaKirin() {
 		super("Asumaki", "Asumaki", "a bottle of Asuma Kirin", 20, "A glass bottle containing a golden liquid. The label features various symbols that you don't know, but you can still read Azuma Kirin written in golden letters! Even closed, you can still smell alcohol, musk and ozone on this thing!");
+		withTag(ItemTags.U_TF);
 	}
 
 	public override function useItem():Boolean {

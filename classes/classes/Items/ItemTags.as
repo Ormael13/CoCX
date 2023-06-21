@@ -16,6 +16,10 @@ public class ItemTags {
      * For armors that are flexible or nearly as flexible as if wearing nothing
      * Value: none.
      */
-    public static const A_AGILE:String     = "agile";
+    public static const A_AGILE:String = "agile";
+    /**
+     * For consumables that trigger a transformation
+     */
+    public static const U_TF:String    = "tf";
 }
 }
