@@ -1047,8 +1047,8 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         //Minotaur cum addiction
-        if (!purified) player.minoCumAddiction(7);
-        else player.minoCumAddiction(-2);
+        if (purified) player.minoCumAddiction(-2);
+        else player.minoCumAddiction(7);
         outputText("As soon as you crack the seal on the bottled white fluid, a ");
         if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && (!player.hasPerk(PerkLib.MinotaurCumResistance) || !player.hasPerk(PerkLib.ManticoreCumAddict))) outputText("potent musk washes over you.");
         else outputText("heavenly scent fills your nostrils.");
