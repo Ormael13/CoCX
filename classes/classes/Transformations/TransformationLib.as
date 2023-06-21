@@ -65,16 +65,25 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	*/
 	public var mutagenEffect: MutagenEffectTransformations = new MutagenEffectTransformations();
 	public const MutagenSpeSpider:PossibleEffect    		= mutagenEffect.MutagenSpeSpider;
+	public const MutagenCurseSpeSpider:PossibleEffect    	= mutagenEffect.MutagenCurseSpeSpider;
 	public const MutagenTouSpider:PossibleEffect    		= mutagenEffect.MutagenTouSpider;
+	public const MutagenCurseStrSpider:PossibleEffect    	= mutagenEffect.MutagenCurseStrSpider;
 	public const MutagenLibSpider:PossibleEffect    		= mutagenEffect.MutagenLibSpider;
-	public const SensUpSpider:PossibleEffect        		= mutagenEffect.SensUpSpider;
-	public const VenomRechargeSpider:PossibleEffect 		= mutagenEffect.VenomRechargeSpider;
-	public const VaginaTightenAndMutagenLib:PossibleEffect  = mutagenEffect.VaginaTightenAndMutagenLib;
-	public const AssholeTightenAndMutagenLib:PossibleEffect = mutagenEffect.AssholeTightenAndMutagenLib;
-	public const CocksThickenAll:PossibleEffect             = mutagenEffect.CocksThickenAll;
 	public const MutagenSpdCat: PossibleEffect 				= mutagenEffect.MutagenSpdCat;
 	public const MutagenStrCat: PossibleEffect 				= mutagenEffect.MutagenStrCat;
+	public const MutagenIntCat: PossibleEffect 				= mutagenEffect.MutagenIntCat;
+	public const MutagenCurseTouCat: PossibleEffect 		= mutagenEffect.MutagenCurseTouCat;
+	public const MutagenLibSensCat: PossibleEffect 		    = mutagenEffect.MutagenLibSensCat;
+	public const MutagenSpeKanga: PossibleEffect 			= mutagenEffect.MutagenSpeKanga;
+    public const MutagenCurseIntKanga:PossibleEffect        = mutagenEffect.MutagenCurseIntKanga;
 
+    public const SensUpSpider:PossibleEffect        		= mutagenEffect.SensUpSpider;
+    public const VenomRechargeSpider:PossibleEffect 		= mutagenEffect.VenomRechargeSpider;
+    public const VaginaTightenAndMutagenLib:PossibleEffect  = mutagenEffect.VaginaTightenAndMutagenLib;
+    public const AssholeTightenAndMutagenLib:PossibleEffect = mutagenEffect.AssholeTightenAndMutagenLib;
+    public const CocksThickenAll:PossibleEffect             = mutagenEffect.CocksThickenAll;
+    public const ShrinkClit:PossibleEffect                  = mutagenEffect.ShrinkClit;
+    public const ShrinkBalls:Transformation                 = mutagenEffect.ShrinkBalls;
 
 //ANTENNAE
 //======================================================================================================================
@@ -983,6 +992,26 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const WingsYggdrasilQuadrupleHuge: Transformation 	= wings.WingsYggdrasilQuadrupleHuge;
 
 
+
+//Warnings
+//======================================================================================================================
+//                                                                                                                    ==
+//   ██       ██  █████  ██████  ███    ██ ██ ███    ██  ██████  ███████                                              ==
+//   ██       ██ ██   ██ ██   ██ ████   ██ ██ ████   ██ ██       ██                                                   ==
+//   ██  ███  ██ ███████ ██████  ██ ██  ██ ██ ██ ██  ██ ██   ███ ███████                                              ==
+//   ██ ██ ██ ██ ██   ██ ██   ██ ██  ██ ██ ██ ██  ██ ██ ██    ██      ██                                              ==
+//   ████   ████ ██   ██ ██   ██ ██   ████ ██ ██   ████  ██████  ███████                                              ==
+//                                                                                                                    ==
+//======================================================================================================================
+
+/*
+    */
+    public var warnings:WarningTransformations = new WarningTransformations();
+    //warnings dont work as yet, calling function needs to return if bad end triggered!
+    public const CaninePepperWarning: PossibleEffect = warnings.CaninePepperWarning;
+    public const KangaFruitWarning: PossibleEffect = warnings.KangaFruitWarning;
+    /*
+*/
 
 /*
 *    ███████ ██████  ███████  ██████ ██  █████  ██          ████████ ███████ ███████

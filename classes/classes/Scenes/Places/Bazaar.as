@@ -47,8 +47,10 @@ private function approachBazaarGuard():void {
 	if(player.cor < 33 - player.corruptionTolerance) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.");
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.");
 	outputText("</i>\"");
-	if(player.cor < 33 - player.corruptionTolerance) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
-	else simpleChoices("Enter",enterTheBazaar, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
+	menu();
+	if (player.cor < 33 - player.corruptionTolerance) addButton(1, "FIGHT!",initiateFightGuard);
+	else addButton(1, "Enter", enterTheBazaar);
+	addButton(3, "Leave", camp.returnToCampUseOneHour);
 }
 
 public function enterTheBazaar():void {
@@ -1254,3 +1256,4 @@ private function finalGayFinallee(road:int = 0):void {
 }
 }
 }
+
