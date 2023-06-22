@@ -198,24 +198,25 @@
             <icon>MghtyVg</icon>
             <icon>FoxBery</icon>
             <icon>VixVigr</icon>
+            <icon>AjidAji</icon>
+            <icon>BlackPp</icon>
+            <icon>CanineP</icon>
+            <icon>BulbyPp</icon>
+            <icon>KnottyP</icon>
+            <icon>DblPepp</icon>
+            <icon>LargePp</icon>
+            <icon>ChillyP</icon>
+            <icon>FishFil</icon>
+            <icon>FreFish</icon>
             <!--
             Frrtfrt (curved brown)
-            AjidAji (yellow peppers)
-            BlackPp (black pepper)
-            BulbyPp (red pepper with 2 bulbs)
-            CanineP (red pepper)
-            ChillyP (ice pepper)
-            DblPepp (two red peppers)
-            KnottyP (red pepper with knot)
-            LargePp (large red pepper)
-            "FishFil"
-            "FreFish"
             "H.Bisct"
             "W.Pddng"
             -->
         </row>
         <row><!-- Row 8 - liquid mutagens (1), cum and milk -->
             <icon>LargeVial_Empty</icon>
+            <icon>LargeSquareBottle_Empty</icon>
             <icon>MinoCum</icon>
             <icon>P.M.Cum</icon>
             <icon>IncubiD</icon>
@@ -298,6 +299,16 @@
      </file>
      -->
 
+    <file name="icons/ui.png" prefix="" cellwidth="32" cellheight="32">
+        <row>
+            <icon>Left</icon>
+            <icon>Right</icon>
+            <icon>Yes</icon>
+            <icon>No</icon>
+            <icon>Back</icon>
+        </row>
+    </file>
+
     <!-- Aliases - images sharing IDs -->
     <aliases>
         <!--
@@ -356,6 +367,8 @@
         <alias alias="I_IronWeed" icon="I_Herb_Green"/>
         <alias alias="I_BladeFerns" icon="I_Herb_Green"/>
         <alias alias="I_RauneNectar" icon="I_Herb_Green"/>
+        <!-- Transformatives -->
+        <alias alias="I_TScroll" icon="I_Scroll_Rune"/>
 
         <!--=============
         = MELEE WEAPONS =

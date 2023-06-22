@@ -598,14 +598,14 @@ use namespace CoC;
 					bd.add("Prev", function ():void {
 						storagePage--;
 						show();
-					}).hint("Prev storage page").disableIf(storagePage == 0)
+					}).hint("Prev storage page").disableIf(storagePage == 0).icon("Left")
 					bd.add("");
 					bd.add("");
 					bd.add("");
 					bd.add("Next", function ():void {
 						storagePage++;
 						show();
-					}).hint("Next storage page").disableIf(storagePage == storagePageMax-1)
+					}).hint("Next storage page").disableIf(storagePage == storagePageMax-1).icon("Right")
 				}
 				
 				bigButtonGrid(bd);
@@ -615,7 +615,7 @@ use namespace CoC;
 				if (canStore) addButton(5, "Drop", drop).hint("Move from your inventory items of types that are already in storage");
 				if (canTake) addButton(6, "Restock", restock).hint("Refill items in your inventory from the storage to max. stack size");
 				
-				addButton(14, "Back", backFn);
+				addButton(14, "Back", backFn).icon("Back");
 			}
 			
 			show();
