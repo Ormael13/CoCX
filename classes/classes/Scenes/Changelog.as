@@ -65,7 +65,7 @@ public class Changelog extends BaseContent
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
 			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD.\n");
 			outputText("-Centipedes and Oomukade races are just race of Oomukade with Centipede been it lowest tier. Tracheal system mutation would be accessable by them too.\n");
-			outputText("-100+ new item icons, setting to toggle icons (aimozg)\n");
+			outputText("-100+ new item icons, Consumable items are tagged with 'tf', Setting to toggle icons (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -88,6 +88,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, ");
@@ -177,9 +180,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
