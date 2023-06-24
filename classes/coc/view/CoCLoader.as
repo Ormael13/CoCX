@@ -54,6 +54,10 @@ public class CoCLoader {
 	public static var BUNDLE_RES_ICONS_ITEMS_PNG:Class;
 	bundleImage("res/icons/items.png", BUNDLE_RES_ICONS_ITEMS_PNG);
 
+	[Embed(source="../../../res/icons/ui.png", mimeType="image/png")]
+	public static var BUNDLE_RES_ICONS_UI_PNG:Class;
+	bundleImage("res/icons/ui.png", BUNDLE_RES_ICONS_UI_PNG);
+
 	[Embed(source="../../../res/icons.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_RES_ICONS_XML:Class;
 	bundleText("res/icons.xml", BUNDLE_RES_ICONS_XML);
