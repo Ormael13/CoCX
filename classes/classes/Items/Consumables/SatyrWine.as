@@ -1,9 +1,7 @@
 package classes.Items.Consumables
 {
-import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 
 /**
 	 * Satyr Wine, part of the Black Cock by Foxxling
@@ -15,6 +13,7 @@ import classes.StatusEffects;
 		public function SatyrWine()
 		{
 			super("SatyrWn", "SatyrWine", "a bottle of satyr wine", 20, "A dark bottle with a brilliant red liquid sloshing around inside. On the label there is a picture of a satyr playing pipes.");
+			withTag(ItemTags.U_TF);
 		}
 		
 		override public function useItem():Boolean {

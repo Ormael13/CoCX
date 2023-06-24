@@ -45,47 +45,367 @@
         "I_" is prepended automatically
     -->
     <file name="icons/items.png" prefix="I_" cellwidth="32" cellheight="32">
-        <row>
-            <icon>IncubiD</icon>
-            <icon>GenericItem_consumable</icon>
-        </row>
-        <row>
+        <!-- TODO sort these
+            Reducto
+            GroPlus
+            LubeSprtay
+            ShimmeringSponge
+             BagOCos
+             BagOCA1
+             BagOCA2
+             BagOCA3
+             BagOCA4
+             BagOCA5
+             BagOCA6
+        "BC Beer"
+        "BhmtCum"
+        "BimboCh"
+        "ChocBox"
+        "CCupcak"
+        "D_Morad"
+        "Fr Beer"
+        "GodMead"
+        "P_Whsky"
+        "ProMead"
+        "S.Water"
+        "TrailMx"
+        "UrtaCum"
+        "Zenji H"
+        "Airweed"
+        "AkbalSl"
+        "AlcThun"
+        -->
+        <row><!-- Row 1: old icons -->
             <icon>red potion icon id</icon>
-            <icon>GenericWeapon_Sword</icon>
+            <icon><!--old GenericWeapon_Sword--></icon>
             <icon>GenericWeapon_Bow</icon>
-            <icon>bow2 id</icon>
-            <icon>tease id</icon>
-        </row>
-        <row>
-            <icon></icon>
+            <icon>GenericWeapon_Bow2</icon>
+            <icon>Heart_Red</icon>
             <icon>GenericItem_shield</icon>
-            <icon>HealHerb</icon>
+            <icon>Herb_Green</icon>
             <icon>GenericItem_necklace</icon>
-            <icon>bookid</icon>
+            <icon>Book_Default</icon>
+        </row>
+        <row><!-- Row 2 - non-tf potions -->
+            <icon>Potion_Unknown</icon>
+            <icon>ManUp B</icon>
+            <icon>Vital T</icon>
+            <icon>Agil.E</icon>
+            <icon>IncOIns</icon>
+            <icon>Smart T</icon>
+            <icon>Vixen T</icon>
+            <icon>SensDrf</icon>
+            <icon>NumbOil</icon>
+            <icon>Potion_Empty</icon>
+            <icon>Potion_Orange</icon>
+            <icon>Potion_Purple</icon>
+            <icon>Potion_White</icon>
+            <icon>Potion_Black</icon>
+            <icon>Potion_Rainbow</icon>
+            <icon>VDARCON</icon>
+            <icon>D_ARCON</icon>
+            <icon>AREGCON</icon>
+            <icon>L.Draft</icon>
+            <icon>F.Draft</icon>
+
+        </row>
+        <row><!-- Row 3 - non-tf drinks and rare potions -->
+            <icon>Cerul P</icon>
+            <icon>BimboLq</icon>
+            <icon>BroBrew</icon>
+            <icon>Debimbo</icon>
+            <icon>OviElix</icon>
+            <icon>PPhiltr</icon>
+            <icon>Bottle_Blue</icon>
+            <icon>HairDye</icon>
+            <icon>Generic_SkinOil</icon>
+            <icon>Generic_Lotion</icon>
+            <icon>PrnsPkr</icon>
+        </row>
+        <row><!-- Row 4 - pills and similar -->
+            <icon>Pill_Unknown</icon>
+            <icon>LGSFRP</icon>
+            <icon>LGSFRPB</icon>
+            <icon>MGSFRP</icon>
+            <icon>MGSFRPB</icon>
+            <icon>HGSFRP</icon>
+            <icon>HGSFRPB</icon>
+            <icon>SGSFRP</icon>
+            <icon>SGSFRPB</icon>
+            <icon>FATPILL</icon>
+            <icon>P.Pearl</icon>
+            <icon>E3Pearl</icon>
+            <icon>E5Pearl</icon>
+            <icon>E7Pearl</icon>
+            <icon>SAPill</icon>
+            <icon>BAPill</icon>
+            <icon>BAPill</icon>
+            <icon>H. Pill</icon>
+            <icon>MH.Pill</icon>
+            <icon>BH.Pill</icon>
+            <icon>SPPearl</icon>
+            <icon>E P Bot.</icon>
+        </row>
+        <row><!-- Row 5 - non-consumable misc items -->
+            <icon>GenericUnknownItem</icon>
+            <icon>B.Chitn</icon>
+            <icon>D.Scale</icon>
+            <icon>GreenGl</icon>
+            <icon>RedGel</icon>
+            <icon>G.Ingot</icon>
+            <icon>S.Ingot</icon>
+            <icon>BronzeB</icon>
+            <icon>EbonIng</icon>
+            <icon>Amethyst</icon>
+            <icon>Diamond</icon>
+            <icon>Amet.Gem</icon>
+            <icon>TopzGem</icon>
+            <icon>RubyGem</icon>
+            <icon>Emd.Gem</icon>
+            <icon>Sap.Gem</icon>
+        </row>
+        <row><!-- Row 6 - eggs -->
+            <icon>EggBig_Unknown</icon>
+            <icon>DrgnEgg</icon>
+            <icon>NPnkEgg</icon>
+            <icon>L.BlkEg</icon>
+            <icon>BlackEg</icon>
+            <icon>L.BluEg</icon>
+            <icon>BlueEg</icon>
+            <icon>L.BrnEg</icon>
+            <icon>BrownEg</icon>
+            <icon>L.PnkEg</icon>
+            <icon>PinkEgg</icon>
+            <icon>L.PrpEg</icon>
+            <icon>PurplEg</icon>
+            <icon>L.WhtEg</icon>
+            <icon>WhiteEg</icon>
+        </row>
+        <row><!-- Row 7 - food -->
+            <icon>Fruit_Unknown</icon>
+            <icon>S.Gossr</icon>
+            <icon>B.Gossr</icon>
+            <icon>M.Gossr</icon>
+            <icon>MaraFru</icon>
+            <icon>PurPeac</icon>
+            <icon>EzekFru</icon>
+            <icon>PrFruit</icon>
+            <icon>W.Fruit</icon>
+            <icon>D.Fruit</icon>
+            <icon>G.Fruit</icon>
+            <icon>WoFruit</icon>
+            <icon>KangaFt</icon>
+            <icon>MghtyVg</icon>
+            <icon>FoxBery</icon>
+            <icon>VixVigr</icon>
+            <icon>AjidAji</icon>
+            <icon>BlackPp</icon>
+            <icon>CanineP</icon>
+            <icon>BulbyPp</icon>
+            <icon>KnottyP</icon>
+            <icon>DblPepp</icon>
+            <icon>LargePp</icon>
+            <icon>ChillyP</icon>
+            <icon>FishFil</icon>
+            <icon>FreFish</icon>
+            <!--
+            Frrtfrt (curved brown)
+            "H.Bisct"
+            "W.Pddng"
+            -->
+        </row>
+        <row><!-- Row 8 - liquid mutagens (1), cum and milk -->
+            <icon>LargeVial_Empty</icon>
+            <icon>LargeSquareBottle_Empty</icon>
+            <icon>MinoCum</icon>
+            <icon>P.M.Cum</icon>
+            <icon>IncubiD</icon>
+            <icon>P.Draft</icon>
+            <icon>SDelite</icon>
+            <icon>PSDelit</icon>
+            <icon>S.Dream</icon>
+            <icon>RedVial</icon>
+            <icon>VampBld</icon>
+            <icon>BeeHony</icon>
+            <icon>PurHony</icon>
+            <icon>SpHoney</icon>
+            <icon>Botle_Empty</icon>
+            <icon>SucMilk</icon>
+            <icon>P.S.Mlk</icon>
+            <icon>ExcMilk</icon>
+            <icon>IzyMilk</icon>
+            <icon>M. Milk</icon>
+            <icon>SheepMk</icon>
+            <icon>Lactaid</icon>
+            <icon>MilkPtn</icon><!--ProLactaid-->
+            <icon>LaBova </icon>
+            <icon>P.LBova</icon>
+            <icon>ProBova</icon>
+        </row>
+        <row><!-- Row 9 - liquid mutagens (2) -->
+            <icon>SmallVial_Empty</icon>
+            <icon>Equinum</icon>
+            <icon>Unicorn</icon>
+            <icon>Alicorn</icon>
+            <icon>Centari</icon>
+            <icon>AbyssIn</icon>
+            <icon>AbysGIn</icon>
+            <icon>AbysWIn</icon>
+            <icon>BlackIn</icon>
+            <icon>GreyInk</icon>
+            <icon>WhiteIn</icon>
+            <icon>ManticV</icon>
+            <icon>MinoBlo</icon>
+            <icon>SalamFW</icon>
+            <icon>SnakOil</icon>
+            <icon>R.SnakOil</icon>
+            <icon>CouaOil</icon>
+            <icon>GorgOil</icon>
+            <icon>VouiOil</icon>
+            <icon>TrapOil</icon>
+        </row>
+        <row><!-- Row 10 - books and scrolls -->
+            <icon>Book_Unknown</icon>
+            <icon>Book_Red</icon>
+            <icon>Book_Blue</icon>
+            <icon>Book_White</icon>
+            <icon>Book_Black</icon>
+            <icon>Book_Gray</icon>
+            <icon>Scroll_Empty</icon>
+            <icon>Scroll_Text</icon>
+            <icon>Scroll_Rune</icon>
+        </row>
+        <row><!-- Row 11 - melee weapons - swords, daggers, and other blades -->
+            <icon>Sword_Unknown</icon>
+            <icon>GenericWeapon_Sword</icon>
+            <icon>AClaymo</icon>
+            <icon>B.Sword</icon>
+            <icon>Claymor</icon>
+            <icon>ChaosBlade</icon>
+            <icon>DSwords</icon>
+            <icon>Excalib</icon>
         </row>
     </file>
 
-    <!-- Ability icons, iconId = "A_" + abilityId -->
+    <!-- Ability icons.
+        Icon ID is:
+        * Specific abilities: "A_" + ability name (ex. "A_Whitefire")
+        * Ability school: "A_AbstractWhiteSpell"
+        * Ability category: "A_Magic"
+        * Placeholder: "A_GenericAbility"
+     -->
     <!--
      <file name="icons/abilities.png" prefix="A_" cellwidth="32" cellheight="32">
      </file>
      -->
 
+    <file name="icons/ui.png" prefix="" cellwidth="32" cellheight="32">
+        <row>
+            <icon>Left</icon>
+            <icon>Right</icon>
+            <icon>Yes</icon>
+            <icon>No</icon>
+            <icon>Back</icon>
+        </row>
+    </file>
+
     <!-- Aliases - images sharing IDs -->
     <aliases>
         <!--
-            Existing icon "I_IncubiD" is also available under id "I_HairDye"
+            Example: existing icon "I_IncubiD" is also available under id "I_HairDye"
             <alias icon="I_IncubiD" alias="I_HairDye"/>
         -->
-        <alias icon="I_HealHerb" alias="I_HealHerb"/>
-        <alias icon="I_HealHerb" alias="I_MoonGrass"/>
-        <alias icon="I_HealHerb" alias="I_SnakFlowr"/>
-        <alias icon="I_HealHerb" alias="I_IronWeed"/>
-        <alias icon="I_HealHerb" alias="I_BladeFerns"/>
-        <alias icon="I_HealHerb" alias="I_RauneNectar"/>
-        <alias icon="I_bookid" alias="I_B__BOOK"/>
-        <alias icon="I_bookid" alias="I_W__BOOK"/>
-        <alias icon="I_bookid" alias="I_G__BOOK"/>
-        <alias icon="I_bookid" alias="I_RMANUSC"/>
+
+        <!--===========
+        = CONSUMABLES =
+        ============-->
+        <alias alias="I_GenericItem_consumable" icon="I_Fruit_Unknown"/>
+
+        <!-- Skin oils -->
+        <alias alias="I_DarkOil" icon="I_Generic_SkinOil"/>
+        <alias alias="I_EbonyOl" icon="I_Generic_SkinOil"/>
+        <alias alias="I_FairOil" icon="I_Generic_SkinOil"/>
+        <alias alias="I_LightOl" icon="I_Generic_SkinOil"/>
+        <alias alias="I_MahogOl" icon="I_Generic_SkinOil"/>
+        <alias alias="I_OliveOl" icon="I_Generic_SkinOil"/>
+        <alias alias="I_RussOil" icon="I_Generic_SkinOil"/>
+        <alias alias="I_Tan Oil" icon="I_Generic_SkinOil"/>
+        <!-- Body lotions -->
+        <alias alias="I_ClearLn" icon="I_Generic_Lotion"/>
+        <alias alias="I_RoughLn" icon="I_Generic_Lotion"/>
+        <alias alias="I_SexyLtn" icon="I_Generic_Lotion"/>
+        <alias alias="I_SmthLtn" icon="I_Generic_Lotion"/>
+        <!-- Growers/Shrinkers - todo -->
+        <!-- Magic books -->
+        <alias alias="I_B. Book" icon="I_Book_Black"/>
+        <alias alias="I_W. Book" icon="I_Book_White"/>
+        <alias alias="I_G. Book" icon="I_Book_Gray"/>
+        <alias alias="I_R.Manusc" icon="I_Scroll_Text"/>
+        <alias alias="I_Pol.Mid" icon="I_Scroll_Text"/>
+        <alias alias="I_Met.Sho" icon="I_Scroll_Text"/>
+        <!-- Magic storages and loot bags of cosoms - todo -->
+        <!-- Soul skills manuals -->
+        <alias alias="I_TRITMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_SEXTMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_NONTMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_MABIMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_DRASMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_COMETMA" icon="I_Scroll_Rune"/>
+        <alias alias="I_VPTRMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_SOBLMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_FOLBMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_IOLBMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_SOSBMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_NOBBMAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_DEV_MAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_HOB1MAN" icon="I_Scroll_Rune"/>
+        <alias alias="I_HOB2MAN" icon="I_Scroll_Rune"/>
+        <!-- Alchemical ingredients -->
+        <alias alias="I_HealHerb" icon="I_Herb_Green" />
+        <alias alias="I_MoonGrass" icon="I_Herb_Green"/>
+        <alias alias="I_SnakFlowr" icon="I_Herb_Green"/>
+        <alias alias="I_IronWeed" icon="I_Herb_Green"/>
+        <alias alias="I_BladeFerns" icon="I_Herb_Green"/>
+        <alias alias="I_RauneNectar" icon="I_Herb_Green"/>
+        <!-- Transformatives -->
+        <alias alias="I_TScroll" icon="I_Scroll_Rune"/>
+
+        <!--=============
+        = MELEE WEAPONS =
+        ==============-->
+        <alias alias="I_GenericItem_weapon" icon="I_Sword_Unknown"/>
+        <!-- Swords -->
+
+
+        <!--===========
+        = OTHER ITEMS =
+        ============-->
+
+        <alias alias="I_GenericItem_weaponranged" icon="I_GenericWeapon_Bow"/>
+        <!--
+        <alias alias="I_GenericItem_shield" icon=""/>
+        <alias alias="I_GenericItem_armor" icon=""/>
+        <alias alias="I_GenericItem_undergarment" icon=""/>
+        <alias alias="I_GenericItem_necklace" icon=""/>
+        <alias alias="I_GenericItem_headjewelry" icon=""/>
+        <alias alias="I_GenericItem_jewelry" icon=""/>
+        <alias alias="I_GenericItem_miscjewelry" icon=""/>
+        <alias alias="I_GenericItem_vehicle" icon=""/>
+        <alias alias="I_GenericItem_flyingsword" icon=""/>
+
+
+        -->
+        <alias alias="I_GenericItem" icon="I_GenericUnknownItem"/>
+
+        <!--=========
+        = ABILITIES =
+        ==========-->
+
+        <!--<alias alias="A_GenericAbility" icon=""/>-->
+        <alias alias="A_Magic" icon="I_Book_Red"/>
+        <alias alias="A_Melee" icon="I_GenericWeapon_Sword"/>
+        <alias alias="A_Ranged" icon="I_GenericWeapon_Bow"/>
+        <alias alias="A_Tease" icon="I_Heart_Red"/>
+        <alias alias="A_Items" icon="I_Potion_Empty"/>
     </aliases>
 </icons>

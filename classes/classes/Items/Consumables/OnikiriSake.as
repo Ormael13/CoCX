@@ -2,8 +2,6 @@
  * @author Liadri
  */
 package classes.Items.Consumables {
-import classes.CoC;
-import classes.EngineCore;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
@@ -11,16 +9,17 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
+import classes.CoC;
+import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
-import classes.Items.Mutations;
-import classes.PerkLib;
-import classes.StatusEffects;
+import classes.Items.ItemTags;
 
 public class OnikiriSake extends Consumable {
 	public function OnikiriSake()
 	{
 		super("OniSake", "Onikiri Sake", "a bottle of Onikiri Sake", 6, "A drink favored by oni.");
+		withTag(ItemTags.U_TF);
 	}
 
 	override public function get description():String {

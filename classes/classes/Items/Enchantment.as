@@ -1,5 +1,4 @@
 package classes.Items {
-import classes.ItemType;
 import classes.Player;
 
 public class Enchantment {
@@ -12,7 +11,6 @@ public class Enchantment {
 	public var params:Array;
 	public var valueAdd:Number;
 	public var valueMul:Number;
-	public var description:String;
 	
 	public function get id():int {
 		return type.id;
@@ -57,11 +55,19 @@ public class Enchantment {
 		try {
 			this.prefix      = EnchantmentType.parseEnchantmentText(prefix, this);
 			this.suffix      = EnchantmentType.parseEnchantmentText(suffix, this);
-			this.description = EnchantmentType.parseEnchantmentText(type.descPattern, this);
 		} catch (e:Error) {
 			trace(e.getStackTrace());
-			this.description = "ERROR "+e.message+"\n"+e.getStackTrace();
 		}
+	}
+	public function get description():String {
+		var description:String = "";
+		try {
+			description = EnchantmentType.parseEnchantmentText(type.descPattern, this);
+		} catch (e:Error) {
+			trace(e.getStackTrace());
+			description = "ERROR "+e.message+"\n"+e.getStackTrace();
+		}
+		return description;
 	}
 	
 	/**

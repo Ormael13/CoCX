@@ -1,12 +1,10 @@
 package classes.Items.Consumables
 {
-import classes.CoC;
 import classes.EngineCore;
 import classes.ItemType;
 import classes.Items.*;
 import classes.Races;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 
 /**
 	 * Satyr Wine, part of the Black Cock by Foxxling
@@ -17,6 +15,7 @@ import classes.StatusEffects;
 		public function SageMedicine()
 		{
 			super("SageMed", "SageMed", "a bottle of Sage medicine", 6, "This drink is made from a bottle of infernal wine, a devil draft, but purified by Alvina. Are you sure it would be a smart idea to drink this?");
+			withTag(ItemTags.U_TF);
 		}
 		
 		override public function useItem():Boolean {

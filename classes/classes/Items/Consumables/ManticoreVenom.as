@@ -2,7 +2,6 @@
  * Coded by aimozg on 01.06.2017.
  */
 package classes.Items.Consumables {
-import classes.Appearance;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
@@ -12,14 +11,15 @@ import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
-import classes.Items.Consumable;
-import classes.PerkLib;
-import classes.VaginaClass;
 import classes.CoC;
+import classes.Items.Consumable;
+import classes.Items.ItemTags;
+import classes.VaginaClass;
 
 public class ManticoreVenom extends Consumable {
 	public function ManticoreVenom() {
 		super("ManticV", "MantiVen", "a vial of manticore venom", 50, "This vial contains a clear green liquid, reminding you of some toxic liquids used back in ignam to kill vermin. Ingesting poison directly might not be the smartest idea. Who knows what it could do to you?");
+		withTag(ItemTags.U_TF);
 	}
 
 	override public function useItem():Boolean {

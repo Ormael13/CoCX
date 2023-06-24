@@ -2,17 +2,16 @@
  * Coded by aimozg on 01.06.2017.
  */
 package classes.Items.Consumables {
-import classes.Appearance;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
-import classes.Items.Consumable;
-import classes.PerkLib;
-import classes.StatusEffects;
 import classes.CoC;
+import classes.Items.Consumable;
+import classes.Items.ItemTags;
 
 public class Scorpinum extends Consumable {
 	public function Scorpinum() {
 		super("Scorico", "Scorpinum", "a vial of Scorpinum", 6, "This is a long flared vial with a small label that reads, \"<i>Scorpinum</i>\".  It is likely this potion is tied to scorpions in some way.");
+		withTag(ItemTags.U_TF);
 	}
 
 	override public function useItem():Boolean {
