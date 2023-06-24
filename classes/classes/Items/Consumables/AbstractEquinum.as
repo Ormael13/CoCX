@@ -3,10 +3,8 @@
  */
 package classes.Items.Consumables {
 import classes.Appearance;
-import classes.BaseContent;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
@@ -14,26 +12,26 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.CoC_Settings;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.EventParser;
 import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
+import classes.Items.ItemTags;
 import classes.Items.Mutations;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
-import classes.Transformations.TransformationLib;
 import classes.VaginaClass;
-import classes.CoC;
 
 public class AbstractEquinum extends Consumable {
 	public function AbstractEquinum(type:Number, id:String, shortName:String, longName:String, value:Number, description:String) {
 		super(id, shortName, longName, value, description);
 		this.type = type;
+		withTag(ItemTags.U_TF);
 	}
 
 	protected var type:Number;

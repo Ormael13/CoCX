@@ -65,7 +65,7 @@ public class Changelog extends BaseContent
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
 			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD.\n");
 			outputText("-Centipedes and Oomukade races are just race of Oomukade with Centipede been it lowest tier. Tracheal system mutation would be accessable by them too.\n");
-			outputText("-\n");
+			outputText("-100+ new item icons, setting to toggle icons (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

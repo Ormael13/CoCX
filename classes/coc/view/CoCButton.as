@@ -11,6 +11,7 @@ package coc.view {
  keyboard events.
  ****/
 
+import classes.GameSettings;
 import classes.ItemSlotClass;
 import classes.ItemType;
 import classes.Parser.Parser;
@@ -154,6 +155,7 @@ public class CoCButton extends Block {
 	}
 	
 	public function set iconId(iconId:String):void {
+		if (!GameSettings.buttonIconsEnabled) return;
 		_iconId           = iconId;
 		var bitmap:Bitmap = iconId ? IconLib.getBitmap(iconId) : null;
 		if (bitmap) {

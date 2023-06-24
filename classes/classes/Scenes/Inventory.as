@@ -21,6 +21,7 @@ import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
 import classes.Scenes.NPCs.MagnoliaFollower;
+
 import coc.view.ButtonDataList;
 import coc.view.charview.DragButton;
 
@@ -389,7 +390,9 @@ use namespace CoC;
 				endExclusive:int,
 				backFn:Function,
 				storageName:String = "Storage",
-				itemTypeFilter:Function = null
+				itemTypeFilter:Function = null,
+				canTake:Boolean = true,
+				canStore:Boolean = true
 		):void {
 			DragButton.setup(mainView, mainView.toolTipView);
 			function fromStorage(i:int):void {
@@ -559,7 +562,8 @@ use namespace CoC;
 							.forItemSlot(playerSlot)
 							.drag(playerSlot, itemTypeFilter)
 							.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype))
-							.disableIf(playerSlot.isEmpty());
+							.disableIf(playerSlot.isEmpty())
+							.disableIf(!canStore);
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
 				if (playerPageMax > 0) {
@@ -586,31 +590,32 @@ use namespace CoC;
 					var storageSlot:ItemSlotClass = storage[i];
 					bd.add("Take", curry(fromStorage, i))
 							.forItemSlot(storageSlot).drag(storageSlot, itemTypeFilter)
-							.disableIf(storageSlot.isEmpty());
+							.disableIf(storageSlot.isEmpty())
+							.disableIf(!canTake);
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
 				if (storagePageMax > 0) {
 					bd.add("Prev", function ():void {
 						storagePage--;
 						show();
-					}).hint("Prev storage page").disableIf(storagePage == 0)
+					}).hint("Prev storage page").disableIf(storagePage == 0).icon("Left")
 					bd.add("");
 					bd.add("");
 					bd.add("");
 					bd.add("Next", function ():void {
 						storagePage++;
 						show();
-					}).hint("Next storage page").disableIf(storagePage == storagePageMax-1)
+					}).hint("Next storage page").disableIf(storagePage == storagePageMax-1).icon("Right")
 				}
 				
 				bigButtonGrid(bd);
-				addButton(0, "Store All", storeAll).hint("Move all items from your inventory to the storage");
-				addButton(1, "Take All", takeAll).hint("Take all items from the storage to your inventory");
-				addButton(4, "Sort storage", sortStorage).hint("Sort and compact the storage");
-				addButton(5, "Drop", drop).hint("Move from your inventory items of types that are already in storage");
-				addButton(6, "Restock", restock).hint("Refill items in your inventory from the storage to max. stack size");
+				if (canStore) addButton(0, "Store All", storeAll).hint("Move all items from your inventory to the storage");
+				if (canTake) addButton(1, "Take All", takeAll).hint("Take all items from the storage to your inventory");
+				if (canStore) addButton(4, "Sort storage", sortStorage).hint("Sort and compact the storage");
+				if (canStore) addButton(5, "Drop", drop).hint("Move from your inventory items of types that are already in storage");
+				if (canTake) addButton(6, "Restock", restock).hint("Refill items in your inventory from the storage to max. stack size");
 				
-				addButton(14, "Back", backFn);
+				addButton(14, "Back", backFn).icon("Back");
 			}
 			
 			show();

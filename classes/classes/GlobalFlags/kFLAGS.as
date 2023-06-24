@@ -2951,7 +2951,7 @@ public static const UNKNOWN_FLAG_NUMBER_02942:int                               
 public static const UNKNOWN_FLAG_NUMBER_02943:int                                   = 2943;
 public static const UNKNOWN_FLAG_NUMBER_02944:int                                   = 2944;
 public static const UNKNOWN_FLAG_NUMBER_02945:int                                   = 2945;
-public static const UNKNOWN_FLAG_NUMBER_02946:int                                   = 2946;
+public static const BUTTON_ICONS_DISABLED:int                                       = 2946;
 public static const COMBAT_TEASE_HEALING:int                                        = 2947;
 public static const USSDISPLAY_STYLE:int                                  			= 2948;
 public static const RACESORT_SETTING:int		                                    = 2949;
@@ -3016,4 +3016,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 ];
 	}
 }
-
+

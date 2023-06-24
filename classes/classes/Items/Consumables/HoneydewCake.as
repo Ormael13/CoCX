@@ -6,12 +6,13 @@ import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
-import classes.PerkLib;
+import classes.Items.ItemTags;
 import classes.Races.AntRace;
 
 public class HoneydewCake extends Consumable {
 	public function HoneydewCake() {
 		super("HDewCake", "HDewCake", "a cake flavored with honeydew", 6, "A very sweet cake beloved by Antmorphs.");
+		withTag(ItemTags.U_TF);
         }
 	public override function useItem():Boolean {
 		var changes:Number = 0;

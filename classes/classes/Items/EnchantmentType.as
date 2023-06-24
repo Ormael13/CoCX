@@ -1,7 +1,6 @@
 package classes.Items {
 import classes.CoC;
 import classes.CoC_Settings;
-import classes.ItemType;
 import classes.Player;
 
 import coc.script.Eval;
@@ -78,10 +77,11 @@ public class EnchantmentType extends ItemConstants {
 				var signed:Boolean = fmt[2] === "+";
 				var decimals:int   = fmt[3] ? parseInt(fmt[3]) : -1;
 				var type:String    = fmt[4];
-				var rawValue:*     = Eval.compile(expr).call(enchantment, {
+				var context:Object  = CoC.instance ? {
 					player: CoC.instance.player,
 					game: CoC.instance
-				});
+				} : {};
+				var rawValue:*   = Eval.compile(expr).call(enchantment, context);
 				if (type === "C") {
 					return capitalizeFirstLetter(String(rawValue));
 				} else {
