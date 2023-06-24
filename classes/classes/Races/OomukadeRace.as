@@ -57,30 +57,40 @@ public class OomukadeRace extends Race {
 		buildTier(8, "centipede")
 				.namesMaleFemale("centipede-man", "centipede-girl")
 				.buffs({
-					"str.mult": +0.60,
-					"spe.mult": +0.80
+					"str.mult": +0.70,
+					"tou.mult": +0.20,
+					"spe.mult": +0.30
 				})
 				.end();
 		
-		buildTier(15, "oomukade")
+		buildTier(13, "elder centipede")
+				.namesMaleFemale("elder centipede-man", "elder centipede-girl")
 				.buffs({
-					"str.mult": +0.75,
+					"str.mult": +0.95,
+					"tou.mult": +0.40,
+					"spe.mult": +0.60
+				})
+				.end();
+		
+		buildTier(18, "oomukade")
+				.buffs({
+					"str.mult": +1.20,
 					"tou.mult": +0.50,
-					"spe.mult": +0.60,
+					"spe.mult": +0.70,
 					"wis.mult": -0.50,
-					"lib.mult": +1.10
+					"lib.mult": +0.80
 				})
-				.end();
+				.end();/*
 		
-		buildTier(18, "elder oomukade")
+		buildTier(24, "primodal oomukade")
 				.buffs({
-					"str.mult": +1.25,
-					"tou.mult": +0.45,
-					"spe.mult": +0.60,
+					"str.mult": +1.40,
+					"tou.mult": +0.70,
+					"spe.mult": +0.90,
 					"wis.mult": -0.50,
 					"lib.mult": +1.10
 				})
-				.end();
+				.end();*/
 	}
 }
 }
