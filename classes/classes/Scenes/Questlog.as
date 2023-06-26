@@ -87,7 +87,13 @@ public class Questlog extends BaseContent
 				else outputText("Completed");
 			}
 			else outputText("Not Started/In Progress");
-			outputText("\n<i><b>4th Floor:</b> Soon</i>");
+			outputText("\n<b>4th Floor:</b> ");
+			if (SceneLib.dungeons.checkRiverDungeon4thFloorClear()) {
+				if (player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 3) outputText("Completed (Reward taken)");
+				else outputText("Completed");
+			}
+			else outputText("Not Started/In Progress");
+			outputText("\n<i><b>5th Floor:</b> Soon</i>");
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
@@ -142,11 +148,11 @@ public class Questlog extends BaseContent
 			if (SceneLib.dungeons.checkBeeHiveClear() && flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 3) addButton(7, "Bee Hive", takeRewardForBeeHive);
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor reward");
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) {
+				if (SceneLib.dungeons.checkRiverDungeon4thFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 3) addButton(8, "River Dungeon", takeRewardForRiverDungeon4thFloor).hint("4th floor reward");
 				if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 2) addButton(8, "River Dungeon", takeRewardForRiverDungeon3rdFloor).hint("3rd floor reward");
 				if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 1) addButton(8, "River Dungeon", takeRewardForRiverDungeon2ndFloor).hint("2nd floor reward");
 			}
-			//3rd floor
-			//4th floor
+			//5th floor
             if (flags[kFLAGS.EBON_LABYRINTH])
                 addButtonIfTrue(9, "Ebon Labyrinth", takeRewardForEL,
                     "Req. to reach room " + SceneLib.dungeons.nextAwardEL() + ".",
@@ -219,6 +225,10 @@ public class Questlog extends BaseContent
             reward(1, 5);
 		}
 		public function takeRewardForRiverDungeon3rdFloor():void {
+			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
+            reward(1, 5);
+		}
+		public function takeRewardForRiverDungeon4thFloor():void {
 			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
             reward(1, 5);
 		}
