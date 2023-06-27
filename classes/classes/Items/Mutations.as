@@ -6,6 +6,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
+import classes.Items.Consumables.OvipositionElixir;
 import classes.Races.*;
 import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
@@ -1046,9 +1047,14 @@ public final class Mutations extends MutationsHelper {
     public function minotaurCum(purified:Boolean, player:Player):void {
         player.slimeFeed();
         clearOutput();
-        //Minotaur cum addiction
-        if (purified) player.minoCumAddiction(-2);
-        else player.minoCumAddiction(7);
+		//Minotaur cum addiction
+        var changingaddition:Number = 7;
+        if (purified) {
+			changingaddition -= 10;
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) changingaddition -= 8;
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) changingaddition -= 16;
+		}
+        player.minoCumAddiction(changingaddition);
         outputText("As soon as you crack the seal on the bottled white fluid, a ");
         if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && (!player.hasPerk(PerkLib.MinotaurCumResistance) || !player.hasPerk(PerkLib.ManticoreCumAddict))) outputText("potent musk washes over you.");
         else outputText("heavenly scent fills your nostrils.");

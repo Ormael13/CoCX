@@ -59,7 +59,7 @@ public class Changelog extends BaseContent
 			outputText("-New two NPC to toggle off/on their appearing in camp/out of camp: Sophie and maybe many expected and wanted... Helia.\n");
 			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 germs. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
 			outputText("-Dark Elfs won't appear at the surface replaced by their lighter skinned fellow elfs... the light elfs.\n");
-			outputText("-New enemies: Red Ooze - lvl 6. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Red Mist Ooze - lvl 42. Encounterable on 4th floor of River Dungeon.\n");
+			outputText("-New enemies: Red Ooze - lvl 6. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Red Mist Ooze - lvl 40, Mist Phouka - lvl 44. Encounterable on 4th floor of River Dungeon.\n");
 			outputText("-New usable item: Red Gel. Costing 50 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies.\n");// .
 			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
 			outputText("-Kitshoo race name would be now Kitsumori.\n");

@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Shield;
 import classes.Items.Weapon;
 import classes.PerkLib;
+import classes.Scenes.Areas.Bog.Phouka;
 import classes.Scenes.Areas.GlacialRift.Yeti;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Dungeons.RiverDungeon.*;
@@ -527,7 +528,7 @@ public class RiverDungeon extends DungeonAbstractContent
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				var choice:Number = rand(2);
+				var choice:Number = rand(2);//36, 40+, 44+, 49, 54, 59
 				if (choice == 0) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous red mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  Then you notice it's covered with nearly blending with rest of it skin purple glowing veins.  The beast surges forward to attack!");
@@ -536,9 +537,8 @@ public class RiverDungeon extends DungeonAbstractContent
 				}
 				if (choice == 1) {
 					//spriteSelect(SpriteDb.s_green_slime);
-					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous red mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  Then you notice it's covered with nearly blending with rest of it skin purple glowing veins.  The beast surges forward to attack!");
-					flags[kFLAGS.RED_OOZE_SUBTYPE] = 1;
-					startCombat(new RedOoze(), true);
+					outputText("As you’re wading through the passage a flickering light off in the distance catches your eye.  Realizing it's been spotted, the light starty to dash toward you.\n\nYour attacker seems to melt, then reforms, becoming a five inch tall mist phouka.  His skin and wings are coal black covered by many glowingh vein-like things, and his eyes are purple and shiny like those of a cat.  He isn't wearing any clothes, and a fully erect cock almost an inch long juts out of his groin.  Apart from that and a lack of breasts, his body looks feminine, much like the faeries of the woods.\n\nThe mist phouka leers at you, clearly deciding what he wants to do next.  Not longh after it decides as he surges forward to attack!");
+					startCombat(new Phouka("mist phouka"), true);
 				}/*
 				if (choice == 2) {
 					//spriteSelect(SpriteDb.s_green_slime);
@@ -565,6 +565,12 @@ public class RiverDungeon extends DungeonAbstractContent
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
 		public function defeatedByRedMistOoze():void {
+			clearOutput();
+			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
+			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
+			cleanupAfterCombat();
+		}
+		public function defeatedByMistPhouka():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
@@ -1427,7 +1433,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_01;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1436,7 +1442,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD02():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_02;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1445,7 +1451,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD03():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_03;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1454,25 +1460,25 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD04():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_04;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+		}*/
 		public function roomD05():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_05;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+			dungeons.setDungeonButtonsRD(null, roomD08, null, null);
+		}/*
 		public function roomD06():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_06;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1496,7 +1502,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, roomD09, roomD07);
+			dungeons.setDungeonButtonsRD(roomD05, null, roomD09, roomD07);
 		}
 		public function roomD09():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_09;
@@ -1505,7 +1511,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, roomD10, roomD08);
+			dungeons.setDungeonButtonsRD(null, roomD13, roomD10, roomD08);
 		}
 		public function roomD10():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_10;
@@ -1514,39 +1520,39 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, roomD09);
-		}/*
+			dungeons.setDungeonButtonsRD(null, null, roomD11, roomD09);
+		}
 		public function roomD11():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_11;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+			dungeons.setDungeonButtonsRD(null, null, null, roomD10);
+		}/*
 		public function roomD12():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_12;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+		}*/
 		public function roomD13():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_13;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+			dungeons.setDungeonButtonsRD(roomD09, roomD19, null, null);
+		}/*
 		public function roomD14():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_14;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1555,7 +1561,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD15():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_15;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1564,7 +1570,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD16():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_16;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1573,7 +1579,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD17():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_17;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1582,25 +1588,25 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD18():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_18;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+		}*/
 		public function roomD19():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_19;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+			dungeons.setDungeonButtonsRD(roomD13, null, null, null);
+		}/*
 		public function roomD20():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_20;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1609,7 +1615,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD21():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_21;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1618,7 +1624,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD22():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_22;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1627,7 +1633,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD23():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_23;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1636,7 +1642,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD24():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_24;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1645,7 +1651,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomD25():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_25;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1654,7 +1660,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_01;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1663,7 +1669,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE02():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_02;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1672,7 +1678,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE03():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_03;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1681,7 +1687,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE04():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_04;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
@@ -1690,7 +1696,7 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function roomE05():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_05;
 			clearOutput();
-			encountersRuletteC();
+			encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
