@@ -12,13 +12,11 @@ import classes.BodyParts.RearBody;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.Items.Consumable;
-import classes.Items.ItemTags;
 import classes.VaginaClass;
 
 public class PotentVenom extends Consumable {
 	public function PotentVenom() {
 		super("P.Venom", "P.Venom", "a vial of potent venom", 50, "A small vial filled with a bubbling, dark purple liquid. Even though it's corked, you can still smell the sweet scent wafting from it and it feels unnaturally warm to the touch.");
-		withTag(ItemTags.U_TF);
 	}
 
 	override public function useItem():Boolean {
@@ -85,8 +83,8 @@ public class PotentVenom extends Consumable {
 		}
 		//Face
 		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0) {
-      outputText("\n\n");
-      CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+			outputText("\n\n");
+			CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
 			changes++;
 		}
 		//NeckMaxilipeds

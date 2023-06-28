@@ -184,6 +184,15 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_RIVER_FLOOR_03_ROOM_33: return riverdungeon.roomC33;
             case DUNGEON_RIVER_FLOOR_03_ROOM_34: return riverdungeon.roomC34;
             //River Dungeon 4th floor
+            case DUNGEON_RIVER_FLOOR_04_ROOM_05: return riverdungeon.roomD05;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_07: return riverdungeon.roomD07;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_08: return riverdungeon.roomD08;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_09: return riverdungeon.roomD09;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_10: return riverdungeon.roomD10;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_11: return riverdungeon.roomD11;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_13: return riverdungeon.roomD13;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_19: return riverdungeon.roomD19;
+            //River Dungeon 5th floor
             //Den of Desire
             case DUNGEON_DEN_OF_DESIRE_ENTRANCE:            return denofdesire.roomEntrance;
             case DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:     return denofdesire.roomGreatHallArea;
@@ -274,6 +283,9 @@ public class DungeonEngine extends DungeonAbstractContent {
     }
     public function checkRiverDungeon3rdFloorClear():Boolean {
         return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8);//8 - otwarcie drzwi boss room-u, 9 - pokonanie bossa
+    }
+    public function checkRiverDungeon4thFloorClear():Boolean {
+        return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10);//10 - otwarcie drzwi boss room-u, 11 - pokonanie bossa
     }
 
     //returns the room required for clearing

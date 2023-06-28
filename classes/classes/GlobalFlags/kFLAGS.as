@@ -2452,12 +2452,12 @@ public static const FOUND_TEMPLE_OF_THE_DIVINE:int                              
 public static const SAPPHIRE_AFFECTION:int                           		        = 2444;
 public static const SAPPHIRE_TALKS:int                       			            = 2445;
 public static const WEDDINGS_UNLOCKED:int                                   		= 2446; //SAPPHIRE_SEX before, now removed and replaced.
-public static const UNKNOWN_FLAG_NUMBER_02447:int                                   = 2447;							//Not Yet Used Flag
-public static const ONYX_PATH:int                                   				= 2448;//slave or free
+public static const UNKNOWN_FLAG_NUMBER_02447:int                                   = 2447;	//Not Yet Used Flag
+public static const ONYX_PATH:int                                   				= 2448;	//slave or free
 public static const UNKNOWN_FLAG_NUMBER_02449:int                                   = 2449;
 public static const ONYX_GENDER:int                                   				= 2450;
 public static const ONYX_02451:int                                                  = 2451; //Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02452:int                     			    = 2452; //Not Yet Used Flag
+public static const RED_OOZE_SUBTYPE:int                     			            = 2452;
 public static const SOULFORCE_STORED_IN_AYO_ARMOR:int           			        = 2453;
 public static const ANEMONE_OR_SEA_ANEMONE:int                                      = 2454;
 public static const SKY_POISON_PEARL:int                         		            = 2455;
