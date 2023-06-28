@@ -184,14 +184,31 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_RIVER_FLOOR_03_ROOM_33: return riverdungeon.roomC33;
             case DUNGEON_RIVER_FLOOR_03_ROOM_34: return riverdungeon.roomC34;
             //River Dungeon 4th floor
+			//01
+			//02
+			//03
+			//04
             case DUNGEON_RIVER_FLOOR_04_ROOM_05: return riverdungeon.roomD05;
+			//06
             case DUNGEON_RIVER_FLOOR_04_ROOM_07: return riverdungeon.roomD07;
             case DUNGEON_RIVER_FLOOR_04_ROOM_08: return riverdungeon.roomD08;
             case DUNGEON_RIVER_FLOOR_04_ROOM_09: return riverdungeon.roomD09;
             case DUNGEON_RIVER_FLOOR_04_ROOM_10: return riverdungeon.roomD10;
             case DUNGEON_RIVER_FLOOR_04_ROOM_11: return riverdungeon.roomD11;
+			//12
             case DUNGEON_RIVER_FLOOR_04_ROOM_13: return riverdungeon.roomD13;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_14: return riverdungeon.roomD14;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_15: return riverdungeon.roomD15;
+			//16
+			//17
+			//18
             case DUNGEON_RIVER_FLOOR_04_ROOM_19: return riverdungeon.roomD19;
+            case DUNGEON_RIVER_FLOOR_04_ROOM_20: return riverdungeon.roomD20;
+			//21
+			//22
+            case DUNGEON_RIVER_FLOOR_04_ROOM_23: return riverdungeon.roomD23;
+			//24
+			//25
             //River Dungeon 5th floor
             //Den of Desire
             case DUNGEON_DEN_OF_DESIRE_ENTRANCE:            return denofdesire.roomEntrance;

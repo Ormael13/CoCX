@@ -22,19 +22,39 @@ use namespace CoC;
 	{
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			SceneLib.defiledravine.demonScene.defeatOmnibus();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else {
+				game.flags[kFLAGS.DEMONS_DEFEATED]++;
+				SceneLib.defiledravine.demonScene.defeatOmnibus();
+			}
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else SceneLib.dungeons.factory.doLossIncubus(false); //it's alright, the scene uses [themonster] and [monster he] to specify.
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByMistOmnibus();
+			else {
+				if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
+				else SceneLib.dungeons.factory.doLossIncubus(false); //it's alright, the scene uses [themonster] and [monster he] to specify.
+			}
 		}
 		
 		public function Omnibus()
 		{
-			if (inDungeon) { //EL check
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				this.short = "mist omnibus";
+				initStrTouSpeInte(220, 180, 165, 140);
+				initWisLibSensCor(140, 150, 75, 100);
+				this.weaponAttack = 39;
+				this.armorDef = 36;
+				this.armorMDef = 6;
+				this.bonusHP = 775;
+				this.bonusLust = 274;
+				this.level = 49;
+				this.additionalXP = 300;
+			    this.gems = rand(40) + 50;
+				this.createPerk(PerkLib.OverMaxHP, 49, 0, 0, 0);
+			}
+			else if (inDungeon) { //EL check
 				this.short = "stray omnibus";
                 var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
                 initStrTouSpeInte(280 + 12*mod, 245 + 15*mod, 210 + 15*mod, 175 + 5*mod);
@@ -65,7 +85,8 @@ use namespace CoC;
 			}
 			this.a = "the ";
 			this.imageName = "omnibus";
-			this.long = "She stands about six feet tall and is hugely voluptuous, her impressive breasts wobble delightfully as she moves.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  She is wearing rags that cover only a tiny fraction of her body, concealing just her naughty bits to make the whole display more erotic.  Her crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.  She's using a leather whip as a weapon.";
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) this.long = "She stands about six feet tall and is hugely voluptuous, her impressive breasts wobble delightfully as she moves.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  She is wearing rags that cover only a tiny fraction of her glowing vein covered body, concealing just her naughty bits to make the whole display more erotic.  Her crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.  She's using a leather whip as a weapon.";
+			else this.long = "She stands about six feet tall and is hugely voluptuous, her impressive breasts wobble delightfully as she moves.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  She is wearing rags that cover only a tiny fraction of her body, concealing just her naughty bits to make the whole display more erotic.  Her crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.  She's using a leather whip as a weapon.";
 			// this.plural = false;
 			this.createCock(10,1.5,CockTypesEnum.DEMON);
 			this.balls = 0;
@@ -95,12 +116,20 @@ use namespace CoC;
 			this.randomDropParams = {
 				rarity: DynamicItems.RARITY_CHANCES_LESSER
 			};
-			this.drop = new WeightedDrop().
-					add(consumables.BIMBOLQ, 1).
-					add(consumables.BROBREW, 1).
-					add(weapons.WHIP, 2).
-					add(consumables.SUCMILK, 12).
-					add(consumables.INCUBID, 12);
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				this.drop = new WeightedDrop().
+						add(weapons.WHIP, 2).
+						add(consumables.LETHITE, 5).
+						add(useables.PCSHARD, 5);
+			}
+			else {
+				this.drop = new WeightedDrop().
+						add(consumables.BIMBOLQ, 1).
+						add(consumables.BROBREW, 1).
+						add(weapons.WHIP, 2).
+						add(consumables.SUCMILK, 12).
+						add(consumables.INCUBID, 12);
+			}
 			this.wings.type = Wings.BAT_LIKE_TINY;
 			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;
