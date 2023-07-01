@@ -11020,7 +11020,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxPercentRegen += 2;
         if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) maxPercentRegen -= (0.5 * player.internalChimeraRating());
-        return maxPercentRegen;
+        if (maxPercentRegen > maximumRegeneration()) maxPercentRegen = maximumRegeneration();
+		return maxPercentRegen;
     }
 
     public function nonPercentBasedRegeneration():Number {
@@ -16565,4 +16566,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}
