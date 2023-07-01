@@ -3064,7 +3064,8 @@ public final class Mutations extends MutationsHelper {
         if (!large) {
             //Grow nipples
             if (player.nippleLength < 3 && player.biggestTitSize() > 0) {
-                outputText("[pg]Your nipples engorge, prodding hard against the inside of your [armor].  Abruptly you realize they've gotten almost a quarter inch longer.");
+				if (player.armor.name == "nothing" && player.upperGarmentName == "nothing") outputText("[pg]Your nipples engorge and abruptly you realize they've gotten almost a quarter inch longer.");
+				else outputText("[pg]Your nipples engorge, prodding hard against the inside of your "+(player.armor.name == "nothing" ? player.upperGarmentName : player.armor.name)+".  Abruptly you realize they've gotten almost a quarter inch longer.");
                 player.nippleLength += .2;
                 dynStats("lus", 15, "scale", false);
             }
@@ -3073,7 +3074,8 @@ public final class Mutations extends MutationsHelper {
         else {
             //Grow nipples
             if (player.nippleLength < 3 && player.biggestTitSize() > 0) {
-                outputText("[pg]Your nipples engorge, prodding hard against the inside of your [armor].  Abruptly you realize they've grown more than an additional quarter-inch.");
+                if (player.armor.name == "nothing" && player.upperGarmentName == "nothing") outputText("[pg]Your nipples engorge and abruptly you realize they've grown more than an additional quarter-inch.");
+				else outputText("[pg]Your nipples engorge, prodding hard against the inside of your "+(player.armor.name == "nothing" ? player.upperGarmentName : player.armor.name)+".  Abruptly you realize they've grown more than an additional quarter-inch.");
                 player.nippleLength += (rand(2) + 3) / 10;
                 dynStats("lus", 15, "scale", false);
             }

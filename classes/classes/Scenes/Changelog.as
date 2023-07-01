@@ -59,7 +59,7 @@ public class Changelog extends BaseContent
 			outputText("-New two NPC to toggle off/on their appearing in camp/out of camp: Sophie and maybe many expected and wanted... Helia.\n");
 			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 germs. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
 			outputText("-Dark Elfs won't appear at the surface replaced by their lighter skinned fellow elfs... the light elfs.\n");
-			outputText("-New enemies: Red Ooze - lvl 6. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Red Mist Ooze - lvl 40, Mist Phouka - lvl 44, Mist Omnibus - lvl 49, Mist Salamander - lvl 59. Encounterable on 4th floor of River Dungeon.\n");
+			outputText("-New enemies: Red Ooze - lvl 6. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 36, Red Mist Ooze - lvl 40, Mist Phouka - lvl 44, Mist Omnibus - lvl 49, Mist Salamander - lvl 59. Encounterable on 4th floor of River Dungeon.\n");
 			outputText("-New usable item: Red Gel. Costing 50 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies.\n");// .
 			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
@@ -94,7 +94,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, ");
-			outputText("Honeydew Cake training str/tou instead of applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap\n");
+			outputText("Honeydew Cake training str/tou instead of applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

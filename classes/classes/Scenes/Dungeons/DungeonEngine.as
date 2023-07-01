@@ -186,8 +186,8 @@ public class DungeonEngine extends DungeonAbstractContent {
             //River Dungeon 4th floor
 			//01
 			case DUNGEON_RIVER_FLOOR_04_ROOM_02: return riverdungeon.roomD02;
-			//03
-			//04
+			case DUNGEON_RIVER_FLOOR_04_ROOM_03: return riverdungeon.roomD03;
+			case DUNGEON_RIVER_FLOOR_04_ROOM_04: return riverdungeon.roomD04;
             case DUNGEON_RIVER_FLOOR_04_ROOM_05: return riverdungeon.roomD05;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_06: return riverdungeon.roomD06;
             case DUNGEON_RIVER_FLOOR_04_ROOM_07: return riverdungeon.roomD07;
@@ -204,10 +204,10 @@ public class DungeonEngine extends DungeonAbstractContent {
 			case DUNGEON_RIVER_FLOOR_04_ROOM_18: return riverdungeon.roomD18;
             case DUNGEON_RIVER_FLOOR_04_ROOM_19: return riverdungeon.roomD19;
             case DUNGEON_RIVER_FLOOR_04_ROOM_20: return riverdungeon.roomD20;
-			//21
+			case DUNGEON_RIVER_FLOOR_04_ROOM_21: return riverdungeon.roomD21;
 			//22
             case DUNGEON_RIVER_FLOOR_04_ROOM_23: return riverdungeon.roomD23;
-			//case DUNGEON_RIVER_FLOOR_04_ROOM_24: return riverdungeon.roomD24;
+			case DUNGEON_RIVER_FLOOR_04_ROOM_24: return riverdungeon.roomD24;
 			//25
             //River Dungeon 5th floor
             //Den of Desire
