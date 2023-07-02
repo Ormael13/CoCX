@@ -67,7 +67,7 @@ package classes.Scenes.Monsters
 		}
 		private function soulfieldsustaincost():Number {
 			var sfsc:Number = 10;
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) sfsc *= 2.4;
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) sfsc *= 2.8;
 			return sfsc;
 		}
 		
@@ -81,11 +81,11 @@ package classes.Scenes.Monsters
 			wisStat.core.value += WB;
 			addPerkValue(PerkLib.MonsterRegeneration, 1, 2);
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				addPerkValue(PerkLib.DieHardHP, 1, 24);
-				addStatusValue(StatusEffects.TranscendentSoulField, 1, 24);
-				addStatusValue(StatusEffects.TranscendentSoulField, 2, 24);
-				bonusWrath += 600;
-				bonusSoulforce += 1200;
+				addPerkValue(PerkLib.DieHardHP, 1, 28);
+				addStatusValue(StatusEffects.TranscendentSoulField, 1, 28);
+				addStatusValue(StatusEffects.TranscendentSoulField, 2, 28);
+				bonusWrath += 700;
+				bonusSoulforce += 1400;
 			}
 			else {
 				addPerkValue(PerkLib.DieHardHP, 1, 10);
@@ -136,22 +136,22 @@ package classes.Scenes.Monsters
 			super(false);
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.short = "low-rank angel of mist";
-				initStrTouSpeInte(14, 160, 80, 40);
+				initStrTouSpeInte(14, 170, 90, 40);
 				initWisLibSensCor(240, 4, 60, 0);
 				this.drop = new ChainedDrop()
 						.add(useables.SRESIDUE, 0.5)
 						.add(useables.PCSHARD, 1);
-				this.level = 36;
-				this.bonusHP = 1200;
-				this.bonusLust = 100;
-				this.bonusWrath = 300;
-				this.bonusSoulforce = 600;
-				this.additionalXP = 180;
-				this.weaponAttack = 12;
-				this.armorDef = 42;
-				this.armorMDef = 42;
-				this.createStatusEffect(StatusEffects.ATranscendentSoulField, 24, 24, 0, 0);//X times less dmg, +X lvl diff bonus
-				this.createPerk(PerkLib.DieHardHP, 24, 0, 0, 0);
+				this.level = 42;
+				this.bonusHP = 1500;
+				this.bonusLust = 106;
+				this.bonusWrath = 350;
+				this.bonusSoulforce = 700;
+				this.additionalXP = 210;
+				this.weaponAttack = 15;
+				this.armorDef = 45;
+				this.armorMDef = 45;
+				this.createStatusEffect(StatusEffects.ATranscendentSoulField, 28, 28, 0, 0);//X times less dmg, +X lvl diff bonus
+				this.createPerk(PerkLib.DieHardHP, 28, 0, 0, 0);
 			}
 			else {
 				this.short = "low-rank angel";

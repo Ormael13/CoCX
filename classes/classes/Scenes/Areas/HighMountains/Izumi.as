@@ -24,7 +24,7 @@ public class Izumi extends Monster
 				this.armorMDef = 14;
 				this.bonusHP = 1600;
 				this.bonusLust = 169;
-				this.level = 54;
+				this.level = 50;
 				this.additionalXP = 250;
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) {

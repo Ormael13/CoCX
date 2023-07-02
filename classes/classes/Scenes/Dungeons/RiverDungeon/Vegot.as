@@ -199,7 +199,7 @@ use namespace CoC;
 			this.bonusLust = 543;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.level = 43;
+			this.level = 40;
 			this.gems = 65 + rand(30);
 			this.drop = new WeightedDrop().
 					add(consumables.VOLTTOP,3).

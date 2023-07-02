@@ -139,7 +139,7 @@ public class WaterElemental extends Monster
 				this.weaponAttack = 6;
 				this.armorDef = 6;
 				this.armorMDef = 40;
-				this.level = 15;
+				this.level = 14;
 				this.bonusHP = 440;
 				this.additionalXP = 75;
 			}
@@ -153,7 +153,7 @@ public class WaterElemental extends Monster
 				this.weaponAttack = 7;
 				this.armorDef = 7;
 				this.armorMDef = 50;
-				this.level = 18;
+				this.level = 16;
 				this.bonusHP = 480;
 				this.additionalXP = 100;
 			}
@@ -167,7 +167,7 @@ public class WaterElemental extends Monster
 				this.weaponAttack = 8;
 				this.armorDef = 8;
 				this.armorMDef = 60;
-				this.level = 21;
+				this.level = 18;
 				this.bonusHP = 520;
 				this.additionalXP = 125;
 			}
@@ -181,7 +181,7 @@ public class WaterElemental extends Monster
 				this.weaponAttack = 12;
 				this.armorDef = 12;
 				this.armorMDef = 90;
-				this.level = 24;
+				this.level = 21;
 				this.bonusHP = 780;
 				this.additionalXP = 190;
 			}

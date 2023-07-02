@@ -5,6 +5,7 @@
 package classes.Scenes.Monsters 
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.IMutations.IMutationsLib;
 	import classes.Scenes.NPCs.LunaFollower;
 	import classes.Scenes.SceneLib;
@@ -94,13 +95,17 @@ public class WerewolfFemaleScene extends BaseContent
 			outputText("You keep painting [monster his] ass several times under the moonlight, once in a while switching to [monster his] mouth");
 			if(player.hasKnot()) outputText(" or [monster his] cunt");
 			outputText(", using and abusing all of [monster his] holes until dawn finally breaks, your cock still dripping cum on your defeated foe’s face. You took your sweet time to mark [monster him] over and over again as your playtoy.");
-			if(player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && (LunaFollower.WerewolfPackMember < 5*player.perkv1(IMutationsLib.AlphaHowlIM)) && rand(100)>=80){
-				outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
+			if(player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && (LunaFollower.WerewolfPackMember < 5*player.perkv1(IMutationsLib.AlphaHowlIM))){
+				if (rand(100)>=80 || flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM] > 3) {
+					outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
 						" Knowing theres still space for loyal bitches in your pack you order [monster him] to stand up and follow you back to your camp." +
 						" Unable to refuse the compulsion of their new alpha, your newest pack member complies with the order, joining your team permanently." +
 						" Luna will also takes care to establish a proper hierarchy so that the pup stays beneath her in rank." +
 						" How she does this is up to her but you know your toy is going to be used for a little longer.\n\n");
-				LunaFollower.WerewolfPackMember += 1;
+					if (flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM] > 3) flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM] = 0;
+					LunaFollower.WerewolfPackMember += 1;
+				}
+				else flags[kFLAGS.WEREWOLF_PACK_PITY_SYSTEM]++;
 			}
 			else{
 				outputText("Perhaps as a last display of [monster his] fast breaking pride the defeated werewolf runs away");

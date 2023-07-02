@@ -2775,7 +2775,7 @@ public static const PABLO_GOT_DICKED_VAGINALLY:int                              
 public static const PABLO_USED_YOUR_PUSSY:int                                   	= 2767;
 public static const PABLO_USED_YOUR_ASS:int                                   		= 2768;
 public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2769;
-public static const UNKNOWN_FLAG_NUMBER_02770:int                                   = 2770;
+public static const WEREWOLF_PACK_PITY_SYSTEM:int                                   = 2770;
 public static const UNKNOWN_FLAG_NUMBER_02771:int                                   = 2771;
 public static const UNKNOWN_FLAG_NUMBER_02772:int                                   = 2772;
 public static const UNKNOWN_FLAG_NUMBER_02773:int                                   = 2773;
