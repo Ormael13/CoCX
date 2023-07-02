@@ -184,7 +184,7 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_RIVER_FLOOR_03_ROOM_33: return riverdungeon.roomC33;
             case DUNGEON_RIVER_FLOOR_03_ROOM_34: return riverdungeon.roomC34;
             //River Dungeon 4th floor
-			//01
+			case DUNGEON_RIVER_FLOOR_04_ROOM_01: return riverdungeon.roomD01;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_02: return riverdungeon.roomD02;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_03: return riverdungeon.roomD03;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_04: return riverdungeon.roomD04;
@@ -195,21 +195,22 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_RIVER_FLOOR_04_ROOM_09: return riverdungeon.roomD09;
             case DUNGEON_RIVER_FLOOR_04_ROOM_10: return riverdungeon.roomD10;
             case DUNGEON_RIVER_FLOOR_04_ROOM_11: return riverdungeon.roomD11;
-			//12
+			case DUNGEON_RIVER_FLOOR_04_ROOM_12: return riverdungeon.roomD12;
             case DUNGEON_RIVER_FLOOR_04_ROOM_13: return riverdungeon.roomD13;
             case DUNGEON_RIVER_FLOOR_04_ROOM_14: return riverdungeon.roomD14;
             case DUNGEON_RIVER_FLOOR_04_ROOM_15: return riverdungeon.roomD15;
-			//16
+			case DUNGEON_RIVER_FLOOR_04_ROOM_16: return riverdungeon.roomD16;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_17: return riverdungeon.roomD17;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_18: return riverdungeon.roomD18;
             case DUNGEON_RIVER_FLOOR_04_ROOM_19: return riverdungeon.roomD19;
             case DUNGEON_RIVER_FLOOR_04_ROOM_20: return riverdungeon.roomD20;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_21: return riverdungeon.roomD21;
-			//22
+			case DUNGEON_RIVER_FLOOR_04_ROOM_22: return riverdungeon.roomD22;
             case DUNGEON_RIVER_FLOOR_04_ROOM_23: return riverdungeon.roomD23;
 			case DUNGEON_RIVER_FLOOR_04_ROOM_24: return riverdungeon.roomD24;
-			//25
+			case DUNGEON_RIVER_FLOOR_04_ROOM_25: return riverdungeon.roomD25;
             //River Dungeon 5th floor
+			//case DUNGEON_RIVER_FLOOR_05_ROOM_01: return riverdungeon.roomE01;
             //Den of Desire
             case DUNGEON_DEN_OF_DESIRE_ENTRANCE:            return denofdesire.roomEntrance;
             case DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:     return denofdesire.roomGreatHallArea;

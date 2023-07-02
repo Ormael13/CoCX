@@ -13,6 +13,7 @@ import classes.PerkLib;
 import classes.Scenes.Areas.BlightRidge.Omnibus;
 import classes.Scenes.Areas.Bog.Phouka;
 import classes.Scenes.Areas.GlacialRift.Yeti;
+import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Dungeons.RiverDungeon.*;
 import classes.Scenes.Monsters.AngelLR;
@@ -26,7 +27,12 @@ import classes.display.SpriteDb;
 
 public class RiverDungeon extends DungeonAbstractContent
 	{
-		public function RiverDungeon() {} //flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] 1 - pok 1 golema, 2 pokonanie obu golemów, 3-6 pokonanie 4 żywiołaków sub bossów, 7 pokonanie chimerycznego żywiołaka, 8 otwarcie drzwi do bossa 3 poziomu, 9 pokonanie bossa 3 poziomu
+		public function RiverDungeon() {}
+		//flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]
+		//1 - pok 1 golema, 2 pokonanie obu golemów
+		//3-6 pokonanie 4 żywiołaków sub bossów, 7 pokonanie chimerycznego żywiołaka
+		//8 otwarcie drzwi do bossa 3 poziomu, 9 pokonanie bossa 3 poziomu
+		//10 oczyszczenie przejścia do bossów 4 poziomu, 11 pokonanie bossów 4 poziomu
 		
 		public function enterDungeon():void {
 			inDungeon = true;
@@ -531,7 +537,7 @@ public class RiverDungeon extends DungeonAbstractContent
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				var choice:Number = rand(5);//36+, 40+, 44+, 49+, 54, 59+
+				var choice:Number = rand(6);
 				if (choice == 0) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous red mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  Then you notice it's covered with nearly blending with rest of it skin purple glowing veins.  The beast surges forward to attack!");
@@ -557,12 +563,12 @@ public class RiverDungeon extends DungeonAbstractContent
 					//spriteSelect(SpriteDb.s_electra);
 					outputText("As you’re wandering through the passage you suddenly hear sound of many wings flapping.  Turning around you notice an angel accompanied by two angeloids flying toward you. They're closing in with supernatural speed, and before you can take more than a few steps, they're surrounding you. \"<i>Don't be afraid of the Mist!!!</i>\"  No way around it, you ready your [weapon] for the fight.");
 					startCombat(new AngelLR(), true);
-				}/*
+				}
 				if (choice == 5) {
 					//spriteSelect(SpriteDb.s_electra);
-					outputText("A soft shuffling splat catches your attention and you turn around, spotting an amorphous red mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
-					startCombat(new RedOoze(), true);
-				}*/
+					outputText("A loud sound attract your attention and you turn around, spotting large oni covered with purple glowing lines walking slowly towards you.  Sounds you heard moment before resounds again and it's caused by her simply walking ahead.  No way around it, you ready your [weapon] for the fight.");
+					startCombat(new Izumi(), true);
+				}
 				//doNext(playerMenu);
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
@@ -590,6 +596,18 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. Your flesh sizzles in its grasp, and you groan in pain. It drops your body there, turning back into the dungeon.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
 			cleanupAfterCombat();
+		}
+		public function defeatedByMistOni():void {
+			clearOutput();
+			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops your body there, turning back into the dungeon.\n\n");
+			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
+			cleanupAfterCombat();
+		}
+		public function defeatedBy4thFloorDualBoss():void {
+			clearOutput();
+			outputText("Placeholder Bad End.\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
 		}
 
 		//Rooms
@@ -1444,7 +1462,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("You stand in a massive hall decorated with lavishly ornate trinkets. The baubles glimmer in the light, many of which resemble ice, snowflakes or bolts of lightning.\n\n");
 			outputText("The walls to the manor have paintings depicting a battle between a man and his foes, the monsters range in size from humans to giants. It's difficult to distinguish what exactly the paintings were, they have long been worn from time and gently torn from the walls.");
 			dungeons.setDungeonButtonsRD(null, roomC33, null, roomC30);
-		}/*
+		}
 		public function roomD01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_01;
 			clearOutput();
@@ -1452,8 +1470,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}*/
+			dungeons.setDungeonButtonsRD(null, roomD05, null, null);
+		}
 		public function roomD02():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_02;
 			clearOutput();
@@ -1489,7 +1507,11 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, roomD08, null, null);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 9) dungeons.setDungeonButtonsRD(roomD01, roomD08, null, null);
+			else {
+				dungeons.setDungeonButtonsRD(null, roomD08, null, null);
+				addButtonDisabled(6, "North", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution?");
+			}
 		}
 		public function roomD06():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_06;
@@ -1546,7 +1568,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomD06, roomD14, null, roomD10);
-		}/*
+		}
 		public function roomD12():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_12;
 			clearOutput();
@@ -1554,8 +1576,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}*/
+			dungeons.setDungeonButtonsRD(null, roomD16, null, null);
+		}
 		public function roomD13():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_13;
 			clearOutput();
@@ -1581,8 +1603,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, roomD21, null, roomD14);
-		}/*
+			dungeons.setDungeonButtonsRD(null, roomD21, roomD16, roomD14);
+		}
 		public function roomD16():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_16;
 			clearOutput();
@@ -1590,8 +1612,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}*/
+			dungeons.setDungeonButtonsRD(roomD12, null, null, roomD15);
+		}
 		public function roomD17():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_17;
 			clearOutput();
@@ -1608,7 +1630,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, roomD19, roomD17);
+			dungeons.setDungeonButtonsRD(null, roomD22, roomD19, roomD17);
 		}
 		public function roomD19():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_19;
@@ -1635,8 +1657,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(roomD15, null, null, null);
-		}/*
+			dungeons.setDungeonButtonsRD(roomD15, roomD25, null, null);
+		}
 		public function roomD22():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_22;
 			clearOutput();
@@ -1644,8 +1666,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}*/
+			dungeons.setDungeonButtonsRD(roomD18, null, null, null);
+		}
 		public function roomD23():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_23;
 			clearOutput();
@@ -1662,8 +1684,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, roomD23);
-		}/*
+			dungeons.setDungeonButtonsRD(null, null, roomD25, roomD23);
+		}
 		public function roomD25():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_25;
 			clearOutput();
@@ -1671,8 +1693,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
-			dungeons.setDungeonButtonsRD(null, null, null, null);
-		}
+			dungeons.setDungeonButtonsRD(roomD21, null, null, roomD24);
+		}/*
 		public function roomE01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_05_ROOM_01;
 			clearOutput();
@@ -1793,12 +1815,21 @@ public class RiverDungeon extends DungeonAbstractContent
 		}
 		private function teleportCircleFloor4():void {
 			menu();
+			addButton(0, "Floor 1", teleportToFloor1);
+			addButton(1, "Floor 2", teleportToFloor2);
+			addButton(2, "Floor 3", teleportToFloor3);
+			addButtonDisabled(3, "Floor 4", "You're currently at Floor 4.");
+			//5
+			addButton(14, "Back", roomC01);
+		}
+		private function teleportCircleFloor5():void {
+			menu();
 			addButton(0, "Floor 1", teleportToFloor1);//1-10
 			addButton(1, "Floor 2", teleportToFloor2);//11-20
 			addButton(2, "Floor 3", teleportToFloor3);//21-35
-			addButtonDisabled(3, "Floor 4", "You're currently at Floor 4.");//36-50
-			//5
-			addButton(14, "Back", roomC01);
+			addButton(3, "Floor 4", teleportToFloor4);//36-50
+			addButtonDisabled(4, "Floor 5", "You're currently at Floor 5.");
+			addButton(14, "Back", roomC01);//36+, 40+, 44+, 49+, 54+, 59+
 		}
 		private function teleportToFloor1():void {
 			clearOutput();
@@ -1825,4 +1856,4 @@ public class RiverDungeon extends DungeonAbstractContent
 			playerMenu();
 		}
 	}
-}
+}
