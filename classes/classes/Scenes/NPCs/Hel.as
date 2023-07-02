@@ -92,32 +92,73 @@ public class Hel extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.PCBeatsUpSalamanderSparring();
-			else SceneLib.helScene.beatUpHel(); //mocking goes here too
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) cleanupAfterCombat();
+			else {
+				if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.PCBeatsUpSalamanderSparring();
+				else SceneLib.helScene.beatUpHel(); //mocking goes here too
+			}
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (pcCameWorms){
-				outputText("\n\nHelia waits it out in stoic silence...");
-				doNext(SceneLib.combat.endLustLoss);
-			} else {
-				if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.loseToSparringHeliaLikeAButtRapedChump();
-				else SceneLib.helScene.loseToSalamander(); //mocking goes here too
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByMistSalamander();
+			else {
+				if (pcCameWorms){
+					outputText("\n\nHelia waits it out in stoic silence...");
+					doNext(SceneLib.combat.endLustLoss);
+				} else {
+					if(hasStatusEffect(StatusEffects.Sparring)) SceneLib.helFollower.loseToSparringHeliaLikeAButtRapedChump();
+					else SceneLib.helScene.loseToSalamander(); //mocking goes here too
+				}
 			}
 		}
 
 		public function Hel()
 		{
-			if (game.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1) {
-				this.a = "";
-				this.short = "Hel";
-			} else {
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.a = "the ";
-				this.short = "salamander";
+				this.short = "mist salamander";
+				this.long = "You are fighting a (literally) smoking hot mist salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, purple veins covering all unprotected by scales parts fo the body, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her violet hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright purple eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
+				this.hairColor = "violet";
+				initStrTouSpeInte(240, 220, 205, 120);
+				initWisLibSensCor(120, 140, 75, 30);
+				this.weaponAttack = 26;
+				this.armorDef = 88;
+				this.armorMDef = 12;
+				this.bonusHP = 1200;
+				this.bonusLust = 274;
+				this.level = 59;
+				this.gems = 75 + rand(12);
+				this.drop = new ChainedDrop().
+						add(weapons.SCIMITR, 0.3).
+						add(consumables.SALAMFW, 0.7).
+						add(useables.PCSHARD, 1);
+			}
+			else {
+				if (game.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1) {
+					this.a = "";
+					this.short = "Hel";
+				} else {
+					this.a = "the ";
+					this.short = "salamander";
+				}
+				this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
+				this.hairColor = "red";
+				initStrTouSpeInte(90, 80, 75, 60);
+				initWisLibSensCor(60, 70, 25, 30);
+				this.weaponAttack = 26;
+				this.armorDef = 22;
+				this.armorMDef = 3;
+				this.bonusHP = 300;
+				this.bonusLust = 116;
+				this.level = 21;
+				this.gems = 15 + rand(8);
+				this.drop = new ChainedDrop().
+						add(armors.CHBIKNI,1/20).
+						add(weapons.SCIMITR,1/20).
+						add(consumables.SALAMFW,0.7);
 			}
 			this.imageName = "hel";
-			this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,85,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));
@@ -128,29 +169,15 @@ public class Hel extends Monster
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.bodyColor = "dusky";
-			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(90, 80, 75, 60);
-			initWisLibSensCor(60, 70, 25, 30);
 			this.weaponName = "sword";
 			this.weaponVerb="slashing blade";
-			this.weaponAttack = 26;
 			this.armorName = "scales";
-			this.armorDef = 22;
-			this.armorMDef = 3;
 			this.armorPerk = "";
 			this.armorValue = 50;
-			this.bonusHP = 300;
-			this.bonusLust = 116;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.level = 21;
-			this.gems = 15 + rand(8);
 			this.noFetishDrop = true;
-			this.drop = new ChainedDrop().
-					add(armors.CHBIKNI,1/20).
-					add(weapons.SCIMITR,1/20).
-					add(consumables.SALAMFW,0.7);
 			this.tailType = Tail.SALAMANDER;
 			this.tailRecharge = 0;
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);

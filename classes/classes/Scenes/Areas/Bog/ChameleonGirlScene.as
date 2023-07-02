@@ -193,8 +193,9 @@ package classes.Scenes.Areas.Bog
 				return;
 			}
 			//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
+			var cgx:Number = monster.vaginalCapacity();
 			menu();
-            addButtonIfTrue(0, "Use Dick", manFucksChameleonWithBiggishWang, "Req. dick area < " + monster.vaginalCapacity(),
+            addButtonIfTrue(0, "Use Dick", manFucksChameleonWithBiggishWang, "Req. dick area < " + cgx,
                 player.cockThatFits(monster.vaginalCapacity()) >= 0);
             addButtonIfTrue(1, "Use Pussy", femaleHasWinSexWithChamCham, "", player.hasVagina());
             addButtonIfTrue(2, "Herm Way", fuckDatChameleonAsACoolGuyGirlHerm, "", player.gender == 3);
