@@ -6234,20 +6234,20 @@ use namespace CoC;
 		}
 
 		public function SexXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					teaseXP++;
-					XP--;
-				}
-				else {
-					teaseXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (teaseLevel < maxTeaseLevel() && teaseXP >= teaseExpToLevelUp()) {
+			if (XP <= 0) return;
+			teaseXP += XP;
+			//Level dat shit up!
+			if (teaseLevel < maxTeaseLevel()) {
+				if (teaseXP >= teaseExpToLevelUp()) {
 					outputText("\n<b>Tease skill leveled up to " + (teaseLevel + 1) + "!</b>");
 					teaseLevel++;
 					teaseXP = 0;
+					game.mainView.notificationView.popupIconText("TeaseXP","Tease skill level up!");
+				} else {
+					game.mainView.notificationView.popupProgressBar(
+							"teaseXP","TeaseXP","Tease XP",
+							teaseXP/teaseExpToLevelUp(),
+							"#ff00ff");
 				}
 			}
 		}

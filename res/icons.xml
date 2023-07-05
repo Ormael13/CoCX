@@ -407,5 +407,11 @@
         <alias alias="A_Ranged" icon="I_GenericWeapon_Bow"/>
         <alias alias="A_Tease" icon="I_Heart_Red"/>
         <alias alias="A_Items" icon="I_Potion_Empty"/>
+
+        <!--=============
+        = NOTIFICATIONS =
+        ==============-->
+
+        <alias alias="TeaseXP" icon="I_Heart_Red"/>
     </aliases>
 </icons>

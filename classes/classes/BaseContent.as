@@ -20,6 +20,7 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 import coc.view.MainView;
+import coc.view.NotificationView;
 import coc.view.charview.DragButton;
 import coc.xxc.StoryContext;
 
@@ -718,6 +719,10 @@ import coc.xxc.StoryContext;
 		protected function get mainViewManager():MainViewManager
 		{
 			return CoC.instance.mainViewManager;
+		}
+		
+		protected static function get notificationView():NotificationView {
+			return CoC.instance.mainView.notificationView;
 		}
 
 		protected static function get model():GameModel
