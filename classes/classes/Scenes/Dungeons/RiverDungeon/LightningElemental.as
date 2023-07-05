@@ -119,7 +119,7 @@ public class LightningElemental extends Monster
 				this.weaponAttack = 14;
 				this.armorDef = 14;
 				this.armorMDef = 75;
-				this.level = 29;
+				this.level = 28;
 				this.bonusHP = 850;
 				this.additionalXP = 215;
 			}
@@ -133,7 +133,7 @@ public class LightningElemental extends Monster
 				this.weaponAttack = 16;
 				this.armorDef = 16;
 				this.armorMDef = 85;
-				this.level = 32;
+				this.level = 30;
 				this.bonusHP = 950;
 				this.additionalXP = 245;
 			}
@@ -147,7 +147,7 @@ public class LightningElemental extends Monster
 				this.weaponAttack = 18;
 				this.armorDef = 18;
 				this.armorMDef = 95;
-				this.level = 35;
+				this.level = 32;
 				this.bonusHP = 1050;
 				this.additionalXP = 275;
 			}

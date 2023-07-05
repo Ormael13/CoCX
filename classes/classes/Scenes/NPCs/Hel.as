@@ -127,7 +127,7 @@ public class Hel extends Monster
 				this.armorMDef = 12;
 				this.bonusHP = 1200;
 				this.bonusLust = 274;
-				this.level = 59;
+				this.level = 54;
 				this.gems = 75 + rand(12);
 				this.drop = new ChainedDrop().
 						add(weapons.SCIMITR, 0.3).

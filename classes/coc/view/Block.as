@@ -4,21 +4,14 @@
 package coc.view {
 import classes.internals.Utils;
 
-import fl.controls.Button;
-
 import fl.controls.ComboBox;
-import fl.controls.LabelButton;
-
 import fl.controls.TextInput;
 import fl.data.DataProvider;
 
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.text.AntiAliasType;
 import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
 import flash.utils.Dictionary;
 import flash.utils.setTimeout;
 
@@ -191,6 +184,7 @@ public class Block extends Sprite {
 	private var _layoutConfig:Object;
 	private var explicitWidth:Number    = 0;
 	private var explicitHeight:Number   = 0;
+	public var dataset:Object = {};
 
 	public function Block(options:Object = null) {
 		super();
@@ -275,10 +269,24 @@ public class Block extends Sprite {
 		layElement(e, hint);
 		return e;
 	}
+	
+	public function hasElement(e:DisplayObject):Boolean {
+		return getElementIndex(e) >= 0;
+	}
 
 	public function addElementAt(e:DisplayObject, index:int, hint:Object = null):DisplayObject {
 		_container.addChildAt(e, index);
 		layElement(e, hint);
+		return e;
+	}
+	public function addElementAbove(e:DisplayObject, reference:DisplayObject, hint:Object = null):DisplayObject {
+		var i:int = getElementIndex(reference) + 1;
+		addElementAt(e, i, hint);
+		return e;
+	}
+	public function addElementBelow(e:DisplayObject, reference:DisplayObject, hint:Object = null):DisplayObject {
+		var i:int = getElementIndex(reference);
+		addElementAt(e, i, hint);
 		return e;
 	}
 
@@ -287,9 +295,13 @@ public class Block extends Sprite {
 		invalidateLayout();
 		return this;
 	}
-
+	
 	public function getElementIndex(e:DisplayObject):int {
-		return _container.getChildIndex(e);
+		var i:int = -1;
+		try {
+			i = _container.getChildIndex(e);
+		} catch (e:ArgumentError) {}
+		return i;
 	}
 
 	public function getElementByName(name:String):DisplayObject {
@@ -303,8 +315,15 @@ public class Block extends Sprite {
 	}
 
 	public function removeElement(e:DisplayObject):void {
-		_container.removeChild(e);
+		try {
+			_container.removeChild(e);
+		} catch (error:ArgumentError) {}
 		delete _layoutHints[e];
+		invalidateLayout();
+	}
+	public function removeAllElements():void {
+		_container.removeChildren();
+		_layoutHints = new Dictionary();
 		invalidateLayout();
 	}
 
@@ -377,20 +396,7 @@ public class Block extends Sprite {
 		return e;
 	}
 	public function addTextField(options:Object, hint:Object = null):TextField {
-		if (options is String) return addTextField({text:options});
-		var e:TextField = new TextField();
-		e.antiAliasType = AntiAliasType.ADVANCED;
-		if ('defaultTextFormat' in options) {
-			e.defaultTextFormat = UIUtils.convertTextFormat(options['defaultTextFormat']);
-		}
-		UIUtils.setProperties(e, options, {
-			defaultTextFormat: UIUtils.convertTextFormat,
-			background: UIUtils.convertColor
-		});
-		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
-		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
-			e.autoSize = TextFieldAutoSize.LEFT;
-		}
+		var e:TextField = UIUtils.newTextField(options);
 		addElement(e, hint);
 		return e;
 	}

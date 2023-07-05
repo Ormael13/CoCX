@@ -5924,14 +5924,16 @@ use namespace CoC;
 		}
 
 		public function gainCombatXP(index:int, exp:Number):void{
-			var level:Number = combatMastery[index].level;
-			var levelUp:Boolean = false;
-			var experience:Number = combatMastery[index].experience;
-			var melee:Boolean = combatMastery[index].melee;
-			var desc:String = combatMastery[index].desc;
+			var masteryObj:Object = combatMastery[index];
+			var level:Number = masteryObj.level;
+			var levelUp:Boolean        = false;
+			var experience:Number      = masteryObj.experience;
+			var melee:Boolean          = masteryObj.melee;
+			var desc:String            = masteryObj.desc;
 
 			var xpToLevel:Number = CombatExpToLevelUp(level, melee);
 			var xpLoop:Number = exp;
+			var oldProgress:Number = experience/xpToLevel;
 			// for tracking bonus attack masteries
 			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
 			var maxAttacksOld:int = SceneLib.combat.maxCurrentAttacks();
@@ -5944,6 +5946,9 @@ use namespace CoC;
 				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
 					levelUp = true;
 					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
+					game.mainView.notificationView.popupIconText(
+							"CombatMastery"+masteryObj.combat,
+							desc+" leveled up to "+level+"!");
 					// Any Leftover EXP?
 					xpLoop = experience - xpToLevel;
 					experience = 0;
@@ -5951,8 +5956,18 @@ use namespace CoC;
 					xpToLevel = CombatExpToLevelUp(level, melee);
 				}
 			}
-            combatMastery[index].level = level;
-            combatMastery[index].experience = experience;
+            masteryObj.level = level;
+            masteryObj.experience = experience;
+			var newProgress:Number = experience/xpToLevel;
+			if (!levelUp && level < maxCombatLevel(melee)) {
+				game.mainView.notificationView.popupProgressBar2(
+						"CombatMastery"+masteryObj.combat,
+						"CombatMastery"+masteryObj.combat,
+						trimSides(desc).replace(/<\/b>/g,""),
+						oldProgress,
+						newProgress
+				)
+			}
 			// Can we get any new attacks?
 			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
 				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
@@ -6234,20 +6249,22 @@ use namespace CoC;
 		}
 
 		public function SexXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					teaseXP++;
-					XP--;
-				}
-				else {
-					teaseXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (teaseLevel < maxTeaseLevel() && teaseXP >= teaseExpToLevelUp()) {
+			if (XP <= 0) return;
+			var oldProgress:Number = teaseXP/teaseExpToLevelUp();
+			teaseXP += XP;
+			//Level dat shit up!
+			if (teaseLevel < maxTeaseLevel()) {
+				if (teaseXP >= teaseExpToLevelUp()) {
 					outputText("\n<b>Tease skill leveled up to " + (teaseLevel + 1) + "!</b>");
 					teaseLevel++;
 					teaseXP = 0;
+					game.mainView.notificationView.popupIconText("TeaseXP","Tease skill level up!");
+				} else {
+					game.mainView.notificationView.popupProgressBar2(
+							"teaseXP","TeaseXP","Tease XP",
+							oldProgress,
+							teaseXP/teaseExpToLevelUp(),
+							"#ff00ff");
 				}
 			}
 		}

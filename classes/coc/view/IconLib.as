@@ -61,7 +61,8 @@ public class IconLib {
 	 * @return null if no icon with such id
 	 */
 	public function getBitmap(id:String):Bitmap {
-		while (id in aliases && id != aliases[id]) id = aliases[id];
+		var i:int = 100; // circular dependency protection
+		while (i-->0 && id in aliases && id != aliases[id]) id = aliases[id];
 		return icons[id] || null;
 	}
 	public static function getBitmap(id:String):Bitmap {

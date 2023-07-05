@@ -667,6 +667,7 @@ public class EngineCore {
         if (!CoC.instance.mainViewManager.buttonsTweened) CoC.instance.mainView.statsView.hide();
         CoC.instance.mainViewManager.tweenOutStats();
         CoC.instance.mainView.monsterStatsView.hide();
+        CoC.instance.mainView.notificationView.clearNotifications();
     }
 
     /**

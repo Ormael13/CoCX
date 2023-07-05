@@ -1,9 +1,10 @@
 package coc.view.charview {
 
-import coc.view.*;
-
+import classes.EngineCore;
 import classes.ItemSlotClass;
 import classes.ItemType;
+
+import coc.view.*;
 
 import flash.display.DisplayObjectContainer;
 import flash.display.Stage;
@@ -11,6 +12,8 @@ import flash.events.MouseEvent;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.Timer;
+
+import mx.effects.easing.Elastic;
 
 //Port from /hgg/ by Oxdeception
 public class DragButton {
@@ -52,8 +55,8 @@ public class DragButton {
     private var _selected:Boolean = false;
     private var _dragging:Boolean = false;
     private var _tweening:Boolean = false;
-    private var _xTween:TweenListener;
-    private var _yTween:TweenListener;
+    private var _xTween:SimpleTween;
+    private var _yTween:SimpleTween;
 
     private var _itemSlot:ItemSlotClass;
     private var _acceptable:Function;
@@ -202,8 +205,20 @@ public class DragButton {
         if (swap()) {
             resetPosition();
         } else {
-            _xTween = new TweenListener(_button, "x", _origin.x, resetPosition);
-            _yTween = new TweenListener(_button, 'y', _origin.y);
+            var ms:int = 300;
+            var easing:Function = Elastic.easeOut;
+            if (EngineCore.silly()) {
+                ms = 750;
+                easing = Elastic.easeOut;
+            }
+            _xTween = new SimpleTween(_button, "x", _origin.x, ms,{
+                easing: easing,
+                fun: resetPosition
+            });
+            _yTween = new SimpleTween(_button, 'y', _origin.y, ms,{
+                ms    : ms,
+                easing: easing
+            });
         }
         _container.addChild(_toolTip); // reset tool tip to top of display stack
 
@@ -220,60 +235,3 @@ public class DragButton {
 }
 }
 
-import classes.EngineCore;
-
-import flash.display.Sprite;
-
-import mx.effects.Tween;
-import mx.effects.easing.Elastic;
-
-import mx.effects.easing.Exponential;
-
-class TweenListener {
-    public function TweenListener(spr:Sprite, prop:String, endVal:*, fun:Function = null) {
-        this._spr  = spr;
-        this._prop = prop;
-        this._fun  = fun;
-        _active    = true;
-
-        var ms:int      = 300;
-        var fn:Function = Exponential.easeOut;
-
-        if (EngineCore.silly()) {
-            ms = 750;
-            fn = Elastic.easeOut;
-        }
-
-        _tween = new Tween(this, _spr[_prop], endVal, ms);
-        _tween.easingFunction = fn;
-    }
-
-    private var _spr:Sprite;
-    private var _prop:String;
-    private var _fun:Function;
-    private var _tween:Tween;
-    private var _active:Boolean;
-
-    // This function is called by the tween every tick
-    public function onTweenUpdate(val:*):void {
-        this._spr[_prop] = val;
-    }
-
-    // This function is called by the tween after it ends
-    public function onTweenEnd(val:*):void {
-        onTweenUpdate(val);
-        _active    = false;
-        this._prop = null;
-
-        if (_fun != null) {
-            _fun();
-        }
-    }
-
-    public function dispose():void {
-        if (_active && _tween) {
-            _tween.stop();
-        }
-        _tween = null;
-    }
-}

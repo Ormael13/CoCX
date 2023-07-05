@@ -149,7 +149,7 @@ public class FireElemental extends Monster
 				this.weaponAttack = 6;
 				this.armorDef = 6;
 				this.armorMDef = 35;
-				this.level = 15;
+				this.level = 14;
 				this.bonusHP = 450;
 				this.additionalXP = 75;
 			}
@@ -163,7 +163,7 @@ public class FireElemental extends Monster
 				this.weaponAttack = 7;
 				this.armorDef = 7;
 				this.armorMDef = 40;
-				this.level = 18;
+				this.level = 16;
 				this.bonusHP = 500;
 				this.additionalXP = 100;
 			}
@@ -177,7 +177,7 @@ public class FireElemental extends Monster
 				this.weaponAttack = 8;
 				this.armorDef = 8;
 				this.armorMDef = 45;
-				this.level = 21;
+				this.level = 18;
 				this.bonusHP = 550;
 				this.additionalXP = 125;
 			}
@@ -191,7 +191,7 @@ public class FireElemental extends Monster
 				this.weaponAttack = 10;
 				this.armorDef = 10;
 				this.armorMDef = 60;
-				this.level = 24;
+				this.level = 21;
 				this.bonusHP = 875;
 				this.additionalXP = 190;
 			}

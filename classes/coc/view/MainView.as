@@ -216,6 +216,7 @@ public class MainView extends Block {
 	internal static const CHARVIEW_X:Number      = 0;
 	internal static const CHARVIEW_H:Number      = 202*2;
 	internal static const CHARVIEW_BOTTOM:Number = SCREEN_H;
+	internal static const CHARVIEW_Y:Number      = CHARVIEW_BOTTOM - CHARVIEW_H;
 	// Text zone
 	internal static const TEXTZONE_X:Number      = STATBAR_RIGHT;
 	internal static const TEXTZONE_Y:Number      = TOPROW_BOTTOM + GAP;
@@ -262,6 +263,7 @@ public class MainView extends Block {
 	public var toolTipView:ToolTipView;
 	public var cornerStatsView:CornerStatsView;
 	public var statsView:StatsView;
+	public var notificationView:NotificationView;
 	public var monsterStatsView:MonsterStatsView;
 	public var sideBarDecoration:Sprite;
 
@@ -428,7 +430,13 @@ public class MainView extends Block {
 		this.statsView = new StatsView(this, this.cornerStatsView);
 		this.statsView.hide();
 		this.addElement(this.statsView);
-
+		this.notificationView = new NotificationView({
+			x: CHARVIEW_X,
+			y: CHARVIEW_Y,
+			width: COLUMN_1_W
+		});
+		this.addElement(this.notificationView);
+		
 		this.monsterStatsView = new MonsterStatsView(this);
 		this.monsterStatsView.hide();
 		this.addElement(this.monsterStatsView);

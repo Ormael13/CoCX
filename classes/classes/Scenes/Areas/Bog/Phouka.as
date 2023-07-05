@@ -329,8 +329,8 @@ public class Phouka extends Monster
 				this.armorDef = 180;
 				this.armorMDef = 180;
 				this.bonusHP = 500;
-				this.bonusLust = 199;
-				this.level = 44;
+				this.bonusLust = 201;
+				this.level = 46;
 			}
 			else {
 				this.short = phoukaName;

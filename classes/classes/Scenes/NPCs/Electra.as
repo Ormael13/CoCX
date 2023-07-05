@@ -217,7 +217,7 @@ use namespace CoC;
 				this.armorMDef = 40;
 				this.bonusHP = 200;
 				this.bonusLust = 520;
-				this.level = 40;
+				this.level = 34;
 			}
 			else {
 				if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) {
