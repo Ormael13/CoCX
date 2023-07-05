@@ -67,8 +67,8 @@ public class Changelog extends BaseContent
 			outputText("-Centipedes and Oomukade races are just race of Oomukade with Centipede been it lowest tier. Tracheal system mutation would be accessable by them too.\n");
 			outputText("-100+ new item icons, Consumable items are tagged with 'tf', Setting to toggle icons (aimozg)\n");
 			outputText("-Enemies/bosses that appear in River Dungeon lvl adjustments: Hellhound 10 > 6, Aether Golem 11 > 9, Air / Earth / Fire / Water Elementals 15/18/21 > 14/16/18, Sylph / Golem / Ifrit / Undine 24 > 21, Quatro Elemental (starting lvl) 21 > 18, Darkness / Ice / Lightning Elementals 29/32/35 > 28/30/32, Yeti 37 > 30, Raiju 40 > 34, Unique Darkness Elemental 38 > 37, Vegot 43 > 40\n");
-			outputText("-Added pity system for Alpha Howl I. Mutation effect of growing werewolf pack. Now if PC fail to recruit werewolf after 4 tries it will be successfull at 5th try to keep with orginal 20% success rate.\n");//Red Ooze 6 > 4, Low rank Angel of Mist 36 > 42, Red Mist Ooze 40 > 44, Mist Phouka 44 > 46, Mist Omnibus 49 > 48, Mist Oni 54 > 50, Mist Salamander 59 > 52
-			outputText("-\n");
+			outputText("-Added pity system for Alpha Howl I. Mutation effect of growing werewolf pack. Now if PC fail to recruit werewolf after 4 tries it will be successfull at 5th try to keep with orginal 20% success rate.\n");
+			outputText("-Tease and masteries XP gains show notifications below the stat bar. Item stack buttons show quantities over the icon. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
