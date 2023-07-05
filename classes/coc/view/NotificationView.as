@@ -19,13 +19,16 @@ public class NotificationView extends Block {
 		bold: true
 	};
 	public static const DEFAULT_BAR_COLOR:String = "#eeee00";
-	public static const ICON_SIZE:int = 32;
+	public static const DEFAULT_BAR2_COLOR:String = "#eeeeee";
 	public static const BAR_BG:String = "#222222";
 	public static const BAR_BORDER:String = "#222222";
-	public static const BAR_WIDTH:int = 64;
-	public static const BAR_HEIGHT:int = 8;
-	public static const BAR_Y:int = (ICON_SIZE-BAR_HEIGHT)/2;
-	public static const BAR_BORDER_WIDTH:int = 2;
+	private static const ICON_SIZE:int = 32;
+	private static const BAR_WIDTH:int = 64;
+	private static const BAR_HEIGHT:int = 8;
+	private static const BAR_Y:int = 8;
+	private static const BAR_BORDER_WIDTH:int = 2;
+	private static const BAR_FILL_WIDTH:int = BAR_WIDTH - 2*BAR_BORDER_WIDTH;
+	private static const BAR_FILL_HEIGHT:int = BAR_HEIGHT - 2*BAR_BORDER_WIDTH;
 	
 	public function NotificationView(options:Object = null) {
 		super(options);
@@ -36,7 +39,11 @@ public class NotificationView extends Block {
 			gap         : 1
 		};
 	}
-	
+	/**
+	 * Fade-in, wait, then fade-out and delete the element.
+	 * @param notification
+	 * @param ttl
+	 */
 	private function animateNotification(notification:DisplayObject, ttl:int = DEFAULT_TTL):void {
 		var alpha:Number   = notification.alpha;
 		notification.alpha = 0.0;
@@ -53,11 +60,21 @@ public class NotificationView extends Block {
 					}, ttl);
 				})
 	}
-	
+	/**
+	 * Display custom Sprite notification.
+	 * @param sprite
+	 * @param ttl Time before popup disappears (ms), default 5000
+	 */
 	public function popupDisplayObject(sprite:DisplayObject, ttl:int = DEFAULT_TTL):void {
 		addElement(sprite);
 		animateNotification(sprite, ttl);
 	}
+	/**
+	 * Display text notification
+	 * @param htmlText
+	 * @param textFormat TextFormat options, default Arial 16 bold
+	 * @param ttl Time before popup disappears (ms), default 5000
+	 */
 	public function popupText(htmlText:String, textFormat:Object = null, ttl:int = DEFAULT_TTL):void {
 		textFormat = Utils.extend({}, DEFAULT_TEXT_FORMAT, textFormat)
 		var tf:TextField = addTextField({
@@ -70,6 +87,13 @@ public class NotificationView extends Block {
 		});
 		animateNotification(tf, ttl);
 	}
+	/**
+	 * Display notification with an icon
+	 * @param iconId
+	 * @param htmlText
+	 * @param textFormat TextFormat options, default Arial 16 bold
+	 * @param ttl Time before popup disappears (ms), default 5000
+	 */
 	public function popupIconText(iconId:String, htmlText:String, textFormat:Object = null, ttl:int = DEFAULT_TTL):void {
 		var bitmap:Bitmap = IconLib.getBitmap(iconId);
 		if (!bitmap) {
@@ -96,7 +120,50 @@ public class NotificationView extends Block {
 		
 		popupDisplayObject(block, ttl);
 	}
-	public function popupProgressBar(id:String, iconId:String, label:String, progress:Number, barColor:String=DEFAULT_BAR_COLOR, ttl:int = DEFAULT_TTL):void {
+	/**
+	 * Display a notification with an icon (optional) and a progress bar.
+	 *
+	 * @param id Notification id. If exi
+	 * @param iconId Icon id, can be null
+	 * @param htmlLabel Text to display (HTML)
+	 * @param progress Progress, 0..1
+	 * @param barColor Progressbar color (default yellow)
+	 * @param ttl Time before popup disappears (ms), default 5000
+	 */
+	public function popupProgressBar(id:String, iconId:String, htmlLabel:String, progress:Number, barColor:String=DEFAULT_BAR_COLOR, ttl:int = DEFAULT_TTL):void {
+		popupProgressBar2(id,iconId,htmlLabel,progress,progress,barColor,barColor,ttl);
+	}
+	/**
+	 * Display a notification with an icon (optional) and a progress bar with highlighted increment.
+	 *
+	 * @param id Notification id. If exi
+	 * @param iconId Icon id, can be null
+	 * @param htmlLabel Text to display (HTML)
+	 * @param progressStart Starting progress, 0..1
+	 * @param progressEnd Ending progress, 0..1
+	 * @param barColorStart Starting bar color (default yellow)
+	 * @param barColorEnd Increment color (default white)
+	 * @param ttl Time before popup disappears (ms), default 5000
+	 *
+	 * @example Show Experience increasing from 0.5 to 0.75, with white main bar (0-0.5) and blue increment (0.5-0.75)
+	 * popupProgressBar2("xp", "XP", "Experience",
+	 *                   0.5, 0.75, "white", "blue")
+	 */
+	public function popupProgressBar2(
+			id:String,
+			iconId:String,
+			htmlLabel:String,
+			progressStart:Number,
+			progressEnd:Number,
+			barColorStart:String=DEFAULT_BAR_COLOR,
+			barColorEnd:String=DEFAULT_BAR2_COLOR,
+			ttl:int = DEFAULT_TTL
+	):void {
+		// Convert to pixels
+		var pxStart:Number = Math.round(Utils.boundFloat(0, progressStart, 1)*BAR_FILL_WIDTH);
+		var pxEnd:Number = Math.round(Utils.boundFloat(0, progressEnd, 1)*BAR_FILL_WIDTH);
+		var pxInc:Number = pxEnd - pxStart;
+//		trace("popupProgressBar2",progressStart,progressEnd,pxStart,pxEnd,pxInc);
 		
 		var bitmap:Bitmap = IconLib.getBitmap(iconId);
 		var block:Block = new Block({
@@ -116,13 +183,27 @@ public class NotificationView extends Block {
 			height: BAR_HEIGHT,
 			fillColor: BAR_BG
 		}));
+		if (pxInc > 0) {
+			var incBar:BitmapDataSprite = new BitmapDataSprite({
+				// End bar
+				x: BAR_BORDER_WIDTH + pxStart,
+				y: BAR_Y + BAR_BORDER_WIDTH,
+				height: BAR_FILL_HEIGHT,
+				width: pxInc,
+				fillColor: barColorEnd
+			});
+			progressBar.addChild(incBar);
+			new SimpleTween(incBar, "fillColor", barColorStart, FADEIN_TIME+ttl, {
+				color: true
+			});
+		}
 		progressBar.addChild(new BitmapDataSprite({
-			// Fill
+			// Start bar
 			x: BAR_BORDER_WIDTH,
 			y: BAR_Y + BAR_BORDER_WIDTH,
-			height: BAR_HEIGHT - 2*BAR_BORDER_WIDTH,
-			width: BAR_WIDTH*progress,
-			fillColor: barColor
+			height: BAR_FILL_HEIGHT,
+			width: pxStart,
+			fillColor: barColorStart
 		}))
 		block.addElement(progressBar);
 		block.addTextField({
@@ -130,16 +211,18 @@ public class NotificationView extends Block {
 			autoSize: TextFieldAutoSize.LEFT,
 			wordWrap: true,
 			width: width - ICON_SIZE - 2,
-			text: label
+			htmlText: htmlLabel
 		});
 		
-		// Mark the block and remove existing with similar ID
-		block.dataset.progress = id;
-		for (var i:int = 0; i < numElements; i++) {
-			var ib:Block = getElementAt(i) as Block;
-			if (ib && ib.dataset.progress == id) {
-				removeElement(ib);
-				break;
+		if (id) {
+			// Mark the block and remove existing with similar ID
+			block.dataset.progress = id;
+			for (var i:int = 0; i < numElements; i++) {
+				var ib:Block = getElementAt(i) as Block;
+				if (ib && ib.dataset.progress == id) {
+					removeElement(ib);
+					break;
+				}
 			}
 		}
 		popupDisplayObject(block, ttl);

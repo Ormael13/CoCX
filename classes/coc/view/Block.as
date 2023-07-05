@@ -317,7 +317,9 @@ public class Block extends Sprite {
 	}
 
 	public function removeElement(e:DisplayObject):void {
-		_container.removeChild(e);
+		try {
+			_container.removeChild(e);
+		} catch (error:ArgumentError) {}
 		delete _layoutHints[e];
 		invalidateLayout();
 	}

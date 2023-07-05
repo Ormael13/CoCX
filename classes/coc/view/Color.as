@@ -42,6 +42,15 @@ public class Color {
 	public static function fromRgb(r:uint, g:uint, b:uint):uint {
 		return ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
 	}
+	/** @return {{a:Number, r:Number, g:Number, b:Number}} object */
+	public static function getFloatComponents(argb:uint):Object {
+		return {
+			a: ((argb >> 24) & 0xff) / 255,
+			r: ((argb >> 16) & 0xff) / 255,
+			g: ((argb >> 8) & 0xff) / 255,
+			b: (argb & 0xff) / 255
+		}
+	}
 	public static function fromArgbFloat(a:Number,r:Number, g:Number, b:Number):uint {
 		return fromArgb(a*255,r*255,g*255,b*255);
 	}
