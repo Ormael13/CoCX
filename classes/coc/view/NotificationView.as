@@ -169,7 +169,7 @@ public class NotificationView extends Block {
 		var block:Block = new Block({
 			layoutConfig: {
 				type: "grid",
-				columns: bitmap ? [ICON_SIZE, BAR_WIDTH, -1] : [-1,BAR_WIDTH, -1],
+				columns: bitmap ? [ICON_SIZE, BAR_WIDTH, -1] : [BAR_WIDTH, -1],
 				gap: 2
 			},
 			width: width
