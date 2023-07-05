@@ -22,6 +22,7 @@ public class ButtonData {
 	public var slot:ItemSlotClass = null;
 	public var slotType:Function;
 	public var iconId:String = null;
+	public var iconQty:String = "";
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
 		this.callback = callback;
@@ -86,7 +87,14 @@ public class ButtonData {
 			return this;
 		}
 		forItem(slot.itype);
-		if (slot.itype.stackSize > 1 || slot.quantity > 1) text += " x"+slot.quantity;
+		if (slot.itype.stackSize > 1 || slot.quantity > 1) {
+			toolTipHeader = ""+slot.quantity+" x "+toolTipHeader;
+			if (IconLib.hasIcon(iconId)) {
+				iconQty = String(slot.quantity)
+			} else {
+				text += " x" + slot.quantity;
+			}
+		}
 		return this;
 	}
 	public function applyTo(btn:CoCButton):void {
@@ -96,7 +104,7 @@ public class ButtonData {
 			btn.show(text, callback, toolTipText, toolTipHeader)
 					.color(labelColor)
 					.disableIf(!enabled)
-					.icon(iconId);
+					.icon(iconId, iconQty);
 		}
 	}
 	/**

@@ -4,6 +4,9 @@
 package coc.view {
 import classes.internals.Utils;
 
+import flash.text.AntiAliasType;
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 
 public class UIUtils {
@@ -40,6 +43,29 @@ public class UIUtils {
 				e[key]           = spc != null ? spc(value) : value;
 			}
 		}
+		return e;
+	}
+	
+	public static function newTextField(options:Object=null):TextField {
+		if (options is String) options ={text:options};
+		var e:TextField = new TextField();
+		e.antiAliasType = AntiAliasType.ADVANCED;
+		if ('defaultTextFormat' in options) {
+			e.defaultTextFormat = UIUtils.convertTextFormat(options['defaultTextFormat']);
+		}
+		UIUtils.setProperties(e, options, {
+			defaultTextFormat: UIUtils.convertTextFormat,
+			background: UIUtils.convertColor,
+			textColor: UIUtils.convertColor,
+			text: null, // set later
+			htmlText: null
+		});
+		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
+		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
+			e.autoSize = TextFieldAutoSize.LEFT;
+		}
+		if ('htmlText' in options) e.htmlText = options.htmlText;
+		else if ('text' in options) e.text = options.text;
 		return e;
 	}
 

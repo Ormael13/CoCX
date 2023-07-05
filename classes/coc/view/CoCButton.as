@@ -19,6 +19,7 @@ import classes.internals.Utils;
 
 import flash.display.Bitmap;
 import flash.events.MouseEvent;
+import flash.filters.DropShadowFilter;
 import flash.text.Font;
 import flash.text.TextField;
 import flash.text.TextFormat;
@@ -31,6 +32,18 @@ public class CoCButton extends Block {
 			embedAsCFF='false')]
 	private static const ButtonLabelFont:Class;
 	public static const ButtonLabelFontName:String = (new ButtonLabelFont() as Font).fontName;
+	public static const ButtonKeyFontName:String = 'Arial';
+	public static const ButtonKeyFontColor:* = "#ffffff";
+	public static const ButtonKeyShadowColor:* = "#000000";
+	public static const ButtonKeyFontSize:int = 10;
+	public static const IconQuantityFormat:Object = {
+		font: 'Arial',
+		size: 10,
+		bold: true,
+		align: 'right'
+	};
+	public static const IconQuantityColor:String = "#ffff00";
+	public static const IconQuantityShadow:String = "#000000";
 	
 	/**
 	 * function(error:Error, button:CoCButton):void
@@ -55,6 +68,9 @@ public class CoCButton extends Block {
 	
 
 	private var _labelField:TextField,
+				_key1label:TextField,
+				_key2label:TextField,
+				_iconQuantityLabel:TextField,
 				_iconGraphic:BitmapDataSprite,
 				_backgroundGraphic:BitmapDataSprite,
 				_enabled:Boolean      = true,
@@ -96,6 +112,49 @@ public class CoCButton extends Block {
 				align: 'center'
 			}
 		});
+		_key1label = addTextField({
+			alpha            : 0.5,
+			x                : 8,
+			width            : MainView.BTN_W - 12,
+			y                : 2,
+			height           : (MainView.BTN_H-4)/2,
+			textColor        : ButtonKeyFontColor,
+			defaultTextFormat: {
+				font : ButtonKeyFontName,
+				size : ButtonKeyFontSize,
+				bold: true,
+				align: 'right'
+			}
+		});
+		_key1label.filters = [new DropShadowFilter(
+				0.0,0,Color.convertColor32(ButtonKeyShadowColor),1.0,4.0,4.0,10.0
+		)];
+		_key2label = addTextField({
+			alpha            : 0.5,
+			x                : 8,
+			width            : MainView.BTN_W - 12,
+			y                : 2+(MainView.BTN_H-4)/2,
+			height           : (MainView.BTN_H-4)/2,
+			textColor        : ButtonKeyFontColor,
+			defaultTextFormat: {
+				font : ButtonKeyFontName,
+				size : ButtonKeyFontSize,
+				bold: true,
+				align: 'right'
+			}
+		});
+		_key2label.filters = _key1label.filters.slice();
+		_iconQuantityLabel = addTextField({
+			x: ICON_X,
+			y: ICON_Y + (ICON_HEIGHT/2),
+			width: ICON_WIDTH,
+			height: ICON_HEIGHT/2,
+			textColor: IconQuantityColor,
+			defaultTextFormat: IconQuantityFormat
+		});
+		_iconQuantityLabel.filters = [
+				new DropShadowFilter(0.0,0,Color.convertColor32(IconQuantityShadow),1.0,4.0,4.0,10.0)
+		];
 
 		this.mouseChildren = true;
 		this.buttonMode    = true;
@@ -168,10 +227,19 @@ public class CoCButton extends Block {
 			this._labelField.x = LABEL_NOICON_X;
 			this._labelField.width = LABEL_NOICON_WIDTH;
 		}
+		_iconQuantityLabel.visible = _iconGraphic.visible;
 		if (labelText) labelText = labelText; // force resize
 	}
-	public function icon(iconId:String):CoCButton {
+	public function get iconQty():String {
+		return _iconQuantityLabel.visible ? _iconQuantityLabel.text : "";
+	}
+	public function set iconQty(value:String):void {
+		_iconQuantityLabel.text    = value;
+		_iconQuantityLabel.visible = _iconGraphic.visible;
+	}
+	public function icon(iconId:String, iconQty:String=""):CoCButton {
 		this.iconId = iconId;
+		this.iconQty = iconQty;
 		return this;
 	}
 	public function get labelText():String {
@@ -194,6 +262,21 @@ public class CoCButton extends Block {
 			this._labelField.y                 = (BTN_H - this._labelField.textHeight)/2;
 			this._labelField.height            = BTN_H - this._labelField.y;
 		}
+	}
+	public function get key1text():String {
+		return this._key1label.text;
+	}
+	
+	public function set key1text(value:String):void {
+		this._key1label.text = value;
+	}
+	
+	public function get key2text():String {
+		return this._key2label.text;
+	}
+	
+	public function set key2text(value:String):void {
+		this._key2label.text = value;
 	}
 
 	public function set bitmapClass(value:Class):void {
@@ -267,7 +350,15 @@ public class CoCButton extends Block {
 	public function itemSlotTexts(slot:ItemSlotClass):CoCButton {
 		itemIcon(slot.itype);
 		itemTexts(slot.itype);
-		if (slot.quantity > 1 || slot.itype.stackSize > 1) labelText += " x"+slot.quantity;
+		iconQty = "";
+		if (slot.quantity > 1 || slot.itype.stackSize > 1) {
+			toolTipHeader = ""+slot.quantity+" x "+toolTipHeader;
+			if (_iconGraphic.visible) {
+				iconQty = String(slot.quantity);
+			} else {
+				labelText += " x" + slot.quantity;
+			}
+		}
 		return this;
 	}
 	public function itemIcon(item:ItemType):CoCButton {
@@ -374,6 +465,7 @@ public class CoCButton extends Block {
 		enabled       = false;
 		callback      = null;
 		iconId        = null;
+		iconQty       = "";
 		return this;
 	}
 	/**

@@ -11,9 +11,7 @@ import fl.data.DataProvider;
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.text.AntiAliasType;
 import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
 import flash.utils.Dictionary;
 import flash.utils.setTimeout;
 
@@ -398,24 +396,7 @@ public class Block extends Sprite {
 		return e;
 	}
 	public function addTextField(options:Object, hint:Object = null):TextField {
-		if (options is String) return addTextField({text:options});
-		var e:TextField = new TextField();
-		e.antiAliasType = AntiAliasType.ADVANCED;
-		if ('defaultTextFormat' in options) {
-			e.defaultTextFormat = UIUtils.convertTextFormat(options['defaultTextFormat']);
-		}
-		UIUtils.setProperties(e, options, {
-			defaultTextFormat: UIUtils.convertTextFormat,
-			background: UIUtils.convertColor,
-			text: null, // set later
-			htmlText: null
-		});
-		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
-		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
-			e.autoSize = TextFieldAutoSize.LEFT;
-		}
-		if ('htmlText' in options) e.htmlText = options.htmlText;
-		else if ('text' in options) e.text = options.text;
+		var e:TextField = UIUtils.newTextField(options);
 		addElement(e, hint);
 		return e;
 	}
