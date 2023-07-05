@@ -458,6 +458,7 @@ public class CoC extends MovieClip
 
     public function run():void
     {
+        this.inputManager.showHotkeys = false;
         trace("Initializing races");
         Races.load();
         trace("Initializing perks");

@@ -1,9 +1,7 @@
 //The code that is responsible for managing MainView.
 package classes {
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 
-import coc.view.BitmapDataSprite;
 import coc.view.BoundClip;
 import coc.view.MainView;
 import coc.view.StatsView;
@@ -17,7 +15,6 @@ import flash.events.TimerEvent;
 import flash.ui.Keyboard;
 import flash.utils.Timer;
 import flash.utils.getQualifiedClassName;
-
 
 public class MainViewManager extends BaseContent {
 	//Interface flags
@@ -92,7 +89,7 @@ public class MainViewManager extends BaseContent {
 		} else {
 			// display in the corner
 			mainView.placeCharviewAtRight();
-			mainView.addElement(mainView.charView);
+			mainView.addElementBelow(mainView.charView, mainView.notificationView);
 		}
 	}
 	public function hidePlayerDoll():void {

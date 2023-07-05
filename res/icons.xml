@@ -312,8 +312,8 @@
     <!-- Aliases - images sharing IDs -->
     <aliases>
         <!--
-            Example: existing icon "I_IncubiD" is also available under id "I_HairDye"
-            <alias icon="I_IncubiD" alias="I_HairDye"/>
+            Example: icon "I_HairDye" uses icon of "I_IncubiD"
+            <alias alias="I_HairDye" icon="I_IncubiD"/>
         -->
 
         <!--===========
@@ -374,19 +374,46 @@
         = MELEE WEAPONS =
         ==============-->
         <alias alias="I_GenericItem_weapon" icon="I_Sword_Unknown"/>
-        <!-- Swords -->
+        <!--
+        missing icons
+        <alias alias="I_GenericWeapon_Axe" icon=""/>
+        <alias alias="I_GenericWeapon_Dagger" icon=""/>
+        <alias alias="I_GenericWeapon_Dueling" icon=""/>
+        <alias alias="I_GenericWeapon_Exotic" icon=""/>
+        <alias alias="I_GenericWeapon_Gauntlet" icon=""/>
+        <alias alias="I_GenericWeapon_Mace/Hammer" icon=""/>
+        <alias alias="I_GenericWeapon_Polearm" icon=""/>
+        <alias alias="I_GenericWeapon_Ribbon" icon=""/>
+        <alias alias="I_GenericWeapon_Scythe" icon=""/>
+        <alias alias="I_GenericWeapon_Spear" icon=""/>
+        <alias alias="I_GenericWeapon_Staff" icon=""/>
+        <alias alias="I_GenericWeapon_Throwing" icon=""/>
+        <alias alias="I_GenericWeapon_Whip" icon=""/>
+        <alias alias="I_GenericWeapon_Wand" icon=""/>
+        -->
+        <alias alias="I_GenericWeapon_Tome" icon="I_Book_Red"/>
 
+        <!--==============
+        = RANGED WEAPONS =
+        ===============-->
+
+        <alias alias="I_GenericItem_weaponranged" icon="I_GenericWeapon_Bow"/>
+        <!--
+        missing icons
+        <alias alias="I_GenericWeapon_Crossbow" icon=""/>
+        <alias alias="I_GenericWeapon_Dual Firearms" icon=""/>
+        <alias alias="I_GenericWeapon_Pistol" icon=""/>
+        <alias alias="I_GenericWeapon_Rifle" icon=""/>
+        <alias alias="I_GenericWeapon_2H Firearm" icon=""/>
+        -->
 
         <!--===========
         = OTHER ITEMS =
         ============-->
 
-        <alias alias="I_GenericItem_weaponranged" icon="I_GenericWeapon_Bow"/>
         <!--
-        <alias alias="I_GenericItem_shield" icon=""/>
         <alias alias="I_GenericItem_armor" icon=""/>
         <alias alias="I_GenericItem_undergarment" icon=""/>
-        <alias alias="I_GenericItem_necklace" icon=""/>
         <alias alias="I_GenericItem_headjewelry" icon=""/>
         <alias alias="I_GenericItem_jewelry" icon=""/>
         <alias alias="I_GenericItem_miscjewelry" icon=""/>
@@ -407,5 +434,38 @@
         <alias alias="A_Ranged" icon="I_GenericWeapon_Bow"/>
         <alias alias="A_Tease" icon="I_Heart_Red"/>
         <alias alias="A_Items" icon="I_Potion_Empty"/>
+
+        <!--=============
+        = NOTIFICATIONS =
+        ==============-->
+
+        <alias alias="TeaseXP" icon="I_Heart_Red"/>
+        <!-- Mastery icons: 'CombatMastery' + player.combatMastery[i].combat -->
+        <alias alias="CombatMastery" icon="I_GenericWeapon_Sword"/>
+        <alias alias="CombatMasteryFeral" icon="CombatMastery"/>
+        <alias alias="CombatMasteryGauntlet" icon="CombatMastery"/>
+        <alias alias="CombatMasteryDagger" icon="CombatMastery"/>
+        <alias alias="CombatMasterySword" icon="I_GenericWeapon_Sword"/>
+        <alias alias="CombatMasteryAxe" icon="CombatMastery"/>
+        <alias alias="CombatMasteryBludgeon" icon="CombatMastery"/>
+        <alias alias="CombatMasteryDueling" icon="CombatMastery"/>
+        <alias alias="CombatMasteryPolearm" icon="CombatMastery"/>
+        <alias alias="CombatMasterySpear" icon="CombatMastery"/>
+        <alias alias="CombatMasteryWhip" icon="CombatMastery"/>
+        <alias alias="CombatMasteryExotic" icon="CombatMastery"/>
+        <alias alias="CombatMasteryArchery" icon="I_GenericWeapon_Bow"/>
+        <alias alias="CombatMasteryThrowing" icon="I_GenericWeapon_Bow"/>
+        <alias alias="CombatMasteryFirearms" icon="I_GenericWeapon_Bow"/>
+        <alias alias="CombatMasteryDualSmall" icon="CombatMastery"/>
+        <alias alias="CombatMasteryDualNormal" icon="CombatMastery"/>
+        <alias alias="CombatMasteryDualLarge" icon="CombatMastery"/>
+        <alias alias="CombatMasteryDualFirearm" icon="CombatMastery"/>
+        <alias alias="CombatMasterySmall" icon="CombatMastery"/>
+        <alias alias="CombatMasteryNormal" icon="CombatMastery"/>
+        <alias alias="CombatMasteryLarge" icon="CombatMastery"/>
+        <alias alias="CombatMasteryMassive" icon="CombatMastery"/>
+        <alias alias="CombatMasteryRange" icon="I_GenericWeapon_Bow"/>
+        <alias alias="CombatMasteryUnarmed" icon="CombatMastery"/>
+        <alias alias="CombatMasteryDualMassive" icon="CombatMastery"/>
     </aliases>
 </icons>
