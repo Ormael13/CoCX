@@ -19,19 +19,29 @@ public class ExplorationEngine extends BaseContent {
 	private static const LINE_COLOR:String = "#444444";
 	private static const LINE_NEXT:String  = "#0080ff";
 	
-	/** Encounter filter for first location on the road */
-	private static function filterForStart(e:SimpleEncounter):Boolean {
-		return !e.special;
-	}
-	/** Encounter filter for locations on the road except first and last */
-	private static function filterForMid(e:SimpleEncounter):Boolean {
+	private function filterUnique(e:SimpleEncounter):Boolean {
+		if (e.unique) {
+			for (var i:int = 0; i < N; i++) {
+				if (flatList[i] && !flatList[i].isCleared && flatList[i].encounter == e) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
-	/** Encounter filter for last location on the road */
-	private static function filterForEnd(e:SimpleEncounter):Boolean {
-		return e.special || ['npc', 'item', 'boss', 'treasure', 'special'].indexOf(e.kind) >= 0;
+	/** Encounter filter for first location on the road */
+	private function filterForStart(e:SimpleEncounter):Boolean {
+		return !e.special && filterUnique(e);
 	}
-	private static const filters:/*Function*/Array = [filterForStart, filterForMid, filterForEnd];
+	/** Encounter filter for locations on the road except first and last */
+	private function filterForMid(e:SimpleEncounter):Boolean {
+		return filterUnique(e);
+	}
+	/** Encounter filter for last location on the road */
+	private function filterForEnd(e:SimpleEncounter):Boolean {
+		return (e.special || ['npc', 'item', 'boss', 'treasure', 'special'].indexOf(e.kind) >= 0) && filterUnique(e);
+	}
+	private const filters:/*Function*/Array = [filterForStart, filterForMid, filterForEnd];
 	
 	public function ExplorationEngine() {
 		for (var i:int = 0; i < NROADS; i++) {
@@ -163,11 +173,12 @@ public class ExplorationEngine extends BaseContent {
 		if (finished) {
 			trace("explorer.doExplore(finished)")
 			onEnd.callback();
-		} else if (roadIndex >= 0 && numUnexplored() == 0) {
+		} else /* // Uncomment to auto return-to-camp after finishing last entry
+		if (roadIndex >= 0 && numUnexplored() == 0) {
 			trace("explorer.doExplore(ended)")
 			stopExploring();
 			onEnd.callback();
-		} else {
+		} else */{
 			trace("explorer.doExplore(normal)")
 			validate();
 			showUI();
@@ -217,7 +228,7 @@ public class ExplorationEngine extends BaseContent {
 	public function numUnexplored():int {
 		if (!road || finished) return 0;
 		var n:int = 0;
-		for (var i:int = 0; i < road.length; i++) if (!road[i].isCleared) n++;
+		for (var i:int = 0; i < road.length; i++) if (!road[i].isDisabled && !road[i].isCleared) n++;
 		return n;
 	}
 	public function numUnrevealed():int {
@@ -228,7 +239,10 @@ public class ExplorationEngine extends BaseContent {
 		}
 		return n;
 	}
-
+	public function get isAtEnd():Boolean {
+		return road != null && numUnexplored() == 0
+	}
+	
 	public function findByName(name:String):ExplorationEntry {
 		for (var i:int = 0; i < N; i++) {
 			if (!flatList[i].isDisabled && flatList[i].encounterName == name) return flatList[i];
@@ -415,6 +429,10 @@ public class ExplorationEngine extends BaseContent {
 		return map;
 	}
 	private function showUI():void {
+		// Buttons
+		// [Forward/Path 1] [Path 2] [Path 3] [Path 4] [Path 5]
+		// [              ] [      ] [      ] [      ] [      ]
+		// [   Inventory  ] [ Mast ] [Repeat] [      ] [Leave ]
 		clearOutput();
 		spriteSelect();
 		outputText(prompt);
@@ -426,7 +444,7 @@ public class ExplorationEngine extends BaseContent {
 		if (road) {
 			if (next) {
 				// We're on the road
-				button(0).show("Next", exploreNext).hint(next.tooltipText, next.tooltipHeader);
+				button(0).show("Forward", exploreNext).hint(next.tooltipText, next.tooltipHeader);
 			} else {
 				// End of the road
 				onEnd.applyTo(button(0));
@@ -451,16 +469,16 @@ public class ExplorationEngine extends BaseContent {
 					.hint("Repeat the '"+playerEntry.label+"' encounter.")
 		}
 		if (overlust == 2 && canMasturbate) {
-			if (!(road && !next)) {
-				// if not end of the road
+			if (!isAtEnd) {
 				for (i = 0; i < NROADS; i++) button(i).disable("You're too aroused to explore!");
+				button(12).disable("You're too aroused to explore!");
 			}
 		}
 		
 		if (debug) {
 			button(14).show("Menu",cheatMenu);
 		} else {
-			if (leave && !finished) leave.applyTo(button(14));
+			if (leave && !finished && !isAtEnd) leave.applyTo(button(14));
 		}
 		if (onMenu != null) onMenu();
 	}
@@ -487,7 +505,7 @@ public class ExplorationEngine extends BaseContent {
 		button(4).show("Camp", camp.returnToCampUseOneHour)
 				 .hint("Return to camp");
 		
-		if (leave && !finished) leave.applyTo(button(13));
+		if (leave && !finished && !isAtEnd) leave.applyTo(button(13));
 		button(14).show("Back",showUI).icon("Back");
 	}
 	
@@ -502,16 +520,6 @@ public class ExplorationEngine extends BaseContent {
 		while (nTries-- > 0) {
 			var e:SimpleEncounter = source.pickEncounter(filter) as SimpleEncounter;
 			if (!e) continue;
-			if (e.unique) {
-				var duplicate:Boolean = false;
-				for (var i:int = 0; i < N; i++) {
-					if (flatList[i] && !flatList[i].isCleared && flatList[i].encounter == e) {
-						duplicate = true;
-						break;
-					}
-				}
-				if (duplicate) continue;
-			}
 			entry.setupForEncounter(e);
 			return;
 		}
@@ -520,6 +528,7 @@ public class ExplorationEngine extends BaseContent {
 	private function generateAll():void {
 		for (var i:int = 0; i < NROADS; i++) {
 			var length:int = randIntIn(2, MAXDEPTH);
+			trace("Road "+i+" length "+length);
 			for (var j:int = length - 1; j >= 0; j--) {
 				generate(roads[i][j],
 						j == length - 1 ? 2
@@ -547,6 +556,7 @@ public class ExplorationEngine extends BaseContent {
 				var e:ExplorationEntry = roads[i][j];
 				if (!e.isCleared && !e.isDisabled && e.encounter && e.encounter.originalChance() <= 0) {
 					trace("Regenerating entry " + i + ";" + j + " " + e.encounterName);
+					e.encounter = null;
 					var special:int = 1;
 					if (j == 0) special = 0;
 					if (j + 1 == MAXDEPTH || roads[i][j + 1].isDisabled) special = 2;
