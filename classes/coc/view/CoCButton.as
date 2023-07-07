@@ -19,7 +19,6 @@ import classes.internals.Utils;
 
 import flash.display.Bitmap;
 import flash.events.MouseEvent;
-import flash.filters.DropShadowFilter;
 import flash.text.Font;
 import flash.text.TextField;
 import flash.text.TextFormat;
@@ -126,9 +125,7 @@ public class CoCButton extends Block {
 				align: 'right'
 			}
 		});
-		_key1label.filters = [new DropShadowFilter(
-				0.0,0,Color.convertColor32(ButtonKeyShadowColor),1.0,4.0,4.0,10.0
-		)];
+		_key1label.filters = [UIUtils.outlineFilter(ButtonKeyShadowColor)];
 		_key2label = addTextField({
 			alpha            : 0.5,
 			x                : 8,
@@ -152,9 +149,7 @@ public class CoCButton extends Block {
 			textColor: IconQuantityColor,
 			defaultTextFormat: IconQuantityFormat
 		});
-		_iconQuantityLabel.filters = [
-				new DropShadowFilter(0.0,0,Color.convertColor32(IconQuantityShadow),1.0,4.0,4.0,10.0)
-		];
+		_iconQuantityLabel.filters = [UIUtils.outlineFilter(IconQuantityShadow)];
 
 		this.mouseChildren = true;
 		this.buttonMode    = true;

@@ -20,10 +20,8 @@ import classes.Items.Weapons.*;
 import classes.Items.WeaponsRange.*;
 import classes.Monster;
 import classes.PerkLib;
-import classes.PotionType;
 import classes.Races;
 import classes.Races.ElementalRace;
-import classes.Scenes.Areas.Desert.Gorgon;
 import classes.Scenes.Areas.Bog.*;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Desert.*;
@@ -439,7 +437,7 @@ public class Combat extends BaseContent {
 //combat is over. Clear shit out and go to main
     public function cleanupAfterCombatImpl(nextFunc:Function = null, ThisIsNotATFScene:Boolean = true):void {
         magic.cleanupAfterCombatImpl();
-        if (nextFunc == null) nextFunc = inDungeon ? playerMenu : camp.returnToCampUseOneHour;
+        if (nextFunc == null) nextFunc = inDungeon ? playerMenu : explorer.done;
         if (inCombat) {
             //clear status
             clearStatuses(false);
@@ -451,6 +449,7 @@ public class Combat extends BaseContent {
             }
             //Player lost
             else {
+                explorer.stopExploring();
                 if (monster.statusEffectv1(StatusEffects.Sparring) == 2) {
                     clearOutput();
                     outputText("The cow-girl has defeated you in a practice fight!");
@@ -8789,7 +8788,7 @@ public class Combat extends BaseContent {
     }
 
     public function dropItem(monster:Monster, nextFunc:Function = null):void {
-        if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
+        if (nextFunc == null) nextFunc = explorer.done;
         if (monster.hasStatusEffect(StatusEffects.NoLoot)) {
             return;
         }
@@ -8815,7 +8814,7 @@ public class Combat extends BaseContent {
     }
 
     public function awardPlayer(nextFunc:Function = null):void {
-        if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour; //Default to returning to camp.
+        if (nextFunc == null) nextFunc = explorer.done;
         if (player.countCockSocks("gilded") > 0) {
             //trace( "awardPlayer found MidasCock. Gems bumped from: " + monster.gems );
             var bonusGems:int = monster.gems * 0.15 + 5 * player.countCockSocks("gilded"); // int so AS rounds to whole numbers
@@ -14632,7 +14631,7 @@ public function runAway(callHook:Boolean = true):void {
         outputText("You flex the muscles in your back and, shaking clear of the sand, burst into the air!  Wasting no time you fly free of the sandtrap and its treacherous pit.  \"One day your wings will fall off, little ant,\" the snarling voice of the thwarted androgyne carries up to you as you make your escape.  \"And I will be waiting for you when they do!\"");
         inCombat = false;
         clearStatuses(false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
         return;
     }
     if (monster.hasStatusEffect(StatusEffects.Dig)) {
@@ -14640,7 +14639,7 @@ public function runAway(callHook:Boolean = true):void {
         outputText("You tunnel away from your opponent, escaping the fight and fleeing back to camp.\n");
         inCombat = false;
         clearStatuses(false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
         return;
     }
     if (monster.hasStatusEffect(StatusEffects.GenericRunDisabled) || SceneLib.urtaQuest.isUrta()) {
@@ -14657,7 +14656,7 @@ public function runAway(callHook:Boolean = true):void {
             outputText("You burn away the vines and run for it, much to the frustration of the [monster name]. You’re thankful that she’s this slow.\n");
             inCombat = false;
             clearStatuses(false);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         else{
@@ -14719,7 +14718,7 @@ public function runAway(callHook:Boolean = true):void {
         outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!");
         inCombat = false;
         clearStatuses(false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
         return;
     } else if (monster.short == "minotaur tribe" && monster.HPRatio() >= 0.75) {
         clearOutput();
@@ -14764,7 +14763,7 @@ public function runAway(callHook:Boolean = true):void {
         outputText("As you retreat the lizan doesn't even attempt to stop you. When you look back for him, you find nothing but the empty bog around you.");
         CoC.instance.inCombat = false;
         clearStatuses(false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
         return;
     }
     if (monster is TrainingDummy) {
@@ -14825,7 +14824,7 @@ public function runAway(callHook:Boolean = true):void {
             outputText("Marshalling your thoughts, you frown at the strange girl and turn to march up the beach.  After twenty paces inshore you turn back to look at her again.  The anemone is clearly crestfallen by your departure, pouting heavily as she sinks beneath the water's surface.");
             inCombat = false;
             clearStatuses(false);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //Speed dependent
@@ -14836,7 +14835,7 @@ public function runAway(callHook:Boolean = true):void {
                 clearStatuses(false);
                 clearOutput();
                 outputText("Marshalling your thoughts, you frown at the strange girl and turn to march up the beach.  After twenty paces inshore you turn back to look at her again.  The anemone is clearly crestfallen by your departure, pouting heavily as she sinks beneath the water's surface.");
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
                 return;
             }
             //Run failed:
@@ -14857,7 +14856,7 @@ public function runAway(callHook:Boolean = true):void {
             outputText("Marshalling your thoughts, you frown at the strange girl and turn to march up the beach.  After twenty paces inshore you turn back to look at her again.  The anemone is clearly crestfallen by your departure, pouting heavily as she sinks beneath the water's surface.");
             inCombat = false;
             clearStatuses(false);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //Speed dependent
@@ -14868,7 +14867,7 @@ public function runAway(callHook:Boolean = true):void {
                 clearStatuses(false);
                 clearOutput();
                 outputText("Marshalling your thoughts, you frown at the strange girl and turn to march up the beach.  After twenty paces inshore you turn back to look at her again.  The anemone is clearly crestfallen by your departure, pouting heavily as she sinks beneath the water's surface.");
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
                 return;
             }
             //Run failed:
@@ -14891,7 +14890,7 @@ public function runAway(callHook:Boolean = true):void {
             outputText("\n\nNot to be outdone, you call back, \"Sucks to be you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
             inCombat = false;
             clearStatuses(false);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
         //Fail:
         else {
@@ -14918,7 +14917,7 @@ public function runAway(callHook:Boolean = true):void {
         }
         inCombat = false;
         clearStatuses(false);
-		doNext(camp.returnToCampUseOneHour);
+        endEncounter();
         return;
     }
     //Runner perk chance
@@ -14929,7 +14928,7 @@ public function runAway(callHook:Boolean = true):void {
             outputText("\n\nAs you leave the tigershark behind, her taunting voice rings out after you.  \"<i>Oooh, look at that fine backside!  Are you running or trying to entice me?  Haha, looks like we know who's the superior specimen now!  Remember: next time we meet, you owe me that ass!</i>\"  Your cheek tingles in shame at her catcalls.");
         }
         clearStatuses(false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
         return;
     }
     else if (onlyZenjiRunnawayTrain()) {
@@ -14939,7 +14938,7 @@ public function runAway(callHook:Boolean = true):void {
             outputText(", leaving your opponent in the dust.");
             inCombat = false;
             clearStatuses(false);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         else outputText(". Despite his best attempt, he is unable to drag the two of you to safety. He stumbles, barely managing to gently set you on the ground as you resume combat.");
@@ -15633,7 +15632,7 @@ public function assumeAsuraForm007():void {
 public function returnToNormalShape():void {
     clearOutput();
     outputText("Gathering all you willpower you forcefully subduing your inner rage and returning to your normal shape.");
-	//if (perkBonusDamage po asura toughness) 
+	//if (perkBonusDamage po asura toughness)
     player.statStore.removeBuffs("AsuraForm");
 	if (player.buff("WarriorsRage").getRemainingTicks() > 9000) player.statStore.removeBuffs("WarriorsRage");
     enemyAI();
@@ -15727,7 +15726,7 @@ public function asurasXFingersOfDestruction(fingercount:String):void {
     doPhysicalDamage(damage, true, true);
 	if (fingercount == "Eight") {
 	    doPhysicalDamage(damage, true, true);
-		doPhysicalDamage(damage, true, true);	
+		doPhysicalDamage(damage, true, true);
 	}
 	if (fingercount == "Ten") {
 		doPhysicalDamage(damage, true, true);
@@ -16566,4 +16565,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

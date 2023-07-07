@@ -6,6 +6,7 @@ import classes.IMutations.IMutationsLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.display.SpriteDb;
+
 import coc.view.CoCButton;
 
 public class Masturbation extends BaseContent {
@@ -18,7 +19,7 @@ public class Masturbation extends BaseContent {
 		}
 
 		public function masturButton(pos:int):CoCButton {
-			if (inDungeon || inRoomedDungeon) return addButton(pos, "Masturbate", masturbateGo)
+			if (inDungeon || inRoomedDungeon || explorer.isActive) return addButton(pos, "Masturbate", masturbateGo)
 				.hint("Attempt to masturbate in order to relieve your lust buildup.")
 				.disableIf(player.lust < 33, "You're not horny enough to masturbate.");
 			else if (canMeditate() && player.lust < 33) return addButton(pos, "Meditate", meditate)
@@ -336,7 +337,7 @@ public class Masturbation extends BaseContent {
 			if (player.isTaur() && !player.isScylla()) {
 				if (centaurMasturbation()) {
 					flags[kFLAGS.TIMES_MASTURBATED]++;
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				}
 				else doNext(playerMenu);
 				return;
@@ -345,7 +346,7 @@ public class Masturbation extends BaseContent {
 				genderlessMasturbate();
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				dynStats("lus", -50, "scale", false);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
             if (SceneLib.exgartuan.dickAwake() && (!SceneLib.exgartuan.boobsAwake() || rand(2) == 0)) {
@@ -921,7 +922,7 @@ public class Masturbation extends BaseContent {
 				eachMinuteCount(60);
 				doNext(playerMenu);
 			}
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 
 		//Genderless people suck!
@@ -1982,7 +1983,7 @@ public class Masturbation extends BaseContent {
 				}
 				masturGasm("Vaginal");
 				flags[kFLAGS.TIMES_MASTURBATED]++;
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				outputText("\n");
 				player.cuntChange(player.vaginalCapacity() * 0.9, true);
 			}
@@ -2042,7 +2043,7 @@ public class Masturbation extends BaseContent {
 				doNext(onaholeFutaContinuation);
 			else {
 				masturGasm("Dick");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -2052,7 +2053,7 @@ public class Masturbation extends BaseContent {
 				outputText("you pass out with aching, empty balls.");
 			else outputText("you pass out with [cocks] sore from exertion.");
 			masturGasm("Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function onaholeFutaContinuation():void {
@@ -2061,7 +2062,7 @@ public class Masturbation extends BaseContent {
 			outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ");
 			outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.");
 			masturGasm("Dick", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function allNaturalOnaholeUse():void {
@@ -2094,7 +2095,7 @@ public class Masturbation extends BaseContent {
 			dynStats("sen", .75, "cor", .5);
 			flags[kFLAGS.TIMES_MASTURBATED]++;
 			masturGasm("Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function stimBeltUse():void {
@@ -2117,7 +2118,7 @@ public class Masturbation extends BaseContent {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				player.cuntChange(1, true, true, false);
 				masturGasm("Vaginal");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 		}
 
 		private function allNaturalStimBeltUse():void {
@@ -2138,7 +2139,7 @@ public class Masturbation extends BaseContent {
 						outputText("Shamed by the depths of your sexual needs, you don the abominable stimulation belt and brace for its eventual ravaging of your needy womanhood. Without waiting for you to touch the activator, the organic portion of the device, sensing your needs, engorges and buries itself in your vagina, beginning to pump with furious speed. The shock of the sudden stimulation convulses you backwards, leaving you writhing on the ground as the horrid symbiote undulates in a luridly sordid manner. You distinctly feel a nodule growing about your clitoris, shifting and changing into a sucker. The suction begins furiously working your clitoris as if it were a miniature penis, slurping, sucking and jerking away, prompting another painfully pleasurable wave of multiple orgasms.\n\n");
 						outputText("You cry in shock as the creature pushes past your cervix and begins injecting your womb with hot, thick cum... or whatever it is that it shoots inside you.  Unlike before, the very sensation of the fluid acts upon your brain and body strangely. The pain dulls and eventually filters from your mind and only the pleasure of the experience remains. The fluid continues pumping in until it overflows. The flooding of your insides leaves you paradoxically ecstatic and revolted. After an unknown amount of time, the thing stops fucking you and it releases its grip of your pelvis, leaving you a sticky, exhausted mess. A part of you wants to try the belt again, but you are too tired to bother cleaning yourself up.");
 						dynStats("sen", .75, "cor", 1);
-						doNext(camp.returnToCampUseOneHour);
+						endEncounter();
 					}
 					//High corruption variant
 					else {
@@ -2168,7 +2169,7 @@ public class Masturbation extends BaseContent {
 			player.slimeFeed();
 			masturGasm("Vaginal");
 			dynStats("lib", 1, "sen", (-0.5));
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function allNaturalSelfStimulationBeltBadEnd():void {
@@ -2189,7 +2190,7 @@ public class Masturbation extends BaseContent {
 		if (!player.hasPerk(PerkLib.Flexibility)) {
 			outputText("You undress from your [armor] and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your [vagina] You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your [vagina]. You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.");
 			dynStats("lus", 15, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			return;
 		}
 		//[1st time doing this]
@@ -2209,7 +2210,7 @@ public class Masturbation extends BaseContent {
 		//DONE!
 		flags[kFLAGS.TIMES_MASTURBATED]++;
 		masturGasm("Vaginal");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function EasterBunnyLayEggs():void { //Female cat masturbation
@@ -2223,7 +2224,7 @@ public class Masturbation extends BaseContent {
 		//DONE!
 		flags[kFLAGS.TIMES_MASTURBATED]++;
 		masturGasm("Dick");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 		private function gobomechImpregnator1():void {
@@ -2235,7 +2236,7 @@ public class Masturbation extends BaseContent {
 			player.cuntChange(8, true, true, false);
 			player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			player.addKeyValue("Cum Reservoir", 1, -4);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function gobomechFuckingMachine():void {
@@ -2252,7 +2253,7 @@ public class Masturbation extends BaseContent {
 			outputText("Gosh if that didn't knock you up you will just use the linking tube next time.\n\n");
 			player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			player.addKeyValue("Cum Reservoir", 1, -4);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function catAutoLick():void { //Male cat masturbation
@@ -2263,7 +2264,7 @@ public class Masturbation extends BaseContent {
 				//[Male]
 				outputText("You undress from your [armor] and take a seat down on the ground, your [cock] pointing straight at your face. You stroke the erect member a few times, but then remember the cats back at the village. You stare at your [cock]; the more you look at the cock, the more your mouth craves to suck on it. You open your mouth as wide as you can and lean towards your cock, only to be stopped halfway to the tip. You stick your tongue out and try to lick the head. You pretend you're rolling your tongue around the head, but this only makes your cock harder in eagerness. You throw your head forward in an attempt to flick your tongue against it, but the [cock] is pulled back as you go forward. You slump your back onto the ground and let out a frustrated groan. The only thing you've managed to do is make yourself more aroused than when you started.");
 				dynStats("lus", 15, "scale", false);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//1st time
@@ -2332,7 +2333,7 @@ public class Masturbation extends BaseContent {
 			//DONE!
 			flags[kFLAGS.TIMES_MASTURBATED]++;
 			masturGasm("Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function meditate(description:String = "rock"):void {
@@ -2342,7 +2343,7 @@ public class Masturbation extends BaseContent {
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function dualBeltMasturbation():void {
@@ -2373,7 +2374,7 @@ public class Masturbation extends BaseContent {
 			if (player.sens > 80) player.removeCurse('sens',1, 2)
 			if (player.tou > 50) player.addCurse("tou", 1, 2);
 			if (player.tou > 75) player.addCurse("tou", 1, 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function centaurMasturbation():Boolean {
@@ -2703,7 +2704,7 @@ public class Masturbation extends BaseContent {
 				outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + player.cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, leaking your cum the entire way.");
 			}
 			masturGasm("Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			player.addKeyValue("Fake Mare", 1, 1);
 		}
 
@@ -2733,7 +2734,7 @@ public class Masturbation extends BaseContent {
 
 			outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your [ass].  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.");
 			masturGasm("Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			player.addKeyValue("Centaur Pole", 1, 1);
 			trace("Times Ridden Pole" + player.keyItemvX("Centaur Pole", 1));
 		}
@@ -2904,7 +2905,7 @@ public class Masturbation extends BaseContent {
 			}
 			player.dumpEggs();
 			masturGasm("Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Birth Bee Eggs Out Your Wang: Finished (Slywyn)(edited)
@@ -3070,7 +3071,7 @@ public class Masturbation extends BaseContent {
 			masturGasm("Vaginal");
 			dynStats("sen", 1);
 			player.dumpEggs();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function tentacleSelfFuck2():void {
@@ -3086,7 +3087,7 @@ public class Masturbation extends BaseContent {
 			outputText(" For hour your lock yourself in constant bliss until after a number of incalculable consecutive orgasm you collapse to the ground exhausted and entirely drenched in black ink.\n\n");
 			outputText("You proceed to clean yourself up in the nearby stream then go lay down on the grass to dry drifting off into a quick nap.");
 			masturGasm("Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Tentacle In Gina Faps.
@@ -3247,7 +3248,7 @@ public class Masturbation extends BaseContent {
 			outputText(" to dribble the spent passion on the ground.  Damn, that was satisfying.");
 			//(-2 sens + 1 per tentacle dick, -100 lust)
 			masturGasm("Dick", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function stamenSelfFuck():void {
@@ -3304,7 +3305,7 @@ public class Masturbation extends BaseContent {
 			outputText("\n\nAt once, your whole body sags back, limp and drained. You move your vines move back to their normal position, popping out of your vagina, ass, and mouth, leaving your orifices to dribble the spent passion. Damn, that was satisfying.");
 			masturGasm("Dick", "Vaginal");
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 	private function twinYuri():void {
@@ -3325,7 +3326,7 @@ public class Masturbation extends BaseContent {
 				"\"<i>I think we only do it for variety. Truthfully, I would get bored if it was just us two all the time… Plus, who says no to a threesome?</i>\"\n\n" +
 				"The two of you giggle at this idea as you resume your journey, highly satisfied.");
 		masturGasm("Dick", "Vaginal");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 		//Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
@@ -3421,7 +3422,7 @@ public class Masturbation extends BaseContent {
 					outputText("\n\nWhen you wake up you find " + payout1 + " gems in the puddle of spunge your " + cockDescript(0) + " created.</b>\n\n");
 				}
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function stamenGoesUpYerPooperNewsAtEleven():void {
@@ -3451,7 +3452,7 @@ public class Masturbation extends BaseContent {
 			outputText("cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
 			outputText("\n\nThe conjugated friction of your vine writhing inside your devastated interior (as well as the rough hanjdob you’re giving yourself) eventually proves too much for your horny body, and all of your stamens releases a massive load, squirting flower juices everywhere inside (and outside) your body. Pressure builds in your ass (and your hands) as pollen flows out of you. You groan and lazily remove your stamen from your anus as you give in to your pleasure-induced drowsiness. You drift into a brief catnap, your stamens mounted vines pulsing and throbbing with continual lust.");
 			masturGasm("Dick", "Ass");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Unique Masturbation Scene (by Frogapus)
@@ -3494,7 +3495,7 @@ public class Masturbation extends BaseContent {
 			player.gems += gems;
 			flags[kFLAGS.GILDED_JERKED]++;
 			statScreenRefresh();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function stickADildoInYourVagooSlut():void {
@@ -3536,7 +3537,7 @@ public class Masturbation extends BaseContent {
 			}
 			masturGasm("Vaginal");
 			statScreenRefresh();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Dildo in the butt because why not?
@@ -3569,7 +3570,7 @@ public class Masturbation extends BaseContent {
 			masturGasm("Anal");
 			dynStats("sen", 0.5);
 			statScreenRefresh();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function midasCockJackingGemsRoll():int {
@@ -3642,7 +3643,7 @@ public class Masturbation extends BaseContent {
 				+ "\n"
 				+ "You finally fall into a puddle on the ground as you achieve release, [skin color] goo spewing everywhere from your cocks, breasts and cunts. Obviously, you take care to recover the fluid as you ready yourself back for adventure, thoroughly satisfied albeit not sated.\n");
 			player.sexReward("no", "Default");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }
