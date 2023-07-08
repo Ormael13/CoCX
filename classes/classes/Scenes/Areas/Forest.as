@@ -7,10 +7,10 @@ import classes.*;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
@@ -62,7 +62,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("You enjoy a peaceful walk in the deepwoods.  It gives you time to think over the recent, disturbing events.");
 			dynStats("tou", 0.5, "int", 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function tentacleBeastDeepwoodsEncounterFn():void {
 			if (player.gender > 0) flags[kFLAGS.TENTABEAST_CENT_GLESS_MET] = 0;
@@ -72,7 +72,7 @@ use namespace CoC;
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");
 				menu();
 				addButton(0, "Continue", tentacleBeastScene.encounter);
-				addButton(1, "Leave", camp.returnToCampUseOneHour);
+				addButton(1, "Leave", explorer.done);
 			} else {
 				tentacleBeastScene.encounter();
 			}
@@ -91,9 +91,12 @@ use namespace CoC;
 		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
-			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
+			_forestOutskirtsEncounter = Encounters.group("outskirtsforest",
+					{
 						//General Golems, Goblin, Angels and Imp Encounters
 						name: "common",
+						label: "Monsters",
+						kind: 'monster',
 						chance: 0.4,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
@@ -103,12 +106,17 @@ use namespace CoC;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						label : "Helia",
+						kind  : 'npc',
+						unique: true,
 						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: forestChance2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name  : "Tamani",
+						kind  : 'npc',
+						unique: true,
 						night : false,
 						chance: 0.6,
 						call  : function ():void {
@@ -128,6 +136,9 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Tamani_Daughters",
+						label : "Tamain Daughters",
+						kind  : 'npc',
+						unique: true,
 						night : false,
 						call  : function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
@@ -139,20 +150,15 @@ use namespace CoC;
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
 								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
 						}
-					}, {
-						name  : "corrGlade",
-						call  : corruptedGlade.encounter,
-						when  : function():Boolean {
-							return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
-						},
-						chance: function():Number {
-							return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
-						}
-					}, {
+					}, corruptedGlade.encounter, {
 						name: "trip",
+						label:"Root",
+						kind: 'trap',
 						call: tripOnARoot
 					}, {
 						name  : "beegirl",
+						label : "Bee-girl",
+						kind  : 'monster',
 						night : false,
 						call  : function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
@@ -161,6 +167,8 @@ use namespace CoC;
 						chance: 0.20
 					}, {
 						name  : "werewolfFemale",
+						label : "Werewolf (F)",
+						kind : 'monster',
 						day : false,
 						when: fn.ifLevelMin(12),
 						call  : function ():void {
@@ -170,23 +178,34 @@ use namespace CoC;
 						chance: 0.50
 					}, {
 						name  : "truffle",
+						label : "Truffle",
+						kind : 'item',
 						call  : findTruffle,
 						chance: 0.20
 					}, {
 						name  : "chitin",
+						label : "Chitin",
+						kind : 'item',
 						call  : findChitin,
 						chance: 0.20
 					}, {
 						name  : "healpill",
+						label : "Heal Pill",
+						kind : 'item',
 						call  : findHPill,
 						chance: 0.20
 					}, {
 						name  : "woods",
+						label : "Woods",
+						kind : 'item',
 						call  : camp.cabinProgress.gatherWoods,
 						when  : camp.cabinProgress.canGatherWoods,
 						chance: 4
 					}, {
 						name  : "marble",
+						label : "Marble",
+						kind : 'npc',
+						unique:true,
 						night : false,
 						call  : marbleVsImp,
 						when  : function ():Boolean {
@@ -200,9 +219,14 @@ use namespace CoC;
 						chance: forestChance3
 					}, {
 						name: "walk",
-						call: forestWalkFn
+						call: forestWalkFn,
+						kind:'walk'
 					}, {
 						name  : "essrayle",
+						label : "Essrayle",
+						kind:'npc',
+						unique:true,
+						reenter:true,
 						night : false,
 						call  : essrayle.essrayleMeetingI,
 						when  : function():Boolean {
@@ -213,10 +237,14 @@ use namespace CoC;
 						chance: 0.25
 					}, {
 						name  : "bigjunk",
+						kind  : 'event',
 						call  : bigJunkForestScene,
 						chance: bigJunkChance
 					}, {
 						name  : "konstantin",
+						label : "Konstantin",
+						kind  : 'npc',
+						unique: true,
 						call  : SceneLib.konstantin.meetKonstantinAtForest,
 						when  : function():Boolean {
 							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
@@ -224,6 +252,9 @@ use namespace CoC;
 						chance: forestChance4
 					}, {
 						name  : "luna",
+						label : "Luna",
+						kind  : 'npc',
+						unique: true,
 						call  : SceneLib.lunaFollower.fullMoonEventResistWinFireHerForest,
 						when  : function():Boolean {
 							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
@@ -326,16 +357,7 @@ use namespace CoC;
 						},
 						when  : fn.ifLevelMin(3),
 						chance: 0.80
-					}, {
-						name  : "corrGlade",
-						call  : corruptedGlade.encounter,
-						when  : function():Boolean {
-							return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
-						},
-						chance: function():Number {
-							return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
-						}
-					}, {
+					}, corruptedGlade.encounter, {
 						name  : "beegirl",
 						night : false,
 						call  : function ():void {
@@ -651,16 +673,7 @@ use namespace CoC;
 				call  : camp.cabinProgress.gatherWoods,
 				when  : camp.cabinProgress.canGatherWoods,
 				chance: 4
-			}, {
-				name  : "corrGlade",
-				call  : corruptedGlade.encounter,
-				when  : function():Boolean {
-					return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
-				},
-				chance: function():Number {
-					return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
-				}
-			}, {
+			}, corruptedGlade.encounter, {
 				name: "tentabeast",
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
@@ -771,22 +784,26 @@ use namespace CoC;
 		}
 
 		public function tripOnARoot():void {
-			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.");
-			player.takePhysDamage(10);
-			doNext(camp.returnToCampUseOneHour);
+			if (explorer.inEncounter && explorer.getCurrentEntry().isFullyRevealed) {
+				outputText("You carefully step over an exposed root.");
+			} else {
+				outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.");
+				player.takePhysDamage(10);
+			}
+			endEncounter();
 		}
 		public function findTruffle():void {
 			outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort.");
-			inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.PIGTRUF, explorer.done);
 		}
 		public function findHPill():void {
 			outputText("You find a pill stamped with the letter 'H' discarded on the ground.");
-			inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.H_PILL, explorer.done);
 		}
 		public function findChitin():void {
 			clearOutput();
 			outputText("You find a large piece of insectile carapace obscured in the ferns to your left. It's mostly black with a thin border of bright yellow along the outer edge. There's still a fair portion of yellow fuzz clinging to the chitinous shard. It feels strong and flexible - maybe someone can make something of it.");
-			inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
+			inventory.takeItem(useables.B_CHITN, explorer.done);
 		}
 		public function forestWalkFn():void {
 			if (player.cor < 80) {
@@ -810,7 +827,7 @@ use namespace CoC;
 				}
 				dynStats("tou", 0.5, "lib", 0.25, "lus", player.lib / 5);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function marbleVsImp():void {
 			clearOutput();
@@ -819,17 +836,19 @@ use namespace CoC;
 			outputText("\n\nShe goes up to the imp and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large bundles of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
 			outputText("\n\nShe gives a wistful sigh. \"<i>I haven't really explored much since getting to the farm.  Between the jobs Whitney gives me, keeping in practice with my hammer, milking to make sure I don't get too full, cooking, and beauty sleep, I don't get a lot of free time to do much else.</i>\"  She sighs again.  \"<i>Well, I need to get this back, so I'll see you later!</i>\"");
 			//end event
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function exploreForestOutskirts():void
 		{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			//Increment forest exploration counter.
-			player.exploredForest++;
-//			forestStory.execute();
-			forestOutskirtsEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(forestOutskirtsEncounter);
+			explorer.setTags("forest","forestOutskirts");
+			explorer.prompt = "You explore the forest outskirts.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				player.exploredForest++;
+			}
+			explorer.leave.hint("Leave the forest outskirts");
+			explorer.skillBasedReveal(1, player.exploredForest);
+			explorer.doExplore();
 		}
 		public function exploreForest():void
 		{
@@ -942,7 +961,7 @@ use namespace CoC;
 			}
 			dynStats("lus", 25 + rand(player.cor / 5), "scale", false);
 			fatigue(5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function partsofAlakablam():void {
@@ -951,7 +970,7 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the Alakablam in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Alakablam", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function jojoEncounter():void {
 			clearOutput();
@@ -979,7 +998,7 @@ use namespace CoC;
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");
 				menu();
 				addButton(0, "Continue", tentacleBeastScene.encounter);
-				addButton(1, "Leave", camp.returnToCampUseOneHour);
+				addButton(1, "Leave", explorer.done);
 			} else {
 				tentacleBeastScene.encounter();
 			}
@@ -991,7 +1010,7 @@ use namespace CoC;
 			//	trace("TENTACLE'S AVOIDED DUE TO BOOK!");		//should it be comented out for alru?
 				outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
 				menu();
-				addButton(0, "Yes", camp.returnToCampUseOneHour);
+				addButton(0, "Yes", explorer.done);
 				addButton(1, "No", alrauneScene.alrauneDeepwoods);
 			} else {
 				alrauneScene.alrauneDeepwoods();
@@ -1000,14 +1019,14 @@ use namespace CoC;
 		private function lilirauneIngrediantEvent():void {
 			clearOutput();
 			outputText("You spot a weird looking flower on a patch of grass that is ripe with corruption. It looks pretty normal save for it having two pistils instead of just one. You feel oddly drawn to it, deciding to bag it just in case.\n\n");
-			inventory.takeItem(consumables.STRFLOW, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.STRFLOW, explorer.done);
 		}
 		public function discoverDeepwoods():void {
 			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
 			clearOutput();
 			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n");
 			outputText("<b>Deepwoods exploration unlocked!</b>");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function bigJunkChance():Number {
 			var temp:Number = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;

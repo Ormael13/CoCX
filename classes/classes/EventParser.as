@@ -12,7 +12,6 @@ import classes.Items.WeaponLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.EtnaDaughterScene;
-import classes.Scenes.NPCs.MidokaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -53,6 +52,10 @@ public class EventParser {
             return;
         }
         CoC.instance.flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
+        if (SceneLib.explorationEngine.isActive) {
+            SceneLib.explorationEngine.doExplore();
+            return;
+        }
         _doCamp();
     }
 

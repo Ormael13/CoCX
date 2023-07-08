@@ -619,9 +619,7 @@ public class MainView extends Block {
 		button = event.target as CoCButton;
 
 		if (button && button.visible && button.toolTipText) {
-			this.toolTipView.header = button.toolTipHeader;
-			this.toolTipView.text   = button.toolTipText;
-			this.toolTipView.showForElement(button);
+			this.toolTipView.showForElement(button, button.toolTipHeader, button.toolTipText);
 		}
 		else {
 			this.toolTipView.hide();

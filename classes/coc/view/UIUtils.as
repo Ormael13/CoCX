@@ -4,6 +4,7 @@
 package coc.view {
 import classes.internals.Utils;
 
+import flash.filters.DropShadowFilter;
 import flash.text.AntiAliasType;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
@@ -57,17 +58,31 @@ public class UIUtils {
 			defaultTextFormat: UIUtils.convertTextFormat,
 			background: UIUtils.convertColor,
 			textColor: UIUtils.convertColor,
+			autoSize: null, // set later
 			text: null, // set later
 			htmlText: null
 		});
 		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
 		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
 			e.autoSize = TextFieldAutoSize.LEFT;
+		} else if ('autoSize' in options) {
+			// set it after sizes
+			e.autoSize = options['autoSize'];
 		}
 		if ('htmlText' in options) e.htmlText = options.htmlText;
 		else if ('text' in options) e.text = options.text;
 		return e;
 	}
-
+	public static function outlineFilter(color:*):DropShadowFilter {
+		return new DropShadowFilter(
+				0.0,
+				0,
+				Color.convertColor32(color),
+				1.0,
+				4.0,
+				4.0,
+				10.0
+		)
+	}
 }
 }

@@ -1,6 +1,7 @@
 package classes.Scenes {
 import classes.CoC;
 import classes.Items.ItemSetChecks;
+import classes.Scenes.API.ExplorationEngine;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
@@ -35,6 +36,8 @@ public class SceneLib {
     public static var combat:Combat = new Combat();
 
     public static var exploration:Exploration = new Exploration();
+    
+    public static var explorationEngine:ExplorationEngine = new ExplorationEngine();
 
     public static var followerInteractions:FollowerInteractions = new FollowerInteractions();
 

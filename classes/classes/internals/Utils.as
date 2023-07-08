@@ -726,6 +726,21 @@ public class Utils extends Object
 			return Math.random()*n < 1;
 		}
 
+		/**
+		 * Shuffle the elements in the array randomly. Returns the array.
+		 */
+		public static function shuffle(a:Array):Array {
+			// https://en.wikipedia.org/wiki/Fisher-Yates_shuffle
+			const n:int = a.length;
+			for (var i:int = n-1; i >= 1; i--) {
+				var j:int = rand(i+1);
+				var x:* = a[i];
+				a[i] = a[j];
+				a[j] = x;
+			}
+			return a;
+		}
+
 		public static function validateNonNegativeNumberFields(obj:Object, func:String, nnf:Array):String
 		{
 			var error:String = "";
