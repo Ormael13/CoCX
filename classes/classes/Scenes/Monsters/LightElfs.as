@@ -156,7 +156,7 @@ public class LightElfs extends Monster
 				this.armorMDef = 12;
 				this.bonusLust = 197;
 				this.weaponRangeAttack = 30;
-				this.level = 14;
+				this.level = 47;
 				this.gems = rand(10) + 20;
 			}
 			if (flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] == 13) {

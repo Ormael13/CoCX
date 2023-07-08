@@ -1112,8 +1112,9 @@ public class Exploration extends BaseContent
 			}
 			else if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
-				outputText("\n\n<b>A wild Dark Elf Ranger Appears.</b>");
-				startCombat(new DarkElfRanger());//lvl 39
+				outputText("\n\n<b>A wild Light Elf Ranger Appears.</b>");
+				flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 12;
+				startCombat(new LightElfs());//lvl 47
 				return;
 			}
 			else {

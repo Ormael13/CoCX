@@ -87,6 +87,13 @@ package classes.Scenes.Monsters
 				bonusWrath += 700;
 				bonusSoulforce += 1400;
 			}
+			else if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				addPerkValue(PerkLib.DieHardHP, 1, 6);
+				addStatusValue(StatusEffects.TranscendentSoulField, 1, 6);
+				addStatusValue(StatusEffects.TranscendentSoulField, 2, 6);
+				bonusWrath += 200;
+				bonusSoulforce += 400;
+			}
 			else {
 				addPerkValue(PerkLib.DieHardHP, 1, 10);
 				addStatusValue(StatusEffects.TranscendentSoulField, 1, 10);
@@ -152,6 +159,24 @@ package classes.Scenes.Monsters
 				this.armorMDef = 45;
 				this.createStatusEffect(StatusEffects.ATranscendentSoulField, 28, 28, 0, 0);//X times less dmg, +X lvl diff bonus
 				this.createPerk(PerkLib.DieHardHP, 28, 0, 0, 0);
+			}
+			else if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				this.short = "low-rank angel";
+				initStrTouSpeInte(6, 75, 35, 15);
+				initWisLibSensCor(100, 3, 25, 0);
+				this.drop = new ChainedDrop()
+						.add(useables.SRESIDUE, 1);
+				this.level = 9;
+				this.bonusHP = 400;
+				this.bonusLust = 36;
+				this.bonusWrath = 100;
+				this.bonusSoulforce = 200;
+				this.additionalXP = 60;
+				this.weaponAttack = 4;
+				this.armorDef = 9;
+				this.armorMDef = 9;
+				this.createStatusEffect(StatusEffects.ATranscendentSoulField, 6, 6, 0, 0);//X times less dmg, +X lvl diff bonus
+				this.createPerk(PerkLib.DieHardHP, 6, 0, 0, 0);
 			}
 			else {
 				this.short = "low-rank angel";

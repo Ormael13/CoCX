@@ -1045,10 +1045,31 @@ public function soularena():void {
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 		monster.XP = monster.XP * 2;
     }
-	public function gaunletsinbetween():void {
+	public function soularenafightsbetween():void {
 		cleanupAfterCombat();
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
+	}
+	public function intermediateleadershipfight1():void {
+		clearOutput();
+		outputText("\n\n");
+		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+        startCombat(new GolemsDummy());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+	}
+	public function intermediateleadershipfight2():void {
+		clearOutput();
+		soularenafightsbetween();
+		outputText("\n\n");
+		startCombat(new TentacleBeast());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+	}
+	public function intermediateleadershippostfight():void {
+		clearOutput();
+		outputText("\n\n");
+		player.createPerk(PerkLib.IntermediateLeadership, 0, 0, 0, 0);
+        cleanupAfterCombat();
 	}
     public function gaunletchallange1fight1():void {
         clearOutput();
@@ -1065,7 +1086,7 @@ public function soularena():void {
     }
     public function gaunletchallange1fight2():void {
         clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the last of the golems fall down, the commentator resumes.\n\n");
         outputText("\"<i>This one is straight from the woods. Freshly caught and horny to boot. Can our champion’s strength overcome the beast’s lust? LET'S FIND OUT!!</i>\"\n\n");
         outputText("A shadow moves out behind the gate, revealing the shape of a fluid starved tentacle beast.\n\n");
@@ -1074,7 +1095,7 @@ public function soularena():void {
     }
     public function gaunletchallange1fight3():void {
         clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
         outputText("\"<i>This contestant is smaller than the last two... She's smarter, and most of all, extremely deadly. She’s paid a handsome sack of gems to kick the ass of anyone who reaches this stage. This femme fatale is by far the deadliest combatant of her division. The crowd favorite huntress from the dark woods... Merisiel the dark elf!!!</i>\"\n\n");
         outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The dark elf readies her bow, smirking.\n\n");
@@ -1112,7 +1133,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the goblin falls unconscious to the ground the crowd cheers you on.\n\n");
         outputText("\"<i>It would seems the hero squashed that midget good, but we're only just beginning. Our next contestant has been incarcerated for daring to break the laws of our fair city! For forcing his way in, and attempting to have his way with our fairest, he'll be here for a good long time! He's been kept locked up for two consecutive months. No sex, no masturbation... and he is desperate to sow his seed...Can the challenger take him on? Or will they take him...IN?! We now release... THE HOUND!!!</i>\"\n\n");
         outputText("A hellhound of massive proportions rush out of an opening gate. Its eyes burning with lust.\n\n");
@@ -1121,7 +1142,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nThe mutt falls to the floor as the crowd screams your name. The announcer announces the next contestant.\n\n");
         outputText("\"<i>The next opponent is a crowd favorite. You've heard her name told in shallow whispers. The silken jailer, the Bondswebber... The Bitch Breaker! That's right, our next opponent is an expert of the dreaded art known as BDSM. Will the challenger hold her back? Or will the Mistress claim another victim?! Please welcome...Mistress...Malady!!!</i>\"\n\n");
         outputText("A drider in a bondage suit comes out of the gate and eyes you, amused.\n\n");
@@ -1131,7 +1152,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the drider falls defeated, the crowd cheers. That said the battle is far from over yet. A large number of shadows mass behind the opposite gate and already you can guess what's coming for you.\n\n");
         outputText("\"<i>The final contestant is both a new opponent and a test! Our resident golemancer has been cooking up something special. Using the traditional gargoyle model, deprived of a soul, only fit for mass production, these living weapons feel no pain, show no fear...and HAVE. NO. MERCY! Our challenger has broken through the competition so far, but can they break this wall of stone?</i>\"\n\n");
         outputText("A full squad of stone gargoyles pour out of the gate, their mace-like tails trailing in the sands. Their claws are sharp and their soulless gaze tells you it will end poorly should you lose.\n\n");

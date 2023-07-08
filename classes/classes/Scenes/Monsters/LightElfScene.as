@@ -7,7 +7,6 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
-	import classes.Scenes.Areas.Caves.DarkElfRangerCaves;
     import classes.display.SpriteDb;
 
 public class LightElfScene extends BaseContent
