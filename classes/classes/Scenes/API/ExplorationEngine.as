@@ -1,5 +1,7 @@
 package classes.Scenes.API {
 import classes.BaseContent;
+import classes.CoC;
+import classes.PerkLib;
 import classes.Scenes.SceneLib;
 
 import coc.view.ButtonData;
@@ -564,6 +566,30 @@ public class ExplorationEngine extends BaseContent {
 				}
 			}
 		}
+	}
+	
+	public function skillBasedReveal(areaLevel:Number, timesExplored:Number):void {
+		var n:Number = 0;
+		
+		// +1 reveal per 100 area explorations
+		n += timesExplored/100;
+		
+		// +1 reveal per 10 wisdom, scaled with NG+ level and area level
+		var wisFactor:Number = 10;
+		wisFactor *= 1 + (areaLevel-1)/99; // x1 on area level 1, x2 on area level 100
+		wisFactor *= (1 + 0.2 * CoC.instance.newGamePlusMod()); // +20% per NG level
+		n += player.wis / wisFactor;
+		
+		// +1 reveal per Eyes of the Hunter rank
+		if (player.hasPerk(PerkLib.EyesOfTheHunterNovice)) n += 1;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept)) n += 1;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterExpert)) n += 1;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterMaster)) n += 1;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster)) n += 1;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterEx)) n += 1;
+		if (player.hasPerk(PerkLib.EyesOfTheHunterSu)) n += 1;
+		
+		revealMultiple(n);
 	}
 }
 }

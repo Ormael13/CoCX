@@ -847,7 +847,7 @@ use namespace CoC;
 				player.exploredForest++;
 			}
 			explorer.leave.hint("Leave the forest outskirts");
-			explorer.revealMultiple(player.wis/10+player.exploredForest/100);
+			explorer.skillBasedReveal(1, player.exploredForest);
 			explorer.doExplore();
 		}
 		public function exploreForest():void

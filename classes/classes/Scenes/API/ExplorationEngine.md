@@ -224,6 +224,16 @@ Ignores disabled (cleared or off-road) entries.
 ---
 
 ```as
+explorer.skillBasedReveal(areaLevel, timesExplored);
+```
+
+Reveal some number of nodes based on player stats, perks, area level and times area was explored.
+
+See function source for exact formula.
+
+---
+
+```as
 explorer.revealRandom()
 ```
 Pick one random `ExplorationEntry`, reveal it and return. `null` if none found.
