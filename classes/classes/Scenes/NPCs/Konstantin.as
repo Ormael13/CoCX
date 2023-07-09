@@ -2,7 +2,7 @@
  * ...
  * @author Coalsack
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -91,7 +91,7 @@ public class Konstantin extends NPCAwareContent
 				}
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForestWeapon():void {
 			clearOutput();
@@ -121,7 +121,7 @@ public class Konstantin extends NPCAwareContent
 				}
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForestNothing():void {
 			clearOutput();
@@ -137,7 +137,7 @@ public class Konstantin extends NPCAwareContent
 			}
 			else outputText("camp");
 			outputText(".\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForest2():void {
 			outputText("As you take your stuff from Konstantin, you’re questioned by the bear-smith.\n\n");
@@ -157,7 +157,7 @@ public class Konstantin extends NPCAwareContent
 		public function meetKonstantinAtForest2No():void {
 			outputText("\"<i>Right. Truth be told, we’ve barely met two times.</i>\" Konstantin says, sighing a bit. \"<i>These times you can’t put your trust in someone so easily, huh? At least I hope that we can see each other again.</i>\"\n\n");
 			outputText("With that, you bid each other farewell, and you return to your camp while he resumes his work.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForest2Yes():void {
 			outputText("\"<i>Really? Damn, I’m so fucking happy</i>\" Konstantin says, wrapping you in a literal bear-hug. \"<i>I’ll make sure that you don’t regret it [name]. And even better, since we’re on your place we’ll have time to meet each other better. So on top of not spending the rest of my life alone in the woods, now I’ll have a new friend.</i>\"\n\n");
@@ -179,6 +179,7 @@ public class Konstantin extends NPCAwareContent
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
 			outputText("\n\n<b>Before fully settling in your camp as if remembering something Konstantin pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 2;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -1092,7 +1093,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("\n\nWhen you can’t hold more seed inside, you let his cock flop free, bathing your face and body with the remaining jets of seed. Konstantin, a bit tired, reaches out to you, and licks most of his cum from your [skin], ticking you with his tongue as he does.\n\n");
 			outputText("Both of you quite satisfied, in more than one sense, you cuddle together and sleep on his bed.\n\n");
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenuReciveBJ():void {
 			clearOutput();
@@ -1131,7 +1132,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("\"<i>Maybe later [name]. I’ll have to rest a bit until our next romp.</i>\" Konstantin answers.\n\n");
 			outputText("Nodding, you grab your clothes and return to your task, not without getting another loving hug from the large bear before going out of his tent.\n\n");
 			player.orgasm();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenu69():void {
 			clearOutput();
@@ -1193,7 +1194,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Once his load has subsided, you lick the remaining cum from his tip, and hop to his side with a bit of difficulty, given the weight added to your cum-filled belly. There, you both relax and cuddle together, your body enveloped in his warm and furry embrace. After you’ve rested enough, you re-dress and give Konstantin a last kiss before returning to your tasks\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenuReciveAnal():void {
 			clearOutput();
@@ -1260,7 +1261,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Accepting his help, you take his hand and try to get up, to no avail, your cum-laden belly forcing you down. Instead, you opt to lie together in bed, relaxing and recovering of your intense lovemaking, while Konstantin gives you tender kisses, caressing your belly from time to time. After a while, you  remind yourself of your duties, and since you’re recovered enough, you grudgingly disentangle from his furred embrace, giving him a last hug before returning to your tasks.\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenuHotSpringFuck():void {
 			clearOutput();
@@ -1290,7 +1291,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Later, you disentangle of each other and wash again before you leave, his seed pouring from your anus as you walk. Laughing, he helps you clean yourself and  the excess cum out of your body. Then you dry yourselves and get dressed, and, after a strong hug and a loving kiss, you part ways with a satisfied smile on your faces.\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

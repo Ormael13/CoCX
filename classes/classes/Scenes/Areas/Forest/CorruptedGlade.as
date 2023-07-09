@@ -2,6 +2,8 @@ package classes.Scenes.Areas.Forest {
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Combat.Combat;
 import classes.display.SpriteDb;
 
@@ -37,17 +39,46 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
     }
 
-    public function encounter():void {
-        if (rand(4) == 0) trappedSatyr.findTrapped();
-        else {
-            clearOutput();
-            spriteSelect(SpriteDb.s_corruptedGlade);
-            outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.\n\n");
-            if (rand(3) == 0) {
-                outputText("While walking through the  glade you notice a rustling in the bushes.   Do you investigate?\n\n");
-                doYesNo(dryad.fightagainstdryad, intro);
-            }
-            else intro();
+    private function gladeWhen():Boolean {
+        return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
+    }
+    private function gladeChance():Number {
+        return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
+    }
+    public var encounter:GroupEncounter = Encounters.group({
+        name: "satyr",
+        label: "Trapped Satyr",
+        kind: "event",
+        call: trappedSatyr.findTrapped,
+        when  : gladeWhen,
+        chance: gladeChance,
+        mods: [0.25]
+    }, {
+        name: "dryad",
+        label: "Dryad",
+        kind: "monster",
+        call: curry(scene, true),
+        when  : gladeWhen,
+        chance: gladeChance,
+        mods: [0.25]
+    }, {
+        name: "glade",
+        label: "Corr. Glade",
+        kind: "place",
+        call: curry(scene,false),
+        when  : gladeWhen,
+        chance: gladeChance
+    });
+    
+    private function scene(dryad:Boolean):void {
+        clearOutput();
+        spriteSelect(SpriteDb.s_corruptedGlade);
+        outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.\n\n");
+        if (dryad) {
+            outputText("While walking through the  glade you notice a rustling in the bushes.   Do you investigate?\n\n")
+            doYesNo(this.dryad.fightagainstdryad, intro);
+        } else {
+            intro();
         }
     }
 
@@ -64,7 +95,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
             outputText("\n\nOf course, you could resolve to destroy the corrupted glade if you want to.");
             menu();
             addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
-            addButton(4, "Leave", camp.returnToCampUseOneHour);
+            addButton(4, "Leave", explorer.done);
         } else if (player.cor <= 66 - player.corruptionTolerance) { //intrigued reaction
             outputText("  You explore the glade with equal parts caution and curiosity.  ");
             switch (rand(3)) {
@@ -80,7 +111,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
             dynStats("lus", 20 + player.lib / 5, "cor", .5);
             menu();
             addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
-            addButton(4, "Leave", camp.returnToCampUseOneHour);
+            addButton(4, "Leave", explorer.done);
         } else { //drink sap/lick flower reaction
             outputText("  You smile as you enter the glade, wondering which of the forbidden fruits you should try...\n\nThere are flowers that bear more than a passing resemblance to pussies,\nvines with absurdly large penis-like tips,\nand trees covered in breast-like knots, leaking sap.");
             menu();
@@ -88,7 +119,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
             addButton(1, "Vines", tentacleFun).hint("These vines look like cocks at their tips. Play with the vines.");
             addButton(2, "Trees", treeBoobFun).hint("The knots on the trees look a lot like breasts. Play with the trees and lick some sap.");
             addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
-            addButton(4, "Leave", camp.returnToCampUseOneHour);
+            addButton(4, "Leave", explorer.done);
         }
         //Wallow in decadence reaction - UNFINISHED
     }
@@ -150,7 +181,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
                 booster += 2;
             if (player.hasPerk(PerkLib.MessyOrgasms) && player.cumMultiplier < 3) booster += 2;
             player.cumMultiplier += booster;
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
 
         function oralF():void { //Oral sex for those without!
@@ -163,7 +194,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
             outputText("You walk away, your lips and tongue feeling slightly puffy and sensitive, but none the worse for the wear.");
             player.sexReward("vaginalFluids", "Lips");
             dynStats("sen", 4, "cor", 1);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
     }
 
@@ -279,7 +310,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
                 player.hips.type += rand(3) + 1;
                 player.fertility++;
             }
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
 
         function suckF():void {
@@ -326,7 +357,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
                     }
                 }
             }
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
     }
 
@@ -358,7 +389,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
                 }
             }
         }
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //DESTROY THE CORRUPTED GLADE!
@@ -389,7 +420,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         }
         if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Your Hands", "You are too tired to destroy the foul glade this way.");
         else addButton(button++, "Your Hands", destroyTheCorruptedGlades, 5);
-        addButton(14, "Never mind", camp.returnToCampUseOneHour);
+        addButton(14, "Never mind", explorer.done);
     }
 
     private function destroyTheCorruptedGlades(choice:int):void {
@@ -437,7 +468,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
                 if (player.str < 30) { //Low strength.
                     outputText("You grab at one of the plants and easily rip the flower stem. Next, you grab one of the vines and focus on tearing it but despite your best efforts, you can't tear it. Sighing with frustration, you drop the vine. You'll have to come back later. \n\n");
                     fatigue(50);
-                    doNext(camp.returnToCampUseOneHour);
+                    endEncounter();
                     return;
                 } else if (player.str >= 30 && player.str < 70) { //Medium strength
                     outputText("You grab at one of the plants and easily rip the flower stem. Next, you grab one of the vines and focus on tearing it and with all your efforts, you manage to tear it. Finally, you look up at the tree but there's no way you could easily take down the tree. \n\n");
@@ -461,7 +492,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 75) outputText("\n\nYou have a feeling you'll see the glades much less often.");
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 100) outputText("\n\nThat should be the last of the glades! <b>Corrupted Glades are now extinct.</b>");
         if (player.hasPerk(PerkLib.QueenOfTheFairies)) player.QueenOfTheForestGladeBonus();
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 }
 }

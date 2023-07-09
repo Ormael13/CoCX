@@ -6,11 +6,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
-import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Camp.*;
 import classes.Scenes.NPCs.*;
-import classes.Scenes.NPCs.EtnaDaughterScene;
-import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.RuinedTownRebuilt;
@@ -75,6 +72,13 @@ public class Camp extends NPCAwareContent{
 	}
 
 	public function returnToCamp(timeUsed:int):void {
+		if (explorer.inEncounter && timeUsed == 1) {
+			clearOutput();
+			outputText("Encounter '"+explorer.getCurrentEntry().encounterName+"' does not end with 'endEncounter()'. This is a bug.");
+			endEncounter();
+			return;
+		}
+		explorer.clear();
 		clearOutput();
 		if (timeUsed == 1)
 			outputText("An hour passes...\n");
@@ -121,7 +125,29 @@ public class Camp extends NPCAwareContent{
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
-
+	
+	/**
+	 * @return 0: normal lust, 1: over lust, 2: over lust, can't do anything
+	 */
+	public function overLustCheck():int {
+		if (player.lust >= player.maxOverLust()) {
+			if (player.hasStatusEffect(StatusEffects.Dysfunction)) {
+				outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n");
+				return 1;
+			} else if (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
+				outputText("<b>You are delibitatingly aroused, but your sex organs are so difficult to reach that masturbation isn't at the forefront of your mind.</b>\n\n");
+				return 1;
+			} else if (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird) || player.hasStatusEffect(StatusEffects.IsKirin)) {
+				outputText("<b>You are delibitatingly aroused, but have no ways to reach true release on your own. The first thing up your mind right now is to find a partner willing or unwilling to discharge yourself into.</b>\n\n");
+				return 1;
+			} else {
+				outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n");
+				return 2;
+			}
+		}
+		return 0;
+	}
+	
 	public function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
 		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
@@ -941,19 +967,10 @@ public class Camp extends NPCAwareContent{
 		}
 
 		//The uber horny
-		if (player.lust >= player.maxOverLust()) {
-			if (player.hasStatusEffect(StatusEffects.Dysfunction)) {
-				outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n");
-			} else if (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
-				outputText("<b>You are delibitatingly aroused, but your sex organs are so difficult to reach that masturbation isn't at the forefront of your mind.</b>\n\n");
-			} else if (player.hasStatusEffect(StatusEffects.IsRaiju) || player.hasStatusEffect(StatusEffects.IsThunderbird) || player.hasStatusEffect(StatusEffects.IsKirin)) {
-				outputText("<b>You are delibitatingly aroused, but have no ways to reach true release on your own. The first thing up your mind right now is to find a partner willing or unwilling to discharge yourself into.</b>\n\n");
-			} else {
-				outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n");
-				exploreEvent = null;
-				placesEvent = null;
-				//This once disabled the ability to rest, sleep or wait, but ir hasn't done that for many many builds
-			}
+		if (overLustCheck() == 2) {
+			exploreEvent = null;
+			placesEvent = null;
+			//This once disabled the ability to rest, sleep or wait, but ir hasn't done that for many many builds
 		}
 		//Set up rest stuff
 		//Night
@@ -4842,4 +4859,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

@@ -2,6 +2,7 @@
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Parser.Parser;
+import classes.Scenes.API.ExplorationEngine;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.D3.D3;
@@ -809,6 +810,12 @@ import coc.xxc.StoryContext;
 		}
 		protected function get context():StoryContext {
 			return CoC.instance.context;
+		}
+		protected static function get explorer():ExplorationEngine {
+			return SceneLib.explorationEngine;
+		}
+		protected function endEncounter():void {
+			doNext(explorer.done);
 		}
 
 		/**

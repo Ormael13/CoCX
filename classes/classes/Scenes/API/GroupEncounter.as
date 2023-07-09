@@ -49,9 +49,13 @@ public class GroupEncounter implements Encounter {
 		Encounters.select(components).execEncounter();
 		Encounters.debug_indent = Encounters.debug_indent.slice(2);
 	}
-	public function pickEncounter():Encounter {
-		var e:Encounter = Encounters.select(components);
-		if (e is GroupEncounter) return (e as GroupEncounter).pickEncounter();
+	/**
+	 * @param [filter] function(e:Encounter):boolean
+	 * @return
+	 */
+	public function pickEncounter(filter:Function=null):Encounter {
+		var e:Encounter = Encounters.select(components, filter);
+		if (e is GroupEncounter) return (e as GroupEncounter).pickEncounter(filter);
 		return e;
 	}
 

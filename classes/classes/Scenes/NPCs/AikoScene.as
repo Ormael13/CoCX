@@ -7,11 +7,10 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.API.Encounter;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
-public class AikoScene extends BaseContent implements Encounter, TimeAwareInterface
+public class AikoScene extends BaseContent implements TimeAwareInterface
 	{
 		
 		public function AikoScene()
@@ -46,10 +45,6 @@ public class AikoScene extends BaseContent implements Encounter, TimeAwareInterf
 	//public static const AIKO_SPAR_VICTORIES:int		= 2308;	//counter for sparring
 	
 private var talkAndSex:Boolean = false;
-
-public function encounterChance():Number { return 0.35; }
-public function encounterName():String { return "aiko"; }
-public function execEncounter():void { encounterAiko(); }
 
 //Encounter Aiko
 public function encounterAiko():void {
