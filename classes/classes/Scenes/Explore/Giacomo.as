@@ -1,5 +1,5 @@
 /*
- LICENSE 
+ LICENSE
  
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him to this project permission to alter the text to conform with current and new game functions, only. Dxasmodeus retains exclusive rights to alter or change the core contents of the events and no other developer may alter, change or use the events without permission from dxasmodeus. Fenoxo agrees to include Dxasmodeus' name in the credits with indications to the specific contribution made to the licensor. This license must appear
@@ -26,10 +26,10 @@ For further information and license requests, Dxasmodeus may be contacted throug
 package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Camp.Garden;
 import classes.display.SpriteDb;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
@@ -114,7 +114,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(2, "Erotica", eroticaMenu);
 			addButton(3, "Misc", miscMenu);
 			if (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Worm Cure", wormRemovalOffer);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 			statScreenRefresh();
 		}
 		
@@ -1011,7 +1011,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.buff("Infested").remove();
 			dynStats("lus", -99, "cor", -4);
 			player.gems -= 175;
-			inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.VITAL_T, explorer.done);
 		}
 		
 		private function wormRemovalOffer():void {

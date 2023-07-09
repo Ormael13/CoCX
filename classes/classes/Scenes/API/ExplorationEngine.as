@@ -7,18 +7,21 @@ import classes.Scenes.SceneLib;
 import coc.view.ButtonData;
 import coc.view.CoCButton;
 import coc.view.Color;
+import coc.view.MainView;
 import coc.view.UIUtils;
 
 import flash.display.Graphics;
 import flash.display.Sprite;
 import flash.text.TextField;
+import flash.utils.Dictionary;
 
 public class ExplorationEngine extends BaseContent {
 	private static const MAXDEPTH:int      = 7;
 	private static const NROADS:int        = 5;
 	private static const N:int             = NROADS * MAXDEPTH;
 	private static const LINE_WIDTH:Number = 4;
-	private static const LINE_COLOR:String = "#444444";
+	private static const LINE_DISABLED:String = "#888888";
+	private static const LINE_COLOR:String = "#884444";
 	private static const LINE_NEXT:String  = "#0080ff";
 	
 	private function filterUnique(e:SimpleEncounter):Boolean {
@@ -46,12 +49,22 @@ public class ExplorationEngine extends BaseContent {
 	private const filters:/*Function*/Array = [filterForStart, filterForMid, filterForEnd];
 	
 	public function ExplorationEngine() {
+		const SIZE:Number = ExplorationEntry.RADIUS * 2;
+		const XGAP:Number = (MainView.TEXTZONE_W) / (MAXDEPTH + 1) - SIZE;
+		const YGAP:Number = SIZE * 1.5;
+		
+		startPos       = new ExplorationEntry(-1, -1, XGAP / 2, YGAP + (NROADS - 1) * (SIZE + YGAP) / 2);
+		startPos.label = "Start";
+		var y:Number   = YGAP;
 		for (var i:int = 0; i < NROADS; i++) {
+			var x:Number = startPos.sprite.x + SIZE + XGAP;
 			roads.push([]);
 			for (var j:int = 0; j < MAXDEPTH; j++) {
-				roads[i][j] = new ExplorationEntry();
+				roads[i][j] = new ExplorationEntry(i, j, x, y);
 				flatList.push(roads[i][j]);
+				x += SIZE + XGAP;
 			}
+			y += SIZE + YGAP;
 		}
 		initialized = true; // for clear() to work
 		clear();
@@ -69,16 +82,16 @@ public class ExplorationEngine extends BaseContent {
 	 */
 	public var canRevealFull:Boolean = true;
 	public var canMasturbate:Boolean = true;
-	public var canInventory:Boolean = true;
+	public var canInventory:Boolean  = true;
 	/**
 	 * function(e:ExplorationEntry):Boolean, called BEFORE the encounter.
 	 * If it returns true, do not continue with the exploration UI
 	 */
-	public var onEncounter:Function   = null;
+	public var onEncounter:Function  = null;
 	/**
 	 * Called after UI is shown - can add custom buttons here
 	 */
-	public var onMenu:Function = null;
+	public var onMenu:Function       = null;
 	/**
 	 * A simple storage for current area tags.
 	 * @example
@@ -87,20 +100,23 @@ public class ExplorationEngine extends BaseContent {
 	 *
 	 * if (explorer.areaTags.forest) { ... }
 	 */
-	public var areaTags:Object        = {};
+	public var areaTags:Object       = {};
+	public var branchChance:Number   = 0;
 	
-	private var source:GroupEncounter              = new GroupEncounter("UNUSED", []);
-	private var playerEntry:ExplorationEntry       = null;
-	private var currentEntry:ExplorationEntry      = null;
-	private var flatList:/*ExplorationEntry*/Array = [];
-	private var roads:/*ExplorationEntry[]*/Array  = [];
-	private var road:/*ExplorationEntry*/Array     = null;
+	private var source:GroupEncounter               = new GroupEncounter("UNUSED", []);
+	private var playerEntry:ExplorationEntry        = null;
+	private var currentEntry:ExplorationEntry       = null;
+	private var flatList:/*ExplorationEntry*/Array  = [];
+	private var roads:/*ExplorationEntry[]*/Array   = [];
+	private var road:/*ExplorationEntry*/Array      = null;
 	/** Selected road */
-	private var roadIndex:int                      = -1;
+	private var roadIndex:int                       = -1;
 	/** Position on road - the next encounter to explore */
-	private var roadPos:int                        = -1;
-	private var initialized:Boolean                = false;
-	private var finished:Boolean                   = false;
+	private var roadPos:int                         = -1;
+	private var initialized:Boolean                 = false;
+	private var finished:Boolean                    = false;
+	private var startPos:ExplorationEntry;
+	private var nextNodes:/*ExplorationEntry*/Array = [];
 	
 	/**
 	 * Switch to clear, uninitialized state.
@@ -114,27 +130,29 @@ public class ExplorationEngine extends BaseContent {
 		leave       = new ButtonData("Leave", defaultReturn)
 				.hint("Return to camp.")
 				.icon("Back");
-		prompt = "Explore the area.";
-		onEnd  = new ButtonData("Return", defaultReturn)
+		prompt      = "Explore the area.";
+		onEnd       = new ButtonData("Return", defaultReturn)
 				.hint("Return to camp.")
 				.icon("Back");
+		startPos.unlink();
 		for (var i:int = 0; i < ExplorationEngine.N; i++) {
 			flatList[i].setEmpty();
+			flatList[i].unlink();
 		}
 		roadPos      = 0;
 		roadIndex    = -1;
 		road         = null;
-		currentEntry  = null;
-		onMenu = null;
-		onEncounter   = null;
+		currentEntry = null;
+		playerEntry  = null;
+		nextNodes    = [];
+		onMenu       = null;
+		onEncounter  = null;
 	}
 	public function markEncounterDone():void {
 		if (initialized && currentEntry != null) {
-			trace("markEncounterDone",currentEntry.encounterName);
+			trace("markEncounterDone", currentEntry.encounterName);
 			currentEntry.markCleared();
 			currentEntry = null;
-			roadPos++;
-			if (road[roadPos]) road[roadPos].isNext = true;
 		}
 	}
 	/**
@@ -190,13 +208,14 @@ public class ExplorationEngine extends BaseContent {
 	 * Do a full reset, then prepare the exploration of the area.
 	 * @param area Group encounter to pick from
 	 */
-	public function prepareArea(area:GroupEncounter):void {
+	public function prepareArea(area:GroupEncounter, branchChance:Number = 0.1):void {
 		trace("explorer.prepareArea");
+		this.branchChance = branchChance;
 		clear();
 		this.source = area;
 		generateAll();
 	}
-
+	
 	private function defaultReturn():void {
 		camp.returnToCampUseOneHour();
 	}
@@ -210,28 +229,11 @@ public class ExplorationEngine extends BaseContent {
 	public function getCurrentEntry():ExplorationEntry {
 		return currentEntry;
 	}
-	/**
-	 * Next entry that player is about to step into. Is null at the end of the road, or when player didn't pick one yet.
-	 * Inside the encounter, it is same as current entry.
-	 */
-	public function getNextEntry():ExplorationEntry {
-		if (road && !finished) {
-			var e:ExplorationEntry = road[roadPos];
-			if (e && e.isNext && !e.isCleared && e.encounter) return e;
-		}
-		return null;
-	}
 	public function get inEncounter():Boolean {
 		return !!currentEntry;
 	}
 	public function get isActive():Boolean {
 		return initialized && !finished;
-	}
-	public function numUnexplored():int {
-		if (!road || finished) return 0;
-		var n:int = 0;
-		for (var i:int = 0; i < road.length; i++) if (!road[i].isDisabled && !road[i].isCleared) n++;
-		return n;
 	}
 	public function numUnrevealed():int {
 		var n:int   = 0;
@@ -242,7 +244,7 @@ public class ExplorationEngine extends BaseContent {
 		return n;
 	}
 	public function get isAtEnd():Boolean {
-		return road != null && numUnexplored() == 0
+		return nextNodes.length == 0;
 	}
 	
 	public function findByName(name:String):ExplorationEntry {
@@ -305,33 +307,39 @@ public class ExplorationEngine extends BaseContent {
 	public function setTags(...tags:/*String*/Array):void {
 		for each (var tag:String in tags) this.areaTags[tag] = true;
 	}
-
+	private function clearNext():void {
+		for each (var e:ExplorationEntry in nextNodes) e.isNext = false;
+		nextNodes = [];
+	}
 	private function selectRoad(i:int):void {
 		roadIndex = i;
 		road      = roads[i];
-		for (var j:int = 0; j < NROADS; j++) {
-			if (i == j) continue;
-			for (var k:int = 0; k < MAXDEPTH; k++) {
-				if (roads[j][k]) roads[j][k].markDisabled();
-			}
-		}
+		clearNext();
+		nextNodes.push(road[0]);
 		road[0].isNext = true;
 		roadPos        = 0;
+		disableUnreachable();
+	}
+	private function disableUnreachable():void {
+		if (!road) return;
+		var reachable:Dictionary            = new Dictionary();
+		var queue:/*ExplorationEntry*/Array = nextNodes.slice();
+		while (queue.length > 0) {
+			var e:ExplorationEntry = queue.pop();
+			if (e.isDisabled || !e.encounter || reachable[e]) continue;
+			queue        = queue.concat(e.nextNodes);
+			reachable[e] = true;
+		}
+		for each (e in flatList) {
+			if (!e.isDisabled && e.encounter && !reachable[e]) {
+				trace("Unreachable: " + e);
+				e.markDisabled();
+			}
+		}
 	}
 	private function selectRoadAndExploreNext(i:int):void {
 		selectRoad(i);
-		exploreNext();
-	}
-	private function exploreNext():void {
-		if (!road) throw new Error("No road selected");
-		var next:ExplorationEntry = getNextEntry();
-		if (next) {
-			execEntry(next);
-		} else {
-			// End of road
-			stopExploring();
-			onEnd.callback();
-		}
+		execEntry(road[0]);
 	}
 	internal function entryClick(entry:ExplorationEntry):void {
 		if (!entry.isNext) return;
@@ -344,12 +352,12 @@ public class ExplorationEngine extends BaseContent {
 				}
 			}
 		} else {
-			if (getNextEntry() == entry) execEntry(entry);
+			if (nextNodes.indexOf(entry) >= 0) execEntry(entry);
 		}
 	}
 	
 	private function execEntry(entry:ExplorationEntry):void {
-		trace("explorer.execEntry",entry.encounterName);
+		trace("explorer.execEntry", entry.encounterName);
 		clearOutput();
 		if (currentEntry != null) {
 			trace("WARNING: ExplorationEntry " + currentEntry.encounter.encounterName() + " was not resolved");
@@ -359,73 +367,77 @@ public class ExplorationEngine extends BaseContent {
 		if (playerEntry) playerEntry.isPlayerHere = false;
 		entry.isPlayerHere = true;
 		playerEntry        = entry;
+		roadPos            = entry.roadPos;
+		roadIndex          = entry.roadIndex;
+		clearNext();
+		for each (var next:ExplorationEntry in entry.nextNodes) {
+			if (next.encounter && !next.isDisabled) {
+				next.isNext = true;
+				nextNodes.push(next);
+			}
+		}
+		disableUnreachable();
 		if (onEncounter != null) {
 			if (onEncounter(entry)) return;
 		}
 		entry.encounter.execEncounter();
 	}
 	private function createMap():Sprite {
-		var map:Sprite    = new Sprite();
-		var g:Graphics    = map.graphics;
-		const SIZE:Number = ExplorationEntry.RADIUS * 2;
-		const XGAP:Number = (mainView.mainText.width) / (MAXDEPTH + 1) - SIZE;
-		const YGAP:Number = SIZE * 1.5;
+		var map:Sprite = new Sprite();
+		var g:Graphics = map.graphics;
 		
-		var startPos:ExplorationEntry = new ExplorationEntry();
-		startPos.label                = "Start";
 		if (roadIndex < 0) {
 			startPos.isPlayerHere = true;
 			playerEntry           = startPos;
 		}
-		var startSprite:Sprite = startPos.render();
-		startSprite.x          = XGAP / 2;
-		startSprite.y          = YGAP + (NROADS - 1) * (SIZE + YGAP) / 2;
-		map.addChild(startSprite);
+		startPos.redraw();
+		map.addChild(startPos.sprite);
 		
-		var y:Number = YGAP;
 		for (var i:int = 0; i < NROADS; i++) {
-			var x:Number              = startSprite.x + SIZE + XGAP;
-			var prev:ExplorationEntry = startPos;
-			var prevSprite:Sprite     = startSprite;
 			for (var j:int = 0; j < MAXDEPTH; j++) {
-				var next:ExplorationEntry = roads[i][j];
-				if (next && next.encounter) {
+				var node:ExplorationEntry = roads[i][j];
+				if (node.encounter) {
 					// draw the sprite
-					var nextSprite:Sprite = next.render();
-					nextSprite.x          = x;
-					nextSprite.y          = y;
-					map.addChild(nextSprite);
-					// draw the line
-					var lineColor:String = next.isNext ? LINE_NEXT : LINE_COLOR;
-					g.lineStyle(LINE_WIDTH, Color.convertColor(lineColor));
-					g.moveTo(prevSprite.x + SIZE / 2, prevSprite.y + SIZE / 2);
-					if (prev == startPos) {
-						var midx:Number = (prevSprite.x + nextSprite.x + SIZE) / 2;
-						g.lineTo(midx, prevSprite.y + SIZE / 2);
-						g.lineTo(midx, nextSprite.y + SIZE / 2);
+					node.redraw();
+					map.addChild(node.sprite);
+					if (j == 0) {
+						// draw the lines from startPos
+						var lineColor: String;
+						if (node.isDisabled) lineColor = LINE_DISABLED;
+						else if (node.isNext) lineColor = LINE_NEXT;
+						else lineColor = LINE_COLOR;
+						g.lineStyle(LINE_WIDTH, Color.convertColor(lineColor));
+						g.moveTo(startPos.centerX, startPos.centerY);
+						var midx:Number = (startPos.centerX + node.centerX) / 2;
+						g.lineTo(midx, startPos.centerY);
+						g.lineTo(midx, node.centerY);
 						if (roadIndex < 0) {
 							var tf:TextField = UIUtils.newTextField({
 								text             : "" + (i + 1),
 								x                : midx + 2,
-								y                : nextSprite.y + SIZE / 2,
+								y                : node.centerY,
 								defaultTextFormat: {
-									font: mainView.mainText.defaultTextFormat.font,
-									size: Number(mainView.mainText.defaultTextFormat.size)-2,
+									font : mainView.mainText.defaultTextFormat.font,
+									size : Number(mainView.mainText.defaultTextFormat.size) - 2,
 									color: mainView.mainText.defaultTextFormat.color
 								}
 							});
 							map.addChild(tf);
 							tf.y -= tf.height;
 						}
+						g.lineTo(node.centerX, node.centerY);
 					}
-					g.lineTo(nextSprite.x + SIZE / 2, nextSprite.y + SIZE / 2);
-					
-					prev       = next;
-					prevSprite = nextSprite;
+					for each (var next:ExplorationEntry in node.nextNodes) {
+						if (!next.encounter) continue;
+						if (next.isDisabled) lineColor = LINE_DISABLED;
+						else if (next.isNext && node.isPlayerHere) lineColor = LINE_NEXT;
+						else lineColor = LINE_COLOR;
+						g.lineStyle(LINE_WIDTH, Color.convertColor(lineColor));
+						g.moveTo(node.centerX, node.centerY);
+						g.lineTo(next.centerX, next.centerY);
+					}
 				}
-				x += SIZE + XGAP;
 			}
-			y += SIZE + YGAP;
 		}
 		
 		return map;
@@ -434,7 +446,7 @@ public class ExplorationEngine extends BaseContent {
 		var i:int;
 		for (i = 0; i < N; i++) {
 			// If there is an encounter with chance ALWAYS, stop the exploration and execute it immediately
-			if(flatList[i].encounter && !flatList[i].isDisabled && flatList[i].encounter.encounterChance() == Encounters.ALWAYS) {
+			if (flatList[i].encounter && !flatList[i].isDisabled && flatList[i].encounter.encounterChance() == Encounters.ALWAYS) {
 				stopExploring();
 				flatList[i].encounter.execEncounter();
 				return;
@@ -451,15 +463,22 @@ public class ExplorationEngine extends BaseContent {
 		var overlust:int = camp.overLustCheck();
 		mainView.setCustomElement(createMap());
 		menu();
-		var next:ExplorationEntry = getNextEntry();
 		if (road) {
-			if (next) {
-				// We're on the road
-				button(0).show("Forward", exploreNext).hint(next.tooltipText, next.tooltipHeader);
-			} else {
+			var n:int = 0;
+			for each (var node:ExplorationEntry in nextNodes) {
+				if (node && node.isNext && node.encounter) {
+					var label:String;
+					if (node.roadIndex > roadIndex) label = "South";
+					else if (node.roadIndex < roadIndex) label = "North";
+					else label = "Forward";
+					button(n).show(label, curry(execEntry, node)).hint(node.tooltipText, node.tooltipHeader);
+					n++;
+				}
+			}
+			if (n == 0) {
 				// End of the road
 				onEnd.applyTo(button(0));
-				button(0).call(function():void {
+				button(0).call(function ():void {
 					stopExploring();
 					onEnd.callback.call();
 				});
@@ -476,8 +495,8 @@ public class ExplorationEngine extends BaseContent {
 				  .disableIf(!canInventory);
 		SceneLib.masturbation.masturButton(11).disableIf(!canMasturbate);
 		if (playerEntry && playerEntry.encounter && playerEntry.reenter) {
-			button(12).show("Repeat", curry(execEntry,playerEntry))
-					.hint("Repeat the '"+playerEntry.label+"' encounter.")
+			button(12).show("Repeat", curry(execEntry, playerEntry))
+					  .hint("Repeat the '" + playerEntry.label + "' encounter.")
 		}
 		if (overlust == 2 && canMasturbate) {
 			if (!isAtEnd) {
@@ -487,7 +506,7 @@ public class ExplorationEngine extends BaseContent {
 		}
 		
 		if (debug) {
-			button(14).show("Menu",cheatMenu);
+			button(14).show("Menu", cheatMenu);
 		} else {
 			if (leave && !finished && !isAtEnd) leave.applyTo(button(14));
 		}
@@ -498,6 +517,7 @@ public class ExplorationEngine extends BaseContent {
 			revealAll(level);
 			showUI();
 		}
+		
 		function cheatReroll():void {
 			for (var i:int = 0; i < N; i++) flatList[i].isPlayerHere = false;
 			generateAll();
@@ -505,19 +525,19 @@ public class ExplorationEngine extends BaseContent {
 		}
 		
 		menu();
-		button(0).show("Reveal(0)", curry(cheatReveal,0))
+		button(0).show("Reveal(0)", curry(cheatReveal, 0))
 				 .hint("Hide all");
-		button(1).show("Reveal(1)", curry(cheatReveal,1))
+		button(1).show("Reveal(1)", curry(cheatReveal, 1))
 				 .hint("Partially reveal all");
-		button(2).show("Reveal(2)", curry(cheatReveal,2))
+		button(2).show("Reveal(2)", curry(cheatReveal, 2))
 				 .hint("Fully reveal all");
 		if (!finished) button(3).show("Re-roll", cheatReroll)
-				 .hint("Recreate the map")
+								.hint("Recreate the map")
 		button(4).show("Camp", camp.returnToCampUseOneHour)
 				 .hint("Return to camp");
 		
 		if (leave && !finished && !isAtEnd) leave.applyTo(button(13));
-		button(14).show("Back",showUI).icon("Back");
+		button(14).show("Back", showUI).icon("Back");
 	}
 	
 	/**
@@ -537,28 +557,60 @@ public class ExplorationEngine extends BaseContent {
 		entry.setEmpty();
 	}
 	private function generateAll():void {
+		clearNext();
 		for (var i:int = 0; i < NROADS; i++) {
 			var length:int = randIntIn(2, MAXDEPTH);
-			trace("Road "+i+" length "+length);
+			trace("Road " + i + " length " + length);
 			for (var j:int = length - 1; j >= 0; j--) {
 				generate(roads[i][j],
 						j == length - 1 ? 2
 								: j == 0 ? 0 : 1);
+				if (!roads[i][j].encounter) break;
+				if (j > 0) roads[i][j - 1].link(roads[i][j]);
 			}
 			for (j = length; j < MAXDEPTH; j++) roads[i][j].setEmpty();
-			roads[i][0].isNext = true;
+			if (roads[i][0].encounter) {
+				roads[i][0].isNext = true;
+				nextNodes.push(roads[i][0]);
+				startPos.link(roads[i][0]);
+			}
+		}
+		if (branchChance > 0) {
+			for (i = 0; i < NROADS; i++) {
+				for (j = 0; j < MAXDEPTH - 1; j++) {
+					if (i > 0) {
+						// North branch
+						// Avoid crossing the ~~beams~~ branches:
+						// i-1;j  --- i-1;j+1
+						//   i;j  ---   i;j+1
+						// link SW to NE if no link from NW to SE
+						if (roads[i - 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1
+								&& Math.random() < branchChance) {
+							roads[i][j].link(roads[i - 1][j + 1]);
+						}
+					}
+					if (i < NROADS - 1) {
+						// South branch
+						if (roads[i + 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1
+								&& Math.random() < branchChance) {
+							roads[i][j].link(roads[i + 1][j + 1]);
+						}
+					}
+				}
+			}
 		}
 		for (i = 0; i < NROADS; i++) {
 			var s:String = "Road " + i + " is";
 			for (j = 0; j < MAXDEPTH; j++) {
-				s += " " + roads[i][j].encounterName
+				s += " ";
+				s += roads[i][j].encounterName;
 			}
 			trace(s);
 		}
-		initialized = true;
-		road = null;
-		roadIndex = -1;
-		roadPos = 0;
+		initialized  = true;
+		road         = null;
+		roadIndex    = -1;
+		roadPos      = 0;
 		currentEntry = null;
 	}
 	private function validate():void {
@@ -567,7 +619,7 @@ public class ExplorationEngine extends BaseContent {
 				var e:ExplorationEntry = roads[i][j];
 				if (!e.isCleared && !e.isDisabled && e.encounter && e.encounter.originalChance() <= 0) {
 					trace("Regenerating entry " + i + ";" + j + " " + e.encounterName);
-					e.encounter = null;
+					e.encounter     = null;
 					var special:int = 1;
 					if (j == 0) special = 0;
 					if (j + 1 == MAXDEPTH || roads[i][j + 1].isDisabled) special = 2;
@@ -581,11 +633,11 @@ public class ExplorationEngine extends BaseContent {
 		var n:Number = 0;
 		
 		// +1 reveal per 100 area explorations
-		n += timesExplored/100;
+		n += timesExplored / 100;
 		
 		// +1 reveal per 10 wisdom, scaled with NG+ level and area level
 		var wisFactor:Number = 10;
-		wisFactor *= 1 + (areaLevel-1)/99; // x1 on area level 1, x2 on area level 100
+		wisFactor *= 1 + (areaLevel - 1) / 99; // x1 on area level 1, x2 on area level 100
 		wisFactor *= (1 + 0.2 * CoC.instance.newGamePlusMod()); // +20% per NG level
 		n += player.wis / wisFactor;
 		

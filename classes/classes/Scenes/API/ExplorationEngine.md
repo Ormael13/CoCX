@@ -173,9 +173,12 @@ Or to make an encounter repeatable/no longer reentrable.
 ---
 
 ```as
-explorer.getNextEntry()
+explorer.nextNodes
 ```
-On an exploration map UI, this is the next `ExplorationEntry` on a road. Inside the encounter, this is same as `getCurrentEntry()`. If the exploration was ended, or road isn't picked yet, return null.
+Array of next nodes.
+
+If exploration is ended, empty array.
+If road not picked, array of first nodes on the road. 
 
 ---
 

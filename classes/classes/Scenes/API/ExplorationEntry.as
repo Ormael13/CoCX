@@ -54,16 +54,52 @@ public class ExplorationEntry {
 	public var isPlayerHere:Boolean;
 	public var revealLevel:int; // 0: not revealed, 1: kind, 2: full
 	public var reenter:Boolean;
+	public var x:Number;
+	public var y:Number;
+	public function get centerX():Number { return x + RADIUS; }
+	public function get centerY():Number { return y + RADIUS; }
+	public var sprite:Sprite;
+	public var tfLabel:TextField;
+	public var roadIndex:int;
+	public var roadPos:int;
+	public var nextNodes:/*ExplorationEntry*/Array = [];
 	
 	public function get isFullyRevealed():Boolean { return revealLevel == REVEAL_FULL }
 	public function get encounterName():String { return encounter ? encounter.encounterName() : "(null)"}
-	public function ExplorationEntry() {
+	public function ExplorationEntry(
+			roadIndex: int,
+			roadPos: int,
+			x: Number,
+			y: Number
+	) {
+		this.roadIndex = roadIndex;
+		this.roadPos = roadPos;
+		this.x = x;
+		this.y = y;
+		createUI();
 		setEmpty();
 	}
 	
-	public function render():Sprite {
-		var s:Sprite   = new Sprite();
-		var g:Graphics = s.graphics;
+	private function createUI():void {
+		sprite = new Sprite();
+		tfLabel         = UIUtils.newTextField({
+			x                : 0,
+			y                : 2 * RADIUS,
+			width            : 2 * RADIUS,
+			autoSize         : TextFieldAutoSize.CENTER
+		});
+//		tfLabel.filters       = [UIUtils.outlineFilter(LABEL_OUTLINE)];
+		sprite.addChild(tfLabel);
+		
+		sprite.mouseChildren = false;
+		sprite.addEventListener(MouseEvent.CLICK, onClick);
+		sprite.addEventListener(MouseEvent.ROLL_OVER, onHover);
+		sprite.addEventListener(MouseEvent.ROLL_OUT, onDim);
+		sprite.x = x;
+		sprite.y = y;
+	}
+	public function redraw():void {
+		var g:Graphics = sprite.graphics;
 		
 		var borderColor:uint = Color.convertColor32(
 				isPlayerHere ? BORDER_PLAYER
@@ -79,35 +115,19 @@ public class ExplorationEntry {
 		g.endFill();
 		
 		var mainTextFormat:TextFormat = CoC.instance.mainView.mainText.defaultTextFormat;
-		var tfLabel:TextField         = UIUtils.newTextField({
-			x                : 0,
-			y                : 2 * RADIUS,
-			width            : 2 * RADIUS,
-			autoSize         : TextFieldAutoSize.CENTER,
-			text             : label,
-			defaultTextFormat: {
-				font : mainTextFormat.font,
-				size : Number(mainTextFormat.size || 12) - 4,
-				color: mainTextFormat.color,
-				align: 'center'
-			}
+		tfLabel.defaultTextFormat = UIUtils.convertTextFormat({
+			font : mainTextFormat.font,
+			size : Number(mainTextFormat.size || 12) - 4,
+			color: mainTextFormat.color,
+			align: 'center'
 		});
-//		tfLabel.filters       = [UIUtils.outlineFilter(LABEL_OUTLINE)];
-		s.addChild(tfLabel)
+		tfLabel.text = label;
 		
-		s.mouseChildren = false;
-		if (isNext) {
-			s.buttonMode = true;
-			s.addEventListener(MouseEvent.CLICK, onClick);
-		}
-		s.addEventListener(MouseEvent.ROLL_OVER, onHover);
-		s.addEventListener(MouseEvent.ROLL_OUT, onDim);
-		
-		return s;
+		sprite.buttonMode = isNext;
 	}
 	
 	private function onClick(event:MouseEvent):void {
-		SceneLib.explorationEngine.entryClick(this);
+		if (encounter && !isDisabled) SceneLib.explorationEngine.entryClick(this);
 	}
 	private function onHover(event:MouseEvent):void {
 		if (!tooltipText && !tooltipHeader) return;
@@ -129,6 +149,12 @@ public class ExplorationEntry {
 		isPlayerHere  = false;
 		revealLevel   = REVEAL_NOT;
 		reenter       = false;
+	}
+	public function unlink():void {
+		nextNodes = [];
+	}
+	public function link(e:ExplorationEntry):void {
+		nextNodes.push(e);
 	}
 	
 	public function setupForEncounter(e:SimpleEncounter):void {
@@ -169,6 +195,7 @@ public class ExplorationEntry {
 			color         = COLOR_DEFAULT;
 			tooltipHeader = "Unknown Encounter";
 			tooltipText   = "Trigger this encounter";
+			redraw();
 		} else if (level == REVEAL_KIND) {
 			revealKind();
 		} else if (level == REVEAL_FULL) {
@@ -193,11 +220,16 @@ public class ExplorationEntry {
 		tooltipText   = "";
 	}
 	public function markDisabled():void {
+		if (!encounter) return;
 		color         = COLOR_DISABLED;
 		isDisabled    = true;
 		isNext        = false;
 		tooltipHeader = "";
 		tooltipText   = "";
+	}
+	public function toString():String {
+		if (roadIndex < 0) return "[Start]";
+		return "["+roadIndex+";"+roadPos+";"+encounterName+"]";
 	}
 }
 }
