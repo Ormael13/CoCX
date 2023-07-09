@@ -5,7 +5,6 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
@@ -25,7 +24,6 @@ import classes.Scenes.NPCs.Holli;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 
@@ -791,7 +789,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(player.hasStatusEffect(StatusEffects.GreenCovenant)) {
 				bd.disable("You already connected with nearby plants!");
 			}
-			else if(!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+			else if(!player.hasStatusEffect(StatusEffects.NearbyPlants) && !explorer.areaTags.plants) {
 				bd.disable("Green Covenant requires having plants nearby.");
 			}
 			else if(player.hasStatusEffect(StatusEffects.CooldownGreenCovenant)) {

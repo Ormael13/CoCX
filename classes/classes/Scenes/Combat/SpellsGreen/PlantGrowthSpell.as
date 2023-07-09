@@ -53,7 +53,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			if (player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+			if (player.hasStatusEffect(StatusEffects.NearbyPlants) || explorer.areaTags.plants) {
 				outputText("You focus your intent on the flora around you, infusing them with the power of your emotions. The onslaught of lust causes flowers to bloom into a pollen cloud as vine surges from the canopy and darts to your opponent.");
 				if (monster.lustVuln == 0) {
 					if (display) {

@@ -409,6 +409,8 @@ public class CoC extends MovieClip
         //setTimeout(this.run,0);
     }
     private function beforeEncounterSelect(pool:/*Encounter*/Array):void {
+        // Disabled - interferes with the new encounter system
+        /*
         while (true) {
             var tw:Number = 0;
             for each (var e:Encounter in pool) {
@@ -432,6 +434,7 @@ public class CoC extends MovieClip
             trace(strace);
             if (!hasSE) break; // somehow total chance is <=0 but there are no SimpleEncounters to work with
         }
+        */
     }
     private function adjustEncounterChance(pool:/*Encounter*/Array, e:Encounter, c:Number):Number {
         if (c === Encounters.ALWAYS) return c;
@@ -449,7 +452,9 @@ public class CoC extends MovieClip
         // Smaller - more randomness
         // Bigger - more predictability
         // Too big - all events fire one by one during first shuffle
-        if (pick is SimpleEncounter) (pick as SimpleEncounter).adjustment -= 0.1;
+        
+        // Disabled - interferes with the new encounter system
+        // if (pick is SimpleEncounter) (pick as SimpleEncounter).adjustment -= 0.1;
     }
 
     private function loadStory():void {

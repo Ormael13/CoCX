@@ -1,7 +1,6 @@
 package classes.Scenes.API {
 import classes.CoC;
 import classes.Scenes.SceneLib;
-import classes.internals.Utils;
 
 import coc.view.Color;
 import coc.view.UIUtils;
@@ -88,7 +87,7 @@ public class ExplorationEntry {
 			text             : label,
 			defaultTextFormat: {
 				font : mainTextFormat.font,
-				size : Number(mainTextFormat.size || 12) - 2,
+				size : Number(mainTextFormat.size || 12) - 4,
 				color: mainTextFormat.color,
 				align: 'center'
 			}
@@ -145,7 +144,7 @@ public class ExplorationEntry {
 	}
 	public function revealKind():void {
 		revealLevel     = REVEAL_KIND;
-		var kind:String = encounter.kind as String;
+		var kind:String = encounter.getKind();
 		if (kind) {
 			if (kind in EncounterKinds) {
 				var entry:*   = EncounterKinds[kind];
@@ -180,9 +179,9 @@ public class ExplorationEntry {
 	public function revealFull():void {
 		revealKind();
 		revealLevel   = REVEAL_FULL;
-		label         = ('label' in encounter) ? encounter.label : Utils.capitalizeFirstLetter(encounter.encounterName());
-		tooltipHeader = label;
-		tooltipText   = ('hint' in encounter) ? encounter.hint : 'Trigger this encounter';
+		label         = encounter.getLabel();
+		tooltipHeader = encounter.getTooltipHeader();
+		tooltipText   = encounter.getTooltipHint();
 	}
 	
 	public function markCleared():void {

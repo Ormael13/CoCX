@@ -41,7 +41,7 @@ public class ExplorationEngine extends BaseContent {
 	}
 	/** Encounter filter for last location on the road */
 	private function filterForEnd(e:SimpleEncounter):Boolean {
-		return (e.special || ['npc', 'item', 'boss', 'treasure', 'special'].indexOf(e.kind) >= 0) && filterUnique(e);
+		return (e.special || ['npc', 'item', 'boss', 'treasure', 'special', 'monster'].indexOf(e.getKind()) >= 0) && filterUnique(e);
 	}
 	private const filters:/*Function*/Array = [filterForStart, filterForMid, filterForEnd];
 	
@@ -431,6 +431,16 @@ public class ExplorationEngine extends BaseContent {
 		return map;
 	}
 	private function showUI():void {
+		var i:int;
+		for (i = 0; i < N; i++) {
+			// If there is an encounter with chance ALWAYS, stop the exploration and execute it immediately
+			if(flatList[i].encounter && !flatList[i].isDisabled && flatList[i].encounter.encounterChance() == Encounters.ALWAYS) {
+				stopExploring();
+				flatList[i].encounter.execEncounter();
+				return;
+			}
+		}
+		
 		// Buttons
 		// [Forward/Path 1] [Path 2] [Path 3] [Path 4] [Path 5]
 		// [              ] [      ] [      ] [      ] [      ]
@@ -441,7 +451,6 @@ public class ExplorationEngine extends BaseContent {
 		var overlust:int = camp.overLustCheck();
 		mainView.setCustomElement(createMap());
 		menu();
-		var i:int;
 		var next:ExplorationEntry = getNextEntry();
 		if (road) {
 			if (next) {
