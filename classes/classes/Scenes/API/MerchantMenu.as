@@ -258,7 +258,7 @@ public class MerchantMenu extends BaseContent {
 		playerInvButtons        = [];
 		if (playerItemCount > 0) {
 			grid.addTextField({
-				htmlText         : "Your inventory: " + (playerCanSell ? " <i>(Click ot sell)</i>" : ""),
+				htmlText         : "Your inventory: " + (playerCanSell ? " <i>(Click to sell, Shift+click to sell all)</i>" : ""),
 				defaultTextFormat: mainView.mainText.defaultTextFormat
 			}, {colspan: 5})
 		}
@@ -286,7 +286,7 @@ public class MerchantMenu extends BaseContent {
 		merchantInvButtons        = [];
 		if (merchantItemCount > 1) {
 			grid.addTextField({
-				htmlText         : "Merchant inventory: <i>(Click to buy)</i>",
+				htmlText         : "Merchant inventory: <i>(Click to buy, Shift+click to buy max)</i>",
 				defaultTextFormat: mainView.mainText.defaultTextFormat
 			}, {colspan: 5})
 		}
@@ -314,9 +314,9 @@ public class MerchantMenu extends BaseContent {
 		if (playerCanSell) button(0).show("Sell All", sellAllClick);
 		if (canInventory) button(2).show("Inventory", curry(inventory.showInventoryMenu, showScreen));
 		if (CoC_Settings.mobileBuild) {
-			button(4).show("Buy 1", function ():void {
+			button(4).show("Buy/Sell: 1", function ():void {
 				shiftKeyDown = !shiftKeyDown;
-				button(4).text(shiftKeyDown ? "Buy max" : "Buy 1");
+				button(4).text(shiftKeyDown ? "Buy/Sell: Max" : "Buy/Sell: 1");
 			})
 		}
 		button(14).show("Back", backButton).icon("Back");
