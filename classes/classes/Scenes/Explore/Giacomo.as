@@ -1,5 +1,5 @@
 /*
- LICENSE 
+ LICENSE
  
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him to this project permission to alter the text to conform with current and new game functions, only. Dxasmodeus retains exclusive rights to alter or change the core contents of the events and no other developer may alter, change or use the events without permission from dxasmodeus. Fenoxo agrees to include Dxasmodeus' name in the credits with indications to the specific contribution made to the licensor. This license must appear
@@ -26,10 +26,11 @@ For further information and license requests, Dxasmodeus may be contacted throug
 package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.MerchantMenu;
+import classes.Scenes.Camp.Garden;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Camp.Garden;
 import classes.display.SpriteDb;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
@@ -113,8 +114,9 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(1, "Books", bookMenu);
 			addButton(2, "Erotica", eroticaMenu);
 			addButton(3, "Misc", miscMenu);
+			addButton(4, "Trade", tradeMenu);
 			if (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Worm Cure", wormRemovalOffer);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 			statScreenRefresh();
 		}
 		
@@ -129,6 +131,30 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			flags[kFLAGS.GIACOMO_MET] = 1;
 		}
 		
+		private function tradeMenu():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			menu();
+			var merchantMenu:MerchantMenu = new MerchantMenu();
+			merchantMenu.addItem(consumables.MANUP_B, 15);
+			merchantMenu.addItem(consumables.VITAL_T, 15);
+			merchantMenu.addItem(consumables.SMART_T, 15);
+			merchantMenu.addItem(consumables.CERUL_P, 75);
+			merchantMenu.addLineBreak();
+			merchantMenu.addItem(consumables.SAPILL_);
+			merchantMenu.addItem(consumables.MAPILL_).disableIf(player.level < 24, "Req. lvl 24+", true);
+			merchantMenu.addItem(consumables.BAPILL_).disableIf(player.level < 42, "Req. lvl 42+", true);
+			merchantMenu.addItem(useables.CONDOM, 10);
+			merchantMenu.addLineBreak();
+			merchantMenu.addItem(consumables.W__BOOK, 100);
+			merchantMenu.addItem(consumables.G__BOOK, 500);
+			merchantMenu.addItem(consumables.B__BOOK, 100);
+			merchantMenu.addItem(consumables.RMANUSC, 125);
+			merchantMenu.addItem(weaponsrange.E_TOME_, 1000);
+			merchantMenu.addItem(consumables.CRIMS_J, 125);
+			merchantMenu.show(giacomoEncounter);
+		}
+	
 		private function potionMenu():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -1011,7 +1037,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.buff("Infested").remove();
 			dynStats("lus", -99, "cor", -4);
 			player.gems -= 175;
-			inventory.takeItem(consumables.VITAL_T, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.VITAL_T, explorer.done);
 		}
 		
 		private function wormRemovalOffer():void {

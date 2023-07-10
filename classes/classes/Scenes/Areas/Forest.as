@@ -92,18 +92,9 @@ use namespace CoC;
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest",
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
 					{
-						//General Golems, Goblin, Angels and Imp Encounters
-						name: "common",
-						label: "Monsters",
-						kind: 'monster',
-						chance: 0.4,
-						call: function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
-							else SceneLib.exploration.genericGolGobImpEncounters();
-						}
-					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
 						label : "Helia",
@@ -120,7 +111,6 @@ use namespace CoC;
 						night : false,
 						chance: 0.6,
 						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
@@ -140,10 +130,7 @@ use namespace CoC;
 						kind  : 'npc',
 						unique: true,
 						night : false,
-						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							encounterTamanisDaughtersFn();
-						},
+						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
 								&& player.hasCock()
@@ -160,10 +147,7 @@ use namespace CoC;
 						label : "Bee-girl",
 						kind  : 'monster',
 						night : false,
-						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							beeGirlScene.beeEncounter();
-						},
+						call  : beeGirlScene.beeEncounter,
 						chance: 0.20
 					}, {
 						name  : "werewolfFemale",
@@ -171,10 +155,7 @@ use namespace CoC;
 						kind : 'monster',
 						day : false,
 						when: fn.ifLevelMin(12),
-						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							SceneLib.werewolfFemaleScene.introWerewolfFemale();
-						},
+						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 						chance: 0.50
 					}, {
 						name  : "truffle",
@@ -268,22 +249,14 @@ use namespace CoC;
 						},
 						call: SceneLib.exploration.demonLabProjectEncounters
 					}*/);
-			_forestEncounter = Encounters.group("forest", {
-						//General Golems, Goblin and Imp Encounters
-						name: "common",
-						chance: 0.4,
-						call: function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							SceneLib.exploration.genericGolGobImpEncounters();
-						}
-					}, {
+			// TODO @aimozg 'plants' tag
+			_forestEncounter = Encounters.group("forest",
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					{
 						//Helia monogamy fucks
 						name  : "helcommon",
 						night : false,
-						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							SceneLib.helScene.helSexualAmbush();
-						},
+						call  : SceneLib.helScene.helSexualAmbush,
 						chance: forestChance2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
@@ -841,7 +814,7 @@ use namespace CoC;
 		public function exploreForestOutskirts():void
 		{
 			explorer.prepareArea(forestOutskirtsEncounter);
-			explorer.setTags("forest","forestOutskirts");
+			explorer.setTags("forest","forestOutskirts","plants");
 			explorer.prompt = "You explore the forest outskirts.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
 				player.exploredForest++;

@@ -317,7 +317,7 @@ public class CoCButton extends Block {
 		return this;
 	}
 	
-	public function color(rgb:String):CoCButton {
+	public function color(rgb:*):CoCButton {
 		this._labelField.textColor = Color.convertColor(rgb);
 		return this;
 	}
@@ -367,7 +367,20 @@ public class CoCButton extends Block {
 		return this;
 	}
 	public function showForItemSlot(slot:ItemSlotClass, callback:Function):CoCButton {
-		show(slot.itype.shortName, callback);
+		if (slot.isEmpty()) {
+			showDisabled("Empty");
+			hint("");
+			color(DEFAULT_COLOR);
+			iconId = null;
+			iconQty = "";
+			return this;
+		}
+		showForItem(slot.itype, callback);
+		if (slot.itype.stackSize > 1 || slot.quantity > 1) {
+			iconQty = String(slot.quantity);
+		} else {
+			iconQty = "";
+		}
 		itemSlotTexts(slot);
 		return this;
 	}

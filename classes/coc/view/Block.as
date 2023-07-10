@@ -99,7 +99,7 @@ public class Block extends Sprite {
 			}
 			if (!grid[row]) grid[row] = [];
 			grid[row][col] = child;
-			col++;
+			col += ('colspan' in hint) ? hint['colspan'] : 1;
 			if (col >= cols) {
 				col = 0;
 				row++;
@@ -110,16 +110,20 @@ public class Block extends Sprite {
 			if (!grid[row]) continue;
 			var h:Number = 0;
 			var x:Number = paddingLeft;
-			for (col = 0; col < columns.length; col++) {
+			for (col = 0; col < columns.length;) {
+				var colspan:int = 1;
 				child = grid[row][col];
 				if (child) {
 					if (debug) trace("[" + row + "][" + col + "] x="+(x|0)+" y="+(y|0)+" w="+(columns[col]|0)+" h="+(cellh|0)+" "+child);
 					var setw:Boolean = 'setWidth' in hint ? hint['setWidth'] : setcw;
 					var seth:Boolean = 'setHeight' in hint ? hint['setHeight'] : setch;
+					colspan = 'colspan' in hint ? hint['colspan'] : 1;
 					child.x          = x + gap / 2;
 					child.y          = y;
 					if (setw) {
-						child.width = columns[col];
+						var cw:Number = columns[col];
+						for (i = 1; i < colspan; i++) cw += gap + columns[col+i];
+						child.width = cw;
 					}
 					if (seth) {
 						child.height = cellh;
@@ -127,7 +131,10 @@ public class Block extends Sprite {
 					if (debug) trace(""+child.x+" "+child.y+" "+child.width+" "+child.height);
 					h = Math.max(h, child.height);
 				}
-				x += columns[col]+gap;
+				while (colspan-->0 && col < columns.length) {
+					x += columns[col] + gap;
+					col++;
+				}
 			}
 			y += h+gap;
 		}

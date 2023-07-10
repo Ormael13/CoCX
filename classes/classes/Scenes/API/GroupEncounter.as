@@ -61,8 +61,32 @@ public class GroupEncounter implements Encounter {
 
 	public function encounterChance():Number {
 		var sum:Number = 0;
-		for each (var encounter:Encounter in components) sum += encounter.encounterChance();
+		for each (var encounter:Encounter in components) {
+			var chance:Number = encounter.encounterChance();
+			if (chance >= Encounters.ALWAYS) return Encounters.ALWAYS;
+			if (chance > 0) sum += chance;
+		}
 		return sum;
+	}
+	
+	/**
+	 * Return a copy of this group encounter with extra condition and chance multipliers
+	 * @param when Extra condition. Can be null if not needed
+	 * @param chances Chance multipliers. Can be null or empty array if not needed
+	 * @return
+	 */
+	public function wrap(when:Function, chances:Array):GroupEncounter {
+		var result:GroupEncounter = new GroupEncounter(name,[]);
+		for each (var e:Encounter in components) {
+			result.components.push(Encounters.wrap2(e, when, chances));
+		}
+		return result;
+	}
+	public function withCondition(when:Function):GroupEncounter {
+		return wrap(when,null);
+	}
+	public function withChanceFactor(chance:*):GroupEncounter {
+		return wrap(null, [chance]);
 	}
 }
 }

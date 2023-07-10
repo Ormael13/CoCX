@@ -1648,6 +1648,7 @@ use namespace CoC;
 		//IMP LORD
 		public function impLordEncounter():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_imp);
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
@@ -1665,6 +1666,7 @@ use namespace CoC;
 
 		//IMP WARLORD
 		public function impWarlordEncounter():void {
+			spriteSelect(SpriteDb.s_impWarlord);
 			clearOutput();
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
@@ -1675,6 +1677,7 @@ use namespace CoC;
 
 		//IMP OVERLORD
 		public function impOverlordEncounter():void {
+			spriteSelect(SpriteDb.s_impOverlord);
 			clearOutput();
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
@@ -1686,6 +1689,7 @@ use namespace CoC;
 		//FERAL IMP LORD
 		public function impLordFeralEncounter():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_imp);
 			outputText("A large corrupted feral imp crosses your path. He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			flags[kFLAGS.FERAL_EXTRAS] = 2;
@@ -1694,6 +1698,7 @@ use namespace CoC;
 
 		//FERAL IMP WARLORD
 		public function impWarlordFeralEncounter():void {
+			spriteSelect(SpriteDb.s_impWarlord);
 			clearOutput();
 			outputText("A large corrupted feral imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;

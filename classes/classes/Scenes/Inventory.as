@@ -88,12 +88,21 @@ use namespace CoC;
 
 		public function itemGoNext():void { if (callNext != null) doNext(callNext); }
 
+		public var returnFn:Function = null;
+		public function showInventoryMenu(returnFn:Function = null):void {
+			this.returnFn = returnFn;
+			inventoryMenu();
+		}
 		public function inventoryMenu(page:int = 1):void {
 			DragButton.setup(mainView, mainView.toolTipView);
 			var x:int;
 			//var foundItem:Boolean = false;
             if (CoC.instance.inCombat) {
-                callNext = inventoryCombatHandler; //Player will return to combat after item use
+				//Player will return to combat after item use
+				callNext = function():void {
+					returnFn = null;
+					inventoryCombatHandler();
+				}
 			}
 			else {
 				spriteSelect(null);
@@ -225,10 +234,17 @@ use namespace CoC;
 				SceneLib.combat.enemyAIImpl();
 				return;
 			}
-			if (CoC.instance.inCombat)
-                addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
-			else addButton(14, "Back", playerMenu);
-//Gone			menuLoc = 1;
+			addButton(14, "Back", returnFromInventory);
+		}
+		private function returnFromInventory():void {
+			var returnFn:Function = this.returnFn;
+			if (returnFn) {
+				this.returnFn = null;
+				returnFn();
+				return;
+			}
+			if (CoC.instance.inCombat) SceneLib.combat.combatMenu(false);
+			playerMenu();
 		}
 		
 		public function showItemTooltipLinkHandler(itemid:String):void {
@@ -714,7 +730,24 @@ use namespace CoC;
 			}
 			addButton(14, "Back", playerMenu);
 		}
-		
+		/**
+		 * Tries to add 1 item to player. Does not produce any output.
+		 * @param itype
+		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
+		 */
+		public function tryAddItemToPlayer(itype:ItemType):int {
+			var i:int = player.roomInExistingStack(itype);
+			if (i >= 0) {
+				player.itemSlots[i].quantity++;
+				return 1;
+			}
+			i = player.emptySlot();
+			if (i >= 0) {
+				player.itemSlots[i].setItemAndQty(itype, 1);
+				return 2;
+			}
+			return 0;
+		}
 		/**
 		 * Tries to transfer 1 item from [source], reducing its quantity, to player.
 		 * Does not produce any output.
@@ -722,19 +755,11 @@ use namespace CoC;
 		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
 		 */
 		public function transferOneItemToPlayer(source:ItemSlotClass):int {
-			var i:int = player.roomInExistingStack(source.itype);
+			var i:int = tryAddItemToPlayer(source.itype);
 			if (i >= 0) {
-				player.itemSlots[i].quantity++;
 				source.removeOneItem()
-				return 1;
 			}
-			i = player.emptySlot();
-			if (i >= 0) {
-				player.itemSlots[i].setItemAndQty(source.itype, 1);
-				source.removeOneItem();
-				return 2;
-			}
-			return 0;
+			return i;
 		}
 		/**
 		 * Tries to transfer 1 item from [source], reducing its quantity, to storage.

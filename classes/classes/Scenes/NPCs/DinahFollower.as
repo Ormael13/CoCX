@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -75,12 +75,12 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			flags[kFLAGS.DINAH_LVL_UP] = 1;
 			flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DINAH_AFFECTION] = 0;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function DinahMoveDecline():void {
 			clearOutput();
 			outputText("They wheeze out an exaggerated sigh.\n\n\"<i>So much of letdown.</i>\" they mutter, as they pack up their goods to travel toward the horizon.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
@@ -120,7 +120,7 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			}
 			else {
 				if (flags[kFLAGS.DINAH_LVL_UP] >= 0.5) addButton(13, "Inv2Camp", DinahMoveToCamp);
-				addButton(14, "Leave", camp.returnToCampUseOneHour);
+				addButton(14, "Leave", explorer.done);
 			}
 		}
 		

@@ -14,7 +14,6 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -59,15 +58,10 @@ public class Mountain extends BaseContent
 		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
-			_hillsEncounter = Encounters.group("hills", {
-				//General Angels, Golems, Goblin and Imp Encounters
-				name: "common",
-				chance: 0.5,
-				call: function ():void{
-					if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
-					else SceneLib.exploration.genericGolGobImpEncounters();
-				}
-			}, {
+			_hillsEncounter = Encounters.group("hills",
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
+			{
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,

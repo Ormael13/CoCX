@@ -5594,6 +5594,16 @@ use namespace CoC;
 			}
 			return -1;
 		}
+		public function roomForItem(itype:ItemType):int {
+			var n:int = 0;
+			for (var i:int = 0; i<itemSlots.length; i++) {
+				var slot:ItemSlotClass = itemSlots[i];
+				if (!slot.unlocked) continue;
+				if (slot.itype == itype) n += slot.roomLeft();
+				if (slot.isEmpty()) n += itype.stackSize;
+			}
+			return n;
+		}
 
 		public function itemSlot(idx:int):ItemSlotClass
 		{

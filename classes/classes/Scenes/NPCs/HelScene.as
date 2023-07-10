@@ -1,7 +1,6 @@
 package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -1772,9 +1771,10 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 
 	public function helSexualAmbushCondition():Boolean {
 		return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
-			   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
-			   && player.gender > 0
-			   && !followerHel();
+				&& flags[kFLAGS.HEL_RAPED_TODAY] == 0
+				&& player.gender > 0
+				&& !followerHel()
+				&& !player.hasStatusEffect(StatusEffects.HeliaOff);
 	}
 //Hel Sexual Ambush
 //(Proc's once per day when [Exploring] anywhere)

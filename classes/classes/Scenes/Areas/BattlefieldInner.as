@@ -3,15 +3,13 @@
  * Area with lvl 24-60 group enemies. Good for PC focused on group fights.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Battlefield.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -75,12 +73,7 @@ public class BattlefieldInner extends BaseContent
 			name: "ted",
 			call: SceneLib.tedScene.introPostHiddenCave,
 			when: SceneLib.tedScene.canEncounterTed
-		}, {
-			//General Golems, Goblin and Imp Encounters
-			name: "common",
-			chance: 0.4,
-			call: SceneLib.exploration.genericGolGobImpEncounters
-		}, {
+		}, SceneLib.exploration.commonEncounters.withChanceFactor(0.4), {
 			//General Golems, Goblin and Imp Encounters
 			name: "vengefulAparitions",
 			chance: 0.4,

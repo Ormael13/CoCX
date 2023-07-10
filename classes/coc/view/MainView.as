@@ -191,7 +191,7 @@ public class MainView extends Block {
 	internal static const COLUMN_1_W:Number      = Math.max(STATBAR_W, CHARVIEW_W);
 	internal static const COLUMN_1_RIGHT:Number  = COLUMN_1_X + COLUMN_1_W;
 	// Column 2 core
-	internal static const TEXTZONE_W:Number      = 770;
+	public static const TEXTZONE_W:Number      = 770;
 	internal static const COLUMN_2_X:Number      = COLUMN_1_RIGHT + GAP;
 	internal static const COLUMN_2_W:Number      = TEXTZONE_W;
 	internal static const COLUMN_2_RIGHT:Number  = COLUMN_2_X + COLUMN_2_W;
@@ -845,7 +845,9 @@ public class MainView extends Block {
 			element.height = mainText.y + mainText.height - element.y;
 		}
 	}
-	
+	public function getCustomElement():DisplayObject {
+		return customElement;
+	}
 
 	public function appendOutputText(text:String):void {
 		var fmt:TextFormat = this.mainText.defaultTextFormat;

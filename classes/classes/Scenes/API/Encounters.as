@@ -44,9 +44,16 @@ public class Encounters {
 	 * Multiply encounter chance
 	 */
 	public static function wrap2(encounter:Encounter,whenFn:Function,chances:Array):Encounter {
-		if (chances.length==0) return encounter;
-		return new SimpleEncounter(encounter.encounterName(),whenFn,
-				fn.product(chances.concat([function():Number{return encounter.encounterChance();}])),
+		if (encounter is GroupEncounter) {
+			return (encounter as GroupEncounter).wrap(whenFn, chances);
+		} else if (encounter is SimpleEncounter) {
+			return (encounter as SimpleEncounter).wrap(whenFn, chances);
+		} else return new SimpleEncounter(
+				encounter.encounterName(),
+				whenFn,
+				(chances && chances.length > 0)
+						? fn.product(chances.concat([encounter.encounterChance]))
+						: encounter.encounterChance,
 				function():void{encounter.execEncounter()}// < wrap in case it uses `this`
 		);
 	}

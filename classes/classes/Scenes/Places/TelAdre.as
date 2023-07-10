@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.MerchantMenu;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
@@ -308,15 +309,15 @@ public function oswaldPawn():void {
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
 		if (player.gems < 500) {
 			outputText("\n\n<b>You can't afford that!</b>");
-			oswaldPawnMenu(); //eventParser(1065);
+			oswaldPawnMenuNew(); //eventParser(1065);
 		}
 		else {
 			menu();
-			addButton(0, "Sell", oswaldPawnMenu);
+			addButton(0, "Sell", oswaldPawnMenuNew);
 			addButton(1, "BuyCarrot", buyCarrotFromOswald);
 		}
 	}
-	else oswaldPawnMenu(); //eventParser(1065);
+	else oswaldPawnMenuNew(); //eventParser(1065);
 }
 
 private function buyCarrotFromOswald():void {
@@ -329,7 +330,22 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //Moved here from Inventory.as
+	private function oswaldPawnMenuNew():void {
+		clearOutput();
+		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
+		var merchantMenu:MerchantMenu = new MerchantMenu();
+		merchantMenu.playerCanSell = true;
+		merchantMenu.playerSellFactor = 0.5;
+		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) {
+			outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal. ");
+			merchantMenu.playerSellFactor = 1.0;
+		}
+		merchantMenu.onShow = function():void {
+			button(10).show("Misc", oswaldPawnMenu2);
+		}
+		merchantMenu.show(telAdreMenu);
+	}
+private function oswaldPawnMenu(page:int = 1, refresh:Boolean = true):void { //Moved here from Inventory.as
 	var slot:int;
 	spriteSelect(SpriteDb.s_oswald);
 	if (refresh) {
@@ -359,7 +375,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 			}
 		}
 		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
-		if (inventory.getMaxSlots() > 20) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+		if (inventory.getMaxSlots() > 20) addButton(13, "Next", oswaldPawnMenu, page + 1, true);
 	}
 	if (page == 3) {
 		for (slot = 20; slot < 30; slot++) {

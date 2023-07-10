@@ -8,7 +8,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Lake.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -157,15 +156,9 @@ use namespace CoC;
 					return player.level >= 3
 				},
 				call: slimeOozeEncounterFn
-			}, {
-				name: "common",
-				when: function ():Boolean {
-					return player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0
-				},
-				chance: 0.5,
-				night: false,
-				call: SceneLib.exploration.genericGolGobImpEncounters
-			}, {
+			}, SceneLib.exploration.commonEncounters.wrap(function ():Boolean {
+				return player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0
+			}, [0.5]), {
 				//Helia monogamy fucks
 				name: "helcommon",
 				night : false,

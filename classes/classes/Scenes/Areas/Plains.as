@@ -5,12 +5,10 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -38,16 +36,11 @@ use namespace CoC;
 
 		private function init():void {
 			const fn:FnHelpers = Encounters.fn;
-			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/ {
-				//General Golems, Goblin, Angels and Imp Encounters
-				name: "common",
-				chance: 0.5,
-				call: function ():void {
-					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-					if (rand(10) == 0) SceneLib.exploration.genericAngelsEncounters();
-					else SceneLib.exploration.genericGolGobImpEncounters();
-				}
-			}, {
+			// TODO @aimozg 'plants' tag
+			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					SceneLib.exploration.angelEncounters.withChanceFactor(0.05),
+			{
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,

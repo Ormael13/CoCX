@@ -10,9 +10,9 @@ Encounters on the map have 3 reveal stages:
 ## Updating encounter definition
 
 ExplorationEngine works with existing GroupEncounter, but they need to have extra fields:
-* `kind` (String, required). An encounter category, for example `"item"`, `"boss"`, or `"npc"`. See `ExplorationEntry.EncounterKinds` for full list.
-* `label` (String, optional). Map label - default is encounter `name` capitalized.
-* `hint` (String, optional). Displayed in the tooltip when hovering over the fully revealed encounter.
+* `kind` (String or function returning String, required). An encounter category, for example `"item"`, `"boss"`, or `"npc"`. See `ExplorationEntry.EncounterKinds` for full list.
+* `label` (String or function returning String, optional). Map label - default is encounter `name` capitalized.
+* `hint` (String or function returning String, optional). Displayed in the tooltip when hovering over the fully revealed encounter.
 * `special` (Boolean, optional). Encounter with `special: true` have priority to appear on the road end.
 * `unique` (Boolean, optional). Only one encounter with `unique: true` can appear on a map (but not guaranteed to).
 * `reenter` (Boolean, optional). You can re-enter the encounter after finishing it (until you go forward).
@@ -173,9 +173,12 @@ Or to make an encounter repeatable/no longer reentrable.
 ---
 
 ```as
-explorer.getNextEntry()
+explorer.nextNodes
 ```
-On an exploration map UI, this is the next `ExplorationEntry` on a road. Inside the encounter, this is same as `getCurrentEntry()`. If the exploration was ended, or road isn't picked yet, return null.
+Array of next nodes.
+
+If exploration is ended, empty array.
+If road not picked, array of first nodes on the road. 
 
 ---
 

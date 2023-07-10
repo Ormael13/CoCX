@@ -1,12 +1,12 @@
-package classes.Scenes.Combat.SpellsGreen 
+package classes.Scenes.Combat.SpellsGreen
 {
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractGreenSpell;
 import classes.StatusEffects;
 
-	public class DeathBlossomSpell extends AbstractGreenSpell {
-		public function DeathBlossomSpell() 
+public class DeathBlossomSpell extends AbstractGreenSpell {
+		public function DeathBlossomSpell()
 		{
 			super("Death Blossom",
 			"Deliver deadly poison and strong aphrodisiac by causing nearby vegetation to bloom corrupted flowers which inflicts their poison each round for 3 rounds. Deals severe tease and poison damage over time intensifying every round by 20%.",
@@ -32,7 +32,7 @@ import classes.StatusEffects;
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
-		if (!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+		if (!player.hasStatusEffect(StatusEffects.NearbyPlants) && !explorer.areaTags.plants) {
 			return "Death Blossom require to have plants nearby.";
 		}
 		
