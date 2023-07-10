@@ -490,7 +490,7 @@ public class ExplorationEngine extends BaseContent {
 				b.show("Path " + (i + 1), curry(selectRoadAndExploreNext, i))
 			}
 		}
-		button(10).show("Inventory", inventory.inventoryMenu)
+		button(10).show("Inventory", curry(inventory.showInventoryMenu, doExplore))
 				  .hint("Use an item or manage your equipment.")
 				  .disableIf(!canInventory);
 		SceneLib.masturbation.masturButton(11).disableIf(!canMasturbate);

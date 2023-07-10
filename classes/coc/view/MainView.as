@@ -845,7 +845,9 @@ public class MainView extends Block {
 			element.height = mainText.y + mainText.height - element.y;
 		}
 	}
-	
+	public function getCustomElement():DisplayObject {
+		return customElement;
+	}
 
 	public function appendOutputText(text:String):void {
 		var fmt:TextFormat = this.mainText.defaultTextFormat;

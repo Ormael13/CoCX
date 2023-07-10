@@ -60,8 +60,8 @@ public dynamic class SimpleEncounter implements Encounter {
 	 * @return
 	 */
 	public function wrap(whenFn:Function,chances:Array):SimpleEncounter {
-		if (whenFn) {
-			if (this._whenFn) whenFn = FnHelpers.FN.all(whenFn, this._whenFn)
+		if (whenFn != null) {
+			if (this._whenFn != null) whenFn = FnHelpers.FN.all(whenFn, this._whenFn)
 		} else whenFn = this._whenFn;
 		var result:SimpleEncounter = new SimpleEncounter(
 				name,
