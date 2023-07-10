@@ -1,10 +1,12 @@
 package classes.Scenes.API {
 import classes.BaseContent;
+import classes.CoC_Settings;
 import classes.ItemSlotClass;
 import classes.ItemType;
 
 import coc.view.Block;
 import coc.view.CoCButton;
+import coc.view.MainView;
 
 public class MerchantMenu extends BaseContent {
 	public var items:/*MerchantItem*/Array = [];
@@ -21,7 +23,7 @@ public class MerchantMenu extends BaseContent {
 	 *
 	 * null - player can sell any item (if playerCanSell is true).
 	 */
-	public var playerSellFilter:Function = null;
+	public var playerSellFilter:Function   = null;
 	/**
 	 * Default price = item value * price factor
 	 */
@@ -33,7 +35,7 @@ public class MerchantMenu extends BaseContent {
 	 *
 	 * To return to merchant interface, this function should call `next();`
 	 */
-	public var afterPurchase:Function = null;
+	public var afterPurchase:Function      = null;
 	/**
 	 * `function(itype:ItemType, quantity:int, slotIndex:int, next:Function):void`.
 	 *
@@ -41,7 +43,7 @@ public class MerchantMenu extends BaseContent {
 	 *
 	 * To return to merchant interface, this function should call `next();`
 	 */
-	public var afterPlayerSell:Function = null;
+	public var afterPlayerSell:Function    = null;
 	/**
 	 * `function(delta:int):void`
 	 */
@@ -55,35 +57,46 @@ public class MerchantMenu extends BaseContent {
 	 *
 	 * Called after merchant interface is displayed. Can be used to add extra buttons.
 	 */
-	public var onShow:Function = null;
+	public var onShow:Function             = null;
 	/**
 	 * Show [Inventory] button.
 	 */
-	public var canInventory:Boolean = true;
+	public var canInventory:Boolean        = true;
 	
 	private var grid:Block;
 	private var backButton:Function                   = camp.returnToCampUseOneHour;
 	private var playerInvButtons:/*CoCButton*/Array   = [];
 	private var playerPage:int                        = 0;
 	private var playerItemsPerPage:int                = 25;
-	private var playerPageMax:int                     = 0;
+	private var playerPageCount:int                   = 0;
+	private var playerPagePrev:CoCButton;
+	private var playerPageNext:CoCButton;
 	private var merchantInvButtons:/*CoCButton*/Array = [];
 	private var merchantPage:int                      = 0;
 	private var merchantItemsPerPage:int              = 25;
-	private var merchantPageMax:int                   = 0;
+	private var merchantPageCount:int                 = 0;
+	private var merchantPagePrev:CoCButton;
+	private var merchantPageNext:CoCButton;
 	
 	public function MerchantMenu() {
 		useGemCurrency();
 	}
 	
 	public function useGemCurrency():void {
-		modCurrencyFn = function(delta:int):void {
+		modCurrencyFn = function (delta:int):void {
 			player.gems += delta;
 			statScreenRefresh();
 		}
-		getCurrencyFn = function():int { return player.gems }
+		getCurrencyFn = function ():int { return player.gems }
 	}
 	
+	/**
+	 * Add item to merchant inventory
+	 * @param item Item to sell
+	 * @param price Price, -1 is to use default value = value * priceFactor
+	 * @param amount Amount in stock, -1 for infinite
+	 * @return MerchantItem instance to configure
+	 */
 	public function addItem(
 			item:ItemType,
 			price:int  = -1,
@@ -110,14 +123,19 @@ public class MerchantMenu extends BaseContent {
 	public function merchantItemClick(mi:MerchantItem):void {
 		var amount:int = 1;
 		if (shiftKeyDown) {
-			amount = mi._item.stackSize;
+			// Purchase max = min of: stack size, inv room, affordable, store stock
+			amount = Math.min(
+					mi._item.stackSize,
+					Math.max(1, player.roomForItem(mi._item)),
+					Math.floor(getCurrencyFn() / mi._price)
+			);
 			if (mi._amount >= 0) amount = Math.min(amount, mi._amount);
-			amount = Math.min(amount, Math.max(1, player.roomForItem(mi._item)));
 		}
-		modCurrencyFn(-mi._price*amount);
+		modCurrencyFn(-mi._price * amount);
 		if (mi._amount >= 0) mi._amount -= amount;
-		var n:int = amount;
+		var n:int          = amount;
 		var redraw:Boolean = false;
+		
 		function addOneItem():void {
 			while (n-- > 0) {
 				if (inventory.tryAddItemToPlayer(mi._item) == 0) {
@@ -134,6 +152,7 @@ public class MerchantMenu extends BaseContent {
 				else update();
 			}
 		}
+		
 		addOneItem();
 	}
 	public function playerItemClick(i:int):void {
@@ -189,9 +208,24 @@ public class MerchantMenu extends BaseContent {
 			if (items[j]) items[j].applyToButton(merchantInvButtons[i]);
 			else merchantInvButtons[i].hide();
 		}
+		if (playerPagePrev) {
+			playerPagePrev.enabled = playerPage > 0;
+			playerPageNext.enabled = playerPage < playerPageCount - 1;
+		}
+		if (merchantPagePrev) {
+			merchantPagePrev.enabled = merchantPage > 0;
+			merchantPageNext.enabled = merchantPage < merchantPageCount - 1;
+		}
 		statScreenRefresh();
 	}
-	
+	private function modPlayerPage(d:int):void {
+		playerPage += d;
+		update();
+	}
+	private function modMerchantPage(d:int):void {
+		merchantPage += d;
+		update();
+	}
 	public function show(backButton:Function):void {
 		this.backButton = backButton;
 		flushOutputTextToGUI();
@@ -219,9 +253,9 @@ public class MerchantMenu extends BaseContent {
 		var playerItemCount:int = player.itemSlotCount();
 		var playerItemRows:int  = Math.min(5, Math.ceil(playerItemCount / 5));
 		playerPage              = 0;
-		playerPageMax           = Math.ceil(playerItemCount / playerItemRows / 5);
+		playerPageCount         = Math.ceil(playerItemCount / playerItemRows / 5);
 		playerItemsPerPage      = playerItemRows * 5;
-		playerInvButtons = [];
+		playerInvButtons        = [];
 		if (playerItemCount > 0) {
 			grid.addTextField({
 				htmlText         : "Your inventory: " + (playerCanSell ? " <i>(Click ot sell)</i>" : ""),
@@ -233,16 +267,24 @@ public class MerchantMenu extends BaseContent {
 			grid.addElement(btn);
 			playerInvButtons.push(btn);
 		}
-		if (playerPageMax > 0) {
-			// todo @aimozg player inventory pagination
+		if (playerPageCount > 1) {
+			playerPagePrev = mainView.createActionButton(0)
+									 .show("Prev", curry(modPlayerPage, -1))
+									 .icon("Left");
+			playerPageNext = mainView.createActionButton(4)
+									 .show("Prev", curry(modPlayerPage, +1))
+									 .icon("Right");
+			grid.addElement(playerPagePrev);
+			grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}), {colspan: 3});
+			grid.addElement(playerPageNext);
 		}
 		var merchantItemCount:int = items.length;
 		var merchantItemRows:int  = Math.min(5, Math.ceil(merchantItemCount / 5));
 		merchantPage              = 0;
-		merchantPageMax           = Math.ceil(merchantItemCount / merchantItemRows / 5);
+		merchantPageCount         = Math.ceil(merchantItemCount / merchantItemRows / 5);
 		merchantItemsPerPage      = merchantItemRows * 5;
-		merchantInvButtons = [];
-		if (merchantItemCount > 0) {
+		merchantInvButtons        = [];
+		if (merchantItemCount > 1) {
 			grid.addTextField({
 				htmlText         : "Merchant inventory: <i>(Click to buy)</i>",
 				defaultTextFormat: mainView.mainText.defaultTextFormat
@@ -253,8 +295,16 @@ public class MerchantMenu extends BaseContent {
 			grid.addElement(btn);
 			merchantInvButtons.push(btn);
 		}
-		if (playerPageMax > 0) {
-			// todo @aimozg merchant inventory pagination
+		if (merchantPageCount > 1) {
+			merchantPagePrev = mainView.createActionButton(0)
+									   .show("Prev", curry(modMerchantPage, -1))
+									   .icon("Left");
+			merchantPageNext = mainView.createActionButton(4)
+									   .show("Next", curry(modMerchantPage, +1))
+									   .icon("Right");
+			grid.addElement(merchantPagePrev);
+			grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}), {colspan: 3});
+			grid.addElement(merchantPageNext);
 		}
 		update();
 		
@@ -263,7 +313,13 @@ public class MerchantMenu extends BaseContent {
 		menu();
 		if (playerCanSell) button(0).show("Sell All", sellAllClick);
 		if (canInventory) button(2).show("Inventory", curry(inventory.showInventoryMenu, showScreen));
-		button(14).show( "Back", backButton).icon("Back");
+		if (CoC_Settings.mobileBuild) {
+			button(4).show("Buy 1", function ():void {
+				shiftKeyDown = !shiftKeyDown;
+				button(4).text(shiftKeyDown ? "Buy max" : "Buy 1");
+			})
+		}
+		button(14).show("Back", backButton).icon("Back");
 		if (onShow != null) onShow();
 	}
 }
