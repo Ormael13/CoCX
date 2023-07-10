@@ -767,10 +767,41 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (player.gems < cost) {
 			outputText("\n<b>You don't have enough gems...</b>");
 			doNext(BuyHolyBands);
-			return;
 		}
-		doYesNo(Utils.curry(belisaBuyBand1,type,cost), BuyHolyBands);
+		else {
+			switch (type) {
+				case 1:
+					HolyBand1Cap += 1;
+					break;
+				case 2:
+					HolyBand2Cap += 1;
+					break;
+				case 3:
+					HolyBand3Cap += 1;
+					break;
+				case 4:
+					HolyBand4Cap += 1;
+					break;
+				case 5:
+					HolyBand5Cap += 1;
+					break;
+				case 6:
+					HolyBand6Cap += 1;
+					break;
+				case 7:
+					HolyBand7Cap += 1;
+					break;
+				default:
+					outputText("You have encounterd a BUG and i not mean drider-bug but just... BUG. Report to Ormael/Aimozg this (not at all drider) BUG.");
+			}
+			player.gems -= cost;
+			outputText("Temp dialogue until Snas gets back to me. \n\" Thanks for the gems, [name]. Here's the band!\"");
+			statScreenRefresh();
+			doNext(BelisaShop);
+		}
+		//doYesNo(Utils.curry(belisaBuyBand1,type,cost), BuyHolyBands);
 	}
+	/*
 	public function belisaBuyBand1(type:Number, cost:Number):void {
 		clearOutput();
 		switch (type) {
@@ -801,7 +832,8 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		player.gems -= cost;
 		statScreenRefresh();
 		doNext(BelisaShop);
-	}
+	}*/
+
 	private function BelisaHolyBandsManagmentCurrent():Number {
 		var BHBMC:Number = 0;
 		if (HolyBand1 > 0) BHBMC += HolyBand1;
