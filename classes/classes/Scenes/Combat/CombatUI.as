@@ -25,6 +25,7 @@ import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Monsters.AngelLR;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
@@ -551,7 +552,11 @@ public class CombatUI extends BaseCombatContent {
 				else if (monster is MinotaurKing) {
 					var minoking:MinotaurKing = monster as MinotaurKing;
 					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of Excellia!");
+					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
+				}
+				else if (monster is AngelLR) {
+					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelperIL);
+					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of second angel!");
 				}
 				else if (monster is Lethice) {
 					var lethice:Lethice = monster as Lethice;

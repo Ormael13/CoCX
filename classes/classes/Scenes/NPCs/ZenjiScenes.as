@@ -1176,8 +1176,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (CorruptedGlade.canBeDestroyed()) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
 			addButton(4, "Nightwatch", loverZenjiNightWatch).hint("Toggle Zenji’s night watch on or off.");
 			if (player.hasPerk(PerkLib.BasicLeadership)) {
-				if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to join you in adventures outside camp.");
-				else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to stay in camp.");
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == "" || flags[kFLAGS.PLAYER_COMPANION_2] == "") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to join you in adventures outside camp.");
+				else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji" || flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to stay in camp.");
 				else addButtonDisabled(5, "Assist Me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Zenji about accompaning you.");
 			}
 			else addButtonDisabled(5, "Assist Me", "You need to have at least Basic Leadership to form a team.");
@@ -2569,7 +2569,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public function zenjiHenchmanOption(textBypass:Boolean =false):void
 		{
 			if (!textBypass) clearOutput();
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "" || flags[kFLAGS.PLAYER_COMPANION_2] == "") {
 				if (!textBypass) {
 					outputText("Zenji readies his spear before flexing his arms, \"<i>¡Vamanos, flaca!</i>\"\n\n");
 					outputText("Zenji is now following you around.\n\n");
@@ -2588,7 +2588,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				strZenji = Math.round(strZenji);
 				meleeAtkZenji += (1 + (int)(meleeAtkZenji / 5)) * player.newGamePlusMod();
 				player.createStatusEffect(StatusEffects.CombatFollowerZenji, strZenji, meleeAtkZenji, 0, 0);
-				flags[kFLAGS.PLAYER_COMPANION_1] = "Zenji";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "") flags[kFLAGS.PLAYER_COMPANION_2] = "Zenji";
+				else flags[kFLAGS.PLAYER_COMPANION_1] = "Zenji";
 			}
 			else {
 				if (!textBypass){
@@ -2597,7 +2598,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 					outputText("Aurora is no longer following you around.\n\n");
 				}
 				player.removeStatusEffect(StatusEffects.CombatFollowerZenji);
-				flags[kFLAGS.PLAYER_COMPANION_1] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				else flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			}
 			doNext(loverZenjiMainCampMenu);
 			cheatTime(1/12);

@@ -421,11 +421,11 @@ public class DungeonMaps extends DungeonAbstractContent
 				}; }
 			),
 			new DungeonMap("River Dungeon, 4th floor", [
-					"[S]-[c]-[b]         [a]    ",
+					"[S]K[c]-[b]         [a]    ",
 					"         |           L     ",
 					"        [e]         [d]    ",
 					"         |           |     ",
-					"[j]     [i]-[h]-[g]-[f]-[s]",
+					"[j]     [i]-[h]-[g]-[f]K[s]",
 					" |       |       |         ",
 					"[n]-[m]-[l]     [k]        ",
 					"     |           |         ",
@@ -461,9 +461,21 @@ public class DungeonMaps extends DungeonAbstractContent
 					'z': DUNGEON_RIVER_FLOOR_04_ROOM_25
 				},
 				function():Object { return {
+					'K': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10 ? "K": "—",
 					'L': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 9 ? "|": "L"
 				}; }
-			),
+			),/*
+			new DungeonMap("River Dungeon, 5th floor", [
+					"[a]—   ",
+					" |     ",
+					"[b]—[c]",
+				],
+				{
+					'a': DUNGEON_RIVER_FLOOR_02_ROOM_25,
+					'b': DUNGEON_RIVER_FLOOR_02_ROOM_26,
+					'c': DUNGEON_RIVER_FLOOR_02_ROOM_27
+				}
+			),*/
             //TODO: place other RD levels here
             //FFS, ANOTHER TOWER, I HATE YOU
 			new DungeonMap("Anzu's Palace, 1st floor", [

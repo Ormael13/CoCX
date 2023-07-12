@@ -21,6 +21,23 @@ package classes.Scenes.Monsters
 			HP = minHP() - 1;
 			SceneLib.combat.cleanupAfterCombatImpl();
 		}
+		private function angelSwitchWithOtherOne():void {
+			clearOutput();
+			outputText("Angel with it lil helpers stops their actions defeated.");
+			outputText("\n\n\"<i>Tricky one opponent. Need assistance.</i>\"");
+			outputText("\n\nThe angel starts then to shine with pure white light so intense you must temporaly avert your gaze. When you look again at spot it was you could see other angel with it helpers all ready to next round of the fight while the defeated one is recovering at the arena side.");
+			touStat.core.value *= 0.25;
+			speStat.core.value *= 0.5;
+			wisStat.core.value *= 0.125;
+			addPerkValue(PerkLib.DieHardHP, 1, -6);
+			addStatusValue(StatusEffects.TranscendentSoulField, 1, -6);
+			addStatusValue(StatusEffects.TranscendentSoulField, 2, -6);
+			bonusWrath -= 200;
+			bonusSoulforce -= 400;
+			HP = maxHP();
+			removeStatusEffect(StatusEffects.TrueFormAngel);
+			SceneLib.combat.combatRoundOver();
+		}
 		
 		private function AngelEnergyRays():void {
 			outputText("Angel lil helpers fixates at you with all of their eyes unleashing a barrage of rays at you! ");
@@ -73,12 +90,9 @@ package classes.Scenes.Monsters
 		
 		private function angelification():void {
 			clearOutput();
-			var TB:Number = Math.round(touStat.core.value * 0.4);
-			var SB:Number = Math.round(speStat.core.value * 0.2);
-			var WB:Number = Math.round(wisStat.core.value * 0.6);
-			touStat.core.value += TB;
-			speStat.core.value += SB;
-			wisStat.core.value += WB;
+			touStat.core.value *= 4;
+			speStat.core.value *= 2;
+			wisStat.core.value *= 8;
 			addPerkValue(PerkLib.MonsterRegeneration, 1, 2);
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				addPerkValue(PerkLib.DieHardHP, 1, 28);
@@ -115,9 +129,25 @@ package classes.Scenes.Monsters
 					angelification();
 					return;
 				}
-				cleanupAfterCombat();
+				if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+					if (player.hasStatusEffect(StatusEffects.MinoKing)) {
+						player.removeStatusEffect(StatusEffects.MinoKing);
+						SceneLib.hexindao.intermediateleadershipfight2();
+					}
+					else angelSwitchWithOtherOne();
+				}
+				else cleanupAfterCombat();
 			}
-			else angelReactsToLustiness();
+			else {
+				if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+					if (player.hasStatusEffect(StatusEffects.MinoKing)) {
+						player.removeStatusEffect(StatusEffects.MinoKing);
+						SceneLib.hexindao.intermediateleadershipfight2();
+					}
+					else angelSwitchWithOtherOne();
+				}
+				else angelReactsToLustiness();
+			}
 		}
 		
 		override public function get long():String
