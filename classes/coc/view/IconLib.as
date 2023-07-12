@@ -2,8 +2,6 @@ package coc.view {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.events.Event;
-import flash.geom.Point;
-import flash.geom.Rectangle;
 
 public class IconLib {
 	public static const INSTANCE:IconLib = new IconLib();
@@ -40,9 +38,7 @@ public class IconLib {
 			for each (var xicon:XML in xrow.icon) {
 				var iconId:String = prefix+xicon.text().toString();
 				if (iconId) {
-					var bmp:BitmapData = new BitmapData(cellwidth, cellheight, true, 0);
-					bmp.copyPixels(bd, new Rectangle(x, y, cellwidth, cellheight), Point(new Point(0, 0)));
-					icons[iconId] = new Bitmap(bmp);
+					icons[iconId] = new Bitmap(UIUtils.subsprite(bd, x, y, cellwidth, cellheight));
 				}
 				x += cellwidth;
 			}

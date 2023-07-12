@@ -905,7 +905,7 @@ import coc.xxc.StoryContext;
 					grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}));
 				} else {
 					// add button
-					var btn:CoCButton = mainView.createActionButton(i);
+					var btn:CoCButton = new CoCButton();
 					b.applyTo(btn);
 					grid.addElement(btn);
 					if (b.draggable)

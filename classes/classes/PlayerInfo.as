@@ -1,12 +1,10 @@
 package classes {
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
-import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EtnaDaughterScene;
-import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -1809,11 +1807,14 @@ public class PlayerInfo extends BaseContent {
 
 	private static var filterChoices:Array = [0,1,1,1,1,1,1,1,1,1];	//1 - is active?, 2-10 - is shown?
 	public function perkBuyMenu():void {
+		CoC.instance.perkMenu.newPerkMenu();
+	}
+	public function perkBuyMenuOld():void {
 		clearOutput();
-		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
+		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player, false);
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		perks = mutationsClear(perks);
+		//perks = mutationsClear(perks);
 		if (perks.length == 0) {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");
@@ -1886,23 +1887,13 @@ public class PlayerInfo extends BaseContent {
 	{
 		if ((filterChoices[pos])==0) filterChoices[pos] = 1;
 		else filterChoices[pos] = 0;
-		perkBuyMenu();
+		perkBuyMenuOld();
 	}
 
 	public function clearFilter():void
 	{
 		filterChoices = [1,1,1,1,1,1,1,1,1,1];
-		perkBuyMenu();
-	}
-	public function mutationsClear(perks:Array):Array{
-		var temp:Array = [];
-		var compMutate2:Array = IMutationsLib.mutationsArray("All");
-		for each (var playerPerk:PerkType in perks){
-			if (!(compMutate2.indexOf(playerPerk) >= 0)){
-				temp.push(playerPerk);
-			}
-		}
-		return temp;
+		perkBuyMenuOld();
 	}
 	private var perkList:Array = [];
 	private function linkhandler(e:TextEvent):void{
@@ -2330,10 +2321,10 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (page == 6) {
 			if (player.superPerkPoints > 0) {
-				
+			
 			}
 			else {
-				
+			
 			}
 			//12 -> page + 1 button
 			//13 -> page - 1 button
@@ -2537,4 +2528,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(superPerkBuyMenu, 5);
 	}
 }
-}
+}

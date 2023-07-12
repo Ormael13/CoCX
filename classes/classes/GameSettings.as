@@ -26,7 +26,7 @@ public class GameSettings extends BaseContent {
     public var sceneHunter_inst:SceneHunter = new SceneHunter();
 	
 	public static function get buttonIconsEnabled():Boolean {
-		return !flags[kFLAGS.BUTTON_ICONS_DISABLED];
+		return flags && !flags[kFLAGS.BUTTON_ICONS_DISABLED];
 	}
 
 	public function get charviewEnabled():Boolean {

@@ -10,6 +10,7 @@ import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
 import classes.IMutations.*;
+import classes.Parser.Parser;
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.PerkTree;
@@ -21,10 +22,14 @@ import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
 import classes.StatusEffects;
 
+import coc.view.Block;
 import coc.view.ButtonDataList;
+import coc.view.CoCButton;
+import coc.view.MainView;
 
 import flash.events.MouseEvent;
 import flash.events.TextEvent;
+import flash.text.TextFieldAutoSize;
 import flash.utils.Dictionary;
 
 public class PerkMenu extends BaseContent {
@@ -64,6 +69,8 @@ public class PerkMenu extends BaseContent {
 			if(player.perkPoints > 1) outputText("s");
 			outputText(" to spend.</b>");
 			addButton(1, "Perk Up", CoC.instance.playerInfo.perkBuyMenu);
+		} else {
+			button(1).show("Menu", newPerkMenu);
 		}
 		if (player.superPerkPoints > 0) {
 			outputText("\n<b>You have " + num2Text(player.superPerkPoints) + " super perk point");
@@ -951,6 +958,217 @@ public class PerkMenu extends BaseContent {
 		}
 		outputText("\n");
 	}
+	public function newPerkMenu(category:*=null):void {
+		mainView.toolTipView.hide();
+		clearOutput();
+		outputText("You have <b>"+numberOfThings(player.perkPoints, "perk point")+"</b>.\n\n");
+		
+		const NCOLS:int = 15;
+		var btn:CoCButton;
+		var i:int;
+		var contentBlock:Block = new Block({
+			layoutConfig: {
+				type: "flow",
+				direction: "column"
+			}
+		});
+		var groupgrid:Block     = new Block({
+			layoutConfig: {
+				type     : "grid",
+				cols     : NCOLS,
+				cellWidth: MainView.BTN_H,
+				setWidth : true,
+				gap      : -1
+			},
+			width: MainView.TEXTZONE_W - 16
+		});
+		
+		var basicJobs:Array    = [
+			["ARr", PerkLib.JobAllRounder],
+			["BsW", PerkLib.JobBeastWarrior],
+			["Gdn", PerkLib.JobGuardian],
+			["Ldr", PerkLib.JobLeader],
+			["Rgr", PerkLib.JobRanger],
+			["Rog", PerkLib.JobRogue],
+			["Sed", PerkLib.JobSeducer],
+			["Sor", PerkLib.JobSorcerer],
+			["Cul", PerkLib.JobSoulCultivator],
+			["Wrr", PerkLib.JobWarrior]
+		];
+		var advancedJobs:Array = [
+			["Bwr", PerkLib.JobBrawler],
+			["Csn", PerkLib.JobCourtesan],
+			["Dfr", PerkLib.JobDefender],
+			["Dvs", PerkLib.JobDervish],
+			["ECj", PerkLib.JobElementalConjurer],
+			["Enc", PerkLib.JobEnchanter],
+			["Ero", PerkLib.JobEromancer],
+			["Glm", PerkLib.JobGolemancer],
+			["Gsg", PerkLib.JobGunslinger],
+			["Hlr", PerkLib.JobHealer],
+			["Hnt", PerkLib.JobHunter],
+			["Knt", PerkLib.JobKnight],
+			["Mnk", PerkLib.JobMonk],
+			["Swm", PerkLib.JobSwordsman],
+			["Wld", PerkLib.JobWarlord]
+		];
+		var prestigeJobs:Array = [
+			["AAr", PerkLib.PrestigeJobArcaneArcher],
+			["APr", PerkLib.PrestigeJobArchpriest],
+			["Brd", PerkLib.PrestigeJobBard],
+			["Bkr", PerkLib.PrestigeJobBerserker],
+			["Bnd", PerkLib.PrestigeJobBindmaster],
+			["Drd", PerkLib.PrestigeJobDruid],
+			["Nec", PerkLib.PrestigeJobNecromancer],
+			["Stl", PerkLib.PrestigeJobSentinel],
+			["SAM", PerkLib.PrestigeJobSoulArtMaster],
+			["SKt", PerkLib.PrestigeJobSpellKnight],
+			["Stl", PerkLib.PrestigeJobStalker],
+			["Tmp", PerkLib.PrestigeJobTempest],
+			["Wlk", PerkLib.PrestigeJobWarlock]
+		];
+		var allJobs:Array      = [basicJobs,advancedJobs, prestigeJobs];
+		
+		groupgrid.addElement(new CoCButton({  square   : true})
+				.show("Common",curry(newPerkMenu,"Common"))
+				.disableIf(category == "Common")
+				.hint("Perks not related to any job."), {colspan: 2});
+		groupgrid.addElement(new CoCButton({square   : true})
+				.show("Jobs", curry(newPerkMenu, "Jobs"))
+				.disableIf(category == "Jobs")
+				.hint("Job perks."), {colspan: 2});
+		groupgrid.addBitmapDataSprite({}, {colspan: Math.max(1, NCOLS - basicJobs.length - 4)});
+		
+		var n:int = 0;
+		function jobPerkClearName(job:PerkType):String {
+			return job.name(null).replace(/^Job \( \w+ \):\s*/, "")
+		}
+		for each (var joblist:Array in allJobs) {
+			for each (var entry:Array in joblist) {
+				var perk:PerkType = entry[1];
+				var name:String = jobPerkClearName(perk);
+				btn = new CoCButton({square: true})
+						.show(entry[0], curry(newPerkMenu, perk))
+						.disableIf(category == perk)
+						.hint("Perks in the " + name + " group.", name);
+				if (player.hasPerk(perk)) btn.color("#008000");
+				groupgrid.addElement(btn);
+				n++;
+			}
+		}
+		groupgrid.doLayout();
+		
+		var perks:/*PerkType*/Array;
+		var catName:String;
+		if (category == "Common") {
+			catName = category;
+			perks = PerkTree.obtainablePerks().filter(function(p:PerkType,...rest):Boolean {
+				return !PerkLib.isJob(p) && PerkTree.getJobs(p) == null;
+			});
+		} else if (category == "Jobs") {
+			catName = category;
+			perks = PerkTree.obtainablePerks().filter(function(p:PerkType,...rest):Boolean {
+				return PerkLib.isJob(p);
+			});
+		} else if (category is PerkType) {
+			catName = jobPerkClearName(category);
+			perks = PerkTree.getJobUnlocks(category);
+		} else {
+			category = null;
+			perks = [];
+		}
+		trace("perks: "+perks.length);
+		perks = perks.filter(function(p:PerkType,...rest):Boolean {
+			if (p is IMutationPerkType) return false;
+			if (player.hasPerk(p)) return false;
+			if (!p.available(player)) {
+				var prev:PerkType = p.tierPrev();
+				if (prev && !player.hasPerk(prev)) return false;
+			}
+			return true;
+		});
+		trace("perks filtered: "+perks.length);
+		perks = sortedBy(perks, sorterRelativeDistance);
+		
+		var nperks:int = 0, navail:int = 0;
+		var perkgrid:Block = new Block({
+			layoutConfig: {
+				type: "grid",
+				setWidth: true,
+				columns: [40, -1],
+				gap: 2
+			},
+			width: MainView.TEXTZONE_W - 16
+		});
+		for each (perk in perks) {
+			var pc:PerkClass = new PerkClass(perk, perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
+			btn = new CoCButton({square:true})
+					.show("", curry(CoC.instance.playerInfo.applyPerk, pc))
+					.icon("Right");
+			var text:String;
+			text = "<b>"+pc.perkName+"</b>"
+			if (perk.tierList) {
+				n = perk.tierList.length - perk.tierPos() - 1;
+				text += " <b>(+"+n+" follow-up "+(n>1?"perks":"perk")+")</b>";
+			}
+			text += ": ";
+			text += Parser.recursiveParser(pc.perkDesc);
+			if (!player.hasPerk(perk)) {
+				var reqs:String = formatPerkRequirements(perk, true);
+				if (reqs) text += "\n"+reqs;
+			}
+			if (player.hasPerk(perk)) {
+				btn.disable();
+				btn.text("");
+				btn.icon("Yes");
+			} else if (!perk.available(player)) {
+				btn.disable();
+				btn.icon("");
+				btn.labelText = "?";
+			} else if (player.perkPoints <= 0) {
+				navail++;
+				btn.disable();
+				btn.icon("");
+			} else {
+				navail++;
+				btn.toolTipHeader = "Click to purchase.";
+			}
+			nperks++;
+			perkgrid.addElement(btn);
+			
+			perkgrid.addTextField({
+				defaultTextFormat: mainView.mainText.defaultTextFormat,
+				htmlText: text,
+				x: btn.width + 4,
+				y: 0,
+				width: MainView.TEXTZONE_W - MainView.BTN_H - 16,
+				wordWrap: true,
+				autoSize: TextFieldAutoSize.LEFT
+			});
+		}
+		perkgrid.doLayout();
+		
+		contentBlock.addTextField({
+			defaultTextFormat: mainView.mainText.defaultTextFormat,
+			text             : "Perk categories:"
+		});
+		contentBlock.addElement(groupgrid);
+		if (category) {
+			contentBlock.addTextField({
+				defaultTextFormat: mainView.mainText.defaultTextFormat,
+				text             : catName + " perks: (" + navail + "/" + nperks + ")"
+			});
+			contentBlock.addElement(perkgrid);
+		}
+		contentBlock.width = MainView.TEXTZONE_W;
+		
+		flushOutputTextToGUI();
+		mainView.setCustomElement(contentBlock,true,false, true);
+		
+		menu();
+		button(1).show(player.perkPoints > 0 ? "Skip" : "Exit", playerMenu);
+		button(10).show("Old Menu", CoC.instance.playerInfo.perkBuyMenuOld);
+	}
 
 	// Sort by perk name
 	private function sorterName(e:PerkType):* {
@@ -961,18 +1179,20 @@ public class PerkMenu extends BaseContent {
 		return e.distance
 	}
 	// Sort by relative distance (from player)
-	private function sorterRelativeDistance(e:PerkType):* {
-		return e.distanceFor(player);
+	public function sorterRelativeDistance(e:PerkType):* {
+		return e.distanceFor(player) + e.id.charCodeAt(0)/1000;
 	}
 	private var sorter:Function = sorterRelativeDistance;
 	private var sortedPerks:/*PerkType*/Array;
 	
-	public function formatPerkRequirements(ptype:PerkType):String {
+	public function formatPerkRequirements(ptype:PerkType, onlyMissing:Boolean=false):String {
 		var reqs:Array = [];
 		var color:String;
 		for each (var cond:Object in ptype.requirements) {
-			if (cond.fn(player)) color=(darkTheme()?'#ffffff':'#000000');
-			else color=darkTheme()?'#ff4444':'#aa2222';
+			if (cond.fn(player)) {
+				if (onlyMissing) continue;
+				color=(darkTheme()?'#ffffff':'#000000');
+			} else color=darkTheme()?'#ff4444':'#aa2222';
 			if (cond.text is String){
 				reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
 			}
@@ -980,8 +1200,10 @@ public class PerkMenu extends BaseContent {
 				reqs.push("<font color='"+color+"'>"+cond.text(player)+"</font>");
 			}
 		}
-		return ("<b>Requires:</b> " + reqs.join(", ")+". " +
-				(CoC_Settings.debugBuild ? "<i>Distance: "+ptype.distanceFor(player)+"/"+ptype.distance+"</i>" : ""));
+		if (reqs.length == 0) return "";
+		var s:String = "<b>Requires:</b> " + reqs.join(", ")+". ";
+		if (CoC_Settings.debugBuild) s +=  "<i>Distance: "+Math.round(ptype.distanceFor(player))+"/"+Math.round(ptype.distance)+"</i>";
+		return s;
 	}
 	
 	public function perkDatabase(page:int=0, count:int=50):void {

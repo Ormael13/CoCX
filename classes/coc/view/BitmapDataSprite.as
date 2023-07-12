@@ -5,6 +5,7 @@ package coc.view {
 import classes.internals.Utils;
 
 import flash.display.Bitmap;
+import flash.display.Graphics;
 import flash.display.Sprite;
 import flash.geom.Matrix;
 
@@ -22,6 +23,9 @@ public class BitmapDataSprite extends Sprite {
 			_stretch = Utils.moveValue(options,'stretch',_stretch);
 			_repeat = Utils.moveValue(options,'repeat',_repeat);
 			_crop = Utils.moveValue(options,'crop',_crop);
+			_borderImage = Utils.moveValue(options, 'borderImage', _borderImage);
+			_bitmapX = Utils.moveValue(options, 'bitmapX', _bitmapX);
+			_bitmapY = Utils.moveValue(options, 'bitmapY', _bitmapY);
 			bitmapClass = Utils.moveValue(options,'bitmapClass',null);
 			bitmap = Utils.moveValue(options,'bitmap',_bitmap);
 			for (var key:String in options) {
@@ -37,6 +41,9 @@ public class BitmapDataSprite extends Sprite {
 		}
 	}
 	private var _bitmap:Bitmap   = null;
+	private var _bitmapX:Number = 0;
+	private var _bitmapY:Number = 0;
+	private var _borderImage:BorderImage = null;
 	private var _fillColor:uint  = 0;
 	private var _fillAlpha:Number  = 1.0;
 	private var _borderColor:uint  = 0;
@@ -118,6 +125,14 @@ public class BitmapDataSprite extends Sprite {
 		_borderRadius = value;
 		if (borderWidth) redraw();
 	}
+	public function get borderImage():BorderImage {
+		return _borderImage;
+	}
+	public function set borderImage(value:BorderImage):void {
+		if (_borderImage == value) return;
+		_borderImage = value;
+		redraw();
+	}
 	override public function set width(value:Number):void {
 		setSize(value,_height);
 	}
@@ -156,25 +171,34 @@ public class BitmapDataSprite extends Sprite {
 		redraw();
 	}
 	private function redraw():void {
-		this.graphics.clear();
-		this.graphics.lineStyle(borderWidth,_borderColor,borderWidth>0?1.0:0);
+		var graphics:Graphics = this.graphics;
+		graphics.clear();
+		if (_borderImage) {
+			graphics.lineStyle();
+		} else {
+			this.graphics.lineStyle(borderWidth, _borderColor, borderWidth > 0 ? 1.0 : 0);
+		}
 		if (bitmap) {
+			var m:Matrix = new Matrix();
 			if (stretch) {
-				var m:Matrix = new Matrix();
 				m.scale(_width / bitmap.width, _height / bitmap.height);
-				this.graphics.beginBitmapFill(bitmap.bitmapData, m, false, smooth);
+				graphics.beginBitmapFill(bitmap.bitmapData, m, false, smooth);
 			} else {
-				this.graphics.beginBitmapFill(bitmap.bitmapData, null, repeat);
+				m.translate(_bitmapX, _bitmapY);
+				graphics.beginBitmapFill(bitmap.bitmapData, m, repeat);
 			}
 		} else {
-			this.graphics.beginFill(_fillColor, _fillAlpha);
+			graphics.beginFill(_fillColor, _fillAlpha);
 		}
 		if (_borderRadius) {
-			this.graphics.drawRoundRect(0, 0, _width, _height, _borderRadius, _borderRadius);
+			graphics.drawRoundRect(0, 0, _width, _height, _borderRadius, _borderRadius);
 		} else {
-			this.graphics.drawRect(0, 0, _width, _height);
+			graphics.drawRect(0, 0, _width, _height);
 		}
-		this.graphics.endFill();
+		graphics.endFill();
+		if (_borderImage) {
+			_borderImage.drawOver(graphics, _width, _height, true);
+		}
 	}
 }
 }

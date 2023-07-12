@@ -263,15 +263,15 @@ public class MerchantMenu extends BaseContent {
 			}, {colspan: 5})
 		}
 		for (i = 0; i < playerItemRows * 5; i++) {
-			btn = mainView.createActionButton(i);
+			btn = new CoCButton();
 			grid.addElement(btn);
 			playerInvButtons.push(btn);
 		}
 		if (playerPageCount > 1) {
-			playerPagePrev = mainView.createActionButton(0)
+			playerPagePrev = new CoCButton()
 									 .show("Prev", curry(modPlayerPage, -1))
 									 .icon("Left");
-			playerPageNext = mainView.createActionButton(4)
+			playerPageNext = new CoCButton()
 									 .show("Prev", curry(modPlayerPage, +1))
 									 .icon("Right");
 			grid.addElement(playerPagePrev);
@@ -291,15 +291,15 @@ public class MerchantMenu extends BaseContent {
 			}, {colspan: 5})
 		}
 		for (i = 0; i < merchantItemRows * 5; i++) {
-			btn = mainView.createActionButton(i);
+			btn = new CoCButton();
 			grid.addElement(btn);
 			merchantInvButtons.push(btn);
 		}
 		if (merchantPageCount > 1) {
-			merchantPagePrev = mainView.createActionButton(0)
+			merchantPagePrev = new CoCButton()
 									   .show("Prev", curry(modMerchantPage, -1))
 									   .icon("Left");
-			merchantPageNext = mainView.createActionButton(4)
+			merchantPageNext = new CoCButton()
 									   .show("Next", curry(modMerchantPage, +1))
 									   .icon("Right");
 			grid.addElement(merchantPagePrev);

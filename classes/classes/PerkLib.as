@@ -4325,20 +4325,79 @@ public class PerkLib
 			ePerkL.push(UniqueNPC);
 			return ePerkL;
 		}
-		
+	
+		public static const BASIC_JOBS:/*PerkType*/Array    = [
+			JobAllRounder,
+			/* JobArcaneArcher, - removed */
+			/* JobArcher, - removed */
+			/* JobBarbarian, - removed */
+			JobBeastWarrior,
+			JobGuardian,
+			JobLeader,
+			JobRanger,
+			JobRogue,
+			JobSeducer,
+			JobSorcerer,
+			/* JobSoulArcher, - removed */
+			JobSoulCultivator,
+			JobWarrior
+		];
+		public static const ADVANCED_JOBS:/*PerkType*/Array = [
+			JobBrawler,
+			/* JobBeastlord, */
+			JobCourtesan,
+			JobDefender,
+			JobDervish,
+			JobElementalConjurer,
+			JobEnchanter,
+			JobEromancer,
+			JobGolemancer,
+			JobGunslinger,
+			JobHealer,
+			JobHunter,
+			JobKnight,
+			JobMonk,
+			JobSwordsman,
+			JobWarlord
+		];
+		public static const PRESTIGE_JOBS:/*PerkType*/Array = [
+			PrestigeJobArcaneArcher,
+			PrestigeJobArchpriest,
+			PrestigeJobBard,
+			PrestigeJobBerserker,
+			PrestigeJobBindmaster,
+			PrestigeJobDruid,
+			PrestigeJobNecromancer,
+			/* PrestigeJobSeer, - not implemented */
+			PrestigeJobSentinel,
+			/* PrestigeJobSoulArcher, - not implemented */
+			PrestigeJobSoulArtMaster,
+			PrestigeJobSpellKnight,
+			PrestigeJobStalker,
+			PrestigeJobTempest,
+			PrestigeJobWarlock
+		];
+		public static const ALL_JOBS:/*PerkType*/Array =
+			[].concat(BASIC_JOBS,ADVANCED_JOBS,PRESTIGE_JOBS);
+		public static function isJob(perk:PerkType):Boolean {
+			return ALL_JOBS.indexOf(perk) >= 0;
+		}
+	
 		// Tiered perks
 		// Array of arrays of perks
-		public static const PERK_TIER_LISTS:Array = [
+		public static const PERK_TIER_LISTS:/*PerkType[]*/Array = [
 			// by alphabet (minus prefix) + special sections below
 			[AerialCombat, AdvancedAerialCombat, GreaterAerialCombat],
 			[BasicAllRounderEducation, IntermediateAllRounderEducation, AdvancedAllRounderEducation,
 				ExpertAllRounderEducation, MasterAllRounderEducation],
+			[Amateur, Prostitute, Escort, BrothelOwner, Pornstar, SexChampion],
 			[ArcanePoolI, ArcanePoolII, ArcanePoolIII, ArcanePoolIV, ArcanePoolV, ArcanePoolVI],
 			[ArcaneRegenerationMinor, ArcaneRegenerationMajor, ArcaneRegenerationEpic,
 				ArcaneRegenerationLegendary, ArcaneRegenerationMythical],
 			[ArchersStaminaI, ArchersStaminaII, ArchersStaminaIII, ArchersStaminaIV, ArchersStaminaV, ArchersStaminaVI],
 			[BiggerGolemBagI, BiggerGolemBagII, BiggerGolemBagIII, BiggerGolemBagIV, BiggerGolemBagV, BiggerGolemBagVI],
 			[Blademaster, GrandBlademaster],
+			[BonesOfSteel, MusclesOfSteel, HeartOfSteel, BodyOfSteel, MindOfSteel, SoulOfSteel],
 			[Brawn, ImprovedBrawn, GreaterBrawn, EpicBrawn, LegendaryBrawn, MythicalBrawn],
 			[Brute, ImprovedBrute, GreaterBrute, EpicBrute, LegendaryBrute, MythicalBrute],
 			[CheetahI, CheetahII, CheetahIII, CheetahIV, CheetahV, CheetahVI],
@@ -4353,9 +4412,10 @@ public class PerkLib
 			[CondensedPower],
 			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
 			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
-			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
-			[Desensitization, GreaterDesensitization, EpicDesensitization/*, LegendaryDesensitization, MythicalDesensitization*/],
+			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV, DemonicDesireV, DemonicDesireVI],
+			[Desensitization, GreaterDesensitization, EpicDesensitization, LegendaryDesensitization/*, MythicalDesensitization*/],
 			[Diehard, ImprovedDiehard, GreaterDiehard, EpicDiehard],
+			[DoorKnob, Bicycle, MeatHole, BedWarmer, TensionTamer, PartyBoyGirl],
 			[
 				ElementalContractRank1, ElementalContractRank2, ElementalContractRank3, ElementalContractRank4,
 				ElementalContractRank5, ElementalContractRank6, ElementalContractRank7, ElementalContractRank8,
@@ -4379,6 +4439,7 @@ public class PerkLib
 			[GoliathI, GoliathII, GoliathIII, GoliathIV, GoliathV, GoliathVI], // systems functional
 			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
 			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
+			[HistoryBuff, GuerrillaTactics, StrengthInNumbers, General, SmallArmy, Fellowship],
 			[HumanSupremacyInitial, HumanSupremacyBasic, HumanSupremacyImproved, HumanSupremacyAdvanced, HumanSupremacySuperior],//, CheetahVI
 			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
 			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
@@ -4389,6 +4450,7 @@ public class PerkLib
 			[Lifeline, ImprovedLifeline, GreaterLifeline, EpicLifeline],
 			[LongerLastingBuffsI, LongerLastingBuffsII, LongerLastingBuffsIII, LongerLastingBuffsIV,
 				LongerLastingBuffsV, LongerLastingBuffsVI],
+			[Lucky, ExtremelyLucky, MoneyFinder, Collector, Hoarder, BlessedByLadyGodiva],
 			[Mage, GrandMage, Archmage, GrandArchmage, GrandArchmage2ndCircle, GrandArchmage3rdCircle],
 			[MeleeWeaponsMastery, MeleeWeaponsMasteryEx, MeleeWeaponsMasterySu],
 			[ManaAffinityI, ManaAffinityII, ManaAffinityIII, ManaAffinityIV, ManaAffinityV, ManaAffinityVI],
@@ -4396,18 +4458,24 @@ public class PerkLib
 			[NaturalHealingMinor, NaturalHealingMajor, NaturalHealingEpic, NaturalHealingLegendary],
 			[Naturaljouster, NaturaljousterMastergrade],
 			[NaturesSpringI, NaturesSpringII, NaturesSpringIII, NaturesSpringIV],
+			[Nurse, Doctor, FirstResponse, Paramedic, SurgeonsAide, Surgeon],
+			[PewWarmer, Acolyte, Priest, Pastor, Saint, Cardinal],
 			[PrimalFuryI, PrimalFuryII, PrimalFuryIII, PrimalFuryIV],
 			[RangeWeaponsMastery, RangeWeaponsMasteryEx, RangeWeaponsMasterySu],
 			[RefinedBodyI, RefinedBodyII, RefinedBodyIII, RefinedBodyIV, RefinedBodyV, RefinedBodyVI],
 			[Regeneration, Regeneration2, Regeneration3, Regeneration4, Regeneration5, Regeneration6],
 			[ResistanceI, ResistanceII, ResistanceIII, ResistanceIV, ResistanceV, ResistanceVI],
+			[SecondRing, ThirdRing, FourthRing],
+			[SoldiersFriend, PyrosFriend, HeavysFriend, EngineersFriend, SnipersFriend, SpysEnemy],
 			[StrongBack, StrongBack2, StrongBack3],
 			[StrongElementalBond, StrongElementalBondEx, StrongElementalBondSu,
 				StrongerElementalBond, StrongerElementalBondEx, StrongerElementalBondSu,
 				StrongestElementalBond, StrongestElementalBondEx, StrongestElementalBondSu
 			],
+			[Studious, Teacher, Professor, Principle, Dean, President],
 			[Survivalist, Survivalist2, Survivalist3],
 			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
+			[Tongs, Bellows, Furnace, Hammer, Anvil, Weap0n],
 			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
 			[TitanicStrength],
 			[TransformationResistance,TransformationAcclimation],
@@ -4418,7 +4486,9 @@ public class PerkLib
 			//[WeaponRangeDoubleStrike, WeaponRangeTripleStrike],
 			//[WeaponSmallDoubleAttack, WeaponSmallTripleAttack, WeaponSmallQuadrupleAttack, WeaponSmallPentaAttack, WeaponSmallHexaAttack,
 			//	WeaponSmallHectaAttack, WeaponSmallOctaAttack, WeaponSmallNonaAttack, WeaponSmallDecaAttack],
+			[Whistles, LyingDown, TakingABreak, SkippingWork, Napping, ZZZ],
 			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
+			[Wizened, PathOfEnlightenment, Embodiment, InControl, Metamorphable, SoulPowered],
 			// special sections
 			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
 			[EpicLibido, LegendaryLibido, MythicalLibido],

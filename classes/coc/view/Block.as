@@ -33,9 +33,11 @@ public class Block extends Sprite {
 	 * Config:
 	 * * `rows` - number of rows. Default 0 (indefinite number, keep adding more rows)
 	 * * `cols` - number of columns. Default 1 (or `columns` size)
-	 * * `columns` - column widths. -1: autosize, 0..1: fraction, >1: pixels. Defaults to 1.0 / rows
+	 * * `columns` - column widths. -1: autosize, 0..1: fraction, >1: pixels. Defaults to cellWidth or (1.0 / rows) if cellWidth not set.
 	 * * `setWidth`, `setHeight - should set width/height of elements. Default false
-	 * * `gap` - gap between cells
+	 * * `gap` - gap between cells, -1 to auto (works only if all columns are fixed width, or cellWidth is set)
+	 * * `cellWidth` - default cell width.
+	 *
 	 * Hints:
 	 * * `row`, `col` - 2D position in grid. Defaults to "next cell"
 	 * * `setWidth`, `setHeight - should set width/height of this element. Default to layout config
@@ -52,9 +54,9 @@ public class Block extends Sprite {
 		var setcw:Boolean        = config['setWidth'];
 		var setch:Boolean        = config['setHeight'];
 		var debug:Boolean        = config['debug'];
-		
+		var cellWidth:Number = Utils.intOr(config['cellWidth'], 0);
 		if (!('cols' in config) && columns) cols = columns.length;
-		innerw -= gap*(cols-1);
+		if (gap > 0) innerw -= gap*cols;
 		if (!columns || columns.length != cols) {
 			columns = [];
 			for (var i:int = 0; i < cols; i++) {
@@ -79,9 +81,15 @@ public class Block extends Sprite {
 		}
 		// calculate autocol sizes
 		if (autocols > 0) {
+			if (cellWidth <= 0) cellWidth = freespace/autocols;
 			for (i = 0; i < cols; i++) {
-				if (columns[i] < 0) columns[i] = freespace/autocols;
+				if (columns[i] < 0) columns[i] = cellWidth;
 			}
+		}
+		if (gap < 0) {
+			var tw:Number = 0;
+			for (i = 0; i < cols; i++) tw += columns[i];
+			gap = (innerw-tw)/cols;
 		}
 		
 		var row:int = 0;
@@ -115,6 +123,7 @@ public class Block extends Sprite {
 				child = grid[row][col];
 				if (child) {
 					if (debug) trace("[" + row + "][" + col + "] x="+(x|0)+" y="+(y|0)+" w="+(columns[col]|0)+" h="+(cellh|0)+" "+child);
+					hint         = _layoutHints[child] || {};
 					var setw:Boolean = 'setWidth' in hint ? hint['setWidth'] : setcw;
 					var seth:Boolean = 'setHeight' in hint ? hint['setHeight'] : setch;
 					colspan = 'colspan' in hint ? hint['colspan'] : 1;
@@ -122,7 +131,7 @@ public class Block extends Sprite {
 					child.y          = y;
 					if (setw) {
 						var cw:Number = columns[col];
-						for (i = 1; i < colspan; i++) cw += gap + columns[col+i];
+						for (i = 1; i < colspan && col + i < cols; i++) cw += gap + columns[col+i];
 						child.width = cw;
 					}
 					if (seth) {
@@ -241,7 +250,7 @@ public class Block extends Sprite {
 			resize();
 		}
 	}
-	private function resize():void {
+	protected function resize():void {
 		invalidateLayout();
 		if (width > 0 || height > 0) {
 			graphics.clear();

@@ -4,7 +4,12 @@
 package coc.view {
 import classes.internals.Utils;
 
+import flash.display.BitmapData;
+import flash.display.Graphics;
 import flash.filters.DropShadowFilter;
+import flash.geom.Matrix;
+import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.text.AntiAliasType;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
@@ -83,6 +88,24 @@ public class UIUtils {
 				4.0,
 				10.0
 		)
+	}
+	public static function subsprite(src:BitmapData, x:int, y:int, width:int, height:int):BitmapData {
+		var dst:BitmapData = new BitmapData(width, height, true, 0);
+		if (width > 0 && height > 0) dst.copyPixels(src, new Rectangle(x, y, width, height), new Point(0, 0));
+		return dst;
+	}
+	public static function drawBitmap(g:Graphics, bmp:BitmapData, x:int, y:int, width:int=-1, height:int=-1):void {
+		if (width == -1) width = bmp.width;
+		if (height == -1) height = bmp.height;
+		// We can't just draw a bitmap onto Graphics, we have to use beginBitmapFill
+		// It fills the shape with repeated bitmap pattern
+		// with origin at graphics' 0,0 corner.
+		// To compensate and avoid weird tiling artifact, we transorm the bitmap fill.
+		var m:Matrix = new Matrix();
+		m.translate(x,y);
+		g.beginBitmapFill(bmp, m);
+		g.drawRect(x, y, width, height);
+		g.endFill();
 	}
 }
 }

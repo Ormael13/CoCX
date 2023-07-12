@@ -71,7 +71,7 @@ import flash.text.TextFieldAutoSize;
 			} else if (this.x + this.width > mainView.width) {
 				this.x = mainView.width - this.width; // right border
 			}
-			resize();
+			autosize();
 			if (by+bh < mainView.height/2) {
 				// put to the bottom
 				this.y = by + bh;
@@ -95,7 +95,7 @@ import flash.text.TextFieldAutoSize;
 
 		public function set header(newText:String):void {
 			this.hd.htmlText = newText || '';
-			resize();
+			autosize();
 		}
 
 		public function get header():String {
@@ -104,14 +104,14 @@ import flash.text.TextFieldAutoSize;
 		
 		public function set text(newText:String):void {
 			this.tf.htmlText = newText || '';
-			resize();
+			autosize();
 		}
 
 		public function get text():String {
 			return this.tf.htmlText;
 		}
 		
-		private function resize():void {
+		private function autosize():void {
 			this.ln.y = Math.max(40, this.hd.x + this.hd.textHeight);
 			this.tf.y = this.ln.y;
 			bg.height = Math.max(tf.textHeight + tf.y + 23, MIN_HEIGHT);
