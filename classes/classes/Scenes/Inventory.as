@@ -238,7 +238,7 @@ use namespace CoC;
 		}
 		private function returnFromInventory():void {
 			var returnFn:Function = this.returnFn;
-			if (returnFn) {
+			if (returnFn != null) {
 				this.returnFn = null;
 				returnFn();
 				return;

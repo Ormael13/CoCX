@@ -15,12 +15,15 @@ package coc.view {
 import classes.CoC;
 import classes.EngineCore;
 
+import fl.containers.ScrollPane;
 import fl.controls.ComboBox;
+import fl.controls.ScrollPolicy;
 import fl.controls.UIScrollBar;
 import fl.data.DataProvider;
 
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
+import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -114,40 +117,6 @@ public class MainView extends Block {
 		}
 	];
 
-	[Embed(source="../../../res/ui/button0.jpg")]
-	public static var ButtonBackground0:Class;
-	[Embed(source="../../../res/ui/button1.jpg")]
-	public static var ButtonBackground1:Class;
-	[Embed(source="../../../res/ui/button2.jpg")]
-	public static var ButtonBackground2:Class;
-	[Embed(source="../../../res/ui/button3.jpg")]
-	public static var ButtonBackground3:Class;
-	[Embed(source="../../../res/ui/button4.jpg")]
-	public static var ButtonBackground4:Class;
-	[Embed(source="../../../res/ui/button5.jpg")]
-	public static var ButtonBackground5:Class;
-	[Embed(source="../../../res/ui/button6.jpg")]
-	public static var ButtonBackground6:Class;
-	[Embed(source="../../../res/ui/button7.jpg")]
-	public static var ButtonBackground7:Class;
-	[Embed(source="../../../res/ui/button8.jpg")]
-	public static var ButtonBackground8:Class;
-	[Embed(source="../../../res/ui/button9.jpg")]
-	public static var ButtonBackground9:Class;
-	public static var ButtonBackgrounds:Array = [
-		ButtonBackground0,
-		ButtonBackground1,
-		ButtonBackground2,
-		ButtonBackground3,
-		ButtonBackground4,
-		ButtonBackground5,
-		ButtonBackground6,
-		ButtonBackground7,
-		ButtonBackground8,
-		ButtonBackground9,
-	];
-
-
 	// Menu button names.
 	public static const MENU_NEW_MAIN:String   = 'newGame';
 	public static const MENU_DATA:String       = 'data';
@@ -191,7 +160,7 @@ public class MainView extends Block {
 	internal static const COLUMN_1_W:Number      = Math.max(STATBAR_W, CHARVIEW_W);
 	internal static const COLUMN_1_RIGHT:Number  = COLUMN_1_X + COLUMN_1_W;
 	// Column 2 core
-	public static const TEXTZONE_W:Number      = 770;
+	public static const TEXTZONE_W:Number        = 770;
 	internal static const COLUMN_2_X:Number      = COLUMN_1_RIGHT + GAP;
 	internal static const COLUMN_2_W:Number      = TEXTZONE_W;
 	internal static const COLUMN_2_RIGHT:Number  = COLUMN_2_X + COLUMN_2_W;
@@ -294,7 +263,6 @@ public class MainView extends Block {
 	public function MainView():void {
 		super();
 		addElement(blackBackground = new BitmapDataSprite({
-			bitmapClass: ButtonBackground2,
 			x          : -SCREEN_W / 2,
 			width      : SCREEN_W * 2,
 			height     : SCREEN_H * 2,
@@ -330,28 +298,22 @@ public class MainView extends Block {
 			}
 		}));
 		topRow.addElement(newGameButton = new CoCButton({
-			labelText  : 'New Game',
-			bitmapClass: ButtonBackground1
+			labelText  : 'New Game'
 		}));
 		topRow.addElement(dataButton = new CoCButton({
-			labelText  : 'Data',
-			bitmapClass: ButtonBackground2
+			labelText  : 'Data'
 		}));
 		topRow.addElement(statsButton = new CoCButton({
-			labelText  : 'Stats',
-			bitmapClass: ButtonBackground3
+			labelText  : 'Stats'
 		}));
 		topRow.addElement(levelButton = new CoCButton({
-			labelText  : 'Level Up',
-			bitmapClass: ButtonBackground4
+			labelText  : 'Level Up'
 		}));
 		topRow.addElement(perksButton = new CoCButton({
-			labelText  : 'Perks & Opt.',
-			bitmapClass: ButtonBackground5
+			labelText  : 'Perks & Opt.'
 		}));
 		topRow.addElement(appearanceButton = new CoCButton({
-			labelText  : 'Appearance',
-			bitmapClass: ButtonBackground6
+			labelText  : 'Appearance'
 		}));
 		addElement(textBGWhite = new BitmapDataSprite({
 			fillColor: '#FFFFFF',
@@ -454,7 +416,6 @@ public class MainView extends Block {
 		createBottomButtons();
 		var button:CoCButton;
 		for each (button in [newGameButton, dataButton, statsButton, levelButton, perksButton, appearanceButton]) {
-			hookButton(button);
 			this.allButtons.push(button);
 		}
 		this.toolTipView = new ToolTipView(this/*, this.model*/);
@@ -535,21 +496,12 @@ public class MainView extends Block {
 	}
 	
 	public function createActionButton(index:int):CoCButton {
-		var button:CoCButton = new CoCButton({
-			bitmapClass: ButtonBackgrounds[index % 10]
-		});
+		var button:CoCButton = new CoCButton();
 		button.preCallback = function (b:CoCButton):void {
 			if (_onBottomButtonClick != null) _onBottomButtonClick(index, button);
 		};
-		hookButton(button);
 		button.addEventListener(MouseEvent.CLICK, this.executeBottomButtonClick);
 		return button;
-	}
-
-	protected function hookButton(b:Sprite):void {
-		b.mouseChildren = false;
-		b.addEventListener(MouseEvent.ROLL_OVER, this.hoverElement);
-		b.addEventListener(MouseEvent.ROLL_OUT, this.dimElement);
 	}
 
 	//////// Internal(?) view update methods ////////
@@ -819,6 +771,7 @@ public class MainView extends Block {
 		if (this.customElement) {
 			this.removeElement(this.customElement);
 			this.customElement = null;
+			this.scrollBar.visible = true;
 		}
 		this.hotkeysDisabled = false;
 		this.mainText.htmlText = '';
@@ -832,18 +785,38 @@ public class MainView extends Block {
 	 * @param afterText Position the element after current text (true, default) or on top of text (false)
 	 * @param stretch Stretch the element (default false)
 	 */
-	public function setCustomElement(element:DisplayObject, afterText:Boolean=true, stretch:Boolean=false):void {
+	public function setCustomElement(element:DisplayObject, afterText:Boolean=true, stretch:Boolean=false, scroll:Boolean=false):void {
 		if (this.customElement) {
 			this.removeElement(this.customElement);
 		}
-		this.addElement(element);
-		this.customElement = element;
+		var innerElement:DisplayObject = element;
+		if (scroll) {
+			var container:ScrollPane = new ScrollPane();
+			container.setStyle("upSkin", new MovieClip());
+			container.horizontalScrollPolicy = ScrollPolicy.OFF;
+			container.verticalPageScrollSize = mainText.height - 64;
+			container.verticalLineScrollSize = 16;
+			container.source = innerElement;
+			element = container;
+			if (innerElement is Block) {
+				innerElement.addEventListener(Block.ON_LAYOUT, function(e:Event):void {
+					container.update();
+				})
+			}
+			scrollBar.visible = false;
+		}
 		element.x = mainText.x;
 		element.y = afterText ? mainText.y + mainText.textHeight : mainText.y;
-		if (stretch) {
-			element.width = mainText.width;
+		if (stretch || scroll) {
+			element.width = mainText.width + (scroll ? scrollBar.width : 0);
 			element.height = mainText.y + mainText.height - element.y;
 		}
+		if (scroll && stretch) {
+			innerElement.width = container.width - container.verticalScrollBar.width;
+			innerElement.height = container.height;
+		}
+		this.addElement(element);
+		this.customElement = element;
 	}
 	public function getCustomElement():DisplayObject {
 		return customElement;

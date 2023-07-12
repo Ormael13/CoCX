@@ -4795,7 +4795,7 @@ public function rebirthFromBadEnd():void {
 			}
 			mainView.showMenuButton(MainView.MENU_LEVEL);
 			mainView.statsView.showLevelUp();
-			if (player.str >= player.strStat.max && player.tou >= player.touStat.max && player.inte >= player.intStat.max && player.spe >= player.speStat.max && (player.perkPoints <= 0 || PerkTree.availablePerks(CoC.instance.player).length <= 0) && (player.XP < player.requiredXP() || player.level >= CoC.instance.levelCap)) {
+			if (player.str >= player.strStat.max && player.tou >= player.touStat.max && player.inte >= player.intStat.max && player.spe >= player.speStat.max && (player.perkPoints <= 0 || PerkTree.availablePerks(CoC.instance.player, false).length <= 0) && (player.XP < player.requiredXP() || player.level >= CoC.instance.levelCap)) {
 				mainView.statsView.hideLevelUp();
 			}
 		} else {
