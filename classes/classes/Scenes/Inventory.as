@@ -761,6 +761,37 @@ use namespace CoC;
 			}
 			return i;
 		}
+		public function tryAddOneItemToPearl(itype:ItemType):int {
+			return tryAddOneItemToStorage(itype, pearlStorage, 0, pearlStorageSize(), "S.P.Pearl");
+		}
+		/**
+		 * Tries to add 1 item to storage.
+		 * Does not produce any output.
+		 * @param source
+		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
+		 */
+		public function tryAddOneItemToStorage(itype:ItemType, storage:/*ItemSlotClass*/Array, startInclusive:int, endExclusive:int, storageName:String):int {
+			var empty:int = -1;
+			var existing:int = -1;
+			for (var i:int = startInclusive; i < endExclusive; i++) {
+				var slot:ItemSlotClass = storage[i];
+				//if (!slot.unlocked) continue;
+				if (empty < 0 && slot.quantity == 0) empty = i;
+				if (existing < 0 && slot.itype == itype && slot.hasRoom()) {
+					existing = i;
+					break;
+				}
+			}
+			if (existing >= 0) {
+				storage[existing].quantity++;
+				return 1;
+			}
+			if (empty >= 0) {
+				storage[empty].setItemAndQty(itype, 1);
+				return 2;
+			}
+			return 0;
+		}
 		/**
 		 * Tries to transfer 1 item from [source], reducing its quantity, to storage.
 		 * Does not produce any output.
@@ -768,28 +799,11 @@ use namespace CoC;
 		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
 		 */
 		public function transferOneItemToStorage(source:ItemSlotClass, storage:/*ItemSlotClass*/Array, startInclusive:int, endExclusive:int, storageName:String):int {
-			var empty:int = -1;
-			var existing:int = -1;
-			for (var i:int = startInclusive; i < endExclusive; i++) {
-				var slot:ItemSlotClass = storage[i];
-				//if (!slot.unlocked) continue;
-				if (empty < 0 && slot.quantity == 0) empty = i;
-				if (existing < 0 && slot.itype == source.itype && slot.hasRoom()) {
-					existing = i;
-					break;
-				}
-			}
-			if (existing >= 0) {
-				storage[existing].quantity++;
+			var i:int = tryAddOneItemToStorage(source.itype, storage, startInclusive, endExclusive, storageName);
+			if (i >= 0) {
 				source.removeOneItem();
-				return 1;
 			}
-			if (empty >= 0) {
-				storage[empty].setItemAndQty(source.itype, 1);
-				source.removeOneItem();
-				return 2;
-			}
-			return 0;
+			return i;
 		}
 		
 		public function takeItem(itype:ItemType, nextAction:Function, overrideAbandon:Function = null, source:ItemSlotClass = null):void {
