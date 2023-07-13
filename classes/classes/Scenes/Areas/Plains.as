@@ -38,7 +38,7 @@ use namespace CoC;
 			const fn:FnHelpers = Encounters.fn;
 			// TODO @aimozg 'plants' tag
 			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
 					SceneLib.exploration.angelEncounters.withChanceFactor(0.05),
 			{
 				//Helia monogamy fucks

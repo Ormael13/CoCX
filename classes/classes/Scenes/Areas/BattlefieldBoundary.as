@@ -96,7 +96,7 @@ use namespace CoC;
 				name: "ted",
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
-			}, SceneLib.exploration.commonEncounters.withChanceFactor(0.4), {
+			}, SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 				name: "zombies",
 				chance: 0.4,
 				call: battlefieldEnemiesScene.encounterZombies,
