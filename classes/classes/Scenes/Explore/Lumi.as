@@ -17,7 +17,7 @@ public class Lumi extends BaseContent {
             //placeholder text for outside the cathedral
             outputText("You spot an anomaly in the barren wastes; a door that seems to be standing out in the middle of nowhere. Somehow, you figure that it must lead to some other part of the world, and the only reason it's here is because you can't get to where the door should be right now.\n\n");
             outputText("Do you open it?");
-            doYesNo(lumiLabChoices, camp.returnToCampUseOneHour);
+            doYesNo(lumiLabChoices, explorer.done);
         }
         else {
             //placeholder text for outside the cathedral
@@ -54,7 +54,7 @@ public class Lumi extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.LumiWorkshop) < 1) addButton(13, "GoblinMech", lumiGarageRetry);
 		}
 		else addButton(12, "Garage", lumiGarage).hint("Click only if you're goblin (10+ in goblin score) with 500+ gems ;)");
-		addButton(14, "Leave", camp.returnToCampUseOneHour);
+		addButton(14, "Leave", explorer.done);
     }
 	
     public function lumiEnhance0(justCheck:Boolean = false):Boolean {
@@ -297,7 +297,7 @@ public class Lumi extends BaseContent {
 		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 10) addButton(2, "Sell 10", lumiSellMatsMetalPlatesAmount, 10).hint("Sell 10 Metal Plates.");
 		if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 50) addButton(3, "Sell 50", lumiSellMatsMetalPlatesAmount, 50).hint("Sell 50 Metal Plates.");
 		addButton(14, "No", lumiSell);
-    }	
+    }
 	private function lumiSellMatsMetalPlatesAmount(amount:int):void {
 		metal_pieces = amount;
 		clearOutput();
@@ -347,17 +347,17 @@ public class Lumi extends BaseContent {
 			outputText("You hand over the gems to Lumi who nods.\n\n");
 			outputText("\"<i>Good deal " + player.mf("stud", "girl") + " ya won’t regret it. In da events ya need bluefrints for new gadgets and upgrades I can sell ya a fopy of mines, fer a price. Speafing of which ya will need a proper workshap to craft. Ya are free ta use mine until you have somehow built yer own.</i>\"\n\n");
 			player.addStatusValue(StatusEffects.LumiWorkshop,2,1);
-			inventory.takeItem(vehicles.GOBMALP, camp.returnToCampUseOneHour);
+			inventory.takeItem(vehicles.GOBMALP, explorer.done);
 		}
 		else {
 			outputText("You would love to purchase the mech but you are somewhat low on gems.\n\n");
 			outputText("\"<i>Well that’s a shame but nonetheless ya can always just come back lafer right?</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 	public function lumiGarageNo():void {
 		outputText("You tell the goblin you will think it over and leave the shop.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	public function lumiGarageRetry():void {
 		outputText("You inquire on the goblin mech.\n\n");
@@ -1092,7 +1092,7 @@ public class Lumi extends BaseContent {
 		if (player.gems >= 2000) addButton(4, "Buy 20", lumiEngineeringBuyMetalPiecesAmount, 20);
 		else addButtonDisabled(4, "Buy 20", "Not enough gems.");
 		addButton(14, "Back", lumiEngineering);
-	}	
+	}
 	private function lumiEngineeringBuyMetalPiecesAmount(amount:int):void {
 		metal_pieces = amount;
 		clearOutput();
@@ -1220,7 +1220,7 @@ public class Lumi extends BaseContent {
 			clearOutput();
 			outputText("Lumi answers by the negative when you ask for the key to the workshop.\n\n");
 			outputText("\"<i>Engineering is a goblin craft [name]. Its made <b>by</b> goblins <b>fer</b> goblins. Ya want in my workshop? Ya will have to look the part. I don't want to be responsible for some big oaf blowing " + player.mf("him", "herself") + " up with [his] own explosives or shocking " + player.mf("him", "herself") + " to death with live wires.</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 	public function lumiWorkshopMechUpgrades():void {
@@ -1286,7 +1286,7 @@ public class Lumi extends BaseContent {
 		player.destroyItems(useables.GOLCORE, 4);
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Energy Core is ready.\n\n");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopMechanism():void {
@@ -1296,7 +1296,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Mechanism is ready.\n\n");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopToolbelt():void {
@@ -1306,7 +1306,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopPotentDrugInjectors():void {
@@ -1347,7 +1347,7 @@ public class Lumi extends BaseContent {
 		player.removeKeyItem("Blueprint - Drug injectors");
 		player.statStore.replaceBuffObject({'lib.mult':0.25,'sens':+5},'DrugInjector',{text:'Drug injectors'})
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopGunScopeWithAimbot():void {
@@ -1383,7 +1383,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Gun Scope", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Gun Scope");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopSATechGoggle():void {
@@ -1414,7 +1414,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Machinist Goggles is ready.\n\n");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(headjewelries.MACHGOG, camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(headjewelries.MACHGOG, explorer.done);
 		else inventory.takeItem(headjewelries.MACHGOG, camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopNitroBoots():void {
@@ -1454,7 +1454,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Spring Boots", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Spring Boots");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopMGSBracer():void {
@@ -1495,7 +1495,7 @@ public class Lumi extends BaseContent {
 		player.removeKeyItem("Blueprint - Power bracer");
 		player.statStore.replaceBuffObject({'str.mult':0.5,'sens':+5},'Power bracer',{text:'Power bracer'})
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopRipper2():void {
@@ -1530,7 +1530,7 @@ public class Lumi extends BaseContent {
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 2;
 		outputText("You get to work spending the necessary time to craft your newest toy. After "+(player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop) ? "an hour":"four hours")+" your brand new Machined greatsword is ready.\n\n");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) inventory.takeItem(weapons.MACGRSW, explorer.done);
 		else inventory.takeItem(weapons.MACGRSW, camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopUpgradedArmorPlating3():void {
@@ -1565,7 +1565,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Upgraded Armor plating 1.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Upgraded Armor plating 1.0");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopTaserOverchargeBattery():void {
@@ -1578,7 +1578,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Taser with an overcharged battery", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Taser with an overcharged battery");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopTaser():void {
@@ -1591,7 +1591,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Taser", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Taser");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopSafetyBubble():void {
@@ -1603,7 +1603,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Safety bubble", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Safety bubble");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopMachineGunMK3():void {
@@ -1642,7 +1642,7 @@ public class Lumi extends BaseContent {
 		player.removeKeyItem("Blueprint - Machine Gun MK1");
 		player.removeKeyItem("Repeater Gun");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopRepeaterGun():void {
@@ -1653,7 +1653,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Repeater Gun", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Repeater Gun");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopDynapunchGlove():void {
@@ -1665,7 +1665,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Dynapunch Glove", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Dynapunch Glove");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopWhitefireBeamCannon():void {
@@ -1742,7 +1742,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Stimpack Dispenser 1.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Stimpack Dispenser 1.0");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopOmniMissile():void {
@@ -1781,7 +1781,7 @@ public class Lumi extends BaseContent {
 		player.removeKeyItem("Blueprint - Lustnade Launcher");
 		player.removeKeyItem("Aphrodigas Gun");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopAphrodigasGun():void {
@@ -1793,7 +1793,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Aphrodigas Gun", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Aphrodigas Gun");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopImpregnator1():void {
@@ -1804,7 +1804,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Impregnator 1.0", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Impregnator 1.0");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopSPMK1():void {
@@ -1814,7 +1814,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("SPMK1", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - SPMK1");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopCumReservoir():void {
@@ -1825,7 +1825,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Cum Reservoir", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Cum Reservoir");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshopMK2Jetpack():void {
@@ -1850,7 +1850,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Jetpack", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Jetpack");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}/*
 	public function lumiWorkshop0():void {
@@ -1860,7 +1860,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshop0():void {
@@ -1870,7 +1870,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshop0():void {
@@ -1880,7 +1880,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}
 	public function lumiWorkshop0():void {
@@ -1890,7 +1890,7 @@ public class Lumi extends BaseContent {
 		player.createKeyItem("Toolbelt", 0, 0, 0, 0);
 		player.removeKeyItem("Blueprint - Toolbelt");
 		statScreenRefresh();
-		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) doNext(camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) endEncounter();
 		else doNext(camp.returnToCampUseFourHours);
 	}*/
 }

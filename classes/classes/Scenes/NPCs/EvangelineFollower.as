@@ -16,15 +16,12 @@ import classes.Items.Armor;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.Shield;
-import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
 import classes.Items.Weapon;
-import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
-import classes.Items.WeaponRangeLib;
 import classes.Scenes.Monsters.Imp;
 import classes.internals.SaveableState;
+
 import coc.view.ButtonDataList;
 
 public class EvangelineFollower extends NPCAwareContent implements SaveableState
@@ -138,7 +135,7 @@ public function Tak():void
 	flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
 	flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
 	//if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
-	inventory.takeItem(consumables.EZEKFRU, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.EZEKFRU, explorer.done);
 }
 
 public function Nie():void
@@ -148,7 +145,7 @@ public function Nie():void
 	outputText("\"<i>So that’s how it is? I just wanted to be nice and friendly but you just outright reject my offer.</i>\" She sighs, before slowly turning around. While starting to walk away you still hear her utter few last words. \"<i>Having someone who can help you keep transformations under control would be useful whoever you are. I will soon move out but in case you find some 'unexpected' troubles I will linger around this area for a little bit. Until we meet again stranger.</i>\"\n\n");
 	outputText("After rejecting Evangeline’s offer of joining camp you feel satisfied. She could have been just another demoness that was trying to lure you away from your quest. But...those last words somehow were odd. Unexpected troubles?\n\n");
 	EvangelineAffectionMeter = 2;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function alternativEvangelineRecruit():void
@@ -165,7 +162,7 @@ public function Nie2():void
 {
 	clearOutput();
 	outputText("After moment of hesitation you once again decline her offer. Saying something about doing pretty well so far, you leave her be. Still your next hour is wasted on wandering around without any actual purpose.\n\n");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function meetEvangeline():void {

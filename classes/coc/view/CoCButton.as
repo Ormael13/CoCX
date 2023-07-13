@@ -227,6 +227,7 @@ public class CoCButton extends Block {
 
 	public function click(event:MouseEvent = null):void {
 		if (!this.enabled) return;
+		CoC.instance.mainView.toolTipView.hide();
 		try {
 			if (this._preCallback != null)
 				this._preCallback(this);

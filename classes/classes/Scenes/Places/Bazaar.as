@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Plains.BazaarGatekeeper;
 import classes.Scenes.Places.Bazaar.*;
 import classes.Scenes.SceneLib;
+
 import coc.view.ButtonDataList;
 
 public class Bazaar extends BaseContent {
@@ -37,7 +38,7 @@ public function findBazaar():void {
 	else outputText("Once again you smell a campfire through the tall grass, and as you close the distance you hear the familiar sounds of the traveling bazaar.  You peek through the weeds and behold the caravan's gate-keeper - a red-skinned, muscular giant of a man.");
 	outputText("\n\nDo you approach?");
 	//[YES] [NOOOO]
-	doYesNo(approachBazaarGuard,camp.returnToCampUseOneHour);
+	doYesNo(approachBazaarGuard,explorer.done);
 }
 
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
@@ -50,10 +51,11 @@ private function approachBazaarGuard():void {
 	menu();
 	if (player.cor < 33 - player.corruptionTolerance) addButton(1, "FIGHT!",initiateFightGuard);
 	else addButton(1, "Enter", enterTheBazaar);
-	addButton(3, "Leave", camp.returnToCampUseOneHour);
+	addButton(3, "Leave", explorer.done);
 }
 
 public function enterTheBazaar():void {
+	explorer.stopExploring();
 	if (model.time.hours == 19 || model.time.hours == 20) {
 		flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
 		if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && (player.gender == 1 || (player.gender == 3 && player.mf("m", "f") == "m")) || flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
@@ -72,6 +74,7 @@ public function initiateFightGuard():void {
 }
 
 public function winAgainstGuard():void {
+	explorer.stopExploring();
 	clearOutput();
 	outputText("With the gatekeeper defeated, you walk right past the unconscious guard and enter...");
 	cleanupAfterCombat(enterTheBazaarAndMenu);
@@ -1256,4 +1259,3 @@ private function finalGayFinallee(road:int = 0):void {
 }
 }
 }
-

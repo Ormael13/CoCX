@@ -53,7 +53,7 @@ public class PriscillaScene extends BaseContent
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2, "Sex", startforeplay);
 				else outputText("\n\n<b>There is no way you can fit your cock into her cunt!</b>");
 			}
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
+			addButton(4, "Leave", explorer.done);
 		}
 
 		private function startFight():void {
@@ -89,7 +89,7 @@ public class PriscillaScene extends BaseContent
 			}
 			outputText("\n\nYou thank the goblin for telling you and wave her off.");
 			flags[kFLAGS.PRISCILLA_TALK_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function startffaction():void {
@@ -99,7 +99,7 @@ public class PriscillaScene extends BaseContent
 				outputText("\"<i>I’m sure you don’t get told ‘no’ often, but I don’t fuck just for the fun of it.</i>\"  Priscilla started.  \"<i>Everything I do is to restore my people, so if you don’t have a penis, you’re just wasting my time.</i>\"\n\n");
 				outputText("You start to protest, but Priscilla had already started walking away. You try to think about what she said, but you find yourself glued the sway of her thighs in that tight spider-silk loincloth. You’re parched, and not from a lack of water.  But unless you have a dick, she’s not interested.  Maybe you should just forget about her?");
 				menu();
-				addButton(0, "Yes", camp.returnToCampUseOneHour);
+				addButton(0, "Yes", explorer.done);
 				addButton(1, "No", notForget);
 			}
 			else if (flags[kFLAGS.PRISCILLA_AFFECTION] == 1) {
@@ -117,7 +117,7 @@ public class PriscillaScene extends BaseContent
 
 		private function notForget():void {
 			++flags[kFLAGS.PRISCILLA_AFFECTION];
-			camp.returnToCampUseOneHour();
+			explorer.done();
 		}
 
 		private function checkonher():void {
@@ -141,19 +141,19 @@ public class PriscillaScene extends BaseContent
 			flags[kFLAGS.PRISCILLA_AFFECTION]++;
 			outputText("You take out your vial, and hold it out in front of Priscilla, she glances at it, then at you.\n\n");
 			outputText("\"<i>You think I need your charity!</i>\"  Priscilla whispers, beads of sweat forming on her forehead.  \"<i>Who the hell do you think I am, you bitch?!</i>\"  It’s obvious she won’t listen to reason, but you’re not going to force the issue-you place the "+item.longName+" on the ground slowly, back up a meter, and walk away towards camp.  Before you left the area completely you look behind you.  Priscilla as well as the "+item.longName+" is gone.  ");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function leaveher():void {
 			clearOutput();
 			outputText("Hey, she’s a big girl, this can’t be the first time she got drugged, she’ll be fine.  Pushing Priscilla out of your mind, you head back to camp ");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function leaveher2():void {
 			clearOutput();
 			outputText("Without even a backwards glance, you step away from Priscilla and head back to camp, ignoring the choking sobs as you left the clearing.  ");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//SH is too lazy to add this to Recall menu. Do it yourself if you must.
@@ -163,7 +163,7 @@ public class PriscillaScene extends BaseContent
 			outputText("\"<i>S-stop!</i>\"  Priscilla moans, trying to reach for her weapon, or a means to escape, but you just continued.  Next was your bottoms.  As you discarded that portion of your " + player.armorName + " you squat right in front of Priscilla, giving her a full view of your pink, bare, pussy.  As you raised a hand towards Priscilla, she gasped as she unconsciously started to squeeze her breasts again.  No!  Don’t touch me, or Marae help me- but her words died as she saw you take the index finger of that hand, and thrust it along with your middle finger, into your happy hole.  You moan sensually, and slowly thrust your fingers farther and deeper, a wave of arousal wafts the air.  Priscilla is fidgeting now, the hem of her loincloth she’s ready to throw away.  You decide now is the time for the coup de grâce:\n\n");
 			outputText("You stop playing with yourself and you turn around, showing your " + player.buttDescript() + " to Priscilla, whose breath quickens, and a bright green flush enters her cheeks, and she breaks out in a cold sweat.  You lift your " + player.buttDescript() + " into the air, and start shaking it up down and around in front of Priscilla, the smell of your arousal wafting through thunderous intense clapping is all she notices.  As you start bouncing faster, you look behind yourself, enjoying the sight of Priscilla’s walls finally breaking, as she tears off her spider-silk loincloth and throws it aside, and plunges two of her fingers right into her slop hungry vagina, exalting a crushing wail of her defeat, but she no longer cares, as with an inhuman pace, she attacks her clit and vagina, rubbing them for dear life.  You bounce faster and faster, wiggling your perfect " + player.buttDescript() + " for Priscilla, who has finally reached the throes of passion.\n\n");
 			outputText("With a cry, Priscilla arches her back as she cums, a tangy sour flow of juices squirts out of her pussy, all over your back and ass.  You blush at the thought of another woman cumming on you, and realize your needs haven’t been met yet.  You turn around expecting Priscilla to fly into your arms, but all you see is that she has passed out.  You remember that Priscilla was drugged, and now that she came, she’s not going to be receptive.  Accepting your defeat this time, you walk back to camp, but not before placing Priscilla’s sword within reach of her.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function scissorscene():void {
@@ -179,7 +179,7 @@ public class PriscillaScene extends BaseContent
 			outputText(", she thrust into you one last time, before with a shriek her fluids gushed all over your pussy and onto the ground.  You moan under Priscilla, the burning finally put out by her fire-fighting.  Priscilla holds the position arching above you shaking slowly for what felt like an eternity before looking at you with a smile on your face.\n\n");
 			outputText("\"<i>Almost as good as cock, right?</i>\"  Priscilla said.  You're only response was pulling Priscilla into a passionate kiss, before the two of you cuddled on the ground, enjoying the closeness and warmth between you two.  After almost an hour, the two of you got up and got dressed and left, but not before kissing each other fully one last time, and promising to meet up again real soon.\n\n");
 			player.sexReward("vaginalFluids", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function startforeplay():void {
@@ -295,7 +295,7 @@ public class PriscillaScene extends BaseContent
 			outputText("\"<i>Right there!  Right there!  Yes!  Yes!</i>\"  Priscilla squealed, as she and the tentacle beast fulfilled their innermost desires.  Priscilla, to have her walls broken down and gangbanged with no way to fight back, and the tentacle beast, letting loose all of its frustration on the goblin who summoned it here.  It wasn’t much longer as with a cry, Priscilla screamed an orgasmic pitch, and her pussy juices squirted everywhere, on the tentacles, on the beast, on you... Still struggling to stay awake, the tentacle beast dropped you and Priscilla to the ground gently, and pulled out of the babbling Priscilla, and all four tentacles pointed out at you both before the tentacle beast did finally cum.  What felt like loads and loads of cream coated you and Priscilla both, caking you in sticky love.\n\n");
 			outputText("You awake an hour later.  Both Priscilla and the Tentacle Beast are gone.  Still aching from before, you gather your gear and head to camp.  ");
 			player.sexReward("cum", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function wrestle():void {
@@ -336,7 +336,7 @@ public class PriscillaScene extends BaseContent
 			outputText("You chuckle to yourself as you grab your things, watching as an annoyed Priscilla get hers.  \n\n");
 			outputText("\"<i>I’ll be the one to take you down next time.</i>\"  Priscilla said as she walks away with a wave.  \"<i>Just you wait!</i>\"  You head back to camp, thinking of the next time you’ll get to dominate Priscilla again.");
 			player.sexReward("saliva", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function priscilladom():void {
@@ -348,7 +348,7 @@ public class PriscillaScene extends BaseContent
 			outputText("\"<i>Yes!  Oh Marae, Yes!</i>\"  Priscilla shouts, riding your face as she starts rubbing her clit furiously.  One of your hands grab her sides and while still holding one of her breasts and start pushing your tongue in farther, her caverns squeezed and gripped you , but in response you fought back, going wild in her taint.  As you kneaded her breasts roughly until she finally exploded in a cry, jumping off your tongue and falling onto your stomach, squirting juices on your chest.  You watch, satisfied as her asshole quivers, slowly opening and closing in pleasure.  ");
 			outputText("When she recomposes herself, Priscilla gets up, not giving you a second glance.  \"<i>Thanks babe, you’re a doll.</i>\"  Priscilla says happily, going towards her armor and weapons.  \"<i>I do hope we can do this again.</i>\"  Before she puts on her loincloth, you get up quite dissatisfied, inquiring about your needs.  Priscilla just laughs.  \"<i>Sorry, honey, maybe next time.  Claim dominance over me and you get to call the shots.</i>\"  You watch as the goblin elder blows you a kiss and walks away smugly.  You tell yourself you’ll get her next time as you head back to camp ");
 			player.sexReward("vaginalFluids", "Lick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function pussyfuck():void {
@@ -369,7 +369,7 @@ public class PriscillaScene extends BaseContent
 			else outputText("\"<i>Stay safe out there, "+player.mf("stud","slut")+".  I’m going to need more of that sticky cream later.  Find me again okay?</i>\"");
 			outputText("She gives you a devious look, the glance made you gulp and almost reach for your " + player.weaponName + " ... \"<i>Whenever you’re done being champion, me and my daughters would love a permanent home "+player.mf("stud","slut")+" to keep us company. Non-stop sex for the rest of your life - don’t say no now, just think about it.</i>\" She blows you a kiss, and walks away.  With a small smile on your face, you sleepily head back to camp for rest.\n\n");
 			player.sexReward("vaginalFluids", "Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function assfuck():void {
@@ -386,7 +386,7 @@ public class PriscillaScene extends BaseContent
 			else outputText("a thin trail of your man milk leaks subtly out of Priscilla’s quivering but closing asshole.  ");
 			outputText("Priscilla for her credit is still conscious, but other than the goofy look on her face, and murmurings of her asshole being pregnant, she wasn’t all there for the moment.  Utterly satisfied, you blow Priscilla a kiss, and head towards your camp.\n\n");
 			player.sexReward("no", "Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function mouthfuck():void {
@@ -404,7 +404,7 @@ public class PriscillaScene extends BaseContent
 			outputText("You feel Priscilla’s hands on your balls again, making them slippery with her juices as she massaged your of your batter out of your shaft in tandem with her sweet lock jaw skills.  You cry out again as you even felt a three fingers reach into your bunghole, jabbing your prostate clumsily to claim even more of your nut - it works.  You groan outward in pain, as you feel the dregs of your semen finally leave your body, to be vacuumed into Priscilla’s mouth.  You weakly watch as she chews your load as she wipes her hands off on to the ground, and did nothing, as after she swallowed, she went up to you, and placed a sloppy, wet, semen tasted kiss on your lips, giving you a taste of her meal.  You moan weakly, so exhausted, that you find you’re unable to even stay awake.\n\n");
 			outputText("You wake up an hour later, dazed, but satisfied.  Fantasies of you and Priscilla engage your mind as you gather your things, count to make sure none of your gems are missing, and walk back to camp.");
 			player.sexReward("saliva", "Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 

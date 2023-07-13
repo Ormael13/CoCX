@@ -26,10 +26,14 @@ import flash.display.DisplayObject;
 import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.events.GesturePhase;
 import flash.events.MouseEvent;
 import flash.events.TextEvent;
+import flash.events.TransformGestureEvent;
 import flash.text.TextField;
 import flash.text.TextFormat;
+import flash.ui.Multitouch;
+import flash.ui.MultitouchInputMode;
 
 public class MainView extends Block {
 	[Embed(source="../../../res/ui/background1.png")]
@@ -804,6 +808,12 @@ public class MainView extends Block {
 				})
 			}
 			scrollBar.visible = false;
+			Multitouch.inputMode = MultitouchInputMode.GESTURE;
+			container.addEventListener(TransformGestureEvent.GESTURE_PAN, function(e:TransformGestureEvent):void {
+				if (e.phase == GesturePhase.UPDATE) {
+					container.verticalScrollPosition -= e.offsetY;
+				}
+			});
 		}
 		element.x = mainText.x;
 		element.y = afterText ? mainText.y + mainText.textHeight : mainText.y;
@@ -813,7 +823,7 @@ public class MainView extends Block {
 		}
 		if (scroll && stretch) {
 			innerElement.width = container.width - container.verticalScrollBar.width;
-			innerElement.height = container.height;
+			// innerElement.height = container.height;
 		}
 		this.addElement(element);
 		this.customElement = element;

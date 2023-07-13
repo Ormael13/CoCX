@@ -858,7 +858,10 @@ public class Exploration extends BaseContent
 						call: SceneLib.goblinScene.goblinShamanEncounter
 					}, {
 						name: "priscilla",
-						label: "Priscilla",
+						label: function():String {
+							if (flags[kFLAGS.TIMES_ENCOUNTERED_PRISCILLA] == 0) return "Gob. Elder";
+							return "Priscilla"
+						},
 						kind: "npc",
 						when: fn.ifLevelMin(24),
 						call: SceneLib.priscillaScene.goblinElderEncounter
@@ -1018,7 +1021,7 @@ public class Exploration extends BaseContent
 						call  : SceneLib.helScene.helSexualAmbush,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
-						name  : "Alvina",
+						name  : "NPC (New)",
 						kind  : "npc",
 						unique: true,
 						when  : function ():Boolean {

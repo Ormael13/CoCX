@@ -272,7 +272,7 @@ public class MerchantMenu extends BaseContent {
 									 .show("Prev", curry(modPlayerPage, -1))
 									 .icon("Left");
 			playerPageNext = new CoCButton()
-									 .show("Prev", curry(modPlayerPage, +1))
+									 .show("Next", curry(modPlayerPage, +1))
 									 .icon("Right");
 			grid.addElement(playerPagePrev);
 			grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}), {colspan: 3});
