@@ -13,6 +13,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
@@ -1017,7 +1018,7 @@ public function soularena():void {
 			//addButton(2, "Gauntlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
 			//addButton(3, "Gauntlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 			//addButton(4, "Gauntlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierwszej walce oblokowanie perków do powiekszania drużyny
+			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");
 			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
 			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
 			//addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
@@ -1035,6 +1036,7 @@ public function soularena():void {
 			else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");*/
 			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
+			addButton(10, "IntermedLeader", intermediateleadershipfight1).hint("Intermediate Leadership fight");
 			addButton(14, "Back", soularenaChallengeBack);
 		}
 	}
@@ -1052,25 +1054,94 @@ public function soularena():void {
 	}
 	public function intermediateleadershipfight1():void {
 		clearOutput();
-		outputText("\n\n");
+		outputText("Angels incoming...\n\n");
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
-        startCombat(new GolemsDummy());
+        startCombat(new AngelLR());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function intermediateleadershipfight2():void {
 		clearOutput();
 		soularenafightsbetween();
-		outputText("\n\n");
-		startCombat(new TentacleBeast());
+		outputText("\n\nMinotaur Champion with his maid incoming...");
+		startCombat(new MinotaurKing());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function intermediateleadershippostfight():void {
 		clearOutput();
-		outputText("\n\n");
+		outputText("Working together with another person has taught you how to fight in a group. <b>Gained Perk: Intermediate Leadership</b>\n\n");
 		player.createPerk(PerkLib.IntermediateLeadership, 0, 0, 0, 0);
         cleanupAfterCombat();
 	}
+	public function dishHelperIL():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.MinoKing,0,0,0,0);
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
+			outputText("You tell Neisa you need her to handle Excellia so you can fight the Minotaur King alone.\n\n");
+			outputText("Neisa nods, \"<i>A sound stratagem, leave it to me!</i>\"\n\n");
+			outputText("Neisa raises her shield before ramming into Excellia. The stun knocks Excellia off her feet before she rises, ready to fight her new foe.\n\n");
+			outputText("Now it’s just you and the Minotaur King.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
+			outputText("You tell Etna you need her to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
+			outputText("Etna smirks, \"<i>Let’s see if her face will enjoy my tail.</i>\"\n\n");
+			outputText("She wastes no time flying into the air before dive-bombing into Excellia, doing her best to wrap her within her tail, and envenom the cow girl.\n\n");
+			outputText("Excellia fights back, evidently stronger than she appears.\n\n");
+			outputText("\"<i>You won’t take me that easily!</i>\" Excellia shouts.\n\n");
+			outputText("Etna raises her claws, \"<i>Just give in, it’ll be so much easier for us.</i>\"\n\n");
+			outputText("Now it’s just you and the Minotaur King.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
+			outputText("You tell Aurora you need her to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
+			outputText("Aurora nods before raising her wings before swooping down onto Excellia, pinning her beneath her stone frame. Excellia struggles and manages to throw Aurora off of her.\n\n");
+			outputText("\"<i>You’re not going to take me that easily.</i>\"\n\n");
+			outputText("Now it’s just you and the Minotaur King.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
+			outputText("You tell Alvina you need her to handle Excellia so you can focus your assault on the Minotaur King.\n\n");
+			outputText("Alvina rolls her eyes, \"<i>Fine, I’ll just keep her restrained for now.</i>\"\n\n");
+			outputText("She sets down her scythe before drawing somatic symbols with a single finger. Excellia is forcibly risen, hoisted further into the air before vanishing in an instant.\n\n");
+			outputText("\"<i>That’ll keep her contained, I’ll just keep this focused so I don’t kill her… yet…</i>\"\n\n");
+			outputText("Now it’s just you and the Minotaur King.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
+			outputText("You tell Mizti and her daughters you need them to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
+			outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that slut!</i>\"\n\n");
+			outputText("Furxia, Lidea, Mizti, and Roxy rush Excellia, flanking her from every direction.\n\n");
+			outputText("Excellia braces herself, trying to fight back against the determined goblin horde.\n\n");
+			outputText("Now it’s just you and the Minotaur King.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
+			outputText("You tell Excellia you need her to take care of her past self.\n\n");
+			if (EngineCore.silly()) {
+				outputText("Excellia frowns, \"<i>You really wanted to cheat and see what happens when you use me against myself? How pathetic. Fine, I’ll do it. Now go share this screenshot with everyone so you can gain clout on the internet.</i>\"\n\n");
+				outputText("Excellia saunters up to herself. Because this scene isn’t canon in the slightest, the past Excellia is confused and is promptly vaporized due to a coding error or something.\n\n");
+				outputText("<b>*poof*</b>\n\n");
+			}
+			else {
+				outputText("Excellia rolls her eyes, \"<i>Next time you shouldn’t cheat just to see what happens.</i>\"\n\n");
+				outputText("Excellia rushes in, using the weight of her body to smash into herself.\n\n");
+			}
+			outputText("Now it’s just you and the Minotaur King.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
+			outputText("You ask Amily if she can take care of Excellia so you can focus on fighting the Minotaur King alone.\n\n");
+			outputText("Amily nods before coating her daggers in some poison, \"<i>I got this, you can count on me.</i>\"\n\n");
+			outputText("She rushes through, evading the Minotaur King before throwing a knife at Excellia. Excellia stumbles back as Amily wastes no time recovering her knife while keeping up the pressure.\n\n");
+			outputText("\"<i>You bitch!</i>\" Excellia shouts, trying to brush off her wound before reading herself to fight back.\n\n");
+			outputText("Now it’s just you and the Minotaur King.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
+			outputText("You tell Zenji you need him to hold back Excellia so you can take care of the Minotaur King.\n\n");
+			outputText("Zenji nods, \"<i>Leave it ta me, champion!</i>\"\n\n");
+			outputText("He readies his spear before pouncing on Excellia, keeping her pinned beneath his weight.\n\n");
+			outputText("\"<i>Stay down!</i>\" he shouts.\n\n");
+			outputText("Excellia struggles before throwing him off, \"<i>Why don’t you make me?!</i>\"\n\n");
+			outputText("Zenji chuckles, \"<i>Haha, I will den.</i>\"\n\n");
+			outputText("You redirect your attention back to your fight now that they’re occupied. Now it’s just you and the Minotaur King.\n\n");
+		}
+		SceneLib.combat.enemyAIImpl();
+        }
     public function gaunletchallange1fight1():void {
         clearOutput();
         outputText("You register for the gauntlet challenge, and wait patiently until you are called. You're motioned forward quickly, and move out beyond the arena gate to face your opponent. The crowd is big, you certainly have quite the audience! A man with a necktie and a weird stick screams across the area.\n\n");
@@ -1098,7 +1169,7 @@ public function soularena():void {
 		soularenafightsbetween();
 		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
         outputText("\"<i>This contestant is smaller than the last two... She's smarter, and most of all, extremely deadly. She’s paid a handsome sack of gems to kick the ass of anyone who reaches this stage. This femme fatale is by far the deadliest combatant of her division. The crowd favorite huntress from the dark woods... Merisiel the dark elf!!!</i>\"\n\n");
-        outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The dark elf readies her bow, smirking.\n\n");
+        outputText("A woman with light skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The light elf readies her bow, smirking.\n\n");
         flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 10;
 		startCombat(new LightElfs());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);

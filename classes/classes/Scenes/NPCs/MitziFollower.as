@@ -189,7 +189,7 @@ public function mitziSexMenu():void {
 		.disableIf(!player.hasStatusEffect(StatusEffects.MitziPregnant), "You need to wait until Mitzi gives a birth.")
 		.disableIf(player.findCock(1, 20, -1, "length") < 0, "You need 20+ inches cock for this.");
 	addButton(4, "Eaten Out", mitziSexEatenOut)
-		.disableIf(!player.hasVagina(), "Req. a cock.");
+		.disableIf(!player.hasVagina(), "Req. a pussy.");
 	addButton(14, "Back", MitziCampMainMenu);
 }
 public function mitziSexBigDickSex():void {

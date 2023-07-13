@@ -122,14 +122,14 @@ public function neisaCampMenu():void {
 	menu();
 	addButton(0, "Appearance", neisaAppearance).hint("Examine Neisa appearance.");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") addButtonDisabled(1, "Spar", "You can't fight against her as long she's in your team.");
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" || flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") addButtonDisabled(1, "Spar", "You can't fight against her as long she's in your team.");
 		else addButton(1, "Spar", neisaSpar).hint("Do a quick battle with Neisa!");
 	}
 	//addButton(2, "Talk", talkWithValeria).hint("Discuss with Valeria.");
 	//if (player.lust >= 33) addButton(3, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", neisaHenchmanOption).hint("Ask Neisa to join you in adventures outside camp.");
-		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") addButton(5, "Team", neisaHenchmanOption).hint("Ask Neisa to stay in camp.");
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "" || flags[kFLAGS.PLAYER_COMPANION_2] == "") addButton(5, "Team", neisaHenchmanOption).hint("Ask Neisa to join you in adventures outside camp.");
+		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" || flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") addButton(5, "Team", neisaHenchmanOption).hint("Ask Neisa to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Neisa about accompaning you.");
 	}
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
@@ -217,7 +217,7 @@ private function LevelingHerself():void {
 
 public function neisaHenchmanOption():void {
 	clearOutput();
-	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "" || flags[kFLAGS.PLAYER_COMPANION_2] == "") {
 		outputText("\"<i>Yeah sure, I will join, just make sure to share the loot.</i>\"\n\n");
 		outputText("Neisa is now following you around.\n\n");
 		var strNeisa:Number = 50;
@@ -230,12 +230,14 @@ public function neisaHenchmanOption():void {
 		strNeisa = Math.round(strNeisa);
 		meleeAtkNeisa += (1 + (int)(meleeAtkNeisa / 5)) * player.newGamePlusMod();
 		player.createStatusEffect(StatusEffects.CombatFollowerNeisa, strNeisa, meleeAtkNeisa, 0, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Neisa";
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") flags[kFLAGS.PLAYER_COMPANION_2] = "Neisa";
+		else flags[kFLAGS.PLAYER_COMPANION_1] = "Neisa";
 	}
 	else {
 		outputText("Neisa is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerNeisa);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		else flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(neisaCampMenu);
 	cheatTime(1/12);
