@@ -161,7 +161,7 @@ private function playDumbToTamanisDaughters():void {
 	if(player.inte/2 + 25 > rand(75)) {
 		outputText("The leader looks you up and down for a moment.  Her face slowly contorts to puzzlement, then rage, \"<i>Tammi you ditz!  I thought you said this was his trail?  Come on girls, we've got a dad to hunt.</i>\"\n\n");
 		if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] > 1) outputText("They really must not be paying much attention to what you look like.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		return;
 	}
 	outputText("The leader stamps her foot in a fit of rage.  It would be more imposing if she wasn't three feet tall... Her eyes lock onto your crotch and she says, \"<i>Last chance.   We're getting our ");
@@ -376,6 +376,7 @@ private function fuckYoDaughtersHomie():void {
 		if (tamaniPresent) SceneLib.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 		knockUpDaughters();
 		player.cumMultiplier += .3;
+		explorer.stopExploring();
 		if (CoC.instance.inCombat) cleanupAfterCombat();
 		else doNext(camp.returnToCampUseFourHours);
 	}
@@ -738,6 +739,7 @@ private function legTamanisDaughtersRAEPYou():void {
 		dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 		if (tamaniPresent) SceneLib.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 		knockUpDaughters();
+		explorer.stopExploring();
 		if (CoC.instance.inCombat) cleanupAfterCombat();
 		else doNext(camp.returnToCampUseFourHours);
 	}
@@ -1045,7 +1047,7 @@ private function loseToDaughtersWithTamaniThere():void {
 		player.sexReward("vaginalFluids")
 		dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
 		if (CoC.instance.inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+		else endEncounter();
 	}
 }
 

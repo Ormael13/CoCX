@@ -1,9 +1,5 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
-import classes.BodyParts.Arms;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -51,7 +47,7 @@ public function encounterFaerie():void {
 			player.orgasm();
 		}
 		else outputText("\n\nYou try in vain to jump and catch her, but she's too high above you and much too fast.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		return;
 	}
 	outputText("The faerie slows the beating of her wings and hovers towards you. You dismiss your fearful notions, certain a small faerie is quite harmless to you.\n\n");
@@ -158,14 +154,14 @@ private function faerieRAEP():void {
 	}
 	player.orgasm();
 	dynStats("lib", -2, "cor", .5);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function faerieShooAway():void {
 	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	outputText("You shake your hands, shooing away the tiny faerie.  She's clearly been touched by the magics of this land, and you want nothing to do with her. With a pouting look, she turns and buzzes away.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function faerieDoNothing():void {
@@ -186,7 +182,7 @@ private function faerieDoNothing():void {
 		if(player.biggestLactation() > 1.5) outputText("\n\nA copious gout of your milk escapes her rosy folds.");
 		player.orgasm();
 		dynStats("lib", -2);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else if (clitOK) {
 		outputText("A smile crosses her face, and she flutters down to your crotch. She starts by scissoring you despite the size difference, driving your clit into her despite its erect state. Compared to her, it looks massive. She swings one leg over it and starts impaling herself on it. Your taut clitoris barely fits inside her, and the tight confines on your sensitive nub are enough to make you weak in the knees. Staggering to the ground, you grab hold of her frail body in your fist and thrust her roughly on your engorged button. She wails in both pain and pleasure, being crushed and stretched open at once. Her cries of pain combined with the intense stimulation on your most sensitive part bring you to a quick orgasm.\n\n");
@@ -195,7 +191,7 @@ private function faerieDoNothing():void {
 		outputText("Time skips a beat, and you eventually come down, gently relaxing your grip and disengaging the worn out faerie from your softening female parts. The faerie regains consciousness slowly and thanks you before flying off.");
 		player.orgasm();
 		dynStats("lib", -1);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else if (nippleSmall) {
 		outputText("The faerie flies close to your nipple and sucks it gingerly.  You pant in pleasure as you feel it pucker tight in her mouth, tingling with her saliva.  She lets it pop free, swollen with arousal.  Her hand flicks it playfully, the sudden sensation fluttering through you as you close your eyes in pleasure.  You recover and find she has flown high into the trees, waving playfully as she escapes.\n\nYou frown and begin to dress yourself, flushing irritably as your nipples protrude further into your clothes than you remember.");
@@ -205,12 +201,12 @@ private function faerieDoNothing():void {
 			player.nippleLength -= .25;
 		}
 		dynStats("sen", 1, "lus", 5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else {
 		outputText("The faerie flies close to your ear and speaks in a volume that would be a whisper from another human, \"You've got some sexy parts girl, but you're too big for me. I hope you find someone to get you off, so I can watch.\" Then she flies in front of you, cutely kisses the bridge of your nose, and flies off.");
 		dynStats("lus", 5, "scale", false);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -219,7 +215,7 @@ private function letFaerieGo():void {
 	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //Disable Faerie encounter
 private function disableFaerieEncounterForGood():void {
@@ -228,7 +224,7 @@ private function disableFaerieEncounterForGood():void {
 	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...");
 	outputText("\n\nYou make a mental note and resolve to never catch her again.");
 	flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[YES] *make her pleasure you
@@ -302,7 +298,7 @@ private function faerieCaptureHJ():void {
             SceneLib.valeria.feedValeria(player.cumQ() / 10);
         }
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function encounterFaerieDragon():void {
 	spriteSelect(SpriteDb.s_faerie);
@@ -341,7 +337,7 @@ private function encounterFaerieDragonStoryNo():void {
 	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	outputText("You excuse yourself, saying that you like yourself the way you are. Then you turn back, making your way back to camp.\n\n");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 private function encounterFaerieDragonStoryYes():void {
 	spriteSelect(SpriteDb.s_faerie);
@@ -357,7 +353,7 @@ private function encounterFaerieDragonStoryYes():void {
 	transformations.ArmsFeyDraconic.applyEffect(false);
 	transformations.LowerBodyFeyDraconic(player.legCount).applyEffect(false);
 	if (!player.hasPerk(PerkLib.DragonFaerieBreath)) player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 }
 }

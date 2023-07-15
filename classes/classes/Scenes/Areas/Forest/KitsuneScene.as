@@ -149,7 +149,7 @@ public class KitsuneScene extends BaseContent
 			outputText("There's no way you're going to go gallivanting off into the woods after some flame.  You shake your head to clear your thoughts, and warily turn away to head back toward camp.  You could almost swear for a moment the flame looked disappointed, and you chuckle lightly at such a silly thought.");
 			//Advance time 1 hour, return to camp.
             if (CoC.instance.inCombat) cleanupAfterCombat();
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
 		}
 
 //[Follow] (C)
@@ -237,7 +237,7 @@ public class KitsuneScene extends BaseContent
 			}
 			else {
 				//add Kitsune's Gift to inventory
-				inventory.takeItem(consumables.KITGIFT, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.KITGIFT, explorer.done);
 			}
 		}
 
@@ -678,7 +678,7 @@ public class KitsuneScene extends BaseContent
 			CoC.instance.timeQ = 0;
 			player.addCurse("tou", 2, 2);
 			if (!CoC.instance.inCombat)
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			else cleanupAfterCombat();
 		}
 
@@ -2193,7 +2193,7 @@ public class KitsuneScene extends BaseContent
 					outputText("<b>You can now visit the forest shrine at will.</b>");
 					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] = 1;
 					flags[kFLAGS.AYANE_FOLLOWER] = 0;
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				else outputText("You find your way to the abandoned kitsune shrine again.  The place is full of rotten timber, but it has a bookcase stuffed with well-maintained tomes.  The remains of a camp are in here as well, though the owner is curiously absent.  Judging by the layer of dust on everything, whoever lived here hasn't been around in quite some time.  You're sure they wouldn't mind if you helped yourself to some of those books - you might just learn a thing or two.");
@@ -2226,7 +2226,7 @@ public class KitsuneScene extends BaseContent
 				addButton(6, "Servant", AyaneServant);
 			}
 			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.inte >= 100 && player.wis >= 100 && player.cor >= 50 && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(7, "Slave", AyaneSlave);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 
 //[Read Books]
@@ -2242,20 +2242,20 @@ public class KitsuneScene extends BaseContent
 				dynStats("int", 2);
 				player.KnowledgeBonus("int",2);
 				player.KnowledgeBonus("wis", 2);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else if (choice == 1) {
 				outputText("It seems to be a religious text of some sort.  As you flip through the pages, you read about various rituals and scriptures, familiarizing yourself with the spirits and gods of this land.  You close the tome at last, setting it reverently back on the shelf and reflecting upon the teachings housed within.");
 				//-1 COR, Advance 1hr and return to camp
 				dynStats("cor", -1);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else {
 				outputText("You start to flip through the pages, a deep blush slowly forming on your cheeks the further you read into what is clearly an erotic novella of some form.  Graphic descriptions of women being violated by tentacle beasts abound on almost every page, " + ((player.lib < 50) ? "and you slam the book shut before reading further, already feeling a heat building in your groin." : "and you lick your lips hungrily, poring over every line and word of lascivious prose."));
 				//+ 1 LIB, + 5 LUST, Advance 1hr and return to camp
 				dynStats("lib", 1, "lus", 5);
 				player.KnowledgeBonus("lib",1);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -2266,7 +2266,7 @@ public class KitsuneScene extends BaseContent
 			outputText("You leave a generous offering of gems at the shrine of Taoth and pray to the fox god for his support in your quest. Light falls from the sky and seems to condense in your star sphere, as you feel your kitsune powers increasing. When you look down to the offering bowl, you discover it is now empty.\n\n");
 			player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
 			player.gems -= 1000;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Meditate]
@@ -2287,7 +2287,7 @@ public class KitsuneScene extends BaseContent
 					player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
 					player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
 					player.consumeItem(consumables.FOXJEWL);
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				} else if (player.tailCount == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && notANineTail) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					//Apply Nine-Tails perk if applicable.
@@ -2341,7 +2341,7 @@ public class KitsuneScene extends BaseContent
 					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
 					player.consumeItem(consumables.FOXJEWL);
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 90 &&  player.wis >= 90 && notANineTail && (!player.hasPerk(PerkLib.CorruptedKitsune) || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					//Apply Kitsune perk if applicable.
@@ -2387,13 +2387,13 @@ public class KitsuneScene extends BaseContent
 				player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
 				player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
 				player.consumeItem(consumables.RUBYCRY);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			} else {
 				//Normal:
 				outputText("As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
 				player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 				dynStats("wis", 5,"int", 5, "lus", -50, "cor", -2);
-				//doNext(camp.returnToCampUseOneHour);
+				//endEncounter();
 			}
 			var tailzAfter:int = player.tail.count;
 			if (player.tailType == Tail.FOX) return tailzAfter;
@@ -2411,7 +2411,7 @@ public class KitsuneScene extends BaseContent
 				outputText("\n\nDo you take her as your attendant?");
 				doYesNo(AyaneCome2Camp, AyaneStayAtShrine);
 			} else {
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 		private function AyaneCome2Camp():void {
@@ -2426,13 +2426,13 @@ public class KitsuneScene extends BaseContent
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
 			outputText("\n\n\"<i>Please take it as my first of many tribute to you my " + player.mf("lord", "lady") + ".</i>\"");
 			flags[kFLAGS.AYANE_FOLLOWER] = 2;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function AyaneStayAtShrine():void {
 			clearOutput();
 			outputText("\n\nAyane looks disappointed but nods regardless. \"<i>I accept your choice... maybe I was too hasty. Come back and see me again, should you be in need of counsel or a servant, my " + player.mf("lordship", "ladyship") + ".</i>\"");
 			flags[kFLAGS.AYANE_FOLLOWER] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function AyaneServant():void {
 			clearOutput();
@@ -2452,7 +2452,7 @@ public class KitsuneScene extends BaseContent
 			player.createKeyItem("Ayane Star Sphere", 0, 0, 0, 0);
 			//dynStats("cor", 10); - dodawać czy nie to?
 			flags[kFLAGS.AYANE_FOLLOWER] = 2;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[Steal Statue]
@@ -2479,7 +2479,7 @@ public class KitsuneScene extends BaseContent
 			outputText("The thought of how many gems you'll be able to get for it is enough to quickly suppress those feelings, avarice winning out over guilt.");
 			//+10 COR, add Gold Statue to inventory, Advance 1hr and return to camp
 			dynStats("lus", 10, "scale", false);
-			inventory.takeItem(useables.GLDSTAT, camp.returnToCampUseOneHour);
+			inventory.takeItem(useables.GLDSTAT, explorer.done);
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 1;
 		}
 
@@ -2491,7 +2491,7 @@ public class KitsuneScene extends BaseContent
 			//Advance 1hr and return to camp.
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 0;
 			player.consumeItem(useables.GLDSTAT);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //Use:

@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.*;
@@ -20,7 +20,7 @@ import classes.display.SpriteDb;
 public class AyaneFollower extends NPCAwareContent implements TimeAwareInterface
 	{
 		public var pregnancy:PregnancyStore;
-		public function AyaneFollower() 
+		public function AyaneFollower()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.AYANE_PREGNANCY_TYPE, kFLAGS.AYANE_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 310, 270, 200, 180, 100, 75, 48, 15);
@@ -138,8 +138,8 @@ public function ayaneShop():void {
 			outputText("You tell Ayane you could use some items from her shop, and she displays her inventory for you to browse.\n\n");
 		}
 		else{
-			outputText("Ayane gives you a mischievous grin as you approach the shrine's shop stall.\n\n");			
-			outputText("\"<i>You want to buy some nice clothes and gear to look the part and do better tricks? Sure, I’ve got a few useful items I can spare, for you that is. What do you need?</i>\"");			
+			outputText("Ayane gives you a mischievous grin as you approach the shrine's shop stall.\n\n");
+			outputText("\"<i>You want to buy some nice clothes and gear to look the part and do better tricks? Sure, I’ve got a few useful items I can spare, for you that is. What do you need?</i>\"");
 		}
 		menu();
 		addButton(0, armors.WKIMONO.shortName, sellItem, armors.WKIMONO);
@@ -248,7 +248,7 @@ public function ayaneWorship():void
 		outputText("\"<i>Wait a minute, is this some cruel joke?</i>\" She looks at you with a puzzled expression while your gaze is fixed down at her. \"<i>Why...Why don't you have anything down here?</i>\"\n\n");
 		outputText("You can feel her rising disapointment in her voice as she begins to back off, you don't even need to say anything about your genderless nature as she gets up and looks over you in barely veiled disgust.");
 		outputText("\"<i>Next time you want to play a cruel joke on somebody, at least don't pick me!</i>\" She turns around and runs off, leaving you alone.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -268,7 +268,7 @@ public function ayaneCockWorship():void
 	}
 	else if (pregnancy.isPregnant) {
 		if (debug) outputText("\n\n<b>DEBUG: Ayane impregnation check skipped.</b>");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function breedayaneweneedallthefoxes():void
@@ -283,19 +283,19 @@ private function breedayaneweneedallthefoxes():void
 		pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_AYANE); //Will always impregnate unless contraceptives are in use
 		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck returned good.</b>");
 		trace("Ayane got PREGNANT!");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else if (rand(100) < Math.sqrt(player.cumQ())) {
 		trace("Ayane got random chance PREGNANT!");
 		if (debug) outputText("\n\n<b>DEBUG: Ayane chance pregcheck returned good.</b>");
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_AYANE); //Will always impregnate unless contraceptives are in use
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Ayane is pregnant!</b>");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else {
 		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck returned as skipped.</b>");
 		trace("Ayane pregcheck failed (not in heat and bad cum volume)");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -308,7 +308,7 @@ public function ayaneVaginalWorship():void
 	outputText("\"<i>Is " + player.mf("milord", "milady") + " satisfied?</i>\"\n\n");
 	outputText("You reply that Ayane is doing a wonderful job and that you are indeed quite satisfied by her worship. A few minutes later both of you start redressing, ready to continue on your journey.");
 	player.sexReward("saliva","Vaginal");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function ayaneAnal():void
@@ -324,7 +324,7 @@ public function ayaneAnal():void
 	outputText("\"<i>Ahh... So wonderful... To be filled with your seed is a blessing...</i>\"\n\n");
 	outputText("You clean your cock on one of her silky white tails, making her gasp, as both of you slowly proceed to redress.");
 	player.sexReward("Default","Default",true,false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function ayaneTribadism():void {
@@ -361,7 +361,7 @@ public function ayaneTribadism():void {
 		+ "\n"
 		+ "As your climax begins to ebb, you slump downward, sliding off of her in satisfaction and panting on the grass. You lie head to toe with her, legs spread apart, breathing in deeply in an attempt to catch your breath. Your eyes close, a contented sigh issuing from your lips as Ayane move to rest on your chest. The both of you wake up later and redress ready for adventuring.");
 	player.sexReward("vaginalFluids", "Vaginal");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function ayaneCuringCurse():void {
@@ -380,7 +380,7 @@ public function ayaneCuringCurse():void {
 			player.removeCurse(stat+".mult", 0.05,3);
 		}
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function ayaneGivesBirth():void {
@@ -423,13 +423,13 @@ public function ayanePregUpdate():Boolean
 		case 4: outputText("\nAyane's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  ");
 				outputText("Ayane catches you looking and blushes <i>W-what is it?</i> You reply merely that she carries a baby bump very well; she looks good pregnant. \n<i>Oh, uh...  Thanks I guess?</i> she replies, looking away nervously.\n");
 				return true;
-		case 5: 
+		case 5:
 				outputText("\nAyane is sitting down with a smile, rubbing her belly; you approach and ask if she's feeling well.\n\n\"<i>Yes, both of us are.  I can already feel our baby starting to move.  Do you want to feel it too?</i>\"  You respond that you do, and gently approach her, reaching out to stroke her gravid stomach, feeling the skin already stretched taut over her burgeoning womb.\n\nYou feel what seems to be a small kick under your hand.  A faint hint of paternal pride fills you, and you can't resist rubbing the spot where the baby kicked.  Ayane sighs and lets you rub her belly to your heart's content.  Unfortunately duty calls, so you bid Ayane farewell and return to your duties.\n");
 				return true;
-		case 6: 
+		case 6:
 				outputText("\nAyane's been getting as moody as her belly is big lately.  She constantly grumbles at anyone and anything that may approach her, even harmless bugs.  You decide to watch your step around her - pregnant women were scary enough back in Ingnam,.\n\n\"<i>Something wrong!?</i>\" Ayane questions you, glaring at you.  Your point proven, you tell her it's nothing, you were merely thinking of your former home.\n\n\"<i>Well if you have enough time to be reminiscing your past, how about you get over here and give me a hand instead!?  You're responsible for this, after all.</i>\"\n\nYou hasten to help her with whatever minor tasks she thinks she needs you for, until she promptly dismisses you.\n");
 				return true;
-		case 7: 
+		case 7:
 				outputText("\nAyane's been much less active nowadays, and a single look at her heavily pregnant belly lets you know why.  She is huge!  You're surprised she can even move about with a belly as big as that.  Upon closer inspection you're pretty sure you can see it squirm as the little fox rolls itself over inside her.\n\n\"<i>Hey, [name]. Fetch me some water will you?</i>\"\n\nYou decide to be generous and fetch it for her - you wouldn't be surprised if she's too heavy to get to the stream by herself.  You promptly return with a full skin and present it to her so that she can slake her thirst.\n\nAyane takes the skin off your hands and chugs it down unceremoniously, sighing in relief once she's done.  \"<i>Ahhh, that hit the spot, thanks.</i>\"  You check to see if there's anything else she needs, but when she confirms she's fine, you nod your head, sneak a quick caress of her swollen stomach, then leave her alone.\n");
 				return true;
 		case 8:
@@ -465,7 +465,7 @@ public function randomEncounter():void {
 		+ "It seems to be beckoning you to follow it.");
 	if (flags[kFLAGS.AYANE_FOUGHT]) {
 		outputText("\n\nSeems like " + ayaName("Ayane", "the kitsune") + " is messing with you again. Will you follow the flame?");
-		doYesNo(followFlame, camp.returnToCampUseOneHour);
+		doYesNo(followFlame, explorer.done);
 	} else doNext(followFlame);
 }
 

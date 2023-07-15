@@ -77,7 +77,7 @@ public class PatchouliScene extends NPCAwareContent {
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MET;
 			menu();
 			addButton(0, "Accept", patchouliExploreLuckyWheel).hint("Let him lead you to new places.");
-			addButton(1, "Decline", camp.returnToCampUseOneHour);
+			addButton(1, "Decline", explorer.done);
 		}
 		else if (follower == MET || follower == FORGIVEN) {
 			outputText("As you explore the forest you come over Patchouli the cat again. He's lazily resting on a nearby tree branch. The moment he notices you, he gives you his most unsettling smile before engaging the conversation.\n\n");
@@ -87,7 +87,7 @@ public class PatchouliScene extends NPCAwareContent {
 			}
 			menu();
 			addButton(0, "Yes", patchouliExploreLuckyWheel).hint("Let him lead you to new places.");
-			addButton(1, "No", camp.returnToCampUseOneHour);
+			addButton(1, "No", explorer.done);
 		}
 		else {
 			outputText("You spot Patchouli resting lazily on a nearby branch. He notices you, opens his eyes and starts to use his usual line just as you grab him and shove him on the ground, holding him by the neck.\n\n");
@@ -108,7 +108,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("\"<i>Thank you! Thank you! Don’t worry, I will never trick anyone again!</i>\"\n\n");
 			outputText("He vanishes into thin air and with his characteristic smirk and you simply head back to camp.");
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = FORGIVEN;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		function patchouliKillHim(silly:Boolean = false):void {
@@ -122,7 +122,7 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("You head back to camp, most disturbed by this.");
 			}
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = BADENDED;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 
@@ -147,7 +147,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText(".\n\n");
 			if (!recalling) {
 				player.sexReward("cum", "Vaginal");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			} else doNext(recallWakeUp);
 		}
 
@@ -171,7 +171,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText(".\n\n");
 			if (!recalling) {
 				player.sexReward("Default", "Dick", true, false);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			} else doNext(recallWakeUp);
 		}
 	}
@@ -188,7 +188,7 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
 				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");
 				outputText("The cat seems uneasy, but you don’t care. You spot a weird set of whisker fruits in a nearby tree and proceed to pack them up before leaving this strange place. You had the weird feeling something was watching you while you were leaving, but this must be your imagination.\n\n");
-				inventory.takeItem(consumables.WOFRUIT, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.WOFRUIT, explorer.done);
 				if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] < 1) flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 1;
 			}
 			else {
@@ -200,7 +200,7 @@ public class PatchouliScene extends NPCAwareContent {
 			}
 			function patchouliExploreWonderlandLeave():void {
 				outputText("You decide it's best to return to camp.\n\n");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			function patchouliExploreWonderlandStay():void {
 				outputText("You decide to stay regardless of the cat’s thoughts on the matter and hear a roar somewhere in the forest. Patchouli whimpers in terror and tries to hide.\n\n");
@@ -472,7 +472,7 @@ public class PatchouliScene extends NPCAwareContent {
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MATE;
 		}
 		player.sexReward("vaginalFluids","Dick");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function patchouleVaginal():void {
@@ -511,7 +511,7 @@ public class PatchouliScene extends NPCAwareContent {
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MATE;
 		}
 		player.sexReward("vaginalFluids","Dick");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function patchouleTakeVaginal():void {
@@ -534,7 +534,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("She's obviously liking it, which only bolsters your lust. Soon, you find yourself on the verge of orgasm. Patchoulie finally loses control of her cock as it twitches, filling you with kitty jizz and causing your own orgasm shortly after.\n\n");
 		outputText("Unsated, you keep milking the prankster for a few hours until you both pass out.\n\n");
 		player.sexReward("cum","Vaginal");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function patchouleAnal():void {
@@ -562,7 +562,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText(". However I don’t mind it, It's exactly how I want my mate to be, completely perverted.</i>\"\n\n");
 		outputText("Well considering the cum still dripping from her cunt you guess the word mate applies as no matter how you sex her, she manages to get your dick in the right spot anyway.\n\n");
 		player.sexReward("no", "Dick");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function patchouleGiveItem():void {
@@ -655,7 +655,7 @@ public class PatchouliScene extends NPCAwareContent {
 					           Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) +
 					           " size, spewing a fountain of milk in the process.\n\n");
 				}
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -681,7 +681,7 @@ public class PatchouliScene extends NPCAwareContent {
 				flags[kFLAGS.PATCHOULI_HAIR_COLOR] = colour;
 				outputText("You ask Patchoulie to coat her hair with the bottle and she complies. Her hair turning to " +
 				           colour + ".\n\n");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 	}

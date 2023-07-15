@@ -910,7 +910,7 @@ public function etnaPussyOpera():void
 {
 	clearOutput();
 	etnaPussyOpera2();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function etnaPussyOpera2():void
 {
@@ -951,7 +951,7 @@ public function etnaShareDrink():void
 	outputText("Etna smirks and reciprocates passing her rough cat tongue on your tail pussy lips. Having a tail pussy is a one of a kind feeling as you both feed and feel indecent pleasure from it. It would be hard for you to give up on that body part. You resume drinking both ways, orgasming at the same time as your tail pussy bottoms up and goes empty. Etna thankfully, however, has extra barrels and gives you both a refill");
 	if (player.hasVagina()) outputText(" the [pussy] between your legs wets the ground as a new cargo of cum fills your tail cavity");
 	outputText(".\n\nAfter several minutes, both of you are done and there's no cum left. You lay down next to Etna for a moment, enjoying the afterglow of your shared dinner. That was quite a good meal and seeing as she has several barrels of this which she seems to replenish daily you like the idea of doing this again. You head back to your tent most satisfied.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 	player.sexReward("cum");
 }
 
@@ -1000,7 +1000,7 @@ private function tailExploration():void {
 		+ "\n"
 		+ "Pint by pint you flood her cunt until you are all in, the manticore begging for you to stop. Midway you hear something hit the ground next to you but heck you don’t care, this cunt is a treasure trove. Every single crevice of her tail wall is dripping with girl fluids and you can even taste the residual cum of her few past meals. Etna/The manticore’s tail is twitching as you violate her insides like no other cock could. Her screams are so loud you can hear her moans of ecstasy from inside. Deciding to go to the depth of the matter you finally reach the end of her tail at the base of her ass which might as well be connected to her stomach and unsurprisingly it is. Since you aren't interested into a digestive acid bath you lick clean the rest of her tail walls with your body, making sure to remove any remnant of cum, and begin to flood out. As you finish oozing on the ground you hear a confused moan and turn over. Etna is on the ground, eyes crossed from the mind-blowing sex you performed inside her tailcunt. Eh?! You hope you didn’t break her, this must be quite the experience, one you would sure love to do again.\n");
 	player.sexReward("vaginalFluids");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function etnaSleepToggle():void {
@@ -1046,7 +1046,7 @@ public function etnaInfidelityEncounter():void {
 		outputText("“<i>T...Thanks [name] I will try to make it up to you one way or another!</i>”[pg]");
 		outputText("That said you leave Etna to her lunch heading back to camp just in time to see the minotaur explode in her tail again.[pg]");
 		EtnaInfidelity = 1;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	function breakOffInfidelity():void {
 		clearOutput();
@@ -1058,7 +1058,7 @@ public function etnaInfidelityEncounter():void {
 		etnaAffection(-60);
 		if (flags[kFLAGS.SLEEP_WITH] == "Etna") flags[kFLAGS.SLEEP_WITH] = "";
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 2) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 2;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	function satisfyHerInfidelity():void {
 		clearOutput();
@@ -1068,7 +1068,7 @@ public function etnaInfidelityEncounter():void {
 		outputText("“<i>I will expect my daily share once you’re home.</i>”[pg]");
 		outputText("You really hope you didn't get in over your head.[pg]");
 		EtnaInfidelity = 3;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 public function etnaInfidelityEncounterRepeat():void {
@@ -1080,7 +1080,7 @@ public function etnaInfidelityEncounterRepeat():void {
 	outputText("“<i>Uh, hello… [name]. I was hungry and I… well you see all these walking reservoirs around here and...</i>”[pg]");
 
 	menu();
-	addButton(0, "Next", camp.returnToCampUseOneHour);
+	addButton(0, "Next", explorer.done);
 	addButtonIfTrue(1, "Satisfy her", satisfyHerInfidelity, "You dont have enough cum to satisfy her", player.cumQ() >= 2000);
 
 	function satisfyHerInfidelity():void {
@@ -1091,7 +1091,7 @@ public function etnaInfidelityEncounterRepeat():void {
 		outputText("“<i>I will expect my daily share once you’re home.</i>”[pg]");
 		outputText("You really hope you didn't get in over your head.[pg]");
 		EtnaInfidelity = 3;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -1135,7 +1135,7 @@ private function etnaAfterInfidelity():void {
 	outputText("Well, that's a surprise, but then again she did say she would make it up to you. Well, if she’s ready to be a mother then you don’t mind. You tell her that whenever she will be pregnant you will be there for her, then head back to your things still considering the ramification of this decision.[pg]");
 	outputText("<b>Etna is off her contraceptive herbs</b>");
 	EtnaFertile = true;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function etnaKnockupAttempt():void {
