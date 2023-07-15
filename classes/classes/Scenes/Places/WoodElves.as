@@ -1,20 +1,19 @@
 package classes.Scenes.Places{
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Wings;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Horns;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Crafting;
-	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
-    import classes.display.SpriteDb;
-	import classes.internals.SaveableState;
-	import classes.CoC;
+import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
-	public class WoodElves extends BaseContent implements SaveableState {
+public class WoodElves extends BaseContent implements SaveableState {
 
 		public static var WoodElvesQuest:int;
 		public static const QUEST_STAGE_METELFSANDEVENBEATSTHEM:int = -1;
@@ -508,7 +507,7 @@ import classes.Scenes.Crafting;
 					"\n\nMerisiel sighs. \"<i>I figured you would when I realized your memories were returning. Don’t worry, we won’t try to stop you.</i>\"\n\n" +
 					"Elenwen tells you where your old equipment is being stored. \"<i>We didn’t get rid of it… we were planning on giving it back to you after your naming ceremony tomorrow anyway. I suppose you’ll be wanting it.</i>\"\n\n" +
 					"Alyssa has tears in her eyes as she pleads with you but your mind's made up and you decide to leave, heading back to your camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function KeepName():void {
@@ -524,7 +523,7 @@ import classes.Scenes.Crafting;
 					" you certainly wouldn’t mind coming back now and again to spend more time with the lovely elves," +
 					" now that you’ve sorted out their rather forceful welcome. The thought manages to bring a stirring heat deep within you.");
 			WoodElvesQuest = QUEST_STAGE_PCNOTELF;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function Ceremony1():void {
@@ -651,6 +650,7 @@ import classes.Scenes.Crafting;
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WOODELF;
 			IMutationsLib.ElvishPeripheralNervSysIM.trueMutation = true;
 			player.removeAllRacialMutation();
+			explorer.stopExploring();
 			doNext(camp.returnToCamp, 16);
 		}
 
@@ -710,7 +710,7 @@ import classes.Scenes.Crafting;
 			addButton(5, "Lutien", Lutien);
 			addButton(6, "Chelsea", Chelsea)
 					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 
 		public function River():void {
@@ -773,7 +773,7 @@ import classes.Scenes.Crafting;
 						" resist the urge to join them, for now; you can always find another release later, when you’re a little less busy.")
 				player.dynStats("lus",+30);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function Tent():void {
@@ -838,7 +838,7 @@ import classes.Scenes.Crafting;
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.trainStat("lib", +1, player.trainStatCap("lib",80));
 			CoC.instance.timeQ = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function Fletching():void {
@@ -886,6 +886,7 @@ import classes.Scenes.Crafting;
 					player.addPerkValue(PerkLib.CraftedArrows, 4, 100);
 					break;
 			}
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -921,6 +922,7 @@ import classes.Scenes.Crafting;
 			outputText("You work for 8 hours adjusting your new " + itype.shortName + " string to your bow. This will serve you well in your adventures.");
 			player.addStatusValue(StatusEffects.FletchingTable, 2, 1);
 			player.destroyItems(itype, 1);
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -983,6 +985,7 @@ import classes.Scenes.Crafting;
 					else player.destroyItems(itype, 1);
 					break;
 			}
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -1098,7 +1101,7 @@ import classes.Scenes.Crafting;
 				else bowSkill1(5);
 			}
 			CoC.instance.timeQ = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function Alyssa():void {
@@ -1176,7 +1179,7 @@ import classes.Scenes.Crafting;
 			else{
 				hasTrainedToday = true;
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function LutienMF(boy:String,girl:String):String {
@@ -1225,7 +1228,7 @@ import classes.Scenes.Crafting;
 					" \"<i>Now, if you would excuse me, I would like to continue my reading in peace.</i>\"\n\n");
 			outputText("You leave Lutien to "+LutienMF("his","her")+" work, not wanting to disturb their efforts, and not especially appreciating "+LutienMF("his","her")+" company.");
 			if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING0) WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function Lutien3():void {
 			clearOutput();
@@ -1238,7 +1241,7 @@ import classes.Scenes.Crafting;
 			outputText("Well, she doesn’t have the best personality, but the prospect of learning new ways to deal with your opponents is too good to pass up. Lutien pats the bench next to her, and you sit beside her to begin your lesson.\n\n");
 			outputText("<b>Found Lutien in the Elven village!</b>");
 			WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING2;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function LutienMain():void {
 			clearOutput();
@@ -1338,6 +1341,7 @@ import classes.Scenes.Crafting;
 			}
 			player.trainStat("int", 2 + rand(4), player.trainStatCap("int",100));
 			CoC.instance.timeQ = 3;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		public function LutienMainSex():void {
@@ -1402,7 +1406,7 @@ import classes.Scenes.Crafting;
 			outputText("You can't say it was an unpleasurable experience.[pg]");
 			outputText("He smiles warmly, \"<i>Good, I hope we can try this again later... I'll be seeing you around, then.</i>\"[pg]");
 			player.sexReward();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function LutienFuckBussy():void {
 			clearOutput();
@@ -1421,7 +1425,7 @@ import classes.Scenes.Crafting;
 			outputText("Lutien breathes softly, exhausted as you pull out your deflating erection. \"<i>Hah... that was... definitely an experience like no other... I wouldn't argue about looking into it again if you were ever to ask... </i>\"[pg]");
 			outputText("He brushes himself off, cum still leaking out of his bussy. \"<i>I'll get us cleaned up, then you can return to other matters.</i>\"[pg]");
 			player.sexReward();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function Chelsea():void {
@@ -1463,7 +1467,7 @@ import classes.Scenes.Crafting;
 			player.SexXP((5+player.level) * 10);
 			player.trainStat("lib", 4, player.trainStatCap("lib",100));
 			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING2;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function ChelseaTraining1No():void {
 			clearOutput();
@@ -1471,7 +1475,7 @@ import classes.Scenes.Crafting;
 			outputText("You decline Chelsea offer fully confident in your own skills.[pg]");
 			outputText("\"<i>Well if you ever need your big sister assistance just come to me and ill teach ya everything there is to sex and controlling your desires.</i>\"[pg]");
 			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function ChelseaMain():void {
 			clearOutput();
@@ -1491,7 +1495,7 @@ import classes.Scenes.Crafting;
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You tell her you just wanted to say hello really. You two talk of everything and nothing before you say your goodbye and head back to the elven commons. Chelsea waves you goodbye before you go.[pg]");
 			outputText("\"<i>Come back anytime, I will be right here.</i>\"[pg]");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function ChelseaTrainingRandom():void {
 			clearOutput();
@@ -1513,7 +1517,7 @@ import classes.Scenes.Crafting;
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
 			player.trainStat("lib", 4, player.trainStatCap("lib",100));
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function ChelseaRandomTrain1():void {
 			outputText("Chelsea disrobe and encourage you to do the same as she heads toward her tent letting you in.[pg]");
@@ -1553,7 +1557,7 @@ import classes.Scenes.Crafting;
 			//Effect: Slutty Seduction 10, Wizard Endurance 60. Increase tease total damage by x 2 when worn by a wood elf. Inflicting Tease damage reduces the wielder's own lust by a small amount.
 			//The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.
 
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function CaptureGoblin():void {

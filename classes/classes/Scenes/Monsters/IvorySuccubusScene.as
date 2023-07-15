@@ -7,8 +7,8 @@
 package classes.Scenes.Monsters
 {
 import classes.BaseContent;
-import classes.display.SpriteDb;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
 public class IvorySuccubusScene extends BaseContent
 {
@@ -85,6 +85,7 @@ public class IvorySuccubusScene extends BaseContent
         }
         dynStats("cor", 3);
         player.addCurse("lib", 2, 2);
+        explorer.stopExploring();
         if (fromBattle)
             cleanupAfterCombat();
         else

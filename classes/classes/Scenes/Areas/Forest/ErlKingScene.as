@@ -221,8 +221,8 @@ public class ErlKingScene extends BaseContent
 			fatigue(10);
 
 			if (waited)
-				inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
-			else inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.CANINEP, explorer.done);
+			else inventory.takeItem(consumables.FOXBERY, explorer.done);
 		}
 
 		public function repeatWildHuntEncounter():void
@@ -270,7 +270,7 @@ public class ErlKingScene extends BaseContent
 			outputText("It seems the Erlking has no interest in chasing prey that won’t run.\n\n");
 
 			if (player.inte < 80) dynStats("int+", 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function repeatWildHuntChase():void
@@ -300,7 +300,7 @@ public class ErlKingScene extends BaseContent
 				if (rand(2) == 0) dynStats("tou+", 1);
 				else dynStats("spe+", 1);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function mockSlow():void {
@@ -399,7 +399,7 @@ public class ErlKingScene extends BaseContent
 			player.gems -= gemLoss;
 
 			outputText("<b>You’ve lost " + gemLoss + " gems.</b>\n\n");
-			inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.CANINEP, explorer.done);
 			dynStats("sen-", 2, "lib+", 2, "cor+", 1, "lus=", 0);
 			fatigue(10);
 			player.sexReward("cum");
@@ -451,10 +451,10 @@ public class ErlKingScene extends BaseContent
 			player.gems += gemFind;
 			var selector:int = rand(4);
 
-			if (selector == 0) inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
-			if (selector == 1) inventory.takeItem(consumables.FOXBERY, camp.returnToCampUseOneHour);
-			if (selector == 2) inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
-			if (selector == 3) inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
+			if (selector == 0) inventory.takeItem(consumables.CANINEP, explorer.done);
+			if (selector == 1) inventory.takeItem(consumables.FOXBERY, explorer.done);
+			if (selector == 2) inventory.takeItem(consumables.NPNKEGG, explorer.done);
+			if (selector == 3) inventory.takeItem(consumables.GLDRIND, explorer.done);
 		}
 
 		protected function stopTheMadness():void
@@ -475,7 +475,7 @@ public class ErlKingScene extends BaseContent
 			outputText("\"<i>As you wish,</i>\" says the Erlking.  The fog rolls in once more, engulfing the Erlking and his steed.  It clears a moment later, leaving you alone in the forest.\n\n");
 
 			outputText("You get the feeling you won’t be seeing him anymore.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function surrenderToTheHounds():void
@@ -686,7 +686,7 @@ public class ErlKingScene extends BaseContent
 				//[+10 Fatigue, +1 Toughness / +1 Strength, 100 hp healed]
 				if (player.tou < player.str) dynStats("toughness+", 1, "fatigue+", 10, "health+", 100, "lust=", 0);
 				else (dynStats("strength+", 1, "fatigue+", 10, "health+", 100, "lust=", 0));
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -772,10 +772,10 @@ public class ErlKingScene extends BaseContent
 					player.sexReward("no");
 					dynStats("lust=", 0);
 					if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0) {
-						inventory.takeItem(weapons.HNTCANE, camp.returnToCampUseOneHour);
+						inventory.takeItem(weapons.HNTCANE, explorer.done);
 						flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
 					}
-					else doNext(camp.returnToCampUseOneHour);
+					else endEncounter();
 				}
 				else doNext(recallWakeUp);
 			}
@@ -831,7 +831,7 @@ public class ErlKingScene extends BaseContent
 			}
 			addButton(3, "Milk Dick", gwynnGetsDickmilked);
 			addButton(4, "Gifts", gwynnGibsGifts);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 
 		protected function gwynnSucksDicks():void
@@ -855,7 +855,7 @@ public class ErlKingScene extends BaseContent
 			//[Libido + 2]
 			dynStats("lib+", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function gwynnGetsButtfuxed():void
@@ -880,7 +880,7 @@ public class ErlKingScene extends BaseContent
 			//[Sensitivity -2]
 			dynStats("sen-", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function gwynnNomsDaCunts():void
@@ -905,7 +905,7 @@ public class ErlKingScene extends BaseContent
 			//[Sensitivity -2, Libido +2]
 			dynStats("sen-", 2, "lib+", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function gwynnGetsDickmilked():void
@@ -937,7 +937,7 @@ public class ErlKingScene extends BaseContent
 
 			//[Lust +20, Libido +2]
 			dynStats("lus+", 20, "lib+", 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function gwynnGibsGifts():void
@@ -956,14 +956,14 @@ public class ErlKingScene extends BaseContent
 
 			outputText("Before you can stop her, she’s gone, and you pocket the small bottle for later.\n\n");
 
-			if (rand(4) > 0) inventory.takeItem(consumables.PRNPKR, camp.returnToCampUseOneHour);
+			if (rand(4) > 0) inventory.takeItem(consumables.PRNPKR, explorer.done);
 			else inventory.takeItem(consumables.PRNPKR, goldenRindBonus);
 		}
 
 		private function goldenRindBonus():void {
 			clearOutput();
 			outputText("\"<i>Oh, I also had this left over from brewing my Pucker,</i>\" she says, popping out of the brush behind you.  You yelp in surprise.  She’d vanished into the forest in front of you a moment ago.  How did she move so quickly?  \"<i>Here you go!</i>\" she pipes up, depositing a small item in your hand before disappearing back into the woods.  If she can move that quickly and quietly through the woods, it’s pretty likely that her falling prey to the forest predators has been entirely voluntary.\n\n");
-			inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.GLDRIND, explorer.done);
 		}
 
 		public function deerTFs():void {

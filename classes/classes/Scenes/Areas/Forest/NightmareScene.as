@@ -19,7 +19,7 @@ public class NightmareScene extends BaseContent
 			outputText("As you explore the deepwoods, you come upon a particularly corrupted grove. At the center of it you see many demons busy fucking each other, some of them wearing armors and weapons. The demons could’ve been a concern if not for an even bigger threat looming at the epicenter of this scene of utter decadence. At the middle of a grove a centauress is busy fucking what seems to be a dog morph. ");
 			if (sceneHunter.other) {
 				outputText("\n\nSeems like it's the creature the unicorn told you about...\n\n<b>The events can take a sharp turn if you don't run away right now... do you still want to aproach?</b>\n\n");
-				doYesNo(intro2, camp.returnToCampUseOneHour);
+				doYesNo(intro2, explorer.done);
 			} else intro2();
 		}
 
@@ -215,7 +215,10 @@ public class NightmareScene extends BaseContent
 				outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
 				if (player.isGargoyle()) {
 					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. Guess you will have to try again.");
-					if (!recalling) doNext(camp.returnToCampUseFourHours);
+					if (!recalling) {
+						explorer.stopExploring();
+						doNext(camp.returnToCampUseFourHours);
+					}
 				}
 				else {
 					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your defiled body and all the more by the powerful black magic you are permeated with. Somehow the centauress permanently desecrated your body with her energy, and you can feel this \"blessing\" resonating with your newfound corruption.\n\n");
@@ -235,6 +238,7 @@ public class NightmareScene extends BaseContent
 				if (!recalling) {
 					player.sexReward("cum", "Oral");
 					player.sexReward("cum", "Anal");
+					explorer.stopExploring();
 					doNext(camp.returnToCampUseFourHours);
 					return;
 				}

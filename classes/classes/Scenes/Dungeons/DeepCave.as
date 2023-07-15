@@ -39,7 +39,7 @@ use namespace CoC;
 			inDungeon = false;
 			clearOutput();
 			outputText("You leave the cave behind and take off through the deepwoods back towards camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function checkDoor1():void {

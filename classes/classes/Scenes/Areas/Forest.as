@@ -288,7 +288,6 @@ use namespace CoC;
 						night : false,
 						chance: 0.6,
 						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
@@ -308,10 +307,7 @@ use namespace CoC;
 						kind  : 'npc',
 						unique: true,
 						night : false,
-						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							encounterTamanisDaughtersFn();
-						},
+						call  : encounterTamanisDaughtersFn,
 						when  : function ():Boolean {
 							return player.gender > 0
 								&& player.hasCock()
@@ -320,7 +316,9 @@ use namespace CoC;
 						}
 					}, {
 						name  : "Jojo",
-						label : "JoJo",
+						label : function():String {
+							return silly() ? "JoJo" : "Jojo"
+						},
 						kind  : 'npc',
 						unique: true,
 						night : false,
@@ -343,10 +341,7 @@ use namespace CoC;
 						name  : "tentaBeast",
 						label : "Tentacle Beast",
 						kind  : 'monster',
-						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							tentacleBeastEncounterFn();
-						},
+						call  : tentacleBeastEncounterFn,
 						when  : fn.ifLevelMin(3),
 						chance: 0.80
 					}, corruptedGlade.encounter, {
@@ -354,10 +349,7 @@ use namespace CoC;
 						label : "Bee-girl",
 						kind  : 'monster',
 						night : false,
-						call  : function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							beeGirlScene.beeEncounter();
-						},
+						call  : beeGirlScene.beeEncounter,
 						chance: 1.0
 					}, {
 						name  : "WoodElf",

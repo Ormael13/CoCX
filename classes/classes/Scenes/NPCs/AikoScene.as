@@ -125,7 +125,7 @@ public function encounterAiko():void {
 		+"<i>\"H-how long were you… I uh… I left the stove on BYE!!\"</i>\n\n"
 		+"Before you can say another word, she dashes off into the forest, trying to hide the deep crimson blush on her face.");
 		flags[kFLAGS.AIKO_HOT_BLOOD]++;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	// Second encounter with Aiko
 	else if (flags[kFLAGS.AIKO_TIMES_MET] == 2) {
@@ -219,7 +219,7 @@ public function encounterAiko():void {
 		+"You smile and congratulate the now eight-tails as she tries to hide a deep crimson blush on her face. She seems to be really convinced to become a nine-tails and you are very happy that she is making it a reality. You spend the remaining time happily chatting with your kitsune girl.\n\n"
 		+"<i>\"See you around, [name].\"</i> She lets you go after a quick peck on the cheek. As you see her rush away, you notice she still has Yamata's Muramasa katana tied to her hip. The blade's corruption is as strong as ever, but it seems that Aiko is as yet unaffected. Her magic has however grown very strong indeed. Still, you are worried, you better keep an eye on her state from now on, lest she become corrupted like her half-sister.");
 		flags[kFLAGS.AIKO_BOSS_OUTRO] = 1;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else if (flags[kFLAGS.AIKO_BOSS_COMPLETE] ==0 && player.level >= 25 && flags[kFLAGS.AIKO_AFFECTION] > 90 && flags[kFLAGS.AIKO_TIMES_MET] > 3) {
 		if (flags[kFLAGS.AIKO_BOSS_INTRO] > 0) {
@@ -376,7 +376,7 @@ private function leave():void
 		player.removeStatusEffect(StatusEffects.DomFight);
 	}
 	cleanupAfterCombat();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -474,7 +474,7 @@ private function aikoE1Riches():void {
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
 	flags[kFLAGS.AIKO_FIRST_CHOICE] = 1;
 	flags[kFLAGS.AIKO_AFFECTION]++;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoE1Power():void {
@@ -493,7 +493,7 @@ private function aikoE1Power():void {
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
 	flags[kFLAGS.AIKO_FIRST_CHOICE] = 2;
 	flags[kFLAGS.AIKO_AFFECTION]++;
-	inventory.takeItem(weapons.PIPE, camp.returnToCampUseOneHour);
+	inventory.takeItem(weapons.PIPE, explorer.done);
 }
 
 private function aikoE1SexPart1():void {
@@ -538,7 +538,7 @@ private function applyAikoLustPrankEffect():void
 {
 	player.createStatusEffect(StatusEffects.AikoLustPrank, rand(48)+24, 0, 0, 0);
 	dynStats("sen", 35);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoE1Nothing():void {
@@ -575,7 +575,7 @@ private function aikoE1Nothing():void {
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
 	flags[kFLAGS.AIKO_FIRST_CHOICE] = 4;
 	flags[kFLAGS.AIKO_AFFECTION] += 5;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoTouchFluffTail():void {
@@ -610,7 +610,7 @@ private function aikoTouchFluffTail():void {
 	flags[kFLAGS.AIKO_FIRST_CHOICE] = 6;
 	flags[kFLAGS.AIKO_AFFECTION] += 15;
 	player.dynStats("lus", 10+rand(11), "cor", -5);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 internal function aikoLosesIntro():void {
@@ -704,7 +704,7 @@ private function aikoTalkE2():void {
 	flags[kFLAGS.AIKO_AFFECTION] += 3;
 	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 5;
 	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoSexE2():void {
@@ -756,7 +756,7 @@ private function aikoApologySincere():void {
 	flags[kFLAGS.AIKO_AFFECTION] = 50;
 	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 5;
 	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoApologyTrick():void {
@@ -846,7 +846,7 @@ private function aikoTalkE3():void {
 	flags[kFLAGS.AIKO_AFFECTION] += 3;
 	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] -= 5;
 	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoApologize2():void {
@@ -910,7 +910,7 @@ private function  talkBees():void {
 		doNext(aikoSex);
 	} else {
 		outputText("You say that that’s alright, thanking her for her time, and tell her that you should be heading back to camp anyway.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkTentacles():void {
@@ -933,7 +933,7 @@ private function  talkTentacles():void {
 		doNext(aikoSex);
 	} else {
 		outputText("Finally, you bid her farewell, telling her that you have to check in on your camp.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkGoblins():void {
@@ -949,7 +949,7 @@ private function  talkGoblins():void {
 		doNext(aikoSex);
 	} else {
 		outputText("bid her farewell, telling her you should be checking in on your camp again soon.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkAkbal():void {
@@ -965,7 +965,7 @@ private function  talkAkbal():void {
 		doNext(aikoSex);
 	} else {
 		outputText("Thanking her for her time, you tell her that you have to go check back on your camp.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function talkCulture():void {
@@ -992,7 +992,7 @@ private function talkCulture():void {
 		doNext(aikoSex);
 	} else {
 		outputText("While the experience has been educational, you should be heading back to check on your camp now.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkAiko():void {
@@ -1018,7 +1018,7 @@ private function  talkAiko():void {
 		doNext(aikoSex);
 	} else {
 		outputText("; you really should be heading back to check on your camp.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkMansionSisters():void {
@@ -1037,7 +1037,7 @@ private function  talkMansionSisters():void {
 		doNext(aikoSex);
 	} else {
 		outputText("Unfortunately, you’ve been away from camp for too long, and you should probably return to check up on it.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkNineTails():void {
@@ -1061,7 +1061,7 @@ private function  talkNineTails():void {
 		doNext(aikoSex);
 	} else {
 		outputText("Thanking her for her time, you tell her that you have to go check back on your camp. <i>\"Sayonara, [name].\"</i>");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkFamily():void {
@@ -1083,7 +1083,7 @@ private function  talkFamily():void {
 	} else {
 		outputText("saying that you should be heading back to camp anyway.\n\n"
 		+"<i>\"Yeah, I'd prefer it that way, thanks.\"</i>");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 private function  talkArchery():void {
@@ -1141,7 +1141,7 @@ private function  talkArchery():void {
 		doNext(aikoSex);
 	} else {
 		outputText(", but unfortunately, you should be getting back to camp now.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -1543,7 +1543,7 @@ private function aikoSexMissionary():void {
 			player.removeStatusEffect(StatusEffects.DomFight);
 		cleanupAfterCombat();
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoSexDoggy():void {
@@ -1582,7 +1582,7 @@ private function aikoSexDoggy():void {
 			player.removeStatusEffect(StatusEffects.DomFight);
 		cleanupAfterCombat();
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoSexBJ():void {
@@ -1632,7 +1632,7 @@ private function aikoSexBJscene(x:int):void {
 			player.removeStatusEffect(StatusEffects.DomFight);
 		cleanupAfterCombat();
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoSexCunni():void {
@@ -1660,7 +1660,7 @@ private function aikoSexCunni():void {
 			player.removeStatusEffect(StatusEffects.DomFight);
 		cleanupAfterCombat();
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoSexTailjob():void {
@@ -1692,7 +1692,7 @@ private function aikoSexTailjob():void {
 			player.removeStatusEffect(StatusEffects.DomFight);
 		cleanupAfterCombat();
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 private function aikoSexKitsuneTailjob():void {
 	clearOutput();
@@ -1728,7 +1728,7 @@ private function aikoSexKitsuneTailjob():void {
 			player.removeStatusEffect(StatusEffects.DomFight);
 		cleanupAfterCombat();
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 private function submitToAiko():void {
 	clearOutput();
@@ -1738,7 +1738,7 @@ private function submitToAiko():void {
 	+"You are worried she won’t take no for an answer, but thankfully she drops her billhook and walks up to you[if ("+"[hasweapon]"+"), gently taking your "+"[weapon]"+" from you and tossing it aside.] <i>\"But I suppose it can’t be helped...\"</i>");
 	if (player.gender == 0) {
 		outputText("Wait a minute! How am I supposed to have sex with you when you don't have any of the tools needed to even have sex?! Fuck off!");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	} else sceneHunter.selectLossMenu([
 		[0, "Footjob", aikoFootjob, "Req. a cock.", player.hasCock()],
 		[1, "Whipping", aikoWhipping, "Req. a vagina.", player.hasVagina()],
@@ -1771,7 +1771,7 @@ private function aikoFootjob():void
 		postSexUpdate();
 	}
 	flags[kFLAGS.AIKO_SEXED]++;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function aikoWhipping():void {
@@ -1809,7 +1809,7 @@ private function aikoWhipping():void {
 		postSexUpdate();
 	}
 	flags[kFLAGS.AIKO_SEXED]++;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -1841,7 +1841,7 @@ private function yamataPrepare():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
 	outputText("You tell Aiko that you still need time to prepare, her half-sister is quite the adversary from how she described Yamata. You return to camp to continue preparations for the huge battle to come.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function yamataStart():void {
@@ -1978,6 +1978,7 @@ private function yamataAftermath():void {
 	+"After some time, you help Aiko free the townsfolk from Yamata's chains and bondage devices and twisted torture contraptions, everyone hailing you as a hero for the service done to the village. Some Kitsune even tempt you with their bodies, showing off her large breasts and seductive hips. It has been a long day and you remember that your camp is waiting. You kiss Aiko goodbye, promising to check on her later, but are stopped before you can leave by a nine-tailed kitsune who materializes before you. She is an absolute beauty, and has more than a few similarities with Aiko, albeit with more matured features.\n\n"
 	+"<i>\"Brave Champion, we thank you for the service done to our race... In the name of all of our village, you'll always be kept in the highest regards should you choose to return. I thank you, both as an elder and as a mother. Aiko seems to have found happiness with you, you have my thanks.\"</i> Politely, the kitsune elder bows before you and then disappears seemingly into nothingness. You widen your eyes and recall Aiko's mention of her mother. No wonder Aiko is as beautiful as she is, having seen her mother."
 	+"\n\nYou return to camp after an exhaustive day.");
+	explorer.stopExploring();
 	cleanupAfterCombat(camp.returnToCampUseFourHours);
 }
   }

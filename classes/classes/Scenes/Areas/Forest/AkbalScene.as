@@ -7,7 +7,6 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class AkbalScene extends BaseContent {
@@ -638,7 +637,7 @@ public class AkbalScene extends BaseContent {
 
 			outputText("The aura pouring forth from this 'Akbal' is anything but god-like; you recognize the demon for what it truly is.  Yet its ivory teeth and sharp claws prove to you that it can make good on its threat.  What do you do?");
 			//Talk / Fight / Run
-			simpleChoices("Talk", superAkbalioTalk, "Fight", startuAkabalFightomon, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Talk", superAkbalioTalk, "Fight", startuAkabalFightomon, "", null, "", null, "Leave", explorer.done);
 		}
 
 		//[Talk]
@@ -667,7 +666,7 @@ public class AkbalScene extends BaseContent {
 			clearOutput();
 			outputText("You shake your head and rub the lust-filled jaguar behind the ear as you tell him you're busy.  The demon's eyes roll, and he licks your [leg] before his eyes find an imp in the trees above the two of you.\n\n");
 			outputText("Knowing he's found a new toy, Akbal allows you to leave unmolested.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Encounter if previously fought and won/raped him]
@@ -680,7 +679,7 @@ public class AkbalScene extends BaseContent {
 			else
 				outputText("dodging roll places you a good distance away from him.  Do you fight or flee?\n\n");
 			//Fight / Flee
-			simpleChoices("Fight", startuAkabalFightomon, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Fight", startuAkabalFightomon, "", null, "", null, "", null, "Leave", explorer.done);
 		}
 
 		//[Encounter if previously fought and lost]
@@ -690,7 +689,7 @@ public class AkbalScene extends BaseContent {
 			outputText("A chorus of laughter sounds inside your mind as the jaguar demon, Akbal, drops to the ground in front of you.  His masculine voice says, \"<i>Well, if it isn't the defiant welp who, in all their great idiocy, has wandered into my territory again.  Will you submit, or do I have to teach you another harsh lesson?</i>\"\n\n");
 
 			//Submit / Fight / Run
-			simpleChoices("Submit", akbalSubmit, "Fight", startuAkabalFightomon, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Submit", akbalSubmit, "Fight", startuAkabalFightomon, "", null, "", null, "Leave", explorer.done);
 		}
 
 		//[Fight]
@@ -772,6 +771,7 @@ public class AkbalScene extends BaseContent {
 					player.butt.type++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
+				explorer.stopExploring();
 				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
@@ -845,6 +845,7 @@ public class AkbalScene extends BaseContent {
 					player.butt.type++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
+				explorer.stopExploring();
 				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
@@ -919,6 +920,7 @@ public class AkbalScene extends BaseContent {
 				player.butt.type++;
 			}
 			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -1031,6 +1033,7 @@ public class AkbalScene extends BaseContent {
 			player.sexReward("cum", "Anal");
 			dynStats("cor", 5);
 			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -1061,7 +1064,7 @@ public class AkbalScene extends BaseContent {
 			outputText("You turn back, allowing the demon to finish cleaning himself and thankful he didn’t ambush you this time.");
 			if (player.lust < 33)
 				outputText("  Besides, you aren't aroused right now, anyway.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//{Choose Rape}
@@ -1174,7 +1177,7 @@ public class AkbalScene extends BaseContent {
 
 				player.sexReward("no", "Dick");
 				dynStats("cor", 3);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 
 			function vagF():void {
@@ -1233,7 +1236,7 @@ public class AkbalScene extends BaseContent {
 				player.sexReward("cum", "Vaginal");
 				dynStats("cor", 3);
 				if (player.hasVagina() && !player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -1305,7 +1308,7 @@ public class AkbalScene extends BaseContent {
 					outputText("\n\nYou stand and Akbal’s legs flop from where you had them pinned to his chest.  You gather your [armor] and dress before aiming a wicked slap at Akbal’s tender cheeks and leaving him tied up for the imps and goblins you spy watching the two of you from the trees.\n\nYou tell him he is all theirs and share a conspiratorial grin as you head back to camp.");
 				player.sexReward("no", "Dick");
 				dynStats("cor", 3);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 
 			function vagF():void {
@@ -1359,7 +1362,7 @@ public class AkbalScene extends BaseContent {
 				player.sexReward("cum", "Dick");
 				dynStats("cor", 3);
 				if (player.hasVagina() && !player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -1403,7 +1406,7 @@ public class AkbalScene extends BaseContent {
 				outputText("\n\nAkbal lies on the ground, shivering as he rolls over.  The tied up demon jaguar’s stomach, and the forest floor are covered in a thick coating of jizz, sticky strings even connect the demon’s chest to the puddle.  With heaving breath, the demon falls asleep as you gather your [armor] and leave.");
 				player.sexReward("no", "Dick");
 				dynStats("cor", 3);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 
 			function vagF():void {
@@ -1457,7 +1460,7 @@ public class AkbalScene extends BaseContent {
 				if (player.hasVagina()) player.sexReward("cum", "Vaginal");
 				else player.sexReward("cum", "Anal");
 				dynStats("cor", 3);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -1601,7 +1604,7 @@ public class AkbalScene extends BaseContent {
 			if (player.hasVagina()) player.sexReward("cum", "Vaginal");
 			else player.sexReward("cum", "Anal");
 			dynStats("cor", 3);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

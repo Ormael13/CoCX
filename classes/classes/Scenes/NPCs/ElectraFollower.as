@@ -88,7 +88,7 @@ public function repeatEncAsRaijuPC():void {
 }
 public function repeatEncAsRaijuPCNoThanks():void {
 	outputText("Can’t get her charge out? Too bad, because you have enough of yours to manage as it is. You bid her good luck then head back to camp.\n\n");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function repeatEncAsRaijuPCRelieveHer():void {
 	outputText("You don’t exactly find her bad on the eyes for a kinswoman so why not help her? You offer to draw out her discharge for her. The raiju lights up, teary eyed at your offer and very appreciative.\n\n");
@@ -151,7 +151,7 @@ public function ElectraRecruitingNah():void {
 	outputText("You apologize to her but for now you aren't exactly ready to make space for someone in your life. Electra nods. She's on the verge of tears but accepts your decision to turn her down, walking away.\n\n");
 	flags[kFLAGS.ELECTRA_FOLLOWER] = 1;
 	electraAffection(-100);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function ElectraRecruitingAgain():void {
 	spriteSelect(SpriteDb.s_electra);
@@ -444,8 +444,8 @@ public function ElectraSeXChargeUp():void {
 	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) outputText("You don't wait for her to tell you twice and run off back to camp.\n\n");
 	electraAffection(10);
 	if (player.lust100 < 90) player.lust = player.maxLust() * 0.9;
-	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) doNext(camp.returnToCampUseOneHour);
-	else inventory.takeItem(useables.RPLASMA, camp.returnToCampUseOneHour);
+	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) endEncounter();
+	else inventory.takeItem(useables.RPLASMA, explorer.done);
 }
 public function ElectraVoltTransfer():void {
 	clearOutput();
@@ -458,7 +458,7 @@ public function ElectraVoltTransfer():void {
 	outputText("You can see the pulse of your statics as a small glow in every thrust of her hips as she keeps fiercely masturbating in an attempt to expel the lust.\n\n");
 	outputText("You leave your lust receptacle there, it's unlikely Electra will stop masturbating anytime soon.");
 	player.sexReward("Default","Default",true,false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function ElectraSeXHeadpat():void {
 	outputText("For reasons unknown you feel like head patting ");

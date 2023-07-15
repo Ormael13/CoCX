@@ -72,14 +72,23 @@ public class Camp extends NPCAwareContent{
 	}
 
 	public function returnToCamp(timeUsed:int):void {
-		if (explorer.inEncounter && timeUsed == 1) {
-			clearOutput();
-			outputText("Encounter '"+explorer.getCurrentEntry().encounterName+"' does not end with 'endEncounter()'. This is a bug.");
-			endEncounter();
-			return;
+		clearOutput();
+		if (explorer.inEncounter) {
+			if (timeUsed == 1) {
+				// Encounter ended with returnToCampUsingOneHour.
+				// Report a bug and continue exploration.
+				// To actually return to camp, call explorer.stopExploring() before return
+				outputText("Encounter '" + explorer.getCurrentEntry().encounterName + "' does not end with 'endEncounter()'. This is a bug.");
+				endEncounter();
+				return;
+			} else {
+				// Encounter ended with returnToCampUsing<MoreThan1>Hours.
+				// Should have had `explorer.stopExploring();`
+				outputText("Encounter '"+explorer.getCurrentEntry().encounterName+"' does not end with 'explorer.stopExploring()'. This is a bug.\n\n");
+				explorer.stopExploring();
+			}
 		}
 		explorer.clear();
-		clearOutput();
 		if (timeUsed == 1)
 			outputText("An hour passes...\n");
 		else outputText(Num2Text(timeUsed) + " hours pass...\n");
