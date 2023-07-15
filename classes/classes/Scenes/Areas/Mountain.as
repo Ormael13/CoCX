@@ -59,7 +59,7 @@ public class Mountain extends BaseContent
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
 			_hillsEncounter = Encounters.group("hills",
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
 					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
 			{
 				//Helia monogamy fucks

@@ -1167,7 +1167,9 @@ public class PerkMenu extends BaseContent {
 		
 		menu();
 		button(1).show(player.perkPoints > 0 ? "Skip" : "Exit", playerMenu);
-		button(10).show("Old Menu", CoC.instance.playerInfo.perkBuyMenuOld);
+		if (player.perkPoints > 0) {
+			button(10).show("Old Menu", CoC.instance.playerInfo.perkBuyMenuOld);
+		}
 	}
 
 	// Sort by perk name

@@ -59,7 +59,7 @@ public function discoverTelAdre():void {
 	else {
 		outputText("While out prowling the desert dunes you manage to spy the desert city of Tel'Adre again.  You could hike over to it again, but some part of you fears being rejected for being 'impure' once again.  Do you try?");
 	}
-	doYesNo(encounterTelAdre,camp.returnToCampUseOneHour);
+	doYesNo(encounterTelAdre,endEncounter);
 }
 
 //player chose to approach the city in the distance
@@ -89,7 +89,7 @@ private function telAdreCrystal():void {
 	if (SceneLib.exgartuan.anyPresent() || player.cor >= 70 + player.corruptionTolerance) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n");
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.");
-		doNext(camp.returnToCampUseOneHour);
+		doNext(endEncounter);
 		return;
 	}
 	//-66+ corruption or corrupted Jojo as marae
@@ -106,6 +106,7 @@ private function telAdreCrystal():void {
 	}
 	outputText("The vixen Urta gestures towards the smaller door and asks, \"<i>Would you like a tour of Tel'Adre, newcomer?</i>\"\n\n");
 	outputText("You remember your etiquette and nod, thankful to have a quick introduction to such a new place.  Urta leaves Edryn to watch the gate and leads you inside.  You do notice her gait is a bit odd, and her fluffy fox-tail seems to be permanently wrapped around her right leg.  The door closes behind you easily as you step into the city of Tel'Adre...");
+	explorer.stopExploring();
 	doNext(telAdreTour);
 }
 

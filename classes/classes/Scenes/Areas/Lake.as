@@ -158,7 +158,7 @@ use namespace CoC;
 				call: slimeOozeEncounterFn
 			}, SceneLib.exploration.commonEncounters.wrap(function ():Boolean {
 				return player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0
-			}, [0.5]), {
+			}, [0.1]), {
 				//Helia monogamy fucks
 				name: "helcommon",
 				night : false,

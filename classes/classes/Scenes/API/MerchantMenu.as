@@ -37,7 +37,7 @@ public class MerchantMenu extends BaseContent {
 	 */
 	public var afterPurchase:Function      = null;
 	/**
-	 * `function(itype:ItemType, quantity:int, slotIndex:int, next:Function):void`.
+	 * `function(itype:ItemType, quantity:int, slot:ItemSlotClass, next:Function):void`.
 	 *
 	 * Called after player sells an item.
 	 *
@@ -62,6 +62,10 @@ public class MerchantMenu extends BaseContent {
 	 * Show [Inventory] button.
 	 */
 	public var canInventory:Boolean        = true;
+	/**
+	 * Can buy to/sell from S.P.Pearl
+	 */
+	public var canPearl:Boolean            = true;
 	
 	private var grid:Block;
 	private var backButton:Function                   = camp.returnToCampUseOneHour;
@@ -77,6 +81,13 @@ public class MerchantMenu extends BaseContent {
 	private var merchantPageCount:int                 = 0;
 	private var merchantPagePrev:CoCButton;
 	private var merchantPageNext:CoCButton;
+	private var toggleStorageButton:CoCButton;
+	private var storageModes:/*int*/Array;
+	private var storageMode:int = STORAGE_MODE_INVENTORY;
+	private var playerStorage:/*ItemSlotClass*/Array;
+	
+	private static const STORAGE_MODE_INVENTORY:int = 0;
+	private static const STORAGE_MODE_PEARL:int = 1;
 	
 	public function MerchantMenu() {
 		useGemCurrency();
@@ -138,7 +149,13 @@ public class MerchantMenu extends BaseContent {
 		
 		function addOneItem():void {
 			while (n-- > 0) {
-				if (inventory.tryAddItemToPlayer(mi._item) == 0) {
+				var added:Boolean = false;
+				if (storageMode == STORAGE_MODE_PEARL) {
+					added = inventory.tryAddOneItemToPearl(mi._item) > 0;
+				} else if (storageMode == STORAGE_MODE_INVENTORY) {
+					added = inventory.tryAddItemToPlayer(mi._item) > 0;
+				}
+				if (!added) {
 					clearOutput();
 					inventory.takeItem(mi._item, addOneItem);
 					return;
@@ -159,7 +176,7 @@ public class MerchantMenu extends BaseContent {
 		sellPlayerItem(i, shiftKeyDown ? -1 : 1);
 	}
 	public function sellPlayerItem(slotIndex:int, quantity:int):void {
-		var itemSlot:ItemSlotClass = player.itemSlot(slotIndex);
+		var itemSlot:ItemSlotClass = playerStorage[slotIndex];
 		var itype:ItemType         = itemSlot.itype;
 		if (itemSlot.isEmpty() || !canSell(itype)) return;
 		if (quantity < 0) quantity = itemSlot.quantity;
@@ -169,16 +186,14 @@ public class MerchantMenu extends BaseContent {
 		modCurrencyFn(+value);
 		itemSlot.quantity -= quantity;
 		update();
-		if (afterPlayerSell != null) afterPlayerSell(itype, quantity, slotIndex, showScreen);
+		if (afterPlayerSell != null) afterPlayerSell(itype, quantity, itemSlot, showScreen);
 	}
 	public function sellAllClick():void {
-		for (var i:int = 0; i < player.itemSlotCount(); i++) {
-			if (player.itemSlot(i).unlocked) {
-				sellPlayerItem(i, -1);
-				if (mainView.getCustomElement() != grid) {
-					// If afterPlayerSell callback displayed own interface, halt
-					return;
-				}
+		for (var i:int = 0; i < playerStorage.length; i++) {
+			sellPlayerItem(i, -1);
+			if (mainView.getCustomElement() != grid) {
+				// If afterPlayerSell callback displayed own interface, halt
+				return;
 			}
 		}
 	}
@@ -192,10 +207,10 @@ public class MerchantMenu extends BaseContent {
 	public function update():void {
 		var i:int, j:int, n:int;
 		j = playerPage * playerItemsPerPage;
-		n = player.itemSlotCount();
+		n = playerStorage.length;
 		for (i = 0; i < playerInvButtons.length; i++, j++) {
 			if (j < n) {
-				var itemSlot:ItemSlotClass = player.itemSlot(j);
+				var itemSlot:ItemSlotClass = playerStorage[j];
 				playerInvButtons[i].showForItemSlot(itemSlot, curry(playerItemClick, j))
 								   .disableIf(!playerCanSell);
 				if (canSell(itemSlot.itype)) playerInvButtons[i].toolTipText += "\nSell price: " + sellPrice(itemSlot.itype);
@@ -226,8 +241,16 @@ public class MerchantMenu extends BaseContent {
 		merchantPage += d;
 		update();
 	}
+	private function toggleStorage():void {
+		storageMode = storageModes[(storageMode+1)%storageModes.length];
+		showScreen();
+	}
 	public function show(backButton:Function):void {
 		this.backButton = backButton;
+		storageModes = [STORAGE_MODE_INVENTORY];
+		if (canPearl) {
+			storageModes.push(STORAGE_MODE_PEARL);
+		}
 		flushOutputTextToGUI();
 		show0();
 	}
@@ -236,6 +259,11 @@ public class MerchantMenu extends BaseContent {
 		show0();
 	}
 	private function show0():void {
+		if (storageMode == STORAGE_MODE_INVENTORY) {
+			playerStorage = player.itemSlots.slice(0, player.itemSlotCount());
+		} else if (storageMode == STORAGE_MODE_PEARL) {
+			playerStorage = inventory.pearlStorageDirectGet().slice(0, inventory.pearlStorageSize());
+		}
 		grid = new Block({
 			layoutConfig: {
 				type: "grid",
@@ -250,7 +278,7 @@ public class MerchantMenu extends BaseContent {
 		// 5 rows: merchant
 		// 1 row : merchant pages
 		n                       = 0;
-		var playerItemCount:int = player.itemSlotCount();
+		var playerItemCount:int = playerStorage.length;
 		var playerItemRows:int  = Math.min(5, Math.ceil(playerItemCount / 5));
 		playerPage              = 0;
 		playerPageCount         = Math.ceil(playerItemCount / playerItemRows / 5);
@@ -258,7 +286,10 @@ public class MerchantMenu extends BaseContent {
 		playerInvButtons        = [];
 		if (playerItemCount > 0) {
 			grid.addTextField({
-				htmlText         : "Your inventory: " + (playerCanSell ? " <i>(Click to sell, Shift+click to sell all)</i>" : ""),
+				htmlText         : "Your " +
+						["inventory","pearl storage"][storageMode] +
+						": " +
+						(playerCanSell ? " <i>(Click to sell, Shift+click to sell all)</i>" : ""),
 				defaultTextFormat: mainView.mainText.defaultTextFormat
 			}, {colspan: 5})
 		}
@@ -267,15 +298,30 @@ public class MerchantMenu extends BaseContent {
 			grid.addElement(btn);
 			playerInvButtons.push(btn);
 		}
-		if (playerPageCount > 1) {
+		if (playerPageCount > 1 || canPearl) {
 			playerPagePrev = new CoCButton()
 									 .show("Prev", curry(modPlayerPage, -1))
 									 .icon("Left");
 			playerPageNext = new CoCButton()
-									 .show("Prev", curry(modPlayerPage, +1))
+									 .show("Next", curry(modPlayerPage, +1))
 									 .icon("Right");
 			grid.addElement(playerPagePrev);
-			grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}), {colspan: 3});
+			grid.addElement(new Block({}));
+			if (canPearl && inventory.pearlStorageSize() > 0) {
+				var label:String = "Inv/Pearl";
+				if (storageMode == STORAGE_MODE_INVENTORY) {
+					label = "(Inv)/Pearl";
+				} else if (storageMode == STORAGE_MODE_PEARL) {
+					label = "Inv/(Pearl)";
+				}
+				toggleStorageButton = new CoCButton()
+						.show(label, toggleStorage)
+						.hint("Switch between trading to/from Inventory and Sky Poison Pearl");
+				grid.addElement(toggleStorageButton);
+			} else {
+				grid.addElement(new Block({}));
+			}
+			grid.addElement(new Block({}));
 			grid.addElement(playerPageNext);
 		}
 		var merchantItemCount:int = items.length;

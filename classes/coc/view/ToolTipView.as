@@ -1,4 +1,6 @@
 package coc.view {
+import classes.CoC_Settings;
+
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.geom.Point;
@@ -65,6 +67,12 @@ import flash.text.TextFieldAutoSize;
 		 * Display tooltip near rectangle with specified coordinates
 		 */
 		public function show(bx:Number, by:Number, bw:Number, bh:Number):void {
+			if (CoC_Settings.mobileBuild) {
+				bx -= 64;
+				by -= 64;
+				bw += 128;
+				bh += 128;
+			}
 			this.x = bx;
 			if (this.x < 0) {
 				this.x = 0; // left border

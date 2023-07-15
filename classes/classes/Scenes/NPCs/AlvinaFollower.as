@@ -10,7 +10,6 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
-import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.Holidays;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -159,7 +158,7 @@ public function alvinaFirstEncounter():void
 	outputText("\"<i>Me? I am a person of no consequence.</i>\"\n\n");
 	outputText("As you turn back to question her, you notice that she's vanished without a trace. You're not sure whether to be relieved...or concerned by this.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function alvinaSecondEncounter():void

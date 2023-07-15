@@ -92,7 +92,7 @@ use namespace CoC;
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest",
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
 					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
 					{
 						//Helia monogamy fucks
@@ -251,7 +251,7 @@ use namespace CoC;
 					}*/);
 			// TODO @aimozg 'plants' tag
 			_forestEncounter = Encounters.group("forest",
-					SceneLib.exploration.commonEncounters.withChanceFactor(0.4),
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
 					{
 						//Helia monogamy fucks
 						name  : "helcommon",
