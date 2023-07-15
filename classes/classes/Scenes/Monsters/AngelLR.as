@@ -132,7 +132,7 @@ package classes.Scenes.Monsters
 				if (player.hasStatusEffect(StatusEffects.SoulArena)) {
 					if (player.hasStatusEffect(StatusEffects.MinoKing)) {
 						player.removeStatusEffect(StatusEffects.MinoKing);
-						SceneLib.hexindao.intermediateleadershipfight2();
+						SceneLib.hexindao.intermediateleadershippostfight();
 					}
 					else angelSwitchWithOtherOne();
 				}
@@ -142,7 +142,7 @@ package classes.Scenes.Monsters
 				if (player.hasStatusEffect(StatusEffects.SoulArena)) {
 					if (player.hasStatusEffect(StatusEffects.MinoKing)) {
 						player.removeStatusEffect(StatusEffects.MinoKing);
-						SceneLib.hexindao.intermediateleadershipfight2();
+						SceneLib.hexindao.intermediateleadershippostfight();
 					}
 					else angelSwitchWithOtherOne();
 				}

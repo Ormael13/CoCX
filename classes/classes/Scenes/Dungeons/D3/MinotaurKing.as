@@ -110,7 +110,7 @@ public class MinotaurKing extends Monster
 				}
 			}
             player.removeStatusEffect(StatusEffects.MinoKing);
-			if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.hexindao.intermediateleadershippostfight();
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.hexindao.intermediateleadershipfight2();
 			else SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing();
 		}
 

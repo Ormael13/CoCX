@@ -69,8 +69,8 @@ public class Changelog extends BaseContent
 			outputText("-Enemies/bosses that appear in River Dungeon lvl adjustments: Hellhound 10 > 6, Aether Golem 11 > 9, Air / Earth / Fire / Water Elementals 15/18/21 > 14/16/18, Sylph / Golem / Ifrit / Undine 24 > 21, Quatro Elemental (starting lvl) 21 > 18, Darkness / Ice / Lightning Elementals 29/32/35 > 28/30/32, Yeti 37 > 30, Raiju 40 > 34, Unique Darkness Elemental 38 > 37, Vegot 43 > 40\n");
 			outputText("-Added pity system for Alpha Howl I. Mutation effect of growing werewolf pack. Now if PC fail to recruit werewolf after 4 tries it will be successfull at 5th try to keep with orginal 20% success rate.\n");
 			outputText("-Tease and masteries XP gains show notifications below the stat bar. Item stack buttons show quantities over the icon. (aimozg)\n");
-			outputText("-New exploration engine. Exploration nodes can branch. New merchant UI. New perk menu. (aimozg)\n");
-			outputText("-\n");
+			outputText("-New exploration engine, exploration nodes can branch, new merchant UI, new perk menu, added touch scrolling for perk menu, extra offset for mobile tooltips, can buy to/sell from pearl storage in new mechant interface, reduced common encounters chance outside main exploration. (aimozg)\n");
+			outputText("-Fixed new game after bad-end on NG+ carrying some data from old character, infinite perk exploit through old menu. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

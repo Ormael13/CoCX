@@ -1054,17 +1054,17 @@ public function soularena():void {
 	}
 	public function intermediateleadershipfight1():void {
 		clearOutput();
-		outputText("Angels incoming...\n\n");
+		outputText("Minotaur Champion with his maid incoming...\n\n");
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
-        startCombat(new AngelLR());
+		startCombat(new MinotaurKing());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function intermediateleadershipfight2():void {
 		clearOutput();
 		soularenafightsbetween();
-		outputText("\n\nMinotaur Champion with his maid incoming...");
-		startCombat(new MinotaurKing());
+		outputText("\n\nAngels incoming...");
+        startCombat(new AngelLR());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function intermediateleadershippostfight():void {
