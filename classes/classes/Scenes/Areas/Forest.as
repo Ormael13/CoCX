@@ -864,13 +864,6 @@ use namespace CoC;
 			}*/);
 		}
 
-		public function exploreDeepwoods():void {
-			clearOutput();
-			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
-			//player.createStatusEffect(StatusEffects.GnomeHomeBuff,1,0,0,0);
-			deepwoodsEncounter.execEncounter();
-		}
-
 		public function forestChance():Number {
 			var temp:Number = 0.5;
 			temp *= player.npcChanceToEncounter();
@@ -961,14 +954,28 @@ use namespace CoC;
 		}
 		public function exploreForest():void
 		{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			//Increment forest exploration counter.
-			player.exploredForest++;
-//			forestStory.execute();
-			forestEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(forestEncounter);
+			explorer.setTags("forest","forestInner","plants");
+			explorer.prompt = "You explore the forest.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				player.exploredForest++;
+			}
+			explorer.leave.hint("Leave the forest");
+			explorer.skillBasedReveal(3, player.exploredForest);
+			explorer.doExplore();
 		}
+		public function exploreDeepwoods():void {
+			explorer.prepareArea(deepwoodsEncounter);
+			explorer.setTags("forest","deepwoods","plants");
+			explorer.prompt = "You explore the deepwoods.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
+			}
+			explorer.leave.hint("Leave the deepwoods");
+			explorer.skillBasedReveal(7, player.statusEffectv1(StatusEffects.ExploredDeepwoods));
+			explorer.doExplore();
+		}
+		
 		//[FOREST]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
 		public function bigJunkForestScene(lake:Boolean = false):void
