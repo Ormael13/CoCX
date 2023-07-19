@@ -6076,6 +6076,7 @@ public class PerkLib
                     }, "Having Elemental Contract Rank 2 or Dao of the Elements (layer 1 or higher) perks");
             StrongElementalBond.requireWis(75)
                     .requireLevel(12)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return (player.hasPerk(PerkLib.ElementalContractRank3) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1)) && !player.hasPerk(PerkLib.StrongElementalBond);
                     }, "Having Elemental Contract Rank 3 or Dao of the Elements (layer 1 or higher) perks");
@@ -6100,6 +6101,7 @@ public class PerkLib
                     .requireLevel(18);
 			ElementalConjurerKnowledge.requireWis(100)
                     .requireLevel(18)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank2) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 2 or Dao of the Elements (layer 1 or higher) perks");
@@ -6146,6 +6148,7 @@ public class PerkLib
             StrongElementalBondEx.requirePerk(StrongElementalBond)
                     .requireWis(125)
                     .requireLevel(24)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank5) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 5 or Dao of the Elements (layer 2 or higher) perks");
@@ -6156,6 +6159,7 @@ public class PerkLib
                     .requireLevel(24);
             FirstAttackElementals.requirePerk(StrongElementalBond)
                     .requireLevel(24)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 4 or Dao of the Elements (layer 1 or higher) perks");
@@ -6183,12 +6187,14 @@ public class PerkLib
                     .requireLevel(30);
             FirstAttackElementalsEx.requirePerk(FirstAttackElementals)
                     .requireLevel(30)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank5) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 5 or Dao of the Elements (layer 2 or higher) perks");
 			ElementalConjurerKnowledgeEx.requirePerk(ElementalConjurerKnowledge)
 					.requireWis(150)
                     .requireLevel(30)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 4 or Dao of the Elements (layer 1 or higher) perks");
@@ -6209,6 +6215,7 @@ public class PerkLib
             StrongElementalBondSu.requirePerks(StrongElementalBondEx)
                     .requireWis(175)
                     .requireLevel(36)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank7) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 7 or Dao of the Elements (layer 2 or higher) perks");
@@ -6239,6 +6246,7 @@ public class PerkLib
 			ElementalConjurerKnowledgeSu.requirePerk(ElementalConjurerKnowledgeEx)
 					.requireWis(200)
                     .requireLevel(42)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank6) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 6 or Dao of the Elements (layer 2 or higher) perks");
@@ -6276,6 +6284,7 @@ public class PerkLib
             StrongerElementalBond.requirePerk(StrongElementalBondSu)
                     .requireWis(250)
                     .requireLevel(54)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank10) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 3);
                     }, "Having Elemental Contract Rank 10 or Dao of the Elements (layer 3 or higher) perks");
@@ -6317,7 +6326,8 @@ public class PerkLib
                     .requireLevel(72);
             StrongerElementalBondEx.requirePerks(StrongerElementalBond, ElementalContractRank13)
                     .requireWis(325)
-                    .requireLevel(72);
+                    .requireLevel(72)
+					.requirePerk(JobElementalConjurer);
             //Tier 13 Wisdom perks
             RecoveryMantra.requireLevel(78)
                     .requirePerk(FlurryOfBlows);
@@ -6339,7 +6349,8 @@ public class PerkLib
                     .requireLevel(90);
             StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
                     .requireWis(400)
-                    .requireLevel(90);
+                    .requireLevel(90)
+					.requirePerk(JobElementalConjurer);
 			///Tier 16 Wisdom perks
 			ElementalContractRank17.requirePerk(ElementalContractRank16)
                     .requireWis(425)
@@ -6361,7 +6372,8 @@ public class PerkLib
                     .requireLevel(114);
             StrongestElementalBond.requirePerks(StrongerElementalBondSu, ElementalContractRank20)
                     .requireWis(500)
-                    .requireLevel(90);
+                    .requireLevel(90)
+					.requirePerk(JobElementalConjurer);
 			///Tier 20 Wisdom perks
 			ElementalContractRank21.requirePerk(ElementalContractRank20)
                     .requireWis(525)
@@ -6380,7 +6392,8 @@ public class PerkLib
                     .requireLevel(138);
             StrongestElementalBondEx.requirePerks(StrongestElementalBond, ElementalContractRank24)
                     .requireWis(600)
-                    .requireLevel(138);
+                    .requireLevel(138)
+					.requirePerk(JobElementalConjurer);
 			///Tier 24 Wisdom perks
 			ElementalContractRank25.requirePerk(ElementalContractRank24)
                     .requireWis(625)
@@ -6399,7 +6412,8 @@ public class PerkLib
                     .requireLevel(162);
             StrongestElementalBondSu.requirePerks(StrongestElementalBondEx, ElementalContractRank28)
                     .requireWis(700)
-                    .requireLevel(162);
+                    .requireLevel(162)
+					.requirePerk(JobElementalConjurer);
 			///Tier 28 Wisdom perks
 			ElementalContractRank29.requirePerk(ElementalContractRank28)
                     .requireWis(725)
@@ -7189,7 +7203,8 @@ public class PerkLib
             ImprovedDiehard.requireLevel(18)
                     .requirePerk(Diehard);
             MotivationEx.requireLevel(18)
-                    .requirePerk(Motivation);//.requirePerk(IntermediateLeadership)
+                    .requirePerk(Motivation)
+					.requirePerk(IntermediateLeadership);
             VexedNocking.requireLevel(18)
 					.requireStr(10)
 					.requireSpe(10);

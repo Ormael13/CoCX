@@ -40,16 +40,12 @@ public function auroraCampMenu():void {
 	addButton(0, "Appearance", auroraAppearance).hint("Examine Aurora appearance.");
 	//talk
 	addButton(4, "Spar", auroraSparsWithPC).hint("Ask Aurora for a mock battle.")
-		.disableIf(flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora", "You can't fight against her as long she's in your team.")
+		.disableIf((flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora" || flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora"), "You can't fight against her as long she's in your team.")
 		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
-	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to join you in adventures outside camp.");
-		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to stay in camp.");
-		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Aurora about accompaning you.");
-	}
+	if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", auroraHenchmanOption);
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
-		if (camp.FisheryWorkersCount() < camp.FisheryMaxWorkersCount() && flags[kFLAGS.PLAYER_COMPANION_1] != "Aurora") addButton(6, "Fishery Work", sendToFishery);
+		if (camp.FisheryWorkersCount() < camp.FisheryMaxWorkersCount() && flags[kFLAGS.PLAYER_COMPANION_1] != "Aurora" && flags[kFLAGS.PLAYER_COMPANION_2] != "Aurora") addButton(6, "Fishery Work", sendToFishery);
 		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] == "Aurora" || flags[kFLAGS.FOLLOWER_AT_FISHERY_2] == "Aurora" || flags[kFLAGS.FOLLOWER_AT_FISHERY_3] == "Aurora") addButton(6, "Stop Work", backFromFishery);
 	}
 	else addButtonDisabled(6, "???", "You need to have functional fishery first.");
@@ -119,8 +115,35 @@ public function AuroraLostSparring():void {
 
 public function auroraHenchmanOption():void
 {
-	clearOutput();
+	menu();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora" || flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") addButtonDisabled(0, "Team (1)", "You already have Aurora accompany you.");
+		else addButton(0, "Team (1)", auroraHenchmanOption2, 1).hint("Ask Aurora to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") addButton(5, "Team (1)", auroraHenchmanOption2, 21).hint("Ask Aurora to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Aurora about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora" || flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") addButtonDisabled(1, "Team (2)", "You already have Aurora accompany you.");
+			else addButton(1, "Team (2)", auroraHenchmanOption2, 2).hint("Ask Aurora to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") addButton(6, "Team (2)", auroraHenchmanOption2, 22).hint("Ask Aurora to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Aurora about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", auroraCampMenu);
+}
+public function auroraHenchmanOption2(slot:Number = 1):void
+{
+	clearOutput();
+	if (slot < 21) {
 		outputText("\"<i>As you command [master].</i>\"\n\n");
 		outputText("Aurora is now following you around.\n\n");
 		var strAurora:Number = 10;
@@ -179,12 +202,14 @@ public function auroraHenchmanOption():void
 		touAurora = Math.round(touAurora);
 		meleeAtkAurora += (1 + (int)(meleeAtkAurora / 5)) * player.newGamePlusMod();
 		player.createStatusEffect(StatusEffects.CombatFollowerAurora, strAurora, touAurora, meleeAtkAurora, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Aurora";
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Aurora";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Aurora";
 	}
 	else {
 		outputText("Aurora is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerAurora);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(auroraCampMenu);
 	cheatTime(1/12);

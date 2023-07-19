@@ -1021,7 +1021,7 @@ public function soularena():void {
 			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");
 			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
 			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
-			//addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
 			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
 			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
 			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
@@ -1054,7 +1054,10 @@ public function soularena():void {
 	}
 	public function intermediateleadershipfight1():void {
 		clearOutput();
-		outputText("Minotaur Champion with his maid incoming...\n\n");
+		outputText("As you enter the arena the announcer voice booms in and the crowd cheers you up. They get to see the hero who defeated the previous trial make a come back and thats clearly not an everyday spectacle.\n\n");
+		outputText("\"<i>Greeting people of the river town, welcome to the arena. Today our favourite champion faces off against team battles, you know what this means!</i>\"\n\n");
+		outputText("The crowd suddenly starts calling out as a pair of large figures easily 8 feet tall steps out from the opposite archway. It's a minotaur and its lacta bovine wife. ");
+		outputText("A single minotaur is normally much trouble but partnered up with a lacta bovine there's no telling what shenanigan could happen! The bull walks toward you confident in his might he won't let you simply trample his pride before his wife.\n\n");
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 		startCombat(new MinotaurKing());
@@ -1063,13 +1066,18 @@ public function soularena():void {
 	public function intermediateleadershipfight2():void {
 		clearOutput();
 		soularenafightsbetween();
-		outputText("\n\nAngels incoming...");
-        startCombat(new AngelLR());
+		outputText("\n\nAs the minotaur couple falls down utterly defeated the announcer claims. \"<i>Well seeing as the challenger defeated the cows we have a special surprise for you today. Angels do not typically associate with us folks as they are too busy waging a bloody war against the demon and scouring corruption from the land ");
+		outputText("but through many deals and persuasion we managed to secure the collaboration of these two. I present to you Gabriel and Uriel the angel twins! Do not be deceived by their beauty noor their innocent look they are definitely out for blood!</i>\"\n\n");
+		outputText("The two angels calmly hover into the battlefield flanked by two pairs of toothed winged orbs. Their demeanour is almost void of expression as they fixate you and emotionlessly declare at the same time.\n\n");
+        outputText("\"<i>Do not make this complicated for us mortal… simply fall.</i>\"\n\n");
+		startCombat(new AngelLR());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	}
 	public function intermediateleadershippostfight():void {
 		clearOutput();
-		outputText("Working together with another person has taught you how to fight in a group. <b>Gained Perk: Intermediate Leadership</b>\n\n");
+		outputText("The twins stare at you in complete confusion as too weak to continue fighting their wings fails them causing them to fall to the ground. Their angeloid constructs are too damaged to even grant them support.\n\n");
+		outputText("\"<i>Woa look like we got a winner here congratulation [name]!</i>\"\n\n");
+		outputText("Successfully working together with another person has taught you how to better fight in a party. <b>Gained Perk: Intermediate Leadership</b>\n\n");
 		player.createPerk(PerkLib.IntermediateLeadership, 0, 0, 0, 0);
         cleanupAfterCombat();
 	}
@@ -1077,68 +1085,55 @@ public function soularena():void {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.MinoKing,0,0,0,0);
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
-			outputText("You tell Neisa you need her to handle Excellia so you can fight the Minotaur King alone.\n\n");
-			outputText("Neisa nods, \"<i>A sound stratagem, leave it to me!</i>\"\n\n");
-			outputText("Neisa raises her shield before ramming into Excellia. The stun knocks Excellia off her feet before she rises, ready to fight her new foe.\n\n");
-			outputText("Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Neisa you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Neisa nods, \"<i>A great stratagem, leave it to me!</i>\" She raises her shield before charging at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", repeatedly bashing the angel with her shield to keep them out of the fight.\n\n");
+			if (silly()) outputText("She speaks through her exertion, \"<i>Stop resisting! I said stop resisting! You angels think you’re so high and mighty, just above the law don’t you?!</i>\"\n\n");
+			else outputText("She speaks through her exertion, \"<i>I need you to stay down!</i>\"\n\n");
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
-			outputText("You tell Etna you need her to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
-			outputText("Etna smirks, \"<i>Let’s see if her face will enjoy my tail.</i>\"\n\n");
-			outputText("She wastes no time flying into the air before dive-bombing into Excellia, doing her best to wrap her within her tail, and envenom the cow girl.\n\n");
-			outputText("Excellia fights back, evidently stronger than she appears.\n\n");
-			outputText("\"<i>You won’t take me that easily!</i>\" Excellia shouts.\n\n");
-			outputText("Etna raises her claws, \"<i>Just give in, it’ll be so much easier for us.</i>\"\n\n");
-			outputText("Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Etna you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Etna smirks, \"<i>Hmm, how long can an angel last against my tail? Time to find out!</i>\"\n\n");
+			outputText("Wasting no time, The manticore leaps with a hungry lunge, diving at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" as she quickly wraps her tail around them to keep them out of the fight.\n\n");
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
-			outputText("You tell Aurora you need her to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
-			outputText("Aurora nods before raising her wings before swooping down onto Excellia, pinning her beneath her stone frame. Excellia struggles and manages to throw Aurora off of her.\n\n");
-			outputText("\"<i>You’re not going to take me that easily.</i>\"\n\n");
-			outputText("Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Aurora you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Aurora nods, raising her wings before swooping down onto "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", pinning them beneath her stone frame, keeping them out of the fight.\n\n");
+			outputText("\"<i>Prevention is the best method to stop danger, now, let’s put a halt to this nuisance.</i>\"\n\n");
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
-			outputText("You tell Alvina you need her to handle Excellia so you can focus your assault on the Minotaur King.\n\n");
-			outputText("Alvina rolls her eyes, \"<i>Fine, I’ll just keep her restrained for now.</i>\"\n\n");
-			outputText("She sets down her scythe before drawing somatic symbols with a single finger. Excellia is forcibly risen, hoisted further into the air before vanishing in an instant.\n\n");
-			outputText("\"<i>That’ll keep her contained, I’ll just keep this focused so I don’t kill her… yet…</i>\"\n\n");
-			outputText("Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Alvina you need her to handle one of the angels before you.\n\n");
+			outputText("Alvina rolls her eyes, \"<i>Oh, why, of course… Leave me to do the dirty work.</i>\"\n\n");
+			outputText("She sets down her scythe before drawing somatic symbols with a single finger. "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" is imprisoned in shadowy chains as they’re thrust into the ground.\n\n");
+			outputText("A faint grin curls up her face, \"<i>It’s so easy to keep them locked down…</i>\"\n\n");
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
-			outputText("You tell Mizti and her daughters you need them to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
-			outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that slut!</i>\"\n\n");
-			outputText("Furxia, Lidea, Mizti, and Roxy rush Excellia, flanking her from every direction.\n\n");
-			outputText("Excellia braces herself, trying to fight back against the determined goblin horde.\n\n");
-			outputText("Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Mitzi and her daughters that you need them to keep the suspended angel from recovering!\n\n");
+			outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that bitch!</i>\"\n\n");
+			outputText("Furxia, Lidea, Mitzi and Roxy rush "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", trapping them within their onslaught as they try to keep the angel pinned and out of the fight.\n\n");
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
-			outputText("You tell Excellia you need her to take care of her past self.\n\n");
-			if (EngineCore.silly()) {
-				outputText("Excellia frowns, \"<i>You really wanted to cheat and see what happens when you use me against myself? How pathetic. Fine, I’ll do it. Now go share this screenshot with everyone so you can gain clout on the internet.</i>\"\n\n");
-				outputText("Excellia saunters up to herself. Because this scene isn’t canon in the slightest, the past Excellia is confused and is promptly vaporized due to a coding error or something.\n\n");
-				outputText("<b>*poof*</b>\n\n");
-			}
-			else {
-				outputText("Excellia rolls her eyes, \"<i>Next time you shouldn’t cheat just to see what happens.</i>\"\n\n");
-				outputText("Excellia rushes in, using the weight of her body to smash into herself.\n\n");
-			}
-			outputText("Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Excellia you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Excellia rolls her shoulders briefly, \"<i>I can handle that easily.</i>\" Without further hesitation, she rushes in, using the weight of her body to smash into "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" and keep them out of the fight.\n\n");
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
-			outputText("You ask Amily if she can take care of Excellia so you can focus on fighting the Minotaur King alone.\n\n");
-			outputText("Amily nods before coating her daggers in some poison, \"<i>I got this, you can count on me.</i>\"\n\n");
-			outputText("She rushes through, evading the Minotaur King before throwing a knife at Excellia. Excellia stumbles back as Amily wastes no time recovering her knife while keeping up the pressure.\n\n");
-			outputText("\"<i>You bitch!</i>\" Excellia shouts, trying to brush off her wound before reading herself to fight back.\n\n");
-			outputText("Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Amily you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Amily nods before coating a dagger in some poison, \"<i>A little more paralytic poison should do the trick…</i>\"\n\n");
+			outputText("Amily quickly rushes to "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" before driving her dagger into them to keep them out of the fight. \"<i>Now I just need to make sure they don’t get up… Let’s hope I have enough to last.</i>\"\n\n");
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
-			outputText("You tell Zenji you need him to hold back Excellia so you can take care of the Minotaur King.\n\n");
-			outputText("Zenji nods, \"<i>Leave it ta me, champion!</i>\"\n\n");
-			outputText("He readies his spear before pouncing on Excellia, keeping her pinned beneath his weight.\n\n");
-			outputText("\"<i>Stay down!</i>\" he shouts.\n\n");
-			outputText("Excellia struggles before throwing him off, \"<i>Why don’t you make me?!</i>\"\n\n");
-			outputText("Zenji chuckles, \"<i>Haha, I will den.</i>\"\n\n");
-			outputText("You redirect your attention back to your fight now that they’re occupied. Now it’s just you and the Minotaur King.\n\n");
+			outputText("You tell Zenji you need him to keep the suspended angel from recovering!\n\n");
+			outputText("Zenji nods, \"<i>Leave it to me, champion!</i>\"\n\n");
+			outputText("He readies his spear before pouncing on "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", smacking them with the blunt side of his spear to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") {
+			outputText("You tell Kiha you need her to keep the suspended angel from recovering!\n\n");
+			outputText("She scoffs teasingly, \"<i>Oh, an idiot like you can’t manage against multiple foes? Yeah, don’t worry, I’ll totally take care of it.</i>\" Axe in hand, Kiha charges at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", bashing the angel with the blunt side of her axe to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") {
+			outputText("You notice the angels eyeing your Drider giantess, disgust all over their expressions. In response, you can <i>feel</i> her aura thickening, her eyes narrowing.\n\n");
+			outputText("\"<i>What?!</i>\" She demands, the hairs on her legs standing straight up. \"<i>WHAT?!</i>\"\n\n");
+			outputText("You point at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", telling your Amazoness that you need her to keep him down, so you can focus on the other.\n\n");
+			outputText("\"<i>Oh…I am all OVER that.</i>\" Tyrantia lets out a guttural roar, shooting a glob of her “webbing” at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+". The angel dodges, but her black and pink aura flares, and she rushes in, black aura hiding the angel’s light from your view.\n\n");
 		}
 		SceneLib.combat.enemyAIImpl();
         }

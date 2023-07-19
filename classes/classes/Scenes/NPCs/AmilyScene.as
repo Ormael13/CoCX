@@ -2560,11 +2560,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				addButton(2, "Make Love", fuckTheMouseBitch).disableIf(player.lust < 33, "Not aroused enough.");
 				addButton(3, "Give Present", giveAmilyAPresent);
 				addButton(4, (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? "Defur" : "Refuzz"), (flags[kFLAGS.AMILY_NOT_FURRY] == 0 ? amilyDefurryOfferAtCamp: refuzzAmily));
-				if (player.hasPerk(PerkLib.BasicLeadership)) {
-					if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", amilyHenchmanOption).hint("Ask Amily to join you in adventures outside camp.");
-					else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") addButton(5, "Team", amilyHenchmanOption).hint("Ask Amily to stay in camp.");
-					else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Amily about accompaning you.");
-				}
+				if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", amilyHenchmanOption);
 				else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 				addButton(6, "Lay Eggs", layEggsInAmily)
 					.hint("Unload your eggs into Amily's ass.")
@@ -2604,11 +2600,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if (!pregnancy.isPregnant && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1)
 				{
 					addButton(5, "Farm Work", sendCorruptCuntToFarm).hint("Send Amily to the farm for work.");
-					if (player.hasPerk(PerkLib.BasicLeadership)) {
-						if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(10, "Team", amilyHenchmanOption).hint("Ask Amily to join you in adventures outside camp.");
-						else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") addButton(10, "Team", amilyHenchmanOption).hint("Ask Amily to stay in camp.");
-						else addButtonDisabled(10, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Amily about accompaning you.");
-					}
+					if (player.hasPerk(PerkLib.BasicLeadership)) addButton(10, "Team", amilyHenchmanOption);
 				}
 
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 1)
@@ -7098,8 +7090,35 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		public function amilyHenchmanOption():void {
-			clearOutput();
+			menu();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily" || flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") addButtonDisabled(0, "Team (1)", "You already have Amily accompany you.");
+				else addButton(0, "Team (1)", amilyHenchmanOption2, 1).hint("Ask Amily to join you in adventures outside camp.");
+			}
+			else {
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") addButton(5, "Team (1)", amilyHenchmanOption2, 21).hint("Ask Amily to stay in camp.");
+				else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Amily about accompaning you as first party member.");
+			}
+			if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+					if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily" || flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") addButtonDisabled(1, "Team (2)", "You already have Amily accompany you.");
+					else addButton(1, "Team (2)", amilyHenchmanOption2, 2).hint("Ask Amily to join you in adventures outside camp.");
+				}
+				else {
+					if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") addButton(6, "Team (2)", amilyHenchmanOption2, 22).hint("Ask Amily to stay in camp.");
+					else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Amily about accompaning you as second party member.");
+				}
+			}
+			else {
+				addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+				addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+			}
+			addButton(14, "Back", amilyMenu, false);
+			
+		}
+		public function amilyHenchmanOption2(slot:Number = 1):void {
+			clearOutput();
+			if (slot < 21) {
 				outputText("Amily nods her head, \"<i>Sure, I have my darts ready, I can lend a hand</i>\"\n\n");
 				outputText("Amily is now following you around.\n\n");
 				var strAmily:Number = 40;
@@ -7113,13 +7132,15 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				libAmily *= (1 + (0.2 * player.newGamePlusMod()));
 				libAmily = Math.round(libAmily);
 				player.createStatusEffect(StatusEffects.CombatFollowerAmily, strAmily, libAmily, 0, 0);
-				flags[kFLAGS.PLAYER_COMPANION_1] = "Amily";
+				if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Amily";
+				if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Amily";
 			}
 			else {
 				outputText("Amily nods her head, \"<i>I’ll be here if you need anything else.</i>\"\n\n");
 				outputText("Amily is no longer following you around.\n\n");
 				player.removeStatusEffect(StatusEffects.CombatFollowerAmily);
-				flags[kFLAGS.PLAYER_COMPANION_1] = "";
+				if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			}
 			doNext(amilyMenu, false);
 			cheatTime(1/12);

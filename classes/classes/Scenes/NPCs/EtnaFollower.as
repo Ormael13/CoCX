@@ -660,13 +660,9 @@ public function etnaCampMenu():void
 	if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) addButtonDisabled(3, "Req. Venom", "You already asked her for a vial today.");
 	else addButton(3, "Req. Venom", etnaDailyVenomVial).hint("Ask Etna for a vial of her venom.");
 	addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.")
-		.disableIf(flags[kFLAGS.PLAYER_COMPANION_1] == "Etna", "You can't fight against her as long she's in your team.")
+		.disableIf((flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" || flags[kFLAGS.PLAYER_COMPANION_2] == "Etna"), "You can't fight against her as long she's in your team.")
 		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
-	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
-		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
-		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-	}
+	if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", etnaHenchmanOption);
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	if (flags[kFLAGS.ETNA_FOLLOWER] < 3) addButton(6, "Marriage", etnaMarriage)
 		.disableIf(player.isGenderless(), "Come on, you're genderless!")
@@ -840,8 +836,36 @@ public function etnaMarriageYes4():void
 
 public function etnaHenchmanOption():void
 {
-	clearOutput();
+	menu();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna" || flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") addButtonDisabled(0, "Team (1)", "You already have Etna accompany you.");
+		else addButton(0, "Team (1)", etnaHenchmanOption2, 1).hint("Ask Etna to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team (1)", etnaHenchmanOption2, 21).hint("Ask Etna to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Etna about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" || flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") addButtonDisabled(1, "Team (2)", "You already have Etna accompany you.");
+			else addButton(1, "Team (2)", etnaHenchmanOption2, 2).hint("Ask Etna to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") addButton(6, "Team (2)", etnaHenchmanOption2, 22).hint("Ask Etna to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Etna about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", etnaCampMenu);
+	
+}
+public function etnaHenchmanOption2(slot:Number = 1):void
+{
+	clearOutput();
+	if (slot < 21) {
 		outputText("\"<i>Nyaaaaa we hunting together [name]? This is going to be enjoyable!</i>\"\n\n");
 		outputText("Etna is now following you around.\n\n");
 		var strEtna:Number = 100;
@@ -855,12 +879,14 @@ public function etnaHenchmanOption():void
 		libEtna *= (1 + (0.2 * player.newGamePlusMod()));
 		libEtna = Math.round(libEtna);
 		player.createStatusEffect(StatusEffects.CombatFollowerEtna, strEtna, libEtna, 0, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Etna";
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Etna";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Etna";
 	}
 	else {
 		outputText("Etna is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerEtna);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(etnaCampMenu);
 	cheatTime(1/12);

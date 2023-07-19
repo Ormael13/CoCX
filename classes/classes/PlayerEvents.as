@@ -1101,6 +1101,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage > 2 && BelisaFollower.BelisaFollowerStage < 6) {
 					BelisaFollower.BelisaFollowerStage += 1;
 				}
+				//Tyrantia affection gains if she's in party
+				if ((flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" || flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia" || flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") && TyrantiaFollower.TyrantiaAffectionMeter < 100) SceneLib.tyrantia.tyraniaAffection(2);
 				//DriderTown Construction
 				if (BelisaFollower.BelisaInCamp && LilyFollower.LilyFollowerState && TyrantiaFollower.isLover()) {
 					DriderTown.DriderTownComplete = true;

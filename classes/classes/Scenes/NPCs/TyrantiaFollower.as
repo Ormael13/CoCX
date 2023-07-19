@@ -1238,11 +1238,13 @@ public function TyrantiaAtCamp():void {
 	addButton(0, "Looks", TyrantiaAppearance);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
 	addButton(2, "Spar", TyrantiaSpar)
+		.disableIf((flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" || flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia"), "You can't fight against her as long she's in your team.")
 		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	if (TyrantiaTrainingSessions >= 20) addButtonDisabled(3, "Training", "You finished all training session with her.");
 	else addButton(3, "Training", TyrantiaTraining);
 	addButton(4, "Sex", TyrantiaSexMenu);
-	//5 - JoinMe addButton(2, "JoinMe", TyrantiaFollowerOptions);
+	if (player.hasPerk(PerkLib.BasicLeadership) && TyrantiaAffectionMeter >= 60) addButton(5, "JoinMe", TyrantiaHenchmanOption);
+	else addButtonDisabled(5, "JoinMe", "You need to have at least Basic Leadership and 60% affection to form a team.");
 	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenuCorrupt);
 	if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 	addButton(14, "Leave", camp.campLoversMenu);
@@ -1260,6 +1262,66 @@ public function TyrantiaAppearance():void {
 	if (DriderTown.TyrantiaPregnancy > 1) outputText("She holds her egg-swollen belly, occasionally looking down at it and smiling. Looking at you, Tyrantia waves bashfully, the expression looking out of place on the giantess.\n\n");
 	else outputText("On the front of her lower body is a moist twat barely covered by a skimpy silk set of embroidered panties, dripping with moisture, and as you look, Tyrantia smiles, flexing her abdomen and arching her back, giving you a little show as she slides the panties to one side.\n\n");
 	doNext(TyrantiaAtCamp);
+}
+
+public function TyrantiaHenchmanOption():void {
+	menu();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia" || flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") addButtonDisabled(0, "JoinMe (1)", "You already have Tyrantia accompany you.");
+		else addButton(0, "JoinMe (1)", TyrantiaHenchmanOption2, 1).hint("Ask Tyrantia to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") addButton(5, "JoinMe (1)", TyrantiaHenchmanOption2, 21).hint("Ask Tyrantia to stay in camp.");
+		else addButtonDisabled(5, "JoinMe (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Tyrantia about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" || flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") addButtonDisabled(1, "JoinMe (2)", "You already have Tyrantia accompany you.");
+			else addButton(1, "JoinMe (2)", TyrantiaHenchmanOption2, 2).hint("Ask Tyrantia to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia") addButton(6, "JoinMe (2)", TyrantiaHenchmanOption2, 22).hint("Ask Tyrantia to stay in camp.");
+			else addButtonDisabled(6, "JoinMe (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Tyrantia about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "JoinMe (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "JoinMe (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", TyrantiaAtCamp);
+	
+}
+public function TyrantiaHenchmanOption2(slot:Number = 1):void {
+	clearOutput();
+	if (slot < 21) {
+		outputText("You ask Tyrantia if she’d be willing to follow you on your adventures. She looks back at her hutch, then back to you. \"<i>And miss all this?</i>\" She grins, her five eyes sparkling. \"<i>[name]...After all you’ve done for me? I’d…</i>\" She smiles, wrapping you in a big fuzzy hug. \"<i>I’d die for you.</i>\"\n\n");
+		if (!player.isDrider() && !player.isTaur() && !player.isInNonGoblinMech() && !player.isInGoblinMech()) outputText("She kisses you on the cheek, picking you up and putting you on her Drider back. \"<i>Just tell me where to go, my sweet [race], and I’ll make sure we get there safely.</i>\"\n\n");
+		outputText("Tyrantia is now following you around.\n\n");
+		var strTyrantia:Number = 295;
+		var intTyrantia:Number = 150;
+		var meleeAtkTyrantia:Number = 150;
+		if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) {
+			strTyrantia += 20 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1);
+			intTyrantia += 10 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1);
+			meleeAtkTyrantia += 10 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1);
+		}
+		strTyrantia *= (1 + (0.2 * player.newGamePlusMod()));
+		strTyrantia = Math.round(strTyrantia);
+		intTyrantia *= (1 + (0.2 * player.newGamePlusMod()));
+		intTyrantia = Math.round(intTyrantia);
+		meleeAtkTyrantia += (1 + (int)(meleeAtkTyrantia / 5)) * player.newGamePlusMod();
+		player.createStatusEffect(StatusEffects.CombatFollowerTyrantia, strTyrantia, meleeAtkTyrantia, intTyrantia, 0);
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Tyrantia";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Tyrantia";
+	}
+	else {
+		outputText("You ask your Drider ally to stay at camp for now. She gives you a surprised look, but nods. \"<i>Alright.</i>\"\n\n");
+		player.removeStatusEffect(StatusEffects.CombatFollowerTyrantia);
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
+	}
+	doNext(TyrantiaHenchmanOption);
+	cheatTime(1/12);
 }
 
 public function unlockingCorruptLegendariesOption():void {

@@ -23,7 +23,7 @@ package classes.Scenes.Monsters
 		}
 		private function angelSwitchWithOtherOne():void {
 			clearOutput();
-			outputText("Angel with it lil helpers stops their actions defeated.");
+			outputText(this.short + " with it lil helpers stops their actions defeated.");
 			outputText("\n\n\"<i>Tricky one opponent. Need assistance.</i>\"");
 			outputText("\n\nThe angel starts then to shine with pure white light so intense you must temporaly avert your gaze. When you look again at spot it was you could see other angel with it helpers all ready to next round of the fight while the defeated one is recovering at the arena side.");
 			touStat.core.value *= 0.25;
@@ -36,11 +36,21 @@ package classes.Scenes.Monsters
 			bonusSoulforce -= 400;
 			HP = maxHP();
 			removeStatusEffect(StatusEffects.TrueFormAngel);
+			if (this.short == "Gabriel") this.short = "Uriel";
+			else this.short = "Gabriel";
+			
+			if (hasStatusEffect(StatusEffects.Stunned)) removeStatusEffect(StatusEffects.Stunned);
+			if (hasStatusEffect(StatusEffects.StunnedTornado)) removeStatusEffect(StatusEffects.StunnedTornado);
+			if (hasStatusEffect(StatusEffects.InkBlind)) removeStatusEffect(StatusEffects.InkBlind);
+			if (hasStatusEffect(StatusEffects.Fascinated)) removeStatusEffect(StatusEffects.Fascinated);
+			if (hasStatusEffect(StatusEffects.FrozenSolid)) removeStatusEffect(StatusEffects.InkBlind);
+			if (hasStatusEffect(StatusEffects.Sleep)) removeStatusEffect(StatusEffects.InkBlind);
+			if (hasStatusEffect(StatusEffects.Polymorphed)) removeStatusEffect(StatusEffects.Polymorphed);
 			SceneLib.combat.combatRoundOver();
 		}
 		
 		private function AngelEnergyRays():void {
-			outputText("Angel lil helpers fixates at you with all of their eyes unleashing a barrage of rays at you! ");
+			outputText((player.hasStatusEffect(StatusEffects.SoulArena)?""+this.short+"":"Angel")+" lil helpers fixates at you with all of their eyes unleashing a barrage of rays at you! ");
 			var omni:Number = 4;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) omni *= 3;
 			while (omni-->0) AngelEnergyRaysD();
@@ -54,7 +64,7 @@ package classes.Scenes.Monsters
 		}
 		
 		private function AngelBaseAttack():void {
-			outputText("Angel gather energy between his palms and then blasts it toward you. ");
+			outputText((player.hasStatusEffect(StatusEffects.SoulArena)?""+this.short+"":"Angel")+" gather energy between his palms and then blasts it toward you. ");
 			var damage:Number = eBaseWisdomDamage();
 			damage += eBaseIntelligenceDamage() * 0.2;
 			damage = Math.round(damage);
@@ -152,7 +162,7 @@ package classes.Scenes.Monsters
 		
 		override public function get long():String
 		{
-			var str:String = "You're currently fighting low-rank angel"+(player.hasStatusEffect(StatusEffects.RiverDungeonA)?" of mist":"")+". It's looks like example of perfect human with large pair of wings and around it hoover pair of winged eyeballs with small mouth full of jagged teeth and one eyes having two";
+			var str:String = "You're currently fighting"+(player.hasStatusEffect(StatusEffects.SoulArena)?" "+this.short+" a":"")+" low-rank angel"+(player.hasStatusEffect(StatusEffects.RiverDungeonA)?" of mist":"")+". It's looks like example of perfect human with large pair of wings and around it hoover pair of winged eyeballs with small mouth full of jagged teeth and one eyes having two";
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " purple irises each. Around each of their bodies are two circles each with pair of eyes looking the same as the main eye and above angel head hoover halo.";
 			else str += " irises each, one red and the other blue. Angel eyes also mirrors this with right one been red and left blue one.";
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) str += " All three of them have their bodies covered in nearly not visible purple lines that glows ocassionaly.";
@@ -191,7 +201,8 @@ package classes.Scenes.Monsters
 				this.createPerk(PerkLib.DieHardHP, 28, 0, 0, 0);
 			}
 			else if (player.hasStatusEffect(StatusEffects.SoulArena)) {
-				this.short = "low-rank angel";
+				if (rand(2) == 0) this.short = "Gabriel";
+				else this.short = "Uriel";
 				initStrTouSpeInte(6, 75, 35, 15);
 				initWisLibSensCor(100, 3, 25, 0);
 				this.drop = new ChainedDrop()

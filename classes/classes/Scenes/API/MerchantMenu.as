@@ -156,6 +156,7 @@ public class MerchantMenu extends BaseContent {
 					added = inventory.tryAddItemToPlayer(mi._item) > 0;
 				}
 				if (!added) {
+					redraw = true;
 					clearOutput();
 					inventory.takeItem(mi._item, addOneItem);
 					return;

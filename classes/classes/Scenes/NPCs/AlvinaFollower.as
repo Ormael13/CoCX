@@ -801,11 +801,7 @@ public function alvinaMainCampMenu():void
 	}
 	else addButtonDisabled(2, "???", "You need to finish Advanced Study to unlock this option.");
 	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) {
-		if (player.hasPerk(PerkLib.BasicLeadership)) {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to join you in adventures outside camp.");
-			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to stay in camp.");
-			else addButtonDisabled(5, "Team", "You already have other henchmen accompanying you. Ask him/her to stay at camp before you talk with Alvina about accompanying you.");
-		}
+		if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", alvinaHenchmanOption);
 		else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	}
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) addButtonDisabled(10, "Study", "You have already completed basic Study.");
@@ -1305,10 +1301,37 @@ public function alvinaAfterSex():void
 	doNext(camp.returnToCampUseOneHour);
 }
 
-public function alvinaHenchmanOption():void
+public function alvinaHenchmanOption():void {
+	menu();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina" || flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") addButtonDisabled(0, "Team (1)", "You already have Alvina accompany you.");
+		else addButton(0, "Team (1)", alvinaHenchmanOption2, 1).hint("Ask Alvina to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(5, "Team (1)", alvinaHenchmanOption2, 21).hint("Ask Alvina to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Alvina about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina" || flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") addButtonDisabled(1, "Team (2)", "You already have Alvina accompany you.");
+			else addButton(1, "Team (2)", alvinaHenchmanOption2, 2).hint("Ask Alvina to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") addButton(6, "Team (2)", alvinaHenchmanOption2, 22).hint("Ask Alvina to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Alvina about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", alvinaMainCampMenu);
+	
+}
+public function alvinaHenchmanOption2(slot:Number = 1):void
 {
 	clearOutput();
-	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+	if (slot < 21) {
 		outputText("\"<i>Such sloth, you truly do ask me to fight for you? Well I might just humor you and practice my more ‘experimental’ magic on your enemies. New spells requires experiments and I am always eager for new ‘living’ test subjects.</i>\"\n\n");
 		outputText("Alvina is now following you around.\n\n");
 		var strAlvina:Number = 375;
@@ -1321,12 +1344,14 @@ public function alvinaHenchmanOption():void
 		libAlvina *= (1 + (0.2 * player.newGamePlusMod()));
 		libAlvina = Math.round(libAlvina);
 		player.createStatusEffect(StatusEffects.CombatFollowerAlvina, strAlvina, inteAlvina, libAlvina, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Alvina";
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Alvina";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Alvina";
 	}
 	else {
 		outputText("Alvina is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerAlvina);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(alvinaMainCampMenu);
 	cheatTime(1/12);
