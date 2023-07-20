@@ -74,7 +74,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Intermediate Leadership. Gained by finishing two 2 on 2 fights in challange section of soul arena. Effects: Allow to form 3 people party.\n");
 			outputText("-Motivation (Ex) now req. additionaly Intermediate Leadership perk.\n");
 			outputText("-Tyrantia can be now asked to join pc as henchman (req. 60%+ affection) and each day she stay as henchman will rise her affection by 2%.\n");
-			outputText("-\n");
+			outputText("-\n");//Elemental Bond: Flesh / Urges perks fixed for appearing in common perks not under it specific job
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

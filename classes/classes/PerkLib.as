@@ -6008,6 +6008,7 @@ public class PerkLib
                     .requireLevel(6);
             ElementalBondFlesh.requireWis(50)
                     .requireLevel(6)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank1) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 1 or Dao of the Elements (layer 1 or higher) perks");
@@ -6071,6 +6072,7 @@ public class PerkLib
                     .requireLevel(12);
             ElementalBondUrges.requireWis(75)
                     .requireLevel(12)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank2) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 2 or Dao of the Elements (layer 1 or higher) perks");
