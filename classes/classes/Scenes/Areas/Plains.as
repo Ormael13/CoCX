@@ -43,6 +43,9 @@ use namespace CoC;
 			{
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
@@ -52,6 +55,9 @@ use namespace CoC;
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -65,6 +71,9 @@ use namespace CoC;
 				}
 			}, {
 				name: "electra",
+				label : "Electra",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
@@ -80,6 +89,8 @@ use namespace CoC;
 				}
 			}, {
 				name  : "werewolfFemale",
+				label : "Werewolf (F)",
+				kind : 'monster',
 				day : false,
 				call  : function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
@@ -88,6 +99,9 @@ use namespace CoC;
 				chance: 0.50
 			}, {
 				name: "sidonie",
+				label : "Sidonie",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
@@ -100,6 +114,9 @@ use namespace CoC;
 				}
 			}, {
 				name: "diana",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
@@ -111,6 +128,9 @@ use namespace CoC;
 				}
 			}, {
 				name: "dianaName",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
@@ -123,6 +143,9 @@ use namespace CoC;
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",
+				label : "Sheila",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				chance: Encounters.ALWAYS,
 				when  : function ():Boolean {
@@ -138,6 +161,9 @@ use namespace CoC;
 			}, {
 				//Add some holiday cheer
 				name: "candy_cane",
+				label : "Candy Cane",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isChristmas() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET];
 				},
@@ -147,6 +173,9 @@ use namespace CoC;
 				}
 			}, {
 				name: "polar_pete",
+				label : "Polar Pete",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isChristmas() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET];
 				},
@@ -157,6 +186,9 @@ use namespace CoC;
 			}, {
 				//Find Niamh
 				name: "niamh",
+				label : "Niamh",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1
@@ -164,6 +196,9 @@ use namespace CoC;
 				call: SceneLib.telAdre.niamh.niamhPostTelAdreMoveOut
 			}, {
 				name  : "owca",
+				label : "Owca",
+				kind  : 'event',
+				unique: true,
 				night : false,
 				chance: 0.3,
 				when  : function ():Boolean {
@@ -176,6 +211,9 @@ use namespace CoC;
 				}
 			}, {
 				name  : "helXizzy",
+				label : "Hel x Izzy",
+				kind  : 'event',
+				unique: true,
 				night : false,
 				chance: 0.2,
 				when  : function ():Boolean {
@@ -189,14 +227,20 @@ use namespace CoC;
 				call  : SceneLib.helScene.helXIzzy
 			}, {
 				name  : "ovielix",
+				label : "Items",
+				kind  : 'event',
 				call  : findOviElix,
 				chance: 0.5
 			}, {
 				name  : "kangaft",
+				label : "Items",
+				kind  : 'event',
 				call  : findKangaFruit,
 				chance: 0.5
 			}, {
 				name  : "gnoll",
+				label : "Gnoll",
+				kind : 'monster',
 				night : false,
 				chance: 0.7,
 				call  : function ():void {
@@ -205,6 +249,8 @@ use namespace CoC;
 				}
 			}, {
 				name  : "gnoll2",
+				label : "Gnoll",
+				kind : 'monster',
 				night : false,
 				chance: 0.7,
 				call  : function ():void {
@@ -213,17 +259,25 @@ use namespace CoC;
 				}
 			}, {
 				name: "bunny",
+				label : "Bunny",
+				kind : 'event',
 				night : false,
 				chance: 0.3,
 				call: bunnyGirl.bunnbunbunMeet
 			}, {
 				name: "usagi",
+				label : "Usagi",
+				kind : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean { return SceneLib.loppe.canEncounterUsagi() },
 				chance: 0.3,
 				call: SceneLib.loppe.encounterUsagi
 			}, {
 				name: "isabella",
+				label : "Isabella",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0
@@ -235,6 +289,9 @@ use namespace CoC;
 				}
 			}, {
 				name  : "helia",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				chance: function ():Number {
 					return flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] ? (0.75 * player.npcChanceToEncounter()) : (1.5 * player.npcChanceToEncounter());
@@ -248,12 +305,18 @@ use namespace CoC;
 				}
 			}, {
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				when: function():Boolean {
 					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
 				},
 				call: SceneLib.tedScene.introPostHiddenCave
 			}, {
 				name: "snippler",
+				label : "Gun Parts",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 0 && player.hasKeyItem("Snippler") < 0;
 				},
@@ -261,6 +324,8 @@ use namespace CoC;
 				call: partsofSnippler
 			},{
 				name: "satyr",
+				label : "Satyr",
+				kind : 'event',
 				night : false,
 				chance: 0.7,
 				call: function ():void {
@@ -269,6 +334,9 @@ use namespace CoC;
 				}
 			}, {
 				name: "sheila",
+				label : "Sheila",
+				kind  : 'event',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0

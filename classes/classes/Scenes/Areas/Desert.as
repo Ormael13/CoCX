@@ -44,6 +44,9 @@ use namespace CoC;
 			_desertEncounter = Encounters.group("desert",
 				{
 					name: "discoverinnerdesert",
+					label : "New Area",
+					kind  : 'event',
+					unique: true,
 					when: function ():Boolean {
 						return (player.level + combat.playerLevelAdjustment()) >= 10 && flags[kFLAGS.DISCOVERED_INNER_DESERT] == 0
 					},
@@ -51,19 +54,26 @@ use namespace CoC;
 					call: discoverInnerDesert
 				}, {
 					name: "walk",
-					call: walkingDesertStatBoost
+					call: walkingDesertStatBoost,
+					kind:'walk'
 				}, {
 					name: "naga",
+					label : "Naga",
+					kind  : 'monster',
 					when: fn.ifLevelMin(4),
 					chance: nagaChance,
 					call: nagaScene.nagaEncounter
 				}, {
 					name  : "sandtrap",
+					label : "Sand Trap",
+					kind  : 'monster',
 					chance: 0.5,
 					when  : fn.ifLevelMin(2),
 					call  : sandTrapScene.encounterASandTarp
 				}, {
 					name: "sandwitch",
+					label : "Sand Witch",
+					kind  : 'monster',
 					night : false,
 					when: function ():Boolean {
 						return player.level >= 3 && flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
@@ -71,6 +81,8 @@ use namespace CoC;
 					call: sandWitchScene.encounter
 				}, {
 					name: "cumwitch",
+					label : "Cum Witch",
+					kind  : 'monster',
 					night : false,
 					when: function ():Boolean {
 						return flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0;
@@ -78,11 +90,16 @@ use namespace CoC;
 					call: SceneLib.dungeons.desertcave.fightCumWitch
 				}, {
 					name  : "wanderer",
+					label : "Wanderer",
+					kind  : 'event',
 					night : false,
 					chance: 0.2,
 					call  : wanderer.wandererRouter
 				}, {
 					name: "sw_preg",
+					label : "Sand Witch (E)",
+					kind  : 'event',
+					unique: true,
 					night : false,
 					when: function ():Boolean {
 						return sandWitchScene.pregnancy.event == 2;
@@ -90,6 +107,9 @@ use namespace CoC;
 					call: sandWitchPregnancyEvent
 				}, {
 					name  : "ants",
+					label : "Ant Colony",
+					kind  : 'event',
+					unique: true,
 					night : false,
 					when  : function ():Boolean {
 						return player.level >= 9 && flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
@@ -98,6 +118,9 @@ use namespace CoC;
 					call  : antsScene.antColonyEncounter
 				}, {
 					name: "dungeon",
+					label : "Desert Cave",
+					kind  : 'event',
+					unique: true,
 					when: function ():Boolean {
 						return (player.level >= 4 || player.exploredDesert > 45)
 							   && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
@@ -105,12 +128,18 @@ use namespace CoC;
 					call: SceneLib.dungeons.desertcave.enterDungeon
 				}, {
 					name: "wstaff",
+					label : "W. Staff",
+					kind  : 'event',
+					unique: true,
 					when: function ():Boolean {
 						return flags[kFLAGS.FOUND_WIZARD_STAFF] == 0 && player.inte > 50;
 					},
 					call: wstaffEncounter
 				}, {
 					name: "desert eagle",
+					label : "Gun Parts",
+					kind  : 'event',
+					unique: true,
 					when: function ():Boolean {
 						return player.level >= 6 && player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Desert Eagle") < 0;
 					},
@@ -118,18 +147,25 @@ use namespace CoC;
 					call: partsofDesertEagle
 				}, {
 					name: "nails",
+					label : "Nails",
+					kind  : 'event',
+					unique: true,
 					when: function ():Boolean {
 						return player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemvX("Carpenter's Toolbox", 1) < 200;
 					},
 					call: nailsEncounter
 				}, {
 					name: "chest",
+					label : "Chest",
+					kind  : 'event',
+					unique: true,
 					when: function ():Boolean {
 						return player.hasKeyItem("Camp - Chest") < 0
 					},
 					call: chestEncounter
 				}, {
 					name  : "bigjunk",
+					kind  : 'event',
 					chance: function ():Boolean
 					{
 						var chance:Number = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;
@@ -139,22 +175,31 @@ use namespace CoC;
 					call  : SceneLib.exploration.bigJunkDesertScene
 				}, {
 					name  : "exgartuan",
+					label : "Fountain",
+					kind  : 'event',
+					unique: true,
 					chance: 0.25,
 					call  : SceneLib.exgartuan.fountainEncounter
 				}, {
 					name  : "mirage",
+					kind  : 'event',
 					night : false,
 					chance: 0.25,
 					when  : fn.ifLevelMin(2),
 					call  : mirageDesert
 				}, {
 					name  : "oasis",
+					label : "Oasis",
+					kind  : 'event',
 					night : false,
 					chance: 0.25,
 					when  : fn.ifLevelMin(2),
 					call  : oasis.oasisEncounter
 				}, {
 					name: "etna",
+					label : "Etna",
+					kind  : 'npc',
+					unique: true,
 					chance: desertChance,
 					when: function ():Boolean
 					{
@@ -164,17 +209,24 @@ use namespace CoC;
 				}, {
 					//Helia monogamy fucks
 					name  : "helcommon",
+					label : "Helia",
+					kind  : 'npc',
+					unique: true,
 					night : false,
 					call  : SceneLib.helScene.helSexualAmbush,
 					chance: desertChance,
 					when  : SceneLib.helScene.helSexualAmbushCondition
 				}, {
 					name: "mimic",
+					label : "Mimic",
+					kind : 'monster',
 					chance: 0.25,
 					when: fn.ifLevelMin(3),
 					call: curry(SceneLib.mimicScene.mimicTentacleStart, 1)
 				}, {
 					name  : "desertloot",
+					label : "Cake",
+					kind  : 'event',
 					chance: 0.3,
 					call  : findDesertLoot
 				}/*, {
@@ -188,14 +240,21 @@ use namespace CoC;
 			_innerdesertEncounter = Encounters.group("inner desert",
 				{
 					name: "gorgon",
+					label : "Gorgon",
+					kind  : 'monster',
 					when: fn.ifLevelMin(14),
 					call: gorgonScene.gorgonEncounter
 				}, {
 					name: "sandworm",
+					label : "Sandworm",
+					kind  : 'monster',
 					night: false,
 					call: sandWormScene.SandWormEncounter
 				}, {
 					name: "etna",
+					label : "Etna",
+					kind  : 'npc',
+					unique: true,
 					chance: desertChance,
 					when: function ():Boolean
 					{
@@ -205,12 +264,18 @@ use namespace CoC;
 				}, {
 					//Helia monogamy fucks
 					name  : "helcommon",
+					label : "Helia",
+					kind  : 'npc',
+					unique: true,
 					night : false,
 					call  : SceneLib.helScene.helSexualAmbush,
 					chance: desertChance,
 					when  : SceneLib.helScene.helSexualAmbushCondition
 				},{
 					name: "electra",
+					label : "Electra",
+					kind  : 'npc',
+					unique: true,
 					night : false,
 					when: function():Boolean {
 						return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
@@ -232,10 +297,15 @@ use namespace CoC;
 					call: partsofLactoBlasters
 				}, {*/
 					name: "ted",
+					label : "Dragon-Boy",
+					kind  : 'npc',
+					unique: true,
 					call: SceneLib.tedScene.introPostHiddenCave,
 					when: SceneLib.tedScene.canEncounterTed
 				}, {
 					name  : "desertloot",
+					label : "Cake",
+					kind  : 'event',
 					chance: 0.3,
 					call  : findDesertLoot
 				}/*, {

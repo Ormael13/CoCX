@@ -38,6 +38,9 @@ use namespace CoC;
 		private function init():void {
 			_lakeEncounter = Encounters.group("lake", {
 				name: "villagepath",
+				label : "Village",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] == 0
 				},
@@ -45,18 +48,26 @@ use namespace CoC;
 				call: SceneLib.amilyScene.discoverAmilyVillage
 			}, {
 				name: "boat",
+				label : "Boat",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.BoatDiscovery)
 				},
 				call: SceneLib.boat.discoverBoat
 			}, {
 				name: "farm",
+				label : "Farm",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.MetWhitney)  || player.statusEffectv1(StatusEffects.MetWhitney) <= 1
 				},
 				call: SceneLib.farm.farmExploreEncounter
 			}, {
 				name: "eggchoose",
+				label : "Eggs",
+				kind  : 'event',
 				when: function ():Boolean {
 					return player.isPregnant() && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)
 				},
@@ -64,6 +75,8 @@ use namespace CoC;
 				call: eggChooseFn
 			}, {
 				name: "dickdrag",
+				label : "Dragging",
+				kind  : 'event',
 				when: function ():Boolean {
 					return (10 + (player.longestCockLength() - player.tallness) / 24 * 10) > 0 &&
 							player.longestCockLength() >= player.tallness - 10 && player.totalCockThickness() >= 8
@@ -79,13 +92,18 @@ use namespace CoC;
 				call: walkAroundLake
 			}, {
 				name: "finditems",
+				label : "Items",
+				kind  : 'event',
 				call: findLakeLoot
 			}, {
 				name: "nothing",
+				label : "walk",
 				chance: 0.4,
 				call: findNothing
 			}, {
 				name: "holystuff",
+				label : "Holy Weapon",
+				kind  : 'event',
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && (
 							!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) ||
@@ -98,6 +116,8 @@ use namespace CoC;
 				call: findBlesedItemEncounterFn
 			}, {
 				name: "ponies",
+				label : "Ponies",
+				kind  : 'event',
 				when: function ():Boolean {
 					return player.isTaur() && Holidays.isAprilFools() && flags[kFLAGS.PONY_APRIL_FOOLS] == 0
 				},
@@ -107,6 +127,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "cultist",
+				label : "Fetish Cultist",
+				kind : 'monster',
 				when: function ():Boolean {
 					return player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0
 				},
@@ -115,6 +137,9 @@ use namespace CoC;
 				call: fetishCultist
 			}, {
 				name: "izma",
+				label : "Izma",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && player.exploredLake >= 10 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
 				},
@@ -122,6 +147,9 @@ use namespace CoC;
 				call: SceneLib.izmaScene.meetIzmaAtLake
 			}, {
 				name: "belisa",
+				label : "Belisa",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 2
 				},
@@ -129,6 +157,9 @@ use namespace CoC;
 				call: SceneLib.belisa.subsequentEncounters
 			}, {
 				name: "callu",
+				label : "Callu",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.CalluOff)
 				},
@@ -137,6 +168,9 @@ use namespace CoC;
 				call: calluScene.ottahGirl
 			}, {
 				name: "latexgirl",
+				label : "Latex Girl",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.GOO_TFED_MEAN] + flags[kFLAGS.GOO_TFED_NICE] > 0 && flags[kFLAGS.GOO_SLAVE_RECRUITED] == 0
 				},
@@ -144,6 +178,9 @@ use namespace CoC;
 				call: SceneLib.latexGirl.encounterLeftBehindGooSlave
 			}, {
 				name: "rathazul",
+				label : "Rathazul",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.CampRathazul)
 				},
@@ -152,6 +189,8 @@ use namespace CoC;
 				call: SceneLib.rathazul.encounterRathazul
 			}, {
 				name: "slimeooze",
+				label : "Green Slime",
+				kind : 'monster',
 				when: function ():Boolean {
 					return player.level >= 3
 				},
@@ -161,12 +200,18 @@ use namespace CoC;
 			}, [0.1]), {
 				//Helia monogamy fucks
 				name: "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
 				chance: lakeChance,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -177,6 +222,9 @@ use namespace CoC;
 				call: SceneLib.etnaScene.repeatYandereEnc
 			},  {
 				name: "diana",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
@@ -185,6 +233,9 @@ use namespace CoC;
 				call: SceneLib.dianaScene.repeatEnc
 			}, {
 				name: "dianaName",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;

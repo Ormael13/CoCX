@@ -63,7 +63,7 @@ public class Changelog extends BaseContent
 			outputText("-New usable item: Red Gel. Costing 50 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies.\n");// .
 			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
-			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD.\n");
+			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD. Tooltip before finding them in places been updated to avoid confusion. Owca pre discovery button gained tip on time when to explore area.\n");
 			outputText("-Centipedes and Oomukade races are just race of Oomukade with Centipede been it lowest tier. Tracheal system mutation would be accessable by them too.\n");
 			outputText("-100+ new item icons, Consumable items are tagged with 'tf', Setting to toggle icons (aimozg)\n");
 			outputText("-Enemies/bosses that appear in River Dungeon lvl adjustments: Hellhound 10 > 6, Aether Golem 11 > 9, Air / Earth / Fire / Water Elementals 15/18/21 > 14/16/18, Sylph / Golem / Ifrit / Undine 24 > 21, Quatro Elemental (starting lvl) 21 > 18, Darkness / Ice / Lightning Elementals 29/32/35 > 28/30/32, Yeti 37 > 30, Raiju 40 > 34, Unique Darkness Elemental 38 > 37, Vegot 43 > 40\n");
@@ -74,26 +74,26 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Intermediate Leadership. Gained by finishing two 2 on 2 fights in challange section of soul arena. Effects: Allow to form 3 people party.\n");
 			outputText("-Motivation (Ex) now req. additionaly Intermediate Leadership perk.\n");
 			outputText("-Tyrantia can be now asked to join pc as henchman (req. 60%+ affection) and each day she stay as henchman will rise her affection by 2%.\n");
-			outputText("-\n");//Elemental Bond: Flesh / Urges perks fixed for appearing in common perks not under it specific job
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");////Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");

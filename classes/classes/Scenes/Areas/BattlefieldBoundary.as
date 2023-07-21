@@ -32,6 +32,9 @@ use namespace CoC;
 			_battlefieldBoundaryEncounter = Encounters.group("batllefieldboundary", {
 				//Discover Outer Battlefield
 				name: "discoverOuter",
+				label : "New Area",
+				kind  : 'event',
+				unique: true,
 				chance: 30,
 				when: function ():Boolean {
 					return flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19
@@ -40,6 +43,9 @@ use namespace CoC;
 			}, {
 				//Find Tripxi gun parts
 				name: "gunPart",
+				label : "Gun Parts",
+				kind  : 'event',
+				unique: true,
 				chance:30,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 0 && player.hasKeyItem("Twin Grakaturd") < 0
@@ -48,6 +54,10 @@ use namespace CoC;
 			}, {
 				//Dilapidated Shrine
 				name: "dilapidatedShrine",
+				label : "Dilapidated Shrine",
+				shortLabel: "D.Shrine",
+				kind  : 'event',
+				unique: true,
 				call: SceneLib.dilapidatedShrine.firstvisitshrineintro,
 				when: function ():Boolean {
 					return flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] == 1
@@ -55,19 +65,28 @@ use namespace CoC;
 				chance: 0.2
 			}, {
 				name: "items",
+				label : "Items",
+				kind  : 'event',
 				call: findItems
 			}, {
 				name: "nothing",
+				label : "walk",
 				call: findNothing
 			}, {
 				//Helia monogamy fucks
 				name: "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
 				chance: battlefieldBoundaryChance,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -78,6 +97,9 @@ use namespace CoC;
 				call: SceneLib.etnaScene.repeatYandereEnc
 			},  {
 				name: "diana",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
@@ -86,6 +108,9 @@ use namespace CoC;
 				call: SceneLib.dianaScene.repeatEnc
 			}, {
 				name: "dianaName",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
@@ -94,10 +119,15 @@ use namespace CoC;
 				call: SceneLib.dianaScene.postNameEnc
 			}, {
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
 			}, SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 				name: "zombies",
+				label : "Zombies",
+				kind : 'monster',
 				chance: 0.4,
 				call: battlefieldEnemiesScene.encounterZombies,
 				when: battlefieldEnemiesScene.canEncounterZombies

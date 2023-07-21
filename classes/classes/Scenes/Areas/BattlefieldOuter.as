@@ -56,6 +56,9 @@ public class BattlefieldOuter extends BaseContent
 			call:SceneLib.iridesianFollower.firstMeetingIridesian
 		},*/ {
 			name: "tyrantia",
+			label : "Tyrantia",
+			kind  : 'npc',
+			unique: true,
 			when: function ():Boolean {
 				return player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)
 			},
@@ -64,6 +67,9 @@ public class BattlefieldOuter extends BaseContent
 		}, {
 			//Giant slayer mech
 			name: "giantmech",
+			label : "Gigant Mech",
+			kind  : 'event',
+			unique: true,
 			when: function ():Boolean {
 				return flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] == 0
 			},
@@ -71,19 +77,28 @@ public class BattlefieldOuter extends BaseContent
 			call: takeWrathMech
 		}, {
 			name: "items",
-					call: findItems
+			label : "Items",
+			kind  : 'event',
+			call: findItems
 		}, {
 			name: "nothing",
-					call: findNothing
+			label : "walk",
+			call: findNothing
 		}, {
 			//Helia monogamy fucks
 			name: "helcommon",
+			label : "Helia",
+			kind  : 'npc',
+			unique: true,
 			night : false,
 			call: SceneLib.helScene.helSexualAmbush,
 			chance: battlefieldOuterChance,
 			when: SceneLib.helScene.helSexualAmbushCondition
 		}, {
 			name: "etna",
+			label : "Etna",
+			kind  : 'npc',
+			unique: true,
 			when: function ():Boolean {
 				return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -94,6 +109,9 @@ public class BattlefieldOuter extends BaseContent
 			call: SceneLib.etnaScene.repeatYandereEnc
 		},  {
 			name: "diana",
+			label : "Diana",
+			kind  : 'npc',
+			unique: true,
 			night : false,
 			when: function():Boolean {
 				return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
@@ -102,6 +120,9 @@ public class BattlefieldOuter extends BaseContent
 			call: SceneLib.dianaScene.repeatEnc
 		}, {
 			name: "dianaName",
+			label : "Diana",
+			kind  : 'npc',
+			unique: true,
 			night : false,
 			when: function():Boolean {
 				return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
@@ -110,14 +131,22 @@ public class BattlefieldOuter extends BaseContent
 			call: SceneLib.dianaScene.postNameEnc
 		}, {
 			name: "ted",
+			label : "Dragon-Boy",
+			kind  : 'npc',
+			unique: true,
 			call: SceneLib.tedScene.introPostHiddenCave,
 			when: SceneLib.tedScene.canEncounterTed
 		}, SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 			name: "vengefulAparitions",
+			label : "Vengeful Aparitions",
+			shortLabel: "V.Aparitions",
+			kind : 'monster',
 			chance: 0.4,
 			call: battlefieldEnemiesScene.encounterVengefulApparitions
 		}, {
 			name: "zombies",
+			label : "Zombies",
+			kind : 'monster',
 			chance: 0.4,
 			call: battlefieldEnemiesScene.encounterZombies,
 			when: battlefieldEnemiesScene.canEncounterZombies

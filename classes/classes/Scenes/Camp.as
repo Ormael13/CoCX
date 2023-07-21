@@ -3976,13 +3976,13 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.HEXINDAO_UNLOCKED]<1, "Explore the realm.", null, "???")
 		bd.add("Tel'Adre", SceneLib.telAdre.visitTelAdre)
 				.hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.")
-				.disableIf(player.statusEffectv1(StatusEffects.TelAdre) < 1, "Search the desert.", null, "???");
+				.disableIf(player.statusEffectv1(StatusEffects.TelAdre) < 1, "Explore the realm.", null, "???");
 		bd.add("Bazaar", SceneLib.bazaar.enterTheBazaar)
 				.hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.")
-				.disableIf(flags[kFLAGS.BAZAAR_ENTERED] <= 0, "Search the plains.", null, "???");
+				.disableIf(flags[kFLAGS.BAZAAR_ENTERED] <= 0, "Explore the realm.", null, "???");
 		bd.add("Owca", SceneLib.owca.gangbangVillageStuff)
 				.hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.")
-				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains.", null, "???");
+				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains (at late afternoon to ealry evening hours).", null, "???");
 		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
 				.hint("Visit the Troll Village.")
 				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "You have not visited this place yet.", null, "???");
