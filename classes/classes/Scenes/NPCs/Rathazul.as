@@ -75,7 +75,7 @@ public function encounterRathazul(meet:Boolean = true):void {
 	offered = rathazulWorkOffer();
 	if(!offered) {
 		outputText("He sighs dejectedly, \"<i>I am not sure what I can do for you, youngling.  This world is fraught with unimaginable dangers, and you're just scratching the surface of them.</i>\"\n\nYou nod and move on, leaving the depressed alchemist to his sadness.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -83,13 +83,13 @@ private function rathazulMoveToCamp():void {
 	clearOutput();
 	outputText("Rathazul smiles happily back at you and begins packing up his equipment.  He mutters over his shoulder, \"<i>It will take me a while to get my equipment moved over, but you head on back and I'll see you within the hour.  Oh my, yes.</i>\"\n\nHe has the look of someone experiencing hope for the first time in a long time.");
 	player.createStatusEffect(StatusEffects.CampRathazul, 0, 0, 0, 0);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function rathazulMoveDecline():void {
 	clearOutput();
 	outputText("Rathazul wheezes out a sigh, and nods.\n\n\"<i>Perhaps I'll still be of some use out here after all,</i>\" he mutters as he packs up his camp and prepares to head to another spot along the lake.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function campRathazul():void {
@@ -273,12 +273,12 @@ private function rathazulWorkOffer():Boolean {
 			}
 			else if(!player.hasItem(consumables.SMART_T,5)) outputText("  You should probably find some if you want that...");
 			else outputText("  You need more gems to afford that, though.");
-			outputText("\n\n");			
+			outputText("\n\n");
 		}
 		//Purification potion for Minerva
 		if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10 && player.hasKeyItem("Rathazul's Purity Potion") < 0) {
 			outputText("The rodent alchemist suddenly looks at you in a questioning manner. \"<i>Have you had any luck finding those items? I need pure honey and at least two samples of other purifiers; your friend’s spring may grow the items you need.</i>\"");
-			outputText("\n\n");	
+			outputText("\n\n");
 		}
 		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
 			outputText("The rodent sniffs your possessions. \"<i>You know, I could make something with five bottles of Lactaid and two bottles of purified LaBova. I'll also need 250 gems.</i>\"");
@@ -298,11 +298,11 @@ private function rathazulWorkOffer():Boolean {
 			}
 			else if(!player.hasItem(consumables.INCOINS,5)) outputText("  You should probably find some if you want that...");
 			else outputText("  You need more gems to afford that, though.");
-			outputText("\n\n");			
+			outputText("\n\n");
 		}
 	}
 	if(totalOffers == 0 && spoken) {
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		return true;
 	}
 	if(totalOffers > 0) {
@@ -330,7 +330,7 @@ private function rathazulWorkOffer():Boolean {
 		if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(12, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
 		addButton(13, "Rare offers", oneTimeOptions).hint("All the one time options.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(14,"Leave", camp.campFollowers);
-		else addButton(14, "Leave", camp.returnToCampUseOneHour);
+		else addButton(14, "Leave", explorer.done);
 		return true;
 	}
 	return false;
@@ -415,12 +415,12 @@ private function rathazulPurifyIncubiDraft():void {
 
 //For Belisa's Tooth Quest
 public function BelisaRalthazulTalk():void {
-	outputText("Hoping your trusty alchemist friend can make Belisa's smile whole again, You ask Ralthazul about curing a cursed injury. \"<i>Oh? Cursed injury, you say?</i>\" He ponders for a second. \"<i>What sort of injury, and what kind of curse?</i>\"\n\n"); 
-	outputText("You explain Belisa’s plight, and he nods thoughtfully, hand on his chin. \"<i>Well…As a matter of fact, there might be a way I can help, young one.</i>\" He brings you over to his beakers excitedly. \"<i>You see, Succubus magic tends to draw upon corruption, and long-term curses…well, they’re niggly little bits of magic.</i>\" He shakes his head. \"<i>If the Succubus in question was a practiced hexmage, they’ll know how to get around this…But if they weren’t…</i>\" He gives you a wry little grin. \"<i>Standard curses of that nature draw upon corruption, if not from the individual, than from the environment around them.</i>\" He rummages around, producing a purity philter. \"<i>However, this little mixture here can cut the curse off from the environment, if you cover the wound in it, starving it out.</i>\"\n\n"); 
-	outputText("You begin to get excited. Belisa is pure. Perhaps too pure. You know her body won’t give this magic any fuel.\n\n"); 
-	outputText("\"<i>But…I’ll need other ingredients to cure the actual injury. Unless we also heal the injury, the curse will just return once it absorbs enough corrupted energy.</i>\" He nods. \"<i>I can do it. I’ll need a shark’s tooth from the lake, one of my purity philter and one vitality tincture.</i>\"\n\n"); 
+	outputText("Hoping your trusty alchemist friend can make Belisa's smile whole again, You ask Ralthazul about curing a cursed injury. \"<i>Oh? Cursed injury, you say?</i>\" He ponders for a second. \"<i>What sort of injury, and what kind of curse?</i>\"\n\n");
+	outputText("You explain Belisa’s plight, and he nods thoughtfully, hand on his chin. \"<i>Well…As a matter of fact, there might be a way I can help, young one.</i>\" He brings you over to his beakers excitedly. \"<i>You see, Succubus magic tends to draw upon corruption, and long-term curses…well, they’re niggly little bits of magic.</i>\" He shakes his head. \"<i>If the Succubus in question was a practiced hexmage, they’ll know how to get around this…But if they weren’t…</i>\" He gives you a wry little grin. \"<i>Standard curses of that nature draw upon corruption, if not from the individual, than from the environment around them.</i>\" He rummages around, producing a purity philter. \"<i>However, this little mixture here can cut the curse off from the environment, if you cover the wound in it, starving it out.</i>\"\n\n");
+	outputText("You begin to get excited. Belisa is pure. Perhaps too pure. You know her body won’t give this magic any fuel.\n\n");
+	outputText("\"<i>But…I’ll need other ingredients to cure the actual injury. Unless we also heal the injury, the curse will just return once it absorbs enough corrupted energy.</i>\" He nods. \"<i>I can do it. I’ll need a shark’s tooth from the lake, one of my purity philter and one vitality tincture.</i>\"\n\n");
 	BelisaFollower.BelisaRalthTalked = true;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function RathazulMakesToothCursePotion():void {
@@ -431,7 +431,7 @@ private function RathazulMakesToothCursePotion():void {
 	outputText("You run over to Ralthazul, showing him the ingredients you’ve obtained in your adventures. \"<i>Alright, that should do it. Give me just a moment please.\"</i> The wizened alchemist grinds up the teeth, and begins to mix the ingredients together. You take a small stroll around the camp to let him work, and within fifteen short minutes, Ralthazul comes to you, a smile on his old face. \n\n");
 	outputText("\"<i>Remember, you must completely submerge the injury in the mixture. And it needs some time to work.\"</i> He blinks, remembering something. \"<i>Oh, and this will hurt, in all probability. Most curses don’t go easily, and the mouth is rather sensitive.\"</i> He passes you a small vial of a silver-white liquid, with streaks of red running through it. \"<i>An hour, at least. Depending on the curse’s power.\"</i> \n\n");
 	BelisaFollower.BelisaFollowerStage = 1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //For Minerva purification.
@@ -441,7 +441,7 @@ public function purificationByRathazulBegin():void {
 	outputText("\n\n\"<i>I am afraid that I have never truly succeeded in my efforts to create a potion to purify the corrupted themselves.</i>\" The rat alchemist explains sadly. \"<i>The problem is there is very little, if anything, in this world that is capable of removing corruption from a consumer... But, I do have a theoretical recipe. If you can just find me some foodstuffs that would lower corruption and soothe the libido, and bring them to me, then I might be able to complete it. I can suggest pure giant bee honey as one, but I need at least two other items that can perform at least one of those effects. You said that the spring was able to keep your friend's corruption in check? Maybe some of the plants that grow there would be viable; bring me some samples, and a fresh dose of pure honey, and we’ll see what I can do.</i>\" He proclaims, managing to shake off his old depression and sound determined.");
 	outputText("\n\nWith that in mind, you walk away from him; gathering the items that could cure Minerva is your responsibility.");
 	flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] = 2;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function rathazulMakesPurifyPotion():void {
@@ -1176,7 +1176,7 @@ private function getThatRatAss3():void {
 	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");
 	outputText("Still though, thinking about that rat ass gets you turned on...");
 	dynStats("lus", 10, "scale", false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 }
 }

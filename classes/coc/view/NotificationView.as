@@ -16,12 +16,13 @@ public class NotificationView extends Block {
 	public static const DEFAULT_TEXT_FORMAT:Object = {
 		font: "Arial",
 		size: 16,
+		color: "#000000",
 		bold: true
 	};
 	public static const DEFAULT_BAR_COLOR:String = "#eeee00";
 	public static const DEFAULT_BAR2_COLOR:String = "#eeeeee";
 	public static const BAR_BG:String = "#222222";
-	public static const BAR_BORDER:String = "#222222";
+	public static const BAR_BORDER:String = "#888888";
 	private static const ICON_SIZE:int = 32;
 	private static const BAR_WIDTH:int = 64;
 	private static const BAR_HEIGHT:int = 8;
@@ -29,6 +30,7 @@ public class NotificationView extends Block {
 	private static const BAR_BORDER_WIDTH:int = 2;
 	private static const BAR_FILL_WIDTH:int = BAR_WIDTH - 2*BAR_BORDER_WIDTH;
 	private static const BAR_FILL_HEIGHT:int = BAR_HEIGHT - 2*BAR_BORDER_WIDTH;
+	private var idMap:Object = {};
 	
 	public function NotificationView(options:Object = null) {
 		super(options);
@@ -44,30 +46,39 @@ public class NotificationView extends Block {
 	 * @param notification
 	 * @param ttl
 	 */
-	private function animateNotification(notification:DisplayObject, ttl:int = DEFAULT_TTL):void {
+	private function animateNotification(id:String, notification:DisplayObject, ttl:int = DEFAULT_TTL):void {
+		var fadeinTime:int = FADEIN_TIME;
+		if (id) {
+			clearNotification(id);
+			fadeinTime = 0;
+			idMap[id] = notification;
+		}
 		var alpha:Number   = notification.alpha;
 		notification.alpha = 0.0;
 		// Fade-in animation
-		new SimpleTween(notification, "alpha", alpha, FADEIN_TIME)
+		new SimpleTween(notification, "alpha", alpha, fadeinTime)
 				.then(function ():void {
 					if (!hasElement(notification)) return;
 					setTimeout(function ():void {
 						if (!hasElement(notification)) return;
 						new SimpleTween(notification, "alpha", 0.0, FADEOUT_TIME)
 								.then(function():void {
+									if (!hasElement(notification)) return;
+									delete idMap[id];
 									removeElement(notification);
 								})
 					}, ttl);
-				})
+				});
+		doLayout();
 	}
 	/**
 	 * Display custom Sprite notification.
 	 * @param sprite
 	 * @param ttl Time before popup disappears (ms), default 5000
 	 */
-	public function popupDisplayObject(sprite:DisplayObject, ttl:int = DEFAULT_TTL):void {
+	public function popupDisplayObject(id:String, sprite:DisplayObject, ttl:int = DEFAULT_TTL):void {
 		addElement(sprite);
-		animateNotification(sprite, ttl);
+		animateNotification(id, sprite, ttl);
 	}
 	/**
 	 * Display text notification
@@ -75,7 +86,7 @@ public class NotificationView extends Block {
 	 * @param textFormat TextFormat options, default Arial 16 bold
 	 * @param ttl Time before popup disappears (ms), default 5000
 	 */
-	public function popupText(htmlText:String, textFormat:Object = null, ttl:int = DEFAULT_TTL):void {
+	public function popupText(id:String, htmlText:String, textFormat:Object = null, ttl:int = DEFAULT_TTL):void {
 		textFormat = Utils.extend({}, DEFAULT_TEXT_FORMAT, textFormat)
 		var tf:TextField = addTextField({
 			defaultTextFormat:textFormat,
@@ -85,7 +96,7 @@ public class NotificationView extends Block {
 			height: ICON_SIZE,
 			htmlText: htmlText
 		});
-		animateNotification(tf, ttl);
+		animateNotification(id, tf, ttl);
 	}
 	/**
 	 * Display notification with an icon
@@ -94,10 +105,10 @@ public class NotificationView extends Block {
 	 * @param textFormat TextFormat options, default Arial 16 bold
 	 * @param ttl Time before popup disappears (ms), default 5000
 	 */
-	public function popupIconText(iconId:String, htmlText:String, textFormat:Object = null, ttl:int = DEFAULT_TTL):void {
+	public function popupIconText(id:String, iconId:String, htmlText:String, textFormat:Object = null, ttl:int = DEFAULT_TTL):void {
 		var bitmap:Bitmap = IconLib.getBitmap(iconId);
 		if (!bitmap) {
-			popupText(htmlText, textFormat, ttl);
+			popupText(id, htmlText, textFormat, ttl);
 			return;
 		}
 		
@@ -115,10 +126,12 @@ public class NotificationView extends Block {
 			autoSize: TextFieldAutoSize.LEFT,
 			wordWrap: true,
 			width: width - ICON_SIZE - 2,
-			htmlText: htmlText
+			htmlText: htmlText,
+			filters: [UIUtils.outlineFilter("#ffffff")]
 		});
+		block.doLayout();
 		
-		popupDisplayObject(block, ttl);
+		popupDisplayObject(id, block, ttl);
 	}
 	/**
 	 * Display a notification with an icon (optional) and a progress bar.
@@ -177,10 +190,19 @@ public class NotificationView extends Block {
 		if (bitmap) block.addBitmapDataSprite({bitmap:bitmap});
 		var progressBar:Sprite = new Sprite();
 		progressBar.addChild(new BitmapDataSprite({
-			// Border + Background
+			// Border
+			x: 0,
 			y: BAR_Y,
 			width: BAR_WIDTH,
 			height: BAR_HEIGHT,
+			fillColor: BAR_BORDER
+		}));
+		progressBar.addChild(new BitmapDataSprite({
+			// Background
+			x: BAR_BORDER_WIDTH,
+			y: BAR_Y + BAR_BORDER_WIDTH,
+			width: BAR_WIDTH - BAR_BORDER_WIDTH*2,
+			height: BAR_HEIGHT - BAR_BORDER_WIDTH*2,
 			fillColor: BAR_BG
 		}));
 		if (pxInc > 0) {
@@ -211,21 +233,21 @@ public class NotificationView extends Block {
 			autoSize: TextFieldAutoSize.LEFT,
 			wordWrap: true,
 			width: width - ICON_SIZE - 2,
-			htmlText: htmlLabel
+			htmlText: htmlLabel,
+			filters: [UIUtils.outlineFilter("#ffffff")]
 		});
+		block.doLayout();
 		
-		if (id) {
-			// Mark the block and remove existing with similar ID
-			block.dataset.progress = id;
-			for (var i:int = 0; i < numElements; i++) {
-				var ib:Block = getElementAt(i) as Block;
-				if (ib && ib.dataset.progress == id) {
-					removeElement(ib);
-					break;
-				}
-			}
+		popupDisplayObject(id, block, ttl);
+	}
+	
+	public function clearNotification(id:String):void {
+		if (!id) return;
+		var e:DisplayObject = idMap[id] as DisplayObject;
+		if (e) {
+			delete idMap[id];
+			removeElement(e);
 		}
-		popupDisplayObject(block, ttl);
 	}
 	
 	public function clearNotifications():void {

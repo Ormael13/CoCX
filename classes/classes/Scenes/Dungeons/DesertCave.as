@@ -1,5 +1,5 @@
 //Side Dungeon: Desert Cave (Refactored, may have bugs)
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.*;
 import classes.BodyParts.Tongue;
@@ -50,7 +50,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function openZeDoorToParadize():void {
 			clearOutput();
 			outputText(images.showImage("dungeon-entrance-desertcave"));
-			//Touch Sphere to Open: 
+			//Touch Sphere to Open:
 			if(flags[kFLAGS.ENTERED_SANDWITCH_DUNGEON] == 0) {
 				outputText("You hesitantly touch the dark sphere, admiring its smooth, glossy finish.  Almost as soon as you come in contact with it, it recedes into the wall.  The doorway rumbles, a giant slab vanishing into the sandy depths, opening a portal to the inside.  Meticulous carvings inlaid with pearl depict large breasted witches in great quantity, and though the specific means of the glyphs are foreign to you, it's clear this place is some kind of sanctuary for sand witches.");
 				flags[kFLAGS.ENTERED_SANDWITCH_DUNGEON] = 1;
@@ -70,7 +70,7 @@ public class DesertCave extends DungeonAbstractContent
 			inDungeon = false;
 			clearOutput();
 			outputText("You leave the door behind and take off through the desert back towards camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		private function checkPharmacyDoorUnlocked():Boolean {
@@ -404,7 +404,7 @@ public class DesertCave extends DungeonAbstractContent
 			player.sexReward("vaginalFluids", "Dick");
 			//[Next]
 			menu();
-			addButton(0,"Next",memeberedFolksFindTrueWuv3);	
+			addButton(0,"Next",memeberedFolksFindTrueWuv3);
 		}
 
 		public function memeberedFolksFindTrueWuv3():void {
@@ -538,7 +538,7 @@ public class DesertCave extends DungeonAbstractContent
 				else doNext(recallWakeUp);
 			}
 		}
-			
+		
 		//*Sapphic Win Sex
 		//Forced cunnlingus, rimjob, and clit-and-nipple sucking.
 		public function forceCunnilingusRimjobClitAndNipple():void {
@@ -1240,7 +1240,7 @@ public class DesertCave extends DungeonAbstractContent
                 else if (inDungeon)
                     doNext(playerMenu);
                 else
-                    doNext(camp.returnToCampUseOneHour);
+                    endEncounter();
             }
 		}
 
@@ -1283,7 +1283,7 @@ public class DesertCave extends DungeonAbstractContent
             else if (inDungeon)
                 doNext(playerMenu);
 			else
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
 		}
 
 		//Female Victory Sex
@@ -1319,9 +1319,9 @@ public class DesertCave extends DungeonAbstractContent
             else if (inDungeon)
                 doNext(playerMenu);
 			else
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
 		}
-			
+		
 		//Tentacle Victory Gangbang
 		//3+ Tentas
 		public function tentacleVictoryGangbangCumWitch():void {
@@ -1358,7 +1358,7 @@ public class DesertCave extends DungeonAbstractContent
             else if (inDungeon)
                 doNext(playerMenu);
 			else
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
 		}
 
 		//Repeat Desert Loss Female & Herm
@@ -1366,7 +1366,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			//(HP)
 			if(player.HP < 1) outputText("Unable to further withstand the witch's magical assault, you topple over into the soft, warm sands. Before you can recover, the witch is on top of you, her powerful legs straddling your [hips]. Her long, dainty fingers lock through your [armor], pulling your face out of the sand and rolling you over to look up at her.");
-			//(Lust) 
+			//(Lust)
 			else outputText("Uncontrollable lust surges through you, your heart pounding beneath your [chest] as your [legs] collapse out from under you.  Your hands desperately claw at your [armor], trying to touch your needy cunt, the fire in your genitals burning like whitefire through your veins.  You moan with helpless lust as the witch looms over you, grabbing your hands away from your crotch and pushing you onto your back.  A moment later, she's on you, straddling your [hips] between her lush thighs.");
 			outputText("\n\nPinned beneath the witch, you struggle weakly in her grasp as she slowly strips off your [armor], bearing your [chest] to her surprisingly soft, gentle caresses.  ");
 			//if Multiboob:
@@ -1448,7 +1448,7 @@ public class DesertCave extends DungeonAbstractContent
 			cleanupAfterCombat();
 		}
 
-			
+		
 		public function lionpaws(skipped:Boolean = false):void {
 			clearOutput();
 			//[skip riddles, just request from menu (requires some event occurrence > 1)]
@@ -1471,7 +1471,7 @@ public class DesertCave extends DungeonAbstractContent
 				if(player.biggestCockArea() > 100) outputText("  It's not as if there's all that much else I can do for that monster of yours anyways.");
 				outputText("</i>\" She raises a paw and examines it, as though trying to figure out just what it is about them that you enjoy so much.  You cough as a means of drawing her attention once you've stripped off the last bit of your armor, shaking her from her reverie.");
 			}
-				
+			
 			outputText("\n\nSanura asks that you kneel, and you eagerly comply.  ");
 			//[if dick isn't already hard and PC knows what's coming]
 			if(player.lust < 50 && flags[kFLAGS.PAWJOBS] == 0) {
@@ -1543,7 +1543,7 @@ public class DesertCave extends DungeonAbstractContent
 			menu();
 			if(skipped) {
 				inDungeon = false;
-				addButton(0,"Next",camp.returnToCampUseOneHour);
+				addButton(0,"Next",explorer.done);
 			}
 			else {
 				menu();
@@ -1820,7 +1820,7 @@ public class DesertCave extends DungeonAbstractContent
 			menu();
 			if(submit) {
 				inDungeon = false;
-				addButton(0,"Next",camp.returnToCampUseOneHour);
+				addButton(0,"Next",explorer.done);
 			}
 			else {
 				addButton(0,"Enter",openZeDoorToParadize);
@@ -1929,7 +1929,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("You disrobe, tossing your [armor] aside into a small pile.  You stretch your muscles in the dry desert air and exult in the warm rays beating down on your " + player.skinFurScales() + " and [cocks].  Sanura pads around you, taking in your appearance with her chestnut-colored eyes before clicking her tongue approvingly.  Her leonine tail swishes across the top of your [cock biggest], stroking it with the silky soft tuft of fur at its tip.  You shiver at the contact, unsure of what to think.  Your penis, on the other hand, has no such conflictions, and immediately begins to rise.");
 			
-			//(Small dicks) 
+			//(Small dicks)
 			if(player.biggestCockArea() < 6) outputText("\n\n\"<i>Aw, it's so cute and compact.  I didn't know these things came in women's sizes,</i>\" she giggles, flicking the [cockHead biggest] of your cock with her tail.  You blush brightly.  Even by Ingnam standards you're a little below average, and in Mareth, well, you're just plain tiny.  \"<i>Don't worry, love, it will suffice for what I have in mind.</i>\"");
 			
 			//(Normal-sized dicks)
@@ -1942,7 +1942,7 @@ public class DesertCave extends DungeonAbstractContent
 				else if(player.hasVagina()) outputText("cunt");
 				else outputText("asshole");
 				outputText(" with the little tuft of fur.  \"<i>That bad boy will be just perfect.</i>\"");
-			}	
+			}
 			else outputText("\n\nSanura's eyes go wide upon seeing your monstrous cock.  She opens her mouth, attempting to speak, but no words come out.  Her tail reaches out, coiling around your dick in futility.  \"<i>By Marae's pillowy tits that thing is huge,</i>\" she says finally, regaining her voice.  \"<i>I don't know if I can take something that big... but goddamnit, I'm going to try.</i>\"");
 			
 			outputText("\n\nYour manhood spikes upwards at the attention, becoming painfully hard as the sphinx continues to survey your body.  Her tail flicks over your " + player.skinFurScales() + " gently, stopping briefly to tantalize ");
@@ -2051,7 +2051,7 @@ public class DesertCave extends DungeonAbstractContent
 			//Lowish Capacity
 			else {
 				outputText("\n\nYou will yourself to relax, but you just aren't big enough back there to make much of a difference.  Just having such an immense dong pressing at your backdoor is enough to push you to your limits, but your sphincter hasn't even dilated enough to take a fraction of her girth.  Sanura growls in frustration and begins to hump at it, smacking the blunted tip into it again and again. The shocking sensation makes your anal muscles twitch, spasm, and relax as she works to plow her way through your more than token resistance.");
-				//VIRGIN ALT: 
+				//VIRGIN ALT:
 				if(player.ass.analLooseness == 0) {
 					outputText("\n\nShe grunts, \"<i>Don't tell me you're a virgin?</i>\"  You nod and bite your lip as you try to endure.  Sanura stops immediately at that news, mulling it over with a detached expression, a smile slowly spreading across her features.  \"<i>Really?</i>\" she asks as her hips begin to slowly work at your ass once more, slowly picking back up to their old tempo.  \"<i>Then it's a good thing you're getting to ride my magic cock and not some brute's.  It might hurt a little, but I promise this will be buttsex worth remembering....</i>\"");
 				}
@@ -2461,11 +2461,11 @@ public class DesertCave extends DungeonAbstractContent
 			}
 			else sceneHunter.print("Check failed: 10 cocks!")
 			outputText("\n\nNow fully enveloped, you lean over your happily gurgling prey, admiring her swollen, milk-engorged bust as you take her in every way imaginable.  You wordlessly command your multitude of dongs to fuck faster, then, lean down for a sip of sweet breast milk.  Drinking happily, you allow your body to whip into a sexual frenzy, pumping and pounding, sliding and squeezing, fucking with the relentless power of a champion-turned-tentacle-beast.  Every ounce of exposed skin and every orifice is liberally slicked with your pre-cum, and as your one-man orgy winds to a fever pitch, you let the milky tit pop free and bellow out in bliss, cumming hard.");
-				
+			
 			outputText("\n\nA bevy of bulges work their way up your shafts as you orgasm, dozens of them quickly traveling from base to tip, stretching cunnies and gaping anuses as they go.  When they reach your large, throbbing tips, your cum slits stretch wide and unleash matching waves of white.  Both cunts are creamed from womb to lips.  Your new favorite slut's anus is given an alabaster enema.  All four tits get a frothing jizz-bath.");
 			if(tentaCnt >= 6) outputText("  Bubbling seed soaks her frantically jerking hands.");
 			outputText("  That was just the first explosions of relief.  You orgasm drags on as you squirt like a firehose, drenching the poor witch with white from head to toe.  Her belly rounds obscenely, stuffed from her throat, ass, and wombs, filled to absolute capacity until all four of the aforementioned holes are squirting torrents of sticky white man-milk into thick puddles.");
-				
+			
 			outputText("\n\nYou pull out as your pleasure dies down, aiming all " + num2Text(tentaCnt) + " of your cum-nozzles above her like an obscene shower, and drench her from head to toe again, a salty white wreck of a cumslut.  With her throat free for the first time in a long time, she swallows and whimpers, \"<i>Oooooh... gods.</i>\"  The cum-drunk fuck-slut begins to clean herself the only way she can right now - with her mouth.  She's so fucked out that she couldn't channel her magic if she tried.  You get dressed with a satisfied swagger.");
 			if(flags[kFLAGS.SAND_WITCHES_COWED] == 0) {
 				outputText("\n\nThe witches are suitably cowed, but you've ruined any chance at a friendly peace with them.");
@@ -2608,7 +2608,7 @@ public class DesertCave extends DungeonAbstractContent
             if (!CoC.instance.inCombat) doNext(playerMenu);
             else cleanupAfterCombat();
 		}
-			
+		
 		//*Lose Male Loss
 		//>Get turned into breeder or sumthin.
 		public function loseToSandMotherBadEnd():void {
@@ -2705,7 +2705,7 @@ public class DesertCave extends DungeonAbstractContent
 			EventParser.gameOver();
 			removeButton(1);
 		}
-			
+		
 		//*Lose Female Loss
 		//>Get turned into sand witch.
 		//Additional Sand Witch Entry (BY XODIN)
@@ -2885,7 +2885,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(y >= 0) outputText("both your cocks");
 			else outputText("your " + cockDescript(x));
 			outputText(".");
-					   
+			
 			//HOARSES:
 			if(player.isTaur()) {
 				outputText("\n\nWhinnying in delight, you rest your forelegs on ");
@@ -3046,7 +3046,7 @@ public class DesertCave extends DungeonAbstractContent
 			player.sexReward("milk", "Vaginal");
 			doNext(playerMenu);
 		}
-			
+		
 		//*History
 		//>Learn about the origin of the sand witches.
 		public function sandWitchHistory():void {
@@ -3166,7 +3166,7 @@ public class DesertCave extends DungeonAbstractContent
 			flags[kFLAGS.MORE_CUM_WITCHES] = 1;
 			sandWitchMotherFriendlyMenu();
 		}
-			
+		
 		//*Pick Mothers
 		//>Ask about how Sand Mothers are chosen.
 		public function askHowSandMothersAreChosen():void {
@@ -3243,7 +3243,7 @@ public class DesertCave extends DungeonAbstractContent
 			flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]++;
 			inventory.takeItem(consumables.LABOVA_, roomSandMotherThrone);
 		}
-			
+		
 		//TURN EM OFF!
 		public function unfriendlyWitchToggle():void {
 			clearOutput();
@@ -3392,7 +3392,7 @@ public class DesertCave extends DungeonAbstractContent
 		//*Take Barren Pills✓Kirbu
 		public function takeBarrenPills():void {
 			clearOutput();
-			//{Already contraceptive'ed} 
+			//{Already contraceptive'ed}
 			if(player.hasStatusEffect(StatusEffects.Contraceptives)) outputText("You're already under the effects of contraceptives.  Taking one of the brown pills wouldn't do anything.");
 			//{TAKE DAT SHIT YO}
 			else {
@@ -3541,7 +3541,7 @@ public class DesertCave extends DungeonAbstractContent
 				if (y >= 0) sceneType = 4;
 			}
 			else sceneHunter.print("Check failed: two or three 20-inch long tentacocks.");
-			//{if player does not have a tentacle cock} 
+			//{if player does not have a tentacle cock}
 			if(sceneType == 0) outputText("You grab the tanned shoulders of the closest pregnant witch and flip her over on to her back, trapping her beneath the weight of her belly and breasts while you grab both of her ankles.  Her dirty blonde, sweat-soaked hair lies in waves around her head on the floor as she pants heavily in sexual desperation.");
 			//{else if player has a tentacle cock}
 			else outputText("Your tentacle cock lashes outwards, extending as it goes, and wraps around the ankle of the closest girl. It flips her over on to her back, trapping her own torso beneath the weight of her heavy pregnancy and her own four massive leaking breasts.");
@@ -3562,13 +3562,13 @@ public class DesertCave extends DungeonAbstractContent
 			else outputText("\n\nYour hands slide along the witch's legs and up her thighs until they grasp her hips. You allow the shaft of your " + cockDescript(x) + " to slide up and down the folds of her dripping labia until your cockhead slips in between and presses against her entrance.  \"<i>P-please!  Q-quickly!  I n-n-neeeed it!</i>\"  You're all too eager to service her as you thrust forwards.");
 			outputText("  The witch's moans and grunts of pleasure arouse the other witches in the room as they watch with the utmost jealously.  Some grab their nipples while others try to finger their pussies; whining and getting off on their envious voyeurism as they watch you fuck their sister.");
 			
-			//{all} 
+			//{all}
 			outputText("\n\nYour thrusts become forceful enough to rock the impaled witch's torso up and down along the floor. Her upper breasts repeatedly smack her own face while her lower slap against the swollen sides of her pregnant belly. All four of her heavily milk engorged tits spray streams of her cream into the air. Whimpering moans of orgasmic ecstasy constantly stream from her perfectly plump lips. Her body shakes and trembles with the convulsions of constant climaxes. The sensation of your bare cock flesh sliding against the naked walls of her inner depths with every thrust quickly shuts down the girl's higher brain functions. She becomes a senseless pregnant she-beast lost in the throes of pleasure that your shaft");
 			if(sceneType >= 3) outputText("s constantly pound");
 			else outputText(" constantly pounds");
 			outputText(" into her nethers. Drool escapes her lips and drips down her cheek even as her eyes roll back in her head. Talk about an easy lay.");
 
-			//{if player has large but not extremely massive breasts} 
+			//{if player has large but not extremely massive breasts}
 			if(player.biggestTitSize() >= 4 && player.biggestTitSize() < 15) {
 				outputText("\n\nYour breasts bounce up and down as you get in to the groove of fucking your pregnant playtoy.");
 				//{if player is largely pregnant and has large breasts.}
@@ -3579,7 +3579,7 @@ public class DesertCave extends DungeonAbstractContent
 			//else if player has extremely huge breasts
 			else if(player.biggestTitSize() >= 15) {
 				outputText("\n\nYour [chest] are massive enough that they jiggle instead of bounce with each thrust.");
-				//if player has only one set of massive breasts 
+				//if player has only one set of massive breasts
 				if(player.bRows() == 1) outputText("  Your two heavy milk sacs sway and at times you must rest them on top of the poor witch's belly to keep from prematurely exhausting yourself.");
 				else if(player.bRows() >= 2) outputText("  Resting on top of each other and on top of the witch's legs, your giant globes of tit flesh quake each time you hips move.");
 				outputText("  The witches around the room can't help but gawk at how much more endowed your mammaries are than even their own, and how the wrong forwards or backwards movement could result in either you or the witch you're fucking to be suddenly smothered under the weight of your ridiculously engorged tits.");
@@ -3589,7 +3589,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText(" forces you to reach your own orgasm.");
 			if(player.hasBalls()) outputText("  Your [balls] tense with the anticipation of releasing the fruit of your loins into her waiting womb.");
 			outputText("  With both hands you reach up and grab the fat nipples of the witch's lower breasts, tugging on them like reins as you try to thrust deeper.  \"<i>Ung! Ah!</i>\" The witch bites her lower lip in pleasure and pain as you roughly handle her leaking teats.");
-			//{if player has huge or massive breasts} 
+			//{if player has huge or massive breasts}
 			if(player.biggestTitSize() >= 15) outputText("  The weight of your own tits bears heavily against your arms as you try to keep the motion of your hips constant while pulling on your lover's milk knobs.");
 			//{if player's tits can lactate}
 			else outputText("  Each of your [nipples] begin spraying milk over the witch as your body begins its crescendo.");
@@ -3649,7 +3649,7 @@ public class DesertCave extends DungeonAbstractContent
 				y = player.cockThatFits2(50);
 			}
 			outputText("These hormonally overwrought witches are each little more than five huge fleshy orbs of tits and bellies, desperately crawling towards you on hands and knees as their stares fixate on your " + cockDescript(y) + ".  ");
-			//{if player has two long tentacle cocks} 
+			//{if player has two long tentacle cocks}
 			if(player.countCocksWithType(CockTypesEnum.TENTACLE, 20) >= 2) outputText("Almost of their own accord your tentacle cocks lash out, wrapping around the arms of the two closest girls, lifting them to their knees only to roll them backwards and on to their sides with their backs to each other.  ");
 			else outputText("It takes little effort to grab the closest two witches and pull them up only to push them down again and on to their sides with their backs pressed against each other.  ");
 			outputText("The two witches lay before you with their heaving breasts and bellies jutting out to either side while their asses are mashed against each other.  You grab an ankle from each of them and raise their legs up to expose the dual pairs of pussies that they possess.");
@@ -3664,14 +3664,14 @@ public class DesertCave extends DungeonAbstractContent
 			outputText(".");
 			if(player.hasVisiblePregnancy()) outputText("  Each of these raised legs carefully bend at the knee to accomodate your own pregnant belly that looms over their prone figures.");
 			outputText("  As each witch lies on her side, both of them begin feeling your stiff cocks slap against their multiple pussies.  They moan as their four pairs of labia bloom in anticipation of the fucking to come.  Each set of nether lips are dark and dripping with gobs of desperation, but on each girl there's one set that looks particularly gaping as if the pressure inside was forcing it open.  It isn't difficult to figure out that those are the ones that lead to their already occupied wombs, while the other sets are the ones eagerly awaiting a fresh deposit of baby batter.");
-				
+			
 			outputText("\n\nYou feel supremely ready to fulfill those cum craving needs and you carefully align your cocks for the purpose.");
 			//{if has two horse cocks}
 			sceneHunter.print("Dick type fork: horse, dog, tentacle, demon.");
 			if(player.cocks[x].cockType == CockTypesEnum.HORSE && player.cocks[y].cockType == CockTypesEnum.HORSE) outputText("  The wide flaring tips of your equine pricks press flatly against the pair of sweltering nether lips, but they easily part with only a little pressing.  The hot swollen folds eagerly slurp around the wide ridged crowns of your cock heads as you press against their vaginal entrances.  They're looser than most normal pussies, yet around such thick cock heads they nonetheless feel enjoyably tight.  With a slightly harsher shove forwards you easily impale both whorish witches.  Pleasured cries of shock escapes their lips as your horse-dongs bore through their depths.");
-			//{else if two dog cocks} 
+			//{else if two dog cocks}
 			else if(player.cocks[x].cockType == CockTypesEnum.DOG && player.cocks[y].cockType == CockTypesEnum.DOG) outputText("  Your canine pricks easily part the obscenely wet folds of the girls' labia.  Each woman's juices drip down your smooth shafts as you begin pressing their pointed heads into their tight entrances, eliciting pleasured and desperate pleas for more from each of them.  A gentle thrust of your pelvis and both pussies become simultaneously impaled upon your doggy dicks, giving you complete control over the hormonal witches.");
-			//{else if two tentacle cocks} 
+			//{else if two tentacle cocks}
 			else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE && player.cocks[y].cockType == CockTypesEnum.TENTACLE) outputText("  Your green tentacle formed cocks stiffen yet weave their ways around the various pussies in front of you.  Their dark fuchsia heads almost seem to have a mind of their own as they trace the outlines of each pussy, teasing the poor hormonal witches into even higher states of sexual desperation. Pussy juice squirts from the anxious cunts with each teasing slide along their labia.  Satisfied with the pleasured taunting your prehensile cocks get down to business, darting into each slutty snatch like snakes striking at prey.  You feel each girl's entrance brutally stretch to accommodate your shafts as they deeply worm a path into each girl's vaginal orifice, causing both to scream in frantic bliss.");
 			//{else if two demon dicks}
 			else if(player.cocks[x].cockType == CockTypesEnum.DEMON && player.cocks[y].cockType == CockTypesEnum.DEMON) outputText("\n\nThe big bumps and nodules that line the rims of each of your demonic cockheads feel particularly wonderful as they force their way between the dark, swollen folds of each witch's as yet unseeded pussy.  Both girls whimper and yelp in pleasure as the demonic ridges and soft protrusions along your shafts tease and taunt the erogenous zones of the inner walls of their cunts.  Your blighted cocks seem to swell even larger specifically to ensure the tightest fit possible within these two girls and it isn't long before each girl is leaking copious amounts of pussy juice around each cock as the highly textured shafts double time the twin twats.");
@@ -3687,13 +3687,13 @@ public class DesertCave extends DungeonAbstractContent
 				sceneHunter.print("Check failed: used cocks at least 20-inch long (hard to fit, better tenta).");
 				outputText("\n\nFinally, you penetrate them far enough to feel the thresholds of their wombs pressing back against your throbbing cock heads.  Each girl cries out in exquisite pain as you pound against their cervixes, yet both protest if you pull back.  Giving in to their needs you fuck and thrust away as hard as you can, and it isn't long until your shafts are tingling with the sensations of imminent release.");
 			}
-			//{if cocks >= 20} 
+			//{if cocks >= 20}
 			else outputText("\n\nWith one thrust at a time you slowly delve inch by strangled inch deeper into the tight tunnels of each girl's womanhood.  You eventually manage to brush up against the deep and tight entrances to each one's womb, and both cry out in pleasured pain as you pound against their inner thresholds.  With plenty of length to spare, your cocks fill each cunt's passage completely, and the witches' begging pleas for more despite the momentary jolts of pain leaves you no choice but to try to ram yourself into their actual wombs.  Leaning forward with their upright legs pressed tightly against your torso, you place more of your body weight behind each cock.  The girls cry out in joyous agony as they each feel their cervixes stretch and both wombs become impaled.  Their bodies suck in more cock than any normal woman ever could, allowing you to use their abdomens as living cock sleeves to fuck.  With such an opportunity you eagerly begin doing just that, thrusting repeatedly into their wombs.  Their cervixes feel like a second pussy within their first, and it isn't long before [eachCock] feels on the verge of climax.");
 			
 			outputText("\n\nThe eight milk-filled breasts of the two preggo sluts wobble lewdly as each witch's body shakes from your thrusting.  Milk spurting nipples plaster the floor with their cream.");
 			//{if player lactates}
 			if(player.lactationQ() >= 200) outputText("  Your own breasts begin spraying down the two pregnant sluts with your own dairy fluids.");
-			//{if player has large but not huge breasts} 
+			//{if player has large but not huge breasts}
 			if(player.biggestTitSize() >= 5 && player.biggestTitSize() < 20) outputText("  Each thrust in to the eager cunts causes your breasts to bounce up and down.");
 			else if(player.biggestTitSize() >= 20) outputText("  Each thrust in to the eager cunts causes your massive breasts to sway back and forth, slapping against your own sides.");
 			//{if player has six huge breasts}
@@ -3703,11 +3703,11 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.hasBalls()) outputText("  The closer your shafts come to their climax the more tense your balls become, preparing to pump their loads through your cocks.");
 			
 			outputText("\n\nEvery other witch in the room is fingering herself off as they watch you recklessly pound their sisters.  Finally ready, you decide to let them see what they're missing as you plunge your cocks as deep as they'll go, and finally cum your brains out.  Your shafts swell as your seed surges upwards from their bases towards the tips that you've buried so expertly inside the milky whores.");
-			//{if cumNormal or Medium} 
+			//{if cumNormal or Medium}
 			if(player.cumQ() < 500) outputText("  The pair of girls yelp as they feel the hot seed splash forth inside them.  Millions of sperm swim in to their fertile wombs, seeking to turn them into doubly pregnant sluts.");
 			//{else if cumHigh}
 			else if(player.cumQ() < 1000) outputText("  The slutty pair of milk bags cry out in sensual surprise as they feel extraordinary amounts of cum pumping directly into their baby makers, knocking them up with the double pregnancy they've desperately wanted. Their bellies bulge with all of the cum you've deposited within them.");
-			//{else if cumVeryHigh} 
+			//{else if cumVeryHigh}
 			else if(player.cumQ() < 3000) outputText("  The two piles of tits and bellies scream in pleasured insanity as their empty wombs are assaulted with a surging torrent of jizz.  You can feel the heavy blasts of cum surging within your shafts as they flood forth in to slutty orifices that have swallowed your manhoods.  Your brain burns with ecstasy as your genitals pump each womb over and over again, forcing them to swell far beyond what they're intended to take from cum alone.  By the time your cocks feel satisfied each witch looks as if she's already full term with a second child, the cum filled womb creating a distinct second orb next to the first pregnancy.");
 			//{else if cumExtreme}
 			else outputText("  The eyes of every witch in the room open wide in shock as they watch their sister's bellies swell obscenely.  Your cocks feel as if they're trying to wrest control of your body from you as liters of hot sperm pump forcefully directly in to the extra fertile wombs of each slutty witch.  The two quad-breasted whores convulse in brain damaging pleasure, causing their huge milk filled tits to quake and bounce everywhere. A white flood of ejaculate erupts from their pussies around your cocks as their overfilled wombs fail to contain your bounty of baby batter.");
@@ -3742,14 +3742,14 @@ public class DesertCave extends DungeonAbstractContent
 			if (tentaCnt > fitCnt)
 				fitCnt = tentaCnt;
 			
-			//{if player has a single cock} 
+			//{if player has a single cock}
 			if(fitCnt == 1) {
 				outputText("\n\nWasting no time you move forwards to slide the shaft of your [cock] up and down the folds of the nearest witch's labia to lube it up.  She moans in frustrated pleasure, anxious to feel the length of your manhood pushing directly into those folds.  As you feel the crown of your cock head sliding along the lips of her cunt you decide not to tease her for the sake of your own pleasure.  With fingers from each hand you pull her nethers aside and press your cock directly into her entrance, feeling the tight orifice stretch around your man-flesh and swallow your cock as deeply as it can.");
 			}
 			//{else if player has two long cocks}
 			else if (fitCnt == 2)
 				outputText("\n\nAs you walk forwards you push two of the witches together, side by side, with their asses up in the air and their pairs of pussies facing you as your cocks press up against the nethers leading to their empty wombs.  Their dark cunts part and swallow up your shafts as you press forward, eliciting cries of pleasure from the whorish witches and forcing gobs of girl cum to drip down your cocks from their sexually charged holes.");
-			//{else if player has three long cocks} 
+			//{else if player has three long cocks}
 			else
 				outputText("\n\nYou gather three of the bent over witches together with their asses pressed tightly side by side, close enough for their sopping wet cunts to be in reach for three long cocks to fuck at once.  With your stiffening shafts growing harder with each passing moment you begin grabbing your pricks and angling them into the flush dark cunts.  As soon as you feel the entrances of each witch's pussy pressing against your cock heads you begin pressing forwards.  All three of them cry out as your shafts spear their cunts and fill their depths at the same time.  Their inner muscles contract and grip your cocks, almost as if they were trying to suck your bundle of shafts even deeper in to their whorish pregnant bodies.");
 			outputText("\n\nWith your shaft");
@@ -3784,13 +3784,13 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.biggestTitSize() > 3 && player.biggestTitSize() < 10) outputText("  Your tits bounce as you enthusiastically grind away.");
 			//{else if player has huge tits}
 			else if(player.biggestTitSize() >= 10 && player.biggestTitSize() < 20) outputText("  The heavy weight of your huge tits causes them to sway with every thrust of your hips.");
-			//{if player has really huge tits} 
+			//{if player has really huge tits}
 			else if(player.biggestTitSize() >= 20) outputText("  The immense swells of your mammaries press down upon the ass of the girl in front of you.");
-			//{if player has four non-huge tits} 
+			//{if player has four non-huge tits}
 			if(player.bRows() >= 2) {
 				if(player.breastRows[1].breastRating >= 3) outputText("  Your second row of breasts slap against the ass cheeks of the girl in front of you.");
 			}
-			//{if player has six huge but not really huge tits} 
+			//{if player has six huge but not really huge tits}
 			if(player.bRows() >= 3) {
 				if(player.breastRows[2].breastRating >= 3 && player.breastRows[2].breastRating < 20) {
 					outputText("  Your lowermost row of breasts become squashed against the witch");
@@ -3885,7 +3885,7 @@ public class DesertCave extends DungeonAbstractContent
 			else outputText("\n\nThey fall");
 			outputText(" over.  Quickly, the rest of the witches in the room are eagerly raising their cunts in the air, begging for their turn at being impregnated.  Happily you oblige, shoving as much cock as you can into each wet hole that the hormonally overwrought sluts offer to you.  One pussy after another finds itself impaled on you, with you thrusting repeatedly until the massaging muscles within their cunts pull forth the rivers of baby gravy that their empty wombs are starving for.  One by one the witches find themselves filled and fall to the floor still reeling from the sensations, only for another new witch to take their place with a sopping cunt even more cum thirsty than the last.");
 			
-			//{if player has two or more cocks} 
+			//{if player has two or more cocks}
 			if(fitCnt > 1) outputText("\n\nFor the final witch you choose to shove two cocks inside her empty pussy.  Your double dicked thrusts force a joyous yelp from her with every thrust.  \"<i>Ah! T-t-too much!</i>\" she screams but her vaginal canal refuses to let you go regardless.  When you finally finish the torrent of sperm makes her feel as if she's on the verge of bursting.  The swelling of her womb causes her belly to bloat up enough to push her quad breasts upwards and siginificantly shift her center of gravity.  The orgasm that accompanies the feeling of your sperm flooding forcefully into her uterus and tubes is too much for her to bear and she slides off of your cocks like a well-used cock sleeve, oozing gobs of cum from between her dark nether lips.");
 			
 			outputText("\n\nFinally finished, you stand in a pool of your own jizz and stare down at the piles of tits and bellies that allegedly are women but for all intent and purpose have become nothing more than sacks of flesh filled with milk, babies, and cum.  Each of them is covered in a layer of sweat and splooge, and small mewing cries of satisfied delight emanate from somewhere underneath those heavy orbs.  You can't help but wonder how long it'll take for them to give birth so that you can once again knock them up with the broods of children that their bodies are so obviously intended to produce.");
@@ -3951,7 +3951,7 @@ public class DesertCave extends DungeonAbstractContent
 			else outputText("and grinning with lusty fervor, you push harder, slipping your fingers into her with ease, her milk providing the perfect lubricant to penetrate her.  The slave girl trembles at your sexual advance, but either does not want to stop you out of well-trained fear, or just doesn't want you to stop");
 			outputText(".  Before you can get too far, though, the slave girl turns on a heel, her huge rack pushing you back through the milky pool and then against the rim.  You're dazed for only a brief second before her breasts press firmly into your back, pressed so hard that a new streak of milk pours from her teats, wetting your back much as you did hers.  You relax against the rim as the slave cups up handfuls of milk, rubbing it into your own hair and shoulders, deft fingers massaging every muscle in your back with the skill of the greatest masseuses, and you can feel the tension bleeding from your muscles. You yawn powerfully, resting your chin on your arms and letting the milky girl massage you, coating your " + player.skinFurScales() + " in her rich, delicious milk.");
 			
-			//{If PC has a dick: 
+			//{If PC has a dick:
 			if(player.hasCock()) {
 				outputText("\n\nOne of the milk girl's hands brushes against your thigh, slipping around your [leg]; slender fingers wrap around your [cock], milky lubricant making her soft strokes all the more pleasurable.  You groan in lusty delight as her fingers slide up and down your quickly-hardening length");
 				if(player.hasBalls()) outputText(", her other hand cupping your [balls], rolling the " + num2Text(player.balls) + " orbs in her palm with surprising dexterity");
@@ -4031,7 +4031,7 @@ public class DesertCave extends DungeonAbstractContent
 			fatigue(-15);
 			doNext(playerMenu);
 		}
-			
+		
 		//[Drink & Masturbate]
 		public function drinkNFap():void {
 			clearOutput();
@@ -4047,7 +4047,7 @@ public class DesertCave extends DungeonAbstractContent
 			
 			outputText("\n\nAn excited moan worms out of the inky slave-girl's puffy lips, a testament to the raw sensitivity of her milk-bloated jugs.  As your tongue swirls over the leaky nozzle's pebbly skin, she releases another breathy pant of delight.  The vocal tremors seem to coo all the way down to your loins, joining with your fingers' caresses to stir you to aching, trembling arousal.");
 			//{Fork, no new PG}
-			//(DA HERMS) 
+			//(DA HERMS)
 			if(player.gender == 3) {
 				outputText("  Your [cock] throbs painfully in your hand, so hot and hard that you're sure you must have begun to leak precum, but any fluid is swiftly washed away by the ever-present milk.");
 				if(player.cockTotal() > 1) outputText("  You make sure to fondle each of your members equally, caressing, squeezing, and stroking to the tempo of your swelling passion.");
@@ -4088,7 +4088,7 @@ public class DesertCave extends DungeonAbstractContent
 		72 == painfully distended
 		48 == bulges with unclean spawn..blahblahblah*/
 		public function sandPregUpdate(womb:Object):Boolean {
-			//1: 
+			//1:
 			if(womb["incubation"] == 336) {
 				outputText("\nYour breasts have felt unusually heavy recently, and a strange pulsing sensation occasionally emanates from them.  Your appetite is a little off; you could really go for some milk...\n");
 				return true;
@@ -4313,7 +4313,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>Eastern Warrens Main Hall (Western Portion)</u></b>\n");
 			outputText("This smooth, sandstone tunnel proceeds in a perfectly straight line from east to west, as if aligned to some titanic, invisible compass buried below the floor.  Flickering white plumes of illumination undulate through the air along the arched ceiling, trailing streamers of pearl incandescence that light the entire chamber with ghostly brightness.  You are at the entrance to the eastern warrens - the commons are still clearly visible to the west, and the pathway to the east goes on a-ways.  Hand woven tapestries adorn the walls, telling the history of this enclave in pictographic form, from its inception to present day.  Further east, you can see a few empty places, ready to be covered with more cloth, once the next chapter of history is ready to be told.  To the north, there is a small opening in the wall, blocked off by plain white curtains.");
-			dungeons.setDungeonButtons(roomSleepingChamber, null, roomCaveCommons, roomEastHall2); 
+			dungeons.setDungeonButtons(roomSleepingChamber, null, roomCaveCommons, roomEastHall2);
 		}
 		public function roomSleepingChamber():void {
 			dungeonLoc = DUNGEON_WITCH_SLEEPING_CHAMBER;
@@ -4347,7 +4347,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>Eastern Warrens, East Portion, South Side (Cum Witch's Bedroom)</u></b>\n");
 			outputText("As soon as you brush back the curtain, you're assaulted by a pungent, salty smell.  It almost reminds you of tepid ocean water... or cum.  Regardless, you force your way in and take a look around.  This area has all the furnishings of a small domicile and comes complete with a solid oak bed and mattress.  The mattress and sheets seem to be cared for with immaculate precision, perhaps magically aided.  There is a simple dresser here, and though it looks to have been fashioned by crude tools, the wood looks sturdy and serviceable.  All of the drawers are closed, of course.  A few books sit on a nearby table, but it's obvious they're written in a language beyond your comprehension.  Whoever wrote them either did so in a different tongue or a magical language that would take years to decipher.  A thick curtain walls this chamber off from the eastern warrens' main hall, to the north.  To the west, there is a thinner, gauzy sheet hanging from an opening in the rock - likely leading to a similar room.");
-			dungeons.setDungeonButtons(roomEastHall2, null, roomCumWitchOffice, null); 
+			dungeons.setDungeonButtons(roomEastHall2, null, roomCumWitchOffice, null);
 		}
 		public function roomCumWitchOffice():void {
 			dungeonLoc = DUNGEON_WITCH_CUM_WITCH_OFFICE;

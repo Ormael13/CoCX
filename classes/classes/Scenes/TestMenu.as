@@ -17,7 +17,6 @@ import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DesertCave.SandMother;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
-import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
@@ -38,6 +37,7 @@ import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Stats.Buff;
 
 import coc.view.ButtonDataList;
+
 use namespace CoC;
 
 public class TestMenu extends BaseContent
@@ -99,7 +99,7 @@ public class TestMenu extends BaseContent
 		bd.add("ClickItTwice", golemArmy, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
-		
+	
 	private function cheatTesting():void {
 		clearOutput();
 		outputText("Cheats made specifically for the testing needs. Use only if you're sure what you're doing - outdated test-cheats may break something and nobody will look into such bugs.");
@@ -649,15 +649,12 @@ public class TestMenu extends BaseContent
 		doNext(SoulforceCheats);
 	}
 	public function AddMaxBackpack2():void {
-		if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 10) {
-			AdventurerGuild.Slot01Cap = 10;
-			AdventurerGuild.Slot02Cap = 10;
+		if (AdventurerGuild.playerGuildLevel > AdventurerGuild.RANK_COPPER && AdventurerGuild.lootBag.SlotCaps[0] < 10) {
+			AdventurerGuild.unlockSlotsForRank(AdventurerGuild.RANK_IRON, 10);
 		}
-		if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.Slot03Cap < 10) {
-			AdventurerGuild.Slot01Cap = 10;
-			AdventurerGuild.Slot02Cap = 10;
-			AdventurerGuild.Slot03Cap = 10;
-			AdventurerGuild.Slot04Cap = 10;
+		if (AdventurerGuild.playerGuildLevel > AdventurerGuild.RANK_COPPER && AdventurerGuild.lootBag.SlotCaps[2] < 10) {
+			AdventurerGuild.unlockSlotsForRank(AdventurerGuild.RANK_COPPER, 10);
+			AdventurerGuild.unlockSlotsForRank(AdventurerGuild.RANK_IRON, 10);
 		}
 		doNext(SoulforceCheats);
 	}

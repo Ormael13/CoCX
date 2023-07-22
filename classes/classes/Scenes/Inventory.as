@@ -21,6 +21,7 @@ import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
 import classes.Scenes.NPCs.MagnoliaFollower;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 
 import coc.view.ButtonDataList;
 import coc.view.charview.DragButton;
@@ -82,6 +83,10 @@ use namespace CoC;
 
 		public function pearlStorageDirectGet():Array { return pearlStorage; }
 
+		public function pearlStorageSlice():/*ItemSlotClass*/Array {
+			return pearlStorage.slice(0, pearlStorageSize());
+		}
+		
 		public function gearStorageDirectGet():Array { return gearStorage; }
 
 //		public function currentCallNext():Function { return callNext; }
@@ -806,7 +811,10 @@ use namespace CoC;
 			return i;
 		}
 		
-		public function takeItem(itype:ItemType, nextAction:Function, overrideAbandon:Function = null, source:ItemSlotClass = null):void {
+		public function takeItem(itype:ItemType,
+								 nextAction:Function,
+								 overrideAbandon:Function = null,
+								 source:ItemSlotClass = null):void {
 			if (itype == null) {
 				CoC_Settings.error("takeItem(null)");
 				return;
@@ -839,11 +847,9 @@ use namespace CoC;
 				}
 			}
 			//Check for room in Guild quest bag and return the itemcount for it.
-			if (InCollection(itype, useables.IMPSKLL, useables.FIMPSKL, useables.MINOHOR, useables.DEMSKLL, useables.SEVTENT) && nextAction != SceneLib.adventureGuild.questItemsBag) {
-				temp = SceneLib.adventureGuild.roomInExistingStack(itype);
-				if (temp >= 0) {
-					SceneLib.adventureGuild.placeItemInStack(itype);
-					outputText("You place " + itype.longName + " in your quest materials pouch, giving you "+ (temp+1) +" of them.");
+			if (nextAction != SceneLib.adventureGuild.questItemsBag) {
+				if (AdventurerGuild.lootBag.addItem(itype, 1) == 1) {
+					outputText("You place " + itype.longName + " in your quest materials pouch, giving you " + AdventurerGuild.lootBag.itemCount(itype) + " of them.");
 					itemGoNext();
 					return;
 				}

@@ -91,7 +91,10 @@ public class SimpleTween {
     }
     
     public function then(callback:Function):void {
-        if (!_active) return;
+        if (!_active) {
+            callback();
+            return;
+        }
         if (_onEnd != null) {
             var oldOnEnd:Function = _onEnd;
             _onEnd = function():void {

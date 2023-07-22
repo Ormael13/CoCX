@@ -38,7 +38,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
-		if (!player.hasStatusEffect(StatusEffects.NearbyPlants) && !explorer.areaTags.plants) {
+		if (!combat.isNearPlants()) {
 			return "Entangle require to have plants nearby.";
 		}
 		

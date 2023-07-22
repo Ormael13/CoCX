@@ -29,7 +29,7 @@ public function bunnbunbunMeet():void {
 
 		outputText("Even though nearly a minute has passed, the bunny-lass is STILL frozen and staring.  She hasn't done anything since realizing that you're looking at her.  Well, it looks like the ball's in your court.  What do you do?");
 		//[Talk] [Rape Her]
-		simpleChoices("Talk", talkToBunnyBunBun, "Rape Her", rapeBunBun, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		simpleChoices("Talk", talkToBunnyBunBun, "Rape Her", rapeBunBun, "", null, "", null, "Leave", explorer.done);
 	}
 	//Met her
 	else {
@@ -65,7 +65,7 @@ private function sexMenu():void {
 	addButton(3, "Your Ass", bunbunFucksPCInAss);
 	addButtonIfTrue(5, "LayYourEggs", ovipositBunnyEaster, "Req. any ovipositor.", player.canOviposit());
 	addButtonIfTrue(6, "Eggs & Honey", layEggsInBunbuns, "Req. bee ovipositor.", player.canOviposit());
-	addButton(14, "Leave", camp.returnToCampUseOneHour);
+	addButton(14, "Leave", explorer.done);
 }
 
 //[Talk]
@@ -92,7 +92,7 @@ private function rapeBunBun():void {
 	if(player.spe < 60) {
 		outputText("You lunge forward off your [feet], trying to tackle and pin the poor girl, but at the first sign of movement from you, she bounds off in the other direction!  She's hopping so fast there's no way you could possibly catch her, and in a matter of seconds you're left totally alone.  Well, perhaps not TOTALLY alone – there's one small egg nestled in the grass.  It fell from the bunny's basket in her haste to flee!");
 		//(pick and loot random egg)
-		inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
+		inventory.takeItem(consumables.NPNKEGG, explorer.done);
 	}
 	//[Rape Her Faster]
 	else {
@@ -192,6 +192,7 @@ private function bunbunFucksYourVag():void {
 	}
 	player.sexReward("cum","Vaginal");
 	dynStats("lib", 1, "sen", -3);
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseEightHours);
 }
 
@@ -281,6 +282,7 @@ private function bunbunFucksPCInAss():void {
 	player.buttKnockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_EGGS, 1, 1);
 	player.sexReward("cum","Anal");
 	dynStats("lib", 1, "sen", 1);
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseEightHours);
 }
 
@@ -364,7 +366,7 @@ private function bunbunGetsFucked():void {
 	player.sexReward("vaginalFluids","Dick");
 
 	dynStats("lib", 1, "sen", 1);
-	inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.NPNKEGG, explorer.done);
 }
 
 private function bunbun69():void {
@@ -386,7 +388,7 @@ private function bunbun69():void {
 			//- Intelligence
 			//+ Lust
 			player.addCurse("int", 2, 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		else {
 			outputText("Without thinking it over too hard beyond 'that sounds hot', you declare your intention to 69 the bunny girl.  She bursts into laughter.  You're a little perturbed by this and make it clear you're quite serious by restating your goal.\n\n");
@@ -404,7 +406,7 @@ private function bunbun69():void {
 			player.addCurse("int", 2, 2);
 			//+ Lust
 			//+ Pink Egg
-			inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.NPNKEGG, explorer.done);
 		}
 		return;
 	}
@@ -462,7 +464,7 @@ private function bunbun69():void {
 				player.tailType = Tail.RABBIT;
 				player.ears.type = Ears.BUNNY;
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			player.sexReward("cum","Lips");
 			player.sexReward("vaginalFluids","Lips");
 			player.sexReward("saliva","Dick");
@@ -522,7 +524,7 @@ private function bunbun69():void {
 				player.tailType = Tail.RABBIT;
 				player.ears.type = Ears.BUNNY;
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			player.sexReward("cum","Lips");
 			player.sexReward("vaginalFluids","Lips");
 			player.sexReward("saliva","Dick");
@@ -566,7 +568,7 @@ private function bunbun69():void {
 			player.tailType = Tail.RABBIT;
 			player.ears.type = Ears.BUNNY;
 		}
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		player.sexReward("cum","Lips");
 		player.sexReward("vaginalFluids","Lips");
 		player.sexReward("saliva","Vaginal");
@@ -621,7 +623,7 @@ public function layEggsInBunbuns():void {
 	outputText("\n\nFinally you find you no longer have any to give to the egg-obsessed rabbit girl, and the ovipositor retracts into its slit.  Tired but blissful, she curls up to slumber, and you leave her to deal with having a stomach chock-full of eggs 'n honey, returning to camp until you once again need a warm body to play host.");
 	player.dumpEggs();
 	player.sexReward("Default","Default",true,false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -676,7 +678,7 @@ public function ovipositBunnyEaster():void {
 	player.dumpEggs();
 	player.orgasm();
 	dynStats("sen", -2);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Bunny Girl Eggsplosion
@@ -719,7 +721,7 @@ private function adjathaEggsplosions():void {
 		if(player.cockThatFits(40) >= 0) addButton(2,"Fuck Her",fuckTheEggBoundBun);
 		else outputText("  <b>You're too big to fuck her!</b>");
 	}
-	addButton(14,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",explorer.done);
 }
 
 //[Free Her] (Any gender)
@@ -762,7 +764,7 @@ private function freeHerOhGodWhyDidYouDoThis():void {
 	outputText("\n\nThe frantic pace of her initial discharge ebbs as her hulking testes visibly shrink.  She leans up against the wobbling factories, resting atop them like they were hefty, liquid pillows.  It'll take her a while to finish emptying herself completely, but for the time being, she seems content.  You give her fluffy tail a playful poof and head back to camp, stooping to retrieve one of the girl's eggs from the ground as you go.\n\n");
 	//[End Encounter, gain neon pink egg]
 	dynStats("lus", 25, "scale", false);
-	inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.NPNKEGG, explorer.done);
 }
 
 //[Fuck Her] (Male/Futa Only)
@@ -817,7 +819,7 @@ private function fuckTheEggBoundBun():void {
 	//[End Encounter, corruption up]
 	player.sexReward("no", "Dick");
 	dynStats("cor", 2);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[Get Egged] (Female/Futa only)
@@ -931,6 +933,7 @@ private function getEggflated():void {
 	outputText(player.modTone(0,3));
 	player.sexReward("cum","Vaginal");
 	dynStats("lib", 1, "sen", -3);
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseEightHours);
 }
 	}

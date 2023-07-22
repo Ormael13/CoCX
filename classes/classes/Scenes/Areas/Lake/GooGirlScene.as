@@ -539,7 +539,7 @@ public class GooGirlScene extends AbstractLakeContent
 			outputText("The small, crimson heart-shaped core in the girl's body swims within her form uncertainly. The expanding " + gooColor8() + " lengths gradually approach the jewel-like nucleus at the girl's center, their corrupt fluids swirling within the trembling shafts, moments from release. In panic, the girl's heart leaps up into her head, and her eyes clench as her gaping mouth crinkles around the edges, and she lurches forward in a tremendous sneeze. The slime core launches from her lips and arcs through the air before splashing safely away from the orgy. Without an intellect, the girl's now doll-like body coos wordlessly when the ooze men climax, unleashing a torrent of seething viridian into her. The murky cum floods the goo's vibration-sexualized form, filling her belly, limbs, and head with a creeping green tint. The hollow slime blissfully strokes her distorted form as the corrupt slime within her begins to work its masculine influence on her shape. Her overfull curves bubble and collapse as the last of her " + gooColor() + " goo is smothered by the corrupt slime semen.  When it's all over, the hyper-feminine slime's body has been sculpted to a slightly effete male. A bulge rises from between her legs, dripping into a fresh, gooey cock.\n\n");
 			outputText("You hurry away before the five oozes take an interest in you next.");
 			dynStats("lus", (4 + player.cor / 10), "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function layBeeEggsInGoo():void

@@ -162,7 +162,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		private function dontExploreAmilyVillage():void {
 			clearOutput();
 			outputText("Standing up, you turn and walk away. You presume from the state of the pathway that the village at the other end must either be in dire straits, abandoned, or overwhelmed by demons. In other words, it's no safe place for a traveler like you.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Yes]
@@ -172,7 +172,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("(<b>\"TownRuins\" added to Places menu.</b>)");
 			//set village unlock flag
 			flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function nailsEncounter():void {
@@ -184,7 +184,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nNails: ");
 			if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
 			outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Exploring the Ruined Village]
@@ -246,7 +246,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					default:
 						outputText("  <b>Please let Ormael/Aimozg know about this bug.</b>");
 				}
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//20% of finding nails
@@ -263,14 +263,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					return;
 				}
 				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside the village.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//Schrödinger Amily corrupted that damn place!
 			else if (flags[kFLAGS.AMILY_FOLLOWER] == 2) {
 				amilySprite();
 				outputText("You enter the ruined village, still laughing at your past nefarious deeds. Maybe it's just your imagination, but you feel like this entire place reeks of corruption now... You explore for an hour, then go back to your camp, knowing your tainted slave will be more than happy to satisfy your urges.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//Remove worm block if player got rid of worms.
@@ -301,7 +301,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Amily Un-encounterable (worms):
 			if (flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1 || player.cor > 25 + player.corruptionTolerance || flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0) {
 				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. For hours you explore, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			amilySprite();
@@ -442,7 +442,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>Hey, us girls gotta stick together, right?</i>\" She winks at you then wanders off behind a partially collapsed wall, disappearing into the rubble.");
 						//Set flag for 'last gender met as'
 						flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
-						doNext(camp.returnToCampUseOneHour);
+						endEncounter();
 						return;
 					}
 					//Lesbo lovin confession!
@@ -501,7 +501,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("She turns and walks away, vanishing into the dust and the rubble like magic.");
 						//Set flag for 'last gender met as'
 						flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
-						doNext(camp.returnToCampUseOneHour);
+						endEncounter();
 						return;
 					}
 					//Medium affection 33% chance, guaranteed by 20.
@@ -579,7 +579,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						}
 						//Set flag for 'last gender met as'
 						flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
-						doNext(camp.returnToCampUseOneHour);
+						endEncounter();
 						return;
 					}
 				}
@@ -689,7 +689,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.AMILY_WANG_LENGTH] == 0 && flags[kFLAGS.AMILY_HERM_QUEST] == 2 && flags[kFLAGS.AMILY_AFFECTION] >= 40 && player.gender == 3)
 				addButton(3, "Efficiency", makeAmilyAHerm).hint("You could probably bring up the efficiency of having two hermaphrodite mothers, particularly since you have this purified incubi draft handy.")
 						.disableIf(!player.hasItem(consumables.P_DRAFT), "You could probably bring up the efficiency of having two hermaphrodite mothers, should you find a bottle of purified incubi draft.");
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 
 		private function determineAmilySexEvent(forced:Boolean = false):Function {
@@ -789,7 +789,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//{+10 Affection}
 			flags[kFLAGS.AMILY_AFFECTION] += 10;
 			//{-5 Libido}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Announce yourself]
@@ -822,7 +822,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			outputText("\"<i>So, have you changed your mind? Have you come to help me out?</i>\" Amily asks curiously.\n\n");
 			//Accept / Politely refuse / Here to talk / Get lost
-			simpleChoices("Accept",secondTimeAmilyOfferedAccepted,"RefusePolite",secondTimeAmilyRefuseAgain,"Just Talk",repeatAmilyTalk,"Get Lost",tellAmilyToGetLost,"Leave",camp.returnToCampUseOneHour);
+			simpleChoices("Accept",secondTimeAmilyOfferedAccepted,"RefusePolite",secondTimeAmilyRefuseAgain,"Just Talk",repeatAmilyTalk,"Get Lost",tellAmilyToGetLost,"Leave",explorer.done);
 		}
 
 		//[Accept]
@@ -846,7 +846,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\"<i>All right; it is your choice. But my offer still stands, you know,</i>\" she tells you.\n\n");
 
 			outputText("You let her know you'll remember that, and then turn and leave.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Here to talk]
@@ -871,7 +871,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 			//{Ruined Village removed from Places list}
 			//I think one variable can handle both these...
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -893,7 +893,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("Amily can still move quickly despite her pregnancy, and you are very promptly left all alone. Perhaps it would be better not to broach the subject that bluntly with her while she's in this state.\n\n");
 							//Reduce affection. DERP
 							flags[kFLAGS.AMILY_AFFECTION] -= 3;
-							doNext(camp.returnToCampUseOneHour);
+							endEncounter();
 						}
 						//[Medium Affection]
 						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
@@ -918,7 +918,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("Annoyed, she turns and waddles off. You do not give chase; you can tell that you've offended her.\n\n");
 							//Reduce affection
 							flags[kFLAGS.AMILY_AFFECTION] -= 3;
-							doNext(camp.returnToCampUseOneHour);
+							endEncounter();
 						}
 						//[Medium Affection]
 						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
@@ -929,7 +929,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("\"<i>It's not that I don't like you, [name], it's just... well, I don't feel comfortable doing that,</i>\" she explains apologetically.\n\n");
 							outputText("You apologize back for confronting her with something she's uncomfortable with, and leave for your own camp, lest you insult her seriously.");
 							flags[kFLAGS.AMILY_AFFECTION] -= 3;
-							doNext(camp.returnToCampUseOneHour);
+							endEncounter();
 						}
 						//[High Affection]
 						else {
@@ -1246,7 +1246,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Feeling the weight of the empty village pressing in on you, you quickly retreat yourself. There's no point coming back here.\n\n");
 			//turn off village.
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Turn her down bluntly]
@@ -1267,7 +1267,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//{Amily can no longer be encountered}
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 			//{Ruined Village removed from Places list}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Birth]
@@ -1292,7 +1292,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("The next morning, you find a note scratched onto a slab of bark beside your sleeping roll, reading, \"<i>The babies and I are both fine. No thanks to you!</i>\"\n\n");
 			//{Affection goes down}
 			flags[kFLAGS.AMILY_AFFECTION] -= 10;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -1317,7 +1317,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("  Their color patterns vary considerably; white, black and brown are most common, and you even see one or two with your hair color. Amily flops back onto her rump and then topples over onto her back, clearly too tired to stand up. Her offspring crowd around, cuddling up to her, and she gives them a tired but happy smile.\n\n");
 
 			outputText("Making sure that there doesn't seem to be any danger, you quietly let yourself out. It seems that she's too concerned about the children to notice you leave.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Help]
@@ -1370,7 +1370,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("As the rambunctious little mouselets burn up their energy and curl up beside Amily to sleep, you gently excuse yourself and return to camp.");
 			//{Affection goes up}
 			flags[kFLAGS.AMILY_AFFECTION] += 5;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 
 		}
 
@@ -1395,7 +1395,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Amily inclines her head towards you in a respectful nod, and then joins her vast brood as they begin to march away purposefully. You watch them go until they have vanished from sight, then shake your head with a sneer. Like you need her or her brats, anyway! Spinning on your heel, you stride purposefully out of this dump of a village; you don't intend to come back here again.\n\n");
 
 			outputText("Amily has left the region with her children to found a new colony elsewhere.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//{Amily can no longer be encountered}
 			//{Ruined Village removed from Places list}
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
@@ -1475,7 +1475,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//Disable amily encounters in the village!
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Conversations - talk wif da bitch.
@@ -1504,7 +1504,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					if(sexAfter) doNext(determineAmilySexEvent());
 					else {
 						outputText("Promising you'll keep that in mind, you take your leave of Amily.\n\n");
-						doNext(camp.returnToCampUseOneHour);
+						endEncounter();
 					}
 					return;
 				}
@@ -1924,7 +1924,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(sexAfter) {
 				doNext(determineAmilySexEvent(true));
 			}
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 
 		//First Time Sekksin:
@@ -1994,7 +1994,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Affection downer
 			flags[kFLAGS.AMILY_AFFECTION] -= 5;
 			amilyPreggoChance();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		//[=Wait for Her=]
 		private function beSomeKindofNervousDoucheAndWaitForAmily():void {
@@ -2015,7 +2015,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_AFFECTION] -= 2;
 			amilyPreggoChance();
 			player.sexReward("vaginalFluids","Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		//[=Kiss Her=]
 		private function kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay():void {
@@ -2045,7 +2045,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Affection boost?
 			flags[kFLAGS.AMILY_AFFECTION] += 3;
 			player.sexReward("vaginalFluids","Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			amilyPreggoChance();
 		}
 
@@ -2057,7 +2057,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(x == -1 && player.hasCock()) {
 				outputText("Amily looks between your legs and doubles over laughing, \"<i>There is no way that thing is fitting inside of me!  You need to find a way to shrink that thing down before we get in bed!</i>\"");
 				flags[kFLAGS.AMILY_AFFECTION]--;
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			if(flags[kFLAGS.AMILY_FUCK_COUNTER] == 0) {
@@ -2122,7 +2122,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//worm infested reaction
 			if(player.hasStatusEffect(StatusEffects.Infested)) {
 				outputText("\"<i>EWWWW!  You're infested!</i>\" she shrieks, \"<i>Get out!  Don't come back 'til you get rid of the worms!</i>\"\n\nYou high tail it out of there.  It looks like Amily doesn't want much to do with you until you're cured.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				flags[kFLAGS.AMILY_AFFECTION] -= 3;
 				flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 1;
 				return;
@@ -2198,7 +2198,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_AFFECTION] += 1 + rand(2);
 			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -2288,7 +2288,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			clearOutput();
 			outputText("You smile at her and give her a kiss before saying goodbye and returning to your camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Stay A While]
@@ -2298,7 +2298,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You decide you'd rather stay with her a little longer, so you get up, go to her and with a kiss and some caresses draw her down again. She doesn't really put up any resistance, so you both lie there kissing and caressing each other for some time before you finally say goodbye and return to your camp.");
 			//Bonus affection mayhapz?
 			flags[kFLAGS.AMILY_AFFECTION] += 3;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -2356,7 +2356,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
 			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//preggo chance
 			amilyPreggoChance();
 		}
@@ -2400,7 +2400,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//preggo chance
 			amilyPreggoChance();
 		}
@@ -2464,7 +2464,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (pregnancy.isPregnant && pregnancy.incubation == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
 				clearOutput();
 				amilyPopsOutKidsInCamp();
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//Jojo + Amily Spar
@@ -2787,7 +2787,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(Random camp discussion takes place)
 			talkWithCuntIMeanAmily();
 			//AbandonedTownRebuilt.InTown = false;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function talkToAmilyWithSexAfter():void { talkWithCuntIMeanAmily(true); }
@@ -3059,7 +3059,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("With a contented sigh and a broad, satisfied smile, Amily murmurs, \"<i>That felt great...</i>\" She switches her position again so that her head is again next to yours, puts her arms around you and nuzzles you a bit. You embrace her too, and enjoy the afterglow with her for some time, before you both go back to work.\n\n");
 			player.sexReward("vaginalFluids");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Take Charge: Mount Amily
@@ -3109,7 +3109,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			player.sexReward("cum", "Vaginal");
 			dynStats("sen", -1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[=Let Amily Lead=]
@@ -3140,7 +3140,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("You'd never have expected the little mousegirl to do something like this - and you certainly would never have thought it would feel so good. Sure enough, you soon feel yourself reaching the \"<i>point of no return</i>\", but any attempts to tell her that you won't be able to hold back much longer are made futile by her enduring kisses. You're quite sure she's smiling at your predicament - she probably planned for this to happen. Shrugging mentally, you decide to go with the flow and worry about it later. So you try to relax (as much as you can do that while Amily is giving you an incredible tailjob...) and simply enjoy the feeling. Sure enough, it doesn't take her much longer to finally make you cum. Breaking the kiss, she steps back and with a broad grin asks: \"<i>Did you enjoy that, you naughty " + player.mf("man","girl") + "?</i>\"\n\n");
 
 				outputText("Naturally, you tell her that you enjoyed it very much, and with a smile, Amily helps you clean up. \"<i>If you liked it that much...</i>\" she says over her shoulder and winks at you as she goes to take care of something else.\n\n");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				player.sexReward("no", "Dick");
 				dynStats("sen", -1);
 			}
@@ -3153,7 +3153,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("Looking at her hands and feet covered by your cum, Amily jokingly accuses you of forcing her to clean herself yet again, just because you have no control. Your eyes widen a bit in surprise when the mousegirl lightly licks one of her hands and comments \"<i>Mmhhmm... not bad, actually...</i>\" With a grin, she cleans up the results of her hand-and-foot-job before pulling you to your feet again. \"<i>Back to work, Champion!</i>\"\n\n");
 
 				outputText("With a satisfied smile, you turn to other things.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				player.sexReward("no", "Dick");
 				dynStats("sen", -1);
 			}
@@ -3181,7 +3181,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("and limp cock ");
 				outputText("across your chest as she repositions herself so that she is looking you in the eyes, laying atop you. \"<i>You always know how to make a girl feel special, don't you?</i>\" she says, softly. Then she kisses you, probing her tongue deep into your mouth to get a good taste of her juices, before wriggling off of you, grabbing her pants and running merrily away. You watch her go, then clean yourself off.\n\n");
 				player.sexReward("vaginalFluids", "Lips", false);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				dynStats("int", .25, "lus", 10);
 			}
 			//B4: Get Ridden
@@ -3205,7 +3205,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("Exhausted, you feel a quick nap is in order yourself. When you wake up, you're alone in the nest but Amily is nearby; she hands you some food and then points you in the direction of the stream to wash up.\n\n");
 				amilyPreggoChance();
 				//if (AbandonedTownRebuilt.InTown = false) {
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 				player.sexReward("vaginalFluids", "Dick");
 				dynStats("sen", -1);
@@ -3227,7 +3227,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("You shrug, uncertain. Slowly, Amily sits up and gets off of you. \"<i>I... um... thank you.</i>\" She says, then quickly steals a kiss from you before running off. She's in such a hurry that she's clear over on the other side of the camp before you can tell her that she left her pants behind.");
 				player.sexReward("cum","Lips", false);
 				//if (AbandonedTownRebuilt.InTown = false) {
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 				dynStats("int", .25, "lus", 10);
 			}
@@ -4405,7 +4405,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("saliva");
 			dynStats("sen", 1, "cor", 1);
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 		private function corruptAmilyLickPussiesLikeAPro():void {
@@ -4482,7 +4482,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("saliva");
 			dynStats("sen", -1, "cor", 1);
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 
@@ -4562,7 +4562,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Amily beams with happiness, \"<i>Yes mistress!</i>\" then proceeds to clean you up, licking every single drop she can out of your body.  To finish it all up, she licks your [feet] clean of whatever juices remained on them. Satisfied, you dismiss Amily with a wave, heading back to the camp, while Amily rubs the results of your coupling on her body.");
 			player.sexReward("vaginalFluids");
 			dynStats("sen", -1, "cor", 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		//Fuck corrupt Amily's pussaaaaaayyyyy
 		private function corruptAmilysPussyGetsMotherfuckingFucked():void {
@@ -4657,7 +4657,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilyPreggoChance();
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2, "cor", 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Let corrupt Amily bone you with her cock
@@ -4727,7 +4727,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("cum","Vaginal");
 			dynStats("sen", -2, "cor", 2);
 
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -4779,7 +4779,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("; stopping only when you're completely clean. You pat her head and praise her, \"<i>That's a good cumdumpster.</i>\" She responds by smiling tiredly, still panting a bit, and swaying her tail in happiness. You wipe the remaining saliva off your dick on her face and dress yourself. \"<i>Don't waste a single drop, cunt,</i>\" you tell her.  You leave the tired mouse alone to recompose herself.");
 			player.sexReward("no", "Dick");
 			dynStats("sen", -2, "cor", 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -4823,7 +4823,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You watch her go, feeling a little guilty, but you just don't swing that way. You can only hope she'll be all right.\n\n");
 			//(Amily's affection drops back down to Low)
 			if(flags[kFLAGS.AMILY_AFFECTION] > 10) flags[kFLAGS.AMILY_AFFECTION] = 10;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Amily's Surprise:
@@ -4863,7 +4863,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Amily stops, her new cock wilting, her expression making it quite obvious that she's heartbroken. Her head falls, tears dripping from her eyes, and she turns and runs away. You glare after her as she vanishes, sobbing, into the ruins, hoping she never comes back.");
 			//no moar amily in village
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Yuri:
@@ -4903,7 +4903,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Your own strength returning to you, you sit up and smile at your mousey lover before giving her a deep kiss, tasting your juices and letting her get a taste of her own. Then you redress yourself and return to your camp.");
 			player.sexReward("cum","Vaginal");
 			flags[kFLAGS.AMILY_TIMES_FUCKED_FEMPC]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Herm Amily on Female:
@@ -4957,7 +4957,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("cum","Vaginal");
 			flags[kFLAGS.AMILY_HERM_TIMES_FUCKED_BY_FEMPC]++;
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Player gives Birth (quest version):
@@ -5350,7 +5350,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					dynStats("lus", 25+player.sens/10, "scale", false);
 				}
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		//"Why Not Herms?" (Req medium 'like')
 		private function whyNotHerms():void {
@@ -5379,7 +5379,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\"<i>But it's unnatural!</i>\" She barks... well, squeaks indignantly, anyway. \"<i>Women with cocks, men with cunts - before those fucking demons, you never saw creatures like that! They're not normal! I mean, you don't seem to be a bad person, but I could never have sex with someone like that!</i>\"\n\n");
 
 			outputText("At that, she turns and runs off, quickly vanishing into the rubble. You choose not to pursue; it seems she's clearly not in the mood to talk about it.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			flags[kFLAGS.AMILY_HERM_QUEST]++;
 		}
 
@@ -5420,7 +5420,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Looking deeply sad, she turns and walks away, vanishing into the urban wilderness in that way only she can. Instinctively, you realize that you will never see her again.");
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Conversation: Efficiency
@@ -5502,7 +5502,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\"<i>I hope you don't mind, [name], but I contacted them to come and take their new siblings back with them shortly after we confirmed I was pregnant.</i>\" Amily says, sheepishly. \"<i>We just can't really care for them here, and they'll be safer and happier with all their siblings.</i>\"\n\n");
 
 				outputText("You nod your head and admit that you agree. Once you have regained your strength, you spend some time talking with your fully adult children and playing with your overdeveloped newborns. Then, with a final wave goodbye, the "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"mouse-morphs":"family of mice")+" disappear into the wilderness once more.");
-				//if (AbandonedTownRebuilt.RebuildState == 3) AbandonedTownRebuilt.MousetownPopulation += 5;	
+				//if (AbandonedTownRebuilt.RebuildState == 3) AbandonedTownRebuilt.MousetownPopulation += 5;
 			}
 			//CORRUPT!
 			else {
@@ -5647,7 +5647,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else outputText("You think about some of the more interesting potions you found while exploring; perhaps you could use some of them...");
 			}
 			dynStats("lus", 25, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//FLAG THAT THIS SHIT WENT DOWN
 			flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 		}
@@ -5668,13 +5668,13 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(if PC doesn't have the required items)
 				if(!(player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT)) || !player.hasItem(consumables.GOB_ALE)) {
 					outputText("You think about going into the Ruined Village, but you don't have the ingredients to create more of Amily's medicine. You return to your camp.");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				//(if PC is genderless and has the ingredients.)
 				else if(player.gender == 0) {
 					outputText("You think about going into the Ruined Village, but without a cock or a pussy you can't complete the mixture. You return to your camp.");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				//(else)
@@ -5713,13 +5713,13 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(if PC doesn't have the required items and has >= 25 Corruption)
 				if(!(player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT)) || !player.hasItem(consumables.GOB_ALE)) {
 					outputText("You think about going into the Ruined Village, but decide it's best to wait until you have a plan underway (maybe some lust draft and a goblin ale to get the ball rolling... you return to your camp.");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				//(else if the PC is genderless)
 				else if(player.gender == 0) {
 					outputText("You think about going into the Ruined Village, but decide to turn back; right now, you just don't have the proper 'parts' to get the job done, and so you return to your camp.\n\n");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				//(else)
@@ -5761,7 +5761,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 			}
 			player.orgasm();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function sendCorruptCuntToFarm():void
@@ -5778,7 +5778,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nShe will make a hard worker for Whitney, you think, but you doubt she will be much use protection wise.");
 
 			flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function backToCamp():void
@@ -5845,7 +5845,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(If player has no main item:)
 				if(player.itemSlot1.quantity == 0) {
 					outputText("You tell her that you'll call for her, if you ever need her knowledge.\n\n");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				//(If player has an item:)
@@ -6149,7 +6149,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("You chuckle a little and tell her you'll think about it.  As you leave, she begins to masturbate, no doubt fantasizing about being used by a tentacle beast.");
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -6373,7 +6373,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (!recalling) {
 				flags[kFLAGS.AMILY_CORRUPTION]++;
 				dynStats("cor", 5);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			} else doNext(recallWakeUp);
 		}
 
@@ -6400,7 +6400,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				sceneHunter.print("NEED MORE CORRUPTION!!");
 				player.orgasm();
 				dynStats("cor", 2);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//(else)
@@ -6458,7 +6458,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				sceneHunter.print("NEED MORE CORRUPTION!!");
 				player.orgasm();
 				dynStats("cor", 2);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			outputText("That was good, but now it's time to reward Amily for her efforts, besides you could really use a proper licking.\n\n");
@@ -6500,7 +6500,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (!recalling) {
 				flags[kFLAGS.AMILY_CORRUPTION]++;
 				dynStats("cor", 5);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			} else doNext(recallWakeUp);
 		}
 
@@ -6512,7 +6512,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(if PC is genderless)
 			if(player.gender == 0) {
 				outputText("You would love to play with your mouse bitch, but you don't have the parts for that; so you return to the camp.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			outputText("You enter the ruined village hoping to find your corrupted mouse cumbucket. It doesn't take long until you spot her; she's stroking her pussy and blowing a wood carved dildo, practicing like you told her to.\n\n");
@@ -6579,7 +6579,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				sceneHunter.print("Not corrupt enough...");
 				player.sexReward("saliva");
 				dynStats("cor", 3);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			outputText("You push her back and withdraw, not yet satisfied. <b>A familiar power gathers inside you, and you decide to tap into it.</b>\n\n");
@@ -6658,7 +6658,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 				outputText("You return to the camp.");
 				sceneHunter.print("Not corrupt enough...");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				player.orgasm();
 				dynStats("cor", 3);
 				return;
@@ -6735,7 +6735,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				} else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 				//Disable amily encounters in the village!
 				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			} else doNext(recallWakeUp);
 		}
 
@@ -6787,6 +6787,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			else {
 				outputText("You search for Amily high and low, but can't find a single trace of her. Frustrated, you return to the camp.  Maybe if you were smarter or faster you could find her.");
+				explorer.stopExploring();
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
@@ -6798,7 +6799,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(if PC is genderless)
 			if(player.gender == 0) {
 				outputText("You think about going into the ruined village, but playing with Amily is not going to be possible if you don't have the parts for it... You return to your camp.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			//(else)
 			else {
@@ -6826,7 +6827,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("Amily shakes her head and yells, \"<i>No! I can't!</i>\" before darting off.\n\n");
 
 					outputText("You laugh and put the bottle away, then return to your camp.\n\n(Not corrupt enough...)");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				outputText("You begin stripping off your [armor] and show her your ");
@@ -6862,7 +6863,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(if PC is genderless)
 			if(player.gender == 0 ) {
 				outputText("You think about going into the ruined village, but playing with Amily is not going to be possible if you don't have the parts for it... You return to your camp.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			amilySprite();
@@ -6904,7 +6905,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			outputText("Amily approaches you, looking concerned.  \"<i>Darling... I don't know what's been going on, but you need to start taking better care of yourself.  I can smell the corruption taking root in you - if you don't stop, you'll soon start acting like any other demon.</i>\"\n\n");
 			flags[kFLAGS.AMILY_WARNING] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Farewell Note:
@@ -6965,7 +6966,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("There's a long pause while Amily digests your implication.  \"<i>You want me to... change?</i>\" she asks quietly.  \"<i>Would that... make you want to mate with me?</i>\"  You can't make any promises, but it would definitely change your considerations, you explain.\n\n");
 			outputText("After another long silence, she sighs.  \"<i>I don't know.  What would my family say if I just... went and made myself a completely different person, all for the sake of a human?</i>\"  You slowly move to her and lay a hand on her shoulder, forcing her to look once more into your eyes.  It's not the fact that she won't be a mouse, you insist.  It's the fact that she's moving on for the sake of her race.  She manages a little smile at that, her expression brightening just a bit.  \"<i>I'll think about it,</i>\" she finally decides.  \"<i>If you can find some non-demonic reagents, perhaps we can give it a try.  If anything bad happens, though,</i>\" she warns, wagging a finger at you threateningly.  She backs off and stands awkwardly for a second.\n\n");
 			outputText("\"<i>Well, uh... bye,</i>\" Amily concludes, whirling around and walking away.  You can't be sure, but it seems like she's exaggerating the sway of her hips a bit.  You don't think much of it, heading back toward camp and beginning to formulate a concoction to de-mouse your potential breeding partner.  Perhaps... a <b>golden seed</b> for a human face, a <b>black egg</b> to get rid of the fur, and some <b>purified succubus milk</b> to round things off.  You make a mental note to remember those ingredients, for they won't show up again and you'd feel positively silly if you somehow completely forgot them.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		// Check if we have all the shit we need
 		private function amilyCanHaveTFNow():Boolean
@@ -7002,7 +7003,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("A cry brings your attention from the hair-pile back up to her face.  As if by magic, her rodent snout simply recedes back into her face, the nose reforming into a more human model.  She gently reaches up and brushes a fingertip across her new lips, eyes glazing over as tears begin to form.  \"<i>So... different,</i>\" she whispers as the transformation continues.  You move to her and wrap her in a warm, comforting hug, and after a moment's pause, she wraps her arms around you as well.\n\n");
 			outputText("Finally, the process comes to a close.  You break from each other and stand at arm's length, both of you studying the changes to her previously-animalistic self.  Her auburn-colored ears and bare tail remain unchanged, but other than that, Amily's completely human.  Though a bit conflicted, Amily seems happy enough with her decision.  \"<i>Well, I guess that's all there is to it,</i>\" she says, scratching her newly bare cheek idly.  \"<i>I'll let you think for a bit... see you later.</i>\"\n\n");
 			outputText("She stalks off into the ruins once more, humming a little tune as she goes.  You note a little more spring in her step, now that hope is restored in repopulating her race.\n\n");
-			doNext(camp.returnToCampUseOneHour); // To camp
+			endEncounter(); // To camp
 		}
 
 //Anyone, find a place to call it please
@@ -7202,6 +7203,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You watch Urta take a nice long drink from the proffered bottle, but before she gets well and truly smashed, you politely excuse yourself and, helping an inebriated Amily to her feet, exit the Wet Bitch.  The two of you make your way back to camp and, putting the drunken mouse-girl to bed, you give her a kiss on the cheek and soon fall asleep.");
 			//Disable threesomes between them forever.
 			flags[kFLAGS.AMILY_VISITING_URTA] = 3;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseFourHours);
 		}
 
@@ -7238,7 +7240,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(Display Appropriate Options: [Use Cock] [Use Vag])
 			if (player.hasCock()) addButton(0, "Use Cock", threesomeAmilUrtaCAWKS);
 			if (player.hasVagina()) addButton(1, "Use Vagina", urtaXAmilyCuntPussyVagSQUICK);
-			addButton(4, "Never mind", camp.returnToCampUseOneHour);
+			addButton(4, "Never mind", explorer.done);
 		}
 
 		//Amily/Urta -- Use Cock
@@ -7327,6 +7329,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\n(<b>Urta unlocked in Amily's sex menu!</b>)");
 				flags[kFLAGS.AMILY_VISITING_URTA] = 4;
 			}
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseFourHours);
 		}
 		public function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
@@ -7411,7 +7414,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			player.sexReward("cum","Anal");
 			dynStats("sen", 1);
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 
@@ -7491,7 +7494,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			dynStats("sen", -2);
 			flags[kFLAGS.TIMES_FUCKED_AMILYBUTT]++;
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 		
@@ -7594,7 +7597,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilyPreggoChance();
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//First talk: Finished (Bagpuss)(Zedited, but no followups are ready yet)
@@ -7742,7 +7745,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You wake up almost an hour later, Amily still dozing on top of you.  Gently picking her up, you take her to her nest and lay the girl down in the soft bedding, smiling at the bulge in her stomach.  It takes you a little while to clean yourself off and redress, though you can't help but feel that getting a little bit of slime on your [armor] was a price worth paying.");
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 
@@ -7871,7 +7874,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			dynStats("sen", -1);
 			amilyPreggoChance();
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 
@@ -8155,6 +8158,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText(" definitely got pregnant.</b>)");
 			}
 			//if (AbandonedTownRebuilt.InTown = false) {
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseFourHours);
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
@@ -8299,7 +8303,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			dynStats("sen", -2);
 			amilyPreggoChance();
 			//if (AbandonedTownRebuilt.InTown = false) {
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//if (AbandonedTownRebuilt.InTown = true) doNext(AbandonedTownRebuilt.EnterTown);
 		}
 

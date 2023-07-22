@@ -78,7 +78,7 @@ public dynamic class SimpleEncounter implements Encounter {
 		var kind:* = null;
 		if ('kind' in this) kind = this['kind'];
 		if (kind is Function) kind = kind();
-		return String(kind).toLowerCase();
+		return kind ? String(kind).toLowerCase() : "";
 	}
 	public function getLabel():String {
 		var label:* = getTooltipHeader();

@@ -2150,7 +2150,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(6, "Garden", "Req. to have Herb bag of any sort.");
 		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
 		addButton(8, "Materials", SceneLib.crafting.accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(Crafting.BagSlot01Cap <= 0, "You'll need a bag to do that.");
-		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(AdventurerGuild.Slot01Cap <= 0, "Join the Adventure Guild for a quest bag!");
+		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");

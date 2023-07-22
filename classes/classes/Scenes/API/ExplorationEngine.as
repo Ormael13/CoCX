@@ -94,15 +94,23 @@ public class ExplorationEngine extends BaseContent {
 	public var onMenu:Function       = null;
 	/**
 	 * A simple storage for current area tags.
+	 *
+	 * Known area tags:
+	 * - generic: "plants", "water"
+	 * - area group: "forest", "desert", "battlefield", "lake"
+	 * - specific area: "explore", "lakeBeach", "forestInner", "forestOuter", "deepwoods", "desertInner", "desertOuter",
+	 *   "battlefieldBoundary", "battlefieldOuter"
+	 *
 	 * @example
 	 *
-	 * explorer.setTags("forest", "forestOutskirts");
+	 * explorer.setTags("forest", "forestOutskirts", "plants");
 	 *
-	 * if (explorer.areaTags.forest) { ... }
+	 * if (explorer.areaTags.plants) { ... } - if near plants
 	 */
 	public var areaTags:Object       = {};
 	public var branchChance:Number   = 0;
 	
+	private var maxDepth:int         = MAXDEPTH;
 	private var source:GroupEncounter               = new GroupEncounter("UNUSED", []);
 	private var playerEntry:ExplorationEntry        = null;
 	private var currentEntry:ExplorationEntry       = null;
@@ -204,16 +212,31 @@ public class ExplorationEngine extends BaseContent {
 			showUI();
 		}
 	}
+	private var _errors:String = "";
 	/**
 	 * Do a full reset, then prepare the exploration of the area.
 	 * @param area Group encounter to pick from
 	 */
-	public function prepareArea(area:GroupEncounter, branchChance:Number = 0.1):void {
+	public function prepareArea(area:GroupEncounter, maxDepth:int = MAXDEPTH, branchChance:Number = 0.1):void {
 		trace("explorer.prepareArea");
+		this.maxDepth = Math.min(MAXDEPTH, maxDepth);
+		_errors = "";
 		this.branchChance = branchChance;
 		clear();
 		this.source = area;
+		validatePool(area);
 		generateAll();
+	}
+	private function validatePool(pool:GroupEncounter):void {
+		for each (var e:Encounter in pool.components) {
+			if (e is GroupEncounter) {
+				validatePool(e as GroupEncounter);
+			} else if (e is SimpleEncounter) {
+				if (!(e as SimpleEncounter).getKind()) {
+					_errors += "ERROR: Encounter '"+e.encounterName()+"' is missing 'kind' property.\n"
+				}
+			}
+		}
 	}
 	
 	private function defaultReturn():void {
@@ -459,6 +482,7 @@ public class ExplorationEngine extends BaseContent {
 		// [   Inventory  ] [ Mast ] [Repeat] [      ] [Leave ]
 		clearOutput();
 		spriteSelect();
+		if (_errors) outputText(_errors);
 		outputText(prompt);
 		var overlust:int = camp.overLustCheck();
 		mainView.setCustomElement(createMap());
@@ -559,7 +583,7 @@ public class ExplorationEngine extends BaseContent {
 	private function generateAll():void {
 		clearNext();
 		for (var i:int = 0; i < NROADS; i++) {
-			var length:int = randIntIn(2, MAXDEPTH);
+			var length:int = maxDepth <= 2 ? randIntIn(1, maxDepth) : randIntIn(2, maxDepth);
 			trace("Road " + i + " length " + length);
 			for (var j:int = length - 1; j >= 0; j--) {
 				generate(roads[i][j],

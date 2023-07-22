@@ -5,7 +5,7 @@ package classes.Scenes.API {
 import classes.internals.Utils;
 
 public class GroupEncounter implements Encounter {
-	protected var components:Array;// of Encounter
+	public var components:/*Encounter*/Array;
 	protected var name:String;
 	public function GroupEncounter(name:String, components:Array) {
 		this.name = name;

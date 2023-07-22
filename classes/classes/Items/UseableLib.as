@@ -144,7 +144,10 @@ use namespace CoC;
 			"You look at the goblin ear.  You admire the overall curve of the ear yet you find no obvious uses for it.");
 		public const GLDSTAT:SimpleUseable = new SimpleUseable("GldStat", "GldStat", "a golden statue", 2000,
 			"An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.",
-			"", SceneLib.forest.kitsuneScene.kitsuneStatue);
+			"", function():void {
+					// SceneLib is not available during class initialization
+					SceneLib.forest.kitsuneScene.kitsuneStatue();
+				});
 		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25,
 			"A skull taken from a slain imp.",
 			"You look at the imp skull.  A pair of horns protrude from the skull. You admire the overall frame of the skull, yet you find no obvious uses for it.");

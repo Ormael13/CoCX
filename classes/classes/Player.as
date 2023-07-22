@@ -46,6 +46,7 @@ import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Places.WoodElves;
@@ -5494,14 +5495,20 @@ use namespace CoC;
 			return minslot;
 		}
 
-		public function hasItem(itype:ItemType, minQuantity:int = 1):Boolean {
-			return itemCount(itype) >= minQuantity;
+		public function hasItem(itype:ItemType, minQuantity:int = 1, allBags:Boolean = false):Boolean {
+			return itemCount(itype, allBags) >= minQuantity;
 		}
 
-		public function itemCount(itype:ItemType):int {
+		public function itemCount(itype:ItemType, allBags:Boolean = false):int {
 			var count:int = 0;
 			for each (var itemSlot:ItemSlotClass in itemSlots){
 				if (itemSlot.itype == itype) count += itemSlot.quantity;
+			}
+			if (allBags) {
+				for each (itemSlot in SceneLib.inventory.pearlStorageSlice()) {
+					if (itemSlot.itype == itype) count += itemSlot.quantity;
+				}
+				count += AdventurerGuild.lootBag.itemCount(itype);
 			}
 			return count;
 		}
@@ -5619,18 +5626,36 @@ use namespace CoC;
 		}
 
 
-		public function destroyItems(itype:ItemType, numOfItemToRemove:Number):Boolean
+		public function destroyItems(itype:ItemType, numOfItemToRemove:Number, allBags:Boolean = false):Boolean
 		{
-			for (var slotNum:int = 0; slotNum < itemSlots.length; slotNum += 1)
-			{
-				if(itemSlot(slotNum).itype == itype)
-				{
-					while(itemSlot(slotNum).quantity > 0 && numOfItemToRemove > 0)
-					{
-						itemSlot(slotNum).removeOneItem();
-						numOfItemToRemove--;
+			var itemSlot:ItemSlotClass;
+			if (numOfItemToRemove <= 0) return true;
+			if (itype.isNothing) return false;
+			if (allBags) {
+				// Remove from adv guild loot bag
+				var n:int = AdventurerGuild.lootBag.itemCount(itype);
+				if (n > 0) {
+					n = Math.min(numOfItemToRemove, n);
+					AdventurerGuild.lootBag.removeItem(itype, n);
+					numOfItemToRemove -= n;
+				}
+				// Remove from SPPearl
+				if (numOfItemToRemove <= 0) return true;
+				for each (itemSlot in SceneLib.inventory.pearlStorageSlice()) {
+					if (itemSlot.itype == itype) {
+						numOfItemToRemove -= itemSlot.removeMany(numOfItemToRemove);
+						if (numOfItemToRemove <= 0) return true;
 					}
 				}
+			}
+			// Remove from inventory
+			if (numOfItemToRemove <= 0) return true;
+			for (var slotNum:int = 0; slotNum < itemSlots.length; slotNum += 1) {
+				itemSlot = itemSlots[slotNum];
+				if (itemSlot.itype == itype) {
+					numOfItemToRemove -= itemSlot.removeMany(numOfItemToRemove);
+				}
+				if (numOfItemToRemove <= 0) return true;
 			}
 			return numOfItemToRemove <= 0;
 		}
@@ -5958,6 +5983,7 @@ use namespace CoC;
 					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
 					game.mainView.notificationView.popupIconText(
 							"CombatMastery"+masteryObj.combat,
+							"CombatMastery"+masteryObj.combat,
 							desc+" leveled up to "+level+"!");
 					// Any Leftover EXP?
 					xpLoop = experience - xpToLevel;
@@ -6268,10 +6294,10 @@ use namespace CoC;
 					outputText("\n<b>Tease skill leveled up to " + (teaseLevel + 1) + "!</b>");
 					teaseLevel++;
 					teaseXP = 0;
-					game.mainView.notificationView.popupIconText("TeaseXP","Tease skill level up!");
+					game.mainView.notificationView.popupIconText("TeaseXP", "TeaseXP","Tease skill level up!");
 				} else {
 					game.mainView.notificationView.popupProgressBar2(
-							"teaseXP","TeaseXP","Tease XP",
+							"TeaseXP","TeaseXP","Tease XP",
 							oldProgress,
 							teaseXP/teaseExpToLevelUp(),
 							"#ff00ff");
