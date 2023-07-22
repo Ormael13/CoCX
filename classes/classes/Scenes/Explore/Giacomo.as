@@ -136,6 +136,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			menu();
 			var merchantMenu:MerchantMenu = new MerchantMenu();
+			merchantMenu.playerCanSell = true;
+			merchantMenu.playerSellFactor = merchantMenu.greedCheck() ? 0.8 : 0.4;
 			merchantMenu.addItem(consumables.MANUP_B, 15);
 			merchantMenu.addItem(consumables.VITAL_T, 15);
 			merchantMenu.addItem(consumables.SMART_T, 15);

@@ -337,7 +337,7 @@ private function buyCarrotFromOswald():void {
 		var merchantMenu:MerchantMenu = new MerchantMenu();
 		merchantMenu.playerCanSell = true;
 		merchantMenu.playerSellFactor = 0.5;
-		if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) {
+		if (merchantMenu.greedCheck()) {
 			outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal. ");
 			merchantMenu.playerSellFactor = 1.0;
 		}

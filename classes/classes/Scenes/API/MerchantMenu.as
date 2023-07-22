@@ -3,6 +3,7 @@ import classes.BaseContent;
 import classes.CoC_Settings;
 import classes.ItemSlotClass;
 import classes.ItemType;
+import classes.PerkLib;
 
 import coc.view.Block;
 import coc.view.CoCButton;
@@ -368,6 +369,10 @@ public class MerchantMenu extends BaseContent {
 		}
 		button(14).show("Back", backButton).icon("Back");
 		if (onShow != null) onShow();
+	}
+	
+	public function greedCheck():Boolean {
+		return player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)
 	}
 }
 }

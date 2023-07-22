@@ -109,6 +109,7 @@ public class ExplorationEngine extends BaseContent {
 	 */
 	public var areaTags:Object       = {};
 	public var branchChance:Number   = 0;
+	public var crossingAllowed:Boolean = false;
 	
 	private var maxDepth:int         = MAXDEPTH;
 	private var source:GroupEncounter               = new GroupEncounter("UNUSED", []);
@@ -217,11 +218,12 @@ public class ExplorationEngine extends BaseContent {
 	 * Do a full reset, then prepare the exploration of the area.
 	 * @param area Group encounter to pick from
 	 */
-	public function prepareArea(area:GroupEncounter, maxDepth:int = MAXDEPTH, branchChance:Number = 0.1):void {
+	public function prepareArea(area:GroupEncounter, branchChance:Number = 0.1, maxDepth:int = MAXDEPTH):void {
 		trace("explorer.prepareArea");
 		this.maxDepth = Math.min(MAXDEPTH, maxDepth);
 		_errors = "";
 		this.branchChance = branchChance;
+		this.crossingAllowed = false;
 		clear();
 		this.source = area;
 		validatePool(area);
@@ -608,14 +610,14 @@ public class ExplorationEngine extends BaseContent {
 						// i-1;j  --- i-1;j+1
 						//   i;j  ---   i;j+1
 						// link SW to NE if no link from NW to SE
-						if (roads[i - 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1
+						if ((crossingAllowed || roads[i - 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1)
 								&& Math.random() < branchChance) {
 							roads[i][j].link(roads[i - 1][j + 1]);
 						}
 					}
 					if (i < NROADS - 1) {
 						// South branch
-						if (roads[i + 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1
+						if ((crossingAllowed || roads[i + 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1)
 								&& Math.random() < branchChance) {
 							roads[i][j].link(roads[i + 1][j + 1]);
 						}
