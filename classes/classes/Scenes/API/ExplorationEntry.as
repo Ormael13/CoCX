@@ -44,6 +44,7 @@ public class ExplorationEntry {
 	}
 	
 	public var encounter:SimpleEncounter;
+	public var kind:String;
 	public var color:String;
 	public var label:String;
 	public var tooltipHeader:String;
@@ -139,6 +140,7 @@ public class ExplorationEntry {
 	
 	public function setEmpty():void {
 		encounter     = null;
+		kind          = null;
 		label         = "";
 		color         = COLOR_DISABLED;
 		tooltipHeader = "";
@@ -159,6 +161,7 @@ public class ExplorationEntry {
 	
 	public function setupForEncounter(e:SimpleEncounter):void {
 		encounter  = e;
+		kind       = e.getKind();
 		isCleared  = false;
 		isDisabled = false;
 		reenter    = !!e.reenter;

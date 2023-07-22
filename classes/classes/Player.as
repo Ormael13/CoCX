@@ -7011,5 +7011,23 @@ use namespace CoC;
 				cooldowns[i] = 0;
 			}
 		}
+		
+		public function get negativeLevel():int {
+			return statusEffectv1(StatusEffects.NegativeLevel);
+		}
+		public function addNegativeLevels(n:int):void {
+			level -= n;
+			if (hasStatusEffect(StatusEffects.NegativeLevel)) {
+				addStatusValue(StatusEffects.NegativeLevel, 1, n);
+			} else {
+				createStatusEffect(StatusEffects.NegativeLevel, n, 0, 0, 0);
+			}
+		}
+		public function recoverNegativeLevel(n:int):void {
+			addStatusValue(StatusEffects.NegativeLevel, 1, -n);
+			if (negativeLevel <= 0) {
+				removeStatusEffect(StatusEffects.NegativeLevel);
+			}
+		}
 	}
 }

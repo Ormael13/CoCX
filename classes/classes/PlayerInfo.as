@@ -1564,22 +1564,8 @@ public class PlayerInfo extends BaseContent {
 		}
 		else {
 			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
-				player.XP -= player.requiredXP();
-				player.level++;
 				lvlinc++;
-				if (player.level <= 1) {
-					player.perkPoints += 6;
-					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 6;
-				}
-				if (player.level <= 9) {
-					player.perkPoints += 2;
-					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 2;
-				}
-				else {
-					player.perkPoints++;
-					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
-					if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
-				}
+				levelUp();
 			}
 			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
 			var perkRes:int = player.perkPoints - perkLvl;
@@ -1589,7 +1575,30 @@ public class PlayerInfo extends BaseContent {
 		}
 		lvlUpFastSubMenu();
 	}
-
+	
+	// Reduce XP, increase level, give points, recover HP
+	private function levelUp():void {
+		player.XP -= player.requiredXP();
+		player.level++;
+		var negativeLevel:int = player.negativeLevel;
+		if (negativeLevel > 0) {
+			player.recoverNegativeLevel(1);
+			return;
+		}
+		HPChange(player.maxHP(), false);
+		if (player.level <= 1) {
+			player.perkPoints += 6;
+			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 6;
+		}
+		if (player.level <= 9) {
+			player.perkPoints += 2;
+			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 2;
+		} else {
+			player.perkPoints++;
+			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
+			if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone, 3, -1);
+		}
+	}
 	public function lUFSMAP():void {
 		if (player.statPoints > 0) {
 			attributeMenu();

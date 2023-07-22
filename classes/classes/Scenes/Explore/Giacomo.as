@@ -72,11 +72,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 
-		public function giacomoEncounterSS():void {
-			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
-			giacomoEncounter();
-		}
-		
 		public function giacomoEncounter():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -105,10 +100,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ");
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
-			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] == 2) {
-				flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
-				outputText("\n\n<b>You have met him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
-			}
 			menu();
 			addButton(0, "Potions", potionMenu);
 			addButton(1, "Books", bookMenu);
@@ -136,6 +127,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			menu();
 			var merchantMenu:MerchantMenu = new MerchantMenu();
+			merchantMenu.playerCanSell = true;
+			merchantMenu.playerSellFactor = merchantMenu.greedCheck() ? 0.8 : 0.4;
 			merchantMenu.addItem(consumables.MANUP_B, 15);
 			merchantMenu.addItem(consumables.VITAL_T, 15);
 			merchantMenu.addItem(consumables.SMART_T, 15);

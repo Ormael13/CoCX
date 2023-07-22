@@ -3,6 +3,7 @@ import classes.BaseContent;
 import classes.CoC;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
+import classes.internals.Utils;
 
 import coc.view.ButtonData;
 import coc.view.CoCButton;
@@ -83,6 +84,7 @@ public class ExplorationEngine extends BaseContent {
 	public var canRevealFull:Boolean = true;
 	public var canMasturbate:Boolean = true;
 	public var canInventory:Boolean  = true;
+	public var canSoulSense:Boolean  = true;
 	/**
 	 * function(e:ExplorationEntry):Boolean, called BEFORE the encounter.
 	 * If it returns true, do not continue with the exploration UI
@@ -109,6 +111,7 @@ public class ExplorationEngine extends BaseContent {
 	 */
 	public var areaTags:Object       = {};
 	public var branchChance:Number   = 0;
+	public var crossingAllowed:Boolean = false;
 	
 	private var maxDepth:int         = MAXDEPTH;
 	private var source:GroupEncounter               = new GroupEncounter("UNUSED", []);
@@ -217,11 +220,12 @@ public class ExplorationEngine extends BaseContent {
 	 * Do a full reset, then prepare the exploration of the area.
 	 * @param area Group encounter to pick from
 	 */
-	public function prepareArea(area:GroupEncounter, maxDepth:int = MAXDEPTH, branchChance:Number = 0.1):void {
+	public function prepareArea(area:GroupEncounter, branchChance:Number = 0.1, maxDepth:int = MAXDEPTH):void {
 		trace("explorer.prepareArea");
 		this.maxDepth = Math.min(MAXDEPTH, maxDepth);
 		_errors = "";
 		this.branchChance = branchChance;
+		this.crossingAllowed = false;
 		clear();
 		this.source = area;
 		validatePool(area);
@@ -465,7 +469,7 @@ public class ExplorationEngine extends BaseContent {
 		
 		return map;
 	}
-	private function showUI():void {
+	private function showUI(message:String = ""):void {
 		var i:int;
 		for (i = 0; i < N; i++) {
 			// If there is an encounter with chance ALWAYS, stop the exploration and execute it immediately
@@ -478,12 +482,13 @@ public class ExplorationEngine extends BaseContent {
 		
 		// Buttons
 		// [Forward/Path 1] [Path 2] [Path 3] [Path 4] [Path 5]
-		// [              ] [      ] [      ] [      ] [      ]
+		// [   SoulSense  ] [      ] [      ] [      ] [      ]
 		// [   Inventory  ] [ Mast ] [Repeat] [      ] [Leave ]
 		clearOutput();
 		spriteSelect();
 		if (_errors) outputText(_errors);
 		outputText(prompt);
+		if (message) outputText("\n"+message);
 		var overlust:int = camp.overLustCheck();
 		mainView.setCustomElement(createMap());
 		menu();
@@ -513,6 +518,11 @@ public class ExplorationEngine extends BaseContent {
 				var b:CoCButton = (NROADS <= 3) ? button(i * 5) : button(i);
 				b.show("Path " + (i + 1), curry(selectRoadAndExploreNext, i))
 			}
+		}
+		if(canSoulSense && player.hasPerk(PerkLib.SoulSense)) {
+			button(5).show("Soul Sense", doSoulSense)
+					 .hint("Use your soul sense to detect people.\n\nSoulforce cost: " + soulSenseCost())
+					.disableIf(player.soulforce < soulSenseCost());
 		}
 		button(10).show("Inventory", curry(inventory.showInventoryMenu, doExplore))
 				  .hint("Use an item or manage your equipment.")
@@ -608,14 +618,14 @@ public class ExplorationEngine extends BaseContent {
 						// i-1;j  --- i-1;j+1
 						//   i;j  ---   i;j+1
 						// link SW to NE if no link from NW to SE
-						if (roads[i - 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1
+						if ((crossingAllowed || roads[i - 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1)
 								&& Math.random() < branchChance) {
 							roads[i][j].link(roads[i - 1][j + 1]);
 						}
 					}
 					if (i < NROADS - 1) {
 						// South branch
-						if (roads[i + 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1
+						if ((crossingAllowed || roads[i + 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1)
 								&& Math.random() < branchChance) {
 							roads[i][j].link(roads[i + 1][j + 1]);
 						}
@@ -675,6 +685,36 @@ public class ExplorationEngine extends BaseContent {
 		if (player.hasPerk(PerkLib.EyesOfTheHunterSu)) n += 1;
 		
 		revealMultiple(n);
+	}
+	public function soulSenseCost():Number {
+		return 100;
+	}
+	public function doSoulSense():void {
+		player.soulforce -= soulSenseCost();
+		statScreenRefresh();
+		
+		var candidates:/*ExplorationEntry*/Array = [];
+		var message:String = "";
+		for (var i:int = 0; i < N; i++) {
+			var e:ExplorationEntry = flatList[i];
+			if (e.isDisabled) continue;
+			if (e.kind == "npc" && !e.isFullyRevealed) {
+				candidates.push(e);
+			}
+		}
+		if (candidates.length == 0) {
+			message = "You reach out, but your soul sense detects no one.";
+		} else {
+			e = Utils.randomChoice(candidates);
+			e.incReveal();
+			if (e.isFullyRevealed) {
+				message = "You've found "+e.label+"!";
+			} else {
+				message = "You've found someone!";
+			}
+		}
+		
+		showUI(message);
 	}
 }
 }

@@ -298,15 +298,16 @@ public class Block extends Sprite {
 	public function addElementAbove(e:DisplayObject, reference:DisplayObject, hint:Object = null):DisplayObject {
 		var i:int = getElementIndex(reference);
 		if (i < 0) i = 0; // above none = below all
+		else i = i + 1;
 		var j:int = getElementIndex(e);
-		if (i != j) addElementAt(e, i, hint);
+		if (j != i + 1) addElementAt(e, i, hint);
 		return e;
 	}
 	public function addElementBelow(e:DisplayObject, reference:DisplayObject, hint:Object = null):DisplayObject {
-		var i:int = getElementIndex(reference) - 1;
+		var i:int = getElementIndex(reference);
 		if (i < 0) i = numElements; // below none = above all
 		var j:int = getElementIndex(e);
-		if (i != j) addElementAt(e, i, hint);
+		if (j != i - 1) addElementAt(e, i, hint);
 		return e;
 	}
 
