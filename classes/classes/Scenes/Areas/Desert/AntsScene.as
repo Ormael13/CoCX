@@ -55,7 +55,7 @@ public class AntsScene extends BaseContent
             //options
             function later():void {
                 outputText("The cart is standing in the middle of the desert, and still nobody has looted it? It's clearly a trap. And you're not ready to risk your life for any rubbish inside it right now. You return to your camp, hoping that the time you'll be strong enough.");
-                camp.returnToCampUseOneHour();
+                endEncounter();
             }
 
             function approach():void {
@@ -86,7 +86,7 @@ public class AntsScene extends BaseContent
 				outputText("After seeing the large pack of demons you decide it's best not to act.  You yourself are in no condition to help the poor creature, and knowing full well what comes after demons 'subdue' their prey, you don't want to stick around either.  You glance over and realize the skirmish has already started.  It's too late to really help her anyway, you argue to yourself, plus she's covered in muscle.");
 				outputText("\n\nAssuring yourself that she'll be fine, you take the opportunity to flee while the demons are distracted, heading back to camp.  Leaving the ant-girl to her fate.");
 				//[End of Event]
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
             else demonsFuckAntgirl();
         }
@@ -163,7 +163,7 @@ public class AntsScene extends BaseContent
                     player.sexReward("Default","Default",true,false);
                     dynStats("sen", -1,  "cor", 3);
                 }
-                doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+                doNext(recalling ? recallWakeUp : explorer.done);
             }
 		}
 
@@ -230,7 +230,7 @@ public class AntsScene extends BaseContent
 			outputText("\n\nThe ant queen gives you a dismissive wave with one of her larger arms, giving you reason to think her good will is anything but.  As you turn to leave, your eye catches Phylla's and she shyly smiles at you.  Her mother sees this and delivers a final, cryptic warning.  \"<i>One last thing before you depart, 'Champion'.  Should you fail, the consequences, for you, will be... dire.</i>\"");
 			outputText("\n\nAs you mull over this ominous message, your guide reappears and leads you back through the maze of tunnels, to the exit of the colony.  You leave the anthill behind and head to camp, considering your best course of action.");
 			flags[kFLAGS.PC_READY_FOR_ANT_COLONY_CHALLENGE] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //The Challenges
@@ -274,7 +274,7 @@ public class AntsScene extends BaseContent
 		{
 			clearOutput();
 			outputText("Deciding to better prepare yourself first, you inform the thin fight manager that you will return later.  You leave the colony, heading back to camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function antColiseumFight():void
@@ -481,7 +481,7 @@ public class AntsScene extends BaseContent
 			outputText("\n\nYou reassuringly tell her and plant a kiss on her lips then get yourself redressed and make the departure back to your camp.");
 			if (!recalling) {
 				flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 1; //Dirty checking for disabling the ant temporarily for 1 day.
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else doNext(recallWakeUp);
 		}
@@ -494,7 +494,7 @@ public class AntsScene extends BaseContent
 			outputText("\n\nYou have a feeling that you won't see her again.");
 			if (!recalling) {
 				flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else doNext(recallWakeUp);
 		}
@@ -942,7 +942,7 @@ public class AntsScene extends BaseContent
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
 			outputText("\n\n<b>Before fully settling in your camp as if remembering something Phylla pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.ANT_WAIFU] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //►[Stay Here]
@@ -954,7 +954,7 @@ public class AntsScene extends BaseContent
 			outputText("\n\nAs you turn to leave she quickly says, \"<i>If you ever feel your camp is safe enough for me to join you, p-please come get me.  If you want.  I mean, I'm not going anywhere... not that I could with my mother watching anyway...</i>\"");
 			outputText("\n\nYou nod and without another word, head back to camp.");
 			flags[kFLAGS.PHYLLA_STAY_HOME] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //If PC returns to colony after telling her to stay with her mother:

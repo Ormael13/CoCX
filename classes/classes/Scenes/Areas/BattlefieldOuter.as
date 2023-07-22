@@ -9,6 +9,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Vehicles;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Battlefield.*;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -75,14 +76,10 @@ public class BattlefieldOuter extends BaseContent
 			},
 			chance: 0.1,
 			call: takeWrathMech
-		}, {
-			name: "items",
-			label : "Items",
-			kind  : 'event',
-			call: findItems
-		}, {
+		}, SceneLib.battlefiledboundary.battlefieldLoot, {
 			name: "nothing",
-			label : "walk",
+			label : "Walk",
+			kind  : "walk",
 			call: findNothing
 		}, {
 			//Helia monogamy fucks
@@ -169,51 +166,21 @@ public class BattlefieldOuter extends BaseContent
 
 
 	public function exploreOuterBattlefield():void {
-		clearOutput();
-		flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
-		doNext(camp.returnToCampUseOneHour);
-		battlefieldOuterEncounter.execEncounter();
-		flushOutputTextToGUI();
+		explorer.prepareArea(battlefieldOuterEncounter);
+		explorer.setTags("battlefield", "battlefieldOuter");
+		explorer.prompt = "You explore the outer battlefield.";
+		explorer.onEncounter = function(e:ExplorationEntry):void {
+			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
+		}
+		explorer.leave.hint("Leave the outer battlefield");
+		explorer.skillBasedReveal(18, flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]);
+		explorer.doExplore();
 	}
 	
 	public function battlefieldOuterChance():Number {
 		var temp:Number = 0.5;
 		temp *= player.npcChanceToEncounter();
 		return temp;
-	}
-
-	private function findItems():void {
-		clearOutput();
-		if (rand(2) == 0) {
-			outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
-			if (rand(2) == 0) {
-				if (player.level >= 24 && rand(3) == 0) {
-					outputText("a mid-grade Soulforce Recovery Pill. ");
-					inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
-				} else {
-					outputText("a low-grade Soulforce Recovery Pill. ");
-					inventory.takeItem(consumables.LG_SFRP, camp.returnToCampUseOneHour);
-				}
-			} else {
-				if (player.level >= 24 && rand(3) == 0) {
-					outputText("a diluted Arcane Regen Concotion. ");
-					inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
-				} else {
-					outputText("a very diluted Arcane Regen Concotion. ");
-					inventory.takeItem(consumables.VDARCON, camp.returnToCampUseOneHour);
-				}
-			}
-		} else {
-			if (player.level >= 24 && rand(5) == 0) {
-				outputText("You spot something on the ground among various items remains. Taking a closer look, it's a Heavy Spiked Shield. ");
-				inventory.takeItem(shields.SPIH_SH, camp.returnToCampUseOneHour);
-			} else {
-				outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
-				outputText("<b>You found a metal plate.</b>");
-				flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
-				doNext(camp.returnToCampUseOneHour);
-			}
-		}
 	}
 
 	private function findNothing():void {
@@ -226,7 +193,7 @@ public class BattlefieldOuter extends BaseContent
 			outputText("Some grey, maybe black colored shape seemly wiggling as it like moving in your direction." + (silly() ? " Oh are you approaching me?" : "") + " Bit tired and on the edge due to meeting potential enemies moments ago you decide to return this time. Maybe next time you will check out closer that 'fog' or whatever it's.");
 		} else outputText("You spend an hour exploring this deserted battlefield but you don't manage to find anything interesting, yet this trip had made you a little wiser.");
 		dynStats("wis", .5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function tyrantiaEncounterFn():void {
@@ -241,7 +208,8 @@ public class BattlefieldOuter extends BaseContent
 		player.explored++;
 		clearOutput();
 		outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
-		doNext(camp.returnToCampUseOneHour);
+		explorer.stopExploring();
+		endEncounter();
 	}
 
 	public function takeWrathMech():void {
@@ -268,7 +236,7 @@ public class BattlefieldOuter extends BaseContent
 		outputText("You carefully put the pieces of the (new firearms) in your back and head back to your camp.\n\n");
 		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 		player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}*/
 }
 }

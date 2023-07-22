@@ -15,6 +15,7 @@ import classes.Items.*;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.SimpleEncounter;
+import classes.Scenes.QuestLib;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -94,7 +95,7 @@ public class CoC extends MovieClip
     // Items/
     public var itemTemplates:ItemTemplateLib       = new ItemTemplateLib();
     public var consumables:ConsumableLib           = new ConsumableLib();
-    public var useables:UseableLib;
+    public var useables:UseableLib                 = new UseableLib();
     public var weapons:WeaponLib                   = new WeaponLib();
     public var weaponsrange:WeaponRangeLib         = new WeaponRangeLib();
     public var weaponsflyingswords:FlyingSwordsLib = new FlyingSwordsLib();
@@ -106,6 +107,8 @@ public class CoC extends MovieClip
     public var jewelries:JewelryLib                = new JewelryLib();
     public var shields:ShieldLib                   = new ShieldLib();
     public var vehicles:VehiclesLib                = new VehiclesLib();
+    
+    public var questLib:QuestLib;
 
 
     // Force updates in Pepper Flash ahuehue
@@ -219,7 +222,7 @@ public class CoC extends MovieClip
         _instance = this;
         context = new StoryContext(this);
 
-        useables = new UseableLib();
+        questLib = new QuestLib();
 
         this.kFLAGS_REF = kFLAGS;
         this.kACHIEVEMENTS_REF = kACHIEVEMENTS;

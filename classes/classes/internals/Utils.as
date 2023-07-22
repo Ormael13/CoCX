@@ -805,6 +805,14 @@ public class Utils extends Object
 		public static function trimSides(s:String):String {
 			return trimLeft(trimRight(s));
 		}
+		public static function padStart(s:String, length:int, padChar:String = ' '):String {
+			while (s.length < length) s = padChar + s;
+			return s;
+		}
+		public static function padEnd(s:String, length:int, padChar:String = ' '):String {
+			while (s.length < length) s = s + padChar;
+			return s;
+		}
 		public static function tieredBonus(stat:Number, step:Number, tier1:Number):Number {
 		  var tier:Number = Math.floor( (stat-tier1)/step + 1 );
 		  var offset:Number = step*( (tier+1)*tier / 2); // Calculates sum of tier boundaries

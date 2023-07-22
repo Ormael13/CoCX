@@ -2,294 +2,130 @@
  * ...
  * @author Ormael and others
  */
-package classes.Scenes.Places.HeXinDao 
+package classes.Scenes.Places.HeXinDao
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.ItemBag;
 import classes.Scenes.SceneLib;
+import classes.internals.EnumValue;
 import classes.internals.SaveableState;
+
+import coc.view.ButtonDataList;
 
 public class AdventurerGuild extends HeXinDaoAbstractContent implements SaveableState
 	{
-		public static var Slot01:Number;
-		public static var Slot01Cap:Number;//imp skulls
-		public static var Slot02:Number;
-		public static var Slot02Cap:Number;//feral imp skulls
-		//Copper plate
-		public static var Slot03:Number;
-		public static var Slot03Cap:Number;//minotaur horns
-		public static var Slot04:Number;
-		public static var Slot04Cap:Number;//demon skulls
-		public static var Slot05:Number;
-		public static var Slot05Cap:Number;//feral tentacle beasts
-		//Iron plate
-		public static var Slot06:Number;
-		public static var Slot06Cap:Number;
-		public static var Slot07:Number;
-		public static var Slot07Cap:Number;
-		//Bronze plate
-		public static var Slot08:Number;
-		public static var Slot08Cap:Number;
-		public static var Slot09:Number;
-		public static var Slot09Cap:Number;
-		//Silver plate
-		public static var Slot10:Number;
-		public static var Slot10Cap:Number;
-		public static var Slot11:Number;
-		public static var Slot11Cap:Number;
-		public static var Slot12:Number;
-		public static var Slot12Cap:Number;
-		//Gold plate
-		public static var Slot13:Number;
-		public static var Slot13Cap:Number;
-		public static var Slot14:Number;
-		public static var Slot14Cap:Number;
-		public static var Slot15:Number;
-		public static var Slot15Cap:Number;
-		public static var Slot16:Number;
-		public static var Slot16Cap:Number;
-		//Platinum plate
-		public static var Slot17:Number;
-		public static var Slot17Cap:Number;
-		public static var Slot18:Number;
-		public static var Slot18Cap:Number;
-		public static var Slot19:Number;
-		public static var Slot19Cap:Number;
-		public static var Slot20:Number;
-		public static var Slot20Cap:Number;
-		//Mithril plate
-		public static var Slot21:Number;
-		public static var Slot21Cap:Number;
-		public static var Slot22:Number;
-		public static var Slot22Cap:Number;
-		public static var Slot23:Number;
-		public static var Slot23Cap:Number;
-		public static var Slot24:Number;
-		public static var Slot24Cap:Number;
-		public static var Slot25:Number;
-		public static var Slot25Cap:Number;
-		//Orichalcum plate
-		public static var Slot26:Number;
-		public static var Slot26Cap:Number;
-		public static var Slot27:Number;
-		public static var Slot27Cap:Number;
-		public static var Slot28:Number;
-		public static var Slot28Cap:Number;
-		public static var Slot29:Number;
-		public static var Slot29Cap:Number;
-		public static var Slot30:Number;
-		public static var Slot30Cap:Number;
-		//Adamantite plate
+		// Array of pairs [item type, guild rank]
+		private static const slotDefs:Array = [
+			//Copper plate 01-02
+			[useables.IMPSKLL, RANK_COPPER], // 01 imp skulls
+			[useables.FIMPSKL, RANK_COPPER], // 02 feral imp skulls
+			//Iron plate 03-05
+			[useables.MINOHOR, RANK_IRON],   // 03 minotaur horns
+			[useables.DEMSKLL, RANK_IRON],   // 04 demon skulls
+			[useables.SEVTENT, RANK_IRON],   // 05 feral tentacle beasts
+			//Bronze plate 06-07
+			[ItemType.NOTHING, RANK_BRONZE], // 06
+			[ItemType.NOTHING, RANK_BRONZE]  // 07
+			//Silver plate 08-09
+			//Gold plate 10-12
+			//Platinum plate 13-16
+			//Mithril plate 17-20
+			//Orichalcum plate 21-25
+			//Adamantite plate 26-30
+		];
+		public static var lootBag:ItemBag = new ItemBag(
+				// convert array of pairs to array of item types by picking each pair element 0
+				mapOneProp(slotDefs,"0"),
+				30
+		);
+		private static var itemIdToSlotIndex:Object = {};
 
 		public function stateObjectName():String {
 			return "AdventurerGuild";
 		}
 
 		public function resetState():void {
-			Slot01 = 0;
-			Slot01Cap = 0;
-			Slot02 = 0;
-			Slot02Cap = 0;
-			Slot03 = 0;
-			Slot03Cap = 0;
-			Slot04 = 0;
-			Slot04Cap = 0;
-			Slot05 = 0;
-			Slot05Cap = 0;
-			Slot06 = 0;
-			Slot06Cap = 0;
-			Slot07 = 0;
-			Slot07Cap = 0;
-			Slot08 = 0;
-			Slot08Cap = 0;
-			Slot09 = 0;
-			Slot09Cap = 0;
-			Slot10 = 0;
-			Slot10Cap = 0;
-			Slot11 = 0;
-			Slot11Cap = 0;
-			Slot12 = 0;
-			Slot12Cap = 0;
-			Slot13 = 0;
-			Slot13Cap = 0;
-			Slot14 = 0;
-			Slot14Cap = 0;
-			Slot15 = 0;
-			Slot15Cap = 0;
-			Slot16 = 0;
-			Slot16Cap = 0;
-			Slot17 = 0;
-			Slot17Cap = 0;
-			Slot18 = 0;
-			Slot18Cap = 0;
-			Slot19 = 0;
-			Slot19Cap = 0;
-			Slot20 = 0;
-			Slot20Cap = 0;
-			Slot21 = 0;
-			Slot21Cap = 0;
-			Slot22 = 0;
-			Slot22Cap = 0;
-			Slot23 = 0;
-			Slot23Cap = 0;
-			Slot24 = 0;
-			Slot24Cap = 0;
-			Slot25 = 0;
-			Slot25Cap = 0;
-			Slot26 = 0;
-			Slot26Cap = 0;
-			Slot27 = 0;
-			Slot27Cap = 0;
-			Slot28 = 0;
-			Slot28Cap = 0;
-			Slot29 = 0;
-			Slot29Cap = 0;
-			Slot30 = 0;
-			Slot30Cap = 0;
+			lootBag.resetState();
 		}
 
 		public function saveToObject():Object {
-			return {
-				"Slot01": Slot01,
-				"Slot01Cap": Slot01Cap,
-				"Slot02": Slot02,
-				"Slot02Cap": Slot02Cap,
-				"Slot03": Slot03,
-				"Slot03Cap": Slot03Cap,
-				"Slot04": Slot04,
-				"Slot04Cap": Slot04Cap,
-				"Slot05": Slot05,
-				"Slot05Cap": Slot05Cap,
-				"Slot06": Slot06,
-				"Slot06Cap": Slot06Cap,
-				"Slot07": Slot07,
-				"Slot07Cap": Slot07Cap,
-				"Slot08": Slot08,
-				"Slot08Cap": Slot08Cap,
-				"Slot09": Slot09,
-				"Slot09Cap": Slot09Cap,
-				"Slot10": Slot10,
-				"Slot10Cap": Slot10Cap,
-				"Slot11": Slot11,
-				"Slot11Cap": Slot11Cap,
-				"Slot12": Slot12,
-				"Slot12Cap": Slot12Cap,
-				"Slot13": Slot13,
-				"Slot13Cap": Slot13Cap,
-				"Slot14": Slot14,
-				"Slot14Cap": Slot14Cap,
-				"Slot15": Slot15,
-				"Slot15Cap": Slot15Cap,
-				"Slot16": Slot16,
-				"Slot16Cap": Slot16Cap,
-				"Slot17": Slot17,
-				"Slot17Cap": Slot17Cap,
-				"Slot18": Slot18,
-				"Slot18Cap": Slot18Cap,
-				"Slot19": Slot19,
-				"Slot19Cap": Slot19Cap,
-				"Slot20": Slot20,
-				"Slot20Cap": Slot20Cap,
-				"Slot21": Slot21,
-				"Slot21Cap": Slot21Cap,
-				"Slot22": Slot22,
-				"Slot22Cap": Slot22Cap,
-				"Slot23": Slot23,
-				"Slot23Cap": Slot23Cap,
-				"Slot24": Slot24,
-				"Slot24Cap": Slot24Cap,
-				"Slot25": Slot25,
-				"Slot25Cap": Slot25Cap,
-				"Slot26": Slot26,
-				"Slot26Cap": Slot26Cap,
-				"Slot27": Slot27,
-				"Slot27Cap": Slot27Cap,
-				"Slot28": Slot28,
-				"Slot28Cap": Slot28Cap,
-				"Slot29": Slot29,
-				"Slot29Cap": Slot29Cap,
-				"Slot30": Slot30,
-				"Slot30Cap": Slot30Cap
-			};
+			return lootBag.saveToObject();
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-				Slot01 = o["Slot01"];
-				Slot01Cap = o["Slot01Cap"];
-				Slot02 = o["Slot02"];
-				Slot02Cap = o["Slot02Cap"];
-				Slot03 = o["Slot03"];
-				Slot03Cap = o["Slot03Cap"];
-				Slot04 = o["Slot04"];
-				Slot04Cap = o["Slot04Cap"];
-				Slot05 = o["Slot05"];
-				Slot05Cap = o["Slot05Cap"];
-				Slot06 = o["Slot06"];
-				Slot06Cap = o["Slot06Cap"];
-				Slot07 = o["Slot07"];
-				Slot07Cap = o["Slot07Cap"];
-				Slot08 = o["Slot08"];
-				Slot08Cap = o["Slot08Cap"];
-				Slot09 = o["Slot09"];
-				Slot09Cap = o["Slot09Cap"];
-				Slot10 = o["Slot10"];
-				Slot10Cap = o["Slot10Cap"];
-				Slot11 = o["Slot11"];
-				Slot11Cap = o["Slot11Cap"];
-				Slot12 = o["Slot12"];
-				Slot12Cap = o["Slot12Cap"];
-				Slot13 = o["Slot13"];
-				Slot13Cap = o["Slot13Cap"];
-				Slot14 = o["Slot14"];
-				Slot14Cap = o["Slot14Cap"];
-				Slot15 = o["Slot15"];
-				Slot15Cap = o["Slot15Cap"];
-				Slot16 = o["Slot16"];
-				Slot16Cap = o["Slot16Cap"];
-				Slot17 = o["Slot17"];
-				Slot17Cap = o["Slot17Cap"];
-				Slot18 = o["Slot18"];
-				Slot18Cap = o["Slot18Cap"];
-				Slot19 = o["Slot19"];
-				Slot19Cap = o["Slot19Cap"];
-				Slot20 = o["Slot20"];
-				Slot20Cap = o["Slot20Cap"];
-				Slot21 = o["Slot21"];
-				Slot21Cap = o["Slot21Cap"];
-				Slot22 = o["Slot22"];
-				Slot22Cap = o["Slot22Cap"];
-				Slot23 = o["Slot23"];
-				Slot23Cap = o["Slot23Cap"];
-				Slot24 = o["Slot24"];
-				Slot24Cap = o["Slot24Cap"];
-				Slot25 = o["Slot25"];
-				Slot25Cap = o["Slot25Cap"];
-				Slot26 = o["Slot26"];
-				Slot26Cap = o["Slot26Cap"];
-				Slot27 = o["Slot27"];
-				Slot27Cap = o["Slot27Cap"];
-				Slot28 = o["Slot28"];
-				Slot28Cap = o["Slot28Cap"];
-				Slot29 = o["Slot29"];
-				Slot29Cap = o["Slot29Cap"];
-				Slot30 = o["Slot30"];
-				Slot30Cap = o["Slot30Cap"];
+				if ("Slots" in o) {
+					lootBag.loadFromObject(o,ignoreErrors);
+				} else if ("Slot01" in o) {
+					resetState();
+					// old version: "Slot01".."Slot30", "Slot01Cap".."Slot30Cap"
+					for (var i:int = 0; i < lootBag.SlotCount; i++) {
+						var s:String = padStart(String(i + 1), 2, "0");
+						lootBag.Slots[i]     = numberOr(o["Slot" + s], 0);
+						lootBag.SlotCaps[i]  = numberOr(o["Slot" + s + "Cap"], 0);
+					}
+				} else {
+					resetState();
+				}
 			} else {
 				// loading from old save
 				resetState();
 			}
 		}
 
-		public function AdventurerGuild() 
+		public function AdventurerGuild()
 		{
 			Saves.registerSaveableState(this);
+			resetState();
+		}
+		
+		public static const GuildRanks:/*EnumValue*/Array = [];
+		public static const RANK_NONE:int                 = 0;
+		EnumValue.add(GuildRanks, RANK_NONE, "NONE", {
+			displayName: "None"
+		});
+		public static const RANK_COPPER:int = 1;
+		EnumValue.add(GuildRanks, RANK_COPPER, "COPPER", {
+			name: "Copper",
+			keyItem: "Adventurer Guild: Copper plate"
+		});
+		public static const RANK_IRON:int = 2;
+		EnumValue.add(GuildRanks, RANK_IRON, "IRON", {
+			name: "Iron",
+			keyItem: "Adventurer Guild: Iron plate"
+		});
+		public static const RANK_BRONZE:int = 3;
+		EnumValue.add(GuildRanks, RANK_BRONZE, "BRONZE", {
+			name: "Bronze",
+			keyItem: "Adventurer Guild: Bronze plate"
+		});
+		// "Adventurer Guild: Silver plate"
+		// "Adventurer Guild: Gold plate"
+		// "Adventurer Guild: Platinum plate"
+		// "Adventurer Guild: Mithril plate"
+		// "Adventurer Guild: Orichalcum plate"
+		// "Adventurer Guild: Adamantite plate"
+		
+		/** Set all SlotCaps for rank to cap */
+		public static function unlockSlotsForRank(rank:int, cap:int):void {
+			for (var slot:int = 0; slot < slotDefs.length; slot++) {
+				if (slotDefs[slot][1] == rank) lootBag.SlotCaps[slot] = cap;
+			}
+		}
+		public static function get playerGuildLevel():int {
+			for (var i:int = GuildRanks.length-1; i>0; i--) {
+				if (GuildRanks[i] && GuildRanks[i].keyItem && player.hasKeyItem(GuildRanks[i].keyItem) >= 0) return i;
+			}
+			return RANK_NONE;
+		}
+		public static function get playerInGuild():Boolean {
+			return playerGuildLevel > 0;
 		}
 		
 		public function BoardkeeperYangMain():void {
 			clearOutput();
-			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 || player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {// || player.hasKeyItem("Adventurer Guild: Bronze plate") >= 0 || player.hasKeyItem("Adventurer Guild: Silver plate") >= 0 || player.hasKeyItem("Adventurer Guild: Gold plate") >= 0 || player.hasKeyItem("Adventurer Guild: Platinum plate") >= 0
-				// || player.hasKeyItem("Adventurer Guild: Mithril plate") >= 0|| player.hasKeyItem("Adventurer Guild: Orichalcum plate") >= 0 || player.hasKeyItem("Adventurer Guild: Adamantite plate") >= 0
+			if (playerInGuild) {
 				outputText("Yang the job handler wait at you arm crossed. She looks bored like she has been there all day.\n\n");
 				outputText("\"<i>So [name] how can I help you today? Here to talk jobs or something else?</i>\"");
 				menu();
@@ -331,8 +167,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 				flags[kFLAGS.SPIRIT_STONES] -= 5;
 				statScreenRefresh();
 				player.createKeyItem("Adventurer Guild: Copper plate", 0, 0, 0, 0);
-				Slot01Cap = 10;
-				Slot02Cap = 10;
+				unlockSlotsForRank(RANK_COPPER, 10);
 				doNext(BoardkeeperYangMain);
 			}
 		}
@@ -369,13 +204,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 6) {
-					if (player.hasItem(useables.IMPSKLL, 5) || Slot01 >= 5) {
+					if (player.hasItem(useables.IMPSKLL, 5, true)) {
 						outputText("Yang examine the skulls to make sure they are imps then nods giving you your payment.\n\n");
 						outputText("\"<i>Good job [name] here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
-						if (Slot01 >= 5) Slot01 -= 5;
-						else player.destroyItems(useables.IMPSKLL, 5);
+						player.destroyItems(useables.IMPSKLL, 5, true);
 						flags[kFLAGS.SPIRIT_STONES] += 7;
 						statScreenRefresh();
 					}
@@ -390,13 +224,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 2);
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 3) {
-					if (player.hasItem(useables.IMPSKLL, 4) || Slot01 >= 4) {
+					if (player.hasItem(useables.IMPSKLL, 4, true)) {
 						outputText("Yang examine the skulls to make sure they are imps then nods giving you your payment.\n\n");
 						outputText("\"<i>Good job [name] here is your payment a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
-						if (Slot01 >= 4) Slot01 -= 4;
-						else player.destroyItems(useables.IMPSKLL, 4);
+						player.destroyItems(useables.IMPSKLL, 4, true);
 						player.perkPoints += 1;
 					}
 					else {
@@ -410,7 +243,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 				}
 				else {
-					if (player.hasItem(useables.IMPSKLL, 3) || Slot01 >= 3) {
+					if (player.hasItem(useables.IMPSKLL, 3, true)) {
 						outputText("Yang examine the skulls to make sure they are imps then nods giving you your payment.\n\n");
 						outputText("\"<i>Good job [name] here is your payment. By the way I though you may want to be able to sense corruption, can be useful to hunt demons here have this amulet.</i>\"\n\n");
 						outputText("(<b>Acquired demon hunter amulet!</b>)\n\n");
@@ -420,8 +253,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 						player.createKeyItem("Demon Hunter Amulet", 0, 0, 0, 0);
 						player.createPerk(PerkLib.SenseCorruption, 0, 0, 0, 0);
-						if (Slot01 >= 3) Slot01 -= 3;
-						else player.destroyItems(useables.IMPSKLL, 3);
+						player.destroyItems(useables.IMPSKLL, 3, true);
 					}
 					else {
 						outputText("The panda taps her foot on the ground.\n\n");
@@ -446,13 +278,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) {
-					if (player.hasItem(useables.SEVTENT, 3) || Slot05 >= 3) {
+					if (player.hasItem(useables.SEVTENT, 3, true)) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope those plants did not prove to much trouble. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-						if (Slot05 >= 3) Slot05 -= 3;
-						else player.destroyItems(useables.SEVTENT, 3);
+						player.destroyItems(useables.SEVTENT, 3, true);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
 						statScreenRefresh();
 					}
@@ -463,13 +294,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 2);
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3) {
-					if (player.hasItem(useables.SEVTENT, 2) || Slot05 >= 2) {
+					if (player.hasItem(useables.SEVTENT, 2, true)) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>Good job [name] here is your payment a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-						if (Slot05 >= 2) Slot05 -= 2;
-						else player.destroyItems(useables.SEVTENT, 2);
+						player.destroyItems(useables.SEVTENT, 2, true);
 						player.perkPoints += 1;
 					}
 					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
@@ -479,7 +309,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 				}
 				else {
-					if (player.hasItem(useables.SEVTENT, 1) || Slot05 >= 1) {
+					if (player.hasItem(useables.SEVTENT, 1, true)) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
@@ -489,8 +319,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 						player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
-						if (Slot05 >= 1) Slot05 -= 1;
-						else player.destroyItems(useables.SEVTENT, 1);
+						player.destroyItems(useables.SEVTENT, 1, true);
 					}
 					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
 				}
@@ -512,13 +341,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 6) {
-					if (player.hasItem(useables.DEMSKLL, 3) || Slot04 >= 3) {
+					if (player.hasItem(useables.DEMSKLL, 3, true)) {
 						outputText("You turn in the quest and Yang nods.\n\n");
 						outputText("\"<i>Good job as usual here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
-						if (Slot04 >= 3) Slot04 -= 3;
-						else player.destroyItems(useables.DEMSKLL, 3);
+						player.destroyItems(useables.DEMSKLL, 3, true);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
 						statScreenRefresh();
 					}
@@ -534,13 +362,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 2);
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 3) {
-					if (player.hasItem(useables.DEMSKLL, 2) || Slot04 >= 2) {
+					if (player.hasItem(useables.DEMSKLL, 2, true)) {
 						outputText("You turn in the quest and Yang nods.\n\n");
 						outputText("\"<i>Good job [name] here is your payment a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
-						if (Slot04 >= 3) Slot04 -= 2;
-						else player.destroyItems(useables.DEMSKLL, 2);
+						player.destroyItems(useables.DEMSKLL, 2, true);
 						player.perkPoints += 1;
 					}
 					else {
@@ -555,7 +382,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 				}
 				else {
-					if (player.hasItem(useables.DEMSKLL, 1) || Slot04 >= 1) {
+					if (player.hasItem(useables.DEMSKLL, 1, true)) {
 						outputText("You display the proof of your victory.\n\n");
 						outputText("\"<i>Nice job [name] so about that special reward, it happens a traveling demon hunter has agreed to train whoever would kill demons in the art of slaying. Chika would you please come over? [name] cleared your bounty.</i>\"\n\n");
 						outputText("Chika appears to be a rattel morph with an eyepatch. Rattel, or honey badgers, are known for their ferocity; the set of throwing daggers and poison flasks hanging from her belt, the pair of scimitars on her side and the crossbow on her back tells everything you need about her, ");
@@ -569,8 +396,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 						player.createPerk(PerkLib.DemonSlayer, 0.1, 0, 0, 0);
-						if (Slot04 >= 3) Slot04 -= 1;
-						else player.destroyItems(useables.DEMSKLL, 1);
+						player.destroyItems(useables.DEMSKLL, 1, true);
 					}
 					else {
 						outputText("The panda taps her foot on the ground.\n\n");
@@ -596,13 +422,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 6) {
-					if (player.hasItem(useables.FIMPSKL, 5) || Slot02 >= 5) {
+					if (player.hasItem(useables.FIMPSKL, 5, true)) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
-						if (Slot02 >= 5) Slot02 -= 5;
-						else player.destroyItems(useables.FIMPSKL, 5);
+						player.destroyItems(useables.FIMPSKL, 5, true);
 						flags[kFLAGS.SPIRIT_STONES] += 7;
 						statScreenRefresh();
 					}
@@ -613,13 +438,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 2);
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3) {
-					if (player.hasItem(useables.FIMPSKL, 4) || Slot02 >= 4) {
+					if (player.hasItem(useables.FIMPSKL, 4, true)) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
-						if (Slot02 >= 4) Slot02 -= 4;
-						else player.destroyItems(useables.FIMPSKL, 4);
+						player.destroyItems(useables.FIMPSKL, 4, true);
 						player.perkPoints += 1;
 					}
 					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
@@ -629,7 +453,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 				}
 				else {
-					if (player.hasItem(useables.FIMPSKL, 3) || Slot02 >= 3) {
+					if (player.hasItem(useables.FIMPSKL, 3, true)) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
@@ -639,8 +463,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 						player.createPerk(PerkLib.FeralHunter, 0.1, 0, 0, 0);
-						if (Slot02 >= 3) Slot02 -= 3;
-						else player.destroyItems(useables.FIMPSKL, 3);
+						player.destroyItems(useables.FIMPSKL, 3, true);
 					}
 					else outputText("You try turn in the quest but Yang tells you you don’t have enough feral imp skulls yet.\n\n");
 				}
@@ -662,13 +485,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
 				}
 				else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 6) {
-					if (player.hasItem(useables.MINOHOR, 4) || Slot03 >= 4) {
+					if (player.hasItem(useables.MINOHOR, 4, true)) {
 						outputText("Yang count the horns then smile.\n\n");
 						outputText("\"<i>Well you did bag four out of four nice job. The guild asked me to pay you this reward money as usual for slaying bulls. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
-						if (Slot03 >= 4) Slot03 -= 4;
-						else player.destroyItems(useables.MINOHOR, 4);
+						player.destroyItems(useables.MINOHOR, 4, true);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
 						statScreenRefresh();
 					}
@@ -679,13 +501,12 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 2);
 				}
 				else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 3) {
-					if (player.hasItem(useables.MINOHOR, 3) || Slot03 >= 3) {
+					if (player.hasItem(useables.MINOHOR, 3, true)) {
 						outputText("Yang count the horns then smile.\n\n");
 						outputText("\"<i>Well you did bag three out of three nice job. The guild asked me to pay you with this special training scroll for slaying bulls. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
-						if (Slot03 >= 3) Slot03 -= 3;
-						else player.destroyItems(useables.MINOHOR, 3);
+						player.destroyItems(useables.MINOHOR, 3, true);
 						player.perkPoints += 1;
 					}
 					else outputText("\"<i>Hey [name], I counted those horns and clearly you forgot a few. Get out there and bring me the remaining ones.</i>\"\n\n");
@@ -695,15 +516,14 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
 				}
 				else {
-					if (player.hasItem(useables.MINOHOR, 2) || Slot03 >= 2) {
+					if (player.hasItem(useables.MINOHOR, 2, true)) {
 						outputText("Yang count the horns then smile.\n\n");
 						outputText("\"<i>Well you indeed did bag two out of two. The guild asked me to pay you this specific tome. Betcha will find nice uses for these. Do come and find me later on for a new job, or for something else...</i>\"\n\n");
 						outputText("Yang gives you a telltale wink before handing you over your reward.\n\n");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 3, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 3, 1);
-						if (Slot03 >= 2) Slot03 -= 2;
-						else player.destroyItems(useables.MINOHOR, 2);
+						player.destroyItems(useables.MINOHOR, 2, true);
 						inventory.takeItem(consumables.TCLEAVE, BoardkeeperYangQuest);
 						return;
 					}
@@ -972,9 +792,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.removeKeyItem("Adventurer Guild: Copper plate");
 					player.createKeyItem("Adventurer Guild: Iron plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 10;
-					Slot03Cap = 10;
-					Slot04Cap = 10;
-					Slot05Cap = 10;
+					unlockSlotsForRank(RANK_IRON, 10);
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather, you would like to but you lack the required spirit stones for the promotion fee.\n\n");
@@ -988,8 +806,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 					player.removeKeyItem("Adventurer Guild: Iron plate");
 					player.createKeyItem("Adventurer Guild: Bronze plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 15;
-					Slot06Cap = 10;
-					Slot07Cap = 10;
+					unlockSlotsForRank(RANK_IRON, 10);
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");
@@ -999,132 +816,34 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 			doNext(BoardkeeperYangMain);
 		}
 
-		public function questItemsBag():void {
+		public function questItemsBag(page:int = 0):void {
 			clearOutput();
 			outputText("Would you like to put some quest items into the bag, and if so, with ones?\n\n");
-			if (Slot01Cap > 0) outputText("<b>Imp Skulls:</b> "+Slot01+" / "+Slot01Cap+"\n");
-			if (Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+Slot02+" / "+Slot02Cap+"\n");
-			if (Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+Slot03+" / "+Slot03Cap+"\n");
-			if (Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+Slot04+" / "+Slot04Cap+"\n");
-			if (Slot05Cap > 0) outputText("<b>Severed Tentacles:</b> "+Slot05+" / "+Slot05Cap+"\n");
+			// TODO @aimozg item transfer menu?
+			var bdl:ButtonDataList = new ButtonDataList();
+			for (var i:int = 0; i < lootBag.SlotCount; i++) {
+				if (lootBag.SlotCaps[i] > 0) {
+					var itemType:ItemType = lootBag.itemTypes[i];
+					outputText("<b>"+itemType.shortName+":</b> "+lootBag.Slots[i] + " / "+lootBag.SlotCaps[i]+"\n");
+					
+					bdl.add("Store "+itemType.shortName, curry(storeItem, i, itemType))
+							.disableIf(!player.hasItem(itemType) || lootBag.Slots[i] >= lootBag.SlotCaps[i]);
+					bdl.add("Take "+itemType.shortName, curry(takeItem, i, itemType))
+							.disableIf(lootBag.Slots[i] == 0);
+				}
+			}
 			menu();
-			if (Slot01 < Slot01Cap) {
-				if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
-				else addButtonDisabled(0, "ImpSkull", "You don't have any imp skulls to store.");
-			}
-			else addButtonDisabled(0, "ImpSkull", "You can't store more imp skulls in your bag.");
-			if (Slot01 > 0) addButton(1, "ImpSkull", questItemsBagImpSkull1Down);
-			else addButtonDisabled(1, "ImpSkull", "You don't have any imp skulls in your bag.");
-			if (Slot02 < Slot02Cap) {
-				if (player.hasItem(useables.FIMPSKL, 1)) addButton(2, "FeralImpS.", questItemsBagFeralImpSkull1Up);
-				else addButtonDisabled(2, "FeralImpS.", "You don't have any feral imp skulls to store.");
-			}
-			else addButtonDisabled(2, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
-			if (Slot02 > 0) addButton(3, "FeralImpS.", questItemsBagFeralImpSkull1Down);
-			else addButtonDisabled(3, "FeralImpS.", "You don't have any feral imp skulls in your bag.");
-			if (Slot03 < Slot03Cap) {
-				if (player.hasItem(useables.MINOHOR, 1)) addButton(5, "MinoHorns", questItemsBagMinotaurHorns1Up);
-				else addButtonDisabled(5, "MinoHorns", "You don't have any minotaur horns to store.");
-			}
-			else addButtonDisabled(5, "MinoHorns", "You can't store more minotaur horns in your bag.");
-			if (Slot03 > 0) addButton(6, "MinoHorns", questItemsBagMinotaurHorns1Down);
-			else addButtonDisabled(6, "MinoHorns", "You don't have any minotaur horns in your bag.");
-			if (Slot04 < Slot04Cap) {
-				if (player.hasItem(useables.DEMSKLL, 1)) addButton(7, "DemonSkull", questItemsBagDemonSkull1Up);
-				else addButtonDisabled(7, "DemonSkull", "You don't have any demon skulls to store.");
-			}
-			else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
-			if (Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
-			else addButtonDisabled(8, "DemonSkull", "You don't have any demon skulls in your bag.");
-			if (Slot05 < Slot05Cap) {
-				if (player.hasItem(useables.SEVTENT, 1)) addButton(10, "SeveredTent", questItemsBagSeveredTentacle1Up);
-				else addButtonDisabled(10, "SeveredTent", "You don't have any severed tentacles to store.");
-			}
-			else addButtonDisabled(10, "SeveredTent", "You can't store more severed tentacles in your bag.");
-			if (Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
-			else addButtonDisabled(11, "SeveredTent", "You don't have any severed tentacles in your bag.");
-			addButton(14, "Back", camp.campActions);
+			submenu(bdl, camp.campActions, page, false);
 		}
-		private function questItemsBagImpSkull1UP():void {
-			player.destroyItems(useables.IMPSKLL, 1);
-			Slot01 += 1;
-			doNext(questItemsBag);
+		private function storeItem(slot:int, itemType:ItemType):void {
+			player.destroyItems(itemType, 1);
+			lootBag.Slots[slot]++;
+			questItemsBag(submenuPage);
 		}
-		private function questItemsBagImpSkull1Down():void {
+		public function takeItem(slot:int, itemType:ItemType):void {
+			lootBag.Slots[slot]--;
 			outputText("\n");
-			Slot01 -= 1;
-			inventory.takeItem(useables.IMPSKLL, questItemsBag);
-		}
-		private function questItemsBagFeralImpSkull1Up():void {
-			player.destroyItems(useables.FIMPSKL, 1);
-			Slot02 += 1;
-			doNext(questItemsBag);
-		}
-		private function questItemsBagFeralImpSkull1Down():void {
-			outputText("\n");
-			Slot02 -= 1;
-			inventory.takeItem(useables.FIMPSKL, questItemsBag);
-		}
-		private function questItemsBagMinotaurHorns1Up():void {
-			player.destroyItems(useables.MINOHOR, 1);
-			Slot03 += 1;
-			doNext(questItemsBag);
-		}
-		private function questItemsBagMinotaurHorns1Down():void {
-			outputText("\n");
-			Slot03 -= 1;
-			inventory.takeItem(useables.MINOHOR, questItemsBag);
-		}
-		private function questItemsBagDemonSkull1Up():void {
-			player.destroyItems(useables.DEMSKLL, 1);
-			Slot04 += 1;
-			doNext(questItemsBag);
-		}
-		private function questItemsBagDemonSkull1Down():void {
-			outputText("\n");
-			Slot04 -= 1;
-			inventory.takeItem(useables.DEMSKLL, questItemsBag);
-		}
-		private function questItemsBagSeveredTentacle1Up():void {
-			player.destroyItems(useables.SEVTENT, 1);
-			Slot05 += 1;
-			doNext(questItemsBag);
-		}
-		private function questItemsBagSeveredTentacle1Down():void {
-			outputText("\n");
-			Slot05 -= 1;
-			inventory.takeItem(useables.SEVTENT, questItemsBag);
-		}
-
-		public function roomInExistingStack(itype:ItemType):Number {
-			switch (itype) {
-				case useables.IMPSKLL: if (Slot01 < Slot01Cap) return Slot01;
-					break;
-				case useables.FIMPSKL: if (Slot02 < Slot02Cap) return Slot02;
-					break;
-				case useables.MINOHOR: if (Slot03 < Slot03Cap) return Slot03;
-					break;
-				case useables.DEMSKLL: if (Slot04 < Slot04Cap) return Slot04;
-					break;
-				case useables.SEVTENT: if (Slot05 < Slot05Cap) return Slot05;
-					break;
-			}
-			return -1;
-		}
-		public function placeItemInStack(itype:ItemType):Number {
-			switch (itype) {
-				case useables.IMPSKLL: questItemsBagImpSkull1UP();
-					break;
-				case useables.FIMPSKL: questItemsBagFeralImpSkull1Up();
-					break;
-				case useables.MINOHOR: questItemsBagMinotaurHorns1Up();
-					break;
-				case useables.DEMSKLL: questItemsBagDemonSkull1Up();
-					break;
-				case useables.SEVTENT: questItemsBagSeveredTentacle1Up();
-					break;
-			}
-			return -1;
+			inventory.takeItem(itemType, questItemsBag);
 		}
 	}
 }

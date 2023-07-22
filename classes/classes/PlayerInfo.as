@@ -1807,9 +1807,14 @@ public class PlayerInfo extends BaseContent {
 
 	private static var filterChoices:Array = [0,1,1,1,1,1,1,1,1,1];	//1 - is active?, 2-10 - is shown?
 	public function perkBuyMenu():void {
-		CoC.instance.perkMenu.newPerkMenu();
+		if (CoC.instance.perkMenu.preferOld) {
+			perkBuyMenuOld();
+		} else {
+			CoC.instance.perkMenu.newPerkMenu();
+		}
 	}
 	public function perkBuyMenuOld():void {
+		CoC.instance.perkMenu.preferOld = true;
 		clearOutput();
 		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player, false);
 		hideMenus();
@@ -1819,7 +1824,8 @@ public class PlayerInfo extends BaseContent {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");
 			outputText(".");
-			doNext(playerMenu);
+			button(0).show("Next",playerMenu);
+			button(1).show("New Menu",CoC.instance.perkMenu.newPerkMenu);
 			return;
 		}
         if (CoC.instance.testingBlockExiting) {
@@ -1842,6 +1848,7 @@ public class PlayerInfo extends BaseContent {
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
 			addButton(1, "Skip", perkSkip);
+			addButton(3, "New Menu",CoC.instance.perkMenu.newPerkMenu);
 			addButton(4,"Filter",changeFilter, 0).hint("Filter perks by reqired stats")
 			if (filterChoices[0]==1)
 			{

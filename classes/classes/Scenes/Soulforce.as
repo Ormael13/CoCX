@@ -862,7 +862,6 @@ public class Soulforce extends BaseContent
 		else SceneLib.tyrantia.firstEncounter();
 	}
 	public function tigerSharkGal():void {
-		player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 		SceneLib.izmaScene.meetIzmaAtLake();
 	}
 	public function shyHealer():void {
@@ -870,7 +869,6 @@ public class Soulforce extends BaseContent
 		else SceneLib.dianaScene.repeatEnc();
 	}
 	public function germanCow():void {
-		player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 		SceneLib.isabellaScene.isabellaGreeting();
 	}
 	public function sneakOnThePlane():void {

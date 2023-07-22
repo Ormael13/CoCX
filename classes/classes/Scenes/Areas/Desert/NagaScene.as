@@ -49,7 +49,7 @@ public function nagaEncounter():void {
 		//No fight for this encounter, brings you back to the camp. Next time you see her, she will attack you unless you turn back into a naga in the meantime
 		player.changeStatusValue(StatusEffects.Naga,1,0);
 		outputText("You walk in the desert for what feels like an eternity, thinking of how much easier it was to move across the sand back when you had a tail, but then you're brought back to reality by a familiar hissing. The identity of your follower is no secret to you. As you open your mouth to greet your naga friend, you find yourself unable to pronounce any words. The girl comes towards you and slithers around in a confused way, trying to communicate. But the sounds that once formed words and phrases now seem to slip through you; all you can do is stand there, unable to grasp what she's trying to tell you. Realizing that you're not who you used to be anymore, she sadly looks down and turns around. The naga slithers away into the distance until she's nothing but a blink on the horizon.");
-		doNext(camp.returnToCampUseOneHour);
+		doNext(explorer.done);
 		return;
 	}
     camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_NAGAS);

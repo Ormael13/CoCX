@@ -4,15 +4,15 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.Plains.GnollPack;
-	import classes.Scenes.Camp.CampUpgrades;
-	import classes.Scenes.SceneLib;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Wings;
-	
-	public class SidonieFollower extends NPCAwareContent
+import classes.*;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Plains.GnollPack;
+import classes.Scenes.Camp.CampUpgrades;
+import classes.Scenes.SceneLib;
+
+public class SidonieFollower extends NPCAwareContent
 	{
 		private function anyHermInCamp():Boolean {
 			return (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.IZMA_NO_COCK] != 0) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 3);
@@ -41,7 +41,7 @@ package classes.Scenes.NPCs
 		public function meetingSidonieAtPlainsNo():void {
 			outputText("Nope. This seems a bit too risky, given their numbers. You continue on your way, hoping that the horse-morph doesn’t get it too rough if those gnolls catch her.\n\n");
 			flags[kFLAGS.SIDONIE_RECOLLECTION] = 18;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function wonGnollPackFight():void {
@@ -119,6 +119,7 @@ package classes.Scenes.NPCs
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
 			outputText("\n\n<b>Before fully settling in your camp as if remembering something Sidonie pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.SIDONIE_FOLLOWER] = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseFourHours);
 		}
 		
@@ -309,6 +310,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.SIDONIE_RECOLLECTION] = 46;
 				if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < SceneLib.campUpgrades.checkMaterialsCapWood()) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;
 				else flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapWood();
+				explorer.stopExploring();
 				doNext(camp.returnToCampUseFourHours);
 			}
 		}
@@ -417,7 +419,7 @@ package classes.Scenes.NPCs
 			outputText("After a relaxing nap, it seems like your body has absorbed most of her seed and is able to walk again. Waking up Sidonie with a kiss, you thank her for a wonderful fucking and disentangle from her embrace to return to your daily activities, a pleasant tingling on your butt left by the remaining horse seed left on your bum.\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function SidonieSexBlowHer():void {
 			clearOutput();
@@ -483,7 +485,7 @@ package classes.Scenes.NPCs
 			outputText(".\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function SidonieSex69():void {
 			clearOutput();
@@ -521,7 +523,7 @@ package classes.Scenes.NPCs
 			outputText("With that, you walk away from the Sidonie’s tent gleefully rubbing your horsecum-filled belly.\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

@@ -6,10 +6,10 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Desert.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -45,7 +45,7 @@ use namespace CoC;
 				{
 					name: "discoverinnerdesert",
 					label : "New Area",
-					kind  : 'event',
+					kind  : 'place',
 					unique: true,
 					when: function ():Boolean {
 						return (player.level + combat.playerLevelAdjustment()) >= 10 && flags[kFLAGS.DISCOVERED_INNER_DESERT] == 0
@@ -119,7 +119,7 @@ use namespace CoC;
 				}, {
 					name: "dungeon",
 					label : "Desert Cave",
-					kind  : 'event',
+					kind  : 'place',
 					unique: true,
 					when: function ():Boolean {
 						return (player.level >= 4 || player.exploredDesert > 45)
@@ -129,7 +129,7 @@ use namespace CoC;
 				}, {
 					name: "wstaff",
 					label : "W. Staff",
-					kind  : 'event',
+					kind  : 'item',
 					unique: true,
 					when: function ():Boolean {
 						return flags[kFLAGS.FOUND_WIZARD_STAFF] == 0 && player.inte > 50;
@@ -138,7 +138,7 @@ use namespace CoC;
 				}, {
 					name: "desert eagle",
 					label : "Gun Parts",
-					kind  : 'event',
+					kind  : 'item',
 					unique: true,
 					when: function ():Boolean {
 						return player.level >= 6 && player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Desert Eagle") < 0;
@@ -148,7 +148,7 @@ use namespace CoC;
 				}, {
 					name: "nails",
 					label : "Nails",
-					kind  : 'event',
+					kind  : 'item',
 					unique: true,
 					when: function ():Boolean {
 						return player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemvX("Carpenter's Toolbox", 1) < 200;
@@ -157,7 +157,7 @@ use namespace CoC;
 				}, {
 					name: "chest",
 					label : "Chest",
-					kind  : 'event',
+					kind  : 'item',
 					unique: true,
 					when: function ():Boolean {
 						return player.hasKeyItem("Camp - Chest") < 0
@@ -226,7 +226,7 @@ use namespace CoC;
 				}, {
 					name  : "desertloot",
 					label : "Cake",
-					kind  : 'event',
+					kind  : 'item',
 					chance: 0.3,
 					call  : findDesertLoot
 				}/*, {
@@ -305,7 +305,7 @@ use namespace CoC;
 				}, {
 					name  : "desertloot",
 					label : "Cake",
-					kind  : 'event',
+					kind  : 'item',
 					chance: 0.3,
 					call  : findDesertLoot
 				}/*, {
@@ -320,20 +320,28 @@ use namespace CoC;
 		//Explore desert
 		public function exploreDesert():void
 		{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			player.exploredDesert++;
-			desertEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(desertEncounter);
+			explorer.setTags("desert", "desertOuter");
+			explorer.prompt = "You explore the outer desert.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				player.exploredDesert++;
+			}
+			explorer.leave.hint("Leave the desert");
+			explorer.skillBasedReveal(1, player.exploredDesert);
+			explorer.doExplore();
 		}
 		
 		public function exploreInnerDesert():void
 		{
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			flags[kFLAGS.DISCOVERED_INNER_DESERT]++;
-			innerdesertEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(innerdesertEncounter);
+			explorer.setTags("desert", "desertInner");
+			explorer.prompt = "You explore the inner desert.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.DISCOVERED_INNER_DESERT]++;
+			}
+			explorer.leave.hint("Leave the desert");
+			explorer.skillBasedReveal(10, flags[kFLAGS.DISCOVERED_INNER_DESERT]);
+			explorer.doExplore();
 		}
 	
 		public function desertChance():Number {
@@ -347,6 +355,7 @@ use namespace CoC;
 			outputText("While exploring the desert you notice that the sandy dunes begins to grow larger and more intimidating. The heat has also ramped up you will have to carry some waterskins on you. ");
 			outputText("<b>It would seem you found the inner desert area!</b>");
 			flags[kFLAGS.DISCOVERED_INNER_DESERT]++;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -366,7 +375,8 @@ use namespace CoC;
 			}
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
 			outputText("\n\n<b>You now have six storage item slots at camp.</b>");
-			doNext(camp.returnToCampUseOneHour);
+			explorer.stopExploring();
+			endEncounter();
 		}
 		
 		public function nagaChance():Number {
@@ -402,7 +412,7 @@ use namespace CoC;
 			outputText("A library is burning up, sending flames dozens of feet into the air.  It doesn't look like any of the books will survive, and most of the structure has already been consumed by the hungry flames.  The source of the inferno is curled up next to it.  It's a naga!  She's tall for a naga, at least seven feet if she stands at her full height.  Her purplish-blue skin looks quite exotic, and she wears a flower in her hair.  The naga is holding a stick with a potato on the end, trying to roast the spud on the library-fire.  It doesn't seem to be going well, and the potato quickly lights up from the intense heat.\n\n");
 			outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n");
 			flags[kFLAGS.FOUND_WIZARD_STAFF]++;
-			inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
+			inventory.takeItem(weapons.W_STAFF, explorer.done);
 		}
 		
 		public function partsofDesertEagle():void {
@@ -411,7 +421,7 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the Desert Eagle in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Desert Eagle", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function mirageDesert():void
@@ -419,7 +429,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.");
 			dynStats("lus", -15, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function walkingDesertStatBoost():void
@@ -441,13 +451,13 @@ use namespace CoC;
 					dynStats("tou", .5);
 				}
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function findDesertLoot():void {
 			clearOutput();
 			outputText("Miraculously, you spot a lone pouch lying in the sand. Opening it, you find a neatly wraped cake!\n");
-			inventory.takeItem(consumables.HDEWCAK, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.HDEWCAK, explorer.done);
 		}
 	}
 }

@@ -958,7 +958,9 @@ public class PerkMenu extends BaseContent {
 		}
 		outputText("\n");
 	}
+	public var preferOld:Boolean = false;
 	public function newPerkMenu(category:*=null):void {
+		preferOld = false;
 		mainView.toolTipView.hide();
 		clearOutput();
 		outputText("You have <b>"+numberOfThings(player.perkPoints, "perk point")+"</b>.\n\n");

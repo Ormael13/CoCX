@@ -263,7 +263,7 @@ public class MerchantMenu extends BaseContent {
 		if (storageMode == STORAGE_MODE_INVENTORY) {
 			playerStorage = player.itemSlots.slice(0, player.itemSlotCount());
 		} else if (storageMode == STORAGE_MODE_PEARL) {
-			playerStorage = inventory.pearlStorageDirectGet().slice(0, inventory.pearlStorageSize());
+			playerStorage = inventory.pearlStorageSlice();
 		}
 		grid = new Block({
 			layoutConfig: {

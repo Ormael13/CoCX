@@ -32,7 +32,7 @@ public class DeathBlossomSpell extends AbstractGreenSpell {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
-		if (!player.hasStatusEffect(StatusEffects.NearbyPlants) && !explorer.areaTags.plants) {
+		if (!combat.isNearPlants()) {
 			return "Death Blossom require to have plants nearby.";
 		}
 		

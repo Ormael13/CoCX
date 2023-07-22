@@ -1,6 +1,5 @@
 ﻿package classes
 {
-import classes.CoC;
 import classes.internals.Utils;
 
 public class StatusEffectClass extends Utils
@@ -25,6 +24,13 @@ public class StatusEffectClass extends Utils
 	public function get host():Creature
 	{
 		return _host;
+	}
+	public function value(index:int):Number {
+		if (index == 1) return value1;
+		if (index == 2) return value2;
+		if (index == 3) return value3;
+		if (index == 4) return value4;
+		return 0;
 	}
 	/**
 	 * Returns null if host is not a Player

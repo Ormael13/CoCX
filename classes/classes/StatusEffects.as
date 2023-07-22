@@ -238,6 +238,8 @@ import classes.StatusEffects.VampireThirstEffect;
 
 		// Non-combat player perks
 		public static const AdvancingCamp:StatusEffectType                 	= mk("AdvancingCamp");
+		// value1-4: quests statuses
+		// 1: started I, 2: completed I, 3: started II, 4: completed II, 6: started III, 7: completed III
 		public static const AdventureGuildQuests1:StatusEffectType          = mk("Adventure Guild Quests 1");//Imps Hunt / Demons Hunt / Minotaurs Hunt / x
 		public static const AdventureGuildQuests2:StatusEffectType          = mk("Adventure Guild Quests 2");//Feral Tentacle Beasts Hunt / Feral Imps Hunt / x / x
 		public static const AdventureGuildQuests3:StatusEffectType          = mk("Adventure Guild Quests 3");//x / x / x / x

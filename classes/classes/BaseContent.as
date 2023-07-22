@@ -10,6 +10,7 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Holidays;
 import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
+import classes.Scenes.QuestLib;
 import classes.Scenes.SceneLib;
 import classes.Transformations.TransformationLib;
 import classes.internals.Utils;
@@ -698,6 +699,10 @@ import coc.xxc.StoryContext;
 		protected function get vehicles():VehiclesLib{
 			return CoC.instance.vehicles;
 		}
+		
+		protected static function get questLib():QuestLib {
+			return CoC.instance.questLib;
+		}
 		protected function get inventory():Inventory{
 			return SceneLib.inventory;
 		}
@@ -818,6 +823,7 @@ import coc.xxc.StoryContext;
 			doNext(explorer.done);
 		}
 
+		public static var submenuPage:int = 0;
 		/**
 		 * Print a submenu from the provided buttons
 		 * @param buttons List of buttons for the menu
@@ -840,6 +846,9 @@ import coc.xxc.StoryContext;
 			if (total + totalConst > 15) //can't fit on 1 page!
 				totalConst += 2; // prev/nex
 			var buttonsPerPage:int = 15 - totalConst; // including back, prev/next, other shit
+			var pageCount:int = Math.ceil(total / buttonsPerPage);
+			page = boundInt(0, page, pageCount);
+			submenuPage = page;
 			menu();
 			// menu buttons
 			var n:int = Math.min(total,(page+1)*buttonsPerPage); // max index for this page
@@ -854,8 +863,8 @@ import coc.xxc.StoryContext;
 					button(bi).show(constButtons[cbi][0], constButtons[cbi][1])
 						.hint(constButtons[cbi].length > 2 ? constButtons[cbi][2] : "");
 			if (page!=0 || total>buttonsPerPage) {
-				button(bi++).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted, constButtons)).disableIf(page == 0);
-				button(bi++).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted, constButtons)).disableIf(n >= total);
+				button(bi++).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted, constButtons)).disableIf(page == 0).icon("Left");
+				button(bi++).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted, constButtons)).disableIf(n >= total).icon("Right");
 			}
 			if (back != null) button(bi++).show("Back",back);
 		}

@@ -1,18 +1,18 @@
-package classes.Scenes.Areas.Lake 
+package classes.Scenes.Areas.Lake
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-	
-	/**
+import classes.*;
+import classes.GlobalFlags.*;
+
+/**
 	 * ...
 	 * @author ...
 	 */
 	public class CalluScene extends AbstractLakeContent
 	{
 		
-		public function CalluScene() 
+		public function CalluScene()
 		{
-			
+		
 		}
 		
 		//Just want to do a quick Ottergirl event submission after you mentioned it!
@@ -182,7 +182,7 @@ package classes.Scenes.Areas.Lake
 			outputText("\n\nYou take a minute to recover before doing the same.  ");
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -1);
-			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.FISHFIL, explorer.done);
 		}
 
 		//For Chicks
@@ -241,7 +241,7 @@ package classes.Scenes.Areas.Lake
 
 			player.sexReward("vaginalFluids");
 			dynStats("sen", -1);
-			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.FISHFIL, explorer.done);
 		}
 
 		//For Pansies
@@ -251,7 +251,7 @@ package classes.Scenes.Areas.Lake
 			outputText("You shake your head and explain you can't.  She simply shrugs, \"<i>Ain't no skin off my back.</i>\"");
 
 			outputText("\n\nThe two of you sit in silence for a little while.  It doesn't feel like an awkward silence, just a serene, relaxing void of noise.  The gentle lapping of the water almost puts you to sleep.  Eventually, you stand, say your goodbyes and leave.  As you're leaving, Callu shouts, \"<i>Come round any time, ya hear?</i>\"  You nod absently, then make your way back to camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//For Fatties
@@ -265,7 +265,7 @@ package classes.Scenes.Areas.Lake
 			outputText("\n\nYou thank Callu for the food and take your leave.  ");
 
 			//(You have gained Fish Fillet!)
-			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.FISHFIL, explorer.done);
 		}
 		
 		//Fishing Rod
@@ -286,14 +286,14 @@ package classes.Scenes.Areas.Lake
 			outputText("<b>You now have a fishing pole. Every now and then while on a body of water you will be able to retrieve fishes.</b>");
 			player.gems -= 50;
 			player.createKeyItem("Fishing Pole", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function noINotWannaFishing():void
 		{
 			clearOutput();
 			outputText("You will pass on this for now.\n\n");
 			outputText("\"<i>Well all okay. Just ask again if you ever change your mind.</i>\"");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 	}

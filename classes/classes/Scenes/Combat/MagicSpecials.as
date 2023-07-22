@@ -789,7 +789,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(player.hasStatusEffect(StatusEffects.GreenCovenant)) {
 				bd.disable("You already connected with nearby plants!");
 			}
-			else if(!player.hasStatusEffect(StatusEffects.NearbyPlants) && !explorer.areaTags.plants) {
+			else if(!combat.isNearPlants()) {
 				bd.disable("Green Covenant requires having plants nearby.");
 			}
 			else if(player.hasStatusEffect(StatusEffects.CooldownGreenCovenant)) {
