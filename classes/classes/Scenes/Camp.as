@@ -2907,10 +2907,7 @@ public class Camp extends NPCAwareContent{
 		player.createStatusEffect(Soulforce.clones[newClone], 0, 0, 0, 0);
 		EngineCore.SoulforceChange(-player.maxSoulforce());
 		HPChange(-(player.maxHP() * 0.9), true);
-		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) player.statPoints -= (45 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 36));
-		else player.statPoints -= 45;
-		player.perkPoints -= 9;
-		player.level -= 9;
+		player.addNegativeLevels(9);
 		doNext(camp.returnToCampUseEightHours);
 	}
 	private function FormCLoneText():void {
@@ -2941,9 +2938,7 @@ public class Camp extends NPCAwareContent{
 				player.addStatusValue(StatusEffects.PCClone, 3, 30);
 				EngineCore.SoulforceChange(-player.maxSoulforce());
 				HPChange(-(player.maxHP() * 0.5), true);
-				player.statPoints -= 150;
-				player.perkPoints -= 30;
-				player.level -= 30;
+				player.addNegativeLevels(30);
 			}
 			else if (player.statusEffectv4(StatusEffects.PCClone) == 2) {
 				outputText("You return to work on completing your clone. Compared to the previous form of the large sphere, it now looks more like you. You begin the process for the third time.\n\n");

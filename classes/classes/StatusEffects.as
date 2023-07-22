@@ -558,6 +558,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MitziPregnant:StatusEffectType                	= mk("Mitzi Pregnant");
 		public static const Naga:StatusEffectType                           = mk("Naga");
 		public static const NakedOn:StatusEffectType                        = mk("NakedOn");
+		public static const NegativeLevel:StatusEffectType                  = mk("Negative Level");
 		public static const NoJojo:StatusEffectType                         = mk("noJojo");
 		public static const NoMoreMarble:StatusEffectType                   = mk("No More Marble");
 		public static const Oswald:StatusEffectType                         = mk("Oswald");
