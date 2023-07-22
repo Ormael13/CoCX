@@ -3347,6 +3347,19 @@ public class Camp extends NPCAwareContent{
 		restFor(model.time.hours >= 22 ? 6 + (24 - model.time.hours) : 6 - model.time.hours);
 	}
 
+	// Multiply by this instead of hours to account for uninterrupted rest bonus
+	public function acceleratingRecoveryFactor(hours:Number, isSleeping:Boolean):Number {
+		var perHour:Number = 1;
+		if (isSleeping) {
+			if (player.hasPerk(PerkLib.RecuperationSleep)) perHour += 1;
+			if (player.hasPerk(PerkLib.RejuvenationSleep)) perHour += 2;
+		}
+		var bonus:Number = perHour * hours;
+		// Bonus for uninterrupted rest: accumulating +50% for every hour starting with 2nd
+		bonus += 0.5*(hours*(hours-1)/2); // 0 + 0.5 + 1 + 1.5 + ...
+		return bonus;
+	}
+	
 	public function rest():void {
 		campQ = true;
 		IsWaitingResting = true;
@@ -3355,6 +3368,7 @@ public class Camp extends NPCAwareContent{
 		var multiplier:Number = 1.0;
 		var fatRecovery:Number = 4;
 		var hpRecovery:Number = 10;
+		var hpTime:Number = acceleratingRecoveryFactor(waitingORresting, false);
 		if (player.level >= 24) {
 			fatRecovery += 2;
 			hpRecovery += 5;
@@ -3382,7 +3396,7 @@ public class Camp extends NPCAwareContent{
 			var hpBefore:int = player.HP;
 			timeQ = waitingORresting;
 			//THIS IS THE TEXT AREA FOR NOCTURNAL
-			HPChange(timeQ * hpRecovery * multiplier, false);
+			HPChange(hpTime * hpRecovery * multiplier, false);
 			fatigue(timeQ * -fatRecovery * multiplier);
 
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !ingnam.inIngnam) {
@@ -3787,8 +3801,6 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
 		if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 3;
-		if (player.hasPerk(PerkLib.RecuperationSleep)) multiplier += 1;
-		if (player.hasPerk(PerkLib.RejuvenationSleep)) multiplier += 2;
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
 			if (player.hunger < 25) {
 				outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n");
@@ -3828,7 +3840,7 @@ public class Camp extends NPCAwareContent{
 					"\"<i>Good night.</i>\"\n\n");
 		}
 		//REGULAR HP/FATIGUE RECOVERY
-		HPChange(timeQ * hpRecovery * multiplier, display);
+		HPChange(acceleratingRecoveryFactor(timeQ, true) * hpRecovery * multiplier, display);
 		//fatigue
 		fatigue(-(timeQ * fatRecovery * multiplier));
 	}
