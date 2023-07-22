@@ -32,12 +32,18 @@ public class Bog extends BaseContent
 		private function init():void {
 			_bogEncounter = Encounters.group("bogs", {
 				name: "halloweenphouka",
+				label : "(Hallow) Phouka",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return (isHalloween() && (date.fullYear > flags[kFLAGS.TREACLE_MINE_YEAR_DONE]) && flags[kFLAGS.BOG_EXPLORED] % 4 == 0) && (flags[kFLAGS.PHOUKA_LORE] > 0)
 				},
 				call: phoukaScene.phoukaHalloween
 			}, {
 				name: "murkychest",
+				label : "M. Chest",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasKeyItem("Camp - Murky Chest") < 0
 				},
@@ -45,39 +51,59 @@ public class Bog extends BaseContent
 				call: findChest
 			}, {
 				name: "froggirl",
+				label : "Frog girl",
+				kind  : 'event',
 				when: function ():Boolean {
 					return flags[kFLAGS.TIMES_ENCOUNTERED_FROG] != -1 && player.buttPregnancyIncubation != 0
 				},
 				call: frogGirlScene.findTheFrogGirl
 			}, {
 				name: "phouka",
+				label : "Phouka",
+				kind  : 'monster',
 				call: phoukaScene.phoukaEncounter
 			}, {
 				name: "chameleon",
+				label : "Chameleon",
+				kind  : 'monster',
 				call: chameleonGirlScene.encounterChameleon
 			}, {
 				name: "lizan",
+				label : "Lizan",
+				kind  : 'monster',
 				call: lizanScene.lizanIntro
 			}, {
 				name: "trollfemale",
+				label : "Troll (F)",
+				kind  : 'monster',
 				call: SceneLib.trollScene.encounterAdultFemaleTroll,
 				chance: 0.5
 			}, {
 				name: "trollmale",
+				label : "Troll (M)",
+				kind  : 'monster',
 				call: SceneLib.trollScene.encounterAdultMaleTroll,
 				chance: 0.5
 			}, {
 				name: "findnothing",
+				label : "Walk",
+				kind:'walk',
 				call: findNothing
 			}, {
 				//Helia monogamy fucks
 				name: "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -88,6 +114,9 @@ public class Bog extends BaseContent
 				call: SceneLib.etnaScene.repeatYandereEnc
 			}, {
 				name: "zenji",
+				label : "Zenji",
+				kind  : 'npc',
+				unique: true,
 				night: false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ZENJI_PROGRESS] != -1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)

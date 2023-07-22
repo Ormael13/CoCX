@@ -6807,6 +6807,16 @@ public class PerkLib
             // MISCELLANEOUS
             //------------
             //Tier 0
+            //Speedy Recovery - Regain Fatigue 50% faster.
+            SpeedyRecovery.requireLevel(0);
+            SpeedyRecuperation.requirePerk(SpeedyRecovery)
+							  .requireLevel(2);
+            RecuperationSleep.requirePerk(SpeedyRecovery)
+							 .requireLevel(2);
+            SpeedyRejuvenation.requirePerk(SpeedyRecuperation)
+							  .requireLevel(4);
+            RejuvenationSleep.requirePerk(RecuperationSleep)
+							 .requireLevel(4);
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));
@@ -6902,8 +6912,6 @@ public class PerkLib
                         return player.internalHumanScore() >= 5 && player.racialScore(Races.HUMAN) > 17;
                     }, "Five human internal mutations & 18+ human score");
 			RacialParagon.requireLevel(6);
-            //Speedy Recovery - Regain Fatigue 50% faster.
-            SpeedyRecovery.requireLevel(6);
             ResistanceI.requireLevel(6);
             Heroism.requireLevel(6);
             DualWield.requireLevel(6);
@@ -7181,10 +7189,6 @@ public class PerkLib
                     .requireTou(65)
                     .requireSpe(65)
                     .requireLevel(18);
-            SpeedyRecuperation.requirePerk(SpeedyRecovery)
-							  .requireLevel(18);
-            RecuperationSleep.requirePerk(SpeedyRecovery)
-							 .requireLevel(18);
             NaturalHealingMajor.requireLevel(18)
                     .requirePerk(NaturalHealingMinor)
                     .requireInt(20)
@@ -7354,10 +7358,6 @@ public class PerkLib
                     .requireInt(110)
                     .requireWis(110)
                     .requirePerk(MasterGolemMaker);
-            SpeedyRejuvenation.requirePerk(SpeedyRecuperation)
-							  .requireLevel(30);
-            RejuvenationSleep.requirePerk(RecuperationSleep)
-							 .requireLevel(30);
             NaturalHealingLegendary.requireLevel(30)
                     .requirePerk(NaturalHealingEpic)
                     .requireInt(30)

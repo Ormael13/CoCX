@@ -37,6 +37,9 @@ use namespace CoC;
 		private function init():void {
 			_cavesEncounter = Encounters.group("caves", {
 				name: "discoverashlands",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return (player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_ASHLANDS] == 0
 				},
@@ -44,6 +47,9 @@ use namespace CoC;
 				call: discoverAshlands
 			}, {
 				name: "discovertundra",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return (player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_TUNDRA] == 0
 				},
@@ -51,6 +57,9 @@ use namespace CoC;
 				call: discoverTundra
 			}, {
 				name: "discoverebonlab",
+				label : "Ebon Labyrinth",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.EBON_LABYRINTH] < 1
 				},
@@ -58,12 +67,18 @@ use namespace CoC;
 				call: SceneLib.dungeons.ebonlabyrinth.ebonlabyrinthdiscovery
 			}, {
 				name: "gunparts",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 0 && player.hasKeyItem("Touhouna M3") < 0
 				},
 				call: partsofTouhounaM3
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.ETNA_AFFECTION] >= 5
 				},
@@ -77,51 +92,71 @@ use namespace CoC;
 					break;
 			}*/, {
 				name: "mine",
+				label : "Mine",
+				kind  : 'place',
 				when: function ():Boolean {
 					return player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained
 				},
 				call: cavesMine
 			}, {
 				name: "cavewyrn",
+				label : "Cave Wyrm",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					cavewyrmScene.berserkingCaveWyrmEncounter();
 				}
 			}, {
 				name: "darkelf",
+				label : "Dark Elf",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					darkelfScene.introDarkELfRangerCaves();
 				}
 			}, {
 				name: "darkslime",
+				label : "Dark Slime",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					darkslimeScene.cavesDarkSlimeEncounter();
 				}
 			}, {
 				name: "displacerbeast",
+				label : "Displacer Beast",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					displacerbeastScene.displacerBeastEncounter();
 				}
 			}, {
 				name: "",
+				label : 'Walk',
+				kind : 'walk',
 				when: function ():Boolean {
 					return true
 				},
 				call: findNothing
 			}, {
 				name: "findebon",
+				label : "Ebonbloom",
+				kind  : 'item',
 				call: findEbonBloom
 			}, {
 				name: "findcrystal",
+				label : "M. Crystal",
+				kind  : 'item',
 				call: findCrystal
 			}, {
 				name: "findeyedrops",
+				label : "Eyedrops",
+				kind  : 'item',
 				call: findEyeDrops
 			}, {
 				name: "findnothing",
+				label : "Walk",
+				kind  : 'walk',
 				call: findNothing
 			})
 		}

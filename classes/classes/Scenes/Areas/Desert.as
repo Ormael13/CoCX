@@ -55,6 +55,7 @@ use namespace CoC;
 				}, {
 					name: "walk",
 					call: walkingDesertStatBoost,
+					label:'Walk',
 					kind:'walk'
 				}, {
 					name: "naga",

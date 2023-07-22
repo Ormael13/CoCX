@@ -64,12 +64,18 @@ public class Mountain extends BaseContent
 			{
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
@@ -83,6 +89,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name  : "etna1",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 0)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
@@ -94,6 +103,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name  : "etna2",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 1)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
@@ -105,6 +117,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name  : "alvina1",
+				label : "Alvina",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] == 8;
 				},
@@ -112,6 +127,9 @@ public class Mountain extends BaseContent
 				call  : SceneLib.alvinaFollower.alvinaSecondEncounter
 			}, {
 				name  : "alvina2",
+				label : "Alvina",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] == 9
 						   && flags[kFLAGS.LETHICE_DEFEATED] > 0
@@ -121,6 +139,9 @@ public class Mountain extends BaseContent
 				call  : SceneLib.alvinaFollower.alvinaSecondBonusEncounter
 			}, {
 				name: "lowmountains",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] <= 0
 						   && ((player.level + combat.playerLevelAdjustment()) >= 15)
@@ -129,6 +150,8 @@ public class Mountain extends BaseContent
 				chance: Encounters.ALWAYS
 			},{
 				name: "minomob",
+				label : "Mino Mob",
+				kind : 'monster',
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3;
@@ -137,24 +160,34 @@ public class Mountain extends BaseContent
 				mods: [SceneLib.exploration.furriteMod]
 			}, {
 				name:"minotaur",
+				label : "Minotaur",
+				kind : 'monster',
 				night : false,
 				chance:minotaurChance,
 				call:minotaurRouter,
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"lacta_bovina",
+				label : "Lacta Bovina",
+				kind : 'monster',
 				night : false,
 				chance:0.7,
 				call:lactabovinaScene.lactaBovinaInto,
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"factory",
+				label : "Factory",
+				kind  : 'place',
+				unique: true,
 				when:function():Boolean {
 					return flags[kFLAGS.MARAE_QUEST_START] >= 0.5 && flags[kFLAGS.FACTORY_FOUND] <= 0;
 				},
 				call: SceneLib.dungeons.factory.enterDungeon
 			},{
 				name:"ceraph",
+				label : "Ceraph",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				chance: mountainChance,
 				when:function ():Boolean {
@@ -168,9 +201,14 @@ public class Mountain extends BaseContent
 				mods:[fn.ifLevelMin(2)]
 			},{
 				name: "lightelf",
+				label : "Light Elf",
+				kind : 'monster',
 				call: lightelfScene.introLightELfScout
 			}, {
 				name: "lactoblasters",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Lactoblasters") < 0;
 				},
@@ -178,14 +216,20 @@ public class Mountain extends BaseContent
 				call: partsofLactoBlasters
 			}, {
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name:"hikeh",
 				chance:0.2,
+				kind:'hike',
 				call:hikeh
 			}, {
 				name: "mimic",
+				label : "Mimic",
+				kind : 'monster',
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
@@ -217,6 +261,9 @@ public class Mountain extends BaseContent
 				call: salon.hairDresser
 			},{
 				name: "mountains",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return player.exploredMountain <= 0
 						   && ((player.level + combat.playerLevelAdjustment()) >= 30)
@@ -391,6 +438,9 @@ public class Mountain extends BaseContent
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "highmountains",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return !SceneLib.highMountains.isDiscovered()
 						   && ((player.level + combat.playerLevelAdjustment()) >= 55)

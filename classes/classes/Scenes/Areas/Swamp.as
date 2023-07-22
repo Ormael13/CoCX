@@ -36,6 +36,9 @@ use namespace CoC;
 		private function init():void {
 			_swampEncounter = Encounters.group("swamp", {
 				name: "discoverbog",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return (player.level + combat.playerLevelAdjustment()) >= 23 && flags[kFLAGS.BOG_EXPLORED] == 0
 				},
@@ -43,6 +46,9 @@ use namespace CoC;
 				call: discoverBog
 			}, {
 				name: "gunparts",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("M1 Cerberus") < 0
 				},
@@ -50,6 +56,9 @@ use namespace CoC;
 				call: partsofM1Cerberus
 			}, {
 				name: "belisa",
+				label : "Belisa",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.SpoodersOff) && BelisaFollower.BelisaEncounternum == 0
 				},
@@ -57,6 +66,9 @@ use namespace CoC;
 				call: SceneLib.belisa.firstEncounter
 			}, {
 				name: "lily",
+				label : "Lily",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.SpoodersOff) && !LilyFollower.LilyFollowerState
 				},
@@ -64,6 +76,9 @@ use namespace CoC;
 				call: SceneLib.lily.lilyEncounter
 			}, {
 				name: "kihaxhel",
+				label : "Kiha x Helia",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return !SceneLib.kihaFollower.followerKiha() && player.cor < 60 + player.corruptionTolerance && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0
 				},
@@ -71,6 +86,9 @@ use namespace CoC;
 				call: SceneLib.kihaFollower.kihaXSalamander
 			}, {
 				name: "emberegg",
+				label : "Ember (E)",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0
 				},
@@ -78,15 +96,24 @@ use namespace CoC;
 				call: SceneLib.emberScene.findEmbersEgg
 			}, {
 				name: "spidermale",
+				label : "Spider (M)",
+				kind  : 'monster',
 				call: maleSpiderMorphScene.greetMaleSpiderMorph
 			}, {
 				name: "spiderfemale",
+				label : "Spider (F)",
+				kind  : 'monster',
 				call: femaleSpiderMorphScene.fSpiderMorphGreeting
 			}, {
 				name: "drider",
+				label : "Drider",
+				kind  : 'monster',
 				call: corruptedDriderScene.driderEncounter
 			}, {
 				name: "rogar",
+				label : "Ro'gar",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_PHASE] < 3
 				},
@@ -94,6 +121,9 @@ use namespace CoC;
 				call: rogar.encounterRogarSwamp
 			}, {
 				name: "kiha1",
+				label : "Kiha",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return SceneLib.kihaFollower.followerKiha()
 				},
@@ -102,6 +132,9 @@ use namespace CoC;
 				call: SceneLib.kihaScene.kihaExplore
 			}, {
 				name: "kiha2",
+				label : "Kiha",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !SceneLib.kihaFollower.followerKiha()
 				},
@@ -111,12 +144,18 @@ use namespace CoC;
 			}, {
 				//Helia monogamy fucks
 				name: "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
 				chance: swampChance,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2

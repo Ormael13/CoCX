@@ -74,11 +74,11 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Intermediate Leadership. Gained by finishing two 2 on 2 fights in challange section of soul arena. Effects: Allow to form 3 people party.\n");
 			outputText("-Motivation (Ex) now req. additionaly Intermediate Leadership perk.\n");
 			outputText("-Tyrantia can be now asked to join pc as henchman (req. 60%+ affection) and each day she stay as henchman will rise her affection by 2%.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Changes to some perk tiers/lvl req.: Speedy Recovery (tier 1 > 0), Speedy Recuperation (tier 3 > 0, lvl 18 > 2), Recuperation Sleep (tier 3 > 0, lvl 18 > 2), Speedy Rejuvenation (tier 6 > 0, lvl 30 > 4), Rejuvenation Sleep (tier 6 > 0, lvl 30 > 4)\n");
+			outputText("-Giacomo can buy from player (40%/80% of item value) (aimozg)\n");
+			outputText("-Rest HP recovery accelerates +50% each hour (resting 8 hours gives total 22 hours of HP regen). Heal on level up. (aimozg)\n");
+			outputText("-Creating clone now give 'negative levels' status effect - no hp recovery or point gain (aimozg)\n");
+			outputText("-Soul Sense is now an exploration ability that reveals 1 NPC for 100 SF (aimozg) It's change only for npc's founded previously during exploring areas/general explore (orm)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
