@@ -2466,9 +2466,9 @@ public static const MULTISHOT_STYLE:int                     	                   
 public static const ARROWS_ACCURACY:int            			                        = 2458;
 public static const PRISON_STORAGE_WEAPON_RANGE:int                                 = 2459;
 public static const ELEMENTAL_ARROWS:int                                 		    = 2460;
-public static const SOUL_SENSE_TAMANI:int                  		                    = 2461;
-public static const SOUL_SENSE_TAMANI_DAUGHTERS:int                                 = 2462;
-public static const SOUL_SENSE_KITSUNE_MANSION:int                                  = 2463;
+public static const SOUL_SENSE_TAMANI:int                  		                    = 2461; // No longer used
+public static const SOUL_SENSE_TAMANI_DAUGHTERS:int                                 = 2462; // No longer used
+public static const SOUL_SENSE_KITSUNE_MANSION:int                                  = 2463; // No longer used
 public static const SOUL_SENSE_IZUMI:int                    		                = 2464;
 public static const ARIAN_SCALES:int                            			        = 2465;
 public static const SEXUAL_FLUIDS_LEVEL:int                            		        = 2466;
@@ -2492,8 +2492,8 @@ public static const AUTO_CAST_CHARGE_ARMOR_DISABLED:int                         
 public static const AUTO_CAST_MIGHT_DISABLED:int                               		= 2484;
 public static const AUTO_CAST_BLINK_DISABLED:int                                	= 2485;
 public static const SOUL_SENSE_WORLD_TREE:int             	     	                = 2486;
-public static const SOUL_SENSE_GIACOMO:int                                   		= 2487;
-public static const SOUL_SENSE_PRISCILLA:int                                   		= 2488;
+public static const SOUL_SENSE_GIACOMO:int                                   		= 2487; // No longer used
+public static const SOUL_SENSE_PRISCILLA:int                                   		= 2488; // No longer used
 public static const SOUL_SENSE_2489:int                                             = 2489;			//Not Yet Used Flag
 public static const KITSUNE_SHRINE_UNLOCKED:int               	                    = 2490;
 public static const VENOM_TIMES_USED:int                	                        = 2491;

@@ -112,7 +112,7 @@ use namespace CoC;
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
-								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
 							} else {
 								tamaniScene.encounterTamani();
@@ -121,8 +121,7 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
-								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
-								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
+								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0);
 						}
 					}, {
 						name  : "Tamani_Daughters",
@@ -134,8 +133,7 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return player.gender > 0
 								&& player.hasCock()
-								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
-								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16;
 						}
 					}, corruptedGlade.encounter, {
 						name: "trip",
@@ -288,7 +286,7 @@ use namespace CoC;
 						chance: 0.6,
 						call  : function ():void {
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
-								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
 							} else {
 								tamaniScene.encounterTamani();
@@ -297,8 +295,7 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 								   && player.gender > 0
-								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
-								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
+								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0);
 						}
 					}, {
 						name  : "Tamani_Daughters",
@@ -310,8 +307,7 @@ use namespace CoC;
 						when  : function ():Boolean {
 							return player.gender > 0
 								&& player.hasCock()
-								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
-								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16;
 						}
 					}, {
 						name  : "Jojo",
@@ -583,9 +579,6 @@ use namespace CoC;
 				name: "kitsune",
 				label : "Kitsune",
 				kind  : 'monster',
-				when: function():Boolean {
-					return flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 3;
-				},
 				call: kitsuneScene.enterTheTrickster
 			}, {
 				name: "celess-nightmare",
@@ -613,7 +606,7 @@ use namespace CoC;
 				chance: 0.6,
 				call  : function ():void {
 					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
-						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3 && rand(5) == 0) {
+						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && rand(5) == 0) {
 						tamaniDaughtersScene.encounterTamanisDaughters();
 					} else {
 						tamaniScene.encounterTamani();
@@ -622,8 +615,7 @@ use namespace CoC;
 				when  : function ():Boolean {
 					return flags[kFLAGS.TAMANI_TIME_OUT] == 0
 						   && player.gender > 0
-						   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
-						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
+						   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0);
 				}
 			}, {
 				name  : "Tamani_Daughters",
@@ -635,8 +627,7 @@ use namespace CoC;
 				when  : function ():Boolean {
 					return player.gender > 0
 						   && player.hasCock()
-						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
-						   && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
+						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16;
 				}
 			}, {
 				name	: "Tyrania_and_Flitzy",

@@ -667,11 +667,6 @@ public class KitsuneScene extends BaseContent
 				}
 				outputText("production has been enhanced.</b>");
 			}
-			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 2) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
-			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 2) {
-				flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
-				outputText("\n\n<b>You have been in mansion enough times to be able to find it in the future when using soul sense. (Removes Kitsunes from deepwoods explore encounters pool!)</b>");
-			}
 			CoC.instance.timeQ = 30 - model.time.hours;
 			outputText("\n\n");
 			camp.sleepRecovery(true);

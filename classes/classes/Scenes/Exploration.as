@@ -1158,7 +1158,7 @@ public class Exploration extends BaseContent
 						name  : "Giacomo",
 						kind  : "npc",
 						unique: true,
-						call  : SceneLib.giacomoShop.giacomoEncounterSS
+						call  : SceneLib.giacomoShop.giacomoEncounter
 					}, {
 						name  : "Dinah",
 						kind  : "npc",
