@@ -2567,7 +2567,7 @@ public static const TEMPLE_OF_THE_DIVINE_FERA:int                               
 public static const GOLEMANCER_PERM_GOLEMS:int	                                    = 2559;
 public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                            = 2560;
 public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
-public static const SOUL_SENSE_ANTHILL:int                         					= 2562;
+public static const SOUL_SENSE_ANTHILL:int                         					= 2562; // No longer used
 public static const FISHES_STORED_AT_FISHERY:int                         			= 2563;
 public static const PATCHOULI_FOLLOWER:int                         					= 2564;
 public static const PATCHOULI_GIRL_OR_MORPH:int                                   	= 2565;

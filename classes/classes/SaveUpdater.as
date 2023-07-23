@@ -1675,7 +1675,6 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
-				flags[kFLAGS.SOUL_SENSE_ANTHILL] = 0; //Izma fishery cleanup.
 				// convert old buff tags to new ("item_"+itemid)
 				const ItemBuffsRename:Array = [
 					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],

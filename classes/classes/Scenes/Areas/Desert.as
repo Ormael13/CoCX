@@ -322,6 +322,9 @@ use namespace CoC;
 		public function exploreDesert():void
 		{
 			explorer.prepareArea(desertEncounter);
+			explorer.soulSenseCheck = function (e:ExplorationEntry):Boolean {
+				return e.kind == "npc" || e.encounter.encounterName() == "ants";
+			}
 			explorer.setTags("desert", "desertOuter");
 			explorer.prompt = "You explore the outer desert.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {

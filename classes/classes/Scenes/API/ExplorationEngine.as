@@ -89,6 +89,12 @@ public class ExplorationEngine extends BaseContent {
 	public var canInventory:Boolean  = true;
 	public var canSoulSense:Boolean  = true;
 	/**
+	 * function(e:ExplorationEntry):Boolean.
+	 * If returns true, that encounter can be revealed with Soul Sense skill.
+	 * Default: all NPC-tagged encounters.
+	 */
+	public var soulSenseCheck:Function = defaultSoulseSenseCheck;
+	/**
 	 * function(e:ExplorationEntry):Boolean, called BEFORE the encounter.
 	 * If it returns true, do not continue with the exploration UI
 	 */
@@ -161,6 +167,7 @@ public class ExplorationEngine extends BaseContent {
 		nextNodes    = [];
 		onMenu       = null;
 		onEncounter  = null;
+		soulSenseCheck = defaultSoulseSenseCheck;
 	}
 	public function markEncounterDone():void {
 		if (initialized && currentEntry != null) {
@@ -692,6 +699,9 @@ public class ExplorationEngine extends BaseContent {
 	public function soulSenseCost():Number {
 		return 100;
 	}
+	public static function defaultSoulseSenseCheck(e:ExplorationEntry):Boolean {
+		return e.kind == "npc";
+	}
 	public function doSoulSense():void {
 		player.soulforce -= soulSenseCost();
 		statScreenRefresh();
@@ -700,13 +710,13 @@ public class ExplorationEngine extends BaseContent {
 		var message:String = "";
 		for (var i:int = 0; i < N; i++) {
 			var e:ExplorationEntry = flatList[i];
-			if (e.isDisabled) continue;
-			if (e.kind == "npc" && !e.isFullyRevealed) {
+			if (e.isDisabled || e.isFullyRevealed) continue;
+			if (soulSenseCheck(e)) {
 				candidates.push(e);
 			}
 		}
 		if (candidates.length == 0) {
-			message = "You reach out, but your soul sense detects no one.";
+			message = "You reach out, but your soul sense detects nothing special.";
 		} else {
 			e = Utils.randomChoice(candidates);
 			e.incReveal();

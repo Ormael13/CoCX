@@ -779,8 +779,6 @@ public class Soulforce extends BaseContent
 				.disableIf(!player.hasVagina(), "Req. to have a vagina.");
 		if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1)
 			addSSButton(btn++, "WorldTree", worldtreeScene.YggdrasilDiscovery, 100);
-		if (flags[kFLAGS.SOUL_SENSE_ANTHILL] >= 1 && !flags[kFLAGS.ANT_WAIFU])
-			addSSButton(btn++, "Ant Colony", SceneLib.desert.antsScene.antColonyChallenge, 200);
 		//button 11
 		addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 		addButton(14, "Back", accessSoulforceMenu);
