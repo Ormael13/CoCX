@@ -509,7 +509,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Nodding, you give her ass a slap and send her off, noting Ceraph has freed her hands at some point and returned them to their normal position.  She hasn't done anything about the sexual filth coating her body, but knowing her, she probably doesn't want to.");
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2, "cor", .25);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //*Ceraph TongueFucks The PC (Zeddited)
@@ -560,7 +560,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			flags[kFLAGS.CERAPH_TIMES_LICKED]++;
 			player.sexReward("saliva", "Vaginal");
 			dynStats("sen", -2 ,"cor", .25);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //*Ceraph goes full tentacle and double penetrates herms (+ standard dick BJ if ceraph dick toggle is on) (Zeddited)
@@ -614,12 +614,12 @@ public class CeraphFollowerScene extends NPCAwareContent
 			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0 && flags[kFLAGS.CERAPH_PUNISHED] == 0) {
 				outputText("You smirk and wonder if you should punish her for stuffing her cock down your throat.  Do you?");
-				simpleChoices("Punish", punishCeraphForSurpriseThroatFuck, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+				simpleChoices("Punish", punishCeraphForSurpriseThroatFuck, "", null, "", null, "", null, "Leave", explorer.done);
 			}
 			//ELSE:
 			else {
 				outputText("You nod graciously and begin to clean up, dismissing your personal demon... for now.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -631,7 +631,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			clearOutput();
 			outputText("You grab hold of Ceraph, bending the surprised demoness over a rock and laying into her ass.  She whimpers, but manages not to cry, even as you turn her purple butt into a black and blue canvas.  With each slap you deliver, you dictate that her cock is only allowed near your mouth at YOUR discretion, not a worthless slave's.  By the end, she's sniffling and nodding, murmuring, \"<i>Yes [Master],</i>\" over and over again.</i>\"\n\n");
 			outputText("You let the demon go with her pride bruised.  There's little doubt to be had - she'll never make that mistake again.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //Siamese Catgirl Twins - TDM (Zeddited, nya)
@@ -700,7 +700,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			//lust to 0, corruption +0.5
 			player.sexReward("no", "Dick");
 			//end scene
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -768,7 +768,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 				trace("PC KNOCKED UP WITH CERAPH IMPS");
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[Sober]
@@ -805,7 +805,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Retrieving your [armor], when you turn around again, Urta is gone, the moment vanishing like a drop of water in an endless sea. \"<i>Thank you, [Master],</i>\" Ceraph's voice demurely whispers, gratitude floating on the wind.");
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2, "cor", 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //Corrupting the Innocent with optional gangbang -Luka (Zeddited) (with Shake N' Bake) (and Shambles helped)
@@ -942,7 +942,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Chagrined, she unfurls her wings and flies off, the imps quickly wilting and following suit.");
 			//(disable repeat of scene)
 			flags[kFLAGS.CERAPH_RP_CORRUPT_DISABLED] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[=No=]
@@ -952,7 +952,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("You tell her you have no interest in granting release to lowly imps.  If they want pleasure, then they should earn it themselves.\n\n");
 
 			outputText("\"<i>Sorry boys, " + player.mf("Master's", "Mistress") + " orders.</i>\"  She extends her wings and flies away, and the horny imps follow suit, still busy masturbating.  A 'pit-pat-pat' sound follows them, the noise of their pre-cum hitting the dry dirt from on high.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[=Yes=]
@@ -971,7 +971,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("Licking the cum off her body, she sashays towards you to give you a little peck on the cheek.  \"<i>Hmm, you're such a good [Master], I might have to leave Ceraph's harem and join yours instead.  See you around, hot stuff.</i>\"  She rounds up the tired imps and extends her wings, setting off alongside them.");
 			dynStats("lus", 5, "cor", 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //(not optimized in any way for centaur)
@@ -1093,7 +1093,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			//end (stat changes?)
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", -5, "cor", 3);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //NOTES:
@@ -1207,7 +1207,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -2, "cor", 2);
 			flags[kFLAGS.CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		/*Ceraph's Harem: Zetsuko
@@ -1304,7 +1304,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\"<i>Zetsuko hopes to taste [Master] again sometime...</i>\"");
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", .25, "sen", -5, "cor", 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //▶[GetTongued] requires vagina
@@ -1359,7 +1359,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\"<i>Zetsuko hopes to taste [Master] again sometime...</i>\"");
 			player.sexReward("saliva");
 			dynStats("lib", .25, "sen", -5, "cor", 2);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //▶[Banana?] silly mode
@@ -1386,7 +1386,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\"<i>FUCK!</i>\"\n\n");
 
 			outputText("You'll take that as a yes.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function noZetsukoLoveToday():void
@@ -1469,7 +1469,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			dynStats("sen", -2, "cor", 5);
 			flags[kFLAGS.CERAPH_OWNED_DICKS]++;
 			player.removeCock(x, 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function ceraphFollowerCuntTaking():void
@@ -1486,7 +1486,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			player.orgasm();
 			dynStats("sen", -2, "cor", 5);
 			flags[kFLAGS.CERAPH_OWNED_PUSSIES]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function ceraphFollowerTitTaking(rowNum:int = 0):void
@@ -1539,7 +1539,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			//(-1 fetish, +1 tit toy status)
 			dynStats("lus", 20, "cor", 5);
 			flags[kFLAGS.CERAPH_OWNED_TITS]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //NippleCunt Stuffing (Ceraph grows dick-nipples to plow your lusty twats!)
@@ -1581,7 +1581,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\n\"<i>Delicious, my [Master],</i>\" the demoness coos as her wings unfurl, \"<i>Please, let's do this again.</i>\"  She leaps into the sky and flies off, no doubt to tend to her own pets.");
 			player.sexReward("cum","Vaginal");
 			dynStats("sen", 2, "cor", 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //Portal Fuck (AKA Ceraph Hung Out With Cinnabar, Req's PC dick)
@@ -1623,7 +1623,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			dynStats("cor", 1);
 			awardAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, true, true);
 			flags[kFLAGS.TIMES_CERAPH_PORTAL_FUCKED]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function layEggsInSlaveCeraph():void
@@ -1672,7 +1672,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\nHumming a happy tune to yourself as you walk around Ceraph's twitching form, you grab a handful of her hair and pull her up off the ground.  Her face is crusted with dirt and her sparkling, gem-like eyes stare senselessly at you.  You rub your ovipositor over her head, carefully wiping your mingled lubes off on her hair before retracting the organ back into its holding sleeve.  \"<i>That will be all,</i>\" you tell her, and she smiles dreamily at you.  You turn around to gather your things, and don't bother to look back.");
 			player.dumpEggs();
 			player.sexReward("Default","Default",true,false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -1736,7 +1736,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("\n\nCeraph gets up with a shocked expression painted on her violet features.  \"<i>Didn't you have any fun?</i>\" she asks.  \"<i>We were just about to the good part!</i>\"");
 			outputText("\n\nYou tell her that it wasn't fun in the slightest, and you want out.");
 			outputText("\n\n\"<i>Well, okay then... [Master]...</i>\" she grumbles.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[Either Once]
@@ -1870,7 +1870,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			//Increase corruption, reset lust, increase sensitivity.
 			player.sexReward("cum","Anal");
 			dynStats("sen", 2, "cor", 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[Either Twice]
@@ -2078,7 +2078,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 				outputText("\n\nYour collar is removed, and you look around realizing your owner is gone.  Your muscles are sore from the journey and you NEED to masturbate...  You aren't even sure why you did that.");
 			}
 			dynStats("sen", 4, "lus=", 100, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

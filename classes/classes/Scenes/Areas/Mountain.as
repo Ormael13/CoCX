@@ -192,11 +192,7 @@ public class Mountain extends BaseContent
 				night : false,
 				chance: mountainChance,
 				when:function ():Boolean {
-					return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
-							/* [INTERMOD:8chan]
-							&& flags[kFLAGS.CERAPH_KILLED] == 0
-							 */
-							/*&& game.fetishManager.compare(FetishManager.FETISH_EXHIBITION)*/;
+					return !SceneLib.ceraphFollowerScene.ceraphIsFollower();
 				},
 				call:ceraphFn,
 				mods:[fn.ifLevelMin(2)]
@@ -225,7 +221,7 @@ public class Mountain extends BaseContent
 			}, {
 				name:"hikeh",
 				chance:0.2,
-				kind:'hike',
+				kind:'walk',
 				call:hikeh
 			}, {
 				name: "mimic",
@@ -242,14 +238,8 @@ public class Mountain extends BaseContent
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
 			}*/);
-			_lowmountainEncounter = Encounters.group("low mountains", {
-				//General Angels, Goblin and Imp Encounters
-				name: "common",
-				chance: 0.5,
-				call: function ():void{
-					SceneLib.exploration.genericGobImpAngEncounters();
-				}
-			}, {
+			_lowmountainEncounter = Encounters.group("low mountains",
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 				//Helia monogamy fucks
 				name  : "helcommon",
 				label : "Helia",
@@ -343,7 +333,7 @@ public class Mountain extends BaseContent
 			},{
 				name:"hhound_master",
 				label : "Hellhound Master",
-				kind  : 'event',
+				kind  : 'npc',
 				unique: true,
 				night : false,
 				chance:2,
@@ -427,7 +417,7 @@ public class Mountain extends BaseContent
 			}, {
 				name  : "mindbreaker",
 				label : "Mindbreakers Cave",
-				kind  : 'npc',
+				kind  : 'place',
 				unique: true,
 				call  : SceneLib.mindbreaker.findMindbreaker,
 				chance: findMindbreakerChance,
@@ -447,7 +437,7 @@ public class Mountain extends BaseContent
 			}, {
 				name:"hike",
 				label : "Hike",
-				kind  : 'hike',
+				kind  : 'walk',
 				chance:0.2,
 				call:hike
 			}, {
@@ -638,25 +628,17 @@ public class Mountain extends BaseContent
 		}
 		//Explore Mountain
 		public function exploreMountain():void {
-			/*
 			explorer.prepareArea(mountainEncounter);
 			explorer.setTags("mountain","mountainMid");
 			explorer.prompt = "You explore the mountain.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
 				player.exploredMountain++;
 			}
-			explorer.leave.hint("Leave the forest outskirts");
+			explorer.leave.hint("Leave the mountain");
 			explorer.skillBasedReveal(30, player.exploredMountain);
 			explorer.doExplore();
-			 */
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			player.exploredMountain++;
-			mountainEncounter.execEncounter();
-			flushOutputTextToGUI();
 		}
 		public function exploreLowMountain():void {
-			/*
 			explorer.prepareArea(lowMountainEncounter);
 			explorer.setTags("mountain","mountainLow");
 			explorer.prompt = "You explore the low mountains.";
@@ -666,12 +648,6 @@ public class Mountain extends BaseContent
 			explorer.leave.hint("Leave the low mountains");
 			explorer.skillBasedReveal(15, flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]);
 			explorer.doExplore();
-			 */
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
-			lowMountainEncounter.execEncounter();
-			flushOutputTextToGUI();
 		}
 		public function exploreHills():void {
 			explorer.prepareArea(hillsEncounter);

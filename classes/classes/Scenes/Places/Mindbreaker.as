@@ -220,7 +220,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			player.sexReward("no", "Vaginal");
 			player.sexReward("no", "Vaginal");
 			MindBreakerQuest = QUEST_STAGE_METMB;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function YesTentacleStage2():void {
@@ -283,7 +283,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			player.sexReward("no", "Vaginal");
 			player.sexReward("no", "Vaginal");
 			player.sexReward("no", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function YesTentacleStage3():void {
@@ -456,7 +456,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			player.createPerk(PerkLib.PsionicEmpowerment,0,0,0,0);
 			player.removeAllRacialMutation();
 			MindBreakerQuest = QUEST_STAGE_ISMB;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function FuckNo():void {
@@ -467,7 +467,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					"\n\nWith your mind made, you turn heel back to camp, never once looking back towards the ominous crevice. Once you’re relatively safe, a reassuring calm settles over you." +
 					" You’ve done the right thing in leaving that place behind, you’ve never felt so sure before." +
 					"\n\nYou’ve done the smart thing.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function NoIndecisive():void {
@@ -477,7 +477,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					" You’ll just end up raped or worse: dead. Back to camp, you need to go back." +
 					" Return and train more. Come back when you’re actually ready, instead of getting ahead of yourself and thinking you were something of note. Inadequate. Inferior. Worthless." +
 					"\n\nTurn back. Grow. Develop. Return.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		///MINDBREAKER CAVE SECTION///
@@ -539,7 +539,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner").hint("There is no prisoners in the cave for you to play with at the time.");
 			addButton(10, "More?", totalSubservience)
 				.hint("Ask if you can do even more for the Mindbreakers.");
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 
 		public function TalkAboutMB():void {
@@ -580,7 +580,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					dynStats("lib", 10);
 				} else outputText("The two of you slowly disentangle from each other after briefly relishing the afterglow together.");
 				outputText("\n\nHighly satisfied after your lovemaking, you head back to camp.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -613,7 +613,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					+ "\n"
 					+ "Each thrust causes her to moan lewdly as her overstimulated pussy is unable to hold back any further. She completely shuts down as she faints from your efforts. Satisfied, you leave her to rest before returning to your camp.\n");
 				player.sexReward("vaginalFluids", "Dick");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 
 			function vagF():void {
@@ -627,7 +627,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					+ "\n"
 					+ "After a few minutes the goblin faints, still impaled on the toy. You unplug her and a massive flood of pussy juice drenches the ground. Utterly satisfied, you leave her to rest and head back to camp.\n");
 				player.sexReward("vaginalFluids", "Vaginal");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -684,7 +684,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			function sharedEnd():void {
 				outputText("\n\nHighly satisfied, you head back to camp.");
 				PlayerEggIsFertile = true;
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -733,7 +733,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big sister. for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\" She giggles as she heads to a corner to play with her other brethren." +
 							"\n\nSatisfied with the result, you head back to camp still smiling.");
 					player.sexReward("vaginalFluids","Vaginal");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				}
 
 				function dickF():void {
@@ -765,7 +765,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big brother, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"She giggles as she heads to a corner to play with her other brethren." +
 							"Satisfied, you head back to camp still smiling.");
 					player.sexReward("vaginalFluids","Dick");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				}
 			}
 			function convertMale():void { //Male Scene
@@ -804,7 +804,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big sister, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"He chuckles as she heads to a corner to play with his other brethren." +
 							"\n\nSatisfied, you head back to camp still smiling.");
 					player.sexReward("cum","Vaginal");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				}
 				function dickF():void {
 					outputText("He has been an excellent slut and it’s high time to reward his throbbing cock and complete submissiveness properly. " +
@@ -830,7 +830,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 							"\n\n\"<i>Thank you, big brother, for showing me enlightenment. I know what I must do now. Seek, share, and spread!</i>\"He chuckles as she heads to a corner to play with his other brethren." +
 							"\n\nSatisfied, you head back to camp still smiling.");
 					player.sexReward("no", "Dick");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				}
 			}
 			/*

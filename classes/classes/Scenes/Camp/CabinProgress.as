@@ -1,4 +1,4 @@
-package classes.Scenes.Camp 
+package classes.Scenes.Camp
 {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -13,7 +13,7 @@ import classes.Scenes.SceneLib;
 	public class CabinProgress extends BaseContent {
 		
 		public function CabinProgress() {
-			
+		
 		}
 		
 		public function initiateCabin():void {
@@ -21,12 +21,12 @@ import classes.Scenes.SceneLib;
 			//if (player.hasKeyItem("Nails") >= 0) player.removeKeyItem("Nails");
 			//Start cabin project!
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) 
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1)
 			{
 				startWork();
 				return;
 			}
-			if (flags[kFLAGS.CAMP_BUILT_CABIN] == 1) 
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] == 1)
 			{
 				SceneLib.dungeons.cabin.enterCabin();
 				return;
@@ -48,18 +48,18 @@ import classes.Scenes.SceneLib;
 				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) enterCabinFirstTime();
 			}
 			else
-			{	
+			{
 				outputText("You are too exhausted to work on your cabin!");
 				doNext(playerMenu);
 			}
-		}	
+		}
 		
 		//Error message
 		public function errorNotEnough():void {
-			outputText("\n\n<b>You do not have sufficient resources. You may buy more nails from the carpentry shop in Tel'Adre, get more wood from either the Forest or the Deepwoods and get more stones from some quarry or if you found someone to help you dig some from underground.</b>")		
+			outputText("\n\n<b>You do not have sufficient resources. You may buy more nails from the carpentry shop in Tel'Adre, get more wood from either the Forest or the Deepwoods and get more stones from some quarry or if you found someone to help you dig some from underground.</b>")
 		}
 		public function errorNotHave():void {
-			outputText("\n\n<b>You do not have the tools to build.</b>")		
+			outputText("\n\n<b>You do not have the tools to build.</b>")
 		}
 		
 		
@@ -75,7 +75,7 @@ import classes.Scenes.SceneLib;
 			outputText("You finally decide to begin your project: a cabin.  A comfortable cabin, come complete with a bed and nightstand along with some furniture. \n\nYou begin clearing away loose debris by picking up loose rocks and sticks and move them somewhere. It takes one hour and you feel a bit exhausted but you've finished creating a space.");
 			fatigue(50);
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 3;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		//STAGE 3 - Think of materials. Obviously, wood.
@@ -83,8 +83,8 @@ import classes.Scenes.SceneLib;
 			outputText("Now that you have cleared an area for your cabin, you'll have to figure out how to get the resources you need. You look at the trees in the distance. Clearly, you'll need something to cut down trees. Maybe there's a shop somewhere?");
 			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") outputText("\n\nYour large axe will suffice for the daunting task of gathering materials.");
 			else if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("\n\nHappily, you have already bought it!");
-			else 
-			{	
+			else
+			{
 				outputText("\n\nYou realize something; you need an axe!");
 				if (camp.followerKiha())
 				{
@@ -92,7 +92,7 @@ import classes.Scenes.SceneLib;
 				}
 			}
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 4;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function canGatherWoods():Boolean {
@@ -111,7 +111,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			if (player.fatigue > player.maxFatigue() - 30) {
 				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") {
@@ -169,7 +169,7 @@ import classes.Scenes.SceneLib;
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
 			fatigue(50, USEFATG_PHYSICAL);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		//Cut down the tree yourself with large axe.
 		private function cutTreeTIMBER():void {
@@ -199,7 +199,7 @@ import classes.Scenes.SceneLib;
 			if (player.isInGoblinMech()) {
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (22 + Math.floor(player.str / 4));
 				incrementWoodSupply(22 + Math.floor(player.str / 4));
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else {
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
@@ -228,7 +228,7 @@ import classes.Scenes.SceneLib;
 				if (model.time.hours <= 5 || model.time.hours >= 21) addButton(0, "Mine (N)", quarrySiteMine, true);
 				else addButton(0, "Mine (D)", quarrySiteMine).hint("Some ores might be available only at night.");
 			}
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 		private function quarrySitePickaxe():void {
 			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems, ore or stone from the landscape. Also inspecting leather bag it turns oput to be some lowest quality bag enchanted to store ores and other crafting materials in it. (It can store up to 5 pieces of 4 types of crafting materials)");
@@ -243,7 +243,7 @@ import classes.Scenes.SceneLib;
 		private function quarrySiteMine(nightExploration:Boolean = false):void {
 			if (player.fatigue > player.maxFatigue() - 50) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			if (nightExploration) {
@@ -267,6 +267,7 @@ import classes.Scenes.SceneLib;
 		}
 		
 		private function findOre(nightExploration:Boolean = false):void {
+			explorer.stopExploring();
 			if (player.miningLevel > 0) {
 				if (rand(4) == 0) {
 					var itype:ItemType;
@@ -315,8 +316,8 @@ import classes.Scenes.SceneLib;
 			{
 				outputText("You are missing a toolbox. Maybe one of the shops sell these? \n\n");
 			}
-			doNext(camp.returnToCampUseOneHour); //- wadą tego etapu to brak menu lub menu za wcześnie?
-		}	
+			endEncounter(); //- wadą tego etapu to brak menu lub menu za wcześnie?
+		}
 		
 		//Get help from Kiha.
 		private function getHelpFromKiha():void {
@@ -334,7 +335,7 @@ import classes.Scenes.SceneLib;
 		
 		private function noThanks():void {
 			outputText("Deciding not to cut down the tree at the moment, you return to your camp. ");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function noThanks2():void {
 			outputText("Deciding not to work on your cabin right now, you return to the center of your camp.");
@@ -365,7 +366,7 @@ import classes.Scenes.SceneLib;
 		private function startCabinPart2():void {
 			outputText("You take out a paper, feather pen, and ink quill to draw some plans and diagrams. You spend one hour editing and perfecting your plans, reviewing and making some final changes to your plan before you fold the paper and put it away.");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 6;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//STAGE 8 - Build cabin part 1.
@@ -454,7 +455,7 @@ import classes.Scenes.SceneLib;
 			outputText("You walk back to your cabin construction site and resume working. You take out the book and flip pages until you come across instructions on how to finish walls and roof. \n\n");
 			outputText("Segment by segment, you nail more wood on one side of the cabin. You move on to the next until the frame is covered. There is a hole where the window and door will be. You then climb up the ladder you have constructed from previous session. You then nail down the wood on roof frame. \n\n");
 			outputText("Several hours flew by as you've managed to complete the walls and roof. Finally, you apply paint on the roof and walls to ensure that it's waterproof and protected from the elements. \n\n");
-			outputText("<b>You have finished constructing the walls and roof!</b>\n\n");		
+			outputText("<b>You have finished constructing the walls and roof!</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 8;
 			fatigue(100);
 			doNext(camp.returnToCampUseEightHours);
@@ -491,7 +492,7 @@ import classes.Scenes.SceneLib;
 			outputText("You walk back to your cabin construction site and resume working. You take out the book and flip pages until you come across instructions on how to construct a door.\n\n");
 			outputText("Following the instructions, you construct a wooden door that comes complete with a window. You frame the doorway and install the door into place.\n\n");
 			outputText("Next, you flip the book pages until you come across instructions on how to construct a window with functional shutters. You measure and cut the wood into the correct sizes before you nail it together into a frame. Next, you construct two shutters and install the shutters into window frame. Finally, you install the window into place.\n\n");
-			outputText("<b>You have finished installing the door and window!</b>\n\n");		
+			outputText("<b>You have finished installing the door and window!</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 9;
 			fatigue(100);
 			doNext(camp.returnToCampUseFourHours);
@@ -529,8 +530,8 @@ import classes.Scenes.SceneLib;
 			outputText("Following the instructions, you lay some wood on the ground and measure the gap between each wood to be consistent.\n\n");
 			outputText("Next, you lay the wood and nail them in place. This takes time and effort but by the time you've finished putting the flooring into place, your cabin has wooden flooring ready to be polished. You spend the next few hours painting and polishing your floor.\n\n");
 			outputText("After spending time painting, you leave the floor to dry.\n\n");
-			outputText("<b>You have finished installing the flooring!</b>\n\n");		
-			outputText("<b>Congratulations! You have finished your cabin structure! You may want to construct some furniture though.</b>\n\n");		
+			outputText("<b>You have finished installing the flooring!</b>\n\n");
+			outputText("<b>Congratulations! You have finished your cabin structure! You may want to construct some furniture though.</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 10;
 			flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
 			fatigue(100);

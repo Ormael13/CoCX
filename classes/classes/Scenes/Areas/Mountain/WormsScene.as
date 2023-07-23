@@ -1,7 +1,7 @@
-//const EVER_INFESTED:int = 787;	
+//const EVER_INFESTED:int = 787;
 //const CAME_WORMS_AFTER_COMBAT:int = 788;
 /*
- LICENSE 
+ LICENSE
  
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him to this project permission to alter the text to conform with current and new game functions, only. Dxasmodeus retains exclusive rights to alter or change the core contents of the events and no other developer may alter, change or use the events without permission from dxasmodeus. Fenoxo agrees to include Dxasmodeus' name in the credits with indications to the specific contribution made to the licensor. This license must appear
@@ -25,16 +25,16 @@ As Fenoxo has made his game code open source, this license DOES NOT transfer to 
 
 For further information and license requests, Dxasmodeus may be contacted through private message at the Futanari Palace. http://www.futanaripalace.com/forum.php. */
 
-package classes.Scenes.Areas.Mountain 
+package classes.Scenes.Areas.Mountain
 {
-	import classes.*;
-	import classes.GlobalFlags.*;
-    import classes.display.SpriteDb;
-	
-	public class WormsScene extends BaseContent
+import classes.*;
+import classes.GlobalFlags.*;
+import classes.display.SpriteDb;
+
+public class WormsScene extends BaseContent
 	{
 		
-		public function WormsScene() 
+		public function WormsScene()
 		{
 		}
 		
@@ -47,7 +47,7 @@ package classes.Scenes.Areas.Mountain
 				outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.");
 				dynStats("lus", -10, "scale", false);
 				player.createStatusEffect(StatusEffects.MetWorms, 0, 0, 0, 0);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else if (player.hasCock()) {
 				outputText("Minding your own business, you make your way through the mountain and you find yourself stopped by another mass of the sickly worms. The collective stops, apparently sensing your presence and briefly ebbs in your direction. After a few tense moments, the mass begins moving again... straight towards you at an alarming rate!\n\n");
@@ -56,7 +56,7 @@ package classes.Scenes.Areas.Mountain
 			}
 			else {
 				outputText("Making your way, you stumble on another gross mass of worms. The countless struggling creatures bar the path before you. Again, you freeze in place as the horror gropes about on the ground. It appears to have no real interest in your presence and it makes its way in a direction other than yours, much to your relief.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -72,7 +72,7 @@ package classes.Scenes.Areas.Mountain
 			outputText("You actually think it's kind of a hot idea, and wonder if such creatures actually exist in this land as you make your way back to camp.");
 			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
 			player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function wormsPartiallyOn():void {
@@ -81,7 +81,7 @@ package classes.Scenes.Areas.Mountain
 			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
 			player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.WormsHalf, 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function wormsOff():void {
@@ -89,9 +89,9 @@ package classes.Scenes.Areas.Mountain
 			outputText("You shudder in revulsion and figure the sign to be the result of someone's perverted fantasy.");
 			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
 			player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-			
+		
 		private function wormsConfront():void {
 			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
@@ -110,7 +110,7 @@ package classes.Scenes.Areas.Mountain
 			clearOutput();
 			if(player.spe > rand(35)) {
 				outputText("Your instincts overwhelm you and you immediately turn around and run like hell in the opposite direction. You look behind you as your heart feels as if it is about to burst only to discover that the creature did not follow you. You take a moment to catch your breath and consider yourself fortunate.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else {
 				outputText("You turn to run, but before your [feet] can get you away, the worms are upon you!  You turn to face them, lest they launch onto your unprotected back.");
@@ -165,6 +165,7 @@ package classes.Scenes.Areas.Mountain
 					}
 				}
 			}
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 			
 		}
@@ -191,7 +192,7 @@ package classes.Scenes.Areas.Mountain
 				//clear status
 				CoC.instance.inCombat = false;
 				clearStatuses(false);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			if(player.statStore.hasBuff("SheilaCorruption")) {

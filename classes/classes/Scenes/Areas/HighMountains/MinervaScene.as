@@ -150,7 +150,7 @@ private function ignoreMinervasPath():void {
 	clearOutput();
 	outputText("Deciding to play it safe, you turn away from the new path and continue your search elsewhere.");
 	// PC returns to camp.
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[Take Path]
 private function takeMinervasPath():void {
@@ -238,7 +238,7 @@ private function leaveMinervasFirstEncounter():void {
 	clearOutput();
 	outputText("You decide that you don't want to risk going into Minerva's lair as, for all you know, it could be a trap.  Therefore, you turn around and skedaddle back down the mountain.  As you leave, Minerva turns and watches you for a bit, a sad look on her face before she turns back and heads inside her home, alone.");
 	// PC returns to camp.
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //1-2 Repeat Encounter 1.  Use any time.
@@ -378,7 +378,7 @@ private function rejectMinervasLove():void {
 	outputText("\n\nSlowly, you get up, looking away from the curvy siren as you step out of the pool and leaving Minerva's tower.  Hopefully she won't be upset for too long, it would be best to check up on her later.  As you go, you swear you hear her let out a sob, the pain of your rejection clear as the mist that floats around the mountain.");
 	// PC returns to camp.
 	flags[kFLAGS.MINERVA_LOVE] = -1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -422,7 +422,7 @@ public function genericMenu(display:Boolean = false):void {
 		.disableIf(player.cor < 50 - player.corruptionTolerance, "You're not corrupted enough.", "???")
 		.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "You need to visit her a bit more often for this", "???")
 		.disableIf(!debug, "Not released yet. Requires to enable debug mode (settings) to view. Sorry, the text is not good enough yet.");
-	addButton(14, "Leave", camp.returnToCampUseOneHour);
+	addButton(14, "Leave", explorer.done);
 }
 
 //1-2 Repeatable Cute, Romantic Encounter. Only if PC accepted Minerva's feelings. Add to normal encounters.
@@ -559,7 +559,7 @@ private function talkingToMinervaAboutBackstory():void {
         if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0)
 		    flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -580,7 +580,7 @@ private function talkAboutTheSpringWithMinerva():void {
 	outputText("\n\nReturning her shining smile, you promise to come back and visit soon, then head out and start the hike back toward your camp.");
 	// PC returns to camp.
 	dynStats("lus", 10+player.lib/10, "scale", false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //3-3 Talking Scene 3 - talks about her shark girl daughter
@@ -602,7 +602,7 @@ private function talkWithMinervaAboutSharkGirlDaughter():void {
     outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
     if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1)
         flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 2;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -621,7 +621,7 @@ private function talkToMinervaAboutHerCorruption():void {
 	outputText("\n\nThe two of you stay like this for a while, just spending some time together, before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
 	flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 1;
 	// PC returns to camp
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //3-5 Motherhood
@@ -669,7 +669,7 @@ private function minervaMotherhood():void {
 	
 	outputText("\n\nLooking around, you see how late it has gotten and swiftly get up, Minerva's right; you have to get back to your great quest!  Looking at the siren one last time, you tell her that you will be sure to come and visit again later.");
 	// PC returns to camp.
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //3-6 Bath Time - romance only
@@ -709,7 +709,7 @@ public function bathTimeWithMinerva():void {
 	// PC returns to camp.
 	dynStats("lus", 10+player.lib/10, "scale", false);
 	fatigue(-30);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -1440,7 +1440,7 @@ internal function loseToMinerva():void {
 		// return PC to options- no combat option
 		// PC gains 1 Purity peach
 		monster.createStatusEffect(StatusEffects.PeachLootLoss,0,0,0,0);
-		inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
+		inventory.takeItem(consumables.PURPEAC, explorer.done);
 		cleanupAfterCombat();
 	}
 	//PC loss by Lust
@@ -1493,12 +1493,12 @@ public function eatSomethingYouCunt():void {
 private function getPurePeach():void {
 	clearOutput();
 	outputText("You walk over to the fruit trees surrounding the spring, examining the strange treats.  You decide that one ripe fruit, one resembling a peach, is the best choice, and pluck it from the tree.  Thanking Minerva for letting you have it, you stow it away safely and head back to camp.\n\n");
-	inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.PURPEAC, explorer.done);
 }
 private function getMint():void {
 	clearOutput();
 	outputText("There are many strange herbs growing around the spring, fed by whatever power resides in the water.  Finally, you locate a sprig of something that resembles mint, but silver in color, and decide to pluck it.  Stowing it carefully amongst your belongings, you thank Minerva for sharing the contents of her 'garden' with you and then head back to camp.");
-	inventory.takeItem(consumables.C__MINT, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.C__MINT, explorer.done);
 }
 
 //Spring Water
@@ -1519,12 +1519,12 @@ private function drinkDirectly():void {
 	player.refillHunger(15);
 	if(player.cor > 50) dynStats("cor", -1);
 	if(player.cor > 75) dynStats("cor", -1);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 private function getBottle():void {
 	clearOutput();
 	outputText("Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack.  ");
-	inventory.takeItem(consumables.S_WATER, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.S_WATER, explorer.done);
 }
 
 private function sleepWithMinerva():void {

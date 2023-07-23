@@ -121,7 +121,7 @@ import classes.Stats.Buff;
 			outputText("Spelunking in random caves around these parts is probably not the best idea; especially considering the kinds of creatures that you keep tripping over whenever you <i>do</i> decide to poke your nose somewhere it doesn't belong.\n\n");
 			
 			outputText("You head back to camp, having found nothing else of interest.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		// Already met, dun wanna get oniraepd again plz
@@ -130,7 +130,7 @@ import classes.Stats.Buff;
 			clearOutput();
 
 			outputText("You decide discretion is the better part of valour and choose not to barge into the strange woman's cave again, opting to slip away before she notices you hanging around outside her home.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		// Introduce the fuckhuge oni
@@ -381,7 +381,7 @@ import classes.Stats.Buff;
 
 			outputText("Spotting an opening, you decide to beat a hasty retreat, as far away from the immense woman as possible.\n\n");
 
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		/**
 		 * FIGHT SHIT
@@ -556,7 +556,7 @@ import classes.Stats.Buff;
 			outputText("\"<i>Well, that was fun.</i>\"  Izumi says, sitting up and dusting off her palms, dismissively.  \"<i>I’m assuming you’re not up to a rematch just yet from the way you’re shaking.</i>\"  She picks up her pipe and takes a drag, shooting you a knowing grin.  \"<i>Feel free to drop by again, though.  You know, in case you wanted to tell me off... or maybe if you just want me to bully you some more.</i>\" \n\n");
 
 			player.sexReward("no", "Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function surrenderMediumCock():void
@@ -621,7 +621,7 @@ import classes.Stats.Buff;
 			outputText(" cum, staring at the cavern roof and panting madly for a good few minutes afterwards.  Once you regain the use of your legs, you retrieve your clothes and wander back to camp in a daze.\n\n");
 
 			player.sexReward("no", "Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		// Male/Herm be a jerk about it split
@@ -653,7 +653,7 @@ import classes.Stats.Buff;
 			outputText("\"<i>So, you learned something today, right?  Next time, just do what I say, and the results are much more... fun.</i>\" She smiles, then turns away.  Retrieving your clothes, you drag yourself back to camp, feeling decidedly shaky.\n\n");
 
 			player.sexReward("no", "Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		// Urtadicks itt
@@ -704,7 +704,7 @@ import classes.Stats.Buff;
 			outputText("Izumi returns to her tent and lights up her pipe, unceremoniously abandoning you there on the cave floor, apparently done with you for now.  Still, it’s some time before you are able to drag yourself to your feet and stumble home to your camp, wondering how long it’ll be before you can see straight again...\n\n");
 
 			player.sexReward("no", "Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		protected function izumiSurrenderFemale():void
@@ -929,7 +929,7 @@ import classes.Stats.Buff;
 			}
 
 			player.sexReward("Default","Default",true,false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		// Female surrender, ask player if which variant they want
@@ -989,7 +989,7 @@ import classes.Stats.Buff;
 			outputText("You jerk upright with a start, warm bedding falling away from your body, the last few hours slowly beginning to filter through the sleepy haze clouding your thoughts.  Izumi seems to have worn herself out too, splayed out across the floor beside you.  You look around, gathering your bearings before deciding a sneaky exit from the Oni’s home is your best course of action...\n\n");
 
 			player.sexReward("Default","Default",true,false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		/**

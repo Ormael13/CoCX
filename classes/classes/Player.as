@@ -6141,7 +6141,7 @@ use namespace CoC;
 							"Mining skill leveled up to " + miningLevel + "!"
 					);
 					miningXP -= toNextLevel;
-				}
+				} else break;
 			}
 		}
 
@@ -6188,7 +6188,7 @@ use namespace CoC;
 							"Farming skill leveled up to " + farmingLevel + "!"
 					);
 					farmingXP -= toNextLevel;
-				}
+				} else break;
 			}
 		}
 
@@ -6250,7 +6250,7 @@ use namespace CoC;
 							"Herbalism skill leveled up to " + herbalismLevel + "!"
 					);
 					herbalismXP -= toNextLevel;
-				}
+				} else break;
 			}
 		}
 
