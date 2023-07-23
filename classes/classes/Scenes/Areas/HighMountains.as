@@ -34,12 +34,18 @@ public class HighMountains extends BaseContent {
 	private function init():void {
         _highMountainsEncounter = Encounters.group("highmountains", {
             name: "d3",
+			label : "Lethice Stronghold",
+			kind  : 'place',
+			unique: true,
             when: function ():Boolean {
                 return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0;
             },
             call: SceneLib.d3.discoverD3
         }, {
             name: "snowangel",
+			label : "Snow Angel",
+			kind  : 'event',
+			unique: true,
             when: function ():Boolean {
                 return player.gender > 0 && isChristmas()
                     && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
@@ -51,12 +57,18 @@ public class HighMountains extends BaseContent {
         }, {
             //Helia monogamy fucks
             name: "helcommon",
+			label : "Helia",
+			kind  : 'npc',
+			unique: true,
             night : false,
             call: SceneLib.helScene.helSexualAmbush,
             chance: highMountainsChance,
             when: SceneLib.helScene.helSexualAmbushCondition
         }, {
             name: "etna",
+			label : "Etna",
+			kind  : 'npc',
+			unique: true,
             when: function ():Boolean {
                 return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
                     && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -67,12 +79,17 @@ public class HighMountains extends BaseContent {
             call: SceneLib.etnaScene.repeatYandereEnc
         }, {
             name: "templeofthediving",
+			label : "Temple of the Divine",
+			kind  : 'place',
+			unique: true,
             when: function ():Boolean {
                 return flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1;
             },
             call: SceneLib.templeofdivine.firstvisitintro
         }, {
             name: "harpychicken",
+			label : "Harpy Chicken",
+			kind  : 'npc',
             night : false,
             when: function ():Boolean {
                 return (player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0)
@@ -84,17 +101,22 @@ public class HighMountains extends BaseContent {
             call: chickenHarpy
         }, {
             name: "phoenix",
-            night : false,
+			label : "Quasi-Phoenix",
+			kind  : 'monster',
             when: SceneLib.dungeons.checkPhoenixTowerClear,
             call: phoenixScene.encounterPhoenix
         }, {
             name: "avianCave",
+			label : "Avian Cave",
+			kind  : 'event',
             when: function ():Boolean {
                 return player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.isRace(Races.AVIAN, 1, false);
             },
             call: caveScene
         }, {
             name: "cockatrice",
+			label : "Cockatrice",
+			kind  : 'enemy',
             night : false,
             when: function ():Boolean {
                 return flags[kFLAGS.COCKATRICES_UNLOCKED] > 0;
@@ -102,10 +124,14 @@ public class HighMountains extends BaseContent {
             call: cockatriceScene.greeting
         }, {
             name: "lightelf",
+			label : "Light Elf",
+			kind  : 'monster',
             chance: 0.5,
             call: lightelfScene.introLightELfSniper
         }, {
             name: "nekobakeInn",
+			label : "Nekobake Inn",
+			kind  : 'place',
             chance: 0.2,
             when: function ():Boolean {
                 return !player.blockingBodyTransformations();

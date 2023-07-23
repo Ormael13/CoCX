@@ -251,12 +251,18 @@ public class Mountain extends BaseContent
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "salon",
+				label : "Salon",
+				kind  : 'place',
+				unique: true,
 				when: fn.not(salon.isDiscovered),
 				call: salon.hairDresser
 			},{
@@ -272,6 +278,9 @@ public class Mountain extends BaseContent
 				chance: Encounters.ALWAYS
 			},{
 				name: "snowangel",
+				label : "Snow Angel",
+				kind  : 'event',
+				unique: true,
 				when: function():Boolean {
 					return isChristmas()
 						   && player.gender > 0
@@ -283,16 +292,23 @@ public class Mountain extends BaseContent
 				call: SceneLib.holidays.gatsSpectacularRouter
 			},{
 				name:"jackfrost",
+				label : "Jack Frost",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 				},
 				call: SceneLib.holidays.meetJackFrostInTheMountains
 			},{
 				name:"hellhound",
+				label : "Hellhound",
+				kind  : 'monster',
 				call:hellHoundScene.hellhoundEncounter,
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"infhhound",
+				label : "Inf. Hellhound",
+				kind  : 'monster',
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.WormsOn);
 				},
@@ -303,6 +319,8 @@ public class Mountain extends BaseContent
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"worms1",
+				label : "Worms",
+				kind  : 'monster',
 				when: function():Boolean {
 					return !player.hasStatusEffect(StatusEffects.WormsOn)
 						   && !player.hasStatusEffect(StatusEffects.WormsOff);
@@ -310,6 +328,8 @@ public class Mountain extends BaseContent
 				call: wormsScene.wormToggle
 			},{
 				name:"worms2",
+				label : "Worms",
+				kind  : 'monster',
 				chance: function ():Number {
 					return player.hasStatusEffect(StatusEffects.WormsHalf) ? 0.5 : 1;
 				},
@@ -321,6 +341,9 @@ public class Mountain extends BaseContent
 				call: wormsScene.wormEncounter
 			},{
 				name:"hhound_master",
+				label : "Hellhound Master",
+				kind  : 'event',
+				unique: true,
 				night : false,
 				chance:2,
 				when:function():Boolean {
@@ -341,6 +364,9 @@ public class Mountain extends BaseContent
 				call:hellHoundScene.HellHoundMasterEncounter
 			}, {
 				name: "electra",
+				label : "Electra",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
@@ -358,6 +384,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name: "diva",
+				label : "Diva",
+				kind  : 'npc',
+				unique: true,
 				when: function():Boolean {
 					return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0 && !player.hasStatusEffect(StatusEffects.DivaOff);
 				},
@@ -365,6 +394,8 @@ public class Mountain extends BaseContent
 				call: DivaScene.instance.encounter
 			},{
 				name: "quarry",
+				label : "Quarry",
+				kind  : 'place',
 				when: function():Boolean {
 					return player.statusEffectv2(StatusEffects.ResourceNode1) < 5;
 				},
@@ -372,9 +403,14 @@ public class Mountain extends BaseContent
 				call: camp.cabinProgress.quarrySite
 			},{
 				name: "lightelf",
+				label : "Light Elf",
+				kind  : 'monster',
 				call: lightelfScene.introLightELfSlaver
 			},{
 				name: "derpnade launcher",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 0 && player.hasKeyItem("Derpnade Launcher") < 0;
 				},
@@ -382,10 +418,16 @@ public class Mountain extends BaseContent
 				call: partsofDerpnadeLauncher
 			}, {
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name  : "mindbreaker",
+				label : "Mindbreakers Cave",
+				kind  : 'npc',
+				unique: true,
 				call  : SceneLib.mindbreaker.findMindbreaker,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
@@ -393,6 +435,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name  : "mindbreaker",
+				label : "Mindbreakers Cave",
+				kind  : 'npc',
+				unique: true,
 				call  : SceneLib.mindbreaker.findMindbreakerAgain,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
@@ -400,10 +445,14 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name:"hike",
+				label : "Hike",
+				kind  : 'hike',
 				chance:0.2,
 				call:hike
 			}, {
 				name: "mimic",
+				label : "Mimic",
+				kind : 'monster',
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
@@ -417,6 +466,9 @@ public class Mountain extends BaseContent
 			}*/);
 			_mountainEncounter = Encounters.group("mountain", {
 				name: "demonlab",
+				label : "Demon Laboratory",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
 				},
@@ -432,6 +484,9 @@ public class Mountain extends BaseContent
 			}, {*/
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: mountainChance,
@@ -449,6 +504,9 @@ public class Mountain extends BaseContent
 				chance: Encounters.ALWAYS
 			},{
 				name: "snowangel",
+				label : "Snow Angel",
+				kind  : 'event',
+				unique: true,
 				when: function():Boolean {
 					return isChristmas()
 						   && player.gender > 0
@@ -460,12 +518,18 @@ public class Mountain extends BaseContent
 				call: SceneLib.holidays.gatsSpectacularRouter
 			},{
 				name:"jackfrost",
+				label : "Jack Frost",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 				},
 				call: SceneLib.holidays.meetJackFrostInTheMountains
 			},{
 				name: "electra",
+				label : "Electra",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
@@ -483,6 +547,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name: "minerva",
+				label : "Minerva",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.MET_MINERVA] < 4;
@@ -490,19 +557,29 @@ public class Mountain extends BaseContent
 				call: minervaScene.encounterMinerva
 			}, {
 				name: "izumi",
+				label : "Izumi",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.SOUL_SENSE_IZUMI] < 3;
 				},
 				call: izumiScenes.encounter
 			}, {
 				name: "harpy",
+				label : "Harpy",
+				kind : 'monster',
 				night : false,
 				call: harpyScene.encounter
 			}, {
 				name: "basilisk",
+				label : "Basilisk",
+				kind : 'monster',
 				call: basiliskScene.basiliskGreeting
 			}, {
 				name: "sophie",
+				label : "Sophie",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] <= 0
@@ -514,6 +591,8 @@ public class Mountain extends BaseContent
 				call: SceneLib.sophieScene.sophieRouter
 			}, {
 				name: "lightelf",
+				label : "Light Elf",
+				kind : 'monster',
 				call: lightelfScene.introLightELfRanger
 			}, {/*
 				name: "lactoblasters",
@@ -524,14 +603,21 @@ public class Mountain extends BaseContent
 				call: partsofLactoBlasters
 			}, {*/
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name:"hike",
+				label : "Hike",
+				kind  : 'hike',
 				chance:0.2,
 				call:hike
 			}, {
 				name: "mimic",
+				label : "Mimic",
+				kind : 'monster',
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
