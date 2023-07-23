@@ -50,6 +50,9 @@ public class ExplorationEngine extends BaseContent {
 	private function filterForEnd(e:SimpleEncounter):Boolean {
 		return (e.special || ['npc', 'item', 'boss', 'treasure', 'special', 'monster'].indexOf(e.getKind()) >= 0) && filterUnique(e);
 	}
+	private function filterForSoulSense(e:SimpleEncounter):Boolean {
+		return soulSenseCheck(e) && filterUnique(e);
+	}
 	private const filters:/*Function*/Array = [filterForStart, filterForMid, filterForEnd];
 	
 	public function ExplorationEngine() {
@@ -89,7 +92,7 @@ public class ExplorationEngine extends BaseContent {
 	public var canInventory:Boolean  = true;
 	public var canSoulSense:Boolean  = true;
 	/**
-	 * function(e:ExplorationEntry):Boolean.
+	 * function(e:SimpleEncounter):Boolean.
 	 * If returns true, that encounter can be revealed with Soul Sense skill.
 	 * Default: all NPC-tagged encounters.
 	 */
@@ -282,6 +285,13 @@ public class ExplorationEngine extends BaseContent {
 	}
 	public function get isAtEnd():Boolean {
 		return nextNodes.length == 0;
+	}
+	public function roadLength(roadIndex:int):int {
+		var length:int;
+		for (length = MAXDEPTH; length>0; length--) {
+			if (roads[roadIndex][length-1].encounter) return length;
+		}
+		return 0;
 	}
 	
 	public function findByName(name:String):ExplorationEntry {
@@ -617,7 +627,9 @@ public class ExplorationEngine extends BaseContent {
 				if (!roads[i][j].encounter) break;
 				if (j > 0) roads[i][j - 1].link(roads[i][j]);
 			}
-			for (j = length; j < MAXDEPTH; j++) roads[i][j].setEmpty();
+			for (j = length; j < MAXDEPTH; j++) {
+				roads[i][j].setEmpty();
+			}
 			if (roads[i][0].encounter) {
 				roads[i][0].isNext = true;
 				nextNodes.push(roads[i][0]);
@@ -627,6 +639,7 @@ public class ExplorationEngine extends BaseContent {
 		if (branchChance > 0) {
 			for (i = 0; i < NROADS; i++) {
 				for (j = 0; j < MAXDEPTH - 1; j++) {
+					if (!roads[i][j].encounter) continue;
 					if (i > 0) {
 						// North branch
 						// Avoid crossing the ~~beams~~ branches:
@@ -634,6 +647,7 @@ public class ExplorationEngine extends BaseContent {
 						//   i;j  ---   i;j+1
 						// link SW to NE if no link from NW to SE
 						if ((crossingAllowed || roads[i - 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1)
+								&& roads[i-1][j+1].encounter
 								&& Math.random() < branchChance) {
 							roads[i][j].link(roads[i - 1][j + 1]);
 						}
@@ -641,6 +655,7 @@ public class ExplorationEngine extends BaseContent {
 					if (i < NROADS - 1) {
 						// South branch
 						if ((crossingAllowed || roads[i + 1][j].nextNodes.indexOf(roads[i][j + 1]) == -1)
+								&& roads[i+1][j+1].encounter
 								&& Math.random() < branchChance) {
 							roads[i][j].link(roads[i + 1][j + 1]);
 						}
@@ -706,8 +721,8 @@ public class ExplorationEngine extends BaseContent {
 	public function soulSenseCost():Number {
 		return 100;
 	}
-	public static function defaultSoulseSenseCheck(e:ExplorationEntry):Boolean {
-		return e.kind == "npc";
+	public static function defaultSoulseSenseCheck(e:SimpleEncounter):Boolean {
+		return e.getKind() == "npc";
 	}
 	public function doSoulSense():void {
 		player.soulforce -= soulSenseCost();
@@ -718,23 +733,67 @@ public class ExplorationEngine extends BaseContent {
 		for (var i:int = 0; i < N; i++) {
 			var e:ExplorationEntry = flatList[i];
 			if (e.isDisabled || e.isFullyRevealed) continue;
-			if (soulSenseCheck(e)) {
+			if (soulSenseCheck(e.encounter)) {
 				candidates.push(e);
 			}
 		}
 		if (candidates.length == 0) {
-			message = "You reach out, but your soul sense detects nothing special.";
+			var encounter:SimpleEncounter = source.pickEncounterOrNull(filterForSoulSense) as SimpleEncounter;
+			if (encounter) {
+				var entry:ExplorationEntry = addNode(encounter);
+				if (entry) {
+					entry.revealKind();
+					message = "You've found something!";
+				} else {
+					message = "You reach out, but your soul sense detects nothing special.";
+				}
+			} else {
+				message = "You reach out, but your soul sense detects nothing special.";
+			}
 		} else {
 			e = Utils.randomChoice(candidates);
 			e.incReveal();
 			if (e.isFullyRevealed) {
 				message = "You've found "+e.label+"!";
 			} else {
-				message = "You've found someone!";
+				message = "You've found something!";
 			}
 		}
 		
 		showUI(message);
+	}
+	
+	/**
+	 * Add an encounter at the end of the road
+	 * @param encounter
+	 * @param roadIndex 0..NROADS-1, or -1 for random
+	 * @return exploration node, null if impossible to add
+	 */
+	public function addNode(encounter:SimpleEncounter, roadIndex:int = -1):ExplorationEntry {
+		if (!encounter) return null;
+		if (roadIndex == -1) {
+			var indices:/*int*/Array = [];
+			for (var i:int = 0; i < NROADS; i++) {
+				var n:int = roadLength(i);
+				if (n < MAXDEPTH && (n == 0 || !roads[i][n - 1].isDisabled)) {
+					indices.push(i);
+				}
+			}
+			if (indices.length == 0) return null;
+			roadIndex = randomChoice(indices);
+		}
+		var roadPos:int;
+		var entry:ExplorationEntry;
+		for (roadPos = 0; roadPos < MAXDEPTH; roadPos++) {
+			entry = roads[roadIndex][roadPos];
+			if (!entry.encounter) {
+				break;
+			}
+		}
+		if (roadPos >= MAXDEPTH) return null;
+		entry.setupForEncounter(encounter);
+		roads[roadIndex][roadPos - 1].link(entry);
+		return entry;
 	}
 }
 }

@@ -58,6 +58,15 @@ public class GroupEncounter implements Encounter {
 		if (e is GroupEncounter) return (e as GroupEncounter).pickEncounter(filter);
 		return e;
 	}
+	/**
+	 * @param [filter] function(e:Encounter):boolean
+	 * @return
+	 */
+	public function pickEncounterOrNull(filter:Function=null):Encounter {
+		var e:Encounter = Encounters.selectOrNull(components, filter);
+		if (e is GroupEncounter) return (e as GroupEncounter).pickEncounterOrNull(filter);
+		return e;
+	}
 
 	public function encounterChance():Number {
 		var sum:Number = 0;

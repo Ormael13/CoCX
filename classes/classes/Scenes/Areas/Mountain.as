@@ -13,6 +13,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.API.SimpleEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Monsters.LightElfScene;
@@ -648,8 +649,8 @@ public class Mountain extends BaseContent
 		}
 		public function exploreHills():void {
 			explorer.prepareArea(hillsEncounter);
-			explorer.soulSenseCheck = function(e:ExplorationEntry):Boolean {
-				return e.kind == 'npc' || e.encounterName == 'minomob';
+			explorer.soulSenseCheck = function(e:SimpleEncounter):Boolean {
+				return e.getKind() == 'npc' || e.encounterName() == 'minomob';
 			}
 			explorer.setTags("hills");
 			explorer.prompt = "You explore the hills.";

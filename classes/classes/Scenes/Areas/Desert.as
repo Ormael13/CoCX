@@ -9,6 +9,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.API.SimpleEncounter;
 import classes.Scenes.Areas.Desert.*;
 import classes.Scenes.SceneLib;
 
@@ -322,8 +323,8 @@ use namespace CoC;
 		public function exploreDesert():void
 		{
 			explorer.prepareArea(desertEncounter);
-			explorer.soulSenseCheck = function (e:ExplorationEntry):Boolean {
-				return e.kind == "npc" || e.encounter.encounterName() == "ants";
+			explorer.soulSenseCheck = function (e:SimpleEncounter):Boolean {
+				return e.getKind() == "npc" || e.encounterName() == "ants";
 			}
 			explorer.setTags("desert", "desertOuter");
 			explorer.prompt = "You explore the outer desert.";
