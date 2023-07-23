@@ -66,7 +66,7 @@ public dynamic class SimpleEncounter implements Encounter {
 		var result:SimpleEncounter = new SimpleEncounter(
 				name,
 				whenFn,
-				chances.length == 0 ? this._weight : FnHelpers.FN.product(chances.concat(this._weight)),
+				!chances || chances.length == 0 ? this._weight : FnHelpers.FN.product(chances.concat(this._weight)),
 				this._body
 		);
 		for (var key:String in this) {

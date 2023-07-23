@@ -70,6 +70,10 @@ public class SceneLib {
     public static var ocean:Ocean = new Ocean();
 
     public static var plains:Plains = new Plains();
+    
+    public static var kihaFollower:KihaFollower = new KihaFollower();
+    
+    public static var kihaScene:KihaScene = new KihaScene();
 
     public static var swamp:Swamp = new Swamp();
 
@@ -176,10 +180,6 @@ public class SceneLib {
     public static var jojoScene:JojoScene = new JojoScene();
 
     public static var joyScene:JoyScene = new JoyScene();
-
-    public static var kihaFollower:KihaFollower = new KihaFollower();
-
-    public static var kihaScene:KihaScene = new KihaScene();
 
     public static var kindraFollower:KindraFollower = new KindraFollower();
 

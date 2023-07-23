@@ -85,7 +85,7 @@ use namespace CoC;
 				call: SceneLib.kihaFollower.kihaXSalamander
 			}, {
 				name: "emberegg",
-				label : "Ember (E)",
+				label : "Egg",
 				kind  : 'npc',
 				unique: true,
 				when: function ():Boolean {
@@ -118,18 +118,9 @@ use namespace CoC;
 				},
 				night: false,
 				call: rogar.encounterRogarSwamp
-			}, {
-				name: "kiha1",
-				label : "Kiha",
-				kind  : 'npc',
-				unique: true,
-				when: function ():Boolean {
-					return SceneLib.kihaFollower.followerKiha()
-				},
-				chance: swampChance,
-				night: false,
-				call: SceneLib.kihaScene.kihaExplore
-			}, {
+			}, SceneLib.kihaScene.kihaTerrirotyEncounters.withCondition(function():Boolean {
+				return SceneLib.kihaFollower.followerKiha()
+			}), {
 				name: "kiha2",
 				label : "Kiha",
 				kind  : 'npc',

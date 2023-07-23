@@ -3,6 +3,8 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.GroupEncounter;
 
 public class KihaScene extends NPCAwareContent {
 	/*FLAGS STUFF*/
@@ -15,7 +17,10 @@ public class KihaScene extends NPCAwareContent {
 //const KIHA_TALK_STAGE:int = 344;
 //const PC_WIN_LAST_KIHA_FIGHT:int = 345;
 //const KIHA_CHOKED_OUT_PC:int = 432;
-
+	
+	public function KihaScene() {
+		onGameInit(init);
+	}
 //Encounter Dragon-Gal
 public function encounterKiha2():void {
 	if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
@@ -148,7 +153,7 @@ private function offerToBuyPassageFromKiha():void {
 private function leaveWhenMeetingAgressiveKiha():void {
 	clearOutput();
 	outputText("You nod and step back, retreating back towards camp.  You've no desire to fight such a fiery opponent.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[Fight]
 internal function meetKihaAndFight():void {
@@ -180,30 +185,67 @@ private function payKihaTribute():void {
 	//(do a 'Kiha' exploration with chances of fantabulous prizes)
 	doNext(kihaExplore);
 }
-public function kihaExplore(clearScreen:Boolean = true):void {
-	if(clearScreen) clearOutput();
-	spriteSelect(null);
-	flags[kFLAGS.KIHA_TOLL_DURATION]--;
-	var event:Number = rand(10);
-	var itype:ItemType;
-	//Grabbin' Inquisitor Armor
-	if(event == 0 && (flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 0 || flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 1)) {
-		inquisitorRobesDiscovery();
-		return;
+	private var _kihaTerrirotyEncounters:GroupEncounter;
+	public function get kihaTerrirotyEncounters():GroupEncounter {
+		return _kihaTerrirotyEncounters;
 	}
-	if(event < 5) {
-		outputText("You wander around through the swamp for a while, but you don't find anything.");
-		doNext(camp.returnToCampUseOneHour);
-		return;
+	private function init():void {
+		_kihaTerrirotyEncounters = Encounters.group("kihaTerritory", {
+			name: "inquisitorArmor",
+			label: "Inq. Cache",
+			kind: "treasure",
+			chance: 0.1,
+			when: function():Boolean {
+				return flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 0 || flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 1
+			},
+			call: inquisitorRobesDiscovery
+		}, {
+			name: "nothing",
+			label: "Walk",
+			kind: "walk",
+			chance: 0.4,
+			call: function():void {
+				outputText("You wander around through the swamp for a while, but you don't find anything.");
+				endEncounter();
+			}
+		}, {
+			name: "REDUCTO",
+			label: "Reducto",
+			kind: "item",
+			chance: 0.1,
+			call: curry(findItem, consumables.REDUCTO)
+		}, {
+			name: "GROPLUS",
+			label: "Gro+",
+			kind: "item",
+			chance: 0.1,
+			call: curry(findItem, consumables.GROPLUS)
+		}, {
+			name: "COAL___",
+			label: "Coal",
+			kind: "item",
+			chance: 0.1,
+			call: curry(findItem, consumables.COAL___)
+		}, {
+			name: "T_SSILK",
+			label: "T.SSilk",
+			kind: "item",
+			chance: 0.1,
+			call: curry(findItem, useables.T_SSILK)
+		})
+		
 	}
-	//Reducto
-	else if(event < 7) itype = consumables.REDUCTO;
-	else if(event < 8) itype = consumables.GROPLUS;
-	else if(event < 9) itype = consumables.COAL___;
-	else if(event < 10) itype = useables.T_SSILK;
-	outputText("While exploring, you find an item on the ground!  ");
-	inventory.takeItem(itype, camp.returnToCampUseOneHour);
-}
+	private function findItem(item:ItemType):void {
+		clearOutput();
+		outputText("While exploring, you find an item on the ground!  ");
+		inventory.takeItem(item, explorer.done);
+		}
+	public function kihaExplore(clearScreen:Boolean = true):void {
+		if(clearScreen) clearOutput();
+		spriteSelect(null);
+		flags[kFLAGS.KIHA_TOLL_DURATION]--;
+		_kihaTerrirotyEncounters.execEncounter();
+	}
 
 //[This was my idea!]
 private function tellKihaTributeWasYourIdea():void {
@@ -794,7 +836,7 @@ private function analRapuzulaKiha():void {
 			if(player.inte < 60) {
 				outputText("Unfortunately, try as you might, you cannot seem to figure the lock out.  You spin the stone circles around multiple times to try and discern the pattern to them, but find yourself continually disappointed.  Eventually you resort to trying to listen for the sound of tumblers behind the door indicating a shifting lock.  It is not as successful as you hope.  Disappointed but not undeterred, you resolve to return to the mysterious lock at a later point, when you are more capable of handling its clever riddle.");
 				//[Player leaves, room can be re-encountered]
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//[Intelligence greater than 60]
@@ -831,7 +873,7 @@ private function analRapuzulaKiha():void {
 			clearOutput();
 			outputText("Uninterested in the proffered reward, you turn and leave the way you came.  At the entrance, you replace the moss, doing your best to conceal the portal in the event you wish to return, or at least to keep any items of power inside from the hands of hostile swamp denizens.  You may as well not have spent the effort, for as you're walking away, you hear the stones grinding and shifting behind you.  Sure enough, an inspection affirms that the door has sealed itself again.\n\n");
 			//allows player to find again later, like the B.Sword
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//[Retribution]
@@ -842,7 +884,7 @@ private function analRapuzulaKiha():void {
 			outputText("The display makes you feel righteous.\n\n");
 			//[Player receives: 1x Inquisitor's Robes]
 			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
-			inventory.takeItem(armors.I_ROBES, camp.returnToCampUseOneHour);
+			inventory.takeItem(armors.I_ROBES, explorer.done);
 		}
 
 		//[Carnality]
@@ -855,7 +897,7 @@ private function analRapuzulaKiha():void {
 			outputText("The display makes you feel like a badass.\n\n");
 			//[Player receives 1x Inquisitor's Corset]
 			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
-			inventory.takeItem(armors.I_CORST, camp.returnToCampUseOneHour);
+			inventory.takeItem(armors.I_CORST, explorer.done);
 		}
 
 		//[Insight]
@@ -875,7 +917,7 @@ private function analRapuzulaKiha():void {
 			outputText("\n\n");
 			//[Player receives: 1x Inquisitor's Tome]
 			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
-			inventory.takeItem(weaponsrange.I_TOME_, camp.returnToCampUseOneHour);
+			inventory.takeItem(weaponsrange.I_TOME_, explorer.done);
 		}
 
 		public function mishapsLunaKiha():void {

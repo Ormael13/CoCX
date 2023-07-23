@@ -119,7 +119,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken);
 				},
-				call: findBlesedSword
+				call: findBlessedSword
 			}, {
 				name: "holybow",
 				label : "Holy Bow",
@@ -129,7 +129,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && player.hasPerk(PerkLib.JobRanger);
 				},
-				call: findBlesedBow
+				call: findBlessedBow
 			}, {
 				name: "holystaff",
 				label : "Holy Staff",
@@ -139,7 +139,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && player.hasPerk(PerkLib.JobSorcerer);
 				},
-				call: findBlesedStaff
+				call: findBlessedStaff
 			}, {
 				name: "holyshield",
 				label : "Holy Shield",
@@ -149,7 +149,7 @@ use namespace CoC;
 				when: function():Boolean {
 					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && player.hasPerk(PerkLib.JobGuardian);
 				},
-				call: findBleseShield
+				call: findBlessedShield
 			}, {
 				name: "ponies",
 				label : "Ponies",
@@ -393,19 +393,19 @@ use namespace CoC;
 			fetishCultistScene.fetishCultistEncounter();
 		}
 
-		private function findBlesedSword():void {
+		private function findBlessedSword():void {
 			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
 			swordInStone.findSwordInStone();
 		}
-		private function findBlesedBow():void {
+		private function findBlessedBow():void {
 			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
 			swordInStone.findBowInStone();
 		}
-		private function findBlesedStaff():void {
+		private function findBlessedStaff():void {
 			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
 			swordInStone.findStaffInStone();
 		}
-		private function findBleseShield():void {
+		private function findBlessedShield():void {
 			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
 			swordInStone.findShieldInStone();
 		}

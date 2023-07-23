@@ -116,7 +116,7 @@ public class HighMountains extends BaseContent {
         }, {
             name: "cockatrice",
 			label : "Cockatrice",
-			kind  : 'enemy',
+			kind  : 'monster',
             night : false,
             when: function ():Boolean {
                 return flags[kFLAGS.COCKATRICES_UNLOCKED] > 0;
@@ -133,6 +133,7 @@ public class HighMountains extends BaseContent {
 			label : "Nekobake Inn",
 			kind  : 'place',
             chance: 0.2,
+            unique: true,
             when: function ():Boolean {
                 return !player.blockingBodyTransformations();
             },

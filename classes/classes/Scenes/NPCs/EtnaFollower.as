@@ -492,6 +492,7 @@ private function etnaCome2Camp():void
 	}
 	outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
+	explorer.stopExploring();
 	doNext(playerMenu);
 }
 
