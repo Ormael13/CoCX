@@ -27,9 +27,12 @@ public class ExplorationEngine extends BaseContent {
 	
 	private function filterUnique(e:SimpleEncounter):Boolean {
 		if (e.unique) {
+			var group:String = e.unique as String;
 			for (var i:int = 0; i < N; i++) {
-				if (flatList[i] && !flatList[i].isCleared && flatList[i].encounter == e) {
-					return false;
+				if (flatList[i] && !flatList[i].isCleared && flatList[i].encounter) {
+					if (flatList[i].encounter == e || (group && flatList[i].encounter.unique == e.unique)) {
+						return false;
+					}
 				}
 			}
 		}

@@ -6122,20 +6122,25 @@ use namespace CoC;
 			return expToLevelUp;
 		}
 		public function mineXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					miningXP++;
-					XP--;
-				}
-				else {
-					miningXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (miningLevel < maxMiningLevel() && miningXP >= MiningExpToLevelUp()) {
-					outputText("\n\n<b>Mining skill leveled up to " + (miningLevel + 1) + "!</b>");
+			if (XP == 0) return;
+			var oldRatio:Number = miningXP / MiningExpToLevelUp();
+			miningXP += XP;
+			game.mainView.notificationView.popupProgressBar2(
+					"mineXP","mineXP",
+					"Mining XP +"+XP,
+					oldRatio,
+					miningXP / MiningExpToLevelUp()
+			);
+			while (miningLevel < maxMiningLevel()) {
+				var toNextLevel:Number = MiningExpToLevelUp();
+				if (miningXP > toNextLevel) {
 					miningLevel++;
-					miningXP = 0;
+					outputText("\n\n<b>Mining skill leveled up to " + miningLevel + "!</b>");
+					game.mainView.notificationView.popupIconText(
+							"mineXP","mineXP",
+							"Mining skill leveled up to " + miningLevel + "!"
+					);
+					miningXP -= toNextLevel;
 				}
 			}
 		}
@@ -6164,20 +6169,25 @@ use namespace CoC;
 			return expToLevelUp;
 		}
 		public function farmXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					farmingXP++;
-					XP--;
-				}
-				else {
-					farmingXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (farmingLevel < maxFarmingLevel() && farmingXP >= FarmExpToLevelUp()) {
-					outputText("\n\n<b>Farming skill leveled up to " + (farmingLevel + 1) + "!</b>");
+			if (XP == 0) return;
+			var oldRatio:Number = farmingXP / FarmExpToLevelUp();
+			farmingXP += XP;
+			game.mainView.notificationView.popupProgressBar2(
+					"farmXP","farmXP",
+					"Farming XP +"+XP,
+					oldRatio,
+					farmingXP / FarmExpToLevelUp()
+			);
+			while (farmingLevel < maxFarmingLevel()) {
+				var toNextLevel:Number = FarmExpToLevelUp();
+				if (farmingXP > toNextLevel) {
 					farmingLevel++;
-					farmingXP = 0;
+					outputText("\n\n<b>Farming skill leveled up to " + farmingLevel + "!</b>");
+					game.mainView.notificationView.popupIconText(
+							"farmXP","farmXP",
+							"Farming skill leveled up to " + farmingLevel + "!"
+					);
+					farmingXP -= toNextLevel;
 				}
 			}
 		}
@@ -6221,20 +6231,25 @@ use namespace CoC;
 			return expToLevelUp;
 		}
 		public function herbXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					herbalismXP++;
-					XP--;
-				}
-				else {
-					herbalismXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (herbalismLevel < maxHerbalismLevel() && herbalismXP >= HerbExpToLevelUp()) {
-					outputText("\n\n<b>Herbalism skill leveled up to " + (herbalismLevel + 1) + "!</b>");
+			if (XP == 0) return;
+			var oldRatio:Number = herbalismXP / HerbExpToLevelUp();
+			herbalismXP += XP;
+			game.mainView.notificationView.popupProgressBar2(
+					"herbXP","herbXP",
+					"Herbalism XP +"+XP,
+					oldRatio,
+					herbalismXP / HerbExpToLevelUp()
+			);
+			while (herbalismLevel < maxHerbalismLevel()) {
+				var toNextLevel:Number = HerbExpToLevelUp();
+				if (herbalismXP > toNextLevel) {
 					herbalismLevel++;
-					herbalismXP = 0;
+					outputText("\n\n<b>Herbalism skill leveled up to " + herbalismLevel + "!</b>");
+					game.mainView.notificationView.popupIconText(
+							"herbXP","herbXP",
+							"Herbalism skill leveled up to " + herbalismLevel + "!"
+					);
+					herbalismXP -= toNextLevel;
 				}
 			}
 		}

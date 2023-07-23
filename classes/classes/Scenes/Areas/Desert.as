@@ -396,6 +396,7 @@ use namespace CoC;
 		}
 
 		public function nailsEncounter():void {
+			clearOutput();
 			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
@@ -405,6 +406,7 @@ use namespace CoC;
 			outputText("\n\nNails: ");
 			if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
 			outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/" + SceneLib.campUpgrades.checkMaterialsCapNails() + "");
+			endEncounter();
 		}
 
 		public function wstaffEncounter():void {
