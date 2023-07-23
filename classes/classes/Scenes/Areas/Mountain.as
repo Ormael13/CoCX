@@ -155,7 +155,7 @@ public class Mountain extends BaseContent
 				kind : 'monster',
 				night : false,
 				when: function ():Boolean {
-					return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3;
+					return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina();
 				},
 				call: minotaurMobScene.meetMinotaurSons,
 				mods: [SceneLib.exploration.furriteMod]
@@ -551,9 +551,6 @@ public class Mountain extends BaseContent
 				label : "Izumi",
 				kind  : 'npc',
 				unique: true,
-				when: function ():Boolean {
-					return flags[kFLAGS.SOUL_SENSE_IZUMI] < 3;
-				},
 				call: izumiScenes.encounter
 			}, {
 				name: "harpy",
@@ -651,6 +648,9 @@ public class Mountain extends BaseContent
 		}
 		public function exploreHills():void {
 			explorer.prepareArea(hillsEncounter);
+			explorer.soulSenseCheck = function(e:ExplorationEntry):Boolean {
+				return e.kind == 'npc' || e.encounterName == 'minomob';
+			}
 			explorer.setTags("hills");
 			explorer.prompt = "You explore the hills.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {

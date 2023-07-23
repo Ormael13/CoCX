@@ -53,11 +53,6 @@ public function meetMinotaurSons():void {
 	spriteSelect(SpriteDb.s_minotaurSons);
 	dynStats("lus", 10, "scale", false);
 	flags[kFLAGS.MINOTAUR_SONS_TIMES_MET]++;
-	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 2) flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS]++;
-	if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] == 2) {
-		flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS]++;
-		outputText("\n\n<b>You have met them enough times to be able to find them in the future when using soul sense. (Removes Minotaur Sons from high mountains explore encounters pool!)</b>\n\n");
-	}
 	//First Meeting
 	if(flags[kFLAGS.MINOTAUR_SONS_TIMES_MET] == 1) {
 		//(Non-Addicted)

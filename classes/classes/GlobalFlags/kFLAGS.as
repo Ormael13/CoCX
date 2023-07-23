@@ -2469,7 +2469,7 @@ public static const ELEMENTAL_ARROWS:int                                 		    =
 public static const SOUL_SENSE_TAMANI:int                  		                    = 2461; // No longer used
 public static const SOUL_SENSE_TAMANI_DAUGHTERS:int                                 = 2462; // No longer used
 public static const SOUL_SENSE_KITSUNE_MANSION:int                                  = 2463; // No longer used
-public static const SOUL_SENSE_IZUMI:int                    		                = 2464;
+public static const SOUL_SENSE_IZUMI:int                    		                = 2464; // No longer used
 public static const ARIAN_SCALES:int                            			        = 2465;
 public static const SEXUAL_FLUIDS_LEVEL:int                            		        = 2466;
 public static const HIDDEN_CAVE_FOUND:int          		                            = 2467;
@@ -2806,7 +2806,7 @@ public static const DISCOVERED_INNER_DESERT:int                                 
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene
-public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801;
+public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801; // No longer used
 public static const E_ICHOR_PITY_SYSTEM:int                                   		= 2802;
 public static const NECROMANCER_SKELETONS:int                                   	= 2803;
 public static const IN_COMBAT_PLAYER_SKELETONS_ATTACKED:int                         = 2804;

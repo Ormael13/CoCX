@@ -408,8 +408,6 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 	
 	public function bringBackEncoutersForSouless():void {
-		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) flags[kFLAGS.SOUL_SENSE_IZUMI] = 2;
-		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] = 2;
 	}
 
 	public function fixFlags():void {
