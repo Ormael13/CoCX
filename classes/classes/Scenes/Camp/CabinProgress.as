@@ -180,6 +180,7 @@ import classes.Scenes.SceneLib;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
 			fatigue(50, USEFATG_PHYSICAL);
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		//Cut down the tree yourself with Machined greatsword.
@@ -205,6 +206,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
 				incrementWoodSupply(13 + Math.floor(player.str / 7));
 				fatigue(50, USEFATG_PHYSICAL);
+				explorer.stopExploring();
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
@@ -330,6 +332,7 @@ import classes.Scenes.SceneLib;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
 			incrementWoodSupply(20 + Math.floor(player.str / 5));
 			fatigue(50, USEFATG_PHYSICAL);
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
