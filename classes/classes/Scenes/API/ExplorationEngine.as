@@ -108,9 +108,9 @@ public class ExplorationEngine extends BaseContent {
 	 *
 	 * Known area tags:
 	 * - generic: "plants", "water"
-	 * - area group: "forest", "desert", "battlefield", "lake"
+	 * - area group: "forest", "desert", "battlefield", "lake", "mountains"
 	 * - specific area: "explore", "lakeBeach", "forestInner", "forestOuter", "deepwoods", "desertInner", "desertOuter",
-	 *   "battlefieldBoundary", "battlefieldOuter"
+	 *   "battlefieldBoundary", "battlefieldOuter", "caves", "bog", "swamp", "hills", "mountainsLow", "mountainsMid"
 	 *
 	 * @example
 	 *
@@ -335,6 +335,11 @@ public class ExplorationEngine extends BaseContent {
 	 *                       40% to reveal 4
 	 */
 	public function revealMultiple(n:Number):void {
+		if (isNaN(n) || n <= 0) return;
+		if (n == -Infinity) {
+			revealAll();
+			return;
+		}
 		var i:int = n | 0;
 		if (Math.random() < n - i) i++;
 		while (i-- > 0) {
@@ -679,11 +684,13 @@ public class ExplorationEngine extends BaseContent {
 		// +1 reveal per 100 area explorations
 		n += timesExplored / 100;
 		
-		// +1 reveal per 10 wisdom, scaled with NG+ level and area level
+		// Wisdom-based reveal:
+		// * first reveal costs 10 wisdom, scaled with NG+ and area level
+		// * each following reveal costs 5% more wis
 		var wisFactor:Number = 10;
-		wisFactor *= 1 + (areaLevel - 1) / 99; // x1 on area level 1, x2 on area level 100
+		wisFactor *= 1 + 4 * (areaLevel - 1) / 99; // x1 on area level 1, x4 on area level 100
 		wisFactor *= (1 + 0.2 * CoC.instance.newGamePlusMod()); // +20% per NG level
-		n += player.wis / wisFactor;
+		n += solveSum(player.wis, wisFactor, wisFactor*0.05);
 		
 		// +1 reveal per Eyes of the Hunter rank
 		if (player.hasPerk(PerkLib.EyesOfTheHunterNovice)) n += 1;

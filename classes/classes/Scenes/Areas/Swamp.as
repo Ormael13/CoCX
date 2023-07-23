@@ -5,11 +5,10 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Swamp.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.LilyFollower;
@@ -176,11 +175,15 @@ use namespace CoC;
 
 		public function exploreSwamp():void
 		{
-			clearOutput();
-			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
-			doNext(camp.returnToCampUseOneHour);
-			swampEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(swampEncounter);
+			explorer.setTags("swamp");
+			explorer.prompt = "You explore the wet swamplands.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
+			}
+			explorer.leave.hint("Leave the wet swamplands");
+			explorer.skillBasedReveal(13, flags[kFLAGS.TIMES_EXPLORED_SWAMP]);
+			explorer.doExplore();
 		}
 
 		public function swampChance():Number {
@@ -198,7 +201,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)");
 			flags[kFLAGS.BOG_EXPLORED]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function partsofM1Cerberus():void {
@@ -207,7 +210,7 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the M1 Cerberus in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("M1 Cerberus", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 	}

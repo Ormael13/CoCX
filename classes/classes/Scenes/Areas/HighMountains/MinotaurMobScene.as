@@ -2,7 +2,6 @@
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class MinotaurMobScene extends BaseContent implements TimeAwareInterface {
@@ -247,7 +246,7 @@ private function runFromMinotaurs():void {
 	//ESCAPE!
 	if((player.canFly() && player.spe > rand(40)) || (!player.canFly() && player.spe > rand(60))) {
 		outputText("A furry arm nearly catches your [leg], but you slip free and quickly escape your lusty brood.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	//FAIL:
 	else {
@@ -412,6 +411,7 @@ private function nonAddictMinotaurGangBang():void {
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else {
 		outputText("\n\n");
+		explorer.stopExploring();
 		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), camp.returnToCampUseEightHours);
 	}
 }
@@ -504,6 +504,7 @@ private function loseToMinoMobVeryPregnant():void {
 	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.minoCumAddiction(15);
+	explorer.stopExploring();
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseEightHours);
 }
@@ -608,6 +609,7 @@ private function analSpearSemiPregMinotaurGangbang():void {
 	player.sexReward("cum","Vaginal");
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "cor", 1);
 	player.minoCumAddiction(15);
+	explorer.stopExploring();
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseEightHours);
 }
@@ -747,7 +749,7 @@ private function victoryMinotaurGangTitFuck():void {
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else {
 		outputText("\n\n");
-		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), camp.returnToCampUseOneHour);
+		inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), explorer.done);
 	}
 }
 
@@ -843,7 +845,7 @@ private function victoryAllThePenetrationsMinotaurGangBang():void {
 	player.minoCumAddiction(20);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 
 //*[Victory - Make minitaur oral (M/F/H)]
@@ -959,7 +961,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 	dynStats("sen", -1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 
 //*[Victory- BJ + Nipplefucking] (boring, samey, not actually punishment again, could have been shoving very long nipples into urethras) (edited)
@@ -1026,7 +1028,7 @@ private function victoryBJNippleFuckMinotaurGang():void {
 	player.minoCumAddiction(10);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 
 //Bad End Scene:

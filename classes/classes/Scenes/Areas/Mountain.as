@@ -10,6 +10,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
@@ -637,6 +638,17 @@ public class Mountain extends BaseContent
 		}
 		//Explore Mountain
 		public function exploreMountain():void {
+			/*
+			explorer.prepareArea(mountainEncounter);
+			explorer.setTags("mountain","mountainMid");
+			explorer.prompt = "You explore the mountain.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				player.exploredMountain++;
+			}
+			explorer.leave.hint("Leave the forest outskirts");
+			explorer.skillBasedReveal(30, player.exploredMountain);
+			explorer.doExplore();
+			 */
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
 			player.exploredMountain++;
@@ -644,6 +656,17 @@ public class Mountain extends BaseContent
 			flushOutputTextToGUI();
 		}
 		public function exploreLowMountain():void {
+			/*
+			explorer.prepareArea(lowMountainEncounter);
+			explorer.setTags("mountain","mountainLow");
+			explorer.prompt = "You explore the low mountains.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
+			}
+			explorer.leave.hint("Leave the low mountains");
+			explorer.skillBasedReveal(15, flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]);
+			explorer.doExplore();
+			 */
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
 			flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
@@ -651,11 +674,15 @@ public class Mountain extends BaseContent
 			flushOutputTextToGUI();
 		}
 		public function exploreHills():void {
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			flags[kFLAGS.DISCOVERED_HILLS]++;
-			hillsEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(hillsEncounter);
+			explorer.setTags("hills");
+			explorer.prompt = "You explore the hills.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.DISCOVERED_HILLS]++;
+			}
+			explorer.leave.hint("Leave the hills");
+			explorer.skillBasedReveal(5, flags[kFLAGS.DISCOVERED_HILLS]);
+			explorer.doExplore();
 		}
 		public function ceraphFn():void {
 			//Rarer 'nice' Ceraph encounter
@@ -707,7 +734,7 @@ public class Mountain extends BaseContent
 						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grâce</i>.  As he readies the blow, another beast-man slams into him from the side.  The two of them begin to fight for the honor of raping you, giving you the opening you need to escape.  You quietly sneak away while they fight – perhaps you should avoid the mountains for now?\n\n");
 					}
 					player.createStatusEffect(StatusEffects.TF2, 0, 0, 0, 0);
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				//Mino gangbang
@@ -778,7 +805,7 @@ public class Mountain extends BaseContent
 			outputText("You carefully put the pieces of the Derpnade Launcher in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Derpnade Launcher", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function partsofLactoBlasters():void {
 			clearOutput();
@@ -786,20 +813,20 @@ public class Mountain extends BaseContent
 			outputText("You carefully put the pieces of the Lactoblasters in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Lactoblasters", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function discoverLM():void {
 			clearOutput();
 			outputText("While exploring the hill you come upon a particular trail. It looks to lead deeper into the mountain range. Having met the many unsavory denizens of the hill already you clench your fist ready for a new challenge as you take up the trail toward the mountain. The atmosphere changes quickly as plants become scarcer and rocky formation more common. ");
 			outputText("Caves previously a rare occurrence now are a regular sight. You have found the way to the low mountain range area.\n\n(<b>Low Mountain exploration location unlocked!</b>)");
 			flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function discoverM():void {
 			clearOutput();
 			outputText("As you explore the low mountain range you hear thunder booming overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it. Forward is a path leading deeper higher into the mountains and possibly harder trials.\n\n<b>You've discovered the Mountain!</b>");
 			player.exploredMountain = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function hike():void {
 			clearOutput();
@@ -811,7 +838,7 @@ public class Mountain extends BaseContent
 				outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
 				dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function hikeh():void {
 			clearOutput();
@@ -823,7 +850,7 @@ public class Mountain extends BaseContent
 				outputText("During your hike into the hills, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
 				dynStats("tou", .2, "spe", .4, "lib", .2, "lus", player.lib / 12);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function joinBeingAMinoCumSlut():void
 		{
@@ -953,7 +980,7 @@ public class Mountain extends BaseContent
 			}
 			//(Acquired minotaur cum!)
 			model.time.hours++;
-			inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.MINOCUM, explorer.done);
 		}
 
 		private function watchAMinoCumSlut():void
@@ -976,7 +1003,7 @@ public class Mountain extends BaseContent
 			outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");
 			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges.  You count at least two goblins and one imp who quickly pull back.  From the sounds, they were busy getting themselves off.  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			dynStats("lus", 25, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		private function continueMinoVoyeurism():void {
@@ -996,7 +1023,7 @@ public class Mountain extends BaseContent
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			//Lust!
 			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR, false) + player.racialScore(Races.COW, false), "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

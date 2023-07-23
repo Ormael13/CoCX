@@ -321,7 +321,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         clearOutput();
         outputText("You can't decide what to do right now, so you leave the egg where it is and return to your camp.");
         //(You can restart this quest by randomly encountering this chamber again. It continues to reappear until you either Destroy or Take the egg.)
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //[=Destroy it=] (Z)
@@ -332,7 +332,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
         flags[kFLAGS.EGG_BROKEN] = 1;
         //[Eat][Leave]
-        simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+        simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", null, "", null, "", null, "Leave", explorer.done);
     }
 
     //[=Eat=]
@@ -350,7 +350,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(also slimefeed!)
         dynStats("str", 5 + rand(5), "tou", 5 + rand(5), "int", 5 + rand(5), "cor", 20);
         player.slimeFeed();
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
 
@@ -393,7 +393,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nYou look around over and over and over... but no matter how much you look you don't see anything at all that could even resemble some kind of magic rune, or activation button, or anything that could disable the ward.  You groan in frustration.");
             outputText("\n\nIt looks like you will have to leave the egg for now until you're better versed in magical methods... or strong enough to knock down a mountain!  You roll it back down the corridor into its shrine to prevent its being seen from the cave entrance.");
             //Same as taking the Leave option. Must find the egg again to take it.
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         outputText("\n\n(<b>You have now begun the Mysterious Egg quest.  The Mysterious Egg is added to the <i>Items</i> at the Camp.</b>)");
@@ -401,7 +401,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         player.createKeyItem("Dragon Egg", 0, 0, 0, 0);
         flags[kFLAGS.TOOK_EMBER_EGG] = 1;
         flags[kFLAGS.EMBER_COR] = 50;
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
 
@@ -656,7 +656,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         clearOutput();
         if (player.gender == 0) {
             outputText("The light pulses decrease in speed as you disrobe and expose your bare crotch, leaving you disappointed after summoning your perversity to bring you this far.  You feel as if you've let it down somehow...  This is confusing!  You decide to go away and deal with this fickle egg another time.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //Nothing changes. PC can go do something else, lose no time.
@@ -720,7 +720,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         flags[kFLAGS.EMBER_JACKED_ON] = 1;
         //INCREMENT EMBER FEEDINZ
         flags[kFLAGS.EMBER_EGG_FLUID_COUNT]++;
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //HATCH DAT BITCH
@@ -825,7 +825,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\n<b>Before fully settling in your camp as if remembering something Ember pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
         flags[kFLAGS.EMBER_HATCHED] = 1;
         player.removeKeyItem("Dragon Egg");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Appearance (shows Ember's appearance, always available)
@@ -964,23 +964,23 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         if (player.isPregnant() && hasCock()) { //Extra check might protect against inappropriate Ember complaints
             if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
                 emberBitchesAboutPCBeingFullOfEggs();
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
                 return;
             }
             if ((player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancy2Type == PregnancyStore.PREGNANCY_EMBER) && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
                 emberTalksToPCAboutPCDragoNPregnancy();
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
                 return;
             }
             if (player.pregnancyIncubation < 200 && (player.pregnancyType != PregnancyStore.PREGNANCY_EMBER || player.pregnancy2Type != PregnancyStore.PREGNANCY_EMBER) && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
                 manEmberBitchesAboutPCPregnancy();
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
                 return;
             }
         }
         if (flags[kFLAGS.EMBER_PREGNANT_TALK] == 0 && pregnancy.event > 1) {
             emberIsPregnantFirstTimeTalkScene();
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
         clearOutput();
         outputText("What will you talk about?");
@@ -1106,7 +1106,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(Low Affection)
         if (emberAffection() <= 25) {
             outputText("\n\n\"<i>You're a waste of time,</i>\" Ember says nonchalantly.  [ember Ey] walks past you and then flies off.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //There's a points system here, that can range from 0 to 8, this is used to check Ember's final answer after " + emberMF("he","she") + "'s done examining the PC.
@@ -1425,7 +1425,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nYou gently ask what [ember ey] means by \"<i>strange ideas</i>\".");
             outputText("\n\n\"<i>The ones you're getting!</i>\" Ember blurts out, before spinning on [ember eir] heels and leaving you alone. You watch [ember em] go and smile.");
         }
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     private function drinkDeeplyOfDagronBlud():void {
@@ -1443,7 +1443,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nAs you break the kiss; Ember leans over, supporting [ember em]self on your shoulders.  \"<i>Ugh... I guess we overdid it... I feel woozy.</i>\"");
             outputText("\n\nYou quickly offer [ember em] a helping hand, inquiring if [ember ey] is all right.  Ember accepts your help, using your hand to balance [ember em]self.  \"<i>I-I'll be fine... just, no more sharing for the day...</i>\"");
         }
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //TF messages (Z)
@@ -1488,7 +1488,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nEmber mumbles quietly, \"<i>Next time, fertilize it for me will you?</i>\"  You start at that; did she really just say it aloud?  But, knowing her temper, you decide against asking.  ");
             //git a dragon egg, small libido-based lust damage
             dynStats("lus", 10 + player.lib / 10, "scale", false);
-            inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
+            inventory.takeItem(consumables.DRGNEGG, explorer.done);
         }
         //(Medium Affection)
         else if (emberAffection() < 75) {
@@ -1542,7 +1542,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nYou just smile and tell her you understand exactly what she meant.  One quick kiss and you head back to the camp proper, leaving one adorably flustered dragon behind you.  ");
             //git a dragon egg, small libido-based lust damage
             dynStats("lus", 10 + player.lib / 10, "scale", false);
-            inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
+            inventory.takeItem(consumables.DRGNEGG, explorer.done);
         }
     }
 
@@ -1554,7 +1554,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         if (flags[kFLAGS.EMBER_GENDER] == 3) outputText(".. it even drips with some kind of off-white fluid.");
         outputText("  \"<i>H-here's your egg.  Use it while it's fresh, okay?</i>\"  Her eyes glaze over a bit at the suggestion, and she giggles.  ");
         //git a dragon egg, no Ember affection change
-        inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
+        inventory.takeItem(consumables.DRGNEGG, explorer.done);
     }
 
     //[Watch]
@@ -1600,7 +1600,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\nYes, you did, because she asked and she seemed to need your help, as you point out.  Ember doesn't bother coming up with something to say, she just unfurls her wings and jumps into the air with a gust of wind.");
         outputText("\n\nYou shake your head and sigh softly.  ");
         //git an egg, moderate lib-based lust damage, Ember affection up
-        inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
+        inventory.takeItem(consumables.DRGNEGG, explorer.done);
         emberAffection(5);
     }
 
@@ -1867,7 +1867,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         fatigue(-50);
         player.slimeFeed();
         HPChange(player.maxHP() * .33, false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Sparring text outputs (Z) (FENCODED TO HERE)
@@ -1984,7 +1984,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(Low affection)
         if (emberAffection() <= 25) {
             outputText("\n\n\"<i>What!?  That is just gross!  Not to mention, it'd never fit!</i>\"  Ember doesn't bother waiting for your reply, shooing you out of [ember eir] den.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //(Moderate affection)
@@ -2116,7 +2116,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         emberAffection(6);
         player.sexReward("cum", "Anal");
         dynStats("sen", 3);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //[Blow Ember] - your shipment of dragon dildoes has arrived
@@ -2218,7 +2218,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         player.sexReward("cum", "Lips");
         emberAffection(6);
         dynStats("lus", 10 + player.lib / 10, "scale", false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Get Blown - put your dick in the knife drawer, it'll be fun! (Z, with reservation)
@@ -2230,7 +2230,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(Low Affection)
         if (emberAffection() <= 25) {
             outputText("\n\n\"<i>Ah.  And... what makes you think I would ever consider that?</i>\"  Ember huffs indignantly and walks away.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //(Medium Affection)
@@ -2329,7 +2329,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //lose lust, reset hours since cum
         player.sexReward("saliva");
         dynStats("sen", -1);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
 
@@ -2342,7 +2342,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(Low Affection)
         if (emberAffection() <= 25) {
             outputText("\n\n[ember Eir] eyes widen.  \"<i>Never!  N-E-V-E-R!  Not even over my dead body!</i>\" Ember exclaims.  The dragon unfurls [ember eir] wings and lifts off, beating the air furiously.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //(Medium Affection)
@@ -2484,7 +2484,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         }
         player.sexReward("no");
         dynStats("sen", -2);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Eat Ember Out - b-baka! (Z)
@@ -2564,7 +2564,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         player.sexReward("vaginalFluids");
         emberAffection(6);
         dynStats("lus", 10 + player.lib / 10, "scale", false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Get Eaten Out - actually halfway likeable
@@ -2576,7 +2576,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         if (emberAffection() <= 25) {
             outputText("\n\n\"<i>No way!  I have no idea what's been there!  Plus, that is just gross!</i>\"  Ember spins on [ember eir] heels and walks away.");
             //End scene
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //(Medium Affection)
@@ -2631,7 +2631,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\nYou smile, hating to see [ember em] go, but so loving to watch [ember em] leave.  Shaking off your pleasurable fantasies, you manage to pull yourself back upright, redress yourself, and return to camp.");
         //minus some fukkin' lust, reset hours since cum
         player.sexReward("saliva");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Penetrate Her - seems not to accommodate centaurs, more's the pity (Z)
@@ -2645,7 +2645,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(Low Affection)
         if (emberAffection() <= 25) {
             outputText("\n\n\"<i>By you?  Ha!  Funny joke!</i>\"  Ember laughs forcibly as she walks away.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //(Medium Affection)
@@ -2703,7 +2703,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             if (player.cockTotal() == 1) outputText("that");
             else outputText("those");
             outputText(" and then come back!</i>\"  Ember turns on her heels and walks away, moodier than usual.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //(else if PC has multiple fit cocks){
@@ -2789,7 +2789,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             player.sexReward("vaginalFluids", "Dick");
             dynStats("sen", -2);
             emberAffection(-5);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT]++;
             return;
         }
@@ -2847,6 +2847,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
 
         outputText("\n\nYour decency restored, you return to camp.");
         flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT]++;
+        explorer.stopExploring();
         doNext(camp.returnToCampUseTwoHours);
     }
 
@@ -2862,7 +2863,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(Low Affection)
         if (emberAffection() <= 25) {
             outputText("\n\n\"<i>Ha!  I'm much more than you can handle!  Talk to me when you have something that can take even half of me.</i>\"  Ember mocks you, as [ember ey] walks away.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //(Medium Affection)
@@ -2977,7 +2978,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
 
         outputText("\n\nEmber's eyes widen in terror.  \"<i>What!?  No!  Not again!</i>\" Ember screams, getting up and wasting no time in bolting away, setting into an unsteady flight as soon as [ember ey]'s gotten far enough.  You wait until [ember ey]'s gone, and then burst out laughing.  Totally worth it... even if you are, as the saying goes, going to be sleeping on the couch for a week as a result.");
         //slimefeed, preg check, reduce lust, reset hours since cum, drain massive libido
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
 
@@ -3949,7 +3950,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         if (player.cor < 50) outputText("thank her for being so understanding");
         else outputText("grunt an acknowledgement");
         outputText(" and then gather your things before heading off to wash yourself down.");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //[=Yes=]
@@ -4152,6 +4153,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\nYou head off yourself, ready to resume the rest of your day.");
         //2 hours pass, PC's fatigue is healed some, Libido is reduced.
         fatigue(-20);
+        explorer.stopExploring();
         doNext(camp.returnToCampUseTwoHours);
     }
 

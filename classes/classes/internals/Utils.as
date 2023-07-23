@@ -112,6 +112,22 @@ public class Utils extends Object
 			}
 			return x * y;
 		}
+		
+		/**
+		 * Solve the arithmetic progression.
+		 * For startValue=1, increment=1, return N such that 1 + 2 + 3 + ... + N = sum
+		 *
+		 * General form: return N such that
+		 *
+		 * `sum = startValue + (startValue + increment) + (startValue + 2*increment) + ...`
+		 * (N total items)
+		 */
+		public static function solveSum(sum:Number, startValue:Number = 1, increment:Number = 1):Number {
+			var a:Number = increment;
+			var b:Number = (2*startValue - increment);
+			var c:Number = -2*sum;
+			return (Math.sqrt(b*b - 4*a*c) - b)/(2*a);
+		}
 		public static function floor(value:Number,decimals:int=0):String {
 			if (decimals == 0) return ''+Math.floor(value);
 			var base:Number = ipow(10,decimals);
