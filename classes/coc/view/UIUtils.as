@@ -4,6 +4,15 @@
 package coc.view {
 import classes.internals.Utils;
 
+import flash.display.BitmapData;
+import flash.display.Graphics;
+import flash.filters.DropShadowFilter;
+import flash.geom.Matrix;
+import flash.geom.Point;
+import flash.geom.Rectangle;
+import flash.text.AntiAliasType;
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 
 public class UIUtils {
@@ -42,6 +51,61 @@ public class UIUtils {
 		}
 		return e;
 	}
-
+	
+	public static function newTextField(options:Object=null):TextField {
+		if (options is String) options ={text:options};
+		var e:TextField = new TextField();
+		e.antiAliasType = AntiAliasType.ADVANCED;
+		if ('defaultTextFormat' in options) {
+			e.defaultTextFormat = UIUtils.convertTextFormat(options['defaultTextFormat']);
+		}
+		UIUtils.setProperties(e, options, {
+			defaultTextFormat: UIUtils.convertTextFormat,
+			background: UIUtils.convertColor,
+			textColor: UIUtils.convertColor,
+			autoSize: null, // set later
+			text: null, // set later
+			htmlText: null
+		});
+		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
+		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
+			e.autoSize = TextFieldAutoSize.LEFT;
+		} else if ('autoSize' in options) {
+			// set it after sizes
+			e.autoSize = options['autoSize'];
+		}
+		if ('htmlText' in options) e.htmlText = options.htmlText;
+		else if ('text' in options) e.text = options.text;
+		return e;
+	}
+	public static function outlineFilter(color:*):DropShadowFilter {
+		return new DropShadowFilter(
+				0.0,
+				0,
+				Color.convertColor32(color),
+				1.0,
+				4.0,
+				4.0,
+				10.0
+		)
+	}
+	public static function subsprite(src:BitmapData, x:int, y:int, width:int, height:int):BitmapData {
+		var dst:BitmapData = new BitmapData(width, height, true, 0);
+		if (width > 0 && height > 0) dst.copyPixels(src, new Rectangle(x, y, width, height), new Point(0, 0));
+		return dst;
+	}
+	public static function drawBitmap(g:Graphics, bmp:BitmapData, x:int, y:int, width:int=-1, height:int=-1):void {
+		if (width == -1) width = bmp.width;
+		if (height == -1) height = bmp.height;
+		// We can't just draw a bitmap onto Graphics, we have to use beginBitmapFill
+		// It fills the shape with repeated bitmap pattern
+		// with origin at graphics' 0,0 corner.
+		// To compensate and avoid weird tiling artifact, we transorm the bitmap fill.
+		var m:Matrix = new Matrix();
+		m.translate(x,y);
+		g.beginBitmapFill(bmp, m);
+		g.drawRect(x, y, width, height);
+		g.endFill();
+	}
 }
 }

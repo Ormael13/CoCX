@@ -4,7 +4,6 @@ import classes.GlobalFlags.*;
 import classes.Scenes.Achievements;
 import classes.Scenes.Changelog;
 import classes.Scenes.Holidays;
-import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
 
@@ -18,7 +17,6 @@ public class MainMenu extends BaseContent {
 	//MainMenu - kicks player out to the main menu
 	public function mainMenu():void {
         CoC.instance.stage.focus = (mainView as MainView).mainText;
-        CoC_Settings.debugBuild = CONFIG::debug;
 
 		mainView.hideComboBox();
         CoC.instance.mainViewManager.registerShiftKeys();

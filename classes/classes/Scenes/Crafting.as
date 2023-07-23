@@ -610,7 +610,7 @@ private function craftingMaterialsMoonstone1Down():void {
 		}*/
 
 
-		public function feedAetherTwinsMaterialFromOreBad(itype:ItemType):void {
+		public function feedAetherTwinsMaterialFromOreBag(itype:ItemType):void {
 			switch (itype) {
 				case useables.COP_ORE: BagSlot01 -= 1;
 					break;

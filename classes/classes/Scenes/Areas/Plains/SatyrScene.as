@@ -7,7 +7,7 @@ import classes.display.SpriteDb;
 
 public class SatyrScene extends BaseContent{
 
-		
+	
 	public function SatyrScene()
 	{
 	}
@@ -44,8 +44,8 @@ public function satyrEncounter(location:int = 0):void {
 		else outputText("sodden expanse of the swamp");
 		outputText(" when you hear strange music emanating not far from where you are.  Do you investigate?");
 		//[Yes][No]
-		if(location == 0) doYesNo(createCallBackFunction(consensualSatyrFuck,0), camp.returnToCampUseOneHour);
-		else doYesNo(createCallBackFunction(consensualSatyrFuck,0), camp.returnToCampUseOneHour);
+		if(location == 0) doYesNo(createCallBackFunction(consensualSatyrFuck,0), explorer.done);
+		else doYesNo(createCallBackFunction(consensualSatyrFuck,0), explorer.done);
 	}
 }
 
@@ -109,6 +109,7 @@ private function keepDrinking():void {
 	outputText(".  This must be the work of that satyr!  Mentally, you remind yourself to watch out for him next time.  You clean yourself up as best as you can and redress, then wobble your way towards your camp, trying to stifle the pain, in your head and elsewhere, along the way.");
 	//(8 hours lost) (PC is pregnant (either vagina or ass) with a satyr, slimefeed)
 	satyrPreggo();
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -146,7 +147,7 @@ private function trickZeSatyr():void {
 	
 	player.gems += 10+rand(10);
 	statScreenRefresh();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[=Skip Foreplay=]
 private function skipForeplay():void {
@@ -292,7 +293,7 @@ private function femaleTakesAdvantageOfSatyr():void {
 	player.sexReward("saliva","Vaginal");
 	cleanupAfterCombat();
 }
-	
+
 //Male (Z)
 private function malesTakeAdvantageOfSatyrs():void {
 	clearOutput();
@@ -404,7 +405,7 @@ private function willinglyBoneSatyr():void {
 	//slimefeed, reduce lust, impregnational geographic
 	player.sexReward("cum","Vaginal");
 	satyrPreggo();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 

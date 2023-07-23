@@ -112,6 +112,22 @@ public class Utils extends Object
 			}
 			return x * y;
 		}
+		
+		/**
+		 * Solve the arithmetic progression.
+		 * For startValue=1, increment=1, return N such that 1 + 2 + 3 + ... + N = sum
+		 *
+		 * General form: return N such that
+		 *
+		 * `sum = startValue + (startValue + increment) + (startValue + 2*increment) + ...`
+		 * (N total items)
+		 */
+		public static function solveSum(sum:Number, startValue:Number = 1, increment:Number = 1):Number {
+			var a:Number = increment;
+			var b:Number = (2*startValue - increment);
+			var c:Number = -2*sum;
+			return (Math.sqrt(b*b - 4*a*c) - b)/(2*a);
+		}
 		public static function floor(value:Number,decimals:int=0):String {
 			if (decimals == 0) return ''+Math.floor(value);
 			var base:Number = ipow(10,decimals);
@@ -726,6 +742,21 @@ public class Utils extends Object
 			return Math.random()*n < 1;
 		}
 
+		/**
+		 * Shuffle the elements in the array randomly. Returns the array.
+		 */
+		public static function shuffle(a:Array):Array {
+			// https://en.wikipedia.org/wiki/Fisher-Yates_shuffle
+			const n:int = a.length;
+			for (var i:int = n-1; i >= 1; i--) {
+				var j:int = rand(i+1);
+				var x:* = a[i];
+				a[i] = a[j];
+				a[j] = x;
+			}
+			return a;
+		}
+
 		public static function validateNonNegativeNumberFields(obj:Object, func:String, nnf:Array):String
 		{
 			var error:String = "";
@@ -789,6 +820,14 @@ public class Utils extends Object
 		}
 		public static function trimSides(s:String):String {
 			return trimLeft(trimRight(s));
+		}
+		public static function padStart(s:String, length:int, padChar:String = ' '):String {
+			while (s.length < length) s = padChar + s;
+			return s;
+		}
+		public static function padEnd(s:String, length:int, padChar:String = ' '):String {
+			while (s.length < length) s = s + padChar;
+			return s;
 		}
 		public static function tieredBonus(stat:Number, step:Number, tier1:Number):Number {
 		  var tier:Number = Math.floor( (stat-tier1)/step + 1 );

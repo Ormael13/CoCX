@@ -6,6 +6,10 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
+import classes.Scenes.API.FnHelpers;
+import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.AlrauneMaiden;
 import classes.Scenes.Areas.Forest.WapsHuntress;
@@ -36,6 +40,7 @@ public class Exploration extends BaseContent
 
 		public function Exploration()
 		{
+			onGameInit(init);
 		}
 
 		public function furriteMod():Number {
@@ -71,12 +76,12 @@ public class Exploration extends BaseContent
 				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation. Even the warning sign about the cursed site or worn down training dummy you found when looking around camp earlier are here. Looking carefully, you see your footprints leaving the opposite side of your camp, then disappearing. You look back the way you came and see your markings vanish before your eyes. ");
 				outputText("The implications boggle your mind as you do your best to mull over them. Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it. A few things click into place as you realize you found your way back just as you were mentally picturing the portal! Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly. You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.");
 				player.createStatusEffect(StatusEffects.EzekielCurse, 0, 0, 0, 0);
-				tryDiscover();
+				doNext(tryDiscover);
 				return;
 			} else if (player.explored == 1) {
 				outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old-looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>");
-				tryDiscover();
 				player.exploredForest++;
+				doNext(tryDiscover);
 				return;
 			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.\n");
 
@@ -454,184 +459,83 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 5;
 			doExplore();
 		}
-
-		public function genericGolGobImpEncounters(even:Boolean = false):void {
-			var sss:Number = 3;
-			if (player.hasPerk(PerkLib.PiercedLethite)) sss += 1;
-			var ImpGobGol:Number = rand(sss);
-			if (ImpGobGol > 1) {
-				var ss:Number = 40;
-				if (player.level >= 8) ss += 20;
-				if (player.level >= 12) ss += 20;
-				if (player.level >= 16) ss += 20;
-				var impChooser:int = rand(ss);
-				//Imp Lord
-				if (impChooser >= 50 && impChooser < 70) {
-					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
-						if (rand(4) == 0) SceneLib.impScene.impLordEncounter();
-						else SceneLib.impScene.impLordFeralEncounter();
-					}
-					else {
-						if (rand(4) == 0) SceneLib.impScene.impLordFeralEncounter();
-						else SceneLib.impScene.impLordEncounter();
-					}
-					spriteSelect(SpriteDb.s_imp);
-					return;
-				}
-				//Imp Warlord
-				else if (impChooser >= 70 && impChooser < 90) {
-					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
-						if (rand(4) == 0) SceneLib.impScene.impWarlordEncounter();
-						else SceneLib.impScene.impWarlordFeralEncounter();
-					}
-					else {
-						if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
-						else SceneLib.impScene.impWarlordEncounter();
-					}
-					spriteSelect(SpriteDb.s_impWarlord);
-					return;
-				}
-				//Imp Overlord (Rare!)
-				else if (impChooser >= 90) {
-					SceneLib.impScene.impOverlordEncounter();
-					spriteSelect(SpriteDb.s_impOverlord);
-					return;
-				}
-				else {
-					clearOutput();
-					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
-						if (rand(4) == 0) {
-							outputText("An imp wings out of the sky and attacks!");
-							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
-							startCombat(new Imp());
-						}
-						else {
-							outputText("A feral imp wings out of the sky and attacks!");
-							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
-							flags[kFLAGS.FERAL_EXTRAS] = 1;
-							startCombat(new FeralImps());
-						}
-					}
-					else {
-						if (rand(4) == 0 && (player.level >= 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0)) {
-							outputText("A feral imp wings out of the sky and attacks!");
-							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
-							flags[kFLAGS.FERAL_EXTRAS] = 1;
-							startCombat(new FeralImps());
-						}
-						else {
-							outputText("An imp wings out of the sky and attacks!");
-							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
-							startCombat(new Imp());
-						}
-					}
-					spriteSelect(SpriteDb.s_imp);
-				}
-				return;
-			}
-			else if (ImpGobGol == 1) {
-				var sg:Number = 10;
-				if (player.level >= 12) sg += 10;
-				if (player.level >= 18) sg += 10;
-				if (player.level >= 24) sg += 10;
-				if (player.level >= 33) sg += 10;
-				if (player.level >= 42) sg += 10;
-				if (player.level >= 51) sg += 10;
-				var golemChooser:int = rand(sg);
-				clearOutput();
-				//Improved dummy golem
-				if (golemChooser >= 10 && golemChooser < 20) {
-					outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
-					startCombat(new GolemDummyImproved());
-					return;
-				}
-				//Advanced dummy golem or golems
-				if (golemChooser >= 20 && golemChooser < 30) {
-					if (rand(4) == 0) {
-						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
-						startCombat(new GolemsDummyAdvanced());
-						return;
-					}
-					else {
-						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your [weapon] for a fight!");
-						startCombat(new GolemDummyAdvanced());
-						return;
-					}
-				}
-				//Superior dummy golem or golems
-				if (golemChooser >= 30 && golemChooser < 40) {
-					if (rand(4) == 0) {
-						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
-						startCombat(new GolemsDummySuperior());
-						return;
-					}
-					else {
-						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your [weapon] for a fight!");
-						startCombat(new GolemDummySuperior());
-						return;
-					}
-				}
-				//Basic true golem or golems
-				if (golemChooser >= 40 && golemChooser < 50) {
-					if (rand(4) == 0) {
-						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
-						startCombat(new GolemsTrueBasic());
-						return;
-					}
-					else {
-						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your [weapon] for a fight!");
-						startCombat(new GolemTrueBasic());
-						return;
-					}
-				}
-				//Improved true golem or golems
-				if (golemChooser >= 50 && golemChooser < 60) {
-					if (rand(4) == 0) {
-						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
-						startCombat(new GolemsTrueImproved());
-						return;
-					}
-					else {
-						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your [weapon] for a fight!");
-						startCombat(new GolemTrueImproved());
-						return;
-					}
-				}
-				//Advanced true golem or golems
-				if (golemChooser >= 60) {
-					if (rand(4) == 0) {
-						outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your [weapon] for a fight!");
-						startCombat(new GolemsTrueAdvanced());
-						return;
-					}
-					else {
-						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your [weapon] for a fight!");
-						startCombat(new GolemTrueAdvanced());
-						return;
-					}
-				}
-				//Dummy golem
-				else {
-					outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
-					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
-					startCombat(new GolemDummy());
-					return;
-				}
-			}
-			else {
-				var gg:Number = 25;
-				if (player.level >= 8) gg += 25;
-				if (player.level >= 16) gg += 25;
-				if (player.level >= 24) gg += 25;
-				var goblinChooser:int = rand(gg);
-				if (goblinChooser >= 25 && goblinChooser < 50) SceneLib.goblinScene.goblinAssassinEncounter();
-				else if (goblinChooser >= 50 && goblinChooser < 75) SceneLib.goblinScene.goblinWarriorEncounter();
-				else if (goblinChooser >= 75) {
-					if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) SceneLib.priscillaScene.goblinElderEncounter();
-					else SceneLib.goblinScene.goblinShamanEncounter();
-				}
-				else SceneLib.goblinScene.goblinEncounter();
-			}
+		
+		private function golemEncountBasic():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
+			startCombat(new GolemDummy());
+		}
+		private function golemEncounterImproved():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
+			startCombat(new GolemDummyImproved());
+		}
+		private function golemEncounterAdvanced():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your [weapon] for a fight!");
+			startCombat(new GolemDummyAdvanced());
+		}
+		private function golemEncounterAdvancedGroup():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
+			startCombat(new GolemsDummyAdvanced());
+		}
+		private function golemEncounterSuperior():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your [weapon] for a fight!");
+			startCombat(new GolemDummySuperior());
+		}
+		private function golemEncounterSuperiorGroup():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
+			startCombat(new GolemsDummySuperior());
+		}
+		private function golemEncounterTrueBasic():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your [weapon] for a fight!");
+			startCombat(new GolemTrueBasic());
+		}
+		private function golemEncounterTrueBasicGroup():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
+			startCombat(new GolemsTrueBasic());
+		}
+		private function golemEncounterTrueImproved():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your [weapon] for a fight!");
+			startCombat(new GolemTrueImproved());
+		}
+		private function golemEncounterTrueImprovedGroup():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
+			startCombat(new GolemsTrueImproved());
+		}
+		private function golemEncounterTrueAdvanced():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your [weapon] for a fight!");
+			startCombat(new GolemTrueAdvanced());
+		}
+		private function golemEncounterTrueAdvancedGroup():void {
+			clearOutput();
+			outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your [weapon] for a fight!");
+			startCombat(new GolemsTrueAdvanced());
+		}
+		
+		private function feralImpEncounter():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_imp);
+			outputText("A feral imp wings out of the sky and attacks!");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
+			flags[kFLAGS.FERAL_EXTRAS] = 1;
+			startCombat(new FeralImps());
+		}
+		private function impEncounter():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_imp);
+			outputText("An imp wings out of the sky and attacks!");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
+			startCombat(new Imp());
 		}
 		public function genericGobImpAngEncounters(even:Boolean = false):void {
 			var gobImpAngChooser:int = rand(20);
@@ -760,33 +664,23 @@ public class Exploration extends BaseContent
 				else SceneLib.impScene.impPackEncounter2();
 			}
 		}
-		public function genericAngelsEncounters(even:Boolean = false):void {
-			var angelsChooser:int = rand(15);
-			//Limit chooser range
-			if (player.level < 6 && angelsChooser >= 5) angelsChooser = 4;
-			else if (player.level < 12 && angelsChooser >= 10) angelsChooser = 9;
+		private function angelEncounterLow():void {
 			clearOutput();
-			//Mid-rank Angel
-			if (angelsChooser >= 5 && angelsChooser < 10) {
-				outputText("A mid-ranked angeloid wings out of the sky and attacks!");
-				player.createStatusEffect(StatusEffects.AngelsChooser,2,0,0,0);
-				startCombat(new Angeloid());
-				return;
-			}
-			//High-rank Angel
-			else if (angelsChooser >= 10) {
-				outputText("A high-ranked angeloid wings out of the sky and attacks!");
-				player.createStatusEffect(StatusEffects.AngelsChooser,3,0,0,0);
-				startCombat(new Angeloid());
-				return;
-			}
-			//Low-rank Angel
-			else {
-				outputText("A low-ranked angeloid wings out of the sky and attacks!");
-				player.createStatusEffect(StatusEffects.AngelsChooser,1,0,0,0);
-				startCombat(new Angeloid());
-				return;
-			}
+			outputText("A low-ranked angeloid wings out of the sky and attacks!");
+			player.createStatusEffect(StatusEffects.AngelsChooser, 1, 0, 0, 0);
+			startCombat(new Angeloid());
+		}
+		private function angelEncounterMid():void {
+			clearOutput();
+			outputText("A mid-ranked angeloid wings out of the sky and attacks!");
+			player.createStatusEffect(StatusEffects.AngelsChooser, 2, 0, 0, 0);
+			startCombat(new Angeloid());
+		}
+		private function angelEncounterHigh():void {
+			clearOutput();
+			outputText("A high-ranked angeloid wings out of the sky and attacks!");
+			player.createStatusEffect(StatusEffects.AngelsChooser, 3, 0, 0, 0);
+			startCombat(new Angeloid());
 		}
 		public function demonLabProjectEncounters():void {
 			clearOutput();
@@ -842,37 +736,459 @@ public class Exploration extends BaseContent
 			}
 		}
 
+		public function impFactor():Number {
+			if (player.hasPerk(PerkLib.PiercedLethite)) return 2;
+			return 1;
+		}
+		public function feralImpFactor():Number {
+			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) return 2;
+			return 1;
+		}
+		
+		private var _explorationEncounters:GroupEncounter = null;
+		private var _commonEncounters:GroupEncounter = null;
+		private var _angelEncounters:GroupEncounter = null;
+		public function get commonEncounters():GroupEncounter { return _commonEncounters }
+		public function get angelEncounters():GroupEncounter { return _angelEncounters }
+		private function init():void {
+			const fn:FnHelpers = Encounters.fn;
+			_angelEncounters = Encounters.group("angels",
+					{
+						name: "angel1",
+						label: "Angeloid I",
+						kind: "monster",
+						call: angelEncounterLow
+					}, {
+						name: "angel2",
+						label: "Angeloid II",
+						kind: "monster",
+						when: fn.ifLevelMin(6),
+						call: angelEncounterMid
+					} , {
+						name: "angel3",
+						label: "Angeloid III",
+						kind: "monster",
+						when: fn.ifLevelMin(12),
+						call: angelEncounterHigh
+					}
+			);
+			
+			_commonEncounters = Encounters.group("common",
+					{
+						name: "Imp",
+						kind: "monster",
+						mods: [impFactor],
+						call: impEncounter
+					}, {
+						name: "feralImp",
+						label: "Feral Imp",
+						kind: "monster",
+						when: function():Boolean {
+							return player.level >= 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0
+						},
+						call: feralImpEncounter,
+						mods: [impFactor, feralImpFactor]
+					}, {
+						name: "impLord",
+						label: "Imp Lord",
+						kind: "monster",
+						chance: 0.5,
+						mods: [impFactor],
+						when: fn.ifLevelMin(8),
+						call: SceneLib.impScene.impLordEncounter
+					}, {
+						name: "feralImpLord",
+						label: "Feral Imp Lord",
+						shortLabel: "FI Lord",
+						kind: "monster",
+						chance: 0.5,
+						mods: [impFactor, feralImpFactor],
+						when: fn.ifLevelMin(8),
+						call: SceneLib.impScene.impLordFeralEncounter
+					}, {
+						name: "impWarlord",
+						label: "Imp Warlord",
+						kind: "monster",
+						chance: 0.5,
+						mods: [impFactor],
+						when: fn.ifLevelMin(12),
+						call: SceneLib.impScene.impWarlordEncounter
+					}, {
+						name: "feralImpWarlord",
+						label: "Feral Imp Warlord",
+						shortLabel: "FI Warlord",
+						kind: "monster",
+						chance: 0.5,
+						mods: [impFactor],
+						when: fn.ifLevelMin(12),
+						call: SceneLib.impScene.impWarlordFeralEncounter
+					}, {
+						name: "impOverlord",
+						label: "Imp Overlord",
+						kind: "monster",
+						chance: 0.25,
+						mods: [impFactor],
+						when: fn.ifLevelMin(16),
+						call: SceneLib.impScene.impOverlordEncounter
+					}, {
+						name: "goblin",
+						label: "Goblin",
+						kind: "monster",
+						call: SceneLib.goblinScene.goblinEncounter
+					}, {
+						name: "goblinAssassin",
+						label: "Goblin Assassin",
+						shortLabel: "Gob. Assassin",
+						kind: "monster",
+						when: fn.ifLevelMin(8),
+						call: SceneLib.goblinScene.goblinAssassinEncounter
+					}, {
+						name: "goblinWarrior",
+						label: "Goblin Warrior",
+						shortLabel: "Gob. Warrior",
+						kind: "monster",
+						when: fn.ifLevelMin(16),
+						call: SceneLib.goblinScene.goblinWarriorEncounter
+					}, {
+						name: "goblinShaman",
+						label: "Goblin Shaman",
+						shortLabel: "Gob. Shaman",
+						kind: "monster",
+						when: fn.ifLevelMin(24),
+						call: SceneLib.goblinScene.goblinShamanEncounter
+					}, {
+						name: "priscilla",
+						label: function():String {
+							if (flags[kFLAGS.TIMES_ENCOUNTERED_PRISCILLA] == 0) return "Gob. Elder";
+							return "Priscilla"
+						},
+						kind: "npc",
+						unique: true,
+						when: fn.ifLevelMin(24),
+						call: SceneLib.priscillaScene.goblinElderEncounter
+					}, {
+						name: "golem1",
+						label: "Dummy Golem",
+						shortLabel: "Golem I",
+						kind: "monster",
+						call: golemEncountBasic
+					}, {
+						name: "golem2",
+						label: "Improved Golem",
+						shortLabel: "Golem II",
+						kind: "monster",
+						when:fn.ifLevelMin(12),
+						call: golemEncounterImproved
+					}, {
+						name: "golem3",
+						label: "Advanced Golem",
+						shortLabel: "Golem III",
+						kind: "monster",
+						when:fn.ifLevelMin(18),
+						call: golemEncounterAdvanced
+					}, {
+						name: "golem3group",
+						label: "Advanced Golem Group",
+						shortLabel: "Golem III+",
+						kind: "monster",
+						when:fn.ifLevelMin(18),
+						chance: 0.25,
+						call: golemEncounterAdvancedGroup
+					}, {
+						name: "golem4",
+						label: "Superior Golem",
+						shortLabel: "Golem IV",
+						kind: "monster",
+						when:fn.ifLevelMin(24),
+						call: golemEncounterSuperior
+					}, {
+						name: "golem4group",
+						label: "Superior Golem Group",
+						shortLabel: "Golem IV+",
+						kind: "monster",
+						when:fn.ifLevelMin(18),
+						chance: 0.25,
+						call: golemEncounterSuperiorGroup
+					}, {
+						name: "golem5",
+						label: "Basic True Golem",
+						shortLabel: "Golem V",
+						kind: "monster",
+						when:fn.ifLevelMin(33),
+						call: golemEncounterTrueBasic
+					}, {
+						name: "golem5group",
+						label: "Basic True Golem Group",
+						shortLabel: "Golem V+",
+						kind: "monster",
+						when:fn.ifLevelMin(33),
+						chance: 0.25,
+						call: golemEncounterTrueBasicGroup
+					}, {
+						name: "golem6",
+						label: "Improved True Golem",
+						shortLabel: "Golem VI",
+						kind: "monster",
+						when:fn.ifLevelMin(42),
+						call: golemEncounterTrueImproved
+					}, {
+						name: "golem6group",
+						label: "Improved True Golem Group",
+						shortLabel: "Golem VI+",
+						kind: "monster",
+						when:fn.ifLevelMin(42),
+						chance: 0.25,
+						call: golemEncounterTrueImprovedGroup
+					}, {
+						name: "golem7",
+						label: "Advanced True Golem",
+						shortLabel: "Golem VII",
+						kind: "monster",
+						when:fn.ifLevelMin(51),
+						call: golemEncounterTrueAdvanced
+					}, {
+						name: "golem5group",
+						label: "Basic True Golem Group",
+						shortLabel: "Golem V+",
+						kind: "monster",
+						when:fn.ifLevelMin(33),
+						chance: 0.25,
+						call: golemEncounterTrueAdvancedGroup
+					}
+			);
+			
+			_explorationEncounters = Encounters.group("exploration",
+					{
+						name  : "Evangeline",
+						kind  : "npc",
+						unique: true,
+						chance: 2,
+						when  : function ():Boolean {
+							return player.level > 0 && (
+									EvangelineFollower.EvangelineAffectionMeter < 1
+									|| (EvangelineFollower.EvangelineAffectionMeter == 1 || EvangelineFollower.EvangelineAffectionMeter == 2) && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1)
+						},
+						call  : function ():void {
+							if (EvangelineFollower.EvangelineAffectionMeter < 1) {
+								SceneLib.evangelineFollower.enterTheEvangeline();
+							} else {
+								SceneLib.evangelineFollower.alternativEvangelineRecruit();
+							}
+						}
+					}, {
+						name  : "Pearl",
+						kind  : "item",
+						unique: true,
+						chance: 1,
+						when  : function ():Boolean {
+							return player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1;
+						},
+						call  : pearldiscovery
+					}, {
+						name  : "hiddencave",
+						label : "Hidden Cave",
+						kind  : "place",
+						unique: true,
+						when  : function ():Boolean {
+							return player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1
+						},
+						call  : hiddencavediscovery
+					}, {
+						name  : "troll",
+						label : "Troll Village",
+						kind  : "place",
+						unique: true,
+						when  : function ():Boolean {
+							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0
+						},
+						call  : SceneLib.trollVillage.FirstEncountersoftheTrollKind
+					}, {
+						name  : "pocketwatch",
+						label : "Pocket Watch",
+						kind  : "item",
+						unique: true,
+						when  : function ():Boolean {
+							return player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0
+									&& (!player.hasStatusEffect(StatusEffects.PocketWatch) || player.superPerkPoints > 0)
+						},
+						call  : pocketwatchdiscovery
+					}, {
+						//Helia monogamy fucks
+						name  : "helcommon",
+						label : "Helia",
+						kind  : 'npc',
+						unique: true,
+						night : false,
+						call  : SceneLib.helScene.helSexualAmbush,
+						when  : SceneLib.helScene.helSexualAmbushCondition
+					}, {
+						name  : "NPC (New)",
+						kind  : "npc",
+						unique: true,
+						when  : function ():Boolean {
+							return flags[kFLAGS.ALVINA_FOLLOWER] < 1
+						},
+						call  : SceneLib.alvinaFollower.alvinaFirstEncounter
+					}, {
+						name  : "HeXinDao",
+						kind  : "place",
+						unique: true,
+						when  : function ():Boolean {
+							return flags[kFLAGS.HEXINDAO_UNLOCKED] < 1
+						},
+						call  : discoverHXD
+					}, {
+						name  : "Tel'Adre",
+						kind  : "place",
+						unique: true,
+						when  : function ():Boolean {
+							return !player.hasStatusEffect(StatusEffects.TelAdre);
+						},
+						call  : SceneLib.telAdre.discoverTelAdre
+					}, {
+						name  : "Bazaar",
+						kind  : "place",
+						unique: true,
+						when  : function ():Boolean {
+							return flags[kFLAGS.BAZAAR_ENTERED] == 0;
+						},
+						call  : SceneLib.bazaar.findBazaar
+					}, {
+						name  : "Forest",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return player.explored > 1 && player.exploredForest <= 0
+						},
+						call  : discoverForest
+					}, {
+						name  : "Lake",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return player.explored > 1 && player.exploredLake <= 0 && flags[kFLAGS.ALVINA_FOLLOWER] == 1
+						},
+						call  : discoverLake
+					}, {
+						name  : "Desert",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return player.exploredLake >= 1 && player.exploredDesert <= 0
+						},
+						call  : discoverDesert
+					}, {
+						name  : "Battlefield",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5
+						},
+						call  : disscoverBattlefield
+					}, {
+						name  : "Hills",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && flags[kFLAGS.DISCOVERED_HILLS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5
+						},
+						call  : discoverHills
+					}, {
+						name  : "Plains",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.DISCOVERED_HILLS] > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9
+						},
+						call  : discoverPlains
+					}, {
+						name  : "Swamp",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && (player.level + combat.playerLevelAdjustment()) >= 13
+						},
+						call  : discoverSwamp
+					}, {
+						name  : "blightRidge",
+						label : "Blight Ridge",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (player.level + combat.playerLevelAdjustment()) >= 21
+						},
+						call  : discoverBlightRidge
+					}, {
+						name  : "Beach",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && (player.level + combat.playerLevelAdjustment()) >= 25
+						},
+						call  : discoverBeach
+					}, {
+						name  : "Caves",
+						kind  : "place",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.DISCOVERED_CAVES] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && (player.level + combat.playerLevelAdjustment()) >= 30
+						},
+						call  : discoverCave
+					}, {
+						name  : "Cathedral",
+						kind  : "place",
+						unique: true,
+						when  : function ():Boolean {
+							return flags[kFLAGS.FOUND_CATHEDRAL] != 1
+						},
+						call  : function ():void {
+							if (flags[kFLAGS.GAR_NAME] == 0) SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork();
+							else SceneLib.gargoyle.returnToCathedral();
+						}
+					}, {
+						name  : "Giacomo",
+						kind  : "npc",
+						unique: true,
+						call  : SceneLib.giacomoShop.giacomoEncounter
+					}, {
+						name  : "Dinah",
+						kind  : "npc",
+						unique: true,
+						when  : function ():Boolean {
+							return flags[kFLAGS.DINAH_LVL_UP] < 1
+						},
+						call  : SceneLib.dinahScene.DinahIntro1
+					}, {
+						name  : "Lumi",
+						kind  : "npc",
+						unique: true,
+						when  : function ():Boolean {
+							return flags[kFLAGS.LUMI_MET] == 0
+						},
+						call  : SceneLib.lumi.lumiEncounter
+					}, _commonEncounters
+			);
+		}
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
-			if (player.level > 0 && EvangelineFollower.EvangelineAffectionMeter < 1 && rand(2) == 0) {
-				SceneLib.evangelineFollower.enterTheEvangeline();
-				return;
+			explorer.prepareArea(_explorationEncounters);
+			explorer.setTags("explore");
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				player.explored++;
 			}
-			if (player.level > 0 && (EvangelineFollower.EvangelineAffectionMeter == 1 || EvangelineFollower.EvangelineAffectionMeter == 2) && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && rand(2) == 0) {
-				SceneLib.evangelineFollower.alternativEvangelineRecruit();
-				return;
-			}
-			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(5) == 0) {
-				pearldiscovery();
-				return;
-			}
-			if (player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1 && rand(10) == 0) {
-				hiddencavediscovery();
-				return;
-			}
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(5) == 0) {
-				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
-				return;
-			}
-			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && !player.hasStatusEffect(StatusEffects.PocketWatch) && rand(3) == 0) {
-				pocketwatchdiscovery();
-				return;
-			}
-			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && player.superPerkPoints > 0 && rand(5) == 0) {
-				pocketwatchdiscovery();
-				return;
-			}
+			explorer.skillBasedReveal(1, player.explored);
+			explorer.doExplore();
 /*			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
 				ryubifirstenc();
 				return;
@@ -881,140 +1197,11 @@ public class Exploration extends BaseContent
 				ryubirepenc();
 				return;
 			}
-*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(5) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
-				SceneLib.helScene.helSexualAmbush();
-				return;
-			}
-			if (flags[kFLAGS.ALVINA_FOLLOWER] < 1 && rand(4) == 0) {
-				SceneLib.alvinaFollower.alvinaFirstEncounter();
-				return;
-			}
-			if (flags[kFLAGS.HEXINDAO_UNLOCKED] < 1 && rand(4) == 0) {
-				clearOutput();
-				outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into a strange area.");
-				outputText("\n\nNot long into your journey, you see a hooded figure looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest, and you start to follow it. You glance around, there's still no one else nearby, so you continue to tail the mysterious being.");
-				outputText("\n\nHalf an hour or so later, still following the cloaked figure, you begin to hear the sound of running water. Moving on, you eventually come across the source: a decently sized river flows across the land, populated by variously sized islands. Stopping for a second to take a look around, the hooded person seems to be moving towards one of the several islands. He? She? It is still oblivious to your presence.");
-				outputText("\n\nA voice rings from behind you, \"<i>Come to visit He'Xin'Dao, stranger?</i>\"");
-				outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood.\n\n"
-					+ "\"<i>You seem lacking in soulforce, but luckily your soul is enough intact to allow future cultivation. So, since you are already here, what do you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
-				outputText("\n\nYou ponder for a moment over the offer. The hooded beings don't seem to carry any malice, given they haven't attacked you nor attempted rape. Perhaps it would be of interest to explore this place?  You decide to accept their offer as they lead you over the wide bridge to one of the islands.  Several heavily armored guards peer at you searchingly, to which one of your new companions state that you are a new guest.  The guard gives a stoic nod as they step aside, no longer barring you from entry.  Your hooded friends guide you to a small island to properly register you as a guest. They give you a small guide on a piece of parchment, telling you places of interest and instructions on how to find this place again.");
-				outputText("\n\nAfterwards, you're left alone.  You wander around, checking a few places of interest before you decide it's time to return to your camp.  With the guide in your hands, you're sure you'll find this place again with ease if you need to.");
-				outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
-				flags[kFLAGS.HEXINDAO_UNLOCKED] = 1;
-				doNext(camp.returnToCampUseTwoHours);
-				return;
-			}
-			if (player.explored > 1) {
-				clearOutput();
-				if (player.exploredForest <= 0) {
-					outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old-looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>");
-					player.exploredForest = 1;
-					player.exploredForest++;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (player.exploredLake <= 0 && flags[kFLAGS.ALVINA_FOLLOWER] == 1) {
-					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides, you find a lake so massive that the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
-					player.exploredLake = 1;
-					player.explored++;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
-					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
-					if (player.lowerBody == LowerBody.HOOFED) outputText("in your hooves");
-					else if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
-					else if (player.isNaga()) outputText("in your scales");
-					else outputText("inside your footwear, between your toes");
-					outputText(".\n\n<b>You've discovered the Desert (Outer)!</b>");
-					player.exploredDesert = 1;
-					player.explored++;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				//Discover Battlefield Boundary
-				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
-					flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the Battlefield (Boundary)!</b>");
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && flags[kFLAGS.DISCOVERED_HILLS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
-					flags[kFLAGS.DISCOVERED_HILLS] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("As you walk the large open wasteland of mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (flags[kFLAGS.DISCOVERED_HILLS] > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9) {
-					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
-					player.explored++;
-					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				//EXPLOOOOOOORE
-				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && (player.level + combat.playerLevelAdjustment()) >= 13) {
-					flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n");
-					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n");
-					outputText("<b>You've discovered the Swamp!</b>");
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Discover Blight Ridge
-				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (player.level + combat.playerLevelAdjustment()) >= 21) {
-					flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("You wander around the mountain area thinking over this whole ‘demonic’ realm affair.  You're not sure how widespread this entire thing is, everything seems to be isolated to certain areas, you've only really seen the demons in small groups or alone, and even then it's usually comprised of imps.  As far as you know it IS a demonic realm so there should be some area where demons live normally, they can't all be hold up in lethice's stronghold right?  You question whether or not the demons could even hold together a city long enough before 'water' damage ruined the place.");
-					if (flags[kFLAGS.BAZAAR_ENTERED] > 0) outputText("  Then again you have been to that Bizarre Bazaar, they seem to exist there to an extent without any trouble...");
-					outputText("  As you think the random topic over in your head you spy a path you've never noticed before.\n\n");
-					outputText("Being the adventurous champion you are you start down the path, as you walk down this sketchy path, carved through a section of the mountain a ridge comes into view.  Walking onwards until you're at the ridge a somewhat would-be beautiful sight lies before you.\n\n");
-					if (player.cor < 66) {
-						outputText("That would be if it wasn't corrupted to all hell, the scent of sweat, milk and semen invade your nose as you peer across the corrupted glade.  And you thought that the main forest was bad.");
-						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Gods... If Marae could see this.");
-						outputText("\n\n");
-					}
-					else if (player.cor >= 66) {
-						outputText("And it is!  Lush fields of corrupted glades consume the land, giving the heavy scent of sweat, milk and semen as you take a deep breath.  Taking it all in and relishing in the corruption.  Truly this is how the world should be.");
-						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Heh, if Marae could see this she'd flip her shit.");
-						outputText("\n\n");
-					}
-					outputText("<b>You've discovered the Blight Ridge!</b>");
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Discover Beach / Ocean / Deep Sea
-				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && (player.level + combat.playerLevelAdjustment()) >= 25) {
-					flags[kFLAGS.DISCOVERED_BEACH] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.");
-					outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.");
-					outputText("\n\n<b>You've discovered the Beach and the Ocean!</b>");
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Discover Caves!
-				if (flags[kFLAGS.DISCOVERED_CAVES] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && (player.level + combat.playerLevelAdjustment()) >= 30) {
-					flags[kFLAGS.DISCOVERED_CAVES] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
-					outputText("<b>You've discovered the Caves!</b>");
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}/*
+*/
+				/*
 				//Discover Abyss
 				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 10) {
 					flags[kFLAGS.] = 1;
-					player.explored++;
 					clearOutput();
 					outputText("You walk \n\n");
 					outputText("<b>You've discovered the Abyss!</b>");
@@ -1024,7 +1211,6 @@ public class Exploration extends BaseContent
 				//Discover Pit
 				if (flags[kFLAGS.] > 0 && flags[kFLAGS.] <= 0 && ((rand(3) == 0 && player.level >= 16) || player.level >= 21)) {
 					flags[kFLAGS.] = 1;
-					player.explored++;
 					clearOutput();
 					outputText("You walk \n\n");
 					outputText("<b>You've discovered the Pit!</b>");
@@ -1032,52 +1218,112 @@ public class Exploration extends BaseContent
 					return;
 				}
 				*/
-				//Used for chosing 'repeat' encounters.
-				var choosey:Number = rand(5);
-				//2 (gargoyle) is never chosen once cathedral is discovered.
-				if(choosey == 2 && flags[kFLAGS.FOUND_CATHEDRAL] == 1)
-				{
-					choosey = rand(4);
-					if(choosey >= 2) choosey++;
-				}
-				if (choosey == 3)
-				{
-					choosey = rand(4);
-					if(choosey == 2) choosey += 2;
-					if(choosey >= 3) choosey++;
-				}
-				//Chance of encountering Giacomo!
-				if (choosey == 0) {
-					player.explored++;
-					if (flags[kFLAGS.SOUL_SENSE_GIACOMO] < 3 && rand(3) > 0) SceneLib.giacomoShop.giacomoEncounterSS();
-					else if (flags[kFLAGS.DINAH_LVL_UP] < 1) SceneLib.dinahScene.DinahIntro1();
-					else genericGolGobImpEncounters(true);
-					return;
-				}
-				else if (choosey == 1) {
-					player.explored++;
-					if (flags[kFLAGS.LUMI_MET] == 0) SceneLib.lumi.lumiEncounter();
-					else genericGolGobImpEncounters(true);
-					return;
-				}
-				else if (choosey == 2) {
-					player.explored++;
-					if (flags[kFLAGS.GAR_NAME] == 0) SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork();
-					else SceneLib.gargoyle.returnToCathedral();
-					return;
-				}
-				//Monster - 50/50 imp/gob split.
-				else {
-					player.explored++;
-					genericGolGobImpEncounters(true);
-					return;
-				}
-			}
-			player.explored++;
-			doNext(camp.returnToCampUseOneHour);
 		}
-
-		//Temporaly place of finding enemies for lvl between 31 and 49
+		
+		private function discoverCave():void {
+			flags[kFLAGS.DISCOVERED_CAVES] = 1;
+			clearOutput();
+			outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
+			outputText("<b>You've discovered the Caves!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		private function discoverBeach():void {
+			flags[kFLAGS.DISCOVERED_BEACH] = 1;
+			clearOutput();
+			outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.");
+			outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.");
+			outputText("\n\n<b>You've discovered the Beach and the Ocean!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		private function discoverBlightRidge():void {
+			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] = 1;
+			clearOutput();
+			outputText("You wander around the mountain area thinking over this whole ‘demonic’ realm affair.  You're not sure how widespread this entire thing is, everything seems to be isolated to certain areas, you've only really seen the demons in small groups or alone, and even then it's usually comprised of imps.  As far as you know it IS a demonic realm so there should be some area where demons live normally, they can't all be hold up in lethice's stronghold right?  You question whether or not the demons could even hold together a city long enough before 'water' damage ruined the place.");
+			if (flags[kFLAGS.BAZAAR_ENTERED] > 0) outputText("  Then again you have been to that Bizarre Bazaar, they seem to exist there to an extent without any trouble...");
+			outputText("  As you think the random topic over in your head you spy a path you've never noticed before.\n\n");
+			outputText("Being the adventurous champion you are you start down the path, as you walk down this sketchy path, carved through a section of the mountain a ridge comes into view.  Walking onwards until you're at the ridge a somewhat would-be beautiful sight lies before you.\n\n");
+			if (player.cor < 66) {
+				outputText("That would be if it wasn't corrupted to all hell, the scent of sweat, milk and semen invade your nose as you peer across the corrupted glade.  And you thought that the main forest was bad.");
+				if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Gods... If Marae could see this.");
+				outputText("\n\n");
+			} else if (player.cor >= 66) {
+				outputText("And it is!  Lush fields of corrupted glades consume the land, giving the heavy scent of sweat, milk and semen as you take a deep breath.  Taking it all in and relishing in the corruption.  Truly this is how the world should be.");
+				if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Heh, if Marae could see this she'd flip her shit.");
+				outputText("\n\n");
+			}
+			outputText("<b>You've discovered the Blight Ridge!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		private function discoverSwamp():void {
+			flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
+			clearOutput();
+			outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n");
+			outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n");
+			outputText("<b>You've discovered the Swamp!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		private function discoverPlains():void {
+			clearOutput();
+			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
+			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
+			endEncounter();
+		}
+		private function discoverHills():void {
+			flags[kFLAGS.DISCOVERED_HILLS] = 1;
+			clearOutput();
+			outputText("As you walk the large open wasteland of mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
+			endEncounter();
+		}
+		private function disscoverBattlefield():void {
+			flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] = 1;
+			clearOutput();
+			outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the Battlefield (Boundary)!</b>");
+			endEncounter();
+		}
+		private function discoverDesert():void {
+			clearOutput();
+			outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
+			if (player.lowerBody == LowerBody.HOOFED) outputText("in your hooves");
+			else if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
+			else if (player.isNaga()) outputText("in your scales");
+			else outputText("inside your footwear, between your toes");
+			outputText(".\n\n<b>You've discovered the Desert (Outer)!</b>");
+			player.exploredDesert = 1;
+			endEncounter();
+		}
+		private function discoverLake():void {
+			clearOutput();
+			outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides, you find a lake so massive that the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
+			player.exploredLake = 1;
+			endEncounter();
+		}
+		private function discoverForest():void {
+			clearOutput();
+			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old-looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>");
+			player.exploredForest = 1;
+			player.exploredForest++;
+			endEncounter();
+		}
+		private function discoverHXD():void {
+			clearOutput();
+			outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into a strange area.");
+			outputText("\n\nNot long into your journey, you see a hooded figure looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest, and you start to follow it. You glance around, there's still no one else nearby, so you continue to tail the mysterious being.");
+			outputText("\n\nHalf an hour or so later, still following the cloaked figure, you begin to hear the sound of running water. Moving on, you eventually come across the source: a decently sized river flows across the land, populated by variously sized islands. Stopping for a second to take a look around, the hooded person seems to be moving towards one of the several islands. He? She? It is still oblivious to your presence.");
+			outputText("\n\nA voice rings from behind you, \"<i>Come to visit He'Xin'Dao, stranger?</i>\"");
+			outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood.\n\n"
+					+ "\"<i>You seem lacking in soulforce, but luckily your soul is enough intact to allow future cultivation. So, since you are already here, what do you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
+			outputText("\n\nYou ponder for a moment over the offer. The hooded beings don't seem to carry any malice, given they haven't attacked you nor attempted rape. Perhaps it would be of interest to explore this place?  You decide to accept their offer as they lead you over the wide bridge to one of the islands.  Several heavily armored guards peer at you searchingly, to which one of your new companions state that you are a new guest.  The guard gives a stoic nod as they step aside, no longer barring you from entry.  Your hooded friends guide you to a small island to properly register you as a guest. They give you a small guide on a piece of parchment, telling you places of interest and instructions on how to find this place again.");
+			outputText("\n\nAfterwards, you're left alone.  You wander around, checking a few places of interest before you decide it's time to return to your camp.  With the guide in your hands, you're sure you'll find this place again with ease if you need to.");
+			outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
+			flags[kFLAGS.HEXINDAO_UNLOCKED] = 1;
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+//Temporaly place of finding enemies for lvl between 31 and 49
 		public function tryDiscoverLL():void {
 			clearOutput();
 			if (rand(4) == 0) {
@@ -1104,8 +1350,9 @@ public class Exploration extends BaseContent
 			}
 			else if (rand(2) == 0) {
 				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
-				outputText("\n\n<b>A wild Dark Elf Ranger Appears.</b>");
-				startCombat(new DarkElfRanger());//lvl 39
+				outputText("\n\n<b>A wild Light Elf Ranger Appears.</b>");
+				flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 12;
+				startCombat(new LightElfs());//lvl 47
 				return;
 			}
 			else {
@@ -1125,8 +1372,9 @@ public class Exploration extends BaseContent
 			clearOutput();
 			if (rand(4) == 0) {
 				outputText("Traversing Mareth vast areas you're stopped by the arrow to the <u>kne</u> 'place between ground and your waist'.");
-				outputText("\n\n<b>A wild Dark Elf Sniper Appears.</b>");
-				startCombat(new DarkElfSniper());//lvl 51
+				outputText("\n\n<b>A wild Light Elf Sniper Appears.</b>");
+				flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 13;
+				startCombat(new LightElfs());//lvl 51
 				return;
 			}
 			else if (rand(3) == 0) {
@@ -1222,7 +1470,7 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.SKY_POISON_PEARL] = 1;
 			clearOutput();
 			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pearl.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it.  Nothing happens so since it somehow attracted your attention you pocket this pearl.\n\n");
-			inventory.takeItem(consumables.SPPEARL, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.SPPEARL, explorer.done);
 		}
 
 		public function hiddencavediscovery():void {
@@ -1247,12 +1495,12 @@ public class Exploration extends BaseContent
 			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.PocketWatch)) player.removeStatusEffect(StatusEffects.PocketWatch);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function pocketwatchdiscoveryNo():void {
 			outputText("No you do not want to sacrifice anything. Leaving the watch behind, you return to the camp.\n\n");
 			player.createStatusEffect(StatusEffects.PocketWatch, 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function ryubifirstenc():void {
@@ -1381,7 +1629,7 @@ public class Exploration extends BaseContent
 			else outputText("  You struggle and push with your [legs] as hard as you can, but it's no use.  You do the only thing you can and begin stroking your [cocks] with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.");
 			dynStats("lus", 25 + rand(player.cor / 5), "scale", false);
 			fatigue(5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 	}

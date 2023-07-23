@@ -42,7 +42,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 	{
 		outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.");
 		outputText("\n\n\"<i>What the fuck do you think you're doing here [name]? After what you did to Marble you still think you're welcome here? Leave. <b>Now</b>.</i>\"");
-		doNext(camp.returnToCampUseOneHour);
+		doNext(explorer.done);
 		return;
 	}
 	if (flags[kFLAGS.FARM_DISABLED] == 2)
@@ -50,7 +50,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		clearOutput();
 		outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.");
 		outputText("\n\n\"<i>What the fuck do you think you're doing here [name]? After what you did to Kelt you still think you're welcome here? Leave. <b>Now</b>.</i>\"");
-		doNext(camp.returnToCampUseOneHour);
+		doNext(explorer.done);
 		return;
 	}
 	
@@ -67,7 +67,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 			player.addStatusValue(StatusEffects.MetWhitney,1,1);
 			if(player.statusEffectv1(StatusEffects.MetWhitney) == 2) outputText("<b>You've been to the farm enough to easily find it.  You can return by selecting it from the places menu (and will no longer encounter it during random lake exploration)</b>.\n\n");
 		}
-		inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
+		inventory.takeItem(consumables.CANINEP, explorer.done);
 	}
 	//Repeat Offender
 	else {

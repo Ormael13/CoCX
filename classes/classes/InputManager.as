@@ -1,23 +1,15 @@
 ﻿package classes
 {
-	import classes.display.BindingPane;
-	import coc.view.MainView;
-	import fl.controls.UIScrollBar;
-	import fl.containers.ScrollPane;
-	import flash.display.Stage;
-	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.text.TextField;
-	import flash.utils.ByteArray;
-	import flash.utils.Dictionary;
-	import flash.display.MovieClip;
-	import flash.utils.describeType;
-	import flash.ui.Keyboard;
-	import flash.utils.describeType;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-	
-	/**
+import classes.display.BindingPane;
+
+import coc.view.CoCButton;
+import coc.view.MainView;
+
+import flash.display.Stage;
+import flash.events.KeyboardEvent;
+import flash.text.TextField;
+
+/**
 	 * Generic input manager
 	 * I feel sick writing some of these control functors; rather than having some form of queryable game state
 	 * we're checking for the presence (and sometimes, the label contents) of UI elements to determine what state
@@ -149,16 +141,17 @@
 		 * @param	func		A function object that defines the BoundControlMethods action
 		 * @param	isCheat		Differentiates between a cheat method (not displayed in the UI) and normal controls.
 		 */
-		public function AddBindableControl(name:String, desc:String, func:Function, isCheat:Boolean = false):void
+		public function AddBindableControl(name:String, desc:String, func:Function, button:CoCButton=null,isCheat:Boolean = false):void
 		{
-			if (isCheat)
-			{
-				_cheatControlMethods.push(new BoundControlMethod(func, name, desc, _availableCheatControlMethods++));
+			var bcm:BoundControlMethod;
+			if (isCheat) {
+				bcm = new BoundControlMethod(func, name, desc, _availableCheatControlMethods++);
+				_cheatControlMethods.push(bcm);
+			} else {
+				bcm = new BoundControlMethod(func, name, desc, _availableControlMethods++);
+				_controlMethods[name] = bcm;
 			}
-			else
-			{
-				_controlMethods[name] = new BoundControlMethod(func, name, desc, _availableControlMethods++);
-			}
+			if (button) bcm.button = button;
 		}
 		
 		/**
@@ -452,6 +445,20 @@
 			}
 			
 			return controls;
+		}
+		
+		public function set showHotkeys(display:Boolean):void {
+			for (var key:String in _controlMethods) {
+				(_controlMethods[key] as BoundControlMethod).showHotkeys = display;
+			}
+		}
+		
+		public function get showHotkeys():Boolean {
+			//noinspection LoopStatementThatDoesntLoopJS
+			for (var key:String in _controlMethods) {
+				return (_controlMethods[key] as BoundControlMethod).showHotkeys;
+			}
+			return false;
 		}
 	}
 	

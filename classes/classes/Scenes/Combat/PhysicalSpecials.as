@@ -1032,6 +1032,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You strike [themonster] vitals with your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
+		if (player.hasPerk(PerkLib.HistoryThief) || player.hasPerk(PerkLib.PastLifeThief)) SAMulti += 1;
 		if (player.weapon == weapons.ANGSTD1 || player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
@@ -2318,13 +2319,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.G_ROD) dmgAMP += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgAMP += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgAMP += 0.25;
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
 			dmgAMP += 0.1;
 			if (player.hasPerk(PerkLib.WispLieutenant)) dmgAMP += 0.2;
 			if (player.hasPerk(PerkLib.WispCaptain)) dmgAMP += 0.3;
 			if (player.hasPerk(PerkLib.WispMajor)) dmgAMP += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgAMP += 0.5;
 		}
+		if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) dmgAMP += (1 - combat.historyTacticianBonus());
 		return dmgAMP;
 	}
 	public function sendTemporalGolem1():void {
@@ -2702,13 +2704,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
 		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
-		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
 			dmgamp += 0.1;
 			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
 			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
 			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
 			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
 		}
+		if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) dmgamp += (1 - combat.historyTacticianBonus());
 		return dmgamp;
 	}
 
@@ -4219,7 +4222,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 			//Check weither its snakebite or apophis
 			var venomType:StatusEffectType = StatusEffects.NagaVenom;
-			if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
+			if (player.racialScore(Races.APOPHIS) >= 20) venomType = StatusEffects.ApophisVenom;
 			if(monster.hasStatusEffect(venomType))
 			{
 				monster.addStatusValue(venomType,2,2);
@@ -6486,4 +6489,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

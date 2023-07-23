@@ -76,7 +76,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			//Selecting has a 50% chance of displaying the following:
 			if (rand(2) == 0) {
 				outputText("You turn around and flee before she can get any closer.  After running for a few moments, you realize the spider-woman isn't trying to pursue you at all.  The last image you see of her is her looking down at the ground with an expression of incredible melancholy.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			//The other 50% will start combat and then immediately attempt to run.
 			else {
@@ -98,7 +98,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 					outputText("After you've both had your fill of talk, the spider-girl asks, \"<i>I-I w-was wondering if you'd do me a favor... I have certain... urges, and");
 					if (player.gender == 0) {
 						outputText(" o-oh never mind, you're genderless... crap.</i>\"  She blushes and lifts her abdomen, shooting a web into the trees that she uses to escape from the awkward situation.  You're left utterly alone, once again.");
-						doNext(camp.returnToCampUseOneHour);
+						endEncounter();
 						return;
 					}
 					outputText(" well, you're the first sane person I've had a chance to ask.  Oh fuck it, can I tie you up and fuck you? Please?</i>\"\n\n");
@@ -108,7 +108,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				//(OPTION 2 - GIFT)
 				else {
 					outputText("After you've both had your fill of talk, the spider-girl smiles and gives you a gentle hug.  She trills, \"<i>Thank you so much for talking to me!  It feels so good to actually... communicate with someone again.  I can't thank you enough, but here, take this.  Maybe it will help you on your journey.</i>\"\n\n");
-					inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+					inventory.takeItem(consumables.S_GOSSR, explorer.done);
 				}
 			}
 			//*Try to Talk - Aggressive Variant
@@ -136,7 +136,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 		{
 			clearOutput();
 			outputText("You tell the lusty spider-morph that you're not interested in having sex with her now, and though she looks crestfallen, she nods understandingly and zips up a line of webbing into the trees before the situation can become any more awkward.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -551,7 +551,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else outputText("You leave her there with her hands and feet completely restrained.  Sucks to be her.");
 			player.sexReward("vaginalFluids","Vaginal");
             if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
 			else cleanupAfterCombat();
 		}
 
@@ -618,7 +618,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			player.sexReward("vaginalFluids","Dick");
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
             if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
 			else cleanupAfterCombat();
 		}
 
@@ -690,7 +690,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			}
 			player.sexReward("vaginalFluids","Dick");
             if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
 			else cleanupAfterCombat();
 		}
 
@@ -703,7 +703,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 			outputText("You're left scratching your head when you realize they were your own children, birthed by the spider-morph you fucked not so long ago.\n\n");
 			pregnancy.knockUpForce(); //Clear Spidermorph pregnancy
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

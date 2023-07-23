@@ -83,8 +83,8 @@ public class PotentVenom extends Consumable {
 		}
 		//Face
 		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0) {
-      outputText("\n\n");
-      CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+			outputText("\n\n");
+			CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
 			changes++;
 		}
 		//NeckMaxilipeds

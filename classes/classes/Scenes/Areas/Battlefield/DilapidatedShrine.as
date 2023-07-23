@@ -57,7 +57,7 @@ public class DilapidatedShrine extends BaseContent
 			//addButtonDisabled(8, "East", "???");//life god subshrine
 			//addButtonDisabled(10, "Crypt", "???");//heavenly kings resting place
 			addButton(12, "South", southSection);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 		
 		private function shinshoku():Boolean {

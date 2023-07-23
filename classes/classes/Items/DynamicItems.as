@@ -306,7 +306,7 @@ public class DynamicItems extends ItemConstants {
 		// If quality > 0, add 20%*quality
 		// If quality < 0, subtract 10%*quality but no less than 50%
 		var valueMul:Number = 1.0;
-		value *= Rarities[rarity].value;
+		value *= Rarities[rarity].valueMul;
 		if (quality > 0) valueMul *= quality * 0.2;
 		if (quality < 0) valueMul *= Math.max(0.5, quality * 0.1);
 		

@@ -98,7 +98,7 @@ public class Yeti extends Monster
 				this.armorMDef = 50;
 				this.bonusHP = 1500;
 				this.bonusLust = 117;
-				this.level = 37;
+				this.level = 32;
 				this.gems = 36 + rand(20);
 			}
 			else {

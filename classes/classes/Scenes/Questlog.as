@@ -2,33 +2,51 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.AbstractQuest;
 import classes.StatusEffects;
 
 public class Questlog extends BaseContent
 	{
 		
-		public function Questlog() 
+		public function Questlog()
 		{}
+		
+		public function printQuest(quest:AbstractQuest):void {
+			if (!quest.isKnown) {
+				var hint:String = quest.hintToUnlock;
+				outputText("<b>???</b>");
+				if (hint) outputText(" <i>("+hint+")</i>");
+				outputText("\n");
+			} else {
+				outputText("<b>"+quest.title+" ("+quest.statusName(true)+")</b>: ");
+				outputText(quest.description);
+				if (quest.objectives().length > 0) {
+					outputText("<ul><li>" +
+							quest.formattedObjectives(true).join("</li><li>") +
+							"</li></ul>"
+					);
+				} else {
+					outputText("\n");
+				}
+			}
+		}
+		public function printQuestGroup(group:String):void {
+			for each(var quest:AbstractQuest in questLib.allQuests(group)) {
+				printQuest(quest);
+			}
+		}
 		
 		public function accessQuestlogMainMenu():void {
 			clearOutput();
-			outputText("List of all not-started, not yet completed and completed quests. After finishing each of them PC could pick reward but... <i>You only need to click once fool</i>\n");
-			outputText("\n<u><b>Main Quests</b></u>");
-			outputText("\n<b>Shut Down Everything:</b> ");
-			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] == 2) outputText("Completed (Reward taken)");
-			else if (SceneLib.dungeons.checkFactoryClear()) outputText("Completed");
-			else if (flags[kFLAGS.FACTORY_FOUND] > 0) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<b>You're in Deep:</b> ");
-			if (flags[kFLAGS.DEFEATED_ZETAZ] > 1) outputText("Completed (Reward taken)");
-			else if (SceneLib.dungeons.checkDeepCaveClear()) outputText("Completed");
-			else if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<b>Chimera Squad:</b> ");
+			outputText("List of all not-started, not yet completed and completed quests. After finishing each of them PC could pick reward but... <i>You only need to click once fool</i>");
+			
+			outputText("\n\n<u><b>Main Quests</b></u>\n");
+			printQuestGroup(QuestLib.QGRP_MAIN);
+			outputText("<b>Chimera Squad:</b> ");
 			if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 1) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkDemonLaboratoryClear()) outputText("Completed");
 			else if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 1) outputText("In Progress");
@@ -38,7 +56,9 @@ public class Questlog extends BaseContent
 			else if (SceneLib.dungeons.checkLethiceStrongholdClear()) outputText("Completed");
 			else if (flags[kFLAGS.D3_DISCOVERED] > 0) outputText("In Progress (to complete this quest PC must beat either Basilisk Boss or Mirror Demon)");
 			else outputText("Not Started");
-			outputText("\n\n<u><b>Side Quests</b></u>");
+			
+			outputText("\n\n<u><b>Side Quests</b></u>\n");
+			printQuestGroup(QuestLib.QGRP_SIDE);
 			outputText("\n<b>Friend of the Sand Witches:</b> ");
 			if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 2) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkSandCaveClear()) outputText("Completed");
@@ -68,6 +88,7 @@ public class Questlog extends BaseContent
 			else if (SceneLib.dungeons.checkDenOfDesireClear()) outputText("Completed");
 			else if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 1) outputText("In Progress");
 			else outputText("Not Started");
+			
 			outputText("\n\n<u><b>River Dungeon Exploration</b></u>");
 			outputText("\n<b>1st Floor:</b> ");
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear()) {
@@ -87,41 +108,22 @@ public class Questlog extends BaseContent
 				else outputText("Completed");
 			}
 			else outputText("Not Started/In Progress");
-			outputText("\n<i><b>4th Floor:</b> Soon</i>");
-			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
-			outputText("\n<b>Imps Hunt:</b> ");
-			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
-			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 3 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 6) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<b>Demons Hunt:</b> ");
-			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
-			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 6) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<b>Minotaurs Hunt:</b> ");
-			if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
-			else if (player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 1 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 3 || player.statusEffectv3(StatusEffects.AdventureGuildQuests1) == 6) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<b>Feral Imps Hunt:</b> ");
-			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 4 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 7) outputText("Completed (for today)");
-			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 6) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<b>Feral Tentacle Beasts Hunt:</b> ");
-			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 7) outputText("Completed (for today)");
-			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3 || player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<i><b>Feral Demons Hunt:</b> Soon</i>");
-			outputText("\n<b>Green Gel Gathering:</b> ");
-			if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 2 || player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 5) outputText("Completed (for today)");
-			else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 1 || player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 4) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<b>Black Chitin Gathering:</b> ");
-			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 5) outputText("Completed (for today)");
-			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 4) outputText("In Progress");
-			else outputText("Not Started");
-			outputText("\n<i><b>Spider-silk Gathering:</b> Very Soon</i>");
-			//outputText("\n<i><b>Dragonscale Gathering:</b> Soon</i>");
-			outputText("\n<i><b>Ebonbloom Gathering:</b> Soon</i>");
-			//outputText("\n<i><b>World Tree Branch Gathering:</b> Soon</i>");
+			outputText("\n<b>4th Floor:</b> ");
+			if (SceneLib.dungeons.checkRiverDungeon4thFloorClear()) {
+				if (player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 3) outputText("Completed (Reward taken)");
+				else outputText("Completed");
+			}
+			else outputText("Not Started/In Progress");
+			outputText("\n<i><b>5th Floor:</b> Soon</i>");
+
+			outputText("\n\n<u><b>Adventure Guild Quests</b></u>\n");
+			printQuestGroup(QuestLib.QGRP_AGUILD);
+			outputText("<i><b>Feral Demons Hunt:</b> Soon</i>\n");
+			outputText("<i><b>Spider-silk Gathering:</b> Very Soon</i>\n");
+			//outputText("<i><b>Dragonscale Gathering:</b> Soon</i>\n");
+			outputText("<i><b>Ebonbloom Gathering:</b> Soon</i>\n");
+			//outputText("<i><b>World Tree Branch Gathering:</b> Soon</i>\n");
+			
 			outputText("\n\n<u><b>Twilight of the Gods</b></u>");
 			outputText("\n<b>Feral Imps Capture:</b> ");
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 0.5) outputText("Completed");
@@ -131,9 +133,13 @@ public class Questlog extends BaseContent
 			outputText("\n<i><b>Feral Tentacle Beasts Capture:</b> Very Soon</i>");
 			/*if () outputText("\n\n<u><b>The New Dawn</b></u>");
 			else outputText("\n<b>???</b>");*/
+			
+			outputText("\n\n<u><b>Other Quests</b></u>\n");
+			printQuestGroup(QuestLib.QGRP_OTHER);
+			
 			menu();
-			if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] < 2) addButton(0, "Factory", takeRewardForFactory);
-			if (SceneLib.dungeons.checkDeepCaveClear() && flags[kFLAGS.DEFEATED_ZETAZ] < 2) addButton(1, "Deep Cave", takeRewardForDeepCave);
+			if (questLib.MQ_Factory.factoryCleared && !questLib.MQ_Factory.perkRewardTaken) addButton(0, "Factory", takeRewardForFactory);
+			if (questLib.MQ_Zetaz.dungeonCleared && !questLib.MQ_Zetaz.perkRewardTaken) addButton(1, "Deep Cave", takeRewardForDeepCave);
 			if (SceneLib.dungeons.checkDemonLaboratoryClear() && flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] < 2) addButton(2, "Demon Laboratory", takeRewardForDemonLaboratory);
 			//button 4 - ?Demon Mine?
 			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(3, "Stronghold", takeRewardForStronghold);
@@ -142,11 +148,11 @@ public class Questlog extends BaseContent
 			if (SceneLib.dungeons.checkBeeHiveClear() && flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 3) addButton(7, "Bee Hive", takeRewardForBeeHive);
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor reward");
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) {
+				if (SceneLib.dungeons.checkRiverDungeon4thFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 3) addButton(8, "River Dungeon", takeRewardForRiverDungeon4thFloor).hint("4th floor reward");
 				if (SceneLib.dungeons.checkRiverDungeon3rdFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 2) addButton(8, "River Dungeon", takeRewardForRiverDungeon3rdFloor).hint("3rd floor reward");
 				if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) == 1) addButton(8, "River Dungeon", takeRewardForRiverDungeon2ndFloor).hint("2nd floor reward");
 			}
-			//3rd floor
-			//4th floor
+			//5th floor
             if (flags[kFLAGS.EBON_LABYRINTH])
                 addButtonIfTrue(9, "Ebon Labyrinth", takeRewardForEL,
                     "Req. to reach room " + SceneLib.dungeons.nextAwardEL() + ".",
@@ -219,6 +225,10 @@ public class Questlog extends BaseContent
             reward(1, 5);
 		}
 		public function takeRewardForRiverDungeon3rdFloor():void {
+			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
+            reward(1, 5);
+		}
+		public function takeRewardForRiverDungeon4thFloor():void {
 			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
             reward(1, 5);
 		}

@@ -2452,12 +2452,12 @@ public static const FOUND_TEMPLE_OF_THE_DIVINE:int                              
 public static const SAPPHIRE_AFFECTION:int                           		        = 2444;
 public static const SAPPHIRE_TALKS:int                       			            = 2445;
 public static const WEDDINGS_UNLOCKED:int                                   		= 2446; //SAPPHIRE_SEX before, now removed and replaced.
-public static const UNKNOWN_FLAG_NUMBER_02447:int                                   = 2447;							//Not Yet Used Flag
-public static const ONYX_PATH:int                                   				= 2448;//slave or free
+public static const UNKNOWN_FLAG_NUMBER_02447:int                                   = 2447;	//Not Yet Used Flag
+public static const ONYX_PATH:int                                   				= 2448;	//slave or free
 public static const UNKNOWN_FLAG_NUMBER_02449:int                                   = 2449;
 public static const ONYX_GENDER:int                                   				= 2450;
-public static const ONYX_02451:int                                                  = 2451;								//Not Yet Used Flag
-public static const NAGA_OR_GORGON:int                     			                = 2452;
+public static const ONYX_02451:int                                                  = 2451; //Not Yet Used Flag
+public static const RED_OOZE_SUBTYPE:int                     			            = 2452;
 public static const SOULFORCE_STORED_IN_AYO_ARMOR:int           			        = 2453;
 public static const ANEMONE_OR_SEA_ANEMONE:int                                      = 2454;
 public static const SKY_POISON_PEARL:int                         		            = 2455;
@@ -2466,10 +2466,10 @@ public static const MULTISHOT_STYLE:int                     	                   
 public static const ARROWS_ACCURACY:int            			                        = 2458;
 public static const PRISON_STORAGE_WEAPON_RANGE:int                                 = 2459;
 public static const ELEMENTAL_ARROWS:int                                 		    = 2460;
-public static const SOUL_SENSE_TAMANI:int                  		                    = 2461;
-public static const SOUL_SENSE_TAMANI_DAUGHTERS:int                                 = 2462;
-public static const SOUL_SENSE_KITSUNE_MANSION:int                                  = 2463;
-public static const SOUL_SENSE_IZUMI:int                    		                = 2464;
+public static const SOUL_SENSE_TAMANI:int                  		                    = 2461; // No longer used
+public static const SOUL_SENSE_TAMANI_DAUGHTERS:int                                 = 2462; // No longer used
+public static const SOUL_SENSE_KITSUNE_MANSION:int                                  = 2463; // No longer used
+public static const SOUL_SENSE_IZUMI:int                    		                = 2464; // No longer used
 public static const ARIAN_SCALES:int                            			        = 2465;
 public static const SEXUAL_FLUIDS_LEVEL:int                            		        = 2466;
 public static const HIDDEN_CAVE_FOUND:int          		                            = 2467;
@@ -2492,8 +2492,8 @@ public static const AUTO_CAST_CHARGE_ARMOR_DISABLED:int                         
 public static const AUTO_CAST_MIGHT_DISABLED:int                               		= 2484;
 public static const AUTO_CAST_BLINK_DISABLED:int                                	= 2485;
 public static const SOUL_SENSE_WORLD_TREE:int             	     	                = 2486;
-public static const SOUL_SENSE_GIACOMO:int                                   		= 2487;
-public static const SOUL_SENSE_PRISCILLA:int                                   		= 2488;
+public static const SOUL_SENSE_GIACOMO:int                                   		= 2487; // No longer used
+public static const SOUL_SENSE_PRISCILLA:int                                   		= 2488; // No longer used
 public static const SOUL_SENSE_2489:int                                             = 2489;			//Not Yet Used Flag
 public static const KITSUNE_SHRINE_UNLOCKED:int               	                    = 2490;
 public static const VENOM_TIMES_USED:int                	                        = 2491;
@@ -2567,7 +2567,7 @@ public static const TEMPLE_OF_THE_DIVINE_FERA:int                               
 public static const GOLEMANCER_PERM_GOLEMS:int	                                    = 2559;
 public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                            = 2560;
 public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
-public static const SOUL_SENSE_ANTHILL:int                         					= 2562;
+public static const SOUL_SENSE_ANTHILL:int                         					= 2562; // No longer used
 public static const FISHES_STORED_AT_FISHERY:int                         			= 2563;
 public static const PATCHOULI_FOLLOWER:int                         					= 2564;
 public static const PATCHOULI_GIRL_OR_MORPH:int                                   	= 2565;
@@ -2762,7 +2762,7 @@ public static const ASURA_FORM_COMBAT_MODE:int                                  
 public static const CRINOS_SHAPE_COMBAT_MODE:int                                   	= 2754;
 public static const WARRIORS_RAGE_COMBAT_MODE:int                                   = 2755;
 public static const MET_YETI_AS_A_GIRL_FIRST_TIME:int                               = 2756;
-public static const UNKNOWN_FLAG_NUMBER_02757:int                                   = 2757;
+public static const DARK_OR_LIGHT_ELF_SUBTYPE:int                                   = 2757;
 public static const TIMES_MINO_MUTUAL:int                                   		= 2758;
 public static const MET_FORGEFATHER:int                                             = 2759; //Met ForgeFather out in Volcanic Crag
 public static const FORGEFATHER_MOVED_TO_TEMPLE:int                                 = 2760; //ForgeFather has moved into Temple of The Divine
@@ -2775,7 +2775,7 @@ public static const PABLO_GOT_DICKED_VAGINALLY:int                              
 public static const PABLO_USED_YOUR_PUSSY:int                                   	= 2767;
 public static const PABLO_USED_YOUR_ASS:int                                   		= 2768;
 public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2769;
-public static const UNKNOWN_FLAG_NUMBER_02770:int                                   = 2770;
+public static const WEREWOLF_PACK_PITY_SYSTEM:int                                   = 2770;
 public static const UNKNOWN_FLAG_NUMBER_02771:int                                   = 2771;
 public static const UNKNOWN_FLAG_NUMBER_02772:int                                   = 2772;
 public static const UNKNOWN_FLAG_NUMBER_02773:int                                   = 2773;
@@ -2806,7 +2806,7 @@ public static const DISCOVERED_INNER_DESERT:int                                 
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene
-public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801;
+public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801; // No longer used
 public static const E_ICHOR_PITY_SYSTEM:int                                   		= 2802;
 public static const NECROMANCER_SKELETONS:int                                   	= 2803;
 public static const IN_COMBAT_PLAYER_SKELETONS_ATTACKED:int                         = 2804;
@@ -2951,7 +2951,7 @@ public static const UNKNOWN_FLAG_NUMBER_02942:int                               
 public static const UNKNOWN_FLAG_NUMBER_02943:int                                   = 2943;
 public static const UNKNOWN_FLAG_NUMBER_02944:int                                   = 2944;
 public static const UNKNOWN_FLAG_NUMBER_02945:int                                   = 2945;
-public static const UNKNOWN_FLAG_NUMBER_02946:int                                   = 2946;
+public static const BUTTON_ICONS_DISABLED:int                                       = 2946;
 public static const COMBAT_TEASE_HEALING:int                                        = 2947;
 public static const USSDISPLAY_STYLE:int                                  			= 2948;
 public static const RACESORT_SETTING:int		                                    = 2949;
@@ -3016,3 +3016,4 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 ];
 	}
 }
+

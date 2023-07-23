@@ -4,7 +4,7 @@ import classes.BodyParts.*;
 import classes.lists.BreastCup;
 
 public class NekobakeInn extends BaseContent implements TimeAwareInterface {
-		
+	
 	public function NekobakeInn() {
 		EventParser.timeAwareClassAdd(this);
 	}
@@ -31,7 +31,7 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 	private function avoidTheInn():void {
 		clearOutput();
 		outputText("Yeah, no. This place looks like a trap, smells like a trap and is probably a trap. Better move away from here as fast as possible. On this, you head back to camp.[pg]");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function enterTheInn():void {
@@ -49,7 +49,7 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		clearOutput();
 		outputText("A little unsure about your initial choice, you decide it would be wise not to linger and say you just wanted in to see what's inside and will be on your way. The ladies in yukata sigh in a united disappointment but bid you a good day as you leave, requesting you to come back soon.[pg]");
 
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function transform():void {
@@ -175,6 +175,7 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		}
 		player.dynStats("cor", 20, "spe", 5, "tou", 5, "lib", 5);
 
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseFourHours);
 	}
 

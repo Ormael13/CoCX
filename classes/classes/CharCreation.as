@@ -88,7 +88,10 @@ import coc.view.MainView;
 		*/
 
 		public function newGameGo():void {
-			EventParser.badEnded = false; //reset bad end if we're going from it
+			if (EventParser.badEnded) {
+				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
+				EventParser.badEnded = false;
+			}
 			XXCNPC.unloadSavedNPCs();
 			CoC.instance.saves.resetSaveableStates();
 			mainView.eventTestInput.x = -10207.5;
@@ -1455,39 +1458,46 @@ import coc.view.MainView;
 			}
 			outputText("Before you became a champion, you had other plans for your life.  What were you doing before?");
 			menu();
-			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) addButton(0, "Alchemy", confirmHistory, PerkLib.HistoryAlchemist);
+			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) addButton(0, "Alchemy", confirmHistory1, PerkLib.HistoryAlchemist);
 			else addButtonDisabled(0, "Alchemy", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeCultivator)) addButton(1, "Cultivator", confirmHistory, PerkLib.HistoryCultivator);
+			if (!player.hasPerk(PerkLib.PastLifeCultivator)) addButton(1, "Cultivator", confirmHistory1, PerkLib.HistoryCultivator);
 			else addButtonDisabled(1, "Cultivator", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeFighter)) addButton(2, "Fighting", confirmHistory, PerkLib.HistoryFighter);
-			else addButtonDisabled(2, "Fighting", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeFortune)) addButton(3, "Fortune", confirmHistory, PerkLib.HistoryFortune);
-			else addButtonDisabled(3, "Fortune", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeHealer)) addButton(4, "Healing", confirmHistory, PerkLib.HistoryHealer);
-			else addButtonDisabled(4, "Healing", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeReligious)) addButton(5, "Religion", confirmHistory, PerkLib.HistoryReligious);
-			else addButtonDisabled(5, "Religion", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeScholar)) addButton(6, "Schooling", confirmHistory, PerkLib.HistoryScholar);
-			else addButtonDisabled(6, "Schooling", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeScout)) addButton(7, "Scout", confirmHistory, PerkLib.HistoryScout);
-			else addButtonDisabled(7, "Scout", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeSlacker)) addButton(8, "Slacking", confirmHistory, PerkLib.HistorySlacker);
-			else addButtonDisabled(8, "Slacking", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeSlut)) addButton(9, "Slutting", confirmHistory, PerkLib.HistorySlut);
-			else addButtonDisabled(9, "Slutting", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeSmith)) addButton(10, "Smithing", confirmHistory, PerkLib.HistorySmith);
-			else addButtonDisabled(10, "Smithing", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeTactician)) addButton(11, "Tactician", confirmHistory, PerkLib.HistoryTactician);
-			else addButtonDisabled(11, "Tactician", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeWhore)) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
-			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
-			if (!player.hasPerk(PerkLib.PastLifeFeral)) addButton(13, "Feral", confirmHistory, PerkLib.HistoryFeral);
-			else addButtonDisabled(13, "Feral", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeFeral)) addButton(2, "Feral", confirmHistory1, PerkLib.HistoryFeral);
+			else addButtonDisabled(2, "Feral", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeFighter)) addButton(3, "Fighting", confirmHistory1, PerkLib.HistoryFighter);
+			else addButtonDisabled(3, "Fighting", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeFortune)) addButton(4, "Fortune", confirmHistory1, PerkLib.HistoryFortune);
+			else addButtonDisabled(4, "Fortune", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeHealer)) addButton(5, "Healing", confirmHistory1, PerkLib.HistoryHealer);
+			else addButtonDisabled(5, "Healing", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeReligious)) addButton(6, "Religion", confirmHistory1, PerkLib.HistoryReligious);
+			else addButtonDisabled(6, "Religion", "You already have this History as one of your Past Lives!");
+			addButton(13, "-2-", chooseHistory1);
 			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
-
+		}
+		public function chooseHistory1():void {
+			menu();
+			if (!player.hasPerk(PerkLib.PastLifeScholar)) addButton(0, "Schooling", confirmHistory2, PerkLib.HistoryScholar);
+			else addButtonDisabled(0, "Schooling", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeScout)) addButton(1, "Scout", confirmHistory2, PerkLib.HistoryScout);
+			else addButtonDisabled(1, "Scout", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeSlacker)) addButton(2, "Slacking", confirmHistory2, PerkLib.HistorySlacker);
+			else addButtonDisabled(2, "Slacking", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeSlut)) addButton(3, "Slutting", confirmHistory2, PerkLib.HistorySlut);
+			else addButtonDisabled(3, "Slutting", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeSmith)) addButton(4, "Smithing", confirmHistory2, PerkLib.HistorySmith);
+			else addButtonDisabled(4, "Smithing", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeTactician)) addButton(5, "Tactician", confirmHistory2, PerkLib.HistoryTactician);
+			else addButtonDisabled(5, "Tactician", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeThief)) addButton(6, "Thief", confirmHistory2, PerkLib.HistoryThief);
+			else addButtonDisabled(6, "Thief", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeWhore)) addButton(7, "Whoring", confirmHistory2, PerkLib.HistoryWhore);
+			else addButtonDisabled(7, "Whoring", "You already have this History as one of your Past Lives!");
+			addButton(13, "-1-", chooseHistory);
+			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
 		}
 
-		private function confirmHistory(choice:PerkType):void {
+		private function confirmHistory1(choice:PerkType):void {
 			clearOutput();
 			switch (choice) {
 				case PerkLib.HistoryAlchemist:
@@ -1496,11 +1506,14 @@ import coc.view.MainView;
 				case PerkLib.HistoryCultivator:
 					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Soul Cultivator perk & Cultivation Manual: Duality. Your max soulforce will be roughly 10% higher. Is this your history?");
 					break;
+				case PerkLib.HistoryFeral:
+					outputText("You were abandoned as a child in the wild. Adopted into a pack of wolves, you quickly learned to survive. You will start with Job: Beast Warrior perk.  Is this your history?");
+					break;
 				case PerkLib.HistoryFighter:
 					outputText("You spent much of your time fighting other children, and you had plans to find work as a guard when you grew up.  You do 10% more damage with physical melee attacks.  You will also start out with 50 gems and Job: Warrior perk.  Is this your history?");
 					break;
 				case PerkLib.HistoryFortune:
-					outputText("You always feel lucky when it comes to fortune.  Because of that, you have always managed to save up gems until whatever's needed and made the most out it (+15% gems on victory).  You will also start out with 250 gems.  Is this your history?");
+					outputText("You always feel lucky when it comes to fortune.  Because of that, you have always managed to save up gems until whatever's needed and made the most out it (+15% gems on victory).  You will also start out with 250 gems and Job: Rogue perk.  Is this your history?");
 					break;
 				case PerkLib.HistoryHealer:
 					outputText("You often spent your free time with the village healer, learning how to tend to wounds.  Healing items and effects are 20% more effective.  Is this your history?");
@@ -1508,6 +1521,16 @@ import coc.view.MainView;
 				case PerkLib.HistoryReligious:
 					outputText("You spent a lot of time at the village temple, and learned how to meditate.  The 'masturbation' option is replaced with 'meditate' when corruption is at or below 66.  Is this your history?");
 					break;
+				default:
+					outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  You will start with Job: Seducer perk.  Is this your history?");
+			}
+			menu();
+			addButton(0, "Yes", setHistory, choice);
+			addButton(1, "No", chooseHistory);
+		}
+		private function confirmHistory2(choice:PerkType):void {
+			clearOutput();
+			switch (choice) {
 				case PerkLib.HistoryScholar:
 					outputText("You spent much of your time in school, and even begged the richest man in town, Mr. " + (silly() ? "Savin" : "Sellet") + ", to let you read some of his books.  You are much better at focusing, your mana cap increased by 10%, start out with 150 gems and will start with Job: Sorcerer perk.  Is this your history?");
 					break;
@@ -1526,15 +1549,18 @@ import coc.view.MainView;
 				case PerkLib.HistoryTactician:
 					outputText("You were being groomed to take over the elderly chief's position until you were chosen as the Champion.  You will start with Job: Leader perk.  Is this your history?");
 					break;
-				case PerkLib.HistoryFeral:
-					outputText("You were abandoned as a child in the wild. Adopted into a pack of wolves, you quickly learned to survive. You will start with Job: Beast Warrior perk.  Is this your history?");
+				case PerkLib.HistoryThief:
+					outputText("You spent much of your time in the lesser streets of Ignam, learning from your friends and peers how to steal and hide from guards to survive.  You sneak attack is better (+1 to sneak attack dmg multi) and will start with Job: Rogue perk.  Is this your history?");
+					break;
+				case PerkLib.HistoryWhore:
+					outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  You will start with Job: Seducer perk.  Is this your history?");
 					break;
 				default:
 					outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  You will start with Job: Seducer perk.  Is this your history?");
 			}
 			menu();
 			addButton(0, "Yes", setHistory, choice);
-			addButton(1, "No", chooseHistory);
+			addButton(1, "No", chooseHistory1);
 		}
 
 		private function setHistory(choice:PerkType):void {
@@ -1803,26 +1829,28 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.HistoryFeral) || (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryFighter) || (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScout) || (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScholar) || (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistorySmith) || (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryTactician) || (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryThief) || (player.hasPerk(PerkLib.PastLifeThief) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRogue, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryWhore) || (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
-			if (player.hasPerk(PerkLib.HistoryFeral) || (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryAlchemist)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryHealer)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryReligious)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlacker)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlut)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeThief) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeAlchemist)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeHealer)) player.perkPoints += 1;
@@ -2469,6 +2497,11 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.PastLifeCultivator,0,0,0,1);
 				historyTopastlife2();
 			}
+			else if (player.hasPerk(PerkLib.HistoryFeral)) {
+				player.removePerk(PerkLib.HistoryFeral);
+				player.createPerk(PerkLib.PastLifeFeral,0,0,0,1);
+				historyTopastlife2();
+			}
 			else if (player.hasPerk(PerkLib.HistoryFighter)) {
 				player.removePerk(PerkLib.HistoryFighter);
 				player.createPerk(PerkLib.PastLifeFighter,0,0,0,1);
@@ -2519,14 +2552,14 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.PastLifeTactician,0,0,0,1);
 				historyTopastlife2();
 			}
+			else if (player.hasPerk(PerkLib.HistoryThief)) {
+				player.removePerk(PerkLib.HistoryThief);
+				player.createPerk(PerkLib.PastLifeThief,0,0,0,1);
+				historyTopastlife2();
+			}
 			else if (player.hasPerk(PerkLib.HistoryWhore)) {
 				player.removePerk(PerkLib.HistoryWhore);
 				player.createPerk(PerkLib.PastLifeWhore,0,0,0,1);
-				historyTopastlife2();
-			}
-			else if (player.hasPerk(PerkLib.HistoryFeral)) {
-				player.removePerk(PerkLib.HistoryFeral);
-				player.createPerk(PerkLib.PastLifeFeral,0,0,0,1);
 				historyTopastlife2();
 			}
 			else {

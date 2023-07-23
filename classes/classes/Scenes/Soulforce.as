@@ -771,28 +771,8 @@ public class Soulforce extends BaseContent
 		outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 		menu();
 		var btn:int = 0;
-		if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3)
-			addSSButton(btn++, "Giacomo", SceneLib.giacomoShop.giacomoEncounter, 100);
-		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3 && player.hasCock() || !player.hasKeyItem("Deluxe Dildo"))
-			addSSButton(btn++, "Tamani", tamaniScene.encounterTamani, 80);
-		if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3)
-			addSSButton(btn++, "Tamani D.", tamaniDaughtersScene.encounterTamanisDaughters, soulforceForDaughters())
-				.disableIf(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] < 16, "Req. to have 16+ daughters with Tamani.")
-				.disableIf(!player.hasCock(), "Req. to have a cock.");
-		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3)
-			addSSButton(btn++, "Priscilla", SceneLib.priscillaScene.goblinElderEncounter, 320);
-		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3)
-			addSSButton(btn++, "KitsuMansion", SceneLib.kitsuneScene.enterTheTrickster, 90);
-		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3)
-			addSSButton(btn++, "Izumi", izumiScenes.encounter, 300);
-		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3)
-			addSSButton(btn++, "Mino Sons", minotaurSonsScene.meetMinotaurSons, soulforceForSons())
-				.disableIf(flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 3, "Req. to have 3+ minotaur sons.")
-				.disableIf(!player.hasVagina(), "Req. to have a vagina.");
 		if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1)
 			addSSButton(btn++, "WorldTree", worldtreeScene.YggdrasilDiscovery, 100);
-		if (flags[kFLAGS.SOUL_SENSE_ANTHILL] >= 1 && !flags[kFLAGS.ANT_WAIFU])
-			addSSButton(btn++, "Ant Colony", SceneLib.desert.antsScene.antColonyChallenge, 200);
 		//button 11
 		addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 		addButton(14, "Back", accessSoulforceMenu);
@@ -862,7 +842,6 @@ public class Soulforce extends BaseContent
 		else SceneLib.tyrantia.firstEncounter();
 	}
 	public function tigerSharkGal():void {
-		player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 		SceneLib.izmaScene.meetIzmaAtLake();
 	}
 	public function shyHealer():void {
@@ -870,7 +849,6 @@ public class Soulforce extends BaseContent
 		else SceneLib.dianaScene.repeatEnc();
 	}
 	public function germanCow():void {
-		player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 		SceneLib.isabellaScene.isabellaGreeting();
 	}
 	public function sneakOnThePlane():void {

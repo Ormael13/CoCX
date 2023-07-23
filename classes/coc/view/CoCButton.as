@@ -11,6 +11,8 @@ package coc.view {
  keyboard events.
  ****/
 
+import classes.CoC;
+import classes.GameSettings;
 import classes.ItemSlotClass;
 import classes.ItemType;
 import classes.Parser.Parser;
@@ -29,7 +31,29 @@ public class CoCButton extends Block {
 			fontName='ShrewsburyTitlingBold',
 			embedAsCFF='false')]
 	private static const ButtonLabelFont:Class;
+
+	[Embed(source="../../../res/ui/buttonBackground.png")]
+	private static const ButtonBackgroundImage:Class;
+
+	[Embed(source="../../../res/ui/buttonBorder.png")]
+	private static const ButtonBorderImage:Class;
+	
+	private static const BACKGROUND_SIZE:int = 256;
+	public static const ButtonBorder:BorderImage = new BorderImage((new ButtonBorderImage() as Bitmap).bitmapData, 8, 8, 8, 8);
+	
 	public static const ButtonLabelFontName:String = (new ButtonLabelFont() as Font).fontName;
+	public static const ButtonKeyFontName:String = 'Arial';
+	public static const ButtonKeyFontColor:* = "#ffffff";
+	public static const ButtonKeyShadowColor:* = "#000000";
+	public static const ButtonKeyFontSize:int = 10;
+	public static const IconQuantityFormat:Object = {
+		font: 'Arial',
+		size: 10,
+		bold: true,
+		align: 'right'
+	};
+	public static const IconQuantityColor:String = "#ffff00";
+	public static const IconQuantityShadow:String = "#000000";
 	
 	/**
 	 * function(error:Error, button:CoCButton):void
@@ -39,21 +63,23 @@ public class CoCButton extends Block {
 	public static const MAX_FONT_SIZE:int = 18;
 	public static const MIN_FONT_SIZE:int = 12;
 	
-	public static const BTN_PADDING:int = 4;
 	public static const ICON_WIDTH:int = 32;
 	public static const ICON_HEIGHT:int = 32;
 	private static const BTN_W:int = MainView.BTN_W;
 	private static const BTN_H:int = MainView.BTN_H;
-	private static const ICON_Y:int = BTN_PADDING;
-	private static const ICON_X:int = BTN_PADDING;
-	private static const LABEL_NOICON_X:int = BTN_PADDING;
-	private static const LABEL_NOICON_WIDTH:int = BTN_W - BTN_PADDING - LABEL_NOICON_X;
+	private static const ICON_Y:int = 4;
+	private static const ICON_X:int = 4;
+	private static const LABEL_NOICON_X:int = 0;
 	private static const LABEL_ICON_X:int = ICON_X + ICON_WIDTH;
-	private static const LABEL_ICON_WIDTH:int = BTN_W - BTN_PADDING - LABEL_ICON_X;
+	private static const LABEL_RIGHT:int = 2;
 	private static const LABEL_Y:int = 8; // works for default font size
 	
 
 	private var _labelField:TextField,
+				_key1label:TextField,
+				_key2label:TextField,
+				_iconQuantityLabel:TextField,
+				_cornerLabel:TextField,
 				_iconGraphic:BitmapDataSprite,
 				_backgroundGraphic:BitmapDataSprite,
 				_enabled:Boolean      = true,
@@ -69,22 +95,25 @@ public class CoCButton extends Block {
 		 */
 	public function CoCButton(options:Object = null):void {
 		super();
+		const width:Number =
+					  (options && 'square' in options) ? BTN_H :
+					  (options && 'width' in options) ? options['width'] : BTN_W;
+		const height:Number = BTN_H;
+		this.width = width;
+		this.height = height;
 		_backgroundGraphic = addBitmapDataSprite({
-			stretch: true,
-			width  : BTN_W,
-			height : BTN_H
-		});
-		_iconGraphic = addBitmapDataSprite({
-			stretch: true,
-			smooth: false,
-			visible: false,
-			x: ICON_X,
-			y: ICON_Y,
-			width: ICON_WIDTH,
-			height: ICON_HEIGHT
+			width  : width,
+			height : BTN_H,
+			bitmapX: Math.max(0, Math.random()*(BACKGROUND_SIZE-width))|0,
+			bitmapY: Math.max(0, Math.random()*(BACKGROUND_SIZE-height))|0,
+			bitmapClass: ButtonBackgroundImage,
+			stretch: false,
+			crop: true,
+			repeat: true,
+			borderImage: ButtonBorder
 		});
 		_labelField        = addTextField({
-			width            : LABEL_NOICON_WIDTH,
+			width            : width - LABEL_RIGHT - LABEL_NOICON_X,
 			embedFonts       : true,
 			x                : LABEL_NOICON_X,
 			y                : LABEL_Y,
@@ -104,22 +133,118 @@ public class CoCButton extends Block {
 		this.addEventListener(MouseEvent.ROLL_OVER, this.hover);
 		this.addEventListener(MouseEvent.ROLL_OUT, this.dim);
 		this.addEventListener(MouseEvent.CLICK, this.click);
+		this.resize();
 	}
-
+	private function iconElement():BitmapDataSprite {
+		if (_iconGraphic) return _iconGraphic;
+		_iconGraphic = addElementBelow(new BitmapDataSprite({
+			stretch: true,
+			smooth: false,
+			visible: false,
+			x: ICON_X,
+			y: ICON_Y,
+			width: ICON_WIDTH,
+			height: ICON_HEIGHT
+		}), _labelField) as BitmapDataSprite;
+		return _iconGraphic;
+	}
+	private function iconQuantityElement():TextField {
+		if (_iconQuantityLabel) return _iconQuantityLabel;
+		_iconQuantityLabel = addElementAbove(UIUtils.newTextField({
+			x: ICON_X,
+			y: ICON_Y + (ICON_HEIGHT/2),
+			width: ICON_WIDTH,
+			height: ICON_HEIGHT/2,
+			textColor: IconQuantityColor,
+			defaultTextFormat: IconQuantityFormat
+		}), iconElement()) as TextField;
+		_iconQuantityLabel.filters = [UIUtils.outlineFilter(IconQuantityShadow)];
+		return _iconQuantityLabel;
+	}
+	private function cornerLabelElement():TextField {
+		if (_cornerLabel) return _cornerLabel;
+		_cornerLabel         = addElementAbove(UIUtils.newTextField({
+			x                : ICON_X,
+			width            : width - ICON_X * 2,
+			y                : ICON_Y,
+			height           : ICON_HEIGHT / 2,
+			textColor        : IconQuantityColor,
+			defaultTextFormat: IconQuantityFormat
+		}), _labelField) as TextField;
+		_cornerLabel.filters = [UIUtils.outlineFilter(IconQuantityShadow)];
+		return _cornerLabel;
+	}
+	private function key1labelElement():TextField {
+		if (_key1label) return _key1label;
+		_key1label         = addElementAbove(UIUtils.newTextField({
+			alpha            : 0.5,
+			x                : 8,
+			width            : width - 12,
+			y                : 2,
+			height           : (MainView.BTN_H - 4) / 2,
+			textColor        : ButtonKeyFontColor,
+			defaultTextFormat: {
+				font : ButtonKeyFontName,
+				size : ButtonKeyFontSize,
+				bold : true,
+				align: 'right'
+			}
+		}), _labelField) as TextField;
+		_key1label.filters = [UIUtils.outlineFilter(ButtonKeyShadowColor)];
+		return _key1label;
+	}
+	private function key2labelElement():TextField {
+		if (_key2label) return _key2label;
+		_key2label         = addElementAbove(UIUtils.newTextField({
+			alpha            : 0.5,
+			x                : 8,
+			width            : width - 12,
+			y                : 2+(MainView.BTN_H-4)/2,
+			height           : (MainView.BTN_H-4)/2,
+			textColor        : ButtonKeyFontColor,
+			defaultTextFormat: {
+				font : ButtonKeyFontName,
+				size : ButtonKeyFontSize,
+				bold: true,
+				align: 'right'
+			}
+		}), _labelField) as TextField;
+		_key2label.filters = [UIUtils.outlineFilter(ButtonKeyShadowColor)];
+		return _key2label;
+	}
+	
+	override protected function resize():void {
+		if (_backgroundGraphic) {
+			_backgroundGraphic.width = innerWidth;
+			if (_key1label) _key1label.width         = innerWidth - 12;
+			if (_key2label) _key2label.width         = innerWidth - 12;
+			iconId                   = iconId;
+		}
+		if (_cornerLabel) {
+			_cornerLabel.width = width - ICON_X * 2;
+		}
+		super.resize();
+	}
+	
 	//////// Mouse Events... ////////
-
+	
 	public function hover(event:MouseEvent = null):void {
 		if (this._backgroundGraphic)
 			this._backgroundGraphic.alpha = enabled ? 0.5 : 0.4;
+		if (visible && toolTipText) {
+			CoC.instance.mainView.toolTipView.showForElement(this, toolTipHeader, toolTipText);
+		}
 	}
 
 	public function dim(event:MouseEvent = null):void {
 		if (this._backgroundGraphic)
 			this._backgroundGraphic.alpha = enabled ? 1 : 0.4;
+		CoC.instance.mainView.toolTipView.hide();
 	}
 
 	public function click(event:MouseEvent = null):void {
 		if (!this.enabled) return;
+		CoC.instance.mainView.toolTipView.hide();
 		try {
 			if (this._preCallback != null)
 				this._preCallback(this);
@@ -146,7 +271,7 @@ public class CoCButton extends Block {
 		var alpha:Number              = value ? 1 : 0.4;
 		this._labelField.alpha        = alpha;
 		this._backgroundGraphic.alpha = alpha;
-		this._iconGraphic.alpha       = alpha;
+		if (_iconGraphic) this._iconGraphic.alpha       = alpha;
 	}
 	
 	public function get iconId():String {
@@ -154,22 +279,48 @@ public class CoCButton extends Block {
 	}
 	
 	public function set iconId(iconId:String):void {
+		if (!GameSettings.buttonIconsEnabled) return;
 		_iconId           = iconId;
 		var bitmap:Bitmap = iconId ? IconLib.getBitmap(iconId) : null;
 		if (bitmap) {
+			iconElement();
 			_iconGraphic.bitmap = IconLib.getBitmap(iconId);
 			_iconGraphic.visible = true;
 			this._labelField.x = LABEL_ICON_X;
-			this._labelField.width = LABEL_ICON_WIDTH;
 		} else {
-			_iconGraphic.visible = false;
+			if (_iconGraphic) _iconGraphic.visible = false;
 			this._labelField.x = LABEL_NOICON_X;
-			this._labelField.width = LABEL_NOICON_WIDTH;
 		}
+		this._labelField.width = width - LABEL_RIGHT - this._labelField.x;
+		if (_iconQuantityLabel && _iconGraphic) _iconQuantityLabel.visible = _iconGraphic.visible;
 		if (labelText) labelText = labelText; // force resize
 	}
-	public function icon(iconId:String):CoCButton {
+	public function get iconQty():String {
+		return _iconQuantityLabel && _iconQuantityLabel.visible ? _iconQuantityLabel.text : "";
+	}
+	public function set iconQty(value:String):void {
+		if (value && !_iconQuantityLabel) iconQuantityElement();
+		if (_iconQuantityLabel) {
+			_iconQuantityLabel.text    = value;
+			_iconQuantityLabel.visible = _iconGraphic && _iconGraphic.visible;
+		}
+	}
+	public function cornerLabel(value:String):CoCButton {
+		cornerLabelText = value;
+		return this;
+	}
+	public function get cornerLabelText():String {
+		return _cornerLabel ? _cornerLabel.text : "";
+	}
+	public function set cornerLabelText(value:String):void {
+		if (value && !_cornerLabel) cornerLabelElement();
+		if (_cornerLabel) {
+			_cornerLabel.text = value;
+		}
+	}
+	public function icon(iconId:String, iconQty:String=""):CoCButton {
 		this.iconId = iconId;
+		this.iconQty = iconQty;
 		return this;
 	}
 	public function get labelText():String {
@@ -184,7 +335,7 @@ public class CoCButton extends Block {
 		this._labelField.text              = value;
 		this._labelField.y                 = LABEL_Y;
 		this._labelField.height            = BTN_H - this._labelField.y;
-		while (this._labelField.textWidth > this._labelField.width && fontSize > MIN_FONT_SIZE) {
+		while (this._labelField.textWidth + 2 > this._labelField.width && fontSize > MIN_FONT_SIZE) {
 			fontSize--;
 			tf.size                            = fontSize;
 			this._labelField.defaultTextFormat = tf;
@@ -193,12 +344,22 @@ public class CoCButton extends Block {
 			this._labelField.height            = BTN_H - this._labelField.y;
 		}
 	}
-
-	public function set bitmapClass(value:Class):void {
-		_backgroundGraphic.bitmapClass = value;
+	public function get key1text():String {
+		return _key1label ? this._key1label.text : "";
 	}
-	public function get bitmapClass():Class {
-		return null;
+	
+	public function set key1text(value:String):void {
+		key1labelElement();
+		this._key1label.text = value;
+	}
+	
+	public function get key2text():String {
+		return _key2label ? this._key2label.text : "";
+	}
+	
+	public function set key2text(value:String):void {
+		key2labelElement();
+		this._key2label.text = value;
 	}
 
 	public function get callback():Function {
@@ -237,12 +398,15 @@ public class CoCButton extends Block {
 		return this;
 	}
 	
-	public function color(rgb:String):CoCButton {
-		this._labelField.textColor = Color.convertColor(rgb);
+	public function color(rgb:*):CoCButton {
+		labelColor = rgb;
 		return this;
 	}
 	public function get labelColor():String {
 		return Color.toHex(this._labelField.textColor);
+	}
+	public function set labelColor(value:*):void {
+		this._labelField.textColor = Color.convertColor(value);
 	}
 	/**
 	 * Set color, text, and hint from the item
@@ -265,7 +429,15 @@ public class CoCButton extends Block {
 	public function itemSlotTexts(slot:ItemSlotClass):CoCButton {
 		itemIcon(slot.itype);
 		itemTexts(slot.itype);
-		if (slot.quantity > 1 || slot.itype.stackSize > 1) labelText += " x"+slot.quantity;
+		iconQty = "";
+		if (slot.quantity > 1 || slot.itype.stackSize > 1) {
+			toolTipHeader = ""+slot.quantity+" x "+toolTipHeader;
+			if (_iconGraphic && _iconGraphic.visible) {
+				iconQty = String(slot.quantity);
+			} else {
+				labelText += " x" + slot.quantity;
+			}
+		}
 		return this;
 	}
 	public function itemIcon(item:ItemType):CoCButton {
@@ -279,7 +451,20 @@ public class CoCButton extends Block {
 		return this;
 	}
 	public function showForItemSlot(slot:ItemSlotClass, callback:Function):CoCButton {
-		show(slot.itype.shortName, callback);
+		if (slot.isEmpty()) {
+			showDisabled("Empty");
+			hint("");
+			color(DEFAULT_COLOR);
+			iconId = null;
+			iconQty = "";
+			return this;
+		}
+		showForItem(slot.itype, callback);
+		if (slot.itype.stackSize > 1 || slot.quantity > 1) {
+			iconQty = String(slot.quantity);
+		} else {
+			iconQty = "";
+		}
 		itemSlotTexts(slot);
 		return this;
 	}
@@ -364,14 +549,16 @@ public class CoCButton extends Block {
 	
 	public function reset():CoCButton {
 		color(DEFAULT_COLOR);
-		visible       = false;
-		labelText     = "";
-		toolTipHeader = "";
-		toolTipText   = "";
-		alpha         = 1;
-		enabled       = false;
-		callback      = null;
-		iconId        = null;
+		visible         = false;
+		labelText       = "";
+		toolTipHeader   = "";
+		toolTipText     = "";
+		alpha           = 1;
+		enabled         = false;
+		callback        = null;
+		iconId          = null;
+		iconQty         = "";
+		cornerLabelText = "";
 		return this;
 	}
 	/**

@@ -50,7 +50,7 @@ public class TempleOfTheDivine extends BaseContent {
 			}
 			outputText("\n\n\"<i>There haven't been many humans in Mareth, especially since the demons took over, so it’s likely that you are the first to make it here in a long time. If you seek salvation, I’m afraid the temple will not provide any, as the gods and their powers have long since left their altars. As for who I am, my name is Sapphire. I am the last guardian of this sacred ground, and the last line of defense against the fiends that desecrate this land.</i>\"");
 			outputText("\n\nHer name seems to be somewhat appropriate, her eyes glowing with a faint, azure hue. As you ponder these details, the gargoyle turns her back to you, taking flight towards one of the pillars in the room.\n\n\"<i>You are welcome to visit this place as often as you see fit. However, I will be watching you.</i>\"\n\n<b>You can now visit the Temple of the Divines!</b>");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function repeatvisitintro():void {
@@ -89,7 +89,7 @@ public class TempleOfTheDivine extends BaseContent {
 			else addButtonDisabled(6, "???", "Sapphire is a little lonely out there. Maybe you could make her a friend...?")
 			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
 			if (flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] == 1) addButton(8, "Workshop", SceneLib.forgefatherScene.workshopMainMenu);
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 
 		public function PlayerPrayAtTemple():void {
@@ -121,7 +121,7 @@ public class TempleOfTheDivine extends BaseContent {
 			}
 			else {
 				outputText("You attempt a prayer to a god of Mareth. Sadly, if this place ever housed the god’s divine power, its ruined state no longer can contain it. It seems you will get no benefit from praying here until you repair the altars, with the god simply unable to contact you while the building is in this sinful state.\n\n");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -197,7 +197,7 @@ public class TempleOfTheDivine extends BaseContent {
 			purifyingPower += 10;
 			if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) purifyingPower += 5;
 			dynStats("cor", -purifyingPower);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function PlayerPrayAtTempleTaothAltar():void {
@@ -215,7 +215,7 @@ public class TempleOfTheDivine extends BaseContent {
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function PlayerPrayAtTempleFenrirAltar():void {
@@ -232,7 +232,7 @@ public class TempleOfTheDivine extends BaseContent {
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", -10);
 			statScreenRefresh();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function PlayerPrayAtTempleFeraAltar():void {
@@ -244,7 +244,7 @@ public class TempleOfTheDivine extends BaseContent {
 			player.buff("FerasBlessing").setStat("minlustx", 0.15).forHours(169).withText("Fera's Blessing");
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
 			dynStats("cor", 10);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function TempleAltarsRebuildMenu():void {
@@ -273,7 +273,7 @@ public class TempleOfTheDivine extends BaseContent {
 				clearOutput();
 				outputText("You take your time to look the place over. After a few moments, you conclude that, while restoring it back to its former glory isn't impossible, it will be a long and arduous task. To make it back into the temple it was in its glory days, you estimate that you will need to repair the altars, all of the stone statues including the one depicting Marae, and the benches, which should then make the temple fully functional again as a place of worship.");
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 
@@ -309,6 +309,7 @@ public class TempleOfTheDivine extends BaseContent {
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] = 1;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3) flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -317,6 +318,7 @@ public class TempleOfTheDivine extends BaseContent {
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Taoth. By the time you're done you can feel divine power amass around it anew.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -325,6 +327,7 @@ public class TempleOfTheDivine extends BaseContent {
 			outputText("You work for 8 hours, sculpting stone and repairing the altar of Fenrir. By the time you're done you can feel a cold chilling aura amass around it. Was that really such a good idea?");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -333,6 +336,7 @@ public class TempleOfTheDivine extends BaseContent {
 			outputText("You work for the entire day sculpting stone and repairing the altar of Fera. By the time you're done you can feel divine power albeit tainted amass around it anew.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -344,6 +348,7 @@ public class TempleOfTheDivine extends BaseContent {
             else outputText("Even though the altar is dysfunctional, the repaired statue looks like a nice addition to the temple.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 150;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -352,6 +357,7 @@ public class TempleOfTheDivine extends BaseContent {
 			outputText("You work for the entire day sculpting stone. By the time you're done a set of well carved statue decorate the walls again.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 500;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -363,6 +369,7 @@ public class TempleOfTheDivine extends BaseContent {
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 50;
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 10;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseEightHours);
 		}
 

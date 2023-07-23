@@ -537,7 +537,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 
 		if ((player.isButtPregnant() || player.isPregnant()) && !player.hasStatusEffect(StatusEffects.GooStuffed) && !player.hasStatusEffect(StatusEffects.WormPlugged)) {
-			if (womb["type"] == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
+			if (player.isPregnant() && womb["type"] == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 				pregnancyDesc += "<b>";
 				//Compute size
 				temp = player.statusEffectv3(StatusEffects.Eggs) + player.statusEffectv2(StatusEffects.Eggs) * 10;

@@ -1,20 +1,11 @@
 package classes.display
 {
-import coc.view.BitmapDataSprite;
 import coc.view.Block;
-import coc.view.MainView;
+import coc.view.CoCButton;
 
-import flash.display.Bitmap;
-import flash.display.MovieClip;
-	import flash.text.Font;
-	import flash.text.TextField;
-	import coc.view.CoCButton;
-	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
-	import flash.text.AntiAliasType;
-	
+import flash.text.TextField;
 
-	/**
+/**
 	 * Defines a composite display object of all the seperate components required to display a
 	 * single BoundControlMethod, its associated primary and secondary bindings with the buttons
 	 * used to bind methods to new keys.
@@ -50,12 +41,10 @@ import flash.display.MovieClip;
 				}
 			});
 			addElement(_button1 = new CoCButton({
-				labelText: 'Unbound',
-				bitmapClass: MainView.ButtonBackground0
+				labelText: 'Unbound'
 			}));
 			addElement(_button2 = new CoCButton({
-				labelText: 'Unbound',
-				bitmapClass: MainView.ButtonBackground0
+				labelText: 'Unbound'
 			}));
 		}
 		

@@ -420,6 +420,62 @@ public class DungeonMaps extends DungeonAbstractContent
 					'L': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7 ? "|": "L"
 				}; }
 			),
+			new DungeonMap("River Dungeon, 4th floor", [
+					"[S]K[c]-[b]         [a]    ",
+					"         |           L     ",
+					"        [e]         [d]    ",
+					"         |           |     ",
+					"[j]     [i]-[h]-[g]-[f]K[s]",
+					" |       |       |         ",
+					"[n]-[m]-[l]     [k]        ",
+					"     |           |         ",
+					"    [u]     [t]-[r]-[p]-[o]",
+					"     |       |       |     ",
+					"    [z]-[y]-[x]     [w]    ",
+				],
+				{
+					'a': DUNGEON_RIVER_FLOOR_04_ROOM_01,
+					'b': DUNGEON_RIVER_FLOOR_04_ROOM_02,
+					'c': DUNGEON_RIVER_FLOOR_04_ROOM_03,
+					'S': DUNGEON_RIVER_FLOOR_04_ROOM_04,
+					'd': DUNGEON_RIVER_FLOOR_04_ROOM_05,
+					'e': DUNGEON_RIVER_FLOOR_04_ROOM_06,
+					's': DUNGEON_RIVER_FLOOR_04_ROOM_07,
+					'f': DUNGEON_RIVER_FLOOR_04_ROOM_08,
+					'g': DUNGEON_RIVER_FLOOR_04_ROOM_09,
+					'h': DUNGEON_RIVER_FLOOR_04_ROOM_10,
+					'i': DUNGEON_RIVER_FLOOR_04_ROOM_11,
+					'j': DUNGEON_RIVER_FLOOR_04_ROOM_12,
+					'k': DUNGEON_RIVER_FLOOR_04_ROOM_13,
+					'l': DUNGEON_RIVER_FLOOR_04_ROOM_14,
+					'm': DUNGEON_RIVER_FLOOR_04_ROOM_15,
+					'n': DUNGEON_RIVER_FLOOR_04_ROOM_16,
+					'o': DUNGEON_RIVER_FLOOR_04_ROOM_17,
+					'p': DUNGEON_RIVER_FLOOR_04_ROOM_18,
+					'r': DUNGEON_RIVER_FLOOR_04_ROOM_19, //s missed - used for stairs
+					't': DUNGEON_RIVER_FLOOR_04_ROOM_20,
+					'u': DUNGEON_RIVER_FLOOR_04_ROOM_21,
+					'w': DUNGEON_RIVER_FLOOR_04_ROOM_22,
+					'x': DUNGEON_RIVER_FLOOR_04_ROOM_23,
+					'y': DUNGEON_RIVER_FLOOR_04_ROOM_24,
+					'z': DUNGEON_RIVER_FLOOR_04_ROOM_25
+				},
+				function():Object { return {
+					'K': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10 ? "K": "—",
+					'L': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 9 ? "|": "L"
+				}; }
+			),/*
+			new DungeonMap("River Dungeon, 5th floor", [
+					"[a]—   ",
+					" |     ",
+					"[b]—[c]",
+				],
+				{
+					'a': DUNGEON_RIVER_FLOOR_02_ROOM_25,
+					'b': DUNGEON_RIVER_FLOOR_02_ROOM_26,
+					'c': DUNGEON_RIVER_FLOOR_02_ROOM_27
+				}
+			),*/
             //TODO: place other RD levels here
             //FFS, ANOTHER TOWER, I HATE YOU
 			new DungeonMap("Anzu's Palace, 1st floor", [

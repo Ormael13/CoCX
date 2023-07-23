@@ -15,6 +15,7 @@ import classes.Items.*;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.SimpleEncounter;
+import classes.Scenes.QuestLib;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -67,7 +68,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8t";
+    public var debugGameVer:String = "v0.8t2.37";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.057;
@@ -94,7 +95,7 @@ public class CoC extends MovieClip
     // Items/
     public var itemTemplates:ItemTemplateLib       = new ItemTemplateLib();
     public var consumables:ConsumableLib           = new ConsumableLib();
-    public var useables:UseableLib;
+    public var useables:UseableLib                 = new UseableLib();
     public var weapons:WeaponLib                   = new WeaponLib();
     public var weaponsrange:WeaponRangeLib         = new WeaponRangeLib();
     public var weaponsflyingswords:FlyingSwordsLib = new FlyingSwordsLib();
@@ -106,6 +107,8 @@ public class CoC extends MovieClip
     public var jewelries:JewelryLib                = new JewelryLib();
     public var shields:ShieldLib                   = new ShieldLib();
     public var vehicles:VehiclesLib                = new VehiclesLib();
+    
+    public var questLib:QuestLib;
 
 
     // Force updates in Pepper Flash ahuehue
@@ -219,7 +222,7 @@ public class CoC extends MovieClip
         _instance = this;
         context = new StoryContext(this);
 
-        useables = new UseableLib();
+        questLib = new QuestLib();
 
         this.kFLAGS_REF = kFLAGS;
         this.kACHIEVEMENTS_REF = kACHIEVEMENTS;
@@ -282,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>Legendary items rebalance/empowering, Human internal mutations (part 2), Seperating/combining some of the items menu, Aether Twins 3rd evolution, increase to inventory space and capacity and many QoL/Bugfixing</b>)";
+			ver += " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
@@ -409,6 +412,8 @@ public class CoC extends MovieClip
         //setTimeout(this.run,0);
     }
     private function beforeEncounterSelect(pool:/*Encounter*/Array):void {
+        // Disabled - interferes with the new encounter system
+        /*
         while (true) {
             var tw:Number = 0;
             for each (var e:Encounter in pool) {
@@ -432,6 +437,7 @@ public class CoC extends MovieClip
             trace(strace);
             if (!hasSE) break; // somehow total chance is <=0 but there are no SimpleEncounters to work with
         }
+        */
     }
     private function adjustEncounterChance(pool:/*Encounter*/Array, e:Encounter, c:Number):Number {
         if (c === Encounters.ALWAYS) return c;
@@ -449,7 +455,9 @@ public class CoC extends MovieClip
         // Smaller - more randomness
         // Bigger - more predictability
         // Too big - all events fire one by one during first shuffle
-        if (pick is SimpleEncounter) (pick as SimpleEncounter).adjustment -= 0.1;
+        
+        // Disabled - interferes with the new encounter system
+        // if (pick is SimpleEncounter) (pick as SimpleEncounter).adjustment -= 0.1;
     }
 
     private function loadStory():void {
@@ -458,6 +466,7 @@ public class CoC extends MovieClip
 
     public function run():void
     {
+        this.inputManager.showHotkeys = false;
         trace("Initializing races");
         Races.load();
         trace("Initializing perks");

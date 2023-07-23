@@ -105,10 +105,10 @@ package classes.Scenes.Monsters
 			addStatusValue(StatusEffects.TranscendentSoulField, 2, 5);
 			HP = maxHP();
 			outputText("Staggering back, Angeloid wastes no time and above it head starts to manifest sort of halo. ");
-			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 1) outputText("Both irises become uniform purple colored. And around it body manifest two crossed circles with pair of eyes looking exactly the same as main eye down to each detail including dual irises.\n");
-			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 2) outputText("All irises become uniform purple colored. And around it body manifest three crossed circles with three eyes looking exactly the same as main eye down to each detail including dual irises.\n");
-			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 3) outputText("All irises become uniform purple colored. And around it body manifest four crossed circles with two pairs of eyes looking exactly the same as main eye down to each detail including dual irises.\n");
-			outputText("\"<i>Don't be afraid!!!</i>\" it whispers loud enough for you to hear before launching up to continue the fight.");
+			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 1) outputText("Both irises become uniform purple colored. And around it body manifest two crossed circles with pair of eyes looking exactly the same as main eye down to each detail including dual irises.");
+			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 2) outputText("All irises become uniform purple colored. And around it body manifest three crossed circles with three eyes looking exactly the same as main eye down to each detail including dual irises.");
+			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 3) outputText("All irises become uniform purple colored. And around it body manifest four crossed circles with two pairs of eyes looking exactly the same as main eye down to each detail including dual irises.");
+			outputText("\n\n\"<i>Don't be afraid!!!</i>\" it whispers loud enough for you to hear before launching up to continue the fight.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
 			SceneLib.combat.combatRoundOver();
 		}

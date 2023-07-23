@@ -8,23 +8,22 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
-import classes.CoC_Settings;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
-import classes.GeneticMemories.BallsMem;
 import classes.Items.Consumable;
-import classes.Scenes.Metamorph;
+import classes.Items.ItemTags;
 import classes.StatusEffects;
 import classes.VaginaClass;
-import classes.CoC;
 
 public class Centaurinum extends Consumable {
 	public function Centaurinum() {
 		super("Centari", "Centari", "a vial of Centaurinum", 20, "This is a long flared vial with a small label that reads, \"<i>Centaurinum</i>\".  It is likely this potion is tied to centaurs in some way.");
+		withTag(ItemTags.U_TF);
 	}
 	public override function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		//Temporary storage

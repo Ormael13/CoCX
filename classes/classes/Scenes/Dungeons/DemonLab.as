@@ -4,10 +4,11 @@
  */
 package classes.Scenes.Dungeons {
 import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Races;
 import classes.Saves;
-import classes.IMutations.IMutationsLib;
 import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
@@ -19,7 +20,6 @@ import classes.Scenes.Dungeons.DemonLab.ScientistGunner;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
-import classes.GlobalFlags.kFLAGS;
 import classes.StatusEffects;
 import classes.internals.SaveableState;
 
@@ -129,7 +129,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
 		outputText("\n\nDo you step inside, or wait until you’re better prepared?");
 		menu();
 		addButton(0, "Enter", EnteringDungeon);
-		addButton(1, "Leave", camp.returnToCampUseOneHour);
+		addButton(1, "Leave", explorer.done);
 	}
 
     //================================================================================
@@ -737,8 +737,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
 		outputText("“<i>Your Majesty, is there anything in particular you wish to see?</i>” The second woman asks. This one is odd, even by demon standards. She has long, sharp bull horns, a horselike face and a red mane running down her body…A body covered in black and white striped scales. Her hair is red…and appears to be made from thin tendrils. Almost like the anemones from the lake. She turns her head towards the camera, and sticks her forked tongue out. Despite the horse-like shape of her face, she has snake-fangs, but the rest of her teeth are sharp. The back of her throat glows red, and she lets out a puff of smoke.\n\n");
 		outputText("Her breasts are C-cups, perky, and held in place by a milking machine repurposed as a bra. She wears a lab coat overtop, unbuttoned. Electricity visibly sparks from her body, and she levitates an inch or so off the ground. Her legs are thin, with a bone spike protruding from her knees, and her legs end in razor-sharp talons. She looks at the camera, and her pupils are…odd. They’re perfect ‘X’s, yellow, with a distinct glow.\n\n");
 		outputText("The Chimera has four arms, ending with clawed fingers. One holds an inkpot, and two hold a clipboard in front of her. She dips a single claw into the inkpot, jotting down notes with her remaining hand.\n\n");
-		outputText("“<i>No, Lucina. I want to know everything about the projects, and their progress.</i>” Lethice’s voice is firm, but very feminine, and she moves with an air of assured confidence. “<i>We’ve put a lot of effort into these labs of yours.</i>”\n\n"); 
-		outputText("“<i>Of course, my queen.</i>” As Lethice and her two retainers walk past, the quivering demon scientist in the back breaks formation, raising his voice.\n\n"); 
+		outputText("“<i>No, Lucina. I want to know everything about the projects, and their progress.</i>” Lethice’s voice is firm, but very feminine, and she moves with an air of assured confidence. “<i>We’ve put a lot of effort into these labs of yours.</i>”\n\n");
+		outputText("“<i>Of course, my queen.</i>” As Lethice and her two retainers walk past, the quivering demon scientist in the back breaks formation, raising his voice.\n\n");
 		outputText("“<i>Queen Lethice! Please, if you would?</i>” He takes two steps towards Lethice, but the massive minotaur turns, hefting his axe.\n\n");
 		outputText("“<i>You will speak to the queen when she requests your presence, and not a moment before.</i>” The chimeric woman says. Lethice ignores the disturbance, continuing on into the lab.\n\n");
 		outputText("“<i>Doctor Hemos, you will behave yourself.</i>” Another demon says, taking the doctor’s hand and pulling him back in line. “<i>Apologies, Doctor Lucina, for my…colleague's outburst.</i>” He shakes his head. “<i>He’s been working in his own lab for quite some time, and doesn’t know how to interact with others.</i>”\n\n");
@@ -1036,7 +1036,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             KihaFollower = false;
             DivaFollower = false;
             inDungeon = false;
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
     }
 
@@ -1128,6 +1128,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         KihaFollower = false;
         DivaFollower = false;
         inDungeon = false;
+        explorer.stopExploring();
         doNext(camp.returnToCampUseTwoHours);
     }
 }

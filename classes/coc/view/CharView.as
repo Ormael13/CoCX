@@ -13,8 +13,6 @@ import flash.display.BitmapData;
 import flash.display.Graphics;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.geom.Point;
-import flash.geom.Rectangle;
 
 public class CharView extends Sprite {
 
@@ -214,9 +212,7 @@ public class CharView extends Sprite {
 				var dx:int               = cell.@dx;
 				var dy:int               = cell.@dy;
 				try {
-					var bd:BitmapData = new BitmapData(w, h, true, 0);
-					bd.copyPixels(result, new Rectangle(x, y, w, h), new Point(0, 0));
-					sprites[f] = new CharViewSprite(bd, dx, dy);
+					sprites[f] = new CharViewSprite(UIUtils.subsprite(result, x, y, w, h), dx, dy);
 				} catch (e:Error) {
 					throw new Error("Error in model.xml <cell name='"+f+"'>: "+e.message)
 				}
@@ -244,9 +240,7 @@ public class CharView extends Sprite {
 				var files:/*String*/Array = row.text().toString().split(",");
 				for each (var f:String in files) {
 					if (f) {
-						var bd:BitmapData = new BitmapData(cellwidth, cellheight, true, 0);
-						bd.copyPixels(result, new Rectangle(x, y, cellwidth, cellheight), new Point(0, 0));
-						sprites[f] = new CharViewSprite(bd, 0, 0);
+						sprites[f] = new CharViewSprite(UIUtils.subsprite(result, x, y, cellwidth, cellheight), 0, 0);
 					}
 					x += cellwidth;
 				}

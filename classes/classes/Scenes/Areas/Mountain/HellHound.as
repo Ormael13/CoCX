@@ -88,7 +88,7 @@ public class HellHound extends Monster
 				this.armorDef = 7;
 				this.armorMDef = 1;
 				this.bonusLust = 125;
-				this.level = 10;
+				this.level = 6;
 				this.gems = 15+rand(12);
 			}
 			else {

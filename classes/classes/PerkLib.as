@@ -230,9 +230,9 @@ public class PerkLib
 		public static const PastLifeCultivator:PerkType = mk("Past Life: Cultivator", "Past Life: Cultivator",
 				"Soulforce is easier to keep giving you a 10% increase to your maximum amount.", null, true);
 		public static const HistoryFeral:PerkType = mk("History: Feral", "History: Feral",
-				"Being raised in the wilds allows your feral attacks to be 10% more effective. Plus one extra feral attack");
+				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack.");
 		public static const PastLifeFeral:PerkType = mk("Past Life: Feral", "Past Life: Feral",
-				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack", null, true);
+				"Being raised in the wilds allows your feral attacks to be 10% more damaging and accurate. Plus one extra feral attack.", null, true);
 		public static const HistoryFighter:PerkType = mk("History: Fighter", "History: Fighter",
 				"A past full of conflict increases physical melee damage dealt by 10% and acc by 20%.");
 		public static const PastLifeFighter:PerkType = mk("Past Life: Fighter", "Past Life: Fighter",
@@ -273,6 +273,10 @@ public class PerkLib
 				"Tactical knowledge allows you to increase the effectiveness of your subordinates. (+10% to minions/pets damage).");
 		public static const PastLifeTactician:PerkType = mk("Past Life: Tactician", "Past Life: Tactician",
 				"Tactical knowledge allows you to increase the effectiveness of your subordinates. (+10% to minions/pets damage).", null, true);
+		public static const HistoryThief:PerkType = mk("History: Thief", "History: Thief",
+				"You spent much of your time in the lesser streets of Ignam, learning from your friends and peers how to steal and hide from guards to survive. (+1 to sneak attack dmg multiplier)");
+		public static const PastLifeThief:PerkType = mk("Past Life: Thief", "Past Life: Thief",
+				"You spent much of your time in the lesser streets of Ignam, learning from your friends and peers how to steal and hide from guards to survive. (+1 to sneak attack dmg multiplier)", null, true);
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
 		public static const PastLifeWhore:PerkType = mk("Past Life: Whore", "Past Life: Whore",
@@ -430,33 +434,54 @@ public class PerkLib
 				"Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced. (+1 per 5 pts of core stat value)",
 				"You've chosen the 'Enchanced Warrior's Rage' perk. Warrior's Rage would be automatical recasted when it ends as long PC got enough wrath and it effects would be enchanced.");
 		public static const DoorKnob:PerkType = mk("Door Knob", "Door Knob",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"Everyone's had their turn with you. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Door Knob' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const Bicycle:PerkType = mk("Bicycle", "Bicycle",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You've always been an easy ride. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Bicycle' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const MeatHole:PerkType = mk("Meat Hole", "Meat Hole",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"Having your holes filled is all you know or understand. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Meat Hole' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const BedWarmer:PerkType = mk("Bed Warmer", "Bed Warmer",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"No need to fear the despairing chill of an empty bed while you're around. You're an adept cuddler... and if they ask nicely, maybe you'll even hold their hand. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Bed Warmer' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const TensionTamer:PerkType = mk("Tension Tamer", "Tension Tamer",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You had something of a reputation back in Ingnam. If someone was feeling lonely, anxious, or sore (in whichever way), they knew who to call. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Tension Tamer' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const PartyBoyGirl:PerkType = mk("Party Boy/Girl", "Party Boy/Girl",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You're the life of the party, particularly the types of parties that happen in Mareth. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Party Boy/Girl' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
 		public static const MattressActressActor:PerkType = mk("Mattress Actress/Actor", "Mattress Actress/Actor",
-				"+10% max lust, +5 to anal/vaginal capacity.",
+				"You know just how they like it, every time. No need for words; just lay back and let the fantasy come to life. Don't worry, you'll take good care of them. +10% max lust, +5 to anal/vaginal capacity.",
 				"You've chosen the 'Mattress Actress/Actor' perk. +10% max lust, +5 to anal/vaginal capacity.")
 				.withBuffs({'maxlust_mult':+0.1});
+		public static const HistoryBuff:PerkType = mk("History Buff", "History Buff",
+				"History was written by the victors, and you've a mind to put their winning strategies to use. (+10% minions/pets damage)",
+				"You've chosen the 'History Buff' perk. (+10% minions/pets damage)");
+		public static const GuerrillaTactics:PerkType = mk("Guerrilla Tactics", "Guerrilla Tactics",
+				"No man is an island. Having companions around you, even if they're only familiars, puts your mind at ease. (+10% minions/pets damage)",
+				"You've chosen the 'Guerrilla Tactics' perk. (+10% minions/pets damage)");
+		public static const StrengthInNumbers:PerkType = mk("Strength in Numbers", "Strength in Numbers",
+				"No man is an island. Having companions around you, even if they're only familiars, puts your mind at ease. (+10% minions/pets damage)",
+				"You've chosen the 'Strength in Numbers' perk. (+10% minions/pets damage)");
+		public static const General:PerkType = mk("General", "General",
+				"You've learned all that you could from those old history books, but now it's finally time to put your knowledge to the ultimate test. Inspire your comrades! Lead them to victory! (+10% minions/pets damage)",
+				"You've chosen the 'General' perk. (+10% minions/pets damage)");
+		public static const SmallArmy:PerkType = mk("Small Army", "Small Army",
+				"Nobody said that you had to save Mareth on your own. The more the merrier--and the easier you can sleep at night. (+10% minions/pets damage)",
+				"You've chosen the 'Small Army' perk. (+10% minions/pets damage)");
+		public static const Fellowship:PerkType = mk("Fellowship", "Fellowship",
+				". (+10% minions/pets damage)",
+				"You've chosen the 'Fellowship' perk. (+10% minions/pets damage)");
+		public static const Alliance:PerkType = mk("Alliance", "Alliance",
+				". (+10% minions/pets damage)",
+				"You've chosen the 'Alliance' perk. (+10% minions/pets damage)");
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -466,7 +491,7 @@ public class PerkLib
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk. +10% max lust.");
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1331,26 +1356,26 @@ public class PerkLib
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
 				"You've chosen the 'Extremely Lucky' perk, increasing gem gains from victories by 15%.");
 		public static const EyesOfTheHunterAdept:PerkType = mk("Eyes of the Hunter (Adept)", "Eyes of the Hunter (Adept)",
-				"You to deal 10% damage and have a 5% higher critical chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies. (req. 50+ sensitivity)",
-				"You've chosen the 'Eyes of the Hunter (Adept)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies.");
+				"You to deal 10% damage and have a 5% higher critical chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies. (req. 50+ sensitivity). +1 exploration reveal.",
+				"You've chosen the 'Eyes of the Hunter (Adept)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies. +1 exploration reveal.");
 		public static const EyesOfTheHunterExpert:PerkType = mk("Eyes of the Hunter (Expert)", "Eyes of the Hunter (Expert)",
-				"You to deal 10% damage and have a 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies (req. 75+ sensitivity)",
-				"You've chosen the 'Eyes of the Hunter (Expert)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies.");
+				"You to deal 10% damage and have a 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies (req. 75+ sensitivity). +1 exploration reveal.",
+				"You've chosen the 'Eyes of the Hunter (Expert)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies. +1 exploration reveal.");
 		public static const EyesOfTheHunterGrandMaster:PerkType = mk("Eyes of the Hunter (Grand Master)", "Eyes of the Hunter (Grand Master)",
-				"You to deal 10% damage and have a 5% higher critical chance against God, Boss type enemies (req. 100+ sensitivity)",
-				"You've chosen the 'Eyes of the Hunter (Grand Master)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against God, Boss type enemies.");
+				"You to deal 10% damage and have a 5% higher critical chance against God, Boss type enemies (req. 100+ sensitivity). +1 exploration reveal.",
+				"You've chosen the 'Eyes of the Hunter (Grand Master)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against God, Boss type enemies. +1 exploration reveal.");
 		public static const EyesOfTheHunterMaster:PerkType = mk("Eyes of the Hunter (Master)", "Eyes of the Hunter (Master)",
-				"You to deal 10% damage and have a 5% higher critical chance against Colossal, Flesh Construct, God, Boss, Fire/Ice/Lightning/Darkness Nature type enemies (req. 100+ sensitivity)",
-				"You've chosen the 'Eyes of the Hunter (Master)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against Colossal, Flesh Construct, God, Boss, Fire/Ice/Lightning/Darkness Nature type enemies.");
+				"You to deal 10% damage and have a 5% higher critical chance against Colossal, Flesh Construct, God, Boss, Fire/Ice/Lightning/Darkness Nature type enemies (req. 100+ sensitivity). +1 exploration reveal.",
+				"You've chosen the 'Eyes of the Hunter (Master)' perk, allowing you to deal 10% damage and have a 5% higher critical chance against Colossal, Flesh Construct, God, Boss, Fire/Ice/Lightning/Darkness Nature type enemies. +1 exploration reveal.");
 		public static const EyesOfTheHunterNovice:PerkType = mk("Eyes of the Hunter (Novice)", "Eyes of the Hunter (Novice)",
-				"Allow see few more than usual infomations about the enemy (req. 25+ sensitivity).",
-				"You've chosen the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about the enemies you fight.");
+				"Allow see few more than usual infomations about the enemy (req. 25+ sensitivity). +1 exploration reveal.",
+				"You've chosen the 'Eyes of the Hunter (Novice)' perk, allowing you to gain more information about the enemies you fight. +1 exploration reveal.");
 		public static const EyesOfTheHunterEx:PerkType = mk("Eyes of the Hunter (Ex)", "Eyes of the Hunter (Ex)",
-				"Allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough, allows to find new areas at lower than normaly level. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)",
-				"You've chosen the 'Eyes of the Hunter (Ex)' perk, allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough, allows to find new areas at lower than normaly level. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)");
+				"Allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough, allows to find new areas at lower than normaly level. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy). +1 exploration reveal.",
+				"You've chosen the 'Eyes of the Hunter (Ex)' perk, allowing you to be able to fight much higher level enemies than you as long your sensitivtiy is high enough, allows to find new areas at lower than normaly level. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy). +1 exploration reveal.");
 		public static const EyesOfTheHunterSu:PerkType = mk("Eyes of the Hunter (Su)", "Eyes of the Hunter (Su)",
-				"Allowing you to increase critical chance and overeal damage dealt to enemies (all with specific type that eyes of hunter allows you to recognize) based on how high is sensitivty. (+1% crit chance/+2% damage per 5 sensitvity up to 95%/190% bonus)",
-				"You've chosen the 'Eyes of the Hunter (Su)' perk, allowing you to increase critical chance and overeal damage dealt to enemies (all with specific type that eyes of hunter allows you to recognize) based on how high is sensitivty. (+1% crit chance/+2% damage per 5 sensitvity up to 95%/190% bonus)");
+				"Allowing you to increase critical chance and overeal damage dealt to enemies (all with specific type that eyes of hunter allows you to recognize) based on how high is sensitivty. (+1% crit chance/+2% damage per 5 sensitvity up to 95%/190% bonus). +1 exploration reveal.",
+				"You've chosen the 'Eyes of the Hunter (Su)' perk, allowing you to increase critical chance and overeal damage dealt to enemies (all with specific type that eyes of hunter allows you to recognize) based on how high is sensitivty. (+1% crit chance/+2% damage per 5 sensitvity up to 95%/190% bonus). +1 exploration reveal.");
 		public static const Feint:PerkType = mk("Feint", "Feint",
 				"Unlocks p. special 'Feint' that has a chance to cause 1 turn long distraction of enemy(ies) that allows you to use a sneaky attack.",
 				"You've chosen the 'Feint' perk. Unlocks p. special 'Feint' that has a chance to cause 1 turn long distraction of enemy(ies) that allows you to use a sneaky attack.");
@@ -3574,7 +3599,7 @@ public class PerkLib
 		public static const DemonEnergyThirst:PerkType = mk("Demonic hunger", "Demonic hunger",
 				"You can metabolise sex into energy and can feed from your partners orgasms.");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
-				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
+				"Pregnancies will not progress when fluid intake is scarce, and will progress much faster when it isn't.");
 		public static const DisplacerMilkAddict:PerkType = mk("Displacer Milk Addict", "Displacer Milk Addict",
 				"Causes you to crave milk frequently.");
 		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
@@ -4300,20 +4325,79 @@ public class PerkLib
 			ePerkL.push(UniqueNPC);
 			return ePerkL;
 		}
-		
+	
+		public static const BASIC_JOBS:/*PerkType*/Array    = [
+			JobAllRounder,
+			/* JobArcaneArcher, - removed */
+			/* JobArcher, - removed */
+			/* JobBarbarian, - removed */
+			JobBeastWarrior,
+			JobGuardian,
+			JobLeader,
+			JobRanger,
+			JobRogue,
+			JobSeducer,
+			JobSorcerer,
+			/* JobSoulArcher, - removed */
+			JobSoulCultivator,
+			JobWarrior
+		];
+		public static const ADVANCED_JOBS:/*PerkType*/Array = [
+			JobBrawler,
+			/* JobBeastlord, */
+			JobCourtesan,
+			JobDefender,
+			JobDervish,
+			JobElementalConjurer,
+			JobEnchanter,
+			JobEromancer,
+			JobGolemancer,
+			JobGunslinger,
+			JobHealer,
+			JobHunter,
+			JobKnight,
+			JobMonk,
+			JobSwordsman,
+			JobWarlord
+		];
+		public static const PRESTIGE_JOBS:/*PerkType*/Array = [
+			PrestigeJobArcaneArcher,
+			PrestigeJobArchpriest,
+			PrestigeJobBard,
+			PrestigeJobBerserker,
+			PrestigeJobBindmaster,
+			PrestigeJobDruid,
+			PrestigeJobNecromancer,
+			/* PrestigeJobSeer, - not implemented */
+			PrestigeJobSentinel,
+			/* PrestigeJobSoulArcher, - not implemented */
+			PrestigeJobSoulArtMaster,
+			PrestigeJobSpellKnight,
+			PrestigeJobStalker,
+			PrestigeJobTempest,
+			PrestigeJobWarlock
+		];
+		public static const ALL_JOBS:/*PerkType*/Array =
+			[].concat(BASIC_JOBS,ADVANCED_JOBS,PRESTIGE_JOBS);
+		public static function isJob(perk:PerkType):Boolean {
+			return ALL_JOBS.indexOf(perk) >= 0;
+		}
+	
 		// Tiered perks
 		// Array of arrays of perks
-		public static const PERK_TIER_LISTS:Array = [
+		public static const PERK_TIER_LISTS:/*PerkType[]*/Array = [
 			// by alphabet (minus prefix) + special sections below
 			[AerialCombat, AdvancedAerialCombat, GreaterAerialCombat],
 			[BasicAllRounderEducation, IntermediateAllRounderEducation, AdvancedAllRounderEducation,
 				ExpertAllRounderEducation, MasterAllRounderEducation],
+			[Amateur, Prostitute, Escort, BrothelOwner, Pornstar, SexChampion],
 			[ArcanePoolI, ArcanePoolII, ArcanePoolIII, ArcanePoolIV, ArcanePoolV, ArcanePoolVI],
 			[ArcaneRegenerationMinor, ArcaneRegenerationMajor, ArcaneRegenerationEpic,
 				ArcaneRegenerationLegendary, ArcaneRegenerationMythical],
 			[ArchersStaminaI, ArchersStaminaII, ArchersStaminaIII, ArchersStaminaIV, ArchersStaminaV, ArchersStaminaVI],
 			[BiggerGolemBagI, BiggerGolemBagII, BiggerGolemBagIII, BiggerGolemBagIV, BiggerGolemBagV, BiggerGolemBagVI],
 			[Blademaster, GrandBlademaster],
+			[BonesOfSteel, MusclesOfSteel, HeartOfSteel, BodyOfSteel, MindOfSteel, SoulOfSteel],
 			[Brawn, ImprovedBrawn, GreaterBrawn, EpicBrawn, LegendaryBrawn, MythicalBrawn],
 			[Brute, ImprovedBrute, GreaterBrute, EpicBrute, LegendaryBrute, MythicalBrute],
 			[CheetahI, CheetahII, CheetahIII, CheetahIV, CheetahV, CheetahVI],
@@ -4328,9 +4412,10 @@ public class PerkLib
 			[CondensedPower],
 			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
 			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
-			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV],
-			[Desensitization, GreaterDesensitization, EpicDesensitization/*, LegendaryDesensitization, MythicalDesensitization*/],
+			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV, DemonicDesireV, DemonicDesireVI],
+			[Desensitization, GreaterDesensitization, EpicDesensitization, LegendaryDesensitization/*, MythicalDesensitization*/],
 			[Diehard, ImprovedDiehard, GreaterDiehard, EpicDiehard],
+			[DoorKnob, Bicycle, MeatHole, BedWarmer, TensionTamer, PartyBoyGirl],
 			[
 				ElementalContractRank1, ElementalContractRank2, ElementalContractRank3, ElementalContractRank4,
 				ElementalContractRank5, ElementalContractRank6, ElementalContractRank7, ElementalContractRank8,
@@ -4354,6 +4439,7 @@ public class PerkLib
 			[GoliathI, GoliathII, GoliathIII, GoliathIV, GoliathV, GoliathVI], // systems functional
 			[GrabbingStyle, GrabbingMaster, GrabbingGrandmaster],
 			[GreyMageApprentice, GreyMage, GreyArchmage, GrandGreyArchmage, GrandGreyArchmage2ndCircle],
+			[HistoryBuff, GuerrillaTactics, StrengthInNumbers, General, SmallArmy, Fellowship],
 			[HumanSupremacyInitial, HumanSupremacyBasic, HumanSupremacyImproved, HumanSupremacyAdvanced, HumanSupremacySuperior],//, CheetahVI
 			[InhumanDesireI, InhumanDesireII, InhumanDesireIII, InhumanDesireIV, InhumanDesireV, InhumanDesireVI],
 			[InsightfulResourcesI, InsightfulResourcesII, InsightfulResourcesIII, InsightfulResourcesIV,
@@ -4364,6 +4450,7 @@ public class PerkLib
 			[Lifeline, ImprovedLifeline, GreaterLifeline, EpicLifeline],
 			[LongerLastingBuffsI, LongerLastingBuffsII, LongerLastingBuffsIII, LongerLastingBuffsIV,
 				LongerLastingBuffsV, LongerLastingBuffsVI],
+			[Lucky, ExtremelyLucky, MoneyFinder, Collector, Hoarder, BlessedByLadyGodiva],
 			[Mage, GrandMage, Archmage, GrandArchmage, GrandArchmage2ndCircle, GrandArchmage3rdCircle],
 			[MeleeWeaponsMastery, MeleeWeaponsMasteryEx, MeleeWeaponsMasterySu],
 			[ManaAffinityI, ManaAffinityII, ManaAffinityIII, ManaAffinityIV, ManaAffinityV, ManaAffinityVI],
@@ -4371,18 +4458,24 @@ public class PerkLib
 			[NaturalHealingMinor, NaturalHealingMajor, NaturalHealingEpic, NaturalHealingLegendary],
 			[Naturaljouster, NaturaljousterMastergrade],
 			[NaturesSpringI, NaturesSpringII, NaturesSpringIII, NaturesSpringIV],
+			[Nurse, Doctor, FirstResponse, Paramedic, SurgeonsAide, Surgeon],
+			[PewWarmer, Acolyte, Priest, Pastor, Saint, Cardinal],
 			[PrimalFuryI, PrimalFuryII, PrimalFuryIII, PrimalFuryIV],
 			[RangeWeaponsMastery, RangeWeaponsMasteryEx, RangeWeaponsMasterySu],
 			[RefinedBodyI, RefinedBodyII, RefinedBodyIII, RefinedBodyIV, RefinedBodyV, RefinedBodyVI],
 			[Regeneration, Regeneration2, Regeneration3, Regeneration4, Regeneration5, Regeneration6],
 			[ResistanceI, ResistanceII, ResistanceIII, ResistanceIV, ResistanceV, ResistanceVI],
+			[SecondRing, ThirdRing, FourthRing],
+			[SoldiersFriend, PyrosFriend, HeavysFriend, EngineersFriend, SnipersFriend, SpysEnemy],
 			[StrongBack, StrongBack2, StrongBack3],
 			[StrongElementalBond, StrongElementalBondEx, StrongElementalBondSu,
 				StrongerElementalBond, StrongerElementalBondEx, StrongerElementalBondSu,
 				StrongestElementalBond, StrongestElementalBondEx, StrongestElementalBondSu
 			],
+			[Studious, Teacher, Professor, Principle, Dean, President],
 			[Survivalist, Survivalist2, Survivalist3],
 			[TankI, TankII, TankIII, TankIV, TankV, TankVI],
+			[Tongs, Bellows, Furnace, Hammer, Anvil, Weap0n],
 			[TraditionalMageI, TraditionalMageII, TraditionalMageIII, TraditionalMageIV, TraditionalMageV, TraditionalMageVI],
 			[TitanicStrength],
 			[TransformationResistance,TransformationAcclimation],
@@ -4393,7 +4486,9 @@ public class PerkLib
 			//[WeaponRangeDoubleStrike, WeaponRangeTripleStrike],
 			//[WeaponSmallDoubleAttack, WeaponSmallTripleAttack, WeaponSmallQuadrupleAttack, WeaponSmallPentaAttack, WeaponSmallHexaAttack,
 			//	WeaponSmallHectaAttack, WeaponSmallOctaAttack, WeaponSmallNonaAttack, WeaponSmallDecaAttack],
+			[Whistles, LyingDown, TakingABreak, SkippingWork, Napping, ZZZ],
 			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
+			[Wizened, PathOfEnlightenment, Embodiment, InControl, Metamorphable, SoulPowered],
 			// special sections
 			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
 			[EpicLibido, LegendaryLibido, MythicalLibido],
@@ -5913,6 +6008,7 @@ public class PerkLib
                     .requireLevel(6);
             ElementalBondFlesh.requireWis(50)
                     .requireLevel(6)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank1) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 1 or Dao of the Elements (layer 1 or higher) perks");
@@ -5976,11 +6072,13 @@ public class PerkLib
                     .requireLevel(12);
             ElementalBondUrges.requireWis(75)
                     .requireLevel(12)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank2) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 2 or Dao of the Elements (layer 1 or higher) perks");
             StrongElementalBond.requireWis(75)
                     .requireLevel(12)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return (player.hasPerk(PerkLib.ElementalContractRank3) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1)) && !player.hasPerk(PerkLib.StrongElementalBond);
                     }, "Having Elemental Contract Rank 3 or Dao of the Elements (layer 1 or higher) perks");
@@ -6005,6 +6103,7 @@ public class PerkLib
                     .requireLevel(18);
 			ElementalConjurerKnowledge.requireWis(100)
                     .requireLevel(18)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank2) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 2 or Dao of the Elements (layer 1 or higher) perks");
@@ -6051,6 +6150,7 @@ public class PerkLib
             StrongElementalBondEx.requirePerk(StrongElementalBond)
                     .requireWis(125)
                     .requireLevel(24)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank5) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 5 or Dao of the Elements (layer 2 or higher) perks");
@@ -6061,6 +6161,7 @@ public class PerkLib
                     .requireLevel(24);
             FirstAttackElementals.requirePerk(StrongElementalBond)
                     .requireLevel(24)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 4 or Dao of the Elements (layer 1 or higher) perks");
@@ -6088,12 +6189,14 @@ public class PerkLib
                     .requireLevel(30);
             FirstAttackElementalsEx.requirePerk(FirstAttackElementals)
                     .requireLevel(30)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank5) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 5 or Dao of the Elements (layer 2 or higher) perks");
 			ElementalConjurerKnowledgeEx.requirePerk(ElementalConjurerKnowledge)
 					.requireWis(150)
                     .requireLevel(30)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 4 or Dao of the Elements (layer 1 or higher) perks");
@@ -6114,6 +6217,7 @@ public class PerkLib
             StrongElementalBondSu.requirePerks(StrongElementalBondEx)
                     .requireWis(175)
                     .requireLevel(36)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank7) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 7 or Dao of the Elements (layer 2 or higher) perks");
@@ -6144,6 +6248,7 @@ public class PerkLib
 			ElementalConjurerKnowledgeSu.requirePerk(ElementalConjurerKnowledgeEx)
 					.requireWis(200)
                     .requireLevel(42)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank6) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
                     }, "Having Elemental Contract Rank 6 or Dao of the Elements (layer 2 or higher) perks");
@@ -6181,6 +6286,7 @@ public class PerkLib
             StrongerElementalBond.requirePerk(StrongElementalBondSu)
                     .requireWis(250)
                     .requireLevel(54)
+					.requirePerk(JobElementalConjurer)
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank10) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 3);
                     }, "Having Elemental Contract Rank 10 or Dao of the Elements (layer 3 or higher) perks");
@@ -6222,7 +6328,8 @@ public class PerkLib
                     .requireLevel(72);
             StrongerElementalBondEx.requirePerks(StrongerElementalBond, ElementalContractRank13)
                     .requireWis(325)
-                    .requireLevel(72);
+                    .requireLevel(72)
+					.requirePerk(JobElementalConjurer);
             //Tier 13 Wisdom perks
             RecoveryMantra.requireLevel(78)
                     .requirePerk(FlurryOfBlows);
@@ -6244,7 +6351,8 @@ public class PerkLib
                     .requireLevel(90);
             StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
                     .requireWis(400)
-                    .requireLevel(90);
+                    .requireLevel(90)
+					.requirePerk(JobElementalConjurer);
 			///Tier 16 Wisdom perks
 			ElementalContractRank17.requirePerk(ElementalContractRank16)
                     .requireWis(425)
@@ -6266,7 +6374,8 @@ public class PerkLib
                     .requireLevel(114);
             StrongestElementalBond.requirePerks(StrongerElementalBondSu, ElementalContractRank20)
                     .requireWis(500)
-                    .requireLevel(90);
+                    .requireLevel(90)
+					.requirePerk(JobElementalConjurer);
 			///Tier 20 Wisdom perks
 			ElementalContractRank21.requirePerk(ElementalContractRank20)
                     .requireWis(525)
@@ -6285,7 +6394,8 @@ public class PerkLib
                     .requireLevel(138);
             StrongestElementalBondEx.requirePerks(StrongestElementalBond, ElementalContractRank24)
                     .requireWis(600)
-                    .requireLevel(138);
+                    .requireLevel(138)
+					.requirePerk(JobElementalConjurer);
 			///Tier 24 Wisdom perks
 			ElementalContractRank25.requirePerk(ElementalContractRank24)
                     .requireWis(625)
@@ -6304,7 +6414,8 @@ public class PerkLib
                     .requireLevel(162);
             StrongestElementalBondSu.requirePerks(StrongestElementalBondEx, ElementalContractRank28)
                     .requireWis(700)
-                    .requireLevel(162);
+                    .requireLevel(162)
+					.requirePerk(JobElementalConjurer);
 			///Tier 28 Wisdom perks
 			ElementalContractRank29.requirePerk(ElementalContractRank28)
                     .requireWis(725)
@@ -6696,6 +6807,16 @@ public class PerkLib
             // MISCELLANEOUS
             //------------
             //Tier 0
+            //Speedy Recovery - Regain Fatigue 50% faster.
+            SpeedyRecovery.requireLevel(0);
+            SpeedyRecuperation.requirePerk(SpeedyRecovery)
+							  .requireLevel(2);
+            RecuperationSleep.requirePerk(SpeedyRecovery)
+							 .requireLevel(2);
+            SpeedyRejuvenation.requirePerk(SpeedyRecuperation)
+							  .requireLevel(4);
+            RejuvenationSleep.requirePerk(RecuperationSleep)
+							 .requireLevel(4);
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));
@@ -6791,8 +6912,6 @@ public class PerkLib
                         return player.internalHumanScore() >= 5 && player.racialScore(Races.HUMAN) > 17;
                     }, "Five human internal mutations & 18+ human score");
 			RacialParagon.requireLevel(6);
-            //Speedy Recovery - Regain Fatigue 50% faster.
-            SpeedyRecovery.requireLevel(6);
             ResistanceI.requireLevel(6);
             Heroism.requireLevel(6);
             DualWield.requireLevel(6);
@@ -6921,6 +7040,8 @@ public class PerkLib
 					.requireAnyPerk(HistorySlut, PastLifeSlut);
 			Tongs.requireLevel(6)
 					.requireAnyPerk(HistorySmith, PastLifeSmith);
+			HistoryBuff.requireLevel(6)
+					.requireAnyPerk(HistoryTactician, PastLifeTactician);
 			Amateur.requireLevel(6)
 					.requireAnyPerk(HistoryWhore, PastLifeWhore);
             //Tier 2
@@ -7068,10 +7189,6 @@ public class PerkLib
                     .requireTou(65)
                     .requireSpe(65)
                     .requireLevel(18);
-            SpeedyRecuperation.requirePerk(SpeedyRecovery)
-							  .requireLevel(18);
-            RecuperationSleep.requirePerk(SpeedyRecovery)
-							 .requireLevel(18);
             NaturalHealingMajor.requireLevel(18)
                     .requirePerk(NaturalHealingMinor)
                     .requireInt(20)
@@ -7092,7 +7209,8 @@ public class PerkLib
             ImprovedDiehard.requireLevel(18)
                     .requirePerk(Diehard);
             MotivationEx.requireLevel(18)
-                    .requirePerk(Motivation);//.requirePerk(IntermediateLeadership)
+                    .requirePerk(Motivation)
+					.requirePerk(IntermediateLeadership);
             VexedNocking.requireLevel(18)
 					.requireStr(10)
 					.requireSpe(10);
@@ -7198,6 +7316,8 @@ public class PerkLib
 					.requirePerk(DoorKnob);
 			Bellows.requireLevel(24)
 					.requirePerk(Tongs);
+			GuerrillaTactics.requireLevel(24)
+					.requirePerk(HistoryBuff);
 			Prostitute.requireLevel(24)
 					.requirePerk(Amateur);
             BasicAllRounderEducation.requireLevel(24)
@@ -7238,10 +7358,6 @@ public class PerkLib
                     .requireInt(110)
                     .requireWis(110)
                     .requirePerk(MasterGolemMaker);
-            SpeedyRejuvenation.requirePerk(SpeedyRecuperation)
-							  .requireLevel(30);
-            RejuvenationSleep.requirePerk(RecuperationSleep)
-							 .requireLevel(30);
             NaturalHealingLegendary.requireLevel(30)
                     .requirePerk(NaturalHealingEpic)
                     .requireInt(30)
@@ -7331,6 +7447,8 @@ public class PerkLib
 					.requirePerk(Bicycle);
 			Furnace.requireLevel(42)
 					.requirePerk(Bellows);
+			StrengthInNumbers.requireLevel(42)
+					.requirePerk(GuerrillaTactics);
 			Escort.requireLevel(42)
 					.requirePerk(Prostitute);
 			LimitBreakerBody1stStage.requireLevel(42);
@@ -7443,6 +7561,8 @@ public class PerkLib
 					.requirePerk(MeatHole);
 			Hammer.requireLevel(72)
 					.requirePerk(Furnace);
+			General.requireLevel(72)
+					.requirePerk(StrengthInNumbers);
 			BrothelOwner.requireLevel(72)
 					.requirePerk(Escort);
 			LimitBreakerBody2ndStage.requireLevel(72)
@@ -7516,6 +7636,8 @@ public class PerkLib
 					.requirePerk(BedWarmer);
 			Anvil.requireLevel(102)
 					.requirePerk(Hammer);
+			SmallArmy.requireLevel(102)
+					.requirePerk(General);
 			Pornstar.requireLevel(102)
 					.requirePerk(BrothelOwner);
             //Tier 18
@@ -7545,7 +7667,8 @@ public class PerkLib
             //Tier 30
 			Perfection.requireLevel(180)
 					.requirePerk(Saturation);
-			Creationism.requirePerk(Perfection);
+			Creationism.requireLevel(180)
+					.requirePerk(Perfection);
 			SoulPowered.requireLevel(180)
 					.requirePerk(Metamorphable);
 			SoulOfSteel.requireLevel(180)
@@ -7566,6 +7689,8 @@ public class PerkLib
 					.requirePerk(TensionTamer);
 			Weap0n.requireLevel(180)
 					.requirePerk(Anvil);
+			Fellowship.requireLevel(180)
+					.requirePerk(SmallArmy);
 			SexChampion.requireLevel(180)
 					.requirePerk(Pornstar);
 			TransformationAcclimation.requirePerk(TransformationResistance);

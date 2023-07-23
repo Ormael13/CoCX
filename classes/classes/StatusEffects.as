@@ -238,6 +238,8 @@ import classes.StatusEffects.VampireThirstEffect;
 
 		// Non-combat player perks
 		public static const AdvancingCamp:StatusEffectType                 	= mk("AdvancingCamp");
+		// value1-4: quests statuses
+		// 1: started I, 2: completed I, 3: started II, 4: completed II, 6: started III, 7: completed III
 		public static const AdventureGuildQuests1:StatusEffectType          = mk("Adventure Guild Quests 1");//Imps Hunt / Demons Hunt / Minotaurs Hunt / x
 		public static const AdventureGuildQuests2:StatusEffectType          = mk("Adventure Guild Quests 2");//Feral Tentacle Beasts Hunt / Feral Imps Hunt / x / x
 		public static const AdventureGuildQuests3:StatusEffectType          = mk("Adventure Guild Quests 3");//x / x / x / x
@@ -556,6 +558,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MitziPregnant:StatusEffectType                	= mk("Mitzi Pregnant");
 		public static const Naga:StatusEffectType                           = mk("Naga");
 		public static const NakedOn:StatusEffectType                        = mk("NakedOn");
+		public static const NegativeLevel:StatusEffectType                  = mk("Negative Level");
 		public static const NoJojo:StatusEffectType                         = mk("noJojo");
 		public static const NoMoreMarble:StatusEffectType                   = mk("No More Marble");
 		public static const Oswald:StatusEffectType                         = mk("Oswald");
@@ -715,10 +718,12 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DivaOff:StatusEffectType             = mk("Diva Off");
 		public static const ElectraOff:StatusEffectType          = mk("Electra Off");
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
+		public static const HeliaOff:StatusEffectType            = mk("Helia Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
 		public static const VenusOff:StatusEffectType            = mk("Venus Off");
-		public static const SpoodersOff:StatusEffectType         = mk("Belisa Off");
+		public static const SophieOff:StatusEffectType           = mk("Sophie Off");
+		public static const SpoodersOff:StatusEffectType         = mk("Spooders Off");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
@@ -1045,6 +1050,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Rage:StatusEffectType                      = mkCombat("Rage");
 		public static const RaijuStaticDischarge:StatusEffectType      = mkCombat("Raiju Static Discharge");
 		public static const RegenInhibitor:StatusEffectType            = mkCombat("Regen Inhibitor");
+		public static const RegenInhibitorPetrify:StatusEffectType     = mkCombat("Regen Inhibitor (Petrify)");
 		public static const ResonanceVolley:StatusEffectType           = mkCombat("Resonance Volley");
 		public static const Rosethorn:StatusEffectType                 = mkCombat("Rosethorn Poison");
 		public static const Sandstorm:StatusEffectType                 = mkCombat("sandstorm");

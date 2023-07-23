@@ -109,7 +109,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 				outputText("She smiles wickedly and intones, \"<i>nuf erutuf rof riah ydnas, nus tresed eht sa ydnas.</i>\"\n\nYou feel a tingling in your scalp, and realize your hair has become a sandy blonde!");
 				player.hairColor = "sandy blonde";
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		private function refuseSandWitchMagic():void {
@@ -192,14 +192,14 @@ internal function sandwitchRape():void {
 		cleanupAfterCombat();
 	}
 	//HP DEFEAT
-	else { 
+	else {
 		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3) {
 			clearOutput();
 			outputText("You stagger and fall to one knee, too overcome by pain to keep fighting.\n\nAs your vision wavers with exhaustion, the witch strides towards you, seeming to glide across the sand. Your consciousness starts to fade, and you see the exotic woman lick her lips and smile cruelly, staring at your generous breasts.\n\nThe last thing you hear before passing out is a mysterious spell, murmured right into your ear in a low, throaty whisper: \"<i>Evals klim ym emoceb llahs uoy.</i>\"\n\nYou dream of walking proudly through the desert, enormous rack jiggling shamelessly with every step, and of tempting nubile young champions to wrap their lips around your nipples and drink. Your sleep becomes fevered as your dreams grow more and more corrupt - you dream of using dark magic to lactate succubus milk, and of your former friends from Ingnam greedily drinking your enhanced milk until their bellies strain to contain it all, then going wide-eyed as pound after pound of breast-flesh suddenly swells upon their chests...");
 			//BAD END.
 			doNext(sandWitchBadEnd);
 			return;
-		}				
+		}
 		outputText("\n<b>You fall, defeated by the Sand Witch!</b>\n\n");
 		cleanupAfterCombat();
 	}
@@ -355,7 +355,7 @@ private function centaurRide():void {
     //[has breasts]
     if(player.biggestTitSize() > 0) outputText("fondle your [allbreasts] and ");
     outputText("tease your " + nippleDescript(0) + "s, and you can feel her grinding herself against your strong shoulders. ");
-    //[orb penetrated player during combat] 
+    //[orb penetrated player during combat]
     outputText("With a start you realize that the witch's orb is still inside you as it suddenly begins to pulse within your " + player.assholeOrPussy() + ", causing you to cry out and hasten your pace across the dunes. ");
     outputText("You lose track of time and location as you ride, feeling her orgasm over and over against you, her milk pouring down your back and spilling onto the sands. ");
     //[has breasts]
@@ -365,7 +365,7 @@ private function centaurRide():void {
             outputText("Your own " + nippleDescript(0) + "s  are leaking as well, ");
             //[light-med lactation]
             if(player.biggestLactation() < 3) outputText("small streams running out ");
-            //[heavy lactation] 
+            //[heavy lactation]
             else outputText("torrents gushing out ");
             outputText("under her expert hands. ");
         }
@@ -455,7 +455,7 @@ private function centaurDick():void {
     else outputText("Lining up two of your cocks to her twin cunts and another to her anus, you thrust into her without pre-amble.  Her anal muscles try to keep you out, but they are no match for the strength of your legs.  You tear into her, ");
     //part 2
     outputText("eliciting a scream as your hind quarters push her forcefully over the sand. ");
-    //[largest cock is wide] 
+    //[largest cock is wide]
     if(player.cocks[x].cockThickness >= 3)
         outputText("It is hard to believe just how tight she is, though if her cries serve as any indication, she will not be after you are through with her.  Turned on even more, you thrust in with increasing vigor and try to widen her as much as possible. ");
     //[2+ cocks]
@@ -478,9 +478,9 @@ private function centaurDick():void {
     //[largest cock is not wide and/or long]
     else outputText(", and her cries have long since turned into groans of pleasure. ");
     outputText("You cannot hold off your orgasm any longer. Your [cocks] explode" + (cocks == 1 ? "" : "s") + ", ");
-    //[large cum production] 
+    //[large cum production]
     if(player.cumQ() >= 250) outputText("gushing massive amounts of your cum ");
-    //[regular cum production] 
+    //[regular cum production]
     else outputText("pushing your sperm ");
     outputText("deep into her ");
     //[1 cock, tentacle]
@@ -497,7 +497,7 @@ private function centaurDick():void {
 
 private function centaurVA_start():void {
     outputText("Finished with your games ");
-    //[has cunt] 
+    //[has cunt]
     if(player.hasVagina()) outputText("and your " + vaginaDescript(0) + " dripping with desire");
     outputText(", you push the witch unceremoniously to the ground and deliver a slap to her breasts.  She cries out in pain as milk splashes out onto the sand.  A cruel smile is brought to your face and you start slapping them even harder, alternatively smacking her pair of cunts for good measure.  Surprisingly, her cries of pain begin to turn into moans of pleasure with every slap.  She might even be pushing into the blows slightly, though it is difficult to tell.  After a sizable pool of milk and her juices has drained into the sands beneath her, you reach down and start to drive your fingers hard into one of the sand witch's cunts.  The first few thrusts are enough to violently bring her to orgasm.  You trot forward slowly until you are over her and the witch suddenly hops up. Driving her face into your ");
 }
@@ -509,7 +509,7 @@ private function centaurVag():void {
     if(player.vaginalCapacity() < 10) outputText("one of her fingers ");
     //[cunt size is normal]
     else if(player.vaginalCapacity() < 20) outputText("several of her fingers ");
-    //[cunt size is large] 
+    //[cunt size is large]
     else outputText("a fist ");
     outputText("pushing deep into your " + vaginaDescript(0) + ", and you're surprised as ");
     //[anus size is small]
@@ -596,7 +596,7 @@ public function sexMenu():void {
     outputText("\n\n<b>SceneHunter: Taur scenes reworked too - more options with UniHerms!</b>");
     //menu
     //because corrupt scenes are REALLY rough here. 2/3 is fair IMO
-    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance; 
+    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance;
     var hiCor:Boolean = player.cor >= 66 - player.corruptionTolerance;
     //pure options
     addButtonIfTrue(0, "Sex", sandwitchSex, "Req. cock and low corruption", lowCor && player.hasCock());
@@ -740,13 +740,13 @@ private function missingoSex6():void {
 
 	outputText("It is like fucking christmas up in here.");
 	//{Player gains about as many gems experience points as they would from a Sand Witch encounter, and the Champion is returned to camp.}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
 //Either type on Sandwich: Finished (Radar)(edited)
 //Display standard victory dialogue, yadda yadda, etc
-//[Sex]----> [sex options here]   [Oviposition] 
+//[Sex]----> [sex options here]   [Oviposition]
 private function ovipositSandWitches():void {
 	clearOutput();
 	outputText("As you glance down at the ");
@@ -756,7 +756,7 @@ private function ovipositSandWitches():void {
 	if(monster.HP <= monster.minHP()) outputText("fright as she clamors to get away.");
 	else outputText("an uneasy curiosity to see what exactly you have planned.");
 	
-	//PC won through HP victory: 
+	//PC won through HP victory:
 	if(monster.HP <= monster.minHP()) outputText("\n\nRolling your eyes, you offer a sympathetic hand to the defeated witch, showing her that you don't mean to hurt her any further, that you have something more... pleasurable in mind.  ");
 	outputText("The sand witch slows to a dead stop as she assesses your intentions, which are made all the more clear as you disrobe and toss your [armor] aside, exposing your ");
 	if(player.hasCock()) outputText("hardened  " + multiCockDescriptLight());
@@ -804,7 +804,7 @@ private function eggwitchForeplay():void {
 //[Get Fucking]
 private function getToFuckingWithZeEggsInWitch():void {
 	clearOutput();
-	//[PC corruption is less than 60: 
+	//[PC corruption is less than 60:
 	if(player.cor < 66) {
 		outputText("While you understand her reservation about being abruptly turned into a host for your young, you know that the experience can be mutually euphoric.  You descend upon the prone sand witch, taking her into a gentle embrace to soothe her uneasiness, and whisper to her that you understand her concern, but ask her to give this a chance.  Her apprehension evaporates slightly at your soft words, but quickly flares up again when she spots the wavering ovipositor that dangles hungrily behind you.  Hastily, you assure her that she'll enjoy the experience, before planting a passionate kiss on the sand witch's soft lips.");
 	
@@ -938,8 +938,8 @@ private function helpZeWithBirfBabies():void {
 	
 	//Body check
 	//no, not like in hockey
-	//PC has a centaur body, or other body capable of carrying the sand witch:  
-	//"W-what the hell did you do to yourself over the last few days?" the sand witch blurts, noticing the 
+	//PC has a centaur body, or other body capable of carrying the sand witch:
+	//"W-what the hell did you do to yourself over the last few days?" the sand witch blurts, noticing the
 	//difference in your appearance since the union with wide eyes.  The words are cut off, however, as she doubles over in pain. (transitions to PC is a drider/centaur/whatever scene)
 	if(!player.isDrider()) outputText("\n\n\"<i>W-what the hell did you do to yourself over the last few days?</i>\" the sand witch blurts, noticing the difference in your appearance since your union.  The words that come out of her mouth next are cut off however, as she doubles over in pain.");
 	
@@ -952,7 +952,7 @@ private function helpZeWithBirfBabies():void {
 		else outputText("gallop");
 		outputText(" across the dry desert sea...");
 	}
-	//PC is everything else: 
+	//PC is everything else:
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
 	doNext(sandwitchBirthsYourMonstrosities, false);
 }
@@ -962,10 +962,10 @@ private function reluctantlyHelpZeWitch():void {
 	outputText("\n\nGreat.  Of all the things you could be doing, you get stuck helping this twit out.  Why she couldn't have just stayed home or gone to the swamp is beyond you at this point - you grumble at your misfortune, helping the bearer of your young to rise to her feet.");
 	
 	//body fork
-	//PC has a centaur body, or other body capable of carrying the sand witch: 
+	//PC has a centaur body, or other body capable of carrying the sand witch:
 	if(!player.isDrider()) outputText("\n\n\"<i>W-what the hell did you do to yourself over the last few days?</i>\" the sand witch blurts, noticing the difference in your appearance since your union.  The words that come out of her mouth next are cut off however, as she doubles over in pain.  Well, not like you needed any guff from a woman with four tits and multiple cunts.");
 
-	//PC is a drider/centaur/whatever:  
+	//PC is a drider/centaur/whatever:
 	if(player.isDrider() || player.isTaur()) {
 		outputText("\n\n\"<i>I-I can't get up, it hurts too much!</i>\" she cries out, despairing of making it somewhere safe it in time, and that your children will be born and die out here, all in the same day.  Annoyed at her lack of common sense, you tell her to get on your back, sinking to the ground to allow her to hobble up.");
 		outputText("\n\n\"<i>Please, not too fast!</i>\" she calls out, clearly trying her best to not have the labors of your lust right here and now.  You'll be goddamned furious if she ends up having the kids right here and now; it's a bear to clean parts of you when your arms can't reach them!  Rising to your feet, you attempt to recall which direction to go, only to realize that you're lost.  Even better- well, actually, it doesn't matter.  Concentrating on the camp, you yell at the sand witch to hold on, then ");
@@ -973,8 +973,9 @@ private function reluctantlyHelpZeWitch():void {
 		else outputText("gallop");
 		outputText(" across the dry desert sea...");
 	}
-	//PC is everything else:  
+	//PC is everything else:
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
+	explorer.stopExploring();
 	doNext(sandwitchBirthsYourMonstrosities, true);
 }
 
@@ -1010,7 +1011,7 @@ public function witchBirfsSomeBees():void {
 	
 	outputText("\n\nContent with how things turned out, you head back to camp and decide on the next course of action for today.");
 	pregnancy.knockUpForce(); //Clear Pregnancy
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function sandwitchSpanking():void {

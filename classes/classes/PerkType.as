@@ -149,10 +149,20 @@ public class PerkType extends BaseContent
 			for each (var req:Object in requirements) {
 				// skip if player passes the requirement
 				if (req.fn(player)) continue;
+				var x:Number;
 				if (req.distanceFor is Function) {
-					d += Math.max(0, req.distanceFor(player));
+					x = Math.max(0, req.distanceFor(player));
 				} else if (req.distance is Number && isFinite(req.distance) && req.distance > 0) {
-					d += req.distance;
+					x = req.distance;
+				}
+				if (req.type == 'allperks') {
+					x += req.allperks.length*PerkType.DISTANCE_PER_PERK;
+					d = Math.max(d, x);
+				} else if (req.type == 'perk' || req.type == 'anyperk') {
+					x += PerkType.DISTANCE_PER_PERK;
+					d = Math.max(d, x);
+				} else {
+					d += x;
 				}
 			}
 			return d;

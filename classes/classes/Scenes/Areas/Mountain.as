@@ -10,12 +10,13 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.API.SimpleEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.Places.Mindbreaker;
@@ -31,7 +32,7 @@ public class Mountain extends BaseContent
 		public var lactabovinaScene:LactaBovinaScene = new LactaBovinaScene();
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
-		public var darkelfScene:DarkElfScene = new DarkElfScene();
+		public var lightelfScene:LightElfScene = new LightElfScene();
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var minervaScene:MinervaScene = new MinervaScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
@@ -59,23 +60,24 @@ public class Mountain extends BaseContent
 		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
-			_hillsEncounter = Encounters.group("hills", {
-				//General Angels, Golems, Goblin and Imp Encounters
-				name: "common",
-				chance: 0.5,
-				call: function ():void{
-					if (rand(10) == 0 && player.level > 5) SceneLib.exploration.genericAngelsEncounters();
-					else SceneLib.exploration.genericGolGobImpEncounters();
-				}
-			}, {
+			_hillsEncounter = Encounters.group("hills",
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
+					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
+			{
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
@@ -89,6 +91,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name  : "etna1",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 0)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
@@ -100,17 +105,23 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name  : "etna2",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 1)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: mountainChance,
+				chance: 0.5,
 				call  : function ():void {
 					 SceneLib.etnaScene.etnaInfidelityEncounterRepeat();
 				}
 			}, {
 				name  : "alvina1",
+				label : "Alvina",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] == 8;
 				},
@@ -118,6 +129,9 @@ public class Mountain extends BaseContent
 				call  : SceneLib.alvinaFollower.alvinaSecondEncounter
 			}, {
 				name  : "alvina2",
+				label : "Alvina",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] == 9
 						   && flags[kFLAGS.LETHICE_DEFEATED] > 0
@@ -127,6 +141,9 @@ public class Mountain extends BaseContent
 				call  : SceneLib.alvinaFollower.alvinaSecondBonusEncounter
 			}, {
 				name: "lowmountains",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] <= 0
 						   && ((player.level + combat.playerLevelAdjustment()) >= 15)
@@ -135,48 +152,61 @@ public class Mountain extends BaseContent
 				chance: Encounters.ALWAYS
 			},{
 				name: "minomob",
+				label : "Mino Mob",
+				kind : 'monster',
 				night : false,
 				when: function ():Boolean {
-					return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3;
+					return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina();
 				},
 				call: minotaurMobScene.meetMinotaurSons,
 				mods: [SceneLib.exploration.furriteMod]
 			}, {
 				name:"minotaur",
+				label : "Minotaur",
+				kind : 'monster',
 				night : false,
 				chance:minotaurChance,
 				call:minotaurRouter,
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"lacta_bovina",
+				label : "Lacta Bovina",
+				kind : 'monster',
 				night : false,
 				chance:0.7,
 				call:lactabovinaScene.lactaBovinaInto,
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"factory",
+				label : "Factory",
+				kind  : 'place',
+				unique: true,
 				when:function():Boolean {
 					return flags[kFLAGS.MARAE_QUEST_START] >= 0.5 && flags[kFLAGS.FACTORY_FOUND] <= 0;
 				},
 				call: SceneLib.dungeons.factory.enterDungeon
 			},{
 				name:"ceraph",
+				label : "Ceraph",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				chance: mountainChance,
 				when:function ():Boolean {
-					return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
-							/* [INTERMOD:8chan]
-							&& flags[kFLAGS.CERAPH_KILLED] == 0
-							 */
-							/*&& game.fetishManager.compare(FetishManager.FETISH_EXHIBITION)*/;
+					return !SceneLib.ceraphFollowerScene.ceraphIsFollower();
 				},
 				call:ceraphFn,
 				mods:[fn.ifLevelMin(2)]
 			},{
-				name: "darkelf",
-				call: darkelfScene.introDarkELfScout
+				name: "lightelf",
+				label : "Light Elf",
+				kind : 'monster',
+				call: lightelfScene.introLightELfScout
 			}, {
 				name: "lactoblasters",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Lactoblasters") < 0;
 				},
@@ -184,14 +214,20 @@ public class Mountain extends BaseContent
 				call: partsofLactoBlasters
 			}, {
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name:"hikeh",
 				chance:0.2,
+				kind:'walk',
 				call:hikeh
 			}, {
 				name: "mimic",
+				label : "Mimic",
+				kind : 'monster',
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
@@ -203,26 +239,29 @@ public class Mountain extends BaseContent
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
 			}*/);
-			_lowmountainEncounter = Encounters.group("low mountains", {
-				//General Angels, Goblin and Imp Encounters
-				name: "common",
-				chance: 0.5,
-				call: function ():void{
-					SceneLib.exploration.genericGobImpAngEncounters();
-				}
-			}, {
+			_lowmountainEncounter = Encounters.group("low mountains",
+					SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "salon",
+				label : "Salon",
+				kind  : 'place',
+				unique: true,
 				when: fn.not(salon.isDiscovered),
 				call: salon.hairDresser
 			},{
 				name: "mountains",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return player.exploredMountain <= 0
 						   && ((player.level + combat.playerLevelAdjustment()) >= 30)
@@ -231,6 +270,9 @@ public class Mountain extends BaseContent
 				chance: Encounters.ALWAYS
 			},{
 				name: "snowangel",
+				label : "Snow Angel",
+				kind  : 'event',
+				unique: true,
 				when: function():Boolean {
 					return isChristmas()
 						   && player.gender > 0
@@ -242,16 +284,23 @@ public class Mountain extends BaseContent
 				call: SceneLib.holidays.gatsSpectacularRouter
 			},{
 				name:"jackfrost",
+				label : "Jack Frost",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 				},
 				call: SceneLib.holidays.meetJackFrostInTheMountains
 			},{
 				name:"hellhound",
+				label : "Hellhound",
+				kind  : 'monster',
 				call:hellHoundScene.hellhoundEncounter,
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"infhhound",
+				label : "Inf. Hellhound",
+				kind  : 'monster',
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.WormsOn);
 				},
@@ -262,6 +311,8 @@ public class Mountain extends BaseContent
 				mods:[SceneLib.exploration.furriteMod]
 			},{
 				name:"worms1",
+				label : "Worms",
+				kind  : 'monster',
 				when: function():Boolean {
 					return !player.hasStatusEffect(StatusEffects.WormsOn)
 						   && !player.hasStatusEffect(StatusEffects.WormsOff);
@@ -269,6 +320,8 @@ public class Mountain extends BaseContent
 				call: wormsScene.wormToggle
 			},{
 				name:"worms2",
+				label : "Worms",
+				kind  : 'monster',
 				chance: function ():Number {
 					return player.hasStatusEffect(StatusEffects.WormsHalf) ? 0.5 : 1;
 				},
@@ -280,6 +333,9 @@ public class Mountain extends BaseContent
 				call: wormsScene.wormEncounter
 			},{
 				name:"hhound_master",
+				label : "Hellhound Master",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				chance:2,
 				when:function():Boolean {
@@ -300,6 +356,9 @@ public class Mountain extends BaseContent
 				call:hellHoundScene.HellHoundMasterEncounter
 			}, {
 				name: "electra",
+				label : "Electra",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
@@ -317,6 +376,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name: "diva",
+				label : "Diva",
+				kind  : 'npc',
+				unique: true,
 				when: function():Boolean {
 					return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0 && !player.hasStatusEffect(StatusEffects.DivaOff);
 				},
@@ -324,16 +386,23 @@ public class Mountain extends BaseContent
 				call: DivaScene.instance.encounter
 			},{
 				name: "quarry",
+				label : "Quarry",
+				kind  : 'place',
 				when: function():Boolean {
 					return player.statusEffectv2(StatusEffects.ResourceNode1) < 5;
 				},
 				chance: 4,
 				call: camp.cabinProgress.quarrySite
 			},{
-				name: "darkelf",
-				call: darkelfScene.introDarkELfSlaver
+				name: "lightelf",
+				label : "Light Elf",
+				kind  : 'monster',
+				call: lightelfScene.introLightELfSlaver
 			},{
 				name: "derpnade launcher",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 0 && player.hasKeyItem("Derpnade Launcher") < 0;
 				},
@@ -341,10 +410,16 @@ public class Mountain extends BaseContent
 				call: partsofDerpnadeLauncher
 			}, {
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name  : "mindbreaker",
+				label : "Mindbreakers Cave",
+				kind  : 'place',
+				unique: true,
 				call  : SceneLib.mindbreaker.findMindbreaker,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
@@ -352,6 +427,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name  : "mindbreaker",
+				label : "Mindbreakers Cave",
+				kind  : 'npc',
+				unique: true,
 				call  : SceneLib.mindbreaker.findMindbreakerAgain,
 				chance: findMindbreakerChance,
 				when  : function ():Boolean {
@@ -359,10 +437,14 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name:"hike",
+				label : "Hike",
+				kind  : 'walk',
 				chance:0.2,
 				call:hike
 			}, {
 				name: "mimic",
+				label : "Mimic",
+				kind : 'monster',
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
@@ -376,6 +458,9 @@ public class Mountain extends BaseContent
 			}*/);
 			_mountainEncounter = Encounters.group("mountain", {
 				name: "demonlab",
+				label : "Demon Laboratory",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
 				},
@@ -391,12 +476,18 @@ public class Mountain extends BaseContent
 			}, {*/
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: mountainChance,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "highmountains",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return !SceneLib.highMountains.isDiscovered()
 						   && ((player.level + combat.playerLevelAdjustment()) >= 55)
@@ -405,6 +496,9 @@ public class Mountain extends BaseContent
 				chance: Encounters.ALWAYS
 			},{
 				name: "snowangel",
+				label : "Snow Angel",
+				kind  : 'event',
+				unique: true,
 				when: function():Boolean {
 					return isChristmas()
 						   && player.gender > 0
@@ -416,12 +510,18 @@ public class Mountain extends BaseContent
 				call: SceneLib.holidays.gatsSpectacularRouter
 			},{
 				name:"jackfrost",
+				label : "Jack Frost",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 				},
 				call: SceneLib.holidays.meetJackFrostInTheMountains
 			},{
 				name: "electra",
+				label : "Electra",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
@@ -439,6 +539,9 @@ public class Mountain extends BaseContent
 				}
 			}, {
 				name: "minerva",
+				label : "Minerva",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.MET_MINERVA] < 4;
@@ -446,30 +549,40 @@ public class Mountain extends BaseContent
 				call: minervaScene.encounterMinerva
 			}, {
 				name: "izumi",
-				when: function ():Boolean {
-					return flags[kFLAGS.SOUL_SENSE_IZUMI] < 3;
-				},
+				label : "Izumi",
+				kind  : 'npc',
+				unique: true,
 				call: izumiScenes.encounter
 			}, {
 				name: "harpy",
+				label : "Harpy",
+				kind : 'monster',
 				night : false,
 				call: harpyScene.encounter
 			}, {
 				name: "basilisk",
+				label : "Basilisk",
+				kind : 'monster',
 				call: basiliskScene.basiliskGreeting
 			}, {
 				name: "sophie",
+				label : "Sophie",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] <= 0
 						&& flags[kFLAGS.SOPHIE_DISABLED] <= 0
-						&& !SceneLib.sophieFollowerScene.sophieFollower();
+						&& !SceneLib.sophieFollowerScene.sophieFollower()
+						&& !player.hasStatusEffect(StatusEffects.SophieOff);
 				},
 				chance: mountainChance,
 				call: SceneLib.sophieScene.sophieRouter
 			}, {
-				name: "darkelf",
-				call: darkelfScene.introDarkELfRanger
+				name: "lightelf",
+				label : "Light Elf",
+				kind : 'monster',
+				call: lightelfScene.introLightELfRanger
 			}, {/*
 				name: "lactoblasters",
 				when: function ():Boolean {
@@ -479,14 +592,21 @@ public class Mountain extends BaseContent
 				call: partsofLactoBlasters
 			}, {*/
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name:"hike",
+				label : "Hike",
+				kind  : 'hike',
 				chance:0.2,
 				call:hike
 			}, {
 				name: "mimic",
+				label : "Mimic",
+				kind : 'monster',
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
@@ -506,25 +626,40 @@ public class Mountain extends BaseContent
 		}
 		//Explore Mountain
 		public function exploreMountain():void {
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			player.exploredMountain++;
-			mountainEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(mountainEncounter);
+			explorer.setTags("mountain","mountainMid");
+			explorer.prompt = "You explore the mountain.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				player.exploredMountain++;
+			}
+			explorer.leave.hint("Leave the mountain");
+			explorer.skillBasedReveal(30, player.exploredMountain);
+			explorer.doExplore();
 		}
 		public function exploreLowMountain():void {
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
-			lowMountainEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(lowMountainEncounter);
+			explorer.setTags("mountain","mountainLow");
+			explorer.prompt = "You explore the low mountains.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
+			}
+			explorer.leave.hint("Leave the low mountains");
+			explorer.skillBasedReveal(15, flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]);
+			explorer.doExplore();
 		}
 		public function exploreHills():void {
-			clearOutput();
-			doNext(camp.returnToCampUseOneHour);
-			flags[kFLAGS.DISCOVERED_HILLS]++;
-			hillsEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(hillsEncounter);
+			explorer.soulSenseCheck = function(e:SimpleEncounter):Boolean {
+				return e.getKind() == 'npc' || e.encounterName() == 'minomob';
+			}
+			explorer.setTags("hills");
+			explorer.prompt = "You explore the hills.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.DISCOVERED_HILLS]++;
+			}
+			explorer.leave.hint("Leave the hills");
+			explorer.skillBasedReveal(5, flags[kFLAGS.DISCOVERED_HILLS]);
+			explorer.doExplore();
 		}
 		public function ceraphFn():void {
 			//Rarer 'nice' Ceraph encounter
@@ -540,7 +675,7 @@ public class Mountain extends BaseContent
 
 		public function mountainChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function minotaurChance():Number {
@@ -576,7 +711,7 @@ public class Mountain extends BaseContent
 						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grâce</i>.  As he readies the blow, another beast-man slams into him from the side.  The two of them begin to fight for the honor of raping you, giving you the opening you need to escape.  You quietly sneak away while they fight – perhaps you should avoid the mountains for now?\n\n");
 					}
 					player.createStatusEffect(StatusEffects.TF2, 0, 0, 0, 0);
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				//Mino gangbang
@@ -647,7 +782,7 @@ public class Mountain extends BaseContent
 			outputText("You carefully put the pieces of the Derpnade Launcher in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Derpnade Launcher", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function partsofLactoBlasters():void {
 			clearOutput();
@@ -655,20 +790,20 @@ public class Mountain extends BaseContent
 			outputText("You carefully put the pieces of the Lactoblasters in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Lactoblasters", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function discoverLM():void {
 			clearOutput();
 			outputText("While exploring the hill you come upon a particular trail. It looks to lead deeper into the mountain range. Having met the many unsavory denizens of the hill already you clench your fist ready for a new challenge as you take up the trail toward the mountain. The atmosphere changes quickly as plants become scarcer and rocky formation more common. ");
 			outputText("Caves previously a rare occurrence now are a regular sight. You have found the way to the low mountain range area.\n\n(<b>Low Mountain exploration location unlocked!</b>)");
 			flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function discoverM():void {
 			clearOutput();
 			outputText("As you explore the low mountain range you hear thunder booming overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it. Forward is a path leading deeper higher into the mountains and possibly harder trials.\n\n<b>You've discovered the Mountain!</b>");
 			player.exploredMountain = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function hike():void {
 			clearOutput();
@@ -680,7 +815,7 @@ public class Mountain extends BaseContent
 				outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
 				dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function hikeh():void {
 			clearOutput();
@@ -692,7 +827,7 @@ public class Mountain extends BaseContent
 				outputText("During your hike into the hills, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
 				dynStats("tou", .2, "spe", .4, "lib", .2, "lus", player.lib / 12);
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function joinBeingAMinoCumSlut():void
 		{
@@ -822,7 +957,7 @@ public class Mountain extends BaseContent
 			}
 			//(Acquired minotaur cum!)
 			model.time.hours++;
-			inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.MINOCUM, explorer.done);
 		}
 
 		private function watchAMinoCumSlut():void
@@ -845,7 +980,7 @@ public class Mountain extends BaseContent
 			outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");
 			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges.  You count at least two goblins and one imp who quickly pull back.  From the sounds, they were busy getting themselves off.  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			dynStats("lus", 25, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		private function continueMinoVoyeurism():void {
@@ -865,7 +1000,7 @@ public class Mountain extends BaseContent
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			//Lust!
 			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR, false) + player.racialScore(Races.COW, false), "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

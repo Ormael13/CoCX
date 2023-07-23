@@ -20,11 +20,20 @@ public class GorgonEyesMutation extends IMutationPerkType
             if (pTier >= 1){
                 descS += "Allows you to use Petrify with any type of eyes and improves your resistance to attacks that are related to sight";
             }
-            if (pTier >= 2){
-                descS += ", increases your reactions & Petrify's duration, and inverts the negative effects of resistances against basilisk and similars";
+            if (pTier == 2){
+                descS += ", increases your reactions & Petrify's duration";
             }
             if (pTier >= 3){
-                descS += ", ";
+                descS += ", increases your reactions & Petrify's duration (with bonus for having gorgon hair)";
+            }
+            if (pTier >= 2){
+                descS += ", and inverts the negative effects of resistances against basilisk and similars";
+            }
+            if (pTier == 3){
+                descS += ", same bonus as Eyes of the Hunter (Ex) perk but with limit to 5(10 w/ gorgon hair) lvl's, Petrify would work on any enemy even if they used invisibility ability (excluding been underground)";
+            }
+            if (pTier == 4){
+                descS += ", same bonus as Eyes of the Hunter (Ex) perk but with limit to 15(30 w/ gorgon hair) lvl's, Petrify would work on any enemy even if they used invisibility ability (excluding been underground), could use enhanced version of Petrification that is shorter but enemy HP/mana/SF recovery is fully stopped during it";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -39,6 +48,9 @@ public class GorgonEyesMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -73,17 +85,25 @@ public class GorgonEyesMutation extends IMutationPerkType
             var pBuffs:Object = {};
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.05;
-                pBuffs['sens'] = 5
+                pBuffs['sens'] = 5;
             }
             if (pTier == 2) {
                 pBuffs['spe.mult'] = 0.15;
                 pBuffs['sens'] = 15;
             }
+            if (pTier == 3) {
+                pBuffs['spe.mult'] = 0.45;
+                pBuffs['sens'] = 45;
+            }
+            if (pTier == 4) {
+                pBuffs['spe.mult'] = 1.5;
+                pBuffs['sens'] = 150;
+            }
             return pBuffs;
         }
 
         public function GorgonEyesMutation() {
-            super(mName + " IM", mName, SLOT_EYES, 2);
+            super(mName + " IM", mName, SLOT_EYES, 4);
         }
 
     }

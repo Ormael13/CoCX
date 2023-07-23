@@ -66,7 +66,7 @@ public function postNameEncSure():void {
 }
 public function postNameEncNotNow():void {
 	outputText("You don’t have time for sparring right now. Diana looks slightly disappointed, but she nods respectfully as you head out back to camp.\n\n");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function wonOverDiana():void {
@@ -791,7 +791,7 @@ public function SexMenuBreeding():void {
 	outputText("When it will be ready.\n\n");
 	outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
 	player.sexReward("vaginalFluids","Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 */
 
@@ -816,7 +816,7 @@ public function SexMenuVaginal():void {
 		outputText("Diana pouts a bit before you both say your goodbyes, and then you head off.\n\n");
 	//}
 	player.sexReward("vaginalFluids","Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function SexMenuAnal():void {
 	clearOutput();
@@ -854,7 +854,7 @@ public function SexMenuAnal():void {
 		}
 	//}
 	player.sexReward("no", "Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function SexMenuTitsfuck():void {
 	clearOutput();
@@ -927,7 +927,7 @@ public function SexMenuTitsfuck():void {
 		}
 	//}
 	player.sexReward("no", "Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function BelisaDianaTalk():void {
@@ -946,7 +946,7 @@ private function BelisaDianaTalk():void {
 	outputText("Nearly an hour later, Belisa’s home bobs to the surface, and Diana walks up onto the beach, a smile on her face. You ask her how it went, and she nods once.\n\n");
 	outputText("\"<i>Your friend is going to be just fine. She’s going to be very sore in the mouth for a few days, but the curse is gone, and her fang has been regrown.</i>\" Diana sighs. \"<i>Please take me back to camp, my stallion…That curse was quite draining on me. Whoever did it wasn’t skilled at all, but had a lot of power behind them.</i>\" You half-carry your mare back to camp, and she’s out cold once she hits her bed. You make a mental note to thank Diana sometime soon.\n\n");
 	BelisaFollower.BelisaQuestComp = true;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 	}
 }

@@ -327,7 +327,7 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "If that’s what he wants you’ll leave him be.\n");
         outputText("<b>Zenji has temporarily left the camp.</b>");
-        SceneLib.zenjiScene.zenjiHenchmanOption(true);
+        SceneLib.zenjiScene.zenjiHenchmanOption2(true);
         TrollVillage.ZenjiFollowing = false;
         TrollVillage.ZenjiVillageStage = 2;
         if (flags[kFLAGS.SLEEP_WITH] == "Zenji") {
@@ -387,7 +387,7 @@ public class Yenza extends TrollVillageAbstractContent{
         TrollVillage.ZenjiTrollVillageTimeChk = -1;
         TrollVillage.ZenjiVillageStage = 3;
         if (!TrollVillage.ZenjiFollowing){
-            SceneLib.zenjiScene.zenjiHenchmanOption(true);
+            SceneLib.zenjiScene.zenjiHenchmanOption2(true);
         }
         if (TrollVillage.ZenjiSleep && flags[kFLAGS.SLEEP_WITH] == ""){
             flags[kFLAGS.SLEEP_WITH] = "Zenji";

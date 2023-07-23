@@ -8,6 +8,7 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.EngineCore;
 import classes.Items.Consumable;
+import classes.Items.ItemTags;
 import classes.Races;
 
 public class VampireBlood extends Consumable {
@@ -23,6 +24,7 @@ public class VampireBlood extends Consumable {
                         "A vial of thick, deep red liquid. It has a slightly metallic scent."
         );
         pure = purified;
+        withTag(ItemTags.U_TF);
     }
     override public function get description():String{
         if(pure){
@@ -51,7 +53,7 @@ public class VampireBlood extends Consumable {
         }
 
         changes = 0;
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;

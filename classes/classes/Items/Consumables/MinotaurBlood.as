@@ -9,18 +9,20 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
+import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
-import classes.CoC;
 
 public class MinotaurBlood extends Consumable {
 	public function MinotaurBlood() {
 		super("MinoBlo","MinoBlo", "a vial of Minotaur blood", 6, "You've got a scratched up looking vial full of bright red minotaur blood.  Any time you move it around it seems to froth up, as if eager to escape.")
+		withTag(ItemTags.U_TF);
 	}
 
 
@@ -29,10 +31,10 @@ public class MinotaurBlood extends Consumable {
 		//Changes done
 		var changes:Number = 0;
 		//Change limit
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2;
 		if (rand(2) == 0) changeLimit++;
-		if (rand(3) == 0) changeLimit++;
-		if (rand(3) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
 		if (changeLimit == 1) changeLimit = 2;
 		changeLimit += player.additionalTransformationChances;
 		//Temporary storage

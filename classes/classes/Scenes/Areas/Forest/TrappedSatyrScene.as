@@ -16,7 +16,7 @@ public class TrappedSatyrScene extends BaseContent {
         //(Player lacks a penis:
         if (!player.hasCock()) {
             outputText("You can't really see any way to take advantage of this scenario, so you simply turn back and leave the way you came.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
             //Player returns to camp)
         //(Player has penis:
@@ -37,7 +37,7 @@ public class TrappedSatyrScene extends BaseContent {
                 : "not feeling inclined to rape some satyr butt right now") +
             ", and silently leave him to his pleasures.");
         dynStats("lus", 5 + player.lib / 20, "scale", false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Player returns to camp
@@ -90,7 +90,7 @@ public class TrappedSatyrScene extends BaseContent {
         clearOutput();
         spriteSelect(SpriteDb.s_stuckSatyr);
         outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your [armor] and leave the rutting satyr behind.");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //[=Again=]
@@ -105,7 +105,7 @@ public class TrappedSatyrScene extends BaseContent {
         outputText("You give your sensitive member a few trembling, almost-painful strokes... maybe you overdid it a bit.  Shrugging, you gather your [armor] and leave the passed-out satyr behind as you go back to your camp.");
         player.orgasm();
         dynStats("lib", 1, "sen", -5);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 }
 }

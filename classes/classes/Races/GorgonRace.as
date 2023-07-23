@@ -55,7 +55,8 @@ public class GorgonRace extends Race {
 							return !(body.player.racialScore(Races.NAGA) > 10
 									|| CouatlRace.isCouatlLike(body)
 									|| VouivreRace.isVouivreLike(body)
-									|| HydraRace.isHydraLike(body));
+									|| HydraRace.isHydraLike(body)
+									|| ApophisRace.isApophisLike(body));
 						}, 0, -1000);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);

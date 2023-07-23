@@ -5,11 +5,10 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Swamp.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.LilyFollower;
@@ -36,6 +35,9 @@ use namespace CoC;
 		private function init():void {
 			_swampEncounter = Encounters.group("swamp", {
 				name: "discoverbog",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return (player.level + combat.playerLevelAdjustment()) >= 23 && flags[kFLAGS.BOG_EXPLORED] == 0
 				},
@@ -43,6 +45,9 @@ use namespace CoC;
 				call: discoverBog
 			}, {
 				name: "gunparts",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("M1 Cerberus") < 0
 				},
@@ -50,6 +55,9 @@ use namespace CoC;
 				call: partsofM1Cerberus
 			}, {
 				name: "belisa",
+				label : "Belisa",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.SpoodersOff) && BelisaFollower.BelisaEncounternum == 0
 				},
@@ -57,6 +65,9 @@ use namespace CoC;
 				call: SceneLib.belisa.firstEncounter
 			}, {
 				name: "lily",
+				label : "Lily",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !player.hasStatusEffect(StatusEffects.SpoodersOff) && !LilyFollower.LilyFollowerState
 				},
@@ -64,6 +75,9 @@ use namespace CoC;
 				call: SceneLib.lily.lilyEncounter
 			}, {
 				name: "kihaxhel",
+				label : "Kiha x Helia",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return !SceneLib.kihaFollower.followerKiha() && player.cor < 60 + player.corruptionTolerance && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0
 				},
@@ -71,6 +85,9 @@ use namespace CoC;
 				call: SceneLib.kihaFollower.kihaXSalamander
 			}, {
 				name: "emberegg",
+				label : "Egg",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0
 				},
@@ -78,30 +95,36 @@ use namespace CoC;
 				call: SceneLib.emberScene.findEmbersEgg
 			}, {
 				name: "spidermale",
+				label : "Spider (M)",
+				kind  : 'monster',
 				call: maleSpiderMorphScene.greetMaleSpiderMorph
 			}, {
 				name: "spiderfemale",
+				label : "Spider (F)",
+				kind  : 'monster',
 				call: femaleSpiderMorphScene.fSpiderMorphGreeting
 			}, {
 				name: "drider",
+				label : "Drider",
+				kind  : 'monster',
 				call: corruptedDriderScene.driderEncounter
 			}, {
 				name: "rogar",
+				label : "Ro'gar",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_PHASE] < 3
 				},
 				night: false,
 				call: rogar.encounterRogarSwamp
-			}, {
-				name: "kiha1",
-				when: function ():Boolean {
-					return SceneLib.kihaFollower.followerKiha()
-				},
-				chance: swampChance,
-				night: false,
-				call: SceneLib.kihaScene.kihaExplore
-			}, {
+			}, SceneLib.kihaScene.kihaTerrirotyEncounters.withCondition(function():Boolean {
+				return SceneLib.kihaFollower.followerKiha()
+			}), {
 				name: "kiha2",
+				label : "Kiha",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return !SceneLib.kihaFollower.followerKiha()
 				},
@@ -111,12 +134,18 @@ use namespace CoC;
 			}, {
 				//Helia monogamy fucks
 				name: "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
 				chance: swampChance,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -137,21 +166,25 @@ use namespace CoC;
 
 		public function exploreSwamp():void
 		{
-			clearOutput();
-			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
-			doNext(camp.returnToCampUseOneHour);
-			swampEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(swampEncounter);
+			explorer.setTags("swamp");
+			explorer.prompt = "You explore the wet swamplands.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
+			}
+			explorer.leave.hint("Leave the wet swamplands");
+			explorer.skillBasedReveal(13, flags[kFLAGS.TIMES_EXPLORED_SWAMP]);
+			explorer.doExplore();
 		}
 
 		public function swampChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 		public function swampChance2():Number {
 			var temp:Number = 5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 
@@ -159,7 +192,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)");
 			flags[kFLAGS.BOG_EXPLORED]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function partsofM1Cerberus():void {
@@ -168,7 +201,7 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the M1 Cerberus in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("M1 Cerberus", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 	}

@@ -580,7 +580,7 @@ public function ChiChiCampMainMenu():void {
 		amilyInteraction();
 		return;
 	}
-	else if (rand(4) == 0 && !heliaInteractionHappened && SceneLib.helScene.followerHel()) {
+	else if (rand(4) == 0 && !heliaInteractionHappened && SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 		heliaInteraction();
 		return;
 	}
@@ -1227,3 +1227,4 @@ public function mishapsLunaChiChi():void {
 	}
 }
 }
+

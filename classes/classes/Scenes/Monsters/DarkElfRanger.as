@@ -10,7 +10,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.internals.*;
 
-public class DarkElfRanger extends DarkElfScout
+public class DarkElfRanger extends DarkElfs
 	{
 		override public function DarkElfBowShooting():void
 		{

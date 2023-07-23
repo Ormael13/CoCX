@@ -46,6 +46,7 @@ import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Places.WoodElves;
@@ -3958,7 +3959,7 @@ use namespace CoC;
 			if (hasMutation(IMutationsLib.HumanAdrenalGlandsIM)) internalHumanCounter += perkv1(IMutationsLib.HumanAdrenalGlandsIM);//4
 			if (hasMutation(IMutationsLib.HumanBloodstreamIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBloodstreamIM);//3
 			if (hasMutation(IMutationsLib.HumanBonesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanBonesIM);//3
-			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//3
+			if (hasMutation(IMutationsLib.HumanEyesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanEyesIM);//4
 			if (hasMutation(IMutationsLib.HumanFatIM)) internalHumanCounter += perkv1(IMutationsLib.HumanFatIM);//3
 			if (hasMutation(IMutationsLib.HumanMusculatureIM)) internalHumanCounter += perkv1(IMutationsLib.HumanMusculatureIM);//3
 			if (hasMutation(IMutationsLib.HumanOvariesIM)) internalHumanCounter += perkv1(IMutationsLib.HumanOvariesIM);//4
@@ -5494,14 +5495,20 @@ use namespace CoC;
 			return minslot;
 		}
 
-		public function hasItem(itype:ItemType, minQuantity:int = 1):Boolean {
-			return itemCount(itype) >= minQuantity;
+		public function hasItem(itype:ItemType, minQuantity:int = 1, allBags:Boolean = false):Boolean {
+			return itemCount(itype, allBags) >= minQuantity;
 		}
 
-		public function itemCount(itype:ItemType):int {
+		public function itemCount(itype:ItemType, allBags:Boolean = false):int {
 			var count:int = 0;
 			for each (var itemSlot:ItemSlotClass in itemSlots){
 				if (itemSlot.itype == itype) count += itemSlot.quantity;
+			}
+			if (allBags) {
+				for each (itemSlot in SceneLib.inventory.pearlStorageSlice()) {
+					if (itemSlot.itype == itype) count += itemSlot.quantity;
+				}
+				count += AdventurerGuild.lootBag.itemCount(itype);
 			}
 			return count;
 		}
@@ -5594,6 +5601,16 @@ use namespace CoC;
 			}
 			return -1;
 		}
+		public function roomForItem(itype:ItemType):int {
+			var n:int = 0;
+			for (var i:int = 0; i<itemSlots.length; i++) {
+				var slot:ItemSlotClass = itemSlots[i];
+				if (!slot.unlocked) continue;
+				if (slot.itype == itype) n += slot.roomLeft();
+				if (slot.isEmpty()) n += itype.stackSize;
+			}
+			return n;
+		}
 
 		public function itemSlot(idx:int):ItemSlotClass
 		{
@@ -5609,18 +5626,36 @@ use namespace CoC;
 		}
 
 
-		public function destroyItems(itype:ItemType, numOfItemToRemove:Number):Boolean
+		public function destroyItems(itype:ItemType, numOfItemToRemove:Number, allBags:Boolean = false):Boolean
 		{
-			for (var slotNum:int = 0; slotNum < itemSlots.length; slotNum += 1)
-			{
-				if(itemSlot(slotNum).itype == itype)
-				{
-					while(itemSlot(slotNum).quantity > 0 && numOfItemToRemove > 0)
-					{
-						itemSlot(slotNum).removeOneItem();
-						numOfItemToRemove--;
+			var itemSlot:ItemSlotClass;
+			if (numOfItemToRemove <= 0) return true;
+			if (itype.isNothing) return false;
+			if (allBags) {
+				// Remove from adv guild loot bag
+				var n:int = AdventurerGuild.lootBag.itemCount(itype);
+				if (n > 0) {
+					n = Math.min(numOfItemToRemove, n);
+					AdventurerGuild.lootBag.removeItem(itype, n);
+					numOfItemToRemove -= n;
+				}
+				// Remove from SPPearl
+				if (numOfItemToRemove <= 0) return true;
+				for each (itemSlot in SceneLib.inventory.pearlStorageSlice()) {
+					if (itemSlot.itype == itype) {
+						numOfItemToRemove -= itemSlot.removeMany(numOfItemToRemove);
+						if (numOfItemToRemove <= 0) return true;
 					}
 				}
+			}
+			// Remove from inventory
+			if (numOfItemToRemove <= 0) return true;
+			for (var slotNum:int = 0; slotNum < itemSlots.length; slotNum += 1) {
+				itemSlot = itemSlots[slotNum];
+				if (itemSlot.itype == itype) {
+					numOfItemToRemove -= itemSlot.removeMany(numOfItemToRemove);
+				}
+				if (numOfItemToRemove <= 0) return true;
 			}
 			return numOfItemToRemove <= 0;
 		}
@@ -5924,14 +5959,16 @@ use namespace CoC;
 		}
 
 		public function gainCombatXP(index:int, exp:Number):void{
-			var level:Number = combatMastery[index].level;
-			var levelUp:Boolean = false;
-			var experience:Number = combatMastery[index].experience;
-			var melee:Boolean = combatMastery[index].melee;
-			var desc:String = combatMastery[index].desc;
+			var masteryObj:Object = combatMastery[index];
+			var level:Number = masteryObj.level;
+			var levelUp:Boolean        = false;
+			var experience:Number      = masteryObj.experience;
+			var melee:Boolean          = masteryObj.melee;
+			var desc:String            = masteryObj.desc;
 
 			var xpToLevel:Number = CombatExpToLevelUp(level, melee);
 			var xpLoop:Number = exp;
+			var oldProgress:Number = experience/xpToLevel;
 			// for tracking bonus attack masteries
 			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
 			var maxAttacksOld:int = SceneLib.combat.maxCurrentAttacks();
@@ -5944,6 +5981,10 @@ use namespace CoC;
 				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
 					levelUp = true;
 					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
+					game.mainView.notificationView.popupIconText(
+							"CombatMastery"+masteryObj.combat,
+							"CombatMastery"+masteryObj.combat,
+							desc+" leveled up to "+level+"!");
 					// Any Leftover EXP?
 					xpLoop = experience - xpToLevel;
 					experience = 0;
@@ -5951,8 +5992,18 @@ use namespace CoC;
 					xpToLevel = CombatExpToLevelUp(level, melee);
 				}
 			}
-            combatMastery[index].level = level;
-            combatMastery[index].experience = experience;
+            masteryObj.level = level;
+            masteryObj.experience = experience;
+			var newProgress:Number = experience/xpToLevel;
+			if (!levelUp && level < maxCombatLevel(melee)) {
+				game.mainView.notificationView.popupProgressBar2(
+						"CombatMastery"+masteryObj.combat,
+						"CombatMastery"+masteryObj.combat,
+						trimSides(desc).replace(/<\/b>/g,""),
+						oldProgress,
+						newProgress
+				)
+			}
 			// Can we get any new attacks?
 			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
 				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
@@ -6071,21 +6122,26 @@ use namespace CoC;
 			return expToLevelUp;
 		}
 		public function mineXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					miningXP++;
-					XP--;
-				}
-				else {
-					miningXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (miningLevel < maxMiningLevel() && miningXP >= MiningExpToLevelUp()) {
-					outputText("\n\n<b>Mining skill leveled up to " + (miningLevel + 1) + "!</b>");
+			if (XP == 0) return;
+			var oldRatio:Number = miningXP / MiningExpToLevelUp();
+			miningXP += XP;
+			game.mainView.notificationView.popupProgressBar2(
+					"mineXP","mineXP",
+					"Mining XP +"+XP,
+					oldRatio,
+					miningXP / MiningExpToLevelUp()
+			);
+			while (miningLevel < maxMiningLevel()) {
+				var toNextLevel:Number = MiningExpToLevelUp();
+				if (miningXP > toNextLevel) {
 					miningLevel++;
-					miningXP = 0;
-				}
+					outputText("\n\n<b>Mining skill leveled up to " + miningLevel + "!</b>");
+					game.mainView.notificationView.popupIconText(
+							"mineXP","mineXP",
+							"Mining skill leveled up to " + miningLevel + "!"
+					);
+					miningXP -= toNextLevel;
+				} else break;
 			}
 		}
 
@@ -6113,21 +6169,26 @@ use namespace CoC;
 			return expToLevelUp;
 		}
 		public function farmXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					farmingXP++;
-					XP--;
-				}
-				else {
-					farmingXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (farmingLevel < maxFarmingLevel() && farmingXP >= FarmExpToLevelUp()) {
-					outputText("\n\n<b>Farming skill leveled up to " + (farmingLevel + 1) + "!</b>");
+			if (XP == 0) return;
+			var oldRatio:Number = farmingXP / FarmExpToLevelUp();
+			farmingXP += XP;
+			game.mainView.notificationView.popupProgressBar2(
+					"farmXP","farmXP",
+					"Farming XP +"+XP,
+					oldRatio,
+					farmingXP / FarmExpToLevelUp()
+			);
+			while (farmingLevel < maxFarmingLevel()) {
+				var toNextLevel:Number = FarmExpToLevelUp();
+				if (farmingXP > toNextLevel) {
 					farmingLevel++;
-					farmingXP = 0;
-				}
+					outputText("\n\n<b>Farming skill leveled up to " + farmingLevel + "!</b>");
+					game.mainView.notificationView.popupIconText(
+							"farmXP","farmXP",
+							"Farming skill leveled up to " + farmingLevel + "!"
+					);
+					farmingXP -= toNextLevel;
+				} else break;
 			}
 		}
 
@@ -6170,21 +6231,26 @@ use namespace CoC;
 			return expToLevelUp;
 		}
 		public function herbXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					herbalismXP++;
-					XP--;
-				}
-				else {
-					herbalismXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (herbalismLevel < maxHerbalismLevel() && herbalismXP >= HerbExpToLevelUp()) {
-					outputText("\n\n<b>Herbalism skill leveled up to " + (herbalismLevel + 1) + "!</b>");
+			if (XP == 0) return;
+			var oldRatio:Number = herbalismXP / HerbExpToLevelUp();
+			herbalismXP += XP;
+			game.mainView.notificationView.popupProgressBar2(
+					"herbXP","herbXP",
+					"Herbalism XP +"+XP,
+					oldRatio,
+					herbalismXP / HerbExpToLevelUp()
+			);
+			while (herbalismLevel < maxHerbalismLevel()) {
+				var toNextLevel:Number = HerbExpToLevelUp();
+				if (herbalismXP > toNextLevel) {
 					herbalismLevel++;
-					herbalismXP = 0;
-				}
+					outputText("\n\n<b>Herbalism skill leveled up to " + herbalismLevel + "!</b>");
+					game.mainView.notificationView.popupIconText(
+							"herbXP","herbXP",
+							"Herbalism skill leveled up to " + herbalismLevel + "!"
+					);
+					herbalismXP -= toNextLevel;
+				} else break;
 			}
 		}
 
@@ -6234,20 +6300,22 @@ use namespace CoC;
 		}
 
 		public function SexXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					teaseXP++;
-					XP--;
-				}
-				else {
-					teaseXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (teaseLevel < maxTeaseLevel() && teaseXP >= teaseExpToLevelUp()) {
+			if (XP <= 0) return;
+			var oldProgress:Number = teaseXP/teaseExpToLevelUp();
+			teaseXP += XP;
+			//Level dat shit up!
+			if (teaseLevel < maxTeaseLevel()) {
+				if (teaseXP >= teaseExpToLevelUp()) {
 					outputText("\n<b>Tease skill leveled up to " + (teaseLevel + 1) + "!</b>");
 					teaseLevel++;
 					teaseXP = 0;
+					game.mainView.notificationView.popupIconText("TeaseXP", "TeaseXP","Tease skill level up!");
+				} else {
+					game.mainView.notificationView.popupProgressBar2(
+							"TeaseXP","TeaseXP","Tease XP",
+							oldProgress,
+							teaseXP/teaseExpToLevelUp(),
+							"#ff00ff");
 				}
 			}
 		}
@@ -6564,10 +6632,12 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
+			if (miscjewelryName == "Ezekiel's Seal") additionalTransformationChancesCounter += 3;
+			if (miscjewelryName2 == "Ezekiel's Seal") additionalTransformationChancesCounter += 3;
 			return additionalTransformationChancesCounter;
 		}
 
-		public function MutagenBonus(statName: String, bonus: Number):Boolean
+		public function MutagenBonus(statName: String, bonus: Number, applyEffect: Boolean = true):Boolean
 		{
 			var cap:Number = 0.2;
 			if (hasPerk(PerkLib.Enhancement)) cap += 0.02;
@@ -6581,7 +6651,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
-            if (removeCurse(statName, bonus, 1) > 0)
+            if (applyEffect && removeCurse(statName, bonus, 1) > 0)
                 return false; //remove existing curses
             var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
             var bonus_sign:Number = (bonus > 0) ? 1 : -1;
@@ -6590,9 +6660,11 @@ use namespace CoC;
                 return false;
 
             var addBonus:Number = bonus_sign * Math.min(Math.abs(bonus_sign * cap - current), Math.abs(bonus * 0.01));
-            buff("Mutagen").addStat(statName + ".mult", addBonus);
-            CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-            CoC.instance.mainView.statsView.showStatUp(statName);
+            if (applyEffect) {
+                buff("Mutagen").addStat(statName + ".mult", addBonus);
+                CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+                CoC.instance.mainView.statsView.showStatUp(statName);
+            }
             return true;
 		}
 
@@ -6922,8 +6994,8 @@ use namespace CoC;
 					if(game.inCombat) outputText(" [themonster] gulps as [monster he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
 					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
 				}
-				if(lust100 >= 100){
-					lust = maxLust()*99/100
+				if ((lust100 >= 100) && !hasPerk(PerkLib.WhatIsReality)){
+					lust = maxLust() * 99 / 100;
 				}
 			}
 		}
@@ -6952,6 +7024,24 @@ use namespace CoC;
 		public function resetCooldowns():void {
 			for (var i:int = 0; i<cooldowns.length; i++) {
 				cooldowns[i] = 0;
+			}
+		}
+		
+		public function get negativeLevel():int {
+			return statusEffectv1(StatusEffects.NegativeLevel);
+		}
+		public function addNegativeLevels(n:int):void {
+			level -= n;
+			if (hasStatusEffect(StatusEffects.NegativeLevel)) {
+				addStatusValue(StatusEffects.NegativeLevel, 1, n);
+			} else {
+				createStatusEffect(StatusEffects.NegativeLevel, n, 0, 0, 0);
+			}
+		}
+		public function recoverNegativeLevel(n:int):void {
+			addStatusValue(StatusEffects.NegativeLevel, 1, -n);
+			if (negativeLevel <= 0) {
+				removeStatusEffect(StatusEffects.NegativeLevel);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.HighMountains 
+package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.BodyParts.Hips;
@@ -10,7 +10,7 @@ import classes.Scenes.SceneLib;
 
 public class PhoenixScene extends BaseContent
 	{
-				
+		
 		//" + (player.cocks.length == 1 ? "": "") + "
 		public function PhoenixScene() {}
 
@@ -150,7 +150,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nYour " + cockDescript() + " explodes, pumping a thick load into the shocked quasi-phoenix’s mouth. She gags on your cum, finally swallowing it as the last of your sperm drips into her mouth. With a grin, you tell her what a good job she did as you withdraw your [cock] from her grip. With little rivulets of cum dripping down her face, the halfbreed collapses onto her back, rapidly fingering herself.");
 			flags[kFLAGS.PHOENIX_WANKED_COUNTER]++;
 			player.sexReward("Default","Default",true,false);
-			cleanupAfterCombat();			
+			cleanupAfterCombat();
 		}
 		
 		public function rideVaginal():void {
@@ -265,6 +265,7 @@ public class PhoenixScene extends BaseContent
 			player.addCurse("str",2,2);
 			player.sexReward("cum","Anal");
 			player.addCurse("tou", 2, 2);
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseFourHours);
 		}
 		

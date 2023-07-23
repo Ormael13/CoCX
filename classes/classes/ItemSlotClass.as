@@ -1,6 +1,8 @@
 ﻿package classes
 {
-	public class ItemSlotClass extends Object
+import classes.internals.Utils;
+
+public class ItemSlotClass extends Object
 	{
 		// storage types (for determining stack size)
 		public static const STORAGE_NORMAL:int = 0;
@@ -58,6 +60,17 @@
 
 			if (this._quantity == 0)
 				this._itype = ItemType.NOTHING;
+		}
+		/**
+		 * Remove at most `count` items.
+		 * @param count
+		 * @return number of actual items removed
+		 */
+		public function removeMany(count:int):int {
+			count = Utils.boundInt(0, count, _quantity);
+			_quantity -= count;
+			if (_quantity == 0) _itype = ItemType.NOTHING;
+			return count;
 		}
 
 		public function get quantity():Number

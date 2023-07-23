@@ -1,9 +1,7 @@
 //The code that is responsible for managing MainView.
 package classes {
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 
-import coc.view.BitmapDataSprite;
 import coc.view.BoundClip;
 import coc.view.MainView;
 import coc.view.StatsView;
@@ -14,10 +12,10 @@ import flash.display.DisplayObjectContainer;
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
 import flash.events.TimerEvent;
+import flash.text.TextField;
 import flash.ui.Keyboard;
 import flash.utils.Timer;
 import flash.utils.getQualifiedClassName;
-
 
 public class MainViewManager extends BaseContent {
 	//Interface flags
@@ -92,7 +90,7 @@ public class MainViewManager extends BaseContent {
 		} else {
 			// display in the corner
 			mainView.placeCharviewAtRight();
-			mainView.addElement(mainView.charView);
+			mainView.addElementBelow(mainView.charView, mainView.notificationView);
 		}
 	}
 	public function hidePlayerDoll():void {
@@ -228,6 +226,13 @@ public class MainViewManager extends BaseContent {
 				if (scaleY != obj.scaleY) ssy += "=" + scaleY;
 			}
 			s += salpha + svis + ssx + ssy;
+			var txt:TextField = obj as TextField;
+			if (txt) {
+				var ts:String = txt.text;
+				if (ts.length > 0) ts = ts.substr(0, 17) + "...";
+				ts = ts.replace(/[\r\n\t]/g, ' ');
+				s += ", txt='"+ts+"'";
+			}
 
 			/*var txt:IDisplayText = obj as IDisplayText;
 			 if (txt) {

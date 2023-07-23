@@ -1354,7 +1354,7 @@ private function playerLovers():int {
 	if (flags[kFLAGS.AMILY_FOLLOWER] == 1) loverSet |= KBIT_LOVER_AMILY; //Not > 0; probably don’t want to admit having corrupt Amily follower to Katherine
 	if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2) loverSet |= KBIT_LOVER_COTTON;
 	if ((flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0) && (player.statusEffectv1(StatusEffects.Edryn) > 3)) loverSet |= KBIT_LOVER_EDRYN;
-	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && SceneLib.helScene.followerHel()) loverSet |= KBIT_LOVER_HELIA;
+	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) loverSet |= KBIT_LOVER_HELIA;
 	if (SceneLib.urta.urtaFuckbuddy()) loverSet |= KBIT_LOVER_URTA;
 	if (flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX] > 0) loverSet |= KBIT_LOVER_VALA;
 	return loverSet;

@@ -408,13 +408,6 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 	
 	public function bringBackEncoutersForSouless():void {
-		if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) flags[kFLAGS.SOUL_SENSE_GIACOMO] = 2;
-		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) flags[kFLAGS.SOUL_SENSE_TAMANI] = 2;
-		if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] = 2;
-		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) flags[kFLAGS.SOUL_SENSE_PRISCILLA] = 2;
-		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] = 2;
-		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) flags[kFLAGS.SOUL_SENSE_IZUMI] = 2;
-		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] = 2;
 	}
 
 	public function fixFlags():void {
@@ -1264,17 +1257,17 @@ public class SaveUpdater extends NPCAwareContent {
 			clearOutput();
 			outputText("Jiangshi getting Tag'd and your backpack feel somehow cheaper (no worry will get back some gems for it if needed).");
 			if (player.hasKeyItem("Backpack") >= 0) player.gems += (150 * player.keyItemvX("Backpack", 1));
-			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 1) {
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.lootBag.SlotCaps[0] < 1) {
 				outputText(" Very small present from Adventure Guild for having easier to manage all the loot ;)");
-				AdventurerGuild.Slot01Cap = 10;
-				AdventurerGuild.Slot02Cap = 10;
+				AdventurerGuild.lootBag.SlotCaps[0] = 10;
+				AdventurerGuild.lootBag.SlotCaps[1] = 10;
 			}
-			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.Slot03Cap < 1) {
+			if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && AdventurerGuild.lootBag.SlotCaps[2] < 1) {
 				outputText(" Small present from Adventure Guild for having easier to manage all the loot ;)");
-				AdventurerGuild.Slot01Cap = 10;
-				AdventurerGuild.Slot02Cap = 10;
-				AdventurerGuild.Slot03Cap = 10;
-				AdventurerGuild.Slot04Cap = 10;
+				AdventurerGuild.lootBag.SlotCaps[0] = 10;
+				AdventurerGuild.lootBag.SlotCaps[1] = 10;
+				AdventurerGuild.lootBag.SlotCaps[2] = 10;
+				AdventurerGuild.lootBag.SlotCaps[3] = 10;
 			}
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 2 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 				outputText(" Oops seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk permanency will be nullified.");
@@ -1514,7 +1507,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.021;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.022) {
-				if (AdventurerGuild.Slot04Cap >= 5) AdventurerGuild.Slot05Cap = 10;
+				if (AdventurerGuild.lootBag.SlotCaps[3] >= 5) AdventurerGuild.lootBag.SlotCaps[4] = 10;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.022;
 			}
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36.0;
@@ -1680,7 +1673,6 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
-				flags[kFLAGS.SOUL_SENSE_ANTHILL] = 0; //Izma fishery cleanup.
 				// convert old buff tags to new ("item_"+itemid)
 				const ItemBuffsRename:Array = [
 					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],

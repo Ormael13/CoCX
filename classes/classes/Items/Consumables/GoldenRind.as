@@ -1,4 +1,4 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
 import classes.Items.*;
 import classes.Scenes.SceneLib;
@@ -10,9 +10,10 @@ import classes.Scenes.SceneLib;
 	public class GoldenRind extends Consumable
 	{
 		
-		public function GoldenRind() 
+		public function GoldenRind()
 		{
 			super("GldRind", "GoldenRind", "a golden rind", ConsumableLib.DEFAULT_VALUE, "This shimmering, citrus peel is shaped like a corkscrew and smells sweet and sour at the same time.");
+			withTag(ItemTags.U_TF);
 		}
 		
 		override public function useItem():Boolean {

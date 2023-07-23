@@ -193,15 +193,16 @@ package classes.Scenes.Areas.Bog
 				return;
 			}
 			//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
+			var cgx:Number = monster.vaginalCapacity();
 			menu();
-            addButtonIfTrue(0, "Use Dick", manFucksChameleonWithBiggishWang, "Req. dick area < " + monster.vaginalCapacity(),
+            addButtonIfTrue(0, "Use Dick", manFucksChameleonWithBiggishWang, "Req. dick area < " + cgx,
                 player.cockThatFits(monster.vaginalCapacity()) >= 0);
             addButtonIfTrue(1, "Use Pussy", femaleHasWinSexWithChamCham, "", player.hasVagina());
             addButtonIfTrue(2, "Herm Way", fuckDatChameleonAsACoolGuyGirlHerm, "", player.gender == 3);
             //items
             addButtonIfTrue(3, "Suc.Milk", giveTheChameleonASuccubiMilk, "Req. Suc.(P.S.) Milk and fitting cock",
                 (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.cockThatFits(monster.vaginalCapacity()) >= 0);
-            addButtonIfTrue(4, "Lust&SensD", giveTheChameleonASuccubiMilk, "Req. LustDraft + Sens./Fuck Draft",
+            addButtonIfTrue(4, "Lust&SensD", doseDatChameleonWithLustAndSensitivityDrafts, "Req. LustDraft + Sens./Fuck Draft",
                 player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT)));
             addButton(14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatChameleonGirl);

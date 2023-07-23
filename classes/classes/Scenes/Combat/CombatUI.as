@@ -11,8 +11,8 @@ import classes.BodyParts.Wings;
 import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Items.Weapons.MoonlightGreatsword;
 import classes.Items.Weapons.MoonlightClaws;
+import classes.Items.Weapons.MoonlightGreatsword;
 import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
@@ -25,6 +25,7 @@ import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Monsters.AngelLR;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
@@ -68,14 +69,14 @@ public class CombatUI extends BaseCombatContent {
 		soulforceButtons.clear();
 		otherButtons.clear();
 
-		var btnMelee:CoCButton      = button(0).icon("I_GenericWeapon_Sword");
-		var btnRanged:CoCButton     = button(1).icon("I_GenericWeapon_Bow");
-		var btnTease:CoCButton      = button(2).icon("I_tease id");
+		var btnMelee:CoCButton      = button(0).icon("A_Melee");
+		var btnRanged:CoCButton     = button(1).icon("A_Ranged");
+		var btnTease:CoCButton      = button(2).icon("A_Tease");
 		var btnWait:CoCButton       = button(3);
-		var btnItems:CoCButton      = button(4).icon("I_red potion icon id")
+		var btnItems:CoCButton      = button(4).icon("A_Items")
 		var btnPSpecials:CoCButton  = button(5);
 		var btnMSpecials:CoCButton  = button(6);
-		var btnMagic:CoCButton      = button(7).icon("I_bookid")
+		var btnMagic:CoCButton      = button(7).icon("A_Magic")
 		var btnSoulskills:CoCButton = button(8);
 		var btnOther:CoCButton      = button(9);
 		var btnSpecial1:CoCButton   = button(10);
@@ -91,7 +92,7 @@ public class CombatUI extends BaseCombatContent {
 
 		//Standard menu before modifications.
 		if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) {
-			btnMelee.show("E.Attack", combat.baseelementalattacks, "Command your elemental to attack the enemy.  Damage it will deal is affected by your wisdom and intelligence.").icon("I_GenericWeapon_Sword");
+			btnMelee.show("E.Attack", combat.baseelementalattacks, "Command your elemental to attack the enemy.  Damage it will deal is affected by your wisdom and intelligence.").icon("A_Melee");
 			if (combat.isEnemyInvisible) btnMelee.disable("You cannot use command your elemental to attack an opponent you cannot see or target.");
 		}
 		else {/*
@@ -115,19 +116,19 @@ public class CombatUI extends BaseCombatContent {
 				if (player.isInGoblinMech()) weapon = "saw blade";
 				if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
 				if (monster.isFlying()) {
-					if (player.isFlying()) btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.").icon("I_GenericWeapon_Sword");
+					if (player.isFlying()) btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
 					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
 					if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				}
-				else btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.").icon("I_GenericWeapon_Sword");
+				else btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
 				if (combat.isEnemyInvisible) btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
 			}
 			else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon() && player.weapon != weapons.TIDAR) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
 				//No shooting fuckbolts from Tidarion!!!
 				if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly && player.isFlying && player.statusEffectv2(StatusEffects.Flying) == 0) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 				else {
-					if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Sword");
-					else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Sword");
+					if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("A_Melee");
+					else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("A_Melee");
 				}
 			}
 			else {
@@ -136,19 +137,19 @@ public class CombatUI extends BaseCombatContent {
 						if (player.isFlying()) {
 							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon()) {
 								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
-								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("I_GenericWeapon_Sword");
+								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
 							}
 							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
 						}
 						else if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.StaffChanneling) && flags[kFLAGS.STAFF_CHANNELING_MODE]) {
-							if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Sword");
-							else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Sword");
+							if (player.hasPerk(PerkLib.ElementalBolt)) btnMelee.show("E.Bolt", combat.magic.spellElementalBolt, "Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("A_Melee");
+							else btnMelee.show("M.Bolt", combat.magic.spellMagicBolt, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.").icon("A_Melee");
 						}
-						else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("I_GenericWeapon_Sword");
+						else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
 					}
 					else btnMelee.disable("No way you could reach enemy in air with melee attacks. Unless you have melee weapon that could be used for range attack too.");
 				}
-				else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("I_GenericWeapon_Sword");
+				else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.").icon("A_Melee");
 			}
 		}
 		if (combat.isEnemyInvisible){
@@ -157,15 +158,15 @@ public class CombatUI extends BaseCombatContent {
 		// Ranged
 		switch (player.weaponRangePerk) {
 			case "Bow":
-				btnRanged.show("Bow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.").icon("I_GenericWeapon_Bow");
+				btnRanged.show("Bow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.").icon("A_Ranged");
 				if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			case "Crossbow":
-				btnRanged.show("Crossbow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.").icon("I_GenericWeapon_Bow");
+				btnRanged.show("Crossbow", combat.fireBow, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.").icon("A_Ranged");
 				if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			case "Throwing":
-				btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.").icon("I_GenericWeapon_Bow");
+				btnRanged.show("Throw", combat.fireBow, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.").icon("A_Ranged");
 				if (player.ammo <= 0 && player.weaponRange != weaponsrange.SHUNHAR) btnRanged.disable("You have used all your throwing weapons in this fight.");
 				if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
@@ -174,19 +175,19 @@ public class CombatUI extends BaseCombatContent {
 			case "2H Firearm":
 			case "Dual Firearms":
 				if (player.ammo <= 0)
-					btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.").icon("I_GenericWeapon_Bow");
-				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("I_GenericWeapon_Bow");
+					btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.").icon("A_Ranged");
+				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("A_Ranged");
 				if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.").icon("GenericWeapon_Bow");
 				break;
 			default:
-				btnRanged.showDisabled("Shoot", "You cannot use ranged combat without a ranged weapon equiped").icon("I_GenericWeapon_Bow");
+				btnRanged.showDisabled("Shoot", "You cannot use ranged combat without a ranged weapon equiped").icon("A_Ranged");
 				if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		if (player.isFlying() && (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly)){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
 				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
-					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("I_GenericWeapon_Bow");
+					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("A_Ranged");
 					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
 				}
 				else btnRanged.disable("You could use your ranged weapon while piloting the goblin mech if you have firearms.");
@@ -194,13 +195,13 @@ public class CombatUI extends BaseCombatContent {
 			if (combat.isEnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		if (player.vehicles == vehicles.HB_MECH) {
-			if (player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) btnRanged.show("Shoot", combat.fireBow, "Attempt to attack the enemy with your mech's inbuilt ranged weapons.  Damage done is determined by your speed and weapon.").icon("I_GenericWeapon_Bow");
+			if (player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) btnRanged.show("Shoot", combat.fireBow, "Attempt to attack the enemy with your mech's inbuilt ranged weapons.  Damage done is determined by your speed and weapon.").icon("A_Ranged");
 			else btnRanged.disable("Your range weapon is not compatibile to be used with current piloted mech.");
 		}
-		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.").icon("I_GenericWeapon_Bow");
-		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Bow");
-		if (player.weapon is MoonlightClaws && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Bow");
-		if (player.weapon is Tidarion && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("FireBeam", combat.throwElementalAttack, "Attack enemy with a beam of fire.  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Bow");
+		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.").icon("A_Ranged");
+		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
+		if (player.weapon is MoonlightClaws && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
+		if (player.weapon is Tidarion && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("FireBeam", combat.throwElementalAttack, "Attack enemy with a beam of fire.  Damage done is determined by your intelligence and weapon.").icon("A_Ranged");
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.").icon("I_red potion icon id")
 
 		// Submenus
@@ -234,10 +235,10 @@ public class CombatUI extends BaseCombatContent {
 		}
 		// Submenu - Spells
 		BuildSpellBookMenu(spellBookButtons);
-		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
+		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("A_Magic")
 		if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
-			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
-		} else if (!combat.canUseMagic()) btnMagic.disable().icon("I_bookid")
+			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
+		} else if (!combat.canUseMagic()) btnMagic.disable().icon("A_Magic")
 		// Submenu - Soulskills
 		combat.soulskills.buildMenu(soulforceButtons);
 		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
@@ -248,15 +249,15 @@ public class CombatUI extends BaseCombatContent {
 		btnFantasize.show("Fantasize", combat.fantasize, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
-				btnTease.show("Lustnade Launcher", combat.goboLustnadeLauncher, "Launch Lustnade at enemy, dealing really heavy lust damage.").icon("I_tease id");
-				if (player.hasStatusEffect(StatusEffects.CooldownLustnadeLauncher)) btnTease.disable("<b>You need more time before you can use Lustnade Launcher again.</b>").icon("I_tease id");
+				btnTease.show("Lustnade Launcher", combat.goboLustnadeLauncher, "Launch Lustnade at enemy, dealing really heavy lust damage.").icon("A_Tease");
+				if (player.hasStatusEffect(StatusEffects.CooldownLustnadeLauncher)) btnTease.disable("<b>You need more time before you can use Lustnade Launcher again.</b>").icon("A_Tease");
 			}
-			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.").icon("I_tease id");
+			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.").icon("A_Tease");
 			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
 		}
 		else if (player.vehicles == vehicles.HB_MECH) btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting elf mech.");
-		else if (monster.lustVuln != 0 && monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.").icon("I_tease id");
-		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.").icon("I_tease id");
+		else if (monster.lustVuln != 0 && monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.").icon("A_Tease");
+		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.").icon("A_Tease");
 		if (combat.isEnemyInvisible) btnTease.disable("You cannot tease an opponent you cannot see or target, heck is it even looking at you right now?");
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.hasStatusEffect(StatusEffects.CreepingDoom)) btnRun.show("Struggle", combat.struggleCreepingDoom, "Shake away the pests.");
@@ -296,11 +297,11 @@ public class CombatUI extends BaseCombatContent {
 			mainMenuWhenChanneling();
 		} else if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
 			if (player.ammo <= 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")){
-				btnMelee.show("Reload&Approach", combat.approachAfterKnockback1, "Reload your range weapon while approaching.", "Reload and Approach").icon("I_GenericWeapon_Sword");
+				btnMelee.show("Reload&Approach", combat.approachAfterKnockback1, "Reload your range weapon while approaching.", "Reload and Approach").icon("A_Melee");
 			} else if (player.ammo > 0 && (player.weaponRangeName == "flintlock pistol" || player.weaponRangeName == "blunderbuss rifle")) {
-				btnMelee.show("Shoot&Approach", combat.approachAfterKnockback2, "Fire a round at your opponent and approach.", "Fire and Approach").icon("I_GenericWeapon_Sword");
+				btnMelee.show("Shoot&Approach", combat.approachAfterKnockback2, "Fire a round at your opponent and approach.", "Fire and Approach").icon("A_Melee");
 			} else {
-				btnMelee.show("Approach", combat.approachAfterKnockback3, "Close some distance between you and your opponent.").icon("I_GenericWeapon_Sword");
+				btnMelee.show("Approach", combat.approachAfterKnockback3, "Close some distance between you and your opponent.").icon("A_Melee");
 			}
 		}
 		//HYPNOSIS
@@ -390,8 +391,8 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Rape", combat.SlimeRapeFeed).hint("Violate your opponent from the inside!");
 		} else if (monster.hasStatusEffect(StatusEffects.Swallowed)) {
 			menu();
-			addButton(0, "Tease", combat.SwallowTease).hint("Use a powerful teasing attack").icon("I_tease id");
-			if (monster.lustVuln != 0 && player.hasPerk(PerkLib.Straddle) && monster.hasStatusEffect(StatusEffects.Stunned)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance").icon("I_tease id");
+			addButton(0, "Tease", combat.SwallowTease).hint("Use a powerful teasing attack").icon("A_Tease");
+			if (monster.lustVuln != 0 && player.hasPerk(PerkLib.Straddle) && monster.hasStatusEffect(StatusEffects.Stunned)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance").icon("A_Tease");
 			addButton(4, "Release", combat.SwallowLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			menu();
@@ -406,11 +407,11 @@ public class CombatUI extends BaseCombatContent {
 					addButton(0, "Swallow", combat.SwallowWhole).hint("Leap out of the ground and attempt to swallow your enemy whole for sticky pleasure time.");
 				}
 				addButton(4, "Wait", combat.wait);
-				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
+				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("A_Magic")
 				if (player.hasStatusEffect(StatusEffects.OniRampage)) {
-					btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
+					btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
 				} else if (!combat.canUseMagic()) {
-					btnMagic.disable().icon("I_bookid")
+					btnMagic.disable().icon("A_Magic")
 				}
 			}
 			addButton(2, "Dig out", combat.DigOut).hint("Dig back out out of the ground.");
@@ -423,13 +424,13 @@ public class CombatUI extends BaseCombatContent {
 			addButton(2, "Captivate", combat.SingCaptivate).hint("Captivate your opponent for a round!");
 			addButton(3, "Intensify", combat.SingIntensify).hint("Increase the strength of your song!");
 			addButton(4, "Wait", combat.wait);
-			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("A_Magic")
 			if (!player.hasPerk(PerkLib.PrestigeJobBard)) {
-				btnMagic.disable("Spellcasting while singing would be impossible for anyone short of a skilled bard.\n\n").icon("I_bookid")
+				btnMagic.disable("Spellcasting while singing would be impossible for anyone short of a skilled bard.\n\n").icon("A_Magic")
 			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
-				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
 			} else if (!combat.canUseMagic()) {
-				btnMagic.disable().icon("I_bookid")
+				btnMagic.disable().icon("A_Magic")
 			}
 			addButton(5, "Stop", combat.SingOut).hint("Stop singing and resume fighting normally.");
 			if (!recalling) addButton(14, "Run", combat.runAway).hint("Escape away from the battle.");
@@ -461,10 +462,10 @@ public class CombatUI extends BaseCombatContent {
 			}
 			// Submenu - Spells
 			//BuildSpellBookMenu(spellBookButtons);
-			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("A_Magic")
 			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
-				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
-			} else if (!combat.canUseMagic()) btnMagic.disable().icon("I_bookid")
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
+			} else if (!combat.canUseMagic()) btnMagic.disable().icon("A_Magic")
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
 			if (player.arms.type == Arms.DISPLACER) addButton(0, "Ravage", combat.clawsRend).hint("Rend your enemy using your four sets of claws. \n\nFatigue Cost: " + physicalCost(20) + "");
@@ -551,7 +552,11 @@ public class CombatUI extends BaseCombatContent {
 				else if (monster is MinotaurKing) {
 					var minoking:MinotaurKing = monster as MinotaurKing;
 					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
-					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of Excellia!");
+					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
+				}
+				else if (monster is AngelLR) {
+					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelperIL);
+					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of second angel!");
 				}
 				else if (monster is Lethice) {
 					var lethice:Lethice = monster as Lethice;
@@ -824,7 +829,7 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 		}
-		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) bd = buttons.add("G.Coven(off)", combat.magic.spellGreenCovenantOff).hint("Ends Green Covenant effect."); 
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) bd = buttons.add("G.Coven(off)", combat.magic.spellGreenCovenantOff).hint("Ends Green Covenant effect.");
 		buildAbilityMenu(CombatAbilities.ALL_WHITE_SPELLS, whiteSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_BLACK_SPELLS, blackSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_GREY_SPELLS, greySpellButtons);

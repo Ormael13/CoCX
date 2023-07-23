@@ -42,7 +42,7 @@ public class MimicScene extends BaseContent {
             else if (mimicAppearance == 3) outputText("While a huge penis ");
             else outputText("While what is clearly a treasure chest ");
             outputText("certainly warrants further investigation, you aren’t absolutely sure that this is the best idea. Do you choose to investigate? ");
-            doYesNo(mimicTentacle1, camp.returnToCampUseOneHour); //call mimicTentacle1() or return to main screen
+            doYesNo(mimicTentacle1, explorer.done); //call mimicTentacle1() or return to main screen
         }
     }
 
@@ -75,7 +75,7 @@ public class MimicScene extends BaseContent {
                     player.createStatusEffect(StatusEffects.KnockedBack, 0, 0, 0, 0);
                     startCombat(new Mimic(mimicAppearance));
                 });
-                addButton(14, "Leave", camp.returnToCampUseOneHour);
+                addButton(14, "Leave", explorer.done);
             }
         } else { //if you're dumb or fail, FIGHT!
             outputText("and slowly reach out to touch it with one hand. You get a sense that something is terribly wrong when you realize that your hand is stuck fast to the ");
@@ -103,10 +103,10 @@ public class MimicScene extends BaseContent {
         if (itemRoll == 2) outputText("bottle ");
         if (itemRoll == 3) outputText("jar ");
         outputText("and leave the monster to its slumber. ");
-        if (itemRoll == 0) inventory.takeItem(consumables.PPHILTR, camp.returnToCampUseOneHour); //find purity philter
+        if (itemRoll == 0) inventory.takeItem(consumables.PPHILTR, explorer.done); //find purity philter
         if (itemRoll == 1) findSomeGems(); //find bag o gems
-        if (itemRoll == 2) inventory.takeItem(consumables.NUMBOIL, camp.returnToCampUseOneHour); //find numbing oil
-        if (itemRoll == 3) inventory.takeItem(consumables.HUMMUS_, camp.returnToCampUseOneHour); //find Hummanus
+        if (itemRoll == 2) inventory.takeItem(consumables.NUMBOIL, explorer.done); //find numbing oil
+        if (itemRoll == 3) inventory.takeItem(consumables.HUMMUS_, explorer.done); //find Hummanus
     }
 
     public function attackIt():void {
@@ -453,7 +453,7 @@ public class MimicScene extends BaseContent {
         var quantity:int = (rand(30) + 10 + player.level) * (1 + (player.perkv1(PerkLib.AscensionFortune) * 0.1));
         player.gems += quantity;
         outputText("Upon opening the small bag, you find " + quantity + " gems inside!");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 }
 

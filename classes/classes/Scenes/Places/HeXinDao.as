@@ -13,6 +13,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
@@ -1017,10 +1018,10 @@ public function soularena():void {
 			//addButton(2, "Gauntlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
 			//addButton(3, "Gauntlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 			//addButton(4, "Gauntlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierwszej walce oblokowanie perków do powiekszania drużyny
+			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");
 			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
 			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
-			//addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
 			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
 			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
 			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
@@ -1028,13 +1029,15 @@ public function soularena():void {
 		}
 		if (page == 2) {
 			//addButton(0, "Kitty", arenaSelection, Veronika);
-			/*addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
+			//addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
 			//addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err Ayotech weapons.");
-			addButton(5, "Macho Mander", arenaSelection,Syth).hint("He's Macho & Mander.");
-			if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
-			else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");*/
+			//addButton(5, "Macho Mander", arenaSelection,Syth).hint("He's Macho & Mander.");
+			//if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
+			//else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
 			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButtonDisabled(10, "IntermedLeader", "Req. to have any henchman with you to start this fight.");
+			else addButton(10, "IntermedLeader", intermediateleadershipfight1).hint("Intermediate Leadership fight");
 			addButton(14, "Back", soularenaChallengeBack);
 		}
 	}
@@ -1045,11 +1048,96 @@ public function soularena():void {
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 		monster.XP = monster.XP * 2;
     }
-	public function gaunletsinbetween():void {
+	public function soularenafightsbetween():void {
 		cleanupAfterCombat();
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
 	}
+	public function intermediateleadershipfight1():void {
+		clearOutput();
+		outputText("As you enter the arena the announcer voice booms in and the crowd cheers you up. They get to see the hero who defeated the previous trial make a come back and thats clearly not an everyday spectacle.\n\n");
+		outputText("\"<i>Greeting people of the river town, welcome to the arena. Today our favourite champion faces off against team battles, you know what this means!</i>\"\n\n");
+		outputText("The crowd suddenly starts calling out as a pair of large figures easily 8 feet tall steps out from the opposite archway. It's a minotaur and its lacta bovine wife. ");
+		outputText("A single minotaur is normally much trouble but partnered up with a lacta bovine there's no telling what shenanigan could happen! The bull walks toward you confident in his might he won't let you simply trample his pride before his wife.\n\n");
+		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+		startCombat(new MinotaurKing());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+	}
+	public function intermediateleadershipfight2():void {
+		clearOutput();
+		soularenafightsbetween();
+		outputText("\n\nAs the minotaur couple falls down utterly defeated the announcer claims. \"<i>Well seeing as the challenger defeated the cows we have a special surprise for you today. Angels do not typically associate with us folks as they are too busy waging a bloody war against the demon and scouring corruption from the land ");
+		outputText("but through many deals and persuasion we managed to secure the collaboration of these two. I present to you Gabriel and Uriel the angel twins! Do not be deceived by their beauty noor their innocent look they are definitely out for blood!</i>\"\n\n");
+		outputText("The two angels calmly hover into the battlefield flanked by two pairs of toothed winged orbs. Their demeanour is almost void of expression as they fixate you and emotionlessly declare at the same time.\n\n");
+        outputText("\"<i>Do not make this complicated for us mortal… simply fall.</i>\"\n\n");
+		startCombat(new AngelLR());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+	}
+	public function intermediateleadershippostfight():void {
+		clearOutput();
+		outputText("The twins stare at you in complete confusion as too weak to continue fighting their wings fails them causing them to fall to the ground. Their angeloid constructs are too damaged to even grant them support.\n\n");
+		outputText("\"<i>Woa look like we got a winner here congratulation [name]!</i>\"\n\n");
+		outputText("Successfully working together with another person has taught you how to better fight in a party. <b>Gained Perk: Intermediate Leadership</b>\n\n");
+		player.createPerk(PerkLib.IntermediateLeadership, 0, 0, 0, 0);
+        cleanupAfterCombat();
+	}
+	public function dishHelperIL():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.MinoKing,0,0,0,0);
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
+			outputText("You tell Neisa you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Neisa nods, \"<i>A great stratagem, leave it to me!</i>\" She raises her shield before charging at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", repeatedly bashing the angel with her shield to keep them out of the fight.\n\n");
+			if (silly()) outputText("She speaks through her exertion, \"<i>Stop resisting! I said stop resisting! You angels think you’re so high and mighty, just above the law don’t you?!</i>\"\n\n");
+			else outputText("She speaks through her exertion, \"<i>I need you to stay down!</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
+			outputText("You tell Etna you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Etna smirks, \"<i>Hmm, how long can an angel last against my tail? Time to find out!</i>\"\n\n");
+			outputText("Wasting no time, The manticore leaps with a hungry lunge, diving at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" as she quickly wraps her tail around them to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
+			outputText("You tell Aurora you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Aurora nods, raising her wings before swooping down onto "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", pinning them beneath her stone frame, keeping them out of the fight.\n\n");
+			outputText("\"<i>Prevention is the best method to stop danger, now, let’s put a halt to this nuisance.</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
+			outputText("You tell Alvina you need her to handle one of the angels before you.\n\n");
+			outputText("Alvina rolls her eyes, \"<i>Oh, why, of course… Leave me to do the dirty work.</i>\"\n\n");
+			outputText("She sets down her scythe before drawing somatic symbols with a single finger. "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" is imprisoned in shadowy chains as they’re thrust into the ground.\n\n");
+			outputText("A faint grin curls up her face, \"<i>It’s so easy to keep them locked down…</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
+			outputText("You tell Mitzi and her daughters that you need them to keep the suspended angel from recovering!\n\n");
+			outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that bitch!</i>\"\n\n");
+			outputText("Furxia, Lidea, Mitzi and Roxy rush "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", trapping them within their onslaught as they try to keep the angel pinned and out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
+			outputText("You tell Excellia you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Excellia rolls her shoulders briefly, \"<i>I can handle that easily.</i>\" Without further hesitation, she rushes in, using the weight of her body to smash into "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" and keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
+			outputText("You tell Amily you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Amily nods before coating a dagger in some poison, \"<i>A little more paralytic poison should do the trick…</i>\"\n\n");
+			outputText("Amily quickly rushes to "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" before driving her dagger into them to keep them out of the fight. \"<i>Now I just need to make sure they don’t get up… Let’s hope I have enough to last.</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
+			outputText("You tell Zenji you need him to keep the suspended angel from recovering!\n\n");
+			outputText("Zenji nods, \"<i>Leave it to me, champion!</i>\"\n\n");
+			outputText("He readies his spear before pouncing on "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", smacking them with the blunt side of his spear to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") {
+			outputText("You tell Kiha you need her to keep the suspended angel from recovering!\n\n");
+			outputText("She scoffs teasingly, \"<i>Oh, an idiot like you can’t manage against multiple foes? Yeah, don’t worry, I’ll totally take care of it.</i>\" Axe in hand, Kiha charges at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", bashing the angel with the blunt side of her axe to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") {
+			outputText("You notice the angels eyeing your Drider giantess, disgust all over their expressions. In response, you can <i>feel</i> her aura thickening, her eyes narrowing.\n\n");
+			outputText("\"<i>What?!</i>\" She demands, the hairs on her legs standing straight up. \"<i>WHAT?!</i>\"\n\n");
+			outputText("You point at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", telling your Amazoness that you need her to keep him down, so you can focus on the other.\n\n");
+			outputText("\"<i>Oh…I am all OVER that.</i>\" Tyrantia lets out a guttural roar, shooting a glob of her “webbing” at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+". The angel dodges, but her black and pink aura flares, and she rushes in, black aura hiding the angel’s light from your view.\n\n");
+		}
+		SceneLib.combat.enemyAIImpl();
+        }
     public function gaunletchallange1fight1():void {
         clearOutput();
         outputText("You register for the gauntlet challenge, and wait patiently until you are called. You're motioned forward quickly, and move out beyond the arena gate to face your opponent. The crowd is big, you certainly have quite the audience! A man with a necktie and a weird stick screams across the area.\n\n");
@@ -1065,7 +1153,7 @@ public function soularena():void {
     }
     public function gaunletchallange1fight2():void {
         clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the last of the golems fall down, the commentator resumes.\n\n");
         outputText("\"<i>This one is straight from the woods. Freshly caught and horny to boot. Can our champion’s strength overcome the beast’s lust? LET'S FIND OUT!!</i>\"\n\n");
         outputText("A shadow moves out behind the gate, revealing the shape of a fluid starved tentacle beast.\n\n");
@@ -1074,11 +1162,12 @@ public function soularena():void {
     }
     public function gaunletchallange1fight3():void {
         clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
         outputText("\"<i>This contestant is smaller than the last two... She's smarter, and most of all, extremely deadly. She’s paid a handsome sack of gems to kick the ass of anyone who reaches this stage. This femme fatale is by far the deadliest combatant of her division. The crowd favorite huntress from the dark woods... Merisiel the dark elf!!!</i>\"\n\n");
-        outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The dark elf readies her bow, smirking.\n\n");
-        startCombat(new DarkElfScout());
+        outputText("A woman with light skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The light elf readies her bow, smirking.\n\n");
+        flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 10;
+		startCombat(new LightElfs());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
     public function gaunletchallange1postfight():void {
@@ -1111,7 +1200,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the goblin falls unconscious to the ground the crowd cheers you on.\n\n");
         outputText("\"<i>It would seems the hero squashed that midget good, but we're only just beginning. Our next contestant has been incarcerated for daring to break the laws of our fair city! For forcing his way in, and attempting to have his way with our fairest, he'll be here for a good long time! He's been kept locked up for two consecutive months. No sex, no masturbation... and he is desperate to sow his seed...Can the challenger take him on? Or will they take him...IN?! We now release... THE HOUND!!!</i>\"\n\n");
         outputText("A hellhound of massive proportions rush out of an opening gate. Its eyes burning with lust.\n\n");
@@ -1120,7 +1209,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nThe mutt falls to the floor as the crowd screams your name. The announcer announces the next contestant.\n\n");
         outputText("\"<i>The next opponent is a crowd favorite. You've heard her name told in shallow whispers. The silken jailer, the Bondswebber... The Bitch Breaker! That's right, our next opponent is an expert of the dreaded art known as BDSM. Will the challenger hold her back? Or will the Mistress claim another victim?! Please welcome...Mistress...Malady!!!</i>\"\n\n");
         outputText("A drider in a bondage suit comes out of the gate and eyes you, amused.\n\n");
@@ -1130,7 +1219,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the drider falls defeated, the crowd cheers. That said the battle is far from over yet. A large number of shadows mass behind the opposite gate and already you can guess what's coming for you.\n\n");
         outputText("\"<i>The final contestant is both a new opponent and a test! Our resident golemancer has been cooking up something special. Using the traditional gargoyle model, deprived of a soul, only fit for mass production, these living weapons feel no pain, show no fear...and HAVE. NO. MERCY! Our challenger has broken through the competition so far, but can they break this wall of stone?</i>\"\n\n");
         outputText("A full squad of stone gargoyles pour out of the gate, their mace-like tails trailing in the sands. Their claws are sharp and their soulless gaze tells you it will end poorly should you lose.\n\n");
