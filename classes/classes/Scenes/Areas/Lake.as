@@ -105,25 +105,51 @@ use namespace CoC;
 				kind  : 'item',
 				call: findWFruit
 			}, {
-				name: "nothing",
+				name  : "nothing",
 				label : "walk",
-				kind: "walk",
+				kind  : "walk",
 				chance: 0.4,
-				call: findNothing
+				call  : findNothing
 			}, {
-				name: "holystuff",
-				label : "Holy Weapon",
+				name: "holysword",
+				label : "Holy Sword",
 				kind  : 'item',
-				when: function ():Boolean {
-					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && (
-							!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) ||
-							!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && player.hasPerk(PerkLib.JobRanger) ||
-							!player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && player.hasPerk(PerkLib.JobSorcerer) ||
-							!player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && player.hasPerk(PerkLib.JobGuardian)
-					)
+				chance: 0.05,
+				unique: 'holyitem', // only one enc with unique:holyitem can appear
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken);
 				},
-				chance: 0.2,
-				call: findBlesedItemEncounterFn
+				call: findBlesedSword
+			}, {
+				name: "holybow",
+				label : "Holy Bow",
+				kind  : 'item',
+				chance: 0.05,
+				unique: 'holyitem', // only one enc with unique:holyitem can appear
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && player.hasPerk(PerkLib.JobRanger);
+				},
+				call: findBlesedBow
+			}, {
+				name: "holystaff",
+				label : "Holy Staff",
+				kind  : 'item',
+				chance: 0.05,
+				unique: 'holyitem', // only one enc with unique:holyitem can appear
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && player.hasPerk(PerkLib.JobSorcerer);
+				},
+				call: findBlesedStaff
+			}, {
+				name: "holyshield",
+				label : "Holy Shield",
+				kind  : 'item',
+				chance: 0.05,
+				unique: 'holyitem', // only one enc with unique:holyitem can appear
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && player.hasPerk(PerkLib.JobGuardian);
+				},
+				call: findBleseShield
 			}, {
 				name: "ponies",
 				label : "Ponies",
@@ -367,28 +393,21 @@ use namespace CoC;
 			fetishCultistScene.fetishCultistEncounter();
 		}
 
-		private function findBlesedItemEncounterFn():void {
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) && rand(5) == 0) {// && player.hasPerk(PerkLib.JobWarrior)
-				player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
-				swordInStone.findSwordInStone();
-				return;
-			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && player.hasPerk(PerkLib.JobRanger) && rand(3) == 0) {
-				player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
-				swordInStone.findBowInStone();
-				return;
-			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && player.hasPerk(PerkLib.JobSorcerer) && rand(3) == 0) {
-				player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
-				swordInStone.findStaffInStone();
-				return;
-			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && player.hasPerk(PerkLib.JobGuardian) && rand(3) == 0) {
-				player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
-				swordInStone.findShieldInStone();
-				return;
-			}
-			findNothing();
+		private function findBlesedSword():void {
+			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
+			swordInStone.findSwordInStone();
+		}
+		private function findBlesedBow():void {
+			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
+			swordInStone.findBowInStone();
+		}
+		private function findBlesedStaff():void {
+			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
+			swordInStone.findStaffInStone();
+		}
+		private function findBleseShield():void {
+			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
+			swordInStone.findShieldInStone();
 		}
 
 		private function walkAroundLake():void {

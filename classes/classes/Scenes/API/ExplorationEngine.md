@@ -14,7 +14,7 @@ ExplorationEngine works with existing GroupEncounter, but they need to have extr
 * `label` (String or function returning String, optional). Map label - default is encounter `name` capitalized.
 * `hint` (String or function returning String, optional). Displayed in the tooltip when hovering over the fully revealed encounter.
 * `special` (Boolean, optional). Encounter with `special: true` have priority to appear on the road end.
-* `unique` (Boolean, optional). Only one encounter with `unique: true` can appear on a map (but not guaranteed to).
+* `unique` (Boolean|String, optional). If `unique: true`, then only one such encounter can appear on a map. If `unique` is a String indicating encounter group, only one encounter of that group can appear.
 * `reenter` (Boolean, optional). You can re-enter the encounter after finishing it (until you go forward).
 
 Example:

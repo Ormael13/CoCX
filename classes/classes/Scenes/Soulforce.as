@@ -771,16 +771,8 @@ public class Soulforce extends BaseContent
 		outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 		menu();
 		var btn:int = 0;
-		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3)
-			addSSButton(btn++, "Izumi", izumiScenes.encounter, 300);
-		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3)
-			addSSButton(btn++, "Mino Sons", minotaurSonsScene.meetMinotaurSons, soulforceForSons())
-				.disableIf(flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 3, "Req. to have 3+ minotaur sons.")
-				.disableIf(!player.hasVagina(), "Req. to have a vagina.");
 		if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1)
 			addSSButton(btn++, "WorldTree", worldtreeScene.YggdrasilDiscovery, 100);
-		if (flags[kFLAGS.SOUL_SENSE_ANTHILL] >= 1 && !flags[kFLAGS.ANT_WAIFU])
-			addSSButton(btn++, "Ant Colony", SceneLib.desert.antsScene.antColonyChallenge, 200);
 		//button 11
 		addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 		addButton(14, "Back", accessSoulforceMenu);

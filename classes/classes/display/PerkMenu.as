@@ -6,7 +6,6 @@ import classes.BaseContent;
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.CoC;
-import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
 import classes.IMutations.*;
@@ -959,6 +958,26 @@ public class PerkMenu extends BaseContent {
 		outputText("\n");
 	}
 	public var preferOld:Boolean = false;
+	private var perksByCategory:Dictionary = null;
+	private function buildCategories():void {
+		perksByCategory = new Dictionary();
+		perksByCategory["Common"] = PerkTree.obtainablePerks().filter(function(p:PerkType,...rest):Boolean {
+			return !PerkLib.isJob(p) && PerkTree.getJobs(p) == null;
+		});
+		perksByCategory["Jobs"] = PerkTree.obtainablePerks().filter(function(p:PerkType,...rest):Boolean {
+			return PerkLib.isJob(p);
+		});
+		for each (var job:PerkType in PerkLib.ALL_JOBS) {
+			perksByCategory[job] = PerkTree.getJobUnlocks(job);
+		}
+	}
+	private function perksInCategory(perks:/*PerkType*/Array):int {
+		var n:int = 0;
+		for each (var perk:PerkType in perks) {
+			if (!(perk is IMutationPerkType) && !player.hasPerk(perk) && perk.available(player)) n++;
+		}
+		return n;
+	}
 	public function newPerkMenu(category:*=null):void {
 		preferOld = false;
 		mainView.toolTipView.hide();
@@ -967,7 +986,7 @@ public class PerkMenu extends BaseContent {
 		
 		const NCOLS:int = 15;
 		var btn:CoCButton;
-		var i:int;
+		var i:int,c:int,n:int;
 		var contentBlock:Block = new Block({
 			layoutConfig: {
 				type: "flow",
@@ -1031,17 +1050,22 @@ public class PerkMenu extends BaseContent {
 		];
 		var allJobs:Array      = [basicJobs,advancedJobs, prestigeJobs];
 		
+		if (!perksByCategory) buildCategories();
+		c = perksInCategory(perksByCategory["Common"]);
 		groupgrid.addElement(new CoCButton({  square   : true})
 				.show("Common",curry(newPerkMenu,"Common"))
 				.disableIf(category == "Common")
-				.hint("Perks not related to any job."), {colspan: 2});
+				.hint("Perks not related to any job.")
+				.cornerLabel(c > 0 ? String(c) : ""), {colspan: 2});
+		c = perksInCategory(perksByCategory["Jobs"]);
 		groupgrid.addElement(new CoCButton({square   : true})
 				.show("Jobs", curry(newPerkMenu, "Jobs"))
 				.disableIf(category == "Jobs")
-				.hint("Job perks."), {colspan: 2});
+				.hint("Job perks.")
+				.cornerLabel(c > 0 ? String(c) : ""), {colspan: 2});
 		groupgrid.addBitmapDataSprite({}, {colspan: Math.max(1, NCOLS - basicJobs.length - 4)});
 		
-		var n:int = 0;
+		n = 0;
 		function jobPerkClearName(job:PerkType):String {
 			return job.name(null).replace(/^Job \( \w+ \):\s*/, "")
 		}
@@ -1049,11 +1073,13 @@ public class PerkMenu extends BaseContent {
 			for each (var entry:Array in joblist) {
 				var perk:PerkType = entry[1];
 				var name:String = jobPerkClearName(perk);
+				c = perksInCategory(perksByCategory[perk]);
 				btn = new CoCButton({square: true})
 						.show(entry[0], curry(newPerkMenu, perk))
 						.disableIf(category == perk)
-						.hint("Perks in the " + name + " group.", name);
-				if (player.hasPerk(perk)) btn.color("#008000");
+						.hint("Perks in the " + name + " group.", name)
+						.cornerLabel(c > 0 ? String(c) : "");
+				if (player.hasPerk(perk)) btn.color("#006000");
 				groupgrid.addElement(btn);
 				n++;
 			}
@@ -1062,22 +1088,15 @@ public class PerkMenu extends BaseContent {
 		
 		var perks:/*PerkType*/Array;
 		var catName:String;
+		perks = perksByCategory[category] || [];
 		if (category == "Common") {
 			catName = category;
-			perks = PerkTree.obtainablePerks().filter(function(p:PerkType,...rest):Boolean {
-				return !PerkLib.isJob(p) && PerkTree.getJobs(p) == null;
-			});
 		} else if (category == "Jobs") {
 			catName = category;
-			perks = PerkTree.obtainablePerks().filter(function(p:PerkType,...rest):Boolean {
-				return PerkLib.isJob(p);
-			});
 		} else if (category is PerkType) {
 			catName = jobPerkClearName(category);
-			perks = PerkTree.getJobUnlocks(category);
 		} else {
 			category = null;
-			perks = [];
 		}
 		trace("perks: "+perks.length);
 		perks = perks.filter(function(p:PerkType,...rest):Boolean {
@@ -1093,11 +1112,12 @@ public class PerkMenu extends BaseContent {
 		perks = sortedBy(perks, sorterRelativeDistance);
 		
 		var nperks:int = 0, navail:int = 0;
+		var style:int = 2; // 0: desc below name, 1: desc in tooltip, 2: desc in separate column
 		var perkgrid:Block = new Block({
 			layoutConfig: {
 				type: "grid",
 				setWidth: true,
-				columns: [40, -1],
+				columns: style == 2 ? [40, -1, -2] : [40, -1],
 				gap: 2
 			},
 			width: MainView.TEXTZONE_W - 16
@@ -1111,13 +1131,20 @@ public class PerkMenu extends BaseContent {
 			text = "<b>"+pc.perkName+"</b>"
 			if (perk.tierList) {
 				n = perk.tierList.length - perk.tierPos() - 1;
+				if (style != 0) text += "\n";
 				text += " <b>(+"+n+" follow-up "+(n>1?"perks":"perk")+")</b>";
 			}
-			text += ": ";
-			text += Parser.recursiveParser(pc.perkDesc);
-			if (!player.hasPerk(perk)) {
-				var reqs:String = formatPerkRequirements(perk, true);
-				if (reqs) text += "\n"+reqs;
+			if (style == 1) {
+				btn.hint(Parser.recursiveParser(pc.perkDesc), pc.perkName);
+			}
+			if (style == 0) {
+				text += ": ";
+				text += Parser.recursiveParser(pc.perkDesc);
+			}
+			
+			var reqs:String = formatPerkRequirements(perk, true);
+			if (!player.hasPerk(perk) && reqs && style != 2) {
+				text += "\n" + reqs;
 			}
 			if (player.hasPerk(perk)) {
 				btn.disable();
@@ -1133,20 +1160,35 @@ public class PerkMenu extends BaseContent {
 				btn.icon("");
 			} else {
 				navail++;
-				btn.toolTipHeader = "Click to purchase.";
+//				btn.toolTipHeader = "Click to purchase.";
 			}
 			nperks++;
 			perkgrid.addElement(btn);
 			
+			var textwidth:Number = MainView.TEXTZONE_W - MainView.BTN_H - 16;
+			if (style == 2) textwidth /= 2;
 			perkgrid.addTextField({
 				defaultTextFormat: mainView.mainText.defaultTextFormat,
 				htmlText: text,
 				x: btn.width + 4,
 				y: 0,
-				width: MainView.TEXTZONE_W - MainView.BTN_H - 16,
+				width: textwidth,
 				wordWrap: true,
 				autoSize: TextFieldAutoSize.LEFT
 			});
+			if (style == 2) {
+				text = Parser.recursiveParser(pc.perkDesc);
+				if (!player.hasPerk(perk) && reqs) text += "\n" + reqs;
+				perkgrid.addTextField({
+					defaultTextFormat: mainView.mainText.defaultTextFormat,
+					htmlText: text,
+					x: btn.width + 4,
+					y: 0,
+					width: textwidth,
+					wordWrap: true,
+					autoSize: TextFieldAutoSize.LEFT
+				});
+			}
 		}
 		perkgrid.doLayout();
 		
@@ -1206,7 +1248,7 @@ public class PerkMenu extends BaseContent {
 		}
 		if (reqs.length == 0) return "";
 		var s:String = "<b>Requires:</b> " + reqs.join(", ")+". ";
-		if (CoC_Settings.debugBuild) s +=  "<i>Distance: "+Math.round(ptype.distanceFor(player))+"/"+Math.round(ptype.distance)+"</i>";
+//		if (CoC_Settings.debugBuild) s +=  "<i>Distance: "+Math.round(ptype.distanceFor(player))+"/"+Math.round(ptype.distance)+"</i>";
 		return s;
 	}
 	

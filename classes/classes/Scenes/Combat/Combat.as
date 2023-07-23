@@ -207,25 +207,46 @@ public class Combat extends BaseContent {
     }
 
     public function spellPerkUnlock():void {
-        if (flags[kFLAGS.SPELLS_CAST] >= 10 && !player.hasPerk(PerkLib.SpellcastingAffinity)) {
-            outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing mana cost of spells by 10%!</b>\n\n");
-            player.createPerk(PerkLib.SpellcastingAffinity, 10, 0, 0, 0);
+        var counter:Number = flags[kFLAGS.SPELLS_CAST];
+        var max:Number = 10;
+        if (counter >= 10) {
+            if (!player.hasPerk(PerkLib.SpellcastingAffinity)) {
+                outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing mana cost of spells by 10%!</b>\n\n");
+                player.createPerk(PerkLib.SpellcastingAffinity, 10, 0, 0, 0);
+            }
+            max = 30;
         }
-        if (flags[kFLAGS.SPELLS_CAST] >= 30 && player.perkv1(PerkLib.SpellcastingAffinity) < 20) {
-            outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
-            player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 20);
+        if (counter >= 30) {
+            if (player.perkv1(PerkLib.SpellcastingAffinity) < 20) {
+                outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
+                player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 20);
+            }
+            max = 70;
         }
-        if (flags[kFLAGS.SPELLS_CAST] >= 70 && player.perkv1(PerkLib.SpellcastingAffinity) < 30) {
-            outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
-            player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 30);
+        if (counter >= 70) {
+            if (player.perkv1(PerkLib.SpellcastingAffinity) < 30) {
+                outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
+                player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 30);
+            }
+            max = 150;
         }
-        if (flags[kFLAGS.SPELLS_CAST] >= 150 && player.perkv1(PerkLib.SpellcastingAffinity) < 40) {
-            outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
-            player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 40);
+        if (counter >= 150) {
+            if (player.perkv1(PerkLib.SpellcastingAffinity) < 40) {
+                outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
+                player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 40);
+            }
+            max = 310;
         }
-        if (flags[kFLAGS.SPELLS_CAST] >= 310 && player.perkv1(PerkLib.SpellcastingAffinity) < 50) {
-            outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
-            player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 50);
+        if (counter >= 310) {
+            if (player.perkv1(PerkLib.SpellcastingAffinity) < 50) {
+                outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 10%!</b>\n\n");
+                player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 50);
+            }
+            max = Infinity;
+        }
+        if (isFinite(max)) {
+            notificationView.popupProgressBar2("spellXP","spellXP",
+                    "Spellcasting XP", (counter-1)/max, counter/max);
         }
     }
 

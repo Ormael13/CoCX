@@ -175,7 +175,7 @@ public function alvinaSecondEncounter():void
 	flags[kFLAGS.ALVINA_FOLLOWER] = 9;
 	menu();
 	addButton(0, "Talk", alvinaSecondEncounterTalk);
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	addButton(4, "Leave", explorer.done);
 }
 public function alvinaSecondEncounterTalk():void
 {
@@ -185,7 +185,7 @@ public function alvinaSecondEncounterTalk():void
 	menu();
 	addButton(0, "Her", alvinaSecondEncounterTalkHer, alvinaSecondEncounterTalk);
 	addButton(1, "Hobby", alvinaSecondEncounterTalkHobby, alvinaSecondEncounterTalk);
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	addButton(4, "Leave", explorer.done);
 }
 public function alvinaSecondEncounterTalkHer(next:Function):void
 {
@@ -216,7 +216,7 @@ public function alvinaSecondBonusEncounter():void
 	outputText("\"<i>Is that so? Even then, what keeps you on Mareth still? Shouldn’t you have gone back to your homeland already? Perhaps it is something else that you seek. Regardless, if purging Mareth of the remaining corruption is your goal, you should go to the blight ridge. The area is dangerous and filled with demons, but surely the bane of Lethice should be able to get by without any issues?</i>\"\n\n");
 	outputText("She chuckles as a gust of wind throws dust at you, causing you to shield your eyes. The moment you look back at her, she is gone.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 10;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function alvinaThirdEncounter():void
@@ -232,7 +232,7 @@ public function alvinaThirdEncounterNo():void
 {
 	outputText("This is a very bad place, better not linger here. You decide to head back to camp.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 11;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function alvinaThirdEncounterYes():void
 {
@@ -291,6 +291,7 @@ public function alvinaThirdEncounterYesSure():void
 	outputText("<b>Alvina has joined you as a follower.</b>\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 13;
 	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function alvinaThirdEncounterYesNever():void

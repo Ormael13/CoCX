@@ -8,10 +8,10 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.internals.SaveableState;
 import classes.display.SpriteDb;
-	
-	use namespace CoC;
+import classes.internals.SaveableState;
+
+use namespace CoC;
 	
 	public class LilyFollower extends NPCAwareContent implements SaveableState {
 		public static var LilyHairColor:String;
@@ -297,7 +297,7 @@ import classes.display.SpriteDb;
 			outputText("Tyrantia unbinds her little sister, who simply stares up at her, tongue out and eyes glazed over. <i>\"Good girl,\"</i> your giantess says simply, patting Lily’s head. The smaller Drider looks over at you, a blissed out look on her face.\n\n");
 			outputText("<i>\"[master], that…was…\"</i> Lily shakes, and you reach to her face, cupping her cheek in your palm. You tell your pet she did well, and Lily smiles, eyes closing as she flops the rest of the way to the ground.\n\n");
 			outputText("<i>\"We gotta do this again sometime,\"</i> your giantess says, and you’re inclined to agree. But for now, you redress, heading back to your part of camp.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		
@@ -351,7 +351,7 @@ import classes.display.SpriteDb;
 			outputText("\n\n<b>Before fully settling in your camp as if remembering something Lily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			LilyFollowerState = true;
 			DriderTown.LilyKidsPCPregnancy = 0;
-			cleanupAfterCombat(camp.returnToCampUseOneHour);
+			cleanupAfterCombat(explorer.done);
 		}
 		
 		public function LilySex():void {
@@ -496,7 +496,7 @@ import classes.display.SpriteDb;
 			outputText("You wake up in your bed, rather surprisingly. Weren’t you just on the floor? You turn your head, and see Lily asleep beside you, one arm dangled on your chest and a completely blissed-out smile on her face. You extract yourself from her arms, tucking your itsy bitsy spider into bed. You redress, somewhat tired, but satisfied and close your cabin door behind you. Your [cock] aches a little, but you decide it was well worth it.\n\n");
 			lilySubmissiveness(5);
 			lilyAffection(5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function LilyBondageCabinDildo():void {
@@ -505,7 +505,7 @@ import classes.display.SpriteDb;
 			outputText("<i></i>\n\n");
 			outputText("<i></i>\n\n");
 			player.sexReward("vaginalFluids","Pussy");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function LilyBondageCabinFuck():void {
@@ -521,7 +521,7 @@ import classes.display.SpriteDb;
 			lilySubmissiveness(5);
 			lilyAffection(5);
 			player.sexReward("vaginalFluids","Dick");
-			inventory.takeItem(useables.T_SSILK, camp.returnToCampUseOneHour);
+			inventory.takeItem(useables.T_SSILK, explorer.done);
 		}
 		
 		public function LilyBondageCabinTease():void {
@@ -545,7 +545,7 @@ import classes.display.SpriteDb;
 			lilySubmissiveness(15);
 			lilyAffection(5);
 			player.sexReward("vaginalFluids");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function Lily3Somes():void {
@@ -581,7 +581,7 @@ import classes.display.SpriteDb;
 			clearOutput();
 			outputText("\n\n");
 			player.sexReward("vaginalFluids");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function SandwichSidonie():void {
@@ -604,7 +604,7 @@ import classes.display.SpriteDb;
 			outputText("\n\n");
 			player.sexReward("vaginalFluids", "Dick");
 			LilyAffectionMeter += 10;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function SidonieDom():void {
@@ -645,7 +645,7 @@ import classes.display.SpriteDb;
 			outputText("Lily gives you a wink as you leave. “Don’t keep me waiting, please?”\n\nn");
 			LilyAffectionMeter += 10;
 			player.sexReward("cum", "Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function LilyExhibition():void {
@@ -699,7 +699,7 @@ import classes.display.SpriteDb;
 		public function LilyExhibitionEndLeave():void {
 			clearOutput();
 			outputText("You decide to leave Lily as she is for now. She protests, but you give her a grin, heading back out to camp.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function LilyExEtna():void {
 			clearOutput();
@@ -722,7 +722,7 @@ import classes.display.SpriteDb;
 			outputText("The irregular bucking motions finally tip you over, and you let out a growl, cumming into Electra’s well-fucked Raiju pussy. Electra hums, her furry tail finally losing a good chunk of its staticy fluff, and she wails, spraying you with femspunk as you pull out. Your spooge leaks from Electra, and she slides off Lily and onto the ground, bobbing her head happily back and forth. The chain isn’t long enough to reach the ground, and it slides out of Electra.\n\n");
 			outputText("Luna takes her fingers out of Lily’s pussy as you approach. You slide your [cock] across her chitinous leg, wiping your Raiju lover’s juices off.\n\n");
 			player.sexReward("vaginalFluids","Dick");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function LilyExIzma():void {
 			clearOutput();

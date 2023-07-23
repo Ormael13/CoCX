@@ -7,8 +7,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.ChainedDrop;
 
-import coc.view.ButtonDataList;
-
 public class MinotaurScene extends BaseContent {
 
 public function minoVictoryRapeChoices():void {
@@ -544,7 +542,7 @@ public function minoPheromones():void {
 		function ignoreMino():void {
 			outputText("This pathetic excuse for a male isn't worth your time.[pg]");
 			outputText("You decide to skip on him and look for a more defiant toy to break heading back toward your camp.")
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		function fightMino():void {
 			outputText("You make a fearsome howl as you charge after him forcing the bull to fight and defend himself as best he can.");
@@ -618,6 +616,7 @@ public function getRapedVagAss():void {
 	outputText("The bull-man relaxes for a moment, then shoves you off of him and to the cold ground. You pass out as a strange sense of euphoria washes over you while copious quantities of monstrous cum escape your distended ");
 	if(player.hasVagina()) outputText("pussy.");
 	else outputText("asshole.");
+	explorer.stopExploring();
     if (CoC.instance.inCombat) {
 		if (inDungeon)
             rapeEndingEL();
@@ -660,6 +659,7 @@ private function getOralRapedByMinotaur():void {
 	player.sexReward("cum","Lips");
 	dynStats("sen", 1);
 	minoCumAddiction(10);
+	explorer.stopExploring();
     if (CoC.instance.inCombat) {
 		if (inDungeon)
             rapeEndingEL();
@@ -871,7 +871,7 @@ public function minoAddictionBadEndEncounter():void {
 		if(player.inte > 40) outputText("A tiny voice speaks up, warning you that it would be hard to get away from such a gathering.  ");
 		outputText("Do you follow the minotaur-scent like the addict that you are?");
 		//[Yes] [No]
-		doYesNo(minoAddictionBadEnd2,camp.returnToCampUseOneHour);
+		doYesNo(minoAddictionBadEnd2,explorer.done);
 	}
 }
 

@@ -22,7 +22,7 @@ public class DarkSlimeScene extends BaseContent
             outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
             outputText("\"<i>Well darn, if you spot a fleshling do share!</i>\"");
             outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the caves unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         }
         //regular scene

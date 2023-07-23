@@ -182,7 +182,7 @@ public class HellHoundScene extends BaseContent
 			clearOutput();
 			outputText("You force the presence out of your mind.  You feel almost a bit lost after it disappears, but giving yourself over to foreign control can never be a good idea, can it?");
 			//end event, A can repeat later.
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //choose yes (C)
@@ -212,7 +212,7 @@ public class HellHoundScene extends BaseContent
 			outputText(" You extract Marae's lethicite from your pack, and wonder if you really want to trade it for the hellfire he offered.");
 			//advance to repeat version
 			flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //Choose no (E)
@@ -221,7 +221,7 @@ public class HellHoundScene extends BaseContent
 			clearOutput();
 			outputText("You push the presence out of your mind.  Maybe later you'll collect the hellfire, but for now you'd rather keep the lethicite.");
 			//end event, D can repeat.
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //Choose yes (F)
@@ -269,7 +269,7 @@ public class HellHoundScene extends BaseContent
 			player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
 			//Hellhounds no longer encounterable.
 			flags[kFLAGS.HELLHOUND_MASTER_PROGRESS]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //Merae's Lethicite

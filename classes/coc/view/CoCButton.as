@@ -79,6 +79,7 @@ public class CoCButton extends Block {
 				_key1label:TextField,
 				_key2label:TextField,
 				_iconQuantityLabel:TextField,
+				_cornerLabel:TextField,
 				_iconGraphic:BitmapDataSprite,
 				_backgroundGraphic:BitmapDataSprite,
 				_enabled:Boolean      = true,
@@ -160,6 +161,19 @@ public class CoCButton extends Block {
 		_iconQuantityLabel.filters = [UIUtils.outlineFilter(IconQuantityShadow)];
 		return _iconQuantityLabel;
 	}
+	private function cornerLabelElement():TextField {
+		if (_cornerLabel) return _cornerLabel;
+		_cornerLabel         = addElementAbove(UIUtils.newTextField({
+			x                : ICON_X,
+			width            : width - ICON_X * 2,
+			y                : ICON_Y,
+			height           : ICON_HEIGHT / 2,
+			textColor        : IconQuantityColor,
+			defaultTextFormat: IconQuantityFormat
+		}), _labelField) as TextField;
+		_cornerLabel.filters = [UIUtils.outlineFilter(IconQuantityShadow)];
+		return _cornerLabel;
+	}
 	private function key1labelElement():TextField {
 		if (_key1label) return _key1label;
 		_key1label         = addElementAbove(UIUtils.newTextField({
@@ -205,6 +219,9 @@ public class CoCButton extends Block {
 			if (_key1label) _key1label.width         = innerWidth - 12;
 			if (_key2label) _key2label.width         = innerWidth - 12;
 			iconId                   = iconId;
+		}
+		if (_cornerLabel) {
+			_cornerLabel.width = width - ICON_X * 2;
 		}
 		super.resize();
 	}
@@ -282,9 +299,24 @@ public class CoCButton extends Block {
 		return _iconQuantityLabel && _iconQuantityLabel.visible ? _iconQuantityLabel.text : "";
 	}
 	public function set iconQty(value:String):void {
-		iconQuantityElement();
-		_iconQuantityLabel.text    = value;
-		_iconQuantityLabel.visible = _iconGraphic && _iconGraphic.visible;
+		if (value && !_iconQuantityLabel) iconQuantityElement();
+		if (_iconQuantityLabel) {
+			_iconQuantityLabel.text    = value;
+			_iconQuantityLabel.visible = _iconGraphic && _iconGraphic.visible;
+		}
+	}
+	public function cornerLabel(value:String):CoCButton {
+		cornerLabelText = value;
+		return this;
+	}
+	public function get cornerLabelText():String {
+		return _cornerLabel ? _cornerLabel.text : "";
+	}
+	public function set cornerLabelText(value:String):void {
+		if (value && !_cornerLabel) cornerLabelElement();
+		if (_cornerLabel) {
+			_cornerLabel.text = value;
+		}
 	}
 	public function icon(iconId:String, iconQty:String=""):CoCButton {
 		this.iconId = iconId;
@@ -517,15 +549,16 @@ public class CoCButton extends Block {
 	
 	public function reset():CoCButton {
 		color(DEFAULT_COLOR);
-		visible       = false;
-		labelText     = "";
-		toolTipHeader = "";
-		toolTipText   = "";
-		alpha         = 1;
-		enabled       = false;
-		callback      = null;
-		iconId        = null;
-		iconQty       = "";
+		visible         = false;
+		labelText       = "";
+		toolTipHeader   = "";
+		toolTipText     = "";
+		alpha           = 1;
+		enabled         = false;
+		callback        = null;
+		iconId          = null;
+		iconQty         = "";
+		cornerLabelText = "";
 		return this;
 	}
 	/**

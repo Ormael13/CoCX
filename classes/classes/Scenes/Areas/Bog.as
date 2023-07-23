@@ -6,10 +6,9 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Bog.*;
-import classes.Scenes.Combat.SpellsBlood.LifestealEnchantmentSpell;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -142,11 +141,15 @@ public class Bog extends BaseContent
 
 		public function exploreBog():void
 		{
-			clearOutput();
-			flags[kFLAGS.BOG_EXPLORED]++;
-			doNext(camp.returnToCampUseOneHour);
-			bogEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(bogEncounter);
+			explorer.setTags("bog");
+			explorer.prompt = "You explore the dark bog.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				flags[kFLAGS.BOG_EXPLORED]++;
+			}
+			explorer.leave.hint("Leave the dark bog");
+			explorer.skillBasedReveal(23, flags[kFLAGS.BOG_EXPLORED]);
+			explorer.doExplore();
 		}
 	
 		public function bogChance():Number {
@@ -157,7 +160,7 @@ public class Bog extends BaseContent
 
 		private function findNothing():void {
 			outputText("You wander around through the humid muck, but you don't run into anything interesting.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function findChest():void {
@@ -170,7 +173,7 @@ public class Bog extends BaseContent
 			player.gems += gemsFound;
 			statScreenRefresh();
 			outputText("\n\n<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function zenjiEncounterFn():void {

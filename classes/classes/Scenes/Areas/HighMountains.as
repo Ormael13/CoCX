@@ -5,9 +5,9 @@ package classes.Scenes.Areas {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Monsters.LightElfScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
@@ -155,16 +155,20 @@ public class HighMountains extends BaseContent {
         clearOutput();
         outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)");
         flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Explore High Mountain
     public function exploreHighMountain():void {
-        clearOutput();
-        doNext(camp.returnToCampUseOneHour);
-        flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-        highMountainsEncounter.execEncounter();
-        flushOutputTextToGUI();
+        explorer.prepareArea(highMountainsEncounter);
+        explorer.setTags("mountain","highMountain");
+        explorer.prompt = "You explore the high mountains.";
+        explorer.onEncounter = function(e:ExplorationEntry):void {
+            flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
+        }
+        explorer.leave.hint("Leave the high mountains");
+        explorer.skillBasedReveal(55, flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]);
+        explorer.doExplore();
     }
 
 	public function highMountainsChance():Number {
@@ -252,7 +256,7 @@ public class HighMountains extends BaseContent {
         spriteSelect(SpriteDb.s_chickenHarpy);
         outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
         outputText("\n\nYou decide to take your own path, heading back to camp while you can.");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     public function caveScene():void {
@@ -264,7 +268,7 @@ public class HighMountains extends BaseContent {
         outputText("Tentatively you put one hand on place");
         if (!player.isRace(Races.AVIAN, 1, false)) {
             outputText(", but absolutely nothing happens. Maybe the magic or whatever that thing was supposed to do stopped working long ago? In any case, you had enough looking for a while, and since you’re not getting anything useful from there, you resume your walk.\n\n");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         } else {
             outputText(" and gasp in surprise as the figures depicting the creatures at the sides of the alcove recede as you do so, leaving in place two smaller alcoves with two statuettes on them.\n\n");
             outputText("The first one, made on brass and bronze, depicts a fierce looking gryphon in an assault stance. Every bit of the artifact emanates an unnatural strength. On the other side, a statue made of alabaster and ruby gemstones is shaped as a graceful peacock. Strangely, besides being pretty, the way it’s crafted gives you a weird, mystic feel.\n\n");
@@ -279,14 +283,14 @@ public class HighMountains extends BaseContent {
         outputText("Picking the brass-forged statuette, you immediately feel how its energy rushes through your avian body, invigorating it with an unknown force. Carefully putting it on your bag, you see how the other one is stored away by the hidden mechanism.\n\n");
         outputText("With nothing useful left to you here, you resume your walk and return to your camp with the gryphon idol on your bag.\n\n");
         player.createKeyItem("Gryphon Statuette", 0, 0, 0, 0);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     public function caveScenePeacock():void {
         outputText("Picking the alabaster statuette, you immediately feel how its energy rushes through your avian body, invigorating it with an unknown force. Carefully putting it on your bag, you see how the other one is stored away by the hidden mechanism.\n\n");
         outputText("With nothing useful left to you here, you resume your walk and return to your camp with the peacock idol on your bag.\n\n");
         player.createKeyItem("Peacock Statuette", 0, 0, 0, 0);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 }
 }

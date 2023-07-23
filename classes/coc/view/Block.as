@@ -71,7 +71,7 @@ public class Block extends Sprite {
 		// count autocols and convert fraction widths to pixels
 		for (i = 0; i < cols; i++) {
 			if (columns[i] < 0) {
-				autocols++;
+				autocols += -columns[i];
 				continue;
 			} else if (columns[i] <= 1) {
 				// fraction
@@ -83,7 +83,7 @@ public class Block extends Sprite {
 		if (autocols > 0) {
 			if (cellWidth <= 0) cellWidth = freespace/autocols;
 			for (i = 0; i < cols; i++) {
-				if (columns[i] < 0) columns[i] = cellWidth;
+				if (columns[i] < 0) columns[i] = cellWidth*(-columns[i]);
 			}
 		}
 		if (gap < 0) {

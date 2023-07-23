@@ -108,6 +108,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         outputText("You find the entrance to what appears to be a tunnel made of stone. This place looks man made as if carved by humanoid hands yet sports no decoration. Just empty linear corridors and corners dimly lit by magical torches. On a wall you find a sign reading ");
         outputText("-Woe to whom seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth's deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
         outputText("<b>You found the Ebon Labyrinth.</b>\n\n");
+        explorer.stopExploring();
         doNext(enterDungeon);
     }
 

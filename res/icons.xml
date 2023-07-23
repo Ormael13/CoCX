@@ -440,6 +440,9 @@
         ==============-->
 
         <alias alias="TeaseXP" icon="I_Heart_Red"/>
+        <alias alias="herbXP" icon="I_Herb_Green"/>
+        <alias alias="mineXP" icon="I_BronzeB"/>
+        <alias alias="spellXP" icon="I_Book_Red"/>
         <!-- Mastery icons: 'CombatMastery' + player.combatMastery[i].combat -->
         <alias alias="CombatMastery" icon="I_GenericWeapon_Sword"/>
         <alias alias="CombatMasteryFeral" icon="CombatMastery"/>

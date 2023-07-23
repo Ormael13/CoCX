@@ -32,7 +32,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			else {
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"");
 				//[Fight] [Talk] [Leave]
-				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", null, "", null, "Leave", explorer.done);
 			}
 		}
 
@@ -55,11 +55,11 @@ public class MaleSpiderMorphScene extends BaseContent
 			if (rand(6) != 0) {
 				outputText("If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
 				outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
-				inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.S_GOSSR, explorer.done);
 			} else {
 				outputText("Spider webs are tougher than steel.  A skilled artisan can make an excellent fabric using it.  Or you can just twist it into a rope.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
 				outputText("He stands and gives you a bundle of white fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
-				inventory.takeItem(useables.T_SSILK, camp.returnToCampUseOneHour);
+				inventory.takeItem(useables.T_SSILK, explorer.done);
 			}
 		}
 

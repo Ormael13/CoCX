@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.D3
 {
 import classes.BaseContent;
 import classes.EventParser;
@@ -29,7 +29,7 @@ import classes.room;
 		public var minotaurKing:MinotaurKingScenes = new MinotaurKingScenes();
 		public var lethice:LethiceScenes = new LethiceScenes();
 		
-		public function D3() 
+		public function D3()
 		{
 			configureRooms();
 		}
@@ -245,11 +245,12 @@ import classes.room;
 			outputText("\n\nDo you step inside, or wait until you’re better prepared?");
 			menu();
 			addButton(0, "Enter", enterD3);
-			addButton(1, "Leave", camp.returnToCampUseOneHour);
+			addButton(1, "Leave", explorer.done);
 		}
 		
 		public function enterD3():void
 		{
+			explorer.stopExploring();
 			SceneLib.dungeons.setDungeonButtons(); //Ensures the top buttons are visible.
 			menu(); //Clear bottom buttons
 			inRoomedDungeon = true;
@@ -399,7 +400,7 @@ import classes.room;
 		private function roomofmirrorsRoomFunc():Boolean
 		{
 			outputText("<b><u>Room of Mirrors</u></b>\n");
-			outputText("The metal door opens soundlessly onto a fairly large, unlit room, shabby and grey with disuse. It is cluttered with a great quantity of mirrors. Round hand mirrors are stacked on shelves, square wall mirrors are leant against walls, a large,"); 
+			outputText("The metal door opens soundlessly onto a fairly large, unlit room, shabby and grey with disuse. It is cluttered with a great quantity of mirrors. Round hand mirrors are stacked on shelves, square wall mirrors are leant against walls, a large,");
 			if (flags[kFLAGS.D3_MIRRORS_SHATTERED] == 1) outputText(" now shattered,");
 			outputText(" ornate standing mirror dominates the center of the room, and a number of broken, jagged specimens are stacked near the back. They reflect the dull trappings of this place back at you emptily. You guess as self-centred a race as the demons probably has quite a large use for these.");
 			
@@ -432,13 +433,13 @@ import classes.room;
                     if (flags[kFLAGS.BENOIT_AFFECTION] == 100) outputText("  This can only be the hall that " + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " once worked in.");
                     outputText("  You get the fright of your life when you think you see a number of depthless pools of grey revolve up to meet yours- but they don’t freeze you, you note as you reflexively turn away. The tinted glass must carry some sort of anti-petrifying charm, and further it must be reflective on the other side, because no one below seems to realize you’re standing there. Relaxing a bit, you continue to absorb the massive room. At the end furthest away from you two huge piles have been created- one of eggs, a massed assortment of every color and size imaginable, and one of pure junk, presumably everything the basilisks have found whilst scavenging and considered worth keeping. The detritus of a dozen collapsed civilizations must be down there, collected for the demons’ perusal by their scaly custodians. Directly below you, you can see archways like the one you just passed under, through which the basilisks ebb and flow.");
 					outputText("\n\nYour heartbeat quickens as you consider. There is a grid gantry running from where you are right around the room to the other side, where you can see a matching observation booth, presumably containing another exit. But it’s quite a distance, there are stairs leading down to the ground level, and outside the protective glass you would surely be spotted and apprehended");
-					if (player.canFly()) outputText(", even if you tried to fly it"); 
-					outputText(". Wouldn’t you? You can’t outrun the gaze of a thousand basilisks... could you?"); 
+					if (player.canFly()) outputText(", even if you tried to fly it");
+					outputText(". Wouldn’t you? You can’t outrun the gaze of a thousand basilisks... could you?");
 					if (player.hasKeyItem("Laybans") >= 0) outputText("  You take the Laybans out of your pouch and hold them up against the glass. It’s exactly as you hoped - they are made of the same material, and are almost certainly what the demons wear when they themselves interact with the basilisks. They would surely help you get across the hall, if you were crazy enough to try.");
 				}
 				else
 				{
-					outputText("Again you creep up to the tinted glass, again you take in the vast hall with the army of basilisks below hard at work, and again you stare out at the metal gantry, with the exit tantalizingly visible on the other side."); 
+					outputText("Again you creep up to the tinted glass, again you take in the vast hall with the army of basilisks below hard at work, and again you stare out at the metal gantry, with the exit tantalizingly visible on the other side.");
 					if (player.hasKeyItem("Laybans") < 0) outputText("  Are you going to try this?");
 					else outputText("  You take the Laybans out of your pocket, turning them around in your hands as you consider. Are you going to try this?");
 				}
@@ -446,7 +447,7 @@ import classes.room;
 				menu();
 				addButton(0, "Go!", jeanClaude.gogoFuckTheseBasilisks);
 				addButton(1, "Fall Back", fallbackFromMagpieHallS);
-					
+				
 				return true;
 			}
 			
@@ -516,7 +517,7 @@ import classes.room;
 			// Should actually be handled by the fallthrough of doNext(1) in the takeItem shit
 			
 			clearOutput();
-			outputText("You pluck out " + item.longName + " ");			
+			outputText("You pluck out " + item.longName + " ");
 			
 			flags[kFLAGS.D3_EGGS_AVAILABLE] += eggMask;
 			inventory.takeItem(item, playerMenu); //playerMenu is equivalent to doNext(1)
@@ -528,7 +529,7 @@ import classes.room;
 			
 			clearOutput();
 			item = weapons.DEMSCYT;
-			outputText("You pluck out " + item.longName + " ");			
+			outputText("You pluck out " + item.longName + " ");
 			flags[kFLAGS.D3_DEMONIC_SCYTHE] = 1;
 			inventory.takeItem(item, playerMenu);
 		}
@@ -613,7 +614,7 @@ import classes.room;
 		{
 			outputText("<b><u>South Courtyard</u></b>\n");
 			outputText("Lethice's courtyard is surprisingly well-groomed for a place that's supposedly home to neverending debauchery and depravity. The paths are laid with interconnecting sandstone bricks that reflect the sun to give the place a gentle, amber glow, and lush, green grass lines the sides along with well-trimmed hedges. You could almost mistake this place for a churchyard if it wasn't for the faint sound of moans on the wind. The courtyard paths lead away east and west, while the gateway out hangs open to the south.");
-			return false;			
+			return false;
 		}
 		
 		private function southwestcourtyardRoomFunc():Boolean

@@ -192,7 +192,7 @@ public class CeraphScene extends NPCAwareContent
 				dynStats("lib", 3, "sen", 3, "cor", 1);
 				if (CoC.instance.inCombat)
 					cleanupAfterCombat();
-				else doNext(camp.returnToCampUseOneHour);
+				else endEncounter();
 			}
 		}
 
@@ -249,7 +249,7 @@ public class CeraphScene extends NPCAwareContent
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
             if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 
 //[OH SHIT SON YOU LOST GET EARS PIERCED]
@@ -381,7 +381,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("You tell Ceraph no, emphatically, over and over.  She gives you a smirk and says, \"<i>Whatever.  It's only a matter of time.  You'll join me soon, pet.</i>\"\n\n");
 
 			outputText("With that declaration she departs, leaving you confused and horny.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[fight]
@@ -493,7 +493,7 @@ public class CeraphScene extends NPCAwareContent
 			player.earsPShort = "green gem-stone ear-studs";
 			player.earsPLong = "Green gem-stone ear-studs";
 			flags[kFLAGS.PC_FETISH] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[PC 'BEAT OFF' Ceraph the first time...]
@@ -588,7 +588,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("\"<i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i>\" she laughs.\n\n");
 			outputText("You tremble with barely restrained lust as the demoness flounces away.  You'd pursue her, but between her ideas and exposing your crotch to the entire area, you need to cum more than anything in the world.  You scurry back to camp, too horny to think straight and your new piercing aching just enough to keep you from forgetting about it.");
 			flags[kFLAGS.PC_FETISH] = 3;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 
@@ -596,7 +596,7 @@ public class CeraphScene extends NPCAwareContent
 		public function encounterCeraph():void
 		{
 			//Just in case set up next button for 1 hr + camp
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 			//If havent met her
 			if (flags[kFLAGS.PC_MET_CERAPH] == 0) {
 				spriteSelect(SpriteDb.s_ceraph);
@@ -734,7 +734,7 @@ public class CeraphScene extends NPCAwareContent
 			dynStats("lus", 200, "scale", false);
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 
 //(REQ's – HUGE WANG, Exgartuan or Jojo corruption, and !centaur)
@@ -803,7 +803,7 @@ public class CeraphScene extends NPCAwareContent
                 outputText("</i>\"");
 				player.orgasm();
 				dynStats("lib", 3, "sen", 3, "cor", 1);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			outputText("  That's rarer than you know, so I'm feeling a little generous.  ");
@@ -898,7 +898,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("beat a hasty retreat from the trickster of fetishes.  Her masturbatory moans chase you down the mountainside back towards your camp, spiking the already-burning furnace of your lust.");
 			//(+10 lust + 10lust/piercing)
 			dynStats("lus", (10 + flags[kFLAGS.PC_FETISH] * 10), "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[Trade]
@@ -949,7 +949,7 @@ public class CeraphScene extends NPCAwareContent
 			spriteSelect(SpriteDb.s_ceraph);
 			outputText("Ceraph smiles knowingly at your response.  \"<i>You'll find this to be quite sexy.  Just be careful putting it on.  If you don't fit it right it'll pinch,</i>\" the demoness instructs while tossing you a set of armor.\n\n");
 			//(Get trapped armor and go home)
-			inventory.takeItem(armors.SEDUCTA, camp.returnToCampUseOneHour);
+			inventory.takeItem(armors.SEDUCTA, explorer.done);
 		}
 
 //[Trade Bimbo Liquer]
@@ -964,7 +964,7 @@ public class CeraphScene extends NPCAwareContent
 			player.takePhysDamage(4);
 			flags[kFLAGS.PC_FETISH] = 0;
 			dynStats("lus", -20, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[Trade Genitals]
@@ -977,7 +977,7 @@ public class CeraphScene extends NPCAwareContent
 				outputText("A disembodied voice roars out, \"<i>FUCK NO!  You are NOT giving me to that crazy bitch!</i>\"  Exgartuan doesn't seem to want to run the risk of being taken by Ceraph, and he completely assumes control of your [legs] to make you flee with all due haste.  He taunts, \"<i>Rip off your own little dick, why doncha!  You'd look better with just a pussy anyhow ya dried out old sow!</i>\"\n\n");
 				outputText("Ceraph seems perturbed but doesn't bother to pursue you.");
 				dynStats("lus", -20, "scale", false);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			//Create array for choosing bits!
@@ -1070,7 +1070,7 @@ public class CeraphScene extends NPCAwareContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_ceraph);
 			outputText("You let her know that you've changed your mind and take off before Ceraph can try to take your beloved body parts.  You hear her laugh and tease as you run, yelling, \"<i>What, can't handle the thought of an Omnibus touching your fun bits?  Poor baby!</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //[Yes]
@@ -1176,7 +1176,7 @@ public class CeraphScene extends NPCAwareContent
 				flags[kFLAGS.CERAPH_OWNED_TITS]++;
 			}
 			//Fix any gender mixmatches
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 //NIGHTTIME
@@ -1445,7 +1445,7 @@ public class CeraphScene extends NPCAwareContent
 			player.sexReward("no", "Dick");
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 
 		public function rapeCerberusStyle():void {
@@ -1462,7 +1462,7 @@ public class CeraphScene extends NPCAwareContent
 			player.sexReward("vaginalFluids","Dick");
 			if (CoC.instance.inCombat)
 				cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 	}
 }

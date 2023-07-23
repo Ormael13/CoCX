@@ -2,13 +2,13 @@
 import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Monsters.Magnar;
-import classes.internals.SaveableState;
 import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Areas.Swamp.SpiderMorphMob;
+import classes.Scenes.Dungeons.DemonLab;
+import classes.Scenes.Monsters.Magnar;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
 public class KihaFollower extends NPCAwareContent implements TimeAwareInterface, SaveableState {
     public static var DergKidnapped:int; //0 for not kidnapped, 1 for currently kidnapped, 2 for rescued, 3 if you've slain Magnar
@@ -425,7 +425,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
             outputText("[pg]To your surprise, Kiha slips an arm of her own around your waist, returning your affection for the first time.  You smile, and stroke her cheek, happy as the dragoness rests her head on your shoulder.");
             flags[kFLAGS.KIHA_TALK_STAGE]++;
             dynStats("cor", -1);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             return;
         } else if (output) {
             //(Activated on Kiha proc'ing in the swamps; replaces combat encounter)
@@ -445,7 +445,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         if (flags[kFLAGS.KIHA_TALK_STAGE] < 6) addButton(0, "Talk", talkToFriendlyKiha).hint("Talk to Kiha. She might not like it but you might make some progress.");
         addButton(1, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
         addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
-        addButton(4, "Leave", camp.returnToCampUseOneHour);
+        addButton(4, "Leave", explorer.done);
     }
 
     //Spar with Friendly Kiha - Intro (Z)
@@ -512,7 +512,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         outputText("[pg]The peaceful, companionable embrace only lasts for a few seconds before Kiha suddenly and violently pushes you away.  \"<i>What do you think you're doing, idiot!</i>\"  she shouts, and launches off into the air before you can respond.");
         outputText("[pg]You shake your head and head on back to camp.");
         kihaAffection(5);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //lose some corruption?
@@ -552,7 +552,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         flags[kFLAGS.KIHA_TALK_STAGE]++;
         //lose some corruption
         dynStats("cor", -1);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Kiha x salamander Threesome - Introduction (Z)
@@ -584,7 +584,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] = -1;
         outputText("While Kiha and the mysterious swordsman are distracted, you pick yourself up out of the mud and high-tail it out and head back to camp.  Over your shoulder, you hear the sounds of battle raging.");
         //to what penalty?
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Lie There
@@ -645,7 +645,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         outputText("[pg]Your [armorName] squelches wetly all the way, full of your cum as it is.");
         if (!recalling) {
             player.sexReward("no", "Dick");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         } else doNext(recallWakeUp);
     }
 
@@ -700,7 +700,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         outputText("[pg]Laughing weakly, exhausted by your efforts at dominating the two fiery redheads, you pull out of Kiha's rectum, watching as cum gushers out of her stretched bum.  You give her a little pat on the thigh before untangling yourself from the dragoness.  You stop by to give Hel and Kiha both a quick kiss on the lips before grabbing your gear and staggering off to camp, leaving the girls to sort themselves out in the murky swamp.");
         if (!recalling) {
             player.sexReward("saliva", "Dick");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         } else doNext(recallWakeUp);
     }
 
@@ -722,7 +722,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         if (!recalling) { //only the first time!
             addButton(1, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
             addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
-            addButton(4, "Leave", camp.returnToCampUseOneHour);
+            addButton(4, "Leave", explorer.done);
         }
         addButton(3, "LovinHug", lovinHugKiha).hint("Give the dragoness a hug and take things to a whole new level!");
     }
@@ -834,7 +834,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         if (!recalling) {
             player.sexReward("vaginalFluids", "Dick");
             dynStats("sen", -2);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         } else doNext(recallWakeUp);
     }
 
@@ -856,7 +856,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         if (!recalling) {
             player.sexReward("vaginalFluids", "Lips");
             dynStats("sen", -2);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         } else doNext(recallWakeUp);
     }
 
@@ -881,7 +881,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         if (!recalling) {
             player.sexReward("vaginalFluids");
             dynStats("sen", -2);
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         } else doNext(recallWakeUp);
     }
 
@@ -896,7 +896,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!")
 		.disableIf(followerKiha() && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2,
 			"You don't have a proper sparring ring for that.");
-	addButton(14, "Leave", followerKiha() ? camp.campLoversMenu : camp.returnToCampUseOneHour);
+	addButton(14, "Leave", followerKiha() ? camp.campLoversMenu : explorer.done);
 	if (followerKiha()) {
 		if (output) {
             if (flags[kFLAGS.LETHICE_DEFEATED] && !TalkedAfterLethice) {
@@ -988,7 +988,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             if (!followerKiha()) outputText("you're back at Kiha's little islet, waving to the dragoness as she flies back home and you head to camp");
             else outputText("you're walking arm in arm again, heading home");
             outputText(".");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             kihaAffection(5);
         }
 
@@ -1042,7 +1042,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             outputText(" idiot.  Don't just lie there,</i>\" she laughs.  Before you can move, through, Kiha leans up and presses her lips to yours, drawing you into a long, loving kiss.  Gently, her long, reptilian tongue presses against your lips, slithering in to entwine with your own tongue.  You lay together for a long while, cuddling and kissing and playing with each other.");
             outputText("[pg]Time seems meaningless in your draconic lover's embrace, yet eventually you know you must part - for the moment.  Giving her another long kiss, you pick yourself up from between Kiha's hefty bosom and, say your goodbyes.");
             outputText("[pg]Kiha gives you a wry smirk as you extricate yourself from your arms.  \"<i>I'll see you soon… Doofus.</i>\"");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
             kihaAffection(5);
         }
     }
@@ -1072,7 +1072,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("[pg]You roll your eyes and spend the next few minutes enjoying a delicious, quiet meal with your dragon lover.  When you've finished, you ruffle Kiha's hair, tell her to try and take better care of herself - or at least make herself a proper meal sometime - and head off back to camp.  You can almost hear her fuming behind you as you walk.");
         player.refillHunger(60);
         kihaAffection(-10);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
 
@@ -1114,7 +1114,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         } else if (player.hasCock())
             addButtonDisabled(2, "???", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
         if (allowBack) addButton(14, "Back", kihaScene.encounterKiha);
-        else addButton(14, "Leave", camp.returnToCampUseOneHour);
+        else addButton(14, "Leave", explorer.done);
     }
 
     //Savage Every Hole With A Bigass Horsecock
@@ -1379,7 +1379,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         flags[kFLAGS.KIHA_HORSECOCK_FUCKED]++;
         player.sexReward("vaginalFluids", "Dick");
         dynStats("sen", -1);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //flags[kFLAGS.KIHA_NEEDS_TO_REACH_TO_HORSECOCKING] = 1;
@@ -1462,7 +1462,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (amilyScene.amilyCorrupt()) outputText("  Amily begs, \"<i>May I help to service you next time, [master]?</i>\"");
         player.sexReward("no", "Dick");
         dynStats("sen", -1);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Girl Camp/Warm Sex
@@ -1492,7 +1492,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         player.sexReward("vaginalFluids", "Lips");
         player.sexReward("saliva", "Vaginal")
         dynStats("sen", -1);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Warm Kiha Sex - Anal (Needs a cock that fits her butt)
@@ -1558,7 +1558,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("[pg]You give Kiha a playful swat on the butt as you depart, laughing as the impact causes a trickle of your cum to leak out and down her thigh.  \"<i>Oh, you idiot!</i>\"  she growls as you run off back to your duties.");
         player.sexReward("Default", "Dick", true, false);
         flags[kFLAGS.TIMES_KIHA_ANALED]++;
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Warm/Follower Kiha Vagaginaginal
@@ -1592,7 +1592,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         kihaKnockUpAttempt();
         player.sexReward("vaginalFluids", "Dick");
         dynStats("sen", -1);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Kiha Takes an Incubus Draft (Requires [Pure?] Incubus Draft)
@@ -1627,7 +1627,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             player.consumeItem(consumables.INCUBID);
             dynStats("cor", 2);
         }
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Kiha Tentacle Scene
@@ -1676,7 +1676,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (x1[3] > 0) player.sexReward("saliva", "Dick");
         if (x1[4] > 0) player.sexReward("no", "Dick");
         dynStats("lib", 1, "sen", -2);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Kiha Camp Move In Hint (Happens once and unlocks options)
@@ -1709,7 +1709,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (player.hasKeyItem("Radiant shard") >= 0) {
             player.addKeyValue("Radiant shard", 1, +1);
         } else player.createKeyItem("Radiant shard", 1, 0, 0, 0);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Possession 'n Boobies
@@ -1743,7 +1743,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         player.orgasm();
         dynStats("cor", 2);
         player.consumeItem(consumables.GROPLUS);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Kiha & Corrupt PCs -- Parting Ways
@@ -1777,7 +1777,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     internal function leaveKihaAfterCorruptionBitch():void {
         clearOutput();
         outputText("You slump your shoulders, deciding not to risk confrontation.  As you step back from the dragoness, she lowers her axe, her head hanging sadly.  It seems this pains her as much as you, but… you return to camp. ");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //Kiha & Less-Corrupt PC -- Reunited
@@ -1794,7 +1794,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (!followerKiha()) kihaFriendlyGreeting(false);
         else {
             outputText("  You make your way back to camp, arm in arm.");
-            doNext(camp.returnToCampUseOneHour);
+            endEncounter();
         }
     }
 
@@ -1837,7 +1837,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         clearOutput();
         outputText("You break eye contact with the fierce dragoness and remain silent in the face of her challenge, unwilling to pursue the issue any further at the moment.  She snorts, dismissively, \"<i>If you don't fight for the things you want, people will just keep taking them from you.</i>\"  Kiha lewdly spreads her legs and runs her tail over her outer lips, teasing you as hard as she can.  She smirks as your eyes glue to her groin and turns away.");
         outputText("[pg]\"<i>Maybe once you grow some balls,</i>\" the dragoness taunts, giving you a wink.");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //[Fight for position]
@@ -2037,7 +2037,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     private function noRapePls():void {
         clearOutput();
         outputText("You break eye contact with the fierce dragoness and remain silent in the face of her challenge, unwilling to pursue the issue any further at the moment.  She snorts, dismissively.  \"<i>That's what I thought,</i>\" she sneers, narrowing her eyes in warning.  After a short pause, her fiery stare almost palpable on your cheek, she turns away once more- with an infuriating little toss of her head- and when you finally glance back at her again, you see that the corners of her mouth are turned up in a smirk.  You turn and walk away shamefully, unable to find the words to explain yourself or to defend your outburst.");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
 
@@ -2232,7 +2232,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice once and for all.");
         outputText("\n\nThe " + (totalKihaChildren() == 1 ? "kid" : "kids") + " are happy to hear about the story. \"<i>Thank you for being with me and listening to my story, my Doofus,</i>\" Kiha says before giving you a peck on your cheek.");
         dynStats("cor", -2, "lus", -50, "scale", false);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     private function kihaTrainsHerKids():void {
@@ -2441,6 +2441,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger).\n\n");
         outputText("As you reach camp, Kiha puts a hand on each of your shoulders. \"<i>… One more thing.</i>\" She says. \"<i>The ring… It can tell you where I am… and the other way around.</i>\" She blushes, and you can hear her voice waver. \"<i>… Just in case.</i>\"\n\n");
         ProposalStatus = 3;
+        explorer.stopExploring();
         doNext(camp.returnToCampUseTwoHours);
     }
 
@@ -2449,6 +2450,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("Stunned into silence, you sit back down without another word. After a few seconds, Kiha whispers your name, and you look back at her. “W-well?” You tell Kiha that this is really sudden. You didn’t expect this… hell, you didn’t expect to find love here, let alone something like this. Kiha’s tail lies still behind her, and her eyes moisten. “So… that’s a no?” She’s almost whispering at this point, her dusky skin sallow and the color draining from her scales. \n\n"+
                     "You kneel down in front of Kiha, and you tell her that you’re sorry. You need some time to process all this. You tell the distraught dragoness that you love her, you do, but that you’re a bit overwhelmed. “O-oh… ” Kiha seems a little better at that, but she clearly was hoping to win you over tonight. You pick her up off the ground, giving your lover a hug. Kiha hugs back, but you can feel her tears on your back. “Well… Tell me when you make up your mind… I’ll be at camp if you need me.”");
         ProposalStatus = 4;
+        explorer.stopExploring();
         doNext(camp.returnToCampUseTwoHours);
     }
 
@@ -2457,7 +2459,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("Turning your head away from Kiha, you tell her that you can’t accept her proposal. \"<i>Wh-what?</i>\" Kiha’s dusky skin pales, and she falls to her knees. \"<i>But… </i>\" You tell her that you can’t go any further with her. You’re willing to keep things as they are right now, that you really care about her, but that you can’t be what she wants.\n\n");
         outputText("\"<i>… So I really am just another piece in your harem.</i>\" Kiha closes her eyes. \"<i>… Thank you for telling me earlier.</i>\" Her sarcasm is bitter, and you can all but see her walls going back up. You reach a hand out to Kiha, but the hot-headed dragoness lets loose a gout of flame. You jump back, and Kiha glares at you. \"<i>Just… leave me alone, [name]. Go back to camp.</i>\" You delay, and she roars her rage, spitting more flame at you. \"<i>GO!!!</i>\"\n\n");
         outputText("You head back to camp, her angered voice ringing in your ears.\n\n");
-        ProposalStatus = 6
+        ProposalStatus = 6;
+        explorer.stopExploring();
         doNext(camp.returnToCampUseTwoHours);
     }
 
@@ -2470,7 +2473,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You tell her that her wings are a part of her, and that you like them… Just like the rest of her. She blushes even hotter, and you feel a bit of heat behind you as she exhales a bit of her fire breath. You continue playing with her wings, rubbing the thin bones, tickling the soft, leathery membranes. Kiha lets you, but the rapidly dampening patch against your thigh, coupled with the muffled exhales, let you know that your dragoness is enjoying this.\n\n");
         outputText("\"<i>Idiot.</i>\" Kiha’s voice is low, but tender. She slowly folds her wings, and you put your hands on her hips. (if playerheight<6ft) You look into her dark red eyes, and she puts a hand on your cheek. You jokingly remind Kiha that she chose to be here, with you. At this, she rolls her eyes, popping you on the thigh with her tail.\n\n");
         outputText("\"<i>Yeah… I did.</i>\" For a few minutes, the two of you stay like this, just… Together. Kiha eventually pushes your shoulders, signalling that the moment’s passed. \"<i>… I forgot what this was like.</i>\" Kiha says to you, not trying to hide her feelings for once. \"<i>Just… Holding someone.</i>\" She smiles slightly, shaking her head. \"<i>You give good hugs… My idiot.</i>\" She walks away, generous ass swaying and tail swishing, back into camp. She seems happier than before.\n\n");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     public function KihaLoveRecip():void {
@@ -2491,7 +2494,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You tell Kiha that you came to Mareth to purify the land and help its people. You tell your dragoness that if it earns you the affection of a hot dragon lady like her, it’s hardly unwelcome… But you explain that a relationship can’t be your focus right now.\n\n");
         outputText("\"<i>Ah. Well, you’re hardly the only one who wants The Demons to pay, [name].</i>\" Kiha pulls away from you, turning her back. \"<i>… I’ll be around if you want me.</i>\" She flies away, and you feel a single droplet of water hit your shoulder. Clearly, Kiha wanted something more.\n\n");
         ProposalStatus = 4;
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     public function KihaWedding():void {
@@ -2700,7 +2703,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You run in, making no attempt to be sneaky. As he turns, surprisingly swift for such a big being, you take your [weapon], slamming it as hard as you can into the giant’s face. He staggers back, and you lower your weapon for a rising blow. His armored wing lashes out, ready to intercept your attack, but you anticipated that. You aim your [weapon] at the base of his wing, and with a sickening *crack* it falls limp.\n\n");
         MagnarState = 1;
         startCombat(new Magnar);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     public function KihaRescueSneaky():void {
@@ -2708,7 +2711,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You rush into the room as he turns back to Kiha, your wedding band sending pure fear coursing through your veins. As he pours a glass of the poisonous alcohol, you run as fast as you can, bearing down on the giant before he knows you’re there. You take your [weapon] and jam it into the brute’s left eye with all your strength. He roars in anger, dropping his glass, which shatters on the floor. Kiha sees you, her face lighting up and your wedding ring pouring relief, love and resolve into you.\n\n");
         MagnarState = 2;
         startCombat(new Magnar);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
 
@@ -2735,6 +2738,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("As you fall asleep, holding her close, you're almost overwhelmed by the warm, cozy feelings coursing through your mind. You chuckle gently, only one thought seems appropriate. You whisper it warmly in her ear, something you've always wanted to say to her face.\n\n");
         outputText("<i>God Damn it, Kiha… <i>.\n\n");
         DergKidnapped = 2;
+        explorer.stopExploring();
         doNext(camp.returnToCampUseEightHours)
     }
 
@@ -2846,6 +2850,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You nod once, telling Kiha that she shouldn't need to hide her feelings… But that if she wants to keep this between you, that you're honored to be the only one to see her so vulnerable. She cough-laughs at that, resting her head on your shoulder again.\n\n");
         outputText("<i>Thank you… My idiot.</i>\n\n");
         outputText("The moment is over, but Kiha points at the rubble, mentioning a few buildings. Slowly, she tells you more about the town, and you listen intently, pride filling your chest. Eventually, Kiha sighs, giving you a slow, tender kiss. <i>\"Thank you… </i>\" Her voice is a bare whisper, low and tender. <i>\"My Idiot… </i> You ask her if she wants to go home, and Kiha's eyes shimmer. She lets loose a small burst of heat as she exhales, and nods. Hand in hand, you walk home in silence. While you see a few of Mareth's denizens, none seem willing to approach.\n\n");
+        explorer.stopExploring();
         doNext(camp.returnToCampUseEightHours);
     }
 
@@ -2886,7 +2891,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     public function KihaTownHug():void {
         clearOutput();
         outputText("For a half-hour or so, you hold your fiery lover close. Slowly, steadily, she rests more and more of her weight on you, until you’re practically supporting her. You open your mouth to ask her if she’s alright, but a snore interrupts. With a small smile, you carry Kiha back to her part of the camp, putting her down to rest. She’s been pushing herself harder than usual, lately.\n\n");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     public function KihaTownSex():void {

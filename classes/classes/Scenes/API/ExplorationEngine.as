@@ -27,9 +27,12 @@ public class ExplorationEngine extends BaseContent {
 	
 	private function filterUnique(e:SimpleEncounter):Boolean {
 		if (e.unique) {
+			var group:String = e.unique as String;
 			for (var i:int = 0; i < N; i++) {
-				if (flatList[i] && !flatList[i].isCleared && flatList[i].encounter == e) {
-					return false;
+				if (flatList[i] && !flatList[i].isCleared && flatList[i].encounter) {
+					if (flatList[i].encounter == e || (group && flatList[i].encounter.unique == e.unique)) {
+						return false;
+					}
 				}
 			}
 		}
@@ -86,6 +89,12 @@ public class ExplorationEngine extends BaseContent {
 	public var canInventory:Boolean  = true;
 	public var canSoulSense:Boolean  = true;
 	/**
+	 * function(e:ExplorationEntry):Boolean.
+	 * If returns true, that encounter can be revealed with Soul Sense skill.
+	 * Default: all NPC-tagged encounters.
+	 */
+	public var soulSenseCheck:Function = defaultSoulseSenseCheck;
+	/**
 	 * function(e:ExplorationEntry):Boolean, called BEFORE the encounter.
 	 * If it returns true, do not continue with the exploration UI
 	 */
@@ -99,9 +108,9 @@ public class ExplorationEngine extends BaseContent {
 	 *
 	 * Known area tags:
 	 * - generic: "plants", "water"
-	 * - area group: "forest", "desert", "battlefield", "lake"
+	 * - area group: "forest", "desert", "battlefield", "lake", "mountains"
 	 * - specific area: "explore", "lakeBeach", "forestInner", "forestOuter", "deepwoods", "desertInner", "desertOuter",
-	 *   "battlefieldBoundary", "battlefieldOuter"
+	 *   "battlefieldBoundary", "battlefieldOuter", "caves", "bog", "swamp", "hills", "mountainsLow", "mountainsMid"
 	 *
 	 * @example
 	 *
@@ -158,6 +167,7 @@ public class ExplorationEngine extends BaseContent {
 		nextNodes    = [];
 		onMenu       = null;
 		onEncounter  = null;
+		soulSenseCheck = defaultSoulseSenseCheck;
 	}
 	public function markEncounterDone():void {
 		if (initialized && currentEntry != null) {
@@ -325,6 +335,11 @@ public class ExplorationEngine extends BaseContent {
 	 *                       40% to reveal 4
 	 */
 	public function revealMultiple(n:Number):void {
+		if (isNaN(n) || n <= 0) return;
+		if (n == -Infinity) {
+			revealAll();
+			return;
+		}
 		var i:int = n | 0;
 		if (Math.random() < n - i) i++;
 		while (i-- > 0) {
@@ -669,11 +684,13 @@ public class ExplorationEngine extends BaseContent {
 		// +1 reveal per 100 area explorations
 		n += timesExplored / 100;
 		
-		// +1 reveal per 10 wisdom, scaled with NG+ level and area level
+		// Wisdom-based reveal:
+		// * first reveal costs 10 wisdom, scaled with NG+ and area level
+		// * each following reveal costs 5% more wis
 		var wisFactor:Number = 10;
-		wisFactor *= 1 + (areaLevel - 1) / 99; // x1 on area level 1, x2 on area level 100
+		wisFactor *= 1 + 4 * (areaLevel - 1) / 99; // x1 on area level 1, x4 on area level 100
 		wisFactor *= (1 + 0.2 * CoC.instance.newGamePlusMod()); // +20% per NG level
-		n += player.wis / wisFactor;
+		n += solveSum(player.wis, wisFactor, wisFactor*0.05);
 		
 		// +1 reveal per Eyes of the Hunter rank
 		if (player.hasPerk(PerkLib.EyesOfTheHunterNovice)) n += 1;
@@ -689,6 +706,9 @@ public class ExplorationEngine extends BaseContent {
 	public function soulSenseCost():Number {
 		return 100;
 	}
+	public static function defaultSoulseSenseCheck(e:ExplorationEntry):Boolean {
+		return e.kind == "npc";
+	}
 	public function doSoulSense():void {
 		player.soulforce -= soulSenseCost();
 		statScreenRefresh();
@@ -697,13 +717,13 @@ public class ExplorationEngine extends BaseContent {
 		var message:String = "";
 		for (var i:int = 0; i < N; i++) {
 			var e:ExplorationEntry = flatList[i];
-			if (e.isDisabled) continue;
-			if (e.kind == "npc" && !e.isFullyRevealed) {
+			if (e.isDisabled || e.isFullyRevealed) continue;
+			if (soulSenseCheck(e)) {
 				candidates.push(e);
 			}
 		}
 		if (candidates.length == 0) {
-			message = "You reach out, but your soul sense detects no one.";
+			message = "You reach out, but your soul sense detects nothing special.";
 		} else {
 			e = Utils.randomChoice(candidates);
 			e.incReveal();

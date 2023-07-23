@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Areas.Mountain{
 import classes.*;
-	import classes.BodyParts.Hair;
-	import classes.GlobalFlags.kFLAGS;
-    import classes.display.SpriteDb;
+import classes.BodyParts.Hair;
+import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class Salon extends BaseContent implements TimeAwareInterface {
 
@@ -36,7 +36,7 @@ public class Salon extends BaseContent implements TimeAwareInterface {
 public function hairDresser():void {
 	clearOutput();
 	outputText("While exploring the mountain, you find a cleverly concealed doorway.  From inside you can hear the sound of blades being sharpened.  Do you enter the doorway?");
-	doYesNo(salonGreeting,camp.returnToCampUseOneHour);
+	doYesNo(salonGreeting,explorer.done);
 }
 	public function isDiscovered():Boolean {
 		return player.hasStatusEffect(StatusEffects.HairdresserMeeting);
@@ -78,7 +78,7 @@ private function salonPaymentMenu():void {
 	addButton(3, "Minotaur", gloryholeMinotaur).hint("Suck that huge minotaur cock!");
 	addButton(4, "Incubus", gloryholeIncubus).hint("Suck that incubus cock. It gives off that pleasant spicy scent.");
 	if (flags[kFLAGS.CAN_BUY_MINOCUM] > 0) addButton(8, "Buy MinoCum", buyMinoCum).hint("Buy a bottle of minotaur cum for 60 gems?");
-	addButton(14, "Leave", camp.returnToCampUseOneHour);
+	addButton(14, "Leave", explorer.done);
 }
 
 		private function buyMinoCum():void{
@@ -96,7 +96,7 @@ private function salonPaymentMenu():void {
 				player.gems -= 60;
 				outputText("You happily give Lynnette 60 gems and pick up the bottle full of glistening, heavenly cum.  ");
 				statScreenRefresh();
-				inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.MINOCUM, explorer.done);
 			}
 		}
 
@@ -130,7 +130,7 @@ public function salonPurchaseMenu():void {
 	if (player.hairLength > 2 && !Hair.Types[player.hairType].ignoresStyle) addButton(10, "Haircut", changeHairStyle);
 	else if (Hair.Types[player.hairType].ignoresStyle) addButtonDisabled(10, "Haircut", "Your current hair can't have its style changed!");
 	else if (player.hairLength <= 2) addButtonDisabled(10, "Haircut", "Your current hair length is too short!");
-	addButton(14,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",explorer.done);
 }
 
 private function hairDresserGreeting():void {
@@ -364,7 +364,7 @@ private function cut(newLen:int):void {
 	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + hairDescript() + ".  When they've finished, you're left with ");
 	player.hairLength = newLen;
 	outputText(hairDescript() + ".");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function hairGrow():void {
@@ -381,7 +381,7 @@ private function hairGrow():void {
 	var growth:Number = rand(3) + 3;
 	player.hairLength += growth;
 	outputText(num2Text(growth) + " more inches of [haircolor] hair.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function removeHair():void {
@@ -390,12 +390,12 @@ private function removeHair():void {
 	outputText("Lynnette instructs you to take a seat and instructs her daughters to pare down your hair down to short length. They effortlessly cut your hair to short length. Next, Lynnette applies a special cream all over your [hair].  Your hair starts to stiffen and falls out.  She gives your head a good cleaning afterwards.\n\n");
 	outputText("<b>You no longer have a hair!</b>");
 	player.hairLength = 0;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 		private function buyDye(itype:ItemType):void{
 			clearOutput();
-			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+			inventory.takeItem(itype, explorer.done);
 		}
 
 private function dyeMenu():void {
@@ -434,7 +434,7 @@ private function cutBeard():void {
 	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + beardDescript() + ".  When they've finished, you're left with ");
 	player.beardLength = 0.01;
 	outputText(beardDescript() + ".");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function growBeard(mode:int = 0):void {
@@ -467,7 +467,7 @@ private function growBeard(mode:int = 0):void {
 			outputText(num2Text(growth) + " more "+Measurements.inchesOrCentimetres(growth));
 			outputText(" of [haircolor] beard.");
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function changeBeardStyle():void {
@@ -487,7 +487,7 @@ private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {
 	outputText("Lynnette and her daughters begin to mess with your beard with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
 	player.beardStyle = choiceStyle;
 	outputText("After a while, you now have " + player.beardDescript() + "!");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function changeHairStyle():void {
@@ -514,7 +514,7 @@ private function chooseHairStyleFinalize(choiceStyle:int = 0):void {
 	outputText("Lynnette and her daughters begin to mess with your hair with razor-sharp scissors and white fluid while they work to change your hairstyle into what you've wanted.\n\n");
 	player.hairStyle = choiceStyle;
 	outputText("After a while, you now have " + player.hairStyleDescript() + "!");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function removeBeard():void {
@@ -524,7 +524,7 @@ private function removeBeard():void {
 	outputText("<b>You no longer have a beard!</b>");
 	player.beardStyle = 0;
 	player.beardLength = 0;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function minotaurCumBukkakeInSalon():void {
@@ -637,7 +637,7 @@ private function mudFacial():void {
 
 	outputText("With that finished, the crowd of busty, green-skinned women disperses to leave you in peace.  Time drags on, but eventually the mud hardens and cracks.  As if on cue, tiny hands emerge with wet rags to scrub your face clean.  Once they've finished, you feel like a whole new you! (+10 femininity)");
 	player.modFem(100,10);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function sandFacial():void {
@@ -647,7 +647,7 @@ private function sandFacial():void {
 
 	outputText("After a while the goblin girls come back and clean the stuff from your face. (+10 masculinity)");
 	player.modFem(0,10);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 /*
 public static const LYNNETTE_PREGNANCY_CYCLE:int                                    = 1022; //0-3 = pregnant. 4-6 = not.

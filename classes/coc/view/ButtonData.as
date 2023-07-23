@@ -23,6 +23,7 @@ public class ButtonData {
 	public var slotType:Function;
 	public var iconId:String = null;
 	public var iconQty:String = "";
+	public var cornerLabelText:String = "";
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
 		this.callback = callback;
@@ -63,7 +64,10 @@ public class ButtonData {
 		this.iconId = iconId;
 		return this;
 	}
-	
+	public function cornerLabel(label:String):ButtonData {
+		this.cornerLabelText = label;
+		return this;
+	}
 	/**
 	 * Associate custom data with the button.
 	 */
@@ -104,7 +108,8 @@ public class ButtonData {
 			btn.show(text, callback, toolTipText, toolTipHeader)
 					.color(labelColor)
 					.disableIf(!enabled)
-					.icon(iconId, iconQty);
+					.icon(iconId, iconQty)
+					.cornerLabel(cornerLabelText);
 		}
 	}
 	/**
