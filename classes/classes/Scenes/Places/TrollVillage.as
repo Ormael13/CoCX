@@ -132,7 +132,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                 outputText("His brow furrows, \"You corrupted don’t belong here… Leave now.\"\n" +
                         "\n" +
                         "You look around, there are far too many trolls for you to handle. More and more trolls turn their attention to you as you decide to take your leave.\n");
-                doNext(camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
             else{
                 outputText("His brow furrows, \"Why are you here, what do you want from the trolls?\"\n" +
@@ -158,7 +158,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                 outputText("You emerge at the troll village once again, the guard jabs his spear in your direction. \"Get back!\" he shouts \"You are outnumbered, leave this place!\"\n" +
                         "\n" +
                         "Not wanting to provoke the wrath of the entire village, you decide that the best course of action is to leave.\n");
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
                 lockVillage = true;
             }
             else{
@@ -183,7 +183,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                 addButton(2,(JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", SceneLib.trollVillage.jabala.JabalaHome).hint(zenjiPreCheck).disableIf((!JabalaUnlocked && ZenjiBerated),  "You don't want to disturb the nice couple.");
                 addButton(3,(YenzaUnlocked > 0)?"Yenza's Hut":"???", SceneLib.trollVillage.yenza.YenzaHome).hint("Look for Yenza").disableIf((YenzaUnlocked == 0),"You don't know who lives there.");
                 addButton(4,(KaljiUnlocked == 5)?"Kalji's Hut":"???", SceneLib.trollVillage.kalji.KaljiHome).disableIf(KaljiUnlocked != 5);
-                addButton(14, "Return", camp.returnToCampUseOneHour);
+                addButton(14, "Return", explorer.done);
             }
         }
     }

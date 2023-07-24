@@ -863,6 +863,7 @@ public class Exploration extends BaseContent
 							return "Priscilla"
 						},
 						kind: "npc",
+						unique: true,
 						when: fn.ifLevelMin(24),
 						call: SceneLib.priscillaScene.goblinElderEncounter
 					}, {
