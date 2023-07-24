@@ -49,12 +49,14 @@ public class PatchouliScene extends NPCAwareContent {
 			return _allVisited;
 		}
 		else {
-			_allVisited = player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 &&
-			              flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 &&/* flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 &&
-						  flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_CAVES] > 0 &&*/
-			              flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0 &&
-			              flags[kFLAGS.DISCOVERED_BEACH] > 0 && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 &&
-			              flags[kFLAGS.BOG_EXPLORED] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
+			_allVisited = SceneLib.mountain.timesExploredMid() > 0 && SceneLib.plains.timesExplored() > 0 &&
+					SceneLib.swamp.timesExplored() > 0 &&
+					SceneLib.glacialRift.timesExplored() > 0 &&
+					SceneLib.volcanicCrag.timesExplored() > 0 &&
+					SceneLib.beach.timesExplored() > 0 &&
+					SceneLib.highMountains.timesExplored() > 0 &&
+					SceneLib.bog.timesExplored() > 0 &&
+					SceneLib.forest.timesExploredDeepwoods() > 0;
 		}
 		return _allVisited;
 

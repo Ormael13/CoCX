@@ -4,14 +4,12 @@
  * Currently a Work in Progress.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
+import classes.*;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
-import classes.Scenes.Areas.DeepSea.*;
+import classes.Scenes.SceneLib;
 
 use namespace CoC;
 
@@ -54,7 +52,7 @@ public class DeepSea extends BaseContent
 
 	public function exploreDeepSea():void {
 		clearOutput();
-		flags[kFLAGS.DISCOVERED_DEEP_SEA]++;
+		SceneLib.exploration.counters.deepSea++;
 		doNext(camp.returnToCampUseOneHour);
 		deepSeaEncounter.execEncounter();
 		flushOutputTextToGUI();

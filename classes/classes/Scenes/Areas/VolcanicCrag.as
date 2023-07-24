@@ -12,8 +12,6 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.Areas.VolcanicCrag.*;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -25,7 +23,18 @@ public class VolcanicCrag extends BaseContent
 		public function VolcanicCrag() {
 			onGameInit(init);
 		}
-
+		
+		public const areaLevel:int = 65;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.volcanicCragOuter > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.volcanicCragOuter;
+		}
+		
 		private var _volcanicCragEncounter:GroupEncounter = null;
 		public function get volcanicCragEncounter():GroupEncounter {
 			return _volcanicCragEncounter;
@@ -161,7 +170,7 @@ public class VolcanicCrag extends BaseContent
 		}
 		
 		public function exploreVolcanicCrag():void {
-			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
+			SceneLib.exploration.counters.volcanicCragOuter++;
 			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
 			doNext(camp.returnToCampUseOneHour);
 			volcanicCragEncounter.execEncounter();

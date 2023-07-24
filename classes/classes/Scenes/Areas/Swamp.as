@@ -22,7 +22,28 @@ use namespace CoC;
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
 		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
 		public var rogar:Rogar = new Rogar();
-
+		
+		public const areaLevel:int = 13;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.swamp > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel && SceneLib.plains.isDiscovered();
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.swamp;
+		}
+		public function discover():void {
+			SceneLib.exploration.counters.swamp = 1;
+			clearOutput();
+			outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n");
+			outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n");
+			outputText("<b>You've discovered the Swamp!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		
 		public function Swamp() {
 			onGameInit(init);
 		}
@@ -38,11 +59,9 @@ use namespace CoC;
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return (player.level + combat.playerLevelAdjustment()) >= 23 && flags[kFLAGS.BOG_EXPLORED] == 0
-				},
+				when: SceneLib.bog.canDiscover,
 				chance: 30,
-				call: discoverBog
+				call: SceneLib.bog.discover
 			}, {
 				name: "gunparts",
 				label : "Gun Parts",
@@ -89,7 +108,7 @@ use namespace CoC;
 				kind  : 'npc',
 				unique: true,
 				when: function ():Boolean {
-					return flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0
+					return flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && SceneLib.exploration.counters.swamp > 0
 				},
 				chance: swampChance,
 				call: SceneLib.emberScene.findEmbersEgg
@@ -170,10 +189,10 @@ use namespace CoC;
 			explorer.setTags("swamp");
 			explorer.prompt = "You explore the wet swamplands.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
+				SceneLib.exploration.counters.swamp++;
 			}
 			explorer.leave.hint("Leave the wet swamplands");
-			explorer.skillBasedReveal(13, flags[kFLAGS.TIMES_EXPLORED_SWAMP]);
+			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
 
@@ -188,12 +207,6 @@ use namespace CoC;
 			return temp;
 		}
 
-		private function discoverBog():void {
-			clearOutput();
-			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)");
-			flags[kFLAGS.BOG_EXPLORED]++;
-			endEncounter();
-		}
 
 		public function partsofM1Cerberus():void {
 			clearOutput();

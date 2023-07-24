@@ -83,10 +83,8 @@ use namespace CoC;
 				kind  : 'place',
 				unique: true,
 				chance: 30,
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19
-				},
-				call: discoverOuter
+				when: SceneLib.battlefiledouter.canDiscover,
+				call: SceneLib.battlefiledouter.discover
 			}, {
 				//Find Tripxi gun parts
 				name: "gunPart",
@@ -183,23 +181,35 @@ use namespace CoC;
 				call: SceneLib.exploration.demonLabProjectEncounters
 			}*/);
 		}
-
+		
+		public const discoverLevel:int = 5;
+		public const areaLevel:int = 16;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0;
+			return SceneLib.exploration.counters.battlefieldBoundary > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= discoverLevel && SceneLib.desert.isDiscoveredOuter();
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY];
+			return SceneLib.exploration.counters.battlefieldBoundary;
 		}
-
+		public function discover():void {
+			SceneLib.exploration.counters.battlefieldBoundary = 1;
+			clearOutput();
+			outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the Battlefield (Boundary)!</b>");
+			endEncounter();
+		}
+		
+		
 		public function exploreBattlefieldBoundary():void {
 			explorer.prepareArea(battlefieldBoundaryEncounter);
 			explorer.setTags("battlefield", "battlefieldBoundary");
 			explorer.prompt = "You explore the battlefield boundary.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY]++;
+				SceneLib.exploration.counters.battlefieldBoundary++;
 			}
 			explorer.leave.hint("Leave the battlefield boundary");
-			explorer.skillBasedReveal(16, flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY]);
+			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
 		
@@ -234,15 +244,6 @@ use namespace CoC;
 				outputText("Some grey, maybe black colored shape seemly wiggling as it like moving in your direction." + (silly() ? " Oh are you approaching me?" : "") + " Bit tired and on the edge due to meeting potential enemies moments ago you decide to return this time. Maybe next time you will check out closer that 'fog' or whatever it's.");
 			} else outputText("You spend an hour exploring this deserted battlefield but you don't manage to find anything interesting, yet this trip had made you a little wiser.");
 			dynStats("wis", .5);
-			endEncounter();
-		}
-
-		private function discoverOuter():void {
-			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
-			player.explored++;
-			clearOutput();
-			outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
-			explorer.stopExploring();
 			endEncounter();
 		}
 

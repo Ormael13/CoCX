@@ -39,9 +39,7 @@ use namespace CoC;
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return (player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_ASHLANDS] == 0
-				},
+				when: SceneLib.ashlands.canDiscover,
 				chance: 30,
 				call: discoverAshlands
 			}, {
@@ -49,9 +47,7 @@ use namespace CoC;
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return (player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_TUNDRA] == 0
-				},
+				when: SceneLib.tundra.canDiscover,
 				chance: 30,
 				call: discoverTundra
 			}, {
@@ -159,23 +155,36 @@ use namespace CoC;
 				call: findNothing
 			})
 		}
-
+		
+		public const areaLevel:int = 30;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_CAVES] > 0;
+			return SceneLib.exploration.counters.caves > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel && SceneLib.beach.isDiscovered();
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.DISCOVERED_CAVES];
+			return SceneLib.exploration.counters.caves;
 		}
-
+		public function discover():void {
+			SceneLib.exploration.counters.caves = 1;
+			clearOutput();
+			outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
+			outputText("<b>You've discovered the Caves!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		
 		public function exploreCaves():void {
 			explorer.prepareArea(cavesEncounter);
 			explorer.setTags("caves");
 			explorer.prompt = "You explore the gloomy caves.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.DISCOVERED_CAVES]++;
+				SceneLib.exploration.counters.caves++;
 			}
 			explorer.leave.hint("Leave the gloomy caves");
-			explorer.skillBasedReveal(30, flags[kFLAGS.DISCOVERED_CAVES]);
+			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
 
@@ -189,7 +198,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("While exploring one of the many tunnels you begin to see a bluish light, curious as to where this opens you take it all the way to the surface and begin to feel chilly, it's definitely cold out there. What awaits you beyond the exit is the sight of endless tundra and icebound mountains.\n\n");
 			outputText("<b>You've discovered the Tundra!</b>");
-			flags[kFLAGS.DISCOVERED_TUNDRA]++;
+			SceneLib.exploration.counters.tundra = 1;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -199,7 +208,7 @@ use namespace CoC;
 			outputText("While exploring one of the many tunnels you begin to see a red light, curious as to where this opens you take it all the way to the surface as the heat starts to increase dramatically the cool fresh air of the tunnel replaced by a warm and smoky air, it's definitely very hot out there. ");
 			outputText("What awaits you beyond the exit is the sight of a field of ashes and lava with volcanoes in the backside.\n\n");
 			outputText("<b>You've discovered the Ashlands!</b>");
-			flags[kFLAGS.DISCOVERED_ASHLANDS]++;
+			SceneLib.exploration.counters.ashlands = 1;
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}

@@ -4,16 +4,14 @@
  * Currently a Work in Progress.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Forgefather;
@@ -23,15 +21,35 @@ import classes.Scenes.SceneLib;
 
 	use namespace CoC;
 	
-	public class Beach extends BaseContent 
+	public class Beach extends BaseContent
 	{
 		public var ceaniScene:CeaniScene = new CeaniScene();
 		public var cancerScene:CancerAttackScene = new CancerAttackScene();
 		public var demonsPack:DemonPackBeachScene = new DemonPackBeachScene();
 		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
-
-		public function Beach() 
+		
+		public const areaLevel:int = 25;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.beach > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel && SceneLib.blightridge.isDiscovered();
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.beach;
+		}
+		public function discover():void {
+			SceneLib.exploration.counters.beach = 1;
+			clearOutput();
+			outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.");
+			outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.");
+			outputText("\n\n<b>You've discovered the Beach and the Ocean!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		public function Beach()
 		{
 			onGameInit(init);
 		}
@@ -157,13 +175,8 @@ import classes.Scenes.SceneLib;
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				call: function ():void {
-					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
-					discoverSeaBoat();
-				},
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_BEACH] >= 10 && flags[kFLAGS.DISCOVERED_OCEAN] <= 0;
-				},
+				call: SceneLib.ocean.discover,
+				when: SceneLib.ocean.canDiscover,
 				chance: Encounters.ALWAYS
 			}, {
 				// Find Orca sunscreen
@@ -210,7 +223,7 @@ import classes.Scenes.SceneLib;
 
 		public function exploreBeach():void {
 			clearOutput();
-			flags[kFLAGS.DISCOVERED_BEACH]++;
+			SceneLib.exploration.counters.beach++;
 			doNext(camp.returnToCampUseOneHour);
 			_beachEncounters.execEncounter();
 			flushOutputTextToGUI();
@@ -251,15 +264,6 @@ import classes.Scenes.SceneLib;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		public function discoverSeaBoat():void {
-			flags[kFLAGS.DISCOVERED_OCEAN] = 1;
-			clearOutput();
-			outputText("You journey around the beach, seeking demons to fight");
-			if(player.cor > 60) outputText(" or fuck");
-			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
-			outputText("<b>You have discovered the sea boat!</b>");
-			doNext(camp.returnToCampUseOneHour);
-		}
 		
 		public function partsofHarpoonGun():void {
 			clearOutput();
@@ -317,3 +321,4 @@ import classes.Scenes.SceneLib;
 		}
 	}
 }
+

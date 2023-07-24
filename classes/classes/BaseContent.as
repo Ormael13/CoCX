@@ -822,6 +822,10 @@ import coc.xxc.StoryContext;
 		protected function endEncounter():void {
 			doNext(explorer.done);
 		}
+		
+		protected function adjustedPlayerLevel():int {
+			return player.level + combat.playerLevelAdjustment();
+		}
 
 		public static var submenuPage:int = 0;
 		/**

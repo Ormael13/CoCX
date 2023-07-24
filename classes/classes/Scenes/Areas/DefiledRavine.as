@@ -4,7 +4,7 @@
  * Currently a Work in Progress.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -12,8 +12,6 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.BlightRidge.DemonScene;
 import classes.Scenes.Areas.DefiledRavine.DemonSoldierScene;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.NPCs.AlvinaFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -23,6 +21,17 @@ use namespace CoC;
 	{
 		public var demonScene:DemonScene = new DemonScene();
 		public var demonSoldierScene:DemonSoldierScene = new DemonSoldierScene();
+		
+		public const areaLevel:int = 36;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.defiledRavine > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.defiledRavine;
+		}
 		
 		public function DefiledRavine() {
 			onGameInit(init);
@@ -114,7 +123,7 @@ use namespace CoC;
 		
 		public function exploreDefiledRavine():void {
 			clearOutput();
-			flags[kFLAGS.DISCOVERED_DEFILED_RAVINE]++;
+			SceneLib.exploration.counters.defiledRavine++;
 			if (player.cor < 71) dynStats("cor", 1.5);
 			doNext(camp.returnToCampUseOneHour);
 			defiledRavineEncounter.execEncounter();

@@ -6,12 +6,10 @@
 package classes.Scenes.Areas
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -21,6 +19,17 @@ use namespace CoC;
 	{
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
+		
+		public const areaLevel:int = 35;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.tundra > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.tundra;
+		}
 		
 		public function Tundra()
 		{
@@ -33,11 +42,9 @@ use namespace CoC;
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65
-				},
+				when: SceneLib.glacialRift.canDiscover,
 				chance: Encounters.ALWAYS,
-				call: discoverGlacialRift
+				call: SceneLib.glacialRift.discover
 			},{
 				// choice[choice.length] = 0; //Valkyrie (lvl 44)
 				name: "valkyrie",
@@ -111,7 +118,7 @@ use namespace CoC;
 		}
 		
 		public function exploreTundra():void {
-			flags[kFLAGS.DISCOVERED_TUNDRA]++;
+			SceneLib.exploration.counters.tundra++;
 			clearOutput();
 			tundraEncounter.execEncounter();
 		}
@@ -167,14 +174,6 @@ use namespace CoC;
 			startCombat(new Valkyrie());
 		}
 		
-		public function discoverGlacialRift():void {
-			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
-			clearOutput();
-			outputText("You walk for some time, roaming the tundra. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. ");
-			outputText("You wrap your arms around yourself tightly, shivering fiercely despite yourself as the dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
-			outputText("<b>You've discovered the Glacial Rift!</b>");
-			doNext(camp.returnToCampUseTwoHours);
-		}
 		
 		private function tundraSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);

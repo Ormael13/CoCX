@@ -8,18 +8,13 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
-import classes.Scenes.Areas.Tundra.Valkyrie;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Valeria;
 import classes.Scenes.SceneLib;
@@ -34,7 +29,27 @@ use namespace CoC;
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
 		public var wendigoScene:WendigoScene = new WendigoScene();
-
+		
+		public const areaLevel:int = 65;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.glacialRiftOuter > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.glacialRiftOuter;
+		}
+		public function discover():void {
+			SceneLib.exploration.counters.glacialRiftOuter = 1;
+			clearOutput();
+			outputText("You walk for some time, roaming the tundra. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. ");
+			outputText("You wrap your arms around yourself tightly, shivering fiercely despite yourself as the dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
+			outputText("<b>You've discovered the Glacial Rift!</b>");
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		
 		public var glacialRiftEncounter:GroupEncounter;
 		public function GlacialRift()
 		{
@@ -212,7 +227,7 @@ use namespace CoC;
 		}
 		
 		public function exploreGlacialRift():void {
-			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
+			SceneLib.exploration.counters.glacialRiftOuter++;
 			if (!player.hasPerk(PerkLib.ColdAffinity)) SubZeroConditionsTick();
 			clearOutput();
 			glacialRiftEncounter.execEncounter();

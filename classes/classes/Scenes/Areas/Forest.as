@@ -44,18 +44,45 @@ use namespace CoC;
 		public function Forest() {
 			onGameInit(init);
 		}
-
-		public function isDiscovered():Boolean {
-			return player.exploredForest > 0;
+		public const areaLevelOuter:int = 1;
+		public const discoverLevelOuter:int = 1;
+		public function isDiscoveredOuter():Boolean {
+			return SceneLib.exploration.counters.forestOuter > 0;
 		}
-		public function timesExplored():int {
-			return player.exploredForest;
+		public function canDiscoverOuter():Boolean {
+			return !isDiscoveredOuter() && adjustedPlayerLevel() >= discoverLevelOuter;
 		}
-		public function deepwoodsDiscovered():Boolean {
-			return player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
+		public function timesExploredOuter():int {
+			return SceneLib.exploration.counters.forestOuter;
+		}
+		public function discoverOuter():void {
+			clearOutput();
+			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old-looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>");
+			SceneLib.exploration.counters.forestOuter = 1;
+			endEncounter();
+		}
+		
+		
+		public const areaLevelInner:int = 3;
+		public function isDiscoveredInner():Boolean {
+			return SceneLib.exploration.counters.forestInner > 0;
+		}
+		public function canDiscoverInner():Boolean {
+			return !isDiscoveredInner() && adjustedPlayerLevel() >= areaLevelInner;
+		}
+		public function timesExploredInner():int {
+			return SceneLib.exploration.counters.forestInner;
+		}
+		
+		public const areaLevelDeepwoods:int = 7;
+		public function isDiscoveredDeepwoods():Boolean {
+			return SceneLib.exploration.counters.deepwoods > 0;
+		}
+		public function canDiscoverDeepwoods():Boolean {
+			return !isDiscoveredDeepwoods() && adjustedPlayerLevel() >= areaLevelDeepwoods;
 		}
 		public function timesExploredDeepwoods():int {
-			return player.statusEffectv1(StatusEffects.ExploredDeepwoods);
+			return SceneLib.exploration.counters.deepwoods;
 		}
 
 		private function deepwoodsWalkFn():void {
@@ -78,13 +105,13 @@ use namespace CoC;
 			}
 		}
 		private var _forestOutskirtsEncounter:GroupEncounter = null;
-		private var _forestEncounter:GroupEncounter = null;
-		private var _deepwoodsEncounter:GroupEncounter = null;
+		private var _forestInnerEncounter:GroupEncounter     = null;
+		private var _deepwoodsEncounter:GroupEncounter       = null;
 		public function get forestOutskirtsEncounter():GroupEncounter {
 			return _forestOutskirtsEncounter;
 		}
-		public function get forestEncounter():GroupEncounter {
-			return _forestEncounter;
+		public function get forestInnerEncounter():GroupEncounter {
+			return _forestInnerEncounter;
 		}
 		public function get deepwoodsEncounter():GroupEncounter {
 			return _deepwoodsEncounter;
@@ -189,8 +216,7 @@ use namespace CoC;
 						call  : marbleVsImp,
 						when  : function ():Boolean {
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
-							return player.exploredForest > 0
-								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
+							return !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
 								   && !player.hasStatusEffect(StatusEffects.NoMoreMarble)
 								   && player.hasStatusEffect(StatusEffects.Marble)
 								   && flags[kFLAGS.MARBLE_WARNING] == 0;
@@ -247,7 +273,7 @@ use namespace CoC;
 						},
 						call: SceneLib.exploration.demonLabProjectEncounters
 					}*/);
-			_forestEncounter = Encounters.group("forest",
+			_forestInnerEncounter = Encounters.group("forest",
 					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
 					{
 						//Helia monogamy fucks
@@ -266,7 +292,7 @@ use namespace CoC;
 						unique: true,
 						call  : discoverDeepwoods,
 						when  : function ():Boolean {
-							return ((player.level + combat.playerLevelAdjustment()) >= 7) && !deepwoodsDiscovered();
+							return ((player.level + combat.playerLevelAdjustment()) >= 7) && !isDiscoveredDeepwoods();
 						},
 						chance: Encounters.ALWAYS
 					}, {
@@ -397,8 +423,7 @@ use namespace CoC;
 						when  : function ():Boolean {
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
-							return player.exploredForest > 0
-								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
+							return !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
 								   && !player.hasStatusEffect(StatusEffects.NoMoreMarble)
 								   && player.hasStatusEffect(StatusEffects.Marble)
 								   && flags[kFLAGS.MARBLE_WARNING] == 0;
@@ -870,22 +895,22 @@ use namespace CoC;
 			explorer.setTags("forest","forestOutskirts","plants");
 			explorer.prompt = "You explore the forest outskirts.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				player.exploredForest++;
+				SceneLib.exploration.counters.forestOuter++;
 			}
 			explorer.leave.hint("Leave the forest outskirts");
-			explorer.skillBasedReveal(1, player.exploredForest);
+			explorer.skillBasedReveal(areaLevelOuter, timesExploredOuter());
 			explorer.doExplore();
 		}
-		public function exploreForest():void
+		public function exploreInnerForest():void
 		{
-			explorer.prepareArea(forestEncounter);
+			explorer.prepareArea(forestInnerEncounter);
 			explorer.setTags("forest","forestInner","plants");
 			explorer.prompt = "You explore the forest.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				player.exploredForest++;
+				SceneLib.exploration.counters.forestInner++;
 			}
 			explorer.leave.hint("Leave the forest");
-			explorer.skillBasedReveal(3, player.exploredForest);
+			explorer.skillBasedReveal(areaLevelInner, timesExploredInner());
 			explorer.doExplore();
 		}
 		public function exploreDeepwoods():void {
@@ -893,10 +918,10 @@ use namespace CoC;
 			explorer.setTags("forest","deepwoods","plants");
 			explorer.prompt = "You explore the deepwoods.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
+				SceneLib.exploration.counters.deepwoods++;
 			}
 			explorer.leave.hint("Leave the deepwoods");
-			explorer.skillBasedReveal(7, player.statusEffectv1(StatusEffects.ExploredDeepwoods));
+			explorer.skillBasedReveal(areaLevelDeepwoods, timesExploredDeepwoods());
 			explorer.doExplore();
 		}
 		
@@ -1062,7 +1087,7 @@ use namespace CoC;
 			inventory.takeItem(consumables.STRFLOW, explorer.done);
 		}
 		public function discoverDeepwoods():void {
-			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
+			SceneLib.exploration.counters.deepwoods = 1;
 			clearOutput();
 			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n");
 			outputText("<b>Deepwoods exploration unlocked!</b>");

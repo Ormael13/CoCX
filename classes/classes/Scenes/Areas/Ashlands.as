@@ -7,14 +7,12 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ashlands.*;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -50,9 +48,7 @@ public class Ashlands extends BaseContent
 			label : "New Area",
 			kind  : 'place',
 			unique: true,
-			when: function ():Boolean {
-				return flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65
-			},
+			when: SceneLib.volcanicCrag.canDiscover,
 			call: discoverCrags
 		}, {
 			name: "phoenix",
@@ -111,24 +107,28 @@ public class Ashlands extends BaseContent
 			call: SceneLib.exploration.demonLabProjectEncounters
 		}*/);
 	}
-
+	
+	public const areaLevel:int = 35;
 	public function isDiscovered():Boolean {
-		return flags[kFLAGS.DISCOVERED_ASHLANDS] > 0;
+		return SceneLib.exploration.counters.ashlands > 0;
+	}
+	public function canDiscover():Boolean {
+		return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
 	}
 	public function timesExplored():int {
-		return flags[kFLAGS.DISCOVERED_ASHLANDS];
+		return SceneLib.exploration.counters.ashlands;
 	}
-		
+	
 	public function exploreAshlands():void {
 		clearOutput();
-		flags[kFLAGS.DISCOVERED_ASHLANDS]++;
+		SceneLib.exploration.counters.ashlands++;
 		doNext(camp.returnToCampUseOneHour);
 		ashlandsEncounter.execEncounter();
 		flushOutputTextToGUI();
 	}
 
 	private function discoverCrags():void {
-		flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+		SceneLib.exploration.counters.volcanicCragOuter = 1;
 		clearOutput();
 		outputText("You walk for some time, roaming the ashlands. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
 		outputText("<b>You've discovered the Volcanic Crag!</b>");

@@ -4,7 +4,7 @@
  * Currently a Work in Progress.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -22,6 +22,28 @@ use namespace CoC;
 		public var ceaniScene:CeaniScene = new CeaniScene();
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var scyllaScene:ScyllaScene = new ScyllaScene();
+		
+		public const areaLevel:int = 25;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.ocean > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.ocean;
+		}
+		
+		public function discover():void {
+			SceneLib.exploration.counters.ocean = 1;
+			clearOutput();
+			outputText("You journey around the beach, seeking demons to fight");
+			if(player.cor > 60) outputText(" or fuck");
+			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
+			outputText("<b>You have discovered the sea boat!</b>");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		
 		public function Ocean() {
 			onGameInit(init);
@@ -112,7 +134,7 @@ use namespace CoC;
 
 		public function exploreOcean():void {
 			clearOutput();
-			flags[kFLAGS.DISCOVERED_OCEAN]++;
+			SceneLib.exploration.counters.ocean++;
 			doNext(camp.returnToCampUseOneHour);
 			oceanEncounter.execEncounter();
 			flushOutputTextToGUI();

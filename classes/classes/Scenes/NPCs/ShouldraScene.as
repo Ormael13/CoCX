@@ -229,7 +229,7 @@ private function littlePigLittlePigLetMeIn():void {
 	addButton(1, "Lake", nowOnVickiLake)
 		.hint("You could take her to the lake to find someone to play with...")
 		.disableIf(player.isGenderless(), "Not for genderless!")
-		.disableIf(!player.hasStatusEffect(StatusEffects.BoatDiscovery)
+		.disableIf(!SceneLib.boat.isDiscovered()
 			|| !flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] && !flags[kFLAGS.CODEX_ENTRY_GOOGIRLS],
 			"You don't know any other place to show her... yet?", "???");
 }

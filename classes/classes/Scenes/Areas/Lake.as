@@ -27,7 +27,26 @@ use namespace CoC;
 		public var greenSlimeScene:GreenSlimeScene = new GreenSlimeScene();
 		public var calluScene:CalluScene = new CalluScene();
 		public var swordInStone:SwordInStone = new SwordInStone();
-
+		
+		public const discoverLevel:int = 0;
+		public const areaLevel:int = 1;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.lake > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= discoverLevel && flags[kFLAGS.ALVINA_FOLLOWER] == 1;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.lake;
+		}
+		public function discover():void {
+			clearOutput();
+			outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides, you find a lake so massive that the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
+			SceneLib.exploration.counters.lake = 1;
+			endEncounter();
+		}
+		
+		
 		public function Lake() {
 			onGameInit(init);
 		}
@@ -54,9 +73,7 @@ use namespace CoC;
 				label : "Boat",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return !player.hasStatusEffect(StatusEffects.BoatDiscovery)
-				},
+				when: SceneLib.boat.canDiscover,
 				call: SceneLib.boat.discoverBoat
 			}, {
 				name: "farm",
@@ -177,7 +194,7 @@ use namespace CoC;
 				kind  : 'npc',
 				unique: true,
 				when: function ():Boolean {
-					return player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && player.exploredLake >= 10 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
+					return player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && timesExplored() >= 10 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0
 				},
 				chance: lakeChance,
 				call: SceneLib.izmaScene.meetIzmaAtLake
@@ -310,13 +327,6 @@ use namespace CoC;
 			}*/);
 		}
 
-		public function isDiscovered():Boolean {
-			return player.exploredLake > 0;
-		}
-		public function timesExplored():int {
-			return player.exploredLake;
-		}
-
 		//Explore Lake
 		public function exploreLake():void
 		{
@@ -324,10 +334,10 @@ use namespace CoC;
 			explorer.setTags("lake", "lakeBeach", "water");
 			explorer.prompt = "You explore the lake beach.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				player.exploredLake++;
+				SceneLib.exploration.counters.lake++;
 			}
 			explorer.leave.hint("Leave the lake");
-			explorer.skillBasedReveal(1, player.exploredLake);
+			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
 

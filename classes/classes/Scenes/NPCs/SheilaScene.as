@@ -6,6 +6,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Camp.*;
+import classes.Scenes.SceneLib;
 
 public class SheilaScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -2611,7 +2612,7 @@ private function forcedSheilaOral(x:int):void {
 		//[(no horse)
 		if(!player.isTaur()) outputText("pinch her nipple for emphasis, then grind your hips across her face, mauling her nose with your ass.  \"<i>I could fuck a tree and it wouldn't be as wooden as you in the sack");
 		//[(PC has found corrupt glade)
-		if(player.exploredForest >= 40) outputText(" - in fact, there are quite a few I've seen who look like better lovers than you.  Maybe I should carry you to the forest and tie you to a nice pussy-shaped giant flower to give you lessons");
+		if(SceneLib.forest.timesExploredInner()+SceneLib.forest.timesExploredOuter() >= 40) outputText(" - in fact, there are quite a few I've seen who look like better lovers than you.  Maybe I should carry you to the forest and tie you to a nice pussy-shaped giant flower to give you lessons");
 		outputText(".  ");
 		//[(minotaur addiction score =/= 0%)
 		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict)) {

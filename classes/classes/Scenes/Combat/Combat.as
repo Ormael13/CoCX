@@ -4619,7 +4619,7 @@ public class Combat extends BaseContent {
             for each (var ability:CombatAbility in abilities) {
                 var button:ButtonData = ability.createButton(monster);
                 button.enabled = true;
-                buttons.list.push(button);
+                buttons.append(button);
             }
             submenu(buttons,debugCheatAbility);
         }
