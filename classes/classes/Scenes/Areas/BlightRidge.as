@@ -34,6 +34,9 @@ use namespace CoC;
 		private function init():void {
 			_blightRidgeEncounter = Encounters.group("blightridge", {
 				name: "discoverravine",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && (player.level + combat.playerLevelAdjustment()) >= 36
 				},
@@ -41,6 +44,9 @@ use namespace CoC;
 				call: discoverDefiledRavine
 			}, {
 				name: "denofdesire",
+				label : "Den of Desire",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 1
 				},
@@ -48,6 +54,9 @@ use namespace CoC;
 				chance: 0.1 + (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0 ? 0.45:0) + (SceneLib.dungeons.canFindDenOfDesire() ? 0.45 : 0)
 			}, {
 				name: "gunpart",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Dart pistol") < 0
 				},
@@ -55,6 +64,9 @@ use namespace CoC;
 				call: partsofDartPistol
 			}, {
 				name: "ignis",
+				label : "Ignis",
+				kind  : 'npc',
+				unique: true,
 				night: false,
 				when: function ():Boolean {
 					return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1
@@ -62,6 +74,9 @@ use namespace CoC;
 				call: ignisIntro
 			}, {
 				name: "sieg1",
+				label : "Sieg",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					var v1: Number = flags[kFLAGS.SIEGWEIRD_FOLLOWER];
 					var proc1a:Boolean = flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2;
@@ -77,6 +92,9 @@ use namespace CoC;
 				call: SceneLib.siegweirdFollower.siegweirdFirstEncounter
 			}, {
 				name: "sieg2",
+				label : "Sieg",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5
 							|| (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 3)
@@ -87,6 +105,9 @@ use namespace CoC;
 				call: SceneLib.siegweirdFollower.siegweirdRepeatEncounterPostFight
 			}, {
 				name: "sieg3",
+				label : "Sieg",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2
 				},
@@ -98,19 +119,29 @@ use namespace CoC;
 				}
 			}, {
 				name: "imps",
+				label : "Imps",
+				kind : 'monster',
 				call: SceneLib.exploration.genericImpEncounters2
 			}, {
 				name: "demons",
+				label : "Demons",
+				kind : 'monster',
 				call: SceneLib.exploration.genericDemonsEncounters1
 			}, {
 				name: "golems",
+				label : "Golems",
+				kind : 'monster',
 				call: SceneLib.fleshGolemScenes.introCorruptedBasicFleshGolemS
 			}, {
 				name: "impfood",
+				label : "Imp Food",
+				kind  : 'item',
 				call: findImpFood
 			}, {
 				name: "findnothing",
-				call: findNothing
+				call: findNothing,
+				label:'Walk',
+				kind:'walk'
 			}/*, {
 				name: "demonProjects",
 				chance: 0.2,

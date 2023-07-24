@@ -44,6 +44,9 @@ use namespace CoC;
 			glacialRiftEncounter = Encounters.group("glacialRift", {
 				//DLC april fools
 				name: "aprilFools",
+				label : "Extreme Zones DLC",
+				kind  : 'event',
+				unique: true,
 				chance: Encounters.ALWAYS,
 				when: function():Boolean {
 					return isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0;
@@ -54,6 +57,9 @@ use namespace CoC;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : function():void {
 					GlacialRiftConditions();
@@ -63,6 +69,9 @@ use namespace CoC;
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name  : "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when  : function():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -77,6 +86,9 @@ use namespace CoC;
 			}, {
 				//Anzu
 				name: "anzu",
+				label : "Anzu Palace",
+				kind  : 'place',
+				unique: true,
 				night : false,
 				chance: 0.20,
 				when: function ():Boolean {
@@ -86,6 +98,9 @@ use namespace CoC;
 			}, {
 				//Yu shop
 				name: "yu",
+				label : "Yu",
+				kind  : 'npc',
+				unique: true,
 				chance: 0.20,
 				when: function():Boolean {
 					return flags[kFLAGS.YU_SHOP] < 2
@@ -94,6 +109,9 @@ use namespace CoC;
 			}, {
 				//Fenrir ruined shrine
 				name: "fenrir",
+				label : "Ruined Shrine",
+				kind  : 'event',
+				unique: true,
 				chance: 0.20,
 				when: function():Boolean {
 					return (player.faceType == Face.WOLF || player.faceType == Face.ANIMAL_TOOTHS) && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.isFurCovered() && player.hairColor == "glacial white" && player.furColor == "glacial white" && player.hasKeyItem("Gleipnir Collar") < 0;
@@ -101,6 +119,8 @@ use namespace CoC;
 				call: FenrirRuinedShrine
 			}, {
 				name: "yukiOnna",
+				label : "Yuki Onna",
+				kind : 'monster',
 				day : false,
 				call: function():void {
 					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) {
@@ -114,33 +134,48 @@ use namespace CoC;
 			}, {
 				//Yeti (lvl 76)
 				name: "yeti",
+				label : "Yeti",
+				kind : 'monster',
 				call: encounterYeti
 			}, {
 				//Frost Giant (lvl 89)
 				name: "frostGiant",
+				label : "Frost gigant",
+				kind : 'monster',
 				night : false,
 				call: encounterFrostGiant
 			}, {
 				//Winter Wolf (lvl 99)
 				name: "winterWolf",
+				label : "Winter Wolf",
+				kind : 'monster',
 				call: encounterWinterWolf
 			}, {
 				//Ice True Golems (lvl 80)
 				name: "iceTrueGolems",
+				label : "True Ice Golems",
+				kind : 'monster',
 				call: encounterGolems
 			}, {
 				//Glacial Troll (M & F variants) (lvl 94)
 				name: "troll",
+				label : "Glacial Troll",
+				kind : 'monster',
 				night : false,
 				call: encounterTroll
 			}, {
 				//Wendigo (lvl 84)
 				name: "wendigo",
+				label : "Wendigo",
+				kind : 'monster',
 				day : false,
 				call: wendigoScene.encounterWendigo
 			}, {
 				//Valeria
 				name: "valeria",
+				label : "Valeria",
+				kind  : 'npc',
+				unique: true,
 				when: function():Boolean {
 					return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALERIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR;
 				},
@@ -149,17 +184,23 @@ use namespace CoC;
 			}, {
 				//Freebie items!
 				name: "loot",
+				label : "Loot",
+				kind  : 'item',
 				chance: 0.33,
 				call: encounterItem
 			}, {
 				//Ornate Chest or cache of gems/pile of stones
 				name: "chest",
+				label : "Chest",
+				kind  : 'item',
 				chance: 0.07,
 				call: encounterChest
 			}, {
 				//Find nothing!
 				name: "nothing",
-				call: encounterNothing
+				call: encounterNothing,
+				label:'Walk',
+				kind:'walk'
 			}/*, {
 				name: "demonProjects",
 				chance: 0.2,

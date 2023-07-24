@@ -35,6 +35,9 @@ use namespace CoC;
 		private function init():void {
 			_oceanEncounter = Encounters.group("ocean", {
 				name: "fishing",
+				label : "Fishing",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasKeyItem("Fishing Pole") >= 0
 				},
@@ -42,9 +45,14 @@ use namespace CoC;
 			}, {
 				name: "nothing",
 				chance:  0.25,
-				call: findNothing
+				call: findNothing,
+				label:'Walk',
+				kind:'walk'
 			}, {
 				name: "ceani",
+				label : "Ceani",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4
 				},
@@ -52,6 +60,8 @@ use namespace CoC;
 				call: ceaniScene.oceanInteractionsAfterArcheryTraining
 			}, {
 				name: "seaanemone",
+				label : "Sea Anemone",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
@@ -60,6 +70,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "scylla",
+				label : "Scylla",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
@@ -67,6 +79,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "sharkgirl",
+				label : "Shark girl",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
@@ -75,6 +89,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "tigersharkgirl",
+				label : "Tigershark girl",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
@@ -83,6 +99,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "sharkgirlpack",
+				label : "Shark girls pack",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);

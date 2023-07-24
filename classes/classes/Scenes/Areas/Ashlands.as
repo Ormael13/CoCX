@@ -37,6 +37,9 @@ public class Ashlands extends BaseContent
 	private function init():void {
 		_ashlandsEncounter = Encounters.group("ashlands", {
 			name: "derpnade launcher",
+			label : "Gun Parts",
+			kind  : 'item',
+			unique: true,
 			when: function ():Boolean {
 				return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0;
 			},
@@ -44,12 +47,17 @@ public class Ashlands extends BaseContent
 			call: partsofTripxiDoubleBarreledDragonGun
 		}, {
 			name: "crags",
+			label : "New Area",
+			kind  : 'place',
+			unique: true,
 			when: function ():Boolean {
 				return flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65
 			},
 			call: discoverCrags
 		}, {
 			name: "phoenix",
+			label : "Quasi-Phoenix",
+			kind : 'monster',
 			night : false,
 			when: SceneLib.dungeons.checkPhoenixTowerClear,
 			call: phoenixScene.encounterPhoenix
@@ -57,6 +65,9 @@ public class Ashlands extends BaseContent
 			//	wendigoScene.encounterWendigo();
 		}, {*/
 			name: "hellCatSabath",
+			label : "HellCat Sabath",
+			kind  : 'event',
+			unique: true,
 			when: function ():Boolean {
 				return (flags[kFLAGS.WITCHES_SABBATH] > 3 && player.isRace(Races.HELLCAT, 1, false) && player.gender == 3) ||
 						(flags[kFLAGS.WITCHES_SABBATH] > 0 && player.isRace(Races.CAT) && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))
@@ -64,23 +75,33 @@ public class Ashlands extends BaseContent
 			call: SceneLib.ashlands.hellcatScene.WitchesSabbath
 		}, {
 			name: "hellcat",
+			label : "Hellcat",
+			kind : 'monster',
 			call: SceneLib.ashlands.hellcatScene.HellCatIntro
 		}, {
 			name: "alraune",
+			label : "Alraune",
+			kind : 'monster',
 			night : false,
 			call: alrauneEncounterFn
 		}, {
 			name: "golem",
+			label : "Fire Golem",
+			kind : 'monster',
 			call: fireGolemEncounterFn
 		}, {
 			name: "granite",
+			label : "Mine",
+			kind  : 'place',
 			when: function():Boolean {
 					return player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained
 				},
 			call: findGranite
 		}, {
 			name: "nothing",
-			call: findNothing
+			call: findNothing,
+			label:'Walk',
+			kind:'walk'
 		}/*, {
 			name: "demonProjects",
 			chance: 0.2,

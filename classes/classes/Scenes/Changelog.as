@@ -48,7 +48,7 @@ public class Changelog extends BaseContent
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
 			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf) and Cobra hood (rear body)(Apophis tf).\n");
-			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time).Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
+			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
 			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
@@ -69,12 +69,12 @@ public class Changelog extends BaseContent
 			outputText("-Enemies/bosses that appear in River Dungeon lvl adjustments: Hellhound 10 > 6, Aether Golem 11 > 9, Air / Earth / Fire / Water Elementals 15/18/21 > 14/16/18, Sylph / Golem / Ifrit / Undine 24 > 21, Quatro Elemental (starting lvl) 21 > 18, Darkness / Ice / Lightning Elementals 29/32/35 > 28/30/32, Yeti 37 > 30, Raiju 40 > 34, Unique Darkness Elemental 38 > 37, Vegot 43 > 40\n");
 			outputText("-Added pity system for Alpha Howl I. Mutation effect of growing werewolf pack. Now if PC fail to recruit werewolf after 4 tries it will be successfull at 5th try to keep with orginal 20% success rate.\n");
 			outputText("-Tease and masteries XP gains show notifications below the stat bar. Item stack buttons show quantities over the icon. (aimozg)\n");
-			outputText("-New exploration engine, exploration nodes can branch, new merchant UI, new perk menu, added touch scrolling for perk menu, extra offset for mobile tooltips, can buy to/sell from pearl storage in new mechant interface, reduced common encounters chance outside main exploration. (aimozg)\n");
+			outputText("-New exploration engine, exploration nodes can branch, new merchant UI, new perk menu, added touch scrolling for perk menu, extra offset for mobile tooltips, can buy to/sell from pearl storage in new mechant interface, reduced common encounters chance outside main exploration, Popups for spellcasting, mining, farming, herbalism XP. (aimozg)\n");
 			outputText("-Fixed new game after bad-end on NG+ carrying some data from old character, infinite perk exploit through old menu. (aimozg)\n");
 			outputText("-New event perk: Intermediate Leadership. Gained by finishing two 2 on 2 fights in challange section of soul arena. Effects: Allow to form 3 people party.\n");
 			outputText("-Motivation (Ex) now req. additionaly Intermediate Leadership perk.\n");
 			outputText("-Tyrantia can be now asked to join pc as henchman (req. 60%+ affection) and each day she stay as henchman will rise her affection by 2%.\n");
-			outputText("-Changes to some perk tiers/lvl req.: Speedy Recovery (tier 1 > 0), Speedy Recuperation (tier 3 > 0, lvl 18 > 2), Recuperation Sleep (tier 3 > 0, lvl 18 > 2), Speedy Rejuvenation (tier 6 > 0, lvl 30 > 4), Rejuvenation Sleep (tier 6 > 0, lvl 30 > 4)\n");
+			outputText("-Changes to some perk tiers/lvl req: Speedy Recovery (tier 1 > 0), Speedy Recuperation (tier 3 > 0, lvl 18 > 2), Recuperation Sleep (tier 3 > 0, lvl 18 > 2), Speedy Rejuvenation (tier 6 > 0, lvl 30 > 4), Rejuvenation Sleep (tier 6 > 0, lvl 30 > 4)\n");
 			outputText("-Giacomo can buy from player (40%/80% of item value) (aimozg)\n");
 			outputText("-Rest HP recovery accelerates +50% each hour (resting 8 hours gives total 22 hours of HP regen). Heal on level up. (aimozg)\n");
 			outputText("-Creating clone now give 'negative levels' status effect - no hp recovery or point gain (aimozg)\n");
@@ -94,6 +94,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
@@ -155,7 +158,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -181,6 +186,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

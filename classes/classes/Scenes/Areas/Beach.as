@@ -40,6 +40,9 @@ import classes.Scenes.SceneLib;
 		private function init():void {
 			_beachEncounters = Encounters.group("beach",{
 				name: "harpoonGun",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 0 && player.hasKeyItem("Harpoon gun") < 0;
 				},
@@ -48,6 +51,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: beachChance,
@@ -55,6 +61,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Etna
 				name  : "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				call  : function():void {
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					SceneLib.etnaScene.repeatYandereEnc();
@@ -66,6 +75,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani
 				name: "ceani",
+				label : "Ceani",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -83,6 +95,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani post training
 				name: "ceani post training",
+				label : "Ceani",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -95,6 +110,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Pinchou swimwear shop
 				name: "pinchou shop",
+				label : "Pinchou",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -105,6 +123,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Beach demons
 				name: "beach demons",
+				label : "Demons",
+				kind : 'monster',
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -114,6 +134,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Cancer ambush
 				name: "cancer ambush",
+				label : "Cancer",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					cancerScene.encounter();
@@ -122,6 +144,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Beach goo girl
 				name: "beach goo girl",
+				label : "Goo Girl",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					gooGirlScene.encounterGooGirlBeach();
@@ -130,6 +154,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Discover boat
 				name: "discover boat",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					discoverSeaBoat();
@@ -141,6 +168,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Find Orca sunscreen
 				name: "orca sunscreen",
+				label : "Orca Sunscreen",
+				kind  : 'item',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					orcaSunscreenFound();
@@ -149,6 +178,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Nothing Happens
 				name: "nothing Happens",
+				label:'Walk',
+				kind:'walk',
 						call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					NothingHappened();
@@ -157,6 +188,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Find Sandstone
 				name: "find Sandstone",
+				label : "Mine",
+				kind  : 'place',
 						call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					findBeachSite();

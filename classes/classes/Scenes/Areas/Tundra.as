@@ -30,6 +30,9 @@ use namespace CoC;
 		private function init():void {
 			tundraEncounter = Encounters.group("tundra", {
 				name: "discover rift",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65
 				},
@@ -38,6 +41,8 @@ use namespace CoC;
 			},{
 				// choice[choice.length] = 0; //Valkyrie (lvl 44)
 				name: "valkyrie",
+				label : "Valkyrie",
+				kind : 'monster',
 				night : false,
 				call: valkyrieEncounter
 			}, /*{
@@ -47,30 +52,42 @@ use namespace CoC;
 			}, */{
 				// choice[choice.length] = 2; //Young Frost Giant (lvl 47)
 				name: "frostgiant",
+				label : "Young Frost gigant",
+				kind : 'monster',
 				night : false,
 				call: frostGiantEncounter
 			}, {
 				// choice[choice.length] = 3; //Snow Lily (lvl 40)
 				name: "snow lily",
+				label : "Snow Lily",
+				kind : 'monster',
 				night : false,
 				call: snowLilyEncounter
 			}, {
 				name: "fafnir tear",
+				label : "Fafnir Tear",
+				kind  : 'item',
 				call: findATear,
 				chance: 0.25
 			}, {
 				// Werewolf huntress
 				name: "werewolf huntress",
+				label : "Werewolf Huntress",
+				kind : 'monster',
 				day : false,
 				call: SceneLib.werewolfFemaleScene.introWerewolfHuntress,
 				chance: 0.50
 			}, {
 				// choice[choice.length] = 4; //Ice Golem (lvl 64)
 				name: "ice golem",
+				label : "Ice Golem",
+				kind : 'monster',
 				call: golemEncounters
 			}, {
 				// choice[choice.length] = 5; Find Alabaster
 				name: "alabaster",
+				label : "Mine",
+				kind  : 'place',
 				when: function():Boolean {
 					return player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained;
 				},
@@ -80,7 +97,9 @@ use namespace CoC;
 				// choice[choice.length] = 6;
 				chance: 0.25,
 				name: "nothing",
-				call: nothingEncounter
+				call: nothingEncounter,
+				label:'Walk',
+				kind:'walk'
 			}/*, {
 				name: "demonProjects",
 				chance: 0.2,

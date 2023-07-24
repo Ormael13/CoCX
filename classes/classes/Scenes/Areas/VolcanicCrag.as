@@ -34,6 +34,9 @@ public class VolcanicCrag extends BaseContent
 		private function init():void {
 			_volcanicCragEncounter = Encounters.group("volcaniccrag", {
 				name: "gunparts",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 0 && player.hasKeyItem("Tripxi Fatbilly") < 0
 				},
@@ -41,6 +44,9 @@ public class VolcanicCrag extends BaseContent
 				call: partsofTripxiFatbilly
 			}, {
 				name: "aprilfools",
+				label : "Extreme Zones DLC",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0
 				},
@@ -49,6 +55,9 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "forgefather1",
+				label : "Forgefather",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return ((player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) && flags[kFLAGS.MET_FORGEFATHER] == 0
 				},
@@ -58,6 +67,9 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "forgefather2",
+				label : "Forgefather",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return ((player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) && flags[kFLAGS.MET_FORGEFATHER] > 0
 				},
@@ -67,12 +79,18 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "nothing",
-				call: findNothing
+				call: findNothing,
+				label:'Walk',
+				kind:'walk'
 			}, {
 				name: "finddrakeheart",
+				label : "Drake Heart",
+				kind  : 'item',
 				call: findDrakeHeart
 			}, {
 				name: "truefiregolem",
+				label : "True Fire Golems",
+				kind : 'monster',
 				call: fireGolemEncounter
 			}, /*{//Magma Slime
 				name: "",
@@ -85,6 +103,8 @@ public class VolcanicCrag extends BaseContent
 				}
 			},*/ {
 				name: "phoenix",
+				label : "Quasi-Phoenix",
+				kind  : 'monster',
 				when: function ():Boolean {
 					return flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0
 				},
@@ -95,10 +115,15 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "behemoth",
+				label : "Behemoth",
+				kind : 'monster',
 				call: behemothScene.behemothIntro
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : function ():void {
 					VolcanicCragConditions();
@@ -108,6 +133,9 @@ public class VolcanicCrag extends BaseContent
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2

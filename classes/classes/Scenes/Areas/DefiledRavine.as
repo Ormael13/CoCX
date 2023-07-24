@@ -36,6 +36,9 @@ use namespace CoC;
 		private function init():void {
 			_defiledRavineEncounter = Encounters.group("defiledravine", {
 				name: "gunparts",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Twin Dart pistol") < 0
 				},
@@ -43,6 +46,9 @@ use namespace CoC;
 				call: partsofTwinDartPistol
 			}, {
 				name: "alvina1",
+				label : "Alvina",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0 && ((rand(10) == 0) || (flags[kFLAGS.LETHICE_DEFEATED] > 0))
 				},
@@ -50,6 +56,9 @@ use namespace CoC;
 				call: SceneLib.alvinaFollower.alvinaThirdEncounter
 			}, {
 				name: "alvina2",
+				label : "Alvina",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return ((flags[kFLAGS.ALVINA_FOLLOWER] > 8 && flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0) || (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) || SceneLib.alvinaFollower.SecondDateSuccess) && !SceneLib.alvinaFollower.AlvinaDied && !SceneLib.alvinaFollower.AlvinaPurified
 				},
@@ -57,28 +66,42 @@ use namespace CoC;
 				call: SceneLib.alvinaFollower.alvinaThirdEncounter
 			}, {
 				name: "cowsuccubus",
+				label : "Cowsucubus",
+				kind : 'monster',
 				call: demonScene.CowSuccubusEncounter
 			}, {
 				name: "minoincubus",
+				label : "Minoincubus",
+				kind : 'monster',
 				call: demonScene.MinoIncubusEncounter
 			}, {
 				name: "mine",
+				label : "Mine",
+				kind  : 'place',
 				when: function ():Boolean {
 					return player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained
 				},
 				call: mineRavine
 			}, {
 				name: "fleshgolems",
+				label : "Flesh Golems",
+				kind : 'monster',
 				call: SceneLib.fleshGolemScenes.introCorruptedImprovedFleshGolemS
 			}, {
 				name: "findimpfood",
+				label : "Imp Food",
+				kind  : 'item',
 				call: findImpFood
 			}, {
 				name: "demonsoldier",
+				label : "Demon Soldier",
+				kind : 'monster',
 				call: demonSoldierScene.encounterTheSoldierz
 			}, {
 				name: "nothing",
-				call: findNothing
+				call: findNothing,
+				label:'Walk',
+				kind:'walk'
 			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
