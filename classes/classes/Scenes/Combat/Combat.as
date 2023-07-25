@@ -16155,6 +16155,18 @@ public function soulskillMod():Number {
 	if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
 	if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
 	if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
+    if (player.hasPerk(PerkLib.SoulApprentice)) modss += .1;
+    if (player.hasPerk(PerkLib.SoulPersonage)) modss += .1;
+    if (player.hasPerk(PerkLib.SoulWarrior)) modss += .1;
+    if (player.hasPerk(PerkLib.SoulSprite)) modss += .2;
+    if (player.hasPerk(PerkLib.SoulScholar)) modss += .2;
+    if (player.hasPerk(PerkLib.SoulGrandmaster)) modss += .2;
+    if (player.hasPerk(PerkLib.SoulElder)) modss += .4;
+    if (player.hasPerk(PerkLib.SoulExalt)) modss += .4;
+    if (player.hasPerk(PerkLib.SoulOverlord)) modss += .4;
+    if (player.hasPerk(PerkLib.SoulTyrant)) modss += .6;
+    if (player.hasPerk(PerkLib.SoulKing)) modss += .6;
+    if (player.hasPerk(PerkLib.SoulEmperor)) modss += .6;
     if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .25;
     if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .5;
     if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .75;
@@ -16186,7 +16198,8 @@ public function soulskillMod():Number {
 
 public function soulskillPhysicalMod():Number {
     var modssp:Number = player.psoulskillPowerStat.value;
-	if (soulskillMod() > 1) modssp += soulskillMod() - 1;
+	var modsspb:Number = 1;
+	if (soulskillMod() > 1) modsspb += soulskillMod() - 1;
     if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
         if (player.hasPerk(PerkLib.SoulApprentice)) modssp += .5;
         if (player.hasPerk(PerkLib.SoulPersonage)) modssp += .5;
@@ -16208,13 +16221,15 @@ public function soulskillPhysicalMod():Number {
         if (player.hasPerk(PerkLib.SoulEmperor)) modssp += 2;
         //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
+    if (modsspb > 1) modssp *= modsspb;
     modssp = Math.round(modssp * 100) / 100;
     return modssp;
 }
 
 public function soulskillMagicalMod():Number {
     var modssm:Number = player.msoulskillPowerStat.value;
-	if (soulskillMod() > 1) modssm += soulskillMod() - 1;
+	var modssmb:Number = 1;
+	if (soulskillMod() > 1) modssmb += soulskillMod() - 1;
     if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
         if (player.hasPerk(PerkLib.SoulApprentice)) modssm += .5;
         if (player.hasPerk(PerkLib.SoulPersonage)) modssm += .5;
@@ -16237,6 +16252,7 @@ public function soulskillMagicalMod():Number {
         //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
     if (player.shieldName == "spirit focus") modssm += .25;
+	if (modssmb > 1) modssm *= modssmb;
     modssm = Math.round(modssm * 100) / 100;
     return modssm;
 }
@@ -16594,3 +16610,4 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
+

@@ -35,11 +35,17 @@ public class Boat extends AbstractLakeContent
 			//Belisa
 			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaEncounternum == 1) {
 				SceneLib.belisa.secondEncounter();
+				//label : "Belisa",
+				//kind  : 'npc',
+				//unique: true,
 				return;
 			}
 			//Etna
 			if ((flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				SceneLib.etnaScene.repeatYandereEnc();
+				//label : "Etna",
+				//kind  : 'npc',
+				//unique: true,
 				return;
 			}
 			clearOutput();
@@ -51,12 +57,18 @@ public class Boat extends AbstractLakeContent
 			//3% chance of finding lost daughters
 			if (rand(100) <= 3 && flags[kFLAGS.IZMA_KIDS_IN_THE_WILD] > 0 && SceneLib.izmaScene.izmaFollower()) {
 				SceneLib.izmaScene.findLostIzmaKids();
+				//label : "Lost daughter",
+				//kind  : 'event',
+				//unique: true,
 				return;
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n");
 			//Marae
 			if (rand(3) == 0 && flags[kFLAGS.MARAE_ISLAND] < 1 && !isNightTime) {
 				marae.encounterMarae();
+				//label : "Marae",
+				//kind  : 'npc',
+				//unique: true,
 				return;
 			}
 			
@@ -71,27 +83,53 @@ public class Boat extends AbstractLakeContent
 				case 0:
 					if (rand(2) == 0) outputText("You row for nearly an hour, until your arms practically burn with exhaustion from all the rowing.");
 					else outputText("You give up on finding anything interesting, and decide to go check up on your camp.");
+					//if (rand(2) == 0 && player.str < 100) {
+					//	outputText("Despite the exaustion, you feel like you have become stronger.");
+					//	dynStats("str", .5);
+					//}
+					//chance:  0.25,
+					//label:'Walk',
+					//kind:'walk'
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				case 1:
 					sharkGirlScene.sharkGirlEncounter();
+					//label : "Shark girl",
+					//kind  : 'monster',
 					return;
 				case 2:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
 					anemoneScene.mortalAnemoneeeeee();
+					//label : "Anemone",
+					//kind  : 'monster',
 					return;
 				case 3:
 				case 4:
-					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2 && player.hasStatusEffect(StatusEffects.FetishOn) && !isNightTime) lake.fetishZealotScene.zealotBoat();
-					else sharkGirlScene.sharkGirlEncounter();
+					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2 && player.hasStatusEffect(StatusEffects.FetishOn) && !isNightTime) {
+					lake.fetishZealotScene.zealotBoat();
+					//label : "Fetish Zealot",
+					//kind  : 'monster',
+					//night : false,
+					}
+					else {
+					sharkGirlScene.sharkGirlEncounter();
+					//label : "Shark girl",
+					//kind  : 'monster',
+					}
 					return;
 				case 5:
 					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
 					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+					//label : "Fishing",
+					//kind  : 'event',
+					//unique: true,
 					return;
 				case 6:
 					kaiju.kaijuMeeting();
+					//label : "Venus",
+					//kind  : 'npc',
+					//unique: true,
 					return;
 			}
 		}

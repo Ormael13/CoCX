@@ -367,7 +367,7 @@ public final class ConsumableLib extends Utils
 		public const WOFRUIT:SimpleConsumable = mk("WoFruit", "WonderFruit", "a Wonder fruit", 10, "A strange whisker fruit from what appears to be a different dimension. Its skin is dyed with all the color of the rainbow.", m.wonderFruit, ItemTags.U_TF);
 		public const WETCLTH:SimpleConsumable = mk("WetClth", "WetCloth", "a wet cloth dripping with slippery slime", 6, "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.", curry(m.gooGasmic, 0), ItemTags.U_TF);
 		public const WHITEIN:SimpleConsumable = mk("WhiteIn", "WhiteInk", "a vial of white ink", 50, "Pearly white ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 2), ItemTags.U_TF);
-		//Wolf Pepper chyba jest nieużywanym itemem ale jesli jednak gdzie byl uzyty zostawie go nie wycietego a w przyszłosci zrobic z niego prawdziwy wolf TF ^^
+		//Wolf Pepper chyba jest nieużywanym itemem ale jesli jednak gdzie byl uzyty zostawie go nie wycietego a w przyszłosci zrobic z niego prawdziwy wolf lub werewolf TF ^^
 		public const WOLF_PP:SimpleConsumable = mk("Wolf Pp", "WolfPepper", "a Wolf pepper", 10, "The pepper is shiny and black, bulbous at the base but long and narrow at the tip.  It has a fuzzy feel to it and it smells spicy.", curry(m.caninePepper, 6), ItemTags.U_TF);
 		public const YETICUM:SimpleConsumable = mk("YetiCum", "YetiCum", "a bottle of Yeti Cum", 6, "This looks like some cum from a yeti. It looks potent and you can’t help but ponder about its effect.", m.yetiCum, ItemTags.U_TF);
 

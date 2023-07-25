@@ -45,20 +45,20 @@ public class Changelog extends BaseContent
 			outputText("Petrify would work on any enemy even if they used invisibility ability (excluding been underground), could use enhanced version of Petrification that is shorter but enemy HP/mana/SF recovery is fully stopped during it\n");
 			outputText("-New mutation perk: Gazer Eyes (Final Form). Req. Gazer Eyes (Evolved) and lvl 90+. Effects: Each seperated spell power increase from 50% to 100% of base spell, spell crit chance increase by 15% (25%).\n");
 			outputText("-New mutation perk: Human Eyes (Final Form). Req. Human Eyes (Evolved) and lvl 90+. Effects: Increase precision of all attacks by 20%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 60 lvl's. 10% less penalty to acc per each next attack during multiattack.\n");
+			outputText("-New History/Past Life Perk - History: Thief - give Job: Rogue for free and increase sneak attack multiplier by +1.\n");
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
+			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 germs. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
 			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf) and Cobra hood (rear body)(Apophis tf).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
+			outputText("-New two NPC to toggle off/on their appearing in camp/out of camp: Sophie and maybe many expected and wanted... Helia.\n");
+			outputText("-Dark Elfs won't appear at the surface replaced by their lighter skinned fellow elfs... the light elfs.\n");
+			outputText("-Fixing various text errors reported by people on discord.\n");
 			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-Fixing various text errors reported by people on discord.\n");
-			outputText("-New History/Past Life Perk - History: Thief - give Job: Rogue for free and increase sneak attack multiplier by +1.\n");
-			outputText("-New two NPC to toggle off/on their appearing in camp/out of camp: Sophie and maybe many expected and wanted... Helia.\n");
-			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 germs. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
-			outputText("-Dark Elfs won't appear at the surface replaced by their lighter skinned fellow elfs... the light elfs.\n");
 			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon.\n");
 			outputText("-New usable item: Red Gel. Costing 50 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies.\n");// .
 			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
@@ -78,7 +78,9 @@ public class Changelog extends BaseContent
 			outputText("-Giacomo can buy from player (40%/80% of item value) (aimozg)\n");
 			outputText("-Rest HP recovery accelerates +50% each hour (resting 8 hours gives total 22 hours of HP regen). Heal on level up. (aimozg)\n");
 			outputText("-Creating clone now give 'negative levels' status effect - no hp recovery or point gain (aimozg)\n");
-			outputText("-Soul Sense is now an exploration ability that reveals 1 NPC for 100 SF (aimozg) It's change only for npc's founded previously during exploring areas/general explore (orm)\n");
+			outputText("-Soul Sense is now an exploration ability that reveals 1 NPC for 100 SF & Soul Sense can spawn extra encounters. (aimozg) It's change only for npc's founded previously during exploring areas/general explore. (orm)\n");
+			outputText("-Physical and Magical Soulskill Effect Multipliers would now not add but multiply Soulskill Effect Multiplier value.\n");
+			outputText("-Reaching steps in cultivation from Soul Apprentice to Soul Emperor would increase Soulskill Effect Multiplier by 10%/20%/40%/60% per major steps.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -86,8 +88,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -95,8 +95,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
