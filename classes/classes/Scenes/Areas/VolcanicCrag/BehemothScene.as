@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.VolcanicCrag 
+package classes.Scenes.Areas.VolcanicCrag
 {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -7,8 +7,8 @@ import classes.Scenes.SceneLib;
 
 public class BehemothScene extends BaseContent
 	{
-				
-		public function BehemothScene() 
+		
+		public function BehemothScene()
 		{
 		}
 		
@@ -24,7 +24,7 @@ public class BehemothScene extends BaseContent
 			else addButtonDisabled(2, "Sex", "You are not aroused enough to initiate sex with the Behemoth.");
 			if (flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] > 0) addButton(3, "Get Cum", getCum).hint("Get some of Behemoth's cum!");
 			else addButtonDisabled(3, "???", "You need to have talked to the Behemoth about his cum.");
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
+			addButton(4, "Leave", explorer.done);
 		}
 		
 		public function behemothIntro():void {
@@ -87,7 +87,7 @@ public class BehemothScene extends BaseContent
 				outputText("\n\nNext, you tell the behemoth on how you've slain Marae, the corrupted goddess of Mareth. The behemoth drops his jaws at what you've done. \"<i>You actually KILLED a goddess? Wow, that's quite an amazing feat for a mortal to defeat a deity. You're even stronger than I am! I normally fear the wrath of the gods but you're brave,</i>\" he chuckles.");
 			}
 			outputText("\n\nAfter chatting for a good while, you and the behemoth part ways and you return to your camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function talkAboutBehemoth():void {
 			clearOutput();
@@ -97,7 +97,7 @@ public class BehemothScene extends BaseContent
 			outputText("\n\n\"<i>I suggest you read the codex entry; it contains detailed information,</i>\" the behemoth says.");
 			outputText("\n\nYou thank him for the codex entry. \"<i>You're always welcome,</i>\" the behemoth says with a smile. His face begins to shift from a happy to a sad look. \"<i>Something wrong?</i>\" you ask. The behemoth replies, \"<i>Well... I had a rough past. I'd rather not talk about it for now. Why not come back later?</i>\" You nod and wrap your arms around the behemoth, giving him a hug before you say farewell and make your way back to camp.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] <= 1) flags[kFLAGS.BEHEMOTH_TALK_LEVEL]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function talkAboutSadStory():void {
 			clearOutput();
@@ -125,7 +125,7 @@ public class BehemothScene extends BaseContent
 			outputText("\n\nThis is quite sad. You wrap your arms around the behemoth and give him an assuring hug. He says, \"<i>Thank you for comforting me. I needed some company anyways.</i>\" You ask him if he has anything left.");
 			outputText("\n\n\"<i>I'm afraid that's pretty much my entire story, but I only hope to find someone who's pure and willing to bear children and start a new family,</i>\" the behemoth says. You thank him for telling you the story. \"<i>You're always welcome,</i>\" the behemoth says with a smile. You give him a farewell and walk back to camp.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] <= 2) flags[kFLAGS.BEHEMOTH_TALK_LEVEL]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function talkAboutHisCum():void {
 			clearOutput();
@@ -149,7 +149,7 @@ public class BehemothScene extends BaseContent
 			}
 			outputText("\n\nPLACEHOLDER");
 			dynStats("lus", -20, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		//Cum offer
 		private function getCum():void {
@@ -157,12 +157,12 @@ public class BehemothScene extends BaseContent
 			outputText("You definitely want his cum! The behemoth smiles at you and says, \"<i>I'll start.</i>\" He moves his loincloth aside and begins stroking his cock to full mast.");
 			outputText("\n\nThe behemoth moans in pleasure as he squeezes his balls and jerks himself off with his hands. He yells, \"<i>I'm going to cum! Get the bottle!</i>\"");
 			outputText("\n\nYou pull out an empty bottle and points his cock towards the bottle opening. The behemoth finally reaches his orgasm as he cums, filling the bottle entirely, and it overflows, the excessive cum spilling all over the thirsty earth. The behemoth eventually finishes orgasming and says, \"<i>If you ever need more, feel free to ask.</i>\" ");
-			inventory.takeItem(consumables.BHMTCUM, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.BHMTCUM, explorer.done);
 		}
 		private function noThanks():void {
 			clearOutput();
 			outputText("You politely decline the offer. \"<i>All right. Just come back anytime, okay?</i>\" the behemoth says. You say your goodbye to the behemoth and make your way back to your camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		//Combat
@@ -228,7 +228,7 @@ public class BehemothScene extends BaseContent
 				flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
 			}
 			outputText("\n\nYou rest for a while and breastfeed your newborn. Eventually, you know you should return to your camp. \"<i>I'll take good care of him,</i>\" the behemoth says. You give him a goodbye and walk back to your camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		//Sex menu
@@ -252,7 +252,7 @@ public class BehemothScene extends BaseContent
 				addButtonIfTrue(5, "Watersports", watersportsWithBehemoth, "Have sex with the behemoth enough times to unlock this!", timesSexed() >= 3, "Do some urine activity with him.");
 			addButtonIfTrue(6, "Get Pollinated", SceneLib.uniqueSexScene.alrauneGetPollinatedScene,
 				"Req. to be an alraune.", player.isAlraune());
-			addButton(14, "Never mind", CoC.instance.inCombat ? cleanupAfterCombat : camp.returnToCampUseOneHour);
+			addButton(14, "Never mind", CoC.instance.inCombat ? cleanupAfterCombat : explorer.done);
 		}
 		
 		private function analPitchBehemoth():void {
@@ -276,7 +276,7 @@ public class BehemothScene extends BaseContent
 			player.orgasm();
 			flags[kFLAGS.BEHEMOTH_ANAL_PITCH]++;
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 		
 		private function analCatchBehemoth():void {
@@ -333,7 +333,7 @@ public class BehemothScene extends BaseContent
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 		
 		private function vagCatchBehemoth():void {
@@ -365,7 +365,7 @@ public class BehemothScene extends BaseContent
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 		
 		
@@ -391,7 +391,7 @@ public class BehemothScene extends BaseContent
 			flags[kFLAGS.BEHEMOTH_COCK_SUCKED]++;
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 		
 		private function haveACumBathLiterally():void {
@@ -425,6 +425,7 @@ public class BehemothScene extends BaseContent
 			if (player.armor == armors.GOOARMR) SceneLib.valeria.feedValeria(100);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);
 			player.slimeFeed();
+			explorer.stopExploring();
 			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseTwoHours);
 		}
@@ -476,7 +477,7 @@ public class BehemothScene extends BaseContent
 				outputText("\n\nThe behemoth gives you a lingering kiss on your " + (timesSexed() >= 5 ? "lips": "cheeks") + " before you make your way back to camp.");
 			}
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 	}
 

@@ -4,19 +4,16 @@
  * Currently a Work in Progress.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.BlightRidge.*;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.SceneLib;
 import classes.Scenes.Monsters.ImpLord;
-import classes.Scenes.Monsters.CorruptedFleshGolemBasic;
-import classes.Scenes.Monsters.CorruptedFleshGolemsBasic;
+import classes.Scenes.SceneLib;
 
 use namespace CoC;
 	
@@ -37,9 +34,7 @@ use namespace CoC;
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && (player.level + combat.playerLevelAdjustment()) >= 36
-				},
+				when: SceneLib.defiledravine.canDiscover,
 				chance: 30,
 				call: discoverDefiledRavine
 			}, {
@@ -151,21 +146,49 @@ use namespace CoC;
 				call: SceneLib.exploration.demonLabProjectEncounters
 			}*/);
 		}
-
+		
+		public const areaLevel:int = 21;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0;
+			return SceneLib.exploration.counters.blightRidge > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel && SceneLib.swamp.isDiscovered();
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE];
+			return SceneLib.exploration.counters.blightRidge;
+		}
+		public function discover():void {
+			SceneLib.exploration.counters.blightRidge = 1;
+			clearOutput();
+			outputText("You wander around the mountain area thinking over this whole ‘demonic’ realm affair.  You're not sure how widespread this entire thing is, everything seems to be isolated to certain areas, you've only really seen the demons in small groups or alone, and even then it's usually comprised of imps.  As far as you know it IS a demonic realm so there should be some area where demons live normally, they can't all be hold up in lethice's stronghold right?  You question whether or not the demons could even hold together a city long enough before 'water' damage ruined the place.");
+			if (flags[kFLAGS.BAZAAR_ENTERED] > 0) outputText("  Then again you have been to that Bizarre Bazaar, they seem to exist there to an extent without any trouble...");
+			outputText("  As you think the random topic over in your head you spy a path you've never noticed before.\n\n");
+			outputText("Being the adventurous champion you are you start down the path, as you walk down this sketchy path, carved through a section of the mountain a ridge comes into view.  Walking onwards until you're at the ridge a somewhat would-be beautiful sight lies before you.\n\n");
+			if (player.cor < 66) {
+				outputText("That would be if it wasn't corrupted to all hell, the scent of sweat, milk and semen invade your nose as you peer across the corrupted glade.  And you thought that the main forest was bad.");
+				if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Gods... If Marae could see this.");
+				outputText("\n\n");
+			} else if (player.cor >= 66) {
+				outputText("And it is!  Lush fields of corrupted glades consume the land, giving the heavy scent of sweat, milk and semen as you take a deep breath.  Taking it all in and relishing in the corruption.  Truly this is how the world should be.");
+				if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Heh, if Marae could see this she'd flip her shit.");
+				outputText("\n\n");
+			}
+			outputText("<b>You've discovered the Blight Ridge!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
 		}
 		
 		public function exploreBlightRidge():void {
-			clearOutput();
-			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE]++;
-			if (player.cor < 66) dynStats("cor", 1);
-			doNext(camp.returnToCampUseOneHour);
-			blightRidgeEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(blightRidgeEncounter);
+			explorer.setTags("blightRidge");
+			explorer.prompt = "You explore the corrupted blight ridge.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				if (player.cor < 66) dynStats("cor", 1);
+				SceneLib.exploration.counters.blightRidge++;
+			}
+			explorer.leave.hint("Leave the corrupted blight ridge");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 	
 		public function blightRidgeChance():Number {
@@ -178,13 +201,13 @@ use namespace CoC;
 			clearOutput();
 			outputText("You spend one hour exploring the tainted ridge but you don't manage to find anything interesting, unless feeling like you are becoming slightly more horny counts.");
 			dynStats("lib", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function findImpFood():void {
 			clearOutput();
 			outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
-			inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.IMPFOOD, explorer.done);
 		}
 
 		private function ignisIntro():void {
@@ -208,11 +231,10 @@ use namespace CoC;
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
 			menu();
 			addButton(0, "Yes", SceneLib.dungeons.denofdesire.enterDungeon);
-			addButton(1, "No", camp.returnToCampUseOneHour);
+			addButton(1, "No", explorer.done);
 		}
 
 		private function discoverDefiledRavine():void {
-			player.explored++;
 			clearOutput();
 			outputText("As you tread through Blight Ridge, you come across a small valley, one you've never noticed before. Where does this place go? How deep does the valley go? Judging by the usual inhabitants of this place, it's not implausible to assume that it would be nothing but more demons up to no good.\n\n");
 			outputText("You pause for a moment, debating if you should go into the valley.\n\n");
@@ -224,13 +246,14 @@ use namespace CoC;
 		public function findDefiledRavineYes():void {
 			outputText("What's the worst that could happen? Treading through the valley, the faint sound of flowing water hits your ears. The sound is quickly followed by the scent of sweat, milk and semen. This is not unlike the usual smells you get in the Blight Ridge, but it's far more condensed and sour here. One step closer to the source.\n\n");
 			outputText("<b>You've discovered the Defiled Ravine!</b>");
-			flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] = 1;
+			SceneLib.exploration.counters.defiledRavine = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
 		public function findDefiledRavineNo():void {
 			outputText("Not everything needs to be your problem anyway. Who knows what could happen if you stick your face into somewhere it doesn't belong.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function partsofDartPistol():void {
@@ -239,7 +262,8 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the Dart pistol in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Dart pistol", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }
+

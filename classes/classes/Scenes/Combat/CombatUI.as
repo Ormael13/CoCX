@@ -851,7 +851,7 @@ public class CombatUI extends BaseCombatContent {
 	private function buildAbilityMenu(abilities:/*CombatAbility*/Array, buttons:ButtonDataList):void {
 		for each(var ability:CombatAbility in abilities) {
 			if (ability.isKnown) {
-				buttons.list.push(ability.createButton(monster));
+				buttons.append(ability.createButton(monster));
 			}
 		}
 	}

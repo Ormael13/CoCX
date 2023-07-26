@@ -1,13 +1,13 @@
 //Coded by Kitteh6660, courtesy of Savin.
-package classes.Scenes.Areas.Tundra 
+package classes.Scenes.Areas.Tundra
 {
 import classes.*;
 import classes.Scenes.SceneLib;
 
 public class ValkyrieScene extends BaseContent
 	{
-				
-		public function ValkyrieScene() 
+		
+		public function ValkyrieScene()
 		{
 		}
 		
@@ -47,7 +47,7 @@ public class ValkyrieScene extends BaseContent
 			dynStats("lust", 50);
 			player.gems -= gemPenalty;
 			cleanupAfterCombat();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function winAgainstValkyrie():void {

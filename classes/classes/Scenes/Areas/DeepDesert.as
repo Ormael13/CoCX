@@ -3,12 +3,12 @@
  * Area with lvl 15-25 enemies.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.SceneLib;
 
 public class DeepDesert extends BaseContent
 	{
@@ -28,17 +28,21 @@ public class DeepDesert extends BaseContent
 
 			})
 		}
-
+		
+		public const areaLevel:int = 65;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_CAVES] > 0;
+			return SceneLib.exploration.counters.desertDeep > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.DISCOVERED_CAVES];
+			return SceneLib.exploration.counters.desertDeep;
 		}
 
 		public function exploreDeepDesert():void {
 			clearOutput();
-			flags[kFLAGS.DISCOVERED_CAVES]++;
+			SceneLib.exploration.counters.desertDeep++;
 			doNext(camp.returnToCampUseOneHour);
 			deepDesertEncounter.execEncounter();
 			flushOutputTextToGUI();

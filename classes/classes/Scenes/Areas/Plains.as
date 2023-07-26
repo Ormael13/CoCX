@@ -21,17 +21,28 @@ use namespace CoC;
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var satyrScene:SatyrScene = new SatyrScene();
-
+		
+		public const areaLevel:int = 9;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.plains > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel && SceneLib.mountain.isDiscoveredHills();
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.plains;
+		}
+		public function discover():void {
+			clearOutput();
+			SceneLib.exploration.counters.plains = 1;
+			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
+			endEncounter();
+		}
+		
+		
 		public function Plains()
 		{
 			onGameInit(init);
-		}
-		public function discover():void {
-			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
-			outputText(images.showImage("area-plain"));
-			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private var explorationEncounter:GroupEncounter = null;
@@ -312,10 +323,10 @@ use namespace CoC;
 			explorer.setTags("plains", "plants");
 			explorer.prompt = "You explore the plains.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
+				SceneLib.exploration.counters.plains++;
 			}
 			explorer.leave.hint("Leave the plains");
-			explorer.skillBasedReveal(9, flags[kFLAGS.TIMES_EXPLORED_PLAINS]);
+			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
 		public function plainsChance():Number {

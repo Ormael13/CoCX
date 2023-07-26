@@ -18,9 +18,21 @@ public class Boat extends AbstractLakeContent
 		public var kaiju:Kaiju = new Kaiju();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public function Boat() {}
+		
+		public const discoverLevel:int = 0;
+		public const areaLevel:int = 1;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.boat > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= discoverLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.boat;
+		}
 
 		public function discoverBoat():void {
-			player.createStatusEffect(StatusEffects.BoatDiscovery,0,0,0,0);
+			SceneLib.exploration.counters.boat = 1;
 			clearOutput();
 			outputText("You journey around the lake, seeking demons to fight");
 			if(player.cor > 60) outputText(" or fuck");
@@ -31,7 +43,7 @@ public class Boat extends AbstractLakeContent
 		}
 		public function boatExplore():void
 		{
-			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
+			SceneLib.exploration.counters.boat++;
 			//Belisa
 			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaEncounternum == 1) {
 				SceneLib.belisa.secondEncounter();

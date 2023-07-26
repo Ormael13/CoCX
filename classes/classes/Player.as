@@ -222,12 +222,6 @@ use namespace CoC;
 		public var tempInt:Number = 0;
 		public var tempWis:Number = 0;
 		public var tempLib:Number = 0;
-		//Number of times explored for new areas
-		public var explored:Number = 0;
-		public var exploredForest:Number = 0;
-		public var exploredDesert:Number = 0;
-		public var exploredMountain:Number = 0;
-		public var exploredLake:Number = 0;
 
 		//Player pregnancy variables and functions
 		private var pregnancy:Pregnancy = new Pregnancy();

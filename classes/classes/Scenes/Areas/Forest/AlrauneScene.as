@@ -50,7 +50,7 @@ public class AlrauneScene extends BaseContent
 					"Your stamens pop free from their cunt sheaths, falling limply to the ground and still leaking as you doze off highly content.");
 			player.sexReward("cum", "Vaginal");
 			if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 	public function alrauneDeepwoods():void {
@@ -201,7 +201,7 @@ public class AlrauneScene extends BaseContent
 				+ "\n"
 				+ "When you wake up you are visibly pregnant with what might be her seeds and the plant woman is nowhere to be found. Not that it matters since you got several flasks of her precious nectar.\n");
 			cleanupAfterCombat();
-			inventory.takeItem(consumables.RAUNENECT, camp.returnToCampUseOneHour); //TODO: make it 5
+			inventory.takeItem(consumables.RAUNENECT, explorer.done); //TODO: make it 5
 			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			player.sexReward("cum", "Anal");
 		}

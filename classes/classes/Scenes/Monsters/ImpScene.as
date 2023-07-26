@@ -1659,9 +1659,9 @@ use namespace CoC;
 				outputText("As you're minding your own business, you spot a large imp.  He is playing with himself, loincloth discarded next to him.  You could make out his cunt, as the result of your breastfeeding session.  However, you notice some difference.  He has a cock instead of clit, perhaps he has partially recovered.  Clearly, he's a maleherm now.  You blush as the imp finally reaches orgasm, his cum and femspunk splattering everywhere.");
 				dynStats("lus", 20, "scale", false);
 				flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] = 10;
+				endEncounter();
 			}
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//IMP WARLORD
@@ -2204,7 +2204,7 @@ use namespace CoC;
 			outputText("No way, is this idiot cumming before you, let alone without your permission? You grab his balls with your hands and unleash a spell closing the valve just as he's about to ejaculate. The imp now looks at you with stupor mixed with terror.[pg]");
 			outputText("\"<i>Nooo! Please, anything but this!</i>\"[pg]");
 			outputText("Pets don't get to argue or plead, just who does he think he is?! He should be grateful to be allowed to taste your pussy with his unworthy dick.");
-			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" Annoyed, you fetch your backpack grab a dildo and cut short his pitiful cry by forcing the toy into his mouth. With the moron now properly gaged, you") else outputText(" You");
+			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" Annoyed, you fetch your backpack grab a dildo and cut short his pitiful cry by forcing the toy into his mouth. With the moron now properly gaged, you"); else outputText(" You");
 			outputText(" resume your ride, the imp’s balls increasing in volume after each trust as a buildup of cum is sealed within. You reach your first orgasm and keep on raping him until his balls are big enough to act as pillows for you to rest on.");
 			outputText("Thoroughly satisfied, you unplug from the tormented imp, his cock sliding out of your cunt with a wet pop before you take several steps as he seems on the verge of eruption, yet still bound by your magic. ");
 			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" You remove the toy from his mouth only when your sure he won't protest further. ");

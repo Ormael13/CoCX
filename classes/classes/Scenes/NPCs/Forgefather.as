@@ -204,13 +204,13 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 			outputText("\n<i>The temple, high in the mountains. It still stands? Those old stones are more stubborn than we thought. And to hear my people's most wonderful designs live on.</i>\"\n\n");
 			outputText("The being grabs his gear from behind the anvil, and steps forward.\n\n");
 			outputText("\"<i>I'm going to see how the old workshop fares. If you want to learn more about your kind, " + player.mf("lad","lass") + ", come find me there.</i>\"");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function notNow():void {
 			outputText("You decide, maybe you should just go back the way you came.\nYou turn around and begin walking out of the mine.\n\n");
 			outputText("\"<i>Fine then, if you finnaly decide to talk, you know where I'll be.</i>\"");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function repeatForgefather():void {
@@ -729,6 +729,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 					player.hairColor = "caramel";
 					break;
 			}
+			explorer.stopExploring();
 			camp.returnToCamp(36);
 		}
 		
@@ -756,6 +757,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 						break;
 				}
 				refinement++;
+				explorer.stopExploring();
 				camp.returnToCampUseSixHours();
 			}
 			if (refinement == 2){
@@ -764,6 +766,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 				player.destroyItems(consumables.ECTOPLS, 1);
 				player.destroyItems(consumables.GODMEAD, 1);
 				refinement++;
+				explorer.stopExploring();
 				camp.returnToCampUseTwelveHours();
 			}
 			if (refinement == 3){
@@ -772,6 +775,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 				player.destroyItems(consumables.IRONWEED, 1);
 				player.destroyItems(consumables.LIGHTOL, 1);
 				refinement++
+				explorer.stopExploring();
 				camp.returnToCampUseTwelveHours();
 			}
 			
@@ -1074,6 +1078,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 			}
 
 			refinement++;
+			explorer.stopExploring();
 			addButton(0,"Return to camp", camp.returnToCampUseSixHours);
 		}
 	}

@@ -205,12 +205,6 @@ import coc.view.MainView;
 			player.hairType = Hair.NORMAL;
 			player.beardLength = 0;
 			player.beardStyle = 0;
-			//Exploration
-			player.explored = 0;
-			player.exploredForest = 0;
-			player.exploredDesert = 0;
-			player.exploredMountain = 0;
-			player.exploredLake = 0;
 			//Inventory clear
 			player.itemSlot1.unlocked = true;
 			player.itemSlot1.emptySlot();
@@ -501,7 +495,7 @@ import coc.view.MainView;
 			}
 			if (mainView.nameBox.text == "") {
 				//If part of newgame+, don't fully wipe.
-				if (player.XP > 0 && player.explored == 0) {
+				if (player.XP > 0 && SceneLib.exploration.counters.explore == 0) {
 					flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
 					if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
 					while (player.level > 1) {
