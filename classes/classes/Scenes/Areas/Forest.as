@@ -65,7 +65,7 @@ use namespace CoC;
 		
 		public const areaLevelInner:int = 3;
 		public function isDiscoveredInner():Boolean {
-			return SceneLib.exploration.counters.forestInner > 0;
+			return /*SceneLib.exploration.counters.forestInner > 0 */ SceneLib.exploration.counters.forestOuter > 0;
 		}
 		public function canDiscoverInner():Boolean {
 			return !isDiscoveredInner() && adjustedPlayerLevel() >= areaLevelInner;
