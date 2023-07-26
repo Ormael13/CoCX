@@ -54,6 +54,7 @@ public class Changelog extends BaseContent
 			outputText("-New two NPC to toggle off/on their appearing in camp/out of camp: Sophie and maybe many expected and wanted... Helia.\n");
 			outputText("-Dark Elfs won't appear at the surface replaced by their lighter skinned fellow elfs... the light elfs.\n");
 			outputText("-Fixing various text errors reported by people on discord.\n");
+			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
 			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
@@ -61,7 +62,6 @@ public class Changelog extends BaseContent
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon.\n");
 			outputText("-New usable item: Red Gel. Costing 50 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies.\n");// .
-			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
 			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD. Tooltip before finding them in places been updated to avoid confusion. Owca pre discovery button gained tip on time when to explore area.\n");
 			outputText("-Centipedes and Oomukade races are just race of Oomukade with Centipede been it lowest tier. Tracheal system mutation would be accessable by them too.\n");
@@ -97,6 +97,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
@@ -158,9 +164,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -186,7 +190,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
