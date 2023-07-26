@@ -143,7 +143,7 @@ public class Exploration extends BaseContent implements SaveableState
 					.hint("Visit the lush forest. "
 							+ "\n\nTimes explored: " + SceneLib.forest.timesExploredOuter())
 					.disableIf(!SceneLib.forest.isDiscoveredOuter(), "You need to 'Explore' Mareth more." +
-							" (Lvl "+SceneLib.forest.areaLevelOuter+"+)")
+							" (Lvl "+SceneLib.forest.discoverLevelOuter+"+)")
 		}
 		private function btnExploreForestInner():ButtonData {
 			return new ButtonData("Forest (I)", SceneLib.forest.exploreInnerForest)
@@ -166,21 +166,21 @@ public class Exploration extends BaseContent implements SaveableState
 							+ (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "")
 							+ "\n\nTimes explored: " + SceneLib.lake.timesExplored())
 					.disableIf(!SceneLib.lake.isDiscovered(), "You need to 'Explore' Mareth more." +
-							" (Lvl "+SceneLib.lake.areaLevel+"+)");
+							" (Lvl "+SceneLib.lake.discoverLevel+"+)");
 		}
 		private function btnExploreLakeBoat():ButtonData {
 			return new ButtonData("Boat", SceneLib.boat.boatExplore)
 					.hint("Get on the boat and explore the lake. \n\nRecommended level: 12" +
 							"\n\nTimes explored: " + SceneLib.boat.timesExplored())
 					.disableIf(!SceneLib.boat.isDiscovered(), "Search the lake." +
-							" (Lvl "+SceneLib.boat.areaLevel+"+)");
+							" (Lvl "+SceneLib.boat.discoverLevel+"+)");
 		}
 		private function btnExploreDesertOuter():ButtonData {
 			return new ButtonData("Desert (O)", SceneLib.desert.exploreOuterDesert)
 					.hint("Visit the dry desert (outer part). "
 							+ "\n\nTimes explored: " + SceneLib.desert.timesExploredOuter())
 					.disableIf(!SceneLib.desert.isDiscoveredOuter(), "You need to 'Explore' Mareth more." +
-							" (Lvl "+SceneLib.desert.areaLevelOuter+"+)");
+							" (Lvl "+SceneLib.desert.discoverLevelOuter+"+)");
 		}
 		private function btnExploreDesertInner():ButtonData {
 			return new ButtonData("Desert (I)", SceneLib.desert.exploreInnerDesert)
@@ -195,7 +195,7 @@ public class Exploration extends BaseContent implements SaveableState
 							+ (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "")
 							+ "\n\nTimes explored: " + SceneLib.battlefiledboundary.timesExplored())
 					.disableIf(!SceneLib.battlefiledboundary.isDiscovered(), "Discovered when using 'Explore' after finding Desert (Outer)." +
-							" (Lvl "+SceneLib.battlefiledboundary.areaLevel+"+)")
+							" (Lvl "+SceneLib.battlefiledboundary.discoverLevel+"+)")
 		}
 		private function btnExploreBattlefieldOuter():ButtonData {
 			return new ButtonData("Battlefield (O)", SceneLib.battlefiledouter.exploreOuterBattlefield)
@@ -357,7 +357,7 @@ public class Exploration extends BaseContent implements SaveableState
 			bd.add("");
 			// Row 4
 			bd.append(btnExploreBattlefieldBoundary());
-			bd.append(btnExploreBattlefieldBoundary());
+			bd.append(btnExploreBattlefieldOuter());
 			bd.add("");
 			bd.add("");
 			bd.add("");
