@@ -185,7 +185,8 @@ public class ExplorationEngine extends BaseContent {
 	 * This function can be called in encounters that finish exploration early (e.g. combat loss)
 	 */
 	public function stopExploring():void {
-		trace("explorer.stopExploring")
+		trace("explorer.stopExploring");
+		if (!initialized) return;
 		finished = true;
 		areaTags = {};
 		markEncounterDone();
