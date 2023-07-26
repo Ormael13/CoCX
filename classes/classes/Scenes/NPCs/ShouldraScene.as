@@ -663,7 +663,7 @@ private function dewormYourGhost():void {
 	outputText("There's silence for a moment, then you are almost rendered unconscious as she cries, \"<i>NOOOOOOOOPE,</i>\" telepathically, surging out of your body in record time. She corporealizes and backs away from you until she bumps into one of the ruined buildings. Then, she's off, booking it down the street to get as far away from you as possible. You shrug, figuring at the very least you dealt with her arousal, albeit in an unexpected way, and begin your trek back to your camp.");
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 	flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER]++;
 }
 
@@ -990,7 +990,7 @@ private function noCourtingYouFag():void {
 	spriteSelect(SpriteDb.s_ghostGirl);
 	clearOutput();
 	outputText("You quickly tell her that there's been a misunderstanding; surely your order would not allow such a relationship. She nods, not seeming very bothered by the dismissal. \"<i>What a shame. Farewell, then, paladin friend,</i>\" she says, turning back towards her shack. \"<i>Perhaps we will meet again.</i>\"  You're left to watch her go, and you soon depart as well.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //(yup)
 private function courtCrazyGirlsDotCom():void {
@@ -998,7 +998,7 @@ private function courtCrazyGirlsDotCom():void {
 	clearOutput();
 	outputText("Her smile widens as she regards your venerable visage. \"<i>Is that so?</i>\" she says softly. \"<i>Interesting. I'll be back in a moment.</i>\" She returns to her \"<i>house,</i>\" rummaging around for some time before returning to you, hands hidden behind her. \"<i>If I am to be sought by a paladin, we must do things right,</i>\" she explains, handing you a small silk handkerchief. The white fabric slides around your fingers like a sacrosanct flow of holy water, and you reverently tuck her gift into your [armor], laying it over your heart. \"<i>Come back in two days' time, please,</i>\" she asks softly. Your eyes meet for a long moment, and it appears as if she's struggling to say something. She instead breaks away and starts back towards her shelter. \"<i>Be safe,</i>\" she advises, and with a smile and a wave, she's gone. For moments, you stand silently, then you turn and start away with long, saintly strides. There's more work to do.\n\n");
 	flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] = 48;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //(two days later)

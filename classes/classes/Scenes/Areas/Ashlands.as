@@ -8,6 +8,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ashlands.*;
 import classes.Scenes.Areas.Forest.AlrauneScene;
@@ -120,11 +121,15 @@ public class Ashlands extends BaseContent
 	}
 	
 	public function exploreAshlands():void {
-		clearOutput();
-		SceneLib.exploration.counters.ashlands++;
-		doNext(camp.returnToCampUseOneHour);
-		ashlandsEncounter.execEncounter();
-		flushOutputTextToGUI();
+		explorer.prepareArea(ashlandsEncounter);
+		explorer.setTags("ashlands");
+		explorer.prompt = "You explore the ashlands.";
+		explorer.onEncounter = function(e:ExplorationEntry):void {
+			SceneLib.exploration.counters.ashlands++;
+		}
+		explorer.leave.hint("Leave the ashlands");
+		explorer.skillBasedReveal(areaLevel, timesExplored());
+		explorer.doExplore();
 	}
 
 	private function discoverCrags():void {
@@ -132,6 +137,7 @@ public class Ashlands extends BaseContent
 		clearOutput();
 		outputText("You walk for some time, roaming the ashlands. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
 		outputText("<b>You've discovered the Volcanic Crag!</b>");
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseTwoHours);
 	}
 
@@ -142,7 +148,7 @@ public class Ashlands extends BaseContent
 			outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
 		}
 		dynStats("tou", .5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function findGranite():void {
@@ -151,7 +157,7 @@ public class Ashlands extends BaseContent
 		outputText("Do you wish to mine it?");
 		menu();
 		addButton(0, "Yes", ahslandsSiteMine);
-		addButton(1, "No", camp.returnToCampUseOneHour);
+		addButton(1, "No", explorer.done);
 	}
 
 	private function fireGolemEncounterFn():void {
@@ -166,7 +172,7 @@ public class Ashlands extends BaseContent
 		outputText("You carefully put the pieces of the Double barreled dragon gun in your back and head back to your camp.\n\n");
 		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 		player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function alrauneEncounterFn():void {
@@ -175,7 +181,7 @@ public class Ashlands extends BaseContent
 		if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 			outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
 			menu();
-			addButton(0, "Yes", camp.returnToCampUseOneHour);
+			addButton(0, "Yes", explorer.done);
 			addButton(1, "No", alrauneScene.alrauneVolcanicCrag);
 		} else {
 			alrauneScene.alrauneVolcanicCrag();
@@ -183,12 +189,12 @@ public class Ashlands extends BaseContent
 	}
 
 	private function ahslandsSiteMine():void {
-		if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+		if (Forgefather.materialsExplained != 1) endEncounter();
 		else {
 			clearOutput();
 			if (player.fatigue > player.maxFatigue() - 50) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			outputText("\n\nYou begin slamming your pickaxe against the granite, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -198,10 +204,10 @@ public class Ashlands extends BaseContent
 			SceneLib.forgefatherScene.incrementGraniteSupply(minedStones);
 			player.mineXP(player.MiningMulti());
 			findGem();
-			doNext(camp.returnToCampUseTwoHours);
 		}
 	}
 	private function findGem():void {
+		explorer.stopExploring();
 		if (player.miningLevel > 4) {
 			if (rand(4) == 0) {
 				inventory.takeItem(useables.RBYGEM, camp.returnToCampUseTwoHours);

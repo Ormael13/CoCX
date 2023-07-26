@@ -3,7 +3,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
@@ -24,7 +24,7 @@ public class HiddenCave extends DungeonAbstractContent
 			inDungeon = false;
 			clearOutput();
 			outputText("You leave the cave behind and take off through the hills back towards camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function defeatedByLoliBatGolem():void {

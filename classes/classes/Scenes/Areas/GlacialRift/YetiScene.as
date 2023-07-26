@@ -52,7 +52,7 @@ public class YetiScene extends BaseContent
 					"A few seconds later he escorts you to the exit. You are positively beaming, pondering whether the seed of your mate took as you leave the cave." +
 					" Probably not since most yeti intercourse would fail to conceive a child but who knows, you could get lucky eventually. Thoroughly satisfied you head back to camp.");
 			player.sexReward("cum","Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function loseToYeti():void {

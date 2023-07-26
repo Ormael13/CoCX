@@ -7,6 +7,7 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
@@ -118,9 +119,15 @@ use namespace CoC;
 		}
 		
 		public function exploreTundra():void {
-			SceneLib.exploration.counters.tundra++;
-			clearOutput();
-			tundraEncounter.execEncounter();
+			explorer.prepareArea(tundraEncounter);
+			explorer.setTags("tundra");
+			explorer.prompt = "You explore the tundra.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.tundra++;
+			}
+			explorer.leave.hint("Leave the tundra");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 		
 		public function nothingEncounter():void {
@@ -131,7 +138,7 @@ use namespace CoC;
 				player.trainStat("tou", +1, player.trainStatCap("tou",50));
 			}
 			dynStats("tou", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function alabasterEncounter():void {
@@ -140,7 +147,7 @@ use namespace CoC;
 			outputText("Do you wish to mine it?");
 			menu();
 			addButton(0, "Yes", tundraSiteMine);
-			addButton(1, "No", camp.returnToCampUseOneHour);
+			addButton(1, "No", explorer.done);
 		}
 		
 		public function golemEncounters():void {
@@ -154,7 +161,7 @@ use namespace CoC;
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
 				menu();
-				addButton(0, "Yes", camp.returnToCampUseOneHour);
+				addButton(0, "Yes", explorer.done);
 				addButton(1, "No", alrauneScene.alrauneGlacialRift);
 			} else {
 				alrauneScene.alrauneGlacialRift();
@@ -176,12 +183,12 @@ use namespace CoC;
 		
 		
 		private function tundraSiteMine():void {
-			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
 				clearOutput();
 				if (player.fatigue > player.maxFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the alabaster, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -191,16 +198,18 @@ use namespace CoC;
 				SceneLib.forgefatherScene.incrementAlabasterSupply(minedStones);
 				player.mineXP(player.MiningMulti());
 				findGem();
+				explorer.stopExploring();
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
 
 		private function findATear():void {
 			outputText("While exploring the tundra you spot a peculiar white flower. It glows feintly as if from some magical residue.");
-			inventory.takeItem(consumables.F_TEAR, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.F_TEAR, explorer.done);
 		}
 
 		private function findGem():void {
+			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.SAPPGEM, camp.returnToCampUseTwoHours);

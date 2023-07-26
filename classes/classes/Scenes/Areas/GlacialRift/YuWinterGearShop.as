@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -11,7 +11,7 @@ import classes.internals.Utils;
 public class YuWinterGearShop extends BaseContent
 	{
 		
-		public function YuWinterGearShop() 
+		public function YuWinterGearShop()
 		{}
 		
 		public function YuIntro():void {
@@ -38,7 +38,7 @@ public class YuWinterGearShop extends BaseContent
 				outputText("\"<i>Tourist lucky! Yu owner to small shop of winter gear. Outsider go to Yu cave if wants gear to properly wander around in snow.</i>\"\n\n");
 				outputText("Yu laughs, grabs her board and walks away. You guess gearing up for the area wouldn't be a dumb idea.");
 				flags[kFLAGS.YU_SHOP] = 1;
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 		
@@ -51,7 +51,7 @@ public class YuWinterGearShop extends BaseContent
 				else addButton(2, "Sex", YuShopSex);
 			}
 			else addButtonDisabled(2, "Sex", "You need to talk with her first.");
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", explorer.done);
 		}
 		public function YuMenuMain2():void {
 			clearOutput();
@@ -219,7 +219,7 @@ public class YuWinterGearShop extends BaseContent
 				if (flags[kFLAGS.YU_SEX] < 1) flags[kFLAGS.YU_SEX] = 1;
 				player.sexReward("vaginalFluids","Dick");
 				outputText("You wake up in Yu’s cave house a few hours later. Yu is still there sleeping next to you, but you have adventuring to do. You give Yu a parting kiss before grabbing back your gear and traveling back to your camp.\n\n");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 
 			function vagF():void {
@@ -234,7 +234,7 @@ public class YuWinterGearShop extends BaseContent
 				outputText("You need it deeper and faster and to make it clear you slide up to the middle of the length causing Yu to yelp in surprise at the swift insertion. Both of you keep fucking until you both cum, your pussy juices freezing on the dildo yet your cunt burning brightly with the need for a good working. Eventually both of you fall off, asleep. Yu making sure to protect you from the cold.\n\n");
 				player.sexReward("no", "Vaginal");
 				outputText("You wake up in Yu’s cave house a few hours later. Yu is still there sleeping next to you, but you have adventuring to do. You give Yu a parting kiss before grabbing back your gear and traveling back to your camp.\n\n");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 	}

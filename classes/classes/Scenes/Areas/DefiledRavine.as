@@ -9,6 +9,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.BlightRidge.DemonScene;
 import classes.Scenes.Areas.DefiledRavine.DemonSoldierScene;
@@ -122,12 +123,16 @@ use namespace CoC;
 		}
 		
 		public function exploreDefiledRavine():void {
-			clearOutput();
-			SceneLib.exploration.counters.defiledRavine++;
-			if (player.cor < 71) dynStats("cor", 1.5);
-			doNext(camp.returnToCampUseOneHour);
-			defiledRavineEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(defiledRavineEncounter);
+			explorer.setTags("defiledRavine");
+			explorer.prompt = "You explore the defiled ravine.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.defiledRavine++;
+				if (player.cor < 71) dynStats("cor", 1.5);
+			}
+			explorer.leave.hint("Leave the defiled ravine");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		public function defiledRavineChance():Number {
@@ -140,13 +145,13 @@ use namespace CoC;
 			clearOutput();
 			outputText("You spend one hour exploring the tainted ravine but you don't manage to find anything interesting, unless feeling like you are becoming slightly more horny counts.");
 			dynStats("lib", 1);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function findImpFood():void {
 			clearOutput();
 			outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
-			inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.IMPFOOD, explorer.done);
 		}
 
 		private function mineRavine():void {
@@ -155,7 +160,7 @@ use namespace CoC;
 			outputText("Do you wish to mine it?");
 			menu();
 			addButton(0, "Yes", defiledRavineSiteMine);
-			addButton(1, "No", camp.returnToCampUseOneHour);
+			addButton(1, "No", explorer.done);
 		}
 
 		public function partsofTwinDartPistol():void {
@@ -164,16 +169,16 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the Twin Dart pistol in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function defiledRavineSiteMine():void {
-			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
 				clearOutput();
 				if (player.fatigue > player.maxFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the marble, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -183,11 +188,11 @@ use namespace CoC;
 				SceneLib.forgefatherScene.incrementMarbleSupply(minedStones);
 				player.mineXP(player.MiningMulti());
 				findGem();
-				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
 
 		private function findGem():void {
+			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.TPAZGEM, camp.returnToCampUseTwoHours);

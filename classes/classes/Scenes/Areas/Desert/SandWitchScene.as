@@ -996,7 +996,7 @@ private function sandwitchBirthsYourMonstrosities(reluctantly:int):void {
 	
 	if (reluctantly) outputText("\n\n\"<i>Just, use your common sense next time.</i>\"");
 	pregnancy.knockUpForce(); //Clear Pregnancy
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //irthing scene: Bees (Radar) (edited)

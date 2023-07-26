@@ -619,7 +619,7 @@ public class AnemoneScene extends BaseContent {
             sexMenu(false); //softer options
             return;
         }
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     //anal

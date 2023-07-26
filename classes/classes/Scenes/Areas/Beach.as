@@ -9,6 +9,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
@@ -222,11 +223,15 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function exploreBeach():void {
-			clearOutput();
-			SceneLib.exploration.counters.beach++;
-			doNext(camp.returnToCampUseOneHour);
-			_beachEncounters.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(_beachEncounters);
+			explorer.setTags("beach", "water");
+			explorer.prompt = "You explore the sunny beach.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.beach++;
+			}
+			explorer.leave.hint("Leave the sunny beach");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 	
 		public function beachChance():Number {
@@ -243,7 +248,7 @@ import classes.Scenes.SceneLib;
 		public function orcaSunscreenFound():void {
 			clearOutput();
 			outputText("As you walk on the beach you find a weird black bottle with a white line and a cap. You pick it up and read the tag. It claims to be 'Orca sunscreen'. ");
-			inventory.takeItem(consumables.ORCASUN, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.ORCASUN, explorer.done);
 		}
 
 		public function NothingHappened():void {
@@ -261,7 +266,7 @@ import classes.Scenes.SceneLib;
 					dynStats("tou", .5);
 				}
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		
@@ -271,7 +276,7 @@ import classes.Scenes.SceneLib;
 			outputText("You carefully put the pieces of the Harpoon gun in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Harpoon gun", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function findBeachSite():void {
@@ -280,7 +285,7 @@ import classes.Scenes.SceneLib;
             outputText("Do you wish to mine it?");
             menu();
             addButton(0, "Yes", beachSiteMine);
-            addButton(1, "No", camp.returnToCampUseOneHour);
+            addButton(1, "No", explorer.done);
 		}
 
 		private function beachSiteMine():void {
@@ -289,7 +294,7 @@ import classes.Scenes.SceneLib;
 				clearOutput();
 				if (player.fatigue > player.maxFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the sandstone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -299,11 +304,11 @@ import classes.Scenes.SceneLib;
 				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);
 				player.mineXP(player.MiningMulti());
 				findGem();
-				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
 
 		private function findGem():void {
+			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.EMDGEM, camp.returnToCampUseTwoHours);

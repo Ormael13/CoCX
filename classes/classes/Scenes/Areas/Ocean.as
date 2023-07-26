@@ -9,6 +9,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ocean.*;
 import classes.Scenes.NPCs.CeaniScene;
@@ -41,7 +42,7 @@ use namespace CoC;
 			if(player.cor > 60) outputText(" or fuck");
 			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
 			outputText("<b>You have discovered the sea boat!</b>");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		
@@ -133,11 +134,15 @@ use namespace CoC;
 		}
 
 		public function exploreOcean():void {
-			clearOutput();
-			SceneLib.exploration.counters.ocean++;
-			doNext(camp.returnToCampUseOneHour);
-			oceanEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(oceanEncounter);
+			explorer.setTags("ocean","water");
+			explorer.prompt = "You explore the ocean surface.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.ocean++;
+			}
+			explorer.leave.hint("Leave the ocean");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		public function oceanChance():Number {
@@ -161,14 +166,14 @@ use namespace CoC;
 					dynStats("spe", .5);
 				}
 			}
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter();
 		}
 
 		private function fishing():void {
 			clearOutput();
 			outputText("This is a calm day on the ocean, you managed to hold your boat just a mile or two away from the brewing storm that constantly rage over the area and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole.\n\n");
 			outputText("<b>You got a fish!</b>");
-			inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.FREFISH, explorer.done);
 		}
 	}
 

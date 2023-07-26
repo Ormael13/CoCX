@@ -9,6 +9,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.BlightRidge.*;
 import classes.Scenes.Monsters.ImpLord;
@@ -178,12 +179,16 @@ use namespace CoC;
 		}
 		
 		public function exploreBlightRidge():void {
-			clearOutput();
-			SceneLib.exploration.counters.blightRidge++;
-			if (player.cor < 66) dynStats("cor", 1);
-			doNext(camp.returnToCampUseOneHour);
-			blightRidgeEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(blightRidgeEncounter);
+			explorer.setTags("blightRidge");
+			explorer.prompt = "You explore the corrupted blight ridge.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				if (player.cor < 66) dynStats("cor", 1);
+				SceneLib.exploration.counters.blightRidge++;
+			}
+			explorer.leave.hint("Leave the corrupted blight ridge");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 	
 		public function blightRidgeChance():Number {
@@ -196,13 +201,13 @@ use namespace CoC;
 			clearOutput();
 			outputText("You spend one hour exploring the tainted ridge but you don't manage to find anything interesting, unless feeling like you are becoming slightly more horny counts.");
 			dynStats("lib", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function findImpFood():void {
 			clearOutput();
 			outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
-			inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.IMPFOOD, explorer.done);
 		}
 
 		private function ignisIntro():void {
@@ -226,7 +231,7 @@ use namespace CoC;
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
 			menu();
 			addButton(0, "Yes", SceneLib.dungeons.denofdesire.enterDungeon);
-			addButton(1, "No", camp.returnToCampUseOneHour);
+			addButton(1, "No", explorer.done);
 		}
 
 		private function discoverDefiledRavine():void {
@@ -242,12 +247,13 @@ use namespace CoC;
 			outputText("What's the worst that could happen? Treading through the valley, the faint sound of flowing water hits your ears. The sound is quickly followed by the scent of sweat, milk and semen. This is not unlike the usual smells you get in the Blight Ridge, but it's far more condensed and sour here. One step closer to the source.\n\n");
 			outputText("<b>You've discovered the Defiled Ravine!</b>");
 			SceneLib.exploration.counters.defiledRavine = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
 		public function findDefiledRavineNo():void {
 			outputText("Not everything needs to be your problem anyway. Who knows what could happen if you stick your face into somewhere it doesn't belong.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function partsofDartPistol():void {
@@ -256,7 +262,7 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the Dart pistol in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Dart pistol", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

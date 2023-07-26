@@ -13,6 +13,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -46,6 +47,7 @@ use namespace CoC;
 			outputText("You walk for some time, roaming the tundra. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. ");
 			outputText("You wrap your arms around yourself tightly, shivering fiercely despite yourself as the dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
 			outputText("<b>You've discovered the Glacial Rift!</b>");
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -227,11 +229,16 @@ use namespace CoC;
 		}
 		
 		public function exploreGlacialRift():void {
-			SceneLib.exploration.counters.glacialRiftOuter++;
-			if (!player.hasPerk(PerkLib.ColdAffinity)) SubZeroConditionsTick();
-			clearOutput();
-			glacialRiftEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(glacialRiftEncounter);
+			explorer.setTags("glacialRift","glacialRiftOuter");
+			explorer.prompt = "You explore the chilly glacial rift.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.glacialRiftOuter++;
+				if (!player.hasPerk(PerkLib.ColdAffinity)) SubZeroConditionsTick();
+			}
+			explorer.leave.hint("Leave the chilly glacial rift");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		public function glacialRiftChance():Number {
@@ -248,7 +255,7 @@ use namespace CoC;
 				player.trainStat("tou", +1, player.trainStatCap("tou",50));
 			}
 			dynStats("tou", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function encounterChest():void {
@@ -286,7 +293,7 @@ use namespace CoC;
 					statScreenRefresh();
 				}
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function encounterItem():void {
@@ -298,10 +305,10 @@ use namespace CoC;
 			var itemChooser:Number = rand(2);
 			if (itemChooser == 0) {
 				outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
-				inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.ICICLE_, explorer.done);
 			} else if (itemChooser == 1) {
 				outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
-				inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.GODMEAD, explorer.done);
 			}
 			//}
 		}
@@ -450,7 +457,7 @@ use namespace CoC;
 			player.createPerk(PerkLib.FenrirSpikedCollar, 0, 0, 0, 0);
 			player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
 			dynStats("cor", 100);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function leaveShrine():void {
@@ -462,7 +469,7 @@ use namespace CoC;
 				outputText("\n\nOn these words Fenrir falls silent again as you make your way back to your camp.");
 				flags[kFLAGS.FENRIR_COLLAR] = 1;
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

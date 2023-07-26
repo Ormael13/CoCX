@@ -9,6 +9,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.Areas.VolcanicCrag.*;
@@ -170,11 +171,16 @@ public class VolcanicCrag extends BaseContent
 		}
 		
 		public function exploreVolcanicCrag():void {
-			SceneLib.exploration.counters.volcanicCragOuter++;
-			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
-			doNext(camp.returnToCampUseOneHour);
-			volcanicCragEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(volcanicCragEncounter);
+			explorer.setTags("volcanicCrag","volcanicCragOuter");
+			explorer.prompt = "You explore the infernal volcanic crag.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.volcanicCragOuter++;
+				if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
+			}
+			explorer.leave.hint("Leave the infernal volcanic crag");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		public function volcanicCragChance():Number {
@@ -191,13 +197,13 @@ public class VolcanicCrag extends BaseContent
 				player.trainStat("spe", +1, player.trainStatCap("spe",50));
 			}
 			dynStats("spe", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function findDrakeHeart():void {
 			clearOutput();
 			outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
-			inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.DRAKHRT, explorer.done);
 		}
 
 		private function fireGolemEncounter():void {
@@ -227,7 +233,7 @@ public class VolcanicCrag extends BaseContent
 			outputText("You carefully put the pieces of the Tripxi Fatbilly in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Tripxi Fatbilly", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 	}
