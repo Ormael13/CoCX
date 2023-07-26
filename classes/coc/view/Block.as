@@ -201,6 +201,8 @@ public class Block extends Sprite {
 	private var explicitWidth:Number    = 0;
 	private var explicitHeight:Number   = 0;
 	public var dataset:Object = {};
+	private var _xminCached:Number = -1;
+	private var _yminCached:Number = -1;
 
 	public function Block(options:Object = null) {
 		super();
@@ -213,21 +215,25 @@ public class Block extends Sprite {
 	}
 
 	private function get xmin():Number {
+		if (_xminCached !== -1) return _xminCached;
 		var xmin:Number = 0;
 		if (_container) {
 			for (var i:int = 0, n:int = numElements; i < n; i++) {
 				xmin = Math.min(xmin, getElementAt(i).x);
 			}
 		}
+//		_xminCached = xmin;
 		return xmin;
 	}
 	private function get ymin():Number {
+		if (_yminCached !== -1) return _yminCached;
 		var ymin:Number = 0;
 		if (_container) {
 			for (var i:int = 0, n:int = numElements; i < n; i++) {
 				ymin = Math.min(ymin, getElementAt(i).y);
 			}
 		}
+//		_yminCached = ymin;
 		return ymin;
 	}
 	override public function get width():Number {
@@ -350,6 +356,8 @@ public class Block extends Sprite {
 	}
 
 	public function invalidateLayout():void {
+		_xminCached = -1;
+		_yminCached = -1;
 		if (!_dirty) {
 			_dirty = true;
 			setTimeout(maybeDoLayout, 0);
@@ -387,6 +395,7 @@ public class Block extends Sprite {
 	public function doLayout():void {
 		_dirty          = false;
 		var type:String = _layoutConfig["type"];
+		Utils.Begin("Block","doLayout",type);
 		//if (type !== "none") trace("doLayout "+this+" ["+x+", "+y+" "+width+"x"+height+"]");
 		switch (type) {
 			case "grid":
@@ -401,6 +410,7 @@ public class Block extends Sprite {
 				trace("Unknown layout config type ", type);
 				break;
 		}
+		Utils.End("Block","doLayout");
 		dispatchEvent(new Event(ON_LAYOUT, true, true));
 	}
 
