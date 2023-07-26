@@ -618,10 +618,14 @@ public class ExplorationEngine extends BaseContent {
 	}
 	private function generateAll():void {
 		clearNext();
-		for (var i:int = 0; i < NROADS; i++) {
+		var i:int, j:int;
+		for (i = 0; i < N; i++) {
+			flatList[i].unlink();
+		}
+		for (i = 0; i < NROADS; i++) {
 			var length:int = maxDepth <= 2 ? randIntIn(1, maxDepth) : randIntIn(2, maxDepth);
 			trace("Road " + i + " length " + length);
-			for (var j:int = length - 1; j >= 0; j--) {
+			for (j = length - 1; j >= 0; j--) {
 				generate(roads[i][j],
 						j == length - 1 ? 2
 								: j == 0 ? 0 : 1);

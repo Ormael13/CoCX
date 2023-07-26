@@ -151,6 +151,7 @@ public class ExplorationEntry {
 		isPlayerHere  = false;
 		revealLevel   = REVEAL_NOT;
 		reenter       = false;
+		unlink();
 	}
 	public function unlink():void {
 		nextNodes = [];
