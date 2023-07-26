@@ -466,6 +466,7 @@ public class BeeGirlScene extends BaseContent
 			player.addCurse("int", 0.5,2);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1); //Anal bee pregnancy!
 			player.buttChange(25, true);
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseFourHours);
 		}
 
@@ -768,6 +769,7 @@ public class BeeGirlScene extends BaseContent
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
+				explorer.stopExploring();
 				if (CoC.instance.inCombat)
 					cleanupAfterCombat(camp.returnToCampUseFourHours);
 				else doNext(camp.returnToCampUseFourHours);
@@ -802,6 +804,7 @@ public class BeeGirlScene extends BaseContent
 				outputText("In moments, her hands are covered with your usual level of cum, though this gets not much more than a nod of approval from the giver of your pleasure.  She gently sets you to the side of her and pulls the bottle from her lower lips and puts a cork on the bottle before setting it down on your stomach.  <i>\"Take thizzz after it hazzz had an hour to zzzet.\"</i> she tells you before picking up her bag and flying away.  Thanks to the after effects of her scent, you don’t really have a chance to react before you drift off to sleep for several hours.\n\n");
 				player.sexReward("no", "Dick");
 				dynStats("lib", 3, "cor", -2);
+				explorer.stopExploring();
 				inventory.takeItem(consumables.SPHONEY, camp.returnToCampUseFourHours);
 			}
 		}
@@ -839,6 +842,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("\"</i> she says handing you the bottle with a wink.  Then she wipes off some of the dried cum from her face, takes her bag, and flies off.  Just before she is out of sight she calls back to you, <i>\"I look forward to zzzeeing you again zzzoon!\"</i>  After cumming so many times it's no surprise that you wake up hours later, having drifted off to sleep.\n\n");
 			player.sexReward("no", "Dick");
 			dynStats("lib", 2, "sen", 2, "cor", -3);
+			explorer.stopExploring();
 			inventory.takeItem(consumables.SPHONEY, camp.returnToCampUseFourHours);
 		}
 

@@ -77,7 +77,7 @@ public function encounter():void {
 		outputText("The beast slaps you squarely on the ass as if to push you along. \"<i>Get the fuck out of here!</i>\" it screams. \"<i>Get lost, so I can hunt myself a REAL meal!!!</i>\"");
 		outputText("You walk away from the creature, which hides back in the brush. After you trek a bit, you wonder if what happened really DID happen...");
 		dynStats("lus", -5, "scale", false);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		return;
 	}
 	//Combat starter
@@ -90,7 +90,7 @@ public function encounter():void {
 	if (player.hasStatusEffect(StatusEffects.Infested))
 	{
 		outputText("It stops itself completely in a moment and twitches, as if sniffing the air, before turning around and disappearing into the underbrush.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		return;
 	}
 	if (player.cor > 50 - player.corruptionTolerance) {
@@ -246,7 +246,7 @@ private function futaTentacleEpilogue():void {
 		}
 		player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 		cleanupAfterCombat();
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function genderlessMemes():void {
@@ -267,7 +267,7 @@ private function futaTentacleEpilogue():void {
 			outputText("\n\nThe beast slaps you squarely on the ass as if to push you along. \"<i>Get the fuck out of here!</i>\" it screams.  \"<i>Get lost so I can hunt me a REAL meal!!!</i>\"  ");
 			outputText("You walk away from the creature, which hides back in the brush. After you trek a bit, you wonder if what happened really DID happen...");
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 	}
 
@@ -295,7 +295,7 @@ private function futaTentacleEpilogue():void {
 		monster.HP = 0;
 		if (player.HP == 0) player.HP++;
 		if (CoC.instance.inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+		else endEncounter();
 	}
 
 	private function centaurLoss():void {
@@ -394,7 +394,7 @@ private function futaTentacleEpilogue():void {
 			monster.HP = 0;
 			if (player.HP == 0) player.HP++;
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 		function scenePart2Fail(describeCock:Boolean = true):void {
 			// has vagina:
@@ -449,6 +449,7 @@ private function futaTentacleEpilogue():void {
 			dynStats("tou", 1, "lib", 1, "cor", 0.5);
 			player.addCurse("int", 0.5);
 			player.addCurse("sen", 1,2);
+			explorer.stopExploring();
 			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseTwoHours);
 		}
@@ -521,7 +522,7 @@ private function futaTentacleEpilogue():void {
 			monster.HP = 0;
 			if (player.HP == 0) player.HP++;
 			if (CoC.instance.inCombat) cleanupAfterCombat();
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 	}
 
@@ -637,7 +638,7 @@ internal function tentacleLossRape():void {
 		player.sexReward("no", "Dick");
 		if (CoC.instance.inCombat)
 			cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+		else endEncounter();
 	}
 	function vagScene2():void {
 		clearOutput();
@@ -692,7 +693,7 @@ internal function tentacleLossRape():void {
 		player.sexReward("cum", "Lips");
 		if (CoC.instance.inCombat)
 			cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+		else endEncounter();
 	}
 }
 
@@ -737,7 +738,7 @@ private function tentacleRapeContinuationForFemales():void {
 	if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 
 //Centaur v. Tentacle Monster: (display if pc is unsexed centaur)
@@ -804,7 +805,7 @@ private function centaurGenderlessRetardation():void {
 	}
 	player.takePhysDamage(5);
     if (CoC.instance.inCombat) cleanupAfterCombat();
-    else doNext(camp.returnToCampUseOneHour);
+    else endEncounter();
 }
 
 //Naga v. Tentacle Monster:
@@ -824,7 +825,7 @@ private function genderlessHilarityForNagaKenDolls():void {
 	outputText("\"<i>Fucking tourists.</i>\"  It slams its tentacles down in a brutal blow, knocking you out.");
 	player.takePhysDamage(15);
     if (CoC.instance.inCombat) cleanupAfterCombat();
-    else doNext(camp.returnToCampUseOneHour);
+    else endEncounter();
 }
 
 //Goo v. Tentacle Monster:
@@ -853,7 +854,7 @@ private function tentacularGenderGooTimes():void {
 
 	outputText("It slams its tentacles down in a brutal blow, knocking you out.");
     if (CoC.instance.inCombat) cleanupAfterCombat();
-    else doNext(camp.returnToCampUseOneHour);
+    else endEncounter();
 }
 public function choiceofaction():void {
 	menu();
