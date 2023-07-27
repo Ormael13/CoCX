@@ -591,14 +591,14 @@ use namespace CoC;
 					bd.add("Prev", function ():void {
 						playerPage--;
 						show();
-					}).hint("Prev inventory page").disableIf(playerPage == 0)
+					}).hint("Prev inventory page").disableIf(playerPage == 0).icon("Left")
 					bd.add("");
 					bd.add("");
 					bd.add("");
 					bd.add("Next", function ():void {
 						playerPage++;
 						show();
-					}).hint("Next inventory page").disableIf(playerPage == playerPageMax-1)
+					}).hint("Next inventory page").disableIf(playerPage == playerPageMax-1).icon("Right")
 				}
 				
 				// Spacer

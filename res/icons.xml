@@ -145,6 +145,11 @@
             <icon>BH.Pill</icon>
             <icon>SPPearl</icon>
             <icon>E P Bot.</icon>
+            <icon>MutagenPill_1</icon>
+            <icon>MutagenPill_2</icon>
+            <icon>MutagenPill_3</icon>
+            <icon>MutagenPill_4</icon>
+            <icon>MutagenPill_5</icon>
         </row>
         <row><!-- Row 5 - non-consumable misc items -->
             <icon>GenericUnknownItem</icon>

@@ -194,6 +194,9 @@ public class ItemType extends ItemConstants
 		{
 			return _longName;
 		}
+		public function get longNameBase():String {
+			return longName.replace(/^(the|a|an)\s+/i,'');
+		}
 
 		/**
 		 * Item base price

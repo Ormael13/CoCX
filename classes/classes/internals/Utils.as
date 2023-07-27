@@ -162,7 +162,7 @@ public class Utils extends Object
 					}
 				}
 			} else {
-				for (var k:String in o) r.push(k);
+				for (var k:* in o) r.push(k);
 			}
 			return r;
 		}
@@ -173,7 +173,17 @@ public class Utils extends Object
 		public static function values(o:Object, reflect:Boolean = false):Array {
 			var r:Array = [];
 			var ks:Array = keys(o, reflect);
-			for each(var k:String in ks) r.push(o[k]);
+			for each(var k:* in ks) r.push(o[k]);
+			return r;
+		}
+		/**
+		 * Mimics JS Object.entries
+		 * For non-dynamic objects and/or getting all defined properties, set reflect = true
+		 */
+		public static function objectEntries(o:Object, reflect:Boolean = false):/*Array*/Array {
+			var r:Array = [];
+			var ks:Array = keys(o, reflect);
+			for each(var k:* in ks) r.push([k,o[k]]);
 			return r;
 		}
 		/**
@@ -605,7 +615,7 @@ public class Utils extends Object
 		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
 		 */
 		public static function weightedRandom(...pairs):* {
-			if (pairs.length == 0) {
+			if (pairs.length == 0 || !pairs[0]) {
 				return null;
 			}
 			if (pairs.length == 1) {
@@ -660,6 +670,26 @@ public class Utils extends Object
 				if (roll <= 0) break;
 			}
 			return valueKey ? item[valueKey] : item;
+		}
+		/**
+		 * Normalize array, making sum of its elements = norm
+		 * @param array
+		 * @param norm
+		 * @param key If non-empty, then source array is array of tuples/objects. Normalize their `key` properties
+		 */
+		public static function normalizeArray(array:Array,norm:Number=1,key:String=""):Array {
+			var sum:Number = 0;
+			for (var i:int = 0; i <array.length; i++) {
+				if (key) sum += array[i][key];
+				else sum += array[i];
+			}
+			if (sum != 0) {
+				for (i = 0; i < array.length; i++) {
+					if (key) array[i][key] *= norm/sum;
+					else array[i] *= norm/sum;
+				}
+			}
+			return array;
 		}
 
 		/**

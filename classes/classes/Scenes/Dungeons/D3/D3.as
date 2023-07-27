@@ -3,7 +3,7 @@ package classes.Scenes.Dungeons.D3
 import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Consumables.SimpleConsumable;
+import classes.Items.Consumable;
 import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Scenes.SceneLib;
@@ -504,7 +504,7 @@ import classes.room;
 		
 		private function takeEgg(eggMask:int):void
 		{
-			var item:SimpleConsumable;
+			var item:Consumable;
 			
 			if (eggMask == BLACK) item = consumables.L_BLKEG;
 			if (eggMask == BLUE) item = consumables.L_BLUEG;

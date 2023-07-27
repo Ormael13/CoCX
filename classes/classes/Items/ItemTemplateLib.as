@@ -1,5 +1,6 @@
 package classes.Items {
 import classes.ItemTemplate;
+import classes.Items.Alchemy.MutagenPill;
 import classes.Items.Consumables.HairDye;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicRing;
@@ -15,12 +16,24 @@ public class ItemTemplateLib {
 		params: [
 			{name: "color", type: "text", value: "White"},
 			/** Affects price */
-			{name: "rarity", type: "number", value: 1, min: 1, max: 4},
+			{name: "rarity", type: "number", value: 1, min: 1, max: 4}
 		]
 	});
 	
 	public function createHairDye(color:String, rarity:int):HairDye {
 		return THairDye.createItem({color: color, rarity: rarity}) as HairDye;
+	}
+	
+	public const TMutagenPill:ItemTemplate = mk("MutagenPill", "Mutagen Pill", MutagenPill, {
+		category: "consumable",
+		params: [
+			{name:"tf", type:"text", value:"TF_1_1"},
+			{name:"power", type:"number",value:1, min:1, max:5}
+		]
+	})
+	
+	public function createMutagenPill(substance:int, essence:int, power:int):MutagenPill {
+		return TMutagenPill.createItem({tf:"TF_"+substance+"_"+essence,p:power}) as MutagenPill;
 	}
 	
 	// Generic dynamic items

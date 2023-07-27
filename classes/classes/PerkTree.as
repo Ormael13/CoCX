@@ -171,17 +171,14 @@ public class PerkTree extends BaseContent {
 				
 				unlocks.sortOn(["distance","id"], Array.NUMERIC);
 				if (CoC_Settings.debugBuild) {
-					trace(job.id+" perks: ("+unlocks.length+")");
+					trace(job.id+" perks ("+unlocks.length+")");
+					/*
 					for each (perk in unlocks) {
 						trace("    "+perk.distance+" "+perk.id);
 					}
+					 */
 				}
 				rootUnlocks[job.id] = unlocks;
-			}
-		}
-		if (CoC_Settings.debugBuild) {
-			for each (job in PerkLib.ALL_JOBS) {
-				trace(job.id+": "+getJobUnlocks(job).length+" perks");
 			}
 		}
 	}
