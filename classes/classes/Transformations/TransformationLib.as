@@ -791,22 +791,28 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 //======================================================================================================================
     public var skin: SkinTransformations = new SkinTransformations();
     public function SkinColor(colors: /*String*/ Array): Transformation { return skin.SkinColor(colors); }
-    public const SkinPlain: Transformation = skin.SkinPlain.registerTfMultiple(AS_SKIN, AE_HUMAN, AE_KITSUNE);
-    public const SkinSlippery: Transformation = skin.SkinSlippery.registerTfMultiple(AS_SKIN, AE_GOO);
-    public const SkinTransparent: Transformation = skin.SkinTransparent.registerTfMultiple(AS_SKIN, AE_GHOST);
+	public const SkinPlain:Transformation = skin.SkinPlain.registerTfMultiple(AS_SKIN,
+			AE_HUMAN, AE_ELF, AE_FAIRY, AE_GAZER, AE_GOBLIN, AE_GREMLIN, AE_IMP, AE_KITSUNE, AE_OOMUKADE, AE_ORC, AE_ORCA);
+    public const SkinSlippery: Transformation = skin.SkinSlippery.registerTfMultiple(AS_SKIN,
+			AE_GOO);
+    public const SkinTransparent: Transformation = skin.SkinTransparent.registerTfMultiple(AS_SKIN,
+			AE_POLTERGEIST);
     /**
      * @param options = {color/colors,color2/colors2,pattern,adj,desc}
      */
     public function SkinFur(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 					{ return skin.SkinFur(coverage, options); }
     public function SkinFurGradual(coverage:int = Skin.COVERAGE_COMPLETE, options:* = null):Transformation 				{ return skin.SkinFurGradual(coverage, options); }
 	public const SkinFurGradualToFull:Transformation = SkinFurGradual().registerTfMultiple(AS_SKIN,
-			AE_CAT, AE_FOX, AE_WOLF);
+			AE_AZAZEL, AE_BEAR, AE_BUNNY, AE_CAT, AE_CERBERUS, AE_COW, AE_DEER, AE_DISPLACER_BEAST, AE_ECHIDNA, AE_FERRET, AE_FOX, AE_HELLCAT, AE_HORSE, AE_KAMAITACHI, AE_KANGAROO, AE_MELKIE, AE_MOUSE, AE_NEKOMATA, AE_PIG, AE_RACCOON, AE_SQUIRREL, AE_RED_PANDA, AE_SPHINX, AE_WENDIGO, AE_WEREWOLF, AE_WOLF, AE_YETI);
     public function SkinScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 				{ return skin.SkinScales(coverage, options); }
-	public const SkinScalesToFull:Transformation = SkinScales().registerTfMultiple(AS_SKIN, AE_SNAKE, AE_LIZARD);
+	public const SkinScalesToFull:Transformation = SkinScales().registerTfMultiple(AS_SKIN,
+			AE_APOPHIS, AE_COUATL, AE_CAVE_WYRM, AE_GORGON, AE_HYDRA, AE_LIZARD, AE_SNAKE, AE_PHOENIX,AE_SALAMANDER);
     public function SkinDragonScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 		{ return skin.SkinDragonScales(coverage, options); }
-	public const SkinDragonScalesToFull:Transformation = SkinDragonScales().registerTfMultiple(AS_SKIN, AE_DRAGON);
+	public const SkinDragonScalesToFull:Transformation = SkinDragonScales().registerTfMultiple(AS_SKIN,
+			AE_DRAGON, AE_FAERIE_DRAGON, AE_FROST_WYRM, AE_JABBERWOCKY, AE_KIRIN);
     public function SkinChitin(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 				{ return skin.SkinChitin(coverage, options); }
-	public const SkinChitinToFull:Transformation = SkinChitin().registerTfMultiple(AS_SKIN, AE_ANT, AE_BEE, AE_MANTIS, AE_SPIDER);
+	public const SkinChitinToFull:Transformation = SkinChitin().registerTfMultiple(AS_SKIN,
+			AE_ANT, AE_BEE, AE_MANTIS, AE_SPIDER, AE_SCORPION, AE_ATLACH_NACHA);
     public function SkinAquaScales(coverage: int = Skin.COVERAGE_HIGH, options: * = null): Transformation 				{ return skin.SkinAquaScales(coverage, options); }
 	public const SkinAquaScalesToFull:Transformation = SkinAquaScales().registerTfMultiple(AS_SKIN, AE_SHARK, AE_SIREN);
 	public function SkinBark(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation					{ return skin.SkinBark(coverage, options); }
@@ -825,7 +831,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 //   ███████ ██   ██ ██ ██   ████ 		██		 ██   ██    ██       ██    ███████ ██   ██ ██   ████                  ==
 //                                                                                                                    ==
 //======================================================================================================================
-    public const SkinPatternNone: Transformation 				= skin.SkinPatternNone.registerTf(AS_SKIN_PATTERN, AE_REMOVE);
+    public const SkinPatternNone: Transformation 				= skin.SkinPatternNone.registerTfMultiple(AS_SKIN_PATTERN, AE_REMOVE, AE_HUMAN);
     public const SkinPatternOrc: Transformation 				= skin.SkinPatternOrc.registerTf(AS_SKIN_PATTERN, AE_ORC);
     public const SkinPatternRaiju: Transformation 				= skin.SkinPatternRaiju.registerTf(AS_SKIN_PATTERN, AE_RAIJU);
     public const SkinPatternOni: Transformation 				= skin.SkinPatternOni.registerTf(AS_SKIN_PATTERN, AE_ONI);

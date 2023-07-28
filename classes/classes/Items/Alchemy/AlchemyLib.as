@@ -635,6 +635,18 @@ public class AlchemyLib extends BaseContent {
 		short: "Yuki",
 		name : "Yuki-onna"
 	});
+	public static const AE_LEVIATHAN:int       = EnumValue.add(Essences, 205, "LEVIATHAN", {
+		short: "Levi",
+		name : "Leviathan"
+	});
+	public static const AE_TROLL:int           = EnumValue.add(Essences, 206, "TROLL", {
+		short: "Troll",
+		name : "Troll"
+	});
+	public static const AE_SATYR:int           = EnumValue.add(Essences, 207, "SATYR", {
+		short: "Satyr",
+		name : "Satyr"
+	});
 	
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean=true):Array {
 		var result:Array = [
@@ -644,6 +656,24 @@ public class AlchemyLib extends BaseContent {
 				[0.25, AE_REMOVE],
 		];
 		if (withHuman) result.push([2, AE_HUMAN]);
+		return result;
+	}
+	
+	public static function MULTIRACE_ESSENCE_DROP_TABLE(...essenceTypes:/*int*/Array):Array {
+		var result:Array = [];
+		for each (var et:int in essenceTypes) {
+			// allow duplicate types to increase the chances
+			// ex. AE_KITSUNE, AE_KITSUNE, AE_FOX, AE_HUMAN
+			// => [[5, AE_KITSUNE], [2.5, AE_FOX], [2.5, AE_HUMAN]]
+			if (result.length > 0 && result[result.length-1][1] == et) {
+				result[result.length-1][0] += 10/essenceTypes.length;
+			} else {
+				result.push([10 / essenceTypes.length, et]);
+			}
+		}
+		result.push([1, AE_GROW],
+				[0.75, AE_SHRINK],
+				[0.25, AE_REMOVE]);
 		return result;
 	}
 	

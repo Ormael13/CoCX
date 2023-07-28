@@ -11,6 +11,7 @@ import classes.BodyParts.Tail;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 import classes.StatusEffects;
@@ -20,6 +21,10 @@ public class Centaurinum extends Consumable {
 	public function Centaurinum() {
 		super("Centari", "Centari", "a vial of Centaurinum", 20, "This is a long flared vial with a small label that reads, \"<i>Centaurinum</i>\".  It is likely this potion is tied to centaurs in some way.");
 		withTag(ItemTags.U_TF);
+		refineableInto(
+				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+				AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_HORSE, true)
+		)
 	}
 	public override function useItem():Boolean {
 		var changes:Number = 0;

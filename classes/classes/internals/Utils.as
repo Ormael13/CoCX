@@ -195,6 +195,19 @@ public class Utils extends Object
 		}
 		
 		/**
+		 * Concatenate into single array.
+		 *
+		 * If only 1 argument provider, concatenate its contents:
+		 * `concat(A, B, C) === concat([A, B, C)`
+		 */
+		public static function concat(...arrays:/*Array*/Array):Array {
+			if (arrays.length == 1) return concat.apply(null, arrays);
+			var result:Array = [];
+			for each (var array:Array in arrays) result = result.concat(array);
+			return result;
+		}
+		
+		/**
 		 * Returns flattened array with elements from all sub-arrays in a single list.
 		 */
 		public static function flatten(src:Array, dst:Array=null):Array {

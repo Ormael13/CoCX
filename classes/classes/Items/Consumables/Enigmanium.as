@@ -15,6 +15,7 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 import classes.Races;
@@ -25,6 +26,10 @@ public class Enigmanium extends Consumable {
     public function Enigmanium() {
       super("Enigmanium", "Enigmanium", "a vial of Enigmanium", 40, "This strange brew crafted by Evangeline combines harpy, cat, human and centaur traits. Supposedly it could allow you to become a sphinx.");
       withTag(ItemTags.U_TF);
+      refineableInto(
+              AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+              AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(AlchemyLib.AE_SPHINX, AlchemyLib.AE_CAT)
+      )
     }
     public override function useItem(): Boolean {
       var choice: int;

@@ -1,6 +1,7 @@
 package classes.Items.Consumables
 {
 import classes.Items.*;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Scenes.SceneLib;
 
 /**
@@ -14,6 +15,10 @@ import classes.Scenes.SceneLib;
 		{
 			super("SatyrWn", "SatyrWine", "a bottle of satyr wine", 20, "A dark bottle with a brilliant red liquid sloshing around inside. On the label there is a picture of a satyr playing pipes.");
 			withTag(ItemTags.U_TF);
+			refineableInto(
+					AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+					AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(AlchemyLib.AE_SATYR, AlchemyLib.AE_GOAT)
+			)
 		}
 		
 		override public function useItem():Boolean {

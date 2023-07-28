@@ -104,7 +104,7 @@ public class MutagenPillCrafting extends BaseContent {
 		outputText("</ul>");
 		if (furnaceStones == stoneLimit()) {
 			outputText("\nYou can't fit more spirit stones in the furnace!");
-			if (silly()) outputText(" The pile emits an eerie blue glow and you hear a periodic clicking noise.");
+			if (silly()) outputText(" The pile emits an eerie blue glow and you hear a chaotic, intermittent clicking noise.");
 		}
 		
 		// TODO @aimozg alchemy skill

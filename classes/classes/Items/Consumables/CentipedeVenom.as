@@ -9,6 +9,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.CoC;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 
@@ -16,6 +17,13 @@ public class CentipedeVenom extends Consumable {
 	public function CentipedeVenom() {
 		super("C.Venom", "C.Venom", "a vial of centipede venom", 50, "A small thin vial filled with a clear liquid produced by centipedes. If consumed, it may have a strange effect on you.");
 		withTag(ItemTags.U_TF);
+		refineableInto(
+				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(
+						AlchemyLib.AE_CENTIPEDE,
+						AlchemyLib.AE_OOMUKADE
+				)
+		)
 	}
 
 	override public function useItem():Boolean {
