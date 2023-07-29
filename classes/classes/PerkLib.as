@@ -5512,7 +5512,7 @@ public class PerkLib
                     .requireLevel(6);
             Tactician.requireInt(50)
                     .requireLevel(6);
-            Channeling.requirePerks(Spellpower, Mage)
+            Channeling.requirePerk(Mage)
                     .requireInt(60)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.spellCount() > 0;

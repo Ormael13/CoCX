@@ -365,7 +365,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const B_GOSSR: Consumable = mk("B.Gossr", "B.Gossr", "a bundle of black, gossamer webbing", 6, "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?", curry(m.sweetGossamer, 1), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_DRIDER, AE_SPIDER)
+						MULTIRACE_ESSENCE_DROP_TABLE(AE_DRIDER, AE_SPIDER)
 				);
 		public const BAYRLEA: Consumable = mk("BayrLea", "Bayr leaf", "a Bayr leaf", 6, "This small leaf shaped like a bear paw can be made into a tea or used as a seasoning.", m.bayrleaf, ItemTags.U_TF)
 				.refineableInto(

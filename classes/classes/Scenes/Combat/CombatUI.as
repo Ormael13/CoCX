@@ -218,14 +218,8 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
 		else combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) {
-			if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
-				if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
-				else btnPSpecials.disable("There is no way you could reach an opponent in the air with p. specials.");
-			}
-			else {
-				if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
-				else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
-			}
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		}
 		// Submenu - Magical Specials
 		combat.mspecials.buildMenu(magspButtons);

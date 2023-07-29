@@ -81,9 +81,9 @@ public class Changelog extends BaseContent
 			outputText("-Soul Sense is now an exploration ability that reveals 1 NPC for 100 SF & Soul Sense can spawn extra encounters. (aimozg) It's change only for npc's founded previously during exploring areas/general explore. (orm)\n");
 			outputText("-Physical and Magical Soulskill Effect Multipliers would now not add but multiply Soulskill Effect Multiplier value.\n");
 			outputText("-Reaching steps in cultivation from Soul Apprentice to Soul Emperor would increase Soulskill Effect Multiplier by 10%/20%/40%/60% per major steps.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Some small tweaking to p.specials in relation to pc or enemy/ies flying letting some special been used from ground or when flying.\n");
+			outputText("-HXD golem merchant sells basic alchemical equipment. (aimozg)\n");
+			outputText("-Can refine consumable items into alchemical substances, essences, body parts, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. (fellow daoist aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -97,6 +97,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -163,9 +167,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -190,7 +192,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
