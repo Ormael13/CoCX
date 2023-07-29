@@ -193,6 +193,7 @@ public class AlchemyExtraction extends BaseContent {
 				failures++;
 			}
 		}
+		Crafting.gooProduced += failures;
 		if (successes == 0) {
 			outputText("Unfortunately, the refining process resulted in a <b>complete failure</b>!\n");
 			outputText("You've 'refined' " +

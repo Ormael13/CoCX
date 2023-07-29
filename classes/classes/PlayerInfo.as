@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EtnaDaughterScene;
@@ -1474,6 +1475,7 @@ public class PlayerInfo extends BaseContent {
 		masteryStats += "\n";
 		masteryStats += player.alchemySkillStat.describe(true);
 		masteryStats += "\n";
+		if (Crafting.gooProduced > 0) masteryStats += "<i>Stinky goo produced:</i> "+Crafting.gooProduced+"\n";
 		if (masteryStats != "")
 			outputText("\n<b><u>Mastery</u></b>\n" + masteryStats);
 		// End Mastery Stats

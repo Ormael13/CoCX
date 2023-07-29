@@ -149,6 +149,8 @@ public class Crafting extends BaseContent implements SaveableState
 		public static var furnaceLevel:int                = 0;
 		// Times used Xianxia MC powers
 		public static var xmcLuck:int = 0;
+		// Amount of 'stinky goo' produced when refining ingredients
+		public static var gooProduced:int = 0;
 		
 		// Map of substanceId -> count
 		public static var substanceStock:Object = {};
@@ -249,6 +251,7 @@ public class Crafting extends BaseContent implements SaveableState
 			alembicCatalyst = null;
 			furnaceLevel = 0;
 			xmcLuck = 0;
+			gooProduced = 0;
 			substanceStock = {};
 			essenceStock = {};
 			residueStock = {};
@@ -339,6 +342,7 @@ public class Crafting extends BaseContent implements SaveableState
 				"BagSlot40Cap": BagSlot40Cap,
 				
 				"xmcLuck": xmcLuck,
+				"gooProduced": gooProduced,
 				"alembicLevel": alembicLevel,
 				"alembicCatalyst": alembicCatalyst?alembicCatalyst.id:null,
 				"furnaceLevel": furnaceLevel,
@@ -433,6 +437,7 @@ public class Crafting extends BaseContent implements SaveableState
 				BagSlot40Cap = o["BagSlot40Cap"];
 				
 				xmcLuck = intOr(o["xmcLuck"], 0);
+				gooProduced = intOr(o["gooProduced"], 0);
 				alembicLevel = intOr(o["alembicLevel"], 0);
 				alembicCatalyst = ItemType.lookupItem(stringOr(o["alembicCatalyst"], "")) as AlembicCatalyst;
 				furnaceLevel = intOr(o["furnaceLevel"], 0);
