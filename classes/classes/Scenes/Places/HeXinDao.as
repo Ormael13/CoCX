@@ -8,16 +8,16 @@
 package classes.Scenes.Places {
 
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Crafting;
 import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
-import classes.Scenes.NPCs.ChiChiFollower;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.SceneLib;
 
@@ -152,7 +152,7 @@ public class HeXinDao extends BaseContent
         outputText("\n\nAt the West end of He'Xin'Dao you see one of the biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses.
         outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each.\n\n");
 		outputText("At first glance these people seem random. Some wield bows, others daggers, a few with no weapons at all... But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention.\n\n");
-		outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n"); 
+		outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n");
 		//outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
         riverislandMenuShow();
     }
@@ -204,7 +204,7 @@ public class HeXinDao extends BaseContent
 		else addButtonDisabled(2, "3rd Stall", "You need to be at least a Soul Apprentice to check those items.");
         if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "4th Stall", TierIII).hint("Check out the fourth stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
 		else addButtonDisabled(3, "4th Stall", "You need to be at least a Soul Sprite to check those items.");
-
+		addButton(5, "Alch.Tools", alchemyTools).hint("Check out alchemy equipment.");
 
         var hasSoulCultivator:Boolean = player.hasPerk(PerkLib.JobSoulCultivator);
         var hasSoulPersonage:Boolean = player.hasPerk(PerkLib.SoulPersonage);
@@ -281,6 +281,51 @@ public class HeXinDao extends BaseContent
 
         statScreenRefresh();
     }
+	private function alchemyTools():void {
+		clearOutput();
+		outputText("You check out the stall with the alchemic equipment. It seems that only most basic tools are present - if you need higher quality devies, you need to look somewhere else.");
+		outputText("\n\n");
+		outputText("<b>You have ")
+		if (Crafting.alembicLevel == 0 && Crafting.furnaceLevel == 0) {
+			outputText("no alchemical equipment in your camp.</b>")
+		} else {
+			if (Crafting.alembicLevel > 0) {
+				outputText(SceneLib.crafting.alchemyExtraction.alembicName());
+				if (Crafting.furnaceLevel > 0) outputText(" and ");
+			}
+			if (Crafting.furnaceLevel > 0) {
+				outputText(SceneLib.crafting.mutagenPillCrafting.furnaceName());
+			}
+			outputText(" in your camp.</b>")
+		}
+		
+		function buyAlembic(tier:int, priceGems:int):void {
+			Crafting.alembicLevel = tier;
+			player.gems -= priceGems;
+			outputText("\n\n<b>"+capitalizeFirstLetter(Crafting.ALEMBIC_LEVELS[tier].name)+" purchased!</b>");
+			statScreenRefresh();
+			doNext(alchemyTools);
+		}
+		function buyFurnace(tier:int, priceGems:int):void {
+			Crafting.furnaceLevel = tier;
+			player.gems -= priceGems;
+			outputText("\n\n<b>"+capitalizeFirstLetter(Crafting.FURNACE_LEVELS[tier].name)+" purchased!</b>");
+			statScreenRefresh();
+			doNext(alchemyTools);
+		}
+		
+		menu();
+		button(0).show("Alembic I", curry(buyAlembic, Crafting.ALEMBIC_LEVEL_SIMPLE, Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value))
+				 .hint("Buy a simple alembic to refine substances from ingredients.\n\nCost: "+Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value+" gems.")
+				.disableIf(player.gems < Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value, "++\n\n<b>Not enough gems!</b>")
+				.disableIf(Crafting.alembicLevel >= Crafting.ALEMBIC_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>")
+		;
+		button(1).show("Furnace I", curry(buyFurnace, Crafting.FURNACE_LEVEL_SIMPLE, Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value))
+				 .hint("Buy a simple alchemic furnace to combine substances into pills.\n\nCost: "+Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value+" gems.")
+				.disableIf(player.gems < Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value)
+				 .disableIf(Crafting.furnaceLevel >= Crafting.FURNACE_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>");
+		button(14).show("Back", golemmerchant);
+	}
     private function debitItem1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String):void{
         var value:int = itype.value * priceRate;
         if (player.gems < value) {
@@ -1369,7 +1414,7 @@ public function soularena():void {
 		outputText("\"<i>Today we shall discuss tribulations. It's something that each of us must face in their life at least once. If you feel you're unable to pass even the most basic of tribulations, it may been a mistake to even start. Not all are cut out for the cultivator's path.</i>\" She sits comfortably behind the desk, tails swishing as she looks out on her students.\n\n");
 		outputText("\"<i>Each time us cultivators face a trial, the objective is simple. The world around you will hold nothing back, and you must not either. To pass is to live. To fail...is to die.</i>\" A few students' eyes widen, and several more murmur, seemingly shocked. \"<i>Please, students. Nothing in this world is risk-free.</i>\" She sighs. \"<i>While it is a risk, one could easily argue that every day on Mareth is its own trial, nowadays. And when a cultivator passes, they will be rewarded, not only with possibility to progress further on the endless road, but maybe even gain something else, something...special.</i>\" She looks over the gathered before continuing.\n\n");
 		outputText("\"<i>However, survival isn't always your only focus in such a trial. While risky, it'\s sometimes possible to fight back, rather than simply surviving the trial. While it can leave you vulnerable, should you fail, a cultivator will often gain more by excelling at a trial, defeating it outright, as opposed to simply surviving.</i>\" At that moment some lizan interrupts, raising his hand.\n\n");
-		outputText("\"<i> Ms. Shigure, are you speaking from experience? Or is this word of mouth from other cultivators?</i>\"\n\n"); 
+		outputText("\"<i> Ms. Shigure, are you speaking from experience? Or is this word of mouth from other cultivators?</i>\"\n\n");
 		outputText("\"<i>Hmmmm...</i>\" she pauses, giving the Lizan a favorable smile. \"<i>Yes, I speak from experience. While my first tribulation, I simply sought to live, my subsequent trials were...easier for me. When I realized this, I took a more aggressive approach, dispelling the clouds with my own power. </i>\" She continues the lecture, describing what happened during her tribulations, and those of other cultivators. From there, she moves on to practical matters,  describing the tribulation's lightning, and how a cultivator could avoid or defend against such attacks.\n\n");
 		outputText("\"<i>When the time will come each of you should feel the approaching tribulation. Some feel it in their Dantain, others have noted a strong metallic smell in the air. Luckily for us, it takes time to build up a proper storm... well beside some rare, extreme, cases, it would take a few hours, at least. So be sure to find a good, open place to face it. Ahh and be careful to not involve others in your trial. Tribulations tend to get much harder if more than one cultivator faces it. Pets or minions should be fine, but trials are unfortunately not group projects.</i>\"\n\n");
 		outputText("The lecture continues for the next hour or so, as your busty teacher speaks in detail about her own tribulations, also using the words and stories from other cultivators. <i>While my second trial was like the first, a heavenly storm, Elder Namaste had a surge of water rise, nearly drowning him. Elder Lemouse, on the other hand, had a volcano erupt, spreading sacred ash around that slowed his movements, while also raining droplets of magma. </i>\n\n");
@@ -1378,7 +1423,7 @@ public function soularena():void {
 		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseTwoHours);
 	}
-    
+ 
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 20;
@@ -1555,7 +1600,7 @@ public function soularena():void {
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES]++;
 		doNext(golemancershopRepeat);
-	}	
+	}
 	private function buyItem(odd:ItemType):void {
 		clearOutput();
 		var cost:int = odd.value / 5;

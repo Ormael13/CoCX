@@ -504,13 +504,16 @@ public class CoCButton extends Block {
 	}
 	/**
 	 * Disable if condition is true, optionally change tooltip and/or label. Does not un-hide button.
+	 * If tooltipText starts with '++', the text after '++' will be appended to existing hint.
 	 * @return this
 	 */
 	public function disableIf(condition:Boolean, toolTipText:String=null, labelText:String=null):CoCButton {
 		if (condition) {
 			enabled = false;
-			if (toolTipText !== null)
-				this.toolTipText = Parser.recursiveParser(toolTipText);
+			if (toolTipText !== null) {
+				if (toolTipText.indexOf("++")==0) this.toolTipText += Parser.recursiveParser(toolTipText).slice(2);
+				else this.toolTipText = Parser.recursiveParser(toolTipText);
+			}
 			if (labelText !== null)
 				this.labelText = labelText;
 		}
