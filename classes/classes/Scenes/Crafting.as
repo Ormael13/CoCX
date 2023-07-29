@@ -6,10 +6,59 @@ import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Alchemy.AlembicCatalyst;
 import classes.Scenes.Crafting.AlchemyExtraction;
 import classes.Scenes.Crafting.MutagenPillCrafting;
+import classes.internals.EnumValue;
 import classes.internals.SaveableState;
 
 public class Crafting extends BaseContent implements SaveableState
 	{
+		public static const ALEMBIC_LEVELS:/*EnumValue*/Array = [];
+		public static const ALEMBIC_LEVEL_NONE:int            = EnumValue.add(ALEMBIC_LEVELS, 0, "NONE", {
+			name         : "no alembic",
+			successChance: 0,
+			value        : 0
+		});
+		public static const ALEMBIC_LEVEL_SIMPLE:int          = EnumValue.add(ALEMBIC_LEVELS, 1, "SIMPLE", {
+			name         : "simple alembic",
+			successChance: 25,
+			value        : 250
+		});
+		public static const ALEMBIC_LEVEL_GOOD:int            = EnumValue.add(ALEMBIC_LEVELS, 2, "GOOD", {
+			name         : "good alembic",
+			successChance: 50,
+			value        : 2500
+		});
+		public static const ALEMBIC_LEVEL_ANCIENT:int         = EnumValue.add(ALEMBIC_LEVELS, 3, "ANCIENT", {
+			name         : "ancient alembic",
+			successChance: 75,
+			value        : 25000
+		});
+		
+		public static const FURNACE_LEVELS:/*EnumValue*/Array = [];
+		public static const FURNACE_LEVEL_NONE:int            = EnumValue.add(FURNACE_LEVELS, 0, "NONE", {
+			name         : "no pill furnace",
+			refineChances: [100, 0, 0, 0, 0, 0], // see AlchemyLib.PP_xxx constants
+			stoneLimit   : 0,
+			value        : 0
+		});
+		public static const FURNACE_LEVEL_SIMPLE:int          = EnumValue.add(FURNACE_LEVELS, 1, "SIMPLE", {
+			name         : "simple pill furnace",
+			refineChances: [0, 40, 30, 20, 10, 0],// see AlchemyLib.PP_xxx constants
+			stoneLimit   : 2,
+			value        : 250
+		});
+		public static const FURNACE_LEVEL_GOOD:int            = EnumValue.add(FURNACE_LEVELS, 2, "GOOD", {
+			name         : "good pill furnace",
+			refineChances: [0, 20, 30, 30, 20, 0],
+			stoneLimit   : 4,
+			value        : 2500
+		});
+		public static const FURNACE_LEVEL_ANCIENT:int         = EnumValue.add(FURNACE_LEVELS, 3, "ANCIENT", {
+			name         : "ancient pill furnace",
+			refineChances: [0, 10, 20, 30, 40, 0],
+			stoneLimit   : 8,
+			value        : 25000
+		});
+		
 		// State
 		
 		public static var BagSlot01:Number;
@@ -781,7 +830,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			button(4).show("Stock", checkStock)
 					 .hint("Check your stock of crafting materials.");
 			button(12).show("Bag", accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(BagSlot01Cap <= 0, "You'll need a bag to do that.");
-			if(CoC_Settings.debugBuild) {
+			if(debug) {
 				button(13).show("Cheat", craftingCheats);
 			}
 			button(14).show("Back", playerMenu).icon("Back");

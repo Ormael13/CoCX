@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Crafting;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
@@ -309,6 +311,9 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Will you take him up on an offer or leave?");
 		//In camp has no time passage if left.
 		menu();
+		// [ Shop   ] [ Purify ] [        ] [Make Dye] [Debimbo ]
+		// [ MindUp ] [AlchThun] [        ] [        ] [        ]
+		// [AlchTool] [Lethicit] [ Flirt  ] [ Rares  ] [ Leave  ]
 		//Shop sub-menu
 		if (dyes || philters || reductos)
 			addButton(0, "Shop", rathazulShopMenu).hint("Check Rathazul's wares.");
@@ -326,6 +331,8 @@ private function rathazulWorkOffer():Boolean {
 			if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(7, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
 			else addButtonDisabled(7, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
 		}
+		addButton(10, "Alch.Tools", askForTools).hint("Ask Rathazul to lend his alchemical tools, so you can dabble in alchemy yourself")
+										   .disableIf(Crafting.alembicLevel >= Crafting.ALEMBIC_LEVEL_SIMPLE, "You already have an alembic!");
 		if (lethiciteDefense != null) addButton(11, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(12, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
 		addButton(13, "Rare offers", oneTimeOptions).hint("All the one time options.");
@@ -335,6 +342,45 @@ private function rathazulWorkOffer():Boolean {
 	}
 	return false;
 }
+	
+	private function askForTools():void {
+		clearOutput();
+		
+		outputText("<i>(todo writeme)</i> ");
+		outputText("Having an interest in doing alchemy yourself, you ask Rathazul if you can borrow some of his tools. ");
+		// high int or HistoryAlchemist: free
+		// medium int: 50 gems
+		// low int:
+		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) {
+			outputText("<i>(todo writeme: free if History:Alchemist)</i> ");
+			outputText("You tell him your history as an alchemist's assistant back in Ingnam. ");
+			doNext(curry(getAlembic, 0));
+		} else if (player.inte >= 25) {
+			var cost:int = Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value;
+			outputText("<i>(todo writeme: int >= 25, can buy)</i> ");
+			menu();
+			addButton(0,"Buy", curry(getAlembic, cost))
+					.hint("Buy alembic for "+cost+" gems.")
+					.disableIf(player.gems < cost, "You need "+cost+" gems");
+			addButton(1, "Cancel", rathazulWorkOffer);
+		} else {
+			outputText("<i>(todo writeme: int < 25, can't buy)</i> ");
+			if (player.inte < 16 && silly()) outputText("You have been fascinated with alchemy ever since you saw mixing blue and yellow paint into green one. But the village alchemists never allowed you to perform such sciences. Envious of your talent, they kept making excuses about <i>'keeping braindead brutes away from fragile equipment'</i>. You enthusiastically tell this story to Rathazul, expecting understanding from a fellow alchemist. ");
+			doNext(rathazulWorkOffer);
+		}
+	}
+	private function getAlembic(price:int):void {
+		clearOutput();
+		outputText("<i>(todo writeme: got/bought equipment from Rathazul)</i> ");
+		if (price > 0) {
+			player.gems -= price;
+			statScreenRefresh();
+		}
+		outputText("\n\n<b>You now can use "+SceneLib.crafting.alchemyExtraction.alembicName()+" to refine consumable items into alchemical components!</b> ");
+		if (Crafting.furnaceLevel == 0) outputText("For a full set of alchemical tools, you need a furnace.")
+		Crafting.alembicLevel = Crafting.ALEMBIC_LEVEL_SIMPLE;
+		doNext(playerMenu);
+	}
 
 private function oneTimeOptions():void {
 	spriteSelect(SpriteDb.s_rathazul);

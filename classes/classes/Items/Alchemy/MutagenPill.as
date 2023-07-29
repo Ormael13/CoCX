@@ -47,7 +47,7 @@ public class MutagenPill extends Consumable {
 	override public function useItem():Boolean {
 		clearOutput();
 		outputText("You swallow the "+longNameBase+". You feel warmth spreading from your stomach...\n\n");
-		if (pillEffect && (Math.random()*100 < AlchemyLib.PillPowerTiers[power].chance)) {
+		if (pillEffect && pillEffect.isPossible() && (Math.random()*100 < AlchemyLib.PillPowerTiers[power].chance)) {
 			pillEffect.applyEffect(true);
 		} else {
 			outputText("However, it quickly fades away. ");

@@ -9,28 +9,6 @@ import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
 
 public class MutagenPillCrafting extends BaseContent {
-	public static const FURNACE_LEVELS:/*EnumValue*/Array = [];
-	public static const FURNACE_LEVEL_NONE:int            = EnumValue.add(FURNACE_LEVELS, 0, "NONE", {
-		name         : "no pill furnace",
-		refineChances: [100, 0, 0, 0, 0, 0], // see AlchemyLib.PP_xxx constants
-		stoneLimit   : 0
-	});
-	public static const FURNACE_LEVEL_SIMPLE:int          = EnumValue.add(FURNACE_LEVELS, 1, "SIMPLE", {
-		name         : "simple pill furnace",
-		refineChances: [0, 40, 30, 20, 10, 0],// see AlchemyLib.PP_xxx constants
-		stoneLimit   : 2
-	});
-	public static const FURNACE_LEVEL_GOOD:int            = EnumValue.add(FURNACE_LEVELS, 2, "GOOD", {
-		name         : "good pill furnace",
-		refineChances: [0, 20, 30, 30, 20, 0],
-		stoneLimit   : 4
-	});
-	public static const FURNACE_LEVEL_ANCIENT:int         = EnumValue.add(FURNACE_LEVELS, 3, "ANCIENT", {
-		name         : "ancient pill furnace",
-		refineChances: [0, 10, 20, 30, 40, 0],
-		stoneLimit   : 8
-	});
-	
 	public function get furnaceLevel():int {
 		return Crafting.furnaceLevel;
 	}
@@ -38,10 +16,10 @@ public class MutagenPillCrafting extends BaseContent {
 	public function MutagenPillCrafting() {
 	}
 	public function furnaceName():String {
-		return FURNACE_LEVELS[furnaceLevel].name;
+		return furnaceObject().name;
 	}
 	public function furnaceObject():EnumValue {
-		return FURNACE_LEVELS[furnaceLevel];
+		return Crafting.FURNACE_LEVELS[furnaceLevel];
 	}
 	
 	// Runtime state variables - not saved, must be cleared when you leave the scene
