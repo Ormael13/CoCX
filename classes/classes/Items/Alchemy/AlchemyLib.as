@@ -655,6 +655,10 @@ public class AlchemyLib extends BaseContent {
 		short: "Satyr",
 		name : "Satyr"
 	});
+	public static const AE_DRIDER:int          = EnumValue.add(Essences, 208, "DRIDER", {
+		short: "Drider",
+		name : "Drider"
+	});
 	
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = true):Array {
 		var result:Array = [

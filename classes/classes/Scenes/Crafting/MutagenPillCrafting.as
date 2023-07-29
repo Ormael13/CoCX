@@ -5,6 +5,7 @@ import classes.ItemType;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Scenes.Crafting;
 import classes.Scenes.SceneLib;
+import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
 
@@ -85,6 +86,14 @@ public class MutagenPillCrafting extends BaseContent {
 			outputText("\nYou can't fit more spirit stones in the furnace!");
 			if (silly()) outputText(" The pile emits an eerie blue glow and you hear a chaotic, intermittent clicking noise.");
 		}
+		if (debug) {
+			var tf:PossibleEffect = Transformation.findSETf(furnaceSubstance, furnaceEssence);
+			if (tf) {
+				outputText("\n<i>Result</i>: "+tf.alchemyLongName);
+			} else {
+				outputText("\n<i>Impossible combination!</i>")
+			}
+		}
 		
 		// [ Refine!] [Substanc] [Essence ] [        ] [        ]
 		// [Add SS  ] [Take SS ] [        ] [        ] [        ]
@@ -116,10 +125,10 @@ public class MutagenPillCrafting extends BaseContent {
 		mainView.linkHandler = function (event:String):void {
 			if (type == AlchemyLib.CT_SUBSTANCE) {
 				furnaceSubstance = int(event);
-				SceneLib.crafting.addEssence(furnaceSubstance, -1);
+				SceneLib.crafting.addSubstance(furnaceSubstance, -1);
 			} else if (type == AlchemyLib.CT_ESSENCE) {
 				furnaceEssence = int(event);
-				SceneLib.crafting.addSubstance(furnaceEssence, -1);
+				SceneLib.crafting.addEssence(furnaceEssence, -1);
 			}
 			pillCraftingMenu();
 		}

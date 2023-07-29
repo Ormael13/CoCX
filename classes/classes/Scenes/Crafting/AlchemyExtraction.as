@@ -114,6 +114,30 @@ public class AlchemyExtraction extends BaseContent {
 		if (chances[4] > 0) outputText("<li>Pigment: " + floor(chances[4]) + "%</li>");
 		outputText("</ul>");
 		outputText("<b>Yield</b>: x" + alembicYield());
+		if (debug && alembicItem) {
+			outputText("\n\n<i>Components:</i><ul>");
+			for each (c in alembicItem.essences) {
+				outputText("<li>");
+				outputText(AlchemyComponent.essence(c[1]).name());
+				outputText("<li>");
+			}
+			for each (c in alembicItem.residues) {
+				outputText("<li>");
+				outputText(AlchemyComponent.residue(c[1]).name());
+				outputText("<li>");
+			}
+			for each (c in alembicItem.pigments) {
+				outputText("<li>");
+				outputText(AlchemyComponent.pigment(c[1]).name());
+				outputText("<li>");
+			}
+			for each (var c:Array in alembicItem.substances) {
+				outputText("<li>");
+				outputText(AlchemyComponent.substance(c[1]).name());
+				outputText("<li>");
+			}
+			outputText("</ul>")
+		}
 		outputText("\n\n");
 		
 		// [Extract!] [        ] [TakeItem] [Take Cat] [        ]
