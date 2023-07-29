@@ -11,47 +11,55 @@ public class AlchemyLib extends BaseContent {
 	// Pill power tiers
 	
 	/**
+	 * EnumValue properties
 	 * * short: button name;
 	 * * name: full name;
 	 * * chance: effect chance (%).
 	 * * value: value multiplier
+	 * * xp: alchemy skill xp gained for refining
 	 */
 	public static const PillPowerTiers:/*EnumValue*/Array = [];
 	public static const PP_DEAD:int                       = EnumValue.add(PillPowerTiers, 0, "DEAD", {
 		short : "D.",
 		name  : "dead",
 		chance: 0,
-		value : 0
+		value : 0,
+		xp    : 1
 	});
 	public static const PP_FAINT:int                      = EnumValue.add(PillPowerTiers, 1, "FAINT", {
 		short : "F.",
 		name  : "faint",
 		chance: 50,
-		value : 1
+		value : 1,
+		xp    : 2
 	});
 	public static const PP_WEAK:int                       = EnumValue.add(PillPowerTiers, 2, "WEAK", {
 		short : "W.",
 		name  : "weak",
 		chance: 60,
-		value : 2
+		value : 2,
+		xp    : 5
 	});
 	public static const PP_NORMAL:int                     = EnumValue.add(PillPowerTiers, 3, "NORMAL", {
 		short : "N.",
 		name  : "normal",
 		chance: 70,
-		value : 3
+		value : 3,
+		xp    : 10
 	});
 	public static const PP_POTENT:int                     = EnumValue.add(PillPowerTiers, 4, "POTENT", {
 		short : "P.",
 		name  : "potent",
 		chance: 80,
-		value: 4
+		value : 4,
+		xp    : 20
 	});
 	public static const PP_RADIANT:int                    = EnumValue.add(PillPowerTiers, 5, "RADIANT", {
-		short: "R.",
-		name : "radiant",
+		short : "R.",
+		name  : "radiant",
 		chance: 100,
-		value: 5
+		value : 5,
+		xp    : 50
 	});
 	
 	// Component types
@@ -165,28 +173,28 @@ public class AlchemyLib extends BaseContent {
 	});
 	
 	public static const DEFAULT_SUBSTANCES_DROP_TABLE:Array = [
-			[0.25, AS_ANTENNAE],
-			[1, AS_ARMS],
-			[1, AS_ASS],
-			[0.5, AS_BALLS],
-			[0.5, AS_BREASTS],
-			[0.25, AS_CLIT],
-			[1, AS_COCK],
-			[1, AS_EARS],
-			[1, AS_EYES],
-			[1, AS_FACE],
-			[0.25, AS_GILLS],
-			[0.5, AS_HAIR],
-			[1, AS_HORNS],
-			[1, AS_LEGS],
-			[0.25, AS_NIPPLES],
-			[0.5, AS_REAR],
-			[1, AS_SKIN],
-			[0.25, AS_SKIN_PATTERN],
-			[1, AS_TAIL],
-			[0.25, AS_TONGUE],
-			[1, AS_VAGINA],
-			[1, AS_WINGS]
+		[0.25, AS_ANTENNAE],
+		[1, AS_ARMS],
+		[1, AS_ASS],
+		[0.5, AS_BALLS],
+		[0.5, AS_BREASTS],
+		[0.25, AS_CLIT],
+		[1, AS_COCK],
+		[1, AS_EARS],
+		[1, AS_EYES],
+		[1, AS_FACE],
+		[0.25, AS_GILLS],
+		[0.5, AS_HAIR],
+		[1, AS_HORNS],
+		[1, AS_LEGS],
+		[0.25, AS_NIPPLES],
+		[0.5, AS_REAR],
+		[1, AS_SKIN],
+		[0.25, AS_SKIN_PATTERN],
+		[1, AS_TAIL],
+		[0.25, AS_TONGUE],
+		[1, AS_VAGINA],
+		[1, AS_WINGS]
 	];
 	
 	// Essences (races or body part effects)
@@ -648,12 +656,12 @@ public class AlchemyLib extends BaseContent {
 		name : "Satyr"
 	});
 	
-	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean=true):Array {
+	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = true):Array {
 		var result:Array = [
-				[10, mainEssencee],
-				[1, AE_GROW],
-				[0.75, AE_SHRINK],
-				[0.25, AE_REMOVE],
+			[10, mainEssencee],
+			[1, AE_GROW],
+			[0.75, AE_SHRINK],
+			[0.25, AE_REMOVE],
 		];
 		if (withHuman) result.push([2, AE_HUMAN]);
 		return result;
@@ -665,8 +673,8 @@ public class AlchemyLib extends BaseContent {
 			// allow duplicate types to increase the chances
 			// ex. AE_KITSUNE, AE_KITSUNE, AE_FOX, AE_HUMAN
 			// => [[5, AE_KITSUNE], [2.5, AE_FOX], [2.5, AE_HUMAN]]
-			if (result.length > 0 && result[result.length-1][1] == et) {
-				result[result.length-1][0] += 10/essenceTypes.length;
+			if (result.length > 0 && result[result.length - 1][1] == et) {
+				result[result.length - 1][0] += 10 / essenceTypes.length;
 			} else {
 				result.push([10 / essenceTypes.length, et]);
 			}
@@ -728,11 +736,11 @@ public class AlchemyLib extends BaseContent {
 		short: "Puri",
 		name : "Purity"
 	});
-	public static const AR_FEM:int             = EnumValue.add(Residues, 11, "FEM", {
+	public static const AR_FEM:int                  = EnumValue.add(Residues, 11, "FEM", {
 		short: "Fem",
 		name : "Femininity"
 	});
-	public static const AR_MASC:int             = EnumValue.add(Residues, 12, "MASC", {
+	public static const AR_MASC:int                 = EnumValue.add(Residues, 12, "MASC", {
 		short: "Masc",
 		name : "Masculinity"
 	});

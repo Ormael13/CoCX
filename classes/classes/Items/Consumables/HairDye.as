@@ -28,6 +28,7 @@ public class HairDye extends Consumable
 			var longName:String = "a vial of " + _color + " hair dye";
 			var description:String = "This bottle of dye will allow you to change the color of your hair, fur, scales, chitin, or feathers.";
 			super(id, shortName, longName, RARITY_TO_VALUE[rarity] || 6, description);
+			refineableInto([], [], [], [_color]);
 		}
 		
 		override public function canUse():Boolean {

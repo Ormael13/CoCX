@@ -36,9 +36,9 @@ public class MutagenPillCrafting extends BaseContent {
 	private function calcMutagenPillChances():/*Number*/Array {
 		var result:Array = furnaceObject().refineChances.slice();
 		normalizeArray(result, 100);
-		// TODO @aimozg alchemy skills
 		// +25% to raise a level per spirit stone
-		const raiseChance:Number = 0.25;
+		var raiseChance:Number = 0.25;
+		raiseChance += 0.005 * player.alchemySkillLevel;
 		for (var i:int = 0; i < furnaceStones; i++) {
 			result = [
 				/*                     */ result[0] * (1 - raiseChance),
@@ -68,6 +68,7 @@ public class MutagenPillCrafting extends BaseContent {
 		} else if (furnaceStones > stoneSafeLimit()) {
 			outputText("<b>WARNING: Too many spirit stones. </b>")
 		}
+		outputText("\n<b>Skill</b>: " + player.alchemySkillLevel);
 		outputText("\n<b>Refinement chances</b>:");
 		outputText("<ul>");
 		var chances:Array = calcMutagenPillChances();
@@ -84,8 +85,6 @@ public class MutagenPillCrafting extends BaseContent {
 			outputText("\nYou can't fit more spirit stones in the furnace!");
 			if (silly()) outputText(" The pile emits an eerie blue glow and you hear a chaotic, intermittent clicking noise.");
 		}
-		
-		// TODO @aimozg alchemy skill
 		
 		// [ Refine!] [Substanc] [Essence ] [        ] [        ]
 		// [Add SS  ] [Take SS ] [        ] [        ] [        ]
@@ -153,7 +152,7 @@ public class MutagenPillCrafting extends BaseContent {
 			outputText("The " + (furnaceStones > 1 ? "spirit stones" : "spirit stone") + " crumble and release the soulforce, fueling the process and empowering the mixture. ");
 		}
 		var chances:/*Number*/Array = calcMutagenPillChances();
-		var result:int              = weightedRandom([
+		var pillPower:int           = weightedRandom([
 			[chances[0], 0],
 			[chances[1], 1],
 			[chances[2], 2],
@@ -162,35 +161,38 @@ public class MutagenPillCrafting extends BaseContent {
 			[chances[5], 5]
 		]);
 		outputText("[pg]");
-		if (result == 0) {
+		if (pillPower == 0) {
 			outputText("The cloud slows down then suddenly <b>collapses in violent implosion</b>, covering the area in smoke and soot. Unfortunately, the refining had failed.");
 			outputText("\n\nCleaning this mess would take some time...");
 			furnaceSubstance = 0;
-			furnaceEssence = 0;
-			furnaceStones = 0;
+			furnaceEssence   = 0;
+			furnaceStones    = 0;
+			player.giveAlchemyXP(AlchemyLib.PillPowerTiers[0].xp);
 			doNext(camp.returnToCampUseOneHour);
 		} else {
 			// TODO @aimozg can craft multiple, depending on skill or other factors
 			var npills:int = 1;
 			outputText("The whirling cloud slows down, then shrinks into " +
-					numberOfThings(npills,"cherry-sized orb","cherry-sized orbs") +
+					numberOfThings(npills, "cherry-sized orb", "cherry-sized orbs") +
 					" at the bottom of the furnace.\n\n");
 			if (Transformation.findSETf(furnaceSubstance, furnaceEssence)) {
-				var pill:ItemType = itemTemplates.createMutagenPill(furnaceSubstance, furnaceEssence, result);
-				furnaceSubstance = 0;
-				furnaceEssence = 0;
-				furnaceStones = 0;
-				outputText("<b>You've successfully refined "+(npills>1?npills+" x ":"a ")+pill.longNameBase+"!</b>");
+				var pill:ItemType = itemTemplates.createMutagenPill(furnaceSubstance, furnaceEssence, pillPower);
+				furnaceSubstance  = 0;
+				furnaceEssence    = 0;
+				furnaceStones     = 0;
+				outputText("<b>You've successfully refined " + (npills > 1 ? npills + " x " : "a ") + pill.longNameBase + "!</b>");
 				// TODO @aimozg support transfering multiple items
+				player.giveAlchemyXP(AlchemyLib.PillPowerTiers[pillPower].xp);
 				inventory.takeItem(pill, pillCraftingMenu);
 			} else {
-				outputText("However, "+(npills>1?"they crumble":"it crumbles")+" into gray dust due to incompatibility. <b>It seems that you can't refine " +
-						AlchemyLib.Essences[furnaceEssence].name+
-						" essence with "+
-						AlchemyLib.Substances[furnaceSubstance].name+" substance!</b>");
+				outputText("However, " + (npills > 1 ? "they crumble" : "it crumbles") + " into gray dust due to incompatibility. <b>It seems that you can't refine " +
+						AlchemyLib.Essences[furnaceEssence].name +
+						" essence with " +
+						AlchemyLib.Substances[furnaceSubstance].name + " substance!</b>");
 				furnaceSubstance = 0;
-				furnaceEssence = 0;
-				furnaceStones = 0;
+				furnaceEssence   = 0;
+				furnaceStones    = 0;
+				player.giveAlchemyXP(AlchemyLib.PillPowerTiers[0].xp);
 				doNext(pillCraftingMenu);
 			}
 		}

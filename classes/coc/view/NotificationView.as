@@ -94,7 +94,8 @@ public class NotificationView extends Block {
 			autoSize: TextFieldAutoSize.LEFT,
 			width: width,
 			height: ICON_SIZE,
-			htmlText: htmlText
+			htmlText: htmlText,
+			filters: [UIUtils.outlineFilter("#ffffff")]
 		});
 		animateNotification(id, tf, ttl);
 	}

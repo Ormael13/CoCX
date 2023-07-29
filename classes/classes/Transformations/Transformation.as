@@ -65,5 +65,10 @@ public class Transformation extends PossibleEffect {
 		for each (var essence:int in essences) registerTf(substance, essence);
 		return this;
 	}
+	public function withAlchemyNames(shortName:String, longName:String):Transformation {
+		alchemyLongName = shortName;
+		alchemyLongName = longName;
+		return this;
+	}
 }
 }

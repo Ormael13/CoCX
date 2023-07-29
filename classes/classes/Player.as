@@ -53,6 +53,7 @@ import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
+import classes.Stats.Skills.AlchemySkill;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.RutEffect;
@@ -128,6 +129,8 @@ use namespace CoC;
 			for each (var slot:EnumValue in ItemConstants.EquipmentSlots) {
 				_equipment[slot.value] = slot.nothing();
 			}
+			alchemySkillStat = new AlchemySkill(this);
+			statStore.addStat(alchemySkillStat);
 		}
 
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -206,6 +209,10 @@ use namespace CoC;
 		//Teasing attributes
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
+		
+		// Alchemy skill
+		public var alchemySkillStat:AlchemySkill;
+		public function get alchemySkillLevel():Number { return alchemySkillStat.level }
 
 		//Only used in survival and realistic mode
 		public var hunger:Number = 0;
@@ -6255,6 +6262,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
 			if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
 			return herbMlt;
+		}
+		
+		public function giveAlchemyXP(XP:Number):void {
+			alchemySkillStat.giveXp(XP);
 		}
 		
 		public function usePotion(pt:PotionType):void {

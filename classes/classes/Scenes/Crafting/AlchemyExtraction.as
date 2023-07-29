@@ -49,7 +49,7 @@ public class AlchemyExtraction extends BaseContent {
 	private function calcChances():/*Number*/Array {
 		var result:/*Number*/Array = [100, 0, 0, 0, 0];
 		var successChance:Number   = alembicObject().successChance;
-		// TODO @aimozg also affected by skill?
+		successChance += 0.5 * player.alchemySkillLevel;
 		successChance              = boundFloat(0, successChance, 100);
 		result[0]                  = 100 - successChance;
 		var n:int                  = 4;
@@ -74,15 +74,15 @@ public class AlchemyExtraction extends BaseContent {
 	}
 	
 	private var inventoryPage:int = 0;
-	private var usePearl:Boolean = false;
+	private var usePearl:Boolean  = false;
 	private function goBack():void {
 		inventoryPage = 0;
-		usePearl = false;
+		usePearl      = false;
 		SceneLib.crafting.craftingMain();
 	}
 	private function extractionMenuPage(inventoryPage:int, usePearl:Boolean):void {
 		this.inventoryPage = inventoryPage;
-		this.usePearl = usePearl;
+		this.usePearl      = usePearl;
 		extractionMenu();
 	}
 	public function extractionMenu():void {
@@ -104,7 +104,7 @@ public class AlchemyExtraction extends BaseContent {
 		outputText("<b>Tool quality</b>: " + alembicName());
 		outputText("\n<b>Catalyst</b>: " + (alembicCatalyst ? alembicCatalyst.longName : "<i>none</i>"));
 		outputText("\n<b>Ingredient</b>: " + (alembicItem ? alembicItemCount + " x " + alembicItem.longNameBase : "<i>none</i>"));
-		// TODO @aimozg alchemy skill
+		outputText("\n<b>Skill</b>: " + player.alchemySkillLevel);
 		outputText("\n<b>Refinement chances</b>:");
 		outputText("<ul>");
 		if (chances[0] > 0) outputText("<li>Failure: " + floor(chances[0]) + "%</li>");
@@ -201,6 +201,7 @@ public class AlchemyExtraction extends BaseContent {
 							: alembicItem.longName) +
 					" into " + numberOfThings(failures, "blob", "blobs") + " of stinky goo...");
 		} else {
+			player.giveAlchemyXP(successes); // 1 alchemy XP per extracted component
 			if (failures == 0) {
 				outputText("The refining process was a <b>complete success</b>!\n");
 			}
