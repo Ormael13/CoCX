@@ -116,10 +116,10 @@ public class MutagenPillCrafting extends BaseContent {
 		mainView.linkHandler = function (event:String):void {
 			if (type == AlchemyLib.CT_SUBSTANCE) {
 				furnaceSubstance = int(event);
-				SceneLib.crafting.addEssence(furnaceEssence, -1);
+				SceneLib.crafting.addEssence(furnaceSubstance, -1);
 			} else if (type == AlchemyLib.CT_ESSENCE) {
 				furnaceEssence = int(event);
-				SceneLib.crafting.addSubstance(furnaceSubstance, -1);
+				SceneLib.crafting.addSubstance(furnaceEssence, -1);
 			}
 			pillCraftingMenu();
 		}
@@ -152,14 +152,20 @@ public class MutagenPillCrafting extends BaseContent {
 			outputText("The " + (furnaceStones > 1 ? "spirit stones" : "spirit stone") + " crumble and release the soulforce, fueling the process and empowering the mixture. ");
 		}
 		var chances:/*Number*/Array = calcMutagenPillChances();
-		var pillPower:int           = weightedRandom([
-			[chances[0], 0],
-			[chances[1], 1],
-			[chances[2], 2],
-			[chances[3], 3],
-			[chances[4], 4],
-			[chances[5], 5]
-		]);
+		var pillPower:int;
+		if (SceneLib.crafting.isLuckyXianxiaMC()) {
+			SceneLib.crafting.useXianxiaMCLuck();
+			pillPower = AlchemyLib.PP_RADIANT;
+		} else {
+			pillPower = weightedRandom([
+				[chances[0], 0],
+				[chances[1], 1],
+				[chances[2], 2],
+				[chances[3], 3],
+				[chances[4], 4],
+				[chances[5], 5]
+			]);
+		}
 		outputText("[pg]");
 		if (pillPower == 0) {
 			outputText("The cloud slows down then suddenly <b>collapses in violent implosion</b>, covering the area in smoke and soot. Unfortunately, the refining had failed.");

@@ -47,7 +47,7 @@ public class SkillXpStat extends Utils implements IStat, Jsonable {
 		if (format) s += "</b>";
 		s += " ";
 		
-		s += ""+level+"/"+maxLevel();
+		s += ""+level+" / "+maxLevel();
 		
 		s += " (Exp: ";
 		if (level == maxLevel()) s += "MAX";

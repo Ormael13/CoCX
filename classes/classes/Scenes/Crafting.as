@@ -1,6 +1,7 @@
 package classes.Scenes
 {
 import classes.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.Alchemy.AlchemyComponent;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Alchemy.AlembicCatalyst;
@@ -146,6 +147,8 @@ public class Crafting extends BaseContent implements SaveableState
 		// Catalyst currently in the alembic, or null
 		public static var alembicCatalyst:AlembicCatalyst = null;
 		public static var furnaceLevel:int                = 0;
+		// Times used Xianxia MC powers
+		public static var xmcLuck:int = 0;
 		
 		// Map of substanceId -> count
 		public static var substanceStock:Object = {};
@@ -245,6 +248,7 @@ public class Crafting extends BaseContent implements SaveableState
 			alembicLevel = 0;
 			alembicCatalyst = null;
 			furnaceLevel = 0;
+			xmcLuck = 0;
 			substanceStock = {};
 			essenceStock = {};
 			residueStock = {};
@@ -334,6 +338,7 @@ public class Crafting extends BaseContent implements SaveableState
 				"BagSlot40": BagSlot40,
 				"BagSlot40Cap": BagSlot40Cap,
 				
+				"xmcLuck": xmcLuck,
 				"alembicLevel": alembicLevel,
 				"alembicCatalyst": alembicCatalyst?alembicCatalyst.id:null,
 				"furnaceLevel": furnaceLevel,
@@ -427,6 +432,7 @@ public class Crafting extends BaseContent implements SaveableState
 				BagSlot40 = o["BagSlot40"];
 				BagSlot40Cap = o["BagSlot40Cap"];
 				
+				xmcLuck = intOr(o["xmcLuck"], 0);
 				alembicLevel = intOr(o["alembicLevel"], 0);
 				alembicCatalyst = ItemType.lookupItem(stringOr(o["alembicCatalyst"], "")) as AlembicCatalyst;
 				furnaceLevel = intOr(o["furnaceLevel"], 0);
@@ -438,6 +444,13 @@ public class Crafting extends BaseContent implements SaveableState
 				// loading from old save
 				resetState();
 			}
+		}
+		
+		public function isLuckyXianxiaMC():Boolean {
+			return xmcLuck < 10 && flags[kFLAGS.GAME_DIFFICULTY] == 4;
+		}
+		public function useXianxiaMCLuck():void {
+			xmcLuck++;
 		}
 		
 		/*
@@ -833,7 +846,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			if(debug) {
 				button(13).show("Cheat", craftingCheats);
 			}
-			button(14).show("Back", playerMenu).icon("Back");
+			button(14).show("Back", camp.campActions).icon("Back");
 		}
 		
 		public function checkStock(withMenu:Boolean=false):void {

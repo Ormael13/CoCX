@@ -18,7 +18,7 @@ public class AlchemySkill extends SkillXpStat {
 	override public function maxLevel():Number {
 		var maxLevel:Number = 2;
 		if (player.level < 48) maxLevel += player.level;
-		else level += 48;
+		else maxLevel += 48;
 		return maxLevel;
 	}
 }
