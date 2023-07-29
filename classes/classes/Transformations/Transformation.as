@@ -66,7 +66,7 @@ public class Transformation extends PossibleEffect {
 		return this;
 	}
 	public function withAlchemyNames(shortName:String, longName:String):Transformation {
-		alchemyLongName = shortName;
+		alchemyShortName = shortName;
 		alchemyLongName = longName;
 		return this;
 	}
