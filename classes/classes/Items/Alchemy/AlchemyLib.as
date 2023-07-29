@@ -660,7 +660,7 @@ public class AlchemyLib extends BaseContent {
 		name : "Drider"
 	});
 	
-	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = true):Array {
+	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [
 			[10, mainEssencee],
 			[1, AE_GROW],

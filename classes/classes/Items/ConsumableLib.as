@@ -23,7 +23,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const INCUBID: Consumable = mk("IncubiD", "IncubiD", "an Incubi draft", 6, "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass.", curry(m.incubiDraft, true), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON),
+						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON, true),
 						[
 							[10, AR_CORR_INC],
 							[1, AR_INT],
@@ -53,7 +53,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const SUCMILK: Consumable = mk("SucMilk", "SucMilk", "a bottle of Succubi milk", 6, "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"", curry(m.succubiMilk, true), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON),
+						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON, true),
 						[
 							[10, AR_CORR_INC],
 							[1, AR_INT],
@@ -67,7 +67,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const P_DRAFT:Consumable = mk("P.Draft", "P.Draft", "an untainted Incubi draft", 20, "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass. Rathazul has purified this to prevent corruption upon use.", curry(m.incubiDraft, false), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON),
+						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON, true),
 						[
 							[1, AR_INT],
 							[1, AR_LIB],
@@ -76,7 +76,7 @@ public final class ConsumableLib extends AlchemyLib
 		public const P_S_MLK: Consumable = mk("P.S.Mlk", "P.S.Mlk", "an untainted bottle of Succubi milk", 20, "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"  Purified by Rathazul to prevent corruption.", curry(m.succubiMilk, false), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON),
+						DEFAULT_ESSENCE_DROP_TABLE(AE_DEMON, true),
 						[
 							[1, AR_INT],
 							[1, AR_LIB],
