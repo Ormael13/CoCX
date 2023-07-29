@@ -331,8 +331,10 @@ private function rathazulWorkOffer():Boolean {
 			if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(7, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
 			else addButtonDisabled(7, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
 		}
+		/*
 		addButton(10, "Alch.Tools", askForTools).hint("Ask Rathazul to lend his alchemical tools, so you can dabble in alchemy yourself")
 										   .disableIf(Crafting.alembicLevel >= Crafting.ALEMBIC_LEVEL_SIMPLE, "You already have an alembic!");
+		 */
 		if (lethiciteDefense != null) addButton(11, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(12, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
 		addButton(13, "Rare offers", oneTimeOptions).hint("All the one time options.");
