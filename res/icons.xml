@@ -145,6 +145,11 @@
             <icon>BH.Pill</icon>
             <icon>SPPearl</icon>
             <icon>E P Bot.</icon>
+            <icon>MutagenPill_1</icon>
+            <icon>MutagenPill_2</icon>
+            <icon>MutagenPill_3</icon>
+            <icon>MutagenPill_4</icon>
+            <icon>MutagenPill_5</icon>
         </row>
         <row><!-- Row 5 - non-consumable misc items -->
             <icon>GenericUnknownItem</icon>
@@ -443,6 +448,7 @@
         <alias alias="herbXP" icon="I_Herb_Green"/>
         <alias alias="mineXP" icon="I_BronzeB"/>
         <alias alias="spellXP" icon="I_Book_Red"/>
+        <alias alias="alchemyXP" icon="I_MutagenPill_5"/>
         <!-- Mastery icons: 'CombatMastery' + player.combatMastery[i].combat -->
         <alias alias="CombatMastery" icon="I_GenericWeapon_Sword"/>
         <alias alias="CombatMasteryFeral" icon="CombatMastery"/>

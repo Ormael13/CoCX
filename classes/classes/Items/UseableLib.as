@@ -4,6 +4,8 @@
 package classes.Items
 {
 import classes.CoC;
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Alchemy.AlembicCatalyst;
 import classes.Items.Other.DebugWand;
 import classes.Items.Other.SimpleUseable;
 import classes.Scenes.SceneLib;
@@ -205,6 +207,37 @@ use namespace CoC;
 		public const TEDDY:SimpleUseable = new SimpleUseable("TeddyBear", "TeddyBear", "a Teddy bear", 200,
 				"An old Teddy bear with a small paper with the name Mister Paw tied to it.",
 				"You look at an old Teddy bear and see there is a small paper with the name Mister Paw tied to it.");
+		// Alchemical catalysts:
+		// Substance/Essence/Residue/Pigment
+		// Minor/Common/Major
+		public const MIN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_SUB_ACAT", AlchemyLib.CT_SUBSTANCE, 1);
+		public const CMN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_SUB_ACAT", AlchemyLib.CT_SUBSTANCE, 2);
+		public const MAJ_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_SUB_ACAT", AlchemyLib.CT_SUBSTANCE, 3);
+		public const MIN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_ESS_ACAT", AlchemyLib.CT_ESSENCE, 1);
+		public const CMN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_ESS_ACAT", AlchemyLib.CT_ESSENCE, 2);
+		public const MAJ_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_ESS_ACAT", AlchemyLib.CT_ESSENCE, 3);
+		public const MIN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_RES_ACAT", AlchemyLib.CT_RESIDUE, 1);
+		public const CMN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_RES_ACAT", AlchemyLib.CT_RESIDUE, 2);
+		public const MAJ_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_RES_ACAT", AlchemyLib.CT_RESIDUE, 3);
+		public const MIN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_PIG_ACAT", AlchemyLib.CT_PIGMENT, 1);
+		public const CMN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_PIG_ACAT", AlchemyLib.CT_PIGMENT, 2);
+		public const MAJ_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_PIG_ACAT", AlchemyLib.CT_PIGMENT, 3);
+		
+		public const List_AllCatalysts:/*ItemType*/Array = [
+				MIN_SUB_ACAT,
+				CMN_SUB_ACAT,
+				MAJ_SUB_ACAT,
+				MIN_ESS_ACAT,
+				CMN_ESS_ACAT,
+				MAJ_ESS_ACAT,
+				MIN_RES_ACAT,
+				CMN_RES_ACAT,
+				MAJ_RES_ACAT,
+				MIN_PIG_ACAT,
+				CMN_PIG_ACAT,
+				MAJ_PIG_ACAT
+		];
+		
 		//CHEAT ITEM
 		public const DBGWAND:DebugWand = new DebugWand();
 	}

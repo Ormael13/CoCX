@@ -6,6 +6,7 @@ import classes.BaseContent;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -14,6 +15,10 @@ public final class Reducto extends Consumable {
 
     public function Reducto() {
         super("Reducto", "Reducto", "a salve marked as 'Reducto'", 30, "This container full of paste can be used to shrink a body part down by a significant amount.");
+        refineableInto([], [
+            [8, AlchemyLib.AE_SHRINK],
+            [2, AlchemyLib.AE_REMOVE]
+        ]);
     }
 
     override public function useItem():Boolean {

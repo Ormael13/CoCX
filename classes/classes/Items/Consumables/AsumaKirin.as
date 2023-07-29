@@ -17,6 +17,7 @@ import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GeneticMemories.BallsMem;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 import classes.Races.KirinRace;
@@ -28,6 +29,23 @@ public class AsumaKirin extends Consumable {
 	public function AsumaKirin() {
 		super("Asumaki", "Asumaki", "a bottle of Asuma Kirin", 20, "A glass bottle containing a golden liquid. The label features various symbols that you don't know, but you can still read Azuma Kirin written in golden letters! Even closed, you can still smell alcohol, musk and ozone on this thing!");
 		withTag(ItemTags.U_TF);
+		refineableInto(
+				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(
+						AlchemyLib.AE_HORSE,
+						AlchemyLib.AE_KIRIN
+				),
+				[
+						[1, AlchemyLib.AR_SPE],
+						[1, AlchemyLib.AR_TOU],
+						[1, AlchemyLib.AR_LIB]
+				],
+				concat(
+						KirinRace.KirinScaleColors,
+						KirinRace.KirinEyeColors,
+						KirinRace.KirinHairColors
+				)
+		)
 	}
 
 	public override function useItem():Boolean {

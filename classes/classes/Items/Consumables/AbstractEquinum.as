@@ -18,20 +18,81 @@ import classes.EngineCore;
 import classes.EventParser;
 import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 import classes.Items.Mutations;
 import classes.PerkLib;
 import classes.Races;
+import classes.Races.AlicornRace;
+import classes.Races.HorseRace;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
 public class AbstractEquinum extends Consumable {
+	
+	
 	public function AbstractEquinum(type:Number, id:String, shortName:String, longName:String, value:Number, description:String) {
 		super(id, shortName, longName, value, description);
 		this.type = type;
 		withTag(ItemTags.U_TF);
+		switch (type) {
+			case 0: // equinum
+				refineableInto(
+						AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+						AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_HORSE),
+						[
+							[1, AlchemyLib.AR_STR],
+							[1, AlchemyLib.AR_TOU],
+							[1, AlchemyLib.AR_LIB]
+						],
+						HorseRace.FurColors
+				);
+				break;
+			case 1: // unicornum
+				refineableInto(
+						AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+						AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(
+								AlchemyLib.AE_HORSE,
+								AlchemyLib.AE_UNICORN
+						), [
+							[1, AlchemyLib.AR_STR],
+							[1, AlchemyLib.AR_TOU],
+							[1, AlchemyLib.AR_INT],
+							[1, AlchemyLib.AR_LIB]
+						],
+						concat(
+								AlicornRace.AlicornFurColors,
+								AlicornRace.AlicornHairColors,
+								AlicornRace.NightmareFurColors,
+								AlicornRace.NightmareHairColors,
+								["red", "blue"]
+						)
+				);
+				break;
+			case 2: // alicornum
+				refineableInto(
+						AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+						AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(
+								AlchemyLib.AE_HORSE,
+								AlchemyLib.AE_ALICORN
+						), [
+							[1, AlchemyLib.AR_STR],
+							[1, AlchemyLib.AR_TOU],
+							[1, AlchemyLib.AR_INT],
+							[1, AlchemyLib.AR_LIB]
+						],
+						concat(
+								AlicornRace.AlicornFurColors,
+								AlicornRace.AlicornHairColors,
+								AlicornRace.NightmareFurColors,
+								AlicornRace.NightmareHairColors,
+								["red", "blue"]
+						)
+				);
+				break;
+		}
 	}
 
 	protected var type:Number;
@@ -446,7 +507,7 @@ public class AbstractEquinum extends Consumable {
 		//Fur - if has horsetail && ears and not at changelimit
 		if (!player.isFurCovered() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
 			outputText("\n\n");
-			if (type == 0) 	CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"]}).applyEffect();
+			if (type == 0) 	CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: HorseRace.FurColors}).applyEffect();
 			else CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["platinum blonde", "silver", "white", "pure white"]}).applyEffect();
 			changes++;
 		}

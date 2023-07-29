@@ -14,6 +14,7 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 import classes.Player;
@@ -41,6 +42,10 @@ public class BeeHoney extends Consumable
 					honeyDesc
 			);
 			withTag(ItemTags.U_TF);
+			refineableInto(
+					AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+					AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_BEE)
+			)
         }
 
 		override public function canUse():Boolean {

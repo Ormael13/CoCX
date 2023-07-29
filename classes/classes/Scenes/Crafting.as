@@ -1,11 +1,67 @@
-package classes.Scenes 
+package classes.Scenes
 {
-	import classes.*;
-	import classes.BaseContent;
-	import classes.internals.SaveableState;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Alchemy.AlchemyComponent;
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Alchemy.AlembicCatalyst;
+import classes.Scenes.Crafting.AlchemyExtraction;
+import classes.Scenes.Crafting.MutagenPillCrafting;
+import classes.internals.EnumValue;
+import classes.internals.SaveableState;
 
-	public class Crafting extends BaseContent implements SaveableState
+public class Crafting extends BaseContent implements SaveableState
 	{
+		public static const ALEMBIC_LEVELS:/*EnumValue*/Array = [];
+		public static const ALEMBIC_LEVEL_NONE:int            = EnumValue.add(ALEMBIC_LEVELS, 0, "NONE", {
+			name         : "no alembic",
+			successChance: 0,
+			value        : 0
+		});
+		public static const ALEMBIC_LEVEL_SIMPLE:int          = EnumValue.add(ALEMBIC_LEVELS, 1, "SIMPLE", {
+			name         : "simple alembic",
+			successChance: 25,
+			value        : 250
+		});
+		public static const ALEMBIC_LEVEL_GOOD:int            = EnumValue.add(ALEMBIC_LEVELS, 2, "GOOD", {
+			name         : "good alembic",
+			successChance: 50,
+			value        : 2500
+		});
+		public static const ALEMBIC_LEVEL_ANCIENT:int         = EnumValue.add(ALEMBIC_LEVELS, 3, "ANCIENT", {
+			name         : "ancient alembic",
+			successChance: 75,
+			value        : 25000
+		});
+		
+		public static const FURNACE_LEVELS:/*EnumValue*/Array = [];
+		public static const FURNACE_LEVEL_NONE:int            = EnumValue.add(FURNACE_LEVELS, 0, "NONE", {
+			name         : "no pill furnace",
+			refineChances: [100, 0, 0, 0, 0, 0], // see AlchemyLib.PP_xxx constants
+			stoneLimit   : 0,
+			value        : 0
+		});
+		public static const FURNACE_LEVEL_SIMPLE:int          = EnumValue.add(FURNACE_LEVELS, 1, "SIMPLE", {
+			name         : "simple pill furnace",
+			refineChances: [0, 40, 30, 20, 10, 0],// see AlchemyLib.PP_xxx constants
+			stoneLimit   : 2,
+			value        : 250
+		});
+		public static const FURNACE_LEVEL_GOOD:int            = EnumValue.add(FURNACE_LEVELS, 2, "GOOD", {
+			name         : "good pill furnace",
+			refineChances: [0, 20, 30, 30, 20, 0],
+			stoneLimit   : 4,
+			value        : 2500
+		});
+		public static const FURNACE_LEVEL_ANCIENT:int         = EnumValue.add(FURNACE_LEVELS, 3, "ANCIENT", {
+			name         : "ancient pill furnace",
+			refineChances: [0, 10, 20, 30, 40, 0],
+			stoneLimit   : 8,
+			value        : 25000
+		});
+		
+		// State
+		
 		public static var BagSlot01:Number;
 		public static var BagSlot01Cap:Number;//Cooper Ore
 		public static var BagSlot02:Number;
@@ -86,6 +142,24 @@ package classes.Scenes
 		public static var BagSlot39Cap:Number;
 		public static var BagSlot40:Number;
 		public static var BagSlot40Cap:Number;
+		
+		public static var alembicLevel:int = 0;
+		// Catalyst currently in the alembic, or null
+		public static var alembicCatalyst:AlembicCatalyst = null;
+		public static var furnaceLevel:int                = 0;
+		// Times used Xianxia MC powers
+		public static var xmcLuck:int = 0;
+		// Amount of 'stinky goo' produced when refining ingredients
+		public static var gooProduced:int = 0;
+		
+		// Map of substanceId -> count
+		public static var substanceStock:Object = {};
+		// Map of essenceId -> count
+		public static var essenceStock:Object = {};
+		// Map of essenceId -> count
+		public static var residueStock:Object = {};
+		// Map of pigment color -> count
+		public static var pigmentStock:Object = {};
 
 		public function stateObjectName():String {
 			return "Crafting";
@@ -172,6 +246,16 @@ package classes.Scenes
 			BagSlot39Cap = 0;
 			BagSlot40 = 0;
 			BagSlot40Cap = 0;
+			
+			alembicLevel = 0;
+			alembicCatalyst = null;
+			furnaceLevel = 0;
+			xmcLuck = 0;
+			gooProduced = 0;
+			substanceStock = {};
+			essenceStock = {};
+			residueStock = {};
+			pigmentStock = {};
 		}
 
 		public function saveToObject():Object {
@@ -255,7 +339,17 @@ package classes.Scenes
 				"BagSlot39": BagSlot39,
 				"BagSlot39Cap": BagSlot39Cap,
 				"BagSlot40": BagSlot40,
-				"BagSlot40Cap": BagSlot40Cap
+				"BagSlot40Cap": BagSlot40Cap,
+				
+				"xmcLuck": xmcLuck,
+				"gooProduced": gooProduced,
+				"alembicLevel": alembicLevel,
+				"alembicCatalyst": alembicCatalyst?alembicCatalyst.id:null,
+				"furnaceLevel": furnaceLevel,
+				"substanceStock": substanceStock,
+				"essenceStock": essenceStock,
+				"residueStock": residueStock,
+				"pigmentStock": pigmentStock
 			};
 		}
 
@@ -341,11 +435,29 @@ package classes.Scenes
 				BagSlot39Cap = o["BagSlot39Cap"];
 				BagSlot40 = o["BagSlot40"];
 				BagSlot40Cap = o["BagSlot40Cap"];
+				
+				xmcLuck = intOr(o["xmcLuck"], 0);
+				gooProduced = intOr(o["gooProduced"], 0);
+				alembicLevel = intOr(o["alembicLevel"], 0);
+				alembicCatalyst = ItemType.lookupItem(stringOr(o["alembicCatalyst"], "")) as AlembicCatalyst;
+				furnaceLevel = intOr(o["furnaceLevel"], 0);
+				substanceStock = objectOr(o["substanceStock"], {});
+				essenceStock = objectOr(o["essenceStock"], {});
+				residueStock = objectOr(o["residueStock"], {});
+				pigmentStock = objectOr(o["pigmentStock"], {});
 			} else {
 				// loading from old save
 				resetState();
 			}
 		}
+		
+		public function isLuckyXianxiaMC():Boolean {
+			return xmcLuck < 10 && flags[kFLAGS.GAME_DIFFICULTY] == 4;
+		}
+		public function useXianxiaMCLuck():void {
+			xmcLuck++;
+		}
+		
 		/*
 		public static const TYPE_ALCHEMY:int = 0;
 		public static const TYPE_COOKING:int = 1;
@@ -362,6 +474,10 @@ package classes.Scenes
 		private var item4Quantity:int = 0;
 		private var itemResult:ItemType = null;
 		*/
+		
+		public const alchemyExtraction:AlchemyExtraction = new AlchemyExtraction();
+		public const mutagenPillCrafting:MutagenPillCrafting = new MutagenPillCrafting();
+		
 		public function Crafting() {
 			Saves.registerSaveableState(this);
 		}
@@ -429,7 +545,7 @@ public function accessCraftingMaterialsBag():void {
 	
 	if (BagSlot07 > 0) addButton(13, "Moonstone", craftingMaterialsMoonstone1Down);
 	else addButtonDisabled(13, "Moonstone", "You don't have any moonstone in your bag.");
-	addButton(14, "Back", camp.campActions);
+	addButton(14, "Back", craftingMain);
 }
 private function craftingMaterialsCopperOre1UP():void {
 	player.destroyItems(useables.COP_ORE, 1);
@@ -497,16 +613,16 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("What would you like to craft?");
 			menu();
 			if (type == TYPE_ALCHEMY) {
-				
+			
 			}
 			else if (type == TYPE_COOKING) {
-				
+			
 			}
 			else if (type == TYPE_SMITHING) {
-				
+			
 			}
 			else if (type == TYPE_TAILORING) {
-				
+			
 			}
 			addButton(14, "Back", campActions);
 		}
@@ -700,6 +816,224 @@ private function craftingMaterialsMoonstone1Down():void {
 				} else return false;
 			}
 			return false;
+		}
+		
+		public function craftingMain():void {
+			clearOutput();
+			
+			if (alembicLevel > 0) {
+				outputText("You can use your "+alchemyExtraction.alembicName()+" to extract alchemical components from consumable items.\n");
+			}
+			if (furnaceLevel > 0) {
+				outputText("With "+mutagenPillCrafting.furnaceName()+" you can refine alchemical components into pills.\n");
+			}
+			outputText("If you have pigments and foundations, you can mix them into hair dyes and eye drops.\n")
+			
+			outputText("\nWhat will you do?");
+			
+			menu();
+			// [Extract ] [Pills   ] [Dyes    ] [Stock   ] [        ]
+			// [        ] [        ] [        ] [        ] [        ]
+			// [        ] [        ] [Bag     ] [Cheat   ] [Back    ]
+			button(0).show("Extract", alchemyExtraction.extractionMenu)
+					 .hint("Refined mutagens into alchemical components using your alembic.")
+					 .disableIf(alembicLevel == 0, "You don't have an alembic!");
+			button(1).show("Mutagen Pills", mutagenPillCrafting.pillCraftingMenu)
+					 .hint("Craft mutagen pills in your alchemical furnace.")
+					 .icon("MutagenPill")
+					 .disableIf(furnaceLevel == 0, "You don't have an alchemical furnace!");
+			button(2).show("Dyes", alchemyDyes)
+					 .hint("Mix dyes using pigments.")
+					 .icon("I_HairDye");
+			button(4).show("Stock", checkStock)
+					 .hint("Check your stock of crafting materials.");
+			button(12).show("Bag", accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(BagSlot01Cap <= 0, "You'll need a bag to do that.");
+			if(debug) {
+				button(13).show("Cheat", craftingCheats);
+			}
+			button(14).show("Back", camp.campActions).icon("Back");
+		}
+		
+		public function checkStock(withMenu:Boolean=false):void {
+			clearOutput();
+			
+			function printAlchemyComponentStock(type:int):void {
+				var a:Array;
+				// Array of [AlchemyComponent, quantity:int, name:String]
+				var list:Array;
+				list = listAlchemyComponents(type).sortOn("2");
+				if(list.length == 0) {
+					outputText(" none\n")
+				} else {
+					outputText("<ul>");
+					for each (a in list) {
+						outputText("<li>"+a[1]+" x "+a[2]+"</li>");
+					}
+					outputText("</ul>");
+				}
+			}
+			outputText("<b><u>Alchemical substances</u></b>:");
+			printAlchemyComponentStock(AlchemyLib.CT_SUBSTANCE);
+			outputText("\n<b><u>Alchemical essences</u></b>:");
+			printAlchemyComponentStock(AlchemyLib.CT_ESSENCE);
+			outputText("\n<b><u>Alchemical residues</u></b>:");
+			printAlchemyComponentStock(AlchemyLib.CT_RESIDUE);
+			outputText("\n<b><u>Alchemical pigments</u></b>:");
+			printAlchemyComponentStock(AlchemyLib.CT_PIGMENT);
+			flushOutputTextToGUI();
+			if (withMenu) {
+				menu();
+				button(14).show("Back",craftingMain).icon("Back");
+			}
+		}
+		
+		private function craftingCheats():void {
+			clearOutput();
+			outputText("You have:");
+			outputText("<ul>");
+			outputText("<li>"+alchemyExtraction.alembicName()+"</li>");
+			outputText("<li>"+mutagenPillCrafting.furnaceName()+"</li>");
+			outputText("</ul>");
+			function setAlembic(level:int):void {
+				alembicLevel = level;
+				craftingCheats();
+			}
+			function setFurnace(level:int):void {
+				furnaceLevel = level;
+				craftingCheats();
+			}
+			function cheatComponents():void {
+				var i:int;
+				for (i = 1; i < AlchemyLib.Substances.length; i++) {
+					if (AlchemyLib.Substances[i]) addSubstance(i, 10);
+				}
+				for (i = 1; i < AlchemyLib.Essences.length; i++) {
+					if (AlchemyLib.Essences[i]) addEssence(i, 10);
+				}
+				for (i = 1; i < AlchemyLib.Residues.length; i++) {
+					if (AlchemyLib.Residues[i]) addResidue(i, 10);
+				}
+				
+				craftingMain();
+				checkStock();
+			}
+			function cheatSpawnItems():void {
+				var storage:/*ItemSlotClass*/Array = [];
+				for each (var type:ItemType in useables.List_AllCatalysts) {
+					var slot:ItemSlotClass = new ItemSlotClass();
+					slot.unlocked = true;
+					slot.setItemAndQty(type, 1);
+					storage.push(slot);
+				}
+				inventory.transferMenu(storage,0,storage.length,craftingMain, "Cheat dimension",null,true,false);
+			}
+			menu();
+			button(0).show("Alembic1", curry(setAlembic, 1));
+			button(1).show("Furnace1", curry(setFurnace, 1));
+			button(5).show("Alembic2", curry(setAlembic, 2));
+			button(6).show("Furnace2", curry(setFurnace, 2));
+			button(9).show("Alc.Comps", cheatComponents)
+					 .hint("Get 10 of every alchemical component (except pigments)");
+			button(10).show("Alembic3", curry(setAlembic, 3));
+			button(11).show("Furnace3", curry(setFurnace, 3));
+			button(13).show("Items", cheatSpawnItems)
+					  .hint("Spawn items like alembic catalysts.");
+			button(14).show("Back", craftingMain);
+		}
+		
+		//=========//
+		// ALCHEMY //
+		//=========//
+		
+		
+		public function maxComponentCount():int {
+			return 100
+		}
+		public function addSubstance(id:int, change:int =+1):int {
+			var count:int = substanceStock[id];
+			count = boundInt(0, count + change, maxComponentCount());
+			if (count > 0) substanceStock[id] = count;
+			else delete substanceStock[id];
+			return count;
+		}
+		public function addEssence(id:int, change:int=+1):int {
+			var count:int = essenceStock[id];
+			count = boundInt(0, count + change, maxComponentCount());
+			if (count > 0) essenceStock[id] = count;
+			else delete essenceStock[id];
+			return count;
+		}
+		public function addResidue(id:int, change:int=+1):int {
+			var count:int = residueStock[id];
+			count = boundInt(0, count + change, maxComponentCount());
+			if (count > 0) residueStock[id] = count;
+			else delete residueStock[id];
+			return count;
+		}
+		public function addPigment(id:String, change:int=+1):int {
+			var count:int = pigmentStock[id];
+			count = boundInt(0, count + change, maxComponentCount());
+			if (count > 0) pigmentStock[id] = count;
+			else delete pigmentStock[id];
+			return count;
+		}
+		public function addAlchemyComponent(ac:AlchemyComponent, change:int =+1):int {
+			switch (ac.type) {
+				case AlchemyLib.CT_SUBSTANCE:
+					return addSubstance(ac.intValue, change);
+				case AlchemyLib.CT_ESSENCE:
+					return addEssence(ac.intValue, change);
+				case AlchemyLib.CT_RESIDUE:
+					return addResidue(ac.intValue, change);
+				case AlchemyLib.CT_PIGMENT:
+					return addPigment(ac.stringValue, change);
+			}
+			return 0;
+		}
+		// Array of [AlchemyComponent, quantity:int, name:String, value:int|String]
+		public function listAlchemyComponents(type:int):/*Array*/Array {
+			var result:Array = [];
+			var key:String;
+			var ac:AlchemyComponent;
+			switch (type) {
+				case AlchemyLib.CT_SUBSTANCE:
+					for (key in substanceStock) if (substanceStock[key] > 0) {
+						ac = AlchemyComponent.substance(int(key));
+						result.push([ac, substanceStock[key], ac.name(), int(key)])
+					}
+					break;
+				case AlchemyLib.CT_ESSENCE:
+					for (key in essenceStock) if (essenceStock[key] > 0) {
+						ac = AlchemyComponent.essence(int(key));
+						result.push([ac, essenceStock[key], ac.name(), int(key)])
+					}
+					break;
+				case AlchemyLib.CT_RESIDUE:
+					for (key in residueStock) if (residueStock[key] > 0) {
+						ac = AlchemyComponent.residue(int(key));
+						result.push([ac, residueStock[key], ac.name(), int(key)])
+					}
+					break;
+				case AlchemyLib.CT_PIGMENT:
+					for (key in pigmentStock) if (pigmentStock[key] > 0) {
+						ac = AlchemyComponent.pigment(key);
+						result.push([ac, pigmentStock[key], ac.name(), key])
+					}
+					break;
+			}
+			return result;
+		}
+		
+		//======================//
+		// ALCHEMY - DYE MIXING //
+		//======================//
+		
+		public function alchemyDyes():void {
+			clearOutput();
+			outputText("Not yet implemented, sorry.")
+			// TODO @aimozg pigment + dye foundation = hair dye
+			// TODO @aimozg pigment + eyedrop foundation = eye drop
+			doNext(craftingMain);
 		}
 	}
 }

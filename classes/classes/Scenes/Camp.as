@@ -1044,6 +1044,9 @@ public class Camp extends NPCAwareContent{
 		}
 
 		//Menu
+		// [Explore  ] [Places    ] [Inventory] [Stash       ] [      ]
+		// [Followers] [Lovers    ] [Slaves   ] [Camp Actions] [Cabin ]
+		// [SF/Morph ] [Masturbate] [Wait/R/S ] [            ] [Cheats]
 
 		menu();
 		addButton(0, "Explore", exploreEvent).hint("Explore to find new regions and visit any discovered regions.");
@@ -2137,6 +2140,9 @@ public class Camp extends NPCAwareContent{
 	public function campActions():void {
 		hideMenus();
 		menu();
+		// [Build   ] [Winions] [Misc     ] [SpendTime] [NPC's     ]
+		// [Crafting] [Garden ] [Herbalism] [         ] [Quest Loot]
+		// [Questlog] [Recall ] [Dummy    ] [Ascension] [Back      ]
 		clearOutput();
 		outputText("What would you like to do?");
 		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.").disableIf(isNightTime,"It's too dark for that!");
@@ -2144,12 +2150,11 @@ public class Camp extends NPCAwareContent{
 		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
 		addButton(3, "Spend Time", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
 		addButton(4, "NPC's", SparrableNPCsMenu);
-		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
+		addButton(5, "Crafting", SceneLib.crafting.craftingMain).hint("Craft some items.");
 		//addButtonDisabled(6, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
 		if (SceneLib.garden.canAccessGarden()) addButton(6, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants.");
 		else addButtonDisabled(6, "Garden", "Req. to have Herb bag of any sort.");
 		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
-		addButton(8, "Materials", SceneLib.crafting.accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(Crafting.BagSlot01Cap <= 0, "You'll need a bag to do that.");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");

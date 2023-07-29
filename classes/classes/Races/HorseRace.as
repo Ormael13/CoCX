@@ -1,13 +1,11 @@
 package classes.Races {
-import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.IMutations.IMutationsLib;
-import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
 
 public class HorseRace extends Race {
+	public static const FurColors:/*String*/Array = ["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",

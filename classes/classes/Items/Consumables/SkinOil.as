@@ -5,7 +5,6 @@ import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
-import classes.PerkLib;
 
 /**
 	 * Skin oils, courtesy of Foxxling.
@@ -23,6 +22,7 @@ import classes.PerkLib;
 			var value:int = ConsumableLib.DEFAULT_VALUE;
 			var description:String = "A small glass bottle filled with a smooth clear liquid. A label across the front says, \"" + color + " Skin Oil.\"";
 			super(id, shortName, longName, value, description);
+			refineableInto([], [], [], [_color]);
 		}
 		
 		override public function useItem():Boolean {
