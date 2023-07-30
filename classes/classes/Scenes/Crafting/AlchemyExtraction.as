@@ -235,13 +235,16 @@ public class AlchemyExtraction extends BaseContent {
 			if (list.length == 1) {
 				ac = list[0][0];
 				outputText(" " + numberOfThings(list[0][1], ac.name()))
-				SceneLib.crafting.addAlchemyReagent(ac, list[0][1]);
+				var n:int = SceneLib.crafting.addAlchemyReagent(ac, list[0][1]);
+				if (n >= SceneLib.crafting.maxReagentCount()) outputText(" (MAX)");
 			} else {
 				outputText(":<ul>");
 				for (i = 0; i < list.length; i++) {
 					ac = list[i][0];
-					outputText("<li>" + numberOfThings(list[i][1], ac.name()) + "</li>")
-					SceneLib.crafting.addAlchemyReagent(ac, list[i][1]);
+					outputText("<li>" + numberOfThings(list[i][1], ac.name()))
+					n = SceneLib.crafting.addAlchemyReagent(ac, list[i][1]);
+					if (n >= SceneLib.crafting.maxReagentCount()) outputText(" (MAX)");
+					outputText("</li>");
 				}
 				outputText("</ul>");
 			}

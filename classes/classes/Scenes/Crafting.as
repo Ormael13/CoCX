@@ -872,7 +872,9 @@ private function craftingMaterialsMoonstone1Down():void {
 					outputText("</ul>");
 				}
 			}
-			outputText("<b><u>Alchemical substances</u></b>:");
+			outputText("<b>Reagent storag capacity: </b>"+maxReagentCount()+" each.");
+			outputText("\n");
+			outputText("\n<b><u>Alchemical substances</u></b>:");
 			printAlchemyReagentStock(AlchemyLib.RT_SUBSTANCE);
 			outputText("\n<b><u>Alchemical essences</u></b>:");
 			printAlchemyReagentStock(AlchemyLib.RT_ESSENCE);
