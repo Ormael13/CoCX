@@ -3,9 +3,12 @@ import classes.BodyParts.*;
 import classes.CockTypesEnum;
 import classes.Items.MutationsHelper;
 import classes.Transformations.Transformations.*;
+import classes.internals.EnumValue;
 
 public class TransformationLib extends MutationsHelper {
-public function TransformationLib() {}
+public function TransformationLib() {
+//	printAlchemyTable();
+}
 
 // VARIABLE NAMING: <body part> + <what to do> + <flavour>
 // e.g. "grow 9th fox tail" -> TailFox9
@@ -82,7 +85,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const VaginaTightenAndMutagenLib:PossibleEffect  = mutagenEffect.VaginaTightenAndMutagenLib;
     public const AssholeTightenAndMutagenLib:PossibleEffect = mutagenEffect.AssholeTightenAndMutagenLib;
     public const CocksThickenAll:PossibleEffect             = mutagenEffect.CocksThickenAll;
-    public const ShrinkClit:PossibleEffect                  = mutagenEffect.ShrinkClit.registerEffect("TF_"+AS_CLIT+"_"+AE_SHRINK);
+    public const ShrinkClit:PossibleEffect                  = mutagenEffect.ShrinkClit.registerEffect(AS_CLIT,AE_SHRINK);
     public const ShrinkBalls:Transformation                 = mutagenEffect.ShrinkBalls.registerTf(AS_BALLS,AE_SHRINK);
 
 //ANTENNAE
@@ -236,23 +239,24 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function UnlockBreasts(): void {	return breasts.UnlockBreasts(); }
     public const BreastsGrowUpToDD:Transformation 		= breasts.BreastsGrowUpToDD.registerTf(AS_BREASTS, AE_GROW);
     public const BreastsShrinkToNothing:Transformation 	= breasts.BreastsShrinkToNothing.registerTf(AS_BREASTS, AE_SHRINK);
-    public const BreastRowsRemoveToOne:Transformation 	= breasts.BreastRowsRemoveToOne.registerTf(AS_BREASTS, AE_HUMAN);
+    public const BreastRowsRemoveToOne:Transformation 	= breasts.BreastRowsRemoveToOne.registerTf(AS_BREASTS, AE_REMOVE);
     public const BreastRowsOne:Transformation 			= breasts.BreastRowsOne;
     public const BreastRowsTwo:Transformation 			= breasts.BreastRowsTwo;
     public const BreastRowsThree:Transformation 		= breasts.BreastRowsThree;
     public const BreastRowsFour:Transformation 			= breasts.BreastRowsFour;
     public function CreateBreastRow(size:int = 2):Transformation { return breasts.CreateBreastRow(size); }
     public function CopyBreastRow(keepSize:Boolean = false):Transformation { return breasts.CopyBreastRow(keepSize); }
-    public const NipplesPerBreastOne:Transformation 	= breasts.NipplesPerBreastOne;
-    public const NipplesPerBreastFour:Transformation 	= breasts.NipplesPerBreastFour;
+    public const NipplesPerBreastOne:Transformation 	= breasts.NipplesPerBreastOne.registerTf(AS_BREASTS, AE_HUMAN);
+    public const NipplesPerBreastFour:Transformation 	= breasts.NipplesPerBreastFour.registerTf(AS_BREASTS, AE_COW);
     public const NipplesFuckableForce:Transformation 	= breasts.NipplesFuckableForce;
-    public const NipplesFuckable:Transformation 		= breasts.NipplesFuckable;
+    public const NipplesFuckable:Transformation 		= breasts.NipplesFuckable.registerTf(AS_NIPPLES, AE_DEMON);
     public const NipplesUnfuck:Transformation 			= breasts.NipplesUnfuck;
     public const StartLactation:Transformation 			= breasts.StartLactation;
     public const RemoveLactation:Transformation 		= breasts.RemoveLactation;
-    public const NipplesNoColor:Transformation 			= breasts.NipplesNoColor.registerTf(AS_NIPPLES, AE_HUMAN);
-    public const NipplesBlack:Transformation 			= breasts.NipplesBlack.registerTf(AS_NIPPLES, AE_SPIDER).registerTf(AS_NIPPLES, AE_SAND_TRAP);
+    public const NipplesNoColor:Transformation 			= breasts.NipplesNoColor;
+    public const NipplesBlack:Transformation 			= breasts.NipplesBlack.registerTfMultiple(AS_NIPPLES, AE_SPIDER, AE_SAND_TRAP);
     public const NipplesGlowing:Transformation 			= breasts.NipplesGlowing.registerTf(AS_NIPPLES, AE_CAVE_WYRM);
+	public const NipplessHumanize:Transformation        = new TransformationGroupAll("Humanize nipples",[NipplesUnfuck, NipplesNoColor]).registerTf(AS_NIPPLES, AE_HUMAN);
 
 
 //COCK
@@ -268,35 +272,65 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public var cocks:CockTransformations = new CockTransformations();
     public function UnlockCocks():void { return cocks.UnlockCocks(); }
     public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(cock); }
+	public const CockRemoveRandom:Transformation = CockNone(-1).registerTf(AS_COCK, AE_REMOVE);
     public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
+	public const CockAnyHuman:Transformation = CockHuman(-1).registerTf(AS_COCK, AE_HUMAN);
     public function CockHorse(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHorse(cock, length, thickness); }
+	public const CockAnyHorse:Transformation = CockHorse(-1).registerTfMultiple(AS_COCK, AE_HORSE, AE_ALICORN, AE_UNICORN);
     public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockKirin(cock, length, thickness); }
+	public const CockAnyKirin:Transformation = CockKirin(-1).registerTf(AS_COCK, AE_KIRIN);
     public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation { return cocks.CockDog(cock, length, thickness, knot); }
+	public const CockAnyDog:Transformation = CockDog(-1).registerTf(AS_COCK, AE_DOG);
     public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockDemon(cock, length, thickness); }
+	public const CockAnyDemon:Transformation = CockDemon(-1).registerTf(AS_COCK, AE_DEMON);
     public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockTentacle(cock, length, thickness); }
+	public const CockAnyTentacle:Transformation = CockTentacle(-1).registerTf(AS_COCK, AE_PLANT);
     public function CockScylla(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockScylla(cock, length, thickness); }
+	public const CockAnyScylla:Transformation = CockScylla(-1).registerTf(AS_COCK, AE_SCYLLA);
     public function CockCat(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockCat(cock, length, thickness); }
+	public const CockAnyCat:Transformation = CockCat(-1).registerTf(AS_COCK, AE_CAT);
     public function CockCancer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCancer(cock, length, thickness); }
+	public const CockAnyCancer:Transformation = CockCancer(-1).registerTf(AS_COCK, AE_CANCER);
     public function CockLizard(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockLizard(cock, length, thickness); }
+	public const CockAnyLizard:Transformation = CockLizard(-1).registerTf(AS_COCK, AE_LIZARD);
     public function CockCaveWyrm(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCaveWyrm(cock, length, thickness); }
+	public const CockAnyCaveWyrm:Transformation = CockCaveWyrm(-1).registerTf(AS_COCK, AE_CAVE_WYRM);
     public function CockAnemone(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockAnemone(cock, length, thickness); }
+	public const CockAnyAnemone:Transformation = CockAnemone(-1).registerTf(AS_COCK, AE_ANEMONE);
     public function CockKangaroo(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockKangaroo(cock, length, thickness); }
+	public const CockAnyKangaroo:Transformation = CockKangaroo(-1).registerTf(AS_COCK, AE_KANGAROO);
     public function CockDragon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockDragon(cock, length, thickness); }
+	public const CockAnyDragon:Transformation = CockDragon(-1).registerTf(AS_COCK, AE_DRAGON);
     public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation { return cocks.CockDisplacer(cock, length, thickness, knot); }
+	public const CockAnyDisplacer:Transformation = CockDisplacer(-1).registerTf(AS_COCK, AE_DISPLACER_BEAST);
     public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation { return cocks.CockFox(cock, length, thickness, knot); }
+	public const CockAnyFox:Transformation = CockFox(-1).registerTf(AS_COCK, AE_FOX);
     public function CockBee(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockBee(cock, length, thickness); }
+	public const CockAnyBee:Transformation = CockBee(-1).registerTf(AS_COCK, AE_BEE);
     public function CockPig(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockPig(cock, length, thickness); }
+	public const CockAnyPig:Transformation = CockPig(-1).registerTf(AS_COCK, AE_PIG);
     public function CockAvian(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockAvian(cock, length, thickness); }
+	public const CockAnyAvian:Transformation = CockAvian(-1).registerTf(AS_COCK, AE_AVIAN);
     public function CockRhino(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockRhino(cock, length, thickness, inBlackCock); }
+	public const CockAnyRhino:Transformation = CockRhino(-1).registerTf(AS_COCK, AE_RHINO);
     public function CockEchidna(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation { return cocks.CockEchidna(cock, length, thickness, inBlackCock); }
+	public const CockAnyEchidna:Transformation = CockEchidna(-1).registerTf(AS_COCK, AE_ECHIDNA);
     public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation { return cocks.CockWolf(cock, length, thickness, knot); }
+	public const CockAnyWolf:Transformation = CockWolf(-1).registerTf(AS_COCK, AE_WOLF);
     public function CockStamen(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockStamen(cock, length, thickness); }
+	public const CockAnyStamen:Transformation = CockStamen(-1).registerTf(AS_COCK, AE_ALRAUNE);
     public function CockRedPanda(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockRedPanda(cock, length, thickness); }
+	public const CockAnyRedPanda:Transformation = CockRedPanda(-1).registerTf(AS_COCK, AE_RED_PANDA);
     public function CockGryphon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockGryphon(cock, length, thickness); }
+	public const CockAnyGryphon:Transformation = CockGryphon(-1).registerTf(AS_COCK, AE_GRYPHON);
     public function CockCentipede(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockCentipede(cock, length, thickness); }
+	public const CockAnyCentipede:Transformation = CockCentipede(-1).registerTf(AS_COCK, AE_CENTIPEDE);
     public function CockRaiju(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockRaiju(cock, length, thickness); }
+	public const CockAnyRaiju:Transformation = CockRaiju(-1).registerTf(AS_COCK, AE_RAIJU);
     public function CockUshiOni(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockUshiOni(cock, length, thickness); }
+	public const CockAnyUshiOni:Transformation = CockUshiOni(-1).registerTf(AS_COCK, AE_USHI_ONI);
     public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockInsect(cock, length, thickness); }
+	public const CockAnyInsect:Transformation = CockInsect(-1).registerTfMultiple(AS_COCK, AE_BEE, AE_ANT, AE_MANTIS);
     public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation 	{ return cocks.GrowKnot(cock, crit, mod, div); }
     public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation 	{ return cocks.CockChangeType(type, grow, oneByOne); }
 
@@ -489,7 +523,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FaceAvian: Transformation 				= face.FaceAvian.registerTf(AS_FACE, AE_AVIAN);
     public const FaceWolfFangs: Transformation 			= face.FaceWolfFangs.registerTf(AS_FACE, AE_WOLF);
     public const FaceOrcFangs: Transformation 			= face.FaceOrcFangs.registerTf(AS_FACE, AE_ORC);
-    public const FaceAnimalTeeth: Transformation 		= face.FaceAnimalTeeth.registerTfMultiple(AS_FACE, AE_CENTIPEDE, AE_CYCLOP, AE_DEMON, AE_GAZER, AE_FROST_WYRM, AE_GOBLIN, AE_HARPY, AE_IMP, AE_KITSUNE, AE_MELKIE, AE_OOMUKADE, AE_WENDIGO, AE_WOLF);
+    public const FaceAnimalTeeth: Transformation 		= face.FaceAnimalTeeth.registerTfMultiple(AS_FACE, AE_CENTIPEDE, AE_CYCLOP, AE_DEMON, AE_GAZER, AE_FROST_WYRM, AE_GOBLIN, AE_HARPY, AE_IMP, AE_KITSUNE, AE_MELKIE, AE_OOMUKADE, AE_WENDIGO, AE_WOLF).withAlchemyNames("Canines","Sharp canines");
     public const FaceBear: Transformation 				= face.FaceBear.registerTf(AS_FACE, AE_BEAR);
     public const FacePanda: Transformation 				= face.FacePanda.registerTf(AS_FACE, AE_PANDA);
     public const FaceFireSnail: Transformation 			= face.FaceFireSnail.registerTf(AS_FACE, AE_FIRE_SNAIL);
@@ -538,11 +572,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HairFeather: Transformation 	= hair.HairFeather.registerTf(AS_HAIR, AE_AVIAN);
     public const HairGorgon: Transformation 	= hair.HairGorgon.registerTf(AS_HAIR, AE_GORGON);
     public const HairSilky: Transformation 		= hair.HairSilky.registerTf(AS_HAIR, AE_ELF);
-    public const HairStorm: Transformation 		= hair.HairStorm.registerTfMultiple(AS_HAIR, AE_RAIJU, AE_KIRIN, AE_THUNDERBIRD);
-    public const HairBurning: Transformation 	= hair.HairBurning.registerTfMultiple(AS_HAIR, AE_FIRE_SNAIL, AE_HELLCAT, AE_HINEZUMI);
+    public const HairStorm: Transformation 		= hair.HairStorm.registerTfMultiple(AS_HAIR, AE_RAIJU, AE_KIRIN, AE_THUNDERBIRD).withAlchemyNames("StormHair","Storm hair");
+    public const HairBurning: Transformation 	= hair.HairBurning.registerTfMultiple(AS_HAIR, AE_FIRE_SNAIL, AE_HELLCAT, AE_HINEZUMI).withAlchemyNames("BurningHair", "Burning hair");
     public const HairSnowy: Transformation 		= hair.HairSnowy.registerTf(AS_HAIR, AE_YUKI_ONNA);
-    public const HairLeaf: Transformation 		= hair.HairLeaf.registerTfMultiple(AS_HAIR, AE_ALRAUNE, AE_PLANT, AE_YGGDRASIL);
-    public const HairGrass: Transformation 		= hair.HairGrass.registerTfMultiple(AS_HAIR, AE_ALRAUNE, AE_PLANT, AE_YGGDRASIL);
+    public const HairLeaf: Transformation 		= hair.HairLeaf.registerTfMultiple(AS_HAIR, AE_PLANT, AE_ALRAUNE, AE_YGGDRASIL);
+    public const HairGrass: Transformation 		= hair.HairGrass.registerTfMultiple(AS_HAIR, AE_PLANT, AE_ALRAUNE, AE_YGGDRASIL);
     public const HairGoo: Transformation 		= hair.HairGoo.registerTf(AS_HAIR, AE_GOO);
     public const HairGhost: Transformation 		= hair.HairGhost.registerTf(AS_HAIR, AE_GHOST);
     public const HairRatatoskr: Transformation 	= hair.HairRatatoskr.registerTf(AS_HAIR, AE_SQUIRREL);
@@ -813,16 +847,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function SkinDragonScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 		{ return skin.SkinDragonScales(coverage, options); }
 	public const SkinDragonScalesToFull:Transformation = SkinDragonScales().registerTfMultiple(AS_SKIN,
 			AE_DRAGON, AE_FAERIE_DRAGON, AE_FROST_WYRM, AE_JABBERWOCKY, AE_KIRIN)
-																		   .withAlchemyNames("Dragon Scale", "Dragon scales");
+																		   .withAlchemyNames("DragonScales", "Dragon scales");
     public function SkinChitin(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation 				{ return skin.SkinChitin(coverage, options); }
 	public const SkinChitinToFull:Transformation = SkinChitin().registerTfMultiple(AS_SKIN,
 			AE_ANT, AE_BEE, AE_MANTIS, AE_SPIDER, AE_SCORPION, AE_ATLACH_NACHA)
 															   .withAlchemyNames("Chitin", "chitin");
     public function SkinAquaScales(coverage: int = Skin.COVERAGE_HIGH, options: * = null): Transformation 				{ return skin.SkinAquaScales(coverage, options); }
 	public const SkinAquaScalesToFull:Transformation = SkinAquaScales().registerTfMultiple(AS_SKIN, AE_SHARK, AE_SIREN)
-																	   .withAlchemyNames("Aqua Scale", "Aqua scales");
+																	   .withAlchemyNames("AquaScales", "Aqua scales");
 	public function SkinBark(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation					{ return skin.SkinBark(coverage, options); }
-	public const SkinBarkToFull:Transformation = SkinBark().registerTfMultiple(AS_SKIN, AE_YGGDRASIL)
+	public const SkinBarkToFull:Transformation = SkinBark().registerTf(AS_SKIN, AE_YGGDRASIL)
 														   .withAlchemyNames("Bark", "Bark");
     public function SkinGoo(coverage: int = Skin.COVERAGE_COMPLETE, type: int = 0, options: * = null): Transformation 	{ return skin.SkinGoo(coverage, type, options); }
 	public const SkinGooToFull:Transformation = SkinGoo().registerTfMultiple(AS_SKIN, AE_GOO, AE_DARK_SLIME)
@@ -965,22 +999,37 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public var vaginas:VaginaTransformations = new VaginaTransformations();
     public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
     public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
+	public const VaginaRemoveFirst:Transformation = VaginaNone(0).registerTf(AS_VAGINA, AE_REMOVE);
     public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
-    public function SecondVagina(): Transformation { return vaginas.SecondVagina(); }
+    public const SecondVagina: Transformation = vaginas.SecondVagina();
     public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
+	public const VaginaAnyHuman:Transformation = VaginaHuman(-1).registerTf(AS_VAGINA, AE_HUMAN);
     public function VaginaHorse(vagina:int = 0): Transformation { return vaginas.VaginaHorse(vagina); }
+	public const VaginaAnyHorse:Transformation = VaginaHorse(-1).registerTf(AS_VAGINA, AE_HORSE);
     public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }
+	public const VaginaAnyKirin:Transformation = VaginaKirin(-1).registerTf(AS_VAGINA, AE_KIRIN);
     public function VaginaSandTrap(vagina:int = 0): Transformation { return vaginas.VaginaSandTrap(vagina); }
+	public const VaginaAnySandTrap:Transformation = VaginaSandTrap(-1).registerTf(AS_VAGINA, AE_SAND_TRAP);
     public function VaginaCaveWyrm(vagina:int = 0): Transformation { return vaginas.VaginaCaveWyrm(vagina); }
+	public const VaginaAnyCaveWyrm:Transformation = VaginaCaveWyrm(-1).registerTf(AS_VAGINA, AE_CAVE_WYRM);
     public function VaginaCentipede(vagina:int = 0): Transformation { return vaginas.VaginaCentipede(vagina); }
+	public const VaginaAnyCentipede:Transformation = VaginaCentipede(-1).registerTf(AS_VAGINA, AE_CENTIPEDE);
     public function VaginaManticore(vagina:int = 0): Transformation { return vaginas.VaginaManticore(vagina); }
+	public const VaginaAnyManticore:Transformation = VaginaManticore(-1).registerTf(AS_VAGINA, AE_MANTICORE);
     public function VaginaCancer(vagina:int = 0): Transformation { return vaginas.VaginaCancer(vagina); }
+	public const VaginaAnyCancer:Transformation = VaginaCancer(-1).registerTf(AS_VAGINA, AE_CANCER);
     public function VaginaDemonic(vagina:int = 0): Transformation { return vaginas.VaginaDemonic(vagina); }
+	public const VaginaAnyDemonic:Transformation = VaginaDemonic(-1).registerTf(AS_VAGINA, AE_DEMON);
     public function VaginaScylla(vagina:int = 0): Transformation { return vaginas.VaginaScylla(vagina); }
+	public const VaginaAnyScylla:Transformation = VaginaScylla(-1).registerTf(AS_VAGINA, AE_SCYLLA);
     public function VaginaNaga(vagina:int = 0): Transformation { return vaginas.VaginaNaga(vagina); }
+	public const VaginaAnyNaga:Transformation = VaginaNaga(-1).registerTf(AS_VAGINA, AE_SNAKE);
     public function VaginaShark(vagina:int = 0): Transformation { return vaginas.VaginaShark(vagina); }
+	public const VaginaAnyShark:Transformation = VaginaShark(-1).registerTf(AS_VAGINA, AE_SHARK);
     public function VaginaRaiju(vagina:int = 0): Transformation { return vaginas.VaginaRaiju(vagina); }
+	public const VaginaAnyRaiju:Transformation = VaginaRaiju(-1).registerTf(AS_VAGINA, AE_RAIJU);
     public function VaginaAlraune(vagina:int = 0): Transformation { return vaginas.VaginaAlraune(vagina); }
+	public const VaginaAnyAlraune:Transformation = VaginaAlraune(-1).registerTf(AS_VAGINA, AE_ALRAUNE);
 
 
 //WINGS
@@ -1011,13 +1060,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const WingsMantisLarge: Transformation 				= wings.WingsMantisLarge.registerTf(AS_WINGS, AE_MANTIS);
 	public const WingsMantisSmall: Transformation 				= wings.WingsMantisSmall.registerTf(AS_WINGS, AE_MANTIS);
 	public const WingsNightmare: Transformation 				= wings.WingsNightmare.registerTf(AS_WINGS, AE_NIGHTMARE);
-	public const WingsThunderousAura: Transformation 			= wings.WingsThunderousAura.registerTfMultiple(AS_WINGS, AE_KIRIN,AE_RAIJU);
+	public const WingsThunderousAura: Transformation 			= wings.WingsThunderousAura.registerTfMultiple(AS_WINGS, AE_KIRIN,AE_RAIJU).withAlchemyNames("Thund.Aura","Thunderous aura");
 	public const WingsDemonicLarge: Transformation 				= wings.WingsDemonicLarge.registerTf(AS_WINGS, AE_DEMON);
 	public const WingsDemonicTiny: Transformation 				= wings.WingsDemonicTiny.registerTf(AS_WINGS, AE_DEMON);
 	public const WingsVampire: Transformation 					= wings.WingsVampire.registerTf(AS_WINGS, AE_VAMPIRE);
 	public const WingsFeatheredAvian: Transformation 			= wings.WingsFeatheredAvian.registerTf(AS_WINGS, AE_AVIAN);
 	public const WingsEthereal: Transformation 					= wings.WingsEthereal.registerTf(AS_WINGS, AE_POLTERGEIST);
-	public const WingsLevitation: Transformation 				= wings.WingsLevitation.registerTfMultiple(AS_WINGS, AE_GAZER,AE_WENDIGO, AE_YUKI_ONNA);
+	public const WingsLevitation: Transformation 				= wings.WingsLevitation.registerTfMultiple(AS_WINGS, AE_GAZER,AE_WENDIGO, AE_YUKI_ONNA).withAlchemyNames("Levitation","Levitation");
 	public const WingsWindyAura: Transformation 				= wings.WingsWindyAura.registerTf(AS_WINGS, AE_KAMAITACHI);
 	public const WingsGiantDragonfly: Transformation 			= wings.WingsGiantDragonfly.registerTf(AS_WINGS, AE_SAND_TRAP);
 	public const WingsSeaDragon: Transformation 				= wings.WingsSeaDragon.registerTf(AS_WINGS, AE_SEA_DRAGON);
@@ -1122,5 +1171,32 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		];
 		/*
 */
+	
+	private function printAlchemyTable():void {
+		var dump:/*String*/Array = [];
+		var eid:int, sid:int;
+		for (eid = 0; eid < Essences.length; eid++) {
+			var ess:EnumValue = Essences[eid];
+			if (eid == 0) {
+				var row:/*String*/Array = ["Essences"];
+			} else {
+				if (!ess) continue;
+				row = [ess.name];
+			}
+			for (sid = 1; sid < Substances.length; sid++) {
+				var sub:EnumValue = Substances[sid];
+				if (!sub) continue;
+				if (eid == 0) {
+					row.push(sub.short);
+				} else {
+					var tf:PossibleEffect = Transformation.findSETf(sid, eid);
+					if (!tf) row.push("-");
+					else row.push(tf.alchemyShortName);
+				}
+			}
+			dump.push(row.join("\t"));
+		}
+		trace("\n"+dump.join("\n"));
+	}
 }
 }

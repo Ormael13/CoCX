@@ -62,13 +62,13 @@ public class AlchemyLib extends BaseContent {
 		xp    : 50
 	});
 	
-	// Component types
+	// Reagent types
 	
-	public static const CT_NOTHING:int   = 0;
-	public static const CT_SUBSTANCE:int = 1;
-	public static const CT_ESSENCE:int   = 2;
-	public static const CT_RESIDUE:int   = 3;
-	public static const CT_PIGMENT:int   = 4;
+	public static const RT_NOTHING:int   = 0;
+	public static const RT_SUBSTANCE:int = 1;
+	public static const RT_ESSENCE:int   = 2;
+	public static const RT_RESIDUE:int   = 3;
+	public static const RT_PIGMENT:int   = 4;
 	
 	// Substances (body parts)
 	
@@ -175,9 +175,9 @@ public class AlchemyLib extends BaseContent {
 	public static const DEFAULT_SUBSTANCES_DROP_TABLE:Array = [
 		[0.25, AS_ANTENNAE],
 		[1, AS_ARMS],
-		[1, AS_ASS],
-		[0.5, AS_BALLS],
-		[0.5, AS_BREASTS],
+		[0.25, AS_ASS],
+		[0.25, AS_BALLS],
+		[0.25, AS_BREASTS],
 		[0.25, AS_CLIT],
 		[1, AS_COCK],
 		[1, AS_EARS],
@@ -185,7 +185,7 @@ public class AlchemyLib extends BaseContent {
 		[1, AS_FACE],
 		[0.25, AS_GILLS],
 		[0.5, AS_HAIR],
-		[1, AS_HORNS],
+		[0.5, AS_HORNS],
 		[1, AS_LEGS],
 		[0.25, AS_NIPPLES],
 		[0.5, AS_REAR],
@@ -193,7 +193,7 @@ public class AlchemyLib extends BaseContent {
 		[0.25, AS_SKIN_PATTERN],
 		[1, AS_TAIL],
 		[0.25, AS_TONGUE],
-		[1, AS_VAGINA],
+		[0.25, AS_VAGINA],
 		[1, AS_WINGS]
 	];
 	

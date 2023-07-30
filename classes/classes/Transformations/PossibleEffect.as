@@ -39,9 +39,19 @@ public class PossibleEffect extends BaseContent {
 	public function applyEffect(doOutput:Boolean = true):void {
 	}
 	
-	public function registerEffect(id:String):PossibleEffect {
+	public function registerEffectRaw(id:String):PossibleEffect {
 		if (!(id in registry)) registry[id] = [];
 		registry[id].push(this);
+		return this;
+	}
+	public function registerEffect(substance:int, essence:int):PossibleEffect {
+		this.substance = substance;
+		this.essence = essence;
+		if (alchemyShortName == "Nothing") {
+			this.alchemyShortName = AlchemyLib.Essences[essence].short + AlchemyLib.Substances[substance].short;
+			this.alchemyLongName  = AlchemyLib.Essences[essence].name + " " + AlchemyLib.Substances[substance].name;
+		}
+		registerEffectRaw("TF_"+substance+"_"+essence);
 		return this;
 	}
 	public static function findEffect(id:String):PossibleEffect {

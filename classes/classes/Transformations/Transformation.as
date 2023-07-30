@@ -1,6 +1,4 @@
 package classes.Transformations {
-import classes.Items.Alchemy.AlchemyLib;
-
 /**
  * Base class for transformation events.
  */
@@ -51,11 +49,7 @@ public class Transformation extends PossibleEffect {
 	}
 	
 	public function registerTf(substance:int, essence:int):Transformation {
-		this.substance = substance;
-		this.essence = essence;
-		this.alchemyShortName = AlchemyLib.Essences[essence].short+AlchemyLib.Substances[substance].short;
-		this.alchemyLongName = AlchemyLib.Essences[essence].name+" "+AlchemyLib.Substances[substance].name;
-		registerEffect("TF_"+substance+"_"+essence);
+		registerEffect(substance, essence);
 		return this;
 	}
 	public static function findSETf(substance:int, essence:int):PossibleEffect {

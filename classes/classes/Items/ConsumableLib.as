@@ -114,14 +114,14 @@ public final class ConsumableLib extends AlchemyLib
 		public const QWHITED:HairDye = ItemTemplateLib.instance.createHairDye("Quartz White", 3);
 
 		//SKIN OILS & BODY LOTIONS
-		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
-		public const EBONYOL:SkinOil = new SkinOil("EbonyOl", "Ebony");
-		public const FAIR_OL:SkinOil = new SkinOil("FairOil", "Fair");
-		public const LIGHTOL:SkinOil = new SkinOil("LightOl", "Light");
-		public const MAHOGOL:SkinOil = new SkinOil("MahogOl", "Mahogany");
-		public const OLIVEOL:SkinOil = new SkinOil("OliveOl", "Olive");
-		public const RUSS_OL:SkinOil = new SkinOil("RussOil", "Russet");
-		public const TAN_OIL:SkinOil = new SkinOil("Tan Oil", "Tan");
+		public const DARK_OL:SkinOil = ItemTemplateLib.instance.createSkinOil("dark");
+		public const EBONYOL:SkinOil = ItemTemplateLib.instance.createSkinOil("ebony");
+		public const FAIR_OL:SkinOil = ItemTemplateLib.instance.createSkinOil("fair");
+		public const LIGHTOL:SkinOil = ItemTemplateLib.instance.createSkinOil("light");
+		public const MAHOGOL:SkinOil = ItemTemplateLib.instance.createSkinOil("mahogany");
+		public const OLIVEOL:SkinOil = ItemTemplateLib.instance.createSkinOil("olive");
+		public const RUSS_OL:SkinOil = ItemTemplateLib.instance.createSkinOil("russet");
+		public const TAN_OIL:SkinOil = ItemTemplateLib.instance.createSkinOil("tan");
 
 		public const CLEARLN:BodyLotion = new BodyLotion("ClearLn", "Clear", "smooth thick creamy liquid");
 		public const ROUGHLN:BodyLotion = new BodyLotion("RoughLn", "Rough", "thick abrasive cream");

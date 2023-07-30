@@ -1,6 +1,7 @@
 package classes.Items.Alchemy {
 import classes.Items.Consumable;
 import classes.Transformations.PossibleEffect;
+import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
 
 public class MutagenPill extends Consumable {
@@ -47,10 +48,20 @@ public class MutagenPill extends Consumable {
 	override public function useItem():Boolean {
 		clearOutput();
 		outputText("You swallow the "+longNameBase+". You feel warmth spreading from your stomach...\n\n");
-		if (pillEffect && pillEffect.isPossible() && (Math.random()*100 < AlchemyLib.PillPowerTiers[power].chance)) {
-			pillEffect.applyEffect(true);
-		} else {
-			outputText("However, it quickly fades away. ");
+		if (pillEffect) {
+			if (Math.random() * 100 > AlchemyLib.PillPowerTiers[power].chance) {
+				outputText("However, it's too weak and quickly fades away. ");
+			} else {
+				if (pillEffect is Transformation && (pillEffect as Transformation).isPresent()) {
+					// already tf'ed
+					outputText("The pill's powers resonate with your body and quickly fade away.")
+				} else if (!pillEffect.isPossible()) {
+					// impossible
+					outputText("The pill's powers conflict with your body and quickly fade away.")
+				} else {
+					pillEffect.applyEffect(true);
+				}
+			}
 		}
 		return false;
 	}

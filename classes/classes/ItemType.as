@@ -55,6 +55,15 @@ public class ItemType extends ItemConstants
 			"RussetD": dynamicItemId("HairDye", {color:"Russet",rarity:1}),
 			"SnowW D": dynamicItemId("HairDye", {color:"Snow White",rarity:2}),
 			"QWhiteD": dynamicItemId("HairDye", {color:"Quartz White",rarity:3}),
+			// Old skin oils
+			"DarkOil": dynamicItemId("SkinOil", {color: "dark"}),
+			"EbonyOl": dynamicItemId("SkinOil", {color: "ebony"}),
+			"FairOil": dynamicItemId("SkinOil", {color: "fair"}),
+			"LightOl": dynamicItemId("SkinOil", {color: "light"}),
+			"MahogOl": dynamicItemId("SkinOil", {color: "mahogany"}),
+			"OliveOl": dynamicItemId("SkinOil", {color: "olive"}),
+			"RussOil": dynamicItemId("SkinOil", {color: "russet"}),
+			"Tan Oil": dynamicItemId("SkinOil", {color: "tan"}),
 			// Old weapons
 			"Dagger ": dynamicItemId("DynamicWeapon",
 					{t: "dagger", q: 0, c: CS_KNOWN_UNCURSED, r: RARITY_COMMON, e: []}),

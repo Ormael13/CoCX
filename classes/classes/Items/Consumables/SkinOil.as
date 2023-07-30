@@ -2,6 +2,7 @@ package classes.Items.Consumables
 {
 import classes.BodyParts.Skin;
 import classes.EngineCore;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
@@ -14,15 +15,16 @@ import classes.Scenes.SceneLib;
 	{
 		private var _color:String;
 		
-		public function SkinOil(id:String, color:String)
+		public function SkinOil(id:String, params:Object)
 		{
+			var color:String = params.color;
 			this._color = color.toLowerCase();
-			var shortName:String = color + " Oil";
+			var shortName:String = capitalizeFirstLetter(color) + " Oil";
 			var longName:String = "a bottle of " + this._color + " oil";
 			var value:int = ConsumableLib.DEFAULT_VALUE;
 			var description:String = "A small glass bottle filled with a smooth clear liquid. A label across the front says, \"" + color + " Skin Oil.\"";
 			super(id, shortName, longName, value, description);
-			refineableInto([], [], [], [_color]);
+			refineableInto([[AlchemyLib.AS_SKIN]], [], [], [_color]);
 		}
 		
 		override public function useItem():Boolean {

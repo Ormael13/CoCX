@@ -6,7 +6,6 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
-import classes.Items.Consumables.OvipositionElixir;
 import classes.Races.*;
 import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
@@ -1999,7 +1998,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.hasVagina() && player.vaginas.length == 1 && type == 3 && rand(8) == 0 && changes < changeLimit) {
-            transformations.SecondVagina().applyEffect();
+            transformations.SecondVagina.applyEffect();
             changes++;
         }
         //Go into heat
@@ -2195,7 +2194,7 @@ public final class Mutations extends MutationsHelper {
         player.growCock(0, cockBonus/2);
         player.growCock(1, cockBonus/2);
         if (doOutput) outputText("\n");
-        if (player.hasVagina() && player.vaginas.length < 2) transformations.SecondVagina().applyEffect(doOutput);
+        if (player.hasVagina() && player.vaginas.length < 2) transformations.SecondVagina.applyEffect(doOutput);
         if (doOutput) outputText("\n");
         if (player.hasVagina() && player.bRows() < 3) transformations.BreastRowsThree.applyEffect(doOutput);
         if (doOutput) outputText("\n");

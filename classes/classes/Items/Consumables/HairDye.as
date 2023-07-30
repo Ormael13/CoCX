@@ -5,6 +5,7 @@ import classes.BodyParts.Skin;
 import classes.CoC;
 import classes.EngineCore;
 import classes.ItemType;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
 
@@ -24,11 +25,11 @@ public class HairDye extends Consumable
 			var color:String = params.color;
 			var rarity:int = params.rarity;
 			_color = color.toLowerCase();
-			var shortName:String = color + " Dye";
+			var shortName:String = capitalizeFirstLetter(color) + " Dye";
 			var longName:String = "a vial of " + _color + " hair dye";
 			var description:String = "This bottle of dye will allow you to change the color of your hair, fur, scales, chitin, or feathers.";
 			super(id, shortName, longName, RARITY_TO_VALUE[rarity] || 6, description);
-			refineableInto([], [], [], [_color]);
+			refineableInto([[1, AlchemyLib.AS_HAIR]], [], [], [_color]);
 		}
 		
 		override public function canUse():Boolean {

@@ -103,8 +103,8 @@ public class MutagenPillCrafting extends BaseContent {
 				 .hint("Refine the pill.")
 				 .disableIf(furnaceSubstance == 0, "Select an alchemical substance.")
 				 .disableIf(furnaceEssence == 0, "Select an alchemical essence.")
-		button(1).show("Substance", curry(selectComponent, AlchemyLib.CT_SUBSTANCE));
-		button(2).show("Essence", curry(selectComponent, AlchemyLib.CT_ESSENCE));
+		button(1).show("Substance", curry(selectReagent, AlchemyLib.RT_SUBSTANCE));
+		button(2).show("Essence", curry(selectReagent, AlchemyLib.RT_ESSENCE));
 		button(5).show("Add S.Stone", addSpiritStone)
 				 .hint("Put spirit stone into furnace to improve the pill quality.\n\nShift+click to add maximum.")
 				 .disableIf(flags[kFLAGS.SPIRIT_STONES] <= 0)
@@ -120,24 +120,24 @@ public class MutagenPillCrafting extends BaseContent {
 				  .disableIf(furnaceSubstance > 0 || furnaceEssence != 0 || furnaceStones != 0,
 						  "Empty the furnace first!");
 	}
-	private function selectComponent(type:int):void {
+	private function selectReagent(type:int):void {
 		clearOutput();
 		mainView.linkHandler = function (event:String):void {
-			if (type == AlchemyLib.CT_SUBSTANCE) {
+			if (type == AlchemyLib.RT_SUBSTANCE) {
 				furnaceSubstance = int(event);
 				SceneLib.crafting.addSubstance(furnaceSubstance, -1);
-			} else if (type == AlchemyLib.CT_ESSENCE) {
+			} else if (type == AlchemyLib.RT_ESSENCE) {
 				furnaceEssence = int(event);
 				SceneLib.crafting.addEssence(furnaceEssence, -1);
 			}
 			pillCraftingMenu();
 		}
-		if (type == AlchemyLib.CT_SUBSTANCE) {
+		if (type == AlchemyLib.RT_SUBSTANCE) {
 			outputText("<b>Alchemical substances</b>:");
-		} else if (type == AlchemyLib.CT_ESSENCE) {
+		} else if (type == AlchemyLib.RT_ESSENCE) {
 			outputText("<b>Alchemical essences</b>:");
 		}
-		var list:Array = SceneLib.crafting.listAlchemyComponents(type);
+		var list:Array = SceneLib.crafting.listAlchemyReagents(type);
 		if (list.length == 0) {
 			outputText("\nYou don't have any! Refine ingredients in the alembic.");
 		} else {

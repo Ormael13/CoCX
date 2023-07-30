@@ -6,7 +6,7 @@ package classes.Items
 import classes.CoC;
 import classes.DefaultDict;
 import classes.EngineCore;
-import classes.Items.Alchemy.AlchemyComponent;
+import classes.Items.Alchemy.AlchemyReagent;
 import classes.Player;
 import classes.Scenes.Camp;
 import classes.Scenes.SceneLib;
@@ -113,7 +113,7 @@ import classes.internals.Utils;
 			}
 			return this;
 		}
-		public function refine(chances:/*Number*/Array):AlchemyComponent {
+		public function refine(chances:/*Number*/Array):AlchemyReagent {
 			var sum:Number = chances[0];
 			if (substances) sum += chances[1];
 			if (essences) sum += chances[2];
@@ -122,13 +122,13 @@ import classes.internals.Utils;
 			if (sum <= 0) return null;
 			var x:Number = Math.random()*sum;
 			x -= chances[1];
-			if (x <= 0) return AlchemyComponent.substance(weightedRandom(substances));
+			if (x <= 0) return AlchemyReagent.substance(weightedRandom(substances));
 			x -= chances[2];
-			if (x <= 0) return AlchemyComponent.essence(weightedRandom(essences));
+			if (x <= 0) return AlchemyReagent.essence(weightedRandom(essences));
 			x -= chances[3];
-			if (x <= 0) return AlchemyComponent.residue(weightedRandom(residues));
+			if (x <= 0) return AlchemyReagent.residue(weightedRandom(residues));
 			x -= chances[4];
-			if (x <= 0) return AlchemyComponent.pigment(weightedRandom(pigments));
+			if (x <= 0) return AlchemyReagent.pigment(weightedRandom(pigments));
 			return null;
 		}
 	}

@@ -1435,7 +1435,7 @@ public class Creature extends Utils
 		//Sexual Stuff
 		//MALE STUFF
 		//public var cocks:Array;
-		public var cocks:Array;
+		public var cocks:/*Cock*/Array;
 		//balls
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
