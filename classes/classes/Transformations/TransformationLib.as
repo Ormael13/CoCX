@@ -7,7 +7,7 @@ import classes.internals.EnumValue;
 
 public class TransformationLib extends MutationsHelper {
 public function TransformationLib() {
-	printAlchemyTable();
+//	printAlchemyTable();
 }
 
 // VARIABLE NAMING: <body part> + <what to do> + <flavour>
