@@ -35,6 +35,7 @@ package classes.Scenes.Monsters
 			bonusWrath -= 200;
 			bonusSoulforce -= 400;
 			HP = maxHP();
+			lust = 0;
 			removeStatusEffect(StatusEffects.TrueFormAngel);
 			if (this.short == "Gabriel") this.short = "Uriel";
 			else this.short = "Gabriel";
