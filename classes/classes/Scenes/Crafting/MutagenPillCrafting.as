@@ -70,6 +70,17 @@ public class MutagenPillCrafting extends BaseContent {
 			outputText("<b>WARNING: Too many spirit stones. </b>")
 		}
 		outputText("\n<b>Skill</b>: " + player.alchemySkillLevel);
+		outputText("\n<b>Result</b>: ");
+		if (debug || SceneLib.crafting.isTfPillKnown(furnaceSubstance, furnaceEssence)) {
+			var tf:PossibleEffect = Transformation.findSETf(furnaceSubstance, furnaceEssence);
+			if (tf) {
+				outputText(tf.alchemyLongName);
+			} else {
+				outputText("<b>Impossible combination!</b>")
+			}
+		} else {
+			outputText("???")
+		}
 		outputText("\n<b>Refinement chances</b>:");
 		outputText("<ul>");
 		var chances:Array = calcMutagenPillChances();
@@ -83,16 +94,8 @@ public class MutagenPillCrafting extends BaseContent {
 		}
 		outputText("</ul>");
 		if (furnaceStones == stoneLimit()) {
-			outputText("\nYou can't fit more spirit stones in the furnace!");
+			outputText("\n\nYou can't fit more spirit stones in the furnace!");
 			if (silly()) outputText(" The pile emits an eerie blue glow and you hear a chaotic, intermittent clicking noise.");
-		}
-		if (debug) {
-			var tf:PossibleEffect = Transformation.findSETf(furnaceSubstance, furnaceEssence);
-			if (tf) {
-				outputText("\n<i>Result</i>: "+tf.alchemyLongName);
-			} else {
-				outputText("\n<i>Impossible combination!</i>")
-			}
 		}
 		
 		// [ Refine!] [Substanc] [Essence ] [        ] [        ]
@@ -185,6 +188,7 @@ public class MutagenPillCrafting extends BaseContent {
 			player.giveAlchemyXP(AlchemyLib.PillPowerTiers[0].xp);
 			doNext(camp.returnToCampUseOneHour);
 		} else {
+			SceneLib.crafting.setTfPillKnown(furnaceSubstance, furnaceEssence);
 			// TODO @aimozg can craft multiple, depending on skill or other factors
 			var npills:int = 1;
 			outputText("The whirling cloud slows down, then shrinks into " +

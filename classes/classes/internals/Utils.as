@@ -574,6 +574,18 @@ public class Utils extends Object
 			return ""+input;
 		}
 
+		//
+		/**
+		 * randomIncrement(3.14) = 3 + (1 in 14% rolls)
+		 *
+		 * Return x or (x+1); P(x+1) = x-floor(x)
+		 */
+		public static function randomIncrement(x:Number):Number {
+			var i:Number = Math.floor(x);
+			if (Math.random() < x - i) i++;
+			return i;
+		}
+		
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
 		// Accepts any type.
 		// Can also accept a *single* array of items, in which case it picks from the array instead.

@@ -5,6 +5,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Alchemy.AlchemyReagent;
 import classes.Items.Alchemy.AlembicCatalyst;
+import classes.Items.Consumable;
 import classes.Scenes.Crafting.AlchemyExtraction;
 import classes.Scenes.Crafting.MutagenPillCrafting;
 import classes.internals.EnumValue;
@@ -160,6 +161,15 @@ public class Crafting extends BaseContent implements SaveableState
 		public static var residueStock:Object = {};
 		// Map of pigment color -> count
 		public static var pigmentStock:Object = {};
+		
+		// Map of itemId -> reagentType -> set of reagent id
+		// ex. { FoxJewl: { RT_ESSENCE: { AE_FOX: true } } }
+		// It is saved in a compressed form
+		public static var ingredientKnowledge:Object = {};
+		// Set of tfId
+		// ex. { TF_2_3: true }
+		// It is saved in a compressed form (array of strings)
+		public static var tfPillKnowledge:Object = {}
 
 		public function stateObjectName():String {
 			return "Crafting";
@@ -256,6 +266,11 @@ public class Crafting extends BaseContent implements SaveableState
 			essenceStock = {};
 			residueStock = {};
 			pigmentStock = {};
+			// do not reset knowledge on ascension
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				ingredientKnowledge = {};
+				tfPillKnowledge = {};
+			}
 		}
 
 		public function saveToObject():Object {
@@ -349,7 +364,9 @@ public class Crafting extends BaseContent implements SaveableState
 				"substanceStock": substanceStock,
 				"essenceStock": essenceStock,
 				"residueStock": residueStock,
-				"pigmentStock": pigmentStock
+				"pigmentStock": pigmentStock,
+				"tfPillKnowledge": compressTfPillKnowledge(),
+				"ingredientKnowledge": compressIngredientKnowledge()
 			};
 		}
 
@@ -445,6 +462,8 @@ public class Crafting extends BaseContent implements SaveableState
 				essenceStock = objectOr(o["essenceStock"], {});
 				residueStock = objectOr(o["residueStock"], {});
 				pigmentStock = objectOr(o["pigmentStock"], {});
+				uncompressTfPillKnowledge(o["tfPillKnowledge"]);
+				uncompressIngredientKnowledge(o["ingredientKnowledge"]);
 			} else {
 				// loading from old save
 				resetState();
@@ -872,7 +891,7 @@ private function craftingMaterialsMoonstone1Down():void {
 					outputText("</ul>");
 				}
 			}
-			outputText("<b>Reagent storag capacity: </b>"+maxReagentCount()+" each.");
+			outputText("<b>Reagent storage capacity: </b>"+maxReagentCount()+" each.");
 			outputText("\n");
 			outputText("\n<b><u>Alchemical substances</u></b>:");
 			printAlchemyReagentStock(AlchemyLib.RT_SUBSTANCE);
@@ -1024,6 +1043,117 @@ private function craftingMaterialsMoonstone1Down():void {
 					break;
 			}
 			return result;
+		}
+		
+		//================================//
+		// ALCHEMY - KNOWLEDGE MANAGEMENT //
+		//================================//
+		// { itemId: { reagentType: { reagentId: true } } }
+		// compressed into
+		// { itemId: [ compressedRT1, compressedRT2, compressedRT3, compressedRT4 ]
+		// where compressedRTX is knowledge of reagent type X in form:
+		// "*" - all known, "0" - all unknown
+		// else array of values
+		// e.g.
+		// { FoxJewl: {
+		//              RT_SUBSTANCE: { 2 :true, 19:true, /* some unknown */ }
+		//              RT_ESSENCE: { all: true },
+		//              RT_RESIDUE: { 5: true, /* some unknown */ },
+		//              RT_PIGMENT: {}
+		// }          }
+		// =>
+		// { FoxJewl: [ [2,19], "*", [5], "0" ] }
+		private function compressIngredientKnowledge():Object {
+			function compressOneEntry(source:Object, itype:Consumable, rtype:int):* {
+				if (!source) return "0";
+				var reagents:/*AlchemyReagent*/Array = itype.getRefineReagents(rtype);
+				var hasUnknown:Boolean = false, hasKnown:Boolean = false;
+				for each (var ar:AlchemyReagent in reagents) {
+					if (source[ar.key()]) {
+						hasKnown = true;
+					} else {
+						hasUnknown = true;
+					}
+					if (hasKnown && hasUnknown) break;
+				}
+				if (hasKnown && !hasUnknown) return "*";
+				if (!hasKnown && hasUnknown) return "0";
+				var result:Array = [];
+				for each(ar in reagents) {
+					if (source[ar.key()]) result.push(ar.key());
+				}
+				return result;
+			}
+			var result:Object = {};
+			for (var itemId:String in ingredientKnowledge) {
+				var source:Object = ingredientKnowledge[itemId];
+				if (!source) continue;
+				var itype:Consumable = ItemType.lookupItem(itemId) as Consumable;
+				if (!itype) continue;
+				var data:Array = [];
+				for (var rt:int = 1 /* SUBSTANCE */; rt <= 4 /* PIGMENT */; rt++) {
+					data.push(compressOneEntry(source[rt], itype, rt));
+				}
+				result[itemId] = data;
+			}
+			return result;
+		}
+		private function uncompressIngredientKnowledge(compressed:Object):void {
+			function uncompressOneEntry(source:*, itype:Consumable, rtype:int):Object {
+				if (!source || source == "0") return {};
+				var result:Object = {};
+				if (source == "*") {
+					for each (var ar:AlchemyReagent in itype.getRefineReagents(rtype)) {
+						result[ar.key()] = true;
+					}
+				}
+				for each (var key:* in (source as Array)) {
+					result[key] = true;
+				}
+				return result;
+			}
+			ingredientKnowledge = {};
+			for (var itemId:String in compressed) {
+				var itemType:Consumable = ItemType.lookupItem(itemId) as Consumable;
+				if (!itemType) continue;
+				var sourceData:Array = compressed[itemId] as Array;
+				var itemEntry:Object = {};
+				for (var rt:int = 1 /* SUBSTANCE */; rt <= 4 /* PIGMENT */; rt++) {
+					itemEntry[rt] = uncompressOneEntry(sourceData[rt-1], itemType, rt);
+				}
+				ingredientKnowledge[itemId] = itemEntry;
+			}
+		}
+		// { TF_1_2:true, TF_4_5:true } -> ["TF_1_2", "TF_4_5"]
+		private function compressTfPillKnowledge():Array {
+			return keys(tfPillKnowledge);
+		}
+		private function uncompressTfPillKnowledge(compressed:Array):void {
+			tfPillKnowledge = {};
+			for each (var tf:String in compressed) {
+				tfPillKnowledge[tf] = true;
+			}
+		}
+		
+		public function isTfPillKnown(substance:int, essence:int):Boolean {
+			return !!tfPillKnowledge["TF_"+substance+"_"+essence];
+		}
+		public function setTfPillKnown(substance:int, essence:int):void {
+			tfPillKnowledge["TF_"+substance+"_"+essence] = true;
+		}
+		public function isReagentKnown(itemId:String, reagentType:int, reagentKey:*):Boolean {
+			var o:Object = ingredientKnowledge[itemId];
+			if (!o) return false;
+			o = o[reagentType];
+			if (!o) return false;
+			return !!o[reagentKey];
+		}
+		public function setReagentKnown(itemId:String, reagentType:int, reagentKey:*):void {
+			var ik:Object = ingredientKnowledge[itemId];
+			if (!ik) ik = (ingredientKnowledge[itemId] = {});
+			var rk:Object = ik[reagentType];
+			if (!rk) rk = (ik[reagentType] = {});
+			rk[reagentKey] = true;
 		}
 		
 		//======================//

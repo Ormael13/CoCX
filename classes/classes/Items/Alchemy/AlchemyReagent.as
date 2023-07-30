@@ -29,10 +29,21 @@ public class AlchemyReagent {
         return "ERROR "+type+"/"+intValue+"/"+stringValue;
     }
     
+    public function key():* {
+        return (type == AlchemyLib.RT_PIGMENT) ? stringValue : intValue;
+    }
+    
     private static function getAC(key:*, type:int, intValue:int, stringValue:String):AlchemyReagent {
         var dict:Object= Dicts[type];
         if(key in dict) return dict[key] as AlchemyReagent;
         return (dict[key] = new AlchemyReagent(type,intValue,stringValue));
+    }
+    public static function getReagent(type:int, value:*):AlchemyReagent {
+        if (type == AlchemyLib.RT_PIGMENT) {
+            return getAC(value, type, 0, String(value));
+        } else {
+            return getAC(value, type, int(value), null);
+        }
     }
     public static function substance(substanceId:int):AlchemyReagent {
         return getAC(substanceId, AlchemyLib.RT_SUBSTANCE, substanceId, null);

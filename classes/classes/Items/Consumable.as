@@ -6,6 +6,7 @@ package classes.Items
 import classes.CoC;
 import classes.DefaultDict;
 import classes.EngineCore;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Alchemy.AlchemyReagent;
 import classes.Player;
 import classes.Scenes.Camp;
@@ -72,6 +73,30 @@ import classes.internals.Utils;
 		public var residues: /*Number[]*/Array = null;
 		// Random drop table: [weight:number, pigment:String][];
 		public var pigments: /*Array*/Array = null;
+		
+		public function getRefineReagents(type:int):/*AlchemyReagent*/Array {
+			var result:/*AlchemyReagent*/Array = [];
+			var source:/*Array*/Array;
+			switch (type) {
+				case AlchemyLib.RT_ESSENCE: source = essences; break;
+				case AlchemyLib.RT_SUBSTANCE: source = substances; break;
+				case AlchemyLib.RT_RESIDUE: source = residues; break;
+				case AlchemyLib.RT_PIGMENT: source = pigments; break;
+			}
+			for each (var k:Array in source) {
+				result.push(AlchemyReagent.getReagent(type, k[1]));
+			}
+			return result;
+		}
+		public function getAllRefineReagents():/*AlchemyReagent*/Array {
+			return concat(
+					getRefineReagents(AlchemyLib.RT_ESSENCE),
+					getRefineReagents(AlchemyLib.RT_RESIDUE),
+					getRefineReagents(AlchemyLib.RT_PIGMENT),
+					getRefineReagents(AlchemyLib.RT_SUBSTANCE)
+			)
+		}
+		
 		public function get isRefinable():Boolean {
 			return essences || substances || residues || pigments;
 		}
