@@ -210,18 +210,28 @@ use namespace CoC;
 		// Alchemical catalysts:
 		// Substance/Essence/Residue/Pigment
 		// Minor/Common/Major
-		public const MIN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_SUB_ACAT", AlchemyLib.CT_SUBSTANCE, 1);
-		public const CMN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_SUB_ACAT", AlchemyLib.CT_SUBSTANCE, 2);
-		public const MAJ_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_SUB_ACAT", AlchemyLib.CT_SUBSTANCE, 3);
-		public const MIN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_ESS_ACAT", AlchemyLib.CT_ESSENCE, 1);
-		public const CMN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_ESS_ACAT", AlchemyLib.CT_ESSENCE, 2);
-		public const MAJ_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_ESS_ACAT", AlchemyLib.CT_ESSENCE, 3);
-		public const MIN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_RES_ACAT", AlchemyLib.CT_RESIDUE, 1);
-		public const CMN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_RES_ACAT", AlchemyLib.CT_RESIDUE, 2);
-		public const MAJ_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_RES_ACAT", AlchemyLib.CT_RESIDUE, 3);
-		public const MIN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_PIG_ACAT", AlchemyLib.CT_PIGMENT, 1);
-		public const CMN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_PIG_ACAT", AlchemyLib.CT_PIGMENT, 2);
-		public const MAJ_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_PIG_ACAT", AlchemyLib.CT_PIGMENT, 3);
+		public const MIN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_SUB_ACAT", AlchemyLib.RT_SUBSTANCE, 1);
+		public const CMN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_SUB_ACAT", AlchemyLib.RT_SUBSTANCE, 2);
+		public const MAJ_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_SUB_ACAT", AlchemyLib.RT_SUBSTANCE, 3);
+		public const MIN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_ESS_ACAT", AlchemyLib.RT_ESSENCE, 1);
+		public const CMN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_ESS_ACAT", AlchemyLib.RT_ESSENCE, 2);
+		public const MAJ_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_ESS_ACAT", AlchemyLib.RT_ESSENCE, 3);
+		public const MIN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_RES_ACAT", AlchemyLib.RT_RESIDUE, 1);
+		public const CMN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_RES_ACAT", AlchemyLib.RT_RESIDUE, 2);
+		public const MAJ_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_RES_ACAT", AlchemyLib.RT_RESIDUE, 3);
+		public const MIN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_PIG_ACAT", AlchemyLib.RT_PIGMENT, 1);
+		public const CMN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_PIG_ACAT", AlchemyLib.RT_PIGMENT, 2);
+		public const MAJ_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_PIG_ACAT", AlchemyLib.RT_PIGMENT, 3);
+		
+		public const DYE_FOUNDATION:SimpleUseable = new SimpleUseable("DyeFoundation", "Dye Found", "a vial of dye foundation", 50,
+				"Alchemical reagent to turn pigments into hair dyes.",
+				"You inspect the transparent liquid in the vial.\n\n<i>(Use Crafting menu to create hair dyes from this item)</i>");
+		public const OIL_FOUNDATION:SimpleUseable = new SimpleUseable("OilFoundation", "Oil Found", "a bottle of skin oil foundation", 100,
+				"Alchemical reagent to turn pigments into skin oils.",
+				"You inspect the transparent liquid in the ottle.\n\n<i>(Use Crafting menu to create skin oils from this item)</i>");
+		public const DROP_FOUNDATION:SimpleUseable = new SimpleUseable("DropFoundation", "Drop Found", "a vial of eyedrop foundation", 150,
+				"Alchemical reagent to turn pigments into iris-recoloring eyedrops.",
+				"You inspect the transparent liquid in the vial.\n\n<i>(Use Crafting menu to create eyedrops from this item)</i>");
 		
 		public const List_AllCatalysts:/*ItemType*/Array = [
 				MIN_SUB_ACAT,

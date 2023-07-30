@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.MerchantMenu;
 import classes.Scenes.Crafting;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -378,7 +379,7 @@ private function rathazulWorkOffer():Boolean {
 			player.gems -= price;
 			statScreenRefresh();
 		}
-		outputText("\n\n<b>You now can use "+SceneLib.crafting.alchemyExtraction.alembicName()+" to refine consumable items into alchemical components!</b> ");
+		outputText("\n\n<b>You now can use "+SceneLib.crafting.alchemyExtraction.alembicName()+" to refine consumable items into alchemical reagents!</b> ");
 		if (Crafting.furnaceLevel == 0) outputText("For a full set of alchemical tools, you need a furnace.")
 		Crafting.alembicLevel = Crafting.ALEMBIC_LEVEL_SIMPLE;
 		doNext(playerMenu);
@@ -746,6 +747,9 @@ private function purifyMinoCum():void{
 //------------
 private function rathazulShopMenu():void {
 	menu();
+	// [HairDyes] [SkinOils] [BLotions] [Reducto ] [GroPlus ]
+	// [NumbOil ] [PuriPhil] [H.Pill  ] [M.H.Pill] [B.H.Pill]
+	// [ProLacta] [Scorpinm] [        ] [        ] [Back    ]
 	//Dyes
 	if (dyes) {
 		addButton(0, "Hair Dyes", buyDyes).hint("Ask him to make a dye for you. \n\nCost: 50 Gems.");
@@ -792,66 +796,34 @@ private function rathazulShopMenu():void {
 	addButton(14, "Back", returnToRathazulMenu);
 }
 //Hair dyes
-private function buyDyes(fromPage2:Boolean = false):void {
+private function buyDyes():void {
 	clearOutput();
-	if (!fromPage2) {
-		spriteSelect(SpriteDb.s_rathazul);
-		outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
-		outputText("\n\n<b>(-50 Gems)</b>");
-		player.gems -= 50;
-		statScreenRefresh();
-	}
+	spriteSelect(SpriteDb.s_rathazul);
+	outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
+	statScreenRefresh();
 	menu();
-	addButton(0, "Auburn", buyDye, consumables.AUBURND);
-	addButton(1, "Black", buyDye, consumables.BLACK_D);
-	addButton(2, "Blond", buyDye, consumables.BLOND_D);
-	addButton(3, "Brown", buyDye, consumables.BROWN_D);
-	addButton(5, "Red", buyDye, consumables.RED_DYE);
-	addButton(6, "White", buyDye, consumables.WHITEDY);
-	addButton(7, "Gray", buyDye, consumables.GRAYDYE);
+	var merchantMenu:MerchantMenu = new MerchantMenu();
+	merchantMenu.addItem(useables.REAGENT, 50);
+	merchantMenu.addItem(useables.DYE_FOUNDATION);
+	merchantMenu.addItem(useables.OIL_FOUNDATION);
+	merchantMenu.addItem(useables.DROP_FOUNDATION);
+	merchantMenu.addItem(consumables.AUBURND, 50);
+	merchantMenu.addItem(consumables.BLACK_D, 50);
+	merchantMenu.addItem(consumables.BLOND_D, 50);
+	merchantMenu.addItem(consumables.BROWN_D, 50);
+	merchantMenu.addItem(consumables.RED_DYE, 50);
+	merchantMenu.addItem(consumables.WHITEDY, 50);
+	merchantMenu.addItem(consumables.GRAYDYE, 50);
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) {
-		addButton(4, "Next", buyDyesPage2);
-		addButton(8, "Blue", buyDye, consumables.BLUEDYE);
-		addButton(9, "Green", buyDye, consumables.GREEN_D);
-		addButton(10, "Orange", buyDye, consumables.ORANGDY);
-		addButton(11, "Purple", buyDye, consumables.PURPDYE);
-		addButton(12, "Pink", buyDye, consumables.PINKDYE);
+		merchantMenu.addItem(consumables.BLUEDYE, 50);
+		merchantMenu.addItem(consumables.GREEN_D, 50);
+		merchantMenu.addItem(consumables.ORANGDY, 50);
+		merchantMenu.addItem(consumables.PURPDYE, 50);
+		merchantMenu.addItem(consumables.PINKDYE, 50);
+		merchantMenu.addItem(consumables.RUSSDYE, 50);
+		merchantMenu.addItem(consumables.RAINDYE, 50);
 	}
-	addButton(13, "Reagent", buyDye, useables.REAGENT);
-	addButton(14, "Never mind", buyDyeNevermind);
-}
-private function buyDyesPage2():void {
-	clearOutput();
-	if (player.statusEffectv2(StatusEffects.MetRathazul) < 8) { // Failsafe, should probably never happen (Stadler76)
-		buyDyes(true);
-		return;
-	}
-	spriteSelect(SpriteDb.s_rathazul);
-	menu();
-	addButton(0, "Russet", buyDye, consumables.RUSSDYE);
-	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
-		addButton(1, "Rainbow", buyDye, consumables.RAINDYE);
-	}
-	addButton(4, "Previous", buyDyes, true);
-	addButton(14, "Never mind", buyDyeNevermind);
- }
-
-private function buyDye(dye:ItemType):void {
-	spriteSelect(SpriteDb.s_rathazul);
-	clearOutput();
-	outputText(images.showImage("rathazul-buy-dye"));
-	inventory.takeItem(dye, rathazulShopMenu);
-	statScreenRefresh();
-	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-}
-
-private function buyDyeNevermind():void {
-	spriteSelect(SpriteDb.s_rathazul);
-	clearOutput();
-	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
-	player.gems += 50;
-	statScreenRefresh();
-	rathazulShopMenu();
+	merchantMenu.show(rathazulShopMenu);
 }
 
 //Scales dyes

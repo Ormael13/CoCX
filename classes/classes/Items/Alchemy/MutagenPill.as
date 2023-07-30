@@ -52,7 +52,7 @@ public class MutagenPill extends Consumable {
 			if (Math.random() * 100 > AlchemyLib.PillPowerTiers[power].chance) {
 				outputText("However, it's too weak and quickly fades away. ");
 			} else {
-				if (pillEffect is Transformation && (pillEffect as Transformation).isPossible()) {
+				if (pillEffect is Transformation && (pillEffect as Transformation).isPresent()) {
 					// already tf'ed
 					outputText("The pill's powers resonate with your body and quickly fade away.")
 				} else if (!pillEffect.isPossible()) {

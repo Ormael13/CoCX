@@ -62,13 +62,13 @@ public class AlchemyLib extends BaseContent {
 		xp    : 50
 	});
 	
-	// Component types
+	// Reagent types
 	
-	public static const CT_NOTHING:int   = 0;
-	public static const CT_SUBSTANCE:int = 1;
-	public static const CT_ESSENCE:int   = 2;
-	public static const CT_RESIDUE:int   = 3;
-	public static const CT_PIGMENT:int   = 4;
+	public static const RT_NOTHING:int   = 0;
+	public static const RT_SUBSTANCE:int = 1;
+	public static const RT_ESSENCE:int   = 2;
+	public static const RT_RESIDUE:int   = 3;
+	public static const RT_PIGMENT:int   = 4;
 	
 	// Substances (body parts)
 	

@@ -1,7 +1,9 @@
 package classes.Items {
 import classes.ItemTemplate;
 import classes.Items.Alchemy.MutagenPill;
+import classes.Items.Consumables.EyeDye;
 import classes.Items.Consumables.HairDye;
+import classes.Items.Consumables.SkinOil;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicRing;
 import classes.Items.Dynamic.DynamicShield;
@@ -22,6 +24,28 @@ public class ItemTemplateLib {
 	
 	public function createHairDye(color:String, rarity:int):HairDye {
 		return THairDye.createItem({color: color, rarity: rarity}) as HairDye;
+	}
+	
+	public const TSkinOil:ItemTemplate = mk("SkinOil", "Skin Oil", SkinOil, {
+		category: "consumable",
+		params: [
+			{name: "color", type: "text", value: "white"}
+		]
+	});
+	
+	public function createSkinOil(color:String):SkinOil {
+		return TSkinOil.createItem({color: color}) as SkinOil;
+	}
+	
+	public const TEyeDye:ItemTemplate = mk("EyeDye", "Eye Dye", EyeDye, {
+		category: "consumable",
+		params: [
+			{name: "color", type: "text", value: "white"}
+		]
+	});
+	
+	public function createEyeDye(color:String):EyeDye {
+		return TEyeDye.createItem({color: color}) as EyeDye;
 	}
 	
 	public const TMutagenPill:ItemTemplate = mk("MutagenPill", "Mutagen Pill", MutagenPill, {

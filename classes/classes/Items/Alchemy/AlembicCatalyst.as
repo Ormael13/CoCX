@@ -2,32 +2,32 @@ package classes.Items.Alchemy {
 import classes.Items.Useable;
 
 public class AlembicCatalyst extends Useable {
-	public var componentType:int;
+	public var reagentType:int;
 	public var power:int;
 	public var chanceFactor:Number;
-	public function AlembicCatalyst(id:String, componentType:int, power:int) {
-		this.componentType = componentType;
-		this.power = power;
+	public function AlembicCatalyst(id:String, reagentType:int, power:int) {
+		this.reagentType = reagentType;
+		this.power       = power;
 		var shortName:String;
 		var longName:String;
 		var compName:String;
-		switch (componentType) {
-			case AlchemyLib.CT_SUBSTANCE:
+		switch (reagentType) {
+			case AlchemyLib.RT_SUBSTANCE:
 				shortName = "Sub.";
 				longName  = "substantial";
 				compName  = "substance";
 				break;
-			case AlchemyLib.CT_ESSENCE:
+			case AlchemyLib.RT_ESSENCE:
 				shortName = "Ess."
 				longName  = "essential";
 				compName  = "essence";
 				break;
-			case AlchemyLib.CT_RESIDUE:
+			case AlchemyLib.RT_RESIDUE:
 				shortName = "Res.";
 				longName  = "residual";
 				compName  = "residue";
 				break;
-			case AlchemyLib.CT_PIGMENT:
+			case AlchemyLib.RT_PIGMENT:
 				shortName = "Pig.";
 				longName  = "colorful";
 				compName  = "pigment";
@@ -66,8 +66,9 @@ public class AlembicCatalyst extends Useable {
 	
 	override public function useItem():Boolean {
 		outputText(description);
+		outputText("You examine the magical crystal.");
 		outputText("\n\n");
-		outputText("<b>This item is used in 'Crafting - Extract' menu.</b>");
+		outputText("<i>This item is used in 'Crafting - Extract' menu.</b>");
 		return false;
 	}
 }

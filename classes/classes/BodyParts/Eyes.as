@@ -1,7 +1,7 @@
 package classes.BodyParts {
 import classes.Creature;
-import classes.internals.EnumValue;
 import classes.PerkLib;
+import classes.internals.EnumValue;
 
 public class Eyes extends BodyPart {
 	/**
@@ -265,6 +265,9 @@ public class Eyes extends BodyPart {
 	public var colour:String = "brown";
 	public function Eyes(creature:Creature) {
 		super(creature, null);
+	}
+	public function get noun():String {
+		return type == MONOEYE ? "eye" : "eyes";
 	}
 
 	public static function getAppearanceDescription(creature: *):String {

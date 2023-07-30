@@ -1,8 +1,8 @@
 package classes.Scenes.Crafting {
 import classes.BaseContent;
 import classes.ItemSlotClass;
-import classes.Items.Alchemy.AlchemyComponent;
 import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Alchemy.AlchemyReagent;
 import classes.Items.Alchemy.AlembicCatalyst;
 import classes.Items.Consumable;
 import classes.Scenes.Crafting;
@@ -40,7 +40,7 @@ public class AlchemyExtraction extends BaseContent {
 	public function alembicCapacity():int {
 		return 10;
 	}
-	// Number of component rolls per ingredient
+	// Number of reagent rolls per ingredient
 	public function alembicYield():int {
 		return 2;
 	}
@@ -62,13 +62,13 @@ public class AlchemyExtraction extends BaseContent {
 		result[3] = successChance / n;
 		result[4] = successChance / n;
 		if (alembicCatalyst != null) {
-			result[alembicCatalyst.componentType] *= alembicCatalyst.chanceFactor;
+			result[alembicCatalyst.reagentType] *= alembicCatalyst.chanceFactor;
 		}
 		if (alembicItem) {
-			if (!alembicItem.substances) result[AlchemyLib.CT_SUBSTANCE] = 0;
-			if (!alembicItem.essences) result[AlchemyLib.CT_ESSENCE] = 0;
-			if (!alembicItem.residues) result[AlchemyLib.CT_RESIDUE] = 0;
-			if (!alembicItem.pigments) result[AlchemyLib.CT_PIGMENT] = 0;
+			if (!alembicItem.substances) result[AlchemyLib.RT_SUBSTANCE] = 0;
+			if (!alembicItem.essences) result[AlchemyLib.RT_ESSENCE] = 0;
+			if (!alembicItem.residues) result[AlchemyLib.RT_RESIDUE] = 0;
+			if (!alembicItem.pigments) result[AlchemyLib.RT_PIGMENT] = 0;
 		}
 		return normalizeArray(result, 100);
 	}
@@ -115,25 +115,25 @@ public class AlchemyExtraction extends BaseContent {
 		outputText("</ul>");
 		outputText("<b>Yield</b>: x" + alembicYield());
 		if (debug && alembicItem) {
-			outputText("\n\n<i>Components:</i><ul>");
+			outputText("\n\n<i>Reagents:</i><ul>");
 			for each (c in alembicItem.essences) {
 				outputText("<li>");
-				outputText(AlchemyComponent.essence(c[1]).name());
+				outputText(AlchemyReagent.essence(c[1]).name());
 				outputText("<li>");
 			}
 			for each (c in alembicItem.residues) {
 				outputText("<li>");
-				outputText(AlchemyComponent.residue(c[1]).name());
+				outputText(AlchemyReagent.residue(c[1]).name());
 				outputText("<li>");
 			}
 			for each (c in alembicItem.pigments) {
 				outputText("<li>");
-				outputText(AlchemyComponent.pigment(c[1]).name());
+				outputText(AlchemyReagent.pigment(c[1]).name());
 				outputText("<li>");
 			}
 			for each (var c:Array in alembicItem.substances) {
 				outputText("<li>");
-				outputText(AlchemyComponent.substance(c[1]).name());
+				outputText(AlchemyReagent.substance(c[1]).name());
 				outputText("<li>");
 			}
 			outputText("</ul>")
@@ -202,11 +202,11 @@ public class AlchemyExtraction extends BaseContent {
 		outputText("You dissolve the " + alembicItem.longNameBase + " in the mixture and start the fire. You calmly watch the fumes raise and condense...\n\n");
 		
 		var chances:/*Number*/Array = calcChances();
-		// AlchemicComponent -> quantity
+		// AlchemicReagent -> quantity
 		var results:Dictionary      = new Dictionary();
 		var failures:int            = 0;
 		var successes:int           = 0;
-		var ac:AlchemyComponent;
+		var ac:AlchemyReagent;
 		for (var i:int = 0; i < alembicYield() * alembicItemCount; i++) {
 			ac = alembicItem.refine(chances);
 			if (ac) {
@@ -226,7 +226,7 @@ public class AlchemyExtraction extends BaseContent {
 							: alembicItem.longName) +
 					" into " + numberOfThings(failures, "blob", "blobs") + " of stinky goo...");
 		} else {
-			player.giveAlchemyXP(successes); // 1 alchemy XP per extracted component
+			player.giveAlchemyXP(successes); // 1 alchemy XP per extracted reagent
 			if (failures == 0) {
 				outputText("The refining process was a <b>complete success</b>!\n");
 			}
@@ -235,13 +235,13 @@ public class AlchemyExtraction extends BaseContent {
 			if (list.length == 1) {
 				ac = list[0][0];
 				outputText(" " + numberOfThings(list[0][1], ac.name()))
-				SceneLib.crafting.addAlchemyComponent(ac, list[0][1]);
+				SceneLib.crafting.addAlchemyReagent(ac, list[0][1]);
 			} else {
 				outputText(":<ul>");
 				for (i = 0; i < list.length; i++) {
 					ac = list[i][0];
 					outputText("<li>" + numberOfThings(list[i][1], ac.name()) + "</li>")
-					SceneLib.crafting.addAlchemyComponent(ac, list[i][1]);
+					SceneLib.crafting.addAlchemyReagent(ac, list[i][1]);
 				}
 				outputText("</ul>");
 			}
