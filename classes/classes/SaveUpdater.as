@@ -2212,11 +2212,14 @@ public class SaveUpdater extends NPCAwareContent {
 				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.DISCOVERED_VOLCANO_CRAG];
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
 			}
-			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
-				
+				outputText("\n\nFree alchemy skill lvl-up's for pc's with alchemy background. Wohooo you're going into 5 lvl alchemy territory.");
+				if ((player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) && player.alchemySkillStat.level < 5) {
+					player.alchemySkillStat.level = 5;
+					player.alchemySkillStat.xp = 0;
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.059;
-			}
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.060) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;

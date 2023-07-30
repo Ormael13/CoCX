@@ -1831,7 +1831,10 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.HistoryTactician) || (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryThief) || (player.hasPerk(PerkLib.PastLifeThief) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRogue, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryWhore) || (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
-			if (player.hasPerk(PerkLib.HistoryAlchemist)) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) {
+				player.alchemySkillStat.level = 5;
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.HistoryFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryHealer)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryReligious)) player.perkPoints += 1;
@@ -1845,7 +1848,6 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeThief) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
-			if (player.hasPerk(PerkLib.PastLifeAlchemist)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeHealer)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeReligious)) player.perkPoints += 1;

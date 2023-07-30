@@ -181,9 +181,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(7, "Grey Book", pitchGreyBook);
 			addButton(8, "Red Manuscript", pitchRedManuscript);
 			addButton(9, "Crimson Jade", pitchCrimsonJade);
-			addButton(10, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
-			addButton(11, "TelAdreMagI8", pitchTelAdreMagazineIssue8).hint("Tel'Adre Magazine Issue 8");
-			addButton(12, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
+			addButton(10, "TelAdreMagI2", pitchTelAdreMagazineIssue2).hint("Tel'Adre Magazine Issue 2");
+			addButton(11, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
+			addButton(12, "TelAdreMagI8", pitchTelAdreMagazineIssue8).hint("Tel'Adre Magazine Issue 8");
+			addButton(13, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -447,6 +448,33 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			doNext(bookMenu);
 		}
 		
+		private function pitchTelAdreMagazineIssue2():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 2") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 2'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 2nd issue of Tel'Adre Magazine.  It dive into matters of distilling moonshine and mixing dyes... I mean, refining alchemical ingredients and medicine-crafting.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your alchemic horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue2, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue2():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("Giacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("You consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in producing stinky goo... and sometimes, alchemical products. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 2", 0, 0, 0, 0);
+			}
+		}
+		
 		private function pitchTelAdreMagazineIssue5():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -455,7 +483,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				return;
 			}
-			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 5th issue of Tel'Adre Magazine.  I dive into matters of so called fifth finger or green thumb.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your herbalism horizons?</i>\"");
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 5th issue of Tel'Adre Magazine.  It dive into matters of so called fifth finger or green thumb.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your herbalism horizons?</i>\"");
 			doYesNo(buyTelAdreMagazineIssue5, bookMenu);
 		}
 		
@@ -482,7 +510,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				return;
 			}
-			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 8th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... err well sometimes just eight to hold your farming tools.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your farming horizons?</i>\"");
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 8th issue of Tel'Adre Magazine.  It dive into matters of so benefits of having all ten fingers... err well sometimes just eight to hold your farming tools.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your farming horizons?</i>\"");
 			doYesNo(buyTelAdreMagazineIssue8, bookMenu);
 		}
 		
@@ -509,7 +537,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				return;
 			}
-			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 10th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... like to hold your pickaxe.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your mining horizons?</i>\"");
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 10th issue of Tel'Adre Magazine.  It dive into matters of so benefits of having all ten fingers... like to hold your pickaxe.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your mining horizons?</i>\"");
 			doYesNo(buyTelAdreMagazineIssue10, bookMenu);
 		}
 		

@@ -204,7 +204,6 @@ public class HeXinDao extends BaseContent
 		else addButtonDisabled(2, "3rd Stall", "You need to be at least a Soul Apprentice to check those items.");
         if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "4th Stall", TierIII).hint("Check out the fourth stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
 		else addButtonDisabled(3, "4th Stall", "You need to be at least a Soul Sprite to check those items.");
-		addButton(5, "Alch.Tools", alchemyTools).hint("Check out alchemy equipment.");
 
         var hasSoulCultivator:Boolean = player.hasPerk(PerkLib.JobSoulCultivator);
         var hasSoulPersonage:Boolean = player.hasPerk(PerkLib.SoulPersonage);
@@ -276,8 +275,9 @@ public class HeXinDao extends BaseContent
             "\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
         ).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
       }*/
-      addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
-      addButton(14, "Back", riverislandVillageStuff);
+		addButton(10, "Alch.Tools", alchemyTools).hint("Check out alchemy equipment.");
+		addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
+		addButton(14, "Back", riverislandVillageStuff);
 
         statScreenRefresh();
     }

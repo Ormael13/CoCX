@@ -6265,6 +6265,10 @@ use namespace CoC;
 		}
 		
 		public function giveAlchemyXP(XP:Number):void {
+			var alchMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) alchMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasKeyItem("Tel'Adre Magazine Issue 2") >= 0) alchMlt *= 2;
+			if (alchMlt > 1) XP *= alchMlt;
 			alchemySkillStat.giveXp(XP);
 		}
 		

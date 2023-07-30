@@ -83,7 +83,16 @@ public class Changelog extends BaseContent
 			outputText("-Reaching steps in cultivation from Soul Apprentice to Soul Emperor would increase Soulskill Effect Multiplier by 10%/20%/40%/60% per major steps.\n");
 			outputText("-Some small tweaking to p.specials in relation to pc or enemy/ies flying letting some special been used from ground or when flying.\n");
 			outputText("-HXD golem merchant sells basic alchemical equipment. (aimozg)\n");
-			outputText("-Can refine consumable items into alchemical substances, essences, body parts, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. (fellow daoist aimozg)\n");
+			outputText("-Can refine consumable items into alchemical substances, essences, residues, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. Dye crafting. (fellow daoist aimozg)\n");
+			outputText("-New key Item (by Aimozg): Tel'Adre Magazine Issue 2 - Increase 2x Alchemy EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
+			outputText("-History: Alchemist or Past Life: Alchemist would start with lvl 5 in alchemy skill.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -97,15 +106,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
