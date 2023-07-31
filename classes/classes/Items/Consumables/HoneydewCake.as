@@ -16,7 +16,9 @@ public class HoneydewCake extends Consumable {
 		withTag(ItemTags.U_TF);
 		refineableInto(
 				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
-				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(AlchemyLib.AE_ANT)
+				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(AlchemyLib.AE_ANT),
+				[],
+				AntRace.AntChitinColors
 		);
         }
 	public override function useItem():Boolean {

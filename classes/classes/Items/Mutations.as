@@ -10952,7 +10952,7 @@ public final class Mutations extends MutationsHelper {
                 else
                     player.furColor = randomChoice(KitsuneRace.BasicKitsuneFurColors);
             else {
-                player.furColor = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
+                player.furColor = randomChoice(FoxRace.FoxFurColors);
             }
             outputText("[pg]");
             transformations.SkinFur().applyEffect();

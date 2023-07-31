@@ -206,6 +206,20 @@ public class Utils extends Object
 			for each (var array:Array in arrays) result = result.concat(array);
 			return result;
 		}
+		/**
+		 * Concatenate into single array, omitting duplicates.
+		 *
+		 * If only 1 argument provider, concatenate its contents:
+		 * `concat(A, B, C) === concat([A, B, C)`
+		*/
+		public static function concatUnique(...arrays:/*Array*/Array):Array {
+			if (arrays.length == 1) return concatUnique.apply(null, arrays);
+			var result:Array = [];
+			for each (var array:Array in arrays)
+				for each (var el:* in array)
+					if (result.indexOf(el) == -1) result.push(el);
+			return result;
+		}
 		
 		/**
 		 * Returns flattened array with elements from all sub-arrays in a single list.

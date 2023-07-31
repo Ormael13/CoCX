@@ -6,6 +6,7 @@ import classes.Race;
 
 public class FoxRace extends Race {
 	public static const FoxHairColors:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
+	public static const FoxFurColors:Array = ["orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Elf",
