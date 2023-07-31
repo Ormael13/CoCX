@@ -528,7 +528,7 @@ public class Exploration extends BaseContent implements SaveableState
 			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(5, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(5, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
 			btnExploreMountainsMid().applyTo(button(6));
-			btnExploreBeach().applyTo(button(8));
+			btnExploreOcean().applyTo(button(8));
 			
 			btnExploreGlacialRiftOuter().applyTo(button(10));
 			btnExploreVolcanicCragOuter().applyTo(button(11));

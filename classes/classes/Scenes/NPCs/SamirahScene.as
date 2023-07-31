@@ -90,7 +90,7 @@ public function desertEncounters():void {
 			outputText("You remember about Rathazul’s knack for alchemy and head home, leaving Samirah to her thoughts as you tell her you're coming back with a solution.\n\n");
 			outputText("\"<i>Be safe and come back soon [name]! This desert isn’t the same without you around.</i>\"\n\n");
 			flags[kFLAGS.SAMIRAH_FOLLOWER] = 6;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }
@@ -102,7 +102,7 @@ public function samirahYesSex():void {
 public function samirahNoSex():void {
 	clearOutput();
 	outputText("You apologize to her but right now you’re really not in the mood. Samirah shrug it off saying that shel find a different way to appease herself. The pair of you separate a while later, you still got more adventures ahead of you.\n\n");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function samirahYesCamp():void {
 	clearOutput();
@@ -114,7 +114,7 @@ public function samirahYesCamp():void {
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
 	outputText("\n\n<b>Before fully settling in your camp as if remembering something Samirah pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.SAMIRAH_FOLLOWER] = 10;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function samirahNoCamp():void {
 	clearOutput();
@@ -122,7 +122,7 @@ public function samirahNoCamp():void {
 	outputText("\"<i>I understand, this might be a bit sudden. Take your time to consider it.</i>\"\n\n");
 	outputText("You wave goodbye and head back to camp.\n\n");
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 9) flags[kFLAGS.SAMIRAH_FOLLOWER] = 9;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function samirahMainCampMenu():void {
@@ -317,15 +317,15 @@ public function samirahTalkClothes():void {
 			flags[kFLAGS.SAMIRAH_CLOTHES] = 1;
 			if (player.armor.isNothing) {
 				player.setArmor(armors.NAGASLK);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else if (player.armor != armors.GOOARMR) {
-				inventory.takeItem(player.setArmor(armors.NAGASLK), camp.returnToCampUseOneHour);
+				inventory.takeItem(player.setArmor(armors.NAGASLK), explorer.done);
 			}
 			else {
 				player.unequipArmor();
 				player.setArmor(armors.NAGASLK);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 		else {
@@ -382,7 +382,7 @@ public function nagaDefaultSexScene():void {
 		outputText("She gives you one last kiss before slithering off" + (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10 ? " into the desert. You watch as she leaves and blow her a kiss goodbye before she disappears from your sight" : "") + ".\n\n");
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] <= 5) outputText("You think it would be a very good idea to come to the desert more often.");
 		player.sexReward("Default", "Dick");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	function fitF():void {
@@ -405,7 +405,7 @@ public function nagaDefaultSexScene():void {
 		outputText("\n\nThe two of you lay there for a moment, basking in the warm glow of orgasm. Eventually " + name + " slowly unwraps her tail from your own and gives you a kiss on the forehead. \"<i>I look forward to our next encounter,</i>\" she whispers softly into your ear before slithering off" + (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10 ? " into the desert. You watch as she leaves and wave her a kiss goodbye before she disappears from your sight" : "") + ".\n\n");
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] <= 5) outputText("You think it would be a very good idea to come to the desert more often.");
 		player.sexReward("vaginalFluids", "Dick");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	function vagF():void {
@@ -427,6 +427,7 @@ public function nagaDefaultSexScene():void {
 		outputText("She returns your kiss, but while you are distracted she prepares herself to help you in the same way you helped her. She begins to rub her tail along your " + vaginaDescript(0) + ", getting it wet. As you feel her scaly member begin to slide inside your own " + vaginaDescript(0) + ", the very thought gets you excited. Although somewhat jumpy, she is able to push at a modest rate, slowly inching her tail inside you, very much like the way you did to her. As you continue to passionately kiss each other, your tongues wrapping around one another and your arms wrapped around each other's warm bodies, you cannot think of a better place to be. Soon, you and your partner are tail-fucking each other in unison, your lips never parting, your bodies never separating. Both of you collapse upon the sand, too focused on one another to care about the surroundings. That is how it carried on for what seemed like a beautiful, passionate eternity. You wake up several hours later, lying on the sand next to your friend, and you can't help but notice how cute she looks asleep. Your tails are still buried within one another, testament to the intensity of your lovemaking. You loved until both of you collapsed, side by side, juices dripping out into the dry desert sands. You slowly remove your tail from inside her body, and simultaneously pull hers from your " + vaginaDescript(0) + ". You kiss her on the cheek, and are just close enough to hear her whisper, \"<i>Will we ever meet again?</i>\" You lean in close, and whisper a simple \"<i>Yes.</i>\" Then, you leave her to her well-deserved rest, and slowly meander back to your camp, your brain still intoxicated with passion.\n\n");
 		player.cuntChange(30, true, false, true);
 		player.sexReward("no", "Vaginal");
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseFourHours);
 	}
 
@@ -443,7 +444,7 @@ public function nagaDefaultSexScene():void {
 		outputText("You uncoil yourself and slowly gather your things, " + name + " lying on the sand panting.\n\n");
 		outputText("\"<i>We should do this more often,</i>\" she says before you head off.\n\n");
 		dynStats("lus", player.lib / 5, "scale", false);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -457,7 +458,7 @@ public function samirahFuckHer():void {
 	outputText("You slowly untangle yourself from the panting naga and leave her to rest, basking in the warmth of sex and sun.\n\n");
 	samirahAffection(20);
 	player.sexReward("vaginalFluids","Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function samirahFuckHerWild():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
@@ -472,7 +473,7 @@ public function samirahFuckHerWild():void {
 	outputText("\"<i>That was wonderful [name], let’s do this more often.</i>\"\n\n");
 	samirahAffection(20);
 	player.sexReward("vaginalFluids","Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function samirahTongueJob():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
@@ -484,7 +485,7 @@ public function samirahTongueJob():void {
 	outputText("At your limit, you let out a yell as you cum into her mouth. You collapse onto the dirt and lay there, basking in the warm glow of your orgasm. The naga slides onto your chest and gives you a kiss. \"<i>I rather enjoyed that,</i>\" she hisses into your ear, \"<i>We should do this more often.</i>\"\n\n");
 	samirahAffection(20);
 	player.sexReward("saliva","Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function samirahTailPenetration():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
@@ -496,7 +497,7 @@ public function samirahTailPenetration():void {
 	outputText("That, you sure did!\n\n");
 	samirahAffection(20);
 	player.sexReward("no", "Vaginal");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function samirahTwinTailFuck():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
@@ -521,6 +522,7 @@ public function samirahTwinTailFuck():void {
 	outputText("You simply entwine your tail with hers and lay against her for a while, your brain still intoxicated with passion. You wake up an hour later ready to resume adventuring and highly satisfied.\n\n");
 	samirahAffection(20);
 	player.sexReward("no", "Vaginal");
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -561,13 +563,13 @@ public function samirahHypnosisTraining():void {
 		outputText("<b>Learned Distract.</b>\n\n");
 		outputText("<b>Learned Hypnosis.</b>\n\n");
 		flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else if (flags[kFLAGS.SAMIRAH_HYPNOSIS] == 3 || flags[kFLAGS.SAMIRAH_HYPNOSIS] == 1) {
 		outputText("You proceed to study hypnosis and other mind tricks with Samirah and finish today’s session successfully, even managing to get a small lizard that crawled into your camp to look at your eyes for a while. You thank the naga for her time, having learned quite a bit. She couldn't teach you everything yet but you sure are making progress.\n\n");
 		outputText("\"<i>It was nothing really [name] all I did was help you unlock your innate ability as a naga. You still need a few more sessions before we are done, thankfully you learn quickly.</i>\"\n\n");
 		flags[kFLAGS.SAMIRAH_HYPNOSIS]++;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else {
 		outputText("\"<i>Sorry [name] but you need to let what you have learned sink in before I teach you further.</i>\"\n\n");
