@@ -149,6 +149,7 @@ public class MerchantMenu extends BaseContent {
 		var redraw:Boolean = false;
 		
 		function addOneItem():void {
+			if (n <= 0) return;
 			while (n-- > 0) {
 				var added:Boolean = false;
 				if (storageMode == STORAGE_MODE_PEARL) {
@@ -165,7 +166,7 @@ public class MerchantMenu extends BaseContent {
 			}
 			if (afterPurchase != null) {
 				redraw = true;
-				afterPurchase(mi._item, amount, curry(addOneItem));
+				afterPurchase(mi._item, amount, showScreen);
 			} else {
 				if (redraw) showScreen();
 				else update();

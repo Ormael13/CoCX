@@ -11,6 +11,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Items.*;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
@@ -2219,11 +2220,37 @@ public class SaveUpdater extends NPCAwareContent {
 					player.alchemySkillStat.xp = 0;
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.059;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.060) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.060) {
+				outputText("\n\nSeparating 'white and brown'-like pigments in two.");
+				// Fix "x and y" pigments in stock
+				var pigmentStock:Object = Crafting.pigmentStock;
+				for each (var s:String in keys(pigmentStock)) {
+					if (s.indexOf(" and ") > 0) {
+						var c1:String = s.substring(0, s.indexOf(" and "));
+						var c2:String = s.substring(s.indexOf(" and ") + 5);
+						SceneLib.crafting.addPigment(c1, pigmentStock[s]);
+						SceneLib.crafting.addPigment(c2, pigmentStock[s]);
+						delete pigmentStock[s];
+					}
+				}
+				// Fix "x and y" pigments in knowledge
+				var ingredientKnowledge:Object = Crafting.ingredientKnowledge;
+				for each (var item:String in keys(ingredientKnowledge)) {
+					var pigmentKnowledge:Object = ingredientKnowledge[item][AlchemyLib.RT_PIGMENT];
+					if (!pigmentKnowledge) continue;
+					for each (s in keys(pigmentKnowledge)) {
+						if (s.indexOf(" and ") > 0) {
+							c1 = s.substring(0, s.indexOf(" and "));
+							c2 = s.substring(s.indexOf(" and ") + 5);
+							pigmentKnowledge[c1] = true;
+							pigmentKnowledge[c2] = true;
+							delete pigmentKnowledge[s];
+						}
+					}
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.061) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.061;

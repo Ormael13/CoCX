@@ -128,11 +128,30 @@ import classes.internals.Utils;
 			}
 			if (pigments && pigments.length > 0) {
 				if (!this.pigments) this.pigments = [];
-				if (pigments[0] is Array) {
-					pushAll(this.pigments, pigments);
-				} else {
-					for each (var pigment:String in pigments) {
-						this.pigments.push([1, pigment]);
+				for each (var p:* in pigments) {
+					var w:int = 1;
+					var color:String;
+					if (p instanceof Array) {
+						w = p[0];
+						color = p[1];
+					} else {
+						color = String(p);
+					}
+					if (color.indexOf(" and ") >= 0) {
+						this.pigments.push([w/2, color.substring(0, color.indexOf(" and "))]);
+						this.pigments.push([w/2, color.substring(color.indexOf(" and ")+5)]);
+					} else {
+						this.pigments.push([w, color]);
+					}
+				}
+				// merge duplicates
+				for (var i:int = 0; i < this.pigments.length; i++) {
+					for (var j:int = this.pigments.length-1; j > i; j--) {
+						if (this.pigments[i][1] == this.pigments[j][1]) {
+							this.pigments[i][0] += this.pigments[j][0];
+							this.pigments[j] = this.pigments[this.pigments.length-1];
+							this.pigments.pop();
+						}
 					}
 				}
 			}

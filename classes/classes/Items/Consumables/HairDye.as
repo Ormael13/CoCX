@@ -96,8 +96,8 @@ public class HairDye extends Consumable
 
 			var bm:BodyMaterial = player.bodyMaterials[material];
 			if (slot == "") {
+				clearOutput();
 				if (bm.binary) {
-					clearOutput();
 					outputText("Do you want to dye primary color (" + bm.color1 + "), secondary (" + bm.color2 + "), or both?");
 					EngineCore.menu();
 					EngineCore.addButton(0, "Primary", curry(dye, material, itemReq, itemCnt, "color1"));
@@ -106,7 +106,12 @@ public class HairDye extends Consumable
 					EngineCore.addButton(14, "Never mind", dyeCancel);
 					return;
 				} else {
-					slot = "color";
+					outputText("Do you want to dye solid " + _color +" or add it as a secondary color?");
+					EngineCore.menu();
+					EngineCore.addButton(0, "Solid", curry(dye, material, itemReq, itemCnt, "color"));
+					EngineCore.addButton(1, "Secondary", curry(dye, material, itemReq, itemCnt, "color2"));
+					EngineCore.addButton(14, "Never mind", dyeCancel);
+					return;
 				}
 			}
 			
