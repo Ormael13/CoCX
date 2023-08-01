@@ -823,6 +823,9 @@ private function buyDyes():void {
 		merchantMenu.addItem(consumables.RUSSDYE, 50);
 		merchantMenu.addItem(consumables.RAINDYE, 50);
 	}
+	merchantMenu.afterPurchase = function(...args):void {
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+	}
 	merchantMenu.show(rathazulShopMenu);
 }
 

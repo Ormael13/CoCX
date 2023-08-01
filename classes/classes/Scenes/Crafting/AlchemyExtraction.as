@@ -116,7 +116,7 @@ public class AlchemyExtraction extends BaseContent {
 		var y:Number = alembicYield();
 		outputText("<b>Yield</b>: ");
 		outputText("x"+Math.floor(y));
-		if (y != Math.floor(y)) outputText(" ("+floor((y-Math.floor(y))*100)+"% for x"+(Math.floor(y)+1)+")");
+		if (y != Math.floor(y)) outputText(" ("+Math.round((y-Math.floor(y))*100)+"% for x"+(Math.floor(y)+1)+")");
 		if (alembicItem) {
 			outputText("\n<b>Output:</b><ul>");
 			for each (var ar:AlchemyReagent in alembicItem.getAllRefineReagents()) {

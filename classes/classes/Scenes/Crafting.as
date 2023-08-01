@@ -1229,7 +1229,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			
 			menu();
-			button(14).show("Back", pigmentSelectMenu).icon("Back");
+			button(14).show("Back", dyeCraftingMenu).icon("Back");
 		}
 		private function craftHairDye():void {
 			clearOutput();
