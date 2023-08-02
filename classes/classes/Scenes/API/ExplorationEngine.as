@@ -583,6 +583,7 @@ public class ExplorationEngine extends BaseContent {
 			showUI();
 		}
 		
+		statScreenRefresh();
 		menu();
 		button(0).show("Reveal(0)", curry(cheatReveal, 0))
 				 .hint("Hide all");
