@@ -67,6 +67,7 @@ public class MerchantMenu extends BaseContent {
 	 * Can buy to/sell from S.P.Pearl
 	 */
 	public var canPearl:Boolean            = true;
+	public var prompt:String               = "";
 	
 	private var grid:Block;
 	private var backButton:Function                   = camp.returnToCampUseOneHour;
@@ -97,6 +98,10 @@ public class MerchantMenu extends BaseContent {
 	public function useGemCurrency():void {
 		modCurrencyFn = function (delta:int):void {
 			player.gems += delta;
+			mainViewManager.createFloatingTextAtCursor(
+					(delta>0?"+":"")+delta+" g",
+					"#fc0","#222"
+			);
 			statScreenRefresh();
 		}
 		getCurrencyFn = function ():int { return player.gems }
@@ -357,6 +362,7 @@ public class MerchantMenu extends BaseContent {
 		}
 		update();
 		
+		outputText(prompt);
 		mainView.setCustomElement(grid, true, true);
 		grid.doLayout();
 		menu();

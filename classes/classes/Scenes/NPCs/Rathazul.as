@@ -799,10 +799,8 @@ private function rathazulShopMenu():void {
 private function buyDyes():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_rathazul);
-	outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
-	statScreenRefresh();
-	menu();
 	var merchantMenu:MerchantMenu = new MerchantMenu();
+	merchantMenu.prompt = "Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?";
 	merchantMenu.addItem(useables.REAGENT, 50);
 	merchantMenu.addItem(useables.DYE_FOUNDATION);
 	merchantMenu.addItem(useables.OIL_FOUNDATION);

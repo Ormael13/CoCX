@@ -8,7 +8,6 @@ import flash.text.TextField;
 import flash.text.TextFormat;
 import flash.text.TextLineMetrics;
 
-import mx.effects.easing.Exponential;
 
 public class StatBar extends Block {
 	[Embed(source="../../../res/ui/StatsBarBottom.png")]
@@ -197,7 +196,7 @@ public class StatBar extends Block {
 				_tween = _tween.retarget(value);
 			} else if (_value != value) {
 				// not animating
-				_tween = new SimpleTween(this, "rawValue", value, 300, {easing: SimpleTween.easingLinear});
+				_tween = new SimpleTween(this, "rawValue", value, 300, {easing: "linear"});
 			}
 		} else {
 			rawValue = value;

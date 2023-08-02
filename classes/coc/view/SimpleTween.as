@@ -8,6 +8,17 @@ import mx.effects.Tween;
 import mx.effects.easing.Exponential;
 
 public class SimpleTween {
+    public static const KnownEasings:Object = {
+        "in": Exponential.easeIn,
+        "easeIn": Exponential.easeIn,
+        "out": Exponential.easeOut,
+        "easeOut": Exponential.easeOut,
+        "in-out": Exponential.easeInOut,
+        "easeInOut": Exponential.easeInOut,
+        "none": easingLinear,
+        "linear": easingLinear
+    }
+    
     /**
      * Animate a property `prop` of sprite `spr` from its current value to `endVal`.
      * @param spr
@@ -21,14 +32,17 @@ public class SimpleTween {
      * @param {Boolean} [options.color] The values are colors
      */
     public function SimpleTween(spr:DisplayObject, prop:String, endVal:*, ms:int=300, options:Object = null) {
-        this._spr        = spr;
-        this._prop       = prop;
-        this._startVal   = _spr[_prop];
-        this._endVal     = endVal;
-        this._duration   = ms;
-        this._onEnd      = Utils.valueOr(options && options.onEnd, null);
-        this._color      = Utils.valueOr(options && options.color, false);
-        this._easingFn   = Utils.valueOr(options && options.easing, Exponential.easeInOut);
+        this._spr      = spr;
+        this._prop     = prop;
+        this._startVal = _spr[_prop];
+        this._endVal   = endVal;
+        this._duration = ms;
+        this._onEnd    = Utils.valueOr(options && options.onEnd, null);
+        this._color    = Utils.valueOr(options && options.color, false);
+        var easingSpec:*    = options && options.easing;
+        if (easingSpec && easingSpec instanceof String) easingSpec = KnownEasings[easingSpec];
+        this._easingFn = Utils.valueOr(easingSpec, Exponential.easeInOut);
+//        trace("SimpleTween",spr.name,prop,'from',_startVal,"to",_endVal,"/",_duration)
         
         _active          = true;
         _tween = new Tween(this, _startVal, endVal, ms);
@@ -40,14 +54,14 @@ public class SimpleTween {
             _tween.easingFunction = numberEasingFn;
         }
     }
-    private function numberEasingFn(time:Number,start:Number,end:Number,duration:Number):* {
-        return _easingFn(time,_startVal,_endVal,duration);
+    private function numberEasingFn(time:Number,start:Number,delta:Number,duration:Number):* {
+        return _easingFn(time,_startVal,_endVal-_startVal,duration);
     }
-    private function colorEasingFn(time:Number,start:*,end:*,duration:Number):* {
+    private function colorEasingFn(time:Number,start:*,delta:*,duration:Number):* {
         return Color.toHex(Color.interpolate(_startVal, _endVal, _easingFn(time,0,1,duration)));
     }
-    public static function easingLinear(time:Number, start:Number, end:Number, duration:Number):Number {
-        return Utils.lerp(start,end,time/duration);
+    public static function easingLinear(time:Number, start:Number, delta:Number, duration:Number):Number {
+        return Utils.lerp(start,start+delta,time/duration);
     }
     
     private var _spr:DisplayObject;

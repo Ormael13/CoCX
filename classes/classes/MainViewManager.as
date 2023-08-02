@@ -4,7 +4,9 @@ import classes.GlobalFlags.kFLAGS;
 
 import coc.view.BoundClip;
 import coc.view.MainView;
+import coc.view.SimpleTween;
 import coc.view.StatsView;
+import coc.view.UIUtils;
 
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
@@ -12,7 +14,9 @@ import flash.display.DisplayObjectContainer;
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
 import flash.events.TimerEvent;
+import flash.geom.Point;
 import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
 import flash.ui.Keyboard;
 import flash.utils.Timer;
 import flash.utils.getQualifiedClassName;
@@ -95,40 +99,50 @@ public class MainViewManager extends BaseContent {
 	}
 	public function hidePlayerDoll():void {
 		mainView.charView.visible = false;
-			tweenInStats();
+		tweenInStats();
+	}
+	public function createFloatingText(x:Number, y:Number, htmlText:String, color:* = "#000", shadowColor:*="#fff"):void {
+		var tf:TextField = UIUtils.newTextField({
+			x: x,
+			y: y,
+			defaultTextFormat: extend({}, mainView.mainText.defaultTextFormat, {
+				size: 18,
+				color: color
+			}),
+			autoSize: TextFieldAutoSize.CENTER,
+			filters: [UIUtils.outlineFilter(shadowColor)],
+			htmlText: htmlText
+		});
+		mainView.addElement(tf);
+		new SimpleTween(tf, "y", y-50, 1000, {easing:"linear"}).then(function():void {
+			new SimpleTween(tf, "alpha", 0.0, 500, {easing:"easeIn"}).then(function():void {
+				mainView.removeElement(tf);
+			});
+		});
+		
+	}
+	public function createFloatingTextAtCursor(htmlText:String, color:*="#000", shadowColor:*="#fff"):void {
+		createFloatingText(mainView.mouseX, mainView.mouseY, htmlText, color, shadowColor);
+	}
+	public function createFloatingTextAtElement(element:DisplayObject, htmlText:String, color:*="#000", shadowColor:*="#fff"):void {
+		var point:Point = UIUtils.getRelativePos(element, mainView);
+		createFloatingText(point.x, point.y, htmlText, color, shadowColor);
 	}
 
 	//Show/hide stats bars.
 	public function tweenInStats():void {
-		var t:Timer = new Timer(20, 21);
 		if (!statsHidden) return;
 		statsHidden = false;
 		mainView.cornerStatsView.visible = true;
-		t.addEventListener(TimerEvent.TIMER, function ():void {
-			mainView.statsView.x += 10;
-			mainView.statsView.alpha += 0.05;
-		});
-		t.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-			mainView.statsView.x     = MainView.STATBAR_X;
-			mainView.statsView.alpha = 1;
-		});
-		t.start();
+		new SimpleTween(mainView.statsView, "x", MainView.STATBAR_X, 1000, {easing:"easeIn"});
+		new SimpleTween(mainView.statsView, "alpha", 1.0, 1000, {easing:"easeIn"});
 	}
 	public function tweenOutStats():void {
-		var t:Timer = new Timer(20, 21);
 		if (statsHidden) return;
 		statsHidden = true;
 		mainView.cornerStatsView.visible = false;
-		t.addEventListener(TimerEvent.TIMER, function ():void {
-			mainView.statsView.x -= 10;
-			mainView.statsView.alpha -= 0.05;
-			if (mainView.statsView.alpha < 0) mainView.statsView.alpha = 0;
-		});
-		t.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-			mainView.statsView.x     = -1000;
-			mainView.statsView.alpha = 0;
-		});
-		t.start();
+		new SimpleTween(mainView.statsView, "x", -MainView.STATBAR_WIDTH, 1000, {easing:"easeIn"});
+		new SimpleTween(mainView.statsView, "alpha", 0.0, 1000, {easing:"easeIn"});
 	}
 
 	//Animate buttons for startup!
