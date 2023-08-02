@@ -5,6 +5,7 @@ package coc.view {
 import classes.internals.Utils;
 
 import flash.display.BitmapData;
+import flash.display.DisplayObject;
 import flash.display.Graphics;
 import flash.filters.DropShadowFilter;
 import flash.geom.Matrix;
@@ -106,6 +107,16 @@ public class UIUtils {
 		g.beginBitmapFill(bmp, m);
 		g.drawRect(x, y, width, height);
 		g.endFill();
+	}
+	public static function getRelativePos(element:DisplayObject, container:DisplayObject):Point {
+		var x:Number = 0;
+		var y:Number = 0;
+		while (element && element != container) {
+			x += element.x;
+			y += element.y;
+			element = element.parent;
+		}
+		return new Point(x,y);
 	}
 }
 }

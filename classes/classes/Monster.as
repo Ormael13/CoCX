@@ -2363,6 +2363,7 @@ import flash.utils.getQualifiedClassName;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in six hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
+			SceneLib.explorationEngine.stopExploring();
 			EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
 		}
 

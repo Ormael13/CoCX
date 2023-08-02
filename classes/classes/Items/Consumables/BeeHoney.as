@@ -44,7 +44,9 @@ public class BeeHoney extends Consumable
 			withTag(ItemTags.U_TF);
 			refineableInto(
 					AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
-					AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_BEE)
+					AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_BEE),
+					[],
+					BeeRace.BeeHairColors
 			)
         }
 

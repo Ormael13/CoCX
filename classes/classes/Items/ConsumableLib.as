@@ -6,10 +6,7 @@ package classes.Items
 import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumables.*;
 import classes.Player;
-import classes.Races.DemonRace;
-import classes.Races.ElfRace;
-import classes.Races.GoblinRace;
-import classes.Races.KitsuneRace;
+import classes.Races.*;
 import classes.Scenes.SceneLib;
 
 public final class ConsumableLib extends AlchemyLib
@@ -359,7 +356,12 @@ public final class ConsumableLib extends AlchemyLib
 		public const AQUSEED: Consumable = mk("AquSeed", "AquaSeed", "an aqua seed", 20, "This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.", curry(m.goldenSeed, 0), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						MULTIRACE_ESSENCE_DROP_TABLE(AE_SHARK, AE_HARPY, AE_SIREN)
+						MULTIRACE_ESSENCE_DROP_TABLE(AE_SHARK, AE_HARPY, AE_SIREN),
+						[
+								[1, AR_STR],
+								[1, AR_SPE],
+								[1, AR_LIB]
+						]
 				);
 		public const ASKIRIN:AsumaKirin 	  = new AsumaKirin();
 		public const B_GOSSR: Consumable = mk("B.Gossr", "B.Gossr", "a bundle of black, gossamer webbing", 6, "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?", curry(m.sweetGossamer, 1), ItemTags.U_TF)
@@ -406,7 +408,8 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_LIB],
 							[1, AR_SPE],
 							[1, AR_INT]
-						]
+						],
+						MantisRace.MantisChitinColors
 				);
 		public const BOARTRU: Consumable = mk("BoarTru", "BoarTruffle", "a boar truffle", 6, "It’s clear where the pigtail truffle gets its name.  A small, curly sprig resembling a pig’s tail can be seen jutting out of it. Now that it’s been enhanced by Lumi, it’s larger and fuzzier than it was before, almost like a peach.", curry(m.pigTruffle, true), ItemTags.U_TF)
 				.refineableInto(
@@ -490,12 +493,16 @@ public final class ConsumableLib extends AlchemyLib
 		public const DSLIMEJ: Consumable = mk("DSlimeJ", "DarkSlimeJelly", "a Dark slime jelly", 20, "This looks to be a chunk of inert goop from a dark slime. Consuming this thing may have a weird effect on you.", curry(m.gooGasmic, 2), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						MULTIRACE_ESSENCE_DROP_TABLE(AE_GOO, AE_DARK_SLIME)
+						MULTIRACE_ESSENCE_DROP_TABLE(AE_GOO, AE_DARK_SLIME),
+						[],
+						DarkSlimeRace.DarkSlimeSkinColors
 				);
 		public const DRAKHRT: Consumable = mk("DrakHrt", "DrakeHeart", "a drake's heart's flower", 50, "A rare, beautiful flower.  It could make an exquisite perfume.  According to a legend, dragons give this flower to the ones they intend to court.", curry(m.drakeHeart), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_DRAGON)
+						DEFAULT_ESSENCE_DROP_TABLE(AE_DRAGON),
+						[],
+						DragonRace.DragonScaleColors
 				);
 		public const DRYTENT: Consumable = mk("DryTent", "DryTent", "a shriveled tentacle", 6, "A dried tentacle from one of the lake anemones.  It's probably edible, but the stingers are still a little active.", m.shriveledTentacle, ItemTags.U_TF)
 				.refineableInto(
@@ -522,7 +529,7 @@ public final class ConsumableLib extends AlchemyLib
 								[1, AR_SPE],
 								[1, AR_INT],
 						],
-						concat(
+						concatUnique(
 								ElfRace.ElfHairColors,
 								ElfRace.ElfSkinColors
 						)
@@ -538,7 +545,11 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_INT],
 							[1, AR_TOU],
 							[1, AR_LIB]
-						]
+						],
+						concatUnique(
+								GazerRace.GazerHairColors,
+								GazerRace.GazerSkinColors
+						)
 				);
 		public const F_TEAR: Consumable  = mk("F.Tear", "FafnirTear", "a Fafnir Tear", 15, "This beautiful flower only grows in the snow. It somehow digs its way and survives even in the harsh climate of the rift.", m.FafnirTear, ItemTags.U_TF)
 				.refineableInto(
@@ -562,7 +573,11 @@ public final class ConsumableLib extends AlchemyLib
 						[
 							[1, AR_INT],
 							[1, AR_LIB]
-						]
+						],
+						concatUnique(
+								FoxRace.FoxHairColors,
+								FoxRace.FoxFurColors
+						)
 				);
 		public const FRRTFRT: Consumable = mk("Frrtfrt", "FerretFrt", "a ferret fruit", 6, "This fruit is curved oddly, just like the tree it came from.  The skin is fuzzy and brown, like the skin of a peach.", m.ferretTF, ItemTags.U_TF)
 				.refineableInto(
@@ -581,7 +596,7 @@ public final class ConsumableLib extends AlchemyLib
 								[1, AR_WIS],
 								[1, AR_LIB]
 						],
-						concat(
+						concatUnique(
 								KitsuneRace.BasicKitsuneHairColors,
 								KitsuneRace.BasicKitsuneFurColors,
 								KitsuneRace.BasicKitsuneSkinColors
@@ -626,7 +641,8 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_SPE],
 							[1, AR_STR],
 							[1, AR_LIB]
-						]
+						],
+						HumanRace.HumanSkinColors
 				);
 		public const GOB_ALE: Consumable = mk("Gob.Ale", "Gob.Ale", "a flagon of potent goblin ale", 6, "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.", m.goblinAle, ItemTags.U_TF)
 				.refineableInto(
@@ -639,7 +655,7 @@ public final class ConsumableLib extends AlchemyLib
 						],
 						[
 								[1, AR_SPE]
-						], concat(
+						], concatUnique(
 								GoblinRace.GoblinHairColors,
 								GoblinRace.GoblinEyeColors,
 								GoblinRace.GoblinSkinColors
@@ -651,7 +667,12 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_ESSENCE_DROP_TABLE(AE_GREMLIN),
 						[
 							[1, AR_SPE]
-						]
+						],
+						concatUnique(
+							GremlinRace.GremlinEyeColors,
+							GremlinRace.GremlinHairColors,
+							GremlinRace.GremlinSkinColors
+						)
 				);
 		public const HDEWCAK:HoneydewCake     = new HoneydewCake();
 		public const HUMMUS_: Consumable = mk("Hummus ", "Hummus", "a blob of cheesy-looking hummus", 100, "This pile of hummus doesn't look that clean.  It looks bland.  So bland that you feel blander just by looking at it.", m.regularHummus, ItemTags.U_TF)
@@ -682,7 +703,13 @@ public final class ConsumableLib extends AlchemyLib
 		public const IMPFOOD: Consumable = mk("ImpFood", "ImpFood", "a parcel of imp food", 6, "This is a small parcel of reddish-brown bread stuffed with some kind of meat.  It smells delicious.", m.impFood, ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_IMP)
+						DEFAULT_ESSENCE_DROP_TABLE(AE_IMP),
+						[],
+						concatUnique(
+								ImpRace.ImpEyeColors,
+								ImpRace.ImpHairColors,
+								ImpRace.ImpSkinColors
+						)
 				);
 		public const INFWINE: Consumable = mk("InfWine", "InfWine", "a bottle of infernal wine", 500, "This drink is made from a bottle of satyr wine, an incubus draft, and some succubus milk. It reeks of corruption. Are you sure it would be a smart idea to drink this?", m.infernalWine, ItemTags.U_TF)
 				.refineableInto(
@@ -748,7 +775,13 @@ public final class ConsumableLib extends AlchemyLib
 		public const MAGSEED: Consumable = mk("MagSeed", "MagSeed", "a magically-enhanced golden seed", 6, "This seed glows with power.  It's been enhanced by Lumi to unlock its full potential, allowing it to transform you more easily.", curry(m.goldenSeed, 1), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						[[1, AE_HARPY]]
+						[[1, AE_HARPY]],
+						[
+								[1, AR_STR],
+								[1, AR_SPE],
+								[1, AR_LIB]
+						],
+						HumanRace.HumanSkinColors
 				);
 		public const MARAFRU:MaraFruit 	      = new MaraFruit();
 		public const MANTICV:ManticoreVenom   = new ManticoreVenom();
@@ -771,7 +804,11 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_TOU],
 							[1, AR_INT],
 							[1, AR_LIB]
-						]
+						],
+						concatUnique(
+								GazerRace.GazerHairColors,
+								GazerRace.GazerSkinColors
+						)
 				);
 		public const MGHTYVG: Consumable = mk("MghtyVg", "MghtyVg", "a mightily enhanced piece of kanga fruit", 6, "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.  It glows slightly from Lumi's enhancements.", curry(m.kangaFruit, 1), ItemTags.U_TF)
 				.refineableInto(
@@ -802,7 +839,7 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_LIB],
 							[1, AR_CORR_INC],
 						],
-						concat(
+						concatUnique(
 								KitsuneRace.ElderKitsuneSkinColors,
 								KitsuneRace.ElderKitsuneColors
 						)
@@ -836,7 +873,8 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_STR],
 							[1, AR_SPE],
 							[1, AR_TOU]
-						]
+						],
+						OrcRace.OrcSkinColors
 				);
 		public const P_LBOVA: Consumable = mk("P.LBova", "P.LBova", "a bottle containing a white fluid labeled \"Pure LaBova\"", 6, "A bottle containing a misty fluid with a grainy texture; it has a long neck and a ball-like base.  The label has a stylized picture of a well-endowed cow-girl nursing two guys while they jerk themselves off. It has been purified by Rathazul.", curry(m.laBova, false, false), ItemTags.U_TF)
 				.refineableInto(
@@ -885,7 +923,9 @@ public final class ConsumableLib extends AlchemyLib
 		public const RESNOIL: Consumable = mk("R.SnakOil", "R.SnakOil", "a vial of refined snake oil", 6, "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, blackish liquid. The odor is even more abominable then that of regular snake oil.", curry(m.snakeOil, 1), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						MULTIRACE_ESSENCE_DROP_TABLE(AE_APOPHIS, AE_SNAKE)
+						MULTIRACE_ESSENCE_DROP_TABLE(AE_APOPHIS, AE_SNAKE),
+						[],
+						NagaRace.SnakeScaleColors
 				);
 		public const RINGFIG: Consumable = mk("RingFig", "RingFig", "a ringtail fig", 6, "A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.", m.ringtailFig, ItemTags.U_TF)
 				.refineableInto(
@@ -911,7 +951,11 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_STR],
 							[1, AR_TOU],
 							[1, AR_LIB]
-						]
+						],
+						concatUnique(
+								SalamanderRace.SalamanderScaleColors,
+								SalamanderRace.SalamanderSkinColors
+						)
 				);
 		public const SATYR_W:SatyrWine        = new SatyrWine();
 		public const SAGEMED:SageMedicine     = new SageMedicine();
@@ -924,7 +968,8 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_STR],
 							[1, AR_LIB],
 							[1, AR_SPE]
-						]
+						],
+						concatUnique(SharkRace.SharkHairColors, SharkRace.SharkScaleColors)
 				);
 		public const SKELP__: Consumable = mk("Skelp  ", "Skelp", "a skelp", 15, "A form of Kelp used by the Melkie as seasoning for their food. Very tasty but can result in transformation if used uncooked.", m.skelp, ItemTags.U_TF)
 				.refineableInto(
@@ -934,7 +979,12 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_LIB],
 							[1, AR_SPE],
 							[1, AR_INT]
-						]
+						],
+						concatUnique(
+								MelkieRace.MelkieFurColors,
+								MelkieRace.MelkieHairColors,
+								MelkieRace.MelkieSkinColors
+						)
 				);
 		public const SKYSEED: Consumable = mk("SkySeed", "SkybornSeed", "a skyborn seed", 10, "A smallish, ovular nut-like fruit, with a hard greenish-blue shell that gives off a pleasant aroma.", curry(m.skybornSeed, 0), ItemTags.U_TF)
 				.refineableInto(
@@ -951,7 +1001,8 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_ESSENCE_DROP_TABLE(AE_SNAKE),
 						[
 							[1, AR_LIB]
-						]
+						],
+						HumanRace.HumanSkinColors
 				);
 		public const SMRTNUT: Consumable = mk("SmrtNut", "SmartyNuts", "a smarty nut", 6, "A special nut highly prized by Ratatoskr's. Rumors are it makes you smarter.", m.smartyNuts, ItemTags.U_TF)
 				.refineableInto(
@@ -960,7 +1011,8 @@ public final class ConsumableLib extends AlchemyLib
 						[
 							[1, AR_INT],
 							[1, AR_SPE]
-						]
+						],
+						RatatoskrRace.RatatoskrHairColors
 				);
 		public const SPHONEY:Consumable		  = new BeeHoney(false, true);
 		public const SRMSEED: Consumable = mk("SrmSeed", "StormSeed", "a storm seed", 20, "This magical seed radiate a faint aura of static as if struck by lightning.", m.stormSeed, ItemTags.U_TF)
@@ -1000,7 +1052,8 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_STR],
 							[1, AR_LIB],
 							[1, AR_SPE]
-						]
+						],
+						concatUnique(SharkRace.SharkHairColors, SharkRace.SharkScaleColors, ["orange"])
 				);
 		public const UNICORN:AbstractEquinum  = new AbstractEquinum(1, "Unicorn", "Unicornum", "a vial of Unicornum", 40, "This is a long flared vial with a small label that reads, \"<i>Unicornum</i>\".  It is likely this potion is tied to unicorns in some way.");
 		public const VAMPBLD:VampireBlood     = new VampireBlood(true);
@@ -1011,7 +1064,11 @@ public final class ConsumableLib extends AlchemyLib
 						[
 							[1, AR_INT],
 							[1, AR_LIB]
-						]
+						],
+						concatUnique(
+								FoxRace.FoxHairColors,
+								FoxRace.FoxFurColors
+						)
 				);
 		public const VOLTTOP: Consumable = mk("VoltTop", "VoltTopaz", "a Voltage topaz", 6, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint static tingle warms your hands as a light flush travels up your arms...", curry(m.voltageTopaz, true), ItemTags.U_TF)
 				.refineableInto(
@@ -1019,7 +1076,11 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_ESSENCE_DROP_TABLE(AE_RAIJU),
 						[
 							[1, AR_LIB]
-						]
+						],
+						concatUnique(
+								RaijuRace.RaijuEyeColors,
+								RaijuRace.RaijuHairColors
+						)
 				);
 		public const VOUIOIL: Consumable = mk("VouiOil", "VouivreOil", "a vial of vouivre oil", 70, "A vial the size of your fist made of light green glass. It contains what appears to be an oily, purple liquid. The odor is strange.", curry(m.evolvedNagaOil, 1), ItemTags.U_TF)
 				.refineableInto(
@@ -1034,7 +1095,9 @@ public final class ConsumableLib extends AlchemyLib
 		public const W_FRUIT: Consumable = mk("W.Fruit", "W.Fruit", "a piece of whisker-fruit", 6, "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.", m.whiskerFruit, ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_CAT)
+						DEFAULT_ESSENCE_DROP_TABLE(AE_CAT),
+						[],
+						CatRace.catFurColors
 				);
 		public const W_EMRLD: Consumable = mk("W.Emerald", "W.Emerald", "a Windstorm Emerald", 20, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint green glow warms your hands as a light breeze travels up your arms...", curry(m.windstormEmerald, true), ItemTags.U_TF)
 				.refineableInto(
@@ -1057,7 +1120,8 @@ public final class ConsumableLib extends AlchemyLib
 						[
 							[1, AR_STR],
 							[1, AR_TOU]
-						]
+						],
+						SlimeRace.SlimeSkinColors
 				);
 		public const WHITEIN: Consumable = mk("WhiteIn", "WhiteInk", "a vial of white ink", 50, "Pearly white ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 2), ItemTags.U_TF)
 				.refineableInto(

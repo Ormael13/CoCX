@@ -66,7 +66,7 @@ public class QuestLib extends BaseContent {
 								 "AGQ_Gel",
 								 "Green Gel Gathering",
 								 AdventurerGuild.RANK_COPPER,
-								 useables.GREENGL, [3, 4, 5],
+								 useables.GREENGL, [5, 5],
 								 StatusEffects.AdventureGuildQuests4, 2
 						 );
 	public const AGQ_Chitin:SimpleGuildQuest    =
@@ -74,7 +74,7 @@ public class QuestLib extends BaseContent {
 								 "AGQ_Chitin",
 								 "Black Chitin Gathering",
 								 AdventurerGuild.RANK_COPPER,
-								 useables.B_CHITN, [3, 4, 5],
+								 useables.B_CHITN, [5, 5],
 								 StatusEffects.AdventureGuildQuests4, 1
 						 );
 	

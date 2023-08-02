@@ -2,15 +2,15 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Beach 
+package classes.Scenes.Areas.Beach
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-    import classes.display.SpriteDb;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class PinchousWaterwearAndTools extends BaseContent
 	{
-		public function PinchousWaterwearAndTools() 
+		public function PinchousWaterwearAndTools()
 		{
 		}
 		
@@ -105,7 +105,7 @@ public class PinchousWaterwearAndTools extends BaseContent
 		public function leavePinchousWaterwearAndToolsShop():void {
 			clearOutput();
 			outputText("You wave her goodbye and head back to camp.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 	}

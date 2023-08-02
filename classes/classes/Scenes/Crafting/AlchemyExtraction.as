@@ -41,8 +41,8 @@ public class AlchemyExtraction extends BaseContent {
 		return 10;
 	}
 	// Number of reagent rolls per ingredient
-	public function alembicYield():int {
-		return 2;
+	public function alembicYield():Number {
+		return 2 + 0.1*player.alchemySkillLevel;
 	}
 	
 	// [failureChance, substanceChance, essenceChance, residueChance, pigmentChance]
@@ -113,28 +113,20 @@ public class AlchemyExtraction extends BaseContent {
 		if (chances[3] > 0) outputText("<li>Residue: " + floor(chances[3]) + "%</li>");
 		if (chances[4] > 0) outputText("<li>Pigment: " + floor(chances[4]) + "%</li>");
 		outputText("</ul>");
-		outputText("<b>Yield</b>: x" + alembicYield());
-		if (debug && alembicItem) {
-			outputText("\n\n<i>Reagents:</i><ul>");
-			for each (c in alembicItem.essences) {
+		var y:Number = alembicYield();
+		outputText("<b>Yield</b>: ");
+		outputText("x"+Math.floor(y));
+		if (y != Math.floor(y)) outputText(" ("+Math.round((y-Math.floor(y))*100)+"% for x"+(Math.floor(y)+1)+")");
+		if (alembicItem) {
+			outputText("\n<b>Output:</b><ul>");
+			for each (var ar:AlchemyReagent in alembicItem.getAllRefineReagents()) {
 				outputText("<li>");
-				outputText(AlchemyReagent.essence(c[1]).name());
-				outputText("<li>");
-			}
-			for each (c in alembicItem.residues) {
-				outputText("<li>");
-				outputText(AlchemyReagent.residue(c[1]).name());
-				outputText("<li>");
-			}
-			for each (c in alembicItem.pigments) {
-				outputText("<li>");
-				outputText(AlchemyReagent.pigment(c[1]).name());
-				outputText("<li>");
-			}
-			for each (var c:Array in alembicItem.substances) {
-				outputText("<li>");
-				outputText(AlchemyReagent.substance(c[1]).name());
-				outputText("<li>");
+				if (debug || SceneLib.crafting.isReagentKnown(alembicItem.id, ar.type, ar.key())) {
+					outputText(ar.name());
+				} else {
+					outputText("???")
+				}
+				outputText("</li>")
 			}
 			outputText("</ul>")
 		}
@@ -207,10 +199,12 @@ public class AlchemyExtraction extends BaseContent {
 		var failures:int            = 0;
 		var successes:int           = 0;
 		var ac:AlchemyReagent;
-		for (var i:int = 0; i < alembicYield() * alembicItemCount; i++) {
+		
+		for (var i:int = 0; i < randomIncrement(alembicYield() * alembicItemCount); i++) {
 			ac = alembicItem.refine(chances);
 			if (ac) {
 				successes++;
+				SceneLib.crafting.setReagentKnown(alembicItem.id, ac.type, ac.key());
 				if (ac in results) results[ac]++;
 				else results[ac] = 1;
 			} else {

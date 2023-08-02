@@ -351,8 +351,7 @@ public class ExplorationEngine extends BaseContent {
 			revealAll();
 			return;
 		}
-		var i:int = n | 0;
-		if (Math.random() < n - i) i++;
+		var i:int = randomIncrement(n);
 		while (i-- > 0) {
 			if (!revealRandom()) break;
 		}
@@ -584,6 +583,7 @@ public class ExplorationEngine extends BaseContent {
 			showUI();
 		}
 		
+		statScreenRefresh();
 		menu();
 		button(0).show("Reveal(0)", curry(cheatReveal, 0))
 				 .hint("Hide all");

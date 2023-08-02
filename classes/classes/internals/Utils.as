@@ -7,6 +7,8 @@ import classes.*;
 
 import flash.utils.describeType;
 
+import mx.formatters.NumberFormatter;
+
 public class Utils extends Object
 	{
 		public static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
@@ -140,12 +142,22 @@ public class Utils extends Object
 			var base:Number = ipow(10, decimals);
 			return Math.round(value*base)/base;
 		}
+		public static function formatNumber(value:Number, options:Object = null):String {
+			var nf:NumberFormatter = new NumberFormatter();
+			return nf.format(value);
+		}
 		public static function boundInt(min:int, x:int, max:int):int {
 			return x < min ? min : x > max ? max : x;
 		}
 		public static function boundFloat(min:Number, x:Number, max:Number):Number {
 			if (!isFinite(x)) return min;
 			return x < min ? min : x > max ? max : x;
+		}
+		/**
+		 * Linear interpolation from v0 at t=0 to v1 at t=1
+		 */
+		public static function lerp(v0:Number, v1:Number, t:Number):Number {
+			return (1-t)*v0 + t*v1;
 		}
 		/**
 		 * Mimics JS Object.keys
@@ -204,6 +216,20 @@ public class Utils extends Object
 			if (arrays.length == 1) return concat.apply(null, arrays);
 			var result:Array = [];
 			for each (var array:Array in arrays) result = result.concat(array);
+			return result;
+		}
+		/**
+		 * Concatenate into single array, omitting duplicates.
+		 *
+		 * If only 1 argument provider, concatenate its contents:
+		 * `concat(A, B, C) === concat([A, B, C)`
+		*/
+		public static function concatUnique(...arrays:/*Array*/Array):Array {
+			if (arrays.length == 1) return concatUnique.apply(null, arrays);
+			var result:Array = [];
+			for each (var array:Array in arrays)
+				for each (var el:* in array)
+					if (result.indexOf(el) == -1) result.push(el);
 			return result;
 		}
 		
@@ -574,6 +600,18 @@ public class Utils extends Object
 			return ""+input;
 		}
 
+		//
+		/**
+		 * randomIncrement(3.14) = 3 + (1 in 14% rolls)
+		 *
+		 * Return x or (x+1); P(x+1) = x-floor(x)
+		 */
+		public static function randomIncrement(x:Number):Number {
+			var i:Number = Math.floor(x);
+			if (Math.random() < x - i) i++;
+			return i;
+		}
+		
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
 		// Accepts any type.
 		// Can also accept a *single* array of items, in which case it picks from the array instead.

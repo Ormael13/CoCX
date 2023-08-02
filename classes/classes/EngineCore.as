@@ -552,6 +552,7 @@ public class EngineCore {
             CoC.instance.mainView.hideBottomButton(i);
         }
         CoC.instance.flushOutputTextToGUI();
+        statScreenRefresh();
     }
 
     /**
@@ -633,12 +634,13 @@ public class EngineCore {
     private static var statScreenRefreshScheduled:Boolean = false;
     public static function doStatScreenRefresh():void {
         statScreenRefreshScheduled = false;
+        if (!CoC.instance || !CoC.instance.player) return;
         Utils.Begin("engineCore", "statScreenRefresh");
-        CoC.instance.mainView.statsView.show(); // show() method refreshes.
         CoC.instance.mainViewManager.refreshStats();
+        CoC.instance.mainView.statsView.show();
         if (CoC.instance.inCombat) {
-            CoC.instance.mainView.monsterStatsView.show();
             CoC.instance.mainView.monsterStatsView.refreshStats(CoC.instance);
+            CoC.instance.mainView.monsterStatsView.show();
         } else {
             CoC.instance.mainView.monsterStatsView.hide();
         }

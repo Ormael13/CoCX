@@ -185,6 +185,7 @@ public class MainView extends Block {
 	internal static const STATBAR_2_X:Number     = STATBAR_1_RIGHT;
 	internal static const STATBAR_2_RIGHT:Number = STATBAR_2_X + STATBAR_COL_W + HALFGAP;
 	internal static const STATBAR_RIGHT:Number   = STATBAR_2_RIGHT;
+	public static const STATBAR_WIDTH:Number     = STATBAR_RIGHT - STATBAR_X;
 	// Char viewer
 	internal static const CHARVIEW_X:Number      = 0;
 	internal static const CHARVIEW_H:Number      = 202*2;
@@ -790,6 +791,7 @@ public class MainView extends Block {
 	 * @param stretch Stretch the element (default false)
 	 */
 	public function setCustomElement(element:DisplayObject, afterText:Boolean=true, stretch:Boolean=false, scroll:Boolean=false):void {
+		CoC.instance.flushOutputTextToGUI();
 		if (this.customElement) {
 			this.removeElement(this.customElement);
 		}
