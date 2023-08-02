@@ -761,6 +761,7 @@ import classes.Scenes.NPCs.Forgefather;
 			max += maxManaPerIntStat.value*inte;
 			max += maxManaPerWisStat.value*wis;
 			if (hasPerk(PerkLib.Archmage) && inte >= 100) max += 180;
+			if (hasPerk(PerkLib.ArchmageEx) && inte >= 100) max += 600;
 			if (hasPerk(PerkLib.Channeling) && inte >= 60) max += 90;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) max += 225;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) max += 270;
@@ -790,6 +791,7 @@ import classes.Scenes.NPCs.Forgefather;
 			}
 			if (hasPerk(PerkLib.ManaCore)) {
 				if (hasPerk(PerkLib.Archmage) && inte >= 100) multimax += 0.15;
+				if (hasPerk(PerkLib.ArchmageEx) && inte >= 100) multimax += 0.5;
 				if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) multimax += 0.15;
 				if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) multimax += 0.15;
 				if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) multimax += 0.15;

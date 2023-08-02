@@ -482,6 +482,13 @@ public class PerkLib
 		public static const Alliance:PerkType = mk("Alliance", "Alliance",
 				". (+10% minions/pets damage)",
 				"You've chosen the 'Alliance' perk. (+10% minions/pets damage)");
+		public static const ArchmageEx:PerkType = mk("Archmage (Ex)", "Archmage (Ex)",
+				"[if (player.inte>=100)" +
+						"Increases base spell strength by 105%, mana pool by 600 and lust bar by 135." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]")
+				.withBuffs({'maxlust_base':+135});
 
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -489,9 +496,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -3727,10 +3731,10 @@ public class PerkLib
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to physical damage and your claws are sharper than normal.");
 		public static const LycanthropyDormant:PerkType = mk("Dormant Lycanthropy", "Dormant Lycanthropy",
 				"You sometimes hear echoes of the call of the moon. If you were more of a werewolf you likely would feel its pull again. A lycanthrope is never truly cured.");
-		//public static const Vulpesthropy:PerkType = mk("Vulpesthropy", "Vulpesthropy",
-		//		"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage       .");
-		//public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
-		//		"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again. A vulpesthrope is never truly cured.")
+		public static const Vulpesthropy:PerkType = mk("Vulpesthropy", "Vulpesthropy",
+				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage       .");
+		public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
+				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again. A vulpesthrope is never truly cured.")
 		public static const LactaBovineImmunity:PerkType = mk("Lacta Bovine Immunity", "Lacta Bovine Immunity",
 				"You are seldom immune to all the dangerous effect of minotaur cum but you are also naturaly addicted to it.");
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
@@ -5508,11 +5512,13 @@ public class PerkLib
                     .requireLevel(3);
             //Tier 1 Intelligence Perks
             Mage.requirePerk(Spellpower)
+					.requireNotThosePerks(ArchmageEx)
+					.requirePerk(JobSorcerer)
                     .requireInt(50)
                     .requireLevel(6);
             Tactician.requireInt(50)
                     .requireLevel(6);
-            Channeling.requirePerk(Mage)
+            Channeling.requireAnyPerk(Mage, ArchmageEx)
                     .requireInt(60)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.spellCount() > 0;
@@ -5567,13 +5573,14 @@ public class PerkLib
                     .requireInt(75)
                     .requireLevel(12);
             JobEnchanter.requireAdvancedJobSlot()
-					.requirePerk(Mage)
+					.requireAnyPerk(Mage, ArchmageEx)
                     .requireInt(75)
                     .requireLevel(12);
-            FocusedMind.requirePerk(Mage)
+            FocusedMind.requireAnyPerk(Mage, ArchmageEx)
                     .requireInt(75)
                     .requireLevel(12);
-            RagingInferno.requirePerks(GrandMage, Channeling)
+            RagingInferno.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
                                 || player.hasStatusEffect(StatusEffects.KnowsPyreBurst)
@@ -5586,7 +5593,8 @@ public class PerkLib
                     }, "Any fire spell")
                     .requireLevel(12)
                     .requireInt(75);
-            GlacialStorm.requirePerks(GrandMage, Channeling)
+            GlacialStorm.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
                                 || player.hasStatusEffect(StatusEffects.KnowsArcticGale)
@@ -5597,7 +5605,8 @@ public class PerkLib
                     }, "Any ice spell")
                     .requireLevel(12)
                     .requireInt(75);
-            HighVoltage.requirePerks(GrandMage, Channeling)
+            HighVoltage.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
                                 || player.hasStatusEffect(StatusEffects.KnowsChainLighting)
@@ -5605,7 +5614,8 @@ public class PerkLib
                     }, "Any lightning spell")
                     .requireLevel(12)
                     .requireInt(75);
-            EclipsingShadow.requirePerks(GrandMage, Channeling)
+            EclipsingShadow.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
                                 || player.hasStatusEffect(StatusEffects.KnowsDuskWave)
@@ -5613,7 +5623,8 @@ public class PerkLib
                     }, "Any darkness spell")
                     .requireLevel(12)
                     .requireInt(75);/*
-            HighTide.requirePerks(GrandMage, Channeling)
+            HighTide.requireAnyPerk(GrandMage, ArchmageEx)
+					.requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWaterBall)
                                 || player.hasStatusEffect(StatusEffects.KnowsWaterSphere)
@@ -5648,7 +5659,7 @@ public class PerkLib
                     .requireInt(90)
                     .requirePerk(HalfStepToImprovedSpirituality)
                     .requireLevel(12);
-            ArcaneRegenerationMajor.requireAnyPerk(GrandMage, GreyMage)
+            ArcaneRegenerationMajor.requireAnyPerk(GrandMage, ArchmageEx, GreyMage)
 					.requirePerk(GrandMage)
 					.requirePerk(ArcaneRegenerationMinor)
                     .requireInt(75)
@@ -5675,7 +5686,7 @@ public class PerkLib
                     .requireInt(90)
                     .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
             TraditionalMageI.requireLevel(18)
-                    .requirePerk(GrandMage)
+                    .requireAnyPerk(GrandMage, ArchmageEx)
                     .requireInt(80);
             TraditionalMageII.requireLevel(20)
                     .requirePerk(TraditionalMageI)
@@ -5690,10 +5701,10 @@ public class PerkLib
                     .requirePerk(ImprovedSpirituality)
                     .requireLevel(18);
             FortressOfIntellect.requireStatusEffect(StatusEffects.KnowsMight, "Might spell")
-                    .requirePerk(GrandMage)
+                    .requireAnyPerk(GrandMage, ArchmageEx)
                     .requireInt(100)
                     .requireLevel(18);
-            ArcaneRegenerationEpic.requireAnyPerk(Archmage, GreyArchmage)
+            ArcaneRegenerationEpic.requireAnyPerk(Archmage, ArchmageEx, GreyArchmage)
 					.requirePerk(ArcaneRegenerationMajor)
                     .requireInt(100)
                     .requireLevel(18);
@@ -5719,7 +5730,8 @@ public class PerkLib
                     .requireInt(120)
                     .requireLevel(18);
             //Tier 4 Intelligence perks
-            GrandArchmage.requirePerks(Archmage, FocusedMind)
+            GrandArchmage.requireAnyPerk(Archmage, ArchmageEx)
+					.requirePerk(FocusedMind)
                     .requireInt(125)
                     .requireLevel(24);
             TraditionalMageIV.requireLevel(24)
@@ -6273,7 +6285,7 @@ public class PerkLib
 					.requireWis(175)
                     .requireLevel(54);
 			PrestigeJobDruid.requirePrestigeJobSlot()
-                    .requirePerk(Archmage)
+                    .requireAnyPerk(Archmage, ArchmageEx)
                     .requireWis(200)
                     .requireLevel(54)
 					.requireCustomFunction(function (player:Player):Boolean {

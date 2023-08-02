@@ -82,11 +82,11 @@ public class Changelog extends BaseContent
 			outputText("-Physical and Magical Soulskill Effect Multipliers would now not add but multiply Soulskill Effect Multiplier value.\n");
 			outputText("-Reaching steps in cultivation from Soul Apprentice to Soul Emperor would increase Soulskill Effect Multiplier by 10%/20%/40%/60% per major steps.\n");
 			outputText("-Some small tweaking to p.specials in relation to pc or enemy/ies flying letting some special been used from ground or when flying.\n");
-			outputText("-HXD golem merchant sells basic alchemical equipment. (aimozg)\n");
-			outputText("-Can refine consumable items into alchemical substances, essences, residues, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. Dye crafting. (fellow daoist aimozg)\n");
+			outputText("-HXD golem merchant sells basic alchemical equipment. Animated stat bars. (aimozg)\n");
+			outputText("-Can refine consumable items into alchemical substances, essences, residues, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. Dye crafting. Alchemy skill increases extraction yield. (fellow daoist aimozg)\n");
 			outputText("-New key Item (by Aimozg): Tel'Adre Magazine Issue 2 - Increase 2x Alchemy EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-History: Alchemist or Past Life: Alchemist would start with lvl 5 in alchemy skill.\n");
-			outputText("-\n");
+			outputText("-New event perk: Archmage (Ex). Gained by use of the Pocket Watch when req. are meet. Effects: Increases base spell strength by 105%, mana pool by 600 and lust bar by 135.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

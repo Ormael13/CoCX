@@ -56,6 +56,7 @@ public class FoxRace extends Race {
 		addScores()
 				.faceType(Face.FOX, +1)
 				.eyeType(Eyes.FOX, +1)
+				.eyeType(NOT(Eyes.FERAL),0, -11)
 				.earType(Ears.FOX, +1)
 				.tailType(Tail.FOX, +1)
 				.customRequirement("","no more than 1 fox tail",

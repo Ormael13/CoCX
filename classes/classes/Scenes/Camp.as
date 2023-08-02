@@ -2340,6 +2340,7 @@ public class Camp extends NPCAwareContent{
 			addButtonIfTrue(11, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx, "Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) && player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx));
 		}
 		if (page == 2) {
+			addButtonIfTrue(5, "Archmage (Ex)", mainPagePocketWatchArchmageEx, "Req. Archmage perk / Or you already got this merged perk", player.hasPerk(PerkLib.Archmage));
 			addButtonIfTrue(10, "G.Diehard (Ex)", mainPagePocketWatchGreaterDiehardEx, "Req. Greater Diehard perk / Or you already got this merged perk", player.hasPerk(PerkLib.GreaterDiehard));
 			addButton(9, "Previous", mainPagePocketWatch, page - 1);
 		}
@@ -2453,16 +2454,18 @@ public class Camp extends NPCAwareContent{
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
 		doNext(mainPagePocketWatch, 2);
-	}/*
-	private function mainPagePocketWatch():void {
-		clearOutput();
-		outputText("Perks combined: '' perk attained.");
-		player.removePerk(PerkLib.);
-		player.createPerk(PerkLib.);
-		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
-		player.perkPoints++;
-		doNext(mainPagePocketWatch, 1);
 	}
+	private function mainPagePocketWatchArchmageEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Archmage (Ex)' perk attained.");
+		player.removePerk(PerkLib.Mage);
+		player.removePerk(PerkLib.GrandMage);
+		player.removePerk(PerkLib.Archmage);
+		player.createPerk(PerkLib.ArchmageEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 1);
+	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();
 		outputText("Perks combined: '' perk attained.");

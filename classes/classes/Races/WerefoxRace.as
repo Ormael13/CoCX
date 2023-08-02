@@ -14,7 +14,7 @@ public class WerefoxRace extends Race {
         /*Breasts*/		"Human",
         /*Nips*/		"Human",
         /*Ears*/		"Human",
-        /*Eyes*/		"Human",
+        /*Eyes*/		"Feral",
         /*Face*/		"Human",
         /*Gills*/		"Human",
         /*Hair*/		"Human",
@@ -25,7 +25,7 @@ public class WerefoxRace extends Race {
         /*Ovipositor*/	"Human",
         /*Oviposition*/	"Human",
         /*GlowingAss*/	"Human",
-        /*Tail*/		"Human",
+        /*Tail*/		"Fox",
         /*Tongue*/		"Human",
         /*Wings*/		"Human",
         /*Penis*/		"Human",
@@ -34,16 +34,18 @@ public class WerefoxRace extends Race {
 
 	public function WerefoxRace(id:int) {
 		super("Werefox", id, []);//RaceBody);
-		chimeraTier = 0;
-		grandChimeraTier = 0;
-		disabled = true;
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				//start ctrl-spacing here
-		;
+				//
+				.eyeType(Eyes.FERAL, +1)
+				.eyeType(NOT(Eyes.FOX), 0,-7)
+				//.earType(Ears., +1)
+				.armType(Arms.FOX, +1)
+				.legType(LowerBody.FOX, +1)
+				.hasPerk(PerkLib.Vulpesthropy, +1);
 		
 		buildTier(11, "werefox")
 				.buffs({

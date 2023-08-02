@@ -479,6 +479,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.Mage)) temp += 15;
 			if (hasPerk(PerkLib.GrandMage)) temp += 30;
 			if (hasPerk(PerkLib.Archmage)) temp += 45;
+			if (hasPerk(PerkLib.ArchmageEx)) temp += 135;
 			if (hasPerk(PerkLib.GrandArchmage)) temp += 60;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) temp += 75;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) temp += 90;
@@ -803,6 +804,7 @@ import flash.utils.getQualifiedClassName;
 				temp += Math.round(this.wis * (3 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.Archmage) && inte >= 100) temp += 180;
+			if (hasPerk(PerkLib.ArchmageEx) && inte >= 100) temp += 600;
 			if (hasPerk(PerkLib.Channeling) && inte >= 60) temp += 90;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) temp += 225;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) temp += 270;
