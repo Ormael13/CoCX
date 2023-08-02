@@ -1,17 +1,19 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
-	import classes.Items.Consumable;
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Consumable;
 	
 	/**
 	 * Oil that reduces sensitivity.
 	 */
-	public class NumbingOil extends Consumable 
+	public class NumbingOil extends Consumable
 	{
 		private static const ITEM_VALUE:int = 100;
 		
-		public function NumbingOil() 
+		public function NumbingOil()
 		{
-			super("NumbOil","Numb Oil", "a bottle of numbing oil", ITEM_VALUE, "This bottle feels a bit warm to the touch. From the look of the label on the bottle of oil, you suspect this will make you less sensitive.");			
+			super("NumbOil","Numb Oil", "a bottle of numbing oil", ITEM_VALUE, "This bottle feels a bit warm to the touch. From the look of the label on the bottle of oil, you suspect this will make you less sensitive.");
+			refineableInto([], [], [[1, AlchemyLib.AR_SENS_DEC]]);
 		}
 		
 		override public function useItem():Boolean
