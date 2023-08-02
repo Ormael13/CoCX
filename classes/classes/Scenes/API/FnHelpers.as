@@ -108,7 +108,7 @@ public class FnHelpers extends BaseContent {
 								min:Number    = Number.NEGATIVE_INFINITY,
 								max:Number    = Number.POSITIVE_INFINITY):Function {
 		return function ():Number {
-			return lerp(player.level, levelA, levelB, valueA, valueB, bound, min, max);
+			return lerpEx(player.level, levelA, levelB, valueA, valueB, bound, min, max);
 		}
 	}
 
@@ -118,8 +118,8 @@ public class FnHelpers extends BaseContent {
 	 * - if bound==false, continues the interpolation outside the xA..xB interval,
 	 * optionally capped between min and max
 	 */
-	public static function lerp(x:Number, xA:int, xB:int, yA:Number, yB:Number,
-						 bound:Boolean = true, min:Number = Number.NEGATIVE_INFINITY, max:Number = Number.POSITIVE_INFINITY):Number {
+	public static function lerpEx(x:Number, xA:int, xB:int, yA:Number, yB:Number,
+								  bound:Boolean = true, min:Number = Number.NEGATIVE_INFINITY, max:Number = Number.POSITIVE_INFINITY):Number {
 			if (bound) {
 			if (x <= xA) return yA;
 			if (x >= xB) return yB;

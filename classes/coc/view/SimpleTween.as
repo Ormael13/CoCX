@@ -2,6 +2,7 @@ package coc.view {
 import classes.internals.Utils;
 
 import flash.display.DisplayObject;
+import flash.sampler.stopSampling;
 
 import mx.effects.Tween;
 import mx.effects.easing.Exponential;
@@ -22,54 +23,62 @@ public class SimpleTween {
     public function SimpleTween(spr:DisplayObject, prop:String, endVal:*, ms:int=300, options:Object = null) {
         this._spr        = spr;
         this._prop       = prop;
-        options          = Utils.extend({
-            onEnd: null,
-            easing: Exponential.easeInOut,
-            color: false
-        }, options);
-        this._onEnd      = options.onEnd;
-        this._color      = options.color;
+        this._startVal   = _spr[_prop];
+        this._endVal     = endVal;
+        this._duration   = ms;
+        this._onEnd      = Utils.valueOr(options && options.onEnd, null);
+        this._color      = Utils.valueOr(options && options.color, false);
+        this._easingFn   = Utils.valueOr(options && options.easing, Exponential.easeInOut);
         
-        var startVal:* = _spr[_prop];
         _active          = true;
-        _tween = new Tween(this, startVal, endVal, ms);
+        _tween = new Tween(this, _startVal, endVal, ms);
         if (_color) {
-            _tween.easingFunction = easingColorFunction(startVal, endVal, options.easing);
+            _startVal = Color.getFloatComponents(Color.convertColor32(_startVal));
+            _endVal = Color.getFloatComponents(Color.convertColor32(_endVal));
+            _tween.easingFunction = colorEasingFn;
         } else {
-            _tween.easingFunction = options.easing;
+            _tween.easingFunction = numberEasingFn;
         }
     }
-    public static function easingColorFunction(
-            startColor:*,
-            endColor:*,
-            easingFunction:Function
-    ): Function {
-        var startARGB:Object = Color.getFloatComponents(Color.convertColor32(startColor));
-        var endARGB:Object = Color.getFloatComponents(Color.convertColor32(endColor));
-        var deltaARGB:Object = {
-            a: endARGB.a - startARGB.a,
-            r: endARGB.r - startARGB.r,
-            g: endARGB.g - startARGB.g,
-            b: endARGB.b - startARGB.b
-        };
-        return function(time:Number,start:*,end:*,duration:Number):* {
-            return Color.toHex(
-                    Color.fromArgbFloat(
-                            easingFunction(time, startARGB.a, deltaARGB.a, duration),
-                            easingFunction(time, startARGB.r, deltaARGB.r, duration),
-                            easingFunction(time, startARGB.g, deltaARGB.g, duration),
-                            easingFunction(time, startARGB.b, deltaARGB.b, duration)
-                    ), true
-            )
-        }
+    private function numberEasingFn(time:Number,start:Number,end:Number,duration:Number):* {
+        return _easingFn(time,_startVal,_endVal,duration);
+    }
+    private function colorEasingFn(time:Number,start:*,end:*,duration:Number):* {
+        return Color.toHex(Color.interpolate(_startVal, _endVal, _easingFn(time,0,1,duration)));
+    }
+    public static function easingLinear(time:Number, start:Number, end:Number, duration:Number):Number {
+        return Utils.lerp(start,end,time/duration);
     }
     
     private var _spr:DisplayObject;
     private var _prop:String;
+    private var _startVal:*;
+    private var _endVal:*;
+    private var _duration:int;
+    private var _easingFn:Function;
     private var _onEnd:Function;
     private var _tween:Tween;
     private var _active:Boolean;
     private var _color:Boolean;
+    
+    
+    public function get startVal():* {
+        return _startVal;
+    }
+    public function get endVal():* {
+        return _endVal;
+    }
+    /**
+     * Stop this tween and start a new one, to a new end value
+     */
+    public function retarget(newEndVal:*):SimpleTween {
+        dispose();
+        return new SimpleTween(_spr, _prop, newEndVal, _duration, {
+            onEnd: _onEnd,
+            color: _color,
+            easing: _easingFn
+        });
+    }
     
     // This function is called by the tween every tick
     public function onTweenUpdate(val:*):void {
@@ -109,6 +118,13 @@ public class SimpleTween {
     public function dispose():void {
         if (_active && _tween) {
             _tween.stop();
+        }
+        _active = false;
+        _tween = null;
+    }
+    public function fastForward():void {
+        if (_active && _tween) {
+            _tween.endTween();
         }
         _tween = null;
     }

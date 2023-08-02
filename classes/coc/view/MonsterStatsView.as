@@ -125,7 +125,16 @@ public class MonsterStatsView extends Block {
 	public function hide():void {
 		this.visible = false;
 	}
-
+	
+	override public function set visible(value:Boolean):void {
+		if (visible != value) {
+			for (var i:int = 0; i < numElements; i++) {
+				var sb:StatBar = getElementAt(i) as StatBar;
+				if(sb) sb.animate = value && StatBar.DEFAULT_ANIMATE;
+			}
+		}
+		super.visible = value;
+	}
 	public function refreshStats(game:CoC):void {
 		var player:Player     = game.player;
 		var monster:Monster   = game.monster;

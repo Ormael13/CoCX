@@ -54,7 +54,7 @@ public class StatsView extends Block {
 	private var soulforceBar:StatBar;
 	private var hungerBar:StatBar;
 
-	private var allStats:Array;
+	private var allStats:/*StatBar*/Array;
 
 	private var col1:Block;
 	private var col2:Block;
@@ -211,6 +211,9 @@ public class StatsView extends Block {
 
 	
 	override public function set visible(value:Boolean):void {
+		if (visible != value) {
+			for each (var sb:StatBar in allStats) sb.animate = value;
+		}
 		super.visible = value;
 		if (corner) corner.visible = visible;
 	}

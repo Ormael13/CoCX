@@ -148,6 +148,12 @@ public class Utils extends Object
 			return x < min ? min : x > max ? max : x;
 		}
 		/**
+		 * Linear interpolation from v0 at t=0 to v1 at t=1
+		 */
+		public static function lerp(v0:Number, v1:Number, t:Number):Number {
+			return (1-t)*v0 + t*v1;
+		}
+		/**
 		 * Mimics JS Object.keys
 		 * For non-dynamic objects and/or getting all defined properties, set reflect = true
 		 */
