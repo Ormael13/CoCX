@@ -40,7 +40,7 @@ public class SimpleTween {
         this._onEnd    = Utils.valueOr(options && options.onEnd, null);
         this._color    = Utils.valueOr(options && options.color, false);
         var easingSpec:*    = options && options.easing;
-        if (easingSpec && easingSpec instanceof String) easingSpec = KnownEasings[easingSpec];
+        if (easingSpec && easingSpec is String) easingSpec = KnownEasings[easingSpec];
         this._easingFn = Utils.valueOr(easingSpec, Exponential.easeInOut);
 //        trace("SimpleTween",spr.name,prop,'from',_startVal,"to",_endVal,"/",_duration)
         

@@ -7,6 +7,8 @@ import classes.*;
 
 import flash.utils.describeType;
 
+import mx.formatters.NumberFormatter;
+
 public class Utils extends Object
 	{
 		public static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
@@ -139,6 +141,10 @@ public class Utils extends Object
 			if (decimals == 0) return Math.round(value);
 			var base:Number = ipow(10, decimals);
 			return Math.round(value*base)/base;
+		}
+		public static function formatNumber(value:Number, options:Object = null):String {
+			var nf:NumberFormatter = new NumberFormatter();
+			return nf.format(value);
 		}
 		public static function boundInt(min:int, x:int, max:int):int {
 			return x < min ? min : x > max ? max : x;

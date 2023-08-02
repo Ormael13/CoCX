@@ -1475,7 +1475,7 @@ public class PlayerInfo extends BaseContent {
 		masteryStats += "\n";
 		masteryStats += player.alchemySkillStat.describe(true);
 		masteryStats += "\n";
-		if (Crafting.gooProduced > 0) masteryStats += "<i>Stinky goo produced:</i> "+Crafting.gooProduced+"\n";
+		if (Crafting.gooProduced > 0) masteryStats += "<i>Stinky goo produced:</i> "+formatNumber(Crafting.gooProduced)+"\n";
 		if (masteryStats != "")
 			outputText("\n<b><u>Mastery</u></b>\n" + masteryStats);
 		// End Mastery Stats

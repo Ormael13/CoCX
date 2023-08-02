@@ -4,6 +4,7 @@ import classes.CoC_Settings;
 import classes.ItemSlotClass;
 import classes.ItemType;
 import classes.PerkLib;
+import classes.internals.Utils;
 
 import coc.view.Block;
 import coc.view.CoCButton;
@@ -49,6 +50,10 @@ public class MerchantMenu extends BaseContent {
 	 * `function(delta:int):void`
 	 */
 	public var modCurrencyFn:Function;
+	/**
+	 * Floating popup text, `function(delta:int):String`
+	 */
+	public var displayCurrencyFn:Function;
 	/**
 	 * `function():int`
 	 */
@@ -98,11 +103,10 @@ public class MerchantMenu extends BaseContent {
 	public function useGemCurrency():void {
 		modCurrencyFn = function (delta:int):void {
 			player.gems += delta;
-			mainViewManager.createFloatingTextAtCursor(
-					(delta>0?"+":"")+delta+" g",
-					"#fc0","#222"
-			);
 			statScreenRefresh();
+		}
+		displayCurrencyFn = function(delta:int):String {
+			return (delta>0?"+":"")+formatNumber(delta)+" g";
 		}
 		getCurrencyFn = function ():int { return player.gems }
 	}
@@ -148,7 +152,9 @@ public class MerchantMenu extends BaseContent {
 			);
 			if (mi._amount >= 0) amount = Math.min(amount, mi._amount);
 		}
-		modCurrencyFn(-mi._price * amount);
+		var value:int = -mi._price * amount;
+		modCurrencyFn(value);
+		showCurrencyFloatingText(value);
 		if (mi._amount >= 0) mi._amount -= amount;
 		var n:int          = amount;
 		var redraw:Boolean = false;
@@ -180,30 +186,40 @@ public class MerchantMenu extends BaseContent {
 		
 		addOneItem();
 	}
-	public function playerItemClick(i:int):void {
-		sellPlayerItem(i, shiftKeyDown ? -1 : 1);
+	private function showCurrencyFloatingText(value:int):void {
+		mainViewManager.createFloatingTextAtCursor(displayCurrencyFn(value), "#fc0", "#222");
 	}
-	public function sellPlayerItem(slotIndex:int, quantity:int):void {
+	public function playerItemClick(i:int):void {
+		sellPlayerItem(i, shiftKeyDown ? -1 : 1, true);
+	}
+	public function sellPlayerItem(slotIndex:int, quantity:int, popup:Boolean):int {
 		var itemSlot:ItemSlotClass = playerStorage[slotIndex];
 		var itype:ItemType         = itemSlot.itype;
-		if (itemSlot.isEmpty() || !canSell(itype)) return;
+		if (itemSlot.isEmpty() || !canSell(itype)) return 0;
 		if (quantity < 0) quantity = itemSlot.quantity;
 		if (quantity > itemSlot.quantity) quantity = itemSlot.quantity;
-		if (quantity == 0) return;
+		if (quantity == 0) return 0;
 		var value:Number = sellPrice(itype) * quantity;
 		modCurrencyFn(+value);
+		if (popup) {
+			showCurrencyFloatingText(value);
+		}
 		itemSlot.quantity -= quantity;
 		update();
 		if (afterPlayerSell != null) afterPlayerSell(itype, quantity, itemSlot, showScreen);
+		return value;
 	}
 	public function sellAllClick():void {
+		var total:int = 0;
 		for (var i:int = 0; i < playerStorage.length; i++) {
-			sellPlayerItem(i, -1);
+			total += sellPlayerItem(i, -1, false);
 			if (mainView.getCustomElement() != grid) {
+				if (total != 0) showCurrencyFloatingText(total);
 				// If afterPlayerSell callback displayed own interface, halt
 				return;
 			}
 		}
+		if (total != 0) showCurrencyFloatingText(total);
 	}
 	public function canSell(itype:ItemType):Boolean {
 		return playerCanSell && !itype.isNothing && (playerSellFilter == null || playerSellFilter(itype));

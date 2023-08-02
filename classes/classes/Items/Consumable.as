@@ -131,7 +131,7 @@ import classes.internals.Utils;
 				for each (var p:* in pigments) {
 					var w:int = 1;
 					var color:String;
-					if (p instanceof Array) {
+					if (p is Array) {
 						w = p[0];
 						color = p[1];
 					} else {
