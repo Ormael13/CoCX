@@ -17,7 +17,6 @@ public class StatBar extends Block {
 	[Embed(source = "../../../res/ui/arrow-down.png")]
 	public static var ArrowDown:Class;
 
-	public static var DEFAULT_ANIMATE:Boolean = true;
 	private static function factoryReset():Object {
 		return {
 			width      : 200,
@@ -25,7 +24,7 @@ public class StatBar extends Block {
 			minValue   : 0,
 			maxValue   : 100,
 			rawValue   : 0,
-			animate    : DEFAULT_ANIMATE,
+			animate    : true,
 			statName   : "",
 			showMax    : false,
 			isUp       : false,

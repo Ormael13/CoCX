@@ -2950,7 +2950,7 @@ public static const UNKNOWN_FLAG_NUMBER_02941:int                               
 public static const UNKNOWN_FLAG_NUMBER_02942:int                                   = 2942;
 public static const UNKNOWN_FLAG_NUMBER_02943:int                                   = 2943;
 public static const UNKNOWN_FLAG_NUMBER_02944:int                                   = 2944;
-public static const UNKNOWN_FLAG_NUMBER_02945:int                                   = 2945;
+public static const STATBAR_ANIMATIONS:int                                          = 2945; // 0: animate bar, 1: disable
 public static const BUTTON_ICONS_DISABLED:int                                       = 2946;
 public static const COMBAT_TEASE_HEALING:int                                        = 2947;
 public static const USSDISPLAY_STYLE:int                                  			= 2948;
@@ -3012,7 +3012,8 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	WATERSPORTS_ENABLED, LVL_UP_FAST, MUTATIONS_SPOILERS, NEWPERKSDISPLAY, INVT_MGMT_TYPE, CHARVIEWER_ENABLED,
 	CHARVIEW_STYLE, CHARVIEW_ARMOR_HIDDEN, USE_OLD_FONT, BACKGROUND_STYLE, IMAGEPACK_OFF, SPRITE_STYLE, USE_12_HOURS,
 	WATERSPORTS_ENABLED, USE_METRICS, AUTO_LEVEL, STRENGTH_SCALING, SPEED_SCALING, WISDOM_SCALING, INTELLIGENCE_SCALING,
-	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS
+	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS,
+		BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
 ];
 	}
 }

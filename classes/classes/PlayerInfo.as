@@ -1849,7 +1849,7 @@ public class PlayerInfo extends BaseContent {
 			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n");
             //CoC.instance.showComboBox(perkList, "Choose a perk", perkCbChangeHandler);
             if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
-	        mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
+			mainView.linkHandler = linkhandler;
 	        perkList = [];
 			if (filterChoices[0] == 1) perks = perks.filter(filterPerks);
 	        for each(var perk:PerkType in perks.sort()) {
@@ -1917,18 +1917,15 @@ public class PlayerInfo extends BaseContent {
 		perkBuyMenuOld();
 	}
 	private var perkList:Array = [];
-	private function linkhandler(e:TextEvent):void{
-		trace(e.text);
-		perkCbChangeHandler(perkList[e.text]);
+	private function linkhandler(event:String):void{
+		perkCbChangeHandler(perkList[event]);
 	}
 	private function perkSelect(selected:PerkClass):void {
-		mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
 		mainView.hideComboBox();
 		applyPerk(selected);
 	}
 
 	private function perkSkip():void {
-		mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
 		mainView.hideComboBox();
 		playerMenu();
 	}
@@ -1951,6 +1948,7 @@ public class PlayerInfo extends BaseContent {
 		for each(var p:* in perkList){
 			outputText("<u><a href=\"event:"+perkList.indexOf(p)+"\">"+p.perk.perkName+"</a></u>\n");
 		}
+		mainView.linkHandler = linkhandler;
 		menu();
 		addButton(0, "Okay", perkSelect, selected);
 		addButton(1, "Skip", perkSkip);
