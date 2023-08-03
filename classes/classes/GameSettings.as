@@ -898,8 +898,17 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Button icons: <b>OFF</b>");
 		outputText("\n\n");
+		
+		if (flags[kFLAGS.STATBAR_ANIMATIONS] == 1)
+			outputText("Stat bar animations: <b>OFF</b>");
+		else
+			outputText("Stat bar animations: <b>ON</b>");
+		outputText("\n\n");
 
 		menu();
+		// [ Font   ] [ Main BG] [ Text BG] [ Sprites] [CV Style]
+		// [ Images ] [ Time   ] [Measurem] [ CV Off ] [CV Armor]
+		// [BtnIcons] [ BarAnim] [        ] [        ] [ Back   ]
 		addButton(0, "Side Bar Font", toggleFlag, kFLAGS.USE_OLD_FONT, settingsScreenInterfaceSettings).hint("Toggle between old and new font for side bar.");
 		addButton(1, "Main BG", menuMainBackground).hint("Choose a background for main game interface.");
 		addButton(2, "Text BG", menuTextBackground).hint("Choose a background for text.");
@@ -911,6 +920,7 @@ public class GameSettings extends BaseContent {
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
 		addButton(9, "Charview Armor",toggleFlag, kFLAGS.CHARVIEW_ARMOR_HIDDEN, settingsScreenInterfaceSettings).hint("Turn PC armor and underwear display on/off");
 		addButton(10, "Button Icons", toggleFlag, kFLAGS.BUTTON_ICONS_DISABLED, settingsScreenInterfaceSettings);
+		addButton(11, "Statbar Anim.", toggleFlag, kFLAGS.STATBAR_ANIMATIONS, settingsScreenInterfaceSettings).hint("Toggle stat bar animations when value changes");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {

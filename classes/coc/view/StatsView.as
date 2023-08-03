@@ -212,7 +212,9 @@ public class StatsView extends Block {
 	
 	override public function set visible(value:Boolean):void {
 		if (visible != value) {
-			for each (var sb:StatBar in allStats) sb.animate = value;
+			for each (var sb:StatBar in allStats) {
+				sb.animate = value && (CoC.instance.flags[kFLAGS.STATBAR_ANIMATIONS] == 0);
+			}
 		}
 		super.visible = value;
 		if (corner) corner.visible = visible;

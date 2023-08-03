@@ -3,6 +3,7 @@
  */
 package coc.view {
 import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
 import classes.Player;
@@ -130,7 +131,7 @@ public class MonsterStatsView extends Block {
 		if (visible != value) {
 			for (var i:int = 0; i < numElements; i++) {
 				var sb:StatBar = getElementAt(i) as StatBar;
-				if(sb) sb.animate = value && StatBar.DEFAULT_ANIMATE;
+				if(sb) sb.animate = value && (CoC.instance.flags[kFLAGS.STATBAR_ANIMATIONS]==0);
 			}
 		}
 		super.visible = value;
