@@ -251,6 +251,12 @@ public class StatUtils {
 		['res_water', 'Resistance (Water)'],
 		['res_earth', 'Resistance (Earth)'],
 		['res_acid', 'Resistance (Acid)'],
+		
+		// These are not IStats, but can be used in 'property id -> readable string' conversion
+		['cor', 'Corruption'],
+		['thickness', 'Thickness'],
+		['tone', 'Muscle Tone'],
+		['femininity', 'Femininity'],
 	]);
 	public static const PercentageStats:Object = Utils.createMapFromPairs([
 		// [StatNames.SPELLPOWER, 'Spellpower']

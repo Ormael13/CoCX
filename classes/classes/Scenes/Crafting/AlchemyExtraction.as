@@ -179,7 +179,9 @@ public class AlchemyExtraction extends BaseContent {
 		button(10).show("Prev", curry(extractionMenuPage, inventoryPage - 1, usePearl))
 				  .icon("Left")
 				  .disableIf(inventoryPage == 0);
-		button(11).show("Inv/Pearl", curry(extractionMenuPage, 0, !usePearl))
+		if (inventory.pearlStorageSize() > 0) {
+			button(11).show("Inv/Pearl", curry(extractionMenuPage, 0, !usePearl));
+		}
 		
 		button(12).show("Next", curry(extractionMenuPage, inventoryPage + 1, usePearl))
 				  .icon("Right")

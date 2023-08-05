@@ -449,12 +449,33 @@ public class Utils extends Object
 			return dest;
 		}
 		/**
+		 * @example
+		 * [ "a", "b", "c" ] -> { "a": true, "b": true, "c": true }
+		 */
+		public static function toSet(src:/*String*/Array):Object {
+			var result:Object = {};
+			for each (var s:String in src) result[s] = true;
+			return result;
+		}
+		/**
+		 * @example
+		 * [ {id: "a"}, {id: "b"}, {id: "c"} ] -> { "a": true, "b": true, "c": true }
+		 */
+		public static function mapPropToSet(src:/*String*/Array, propname:String):Object {
+			var result:Object = {};
+			for each (var o:* in src) result[o[propname]] = true;
+			return result;
+		}
+		
+		/**
+		 * @example
 		 * [ [key1,value1], [key2, value2], ... ] -> { key1: value1, key2: value2, ... }
 		 */
 		public static function createMapFromPairs(src:Array):Object {
 			return multipleMapsFromPairs(src)[0];
 		}
 		/**
+		 * @example
 		 * [ [key1, value1_1, value1_2, ...],
 		 *   [key2, value2_1, value2_2, ...], ... ]
 		 *   ->

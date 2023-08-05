@@ -8,6 +8,11 @@ public class MutagenPill extends Consumable {
 	public var pillEffect:PossibleEffect;
 	public var power:int;
 	
+	/**
+	 * @param params
+	 * @param params.tf TF id ("TF_1_2")
+	 * @param params.p Pill power (AlchemyLib.PP_XXX)
+	 * */
 	public function MutagenPill(id:String, params:Object) {
 		var tfId:String = String(params.tf);
 		var power:int = params.p;

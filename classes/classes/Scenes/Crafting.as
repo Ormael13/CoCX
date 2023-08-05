@@ -8,6 +8,7 @@ import classes.Items.Alchemy.AlembicCatalyst;
 import classes.Items.Consumable;
 import classes.Scenes.Crafting.AlchemyExtraction;
 import classes.Scenes.Crafting.MutagenPillCrafting;
+import classes.Scenes.Crafting.StatPillCrafting;
 import classes.internals.EnumValue;
 import classes.internals.SaveableState;
 
@@ -496,6 +497,7 @@ public class Crafting extends BaseContent implements SaveableState
 		
 		public const alchemyExtraction:AlchemyExtraction = new AlchemyExtraction();
 		public const mutagenPillCrafting:MutagenPillCrafting = new MutagenPillCrafting();
+		public const statPillCrafting:StatPillCrafting = new StatPillCrafting();
 		
 		public function Crafting() {
 			Saves.registerSaveableState(this);
@@ -851,17 +853,22 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("\nWhat will you do?");
 			
 			menu();
-			// [Extract ] [Pills   ] [Dyes    ] [Stock   ] [        ]
+			// [Extract ] [Mut.Pill] [StatPill] [Dyes    ] [Stock   ]
 			// [        ] [        ] [        ] [        ] [        ]
 			// [        ] [        ] [Bag     ] [Cheat   ] [Back    ]
 			button(0).show("Extract", alchemyExtraction.extractionMenu)
 					 .hint("Refined mutagens into alchemical reagents using your alembic.")
+					 .icon("I_Potion_Empty")
 					 .disableIf(alembicLevel == 0, "You don't have an alembic!");
-			button(1).show("Mutagen Pills", mutagenPillCrafting.pillCraftingMenu)
+			button(1).show("Mutagen Pills", mutagenPillCrafting.craftingMenu)
 					 .hint("Craft mutagen pills in your alchemical furnace.")
-					 .icon("MutagenPill")
+					 .icon("I_MutagenPill_5")
 					 .disableIf(furnaceLevel == 0, "You don't have an alchemical furnace!");
-			button(2).show("Dyes", dyeCraftingMenu)
+			button(2).show("Stat Pills", statPillCrafting.craftingMenu)
+					 .hint("Craft enhancing pills in your alchemical furnace.")
+					 .icon("I_StatBonusPill_5")
+					 .disableIf(furnaceLevel == 0, "You don't have an alchemical furnace!");
+			button(3).show("Dyes", dyeCraftingMenu)
 					 .hint("Mix dyes using pigments.")
 					 .icon("I_HairDye");
 			button(4).show("Stock", checkStock)
@@ -1155,12 +1162,22 @@ private function craftingMaterialsMoonstone1Down():void {
 			if (!rk) rk = (ik[reagentType] = {});
 			rk[reagentKey] = true;
 		}
+		public function alchemyFurnaceObject():EnumValue {
+			return Crafting.FURNACE_LEVELS[furnaceLevel];
+		}
+		public function alchemyFurnaceStoneSafeLimit():int {
+			return alchemyFurnaceObject().stoneLimit
+		}
 		
 		//======================//
 		// ALCHEMY - DYE MIXING //
 		//======================//
 		
 		private var selectedPigment:String = "";
+		private function selectPigment(pigment:String):void {
+			selectedPigment = pigment;
+			dyeCraftingMenu();
+		}
 		public function dyeCraftingMenu():void {
 			clearOutput();
 			
@@ -1184,7 +1201,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			
 			menu();
-			button(0).show("Pigment", pigmentSelectMenu)
+			button(0).show("Pigment", curry(selectReagent, AlchemyLib.RT_PIGMENT, selectPigment, dyeCraftingMenu, selectedPigment))
 					 .hint("Select a pigment to use")
 					 .disableIf(keys(pigmentStock).length == 0);
 			button(1).show("Craft Dye", craftHairDye)
@@ -1208,14 +1225,20 @@ private function craftingMaterialsMoonstone1Down():void {
 				craftingMain();
 			}).icon("Back");
 		}
-		private function pigmentSelectMenu():void {
+		
+		public function selectReagent(type:int, callback:Function, backFn:Function, current:*):void {
 			clearOutput();
 			mainView.linkHandler = function (event:String):void {
-				selectedPigment = event;
-				dyeCraftingMenu();
+				if (type == AlchemyLib.RT_PIGMENT) {
+					addPigment(event, -1);
+					callback(event);
+				} else {
+					addAlchemyReagent(AlchemyReagent.getReagent(type, int(event)), -1);
+					callback(int(event));
+				}
 			}
-			outputText("<b>Alchemical reagents</b>:");
-			var list:Array = SceneLib.crafting.listAlchemyReagents(AlchemyLib.RT_PIGMENT);
+			outputText("<b>Alchemical " + AlchemyLib.ReagentTypes[type].name  + "s</b>:");
+			var list:Array = SceneLib.crafting.listAlchemyReagents(type).sortOn("2");
 			if (list.length == 0) {
 				outputText("\nYou don't have any! Refine ingredients in the alembic.");
 			} else {
@@ -1223,13 +1246,14 @@ private function craftingMaterialsMoonstone1Down():void {
 				for each (var element:Array in list) {
 					outputText("<li>");
 					outputText(mkLink(element[2] + " (" + element[1] + ")", String(element[3])));
+					if (element[3] == current) outputText(" - selected");
 					outputText("</li>")
 				}
 				outputText("</ul>");
 			}
 			
 			menu();
-			button(14).show("Back", dyeCraftingMenu).icon("Back");
+			button(14).show("Back", backFn).icon("Back");
 		}
 		private function craftHairDye():void {
 			clearOutput();

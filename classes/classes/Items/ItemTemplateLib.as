@@ -1,6 +1,7 @@
 package classes.Items {
 import classes.ItemTemplate;
 import classes.Items.Alchemy.MutagenPill;
+import classes.Items.Alchemy.StatBonusPill;
 import classes.Items.Consumables.EyeDye;
 import classes.Items.Consumables.HairDye;
 import classes.Items.Consumables.SkinOil;
@@ -52,12 +53,24 @@ public class ItemTemplateLib {
 		category: "consumable",
 		params: [
 			{name:"tf", type:"text", value:"TF_1_1"},
-			{name:"power", type:"number",value:1, min:1, max:5}
+			{name:"p", type:"number",value:1, min:1, max:5}
 		]
 	})
 	
 	public function createMutagenPill(substance:int, essence:int, power:int):MutagenPill {
 		return TMutagenPill.createItem({tf:"TF_"+substance+"_"+essence,p:power}) as MutagenPill;
+	}
+	
+	public const TStatBonussPill:ItemTemplate = mk("StatBonusPill", "Stat Bonus Pill", StatBonusPill, {
+		category: "consumable",
+		params: [
+			{name:"r", type:"number", value:1, min: 1, max: 12},
+			{name:"p", type:"number",value:1, min:1, max:5}
+		]
+	});
+	
+	public function createStatBonusPill(residue:int, power:int):StatBonusPill {
+		return TStatBonussPill.createItem({r:residue,p:power}) as StatBonusPill;
 	}
 	
 	// Generic dynamic items
