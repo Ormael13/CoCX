@@ -87,7 +87,7 @@ public class Changelog extends BaseContent
 			outputText("-New key Item (by Aimozg): Tel'Adre Magazine Issue 2 - Increase 2x Alchemy EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-History: Alchemist or Past Life: Alchemist would start with lvl 5 in alchemy skill.\n");
 			outputText("-New event perk: Archmage (Ex). Gained by use of the Pocket Watch when req. are meet. Effects: Increases base spell strength by 105%, mana pool by 600 and lust bar by 135.\n");
-			outputText("-\n");
+			outputText("-Evangeline can craft diluted E-Ichor. Can craft pills that give Mutagen Bonus (D.E.Ichor + herb + stat residue) (fellow daoist aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
