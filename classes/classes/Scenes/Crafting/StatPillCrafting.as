@@ -12,7 +12,7 @@ public class StatPillCrafting extends AbstractPillCraftingContent {
 		[useables.D_E_ICHOR, consumables.BLADEFERN, AlchemyLib.AR_SPE],
 		[useables.D_E_ICHOR, consumables.SNAKEBANE, AlchemyLib.AR_INT],
 		[useables.D_E_ICHOR, consumables.MOONGRASS, AlchemyLib.AR_WIS],
-		[useables.D_E_ICHOR, consumables.BLADEFERN, AlchemyLib.AR_LIB],
+		[useables.D_E_ICHOR, consumables.RAUNENECT, AlchemyLib.AR_LIB],
 	];
 	public const ValidIngredients1:Object = mapPropToSet([
 		useables.D_E_ICHOR
@@ -23,7 +23,7 @@ public class StatPillCrafting extends AbstractPillCraftingContent {
 		consumables.BLADEFERN,
 		consumables.SNAKEBANE,
 		consumables.MOONGRASS,
-		consumables.BLADEFERN
+		consumables.RAUNENECT
 	], "id");
 	
 	public function StatPillCrafting() {
