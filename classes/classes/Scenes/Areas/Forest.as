@@ -183,6 +183,12 @@ use namespace CoC;
 						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 						chance: 0.50
 					}, {
+						name  : "ginseng",
+						label : "Ginseng",
+						kind : 'item',
+						call  : findGinseng,
+						chance: 0.20
+					}, {
 						name  : "truffle",
 						label : "Truffle",
 						kind : 'item',
@@ -786,6 +792,12 @@ use namespace CoC;
 				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 				chance: 0.50
 			}, {
+				name  : "ginseng",
+				label : "Ginseng",
+				kind : 'item',
+				call  : findGinseng,
+				chance: 0.20
+			}, {
 				name  : "truffle",
 				label : "Truffle",
 				kind : 'item',
@@ -842,6 +854,10 @@ use namespace CoC;
 				player.takePhysDamage(10);
 			}
 			endEncounter();
+		}
+		public function findGinseng():void {
+			outputText("You spot something unusual. Taking a closer look, it's definitely a ginseng.");
+			inventory.takeItem(consumables.GINSENG, explorer.done);
 		}
 		public function findTruffle():void {
 			outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort.");

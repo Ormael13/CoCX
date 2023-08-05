@@ -1377,6 +1377,14 @@ public class Combat extends BaseContent {
 		StatusEffects.FrostburnDoT,
 		StatusEffects.FrozenLung,
 	];
+    public function Ginseng():void {
+        clearOutput();
+        var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
+        //strength then Duration in hours
+        player.createStatusEffect(StatusEffects.TeasePotion,power,duration,0,0);
+        outputText("You eat the ginseng and gulp it down. Your breath will now smells like ginseng for a while wich should increase your appeal. "+power+" "+duration+"");
+    }
     public function Painkiller():void {
         clearOutput();
         var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
@@ -10019,6 +10027,12 @@ public class Combat extends BaseContent {
                 outputText("<b>Stimulant effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.AttackPotion, 2, -1);
         }
+		if (player.hasStatusEffect(StatusEffects.TeasePotion)) {
+            if (player.statusEffectv2(StatusEffects.TeasePotion) <= 0) {
+                player.removeStatusEffect(StatusEffects.TeasePotion);
+                outputText("<b>Ginseng effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.TeasePotion, 2, -1);
+        }
         //Spell buffs
         //Violet Pupil Transformation
         if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
@@ -12767,6 +12781,7 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
     if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
     if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
     if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
+	if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
     damage *= damagemultiplier;
     if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
     if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
@@ -16610,4 +16625,4 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
-
+

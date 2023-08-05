@@ -210,8 +210,12 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
-			if (Garden.IngrediantBagSlot01Cap == 0) addButton(8, "Herb Bag (LowG)", pitchHerbsBag).hint("Herbs Bag (Lowest Grade)");
-			if (Garden.PotionsBagSlot01Cap == 0) addButton(9, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
+			if (Garden.IngrediantBagSlot01Cap == 0) addButton(6, "Herb Bag (LLowG)", pitchLLHerbsBag).hint("Herbs Bag (Lowest Grade)");
+			if (Garden.IngrediantBagSlot07Cap == 0) {
+				if (player.farmingLevel >= 5) addButton(7, "Herb Bag (LowG)", pitchLHerbsBag).hint("Herbs Bag (Low Grade)");
+				else addButtonDisabled(7, "Herb Bag (LowG)", "Herbs Bag (Low Grade) Req. lvl 5 in Farming.");
+			}
+			if (Garden.PotionsBagSlot01Cap == 0) addButton(8, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
 			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
@@ -556,14 +560,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 		}
 		
-		private function pitchHerbsBag():void {
+		private function pitchLLHerbsBag():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("\"<i>I see you keep herbs between your other stuff. Why not you buy this one bag that is much better to keep them in one place? Only 300 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
-			doYesNo(buyHerbsBag, miscMenu);
+			doYesNo(buyLLHerbsBag, miscMenu);
 		}
 		
-		private function buyHerbsBag():void {
+		private function buyLLHerbsBag():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 300) {
@@ -580,6 +584,37 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				Garden.IngrediantBagSlot04Cap = 5;
 				Garden.IngrediantBagSlot05Cap = 5;
 				Garden.IngrediantBagSlot06Cap = 5;
+				doNext(miscMenu);
+			}
+		}
+		
+		private function pitchLHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep herbs between your other stuff. Why not you buy this one bag that is much better then the one you already have to keep them in one place? Only 500 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyLHerbsBag, miscMenu);
+		}
+		
+		private function buyLHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 500) {
+				outputText("\n\nGiacomo sighs, indicating you need 400 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Herbs Bag (Low grade).</b>");
+				player.gems -= 500;
+				player.removeKeyItem("Herbs Bag (Lowest grade)");
+				player.createKeyItem("Herbs Bag (Low grade)", 0, 0, 0, 0);
+				Garden.IngrediantBagSlot01Cap = 10;
+				Garden.IngrediantBagSlot02Cap = 10;
+				Garden.IngrediantBagSlot03Cap = 10;
+				Garden.IngrediantBagSlot04Cap = 10;
+				Garden.IngrediantBagSlot05Cap = 10;
+				Garden.IngrediantBagSlot06Cap = 10;
+				Garden.IngrediantBagSlot07Cap = 10;
+				Garden.IngrediantBagSlot08Cap = 10;
 				doNext(miscMenu);
 			}
 		}

@@ -16644,7 +16644,20 @@ public final class Mutations extends MutationsHelper {
     }
 
     //ALCHEMICAL ITEMS
-	public function HealingHerb(player:Player):void {
+	public function Ginseng(player:Player):void {
+        clearOutput();
+        var power:Number = 10; //needs to be calculated in game
+        var duration:Number = Math.round(power/100)+5;
+        //strength then Duration in hours
+        player.createStatusEffect(StatusEffects.TeasePotion,power,duration,0,0);
+        outputText("You eat the ginseng and gulp it down. Your breath will now smells like ginseng for a while wich should increase your appeal.");
+        player.refillHunger(15);
+        var HE:Number = 5 + player.level;
+		HE *= player.HerbalismMulti();
+		player.herbXP(HE);
+    }
+
+    public function HealingHerb(player:Player):void {
         clearOutput();
         outputText("You eat up the herb, your wounds closing at high speed.");
         var power:Number = 1;
@@ -16685,7 +16698,7 @@ public final class Mutations extends MutationsHelper {
         //strength then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You eat up the weed, feeling any lingering pain recede as your skin hardens like stone.");
-        player.refillHunger(15)
+        player.refillHunger(15);
         player.createStatusEffect(StatusEffects.AlchIronweed, 6, 0, 0, 0);
         var HE:Number = 5 + player.level;
 		HE *= player.HerbalismMulti();

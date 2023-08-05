@@ -2280,6 +2280,8 @@ public class Camp extends NPCAwareContent{
 		if (player.itemCount(weapons.DDAGGER) > 0) addButton(btn++, "Dagger", menuSeparating, weapons.DDAGGER, weapons.DAGGER).hint("Separate Dual Daggers into 2 Daggers");
 		if (player.itemCount(weapons.ANGSTD1) > 1) addButton(btn++, "A.Daggers", menuCombining, weapons.ANGSTD1, weapons.ANGSTD).hint("Combine 2 Angst Dagger(s) into Angst Daggers");
 		if (player.itemCount(weapons.ANGSTD) > 0) addButton(btn++, "A.Dagger", menuSeparating, weapons.ANGSTD, weapons.ANGSTD1).hint("Separate Angst Daggers into 2 Angst Dagger(s)");
+		if (player.itemCount(weapons.DAGWHIP) > 1) addButton(btn++, "D.Daggers", menuCombining, weapons.DAGWHIP, weapons.DDAGWHIP).hint("Combine 2 Dagger Whips into Dual Dagger Whips");
+		if (player.itemCount(weapons.DDAGWHIP) > 0) addButton(btn++, "Dagger", menuSeparating, weapons.DDAGWHIP, weapons.DAGWHIP).hint("Separate Dual Dagger Whips into 2 Dagger Whips");
 		if (player.itemCount(weapons.BFSWORD) > 1) addButton(btn++, "D.BF Swords", menuCombining, weapons.BFSWORD, weapons.DBFSWO).hint("Combine 2 BF Swords into Dual BF Swords");
 		if (player.itemCount(weapons.DBFSWO) > 0) addButton(btn++, "BF Sword", menuSeparating, weapons.DBFSWO, weapons.BFSWORD).hint("Separate Dual BF Swords into 2 BF Swords");
 		if (player.itemCount(weapons.BFTHSWORD) > 1) addButton(btn++, "D.BFTH Swords", menuCombining, weapons.BFTHSWORD, weapons.DBFTHSWO).hint("Combine 2 BF Two-Handed Swords into Dual BF Two-Handed Swords");

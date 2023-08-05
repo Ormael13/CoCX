@@ -866,6 +866,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ArmorPotion:StatusEffectType        = mkCombat("Painkiller");
 		public static const ArousalPotion:StatusEffectType      = mk("Perfume");
 		public static const AttackPotion:StatusEffectType       = mkCombat("Stimulant");
+		public static const TeasePotion:StatusEffectType      	= mkCombat("Ginseng");
 
 		// combat
 		public static const AcidDoT:StatusEffectType                   = mkCombat("Acid DoT");

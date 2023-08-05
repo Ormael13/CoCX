@@ -88,9 +88,9 @@ public class Changelog extends BaseContent
 			outputText("-History: Alchemist or Past Life: Alchemist would start with lvl 5 in alchemy skill.\n");
 			outputText("-New event perk: Archmage (Ex). Gained by use of the Pocket Watch when req. are meet. Effects: Increases base spell strength by 105%, mana pool by 600 and lust bar by 135.\n");
 			outputText("-Evangeline can craft diluted E-Ichor. Can craft pills that give Mutagen Bonus (D.E.Ichor + herb + stat residue) (fellow daoist aimozg)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New consumable (by Liadri): Ginseng. Cost 6 gems. Can be found when exploring forest areas. Eating it would apply effect for few hours increasing tease dmg by 5%.\n");
+			outputText("-New key item: Herbs Bag (Low grade). Buyable at Giacomo when pc have lvl 5+ in farming skill. Costs 500 gems and would increase slots cap to 10 and open 2 additional slots for 2 new herb types.\n");
+			outputText("-New melee weapon (by Ormael): Dual Dagger Whips - can be gained by combining 2x Dagger Whip weapon. Cost 400 gems. Base atk is 5. It's dual small weapon belonging to dagger type, can use whipping special with them.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -106,6 +106,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
@@ -166,9 +169,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -192,7 +193,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
