@@ -6646,23 +6646,30 @@ use namespace CoC;
 			return additionalTransformationChancesCounter;
 		}
 
-		public function MutagenBonus(statName: String, bonus: Number, applyEffect: Boolean = true):Boolean
+		public function MutagenBonusCap100():Number {
+			var cap:Number = 20;
+			if (hasPerk(PerkLib.Enhancement)) cap += 2;
+			if (hasPerk(PerkLib.Fusion)) cap += 2;
+			if (hasPerk(PerkLib.Enchantment)) cap += 2;
+			if (hasPerk(PerkLib.Refinement)) cap += 2;
+			if (hasPerk(PerkLib.Saturation)) cap += 2;
+			if (hasPerk(PerkLib.Perfection)) cap += 2;
+			if (hasPerk(PerkLib.Creationism)) cap += 2;
+			if (hasPerk(PerkLib.TransformationAcclimation)) cap += 2;
+			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 5;
+			return cap
+		}
+		public function GetMutagenBonus(statName:String):Number {
+			return buff("Mutagen").getValueOfStatBuff(statName+".mult");
+		}
+		public function MutagenBonus(statName: String, bonus: Number, applyEffect: Boolean = true, extraCap:Number = 0):Boolean
 		{
-			var cap:Number = 0.2;
-			if (hasPerk(PerkLib.Enhancement)) cap += 0.02;
-			if (hasPerk(PerkLib.Fusion)) cap += 0.02;
-			if (hasPerk(PerkLib.Enchantment)) cap += 0.02;
-			if (hasPerk(PerkLib.Refinement)) cap += 0.02;
-			if (hasPerk(PerkLib.Saturation)) cap += 0.02;
-			if (hasPerk(PerkLib.Perfection)) cap += 0.02;
-			if (hasPerk(PerkLib.Creationism)) cap += 0.02;
-			if (hasPerk(PerkLib.TransformationAcclimation)) cap += 0.02;
-			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
-            if (bonus == 0)
+			var cap:Number = 0.01*(MutagenBonusCap100() + extraCap);
+			if (bonus == 0)
                 return false; //no bonus - no effect
             if (applyEffect && removeCurse(statName, bonus, 1) > 0)
                 return false; //remove existing curses
-            var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
+            var current:Number = GetMutagenBonus(statName);
             var bonus_sign:Number = (bonus > 0) ? 1 : -1;
             var current_sign:Number = (current > 0) ? 1 : -1;
             if ((bonus_sign == current_sign) && Math.abs(current) >= cap) //already max and matching signs

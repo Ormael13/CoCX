@@ -1,5 +1,4 @@
 package classes.Scenes.Crafting {
-import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
 import classes.Items.Alchemy.AlchemyLib;
@@ -7,71 +6,30 @@ import classes.Scenes.Crafting;
 import classes.Scenes.SceneLib;
 import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
-import classes.internals.EnumValue;
 
-public class MutagenPillCrafting extends BaseContent {
+public class MutagenPillCrafting extends AbstractPillCraftingContent {
 	public function get furnaceLevel():int {
 		return Crafting.furnaceLevel;
 	}
 	
 	public function MutagenPillCrafting() {
 	}
-	public function furnaceName():String {
-		return furnaceObject().name;
-	}
-	public function furnaceObject():EnumValue {
-		return Crafting.FURNACE_LEVELS[furnaceLevel];
-	}
 	
 	// Runtime state variables - not saved, must be cleared when you leave the scene
 	private var furnaceSubstance:int = AlchemyLib.AE_NONE;
 	private var furnaceEssence:int   = AlchemyLib.AS_NONE;
-	private var furnaceStones:int    = 0;
 	
-	private function stoneSafeLimit():int {
-		return furnaceObject().stoneLimit
-	}
-	private function stoneLimit():int {
-		return 20
-	}
-	private function calcMutagenPillChances():/*Number*/Array {
-		var result:Array = furnaceObject().refineChances.slice();
-		normalizeArray(result, 100);
-		// +25% to raise a level per spirit stone
-		var raiseChance:Number = 0.25;
-		raiseChance += 0.005 * player.alchemySkillLevel;
-		for (var i:int = 0; i < furnaceStones; i++) {
-			result = [
-				/*                     */ result[0] * (1 - raiseChance),
-				result[0] * raiseChance + result[1] * (1 - raiseChance),
-				result[1] * raiseChance + result[2] * (1 - raiseChance),
-				result[2] * raiseChance + result[3] * (1 - raiseChance),
-				result[3] * raiseChance + result[4] * (1 - raiseChance),
-				result[4] * raiseChance + result[5]
-			];
-		}
-		// +20 chance to explore per extra SS
-		if (furnaceStones > stoneSafeLimit()) result[0] += 20 * (furnaceStones - stoneSafeLimit());
-		return normalizeArray(result, 100);
-	}
-	
-	public function pillCraftingMenu():void {
+	public override function craftingMenu():void {
 		clearOutput();
 		
 		outputText("<b>Tool quality</b>: " + furnaceName());
 		outputText("\n<b>Substance</b>: " + (furnaceSubstance ? AlchemyLib.Substances[furnaceSubstance].name : "<i>none</i>"));
 		outputText("\n<b>Essence</b>: " + (furnaceEssence ? AlchemyLib.Essences[furnaceEssence].name : "<i>none</i>"));
-		outputText("\n<b>Spirit Stones</b>: " + furnaceStones + "/" + stoneSafeLimit() + ". ");
-		if (silly() && furnaceStones == stoneLimit()) {
-			outputText("<b>WARNING: Prepare for unforeseen consequences. </b>");
-		} else if (furnaceStones == stoneSafeLimit()) {
-			outputText("This is maximum safe value.")
-		} else if (furnaceStones > stoneSafeLimit()) {
-			outputText("<b>WARNING: Too many spirit stones. </b>")
-		}
+		printStonesInFurnace();
+		
 		outputText("\n<b>Skill</b>: " + player.alchemySkillLevel);
 		outputText("\n<b>Result</b>: ");
-		if (debug || SceneLib.crafting.isTfPillKnown(furnaceSubstance, furnaceEssence)) {
+		if (debug || crafting.isTfPillKnown(furnaceSubstance, furnaceEssence)) {
 			var tf:PossibleEffect = Transformation.findSETf(furnaceSubstance, furnaceEssence);
 			if (tf) {
 				outputText(tf.alchemyLongName);
@@ -81,22 +39,7 @@ public class MutagenPillCrafting extends BaseContent {
 		} else {
 			outputText("???")
 		}
-		outputText("\n<b>Refinement chances</b>:");
-		outputText("<ul>");
-		var chances:Array = calcMutagenPillChances();
-		for (var i:int = 0; i < chances.length; i++) {
-			if (chances[i] <= 0) continue;
-			outputText("<li>");
-			if (i == 0) outputText("<b>Explosion</b>");
-			else outputText(capitalizeFirstLetter(AlchemyLib.PillPowerTiers[i].name + " pill"));
-			outputText(": " + floor(chances[i]) + "%");
-			outputText("</li>");
-		}
-		outputText("</ul>");
-		if (furnaceStones == stoneLimit()) {
-			outputText("\n\nYou can't fit more spirit stones in the furnace!");
-			if (silly()) outputText(" The pile emits an eerie blue glow and you hear a chaotic, intermittent clicking noise.");
-		}
+		printRefinementChances();
 		
 		// [ Refine!] [Substanc] [Essence ] [        ] [        ]
 		// [Add SS  ] [Take SS ] [        ] [        ] [        ]
@@ -106,55 +49,27 @@ public class MutagenPillCrafting extends BaseContent {
 				 .hint("Refine the pill.")
 				 .disableIf(furnaceSubstance == 0, "Select an alchemical substance.")
 				 .disableIf(furnaceEssence == 0, "Select an alchemical essence.")
-		button(1).show("Substance", curry(selectReagent, AlchemyLib.RT_SUBSTANCE));
-		button(2).show("Essence", curry(selectReagent, AlchemyLib.RT_ESSENCE));
-		button(5).show("Add S.Stone", addSpiritStone)
-				 .hint("Put spirit stone into furnace to improve the pill quality.\n\nShift+click to add maximum.")
-				 .disableIf(flags[kFLAGS.SPIRIT_STONES] <= 0)
-				 .disableIf(furnaceStones >= stoneLimit());
-		button(6).show("Take S.Stone", takeSpiritStone)
-				 .hint("Take spirit stone from.\n\nShift+click to take all.")
-				 .disableIf(furnaceStones == 0);
+		button(1).show("Substance", curry(crafting.selectReagent, AlchemyLib.RT_SUBSTANCE, selectSubstance, craftingMenu, furnaceSubstance));
+		button(2).show("Essence", curry(crafting.selectReagent, AlchemyLib.RT_ESSENCE, selectEssence, craftingMenu, furnaceEssence));
+		setAddSSButton(5);
+		setTakeSSButton(6);
 		button(13).show("Cancel", cleanTheFurnace)
 				  .hint("Cancel refinement and take back the resources.")
 				  .disableIf(furnaceSubstance == 0 && furnaceEssence == 0 && furnaceStones == 0);
-		button(14).show("Back", SceneLib.crafting.craftingMain)
+		button(14).show("Back", crafting.craftingMain)
 				  .icon("Back")
 				  .disableIf(furnaceSubstance > 0 || furnaceEssence != 0 || furnaceStones != 0,
 						  "Empty the furnace first!");
 	}
-	private function selectReagent(type:int):void {
-		clearOutput();
-		mainView.linkHandler = function (event:String):void {
-			if (type == AlchemyLib.RT_SUBSTANCE) {
-				furnaceSubstance = int(event);
-				SceneLib.crafting.addSubstance(furnaceSubstance, -1);
-			} else if (type == AlchemyLib.RT_ESSENCE) {
-				furnaceEssence = int(event);
-				SceneLib.crafting.addEssence(furnaceEssence, -1);
-			}
-			pillCraftingMenu();
-		}
-		if (type == AlchemyLib.RT_SUBSTANCE) {
-			outputText("<b>Alchemical substances</b>:");
-		} else if (type == AlchemyLib.RT_ESSENCE) {
-			outputText("<b>Alchemical essences</b>:");
-		}
-		var list:Array = SceneLib.crafting.listAlchemyReagents(type);
-		if (list.length == 0) {
-			outputText("\nYou don't have any! Refine ingredients in the alembic.");
-		} else {
-			outputText("<ul>");
-			for each (var element:Array in list) {
-				outputText("<li>");
-				outputText(mkLink(element[2] + " (" + element[1] + ")", String(element[3])));
-				outputText("</li>")
-			}
-			outputText("</ul>");
-		}
-		
-		menu();
-		button(14).show("Back", pillCraftingMenu).icon("Back");
+	private function selectSubstance(i:int):void {
+		if (furnaceSubstance) crafting.addSubstance(furnaceSubstance);
+		furnaceSubstance = i;
+		craftingMenu();
+	}
+	private function selectEssence(i:int):void {
+		if (furnaceEssence) crafting.addSubstance(furnaceEssence);
+		furnaceEssence = i;
+		craftingMenu();
 	}
 	private function doRefinePill():void {
 		clearOutput();
@@ -163,10 +78,10 @@ public class MutagenPillCrafting extends BaseContent {
 		if (furnaceStones > 0) {
 			outputText("The " + (furnaceStones > 1 ? "spirit stones" : "spirit stone") + " crumble and release the soulforce, fueling the process and empowering the mixture. ");
 		}
-		var chances:/*Number*/Array = calcMutagenPillChances();
+		var chances:/*Number*/Array = calcPillChances();
 		var pillPower:int;
-		if (SceneLib.crafting.isLuckyXianxiaMC()) {
-			SceneLib.crafting.useXianxiaMCLuck();
+		if (crafting.isLuckyXianxiaMC()) {
+			crafting.useXianxiaMCLuck();
 			pillPower = AlchemyLib.PP_RADIANT;
 		} else {
 			pillPower = weightedRandom([
@@ -188,7 +103,7 @@ public class MutagenPillCrafting extends BaseContent {
 			player.giveAlchemyXP(AlchemyLib.PillPowerTiers[0].xp);
 			doNext(camp.returnToCampUseOneHour);
 		} else {
-			SceneLib.crafting.setTfPillKnown(furnaceSubstance, furnaceEssence);
+			crafting.setTfPillKnown(furnaceSubstance, furnaceEssence);
 			// TODO @aimozg can craft multiple, depending on skill or other factors
 			var npills:int = 1;
 			outputText("The whirling cloud slows down, then shrinks into " +
@@ -202,7 +117,7 @@ public class MutagenPillCrafting extends BaseContent {
 				outputText("<b>You've successfully refined " + (npills > 1 ? npills + " x " : "a ") + pill.longNameBase + "!</b>");
 				// TODO @aimozg support transfering multiple items
 				player.giveAlchemyXP(AlchemyLib.PillPowerTiers[pillPower].xp);
-				inventory.takeItem(pill, pillCraftingMenu);
+				inventory.takeItem(pill, craftingMenu);
 			} else {
 				outputText("However, " + (npills > 1 ? "they crumble" : "it crumbles") + " into gray dust due to incompatibility. <b>It seems that you can't refine " +
 						AlchemyLib.Essences[furnaceEssence].name +
@@ -212,45 +127,22 @@ public class MutagenPillCrafting extends BaseContent {
 				furnaceEssence   = 0;
 				furnaceStones    = 0;
 				player.giveAlchemyXP(AlchemyLib.PillPowerTiers[0].xp);
-				doNext(pillCraftingMenu);
+				doNext(craftingMenu);
 			}
 		}
 	}
-	private function addSpiritStone():void {
-		var n:int = 1;
-		if (shiftKeyDown) {
-			n = Math.min(flags[kFLAGS.SPIRIT_STONES], stoneSafeLimit());
-		}
-		flags[kFLAGS.SPIRIT_STONES] -= n;
-		furnaceStones += n;
-		statScreenRefresh();
-		pillCraftingMenu();
-	}
-	private function takeSpiritStone():void {
-		var n:int = shiftKeyDown ? furnaceStones : 1;
-		flags[kFLAGS.SPIRIT_STONES] += n;
-		furnaceStones -= n;
-		statScreenRefresh();
-		pillCraftingMenu();
-	}
-	private function cleanTheFurnace():void {
-		if (furnaceStones > 0) {
-			outputText("\nYou take " + numberOfThings(furnaceStones, "spirit stone", "spirit stones") + " out and store them back in your pocket.")
-			flags[kFLAGS.SPIRIT_STONES] += furnaceStones;
-			furnaceStones = 0;
-		}
+	protected override function cleanTheFurnace():void {
 		if (furnaceSubstance != 0) {
 			outputText("\nYou carefully collect the " + AlchemyLib.Substances[furnaceSubstance].name + " substance and put it back in into your alchemical storage.");
-			SceneLib.crafting.addSubstance(furnaceSubstance);
+			crafting.addSubstance(furnaceSubstance);
 			furnaceSubstance = 0;
 		}
 		if (furnaceEssence != 0) {
 			outputText("\nYou carefully collect the " + AlchemyLib.Essences[furnaceEssence].name + " essence and put it back in into your alchemical storage.");
-			SceneLib.crafting.addEssence(furnaceEssence);
+			crafting.addEssence(furnaceEssence);
 			furnaceEssence = 0;
 		}
-		statScreenRefresh();
-		doNext(pillCraftingMenu);
+		super.cleanTheFurnace();
 	}
 	
 }

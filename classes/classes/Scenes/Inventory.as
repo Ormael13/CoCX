@@ -754,6 +754,18 @@ use namespace CoC;
 			return 0;
 		}
 		/**
+		 * Tries to add `qty` items to player. Does not produce any output. Halts when out of inventory space
+		 * @return Number of items added
+		 */
+		public function tryAddMultipleItemsToPlayer(itype:ItemType, qty:int):int {
+			var n:int = 0;
+			while (qty-->0) {
+				if (tryAddItemToPlayer(itype) == 0) break;
+				n++;
+			}
+			return n
+		}
+		/**
 		 * Tries to transfer 1 item from [source], reducing its quantity, to player.
 		 * Does not produce any output.
 		 * @param source

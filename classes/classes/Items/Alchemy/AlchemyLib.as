@@ -15,6 +15,7 @@ public class AlchemyLib extends BaseContent {
 	 * * short: button name;
 	 * * name: full name;
 	 * * chance: effect chance (%).
+	 * * power: effect multiplier
 	 * * value: value multiplier
 	 * * xp: alchemy skill xp gained for refining
 	 */
@@ -23,6 +24,7 @@ public class AlchemyLib extends BaseContent {
 		short : "D.",
 		name  : "dead",
 		chance: 0,
+		power : 0,
 		value : 0,
 		xp    : 1
 	});
@@ -30,6 +32,7 @@ public class AlchemyLib extends BaseContent {
 		short : "F.",
 		name  : "faint",
 		chance: 50,
+		power : 1,
 		value : 1,
 		xp    : 2
 	});
@@ -37,6 +40,7 @@ public class AlchemyLib extends BaseContent {
 		short : "W.",
 		name  : "weak",
 		chance: 60,
+		power : 2,
 		value : 2,
 		xp    : 5
 	});
@@ -44,21 +48,24 @@ public class AlchemyLib extends BaseContent {
 		short : "N.",
 		name  : "normal",
 		chance: 70,
-		value : 3,
+		power : 3,
+		value : 5,
 		xp    : 10
 	});
 	public static const PP_POTENT:int                     = EnumValue.add(PillPowerTiers, 4, "POTENT", {
 		short : "P.",
 		name  : "potent",
 		chance: 80,
-		value : 4,
+		power : 4,
+		value : 8,
 		xp    : 20
 	});
 	public static const PP_RADIANT:int                    = EnumValue.add(PillPowerTiers, 5, "RADIANT", {
 		short : "R.",
 		name  : "radiant",
 		chance: 100,
-		value : 5,
+		power : 5,
+		value : 10,
 		xp    : 50
 	});
 	
@@ -69,6 +76,21 @@ public class AlchemyLib extends BaseContent {
 	public static const RT_ESSENCE:int   = 2;
 	public static const RT_RESIDUE:int   = 3;
 	public static const RT_PIGMENT:int   = 4;
+	
+	public static const ReagentTypes:/*EnumValue*/Array = [];
+	EnumValue.add(ReagentTypes, RT_NOTHING, "NOTHING", {});
+	EnumValue.add(ReagentTypes, RT_SUBSTANCE, "SUBSTANCE", {
+		name: "substance"
+	});
+	EnumValue.add(ReagentTypes, RT_ESSENCE, "ESSENCE", {
+		name: "essence"
+	});
+	EnumValue.add(ReagentTypes, RT_RESIDUE, "RESIDUE", {
+		name: "residue"
+	});
+	EnumValue.add(ReagentTypes, RT_PIGMENT, "PIGMENT", {
+		name: "pigment"
+	});
 	
 	// Substances (body parts)
 	
@@ -694,6 +716,9 @@ public class AlchemyLib extends BaseContent {
 	/**
 	 * short: button name ("Corr", "Speed")
 	 * name: item name ("Corruption", "Speed")
+	 * stat: stat id or player property ("cor", "spe")
+	 * sign: stat change direction (-1, +1)
+	 * feedback: feedback text after "You feel"
 	 */
 	public static const Residues:/*EnumValue*/Array = [];
 	public static const AR_NONE:int                 = EnumValue.add(Residues, 0, "NONE", {
@@ -701,52 +726,88 @@ public class AlchemyLib extends BaseContent {
 		name : "None"
 	});
 	public static const AR_STR:int                  = EnumValue.add(Residues, 1, "STR", {
-		short: "Str",
-		name : "Strength"
+		short   : "Str",
+		name    : "Strength",
+		stat    : "str",
+		sign    : +1,
+		feedback: "stronger"
 	});
 	public static const AR_TOU:int                  = EnumValue.add(Residues, 2, "TOU", {
-		short: "Tou",
-		name : "Toughness"
+		short   : "Tou",
+		name    : "Toughness",
+		stat    : "tou",
+		sign    : +1,
+		feedback: "tougher"
 	});
 	public static const AR_SPE:int                  = EnumValue.add(Residues, 3, "SPE", {
-		short: "Spe",
-		name : "Speed"
+		short   : "Spe",
+		name    : "Speed",
+		stat    : "spe",
+		sign    : +1,
+		feedback: "faster"
 	});
 	public static const AR_INT:int                  = EnumValue.add(Residues, 4, "INT", {
-		short: "Int",
-		name : "Intelligence"
+		short   : "Int",
+		name    : "Intelligence",
+		stat    : "int",
+		sign    : +1,
+		feedback: "smarter"
 	});
 	public static const AR_WIS:int                  = EnumValue.add(Residues, 5, "WIS", {
-		short: "Wis",
-		name : "Wisdom"
+		short   : "Wis",
+		name    : "Wisdom",
+		stat    : "wis",
+		sign    : +1,
+		feedback: "wiser"
 	});
 	public static const AR_LIB:int                  = EnumValue.add(Residues, 6, "LIB", {
-		short: "Lib",
-		name : "Libido"
+		short   : "Lib",
+		name    : "Libido",
+		stat    : "lib",
+		sign    : +1,
+		feedback: "more horny"
 	});
 	public static const AR_SENS_INC:int             = EnumValue.add(Residues, 7, "SENS_INC", {
-		short: "Sens",
-		name : "Sensitivity"
+		short   : "Sens",
+		name    : "Sensitivity",
+		stat    : "sens",
+		sign    : +1,
+		feedback: "more sensitive"
 	});
 	public static const AR_SENS_DEC:int             = EnumValue.add(Residues, 8, "SENS_DEC", {
-		short: "Numb",
-		name : "Numbness"
+		short   : "Numb",
+		name    : "Numbness",
+		stat    : "sens",
+		sign    : -1,
+		feedback: "numb"
 	});
 	public static const AR_CORR_INC:int             = EnumValue.add(Residues, 9, "CORR_INC", {
-		short: "Corr",
-		name : "Corruption"
+		short   : "Corr",
+		name    : "Corruption",
+		stat    : "cor",
+		sign    : +1,
+		feedback: "dirty"
 	});
 	public static const AR_CORR_DEC:int             = EnumValue.add(Residues, 10, "CORR_DEC", {
-		short: "Puri",
-		name : "Purity"
+		short   : "Puri",
+		name    : "Purity",
+		stat    : "cor",
+		sign    : -1,
+		feedback: "cleaner"
 	});
 	public static const AR_FEM:int                  = EnumValue.add(Residues, 11, "FEM", {
-		short: "Fem",
-		name : "Femininity"
+		short   : "Fem",
+		name    : "Femininity",
+		stat    : "femininity",
+		sign    : +1,
+		feedback: "more feminine"
 	});
 	public static const AR_MASC:int                 = EnumValue.add(Residues, 12, "MASC", {
-		short: "Masc",
-		name : "Masculinity"
+		short   : "Masc",
+		name    : "Masculinity",
+		stat    : "femininity",
+		sign    : -1,
+		feedback: "more masculine"
 	});
 }
 }

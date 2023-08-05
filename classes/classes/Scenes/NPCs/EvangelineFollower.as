@@ -179,6 +179,9 @@ public function meetEvangeline():void {
 	}
 	else outputText("Deciding to visit your camp’s transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
 	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
+	// [Appearan] [ Talk   ] [ Alchemy] [ Spar   ] [        ]
+	// [GiveGems] [        ] [        ] [I.Mutati] [Ingreds ]
+	// [        ] [ Wendigo] [Jiangshi] [Soul Gem] [ Back   ]
 	menu();
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
@@ -196,6 +199,7 @@ public function meetEvangeline():void {
 		addButtonDisabled(8, "I.Mutations", "Req. 5%+ affection and Evangeline been lvl 6+.");
 	}
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
+	addButton(5, "Ingredients", ingredientsMenu).hint("Ask Evangeline to make some alchemy ingredients");
 	//if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	//addButtonDisabled(9, "???", "Req. Evangeline been lvl 15+.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
@@ -407,6 +411,9 @@ private function evangelineAlchemyMenu(page:int = 1):void {
 	outputText("\"<i>So you do want another transformational item made by me?</i>\" She asked after hearing what potion you want to purpose to her this time, at which you simply nod. Without wasting time she walks, with you closely behind, toward a entrance to a small cave right outside the camp's border, in which she keep her equipment.\n\n\"<i>So what you want this time for me to make?</i>\" Stopping at the edge of the entrance to lab Evangeline glance in your direction.");
 	menu();
 	if (page == 1) {
+		// [Gorgon  ] [Vouivre ] [Couatl  ] [Nocello ] [Unicorn ]
+		// [RubyCrys] [        ] [        ] [        ] [Alicorn ]
+		// [GreyInk ] [WhiteInk] [InfernWn] [ -2-    ] [Back    ]
 		addButton(0, "Gorgon Oil", MakingGorgonPotion).hint("Ask her to brew a special potion that could aid in becoming a gorgon. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Reptilum.");
 		addButton(1, "Vouivre Oil", MakingVouivrePotion).hint("Ask her to brew a special potion that could aid in becoming a vouivre. \n\nCost: 15 Gems \nNeeds 1 Snake Oil and 1 Drake Heart.");
 		addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
@@ -424,6 +431,9 @@ private function evangelineAlchemyMenu(page:int = 1):void {
 		addButton(14, "Back", meetEvangeline);
 	}
 	if (page == 2) {
+		// [Centaur ] [Thunderb] [Sphinx  ] [        ] [        ]
+		// [Leviathn] [        ] [        ] [        ] [        ]
+		// [GreyAInk] [WhiteAIn] [        ] [ -1-    ] [ Back   ]
 		addButton(0, "Centaurinum", MakingCentaurPotion).hint("Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
 		addButton(1, "Storm Seed", MakingStormSeed).hint("Ask her to brew a special potion that could aid in becoming a thunderbird. \n\nCost: 10 Gems \nNeeds 1 Magically-enhanced Golden Seed and 1 Voltage topaz.");//Hybryd race TF
 		addButton(2, "Enigmanium", MakingEnigmaniumPotion).hint("Ask her to brew a special potion that could aid in becoming a sphinx. \n\nCost: 30 Gems \nNeeds 1 Centarium, 1 Golden Seed and 1 Whisker Fruit.");
@@ -790,6 +800,25 @@ private function MakingWhiteAbyssalInkPotion():void {
 	cheatTime(1/6);
 }
 
+	private function ingredientsMenu():void {
+		clearOutput();
+		menu();
+		var emptySlot:int = player.emptySlot();
+		addButton(0, "D.E-Ichor", MakeDEIchor)
+				.hint("Ask Evangeline to prepare a diluted version of E-Ichor")
+				.disableIf(!player.hasItem(useables.E_ICHOR), "++\n\n<b>You don't have any E-Ichor!</b>")
+				.disableIf(emptySlot < 0, "++\n\n<b>You don't have free space in your inventory!</b>")
+		addButton(14, "Back", meetEvangeline);
+	}
+	private function MakeDEIchor():void {
+		clearOutput();
+		outputText("You hand over the "+useables.E_ICHOR.longNameBase+" to Evangeline and wait for her to dilute it.");
+		outputText("\n\nAfter a while, she hands you ten vials of "+useables.D_E_ICHOR.longNameBase+" and you carefully put them into your inventory.");
+		player.destroyItems(useables.E_ICHOR, 1);
+		inventory.tryAddMultipleItemsToPlayer(useables.D_E_ICHOR, 10);
+		doNext(ingredientsMenu);
+	}
+	
 private function LvLUp():void {
 	clearOutput();
 	outputText("\"<i>So [name] how much gems will you give me this time for my recovery or new experiments?</i>\" Asks Evangeline waiting for your decision.");
