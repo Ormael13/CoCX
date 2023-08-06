@@ -2251,9 +2251,17 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;
 			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.061) {
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.070) {
 				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.061;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.070;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.080) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.080;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.090) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.090;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

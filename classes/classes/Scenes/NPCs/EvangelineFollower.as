@@ -75,14 +75,9 @@ public class EvangelineFollower extends NPCAwareContent implements SaveableState
 public function evangelineAffection(changes:Number = 0):Number
 {
 	EvangelineAffectionMeter += changes;
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 11 && EvangelineAffectionMeter > 70) EvangelineAffectionMeter = 75;
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10 && EvangelineAffectionMeter > 65) EvangelineAffectionMeter = 70;
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && EvangelineAffectionMeter > 60) EvangelineAffectionMeter = 67;
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineAffectionMeter > 55) EvangelineAffectionMeter = 60;
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineAffectionMeter > 50) EvangelineAffectionMeter = 56;
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 50;
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineAffectionMeter > 35) EvangelineAffectionMeter = 45;
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] < 5 && EvangelineAffectionMeter > 40) EvangelineAffectionMeter = 40;//current cap
+	var AffCap:Number = 40;
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) AffCap += 20;
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 5 && EvangelineAffectionMeter > AffCap) EvangelineAffectionMeter = AffCap;
 	else if (EvangelineAffectionMeter < 0) EvangelineAffectionMeter = 0;
 	return EvangelineAffectionMeter;
 }
@@ -179,8 +174,8 @@ public function meetEvangeline():void {
 	}
 	else outputText("Deciding to visit your camp’s transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
 	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
-	// [Appearan] [ Talk   ] [ Alchemy] [ Spar   ] [        ]
-	// [GiveGems] [        ] [        ] [I.Mutati] [Ingreds ]
+	// [Appearan] [ Talk   ] [   Sex  ] [ Spar   ] [GiveGems]
+	// [Alchemy ] [Ingreds ] [        ] [I.Mutati] [Experime]
 	// [        ] [ Wendigo] [Jiangshi] [Soul Gem] [ Back   ]
 	menu();
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
@@ -189,19 +184,19 @@ public function meetEvangeline():void {
 	if (EvangelineAffectionMeter >= 5) {
 		addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!")
 			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
-		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
-		else addButtonDisabled(5, "Give Gems", "Req. sparring with Evangeline at least once.");
+		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(4, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
+		else addButtonDisabled(4, "Give Gems", "Req. sparring with Evangeline at least once.");
 		addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
 	}
 	else {
 		addButtonDisabled(3, "Spar", "Req. 5%+ affection and built sparring ring.");
-		addButtonDisabled(5, "Give Gems", "Req. 5%+ affection and sparring with Evangeline at least once.");
-		addButtonDisabled(8, "I.Mutations", "Req. 5%+ affection and Evangeline been lvl 6+.");
+		addButtonDisabled(4, "Give Gems", "Req. 5%+ affection and sparring with Evangeline at least once.");
+		addButtonDisabled(8, "I.Mutations", "Req. 5%+ affection.");
 	}
-	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
-	addButton(5, "Ingredients", ingredientsMenu).hint("Ask Evangeline to make some alchemy ingredients");
-	//if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
-	//addButtonDisabled(9, "???", "Req. Evangeline been lvl 15+.");
+	addButton(5, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
+	addButton(6, "Ingredients", ingredientsMenu).hint("Ask Evangeline to make some alchemy ingredients");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -231,8 +226,7 @@ private function evangelineAppearance():void {
 	else outputText("seven and a half feet");
 	outputText(" tall.\n\n");
 	outputText("Oddly despite living in Mareth she looks like a human aside from her eyes that have uncanny pupils, which after narrowing looks like two cat slits that forms an X shape over her golden eyes. Her ");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 9) outputText("crimson platinum ");
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("platinum blonde ");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("crimson platinum ");
 	else outputText("red ");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 10) outputText("hair are ass-length along with breats that could easily fill a F-cup bra, expansive ass and fertile hips.\n\n");
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("hair are ass-length along with breats that could easily fill a E-cup bra, jiggly ass and curvy hips is quite a change that resulted from her drinking bimbo liquer personaly modified by her.\n\n");
@@ -256,7 +250,7 @@ private function evangelineTalkMenu():void {
 	if (EvangelineTalks >= 2) addButton(2, "Past Life", TalkPastLife1).hint("Talk about her past before meeting you.");
 	else addButtonDisabled(2, "???", "???");
 	if (EvangelineTalks >= 3) {
-		if (EvangelineAffectionMeter >= 30) addButton(3, "Father", TalkYourFather).hint("");
+		if (EvangelineAffectionMeter >= 30) addButton(3, "Father", TalkYourFather).hint("Talk about her father.");
 		else addButtonDisabled(3, "???", "Req. 30%+ affection");
 	}
 	else addButtonDisabled(3, "???", "???");
@@ -391,18 +385,14 @@ private function LightSpar():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 3 && flags[kFLAGS.EVANGELINE_LVL_UP] < 8) outputText("practically indecent steel armor");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 3) outputText("rags");
 	outputText(" and after stretching a few times she’s finished her warm up.  You raise your [weapon] and prepare to fight.  It's on!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 7) startCombat(new Evangeline1());
-	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] < 12) startCombat(new Evangeline2());
-	else startCombat(new Evangeline3());
+	startCombat(new Evangeline1());
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 1;
 	evangelineAffection(3);
 	monster.XP = Math.round(monster.XP / 2);
 }
-//może jak bedzie mieć bimbo body to uaktywnić hard spar a w light spar zmienić odnośnik na Evangeline2?
 private function HardSpar():void {
-	outputText("Evangeline adjusts her lusty maiden's armor and after stretching few times she finished her warm up.  You raise your [weapon] and prepare to fight.  It's on!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 12) startCombat(new Evangeline2());
-	else startCombat(new Evangeline3());
+	outputText("\n\nEvangeline adjusts her practically indecent steel armor and after stretching few times she finished her warm up.  This time she won't hold back.  You raise your [weapon] and prepare to fight.  It's on!");
+	startCombat(new Evangeline1());
 	evangelineAffection(10);
 }
 
@@ -413,7 +403,7 @@ private function evangelineAlchemyMenu(page:int = 1):void {
 	if (page == 1) {
 		// [Gorgon  ] [Vouivre ] [Couatl  ] [Nocello ] [Unicorn ]
 		// [RubyCrys] [        ] [        ] [        ] [Alicorn ]
-		// [GreyInk ] [WhiteInk] [InfernWn] [ -2-    ] [Back    ]
+		// [GreyInk ] [WhiteInk] [InfernWn] [  -2-   ] [Back    ]
 		addButton(0, "Gorgon Oil", MakingGorgonPotion).hint("Ask her to brew a special potion that could aid in becoming a gorgon. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Reptilum.");
 		addButton(1, "Vouivre Oil", MakingVouivrePotion).hint("Ask her to brew a special potion that could aid in becoming a vouivre. \n\nCost: 15 Gems \nNeeds 1 Snake Oil and 1 Drake Heart.");
 		addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
@@ -433,7 +423,7 @@ private function evangelineAlchemyMenu(page:int = 1):void {
 	if (page == 2) {
 		// [Centaur ] [Thunderb] [Sphinx  ] [        ] [        ]
 		// [Leviathn] [        ] [        ] [        ] [        ]
-		// [GreyAInk] [WhiteAIn] [        ] [ -1-    ] [ Back   ]
+		// [GreyAInk] [WhiteAIn] [        ] [  -1-   ] [ Back   ]
 		addButton(0, "Centaurinum", MakingCentaurPotion).hint("Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
 		addButton(1, "Storm Seed", MakingStormSeed).hint("Ask her to brew a special potion that could aid in becoming a thunderbird. \n\nCost: 10 Gems \nNeeds 1 Magically-enhanced Golden Seed and 1 Voltage topaz.");//Hybryd race TF
 		addButton(2, "Enigmanium", MakingEnigmaniumPotion).hint("Ask her to brew a special potion that could aid in becoming a sphinx. \n\nCost: 30 Gems \nNeeds 1 Centarium, 1 Golden Seed and 1 Whisker Fruit.");
@@ -830,9 +820,9 @@ private function LvLUp():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && EvangelineGemsPurse >= 450) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && EvangelineGemsPurse >= 800) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineGemsPurse >= 640) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineGemsPurse >= 1250 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineGemsPurse >= 800 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineGemsPurse >= 1250) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 9 && flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && EvangelineGemsPurse >= 0) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
@@ -929,17 +919,17 @@ private function JustDoIt():void {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
 		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 4;//12 lub 18 lub 24 z powodu wypicia zmodyf bimbo liquer bo musi kupic itemy na modyf jego też
 		EvangelineGemsPurse -= 1250;
-	}
+	}*/
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 4;
-		EvangelineGemsPurse -= ;
+		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 6;
+		EvangelineGemsPurse -= 400;
 	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
-		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 5;
-		EvangelineGemsPurse -= ;
-	}*/
+		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 12;
+		EvangelineGemsPurse -= 800;
+	}
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) {
 		flags[kFLAGS.EVANGELINE_LVL_UP]++;
 		flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 10;
@@ -1097,8 +1087,8 @@ private function Experiments():void {
 	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of the finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
 	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	menu();
-	addButtonDisabled(0, "BL/BB Plus", "Bimbo Liquer Plus / Bro Brew Plus");
-	addButtonDisabled(1, "Amazon L.", "Amazon Liquer");
+	//addButtonDisabled(0, "BL/BB Plus", "Bimbo Liquer Plus / Bro Brew Plus");
+	//addButtonDisabled(1, "Amazon L.", "Amazon Liquer");
 	addButton(13, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her experiments expenses.");
 	addButton(14, "Back", meetEvangeline);
 }
