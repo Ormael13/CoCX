@@ -6,25 +6,18 @@ import classes.Items.Alchemy.AlchemyLib;
 import coc.view.CoCButton;
 
 public class StatPillCrafting extends AbstractPillCraftingContent {
-	public const StatBonusRecipes:Array   = [
-		[useables.D_E_ICHOR, consumables.IRONWEED, AlchemyLib.AR_STR],
-		[useables.D_E_ICHOR, consumables.HEALHERB, AlchemyLib.AR_TOU],
-		[useables.D_E_ICHOR, consumables.BLADEFERN, AlchemyLib.AR_SPE],
-		[useables.D_E_ICHOR, consumables.SNAKEBANE, AlchemyLib.AR_INT],
-		[useables.D_E_ICHOR, consumables.MOONGRASS, AlchemyLib.AR_WIS],
-		[useables.D_E_ICHOR, consumables.RAUNENECT, AlchemyLib.AR_LIB],
+	// [ ingredient1, ingredient2, residue, pill type ]
+	public const PillRecipes:Array        = [
+		[useables.D_E_ICHOR, consumables.IRONWEED, AlchemyLib.AR_STR, "StatBonus"],
+		[useables.D_E_ICHOR, consumables.HEALHERB, AlchemyLib.AR_TOU, "StatBonus"],
+		[useables.D_E_ICHOR, consumables.BLADEFERN, AlchemyLib.AR_SPE, "StatBonus"],
+		[useables.D_E_ICHOR, consumables.SNAKEBANE, AlchemyLib.AR_INT, "StatBonus"],
+		[useables.D_E_ICHOR, consumables.MOONGRASS, AlchemyLib.AR_WIS, "StatBonus"],
+		[useables.D_E_ICHOR, consumables.RAUNENECT, AlchemyLib.AR_LIB, "StatBonus"],
 	];
-	public const ValidIngredients1:Object = mapPropToSet([
-		useables.D_E_ICHOR
-	], "id");
-	public const ValidIngredients2:Object = mapPropToSet([
-		consumables.IRONWEED,
-		consumables.HEALHERB,
-		consumables.BLADEFERN,
-		consumables.SNAKEBANE,
-		consumables.MOONGRASS,
-		consumables.RAUNENECT
-	], "id");
+	public const ValidIngredients1:Object = mapPropToSet(mapOneProp(PillRecipes, "0"), "id");
+	public const ValidIngredients2:Object = mapPropToSet(mapOneProp(PillRecipes, "1"), "id");
+	public const ValidIngredients:Object  = toSet(keys(ValidIngredients1).concat(keys(ValidIngredients2)));
 	
 	public function StatPillCrafting() {
 	}
@@ -39,8 +32,8 @@ public class StatPillCrafting extends AbstractPillCraftingContent {
 	private function currentRecipe():String {
 		if (!furnaceIngredient1 || !furnaceIngredient2 || !furnaceResidue) return "";
 		var i:int;
-		for (i = 0; i < StatBonusRecipes.length; i++) {
-			if (furnaceIngredient1 == StatBonusRecipes[i][0] && furnaceIngredient2 == StatBonusRecipes[i][1] && furnaceResidue == StatBonusRecipes[i][2]) return "StatBonus";
+		for (i = 0; i < PillRecipes.length; i++) {
+			if (furnaceIngredient1 == PillRecipes[i][0] && furnaceIngredient2 == PillRecipes[i][1] && furnaceResidue == PillRecipes[i][2]) return PillRecipes[i][3];
 		}
 		return "";
 	}
