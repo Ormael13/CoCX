@@ -124,8 +124,7 @@ public final class ArmorLib extends ItemConstants
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const FMDRESS:Armor = new Armor("FMageDress","Forest Mage Dress","Forest Mage Dress","a Forest Mage Dress",0,0,800,"The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.","Light")
 				.withBuffs({
-					'spellcost': -0.10,
-					'soulskillcost': -0.60
+					'spellcost': -0.10
 				}) as Armor;	//Effect: Slutty Seduction 10, Wizard Endurance 60. Increase tease total damage by x 2 when worn by a wood elf. Inflicting Tease damage reduces the wielder's own lust by a small amount.
 		public const FQR:Armor = new Armor("F.Q.Regalia","F.Q.Regalia","Fairy Queen Regalia","a Fairy Queen Regalia",0,30,6000,"This long dress has full glove sleeves to match, and changes color depending on your mood. It is lighter than air and about almost as transparent. Modeled after its people carefree nature this dress barely conceal anything though it still hide your assets just enough that you don’t appear outright naked. It also magicaly enhances one's ability to evade and is especially useful when worn by someone trained in the art of misdirection or fey magic. It comes with an assorted Tiara and choker.","Light")
 				.withBuffs({
@@ -140,6 +139,10 @@ public final class ArmorLib extends ItemConstants
 		public const G_DIVES:Armor = new Armor("G.DiveS","GreenDivingSuit","Green Diving Suit","a Green Diving Suit",25,5,1800,"A green diving suit. Good for diving, stomping splicers or slaying demons.","Heavy");
 		public const G_QIPAO:Armor = new Armor("G.Qipao","GreenQipao","Green Lunar new year dress (f)","a Green Lunar new year dress (f)",0,0,100,"A simple yet elegant green qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,0,600,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.","Heavy");
+		public const GELCARM:Armor = new Armor("GelCArm","GelCArm","glistening crimson gel-armor plates","a suit of crimson gel armor",10,0,1200,"This suit of interlocking plates is made from a strange red material.  It feels spongy to the touch but is amazingly resiliant and very reactive to soulforce.","Heavy")
+				.withBuffs({
+					'soulskillcost': -0.20
+				}) as Armor;
 		public const GTECHC_:GoblinTechnomancerClothes = new GoblinTechnomancerClothes();
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const H_GARB_:Armor = new Armor("H. Garb","Heretic‘s Garb","Heretic‘s Garb","an Heretic‘s Garb",0,6,480,"Weathered traveling clothes, covered by a duster.  Wards and arcane glyphs inscribed in the duster facilitates magic while providing significant defense.  A feather tipped trilby completes the look.","Light", true, true)

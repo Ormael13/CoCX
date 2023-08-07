@@ -27,6 +27,7 @@ public class Konstantin extends NPCAwareContent
 				useables.WT_BRAN,
 				useables.DBAPLAT,
 				useables.TBAPLAT,
+				useables.RED_GEL,
 			]
 			for each (var material:ItemType in materials)
 				if (player.hasItem(material)) return true;
@@ -304,8 +305,12 @@ public class Konstantin extends NPCAwareContent
 			outputText("Seeing how Konstantin is working with armor and plating pieces, you happen to ask him if he could assemble some of the materials that you’ve found during your travels in Mareth into something useful to wear and protect yourself.\n\n");
 			if (anyUsableMaterials()) {
 				if (player.hasItem(useables.GREENGL)) {
-					outputText("He looks over your bag’s contents, noticing a glimpse of the gel-like substance in it.\n\n");
+					outputText("He looks over your bag’s contents, noticing a glimpse of the greenish gel-like substance in it.\n\n");
 					outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell around the lake these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid if exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a large amount, something like, five samples.</i>\"\n\n");
+				}
+				if (player.hasItem(useables.RED_GEL)) {
+					outputText("He looks over your bag’s contents, noticing a glimpse of the redish gel-like substance in it.\n\n");
+					outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell beneath river village these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid if exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient soulforce conductive armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a large amount, something like, five samples.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.B_CHITN)) {
 					outputText("Catching a glimpse of the piece of black chitin among your stuff, Konstantin remarks: ");
@@ -385,7 +390,7 @@ public class Konstantin extends NPCAwareContent
 				outputText("A bit disappointed, you retrieve you pack, guessing which items you should get this time.\n\n");
 			}
 			menu();
-			if (player.hasItem(useables.GREENGL)) addButton(0, "Gel", KonstantinCraftingGelArmor);
+			if (player.hasItem(useables.GREENGL)) addButton(0, "G.Gel", KonstantinCraftingGreenGelArmor);
 			if (player.hasItem(useables.B_CHITN)) addButton(1, "Chitin", KonstantinCraftingChitinItems);
 			if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 1) addButton(2, "SpiderSilk", KonstantinCraftingSpiderSilkItems);
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
@@ -397,6 +402,7 @@ public class Konstantin extends NPCAwareContent
 				if (player.hasItem(useables.SKYMETA) || Crafting.BagSlot08 > 0) addButton(8, "Skymetal", KonstantinCraftingSkymetalItems);
 				if (player.hasItem(useables.EBONING) || Crafting.BagSlot06 > 0) addButton(9, "EbonbIng", KonstantinCraftingEbonbIngItems);
 			}
+			if (player.hasItem(useables.RED_GEL)) addButton(10, "R.Gel", KonstantinCraftingRedGelArmor);
 			addButton(13, "Misc", KonstantinSmithingMenu2).hint("Specific crafting options.");
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
@@ -437,16 +443,28 @@ public class Konstantin extends NPCAwareContent
 			outputText("\"<i>Nah, " + player.mf("man", "girl") + ". I’ll need more of that stuff to start doing something. Ten pieces, as I’ve said. If you happen to gather them somehow, look for me and we’ll work something.</i>\"\n\n");
 			doNext(KonstantinMainCampMenu);
 		}
-		private function KonstantinCraftingGelArmor():void {
+		private function KonstantinCraftingGreenGelArmor():void {
 			if (player.hasItem(useables.GREENGL, 5)) {
 				clearOutput();
-				outputText("Konstantin then takes the green gel from your bags and pours it into a large pot of glistening steel. Humming to himself, he proceeds to add some liquids and metal-looking powders, and then closes the pot, after what he puts it inside a small furnace. Even from outside, you manage to hear how the mix boils and bubbles inside the pot.\n\n");
-				outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothens the blemishes and turns them into beautiful emerald plates.\n\n");
-				outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the emerald plates. Once he’s finished your bear friend presents to you the brand-new set of glistening gel armor.\n\n");
+				KonstantinCraftingGelArmor(0);
 				player.destroyItems(useables.GREENGL, 5);
 				inventory.takeItem(armors.GELARMR, KonstantinMainCampMenu);
 			}
 			else KonstantinCraftingNotEnoughMaterials1();
+		}
+		private function KonstantinCraftingRedGelArmor():void {
+			if (player.hasItem(useables.RED_GEL, 5)) {
+				clearOutput();
+				KonstantinCraftingGelArmor(1);
+				player.destroyItems(useables.RED_GEL, 5);
+				inventory.takeItem(armors.GELCARM, KonstantinMainCampMenu);
+			}
+			else KonstantinCraftingNotEnoughMaterials1();
+		}
+		private function KonstantinCraftingGelArmor(type:Number = 0):void {
+			outputText("Konstantin then takes the "+(type == 0?"green":"red")+" gel from your bags and pours it into a large pot of glistening steel. Humming to himself, he proceeds to add some liquids and metal-looking powders, and then closes the pot, after what he puts it inside a small furnace. Even from outside, you manage to hear how the mix boils and bubbles inside the pot.\n\n");
+			outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothens the blemishes and turns them into beautiful "+(type == 0?"emerald":"crimson")+" plates.\n\n");
+			outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the "+(type == 0?"emerald":"crimson")+" plates. Once he’s finished your bear friend presents to you the brand-new set of glistening "+(type == 0?"green":"red")+" gel armor.\n\n");
 		}
 		private function KonstantinCraftingChitinItems():void {
 			if (player.hasItem(useables.B_CHITN, 5)) {

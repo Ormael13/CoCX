@@ -47,7 +47,7 @@ use namespace CoC;
 		public const GREENGL:SimpleUseable = new SimpleUseable("GreenGl", "GreenGl", "a clump of green gel", 50,
 			"This tough substance has no obvious use that you can discern.",
 			"You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.");
-		public const RED_GEL:SimpleUseable = new SimpleUseable("RedGel", "RedGel", "a clump of red gel", 50,
+		public const RED_GEL:SimpleUseable = new SimpleUseable("RedGel", "RedGel", "a clump of red gel", 100,
 			"This malleable substance has no obvious use that you can discern.",
 			"You examine the gel thoroughly, noting it is malleable, yet extremely reactive to soulforce.  Somehow you know eating it would not be a good idea.");
 		public const T_SSILK:SimpleUseable = new SimpleUseable("T.SSilk", "T.SSilk", "a bundle of tough spider-silk", 200,

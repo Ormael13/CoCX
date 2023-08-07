@@ -47,7 +47,7 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Eyes (Final Form). Req. Human Eyes (Evolved) and lvl 90+. Effects: Increase precision of all attacks by 20%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 60 lvl's. 10% less penalty to acc per each next attack during multiattack.\n");
 			outputText("-New History/Past Life Perk - History: Thief - give Job: Rogue for free and increase sneak attack multiplier by +1.\n");
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
-			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 germs. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
+			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 gems. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
 			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf) and Cobra hood (rear body)(Apophis tf).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
@@ -61,7 +61,7 @@ public class Changelog extends BaseContent
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon.\n");
-			outputText("-New usable item: Red Gel. Costing 50 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies.\n");// .
+			outputText("-New usable item: Red Gel. Costing 100 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies. Can be used to craft items like armors.\n");
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
 			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD. Tooltip before finding them in places been updated to avoid confusion. Owca pre discovery button gained tip on time when to explore area.\n");
 			outputText("-Centipedes and Oomukade races are just race of Oomukade with Centipede been it lowest tier. Tracheal system mutation would be accessable by them too.\n");
@@ -91,7 +91,8 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Liadri): Ginseng. Cost 6 gems. Can be found when exploring forest areas. Eating it would apply effect for few hours increasing tease dmg by 5%.\n");
 			outputText("-New key item: Herbs Bag (Low grade). Buyable at Giacomo when pc have lvl 5+ in farming skill. Costs 500 gems and would increase slots cap to 10 and open 2 additional slots for 2 new herb types.\n");
 			outputText("-New melee weapon (by Ormael): Dual Dagger Whips - can be gained by combining 2x Dagger Whip weapon. Cost 400 gems. Base atk is 5. It's dual small weapon belonging to dagger type, can use whipping special with them.\n");
-			outputText("-\n");
+			outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
+			outputText("-New armor (by Ormael): Red gel armor - craftable by Konstantin using 5 pieces of red gel. Cost 1200 gems, 10 armor, -20% soulskills cost.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -114,6 +115,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper\n");
@@ -122,7 +126,6 @@ public class Changelog extends BaseContent
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Fixed bugs: \n");
 			//remove this line when other two lines below get added ingame
-			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -170,9 +173,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -194,7 +195,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
