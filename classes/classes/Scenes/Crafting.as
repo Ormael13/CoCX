@@ -9,6 +9,7 @@ import classes.Items.Consumable;
 import classes.Scenes.Crafting.AlchemyExtraction;
 import classes.Scenes.Crafting.MutagenPillCrafting;
 import classes.Scenes.Crafting.StatPillCrafting;
+import classes.Transformations.PossibleEffect;
 import classes.internals.EnumValue;
 import classes.internals.SaveableState;
 
@@ -953,11 +954,38 @@ private function craftingMaterialsMoonstone1Down():void {
 					slot.setItemAndQty(type, 1);
 					storage.push(slot);
 				}
+				for (var id:String in statPillCrafting.ValidIngredients) {
+					slot = new ItemSlotClass();
+					slot.unlocked = true;
+					slot.setItemAndQty(ItemType.lookupItem(id), 10);
+					storage.push(slot);
+				}
 				inventory.transferMenu(storage,0,storage.length,craftingMain, "Cheat dimension",null,true,false);
 			}
+			function cheatKnowledge():void {
+				for (var s:int = 1; s < AlchemyLib.Substances.length; s++) {
+					if (!AlchemyLib.Substances[s]) continue;
+					for (var e:int = 1; e < AlchemyLib.Essences.length; e++) {
+						if (!AlchemyLib.Essences[e]) continue;
+						setTfPillKnown(s,e);
+					}
+				}
+				for each (var o:* in values(consumables)) {
+					var item:Consumable = o as Consumable;
+					if (!item) continue;
+					for each (var ar:AlchemyReagent in item.getAllRefineReagents()) {
+						setReagentKnown(item.id, ar.type, ar.key())
+					}
+				}
+				craftingCheats();
+			}
 			menu();
+			// [Alembic1] [Furnace1] [        ] [        ] [Knowledg]
+			// [Alembic2] [Furnace2] [        ] [        ] [Alc.Reag]
+			// [Alembic3] [Furnace3] [        ] [ Items  ] [ Back   ]
 			button(0).show("Alembic1", curry(setAlembic, 1));
 			button(1).show("Furnace1", curry(setFurnace, 1));
+			button(4).show("Knowledge", cheatKnowledge);
 			button(5).show("Alembic2", curry(setAlembic, 2));
 			button(6).show("Furnace2", curry(setFurnace, 2));
 			button(9).show("Alc.Reags", cheatReagents)

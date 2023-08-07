@@ -720,8 +720,12 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 
 	saveFile.data.ss = {};
 	for (var key:String in _saveableStates) {
-		var ss:SaveableState = _saveableStates[key];
-		saveFile.data.ss[key] = ss.saveToObject();
+		try {
+			var ss:SaveableState  = _saveableStates[key];
+			saveFile.data.ss[key] = ss.saveToObject();
+		} catch (e:Error) {
+			CoC_Settings.error("Error saving ss."+key+": "+e.getStackTrace());
+		}
 	}
 
 	//CLEAR OLD ARRAYS
@@ -2765,10 +2769,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		for (var key:String in _saveableStates) {
 			var ss:SaveableState = _saveableStates[key];
-			if (saveFile.data.ss && key in saveFile.data.ss) {
-				ss.loadFromObject(saveFile.data.ss[key], true);
-			} else {
-				ss.loadFromObject(null, true);
+			try {
+				if (saveFile.data.ss && key in saveFile.data.ss) {
+					ss.loadFromObject(saveFile.data.ss[key], true);
+				} else {
+					ss.loadFromObject(null, true);
+				}
+			} catch (e:Error) {
+				CoC_Settings.error("Error loading ss."+key+": "+e.getStackTrace())
 			}
 		}
 		loadAllAwareClasses(CoC.instance); //Informs each saveAwareClass that it must load its values from the flags array

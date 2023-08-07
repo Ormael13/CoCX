@@ -87,7 +87,7 @@ public class StatBonusPill extends Consumable {
 			} else {
 				player[stat] += bonus;
 			}
-			dud = oldValue != player[stat];
+			dud = oldValue == player[stat];
 		}
 		
 		if (dud) {
