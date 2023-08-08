@@ -389,6 +389,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsMelkie: Transformation 	= ears.EarsMelkie.registerTf(AS_EARS, AE_MELKIE);
 	public const EarsDeer: Transformation 		= ears.EarsDeer.registerTf(AS_EARS, AE_DEER);
 	public const EarsBig: Transformation        = ears.EarsBig.registerTf(AS_EARS, AE_GOBLIN);
+	public const EarsFennecFox: Transformation 	= ears.EarsFennecFox.registerTf(AS_EARS, AE_WEREFOX);
 
 
 //EYES
@@ -538,6 +539,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FaceSquirrel: Transformation 			= face.FaceSquirrel.registerTf(AS_FACE, AE_SQUIRREL);
     public const FaceElf: Transformation 				= face.FaceElf.registerTf(AS_FACE, AE_ELF);
     public const FaceAnt: Transformation 				= face.FaceAnt.registerTf(AS_FACE, AE_ANT);
+    public const FaceFoxFangs: Transformation 			= face.FaceFoxFangs.registerTf(AS_FACE, AE_WEREFOX);
 
 
 //GILLS

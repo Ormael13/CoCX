@@ -681,6 +681,10 @@ public class AlchemyLib extends BaseContent {
 		short: "Drider",
 		name : "Drider"
 	});
+	public static const AE_WEREFOX:int         = EnumValue.add(Essences, 209, "WEREFOX", {
+		short: "WFox",
+		name : "Werefox"
+	});
 	
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [

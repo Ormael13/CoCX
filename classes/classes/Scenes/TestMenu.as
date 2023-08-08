@@ -114,6 +114,7 @@ public class TestMenu extends BaseContent
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		bd.add("Neko Items", giveNekoItems, "All new neko items from Nekobake Inn doc");
+		bd.add("Desert Berry", desertBerryTest, "Testing effects of Desert Berry consumption.");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 
@@ -309,6 +310,50 @@ public class TestMenu extends BaseContent
 		inventory.takeItem(undergarments.BN_TOP, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(undergarments.BN_SKIRT, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(necklaces.CATBELL, curry(NonEquipmentMenu, 2));
+	}
+	public function desertBerryTest():void {
+			player.lowerBody = LowerBody.FOX;
+			if (player.legCount != 2) player.legCount = 2;
+			player.tailType = Tail.FOX;
+			//if (player.tailCount != 1) player.tailCount = 1;
+			player.rearBody.type = RearBody.WOLF_COLLAR;
+			player.arms.type = Arms.FOX;
+			CoC.instance.transformations.FaceFoxFangs.applyEffect(false);
+			player.ears.type = Ears.FENNEC_FOX;
+			player.eyes.type = Eyes.FERAL;
+			//player.tongue.type = Tongue.;
+			player.wings.type = Wings.NONE;
+			player.antennae.type = Antennae.NONE;
+			player.horns.type = Horns.NONE;
+			CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
+			if (player.hasCock() && player.foxCocks() < 1) {
+				var selectedCockValue:int = -1;
+				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
+				{
+					if (player.cocks[indexI].cockType != CockTypesEnum.FOX)
+					{
+						selectedCockValue = indexI;
+						break;
+					}
+				}
+				if (selectedCockValue != -1) {
+					transformations.CockFox(selectedCockValue).applyEffect(false);
+					player.thickenCock(selectedCockValue, 2);
+				}
+			}
+			var bonusStats:Number = 0;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
+			if (!player.hasPerk(PerkLib.Vulpesthropy)) player.createPerk(PerkLib.Vulpesthropy,bonusStats,0,0,0);
+			player.statStore.replaceBuffObject({ 'str': (bonusStats * 0.2),'tou': (bonusStats * 1.3),'spe': (bonusStats * 1.5)}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+			player.trainStat('str', +5, 100);
+			player.trainStat('tou', +5, 100);
+			player.trainStat('spe', +5, 100);
+			player.trainStat('lib', +5, 100);
+			player.dynStats("cor", 20);
+			statScreenRefresh();
 	}
 	public function fixShards():void {
 		var cnt:int = 0;
@@ -2660,3 +2705,4 @@ public class TestMenu extends BaseContent
 	}
 	}
 }
+ 

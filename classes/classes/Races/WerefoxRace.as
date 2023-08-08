@@ -39,18 +39,30 @@ public class WerefoxRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				//
+				.faceType(Face.FOX_FANGS, +1)
 				.eyeType(Eyes.FERAL, +1)
 				.eyeType(NOT(Eyes.FOX), 0,-7)
-				//.earType(Ears., +1)
+				.earType(Ears.FENNEC_FOX, +2)
 				.armType(Arms.FOX, +1)
 				.legType(LowerBody.FOX, +1)
-				.hasPerk(PerkLib.Vulpesthropy, +1);
+				.customScoreRequirement("tail", "multiple fox tails, +1 per tail",
+						function (body:BodyData):Boolean {
+							return body.tailType == Tail.FOX && body.tailCount >= 1;
+						},
+						function (body:BodyData):int {
+							return body.tailCount;
+						},
+						-7
+				)
+				.skinCoatType(Skin.FUR, +1)
+				.rearType(RearBody.WOLF_COLLAR, +1)
+				.corruption(AT_LEAST(20), +2)
+				.hasPerk(PerkLib.Vulpesthropy, +1, -11);
 		
-		buildTier(11, "werefox")
+		buildTier(12, "werefox")
 				.buffs({
-					"str.mult": +0.30,
-					"tou.mult": +0.35,
+					"str.mult": +0.10,
+					"tou.mult": +0.70,
 					"wis.mult": +1.00,
 					"maxlust_mult": -0.15,
 					"maxsf_mult": +1,

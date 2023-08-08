@@ -1129,7 +1129,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Full moon
 				flags[kFLAGS.LUNA_MOON_CYCLE]++;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
-				if (player.hasPerk(PerkLib.Lycanthropy)) {
+				if (player.hasPerk(PerkLib.Lycanthropy) || player.hasPerk(PerkLib.Vulpesthropy)) {
 					var ngMult:Number = (player.newGamePlusMod() + 1);
 					var changeV:Number = 0;
 					switch (flags[kFLAGS.LUNA_MOON_CYCLE]) {
@@ -1166,13 +1166,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							break;
 						case 8:
 							changeV = 40;
-							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your lupine seeds", "heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
+							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go ");
+							outputText("into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your " + (player.hasPerk(PerkLib.Lycanthropy)?"lupine":"vulpine") + " seeds", "heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
 							if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 							else if (player.hasVagina()) player.goIntoHeat(false);
 							break;
 					}
-					player.statStore.replaceBuffObject({ 'str': changeV*ngMult,'tou': changeV*ngMult,'spe': changeV*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
-					player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
+					if (player.hasPerk(PerkLib.Lycanthropy)) {
+						player.statStore.replaceBuffObject({ 'str': changeV*ngMult,'tou': changeV*ngMult,'spe': changeV*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
+						player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
+					}
+					if (player.hasPerk(PerkLib.Vulpesthropy)) {
+						player.statStore.replaceBuffObject({ 'str': changeV*ngMult*0.2,'tou': changeV*ngMult*1.3,'spe': changeV*ngMult*1.5, 'minlustx': changeV * 0.01}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+						player.setPerkValue(PerkLib.Vulpesthropy,1,changeV);
+					}
 					needNext = true;
 				}
 				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);
@@ -2778,4 +2785,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

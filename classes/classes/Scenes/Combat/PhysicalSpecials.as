@@ -41,7 +41,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var bd:ButtonData;
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
-			if (player.isFlying() && monster.isFlying()) {
+			if (player.isFlying() == monster.isFlying()) {
 				bd = buttons.add("PowerAttack", powerAttack).hint("Do a single way more powerfull wrath-enhanced melee strike.");
 				if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Attack (below 1%)");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");

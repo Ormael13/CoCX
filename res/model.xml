@@ -2340,7 +2340,7 @@
                 <show part="ears/dragon"/>
                 <show part="ears_bg/dragon"/>
             </case>
-            <case values="Ears.FOX,Ears.BAT">
+            <case values="Ears.FOX,Ears.BAT,Ears">
                 <show part="ears/fox"/>
                 <show part="ears_bg/fox"/>
             </case>
@@ -2405,6 +2405,10 @@
                 <show part="ears_fg/impBigEarsRight"/>
                 <show part="ears_bg/impBigEars"/>
                 <show part="ears_bg/impBigEarsRight"/>
+            </case>
+            <case values="Ears.FENNEC_FOX">
+                <show part="ears/fox"/>
+                <show part="ears_bg/fox"/>
             </case>
             <default> <!-- TODO AVIAN, GRYPHON -->
                 <show part="ears_bg/human"/>
@@ -3021,7 +3025,7 @@
 			<case values="Face.RACCOON,Face.FERRET">
                 <show part="face/racoon"/>
             </case>
-            <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE,Face.IMP">
+            <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.FOX_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE,Face.IMP">
                 <show part="face/human_fang"/>
                 <if test="eyes.type= Eyes.CENTIPEDE">
                     <hide part="face/human_fang"/>

@@ -837,6 +837,20 @@ public class FaceTransformations extends MutationsHelper {
 			}
 	);
 
+	public const FaceFoxFangs: Transformation = new SimpleTransformation("Fox Fangs Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.FOX_FANGS;
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.FOX_FANGS;
+			}
+	);
+
 	public const FaceOrcFangs: Transformation = new SimpleTransformation("Orc Fangs Face",
 			// apply effect
 			function (doOutput: Boolean): void {

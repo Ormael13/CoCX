@@ -515,6 +515,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const FENNEC_FOX:int = _partid++;
+		EnumValue.add(Memories, FENNEC_FOX, "FENNEC_FOX", {
+			id: "Fennec Fox Ears",
+			name: "Fennec Fox Ears",
+			cost: 100,
+			title: "Fennec Fox",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsFennecFox;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
