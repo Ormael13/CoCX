@@ -347,7 +347,7 @@ public class TestMenu extends BaseContent
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (!player.hasPerk(PerkLib.Vulpesthropy)) player.createPerk(PerkLib.Vulpesthropy,bonusStats,0,0,0);
-			player.statStore.replaceBuffObject({ 'str': (bonusStats * 0.2),'tou': (bonusStats * 1.3),'spe': (bonusStats * 1.5)}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+			player.statStore.replaceBuffObject({ 'tou': (bonusStats * 1.5),'spe': (bonusStats * 1.5)}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 			player.trainStat('str', +5, 100);
 			player.trainStat('tou', +5, 100);
 			player.trainStat('spe', +5, 100);

@@ -57,6 +57,7 @@ public class WerewolfRace extends Race {
 				.hasCockOfType(CockTypesEnum.WOLF, +1)
 		
 		buildTier(12, "werewolf")
+                .requirePerk(PerkLib.Lycanthropy)
 				.buffs({
 					"str.mult": +1.00,
 					"tou.mult": +0.40,
@@ -65,13 +66,13 @@ public class WerewolfRace extends Race {
 				})
 				.end();
 		buildTier(16, "greater werewolf")
+				.requirePreviousTier()
 				.buffs({
 					"str.mult": +1.30,
 					"tou.mult": +0.55,
 					"spe.mult": +0.75,
 					"int.mult": -0.20
 				})
-                .requirePerk(PerkLib.Lycanthropy)
 				.end();
 	}
 }

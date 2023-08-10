@@ -914,7 +914,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.FEY_DRAGON) armorMDef += (2 * newGamePlusMod);
 			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorMDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.YGG_ROOT_CLAWS) armorMDef += (4 * newGamePlusMod);
-			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
+			if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
 				if (Forgefather.refinement == 0) armorMDef *= (1.15);
@@ -6872,6 +6872,7 @@ use namespace CoC;
 				if (dcor > 0 && weapon == game.weapons.HNTCANE) dcor *= 0.5;
 				if (hasPerk(PerkLib.AscensionMoralShifter)) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 				if (hasPerk(PerkLib.Lycanthropy)) dcor *= 1.2;
+				if (hasPerk(PerkLib.Vulpesthropy)) dcor *= 0.8;
 				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
 				if (sens > 50 && dsens > 0) dsens /= 2;
 				if (sens > 75 && dsens > 0) dsens /= 2;

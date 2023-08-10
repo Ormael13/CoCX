@@ -3732,7 +3732,7 @@ public class PerkLib
 		public static const LycanthropyDormant:PerkType = mk("Dormant Lycanthropy", "Dormant Lycanthropy",
 				"You sometimes hear echoes of the call of the moon. If you were more of a werewolf you likely would feel its pull again. A lycanthrope is never truly cured.");
 		public static const Vulpesthropy:PerkType = mk("Vulpesthropy", "Vulpesthropy",
-				"Your strength and urges are directly tied to the cycle of the moon.");// Furthermore, your skin is more resistant to magical damage       .
+				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage       .");
 		public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
 				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again. A vulpesthrope is never truly cured.")
 		public static const LactaBovineImmunity:PerkType = mk("Lacta Bovine Immunity", "Lacta Bovine Immunity",
@@ -7743,3 +7743,4 @@ public class PerkLib
 	}
 }
 }
+

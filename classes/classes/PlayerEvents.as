@@ -1177,7 +1177,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
 					}
 					if (player.hasPerk(PerkLib.Vulpesthropy)) {
-						player.statStore.replaceBuffObject({ 'str': changeV*ngMult*0.2,'tou': changeV*ngMult*1.3,'spe': changeV*ngMult*1.5, 'minlustx': changeV * 0.01}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+						player.statStore.replaceBuffObject({ 'tou': changeV*ngMult*1.5,'spe': changeV*ngMult*1.5, 'minlustx': changeV * 0.01}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 						player.setPerkValue(PerkLib.Vulpesthropy,1,changeV);
 					}
 					needNext = true;

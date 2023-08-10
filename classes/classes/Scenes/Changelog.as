@@ -94,6 +94,15 @@ public class Changelog extends BaseContent
 			outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
 			outputText("-New armor (by Ormael): Red gel armor - craftable by Konstantin using 5 pieces of red gel. Cost 1200 gems, 10 armor, -20% soulskills cost.\n");
 			outputText("-Added options for making 5 bronze ore/ebon ignots by Konstantine. But it req. to have enough space left in ore bag.\n");
+			outputText("-Using Crinos Shape as werebeast (wolf/fox) would add bonus to boost from special depending on moon phase (from no bonus to 40%/60%). Reaching higher tier of race like greater/elder/ancient would double/tripple that bonus.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -107,15 +116,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
