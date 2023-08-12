@@ -69,7 +69,7 @@ public class WerefoxRace extends Race {
 					"wis.mult": +1.20,
 					"sens": +50,
 					"maxlust_mult": -0.15,
-					"maxsf_mult": +1,
+					"maxsf_mult": +1.0,
 					"maxwrath_mult": +0.6,
 					"maxmana_mult": -0.8
 				})

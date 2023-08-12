@@ -210,6 +210,9 @@ use namespace CoC;
 		public const TEDDY:SimpleUseable = new SimpleUseable("TeddyBear", "TeddyBear", "a Teddy bear", 200,
 				"An old Teddy bear with a small paper with the name Mister Paw tied to it.",
 				"You look at an old Teddy bear and see there is a small paper with the name Mister Paw tied to it.");
+		public const BANDAGE:SimpleUseable = new SimpleUseable("Bandage", "Bandages", "a Bandages", 25,
+			"A Bandages.",
+			"A roll of bandages. What are you gonna do with this anyway?");
 		// Alchemical catalysts:
 		// Substance/Essence/Residue/Pigment
 		// Minor/Common/Major
