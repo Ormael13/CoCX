@@ -514,6 +514,7 @@ public class Combat extends BaseContent {
                 inCombat = false;
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
                 if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);
+                if (player.hasStatusEffect(StatusEffects.LockingCurse)) player.removeStatusEffect(StatusEffects.LockingCurse);
                 //BUNUS XPZ
                 if (flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
                     player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
@@ -9173,6 +9174,13 @@ public class Combat extends BaseContent {
                 outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. ([font-damage]" + hemorrhage + "[/font])</b>\n\n");
             }
         }
+        if (player.hasStatusEffect(StatusEffects.LockingCurse)) {
+            var mummyservants:Number = 0;
+            mummyservants += player.maxHP() * player.statusEffectv2(StatusEffects.LockingCurse);
+			if (player.statStore.hasBuff("Crossed Holy Band")) mummyservants *= 0.5;
+            mummyservants = player.takePhysDamage(mummyservants);
+			outputText("<b>The mummies swarm you, punching and kicking you from all sides with unhinged strength. ([font-damage]" + mummyservants + "[/font])</b>\n\n");
+        }
         if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
             player.addStatusValue(StatusEffects.BurnDoT, 1, -1);
             if (player.statusEffectv1(StatusEffects.BurnDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
@@ -11240,6 +11248,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.DaoistOverlordStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.headJewelry == headjewelries.DEATHPR && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
         if (player.hasPerk(PerkLib.EnergyDependent)) soulforceregen = 0;
         return soulforceregen;
     }
@@ -14805,6 +14814,18 @@ public function runAway(callHook:Boolean = true):void {
     if (monster is TrainingDummy) {
         outputText("As you retreat the training dummy just stands there. ");
     }
+	if (player.hasStatusEffect(StatusEffects.LockingCurse)) {
+		if (player.statusEffectv1(StatusEffects.LockingCurse) == 1) {
+			outputText("So Lia not wrote text for this ocassion. Concidence/Typical? I not think so!!!");
+			enemyAI();
+			return;
+		}
+		if (player.statusEffectv1(StatusEffects.LockingCurse) == 0 && !player.isFlying() && !monster.hasStatusEffect(StatusEffects.Dig)) {
+			outputText("The anubis has you surrounded by h"+(monster.hasVagina()?"er":"is")+" pet, there is no escape by land!");
+			enemyAI();
+			return;
+		}
+	}
     else if (player.canFly()) {
         var wingsNoFlap:Array = [Wings.ETHEREAL, Wings.LEVITATION, Wings.THUNDEROUS_AURA, Wings.WINDY_AURA];
         if(!(wingsNoFlap.indexOf(player.wings.type) >= 0)){
@@ -16193,6 +16214,7 @@ public function soulskillMod():Number {
     if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modss += (player.cor * .01);
     if (player.necklaceName == "Yin Yang Amulet") modss += .15;
     if (player.armorName == "Traditional clothes") modss += .4;
+	if (player.headJewelry == headjewelries.DEATHPR) modss += .2;
     if (player.hasPerk(PerkLib.ElementalBody)) {
         if (player.perkv1(PerkLib.ElementalBody) == 1 || player.perkv1(PerkLib.ElementalBody) == 2 || player.perkv1(PerkLib.ElementalBody) == 3) {
             if (player.perkv2(PerkLib.ElementalBody) == 1) modss += .05;

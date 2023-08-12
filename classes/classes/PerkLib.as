@@ -4233,7 +4233,7 @@ public class PerkLib
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
 		public static const AlwaysSuccesfullRunaway:PerkType = mk("Always Succesfull Runaway", "Always Succesfull Runaway", "");
 		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
-		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");//NYU
+		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");
 		public static const DieHardHP:PerkType = mk("DieHard HP", "DieHard HP", "");
 		public static const Enemy300Type:PerkType = mk("300-type enemy", "300-type enemy", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
@@ -4242,7 +4242,7 @@ public class PerkLib
 		public static const EnemyColossalType:PerkType = mk("Colossal-sized type enemy", "Colossal-sized type enemy", "");//50+ ft. tall   //NYU
 		public static const EnemyConstructType:PerkType = mk("Construct-type enemy", "Construct-type enemy", "");
 		public static const EnemyElementalType:PerkType = mk("Elemental-type enemy", "Elemental-type enemy", "");
-		public static const EnemyEliteType:PerkType = mk("Elite-type enemy", "Elite-type enemy", "");//NYU
+		public static const EnemyEliteType:PerkType = mk("Elite-type enemy", "Elite-type enemy", "");
 		public static const EnemyFeralType:PerkType = mk("Feral-type enemy", "Feral-type enemy", "");
 		public static const EnemyFleshConstructType:PerkType = mk("Flesh Construct-type enemy", "Flesh Construct-type enemy", "");
 		public static const EnemyForBeginnersType:PerkType = mk("For Beginners-type enemy", "For Beginners-type enemy", "");

@@ -335,6 +335,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DaoOfWater:StatusEffectType                     = mk("Dao of Water");
 		public static const DaoOfEarth:StatusEffectType                     = mk("Dao of Earth");
 		public static const DaoOfAcid:StatusEffectType                      = mk("Dao of Acid");
+		public static const DeathPrinceR:StatusEffectType             		= mk("Death Prince Regalia");
 		public static const DefenseCanopy:StatusEffectType                  = mk("Defense: Canopy");
 		public static const DeluxeOnaholeUsed:StatusEffectType              = mk("deluxe onahole used");
 		public static const DemonEnergyThirstFeed:StatusEffectType          = mk("demon fed from orgasm");
@@ -1237,6 +1238,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BerzerkingSiegweird:StatusEffectType   = mkCombat("Berzerking Siegweird");
 		public static const HealingSiegweird:StatusEffectType      = mkCombat("Healing Siegweird");
 		public static const CHCompellingAria:StatusEffectType      = mkCombat("Corrupted Handmaidens Compelling Aria");
+		public static const LockingCurse:StatusEffectType          = mkCombat("Locking Curse");
 		
 		// enchanted item stuff
 		

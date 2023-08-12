@@ -50,11 +50,12 @@ public class WerewolfRace extends Race {
 				.rearType(RearBody.WOLF_COLLAR, +1)
 				.rearType(NOT(RearBody.FENRIR_ICE_SPIKES), 0, -7)
 				.corruption(AT_LEAST(20), +2)
-				.hasPerk(PerkLib.Lycanthropy, +1, -11)
+				.hasPerk(PerkLib.Lycanthropy, +1, -11);
 				//.hasPerk(PerkLib.LycanthropyDormant, -11)
-		addMutation(IMutationsLib.AlphaHowlIM);
 		addScoresAfter(1)
-				.hasCockOfType(CockTypesEnum.WOLF, +1)
+				.hasCockOfType(CockTypesEnum.WOLF, +1);
+		
+		addMutation(IMutationsLib.AlphaHowlIM);
 		
 		buildTier(12, "werewolf")
                 .requirePerk(PerkLib.Lycanthropy)
@@ -65,12 +66,21 @@ public class WerewolfRace extends Race {
 					"int.mult": -0.20
 				})
 				.end();
-		buildTier(16, "greater werewolf")
+		buildTier(16, "elder werewolf")
 				.requirePreviousTier()
 				.buffs({
 					"str.mult": +1.30,
 					"tou.mult": +0.55,
 					"spe.mult": +0.75,
+					"int.mult": -0.20
+				})
+				.end();
+		buildTier(20, "ancient werewolf")
+				.requirePreviousTier()
+				.buffs({
+					"str.mult": +1.60,
+					"tou.mult": +0.70,
+					"spe.mult": +0.90,
 					"int.mult": -0.20
 				})
 				.end();

@@ -60,7 +60,7 @@ public class Changelog extends BaseContent
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon.\n");
+			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Anubis - lvl 24. Encounterable in Inner Desert.\n");
 			outputText("-New usable item: Red Gel. Costing 100 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies. Can be used to craft items like armors.\n");
 			outputText("-Kitshoo race name would be now Kitsumori.\n");
 			outputText("-Tel'Adre & Bizarre Bazaar can now be found using general Explore option similary to HXD. Tooltip before finding them in places been updated to avoid confusion. Owca pre discovery button gained tip on time when to explore area.\n");
@@ -94,10 +94,10 @@ public class Changelog extends BaseContent
 			outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
 			outputText("-New armor (by Ormael): Red gel armor - craftable by Konstantin using 5 pieces of red gel. Cost 1200 gems, 10 armor, -20% soulskills cost.\n");
 			outputText("-Added options for making 5 bronze ore/ebon ignots by Konstantine. But it req. to have enough space left in ore bag.\n");
-			outputText("-Using Crinos Shape as werebeast (wolf/fox) would add bonus to boost from special depending on moon phase (from no bonus to 40%/60%). Reaching higher tier of race like greater/elder/ancient would double/tripple that bonus.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Using Crinos Shape as werebeast (wolf/fox) would add bonus to boost from special depending on moon phase (from no bonus to 40%/60%). Reaching higher tier of race like elder/ancient would double/tripple that bonus.\n");
+			outputText("-New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.\n");
+			outputText("-New head accesory (by Liadri): Death Prince Regalia - obtained by beating Anubis. Cost 800 gems. Increases Soul Skill damage by 20%. Grants 1% regeneration when SF is above half.\n");
+			outputText("-New melee weapon (by Liadri): Judge staff - obtained by beating Anubis. Cost 1600 gems. Base atk is 10. It's large staff type weapon. Increase magic soulskill power by 80% and spellpower by 20%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -1500,7 +1500,7 @@ public class Changelog extends BaseContent
 			outputText("-New consumable (by Daikael): Ambrosia. Obtained by giving Sand Mother Bee Honey and 25 gems. Effect: As Pure Honey item but without TF body effect.\n");
 			outputText("-New necklace (by Liadri): Cow bell - drop after bgeating lacta bovina or minotaur enemies. Cost 1500 gems. Raise milk productivity by 50% and immunise players to the negative effects of minotaur cum addiction as if a cow girl. If the player is a cowgirl, raise maximum strength and libido by 20%.\n");
 			outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Dinah Rulette. Cost 2000 gems. Can't be used by character shorter than 7 ft. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
-			outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
+			outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech melee/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
 			outputText("-New material: Iron ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-New enemies: Vengeful Apparitions (lvl 24 or 30 normal/large sized group of ghost type enemies and can be found in (Outer) Battlefield).\n");
 			outputText("-Added mastery for: polearm type weapons AND fighting with body weapons (it would boost some of physcial specials that use bodyparts in attack - it will not affect specials that are attacks with fluids or other substances aka breath attacks).\n");
@@ -1838,7 +1838,7 @@ public class Changelog extends BaseContent
 			outputText("-Added passive gains of soulforce (5) and lust/wrath (1) on level up. Also first 6 level up would grant 5x more increase to max HP, Fatigue, Mana, Soulforce, Wrath and Lust.\n");
 			outputText("-Change to handling dual weapons. No need to get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy. There would be two ways to offset those: get specific for that type of weapons perk ");
 			outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
-			outputText("-Added mastery tracker for various types of meele weapons to 5th subpage of Stats.\n");
+			outputText("-Added mastery tracker for various types of melee weapons to 5th subpage of Stats.\n");
 			outputText("-Dual Wield perks like (Small), (Large), etc. that aren't based ones now have added req. to also have Dual Wield perk.\n");
 			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw.\n");
 			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
@@ -2198,7 +2198,7 @@ public class Changelog extends BaseContent
 			outputText("-New rare ascension perk -> Ascension: Additional Organ Mutation (3rd Stage). Req. Ascension: Additional Organ Mutation (2nd Stage) perk, 30+ in internal chimera score and be at sixth ascension. It costs 60 asc points and will give 1 more slot for organ mutations. Like heart, muscles or mouth related racial mutation perks.\n");
 			outputText("-New P. Special: Charge. It can be used by any pc and have 6 turn cooldown. Due to this all natural jouster bonuses form other melee attacks or specials was removed and will only stay on this one special. Having bovine or unicorn type horns will add bonus damage and chance to leave bleed debuff. Also having spear-like weapon with taur or drider lower body will add 2x multiplier to damage.\n");
 			outputText("-New P. Special: Power Shoot. range equivalent of Power Attack. Req. using either Bow or Throwing type weapon.\n");
-			outputText("-New meele weapon (by Liadri): Golemancer Rod - buyable at golemancer shop in He'Xin'Dao. Cost 100 gems. Raise golems power by 75%.\n");
+			outputText("-New melee weapon (by Liadri): Golemancer Rod - buyable at golemancer shop in He'Xin'Dao. Cost 100 gems. Raise golems power by 75%.\n");
 			outputText("-New range weapon (by Liadri): Snippler - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Deepwoods area. Cost 1030 gems. Base atk is 50 and ammo clip size 1. Cannot multishot deals +300% base damage on sneak attack. It's 2H Firearm type range weapon.\n");
 			outputText("-New range weapon (by Liadri): Touhouna M3 - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Caves area. Cost 430 gems. Base atk is 20 and ammo clip size 1. Each perk for mutli attacks per turn increase times it deal dmg by 2. And base ration of shooting per turn is 2 bullets. Lowering range accuracy by 10%. It's 2H Firearm type range weapon. Can be used in goblin mech.\n");
 			outputText("-New range weapon (by Liadri): Derpnade Launcher - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Mountain area. Cost 2030 gems. Base atk is 100 and ammo clip size 1. deal AoE dmg and have 10% chance to deal 20% of it dmg to PC. It's 2H Firearm type range weapon.\n");
@@ -3966,7 +3966,7 @@ public class Changelog extends BaseContent
 			outputText("-Text History. In new games bound to 'H' button; in old saves need manual binding to hotkey.\n");
 			outputText("-Perks Database. It gathers all lvl-up perks with their desc and req. to gain them. Made by aimozg.\n");
 			outputText("-When having enough high plant-morph score and soul sense perk PC can trigger dream about Wolrd Tree. With this it will be added as new souls ense encounter.\n");
-			outputText("-Visiting World Tree allow PC to gain material to make Warden weapon - Wolrd Branch or slowly transform into Yggdrasil race. Bonuses for been Yggrasil (scalable): +50 to max Str, +70 to max Tou, -50 to max Spe, +50 to max Int, +80 to max Wis, -50 to max Lib, +10 armor.\n");
+			outputText("-Visiting World Tree allow PC to gain material to make Warden weapon - World Branch or slowly transform into Yggdrasil race. Bonuses for been Yggrasil (scalable): +50 to max Str, +70 to max Tou, -50 to max Spe, +50 to max Int, +80 to max Wis, -50 to max Lib, +10 armor.\n");
 			outputText("-Visiting Marae (and before killing her in case of corrutped one) after finishing Factory and having any version of Holli in camp fully grown up allow PC tht is enough plant-morph to undergone transformation into Alraune.\n");
 			outputText("-Alraune brings new options after combat and it racial bonuses are: +100 to max Tou, -50 to max Spe, +100 to max Lib.\n");
 			outputText("-New physical special: Alraune Pollen Req. to be Alraune Effects: Works like arousing aura till end of fight.\n");

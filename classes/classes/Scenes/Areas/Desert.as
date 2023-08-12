@@ -19,6 +19,7 @@ use namespace CoC;
 	public class Desert extends BaseContent
 	{
 		public var antsScene:AntsScene = new AntsScene();
+		public var anubisScene:AnubisScene = new AnubisScene();
 		public var nagaScene:NagaScene = new NagaScene();
 		public var gorgonScene:GorgonScene = new GorgonScene();
 		public var oasis:Oasis = new Oasis();
@@ -286,6 +287,12 @@ use namespace CoC;
 					kind  : 'monster',
 					night: false,
 					call: sandWormScene.SandWormEncounter
+				}, {
+					name: "anubis",
+					label : "Anubis",
+					kind  : 'monster',
+					night: false,
+					call: anubisScene.anubisEncounter
 				}, {
 					name: "etna",
 					label : "Etna",

@@ -32,6 +32,7 @@ public final class HeadJewelryLib extends ItemConstants
 		
 		public const AQBREATH:HeadJewelry = new HeadJewelry("AqBreath", "Aqua breather", "Aqua breather", "an Aqua breather", 0, 0, 200, "This unfashionable, yet very practical, goblin device allows to breathe underwater. A must have for any underwater expedition.",HJT_HELMET);
 		public const COWHAT :HeadJewelry = new HeadJewelry("CGHAT", "C.G.Hat", "cow girl hat", "cow girl hat", 0, 0, 200, "This hat was retrieved from an offworld gunslinger who became a cow. As such aside from its powerful enchantment that increase firearms potency it also raise milk production.",HJT_HELMET);
+		public const DEATHPR:DeathPrinceRegalia = new DeathPrinceRegalia();
 		public const DMONSKUL:SkullOrnament = new SkullOrnament();
 		public const FOXHAIR:HeadJewelry = new HeadJewelry("FoxHair", "Fox Hairpin", "fox hairpin", "a fox hairpin", 0, 0, 800, "This hairpin, adorned with the design of a fox and blessed by Taoth, grants a kitsune increased magical power. (-20% spell and soulskills costs, +20% mag/lust dmg to fox fire specials)",HJT_HAIRPIN);
 		public const GNHAIR:HeadJewelry = new HeadJewelry("GNHair", "Golden Naga Hairpins", "pair of Golden Naga Hairpins", "a pair of Golden Naga Hairpins", 0, 0, 400, "This pair of lovely half moon-shaped golden hairpins are commonly used by the nagas to enhance their bodily charms. (+10% lust dmg from naga specials and +1 duration of Hypnosis)",HJT_HAIRPIN);
