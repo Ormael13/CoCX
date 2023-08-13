@@ -5,28 +5,31 @@
 package classes.IMutations
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Races;
 
-public class BlackHeartMutation extends IMutationPerkType
-    {
-        private static const mName:String = "Black Heart";
+public class HengeyokaiBirthrightMutation extends IMutationPerkType
+	{
+		private static const mName:String = "Hengeyokai Birthright";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS += "Increased Lust strike power, Empower Fascinate";
+            if (pTier >= 1) descS += "Your body possesses a ";
+            if (pTier == 1){
+                descS += "rudimentary";
             }
-            if (pTier >= 2){
-                descS += ", Adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 1";
+            if (pTier == 2){
+                descS += "basic";
             }
-            if (pTier >= 3){
-                descS += ", Adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). Facinate Stun lasts 2 turns";
+            if (pTier == 3){
+                descS += "half developed";
             }
-            if (descS != "")descS += ".";
+            if (pTier == 4){
+                descS += "fully developed";
+            }
+            if (descS != "")descS += " restorative system modeled after progenitor of all werebeasts.";
             return descS;
         }
 
@@ -40,17 +43,14 @@ public class BlackHeartMutation extends IMutationPerkType
                 case 3:
                     sufval = "(Evolved)";
                     break;
+                case 4:
+                    sufval = "(Final Form)";
+                    break;
                 default:
                     sufval = "";
             }
             return mName + sufval;
         }
-
-        override public function evolveText():String {
-            var descS:String = "\nAs you acclimate further to your new life as a fiend you find your thought and morality slowly sinking deeper and deeper into the abyss of corruption. Betraying someone who trusted and loved you would be so easy now if it could further your growing ambitions.";
-            return descS;
-        }
-
 
         //Mutation Requirements
         override public function pReqs(pCheck:int = -1):void{
@@ -59,9 +59,8 @@ public class BlackHeartMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireHeartMutationSlot()
-                    .requirePerk(PerkLib.DarkCharm).requireCor(100)
-                    .requireAnyRace(Races.DEMON, Races.IMP);
+                    this.requireAdaptationsMutationSlot()
+                    .requireAnyRace(Races.WEREWOLF, Races.WERESHARK);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -75,16 +74,33 @@ public class BlackHeartMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
-            else if (pTier == 2) pBuffs['lib.mult'] = 0.15;
-            else if (pTier == 3) pBuffs['lib.mult'] = 0.3;
+            if (pTier == 1){
+                pBuffs['str.mult'] = 0.01;
+                pBuffs['spe.mult'] = 0.01;
+                pBuffs['tou.mult'] = 0.01;
+            }
+            else if (pTier == 2){
+                pBuffs['str.mult'] = 0.03;
+                pBuffs['spe.mult'] = 0.05;
+                pBuffs['tou.mult'] = 0.01;
+            }
+            else if (pTier == 3){
+                pBuffs['str.mult'] = 0.07;
+                pBuffs['spe.mult'] = 0.1;
+                pBuffs['tou.mult'] = 0.04;
+            }
+            else if (pTier == 4){
+                pBuffs['str.mult'] = 0.15;
+                pBuffs['spe.mult'] = 0.2;
+                pBuffs['tou.mult'] = 0.1;
+            }
             return pBuffs;
         }
 
-        public function BlackHeartMutation() {
-            super(mName + " IM", mName, SLOT_HEART, 3);
+        public function HengeyokaiBirthrightMutation() 
+		{
+			super(mName + " IM", mName, SLOT_ADAPTATIONS, 1);
         }
 
-        
     }
 }

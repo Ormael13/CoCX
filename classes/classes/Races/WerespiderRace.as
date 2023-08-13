@@ -3,6 +3,7 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CoC;
 import classes.GeneticMemories.RaceMem;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -40,14 +41,17 @@ public class WerespiderRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.eyeType(Eyes.FERAL, +1)
-		;
+				.eyeType(Eyes.FERAL, +1);
 		
-		buildTier(2, "werespider")
+		addMutation(IMutationsLib.AnanasaBirthrightIM);
+		
+		buildTier(12, "werespider")
 				.buffs({
-					"str.mult": +0.10,
-					"tou.mult": +0.10,
-					"wis.mult": +0.10
+					"str.mult": +0.70,
+					"tou.mult": +0.70,
+					"spe.mult": +0.70,
+					"lib.mult": -0.30,
+					"maxlust_mult": -0.1
 				})
 				.end();
 		/*

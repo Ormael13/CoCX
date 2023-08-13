@@ -3,6 +3,7 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CoC;
 import classes.GeneticMemories.RaceMem;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -61,6 +62,8 @@ public class WerefoxRace extends Race {
 				.hasPerk(PerkLib.Vulpesthropy, +1, -11)/*
 				.hasPerk(PerkLib.VulpesthropyDormant, -11)*/;
 		
+		addMutation(IMutationsLib.WhiteFacedOneBirthrightIM);
+		
 		buildTier(12, "werefox")
                 .requirePerk(PerkLib.Vulpesthropy)
 				.buffs({
@@ -68,10 +71,10 @@ public class WerefoxRace extends Race {
 					"tou.mult": +1.00,
 					"wis.mult": +1.20,
 					"sens": +50,
-					"maxlust_mult": -0.15,
-					"maxsf_mult": +1.0,
+					"maxlust_mult": -0.1,
+					"maxsf_mult": +1,
 					"maxwrath_mult": +0.6,
-					"maxmana_mult": -0.8
+					"maxmana_mult": -0.4
 				})
 				.end();
 		buildTier(16, "elder werefox")
@@ -82,10 +85,10 @@ public class WerefoxRace extends Race {
 					"tou.mult": +1.50,
 					"wis.mult": +1.75,
 					"sens": +100,
-					"maxlust_mult": -0.15,
-					"maxsf_mult": +1.2,
+					"maxlust_mult": -0.1,
+					"maxsf_mult": +1.5,
 					"maxwrath_mult": +0.7,
-					"maxmana_mult": -0.8
+					"maxmana_mult": -0.4
 				})
 				.end();
 		buildTier(20, "ancient werefox")
@@ -96,10 +99,10 @@ public class WerefoxRace extends Race {
 					"tou.mult": +2.00,
 					"wis.mult": +2.30,
 					"sens": +150,
-					"maxlust_mult": -0.15,
-					"maxsf_mult": +1.4,
+					"maxlust_mult": -0.1,
+					"maxsf_mult": +2,
 					"maxwrath_mult": +0.8,
-					"maxmana_mult": -0.8
+					"maxmana_mult": -0.4
 				})
 				.end();
 	}

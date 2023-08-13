@@ -98,10 +98,10 @@ public class Changelog extends BaseContent
 			outputText("-New head accesory (by Liadri): Death Prince Regalia - obtained by beating Anubis. Cost 800 gems. Increases Soul Skill damage by 20%. Grants 1% regeneration when SF is above half.\n");
 			outputText("-New melee weapon (by Liadri): Judge staff - obtained by beating Anubis. Cost 1600 gems. Base atk is 10. It's large staff type weapon. Increase magic soulskill power by 80% and spellpower by 20%.\n");
 			outputText("-New usable item: bandages. Costing 25 gems and it's obtainable from Anubis enemies.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New armor (by Liadri): Death Prince Outfit - obtained by beating Anubis. Cost 500 gems, 5 magic resistance, +50% Magic Soulskill power, grants 2% regeneration when soulforce is above half.\n");
+			outputText("-New armor (by Liadri): Death Prince Golden Armor - obtainable by giving Death Prince Outfit to Corrupted Celess to corrupt. Cost 19200 gems, 20 armor, 40 magic resistance, empowers Anubi ability by 50%, +200% Magic Soulskill power, grants 5% regeneration when soulforce is above half.\n");
+			outputText("-New mutation perk: Hengeyokai Birthright. Req. having free adaptation mutation slot, werewolf race. Effects: Increases HP regeneration 0.5%.\n");
+			outputText("-\n");//New mutation perk: White-Faced One Birthright. Req. having free adaptation mutation slot, werefox race. Effects: Increases soulforce recovery 0.5%.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -122,9 +122,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
-			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper\n");
+			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -178,7 +183,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -201,6 +208,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -55,14 +55,15 @@ public class WerewolfRace extends Race {
 		addScoresAfter(1)
 				.hasCockOfType(CockTypesEnum.WOLF, +1);
 		
+		addMutation(IMutationsLib.HengeyokaiBirthrightIM);
 		addMutation(IMutationsLib.AlphaHowlIM);
 		
 		buildTier(12, "werewolf")
                 .requirePerk(PerkLib.Lycanthropy)
 				.buffs({
 					"str.mult": +1.00,
-					"tou.mult": +0.40,
-					"spe.mult": +0.60,
+					"tou.mult": +0.60,
+					"spe.mult": +0.40,
 					"int.mult": -0.20
 				})
 				.end();
@@ -70,8 +71,8 @@ public class WerewolfRace extends Race {
 				.requirePreviousTier()
 				.buffs({
 					"str.mult": +1.30,
-					"tou.mult": +0.55,
-					"spe.mult": +0.75,
+					"tou.mult": +0.80,
+					"spe.mult": +0.50,
 					"int.mult": -0.20
 				})
 				.end();
@@ -79,8 +80,8 @@ public class WerewolfRace extends Race {
 				.requirePreviousTier()
 				.buffs({
 					"str.mult": +1.60,
-					"tou.mult": +0.70,
-					"spe.mult": +0.90,
+					"tou.mult": +1.00,
+					"spe.mult": +0.60,
 					"int.mult": -0.20
 				})
 				.end();

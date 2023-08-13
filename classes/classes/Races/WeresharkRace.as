@@ -3,6 +3,7 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CoC;
 import classes.GeneticMemories.RaceMem;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -40,14 +41,16 @@ public class WeresharkRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.eyeType(Eyes.FERAL, +1)
-		;
+				.eyeType(Eyes.FERAL, +1);
 		
-		buildTier(2, "wereshark")
+		addMutation(IMutationsLib.HengeyokaiBirthrightIM);
+		
+		buildTier(12, "wereshark")
 				.buffs({
-					"str.mult": +0.10,
-					"tou.mult": +0.10,
-					"wis.mult": +0.10
+					"str.mult": +0.90,
+					"tou.mult": +0.50,
+					"spe.mult": +0.50,
+					"int.mult": -0.10
 				})
 				.end();
 		/*

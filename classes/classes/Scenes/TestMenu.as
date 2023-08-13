@@ -351,7 +351,7 @@ public class TestMenu extends BaseContent
 			player.trainStat('str', +5, 100);
 			player.trainStat('tou', +5, 100);
 			player.trainStat('spe', +5, 100);
-			player.trainStat('lib', +5, 100);
+			player.trainStat('wis', +5, 100);
 			player.dynStats("cor", 20);
 			statScreenRefresh();
 	}
@@ -2705,4 +2705,4 @@ public class TestMenu extends BaseContent
 	}
 	}
 }
- 
+ 

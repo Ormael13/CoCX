@@ -11042,6 +11042,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
+        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1) maxPercentRegen += 0.5;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
@@ -11089,6 +11090,7 @@ public class Combat extends BaseContent {
 			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxRegen += 1;
+        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1) maxRegen += 0.5;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
@@ -11238,6 +11240,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
+        if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
 		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
@@ -11249,6 +11252,8 @@ public class Combat extends BaseContent {
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
 		if (player.headJewelry == headjewelries.DEATHPR && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
+		if (player.armor == armors.DEATHPO && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
+		if (player.armor == armors.DEATHPGA && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.05);
         if (player.hasPerk(PerkLib.EnergyDependent)) soulforceregen = 0;
         return soulforceregen;
     }
@@ -16289,6 +16294,8 @@ public function soulskillMagicalMod():Number {
         //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
     if (player.shieldName == "spirit focus") modssm += .25;
+	if (player.armor == armors.DEATHPO) modssm += .5;
+	if (player.armor == armors.DEATHPGA) modssm += 2;
 	if (modssmb > 1) modssm *= modssmb;
     modssm = Math.round(modssm * 100) / 100;
     return modssm;

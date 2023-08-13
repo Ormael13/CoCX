@@ -94,7 +94,9 @@ public final class ArmorLib extends ItemConstants
 		public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
 		public const CTHPALA:CentaurPaladinArmor = new CentaurPaladinArmor();
 		public const CTPALAD:CentaurArmor = new CentaurArmor();
-		public const DBARMOR:Armor = new PureMaraeArmor();
+		public const DBARMOR:PureMaraeArmor = new PureMaraeArmor();
+		public const DEATHPGA:DeathPrinceGoldenArmor = new DeathPrinceGoldenArmor();
+		public const DEATHPO:DeathPrinceOutfit = new DeathPrinceOutfit();
 		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 10, 10, 800, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
 		public const DSCLROB:Armor = new Armor("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 0, 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light")
 				.withBuffs({'spellcost': -0.20}) as Armor;

@@ -335,6 +335,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DaoOfWater:StatusEffectType                     = mk("Dao of Water");
 		public static const DaoOfEarth:StatusEffectType                     = mk("Dao of Earth");
 		public static const DaoOfAcid:StatusEffectType                      = mk("Dao of Acid");
+		public static const DeathPrinceGA:StatusEffectType             		= mk("Death Prince Golden Armor");
+		public static const DeathPrinceO:StatusEffectType             		= mk("Death Prince Outfit");
 		public static const DeathPrinceR:StatusEffectType             		= mk("Death Prince Regalia");
 		public static const DefenseCanopy:StatusEffectType                  = mk("Defense: Canopy");
 		public static const DeluxeOnaholeUsed:StatusEffectType              = mk("deluxe onahole used");
