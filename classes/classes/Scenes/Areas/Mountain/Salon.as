@@ -486,7 +486,7 @@ private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {
 	outputText("You tell Lynnette that you'd like to have your beard style changed to what you've indicated.\n\n");
 	outputText("Lynnette and her daughters begin to mess with your beard with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
 	player.beardStyle = choiceStyle;
-	outputText("After a while, you now have " + player.beardDescript() + "!");
+	outputText("After a while, you now have " + player.beardDescript() + " styled hair!");
 	endEncounter();
 }
 
