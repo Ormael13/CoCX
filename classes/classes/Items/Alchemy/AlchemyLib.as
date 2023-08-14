@@ -685,6 +685,10 @@ public class AlchemyLib extends BaseContent {
 		short: "WFox",
 		name : "Werefox"
 	});
+	public static const AE_ANUBIS:int         = EnumValue.add(Essences, 210, "ANUBIS", {
+		short: "Anubis",
+		name : "Anubis"
+	});
 	
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [

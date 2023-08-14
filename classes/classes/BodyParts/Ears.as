@@ -280,6 +280,12 @@ public class Ears extends BodyPart {
 		appearanceDesc: "A pair of unusual large, adept fox ears sit high on your head, always listening.",
 		fur: true
 	});
+	public static const JACKAL: int = 46;
+	EnumValue.add(Types, JACKAL, "JACKAL", {
+		name: "jackal fox",
+		appearanceDesc: "A pair of jackal ears that gives you an austere outlook. With that kind of getup no one can question that you are the one in charge.",
+		fur: true
+	});
 	
 	public static const HoleEars:/*String*/Array = [LIZARD, DRAGON, ORCA2, AVIAN, INSECT];
 	

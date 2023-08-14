@@ -14963,6 +14963,164 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function jackalDate(player:Player):void {
+		player.slimeFeed();
+        //init variables
+        var choice:int;
+		var changes:Number = 0;
+        var changeLimit:Number = 2;
+        //Temporary storage
+        var temp2:Number = 0;
+        //var temp3:Number = 0;
+        //Randomly choose affects limit
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
+        //clear screen
+        clearOutput();
+        outputText("You consume the date. Despite its dried up looking exterior the fruit proves to be rich in flavor and nutrient. A few second later your body heats up as it is overcome by changes.");
+		//wis change
+        if (changes < changeLimit && rand(3) == 0 && MutagenBonus("wis", 1)) {
+            outputText("[pg]You begin musing on the many people and creatures you've met thus far on Mareth. They are undisciplined and disorganized. It would only make sense for you to simply gather all those rowdy fools under your leadership so to better lead them against the common foe, maybe rule them too? ");
+			if (player.cor < 50) {
+				outputText("Your");
+				if (player.gender > 0) outputText((player.hasCock()?" cock hardens":"")+(player.hasSheath()?" out of its sheath":"")+(player.gender == 3?" while":"")+(player.hasVagina()?" vagina drips":"")+(player.gender == 3?" in sympathy":"")+" as fantasies of an endless harem of slaves and sycophants servicing you overtake your thought. Even your enemies would make fine slaves if you could properly coerce them into working for you.");
+				else outputText(" cheeks blush with arousal.");
+			}
+			else outputText("Realizing how self centered your thoughts are becoming you shake your head and berate yourself. Just what is this place doing to you?");
+			dynStats("cor", 2 + rand(2));
+            changes++;
+        }
+		//Cat dangly-doo.
+        if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.CAT || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
+            //loop through and find a non-cat wang.
+            for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
+            }
+            transformations.CockCat(i).applyEffect();
+            changes++;
+        }
+        //Cat penorz shrink
+        if (player.catCocks() > 0 && rand(4) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+            //loop through and find a cat wang.
+            choice = 0;
+            for (var j:Number = 0; j < (player.cockTotal()); j++) {
+                if (player.cocks[j].cockType == CockTypesEnum.CAT && player.cocks[j].cockLength > 6) {
+                    choice = 1;
+                    break;
+                }
+            }
+            if (choice == 1) {
+                //lose 33% size until under 10, then lose 2" at a time
+                if (player.cocks[j].cockLength > 16) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles, making your sheath feel a little less tight.  It dwindles in size, losing a full third of its length and a bit of girth before the change finally stops.");
+                    player.cocks[j].cockLength *= .66;
+                } else if (player.cocks[j].cockLength > 6) {
+                    outputText("[pg]Your " + cockDescript(j) + " tingles and withdraws further into your sheath.  If you had to guess, you'd say you've lost about two inches of total length and perhaps some girth.");
+                    player.cocks[j].cockLength -= 2;
+                }
+                if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                //Check for any more!
+                temp2 = 0;
+                j++;
+                for (j; j < player.cocks.length; j++) {
+                    //Found another cat wang!
+                    if (player.cocks[j].cockType == CockTypesEnum.CAT) {
+                        //Long enough - change it
+                        if (player.cocks[j].cockLength > 6) {
+                            if (player.cocks[j].cockLength > 16)
+                                player.cocks[j].cockLength *= .66;
+                            else if (player.cocks[j].cockLength > 6)
+                                player.cocks[j].cockLength -= 2;
+                            //Thickness adjustments
+                            if (player.cocks[j].cockLength / 5 < player.cocks[j].cockThickness && player.cocks[j].cockThickness > 1.25) player.cocks[j].cockThickness = player.cocks[j].cockLength / 6;
+                            temp2 = 1;
+                        }
+                    }
+                }
+                //(big sensitivity boost)
+                outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.");
+                player.addCurse("sen", 5, 1);
+                //Make note of other dicks changing
+                if (temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!");
+                changes++;
+            }
+        }
+		//physical changes
+		//legs
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+            outputText("[pg]");
+            CoC.instance.transformations.LowerBodyCat(2).applyEffect();
+            changes++;
+        }
+		//arms
+        if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
+            outputText("[pg]");
+            transformations.ArmsCat.applyEffect();
+            changes++;
+        }
+        //tail
+        if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.CAT) {
+            outputText("[pg]");
+            transformations.TailCat.applyEffect();
+            changes++;
+        }
+        //Ears
+        if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.JACKAL) {
+            outputText("[pg]");
+			transformations.EarsJackal.applyEffect();
+            changes++;
+        }
+        //CAT-FACE!
+        // Prevents player with cat face from switching to cat canines then back to cat face and wasting changes
+        var startedWithCatFace: Boolean = player.faceType == Face.CAT;
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES) {
+            //This scenario exist only for cat tf that have no furry version!
+            outputText("[pg]");
+            transformations.FaceCatCanines.applyEffect();
+            changes++;
+        }
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT && !startedWithCatFace) {
+            outputText("[pg]");
+            transformations.FaceCat.applyEffect();
+            changes++;
+        }
+        //CAT TOUNGE CUZ WHY NOT?
+        if (transformations.TongueCat.isPossible() && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TongueCat.applyEffect();
+            changes++;
+        }
+        //Change skin to normal
+        if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
+            if (player.skinAdj != "") player.skinAdj = "";
+            outputText("[pg]");
+            transformations.SkinPlain.applyEffect();
+            changes++;
+        }
+		//Remove odd eyes
+		if (changes < changeLimit && rand(3) == 0 && transformations.EyesHuman.isPossible()) {
+			outputText("[pg]");
+			transformations.EyesHuman.applyEffect();
+			changes++;
+		}
+		if (changes < changeLimit && rand(3) == 0 && transformations.EyesChangeColor(["green", "red"]).isPossible()) {
+			outputText("[pg]");
+			if (rand(2) == 0) transformations.EyesChangeColor(["red"]).applyEffect();
+			else transformations.EyesChangeColor(["green"]).applyEffect();
+			changes++;
+		}
+        //Removes wings
+        if (!InCollection(player.wings.type, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.WingsNone.applyEffect();
+            changes++;
+        }
+		
+		player.refillHunger(10);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+	}
 
     public function sageMedicine(player:Player, item:ItemType):void {
         player.slimeFeed();

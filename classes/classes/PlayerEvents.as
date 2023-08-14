@@ -1173,11 +1173,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							break;
 					}
 					if (player.hasPerk(PerkLib.Lycanthropy)) {
-						player.statStore.replaceBuffObject({ 'str': changeV*ngMult,'tou': changeV*ngMult,'spe': changeV*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
+						player.statStore.replaceBuffObject({ 'str.mult': changeV*ngMult,'tou.mult': changeV*0.6*ngMult,'spe.mult': changeV*0.4*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
 					}
 					if (player.hasPerk(PerkLib.Vulpesthropy)) {
-						player.statStore.replaceBuffObject({ 'tou': changeV*ngMult*1.5,'spe': changeV*ngMult*1.5, 'minlustx': changeV * 0.01}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+						player.statStore.replaceBuffObject({ 'str.mult': changeV*0.1*ngMult,'tou.mult': changeV*ngMult,'spe.mult': changeV*0.4*ngMult, 'minlustx': changeV * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 						player.setPerkValue(PerkLib.Vulpesthropy,1,changeV);
 					}
 					needNext = true;
@@ -2484,7 +2484,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
-				player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
+				player.statStore.replaceBuffObject({ 'str.mult': bonusStats,'tou.mult': bonusStats,'spe.mult': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
 				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
 			}

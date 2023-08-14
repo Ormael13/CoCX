@@ -341,13 +341,14 @@ public class TestMenu extends BaseContent
 					player.thickenCock(selectedCockValue, 2);
 				}
 			}
+			var ngM:Number = (player.newGamePlusMod() + 1);
 			var bonusStats:Number = 0;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (!player.hasPerk(PerkLib.Vulpesthropy)) player.createPerk(PerkLib.Vulpesthropy,bonusStats,0,0,0);
-			player.statStore.replaceBuffObject({ 'tou': (bonusStats * 1.5),'spe': (bonusStats * 1.5)}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.1*ngM,'tou.mult': bonusStats*ngM,'spe.mult': bonusStats*0.4*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 			player.trainStat('str', +5, 100);
 			player.trainStat('tou', +5, 100);
 			player.trainStat('spe', +5, 100);

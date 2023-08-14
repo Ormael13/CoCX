@@ -265,7 +265,7 @@ use namespace CoC;
 					label : "Cake",
 					kind  : 'item',
 					chance: 0.3,
-					call  : findDesertLoot
+					call  : findDesertLoot1
 				}/*, {
 					name: "demonProjects",
 					chance: 0.2,
@@ -346,11 +346,23 @@ use namespace CoC;
 					call: SceneLib.tedScene.introPostHiddenCave,
 					when: SceneLib.tedScene.canEncounterTed
 				}, {
-					name  : "desertloot",
+					name  : "desertloot1",
 					label : "Cake",
 					kind  : 'item',
 					chance: 0.3,
-					call  : findDesertLoot
+					call  : findDesertLoot1
+				}, {
+					name  : "desertloot2",
+					label : "Date",
+					kind  : 'item',
+					chance: 0.3,
+					call  : findDesertLoot2
+				}, {
+					name  : "desertruins",
+					label : "Ruins",
+					kind  : 'event',
+					chance: 0.2,
+					call  : findDesertRuins
 				}/*, {
 					name: "demonProjects",
 					chance: 0.2,
@@ -502,10 +514,24 @@ use namespace CoC;
 			endEncounter();
 		}
 
-		private function findDesertLoot():void {
+		private function findDesertLoot1():void {
 			clearOutput();
 			outputText("Miraculously, you spot a lone pouch lying in the sand. Opening it, you find a neatly wraped cake!\n");
 			inventory.takeItem(consumables.HDEWCAK, explorer.done);
+		}
+		private function findDesertLoot2():void {
+			clearOutput();
+			outputText("While exploring the desert you walk into an oasis with clear fresh water and the some date tree. It seems to be your lucky day as this is no mirage.\n");
+			inventory.takeItem(consumables.JACKALD, explorer.done);
+		}
+		
+		private function findDesertRuins():void {
+			clearOutput();
+			var gemsFound:int = 150 + rand(50);
+			outputText("While exploring the desert you find some old sandy ruins battered by time. Inside is a half buried treasure chest filled with some gems. (" + String(gemsFound) + ")");
+			player.gems += gemsFound;
+			statScreenRefresh();
+			endEncounter();
 		}
 	}
 }

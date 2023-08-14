@@ -1,10 +1,12 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.CoC;
 import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
+//import classes.VaginaClass;
 
 public class AnubisRace extends Race {
     public static const RaceBody:/*String*/Array = [
@@ -39,13 +41,18 @@ public class AnubisRace extends Race {
 	public override function setup():void {
 		
 		addScores()
+				.earType(Ears.JACKAL, +1)
+				.skinPlainOnly(+1)
+				.eyeType(Eyes.HUMAN, +1)
+				.eyeColor(ANY("red","green"), +1)
+				.faceType(ANY(Face.CAT,Face.CAT_CANINES), +1)
 				.tongueType(Tongue.CAT, +1)
 				.armType(Arms.CAT, +1)
 				.legType(LowerBody.CAT, +1)
 				.tailType(Tail.CAT, +1)
 				.wingType(Wings.NONE, +4)
-				.corruption(AT_LEAST(50), +1)
-		;
+				.hasCockOfType(CockTypesEnum.CAT, +1)//.cockOrVaginaOfType(CockTypesEnum.CAT, VaginaClass.cat,1)
+				.corruption(AT_LEAST(50), +1);
 		
 		buildTier(20, "anubi")
 				.buffs({

@@ -2250,11 +2250,21 @@ public class SaveUpdater extends NPCAwareContent {
 					}
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.070) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.070;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.070) {
+				if (player.hasPerk(PerkLib.Lycanthropy)) {
+					var ngM:Number = (player.newGamePlusMod() + 1);
+					var bonusStats2:Number = 0;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats2 += 10;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats2 += 20;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats2 += 30;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats2 += 40;
+					player.removePerk(PerkLib.Lycanthropy);
+					player.createPerk(PerkLib.Lycanthropy,bonusStats2,0,0,0);
+					player.statStore.replaceBuffObject({ 'str.mult': bonusStats2*ngM,'tou.mult': bonusStats2*0.6*ngM,'spe.mult': bonusStats2*0.4*ngM, 'minlustx': bonusStats2 * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.070;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.080) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.080;
@@ -2262,6 +2272,10 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.090) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.090;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.100) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.100;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
@@ -2447,3 +2461,4 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 }
 }
+

@@ -725,6 +725,16 @@ public final class ConsumableLib extends AlchemyLib
 						DEFAULT_SUBSTANCES_DROP_TABLE,
 						DEFAULT_ESSENCE_DROP_TABLE(AE_JABBERWOCKY)
 				);
+		public const JACKALD: Consumable = mk("JackalD", "JackalD", "a Jackal Date", 10, "A fruit found in the desert commonly eaten by its denizen. A favorite of the jackal like anubi.", m.jackalDate, ItemTags.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						DEFAULT_ESSENCE_DROP_TABLE(AE_ANUBIS),
+						[
+							[1, AR_TOU],
+							[1, AR_WIS],
+							[1, AR_LIB]
+						]
+				);
 		public const KANGAFT: Consumable = mk("KangaFt", "KangaFruit", "a piece of kanga fruit", 6, "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.", curry(m.kangaFruit, 0), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,

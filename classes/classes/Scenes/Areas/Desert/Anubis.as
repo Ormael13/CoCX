@@ -6,9 +6,7 @@ package classes.Scenes.Areas.Desert
 {
 import classes.*;
 import classes.BodyParts.Butt;
-//import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
-//import classes.BodyParts.LowerBody;
 import classes.Scenes.Areas.Desert.AnubisScene;
 import classes.Stats.Buff;
 import classes.internals.*;	
@@ -118,6 +116,7 @@ public class Anubis extends Monster
 			this.drop = new WeightedDrop().
 					add(useables.BANDAGE,1).
 					add(weapons.JUDGE_S,2).
+					add(consumables.JACKALD,2).
 					add(headjewelries.DEATHPR,3);
 			//this.faceType = Face.SNAKE_FANGS;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
