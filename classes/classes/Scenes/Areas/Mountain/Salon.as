@@ -494,6 +494,7 @@ private function changeHairStyle():void {
 	clearOutput();
 	outputText("What hairstyle would you like?");
 	menu();
+
 	addButton(0, "Normal", chooseHairStyleFinalize, 0).hint("The standard straith cut.");
 	addButton(1, "Wild", chooseHairStyleFinalize, 1).hint("Ruffle and shuffle this hair some.");
 	addButton(2, "Ponytail", chooseHairStyleFinalize, 2).hint("The basic ponytail, a classic.");
@@ -505,6 +506,8 @@ private function changeHairStyle():void {
 	addButton(8, "Wind Long", chooseHairStyleFinalize, 8).hint("The four wind long hair cut seen almost seldomly amonst student of the now near extinct four wind school.");
 	addButton(9, "Taur Tail", chooseHairStyleFinalize, 9).hint("A haircut favored by centaur maidens. Hairs are tied into a single long ponytail not unlike a horse tail itself");
 	addButton(10, "Twin Ribbon", chooseHairStyleFinalize, 10).hint("An haircut which apparently was very popular amonst less masculine mens from the old kingdom before lethice became the current ruler. It has a feminine touch that works on either a man or a woman.");
+	addButton(11, "Desert Grace", chooseHairStyleFinalize, 11).hint("A common haircut favored by the denisen of the desert. It is well known for its two long straith bangs.");
+
 	addButton(14, "Back", salonPurchaseMenu);
 }
 

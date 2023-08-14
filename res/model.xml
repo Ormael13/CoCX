@@ -243,8 +243,8 @@
         <key src="#880088" base="hair" transform="darken(25)"/>
         <key src="#440044" base="hair" transform="darken(50)"/>
         <key src="#FFFF88" base="hair2" transform="lighten(25)"/>
-		<key src="#b0b000" base="hair2" transform="lighten(10)"/>
-        <key src="#CCCC00" base="hair2"/>
+		<key src="#CCCC00" base="hair2" transform="lighten(10)"/>
+        <key src="#b0b000" base="hair2"/>
         <key src="#999900" base="hair2" transform="darken(25)"/>
         <key src="#333300" base="hair2" transform="darken(50)"/>
         <key src="#FFA54C" base="feather" transform="lighten(25)"/>
@@ -929,6 +929,9 @@
         <cell rect="991,251,87,98" name="hair/fourWindBraid" dx="69" dy="3"/>
         <cell rect="991,350,89,164" name="hair_bg/fourWindBraid" dx="69" dy="2"/>
 		<cell rect="1081,251,87,98" name="hair_bg/centaurPonytail" dx="81" dy="6"/>
+		<cell rect="781,136,59,65" name="hair/desertGrace" dx="75" dy="21"/>
+		<cell rect="451,350,89,164" name="hair_bg/desertGrace" dx="62" dy="5"/>
+		<cell rect="841,136,59,65" name="hairFront/desertGrace" dx="75" dy="21"/>
         <cell rect="1,350,89,98" name="hair/raiju" dx="60" dy="4"/>
         <cell rect="91,350,89,164" name="hair_bg/raiju3" dx="60" dy="4"/>
         <cell rect="181,350,89,98" name="hair/hellcat" dx="60" dy="4"/>
@@ -1047,6 +1050,8 @@
         <cell rect="1,289,29,32" name="ears_fg/impBigEarsRight" dx="104" dy="38"/>
 		<cell rect="31,256,29,32" name="ears_bg/impBigEars" dx="77" dy="37"/>
         <cell rect="31,289,29,32" name="ears_bg/impBigEarsRight" dx="104" dy="38"/>
+		<cell rect="781,190,29,65" name="ears_bg/anubis" dx="90" dy="4"/>
+		<cell rect="691,256,89,65" name="ears_bg/fennec" dx="57" dy="2"/>
         <cell rect="541,330,87,97" name="ears_truebg/melkie" dx="60" dy="36"/>
         <cell rect="1,396,59,65" name="horns/orchid" dx="73" dy="4"/>
         <cell rect="61,396,59,65" name="horns/devil" dx="72" dy="4"/>
@@ -2400,6 +2405,12 @@
                 <show part="ears_bg/ratatoskr"/>
                 <show part="ears_bg/ratatoskrRight"/>
             </case>
+			<case values="Ears.FENNEC_FOX">
+                <show part="ears_bg/fennec"/>
+            </case>
+			<case values="Ears.JACKAL">
+                <show part="ears_bg/anubis"/>
+            </case>
 			<case values="Ears.BIG">
 				<show part="ears_fg/impBigEars"/>
                 <show part="ears_fg/impBigEarsRight"/>
@@ -2824,6 +2835,14 @@
                             <hide part="hair_bg/raiju3"/>
                             <hide part="hair_bg/hellcat"/>
                         </if>
+                    </case>
+					<case values="Hair.DESERTGRACE">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+						<hide part="hairFront/*"/>
+						<show part="hair/desertGrace"/>
+						<show part="hairFront/desertGrace"/>
+						<show part="hair_bg/desertGrace"/>
                     </case>
 					<case values="Hair.TWINRIBBON">
 						<show part="hairFront/ribbon"/>

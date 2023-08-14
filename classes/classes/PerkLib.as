@@ -3674,8 +3674,6 @@ public class PerkLib
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
 				"(Amount of hydra heads)% health and (Amount of hydra heads) points of fatigue regeneration but double hunger decaying speed. Stops for 5 rounds when damaged by fire.");
-		public static const HypnoticSpell:PerkType = mk("Hypnotic Spell", "Hypnotic Spell",
-				"As an Apophis even the use of magic will not break your hypnosis.");
 		public static const IcyFlesh:PerkType = mk("Icy flesh", "Icy flesh",
 				"You are about as frigid and dead as a corpse however your mastery of ice magic grants you the ability to harden your flesh to the durability of diamonds. Gain an intelligence modifier as a bonus to health calculation equal to that of toughness as well as 1% regeneration. Gain an extra 40% resistance to cold.");
 		public static const ImpNobility:PerkType = mk("Imp Nobility", "Imp Nobility",
