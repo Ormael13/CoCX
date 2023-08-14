@@ -113,7 +113,7 @@ public function isabellaGreeting():void {
 		outputText("While walking through the high grasses you hear a rich, high voice warbling out a melodious tune in a language you don't quite understand.  Do you approach or avoid it?");
 		//[Approach – to meeting] [Avoid – camp] – dont flag as met yet
 		//Approach - sets flags[kFLAGS.ISABELLA_CAMP_APPROACHED] to 1 and calls this function
-		simpleChoices("Approach", isabellaGreetingFirstTime, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		simpleChoices("Approach", isabellaGreetingFirstTime, "", null, "", null, "", null, "Leave", explorer.done);
 		return;
 	}
 	//CAMP MEETING – UMAD BRAH!?
@@ -160,7 +160,7 @@ public function isabellaGreeting():void {
 				else outputText("  The cow's eyes close, disappointment visible on her face when she sees the sheer size of your bulge.");
 			}
 			//[Talk – real conversations] [Drink – leads to breastfeeding] [Get Licks – leads to oral for small fries] [Rape?]
-			simpleChoices("Talk", talkWithIsabella, "Drink", nomOnMommaIzzysTits, "Get Licked", suck, "Fight", fightIsabella, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Talk", talkWithIsabella, "Drink", nomOnMommaIzzysTits, "Get Licked", suck, "Fight", fightIsabella, "Leave", explorer.done);
 		}
 		return;
 	}
@@ -237,7 +237,7 @@ public function isabellaGreeting():void {
 		}
 	}
 	choices("Talk", talkWithIsabella, "Drink", nomOnMommaIzzysTits, "Get Licked", suck, "Fight 4 Rape", fightIsabella, "Offer Oral", volunteerToSlurpCowCunt,
-		"", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		"", null, "", null, "", null, "", null, "Leave", explorer.done);
 	//outputText("ISABELLA HAS BROKEN.  PLEASE TELL FENOXO.", true);
 }
 
@@ -251,7 +251,7 @@ public function leaveAngryIzzy():void {
 	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	outputText("You shrug and make it quite clear you're leaving.  Crazy cow.  She shouts, \"<i>And stay avay, demon!  Izabella has no need of your foul tricks!</i>\"");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[Fight]
 public function unwelcomeFightCowGal():void {
@@ -307,7 +307,7 @@ public function tryToTalkDownAngryCow():void {
 		outputText("You sit down in the dirt and impart your tale, explaining how you came here as a 'champion', chosen by your village.  You go on to speak of your encounters and how strange everything is here, and Isabella nods quite knowingly as you go on and on.  Now that you've begun to tell your tale, the words fall out of your mouth, one after another.  Like an unbroken chain, they spool out of your maw until nearly an hour later, you finally run out of things to say.  You rub your jaw, your throat a little sore from the diatribe, and look on to Isabella to see how she reacts.\n\n");
 		outputText("The busty cow-girl has moisture glimmering in the corners of her big brown eyes, and she nods emphatically to you as she vocalizes her feelings, \"<i>I, too, know how you feel, Champion [name].  Mein own story is similar, though mein fate vas not thrust upon me so.  Perhaps I vill tell you sometime, but for now, ve should part.  You are velcome to return in ze future.</i>\"\n\n");
 		outputText("You smile to yourself, glad to have made a friend.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		isabellaFollowerScene.isabellaAffection(10); //yay
 		flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS]++;
 	}
@@ -464,7 +464,7 @@ public function nomOnMommaIzzysTits():void {
 	//(Chance of thickening body to 75, chance of softening body if PC has a vag)
 	if(rand(2) == 0) outputText(player.modThickness(75,4));
 	if(rand(2) == 0 && player.hasVagina()) outputText(player.modTone(0,4));
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[GET ORAL'ED AS A SMALL MALE]
@@ -606,7 +606,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		isabellaFollowerScene.isabellaAffection(7); //disappointed, but anyway..
 	}
 	player.sexReward("saliva", "Dick");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[Give Isy Oral]
@@ -666,21 +666,21 @@ public function volunteerToSlurpCowCunt():void {
 			outputText("before offering something else.  \"<i>Perhaps you could undress?  I ");
 			if(isabellaAccent()) outputText("vould like to return ze favor.</i>\"");
 			else outputText("would like to return the favor.</i>\"");
-			doYesNo(izzyGivesSmallWangsFreeOral,camp.returnToCampUseOneHour);
+			doYesNo(izzyGivesSmallWangsFreeOral,explorer.done);
 			return;
 		}
 	}
 	isabellaFollowerScene.isabellaAffection(15); //thankful!
 	if(!isabellaFollower() || !player.hasVagina() || player.biggestTitSize() < 1) {
 		sceneHunter.print("Check failed: Isabella follower, vagina, tits.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else {
 		//(Change the ending of the \"Service Her\" option on an affectionate Isabella to the following; PC must NOT have a dick that suits her and MUST have a vagina)
 		if(!isabellaAccent()) outputText("Seeing the ardent desire your sexual service has so visibly inspired in your body - in your slick, ready cunt and erect nipples - the cow-girl smiles slightly, and asks, \"<i>Perhaps you would like me to return the favor?  It seems only fair...</i>\"");
 		else outputText("Seeing the ardent desire your sexual service has so visibly inspired in your body - in your slick, ready cunt and erect nipples - the cow-girl smiles slightly, and asks, \"<i>Perhaps you vould like me to return ze favor?  It seems only fair...</i>\"");
 		//[Leave] [Get Cowlicked]
-		simpleChoices("Get Licked", isabellaFollowerScene.receiveAllTheCowTOngues, "Leave", camp.returnToCampUseOneHour, "", null, "", null, "", null);
+		simpleChoices("Get Licked", isabellaFollowerScene.receiveAllTheCowTOngues, "Leave", explorer.done, "", null, "", null, "", null);
 	}
 }
 
@@ -1361,7 +1361,7 @@ public function victoryAgainstIzzzzzySixtyNine(x:int):void {
 	isabellaFollowerScene.isabellaAffection(15); //okay, redeemed)
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
     if (CoC.instance.inCombat) cleanupAfterCombat();
-    else doNext(camp.returnToCampUseOneHour);
+    else endEncounter();
 }
 
 //['Too Big' Victory Titfucking Funtimes With Milk]
@@ -1599,7 +1599,7 @@ public function talkWithIsabella():void {
         isabellaFollowerScene.isabellaAffection(5); //smaller later
     }
 	flags[kFLAGS.ISABELLA_TALKS]++;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 	}
 }

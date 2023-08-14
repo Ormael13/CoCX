@@ -1,7 +1,6 @@
 package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -172,14 +171,14 @@ private function greetHelAsFuckbuddies():void {
 //PARTING FUCKBUDDIES (edited)
 private function postHelFuckBuddyFollowup():void {
 	if(followerHel() || flags[kFLAGS.HEL_FUCKBUDDY] == 0) {
-		camp.returnToCampUseOneHour();
+		explorer.done();
 		return;
 	}
 	clearOutput();
 	outputText("You wake up an hour or so later, still snuggled up to Hel, entwined in a post-coitus repose.  You spend a few moments basking in the warmth of her presence, but you know you have duties to attend to.  You give her a peck on the cheek, waking her, and she's quick to escalate your gesture into a long, tongue-entwining kiss.\n\n");
 
 	outputText("The two of you redress, teasing and flirting all the while – you give her ample ass a little smack, and she coyly brushes your thighs with her tail – but soon you must part.  Giving Hel another deep kiss, you make your way back to camp as she saunters off into the heart of the plains.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -380,7 +379,7 @@ if (CoC.instance.inCombat) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she 
 	helFollower.helAffection(1);
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 
 private function afterSex():void {
@@ -897,7 +896,7 @@ private function leaveMinotaurHelThreesome():void {
 	outputText("You shake your head with a deprecating smile, and turn to leave her to her pleasures.");
 	if (!recalling) {
 		flags[kFLAGS.HEL_AFFECTION] = 0;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	} else doNext(recallWakeUp);
 }
 
@@ -978,7 +977,7 @@ private function bugOutAfterHelMinoThreesome():void {
 	outputText("On second thought, you'd rather keep it simple for now, even if it means battling back her future advances with force of arms instead of words.  You kiss her once more and give her breasts a squeeze for the road, then wordlessly get up and take your leave.\n\n");
 	//(reset Helgate to 0)
 	flags[kFLAGS.HEL_AFFECTION] = 0;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[Berserker Mode]
@@ -1097,7 +1096,7 @@ private function leaveHelAfterMinoThreeSomeChat():void {
 
 	outputText("You tell her to count on it, and make your way back to camp.");
 	dynStats("lus", 2, "scale", false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //===================
 //THREESOMES AHOY!
@@ -1199,7 +1198,7 @@ private function salamanderXIsabellaDiplomacy2():void {
 	isabellaFollowerScene.isabellaAffection(5);
 	helFollower.helAffection(5);
 	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Watch (edited)
@@ -1224,7 +1223,7 @@ private function watchIsabellaAndHelFight():void {
 	outputText("\"<i>Count on it, naughty girl!</i>\" Isabella shouts before the two of them break apart and disappear into the brush to elude the hunting party.");
 
 	//(Return PC to camp, advance time 1 hour. 10% chance of Intro Scene playing whenever Isabella or Hel would normally be encountered until PC chooses Leave or Diplomacy in the future)
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Leave (edited)
@@ -1234,7 +1233,7 @@ private function skipTownOnIsabellaAndHelsFight():void {
 	outputText("Well, you're sure as hell not going to get involved in this – better to let them duke it out between themselves rather than risk your relationship with either girl.  You head on back to camp, not terribly surprised to hear sharp moos, grunts, and cries for some time in the distance.\n\n");
 	//(Return PC to camp, advance time 1 hour. Intro scene will not play again.)
 	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = -1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -1337,7 +1336,7 @@ private function leaveIsabellaSallyBehind():void {
 	clearOutput();
 	outputText("You decline the cow-girl's offer, but tell the redheads to have fun without you.  Though a bit disappointed, they both wave as you make your way back to camp.");
 	if(model.time.hours < 6) doNext(playerMenu);
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 
 //[Drink]
@@ -1397,7 +1396,7 @@ private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	if(player.hasBalls()) outputText(" and balls bluer than the lake");
 	outputText(".");
 	if(model.time.hours < 6) doNext(playerMenu);
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 
 //DICK (edited)
@@ -1527,6 +1526,7 @@ private function izzySallyThreeSomeFollowup():void {
 
 	outputText("\"<i>Yeah.  Resting is... resting is good,</i>\" Hel says, trying and failing to suppress a yawn of her own.  Smiling, you wrap your arms around your two beautiful, busty redheads and let sleep overcome you.");
 	//(Either return PC to camp or advance to the next day, if in plains or camp, respectively)
+	explorer.stopExploring();
 	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseFourHours);
 }
@@ -1572,6 +1572,7 @@ private function izzySallyThreeSomeVagoozlaz():void {
 	//Bump up follower tracking affection too
 	isabellaFollowerScene.isabellaAffection(4);
 	helFollower.helAffection(5);
+	explorer.stopExploring();
 	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseFourHours);
 }
@@ -1700,6 +1701,7 @@ private function foxyFluffOutro():void {
 	outputText("You awake to find yourself tucked into the bed, your clothes folded neatly next to you.  It looks like someone cleaned you up and tucked you in after your little orgy.  When you hear a loud snore beside you, you don't even need to guess who it was that took care of you.  You pull up the covers, and of course find Helia curled up beside you, her warm tail acting like a pillow for the two of you.  You smile, give her a long kiss, and collect your things.  You leave the salamander to sleep it off, and head back to camp.");
 	//Bump up follower tracking affection too
 	helFollower.helAffection(5);
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -1772,9 +1774,10 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 
 	public function helSexualAmbushCondition():Boolean {
 		return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
-			   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
-			   && player.gender > 0
-			   && !followerHel();
+				&& flags[kFLAGS.HEL_RAPED_TODAY] == 0
+				&& player.gender > 0
+				&& !followerHel()
+				&& !player.hasStatusEffect(StatusEffects.HeliaOff);
 	}
 //Hel Sexual Ambush
 //(Proc's once per day when [Exploring] anywhere)
@@ -1797,7 +1800,7 @@ private function pussyOutOfHelSexAmbush():void {
 	outputText("\n\n\"<i>No sex for you,</i>\" you answer.");
 	outputText("\n\n\"<i>I.  But.  What.  You said.  We.  But.... WELL FUCK YOU ANYWAY.</i>\"");
 	outputText("\n\nYou shrug and head back to camp as Hel, half-mad with lust, starts masturbating, glaring at your back as you leave.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 	helFollower.helAffection(-20);
 }
 	}

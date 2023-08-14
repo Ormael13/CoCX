@@ -479,6 +479,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.Mage)) temp += 15;
 			if (hasPerk(PerkLib.GrandMage)) temp += 30;
 			if (hasPerk(PerkLib.Archmage)) temp += 45;
+			if (hasPerk(PerkLib.ArchmageEx)) temp += 135;
 			if (hasPerk(PerkLib.GrandArchmage)) temp += 60;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) temp += 75;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) temp += 90;
@@ -803,6 +804,7 @@ import flash.utils.getQualifiedClassName;
 				temp += Math.round(this.wis * (3 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.Archmage) && inte >= 100) temp += 180;
+			if (hasPerk(PerkLib.ArchmageEx) && inte >= 100) temp += 600;
 			if (hasPerk(PerkLib.Channeling) && inte >= 60) temp += 90;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) temp += 225;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) temp += 270;
@@ -2363,6 +2365,7 @@ import flash.utils.getQualifiedClassName;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in six hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
+			SceneLib.explorationEngine.stopExploring();
 			EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
 		}
 
@@ -2620,10 +2623,10 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage) || hasPerk(PerkLib.MonsterRegeneration)
-			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
-			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel)
-			|| hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
+			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor)
+			|| hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)
+			|| hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
@@ -2631,13 +2634,14 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.IceQueenGown) && player.isRace(Races.YUKIONNA)) healingPercent += 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && !isNightTime()) healingPercent -= 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && isNightTime()) healingPercent += 5;
-				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
-				if (perkv1(IMutationsLib.LizanMarrowIM) >= 1 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
-				if (perkv1(IMutationsLib.LizanMarrowIM) >= 2 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
-				if (perkv1(IMutationsLib.LizanMarrowIM) >= 3 && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
+				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1.5;
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 1 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 0.5;
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 2 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1;
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 3 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
 					healingPercent += 1.5;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
+				if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 0.5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
@@ -2656,7 +2660,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.Ferocity) && this.HP < 1) healingPercent -= 1;
 				if (hasPerk(PerkLib.EnemyPlantType)) healingPercent += 1;
-				if (hasPerk(PerkLib.MonsterRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
+				if (hasPerk(PerkLib.MonsterRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				if (hasPerk(PerkLib.Diehard) && !hasPerk(PerkLib.EpicDiehard) && this.HP < 1) healingPercent -= 1;
 				if (perkv1(IMutationsLib.LizanMarrowIM) >= 3 && this.HP < 1) healingPercent -= 1;
@@ -2730,7 +2734,9 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
+				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
 				soulforceRecovery *= soulforceRecoveryMulti;
+				if (hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) soulforceRecovery = 0;
 				addSoulforce(soulforceRecovery);
 			}
 			if (hasPerk(PerkLib.JobSorcerer) && this.mana < maxOverMana()) {
@@ -2760,6 +2766,7 @@ import flash.utils.getQualifiedClassName;
 					else manaRecovery += Math.round(maxMana() * this.inte * 0.001);
 				}
 				if (hasPerk(PerkLib.GreySageWisdom)) manaRecovery += Math.round(maxMana() * 0.005);
+				if (hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) manaRecovery = 0;
 				addMana(manaRecovery);
 			}
 
@@ -3451,7 +3458,7 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.RegenInhibitor);
 				}
 			}
-			//Regen Inhibitor
+			//Regen Inhibitor Hydra
 			if (hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
 				//Countdown to heal
 				addStatusValue(StatusEffects.HydraRegenerationDisabled,1,-1);
@@ -3460,6 +3467,13 @@ import flash.utils.getQualifiedClassName;
 					if (this is Hydra) outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
 					removeStatusEffect(StatusEffects.HydraRegenerationDisabled);
 				}
+			}
+			//Recovery Inhibitor (Petrify)
+			if (hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
+				//Countdown to kickstart recovery anew
+				addStatusValue(StatusEffects.RegenInhibitorPetrify,1,-1);
+				//Recovery kickstarted anew
+				if (statusEffectv1(StatusEffects.RegenInhibitorPetrify) <= 0) removeStatusEffect(StatusEffects.RegenInhibitorPetrify);
 			}
 			//Ice DoT
 			if (hasStatusEffect(StatusEffects.FrostburnDoT)) {

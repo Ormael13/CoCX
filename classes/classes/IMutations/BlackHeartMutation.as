@@ -61,7 +61,7 @@ public class BlackHeartMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
                     .requirePerk(PerkLib.DarkCharm).requireCor(100)
-                    .requireAnyRace(Races.DEMON, Races.IMP)
+                    .requireAnyRace(Races.DEMON, Races.IMP);
                 }
                 else{
                     var pLvl:int = pTier * 30;

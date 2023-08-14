@@ -125,7 +125,7 @@ public function WitchesSabbath():void {
 			outputText("She is gently escorted to the common by the leader for a rest while you get to wipe off the remaining strand of jizz from your barbed crown on the altar.\n\n");
 			outputText("You take time to enjoy a short chat with your fiery sisters before waving goodbye and heading back to camp. There will be more rituals like these at a later time, but for now you got work to do.");
 			if (flags[kFLAGS.WITCHES_SABBATH] == 4) flags[kFLAGS.WITCHES_SABBATH]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		else {
 			outputText("As you explore the crag you run into a hooded figure with a cape walking silently toward you, looks to be another hellcat witch. You stride toward her to say hello. She greets you as you get in range.\n\n");
@@ -157,12 +157,12 @@ public function WitchesSabbath():void {
 		outputText("As you explore the crag you stumble upon a small volcanic cave. Inside, you eavesdrop on a circle of hellcats chanting some dark ritual. Seeing as the last time you met one of those girls you got yourself set on fire, you keep a fairly good distance to not get spotted. The fiery catgirls recite some form of incantation, but past some point you fail to understand what is truly going on amidst the sounds of orgasm from the assembly. ");
 		outputText("Eventually the ritual ends and they leave the cave heading toward your direction. Wise enough not to take on a whole bunch of them, you run for it before they spot you. Whatever is going here, you plan to find out eventually.");
 		flags[kFLAGS.WITCHES_SABBATH]++;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 public function WitchesSabbathSecondVisitRun():void {
 	outputText("\n\nWhatever they are doing is likely corrupt in nature and whoever is on the altar will clearly be used in the ritual. You don’t plan on being the next one on that altar so you run away from the feline spellcaster before she gets the time to cast a curse or something of the like. You keep running until you finally reach the safety of your camp.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function WitchesSabbathSecondVisitJoin():void {
 	outputText("\n\nWhy not? You happen to have a keen interest in everything magical. There's no way you would miss out on an opportunity to study those feline witches' magical practices up close. The Hellcats let you walk closer to the circle so you can fully see what this is about. The interruption now over, the hellcats resume their unholy chanting and, try as you may, you fail to fully fellow them. Though you do manage to learn a few ");
@@ -176,11 +176,11 @@ public function WitchesSabbathSecondVisitJoin():void {
 	outputText("The fire finally recedes slightly as her skin seems to smoke, turning about the same color as ash. The ceremony ends as the woman is properly covered with a drape by the leader and escorted to the side.\n\n");
 	outputText("You decide not to prolong your stay any further then this for your own good and safety as the hellcats are busy attending the newly converted woman.");
 	flags[kFLAGS.WITCHES_SABBATH]++;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function WitchesSabbathThirdVisitNo():void {
 	outputText("No way in hell you’re going to be anywhere close to the feline witches while they do their unholy ritual. You get out of here before they even notice you were spying on them.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function WitchesSabbathThirdVisitYes():void {
 	outputText("Curiosity triumphs against your better judgement. You need to know what they are doing, and perhaps, once they're done, you will even destroy their ritual site to prevent them from ever using it again.\n\n");
@@ -257,7 +257,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	else player.goIntoHeat(false);
 	flags[kFLAGS.WITCHES_SABBATH]++;
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function WitchesSabbathFourthVisitYeahSure():void {
 	outputText("Whatever she is doing you tell her to go on. She’s only trying to help after all. ");
@@ -313,7 +313,7 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 		flags[kFLAGS.WITCHES_SABBATH] -= 2;
 		cleanupAfterCombat();
 	}
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 }
 public function WitchesSabbathFourthVisitNoWay():void {
 	outputText("Who said she could perform a spell on you without your permission? You shove her off, interrupting her casting. She goes from friendly to aggressive in the blink of an eye.\n\n");

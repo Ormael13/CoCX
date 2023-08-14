@@ -1,4 +1,4 @@
-﻿package classes 
+﻿package classes
 {
 	/**
 	 * ...
@@ -8,7 +8,8 @@
 	{
 
 
-		public static var debugBuild:Boolean = true;
+		public static var debugBuild:Boolean = CONFIG::debug;
+		public static var mobileBuild:Boolean = CONFIG::AIR;
 		
 		// Horrible static abuse FTW
 		public static var haltOnErrors:Boolean = false;

@@ -4,6 +4,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Plains.BazaarGatekeeper;
 import classes.Scenes.Places.Bazaar.*;
 import classes.Scenes.SceneLib;
+
 import coc.view.ButtonDataList;
 
 public class Bazaar extends BaseContent {
@@ -31,20 +32,14 @@ public function findBazaar():void {
 	if(flags[kFLAGS.BAZAAR_ENCOUNTERED] == 0) {
 		flags[kFLAGS.BAZAAR_ENCOUNTERED]++;
 		outputText("Warm, earthy breezes drift by as you explore the wind-blown grasses of the plains.  Though it seems you can see for miles, with the grasses subtly shifting between a few feet and over a dozen feet tall, it's impossible to tell what you'll stumble into next.  You trust your ears and your nose as much as your oft-blocked vision at this point, and before long you catch a whiff of blackened meat and aromatic spices.  There's some kind of camp not far away!\n\n");
-
 		outputText("You raise your [weapon] and cautiously creep through the towering vegetation, trying not to give your position away until you've ascertained just what type of people inhabit this camp.  Bright light flickers through the grass in front of you, and you part it to peek from between the blowing stalks.  There's a ring of brightly colored wagons set up here, with a tall, picketed fence erected around them.  Smoke curls up from the camp's center, twisting in the air like a viper in the grass.  Each of the wagons appears to be expanded, deployed into a small, self-contained structure.  Clearly this is some kind of traveling caravan or bazaar.\n\n");
-
 		outputText("There's only one gap in the fence – a narrow gate watched by a ten-foot tall man with red skin and a pale, almost sky-blue turban.  He has a pair of scimitars that hang from a simple, leather belt.  The crimson-skinned man's clothing is a simple tunic and loose-fitting pants, but neither can conceal his obviously well-muscled frame.  He looks alert and attentive – a good sign since demons would have little need to post guards.");
 	}
-	else {
-		outputText("Once again you smell a campfire through the tall grass, and as you close the distance you hear the familiar sounds of the traveling bazaar.  You peek through the weeds and behold the caravan's gate-keeper - a red-skinned, muscular giant of a man.");
-	}
+	else outputText("Once again you smell a campfire through the tall grass, and as you close the distance you hear the familiar sounds of the traveling bazaar.  You peek through the weeds and behold the caravan's gate-keeper - a red-skinned, muscular giant of a man.");
 	outputText("\n\nDo you approach?");
 	//[YES] [NOOOO]
-	doYesNo(approachBazaarGuard,camp.returnToCampUseOneHour);
+	doYesNo(approachBazaarGuard,explorer.done);
 }
-
-
 
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
 private function approachBazaarGuard():void {
@@ -53,11 +48,14 @@ private function approachBazaarGuard():void {
 	if(player.cor < 33 - player.corruptionTolerance) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.");
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.");
 	outputText("</i>\"");
-	if(player.cor < 33 - player.corruptionTolerance) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
-	else simpleChoices("Enter",enterTheBazaar, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
+	menu();
+	if (player.cor < 33 - player.corruptionTolerance) addButton(1, "FIGHT!",initiateFightGuard);
+	else addButton(1, "Enter", enterTheBazaar);
+	addButton(3, "Leave", explorer.done);
 }
 
 public function enterTheBazaar():void {
+	explorer.stopExploring();
 	if (model.time.hours == 19 || model.time.hours == 20) {
 		flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
 		if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && (player.gender == 1 || (player.gender == 3 && player.mf("m", "f") == "m")) || flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
@@ -76,6 +74,7 @@ public function initiateFightGuard():void {
 }
 
 public function winAgainstGuard():void {
+	explorer.stopExploring();
 	clearOutput();
 	outputText("With the gatekeeper defeated, you walk right past the unconscious guard and enter...");
 	cleanupAfterCombat(enterTheBazaarAndMenu);

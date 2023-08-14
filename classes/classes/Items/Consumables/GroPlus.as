@@ -5,6 +5,7 @@ package classes.Items.Consumables {
 import classes.BaseContent;
 import classes.CoC;
 import classes.EngineCore;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -13,6 +14,7 @@ public final class GroPlus extends Consumable {
 
     public function GroPlus() {
         super("GroPlus", "GroPlus", "a needle filled with Gro+", 50, "This is a small needle with a reservoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.");
+        refineableInto([], [[1, AlchemyLib.AE_GROW]]);
     }
 
     override public function useItem():Boolean {

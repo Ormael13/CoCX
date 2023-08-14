@@ -21,6 +21,8 @@ import classes.Scenes.Camp.Garden;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
 import classes.Scenes.NPCs.MagnoliaFollower;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+
 import coc.view.ButtonDataList;
 import coc.view.charview.DragButton;
 
@@ -81,18 +83,31 @@ use namespace CoC;
 
 		public function pearlStorageDirectGet():Array { return pearlStorage; }
 
+		public function pearlStorageSlice():/*ItemSlotClass*/Array {
+			return pearlStorage.slice(0, pearlStorageSize());
+		}
+		
 		public function gearStorageDirectGet():Array { return gearStorage; }
 
 //		public function currentCallNext():Function { return callNext; }
 
 		public function itemGoNext():void { if (callNext != null) doNext(callNext); }
 
+		public var returnFn:Function = null;
+		public function showInventoryMenu(returnFn:Function = null):void {
+			this.returnFn = returnFn;
+			inventoryMenu();
+		}
 		public function inventoryMenu(page:int = 1):void {
 			DragButton.setup(mainView, mainView.toolTipView);
 			var x:int;
 			//var foundItem:Boolean = false;
             if (CoC.instance.inCombat) {
-                callNext = inventoryCombatHandler; //Player will return to combat after item use
+				//Player will return to combat after item use
+				callNext = function():void {
+					returnFn = null;
+					inventoryCombatHandler();
+				}
 			}
 			else {
 				spriteSelect(null);
@@ -224,10 +239,17 @@ use namespace CoC;
 				SceneLib.combat.enemyAIImpl();
 				return;
 			}
-			if (CoC.instance.inCombat)
-                addButton(14, "Back", SceneLib.combat.combatMenu, false); //Player returns to the combat menu on cancel
-			else addButton(14, "Back", playerMenu);
-//Gone			menuLoc = 1;
+			addButton(14, "Back", returnFromInventory);
+		}
+		private function returnFromInventory():void {
+			var returnFn:Function = this.returnFn;
+			if (returnFn != null) {
+				this.returnFn = null;
+				returnFn();
+				return;
+			}
+			if (CoC.instance.inCombat) SceneLib.combat.combatMenu(false);
+			playerMenu();
 		}
 		
 		public function showItemTooltipLinkHandler(itemid:String):void {
@@ -389,7 +411,9 @@ use namespace CoC;
 				endExclusive:int,
 				backFn:Function,
 				storageName:String = "Storage",
-				itemTypeFilter:Function = null
+				itemTypeFilter:Function = null,
+				canTake:Boolean = true,
+				canStore:Boolean = true
 		):void {
 			DragButton.setup(mainView, mainView.toolTipView);
 			function fromStorage(i:int):void {
@@ -559,21 +583,22 @@ use namespace CoC;
 							.forItemSlot(playerSlot)
 							.drag(playerSlot, itemTypeFilter)
 							.disableIf(itemTypeFilter != null && !itemTypeFilter(playerSlot.itype))
-							.disableIf(playerSlot.isEmpty());
+							.disableIf(playerSlot.isEmpty())
+							.disableIf(!canStore);
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
 				if (playerPageMax > 0) {
 					bd.add("Prev", function ():void {
 						playerPage--;
 						show();
-					}).hint("Prev inventory page").disableIf(playerPage == 0)
+					}).hint("Prev inventory page").disableIf(playerPage == 0).icon("Left")
 					bd.add("");
 					bd.add("");
 					bd.add("");
 					bd.add("Next", function ():void {
 						playerPage++;
 						show();
-					}).hint("Next inventory page").disableIf(playerPage == playerPageMax-1)
+					}).hint("Next inventory page").disableIf(playerPage == playerPageMax-1).icon("Right")
 				}
 				
 				// Spacer
@@ -586,31 +611,32 @@ use namespace CoC;
 					var storageSlot:ItemSlotClass = storage[i];
 					bd.add("Take", curry(fromStorage, i))
 							.forItemSlot(storageSlot).drag(storageSlot, itemTypeFilter)
-							.disableIf(storageSlot.isEmpty());
+							.disableIf(storageSlot.isEmpty())
+							.disableIf(!canTake);
 				}
 				while (bd.length%5 > 0) bd.add(""); // Padding
 				if (storagePageMax > 0) {
 					bd.add("Prev", function ():void {
 						storagePage--;
 						show();
-					}).hint("Prev storage page").disableIf(storagePage == 0)
+					}).hint("Prev storage page").disableIf(storagePage == 0).icon("Left")
 					bd.add("");
 					bd.add("");
 					bd.add("");
 					bd.add("Next", function ():void {
 						storagePage++;
 						show();
-					}).hint("Next storage page").disableIf(storagePage == storagePageMax-1)
+					}).hint("Next storage page").disableIf(storagePage == storagePageMax-1).icon("Right")
 				}
 				
 				bigButtonGrid(bd);
-				addButton(0, "Store All", storeAll).hint("Move all items from your inventory to the storage");
-				addButton(1, "Take All", takeAll).hint("Take all items from the storage to your inventory");
-				addButton(4, "Sort storage", sortStorage).hint("Sort and compact the storage");
-				addButton(5, "Drop", drop).hint("Move from your inventory items of types that are already in storage");
-				addButton(6, "Restock", restock).hint("Refill items in your inventory from the storage to max. stack size");
+				if (canStore) addButton(0, "Store All", storeAll).hint("Move all items from your inventory to the storage");
+				if (canTake) addButton(1, "Take All", takeAll).hint("Take all items from the storage to your inventory");
+				if (canStore) addButton(4, "Sort storage", sortStorage).hint("Sort and compact the storage");
+				if (canStore) addButton(5, "Drop", drop).hint("Move from your inventory items of types that are already in storage");
+				if (canTake) addButton(6, "Restock", restock).hint("Refill items in your inventory from the storage to max. stack size");
 				
-				addButton(14, "Back", backFn);
+				addButton(14, "Back", backFn).icon("Back");
 			}
 			
 			show();
@@ -709,7 +735,36 @@ use namespace CoC;
 			}
 			addButton(14, "Back", playerMenu);
 		}
-		
+		/**
+		 * Tries to add 1 item to player. Does not produce any output.
+		 * @param itype
+		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
+		 */
+		public function tryAddItemToPlayer(itype:ItemType):int {
+			var i:int = player.roomInExistingStack(itype);
+			if (i >= 0) {
+				player.itemSlots[i].quantity++;
+				return 1;
+			}
+			i = player.emptySlot();
+			if (i >= 0) {
+				player.itemSlots[i].setItemAndQty(itype, 1);
+				return 2;
+			}
+			return 0;
+		}
+		/**
+		 * Tries to add `qty` items to player. Does not produce any output. Halts when out of inventory space
+		 * @return Number of items added
+		 */
+		public function tryAddMultipleItemsToPlayer(itype:ItemType, qty:int):int {
+			var n:int = 0;
+			while (qty-->0) {
+				if (tryAddItemToPlayer(itype) == 0) break;
+				n++;
+			}
+			return n
+		}
 		/**
 		 * Tries to transfer 1 item from [source], reducing its quantity, to player.
 		 * Does not produce any output.
@@ -717,16 +772,39 @@ use namespace CoC;
 		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
 		 */
 		public function transferOneItemToPlayer(source:ItemSlotClass):int {
-			var i:int = player.roomInExistingStack(source.itype);
+			var i:int = tryAddItemToPlayer(source.itype);
 			if (i >= 0) {
-				player.itemSlots[i].quantity++;
 				source.removeOneItem()
+			}
+			return i;
+		}
+		public function tryAddOneItemToPearl(itype:ItemType):int {
+			return tryAddOneItemToStorage(itype, pearlStorage, 0, pearlStorageSize(), "S.P.Pearl");
+		}
+		/**
+		 * Tries to add 1 item to storage.
+		 * Does not produce any output.
+		 * @param source
+		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
+		 */
+		public function tryAddOneItemToStorage(itype:ItemType, storage:/*ItemSlotClass*/Array, startInclusive:int, endExclusive:int, storageName:String):int {
+			var empty:int = -1;
+			var existing:int = -1;
+			for (var i:int = startInclusive; i < endExclusive; i++) {
+				var slot:ItemSlotClass = storage[i];
+				//if (!slot.unlocked) continue;
+				if (empty < 0 && slot.quantity == 0) empty = i;
+				if (existing < 0 && slot.itype == itype && slot.hasRoom()) {
+					existing = i;
+					break;
+				}
+			}
+			if (existing >= 0) {
+				storage[existing].quantity++;
 				return 1;
 			}
-			i = player.emptySlot();
-			if (i >= 0) {
-				player.itemSlots[i].setItemAndQty(source.itype, 1);
-				source.removeOneItem();
+			if (empty >= 0) {
+				storage[empty].setItemAndQty(itype, 1);
 				return 2;
 			}
 			return 0;
@@ -738,31 +816,17 @@ use namespace CoC;
 		 * @return 0: not transfered, 1: added to existing stack, 2: added to empty stack
 		 */
 		public function transferOneItemToStorage(source:ItemSlotClass, storage:/*ItemSlotClass*/Array, startInclusive:int, endExclusive:int, storageName:String):int {
-			var empty:int = -1;
-			var existing:int = -1;
-			for (var i:int = startInclusive; i < endExclusive; i++) {
-				var slot:ItemSlotClass = storage[i];
-				//if (!slot.unlocked) continue;
-				if (empty < 0 && slot.quantity == 0) empty = i;
-				if (existing < 0 && slot.itype == source.itype && slot.hasRoom()) {
-					existing = i;
-					break;
-				}
-			}
-			if (existing >= 0) {
-				storage[existing].quantity++;
+			var i:int = tryAddOneItemToStorage(source.itype, storage, startInclusive, endExclusive, storageName);
+			if (i >= 0) {
 				source.removeOneItem();
-				return 1;
 			}
-			if (empty >= 0) {
-				storage[empty].setItemAndQty(source.itype, 1);
-				source.removeOneItem();
-				return 2;
-			}
-			return 0;
+			return i;
 		}
 		
-		public function takeItem(itype:ItemType, nextAction:Function, overrideAbandon:Function = null, source:ItemSlotClass = null):void {
+		public function takeItem(itype:ItemType,
+								 nextAction:Function,
+								 overrideAbandon:Function = null,
+								 source:ItemSlotClass = null):void {
 			if (itype == null) {
 				CoC_Settings.error("takeItem(null)");
 				return;
@@ -795,11 +859,9 @@ use namespace CoC;
 				}
 			}
 			//Check for room in Guild quest bag and return the itemcount for it.
-			if (InCollection(itype, useables.IMPSKLL, useables.FIMPSKL, useables.MINOHOR, useables.DEMSKLL, useables.SEVTENT) && nextAction != SceneLib.adventureGuild.questItemsBag) {
-				temp = SceneLib.adventureGuild.roomInExistingStack(itype);
-				if (temp >= 0) {
-					SceneLib.adventureGuild.placeItemInStack(itype);
-					outputText("You place " + itype.longName + " in your quest materials pouch, giving you "+ (temp+1) +" of them.");
+			if (nextAction != SceneLib.adventureGuild.questItemsBag) {
+				if (AdventurerGuild.lootBag.addItem(itype, 1) == 1) {
+					outputText("You place " + itype.longName + " in your quest materials pouch, giving you " + AdventurerGuild.lootBag.itemCount(itype) + " of them.");
 					itemGoNext();
 					return;
 				}

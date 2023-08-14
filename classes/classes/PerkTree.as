@@ -9,7 +9,7 @@ public class PerkTree extends BaseContent {
 	/*
 	 perk.id => PerkTreeEntry
 	 */
-	private var pdata:Dictionary = new Dictionary();
+	private static var pdata:Dictionary = new Dictionary();
 	
 	public function PerkTree() {
 		var library:Dictionary = PerkType.getPerkLibrary();
@@ -130,12 +130,80 @@ public class PerkTree extends BaseContent {
 			}
 			trace("[ERROR]   (total "+queue.length+")");
 		}
+		queue = [];
 		perksByDistance.sortOn(["distance","id"], Array.NUMERIC);
+		/*
 		if (CoC_Settings.debugBuild) {
 			for each (perk in perksByDistance) {
 				trace("" + perk.distance + " " + perk.id);
 			}
 		}
+		 */
+		// 3. Group perks by roots (jobs)
+		var rootLists:/*PerkType*/Array = [
+				PerkLib.PRESTIGE_JOBS,
+				PerkLib.ADVANCED_JOBS,
+				PerkLib.BASIC_JOBS
+		];
+		var job:PerkType;
+		for (i = 0; i < rootLists.length; i++) {
+			var jobTier:int = rootLists.length - i;
+			for each (job in rootLists[i]) {
+				if (listUnlocks(job).length == 0) {
+					trace("WARNING: Perk "+job.id+" listed as job but has no unlocks");
+					continue;
+				}
+				var unlocks:/*PerkType*/Array = [];
+				queue = listUnlocks(job);
+				while (queue.length > 0) {
+					perk = queue.pop();
+					if (perk is IMutationPerkType) continue;
+					if (PerkLib.isJob(perk)) continue;
+					entry = pdata[perk.id];
+					if (!entry) continue;
+					if (entry.jobTier > i) continue;
+					if (entry.hasJob(job)) continue;
+					
+					entry.addJob(job, jobTier);
+					unlocks.push(perk);
+					pushAll(queue, listUnlocks(perk));
+				}
+				
+				unlocks.sortOn(["distance","id"], Array.NUMERIC);
+				if (CoC_Settings.debugBuild) {
+					trace(job.id+" perks ("+unlocks.length+")");
+					/*
+					for each (perk in unlocks) {
+						trace("    "+perk.distance+" "+perk.id);
+					}
+					 */
+				}
+				rootUnlocks[job.id] = unlocks;
+			}
+		}
+	}
+	
+	/** perk.id -> PerkType[] sorted by distance  */
+	private static var rootUnlocks:Dictionary = new Dictionary();
+	/**
+	 * Return all perks associated with this job:
+	 * - require (directly on indirectly) this job
+	 * - not a job perks themselves
+	 * - do not require higher-tier job
+	 */
+	public static function getJobUnlocks(job:PerkType):/*PerkType*/Array {
+		return rootUnlocks[job.id] || [];
+	}
+	public static function getJobs(perk:PerkType):Array {
+		var entry:PerkTreeEntry = pdata[perk.id];
+		if (!entry) return null;
+		if (entry.jobs && entry.jobs.length > 0) return entry.jobs;
+		return null;
+	}
+	public static function hasJob(perk:PerkType, job:PerkType):Boolean {
+		var entry:PerkTreeEntry = pdata[perk.id];
+		if (!entry) return false;
+		return entry.hasJob(job);
 	}
 	
 	public var perksByDistance:/*PerkType*/Array = [];
@@ -143,17 +211,17 @@ public class PerkTree extends BaseContent {
 	/**
 	 * Returns Array of PerkType
 	 */
-	public function listUnlocks(p:PerkType):Array {
+	public function listUnlocks(p:PerkType):/*PerkType*/Array {
 		if (!pdata[p.id]) return [];
 		return pdata[p.id].unlocks.map(function(entry:PerkTreeEntry,idx:int,array:/*PerkTreeEntry*/Array):PerkType {
 			return entry.perk;
 		});
 	}
-	public static var obtanablePerksCached:/*PerkType*/Array = null;
+	private static var obtanablePerksCached:/*PerkType*/Array = null;
 	/**
 	 * Returns Array of PerkType
 	 */
-	public static function obtainablePerks():Array {
+	public static function obtainablePerks():/*PerkType*/Array {
 		if (obtanablePerksCached) return obtanablePerksCached;
 		var rslt:Array=[];
 		for each(var perk:PerkType in PerkType.getPerkLibrary()) {
@@ -167,9 +235,10 @@ public class PerkTree extends BaseContent {
 	/**
 	 * Returns Array of PerkType
 	 */
-	public static function availablePerks(player:Player):/*PerkType*/Array {
+	public static function availablePerks(player:Player, withMutations:Boolean):/*PerkType*/Array {
 		return obtainablePerks().filter(
 				function (perk:PerkType,idx:int,array:/*PerkType*/Array):Boolean {
+					if (perk is IMutationPerkType && !withMutations) return false;
 					return !player.hasPerk(perk) && perk.available(player);
 				});
 	}
@@ -180,9 +249,19 @@ import classes.PerkType;
 
 class PerkTreeEntry {
 	public var perk:PerkType;
+	public var jobs:Array;
+	public var jobTier:int = 0;
 	public var unlocks:/*PerkTreeEntry*/Array =[];
 
 	public function PerkTreeEntry(perk:PerkType) {
 		this.perk = perk;
+	}
+	public function addJob(job:PerkType, tier:int):void {
+		if (!jobs) jobs = [];
+		jobs.push(job);
+		jobTier = tier;
+	}
+	public function hasJob(job:PerkType):Boolean {
+		return jobs && jobs.indexOf(job) >= 0;
 	}
 }

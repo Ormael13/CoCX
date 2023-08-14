@@ -1,11 +1,8 @@
 package coc.view {
 import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.PerkLib;
 import classes.Player;
-import classes.Scenes.Holidays;
-import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
 import classes.Stats.PrimaryStat;
@@ -15,9 +12,7 @@ import classes.internals.Utils;
 import coc.model.TimeModel;
 
 import flash.events.MouseEvent;
-
 import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 
@@ -59,7 +54,7 @@ public class StatsView extends Block {
 	private var soulforceBar:StatBar;
 	private var hungerBar:StatBar;
 
-	private var allStats:Array;
+	private var allStats:/*StatBar*/Array;
 
 	private var col1:Block;
 	private var col2:Block;
@@ -216,6 +211,11 @@ public class StatsView extends Block {
 
 	
 	override public function set visible(value:Boolean):void {
+		if (visible != value) {
+			for each (var sb:StatBar in allStats) {
+				sb.animate = value && (CoC.instance.flags[kFLAGS.STATBAR_ANIMATIONS] == 0);
+			}
+		}
 		super.visible = value;
 		if (corner) corner.visible = visible;
 	}
@@ -414,21 +414,25 @@ public class StatsView extends Block {
 					var stat:BuffableStat = astat as BuffableStat;
 					if (!stat) return;
 					if (!bar) return;
-					CoC.instance.mainView.toolTipView.header = bar.statName;
 					if (statname == "sens" || statname == "cor" || statname == "minlust") isPositiveStat = false;
 					if (statname == "minlust") {
-						CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
+						var text:String = StatUtils.describeBuffs(stat, false, isPositiveStat);
 						player.listMinLustMultiBuffs();
-						CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(player.minLustXStat, true, isPositiveStat);
+						text += StatUtils.describeBuffs(player.minLustXStat, true, isPositiveStat);
+						CoC.instance.mainView.toolTipView.showForElement(
+								bar,
+								bar.statName,
+								text);
 					}
-					else
-						CoC.instance.mainView.toolTipView.text = StatUtils.describeBuffs(stat, false, isPositiveStat);
-					CoC.instance.mainView.toolTipView.showForElement(bar);
-					break;
+					else {
+						CoC.instance.mainView.toolTipView.showForElement(
+								bar,
+								bar.statName,
+								StatUtils.describeBuffs(stat, false, isPositiveStat));
+					}
 				} else if (astat is PrimaryStat) {
 					var primStat:PrimaryStat = astat as PrimaryStat;
 					if (!primStat) return;
-					CoC.instance.mainView.toolTipView.header = bar.statName;
 					if (statname == "sens" || statname == "cor") isPositiveStat = false;
 					var s:String = "Core: "+primStat.core.value+"/"+primStat.core.max+". ";
 					s += "Training: "+primStat.train.value+"/"+primStat.train.max+". ";
@@ -439,10 +443,9 @@ public class StatsView extends Block {
 								"" + StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat) + "" +
 								"" + StatUtils.describeBuffs(primStat.mult, true, isPositiveStat) + "";
 					}
-					CoC.instance.mainView.toolTipView.text = s;
-					CoC.instance.mainView.toolTipView.showForElement(bar);
-					break;
+					CoC.instance.mainView.toolTipView.showForElement(bar,bar.statName,s);
 				}
+				break;
 			case MouseEvent.ROLL_OUT:
 				CoC.instance.mainView.toolTipView.hide();
 				if (statname == "minlust") {

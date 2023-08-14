@@ -11,14 +11,16 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.Races;
-import classes.Races.BeeRace;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
+import classes.Items.ItemTags;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.Races;
+import classes.Races.BeeRace;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -39,6 +41,13 @@ public class BeeHoney extends Consumable
 					honeyValue,
 					honeyDesc
 			);
+			withTag(ItemTags.U_TF);
+			refineableInto(
+					AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+					AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_BEE),
+					[],
+					BeeRace.BeeHairColors
+			)
         }
 
 		override public function canUse():Boolean {
@@ -54,7 +63,7 @@ public class BeeHoney extends Consumable
             var pure:Boolean = (value == PURE_HONEY_VALUE);
 			var special:Boolean = (value == SPECIAL_HONEY_VALUE);
 			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			var changeLimit:Number = 2;
 			clearOutput();
 			player.slimeFeed();
 			//Chances of boosting the change limit.

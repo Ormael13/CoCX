@@ -76,7 +76,8 @@ public function itemImproveMenuPure():void {
 		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
 		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
 		[armors.CTPALAD, armors.CTHPALA, armors.CTBGUAR],
-		[armors.HLEATHR, null, armors.CGUNSLI]
+		[armors.LTHRPNT, null, armors.CGUNSLI],
+		[armors.DEATHPO, null, armors.DEATHPGA]
 	];
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");

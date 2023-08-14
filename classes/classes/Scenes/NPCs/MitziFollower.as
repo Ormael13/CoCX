@@ -65,11 +65,7 @@ public function MitziCampMainMenu2():void {
 	addButton(1, "Herself", mitziHerself);
 	addButton(2, "Camp", mitziCamp);
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.MITZI_DAUGHTERS] >= 6) {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to join you in adventures outside camp.");
-			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") addButton(5, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to stay in camp.");
-			else addButtonDisabled(5, "Assist me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Mitzi about accompaning you.");
-		}
+		if (flags[kFLAGS.MITZI_DAUGHTERS] >= 6) addButton(5, "Assist me", mitziHenchmanOption);
 		else addButtonDisabled(5, "Assist me", "She doesn't have enough daughters (6+) to accompany you.");
 	}
 	else addButtonDisabled(5, "Assist me", "You need to have at least Basic Leadership to form a team with Mitzi.");
@@ -118,7 +114,7 @@ public function mitziCamp():void {
 		outputText("\"<i>I don't really see cow-girls too often but Isabella seems different somehow… Her milk's pretty tasty too. Maybe she'll let me have some more later.</i>\"\n\n");
 		outputText("She giggles to herself.\n\n");
 	}
-	if (followerHel()) {
+	if (followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 		outputText("\"<i>That rowdy salamander slut may be a bit of an annoyance but I've dealt with worse honestly. Would not recommend trying to entertain a group of Minotaurs. Get really rough and messy… Still hot though.</i>\"\n\n");
 		outputText("She shudders at the thought.\n\n");
 	}
@@ -144,8 +140,35 @@ public function mitziCamp():void {
 }
 
 public function mitziHenchmanOption():void {
-	clearOutput();
+	menu();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi" || flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") addButtonDisabled(0, "Team (1)", "You already have Mitzi accompany you.");
+		else addButton(0, "Team (1)", mitziHenchmanOption2, 1).hint("Ask Mitzi to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") addButton(5, "Team (1)", mitziHenchmanOption2, 21).hint("Ask Mitzi to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Mitzi about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi" || flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") addButtonDisabled(1, "Team (2)", "You already have Mitzi accompany you.");
+			else addButton(1, "Team (2)", mitziHenchmanOption2, 2).hint("Ask Mitzi to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") addButton(6, "Team (2)", mitziHenchmanOption2, 22).hint("Ask Mitzi to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Mitzi about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", MitziCampMainMenu2);
+	
+}
+public function mitziHenchmanOption2(slot:Number = 1):void {
+	clearOutput();
+	if (slot < 21) {
 		outputText("Mitzi grins up at you then puts her fingers to mouth, letting out a loud whistle.n\n");
 		outputText("\"<i>Lildea! Furxia! Roxy! It's showtime!</i>\"\n\n");
 		outputText("Three goblin girls come running over to her. They have short purple hair tied back into ponytails and their soft curves are accentuated by a belt lined with assorted needles strapped across their sizable chests and a pair of black gloves and thigh length stockings. Mitzi changes into the same matter of dress, striking a sexy pose with her three daughters.\n\n");
@@ -162,12 +185,14 @@ public function mitziHenchmanOption():void {
 		libMitzi *= (1 + (0.2 * player.newGamePlusMod()));
 		libMitzi = Math.round(libMitzi);
 		player.createStatusEffect(StatusEffects.CombatFollowerMitzi, strMitzi, intMitzi, libMitzi, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Mitzi";
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Mitzi";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Mitzi";
 	}
 	else {
 		outputText("\"<i>Aw.. just when we were having fun… Ah well, you know where to find us if you need anything!</i>\"\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerMitzi);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(MitziCampMainMenu);
 	cheatTime(1/12);
@@ -189,7 +214,7 @@ public function mitziSexMenu():void {
 		.disableIf(!player.hasStatusEffect(StatusEffects.MitziPregnant), "You need to wait until Mitzi gives a birth.")
 		.disableIf(player.findCock(1, 20, -1, "length") < 0, "You need 20+ inches cock for this.");
 	addButton(4, "Eaten Out", mitziSexEatenOut)
-		.disableIf(!player.hasVagina(), "Req. a cock.");
+		.disableIf(!player.hasVagina(), "Req. a pussy.");
 	addButton(14, "Back", MitziCampMainMenu);
 }
 public function mitziSexBigDickSex():void {

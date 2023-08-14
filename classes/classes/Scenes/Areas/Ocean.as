@@ -4,11 +4,12 @@
  * Currently a Work in Progress.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ocean.*;
 import classes.Scenes.NPCs.CeaniScene;
@@ -23,6 +24,28 @@ use namespace CoC;
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var scyllaScene:ScyllaScene = new ScyllaScene();
 		
+		public const areaLevel:int = 25;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.ocean > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.ocean;
+		}
+		
+		public function discover():void {
+			SceneLib.exploration.counters.ocean = 1;
+			clearOutput();
+			outputText("You journey around the beach, seeking demons to fight");
+			if(player.cor > 60) outputText(" or fuck");
+			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
+			outputText("<b>You have discovered the sea boat!</b>");
+			endEncounter();
+		}
+		
+		
 		public function Ocean() {
 			onGameInit(init);
 		}
@@ -35,6 +58,9 @@ use namespace CoC;
 		private function init():void {
 			_oceanEncounter = Encounters.group("ocean", {
 				name: "fishing",
+				label : "Fishing",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasKeyItem("Fishing Pole") >= 0
 				},
@@ -42,9 +68,14 @@ use namespace CoC;
 			}, {
 				name: "nothing",
 				chance:  0.25,
-				call: findNothing
+				call: findNothing,
+				label:'Walk',
+				kind:'walk'
 			}, {
 				name: "ceani",
+				label : "Ceani",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4
 				},
@@ -52,6 +83,8 @@ use namespace CoC;
 				call: ceaniScene.oceanInteractionsAfterArcheryTraining
 			}, {
 				name: "seaanemone",
+				label : "Sea Anemone",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
@@ -60,6 +93,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "scylla",
+				label : "Scylla",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
@@ -67,6 +102,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "sharkgirl",
+				label : "Shark girl",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
@@ -75,6 +112,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "tigersharkgirl",
+				label : "Tigershark girl",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
@@ -83,6 +122,8 @@ use namespace CoC;
 				}
 			}, {
 				name: "sharkgirlpack",
+				label : "Shark girls pack",
+				kind : 'monster',
 				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
@@ -93,16 +134,20 @@ use namespace CoC;
 		}
 
 		public function exploreOcean():void {
-			clearOutput();
-			flags[kFLAGS.DISCOVERED_OCEAN]++;
-			doNext(camp.returnToCampUseOneHour);
-			oceanEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(oceanEncounter);
+			explorer.setTags("ocean","water");
+			explorer.prompt = "You explore the ocean surface.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.ocean++;
+			}
+			explorer.leave.hint("Leave the ocean");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		public function oceanChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 
@@ -121,14 +166,14 @@ use namespace CoC;
 					dynStats("spe", .5);
 				}
 			}
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter();
 		}
 
 		private function fishing():void {
 			clearOutput();
 			outputText("This is a calm day on the ocean, you managed to hold your boat just a mile or two away from the brewing storm that constantly rage over the area and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole.\n\n");
 			outputText("<b>You got a fish!</b>");
-			inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.FREFISH, explorer.done);
 		}
 	}
 

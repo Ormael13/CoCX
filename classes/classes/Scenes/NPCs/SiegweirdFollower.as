@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -13,7 +13,7 @@ import classes.display.SpriteDb;
 public class SiegweirdFollower extends NPCAwareContent
 	{
 		
-		public function SiegweirdFollower() 
+		public function SiegweirdFollower()
 		{}
 
 public function siegweirdFirstEncounter():void
@@ -42,7 +42,7 @@ public function siegweirdFirstEncounterHelpHim():void
 public function siegweirdFirstEncounterDoNotHelpHim():void
 {
 	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function siegweirdFirstEncounterPostFight():void
@@ -81,10 +81,11 @@ public function siegweirdFirstEncounterPostFightJoinYes():void
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) {
 		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 4;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else {
 		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 4;
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseSixHours);
 	}
 }
@@ -94,9 +95,10 @@ public function siegweirdFirstEncounterPostFightJoinNo():void
 	outputText("It may not be the best to have such a luminous beacon marching in your camp. Not only does his armor cause a ludicrous amount of noise, his powerful aura will surely illuminate your camp for anyone who wants to corrupt the pure.\n\n");
 	outputText("Siegweird nods softly, \"<i>I understand if you do not wish for me to accompany you, I suppose I shall remain here if you need me.</i>\"\n\n");
 	outputText("You nod respectfully before heading back to camp.\n\n");
-	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) doNext(camp.returnToCampUseOneHour);
+	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) endEncounter();
 	else {
 		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 2.5;
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseSixHours);
 	}
 }
@@ -119,6 +121,7 @@ public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 	outputText("<b>You obtained Siegweird's holy symbol!</b>\n\n");
 	player.createKeyItem("Siegweird's holy symbol", 0, 0, 0, 0);
 	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
+	explorer.stopExploring();
 	cleanupAfterCombat(camp.returnToCampUseSixHours);
 }
 public function siegweirdFirstEncounterPostFightAnotherFightLost():void
@@ -143,7 +146,7 @@ public function siegweirdRepeatEncounterPostFight():void
 		outputText("It may not be the best to have such a luminous beacon marching in your camp. Not only does his armor cause a ludicrous amount of noise, his powerful aura will surely illuminate your camp for anyone who wants to corrupt the pure. Is he really versed well enough in magic to be worth recruitment?\n\n");
 		outputText("Before you can weigh your options, he speaks up, \"<i>I would love to spend more time with you, but alas, my quarry vanished from her lair recently. I cannot settle down while evil runs rampant. I must say farewell to you, brave hero, may luck always be on your path. Perhaps one day long from now we will meet again...</i>\"\n\n");
 		outputText("He leaves without another word.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else {
 		outputText("While exploring the Blight Ridge, you find Siegweird. The opening in his helmet is glowing with golden brilliance as he is surrounded by several demon corpses.\n\n");
@@ -345,6 +348,7 @@ public function siegweirdCampStudy():void
 			player.fatigue = player.maxFatigue();
 			flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 5;
 		}
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseSixHours);
 	}
 }

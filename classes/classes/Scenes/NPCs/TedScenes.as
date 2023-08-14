@@ -2,17 +2,16 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 
 public class TedScenes extends NPCAwareContent
 	{
 		
-				
-		public function TedScenes() 
+		
+		public function TedScenes()
 		{
 		}
 
@@ -60,7 +59,6 @@ public function introPostHiddenCave():void {
 		outputText("\"<i>Repent sinner...</i>\" and you just dodge in time throws at you his hammer.\n\n");
 	}
 	startCombat(new Ted());
-	doNext(playerMenu);
 }
 
 public function defeatedTedPostHiddenCave():void {

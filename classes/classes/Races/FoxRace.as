@@ -6,6 +6,7 @@ import classes.Race;
 
 public class FoxRace extends Race {
 	public static const FoxHairColors:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
+	public static const FoxFurColors:Array = ["orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Elf",
@@ -55,6 +56,7 @@ public class FoxRace extends Race {
 		addScores()
 				.faceType(Face.FOX, +1)
 				.eyeType(Eyes.FOX, +1)
+				.eyeType(NOT(Eyes.FERAL),0, -11)
 				.earType(Ears.FOX, +1)
 				.tailType(Tail.FOX, +1)
 				.customRequirement("","no more than 1 fox tail",

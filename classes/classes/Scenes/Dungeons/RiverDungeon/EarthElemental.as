@@ -133,7 +133,7 @@ public class EarthElemental extends Monster
 				this.weaponAttack = 7;
 				this.armorDef = 15;
 				this.armorMDef = 35;
-				this.level = 15;
+				this.level = 14;
 				this.bonusHP = 600;
 				this.additionalXP = 75;
 			}
@@ -147,7 +147,7 @@ public class EarthElemental extends Monster
 				this.weaponAttack = 9;
 				this.armorDef = 20;
 				this.armorMDef = 40;
-				this.level = 18;
+				this.level = 16;
 				this.bonusHP = 700;
 				this.additionalXP = 100;
 			}
@@ -161,7 +161,7 @@ public class EarthElemental extends Monster
 				this.weaponAttack = 11;
 				this.armorDef = 25;
 				this.armorMDef = 45;
-				this.level = 21;
+				this.level = 18;
 				this.bonusHP = 800;
 				this.additionalXP = 125;
 			}
@@ -175,7 +175,7 @@ public class EarthElemental extends Monster
 				this.weaponAttack = 17;
 				this.armorDef = 40;
 				this.armorMDef = 70;
-				this.level = 24;
+				this.level = 21;
 				this.bonusHP = 1200;
 				this.additionalXP = 190;
 			}

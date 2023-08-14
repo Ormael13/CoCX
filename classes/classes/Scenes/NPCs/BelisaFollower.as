@@ -6,7 +6,6 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
@@ -231,7 +230,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	
 	public function secondEncounterLeaveAlone():void {
 		outputText("You apologize for startling her, and turn your boat around. You blink, realizing you didn’t even get her name. You turn back and ask loudly what the Drider’s name is. As you row away, you can see the white orb sinking beneath the water’s surface. <i>\"Belisa\",</i> you hear on the breeze. You see her eyes, and the ripple on the water as The Drider-No, <i>Belisa,</i> slips underneath the surface of the water, following her home down.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	
 	public function secondEncounterNahFight():void {
@@ -250,14 +249,14 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	public function secondEncounterNo():void {
 		clearOutput();
 		outputText("After a few sidelong glances, you row away from the odd object, shrugging to yourself. This boat trip wasn’t productive, but oddities aren’t entirely unwelcome.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	
 	public function secondEncounterNever():void {
 		clearOutput();
 		outputText("You’ve experienced enough of Mareth to leave curious objects alone. You vow to give this object a wide berth in the future.\n\n");
 		BelisaInGame = false;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	
 	public function subsequentEncounters():void {
@@ -343,7 +342,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 				eachMinuteCount(15);
 				doNext(BelisaTalk);
 			}
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 	}
 	public function BelisaTalkAbsisters(): void {
@@ -352,13 +351,13 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>\"...Thank you, [name]. If she’s as corrupt as you say...then perhaps it’s best I keep my distance for now...But knowing she’s alive brings joy to my heart. Thank you.\"</i> You excuse yourself, extracting yourself from Belisa’s embrace and heading back to camp. You can feel her eyes on your back as you walk away.\n\n");
 		BelisaToldTyrantia = true;
 		BelisaAffection(10);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	public function BelisaTalkYouEnd():void {
 		clearOutput();
 		outputText("You tell Belisa that you didn’t catch her name, and that her speed, strength and corruption makes her a dangerous foe, even for you. She nods in understanding, but there’s a clear look of disappointment on her face. <i>\"Thank you for sharing your experiences with me.\"</i> You politely excuse yourself, heading back to camp.\n\n");
 		BelisaAffection(5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	
 	public function BelisaTalkHome():void {
@@ -370,7 +369,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			eachMinuteCount(15);
 			doNext(BelisaTalk);
 		}
-		else doNext(camp.returnToCampUseOneHour);
+		else endEncounter();
 	}
 	
 	public function BelisaTalkHer():void {
@@ -447,7 +446,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		clearOutput();
 		if (BelisaAffectionMeter < 15) {
 			outputText("She pushes you back, now a bit more annoyed than before. <i>\"Look...I’m trying to be nice, but you brought up a touchy subject. So please, before I lose...My composure…\"</i> You turn and walk away, but you hear her crying as you leave, little <i>\"Tk-tk-tk\"</i> noises occasionally coming with the sobs.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		else {
 			outputText("You wrap your arms all the way around Belisa’s upper body, and she leans into you slightly. She returns the embrace for a second. <i>\"Sorry about that.\"</i> She wipes the tears from her face. <i>\"It’s been a while, but...Sometimes they still make me sad, just talking about those disgusting things that used to be my people.\"</i> She gently pulls back from your embrace. <i>\"Can we talk about something else?\"</i>\n\n");
@@ -457,7 +456,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	public function BelisaTalkHerNohermLeave():void {
 		clearOutput();
 		outputText("You apologize to the Drider-girl, and she nods, acknowledging your apology. You turn and walk away, but you hear her crying as you leave, little <i>\"Tk-tk-tk\"</i> noises occasionally coming with the sobs.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	public function BelisaTalkHerSkittish():void {
 		clearOutput();
@@ -467,7 +466,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>“I mean…Really, [name]. My best defense is people like that not knowing where I am…so it’s kind of obvious…Right?”</i> You sigh, telling her that she’s made her point. <i>“Look…If I’ve learned anything on my own out here, it’s that I can’t really trust that the normal-looking person I see in the distance won’t try and turn me into some kind of fuck-toy…No matter how lonely that really is.”</i>\n\n");
 		outputText("It seems you’ve touched a nerve. You apologize for your words, and Belisa smirks a little, putting a hand over your mouth. <i>“It’s okay, [name]. Honestly, it was a little funny.”</i>\n\n");
 		outputText("You head back to camp, a little embarrassed about that rather boneheaded question.\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	public function BelisaTalkInjuries():void {
 		clearOutput();
@@ -487,7 +486,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			outputText("You tell Belisa that she doesn’t need to hide her pretty face anymore. This gets more of a blush, but she seems to take this to heart. You stay with her for a little while longer, but eventually excuse yourself. You tell Belisa that you need to head back to camp. She seems a little saddened, but she nods. \"<i>I will never forget what you’ve done for me today. Never.</i>\" Belisa waves as you leave. \"<i>Stay safe!</i>\"\n\n");
 			BelisaFollowerStage = 2;
 			BelisaQuestComp = true;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		else {
 			outputText("You ask her about her other fang, and why she hides it from you. Belisa instinctively turns away, but you continue talking. You tell her that  it doesn’t make her any less of a person. That you care about her, and want to see if you can help. Slowly, surely, Belisa turns around, facing towards you. She slowly pulls back her lip to reveal the right side of her mouth. Several teeth are broken, cracks along the enamel, but worst of all is the fang. She’s hidden it under a layer of silk bandages, but as she pulls it back, you can’t help but wince. ");
@@ -505,7 +504,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("You ask her what happened, how she’d managed to injure herself so badly. <i>\"Demons\"</i>, she spits. <i>\"Demons thought it would be funny to make the little Drider bite metal, then stomp on her jaw.\"</i> She closes her eyes. <i>\"And now...I can’t even bite my food properly.\"</i>\n\n");
 		outputText("You put a hand on her shoulder and pull her into you. You tell Belisa that even though she has trouble with food, she should never worry about finding the good, even now. You tell her about her accomplishments, and how tough she is, living on her own in these times. Your words put a small smile on the little Drider’s face, but she turns away. You excuse yourself and walk back to camp, but at the back of your mind, a question rises. Could you help her?\n\n");
 		BelisaAffection(5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	public function BelisaTalkInjuriesHeal():void {
 		clearOutput();
@@ -518,13 +517,13 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana should be able to heal such a curse. You make a note to ask her.\n\n");
 		BelisaAffection(5);
 		BelisaQuestOn = true;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	public function BelisaTalkInjuriesEw():void {
 		clearOutput();
 		outputText("You say nothing, but turn away quickly. Belisa closes her mouth, nervous. <i>\"I-i’m sorry.\"</i> She sounds crestfallen at your reaction. You make small talk, then leave, but Belisa seems very saddened by your reaction.\n\n");
 		BelisaAffection(-20);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	
 	public function BelisaSleepToggle():void {
@@ -548,7 +547,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (BelisaAffectionMeter < 20) {
 			outputText("<i>\"You...\"</i> The Drider sinks back under the water, leaving nothing but her mouth, looking up at you, above the surface. <i>\"No. I don't think that's a good idea.\"</i> She points away, back where you came from. <i>\"Please leave me alone now\"</i>\n\n");
 			outputText("Not wanting to aggravate the odd, aquatic Drider any further, you take your leave, heading back towards camp.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		else {
 			outputText("<i>\"You just want to...hang out?\"</i> Belisa seems taken aback by this, but she smiles slightly. <i>\"I...wouldn't be opposed to spending some time with you. What are you thinking of doing?\"</i>\n\n");
@@ -566,7 +565,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		clearOutput();
 		if (BelisaAffectionMeter < 30) {
 			outputText ("<i>\"You want to fight...ME?!\"</i> she seems rather angry...and afraid. <i>\"Was this just your way of getting me to lower my guard? To be able to fight me, 'for fun' or 'for training', and weaken me so I can't run?\"</i> without listening to your denials, she immediately sinks to the bottom of the lake.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		else {
 			outputText("You ask Belisa if she feels ready to fight a demon. The little Drider looks at you, and shakes her head. <i>\"I don’t really like fighting, [name]. So…\"</i> You tell her that running and hiding won’t save her forever.\n\n");
@@ -622,7 +621,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		else outputText(" You dive down, deep into the lake with Belisa. Eventually, you begin to run low on air, and...she keeps going down! You turn back, but Belisa grabs your foot, pulling you down to her. The spider-girl produces an odd, silky bag, draping it over your head. You struggle at first, but you quickly realize that the bag’s...full of breathable air? She takes it off your head, and giggles, sending bubbles back up to the surface of the water.\n\n");
 		outputText("You spend an hour under the water with Belisa, and she swims with you. You catch a few fish, but you can’t hold a candle to the water-spider. Her eight lower limbs move precisely, and she swims circles around you. You miss your spear throw a few times, and when you do, she gives you a bright laugh, swimming over to your spear and bringing it back to you. It’s odd, but a lot of fun, just throwing spears and swimming deep under the lake. Eventually, you point back to the surface. Belisa’s bright smile shrinks a little, but she nods, guiding you back to her silky orb.\n\n");
 		outputText("<i>\"I forgot how nice it was to have a fishing partner\"</i>, she says simply, taking your hand as you leave the water together. <i>\"Come back soon, okay?\"</i> She looks into your eyes, then pulls her hand away. <i>\"It gets lonely out here.\"</i> You smile to yourself as Belisa dives back into the water, and head back to camp.\n\n");
-		inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+		inventory.takeItem(consumables.FREFISH, explorer.done);
 	}
 	
 	public function BelisaHangMagic():void {
@@ -645,7 +644,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
 			outputText("<b>New White Magic Spell Learned: Blind</b>");
 		}
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	public function BelisaHangWeave():void {
@@ -655,7 +654,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>\"If you want to learn some basic threads, I can teach you.\"</i>\n\n");
 		outputText("You spend an hour with the Drider, learning the basics of weaving spider-silk into a rope. Your efforts are...well, crappy, but she seems to approve. <i>\"Well, you’re better than…\"</i> She looks down at her lap. <i>\"Never mind. You’re doing well, [name]. I think that’s enough for today, though. I need some time alone.\"</i>\n\n");
 		BelisaAffection(5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	
 	public function BelisaHangHouse():void {
@@ -666,7 +665,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>\"Cool, right?!\"</i> Belisa asks, a huge smile on the half of her face she’ll let you see. <i>\"My silk has an odd effect on the water. No matter how deep we go, we’ll have breathable air for a long time. I don’t know how it works, but…It lasts for over a day if I don’t do anything strenuous.\"</i> Now you understand how your Drider friend’s been able to remain hidden for so long.\n\n");
 		outputText("For a while, you sit in Belisa’s odd, but surprisingly cozy home, chatting with your Drider friend. Eventually, you tell her that you need to leave. Belisa nods, and brings the silk bubble back to the surface. As you step out onto the shore, you realize it’s been nearly an hour. You excuse yourself, and Belisa waves as you leave.\n\n");
 		BelisaAffection(5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	
 	private function BelisaShop():void {
@@ -767,10 +766,41 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (player.gems < cost) {
 			outputText("\n<b>You don't have enough gems...</b>");
 			doNext(BuyHolyBands);
-			return;
 		}
-		doYesNo(Utils.curry(belisaBuyBand1,type,cost), BuyHolyBands);
+		else {
+			switch (type) {
+				case 1:
+					HolyBand1Cap += 1;
+					break;
+				case 2:
+					HolyBand2Cap += 1;
+					break;
+				case 3:
+					HolyBand3Cap += 1;
+					break;
+				case 4:
+					HolyBand4Cap += 1;
+					break;
+				case 5:
+					HolyBand5Cap += 1;
+					break;
+				case 6:
+					HolyBand6Cap += 1;
+					break;
+				case 7:
+					HolyBand7Cap += 1;
+					break;
+				default:
+					outputText("You have encounterd a BUG and i not mean drider-bug but just... BUG. Report to Ormael/Aimozg this (not at all drider) BUG.");
+			}
+			player.gems -= cost;
+			outputText("Temp dialogue until Snas gets back to me. \n\" Thanks for the gems, [name]. Here's the band!\"");
+			statScreenRefresh();
+			doNext(BelisaShop);
+		}
+		//doYesNo(Utils.curry(belisaBuyBand1,type,cost), BuyHolyBands);
 	}
+	/*
 	public function belisaBuyBand1(type:Number, cost:Number):void {
 		clearOutput();
 		switch (type) {
@@ -801,7 +831,8 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		player.gems -= cost;
 		statScreenRefresh();
 		doNext(BelisaShop);
-	}
+	}*/
+
 	private function BelisaHolyBandsManagmentCurrent():Number {
 		var BHBMC:Number = 0;
 		if (HolyBand1 > 0) BHBMC += HolyBand1;
@@ -1080,7 +1111,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("\n\n<b>Before fully settling in your camp as if remembering something Belisa pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 		BelisaFollowerStage = 3;
 		BelisaInCamp = true;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		model.time.hours = 21;
 	}
 
@@ -1170,7 +1201,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			else if (BelisaAffectionMeter < 80) outputText("Belisa blushes, turning her head away from you shyly. <i>\"...[name], I can’t right now, okay?\"</i> She heads back into her home, and you can hear some rustling inside. You can hear a small gasp, and a wet <i>schluck</i>. Is...Is Belisa...?\n\n");
 			else if (BelisaAffectionMeter >= 80) outputText("Your shy Drider looks you up and down, a small bit of drool dripping from the corner of her mouth. She snaps out of it, then immediately turns her head. <i>\"Nope! Nope nope nope nope! Nope!\"</i> She sprints as fast as she can, launching herself face-first into the water. Judging from her reaction…she wants to…? But…Something’s in the way? You’re not sure whether to be amused or insulted by her reaction.\n\n");
 			if (BelisaInCamp) doNext(BelisaMainCampMenu);
-			else doNext(camp.returnToCampUseOneHour);
+			else endEncounter();
 		}
 	}
 

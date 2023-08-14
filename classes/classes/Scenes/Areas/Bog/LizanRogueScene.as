@@ -78,11 +78,11 @@ public class LizanRogueScene extends BaseContent
 			clearOutput();
 			if (!pure) {
 				outputText("You roll your eyes at the overt display. You raise your hands in a gesture of harmlessness and turn around to head home. When you look back over your shoulder the lizan is gone. Such a creature doesn't interest you right now anyway.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 			else {
 				outputText("You tell the lizan you aren't up for any games. He shrugs, \"<i>Maybe next time then,</i>\" he says as he rummages around in his pack. When he finds what he's looking for he takes it out and tosses it towards you. You catch the small vial and read that it is labeled Reptilium. When you look up the scaly guy is nowhere to be seen. You head back to camp, smiling at the weird but friendly encounter.");
-				inventory.takeItem(consumables.REPTLUM, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.REPTLUM, explorer.done);
 			}
 		}
 		
@@ -197,7 +197,7 @@ public class LizanRogueScene extends BaseContent
                 outputText("\n\nSpent and breathing hard you collapse. For a second you just lie there [fullChest] against his abs, and his legs wrapped around your [hips] while lying in the hot glorious mess of his lizan spunk. Both of you are panting, both of you have been satisfied. Then you push yourself off of him and go to collect your [armor]. He takes it upon himself to clean your [fullChest] with his tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave, you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
                 flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
                 player.sexReward("no", "Dick");
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
                 if (CoC.instance.inCombat) cleanupAfterCombat();
             }
         }
@@ -253,7 +253,7 @@ public class LizanRogueScene extends BaseContent
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.sexReward("cum","Vaginal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
@@ -303,7 +303,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nYou spend some time cuddling, the lizan's still on your back with his warm cock in your [asshole]. Eventually, you get up and give him a deep kiss before you return to your camp.");
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.sexReward("cum","Anal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
@@ -365,7 +365,7 @@ public class LizanRogueScene extends BaseContent
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
 			player.sexReward("cum","Vaginal");
 			player.sexReward("cum","Anal");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 		
@@ -398,7 +398,7 @@ public class LizanRogueScene extends BaseContent
 		private function finishWatersports():void {
 			outputText(" You cuddle with the lizan for a moment before you have to part ways" + player.clothedOrNaked(" and redress yourself in your [armor]", "") + ".");
 			outputText("\n\n\"<i>I hope you come back later,</i>\" the lizan says with a smile. You give him a kiss before you return to your camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
             if (CoC.instance.inCombat) cleanupAfterCombat();
         }
 

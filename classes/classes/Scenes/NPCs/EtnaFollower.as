@@ -476,7 +476,7 @@ private function etnaCome2Camp():void
 		outputText("You assure Jojo that you will and that Etna won't cause problems.\n\n");
 	}
 	if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) outputText("Amily sees the manticore and pulls out her blowpipe.\n\n\"<i>A manticore, HERE?! This is a catastrophe! You need to keep it out of the camp! I bet she’s fully corrupted and will rape anyone given the chance.</i>\"\n\nYou tell Amily that Etna isn’t dangerous and won't harm anyone, however, the mouse remains wary of the manticore, even going as far as staying several meters away from her at all times. Maybe this is some kind of mouse versus cat relation problem, go figure.\n\n");
-	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
+	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && !player.hasStatusEffect(StatusEffects.SophieOff)) {
 		outputText("Sophie flies down and lands right in front of Etna. As they glare at each other you get the feeling that they already know each other, and judging by the looks on their faces, neither is happy about the other being there...\n\n");
 		outputText("\"<i>Damned cat, figures that you would try stealing [name] from me. You're here only to sate your endless thirst, aren’t you?</i>\"\n\n");
 		outputText("Etna replies smirking. \"<i>So what, you milfy bird? It’s not like you need more of [name]’s affection after your hundredth kid! Heck, I'm surprised a slut like you hasn’t already taken a permanent mate or maybe, you just don't consider men as such?</i>\"\n\nIt takes everything you have to prevent Sophie and Etna from fighting, but you eventually manage to calm them down and force them to make peace. Sophie begrudgingly shakes hands with Etna but you’re quite aware the odds of them becoming friends is quite slim.\n\n");
@@ -492,6 +492,7 @@ private function etnaCome2Camp():void
 	}
 	outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
+	explorer.stopExploring();
 	doNext(playerMenu);
 }
 
@@ -660,13 +661,9 @@ public function etnaCampMenu():void
 	if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) addButtonDisabled(3, "Req. Venom", "You already asked her for a vial today.");
 	else addButton(3, "Req. Venom", etnaDailyVenomVial).hint("Ask Etna for a vial of her venom.");
 	addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.")
-		.disableIf(flags[kFLAGS.PLAYER_COMPANION_1] == "Etna", "You can't fight against her as long she's in your team.")
+		.disableIf((flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" || flags[kFLAGS.PLAYER_COMPANION_2] == "Etna"), "You can't fight against her as long she's in your team.")
 		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
-	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
-		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
-		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-	}
+	if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", etnaHenchmanOption);
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	if (flags[kFLAGS.ETNA_FOLLOWER] < 3) addButton(6, "Marriage", etnaMarriage)
 		.disableIf(player.isGenderless(), "Come on, you're genderless!")
@@ -840,8 +837,36 @@ public function etnaMarriageYes4():void
 
 public function etnaHenchmanOption():void
 {
-	clearOutput();
+	menu();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna" || flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") addButtonDisabled(0, "Team (1)", "You already have Etna accompany you.");
+		else addButton(0, "Team (1)", etnaHenchmanOption2, 1).hint("Ask Etna to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team (1)", etnaHenchmanOption2, 21).hint("Ask Etna to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Etna about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" || flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") addButtonDisabled(1, "Team (2)", "You already have Etna accompany you.");
+			else addButton(1, "Team (2)", etnaHenchmanOption2, 2).hint("Ask Etna to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") addButton(6, "Team (2)", etnaHenchmanOption2, 22).hint("Ask Etna to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Etna about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", etnaCampMenu);
+	
+}
+public function etnaHenchmanOption2(slot:Number = 1):void
+{
+	clearOutput();
+	if (slot < 21) {
 		outputText("\"<i>Nyaaaaa we hunting together [name]? This is going to be enjoyable!</i>\"\n\n");
 		outputText("Etna is now following you around.\n\n");
 		var strEtna:Number = 100;
@@ -855,12 +880,14 @@ public function etnaHenchmanOption():void
 		libEtna *= (1 + (0.2 * player.newGamePlusMod()));
 		libEtna = Math.round(libEtna);
 		player.createStatusEffect(StatusEffects.CombatFollowerEtna, strEtna, libEtna, 0, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Etna";
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Etna";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Etna";
 	}
 	else {
 		outputText("Etna is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerEtna);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(etnaCampMenu);
 	cheatTime(1/12);
@@ -910,7 +937,7 @@ public function etnaPussyOpera():void
 {
 	clearOutput();
 	etnaPussyOpera2();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function etnaPussyOpera2():void
 {
@@ -951,7 +978,7 @@ public function etnaShareDrink():void
 	outputText("Etna smirks and reciprocates passing her rough cat tongue on your tail pussy lips. Having a tail pussy is a one of a kind feeling as you both feed and feel indecent pleasure from it. It would be hard for you to give up on that body part. You resume drinking both ways, orgasming at the same time as your tail pussy bottoms up and goes empty. Etna thankfully, however, has extra barrels and gives you both a refill");
 	if (player.hasVagina()) outputText(" the [pussy] between your legs wets the ground as a new cargo of cum fills your tail cavity");
 	outputText(".\n\nAfter several minutes, both of you are done and there's no cum left. You lay down next to Etna for a moment, enjoying the afterglow of your shared dinner. That was quite a good meal and seeing as she has several barrels of this which she seems to replenish daily you like the idea of doing this again. You head back to your tent most satisfied.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 	player.sexReward("cum");
 }
 
@@ -1000,7 +1027,7 @@ private function tailExploration():void {
 		+ "\n"
 		+ "Pint by pint you flood her cunt until you are all in, the manticore begging for you to stop. Midway you hear something hit the ground next to you but heck you don’t care, this cunt is a treasure trove. Every single crevice of her tail wall is dripping with girl fluids and you can even taste the residual cum of her few past meals. Etna/The manticore’s tail is twitching as you violate her insides like no other cock could. Her screams are so loud you can hear her moans of ecstasy from inside. Deciding to go to the depth of the matter you finally reach the end of her tail at the base of her ass which might as well be connected to her stomach and unsurprisingly it is. Since you aren't interested into a digestive acid bath you lick clean the rest of her tail walls with your body, making sure to remove any remnant of cum, and begin to flood out. As you finish oozing on the ground you hear a confused moan and turn over. Etna is on the ground, eyes crossed from the mind-blowing sex you performed inside her tailcunt. Eh?! You hope you didn’t break her, this must be quite the experience, one you would sure love to do again.\n");
 	player.sexReward("vaginalFluids");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function etnaSleepToggle():void {
@@ -1046,7 +1073,7 @@ public function etnaInfidelityEncounter():void {
 		outputText("“<i>T...Thanks [name] I will try to make it up to you one way or another!</i>”[pg]");
 		outputText("That said you leave Etna to her lunch heading back to camp just in time to see the minotaur explode in her tail again.[pg]");
 		EtnaInfidelity = 1;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	function breakOffInfidelity():void {
 		clearOutput();
@@ -1058,7 +1085,7 @@ public function etnaInfidelityEncounter():void {
 		etnaAffection(-60);
 		if (flags[kFLAGS.SLEEP_WITH] == "Etna") flags[kFLAGS.SLEEP_WITH] = "";
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 2) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 2;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	function satisfyHerInfidelity():void {
 		clearOutput();
@@ -1068,7 +1095,7 @@ public function etnaInfidelityEncounter():void {
 		outputText("“<i>I will expect my daily share once you’re home.</i>”[pg]");
 		outputText("You really hope you didn't get in over your head.[pg]");
 		EtnaInfidelity = 3;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 public function etnaInfidelityEncounterRepeat():void {
@@ -1080,7 +1107,7 @@ public function etnaInfidelityEncounterRepeat():void {
 	outputText("“<i>Uh, hello… [name]. I was hungry and I… well you see all these walking reservoirs around here and...</i>”[pg]");
 
 	menu();
-	addButton(0, "Next", camp.returnToCampUseOneHour);
+	addButton(0, "Next", explorer.done);
 	addButtonIfTrue(1, "Satisfy her", satisfyHerInfidelity, "You dont have enough cum to satisfy her", player.cumQ() >= 2000);
 
 	function satisfyHerInfidelity():void {
@@ -1091,7 +1118,7 @@ public function etnaInfidelityEncounterRepeat():void {
 		outputText("“<i>I will expect my daily share once you’re home.</i>”[pg]");
 		outputText("You really hope you didn't get in over your head.[pg]");
 		EtnaInfidelity = 3;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -1135,7 +1162,7 @@ private function etnaAfterInfidelity():void {
 	outputText("Well, that's a surprise, but then again she did say she would make it up to you. Well, if she’s ready to be a mother then you don’t mind. You tell her that whenever she will be pregnant you will be there for her, then head back to your things still considering the ramification of this decision.[pg]");
 	outputText("<b>Etna is off her contraceptive herbs</b>");
 	EtnaFertile = true;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function etnaKnockupAttempt():void {

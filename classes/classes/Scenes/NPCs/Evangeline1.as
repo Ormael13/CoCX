@@ -365,40 +365,37 @@ public class Evangeline1 extends Monster
 				this.level = 12;
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
-				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human bimbo. She's wearing practically indecent steel armor and using inscribed spellblade to attack.";
-				initStrTouSpeInte(41, 46, 55, 100);
-				this.weaponName = "inscribed spellblade";
-				this.weaponVerb="slash";
+				initStrTouSpeInte(46, 48, 68, 110);
+				initWisLibSensCor(20, 25, 35, 50);
 				this.weaponAttack = 10;
-				this.armorName = "practically indecent steel armor";
-				this.armorDef = 12;
-				this.armorMDef = 1;
+				this.armorDef = 14;
+				this.armorMDef = 3;
 				this.bonusHP = 240;
 				this.bonusLust = 75;
 				this.lust = 70;
 				this.additionalXP += 40;
-				this.level = 15;
-			}/*
+				this.level = 16;
+			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
-				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing practically indecent steel armor and using inscribed spellblade to attack.";
-				initStrTouSpeInte(32, 32, 45, 100);
+				initStrTouSpeInte(82, 87, 105, 115);
+				initWisLibSensCor(25, 30, 45, 50);
+				this.weaponAttack = 12;
+				this.armorDef = 18;
+				this.armorMDef = 5;
+				this.bonusHP = 360;
+				this.bonusLust = 89;
+				this.additionalXP += 60;
+				this.level = 24;
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 || flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
+				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human bimbo. She's wearing practically indecent steel armor and using inscribed spellblade to attack.";
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9;
 				this.armorName = "practically indecent steel armor";
-				this.armorDef = 11;
-				this.armorMDef = 1;
-				this.bonusHP = 180;
-				this.bonusLust = 32;
-				this.additionalXP += 30;
-				this.level = 12;
-			}*/
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
 				createBreastRow(Appearance.breastCupInverse("E"));
 				this.hips.type = Hips.RATING_CURVY + 2;
 				this.butt.type = Butt.RATING_JIGGLY + 2;
-				initWisLibSensCor(15, 25, 35, 100);
-				this.hairColor = "platinum blonde";
+				this.hairColor = "crimson platinum";
 				this.hairLength = 36;
 				this.lustVuln = .8;
 			}
@@ -406,7 +403,7 @@ public class Evangeline1 extends Monster
 				createBreastRow(Appearance.breastCupInverse("A"));
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_BUTTLESS;
-				initWisLibSensCor(15, 10, 10, 100);
+				initWisLibSensCor(15, 10, 10, 50);
 				this.hairColor = "red";
 				this.hairLength = 6;
 				this.lustVuln = .85;
@@ -435,8 +432,15 @@ public class Evangeline1 extends Monster
 				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.EnemyEliteType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ManaAffinityI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.JobRogue, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) {
+				//this.createPerk(PerkLib.EnemyChampionType, 0, 0, 0, 0);
 			}
 			checkMonster();
 		}

@@ -49,7 +49,7 @@ public function helAffection(diff:Number = 0):Number {
 		if(flags[kFLAGS.HEL_AFFECTION_FOLLOWER] >= 100) flags[kFLAGS.HEL_AFFECTION_FOLLOWER] = 100;
 		if(flags[kFLAGS.HEL_AFFECTION_FOLLOWER] < 0) flags[kFLAGS.HEL_AFFECTION_FOLLOWER] = 0;
 	}
-	else if(followerHel()) {
+	else if(followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) {
 		flags[kFLAGS.HEL_AFFECTION_FOLLOWER] = 100;
 		flags[kFLAGS.HEL_BONUS_POINTS] += diff * 3;
 		if(diff > 0) if(flags[kFLAGS.HEL_BONUS_POINTS] > 150) flags[kFLAGS.HEL_BONUS_POINTS] = 150;

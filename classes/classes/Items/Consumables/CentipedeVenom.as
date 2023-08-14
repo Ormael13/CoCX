@@ -8,18 +8,28 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
-import classes.Items.Consumable;
 import classes.CoC;
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Consumable;
+import classes.Items.ItemTags;
 
 public class CentipedeVenom extends Consumable {
 	public function CentipedeVenom() {
 		super("C.Venom", "C.Venom", "a vial of centipede venom", 50, "A small thin vial filled with a clear liquid produced by centipedes. If consumed, it may have a strange effect on you.");
+		withTag(ItemTags.U_TF);
+		refineableInto(
+				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(
+						AlchemyLib.AE_CENTIPEDE,
+						AlchemyLib.AE_OOMUKADE
+				)
+		)
 	}
 
 	override public function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
-		if (rand(3) == 0) changeLimit++;
+		var changeLimit:Number = 2;
+		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();
@@ -64,8 +74,8 @@ public class CentipedeVenom extends Consumable {
 		}
 		//Face
 		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0) {
-      outputText("\n\n");
-      CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+			outputText("\n\n");
+			CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
 			changes++;
 		}
 		//NeckMaxilipeds

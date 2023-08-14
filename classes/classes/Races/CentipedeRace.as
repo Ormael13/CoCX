@@ -34,6 +34,7 @@ public class CentipedeRace extends Race {
 		super("Centipede", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+		disabled = true;
 	}
 	
 	public override function setup():void {

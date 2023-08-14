@@ -184,11 +184,7 @@ public function ExcelliaCampMainMenuFixHer2():void {
 	addButton(7, "Sex", ExcelliaCampFixHerSex);
 	if (fixed()) {
 		addButton(2, "Talk", ExcelliaCampFixHerTalk);
-		if (player.hasPerk(PerkLib.BasicLeadership)) {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", excelliaHenchmanOption).hint("Ask Excellia to join you in adventures outside camp.");
-			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") addButton(5, "Team", excelliaHenchmanOption).hint("Ask Excellia to stay in camp.");
-			else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Excellia about accompaning you.");
-		}
+		if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", excelliaHenchmanOption);
 		else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 		if (flags[kFLAGS.SLEEP_WITH] != "Excellia") addButton(6, "Sleep With", ExcelliaCampFixHerSleepToggle);
 		else addButton(6, "Sleep Alone", ExcelliaCampFixHerSleepToggle);
@@ -454,9 +450,36 @@ public function ExcelliaCampFixHerSexSuckleFuck():void {
     player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
-public function excelliaHenchmanOption():void {
-	clearOutput();
+public function excelliaHenchmanOption():void
+{
+	menu();
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia" || flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") addButtonDisabled(0, "Team (1)", "You already have Excellia accompany you.");
+		else addButton(0, "Team (1)", excelliaHenchmanOption2, 1).hint("Ask Excellia to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") addButton(5, "Team (1)", excelliaHenchmanOption2, 21).hint("Ask Excellia to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Excellia about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia" || flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") addButtonDisabled(1, "Team (2)", "You already have Excellia accompany you.");
+			else addButton(1, "Team (2)", excelliaHenchmanOption2, 2).hint("Ask Excellia to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia") addButton(6, "Team (2)", excelliaHenchmanOption2, 22).hint("Ask Excellia to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Excellia about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", ExcelliaCampMainMenuFixHer2);
+}
+public function excelliaHenchmanOption2(slot:Number = 1):void {
+	clearOutput();
+	if (slot < 21) {
 		outputText("The [exc race] grins and stretches, pumping herself up.\n\n");
 		outputText("\"<i>Of course, I'll help you out [name]. I'm ready for anything the world throws at us!</i>\"\n\n");
 		outputText("Excellia is now following you around.\n\n");
@@ -470,13 +493,15 @@ public function excelliaHenchmanOption():void {
 		strExcellia = Math.round(strExcellia);
 		unarmedExcellia += (1 + (int)(unarmedExcellia / 5)) * player.newGamePlusMod();
 		player.createStatusEffect(StatusEffects.CombatFollowerExcellia, strExcellia, unarmedExcellia, 0, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Excellia";
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Excellia";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Excellia";
 	}
 	else {
 		outputText("\"<i>Well, that was fun. If you want to go out on another adventure, be sure to let me know!</i>\"\n\n");
 		outputText("Excellia is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerExcellia);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(ExcelliaCampMainMenuFixHer2);
 	cheatTime(1/12);

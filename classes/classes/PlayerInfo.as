@@ -1,12 +1,11 @@
 package classes {
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
-import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EtnaDaughterScene;
-import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -848,10 +847,12 @@ public class PlayerInfo extends BaseContent {
 		// Begin Evangeline Stats
 		var evangelineStats:String = "";
 		if (EvangelineFollower.EvangelineAffectionMeter > 2) {
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 15\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) evangelineStats += "<b>Evangeline lvl:</b> 12 (current max lvl)\n";
-			else if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) evangelineStats += "<b>Evangeline lvl:</b> 3\n";
-			else evangelineStats += getNPCLevel("Evangeline", 3, 1, 4, 3, flags[kFLAGS.EVANGELINE_LVL_UP]);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) evangelineStats += "<b>Evangeline lvl:</b> 24 (current max lvl)\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 16\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) evangelineStats += "<b>Evangeline lvl:</b> 12\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) evangelineStats += "<b>Evangeline lvl:</b> 9\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) evangelineStats += "<b>Evangeline lvl:</b> 6\n";
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) evangelineStats += "<b>Evangeline lvl:</b> 3\n";
 			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(EvangelineFollower.EvangelineAffectionMeter) + "%\n";
 		}
 		if (EvangelineFollower.EvangelineAffectionMeter >= 5) {
@@ -1473,6 +1474,10 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: " + player.herbalismXP + " / " + player.HerbExpToLevelUp() + ")\n";
 		else
 			masteryStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: MAX)\n";
+		masteryStats += "\n";
+		masteryStats += player.alchemySkillStat.describe(true);
+		masteryStats += "\n";
+		if (Crafting.gooProduced > 0) masteryStats += "<i>Stinky goo produced:</i> "+formatNumber(Crafting.gooProduced)+"\n";
 		if (masteryStats != "")
 			outputText("\n<b><u>Mastery</u></b>\n" + masteryStats);
 		// End Mastery Stats
@@ -1566,22 +1571,8 @@ public class PlayerInfo extends BaseContent {
 		}
 		else {
 			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
-				player.XP -= player.requiredXP();
-				player.level++;
 				lvlinc++;
-				if (player.level <= 1) {
-					player.perkPoints += 6;
-					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 6;
-				}
-				if (player.level <= 9) {
-					player.perkPoints += 2;
-					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 2;
-				}
-				else {
-					player.perkPoints++;
-					player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
-					if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
-				}
+				levelUp();
 			}
 			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
 			var perkRes:int = player.perkPoints - perkLvl;
@@ -1591,7 +1582,30 @@ public class PlayerInfo extends BaseContent {
 		}
 		lvlUpFastSubMenu();
 	}
-
+	
+	// Reduce XP, increase level, give points, recover HP
+	private function levelUp():void {
+		player.XP -= player.requiredXP();
+		player.level++;
+		var negativeLevel:int = player.negativeLevel;
+		if (negativeLevel > 0) {
+			player.recoverNegativeLevel(1);
+			return;
+		}
+		HPChange(player.maxHP(), false);
+		if (player.level <= 1) {
+			player.perkPoints += 6;
+			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 6;
+		}
+		if (player.level <= 9) {
+			player.perkPoints += 2;
+			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 2;
+		} else {
+			player.perkPoints++;
+			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
+			if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone, 3, -1);
+		}
+	}
 	public function lUFSMAP():void {
 		if (player.statPoints > 0) {
 			attributeMenu();
@@ -1809,16 +1823,25 @@ public class PlayerInfo extends BaseContent {
 
 	private static var filterChoices:Array = [0,1,1,1,1,1,1,1,1,1];	//1 - is active?, 2-10 - is shown?
 	public function perkBuyMenu():void {
+		if (CoC.instance.perkMenu.preferOld) {
+			perkBuyMenuOld();
+		} else {
+			CoC.instance.perkMenu.newPerkMenu();
+		}
+	}
+	public function perkBuyMenuOld():void {
+		CoC.instance.perkMenu.preferOld = true;
 		clearOutput();
-		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player);
+		var perks:/*PerkType*/Array    = PerkTree.availablePerks(player, false);
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		perks = mutationsClear(perks);
+		//perks = mutationsClear(perks);
 		if (perks.length == 0) {
 			outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 			if (player.perkPoints > 1) outputText("s");
 			outputText(".");
-			doNext(playerMenu);
+			button(0).show("Next",playerMenu);
+			button(1).show("New Menu",CoC.instance.perkMenu.newPerkMenu);
 			return;
 		}
         if (CoC.instance.testingBlockExiting) {
@@ -1828,7 +1851,7 @@ public class PlayerInfo extends BaseContent {
 			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n");
             //CoC.instance.showComboBox(perkList, "Choose a perk", perkCbChangeHandler);
             if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
-	        mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
+			mainView.linkHandler = linkhandler;
 	        perkList = [];
 			if (filterChoices[0] == 1) perks = perks.filter(filterPerks);
 	        for each(var perk:PerkType in perks.sort()) {
@@ -1841,6 +1864,7 @@ public class PlayerInfo extends BaseContent {
 			mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 			menu();
 			addButton(1, "Skip", perkSkip);
+			addButton(3, "New Menu",CoC.instance.perkMenu.newPerkMenu);
 			addButton(4,"Filter",changeFilter, 0).hint("Filter perks by reqired stats")
 			if (filterChoices[0]==1)
 			{
@@ -1886,37 +1910,24 @@ public class PlayerInfo extends BaseContent {
 	{
 		if ((filterChoices[pos])==0) filterChoices[pos] = 1;
 		else filterChoices[pos] = 0;
-		perkBuyMenu();
+		perkBuyMenuOld();
 	}
 
 	public function clearFilter():void
 	{
 		filterChoices = [1,1,1,1,1,1,1,1,1,1];
-		perkBuyMenu();
-	}
-	public function mutationsClear(perks:Array):Array{
-		var temp:Array = [];
-		var compMutate2:Array = IMutationsLib.mutationsArray("All");
-		for each (var playerPerk:PerkType in perks){
-			if (!(compMutate2.indexOf(playerPerk) >= 0)){
-				temp.push(playerPerk);
-			}
-		}
-		return temp;
+		perkBuyMenuOld();
 	}
 	private var perkList:Array = [];
-	private function linkhandler(e:TextEvent):void{
-		trace(e.text);
-		perkCbChangeHandler(perkList[e.text]);
+	private function linkhandler(event:String):void{
+		perkCbChangeHandler(perkList[event]);
 	}
 	private function perkSelect(selected:PerkClass):void {
-		mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
 		mainView.hideComboBox();
 		applyPerk(selected);
 	}
 
 	private function perkSkip():void {
-		mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
 		mainView.hideComboBox();
 		playerMenu();
 	}
@@ -1939,6 +1950,7 @@ public class PlayerInfo extends BaseContent {
 		for each(var p:* in perkList){
 			outputText("<u><a href=\"event:"+perkList.indexOf(p)+"\">"+p.perk.perkName+"</a></u>\n");
 		}
+		mainView.linkHandler = linkhandler;
 		menu();
 		addButton(0, "Okay", perkSelect, selected);
 		addButton(1, "Skip", perkSkip);
@@ -2330,10 +2342,10 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (page == 6) {
 			if (player.superPerkPoints > 0) {
-				
+			
 			}
 			else {
-				
+			
 			}
 			//12 -> page + 1 button
 			//13 -> page - 1 button

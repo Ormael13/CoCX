@@ -7,14 +7,13 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ashlands.*;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -37,6 +36,9 @@ public class Ashlands extends BaseContent
 	private function init():void {
 		_ashlandsEncounter = Encounters.group("ashlands", {
 			name: "derpnade launcher",
+			label : "Gun Parts",
+			kind  : 'item',
+			unique: true,
 			when: function ():Boolean {
 				return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0;
 			},
@@ -44,12 +46,15 @@ public class Ashlands extends BaseContent
 			call: partsofTripxiDoubleBarreledDragonGun
 		}, {
 			name: "crags",
-			when: function ():Boolean {
-				return flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65
-			},
+			label : "New Area",
+			kind  : 'place',
+			unique: true,
+			when: SceneLib.volcanicCrag.canDiscover,
 			call: discoverCrags
 		}, {
 			name: "phoenix",
+			label : "Quasi-Phoenix",
+			kind : 'monster',
 			night : false,
 			when: SceneLib.dungeons.checkPhoenixTowerClear,
 			call: phoenixScene.encounterPhoenix
@@ -57,6 +62,9 @@ public class Ashlands extends BaseContent
 			//	wendigoScene.encounterWendigo();
 		}, {*/
 			name: "hellCatSabath",
+			label : "HellCat Sabath",
+			kind  : 'event',
+			unique: true,
 			when: function ():Boolean {
 				return (flags[kFLAGS.WITCHES_SABBATH] > 3 && player.isRace(Races.HELLCAT, 1, false) && player.gender == 3) ||
 						(flags[kFLAGS.WITCHES_SABBATH] > 0 && player.isRace(Races.CAT) && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))
@@ -64,23 +72,33 @@ public class Ashlands extends BaseContent
 			call: SceneLib.ashlands.hellcatScene.WitchesSabbath
 		}, {
 			name: "hellcat",
+			label : "Hellcat",
+			kind : 'monster',
 			call: SceneLib.ashlands.hellcatScene.HellCatIntro
 		}, {
 			name: "alraune",
+			label : "Alraune",
+			kind : 'monster',
 			night : false,
 			call: alrauneEncounterFn
 		}, {
 			name: "golem",
+			label : "Fire Golem",
+			kind : 'monster',
 			call: fireGolemEncounterFn
 		}, {
 			name: "granite",
+			label : "Mine",
+			kind  : 'place',
 			when: function():Boolean {
 					return player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained
 				},
 			call: findGranite
 		}, {
 			name: "nothing",
-			call: findNothing
+			call: findNothing,
+			label:'Walk',
+			kind:'walk'
 		}/*, {
 			name: "demonProjects",
 			chance: 0.2,
@@ -90,27 +108,36 @@ public class Ashlands extends BaseContent
 			call: SceneLib.exploration.demonLabProjectEncounters
 		}*/);
 	}
-
+	
+	public const areaLevel:int = 35;
 	public function isDiscovered():Boolean {
-		return flags[kFLAGS.DISCOVERED_ASHLANDS] > 0;
+		return SceneLib.exploration.counters.ashlands > 0;
+	}
+	public function canDiscover():Boolean {
+		return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
 	}
 	public function timesExplored():int {
-		return flags[kFLAGS.DISCOVERED_ASHLANDS];
+		return SceneLib.exploration.counters.ashlands;
 	}
-		
+	
 	public function exploreAshlands():void {
-		clearOutput();
-		flags[kFLAGS.DISCOVERED_ASHLANDS]++;
-		doNext(camp.returnToCampUseOneHour);
-		ashlandsEncounter.execEncounter();
-		flushOutputTextToGUI();
+		explorer.prepareArea(ashlandsEncounter);
+		explorer.setTags("ashlands");
+		explorer.prompt = "You explore the ashlands.";
+		explorer.onEncounter = function(e:ExplorationEntry):void {
+			SceneLib.exploration.counters.ashlands++;
+		}
+		explorer.leave.hint("Leave the ashlands");
+		explorer.skillBasedReveal(areaLevel, timesExplored());
+		explorer.doExplore();
 	}
 
 	private function discoverCrags():void {
-		flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+		SceneLib.exploration.counters.volcanicCragOuter = 1;
 		clearOutput();
 		outputText("You walk for some time, roaming the ashlands. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
 		outputText("<b>You've discovered the Volcanic Crag!</b>");
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseTwoHours);
 	}
 
@@ -121,7 +148,7 @@ public class Ashlands extends BaseContent
 			outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
 		}
 		dynStats("tou", .5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function findGranite():void {
@@ -130,7 +157,7 @@ public class Ashlands extends BaseContent
 		outputText("Do you wish to mine it?");
 		menu();
 		addButton(0, "Yes", ahslandsSiteMine);
-		addButton(1, "No", camp.returnToCampUseOneHour);
+		addButton(1, "No", explorer.done);
 	}
 
 	private function fireGolemEncounterFn():void {
@@ -145,7 +172,7 @@ public class Ashlands extends BaseContent
 		outputText("You carefully put the pieces of the Double barreled dragon gun in your back and head back to your camp.\n\n");
 		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 		player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function alrauneEncounterFn():void {
@@ -154,7 +181,7 @@ public class Ashlands extends BaseContent
 		if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 			outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
 			menu();
-			addButton(0, "Yes", camp.returnToCampUseOneHour);
+			addButton(0, "Yes", explorer.done);
 			addButton(1, "No", alrauneScene.alrauneVolcanicCrag);
 		} else {
 			alrauneScene.alrauneVolcanicCrag();
@@ -162,12 +189,12 @@ public class Ashlands extends BaseContent
 	}
 
 	private function ahslandsSiteMine():void {
-		if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+		if (Forgefather.materialsExplained != 1) endEncounter();
 		else {
 			clearOutput();
 			if (player.fatigue > player.maxFatigue() - 50) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				return;
 			}
 			outputText("\n\nYou begin slamming your pickaxe against the granite, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -177,10 +204,10 @@ public class Ashlands extends BaseContent
 			SceneLib.forgefatherScene.incrementGraniteSupply(minedStones);
 			player.mineXP(player.MiningMulti());
 			findGem();
-			doNext(camp.returnToCampUseTwoHours);
 		}
 	}
 	private function findGem():void {
+		explorer.stopExploring();
 		if (player.miningLevel > 4) {
 			if (rand(4) == 0) {
 				inventory.takeItem(useables.RBYGEM, camp.returnToCampUseTwoHours);

@@ -271,7 +271,7 @@ private function sendToFarm():void
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] = 1;
 
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function backToCamp():void
@@ -643,7 +643,7 @@ public function useTentacleJojo():void {
 	player.cuntChange(40, true);
 	player.sexReward("cum");
 	dynStats("cor", .5);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Jojo milk payments
@@ -806,7 +806,7 @@ public function milkJojoFirst():void {
 		else outputText("A loud 'ding' chimes and a panel displays 0.864 Ls.  Ten gems roll out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gems and g");
 
 		outputText("o on your way, dragging an exhausted mouse behind you as you head back towards camp.");
-		doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+		doNext(recalling ? recallWakeUp : explorer.done);
 	}
 }
 
@@ -896,7 +896,7 @@ private function repeatMilkJojo(tentacle:Boolean = false):void {
 		outputText("o on your way, dragging an exhausted mouse behind you as you head back towards camp.");
 	}
 	player.orgasm();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //Use Jojo to pay for Hair Care
 private function jojoPaysForPerms():void {
@@ -998,7 +998,7 @@ private function fillAmilysMouth():void {
 	outputText("\n\nThe sperm-filled girl burps and turns to kiss Jojo, the once-pure monk eagerly returning the embrace and getting a good taste for your seed as Amily fervently tongues it into his mouth.  She eventually pulls back to encourage him with an overwrought sigh. \"<i>Maybe if you service [master] better you'll be allowed to receive [his] seed next time.</i>\"  Jojo pants and licks at his lips, hands darting down to tend to his long-neglected phallus.");
 	outputText("\n\nYour personal whore laughs and hugs your leg, whispering, \"<i>Cum-slut thanks you, [master].</i>\"  You pull her up and smile at her, glad she's working to make your budding harem as sexually adept as possible.  She beams and grabs Jojo with her tail, no doubt eager to drag him off for more training.");
 	player.sexReward("saliva");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //Fill Amily's Twat (requires not short-ass, weak-ass nigga) (Z)
 private function stuffAmilysMouthWithPostBJCUM():void {
@@ -1014,7 +1014,7 @@ private function stuffAmilysMouthWithPostBJCUM():void {
 	dynStats("sen", -1);
 	//{DONT FORGET PREGNANCY CHECK}
 	amilyScene.amilyPreggoChance();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //Fill Jojo's Mouth (Z)
 private function fillJojosMouthWithHotStickyCum():void {
@@ -1025,7 +1025,7 @@ private function fillJojosMouthWithHotStickyCum():void {
 	outputText("\n\nWhile one of your mouse-toys is polishing your rod, the other is masturbating and panting.  \"<i>Please, [master], may I... may I have some cum?  Can I... I lick him clean?  He's so...</i>\"  She inhales and luridly moans, \"<i>...messy.</i>\"  You give her your assent as you withdraw your spit-shined pecker from Jojo's maw, not caring how the two of them get their rocks off so long as your harem is kept well-trained and willing.");
 	player.sexReward("saliva");
 	dynStats("lib", -1, "cor", 1);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Scene 2: Amily And Jojo Fuck (w/o Tentacles) (Z)
@@ -1048,7 +1048,7 @@ private function amilyAndJojoFuck():void {
 	player.orgasm();
 	//{DONT FORGET PREGNANCY CHECK}
 	//amilyPreggoChance();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function jojoFollowerMeditate(doClear:Boolean = true):void {
@@ -1079,7 +1079,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 		flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 		player.addStatusValue(StatusEffects.JojoMeditationCount, 1, 1);
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 		public function jojoDefenseToggle():void {
@@ -1661,7 +1661,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			outputText("You sneer at him and shake your head, hissing out, \"<i>It would be so much better for you if you didn't try to resist, my slut.</i>\"  ");
 			player.sexReward("saliva", "Dick");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoBJGentle():void {
@@ -1682,7 +1682,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			else outputText("You give him one last fond caress, running your fingers through his fur in an almost patronizing petting motion, then turn without another word and leave him to retreat back into the jungle.  ");
 			player.sexReward("saliva", "Dick");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoGiveBJ():void {
@@ -1703,7 +1703,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			outputText("Once the vulgar kiss is finished, you stand and smile, dismissing him with a casual wave of your hand.  ");
 			player.sexReward("cum", "Lips");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoVaginalGentle():void {
@@ -1732,7 +1732,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			player.sexReward("cum","Vaginal");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoVaginalSmother():void {
@@ -1749,7 +1749,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			outputText("He gasps for breath and coughs a few times, and once you are sure that he is safe, you laugh softly and walk back to your camp.  ");
 			player.sexReward("saliva","Vaginal");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoAnalCruel():void {
@@ -1767,7 +1767,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			outputText("You pull out of Jojo's ass once your orgasm has subsided and wipe your " + player.cockDescript(x) + " off on the fur of his back, then walk away to leave him to his own devices.  ");
 			player.sexReward("no", "Dick");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoAnalGentle():void {
@@ -1786,7 +1786,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			outputText("You can't help but laugh at the scene, and draw out of his ass with a groan of pleasure. You watch as he crawls back into the jungle in shame, leaving a trail of your cum the whole way.  ");
 			player.sexReward("Default","Dick");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoAnalSmother():void {
@@ -1808,7 +1808,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			outputText("He gasps for breath and coughs a few times, and once you are sure that he is safe, you laugh softly and walk back to your camp.");
 			player.sexReward("saliva","Anal");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function corruptJojoBreasts():void { //Should only be available to players with biggestBreastSize > 2
@@ -1833,7 +1833,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			outputText("He slinks back into the woods, chased by your amused laughter.");
 			player.sexReward("cum");
 			dynStats("cor", 0.5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		//Extra Scenes
@@ -1885,6 +1885,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("As you move away from the mouse, you step into a huge puddle of Jojo's creamy rodent cum and look back. You see that his dick, still trapped under his body and pointing behind the two of you, blasted long ropes of thick mouse spunk far into the depths of the forest.  Feeling beyond satisfied, you give your mouse slut a quick scratch behind the ear as he passes out – cum splattered and smiling.");
 			}
 			player.sexReward("no", "Dick");
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -2031,7 +2032,7 @@ public function lowCorruptionIntro():void
 	//Choices time!
 	menu();
 	addButton(0, "Meditate", meditateInForest); // OH GOD NO SEND HELP
-	addButton(1, "Leave", camp.returnToCampUseOneHour);
+	addButton(1, "Leave", explorer.done);
 }
 
 public function highCorruptionJojoEncounter():void {
@@ -2044,7 +2045,7 @@ public function highCorruptionJojoEncounter():void {
 	//Choices time!
 	menu();
     addButton(0, "Accept", SceneLib.jojoScene.meditateInForest);
-    addButton(1, "Decline", camp.returnToCampUseOneHour);
+    addButton(1, "Decline", explorer.done);
 	rapeButton(2, false);
 }
 
@@ -2060,14 +2061,14 @@ public function repeatJojoEncounter():void {
         addButton(0, "Meditate", SceneLib.jojoScene.meditateInForest);
         addButton(1, "Purge", SceneLib.jojoScene.wormRemoval).hint("Request him to purge the worms from your body.");
 		rapeButton(2, false);
-        addButton(4, "Leave", camp.returnToCampUseOneHour);
+        addButton(4, "Leave", explorer.done);
 		return;
 	}
 	SceneLib.jojoScene.jojoSprite();
 	outputText("Jojo the monk appears before you, robes and soft white fur fluttering in the breeze.  He asks, \"<i>Are you ready for a meditation session?</i>\"");
 	//Choices time!
 	menu();
-    doYesNo(SceneLib.jojoScene.meditateInForest, camp.returnToCampUseOneHour);
+    doYesNo(SceneLib.jojoScene.meditateInForest, explorer.done);
 	rapeButton(2, false);
 }
 
@@ -2110,6 +2111,7 @@ public function meditateInForest():void {
 				//get a small talisman if not have one
 				player.createKeyItem("Jojo's Talisman", 0, 0, 0, 0);
 			}
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
@@ -2119,12 +2121,14 @@ public function meditateInForest():void {
 	if (player.statusEffectv1(StatusEffects.JojoMeditationCount) % 5 == 0)
 	{
 		outputText("\n\nYou ponder and get an idea - the mouse could stay at your camp.  There's safety in numbers, and it would be easier for the two of you to get together for meditation sessions.  Do you want Jojo's company at camp?");
+		explorer.stopExploring();
 		doYesNo(jojoScene.acceptJojoIntoYourCamp, camp.returnToCampUseTwoHours);
 		return;
-	}
-	else
+	} else {
 		outputText("\n\nHe bows his head sadly and dismisses you.");
-	doNext(camp.returnToCampUseTwoHours);
+		explorer.stopExploring();
+		doNext(camp.returnToCampUseTwoHours);
+	}
 }
 
 
@@ -2138,7 +2142,7 @@ public function acceptJojoIntoYourCamp():void {
 		outputText("You offer Jojo the chance to stay at your camp.  He cocks his head to the side and thinks, stroking his mousey whiskers.\n\n\"<i>Yes, it would be wise.   We would be safer together, and if you like I could keep watch at night to keep some of the creatures away.  I'll gather my things and be right there!</i>\"\n\nJojo scurries into the bushes, disappearing in a flash.  Knowing him, he'll be at camp before you!");
 		player.createStatusEffect(StatusEffects.PureCampJojo, 0, 0, 0, 0);
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Jojo In Camp
@@ -2451,7 +2455,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 		outputText("You tell Jojo about how you spent a lot of your time... making money.  When the naive little monk asks how, you just smile as you fondly remember the older whore, Poison, showing you the ropes and teaching the tricks of the trade.  Regardless of how it made people think of you, it was certainly good money.  In an attempt to hide some of the messier details of your past from the monk, you explain how you accepted... odd jobs for people, important work that not many others in the village would be willing to accept.  He seems confused but shrugs it off.\n\n");
 	}
 	else if (player.hasPerk(PerkLib.HistoryFeral)) {
-		outputText("You tell Jojo about how you spent a lot of your time in the wild. You tell him that before arriving in Mareth, you were living your life among a pack of wild wolves.  \n\n");  // I am not a writer, feel free to amend. 
+		outputText("You tell Jojo about how you spent a lot of your time in the wild. You tell him that before arriving in Mareth, you were living your life among a pack of wild wolves.  \n\n");  // I am not a writer, feel free to amend.
 	}
 	else {
 		outputText("You're not sure where to start. You have been doing countless activities before arriving in Mareth that it'd be virtually impossible to list all of them. It's almost impossible to choose where to start or what to even begin talking about. It comes to the point where you're not sure if there's anything you HAVEN'T done.\n\n");
@@ -2691,12 +2695,12 @@ public function apparantlyJojoDOESlift():void
 		if (flags[kFLAGS.AMILY_FOLLOWER] > 0) enlightenedBlurbs.push("You can hear Amily changing the bedding to her nest.");
 		if (SceneLib.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
-		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
+		if (sophieFollower() && !player.hasStatusEffect(StatusEffects.SophieOff)) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] > 0) {
 			if (flags[kFLAGS.IZMA_BROFIED] > 0) enlightenedBlurbs.push("You can hear Izmael doing push-ups to stay fit.");
 			else enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book.");
 		}
-		if (SceneLib.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
+		if (SceneLib.helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
@@ -2724,7 +2728,7 @@ public function apparantlyJojoDOESlift():void
 		dynStats("wis", 1); //Wisdom boost to 100
 		player.trainStat("wis", .5, player.trainStatCap("wis",100));
 	}
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function wormRemoval():void {
@@ -2744,7 +2748,7 @@ public function wormRemoval():void {
 	player.buff("Infested").remove();
 	dynStats("lus", -99, "cor", -15);
 	player.orgasm();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function jojoFreaksOutSoulless():void {
@@ -2761,7 +2765,7 @@ public function jojoFreaksOutSoulless():void {
 		outputText("[pg]On this note, Jojo takes a safe distance from you. He doesn't trust you fully… not anymore but still he's willing to give you a chance.");
 		outputText("[pg]\"<i>Once you have the item, meet me in the forest. For my own safety I'm leaving your camp until you do.</i>\"");
 		SceneLib.alvinaFollower.JojoDevilPurification = 1;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -2780,7 +2784,7 @@ public function jojoForestPurifyMeFromDevilry():void {
 		outputText(item.longName +"\n");
 		addButton(button++, item.shortName, jojoDevilPurificationScene, item);
 	}
-	addButton(14, "Never mind", camp.returnToCampUseOneHour);
+	addButton(14, "Never mind", explorer.done);
 
 	function jojoDevilPurificationScene(item:ItemType):void {
 		outputText("[pg]Jojo begins to draw circles into the ground.[pg]");
@@ -2793,6 +2797,7 @@ public function jojoForestPurifyMeFromDevilry():void {
 		player.cor -= 50;
 		SceneLib.alvinaFollower.JojoDevilPurification = 2;
 		player.consumeItem(item);
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseFourHours);
 	}
 }
@@ -2953,7 +2958,7 @@ private function anallyFuckTheMouseButtSlut():void {
 	flags[kFLAGS.JOJO_ANAL_XP]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	player.sexReward("default","default",true,false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function getAnallyFuckedByMouseYouSlut():void {
@@ -2979,7 +2984,7 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	player.sexReward("cum","Anal");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function getVagFuckedByMouse():void {
@@ -3014,7 +3019,7 @@ private function getVagFuckedByMouse():void {
 	if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 	else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82, (jojoCumQ() < 2000 ? 100 - (jojoCumQ() / 50) : 60));
 	player.sexReward("cum","Vaginal");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function giveBirthToPureJojoBabies():void {
@@ -3053,7 +3058,7 @@ private function suckJojosCock():void {
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	dynStats("lus", 20, "cor", -1);
 	player.sexReward("cum","Lips");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function mishapsLunaJojo():void {

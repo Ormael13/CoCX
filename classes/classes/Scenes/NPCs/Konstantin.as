@@ -2,7 +2,7 @@
  * ...
  * @author Coalsack
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -27,6 +27,7 @@ public class Konstantin extends NPCAwareContent
 				useables.WT_BRAN,
 				useables.DBAPLAT,
 				useables.TBAPLAT,
+				useables.RED_GEL,
 			]
 			for each (var material:ItemType in materials)
 				if (player.hasItem(material)) return true;
@@ -91,7 +92,7 @@ public class Konstantin extends NPCAwareContent
 				}
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForestWeapon():void {
 			clearOutput();
@@ -121,7 +122,7 @@ public class Konstantin extends NPCAwareContent
 				}
 			}
 			else outputText("\"<i>It’s okay, " + player.mf("man","girl") + ". Gems can be tough to get sometimes. If you feel like using my services, you can find me in this clearing.</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForestNothing():void {
 			clearOutput();
@@ -137,7 +138,7 @@ public class Konstantin extends NPCAwareContent
 			}
 			else outputText("camp");
 			outputText(".\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForest2():void {
 			outputText("As you take your stuff from Konstantin, you’re questioned by the bear-smith.\n\n");
@@ -157,7 +158,7 @@ public class Konstantin extends NPCAwareContent
 		public function meetKonstantinAtForest2No():void {
 			outputText("\"<i>Right. Truth be told, we’ve barely met two times.</i>\" Konstantin says, sighing a bit. \"<i>These times you can’t put your trust in someone so easily, huh? At least I hope that we can see each other again.</i>\"\n\n");
 			outputText("With that, you bid each other farewell, and you return to your camp while he resumes his work.\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function meetKonstantinAtForest2Yes():void {
 			outputText("\"<i>Really? Damn, I’m so fucking happy</i>\" Konstantin says, wrapping you in a literal bear-hug. \"<i>I’ll make sure that you don’t regret it [name]. And even better, since we’re on your place we’ll have time to meet each other better. So on top of not spending the rest of my life alone in the woods, now I’ll have a new friend.</i>\"\n\n");
@@ -179,6 +180,7 @@ public class Konstantin extends NPCAwareContent
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
 			outputText("\n\n<b>Before fully settling in your camp as if remembering something Konstantin pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 2;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		
@@ -303,7 +305,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Seeing how Konstantin is working with armor and plating pieces, you happen to ask him if he could assemble some of the materials that you’ve found during your travels in Mareth into something useful to wear and protect yourself.\n\n");
 			if (anyUsableMaterials()) {
 				if (player.hasItem(useables.GREENGL)) {
-					outputText("He looks over your bag’s contents, noticing a glimpse of the gel-like substance in it.\n\n");
+					outputText("He looks over your bag’s contents, noticing a glimpse of the greenish gel-like substance in it.\n\n");
 					outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell around the lake these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid if exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a large amount, something like, five samples.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.B_CHITN)) {
@@ -378,13 +380,17 @@ public class Konstantin extends NPCAwareContent
 					outputText("Then, you produce Depravito and tell Konstantin that you instead want him to infuse the wood into the staff. The bear-smith examines the staff, confusion growing as he proceeds. \"<i>Where the hell did you get this?  It appears like someone already infused it with bark, and it looks quite a bit like my own crafting work, except...</i>\" You tell him that the staff is infused with Marae’s power, and the bark is as well.  Infusing the bark into the staff would improve the staff, and balance the powers within it.\n\n");
 					outputText("\"<i>Well, I dunno what effects would have this kind of bark on a thing like that, since they seem to have an opposite nature. But I’m a bit intrigued about what’s gonna happen, and the voice of the so-called goddess already told me to help you, so I’ll trust your judgment.</i>\"\n\n");
 				}
+				if (player.hasItem(useables.RED_GEL)) {
+					outputText("He looks over your bag’s contents, noticing a glimpse of the redish gel-like substance in it.\n\n");
+					outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell beneath river village these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid if exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient soulforce conductive armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a large amount, something like, five samples.</i>\"\n\n");
+				}
 			}
 			else {
 				outputText("With a sigh, Konstantin tells you that nothing of you’ve brought him is useful to make a durable outfit, as they either lack the composition or the properties to be properly crafted.\n\n");
 				outputText("A bit disappointed, you retrieve you pack, guessing which items you should get this time.\n\n");
 			}
 			menu();
-			if (player.hasItem(useables.GREENGL)) addButton(0, "Gel", KonstantinCraftingGelArmor);
+			if (player.hasItem(useables.GREENGL)) addButton(0, "G.Gel", KonstantinCraftingGreenGelArmor);
 			if (player.hasItem(useables.B_CHITN)) addButton(1, "Chitin", KonstantinCraftingChitinItems);
 			if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 1) addButton(2, "SpiderSilk", KonstantinCraftingSpiderSilkItems);
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.RATHAZUL_ARMOR_TYPE] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
@@ -396,9 +402,10 @@ public class Konstantin extends NPCAwareContent
 				if (player.hasItem(useables.SKYMETA) || Crafting.BagSlot08 > 0) addButton(8, "Skymetal", KonstantinCraftingSkymetalItems);
 				if (player.hasItem(useables.EBONING) || Crafting.BagSlot06 > 0) addButton(9, "EbonbIng", KonstantinCraftingEbonbIngItems);
 			}
+			if (player.hasItem(useables.RED_GEL)) addButton(10, "R.Gel", KonstantinCraftingRedGelArmor);
 			addButton(13, "Misc", KonstantinSmithingMenu2).hint("Specific crafting options.");
 			addButton(14, "Back", KonstantinMainCampMenu);
-		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
+		}
 		private function KonstantinSmithingMenu2():void {
 			menu();
 			if (TyrantiaFollower.TyraniaThePhalluspear && player.hasItem(weapons.SPEAR) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.T_SSILK) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3) addButton(6, "ThePhalluspear", KonstantinCraftingThePhalluspear);
@@ -436,16 +443,28 @@ public class Konstantin extends NPCAwareContent
 			outputText("\"<i>Nah, " + player.mf("man", "girl") + ". I’ll need more of that stuff to start doing something. Ten pieces, as I’ve said. If you happen to gather them somehow, look for me and we’ll work something.</i>\"\n\n");
 			doNext(KonstantinMainCampMenu);
 		}
-		private function KonstantinCraftingGelArmor():void {
+		private function KonstantinCraftingGreenGelArmor():void {
 			if (player.hasItem(useables.GREENGL, 5)) {
 				clearOutput();
-				outputText("Konstantin then takes the green gel from your bags and pours it into a large pot of glistening steel. Humming to himself, he proceeds to add some liquids and metal-looking powders, and then closes the pot, after what he puts it inside a small furnace. Even from outside, you manage to hear how the mix boils and bubbles inside the pot.\n\n");
-				outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothens the blemishes and turns them into beautiful emerald plates.\n\n");
-				outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the emerald plates. Once he’s finished your bear friend presents to you the brand-new set of glistening gel armor.\n\n");
+				KonstantinCraftingGelArmor(0);
 				player.destroyItems(useables.GREENGL, 5);
 				inventory.takeItem(armors.GELARMR, KonstantinMainCampMenu);
 			}
 			else KonstantinCraftingNotEnoughMaterials1();
+		}
+		private function KonstantinCraftingRedGelArmor():void {
+			if (player.hasItem(useables.RED_GEL, 5)) {
+				clearOutput();
+				KonstantinCraftingGelArmor(1);
+				player.destroyItems(useables.RED_GEL, 5);
+				inventory.takeItem(armors.GELCARM, KonstantinMainCampMenu);
+			}
+			else KonstantinCraftingNotEnoughMaterials1();
+		}
+		private function KonstantinCraftingGelArmor(type:Number = 0):void {
+			outputText("Konstantin then takes the "+(type == 0?"green":"red")+" gel from your bags and pours it into a large pot of glistening steel. Humming to himself, he proceeds to add some liquids and metal-looking powders, and then closes the pot, after what he puts it inside a small furnace. Even from outside, you manage to hear how the mix boils and bubbles inside the pot.\n\n");
+			outputText("After a couple of minutes, during which Konstantin has been busy taking your measurements, the bear-smith takes the pot out of the furnace and after cooling with clean water, he pours the hot fluid into several molds placed on one of his workbenches. The substance solidifies quickly, and once it has become air-temperature, he smoothens the blemishes and turns them into beautiful "+(type == 0?"emerald":"crimson")+" plates.\n\n");
+			outputText("Grabbing a mannequin that he has nearby for armor making purposes, he assembles a chest piece, a set of arm guards, shoulder and leg protections and even a couple of ornaments from the "+(type == 0?"emerald":"crimson")+" plates. Once he’s finished your bear friend presents to you the brand-new set of glistening "+(type == 0?"green":"red")+" gel armor.\n\n");
 		}
 		private function KonstantinCraftingChitinItems():void {
 			if (player.hasItem(useables.B_CHITN, 5)) {
@@ -969,20 +988,20 @@ public class Konstantin extends NPCAwareContent
 			outputText("Konstantin eyes you expectantly.\n\n");
 			outputText("\"<i>So [name], do you have anything special for me today?</i>\"\n\n");
 			menu();
-			if ((player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) || (SceneLib.crafting.hasMaterial(useables.COP_ORE) && SceneLib.crafting.hasMaterial(useables.TIN_ORE))) addButton(0, "Copper/Tin", KonstantinSmeltingMenuCopperAndTin);
-			if (player.hasItem(useables.EBONBLO)) addButton(1, "Ebonbloom", KonstantinSmeltingMenuEbonbloom);
+			if ((player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) || (Crafting.BagSlot01 > 0 && Crafting.BagSlot02 > 0)) addButton(0, "Copper/Tin", KonstantinSmeltingMenuCopperAndTin);
+			if (player.hasItem(useables.EBONBLO) || Crafting.BagSlot05 > 0) addButton(1, "Ebonbloom", KonstantinSmeltingMenuEbonbloom);
 			addButton(14, "No", KonstantinSmeltingMenuNo);
 		}
 		private function KonstantinSmeltingMenuCopperAndTin():void {
 			menu();
-			if ((player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) || (SceneLib.crafting.hasMaterial(useables.COP_ORE) && SceneLib.crafting.hasMaterial(useables.TIN_ORE))) addButton(0, "One", KonstantinSmeltingMenuProcess, "copper and tin", 1);
-			//if (player.hasItem(useables.COP_ORE, 5) && player.hasItem(useables.TIN_ORE, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "copper and tin", 2, true);
+			if ((player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) || (Crafting.BagSlot01 > 0 && Crafting.BagSlot02 > 0)) addButton(0, "One", KonstantinSmeltingMenuProcess, "copper and tin", 1);
+			if (((player.hasItem(useables.COP_ORE, 5) && player.hasItem(useables.TIN_ORE, 5)) || (Crafting.BagSlot01 > 4 && Crafting.BagSlot02 > 4)) && Crafting.BagSlot03 <= (Crafting.BagSlot03Cap - 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "copper and tin", 2, true);
 			addButton(14, "Back", KonstantinSmeltingMenu);
 		}
 		private function KonstantinSmeltingMenuEbonbloom():void {
 			menu();
-			if (player.hasItem(useables.EBONBLO)) addButton(0, "One", KonstantinSmeltingMenuProcess, "ebonbloom", 3);
-			//if (player.hasItem(useables.EBONBLO, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "ebonbloom", 4, true);
+			if (player.hasItem(useables.EBONBLO) || Crafting.BagSlot05 > 0) addButton(0, "One", KonstantinSmeltingMenuProcess, "ebonbloom", 3);
+			if ((player.hasItem(useables.EBONBLO, 5) || Crafting.BagSlot05 > 4) && Crafting.BagSlot06 <= (Crafting.BagSlot06Cap - 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "ebonbloom", 4, true);
 			addButton(14, "Back", KonstantinSmeltingMenu);
 		}
 		private function KonstantinSmeltingMenuNo():void {
@@ -999,29 +1018,42 @@ public class Konstantin extends NPCAwareContent
 			var itype:ItemType;
 			switch(craft) {
 			case 1: //1 Copper+Tin ore
-				if (!(SceneLib.crafting.hasMaterial(useables.COP_ORE) > 0 && SceneLib.crafting.useMaterial(useables.COP_ORE)))
+				if (Crafting.BagSlot01 > 0 && Crafting.BagSlot02 > 0) {
+					Crafting.BagSlot01 -= 1;
+					Crafting.BagSlot02 -= 1;
+				}
+				else {
 					player.destroyItems(useables.COP_ORE, 1);
-				if (!(SceneLib.crafting.hasMaterial(useables.TIN_ORE) > 0 && SceneLib.crafting.useMaterial(useables.TIN_ORE)))
 					player.destroyItems(useables.TIN_ORE, 1);
+				}
 				itype = useables.BRONZEB;
 				break;
 			case 2: //5 Copper+Tin ores
-				player.destroyItems(useables.COP_ORE, 5);
-				player.destroyItems(useables.TIN_ORE, 5);
-				itype = useables.BRONZEB;
+				if (Crafting.BagSlot01 > 4 && Crafting.BagSlot02 > 4) {
+					Crafting.BagSlot01 -= 5;
+					Crafting.BagSlot02 -= 5;
+				}
+				else {
+					player.destroyItems(useables.COP_ORE, 5);
+					player.destroyItems(useables.TIN_ORE, 5);
+				}
+				Crafting.BagSlot03 += 5;
 				break;
 			case 3: //1 Ebonbloom
-				player.destroyItems(useables.EBONBLO, 1);
+				if (Crafting.BagSlot05 > 0) Crafting.BagSlot05 -= 1; 
+				else player.destroyItems(useables.EBONBLO, 1);
 				itype = useables.EBONING;
 				break;
 			case 4: //5 Ebonblooms
-				player.destroyItems(useables.EBONBLO, 5);
-				itype = useables.EBONING;
+				if (Crafting.BagSlot05 > 4) Crafting.BagSlot05 -= 5; 
+				else player.destroyItems(useables.EBONBLO, 5);
+				Crafting.BagSlot06 += 5;
 				break;
 			default:
 				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 			}
-			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+			if (craft == 2 || craft == 4) doNext(camp.returnToCampUseOneHour);
+			else inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
 		
 		public function KonstantinTinkeringMenu():void {
@@ -1092,7 +1124,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("\n\nWhen you can’t hold more seed inside, you let his cock flop free, bathing your face and body with the remaining jets of seed. Konstantin, a bit tired, reaches out to you, and licks most of his cum from your [skin], ticking you with his tongue as he does.\n\n");
 			outputText("Both of you quite satisfied, in more than one sense, you cuddle together and sleep on his bed.\n\n");
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenuReciveBJ():void {
 			clearOutput();
@@ -1131,7 +1163,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("\"<i>Maybe later [name]. I’ll have to rest a bit until our next romp.</i>\" Konstantin answers.\n\n");
 			outputText("Nodding, you grab your clothes and return to your task, not without getting another loving hug from the large bear before going out of his tent.\n\n");
 			player.orgasm();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenu69():void {
 			clearOutput();
@@ -1193,7 +1225,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Once his load has subsided, you lick the remaining cum from his tip, and hop to his side with a bit of difficulty, given the weight added to your cum-filled belly. There, you both relax and cuddle together, your body enveloped in his warm and furry embrace. After you’ve rested enough, you re-dress and give Konstantin a last kiss before returning to your tasks\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenuReciveAnal():void {
 			clearOutput();
@@ -1260,7 +1292,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Accepting his help, you take his hand and try to get up, to no avail, your cum-laden belly forcing you down. Instead, you opt to lie together in bed, relaxing and recovering of your intense lovemaking, while Konstantin gives you tender kisses, caressing your belly from time to time. After a while, you  remind yourself of your duties, and since you’re recovered enough, you grudgingly disentangle from his furred embrace, giving him a last hug before returning to your tasks.\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		public function KonstantinSexMenuHotSpringFuck():void {
 			clearOutput();
@@ -1290,7 +1322,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Later, you disentangle of each other and wash again before you leave, his seed pouring from your anus as you walk. Laughing, he helps you clean yourself and  the excess cum out of your body. Then you dry yourselves and get dressed, and, after a strong hug and a loving kiss, you part ways with a satisfied smile on your faces.\n\n");
 			player.orgasm();
 			player.slimeFeed();
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

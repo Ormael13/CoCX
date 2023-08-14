@@ -1,6 +1,8 @@
 package classes {
 import classes.Races.*;
 import classes.Races.KirinRace;
+import classes.Scenes.Monsters.Werespider;
+import classes.Scenes.Monsters.WerespiderScene;
 import classes.internals.race.RaceTierBuilder;
 
 public class Races {
@@ -131,16 +133,21 @@ public class Races {
 	public static const CERBERUS:CerberusRace	           = new CerberusRace(108);
 	public static const IMP:ImpRace                        = new ImpRace(109);
 	public static const SANDWORM:SandWormRace              = new SandWormRace(110);
+	public static const RAISUNE:RaisuneRace                = new RaisuneRace(111);
+	public static const WEREFOX:WerefoxRace                = new WerefoxRace(112);
+	public static const ANUBIS:AnubisRace				   = new AnubisRace(113);
+	public static const WERESPIDER:WerespiderRace          = new WerespiderRace(114);
+	public static const WERESHARK:WeresharkRace            = new WeresharkRace(115);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
-			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX, MANTICORE
+			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX, MANTICORE, ANUBIS
 	];
 	public static const SnakelikeRaces:/*Race*/Array = [
 			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS
 	];
 	public static const InsectRaces:/*Race*/Array = [
-			BEE, MANTIS, SCORPION, SPIDER, CANCER, ATLACH_NACHA, ANT, SANDWORM
+			BEE, MANTIS, SCORPION, SPIDER, ANT, OOMUKADE, CANCER, ATLACH_NACHA, SANDWORM, WERESPIDER
 	];
 	public static const GoblinoidRaces:/*Race*/Array = [
 			GOBLIN, GREMLIN

@@ -68,7 +68,8 @@ public class HydraRace extends Race {
 							return !(body.player.racialScore(Races.NAGA) > 10
 									|| GorgonRace.isGorgonLike(body)
 									|| VouivreRace.isVouivreLike(body)
-									|| CouatlRace.isCouatlLike(body));
+									|| CouatlRace.isCouatlLike(body)
+									|| ApophisRace.isApophisLike(body));
 						}, 0, -1000);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);

@@ -8,15 +8,16 @@
 package classes.Scenes.Places {
 
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Crafting;
+import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
-import classes.Scenes.NPCs.ChiChiFollower;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.SceneLib;
 
@@ -151,7 +152,7 @@ public class HeXinDao extends BaseContent
         outputText("\n\nAt the West end of He'Xin'Dao you see one of the biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses.
         outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each.\n\n");
 		outputText("At first glance these people seem random. Some wield bows, others daggers, a few with no weapons at all... But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention.\n\n");
-		outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n"); 
+		outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n");
 		//outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
         riverislandMenuShow();
     }
@@ -162,7 +163,7 @@ public class HeXinDao extends BaseContent
         addButton(1, "TFspec/Exch", mogahenmerchant);
         addButton(2, "SoulEquip", serenamerchant);
         addButton(3, "SoulArrow", ermaswiftarrowmerchant);
-		addButton(4, "FSAAWY", ermaswiftarrow2merchant).hint("Flying Swords are always with you!");
+		addButton(4, "FSAAWY", qimerchant).hint("Flying Swords are always with you!");
 		//addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
         addButton(6, "JourTTEast", SceneLib.journeyToTheEast.enteringInn);
         addButton(7, "Arena", soularena);
@@ -203,7 +204,6 @@ public class HeXinDao extends BaseContent
 		else addButtonDisabled(2, "3rd Stall", "You need to be at least a Soul Apprentice to check those items.");
         if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "4th Stall", TierIII).hint("Check out the fourth stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
 		else addButtonDisabled(3, "4th Stall", "You need to be at least a Soul Sprite to check those items.");
-
 
         var hasSoulCultivator:Boolean = player.hasPerk(PerkLib.JobSoulCultivator);
         var hasSoulPersonage:Boolean = player.hasPerk(PerkLib.SoulPersonage);
@@ -275,11 +275,57 @@ public class HeXinDao extends BaseContent
             "\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
         ).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
       }*/
-      addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
-      addButton(14, "Back", riverislandVillageStuff);
+		addButton(10, "Alch.Tools", alchemyTools).hint("Check out alchemy equipment.");
+		addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
+		addButton(14, "Back", riverislandVillageStuff);
 
         statScreenRefresh();
     }
+	private function alchemyTools():void {
+		clearOutput();
+		outputText("You check out the stall with the alchemic equipment. It seems that only most basic tools are present - if you need higher quality devies, you need to look somewhere else.");
+		outputText("\n\n");
+		outputText("<b>You have ")
+		if (Crafting.alembicLevel == 0 && Crafting.furnaceLevel == 0) {
+			outputText("no alchemical equipment in your camp.</b>")
+		} else {
+			if (Crafting.alembicLevel > 0) {
+				outputText(SceneLib.crafting.alchemyExtraction.alembicName());
+				if (Crafting.furnaceLevel > 0) outputText(" and ");
+			}
+			if (Crafting.furnaceLevel > 0) {
+				outputText(SceneLib.crafting.mutagenPillCrafting.furnaceName());
+			}
+			outputText(" in your camp.</b>")
+		}
+		
+		function buyAlembic(tier:int, priceGems:int):void {
+			Crafting.alembicLevel = tier;
+			player.gems -= priceGems;
+			outputText("\n\n<b>"+capitalizeFirstLetter(Crafting.ALEMBIC_LEVELS[tier].name)+" purchased!</b>");
+			statScreenRefresh();
+			doNext(alchemyTools);
+		}
+		function buyFurnace(tier:int, priceGems:int):void {
+			Crafting.furnaceLevel = tier;
+			player.gems -= priceGems;
+			outputText("\n\n<b>"+capitalizeFirstLetter(Crafting.FURNACE_LEVELS[tier].name)+" purchased!</b>");
+			statScreenRefresh();
+			doNext(alchemyTools);
+		}
+		
+		menu();
+		button(0).show("Alembic I", curry(buyAlembic, Crafting.ALEMBIC_LEVEL_SIMPLE, Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value))
+				 .hint("Buy a simple alembic to refine substances from ingredients.\n\nCost: "+Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value+" gems.")
+				.disableIf(player.gems < Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value, "++\n\n<b>Not enough gems!</b>")
+				.disableIf(Crafting.alembicLevel >= Crafting.ALEMBIC_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>")
+		;
+		button(1).show("Furnace I", curry(buyFurnace, Crafting.FURNACE_LEVEL_SIMPLE, Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value))
+				 .hint("Buy a simple alchemic furnace to combine substances into pills.\n\nCost: "+Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value+" gems.")
+				.disableIf(player.gems < Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value)
+				 .disableIf(Crafting.furnaceLevel >= Crafting.FURNACE_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>");
+		button(14).show("Back", golemmerchant);
+	}
     private function debitItem1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String):void{
         var value:int = itype.value * priceRate;
         if (player.gems < value) {
@@ -893,7 +939,7 @@ public class HeXinDao extends BaseContent
 		}
 	}
 	
-	public function ermaswiftarrow2merchant():void {
+	public function qimerchant():void {
         clearOutput();
         outputText("After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. ");
         outputText("Behind the desk in the central point of the shop you see a flesh golem on unidentified gender.");
@@ -906,7 +952,7 @@ public class HeXinDao extends BaseContent
 		addButton(4, weaponsflyingswords.MOONLGT.shortName, flyingswordBuy, weaponsflyingswords.MOONLGT);
 		addButton(5, weaponsflyingswords.S_TWINS.shortName, flyingswordBuy, weaponsflyingswords.S_TWINS);
 		addButton(10, weaponsflyingswords.ASAUCHI.shortName, flyingswordBuy, weaponsflyingswords.ASAUCHI);
-        addButtonDisabled(13, "Training", "The owner of the shop isn't here, currently. There's nobody to train you.");//.hint("Flying Sword training.")
+        addButtonDisabled(13, "Training", "The shop owner, Qi, is in the middle of closed door cultivations. It shouldn't take longer than a few months for him to finish.");//.hint("Flying Sword training.")
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
@@ -917,17 +963,17 @@ public class HeXinDao extends BaseContent
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
             //Goto shop main menu
-            doNext(ermaswiftarrow2merchant);
+            doNext(qimerchant);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
         //Go to debit/update function or back to shop window
-        doYesNo(curry(debitFlyingSword,itype), ermaswiftarrow2merchant);
+        doYesNo(curry(debitFlyingSword,itype), qimerchant);
     }
     private function debitFlyingSword(itype:ItemType):void {
         flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
-        inventory.takeItem(itype, ermaswiftarrow2merchant);
+        inventory.takeItem(itype, qimerchant);
     }
 
 public function soularena():void {
@@ -1017,10 +1063,10 @@ public function soularena():void {
 			//addButton(2, "Gauntlet 3", gaunletchallange3).hint("Fight 5 diff enemies one after another.");
 			//addButton(3, "Gauntlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 			//addButton(4, "Gauntlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
-			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierwszej walce oblokowanie perków do powiekszania drużyny
+			//addButton(5, "Gauntlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");
 			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
 			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
-			//addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
 			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
 			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
 			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
@@ -1028,13 +1074,15 @@ public function soularena():void {
 		}
 		if (page == 2) {
 			//addButton(0, "Kitty", arenaSelection, Veronika);
-			/*addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
+			//addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
 			//addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err Ayotech weapons.");
-			addButton(5, "Macho Mander", arenaSelection,Syth).hint("He's Macho & Mander.");
-			if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
-			else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");*/
+			//addButton(5, "Macho Mander", arenaSelection,Syth).hint("He's Macho & Mander.");
+			//if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
+			//else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
 			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButtonDisabled(10, "IntermedLeader", "Req. to have any henchman with you to start this fight.");
+			else addButton(10, "IntermedLeader", intermediateleadershipfight1).hint("Intermediate Leadership fight");
 			addButton(14, "Back", soularenaChallengeBack);
 		}
 	}
@@ -1045,11 +1093,96 @@ public function soularena():void {
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 		monster.XP = monster.XP * 2;
     }
-	public function gaunletsinbetween():void {
+	public function soularenafightsbetween():void {
 		cleanupAfterCombat();
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
 	}
+	public function intermediateleadershipfight1():void {
+		clearOutput();
+		outputText("As you enter the arena the announcer voice booms in and the crowd cheers you up. They get to see the hero who defeated the previous trial make a come back and thats clearly not an everyday spectacle.\n\n");
+		outputText("\"<i>Greeting people of the river town, welcome to the arena. Today our favourite champion faces off against team battles, you know what this means!</i>\"\n\n");
+		outputText("The crowd suddenly starts calling out as a pair of large figures easily 8 feet tall steps out from the opposite archway. It's a minotaur and its lacta bovine wife. ");
+		outputText("A single minotaur is normally much trouble but partnered up with a lacta bovine there's no telling what shenanigan could happen! The bull walks toward you confident in his might he won't let you simply trample his pride before his wife.\n\n");
+		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+		startCombat(new MinotaurKing());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+	}
+	public function intermediateleadershipfight2():void {
+		clearOutput();
+		soularenafightsbetween();
+		outputText("\n\nAs the minotaur couple falls down utterly defeated the announcer claims. \"<i>Well seeing as the challenger defeated the cows we have a special surprise for you today. Angels do not typically associate with us folks as they are too busy waging a bloody war against the demon and scouring corruption from the land ");
+		outputText("but through many deals and persuasion we managed to secure the collaboration of these two. I present to you Gabriel and Uriel the angel twins! Do not be deceived by their beauty noor their innocent look they are definitely out for blood!</i>\"\n\n");
+		outputText("The two angels calmly hover into the battlefield flanked by two pairs of toothed winged orbs. Their demeanour is almost void of expression as they fixate you and emotionlessly declare at the same time.\n\n");
+        outputText("\"<i>Do not make this complicated for us mortal… simply fall.</i>\"\n\n");
+		startCombat(new AngelLR());
+        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+	}
+	public function intermediateleadershippostfight():void {
+		clearOutput();
+		outputText("The twins stare at you in complete confusion as too weak to continue fighting their wings fails them causing them to fall to the ground. Their angeloid constructs are too damaged to even grant them support.\n\n");
+		outputText("\"<i>Woa look like we got a winner here congratulation [name]!</i>\"\n\n");
+		outputText("Successfully working together with another person has taught you how to better fight in a party. <b>Gained Perk: Intermediate Leadership</b>\n\n");
+		player.createPerk(PerkLib.IntermediateLeadership, 0, 0, 0, 0);
+        cleanupAfterCombat();
+	}
+	public function dishHelperIL():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.MinoKing,0,0,0,0);
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
+			outputText("You tell Neisa you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Neisa nods, \"<i>A great stratagem, leave it to me!</i>\" She raises her shield before charging at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", repeatedly bashing the angel with her shield to keep them out of the fight.\n\n");
+			if (silly()) outputText("She speaks through her exertion, \"<i>Stop resisting! I said stop resisting! You angels think you’re so high and mighty, just above the law don’t you?!</i>\"\n\n");
+			else outputText("She speaks through her exertion, \"<i>I need you to stay down!</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
+			outputText("You tell Etna you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Etna smirks, \"<i>Hmm, how long can an angel last against my tail? Time to find out!</i>\"\n\n");
+			outputText("Wasting no time, The manticore leaps with a hungry lunge, diving at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" as she quickly wraps her tail around them to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
+			outputText("You tell Aurora you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Aurora nods, raising her wings before swooping down onto "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", pinning them beneath her stone frame, keeping them out of the fight.\n\n");
+			outputText("\"<i>Prevention is the best method to stop danger, now, let’s put a halt to this nuisance.</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
+			outputText("You tell Alvina you need her to handle one of the angels before you.\n\n");
+			outputText("Alvina rolls her eyes, \"<i>Oh, why, of course… Leave me to do the dirty work.</i>\"\n\n");
+			outputText("She sets down her scythe before drawing somatic symbols with a single finger. "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" is imprisoned in shadowy chains as they’re thrust into the ground.\n\n");
+			outputText("A faint grin curls up her face, \"<i>It’s so easy to keep them locked down…</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
+			outputText("You tell Mitzi and her daughters that you need them to keep the suspended angel from recovering!\n\n");
+			outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that bitch!</i>\"\n\n");
+			outputText("Furxia, Lidea, Mitzi and Roxy rush "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", trapping them within their onslaught as they try to keep the angel pinned and out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
+			outputText("You tell Excellia you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Excellia rolls her shoulders briefly, \"<i>I can handle that easily.</i>\" Without further hesitation, she rushes in, using the weight of her body to smash into "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" and keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
+			outputText("You tell Amily you need her to keep the suspended angel from recovering!\n\n");
+			outputText("Amily nods before coating a dagger in some poison, \"<i>A little more paralytic poison should do the trick…</i>\"\n\n");
+			outputText("Amily quickly rushes to "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" before driving her dagger into them to keep them out of the fight. \"<i>Now I just need to make sure they don’t get up… Let’s hope I have enough to last.</i>\"\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
+			outputText("You tell Zenji you need him to keep the suspended angel from recovering!\n\n");
+			outputText("Zenji nods, \"<i>Leave it to me, champion!</i>\"\n\n");
+			outputText("He readies his spear before pouncing on "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", smacking them with the blunt side of his spear to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") {
+			outputText("You tell Kiha you need her to keep the suspended angel from recovering!\n\n");
+			outputText("She scoffs teasingly, \"<i>Oh, an idiot like you can’t manage against multiple foes? Yeah, don’t worry, I’ll totally take care of it.</i>\" Axe in hand, Kiha charges at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", bashing the angel with the blunt side of her axe to keep them out of the fight.\n\n");
+		}
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") {
+			outputText("You notice the angels eyeing your Drider giantess, disgust all over their expressions. In response, you can <i>feel</i> her aura thickening, her eyes narrowing.\n\n");
+			outputText("\"<i>What?!</i>\" She demands, the hairs on her legs standing straight up. \"<i>WHAT?!</i>\"\n\n");
+			outputText("You point at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", telling your Amazoness that you need her to keep him down, so you can focus on the other.\n\n");
+			outputText("\"<i>Oh…I am all OVER that.</i>\" Tyrantia lets out a guttural roar, shooting a glob of her “webbing” at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+". The angel dodges, but her black and pink aura flares, and she rushes in, black aura hiding the angel’s light from your view.\n\n");
+		}
+		SceneLib.combat.enemyAIImpl();
+        }
     public function gaunletchallange1fight1():void {
         clearOutput();
         outputText("You register for the gauntlet challenge, and wait patiently until you are called. You're motioned forward quickly, and move out beyond the arena gate to face your opponent. The crowd is big, you certainly have quite the audience! A man with a necktie and a weird stick screams across the area.\n\n");
@@ -1065,7 +1198,7 @@ public function soularena():void {
     }
     public function gaunletchallange1fight2():void {
         clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the last of the golems fall down, the commentator resumes.\n\n");
         outputText("\"<i>This one is straight from the woods. Freshly caught and horny to boot. Can our champion’s strength overcome the beast’s lust? LET'S FIND OUT!!</i>\"\n\n");
         outputText("A shadow moves out behind the gate, revealing the shape of a fluid starved tentacle beast.\n\n");
@@ -1074,11 +1207,12 @@ public function soularena():void {
     }
     public function gaunletchallange1fight3():void {
         clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
         outputText("\"<i>This contestant is smaller than the last two... She's smarter, and most of all, extremely deadly. She’s paid a handsome sack of gems to kick the ass of anyone who reaches this stage. This femme fatale is by far the deadliest combatant of her division. The crowd favorite huntress from the dark woods... Merisiel the dark elf!!!</i>\"\n\n");
-        outputText("A woman with dark skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The dark elf readies her bow, smirking.\n\n");
-        startCombat(new DarkElfScout());
+        outputText("A woman with light skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The light elf readies her bow, smirking.\n\n");
+        flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 10;
+		startCombat(new LightElfs());
         monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
     }
     public function gaunletchallange1postfight():void {
@@ -1111,7 +1245,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight2():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the goblin falls unconscious to the ground the crowd cheers you on.\n\n");
         outputText("\"<i>It would seems the hero squashed that midget good, but we're only just beginning. Our next contestant has been incarcerated for daring to break the laws of our fair city! For forcing his way in, and attempting to have his way with our fairest, he'll be here for a good long time! He's been kept locked up for two consecutive months. No sex, no masturbation... and he is desperate to sow his seed...Can the challenger take him on? Or will they take him...IN?! We now release... THE HOUND!!!</i>\"\n\n");
         outputText("A hellhound of massive proportions rush out of an opening gate. Its eyes burning with lust.\n\n");
@@ -1120,7 +1254,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight3():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nThe mutt falls to the floor as the crowd screams your name. The announcer announces the next contestant.\n\n");
         outputText("\"<i>The next opponent is a crowd favorite. You've heard her name told in shallow whispers. The silken jailer, the Bondswebber... The Bitch Breaker! That's right, our next opponent is an expert of the dreaded art known as BDSM. Will the challenger hold her back? Or will the Mistress claim another victim?! Please welcome...Mistress...Malady!!!</i>\"\n\n");
         outputText("A drider in a bondage suit comes out of the gate and eyes you, amused.\n\n");
@@ -1130,7 +1264,7 @@ public function soularena():void {
 	}
 	public function gaunletchallange2fight4():void {
 		clearOutput();
-		gaunletsinbetween();
+		soularenafightsbetween();
 		outputText("\n\nAs the drider falls defeated, the crowd cheers. That said the battle is far from over yet. A large number of shadows mass behind the opposite gate and already you can guess what's coming for you.\n\n");
         outputText("\"<i>The final contestant is both a new opponent and a test! Our resident golemancer has been cooking up something special. Using the traditional gargoyle model, deprived of a soul, only fit for mass production, these living weapons feel no pain, show no fear...and HAVE. NO. MERCY! Our challenger has broken through the competition so far, but can they break this wall of stone?</i>\"\n\n");
         outputText("A full squad of stone gargoyles pour out of the gate, their mace-like tails trailing in the sands. Their claws are sharp and their soulless gaze tells you it will end poorly should you lose.\n\n");
@@ -1166,24 +1300,24 @@ public function soularena():void {
 		else if (player.hasPerk(PerkLib.JobSoulCultivator)) addButtonDisabled(0, "1st", "You've already learned the basics of soul cultivation.");
 		else if (player.wis < 10) addButtonDisabled(0, "1st", "Your wisdom isn't high enough to grasp these concepts.");
 		else addButtonDisabled(0, "1st", "You don't have enough gems to attend today's lecture.");
-		if (!player.hasPerk(PerkLib.Dantain) && player.hasPerk(PerkLib.SoulApprentice)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 5) addButton(1, "2nd", mrsShigureLecturesFirst).hint("Mrs. Shigure's lecture on the first step of soul cultivation.");
-			else addButtonDisabled(1, "2nd", "You don't have enough spirit stones (5) to listen to today's lecture.");
+		if (!player.hasPerk(PerkLib.Dantain)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 5 && player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "2nd", mrsShigureLecturesFirst).hint("Mrs. Shigure's lecture on the first step of soul cultivation.");
+			else addButtonDisabled(1, "2nd", "You don't have enough spirit stones (5) or not yet reached Early Soul Apprentice to listen to today's lecture.");
 		}
 		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(1, "2nd", "You've already taken the first steps of soul cultivation.");
-		if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulPersonage)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(2, "3rd", mrsShigureLecturesSecond).hint("Mrs. Shigure's lecture on the second step of soul cultivation.");
-			else addButtonDisabled(2, "3rd", "You don't have enough spirit stones (10) to listen to today's lecture.");
+		if (!player.hasPerk(PerkLib.SoulSense)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 10 && player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "3rd", mrsShigureLecturesSecond).hint("Mrs. Shigure's lecture on the second step of soul cultivation.");
+			else addButtonDisabled(2, "3rd", "You don't have enough spirit stones (10) or not yet reached Early Soul Personage to listen to today's lecture.");
 		}
 		else if (player.hasPerk(PerkLib.SoulSense)) addButtonDisabled(2, "3rd", "You've already taken the second step of soul cultivation.");
-		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") < 0 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.hasPerk(PerkLib.SoulWarrior)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 15) addButton(3, "4th", mrsShigureLecturesThird).hint("Mrs. Shigure's lecture on the third step of soul cultivation.");
-			else addButtonDisabled(3, "4th", "You don't have enough spirit stones (15) to listen to today's lecture.");
+		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") < 0 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 15 && player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "4th", mrsShigureLecturesThird).hint("Mrs. Shigure's lecture on the third step of soul cultivation.");
+			else addButtonDisabled(3, "4th", "You don't have enough spirit stones (15) or not yet reached Early Soul Warrior to listen to today's lecture.");
 		}
 		else if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 || player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(3, "4th", "You've already taken the third step of soul cultivation.");
-		if (player.hasKeyItem("A summary of Marethian Sects") < 0 && player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 20) addButton(4, "5th", mrsShigureLecturesFourth).hint("Mrs. Shigure's lecture on the fourth step of soul cultivation.");
-			else addButtonDisabled(4, "5th", "You don't have enough spirit stones (20) to listen to today's lecture.");
+		if (player.hasKeyItem("A summary of Marethian Sects") < 0) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 20 && player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(4, "5th", mrsShigureLecturesFourth).hint("Mrs. Shigure's lecture on the fourth step of soul cultivation.");
+			else addButtonDisabled(4, "5th", "You don't have enough spirit stones (20) or not surtvived your first tribulation to listen to today's lecture.");
 		}
 		else if (player.hasKeyItem("A summary of Marethian Sects") >= 0) addButtonDisabled(4, "5th", "You already taken the fourth step of soul cultivation.");
 		if (player.hasPerk(PerkLib.Dantain)) addButton(13, "MissAkemi", missAkemiManualsShop);
@@ -1280,7 +1414,7 @@ public function soularena():void {
 		outputText("\"<i>Today we shall discuss tribulations. It's something that each of us must face in their life at least once. If you feel you're unable to pass even the most basic of tribulations, it may been a mistake to even start. Not all are cut out for the cultivator's path.</i>\" She sits comfortably behind the desk, tails swishing as she looks out on her students.\n\n");
 		outputText("\"<i>Each time us cultivators face a trial, the objective is simple. The world around you will hold nothing back, and you must not either. To pass is to live. To fail...is to die.</i>\" A few students' eyes widen, and several more murmur, seemingly shocked. \"<i>Please, students. Nothing in this world is risk-free.</i>\" She sighs. \"<i>While it is a risk, one could easily argue that every day on Mareth is its own trial, nowadays. And when a cultivator passes, they will be rewarded, not only with possibility to progress further on the endless road, but maybe even gain something else, something...special.</i>\" She looks over the gathered before continuing.\n\n");
 		outputText("\"<i>However, survival isn't always your only focus in such a trial. While risky, it'\s sometimes possible to fight back, rather than simply surviving the trial. While it can leave you vulnerable, should you fail, a cultivator will often gain more by excelling at a trial, defeating it outright, as opposed to simply surviving.</i>\" At that moment some lizan interrupts, raising his hand.\n\n");
-		outputText("\"<i> Ms. Shigure, are you speaking from experience? Or is this word of mouth from other cultivators?</i>\"\n\n"); 
+		outputText("\"<i> Ms. Shigure, are you speaking from experience? Or is this word of mouth from other cultivators?</i>\"\n\n");
 		outputText("\"<i>Hmmmm...</i>\" she pauses, giving the Lizan a favorable smile. \"<i>Yes, I speak from experience. While my first tribulation, I simply sought to live, my subsequent trials were...easier for me. When I realized this, I took a more aggressive approach, dispelling the clouds with my own power. </i>\" She continues the lecture, describing what happened during her tribulations, and those of other cultivators. From there, she moves on to practical matters,  describing the tribulation's lightning, and how a cultivator could avoid or defend against such attacks.\n\n");
 		outputText("\"<i>When the time will come each of you should feel the approaching tribulation. Some feel it in their Dantain, others have noted a strong metallic smell in the air. Luckily for us, it takes time to build up a proper storm... well beside some rare, extreme, cases, it would take a few hours, at least. So be sure to find a good, open place to face it. Ahh and be careful to not involve others in your trial. Tribulations tend to get much harder if more than one cultivator faces it. Pets or minions should be fine, but trials are unfortunately not group projects.</i>\"\n\n");
 		outputText("The lecture continues for the next hour or so, as your busty teacher speaks in detail about her own tribulations, also using the words and stories from other cultivators. <i>While my second trial was like the first, a heavenly storm, Elder Namaste had a surge of water rise, nearly drowning him. Elder Lemouse, on the other hand, had a volcano erupt, spreading sacred ash around that slowed his movements, while also raining droplets of magma. </i>\n\n");
@@ -1289,16 +1423,17 @@ public function soularena():void {
 		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseTwoHours);
 	}
-    
+ 
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 20;
 		outputText("\"<i>Greetings, everyone. Is it just me, or does it smell like Ozone in here? It’s like every single one of you has been hit by lightning recently. </i>\" She waves her hand daintily in front of her nose, getting some laughs.\n\n");
-		outputText("\"<i>Congratulations everyone! From the feel of you, everyone here has survived your first tribulation.</i>\" She gives you a few claps, and some students join in, a small token applause echoing around the lecture hall. She sternly stares at those clapping, flicking her tails as a small scowl forms on her face. \"<i>Don't let it go to your heads. This was by far the easiest trial, and there will be more.</i>\" She inhales deeply, nodding sagely.  \"<i>After each of the three major levels of Cultivation, there will be another trial.</i>\" There are a few gasps, some groans, and she stares those students down, golden eyes deadly serious. \"<i> Three heavenly trials to pass, getting stronger as you do. No matter how powerful you feel, remember that your Tribulation will rise to meet you, no matter what.</i>\"\n\n");
+		outputText("\"<i>Congratulations everyone! From the feel of you, everyone here has survived your first tribulation.</i>\" She gives you a few claps, and some students join in, a small token applause echoing around the lecture hall. She sternly stares at those clapping, flicking her tails as a small scowl forms on her face. \"<i>Don't let it go to your heads. This was by far the easiest trial, and there will be more.</i>\" She inhales deeply, nodding sagely.  \"<i>After each of the three major levels of Cultivation, there will be another trial.</i>\" There are a few gasps, some groans, and she stares those students down, golden eyes deadly serious. \"<i>Three heavenly trials to pass, getting stronger as you do. No matter how powerful you feel, remember that your Tribulation will rise to meet you, no matter what.</i>\"\n\n");
 		outputText("\"<i>Now some of you may feel a stronger connection to some of the world's energies. We call such energy Dao, and you can find it in nearly anything. From the sky, the ground or even living beings, almost everything has a Dao. Some races, such as the Salamanders or Ice Wolves, have a natural affinity to their element. This makes it easier to comprehend, and makes that form of elemental dao easier for them to work with. So, for those of you without such natural advantages, don't be afraid to spend some time working with elemental energies. Such efforts can give you increased damage with that element, and");
 		outputText(" even some minor protection from it. But the last part may be not noticable until ending early stages of comprehension.</i>\" She continue her explanations on elemental daos giving even some examples.\n\n");
 		outputText("\"<i>Second matter I would like to mention is sects. Some maybe heard about them or maybe not. In simpler words it's groups of similar minded cultivators with patriarch leader, it direct subordinates like elders and common members been disciplines. Now that you all have passed your first major trial, you could try joining a cultivator sect. Naturally, joining one would reduce the freedom you enjoy now as rogue cultivators but there are benefits to membership. Joining a sect will give access to better materials or ");
-		outputText("various manuals. Some will even fight alongside their members, granting some measure of protection. I must warn you, however, of some of the dangers of being in such an alliance.</i>\" The busty kitsune sighs, leaning on her podium. \"<i> While we cultivators are wiser than most...or so we like to think</i>\". This gets a few chuckles. \"<i>Unfortunately, we fight like any other mortals. Many sects have rivalries, alliances or even hatred, bad blood that only gets put aside when everything we all love is at stake.</i>\" She lowers her head, and drops her voice, closing her golden eyes. \"<i>One of the only times we've ever united the sects...Was the war that shall not be named.</i>\" Shigure visibly shivers, revealing a vulnerable side for the first time. \"<i> As cultivators, we can draw power from our surroundings, strength from the earth itself, and take to the sky...But even the mightiest of us can be felled by numbers. As it was against the demons.</i>\" She opens her eyes, tails glowing orange. \"<i>After the goblin city fell, the council of the State of Azoh called for us, everyone who could fight...and we answered, souls blazing. While we were outnumbered, hundreds to one, the demons were not strong individually, and our Dao hearts were firm.</i>\" Ms. Shigure inhales, shaking her head. \"<i>...Too firm. We were so focused on the battle, on stopping those monstrosities...that we drew power from the land, more than it could sustain. Inch by inch, the land was robbed of power, of the SoulForce around it...To say nothing of what the demons did.\"</i> Ms. Shigure grips the podium with both hands, her golden tails limp. \"<i> You younger ones likely know this blighted place only as 'The Battlefield'...But now you know of its true story...And hopefully, you learn from our mistakes.</i>\" The younger Kitsune assistant puts a hand on Ms. Shigure's shoulder, and she shudders, visibly pulling herself back together. \"<i>Anyways, let's get into more lighthearted topics, shall we?</i>\" She goes on for another ten to twenty minutes talking about the various benefits or obligations that comes with several different sects of cultivators.\n\n");
+		outputText("various manuals. Some will even fight alongside their members, granting some measure of protection. I must warn you, however, of some of the dangers of being in such an alliance.</i>\" The busty kitsune sighs, leaning on her podium. \"<i> While we cultivators are wiser than most...or so we like to think</i>\". This gets a few chuckles. \"<i>Unfortunately, we fight like any other mortals. Many sects have rivalries, alliances or even hatred, bad blood that only gets put aside when everything we all love is at stake.</i>\" She lowers her head, and drops her voice, closing her golden eyes. \"<i>One of the only times we've ever united the sects...Was the war that shall not be named.</i>\" Shigure visibly shivers, revealing a vulnerable side for the first time. \"<i>As cultivators, we can draw power from our surroundings, strength from the earth itself, and take to the sky...But even the mightiest of us can be felled by numbers. As it was against the demons.</i>\" She opens her eyes, tails glowing orange. ");
+		outputText("\"<i>After the goblin city fell, the council of the State of Azoh called for us, everyone who could fight...and we answered, souls blazing. While we were outnumbered, hundreds to one, the demons were not strong individually, and our Dao hearts were firm.</i>\" Ms. Shigure inhales, shaking her head. \"<i>...Too firm. We were so focused on the battle, on stopping those monstrosities...that we drew power from the land, more than it could sustain. Inch by inch, the land was robbed of power, of the SoulForce around it...To say nothing of what the demons did.\"</i> Ms. Shigure grips the podium with both hands, her golden tails limp. \"<i>You younger ones likely know this blighted place only as 'The Battlefield'...But now you know of its true story...And hopefully, you learn from our mistakes.</i>\" The younger Kitsune assistant puts a hand on Ms. Shigure's shoulder, and she shudders, visibly pulling herself back together. \"<i>Anyways, let's get into more lighthearted topics, shall we?</i>\" She goes on for another ten to twenty minutes talking about the various benefits or obligations that comes with several different sects of cultivators.\n\n");
 		outputText("\"<i>As a parting gift, since this is our last lecture, I would like to give you all this small booklet. Inside is a pamphlet for most of our local sects. And if fate allows, we may meet again somewhere in State of Azoh. May your dao be endless,</i>\" with this she ends lecture and leaves, waving goodbye.\n\n");
 		outputText("<b>Gained Key Item: A summary of Marethian Sects</b>");
 		player.createKeyItem("A summary of Marethian Sects", 0, 0, 0, 0);
@@ -1466,7 +1601,7 @@ public function soularena():void {
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES]++;
 		doNext(golemancershopRepeat);
-	}	
+	}
 	private function buyItem(odd:ItemType):void {
 		clearOutput();
 		var cost:int = odd.value / 5;

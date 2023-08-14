@@ -177,7 +177,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	public override function campInteraction():void {
 		celessSprite();
 		clearOutput();
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		outputText(_name + " sees you coming over, and smiles. She trots over happily, horn almost glowing.\n\n<i>\""+
 				player.mf("Dad", "Mom") +
 				", did you come over to see me?!\"</i>");
@@ -251,7 +251,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.")
 		}
 		_age+=72;
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 
@@ -274,7 +274,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
 		doHeatOrRut();
 		pureChildCorruption();
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 		//region INTERFACE classes.TimeAwareInterface
@@ -352,6 +352,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("<i>\""+ player.mf("Dad", "Mom") +", is something wrong?\"</i>\n" +
 		"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
 		"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
+		explorer.stopExploring();
 		doNext(camp.returnToCampUseFourHours);
 	}
 
@@ -393,7 +394,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.armors.WKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
 			[CoC.instance.armors.SPKIMO, CoC.instance.armors.OEKIMO, CoC.instance.armors.OTKIMO],
 			[CoC.instance.armors.CTPALAD, CoC.instance.armors.CTHPALA, CoC.instance.armors.CTBGUAR],
-			[CoC.instance.armors.LTHRPNT, null, CoC.instance.armors.CGUNSLI]
+			[CoC.instance.armors.LTHRPNT, null, CoC.instance.armors.CGUNSLI],
+			[CoC.instance.armors.DEATHPO, null, CoC.instance.armors.DEATHPGA]
 		];
 		var selectfrom:int = corrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
@@ -440,7 +442,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		else player.addKeyValue("Radiant shard",1,-3);
 		player.gems -= 20000;
 		player.destroyItems(from, 1);
-		SceneLib.inventory.takeItem(item, SceneLib.camp.returnToCampUseOneHour);
+		SceneLib.inventory.takeItem(item, explorer.done);
 	}
 
 	public function AboutRadiantShard():void {
@@ -455,14 +457,14 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		spriteSelect(SpriteDb.s_celessWhite);
 		if (player.hasPerk(PerkLib.BicornBlessing)) {
 			outputText("No matter how much you try, you cannot find the grove where the holy shield rest. It seems that the barriers are keeping you at bay now.");
-			doNext(camp.returnToCampUseOneHour);	
+			endEncounter();
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.CanMeetNightmare)) {
 			outputText("You manage to find your way back to the sacred grove. As expected the guardian is swift to show, blocking your path to the shield, her tall frame acting like a pure, furry wall.\n\n"+
 			"<i>\"Sorry, but until you have proven yourself I cannot allow you any further.\"</i>")
 			menu();
-			addButton(0, "Back", camp.returnToCampUseOneHour);
+			addButton(0, "Back", explorer.done);
 			if (player.hasKeyItem("Nightmare Horns") >= 0) addButton(1, "Show proof", celessUnicornIntro2);
 			else addButtonDisabled(1, "Show proof", "Req. to have Nightmare Horns.");
 			return;
@@ -529,12 +531,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"On these words you leave, better seek out this creature as fast as possible.");
 					player.createStatusEffect(StatusEffects.CanMeetNightmare,0,0,0,0);
 					_age = _ageCanMeetNightmare;
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				}
 				break;
 			case 1:
 				celessGuardNoWay();
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 				break;
 			case 2:
 				celessGuardOkayMale();
@@ -547,7 +549,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
 				player.knockUp(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS, 1, 1);
-				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+				inventory.takeItem(shields.SANCTYN, explorer.done);
 				_age = _ageDidPregnancy;
 				_questFinished = _finishedUnicorn;
 				break;
@@ -576,7 +578,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				outputText("You give her the same answer you gave all others, a flat \"No\" that leaves no room for negotiation");
 				if (silly()) outputText(", followed by singing <i>\"nope, nope, nope, fuck this shit, I’m out!\" </i>, ");
 				outputText(" as you turn around and leave. You fought hard to keep your virginity, no amount of loot is going to tempt you.");
-				doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+				doNext(recalling ? recallWakeUp : explorer.done);
 				break;
 			case 2:
 				celessGuardOkayMale();
@@ -586,7 +588,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				} else if (!recalling) {
 					if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 					findArmor();
-					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+					inventory.takeItem(shields.SANCTYN, explorer.done);
 				} else recallWakeUp();
 				break;
 			case 3:
@@ -596,7 +598,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 					player.cor = 0;
 					if (player.canGetPregnant()) player.knockUp(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS, 1, 1);
-					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+					inventory.takeItem(shields.SANCTYN, explorer.done);
 					_age = _ageDidPregnancy;
 					_questFinished = _finishedUnicorn;
 				} else doNext(recallWakeUp);
@@ -734,7 +736,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (!recalling) {
 			if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 			findArmor();
-			inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+			inventory.takeItem(shields.SANCTYN, explorer.done);
 			if (sceneHunter.other) flags[kFLAGS.HACK_CELESS_INCUBATION] = PregnancyStore.INCUBATION_CELESS / 2; //make the same shit, but shorter.
 		} else doNext(recallWakeUp);
 	}
@@ -763,7 +765,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"It has plated barding and a skirt fit for a horse's body, it even comes with matching horseshoes."+
 		"While clearly made like a full plate, it is surprisingly flexible, allowing for maneuverability similar to that of light armor, which is rather unusual.");
 		findArmor();
-		inventory.takeItem(armors.CTPALAD, camp.returnToCampUseOneHour);
+		inventory.takeItem(armors.CTPALAD, explorer.done);
 	}
 	
 	public function nightmareDefeated():void {
@@ -849,7 +851,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 		}
 		else{
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 
@@ -863,7 +865,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.\n\n"+
 		"Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach.");
 		doHeatOrRut();
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function incestGetFucked():void{
@@ -883,7 +885,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"By now you already figured this is a common thing among unicorns.");
 		outputText("You feel something change in you as the corrupted cum reaches your womb.");
 		doHeatOrRut();
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 
@@ -902,13 +904,13 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"You lick the flared tip to get a taste. Satisfied with it, you then proceed to put the thing in your mouth proper. " + _name + " moans as her horse dong throbs in appreciation for the attention you’re giving it.\n"+
 		"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.");
 		outputText("\t\t\t\tWeirdly enough, you feel something change in you as the corrupted cum reaches your stomach. ");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function incestMasturbate():void{
 		clearOutput();
 		outputText("You simply help her by masturbating her horse dong to satisfaction. " + _name + " thanks you afterward and goes to sit in a corner to rest.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function incestFuckCorrupt():void{
@@ -937,13 +939,13 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"As expected, nothing spills out of her pussy, even after both of you lay down in the grass to rest.\n\n" +
 		"You snuggle for a time with "+ _name +" then head back to your daily routine. ");
 		doHeatOrRut();
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function incestCentaurToys():void{
 		outputText("\n\nYou point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.\n"+
 		"Well that's one problem solved.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function doHeatOrRut():void{
@@ -955,7 +957,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		else if (!player.inRut && player.goIntoRut(false)) {	//This is based on the original.xml source.
 			outputText("\nYou are now in Rut!");
 		}
-		//doNext(camp.returnToCampUseOneHour);
+		//endEncounter();
 	}
 
 	private function celessChildAppearance():void{
@@ -1002,7 +1004,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				outputText("Just as you're about to go, however, you catch a glimpse of " + _name +"’s horse dong as it resumes acting up, just as you wanted. " +
 						"You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.");
 				dynStats("cor", -1);
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 	}
@@ -1023,7 +1025,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		celessSprite();
 		mainView.nameBox.text = "";
 		clearOutput();
-		outputText("You wake up from a quiet rustle. Strange. " + (camp.followersCount() + camp.loversCount() + camp.slavesCount() > 0 ? "Your camp should be still sleeping, and a" : "A") + " ny invasion would sound much louder. When you go outside to check what is happening, a strange scene presents before your eyes. A unicorn child lies on a small blanket right near your " + (flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "cabin":"tent") + ". Inspecting the child more closely, you notice some resemblance to yourself... and to the unicorn you had sex in the forest with. The girl is very young: she can't be older than several days. Well, seems like damn horse wants you to take care of your child. First, however, comes an important question... how will you name her?");
+		outputText("You wake up from a quiet rustle. Strange. " + (camp.followersCount() + camp.loversCount() + camp.slavesCount() > 0 ? "Your camp should be still sleeping, and a" : "A") + "ny invasion would sound much louder. When you go outside to check what is happening, a strange scene presents before your eyes. A unicorn child lies on a small blanket right near your " + (flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "cabin":"tent") + ". Inspecting the child more closely, you notice some resemblance to yourself... and to the unicorn you had sex in the forest with. The girl is very young: she can't be older than several days. Well, seems like damn horse wants you to take care of your child. First, however, comes an important question... how will you name her?");
 		doNext(nameScene);
 	}
 }

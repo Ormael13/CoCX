@@ -720,8 +720,12 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 
 	saveFile.data.ss = {};
 	for (var key:String in _saveableStates) {
-		var ss:SaveableState = _saveableStates[key];
-		saveFile.data.ss[key] = ss.saveToObject();
+		try {
+			var ss:SaveableState  = _saveableStates[key];
+			saveFile.data.ss[key] = ss.saveToObject();
+		} catch (e:Error) {
+			CoC_Settings.error("Error saving ss."+key+": "+e.getStackTrace());
+		}
 	}
 
 	//CLEAR OLD ARRAYS
@@ -1134,11 +1138,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.ass.analLooseness = player.ass.analLooseness;
 		saveFile.data.ass.fullness = player.ass.fullness;
 		//EXPLORED
-		saveFile.data.exploredLake = player.exploredLake;
-		saveFile.data.exploredMountain = player.exploredMountain;
-		saveFile.data.exploredForest = player.exploredForest;
-		saveFile.data.exploredDesert = player.exploredDesert;
-		saveFile.data.explored = player.explored;
+		saveFile.data.exploredLake = SceneLib.exploration.counters.lake;
+		saveFile.data.exploredMountain = SceneLib.exploration.counters.mountainsMid;
+		saveFile.data.exploredForest = SceneLib.exploration.counters.forestOuter+SceneLib.exploration.counters.forestInner;
+		saveFile.data.exploredDesert = SceneLib.exploration.counters.desertOuter;
+		saveFile.data.explored = SceneLib.exploration.counters.explore;
 		saveFile.data.gameState = gameStateGet();
 
 		//Time and Items
@@ -2162,8 +2166,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					}
 				}
 			}
-			player.internalEquipItem(slot, defaultValue, false, true);
-			return false;
+			return camp.saveUpdater.onUnknownEquipmentItem(player, saveFile.data, slot, savedId, savedName, defaultValue);
 		}
 
 		var found:Boolean;
@@ -2245,7 +2248,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			if (ptype == null) {
-				CoC_Settings.error("Unknown perk id: " + id);
+				camp.saveUpdater.onUnknownPerk(player, saveFile.data, id, value1, value2, value3, value4);
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
@@ -2338,18 +2341,22 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
 			var name:String = saveFile.data.statusAffects[i].statusAffectName;
+			value1 = saveFile.data.statusAffects[i].value1;
+			value2 = saveFile.data.statusAffects[i].value2;
+			value3 = saveFile.data.statusAffects[i].value3;
+			value4 = saveFile.data.statusAffects[i].value4;
 			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(name);
 			if (stype == null){
 				if (StatusEffectType.RemovedIds.indexOf(name) < 0) {
-					CoC_Settings.error("Cannot find status effect '" + name + "'");
+					camp.saveUpdater.onUnknownStatusEffect(player, saveFile.data, name, value1,value2,value3,value4);
 				}
 				continue;
 			}
 			player.createStatusEffect(stype,
-					saveFile.data.statusAffects[i].value1,
-					saveFile.data.statusAffects[i].value2,
-					saveFile.data.statusAffects[i].value3,
-					saveFile.data.statusAffects[i].value4);
+					value1,
+					value2,
+					value3,
+					value4);
 		}
 		//Make sure keyitems exist!
 		if (saveFile.data.keyItems != undefined)
@@ -2370,6 +2377,28 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					//trace("KeyItem " + player.keyItems[i].keyName + " loaded.");
 			}
 		}
+		
+		function loadItem(storage:ItemSlotClass, savedIS:*):void {
+			if (!savedIS || !(savedIS.shortName || savedIS.id) || !savedIS.quantity || savedIS.quantity == 0) {
+				storage.emptySlot();
+				return;
+			}
+			storage.unlocked = !!savedIS.unlocked;
+			var id:String = savedIS.id;
+			if (savedIS.shortName) {
+				if (savedIS.shortName.indexOf("Gro+") != -1)
+					id = "GroPlus";
+				else if (savedIS.shortName.indexOf("Sp Honey") != -1)
+					id = "SpHoney";
+			}
+			itype = ItemType.lookupItem(id || savedIS.shortName);
+			if (itype == null) {
+				camp.saveUpdater.onUnknownInventoryItem(player, saveFile.data, id, savedIS.shortName, savedIS.quantity, storage);
+			} else {
+				storage.setItemAndQty(itype, savedIS.quantity);
+			}
+		}
+		
 		//Set storage slot array
 		if (saveFile.data.itemStorage == undefined)
 		{
@@ -2384,18 +2413,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				inventory.createStorage();
 				var storage:ItemSlotClass = itemStorageGet()[i];
 				var savedIS:* = saveFile.data.itemStorage[i];
-				storage.unlocked = savedIS.unlocked;
-				if (savedIS.shortName)
-				{
-					if (savedIS.shortName.indexOf("Gro+") != -1)
-						savedIS.id = "GroPlus";
-					else if (savedIS.shortName.indexOf("Sp Honey") != -1)
-						savedIS.id = "SpHoney";
-				}
-				if (savedIS.quantity>0)
-					storage.setItemAndQty(ItemType.lookupItem(savedIS.id || savedIS.shortName), savedIS.quantity);
-				else
-					storage.emptySlot();
+				loadItem(storage, savedIS);
 			}
 		}
 
@@ -2417,13 +2435,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = pearlStorageGet()[i];
-				storage.unlocked = saveFile.data.pearlStorage[i].unlocked;
-				if ((saveFile.data.pearlStorage[i].shortName == undefined && saveFile.data.pearlStorage[i].id == undefined)
-                        || saveFile.data.pearlStorage[i].quantity == undefined
-						|| saveFile.data.pearlStorage[i].quantity == 0)
-					storage.emptySlot();
-				else
-					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.pearlStorage[i].id || saveFile.data.pearlStorage[i].shortName),saveFile.data.pearlStorage[i].quantity);
+				loadItem(storage, saveFile.data.pearlStorage[i]);
 			}
 		}
 
@@ -2445,13 +2457,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = gearStorageGet()[i];
-				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
-				if ((saveFile.data.gearStorage[i].shortName == undefined && saveFile.data.gearStorage[i].id == undefined)
-                        || saveFile.data.gearStorage[i].quantity == undefined
-						|| saveFile.data.gearStorage[i].quantity == 0)
-					storage.emptySlot();
-				else
-					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].id || saveFile.data.gearStorage[i].shortName),saveFile.data.gearStorage[i].quantity);
+				loadItem(storage, saveFile.data.gearStorage[i]);
 			}
 		}
 
@@ -2471,11 +2477,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		//Shit
 		gameStateSet(saveFile.data.gameState);
-		player.exploredLake = saveFile.data.exploredLake;
-		player.exploredMountain = saveFile.data.exploredMountain;
-		player.exploredForest = saveFile.data.exploredForest;
-		player.exploredDesert = saveFile.data.exploredDesert;
-		player.explored = saveFile.data.explored;
 
 		//Days
 		//Time and Items
@@ -2768,10 +2769,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		for (var key:String in _saveableStates) {
 			var ss:SaveableState = _saveableStates[key];
-			if (saveFile.data.ss && key in saveFile.data.ss) {
-				ss.loadFromObject(saveFile.data.ss[key], true);
-			} else {
-				ss.loadFromObject(null, true);
+			try {
+				if (saveFile.data.ss && key in saveFile.data.ss) {
+					ss.loadFromObject(saveFile.data.ss[key], true);
+				} else {
+					ss.loadFromObject(null, true);
+				}
+			} catch (e:Error) {
+				CoC_Settings.error("Error loading ss."+key+": "+e.getStackTrace())
 			}
 		}
 		loadAllAwareClasses(CoC.instance); //Informs each saveAwareClass that it must load its values from the flags array
@@ -2792,12 +2797,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
                 ref["instance"].load(saveFile.data.world.x);
 			}
 		}
+		camp.saveUpdater.postLoadSaveObject(player, saveFile.data);
 
 		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
 		EventParser.badEnded = false; //reset bad end if we're going from it
 	}
 	game.isLoadingSave = false;
+	mainView.statsView.hide(); // to reset animations
 }
 
 public function unFuckSave():void

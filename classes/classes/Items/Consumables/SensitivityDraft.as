@@ -1,19 +1,20 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
-	import classes.Items.Consumable;
-	import classes.StatusEffects;
-import classes.internals.Utils;
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Consumable;
+import classes.StatusEffects;
 
 /**
 	 * Increases sensitivity.
 	 */
-	public class SensitivityDraft extends Consumable 
+	public class SensitivityDraft extends Consumable
 	{
 		private static const ITEM_VALUE:int = 15;
 		
-		public function SensitivityDraft() 
+		public function SensitivityDraft()
 		{
 			super("SensDrf","SensDraft", "a bottle of sensitivity draft", ITEM_VALUE, "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive.");
+			refineableInto([], [], [[1, AlchemyLib.AR_SENS_DEC]]);
 		}
 		
 		override public function useItem():Boolean
@@ -44,7 +45,7 @@ import classes.internals.Utils;
 			player.refillHunger(5);
 			
 			return false;
-		}		
+		}
 	}
 
 }

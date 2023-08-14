@@ -117,7 +117,7 @@ public class IceElemental extends Monster
 				this.weaponAttack = 14;
 				this.armorDef = 14;
 				this.armorMDef = 120;
-				this.level = 29;
+				this.level = 28;
 				this.bonusHP = 760;
 				this.additionalXP = 215;
 			}
@@ -131,7 +131,7 @@ public class IceElemental extends Monster
 				this.weaponAttack = 16;
 				this.armorDef = 16;
 				this.armorMDef = 140;
-				this.level = 32;
+				this.level = 30;
 				this.bonusHP = 840;
 				this.additionalXP = 245;
 			}
@@ -145,7 +145,7 @@ public class IceElemental extends Monster
 				this.weaponAttack = 18;
 				this.armorDef = 18;
 				this.armorMDef = 160;
-				this.level = 35;
+				this.level = 32;
 				this.bonusHP = 920;
 				this.additionalXP = 275;
 			}

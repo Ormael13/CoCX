@@ -302,7 +302,7 @@ public class MarblePurification extends NPCAwareContent{
 			}
 			//if (Helia is in camp)
 			//Helia’s response to being asked to have tea
-			if(followerHel())
+			if(followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff))
 			{
 			 	outputText("\n\nYou walk over to Hel's hammock at the edge of camp and ask the fiery berserker if she'd like to join you for a cup of tea.  She cocks an eyebrow, \"<i>Don't you have something a little, uh, stronger somewhere?</i>\"  Still, with a little urging, she agrees to go to the campfire.");
 				//temp follower variable ++
@@ -541,7 +541,7 @@ public class MarblePurification extends NPCAwareContent{
 			 	outputText("\n\nSnarling with a surprisingly savage expression for such a normally meek mouse, Amily whips out her familiar blowgun and loads it with a dart from somewhere about her person, falling back to ensure she is a safe distance for firing.");
 			}
 			//if (Helia is in camp)
-			if(followerHel())
+			if(followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff))
 			{
 			 	outputText("\n\n\"<i>You bitch, you'll pay for that,</i>\" Hel growls, drawing the scimitar from her hip and leveling it right at the woman in defiant challenge.");
 			}

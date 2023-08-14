@@ -47,7 +47,7 @@ use namespace CoC;
 			inDungeon = false;
 			clearOutput();
 			outputText("You slip out the door and disappear, heading back towards your camp, leaving the hellish factory behind.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function checkDoor1():void {

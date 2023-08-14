@@ -3,25 +3,35 @@
  * Area with lvl 24-53 group enemies. Good for PC focused on group fights.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
+import classes.Items.Vehicles;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Battlefield.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
-import classes.Items.Vehicles;
 
 use namespace CoC;
-	
+
 public class BattlefieldOuter extends BaseContent
 {
 	public var battlefieldEnemiesScene:BattlefieldEnemiesScenes = new BattlefieldEnemiesScenes();
+	
+	public const areaLevel:int = 19;
+	public function isDiscovered():Boolean {
+		return SceneLib.exploration.counters.battlefieldOuter > 0;
+	}
+	public function canDiscover():Boolean {
+		return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+	}
+	public function timesExplored():int {
+		return SceneLib.exploration.counters.battlefieldOuter;
+	}
 
 	public function BattlefieldOuter()
 	{
@@ -58,6 +68,9 @@ public class BattlefieldOuter extends BaseContent
 			call:SceneLib.iridesianFollower.firstMeetingIridesian
 		},*/ {
 			name: "tyrantia",
+			label : "Tyrantia",
+			kind  : 'npc',
+			unique: true,
 			when: function ():Boolean {
 				return player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)
 			},
@@ -66,26 +79,34 @@ public class BattlefieldOuter extends BaseContent
 		}, {
 			//Giant slayer mech
 			name: "giantmech",
+			label : "Gigant Mech",
+			kind  : 'event',
+			unique: true,
 			when: function ():Boolean {
 				return flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] == 0
 			},
 			chance: 0.1,
 			call: takeWrathMech
-		}, {
-			name: "items",
-					call: findItems
-		}, {
+		}, SceneLib.battlefiledboundary.battlefieldLoot, {
 			name: "nothing",
-					call: findNothing
+			label : "Walk",
+			kind  : "walk",
+			call: findNothing
 		}, {
 			//Helia monogamy fucks
 			name: "helcommon",
+			label : "Helia",
+			kind  : 'npc',
+			unique: true,
 			night : false,
 			call: SceneLib.helScene.helSexualAmbush,
 			chance: battlefieldOuterChance,
 			when: SceneLib.helScene.helSexualAmbushCondition
 		}, {
 			name: "etna",
+			label : "Etna",
+			kind  : 'npc',
+			unique: true,
 			when: function ():Boolean {
 				return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -96,6 +117,9 @@ public class BattlefieldOuter extends BaseContent
 			call: SceneLib.etnaScene.repeatYandereEnc
 		},  {
 			name: "diana",
+			label : "Diana",
+			kind  : 'npc',
+			unique: true,
 			night : false,
 			when: function():Boolean {
 				return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
@@ -104,6 +128,9 @@ public class BattlefieldOuter extends BaseContent
 			call: SceneLib.dianaScene.repeatEnc
 		}, {
 			name: "dianaName",
+			label : "Diana",
+			kind  : 'npc',
+			unique: true,
 			night : false,
 			when: function():Boolean {
 				return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
@@ -112,19 +139,22 @@ public class BattlefieldOuter extends BaseContent
 			call: SceneLib.dianaScene.postNameEnc
 		}, {
 			name: "ted",
+			label : "Dragon-Boy",
+			kind  : 'npc',
+			unique: true,
 			call: SceneLib.tedScene.introPostHiddenCave,
 			when: SceneLib.tedScene.canEncounterTed
-		}, {
-			//General Golems, Goblin and Imp Encounters
-			name: "common",
-			chance: 0.4,
-			call: SceneLib.exploration.genericGolGobImpEncounters
-		}, {
+		}, SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 			name: "vengefulAparitions",
+			label : "Vengeful Aparitions",
+			shortLabel: "V.Aparitions",
+			kind : 'monster',
 			chance: 0.4,
 			call: battlefieldEnemiesScene.encounterVengefulApparitions
 		}, {
 			name: "zombies",
+			label : "Zombies",
+			kind : 'monster',
 			chance: 0.4,
 			call: battlefieldEnemiesScene.encounterZombies,
 			when: battlefieldEnemiesScene.canEncounterZombies
@@ -138,60 +168,31 @@ public class BattlefieldOuter extends BaseContent
 		}*/);
 	}
 
-	public function isDiscovered():Boolean {
-		return flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0;
-	}
-	public function timesExplored():int {
-		return flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD];
+	public function discover():void {
+		SceneLib.exploration.counters.battlefieldOuter = 1;
+		clearOutput();
+		outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
+		explorer.stopExploring();
+		endEncounter();
 	}
 
 
 	public function exploreOuterBattlefield():void {
-		clearOutput();
-		flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
-		doNext(camp.returnToCampUseOneHour);
-		battlefieldOuterEncounter.execEncounter();
-		flushOutputTextToGUI();
+		explorer.prepareArea(battlefieldOuterEncounter);
+		explorer.setTags("battlefield", "battlefieldOuter");
+		explorer.prompt = "You explore the outer battlefield.";
+		explorer.onEncounter = function(e:ExplorationEntry):void {
+			SceneLib.exploration.counters.battlefieldOuter++;
+		}
+		explorer.leave.hint("Leave the outer battlefield");
+		explorer.skillBasedReveal(areaLevel, timesExplored());
+		explorer.doExplore();
 	}
 	
 	public function battlefieldOuterChance():Number {
 		var temp:Number = 0.5;
-		if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+		temp *= player.npcChanceToEncounter();
 		return temp;
-	}
-
-	private function findItems():void {
-		clearOutput();
-		if (rand(2) == 0) {
-			outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
-			if (rand(2) == 0) {
-				if (player.level >= 24 && rand(3) == 0) {
-					outputText("a mid-grade Soulforce Recovery Pill. ");
-					inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
-				} else {
-					outputText("a low-grade Soulforce Recovery Pill. ");
-					inventory.takeItem(consumables.LG_SFRP, camp.returnToCampUseOneHour);
-				}
-			} else {
-				if (player.level >= 24 && rand(3) == 0) {
-					outputText("a diluted Arcane Regen Concotion. ");
-					inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
-				} else {
-					outputText("a very diluted Arcane Regen Concotion. ");
-					inventory.takeItem(consumables.VDARCON, camp.returnToCampUseOneHour);
-				}
-			}
-		} else {
-			if (player.level >= 24 && rand(5) == 0) {
-				outputText("You spot something on the ground among various items remains. Taking a closer look, it's a Heavy Spiked Shield. ");
-				inventory.takeItem(shields.SPIH_SH, camp.returnToCampUseOneHour);
-			} else {
-				outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
-				outputText("<b>You found a metal plate.</b>");
-				flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
-				doNext(camp.returnToCampUseOneHour);
-			}
-		}
 	}
 
 	private function findNothing():void {
@@ -204,7 +205,7 @@ public class BattlefieldOuter extends BaseContent
 			outputText("Some grey, maybe black colored shape seemly wiggling as it like moving in your direction." + (silly() ? " Oh are you approaching me?" : "") + " Bit tired and on the edge due to meeting potential enemies moments ago you decide to return this time. Maybe next time you will check out closer that 'fog' or whatever it's.");
 		} else outputText("You spend an hour exploring this deserted battlefield but you don't manage to find anything interesting, yet this trip had made you a little wiser.");
 		dynStats("wis", .5);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 
 	private function tyrantiaEncounterFn():void {
@@ -216,10 +217,10 @@ public class BattlefieldOuter extends BaseContent
 
 	private function discoverInner():void {
 		flags[kFLAGS.DISCOVERED_INNER_BATTLEFIELD] = 1;
-		player.explored++;
 		clearOutput();
 		outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
-		doNext(camp.returnToCampUseOneHour);
+		explorer.stopExploring();
+		endEncounter();
 	}
 
 	public function takeWrathMech():void {
@@ -246,7 +247,7 @@ public class BattlefieldOuter extends BaseContent
 		outputText("You carefully put the pieces of the (new firearms) in your back and head back to your camp.\n\n");
 		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 		player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}*/
 }
 }

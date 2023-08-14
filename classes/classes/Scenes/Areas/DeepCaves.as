@@ -3,15 +3,11 @@
  * Area with lvl 65-95 enemies.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
-import classes.Scenes.Areas.Caves.*;
-import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -33,18 +29,22 @@ use namespace CoC;
 
 			})
 		}
-
+		
+		public const areaLevel:int = 65;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_CAVES] > 0;
+			return SceneLib.exploration.counters.deepCaves > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.DISCOVERED_CAVES];
+			return SceneLib.exploration.counters.deepCaves;
 		}
 
 
 		public function exploreCaves():void {
 			clearOutput();
-			flags[kFLAGS.DISCOVERED_CAVES]++;
+			SceneLib.exploration.counters.deepCaves++;
 			doNext(camp.returnToCampUseOneHour);
 			deepCavesEncounter.execEncounter();
 			flushOutputTextToGUI();

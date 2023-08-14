@@ -337,7 +337,7 @@ public class ItemConstants extends Utils {
 	 *
 	 * - name: display name ("magical")
 	 * - buttonColor: button label color
-	 * - value: Base value multiplier
+	 * - valueMul: Base value multiplier
 	 */
 	public static const Rarities:/*EnumValue*/Array = [];
 	
@@ -349,27 +349,27 @@ public class ItemConstants extends Utils {
 	EnumValue.add(Rarities, RARITY_COMMON, "COMMON", {
 		name: "common",
 		buttonColor: "#000000",
-		value: 1
+		valueMul: 1
 	});
 	EnumValue.add(Rarities, RARITY_MAGICAL, "MAGICAL", {
 		name: "magical",
 		buttonColor: "#0000C0",
-		value: 1
+		valueMul: 1
 	});
 	EnumValue.add(Rarities, RARITY_RARE, "RARE", {
 		name: "rare",
 		buttonColor: "#006000",
-		value: 2
+		valueMul: 2
 	});
 	EnumValue.add(Rarities, RARITY_LEGENDARY, "LEGENDARY", {
 		name: "legendary",
 		buttonColor: "#FFFF40",
-		value: 3
+		valueMul: 3
 	});
 	EnumValue.add(Rarities, RARITY_DIVINE, "DIVINE", {
 		name: "divine",
 		buttonColor: "#80EEEE",
-		value: 4
+		valueMul: 4
 	});
 	
 	public static const BTNCOLOR_CURSED:String = "#800000";

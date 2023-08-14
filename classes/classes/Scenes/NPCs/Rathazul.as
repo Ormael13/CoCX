@@ -1,6 +1,9 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.MerchantMenu;
+import classes.Scenes.Crafting;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
@@ -75,7 +78,7 @@ public function encounterRathazul(meet:Boolean = true):void {
 	offered = rathazulWorkOffer();
 	if(!offered) {
 		outputText("He sighs dejectedly, \"<i>I am not sure what I can do for you, youngling.  This world is fraught with unimaginable dangers, and you're just scratching the surface of them.</i>\"\n\nYou nod and move on, leaving the depressed alchemist to his sadness.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -83,13 +86,13 @@ private function rathazulMoveToCamp():void {
 	clearOutput();
 	outputText("Rathazul smiles happily back at you and begins packing up his equipment.  He mutters over his shoulder, \"<i>It will take me a while to get my equipment moved over, but you head on back and I'll see you within the hour.  Oh my, yes.</i>\"\n\nHe has the look of someone experiencing hope for the first time in a long time.");
 	player.createStatusEffect(StatusEffects.CampRathazul, 0, 0, 0, 0);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function rathazulMoveDecline():void {
 	clearOutput();
 	outputText("Rathazul wheezes out a sigh, and nods.\n\n\"<i>Perhaps I'll still be of some use out here after all,</i>\" he mutters as he packs up his camp and prepares to head to another spot along the lake.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function campRathazul():void {
@@ -273,12 +276,12 @@ private function rathazulWorkOffer():Boolean {
 			}
 			else if(!player.hasItem(consumables.SMART_T,5)) outputText("  You should probably find some if you want that...");
 			else outputText("  You need more gems to afford that, though.");
-			outputText("\n\n");			
+			outputText("\n\n");
 		}
 		//Purification potion for Minerva
 		if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10 && player.hasKeyItem("Rathazul's Purity Potion") < 0) {
 			outputText("The rodent alchemist suddenly looks at you in a questioning manner. \"<i>Have you had any luck finding those items? I need pure honey and at least two samples of other purifiers; your friend’s spring may grow the items you need.</i>\"");
-			outputText("\n\n");	
+			outputText("\n\n");
 		}
 		if (player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2)) {
 			outputText("The rodent sniffs your possessions. \"<i>You know, I could make something with five bottles of Lactaid and two bottles of purified LaBova. I'll also need 250 gems.</i>\"");
@@ -298,17 +301,20 @@ private function rathazulWorkOffer():Boolean {
 			}
 			else if(!player.hasItem(consumables.INCOINS,5)) outputText("  You should probably find some if you want that...");
 			else outputText("  You need more gems to afford that, though.");
-			outputText("\n\n");			
+			outputText("\n\n");
 		}
 	}
 	if(totalOffers == 0 && spoken) {
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		return true;
 	}
 	if(totalOffers > 0) {
 		outputText("Will you take him up on an offer or leave?");
 		//In camp has no time passage if left.
 		menu();
+		// [ Shop   ] [ Purify ] [        ] [Make Dye] [Debimbo ]
+		// [ MindUp ] [AlchThun] [        ] [        ] [        ]
+		// [AlchTool] [Lethicit] [ Flirt  ] [ Rares  ] [ Leave  ]
 		//Shop sub-menu
 		if (dyes || philters || reductos)
 			addButton(0, "Shop", rathazulShopMenu).hint("Check Rathazul's wares.");
@@ -326,15 +332,58 @@ private function rathazulWorkOffer():Boolean {
 			if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(7, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
 			else addButtonDisabled(7, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
 		}
+		/*
+		addButton(10, "Alch.Tools", askForTools).hint("Ask Rathazul to lend his alchemical tools, so you can dabble in alchemy yourself")
+										   .disableIf(Crafting.alembicLevel >= Crafting.ALEMBIC_LEVEL_SIMPLE, "You already have an alembic!");
+		 */
 		if (lethiciteDefense != null) addButton(11, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(12, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
 		addButton(13, "Rare offers", oneTimeOptions).hint("All the one time options.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(14,"Leave", camp.campFollowers);
-		else addButton(14, "Leave", camp.returnToCampUseOneHour);
+		else addButton(14, "Leave", explorer.done);
 		return true;
 	}
 	return false;
 }
+	
+	private function askForTools():void {
+		clearOutput();
+		
+		outputText("<i>(todo writeme)</i> ");
+		outputText("Having an interest in doing alchemy yourself, you ask Rathazul if you can borrow some of his tools. ");
+		// high int or HistoryAlchemist: free
+		// medium int: 50 gems
+		// low int:
+		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) {
+			outputText("<i>(todo writeme: free if History:Alchemist)</i> ");
+			outputText("You tell him your history as an alchemist's assistant back in Ingnam. ");
+			doNext(curry(getAlembic, 0));
+		} else if (player.inte >= 25) {
+			var cost:int = Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value;
+			outputText("<i>(todo writeme: int >= 25, can buy)</i> ");
+			menu();
+			addButton(0,"Buy", curry(getAlembic, cost))
+					.hint("Buy alembic for "+cost+" gems.")
+					.disableIf(player.gems < cost, "You need "+cost+" gems");
+			addButton(1, "Cancel", rathazulWorkOffer);
+		} else {
+			outputText("<i>(todo writeme: int < 25, can't buy)</i> ");
+			if (player.inte < 16 && silly()) outputText("You have been fascinated with alchemy ever since you saw mixing blue and yellow paint into green one. But the village alchemists never allowed you to perform such sciences. Envious of your talent, they kept making excuses about <i>'keeping braindead brutes away from fragile equipment'</i>. You enthusiastically tell this story to Rathazul, expecting understanding from a fellow alchemist. ");
+			doNext(rathazulWorkOffer);
+		}
+	}
+	private function getAlembic(price:int):void {
+		clearOutput();
+		outputText("<i>(todo writeme: got/bought equipment from Rathazul)</i> ");
+		if (price > 0) {
+			player.gems -= price;
+			statScreenRefresh();
+		}
+		outputText("\n\n<b>You now can use "+SceneLib.crafting.alchemyExtraction.alembicName()+" to refine consumable items into alchemical reagents!</b> ");
+		if (Crafting.furnaceLevel == 0) outputText("For a full set of alchemical tools, you need a furnace.")
+		Crafting.alembicLevel = Crafting.ALEMBIC_LEVEL_SIMPLE;
+		doNext(playerMenu);
+	}
 
 private function oneTimeOptions():void {
 	spriteSelect(SpriteDb.s_rathazul);
@@ -415,12 +464,12 @@ private function rathazulPurifyIncubiDraft():void {
 
 //For Belisa's Tooth Quest
 public function BelisaRalthazulTalk():void {
-	outputText("Hoping your trusty alchemist friend can make Belisa's smile whole again, You ask Ralthazul about curing a cursed injury. \"<i>Oh? Cursed injury, you say?</i>\" He ponders for a second. \"<i>What sort of injury, and what kind of curse?</i>\"\n\n"); 
-	outputText("You explain Belisa’s plight, and he nods thoughtfully, hand on his chin. \"<i>Well…As a matter of fact, there might be a way I can help, young one.</i>\" He brings you over to his beakers excitedly. \"<i>You see, Succubus magic tends to draw upon corruption, and long-term curses…well, they’re niggly little bits of magic.</i>\" He shakes his head. \"<i>If the Succubus in question was a practiced hexmage, they’ll know how to get around this…But if they weren’t…</i>\" He gives you a wry little grin. \"<i>Standard curses of that nature draw upon corruption, if not from the individual, than from the environment around them.</i>\" He rummages around, producing a purity philter. \"<i>However, this little mixture here can cut the curse off from the environment, if you cover the wound in it, starving it out.</i>\"\n\n"); 
-	outputText("You begin to get excited. Belisa is pure. Perhaps too pure. You know her body won’t give this magic any fuel.\n\n"); 
-	outputText("\"<i>But…I’ll need other ingredients to cure the actual injury. Unless we also heal the injury, the curse will just return once it absorbs enough corrupted energy.</i>\" He nods. \"<i>I can do it. I’ll need a shark’s tooth from the lake, one of my purity philter and one vitality tincture.</i>\"\n\n"); 
+	outputText("Hoping your trusty alchemist friend can make Belisa's smile whole again, You ask Ralthazul about curing a cursed injury. \"<i>Oh? Cursed injury, you say?</i>\" He ponders for a second. \"<i>What sort of injury, and what kind of curse?</i>\"\n\n");
+	outputText("You explain Belisa’s plight, and he nods thoughtfully, hand on his chin. \"<i>Well…As a matter of fact, there might be a way I can help, young one.</i>\" He brings you over to his beakers excitedly. \"<i>You see, Succubus magic tends to draw upon corruption, and long-term curses…well, they’re niggly little bits of magic.</i>\" He shakes his head. \"<i>If the Succubus in question was a practiced hexmage, they’ll know how to get around this…But if they weren’t…</i>\" He gives you a wry little grin. \"<i>Standard curses of that nature draw upon corruption, if not from the individual, than from the environment around them.</i>\" He rummages around, producing a purity philter. \"<i>However, this little mixture here can cut the curse off from the environment, if you cover the wound in it, starving it out.</i>\"\n\n");
+	outputText("You begin to get excited. Belisa is pure. Perhaps too pure. You know her body won’t give this magic any fuel.\n\n");
+	outputText("\"<i>But…I’ll need other ingredients to cure the actual injury. Unless we also heal the injury, the curse will just return once it absorbs enough corrupted energy.</i>\" He nods. \"<i>I can do it. I’ll need a shark’s tooth from the lake, one of my purity philter and one vitality tincture.</i>\"\n\n");
 	BelisaFollower.BelisaRalthTalked = true;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function RathazulMakesToothCursePotion():void {
@@ -431,7 +480,7 @@ private function RathazulMakesToothCursePotion():void {
 	outputText("You run over to Ralthazul, showing him the ingredients you’ve obtained in your adventures. \"<i>Alright, that should do it. Give me just a moment please.\"</i> The wizened alchemist grinds up the teeth, and begins to mix the ingredients together. You take a small stroll around the camp to let him work, and within fifteen short minutes, Ralthazul comes to you, a smile on his old face. \n\n");
 	outputText("\"<i>Remember, you must completely submerge the injury in the mixture. And it needs some time to work.\"</i> He blinks, remembering something. \"<i>Oh, and this will hurt, in all probability. Most curses don’t go easily, and the mouth is rather sensitive.\"</i> He passes you a small vial of a silver-white liquid, with streaks of red running through it. \"<i>An hour, at least. Depending on the curse’s power.\"</i> \n\n");
 	BelisaFollower.BelisaFollowerStage = 1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //For Minerva purification.
@@ -441,7 +490,7 @@ public function purificationByRathazulBegin():void {
 	outputText("\n\n\"<i>I am afraid that I have never truly succeeded in my efforts to create a potion to purify the corrupted themselves.</i>\" The rat alchemist explains sadly. \"<i>The problem is there is very little, if anything, in this world that is capable of removing corruption from a consumer... But, I do have a theoretical recipe. If you can just find me some foodstuffs that would lower corruption and soothe the libido, and bring them to me, then I might be able to complete it. I can suggest pure giant bee honey as one, but I need at least two other items that can perform at least one of those effects. You said that the spring was able to keep your friend's corruption in check? Maybe some of the plants that grow there would be viable; bring me some samples, and a fresh dose of pure honey, and we’ll see what I can do.</i>\" He proclaims, managing to shake off his old depression and sound determined.");
 	outputText("\n\nWith that in mind, you walk away from him; gathering the items that could cure Minerva is your responsibility.");
 	flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] = 2;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 private function rathazulMakesPurifyPotion():void {
@@ -698,6 +747,9 @@ private function purifyMinoCum():void{
 //------------
 private function rathazulShopMenu():void {
 	menu();
+	// [HairDyes] [SkinOils] [BLotions] [Reducto ] [GroPlus ]
+	// [NumbOil ] [PuriPhil] [H.Pill  ] [M.H.Pill] [B.H.Pill]
+	// [ProLacta] [Scorpinm] [        ] [        ] [Back    ]
 	//Dyes
 	if (dyes) {
 		addButton(0, "Hair Dyes", buyDyes).hint("Ask him to make a dye for you. \n\nCost: 50 Gems.");
@@ -744,66 +796,36 @@ private function rathazulShopMenu():void {
 	addButton(14, "Back", returnToRathazulMenu);
 }
 //Hair dyes
-private function buyDyes(fromPage2:Boolean = false):void {
+private function buyDyes():void {
 	clearOutput();
-	if (!fromPage2) {
-		spriteSelect(SpriteDb.s_rathazul);
-		outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
-		outputText("\n\n<b>(-50 Gems)</b>");
-		player.gems -= 50;
-		statScreenRefresh();
-	}
-	menu();
-	addButton(0, "Auburn", buyDye, consumables.AUBURND);
-	addButton(1, "Black", buyDye, consumables.BLACK_D);
-	addButton(2, "Blond", buyDye, consumables.BLOND_D);
-	addButton(3, "Brown", buyDye, consumables.BROWN_D);
-	addButton(5, "Red", buyDye, consumables.RED_DYE);
-	addButton(6, "White", buyDye, consumables.WHITEDY);
-	addButton(7, "Gray", buyDye, consumables.GRAYDYE);
+	spriteSelect(SpriteDb.s_rathazul);
+	var merchantMenu:MerchantMenu = new MerchantMenu();
+	merchantMenu.prompt = "Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?";
+	merchantMenu.addItem(useables.REAGENT, 50);
+	merchantMenu.addItem(useables.DYE_FOUNDATION);
+	merchantMenu.addItem(useables.OIL_FOUNDATION);
+	merchantMenu.addItem(useables.DROP_FOUNDATION);
+	merchantMenu.addItem(consumables.AUBURND, 50);
+	merchantMenu.addItem(consumables.BLACK_D, 50);
+	merchantMenu.addItem(consumables.BLOND_D, 50);
+	merchantMenu.addItem(consumables.BROWN_D, 50);
+	merchantMenu.addItem(consumables.RED_DYE, 50);
+	merchantMenu.addItem(consumables.WHITEDY, 50);
+	merchantMenu.addItem(consumables.GRAYDYE, 50);
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) {
-		addButton(4, "Next", buyDyesPage2);
-		addButton(8, "Blue", buyDye, consumables.BLUEDYE);
-		addButton(9, "Green", buyDye, consumables.GREEN_D);
-		addButton(10, "Orange", buyDye, consumables.ORANGDY);
-		addButton(11, "Purple", buyDye, consumables.PURPDYE);
-		addButton(12, "Pink", buyDye, consumables.PINKDYE);
+		merchantMenu.addItem(consumables.BLUEDYE, 50);
+		merchantMenu.addItem(consumables.GREEN_D, 50);
+		merchantMenu.addItem(consumables.ORANGDY, 50);
+		merchantMenu.addItem(consumables.PURPDYE, 50);
+		merchantMenu.addItem(consumables.PINKDYE, 50);
+		merchantMenu.addItem(consumables.RUSSDYE, 50);
+		merchantMenu.addItem(consumables.RAINDYE, 50);
 	}
-	addButton(13, "Reagent", buyDye, useables.REAGENT);
-	addButton(14, "Never mind", buyDyeNevermind);
-}
-private function buyDyesPage2():void {
-	clearOutput();
-	if (player.statusEffectv2(StatusEffects.MetRathazul) < 8) { // Failsafe, should probably never happen (Stadler76)
-		buyDyes(true);
-		return;
+	merchantMenu.afterPurchase = function(itype:ItemType,qty:int,next:Function):void {
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+		next();
 	}
-	spriteSelect(SpriteDb.s_rathazul);
-	menu();
-	addButton(0, "Russet", buyDye, consumables.RUSSDYE);
-	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
-		addButton(1, "Rainbow", buyDye, consumables.RAINDYE);
-	}
-	addButton(4, "Previous", buyDyes, true);
-	addButton(14, "Never mind", buyDyeNevermind);
- }
-
-private function buyDye(dye:ItemType):void {
-	spriteSelect(SpriteDb.s_rathazul);
-	clearOutput();
-	outputText(images.showImage("rathazul-buy-dye"));
-	inventory.takeItem(dye, rathazulShopMenu);
-	statScreenRefresh();
-	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-}
-
-private function buyDyeNevermind():void {
-	spriteSelect(SpriteDb.s_rathazul);
-	clearOutput();
-	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
-	player.gems += 50;
-	statScreenRefresh();
-	rathazulShopMenu();
+	merchantMenu.show(rathazulShopMenu);
 }
 
 //Scales dyes
@@ -1176,7 +1198,7 @@ private function getThatRatAss3():void {
 	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");
 	outputText("Still though, thinking about that rat ass gets you turned on...");
 	dynStats("lus", 10, "scale", false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 }
 }

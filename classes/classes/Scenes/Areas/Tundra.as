@@ -6,12 +6,11 @@
 package classes.Scenes.Areas
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -22,6 +21,17 @@ use namespace CoC;
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		
+		public const areaLevel:int = 35;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.tundra > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.tundra;
+		}
+		
 		public function Tundra()
 		{
 			onGameInit(init);
@@ -30,14 +40,17 @@ use namespace CoC;
 		private function init():void {
 			tundraEncounter = Encounters.group("tundra", {
 				name: "discover rift",
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65
-				},
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
+				when: SceneLib.glacialRift.canDiscover,
 				chance: Encounters.ALWAYS,
-				call: discoverGlacialRift
+				call: SceneLib.glacialRift.discover
 			},{
 				// choice[choice.length] = 0; //Valkyrie (lvl 44)
 				name: "valkyrie",
+				label : "Valkyrie",
+				kind : 'monster',
 				night : false,
 				call: valkyrieEncounter
 			}, /*{
@@ -47,30 +60,42 @@ use namespace CoC;
 			}, */{
 				// choice[choice.length] = 2; //Young Frost Giant (lvl 47)
 				name: "frostgiant",
+				label : "Young Frost gigant",
+				kind : 'monster',
 				night : false,
 				call: frostGiantEncounter
 			}, {
 				// choice[choice.length] = 3; //Snow Lily (lvl 40)
 				name: "snow lily",
+				label : "Snow Lily",
+				kind : 'monster',
 				night : false,
 				call: snowLilyEncounter
 			}, {
 				name: "fafnir tear",
+				label : "Fafnir Tear",
+				kind  : 'item',
 				call: findATear,
 				chance: 0.25
 			}, {
 				// Werewolf huntress
 				name: "werewolf huntress",
+				label : "Werewolf Huntress",
+				kind : 'monster',
 				day : false,
 				call: SceneLib.werewolfFemaleScene.introWerewolfHuntress,
 				chance: 0.50
 			}, {
 				// choice[choice.length] = 4; //Ice Golem (lvl 64)
 				name: "ice golem",
+				label : "Ice Golem",
+				kind : 'monster',
 				call: golemEncounters
 			}, {
 				// choice[choice.length] = 5; Find Alabaster
 				name: "alabaster",
+				label : "Mine",
+				kind  : 'place',
 				when: function():Boolean {
 					return player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained;
 				},
@@ -80,7 +105,9 @@ use namespace CoC;
 				// choice[choice.length] = 6;
 				chance: 0.25,
 				name: "nothing",
-				call: nothingEncounter
+				call: nothingEncounter,
+				label:'Walk',
+				kind:'walk'
 			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
@@ -92,9 +119,15 @@ use namespace CoC;
 		}
 		
 		public function exploreTundra():void {
-			flags[kFLAGS.DISCOVERED_TUNDRA]++;
-			clearOutput();
-			tundraEncounter.execEncounter();
+			explorer.prepareArea(tundraEncounter);
+			explorer.setTags("tundra");
+			explorer.prompt = "You explore the tundra.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.tundra++;
+			}
+			explorer.leave.hint("Leave the tundra");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 		
 		public function nothingEncounter():void {
@@ -105,7 +138,7 @@ use namespace CoC;
 				player.trainStat("tou", +1, player.trainStatCap("tou",50));
 			}
 			dynStats("tou", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function alabasterEncounter():void {
@@ -114,7 +147,7 @@ use namespace CoC;
 			outputText("Do you wish to mine it?");
 			menu();
 			addButton(0, "Yes", tundraSiteMine);
-			addButton(1, "No", camp.returnToCampUseOneHour);
+			addButton(1, "No", explorer.done);
 		}
 		
 		public function golemEncounters():void {
@@ -128,7 +161,7 @@ use namespace CoC;
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
 				menu();
-				addButton(0, "Yes", camp.returnToCampUseOneHour);
+				addButton(0, "Yes", explorer.done);
 				addButton(1, "No", alrauneScene.alrauneGlacialRift);
 			} else {
 				alrauneScene.alrauneGlacialRift();
@@ -148,22 +181,14 @@ use namespace CoC;
 			startCombat(new Valkyrie());
 		}
 		
-		public function discoverGlacialRift():void {
-			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
-			clearOutput();
-			outputText("You walk for some time, roaming the tundra. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. ");
-			outputText("You wrap your arms around yourself tightly, shivering fiercely despite yourself as the dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
-			outputText("<b>You've discovered the Glacial Rift!</b>");
-			doNext(camp.returnToCampUseTwoHours);
-		}
 		
 		private function tundraSiteMine():void {
-			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
 				clearOutput();
 				if (player.fatigue > player.maxFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the alabaster, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -173,16 +198,18 @@ use namespace CoC;
 				SceneLib.forgefatherScene.incrementAlabasterSupply(minedStones);
 				player.mineXP(player.MiningMulti());
 				findGem();
+				explorer.stopExploring();
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
 
 		private function findATear():void {
 			outputText("While exploring the tundra you spot a peculiar white flower. It glows feintly as if from some magical residue.");
-			inventory.takeItem(consumables.F_TEAR, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.F_TEAR, explorer.done);
 		}
 
 		private function findGem():void {
+			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.SAPPGEM, camp.returnToCampUseTwoHours);

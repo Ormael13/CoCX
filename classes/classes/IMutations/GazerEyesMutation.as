@@ -23,8 +23,10 @@ public class GazerEyesMutation extends IMutationPerkType
                 descS += ", empower your ability to cast multiple spells as a Gazer if available";
             }
             if (pTier >= 3){
-                descS += ", increase spell critical hit chance by 10%";
+                descS += ", increase spell critical hit chance by ";
             }
+            if (pTier == 3) descS += "10%";
+            if (pTier == 4) descS += "25%";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -38,6 +40,9 @@ public class GazerEyesMutation extends IMutationPerkType
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -78,11 +83,15 @@ public class GazerEyesMutation extends IMutationPerkType
                 pBuffs['int.mult'] = 0.25;
                 pBuffs['lib.mult'] = 0.10;
             }
+            if (pTier == 4){
+                pBuffs['int.mult'] = 0.35;
+                pBuffs['lib.mult'] = 0.15;
+            }
             return pBuffs;
         }
 
         public function GazerEyesMutation() {
-            super(mName + " IM", mName, SLOT_EYES, 3);
+            super(mName + " IM", mName, SLOT_EYES, 4);
         }
 
     }

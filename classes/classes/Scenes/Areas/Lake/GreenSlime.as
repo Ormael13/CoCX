@@ -10,26 +10,17 @@ import classes.internals.*;
 
 public class GreenSlime extends Monster
 	{
-		public var floor1:RiverDungeon = new RiverDungeon();
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
-				cleanupAfterCombat();
-			}
-			else SceneLib.lake.greenSlimeScene.defeatGS();
+			SceneLib.lake.greenSlimeScene.defeatGS();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) floor1.defeatedByGreenSlime();
-			else {
-				if (pcCameWorms) {
-					outputText("\n\nThe slime doesn't even seem to notice.\n\n");
-				}
-				doNext(SceneLib.lake.greenSlimeScene.slimeLoss);
+			if (pcCameWorms) {
+				outputText("\n\nThe slime doesn't even seem to notice.\n\n");
 			}
+			doNext(SceneLib.lake.greenSlimeScene.slimeLoss);
 		}
 		
 		private function lustAttack():void {
@@ -47,27 +38,6 @@ public class GreenSlime extends Monster
 		
 		public function GreenSlime()
 		{
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
-				initStrTouSpeInte(30, 50, 40, 10);
-				initWisLibSensCor(10, 80, 60, 20);
-				this.weaponAttack = 4;
-				this.armorDef = 4;
-				this.armorMDef = 12;
-				this.bonusHP = 100;
-				this.bonusLust = 146;
-				this.level = 6;
-			}
-			else {
-				initStrTouSpeInte(25, 30, 10, 5);
-				initWisLibSensCor(5, 50, 60, 20);
-				this.weaponAttack = 3;
-				this.armorDef = 3;
-				this.armorMDef = 9;
-				this.bonusHP = 50;
-				this.bonusLust = 114;
-				this.level = 4;
-				this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
-			}
 			trace("GreenSlime Constructor!");
 			this.a = "a ";
 			this.short = "green slime";
@@ -87,11 +57,19 @@ public class GreenSlime extends Monster
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.GOO;
+			initStrTouSpeInte(25, 30, 10, 5);
+			initWisLibSensCor(5, 50, 60, 20);
 			this.bodyColor = "green";
 			this.weaponName = "hands";
 			this.weaponVerb = "slap";
+			this.weaponAttack = 3;
 			this.armorName = "gelatinous skin";
+			this.armorDef = 3;
+			this.armorMDef = 9;
+			this.bonusHP = 50;
+			this.bonusLust = 114;
 			this.lust = 30;
+			this.level = 4;
 			this.gems = rand(5) + 3;
 			this.drop = new ChainedDrop().add(weapons.PIPE, 1 / 10)
 					.add(consumables.WETCLTH, 1 / 2)
@@ -99,11 +77,10 @@ public class GreenSlime extends Monster
 			this.special1 = lustReduction;
 			this.special2 = lustAttack;
 			this.special3 = lustAttack;
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			checkMonster();
 		}
-
 	}
-
 }

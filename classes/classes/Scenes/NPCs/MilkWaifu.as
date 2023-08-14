@@ -358,12 +358,12 @@ private function milkBathTime():void {
 	addButton(1,"Milk Girl",pullInZeMilkGirl);
 	if(player.gender > 0 && player.lust >= 33) addButton(0,"DrinkNFap",drinkAndFapturbate);
 	var count:int = 0;
-	if(sophieFollowerScene.sophieFollower()) count++;
+	if(sophieFollowerScene.sophieFollower() && !player.hasStatusEffect(StatusEffects.SophieOff)) count++;
 	if(player.hasStatusEffect(StatusEffects.PureCampJojo)) count++;
 	if(latexGirl.latexGooFollower()) count++;
 	if(flags[kFLAGS.VALERIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) count++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) count++;
-	if(helScene.followerHel()) count++;
+	if(helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) count++;
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) count++;
 	if(emberScene.followerEmber()) count++;
 	if(kihaFollower.followerKiha()) count++;
@@ -398,7 +398,7 @@ private function communalBath():void {
 		outputText("</i>\"");
 	}
 	//If PC has Sophie:
-	if(sophieFollowerScene.sophieFollower()) outputText("\n\n\"<i>Oh, fresh milk!</i>\" Sophie exclaims cheerily.  She drops down by the edge of the pool and scoops up a handful, bringing the thick, creamy milk up to her lips.  Her wings flutter happily as she laps it up, rubbing more into her fair skin between clumps of downy feathers.");
+	if(sophieFollowerScene.sophieFollower() && !player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\n\n\"<i>Oh, fresh milk!</i>\" Sophie exclaims cheerily.  She drops down by the edge of the pool and scoops up a handful, bringing the thick, creamy milk up to her lips.  Her wings flutter happily as she laps it up, rubbing more into her fair skin between clumps of downy feathers.");
 	
 	//If PC has Pure!Jojo or Joy:
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
@@ -419,7 +419,7 @@ private function communalBath():void {
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("\n\nThe mouse-girl, Amily, is quick to respond to your call.  Happy for the luxury of a simple bath, even a milky one, she quickly tosses her clothes aside and dives in beside you, laughing and splashing playfully even as her brown hair is soaked.");
 	
 	//If PC has Helia:
-	if(helScene.followerHel()) outputText("\n\nWith a gleeful shout, Hel rushes the pool.  In one swift motion, she tosses her scale bikini aside and cannon-balls in, splashing everyone with a creamy tidal wave.  Chuckling, you clear your eyes - just in time for her bikini bottom to land on your face.");
+	if(helScene.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\n\nWith a gleeful shout, Hel rushes the pool.  In one swift motion, she tosses her scale bikini aside and cannon-balls in, splashing everyone with a creamy tidal wave.  Chuckling, you clear your eyes - just in time for her bikini bottom to land on your face.");
 	
 	//If PC has Izma: 
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
@@ -616,7 +616,7 @@ private function nyanCatMilkTime():void {
 		outputText("\n\nIn a matter of moments, you coax out the first explosive spurt of milk from your friend's teats, two hot streams of white cream blasting you in the face and drenching you before you can blink.  \"<i>S-sorryyyyyyyy,</i>\" she whines, voice turning into an ecstatic moan as you grip her nipples and start working vigorously, not letting the milky stream die down for an instant.  " + flags[kFLAGS.MILK_NAME] + " moans and groans as you roughly milk her, rewarded with gallon after gallon of delightful motherly milk.");
 		
 		//If PC has Smart/Normal Sophie:
-		if(sophieFollowerScene.sophieFollower()) outputText("\n\nAs you milk " + flags[kFLAGS.MILK_NAME] + ", you see a shadow flash overhead.  You look up in time to see your harpy broodmother perching at the rim of the pool, just beside " + flags[kFLAGS.MILK_NAME] + "'s quivering body.  \"<i>Fresh milk!</i>\" Sophie laughs, cupping up a handful and bringing it to her mouth.  \"<i>You don't mind if Momma Sophie has a taste, do you honey?</i>\"\n\nThe milky girl shakes her head, barely paying attention as Sophie flops down beside her, avian tongue lapping at the stream pouring down into the pool.");
+		if(sophieFollowerScene.sophieFollower() && !player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\n\nAs you milk " + flags[kFLAGS.MILK_NAME] + ", you see a shadow flash overhead.  You look up in time to see your harpy broodmother perching at the rim of the pool, just beside " + flags[kFLAGS.MILK_NAME] + "'s quivering body.  \"<i>Fresh milk!</i>\" Sophie laughs, cupping up a handful and bringing it to her mouth.  \"<i>You don't mind if Momma Sophie has a taste, do you honey?</i>\"\n\nThe milky girl shakes her head, barely paying attention as Sophie flops down beside her, avian tongue lapping at the stream pouring down into the pool.");
 		
 		//If PC has Kiha:
 		if(kihaFollower.followerKiha()) outputText("\n\nFeeling like you're being watched, you cast a glance over your shoulder in time to see the dusky form of Kiha standing behind you.  She simply says \"<i>Ew,</i>\" before walking off.");
@@ -635,7 +635,7 @@ private function nyanCatMilkTime():void {
 		}
 		
 		//If PC has ONLY KIha or if PC dun have Izzy, Sophie, OR Kiha: 
-		if(!isabellaFollowerScene.isabellaFollower() || !sophieFollowerScene.sophieFollower()) outputText("\n\nIt takes a good long while to get " + flags[kFLAGS.MILK_NAME] + "'s bloated tits under control, but nearly an hour later you've milked her as well as you can for now.  Sopping wet, you pull yourself out of the pool and grab a towel.  With her tits lightened for the moment, " + flags[kFLAGS.MILK_NAME] + " reaches up and pulls you down to her, just long enough to plant a kiss on your cheek and whisper, \"<i>Thank you, [name].  That felt good.</i>\"");
+		if(!isabellaFollowerScene.isabellaFollower() || !sophieFollowerScene.sophieFollower() || player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\n\nIt takes a good long while to get " + flags[kFLAGS.MILK_NAME] + "'s bloated tits under control, but nearly an hour later you've milked her as well as you can for now.  Sopping wet, you pull yourself out of the pool and grab a towel.  With her tits lightened for the moment, " + flags[kFLAGS.MILK_NAME] + " reaches up and pulls you down to her, just long enough to plant a kiss on your cheek and whisper, \"<i>Thank you, [name].  That felt good.</i>\"");
 		
 		//If PC has Sophie or Isabella:
 		else outputText("\n\nThough you didn't intend for this to turn communal, " + flags[kFLAGS.MILK_NAME] + " certainly has more than enough to share.  You relax as the last trickles of milk pour into the pool, her breasts looking positively deflated.  You decide to leave the plug in for your friends as you clamber out, figuring they'll want to stockpile a little for the day before you drain it.  With her tits lightened for the moment, " + flags[kFLAGS.MILK_NAME] + " reaches up and pulls you down to her, just long enough to plant a kiss on your cheek and whisper, \"<i>Thank you, [name].  That felt good.</i>\"");

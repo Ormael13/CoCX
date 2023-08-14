@@ -660,6 +660,25 @@ public class Face extends SaveableBodyPart {
 		bite: true,
 		hasMuzzle: true
 	});
+	public static const FOX_FANGS: int = 61;
+	EnumValue.add(Types, FOX_FANGS, "FOX_FANGS", {
+		name: "fox fangs",
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = "";
+
+			if (!creature.hasCoat()) {
+				desc += " Your face is human in shape and structure with [skin coat]. Your mouth is somewhat human save for your fox-like canines.";
+			} else if (creature.hasPartialCoat(Skin.FUR)) {
+				desc += " Your face looks human save for your fox-like canines, but overlaid with glittering patches of [skin coat].";
+			} else {
+				desc += " Your face looks human save for your fox-like canines. You've got [skin coat], hiding your [skin noadj] underneath your furry visage.";
+			}
+
+			return desc;
+		},
+		bite: true,
+		humanShaped: true
+	});
 
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);

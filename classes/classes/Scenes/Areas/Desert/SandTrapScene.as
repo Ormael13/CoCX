@@ -14,7 +14,7 @@ public class SandTrapScene extends BaseContent{
 			return monster as SandTrap;
 		}
 
-				
+		
 		public function SandTrapScene()
 		{
 		}
@@ -35,7 +35,7 @@ public function encounterASandTarp():void {
 	}
 	flags[kFLAGS.TIMES_ENCOUNTERED_SAND_TRAPS]++;
 	if(flags[kFLAGS.TIMES_ENCOUNTERED_SAND_TRAPS] == 1) {
-		//femininity <= 65: 
+		//femininity <= 65:
 		if(player.femininity <= 65) {
 			outputText("You are exploring the endlessly undulating landscape of the desert when you hear an agonized cry for help over the nearest dune.  You quickly scramble up it and are confronted by the sight of a small, flat lake of exceptionally fine sand, overlooked on each side by tall dunes.  Trapped in the middle of it is a young woman with black hair, up to her armpits in the sand.  \"<i>Oh, thank the Gods!</i>\" she cries, spotting you.  \"<i>I'm sinking, please help me!</i>\"  The word 'quicksand' flashes through your mind like fire and you take a nervous step back, attempting to quickly evaluate the situation.");
 			if(player.inte > 65) outputText("  Something about this scene puts you on edge.  How come you've never encountered quicksand in this desert before, with no water and its steady, stubborn, but not violent winds?  There's something odd about the woman, too - although she can't be a sand witch with that hair, you can't quite make her features out clearly through the heat haze.");
@@ -49,15 +49,15 @@ public function encounterASandTarp():void {
 		simpleChoices("Save", saveTheSandTarps, "Don't Save", dontSaveTheTarps, "", null, "", null, "", null);
 	}
 	else {
-		//Standard encounter: 
+		//Standard encounter:
 		outputText("You are walking aimlessly through the desert when your [leg] sinks six inches into powdery sand.  The sound of hissing fills your ears as all around you sand cascades downwards into a conical depression.  A slender figure is emerging at the bottom... you desperately free your lower half and fight your way upwards, trying to stay ahead of the collapsing particulate.");
 		if(player.spe/10 + rand(20) >= 16) {
 			outputText("\n\nMoving as quickly and lightly as you can, you manage to hop clear of the sandtrap's pitfall and claw your way up a relatively stable dune.  You turn to take the androgynous creature in, half buried in its deep hollow.");
 			outputText("\n\n\"<i>You've got quick feet, little ant!</i>\" it giggles.  It lowers its brow and leers up at you with smouldering black eyes, its hands slowly and sensuously trailing patterns in the sand.  \"<i>I bet you're good at lots of other things, too.  Why doesn't the brave little ant come down here and show me?</i>\"  If you're going to fight this creature, you will have to step into its treacherous hollow to get in range, which is surely its intention - if you try launching things at it from where you are, it will probably just hide itself.  On the other hand, it would be easy to just ignore its taunts and walk away.");
 			//Fight]/[Leave]
-			simpleChoices("Fight", startSandTarpFight, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Fight", startSandTarpFight, "", null, "", null, "", null, "Leave", explorer.done);
 		}
-		//Speed check fail: 
+		//Speed check fail:
 		else {
 			outputText("\n\nYou don't move quickly enough, however, and you may as well be running on the spot; the edge of the pit recedes as the fluid sand carries you downwards.  You struggle upright as best you can and ready yourself to fight the sandtrap, which is leering at you hungrily from the bottom of its vast pit.");
 			outputText("\n\n\"<i>Only a matter of time now, little ant,</i>\" it says huskily, in its fluttering, buzzing voice.  You will have to defeat it in order to escape, and before it pulls you to the bottom!");
@@ -74,14 +74,14 @@ public function encounterASandTarp():void {
 private function saveTheSandTarps():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sandtrap);
-	//(femininity <= 65): 
+	//(femininity <= 65):
 	if(player.femininity <= 65) {
 		outputText("You carefully kneel at the edge of the quicksand and stretch your hand out towards the stricken woman, commanding her to grab hold.   With effort she pulls an arm clear of the treacherous powder and, straining, reaches out to grab the very tips of your fingers... before, with a triumphant sneer, pulling as hard as she can.  Thrown off-balance, you fall face-first into the quicksand.  Coughing, you right yourself and struggle desperately to get back up the side, but you have no leverage, and your thrashing causes you to sink waist deep into what feels like dry, impossibly heavy water.");
 		outputText("\n\n\"<i>Don't struggle,</i>\" says the woman, drifting further away from you as easily as if she were swimming.  You can see a second collarbone flexing beneath her first as her arms rest easily upon the surface, a whole second pair of limbs doing the delicate balancing work, and she speaks in a buzzing, fluttering voice, which is nothing like the one she enticed you into her trap with.  She smiles at you - or at least displays her teeth - and with a kind of horror you watch two sets of small, black eyes open on either side of her first pair to stare at you hungrily.  \"<i>Don't you know struggling just makes it worse?  Just relax.  Let me do all the work.</i>\"");
 		outputText("\n\nA rumbling, hissing sound fills your ears and the dunes surrounding you lift out of sight as all the sand in the hollow begins to run downwards, taking you with it.  You fight against it desperately, but you cannot swim up a landslide and within moments you find yourself buried up to your neck at the bottom of a huge, conical depression, eyes level with the naked abdomen of your captor.  You cough, spit and blink sand away and stare helplessly up at it.  The creature has a long, slim human upper half with four arms and a pair of flat breasts; its twenty slender fingers stroke your face, brush you off and massage your [chest] as it allows you to take it in.  With its glamour gone you can see clearly the six eyed creature is in fact male... or is it?  Its long face is soft around the edges with a cute, pointed chin, which is very pretty - or very handsome.  Every time the creature moves its face its gender seems to shift.  Unnerved, you look downwards, and wish you hadn't.  Although its lower half is obscured below the sand, you can see that below its waist the creature's body balloons outwards into what must be a massive, sand-colored insect thorax.  You feel something brush against you and you instinctively attempt to flinch, but you can't.  The sand feels packed against you, and straining every muscle you have to free your limbs gets you nowhere.  Gently, the creature slides its fingers behind your neck and makes you look into its black eyes.");
 		outputText("\n\n\"<i>You made it all too easy for me, little ant,</i>\" it says pityingly.  \"<i>Did no one warn you about sandtraps?</i>\"  Slowly it sinks downwards, and whilst it fondles your face you feel its other set of hands cup your [butt].  \"<i>Never mind,</i>\" the insect monster sighs into your forehead in its fluttery voice.  \"<i>I'll teach you everything there is to know.</i>\"");
 	}
-	//(else fem > 65): 
+	//(else fem > 65):
 	else {
 		outputText("You carefully kneel at the edge of the quicksand and stretch your hand out towards the stricken man, commanding him to grab hold.   With effort he pulls an arm clear of the treacherous powder and, straining, reaches out to grab the very tips of your fingers... before, with a triumphant sneer, pulling as hard as he can.  Thrown off-balance, you fall face-first into the quicksand.  Coughing, you right yourself and struggle desperately to get back up the side, but you have no leverage, and your thrashing causes you to sink waist deep into what feels like dry, impossibly heavy water.");
 		outputText("\n\n\"<i>Don't struggle,</i>\" says the man, drifting further away from you as easily as if he were swimming.  You can see a second collarbone flexing beneath his first as his arms rest easily upon the surface, a whole second pair of limbs doing the delicate balancing work, and he speaks in a buzzing, fluttering voice, which is nothing like the one he enticed you into his trap with.  He smiles at you - or at least displays his teeth - and with a kind of horror you watch two sets of small, black eyes open on either side of his first pair to stare at you hungrily.  \"<i>Don't you know struggling just makes it worse?  Just relax.  Let me do all the work.</i>\" ");
@@ -93,7 +93,7 @@ private function saveTheSandTarps():void {
 	doNext(playerMenu);
 }
 
-//[Don't Save]: 
+//[Don't Save]:
 private function dontSaveTheTarps():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sandtrap);
@@ -105,7 +105,7 @@ private function dontSaveTheTarps():void {
 	else outputText("he");
 	outputText(" cries, neck sinking into the drift.  \"<i>Don't let me die like this... oh, very well.  Have it YOUR way!</i>\"  The ");
 	if(player.femininity <= 65) outputText("woman");
-	else outputText("man"); 
+	else outputText("man");
 	outputText(" suddenly thrusts upwards and plunges a fist into the fluid sand surrounding ");
 	if(player.femininity <= 65) outputText("her");
 	else outputText("him");
@@ -118,7 +118,7 @@ private function dontSaveTheTarps():void {
 	outputText(" midriff exposed and glamour gone, the creature looks quite different; six eyes as black as its hair look at you hungrily from its beautiful androgynous face, whilst four slender arms trail patterns in the sand around its willowy, flat-chested midsection.  It wriggles its body tauntingly at you, making the sand beneath it move ponderously.  You glimpse insect chitin beneath its flat humanoid belly; the buried half of this creature must be monstrous.");
 	outputText("\n\n\"<i>You aren't as slow as you look, little ant,</i>\" it calls up to you, grinning slyly.  It speaks in a buzzing, fluttering voice which is nothing like the one it attempted to entice you into its trap with.  \"<i>Why don't you come down here and dance for me some more?  I'm sure a quick, strong traveller like you could run rings around a simple little sandtrap like me.</i>\"  If you're going to fight this creature, you will have to step into its treacherous hollow to get in range, which is surely its intention - if you try launching things at it from where you are, it will probably just hide itself.  On the other hand, it would be easy to just ignore its taunts and walk away.");
 	//[Fight]/[Leave]
-	simpleChoices("Fight", startSandTarpFight, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+	simpleChoices("Fight", startSandTarpFight, "", null, "", null, "", null, "Leave", explorer.done);
 }
 
 
@@ -141,7 +141,7 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 	else outputText("\n\n");
 	spriteSelect(SpriteDb.s_sandtrap);
 	if(sandTrap.trapLevel() == 1) outputText("You are sunk to your belly in the depthless sand at the bottom of the pit, and are still falling fast.  The sun above you is blotted out by a shape which leans downwards towards you, smiling triumphantly.  Desperately, you try to keep your arms free so you can swing a blow at it, but with consummate ease, the sandtrap grabs your wrists with one set of hands while pushing you downwards with the others.  Within moments you are up to your armpits in the stuff, staring helplessly up at the strange androgynous creature who has you entirely at its mercy.");
-	//PC lust loss: 
+	//PC lust loss:
 	else outputText("You feel as radiant and molten as the sun above you... you just want to sink into the warm sand surrounding you forever.  Why are you struggling against it again?  You can't remember; with a sigh, you fall backwards onto the soft powder and allow yourself to be carried right down to the bottom.  The sandtrap chuckles softly as it envelops you in its waiting arms.  \"<i>Good " + player.mf("boy","girl") + "...</i>\"");
 
 	if (sceneHunter.uniHerms) {
@@ -160,15 +160,15 @@ internal function pcBeatsATrap():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sandtrap);
 	flags[kFLAGS.SANDTRAP_LOSS_REPEATS] = 0;
-	//PC HP victory: 
+	//PC HP victory:
 	if(monster.HP <= monster.minHP()) outputText("The sandtrap groans and collapses forwards into the dirt.  With the creature no longer controlling it, the sand underneath you feels a great deal more stable... climbing out won't be too difficult.");
-	//PC lust victory: 
+	//PC lust victory:
 	else outputText("The sand around you stops sinking.  Overpowered with lust, the sandtrap moans and gives up control over itself and its pit to desperately run one set of hands over its flat chest whilst the other pushes into the sand to masturbate... whatever it has down there.  With your foe in this state, climbing out won't be so difficult now.");
-	//additional victory sentence if PC lust over 30: 
+	//additional victory sentence if PC lust over 30:
 	if (player.lust >= 33) {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
 		menu();
-		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) 
+		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS)
             addButton(0, "Naga3Some", nagaThreesomeWithSandTrap);
         else    addButtonDisabled(0, "???", "Requires naga lower body, naga fangs, and to have a certain Naga lover. (not genderless)")
 		addButtonIfTrue(1, "UseYourCock", stickWangInSandgina, "Req. to be strong enough (>60) and have a dick", player.hasCock() && player.str >= 60);
@@ -191,15 +191,15 @@ private function dickwieldersLoseToSandTarps():void {
 	outputText("\n\nThe cock prong slides into your mouth and past your teeth with ease, already dripping with its strange, clear lubicrant.  Sighing dreamily, the sandtrap slowly pushes half of its length into your mouth before pulling itself back out, then in again, picking up a gentle rhythm, each time pushing a bit more of itself into your mouth.  Soon it is stretching your lips wide as it takes you right to its thick base, its tip finding the back of your throat.  It groans and you feel your mouth fill with its oil; rather than ejaculate, the sandtrap's cock seems to perspire its odorless payload from all sides.  The stuff swabs and swathes your mouth in warmth; it makes your lips, the inside of your cheeks and your tongue feel relaxed, accepting and soft.  It feels like your mouth was made to take and enjoy this creature's cock... you begin to suckle the sandtrap eagerly, hoping for more.  Sighing at your greed, the creature pushes as much of itself as it can down your throat, leaking oil deliriously as it does.  Your lips stretched wide by the base of its prong, you can't help but dribble oil down your front even as you inadvertently swallow a great deal of its warm, coating ooze.");
 	
 	outputText("\n\nYou feel flutters spread throughout you, penetrating your core.  The rest of your body begins to feel just like your mouth; languid, sensual and submissive.  The sands encompassing you feel like the most comfortable straitjacket imaginable, and you close your eyes again as [eachCock] begins to harden.  It hazily occurs to you that the sensation of your cock hardening in the sand should irritate you, but in effect it doesn't; below you the substance feels more like packed mud, and the feeling of your length sliding through the yielding, enveloping dirt is incredibly pleasurable.  You actually smile dreamily around the prong stuffing your face when you feel something hot and wet press insistently against the tip of your [cock].   The sand massages every inch of your body as below the surface the sandtrap begins to sink its insect cunt down your sensitive shaft.");
-	//[Less than 6 inches:  
+	//[Less than 6 inches:
 	if(player.cocks[0].cockLength < 6) outputText("\n\nThe creature looks down in surprise at you when its dripping, grasping sex reaches the base of your cock so quickly.  You feel a familiar sense of shame creeping across your cheeks... but the sandtrap uses the two hands grasping your head to stroke your brow and face with odd tenderness.  \"<i>Yyou do not like being all man, do you?  Perhaps little ant likes fooling mates with its looks, too.  Perhaps little ant is more like sandtrap than I thought.</i>\"  You look up at it, its prong still buried in your face, to see an odd look of hunger in its six eyes.  \"<i>Do not worry,</i>\" it says, smiling widely.  \"<i>Hyou are perfect to me.</i>\"  It begins to slowly work your small shaft, its pulsing muscles squeezing you possessively up and down.");
-	//6 inches to 15: 
+	//6 inches to 15:
 	else if(player.cocks[0].cockLength < 15) outputText("\n\nThe creature owns an incredibly tight sex, which grasps you possessively once it is on you; it fits your cock like a glove.  The sandtrap sighs its fluttering sigh when it reaches your base and then slowly begins to work you, its punishing, pulsing muscles squeezing your cock up and down.");
-	//More than 15 inches: 
+	//More than 15 inches:
 	else outputText("\n\nThe creature owns an incredibly tight sex, which grasps you possessively once it is on you.  Sweat beads the sandtrap's elegant brow as it forces itself brutally down your huge shaft; when it finally stops with a sizable portion of your [cock] inside it and draws back slightly, it feels like it is going to suck the cum right out of you.  It slowly begins to work what it can of you, its punishing, pulsing muscles squeezing your cock up and down.");
 	
 	outputText("\n\nThe sandtrap caresses your face tenderly as you suck its pseudo-cock while below the sand it assiduously begins to milk you.  You are pushed further into the hopelessly relaxed sex daze the creature's warm oil has instilled in you; it feels like the sand itself is moving with the creature, massaging your body in waves at the same gentle rhythm as the creature fucks your face and cock.  You can't keep track of time; there is only the sensation inundating your mouth, your body and [cock], the sandtrap's gentle sighs, and the hiss and crunch of the sand itself.  Eventually the sandtrap begins to pick up the pace; it shoves your face into its groin as it begins to pant with need, stretching your mouth wide again as it begins to milk your cock as hard as it can.  Its vaginal muscles grip you tightly, rippling up and down your length; it feels like you are being fucked by a wet, grasping tube.  You can't possibly contain yourself against the creature who has sunk you into such glorious submission and, groaning around its prong, you spurt everything you can give into that clenching warmth.");
-	//[High cum: 
+	//[High cum:
 	if(player.cumQ() > 1000) outputText("  The sandtrap gasps and coos as you ejaculate over and over again, and beneath you feel your cum wet the sands as it beads around the clenching grip it has you in.");
 	if(player.hasVagina()) outputText("  Ignored entirely, your " + player.vaginaDescript(0) + " quivers and orgasms in tandem, flexing and wetting fruitlessly against the dry water pressing against it.");
 	
@@ -270,7 +270,7 @@ private function genderlessLoss():void {
 	outputText("\n\nThe sandtrap holds your hands whilst it pushes you further down with its other set of arms, until only your head is above the sand.  Below the surface you try to weakly move your limbs, try to work yourself out of this situation but it is impossible; the sand feels impossibly heavy and is packed against you.  The sandtrap seems to have no such difficulty.  It towers above you, moving with sinuous grace.  You feel something wet touch your thigh and you try to flinch, but aside from flexing your muscles you cannot move.");
     if (player.gender == 0) {
         outputText("\n\n\"<i>Hwhat a strange creature you arrrhe,</i>\" says the sandtrap, looking at you with vague bafflement as it gently strokes your face.  It seems the more excited it gets and the less it feels the need to pretend, the more fluttery and broken its voice becomes; it is like you are listening to a hive of bees that just happens to be forming words.  ");
-        //(Trap has fertilised eggs: 
+        //(Trap has fertilised eggs:
         if(monster.hasStatusEffect(StatusEffects.Fertilized)) outputText("\"<i>Not a worker OR a drone! Wwwell, that isz ok.  Even ants who hhhave nothing can be someone for somebody.  And hhyou can be mommy for my childrrhen!</i>\"");
         else outputText("\"<i>Not a worker OR a drone! Wwwell, that isz ok.  Hwwe can still have fun, can't we?</i>\"");
     }
@@ -309,19 +309,19 @@ private function sandTrapPregChance():void {
 public function birfSandTarps():void {
 	spriteSelect(SpriteDb.s_sandtrap);
 	outputText("\nYour eyes widen as a gout of oil suddenly gushes from your ass.  Before panic can set in, an incredible light-headedness overtakes you.  Dreamily, you discard your [armor] and squat.  More oil oozes out of you, and in your hazy euphoria, you scoop some of it up and rub it dreamily into your " + nippleDescript(0) + "s.  Part of you is disgusted at yourself, questioning what you are doing, but that is one voice in a million-strong chorus crooning you into total relaxation... the oil clings to your skin and seems to radiate warmth and softness.  Something round stretches your rectum wide, but in your state the sensation is practically orgasmic.");
-	//[Male: 
+	//[Male:
 	if(player.gender == 1) {
 		outputText("  You roll your eyes to the sky and moan, [eachCock] growing hard as you push out the egg.");
 		//[(mans and qualified horses only)]
 		if(!player.isTaur() || (player.tallness * (5/6) < player.cocks[player.longestCock()].cockLength)) outputText("  Your oily hands descend upon your cock, and you massage your shaft as you feel the pressure in your bowels intensify again.");
 	}
-	//Female: 
+	//Female:
 	else if(player.gender == 2) {
 		outputText("  You roll your eyes to the sky and moan, your " + vaginaDescript(0) + " moistening as you push out the egg.");
 		//[(no fukken horses from here)]
 		if(!player.isTaur()) outputText("  Your oily hands push softly into your cleft, fingering your needy " + player.clitDescript() + " as you feel the pressure in your bowels intensify again.");
 	}
-	//Herm: 
+	//Herm:
 	else if(player.gender == 3) {
 		outputText("  You roll your eyes to the sky and moan, [eachCock] growing hard and your [vagina] moistening as you push out the egg.");
 		//[(no horses)]
@@ -333,9 +333,9 @@ public function birfSandTarps():void {
 	
 	//Libido <30:
 	if(player.lib < 33) outputText("\n\nYou pick yourself up wearily, flap the flytraps you have birthed away and make your way back to camp.  This whole experience has been deeply unnerving, and you vow to make sure you don't have to repeat it.");
-	//Libido 30-65: 
+	//Libido 30-65:
 	else if(player.lib < 66) outputText("\n\nYou spend a moment enjoying your post-natal haze, then haul yourself out of it, flap the flytraps you have birthed away, and make your way back to camp.  Though this experience has been deeply unnerving, you can't help but acknowledge it has also been incredibly erotic.");
-	//Libido >65: 
+	//Libido >65:
 	else outputText("\n\nYou smile lazily, then lie back and glory in the sensual haze the oil has left you in.  After you have spent many minutes lying listening to the happy twittering of your flytrap children above you, you reluctantly get up.  You only hope that you get to experience the unearthly wonder of birthing these strange creatures again, and again, and again.");
 	player.buttChange(25,true,true,false);
 	outputText("\n");
@@ -365,24 +365,24 @@ private function useSandTarpsHands():void {
 
         sceneHunter.print("Details for different cock lengths and multicock up to 5");
         outputText("\n\nOne pair of the creature's hands slowly brush up your inner thighs whilst the other two feel around your [armor], clumsily loosening clasps and belts as it finds them.  One hand locates [oneCock] and, after pausing for a split second, slides its fingers around your shaft and begins to slowly rub up and down.  You sigh as you quickly harden in the creature's smooth, dry, enveloping grasp.  You look into the sandtrap's face as it works; blushing, it looks down from your gaze and concentrates upon what it is doing.  It begins to pump you faster and you hiss slightly at the abrasion this causes.  The sandtrap makes a throaty sound.  Curiously you look down in time to see it bring its other pair of hands up to its mouth and deposit a great dollop of clear ooze into its cupped palms.  Your disgust turns to delight as it swaps its hands and begins to massage its oil into your length, the warm lubricant allowing the creatures' fingers to glide around your shaft and head like they were made of silk.  Tentatively the creature uses its other hands to cup your [butt] and really gets to work on you.");
-		//Cock less than 6 inches: 
+		//Cock less than 6 inches:
 		if(player.longestCockLength() < 6) {
 			// balls:
 			if(player.balls == 0) outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x1[0]+"] to stimulate you even further.");
 			else outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x1[0]+"] to incite you even further, whilst it uses its free hand to gently cup your [balls].");
 			outputText("  Your small size doesn't seem to bother it; if anything, judging from the red rising in its thin cheeks and its shortening breath, the girliness of your cock actually seems to excite it.  It pauses and, whilst you are both panting lightly, it slowly and gently circles your head with its index finger whilst it still holds the entirety of your cock with the rest of its hand.");
 		}
-		//Cock 6-16 inches: 
+		//Cock 6-16 inches:
 		else if(player.longestCockLength() < 16) {
 			//[no balls:
 			if(player.balls == 0) outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x1[0]+"], picking up a warm smooth rhythm.");
 			//Balls:
 			else outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x1[0]+"], picking up a warm smooth rhythm as it gently cups your [balls] with its free hand. It slows down intermittently to move its palm around your length, letting every inch of your dick feel the tips of its delicate fingers.");
 		}
-		//Cock more than 16 inches: 
+		//Cock more than 16 inches:
 		else outputText("\n\nThe sandtrap quickly comes to the realisation it needs both hands for this.  Still cupping your behind, it moves one oily hand up the top end of your massive shaft, while the other works the other half.  You sigh with deep satisfaction, enjoying the all-too-rare sensation of having every inch of your [cock "+x1[0]+"] immersed in pleasure.  The creature screws its face up and looks away in distaste at the size of your straining dick, which is in danger of poking it in the nose.  As you enjoy the warm, slippery sensation inundating you, you find you couldn't care less what it thinks.");
 		//number of cock fork
-		//One cock: 
+		//One cock:
         switch(player.cockTotal()) {
         case 1:
             outputText("  The sandtrap pumps you faster and faster until its slippery hands are a blur of motion.  It clutches onto your butt cheeks so tightly you hazily realize the indents of its slender digits will be with you for hours afterwards.");
@@ -425,14 +425,14 @@ private function useSandTarpsHands():void {
             x1[i] = player.findCock(i+1, -1, -1, "length") + 1;
         sceneHunter.print("Details for different cock lengths and multicock up to 4");
         outputText("\n\nOne pair of the creature's hands slowly brush up your inner thighs whilst the other two feel around your \"<i>armor</i>\", clumsily loosening clasps and belts as it finds them.  One hand finds your [cock "+x1[0]+"] and, after pausing for a split second, slides its fingers around your shaft and begins to slowly rub up and down.  You sigh as you quickly harden in the creature's smooth, dry, enveloping grasp.  You look into the sandtrap's face as it works; blushing, it looks down from your gaze and concentrates upon what it is doing.  It begins to pump you faster and you hiss slightly at the abrasion this causes.  At this the sandtrap makes a throaty sound.  Curiously you look down in time to see it bring its other pair of hands up to its mouth and deposit a great dollop of clear ooze into its cupped palms.  Your disgust turns to delight as it swaps its hands and begins to massage its oil into your length, the warm lubricant allowing the creatures' fingers to glide around your shaft and head like they were made of silk.  As it moves its first hand up and down, it tentatively moves its second further between your legs.  It finds your [vagina] and, after pausing for a split second, slides its slender fingers into your moistness.  Although it is clumsy at first, the oil which coats its digits make them glide over your shaft and labia as if they were entirely frictionless.  It quickly gains confidence and begins to gently frig you as it slides its warm, slippery grasp up and down your [cock "+x1[0]+"], circling your [clit] whilst occasionally dipping into your dripping hole.  You sigh and begin to lose yourself in the wet, silky sensation.");
-		//Cock less than 6 inches:  
+		//Cock less than 6 inches:
 		if(player.longestCockLength() < 6) {
-			//[no balls: 
+			//[no balls:
 			if(player.balls == 0) outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x1[0]+"] to stimulate you even further.");
 			else outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x1[0]+"] to incite you even further, whilst it uses its free hand to gently cup your [balls].");
 			outputText("  Your small size doesn't seem to bother it; if anything, judging from the red rising in its thin cheeks and its shortening breath, the girliness of your cock actually seems to excite it.  It pauses and, while you are both panting lightly, it slowly and gently circles your head with its index finger, still holding the entirety of your cock with the rest of its hand.");
 		}
-		//Cock 6-16 inches: 
+		//Cock 6-16 inches:
 		else if (player.longestCockLength() < 16) {
 			if(player.balls == 0) outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x1[0]+"], picking up a warm smooth rhythm.");
 			else outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x1[0]+"], picking up a warm smooth rhythm as it gently cups your [balls] with its free hand.]  It slows down intermittently to move its fingers around your length, letting every inch of your dick feel the tips of its delicate fingers.");
@@ -465,7 +465,7 @@ private function useSandTarpsHands():void {
         sharedEnd();
     }
     function sharedEnd():void {
-        //All sexes go to: 
+        //All sexes go to:
         outputText("\n\nYou sigh with immense satisfaction and step back from the sandtrap.  Taking into account what an excellent job it did you opt not to rub its face in what you have made it do, particularly as you have managed to get quite a bit of your fluids on it anyway.  It watches you, still flushed and mouth slightly ajar, as you leisurely pull your [armor] back on.");
         outputText("\n\n\"<i>Please, lion,</i>\" it manages eventually.  You look at the strange, half-buried creature and notice that spots of fluid are darkening the sand around it; it is evidently perversely turned on by your domineering actions, and you have left it in no way satiated.  You curl your lip into an evil smirk.");
         outputText("\n\n\"<i>Not today, I think,</i>\" you say over your shoulder, as you clamber out of its pit.  \"<i>I think you'll have to try a bit harder if you want to get what you want from this lion.</i>\"  Your smile broadens as a deeply frustrated moan reaches your ears from behind you...");
@@ -487,9 +487,9 @@ private function rideDatSandTarpLikeIts1999():void {
 	outputText("\n\n\"<i>Pleasze...</i>\" the sandtrap manages in a tiny voice.  Its slender cheeks are red and it stares hopelessly into your eyes.  You twist your thighs and very gently tease its tip with your wet opening, before once again coming to an agonising halt.  The trap almost sobs.");
 	outputText("\n\n\"<i>Beg for it!</i>\"");
 	outputText("\n\n\"<i>Pleasze lion!  I hwill do anything for you!  I hhwill do anything to serve your body!  I am hyour slave! Just... pleasze pleasze fuck me!</i>\" it cries out, its fluttering voice in danger of breaking up completely.  You suppose that will do.  Holding the sandtrap down, you sink your wetness down onto its long, thin length with a pleasurable sigh.");
-	//Tight: 
+	//Tight:
 	if(player.vaginalCapacity() < 30) outputText("  Its thin length is a perfect fit for your tight pussy - the slick prong slides against your inner walls like a hand into a silk glove.  After slowly working your [hips] back and forth for a while you quickly pick up a rhythm, until you are ruthlessly bucking its pseudo-penis back towards its face, giggling as you ride the creature for all it is worth.  Its willowy upper body is your plaything and you tweak its pale nipples, stroke its sensitive armpits, anything that will make it flinch and force another cute, fluttering moan out of it.");
-	//Loose: 
+	//Loose:
 	else outputText("  Its thin length is lost in your vast pussy, and you find you have to work your [hips] hard, ruthlessly bucking its pseudo-penis back towards its face, to get what you can from it.  You spare no expense telling it how unsatisfied it leaves you, what a pathetically-sized penis it owns, more like a sissy clit really, and as you do so you tweak its pale nipples, stroke its sensitive armpits, saying or doing anything that will make it flinch and force another cute, fluttering moan out of it.");
 	player.cuntChange(14,true,true,false);
 	outputText("\n\nIt can't last long against your domineering fuck and you are only minutes in when, with a trembling gasp, it thrusts itself upwards and orgasms.  Rather than ejaculate, the sandtrap's cock seems to perspire its odorless payload from all sides; oil drools out of your [vagina].  You swoon at the sensation; the stuff makes you feel like butter in the desert sun, imbuing you with a lazy, radiant sensitivity.  You grip your hips around the trap, plugging as much of the wonderful substance in on its thick base, savoring the softness it brings.  It dreamily occurs to you that whilst the creature is capable of ejaculating, it apparently can't lose its erection; the thing in your cunt is more like a stinger than anything.  This strikes you as a feature to take full advantage of.  You lean downwards and blissfully inform the sandtrap that it came instantly like the sissy it is, and the only way it can make it up to you is giving you everything it's got over the course of the next few merciless hours.  The creature is incapable of responding.  Its thin chest heaves for air as its six eyes roll to the heavens as you begin to slowly buck against it once more.");
@@ -517,16 +517,16 @@ private function stickWangInSandgina():void {
         
         outputText("\n\nWith an air of purposefulness, you step forward and clinch the sandtrap around its abdomen.  It makes a startled, fluttering noise and grabs you instinctively with its four arms as you set your shoulder into it and heave, as if you were preparing to give it a fireman's lift.  With a rumbling, hissing sound, its bulging insect abdomen begins to emerge from the sand.  The sandtrap goes into full panic mode as you progressively winch it clear of its nest, beating its arms weakly against your back as it babbles.");
         outputText("\n\n\"<i>No!  Pleasze don't do that!  Pleasze I, I don't hhwant to be naked!  I'll leave you alone from nowhh on, I'll- I'll make sandcastles for you, juszt sztop...</i>\"  You ignore it, concentrating on the task in hand, and with one final heave pull it completely clear of its hole, spilling it onto the sand.  You catch your breath as you take it in.   Its fawn-coloured teardrop-shaped abdomen must be twice the mass of its human half, every bit as ponderous, leathery and alien as the rest of the creature is graceful, smooth and trim.  And at the very tip of it... a wave of heavy female sex pheromones assaults you as you observe, far more powerful this time, drawing blood from your head inexorably to your genitals.  Its lips and labia are strikingly human looking, bizarre against the leathery exoskeleton from which they protrude, but the vagina itself looks different: less like an opening and more like one end of a tight, fleshy tube.  Despite the creature's continuing babble of protests, it is dripping and ready, miraculously clean of sand.  You brace yourself against the beached trap's warm hide and try to clear your head, which is buzzing with the anticipation of sex.  Are you really going to do this?  <i>Yes.</i>  It's your dick again.  <i>Yes you are.</i>  You close your eyes and, thinking only of the heat in your veins and the pheromones in your nostrils, you grip the sandtrap's abdomen and push your " + player.cockDescript(x) + " into its wet sex.");
-        //8 inches or less: 
+        //8 inches or less:
         if(player.cocks[x].cockLength < 8) {
             outputText("\n\nThe creature's moist cunt is tight and is a perfect fit for your modest cock.  Working yourself slowly backwards and forwards, you sigh as you soon hilt yourself in the warm wet, nowhere near its full depth.");
         }
-        //8 inches to 35: 
+        //8 inches to 35:
         else if(player.cocks[x].cockLength < 35) outputText("\n\nThe creature's moist sex is tight and you have to work your way in carefully, letting it get used to your girth, slowly working it loose enough to take your big cock.  The creature moans as you patiently squeeze more and more of yourself into its warm wet, eventually hilting yourself deep in its depths as it dribbles fluids on the sand at your feet.");
-        //Megacock: 
+        //Megacock:
         else {
             outputText("\n\nThe creature's moist sex is tight and you honestly doubt it can even take your obscenely massive tool.  Never say never, though.  You work your way in carefully, letting it get used to your girth, slowly working it loose enough to take your " + player.cockDescript(x) + ".  The creature gasps and then moans as you patiently squeeze more and more of yourself into its warm wet; its sex may be narrow but it is incredibly long, running perhaps the entire length of its abdomen.  Your cock is more than a match for it however and your breath quickens as you continue thrusting more of yourself in, until it feels like the end of your cock is trapped inside a hot, soft, grasping drainpipe.  \"<i>Hhhhwhat even is that?</i>\" squeaks the panting, peering sandtrap, in a tone somewhere between terror and awe.  \"<i>Yyour leg?  Hwhat kind of monszter even are you?</i>\"  You're not taking that from an androgynous insect chimera.  You respond by giving it one last savage, triumphant push, bottoming out in the sandtrap's egg sac.");
-            //[Balls and cocklength >= 40:  
+            //[Balls and cocklength >= 40:
             if(player.hasBalls()) outputText("  Your [balls] slap against the creature's wet opening.  ");
             outputText("  Any coherence flies straight out of the sandtrap's head and it can do nothing but whine, buzz and moan as you begin to thrust in and out of it, penetrating it to its very core, the [cockHead] bumping against strange bulbous objects which give and push back against your sensitive end delightfully.");
         }
@@ -553,13 +553,13 @@ private function nagaThreesomeWithSandTrap():void {
 	spriteSelect(SpriteDb.s_sandtrap);
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
 	outputText("You slowly slither down to the bottom of the pit, your long patterned tail undulating in the sand, until you are by the sandtrap's side.  There is a mixture of fear and lust in its eyes as it regards your sinuous form; you slowly prise yourself out of your [armor].  You're not quite sure what you want to do with your lean, tender prize yet, so you follow what your snake instincts, speaking to you in the warm hush of your scales brushing through the sand, tell you to do.  The sandtrap murmurs in disquiet as you pass yourself around its willowy upper body, your tail looping first its abdomen and then its flat breasts, strong, muscular coils easily overcoming the struggles of its four thin arms.  Soon its upper frame is swaddled in your lower body.  It scowls at you and you beam back, displaying your fangs, enjoying the sight and feeling of this former aggressor entirely at your mercy.");
-	//First encounter: 
+	//First encounter:
 	if(flags[kFLAGS.SANDTRAP_NAGA_3SOME] == 0) {
 		outputText("\n\nA small cough from above you makes you start.  Looking up you are startled to see the desert naga peering down at the two of you.  Anxiety vies with amusement on her face.");
 		outputText("\n\n\"<i>I heard fighting and I heard you,</i>\" she says, in your lonely, shared tongue.  \"<i>I thought you might need help.</i>\"  She gestures with disdain at the creature held in your coils, the six eyes of whom are bulging with fright at the sight of the pair of you.  \"<i>I have encountered these creatures before.  They do... bad things if you let them surprise you.</i>\"  She twists her mouth, and you do the math yourself.");
 		outputText("\n\nAs you languidly corkscrewing your coils around your prize, you ask the Naga if she's in the mood for revenge against all the bad things he's done.  She blinks, and then smiles warmly.  \"<i>We </i>are<i> of one blood, you and I,</i>\" she says fondly, as she slowly slides down to join you.");
 	}
-	//Repeat encounter: 
+	//Repeat encounter:
 	else {
 		outputText("\n\nYou look up and are somehow unsurprised to see that whilst you were twining yourself around the sandtrap, you gained a spectator.  You look into the eyes of the desert naga seated above you and the two of you smile; there's no need for words.  She sinuously descends into the pit, the sandtrap moaning in its fluttery voice at the sight of her.");
 	}
@@ -573,15 +573,15 @@ private function nagaThreesomeWithSandTrap():void {
 
     //PARTS
     //==================================================================================================
-	//Male/Herm: 
+	//Male/Herm:
 	function dickF():void {
 		outputText("\n\nYou press your hardening [cock] against the creature's lips.  Its eyes still far away, the sandtrap opens its mouth and begins to lavish attention upon your head with its tongue, circling it with gentle pressure whilst giving your urethra the occasional faintest of flicks.  Sighing, you push yourself forward into the creature's soft mouth, its teeth parting to quiescently accept your dick.  At the edge of your concentration you hear a quiet gasp as your snake partner lowers herself slowly down the sandtrap's prong.  The creature's mind may be elsewhere, but its body evidently still understands pleasure; it gives out a muffled moan around your cock, sending pleasurable vibrations down your shaft, before beginning to suckle you in earnest.  The sensation is devilishly strange; you're feeding yourself into the sandtrap's mouth upside down, its tongue lavishing attention upon the upside of your dick.  It moves its tongue around and briefly you press against the incredibly wet and pliable tissue at the bottom of its mouth.  You light-headedly wonder if this isn't just the much better way of doing things.");
-		//[<14 inches: 
+		//[<14 inches:
 		if(player.cocks[0].cockLength < 14) {
 			outputText("\n\nYour [cock] is a good fit for the sandtrap's mouth and soon the creature is taking your whole length, lavishing its oil and saliva into your straining cock, lying its head back and opening its mouth wide so you can begin to piston into its submissive opening with fervor, ");
 			if(player.hasBalls()) outputText("slapping your [balls] into its nose, forcing your cock all the way to the top of its tight throat.");
 		}
-		//14 inches or more: 
+		//14 inches or more:
 		else {
 			outputText("\n\nYour [cock] is bigger than what the sandtrap's mouth can accommodate, and it isn't long before you are beginning to push into the creature's tight throat.  It lavishes its oil and saliva onto your straining cock, lying its head back and opening its mouth as wide as it can to aid you in your task, and soon you are ");
 			if(player.skinType == Skin.PLAIN) outputText("beading sweat, ");
@@ -598,10 +598,10 @@ private function nagaThreesomeWithSandTrap():void {
 	    player.sexReward("saliva","Dick");
         sharedEnd();
 	}
-	//Female: 
+	//Female:
 	function vagF():void {
 		outputText("\n\nYou press your moistening " + player.vaginaDescript(0) + " against the creature's lips.  Its eyes still far away, the sandtrap opens its mouth and pushes its soft tongue into your cleft.  It explores your labia and hole before turning its attention to your " + player.clitDescript() + ", circling it with gentle pressure whilst giving it the occasional faintest of flicks.");
-		//[Squirtr, jotun of flooding: 
+		//[Squirtr, jotun of flooding:
 		if(player.wetness() < 4) outputText("  Its gentle worship of your " + player.vaginaDescript(0) + " soon has you streaming rivulets of girlcum from your oversexed hole, dribbling down the sandtrap's face as you eagerly press yourself down for more.");
 		outputText("  You close your eyes and lose yourself to the delightful sensation, contracting and relaxing the coils wrapped around your prey in time with throbs of pleasure.  At the edge of your concentration you hear a quiet gasp as your snake partner lowers herself slowly down the sandtrap's prong.  The creature's mind may be elsewhere, but its body evidently still understands pleasure; it gives out a muffled moan in your cunt, sending pleasurable vibrations deep into you, before sinking its tongue deep into you, slathering your sex with saliva and oil as it pushes its mouth fully onto you.  You buck against it excitedly, forcing more and more of its tender muscle into you, squealing as you reach an exuberant high, your vagina flexing around the sandtrap's tongue as you reward its attentions with a small waterfall of girlcum.");
 		outputText("\n\nSimmering with pleasure, you lazily work your thighs backwards and forwards, allowing the creature to lick your lips clean whilst still keeping you oiled and purring.  In front of you the naga moans, clear glaze dribbling out of her snatch as she moves sensuously atop the sandtrap's prong; she looks at you with heavy, pheromone-induced lust, her forked tongue flicking out of her mouth.  Your coils rub together over your shared meal's slim body, and you find yourself flicking your own tongue out in tandem with your lover, smiling as you touch one another for the briefest of moments, breathing in the scent of each other's flesh.  Mindlessly, the sandtrap's four arms clutch and stroke the warm scales that swaddle its upper body as the two of you continue to fuck it.");
@@ -632,7 +632,7 @@ private function sandTrapBadEnd():void {
 	outputText("\n\n\"<i>My people have stories about wanderers like you,</i>\" the androgyne says softly, its multiple black eyes looking into your own black orbs.  \"<i>It has been so long since we had such a one as you, and we were so winnowed by the soulless lions of the mountains, that your kind have passed into legend.  Surface scratchers who not only bear our children, but choose to do so willingly; who drink the fluids we gift them to become of our flesh; who come back to our lands time and again, answering a call only they can hear.</i>\"  The creature opens all four of its arms to you, beaming triumphantly.  \"<i>You need only to take the final step, Flytrap.  Come to me, and embrace your desztiny.</i>\"");
 	outputText("\n\nYou stand at the lip of the Sandtrap's hollow, shaking your head, trying to make sense of what it is saying.  It's talking nonsense...isn't it?  Again you feel light-headed, your thoughts a lonely cloud of bees without a hive.  They have no purpose, and the Sandtrap is offering you one... but don't you already have a purpose?  Not as good a purpose as this one.  Not as right a purpose, one that perfectly suits what your body has become...  ");
 	if(player.hasCock()) outputText("[EachCock] hardens and your thin frame feels aflame, barely understood impulses deep within you begging you to walk down and submit to the Sandtrap's will.  ");
-	//Female: 
+	//Female:
 	else if(player.hasVagina()) outputText("Your [vagina] moistens and your thin frame feels aflame, barely understood impulses deep within you begging you to walk down and submit to the Sandtrap's will.  ");
 	outputText("You inhale hard and try to clear your head, forcing yourself not to sleepwalk downwards into the Sandtrap's waiting embrace.  The creature doesn't seem to mind your hesitation; it smiles softly and confidently, waiting for you with the infinite patience of its kind.  You need to make a choice here fast, before your burning body makes it for you.");
 	//Fight/Desztiny/Leave
@@ -643,7 +643,7 @@ private function sandTrapBadEnd():void {
 	
 }
 
-//Fight: 
+//Fight:
 private function sandTrapBadEndFight():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sandtrap);
@@ -658,7 +658,7 @@ private function leaveSandTrapBadEnd():void {
 	spriteSelect(SpriteDb.s_sandtrap);
 	outputText("With some effort you break your stare with the Sandtrap, turn away and step back towards camp, resolving to leave this disturbing scenario with its disturbing thoughts behind.");
 	outputText("\n\n\"<i>I understand, Flytrap,</i>\" a calm voice reaches you from behind.  \"<i>You need time to think things over and truly recognise what you are.  I know you will come back.  You always do.</i>\"");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Desztiny:
@@ -666,7 +666,7 @@ private function desztiny():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sandtrap);
 	outputText("The Sandtrap is right.  What your body and subconscious are telling you is so right.  At your acceptance of what the creature is saying warmth floods through your body; your mind bubbles as blood rushes towards your skin, making you feel incredibly sensitive, incredibly sexual.  ");
-	//Male: 
+	//Male:
 	if(player.hasCock()) outputText("Your cock strains upwards and you moan; feeling as sensitive as you do, you are both desperate to be touched and desperate not to be.  ");
 	//Female:
 	else if(player.hasVagina()) outputText("You feel but barely hear the drip of moisture on the sand, both your [asshole] and [vagina] beading with oily need.  ");
@@ -683,7 +683,7 @@ private function loseLastFightWithSandTrap():void {
 	sandTrapBadEndFinale();
 }
 
-//Both go to: 
+//Both go to:
 private function sandTrapBadEndFinale():void {
 	spriteSelect(SpriteDb.s_sandtrap);
 	outputText("\n\nIts lips move a slippery friction against yours as it twines its tongue around yours and begins to work glands deep in its gourd, trickling oil into your mouth.  It holds the back of your head kindly yet firmly as it does this, as if it were feeding you, but there is no need for it to apply any pressure at all.  You are nothing but a vessel for it, accepting what it is doing to you without question; you know nothing but the texture of oil and the creature's tongue pushing into you.  Your willingness is rewarded by making the Sandtrap's fluids flow swifter; it smiles against your face before gushing oil into your mouth in a torrent.  At the very edge of your awareness, you feel the sand parting around your feet, of the Sandtrap pushing you slowly downwards, of the delicious feeling of an infinity of warm particles against your \"thighs\"; but this is as nothing to the warm ooze sliding down your throat, intensifying your sensitivity, making you gasp and pull away and gush fluids of your own against the Sandtrap, before being pushed back into its dripping mouth with that insistent, loving pressure.  You drink, and drink, and drink, transfixed by a kiss which is more like suckling at a teat...");

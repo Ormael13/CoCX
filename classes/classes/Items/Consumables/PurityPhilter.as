@@ -1,17 +1,19 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
-	import classes.Items.Consumable;
-	
-	/**
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Consumable;
+
+/**
 	 * Reduces corruption.
 	 */
-	public class PurityPhilter extends Consumable 
+	public class PurityPhilter extends Consumable
 	{
 		private static const ITEM_VALUE:int = 100;
 		
-		public function PurityPhilter() 
+		public function PurityPhilter()
 		{
 			super("PPhiltr","P.Philter", "a vial of purity philter", ITEM_VALUE, "This silver vial feels cool to the touch. In fact, it feels a bit cold. Given the label, you suspect this will help to erase corruption.");
+			refineableInto([], [], [[1, AlchemyLib.AR_CORR_DEC]]);
 		}
 		
 		override public function useItem():Boolean

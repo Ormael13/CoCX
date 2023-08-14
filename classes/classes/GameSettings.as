@@ -9,11 +9,12 @@ import classes.Stats.PrimaryStat;
 import classes.Stats.RawStat;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.CombatStatusEffect;
+
 import coc.view.CoCLoader;
 import coc.view.MainView;
+
 import flash.net.FileReference;
 import flash.text.TextFormat;
-
 import flash.utils.ByteArray;
 
 /**
@@ -23,6 +24,10 @@ import flash.utils.ByteArray;
 public class GameSettings extends BaseContent {
 
     public var sceneHunter_inst:SceneHunter = new SceneHunter();
+	
+	public static function get buttonIconsEnabled():Boolean {
+		return flags && !flags[kFLAGS.BUTTON_ICONS_DISABLED];
+	}
 
 	public function get charviewEnabled():Boolean {
 		return flags[kFLAGS.CHARVIEWER_ENABLED];
@@ -887,8 +892,23 @@ public class GameSettings extends BaseContent {
 		else	//Yes, this is 2. Yes, this was added as an afterthought.
 			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches. (Symbols)");
 		outputText("\n\n");
+		
+		if (buttonIconsEnabled)
+			outputText("Button icons: <b>ON</b>");
+		else
+			outputText("Button icons: <b>OFF</b>");
+		outputText("\n\n");
+		
+		if (flags[kFLAGS.STATBAR_ANIMATIONS] == 1)
+			outputText("Stat bar animations: <b>OFF</b>");
+		else
+			outputText("Stat bar animations: <b>ON</b>");
+		outputText("\n\n");
 
 		menu();
+		// [ Font   ] [ Main BG] [ Text BG] [ Sprites] [CV Style]
+		// [ Images ] [ Time   ] [Measurem] [ CV Off ] [CV Armor]
+		// [BtnIcons] [ BarAnim] [        ] [        ] [ Back   ]
 		addButton(0, "Side Bar Font", toggleFlag, kFLAGS.USE_OLD_FONT, settingsScreenInterfaceSettings).hint("Toggle between old and new font for side bar.");
 		addButton(1, "Main BG", menuMainBackground).hint("Choose a background for main game interface.");
 		addButton(2, "Text BG", menuTextBackground).hint("Choose a background for text.");
@@ -899,6 +919,8 @@ public class GameSettings extends BaseContent {
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
 		addButton(9, "Charview Armor",toggleFlag, kFLAGS.CHARVIEW_ARMOR_HIDDEN, settingsScreenInterfaceSettings).hint("Turn PC armor and underwear display on/off");
+		addButton(10, "Button Icons", toggleFlag, kFLAGS.BUTTON_ICONS_DISABLED, settingsScreenInterfaceSettings);
+		addButton(11, "Statbar Anim.", toggleFlag, kFLAGS.STATBAR_ANIMATIONS, settingsScreenInterfaceSettings).hint("Toggle stat bar animations when value changes");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {

@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.MerchantMenu;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
@@ -58,7 +59,7 @@ public function discoverTelAdre():void {
 	else {
 		outputText("While out prowling the desert dunes you manage to spy the desert city of Tel'Adre again.  You could hike over to it again, but some part of you fears being rejected for being 'impure' once again.  Do you try?");
 	}
-	doYesNo(encounterTelAdre,camp.returnToCampUseOneHour);
+	doYesNo(encounterTelAdre,endEncounter);
 }
 
 //player chose to approach the city in the distance
@@ -88,7 +89,7 @@ private function telAdreCrystal():void {
 	if (SceneLib.exgartuan.anyPresent() || player.cor >= 70 + player.corruptionTolerance) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n");
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.");
-		doNext(camp.returnToCampUseOneHour);
+		doNext(endEncounter);
 		return;
 	}
 	//-66+ corruption or corrupted Jojo as marae
@@ -105,6 +106,7 @@ private function telAdreCrystal():void {
 	}
 	outputText("The vixen Urta gestures towards the smaller door and asks, \"<i>Would you like a tour of Tel'Adre, newcomer?</i>\"\n\n");
 	outputText("You remember your etiquette and nod, thankful to have a quick introduction to such a new place.  Urta leaves Edryn to watch the gate and leads you inside.  You do notice her gait is a bit odd, and her fluffy fox-tail seems to be permanently wrapped around her right leg.  The door closes behind you easily as you step into the city of Tel'Adre...");
+	explorer.stopExploring();
 	doNext(telAdreTour);
 }
 
@@ -216,7 +218,7 @@ public function telAdreMenu():void {
 					
 					break;
 				default:
-					
+				
 			}
 	}*/
 	telAdreMenuShow();
@@ -308,15 +310,15 @@ public function oswaldPawn():void {
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
 		if (player.gems < 500) {
 			outputText("\n\n<b>You can't afford that!</b>");
-			oswaldPawnMenu(); //eventParser(1065);
+			oswaldPawnMenuNew(); //eventParser(1065);
 		}
 		else {
 			menu();
-			addButton(0, "Sell", oswaldPawnMenu);
+			addButton(0, "Sell", oswaldPawnMenuNew);
 			addButton(1, "BuyCarrot", buyCarrotFromOswald);
 		}
 	}
-	else oswaldPawnMenu(); //eventParser(1065);
+	else oswaldPawnMenuNew(); //eventParser(1065);
 }
 
 private function buyCarrotFromOswald():void {
@@ -329,7 +331,22 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //Moved here from Inventory.as
+	private function oswaldPawnMenuNew():void {
+		clearOutput();
+		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
+		var merchantMenu:MerchantMenu = new MerchantMenu();
+		merchantMenu.playerCanSell = true;
+		merchantMenu.playerSellFactor = 0.5;
+		if (merchantMenu.greedCheck()) {
+			outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal. ");
+			merchantMenu.playerSellFactor = 1.0;
+		}
+		merchantMenu.onShow = function():void {
+			button(10).show("Misc", oswaldPawnMenu2);
+		}
+		merchantMenu.show(telAdreMenu);
+	}
+private function oswaldPawnMenu(page:int = 1, refresh:Boolean = true):void { //Moved here from Inventory.as
 	var slot:int;
 	spriteSelect(SpriteDb.s_oswald);
 	if (refresh) {
@@ -344,7 +361,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 		for (slot = 0; slot < 10; slot++) {
 			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
-				addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
+				addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot).itemIcon(player.itemSlots[slot].itype);
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
@@ -359,7 +376,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 			}
 		}
 		addButton(12, "Prev", oswaldPawnMenu, page - 1, refresh = true);
-		if (inventory.getMaxSlots() > 20) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
+		if (inventory.getMaxSlots() > 20) addButton(13, "Next", oswaldPawnMenu, page + 1, true);
 	}
 	if (page == 3) {
 		for (slot = 20; slot < 30; slot++) {
@@ -373,7 +390,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 		if (inventory.getMaxSlots() > 30) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
 	}
 	if (page == 4) {
-		for (slot = 30; slot < 340; slot++) {
+		for (slot = 30; slot < 40; slot++) {
 			if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 				outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 				addButton(slot-30, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
@@ -601,7 +618,7 @@ public function barTelAdre():void {
 	//trace("HEL FOLLOWER LEVEL: " + flags[kFLAGS.HEL_FOLLOWER_LEVEL] + " HEL FUCKBUDDY: " + flags[kFLAGS.HEL_FUCKBUDDY] + " HARPY QUEEN DEFEATED: " + flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]);
 	//trace("REDUCED ENCOUNTER RATE (DISPLINED): " + flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE]);
 	//HELIA
-//	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || CoC.instance.helFollower.followerHel()) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
+//	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && (flags[kFLAGS.HEL_FUCKBUDDY] != 0 || (CoC.instance.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff))) && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
 	if (edryn.edrynHeliaThreesomePossible()) {
 		edryn.helAppearance();
 		button = anotherButton(button,"Helia",edryn.approachHelAtZeBitch);
@@ -1126,8 +1143,9 @@ public function kaibaShopMainMenu2():void {
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(12, "-2-", kaibaShopMainMenuPage2);
-		addButton(13, "-3-", kaibaShopMainMenuPage3);
+		addButton(11, "-2-", kaibaShopMainMenuPage2);
+		addButton(12, "-3-", kaibaShopMainMenuPage3);
+		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1153,8 +1171,9 @@ public function kaibaShopMainMenu2():void {
 			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(12, "-1-", kaibaShopMainMenuPage1);
-		addButton(13, "-3-", kaibaShopMainMenuPage3);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
+		addButton(12, "-3-", kaibaShopMainMenuPage3);
+		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1167,6 +1186,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "MoonClaws", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "Leaf Amulet", "You already bought item from Kaiba today.");
+			addButtonDisabled(9, "Kratia's Seal", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
@@ -1178,8 +1198,11 @@ public function kaibaShopMainMenu2():void {
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
 			addButton(7, "MoonClaws", buyItem, weapons.MCLAWS).hint("Moonlight Claws - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
 			addButton(8, "Leaf Amulet", buyItem, necklaces.LEAFAMU).hint("Leaf Amulet - Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf. This is a temporary sale.");
+			addButton(9, "Kratia's Seal", buyItem, miscjewelries.KRATIASL).hint("Kratia's Seal - Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);
 		addButton(13, "-4-", kaibaShopMainMenuPage4);
 	}
@@ -1202,6 +1225,7 @@ public function kaibaShopMainMenu2():void {
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(11, "-1-", kaibaShopMainMenuPage1);
 		addButton(12, "-2-", kaibaShopMainMenuPage2);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}

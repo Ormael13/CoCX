@@ -33,7 +33,7 @@ public class YukiOnnaScene extends BaseContent
 					outputText("After a few minutes of this delicious experience, your paired orgasm now imminent, both of you let out a banshee like scream as your cunts drenches the snowy mat below.\n\n");
 					outputText("Highly satisfied you depose a loving kiss on your partner's lips before dressing up and heading back to camp.\n\n");
 					player.sexReward("Default","Default",true,false);
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 				}
 				else {
 					outputText("As you explore the glacial rift the weather begins to take a turn for the worse your visibility diming out until you can barely see a few meters ahead of yourself. You begin considering going back to camp when a sweet female voice begins to sing amidst the blizzard. The song is melancholic, tragic even and something stirs you to fellow the song to its source, a young human woman who appear to be lost in the blizzard next to a cliff, her snowish white silk like hair floating softly in the wind. ");
@@ -123,6 +123,7 @@ public class YukiOnnaScene extends BaseContent
 				player.femininity = 100;
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			explorer.stopExploring();
 			if (CoC.instance.inCombat) cleanupAfterCombatTFEvent();
 			else doNext(camp.returnToCampUseEightHours);
 		}

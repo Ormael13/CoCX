@@ -2,23 +2,28 @@
  * Coded by aimozg on 01.06.2017.
  */
 package classes.Items.Consumables {
-import classes.Appearance;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
-import classes.Items.Consumable;
-import classes.PerkLib;
-import classes.StatusEffects;
 import classes.CoC;
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Consumable;
+import classes.Items.ItemTags;
 
 public class Scorpinum extends Consumable {
 	public function Scorpinum() {
 		super("Scorico", "Scorpinum", "a vial of Scorpinum", 6, "This is a long flared vial with a small label that reads, \"<i>Scorpinum</i>\".  It is likely this potion is tied to scorpions in some way.");
+		withTag(ItemTags.U_TF);
+		refineableInto(
+				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+				AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_SCORPION)
+		)
 	}
 
 	override public function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
-		if (rand(3) == 0) changeLimit++;
+		var changeLimit:Number = 2;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		player.slimeFeed();
 		clearOutput();

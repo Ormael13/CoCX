@@ -1648,6 +1648,7 @@ use namespace CoC;
 		//IMP LORD
 		public function impLordEncounter():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_imp);
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
@@ -1658,13 +1659,14 @@ use namespace CoC;
 				outputText("As you're minding your own business, you spot a large imp.  He is playing with himself, loincloth discarded next to him.  You could make out his cunt, as the result of your breastfeeding session.  However, you notice some difference.  He has a cock instead of clit, perhaps he has partially recovered.  Clearly, he's a maleherm now.  You blush as the imp finally reaches orgasm, his cum and femspunk splattering everywhere.");
 				dynStats("lus", 20, "scale", false);
 				flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] = 10;
+				endEncounter();
 			}
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//IMP WARLORD
 		public function impWarlordEncounter():void {
+			spriteSelect(SpriteDb.s_impWarlord);
 			clearOutput();
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
@@ -1675,6 +1677,7 @@ use namespace CoC;
 
 		//IMP OVERLORD
 		public function impOverlordEncounter():void {
+			spriteSelect(SpriteDb.s_impOverlord);
 			clearOutput();
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
@@ -1686,6 +1689,7 @@ use namespace CoC;
 		//FERAL IMP LORD
 		public function impLordFeralEncounter():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_imp);
 			outputText("A large corrupted feral imp crosses your path. He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			flags[kFLAGS.FERAL_EXTRAS] = 2;
@@ -1694,6 +1698,7 @@ use namespace CoC;
 
 		//FERAL IMP WARLORD
 		public function impWarlordFeralEncounter():void {
+			spriteSelect(SpriteDb.s_impWarlord);
 			clearOutput();
 			outputText("A large corrupted feral imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
@@ -2199,7 +2204,7 @@ use namespace CoC;
 			outputText("No way, is this idiot cumming before you, let alone without your permission? You grab his balls with your hands and unleash a spell closing the valve just as he's about to ejaculate. The imp now looks at you with stupor mixed with terror.[pg]");
 			outputText("\"<i>Nooo! Please, anything but this!</i>\"[pg]");
 			outputText("Pets don't get to argue or plead, just who does he think he is?! He should be grateful to be allowed to taste your pussy with his unworthy dick.");
-			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" Annoyed, you fetch your backpack grab a dildo and cut short his pitiful cry by forcing the toy into his mouth. With the moron now properly gaged, you") else outputText(" You");
+			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" Annoyed, you fetch your backpack grab a dildo and cut short his pitiful cry by forcing the toy into his mouth. With the moron now properly gaged, you"); else outputText(" You");
 			outputText(" resume your ride, the imp’s balls increasing in volume after each trust as a buildup of cum is sealed within. You reach your first orgasm and keep on raping him until his balls are big enough to act as pillows for you to rest on.");
 			outputText("Thoroughly satisfied, you unplug from the tormented imp, his cock sliding out of your cunt with a wet pop before you take several steps as he seems on the verge of eruption, yet still bound by your magic. ");
 			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" You remove the toy from his mouth only when your sure he won't protest further. ");

@@ -1,21 +1,23 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
 import classes.AssClass;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
-	import classes.PerkLib;
-	import classes.StatusEffects;
+import classes.PerkLib;
+import classes.StatusEffects;
 import classes.VaginaClass;
 
 /**
 	 * Lower lust significantly but has a chance of inducing the masturbation preventing effect from minotaur.
 	 */
-	public class NumbRocks extends Consumable 
+	public class NumbRocks extends Consumable
 	{
 		private static const ITEM_VALUE:int = 15;
 		
-		public function NumbRocks() 
+		public function NumbRocks()
 		{
 			super("NumbRox","Numb Rox", "a strange packet of candy called 'Numb Rocks'", ITEM_VALUE, "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious.");
+			refineableInto([], [], [[1, AlchemyLib.AR_SENS_DEC]]);
 		}
 		
 		override public function useItem():Boolean

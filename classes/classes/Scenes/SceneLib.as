@@ -1,6 +1,7 @@
 package classes.Scenes {
 import classes.CoC;
 import classes.Items.ItemSetChecks;
+import classes.Scenes.API.ExplorationEngine;
 import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
@@ -35,6 +36,8 @@ public class SceneLib {
     public static var combat:Combat = new Combat();
 
     public static var exploration:Exploration = new Exploration();
+    
+    public static var explorationEngine:ExplorationEngine = new ExplorationEngine();
 
     public static var followerInteractions:FollowerInteractions = new FollowerInteractions();
 
@@ -67,6 +70,10 @@ public class SceneLib {
     public static var ocean:Ocean = new Ocean();
 
     public static var plains:Plains = new Plains();
+    
+    public static var kihaFollower:KihaFollower = new KihaFollower();
+    
+    public static var kihaScene:KihaScene = new KihaScene();
 
     public static var swamp:Swamp = new Swamp();
 
@@ -173,10 +180,6 @@ public class SceneLib {
     public static var jojoScene:JojoScene = new JojoScene();
 
     public static var joyScene:JoyScene = new JoyScene();
-
-    public static var kihaFollower:KihaFollower = new KihaFollower();
-
-    public static var kihaScene:KihaScene = new KihaScene();
 
     public static var kindraFollower:KindraFollower = new KindraFollower();
 

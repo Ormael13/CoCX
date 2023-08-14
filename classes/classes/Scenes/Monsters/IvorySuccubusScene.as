@@ -8,7 +8,6 @@ package classes.Scenes.Monsters
 {
 import classes.BaseContent;
 import classes.display.SpriteDb;
-import classes.StatusEffects;
 
 public class IvorySuccubusScene extends BaseContent
 {
@@ -29,13 +28,11 @@ public class IvorySuccubusScene extends BaseContent
         }
         else {
             outputText("She starts to close the distance by charging at you! It's a fight!");
-            player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 			startCombat(new IvorySuccubus());
         }
     }
 
     public function fightAgainstSuccubus():void {
-        player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 		startCombatImmediate(new IvorySuccubus());
     }
 
@@ -85,6 +82,7 @@ public class IvorySuccubusScene extends BaseContent
         }
         dynStats("cor", 3);
         player.addCurse("lib", 2, 2);
+        explorer.stopExploring();
         if (fromBattle)
             cleanupAfterCombat();
         else

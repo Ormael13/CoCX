@@ -44,9 +44,16 @@ public class Encounters {
 	 * Multiply encounter chance
 	 */
 	public static function wrap2(encounter:Encounter,whenFn:Function,chances:Array):Encounter {
-		if (chances.length==0) return encounter;
-		return new SimpleEncounter(encounter.encounterName(),whenFn,
-				fn.product(chances.concat([function():Number{return encounter.encounterChance();}])),
+		if (encounter is GroupEncounter) {
+			return (encounter as GroupEncounter).wrap(whenFn, chances);
+		} else if (encounter is SimpleEncounter) {
+			return (encounter as SimpleEncounter).wrap(whenFn, chances);
+		} else return new SimpleEncounter(
+				encounter.encounterName(),
+				whenFn,
+				(chances && chances.length > 0)
+						? fn.product(chances.concat([encounter.encounterChance]))
+						: encounter.encounterChance,
 				function():void{encounter.execEncounter()}// < wrap in case it uses `this`
 		);
 	}
@@ -80,7 +87,7 @@ public class Encounters {
 	 * Runs the encounter selection check. DOES NOT call .execute()
 	 * Returns null if all encounters have chance <= 0
 	 */
-	public static function selectOrNull(encounters:Array):Encounter {
+	public static function selectOrNull(encounters:Array, filter:Function=null):Encounter {
 		if (hookBeforeSelect != null) hookBeforeSelect(encounters);
 		var items:Array = [];
 		var sum:Number = 0;
@@ -89,6 +96,7 @@ public class Encounters {
 		var name:String;
 		for (i=0;i<encounters.length;i++) {
 			var e:Encounter            = encounters[i];
+			if (filter && e is SimpleEncounter && !filter(e)) continue;
 			name = e.encounterName() || ("#" + i);
 			debug_callsite = name;
 			var c:Number               = chance(encounters, e);
@@ -134,8 +142,13 @@ public class Encounters {
 	 * Returns last if all encounters have chance <= 0.
 	 * Throws an error if there are 0 encounters
 	 */
-	public static function select(encounters:Array):Encounter {
-		return selectOrNull(encounters) || encounters[encounters.length-1];
+	public static function select(encounters:Array, filter:Function=null):Encounter {
+		var e:Encounter = selectOrNull(encounters, filter);
+		if (e == null && filter != null) {
+			trace("Failed to pick, re-rolling with no filter.");
+			e = selectOrNull(encounters, null);
+		}
+		return e || encounters[encounters.length-1];
 	}
 
 	/**
@@ -216,7 +229,7 @@ public class Encounters {
 	public static function convertChance(chance:*):Number {
 		while (!(chance is Number)) {
 			if (chance === undefined || chance === null) {
-				trace("WARNING chance is "+chance+(debug_callsite?" at ":debug_callsite)+"; using 1 as default");
+				trace("WARNING chance is "+chance+(debug_callsite?" at "+debug_callsite:"")+"; using 1 as default");
 				return 1;
 			}
 			if (chance is Array) {

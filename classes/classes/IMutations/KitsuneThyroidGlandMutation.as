@@ -58,7 +58,7 @@ import classes.BodyParts.Tail;
                     .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune, PerkLib.StarSphereMastery)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO) && player.tailCount >= 2;
-                    }, "2+ fox/kitshoo tails");
+                    }, "2+ fox/kitsumori tails");
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -69,13 +69,13 @@ public class NekomataRace extends Race{
 				)
 				.end();
 		
-		buildTier(12, "elder nekomata")
+		buildTier(14, "elder nekomata")
 				.requireTailType(Tail.CAT)
 				.requireTailCount(AT_LEAST(2))
 				.buffs({
-					"spe.mult": +0.40,
+					"spe.mult": +0.50,
 					"int.mult": +0.40,
-					"wis.mult": +1.00,
+					"wis.mult": +1.20,
 					"maxsf_mult": +0.3
 				})
 				.withExtraBonuses(

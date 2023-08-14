@@ -224,6 +224,7 @@ public class CombatMagic extends BaseCombatContent {
     internal function modChange_spell_1():Number {
 		var mod:Number = 0;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
+		if (player.hasPerk(PerkLib.ArchmageEx) && player.inte >= 100) mod += 1.05;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
 		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;

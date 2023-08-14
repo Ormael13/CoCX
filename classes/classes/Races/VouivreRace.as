@@ -57,7 +57,8 @@ public class VouivreRace extends Race {
 							return !(body.player.racialScore(Races.NAGA) > 10
 									|| GorgonRace.isGorgonLike(body)
 									|| CouatlRace.isCouatlLike(body)
-									|| HydraRace.isHydraLike(body));
+									|| HydraRace.isHydraLike(body)
+									|| ApophisRace.isApophisLike(body));
 						}, 0, -1000);
 		addScoresAfter(11)
 				.hasPerk(PerkLib.DragonFireBreath,+1);

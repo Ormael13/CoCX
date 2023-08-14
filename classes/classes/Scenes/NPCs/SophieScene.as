@@ -302,7 +302,7 @@ public function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and warns, \"<i>Cutey, a " + player.mf("neuter","girl") + " like you doesn't belong up here.  The younger harpies don't really get the idea of conversation and see you as competition.</i>\"\n\n");
 
 			outputText("Do you see the wisdom of her words and climb back down the mountain, fight Sophie, or keep climbing?");
-			simpleChoices("Fight Sophie", FirstTimeSophieForceSex, "Keep Climbing", PCIgnoresSophieAndHarpyIsFought, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			simpleChoices("Fight Sophie", FirstTimeSophieForceSex, "Keep Climbing", PCIgnoresSophieAndHarpyIsFought, "", null, "", null, "Leave", explorer.done);
 		}
 		//(LACTATE)
 		else {
@@ -355,7 +355,7 @@ private function sophieLookingForDemons():void {
 	//Otherwise leave.
 	else {
 		outputText("  You gulp and nod, understanding quite clearly that the harpies don't care for demons in their nesting grounds.  Sophie smiles and turns about, fluffing purple-tinted tail-feathers at you in what is clearly a dismissal.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 		return;
 	}
 	outputText("\"<i>Mmmm, have you gotten bored of the talk, ");
@@ -373,7 +373,7 @@ private function shootDownSophieSex():void {
 	sophieBimbo.sophieSprite();
 	clearOutput();
 	outputText("Sophie pouts for a moment, leaning forward to better display her cleavage. \"<i>Really?  Well if you change your mind, come back and visit me.</i>\"  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.  You climb down, careful to avoid any other nests as you head back to check on your camp and its portal.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 	if(player.lib > 25) dynStats("lib", -1);
 	if(player.lust > 50) dynStats("lus", -5, "scale", false);
 }
@@ -390,10 +390,10 @@ private function sophieMeetingChoseSex():void {
 		if(player.hasVagina()) {
 			outputText("  What do you do?");
 			//[Stay&Sex] [Leave]
-			simpleChoices("Force Sex", FirstTimeSophieForceSex, "Leave", camp.returnToCampUseOneHour, "", null, "", null, "", null);
+			simpleChoices("Force Sex", FirstTimeSophieForceSex, "Leave", explorer.done, "", null, "", null, "", null);
 			return;
 		}
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	//(Haz dick (male futa))
 	else {
@@ -440,7 +440,7 @@ private function sophieMeetingGotLost():void {
 		dynStats("lus", (10+player.lib/4), "scale", false);
 		if(player.inte < 50) dynStats("int", 1);
 		//[Go to camp if neither of the above]
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -455,7 +455,7 @@ private function tellSophieYoureForagingForStuff():void {
 	//(+10 + libmod lust, +1 int up to 50 int))
 	dynStats("lus", (10+player.lib/4), "scale", false);
 	if(player.inte < 50) dynStats("int", 1);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[Harpy Breastfeeding]
@@ -560,7 +560,7 @@ private function cramANippleInIt():void {
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
     if (CoC.instance.inCombat)
         cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	else endEncounter();
 	//You've now been milked, reset the timer for that
 	if(player.hasStatusEffect(StatusEffects.Feeder)) {
 		player.addStatusValue(StatusEffects.Feeder,1,1);
@@ -716,6 +716,7 @@ private function postSophieSexSnuggle():void {
 	dynStats("lib", 1, "sen", 1);
 
 	//4 hours pass
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseFourHours);
 }
 
@@ -726,7 +727,7 @@ private function postSexSophieSnuggleTurnedDown():void {
 	outputText("You turn down her offer and assure her that you'll be fine.  Sophie giggles while you try to get dressed, and you see her amber eyes watching you as try to climb back down the mountain with a stiffy.  She seems greatly amused by your predicament.");
 	//(+sensitivity, +libido
 	dynStats("lib", 1, "sen", 1);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[Consentual Sex No Fito]

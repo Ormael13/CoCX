@@ -10,7 +10,6 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
-import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.Holidays;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -159,7 +158,7 @@ public function alvinaFirstEncounter():void
 	outputText("\"<i>Me? I am a person of no consequence.</i>\"\n\n");
 	outputText("As you turn back to question her, you notice that she's vanished without a trace. You're not sure whether to be relieved...or concerned by this.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function alvinaSecondEncounter():void
@@ -176,7 +175,7 @@ public function alvinaSecondEncounter():void
 	flags[kFLAGS.ALVINA_FOLLOWER] = 9;
 	menu();
 	addButton(0, "Talk", alvinaSecondEncounterTalk);
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	addButton(4, "Leave", explorer.done);
 }
 public function alvinaSecondEncounterTalk():void
 {
@@ -186,7 +185,7 @@ public function alvinaSecondEncounterTalk():void
 	menu();
 	addButton(0, "Her", alvinaSecondEncounterTalkHer, alvinaSecondEncounterTalk);
 	addButton(1, "Hobby", alvinaSecondEncounterTalkHobby, alvinaSecondEncounterTalk);
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	addButton(4, "Leave", explorer.done);
 }
 public function alvinaSecondEncounterTalkHer(next:Function):void
 {
@@ -217,7 +216,7 @@ public function alvinaSecondBonusEncounter():void
 	outputText("\"<i>Is that so? Even then, what keeps you on Mareth still? Shouldn’t you have gone back to your homeland already? Perhaps it is something else that you seek. Regardless, if purging Mareth of the remaining corruption is your goal, you should go to the blight ridge. The area is dangerous and filled with demons, but surely the bane of Lethice should be able to get by without any issues?</i>\"\n\n");
 	outputText("She chuckles as a gust of wind throws dust at you, causing you to shield your eyes. The moment you look back at her, she is gone.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 10;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 public function alvinaThirdEncounter():void
@@ -233,7 +232,7 @@ public function alvinaThirdEncounterNo():void
 {
 	outputText("This is a very bad place, better not linger here. You decide to head back to camp.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 11;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function alvinaThirdEncounterYes():void
 {
@@ -292,6 +291,7 @@ public function alvinaThirdEncounterYesSure():void
 	outputText("<b>Alvina has joined you as a follower.</b>\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 13;
 	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
+	explorer.stopExploring();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function alvinaThirdEncounterYesNever():void
@@ -802,11 +802,7 @@ public function alvinaMainCampMenu():void
 	}
 	else addButtonDisabled(2, "???", "You need to finish Advanced Study to unlock this option.");
 	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) {
-		if (player.hasPerk(PerkLib.BasicLeadership)) {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to join you in adventures outside camp.");
-			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to stay in camp.");
-			else addButtonDisabled(5, "Team", "You already have other henchmen accompanying you. Ask him/her to stay at camp before you talk with Alvina about accompanying you.");
-		}
+		if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", alvinaHenchmanOption);
 		else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	}
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) addButtonDisabled(10, "Study", "You have already completed basic Study.");
@@ -1306,10 +1302,37 @@ public function alvinaAfterSex():void
 	doNext(camp.returnToCampUseOneHour);
 }
 
-public function alvinaHenchmanOption():void
+public function alvinaHenchmanOption():void {
+	menu();
+	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina" || flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") addButtonDisabled(0, "Team (1)", "You already have Alvina accompany you.");
+		else addButton(0, "Team (1)", alvinaHenchmanOption2, 1).hint("Ask Alvina to join you in adventures outside camp.");
+	}
+	else {
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(5, "Team (1)", alvinaHenchmanOption2, 21).hint("Ask Alvina to stay in camp.");
+		else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Alvina about accompaning you as first party member.");
+	}
+	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+		if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina" || flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") addButtonDisabled(1, "Team (2)", "You already have Alvina accompany you.");
+			else addButton(1, "Team (2)", alvinaHenchmanOption2, 2).hint("Ask Alvina to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") addButton(6, "Team (2)", alvinaHenchmanOption2, 22).hint("Ask Alvina to stay in camp.");
+			else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Alvina about accompaning you as second party member.");
+		}
+	}
+	else {
+		addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+	}
+	addButton(14, "Back", alvinaMainCampMenu);
+	
+}
+public function alvinaHenchmanOption2(slot:Number = 1):void
 {
 	clearOutput();
-	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+	if (slot < 21) {
 		outputText("\"<i>Such sloth, you truly do ask me to fight for you? Well I might just humor you and practice my more ‘experimental’ magic on your enemies. New spells requires experiments and I am always eager for new ‘living’ test subjects.</i>\"\n\n");
 		outputText("Alvina is now following you around.\n\n");
 		var strAlvina:Number = 375;
@@ -1322,12 +1345,14 @@ public function alvinaHenchmanOption():void
 		libAlvina *= (1 + (0.2 * player.newGamePlusMod()));
 		libAlvina = Math.round(libAlvina);
 		player.createStatusEffect(StatusEffects.CombatFollowerAlvina, strAlvina, inteAlvina, libAlvina, 0);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "Alvina";
+		if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Alvina";
+		if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Alvina";
 	}
 	else {
 		outputText("Alvina is no longer following you around.\n\n");
 		player.removeStatusEffect(StatusEffects.CombatFollowerAlvina);
-		flags[kFLAGS.PLAYER_COMPANION_1] = "";
+		if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+		if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
 	}
 	doNext(alvinaMainCampMenu);
 	cheatTime(1/12);

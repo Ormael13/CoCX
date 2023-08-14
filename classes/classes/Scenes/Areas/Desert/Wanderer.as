@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Areas.Desert {
-	import classes.*;
-    import classes.display.SpriteDb;
+import classes.*;
+import classes.display.SpriteDb;
 
-	public class Wanderer extends BaseContent{
+public class Wanderer extends BaseContent{
 
 		public function Wanderer()
 		{
@@ -47,7 +47,7 @@ private function wandererLeave():void {
 	spriteSelect(SpriteDb.s_markus_and_lucia);
 	clearOutput();
 	outputText("Marcus looks disappointed and sighs, hefting his wheelbarrow and waddling away.  Lucia bounces after him, looking like the cat that got the cream.  You wonder what all that was about.   What a strange land.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //Repeated encounter if he left
 private function wandererRepeatMeeting():void {
@@ -76,7 +76,7 @@ private function wandererStayHuman():void {
 	outputText("Marcus sighs, though you think you spy the hint of a smile on his lips, \"<i>As you wish... thanks for your guidance traveler, and may you find what you seek in this strange land.</i>\"\n\nAs they turn to leave, Lucia scowls at you over her shoulder...");
 	dynStats("lus", 1, "cor", -5);
 	player.createStatusEffect(StatusEffects.WandererHuman,0,0,0,0);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //Ask marcus to go demon
 private function wandererGoDemon():void {
@@ -86,7 +86,7 @@ private function wandererGoDemon():void {
 	outputText("Marcus raises an eyebrow at the exchange, but smiles as his demonic lover returns to his side.  Lucia winks again, and huge wings explode from her back.  She grabs Marcus, who bleats in surprise, and lifts off, flying away with her prize to her lair.");
 	dynStats("lus", 5, "cor", 1);
 	player.createStatusEffect(StatusEffects.WandererDemon,0,0,0,0);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //Demonic epilogue v1
@@ -101,7 +101,7 @@ private function wandererDemonEpilogue():void {
 			outputText("Lucia places a small bottle in your hand.  \"<i>So thank you, and have this present.  Perhaps you can create some lethicite for us later... oh, and before I forget, Marcus is loving his new existence.</i>\"\n\n");
 			outputText("She steps away and blows a kiss as her wings unfurl.  With a powerful downstroke she scatters sand everywhere, forcing you to throw an arm in front of your eyes.  When the debris settles, she's gone.\n\n");
 			dynStats("lus", 5, "scale", false);
-			inventory.takeItem(consumables.SDELITE, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.SDELITE, explorer.done);
 			player.statusEffectByType(StatusEffects.WandererDemon).value1 = 1;
 		}
 		//Second Encounter
@@ -110,12 +110,12 @@ private function wandererDemonEpilogue():void {
 			//Catch it
 			if(50 < (player.spe + rand(60))) {
 				outputText("You handily catch a small potion vial.  When you look up, she's gone.\n\n");
-				inventory.takeItem(consumables.SDELITE, camp.returnToCampUseOneHour);
+				inventory.takeItem(consumables.SDELITE, explorer.done);
 			}
 			//Drop it
 			else {
 				outputText("You dive for the falling bottle, but miss, and it shatters into the sands, the fluids wicking away nearly instantaneously.");
-				doNext(camp.returnToCampUseOneHour);
+				endEncounter();
 			}
 		}
 	}
@@ -134,12 +134,12 @@ private function wandererEpilogueHuman():void {
 			dynStats("lus", 10, "scale", false);
 			//Value 1 is used to track the status of the end state.
 			player.statusEffectByType(StatusEffects.WandererHuman).value1 = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		//Human Epilogue 2
 		else if(player.statusEffectv1(StatusEffects.WandererHuman) == 1) {
 			outputText("While exploring the desert, you find a strange bottle half-buried in the sand.  A small note is tied to it:\n\n\"<i>I just knew you'd find this.  Try this a few times and I think you might change your mind about Marcus' situation.\n  -Lovely Lucia</i>\"\n\n");
-			inventory.takeItem(consumables.SDELITE, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.SDELITE, explorer.done);
 		}
 	}
 }

@@ -3,15 +3,15 @@
  * Area with lvl 6-29 group enemies. Good for PC focused on group fights.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
+import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Battlefield.*;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -26,22 +26,71 @@ use namespace CoC;
 		}
 
 		private var _battlefieldBoundaryEncounter:GroupEncounter = null;
+		private var _battlefieldLoot:GroupEncounter = null;
 		public function get battlefieldBoundaryEncounter():GroupEncounter {
 			return _battlefieldBoundaryEncounter;
 		}
+		public function get battlefieldLoot():GroupEncounter {
+			return _battlefieldLoot;
+		}
 
 		private function init():void {
+			const fn:FnHelpers = Encounters.fn;
+			_battlefieldLoot = Encounters.group("battlefieldLoot", {
+				name: "MG_SFRP",
+				label: "MGSFRPill",
+				kind  : 'item',
+				chance: 0.08,
+				when: fn.ifLevelMin(24,0),
+				call: curry(findItem, consumables.MG_SFRP)
+			}, {
+				name: "D_ARCON",
+				label: "Dil.ARC",
+				kind  : 'item',
+				chance: 0.08,
+				when: fn.ifLevelMin(24,0),
+				call: curry(findItem, consumables.D_ARCON)
+			}, {
+				name: "SPIL_SH",
+				label: "SpikeLShield",
+				kind  : 'item',
+				chance: 0.10,
+				when: fn.ifLevelMin(16,0),
+				call: curry(findItem, shields.SPIL_SH)
+			}, {
+				name: "LG_SFRP",
+				label: "LGSFRPill",
+				kind  : 'item',
+				chance: 0.17,
+				call: curry(findItem, consumables.LG_SFRP)
+			}, {
+				name: "VDARCON",
+				label: "V.D.ARC",
+				kind  : 'item',
+				chance: 0.17,
+				call: curry(findItem, consumables.VDARCON)
+			}, {
+				name: "metal",
+				label : "Scrap",
+				kind  : 'item',
+				chance: 0.4,
+				call: findMetalScrap
+			});
 			_battlefieldBoundaryEncounter = Encounters.group("batllefieldboundary", {
 				//Discover Outer Battlefield
 				name: "discoverOuter",
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
 				chance: 30,
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19
-				},
-				call: discoverOuter
+				when: SceneLib.battlefiledouter.canDiscover,
+				call: SceneLib.battlefiledouter.discover
 			}, {
 				//Find Tripxi gun parts
 				name: "gunPart",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				chance:30,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 0 && player.hasKeyItem("Twin Grakaturd") < 0
@@ -50,26 +99,35 @@ use namespace CoC;
 			}, {
 				//Dilapidated Shrine
 				name: "dilapidatedShrine",
+				label : "Dilapidated Shrine",
+				shortLabel: "D.Shrine",
+				kind  : 'place',
+				unique: true,
 				call: SceneLib.dilapidatedShrine.firstvisitshrineintro,
 				when: function ():Boolean {
 					return flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] == 1
 				},
 				chance: 0.2
-			}, {
-				name: "items",
-				call: findItems
-			}, {
+			}, battlefieldLoot, {
 				name: "nothing",
+				label : "Walk",
+				kind  : "walk",
 				call: findNothing
 			}, {
 				//Helia monogamy fucks
 				name: "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
 				chance: battlefieldBoundaryChance,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -80,6 +138,9 @@ use namespace CoC;
 				call: SceneLib.etnaScene.repeatYandereEnc
 			},  {
 				name: "diana",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
@@ -88,6 +149,9 @@ use namespace CoC;
 				call: SceneLib.dianaScene.repeatEnc
 			}, {
 				name: "dianaName",
+				label : "Diana",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
@@ -96,15 +160,15 @@ use namespace CoC;
 				call: SceneLib.dianaScene.postNameEnc
 			}, {
 				name: "ted",
+				label : "Dragon-Boy",
+				kind  : 'npc',
+				unique: true,
 				call: SceneLib.tedScene.introPostHiddenCave,
 				when: SceneLib.tedScene.canEncounterTed
-			}, {
-				//General Golems, Goblin and Imp Encounters
-				name: "common",
-				chance: 0.4,
-				call: SceneLib.exploration.genericGolGobImpEncounters
-			}, {
+			}, SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 				name: "zombies",
+				label : "Zombies",
+				kind : 'monster',
 				chance: 0.4,
 				call: battlefieldEnemiesScene.encounterZombies,
 				when: battlefieldEnemiesScene.canEncounterZombies
@@ -117,60 +181,57 @@ use namespace CoC;
 				call: SceneLib.exploration.demonLabProjectEncounters
 			}*/);
 		}
-
+		
+		public const discoverLevel:int = 5;
+		public const areaLevel:int = 16;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0;
+			return SceneLib.exploration.counters.battlefieldBoundary > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= discoverLevel && SceneLib.desert.isDiscoveredOuter();
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY];
+			return SceneLib.exploration.counters.battlefieldBoundary;
 		}
-
-		public function exploreBattlefieldBoundary():void {
+		public function discover():void {
+			SceneLib.exploration.counters.battlefieldBoundary = 1;
 			clearOutput();
-			flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY]++;
-			doNext(camp.returnToCampUseOneHour);
-			battlefieldBoundaryEncounter.execEncounter();
-			flushOutputTextToGUI();
+			outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the Battlefield (Boundary)!</b>");
+			endEncounter();
+		}
+		
+		
+		public function exploreBattlefieldBoundary():void {
+			explorer.prepareArea(battlefieldBoundaryEncounter);
+			explorer.setTags("battlefield", "battlefieldBoundary");
+			explorer.prompt = "You explore the battlefield boundary.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.battlefieldBoundary++;
+			}
+			explorer.leave.hint("Leave the battlefield boundary");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 		
 		public function battlefieldBoundaryChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 
-		private function findItems():void {
+		private function findItem(item:ItemType):void {
 			clearOutput();
-			if (rand(2) == 0) {
-				outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
-				if (rand(2) == 0) {
-					if (player.level >= 24 && rand(3) == 0) {
-						outputText("a mid-grade Soulforce Recovery Pill. ");
-						inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
-					} else {
-						outputText("a low-grade Soulforce Recovery Pill. ");
-						inventory.takeItem(consumables.LG_SFRP, camp.returnToCampUseOneHour);
-					}
-				} else {
-					if (player.level >= 24 && rand(3) == 0) {
-						outputText("a diluted Arcane Regen Concotion. ");
-						inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
-					} else {
-						outputText("a very diluted Arcane Regen Concotion. ");
-						inventory.takeItem(consumables.VDARCON, camp.returnToCampUseOneHour);
-					}
-				}
-			} else {
-				if (player.level >= 16 && rand(5) == 0) {
-					outputText("You spot something on the ground among various items remains. Taking a closer look, it's a Light Spiked Shield. ");
-					inventory.takeItem(shields.SPIL_SH, camp.returnToCampUseOneHour);
-				} else {
-					outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
-					outputText("<b>You found a metal plate.</b>");
-					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
-					doNext(camp.returnToCampUseOneHour);
-				}
-			}
+			outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
+			outputText(item.longName);
+			outputText(". ");
+			inventory.takeItem(item, explorer.done);
+		}
+		private function findMetalScrap():void {
+			clearOutput();
+			outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
+			outputText("<b>You found a metal plate.</b>");
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
+			endEncounter();
 		}
 
 		private function findNothing():void {
@@ -183,15 +244,7 @@ use namespace CoC;
 				outputText("Some grey, maybe black colored shape seemly wiggling as it like moving in your direction." + (silly() ? " Oh are you approaching me?" : "") + " Bit tired and on the edge due to meeting potential enemies moments ago you decide to return this time. Maybe next time you will check out closer that 'fog' or whatever it's.");
 			} else outputText("You spend an hour exploring this deserted battlefield but you don't manage to find anything interesting, yet this trip had made you a little wiser.");
 			dynStats("wis", .5);
-			doNext(camp.returnToCampUseOneHour);
-		}
-
-		private function discoverOuter():void {
-			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
-			player.explored++;
-			clearOutput();
-			outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		public function partsofTwinGrakaturd():void {
@@ -200,7 +253,7 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the Twin Grakaturd in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }

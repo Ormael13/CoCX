@@ -197,7 +197,7 @@ private function drinkNiamhsBeerInTelAdre():void {
 		outputText(" breasts have had the last of their beer squeezed from them.  She sighs in relief, caressing her shrunken breasts; while still hovering at around G-cup size, they're much smaller than they are when the day starts for her.  \"<i>Me thanks for the business; ye got the last mug for today.  Still, I'll be here tomorrow, full as ever.</i>\" She sighs softly.  \"<i>I regret to say that Niamh's Black Cat Beer doesn't look to be going out of business anytime soon.</i>\"  She stands and gathers her coat, slipping her arms into the sleeves.  The nimble girl draws the garment across her buxom chest, buttoning the slightly strained buttons with deceptive ease.  Dressed properly, she starts away, a bag full of gems bouncing against her swaying hips. You watch her go, staring at her back until she walks out the door.");
 	}
 	flags[kFLAGS.MET_NIAMH]++;
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[To Go]
@@ -249,7 +249,7 @@ private function talkToNiamh():void {
 	var beer:Function =null;
 	if(player.gems >= 2)
 		beer = getANiamhBeer;
-	simpleChoices("Beer", beer, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+	simpleChoices("Beer", beer, "", null, "", null, "", null, "Leave", explorer.done);
 }
 //Leave
 private function leaveNiamh():void {
@@ -361,7 +361,7 @@ private function giveNiamphBimboLiquer():void {
 	//}
 	flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] = 25;
 	dynStats("cor", 10);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //24 hours later, random encounter on the Plains
@@ -394,7 +394,7 @@ public function niamhPostTelAdreMoveOut():void {
 private function niamhCorruptMobileSnackTurnDown():void {
 	clearOutput();
 	outputText("You turn her down, fabricating a little tale about how you just got done drinking a delicious beverage, and you couldn't possibly have anything more.  She nods sagely, pauses, and loudly belches.  Even in her soused state, she retains some semblance of manners, so she chuckles nervously while moving a hand to her lips.  \"<i>Sorry 'bout tha'...</i>\" she mutters, slinking off.  You have a feeling you'll see her again.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[yup]
 private function niamhCorruptedMobileSnackDrinkTime():void {
@@ -432,7 +432,7 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 		blackCatBeerEffects(player,false,true);
 		//[end encounter]
 	}*/
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):void {
 	if(clearScreen) clearOutput();
@@ -550,7 +550,7 @@ private function drinkFromZeTap():void {
 
 	outputText("\n\nYou push yourself upright and assure the pretty catgirl that you feel, like, super-duper wonderful!  You punctuate this declaration with a burp as the sudden motion makes all the yummy bubbles in your belly dance, and then you giggle at how naughty that was.");
 	bimboChampagne(player,false,false);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //grabbing Bim Cham in a to-go box
@@ -561,7 +561,7 @@ private function getBimboChampFromNiamh():void {
 	outputText("\n\nPushing that slightly scary thought to the side, you lean in, firmly grasping one stiff nipple and forcing it to the mouth of your container.  Ignoring her increasingly loud and frequent groans, you dutifully milk the bubbly into the flask, stopper it up, and rise.  Niamh tries to follow you, too aroused by the milking to resist her carnal urges, but you easily push her to the side, her ponderous melons throwing her off balance.");
 	outputText("\n\nShe lands into a big pile of similarly blonde and giggling girls who waste no time in swarming her.  You chuckle and shake your head.  Perhaps you'll come back later.\n\n");
 	//bimbo champagne aqua-aired
-	inventory.takeItem(consumables.BIMBOCH, camp.returnToCampUseOneHour);
+	inventory.takeItem(consumables.BIMBOCH, explorer.done);
 }
 
 //[Bazaar sex]
@@ -582,7 +582,7 @@ private function bazaarSex():void {
 		dynStats("int", -.5, "sen", -2);
 	//}
 	//Succubi NYI
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 
@@ -635,7 +635,7 @@ private function leaveWithBeerTits():void {
 	clearOutput();
 	outputText("The offer is tempting but right now you'd much rather deal with your boozy boobs privately.  You take off while trying to keep your [armor] modestly in place over your tits but it's difficult.  Your nipples constantly leak and drip a trail of alcohol all the way back to camp.  Thankfully by the time you arrive the effects seem to have mostly worn off.  Your nipples return to dripping milk, but although they've shrunk back down a bit they don't quite shrink all the way, leaving you with somewhat larger endowments than you had before.");
 	player.growTits(2, player.bRows(), false, 2);
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 // [SELL YOUR BOOZE]
@@ -665,7 +665,7 @@ private function sellYourBooze():void {
 		player.growTits(2, player.bRows(), false, 2);
 		outputText("\n\nYou feel flushed from the sensations, but finally you run dry.  Your breasts have shrunk back down, but they still feel a little larger than they were earlier.  As little droplets of milk instead of booze return to dripping from your nipples, Niamh hands you your cut of the gems you earned from the sales.");
 		//[LEAVE]
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	//If lust is high
 	else {
@@ -886,7 +886,7 @@ private function barBeerOrgyTits():void {
 		player.growTits(2, player.bRows(), false, 2);
 	}
 	player.orgasm();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 

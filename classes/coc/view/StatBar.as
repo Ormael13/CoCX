@@ -8,6 +8,7 @@ import flash.text.TextField;
 import flash.text.TextFormat;
 import flash.text.TextLineMetrics;
 
+
 public class StatBar extends Block {
 	[Embed(source="../../../res/ui/StatsBarBottom.png")]
 	public static var StatsBarBottom:Class;
@@ -22,7 +23,8 @@ public class StatBar extends Block {
 			height     : 28,
 			minValue   : 0,
 			maxValue   : 100,
-			value      : 0,
+			rawValue   : 0,
+			animate    : true,
 			statName   : "",
 			showMax    : false,
 			isUp       : false,
@@ -56,6 +58,8 @@ public class StatBar extends Block {
 	private var _maxValue:Number;
 	private var _value:Number;
 	private var _showMax:Boolean;
+	private var _tween:SimpleTween;
+	private var _animate:Boolean;
 	private function get arrowSz():Number {
 		return this.height-2;
 	}
@@ -173,13 +177,39 @@ public class StatBar extends Block {
 		if (maxValue > 1000000) mValue = maxValue.toPrecision(3);
 		valueText = '' + bValue + (showMax ? '/' + mValue : '');
 	}
+	public function get rawValue():Number {
+		return _value;
+	}
+	public function set rawValue(value:Number):void {
+		_value    = value;
+		renderValue();
+		update();
+	}
 	public function get value():Number {
 		return _value;
 	}
 	public function set value(value:Number):void {
-		_value    = value;
-		renderValue();
-		update();
+		if (_animate) {
+			if (_tween && _tween.endVal != value) {
+				// animating
+				_tween = _tween.retarget(value);
+			} else if (_value != value) {
+				// not animating
+				_tween = new SimpleTween(this, "rawValue", value, 300, {easing: "linear"});
+			}
+		} else {
+			rawValue = value;
+		}
+	}
+	public function get animate():Boolean {
+		return _animate;
+	}
+	public function set animate(value:Boolean):void {
+		_animate = value;
+		if (!value && _tween) {
+			_tween.fastForward();
+			_tween = null;
+		}
 	}
 	public function get valueText():String {
 		return _valueLabel ? _valueLabel.text : value + '';

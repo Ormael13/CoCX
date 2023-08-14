@@ -4,21 +4,14 @@
 package coc.view {
 import classes.internals.Utils;
 
-import fl.controls.Button;
-
 import fl.controls.ComboBox;
-import fl.controls.LabelButton;
-
 import fl.controls.TextInput;
 import fl.data.DataProvider;
 
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.text.AntiAliasType;
 import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
 import flash.utils.Dictionary;
 import flash.utils.setTimeout;
 
@@ -40,9 +33,11 @@ public class Block extends Sprite {
 	 * Config:
 	 * * `rows` - number of rows. Default 0 (indefinite number, keep adding more rows)
 	 * * `cols` - number of columns. Default 1 (or `columns` size)
-	 * * `columns` - column widths. -1: autosize, 0..1: fraction, >1: pixels. Defaults to 1.0 / rows
+	 * * `columns` - column widths. -1: autosize, 0..1: fraction, >1: pixels. Defaults to cellWidth or (1.0 / rows) if cellWidth not set.
 	 * * `setWidth`, `setHeight - should set width/height of elements. Default false
-	 * * `gap` - gap between cells
+	 * * `gap` - gap between cells, -1 to auto (works only if all columns are fixed width, or cellWidth is set)
+	 * * `cellWidth` - default cell width.
+	 *
 	 * Hints:
 	 * * `row`, `col` - 2D position in grid. Defaults to "next cell"
 	 * * `setWidth`, `setHeight - should set width/height of this element. Default to layout config
@@ -59,9 +54,9 @@ public class Block extends Sprite {
 		var setcw:Boolean        = config['setWidth'];
 		var setch:Boolean        = config['setHeight'];
 		var debug:Boolean        = config['debug'];
-		
+		var cellWidth:Number = Utils.intOr(config['cellWidth'], 0);
 		if (!('cols' in config) && columns) cols = columns.length;
-		innerw -= gap*(cols-1);
+		if (gap > 0) innerw -= gap*cols;
 		if (!columns || columns.length != cols) {
 			columns = [];
 			for (var i:int = 0; i < cols; i++) {
@@ -76,7 +71,7 @@ public class Block extends Sprite {
 		// count autocols and convert fraction widths to pixels
 		for (i = 0; i < cols; i++) {
 			if (columns[i] < 0) {
-				autocols++;
+				autocols += -columns[i];
 				continue;
 			} else if (columns[i] <= 1) {
 				// fraction
@@ -86,9 +81,15 @@ public class Block extends Sprite {
 		}
 		// calculate autocol sizes
 		if (autocols > 0) {
+			if (cellWidth <= 0) cellWidth = freespace/autocols;
 			for (i = 0; i < cols; i++) {
-				if (columns[i] < 0) columns[i] = freespace/autocols;
+				if (columns[i] < 0) columns[i] = cellWidth*(-columns[i]);
 			}
+		}
+		if (gap < 0) {
+			var tw:Number = 0;
+			for (i = 0; i < cols; i++) tw += columns[i];
+			gap = (innerw-tw)/cols;
 		}
 		
 		var row:int = 0;
@@ -106,7 +107,7 @@ public class Block extends Sprite {
 			}
 			if (!grid[row]) grid[row] = [];
 			grid[row][col] = child;
-			col++;
+			col += ('colspan' in hint) ? hint['colspan'] : 1;
 			if (col >= cols) {
 				col = 0;
 				row++;
@@ -117,16 +118,21 @@ public class Block extends Sprite {
 			if (!grid[row]) continue;
 			var h:Number = 0;
 			var x:Number = paddingLeft;
-			for (col = 0; col < columns.length; col++) {
+			for (col = 0; col < columns.length;) {
+				var colspan:int = 1;
 				child = grid[row][col];
 				if (child) {
 					if (debug) trace("[" + row + "][" + col + "] x="+(x|0)+" y="+(y|0)+" w="+(columns[col]|0)+" h="+(cellh|0)+" "+child);
+					hint         = _layoutHints[child] || {};
 					var setw:Boolean = 'setWidth' in hint ? hint['setWidth'] : setcw;
 					var seth:Boolean = 'setHeight' in hint ? hint['setHeight'] : setch;
+					colspan = 'colspan' in hint ? hint['colspan'] : 1;
 					child.x          = x + gap / 2;
 					child.y          = y;
 					if (setw) {
-						child.width = columns[col];
+						var cw:Number = columns[col];
+						for (i = 1; i < colspan && col + i < cols; i++) cw += gap + columns[col+i];
+						child.width = cw;
 					}
 					if (seth) {
 						child.height = cellh;
@@ -134,7 +140,10 @@ public class Block extends Sprite {
 					if (debug) trace(""+child.x+" "+child.y+" "+child.width+" "+child.height);
 					h = Math.max(h, child.height);
 				}
-				x += columns[col]+gap;
+				while (colspan-->0 && col < columns.length) {
+					x += columns[col] + gap;
+					col++;
+				}
 			}
 			y += h+gap;
 		}
@@ -191,6 +200,9 @@ public class Block extends Sprite {
 	private var _layoutConfig:Object;
 	private var explicitWidth:Number    = 0;
 	private var explicitHeight:Number   = 0;
+	public var dataset:Object = {};
+	private var _xminCached:Number = -1;
+	private var _yminCached:Number = -1;
 
 	public function Block(options:Object = null) {
 		super();
@@ -203,21 +215,25 @@ public class Block extends Sprite {
 	}
 
 	private function get xmin():Number {
+		if (_xminCached !== -1) return _xminCached;
 		var xmin:Number = 0;
 		if (_container) {
 			for (var i:int = 0, n:int = numElements; i < n; i++) {
 				xmin = Math.min(xmin, getElementAt(i).x);
 			}
 		}
+//		_xminCached = xmin;
 		return xmin;
 	}
 	private function get ymin():Number {
+		if (_yminCached !== -1) return _yminCached;
 		var ymin:Number = 0;
 		if (_container) {
 			for (var i:int = 0, n:int = numElements; i < n; i++) {
 				ymin = Math.min(ymin, getElementAt(i).y);
 			}
 		}
+//		_yminCached = ymin;
 		return ymin;
 	}
 	override public function get width():Number {
@@ -240,7 +256,7 @@ public class Block extends Sprite {
 			resize();
 		}
 	}
-	private function resize():void {
+	protected function resize():void {
 		invalidateLayout();
 		if (width > 0 || height > 0) {
 			graphics.clear();
@@ -275,10 +291,29 @@ public class Block extends Sprite {
 		layElement(e, hint);
 		return e;
 	}
+	
+	public function hasElement(e:DisplayObject):Boolean {
+		return getElementIndex(e) >= 0;
+	}
 
 	public function addElementAt(e:DisplayObject, index:int, hint:Object = null):DisplayObject {
 		_container.addChildAt(e, index);
 		layElement(e, hint);
+		return e;
+	}
+	public function addElementAbove(e:DisplayObject, reference:DisplayObject, hint:Object = null):DisplayObject {
+		var i:int = getElementIndex(reference);
+		if (i < 0) i = 0; // above none = below all
+		else i = i + 1;
+		var j:int = getElementIndex(e);
+		if (j != i + 1) addElementAt(e, i, hint);
+		return e;
+	}
+	public function addElementBelow(e:DisplayObject, reference:DisplayObject, hint:Object = null):DisplayObject {
+		var i:int = getElementIndex(reference);
+		if (i < 0) i = numElements; // below none = above all
+		var j:int = getElementIndex(e);
+		if (j != i - 1) addElementAt(e, i, hint);
 		return e;
 	}
 
@@ -287,9 +322,14 @@ public class Block extends Sprite {
 		invalidateLayout();
 		return this;
 	}
-
+	
 	public function getElementIndex(e:DisplayObject):int {
-		return _container.getChildIndex(e);
+		if (!e) return -1;
+		var i:int = -1;
+		try {
+			i = _container.getChildIndex(e);
+		} catch (e:ArgumentError) {}
+		return i;
 	}
 
 	public function getElementByName(name:String):DisplayObject {
@@ -303,12 +343,21 @@ public class Block extends Sprite {
 	}
 
 	public function removeElement(e:DisplayObject):void {
-		_container.removeChild(e);
+		try {
+			_container.removeChild(e);
+		} catch (error:ArgumentError) {}
 		delete _layoutHints[e];
+		invalidateLayout();
+	}
+	public function removeAllElements():void {
+		_container.removeChildren();
+		_layoutHints = new Dictionary();
 		invalidateLayout();
 	}
 
 	public function invalidateLayout():void {
+		_xminCached = -1;
+		_yminCached = -1;
 		if (!_dirty) {
 			_dirty = true;
 			setTimeout(maybeDoLayout, 0);
@@ -346,6 +395,7 @@ public class Block extends Sprite {
 	public function doLayout():void {
 		_dirty          = false;
 		var type:String = _layoutConfig["type"];
+		Utils.Begin("Block","doLayout",type);
 		//if (type !== "none") trace("doLayout "+this+" ["+x+", "+y+" "+width+"x"+height+"]");
 		switch (type) {
 			case "grid":
@@ -360,6 +410,7 @@ public class Block extends Sprite {
 				trace("Unknown layout config type ", type);
 				break;
 		}
+		Utils.End("Block","doLayout");
 		dispatchEvent(new Event(ON_LAYOUT, true, true));
 	}
 
@@ -377,20 +428,7 @@ public class Block extends Sprite {
 		return e;
 	}
 	public function addTextField(options:Object, hint:Object = null):TextField {
-		if (options is String) return addTextField({text:options});
-		var e:TextField = new TextField();
-		e.antiAliasType = AntiAliasType.ADVANCED;
-		if ('defaultTextFormat' in options) {
-			e.defaultTextFormat = UIUtils.convertTextFormat(options['defaultTextFormat']);
-		}
-		UIUtils.setProperties(e, options, {
-			defaultTextFormat: UIUtils.convertTextFormat,
-			background: UIUtils.convertColor
-		});
-		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
-		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
-			e.autoSize = TextFieldAutoSize.LEFT;
-		}
+		var e:TextField = UIUtils.newTextField(options);
 		addElement(e, hint);
 		return e;
 	}

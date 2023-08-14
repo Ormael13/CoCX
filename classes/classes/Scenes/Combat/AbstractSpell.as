@@ -369,7 +369,8 @@ public class AbstractSpell extends CombatAbility {
     
     public static function omnicasterDamageFactor_gazer():Number {
         if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.perkv1(IMutationsLib.GazerEyesIM) >= 3) return 0.5;
+			if (player.perkv1(IMutationsLib.GazerEyesIM) >= 4) return 1;
+			else if (player.perkv1(IMutationsLib.GazerEyesIM) >= 3) return 0.5;
 			else if (player.perkv1(IMutationsLib.GazerEyesIM) >= 2) return 0.3;
 			else return 0.2;
 		}
@@ -469,6 +470,9 @@ public class AbstractSpell extends CombatAbility {
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5 + combatMagicalCritical();
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 4) critChance += 10;
+		if (player.perkv1(IMutationsLib.GazerEyesIM) >= 3) critChance += 10;
+		if (player.perkv1(IMutationsLib.GazerEyesIM) >= 4) critChance += 25;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (critChance > 0 && rand(100) < critChance) {
 			crit = true;

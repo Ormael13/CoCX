@@ -184,7 +184,7 @@ public function fountainEncounter():void {
 	outputText("You come closer and discover a placard.  It reads, \"Fountain of Endowment\".  Well, clearly it's supposed to enhance something, but at what cost?\n\n");
 	outputText("Do you drink from the fountain?");
 	//[Yes] [No]
-	doYesNo(drinkFountainEndowment,camp.returnToCampUseOneHour);
+	doYesNo(drinkFountainEndowment,explorer.done);
 }
 
 private function drinkFountainEndowment():void {
@@ -237,7 +237,7 @@ private function drinkFountainEndowment():void {
         changed = true;
 	}
     if (!changed) outputText("\n\nWeird. You thought it would make you feel different somehow.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 private function exgartuanInfestDick():void {
 	spriteSelect(SpriteDb.s_exgartuan);
@@ -259,7 +259,7 @@ private function exgartuanInfestDick():void {
     outputText("\n\n\"<i>Yes I am.  You should consider yourself lucky – you're now the host of the great demon Exgartuan, and you'd best please me every few hours, or I'll make sure your body finds someone to relieve my building pressure.  But I think you'll do fine.  Come now, I can see a wonderful camp in your mind that we can paint white,</i>\" it suggests.");
     outputText("\n\nWell now... this was certainly unexpected.  Perhaps there's a way to be rid of this thing?");
 	infestDick();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 private function exgartuanInfestTits():void {
 	outputText("\n\nYour [allbreasts] jiggle as they grow MUCH larger, turning into obscene mounds that shake with every motion of your body.  All your " + nippleDescript(0) + "s puff up with them, gaining volume to match their new, larger homes.  They feel hot and ache to be touched.");
@@ -275,7 +275,7 @@ private function exgartuanInfestTits():void {
 	outputText("\n\n\"<i>Yes I am,</i>\" mutters Xenora, spurting a trickle of milk from your " + nippleDescript(0) + "s for emphasis, \"<i>and you had better take me back to that lovely camp I can see in your memories and give me a nice long massage.</i>\"");
 	outputText("\n\nWell now... this was certainly unexpected.  Perhaps there's a way to be rid of this thing?");
 	infestBoobs();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 	public function exgartuanMasturbation_dick():void {

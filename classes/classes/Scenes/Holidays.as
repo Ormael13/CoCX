@@ -129,9 +129,9 @@ public class Holidays extends BaseContent {
         //If PC has neither
         if (player.gender == 0) {
             outputText("\n\nOdd as it is, it doesn't seem to react as you look it over.  You avoid it, for now.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
-        simpleChoices("Fuck It", fuck, "Mount It", mount, "", null, "", null, "No Way", SceneLib.camp.returnToCampUseOneHour);
+        simpleChoices("Fuck It", fuck, "Mount It", mount, "", null, "", null, "No Way", explorer.done);
 
         //[HOLY SHIT YOU BE FUCKING A PUMPKIN]
         function pumpkinFuck():void {
@@ -160,7 +160,7 @@ public class Holidays extends BaseContent {
                 outputText("\n\nAll too soon, you finish and step away, satisfied.  The pumpkin's pussy seals closed slowly, cutting off the worst of the slime-flow.  You get dressed, but the plant's tendrils no longer bother you.  They lie still and flat, and even the perverse sweating comes to an end.  Whatever fel magic was behind this, it seems to have settled after the salty snack you gave it.  You get dressed and walk back to camp with a spring in your step.");
                 player.orgasm();
                 player.dynStats("cor", 2);
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             } else {
                 outputText("\n\nOver and over you empty your [balls] into the growing gourd, inflating it larger and larger, passionately giving up every drop of sperm to fuel its unnatural growth.  Even once you feel empty, your [cock biggest] continues to clench and pump, firing blanks in an effort to feed EVERYTHING to the semen-hungry plant.  Still, even your prodigious virility can only take so much, and once your dick starts to go soft inside the massive cunt, it releases you, allowing you to ride out the rest of your orgasm, below, on the ground.  Your descent is graceless, a lazy slide down the orange rind.  Were it not for the gentle slope, it would be a dangerous six-foot fall."
                     + "\n\nYou thank the gods for that small mercy as you calm down and climb to your feet, beholding the sudden gargantuan growth as if for the first time.  That pumpkin is at least six feet tall, and the swollen pussy that devoured your cum?  It has grown with it, now a gash big enough to devour a man.  A few strings of semen trail from the labia to the ground, but it looks like most of your cum is vanishing into the pumpkin's depths, drank down for some purpose only the demons would know."
@@ -223,7 +223,7 @@ public class Holidays extends BaseContent {
                 player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
                 player.dynStats("cor", 30);
             }
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         function mountPumpkin():void {
@@ -240,7 +240,7 @@ public class Holidays extends BaseContent {
                     + "\n\nWet slapping noises ring out as you piston faster and faster, violently plowing the plant-cock into your [vagina] in a rutting, mating frenzy.  Your eyes are repeatedly drawn downward to the slimy shaft each time you pull up, the ooze keeping your [vagina] well lubricated.  The green shaft seems even larger than before, the phallus stretching you wider and longer each time you slam down on it as you ride the pumpkin into orgasm.  You feel a strange compulsion to let it cum inside, to flood your womb with pie goop until you appear immensely pregnant and the overflow is spraying out around your legs."
                     + "\n\nWith a triumphant roar, you climax and mash yourself against the pumpkin, slamming your [hips] hard enough onto the hard green shaft, that you could almost swear your cervix was penetrated.  You don't care, your vagina is clenching, the stem is flexing, and the pumpkin's ooze is gushing out, flooding your innards with pumpkin seed as you flood the pumpkin's surface with your female juices in turn.  Clenching tightly, your muscles lock, working in perfect concert with one goal; filling you up with fruity cum.  The pumpkin's thick load floods your inner folds, a deluge of sweet-smelling goop squirting deep into your [vagina], inflating you and then squirting back out mixed with your own juices.  The mixed juices are absorbed into the plant's rind almost as fast as they exit your body, though you can see a bit of glistening moisture around the base of the stem."
                     + "\n\nAll too soon, you finish and step away, satisfied.  The pumpkin's stem slowly stops pulsing, cutting off the worst of the slime-flow.  You get dressed, but the plant's tendrils no longer bother you.  They lie still and flat, and even the perverse sweating comes to an end.  Whatever fell magic was behind this, it seems to have settled after the pressure you relieved it of.  You get dressed and walk back to camp with a spring in your step.");
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
             //Female characters don't have an easy analogue to cum production unless we count milk production, and female gender doesn't require either breasts or lactation to play.  So I just went for high vaginal wetness, not pregnant, and likely to become pregnant if she had sex with a male creature.  I hope that works out OK.
             else {
@@ -299,7 +299,7 @@ public class Holidays extends BaseContent {
                 player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
                 player.dynStats("cor", 30);
             }
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
     }
 
@@ -328,7 +328,7 @@ public class Holidays extends BaseContent {
             clearOutput();
             outputText("Nah, that whole place is probably some kind of giant venus fly trap. Fuck that.");
             flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //Explore Das Trees
@@ -350,7 +350,7 @@ public class Holidays extends BaseContent {
             else {
                 outputText("\n\nWell, that was nice, but you don't see much reason to stick around.  You head back to camp with a wistful look over your shoulder.");
                 player.dynStats("lib", 1, "lus", 20, "cor", 1);
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
                 return;
             }
 
@@ -380,7 +380,7 @@ public class Holidays extends BaseContent {
         function leaveAfterFlowerHuffing():void {
             clearOutput();
             outputText("The farther you get from that glade, the more your head clears and the more you realize how close you came to disaster.  You resolve to avoid it in the future, lest you fall prey to that entrancing pollen and the hypnotic petals once more.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //Fuck the Lips
@@ -494,6 +494,7 @@ public class Holidays extends BaseContent {
             //Add ten more corruption.
             //Add 50 lust.
             player.dynStats("lus", 25, "cor", 10, "scale", false);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseFourHours);
         }
 
@@ -594,6 +595,7 @@ public class Holidays extends BaseContent {
             //Add ten more corruption.
             player.dynStats("lus", 20, "cor", 10, "scale", false);
             player.buff("FeraBlessing").setStat("lib.mult", 0.10).withText("Fera Blessing");
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseFourHours);
         }
 
@@ -648,6 +650,7 @@ public class Holidays extends BaseContent {
                 + "\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
             player.dynStats("lus", 20, "cor", 10, "scale", false);
             player.buff("FeraBlessing").setStat("lib.mult", 0.10).withText("Fera Blessing");
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseFourHours);
             //Add ten more corruption.
         }
@@ -688,6 +691,7 @@ public class Holidays extends BaseContent {
             //Add 50 lust.
             player.dynStats("lus", 20, "cor", 10);
             player.buff("FeraBlessing").setStat("lib.mult", 0.10).withText("Fera Blessing");
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseFourHours);
         }
     }
@@ -708,7 +712,7 @@ public class Holidays extends BaseContent {
         function leavePonies():void {
             clearOutput();
             outputText("Deciding it must be some demonic trick, you decide to retreat from the scene before they notice your presence.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         function approachPonies():void {
@@ -734,7 +738,7 @@ public class Holidays extends BaseContent {
         function derpPolitely():void {
             clearOutput();
             outputText("You hold out your arms and stop the ponies.  Once you have their attention you let them know you have something important you need to do for now, but will come back soon.  With a wave you turn and walk back into the trees to a chorus of disappointed \"<i>ahhhs</i>\", mostly from the pink one.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         function derpCreepy():void {
@@ -742,7 +746,7 @@ public class Holidays extends BaseContent {
             outputText("Cocks, horns and slavering vaginas is one thing, but this is almost too much cute to process.  You determine to leave this grove and never EVER come back again.  Still disturbed by the mental images running through your head, as you make your way back to camp, you callously slaughter an imp. Yeah, that feels better.\n\n(+10 XP!  +5 Gems!)");
             player.XP += 10;
             player.gems += 5;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         function derpyParty():void {
@@ -752,6 +756,7 @@ public class Holidays extends BaseContent {
                 + "Your strong lower body has shrunk, the firm musculature replaced by an oddly cartoonish looking form.  In fact, from the waist down you look just like one of the ponies!  Everything looks to still be in the same general place, and a quick test of your new lower body proves it still functions somewhat the same. The new shape of your hooves takes a little while to get used to, but other than that you get used to your new lower body almost with no effort\n\n(<i>*Note:You should really check the character viewer</i>)");
             player.lowerBody = LowerBody.PONY;
             player.legCount = 4;
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseEightHours);
         }
     }
@@ -843,6 +848,7 @@ public class Holidays extends BaseContent {
         function noThanksTurkeyGal():void {
             clearOutput();
             outputText("You reluctantly push her away.  You've no need to ram your dick down some new monstrosity's gullet.  The girl forlornly gobbles one last time, then prances off into the fading evening light, globular ass jiggling.");
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -918,6 +924,7 @@ public class Holidays extends BaseContent {
                 player.createPerk(PerkLib.PilgrimsBounty, 0, 0, 0, 0);
                 outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
             }
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -996,6 +1003,7 @@ public class Holidays extends BaseContent {
             //HP set to full, fatigue to 0?
             fatigue(-100);
             HPChange(3000, false);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1145,6 +1153,7 @@ public class Holidays extends BaseContent {
                 + "\n\n\"<i>Gobble,</i>\" you agree, wrapping the giddy turkey up in your arms and planting one last kiss on her big ol' boob.  She stares sedately at you with big, blue eyes, a cute little smile on her lips as you withdraw from her, wiping the last of your spunk on her feathery thigh.  Running your hand through the turkey-girl’s hair, you whisper what a good little cockgobbler she is.  However, you soon find that the poor thing’s passed out, your rut finally over with.  Still, she's left you with a nice soft tit-pillow to lay your head down upon as you pick up the lunch you’d been preparing to eat before the eager slut arrived."
                 + "\n\n\"<i>That’ll do, turkey,</i>\" you say, patting her jiggling tit and scraping some of the excess gravy out of your lunch.  \"<i>That’ll do.</i>\"");
             player.orgasm();
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
     }
@@ -1343,6 +1352,7 @@ public class Holidays extends BaseContent {
             outputText("\n\nYou sigh");
             if (changed) outputText(", feeling your body expand as you waddle out back towards camp with belly full of sweet syrup");
             outputText(". For only one gem, that was a pretty good time...");
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
     }
@@ -1385,7 +1395,7 @@ public class Holidays extends BaseContent {
         function leaveValentinesDayForever():void {
             clearOutput();
             outputText("Ultimately, this is not worth your time.  You wish Scylla good luck, but tell her you won't help her make the holiday more popular in Tel'Adre, as you have other things to do.  Her expression turns sad and she nods in understanding as you turn away and go back into the streets of Tel'Adre.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //[next]
@@ -1429,6 +1439,7 @@ public class Holidays extends BaseContent {
             //With no other things to do, you go back to camp to rest.
             //{Small Lust Increase, return to camp, go to sleep}
             player.dynStats("lus", 10, "scale", false);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1485,6 +1496,7 @@ public class Holidays extends BaseContent {
                 outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
                 player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
             }
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1535,7 +1547,7 @@ public class Holidays extends BaseContent {
                 outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
                 player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
             }
-
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1550,6 +1562,7 @@ public class Holidays extends BaseContent {
                 outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
                 player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
             }
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1619,6 +1632,7 @@ public class Holidays extends BaseContent {
 
             player.orgasm();
             player.dynStats("sen", -3);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1647,6 +1661,7 @@ public class Holidays extends BaseContent {
             }
 
             player.dynStats("lus", 80, "scale", false);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1666,6 +1681,7 @@ public class Holidays extends BaseContent {
                 if (player.hasVagina()) addButton(3, "Pussy", pastieValentineIntro, "vag");
             } else {
                 outputText("\n\nYou tell Pastie that, regrettably, you only have what she sees.  She nods and says, \"<i>Too bad.  I think I'll better get going, then.  It's been somewhat fun, and I finally get a chance to go to sleep sober and wake up without a hangover.\"</i>");
+                explorer.stopExploring();
                 doNext(SceneLib.camp.returnToCampUseTwoHours);
             }
         }
@@ -1768,6 +1784,7 @@ public class Holidays extends BaseContent {
             }
             player.orgasm();
             player.dynStats("sen", -2);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1800,6 +1817,7 @@ public class Holidays extends BaseContent {
             }
             player.orgasm();
             player.dynStats("sen", -2);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1831,6 +1849,7 @@ public class Holidays extends BaseContent {
 
             player.orgasm();
             player.dynStats("sen", -2);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
     }
@@ -2130,7 +2149,7 @@ public class Holidays extends BaseContent {
                 + "\n\nIt's certainly warmer there.");
             //turn dat shit off
             flags[kFLAGS.GATS_ANGEL_DISABLED] = .5;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //ii. Yes
@@ -2180,7 +2199,7 @@ public class Holidays extends BaseContent {
                 flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] = 1;
             }
             flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] = 1;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //5. Solution
@@ -2199,7 +2218,7 @@ public class Holidays extends BaseContent {
                 + "\n\nOne surprise leads to another when a warm glow breaks free from between your hands.  A swirling of green and red mist is concentrated within the frame of your prize, glowing brightly as they swim endlessly through the key's curves at a variety of velocities.  It's plain to see that this little treasure was the cause for the cave's unnatural brilliance.  You're a little ashamed to rob it of its power source... but not enough to give it a second thought as you crawl back down to the entrance only a few feet away.  The last thing you want is for your magical lantern to dull and leave your naked body blind in this hazard-filled hole."
                 + "\n\nYou carefully re-enter the flooded tunnel, unsure how the supposed key will take to water.  It makes little impact as you submerge it, though the glowing light looks lovely on the pitch black tunnel.  The sight reinvigorates you slightly, though the warmer waters are probably more to blame.  Chalking up yet another simple retrieval asked of your person, you surface back outside, eager to get back into your [armor] and return to the high mountains.");
             player.createKeyItem("North Star Key", 0, 0, 0, 0);
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //ii. Bringing the Key Back
@@ -2234,7 +2253,7 @@ public class Holidays extends BaseContent {
                     + "\n\nThe air remains cold and merciless, and regardless of what you do it would be difficult to stay for much longer.  Turning away, you trot silently back to your camp, wondering how things would've gone - if only you were quicker.");
                 //[BAD END, Can no longer see the Old Woman or this series of events]
                 flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
             //player.removeKeyItem("North Star Key");
         }
@@ -2286,7 +2305,7 @@ public class Holidays extends BaseContent {
             //[if (corruption > 49)
             if (player.cor > 49) outputText("  More importantly, you have some unsatisfied, pent up lust that you'd like to expend.");
             player.dynStats("lus", 2 + player.lib / 10 + player.cor / 10, "cor", 10, "scale", false);
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
             flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
             player.removeKeyItem("North Star Key");
         }
@@ -2358,7 +2377,7 @@ public class Holidays extends BaseContent {
             flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
             player.orgasm();
             player.dynStats("cor", 10);
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //8. Good End
@@ -2464,7 +2483,7 @@ public class Holidays extends BaseContent {
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("\n\nYou have no idea what that is.");
             awardAchievement("A Christmas Carol", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_II);
             flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] = 1;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
     }
@@ -2497,7 +2516,7 @@ public class Holidays extends BaseContent {
                 + "\n\n\"<i>Pity... well, if you'll excuse me, this mountain ain't snowy enough just yet!</i>\"  He resumes his furious masturbation, spraying another gush of snow on the side of the mountain."
                 + "\n\nSeeing no reason to linger, you return to your camp.");
             flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //[=Yes=]
@@ -2507,7 +2526,7 @@ public class Holidays extends BaseContent {
                 + "\n\nYou thank him for the surprisingly kind gesture, and start to head back down to camp.  Even as you go, you can see the first huge jet of snow arcing its way across the sky...");
             flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
             flags[kFLAGS.JACK_FROST_PROGRESS] = 1;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
     }
 
@@ -2531,6 +2550,7 @@ public class Holidays extends BaseContent {
             flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
             HPChange(player.maxHP(), false);
             fatigue(-100);
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseEightHours);
         }
         //Rathazul
@@ -2760,7 +2780,7 @@ public class Holidays extends BaseContent {
         }
             //Helia
         //if she ain't a follower and is a lover, just have her visit.
-        else if (flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (SceneLib.helScene.fuckBuddyHel() || SceneLib.helFollower.followerHel())) {
+        else if (flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (SceneLib.helScene.fuckBuddyHel() || (SceneLib.helFollower.followerHel() && !player.hasStatusEffect(StatusEffects.HeliaOff)))) {
 
             outputText("\"<i>Hey, champ, what's going on here?</i>\"  Helia calls as she sees you approach.  Gentle trails of steam are wafting from the salamander's body as her own internal heat melts any snow that builds up on her."
                 + "\n\nYou greet your salamander lover, telling her you found a way to make it snow on your camp... so you were just planning on having a snow-day play-day on your camp, while it lasts."
@@ -2897,6 +2917,7 @@ public class Holidays extends BaseContent {
             HPChange(player.maxHP(), false);
             fatigue(-100);
             flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
+            explorer.stopExploring();
             doNext(SceneLib.camp.returnToCampUseEightHours);
         }
         //[=Fuck Her=]
@@ -3075,7 +3096,7 @@ public class Holidays extends BaseContent {
             outputText("You're not willing to run the risk of getting a foreign cock stuffed up your [butt].");
             //(If corruption or libido>50)
             if (player.cor > 50 || player.lib > 50) outputText("  At least not right now.  You turn back, navigating your way back to your camp.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //INVESTIGATE
@@ -3114,7 +3135,7 @@ public class Holidays extends BaseContent {
             function declineCandyCaneCawks():void {
                 clearOutput();
                 outputText("Turning around a tad awkwardly, you stumble out of the glade.  Tempting as he is, you don't have time to help the random bunny orgasm.");
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
 
             //YES
@@ -3138,7 +3159,7 @@ public class Holidays extends BaseContent {
                 else outputText("  Despite your rising urge to take advantage of the unknowing bunny, you decide to retire and return to camp.");
                 //(Lust set to 100, hour passes.)
                 player.dynStats("lib", 1, "sen", 1, "lus=", 100, "cor", -5, "scale", false);
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
         }
     }
@@ -3157,7 +3178,7 @@ public class Holidays extends BaseContent {
         function leaveXmasChicken():void {
             clearOutput();
             outputText("Too exasperated by the plain absurdity of the situation to deal with it, you bury your face in your hands and decide to leave her to it.  Maybe some imps will shut her up for you.  You head back to camp with her piercing cries following you all the way, and prepare for the day ahead.  Her cries fade a while later; the snow thaws and the air warms soon after.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //[Talk]
@@ -3313,7 +3334,7 @@ public class Holidays extends BaseContent {
             outputText("You politely decline Kami's sexual advances, apologizing before making a turn for the door. You begin to wonder why you didn't buy anything at the bakery.");
             //[Return to Tel Adre, KamiEnc = 1]
             flags[kFLAGS.KAMI_ENCOUNTER] = 1;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //[Player chooses 'Let's go!']
@@ -3356,7 +3377,7 @@ public class Holidays extends BaseContent {
             flags[kFLAGS.KAMI_ENCOUNTER] = 1;
             player.orgasm();
             player.dynStats("sen", -2);
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //[Player selects 'Receive Anal']
@@ -3390,7 +3411,7 @@ public class Holidays extends BaseContent {
             //[Player heads back to camp, An hour passes, Asshole tightness is reduced, Lust is reduced to zero and KamiEnc = 1]
             player.orgasm();
             player.dynStats("sen", 1);
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
             flags[kFLAGS.KAMI_ENCOUNTER] = 1;
         }
 
@@ -3408,7 +3429,7 @@ public class Holidays extends BaseContent {
             player.dynStats("lus", 20 + player.lib / 10 + player.sens / 10, "scale", false);
             //[Player heads back to camp, An hour passes, Lust = + 40 and KamiEnc = 1]
             flags[kFLAGS.KAMI_ENCOUNTER] = 1;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         function KamiDoubleDickFuck():void {
@@ -3427,7 +3448,7 @@ public class Holidays extends BaseContent {
             player.orgasm();
             player.dynStats("sen", -3);
             flags[kFLAGS.KAMI_ENCOUNTER] = 1;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
     }
 
@@ -3502,7 +3523,7 @@ public class Holidays extends BaseContent {
             //end encounter
             //Receive \"<i>Peppermint White</i>\"
             player.orgasm();
-            SceneLib.inventory.takeItem(consumables.PEPPWHT, SceneLib.camp.returnToCampUseOneHour);
+            SceneLib.inventory.takeItem(consumables.PEPPWHT, explorer.done);
         }
 
         //Leave
@@ -3511,7 +3532,7 @@ public class Holidays extends BaseContent {
             outputText("You've decided not to trust the stranger, with a nod of your head you walk away from the man.  \"<i>Wait!  Before you go...</i>\" he speaks as he moves his massive sack in front of himself with a huff.  He leans forward, his upper body rummaging through the sack before reappearing.  He hands you a brightly wrapped gift."
                 + "\n\n\"<i>A little something from me,</i>\" he says with a bright smile.  Despite your hesitation, something about this gesture seems genuine.  You nod your head taking the gift from him and leaving after a simple word of thanks.  You unwrap the gift after returning to a normal climate, inside you find a small crystal bottle filled with a white liquid that looks strangely familiar.  Popping the cork and smelling the contents fills your nose with the refreshing scent of mint. It smells delicious, though you resist the temptation and cork the bottle again.  You take it with you back to camp.\n\n");
             //Receive \"<i>Peppermint White</i>\"
-            SceneLib.inventory.takeItem(consumables.PEPPWHT, SceneLib.camp.returnToCampUseOneHour);
+            SceneLib.inventory.takeItem(consumables.PEPPWHT, explorer.done);
         }
 
         flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.fullYear;
@@ -3569,7 +3590,7 @@ public class Holidays extends BaseContent {
             menu();
             if (player.hasItem(consumables.COAL___)) addButton(0, "Coal", nieveCoalEyes);
             addButton(1, "Gems", nieveGemEyes);
-            addButton(4, "Back", SceneLib.camp.returnToCampUseOneHour);
+            addButton(4, "Back", explorer.done);
         }
         //Fourth Step: The Nose
         else if (flags[kFLAGS.NIEVE_STAGE] == 3) {
@@ -3586,10 +3607,10 @@ public class Holidays extends BaseContent {
             else {
                 outputText("Unfortunately, you've yet to find one in your adventures.  You suppose you'll have to look more carefully.  Who knows, there might be a farm right under your nose.");
             }
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         } else {
             outputText("Your snowman is done!  There's nothing more to add to it.  It looks mighty fine however, and just looking at it brings a nostalgia-fueled smile to your lips.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //Coal
@@ -3601,7 +3622,7 @@ public class Holidays extends BaseContent {
                 + "\n\nYou split the coal into smaller chunks, and place them evenly around the Snowman's face, creating a nice, vacant smile.  It still needs a nose, however, and for that, you'll need a carrot.  Perhaps there's a farm nearby, or maybe you could buy one somewhere?");
             flags[kFLAGS.NIEVE_MOUTH] = "coal";
             flags[kFLAGS.NIEVE_STAGE] = 3;
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //Gems
@@ -3619,7 +3640,7 @@ public class Holidays extends BaseContent {
             else {
                 outputText("You open up your pouch, and frown.  Unfortunately, you don't have enough gems to create the eyes and mouth. With a sigh you march your broke ass back to camp.");
             }
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //Snowwoman
@@ -3628,7 +3649,7 @@ public class Holidays extends BaseContent {
             //Add to existing text if possible, rather than a new window?
             outputText("You grin mischievously to yourself and set about making two more balls of powdery snow.  It takes less time than any of the others, and before you know it you've attached two icy-breasts to the snowman.  They aren't terribly big, any heavier and you're sure they'd fall off, but they get the point across."
                 + "\n\nYour snowwoman still needs a face, of course, but you'll leave that until later.  For now, you head back into the main part of camp.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
             flags[kFLAGS.NIEVE_STAGE] = 2;
             flags[kFLAGS.NIEVE_GENDER] = 2;
         }
@@ -3639,7 +3660,7 @@ public class Holidays extends BaseContent {
             clearOutput();
             outputText("You decide to leave it as is. Not everything has to have breasts, of course, even in Mareth."
                 + "\n\nYour snowman still needs a face, of course, but you'll leave that until later.  For now, you head back into the main part of camp.");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
             flags[kFLAGS.NIEVE_STAGE] = 2;
             flags[kFLAGS.NIEVE_GENDER] = 1;
         }
@@ -3652,7 +3673,7 @@ public class Holidays extends BaseContent {
             + "\n\nYou stash the carrot away with a smile.  You've got a nose for your snowman!");
         outputText("\n\n(Gained Key Item: Carrot)");
         player.createKeyItem("Carrot", 0, 0, 0, 0);
-        doNext(SceneLib.camp.returnToCampUseOneHour);
+        doNext(explorer.done);
     }
 
     public static function nieveMF(Man:String = "", Woman:String = ""):String {
@@ -3698,7 +3719,7 @@ public class Holidays extends BaseContent {
             outputText("  " + nieveMF("He", "She") + " doesn't seem to be a threat, and indeed seems sincere in the fact that " + nieveMF("he", "she") + " was sent here to be your lover."
                 + "\n\nNieve beams at you, \"<i>You won't regret it, [name]!  Just give me a little while to set up a cozy place here... then we can get cozy.</i>\""
                 + "\n\nYou return to your camp proper with a goofy smirk on your face.\n\n(<b>Nieve is now available in the Lovers menu.</b>)");
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
 
         //No, because I'm an idiot.
@@ -3710,7 +3731,7 @@ public class Holidays extends BaseContent {
             flags[kFLAGS.NIEVE_STAGE] = -1;
             flags[kFLAGS.NIEVE_GENDER] = 0;
             flags[kFLAGS.NIEVE_MOUTH] = "";
-            doNext(SceneLib.camp.returnToCampUseOneHour);
+            doNext(explorer.done);
         }
     }
 
@@ -3864,7 +3885,7 @@ public class Holidays extends BaseContent {
                         + "\n\nBoth of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
                     player.dynStats("lus", -5 - player.sens / 5, "scale", false);
                 }
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
 
             //Suck Him by Kinathis
@@ -3881,7 +3902,7 @@ public class Holidays extends BaseContent {
                     + "\n\nSucking as hard as you can, you slither your tongue around the length inside your mouth, licking everywhere you can in spite of having your mouth full already.  Cupping those swollen balls in your hands you gently fondle them, massaging them tenderly even as they lurch and swell, their icy payload ready to burst and gush into your mouth already.  Giving you only seconds notice, the pleasure filed gasps warn you of the impending orgasm.  Letting out a long moan of pure ecstasy Nieve blows his minty load inside your mouth.  Pulse after pulse, burst after thick burst of creamy minty cum flows over your tongue and down your throat.  With each gush your tongue is overwhelmed by the strong minty flavor, the thick stuff gushing down your throat to pool inside your stomach.  With his body presumably made from ice and snow, you're unsure as to where he is keeping all this minty cream, more and more gushing until your belly swells just a little under the chilling amount.  Shivering from the icy cum in your tummy you slowly pull back, sucking the last streams of pearly seed from your wintery lover before popping off."
                     + "\n\nLetting out a deep sigh you grin and look up, wanting to see the look on Nieve's face.  The iceborn man looks like he couldn't be happier, a silly smile on his face as he looks down at you.  \"<i>Oh [Master]... that was amazing, I've never met someone so skilled before.  I hope you're not too cold now,</i>\" he says with a hint of worry, knowing that his body and by extension, his cum, must be quite cold.  Reassuring him you tell your frosty friend you're fine and that he actually tasted pretty good. Looking quite pleased Nieve helps you up before sweeping you up into a squeezing hug.  \"<i>Thank you so much for this, but next time let me do you though, you need to be pleasured as well,</i>\" the elemental spirit says gently before helping you get cleaned up and ready for your adventures.");
                 player.dynStats("lus", 10 + player.lib / 10, "scale", false);
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
 
             function fuckNieve_router():void {
@@ -4024,7 +4045,7 @@ public class Holidays extends BaseContent {
                     + "\n\n\"<i>So messy, [Master],</i>\" she notes with a smile.  \"<i>Allow me to clean you up.</i>\"  Her cool mouth descends on your member, licking and sucking away all of your juices and hers, leaving you spotless.  She seems to delight in the flavor, and once she's done, she leans in and gives you a big, sloppy kiss that tastes more like mint than anything else.  She then cuddles up next to you, her cold body somehow comforting, until you've recuperated enough to head back to the camp proper.");
                 player.orgasm();
                 player.dynStats("sen", -2);
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
 
             //Get Fucked by Gurumash
@@ -4087,7 +4108,7 @@ public class Holidays extends BaseContent {
                         + "\n\nYou both rest in that position, Nieve still trickling cum into you even though he stopped moving minutes ago.  You turn your head to look at him and notice his face a few inches from yours.  It's clear that at the moment he's barely conscious, and you shift a bit to kiss him, thanking him for a job well done.  After a little while you both recover, redress, and silently go back to business.  Looking back at him as you leave, you know you want to do it again real soon.");
                     player.orgasm();
                     player.dynStats("sen", -2);
-                    doNext(SceneLib.camp.returnToCampUseOneHour);
+                    doNext(explorer.done);
                 }
 
                 //Vaginal
@@ -4116,7 +4137,7 @@ public class Holidays extends BaseContent {
                         + "\n\nAnother hour passes and you wake up clean and dressed, laying next to Nieve.  You noticed he's probably been watching you for the last several minutes.  You get up, pat yourself off, then with one hand tussle his snow-white hair, while uttering the words, \"<i>Good boy.</i>\"");
                     player.orgasm();
                     player.dynStats("sen", -2);
-                    doNext(SceneLib.camp.returnToCampUseOneHour);
+                    doNext(explorer.done);
                 }
             }
 
@@ -4211,7 +4232,7 @@ public class Holidays extends BaseContent {
                     + "\n\n\"<i>I... I can still only stay the winter, at least for now, but it's something, right?</i>\" the snow spirit says, clasping your hand in theirs."
                     + "\n\nYou nod.  You'll take what you can get, even if it is such a brief moment.  The two of you share stories, well, you share stories while Nieve listens with rapt attention, for the next hour or so.  It's been a long time since you've seen each other, and there's a lot to catch up on...");
                 flags[kFLAGS.NIEVE_STAGE] = 5;
-                doNext(SceneLib.camp.returnToCampUseOneHour);
+                doNext(explorer.done);
             }
         }
     }

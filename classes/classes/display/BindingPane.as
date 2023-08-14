@@ -1,36 +1,34 @@
-package classes.display 
+package classes.display
 {
-	import classes.BoundControlMethod;
-	import classes.InputManager;
+import classes.InputManager;
 
 import coc.view.Block;
 
-	import fl.containers.ScrollPane;
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
-	import flash.display.Stage;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.text.TextField;
-	import flash.text.TextFormat;
-	import flash.utils.Dictionary;
-	import flash.ui.Keyboard;
-	import flash.utils.describeType;
-	import classes.display.BindDisplay;
-	import flash.text.TextFieldAutoSize;
-	
-	/**
+import fl.containers.ScrollPane;
+
+import flash.display.MovieClip;
+import flash.display.Stage;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
+import flash.text.TextFormat;
+import flash.ui.Keyboard;
+import flash.utils.Dictionary;
+import flash.utils.describeType;
+
+/**
 	 * Defines a new UI element, providing a scrollable container to be used for display of bound
 	 * keyboard controls.
 	 * @author Gedan
 	 */
 	public class BindingPane extends ScrollPane
-	{	
+	{
 		private var _inputManager:InputManager;
 		private var _stage:Stage;
 		
 		// A lookup for integer keyCodes -> string representations
-		private var _keyDict:Dictionary;
+		private static var _keyDict:Dictionary;
 		
 		private var _functions:Array;
 		private var _newFuncs:Array;
@@ -41,7 +39,7 @@ import coc.view.Block;
 		/**
 		 * Initiate the BindingPane, setting the stage positioning and reference back to the input manager
 		 * so we can generate function callbacks later.
-		 * 
+		 *
 		 * @param	inputManager	Reference to the game input manager for method access
 		 * @param	xPos			X position on the stage for the top-left corner of the ScrollPane
 		 * @param	yPos			Y position on the stage for the top-left corner of the ScrollPane
@@ -57,9 +55,6 @@ import coc.view.Block;
 			// Cheap hack to remove the stupid styling elements of the stock ScrollPane
 			var blank:MovieClip = new MovieClip();
 			this.setStyle("upSkin", blank);
-			
-			// Build the keyCode->string lookup object
-			this.PopulateKeyboardDict();
 			
 			// Initiate a new container for content that will be placed in the scroll pane
 			_content = new Block({layoutConfig:{
@@ -138,7 +133,7 @@ import coc.view.Block;
 			helpLabel.name = "helpLabel";
 			helpLabel.x = 10;
 			helpLabel.width = this.width - 40;
-			helpLabel.defaultTextFormat = _textFormatLabel;			
+			helpLabel.defaultTextFormat = _textFormatLabel;
 			helpLabel.multiline = true;
 			helpLabel.wordWrap = true;
 			helpLabel.autoSize = TextFieldAutoSize.LEFT; // With multiline enabled, this SHOULD force the textfield to resize itself vertically dependent on content.
@@ -149,7 +144,7 @@ import coc.view.Block;
 			helpLabel.htmlText += "<b>Reset Ctrls</b> will reset all of the control bindings to their defaults.\n\n";
 			helpLabel.htmlText += "<b>Clear Ctrls</b> will remove all of the current control bindings, leaving everything Unbound.\n\n";
 			
-			//helpLabel.height *= 2; 
+			//helpLabel.height *= 2;
 			
 			_contentChildren++;
 			_content.addElement(helpLabel);
@@ -167,7 +162,7 @@ import coc.view.Block;
 				// This is going to look crazy...
 				var genPrimaryCallback:Function = function(funcName:String, inMan:InputManager):Function
 				{
-					return function():void 
+					return function():void
 					{
 						inMan.ListenForNewBind(funcName, InputManager.PRIMARYKEY);
 						_stage.focus = _stage;
@@ -212,7 +207,7 @@ import coc.view.Block;
 		 * Handles things like turning keyCode = 8 into "BACKSPACE" rather than an undisplayable
 		 * character.
 		 */
-		private function PopulateKeyboardDict():void
+		private static function PopulateKeyboardDict():void
 		{
 		
 			var keyDescriptions:XML = describeType(Keyboard);
@@ -222,10 +217,20 @@ import coc.view.Block;
 			
 			for (var i:int = 0; i < keyNames.length(); i++)
 			{
-				_keyDict[Keyboard[keyNames[i]]] = keyNames[i];
+				_keyDict[Keyboard[keyNames[i]]] = humanize(keyNames[i].toString());
 			}
 			
 			_keyDict[ -1] = "Unbound";
+		}
+		
+		private static function humanize(name:String):String {
+			if (name.indexOf("NUMBER_") == 0) name = name.slice("NUMBER_".length);
+			return name;
+		}
+		// Build the keyCode->string lookup object
+		PopulateKeyboardDict();
+		public static function keyName(keyCode:int,defaultName:String):String {
+			return _keyDict[keyCode] || defaultName;
 		}
 		
 		public function set functions(funcs:Array):void

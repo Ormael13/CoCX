@@ -25,16 +25,14 @@ import classes.StatusEffects;
 		
 		override public function get def():Number{
 			var mod:int = 0;
-			mod += (100-game.player.cor)/5;
+			mod += game.player.cor/5;
 			return 20 + mod;
 		}
 		override public function get mdef():Number{
 			var mod:int = 0;
-			mod += (100 - game.player.cor) / 10;
+			mod += game.player.cor/10;
 			return 10 + mod;
 		}
-		
-		
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
 			if (game.player.level >= 54) return super.canEquip(doOutput);

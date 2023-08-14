@@ -162,7 +162,7 @@ private function tamaniFemaleYes():void {
 	outputText("(<b>Deluxe Dildo acquired!</b>)");
 	player.createKeyItem("Deluxe Dildo",0,0,0,0);
 	outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[No]
 private function tamaniFemaleNo(): void {
@@ -173,7 +173,7 @@ private function tamaniFemaleNo(): void {
 	if(player.cor < 33) outputText("What a slut.");
 	else if(player.cor < 66) outputText("How odd.");
 	else outputText("You hope she misses a few.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[Encounter Tamani – HAZ COCK]
 //[First Time]
@@ -246,7 +246,7 @@ public function tamaniFirstTimeConsentual():void {
 			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", .5, "sen", -1, "cor", .5);
 			player.trainStat("lib", 2, player.trainStatCap("lib",100));
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		else doNext(recallWakeUp);
 	}
@@ -271,7 +271,7 @@ private function tamaniSecondRefusal(): void {
 	flags[kFLAGS.TAMANI_MET] = 2; //First time refused
 	outputText("The goblin pouts, anger clouding her cute little features.  She turns and storms off, clearly pissed at you, \"<i>Think about it.  Next time that dick better ache for me, or I'll MAKE you want it.</i>\"\n\n");
 	outputText("...What?");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //[REPEAT MALE ENCOUNTER]
@@ -289,11 +289,6 @@ private function tamaniMaleRepeatEncounter():void {
 	}
 	//(+1 lust per 10 sensitivity)
 	dynStats("lus", player.sens / 10, "scale", false);
-	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_TAMANI] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI]++;
-	if (flags[kFLAGS.SOUL_SENSE_TAMANI] == 2) {
-		flags[kFLAGS.SOUL_SENSE_TAMANI]++;
-		outputText("\n\n<b>You have met her enough times to be able to find her in the future when using soul sense. (Removes Tamani from forest explore encounters pool!)</b>\n\n");
-	}
 	menu();
 	addButton(0, "Take Her", tamaniSexWon);
 	addButton(1, "Let Her", tamaniSexLetHer);
@@ -448,7 +443,7 @@ internal function tamaniSexLetHer():void {
 		else {
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("lus", +10, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 
@@ -539,7 +534,7 @@ internal function tamaniSexLetHer():void {
 			outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.");
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("lus", +10, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 	}
 }
@@ -632,7 +627,7 @@ internal function tamaniSexWon():void {
 		player.sexReward("vaginalFluids","Dick");
 		player.trainStat("lib",2,player.trainStatCap("lib",100));
         if (CoC.instance.inCombat) cleanupAfterCombat();
-        else doNext(camp.returnToCampUseOneHour);
+        else endEncounter();
 	}
 	//Too big? Jerk off with feet and bukkake
 	function nofitF():void {
@@ -660,7 +655,7 @@ internal function tamaniSexWon():void {
 		player.sexReward("vaginalFluids","Dick");
 		dynStats("lus", 35, "scale", false);
         if (CoC.instance.inCombat) cleanupAfterCombat();
-        else doNext(camp.returnToCampUseOneHour);
+        else endEncounter();
 	}
 }
 
@@ -679,7 +674,7 @@ private function tamaniPregnantRefusal():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
 	outputText("She bursts into tears and waddles away crying.  You aren't sure if you should feel bad or not.");
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 //[FUCK HER PREGGERS – Consentual]
 private function tamaniPregnantFuck():void {
@@ -730,7 +725,7 @@ private function tamaniPregnantFuck():void {
 			outputText("Tamani comes over to you and gives you a sloppy goodbye kiss, sending an immediate surge of hardness and desire to your groin.  She looks back and giggles, then waddles off, patting her pouches and dripping with your spooge.");
 			player.sexReward("vaginalFluids", "Dick");
 		}
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 }
 
@@ -764,7 +759,7 @@ private function tamaniPoopsOutBabies():void {
 	outputText("Tamani sighs and relaxes, enjoying the breastfeeding and waving you away.  You shrug and head back to camp, more than a little aroused.");
 	dynStats("lus", player.lib / 10 + player.cor / 10, "scale", false);
 	tamaniGivesBirth();
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 internal function tamaniKnockUp():void {
@@ -941,7 +936,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 			player.addCurse("int", 0.5, 2);
 		}
 		if (CoC.instance.inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+		else endEncounter();
 	}
 }
 
@@ -1018,7 +1013,7 @@ private function declineZeFacesits():void {
 	outputText("You tell her you're not interested.");
 	outputText("\n\nThe curvy goblin kicks you with a snarl, making you instinctively grab at one [leg] and hop around on the other - until she kicks it too, knocking you down.  \"<i>Fine, bitch. Have it your way. But if I find you taking <b>my</b> cocks again, you're going to be in trouble!</i>\"  She darts off before you can get a word in edgewise, leaving you alone.");
 	//((Needs non-leg and centaur equivalents))
-	doNext(camp.returnToCampUseOneHour);
+	endEncounter();
 }
 
 //(("Accept" choice))
@@ -1043,7 +1038,7 @@ private function acceptTamaniFacesits():void {
 	outputText("\n\nYou withdraw your fingers from her ass and let go of her clit, and the little green fuck-doll topples over, falling into the dirt and muttering something incoherently. You sit up and look, admiring the sight of her fat green ass sticking up in the air with her juices still dripping down her thighs, and decide to walk away from the clearly unconscious goblin.");
 	if (!recalling) {
 		dynStats("lus", 20 + player.lib / 20, "scale", false);
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else doNext(recallWakeUp);
 }

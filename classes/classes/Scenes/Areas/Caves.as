@@ -3,15 +3,14 @@
  * Area with lvl 35-60 enemies.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Caves.*;
-import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
@@ -37,20 +36,25 @@ use namespace CoC;
 		private function init():void {
 			_cavesEncounter = Encounters.group("caves", {
 				name: "discoverashlands",
-				when: function ():Boolean {
-					return (player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_ASHLANDS] == 0
-				},
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
+				when: SceneLib.ashlands.canDiscover,
 				chance: 30,
 				call: discoverAshlands
 			}, {
 				name: "discovertundra",
-				when: function ():Boolean {
-					return (player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_TUNDRA] == 0
-				},
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
+				when: SceneLib.tundra.canDiscover,
 				chance: 30,
 				call: discoverTundra
 			}, {
 				name: "discoverebonlab",
+				label : "Ebon Labyrinth",
+				kind  : 'place',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.EBON_LABYRINTH] < 1
 				},
@@ -58,12 +62,18 @@ use namespace CoC;
 				call: SceneLib.dungeons.ebonlabyrinth.ebonlabyrinthdiscovery
 			}, {
 				name: "gunparts",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 0 && player.hasKeyItem("Touhouna M3") < 0
 				},
 				call: partsofTouhounaM3
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return flags[kFLAGS.ETNA_AFFECTION] >= 5
 				},
@@ -77,73 +87,110 @@ use namespace CoC;
 					break;
 			}*/, {
 				name: "mine",
+				label : "Mine",
+				kind  : 'place',
 				when: function ():Boolean {
 					return player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained
 				},
 				call: cavesMine
 			}, {
 				name: "cavewyrn",
+				label : "Cave Wyrm",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					cavewyrmScene.berserkingCaveWyrmEncounter();
 				}
 			}, {
 				name: "darkelf",
+				label : "Dark Elf",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					darkelfScene.introDarkELfRangerCaves();
 				}
 			}, {
 				name: "darkslime",
+				label : "Dark Slime",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					darkslimeScene.cavesDarkSlimeEncounter();
 				}
 			}, {
 				name: "displacerbeast",
+				label : "Displacer Beast",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					displacerbeastScene.displacerBeastEncounter();
 				}
 			}, {
 				name: "",
+				label : 'Walk',
+				kind : 'walk',
 				when: function ():Boolean {
 					return true
 				},
 				call: findNothing
 			}, {
 				name: "findebon",
+				label : "Ebonbloom",
+				kind  : 'item',
 				call: findEbonBloom
 			}, {
 				name: "findcrystal",
+				label : "M. Crystal",
+				kind  : 'item',
 				call: findCrystal
 			}, {
 				name: "findeyedrops",
+				label : "Eyedrops",
+				kind  : 'item',
 				call: findEyeDrops
 			}, {
 				name: "findnothing",
+				label : "Walk",
+				kind  : 'walk',
 				call: findNothing
 			})
 		}
-
+		
+		public const areaLevel:int = 30;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_CAVES] > 0;
+			return SceneLib.exploration.counters.caves > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel && SceneLib.beach.isDiscovered();
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.DISCOVERED_CAVES];
+			return SceneLib.exploration.counters.caves;
 		}
-
-		public function exploreCaves():void {
+		public function discover():void {
+			SceneLib.exploration.counters.caves = 1;
 			clearOutput();
-			flags[kFLAGS.DISCOVERED_CAVES]++;
-			doNext(camp.returnToCampUseOneHour);
-			cavesEncounter.execEncounter();
-			flushOutputTextToGUI();
+			outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
+			outputText("<b>You've discovered the Caves!</b>");
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		
+		public function exploreCaves():void {
+			explorer.prepareArea(cavesEncounter);
+			explorer.setTags("caves");
+			explorer.prompt = "You explore the gloomy caves.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.caves++;
+			}
+			explorer.leave.hint("Leave the gloomy caves");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		public function cavesChance():Number {
 			var temp:Number = 0.5;
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 10) temp *= player.npcChanceToEncounter();
+			temp *= player.npcChanceToEncounter();
 			return temp;
 		}
 
@@ -151,7 +198,8 @@ use namespace CoC;
 			clearOutput();
 			outputText("While exploring one of the many tunnels you begin to see a bluish light, curious as to where this opens you take it all the way to the surface and begin to feel chilly, it's definitely cold out there. What awaits you beyond the exit is the sight of endless tundra and icebound mountains.\n\n");
 			outputText("<b>You've discovered the Tundra!</b>");
-			flags[kFLAGS.DISCOVERED_TUNDRA]++;
+			SceneLib.exploration.counters.tundra = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -160,7 +208,8 @@ use namespace CoC;
 			outputText("While exploring one of the many tunnels you begin to see a red light, curious as to where this opens you take it all the way to the surface as the heat starts to increase dramatically the cool fresh air of the tunnel replaced by a warm and smoky air, it's definitely very hot out there. ");
 			outputText("What awaits you beyond the exit is the sight of a field of ashes and lava with volcanoes in the backside.\n\n");
 			outputText("<b>You've discovered the Ashlands!</b>");
-			flags[kFLAGS.DISCOVERED_ASHLANDS]++;
+			SceneLib.exploration.counters.ashlands = 1;
+			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -169,26 +218,26 @@ use namespace CoC;
 			outputText("You're exploring the vast cave system when you come across a small cavern. As you head further into the cavern you spot something glinting just up ahead. A small crack in the ceiling lets a sliver of light shine down on a dark metallic looking flower growing on top of a stone pillar. ");
 			outputText("Your eyes widen in surprise when you recognize it to be a rare Ebonbloom. Seeing that nothing else is around, you make your way over to the flower then try to pluck it. It doesn't budge at first but with a little more effort you manage to pull the flower free. ");
 			if (silly()) outputText("You suddenly hear dramatic music play as the cavern around you begins to cave in. You don your brown explorer's hat and whip as you make your way out of the collapsing cavern, dodging falling rocks in the process. By the skin of your teeth you escape from the cavern with your treasure in hand. ");
-			inventory.takeItem(useables.EBONBLO, camp.returnToCampUseOneHour);
+			inventory.takeItem(useables.EBONBLO, explorer.done);
 		}
 
 		private function findCrystal():void {
 			clearOutput();
 			outputText("As you explore the cave, you run into a weird neon blue crystal that glow in the dark. You pack it in your backpack in case it could be sold for a decent amount" + (silly() ? ", perhaps to a drug dealer" : "") + ". ");
-			inventory.takeItem(consumables.METHIRC, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.METHIRC, explorer.done);
 		}
 
 		private function findEyeDrops():void {
 			clearOutput();
 			outputText("As you explore the cave, you run into a bottle of eye drops. You pack it in your backpack in case it could be sold for a decent amount. ");
-			inventory.takeItem(consumables.EYEDROP, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.EYEDROP, explorer.done);
 		}
 
 		private function findNothing():void {
 			clearOutput();
 			outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling like you are becoming slightly tougher counts.");
 			dynStats("tou", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function manticoreEncounterFn():void {
@@ -207,7 +256,7 @@ use namespace CoC;
 			outputText("You carefully put the pieces of the Touhouna M3 in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Touhouna M3", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function cavesMine():void {
@@ -216,15 +265,15 @@ use namespace CoC;
 			outputText("Do you wish to mine it?");
 			menu();
 			addButton(0, "Yes", cavesSiteMine);
-			addButton(1, "No", camp.returnToCampUseOneHour);
+			addButton(1, "No", explorer.done);
 		}
 
 		private function cavesSiteMine():void {
-			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
 				if (player.fatigue > player.maxFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the ebony, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -234,11 +283,11 @@ use namespace CoC;
 				SceneLib.forgefatherScene.incrementEbonySupply(minedStones);
 				player.mineXP(player.MiningMulti());
 				findGem();
-				camp.returnToCampUseTwoHours();
 			}
 		}
 
 		private function findGem():void {
+			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
 					inventory.takeItem(useables.AMEGEM, camp.returnToCampUseTwoHours);
