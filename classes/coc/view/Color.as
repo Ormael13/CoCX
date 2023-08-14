@@ -24,7 +24,7 @@ public class Color {
 	public static function convertColorEx(input:Object,alpha:Boolean):uint {
 		var s:String = input as String;
 		if (s) return parseColorString(s);
-		if (input is Number) return uint(input);
+		if (input is Number) return int(input);
 		if (!input) return INVALID_COLOR;
 		if ('r' in input && 'g' in input && 'b' in input) {
 			var r:Number = input.r;

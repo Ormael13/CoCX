@@ -1856,4 +1856,4 @@ public class RiverDungeon extends DungeonAbstractContent
 			playerMenu();
 		}
 	}
-}
+}

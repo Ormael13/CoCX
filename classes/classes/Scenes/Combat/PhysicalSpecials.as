@@ -59,7 +59,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						}
 					}
 					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					
+
 					}
 				}
 				if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {
@@ -6551,4 +6551,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}
