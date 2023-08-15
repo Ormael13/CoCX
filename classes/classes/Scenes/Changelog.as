@@ -49,7 +49,7 @@ public class Changelog extends BaseContent
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 gems. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
-			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Jackal Ears (Anubis TF).\n");//, Fennec Fox Ears (Werefox TF)
+			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Fennec Fox Ears (Werefox TF), Jackal Ears (Anubis TF).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
 			outputText("-New two NPC to toggle off/on their appearing in camp/out of camp: Sophie and maybe many expected and wanted... Helia.\n");
 			outputText("-Dark Elfs won't appear at the surface replaced by their lighter skinned fellow elfs... the light elfs.\n");
@@ -103,15 +103,16 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Hengeyokai Birthright. Req. having free adaptation mutation slot, werewolf race. Effects: Increases HP regeneration 0.5%.\n");
 			outputText("-New tf item (by Liadri): Jackal Date. Dropped by Anubis enemies or founded when exploring Inner Desert. Using this item will turn PC into anubis. Anubi//Anubi high priest/ess bonuses at 20/28 pts in racial score (scalable): +100% to Tou multi, +150/200% to Wis multi, +50/120% to max Lib multi.\n");
 			outputText("-Wereraces bonuses related to moon phase would be now instead of flat bonuses a multi bonuses, for ex. +10 str > +10% str multi.\n");
+			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies or founded when exploring Outer/Inner Desert. Using this item will gradualy turn PC into werefox. Werefox/Elder werefox/Acient werefox bonuses at 12/16/20 pts in racial score (scalable): ");
+			outputText("+10% to Str multi, +100/150/200% to Tou multi, +40/70/100% to Spe multi, +100/150/200% to Wis multi, +70/140/210 to Sens, -10% to max lust multi, +100/150/200% to max soulforce multi, -40% to max mana multi.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: White-Faced One Birthright. Req. having free adaptation mutation slot, werefox race. Effects: Increases soulforce recovery 0.5%.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)

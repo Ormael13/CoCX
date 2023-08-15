@@ -490,6 +490,20 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_TOU]
 						]
 				);
+		public const DESERTB: Consumable = mk("DesertB", "Desert Berry", "a desert berry", 20, "This small orange berry is light in your hands.  It may have gotten its name from been founded usualy in desert regions.  You're certain it is no mere fruit.", m.desertBerry, ItemTags.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						DEFAULT_ESSENCE_DROP_TABLE(AE_WEREFOX),
+						[
+							[1, AR_TOU],
+							[1, AR_SPE],
+							[1, AR_WIS]
+						],
+						concatUnique(
+								FoxRace.FoxHairColors,
+								FoxRace.FoxFurColors
+						)
+				);
 		public const DSLIMEJ: Consumable = mk("DSlimeJ", "DarkSlimeJelly", "a Dark slime jelly", 20, "This looks to be a chunk of inert goop from a dark slime. Consuming this thing may have a weird effect on you.", curry(m.gooGasmic, 2), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,

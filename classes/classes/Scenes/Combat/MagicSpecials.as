@@ -3271,28 +3271,30 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.Lycanthropy) && player.racialScore(Races.WEREWOLF) > 11) {
 			var tempWW:Number = 1;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) tempWW += 0.1;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) tempWW += 0.2;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) tempWW += 0.3;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) tempWW += 0.4;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) tempWW += 0.01;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) tempWW += 0.02;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) tempWW += 0.03;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) tempWW += 0.04;
 			if (tempWW > 1) {
 				if (player.racialScore(Races.WEREWOLF) > 15) tempWW *= 2;
-				temp1 *= tempWW;
-				temp2 *= tempWW;
-				temp3 *= tempWW;
+				if (player.racialScore(Races.WEREWOLF) > 19) tempWF *= 1.5;
+				temp1 *= (tempWW * 10);
+				temp2 *= (tempWW * 6);
+				temp3 *= (tempWW * 4);
 			}
 		}
 		if (player.hasPerk(PerkLib.Vulpesthropy) && player.racialScore(Races.WEREFOX) > 11) {
 			var tempWF:Number = 1;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) tempWF += 0.15;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) tempWF += 0.3;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) tempWF += 0.45;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) tempWF += 0.6;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) tempWF += 0.01;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) tempWF += 0.02;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) tempWF += 0.03;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) tempWF += 0.04;
 			if (tempWF > 1) {
 				if (player.racialScore(Races.WEREFOX) > 15) tempWF *= 2;
 				if (player.racialScore(Races.WEREFOX) > 19) tempWF *= 1.5;
-				temp2 *= tempWF;
-				temp3 *= tempWF;
+				temp1 *= tempWF;
+				temp2 *= (tempWF * 10);
+				temp3 *= (tempWF * 4);
 			}
 		}
 		temp1 = Math.round(temp1);

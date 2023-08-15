@@ -841,6 +841,12 @@ public class FaceTransformations extends MutationsHelper {
 			// apply effect
 			function (doOutput: Boolean): void {
 				var desc: String = "";
+				var startsWithFoxFace: Boolean = player.faceType === Face.FOX;
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+
+				if (!startsWithFoxFace) desc += "You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with fox-like canines.</b>";
+				else desc += "However, your mouth remains filled with fox-like canines."
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.FOX_FANGS;

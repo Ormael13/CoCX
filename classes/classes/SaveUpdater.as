@@ -2252,6 +2252,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.070) {
+				outputText("\n\nIf you not werewolf nothing to worry here...");
 				if (player.hasPerk(PerkLib.Lycanthropy)) {
 					var ngM:Number = (player.newGamePlusMod() + 1);
 					var bonusStats2:Number = 0;

@@ -266,6 +266,12 @@ use namespace CoC;
 					kind  : 'item',
 					chance: 0.3,
 					call  : findDesertLoot1
+				}, {
+					name  : "desertloot2",
+					label : "Berry",
+					kind  : 'item',
+					chance: 0.3,
+					call  : findDesertLoot3
 				}/*, {
 					name: "demonProjects",
 					chance: 0.2,
@@ -357,6 +363,12 @@ use namespace CoC;
 					kind  : 'item',
 					chance: 0.3,
 					call  : findDesertLoot2
+				}, {
+					name  : "desertloot3",
+					label : "Berry",
+					kind  : 'item',
+					chance: 0.3,
+					call  : findDesertLoot3
 				}, {
 					name  : "desertruins",
 					label : "Ruins",
@@ -523,6 +535,11 @@ use namespace CoC;
 			clearOutput();
 			outputText("While exploring the desert you walk into an oasis with clear fresh water and the some date tree. It seems to be your lucky day as this is no mirage.\n");
 			inventory.takeItem(consumables.JACKALD, explorer.done);
+		}
+		private function findDesertLoot3():void {
+			clearOutput();
+			outputText("While exploring the desert you walk into an oasis with clear fresh water and the some spiny, sprawling shrub plants. It seems to be your lucky day as this is no mirage.\n");
+			inventory.takeItem(consumables.DESERTB, explorer.done);
 		}
 		
 		private function findDesertRuins():void {
