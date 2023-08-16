@@ -141,7 +141,7 @@ public class Races {
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
-			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX, MANTICORE, ANUBIS
+			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX, MANTICORE
 	];
 	public static const SnakelikeRaces:/*Race*/Array = [
 			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS

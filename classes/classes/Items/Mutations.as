@@ -15117,6 +15117,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         var Jackal_HairColor:Array = ["brown", "black"];
         var Jackal_FurColor:Array = ["brown", "black"];
+        var Jackal_SkinColor:Array = ["dark", "tan", "olive"];
         //clear screen
         clearOutput();
         outputText("You consume the date. Despite its dried up looking exterior the fruit proves to be rich in flavor and nutrient. A few second later your body heats up as it is overcome by changes.");
@@ -15218,12 +15219,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		//arms
-        /*if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
+        if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CANINE) {
             outputText("[pg]");
-            transformations.ArmsCat.applyEffect();
+            transformations.ArmsCanine.applyEffect();
             changes++;
-        if (player.arms.type != Arms.HOUND) transformations.ArmsHound.applyEffect(doOutput);
-        }*/
+        }
         //tail
         if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.DOG) {
             outputText("[pg]");
@@ -15249,18 +15249,21 @@ public final class Mutations extends MutationsHelper {
 			transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
-        //CAT TOUNGE CUZ WHY NOT?
-        /*if (transformations.TongueCat.isPossible() && rand(3) == 0 && changes < changeLimit) {
+        if (player.tongue.type != Tongue.DOG && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
-            transformations.TongueCat.applyEffect();
+            transformations.TongueDog.applyEffect();
             changes++;
-		if (player.tongue.type != Tongue.DOG) transformations.TongueDog.applyEffect(doOutput);
-        }*/
+        }
         //Change skin to normal
         if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
             if (player.skinAdj != "") player.skinAdj = "";
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
+            changes++;
+        }
+		if (!InCollection(player.hairColor, Jackal_SkinColor) && changes < changeLimit && rand(3) == 0) {
+			player.skinColor = randomChoice(Jackal_SkinColor);
+            outputText("[pg]Your skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinColor + " skin.</b>");
             changes++;
         }
 		//Remove odd eyes

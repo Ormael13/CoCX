@@ -115,9 +115,10 @@ public class Anubis extends Monster
 			this.gems = rand(16) + 30;
 			this.drop = new WeightedDrop().
 					add(useables.BANDAGE,1).
+					add(consumables.JACKALD,1).
 					add(weapons.JUDGE_S,2).
-					add(consumables.JACKALD,2).
-					add(headjewelries.DEATHPR,3);
+					add(headjewelries.DEATHPR,2).
+					add(armors.DEATHPO,2);
 			//this.faceType = Face.SNAKE_FANGS;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);

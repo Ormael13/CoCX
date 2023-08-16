@@ -12,6 +12,7 @@ public class AnubisRace extends Race {
 	public static const AnubisEyeColors:Array = ["red", "green"];
 	public static const AnubisHairColors:Array = ["brown", "black"];
 	public static const AnubisFurColors:Array = ["brown", "black"];
+	public static const AnubisSkinColors:Array = ["dark", "tan", "olive"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -49,14 +50,15 @@ public class AnubisRace extends Race {
 				.eyeType(Eyes.HUMAN, +1)
 				.eyeColor(ANY(AnubisEyeColors), +1)
 				.faceType(ANY(Face.DOG,Face.ANIMAL_TOOTHS), +1)
-				//.tongueType(Tongue.DOG, +1)
-				//.armType(Arms.CAT, +1)
+				.tongueType(Tongue.DOG, +1)
+				.armType(Arms.CANINE, +1)
 				.legType(LowerBody.DOG, +1)
 				.tailType(Tail.DOG, +1)
 				.wingType(Wings.NONE, +4)
 				.furColor1(ANY(AnubisFurColors), +1)
 				.hairColor1(ANY(AnubisHairColors), +1)
 				.hasCockOfType(CockTypesEnum.DOG, +1)//.cockOrVaginaOfType(CockTypesEnum.DOG, VaginaClass.cat,1)
+				.skinColor1(ANY(AnubisSkinColors), +1)
 				.corruption(AT_LEAST(50), +1);
 		
 		buildTier(20, "anubi")

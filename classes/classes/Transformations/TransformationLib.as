@@ -179,6 +179,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsYeti: Transformation 				= arms.ArmsYeti.registerTf(AS_ARMS, AE_YETI);
 	public const ArmsYukiOnna: Transformation 			= arms.ArmsYukiOnna.registerTf(AS_ARMS, AE_YUKI_ONNA);
 	public const ArmsTiny: Transformation 			    = arms.ArmsTiny.registerTf(AS_ARMS, AE_IMP);
+	public const ArmsCanine: Transformation 			= arms.ArmsCanine.registerTf(AS_ARMS, AE_ANUBIS);
 
 
 //ASS
