@@ -100,11 +100,14 @@ public class Changelog extends BaseContent
 			outputText("-New usable item: bandages. Costing 25 gems and it's obtainable from Anubis enemies.\n");
 			outputText("-New armor (by Liadri): Death Prince Outfit - obtained by beating Anubis. Cost 500 gems, 5 magic resistance, +50% Magic Soulskill power, grants 2% regeneration when soulforce is above half.\n");
 			outputText("-New armor (by Liadri): Death Prince Golden Armor - obtainable by giving Death Prince Outfit to Corrupted Celess to corrupt. Cost 19200 gems, 20 armor, 40 magic resistance, empowers Anubi ability by 50%, +200% Magic Soulskill power, grants 5% regeneration when soulforce is above half.\n");
-			outputText("-New mutation perk: Hengeyokai Birthright. Req. having free adaptation mutation slot, werewolf race. Effects: Increases HP regeneration 0.5%.\n");
+			outputText("-New mutation perk: Hengeyokai Birthright. Req. having free adaptation mutation slot, werewolf race. Effects: Increases HP regeneration 0.5-2% based on moon phase. (New moon - 0.5%, Half moon - 1%, Full moon - 2%)\n");
 			outputText("-New tf item (by Liadri): Jackal Date. Dropped by Anubis enemies or founded when exploring Inner Desert. Using this item will turn PC into anubis. Anubi//Anubi high priest/ess bonuses at 20/28 pts in racial score (scalable): +100% to Tou multi, +150/200% to Wis multi, +50/120% to max Lib multi.\n");
 			outputText("-Wereraces bonuses related to moon phase would be now instead of flat bonuses a multi bonuses, for ex. +10 str > +10% str multi.\n");
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies or founded when exploring Outer/Inner Desert. Using this item will gradualy turn PC into werefox. Werefox/Elder werefox/Acient werefox bonuses at 12/16/20 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200% to Tou multi, +40/70/100% to Spe multi, +100/150/200% to Wis multi, +70/140/210 to Sens, -10% to max lust multi, +100/150/200% to max soulforce multi, -40% to max mana multi.\n");
+			outputText("-New mutation perk: Hengeyokai Birthright (Primitive). Req. Hengeyokai Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
+			outputText("-Moon phases been divided futher from Full Moon day and rest into Full Moon (8th day of the cycle), New Moon (4th day of the cycle) and Half Moon (all rest days) with stats page tracker for moon cycle day indicating in which of moon cycle phases is currently.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -114,9 +117,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New mutation perk: White-Faced One Birthright. Req. having free adaptation mutation slot, werefox race. Effects: Increases soulforce recovery 0.5%.
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym; pozwala użyć charge speciala w trakcie trwania a jak postać może użyć charge i tak wzmacnia charge dodatkowo

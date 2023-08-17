@@ -692,6 +692,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TookImpTome:StatusEffectType                    = mk("Took Imp Tome");
 		public static const TrainingNPCsTimersReduction:StatusEffectType    = mk("TrainingNPCsTimersReduction");
 		public static const UshiOnnaVariant:StatusEffectType             	= mk("Ushi Onna Variant");
+		public static const WereraceRegenerationDisabled:StatusEffectType  	= mk("Wererace Regeneration Disabled");
 		public static const WildMalikore:StatusEffectType                   = mk("Wild Malikore");
 		public static const WildManticore:StatusEffectType                  = mk("Wild Manticore");
 		public static const VampireThirst:StatusEffectType                  = VampireThirstEffect.TYPE;

@@ -6750,7 +6750,10 @@ public class Combat extends BaseContent {
             if (Forgefather.refinement == 2 || Forgefather.refinement == 3) unarmedMulti += (.5);
             if (Forgefather.refinement == 4) unarmedMulti += (1);
         }
-        if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
+        if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) {
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) unarmed *= 1.2;
+			else unarmed *= 1.1;
+		}
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.YETI || player.arms.type == Arms.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
@@ -10980,7 +10983,10 @@ public class Combat extends BaseContent {
             healingPercent += PercentBasedRegeneration();
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
             if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
-            if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) healingPercent += 2;
+            if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) {
+				if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) healingPercent += 2;
+				healingPercent += 2;
+			}
             if (player.hasPerk(PerkLib.Sanctuary)) healingPercent += 1;
             if (player.shield == shields.SANCTYL) healingPercent += ((player.corruptionTolerance - player.cor) / (100 + player.corruptionTolerance)) * 4;
             if (player.shield == shields.SANCTYD) healingPercent += (player.cor / (100 + player.corruptionTolerance)) * 4;
@@ -11042,7 +11048,14 @@ public class Combat extends BaseContent {
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
-        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1) maxPercentRegen += 0.5;
+        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+			var hbr:Number = 0.5;
+			var mp:Number = 2;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += 0.5;
+			maxPercentRegen += (hbr * mp);
+		}
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
@@ -11090,14 +11103,24 @@ public class Combat extends BaseContent {
 			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxRegen += 1;
-        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1) maxRegen += 0.5;
+        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
+			var hbr:Number = 0.5;
+			var mp:Number = 2;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += 0.5;
+			maxRegen += (hbr * mp);
+		}
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
-		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
+		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) {
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) maxRegen += 2;
+			maxRegen += 2;
+		}
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;
@@ -11384,10 +11407,12 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 6 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12 * BonusWrathMult;
             if (player.statStore.hasBuff("CrinosShape")) {
-                gainedwrath += 2 * BonusWrathMult;
-                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 2 * BonusWrathMult;
-                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 4 * BonusWrathMult;
-                if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8 * BonusWrathMult;
+				var com:Number = 2;
+                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) com += 2;
+                if (player.hasPerk(PerkLib.GreaterCrinosShape)) com += 4;
+                if (player.hasPerk(PerkLib.MasterCrinosShape)) com += 8;
+				if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) com *= 2;
+                gainedwrath += com * BonusWrathMult;
             }
 			if (player.statStore.hasBuff("AsuraForm")) {
 				gainedwrath += 2 * BonusWrathMult;

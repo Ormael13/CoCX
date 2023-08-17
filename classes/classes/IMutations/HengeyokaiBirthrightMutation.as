@@ -29,7 +29,23 @@ public class HengeyokaiBirthrightMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += "fully developed";
             }
-            if (descS != "")descS += " restorative system modeled after progenitor of all werebeasts.";
+            if (descS != "") descS += " restorative system modeled after progenitor of all werebeasts. (+";
+			if (pTier == 1){
+                descS += "0.5/1/2";
+            }
+			if (pTier == 2){
+                descS += "1/2/4";
+            }
+			if (pTier >= 1){
+                descS += "% HP regen (New moon / Half moon / Full moon)";
+            }
+            if (pTier >= 2){
+                descS += ", double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it";
+            }
+            if (pTier == 4){
+                descS += ", ";
+            }
+            if (descS != "") descS += ")";
             return descS;
         }
 
@@ -81,25 +97,25 @@ public class HengeyokaiBirthrightMutation extends IMutationPerkType
             }
             else if (pTier == 2){
                 pBuffs['str.mult'] = 0.03;
-                pBuffs['spe.mult'] = 0.05;
-                pBuffs['tou.mult'] = 0.01;
+                pBuffs['spe.mult'] = 0.03;
+                pBuffs['tou.mult'] = 0.03;
             }
             else if (pTier == 3){
                 pBuffs['str.mult'] = 0.07;
-                pBuffs['spe.mult'] = 0.1;
-                pBuffs['tou.mult'] = 0.04;
+                pBuffs['spe.mult'] = 0.07;
+                pBuffs['tou.mult'] = 0.07;
             }
             else if (pTier == 4){
                 pBuffs['str.mult'] = 0.15;
-                pBuffs['spe.mult'] = 0.2;
-                pBuffs['tou.mult'] = 0.1;
+                pBuffs['spe.mult'] = 0.15;
+                pBuffs['tou.mult'] = 0.15;
             }
             return pBuffs;
         }
 
         public function HengeyokaiBirthrightMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADAPTATIONS, 1);
+			super(mName + " IM", mName, SLOT_ADAPTATIONS, 2);
         }
 
     }
