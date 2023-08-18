@@ -892,6 +892,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const SkinPatternOrca:Transformation 				= skin.SkinPatternOrca.registerTf(AS_SKIN_PATTERN, AE_ORCA);
     public const SkinPatternSeaDragon:Transformation 			= skin.SkinPatternSeaDragon.registerTf(AS_SKIN_PATTERN, AE_SEA_DRAGON);
     public const SkinPatternArchImp:Transformation 			    = skin.SkinPatternArchImp.registerTf(AS_SKIN_PATTERN, AE_IMP);
+    public const SkinPatternAnubis:Transformation 			    = skin.SkinPatternAnubis.registerTf(AS_SKIN_PATTERN, AE_ANUBIS);
 
 
 //TAIL

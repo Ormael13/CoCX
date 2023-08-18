@@ -55,6 +55,7 @@ public class AnubisRace extends Race {
 				.legType(LowerBody.DOG, +1)
 				.tailType(Tail.DOG, +1)
 				.wingType(Wings.NONE, +4)
+				.skinBasePattern(Skin.PATTERN_GLYPH_TATTOO, +1)
 				.furColor1(ANY(AnubisFurColors), +1)
 				.hairColor1(ANY(AnubisHairColors), +1)
 				.hasCockOfType(CockTypesEnum.DOG, +1)//.cockOrVaginaOfType(CockTypesEnum.DOG, VaginaClass.cat,1)

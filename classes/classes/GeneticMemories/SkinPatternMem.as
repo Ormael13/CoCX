@@ -187,6 +187,17 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const GLYPH:int = _partid++;
+		EnumValue.add(Memories, GLYPH, "GLYPH", {
+			id: "Anubis Glyph Pattern",
+			name: "Glyph Tattoos",
+			cost: 100,
+			title: "Anubis",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.SkinPatternOni
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

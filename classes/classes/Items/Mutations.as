@@ -15266,6 +15266,11 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Your skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinColor + " skin.</b>");
             changes++;
         }
+		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasGlyphTattoo() && rand(3) == 0 && changes < changeLimit) {
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPatternAnubis.applyEffect();
+			changes++;
+		}
 		//Remove odd eyes
 		if (changes < changeLimit && rand(3) == 0 && transformations.EyesHuman.isPossible()) {
 			outputText("[pg]");
@@ -15297,6 +15302,11 @@ public final class Mutations extends MutationsHelper {
 		if (rand(3) == 0 && changes < changeLimit && player.rearBody.type != RearBody.NONE) {
             outputText("[pg]");
             transformations.RearBodyNone.applyEffect();
+            changes++;
+        }
+        if (changes < changeLimit && player.racialScore(Races.ANUBIS) >= 15 && rand(3) == 0 && player.cor >= (50-player.corruptionTolerance)) {
+            outputText("[pg]You begin to fantasize about building up a whole army of slave at your command and with your growing anubi powers this fetish is right within your reach.[pg]<b>(Gained the Mummy Lord perk!)</b>");
+            //player.createPerk(PerkLib., 0, 0, 0, 0);
             changes++;
         }
 		player.refillHunger(10);

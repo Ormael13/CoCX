@@ -49,7 +49,7 @@ public class Changelog extends BaseContent
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 gems. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
-			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Fennec Fox Ears (Werefox TF), Jackal Ears (Anubis TF).\n");
+			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Fennec Fox Ears (Werefox TF), Jackal Ears (Anubis TF), Glyph Tattoos (Anubis TF).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
 			outputText("-New two NPC to toggle off/on their appearing in camp/out of camp: Sophie and maybe many expected and wanted... Helia.\n");
 			outputText("-Dark Elfs won't appear at the surface replaced by their lighter skinned fellow elfs... the light elfs.\n");
@@ -106,10 +106,10 @@ public class Changelog extends BaseContent
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies or founded when exploring Outer/Inner Desert. Using this item will gradualy turn PC into werefox. Werefox/Elder werefox/Acient werefox bonuses at 12/16/20 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200% to Tou multi, +40/70/100% to Spe multi, +100/150/200% to Wis multi, +70/140/210 to Sens, -10% to max lust multi, +100/150/200% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New mutation perk: Hengeyokai Birthright (Primitive). Req. Hengeyokai Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
-			outputText("-Moon phases been divided futher from Full Moon day and rest into Full Moon (8th day of the cycle), New Moon (4th day of the cycle) and Half Moon (all rest days) with stats page tracker for moon cycle day indicating in which of moon cycle phases is currently.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Moon phases been divided further from Full Moon day and rest into Full Moon (8th day of the cycle), New Moon (4th day of the cycle) and Half Moon (rest of the days) with stats page tracker for moon cycle day indicating which moon cycle phase is currently.\n");
+			outputText("-New mutation perk: Anubis Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
+			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
+			outputText("-New event perk: Soul Nexus. Req. having 20+ in anubis score. Effects: An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

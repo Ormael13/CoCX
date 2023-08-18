@@ -444,6 +444,25 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			else{
 				player.buff("RealisticMode").remove();
 			}
+			if (player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) < 15 && player.cor < (50-player.corruptionTolerance)) {
+				outputText("\nWith the waning of your anubi powers so does your ability to command your slaves. No longer hearing your orders your pets keeps to the last command you gave them and stick to the area at the far edge of your camp locked in a small recurring orgy of their own making in order to attempt to sate their unending hunger for sex and life force, something only you in your anubi form or a victim could provide to them.\n\n(<b>Lost the Mummy Lord Perk!</b>)\n");
+				player.removePerk(PerkLib.MummyLord);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.MummyCurse) && player.racialScore(Races.ANUBIS) >= 20) {
+				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				player.createPerk(PerkLib.MummyCurse,0,0,0,0);
+				player.createPerk(PerkLib.DeathPriest,0,0,0,0);
+				player.createPerk(PerkLib.SoulNexus,0,0,0,0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.MummyCurse) && player.racialScore(Races.ANUBIS) < 20) {
+				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Lost Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				player.removePerk(PerkLib.MummyCurse);
+				player.removePerk(PerkLib.DeathPriest);
+				player.removePerk(PerkLib.SoulNexus);
+				needNext = true;
+			}
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
 					outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n");

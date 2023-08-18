@@ -174,7 +174,7 @@ public class OnikiriSake extends Consumable {
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\n");
-      CoC.instance.transformations.SkinPatternOni.applyEffect();
+			CoC.instance.transformations.SkinPatternOni.applyEffect();
 			changes++;
 		}
 		//});

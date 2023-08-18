@@ -3760,6 +3760,14 @@ public class PerkLib
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
 		public static const MindbreakerBrain1toX:MindBreakerBrain = new MindBreakerBrain();
+		public static const SoulNexus:PerkType = mk("Soul Nexus", "Soul Nexus",
+				"An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.");
+		public static const DeathPriest:PerkType = mk("Death Priest", "Death Priest",
+				"Add 100% of wisdom as a modifier to hit points and intelligence.");
+		public static const MummyCurse:PerkType = mk("Mummy Curse", "Mummy Curse",
+				"Defeated humanoids and beastmen with souls can be mummified and enslaved.");
+		public static const MummyLord:PerkType = mk("Mummy Lord", "Mummy Lord",
+				"Can control and gather mummies. Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Alpha Howl also increases the amount of mummies under your control.");
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
 				"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain herbalism experience faster.");
 		public static const NaturalSpellcasting:PerkType = mk("Natural Spellcasting", "Natural Spellcasting",
