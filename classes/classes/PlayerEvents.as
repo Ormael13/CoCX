@@ -449,7 +449,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.MummyLord);
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.MummyCurse) && player.racialScore(Races.ANUBIS) >= 20) {
+			if (!player.hasPerk(PerkLib.MummyCurse) && player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 20) {
 				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.createPerk(PerkLib.MummyCurse,0,0,0,0);
 				player.createPerk(PerkLib.DeathPriest,0,0,0,0);

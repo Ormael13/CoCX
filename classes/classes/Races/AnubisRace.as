@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
 import classes.CoC;
 import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
@@ -61,6 +62,8 @@ public class AnubisRace extends Race {
 				.hasCockOfType(CockTypesEnum.DOG, +1)//.cockOrVaginaOfType(CockTypesEnum.DOG, VaginaClass.cat,1)
 				.skinColor1(ANY(AnubisSkinColors), +1)
 				.corruption(AT_LEAST(50), +1);
+		
+		addMutation(IMutationsLib.AnubiHeartIM);
 		
 		buildTier(20, "anubi")
 				.buffs({

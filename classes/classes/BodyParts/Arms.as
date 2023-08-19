@@ -489,7 +489,7 @@ public class Arms extends BodyPart {
 	public static const CANINE:int = 62;
 	EnumValue.add(Types, CANINE, "CANINE", {
 		name:"canine",
-		appearanceDesc: "Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.",
+		appearanceDesc: "Your arms are covered in thick [fur color] fur ending up with clawed hands with animal like paw pads.",
 		claw: true
 	});
 

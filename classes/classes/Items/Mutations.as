@@ -15213,7 +15213,7 @@ public final class Mutations extends MutationsHelper {
         }
 		//physical changes
 		//legs
-        if (rand(3) == 0 && transformations.LowerBodyDog(2).isPossible() && changes < changeLimit) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.DOG) {
             outputText("[pg]");
             transformations.LowerBodyDog(2).applyEffect();
             changes++;
@@ -15239,7 +15239,7 @@ public final class Mutations extends MutationsHelper {
         //Face!
         // Prevents player with dog face from switching to animal canines then back to dog face and wasting changes
         var startedWithDogFace: Boolean = player.faceType == Face.DOG;
-        if (rand(3) == 0 && changes < changeLimit && transformations.FaceDog.isPossible()) {
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.DOG) {
             outputText("[pg]");
             transformations.FaceDog.applyEffect();
             changes++;
@@ -15283,7 +15283,7 @@ public final class Mutations extends MutationsHelper {
 			else transformations.EyesChangeColor(["green"]).applyEffect();
 			changes++;
 		}
-		if ((player.lowerBody == LowerBody.DOG || player.tailType == Tail.DOG) && !InCollection(player.furColor, Jackal_FurColor) && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody == LowerBody.DOG && player.arms.type == Arms.CANINE && !InCollection(player.furColor, Jackal_FurColor) && changes < changeLimit && rand(3) == 0) {
             player.scaleColor = randomChoice(Jackal_FurColor);
             outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
             changes++;
@@ -15304,9 +15304,9 @@ public final class Mutations extends MutationsHelper {
             transformations.RearBodyNone.applyEffect();
             changes++;
         }
-        if (changes < changeLimit && player.racialScore(Races.ANUBIS) >= 15 && rand(3) == 0 && player.cor >= (50-player.corruptionTolerance)) {
+        if (changes < changeLimit && !player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 15 && rand(3) == 0 && player.cor >= (50-player.corruptionTolerance)) {
             outputText("[pg]You begin to fantasize about building up a whole army of slave at your command and with your growing anubi powers this fetish is right within your reach.[pg]<b>(Gained the Mummy Lord perk!)</b>");
-            //player.createPerk(PerkLib., 0, 0, 0, 0);
+            player.createPerk(PerkLib.MummyLord, 0, 0, 0, 0);
             changes++;
         }
 		player.refillHunger(10);
