@@ -49,7 +49,7 @@ public class Anubis extends Monster
 		
 		public function anubisSoulDrain():void {
 			outputText("The anubis stretches h"+(this.hasVagina()?"er":"is")+" hand out and you feel your soul force being forcefully pulled out drop by drop!");
-			var dmgW1:Number = this.weaponAttack;
+			var dmgW1:Number = this.wis;
 			dmgW1 += wisdomscalingbonus() * 2;
 			player.takeDarknessDamage(dmgW1);
 			this.HP += Math.round(this.maxHP() * 0.2);

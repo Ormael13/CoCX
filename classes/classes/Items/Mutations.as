@@ -11121,11 +11121,47 @@ public final class Mutations extends MutationsHelper {
 			transformations.EarsFennecFox.applyEffect();
             changes++;
         }
-        if (player.tailType != Tail.FOX && changes < changeLimit && rand(3) == 0) {
+        //[Grow Addtl. Fox Tail]
+		var nFoxTails:int = (player.ears.type == Ears.FENNEC_FOX && player.tailType == Tail.FOX) ? player.tailCount : 0;
+        //[Grow Addtl. Fox Tail]
+        if (nFoxTails == 8 && player.level >= 42 && player.wis >= 240 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(9).applyEffect();
+        }
+        if (nFoxTails == 7 && player.level >= 36 && player.wis >= 210 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(8).applyEffect();
+        }
+        if (nFoxTails == 6 && player.level >= 30 && player.wis >= 180 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(7).applyEffect();
+        }
+        if (nFoxTails == 5 && player.level >= 24 && player.wis >= 150 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(6).applyEffect();
+        }
+        if (nFoxTails == 4 && player.level >= 18 && player.wis >= 120 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(5).applyEffect();
+        }
+        if (nFoxTails == 3 && player.level >= 12 && player.wis >= 90 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(4).applyEffect();
+        }
+        if (nFoxTails == 2 && player.level >= 6 && player.wis >= 60 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(3).applyEffect();
+        }
+        if (nFoxTails == 1 && player.wis >= 30 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(2).applyEffect();
+        }
+        //[Grow Fox Tail]
+        if (player.ears.type == Ears.FENNEC_FOX && player.tailType != Tail.FOX && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailFox(1).applyEffect();
-            changes++;
         }
+		//
 		if (player.faceType != Face.FOX_FANGS && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.FaceFoxFangs.applyEffect();

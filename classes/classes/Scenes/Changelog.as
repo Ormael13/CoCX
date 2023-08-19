@@ -97,26 +97,26 @@ public class Changelog extends BaseContent
 			outputText("-Using Crinos Shape as werebeast (wolf/fox) would add bonus to boost from special depending on moon phase (from no bonus to 40%/60%). Reaching higher tier of race like elder/ancient would double/tripple that bonus.\n");
 			outputText("-New head accesory (by Liadri): Death Prince Regalia - obtained by beating Anubis. Cost 800 gems. Increases Soul Skill damage by 20%. Grants 1% regeneration when SF is above half.\n");
 			outputText("-New melee weapon (by Liadri): Judge staff - obtained by beating Anubis. Cost 1600 gems. Base atk is 10. It's large staff type weapon. Increase magic soulskill power by 80% and spellpower by 20%.\n");
-			outputText("-New usable item: bandages. Costing 25 gems and it's obtainable from Anubis enemies.\n");
+			outputText("-New usable item: bandages. Costing 25 gems and it's obtainable from Anubis enemies or bought at Tailor shop in Tel'Adre.\n");
 			outputText("-New armor (by Liadri): Death Prince Outfit - obtained by beating Anubis. Cost 500 gems, 5 magic resistance, +50% Magic Soulskill power, grants 2% regeneration when soulforce is above half.\n");
 			outputText("-New armor (by Liadri): Death Prince Golden Armor - obtainable by giving Death Prince Outfit to Corrupted Celess to corrupt. Cost 19200 gems, 20 armor, 40 magic resistance, empowers Anubi ability by 50%, +200% Magic Soulskill power, grants 5% regeneration when soulforce is above half.\n");
 			outputText("-New mutation perk: Hengeyokai Birthright. Req. having free adaptation mutation slot, werewolf race. Effects: Increases HP regeneration 0.5-2% based on moon phase. (New moon - 0.5%, Half moon - 1%, Full moon - 2%)\n");
 			outputText("-New tf item (by Liadri): Jackal Date. Dropped by Anubis enemies or founded when exploring Inner Desert. Using this item will turn PC into anubis. Anubi//Anubi high priest/ess bonuses at 20/28 pts in racial score (scalable): +100% to Tou multi, +150/200% to Wis multi, +50/120% to max Lib multi.\n");
 			outputText("-Wereraces bonuses related to moon phase would be now instead of flat bonuses a multi bonuses, for ex. +10 str > +10% str multi.\n");
-			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies or founded when exploring Outer/Inner Desert. Using this item will gradualy turn PC into werefox. Werefox/Elder werefox/Acient werefox bonuses at 12/16/20 pts in racial score (scalable): ");
+			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox/Elder werefox/Acient werefox bonuses at 12/16/20 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200% to Tou multi, +40/70/100% to Spe multi, +100/150/200% to Wis multi, +70/140/210 to Sens, -10% to max lust multi, +100/150/200% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New mutation perk: Hengeyokai Birthright (Primitive). Req. Hengeyokai Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
 			outputText("-Moon phases been divided further from Full Moon day and rest into Full Moon (8th day of the cycle), New Moon (4th day of the cycle) and Half Moon (rest of the days) with stats page tracker for moon cycle day indicating which moon cycle phase is currently.\n");
 			outputText("-New mutation perk: Anubis Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
 			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
 			outputText("-New event perk: Soul Nexus. Req. having 20+ in anubis score. Effects: An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New mutation perk: Anubis Heart (Primitive). Req. Anubis Heart and lvl 30+. Effects: Increase Soulskills power by 30%. Soul skills cost 50% more but are twice as effective when above 80% Soulforce.\n");
+			outputText("-Alpha Howl i.mutation can be picked by Anubis race too.\n");
+			outputText("-New magic soulskill: Soul drain. Accessable by having 20+ in anubis racial score. Effects: Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen. (True Damage)\n");
+			outputText("-New magic soulskill: Finger of death. Accessable by having 20+ in anubis racial score. Effects: Once per 6 rounds inflict massive damage. Also damage the opponent's toughness and strength by 10. Ineffective on foes who lack a soul.\n");
+			outputText("-New event perk: Mummy Lord. Req. having 15+ in anubis score and 50+ corruption. Effects: Can control and gather mummies. Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Alpha Howl also increases the amount of mummies under your control.\n");
+			outputText("-New event perk: Dormant Mummy Lord. Req. having 1+ mummies when loosing Mummy Lord perk. Effects: Hmmmm.... none it just let you know your mummies awaits when your PC become able to control mummies again.\n");
+			outputText("-Dominated by werewolf/cerberus female werewolf and enslaved by anubi mummies would count toward current camp population. In case PC loose ability to control mummies due to loosing Mummy Lord perk their population won't count toward total population counter. Also both types of 'camp members' would be listed in player info section under camp population section.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -198,7 +198,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -225,6 +231,9 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

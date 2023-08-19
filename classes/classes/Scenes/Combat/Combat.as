@@ -11263,7 +11263,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
-        if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
+        if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1 && player.tailType == Tail.FOX) soulforceregen += Math.round(player.maxSoulforce() * 0.0025 * player.tailCount);
 		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
@@ -16244,6 +16244,7 @@ public function soulskillMod():Number {
     if (player.hasPerk(PerkLib.InariBlessedKimono)) modss += ((100 - player.cor) * .01);
     if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modss += (player.cor * .01);
 	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 1) modss += .2;
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2) modss += .1;
     if (player.necklaceName == "Yin Yang Amulet") modss += .15;
     if (player.armorName == "Traditional clothes") modss += .4;
 	if (player.headJewelry == headjewelries.DEATHPR) modss += .2;
@@ -16261,6 +16262,7 @@ public function soulskillMod():Number {
             if (player.perkv2(PerkLib.ElementalBody) == 4) modss += .4;
         }
     }
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * 0.8)) modss *= 2;
     modss = Math.round(modss * 100) / 100;
     return modss;
 }
@@ -16347,6 +16349,7 @@ public function soulskillCost():Number {
     if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
     if (player.jewelryName == "fox hairpin") modssc -= .2;
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.2);
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * 0.8)) modssc *= 1.5;
     if (modssc < 0.1) modssc = 0.1;
     modssc = Math.round(modssc * 100) / 100;
     return modssc;

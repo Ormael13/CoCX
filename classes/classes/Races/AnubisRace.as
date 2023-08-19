@@ -61,9 +61,11 @@ public class AnubisRace extends Race {
 				.hairColor1(ANY(AnubisHairColors), +1)
 				.hasCockOfType(CockTypesEnum.DOG, +1)//.cockOrVaginaOfType(CockTypesEnum.DOG, VaginaClass.cat,1)
 				.skinColor1(ANY(AnubisSkinColors), +1)
-				.corruption(AT_LEAST(50), +1);
+				.corruption(AT_LEAST(50), +1)
+				.hasPerk(PerkLib.MummyLord, +1);
 		
 		addMutation(IMutationsLib.AnubiHeartIM);
+		addMutation(IMutationsLib.AlphaHowlIM);
 		
 		buildTier(20, "anubi")
 				.buffs({

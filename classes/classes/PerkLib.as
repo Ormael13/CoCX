@@ -3600,6 +3600,8 @@ public class PerkLib
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const DeadMetabolism:PerkType = mk("Dead metabolism", "Dead metabolism",
 				"Kills off hunger. (hunger meter wouldn't decay with time)");
+		public static const DeathPriest:PerkType = mk("Death Priest", "Death Priest",
+				"Add 100% of wisdom as a modifier to hit points and intelligence.");
 		public static const DemonEnergyThirst:PerkType = mk("Demonic hunger", "Demonic hunger",
 				"You can metabolise sex into energy and can feed from your partners orgasms.");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
@@ -3734,7 +3736,7 @@ public class PerkLib
 		public static const Vulpesthropy:PerkType = mk("Vulpesthropy", "Vulpesthropy",
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage       .");
 		public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
-				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again. A vulpesthrope is never truly cured.")
+				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again.")
 		public static const LactaBovineImmunity:PerkType = mk("Lacta Bovine Immunity", "Lacta Bovine Immunity",
 				"You are seldom immune to all the dangerous effect of minotaur cum but you are also naturaly addicted to it.");
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
@@ -3760,14 +3762,12 @@ public class PerkLib
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
 		public static const MindbreakerBrain1toX:MindBreakerBrain = new MindBreakerBrain();
-		public static const SoulNexus:PerkType = mk("Soul Nexus", "Soul Nexus",
-				"An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.");
-		public static const DeathPriest:PerkType = mk("Death Priest", "Death Priest",
-				"Add 100% of wisdom as a modifier to hit points and intelligence.");
 		public static const MummyCurse:PerkType = mk("Mummy Curse", "Mummy Curse",
 				"Defeated humanoids and beastmen with souls can be mummified and enslaved.");
 		public static const MummyLord:PerkType = mk("Mummy Lord", "Mummy Lord",
 				"Can control and gather mummies. Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Alpha Howl also increases the amount of mummies under your control.");
+		public static const MummyLordDormant:PerkType = mk("Dormant Mummy Lord", "Dormant Mummy Lord",
+				"You not enough of Anubi to command the mummies you created before.");
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
 				"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain herbalism experience faster.");
 		public static const NaturalSpellcasting:PerkType = mk("Natural Spellcasting", "Natural Spellcasting",
@@ -3808,6 +3808,8 @@ public class PerkLib
 				"Naturally small species have better evasion");
 		public static const SoulEater:PerkType = mk("Soul Eater", "Soul eater",
 				"You have the ability to consume souls for power.");
+		public static const SoulNexus:PerkType = mk("Soul Nexus", "Soul Nexus",
+				"An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
 		public static const StrengthOfStone:PerkType = mk("Strenght of stone", "Strenght of stone",

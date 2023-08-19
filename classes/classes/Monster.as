@@ -442,10 +442,12 @@ import flash.utils.getQualifiedClassName;
 		public function addSoulforce(soulforce:Number):void {
 			this.soulforce += soulforce;
 			if (this.soulforce > maxOverSoulforce()) this.soulforce = maxOverSoulforce();
+			if (this.soulforce < 0) this.soulforce = 0;
 		}
 		public function addMana(mana:Number):void {
 			this.mana += mana;
 			if (this.mana > maxOverMana()) this.mana = maxMana();
+			if (this.mana < 0) this.mana = 0;
 		}
 
 		public override function maxLust():Number {

@@ -40,7 +40,7 @@ public class WerefoxRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(Face.FOX_FANGS, +1)
+				.faceType(Face.FOX_FANGS, +2)
 				.eyeType(Eyes.FERAL, +1)
 				.eyeType(NOT(Eyes.FOX), 0,-7)
 				.earType(Ears.FENNEC_FOX, +2)
@@ -58,8 +58,7 @@ public class WerefoxRace extends Race {
 				)
 				.skinCoatType(Skin.FUR, +1)
 				.rearType(RearBody.WOLF_COLLAR, +1)
-				.corruption(AT_LEAST(20), +2)
-				.hasPerk(PerkLib.Vulpesthropy, +1, -11);
+				.hasPerk(PerkLib.Vulpesthropy, +2, -12);
 		
 		addMutation(IMutationsLib.WhiteFacedOneBirthrightIM);
 		

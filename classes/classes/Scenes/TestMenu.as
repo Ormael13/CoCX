@@ -312,14 +312,9 @@ public class TestMenu extends BaseContent
 		inventory.takeItem(necklaces.CATBELL, curry(NonEquipmentMenu, 2));
 	}
 	public function desertBerryTest():void {
-			player.lowerBody = LowerBody.FOX;
-			if (player.legCount != 2) player.legCount = 2;
 			player.tailType = Tail.FOX;
-			//if (player.tailCount != 1) player.tailCount = 1;
+			if (player.tailCount != 1) player.tailCount = 1;
 			player.rearBody.type = RearBody.WOLF_COLLAR;
-			player.arms.type = Arms.FOX;
-			CoC.instance.transformations.FaceFoxFangs.applyEffect(false);
-			player.ears.type = Ears.FENNEC_FOX;
 			player.eyes.type = Eyes.FERAL;
 			//player.tongue.type = Tongue.;
 			player.wings.type = Wings.NONE;
@@ -353,7 +348,6 @@ public class TestMenu extends BaseContent
 			player.trainStat('tou', +5, 100);
 			player.trainStat('spe', +5, 100);
 			player.trainStat('wis', +5, 100);
-			player.dynStats("cor", 20);
 			statScreenRefresh();
 	}
 	public function fixShards():void {
@@ -1767,7 +1761,7 @@ public class TestMenu extends BaseContent
 			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 			addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
-			addButton(4, "Ruby Crystal", AddRubyCrystal).hint("Add 1 kitshoo TF.");
+			addButton(4, "Desert Berry", AddDesertBerry).hint("Add 1 werefox TF.");
 			addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 			addButton(6, "dragonshit", AddDragonShit).hint("Add dragon stuff for jabberwocky test.");
 			addButton(7, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
@@ -1996,9 +1990,9 @@ public class TestMenu extends BaseContent
 		outputText("\n\n<b>(Gained 1 Cyclop TF)</b>\n\n");
 		inventory.takeItem(consumables.EYEDROP, curry(NonEquipmentMenu, 1));
 	}
-	public function AddRubyCrystal():void {
-		outputText("\n\n<b>(Gained 1 Kitshoo TF)</b>\n\n");
-		inventory.takeItem(consumables.RUBYCRY, curry(NonEquipmentMenu, 2));
+	public function AddDesertBerry():void {
+		outputText("\n\n<b>(Gained 1 Werefox TF)</b>\n\n");
+		inventory.takeItem(consumables.DESERTB, curry(NonEquipmentMenu, 2));
 	}
 	public function AddVoltageTopaz():void {
 		outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");

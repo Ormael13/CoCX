@@ -446,6 +446,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) < 15 && player.cor < (50-player.corruptionTolerance)) {
 				outputText("\nWith the waning of your anubi powers so does your ability to command your slaves. No longer hearing your orders your pets keeps to the last command you gave them and stick to the area at the far edge of your camp locked in a small recurring orgy of their own making in order to attempt to sate their unending hunger for sex and life force, something only you in your anubi form or a victim could provide to them.\n\n(<b>Lost the Mummy Lord Perk!</b>)\n");
+				if (player.perkv1(PerkLib.MummyLord) > 0) {
+					var mummies:Number = player.perkv1(PerkLib.MummyLord);
+					player.createPerk(PerkLib.MummyLordDormant,mummies,0,0,0);
+				}
 				player.removePerk(PerkLib.MummyLord);
 				needNext = true;
 			}

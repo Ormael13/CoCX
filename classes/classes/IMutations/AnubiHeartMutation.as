@@ -19,11 +19,14 @@ public class AnubiHeartMutation extends IMutationPerkType
             if (pTier >= 1){
                 descS = "Increase Soulskills power by ";
             }
-            if (pTier == 1){
+            if (pTier == 1 || pTier == 2){
                 descS = "20%";
             }
+            if (pTier == 3 || pTier == 4){
+                descS = "30%";
+            }
             if (pTier >= 2){
-                descS = "Each heartbeat fills your body with great power. (+2 Fatigue / +8 SF / +10 Mana / +2 Wrath regen, +5% of max core Str as phantom Str)";
+                descS = ". Soul skills cost 50% more but are twice as effective when above 80% Soulforce";
             }
             if (pTier >= 3){
                 descS = "Your heart metamorphosis reached pseudo-dragon level. (+3 Fatigue / +12 SF / +15 Mana / +3 Wrath regen, +1% HP regen, +15% of max core Str as phantom Str)";
@@ -79,7 +82,7 @@ public class AnubiHeartMutation extends IMutationPerkType
 
         public function AnubiHeartMutation() 
 		{
-			super(mName + " IM", mName, SLOT_HEART, 1);
+			super(mName + " IM", mName, SLOT_HEART, 2);
         }
 
     }

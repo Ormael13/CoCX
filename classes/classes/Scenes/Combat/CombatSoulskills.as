@@ -311,6 +311,32 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
 			}
 		}
+		if (player.racialScore(Races.ANUBIS) >= 20) {
+			bd = buttons.add("Soul drain", SoulDrain).hint("Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+			if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
+				bd.disable("You can't use this soulskill on somoene truly souless.");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if (player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			}
+			
+		}
+		if (player.racialScore(Races.ANUBIS) >= 20) {
+			bd = buttons.add("Finger of death", FingerOfDeath).hint("Inflict massive damage. Also damage the opponent's toughness and strength by 10%. Ineffective on foes who lack a soul.  \n\nWould go into cooldown after use for: 6 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(200 * soulskillCost() * soulskillcostmulti()));
+			if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
+				bd.disable("You can't use this soulskill on somoene truly souless.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownFingerOfDeath)) {
+				bd.disable("You need more time before you can use Grandiose Hail of Blades again.");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 300 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (200 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
 			bd = buttons.add("Blood Swipe", bloodSwipe)
 					.hint("Blood Swipe will fire three red lines of blood energy from your hand.  " +
@@ -1434,6 +1460,79 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		outputText(".\n\n");
 		enemyAI();
+	}
+
+	public function SoulDrain():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You reach out with your magic and attempt to tear a part of your opponent soul. [monster his] scream in pain and horror as you attack [monster his] very essence!  ");
+		var soulforcecost:Number = 100 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		var damage:Number = scalingBonusWisdom();
+		if (damage < 10) damage = 10;
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		HPChange(Math.round(player.maxHP() * 0.2), true);
+		monster.addSoulforce(-Math.round(monster.maxSoulforce() * 0.2)); 
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function FingerOfDeath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You point a finger at your opponent condemning [monster his] soul as you call on to the power of death to claim a part of [monster him] early! A ghastly claw appears and pierce through [themonster] body tearing [monster his] soul appart.  ");
+		var soulforcecost:Number = 300 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
+		else player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 6, 0, 0, 0);
+		var damage:Number = player.wis * 1.5;
+		damage += scalingBonusWisdom() * 1.5;
+		if (damage < 15) damage = 15;
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		outputText(" ");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		monster.statStore.addBuffObject({str:-10,tou:-10}, "Finger of death",{text:"Finger of death"});
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
 	}
 	
 	public function bloodSwipe():void {
