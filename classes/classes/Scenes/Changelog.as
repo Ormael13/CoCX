@@ -131,6 +131,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int,
 			outputText("-\n");// hp regen - zuzywa hp and/or sf per turn aby być aktywnym; pozwala użyć charge speciala w trakcie trwania a jak postać może użyć charge i tak wzmacnia charge dodatkowo
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling\n");
@@ -189,7 +196,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -214,6 +225,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

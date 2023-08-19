@@ -11374,7 +11374,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.tailType == Tail.KITSHOO && !InCollection(player.furColor, KitshooRace.KitshooFurColors) && changes < changeLimit && rand(2) == 0) {
-            player.scaleColor = randomChoice(KitshooRace.KitshooScaleColors);
+            player.furColor = randomChoice(KitshooRace.KitshooScaleColors);
             outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
             changes++;
         }
@@ -15284,7 +15284,7 @@ public final class Mutations extends MutationsHelper {
 			changes++;
 		}
 		if (player.lowerBody == LowerBody.DOG && player.arms.type == Arms.CANINE && !InCollection(player.furColor, Jackal_FurColor) && changes < changeLimit && rand(3) == 0) {
-            player.scaleColor = randomChoice(Jackal_FurColor);
+            player.furColor = randomChoice(Jackal_FurColor);
             outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
             changes++;
         }
