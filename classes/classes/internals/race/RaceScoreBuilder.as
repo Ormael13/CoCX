@@ -100,6 +100,17 @@ public class RaceScoreBuilder {
 		);
 		return this;
 	}
+	public function furColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"skin coat",
+						" colored ",
+						slotRequirement(BodyData.SLOT_FUR_COLOR2, color, score, failScore, false),
+						slotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, Skin.FUR, score, failScore)
+				), customName
+		);
+		return this;
+	}
 	public function gillType(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_GILLS_TYPE, value, score, failScore, customName);
 		return this;
@@ -117,6 +128,10 @@ public class RaceScoreBuilder {
 	}
 	public function hairColor1(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HAIR_COLOR1, type, score, failScore, customName);
+		return this;
+	}
+	public function hairColor2(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HAIR_COLOR2, type, score, failScore, customName);
 		return this;
 	}
 	public function hairTypeAndColor1(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {

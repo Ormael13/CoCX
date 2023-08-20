@@ -478,7 +478,7 @@ private function changeBeardStyle():void {
 	addButton(1, "Goatee", chooseBeardStyleFinalize, 1);
 	addButton(2, "Clean-cut", chooseBeardStyleFinalize, 2);
 	addButton(3, "Mountainman", chooseBeardStyleFinalize, 3);
-	addButton(4, "Back", beardMenu);
+	addButton(4, "Back", beardMenu)
 }
 
 private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {

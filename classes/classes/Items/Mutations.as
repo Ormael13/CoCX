@@ -6458,7 +6458,7 @@ public final class Mutations extends MutationsHelper {
                 transformations.SkinPlain.applyEffect();
             }
 
-            transformations.SkinFur(Skin.COVERAGE_LOW, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_LOW, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white"]}).applyEffect();
 
             changes++;
         }
@@ -6709,9 +6709,11 @@ public final class Mutations extends MutationsHelper {
         }
         //cheshire fur color
         if (rand(4) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
-            outputText("[pg]Your fur and hair color are suddenly changing as lilac fur covered with white stripe begins to cover every area you have fur on. Your hair also changed color to match it turning to lilac strands separated by white strands every now and then. This change makes you feel like smiling at the absurdity of it all.");
-            player.hairColor = "lilac and white";
-            player.furColor = "lilac and white";
+            outputText("[pg]Your fur and hair color are suddenly changing as dark fur covered with light purple stripe begins to cover every area you have fur on. Your hair also changed color to match it turning to lilac strands separated by white strands every now and then. This change makes you feel like smiling at the absurdity of it all.");
+            player.hairColor1 = "dark purple";
+            player.furColor1 = "light purple";
+            player.hairColor2 = "dark purple";
+            player.furColor2 = "light purple";
             changes++;
         }
         //switching between low and high coverage of fur

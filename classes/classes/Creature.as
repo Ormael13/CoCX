@@ -1176,6 +1176,12 @@ public class Creature extends Utils
 		public function get hairColor2():String {
 			return bodyMaterials[BodyMaterial.HAIR].color2;
 		}
+		public function set hairColor1(value:String):void {
+			bodyMaterials[BodyMaterial.HAIR].color1 = value;
+		}
+		public function set hairColor2(value:String):void {
+			bodyMaterials[BodyMaterial.HAIR].color2 = value;
+		}
 		public function set hairColor(value:String):void {
 			bodyMaterials[BodyMaterial.HAIR].color = value;
 		}

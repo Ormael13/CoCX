@@ -214,8 +214,16 @@ public class BodyData {
 		name: "fur primary color",
 		suffix: "fur"
 	});
+	public static const SLOT_FUR_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_FUR_COLOR2, "FUR_COLOR2", {
+		name: "fur secondary color",
+		suffix: "fur"
+	});
 	public function get furColor1():String {
 		return data[SLOT_FUR_COLOR1];
+	}
+	public function get furColor2():String {
+		return data[SLOT_FUR_COLOR2];
 	}
 	
 	public static const SLOT_GILLS_TYPE:int = _slotid++;
@@ -255,10 +263,19 @@ public class BodyData {
 		name:"hair primary color",
 		suffix:"hair"
 	});
+	public static const SLOT_HAIR_COLOR2:int = _slotid++;
+	EnumValue.add(Slots,SLOT_HAIR_COLOR2, "HAIR_COLOR2", {
+		name:"hair secondary color",
+		suffix:"hair"
+	});
 	public function get hairColor1():String {
 		return data[SLOT_HAIR_COLOR1];
 	}
-	
+	public function get hairColor2():String {
+		return data[SLOT_HAIR_COLOR2];
+	}
+
+
 	public static const SLOT_HORN_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_HORN_TYPE, "HORN_TYPE", {
 		name:"horns",
@@ -782,10 +799,12 @@ public class BodyData {
 		data[SLOT_FACE_TYPE]         = player.facePart.type;
 		data[SLOT_FUR_COLORS]        = player.furColor;
 		data[SLOT_FUR_COLOR1]        = player.furColor1;
+		data[SLOT_FUR_COLOR2]        = player.furColor2;
 		data[SLOT_GILLS_TYPE]        = player.gills.type;
 		data[SLOT_HAIR_TYPE]         = player.hairType;
 		data[SLOT_HAIR_COLORS]       = player.hairColor;
 		data[SLOT_HAIR_COLOR1]       = player.hairColor1;
+		data[SLOT_HAIR_COLOR2]       = player.hairColor2;
 		data[SLOT_HORN_TYPE]         = player.horns.type;
 		data[SLOT_HORN_COUNT]        = player.horns.count;
 		data[SLOT_LEG_TYPE]          = player.lowerBodyPart.type;
