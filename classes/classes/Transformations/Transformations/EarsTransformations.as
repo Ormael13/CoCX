@@ -797,6 +797,23 @@ public class EarsTransformations extends MutationsHelper {
 				return player.ears.type === Ears.FENNEC_FOX;
 			}
 	);
+
+	public const EarsJackal: Transformation = new SimpleTransformation("Jackal Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You moan as your ears suddenly become extremely sensitive making you twitch uncontrollably as they migrate toward the top of your head, growing pointier and bigger. Putting your hands to your new ears you discover they are now covered with a fair amount of fur. <b>You now have jackals ears.</b>";
+
+				player.ears.type = Ears.JACKAL;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.JACKAL));
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.JACKAL;
+			}
+	);
 	/*
   */
 }

@@ -2096,7 +2096,7 @@ public final class Mutations extends MutationsHelper {
         //Master Furry Appearance Order:
         //Tail -> Ears -> Paws -> Arms -> Fur -> Face
         //Dog-face requires fur & paws  Should be last morph to take place
-        if (rand(4) == 0 && changes < changeLimit && transformations.FaceDog.isPossible()) {
+        if (rand(3) == 0 && changes < changeLimit && transformations.FaceDog.isPossible()) {
             outputText("[pg]");
             transformations.FaceDog.applyEffect();
             changes++;
@@ -2431,7 +2431,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Face!
-        if ((((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && rand(4) == 0) || rand(10) == 0) && changes < changeLimit) {
+        if ((((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && rand(3) == 0) || rand(10) == 0) && changes < changeLimit) {
             outputText("[pg]");
             if (player.faceType != Face.ANIMAL_TOOTHS) {
                 transformations.FaceAnimalTeeth.applyEffect();
@@ -2468,13 +2468,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (rand(5) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
+        if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
             outputText("[pg]");
             CoC.instance.transformations.AntennaeNone.applyEffect();
             changes++;
         }
 
-        if (rand(5) == 0 && changes < changeLimit && player.rearBody.type != RearBody.NONE) {
+        if (rand(3) == 0 && changes < changeLimit && player.rearBody.type != RearBody.NONE) {
             outputText("[pg]");
             transformations.RearBodyNone.applyEffect();
             changes++;
@@ -4598,7 +4598,7 @@ public final class Mutations extends MutationsHelper {
             outputText(" turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
         }
         //Face!
-        if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.ELFIN) {
+        if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.ELFIN) {
             if (player.faceType != Face.ANIMAL_TOOTHS) {
                 outputText("[pg]");
                 transformations.FaceAnimalTeeth.applyEffect();
@@ -10806,13 +10806,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (player.blockingBodyTransformations()) changeLimit = 0;
-
-        if (!InCollection(player.hairColor, FoxRace.FoxHairColors, KitsuneRace.KitsuneHairColors) && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.hairColor, FoxRace.FoxHairColors, KitsuneRace.KitsuneHairColors) && changes < changeLimit && rand(3) == 0) {
             if (player.tailType == Tail.FOX && player.tailCount > 1)
                 if (player.tailCount < 9) player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
                 else player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
             else player.hairColor = randomChoice(FoxRace.FoxHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
+            changes++;
         }
         //[Adjust hips toward 10 – wide/curvy/flared]
         if (changes < changeLimit && rand(3) == 0 && player.hips.type != 10) {
@@ -10840,7 +10840,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //[Adjust hair length toward range of 16-26 – very long to ass-length]
-        if (player.hairType != 4 && (player.hairLength > 26 || player.hairLength < 16) && changes < changeLimit && rand(4) == 0) {
+        if (player.hairType != 4 && (player.hairLength > 26 || player.hairLength < 16) && changes < changeLimit && rand(3) == 0) {
             if (player.hairLength < 16) {
                 player.hairLength += 1 + rand(4);
                 outputText("[pg]You experience a tingling sensation in your scalp.  Feeling a bit off-balance, you discover your hair has lengthened, becoming " + num2Text(Math.round(player.hairLength)) + " inches long.");
@@ -10850,12 +10850,12 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        if (changes < changeLimit && rand(10) == 0) {
+        if (changes < changeLimit && rand(5) == 0) {
             outputText("[pg]You sigh as the exotic flavor washes through you, and unbidden, you begin to daydream.  Sprinting through the thicket, you can feel the corners of your muzzle curling up into a mischievous grin.  You smell the scent of demons, and not far away either.  With your belly full and throat watered, now is the perfect time for a little bit of trickery.   As the odor intensifies, you slow your playful gait and begin to creep a bit more carefully.");
             outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefully prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
             outputText("[pg]They don't even notice, so lost in the subconscious copulation as they are.  Satisfied at your petty tricks, you scurry off into the night, a red blur amidst the foliage.");
             changes++;
-            fatigue(-10);
+            fatigue(-Math.round(player.fatigue * 0.05));
         }
 
         //fox cocks!
@@ -10872,7 +10872,6 @@ public final class Mutations extends MutationsHelper {
                 transformations.CockFox(select).applyEffect();
                 changes++;
             }
-
         }
         //Cum Multiplier Xform
         if (player.cumQ() < 5000 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
@@ -10945,7 +10944,7 @@ public final class Mutations extends MutationsHelper {
         }
         //[Grow Fur]
         //FOURTH
-        if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.isFurCovered() && changes < changeLimit && rand(4) == 0) {
+        if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.isFurCovered() && changes < changeLimit && rand(3) == 0) {
             if (player.racialScore(Races.KITSUNE, false) >= 4)
                 if (InCollection(player.hairColor, KitsuneRace.KitsuneFurColors)) {
                     player.furColor = player.hairColor;
@@ -10962,27 +10961,27 @@ public final class Mutations extends MutationsHelper {
         }
         //[Grow Fox Legs]
         //THIRD
-        if ((enhanced || player.ears.type == Ears.FOX) && player.lowerBody != LowerBody.FOX && changes < changeLimit && rand(5) == 0) {
+        if ((enhanced || player.ears.type == Ears.FOX) && player.lowerBody != LowerBody.FOX && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyFox(2).applyEffect();
             changes++;
         }
         //Grow Fox Arms
-        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && rand(2) == 0) {
+        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsFox.applyEffect();
             changes++;
         }
         //Grow Fox Ears]
         //SECOND
-        if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && changes < changeLimit && rand(4) == 0) {
+        if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsFox.applyEffect();
             changes++;
         }
         //[Grow Fox Tail](fairly common)
         //FIRST
-        if (player.tailType != Tail.FOX && changes < changeLimit && rand(4) == 0) {
+        if (player.tailType != Tail.FOX && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailFox(1).applyEffect();
             changes++;
@@ -10990,18 +10989,18 @@ public final class Mutations extends MutationsHelper {
         //[Grow Fox Face]
         //LAST - muzzlygoodness
         //should work from any face, including other muzzles
-        if (player.tailType == Tail.FOX && player.faceType != Face.FOX && changes < changeLimit && rand(4) == 0) {
+        if (player.tailType == Tail.FOX && player.faceType != Face.FOX && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.FaceFox.applyEffect();
             changes++;
         }
         //Fox Eyes
-        if (player.faceType == Face.FOX && player.eyes.type != Eyes.FOX && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType == Face.FOX && player.eyes.type != Eyes.FOX && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.EyesFox.applyEffect();
             changes++;
         }
-        if (player.tone > 40 && changes < changeLimit && rand(2) == 0) {
+        if (player.tone > 40 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]Moving brings with it a little more jiggle than you're used to.  You don't seem to have gained weight, but your muscles seem less visible, and various parts of you are pleasantly softer.");
             player.tone -= 4;
         }
@@ -11017,11 +11016,183 @@ public final class Mutations extends MutationsHelper {
         }
         if (changes == 0) {
             outputText("[pg]Well that didn't do much, but you do feel a little refreshed!");
-            fatigue(-5);
+            fatigue(-50);
         }
         player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function desertBerry(player:Player):void {
+		clearOutput();
+        outputText("You examine the berry a bit, rolling the orange fruit in your hand for a moment before you decide to take the plunge and chow down.  It's tart and sweet at the same time, and the flavors seem to burst across your tongue with potent strength.  Juice runs from the corners of your lips as you finish the tasty snack.");
+		var changes:int = 0;
+        var changeLimit:int = 1;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
+		//Used for dick and boob TFs
+        var counter:int = 0;
+        if (changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips.");
+            if (MutagenBonus("wis", 4)) changes++;
+            if (player.sens < 200) player.addCurse("sen", 1, 1);
+        }
+		if (changes < changeLimit && rand(2) == 0 && MutagenBonus("tou", 4)) {
+            if (player.tou < 50)
+                outputText("[pg]Your body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher your hide has gotten.");
+            else if (player.tou < 100)
+                outputText("[pg]You grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
+            else
+                outputText("[pg]You snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your [skin.type] getting tough enough to make you feel invincible.");
+            changes++;
+        }
+		if (rand(3) == 0 && changes < changeLimit && MutagenBonus("spe", 2)) {
+            outputText("[pg]You feel fleet and lighter on your toes; you sense you could dodge, dart or skip away from anything.");
+            changes++;
+        }
+        if (changes < changeLimit && rand(5) == 0) {
+            outputText("[pg]You sigh as the exotic flavor washes through you, and unbidden, you begin to daydream.  Sprinting through the thicket, you can feel the corners of your muzzle curling up into a mischievous grin.  You smell the scent of demons, and not far away either.  With your belly full and throat watered, now is the perfect time for a little bit of trickery.   As the odor intensifies, you slow your playful gait and begin to creep a bit more carefully.");
+            outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefully prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
+            outputText("[pg]They don't even notice, so lost in the subconscious copulation as they are.  Satisfied at your petty tricks, you scurry off into the night, a red blur amidst the foliage.");
+            changes++;
+            fatigue(-Math.round(player.fatigue * 0.05));
+        }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
+        if (!InCollection(player.hairColor, FoxRace.FoxHairColors) && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(FoxRace.FoxHairColors);
+            outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
+            changes++;
+        }
+		//fox cocks!
+        if (changes < changeLimit && rand(3) == 0 && player.foxCocks() < player.cocks.length) {
+            var choices:Array = [];
+            counter = player.cockTotal();
+            while (counter > 0) {
+                counter--;
+                //Add non-fox locations to the array
+                if (!InCollection(player.cocks[counter].cockType, CockTypesEnum.FOX, CockTypesEnum.DOG)) choices[choices.length] = counter;
+            }
+            if (choices.length != 0) {
+                var select:int = choices[rand(choices.length)];
+                transformations.CockFox(select).applyEffect();
+                changes++;
+            }
+        }
+        //Cum Multiplier Xform
+        if (player.cumQ() < 5000 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
+            var mult:int = 2 + rand(4);
+            //Lots of cum raises cum multiplier cap to 3 instead of 1.5
+            if (player.hasPerk(PerkLib.MessyOrgasms)) mult += rand(20);
+            player.cumMultiplier += mult;
+            //Flavor text
+            if (player.balls == 0) outputText("[pg]You feel a churning inside your gut as something inside you changes.");
+            if (player.hasBalls()) outputText("[pg]You feel a churning in your [balls].  It quickly settles, leaving them feeling somewhat more dense.");
+            outputText("  A bit of milky pre dribbles from your [cocks], pushed out by the change.");
+            changes++;
+        }
+        if (changes < changeLimit && player.hasBalls() && player.ballSize > 4 && rand(3) == 0) {
+            outputText("[pg]Your [sack] gets lighter and lighter, the skin pulling tight around your shrinking balls until you can't help but check yourself.");
+            if (player.ballSize > 10) player.ballSize -= 5;
+            if (player.ballSize > 20) player.ballSize -= 4;
+            if (player.ballSize > 30) player.ballSize -= 4;
+            if (player.ballSize > 40) player.ballSize -= 4;
+            if (player.ballSize > 50) player.ballSize -= 8;
+            if (player.ballSize > 60) player.ballSize -= 8;
+            if (player.ballSize <= 10) player.ballSize--;
+            changes++;
+            outputText("  You now have a [balls].");
+        }
+		if (!player.isFurCovered() && changes < changeLimit && rand(3) == 0) {
+            player.furColor = randomChoice(FoxRace.FoxFurColors);
+            outputText("[pg]");
+            transformations.SkinFur().applyEffect();
+            changes++;
+        }
+		if (player.lowerBody != LowerBody.FOX && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.LowerBodyFox(2).applyEffect();
+            changes++;
+        }
+        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.ArmsFox.applyEffect();
+            changes++;
+        }
+		if (player.ears.type != Ears.FENNEC_FOX && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+			transformations.EarsFennecFox.applyEffect();
+            changes++;
+        }
+        //[Grow Addtl. Fox Tail]
+		var nFoxTails:int = (player.ears.type == Ears.FENNEC_FOX && player.tailType == Tail.FOX) ? player.tailCount : 0;
+        //[Grow Addtl. Fox Tail]
+        if (nFoxTails == 8 && player.level >= 42 && player.wis >= 240 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(9).applyEffect();
+        }
+        if (nFoxTails == 7 && player.level >= 36 && player.wis >= 210 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(8).applyEffect();
+        }
+        if (nFoxTails == 6 && player.level >= 30 && player.wis >= 180 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(7).applyEffect();
+        }
+        if (nFoxTails == 5 && player.level >= 24 && player.wis >= 150 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(6).applyEffect();
+        }
+        if (nFoxTails == 4 && player.level >= 18 && player.wis >= 120 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(5).applyEffect();
+        }
+        if (nFoxTails == 3 && player.level >= 12 && player.wis >= 90 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(4).applyEffect();
+        }
+        if (nFoxTails == 2 && player.level >= 6 && player.wis >= 60 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(3).applyEffect();
+        }
+        if (nFoxTails == 1 && player.wis >= 30 && changes < changeLimit && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(2).applyEffect();
+        }
+        //[Grow Fox Tail]
+        if (player.ears.type == Ears.FENNEC_FOX && player.tailType != Tail.FOX && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.TailFox(1).applyEffect();
+        }
+		//
+		if (player.faceType != Face.FOX_FANGS && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.FaceFoxFangs.applyEffect();
+            changes++;
+        }/*
+		if (player.faceType == Face.FOX_FANGS && player.eyes.type != Eyes.FERAL && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.EyesFox.applyEffect();
+            changes++;
+        }
+        if (player.rearBody.type != RearBody.WOLF_COLLAR && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
+            transformations.RearBodyRaijuMane.applyEffect();
+            changes++;
+        }
+        if (player.lowerBody == LowerBody.FOX && player.arms.type == Arms.FOX && player.faceType == Face.FOX_FANGS && player.eyes.type == Eyes.FERAL && player.skin.hasScarShapedTattoo() && !player.hasPerk(PerkLib.Vulpesthropy) && changes < changeLimit) {
+            outputText("[pg]You feel a limitless energy fill your orcish limbs, as your body tenses, rippling muscle making your scar-like tattoos look even more realistic. Your [face] gains a look of reverence has you hear the all mighty words of your goddess, telling you to go and claim new lands, conquer all living things, bring them beneath your rule.");
+            outputText("[pg]She tells you that as long as you bear her blessing, you will not fall in battle, even if fatal blows are dealt. Go forth and prove that puny human who said people die when they are killed wrong.");
+            outputText("[pg]<b>(Gained Perk: Vulpesthropy</b>)");
+            player.createPerk(PerkLib.Vulpesthropy, 0, 0, 0, 0);
+            changes++;
+        }*/
+        if (changes == 0) {
+            outputText("[pg]Well that didn't do much, but you do feel a little refreshed!");
+            fatigue(-50);
+        }
+        player.refillHunger(15);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+	}
 
     public function rubycrystal(player:Player):void {
         player.slimeFeed();
@@ -11241,7 +11412,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.tailType == Tail.KITSHOO && !InCollection(player.furColor, KitshooRace.KitshooFurColors) && changes < changeLimit && rand(2) == 0) {
-            player.scaleColor = randomChoice(KitshooRace.KitshooScaleColors);
+            player.furColor = randomChoice(KitshooRace.KitshooScaleColors);
             outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
             changes++;
         }
@@ -14965,6 +15136,220 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function jackalDate(player:Player):void {
+		player.slimeFeed();
+        //init variables
+        var choice:int;
+		var changes:Number = 0;
+        var changeLimit:Number = 2;
+        //Temporary storage
+        var temp2:Number = 0;
+        var temp3:Number = 0;
+        var crit:Number = int(Math.random() * 20) / 10 + 2;
+        //var temp3:Number = 0;
+        //Randomly choose affects limit
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(2) == 0) changeLimit++;
+        changeLimit += player.additionalTransformationChances;
+        var Jackal_HairColor:Array = ["brown", "black"];
+        var Jackal_FurColor:Array = ["brown", "black"];
+        var Jackal_SkinColor:Array = ["dark", "tan", "olive"];
+        //clear screen
+        clearOutput();
+        outputText("You consume the date. Despite its dried up looking exterior the fruit proves to be rich in flavor and nutrient. A few second later your body heats up as it is overcome by changes.");
+		//wis change
+        if (changes < changeLimit && rand(3) == 0 && MutagenBonus("wis", 1)) {
+            outputText("[pg]You begin musing on the many people and creatures you've met thus far on Mareth. They are undisciplined and disorganized. It would only make sense for you to simply gather all those rowdy fools under your leadership so to better lead them against the common foe, maybe rule them too? ");
+			if (player.cor < 50) {
+				outputText("Your");
+				if (player.gender > 0) outputText((player.hasCock()?" cock hardens":"")+(player.hasSheath()?" out of its sheath":"")+(player.gender == 3?" while":"")+(player.hasVagina()?" vagina drips":"")+(player.gender == 3?" in sympathy":"")+" as fantasies of an endless harem of slaves and sycophants servicing you overtake your thought. Even your enemies would make fine slaves if you could properly coerce them into working for you.");
+				else outputText(" cheeks blush with arousal.");
+			}
+			else outputText("Realizing how self centered your thoughts are becoming you shake your head and berate yourself. Just what is this place doing to you?");
+			dynStats("cor", 2 + rand(2));
+            changes++;
+        }
+		if (player.blockingBodyTransformations()) changeLimit = 0;
+		if (changes < changeLimit && player.cocks.length > 0) {
+            //Grow knot on smallest knotted dog cock
+            if (player.dogCocks() > 0 && changes < changeLimit && rand(3) == 0) {
+                //Have smallest knotted cock selected.
+                transformations.GrowKnot(-1, crit, 1, 20).applyEffect();
+                changes++;
+            }
+            //Cock Xform if player has free cocks.
+            if (player.dogCocks() < player.cocks.length && changes < changeLimit && rand(3) == 0) {
+                //Select first human cock
+                choice = player.findFirstCockNotInType([CockTypesEnum.DOG])
+                //Talk about it
+                //Demon
+                if (player.cocks[choice].cockType == CockTypesEnum.DEMON) {
+                    outputText("[pg]Your " + cockDescript(choice) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.");
+                    dynStats("lus", 2 * crit, "scale", false);
+                    player.addCurse("sen", 1, 1);
+                }
+                else{
+                    dynStats("lus", 5 * crit, "scale", false);
+                    player.addCurse("sen", 4, 1);
+                    transformations.CockDog(choice).applyEffect();
+                }
+                //Xform it!
+                player.cocks[choice].knotMultiplier += 0.1;
+                player.thickenCock(choice, 2);
+                changes++;
+            }
+            //Cum Multiplier Xform
+            if (player.cumMultiplier < 2 && rand(3) == 0 && changes < changeLimit) {
+                choice = 1.5;
+                //Lots of cum raises cum multiplier cap to 3 instead of 1.5
+                if (player.hasPerk(PerkLib.MessyOrgasms)) choice = 3;
+                if (choice < player.cumMultiplier + .05 * crit) {
+                    changes--;
+                } else {
+                    player.cumMultiplier += .05 * crit;
+                    //Flavor text
+                    if (player.balls == 0) outputText("[pg]You feel a churning inside your gut as something inside you changes.");
+                    if (player.hasBalls()) outputText("[pg]You feel a churning in your [balls].  It quickly settles, leaving them feeling somewhat more dense.");
+                    if (crit > 1) outputText("  A bit of milky pre dribbles from your [cocks], pushed out by the change.");
+                }
+                changes++;
+            }
+            //single cock
+            if (player.cocks.length == 1) {
+                temp2 = player.growCock(0, rand(4) + 3);
+                choice = 0;
+                dynStats("lus", 10, "scale", false);
+                player.addCurse("sen", 1, 1);
+            }
+            //Multicock
+            else {
+                //Find smallest cock
+                //Temp2 = smallness size
+                //choice = current smallest
+                temp3 = player.cocks.length;
+                choice = 0;
+                while (temp3 > 0) {
+                    temp3--;
+                    //If current cock is smaller than saved, switch values.
+                    if (player.cocks[choice].cockLength > player.cocks[temp3].cockLength) {
+                        temp2 = player.cocks[temp3].cockLength;
+                        choice = temp3;
+                    }
+                }
+                //Grow smallest cock!
+                //temp2 changes to growth amount
+                temp2 = player.growCock(choice, rand(4) + 3);
+                dynStats("lus", 10, "scale", false);
+                player.addCurse("sen", 1, 1);
+                if (player.cocks[choice].cockThickness <= 2) player.thickenCock(choice, 1);
+            }
+            if (temp2 > 2) outputText("[pg]Your " + cockDescript(choice) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
+            if (temp2 > 1 && temp2 <= 2) outputText("[pg]Aching pressure builds within your crotch, suddenly releasing as an inch or more of extra dick-flesh spills out.  A dollop of pre beads on the head of your enlarged " + cockDescript(choice) + " from the pleasure of the growth.");
+            if (temp2 <= 1) outputText("[pg]A slight pressure builds and releases as your " + cockDescript(choice) + " pushes a bit further out of your crotch.");
+        }
+		//physical changes
+		//legs
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.DOG) {
+            outputText("[pg]");
+            transformations.LowerBodyDog(2).applyEffect();
+            changes++;
+        }
+		//arms
+        if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CANINE) {
+            outputText("[pg]");
+            transformations.ArmsCanine.applyEffect();
+            changes++;
+        }
+        //tail
+        if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.DOG) {
+            outputText("[pg]");
+            transformations.TailDog.applyEffect();
+            changes++;
+        }
+        //Ears
+        if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.JACKAL) {
+            outputText("[pg]");
+			transformations.EarsJackal.applyEffect();
+            changes++;
+        }
+        //Face!
+        // Prevents player with dog face from switching to animal canines then back to dog face and wasting changes
+        var startedWithDogFace: Boolean = player.faceType == Face.DOG;
+        if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.DOG) {
+            outputText("[pg]");
+            transformations.FaceDog.applyEffect();
+            changes++;
+        }
+		if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && !startedWithDogFace) {
+            outputText("[pg]");
+			transformations.FaceAnimalTeeth.applyEffect();
+            changes++;
+        }
+        if (player.tongue.type != Tongue.DOG && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TongueDog.applyEffect();
+            changes++;
+        }
+        //Change skin to normal
+        if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
+            if (player.skinAdj != "") player.skinAdj = "";
+            outputText("[pg]");
+            transformations.SkinPlain.applyEffect();
+            changes++;
+        }
+		if (!InCollection(player.hairColor, Jackal_SkinColor) && changes < changeLimit && rand(3) == 0) {
+			player.skinColor = randomChoice(Jackal_SkinColor);
+            outputText("[pg]Your skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinColor + " skin.</b>");
+            changes++;
+        }
+		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasGlyphTattoo() && rand(3) == 0 && changes < changeLimit) {
+			outputText("\n\n");
+			CoC.instance.transformations.SkinPatternAnubis.applyEffect();
+			changes++;
+		}
+		//Remove odd eyes
+		if (changes < changeLimit && rand(3) == 0 && transformations.EyesHuman.isPossible()) {
+			outputText("[pg]");
+			transformations.EyesHuman.applyEffect();
+			changes++;
+		}
+		if (changes < changeLimit && rand(3) == 0 && transformations.EyesChangeColor(["green", "red"]).isPossible()) {
+			outputText("[pg]");
+			if (rand(2) == 0) transformations.EyesChangeColor(["red"]).applyEffect();
+			else transformations.EyesChangeColor(["green"]).applyEffect();
+			changes++;
+		}
+		if (player.lowerBody == LowerBody.DOG && player.arms.type == Arms.CANINE && !InCollection(player.furColor, Jackal_FurColor) && changes < changeLimit && rand(3) == 0) {
+            player.furColor = randomChoice(Jackal_FurColor);
+            outputText("[pg]Woa! Your fur suddenly changed color to <b>[fur color]</b>!");
+            changes++;
+        }
+        if (!InCollection(player.hairColor, Jackal_HairColor) && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(Jackal_HairColor);
+            outputText("[pg]Your hairs seems to have changed color to " + player.hairColor + "!");
+            changes++;
+        }
+        //Removes wings & rear body
+        if (!InCollection(player.wings.type, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.WingsNone.applyEffect();
+            changes++;
+        }
+		if (rand(3) == 0 && changes < changeLimit && player.rearBody.type != RearBody.NONE) {
+            outputText("[pg]");
+            transformations.RearBodyNone.applyEffect();
+            changes++;
+        }
+        if (changes < changeLimit && !player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 15 && rand(3) == 0 && player.cor >= (50-player.corruptionTolerance)) {
+            outputText("[pg]You begin to fantasize about building up a whole army of slave at your command and with your growing anubi powers this fetish is right within your reach.[pg]<b>(Gained the Mummy Lord perk!)</b>");
+            player.createPerk(PerkLib.MummyLord, 0, 0, 0, 0);
+            changes++;
+        }
+		player.refillHunger(10);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+	}
 
     public function sageMedicine(player:Player, item:ItemType):void {
         player.slimeFeed();

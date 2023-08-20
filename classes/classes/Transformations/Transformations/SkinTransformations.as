@@ -858,6 +858,24 @@ public class SkinTransformations extends MutationsHelper {
 				return player.skin.base.pattern === Skin.PATTERN_ARCH_IMP_RUNIC_TATTOO;
 			}
 	);
+
+	public const SkinPatternAnubis: Transformation = new SimpleTransformation("Anubis Skin Pattern",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You suddenly feel a searing warmth all over your skin as white patterns not unlike those of the desert anubis appear as if branded onto your flesh. Well you might as well proudly display your <b>Anubis glyph like tattoo.</b>";
+				player.skin.base.adj = "tattooed";
+				player.skin.base.pattern = Skin.PATTERN_GLYPH_TATTOO;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.GLYPH));
+			},
+			// is present
+			function (): Boolean {
+				return player.skin.base.pattern === Skin.PATTERN_GLYPH_TATTOO;
+			}
+	);
 	/*
   */
 }

@@ -31,7 +31,7 @@ import classes.Scenes.SceneLib;
 				SceneLib.dungeons.cabin.enterCabin();
 				return;
 			}
-			if (player.fatigue <= player.maxFatigue() - 50)
+			if (player.fatigue <= player.maxFatigue() - gatherWoodsORquarrySiteMineCost())
 			{
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) startWork();
 				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 2) startLayout();
@@ -73,7 +73,7 @@ import classes.Scenes.SceneLib;
 		//STAGE 2 - Survey and clear area for cabin site.
 		private function startLayout():void {
 			outputText("You finally decide to begin your project: a cabin.  A comfortable cabin, come complete with a bed and nightstand along with some furniture. \n\nYou begin clearing away loose debris by picking up loose rocks and sticks and move them somewhere. It takes one hour and you feel a bit exhausted but you've finished creating a space.");
-			fatigue(50);
+			fatigue(gatherWoodsORquarrySiteMineCost());
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 3;
 			endEncounter();
 		}
@@ -109,7 +109,7 @@ import classes.Scenes.SceneLib;
 				player.addStatusValue(StatusEffects.ResourceNode1, 1, 1);
 			}
 			menu();
-			if (player.fatigue > player.maxFatigue() - 30) {
+			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -168,7 +168,7 @@ import classes.Scenes.SceneLib;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
 			awardAchievement("Getting Wood", kACHIEVEMENTS.GENERAL_GETTING_WOOD);
-			fatigue(50, USEFATG_PHYSICAL);
+			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			endEncounter();
 		}
 		//Cut down the tree yourself with large axe.
@@ -179,7 +179,7 @@ import classes.Scenes.SceneLib;
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
-			fatigue(50, USEFATG_PHYSICAL);
+			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -205,7 +205,7 @@ import classes.Scenes.SceneLib;
 			else {
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
 				incrementWoodSupply(13 + Math.floor(player.str / 7));
-				fatigue(50, USEFATG_PHYSICAL);
+				fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 				explorer.stopExploring();
 				doNext(camp.returnToCampUseTwoHours);
 			}
@@ -242,8 +242,16 @@ import classes.Scenes.SceneLib;
 			Crafting.BagSlot04Cap = 5;
 			doNext(quarrySite);
 		}
+		private function gatherWoodsORquarrySiteMineCost():Number {
+			var fatigueAmount:Number = 50;
+			if (player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0) {
+				if (player.perkv1(PerkLib.MummyLord) > 19) fatigueAmount = 0;
+				else fatigueAmount = Math.round(50*(1/player.perkv1(PerkLib.MummyLord)));
+			}
+			return fatigueAmount;
+		}
 		private function quarrySiteMine(nightExploration:Boolean = false):void {
-			if (player.fatigue > player.maxFatigue() - 50) {
+			if (player.fatigue > player.maxFatigue() - gatherWoodsORquarrySiteMineCost()) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				endEncounter();
 				return;
@@ -254,7 +262,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
 			var minedStones:Number = 13 + Math.floor(player.str / 7);
 			minedStones = Math.round(minedStones);
-			fatigue(50, USEFATG_PHYSICAL);
+			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			if (minedStones > (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()))) minedStones = (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()));
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
 			incrementStoneSupply(minedStones);
@@ -331,7 +339,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nIt takes some time but you eventually bring the last of wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
 			incrementWoodSupply(20 + Math.floor(player.str / 5));
-			fatigue(50, USEFATG_PHYSICAL);
+			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -423,7 +431,7 @@ import classes.Scenes.SceneLib;
 			if (camp.companionsCount() == 1) outputText("Your lone camp follower comes to see what you've been working on. They nod in approval, impressed by your handiwork.");
 			else if (camp.companionsCount() > 1) outputText("Your camp followers come to see what you've built so far. Most of them are even impressed.");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 7;
-			fatigue(100);
+			fatigue(gatherWoodsORquarrySiteMineCost()*2);
 			doNext(camp.returnToCampUseEightHours);
 		}
 		
@@ -460,7 +468,7 @@ import classes.Scenes.SceneLib;
 			outputText("Several hours flew by as you've managed to complete the walls and roof. Finally, you apply paint on the roof and walls to ensure that it's waterproof and protected from the elements. \n\n");
 			outputText("<b>You have finished constructing the walls and roof!</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 8;
-			fatigue(100);
+			fatigue(gatherWoodsORquarrySiteMineCost()*2);
 			doNext(camp.returnToCampUseEightHours);
 		}
 		
@@ -497,7 +505,7 @@ import classes.Scenes.SceneLib;
 			outputText("Next, you flip the book pages until you come across instructions on how to construct a window with functional shutters. You measure and cut the wood into the correct sizes before you nail it together into a frame. Next, you construct two shutters and install the shutters into window frame. Finally, you install the window into place.\n\n");
 			outputText("<b>You have finished installing the door and window!</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 9;
-			fatigue(100);
+			fatigue(gatherWoodsORquarrySiteMineCost()*2);
 			doNext(camp.returnToCampUseFourHours);
 		}
 		
@@ -537,7 +545,7 @@ import classes.Scenes.SceneLib;
 			outputText("<b>Congratulations! You have finished your cabin structure! You may want to construct some furniture though.</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 10;
 			flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
-			fatigue(100);
+			fatigue(gatherWoodsORquarrySiteMineCost()*2);
 			doNext(enterCabinFirstTime);
 		}
 

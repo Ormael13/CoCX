@@ -107,31 +107,31 @@ public class CampUpgrades extends BaseContent {
     */
     public function buildmisc1Menu():void {
         menu();
-        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) addButton(0, "Wood Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more wood at the camp. (Req. "+usedFatigue(150)+" fatigue)");
-        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) addButton(0, "Stone Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more stones at the camp. (Req. "+usedFatigue(150)+" fatigue)");
-        if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) addButton(1, "1st Warehouse", warehousegranary).hint("Build 1st part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250)+" fatigue)");
-        if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) addButton(1, "Granary", warehousegranary).hint("Build Granary to expand your food space. (Req. "+usedFatigue(250)+" fatigue)");
-        if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) addButton(1, "2nd Warehouse", warehousegranary).hint("Build 2nd part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250)+" fatigue)");
+        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) addButton(0, "Wood Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more wood at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
+        if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) addButton(0, "Stone Storage", materialgatheringstorageupgrade).hint("Build up storage to gather more stones at the camp. (Req. "+usedFatigue(150, true)+" fatigue)");
+        if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) addButton(1, "1st Warehouse", warehousegranary).hint("Build 1st part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250, true)+" fatigue)");
+        if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) addButton(1, "Granary", warehousegranary).hint("Build Granary to expand your food space. (Req. "+usedFatigue(250, true)+" fatigue)");
+        if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) addButton(1, "2nd Warehouse", warehousegranary).hint("Build 2nd part of the Warehouse to expand your storage space. (Req. "+usedFatigue(250, true)+" fatigue)");
         if ((player.isRace(Races.KITSUNE, 1, false) || player.isRace(Races.KITSHOO, 1, false)) && (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2)) addButton(2, "Shrine", kitsuneshrine).hint("Build up kitsune shrine at the camp. (Req. "+usedFatigue(200)+"~"+usedFatigue(300)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 3) {
             if (!(player.hasItem(useables.GLDSTAT))) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
             if (!player.hasPerk(PerkLib.StarSphereMastery)) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
             if (player.hasPerk(PerkLib.StarSphereMastery) && player.hasItem(useables.GLDSTAT)) addButton(2, "Shrine", kitsuneshrine2).hint("Finish up kitsune shrine at the camp.");
         }
-        if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. "+usedFatigue(100)+" fatigue)");
+        if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. "+usedFatigue(100, true)+" fatigue)");
         if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 0) {
-            //if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 7) addButton(4, "Sparring Ring", sparringRing).hint("Expand your stone sparing ring to collosal size. (Decrease npc's training time by 1/2 and increase exp from using training dummy by 500% more (1500% of base amount))(Req. "+usedFatigue(12150)+" fatigue)");
-            //if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 6) addButton(4, "Sparring Ring", sparringRing).hint("Replace wood with stone. (Decrease npc's training time by 1/3 and increase exp from using training dummy by 300% more (1000% of base amount))(Req. "+usedFatigue(4050)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5) addButton(4, "Sparring Ring", sparringRing).hint("Add wood floor to sparring ring for better training experience. (Decrease npc's training time by 1/4 and increase exp from using training dummy by 250% more (700% of base amount))(Req. "+usedFatigue(1350)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 4) addButton(4, "Sparring Ring", sparringRing).hint("Expand sparring ring to massive size. (Decrease npc's training time by 1/5 and increase exp from using training dummy by another 200% (450% of base amount))(Req. "+usedFatigue(450)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3) addButton(4, "Sparring Ring", sparringRing).hint("Expand sparring ring to large size. (Decrease npc's training time by 1/6 and increase exp from using training dummy by 150% (250% of base amount))(Req. "+usedFatigue(150)+" fatigue)");
-            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. "+usedFatigue(50)+" fatigue)");
+            //if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 7) addButton(4, "Sparring Ring", sparringRing).hint("Expand your stone sparing ring to collosal size. (Decrease npc's training time by 1/2 and increase exp from using training dummy by 500% more (1500% of base amount))(Req. "+usedFatigue(12150, true)+" fatigue)");
+            //if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 6) addButton(4, "Sparring Ring", sparringRing).hint("Replace wood with stone. (Decrease npc's training time by 1/3 and increase exp from using training dummy by 300% more (1000% of base amount))(Req. "+usedFatigue(4050, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 5) addButton(4, "Sparring Ring", sparringRing).hint("Add wood floor to sparring ring for better training experience. (Decrease npc's training time by 1/4 and increase exp from using training dummy by 250% more (700% of base amount))(Req. "+usedFatigue(1350, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 4) addButton(4, "Sparring Ring", sparringRing).hint("Expand sparring ring to massive size. (Decrease npc's training time by 1/5 and increase exp from using training dummy by another 200% (450% of base amount))(Req. "+usedFatigue(450, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3) addButton(4, "Sparring Ring", sparringRing).hint("Expand sparring ring to large size. (Decrease npc's training time by 1/6 and increase exp from using training dummy by 150% (250% of base amount))(Req. "+usedFatigue(150, true)+" fatigue)");
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. "+usedFatigue(50, true)+" fatigue)");
         }
         if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp OR add another circle to it. (Unlock elementals summons/rank up related options)(Req. 50 fatigue, enough stones, mana and blood)");
         if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) addButton(6, "Elemental E. C.", arcaneCircleUpgrade).hint("Add Elemental Energy Conduits to your arcane circle to store in them elemental energy stored in elementals shards for more easy use. (Allowing to replace mana and reduce fatigue usage when summoning/ranking up normal tier elementals. Allowing to rank up elementals of tiers above normal tier.)(Req. 50 fatigue, enough stones, mana and elemental shards)");
         if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(7, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
-        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 3) addButton(8, "Dam", dam).hint("Build up a dam on the stream next to the camp. (Req. "+usedFatigue(200)+" fatigue * tier of built dam)");
-        if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 2) addButton(9, "Fishery", fishery).hint("Build up a fishery on the stream next to the camp. (Req. "+usedFatigue(200)+" fatigue)");
+        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 3) addButton(8, "Dam", dam).hint("Build up a dam on the stream next to the camp. (Req. "+usedFatigue(200, true)+" fatigue * tier of built dam)");
+        if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 2) addButton(9, "Fishery", fishery).hint("Build up a fishery on the stream next to the camp. (Req. "+usedFatigue(200, true)+" fatigue)");
         addButton(14, "Back", camp.campBuildingSim);
     }
 
@@ -191,13 +191,13 @@ public class CampUpgrades extends BaseContent {
         return helpers;
     }
 
-    private function buildWithHelpers(baseFatigue:int, timeWithout:int = 4, timeWithOne:int = 2, timeWithMore:int = 1):void {
+    private function buildWithHelpers(baseFatigue:int, mummies:Boolean = false, timeWithout:int = 4, timeWithOne:int = 2, timeWithMore:int = 1):void {
         function formatTime(hrs:int):String {
             return hrs > 1 ? NUMBER_WORDS_NORMAL[hrs] + " hours" : "one hour";
         }
 
         var helpers:Object = getHelpers();
-        useFatigue(baseFatigue, helpers.count);
+        useFatigue(baseFatigue, helpers.count, mummies);
         if (helpers.count > 0) {
             outputText("\n\n" + helpers.names);
             outputText(" " + (helpers.count == 1 ? "assists" : "assist") + " you, helping to speed up the process and make it less fatiguing.");
@@ -214,7 +214,7 @@ public class CampUpgrades extends BaseContent {
         }
     }
 
-    private function useFatigue(base:int, helpersCount:int = 0):void {
+    private function useFatigue(base:int, helpersCount:int = 0, mummies:Boolean = false):void {
         var fatigueAmount:int = base;
         fatigueAmount -= player.str / 5;
         fatigueAmount -= player.tou / 10;
@@ -224,9 +224,13 @@ public class CampUpgrades extends BaseContent {
         fatigueAmount /= (helpersCount + 1);
         fatigueAmount = Math.round(fatigueAmount);
         if (fatigueAmount < 10) fatigueAmount = 10;
+		if (mummies && player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0) {
+			if (player.perkv1(PerkLib.MummyLord) > 19) fatigueAmount = 0;
+			else fatigueAmount = Math.round(fatigueAmount*(1/player.perkv1(PerkLib.MummyLord)));
+		}
         fatigue(fatigueAmount);
     }
-	private function usedFatigue(base:int):Number {
+	private function usedFatigue(base:int, mummies:Boolean = false):Number {
 		var baseFatigue:Number = base;
 		var helpers:Object = getHelpers();
         baseFatigue -= player.str / 5;
@@ -237,13 +241,17 @@ public class CampUpgrades extends BaseContent {
         if (helpers.count > 0) baseFatigue /= (helpers.count + 1);
 		baseFatigue = Math.round(baseFatigue);
         if (baseFatigue < 10) baseFatigue = 10;
+		if (mummies && player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0) {
+			if (player.perkv1(PerkLib.MummyLord) > 19) baseFatigue = 0;
+			else baseFatigue = Math.round(baseFatigue*(1/player.perkv1(PerkLib.MummyLord)));
+		}
 		return baseFatigue;
 	}
 
     //Materials Storages Upgrade
     public function materialgatheringstorageupgrade():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(150)) {
+        if (player.fatigue <= player.maxFatigue() - usedFatigue(150, true)) {
             if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) neednailsbox();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 2) startWoodStorage();
             else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) startStoneStorage();
@@ -277,7 +285,7 @@ public class CampUpgrades extends BaseContent {
         outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for woods. You spend few minutes looking at the instructions.");
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
         outputText("\n\nYou take the wood, saw it and then cut into planks. You put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. After that last part of building is to put all rest wood planks on prepared base and nail them in place.");
-        buildWithHelpers(150);
+        buildWithHelpers(150, true);
     }
 
     public function startStoneStorage():void {
@@ -299,7 +307,7 @@ public class CampUpgrades extends BaseContent {
         outputText("You pull out \"Carpenter's Guide\" and flip pages until you come across instructions on how to build storage for stones. You spend few minutes looking at the instructions.");
         flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
         outputText("\n\nYou take the wood, saw it and then cut into planks. Like before you put four long and thick wood posts as base, then you connect them with nails. Next you cut few posts into short fragments and impale at the edges. Inside of prepared frame you put few large wood logs that you fix in place with a few short wood desks and stones. Rest of the stones fill the space inside due to need in future support weight of stones stored above. After that prelast part of building is to put all most of remaining wood planks on prepared base and nail them in place. Final thing to do is use remain wood and nails to make protective barrier around the whole storage.");
-        buildWithHelpers(150);
+        buildWithHelpers(150, true);
         outputText("\n\nNow you can store safetly larger amount of stones!");
         flushOutputTextToGUI();
     }
@@ -307,7 +315,7 @@ public class CampUpgrades extends BaseContent {
     //Warehouse + Granary Upgrade
     public function warehousegranary():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(250)) {
+        if (player.fatigue <= player.maxFatigue() - usedFatigue(250, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 0) start1stWarehouse1();
             else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) startWarehouse2();
             else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) startGranary1();
@@ -346,7 +354,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting("warehouse");
-        buildWithHelpers(250);
+        buildWithHelpers(250, true);
     }
 
     public function startWarehouse2():void {
@@ -372,7 +380,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting2("warehouse");
-        buildWithHelpers(250);
+        buildWithHelpers(250, true);
         outputText("\n\n<b>You've built the " + (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1 ? "first" : "second") + " warehouse and gained 12 inventory slots.</b>");
         flushOutputTextToGUI();
     }
@@ -395,7 +403,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting("granary");
-        buildWithHelpers(250);
+        buildWithHelpers(250, true);
     }
 
     public function startGranary2():void {
@@ -416,7 +424,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
         clearOutput();
         printLazyWriting2("granary");
-        buildWithHelpers(250);
+        buildWithHelpers(250, true);
         outputText("\n\n<b>You've built a granary and gained 9 inventory slots for consumable items.</b>");
         flushOutputTextToGUI();
     }
@@ -469,7 +477,7 @@ public class CampUpgrades extends BaseContent {
         outputText("You proceed to build the structure of the shrine. You lose track of time as you work at building Taoth a proper place of prayer. ");
         flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] += 1;
         outputText("\n\nSeveral hours later the building is finally ready, although you are completely exhausted.");
-        buildWithHelpers(300, 8, 4, 2);
+        buildWithHelpers(300, false, 8, 4, 2);
     }
 
     public function buildAltar():void {
@@ -503,7 +511,7 @@ public class CampUpgrades extends BaseContent {
     //Hot Spring Upgrade
     public function hotspring():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(100)) {
+        if (player.fatigue <= player.maxFatigue() - usedFatigue(100, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2) digApool();
             else if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addAWoodenWalls();
         } else {
@@ -529,7 +537,7 @@ public class CampUpgrades extends BaseContent {
         outputText("You proceed to dig a proper pool and line it and the border with rocks.");
         flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] += 1;
         outputText("\n\nA few hour later the bathing area is steamy and ready for use.");
-        buildWithHelpers(100);
+        buildWithHelpers(100, true);
         outputText("\n\nThe bathing area is steamy and ready for use.");
         flushOutputTextToGUI();
     }
@@ -550,16 +558,16 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         outputText("You start building some cover, so you can actually enjoy bathing without having to worry about potential voyeurs.");
         flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] += 1;
-        buildWithHelpers(100);
+        buildWithHelpers(100, true);
     }
 
     //Sparring Ring Upgrade
     public function sparringRing():void {
         clearOutput();
-        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(50)) buildSmallRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(150)) buildLargeRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(450)) buildMassiveRing();
-        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxFatigue() - usedFatigue(1350)) buildRingWoodFloor();
+        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(50, true)) buildSmallRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(150, true)) buildLargeRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(450, true)) buildMassiveRing();
+        else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4 && player.fatigue <= player.maxFatigue() - usedFatigue(1350, true)) buildRingWoodFloor();
         else {
             outputText("You are too exhausted to work on sparring ring!");
             doNext(playerMenu);
@@ -584,7 +592,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
         outputText("\n\nYou even moved to its border that training dummy you've found in camp upon your arrival.");
         player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
-        buildWithHelpers(50, 1, 1, 1);
+        buildWithHelpers(50, true, 1, 1, 1);
     }
 
     public function buildLargeRing():void {
@@ -605,7 +613,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
         outputText("\n\nYou work without rest on this project but by the end the ring is expanded to large size!");
         player.addStatusValue(StatusEffects.TrainingNPCsTimersReduction, 1, -1);
-		buildWithHelpers(150, 2, 1, 1);
+		buildWithHelpers(150, true, 2, 1, 1);
     }
 
     public function buildMassiveRing():void {
@@ -626,7 +634,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
         outputText("\n\nYou work without rest on this project but by the end the ring is expanded to massive size!");
         player.addStatusValue(StatusEffects.TrainingNPCsTimersReduction, 1, -1);
-        buildWithHelpers(450);
+        buildWithHelpers(450, true);
     }
 
     public function buildRingWoodFloor():void {
@@ -647,7 +655,7 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
         outputText("\n\nYou work without rest on this project but by the end the ring get it floor made of wood planks and on one side around previosly lone dummy stands four more similar looking dummies.");
         player.addStatusValue(StatusEffects.TrainingNPCsTimersReduction, 1, -1);
-        buildWithHelpers(1350, 6, 4, 2);
+        buildWithHelpers(1350, true, 6, 4, 2);
     }
 
     //Arcane Circle Upgrade
@@ -817,10 +825,10 @@ public class CampUpgrades extends BaseContent {
     //Dam Upgrade
     public function dam():void {
         clearOutput();
-        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - usedFatigue(200)) buildUpMinorWoodDam();
-        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(400)) buildUpWoodDam();
-        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(600)) buildUpMajorWoodDam();
-        //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(800)) buildUpMinorStoneDam();
+        if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - usedFatigue(200, true)) buildUpMinorWoodDam();
+        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - usedFatigue(400, true)) buildUpWoodDam();
+        else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - usedFatigue(600, true)) buildUpMajorWoodDam();
+        //else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - usedFatigue(800, true)) buildUpMinorStoneDam();
         else {
             outputText("You are too exhausted to work on dam!");
             doNext(playerMenu);
@@ -844,7 +852,7 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         outputText("You get down to work building the dam plank by plank. At first, it proves to be a challenge, given the running water. But you eventually manage to build the structure in full your dam allowing to increase the stream size.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 1;
-        buildWithHelpers(200, 8, 4, 2);
+        buildWithHelpers(200, true, 8, 4, 2);
     }
 	
     public function buildUpWoodDam():void {
@@ -867,7 +875,7 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         outputText("You get down to work expanding the dam plank by plank starting from sides. At first, it goes slowly, but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between stream and miniature narrow shaped lake.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 2;
-        buildWithHelpers(400, 8, 4, 2);
+        buildWithHelpers(400, true, 8, 4, 2);
     }
 	
     public function buildUpMajorWoodDam():void {
@@ -889,13 +897,13 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened stream due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
         flags[kFLAGS.CAMP_UPGRADES_DAM] = 3;
-        buildWithHelpers(600, 8, 4, 2);
+        buildWithHelpers(600, true, 8, 4, 2);
     }
 	
     //Fishery Upgrade
     public function fishery():void {
         clearOutput();
-        if (player.fatigue <= player.maxFatigue() - usedFatigue(200)) {
+        if (player.fatigue <= player.maxFatigue() - usedFatigue(200, true)) {
             if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) {
                 buildUpFishery1();
                 return;
@@ -932,7 +940,7 @@ public class CampUpgrades extends BaseContent {
         outputText("You spend some time building your fishery. At the end of it, you look at the result with pride. Time to have someone on fishing duty.");
         flags[kFLAGS.CAMP_UPGRADES_FISHERY] = 1;
         flags[kFLAGS.FISHES_STORED_AT_FISHERY] = 0;
-        buildWithHelpers(200, 8, 4, 2);
+        buildWithHelpers(200, true, 8, 4, 2);
     }
 
     public function buildUpFishery2():void {
@@ -952,7 +960,7 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         outputText("You spend some time building your fishery. At the end of it, you look at the result with pride. Now you can have two people on fishing duty.");
         flags[kFLAGS.CAMP_UPGRADES_FISHERY] = 2;
-        buildWithHelpers(200, 8, 6, 4);
+        buildWithHelpers(200, true, 8, 6, 4);
     }
 
     public function errorNotEnough():void {

@@ -179,6 +179,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsYeti: Transformation 				= arms.ArmsYeti.registerTf(AS_ARMS, AE_YETI);
 	public const ArmsYukiOnna: Transformation 			= arms.ArmsYukiOnna.registerTf(AS_ARMS, AE_YUKI_ONNA);
 	public const ArmsTiny: Transformation 			    = arms.ArmsTiny.registerTf(AS_ARMS, AE_IMP);
+	public const ArmsCanine: Transformation 			= arms.ArmsCanine.registerTf(AS_ARMS, AE_ANUBIS);
 
 
 //ASS
@@ -390,6 +391,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsDeer: Transformation 		= ears.EarsDeer.registerTf(AS_EARS, AE_DEER);
 	public const EarsBig: Transformation        = ears.EarsBig.registerTf(AS_EARS, AE_GOBLIN);
 	public const EarsFennecFox: Transformation 	= ears.EarsFennecFox.registerTf(AS_EARS, AE_WEREFOX);
+	public const EarsJackal: Transformation 	= ears.EarsJackal.registerTf(AS_EARS, AE_ANUBIS);
 
 
 //EYES
@@ -890,6 +892,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const SkinPatternOrca:Transformation 				= skin.SkinPatternOrca.registerTf(AS_SKIN_PATTERN, AE_ORCA);
     public const SkinPatternSeaDragon:Transformation 			= skin.SkinPatternSeaDragon.registerTf(AS_SKIN_PATTERN, AE_SEA_DRAGON);
     public const SkinPatternArchImp:Transformation 			    = skin.SkinPatternArchImp.registerTf(AS_SKIN_PATTERN, AE_IMP);
+    public const SkinPatternAnubis:Transformation 			    = skin.SkinPatternAnubis.registerTf(AS_SKIN_PATTERN, AE_ANUBIS);
 
 
 //TAIL

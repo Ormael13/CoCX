@@ -6,9 +6,7 @@ package classes.Scenes.Areas.Desert
 {
 import classes.*;
 import classes.BodyParts.Butt;
-//import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
-//import classes.BodyParts.LowerBody;
 import classes.Scenes.Areas.Desert.AnubisScene;
 import classes.Stats.Buff;
 import classes.internals.*;	
@@ -51,7 +49,7 @@ public class Anubis extends Monster
 		
 		public function anubisSoulDrain():void {
 			outputText("The anubis stretches h"+(this.hasVagina()?"er":"is")+" hand out and you feel your soul force being forcefully pulled out drop by drop!");
-			var dmgW1:Number = this.weaponAttack;
+			var dmgW1:Number = this.wis;
 			dmgW1 += wisdomscalingbonus() * 2;
 			player.takeDarknessDamage(dmgW1);
 			this.HP += Math.round(this.maxHP() * 0.2);
@@ -117,8 +115,10 @@ public class Anubis extends Monster
 			this.gems = rand(16) + 30;
 			this.drop = new WeightedDrop().
 					add(useables.BANDAGE,1).
+					add(consumables.JACKALD,1).
 					add(weapons.JUDGE_S,2).
-					add(headjewelries.DEATHPR,3);
+					add(headjewelries.DEATHPR,2).
+					add(armors.DEATHPO,2);
 			//this.faceType = Face.SNAKE_FANGS;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);

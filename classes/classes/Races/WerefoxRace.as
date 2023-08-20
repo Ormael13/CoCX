@@ -40,7 +40,7 @@ public class WerefoxRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(Face.FOX_FANGS, +1)
+				.faceType(Face.FOX_FANGS, +2)
 				.eyeType(Eyes.FERAL, +1)
 				.eyeType(NOT(Eyes.FOX), 0,-7)
 				.earType(Ears.FENNEC_FOX, +2)
@@ -58,9 +58,7 @@ public class WerefoxRace extends Race {
 				)
 				.skinCoatType(Skin.FUR, +1)
 				.rearType(RearBody.WOLF_COLLAR, +1)
-				.corruption(AT_LEAST(20), +2)
-				.hasPerk(PerkLib.Vulpesthropy, +1, -11)/*
-				.hasPerk(PerkLib.VulpesthropyDormant, -11)*/;
+				.hasPerk(PerkLib.Vulpesthropy, +2, -12);
 		
 		addMutation(IMutationsLib.WhiteFacedOneBirthrightIM);
 		
@@ -69,11 +67,11 @@ public class WerefoxRace extends Race {
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +1.00,
-					"wis.mult": +1.20,
-					"sens": +50,
+					"spe.mult": +0.40,
+					"wis.mult": +1.00,
+					"sens": +70,
 					"maxlust_mult": -0.1,
 					"maxsf_mult": +1,
-					"maxwrath_mult": +0.6,
 					"maxmana_mult": -0.4
 				})
 				.end();
@@ -81,13 +79,13 @@ public class WerefoxRace extends Race {
 				.requirePreviousTier()
 				.requireTailCount(AT_LEAST(3))
 				.buffs({
-					"str.mult": +0.15,
+					"str.mult": +0.10,
 					"tou.mult": +1.50,
-					"wis.mult": +1.75,
-					"sens": +100,
+					"spe.mult": +0.70,
+					"wis.mult": +1.50,
+					"sens": +140,
 					"maxlust_mult": -0.1,
 					"maxsf_mult": +1.5,
-					"maxwrath_mult": +0.7,
 					"maxmana_mult": -0.4
 				})
 				.end();
@@ -95,13 +93,13 @@ public class WerefoxRace extends Race {
 				.requirePreviousTier()
 				.requireTailCount(AT_LEAST(6))
 				.buffs({
-					"str.mult": +0.20,
+					"str.mult": +0.10,
 					"tou.mult": +2.00,
-					"wis.mult": +2.30,
-					"sens": +150,
+					"spe.mult": +1.00,
+					"wis.mult": +2.00,
+					"sens": +210,
 					"maxlust_mult": -0.1,
 					"maxsf_mult": +2,
-					"maxwrath_mult": +0.8,
 					"maxmana_mult": -0.4
 				})
 				.end();

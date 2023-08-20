@@ -66,11 +66,11 @@ public class WerewolfFemaleScene extends BaseContent
 		}
 
 		public function rapeMenu():void {
-			menu()
-			addButtonDisabled(0, "Dominate", "This scene requires you to have a cock.", "Dominate");
-			addButtonDisabled(1, "Femdom", "This scene requires you to have a vagina.", "Femdom");
-			if (player.hasCock())addButton(0, "Dominate", domWithCock).hint("Show that pup who's the boss.");
+			menu();
+			if (player.hasCock()) addButton(0, "Dominate", domWithCock).hint("Show that pup who's the boss.");
+			else addButtonDisabled(0, "Dominate", "This scene requires you to have a cock.", "Dominate");
 			if (player.hasVagina()) addButton(1, "Femdom", femDom).hint("You're top girl here. It's time to show it!");
+			else addButtonDisabled(1, "Femdom", "This scene requires you to have a vagina.", "Femdom");
 			addButton(14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeMenu);
 		}

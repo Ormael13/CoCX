@@ -855,8 +855,14 @@ use namespace CoC;
 				armorDef += 1;
 			}
 			if (statStore.hasBuff("CrinosShape") && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)) {
-				armorDef = Math.round(armorDef * 1.1);
-				armorDef += 1;
+				if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) {
+					armorDef = Math.round(armorDef * 1.2);
+					armorDef += 2;
+				}
+				else {
+					armorDef = Math.round(armorDef * 1.1);
+					armorDef += 1;
+				}
 			}
 			armorDef = Math.round(armorDef);
 			return armorDef;
@@ -5165,6 +5171,8 @@ use namespace CoC;
 			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
+			if (hasPerk(PerkLib.DeathPriest)) statStore.replaceBuffObject({'int.mult':Math.round(wisStat.mult.value)}, 'Death Priest', { text: 'Death Priest' });
+			if (!hasPerk(PerkLib.DeathPriest) && statStore.hasBuff('Death Priest')) statStore.removeBuffs('Death Priest');
 			if (hasPerk(PerkLib.LustingWarrior) && hasStatusEffect(StatusEffects.Overheat)) statStore.replaceBuffObject({'str.mult':Math.round(libStat.mult.value)}, 'Lusting Warrior', { text: 'Lusting Warrior' });
 			if (!hasPerk(PerkLib.LustingWarrior) && statStore.hasBuff('Lusting Warrior')) statStore.removeBuffs('Lusting Warrior');
 			if (hasPerk(PerkLib.AvatorOfCorruption) && isRaceCached(Races.UNICORN,2)) statStore.replaceBuffObject({'lib.mult':Math.round(intStat.mult.value/2)}, 'Avatar Of Corruption', { text: 'Avatar Of Corruption' });

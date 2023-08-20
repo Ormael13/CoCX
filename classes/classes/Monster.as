@@ -442,10 +442,12 @@ import flash.utils.getQualifiedClassName;
 		public function addSoulforce(soulforce:Number):void {
 			this.soulforce += soulforce;
 			if (this.soulforce > maxOverSoulforce()) this.soulforce = maxOverSoulforce();
+			if (this.soulforce < 0) this.soulforce = 0;
 		}
 		public function addMana(mana:Number):void {
 			this.mana += mana;
 			if (this.mana > maxOverMana()) this.mana = maxMana();
+			if (this.mana < 0) this.mana = 0;
 		}
 
 		public override function maxLust():Number {
@@ -2641,9 +2643,17 @@ import flash.utils.getQualifiedClassName;
 					healingPercent += 1.5;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
-				if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !hasStatusEffect(StatusEffects.RegenInhibitor) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 0.5;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
-				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
+				if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !hasStatusEffect(StatusEffects.WereraceRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
+					var br:Number = 0.5;
+					var mp:Number = 2;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
+					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) br += 0.5;
+					//if ("CrinosShape" for monsters) br *= 2;
+					healingPercent += (br * mp);
+				}
+				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
 				if (hasPerk(PerkLib.FleshBodyApprenticeStage)) healingPercent += 0.5;
 				if (hasPerk(PerkLib.FleshBodyWarriorStage)) healingPercent += 0.5;

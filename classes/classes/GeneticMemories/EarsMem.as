@@ -526,6 +526,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const JACKAL:int = _partid++;
+		EnumValue.add(Memories, JACKAL, "JACKAL", {
+			id: "Jackal Ears",
+			name: "Jackal Ears",
+			cost: 100,
+			title: "Jackal",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsJackal;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

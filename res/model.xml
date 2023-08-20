@@ -2405,21 +2405,17 @@
                 <show part="ears_bg/ratatoskr"/>
                 <show part="ears_bg/ratatoskrRight"/>
             </case>
-			<case values="Ears.FENNEC_FOX">
-                <show part="ears_bg/fennec"/>
-            </case>
-			<case values="Ears.JACKAL">
-                <show part="ears_bg/anubis"/>
-            </case>
 			<case values="Ears.BIG">
 				<show part="ears_fg/impBigEars"/>
                 <show part="ears_fg/impBigEarsRight"/>
                 <show part="ears_bg/impBigEars"/>
                 <show part="ears_bg/impBigEarsRight"/>
             </case>
-            <case values="Ears.FENNEC_FOX">
-                <show part="ears/fox"/>
-                <show part="ears_bg/fox"/>
+			<case values="Ears.FENNEC_FOX">
+                <show part="ears_bg/fennec"/>
+            </case>
+			<case values="Ears.JACKAL">
+                <show part="ears_bg/anubis"/>
             </case>
             <default> <!-- TODO AVIAN, GRYPHON -->
                 <show part="ears_bg/human"/>

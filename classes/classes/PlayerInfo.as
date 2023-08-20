@@ -1,6 +1,7 @@
 package classes {
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
@@ -10,6 +11,7 @@ import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.NPCs.LilyFollower;
+import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
@@ -143,6 +145,8 @@ public class PlayerInfo extends BaseContent {
 				miscStats += "<b>Mindbroken Minions:</b> " + Mindbreaker.MindBreakerConvert + "\n";
 				miscStats += "<b>Mindbreaker Goal:</b> " + Mindbreaker.MindBreakerConvertGoal + "\n";
 			}
+			if (player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) miscStats += "<b>Female Werewolfs:</b> " + LunaFollower.WerewolfPackMember + "\n";
+			if (player.hasPerk(PerkLib.MummyLord)) miscStats += "<b>Mummies:</b> " + player.perkv1(PerkLib.MummyLord) + " / 5\n";
 		}
 
 		if (player.hasKeyItem("Radiant shard") >= 0) miscStats += "<b>Radiant Shards:</b> " + player.keyItemvX("Radiant shard", 1) + "\n";
@@ -221,7 +225,8 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.LUNA_MOON_CYCLE] > 0) {
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) miscStats += "<font color=\"#C00000\"><b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE] + " (FULL MOON)</font>";
-			else miscStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE];
+			else if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) miscStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE] + " (New Moon)";
+			else miscStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE] + " (Half Moon)";
 			miscStats += "\n";
 		}
 		miscStats += "<b>Ebon Labyrinth:</b> Explored up to " + flags[kFLAGS.EBON_LABYRINTH_RECORD] + " room\n";

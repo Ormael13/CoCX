@@ -100,6 +100,10 @@ public class RaceScoreBuilder {
 		);
 		return this;
 	}
+	public function furColor01(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FUR_COLOR1, color, score, failScore, customName);
+		return this;
+	}
 	public function furColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(

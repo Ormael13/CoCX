@@ -51,7 +51,6 @@ public class WerewolfRace extends Race {
 				.rearType(NOT(RearBody.FENRIR_ICE_SPIKES), 0, -7)
 				.corruption(AT_LEAST(20), +2)
 				.hasPerk(PerkLib.Lycanthropy, +1, -11);
-				//.hasPerk(PerkLib.LycanthropyDormant, -11)
 		addScoresAfter(1)
 				.hasCockOfType(CockTypesEnum.WOLF, +1);
 		

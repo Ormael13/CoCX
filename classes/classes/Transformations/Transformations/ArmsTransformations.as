@@ -750,7 +750,7 @@ public class ArmsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into dog like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
 
 				player.arms.type = Arms.HOUND;
 				if (doOutput) outputText(desc);
@@ -1192,6 +1192,23 @@ public class ArmsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.arms.type === Arms.TINY;
+			}
+	);
+
+	public const ArmsCanine: Transformation = new SimpleTransformation("Canine Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into canine like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+
+				player.arms.type = Arms.CANINE;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CANINE));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.CANINE;
 			}
 	);
 	/*

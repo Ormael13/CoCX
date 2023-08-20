@@ -4844,6 +4844,8 @@ public function rebirthFromBadEnd():void {
 		if (player.weapon == weapons.AETHERD) pop++; //Include Aether D twin if you're wearing her.
 		if (player.shield == shields.AETHERS) pop++; //Include Aether S twin if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
+		if (player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) pop += LunaFollower.WerewolfPackMember;
+		if (player.hasPerk(PerkLib.MummyLord)) pop += player.perkv1(PerkLib.MummyLord)
 		//------------
 		//Children check!
 		//Followers

@@ -30,7 +30,26 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += "fully developed";
             }
-            if (descS != "")descS += " soul nexus organ modeled after White-Faced One.";
+            if (descS != "")descS += " soul nexus-like organ modeled after White-Faced One. (+";
+			if (pTier == 1){
+                descS += "0.25/0.5/1";
+            }
+			if (pTier == 2){
+                descS += "0.5/1/2";
+            }
+			if (pTier >= 1){
+                descS += "% Soulforce regen per fox tail you posses (New moon / Half moon / Full moon)";
+            }
+            if (pTier == 2){
+                descS += ", ";
+            }
+            if (pTier == 3){
+                descS += ", ";
+            }
+            if (pTier == 4){
+                descS += ", ";
+            }
+            if (descS != "") descS += ")";
             return descS;
         }
 
@@ -77,23 +96,24 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1){
-                pBuffs['str.mult'] = 0.01;
-                pBuffs['spe.mult'] = 0.02;
+                pBuffs['spe.mult'] = 0.01;
+                pBuffs['tou.mult'] = 0.01;
+                pBuffs['wis.mult'] = 0.03;
             }
             else if (pTier == 2){
-                pBuffs['str.mult'] = 0.03;
-                pBuffs['spe.mult'] = 0.05;
-                pBuffs['tou.mult'] = 0.01;
+                pBuffs['spe.mult'] = 0.03;
+                pBuffs['tou.mult'] = 0.03;
+                pBuffs['wis.mult'] = 0.09;
             }
             else if (pTier == 3){
-                pBuffs['str.mult'] = 0.07;
-                pBuffs['spe.mult'] = 0.1;
-                pBuffs['tou.mult'] = 0.04;
+                pBuffs['spe.mult'] = 0.07;
+                pBuffs['tou.mult'] = 0.07;
+                pBuffs['wis.mult'] = 0.2;
             }
             else if (pTier == 4){
                 pBuffs['str.mult'] = 0.15;
-                pBuffs['spe.mult'] = 0.2;
-                pBuffs['tou.mult'] = 0.1;
+                pBuffs['spe.mult'] = 0.15;
+                pBuffs['tou.mult'] = 0.42;
             }
             return pBuffs;
         }

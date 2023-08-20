@@ -650,7 +650,15 @@ public class Creature extends Utils
 				if (tou >= 61) max += Math.round(tou);
 				if (tou >= 81) max += Math.round(tou);
 				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
-			}
+				if (hasPerk(PerkLib.DeathPriest)) {
+					max += int(wis * 2 + 50);
+					if (wis >= 21) max += Math.round(wis);
+					if (wis >= 41) max += Math.round(wis);
+					if (wis >= 61) max += Math.round(wis);
+					if (wis >= 81) max += Math.round(wis);
+					if (wis >= 101) max += Math.round(wis) * Math.floor( (wis-100)/50 + 1);
+				}
+			} 
 			if (hasPerk(PerkLib.IcyFlesh)) {
 				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
@@ -675,7 +683,15 @@ public class Creature extends Utils
 				if (hasPerk(PerkLib.TankIII)) max += Math.round(tou*12);
 				if (hasPerk(PerkLib.TankIV)) max += Math.round(tou*12);
 				if (hasPerk(PerkLib.TankV)) max += Math.round(tou*12);
-				if (hasPerk(PerkLib.TankVI)) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankVI)) max += Math.round(tou * 12);
+				if (hasPerk(PerkLib.DeathPriest)) {
+					if (hasPerk(PerkLib.TankI)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankII)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankIII)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankIV)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankV)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankVI)) max += Math.round(wis*12);
+				}
 			}
 			if (hasPerk(PerkLib.GoliathI)) max += Math.round(str*8);
 			if (hasPerk(PerkLib.GoliathII)) max += Math.round(str*8);

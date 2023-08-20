@@ -45,6 +45,7 @@ public class IMutationsLib
 		public static const HellcatParathyroidGlandsIM:IMutationPerkType = new HellcatParathyroidGlandMutation();
 		//Mutations start here.
 		public static const AlphaHowlIM:IMutationPerkType = new AlphaHowlMutation();
+		public static const AnubiHeartIM:IMutationPerkType = new AnubiHeartMutation();
 		public static const AnanasaBirthrightIM:IMutationPerkType = new AnanasaBirthrightMutation();
 		public static const ArachnidBookLungIM:IMutationPerkType = new ArachnidBookLungMutation();
 		public static const BlackHeartIM:IMutationPerkType = new BlackHeartMutation();
