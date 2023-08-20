@@ -117,10 +117,10 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Mummy Lord. Req. having 15+ in anubis score and 50+ corruption. Effects: Can control and gather mummies. Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Alpha Howl also increases the amount of mummies under your control.\n");
 			outputText("-New event perk: Dormant Mummy Lord. Req. having 1+ mummies when loosing Mummy Lord perk. Effects: Hmmmm.... none it just let you know your mummies awaits when your PC become able to control mummies again.\n");
 			outputText("-Dominated by werewolf/cerberus female werewolf and enslaved by anubi mummies would count toward current camp population. In case PC loose ability to control mummies due to loosing Mummy Lord perk their population won't count toward total population counter. Also both types of 'camp members' would be listed in player info section under camp population section.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New Unique Sexscene: Mummy Curse - req. to be anubi with mummy curse/lord perks and having badge in inventory. Also can be only used against enemeis that are sentient, humanoid and with soul. After scene PC will gain new mummy minion up to cap of 5 mummies.\n");
+			outputText("-New tf item (by Ormael): Wolf Pepper. Dropped by werewolf enemies or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werewolf but only physicaly. To gain curse/lycantophy perk still need to find some werewolf to bite PC.\n");
+			outputText("-Fix Cheshire cat and some invalid cat fur colors. (Liadri)\n");
+			outputText("-Feral Eyes & Wolf Collar options could be stored with genetic memory.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -137,6 +137,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
@@ -201,7 +204,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -231,6 +236,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

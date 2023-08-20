@@ -68,7 +68,7 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requirePeripheralNervSysMutationSlot()
-                    .requireAnyRace(Races.SHARK, Races.SIREN);
+                    .requireAnyRace(Races.SHARK, Races.SIREN, Races.WERESHARK);
                 }
                 else{
                     var pLvl:int = pTier * 30;

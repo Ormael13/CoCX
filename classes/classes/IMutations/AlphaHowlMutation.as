@@ -28,7 +28,7 @@ public class AlphaHowlMutation extends IMutationPerkType
                 descS += "Each additional pack member helps coordinate your offense, increasing your feral damage by 2% per member. ";
             }
             if (pTier >= 4){
-                descS += "Raise the bonus from Evolved to 5% and while a canine grants anr increase to all stat of 5% per pack member. ";
+                descS += "Raise the bonus from Evolved to 5% and while a canine grants an increase to all stat of 5% per pack member. ";
             }
             descS += "You may have up to " + 5 * pTier + " pack members";
             if (descS != "")descS += ".";

@@ -83,7 +83,7 @@ public class KitsuneRace extends Race {
 	public override function setup():void {
 		addScores()
 				.eyeType(Eyes.FOX, +1)
-				.eyeType(NOT(Eyes.FERAL), 0,-7)
+				.eyeType(NOT(Eyes.FERAL), 0,-11)
 				.earType(Ears.FOX, +1, -1)
 				.customScoreRequirement("tail", "multiple fox tails, +1 per tail",
 						function (body:BodyData):Boolean {

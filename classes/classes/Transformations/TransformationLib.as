@@ -421,7 +421,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesFenrir: Transformation			= eyes.EyesFenrir.registerTf(AS_EYES, AE_FENRIR);
 	public const EyesFiendish: Transformation		= eyes.EyesFiendish.registerTf(AS_EYES, AE_DARK_SLIME);
 	public const EyesFireSnail: Transformation		= eyes.EyesFireSnail.registerTf(AS_EYES, AE_FIRE_SNAIL);
-	public const EyesFeral: Transformation		    = eyes.EyesFeral.registerTf(AS_EYES, AE_WEREWOLF);
+	public const EyesFeral: Transformation		    = eyes.EyesFeral.registerTfMultiple(AS_EYES, AE_WEREWOLF, AE_WEREFOX, AE_WERESHARK);
 	public const EyesFox: Transformation			= eyes.EyesFox.registerTf(AS_EYES, AE_FOX);
 	public const EyesFrostwyrm: Transformation		= eyes.EyesFrostwyrm.registerTf(AS_EYES, AE_FROST_WYRM);
 	public const EyesGoat: Transformation			= eyes.EyesGoat.registerTf(AS_EYES, AE_GOAT);
@@ -813,7 +813,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const RearBodyFurCoat: Transformation 			= rearBody.RearBodyFurCoat.registerTf(AS_REAR, AE_WENDIGO);
 	public const RearBodyAtlachNacha: Transformation 		= rearBody.RearBodyAtlachNacha.registerTf(AS_REAR, AE_ATLACH_NACHA);
 	public const RearBodyCobraHood: Transformation 			= rearBody.RearBodyCobraHood.registerTf(AS_REAR, AE_APOPHIS);
-	public const RearBodyWolfCollar: Transformation 		= rearBody.RearBodyWolfCollar.registerTf(AS_REAR, AE_WOLF);
+	public const RearBodyWolfCollar: Transformation 		= rearBody.RearBodyWolfCollar.registerTfMultiple(AS_REAR, AE_WOLF, AE_WEREWOLF, AE_WEREFOX);
 	public const RearBodyHellhoundCollar: Transformation 	= rearBody.RearBodyHellhoundCollar.registerTf(AS_REAR, AE_CERBERUS);
 
 

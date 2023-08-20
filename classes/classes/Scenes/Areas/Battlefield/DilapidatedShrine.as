@@ -120,6 +120,11 @@ public class DilapidatedShrine extends BaseContent
 						break;
 					case 3:
 						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("and a single Wolf Pepper rests in the other bowl.");
+						inventory.takeItem(consumables.WOLF_PP, westSection);
+						break;
+					case 4:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
 						outputText("replaced by a bottle of Nocello sitting in front of the statue.");
 						inventory.takeItem(consumables.NOCELIQ, westSection);
 						break;

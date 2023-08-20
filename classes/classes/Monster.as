@@ -2649,9 +2649,13 @@ import flash.utils.getQualifiedClassName;
 					var mp:Number = 2;
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
-					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) br += 0.5;
-					//if ("CrinosShape" for monsters) br *= 2;
+					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) br += ((perkv1(IMutationsLib.HengeyokaiBirthrightIM) - 1) * 0.5);
+					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3 && hasStatusEffect(StatusEffects.CrinosShape)) br *= 2;
 					healingPercent += (br * mp);
+				}
+				if (hasStatusEffect(StatusEffects.CrinosShape) && hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) {
+					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3) healingPercent += 2;
+					healingPercent += 2;
 				}
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;

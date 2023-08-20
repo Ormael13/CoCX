@@ -10983,8 +10983,8 @@ public class Combat extends BaseContent {
             healingPercent += PercentBasedRegeneration();
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
             if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
-            if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) {
-				if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) healingPercent += 2;
+            if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
+				if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3) healingPercent += 2;
 				healingPercent += 2;
 			}
             if (player.hasPerk(PerkLib.Sanctuary)) healingPercent += 1;
@@ -11053,7 +11053,8 @@ public class Combat extends BaseContent {
 			var mp:Number = 2;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += 0.5;
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += ((player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) - 1) * 0.5);
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3 && player.statStore.hasBuff("CrinosShape")) hbr *= 2;
 			maxPercentRegen += (hbr * mp);
 		}
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
@@ -11108,7 +11109,8 @@ public class Combat extends BaseContent {
 			var mp:Number = 2;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += 0.5;
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += ((player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) - 1) * 0.5);
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3 && player.statStore.hasBuff("CrinosShape")) hbr *= 2;
 			maxRegen += (hbr * mp);
 		}
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
@@ -11117,8 +11119,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
-		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) {
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) maxRegen += 2;
+		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
+			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3) maxRegen += 2;
 			maxRegen += 2;
 		}
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
@@ -16216,6 +16218,13 @@ public function firearmsForce():Number {
     return mod;
 }
 
+private function sfT():Number {
+	var sfT:Number = 0.8;
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 3) sfT -= 0.1;
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4) sfT -= 0.1;
+	return sfT;
+}
+
 public function soulskillMod():Number {
     var modss:Number = 1;
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_SOUL_POWER) modss += (player.jewelryEffectMagnitude / 100);
@@ -16245,6 +16254,8 @@ public function soulskillMod():Number {
     if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modss += (player.cor * .01);
 	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 1) modss += .2;
 	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2) modss += .1;
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 3) modss += .1;
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4) modss += .1;
     if (player.necklaceName == "Yin Yang Amulet") modss += .15;
     if (player.armorName == "Traditional clothes") modss += .4;
 	if (player.headJewelry == headjewelries.DEATHPR) modss += .2;
@@ -16262,7 +16273,7 @@ public function soulskillMod():Number {
             if (player.perkv2(PerkLib.ElementalBody) == 4) modss += .4;
         }
     }
-	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * 0.8)) modss *= 2;
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * sfT())) modss *= 2;
     modss = Math.round(modss * 100) / 100;
     return modss;
 }
@@ -16349,7 +16360,7 @@ public function soulskillCost():Number {
     if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
     if (player.jewelryName == "fox hairpin") modssc -= .2;
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.2);
-	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * 0.8)) modssc *= 1.5;
+	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * sfT())) modssc *= 1.5;
     if (modssc < 0.1) modssc = 0.1;
     modssc = Math.round(modssc * 100) / 100;
     return modssc;

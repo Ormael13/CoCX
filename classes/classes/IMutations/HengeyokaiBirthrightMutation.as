@@ -36,11 +36,20 @@ public class HengeyokaiBirthrightMutation extends IMutationPerkType
 			if (pTier == 2){
                 descS += "1/2/4";
             }
-			if (pTier >= 1){
-                descS += "% HP regen (New moon / Half moon / Full moon)";
+			if (pTier == 3){
+                descS += "1.5/3/6";
             }
-            if (pTier >= 2){
+			if (pTier == 4){
+                descS += "2/4/8";
+            }
+			if (pTier >= 1){
+                descS += "% HP regen during New moon / Half moon / Full moon";
+            }
+            if (pTier == 2){
                 descS += ", double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it";
+            }
+            if (pTier == 3){
+                descS += "(doubled when in Crinos Shape), double bonuses to unarmed/armor/wrath/HP gains in Crinos Shape & half the cost of maintaining it";
             }
             if (pTier == 4){
                 descS += ", ";

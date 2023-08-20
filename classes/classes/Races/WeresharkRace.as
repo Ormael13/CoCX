@@ -44,6 +44,7 @@ public class WeresharkRace extends Race {
 				.eyeType(Eyes.FERAL, +1);
 		
 		addMutation(IMutationsLib.HengeyokaiBirthrightIM);
+		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
 		buildTier(12, "wereshark")
 				.buffs({

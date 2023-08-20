@@ -768,6 +768,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CoonWhip:StatusEffectType           	= mk("Coon Whip");
 		public static const Counter:StatusEffectType            	= mk("Counter");
 		public static const CreepingDoom:StatusEffectType       	= mk("Creeping doom");
+		public static const CrinosShape:StatusEffectType            = mk("Crinos Shape");
 		public static const DevourMagic:StatusEffectType        	= mk("DevourMagic");
 		public static const DomFight:StatusEffectType           	= mk("domfight");
 		public static const DrankMinoCum:StatusEffectType       	= mk("drank mino cum");

@@ -19,14 +19,32 @@ public class AnubiHeartMutation extends IMutationPerkType
             if (pTier >= 1){
                 descS = "Increase Soulskills power by ";
             }
-            if (pTier == 1 || pTier == 2){
+            if (pTier == 1){
                 descS = "20%";
             }
-            if (pTier == 3 || pTier == 4){
+            if (pTier == 2){
                 descS = "30%";
             }
+            if (pTier == 3){
+                descS = "40%";
+            }
+            if (pTier == 4){
+                descS = "50%";
+            }
             if (pTier >= 2){
-                descS = ". Soul skills cost 50% more but are twice as effective when above 80% Soulforce";
+                descS = ". Soul skills cost 50% more but are twice as effective when above ";
+            }
+            if (pTier == 2){
+                descS = "8";
+            }
+            if (pTier == 3){
+                descS = "7";
+            }
+            if (pTier == 4){
+                descS = "6";
+            }
+            if (pTier >= 2){
+                descS = "0% Soulforce";
             }
             if (pTier >= 3){
                 descS = "Your heart metamorphosis reached pseudo-dragon level. (+3 Fatigue / +12 SF / +15 Mana / +3 Wrath regen, +1% HP regen, +15% of max core Str as phantom Str)";
