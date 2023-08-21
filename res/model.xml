@@ -6305,6 +6305,8 @@
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.A"><!--FLAT-->
 						<show part="bra/anubisRoyalDressBraSmall"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
