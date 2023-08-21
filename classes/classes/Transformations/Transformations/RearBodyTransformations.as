@@ -339,7 +339,7 @@ public class RearBodyTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "";
+				desc += "You suddenly feel hair growing around your neck at a crazy pace. It soon gets so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a wolf collar around your neck.</b>";
 
 				player.rearBody.type = RearBody.WOLF_COLLAR;
 				if (doOutput) outputText(desc);

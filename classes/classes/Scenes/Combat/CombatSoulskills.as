@@ -3,6 +3,7 @@
  */
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.Weapons.Tidarion;
 import classes.Monster;
 import classes.PerkLib;
@@ -1504,7 +1505,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
-		player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 6, 0, 0, 0);
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4) player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 4, 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 6, 0, 0, 0);
 		var damage:Number = player.wis * 1.5;
 		damage += scalingBonusWisdom() * 1.5;
 		if (damage < 15) damage = 15;

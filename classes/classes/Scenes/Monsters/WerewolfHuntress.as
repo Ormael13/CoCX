@@ -88,7 +88,10 @@ import classes.Scenes.NPCs.*;
 			this.lust = 10;
 			this.lustVuln = 0;
 			this.gems = 5 + rand(5);
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop().
+					add(null,1).
+					//add(consumables.REPTLUM,2).
+					add(consumables.WOLF_PP,5);
 			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.abilities = [

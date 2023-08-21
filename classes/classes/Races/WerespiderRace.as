@@ -41,9 +41,9 @@ public class WerespiderRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.eyeType(Eyes.FERAL, +1);
+				.eyeType(Eyes.FERAL, +2);
 		
-		addMutation(IMutationsLib.AnanasaBirthrightIM);
+		//addMutation(IMutationsLib.AnanasaBirthrightIM);
 		
 		buildTier(12, "werespider")
 				.buffs({

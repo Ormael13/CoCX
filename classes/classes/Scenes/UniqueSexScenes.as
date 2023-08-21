@@ -177,7 +177,8 @@ public class UniqueSexScenes extends BaseContent
 				USSEastrBny(),
 				USSTentRape(),
 				USSLiveDildo(),
-				USSJiangshiDrn()];
+				USSJiangshiDrn(),
+				USSAnubiMummyCurse()];
 
 			var bd:ButtonDataList = new ButtonDataList();
 			//menuItems.push();

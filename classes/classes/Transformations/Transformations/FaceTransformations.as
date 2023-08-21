@@ -827,9 +827,16 @@ public class FaceTransformations extends MutationsHelper {
 			// apply effect
 			function (doOutput: Boolean): void {
 				var desc: String = "";
+				var startsWithWolfFace: Boolean = player.faceType === Face.WOLF;
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+
+				if (!startsWithWolfFace) desc += "You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf-like canines.</b>";
+				else desc += "However, your mouth remains filled with wolf-like canines."
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.WOLF_FANGS;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.WOLF_FANGS));
 			},
 			// is present
 			function (): Boolean {
@@ -850,6 +857,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.FOX_FANGS;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FOX_FANGS));
 			},
 			// is present
 			function (): Boolean {

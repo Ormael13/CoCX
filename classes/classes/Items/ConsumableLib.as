@@ -1157,11 +1157,15 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_INT]
 						]
 				);
-		//Wolf Pepper chyba jest nieużywanym itemem ale jesli jednak gdzie byl uzyty zostawie go nie wycietego a w przyszłosci zrobic z niego prawdziwy wolf lub werewolf TF ^^
-		public const WOLF_PP: Consumable = mk("Wolf Pp", "WolfPepper", "a Wolf pepper", 10, "The pepper is shiny and black, bulbous at the base but long and narrow at the tip.  It has a fuzzy feel to it and it smells spicy.", curry(m.caninePepper, 6), ItemTags.U_TF)
+		public const WOLF_PP: Consumable = mk("Wolf Pp", "WolfPepper", "a Wolf pepper", 20, "The pepper is shiny and black, bulbous at the base but long and narrow at the tip.  It has a fuzzy feel to it and it smells spicy.", m.wolfPepper, ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_WOLF)
+						DEFAULT_ESSENCE_DROP_TABLE(AE_WEREWOLF),
+						[
+							[1, AR_STR],
+							[1, AR_TOU],
+							[1, AR_SPE]
+						]
 				);
 		public const YETICUM: Consumable = mk("YetiCum", "YetiCum", "a bottle of Yeti Cum", 6, "This looks like some cum from a yeti. It looks potent and you can’t help but ponder about its effect.", m.yetiCum, ItemTags.U_TF)
 				.refineableInto(

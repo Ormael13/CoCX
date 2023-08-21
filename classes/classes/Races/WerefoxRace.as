@@ -41,7 +41,7 @@ public class WerefoxRace extends Race {
 		
 		addScores()
 				.faceType(Face.FOX_FANGS, +2)
-				.eyeType(Eyes.FERAL, +1)
+				.eyeType(Eyes.FERAL, +2)
 				.eyeType(NOT(Eyes.FOX), 0,-7)
 				.earType(Ears.FENNEC_FOX, +2)
 				//.tongueType(Tongue., +1)
@@ -91,7 +91,7 @@ public class WerefoxRace extends Race {
 				.end();
 		buildTier(20, "ancient werefox")
 				.requirePreviousTier()
-				.requireTailCount(AT_LEAST(6))
+				.requireTailCount(AT_LEAST(5))
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +2.00,

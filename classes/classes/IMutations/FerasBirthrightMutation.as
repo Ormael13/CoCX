@@ -5,14 +5,13 @@
 package classes.IMutations
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Races;
 
-public class AnanasaBirthrightMutation extends IMutationPerkType
+public class FerasBirthrightMutation extends IMutationPerkType
 	{
-		private static const mName:String = "Ananasa Birthright";
+		private static const mName:String = "Fera's Birthright";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -30,7 +29,41 @@ public class AnanasaBirthrightMutation extends IMutationPerkType
             if (pTier == 4){
                 descS += "fully developed";
             }
-            if (descS != "")descS += " multi-functional self-sustain system modeled after progenitor of all werespiders.";
+            if (descS != "") descS += " restorative system modeled by creator of all corrupted werebeasts. (+";
+			if (pTier == 1){
+                descS += "0.5/1/2";
+            }
+			if (pTier == 2){
+                descS += "1/2/4";
+            }
+			if (pTier == 3){
+                descS += "1.5/3/6";
+            }
+			if (pTier == 4){
+                descS += "2/4/8";
+            }
+			if (pTier >= 1){
+                descS += "% HP regen during New moon / Half moon / Full moon";
+            }
+            if (pTier >= 3){
+                descS += "(doubled when in Crinos Shape)";
+            }
+            if (pTier >= 2){
+                descS += ", double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it";
+            }
+            if (pTier >= 3){
+                descS += ", once each fight when HP drops below 0 it would trigger Regeneration Surge ";
+            }
+            if (pTier == 3){
+                descS += "(+20% regen for 2 turns)";
+            }
+            if (pTier == 3){
+                descS += "(+40% regen for 3 turns)";
+            }
+            if (pTier == 4){
+                descS += ", +50% OverMax HP";
+            }
+            if (descS != "") descS += ")";
             return descS;
         }
 
@@ -61,8 +94,7 @@ public class AnanasaBirthrightMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
-                    //.requirePerk(PerkLib.)
-                    .requireRace(Races.WERESPIDER);
+                    .requireAnyRace(Races.WEREWOLF, Races.WERESHARK);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -78,29 +110,30 @@ public class AnanasaBirthrightMutation extends IMutationPerkType
             var pBuffs:Object = {};
             if (pTier == 1){
                 pBuffs['str.mult'] = 0.01;
-                pBuffs['spe.mult'] = 0.02;
+                pBuffs['spe.mult'] = 0.01;
+                pBuffs['tou.mult'] = 0.01;
             }
             else if (pTier == 2){
                 pBuffs['str.mult'] = 0.03;
-                pBuffs['spe.mult'] = 0.05;
-                pBuffs['tou.mult'] = 0.01;
+                pBuffs['spe.mult'] = 0.03;
+                pBuffs['tou.mult'] = 0.03;
             }
             else if (pTier == 3){
                 pBuffs['str.mult'] = 0.07;
-                pBuffs['spe.mult'] = 0.1;
-                pBuffs['tou.mult'] = 0.04;
+                pBuffs['spe.mult'] = 0.07;
+                pBuffs['tou.mult'] = 0.07;
             }
             else if (pTier == 4){
                 pBuffs['str.mult'] = 0.15;
-                pBuffs['spe.mult'] = 0.2;
-                pBuffs['tou.mult'] = 0.1;
+                pBuffs['spe.mult'] = 0.15;
+                pBuffs['tou.mult'] = 0.15;
             }
             return pBuffs;
         }
 
-        public function AnanasaBirthrightMutation() 
+        public function FerasBirthrightMutation() 
 		{
-			super(mName + " IM", mName, SLOT_NONE, 1);
+			super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
 
     }

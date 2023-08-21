@@ -689,6 +689,10 @@ public class AlchemyLib extends BaseContent {
 		short: "Anubis",
 		name : "Anubis"
 	});
+	public static const AE_WERESHARK:int         = EnumValue.add(Essences, 211, "WERESHARK", {
+		short: "WSkark",
+		name : "Wereshark"
+	});
 	
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [
