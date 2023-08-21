@@ -193,6 +193,7 @@ public class CharViewContext extends ExecContext {
 					playerWearsAStanceBannedArmor: armorSubtype == "fullplate" || player.armor == game.armors.CTPALAD || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					ComfyCLothes: armorSubtype == "clothes" || player.armor == game.armors.C_CLOTH,
+					deathPrinceOutfit: player.armor == game.armors.DEATHPO || player.armor == game.armors.DEATHPGA,
 					MageRobe: player.armor == game.armors.M_ROBES || player.armor == game.armors.I_ROBES || player.armor == game.armors.I_CORST || player.armor == game.armors.EWROBE_ || player.armor == game.armors.A_ROBE_,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
 					sakuraPetalKimono: player.armor == game.armors.SPKIMO,
@@ -265,6 +266,7 @@ public class CharViewContext extends ExecContext {
 					goldenNagaHairpin: player.headJewelry == game.headjewelries.GNHAIR,
 					machinistGoggles: player.headJewelry == game.headjewelries.MACHGOG || player.headJewelry == game.headjewelries.SATGOG || player.headJewelry == game.headjewelries.SCANGOG,
 					sphinxRegalia: player.headJewelry == game.headjewelries.SPHINXAS,
+					deathPrinceRegalia: player.headJewelry == game.headjewelries.DEATHPR,
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
