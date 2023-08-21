@@ -11,8 +11,8 @@ import classes.Race;
 
 public class AnubisRace extends Race {
 	public static const AnubisEyeColors:Array = ["red", "green"];
-	public static const AnubisHairColors:Array = ["brown", "black"];
-	public static const AnubisFurColors:Array = ["brown", "black"];
+	public static const AnubisHairColors:Array = ["brown", "black", "bluish black"];
+	public static const AnubisFurColors:Array = ["brown", "black", "bluish black"];
 	public static const AnubisSkinColors:Array = ["dark", "tan", "olive"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
