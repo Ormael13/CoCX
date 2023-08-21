@@ -193,6 +193,7 @@ public class CharViewContext extends ExecContext {
 					playerWearsAStanceBannedArmor: armorSubtype == "fullplate" || player.armor == game.armors.CTPALAD || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					ComfyCLothes: armorSubtype == "clothes" || player.armor == game.armors.C_CLOTH,
+					deathPrinceOutfit: player.armor == game.armors.DEATHPO || player.armor == game.armors.DEATHPGA,
 					MageRobe: player.armor == game.armors.M_ROBES || player.armor == game.armors.I_ROBES || player.armor == game.armors.I_CORST || player.armor == game.armors.EWROBE_ || player.armor == game.armors.A_ROBE_,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
 					sakuraPetalKimono: player.armor == game.armors.SPKIMO,
@@ -265,6 +266,7 @@ public class CharViewContext extends ExecContext {
 					goldenNagaHairpin: player.headJewelry == game.headjewelries.GNHAIR,
 					machinistGoggles: player.headJewelry == game.headjewelries.MACHGOG || player.headJewelry == game.headjewelries.SATGOG || player.headJewelry == game.headjewelries.SCANGOG,
 					sphinxRegalia: player.headJewelry == game.headjewelries.SPHINXAS,
+					deathPrinceRegalia: player.headJewelry == game.headjewelries.DEATHPR,
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
@@ -298,6 +300,7 @@ class Pattern {
 	public static const BEE_STRIPES:int             = Skin.PATTERN_BEE_STRIPES;
 	public static const TIGER_STRIPES:int           = Skin.PATTERN_TIGER_STRIPES;
 	public static const BATTLE_TATTOO:int           = Skin.PATTERN_BATTLE_TATTOO;
+	public static const PATTERN_GLYPH_TATTOO:int    = Skin.PATTERN_GLYPH_TATTOO;
 	public static const SPOTTED:int                 = Skin.PATTERN_SPOTTED;
 	public static const LIGHTNING_SHAPED_TATTOO:int = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
 	public static const RED_PANDA_UNDERBODY:int     = Skin.PATTERN_RED_PANDA_UNDERBODY;

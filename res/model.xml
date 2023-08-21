@@ -336,6 +336,7 @@
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="79" dy="64"/>
         <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="79" dy="64"/>
         <cell rect="801,90,49,59" name="torso_pattern/Bvenom" dx="79" dy="64"/>
+		<cell rect="1451,90,49,59" name="torso_pattern/anubisGlyph" dx="79" dy="64"/>
         <cell rect="951,90,49,59" name="breasts_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1051,90,49,59" name="torso_pattern/Bbioluminescence" dx="80" dy="61"/>
@@ -637,7 +638,10 @@
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
 		<cell rect="201,242,50,31" name="clotheHead/CowGirl" dx="77" dy="26"/>
-        <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
+		<cell rect="1704,12,75,42" name="clotheHead/anubisRoyalDress" dx="67" dy="22"/>
+		<cell rect="1742,57,35,40" name="clotheHead/anubisRoyalDressRight" dx="106" dy="52"/>
+		<cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
+		<cell rect="1704,57,35,40" name="clotheHead_bg/anubisRoyalDressLeft" dx="67" dy="52"/>
 		<cell rect="150,187,49,25" name="clotheHead_behindHorns/darkPriest" dx="79" dy="33"/>
 		<cell rect="201,210,49,25" name="clotheHead_behindHorns/priest" dx="79" dy="33"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
@@ -648,6 +652,7 @@
         <cell rect="524,41,80,28" name="clotheScarf/scarfYellow" dx="94" dy="64"/>
         <cell rect="524,70,80,28" name="clotheScarf/scarfPurple" dx="94" dy="64"/>
         <cell rect="650,12,75,88" name="clotheUnderAmulet/sphinxregalia" dx="57" dy="26"/>
+		<cell rect="1626,12,75,88" name="clotheUnderAmulet/anubisRoyalDress" dx="57" dy="26"/>
         <cell rect="1570,158,40,55" name="clotheUnderAmulet/mageRobe" dx="84" dy="55"/>
         <cell rect="751,101,40,50" name="clothe/blizzardTop" dx="83" dy="72"/>
         <cell rect="797,101,40,50" name="clothe/whiteKimonoTop" dx="83" dy="72"/>
@@ -714,6 +719,7 @@
 		<cell rect="1673,434,80,104" name="clotheLegs/priestBoots" dx="66" dy="73"/>
 		<cell rect="2242,158,40,55" name="clotheLegs/francescaBoots" dx="85" dy="121"/>
 		<cell rect="2284,158,40,55" name="clotheLegs/cowgirlClothe" dx="86" dy="111"/>
+		<cell rect="1673,543,80,104" name="clotheLegs/anubisRoyalDress" dx="64" dy="78"/>
         <cell rect="776,12,45,27" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="728,12,45,27" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="833,12,45,27" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
@@ -1418,6 +1424,9 @@
         <cell rect="1161,440,49,29" name="bra/cowBraMedium" dx="79" dy="68"/>
         <cell rect="1161,470,49,29" name="bra/cowBraLarge" dx="79" dy="68"/>
 		<cell rect="1161,530,49,29" name="bra/cowBraMega" dx="80" dy="68"/>
+		<cell rect="1361,410,49,29" name="bra/anubisRoyalDressBraSmall" dx="79" dy="68"/>
+        <cell rect="1361,440,49,29" name="bra/anubisRoyalDressBraMedium" dx="79" dy="68"/>
+        <cell rect="1361,470,49,29" name="bra/anubisRoyalDressBraLarge" dx="79" dy="68"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -2481,10 +2490,10 @@
 
 		<!-- REARBODY AREA -->
         <switch value="rearBody.type">
-            <case values="RearBody.RAIJU_MANE">
+            <case values="RearBody.RAIJU_MANE,RearBody.BAT_COLLAR,RearBody.WOLF_COLLAR,RearBody.FENRIR_ICE_SPIKES,RearBody.FROSTWYRM">
                 <show part="neck/weasel"/>
             </case>
-			<case values="RearBody.BAT_COLLAR,RearBody.WOLF_COLLAR,RearBody.FENRIR_ICE_SPIKES,RearBody.LION_MANE,RearBody.FROSTWYRM">
+			<case values="RearBody.LION_MANE">
 				<show part="neck/manticore"/>
             </case>
 			<case values="RearBody.SHARK_FIN">
@@ -3674,7 +3683,7 @@
                 <show part="hands/fins-orca"/>
                 <show part="hands_bg/fins-orca"/>
             </case>
-            <case values="Arms.DEVIL,Arms.RAIJU_PAWS">
+            <case values="Arms.DEVIL,Arms.RAIJU_PAWS,Arms.CANINE">
                 <show part="hands/devil"/>
                 <show part="hands_bg/devil"/>
             </case>
@@ -5183,6 +5192,9 @@
                 <show part="arms_pattern/Bvenom"/>
                 <show part="arms_bg_pattern/Bvenom"/>
             </case>
+			<case values="Skin.PATTERN_GLYPH_TATTOO">
+                <show part="torso_pattern/anubisGlyph"/>
+            </case>
 			<case values="Skin.PATTERN_OIL">
                 <show part="breasts_pattern/BgazerTar"/>
             </case>
@@ -6281,6 +6293,58 @@
 					</if>
 				</if>
 			</if>
+		</if>
+		
+		<!--Anubis set -->
+		<if test="deathPrinceRegalia">
+			<show part="clotheHead/anubisRoyalDress"/>
+			<show part="clotheHead/anubisRoyalDressRight"/>
+			<show part="clotheHead_bg/anubisRoyalDressLeft"/>
+		</if>
+		<if test="deathPrinceOutfit">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.A"><!--FLAT-->
+						<show part="bra/anubisRoyalDressBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/anubisRoyalDressBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/anubisRoyalDressBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/anubisRoyalDressBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/anubisRoyalDressBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/anubisRoyalDressBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showClothing">
+				<show part="clotheUnderAmulet/anubisRoyalDress"/>
+				<if test="showPanty">
+					<if test="isTaur()">
+						<show part="panty/sexyBlackBikiniPanty"/>
+						<hide part="penis/*"/>
+						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
+					</if>
+				</if>
+			</if>
+			<if test="showLegClothing">
+                <if test="isTaur()">
+                    <else>
+                        <show part="clotheLegs/anubisRoyalDress"/>
+                    </else>
+                </if>
+            </if>
 		</if>
 
 		<!--Comfortable clothing set -->
