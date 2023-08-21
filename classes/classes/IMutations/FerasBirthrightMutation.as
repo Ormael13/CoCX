@@ -61,7 +61,7 @@ public class FerasBirthrightMutation extends IMutationPerkType
                 descS += "(+40% regen for 3 turns)";
             }
             if (pTier == 4){
-                descS += ", +50% OverMax HP";
+                descS += ", +20% OverMax HP";
             }
             if (descS != "") descS += ")";
             return descS;
