@@ -15382,8 +15382,8 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
-        var Jackal_HairColor:Array = ["brown", "black"];
-        var Jackal_FurColor:Array = ["brown", "black"];
+        var Jackal_HairColor:Array = ["brown", "black", "bluish black"];
+        var Jackal_FurColor:Array = ["brown", "black", "bluish black"];
         var Jackal_SkinColor:Array = ["dark", "tan", "olive"];
         //clear screen
         clearOutput();
@@ -15528,7 +15528,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPlain.applyEffect();
             changes++;
         }
-		if (!InCollection(player.hairColor, Jackal_SkinColor) && changes < changeLimit && rand(3) == 0) {
+		if (!InCollection(player.skinColor, Jackal_SkinColor) && changes < changeLimit && rand(3) == 0) {
 			player.skinColor = randomChoice(Jackal_SkinColor);
             outputText("[pg]Your skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinColor + " skin.</b>");
             changes++;
