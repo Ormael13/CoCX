@@ -300,6 +300,7 @@ class Pattern {
 	public static const BEE_STRIPES:int             = Skin.PATTERN_BEE_STRIPES;
 	public static const TIGER_STRIPES:int           = Skin.PATTERN_TIGER_STRIPES;
 	public static const BATTLE_TATTOO:int           = Skin.PATTERN_BATTLE_TATTOO;
+	public static const PATTERN_GLYPH_TATTOO:int    = Skin.PATTERN_GLYPH_TATTOO;
 	public static const SPOTTED:int                 = Skin.PATTERN_SPOTTED;
 	public static const LIGHTNING_SHAPED_TATTOO:int = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
 	public static const RED_PANDA_UNDERBODY:int     = Skin.PATTERN_RED_PANDA_UNDERBODY;

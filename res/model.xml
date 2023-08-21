@@ -336,6 +336,7 @@
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="79" dy="64"/>
         <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="79" dy="64"/>
         <cell rect="801,90,49,59" name="torso_pattern/Bvenom" dx="79" dy="64"/>
+		<cell rect="1451,90,49,59" name="torso_pattern/anubisGlyph" dx="79" dy="64"/>
         <cell rect="951,90,49,59" name="breasts_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1051,90,49,59" name="torso_pattern/Bbioluminescence" dx="80" dy="61"/>
@@ -5191,6 +5192,9 @@
                 <show part="arms_pattern/Bvenom"/>
                 <show part="arms_bg_pattern/Bvenom"/>
             </case>
+			<case values="Skin.PATTERN_GLYPH_TATTOO">
+                <show part="torso_pattern/anubisGlyph"/>
+            </case>
 			<case values="Skin.PATTERN_OIL">
                 <show part="breasts_pattern/BgazerTar"/>
             </case>
@@ -6292,7 +6296,12 @@
 		</if>
 		
 		<!--Anubis set -->
-		<if test="anubisRoyalDress">
+		<if test="deathPrinceRegalia">
+			<show part="clotheHead/anubisRoyalDress"/>
+			<show part="clotheHead/anubisRoyalDressRight"/>
+			<show part="clotheHead_bg/anubisRoyalDressLeft"/>
+		</if>
+		<if test="deathPrinceOutfit">
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
