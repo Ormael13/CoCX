@@ -2518,6 +2518,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
+			if (!player.isRaceCached(Races.WEREFOX) && player.hasPerk(PerkLib.Vulpesthropy)) {
+				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werefox you once were. <b>Gained Dormant vulpesthropy.</b>\n");
+				player.createPerk(PerkLib.VulpesthropyDormant,0,0,0,0);
+				player.statStore.removeBuffs("Vulpesthropy");
+				player.removePerk(PerkLib.Vulpesthropy);
+				needNext = true;
+			}
 
 			if (player.hasPerk(PerkLib.FutaForm)) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)

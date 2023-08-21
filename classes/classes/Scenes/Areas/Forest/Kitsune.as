@@ -218,6 +218,7 @@ public class Kitsune extends Monster
 				this.weaponAttack = 8;
 				this.armorDef = 5;
 				this.armorMDef = 30;
+				this.tailCount = 4;
 				this.bonusHP = 120;
 				this.bonusLust = 144;
 				this.level = 19;
@@ -228,6 +229,7 @@ public class Kitsune extends Monster
 				this.weaponAttack = 9;
 				this.armorDef = 6;
 				this.armorMDef = 36;
+				this.tailCount = 5;
 				this.bonusHP = 130;
 				this.bonusLust = 180;
 				this.level = 25;
@@ -238,6 +240,7 @@ public class Kitsune extends Monster
 				this.weaponAttack = 10;
 				this.armorDef = 7;
 				this.armorMDef = 42;
+				this.tailCount = 5;
 				this.bonusHP = 140;
 				this.bonusLust = 216;
 				this.level = 31;
@@ -248,6 +251,7 @@ public class Kitsune extends Monster
 				this.weaponAttack = 11;
 				this.armorDef = 8;
 				this.armorMDef = 48;
+				this.tailCount = 6;
 				this.bonusHP = 150;
 				this.bonusLust = 252;
 				this.level = 37;

@@ -368,7 +368,8 @@ import flash.utils.getQualifiedClassName;
 				if (bonus > limit) bonus = limit;
 				maxOver2 += (maxHP() * 0.01 * bonus);
 			}
-			maxOver *= maxOver2;//~240%
+			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
+			maxOver *= maxOver2;//~290%
 			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -2625,7 +2626,7 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.FerasBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
 			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)
 			|| hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
@@ -2644,17 +2645,17 @@ import flash.utils.getQualifiedClassName;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
-				if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !hasStatusEffect(StatusEffects.WereraceRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
+				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !hasStatusEffect(StatusEffects.WereraceRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) {
 					var br:Number = 0.5;
 					var mp:Number = 2;
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
 					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
-					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) br += ((perkv1(IMutationsLib.HengeyokaiBirthrightIM) - 1) * 0.5);
-					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3 && hasStatusEffect(StatusEffects.CrinosShape)) br *= 2;
+					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 2) br += ((perkv1(IMutationsLib.FerasBirthrightIM) - 1) * 0.5);
+					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 3 && hasStatusEffect(StatusEffects.CrinosShape)) br *= 2;
 					healingPercent += (br * mp);
 				}
 				if (hasStatusEffect(StatusEffects.CrinosShape) && hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) {
-					if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3) healingPercent += 2;
+					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 3) healingPercent += 2;
 					healingPercent += 2;
 				}
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled) && !hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
@@ -2685,6 +2686,10 @@ import flash.utils.getQualifiedClassName;
 				}
 				if (hasPerk(PerkLib.EnemyTrueAngel)) healingPercent += 2;
 				if (hasPerk(PerkLib.EnemyTrueDemon)) healingPercent += 1;
+				if (hasStatusEffect(StatusEffects.RegenSurge)) {
+					healingPercent += 20;
+					if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) healingPercent += 10;
+				}
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.55;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.25;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.15;
@@ -2748,7 +2753,7 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
-				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceRecovery += Math.round(maxSoulforce() * 0.005);
+				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
 				soulforceRecovery *= soulforceRecoveryMulti;
 				if (hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) soulforceRecovery = 0;
 				addSoulforce(soulforceRecovery);
@@ -3208,6 +3213,11 @@ import flash.utils.getQualifiedClassName;
 				if(statusEffectv1(StatusEffects.MonsterRegen2) <= 0)
 					removeStatusEffect(StatusEffects.MonsterRegen2);
 				addStatusValue(StatusEffects.MonsterRegen2,1,-1);
+			}
+			if(hasStatusEffect(StatusEffects.RegenSurge) && statusEffectv1(StatusEffects.RegenSurge) > 0) addStatusValue(StatusEffects.RegenSurge,1,-1);
+			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 3 && this.HP < 1 && !hasStatusEffect(StatusEffects.RegenSurge)) {
+				if (perkv1(IMutationsLib.FerasBirthrightIM) == 3) createStatusEffect(StatusEffects.RegenSurge,3,0,0,0);
+				if (perkv1(IMutationsLib.FerasBirthrightIM) == 4) createStatusEffect(StatusEffects.RegenSurge,4,0,0,0);
 			}
 			if(hasStatusEffect(StatusEffects.Timer)) {
 				if(statusEffectv1(StatusEffects.Timer) <= 0)

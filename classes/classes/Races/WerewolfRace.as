@@ -38,8 +38,8 @@ public class WerewolfRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(Face.WOLF_FANGS, +1)
-				.eyeType(Eyes.FERAL, +1)
+				.faceType(Face.WOLF_FANGS, +2)
+				.eyeType(Eyes.FERAL, +2)
 				.eyeType(NOT(Eyes.FENRIR), 0,-7)
 				.earType(Ears.WOLF, +1)
 				.tongueType(Tongue.DOG, +1)
@@ -49,12 +49,12 @@ public class WerewolfRace extends Race {
 				.skinCoatType(Skin.FUR, +1)
 				.rearType(RearBody.WOLF_COLLAR, +1)
 				.rearType(NOT(RearBody.FENRIR_ICE_SPIKES), 0, -7)
-				.corruption(AT_LEAST(20), +2)
-				.hasPerk(PerkLib.Lycanthropy, +1, -11);
+				.corruption(AT_LEAST(20), +1)
+				.hasPerk(PerkLib.Lycanthropy, +2, -11);
 		addScoresAfter(1)
 				.hasCockOfType(CockTypesEnum.WOLF, +1);
 		
-		addMutation(IMutationsLib.HengeyokaiBirthrightIM);
+		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.AlphaHowlIM);
 		
 		buildTier(12, "werewolf")

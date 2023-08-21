@@ -83,7 +83,7 @@ public class KitsuneRace extends Race {
 	public override function setup():void {
 		addScores()
 				.eyeType(Eyes.FOX, +1)
-				.eyeType(NOT(Eyes.FERAL), 0,-11)
+				.eyeType(NOT(Eyes.FERAL), 0, -11)
 				.earType(Ears.FOX, +1, -1)
 				.customScoreRequirement("tail", "multiple fox tails, +1 per tail",
 						function (body:BodyData):Boolean {
@@ -101,7 +101,8 @@ public class KitsuneRace extends Race {
 						}, +1)
 				.armType(ANY(Arms.HUMAN, Arms.KITSUNE, Arms.FOX), +1)
 				.legType(ANY(LowerBody.FOX, LowerBody.HUMAN), +1, -1)
-				.faceType(ANY(Face.ANIMAL_TOOTHS, Face.HUMAN, Face.FOX), +1, -1);
+				.faceType(ANY(Face.ANIMAL_TOOTHS, Face.HUMAN, Face.FOX), +1, -1)
+				.rearType(NOT(RearBody.WOLF_COLLAR), 0, -7);
 		addScoresAfter(5)
 				.customRequirement("skin coat", "fur or no coat",
 						function (body:BodyData):Boolean {

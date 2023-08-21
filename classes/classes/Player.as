@@ -855,7 +855,7 @@ use namespace CoC;
 				armorDef += 1;
 			}
 			if (statStore.hasBuff("CrinosShape") && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)) {
-				if (perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) {
+				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 2) {
 					armorDef = Math.round(armorDef * 1.2);
 					armorDef += 2;
 				}

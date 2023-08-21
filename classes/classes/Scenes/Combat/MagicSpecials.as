@@ -3219,7 +3219,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GreaterCrinosShape)) modcsc += 10;
 		if (player.hasPerk(PerkLib.MasterCrinosShape)) modcsc += 20;
 		if (player.hasPerk(PerkLib.JobBeastWarrior) && player.necklaceName == "Crinos Shape necklace") modcsc += 5;
-		if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) modcsc = Math.round(modcsc * 0.5);
+		if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 2) modcsc = Math.round(modcsc * 0.5);
 		return modcsc;
 	}
 	public function assumeCrinosShape():void {

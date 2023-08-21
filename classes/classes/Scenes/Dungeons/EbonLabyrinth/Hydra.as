@@ -21,6 +21,7 @@ use namespace CoC;
 			createStatusEffect(StatusEffects.AbilityCooldown2, 3, 0, 0, 0);
 			this.HP = this.maxHP();
 			this.addStatusValue(StatusEffects.HydraTails, 1, 1);
+			this.tailCount += 1;
 			this.removePerk(PerkLib.HydraRegeneration);
 			this.createPerk(PerkLib.HydraRegeneration, this.statusEffectv1(StatusEffects.HydraTails), 0, 0, 0);
 		}
@@ -120,6 +121,7 @@ use namespace CoC;
 			this.weaponVerb="punch";
 			this.weaponAttack = 5;
 			this.armorName = "scales";
+			this.tailCount = 5;
 			this.lust = 30;
 			this.drop = new WeightedDrop(consumables.HYDRASC, 1);
 			this.createStatusEffect(StatusEffects.HydraTails, 5, 0, 0, 0);

@@ -832,7 +832,8 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				maxOver2 += (0.01 * bonus);
 			}
-			maxOver *= maxOver2;//~220%
+			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
+			maxOver *= maxOver2;//~270%
 			maxOver = Math.round(maxOver);
 			return Math.min(21999999,maxOver);
 		}

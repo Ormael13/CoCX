@@ -11193,7 +11193,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Grow Fox Arms
-        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && rand(3) == 0) {
+        if (changes < changeLimit && player.arms.type != Arms.FOX && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsFox.applyEffect();
             changes++;
@@ -11339,7 +11339,7 @@ public final class Mutations extends MutationsHelper {
             transformations.LowerBodyFox(2).applyEffect();
             changes++;
         }
-        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && rand(3) == 0) {
+        if (changes < changeLimit && player.arms.type != Arms.FOX && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsFox.applyEffect();
             changes++;
@@ -11404,14 +11404,17 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             transformations.RearBodyWolfCollar.applyEffect();
             changes++;
-        }/*
-        if (player.lowerBody == LowerBody.FOX && player.arms.type == Arms.FOX && player.faceType == Face.FOX_FANGS && player.eyes.type == Eyes.FERAL && player.skin.hasScarShapedTattoo() && !player.hasPerk(PerkLib.Vulpesthropy) && changes < changeLimit) {
-            outputText("[pg]You feel a limitless energy fill your orcish limbs, as your body tenses, rippling muscle making your scar-like tattoos look even more realistic. Your [face] gains a look of reverence has you hear the all mighty words of your goddess, telling you to go and claim new lands, conquer all living things, bring them beneath your rule.");
-            outputText("[pg]She tells you that as long as you bear her blessing, you will not fall in battle, even if fatal blows are dealt. Go forth and prove that puny human who said people die when they are killed wrong.");
+        }
+        if (player.ears.type == Ears.FENNEC_FOX && player.faceType == Face.FOX_FANGS && player.eyes.type == Eyes.FERAL && !player.hasPerk(PerkLib.Vulpesthropy) && changes < changeLimit) {
+            outputText("[pg]Scarcely audible sounds of slumber shuffle distantly around you before being followed by mischevious laughter. At the corner of your eye, you spot some subtle movement before you notice a figure clad in white adornments with a face paler than snow. Her smiling face beckons you forth as she points above herself. ");
+            outputText("You watch as glowing orbs she gestured toward shift as they gradually sharpen into a clearer figure, resembling the eyes of a large beast before a second pair of eyes open.");
+            outputText("[pg]\"<i>Open your eyes, newborn, and gaze upon the world. Do not look with your eyes, but open your mind so that it may marvel at the beauty of the world you're already living in. Feel it pulsate, constantly changing and grab it... Grab it to make it yours. Weave it into any form you want. One day, the White-Faced One and The One That Sleeps Below shall lay waste to this world, and until then: Learn, adapt, survive until our return.</i>\"");
+			outputText("[pg]With her last words, your vision starts to blur before you awaken from your intruded slumber. Your world seems to quake and tremor as you fall back into yourself, landing flat onto the earth below you. As the tremors fade, you feel... strange... different. Something has changed within you.");
             outputText("[pg]<b>(Gained Perk: Vulpesthropy</b>)");
+			if (player.hasPerk(PerkLib.VulpesthropyDormant)) player.removePerk(PerkLib.VulpesthropyDormant);
             player.createPerk(PerkLib.Vulpesthropy, 0, 0, 0, 0);
             changes++;
-        }*/
+        }
         if (changes == 0) {
             outputText("[pg]Well that didn't do much, but you do feel a little refreshed!");
             fatigue(-50);
@@ -15570,7 +15573,12 @@ public final class Mutations extends MutationsHelper {
         }
         if (changes < changeLimit && !player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 15 && rand(3) == 0 && player.cor >= (50-player.corruptionTolerance)) {
             outputText("[pg]You begin to fantasize about building up a whole army of slave at your command and with your growing anubi powers this fetish is right within your reach.[pg]<b>(Gained the Mummy Lord perk!)</b>");
-            player.createPerk(PerkLib.MummyLord, 0, 0, 0, 0);
+            if (player.hasPerk(PerkLib.MummyLordDormant)) {
+				var mummies:Number = player.perkv1(PerkLib.MummyLord);
+				player.createPerk(PerkLib.MummyLord, mummies,0,0,0);
+				player.removePerk(PerkLib.MummyLordDormant);
+			}
+			else player.createPerk(PerkLib.MummyLord,0,0,0,0);
             changes++;
         }
 		player.refillHunger(10);

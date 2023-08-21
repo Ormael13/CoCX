@@ -6751,7 +6751,7 @@ public class Combat extends BaseContent {
             if (Forgefather.refinement == 4) unarmedMulti += (1);
         }
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) {
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) unarmed *= 1.2;
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 2) unarmed *= 1.2;
 			else unarmed *= 1.1;
 		}
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
@@ -9050,6 +9050,10 @@ public class Combat extends BaseContent {
 			}//v3 = 1 - jesli chaneluje zaklecie/special to nie traci wzmocnienia
 			if (player.statusEffectv2(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 2, -1);
         }
+		if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3 && player.HP < 1 && !player.hasStatusEffect(StatusEffects.RegenSurge)) {
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) == 3) player.createStatusEffect(StatusEffects.RegenSurge,3,0,0,0);
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) == 4) player.createStatusEffect(StatusEffects.RegenSurge,4,0,0,0);
+		}
         monster.combatRoundUpdate();
 		// Advance abilities
         for each (var ability:CombatAbility in CombatAbility.Registry) {
@@ -10984,7 +10988,7 @@ public class Combat extends BaseContent {
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
             if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
             if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
-				if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3) healingPercent += 2;
+				if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) healingPercent += 2;
 				healingPercent += 2;
 			}
             if (player.hasPerk(PerkLib.Sanctuary)) healingPercent += 1;
@@ -11048,14 +11052,18 @@ public class Combat extends BaseContent {
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
         if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
-        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) {
+        if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
 			var hbr:Number = 0.5;
 			var mp:Number = 2;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += ((player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) - 1) * 0.5);
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3 && player.statStore.hasBuff("CrinosShape")) hbr *= 2;
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 2) hbr += ((player.perkv1(IMutationsLib.FerasBirthrightIM) - 1) * 0.5);
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3 && player.statStore.hasBuff("CrinosShape")) hbr *= 2;
 			maxPercentRegen += (hbr * mp);
+		}
+		if (player.hasStatusEffect(StatusEffects.RegenSurge)) {
+			maxPercentRegen += 20;
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxPercentRegen += 10;
 		}
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxPercentRegen += 1;
@@ -11104,14 +11112,18 @@ public class Combat extends BaseContent {
 			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
 		}
 		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxRegen += 1;
-        if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
+        if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 1 && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
 			var hbr:Number = 0.5;
 			var mp:Number = 2;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) mp -= 1;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) mp += 2;
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) hbr += ((player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) - 1) * 0.5);
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3 && player.statStore.hasBuff("CrinosShape")) hbr *= 2;
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 2) hbr += ((player.perkv1(IMutationsLib.FerasBirthrightIM) - 1) * 0.5);
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3 && player.statStore.hasBuff("CrinosShape")) hbr *= 2;
 			maxRegen += (hbr * mp);
+		}
+		if (player.hasStatusEffect(StatusEffects.RegenSurge)) {
+			maxRegen += 20;
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxRegen += 10;
 		}
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxRegen += 1;
@@ -11120,7 +11132,7 @@ public class Combat extends BaseContent {
         if (isNearWater() && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
 		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator) && !player.hasStatusEffect(StatusEffects.WereraceRegenerationDisabled)) {
-			if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 3) maxRegen += 2;
+			if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 3) maxRegen += 2;
 			maxRegen += 2;
 		}
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
@@ -11265,7 +11277,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
-        if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1 && player.tailType == Tail.FOX) soulforceregen += Math.round(player.maxSoulforce() * 0.0025 * player.tailCount);
+        if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceregen += Math.round(player.maxSoulforce() * 0.0025 * player.tailCount);
 		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
@@ -11275,6 +11287,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.DaoistElderStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
 		if (player.hasPerk(PerkLib.DaoistOverlordStage)) soulforceregen += Math.round(player.maxSoulforce() * 0.005);
 		if (player.hasPerk(PerkLib.SoulNexus)) soulforceregen += Math.round(player.maxSoulforce() * 0.05);
+		if (player.hasPerk(PerkLib.Vulpesthropy)) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
 		if (player.headJewelry == headjewelries.DEATHPR && player.soulforce >= Math.round(player.maxSoulforce() * 0.5)) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
@@ -11414,7 +11427,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.ImprovedCrinosShape)) com += 2;
                 if (player.hasPerk(PerkLib.GreaterCrinosShape)) com += 4;
                 if (player.hasPerk(PerkLib.MasterCrinosShape)) com += 8;
-				if (player.perkv1(IMutationsLib.HengeyokaiBirthrightIM) >= 2) com *= 2;
+				if (player.perkv1(IMutationsLib.FerasBirthrightIM) >= 2) com *= 2;
                 gainedwrath += com * BonusWrathMult;
             }
 			if (player.statStore.hasBuff("AsuraForm")) {
@@ -16333,6 +16346,12 @@ public function soulskillMagicalMod():Number {
         if (player.hasPerk(PerkLib.SoulEmperor)) modssm += 2;
         //if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 2;
     }
+	if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 2) {
+		var wfb:Number = 0.5;
+		//if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) wfb += ;
+		if (player.tailCount >= 3) wfb *= 2;
+		modssm += wfb;
+	}
     if (player.shieldName == "spirit focus") modssm += .25;
 	if (player.armor == armors.DEATHPO) modssm += .5;
 	if (player.armor == armors.DEATHPGA) modssm += 2;

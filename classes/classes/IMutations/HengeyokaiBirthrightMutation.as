@@ -124,7 +124,7 @@ public class HengeyokaiBirthrightMutation extends IMutationPerkType
 
         public function HengeyokaiBirthrightMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADAPTATIONS, 2);
+			super(mName + " IM", mName, SLOT_NONE, 2);
         }
 
     }

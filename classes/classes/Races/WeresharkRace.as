@@ -41,9 +41,22 @@ public class WeresharkRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.eyeType(Eyes.FERAL, +1);
+				.faceType(Face.SHARK_TEETH,1)
+				.eyeType(Eyes.FERAL, +2)
+				.gillType(Gills.FISH, +1)
+				.earType(Ears.SHARK, +1)
+				.rearType(RearBody.SHARK_FIN, +1)
+				.armType(Arms.SHARK, +1);
+				//.legType(LowerBody.SHARK, +1)
+				//.tailType(Tail.SHARK, +1)
+				//.hairTypeAndColor1(Hair.NORMAL, "silver", +1)
+				//.skinCoatTypeAndColor1(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), ANY(SharkScaleColors), +1)
+				//.skinCoatPattern(Skin.PATTERN_TIGER_STRIPES, +1)
+				//.vaginaType(VaginaClass.SHARK, +1)
+				//.wingType(NOT(Wings.FEATHERED_LARGE), 0, -1000)
+				//.hasPerk(PerkLib., +2, -11)	7/12
 		
-		addMutation(IMutationsLib.HengeyokaiBirthrightIM);
+		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
 		buildTier(12, "wereshark")

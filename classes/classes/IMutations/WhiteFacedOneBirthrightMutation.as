@@ -31,17 +31,23 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
                 descS += "fully developed";
             }
             if (descS != "")descS += " soul nexus-like organ modeled after White-Faced One. (+";
-			if (pTier == 1){
+			if (pTier == 1 || pTier == 2){
                 descS += "0.25/0.5/1";
             }
-			if (pTier == 2){
+			if (pTier == 3){
                 descS += "0.5/1/2";
             }
 			if (pTier >= 1){
-                descS += "% Soulforce regen per fox tail you posses (New moon / Half moon / Full moon)";
+                descS += "% Soulforce regen per tail you posses (New moon / Half moon / Full moon)";
             }
             if (pTier == 2){
-                descS += ", ";
+                descS += ", +";
+            }
+            if (pTier == 2){
+                descS += "5";
+            }
+            if (pTier >= 2){
+                descS += "0% to magical soulskills power (doubled if you have 3+ tails)";
             }
             if (pTier == 3){
                 descS += ", ";
