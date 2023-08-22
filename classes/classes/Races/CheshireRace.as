@@ -41,7 +41,7 @@ public class CheshireRace extends Race{
 				.faceType(Face.CHESHIRE, +2)
 				.faceType(Face.CHESHIRE_SMILE, +2)
 				.eyeType(Eyes.CAT, +1)
-				.eyeColor(ANY("Yellow"), +1)
+				.eyeColor("yellow", +1)
 				.earType(Ears.CAT, +1)
 				.tongueType(Tongue.CAT, +1)
 				.tailType(Tail.CAT, +1)

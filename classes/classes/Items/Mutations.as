@@ -6651,16 +6651,9 @@ public final class Mutations extends MutationsHelper {
         }
 
         //CAT-FACE!
-        var wasCheshire:Boolean = player.faceType == Face.CHESHIRE;
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES) {
             outputText("[pg]");
             transformations.FaceCatCanines.applyEffect();
-            changes++;
-        }
-
-        if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.CHESHIRE && !wasCheshire) {
-            outputText("[pg]");
-            transformations.FaceCheshireSmile.applyEffect();
             changes++;
         }
 
@@ -6934,7 +6927,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //cheshire fur color
-        if (rand(4) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
+        if (rand(3) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
             outputText("[pg]Your fur and hair color are suddenly changing as dark fur covered with light purple stripe begins to cover every area you have fur on. Your hair also changed color to match it turning to lilac strands separated by white strands every now and then. This change makes you feel like smiling at the absurdity of it all.");
             player.hairColor1 = "dark purple";
             player.furColor1 = "dark purple";

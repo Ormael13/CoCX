@@ -11,7 +11,16 @@ public class AbyssalSharkRace extends Race {
 	
 	public function AbyssalSharkRace(id:int) {
 		super("Abbysal Shark", id, []);//RaceBody);
-		disabled = true;
+		//disabled = true;
+	}
+	
+	public override function setup():void {
+		
+		addScores()
+				.gillType(Gills.FISH, +1);
+		
+		buildTier(10, "shark-morph")
+				.end();
 	}
 }
 }
