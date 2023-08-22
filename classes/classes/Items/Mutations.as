@@ -6937,8 +6937,8 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
             outputText("[pg]Your fur and hair color are suddenly changing as dark fur covered with light purple stripe begins to cover every area you have fur on. Your hair also changed color to match it turning to lilac strands separated by white strands every now and then. This change makes you feel like smiling at the absurdity of it all.");
             player.hairColor1 = "dark purple";
-            player.furColor1 = "light purple";
-            player.hairColor2 = "dark purple";
+            player.furColor1 = "dark purple";
+            player.hairColor2 = "light purple";
             player.furColor2 = "light purple";
             changes++;
         }
