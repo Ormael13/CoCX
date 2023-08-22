@@ -11,7 +11,7 @@ import classes.Races;
 
 public class AnubiHeartMutation extends IMutationPerkType
 	{
-		private static const mName:String = "Anubis Heart";
+		private static const mName:String = "Anubi Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -47,7 +47,10 @@ public class AnubiHeartMutation extends IMutationPerkType
                 descS = "0% Soulforce";
             }
             if (pTier >= 3){
-                descS = "Your heart metamorphosis reached pseudo-dragon level. (+3 Fatigue / +12 SF / +15 Mana / +3 Wrath regen, +1% HP regen, +15% of max core Str as phantom Str)";
+                descS = ". Soul skills become vampiric in nature, healing the user for 10% of their hp on use. This effect can only happen once per round";
+            }
+            if (pTier >= 4){
+                descS = ". While below half health, soul skill inflicts 20% more damage and leech twice as many hit points";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -100,7 +103,7 @@ public class AnubiHeartMutation extends IMutationPerkType
 
         public function AnubiHeartMutation() 
 		{
-			super(mName + " IM", mName, SLOT_HEART, 2);
+			super(mName + " IM", mName, SLOT_HEART, 4);
         }
 
     }

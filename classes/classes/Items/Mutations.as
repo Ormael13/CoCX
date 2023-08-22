@@ -11411,8 +11411,19 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]\"<i>Open your eyes, newborn, and gaze upon the world. Do not look with your eyes, but open your mind so that it may marvel at the beauty of the world you're already living in. Feel it pulsate, constantly changing and grab it... Grab it to make it yours. Weave it into any form you want. One day, the White-Faced One and The One That Sleeps Below shall lay waste to this world, and until then: Learn, adapt, survive until our return.</i>\"");
 			outputText("[pg]With her last words, your vision starts to blur before you awaken from your intruded slumber. Your world seems to quake and tremor as you fall back into yourself, landing flat onto the earth below you. As the tremors fade, you feel... strange... different. Something has changed within you.");
             outputText("[pg]<b>(Gained Perk: Vulpesthropy</b>)");
+			var ngM:Number = (player.newGamePlusMod() + 1);
+			var bonusStats:Number = 0;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
+			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (player.hasPerk(PerkLib.VulpesthropyDormant)) player.removePerk(PerkLib.VulpesthropyDormant);
             player.createPerk(PerkLib.Vulpesthropy, 0, 0, 0, 0);
+			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.1*ngM,'tou.mult': bonusStats*ngM,'spe.mult': bonusStats*0.4*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+			player.trainStat('str', +5, 100);
+			player.trainStat('tou', +5, 100);
+			player.trainStat('spe', +5, 100);
+			player.trainStat('wis', +5, 100);
             changes++;
         }
         if (changes == 0) {
@@ -15575,7 +15586,8 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]You begin to fantasize about building up a whole army of slave at your command and with your growing anubi powers this fetish is right within your reach.[pg]<b>(Gained the Mummy Lord perk!)</b>");
             if (player.hasPerk(PerkLib.MummyLordDormant)) {
 				var mummies:Number = player.perkv1(PerkLib.MummyLord);
-				player.createPerk(PerkLib.MummyLord, mummies,0,0,0);
+				var dura:Number = player.perkv2(PerkLib.MummyLord);
+				player.createPerk(PerkLib.MummyLord,mummies,dura,0,0);
 				player.removePerk(PerkLib.MummyLordDormant);
 			}
 			else player.createPerk(PerkLib.MummyLord,0,0,0,0);

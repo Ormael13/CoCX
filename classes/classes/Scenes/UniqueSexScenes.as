@@ -382,10 +382,13 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSAnubiMummyCurse():Array{
             var btnSet:Array = ["Mummy Curse!!"];
-            if (player.hasPerk(PerkLib.MummyCurse) && !monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) && !monster.hasPerk(PerkLib.EnemyGooType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyPlantType) && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType) && player.hasItem(useables.BANDAGE, 1) && player.perkv1(PerkLib.MummyLord) < 5) btnSet.push(anubisMummyCurse, "");
+            if (player.hasPerk(PerkLib.MummyCurse) && AnubiMummyCurseNotWrongEnemyType() && player.hasItem(useables.BANDAGE, 1) && player.perkv1(PerkLib.MummyLord) < player.mummyControlLimit()) btnSet.push(anubisMummyCurse, "");
             else btnSet.push(false, "Req. to be a Anubi.");
             return btnSet;
         }
+		private function AnubiMummyCurseNotWrongEnemyType():Boolean{
+			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) && !monster.hasPerk(PerkLib.EnemyGooType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyPlantType) && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType));
+		}
 
 		public function RaijuRapeSupercharged():void {
 			clearOutput();

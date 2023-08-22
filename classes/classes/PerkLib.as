@@ -3736,7 +3736,11 @@ public class PerkLib
 		public static const Vulpesthropy:PerkType = mk("Vulpesthropy", "Vulpesthropy",
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage and you can naturaly absorb ambient soulforce. (+1%)");
 		public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
-				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again.")
+				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again.");
+		public static const Karchariathropy:PerkType = mk("Karchariathropy", "Karchariathropy",
+				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, .");
+		public static const KarchariathropyDormant:PerkType = mk("Dormant Karchariathropy", "Dormant Karchariathropy",
+				"You sometimes hear echoes of the call of the moon. If you were more of a wereshark you likely would feel its pull again. A karchariathrope is never truly cured.");
 		public static const LactaBovineImmunity:PerkType = mk("Lacta Bovine Immunity", "Lacta Bovine Immunity",
 				"You are seldom immune to all the dangerous effect of minotaur cum but you are also naturaly addicted to it.");
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
@@ -3765,7 +3769,7 @@ public class PerkLib
 		public static const MummyCurse:PerkType = mk("Mummy Curse", "Mummy Curse",
 				"Defeated humanoids and beastmen with souls can be mummified and enslaved.");
 		public static const MummyLord:PerkType = mk("Mummy Lord", "Mummy Lord",
-				"Can control and gather mummies. Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Alpha Howl also increases the amount of mummies under your control.");
+				"Can control and gather mummies (up to 5). Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Each mummy under your control increases soulskill power by 5%. Alpha Howl also increases the amount of mummies under your control (5 * tier).");
 		public static const MummyLordDormant:PerkType = mk("Dormant Mummy Lord", "Dormant Mummy Lord",
 				"You not enough of Anubi to command the mummies you created before.");
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
@@ -4281,6 +4285,9 @@ public class PerkLib
 		public static const NoItemsGained:PerkType = mk("No Item(s) Gained", "No Item(s) Gained", "");
 		public static const OverMaxHP:PerkType = mk("OverMax HP", "OverMax HP", "");
 		public static const OverMaxLust:PerkType = mk("OverMax Lust", "OverMax Lust", "");
+		public static const OverMaxMana:PerkType = mk("OverMax Mana", "OverMax Mana", "");//NYU
+		public static const OverMaxSoulforce:PerkType = mk("OverMax Soulforce", "OverMax Soulforce", "");//NYU
+		public static const OverMaxWrath:PerkType = mk("OverMax Wrath", "OverMax Wrath", "");//NYU
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
@@ -4300,6 +4307,7 @@ public class PerkLib
 			ePerkL.push(AlwaysSuccesfullRunaway);
 			ePerkL.push(DarknessNature);
 			ePerkL.push(DarknessVulnerability);
+			ePerkL.push(DieHardHP);
 			ePerkL.push(Enemy300Type);
 			ePerkL.push(EnemyBeastOrAnimalMorphType);
 			ePerkL.push(EnemyBossType);
@@ -4331,8 +4339,14 @@ public class PerkLib
 			ePerkL.push(LightningVulnerability);
 			ePerkL.push(MonsterRegeneration);
 			ePerkL.push(NoExpGained);
+			ePerkL.push(NoDodges);
 			ePerkL.push(NoGemsLost);
+			ePerkL.push(NoItemsGained);
 			ePerkL.push(OverMaxHP);
+			ePerkL.push(OverMaxLust);
+			ePerkL.push(OverMaxMana);
+			ePerkL.push(OverMaxSoulforce);
+			ePerkL.push(OverMaxWrath);
 			ePerkL.push(Sentience);
 			ePerkL.push(ShieldWielder);
 			ePerkL.push(TeaseResistance);

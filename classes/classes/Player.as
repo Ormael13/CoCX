@@ -1332,6 +1332,12 @@ use namespace CoC;
 		{
 			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
 		}
+		public function mummyControlLimit():Number
+		{
+			var mCL:Number = 5;
+			if (perkv1(IMutationsLib.AlphaHowlIM) >= 1) mCL
+			return mCL;
+		}
 
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];

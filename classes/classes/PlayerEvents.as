@@ -448,7 +448,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nWith the waning of your anubi powers so does your ability to command your slaves. No longer hearing your orders your pets keeps to the last command you gave them and stick to the area at the far edge of your camp locked in a small recurring orgy of their own making in order to attempt to sate their unending hunger for sex and life force, something only you in your anubi form or a victim could provide to them.\n\n(<b>Lost the Mummy Lord Perk!</b>)\n");
 				if (player.perkv1(PerkLib.MummyLord) > 0) {
 					var mummies:Number = player.perkv1(PerkLib.MummyLord);
-					player.createPerk(PerkLib.MummyLordDormant,mummies,0,0,0);
+					var dura:Number = player.perkv2(PerkLib.MummyLord);
+					player.createPerk(PerkLib.MummyLordDormant,mummies,dura,0,0);
 				}
 				player.removePerk(PerkLib.MummyLord);
 				needNext = true;
@@ -1386,6 +1387,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.dynStats("lus", 10, "scale", false);
 				needNext = true;
 			}
+			if ((player.hasPerk(PerkLib.MummyLord) && player.perkv2(PerkLib.MummyLord) > 0) || (player.hasPerk(PerkLib.MummyLordDormant) && player.perkv2(PerkLib.MummyLordDormant) > 0)) {
+				if (player.hasPerk(PerkLib.MummyLord)) player.addPerkValue(PerkLib.MummyLord,2,-1);
+				else player.addPerkValue(PerkLib.MummyLordDormant,2,-1);
+			}
 			if (CoC.instance.model.time.hours == 6) {
 				//Getting chrismas tree
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) {
@@ -1748,7 +1753,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Dark Affinity
-			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.racialScoreCached(Races.VAMPIRE) >= 15 || player.isRaceCached(Races.APOPHIS), "You are at home in darkness, seeing as clearly in the shadows wich you find as comforting as broad daylight.", "The pitch black darkness becomes hostile toward you again as you lose your affinity toward it.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.racialScoreCached(Races.VAMPIRE) >= 15 || player.isRaceCached(Races.APOPHIS) || player.isRaceCached(Races.ANUBIS), "You are at home in darkness, seeing as clearly in the shadows wich you find as comforting as broad daylight.", "The pitch black darkness becomes hostile toward you again as you lose your affinity toward it.");
 			//Compelling Aria
 			needNext ||= player.gainOrLosePerk(PerkLib.HarpySong, player.isAnyRaceCached(Races.SIREN, Races.HARPY, Races.PHOENIX, Races.THUNDERBIRD) || player.hasMutation(IMutationsLib.HarpyHollowBonesIM), "Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.");
 			needNext ||= player.gainOrLosePerk(PerkLib.MelkieSong, player.tongue.type == Tongue.MELKIE || player.hasMutation(IMutationsLib.MelkieLungIM), "Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of a Melkie adapting even your tongue and voice. Well you could always go sit on a rock and sing in case some sailor came by.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.")

@@ -312,30 +312,6 @@ public class TestMenu extends BaseContent
 		inventory.takeItem(necklaces.CATBELL, curry(NonEquipmentMenu, 2));
 	}
 	public function desertBerryTest():void {
-			player.tailType = Tail.FOX;
-			if (player.tailCount != 1) player.tailCount = 1;
-			player.rearBody.type = RearBody.WOLF_COLLAR;
-			player.eyes.type = Eyes.FERAL;
-			//player.tongue.type = Tongue.;
-			player.wings.type = Wings.NONE;
-			player.antennae.type = Antennae.NONE;
-			player.horns.type = Horns.NONE;
-			CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
-			if (player.hasCock() && player.foxCocks() < 1) {
-				var selectedCockValue:int = -1;
-				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
-				{
-					if (player.cocks[indexI].cockType != CockTypesEnum.FOX)
-					{
-						selectedCockValue = indexI;
-						break;
-					}
-				}
-				if (selectedCockValue != -1) {
-					transformations.CockFox(selectedCockValue).applyEffect(false);
-					player.thickenCock(selectedCockValue, 2);
-				}
-			}
 			var ngM:Number = (player.newGamePlusMod() + 1);
 			var bonusStats:Number = 0;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
@@ -2699,4 +2675,4 @@ public class TestMenu extends BaseContent
 		else SceneLib.tyrantia.firstEncounter();
 	}
 	}
-}
+}

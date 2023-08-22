@@ -46,7 +46,7 @@ public class WeresharkRace extends Race {
 				.gillType(Gills.FISH, +1)
 				.earType(Ears.SHARK, +1)
 				.rearType(RearBody.SHARK_FIN, +1)
-				.armType(Arms.SHARK, +1);
+				.armType(Arms.SHARK, +1)
 				//.legType(LowerBody.SHARK, +1)
 				//.tailType(Tail.SHARK, +1)
 				//.hairTypeAndColor1(Hair.NORMAL, "silver", +1)
@@ -54,7 +54,7 @@ public class WeresharkRace extends Race {
 				//.skinCoatPattern(Skin.PATTERN_TIGER_STRIPES, +1)
 				//.vaginaType(VaginaClass.SHARK, +1)
 				//.wingType(NOT(Wings.FEATHERED_LARGE), 0, -1000)
-				//.hasPerk(PerkLib., +2, -11)	7/12
+				.hasPerk(PerkLib.Karchariathropy, +2, -11);	//7/12
 		
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);

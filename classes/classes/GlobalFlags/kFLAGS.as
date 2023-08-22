@@ -2294,8 +2294,8 @@ public static const DISCOVERED_OUTER_BATTLEFIELD:int   	                        
 public static const DISCOVERED_INNER_BATTLEFIELD:int                   			   	= 2286;	//Not Yet Used Flag
 public static const DISCOVERED_DEFILED_RAVINE:int                                   = 2287; // No longer used
 public static const DISCOVERED_BATTLEFIELD_BOUNDARY:int                             = 2288;
-public static const DISCOVERED_02289:int                          		   = 2289;			//Not Yet Used Flag //for Pit or Abyss area
-public static const DISCOVERED_BEACH:int                        		   			= 2290; // No longer used
+public static const IN_COMBAT_PLAYER_MUMMY_ATTACKED:int                          	= 2289;
+public static const DISCOVERED_BEACH:int                        					= 2290; // No longer used
 public static const DISCOVERED_OCEAN:int                           		            = 2291; // No longer used
 public static const DISCOVERED_DEEP_SEA:int                           		        = 2292; // Not used
 public static const DISCOVERED_SEABED:int                                   		= 2293;	//Not Yet Used Flag
@@ -2806,7 +2806,7 @@ public static const DISCOVERED_INNER_DESERT:int                                 
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene
-public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801; // No longer used
+public static const IN_COMBAT_PLAYER_ANUBI_HEART_LEECH:int                          = 2801;
 public static const E_ICHOR_PITY_SYSTEM:int                                   		= 2802;
 public static const NECROMANCER_SKELETONS:int                                   	= 2803;
 public static const IN_COMBAT_PLAYER_SKELETONS_ATTACKED:int                         = 2804;

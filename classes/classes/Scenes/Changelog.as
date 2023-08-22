@@ -108,13 +108,13 @@ public class Changelog extends BaseContent
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox/Elder werefox/Acient werefox bonuses at 12/16/20 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200% to Tou multi, +40/70/100% to Spe multi, +100/150/200% to Wis multi, +70/140/210 to Sens, -10% to max lust multi, +100/150/200% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New mutation perk: Fera's Birthright (Primitive). Req. Fera's Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
-			outputText("-New mutation perk: Anubis Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
+			outputText("-New mutation perk: Anubi Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
 			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
 			outputText("-New event perk: Soul Nexus. Req. having 20+ in anubis score. Effects: An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.\n");
-			outputText("-New mutation perk: Anubis Heart (Primitive). Req. Anubis Heart and lvl 30+. Effects: Increase Soulskills power by 30%. Soul skills cost 50% more but are twice as effective when above 80% Soulforce.\n");
+			outputText("-New mutation perk: Anubi Heart (Primitive). Req. Anubi Heart and lvl 30+. Effects: Increase Soulskills power by 30%. Soul skills cost 50% more but are twice as effective when above 80% Soulforce.\n");
 			outputText("-New magic soulskill: Soul drain. Accessable by having 20+ in anubis racial score. Effects: Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen. (True Damage)\n");
 			outputText("-New magic soulskill: Finger of death. Accessable by having 20+ in anubis racial score. Effects: Once per 6 rounds inflict massive damage. Also damage the opponent's toughness and strength by 10. Ineffective on foes who lack a soul.\n");
-			outputText("-New event perk: Mummy Lord. Req. having 15+ in anubis score and 50+ corruption. Effects: Can control and gather mummies. Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Alpha Howl also increases the amount of mummies under your control.\n");
+			outputText("-New event perk: Mummy Lord. Req. having 15+ in anubis score and 50+ corruption. Effects: Can control and gather mummies (up to 5). Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Each mummy under your control increases soulskill power by 5%. Alpha Howl also increases the amount of mummies under your control (5 * tier).\n");
 			outputText("-New event perk: Dormant Mummy Lord. Req. having 1+ mummies when loosing Mummy Lord perk. Effects: Hmmmm.... none it just let you know your mummies awaits when your PC become able to control mummies again.\n");
 			outputText("-Dominated by werewolf/cerberus female werewolf and enslaved by anubi mummies would count toward current camp population. In case PC loose ability to control mummies due to loosing Mummy Lord perk their population won't count toward total population counter. Also both types of 'camp members' would be listed in player info section under camp population section.\n");
 			outputText("-New Unique Sexscene: Mummy Curse - req. to be anubi with mummy curse/lord perks and having badge in inventory. Also can be only used against enemeis that are sentient, humanoid and with soul. After scene PC will gain new mummy minion up to cap of 5 mummies.\n");
@@ -128,10 +128,11 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Fera's Birthright (Evolved). Req. Fera's Birthright (Primitive) and lvl 60+. Effects: Increases HP regeneration 1.5-6% based on moon phase (doubled when in Crinos Shape). Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it, once each fight when HP drops below 0 it would trigger Regeneration Surge (+20% regen for 2 turns).\n");
 			outputText("-New mutation perk: Fera's Birthright (Final Form). Req. Fera's Birthright (Evolved) and lvl 90+. Effects: Increases HP regeneration 2-8% based on moon phase (doubled when in Crinos Shape). Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it, ");
 			outputText("once each fight when HP drops below 0 it would trigger Regeneration Surge (+40% regen for 3 turns), +20% OverMax HP.\n");
-			outputText("-Death Prince Regalia, outfit and Golden armor sprited. (Liadri)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Death Prince Regalia, outfit and Golden armor & Anubis glyph tattoo sprited. (Liadri)\n");
+			outputText("-New mutation perk: Anubi Heart (Evolved). Req. Anubi Heart (Primitive) and lvl 60+. Effects: Increase Soulskills power by 40%. Soul skills cost 50% more but are twice as effective when above 70% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. This effect can only happen once per round.\n");
+			outputText("-New mutation perk: Anubi Heart (Final Form). Req. Anubi Heart (Evolved) and lvl 90+. Effects: Increase Soulskills power by 50%. Soul skills cost 50% more but are twice as effective when above 60% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. ");
+			outputText("This effect can only happen once per round. While below half health, soul skill inflicts 50% more damage and leech twice as many hit points.\n");
+			outputText("-New Masturbation option: Mummy Sex. Req. 50%+ Soulfroce, be Anubi and have 3+ mummies. Beside typical effects it would drain those 50% of SF and increase mummies attack (2x) for 24 hours. (In case PC loose control over mummies in that time timer would be still ticking down each hour so regaining control ove rmummies would keep boost for remaining time until full day would pass by)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -148,6 +149,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling\n");
@@ -211,11 +224,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -245,8 +254,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

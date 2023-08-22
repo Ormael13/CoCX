@@ -259,7 +259,7 @@ public class CombatUI extends BaseCombatContent {
 
 		// Modifications - full or partial replacements
 		//==============================================================================================================
-		//ALLIES - 'smart' ones (wisps & henchmen). Do not depend on PC to do anything. Call them first!
+		//ALLIES - 'smart' ones (wisps & mummies & henchmen). Do not depend on PC to do anything. Call them first!
 		var playerBusy:Boolean = true; //changed to true if 'stupid' allies can help.
 		//no elses - Simpturn works without 'Next'!
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
@@ -268,6 +268,8 @@ public class CombatUI extends BaseCombatContent {
 		//Others
 		if (isWispTurn())
 			doWispTurn();
+		else if (isMummyTurn())
+			doMummyTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
 		else if (isCompanionTurn(1))
@@ -589,6 +591,14 @@ public class CombatUI extends BaseCombatContent {
 			addButton(0, "Skip", combat.willothewispskip).hint("You forfeit this attack of the wisp. Would skip to next minion attack/your main turn.");
 			addButton(1, "Attack", combat.willothewispattacks).hint("The wisp attacks your enemy.");
 		}
+	}
+
+	public function isMummyTurn():Boolean {
+		return player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0 && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1;
+	}
+	
+	public function doMummyTurn():void {
+		combat.mummyattacks();
 	}
 
 	public function isGolemTurn():Boolean {
