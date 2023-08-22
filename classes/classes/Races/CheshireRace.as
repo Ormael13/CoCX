@@ -48,7 +48,7 @@ public class CheshireRace extends Race{
 				.armType(Arms.CAT, +1)
 				.legType(LowerBody.CAT, +1)
 				.skinCoatType(Skin.FUR, +1)
-				.customRequirement("", "light purple stripes and any color hair and fur",
+				.customRequirement("", "light purple secondary hair and fur and any primary color hair and fur",
 						function (body:BodyData):Boolean {
 							return body.hairColor2 == "light purple" &&
 									body.furColor2 == "light purple"
