@@ -41,7 +41,14 @@ public class WerespiderRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.eyeType(Eyes.FERAL, +2);
+				.eyeType(Eyes.WERESPIDER, +2)
+				.earType(Ears.INSECT, +1)
+				.faceType(Face.SPIDER_FANGS, +1)
+				.armType(Arms.SPIDER, +1)
+				.legType(LowerBody.CHITINOUS_SPIDER_LEGS, +1)
+				.tailType(Tail.SPIDER_ADBOMEN, +1)
+				.noWings(+4)
+				.hasPerk(PerkLib.Araneathropy, +2, -11);
 		
 		//addMutation(IMutationsLib.AnanasaBirthrightIM);
 		
@@ -53,20 +60,17 @@ public class WerespiderRace extends Race {
 					"lib.mult": -0.30,
 					"maxlust_mult": -0.1
 				})
-				.end();
-		/*
-		buildTier(16, "tierName")
+				.end();/*
+		buildTier(18, "elder werespider")
+				.requirePreviousTier()
 				.buffs({
-					"str.mult": +0.40,
-					"tou.mult": +0.60,
-					"wis.mult": +1.40,
-					"maxlust_mult": -0.3,
-					"maxsf_mult": +1.0,
-					"maxwrath_mult": +0.8,
-					"maxmana_mult": -0.8
+					"str.mult": +1.00,
+					"tou.mult": +1.00,
+					"spe.mult": +1.00,
+					"lib.mult": -0.30,
+					"maxlust_mult": -0.1
 				})
-				.end();
-		 */
+				.end();*/
 	}
 }
 }

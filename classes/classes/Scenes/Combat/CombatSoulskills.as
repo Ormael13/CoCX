@@ -289,6 +289,66 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 			
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsCreateElementBasic)) {
+			bd = buttons.add("Create E. (Fire)", curry(CreateElement, "fire")).hint("Form ball of fire elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			bd = buttons.add("Create E. (Water)", curry(CreateElement, "water")).hint("Form ball of water elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			bd = buttons.add("Create E. (Air)", curry(CreateElement, "air")).hint("Form ball of air elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			bd = buttons.add("Create E. (Earth)", curry(CreateElement, "earth")).hint("Form ball of earth elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsCreateElementAdvanced)) {
+				bd = buttons.add("Create E. (Ice)", curry(CreateElement, "ice")).hint("Form ball of ice elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+				if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+					bd.disable("Your hp is too low to use this soulskill.");
+				}
+				bd = buttons.add("Create E. (Lightning)", curry(CreateElement, "lightning")).hint("Form ball of lightning elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+				if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+					bd.disable("Your hp is too low to use this soulskill.");
+				}
+				bd = buttons.add("Create E. (Darkness)", curry(CreateElement, "darkness")).hint("Form ball of darkness elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+				if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+					bd.disable("Your hp is too low to use this soulskill.");
+				}
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
 			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
 				bd = buttons.add("Deactiv VPT", DeactivateVioletPupilTransformation)
@@ -1014,6 +1074,77 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
+	}
+
+	public function CreateElement(type:String):void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You concentrate, focusing on the power of your soul. You infuse a bit of soulforce into a finger, light blue energy covering the tip. You draw a simple rune in the air, the energy from your finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "+type+". You motion, sending the ball flying toward [themonster].  ");
+		if (monsterDodgeSkill("ball")) return;
+		var soulforcecost:Number = 60 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
+		else player.soulforce -= soulforcecost;
+		var damage:Number = scalingBonusWisdom();
+		if (damage < 10) damage = 10;
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		outputText("The tossed projectile hits [themonster], dealing ");
+		switch (type) {
+			case "fire":
+				damage = Math.round(damage*combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+				break;
+			case "water":
+				damage = Math.round(damage*combat.waterDamageBoostedByDao());
+				doWaterDamage(damage, true, true);
+				break;
+			case "air":
+				damage = Math.round(damage*combat.windDamageBoostedByDao());
+				doWindDamage(damage, true, true);
+				break;
+			case "earth":
+				damage = Math.round(damage*combat.earthDamageBoostedByDao());
+				doEarthDamage(damage, true, true);
+				break;
+			case "ice":
+				damage = Math.round(damage*combat.iceDamageBoostedByDao());
+				doIceDamage(damage, true, true);
+				break;
+			case "lightning":
+				damage = Math.round(damage*combat.lightningDamageBoostedByDao());
+				doLightingDamage(damage, true, true);
+				break;
+			case "darkness":
+				damage = Math.round(damage*combat.darknessDamageBoostedByDao());
+				doDarknessDamage(damage, true, true);
+				break;
+			default:
+				damage = Math.round(damage*combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+				break;
+		}
+		outputText(" damage! ");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
+		combat.heroBaneProc(damage);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function CleansingPalm():void {

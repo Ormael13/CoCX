@@ -41,6 +41,7 @@ public class MantisRace extends Race {
 				.chitinColor1(ANY(MantisChitinColors), +1)
 				.antennaeType(Antennae.MANTIS, +1)
 				.faceType(Face.HUMAN, +1)
+				.earType(Ears.INSECT, +1)
 				.armType(Arms.MANTIS, +1)
 				.legType(LowerBody.MANTIS, +1)
 				.tailType(Tail.MANTIS_ABDOMEN, +1)

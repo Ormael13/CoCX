@@ -635,6 +635,38 @@ public final class Mutations extends MutationsHelper {
             outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
+    public function createelementmanual1(player:Player):void {
+        clearOutput();
+        if (!player.hasStatusEffect(StatusEffects.KnowsCreateElementBasic)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Create Element (Basic).  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Create Element (Basic).</b>");
+            player.createStatusEffect(StatusEffects.KnowsCreateElementBasic, 0, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsCreateElementBasic)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            EngineCore.SoulforceChange(25);
+        }
+    }
+    public function createelementmanual2(player:Player):void {
+        clearOutput();
+        if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsCreateElementBasic)) {
+            if (!player.hasStatusEffect(StatusEffects.KnowsCreateElementAdvanced)) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Create Element (Advanced).  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Create Element (Advanced).</b>");
+                player.createStatusEffect(StatusEffects.KnowsCreateElementAdvanced, 0, 0, 0, 0);
+                return;
+            }
+            if (player.hasStatusEffect(StatusEffects.KnowsCreateElementAdvanced)) {
+                outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+                EngineCore.SoulforceChange(45);
+            }
+        } else {
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            if (!player.hasStatusEffect(StatusEffects.KnowsCreateElementAdvanced)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
+        }
+    }
 
     public function violetpupiltransformationmanual(player:Player):void {
         clearOutput();

@@ -4,6 +4,7 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
 
 public class WerewolfRace extends Race {
     public static const RaceBody:/*String*/Array = [
@@ -49,10 +50,12 @@ public class WerewolfRace extends Race {
 				.skinCoatType(Skin.FUR, +1)
 				.rearType(RearBody.WOLF_COLLAR, +1)
 				.rearType(NOT(RearBody.FENRIR_ICE_SPIKES), 0, -7)
+				.cockOrVaginaOfType(CockTypesEnum.WOLF, VaginaClass.HUMAN, +1)
+				.noWings(+4)
 				.corruption(AT_LEAST(20), +1)
+				.corruption(AT_LEAST(50), +1)
+				.corruption(AT_LEAST(80), +1)
 				.hasPerk(PerkLib.Lycanthropy, +2, -11);
-		addScoresAfter(1)
-				.hasCockOfType(CockTypesEnum.WOLF, +1);
 		
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.AlphaHowlIM);
@@ -66,21 +69,21 @@ public class WerewolfRace extends Race {
 					"int.mult": -0.20
 				})
 				.end();
-		buildTier(16, "elder werewolf")
+		buildTier(18, "elder werewolf")
 				.requirePreviousTier()
 				.buffs({
-					"str.mult": +1.30,
-					"tou.mult": +0.80,
-					"spe.mult": +0.50,
+					"str.mult": +1.45,
+					"tou.mult": +0.90,
+					"spe.mult": +0.55,
 					"int.mult": -0.20
 				})
 				.end();
-		buildTier(20, "ancient werewolf")
+		buildTier(24, "ancient werewolf")
 				.requirePreviousTier()
 				.buffs({
-					"str.mult": +1.60,
-					"tou.mult": +1.00,
-					"spe.mult": +0.60,
+					"str.mult": +1.90,
+					"tou.mult": +1.20,
+					"spe.mult": +0.70,
 					"int.mult": -0.20
 				})
 				.end();

@@ -2,13 +2,16 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CoC;
+import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
 
 public class WeresharkRace extends Race {
-    public static const RaceBody:/*String*/Array = [
+    public static const SharkScaleColors:/*String*/Array = ["rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"];
+	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
         /*Balls*/		"Human",
@@ -45,16 +48,20 @@ public class WeresharkRace extends Race {
 				.eyeType(Eyes.FERAL, +2)
 				.gillType(Gills.FISH, +1)
 				.earType(Ears.SHARK, +1)
+				.tongueType(Tongue.HUMAN, +1)
 				.rearType(RearBody.SHARK_FIN, +1)
 				.armType(Arms.SHARK, +1)
 				//.legType(LowerBody.SHARK, +1)
 				//.tailType(Tail.SHARK, +1)
-				//.hairTypeAndColor1(Hair.NORMAL, "silver", +1)
-				//.skinCoatTypeAndColor1(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), ANY(SharkScaleColors), +1)
-				//.skinCoatPattern(Skin.PATTERN_TIGER_STRIPES, +1)
-				//.vaginaType(VaginaClass.SHARK, +1)
-				//.wingType(NOT(Wings.FEATHERED_LARGE), 0, -1000)
-				.hasPerk(PerkLib.Karchariathropy, +2, -11);	//7/12
+				.hairTypeAndColor1(Hair.NORMAL, "silver", +1)
+				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
+				.skinColor1(ANY(SharkScaleColors), +1)
+				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
+				.noWings(+4)
+				.corruption(AT_LEAST(20), +1)
+				.corruption(AT_LEAST(50), +1)
+				.corruption(AT_LEAST(80), +1)
+				.hasPerk(PerkLib.Karchariathropy, +2, -11);
 		
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
@@ -67,19 +74,24 @@ public class WeresharkRace extends Race {
 					"int.mult": -0.10
 				})
 				.end();
-		/*
-		buildTier(16, "tierName")
+		buildTier(18, "elder wereshark")
+				.requirePreviousTier()
 				.buffs({
-					"str.mult": +0.40,
-					"tou.mult": +0.60,
-					"wis.mult": +1.40,
-					"maxlust_mult": -0.3,
-					"maxsf_mult": +1.0,
-					"maxwrath_mult": +0.8,
-					"maxmana_mult": -0.8
+					"str.mult": +1.40,
+					"tou.mult": +0.70,
+					"spe.mult": +0.70,
+					"int.mult": -0.10
 				})
 				.end();
-		 */
+		buildTier(24, "ancient wereshark")
+				.requirePreviousTier()
+				.buffs({
+					"str.mult": +1.90,
+					"tou.mult": +0.90,
+					"spe.mult": +0.90,
+					"int.mult": -0.10
+				})
+				.end();
 	}
 }
 }

@@ -475,6 +475,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsHeartSeeker:StatusEffectType             	= mk("Knows Heart Seeker");
 		public static const KnowsHeartSeekerSF:StatusEffectType           	= mk("Knows Heart Seeker (infused with Soulforce)");
 		public static const KnowsHeal:StatusEffectType                      = mk("Knows Heal");
+		public static const KnowsCreateElementAdvanced:StatusEffectType     = mk("Knows Create Element (Advanced)");
+		public static const KnowsCreateElementBasic:StatusEffectType        = mk("Knows Create Element (Basic)");
 		public static const KnowsHeavensDevourer:StatusEffectType           = mk("Knows Heaven's Devourer");
 		public static const KnowsHurricaneDance:StatusEffectType            = mk("Knows Hurricane Dance");
 		public static const KnowsHydroAcid:StatusEffectType             	= mk("Knows Hydro Acid");

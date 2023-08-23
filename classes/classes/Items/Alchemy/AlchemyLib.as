@@ -685,13 +685,17 @@ public class AlchemyLib extends BaseContent {
 		short: "WFox",
 		name : "Werefox"
 	});
-	public static const AE_ANUBIS:int         = EnumValue.add(Essences, 210, "ANUBIS", {
+	public static const AE_ANUBIS:int          = EnumValue.add(Essences, 210, "ANUBIS", {
 		short: "Anubis",
 		name : "Anubis"
 	});
-	public static const AE_WERESHARK:int         = EnumValue.add(Essences, 211, "WERESHARK", {
+	public static const AE_WERESHARK:int       = EnumValue.add(Essences, 211, "WERESHARK", {
 		short: "WSkark",
 		name : "Wereshark"
+	});
+	public static const AE_ABYSSAL_SHARK:int   = EnumValue.add(Essences, 212, "ABYSSAL_SHARK", {
+		short: "AShark",
+		name : "Abyssal Shark"
 	});
 	
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {

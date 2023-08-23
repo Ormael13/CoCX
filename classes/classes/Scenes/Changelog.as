@@ -105,8 +105,8 @@ public class Changelog extends BaseContent
 			outputText("-New usable item: bandages. Costing 25 gems and it's obtainable from Anubis enemies or bought at Tailor shop in Tel'Adre.\n");
 			outputText("-New mutation perk: Fera's Birthright. Req. having free adaptation mutation slot, werewolf/wereshark race. Effects: Increases HP regeneration 0.5-2% based on moon phase. (New moon - 0.5%, Half moon - 1%, Full moon - 2%)\n");
 			outputText("-New tf item (by Liadri): Jackal Date. Dropped by Anubis enemies or founded when exploring Inner Desert. Using this item will turn PC into anubis. Anubi//Anubi high priest/ess bonuses at 20/28 pts in racial score (scalable): +100% to Tou multi, +150/200% to Wis multi, +50/120% to max Lib multi.\n");
-			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox/Elder werefox/Acient werefox bonuses at 12/16/20 pts in racial score (scalable): ");
-			outputText("+10% to Str multi, +100/150/200% to Tou multi, +40/70/100% to Spe multi, +100/150/200% to Wis multi, +70/140/210 to Sens, -10% to max lust multi, +100/150/200% to max soulforce multi, -40% to max mana multi.\n");
+			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Acient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
+			outputText("+10% to Str multi, +100/150/200/250% to Tou multi, +40/70/100/130% to Spe multi, +100/180/260/340% to Wis multi, +70/140/210/280 to Sens, -10% to max lust multi, +100/150/200/250% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New mutation perk: Fera's Birthright (Primitive). Req. Fera's Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
 			outputText("-New mutation perk: Anubi Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
 			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
@@ -133,10 +133,10 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Anubi Heart (Final Form). Req. Anubi Heart (Evolved) and lvl 90+. Effects: Increase Soulskills power by 50%. Soul skills cost 50% more but are twice as effective when above 60% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. ");
 			outputText("This effect can only happen once per round. While below half health, soul skill inflicts 50% more damage and leech twice as many hit points.\n");
 			outputText("-New Masturbation option: Mummy Sex. Req. 50%+ Soulfroce, be Anubi and have 3+ mummies. Beside typical effects it would drain those 50% of SF and increase mummies attack (2x) for 24 hours. (In case PC loose control over mummies in that time timer would be still ticking down each hour so regaining control ove rmummies would keep boost for remaining time until full day would pass by)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Shark race could gain +1 race score for having human tongue and for human hair. Also their got 3rd tier of racial bonuses - elder tigershark-morph: +90% str multi, +130% spe multi, +50% lib multi, +200 to lust\n");
+			outputText("-Spider/Bee/Mantis races could gain + race score for having insect ears. Spider race bonuses been slight changed and added 2nd tier of bonuses - spider-morph/elder spider-morph (10/16): +30/60% str multi, +40/70% tou multi, +20/50% spe multi, +60% int multi\n");
+			outputText("-New magical soulskill: Create Element (Basic). Req. buying manual from golem merchant for 20 spirit stones. Creates ball of fire / water / air / earth and throw it at enemy. Base cost: 200 soulforce.\n");
+			outputText("-New magical soulskill: Create Element (Advanced). Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Create Element (Basic). Creates ball of ice / lightning / darkness and throw it at enemy. Base cost: 200 soulforce.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -160,6 +160,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
@@ -223,9 +232,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -254,7 +261,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

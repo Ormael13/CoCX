@@ -3565,6 +3565,8 @@ public class PerkLib
 				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60,'minlustx':0.2});
 		public static const BimboBrains:PerkType = mk("Bimbo Brains", "Bimbo Brains",
 				"Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!").withBuffs({'int.mult':-0.50});
+		public static const BloodAffinity:PerkType = mk("Blood Affinity", "Blood Affinity",
+				"Increase all damage dealt with blood spells/soulskills by 100%.");
 		public static const BouncyBody:PerkType = mk("Bouncy body", "Bouncy body",
 				"Attacks that would deal more than half of your health have a chance to simply punt you around, reducing damage taken by 25%.");
 		public static const BroBody:PerkType = mk("Bro Body", "Bro Body",
@@ -3741,6 +3743,10 @@ public class PerkLib
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, .");
 		public static const KarchariathropyDormant:PerkType = mk("Dormant Karchariathropy", "Dormant Karchariathropy",
 				"You sometimes hear echoes of the call of the moon. If you were more of a wereshark you likely would feel its pull again. A karchariathrope is never truly cured.");
+		public static const Araneathropy:PerkType = mk("Araneathropy", "Araneathropy",
+				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, .");
+		public static const AraneathropyDormant:PerkType = mk("Dormant Araneathropy", "Dormant Araneathropy",
+				"You sometimes hear echoes of the call of the moon. If you were more of a werespider you likely would feel its pull again. An araneathrope is never truly cured.");
 		public static const LactaBovineImmunity:PerkType = mk("Lacta Bovine Immunity", "Lacta Bovine Immunity",
 				"You are seldom immune to all the dangerous effect of minotaur cum but you are also naturaly addicted to it.");
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",

@@ -80,6 +80,7 @@ public class BeeRace extends Race {
 				.eyeType(Eyes.BLACK_EYES_SAND_TRAP, +1)
 				.antennaeType(Antennae.BEE, +1)
 				.faceType(Face.HUMAN, +1) //potem zamienić na specificzny dla pszczół wariant twarzy
+				.earType(Ears.INSECT, +1)
 				.noHorns(+1)
 				.armType(Arms.BEE, +1)
 				.legType(LowerBody.BEE, +1)
