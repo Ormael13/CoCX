@@ -2273,31 +2273,42 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons.");
 		menu();
-		var btn:int = 0;
-		if (player.itemCount(weapons.KAMA) > 1) addButton(btn++, "D.Kama", menuCombining, weapons.KAMA, weapons.D_KAMA).hint("Combine 2 Kama into Dual Kama");
-		if (player.itemCount(weapons.D_KAMA) > 0) addButton(btn++, "Kama", menuSeparating, weapons.D_KAMA, weapons.KAMA).hint("Separate Dual Kama into 2 Kama");
-		if (player.itemCount(weapons.DAGGER) > 1) addButton(btn++, "D.Daggers", menuCombining, weapons.DAGGER, weapons.DDAGGER).hint("Combine 2 Daggers into Dual Daggers");
-		if (player.itemCount(weapons.DDAGGER) > 0) addButton(btn++, "Dagger", menuSeparating, weapons.DDAGGER, weapons.DAGGER).hint("Separate Dual Daggers into 2 Daggers");
-		if (player.itemCount(weapons.ANGSTD1) > 1) addButton(btn++, "A.Daggers", menuCombining, weapons.ANGSTD1, weapons.ANGSTD).hint("Combine 2 Angst Dagger(s) into Angst Daggers");
-		if (player.itemCount(weapons.ANGSTD) > 0) addButton(btn++, "A.Dagger", menuSeparating, weapons.ANGSTD, weapons.ANGSTD1).hint("Separate Angst Daggers into 2 Angst Dagger(s)");
-		if (player.itemCount(weapons.DAGWHIP) > 1) addButton(btn++, "D.Daggers", menuCombining, weapons.DAGWHIP, weapons.DDAGWHIP).hint("Combine 2 Dagger Whips into Dual Dagger Whips");
-		if (player.itemCount(weapons.DDAGWHIP) > 0) addButton(btn++, "Dagger", menuSeparating, weapons.DDAGWHIP, weapons.DAGWHIP).hint("Separate Dual Dagger Whips into 2 Dagger Whips");
-		if (player.itemCount(weapons.BFSWORD) > 1) addButton(btn++, "D.BF Swords", menuCombining, weapons.BFSWORD, weapons.DBFSWO).hint("Combine 2 BF Swords into Dual BF Swords");
-		if (player.itemCount(weapons.DBFSWO) > 0) addButton(btn++, "BF Sword", menuSeparating, weapons.DBFSWO, weapons.BFSWORD).hint("Separate Dual BF Swords into 2 BF Swords");
-		if (player.itemCount(weapons.BFTHSWORD) > 1) addButton(btn++, "D.BFTH Swords", menuCombining, weapons.BFTHSWORD, weapons.DBFTHSWO).hint("Combine 2 BF Two-Handed Swords into Dual BF Two-Handed Swords");
-		if (player.itemCount(weapons.DBFTHSWO) > 0) addButton(btn++, "BFTH Sword", menuSeparating, weapons.DBFTHSWO, weapons.BFTHSWORD).hint("Separate Dual BF Two-Handed Swords into 2 BF Two-Handed Swords");
-		if (player.itemCount(weapons.BFWHIP) > 1) addButton(btn++, "D.BF Whips", menuCombining, weapons.BFWHIP, weapons.DBFWHIP).hint("Combine 2 BF Whips into Dual BF Whips");
-		if (player.itemCount(weapons.DBFWHIP) > 0) addButton(btn++, "BF Whip", menuSeparating, weapons.DBFWHIP, weapons.BFWHIP).hint("Separate Dual BF Whips into 2 BF Whips");
-		if (player.itemCount(weapons.NODACHI) > 1) addButton(btn++, "D.Nodachi", menuCombining, weapons.NODACHI, weapons.DNODACHI).hint("Combine 2 Nodachi into Dual Nodachi");
-		if (player.itemCount(weapons.DNODACHI) > 0) addButton(btn++, "Nodachi", menuSeparating, weapons.DNODACHI, weapons.NODACHI).hint("Separate Dual Nodachi into 2 Nodachi");
-		if (player.itemCount(weapons.WHIP) > 1) addButton(btn++, "D. Whip", menuCombining, weapons.WHIP, weapons.PWHIP).hint("Combine 2 Whip into Dual Whip");
-		if (player.itemCount(weapons.PWHIP) > 0) addButton(btn++, "Whip", menuSeparating, weapons.PWHIP, weapons.WHIP).hint("Separate Dual Whip into 2 Whips");
-		if (player.itemCount(weapons.WARHAMR) > 1) addButton(btn++, "D.HWhamm", menuCombining, weapons.WARHAMR, weapons.D_WHAM_).hint("Combine 2 Huge Warahmmers into Dual Huge Warahmmer");
-		if (player.itemCount(weapons.D_WHAM_) > 0) addButton(btn++, "HWhamm", menuSeparating, weapons.D_WHAM_, weapons.WARHAMR).hint("Separate Dual Huge Warahmmer into 2 Huge Warahmmers");
-		if (player.itemCount(weapons.SUCWHIP) > 1) addButton(btn++, "P.S.Whips", menuCombining, weapons.SUCWHIP, weapons.PSWHIP).hint("Combine 2 Succubi Whips into Pair of Succubi Whips");
-		if (player.itemCount(weapons.PSWHIP) > 0) addButton(btn++, "S.Whips", menuSeparating, weapons.PSWHIP, weapons.SUCWHIP).hint("Separate Pair of Succubi Whips into 2 Succubi Whips");
+		var weaponList: Array = [
+			[weapons.KAMA, weapons.D_KAMA],
+			[weapons.DAGGER, weapons.DDAGGER],
+			[weapons.ANGSTD1, weapons.ANGSTD],
+			[weapons.DAGWHIP, weapons.DDAGWHIP],
+			[weapons.BFSWORD, weapons.DBFSWO],
+			[weapons.BFTHSWORD, weapons.DBFTHSWO],
+			[weapons.BFWHIP, weapons.DBFWHIP],
+			[weapons.NODACHI, weapons.DNODACHI],
+			[weapons.WHIP, weapons.PWHIP],
+			[weapons.WARHAMR, weapons.D_WHAM_],
+			[weapons.SUCWHIP, weapons.PSWHIP]
+		];
+		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
+		addButton(4,"Seperate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
 	}
+
+	public function menuCombineStaging(weaponList:Array):void{
+		menu();
+		var bd:ButtonDataList = new ButtonDataList();
+		for each(var weapongroup:Array in weaponList){
+			bd.add(weapongroup[0].name,curry(menuCombining, weapongroup[0], weapongroup[1])).disableIf(player.itemCount(weapongroup[0]) < 2, "You need more than one " + weapongroup[0].name + "to make a " + weapongroup[1].name + "!").hint("Combine 2 "+ weapongroup[0].name + " into a " + weapongroup[1].name)
+		}
+		submenu(bd, menuForCombiningAndSeperating,0,false);
+	}
+
+	public function menuSeperateStaging(weaponList:Array):void{
+		menu();
+		var bd:ButtonDataList = new ButtonDataList();
+		for each(var weapongroup:Array in weaponList){
+			bd.add(weapongroup[1].name,curry(menuSeparating, weapongroup[1], weapongroup[0])).disableIf(player.itemCount(weapongroup[1]) == 0, "You need more than one " + weapongroup[1].name + "to break down back to two " + weapongroup[0].name + "!").hint("Disassemble "+ weapongroup[1].name + " to get 2 " + weapongroup[0].name)
+		}
+		submenu(bd, menuForCombiningAndSeperating,0,false);
+	}
+	
 	public function menuCombining(weapon1: Weapon, weapon2: Weapon):void {
 		clearOutput();
 		outputText("Combining.\n\n");
