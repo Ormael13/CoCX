@@ -2271,7 +2271,7 @@ public class Camp extends NPCAwareContent{
 	
 	public function menuForCombiningAndSeperating():void {
 		clearOutput();
-		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons.");
+		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons. <b>(WARNING: ENCHANTED ITEMS WOULD IRREVERSABLE LOOSE ENCHANTMENTS DURING COMBINING!!!)</b>");
 		menu();
 		var weaponList: Array = [
 			[weapons.KAMA, weapons.D_KAMA],
@@ -2284,7 +2284,8 @@ public class Camp extends NPCAwareContent{
 			[weapons.NODACHI, weapons.DNODACHI],
 			[weapons.WHIP, weapons.PWHIP],
 			[weapons.WARHAMR, weapons.D_WHAM_],
-			[weapons.SUCWHIP, weapons.PSWHIP]
+			[weapons.SUCWHIP, weapons.PSWHIP],
+			[weapons.KATANA, weapons.DKATANA]
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4,"Seperate Weapons", menuSeperateStaging, weaponList)

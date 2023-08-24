@@ -39,8 +39,9 @@ public class ScorpionRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.skinCoatType(Skin.CHITIN, +1)
-				.tailType(Tail.SCORPION, +1);
+				.earType(Ears.INSECT, +1)
+				.tailType(Tail.SCORPION, +1)
+				.skinCoatType(Skin.CHITIN, +1);
 		
 		addMutation(IMutationsLib.TrachealSystemIM);
 		

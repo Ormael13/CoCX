@@ -11318,7 +11318,12 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
 		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
         if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
-        if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceregen += Math.round(player.maxSoulforce() * 0.0025 * player.tailCount);
+        if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) {
+			var wfob:Number = 0.0025;
+			if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 2) wfob += 0.0025;
+			if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) wfob += 0.0025;
+			soulforceregen += Math.round(player.maxSoulforce() * wfob * player.tailCount);
+		}
 		if (player.perkv1(IMutationsLib.HumanSmartsIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.perkv1(IMutationsLib.HumanThyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) soulforceregen += Math.round(player.maxSoulforce() * 0.01);
 		if (player.hasPerk(PerkLib.Necromancy)) soulforceregen += Math.round(player.maxSoulforce() * 0.02);
@@ -16390,7 +16395,8 @@ public function soulskillMagicalMod():Number {
     }
 	if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 2) {
 		var wfb:Number = 0.5;
-		//if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) wfb += ;
+		if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) wfb += 0.25;
+		if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) wfb += 0.25;
 		if (player.tailCount >= 3) wfb *= 2;
 		modssm += wfb;
 	}

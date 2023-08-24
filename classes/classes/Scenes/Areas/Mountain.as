@@ -260,6 +260,7 @@ public class Mountain extends BaseContent
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name:"hikeh",
+				label : "Hike",
 				chance:0.2,
 				kind:'walk',
 				call:hikeh

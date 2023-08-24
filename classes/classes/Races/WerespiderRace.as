@@ -58,7 +58,8 @@ public class WerespiderRace extends Race {
 					"tou.mult": +0.70,
 					"spe.mult": +0.70,
 					"lib.mult": -0.30,
-					"maxlust_mult": -0.1
+					"maxlust_mult": -0.2,
+					"maxwrath_mult": -0.8
 				})
 				.end();/*
 		buildTier(18, "elder werespider")
@@ -68,7 +69,8 @@ public class WerespiderRace extends Race {
 					"tou.mult": +1.00,
 					"spe.mult": +1.00,
 					"lib.mult": -0.30,
-					"maxlust_mult": -0.1
+					"maxlust_mult": -0.2,
+					"maxwrath_mult": -0.8
 				})
 				.end();*/
 	}

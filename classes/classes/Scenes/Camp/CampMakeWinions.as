@@ -1375,13 +1375,13 @@ public class CampMakeWinions extends BaseContent
 			else addButtonDisabled(5, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(6, "ElementUp(E)", elementaLvlUpEpic);
 			else addButtonDisabled(6, "ElementUp(E)", "You don't have any epic elementals, try summoning one!");
-			if (canSearchForParls()) addButton(10, "Explore", SceneLib.exploration.goSearchForPearls);
+			if (canSearchForPearls()) addButton(10, "Explore", SceneLib.exploration.goSearchForPearls);
 			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) >= 1) addButton(12, "E.S.Conv.", elementalShardsConversion).hint("Conversion of Elemental Shards"+(player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)?" of Soulforce":"")+" into energy stored in arcane circle elemental conduit.");
 			else addButtonDisabled(12, "E.S.Conv.", "You need to have any elemental conduit added to the arcane circle to use this option.");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
-		private function canSearchForParls():Boolean {
+		private function canSearchForPearls():Boolean {
 			return (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) ||
 				(player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2) ||
 				(player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2);

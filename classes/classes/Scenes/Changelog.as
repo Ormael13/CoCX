@@ -57,7 +57,9 @@ public class Changelog extends BaseContent
 			outputText("-New head accesory (by Liadri): Death Prince Regalia - obtained by beating Anubis. Cost 800 gems. Increases Soul Skill damage by 20%. Grants 1% regeneration when SF is above half.\n");
 			outputText("-New misc accesory (by Ormael): Ezekiel's Seal - buyable at Felix in Journey to the East inn. Cost 80 spirit stones. Increase by 3 tf effects from using most of tf items.\n");
 			outputText("-New misc accesory (by Ormael): Kratia's Seal - buyable at Kaiba shop in Tel'Adre. Cost 800 gems. Increase by 100 (150 if it's training dummy) enemy effective level in regard to enemy DR.\n");
+			outputText("-New consumable (by Liadri): Ginseng. Cost 6 gems. Can be found when exploring forest areas. Eating it would apply effect for few hours increasing tease dmg by 5%.\n");
 			outputText("-New key Item (by Aimozg): Tel'Adre Magazine Issue 2 - Increase 2x Alchemy EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
+			outputText("-New key item: Herbs Bag (Low grade). Buyable at Giacomo when pc have lvl 5+ in farming skill. Costs 500 gems and would increase slots cap to 10 and open 2 additional slots for 2 new herb types.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
 			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Fennec Fox Ears (Werefox TF), Jackal Ears (Anubis TF), Glyph Tattoos (Anubis TF).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
@@ -100,12 +102,10 @@ public class Changelog extends BaseContent
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Anubis - lvl 24. Encounterable in Inner Desert.\n");
 			outputText("-New usable item: Red Gel. Costing 100 gems and it's obtainable from Red Ooze or Red Mist Ooze enemies. Can be used to craft items like armors.\n");
-			outputText("-New consumable (by Liadri): Ginseng. Cost 6 gems. Can be found when exploring forest areas. Eating it would apply effect for few hours increasing tease dmg by 5%.\n");
-			outputText("-New key item: Herbs Bag (Low grade). Buyable at Giacomo when pc have lvl 5+ in farming skill. Costs 500 gems and would increase slots cap to 10 and open 2 additional slots for 2 new herb types.\n");
 			outputText("-New usable item: bandages. Costing 25 gems and it's obtainable from Anubis enemies or bought at Tailor shop in Tel'Adre.\n");
 			outputText("-New mutation perk: Fera's Birthright. Req. having free adaptation mutation slot, werewolf/wereshark race. Effects: Increases HP regeneration 0.5-2% based on moon phase. (New moon - 0.5%, Half moon - 1%, Full moon - 2%)\n");
 			outputText("-New tf item (by Liadri): Jackal Date. Dropped by Anubis enemies or founded when exploring Inner Desert. Using this item will turn PC into anubis. Anubi//Anubi high priest/ess bonuses at 20/28 pts in racial score (scalable): +100% to Tou multi, +150/200% to Wis multi, +50/120% to max Lib multi.\n");
-			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Acient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
+			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Ancient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200/250% to Tou multi, +40/70/100/130% to Spe multi, +100/180/260/340% to Wis multi, +70/140/210/280 to Sens, -10% to max lust multi, +100/150/200/250% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New mutation perk: Fera's Birthright (Primitive). Req. Fera's Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
 			outputText("-New mutation perk: Anubi Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
@@ -124,7 +124,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Vulpesthropy. Req. having fennec fox ears, fox fangs and feral eyes when using desert berry. Your skin is more resistant to magical damage and you can naturaly absorb ambient soulforce. (+1%)\n");
 			outputText("-New event perk: Dormant Vulpesthropy. When PC not qualify as werefox Vulpesthropy would be replaced by this perk. It's like the one for werewolf. Werebeast nature just slumber inside PC ready to become active again.\n");
 			outputText("-New mutation perk: White-Faced One Birthright. Req. having free adaptation mutation slot, werefox race. Effects: Increases soulforce recovery 0.25-1% Soulforce regen per tail you posses (New moon / Half moon / Full moon)\n");
-			outputText("-New mutation perk: White-Faced One Birthright (Primitive). Req. White-Faced One Birthright and lvl 30+. Effects: Increases soulforce recovery 0.25-1% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +50% to magical soulskills power (doubled if you have 3+ tails)\n");
+			outputText("-New mutation perk: White-Faced One Birthright (Primitive). Req. White-Faced One Birthright and lvl 30+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +50% to magical soulskills power (doubled if you have 3+ tails)\n");
 			outputText("-New mutation perk: Fera's Birthright (Evolved). Req. Fera's Birthright (Primitive) and lvl 60+. Effects: Increases HP regeneration 1.5-6% based on moon phase (doubled when in Crinos Shape). Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it, once each fight when HP drops below 0 it would trigger Regeneration Surge (+20% regen for 2 turns).\n");
 			outputText("-New mutation perk: Fera's Birthright (Final Form). Req. Fera's Birthright (Evolved) and lvl 90+. Effects: Increases HP regeneration 2-8% based on moon phase (doubled when in Crinos Shape). Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it, ");
 			outputText("once each fight when HP drops below 0 it would trigger Regeneration Surge (+40% regen for 3 turns), +20% OverMax HP.\n");
@@ -135,12 +135,12 @@ public class Changelog extends BaseContent
 			outputText("-New Masturbation option: Mummy Sex. Req. 50%+ Soulfroce, be Anubi and have 3+ mummies. Beside typical effects it would drain those 50% of SF and increase mummies attack (2x) for 24 hours. (In case PC loose control over mummies in that time timer would be still ticking down each hour so regaining control ove rmummies would keep boost for remaining time until full day would pass by)\n");
 			outputText("-Shark race could gain +1 race score for having human tongue and for human hair. Also their got 3rd tier of racial bonuses - elder tigershark-morph: +90% str multi, +130% spe multi, +50% lib multi, +200 to lust\n");
 			outputText("-Spider/Bee/Mantis races could gain + race score for having insect ears. Spider race bonuses been slight changed and added 2nd tier of bonuses - spider-morph/elder spider-morph (10/16): +30/60% str multi, +40/70% tou multi, +20/50% spe multi, +60% int multi\n");
-			outputText("-New magical soulskill: Create Element (Basic). Req. buying manual from golem merchant for 20 spirit stones. Creates ball of fire / water / air / earth and throw it at enemy. Base cost: 200 soulforce.\n");
-			outputText("-New magical soulskill: Create Element (Advanced). Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Create Element (Basic). Creates ball of ice / lightning / darkness and throw it at enemy. Base cost: 200 soulforce.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New magical soulskill: Create Element (Basic). Req. buying manual from golem merchant for 20 spirit stones. Create ball of fire / water / air / earth and throw it at enemy. Base cost: 60 soulforce.\n");
+			outputText("-New magical soulskill: Create Element (Advanced). Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Create Element (Basic). Create ball of ice / lightning / darkness and throw it at enemy. Base cost: 60 soulforce.\n");
+			outputText("-Weapons Combining/Separating menu redone. (Jtecx) (added grey out buttons for combining, etc.)\n");
+			outputText("-Added option to combine and seperate katana weapons. Still combining two katana/daggers that may have bonus effects on them from randomn items system would cause it to loose those bonus effects.\n");
+			//outputText("-New mutation perk: White-Faced One Birthright (Evolved). Req. White-Faced One Birthright (Primitive) and lvl 60+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails)\n");
+			//outputText("-New mutation perk: White-Faced One Birthright (Final Form). Req. White-Faced One Birthright (Evolved) and lvl 90+. Effects: Increases soulforce recovery 0.75-3% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -152,18 +152,20 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int,
 			outputText("-\n");// hp regen - zuzywa hp and/or sf per turn aby być aktywnym; pozwala użyć charge speciala w trakcie trwania a jak postać może użyć charge i tak wzmacnia charge dodatkowo
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -172,7 +174,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
-			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling\n");
+			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
+			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -200,8 +203,6 @@ public class Changelog extends BaseContent
 			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
 			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New event perk: . Gained by . Effects: \n");
 			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");

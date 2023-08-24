@@ -255,8 +255,6 @@ public class ElementalGolems extends AbstractGargoyle
 				this.tallness = 184;
 				this.createBreastRow(0, 1);
 				initGenderless();
-				this.drop = new ChainedDrop()
-						.add(consumables.E7PEARL, 1);
 				this.level = 57;
 				this.bonusHP = 3000;
 				this.weaponName = "stone greathammer";
@@ -285,8 +283,6 @@ public class ElementalGolems extends AbstractGargoyle
 				this.tallness = 120;
 				initStrTouSpeInte(140, 110, 90, 10);
 				initWisLibSensCor(10, 10, 10, 50);
-				this.drop = new ChainedDrop()
-						.add(consumables.E5PEARL, 1);
 				this.level = 33;
 				this.bonusHP = 2000;
 				this.additionalXP = 500;
@@ -315,12 +311,11 @@ public class ElementalGolems extends AbstractGargoyle
 				this.armorMDef = 16;
 				this.bonusHP = 100;
 				this.level = 9;
-				this.drop = new ChainedDrop()
-						.add(consumables.E3PEARL, 1);
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			}
 			this.a = "the ";
 			this.lustVuln = 0;
+			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			checkMonster();

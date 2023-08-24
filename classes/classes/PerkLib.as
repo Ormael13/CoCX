@@ -4445,7 +4445,7 @@ public class PerkLib
 			],
 			[CondensedPower],
 			[CycloneStage1, CycloneStage2, CycloneStage3, CycloneStage4, CycloneStage5],
-			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV],
+			[DancersVitalityI, DancersVitalityII, DancersVitalityIII, DancersVitalityIV, DancersVitalityV, DancersVitalityVI],
 			[DemonicDesireI, DemonicDesireII, DemonicDesireIII, DemonicDesireIV, DemonicDesireV, DemonicDesireVI],
 			[Desensitization, GreaterDesensitization, EpicDesensitization, LegendaryDesensitization/*, MythicalDesensitization*/],
 			[Diehard, ImprovedDiehard, GreaterDiehard, EpicDiehard],

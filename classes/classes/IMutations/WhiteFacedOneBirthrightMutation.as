@@ -31,10 +31,10 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
                 descS += "fully developed";
             }
             if (descS != "")descS += " soul nexus-like organ modeled after White-Faced One. (+";
-			if (pTier == 1 || pTier == 2){
+			if (pTier == 1){
                 descS += "0.25/0.5/1";
             }
-			if (pTier == 3){
+			if (pTier == 2 || pTier == 3){
                 descS += "0.5/1/2";
             }
 			if (pTier >= 1){
@@ -44,10 +44,16 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
                 descS += ", +";
             }
             if (pTier == 2){
-                descS += "5";
+                descS += "50";
+            }
+            if (pTier == 3){
+                descS += "75";
+            }
+            if (pTier == 4){
+                descS += "100";
             }
             if (pTier >= 2){
-                descS += "0% to magical soulskills power (doubled if you have 3+ tails)";
+                descS += "% to magical soulskills power (doubled if you have 3+ tails)";
             }
             if (pTier == 3){
                 descS += ", ";
@@ -126,7 +132,7 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
 
         public function WhiteFacedOneBirthrightMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADAPTATIONS, 1);
+			super(mName + " IM", mName, SLOT_ADAPTATIONS, 2);
         }
 
     }

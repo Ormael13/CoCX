@@ -10,7 +10,32 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class AbyssalSharkRace extends Race {
-	
+	public static const AbyssalSharkScaleColors:/*String*/Array = ["rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"];
+	public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function AbyssalSharkRace(id:int) {
 		super("Abbysal Shark", id, []);//RaceBody);
 		//disabled = true;
@@ -46,6 +71,14 @@ public class AbyssalSharkRace extends Race {
 				.end();
 				
 		buildTier(12, "abyssal shark-morph")
+				.buffs({
+					"str.mult": +0.50,
+					"tou.mult": +0.10,//or no tou bonus at all?
+					"spe.mult": +0.90,
+					"wis.mult": +0.40,
+					"lib.mult": -0.20,
+					"sens": +20
+				})
 				.end();
 	}
 }

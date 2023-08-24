@@ -601,7 +601,10 @@ import flash.utils.getQualifiedClassName;
 
 		public override function maxSoulforce():Number {
 			//Base soulforce
-			var temp:Number = 50 + this.level * 5 + this.bonusSoulforce * 2;
+			var ratioW:Number = 5;
+			if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) ratioW += 5;
+			if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) ratioW += 5;
+			var temp:Number = 50 + this.level * ratioW + this.bonusSoulforce * (ratioW * 0.4);
 			if (hasPerk(PerkLib.JobSoulCultivator)) temp += 50;
 			if (hasPerk(PerkLib.SoulApprentice)) {
 				temp += 30;
@@ -639,7 +642,7 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 60) temp += 210;
 				if (this.level >= 63) temp += 210;
 			}
-			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*ratioW) * (1 + newGamePlusMod()));
 			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) temp += 50;

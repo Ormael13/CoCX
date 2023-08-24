@@ -1552,16 +1552,16 @@ public class Exploration extends BaseContent implements SaveableState
 			clearOutput();
 			outputText("You grab your [weapon] and goes on serching solution to your waning physical constitution.");
 			if (player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2 && player.hasStatusEffect(StatusEffects.ElementalPearlGolems) && player.statusEffectv1(StatusEffects.ElementalPearlGolems) == 2) {
-				player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
-				player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
+				if (player.statusEffectv1(StatusEffects.ElementalPearlGolems) == 2) player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
+				if (player.perkv1(PerkLib.ElementalConjurerSacrifice) < 1) player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
 			}
 			if (player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2 && player.hasStatusEffect(StatusEffects.ElementalPearlGolems)) {
-				player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
-				player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
+				if (player.statusEffectv1(StatusEffects.ElementalPearlGolems) == 1) player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
+				if (player.perkv1(PerkLib.ElementalConjurerDedication) < 1) player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
 			}
 			if (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) {
-				player.createStatusEffect(StatusEffects.ElementalPearlGolems, 1, 0, 0, 0);
-				player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
+				if (!player.hasStatusEffect(StatusEffects.ElementalPearlGolems)) player.createStatusEffect(StatusEffects.ElementalPearlGolems, 1, 0, 0, 0);
+				if (player.perkv1(PerkLib.ElementalConjurerResolve) < 1) player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
 			}
 			startCombat(new ElementalGolems());
 		}
@@ -1572,8 +1572,12 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		private function elementalGolemBeaten1a():void {
 			outputText("\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten1b);
+		}
+		private function elementalGolemBeaten1b():void {
+			outputText("\n");
 			player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
-			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
+			inventory.takeItem(consumables.E3PEARL, cleanupAfterCombat);
 		}
 		public function elementalGolemBeaten2():void {
 			clearOutput();
@@ -1582,8 +1586,12 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		private function elementalGolemBeaten2a():void {
 			outputText("\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten2b);
+		}
+		private function elementalGolemBeaten2b():void {
+			outputText("\n");
 			player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
-			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
+			inventory.takeItem(consumables.E5PEARL, cleanupAfterCombat);
 		}
 		public function elementalGolemBeaten3():void {
 			outputText("You stops before beaten living statue golem and reach toward it shoulder mounted crystals yanking off each of them.\n\n");
@@ -1591,8 +1599,12 @@ public class Exploration extends BaseContent implements SaveableState
 		}
 		private function elementalGolemBeaten3a():void {
 			outputText("\n");
+			inventory.takeItem(useables.ELCRYST, elementalGolemBeaten3b);
+		}
+		private function elementalGolemBeaten3b():void {
+			outputText("\n");
 			player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
-			inventory.takeItem(useables.ELCRYST, cleanupAfterCombat);
+			inventory.takeItem(consumables.E7PEARL, cleanupAfterCombat);
 		}
 
 		public function debugOptions():void
