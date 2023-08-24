@@ -46,8 +46,6 @@ public class TestMenu extends BaseContent
 		clearOutput();
 		outputText("Collection of different cheats that can be used by the players.");
 		outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
-		outputText("\n\nElemental Pearl Golems: " + player.statusEffectv1(StatusEffects.ElementalPearlGolems) + "");
-		outputText("\n\nElemental Conjuer Resolve: " + player.perkv1(PerkLib.ElementalConjurerResolve) + "");
 		var bd:ButtonDataList = new ButtonDataList();
 		bd.add("StatsAdj/Ascen", StatsAscensionMenu, "For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
 		bd.add("P/G/XP", PerksGemsEXP, "Adding/Removing perk points and adding gems/exp.");
@@ -84,13 +82,7 @@ public class TestMenu extends BaseContent
 		bd.add("Bugfixes", cheatBugfixes, "Buttons or fixing some rare old bugs that can't be fixd with save-updater.");
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
 		bd.add("Bags expansion", SceneLib.garden.justForTestBuildsAdjustingBagsCapacityCuzINotWannaWasteSaveUpdateForThat, "Expand the bags. (If you not own any of them will not have any effect)");
-		bd.add("-0-", fixElementalGolems, "Add missing fairy dragon bodyparts.");
 		submenu(bd, playerMenu, 0, false);
-	}
-	private function fixElementalGolems():void {
-		if (player.hasStatusEffect(StatusEffects.ElementalPearlGolems)) player.removeStatusEffect(StatusEffects.ElementalPearlGolems);
-		if (player.perkv1(PerkLib.ElementalConjurerResolve) > 0) player.setPerkValue(PerkLib.ElementalConjurerResolve, 1, 0);
-		doNext(SoulforceCheats);
 	}
 
 	private function cheatBugfixes():void {

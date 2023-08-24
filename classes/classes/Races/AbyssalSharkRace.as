@@ -10,7 +10,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class AbyssalSharkRace extends Race {
-	public static const AbyssalSharkScaleColors:/*String*/Array = ["rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"];
+	public static const AbyssalSharkScaleColors:/*String*/Array = ["rough gray","dark gray","iridescent gray","ashen","gray","black"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -50,6 +50,10 @@ public class AbyssalSharkRace extends Race {
 				.tongueType(Tongue.HUMAN, +1)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
+				.customRequirement("",'H-cup tits (or bigger) or 18"+ long cock',
+						function (body:BodyData):Boolean {
+							return body.biggestTitSize > 18 || body.biggestCockSize > 17
+						}, +1)
 				.faceType(Face.SHARK_TEETH, +1)
 				//.faceType(Face.SHARK_TEETH, +1)
 				.rearType(RearBody.SHARK_FIN, +1)
@@ -72,13 +76,13 @@ public class AbyssalSharkRace extends Race {
 				
 		buildTier(12, "abyssal shark-morph")
 				.buffs({
-					"str.mult": +0.50,
-					"tou.mult": +0.10,//or no tou bonus at all?
+					"str.mult": +0.90,
 					"spe.mult": +0.90,
-					"wis.mult": +0.40,
-					"lib.mult": -0.20,
-					"sens": +20
+					"wis.mult": +0.30,
+					"lib.mult": -0.30,
+					"sens": +30
 				})
+				.withExtraBonuses("+50 Max Hunger")
 				.end();
 	}
 }

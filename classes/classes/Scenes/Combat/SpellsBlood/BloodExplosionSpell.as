@@ -37,7 +37,7 @@ public class BloodExplosionSpell extends AbstractBloodSpell {
 	
 	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var damage:Number = adjustSpellDamage(
-				scalingBonusIntelligence(randomize)*4,
+				scalingBonusIntelligence(randomize)*4*bloodAffinityBoost(),
 				DamageType.MAGICAL,
 				CAT_SPELL_BLOOD,
 				target,

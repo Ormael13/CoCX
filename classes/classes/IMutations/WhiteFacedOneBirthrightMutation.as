@@ -55,11 +55,20 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
             if (pTier >= 2){
                 descS += "% to magical soulskills power (doubled if you have 3+ tails)";
             }
+            if (pTier == 4){
+                descS += ", -10% of soulskills cost";
+            }
+            if (pTier >= 3){
+                descS += ", SF gains per level/Wisdom stat increased to ";
+            }
             if (pTier == 3){
-                descS += ", ";
+                descS += "200%";
             }
             if (pTier == 4){
-                descS += ", ";
+                descS += "300%";
+            }
+            if (pTier == 4){
+                descS += ", +20% to OverMax Soulforce";
             }
             if (descS != "") descS += ")";
             return descS;
@@ -132,7 +141,7 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
 
         public function WhiteFacedOneBirthrightMutation() 
 		{
-			super(mName + " IM", mName, SLOT_ADAPTATIONS, 2);
+			super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
 
     }

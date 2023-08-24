@@ -356,7 +356,7 @@ public function beachInteractionsDateUnderwater2():void
 			outputText("however you reach the finishing line before her. She looks somewhat frustrated.\n\n");
 			outputText("\"<i>Well, you won.. and here I thought I was the fastest.</i>\"\n\n");
 		}
-		else outputText("however she reaches the finishing line before you cheerfully swimming in circle up and down. \n\n");
+		else outputText("however she reaches the finishing line before you cheerfully swimming in circle up and down.\n\n");
 	}
 	else outputText("While you can breathe underwater, you don’t have the body to swim quite as fast as she, so you simply cling to her back as she swims to various locations showing you what the ocean is like. \n\n");
 	outputText("Ceani stop for a moment lost in thinking then smile wide.\n\n");

@@ -448,6 +448,12 @@ public class AbstractSpell extends CombatAbility {
 		return sAV;
 	}
 	
+	public function bloodAffinityBoost():Number {
+		var bAB:Number = 1;
+		if (player.hasPerk(PerkLib.BloodAffinity)) bAB += 1;
+		return bAB;
+	}
+	
 	/**
 	 * Do a crit roll and apply crit multiplier.
 	 * Deal damage once or repeatedly (if Omnicaster and param set). Does NOT apply Omnicaster damage downscale!

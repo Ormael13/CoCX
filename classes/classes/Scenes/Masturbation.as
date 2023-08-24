@@ -184,7 +184,7 @@ public class Masturbation extends BaseContent {
 				.disableIf(!player.hasVagina(), "Req. a vagina.");
 			for (b = 0; b < 2; ++b) button(3 + b*5) //for belts
 				.disableIf(!player.isTaur(), "You need to be a taur to use it!");
-			addKAbutton(13, "Mummy Sex", "Mummy Sex", mummySex)
+			addButton(13, "Mummy Sex", mummySex)
 				.disableIf(player.gender == 0, "Req. to not be genderless.")
 				.disableIf(player.soulforce < Math.round(player.maxSoulforce() * 0.5), "Req. 50% of max soulforce.")
 				.disableIf(player.racialScore(Races.ANUBIS) < 15, "Req. to be Anubi race.")

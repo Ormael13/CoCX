@@ -74,9 +74,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (!player.isStaffTypeWeapon()) {
 					bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
-					bd.requireFatigue(chargingcoooooost());
-					if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
-						bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
+					if (player.statStore.hasBuff("ScarletSpiritCharge")) {
+						if (player.HP <= (player.minHP() + (chargingcoooooost() * 2))) bd.disable("Your hp is too low to perform Charge.");
+					}
+					else {
+						bd.requireFatigue(chargingcoooooost());
+						if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
+							bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
+						}
 					}
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
@@ -1438,18 +1443,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function charging():void {
 		clearOutput();
 		var costvalue:Number = chargingcoooooost();
-		fatigue(costvalue, USEFATG_PHYSICAL);
-		if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) {
-			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) {
-				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) {
-					if (player.perkv1(IMutationsLib.TwinHeartIM) >= 4 && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,2,0,0,0);
-					else player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
+		if (player.statStore.hasBuff("ScarletSpiritCharge")) HPChange(-(costvalue*2), false);
+		else {
+			fatigue(costvalue, USEFATG_PHYSICAL);
+			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) {
+				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) {
+					if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) {
+						if (player.perkv1(IMutationsLib.TwinHeartIM) >= 4 && (player.isTaur() || player.isDrider())) player.createStatusEffect(StatusEffects.CooldownCharging,2,0,0,0);
+						else player.createStatusEffect(StatusEffects.CooldownCharging,3,0,0,0);
+					}
+					else player.createStatusEffect(StatusEffects.CooldownCharging,4,0,0,0);
 				}
-				else player.createStatusEffect(StatusEffects.CooldownCharging,4,0,0,0);
+				else player.createStatusEffect(StatusEffects.CooldownCharging,5,0,0,0);
 			}
-			else player.createStatusEffect(StatusEffects.CooldownCharging,5,0,0,0);
+			else player.createStatusEffect(StatusEffects.CooldownCharging,6,0,0,0);
 		}
-		else player.createStatusEffect(StatusEffects.CooldownCharging,6,0,0,0);
 		outputText("You take some distance before making a U-turn and charge at your opponent with all your might, impaling them on your [weapon]. ");
 		var damage:Number = 0;
 		var PAM2:Number = 1;

@@ -2694,6 +2694,7 @@ use namespace CoC;
 			}
 		}
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
+			if (hasPerk(PerkLib.BloodAffinity)) damage = Math.round(damage*0.5);
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
 				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");

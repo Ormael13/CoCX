@@ -553,8 +553,8 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionEndurance)) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			max += level * maxFatiguePerLevelStat.value;
-			if (level <= 6) max += level * 5;
-			else max += 30;
+			if (level <= 6) max += level * maxFatiguePerLevelStat.value;
+			else max += 6 * maxFatiguePerLevelStat.value;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 1499999) max = 1499999;
@@ -565,7 +565,10 @@ import classes.Scenes.NPCs.Forgefather;
 		{
 			var max:Number = maxSfBaseStat.value;
 			var multimax:Number = maxSfMultStat.value;
-			max += maxSfPerWisStat.value*wis;
+			var ratioW:Number = 1;
+			if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) ratioW += 1;
+			if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) ratioW += 1;
+			max += maxSfPerWisStat.value*ratioW*wis;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) max += 30 * flags[kFLAGS.SOUL_CULTIVATION];//Soul Apprentice
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 3);//Soul Personage
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) max += 15 * (flags[kFLAGS.SOUL_CULTIVATION] - 6);//Soul Warrior
@@ -619,9 +622,9 @@ import classes.Scenes.NPCs.Forgefather;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude3;//+100
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude4;//+100
 			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
-			max += level * maxSfPerLevelStat.value;
-			if (level <= 6) max += level * 5;
-			else max += 30;
+			max += level * ratioW * maxSfPerLevelStat.value;
+			if (level <= 6) max += level * ratioW * maxSfPerLevelStat.value;
+			else max += 6 * ratioW * maxSfPerLevelStat.value;
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
 				if (Forgefather.refinement == 0) multimax += (.15);
@@ -666,6 +669,7 @@ import classes.Scenes.NPCs.Forgefather;
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) max2 += 0.2;
 			max1 *= max2;//~110%
 			max1 = Math.round(max1);
 			if (max1 > 1699999) max1 = 1699999;
@@ -683,8 +687,8 @@ import classes.Scenes.NPCs.Forgefather;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude4;//+75 to +175
 			if (jewelryName == "Undefeated King's Signet" || jewelryName3 == "Undefeated King's Signet") max += 150;
 			max += level * maxWrathPerLevelStat.value;
-			if (level <= 6) max += level * 5;
-			else max += 30;
+			if (level <= 6) max += level * maxWrathPerLevelStat.value;
+			else max += 6 * maxWrathPerLevelStat.value;
 			//~194,455
 			if (game.player.isRace(Races.ORC)) multimax += 0.2;
 			if (vehiclesName == "Giant Slayer Mech") {
@@ -817,8 +821,8 @@ import classes.Scenes.NPCs.Forgefather;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude3;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude4;
 			max += level * maxManaPerLevelStat.value;
-			if (level <= 6) max += level * 10;
-			else max += 60;
+			if (level <= 6) max += level * maxManaPerLevelStat.value;
+			else max += 6 * maxManaPerLevelStat.value;
 			max *= multimax;
 			max = Math.round(max);
 			if (max < 0) max = 0;
@@ -921,13 +925,16 @@ import classes.Scenes.NPCs.Forgefather;
 			//if (flags[kFLAGS.SOUL_CULTIVATION] >= ) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - );//Soul Immortal
 			tier = game.player.racialTier(Races.DRAGON);
 			if (tier == 1) max += 50;
-			else if (tier >= 2) max += 100;
+			else if (tier == 2) max += 100;
+			else if (tier >= 3) max += 150;
 			tier = game.player.racialTier(Races.PIG);
 			if (tier == 1) max += 25;
 			else if (tier >= 2) max += 45;
 			tier = game.player.racialTier(Races.ORCA);
 			if (tier == 1) max += 35;
 			else if (tier >= 2) max += 60;
+			tier = game.player.racialTier(Races.ABYSSALSHARK);
+			if (tier == 2) max += 50;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
 			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) max += 50;
 			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) max += 50;

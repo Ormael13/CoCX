@@ -139,8 +139,10 @@ public class Changelog extends BaseContent
 			outputText("-New magical soulskill: Create Element (Advanced). Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Create Element (Basic). Create ball of ice / lightning / darkness and throw it at enemy. Base cost: 60 soulforce.\n");
 			outputText("-Weapons Combining/Separating menu redone. (Jtecx) (added grey out buttons for combining, etc.)\n");
 			outputText("-Added option to combine and seperate katana weapons. Still combining two katana/daggers that may have bonus effects on them from randomn items system would cause it to loose those bonus effects.\n");
-			//outputText("-New mutation perk: White-Faced One Birthright (Evolved). Req. White-Faced One Birthright (Primitive) and lvl 60+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails)\n");
-			//outputText("-New mutation perk: White-Faced One Birthright (Final Form). Req. White-Faced One Birthright (Evolved) and lvl 90+. Effects: Increases soulforce recovery 0.75-3% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails)\n");
+			outputText("-New mutation perk: White-Faced One Birthright (Evolved). Req. White-Faced One Birthright (Primitive) and lvl 60+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails), SF gains per level/Wisdom stat increased to 200%.\n");
+			outputText("-New mutation perk: White-Faced One Birthright (Final Form). Req. White-Faced One Birthright (Evolved) and lvl 90+. Effects: Increases soulforce recovery 0.75-3% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +100% to magical soulskills power (doubled if you have 3+ tails), -10% of soulskills cost, SF gains per level/Wisdom stat increased to 300%, +20% to OverMax Soulforce.\n");
+			outputText("-New event perk: Blood Afinity. Gained by been race like vampires. Effects: Increase all damage dealt with blood spells/soulskills or amount of damage blood shield can absorb by 100%.\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 5% of max health per turn. Selfbuff that boost str/tou/spe/int/wis (physical stats are boosted 2x higher), when it's active would allow to use without cooldown Charge special with cost been HP equal to 200% of normal fatigue cost.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -150,8 +152,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health. selfbuff that boost spe, maybe str and tou, maybe int,
-			outputText("-\n");// hp regen - zuzywa hp and/or sf per turn aby być aktywnym; pozwala użyć charge speciala w trakcie trwania a jak postać może użyć charge i tak wzmacnia charge dodatkowo
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

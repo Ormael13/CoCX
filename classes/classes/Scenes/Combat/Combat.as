@@ -8839,6 +8839,7 @@ public class Combat extends BaseContent {
             return;
         }
         monster.doAI();
+        if (player.statStore.hasBuff("ScarletSpiritCharge")) HPChange(-Math.round(player.maxHP()*0.05), false);
         if (player.statStore.hasBuff("TranceTransformation")) player.soulforce -= 50;
         if (player.statStore.hasBuff("CrinosShape")) player.wrath -= mspecials.crinosshapeCost();
         if (player.statStore.hasBuff("AsuraForm")) player.wrath -= asuraformCost();
@@ -10175,11 +10176,21 @@ public class Combat extends BaseContent {
             //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
             //	}
         }
-        //Asura form
+        //Foxflame Pelt
         if (player.statStore.hasBuff("FoxflamePelt")) {
             if ((player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) || (player.mana < spellCost(100 * combat.mspecials.kitsuneskill2Cost()))) {
                 player.statStore.removeBuffs("FoxflamePelt");
                 outputText("<b>The flow of power through you suddenly stops, as you no longer able to sustain it.  Your Foxflame Pelt slowly extinguish, leaving you in your normal form.</b>\n\n");
+            }
+            //	else {
+            //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
+            //	}
+        }
+        //Scarlet Spirit Charge
+        if (player.statStore.hasBuff("ScarletSpiritCharge")) {
+            if (player.HP <= (player.minHP() + Math.round(player.maxHP()*0.05))) {
+                player.statStore.removeBuffs("ScarletSpiritCharge");
+                outputText("<b>Flow of blood within you is disturbed, softly slumping to the ground as the glow covering your [skin] fade away into nothingness.</b>\n\n");
             }
             //	else {
             //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
@@ -16427,6 +16438,7 @@ public function soulskillCost():Number {
     if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
     if (player.jewelryName == "fox hairpin") modssc -= .2;
     if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssc -= (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.2);
+	if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) modssc -= .1;
 	if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 2 && player.soulforce >= Math.round(player.maxSoulforce() * sfT())) modssc *= 1.5;
     if (modssc < 0.1) modssc = 0.1;
     modssc = Math.round(modssc * 100) / 100;

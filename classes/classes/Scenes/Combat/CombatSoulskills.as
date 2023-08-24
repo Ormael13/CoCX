@@ -534,6 +534,10 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
+			if (!player.statStore.hasBuff("ScarletSpiritCharge")) bd = buttons.add("ScarletSpiritCharge", ScarletSpiritCharge).hint("Activate Scarlet Spirit Charge state, which enhances your physical and mental abilities.  Allow to use during it Charge action.  \n\n(MAGICAL SOULSKILL)  \n\nBlood Cost: 5% of max HP per turn");
+			else bd = buttons.add("DeActSSCharge", DeactivateScarletSpiritCharge).hint("Deactivate Scarlet Spirit Charge.");
+		}
 	}
 	private function monsterDodgeSkill(skillName:String):Boolean {
 		if ((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
@@ -1505,6 +1509,46 @@ public class CombatSoulskills extends BaseCombatContent {
 		enemyAI();
 	}
 	
+	private static const ScarletSpiritChargeABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
+	public function ScarletSpiritCharge():void {
+		clearOutput();
+		var doEffect:Function = function():* {
+			var ScarletSpiritChargeBoost:Number = 10;
+			ScarletSpiritChargeBoost *= spellModBlood();
+			if (ScarletSpiritChargeBoost < 10) ScarletSpiritChargeBoost = 10;
+			ScarletSpiritChargeBoost = FnHelpers.FN.logScale(ScarletSpiritChargeBoost,ScarletSpiritChargeABC,10);
+			ScarletSpiritChargeBoost = Math.round(ScarletSpiritChargeBoost);
+			tempStrTouSpe = ScarletSpiritChargeBoost;
+			mainView.statsView.showStatUp('str');
+			// strUp.visible = true;
+			// strDown.visible = false;
+			mainView.statsView.showStatUp('tou');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			mainView.statsView.showStatUp('spe');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			mainView.statsView.showStatUp('inte');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			mainView.statsView.showStatUp('wis');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			player.buff("ScarletSpiritCharge").addStats({"str.mult":(ScarletSpiritChargeBoost*0.02),"tou.mult":(ScarletSpiritChargeBoost*0.02),"spe.mult":(ScarletSpiritChargeBoost*0.02),"inte.mult":(ScarletSpiritChargeBoost*0.01),"wis.mult":(ScarletSpiritChargeBoost*0.01)}).withText("Scarlet Spirit Charge").combatPermanent();
+			statScreenRefresh();
+		}
+		var tempStrTouSpe:Number = 0;
+		outputText("You focus the power of your blood and soul, letting the scarlet energy fill you. Your [skin] begins to glow as the power within you takes form. The power whirls within you like a tsunami.\n");
+		doEffect.call();
+		enemyAI();
+	}
+	public function DeactivateScarletSpiritCharge():void {
+		clearOutput();
+		outputText("You disrupt the flow of blood within you, softly slumping to the ground as the glow covering your [skin] fade away into nothingness.");
+		player.statStore.removeBuffs("ScarletSpiritCharge");
+		enemyAI();
+	}
+	
 	private static const TranceABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
 	public function TranceTransformation():void {
 		clearOutput();
@@ -1715,6 +1759,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You concentrate, focusing on the power of your blood. You swipe your hand across your chest. Three trails of blood pour from your fingertips, condensing into thin crimson blades. You point your clawlike blades at your foe, and they detach with a small crunch, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
 		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -1746,7 +1791,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF,3,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, before swiping your hand across your chest. Three trails of blood pour from your fingertips, condensing into thin crimson blades. You point your clawlike blades at your foe, and they detach with a small crunch, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 3;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
@@ -1779,6 +1825,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, spreading your fingers wide. Within an instant, a large blood dripping spear forms in your hand. You motion, sending the spear flying toward [themonster]'s vitals.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -1806,7 +1853,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeekerSF,4,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, spreading your fingers wide. Within an instant, a large blood dripping spear forms in your hand. You motion, sending the spear flying toward [themonster]'s vitals.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -1834,6 +1882,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -1867,8 +1916,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF,3,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward the enem"+(monster.plural?"ies":"y")+". Blood spurts from your fingertips, beads of crimson darkening as they harden. You close your eyes for a moment, sending soulforce into the pellets. You flick your wrist, sending the blood pellets flying towards [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 1.5;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
 		if (monster.plural) damage *= 5;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
@@ -1903,6 +1953,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands, precise movements sending power blazing through your body. Within an instant, large, blood dripping pillars form above [themonster]. The pillars begin to fall, and [themonster] looks up in shock, too late to dodge such a large projectile. \n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -1932,7 +1983,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF,5,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands, precise movements sending power blazing through your body. You pour Soulforce into your hands, and they glow blue with each gesture, power pulsing with your heartbeat. Within an instant, large, blood dripping pillars form above [themonster]. The pillars begin to fall, and [themonster] looks up in shock, too late to dodge such a large projectile. \n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;

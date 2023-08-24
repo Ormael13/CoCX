@@ -3566,7 +3566,7 @@ public class PerkLib
 		public static const BimboBrains:PerkType = mk("Bimbo Brains", "Bimbo Brains",
 				"Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!").withBuffs({'int.mult':-0.50});
 		public static const BloodAffinity:PerkType = mk("Blood Affinity", "Blood Affinity",
-				"Increase all damage dealt with blood spells/soulskills by 100%.");
+				"Increase all damage dealt with blood spells/soulskills or amount of damage blood shield can absorb by 100%.");
 		public static const BouncyBody:PerkType = mk("Bouncy body", "Bouncy body",
 				"Attacks that would deal more than half of your health have a chance to simply punt you around, reducing damage taken by 25%.");
 		public static const BroBody:PerkType = mk("Bro Body", "Bro Body",
