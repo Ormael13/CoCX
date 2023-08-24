@@ -2304,7 +2304,7 @@ public class Camp extends NPCAwareContent{
 		menu();
 		var bd:ButtonDataList = new ButtonDataList();
 		for each(var weapongroup:Array in weaponList){
-			bd.add(weapongroup[1].name,curry(menuSeparating, weapongroup[1], weapongroup[0])).disableIf(player.itemCount(weapongroup[1]) == 0, "You need more than one " + weapongroup[1].name + "to break down back to two " + weapongroup[0].name + "!").hint("Disassemble "+ weapongroup[1].name + " to get 2 " + weapongroup[0].name)
+			bd.add(weapongroup[1].name,curry(menuSeparating, weapongroup[1], weapongroup[0])).disableIf(player.itemCount(weapongroup[1]) == 0, "You need at least one " + weapongroup[1].name + "to break back down to two " + weapongroup[0].name + "!").hint("Disassemble "+ weapongroup[1].name + " to get 2 " + weapongroup[0].name)
 		}
 		submenu(bd, menuForCombiningAndSeperating,0,false);
 	}
