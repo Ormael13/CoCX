@@ -35,6 +35,7 @@ public class ArmsTransformations extends MutationsHelper {
 					case Arms.BEAR:
 					case Arms.RACCOON:
 					case Arms.RAIJU_PAWS:
+					case Arms.CANINE:
 						desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [fur color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.";
 						break;
 					case Arms.DISPLACER:
@@ -1211,6 +1212,32 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.CANINE;
 			}
 	);
+/*
+	public const ArmsWerespider: Transformation = new SimpleTransformation("Werespider Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny carapace</b>.  A second pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+				else if (player.arms.type == Arms.BEE) desc += "A second pair of arms starts sprouting underneath your original pair, and the fizz covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+				else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "A second pair of arms starts sprouting underneath your original pair, and the scales covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+				else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, leaving you with shiny, chitonous but humanoid arms. A second pair then starts to sprout out below";
+				else if (player.arms.type == Arms.SPIDER) desc += "There's a sudden swelling below your armpits, and you look to see a second pair of chitinous arms sprouting below your main pair."
+				else {
+					TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+					desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny  carapace</b>. A econd pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+				}
+
+				player.arms.type = Arms.ANT;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ANT));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.ANT;
+			}
+	);*/
 	/*
   */
 }

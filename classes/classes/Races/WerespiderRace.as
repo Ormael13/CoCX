@@ -44,8 +44,8 @@ public class WerespiderRace extends Race {
 				.eyeType(Eyes.WERESPIDER, +2)
 				.earType(Ears.INSECT, +1)
 				.faceType(Face.SPIDER_FANGS, +1)
-				.armType(Arms.SPIDER, +1)
-				.legType(LowerBody.CHITINOUS_SPIDER_LEGS, +1)
+				.armType(Arms.ANT, +2)
+				.legType(LowerBody.CHITINOUS_SPIDER_LEGS, +1)//smth like taur but not so long lower body but more like two pairs of legs starting next to each other
 				.tailType(Tail.SPIDER_ADBOMEN, +1)
 				.noWings(+4)
 				.hasPerk(PerkLib.Araneathropy, +2, -11);

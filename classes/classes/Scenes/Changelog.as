@@ -142,7 +142,10 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: White-Faced One Birthright (Evolved). Req. White-Faced One Birthright (Primitive) and lvl 60+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails), SF gains per level/Wisdom stat increased to 200%.\n");
 			outputText("-New mutation perk: White-Faced One Birthright (Final Form). Req. White-Faced One Birthright (Evolved) and lvl 90+. Effects: Increases soulforce recovery 0.75-3% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +100% to magical soulskills power (doubled if you have 3+ tails), -10% of soulskills cost, SF gains per level/Wisdom stat increased to 300%, +20% to OverMax Soulforce.\n");
 			outputText("-New event perk: Blood Afinity. Gained by been race like vampires. Effects: Increase all damage dealt with blood spells/soulskills or amount of damage blood shield can absorb by 100%.\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 5% of max health per turn. Selfbuff that boost str/tou/spe/int/wis (physical stats are boosted 2x higher), when it's active would allow to use without cooldown Charge special with cost been HP equal to 200% of normal fatigue cost.
+			outputText("-Tier 3 Dragon bonus to max hunger increased from 100 to 150.\n");
+			outputText("-New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 5% of max health per turn. Selfbuff that boost str/tou/spe/int/wis (physical stats are boosted 2x higher), when it's active would allow to use without cooldown Charge special with cost been HP equal to 200% of normal fatigue cost.\n");
+			outputText("-Bonus to Charge/Great Dive from Natural Jouster perk and it upgraded version was fixed due to last melee changes that made perk useless. Also jouster effect would now include also polearms type weapons and not just spears, but polearm weapons would have 25% lower bonus from jouster perks.\n");
+			outputText("-Bite special gained additional scaling from bonus str and spe.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -158,19 +161,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");

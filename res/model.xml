@@ -2496,7 +2496,7 @@
 			<case values="RearBody.LION_MANE">
 				<show part="neck/manticore"/>
             </case>
-			<case values="RearBody.SHARK_FIN">
+			<case values="RearBody.SHARK_FIN,RearBody.ABYSSAL_SHARK_FIN">
                 <show part="rearbody/shark"/>
             </case>
 			<case values="RearBody.DISPLACER_TENTACLES">
@@ -4186,7 +4186,7 @@
 				</if>
 
             </case>
-			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEA_DRAGON">
+			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEA_DRAGON,LowerBody.ABYSSAL_SHARK">
 				<if test="lowerBody==LowerBody.ORCA">
 					<hide part="legs/*"/>
 					<show part="legs/orca"/>

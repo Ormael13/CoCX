@@ -5045,7 +5045,8 @@ public class Combat extends BaseContent {
                 HPChange(player.maxHP()*0.25,false);
             }
             if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
-            if ((player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) && !monster.isImmuneToBleed()) {
+            if (player.faceType == Face.ABYSSAL_SHARK) biteMultiplier = 4.0;
+            if ((player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK || player.faceType == Face.VAMPIRE) && !monster.isImmuneToBleed()) {
                 outputText(" and drawing blood out.");
                 if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
                 else {
@@ -7157,7 +7158,7 @@ public class Combat extends BaseContent {
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
                 crit = true;
-                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) {
+                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 3) {
                     if (monster.canMonsterBleed()) {
                         if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,4,0,0,0);
                         else {
@@ -10190,7 +10191,7 @@ public class Combat extends BaseContent {
         if (player.statStore.hasBuff("ScarletSpiritCharge")) {
             if (player.HP <= (player.minHP() + Math.round(player.maxHP()*0.05))) {
                 player.statStore.removeBuffs("ScarletSpiritCharge");
-                outputText("<b>Flow of blood within you is disturbed, softly slumping to the ground as the glow covering your [skin] fade away into nothingness.</b>\n\n");
+                outputText("<b>The flow of blood within you is disturbed, causing your body to slump as the glow radiating from your [skin] dissipates back into your natural hue.</b>\n\n");
             }
             //	else {
             //		outputText("<b>As your soulforce is drained you can feel the Violet Pupil Transformation's regenerative power spreading in your body.</b>\n\n");
@@ -15397,9 +15398,9 @@ public function greatDive():void {
         }
         if (player.haveWeaponForJouster()) {
             var JousterDamageMod:Number = 1;
-            //if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
-            if (player.hasPerk(PerkLib.Naturaljouster) && (((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) || player.spe >= 150)) damage *= 3*JousterDamageMod;
-            if (player.hasPerk(PerkLib.NaturaljousterMastergrade) && (((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) || player.spe >= 450)) damage *= 5*JousterDamageMod;
+            if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
+            if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
+            if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
 
         }
         damage *= (1 + PASPAS());

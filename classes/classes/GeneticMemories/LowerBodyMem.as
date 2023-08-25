@@ -521,6 +521,13 @@ package classes.GeneticMemories {
           title: "YggdrasilRootClaws",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyYgddrasilRootClaws}});
 
+      public static const ABYSSAL_SHARK: int = _partid++;
+      EnumValue.add(Memories, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+          id: "Abyssal Shark Lower Body",name: "Abyssal Shark Legs",
+          cost: 200,
+          title: "Abyssal Shark Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyAbyssalShark}});
+
 
 
 

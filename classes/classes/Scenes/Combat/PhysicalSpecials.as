@@ -91,7 +91,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
 					//Bitez
-					if (player.faceType == Face.SHARK_TEETH) {
+					if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK) {
 						bd = buttons.add("SharkBite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
@@ -1483,7 +1483,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.haveWeaponForJouster()) {
 			var JousterDamageMod:Number = 1;
-			//if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
+			if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
 			if (player.isTaur() || player.isDrider()) damage *= 2*JousterDamageMod;
 			if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
@@ -5343,7 +5343,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		if (player.fatigue + physicalCost(25) > player.maxFatigue()) {
 			clearOutput();
-			if (player.faceType == Face.SHARK_TEETH) outputText("You're too fatigued to use your shark-like jaws!");
+			if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK) outputText("You're too fatigued to use your shark-like jaws!");
 			if (player.faceType == Face.ORCA) outputText("You're too fatigued to use your orca-like jaws!");
 			if (player.faceType == Face.WOLF) outputText("You're too fatigued to use your wolf jaws!");
 			if (player.faceType == Face.CERBERUS) outputText("You're too fatigued to use your canine jaws!");
@@ -5362,7 +5362,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		fatigue(25, USEFATG_PHYSICAL);
 		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You open your mouth wide, your ");
-		if (player.faceType == Face.SHARK_TEETH) outputText("shark teeth extending out");
+		if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK) outputText("shark teeth extending out");
 		if (player.faceType == Face.ORCA) outputText("sharp orca teeth shining briefly");
 		if (player.faceType == Face.WOLF) outputText("sharp wolf teeth shining briefly");
 		if (player.faceType == Face.CERBERUS) outputText("sharp canine teeth shining briefly while your companion heads follow suit");
@@ -5380,13 +5380,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine damage - str modified by enemy toughness!
-		damage = int((player.str + player.spe) * 3 * (monster.damagePercent() / 100));
+		damage += player.str * 3;
+		damage += combat.scalingBonusStrength() * 0.25;
+		damage += player.spe * 3;
+		damage += combat.scalingBonusSpeed() * 0.25;
+		if (player.faceType == Face.ABYSSAL_SHARK) damage *= 2;
+		damage *= (monster.damagePercent() / 100);
+		damage = Math.round(damage);
 		if (!monster.isImmuneToBleed()) {
 			if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
 			else {
 				monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
 				monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
 			}
+			if (player.faceType == Face.ABYSSAL_SHARK) monster.addStatusValue(StatusEffects.SharkBiteBleed,2,2);
 		}
 		//Deal damage and update based on perks
 		if(damage > 0) {
@@ -6559,4 +6566,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

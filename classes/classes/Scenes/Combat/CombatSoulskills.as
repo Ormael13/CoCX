@@ -776,7 +776,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
 		if (player.haveWeaponForJouster()) {
-			//if (player.isPolearmTypeWeapon()) damage *= 0.75;
+			if (player.isPolearmTypeWeapon()) damage *= 0.75;
 			if (player.isTaur() || player.isDrider()) damage *= 2;
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
@@ -1514,6 +1514,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		var doEffect:Function = function():* {
 			var ScarletSpiritChargeBoost:Number = 10;
+			ScarletSpiritChargeBoost += player.wisStat.core.value;
 			ScarletSpiritChargeBoost *= spellModBlood();
 			if (ScarletSpiritChargeBoost < 10) ScarletSpiritChargeBoost = 10;
 			ScarletSpiritChargeBoost = FnHelpers.FN.logScale(ScarletSpiritChargeBoost,ScarletSpiritChargeABC,10);
@@ -1534,17 +1535,17 @@ public class CombatSoulskills extends BaseCombatContent {
 			mainView.statsView.showStatUp('wis');
 			// touUp.visible = true;
 			// touDown.visible = false;
-			player.buff("ScarletSpiritCharge").addStats({"str.mult":(ScarletSpiritChargeBoost*0.02),"tou.mult":(ScarletSpiritChargeBoost*0.02),"spe.mult":(ScarletSpiritChargeBoost*0.02),"inte.mult":(ScarletSpiritChargeBoost*0.01),"wis.mult":(ScarletSpiritChargeBoost*0.01)}).withText("Scarlet Spirit Charge").combatPermanent();
+			player.buff("ScarletSpiritCharge").addStats({"str.mult":(ScarletSpiritChargeBoost*0.02),"tou.mult":(ScarletSpiritChargeBoost*0.02),"spe.mult":(ScarletSpiritChargeBoost*0.02),"int.mult":(ScarletSpiritChargeBoost*0.01),"wis.mult":(ScarletSpiritChargeBoost*0.01)}).withText("Scarlet Spirit Charge").combatPermanent();
 			statScreenRefresh();
 		}
 		var tempStrTouSpe:Number = 0;
-		outputText("You focus the power of your blood and soul, letting the scarlet energy fill you. Your [skin] begins to glow as the power within you takes form. The power whirls within you like a tsunami.\n");
+		outputText("You focus the power of your blood and soul, allowing the scarlet energy fill your being. Your [skin] begins to glow as the power within you coalesces, whirling within you with the force of a tsunami.\n");
 		doEffect.call();
 		enemyAI();
 	}
 	public function DeactivateScarletSpiritCharge():void {
 		clearOutput();
-		outputText("You disrupt the flow of blood within you, softly slumping to the ground as the glow covering your [skin] fade away into nothingness.");
+		outputText("You disrupt the flow of blood within you, your body slumps as the glow radiating from your [skin] dissipates back into your natural hue.");
 		player.statStore.removeBuffs("ScarletSpiritCharge");
 		enemyAI();
 	}

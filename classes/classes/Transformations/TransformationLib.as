@@ -755,6 +755,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake.registerTf(AS_LEGS, AE_SNAKE);
     public const LowerBodyTiny: Transformation 			    = lowerBody.LowerBodyTiny.registerTf(AS_LEGS, AE_IMP);
     public const LowerBodyWorm: Transformation 			    = lowerBody.LowerBodyWorm.registerTf(AS_LEGS, AE_SAND_WORM);
+    public const LowerBodyAbyssalShark: Transformation 		= lowerBody.LowerBodyAbyssalShark.registerTf(AS_LEGS, AE_ABYSSAL_SHARK);
     public const LowerBodyYgddrasilRootClaws: Transformation 	= lowerBody.LowerBodyYgddrasilRootClaws.registerTf(AS_LEGS, AE_YGGDRASIL);
 
 
@@ -815,6 +816,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const RearBodyCobraHood: Transformation 			= rearBody.RearBodyCobraHood.registerTf(AS_REAR, AE_APOPHIS);
 	public const RearBodyWolfCollar: Transformation 		= rearBody.RearBodyWolfCollar.registerTfMultiple(AS_REAR, AE_WOLF, AE_WEREWOLF, AE_WEREFOX);
 	public const RearBodyHellhoundCollar: Transformation 	= rearBody.RearBodyHellhoundCollar.registerTf(AS_REAR, AE_CERBERUS);
+	public const RearBodyAbyssalSharkFin: Transformation 	= rearBody.RearBodyAbyssalSharkFin.registerTf(AS_REAR, AE_ABYSSAL_SHARK);
 
 
 //SKIN
@@ -1205,3 +1207,4 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	}
 }
 }
+

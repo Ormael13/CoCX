@@ -679,6 +679,12 @@ public class Face extends SaveableBodyPart {
 		bite: true,
 		humanShaped: true
 	});
+	public static const ABYSSAL_SHARK: int = 62;
+	EnumValue.add(Types, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+		name: "abyss shark",
+		appearanceDesc: "Your face is hammer shark in shape and structure. A set of razor-sharp, retractable shark-teeth fill your large mouth and gives your visage an angular appearance.",
+		bite: true
+	});
 
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);

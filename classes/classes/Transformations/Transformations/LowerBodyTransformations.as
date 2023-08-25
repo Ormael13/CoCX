@@ -2213,6 +2213,25 @@ public class LowerBodyTransformations extends MutationsHelper {
 		}
 	);
 	
+	public const LowerBodyAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Lower Body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
+			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+			desc += "You feel something change in your [feet] as they morph into a reptilian-like form and webbing forms between your toes. Well, this is sure to help you swim faster. Soon after you start sweating profusely and panting loudly, feeling the space near your hips shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your thighs. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have webbed abyssal shark feet!</b>";
+
+			if (doOutput) outputText(desc);
+			player.lowerBody = LowerBody.ABYSSAL_SHARK;
+			player.legCount = 2;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ABYSSAL_SHARK));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.ABYSSAL_SHARK && player.legCount === 2;
+		}
+	);
+	
 	/*
   */
 }

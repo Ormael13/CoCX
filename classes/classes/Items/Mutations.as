@@ -4350,13 +4350,13 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 			//Smart enough for Crimson Overflow and doesnt have it
-			/*
+			
 			//Smart enough for Scarlet Spirit Charge and doesnt have it
 			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Scarlet Spirit Charge.</b>");
 				player.createStatusEffect(StatusEffects.KnowsScarletSpiritCharge, 0, 0, 0, 0);
 				return;
-			}*/
+			}
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			//Smart enough for SF Infused Blood Swipe and doesnt have it

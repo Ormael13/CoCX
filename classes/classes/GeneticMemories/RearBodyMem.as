@@ -273,6 +273,17 @@ import classes.CoC;
 		  }
 	  });
 
+		public static const ABYSSAL_SHARK_FIN:int = _partid++;
+		EnumValue.add(Memories, ABYSSAL_SHARK_FIN, "ABYSSAL_SHARK_FIN", {
+			id: "Abyss Shark Fin Rear Body",
+			name: "Abyss Shark Fin",
+			cost: 200,
+			title: "Abyss Shark",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.RearBodyAbyssalSharkFin;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

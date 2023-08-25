@@ -425,6 +425,23 @@ public class RearBodyTransformations extends MutationsHelper {
 				return player.rearBody.type === RearBody.COBRA_HOOD
 			}
 	);
+
+	public const RearBodyAbyssalSharkFin: Transformation = new SimpleTransformation("Abyss Shark Fin Rear Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades and above your buttocks shifting about. You hastily remove your [armor] just in time before a strange fin-like structures bursts from in-between your shoulders and a bit above your butt. You examine it carefully and make a few modifications to your [armor] to accommodate your new fins.";
+				player.rearBody.type = RearBody.ABYSSAL_SHARK_FIN;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.ABYSSAL_SHARK_FIN));
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.ABYSSAL_SHARK_FIN;
+			}
+	);
 	/*
   */
 }
