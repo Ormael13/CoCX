@@ -1662,6 +1662,11 @@ import flash.utils.getQualifiedClassName;
 			this.XP = totalXP();
 			error += super.validate();
 			error += Utils.validateNonNegativeNumberFields(this, "Monster.validate", ["lustVuln"]);
+			for each (var ability:* in abilities) {
+				if ('condition' in ability && !(ability.condition is Function)) {
+					error += "Ability is not a Function. ";
+				}
+			}
 			return error;
 		}
 

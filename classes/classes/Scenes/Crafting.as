@@ -1196,13 +1196,52 @@ private function craftingMaterialsMoonstone1Down():void {
 		public function alchemyFurnaceStoneSafeLimit():int {
 			return alchemyFurnaceObject().stoneLimit
 		}
-		
+		/**
+		 * List reagents of type. On click, **take one from storage** and call `callback(value)`
+		 * @param type AlchemyLib.RT_XXXX
+		 * @param callback function(value:int|String):void
+		 * @param backFn function():void
+		 * @param current int|String, selected reagent.
+		 */
+		public function selectReagent(type:int, callback:Function, backFn:Function, current:*):void {
+			clearOutput();
+			mainView.linkHandler = function (event:String):void {
+				if (type == AlchemyLib.RT_PIGMENT) {
+					addPigment(event, -1);
+					callback(event);
+				} else {
+					addAlchemyReagent(AlchemyReagent.getReagent(type, int(event)), -1);
+					callback(int(event));
+				}
+			}
+			outputText("<b>Alchemical " + AlchemyLib.ReagentTypes[type].name  + "s</b>:");
+			var list:Array = SceneLib.crafting.listAlchemyReagents(type).sortOn("2");
+			if (list.length == 0) {
+				outputText("\nYou don't have any! Refine ingredients in the alembic.");
+			} else {
+				outputText("<ul>");
+				for each (var element:Array in list) {
+					outputText("<li>");
+					outputText(mkLink(element[2] + " (" + element[1] + ")", String(element[3])));
+					if (element[3] == current) outputText(" - selected");
+					outputText("</li>")
+				}
+				outputText("</ul>");
+			}
+			
+			menu();
+			button(14).show("Back", backFn).icon("Back");
+		}
 		//======================//
 		// ALCHEMY - DYE MIXING //
 		//======================//
 		
 		private var selectedPigment:String = "";
 		private function selectPigment(pigment:String):void {
+			if (selectedPigment) {
+				// Give back old pigment
+				addPigment(selectedPigment);
+			}
 			selectedPigment = pigment;
 			dyeCraftingMenu();
 		}
@@ -1249,45 +1288,17 @@ private function craftingMaterialsMoonstone1Down():void {
 					 .disableIf(!selectedPigment, "Select a pigment");
 			
 			button(14).show("Back",function():void {
+				if (selectedPigment) {
+					addPigment(selectedPigment);
+				}
 				selectedPigment = "";
 				craftingMain();
 			}).icon("Back");
-		}
-		
-		public function selectReagent(type:int, callback:Function, backFn:Function, current:*):void {
-			clearOutput();
-			mainView.linkHandler = function (event:String):void {
-				if (type == AlchemyLib.RT_PIGMENT) {
-					addPigment(event, -1);
-					callback(event);
-				} else {
-					addAlchemyReagent(AlchemyReagent.getReagent(type, int(event)), -1);
-					callback(int(event));
-				}
-			}
-			outputText("<b>Alchemical " + AlchemyLib.ReagentTypes[type].name  + "s</b>:");
-			var list:Array = SceneLib.crafting.listAlchemyReagents(type).sortOn("2");
-			if (list.length == 0) {
-				outputText("\nYou don't have any! Refine ingredients in the alembic.");
-			} else {
-				outputText("<ul>");
-				for each (var element:Array in list) {
-					outputText("<li>");
-					outputText(mkLink(element[2] + " (" + element[1] + ")", String(element[3])));
-					if (element[3] == current) outputText(" - selected");
-					outputText("</li>")
-				}
-				outputText("</ul>");
-			}
-			
-			menu();
-			button(14).show("Back", backFn).icon("Back");
 		}
 		private function craftHairDye():void {
 			clearOutput();
 			player.giveAlchemyXP(1);
 			outputText("You pour the pigment into foundation and stir it with a spoon. The viscous mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the vial.\n");
-			addPigment(selectedPigment, -1);
 			player.destroyItems(useables.DYE_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createHairDye(selectedPigment, 1), dyeCraftingMenu);
 		}
@@ -1295,7 +1306,6 @@ private function craftingMaterialsMoonstone1Down():void {
 			clearOutput();
 			player.giveAlchemyXP(1);
 			outputText("You pour the pigment into foundation and stir it with a spoon. The viscous mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the bottle.\n");
-			addPigment(selectedPigment, -1);
 			player.destroyItems(useables.OIL_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createSkinOil(selectedPigment), dyeCraftingMenu);
 		}
@@ -1303,7 +1313,6 @@ private function craftingMaterialsMoonstone1Down():void {
 			clearOutput();
 			player.giveAlchemyXP(1);
 			outputText("You pour the pigment into foundation and stir it with a spoon. The mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the vial.\n");
-			addPigment(selectedPigment, -1);
 			player.destroyItems(useables.DROP_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createEyeDye(selectedPigment), dyeCraftingMenu);
 		}

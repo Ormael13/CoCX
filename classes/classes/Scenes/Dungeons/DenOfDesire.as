@@ -1,5 +1,5 @@
 //Quest Dungeon: Den of Desire (Gargoyle TF Quest)
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
@@ -11,7 +11,7 @@ import classes.display.SpriteDb;
 public class DenOfDesire extends DungeonAbstractContent
 	{
 		public function DenOfDesire() { }
-				
+		
 		public function enterDungeon():void {
 			inDungeon = true;
 			dungeonLoc = DUNGEON_DEN_OF_DESIRE_ENTRANCE;
@@ -21,7 +21,7 @@ public class DenOfDesire extends DungeonAbstractContent
 			inDungeon = false;
 			clearOutput();
 			outputText("You leave the den behind and take off through the ridge back towards camp.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		
 		public function defeatedByObsidianGargoyle():void {
