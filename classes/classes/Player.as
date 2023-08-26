@@ -619,6 +619,9 @@ use namespace CoC;
 		public function isWearingBra():Boolean {
 			return !upperGarment.isNothing;
 		}
+		public function humanForm():Boolean {
+			return (hasStatusEffect(StatusEffects.HumanForm));
+		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
 		}

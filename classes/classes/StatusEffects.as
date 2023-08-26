@@ -790,6 +790,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const GooEngulf:StatusEffectType          	= mk("Goo Engulf");
 		public static const GrabBear:StatusEffectType     			= mk("Grab (Bear)");
 		public static const HolliBurning:StatusEffectType       	= mk("Holli Burning");
+		public static const HumanForm:StatusEffectType  			= mk("HumanForm");
 		public static const HypnosisNaga:StatusEffectType  			= mk("Hypnosis Naga");
 		public static const HydraTails:StatusEffectType  			= mk("Hydra Tails");
 		public static const Hypermode:StatusEffectType  			= mk("Hypermode");

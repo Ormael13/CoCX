@@ -5306,6 +5306,143 @@
 		<if test="AzazelPhylactery">
 			<show part="overbreast/phylacteryExposed"/>
 		</if>
+		
+		<!-- WERE HUMAN FORM -->
+		<if test="HUMANFORM">
+			<!-- Set Human -->
+			<hide part="*"/>
+			
+			<!-- Display sexuality -->
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="breasts/0"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="breasts/Bhuman"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+						<show part="fullbodyBreast/Dhuman"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+						<show part="fullbodyBreast/Dhuman"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+						<show part="fullbodyBreast/Fhuman"/>
+					</case>
+					<default>
+						<show part="fullbodyBreast/Fhuman"/>
+					</default>
+				</switch>
+				<else>
+					<show part="breasts/0"/>
+                </else>
+			</if>
+			<if test="hasCock()">
+				<if test="big">
+                    <show part="penis/humanbig"/>
+                    <else>
+						<show part="penis/human"/>
+                    </else>
+                </if>
+			</if>
+			<if test="balls gt 0">
+				<switch>
+					<case test="ballSize ge 12">
+						<show part="balls/Bhumangigahuge"/>
+					</case>
+					<case test="ballSize ge 8">
+						<show part="balls/Bhumansillyhuge"/>
+					</case>
+					<case test="ballSize ge 6">
+						<show part="balls/Bhumanhuge"/>
+					</case>
+					<case test="ballSize ge 4">
+						<show part="balls/Bhumanlarge"/>
+					</case>
+					<default>
+						<show part="balls/Bhumansmall"/>
+					</default>
+				</switch>
+			</if>
+			
+			<!-- Display Hair -->
+			<show part="hair/0"/>
+			<show part="hair_bg/02"/>   
+			<if test="hairStyle != Hair.PLAIN">
+				<hide part="hair/0"/>
+				<hide part="hair_bg/02"/>   
+				<show part="hair/feather"/>
+				<show part="hair_bg/feather"/> 
+			</if>
+			<switch value="hairStyle">
+				<case values="Hair.PONYTAIL">
+					<show part="hair_bg/ponytail"/>
+				</case>
+				<case values="Hair.LONGTRESSES">
+					<show part="hair_bg/longTresse"/>
+				</case>
+				<case values="Hair.TWINTAILS">
+					<show part="hair_bg/twinPigtail"/>
+				</case>
+				<case values="Hair.DWARVEN">
+					<show part="hair_bg/dwarven"/>
+				</case>
+				<case values="Hair.SNOWLILY">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+					<show part="hair/yukionna"/>
+					<show part="hair_bg/yukionna"/>
+				</case>
+				<case values="Hair.FOURWIND">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+					<show part="hair/fourWindBraid"/>
+					<show part="hair_bg/fourWindBraid"/>
+				</case>
+				<case values="Hair.FOURWINDL">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+					<show part="hair/fourWindBraid"/>
+					<show part="hair_bg/CerberusHair"/>
+				</case>
+				<case values="Hair.TAURPONYTAIL">
+					<show part="hair_bg/centaurPonytail"/>
+				</case>
+				<case values="Hair.TWINRIBBON">
+					<show part="hairFront/ribbon"/>
+				</case>
+				<case values="Hair.DESERTGRACE">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+					<hide part="hairFront/*"/>
+					<show part="hair/desertGrace"/>
+					<show part="hairFront/desertGrace"/>
+					<show part="hair_bg/desertGrace"/>
+				</case>
+				<default>
+                    <switch>
+						<case test="hairLength lt 16">
+						</case>
+						<default>
+                            <hide part="hair_bg/*"/>
+                            <show part="hair_bg/02"/>
+						</default>
+					</switch>
+                </default>
+			</switch>
+			
+			<!-- Display human body parts -->
+			<show part="face/human"/>
+			<show part="eyes/human"/>
+			<show part="head/human"/>
+			<show part="ears_bg/human"/>
+			<show part="torso/human"/>
+			<show part="arms/human"/>
+            <show part="arms_bg/human"/>
+			<show part="legs/human"/>
+			
+		</if>
 
 		<!-- DRESS AREA -->
 
@@ -7172,6 +7309,14 @@
 				<case values="Hair.TWINRIBBON">
 					<show part="hairFront/ribbon"/>
                 </case>
+				<case values="Hair.DESERTGRACE">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+					<hide part="hairFront/*"/>
+					<show part="hair/desertGrace"/>
+					<show part="hairFront/desertGrace"/>
+					<show part="hair_bg/desertGrace"/>
+                </case>
                 <default>
                     <switch>
 						<case test="hairLength lt 16">
@@ -7185,7 +7330,7 @@
             </switch>
 		</if>
 		
-				<!-- Sand Worm -->
+		<!-- Sand Worm -->
 		<if test="lowerBody == LowerBody.SANDWORM">
 			<!-- Hide everything else -->
 			<hide part="*"/>
