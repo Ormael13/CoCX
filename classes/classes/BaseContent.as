@@ -819,6 +819,7 @@ import coc.xxc.StoryContext;
 		protected static function get explorer():ExplorationEngine {
 			return SceneLib.explorationEngine;
 		}
+		/** [Next] to camp or exploartion map */
 		protected function endEncounter():void {
 			doNext(explorer.done);
 		}
