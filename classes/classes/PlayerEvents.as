@@ -1965,7 +1965,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
 					(player.tallness < 80) ? "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size." : "You sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.");
 			//Oni Might
-			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA) || player.isRaceCached(Races.SEA_DRAGON)) {
+			if (player.isRaceCached(Races.ONI) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.ORCA) || player.isRaceCached(Races.SEA_DRAGON) || player.isRaceCached(Races.ABYSSAL_SHARK)) {
 				if (!player.hasPerk(PerkLib.GiantMight)) {
 					outputText("\nWhoa, you just feel so damn powerful like you could move mountains like your size has no relative correlation with your current strength. That must be the so called fabled strength of the giants.\n\n<b>(Gained Oni Might perk!)</b>\n");
 					player.createPerk(PerkLib.GiantMight, 0, 0, 0, 0);

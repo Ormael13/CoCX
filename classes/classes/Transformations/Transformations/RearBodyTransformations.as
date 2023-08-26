@@ -431,7 +431,9 @@ public class RearBodyTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades and above your buttocks shifting about. You hastily remove your [armor] just in time before a strange fin-like structures bursts from in-between your shoulders and a bit above your butt. You examine it carefully and make a few modifications to your [armor] to accommodate your new fins.";
+				desc += "You groan, slumping in pain. Almost immediately, you feel a tinge of regret for eating the tooth. Sweat streaks down your face as you struggle to swallow in air, your breathing staggers as your body begins shifting to accomodate the transformation. ";
+				desc += "You"+(player.isNaked()?"r shoulder blades move apart as fin-like protrusions form between them":" hastily remove your [armor] as your shoulder blades move apart as fin-like protrusions form between them")+". Just above your ass, another fin expels from your body, growing firmly into place. You examine the new appendages carefully, thinking about how armor you'll wear must be modified to withstand your new shapes.";
+				if (player.isNaked()) desc += " Though, perhaps armor is not the biggest concern you have with your new body.";
 				player.rearBody.type = RearBody.ABYSSAL_SHARK_FIN;
 
 				if (doOutput) outputText(desc);

@@ -843,7 +843,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const ABYSSAL_SHARK:int = 79;
 	EnumValue.add(Types, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
 		name: "abyss shark",
-		appearanceDesc: "Your two legs are mostly human save for the webbing between your toes and pair of fins have sprouted on each of your thighs near your hips."
+		appearanceDesc: "Your legs are fairly human, save for the webbing between your toes and a pair of fins that have sprouted on each of your thighs, just below the hips."
 	});
 
 	override public function set type(value:int):void {

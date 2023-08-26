@@ -317,6 +317,9 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyGroupType)) temp *= 5;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
+			/*if (hasPerk(PerkLib.EnemyBossType) && flags[kFLAGS.GAME_DIFFICULTY] > 0) {
+				temp *= ((1+flags[kFLAGS.GAME_DIFFICULTY])*2); 
+			}*/
 			temp *= stats_multi_based_on_misc();
 			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;

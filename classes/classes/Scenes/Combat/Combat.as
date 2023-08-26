@@ -14920,7 +14920,7 @@ public function runAway(callHook:Boolean = true):void {
     }
 	if (player.hasStatusEffect(StatusEffects.LockingCurse)) {
 		if (player.statusEffectv1(StatusEffects.LockingCurse) == 1) {
-			outputText("So Lia not wrote text for this ocassion. Concidence/Typical? I not think so!!!");
+			outputText("The anubis acursed magic prevents you from escaping as an invisible wall blocks your path!");
 			enemyAI();
 			return;
 		}

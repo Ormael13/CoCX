@@ -11,6 +11,7 @@ import classes.VaginaClass;
 
 public class AbyssalSharkRace extends Race {
 	public static const AbyssalSharkScaleColors:/*String*/Array = ["rough gray","dark gray","iridescent gray","ashen","gray","black"];
+	public static const AbyssalSharkHairColors:/*String*/Array = ["silver","purplish black","dark purple","iridescent"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -60,14 +61,14 @@ public class AbyssalSharkRace extends Race {
 						}, +1)
 //9
 				.rearType(RearBody.SHARK_FIN, +1)
-				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
+				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2) - done
 				.armType(Arms.SHARK, +1)
-				//.armType(Arms.SEA_DRAGON, +2)
+				.armType(Arms.SEA_DRAGON, +2)
 				.legType(LowerBody.SHARK, +1)
-				//.legType(LowerBody.ABYSSAL_SHARK, +2)
+				//.legType(LowerBody.ABYSSAL_SHARK, +2) - done
 				.tailType(Tail.SHARK, +1)
 				//.tailType(Tail.SHARK, +1)
-				.hasPerk(PerkLib.Phylactery, +1, -10);//4+1
+				.hasPerk(PerkLib.Phylactery, +1, -10);//5+1
 		
 		buildTier(10, "abyssal shark-morph")
                 .requirePerk(PerkLib.Phylactery)

@@ -71,12 +71,20 @@ public class Anubis extends Monster
 			player.addCurse("tou", 10,1);
 		}
 		
+		override public function get long():String
+		{
+			var str:String = "";
+			str += "You are fighting an anubi and h"+(this.hasVagina()?"er":"is")+" cohort of mummy slaves. The undeads are salivating abundantly at the though of raping you and its obvious the anubi can only keep them under control through some special powers. ";
+			str += "The anubi is a problem on its own as "+(this.hasVagina()?"s":"")+"he can cast spells that will cripple and weaken you for the bandaged horde to submerge. "+(this.hasVagina()?"Sh":"H")+"e passively watches the scene from the back directing h"+(this.hasVagina()?"er":"is")+" horde of mummies as "+(this.hasVagina()?"s":"")+"he incant spells.";
+			return str;
+		}
+		
 		public function Anubis(genderA:Number, skinA:Number) 
 		{
 			this.a = "the ";
 			this.short = "anubi";
 			//this.imageName = "gorgon";
-			this.long = "You are fighting an anubi. For the rest of combat desc pest Liadri.";
+			this.long = "";
 			// this.plural = false;
 			if (genderA == 1) {
 				this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);

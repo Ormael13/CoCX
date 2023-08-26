@@ -933,7 +933,7 @@ import classes.Scenes.NPCs.Forgefather;
 			tier = game.player.racialTier(Races.ORCA);
 			if (tier == 1) max += 35;
 			else if (tier >= 2) max += 60;
-			tier = game.player.racialTier(Races.ABYSSALSHARK);
+			tier = game.player.racialTier(Races.ABYSSAL_SHARK);
 			if (tier == 1) max += 150;
 			else if (tier >= 2) max += 300;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;

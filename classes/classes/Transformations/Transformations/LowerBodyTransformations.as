@@ -2219,7 +2219,10 @@ public class LowerBodyTransformations extends MutationsHelper {
 			var desc: String = "";
 			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
 
-			desc += "You feel something change in your [feet] as they morph into a reptilian-like form and webbing forms between your toes. Well, this is sure to help you swim faster. Soon after you start sweating profusely and panting loudly, feeling the space near your hips shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your thighs. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have webbed abyssal shark feet!</b>";
+			desc += "You feel your [feet] tingle, and you can only watch as they morph into a webbed, reptilian-like form. With all this webbing between your toes, it'll surely help you swim even faster, right? Before you have time to dwell on the thought, a torrent of sweat begins streaming from your forehead as you gasp and swallow for air, panting loudly. ";
+			desc += "The area around your hips shifts a"+(player.isNaked()?"s you can only endure and watch your body more as fin-like protrusions rise from your thighs":"bout as you hastily remove your [armor] with just enough time before fin-like protrusions rise from your thighs")+". You examine your hips warily, touching the fins that jut from your thighs lightly. They're firm and dense, but flexible as you'd expect. You think about how difficult it may be to restructure apparel to fit your new body.";
+			if (player.isNaked()) desc += " Though, perhaps that's the least of your concerns.";
+			desc += " <b>You now have webbed abyssal shark feet!</b>";
 
 			if (doOutput) outputText(desc);
 			player.lowerBody = LowerBody.ABYSSAL_SHARK;

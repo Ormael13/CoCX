@@ -138,7 +138,7 @@ public class Races {
 	public static const ANUBIS:AnubisRace				   = new AnubisRace(113);
 	public static const WERESPIDER:WerespiderRace          = new WerespiderRace(114);
 	public static const WERESHARK:WeresharkRace            = new WeresharkRace(115);
-	public static const ABYSSALSHARK:AbyssalSharkRace      = new AbyssalSharkRace(116);
+	public static const ABYSSAL_SHARK:AbyssalSharkRace     = new AbyssalSharkRace(116);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
