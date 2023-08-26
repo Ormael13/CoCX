@@ -34,8 +34,14 @@ public class WhiteFacedOneBirthrightMutation extends IMutationPerkType
 			if (pTier == 1){
                 descS += "0.25/0.5/1";
             }
-			if (pTier == 2 || pTier == 3){
+			if (pTier == 2){
                 descS += "0.5/1/2";
+            }
+			if (pTier == 3){
+                descS += "0.75/1.5/3";
+            }
+			if (pTier == 4){
+                descS += "1/2/4";
             }
 			if (pTier >= 1){
                 descS += "% Soulforce regen per tail you posses (New moon / Half moon / Full moon)";

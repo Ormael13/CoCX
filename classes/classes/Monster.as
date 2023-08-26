@@ -317,9 +317,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyGroupType)) temp *= 5;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
-			/*if (hasPerk(PerkLib.EnemyBossType) && flags[kFLAGS.GAME_DIFFICULTY] > 0) {
-				temp *= ((1+flags[kFLAGS.GAME_DIFFICULTY])*2); 
-			}*/
+			if ((hasPerk(PerkLib.EnemyEliteType) || hasPerk(PerkLib.EnemyChampionType) || hasPerk(PerkLib.EnemyBossType)) && flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0) {
+				if (hasPerk(PerkLib.EnemyEliteType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*1.25);
+				if (hasPerk(PerkLib.EnemyChampionType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*2.5);
+				if (hasPerk(PerkLib.EnemyBossType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*5);
+			}
 			temp *= stats_multi_based_on_misc();
 			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
@@ -2765,6 +2767,9 @@ import flash.utils.getQualifiedClassName;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
+				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 2) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
+				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
+				if (perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) soulforceRecovery += Math.round(maxSoulforce() * 0.0025 * this.tailCount);
 				soulforceRecovery *= soulforceRecoveryMulti;
 				if (hasStatusEffect(StatusEffects.RegenInhibitorPetrify)) soulforceRecovery = 0;
 				addSoulforce(soulforceRecovery);
