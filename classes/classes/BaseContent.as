@@ -224,6 +224,9 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
+			if (player.hasStatusEffect(StatusEffects.HumanForm) && player.statusEffectv1(StatusEffects.HumanForm) >= 1){
+				player.addStatusValue(StatusEffects.HumanForm, 1, -1);
+			}
 			SceneLib.combat.startCombatImpl(monster_,plotFight_);
 		}
 

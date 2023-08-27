@@ -73,6 +73,9 @@ public class Camp extends NPCAwareContent{
 
 	public function returnToCamp(timeUsed:int):void {
 		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.HumanForm) && player.statusEffectv1(StatusEffects.HumanForm) <= 0){
+			player.addStatusValue(StatusEffects.HumanForm, 1, 1);
+		}
 		if (explorer.inEncounter) {
 			if (timeUsed == 1) {
 				// Encounter ended with returnToCampUsingOneHour.

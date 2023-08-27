@@ -620,7 +620,7 @@ use namespace CoC;
 			return !upperGarment.isNothing;
 		}
 		public function humanForm():Boolean {
-			return (hasStatusEffect(StatusEffects.HumanForm));
+			return (getStatusValue(StatusEffects.HumanForm, 1) >= 1);
 		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
