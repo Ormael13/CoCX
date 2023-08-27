@@ -5308,7 +5308,7 @@
 		</if>
 		
 		<!-- WERE HUMAN FORM -->
-		<if test="HUMANFORM">
+		<if test="PlayerIsInHumanForm">
 			<!-- Set Human -->
 			<hide part="*"/>
 			
@@ -5322,16 +5322,16 @@
 						<show part="breasts/Bhuman"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
-						<show part="fullbodyBreast/Dhuman"/>
+						<show part="breasts/Dhuman"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
-						<show part="fullbodyBreast/Dhuman"/>
+						<show part="breasts/Dhuman"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
-						<show part="fullbodyBreast/Fhuman"/>
+						<show part="breasts/Fhuman"/>
 					</case>
 					<default>
-						<show part="fullbodyBreast/Fhuman"/>
+						<show part="breasts/Fhuman"/>
 					</default>
 				</switch>
 				<else>
@@ -5441,7 +5441,7 @@
 			<show part="arms/human"/>
             <show part="arms_bg/human"/>
 			<show part="legs/human"/>
-			
+		
 		</if>
 
 		<!-- DRESS AREA -->

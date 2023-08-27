@@ -1163,7 +1163,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"You see tears streaming down Luna's face as she looks up at you with shining eyes. [Master], I mean, no... [name], my love, I...</i>\" she trails off for a second and closes her eyes as she sorts her thoughts and emotions. Finally she opens her eyes again and looks directly at you. \"<i>I would love to carry your children if I were ready, but I don't think I am yet. I... I still have things that I need to work through, I think, before I could be as good a mother as your children deserve. I hope I haven't disappointed you, [Master] if it was your desire, but if it is your wish to leave part of the decision to me, I would prefer to wait.</i>\" You nod, and pet her head while you tell her that that's entirely why you asked her, and that if she ever changes her mind she should feel free to speak with you about it.");
 				player.sexReward("saliva", "Vaginal");
 				player.sexReward("vaginalFluids", "Lips");
-				if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
 				sharedEnd();
 			}
 			function vagF():void {
@@ -1187,6 +1186,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			function sharedEnd():void {
 				lunaJealousy(-100);
 				lunaAffection(2);
+				if (player.hasPerk(PerkLib.Lycanthropy)){
+					if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
+				}
 				if (!mooning) {
                     outputText("She speaks up again after a moment. " +
                         "\"<i>Really,[Master], thank you so much for this. I've never had a master or mistress who... accepted me, the way you do; not even before I came to Mareth and became... what I am. It means so much to me that you accept all of me, and that you take such good care of my needs... even if I wish you would stop relying on other people so often when I'm here for you.</i>\"" +
