@@ -342,7 +342,6 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (!player.hasPerk(PerkLib.Lycanthropy)) player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
-			if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
 			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*ngM,'tou.mult': bonusStats*0.6*ngM,'spe.mult': bonusStats*0.4*ngM, 'minlustx': bonusStats * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 			player.trainStat('str', +5, 100);
 			player.trainStat('tou', +5, 100);
@@ -1164,6 +1163,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"You see tears streaming down Luna's face as she looks up at you with shining eyes. [Master], I mean, no... [name], my love, I...</i>\" she trails off for a second and closes her eyes as she sorts her thoughts and emotions. Finally she opens her eyes again and looks directly at you. \"<i>I would love to carry your children if I were ready, but I don't think I am yet. I... I still have things that I need to work through, I think, before I could be as good a mother as your children deserve. I hope I haven't disappointed you, [Master] if it was your desire, but if it is your wish to leave part of the decision to me, I would prefer to wait.</i>\" You nod, and pet her head while you tell her that that's entirely why you asked her, and that if she ever changes her mind she should feel free to speak with you about it.");
 				player.sexReward("saliva", "Vaginal");
 				player.sexReward("vaginalFluids", "Lips");
+				if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
 				sharedEnd();
 			}
 			function vagF():void {
