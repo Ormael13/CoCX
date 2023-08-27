@@ -3451,6 +3451,8 @@ public class PerkLib
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 		public static const Dantain:PerkType = mk("Dantian", "Dantian",
 				"Increase max soulforce by 10% + 10% to 30% (per each attained cultivation stage) of base value.");
+		public static const DantianPhylactery:PerkType = mk("Dantian Phylactery", "Dantian Phylactery",
+				"Your soul has been stored into dantians allowing you to fully unlock your potential as a demon and at the same time follow your choosen dao as devil cultivator.").withBuffs({'int.mult':0.20,'wis.mult':0.60});
 		public static const DaoistCultivator:PerkType = mk("Daoist Cultivator", "Daoist Cultivator",
 				"Allow you to train your soul cultivator mind to unleash soulskills with their apex power. (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)",
 				"You've chosen the 'Daoist Cultivator' perk, starting the journey on the daoist cultivators path! (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)")

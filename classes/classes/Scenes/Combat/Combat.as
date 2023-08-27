@@ -753,6 +753,7 @@ public class Combat extends BaseContent {
 				if (player.soulforce < (player.maxSoulforce() * 0.05)) player.removeStatusEffect(StatusEffects.FieryRage);
 				else EngineCore.SoulforceChange(Math.round(player.maxSoulforce() * 0.05));
 			}
+			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);

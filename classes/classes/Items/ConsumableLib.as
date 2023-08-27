@@ -368,6 +368,17 @@ public final class ConsumableLib extends AlchemyLib
 						]
 				);
 		public const ASKIRIN:AsumaKirin 	  = new AsumaKirin();
+		public const ASTOOTH: Consumable = mk("ASTooth", "ASTooth", "a gloomy abyssal shark tooth", 20, "This looks like a normal shark tooth, though enveloped with darkness.", curry(m.sharkTooth, 2), ItemTags.U_TF)
+				.refineableInto(
+						DEFAULT_SUBSTANCES_DROP_TABLE,
+						DEFAULT_ESSENCE_DROP_TABLE(AE_ABYSSAL_SHARK),
+						[
+							[1, AR_STR],
+							[1, AR_WIS],
+							[1, AR_SPE]
+						],
+						concatUnique(AbyssalSharkRace.AbyssalSharkHairColors, AbyssalSharkRace.AbyssalSharkScaleColors)
+				);
 		public const B_GOSSR: Consumable = mk("B.Gossr", "B.Gossr", "a bundle of black, gossamer webbing", 6, "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?", curry(m.sweetGossamer, 1), ItemTags.U_TF)
 				.refineableInto(
 						DEFAULT_SUBSTANCES_DROP_TABLE,
@@ -1082,17 +1093,6 @@ public final class ConsumableLib extends AlchemyLib
 							[1, AR_SPE]
 						],
 						concatUnique(SharkRace.SharkHairColors, SharkRace.SharkScaleColors, ["orange"])
-				);
-		public const ASTOOTH: Consumable = mk("ASTooth", "ASTooth", "a gloomy abyssal shark tooth", 20, "This looks like a normal shark tooth, though enveloped with darkness.", curry(m.sharkTooth, 2), ItemTags.U_TF)
-				.refineableInto(
-						DEFAULT_SUBSTANCES_DROP_TABLE,
-						DEFAULT_ESSENCE_DROP_TABLE(AE_ABYSSAL_SHARK),
-						[
-							[1, AR_STR],
-							[1, AR_WIS],
-							[1, AR_SPE]
-						],
-						concatUnique(AbyssalSharkRace.AbyssalSharkHairColors, AbyssalSharkRace.AbyssalSharkScaleColors)
 				);
 		public const UNICORN:AbstractEquinum  = new AbstractEquinum(1, "Unicorn", "Unicornum", "a vial of Unicornum", 40, "This is a long flared vial with a small label that reads, \"<i>Unicornum</i>\".  It is likely this potion is tied to unicorns in some way.");
 		public const VAMPBLD:VampireBlood     = new VampireBlood(true);

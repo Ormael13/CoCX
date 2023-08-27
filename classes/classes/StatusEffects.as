@@ -1104,6 +1104,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UnderwaterAndIgnis:StatusEffectType        = mkCombat("UnderwaterAndIgnis");
 		public static const UnderwaterCombatBoost:StatusEffectType     = mkCombat("UnderwaterCombatBoost");
 		public static const UnderwaterOutOfAir:StatusEffectType        = mkCombat("UnderwaterOutOfAir");
+		public static const VampThirstStacksHPMana:StatusEffectType    = mkCombat("Vampire Thirst Stacks to HP or Mana");
 		public static const VioletPupilTransformation:StatusEffectType = mkCombat("Violet Pupil Transformation");
 		public static const WebSilence:StatusEffectType                = mkCombat("Web-Silence");
 		public static const WinterClaw:StatusEffectType       		   = mkCombat("Winter Claw");

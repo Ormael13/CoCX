@@ -148,9 +148,9 @@ public class Changelog extends BaseContent
 			outputText("-Bonus to Charge/Great Dive from Natural Jouster perk and it upgraded version was fixed due to last melee changes that made perk useless. Also jouster effect would now include also polearms type weapons and not just spears, but polearm weapons would have 25% lower bonus from jouster perks.\n");
 			outputText("-Bite special gained additional scaling from bonus str and spe.\n");
 			outputText("-Added new setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP. From measy 1,25x more HP up to even 10x more hp depending on setting and enemy type.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Implementation of wereraces human form. (Liadri) (out of combat of most of sex scenes pc sprite would look 100% humanlike if current race is one of wereraces even partialy)\n");
+			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
+			outputText("-Vampire Thirst stacks can be used in new way: convertion to HP/Mana - 1 stack = 5% max HP/max Mana. Could pick option to use 1 stack or 5 stacks. Can be used once a turn (each option no matter how many stacks changed at once) and it will not take turn allowing to still act after that.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -172,6 +172,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
@@ -236,7 +237,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -266,9 +269,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

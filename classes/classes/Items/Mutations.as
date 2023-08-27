@@ -5085,8 +5085,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.blockingBodyTransformations()) {
             //Smexual stuff!
-            //-TIGERSHARK or ABYSSAL SHARK ONLY: Grow a cunt (guaranteed if no gender)
-            if (type != 0 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
+            //-TIGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
+            if (type == 1 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
                 changes++;
                 transformations.VaginaHuman().applyEffect();
                 player.addCurse("sen", 10, 1);
@@ -5118,6 +5118,37 @@ public final class Mutations extends MutationsHelper {
                 MutagenBonus("lib", 2);
                 changes++;
             }
+			//Cock gets bigger!
+			if (type == 2 && (player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && player.biggestCockLength() < 30 && changes < changeLimit && rand(3) == 0) {
+				var selectedCock:int = -1;
+				for (var i:int = 0; i < player.cocks.length; i++) {
+					if (player.cocks[i].cockLength < 21 || player.cocks[i].cockThickness < 4) {
+						selectedCock = i;
+						break;
+					}
+				}
+				if (selectedCock != -1) {
+					if (player.cocks[selectedCock].cockThickness < 4) {
+						player.growCock(selectedCock, 2 + rand(4));
+						player.thickenCock(selectedCock, 1);
+						outputText("[pg]You moan as your cock suddenly becomes erect, dripping precum as it increases in thickness and length.");
+						if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
+					} else {
+						player.growCock(selectedCock, 2 + rand(4));
+						outputText("[pg]You moan as your cock suddenly becomes erect, dripping precum as it increases in length.");
+						if (player.biggestCockLength() > 21) outputText(" It has became so big you could likely fuck a horse or a small whale with it if you wanted.");
+						outputText(" The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
+					}
+					changes++;
+				}
+			}
+			//Change cock back to normal
+			if (type == 2 && player.hasCock() && changes < changeLimit) {
+				if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
+					transformations.CockHuman().applyEffect();
+					changes++;
+				}
+			}
             //Transformations:
             //Mouth TF
             if (player.faceType != Face.SHARK_TEETH && rand(3) == 0 && changes < changeLimit) {
@@ -5125,6 +5156,12 @@ public final class Mutations extends MutationsHelper {
                 transformations.FaceSharkTeeth.applyEffect();
                 changes++;
             }
+			//-Human tongue
+			if (player.tongue.type != Tongue.HUMAN && changes < changeLimit && rand(3) == 0) {
+				outputText("[pg]");
+				transformations.TongueHuman.applyEffect();
+				changes++;
+			}
             //Ear tf
             if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
@@ -5132,7 +5169,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Remove odd eyes
-            if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN) {
+            if (changes < changeLimit && rand(3) == 0 && ((type != 2 && player.eyes.type != Eyes.HUMAN) || !InCollection(player.eyes.type, Eyes.HUMAN, Eyes.DEVIL))) {
                 outputText("[pg]");
                 transformations.EyesHuman.applyEffect();
                 changes++;
@@ -5150,11 +5187,16 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Hair
-            if (player.hairColor != "silver" && rand(3) == 0 && changes < changeLimit) {
+            if (type != 2 && player.hairColor != "silver" && rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 outputText("[pg]You feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair color has changed into a silvery color, just like that of a shark girl!");
                 player.hairColor = "silver";
             }
+			if (type == 2 && !InCollection(player.hairColor, AbyssalSharkRace.AbyssalSharkHairColors) && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(AbyssalSharkRace.AbyssalSharkHairColors);
+				outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
+				changes++;
+			}
             //Skin
             if (type != 2 && (!InCollection(player.scaleColor, SharkRace.SharkScaleColors, "orange") || !player.isScaleCovered()) && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
@@ -5173,28 +5215,75 @@ public final class Mutations extends MutationsHelper {
                 }
             }
             //Legs
-            if (player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SHARK && changes < changeLimit && rand(3) == 0) {
+            if (type != 2 && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SHARK && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.LowerBodyShark(2).applyEffect();
                 changes++;
             }
-            if (!InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.SHARK, LowerBody.ABYSSAL_SHARK) && changes < changeLimit && rand(3) == 0) {
+            if ((type != 2 && !InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.SHARK) || type == 2 && !InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.ABYSSAL_SHARK)) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
                 changes++;
             }
             //Arms
-            if (player.lowerBody == LowerBody.SHARK && !InCollection(player.arms.type, Arms.SHARK) && changes < changeLimit && rand(3) == 0) {
+            if ((player.lowerBody == LowerBody.SHARK || player.lowerBody == LowerBody.ABYSSAL_SHARK) && !InCollection(player.arms.type, Arms.SHARK, Arms.SEA_DRAGON) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.ArmsShark.applyEffect();
                 changes++;
             }
             //FINZ
-            if (player.rearBody.type != RearBody.SHARK_FIN && changes < changeLimit && rand(3) == 0) {
+            if (type != 2 && player.rearBody.type != RearBody.SHARK_FIN && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.RearBodySharkFin.applyEffect();
                 changes++;
             }
+			if (type == 2 && player.hasPerk(PerkLib.DantianPhylactery)) {
+				if (player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.DEVIL && changes < changeLimit && rand(3) == 0) {
+					outputText("[pg]");
+					transformations.EyesDevil.applyEffect();
+					changes++;
+				}
+				if (player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
+					outputText("[pg]");
+					transformations.LowerBodyAbyssalShark.applyEffect();
+					changes++;
+				}
+				if (player.rearBody.type != RearBody.ABYSSAL_SHARK_FIN && changes < changeLimit && rand(3) == 0) {
+					outputText("[pg]");
+					transformations.RearBodyAbyssalSharkFin.applyEffect();
+					changes++;
+				}
+				if (player.arms.type == Arms.SHARK && !InCollection(player.arms.type, Arms.SEA_DRAGON) && changes < changeLimit && rand(3) == 0) {
+					outputText("[pg]");
+					transformations.ArmsSeaDragon.applyEffect();
+					changes++;
+				}
+				if ((!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors) || !player.isScaleCovered()) && rand(3) == 0 && changes < changeLimit) {
+					outputText("[pg]");
+					var acolor:String;
+					if (!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors)) acolor = randomChoice(AbyssalSharkRace.AbyssalSharkScaleColors);
+					transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color:acolor}).applyEffect();
+					outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
+					outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");
+					changes++;
+				}
+				/*
+				if (!player.skin.hasWhiteBlackVeins()) {
+					outputText("[pg]");
+					transformations.SkinPatternTigerSharkStripes.applyEffect();
+					changes++;
+				}
+				*/
+				if (player.basetallness < 132 && changes < changeLimit && rand(3) == 0) {
+					var heightGain:int = rand(15) + 5;
+					//Flavor texts.  Flavored like 1950's cigarettes. Yum.
+					if (heightGain < 10) outputText("[pg]You shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
+					else if (heightGain >= 10 && heightGain < 20) outputText("[pg]You feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
+					else if (heightGain == 20) outputText("[pg]Staggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
+					player.tallness += heightGain;
+					changes++;
+				}
+			}
             if (changes == 0) {
                 outputText("[pg]Nothing happened.  Weird.");
             }
@@ -11460,6 +11549,7 @@ public final class Mutations extends MutationsHelper {
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (player.hasPerk(PerkLib.VulpesthropyDormant)) player.removePerk(PerkLib.VulpesthropyDormant);
             player.createPerk(PerkLib.Vulpesthropy, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
 			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.1*ngM,'tou.mult': bonusStats*ngM,'spe.mult': bonusStats*0.4*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 			player.trainStat('str', +5, 100);
 			player.trainStat('tou', +5, 100);
@@ -14531,7 +14621,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Toughness
-        if (changes < changeLimit && rand(4) == 0 && MutagenBonus("tou", 1 + rand(10))) {
+        if (changes < changeLimit && rand(3) == 0 && MutagenBonus("tou", 1 + rand(10))) {
             if (rand(2) == 0) outputText("[pg]You feel your insides toughening up; it feels like you could stand up to almost any blow.");
             else outputText("[pg]Your bones and joints feel sore for a moment, and before long you realize they've gotten more durable.");
             changes++;
@@ -14546,7 +14636,7 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) changeLimit = 0;
 
         //Cock gets bigger!
-        if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && player.biggestCockLength() < 30 && changes < changeLimit && rand(4) == 0) {
+        if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && player.biggestCockLength() < 30 && changes < changeLimit && rand(3) == 0) {
             var selectedCock:int = -1;
             for (var i:int = 0; i < player.cocks.length; i++) {
                 if (player.cocks[i].cockLength < 21 || player.cocks[i].cockThickness < 4) {
@@ -14589,28 +14679,28 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if ((player.gender >= 2 || player.gender == 3) && player.biggestTitSize() < 30 && changes < changeLimit && rand(4) == 0) {
+        if ((player.gender >= 2 || player.gender == 3) && player.biggestTitSize() < 30 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]You are suddenly pulled forward as you feel a loss of balance on your front. Looking down you notice your [breasts] have increased by a full cup.");
             player.growTits(5 + rand(5), 1, false, 3);
             changes++;
         }
 
         //face
-        if (player.faceType != Face.ORCA && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType != Face.ORCA && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.FaceOrca.applyEffect();
             changes++;
         }
 
         //-Existing horns become draconic, max of 4, max length of 1'
-        if (player.horns.type != Horns.SEA_DRAGON && type == 1 && changes < changeLimit && rand(5) == 0) {
+        if (player.horns.type != Horns.SEA_DRAGON && type == 1 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.HornsSeadragon.applyEffect();
             changes++;
         }
 
         //antenna
-        if (player.antennae.type != Antennae.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.antennae.type != Antennae.SEA_DRAGON && type == 1 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.AntennaeSeaDragon.applyEffect();
             changes++;
@@ -14629,19 +14719,19 @@ public final class Mutations extends MutationsHelper {
         }
 
         //skin
-        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(4) == 0 && type == 0 && changes < changeLimit) {
+        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(3) == 0 && type == 0 && changes < changeLimit) {
             transformations.SkinPatternOrca.applyEffect();
             changes++;
         }
 
         //skin sea dragon
-        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(4) == 0 && type == 1 && changes < changeLimit) {
+        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(3) == 0 && type == 1 && changes < changeLimit) {
             transformations.SkinPatternSeaDragon.applyEffect();
             changes++;
         }
 
         //legs
-        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.ORCA && type == 0 && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyOrca(2).applyEffect();
@@ -14652,13 +14742,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //arms
-        if (player.lowerBody == LowerBody.ORCA && player.arms.type != Arms.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.ORCA && player.arms.type != Arms.ORCA && type == 0 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsOrca.applyEffect();
             changes++;
         }
         //Dragon legs
-        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEA_DRAGON && type == 1 && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodySeaDragon(2).applyEffect();
@@ -14669,66 +14759,66 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Dragon arms
-        if (player.lowerBody == LowerBody.SEA_DRAGON && !InCollection(player.arms.type, Arms.SEA_DRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.SEA_DRAGON && !InCollection(player.arms.type, Arms.SEA_DRAGON) && type == 1 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsSeaDragon.applyEffect();
             changes++;
         }
         //Dragon Wings
-        if (player.lowerBody == LowerBody.SEA_DRAGON && player.arms.type == Arms.SEA_DRAGON && player.wings.type != Wings.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.SEA_DRAGON && player.arms.type == Arms.SEA_DRAGON && player.wings.type != Wings.SEA_DRAGON && type == 1 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsSeaDragon.applyEffect();
             changes++;
         }
         //tail
-        if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && type == 0 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailOrca.applyEffect();
             changes++;
         }
         //dragon tail
-        if (player.arms.type == Arms.SEA_DRAGON && player.tailType != Tail.ORCA && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.arms.type == Arms.SEA_DRAGON && player.tailType != Tail.ORCA && type == 1 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailOrca.applyEffect();
             changes++;
         }
         //ears
-        if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA && changes < changeLimit && rand(4) == 0) {
+        if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsOrca.applyEffect();
             changes++;
         }
         //ears alternative
-        if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA2 && type == 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA2 && type == 0 && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsOrca2.applyEffect();
             changes++;
         }
         //blowhole
-        if (player.ears.type == Ears.ORCA && player.rearBody.type != RearBody.ORCA_BLOWHOLE && changes < changeLimit && rand(4) == 0) {
+        if (player.ears.type == Ears.ORCA && player.rearBody.type != RearBody.ORCA_BLOWHOLE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.RearBodyOrcaBlowhole.applyEffect();
             changes++;
         }
         //eyes to human
-        if (player.eyes.type != Eyes.HUMAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+        if (player.eyes.type != Eyes.HUMAN && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("[pg]");
             transformations.EyesHuman.applyEffect();
             changes++;
         }
         //eyes to human if not dragon
-        if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.DRACONIC && changes < changeLimit && type == 1 && rand(4) == 0) {
+        if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.DRACONIC && changes < changeLimit && type == 1 && rand(3) == 0) {
             outputText("[pg]");
             transformations.EyesHuman.applyEffect();
             changes++;
         }
         //eyes to orange
-        if (transformations.EyesChangeColor(["orange"]).isPossible() && changes < changeLimit && type == 0 && rand(4) == 0) {
+        if (transformations.EyesChangeColor(["orange"]).isPossible() && changes < changeLimit && type == 0 && rand(3) == 0) {
             transformations.EyesChangeColor(["orange"]).applyEffect();
             changes++;
         }
         //eyes to sea dragon list
-        if (transformations.EyesSeadragonColors.isPossible() && changes < changeLimit && type == 1 && rand(4) == 0) {
+        if (transformations.EyesSeadragonColors.isPossible() && changes < changeLimit && type == 1 && rand(3) == 0) {
             transformations.EyesSeadragonColors.applyEffect();
             changes++;
         }
@@ -14746,7 +14836,7 @@ public final class Mutations extends MutationsHelper {
             //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
         //tallness
-        if (player.basetallness < 132 && changes < changeLimit && rand(4) == 0) {
+        if (player.basetallness < 132 && changes < changeLimit && rand(3) == 0) {
             var heightGain:int = rand(15) + 5;
             //Flavor texts.  Flavored like 1950's cigarettes. Yum.
             if (heightGain < 10) outputText("[pg]You shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
