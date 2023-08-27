@@ -452,6 +452,7 @@ import coc.view.MainView;
                     kFLAGS.STRENGTH_SCALING,
                     kFLAGS.SPEED_SCALING,
                     kFLAGS.SECONDARY_STATS_SCALING,
+                    kFLAGS.BOSS_CHAMPION_ELITE_SCALING,
                     kFLAGS.WATERSPORTS_ENABLED,
 				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,

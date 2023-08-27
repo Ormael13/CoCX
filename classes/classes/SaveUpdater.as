@@ -2199,8 +2199,8 @@ public class SaveUpdater extends NPCAwareContent {
 				SceneLib.exploration.counters.hills               = flags[kFLAGS.DISCOVERED_HILLS];
 				SceneLib.exploration.counters.mountainsLow        = flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN];
 				SceneLib.exploration.counters.highMountains       = flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN];
-				SceneLib.exploration.counters.plains              = flags[kFLAGS.TIMES_EXPLORED_PLAINS];
-				SceneLib.exploration.counters.swamp               = flags[kFLAGS.TIMES_EXPLORED_SWAMP];
+				SceneLib.exploration.counters.plains              = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131];
+				SceneLib.exploration.counters.swamp               = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272];
 				SceneLib.exploration.counters.bog                 = flags[kFLAGS.BOG_EXPLORED];
 				SceneLib.exploration.counters.blightRidge         = flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE];
 				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.DISCOVERED_DEFILED_RAVINE];
@@ -2208,9 +2208,9 @@ public class SaveUpdater extends NPCAwareContent {
 				SceneLib.exploration.counters.ocean               = flags[kFLAGS.DISCOVERED_OCEAN];
 				SceneLib.exploration.counters.caves               = flags[kFLAGS.DISCOVERED_CAVES];
 				SceneLib.exploration.counters.tundra              = flags[kFLAGS.DISCOVERED_TUNDRA];
-				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.DISCOVERED_GLACIAL_RIFT];
+				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059];
 				SceneLib.exploration.counters.ashlands            = flags[kFLAGS.DISCOVERED_ASHLANDS];
-				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.DISCOVERED_VOLCANO_CRAG];
+				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060];
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
@@ -2265,11 +2265,14 @@ public class SaveUpdater extends NPCAwareContent {
 					player.statStore.replaceBuffObject({ 'str.mult': bonusStats2*ngM,'tou.mult': bonusStats2*0.6*ngM,'spe.mult': bonusStats2*0.4*ngM, 'minlustx': bonusStats2 * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.070;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.080) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.080;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.080) {
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] = 0;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] = 0;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] = 0;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.080;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.090) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.090;

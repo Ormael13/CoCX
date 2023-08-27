@@ -136,7 +136,7 @@ public static const TIMES_PC_DEFEATED_VALA_AND_RAEPED:int                       
 public static const ZETAZ_DEFEATED_AND_KILLED:int                                   =  128; // Zetaz Killed
 public static const ZETAZ_LAIR_TOOK_BONDAGE_STRAPS:int                              =  129; // Bondage Straps Taken
 public static const ZETAZ_LAIR_DEMON_VENDOR_PRESENT:int                             =  130; // Sean Demon Vendor Here
-public static const TIMES_EXPLORED_PLAINS:int                                       =  131; // No longer used
+public static const UNKNOWN_FLAG_NUMBER_0131:int                                    =  131; // No longer used
 public static const MET_BUNBUN:int                                                  =  132; // Met Bunbun
 public static const RAPHEAL_COUNTDOWN_TIMER:int                                     =  133; // Raphael Countdown (Time till Quiksilver Fawkes.  Set to -1 betrayed, set to -2 if covered for.
 public static const RAPHAEL_MET:int                                                 =  134; // Raphael Met? (1 = Y)
@@ -277,7 +277,7 @@ public static const PLAYER_DISARMED_WEAPON_ID:int                               
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
 public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                             =  270; // Times encountered spiderbitches
 public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                     =  271; // Spider Preggo Timer
-public static const TIMES_EXPLORED_SWAMP:int                                        =  272; // No longer used
+public static const UNKNOWN_FLAG_NUMBER_0272:int                                    =  272; // No longer used
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const RATHAZUL_ARMOR_TYPE:int                                   		=  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
@@ -2064,8 +2064,8 @@ public static const CODEX_ENTRY_SUCCUBUS:int                                    
 public static const PIG_SLUT_DISABLED:int                                           = 2056;
 public static const MARBLE_CORRUPT_MARAE_STORY:int                                  = 2057;
 public static const CAMP_PORTAL_PROGRESS:int                                        = 2058; //Will eventually allow you to travel back to Ingnam.
-public static const DISCOVERED_GLACIAL_RIFT:int                                     = 2059; // No longer used
-public static const DISCOVERED_VOLCANO_CRAG:int                                     = 2060; // No longer used
+public static const UNKNOWN_FLAG_NUMBER_2059:int                                    = 2059; // No longer used
+public static const UNKNOWN_FLAG_NUMBER_2060:int                                    = 2060; // No longer used
 public static const MET_YETI_FIRST_TIME:int                                         = 2061;
 public static const VALERIA_FOUND_IN_GLACIAL_RIFT:int                               = 2062;
 public static const SHEILA_LETHICITE_FORGE_DAY:int                                  = 2063; //Scarred Blade forge progress.
@@ -2966,7 +2966,7 @@ public static const SCENEHUNTER_OTHER:int                                    		=
 public static const SCENEHUNTER_DICK_SELECT:int                                     = 2958;
 public static const SCENEHUNTER_UNI_HERMS:int                                       = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
-public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
+public static const BOSS_CHAMPION_ELITE_SCALING:int                                 = 2961;
 public static const NEWPERKSDISPLAY:int                                   			= 2962;//Perks Display cleanup
 public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
 public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling

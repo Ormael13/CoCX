@@ -300,6 +300,13 @@ use namespace CoC;
 					night: false,
 					call: anubisScene.anubisEncounter
 				}, {
+					name  : "werefoxFemale",
+					label : "Werefox (F)",
+					kind : 'monster',
+					day : false,
+					call  : SceneLib.werefoxScene.werefoxInnerDesertEncounter,
+					chance: 0.50
+				}, {
 					name: "etna",
 					label : "Etna",
 					kind  : 'npc',

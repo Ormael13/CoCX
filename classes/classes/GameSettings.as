@@ -540,6 +540,16 @@ public class GameSettings extends BaseContent {
 			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 1600x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		outputText("\n\n");
+		if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 0) {
+			outputText("Elite/Champion/Boss HP bonus: <font color=\"#808000\"><b>Normal</b></font>\n No HP modifiers.\n");
+		}
+		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] == 1) {
+			outputText("Elite/Champion/Boss HP bonus: <b><font color=\"#800000\">Fantasy</font></b>\n 1.25x / 2.5x / 5x HP modifiers.");
+		}
+		else if (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] >= 2) {
+			outputText("Elite/Champion/Boss HP bonus: <b><font color=\"#C00000\">Infernium</font></b>\n 2.5x / 5x / 10x HP modifiers.");
+		}
+		outputText("\n\n");
 		if (flags[kFLAGS.STRENGTH_SCALING] >= 1) {
 			outputText("Strength Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
 		}
@@ -574,6 +584,7 @@ public class GameSettings extends BaseContent {
 
 		addButton(0, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		addButton(2, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
+		addButton(3, "E/Ch/B.Mon.Stat", difficultySelectionMenu3).hint("Adjusts elite/champion/boss monsters HP multiplier to make game easier or harder.");
 		addButton(5, "Wis scaling", toggleFlag, kFLAGS.WISDOM_SCALING, settingsScreenGameSettings2).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
 		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
 		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
@@ -814,6 +825,24 @@ public class GameSettings extends BaseContent {
 
 	public function chooseDifficulty2(difficulty:int = 0):void {
 		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
+		settingsScreenGameSettings2();
+	}
+	
+	public function difficultySelectionMenu3():void {
+		clearOutput();
+		outputText("You can choose a difficulty to set how hard elite/champion/boss battles will be.\n");
+		outputText("\n<b>Normal:</b> No stats changes.");
+		outputText("\n<b>Fantasy:</b> 1.25x/2.5x/5x HP for elite/champion/boss monsters.");
+		outputText("\n<b>Infernium:</b> 2.5x/5x/10x HP for elite/champion/boss monsters.");
+		menu();
+		addButton(0, "Normal", chooseDifficulty3, 0);
+		addButton(1, "Fantasy", chooseDifficulty3, 1);
+		addButton(2, "Infernium", chooseDifficulty3, 2);
+		addButton(14, "Back", settingsScreenGameSettings2);
+	}
+
+	public function chooseDifficulty3(difficulty:int = 0):void {
+		flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] = difficulty;
 		settingsScreenGameSettings2();
 	}
 

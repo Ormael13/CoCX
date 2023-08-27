@@ -253,6 +253,8 @@ public class SceneLib {
 
     public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
 
+    public static var werefoxScene:WerefoxScene = new WerefoxScene();
+
     public static var woodElves:WoodElves = new WoodElves();
 
     public static var mindbreaker:Mindbreaker = new Mindbreaker();

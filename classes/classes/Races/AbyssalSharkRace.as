@@ -52,6 +52,7 @@ public class AbyssalSharkRace extends Race {
 				.hairType(Hair.NORMAL, +1)
 				.tongueType(Tongue.HUMAN, +1)
 				//.skinBasePattern(Skin.PATTERN_, +1) - bioluminescent
+				.hairColor1(ANY(AbyssalSharkHairColors), +1)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
 				.height(AT_LEAST(84), +1)
@@ -59,7 +60,7 @@ public class AbyssalSharkRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.biggestTitSize > 18 || body.biggestCockSize > 17
 						}, +1)
-//9
+//10
 				.rearType(RearBody.SHARK_FIN, +1)
 				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2) - done
 				.armType(Arms.SHARK, +1)
@@ -68,7 +69,7 @@ public class AbyssalSharkRace extends Race {
 				//.legType(LowerBody.ABYSSAL_SHARK, +2) - done
 				.tailType(Tail.SHARK, +1)
 				//.tailType(Tail.SHARK, +1)
-				.hasPerk(PerkLib.Phylactery, +1, -10);//5+1
+				.hasPerk(PerkLib.Phylactery, +1, -10);//4+1
 		
 		buildTier(10, "abyssal shark-morph")
                 .requirePerk(PerkLib.Phylactery)

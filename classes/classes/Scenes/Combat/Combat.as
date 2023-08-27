@@ -11333,6 +11333,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 1) {
 			var wfob:Number = 0.0025;
 			if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 2) wfob += 0.0025;
+			if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 3) wfob += 0.0025;
 			if (player.perkv1(IMutationsLib.WhiteFacedOneBirthrightIM) >= 4) wfob += 0.0025;
 			soulforceregen += Math.round(player.maxSoulforce() * wfob * player.tailCount);
 		}

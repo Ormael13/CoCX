@@ -5045,6 +5045,9 @@ public final class Mutations extends MutationsHelper {
         } else if (type == 1) {
             clearOutput();
             outputText("You have no idea why, but you decide to eat the pointed, glowing tooth. To your surprise, it's actually quite brittle, crumbling into a fishy-tasting dust. Maybe it's just a tablet made to look like a shark's tooth.");
+        } else if (type == 2) {
+            clearOutput();
+            outputText("You have no idea why, but you decide to eat the pointed, gloomy tooth. To your surprise, it's actually quite brittle, crumbling into a fishy-tasting dust. Maybe it's just a tablet made to look like a shark's tooth.");
         }
         //STATS
         //Increase strength 1-2 points (Up to 50) (60 for tiger)
@@ -5058,27 +5061,32 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Shivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.");
         }
         //Reduce sensitivity 1-3 Points (Down to 25 points)
-        if (player.sens > 25 && rand(1.5) == 0 && changes < changeLimit) {
+        if (type != 2 && player.sens > 25 && rand(1.5) == 0 && changes < changeLimit) {
             dynStats("sen", (-1 - rand(3)));
             changes++;
             outputText("[pg]It takes a while, but you eventually realize your body has become less sensitive.");
         }
         //Increase Libido 2-4 points (Up to 75 points) (100 for tigers)
-        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("lib", 1 + rand(3))) {
+        if (type != 2 && rand(3) == 0 && changes < changeLimit && MutagenBonus("lib", 1 + rand(3))) {
             changes++;
             outputText("[pg]A blush of red works its way across your skin as your sex drive kicks up a notch.");
         }
         //Decrease intellect 1-3 points (Down to 40 points)
-        if (player.inte > 40 && rand(3) == 0 && changes < changeLimit) {
+        if (type != 2 && player.inte > 40 && rand(3) == 0 && changes < changeLimit) {
             player.addCurse("int", (1 + rand(3)), 1);
             changes++;
             outputText("[pg]You shake your head and struggle to gather your thoughts, feeling a bit slow.");
         }
+		//Increase Wis and Sensitivity
+		if (type == 2 && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips.");
+            if (MutagenBonus("wis", 2)) changes++;
+            if (player.sens < 200) player.addCurse("sen", 1, 1);
+        }
         if (!player.blockingBodyTransformations()) {
-
             //Smexual stuff!
-            //-TIGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
-            if (type == 1 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
+            //-TIGERSHARK or ABYSSAL SHARK ONLY: Grow a cunt (guaranteed if no gender)
+            if (type != 0 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
                 changes++;
                 transformations.VaginaHuman().applyEffect();
                 player.addCurse("sen", 10, 1);
@@ -5142,13 +5150,13 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Hair
-            if (player.hairColor != "silver" && rand(4) == 0 && changes < changeLimit) {
+            if (player.hairColor != "silver" && rand(3) == 0 && changes < changeLimit) {
                 changes++;
                 outputText("[pg]You feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair color has changed into a silvery color, just like that of a shark girl!");
                 player.hairColor = "silver";
             }
             //Skin
-            if ((!InCollection(player.scaleColor, SharkRace.SharkScaleColors, "orange") || !player.isScaleCovered()) && rand(7) == 0 && changes < changeLimit) {
+            if (type != 2 && (!InCollection(player.scaleColor, SharkRace.SharkScaleColors, "orange") || !player.isScaleCovered()) && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 if (type == 0) {
                     var color:String;
@@ -5170,7 +5178,7 @@ public final class Mutations extends MutationsHelper {
                 transformations.LowerBodyShark(2).applyEffect();
                 changes++;
             }
-            if (!InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.SHARK) && changes < changeLimit && rand(3) == 0) {
+            if (!InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.SHARK, LowerBody.ABYSSAL_SHARK) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
                 changes++;
