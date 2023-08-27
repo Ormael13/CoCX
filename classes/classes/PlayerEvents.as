@@ -2514,6 +2514,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+				player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
 				player.statStore.replaceBuffObject({ 'str.mult': bonusStats,'tou.mult': bonusStats,'spe.mult': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
 				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
@@ -2522,6 +2523,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
 				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
 				player.statStore.removeBuffs("Lycanthropy");
+				player.removeStatusEffect(StatusEffects.HumanForm);
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
@@ -2529,6 +2531,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werefox you once were. <b>Gained Dormant vulpesthropy.</b>\n");
 				player.createPerk(PerkLib.VulpesthropyDormant,0,0,0,0);
 				player.statStore.removeBuffs("Vulpesthropy");
+				player.removeStatusEffect(StatusEffects.HumanForm);
 				player.removePerk(PerkLib.Vulpesthropy);
 				needNext = true;
 			}
@@ -2822,4 +2825,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}
