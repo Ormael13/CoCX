@@ -74,6 +74,11 @@ public class WerewolfFemaleScene extends BaseContent
 		public function domWithCock():void {
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
+			if (player.hasPerk(PerkLib.Lycanthropy)){
+				if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,0,0,0,0);
+				else player.addStatusValue(StatusEffects.HumanForm, 1, -1);
+				CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			}
 			var x:Number = player.biggestCockIndex();
 			outputText("You pin the werewolf to the ground as your erect shaft drools in anticipation.\n\n");
 			outputText("\"<i>Ugh, I won't yield!</i>\"\n\n");
@@ -118,6 +123,11 @@ public class WerewolfFemaleScene extends BaseContent
 
 		public function femDom():void {
 			clearOutput();
+			if (player.hasPerk(PerkLib.Lycanthropy)){
+				if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,0,0,0,0);
+				else player.addStatusValue(StatusEffects.HumanForm, 1, -1);
+				CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			}
 			//spriteSelect(SpriteDb.s_DarkElf);
 			var x:Number = player.biggestCockIndex();
 			outputText("You sure are making this pup your toy tonight, you're the bigger female here and as such you deserve proper tribute!" +

@@ -73,6 +73,9 @@ public class Camp extends NPCAwareContent{
 
 	public function returnToCamp(timeUsed:int):void {
 		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.HumanForm) && player.statusEffectv1(StatusEffects.HumanForm) <= 0){
+			player.addStatusValue(StatusEffects.HumanForm, 1, 1);
+		}
 		if (explorer.inEncounter) {
 			if (timeUsed == 1) {
 				// Encounter ended with returnToCampUsingOneHour.
@@ -159,6 +162,7 @@ public class Camp extends NPCAwareContent{
 	
 	public function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
+
 		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
 			trace("Autosaving to slot: " + player.slotName);
 
