@@ -781,8 +781,6 @@ public class Camp extends NPCAwareContent{
 		}
 		//Live in-ness
 		else {
-			var textvalue = player.statusEffectv2(StatusEffects.HumanForm)
-			outputText("derp derp derp text test" + textvalue);
 			if (model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.  ");
 			if (model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.  ");
 			if (model.time.days >= 20) {
