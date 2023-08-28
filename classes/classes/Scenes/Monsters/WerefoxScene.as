@@ -20,6 +20,15 @@ public function werefoxInnerDesertEncounter():void {
 	if (player.hasDarkVision()) outputText("Your night-adapted eyes allow you to quickly notice a white-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
 	else outputText("Out of nowhere a fur-covered figure hits you from the side, bringing you down to the ground. You quickly shove it off, you manage to shove her back, and you see your assailant clearly for the first time. She appears to be a fox girl of some sort.");
 	outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. This She-fox seems intent on fighting you.");
+	flags[kFLAGS.WEREFOX_EXTRAS] = 1;
+	startCombat(new Werefox());
+}
+public function werefoxOuterDeepDesertEncounter():void {
+	outputText("As you explore the sleeping land of Mareth, you begin to feel as if something was stalking you, a presence just out of your line of sight.");
+	if (player.hasDarkVision()) outputText("Your night-adapted eyes allow you to quickly notice a white-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
+	else outputText("Out of nowhere a shadowy pounce on you and it’s barely if you manage to shove her back after overcoming the surprise attack. You focus your vision on your opponent and determine it to be a fox girl of some sort.");
+	outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. This She-fox seems intent on fighting you.");
+	flags[kFLAGS.WEREFOX_EXTRAS] = 2;
 	startCombat(new Werefox());
 }
 public function lostToWerefox():void {

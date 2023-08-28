@@ -5247,7 +5247,7 @@ public final class Mutations extends MutationsHelper {
 					outputText("[pg]");
 					transformations.LowerBodyAbyssalShark.applyEffect();
 					changes++;
-				}
+				}/*
 				if (player.rearBody.type != RearBody.ABYSSAL_SHARK_FIN && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.RearBodyAbyssalSharkFin.applyEffect();
@@ -5257,7 +5257,7 @@ public final class Mutations extends MutationsHelper {
 					outputText("[pg]");
 					transformations.ArmsSeaDragon.applyEffect();
 					changes++;
-				}
+				}*/
 				if ((!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors) || !player.isScaleCovered()) && rand(3) == 0 && changes < changeLimit) {
 					outputText("[pg]");
 					var acolor:String;

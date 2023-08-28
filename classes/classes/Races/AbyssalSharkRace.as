@@ -51,29 +51,29 @@ public class AbyssalSharkRace extends Race {
 				.eyeType(Eyes.DEVIL, +2)
 				.hairType(Hair.NORMAL, +1)
 				.tongueType(Tongue.HUMAN, +1)
+				.legType(LowerBody.SHARK, +1)
+				.legType(LowerBody.ABYSSAL_SHARK, +2)
 				//.skinBasePattern(Skin.PATTERN_SEA_DRAGON_UNDERBODY, +1) - bioluminescent
 				.hairColor1(ANY(AbyssalSharkHairColors), +1)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
-				.height(AT_LEAST(84), +1)
+				.height(AT_LEAST(108), +1)
 				.customRequirement("",'H-cup tits (or bigger) or 18"+ long cock',
 						function (body:BodyData):Boolean {
 							return body.biggestTitSize > 18 || body.biggestCockSize > 17
 						}, +1)
-//11
+//13
 				.faceType(Face.SHARK_TEETH, +1)
 				//.faceType(Face.ABYSSAL_SHARK, +2)
 				.rearType(RearBody.SHARK_FIN, +1)
 				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
 				.armType(Arms.SHARK, +1)
 				//.armType(Arms.SEA_DRAGON, +2)
-				.legType(LowerBody.SHARK, +1)
-				//.legType(LowerBody.ABYSSAL_SHARK, +2)
 				.tailType(Tail.SHARK, +1)
 				//.tailType(Tail.SHARK, +1)
-				.hasPerk(PerkLib.DantianPhylactery, +1, -10);//5+1
+				.hasPerk(PerkLib.DantianPhylactery, +1, -10);//4+1
 		
-		//addMutation(IMutationsLib.SharkOlfactorySystemIM);
+		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
 		buildTier(10, "abyssal shark-morph")
                 .requirePerk(PerkLib.DantianPhylactery)

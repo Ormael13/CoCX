@@ -184,7 +184,6 @@ import classes.internals.*;
 			this.armorName = "red kimono";
 			this.armorDef = 20;
 			this.armorMDef = 50;
-			//this.tailCount = ;
 			this.bonusHP = 1000;
 			this.bonusLust = 430;
 			this.bonusMana = 3000;

@@ -15,42 +15,19 @@ public class AnubiHeartMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
+            var perkCent:int = 0;
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS = "Increase Soulskills power by ";
-            }
-            if (pTier == 1){
-                descS = "20%";
-            }
-            if (pTier == 2){
-                descS = "30%";
-            }
-            if (pTier == 3){
-                descS = "40%";
-            }
-            if (pTier == 4){
-                descS = "50%";
+                descS = "Increase Soulskills power by " + (20 + ((pTier - 1) * 10)) + "%";
             }
             if (pTier >= 2){
-                descS = ". Soul skills cost 50% more but are twice as effective when above ";
-            }
-            if (pTier == 2){
-                descS = "8";
-            }
-            if (pTier == 3){
-                descS = "7";
-            }
-            if (pTier == 4){
-                descS = "6";
-            }
-            if (pTier >= 2){
-                descS = "0% Soulforce";
+                descS += ". Soul skills cost 50% more but are twice as effective when above " + (90 - ((pTier - 1) * 10)) + "% Soulforce";
             }
             if (pTier >= 3){
-                descS = ". Soul skills become vampiric in nature, healing the user for 10% of their hp on use. This effect can only happen once per round";
+                descS += ". Soul skills become vampiric in nature, healing the user for 10% of their hp on use. This effect can only happen once per round";
             }
             if (pTier >= 4){
-                descS = ". While below half health, soul skill inflicts 20% more damage and leech twice as many hit points";
+                descS += ". While below half health, soul skill inflicts 20% more damage and leech twice as many hit points";
             }
             if (descS != "")descS += ".";
             return descS;
