@@ -322,6 +322,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CombatFollowerSiegweird:StatusEffectType		= mk("Combat Follower: Siegweird");
 		public static const CombatFollowerTyrantia:StatusEffectType			= mk("Combat Follower: Tyrantia");
 		public static const CombatFollowerZenji:StatusEffectType			= mk("Combat Follower: Zenji");
+		public static const CombatWounds:StatusEffectType             		= mk("Combat wounds");
 		public static const Contraceptives:StatusEffectType                 = mk("Contraceptives");
 		public static const CuntStretched:StatusEffectType                  = mk("CuntStretched");
 		public static const DarkRitual:StatusEffectType            	   		= mk("Dark Ritual");

@@ -561,7 +561,7 @@ public class TailTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
-				desc += "Jets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.";
+				desc += "Jets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with <b>your brand new shark tail.</b>";
 				player.tailVenom = 0;
 				player.tailRecharge = 0;
 				player.tailType = Tail.SHARK;
@@ -573,6 +573,30 @@ public class TailTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.tailType === Tail.SHARK;
+			}
+	);
+
+	public const TailAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "Jets of pain shoot down your spine, forcing a surprised gasp as you fall to your knees, reeling as your hands clutch the ground beneath you. A bulging sensation gathers at the base of your back as you "+(player.isNaked()?"":"lower your [armor] and ")+"look at your backside to see a shark tail quickly start to form. Fins burst out as the tail grows out at the base, spreading out from you as a pair of smaller fins sproud at the mid-section of the tail. You're surprised how flexible it is as you sway it around seamlessly. With a few modifications to your armor, you'll be ready to advance with the <b>abyssal shark tail</b> at your behind.";
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.ABYSSAL_SHARK;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ABYSSAL_SHARK));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.ABYSSAL_SHARK;
 			}
 	);
 

@@ -19,7 +19,7 @@ public class JuvenileAbyssalShark extends Monster
 			damage += (eBaseDamage() * 2);
 			player.takePhysDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(4),0.1,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 		}
 		
 		override protected function performCombatAction():void
@@ -29,7 +29,7 @@ public class JuvenileAbyssalShark extends Monster
 			if (chooser < 4) {
 				if (this.soulforce >= cost()) createElement();
 				else eAttack();
-			}*/if (chooser < 2) 
+			} */if (chooser < 2) abyssalSharkBiteAttack();
 			if (chooser >= 2) eAttack();
 		}
 		
@@ -47,7 +47,7 @@ public class JuvenileAbyssalShark extends Monster
 			this.a = "the ";
 			this.short = "juvenile abyssal shark";
 			//this.imageName = "kraken";
-			this.long = "You are currently fighting 10 feet tall juvenile abyssal shark. He looks very similar to shark girls you meet if not for the different look of the head, which looks like flattened into hammer shape with massive jaws in front and eyes on the sides.";
+			this.long = "You are currently fighting 11 feet tall juvenile abyssal shark. He looks very similar to shark girls you meet if not for the different look of the head, which looks like flattened into hammer shape with massive jaws in front and eyes on the sides.";
 			// this.plural = false;
 			this.createCock(20,2.5);
 			this.balls = 2;

@@ -5175,13 +5175,13 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Tail TF
-            if (player.tailType != Tail.SHARK && rand(3) == 0 && changes < changeLimit) {
+            if (type != 2 && player.tailType != Tail.SHARK && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 transformations.TailShark.applyEffect();
                 changes++;
             }
             //Gills TF
-            if (player.gills.type != Gills.FISH && player.tailType == Tail.SHARK && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0) {
+            if (player.gills.type != Gills.FISH && (player.tailType == Tail.SHARK || player.tailType == Tail.ABYSSAL_SHARK) && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.GillsFish.applyEffect();
                 changes++;
@@ -5247,15 +5247,20 @@ public final class Mutations extends MutationsHelper {
 					outputText("[pg]");
 					transformations.LowerBodyAbyssalShark.applyEffect();
 					changes++;
-				}/*
+				}
 				if (player.rearBody.type != RearBody.ABYSSAL_SHARK_FIN && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.RearBodyAbyssalSharkFin.applyEffect();
 					changes++;
-				}
+				}/*
 				if (player.arms.type == Arms.SHARK && !InCollection(player.arms.type, Arms.SEA_DRAGON) && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.ArmsSeaDragon.applyEffect();
+					changes++;
+				}
+				if (player.tailType != Tail.ABYSSAL_SHARK && rand(3) == 0 && changes < changeLimit) {
+					outputText("[pg]");
+					transformations.TailAbyssalShark.applyEffect();
 					changes++;
 				}*/
 				if ((!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors) || !player.isScaleCovered()) && rand(3) == 0 && changes < changeLimit) {

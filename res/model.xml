@@ -3033,6 +3033,9 @@
             <case values="Face.SHARK_TEETH">
                 <show part="face/shark"/>
             </case>
+            <case values="Face.ABYSSAL_SHARK">
+                <show part="face/shark"/>
+            </case>
             <case values="Face.LIZARD,Face.DRAGON">
                 <show part="face/reptile"/>
             </case>
@@ -4749,7 +4752,7 @@
 					</else>
 				</if>
             </case>
-			<case values="Tail.SHARK">
+			<case values="Tail.SHARK,Tail.ABYSSAL_SHARK">
 				<if test="isTaur()">
 					<show part="tail/shark_taur"/>
 					<else>

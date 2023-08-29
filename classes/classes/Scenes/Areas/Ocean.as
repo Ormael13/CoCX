@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.DeepSea.AbyssalSharkScene;
 import classes.Scenes.Areas.Ocean.*;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.Places.Boat.SharkGirlScene;
@@ -23,6 +24,7 @@ use namespace CoC;
 		public var ceaniScene:CeaniScene = new CeaniScene();
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var scyllaScene:ScyllaScene = new ScyllaScene();
+		public var abyssalsharkScene:AbyssalSharkScene = new AbyssalSharkScene();
 		
 		public const areaLevel:int = 25;
 		public function isDiscovered():Boolean {
@@ -129,6 +131,16 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					sharkGirlScene.oceanSharkGirlsPackEncounter();
+				}
+			}, {
+				name: "juvenileabyssalshark",
+				label : "Juvenile A. Shark",
+				kind : 'monster',
+				chance:  0.75,
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
+					abyssalsharkScene.oceanJuvenileAbyssalSharkEncounter();
 				}
 			})
 		}

@@ -957,6 +957,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailSpinneretAtlach: Transformation 			= tail.TailSpinneretAtlach.registerTf(AS_TAIL, AE_ATLACH_NACHA);
 	public const TailDeer: Transformation 						= tail.TailDeer.registerTf(AS_TAIL, AE_DEER);
 	public const TailYgddrasil: Transformation 					= tail.TailYgddrasil.registerTf(AS_TAIL, AE_YGGDRASIL);
+	public const TailAbyssalShark: Transformation 				= tail.TailAbyssalShark.registerTf(AS_TAIL, AE_ABYSSAL_SHARK);
 	/**
 	 * @param tailCount target tail count
 	 * @param magnitude max. number of added/removed tails

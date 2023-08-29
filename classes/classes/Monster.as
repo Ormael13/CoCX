@@ -28,6 +28,7 @@ import classes.Items.UseableLib;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRangeLib;
 import classes.Races.HumanRace;
+import classes.Scenes.Areas.DeepSea.JuvenileAbyssalShark;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
@@ -1725,7 +1726,7 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function eAttack():void {
-			if (game.player.hasStatusEffect(StatusEffects.Hemorrhage)) {
+			if (game.player.hasStatusEffect(StatusEffects.Hemorrhage) && (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl || this is UnderwaterSharkGirlsPack || this is JuvenileAbyssalShark)) {
 				if (hasStatusEffect(StatusEffects.Bloodlust)) addStatusValue(StatusEffects.Bloodlust,1,10);
 				else createStatusEffect(StatusEffects.Bloodlust,10,0,0,0);
 			}
@@ -3201,9 +3202,7 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
-				if (this is UnderwaterSharkGirl || this is UnderwaterTigersharkGirl || this is UnderwaterSharkGirlsPack) {
-					outputText("As blood flows through the water the "+(this is UnderwaterTigersharkGirl ? "tiger ":"")+"shark girl"+(this is UnderwaterSharkGirlsPack ? "s":"")+" grows increasingly vicious. ");
-				}
+				outputText("As blood flows through the water [themonster] grows increasingly vicious. ");
 			}
 			if (game.player.hasStatusEffect(StatusEffects.BloodField)) {
 				game.player.addStatusValue(StatusEffects.BloodField, 1, -1);

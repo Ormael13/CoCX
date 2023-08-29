@@ -1483,10 +1483,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.haveWeaponForJouster()) {
 			var JousterDamageMod:Number = 1;
-			if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
-			if (player.isTaur() || player.isDrider()) damage *= 2*JousterDamageMod;
-			if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
-			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
+			if (player.isMeetingNaturalJousterReq()) JousterDamageMod += 2;
+            if (player.isMeetingNaturalJousterMasterGradeReq()) JousterDamageMod += 2;
+            if (player.isPolearmTypeWeapon()) JousterDamageMod *= 0.75;
+			if (player.isTaur() || player.isDrider()) damage *= 2;
+			damage *= JousterDamageMod;
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);

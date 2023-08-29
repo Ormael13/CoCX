@@ -113,7 +113,7 @@ public class Changelog extends BaseContent
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Anubis - lvl 24. Encounterable in Inner Desert; ");
-			outputText("Werefox (F) - lvl 19. Encounterable in Inner Desert at night; Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter).\n");
+			outputText("Werefox (F) - lvl 19. Encounterable in Inner Desert at night; Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter); Juvenile Abyssal Shark - lvl 73. Encounterable in Ocean.\n");
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Ancient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200/250% to Tou multi, +40/70/100/130% to Spe multi, +100/180/260/340% to Wis multi, +70/140/210/280 to Sens, -10% to max lust multi, +100/150/200/250% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
@@ -152,8 +152,9 @@ public class Changelog extends BaseContent
 			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
 			outputText("-Vampire Thirst stacks can be used in new way: convertion to HP/Mana - 1 stack = 5% max HP/max Mana. Could pick option to use 1 stack or 5 stacks. Can be used once a turn (each option no matter how many stacks changed at once) and it will not take turn allowing to still act after that.\n");
 			outputText("-Gorgon lvl increased from 24 to 31 and she req. PC to be lvl 31+ to find her. Like fellow companion (elder werefox) she too temporaly ventured into inner desert from deper regions.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-On stats page in section listing all camp population was added counter for werewolfs / hellhounds in pack and mummies under control in case pc is capable to control / have any of those three type of minions.\n");
+			outputText("-Some enemy attacks or actions before or after combat could lead to PC gaining status called 'combat wounds'. It can be only healed outside combat by healer npc's (Luna, Diana) and until then would be lowering maximum possible amount of healing (for ex. 5% in combat wounds would mean pc heal up to only 95% of max/overmax HP). ");
+			outputText("On status page under ongoing status effects would be listed how severe (%) is this status currently in case of PC gaining it.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

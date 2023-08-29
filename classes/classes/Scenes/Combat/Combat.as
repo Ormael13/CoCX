@@ -15400,10 +15400,11 @@ public function greatDive():void {
         }
         if (player.haveWeaponForJouster()) {
             var JousterDamageMod:Number = 1;
-            if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
-            if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
-            if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
-
+            if (player.isMeetingNaturalJousterReq()) JousterDamageMod += 2;
+            if (player.isMeetingNaturalJousterMasterGradeReq()) JousterDamageMod += 2;
+            if (player.isPolearmTypeWeapon()) JousterDamageMod *= 0.75;
+			if (player.thirdtierWingsForWingSlap()) JousterDamageMod *= 2;
+			damage *= JousterDamageMod;
         }
         damage *= (1 + PASPAS());
     } else {
@@ -16776,4 +16777,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

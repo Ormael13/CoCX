@@ -17,40 +17,36 @@ public class AbyssalSharkScene extends BaseContent
 		
 public function oceanJuvenileAbyssalSharkEncounter():void {
 	clearOutput();
-	outputText("Your boat is hit from the side and violently rocked, throwing you right into the water! As you look for your opponent you see an indistinct shape doing circle in the distance and closing in on you at high speed until its shape becomes clear, jaw wide with a toothy grin.\n\n");
-    outputText("After approaching it grabs your leg and pulling you to the watery deeps under! As you scan the water to find your attacker, you end up face to face with what looks to be a shark-morph but with deformed into hammer shape head. His two ember eyes looking at you and in his massive jaws is part of your body it ripped off while dragging you underwater. He slowly chewing on the bitten part and then giving you wide smile despite pieces of meat still between the teeth.\n\n");
-	outputText("Blood from your wound start spreading and you see on the side small groups of shark girls lead by alpha male approaching fast. But when the leading shark notice your attacker it slowls down and change the cuourse into one that cause his pack circle you both. Apparently even he not feel daring enough to provoke your attacker and just waits how would this situation develop.\n\n");
-	outputText("You are fighting a Scylla!");
-	if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
+	outputText("A violent ram rocks your boat at the side, the force enough to shake you directly into the water! Your frantically search for your opponent as you notice an indistinct figure beneath the water circling you as it closes the distance with a burst of speed. Nearing, its shape grows clearer as you're met with a massive jaw supporting a toothy grin with razor-like teeth.\n\n");
+    outputText("Upon approaching, it grabs your leg, pulling you straight into the watery depths! You're now face to face with what appears to be a shark-morph, but his head has deformed into a hammer-like shape. His amber eyes stare through you as his massive jaws grin maliciously with bits of [skin] cling to his teeth... Is that... was that a part of you? ");
+    outputText("Bits of adrenaline begin to fade as you realize he has taken a chunk out of your body, still chewing on the part of you he stole, smiling wide as he clearly is seeking more.\n\n");
+	outputText("The blood from your wound spreads as you spot several other sharks encircle you, and the pack leader approaches you rapidly. As the leader spots your attacker, it drifts, changing course to circle around the two of you. Apparently, even he doesn't feel daring enough to provoke your attacker, waiting to see the situation develop.\n\n");
+	outputText("You are fighting a Juvenile Abyssal Shark!");
+	if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir, 0, 0, 0, 0);
+	if (player.hasStatusEffect(StatusEffects.CombatWounds)) player.addStatusValue(StatusEffects.CombatWounds, 1, 0.05);
+	else player.createStatusEffect(StatusEffects.CombatWounds,0.05,0,0,0);
+	monster.createStatusEffect(StatusEffects.Bloodlust,10,0,0,0);
 	startCombat(new JuvenileAbyssalShark());
 }
 
 public function oceanJuvenileAbyssalSharkDefeated():void {
 	clearOutput();
-	outputText("The abyssal shark falls, clearly defeated. And without skipping beat he start to fleeing. Do you try to purse him?\n\n");
-	menu();
-	addButton(1, "No", oceanJuvenileAbyssalSharkDefeatedNo);
-	addButton(3, "Yes", oceanJuvenileAbyssalSharkDefeatedYes);
-}
-public function oceanJuvenileAbyssalSharkDefeatedNo():void {
-	outputText("Feeling something isn't right you wait without moving as the enemy flee. Your instincts prove true when previously circling pack of sharks starts to slwoly comming closer. But due to previously vigilance you manage to escape to your boat which cause them to loose interest to attack you. maybe they not belive you're weakend enough by last fight or they vigilant against abyssal shark that may still be in vinicity. Either way it's not your problem anymore.\n\n");
-	cleanupAfterCombat();
-}
-public function oceanJuvenileAbyssalSharkDefeatedYes():void {
-	cleanupAfterCombat();
-	outputText("How dare he run away now that you gain upper head. Without care you rush after him but looks like he expected this to happen. As you rush after him you both ends up divided by circling during previous fight pack of shark-morphs. Seeing you not in top form leading male decides to take a chance and command attack. Damn looks like abyssal shark set you up into another fight while getting chance to safetly retreat.\n\n");
+	outputText("Just as you manage to surmount him, he turns tail and torpedos away. You almost begin to chase after him, yet are swiftly cut off by the nearby swarm of sharks closing the distance upon you, giving him a chance to escape, seemingly as he had anticipated.\n\n");
+	outputText("The hunting pack leader reveals a devious, toothy grin upon commanding the offense. Looks like you're in for more as the pack closes in for a fight!\n\n");
 	outputText("You are under attack by a shark girls pack!");
-    if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
+    if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.Bloodlust,10,0,0,0);
 	startCombat(new UnderwaterSharkGirlsPack());
 }
 
 public function oceanJuvenileAbyssalSharkVictorious():void {
 	clearOutput();
-	outputText("You slump down in defeat, too ");
-    if (player.HP < 1) outputText("hurt ");
-    else outputText("horny ");
-    outputText("to fight on.\n\n");
-	outputText("The shark boy does a little victory dance, before moving over to you. Without any ceremonies he simply knocks you out. You wake up half hour later feeling pain in all your body and trying to check your condition despite pain finds you have many places where you missing chunks of your body. That gonna tak long to regorw or heal if you find healer enough capable to hadle such wounds.");
+	outputText("You slum down in defeat, ");
+    if (player.HP < 1) outputText("your wounds too severe to carry on");
+    else outputText("arousal taking the best of you");
+    outputText(". The shark boy careens his body side to side with a wide, toothy grin as if relishing his victory, slowly encroaching upon you. Without further ceremony, his tail swings from around you, striking you unconscious.\n\n");
+	outputText("You wake up some time later, your body bloody and aching, drifting gently at the shore of the beach. You glance around your body, bruised and scarred, these wounds won't heal naturally... At least, not quickly. You need to find some way to remedy such a severe condition.");
+	player.addStatusValue(StatusEffects.CombatWounds, 1, 0.1);
 	cleanupAfterCombat();
 }
 		

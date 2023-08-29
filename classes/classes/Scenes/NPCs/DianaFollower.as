@@ -720,6 +720,7 @@ public function HealingScene():void {
 	outputText("Diana starts to rub her chest against yours, causing more of the strange tingling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move up your inner thigh, sparks of pleasure shooting up your spine as she runs her fingertips across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. All your wounds and injuries have closed up, as if they never existed. You're healed, but now you feel rather aroused.\n\n");
 	dynStats("lus", 33, "scale", false);
+	if (player.hasStatusEffect(StatusEffects.CombatWounds)) player.removeStatusEffect(StatusEffects.CombatWounds);
 	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
 	doNext(mainCampMenu);

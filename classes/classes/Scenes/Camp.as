@@ -1804,10 +1804,13 @@ public class Camp extends NPCAwareContent{
 				outputText("\n\n");
 				buttons.add("Vapula", vapula.callSlaveVapula);
 			}
-			//Galia
+			//Galia Slave
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 1 && EvangelineFollower.EvangelineFollowerStage >= 1) {
-				if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
-				else outputText("Nothing to see here yet.\n\n");
+				if (flags[kFLAGS.GALIA_AFFECTION] < 2) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
+				else {
+					outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
+					buttons.add("Galia", SceneLib.galiaFollower.GaliaCampMainMenuSlave).hint("Visit Galia.");
+				}
 			}
 			//Excellia Slave
 			if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2) {
@@ -4861,7 +4864,8 @@ public function rebirthFromBadEnd():void {
 		if (player.shield == shields.AETHERS) pop++; //Include Aether S twin if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
 		if (player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) pop += LunaFollower.WerewolfPackMember;
-		if (player.hasPerk(PerkLib.MummyLord)) pop += player.perkv1(PerkLib.MummyLord)
+		if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) pop += LunaFollower.HellhoundPackMember;
+		if (player.hasPerk(PerkLib.MummyLord)) pop += player.perkv1(PerkLib.MummyLord);
 		//------------
 		//Children check!
 		//Followers

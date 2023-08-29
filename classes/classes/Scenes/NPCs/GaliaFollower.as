@@ -38,6 +38,12 @@ import classes.Scenes.NPCs.Galia;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		public function GaliaCampMainMenuSlave():void {
+			clearOutput();
+			menu();
+			addButton(14, "Back", camp.campSlavesMenu);
+		}
+		
 		public function GaliaSparring():void {
 			clearOutput();
 			outputText("\"<i>Good. I was feeling a bit itchy lately. You won't hold grunge if I go a bit too 'rough' on you, right?</i>\" And without even waiting for your answer Galia starts to crack her fists.");

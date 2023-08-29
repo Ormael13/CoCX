@@ -722,7 +722,7 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 			}
 		}
-		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isRaceCached(Races.SHARK)) {
+		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isAnyRaceCached(Races.SHARK, Races.ABYSSAL_SHARK)) {
 			bd = buttons.add("Blood Frenzy", bloodFrenzy);
 			if (combat.MonsterIsBleeding()) {
 				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");

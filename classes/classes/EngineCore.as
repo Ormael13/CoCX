@@ -29,6 +29,15 @@ public class EngineCore {
     public static function maxOverHP():Number {
         return CoC.instance.player.maxOverHP();
     }
+	
+	public static function maxOverHPCW():Number {
+		var mOHPCW:Number = maxOverHP();
+		if (CoC.instance.player.hasStatusEffect(StatusEffects.CombatWounds)) {
+			mOHPCW *= (1 - CoC.instance.player.statusEffectv1(StatusEffects.CombatWounds));
+			mOHPCW = Math.round(mOHPCW);
+		}
+		return mOHPCW;
+	}
 
     public static function minHP():Number {
         return CoC.instance.player.minHP();
@@ -73,7 +82,7 @@ public class EngineCore {
 		var healingFromHealer:Number = 1;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            //Increase by 20%!
+			//Increase by 20%!
             if (CoC.instance.player.hasPerk(PerkLib.HistoryHealer) || CoC.instance.player.hasPerk(PerkLib.PastLifeHealer)) {
 				healingFromHealer += 0.2;
 				if (CoC.instance.player.hasPerk(PerkLib.Nurse)) healingFromHealer += 0.2;
@@ -86,13 +95,13 @@ public class EngineCore {
 				changeNum *= healingFromHealer;
                 changeNum = Math.min(changeNum, int.MAX_VALUE)
 			}
-            if (Math.min(CoC.instance.player.HP + changeNum, int.MAX_VALUE) > maxOverHP()) {
-                if (CoC.instance.player.HP >= maxOverHP()) {
+            if (Math.min(CoC.instance.player.HP + changeNum, int.MAX_VALUE) > maxOverHPCW()) {
+                if (CoC.instance.player.HP >= maxOverHPCW()) {
                     if (display) HPChangeNotify(changeNum);
                     return CoC.instance.player.HP - before;
                 }
                 if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.HP = maxOverHP();
+                CoC.instance.player.HP = maxOverHPCW();
             }
             else {
                 if (display) HPChangeNotify(changeNum);
