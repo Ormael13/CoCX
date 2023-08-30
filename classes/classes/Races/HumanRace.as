@@ -89,7 +89,7 @@ public class HumanRace extends Race {
 		tiers.push(new HumanRaceTier(1, maxScore-9, "Human",{"str.mult": +0.20, "tou.mult": +0.20, "spe.mult": +0.20, "int.mult": +0.20, "wis.mult": +0.20, "lib.mult": +0.20}));
 		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human",
 				{"str.mult": +0.50, "tou.mult": +0.50, "spe.mult": +0.50, "int.mult": +0.50, "wis.mult": +0.50, "lib.mult": +0.50, "sens": +30}));
-        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human",{}));
+        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human",{"str.mult": +1.00, "tou.mult": +1.00, "spe.mult": +1.00, "int.mult": +1.00, "wis.mult": +1.00, "lib.mult": +1.00, "sens": +60}));
 
 		debugForms = {
 			"human": [
