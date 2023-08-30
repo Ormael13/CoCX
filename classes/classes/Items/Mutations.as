@@ -97,13 +97,13 @@ public final class Mutations extends MutationsHelper {
             else outputText(player.modTone(15, 1));
         }
         if (player.wis < 50) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("spe", 2 + rand(7));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("wis", 2 + rand(7));
             else AlchemyBonus("wis", 1 + rand(4));
         } else if (player.wis < 100) {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("spe", 2 + rand(5));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("wis", 2 + rand(5));
             else AlchemyBonus("wis", 1 + rand(3));
         } else {
-            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("spe", 2 + rand(3));
+            if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("wis", 2 + rand(3));
             else AlchemyBonus("wis", 1 + rand(2));
         }
     }
@@ -5257,12 +5257,12 @@ public final class Mutations extends MutationsHelper {
 					outputText("[pg]");
 					transformations.ArmsSeaDragon.applyEffect();
 					changes++;
-				}
+				}*/
 				if (player.tailType != Tail.ABYSSAL_SHARK && rand(3) == 0 && changes < changeLimit) {
 					outputText("[pg]");
 					transformations.TailAbyssalShark.applyEffect();
 					changes++;
-				}*/
+				}
 				if ((!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors) || !player.isScaleCovered()) && rand(3) == 0 && changes < changeLimit) {
 					outputText("[pg]");
 					var acolor:String;

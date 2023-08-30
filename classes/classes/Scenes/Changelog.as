@@ -155,7 +155,7 @@ public class Changelog extends BaseContent
 			outputText("-On stats page in section listing all camp population was added counter for werewolfs / hellhounds in pack and mummies under control in case pc is capable to control / have any of those three type of minions.\n");
 			outputText("-Some enemy attacks or actions before or after combat could lead to PC gaining status called 'combat wounds'. It can be only healed outside combat by healer npc's (Luna, Diana) and until then would be lowering maximum possible amount of healing (for ex. 5% in combat wounds would mean pc heal up to only 95% of max/overmax HP). ");
 			outputText("On status page under ongoing status effects would be listed how severe (%) is this status currently in case of PC gaining it.\n");
-			outputText("-\n");
+			outputText("-Smol fixes, and adds Super Human stat buff. (Jtecx)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -179,7 +179,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
-			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC\n");
+			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

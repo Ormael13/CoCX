@@ -13,24 +13,38 @@ import classes.internals.*;
 
 public class JuvenileAbyssalShark extends Monster
 	{
+		public function createElement():void {
+			var type:String = "";
+			if (rand(2) == 0) type = "darkness";
+			else type = "water";
+			addSoulforce(-60);
+			outputText("The "+this.short+" infuse a bit of soulforce into a finger, light blue energy covering the tip. She draw a simple rune in the water, the energy from his finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "+type+". He motion, sending the ball flying toward you.");
+			var ElementDmg:Number = eBaseWisdomDamage();
+			ElementDmg *= 2;
+			ElementDmg = Math.round(ElementDmg);
+			if (type == "darkness") player.takeDarknessDamage(ElementDmg, true);
+			else player.takeWaterDamage(ElementDmg, true);
+		}
+		
 		private function abyssalSharkBiteAttack():void {
 			outputText("Your opponent takes a turn and charges at you at high speed, large jaw open as he goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
 			var damage:Number = 0;
 			damage += (eBaseDamage() * 2);
 			player.takePhysDamage(damage, true);
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) player.addStatusValue(StatusEffects.CombatWounds, 1, 0.01);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.1,0,0);
 		}
 		
 		override protected function performCombatAction():void
 		{
 			var chooser:Number = 0;
-			chooser = rand(3);/*
-			if (chooser < 4) {
-				if (this.soulforce >= cost()) createElement();
-				else eAttack();
-			} */if (chooser < 2) abyssalSharkBiteAttack();
-			if (chooser >= 2) eAttack();
+			chooser = rand(3);
+			if (chooser < 2) {
+				if (this.soulforce >= 60) createElement();
+				else abyssalSharkBiteAttack();
+			}
+			if (chooser == 2) abyssalSharkBiteAttack();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -80,15 +94,16 @@ public class JuvenileAbyssalShark extends Monster
 			this.level = 73;
 			this.gems = 0;
 			this.drop = new WeightedDrop(consumables.ASTOOTH, 1);
-			//this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib., 0, 0, 0, 0);
-			//this.createPerk(PerkLib., 0, 0, 0, 0);
-			//this.createPerk(PerkLib., 0, 0, 0, 0);
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

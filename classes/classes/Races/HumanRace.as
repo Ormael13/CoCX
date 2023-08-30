@@ -86,10 +86,9 @@ public class HumanRace extends Race {
 		addMutation(IMutationsLib.HumanThyroidGlandIM);
 		addMutation(IMutationsLib.HumanVersatilityIM);
 		
-		tiers.push(new HumanRaceTier(1, maxScore-9, "Human",{"str.mult": +0.20, "tou.mult": +0.20, "spe.mult": +0.20, "int.mult": +0.20, "wis.mult": +0.20, "lib.mult": +0.20}));
-		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human",
-				{"str.mult": +0.50, "tou.mult": +0.50, "spe.mult": +0.50, "int.mult": +0.50, "wis.mult": +0.50, "lib.mult": +0.50, "sens": +30}));
-        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human",{"str.mult": +1.00, "tou.mult": +1.00, "spe.mult": +1.00, "int.mult": +1.00, "wis.mult": +1.00, "lib.mult": +1.00, "sens": +60}));
+		tiers.push(new HumanRaceTier(1, maxScore-9, "Human", {"str.mult": +0.20, "tou.mult": +0.20, "spe.mult": +0.20, "int.mult": +0.20, "wis.mult": +0.20, "lib.mult": +0.20}));
+		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human", {"str.mult": +0.50, "tou.mult": +0.50, "spe.mult": +0.50, "int.mult": +0.50, "wis.mult": +0.50, "lib.mult": +0.50, "sens": +30}));
+        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human", {"str.mult": +1.00, "tou.mult": +1.00, "spe.mult": +1.00, "int.mult": +1.00, "wis.mult": +1.00, "lib.mult": +1.00, "sens": +60}));
 
 		debugForms = {
 			"human": [
@@ -188,7 +187,7 @@ class HumanRaceTier extends RaceTier {
 		if (!body) return "Bonus EXP gains";
 		var boost:Number = HumanRace.xpBoost(body.player, body.player.racialScore(Races.HUMAN));
 		if (boost <= 0) return "";
-		s.push("+" + boost + " bonus EXP gains");
+		else s.push("+" + boost + " bonus EXP gains");
 		var buffs:Object = this.buffs(body);
 		for (var key:String in buffs) {
 			s.push(StatUtils.explainBuff(key,buffs[key]));
