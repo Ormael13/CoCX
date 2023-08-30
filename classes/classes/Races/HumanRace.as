@@ -86,7 +86,7 @@ public class HumanRace extends Race {
 		addMutation(IMutationsLib.HumanThyroidGlandIM);
 		addMutation(IMutationsLib.HumanVersatilityIM);
 		
-		tiers.push(new HumanRaceTier(1, maxScore-9, "Human",{}));
+		tiers.push(new HumanRaceTier(1, maxScore-9, "Human",{"str.mult": +0.20, "tou.mult": +0.20, "spe.mult": +0.20, "int.mult": +0.20, "wis.mult": +0.20, "lib.mult": +0.20}));
 		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human",
 				{"str.mult": +0.50, "tou.mult": +0.50, "spe.mult": +0.50, "int.mult": +0.50, "wis.mult": +0.50, "lib.mult": +0.50, "sens": +30}));
         tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human",{}));
