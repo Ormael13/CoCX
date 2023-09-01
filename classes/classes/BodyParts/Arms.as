@@ -494,6 +494,13 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
+	public static const ABYSSAL_SHARK:int = 63;
+	EnumValue.add(Types, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+		name:"a.shark",
+		appearanceDesc: "A pair of large shark fins have sprouted on each of your forearms near your elbows, and the skin between your fingers forms a small webbing which assists your swimming. You have sharp and deadly claws which allow you to impale your prey or rip your foes to shreds.",
+		claw: true
+	});
+
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}

@@ -13,16 +13,55 @@ import classes.internals.*;
 
 public class JuvenileAbyssalShark extends Monster
 	{
+		public function castHailOfSwordfishesSoulskill():void {
+			outputText("Letting soulforce leak out around him, "+this.short+" form twelve ethereal two meter long weapons looking like swordfishes in two rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
+			addSoulforce(-90);
+			var hobD:Number = 6;
+			while (hobD-->0) bladesD(2);
+			outputText("damage!");
+		}
+		private function bladesD(hits:Number = 1):void {
+			var bd:Number = 0;
+			bd += this.wis * 0.5;
+			bd += wisdomscalingbonus() * 0.5;
+			if (bd < 10) bd = 10;
+			bd *= 1.9;
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (this.wis <= 200) critChance += this.wis / 10;
+			if (this.wis > 200) critChance += 20;
+			if (rand(100) < critChance) {
+				crit = true;
+				bd *= 1.75;
+			}
+			var bd2:Number = 0.9;
+			bd2 += (rand(21) * 0.01);
+			bd *= bd2;
+			bd = Math.round(bd);
+			bd = player.takeMagicDamage(bd, true);
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			outputText(" ");
+			if (hits == 2) {
+				bd = player.takeMagicDamage(bd, true);
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				outputText(" ");
+			}
+		}
+		
 		public function createElement():void {
 			var type:String = "";
-			if (rand(2) == 0) type = "darkness";
-			else type = "water";
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) type = "ice";
+			else {
+				if (rand(2) == 0) type = "darkness";
+				else type = "water";
+			}
 			addSoulforce(-60);
 			outputText("The "+this.short+" infuse a bit of soulforce into a finger, light blue energy covering the tip. She draw a simple rune in the water, the energy from his finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "+type+". He motion, sending the ball flying toward you.");
 			var ElementDmg:Number = eBaseWisdomDamage();
 			ElementDmg *= 2;
 			ElementDmg = Math.round(ElementDmg);
-			if (type == "darkness") player.takeDarknessDamage(ElementDmg, true);
+			if (type == "ice") player.takeIceDamage(ElementDmg, true);
+			else if (type == "darkness") player.takeDarknessDamage(ElementDmg, true);
 			else player.takeWaterDamage(ElementDmg, true);
 		}
 		
@@ -39,12 +78,16 @@ public class JuvenileAbyssalShark extends Monster
 		override protected function performCombatAction():void
 		{
 			var chooser:Number = 0;
-			chooser = rand(3);
+			chooser = rand(4);
 			if (chooser < 2) {
 				if (this.soulforce >= 60) createElement();
 				else abyssalSharkBiteAttack();
 			}
-			if (chooser == 2) abyssalSharkBiteAttack();
+			if (chooser == 2) {
+				if (this.soulforce >= 90) castHailOfSwordfishesSoulskill();
+				else abyssalSharkBiteAttack();
+			}
+			if (chooser == 3) abyssalSharkBiteAttack();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

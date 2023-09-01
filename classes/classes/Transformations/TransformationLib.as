@@ -180,6 +180,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsYukiOnna: Transformation 			= arms.ArmsYukiOnna.registerTf(AS_ARMS, AE_YUKI_ONNA);
 	public const ArmsTiny: Transformation 			    = arms.ArmsTiny.registerTf(AS_ARMS, AE_IMP);
 	public const ArmsCanine: Transformation 			= arms.ArmsCanine.registerTf(AS_ARMS, AE_ANUBIS);
+	public const ArmsAbyssalShark: Transformation 		= arms.ArmsAbyssalShark.registerTf(AS_ARMS, AE_ABYSSAL_SHARK);
 
 
 //ASS
@@ -542,6 +543,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FaceElf: Transformation 				= face.FaceElf.registerTf(AS_FACE, AE_ELF);
     public const FaceAnt: Transformation 				= face.FaceAnt.registerTf(AS_FACE, AE_ANT);
     public const FaceFoxFangs: Transformation 			= face.FaceFoxFangs.registerTf(AS_FACE, AE_WEREFOX);
+    public const FaceAbyssalShark: Transformation 		= face.FaceAbyssalShark.registerTf(AS_FACE, AE_ABYSSAL_SHARK);
 
 
 //GILLS
@@ -895,6 +897,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const SkinPatternSeaDragon:Transformation 			= skin.SkinPatternSeaDragon.registerTf(AS_SKIN_PATTERN, AE_SEA_DRAGON);
     public const SkinPatternArchImp:Transformation 			    = skin.SkinPatternArchImp.registerTf(AS_SKIN_PATTERN, AE_IMP);
     public const SkinPatternAnubis:Transformation 			    = skin.SkinPatternAnubis.registerTf(AS_SKIN_PATTERN, AE_ANUBIS);
+    public const SkinPatternBioluminescence:Transformation 		= skin.SkinPatternBioluminescence.registerTf(AS_SKIN_PATTERN, AE_ABYSSAL_SHARK);//TfMultiple(AS_
 
 
 //TAIL

@@ -1336,7 +1336,7 @@ use namespace CoC;
 		public function mummyControlLimit():Number
 		{
 			var mCL:Number = 5;
-			if (perkv1(IMutationsLib.AlphaHowlIM) >= 1) mCL
+			if (perkv1(IMutationsLib.AlphaHowlIM) >= 1) mCL += (perkv1(IMutationsLib.AlphaHowlIM) * 5);
 			return mCL;
 		}
 

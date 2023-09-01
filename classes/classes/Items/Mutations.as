@@ -5151,7 +5151,7 @@ public final class Mutations extends MutationsHelper {
 			}
             //Transformations:
             //Mouth TF
-            if (player.faceType != Face.SHARK_TEETH && rand(3) == 0 && changes < changeLimit) {
+            if (type != 2 && player.faceType != Face.SHARK_TEETH && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 transformations.FaceSharkTeeth.applyEffect();
                 changes++;
@@ -5181,7 +5181,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Gills TF
-            if (player.gills.type != Gills.FISH && (player.tailType == Tail.SHARK || player.tailType == Tail.ABYSSAL_SHARK) && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0) {
+            if (player.gills.type != Gills.FISH && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.GillsFish.applyEffect();
                 changes++;
@@ -5238,6 +5238,11 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
 			if (type == 2 && player.hasPerk(PerkLib.DantianPhylactery)) {
+				if (type != 2 && player.faceType != Face.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
+					outputText("[pg]");
+					transformations.FaceAbyssalShark.applyEffect();
+					changes++;
+				}
 				if (player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.DEVIL && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.EyesDevil.applyEffect();
@@ -5253,17 +5258,17 @@ public final class Mutations extends MutationsHelper {
 					transformations.RearBodyAbyssalSharkFin.applyEffect();
 					changes++;
 				}/*
-				if (player.arms.type == Arms.SHARK && !InCollection(player.arms.type, Arms.SEA_DRAGON) && changes < changeLimit && rand(3) == 0) {
+				if (player.arms.type != Arms.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
-					transformations.ArmsSeaDragon.applyEffect();
+					transformations.ArmsAbyssalShark.applyEffect();
 					changes++;
 				}*/
-				if (player.tailType != Tail.ABYSSAL_SHARK && rand(3) == 0 && changes < changeLimit) {
+				if (player.tailType != Tail.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.TailAbyssalShark.applyEffect();
 					changes++;
 				}
-				if ((!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors) || !player.isScaleCovered()) && rand(3) == 0 && changes < changeLimit) {
+				if ((!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors) || !player.isScaleCovered()) && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					var acolor:String;
 					if (!InCollection(player.scaleColor, AbyssalSharkRace.AbyssalSharkScaleColors)) acolor = randomChoice(AbyssalSharkRace.AbyssalSharkScaleColors);
@@ -5271,14 +5276,12 @@ public final class Mutations extends MutationsHelper {
 					outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
 					outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");
 					changes++;
-				}
-				/*
-				if (!player.skin.hasWhiteBlackVeins()) {
+				}/*
+				if (!player.skin.hasWhiteBlackVeins() && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.SkinPatternTigerSharkStripes.applyEffect();
 					changes++;
-				}
-				*/
+				}*/
 				if (player.basetallness < 132 && changes < changeLimit && rand(3) == 0) {
 					var heightGain:int = rand(15) + 5;
 					//Flavor texts.  Flavored like 1950's cigarettes. Yum.

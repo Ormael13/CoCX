@@ -1238,6 +1238,24 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.ANT;
 			}
 	);*/
+
+	public const ArmsAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing and your nails sharpen into curved claws. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. ";
+				desc += "You hastily remove your [armor] just in time before a strange large fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have abyssal shark arms.</b>";
+
+				player.arms.type = Arms.ABYSSAL_SHARK;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ABYSSAL_SHARK));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.ABYSSAL_SHARK;
+			}
+	);
 	/*
   */
 }

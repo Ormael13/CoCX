@@ -153,11 +153,11 @@ public class Changelog extends BaseContent
 			outputText("-Vampire Thirst stacks can be used in new way: convertion to HP/Mana - 1 stack = 5% max HP/max Mana. Could pick option to use 1 stack or 5 stacks. Can be used once a turn (each option no matter how many stacks changed at once) and it will not take turn allowing to still act after that.\n");
 			outputText("-Gorgon lvl increased from 24 to 31 and she req. PC to be lvl 31+ to find her. Like fellow companion (elder werefox) she too temporaly ventured into inner desert from deper regions.\n");
 			outputText("-On stats page in section listing all camp population was added counter for werewolfs / hellhounds in pack and mummies under control in case pc is capable to control / have any of those three type of minions.\n");
-			outputText("-Some enemy attacks or actions before or after combat could lead to PC gaining status called 'combat wounds'. It can be only healed outside combat by healer npc's (Luna, Diana) and until then would be lowering maximum possible amount of healing (for ex. 5% in combat wounds would mean pc heal up to only 95% of max/overmax HP). ");
-			outputText("On status page under ongoing status effects would be listed how severe (%) is this status currently in case of PC gaining it.\n");
-			outputText("-Smol fixes, and adds Super Human stat buff. (Jtecx)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Some enemy attacks or actions before or after combat could lead to PC gaining status called 'combat wounds'. Until healed it would be lowering maximum possible amount of healing (for ex. 5% in combat wounds would mean pc heal up to only 95% of max/overmax HP). On status page under ongoing status effects would be listed how severe (%) is this status currently in case of PC gaining it. ");
+			outputText("It can be healed outside combat by healer npc's (Luna, Diana) and during combat by effect of spells like: Tears of Denial (fully heal of current combat wounds status), Heal (up to of 3%), Regenerate (1% per turn), Restore (up to 3% upfront then 1% per turn). Poultice on top of healing would remove up to 4% of combat wound status.\n");
+			outputText("-Smol fixes, and adds Super Human stat buff. (Our Godfather-Emperor of Gigachad Humanity - Jtecx)\n");
+			outputText("-Shark Olfactory System (Primitive) would lower cost of shark bite to 0 fatigue, Shark Olfactory System (Final Form) would now allow to use shark bite once a turn without ending combat turn.\n");
+			outputText("-Shark / Orce / Vicious / Tripple Bite specials fatigue cost and damage been doubled.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

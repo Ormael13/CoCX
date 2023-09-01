@@ -876,6 +876,24 @@ public class SkinTransformations extends MutationsHelper {
 				return player.skin.base.pattern === Skin.PATTERN_GLYPH_TATTOO;
 			}
 	);
+
+	public const SkinPatternBioluminescence: Transformation = new SimpleTransformation("Bioluminescence Skin Pattern",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your chest burns as strange marks appear on it, burning your skin until it creates a <b>black spider glyph in your chest</b>. You feel like something is coming up throughout your skin and upon taking your [armor] off, strokes of coarse fur travelling from your abdomen, all the way up to your breasts. Conveniently ending around the nipples, covering them, <b>you know have a Ushi-Oni torso pattern.</b>";
+
+				player.skin.base.pattern = Skin.PATTERN_BIOLUMINESCENCE;
+				player.skin.base.adj = "black spider glyph-tattooed";
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.skin.base.pattern === Skin.PATTERN_BIOLUMINESCENCE;
+			}
+	);
 	/*
   */
 }
