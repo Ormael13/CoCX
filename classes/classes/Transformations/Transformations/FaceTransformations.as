@@ -1134,7 +1134,24 @@ public class FaceTransformations extends MutationsHelper {
 				return player.faceType === Face.ANT;
 			}
 	);
-	/*
-  */
+
+	public const FaceAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+
+				desc += "Your [face] explodes with agony, reshaping into a more human-like visage. You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them! They even scare you a little.\n(Gain: 'Bite' special attack)";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.ABYSSAL_SHARK;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ABYSSAL_SHARK));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.ABYSSAL_SHARK;
+			}
+	);
 }
 }

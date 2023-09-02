@@ -110,7 +110,7 @@ public class WerewolfFemaleScene extends BaseContent
 			}
 			outputText("Thoroughly satisfied by this nightly encounter you head back to camp.");
 			if(player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)){
-				outputText(" Your pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
+				outputText(" Your werewolf pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
 			}
 			outputText("\n\n");
 			cleanupAfterCombat();

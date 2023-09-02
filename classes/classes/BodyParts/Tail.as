@@ -474,6 +474,13 @@ public class Tail extends SaveableBodyPart {
 		appearanceDesc: "A thin, scaly, prehensile reptilian tail almost as long as you are tall and covered in [fur color] fur, swings behind you like a living bullwhip. The end of its tip is tapered and thin like the end of a whip.",
 		isLong: true
 	});
+	public static const ABYSSAL_SHARK: int = 56;
+	EnumValue.add(Types, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+		name:"abyssal shark",
+		appearanceDesc: "A long shark tail trails down from your back side with two large fins at the base and another pair of smaller fins near the mid-section, both equally as firm as it sways behind you seamlessly, giving you a dangerous air.",
+		tailSlam: true,
+		isLong: true
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;

@@ -39,6 +39,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 misc lvl-up perk: General. Req. Strength in Numbers perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 17 misc lvl-up perk: Small Army. Req. General perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: Fellowship. Req. Small Army perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New mutation perk: Anubi Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
 			outputText("-New mutation perk: Fera's Birthright. Req. having free adaptation mutation slot, werewolf/wereshark race. Effects: Increases HP regeneration 0.5-2% based on moon phase. (New moon - 0.5%, Half moon - 1%, Full moon - 2%)\n");
 			outputText("-New mutation perk: Fera's Birthright (Primitive). Req. Fera's Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
 			outputText("-New mutation perk: Fera's Birthright (Evolved). Req. Fera's Birthright (Primitive) and lvl 60+. Effects: Increases HP regeneration 1.5-6% based on moon phase (doubled when in Crinos Shape). Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it, once each fight when HP drops below 0 it would trigger Regeneration Surge (+20% regen for 2 turns).\n");
@@ -112,10 +113,9 @@ public class Changelog extends BaseContent
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Anubis - lvl 24. Encounterable in Inner Desert; ");
-			outputText("Werefox (F) - lvl 19. Encounterable in Inner Desert at night.\n");
+			outputText("Werefox (F) - lvl 19. Encounterable in Inner Desert at night; Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter); Juvenile Abyssal Shark - lvl 73. Encounterable in Ocean.\n");
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Ancient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200/250% to Tou multi, +40/70/100/130% to Spe multi, +100/180/260/340% to Wis multi, +70/140/210/280 to Sens, -10% to max lust multi, +100/150/200/250% to max soulforce multi, -40% to max mana multi.\n");
-			outputText("-New mutation perk: Anubi Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
 			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
 			outputText("-New event perk: Soul Nexus. Req. having 20+ in anubis score. Effects: An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.\n");
 			outputText("-New mutation perk: Anubi Heart (Primitive). Req. Anubi Heart and lvl 30+. Effects: Increase Soulskills power by 30%. Soul skills cost 50% more but are twice as effective when above 80% Soulforce.\n");
@@ -148,15 +148,16 @@ public class Changelog extends BaseContent
 			outputText("-Bonus to Charge/Great Dive from Natural Jouster perk and it upgraded version was fixed due to last melee changes that made perk useless. Also jouster effect would now include also polearms type weapons and not just spears, but polearm weapons would have 25% lower bonus from jouster perks.\n");
 			outputText("-Bite special gained additional scaling from bonus str and spe.\n");
 			outputText("-Added new setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP. From measy 1,25x more HP up to even 10x more hp depending on setting and enemy type.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Implementation of wereraces human form. (Liadri) (out of combat of most of sex scenes pc sprite would look 100% humanlike if current race is one of wereraces even partialy)\n");
+			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
+			outputText("-Vampire Thirst stacks can be used in new way: convertion to HP/Mana - 1 stack = 5% max HP/max Mana. Could pick option to use 1 stack or 5 stacks. Can be used once a turn (each option no matter how many stacks changed at once) and it will not take turn allowing to still act after that.\n");
+			outputText("-Gorgon lvl increased from 24 to 31 and she req. PC to be lvl 31+ to find her. Like fellow companion (elder werefox) she too temporaly ventured into inner desert from deper regions.\n");
+			outputText("-On stats page in section listing all camp population was added counter for werewolfs / hellhounds in pack and mummies under control in case pc is capable to control / have any of those three type of minions.\n");
+			outputText("-Some enemy attacks or actions before or after combat could lead to PC gaining status called 'combat wounds'. Until healed it would be lowering maximum possible amount of healing (for ex. 5% in combat wounds would mean pc heal up to only 95% of max/overmax HP). On status page under ongoing status effects would be listed how severe (%) is this status currently in case of PC gaining it. ");
+			outputText("It can be healed outside combat by healer npc's (Luna, Diana) and during combat by effect of spells like: Tears of Denial (fully heal of current combat wounds status), Heal (up to of 3%), Regenerate (1% per turn), Restore (up to 3% upfront then 1% per turn). Poultice on top of healing would remove up to 4% of combat wound status.\n");
+			outputText("-Smol fixes, and adds Super Human stat buff. (Our Godfather-Emperor of Gigachad Humanity - Jtecx)\n");
+			outputText("-Shark Olfactory System (Primitive) would lower cost of shark bite to 0 fatigue, Shark Olfactory System (Final Form) would now allow to use shark bite once a turn without ending combat turn.\n");
+			outputText("-Shark / Orce / Vicious / Tripple Bite specials fatigue cost and damage been doubled.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -174,10 +175,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
-			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC\n");
+			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -236,7 +238,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -266,9 +270,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

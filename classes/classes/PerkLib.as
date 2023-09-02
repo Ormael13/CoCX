@@ -2366,11 +2366,11 @@ public class PerkLib
 				"All racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.",
 				"You've chosen the 'Natural Instincts' perk, all racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.");
 		public static const Naturaljouster:PerkType = mk("Natural jouster", "Natural jouster",
-				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you don't have one of this specific lower body types (60+ for taurs/drider and 150+ for others).",
-				"You've chosen the 'Natural jouster' perk. As long you have high enough speed (60+ for taurs/drider and 150+ for others) and attack once per turn, your spear/lance attack power will be three times higher.");
+				"Increase by 200% of base attack power for spears/lances/polearms when you use Charge (have taur/drider lower body) or Great Dive (have large sized wings capable of flight) or 2,5x higher speed if you don't have one of this specific body types (60+/150+ speed).",
+				"You've chosen the 'Natural jouster' perk. Increase by 200% of base attack power for spears/lances/polearms when you use Charge (have taur/drider lower body) or Great Dive (have large sized wings capable of flight) or 2,5x higher speed if you don't have one of this specific body types (60+/150+ speed).");
 		public static const NaturaljousterMastergrade:PerkType = mk("Natural jouster (Master grade)", "Natural jouster (Master grade)",
-				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you don't have one of this specific lower body types (180+ for taurs/drider and 450+ for others).",
-				"You've chosen the 'Natural jouster (Master grade)' perk. As long you have high enough speed (180+ for taurs/drider and 450+ for others) and attack once per turn, your spear/lance attack power will be five times higher.");
+				"Increase by another 200% of base attack power for spears/lances/polearms when you use Charge (have taur/drider lower body) or Great Dive (have large sized wings capable of flight) or 2,5x higher speed if you don't have one of this specific body types (180+/450+ speed).",
+				"You've chosen the 'Natural jouster (Master grade)' perk. Increase by another 200% of base attack power for spears/lances/polearms when you use Charge (have taur/drider lower body) or Great Dive (have large sized wings capable of flight) or 2,5x higher speed if you don't have one of this specific body types (180+/450+ speed).");
 		public static const NaturesSpringI:PerkType = mk("Nature's Spring I", "Nature's Spring I",
 				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You've chosen the 'Nature's Spring I' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
@@ -3451,6 +3451,8 @@ public class PerkLib
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 		public static const Dantain:PerkType = mk("Dantian", "Dantian",
 				"Increase max soulforce by 10% + 10% to 30% (per each attained cultivation stage) of base value.");
+		public static const DantianPhylactery:PerkType = mk("Dantian Phylactery", "Dantian Phylactery",
+				"Your soul has been stored into dantians allowing you to fully unlock your potential as a demon and at the same time follow your choosen dao as devil cultivator.").withBuffs({'int.mult':0.20,'wis.mult':0.60});
 		public static const DaoistCultivator:PerkType = mk("Daoist Cultivator", "Daoist Cultivator",
 				"Allow you to train your soul cultivator mind to unleash soulskills with their apex power. (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)",
 				"You've chosen the 'Daoist Cultivator' perk, starting the journey on the daoist cultivators path! (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)")

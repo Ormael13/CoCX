@@ -86,10 +86,10 @@ public class HumanRace extends Race {
 		addMutation(IMutationsLib.HumanThyroidGlandIM);
 		addMutation(IMutationsLib.HumanVersatilityIM);
 		
-		tiers.push(new HumanRaceTier(1, maxScore-9, "Human"));
-		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human"));
-        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human"));
-		
+		tiers.push(new HumanRaceTier(1, maxScore-9, "Human", {"str.mult": +0.20, "tou.mult": +0.20, "spe.mult": +0.20, "int.mult": +0.20, "wis.mult": +0.20, "lib.mult": +0.20}));
+		tiers.push(new HumanRaceTier(2, maxScore+1, "Super Human", {"str.mult": +0.50, "tou.mult": +0.50, "spe.mult": +0.50, "int.mult": +0.50, "wis.mult": +0.50, "lib.mult": +0.50, "sens": +30}));
+        tiers.push(new HumanRaceTier(3, maxScore+19, "Primaris Super Human", {"str.mult": +1.00, "tou.mult": +1.00, "spe.mult": +1.00, "int.mult": +1.00, "wis.mult": +1.00, "lib.mult": +1.00, "sens": +60}));
+
 		debugForms = {
 			"human": [
 					game.transformations.SkinPlain,
@@ -112,9 +112,9 @@ public class HumanRace extends Race {
 			]
 		}
 	}
-	
+
 	public static const maxScore:int = 17;
-	
+
 	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
 		var ics:Number = (body.player.internalChimeraScore() - body.player.internalHumanScore());
 		if (ics < 0) ics = 0;
@@ -127,7 +127,7 @@ public class HumanRace extends Race {
 		score = super.finalizeScore(body, score, checkRP, outputText);
 		return score;
 	}
-	
+
 	public static function xpBoostBase(player:Player):Number {
 		var baseHumBoost1:Number = 1;
 		if (player.level >= 6) baseHumBoost1 += 1;
@@ -140,12 +140,12 @@ public class HumanRace extends Race {
 		//if (level >= 274)
 		return baseHumBoost1;
 	}
-	
+
 	public static function xpBoostMultiplier(player:Player, humanScore:int):Number {
 		var boost:Number = 10 + humanScore - maxScore;
 		return boost > 0 ? boost : 0;
 	}
-	
+
 	public static function xpBoost(player:Player, humanScore:int):Number {
 		return xpBoostBase(player) * xpBoostMultiplier(player, humanScore);
 	}
@@ -156,9 +156,10 @@ import classes.BodyData;
 import classes.RaceTier;
 import classes.Races;
 import classes.Races.HumanRace;
+import classes.Stats.StatUtils;
 
 class HumanRaceTier extends RaceTier {
-	public function HumanRaceTier(tierNumber:int, minScore:int, tierName:String) {
+	public function HumanRaceTier(tierNumber:int, minScore:int, tierName:String, buffs:Object) {
 		super(
 				tierNumber,
 				tierName,
@@ -166,7 +167,7 @@ class HumanRaceTier extends RaceTier {
 					return tierName
 				},
 				minScore,
-				/* buff object */ {},
+				/* buff object */ buffs,
 				/* requirement list */ [],
 				/* extra bonus names */ []
 		);
@@ -181,10 +182,17 @@ class HumanRaceTier extends RaceTier {
 			separator:String         = ", ",
 			withExtraBonuses:Boolean = true
 	):String {
+		var s:Array = [];
 		if (!withExtraBonuses) return "";
 		if (!body) return "Bonus EXP gains";
 		var boost:Number = HumanRace.xpBoost(body.player, body.player.racialScore(Races.HUMAN));
 		if (boost <= 0) return "";
-		return "+" + boost + " bonus EXP gains";
+		s.push("+" + boost + " bonus EXP gains");
+		var buffs:Object = this.buffs(body);
+		for (var key:String in buffs) {
+			s.push(StatUtils.explainBuff(key,buffs[key]));
+		}
+		return s.join(", ");
+
 	}
 }

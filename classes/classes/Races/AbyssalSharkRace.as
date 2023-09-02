@@ -38,7 +38,7 @@ public class AbyssalSharkRace extends Race {
         /*Perks*/		"Human"];
 
 	public function AbyssalSharkRace(id:int) {
-		super("Abbysal Shark", id, []);//RaceBody);
+		super("Abyssal Shark", id, []);//RaceBody);
 		//disabled = true;
 	}
 	
@@ -47,32 +47,36 @@ public class AbyssalSharkRace extends Race {
 		addScores()
 				.gillType(Gills.FISH, +1)
 				.earType(Ears.SHARK, +1)
-				.eyeType(Eyes.DEVIL, +1)
-				//.faceType(Face.ABYSSAL_SHARK, +2)
+				.eyeType(Eyes.HUMAN, +1)
+				.eyeType(Eyes.DEVIL, +2)
+				.faceType(Face.SHARK_TEETH, +1)
+				.faceType(Face.ABYSSAL_SHARK, +2)
 				.hairType(Hair.NORMAL, +1)
 				.tongueType(Tongue.HUMAN, +1)
-				//.skinBasePattern(Skin.PATTERN_, +1) - bioluminescent
+				.tailType(Tail.SHARK, +1)
+				.tailType(Tail.ABYSSAL_SHARK, +2)
+				.legType(LowerBody.SHARK, +1)
+				.legType(LowerBody.ABYSSAL_SHARK, +2)
+				.rearType(RearBody.SHARK_FIN, +1)
+				.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
+				//.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hairColor1(ANY(AbyssalSharkHairColors), +1)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
-				.height(AT_LEAST(84), +1)
+				.height(AT_LEAST(108), +1)
 				.customRequirement("",'H-cup tits (or bigger) or 18"+ long cock',
 						function (body:BodyData):Boolean {
 							return body.biggestTitSize > 18 || body.biggestCockSize > 17
 						}, +1)
-//10
-				.rearType(RearBody.SHARK_FIN, +1)
-				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2) - done
+//19
 				.armType(Arms.SHARK, +1)
-				.armType(Arms.SEA_DRAGON, +2)
-				.legType(LowerBody.SHARK, +1)
-				//.legType(LowerBody.ABYSSAL_SHARK, +2) - done
-				.tailType(Tail.SHARK, +1)
-				//.tailType(Tail.SHARK, +1)
-				.hasPerk(PerkLib.Phylactery, +1, -10);//4+1
+				//.armType(Arms.ABYSSAL_SHARK, +2)
+				.hasPerk(PerkLib.DantianPhylactery, +1, -10);//1+1
+		
+		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
 		buildTier(10, "abyssal shark-morph")
-                .requirePerk(PerkLib.Phylactery)
+                .requirePerk(PerkLib.DantianPhylactery)
 				.buffs({
 					"str.mult": +0.90,
 					"spe.mult": +0.90,

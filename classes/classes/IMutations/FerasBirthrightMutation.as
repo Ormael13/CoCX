@@ -46,7 +46,7 @@ public class FerasBirthrightMutation extends IMutationPerkType
                 descS += "% HP regen during New moon / Half moon / Full moon";
             }
             if (pTier >= 3){
-                descS += "(doubled when in Crinos Shape)";
+                descS += " (doubled when in Crinos Shape)";
             }
             if (pTier >= 2){
                 descS += ", double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it";

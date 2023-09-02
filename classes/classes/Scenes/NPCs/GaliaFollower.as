@@ -38,6 +38,22 @@ import classes.Scenes.NPCs.Galia;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		public function GaliaCampMainMenuSlave():void {
+			clearOutput();
+			menu();
+			addButton(0, "Appearance", GaliaCampMainMenuSlaveAppearance);
+			addButton(14, "Back", camp.campSlavesMenu);
+		}
+		
+		public function GaliaCampMainMenuSlaveAppearance():void {
+			clearOutput();
+			outputText("Galia is short, only 2 feet 3 inches tall female feral imp. Her formely unkempt mane of shaggy platinum blond hair, parted by two short curved horns, is now braided into few ponytails to keep her longer then her height hair, gained from recent transformation, from keep dragged over the ground. Her eyes are solid black, save for tiny red irises.\n\n");
+			outputText("Her breasts are around DD cup sized, which given her super short figure makes them appear way bigger. Her extremely well-muscled body is nowhere to be seen replaced by much soft one, much to her unhappiness. Her hips are now much wider causing to give her slow, swaying gait when moving coupled with swelled butt, which jiggles along with each step.\n\n");
+			outputText("A pair of tiny but functional wings occasionally flap from her back. Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her chest, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.\n\n");
+			menu();
+			addButton(14, "Back", GaliaCampMainMenuSlave);
+		}  
+		
 		public function GaliaSparring():void {
 			clearOutput();
 			outputText("\"<i>Good. I was feeling a bit itchy lately. You won't hold grunge if I go a bit too 'rough' on you, right?</i>\" And without even waiting for your answer Galia starts to crack her fists.");

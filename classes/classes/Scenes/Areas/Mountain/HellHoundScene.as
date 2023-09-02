@@ -482,7 +482,9 @@ public class HellHoundScene extends BaseContent
 				}
 			}
 			outputText("You head out to camp snarling in satisfaction.[pg]");
-
+			if(player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)){
+				outputText(" Your hellhound pack is currently "+LunaFollower.HellhoundPackMember+" member strong.");
+			}
 			player.sexReward();
 			cleanupAfterCombat();
 		}

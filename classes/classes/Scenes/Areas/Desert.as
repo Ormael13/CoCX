@@ -285,8 +285,16 @@ use namespace CoC;
 					name: "gorgon",
 					label : "Gorgon",
 					kind  : 'monster',
-					when: fn.ifLevelMin(14),
+					when: fn.ifLevelMin(31),
 					call: gorgonScene.gorgonEncounter
+				}, {
+					name  : "werefoxEFemale",
+					label : "E.Werefox (F)",
+					kind : 'monster',
+					day : false,
+					when: fn.ifLevelMin(43),
+					call  : SceneLib.werefoxScene.werefoxOuterDeepDesertEncounter,
+					chance: 0.50
 				}, {
 					name: "sandworm",
 					label : "Sandworm",

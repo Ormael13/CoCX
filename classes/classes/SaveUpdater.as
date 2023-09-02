@@ -2192,7 +2192,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.058) {
 				// deepwoods, boat - handled by onUnknownStatusEffect()
 				// explore, forestOuter, forestInner, lake, desertOuter - handled by postLoadSaveObject()
-				SceneLib.exploration.counters.desertInner         = flags[kFLAGS.DISCOVERED_INNER_DESERT];
+				SceneLib.exploration.counters.desertInner         = flags[kFLAGS.WEREFOX_EXTRAS];
 				SceneLib.exploration.counters.battlefieldBoundary = flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY];
 				SceneLib.exploration.counters.battlefieldOuter    = flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD];
 				// mountainsMid - handled by postLoadSaveObject()

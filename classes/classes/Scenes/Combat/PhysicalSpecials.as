@@ -1483,10 +1483,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.haveWeaponForJouster()) {
 			var JousterDamageMod:Number = 1;
-			if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
-			if (player.isTaur() || player.isDrider()) damage *= 2*JousterDamageMod;
-			if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
-			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
+			if (player.isMeetingNaturalJousterReq()) JousterDamageMod += 2;
+            if (player.isMeetingNaturalJousterMasterGradeReq()) JousterDamageMod += 2;
+            if (player.isPolearmTypeWeapon()) JousterDamageMod *= 0.75;
+			if (player.isTaur() || player.isDrider()) damage *= 2;
+			damage *= JousterDamageMod;
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);
@@ -5341,7 +5342,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 // (Similar to the bow attack, high damage but it raises your fatigue).
 	public function bite():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		if (player.fatigue + physicalCost(25) > player.maxFatigue()) {
+		if ((player.fatigue + physicalCost(50) > player.maxFatigue()) && player.perkv1(IMutationsLib.SharkOlfactorySystemIM) < 2 && player.faceType != Face.SHARK_TEETH && player.faceType != Face.ABYSSAL_SHARK) {
 			clearOutput();
 			if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK) outputText("You're too fatigued to use your shark-like jaws!");
 			if (player.faceType == Face.ORCA) outputText("You're too fatigued to use your orca-like jaws!");
@@ -5359,7 +5360,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(25, USEFATG_PHYSICAL);
+		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) < 2 && player.faceType != Face.SHARK_TEETH && player.faceType != Face.ABYSSAL_SHARK) fatigue(50, USEFATG_PHYSICAL);
 		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You open your mouth wide, your ");
 		if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK) outputText("shark teeth extending out");
@@ -5380,10 +5381,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine damage - str modified by enemy toughness!
-		damage += player.str * 3;
-		damage += combat.scalingBonusStrength() * 0.25;
-		damage += player.spe * 3;
-		damage += combat.scalingBonusSpeed() * 0.25;
+		damage += player.str * 6;
+		damage += combat.scalingBonusStrength() * 0.5;
+		damage += player.spe * 6;
+		damage += combat.scalingBonusSpeed() * 0.5;
 		if (player.faceType == Face.ABYSSAL_SHARK) damage *= 2;
 		damage *= (monster.damagePercent() / 100);
 		damage = Math.round(damage);
@@ -5448,7 +5449,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		//Kick back to main if no damage occured!
 		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) {
-			enemyAI();
+			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4 && (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ABYSSAL_SHARK) && flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] == 0) {
+				flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 1;
+				combat.combatMenu(false);
+			}
+			else enemyAI();
 		}
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);

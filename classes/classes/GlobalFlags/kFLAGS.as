@@ -2776,7 +2776,7 @@ public static const PABLO_USED_YOUR_PUSSY:int                                   
 public static const PABLO_USED_YOUR_ASS:int                                   		= 2768;
 public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2769;
 public static const WEREWOLF_PACK_PITY_SYSTEM:int                                   = 2770;
-public static const UNKNOWN_FLAG_NUMBER_02771:int                                   = 2771;
+public static const IN_COMBAT_PLAYER_USED_SHARK_BITE:int                            = 2771;
 public static const UNKNOWN_FLAG_NUMBER_02772:int                                   = 2772;
 public static const UNKNOWN_FLAG_NUMBER_02773:int                                   = 2773;
 public static const UNKNOWN_FLAG_NUMBER_02774:int                                   = 2774;
@@ -2802,7 +2802,7 @@ public static const UNKNOWN_FLAG_NUMBER_02793:int                               
 public static const UNKNOWN_FLAG_NUMBER_02794:int                                   = 2794;
 public static const UNKNOWN_FLAG_NUMBER_02795:int                                   = 2795;
 public static const UNKNOWN_FLAG_NUMBER_02796:int                                   = 2796;
-public static const DISCOVERED_INNER_DESERT:int                                   	= 2797; // No longer used
+public static const WEREFOX_EXTRAS:int                                   			= 2797;
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene

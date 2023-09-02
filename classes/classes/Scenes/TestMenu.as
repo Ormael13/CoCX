@@ -114,7 +114,7 @@ public class TestMenu extends BaseContent
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		bd.add("Neko Items", giveNekoItems, "All new neko items from Nekobake Inn doc");
-		bd.add("Desert Berry", desertBerryTest, "Testing effects of Desert Berry consumption.");
+		bd.add("DantianPhylactery", dantianPhylacteryTest, "Getting or loosing Dantian Phylactery.");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 
@@ -311,20 +311,10 @@ public class TestMenu extends BaseContent
 		inventory.takeItem(undergarments.BN_SKIRT, curry(NonEquipmentMenu, 2));
 		inventory.takeItem(necklaces.CATBELL, curry(NonEquipmentMenu, 2));
 	}
-	public function desertBerryTest():void {
-			var ngM:Number = (player.newGamePlusMod() + 1);
-			var bonusStats:Number = 0;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
-			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
-			if (!player.hasPerk(PerkLib.Vulpesthropy)) player.createPerk(PerkLib.Vulpesthropy,bonusStats,0,0,0);
-			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.1*ngM,'tou.mult': bonusStats*ngM,'spe.mult': bonusStats*0.4*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
-			player.trainStat('str', +5, 100);
-			player.trainStat('tou', +5, 100);
-			player.trainStat('spe', +5, 100);
-			player.trainStat('wis', +5, 100);
-			statScreenRefresh();
+	public function dantianPhylacteryTest():void {
+		if (player.hasPerk(PerkLib.DantianPhylactery)) player.removePerk(PerkLib.DantianPhylactery);
+		else player.createPerk(PerkLib.DantianPhylactery,0,0,0,0);
+		doNext(SoulforceCheats);
 	}
 	public function fixShards():void {
 		var cnt:int = 0;
@@ -1714,22 +1704,16 @@ public class TestMenu extends BaseContent
 		if (page == 1) {
 			addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 			addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
-			//addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
-			addButton(2, "CyclopTF", AddTrollFig).hint("Add 1 cyclop TF.");
-			//addButton(3, "", ).hint("Add 1 .");
-			//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
-			//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
-			addButton(3, "CrimsonJade", AddCrimsonJade).hint("Add 1 Crimson Jade.");
-			addButton(4, "R.Manuscript", AddRedManuscript).hint("Add 1 Red Manuscript.");
+			addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
+			addButton(3, "CyclopTF", AddEyedrop).hint("Add 1 cyclop TF.");
+			//addButton(4, "", ).hint("Add 1 .");
 			addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
-			addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
-			addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
-			addButton(8, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
-			addButton(9, "A.R.CON", AddArcaneRegenConcotion).hint("Add 1 Arcane Regen Concotion.");
-			addButton(10, "White B.", AddWhiteBook).hint("Add 1 White Book.");
-			addButton(11, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
-			addButton(12, "Grey B.", AddGreyBook).hint("Add 1 Grey Book.");
-			addButton(13, "-2-", NonEquipmentMenu, page + 1);
+			addButton(6, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+			addButton(7, "AbyssalSTooth", AddAbyssalSharkTooth).hint("Add 1 Abyssal Shark Tooth.");
+			addButton(10, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
+			//addButton(11, "", ).hint("Add 1 .");
+			addButton(12, "-2-", NonEquipmentMenu, page + 1);
+			addButton(13, "-3-", NonEquipmentMenu, page + 2);
 			addButton(14, "Back", SoulforceCheats);
 		}
 		if (page == 2) {
@@ -1745,17 +1729,30 @@ public class TestMenu extends BaseContent
 			addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
 			addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (Frost wyrm TF).");
 			addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
-			addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
-			//addButton(11, "", ).hint("Add 1 .");
-			addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
-			addButton(13, "-1-", NonEquipmentMenu, page - 1);
+			addButton(12, "-1-", NonEquipmentMenu, page - 1);
+			addButton(13, "-3-", NonEquipmentMenu, page + 1);
+			addButton(14, "Back", SoulforceCheats);
+		}
+		if (page == 3) {
+			addButton(0, "CrimsonJade", AddCrimsonJade).hint("Add 1 Crimson Jade.");
+			addButton(1, "R.Manuscript", AddRedManuscript).hint("Add 1 Red Manuscript.");
+			addButton(2, "White B.", AddWhiteBook).hint("Add 1 White Book.");
+			addButton(3, "Black B.", AddBlackBook).hint("Add 1 Black Book.");
+			addButton(4, "Grey B.", AddGreyBook).hint("Add 1 Grey Book.");
+			addButton(5, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
+			addButton(6, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
+			addButton(7, "A.R.CON", AddArcaneRegenConcotion).hint("Add 1 Arcane Regen Concotion.");
+			addButton(10, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
+			addButton(11, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
+			addButton(12, "-1-", NonEquipmentMenu, page - 2);
+			addButton(13, "-2-", NonEquipmentMenu, page - 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
 	}
 
 	private function addConsumable(consumable: Consumable): void {
 		outputText("\n\n<b>(Gained 1 " + consumable.longName + "!)</b>\n\n");
-		inventory.takeItem(consumable, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(consumable, curry(NonEquipmentMenu, 3));
 	}
 
 	public function MaterialMenu(page:int = 1):void {
@@ -1961,8 +1958,10 @@ public class TestMenu extends BaseContent
 		inventory.takeItem(consumables.FREFISH, curry(NonEquipmentMenu, 2));
 	}
 	public function AddTrollFig():void {
-		//outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
-		//inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
+		outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
+		inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
+	}
+	public function AddEyedrop():void {
 		outputText("\n\n<b>(Gained 1 Cyclop TF)</b>\n\n");
 		inventory.takeItem(consumables.EYEDROP, curry(NonEquipmentMenu, 1));
 	}
@@ -2154,15 +2153,15 @@ public class TestMenu extends BaseContent
 	}
 	public function AddVeryDilutedArcaneRegenConcotion():void {
 		outputText("\n\n<b>(Gained 1 very diluted Arcane Regen Concotion!)</b>\n\n");
-		inventory.takeItem(consumables.VDARCON, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.VDARCON, curry(NonEquipmentMenu, 3));
 	}
 	public function AddDilutedArcaneRegenConcotion():void {
 		outputText("\n\n<b>(Gained 1 diluted Arcane Regen Concotion!)</b>\n\n");
-		inventory.takeItem(consumables.D_ARCON, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.D_ARCON, curry(NonEquipmentMenu, 3));
 	}
 	public function AddArcaneRegenConcotion():void {
 		outputText("\n\n<b>(Gained 1 Arcane Regen Concotion!)</b>\n\n");
-		inventory.takeItem(consumables.AREGCON, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.AREGCON, curry(NonEquipmentMenu, 3));
 	}
 	public function AddSoulBlastManual():void {
 		outputText("\n\n<b>(Gained 1 Soul Blast Manual!)</b>\n\n");
@@ -2170,7 +2169,11 @@ public class TestMenu extends BaseContent
 	}
 	public function AddDisplacerFruit():void {
 		outputText("\n\n<b>(Gained 1 Displacer Fruit!)</b>\n\n");
-		inventory.takeItem(consumables.ALICORN, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.D_FRUIT, curry(NonEquipmentMenu, 1));
+	}
+	public function AddAbyssalSharkTooth():void {
+		outputText("\n\n<b>(Gained 1 Abyssal Shark Tooth!)</b>\n\n");
+		inventory.takeItem(consumables.ASTOOTH, curry(NonEquipmentMenu, 1));
 	}
 	public function AddAlicornium():void {
 		outputText("\n\n<b>(Gained 1 Alicornium!)</b>\n\n");
@@ -2347,23 +2350,23 @@ public class TestMenu extends BaseContent
 	}
 	public function AddWhiteBook():void {
 		outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");
-		inventory.takeItem(consumables.W__BOOK, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.W__BOOK, curry(NonEquipmentMenu, 3));
 	}
 	public function AddBlackBook():void {
 		outputText("\n\n<b>(Gained 1 Black Book!)</b>\n\n");
-		inventory.takeItem(consumables.B__BOOK, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.B__BOOK, curry(NonEquipmentMenu, 3));
 	}
 	public function AddGreyBook():void {
 		outputText("\n\n<b>(Gained 1 Grey Book!)</b>\n\n");
-		inventory.takeItem(consumables.G__BOOK, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.G__BOOK, curry(NonEquipmentMenu, 3));
 	}
 	public function AddRedManuscript():void {
 		outputText("\n\n<b>(Gained 1 Red Manuscript!)</b>\n\n");
-		inventory.takeItem(consumables.RMANUSC, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.RMANUSC, curry(NonEquipmentMenu, 3));
 	}
 	public function AddCrimsonJade():void {
 		outputText("\n\n<b>(Gained 1 Crimson Jade!)</b>\n\n");
-		inventory.takeItem(consumables.CRIMS_J, curry(NonEquipmentMenu, 1));
+		inventory.takeItem(consumables.CRIMS_J, curry(NonEquipmentMenu, 3));
 	}
 	public function AddThePearls():void {
 		outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");
@@ -2375,7 +2378,7 @@ public class TestMenu extends BaseContent
 	}
 	public function AddThePearls2():void {
 		outputText("\n\n");
-		inventory.takeItem(consumables.E7PEARL, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(consumables.E7PEARL, curry(NonEquipmentMenu, 3));
 	}
 	public function AddWood():void {
 		outputText("\n\n<b>(Gained 100 Wood!)</b>");

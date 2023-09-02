@@ -420,6 +420,7 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.TearsOfDenial) && player.statusEffectv1(StatusEffects.TearsOfDenial) == 1) {
 			player.addStatusValue(StatusEffects.TearsOfDenial, 1, -1);
 			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To [themonster] dismay you get back up, still undefeated and ready to keep fighting.");
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) player.removeStatusEffect(StatusEffects.CombatWounds);
 			player.HP = player.maxOverHP();
 			player.lust = player.minLust();
 			combatMenu(false);
@@ -746,6 +747,7 @@ public class Combat extends BaseContent {
 			flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] = 0;
 			if (player.hasPerk(PerkLib.FirstAttackSkeletons)) flags[kFLAGS.IN_COMBAT_PLAYER_SKELETONS_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
+			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) flags[kFLAGS.IN_COMBAT_PLAYER_USED_SHARK_BITE] = 0;
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
@@ -753,6 +755,7 @@ public class Combat extends BaseContent {
 				if (player.soulforce < (player.maxSoulforce() * 0.05)) player.removeStatusEffect(StatusEffects.FieryRage);
 				else EngineCore.SoulforceChange(Math.round(player.maxSoulforce() * 0.05));
 			}
+			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.removeStatusEffect(StatusEffects.VampThirstStacksHPMana);
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -1317,6 +1320,10 @@ public class Combat extends BaseContent {
         power += (player.maxOverHP()*0.2);
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         Math.round(power);
+		if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+			if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.04) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.04);
+			else player.removeStatusEffect(StatusEffects.CombatWounds);
+		}
         HPChange(power,false);
         outputText("You apply the poultice, your wounds closing at high speed. Healed for ");
         CommasForDigits(power*-1);
@@ -15399,10 +15406,11 @@ public function greatDive():void {
         }
         if (player.haveWeaponForJouster()) {
             var JousterDamageMod:Number = 1;
-            if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
-            if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
-            if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
-
+            if (player.isMeetingNaturalJousterReq()) JousterDamageMod += 2;
+            if (player.isMeetingNaturalJousterMasterGradeReq()) JousterDamageMod += 2;
+            if (player.isPolearmTypeWeapon()) JousterDamageMod *= 0.75;
+			if (player.thirdtierWingsForWingSlap()) JousterDamageMod *= 2;
+			damage *= JousterDamageMod;
         }
         damage *= (1 + PASPAS());
     } else {
@@ -16524,10 +16532,7 @@ public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
     var BleedMod:Number = 1.0;
     if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.25;
     if (player.hasPerk(PerkLib.KingOfTheJungle)) BleedMod += 0.2
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += 0.25;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.25;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.25;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += (0.25 * player.perkv1(IMutationsLib.SharkOlfactorySystemIM));
     if (isARacialAbility) BleedMod *= combat.RacialParagonAbilityBoost();
     return BleedMod;
 }
@@ -16775,4 +16780,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

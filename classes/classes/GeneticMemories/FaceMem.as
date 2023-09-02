@@ -649,6 +649,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const ABYSSAL_SHARK:int = _partid++;
+		EnumValue.add(Memories, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+			id: "Abyssal Shark Face",
+			name: "Abyssal Shark Face",
+			cost: 100,
+			title: "A. Shark Face",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceAbyssalShark;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

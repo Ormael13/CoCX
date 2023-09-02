@@ -444,6 +444,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			lunaJealousy(-100);
 			lunaAffection(5);
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.05) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.05);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
+			}
 			HPChange(Math.round(player.maxHP() * .1), true);
 			Nursed = true;
 			NursedCooldown = 24;

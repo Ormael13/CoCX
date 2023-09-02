@@ -432,6 +432,25 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.CooldownSonicScream)) {
 				bd.disable("<b>You need more time before you can use Sonic scream again.</b>\n\n");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			//Vampire Thirst Stacks To Health/Mana
+			bd = buttons.add("Health Tap (1)", curry(VampireThirstStacksToHealth, 1), "Draw on your tainted blood power to heal yourself. \n");
+			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana) && player.statusEffectv1(StatusEffects.VampThirstStacksHPMana) > 0) {
+				bd.disable("<b>You can't use Health Tap more than once a turn.</b>\n\n");
+			}
+			bd = buttons.add("Mana Tap (1)", curry(VampireThirstStacksToMana, 1), "Draw on your tainted blood power to recover some of your magic energies. \n");
+			if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana) && player.statusEffectv2(StatusEffects.VampThirstStacksHPMana) > 0) {
+				bd.disable("<b>You can't use Mana Tap more than once a turn.</b>\n\n");
+			}
+			if (player.statusEffectv1(StatusEffects.VampireThirst) >= 5) {
+				bd = buttons.add("Health Tap (5)", curry(VampireThirstStacksToHealth, 5), "Draw on your tainted blood power to heal yourself. \n");
+				if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana) && player.statusEffectv1(StatusEffects.VampThirstStacksHPMana) > 0) {
+					bd.disable("<b>You can't use Health Tap more than once a turn.</b>\n\n");
+				}
+				bd = buttons.add("Mana Tap (5)", curry(VampireThirstStacksToMana, 5), "Draw on your tainted blood power to recover some of your magic energies. \n");
+				if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana) && player.statusEffectv2(StatusEffects.VampThirstStacksHPMana) > 0) {
+					bd.disable("<b>You can't use Mana Tap more than once a turn.</b>\n\n");
+				}
+			}
 		}
 		if (player.isRaceCached(Races.COUATL) && player.isFlying()) {
 			bd = buttons.add("Hurricane", Hurricane).hint("Kickstart a hurricane unleashing violent winds on your opponent. The hurricane intensifies every round and may even stun your victim\n", "Hurricane");
@@ -703,7 +722,7 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 			}
 		}
-		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isRaceCached(Races.SHARK)) {
+		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isAnyRaceCached(Races.SHARK, Races.ABYSSAL_SHARK)) {
 			bd = buttons.add("Blood Frenzy", bloodFrenzy);
 			if (combat.MonsterIsBleeding()) {
 				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");
@@ -5331,6 +5350,28 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(playerMenu);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+//Vampire Thirst Stacks To Health/Mana
+	public function VampireThirstStacksToHealth(stack:Number = 1):void {
+		clearOutput();
+		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		thirst.modSatiety(-stack);
+		outputText("You call on the power of your tainted blood (Lia is already notified to write in future some fancy text here on converted taken blood into HP).");
+		if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.addStatusValue(StatusEffects.VampThirstStacksHPMana,1,1);
+		else player.createStatusEffect(StatusEffects.VampThirstStacksHPMana,1,0,0,0);
+		HPChange(Math.round(player.maxHP()*0.05*stack), false);
+		combat.combatMenu(false);
+	}
+	public function VampireThirstStacksToMana(stack:Number = 1):void {
+		clearOutput();
+		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		thirst.modSatiety(-stack);
+		outputText("You call on the power of your tainted blood (Lia is already notified to write in future some fancy text here on converted taken blood into Mana).");
+		if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.addStatusValue(StatusEffects.VampThirstStacksHPMana,2,1);
+		else player.createStatusEffect(StatusEffects.VampThirstStacksHPMana,0,1,0,0);
+		EngineCore.ManaChange(Math.round(player.maxMana()*0.05*stack));
+		combat.combatMenu(false);
 	}
 
 	public function Hurricane():void {
