@@ -317,14 +317,16 @@ use namespace CoC;
 				},
 				chance: lakeChance,
 				call: SceneLib.dianaScene.postNameEnc
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
 
 		//Explore Lake

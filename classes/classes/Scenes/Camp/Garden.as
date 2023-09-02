@@ -736,8 +736,10 @@ import classes.Scenes.SceneLib;
 		else addButtonDisabled(4, "Blade fern", "You not have any herb of this type in herb bag.");
 		if (IngrediantBagSlot06 > 0) addButton(5, "Alraune nectar", putOutHerbFromHerbBag, CoC.instance.consumables.RAUNENECT).hint("Make sure to have free space in backapck to put it in or it would be lost.");
 		else addButtonDisabled(5, "Alraune nectar", "You not have any herb of this type in herb bag.");
-		if (IngrediantBagSlot07 > 0) addButton(6, "Ginseng", putOutHerbFromHerbBag, CoC.instance.consumables.GINSENG).hint("Make sure to have free space in backapck to put it in or it would be lost.");
-		else addButtonDisabled(6, "Ginseng", "You not have any herb of this type in herb bag.");
+		if (IngrediantBagSlot07Cap > 0) {
+			if (IngrediantBagSlot07 > 0) addButton(6, "Ginseng", putOutHerbFromHerbBag, CoC.instance.consumables.GINSENG).hint("Make sure to have free space in backapck to put it in or it would be lost.");
+			else addButtonDisabled(6, "Ginseng", "You not have any herb of this type in herb bag.");
+		}
 		addButton(14, "Back", accessGarden);
 	}
 	private function putOutHerbFromHerbBag(ItemID:SimpleConsumable):void {
@@ -783,6 +785,10 @@ import classes.Scenes.SceneLib;
 		else addButton(3, "Ironweed", Seed1, 4).hint("Plant new seeds.");
 		if (IngrediantBagSlot05 == 0) addButtonDisabled(4, "Blade fern", "You lack a plant sample in ingredient bag to get seeds from.");
 		else addButton(4, "Blade fern", Seed1, 5).hint("Plant new seeds.");
+		if (IngrediantBagSlot07Cap > 0) {
+			if (IngrediantBagSlot07 == 0) addButtonDisabled(5, "Ginseng", "You lack a plant sample in ingredient bag to get seeds from.");
+			else addButton(5, "Ginseng", Seed1, 6).hint("Plant new seeds.");
+		}
 		addButton(14, "Back", accessGarden).hint("Go back to garden menu.");
 	}
 	private function Seed1(Item:Number):void {
@@ -849,6 +855,7 @@ import classes.Scenes.SceneLib;
 		if (Item == 3) herb = "snakebane";
 		if (Item == 4) herb = "ironweed";
 		if (Item == 5) herb = "bladefern";
+		if (Item == 6) herb = "ginseng";
 		switch (plot) {
 			case 1:
 				GardenSlot01 = herb;
@@ -926,6 +933,10 @@ import classes.Scenes.SceneLib;
 		if (Item == 5) {
 			outputText("bladefern");
 			IngrediantBagSlot05 -= 1;
+		}
+		if (Item == 6) {
+			outputText("ginseng");
+			IngrediantBagSlot07 -= 1;
 		}
 		outputText("into the fertile soil. It should grow back into several or more plants within a few days. Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
 		var FE:Number = 20 + player.level;
@@ -1025,6 +1036,13 @@ import classes.Scenes.SceneLib;
 			IngrediantBagSlot05 += 5;
 			if (IngrediantBagSlot05 > IngrediantBagSlot05Cap) {
 				IngrediantBagSlot05 -= 5;
+				plot = 0;
+			}
+		}
+		if (IngredientName == "ginseng") {
+			IngrediantBagSlot07 += 5;
+			if (IngrediantBagSlot07 > IngrediantBagSlot07Cap) {
+				IngrediantBagSlot07 -= 5;
 				plot = 0;
 			}
 		}

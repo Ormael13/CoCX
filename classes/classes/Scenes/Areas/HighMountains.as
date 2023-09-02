@@ -149,14 +149,16 @@ public class HighMountains extends BaseContent {
                 return !player.blockingBodyTransformations();
             },
             call: nekobakeInn.encounterNekobakeInn
-        }/*, {
+        }, {
             name: "demonProjects",
+			label : "DemLab Subject",
+			kind  : 'monster',
             chance: 0.2,
             when: function ():Boolean {
-                return DemonLab.MainAreaComplete >= 4;
+                return SceneLib.exploration.demonLabProjectEncountersEnabled();
             },
             call: SceneLib.exploration.demonLabProjectEncounters
-        }*/);
+        });
     }
 
     public function discover():void {

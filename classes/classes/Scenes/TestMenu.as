@@ -2678,4 +2678,4 @@ public class TestMenu extends BaseContent
 		else SceneLib.tyrantia.firstEncounter();
 	}
 	}
-}
+}

@@ -309,14 +309,16 @@ use namespace CoC;
 				},
 				chance: 0.5,
 				call: SceneLib.sheilaScene.sheilaEncounterRouter
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
 		public function explorePlains():void {
 			explorer.prepareArea(explorationEncounter);

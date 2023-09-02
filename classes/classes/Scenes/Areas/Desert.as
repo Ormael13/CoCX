@@ -272,14 +272,16 @@ use namespace CoC;
 					kind  : 'item',
 					chance: 0.3,
 					call  : findDesertLoot3
-				}/*, {
+				}, {
 					name: "demonProjects",
+					label : "DemLab Subject",
+					kind  : 'monster',
 					chance: 0.2,
 					when: function ():Boolean {
-						return DemonLab.MainAreaComplete >= 4;
+						return SceneLib.exploration.demonLabProjectEncountersEnabled();
 					},
 					call: SceneLib.exploration.demonLabProjectEncounters
-				}*/);
+				});
 			_desertInnerEncounter = Encounters.group("inner desert",
 				{
 					name: "gorgon",
@@ -390,14 +392,16 @@ use namespace CoC;
 					kind  : 'event',
 					chance: 0.2,
 					call  : findDesertRuins
-				}/*, {
+				}, {
 					name: "demonProjects",
+					label : "DemLab Subject",
+					kind  : 'monster',
 					chance: 0.2,
 					when: function ():Boolean {
-						return DemonLab.MainAreaComplete >= 4;
+						return SceneLib.exploration.demonLabProjectEncountersEnabled();
 					},
 					call: SceneLib.exploration.demonLabProjectEncounters
-				}*/);
+				});
 		}
 		//Explore desert
 		public function exploreOuterDesert():void

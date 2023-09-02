@@ -15,6 +15,7 @@ import classes.Scenes.Areas.Forest.WapsHuntress;
 import classes.Scenes.Areas.Forest.WaspAssassin;
 import classes.Scenes.Areas.Forest.WaspGirl;
 import classes.Scenes.Areas.Ocean.Scylla;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Dungeons.DemonLab.ProjectFlameSpreader;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
@@ -821,6 +822,9 @@ public class Exploration extends BaseContent implements SaveableState
 			outputText("A high-ranked angeloid wings out of the sky and attacks!");
 			player.createStatusEffect(StatusEffects.AngelsChooser, 3, 0, 0, 0);
 			startCombat(new Angeloid());
+		}
+		public function demonLabProjectEncountersEnabled():Boolean {
+			return DemonLab.MainAreaComplete >= 4;
 		}
 		public function demonLabProjectEncounters():void {
 			clearOutput();

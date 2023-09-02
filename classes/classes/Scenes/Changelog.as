@@ -158,6 +158,9 @@ public class Changelog extends BaseContent
 			outputText("-Smol fixes, and adds Super Human stat buff. (Our Godfather-Emperor of Gigachad Humanity - Jtecx)\n");
 			outputText("-Shark Olfactory System (Primitive) would lower cost of shark bite to 0 fatigue, Shark Olfactory System (Final Form) would now allow to use shark bite once a turn without ending combat turn.\n");
 			outputText("-Shark / Orce / Vicious / Tripple Bite specials fatigue cost and damage been doubled.\n");
+			outputText("-New range weapon (by Ormael): Twin Six Shooter - can be gained by combining 2x Six Shooter weapon. Cost 1160 gems. Base atk is 20 and ammo clip size 6. It's Dual Firearm type range weapon.\n");
+			outputText("-After finishing Demon Laboratory dungeon some of projects kept there would start to roam Mareth giving PC chance to encounter 3 different boss tier enemies. (Snas)\n");
+			outputText("-For all those that wanted PC marry some bit rough pseudo-dragoness there is possibilty now to do this. Added marriage option to Kiha. (Snas)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -165,17 +168,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");

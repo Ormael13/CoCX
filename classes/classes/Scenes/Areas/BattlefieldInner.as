@@ -78,14 +78,16 @@ public class BattlefieldInner extends BaseContent
 			name: "vengefulAparitions",
 			chance: 0.4,
 			call: battlefieldEnemiesScene.encounterVengefulApparitions
-		}/*, {
+		}, {
 			name: "demonProjects",
+			label : "DemLab Subject",
+			kind  : 'monster',
 			chance: 0.2,
 			when: function ():Boolean {
-				return DemonLab.MainAreaComplete >= 4;
+				return SceneLib.exploration.demonLabProjectEncountersEnabled();
 			},
 			call: SceneLib.exploration.demonLabProjectEncounters
-		}*/);
+		});
 	}
 
 	public function isDiscovered():Boolean {

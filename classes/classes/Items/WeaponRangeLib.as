@@ -87,6 +87,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const TRSXBOW:WeaponRange = new WeaponRange("TrSXBow", "Tra.S.Xbow", "training soul crossbow", "a training soul crossbow", "shot", 1, 50, "This crossbow was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal range weapon.", WT_CROSSBOW).withBuffs({'rangedaccuracy':+5}) as WeaponRange;
 		public const TTKNIFE:WeaponRange = new WeaponRange("TTKnife", "T.ThrowingKnife", "topaz throwing knife", "a topaz throwing knife", "shot", 3, 300, "A small knife made of eversteel and richly decorated with yellow topazes and copper engravings that could be thrown. The magic within this shining blade will oversaturate the metal with electricity when charged with magic. You can carry up to 15 on you and need to retrieve them after battles.", "Throwing");
 		public const TWINGRA:TwinGrakaturd = new TwinGrakaturd();
+		public const TWINSIXS:TwinSixShooter = new TwinSixShooter();
 		public const WARDBOW:WeaponRange = new WeaponRange("WardBow", "WardensBow", "Warden’s bow", "a Warden’s bow", "shot", 20, 2000, "Recurve bows like this serve as a compromise for a shortbow’s accuracy and ease of use, with a longbow’s devastating stopping power.  The sacred wood quietly hums Yggdrasil's song, unheard by all but it’s wielder.", WT_BOW).withBuffs({
 			'rangedaccuracy':+10,
 			'psoulskillpower':+0.4,

@@ -271,14 +271,16 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}/*, {
+			}, {
 				name: "demonProjects",
-						chance: 0.2,
-						when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+				label : "DemLab Subject",
+				kind  : 'monster',
+				chance: 0.2,
+				when: function ():Boolean {
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 			_lowmountainEncounter = Encounters.group("low mountains",
 					SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 				//Helia monogamy fucks
@@ -485,14 +487,16 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 			_midMountainEncounter = Encounters.group("mountain", {
 				name: "demonlab",
 				label : "Demon Laboratory",
@@ -647,14 +651,16 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
 		public function findMindbreakerChance():Number {
 			var fMC:Number = 5;

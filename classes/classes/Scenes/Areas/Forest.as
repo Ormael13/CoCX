@@ -271,14 +271,16 @@ use namespace CoC;
 							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
 						},
 						chance: forestChance4
-					}/*, {
+					}, {
 						name: "demonProjects",
+						label : "DemLab Subject",
+						kind  : 'monster',
 						chance: 0.2,
 						when: function ():Boolean {
-							return DemonLab.MainAreaComplete >= 4;
+							return SceneLib.exploration.demonLabProjectEncountersEnabled();
 						},
 						call: SceneLib.exploration.demonLabProjectEncounters
-					}*/);
+					});
 			_forestInnerEncounter = Encounters.group("forest",
 					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
 					{
@@ -537,14 +539,16 @@ use namespace CoC;
 						when: fn.ifLevelMin(12),
 						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
 						chance: 0.50
-					}/*, {
+					}, {
 						name: "demonProjects",
+						label : "DemLab Subject",
+						kind  : 'monster',
 						chance: 0.2,
 						when: function ():Boolean {
-							return DemonLab.MainAreaComplete >= 4;
+							return SceneLib.exploration.demonLabProjectEncountersEnabled();
 						},
 						call: SceneLib.exploration.demonLabProjectEncounters
-					}*/);
+					});
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
 				name: "shrine",
 				label : "Shrine",
@@ -815,14 +819,16 @@ use namespace CoC;
 				kind : 'item',
 				call  : findHPill,
 				chance: 0.20
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
 
 		public function forestChance():Number {

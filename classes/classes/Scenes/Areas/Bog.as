@@ -123,14 +123,16 @@ public class Bog extends BaseContent
 				},
 				chance: bogChance,
 				call: zenjiEncounterFn
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
 		
 		public const areaLevel:int = 23;

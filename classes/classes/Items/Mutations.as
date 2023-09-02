@@ -5257,12 +5257,12 @@ public final class Mutations extends MutationsHelper {
 					outputText("[pg]");
 					transformations.RearBodyAbyssalSharkFin.applyEffect();
 					changes++;
-				}/*
+				}
 				if (player.arms.type != Arms.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.ArmsAbyssalShark.applyEffect();
 					changes++;
-				}*/
+				}
 				if (player.tailType != Tail.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.TailAbyssalShark.applyEffect();
