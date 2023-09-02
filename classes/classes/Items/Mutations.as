@@ -5276,12 +5276,12 @@ public final class Mutations extends MutationsHelper {
 					outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
 					outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");
 					changes++;
-				}/*
-				if (!player.skin.hasWhiteBlackVeins() && changes < changeLimit && rand(3) == 0) {
+				}
+				if (!player.skin.hasBioluminescence() && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
-					transformations.SkinPatternTigerSharkStripes.applyEffect();
+					transformations.SkinPatternBioluminescence.applyEffect();
 					changes++;
-				}*/
+				}
 				if (player.basetallness < 132 && changes < changeLimit && rand(3) == 0) {
 					var heightGain:int = rand(15) + 5;
 					//Flavor texts.  Flavored like 1950's cigarettes. Yum.

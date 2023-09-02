@@ -572,6 +572,9 @@ public class Skin extends SaveableBodyPart {
 	public function hasGlyphTattoo():Boolean {
 		return base.pattern == PATTERN_GLYPH_TATTOO;
 	}
+	public function hasBioluminescence():Boolean {
+		return base.pattern == PATTERN_BIOLUMINESCENCE;
+	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;
 		base.restore(keepTone);

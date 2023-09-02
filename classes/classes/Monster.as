@@ -3859,31 +3859,31 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.LegendaryLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.5);
 			if (hasPerk(PerkLib.MythicalLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.65);
 			if (hasPerk(PerkLib.EnemyHugeType)) {
-				this.strStat.core.value += Math.round(this.strStat.core.value * 0.1);
-				this.touStat.core.value += Math.round(this.touStat.core.value * 0.1);
-				this.speStat.core.value += Math.round(this.speStat.core.value * 0.05);
-				weaponAttack += Math.round(weaponAttack * 0.05);
-				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 0.05);
-				armorDef += Math.round(armorDef * 0.05);
-				armorMDef += Math.round(armorMDef * 0.05);
+				this.strStat.core.value += Math.round(this.strStat.core.value * 0.25);
+				this.touStat.core.value += Math.round(this.touStat.core.value * 0.3);
+				this.speStat.core.value += Math.round(this.speStat.core.value * 0.2);
+				weaponAttack += Math.round(weaponAttack * 0.2);
+				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 0.2);
+				armorDef += Math.round(armorDef * 0.1);
+				armorMDef += Math.round(armorMDef * 0.1);
 			}
 			if (hasPerk(PerkLib.EnemyGigantType)) {
-				this.strStat.core.value += Math.round(this.strStat.core.value * 0.25);
-				this.touStat.core.value += Math.round(this.touStat.core.value * 0.25);
-				this.speStat.core.value += Math.round(this.speStat.core.value * 0.1);
-				weaponAttack += Math.round(weaponAttack * 0.15);
-				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 0.15);
-				armorDef += Math.round(armorDef * 0.15);
-				armorMDef += Math.round(armorMDef * 0.15);
-			}
-			if (hasPerk(PerkLib.EnemyColossalType)) {
-				this.strStat.core.value += Math.round(this.strStat.core.value * 0.75);
-				this.touStat.core.value += Math.round(this.touStat.core.value * 0.75);
-				this.speStat.core.value += Math.round(this.speStat.core.value * 0.15);
-				weaponAttack += Math.round(weaponAttack * 0.5);
-				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 0.5);
+				this.strStat.core.value += Math.round(this.strStat.core.value * 1.25);
+				this.touStat.core.value += Math.round(this.touStat.core.value * 1.5);
+				this.speStat.core.value += Math.round(this.speStat.core.value * 0.8);
+				weaponAttack *= 2;
+				if (weaponRangeAttack > 0) weaponRangeAttack *= 2;
 				armorDef += Math.round(armorDef * 0.5);
 				armorMDef += Math.round(armorMDef * 0.5);
+			}
+			if (hasPerk(PerkLib.EnemyColossalType)) {
+				this.strStat.core.value += Math.round(this.strStat.core.value * 6.25);
+				this.touStat.core.value += Math.round(this.touStat.core.value * 7.5);
+				this.speStat.core.value += Math.round(this.speStat.core.value * 3.2);
+				weaponAttack += Math.round(weaponAttack * 5);
+				if (weaponRangeAttack > 0) weaponRangeAttack += Math.round(weaponRangeAttack * 5);
+				armorDef += Math.round(armorDef * 2.5);
+				armorMDef += Math.round(armorMDef * 2.5);
 			}
 			if (level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) this.lust *= 0.1;

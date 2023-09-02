@@ -5884,8 +5884,37 @@ use namespace CoC;
 				trace( "increaseEachCock at: " + i);
 				totalGrowth += growCock(i as Number, lengthDelta);
 			}
-
 			return totalGrowth;
+		}
+		
+		public function differentTypesOfCocks():Number
+		{
+			var dTOC:Number = 0;
+			if (anemoneCocks() > 0) dTOC += 1;
+			if (foamingCocks() > 0) dTOC += 1;
+			if (catCocks() > 0) dTOC += 1;
+			if (demonCocks() > 0) dTOC += 1;
+			if (displacerCocks() > 0) dTOC += 1;
+			if (eldritchCocks() > 0) dTOC += 1;
+			if (dogCocks() > 0) dTOC += 1;
+			if (dragonCocks() > 0) dTOC += 1;
+			if (foxCocks() > 0) dTOC += 1;
+			if (wolfCocks() > 0) dTOC += 1;
+			if (horseCocks() > 0) dTOC += 1;
+			if (kirinCocks() > 0) dTOC += 1;
+			if (kangaCocks() > 0) dTOC += 1;
+			if (lizardCocks() > 0) dTOC += 1;
+			if (cavewyrmCocks() > 0) dTOC += 1;
+			if (raijuCocks() > 0) dTOC += 1;
+			if (pigCocks() > 0) dTOC += 1;
+			if (normalCocks() > 0) dTOC += 1;
+			if (tentacleCocks() > 0) dTOC += 1;
+			if ((tentacleCocks() - stamenCocks()) > 0) dTOC += 1;
+			if (avianCocks() > 0) dTOC += 1;
+			if (gryphonCocks() > 0) dTOC += 1;
+			if (beeCocks() > 0) dTOC += 1;
+			if (insectCocks() > 0) dTOC += 1;
+			return dTOC;
 		}
 
 		// Attempts to put the player in heat (or deeper in heat).

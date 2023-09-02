@@ -1489,6 +1489,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.02 * (chance - 100));
+			if (player.hasPerk(PerkLib.BroadSelection) && player.differentTypesOfCocks() > 1) damagemultiplier += (0.25 * player.differentTypesOfCocks());
 			if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;

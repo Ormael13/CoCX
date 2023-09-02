@@ -161,9 +161,9 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Ormael): Twin Six Shooter - can be gained by combining 2x Six Shooter weapon. Cost 1160 gems. Base atk is 20 and ammo clip size 6. It's Dual Firearm type range weapon.\n");
 			outputText("-After finishing Demon Laboratory dungeon some of projects kept there would start to roam Mareth giving PC chance to encounter 3 different boss tier enemies. (Snas)\n");
 			outputText("-For all those that wanted PC marry some bit rough pseudo-dragoness there is possibilty now to do this. Added marriage option to Kiha. (Snas)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 0 libido lvl-up perk: Broad Selection. Req. Job: Seducer perk and at least two different types of penises. Effect: Increasing the Tease damage by 25% for each different type of penis that you have.\n");
+			outputText("-New melee weapon (by Ormael): Beautiful Whip - obtained by finding it at Lake. 5 atk, costing 400 gems, can't be used above 33 (+ corruption tolerance bonus) corruption and the less corruption PC have the bigger bonus to atk (max 7)\n");
+			outputText("-Enemy of gigantic/collosal type hit by AoE spell would take increased damage as if it was used vs group enemy, hit by Grey AoE spells with Convergence/Super Convergence it would strike 3x more times (6/9 times).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -176,6 +176,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
@@ -238,9 +250,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -270,7 +280,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

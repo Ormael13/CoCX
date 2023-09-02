@@ -489,16 +489,16 @@ public class PerkLib
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]")
 				.withBuffs({'maxlust_base':+135});
-
+		public static const BroadSelection:PerkType = mk("Broad Selection", "Broad Selection",
+				"Increasing the Tease damage by 25% for each different type of penis that you have.",
+				"You've chosen the 'Broad Selection' perk, increasing the Tease damage by 25% for each different type of penis that you have.");
+		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -6489,6 +6489,10 @@ public class PerkLib
                     .requireLib(20);
             SuperSensual.requirePerk(Sensual)
                     .requireLib(40);
+			BroadSelection.requirePerk(JobSeducer)
+                    .requireCustomFunction(function (player:Player):Boolean {
+						return player.differentTypesOfCocks() > 1;
+					}, "At least two different types of penises.");
             //Slot 5 - minimum libido
             ColdBlooded.requireMinLust(20);
             HotBlooded.requireLib(50);

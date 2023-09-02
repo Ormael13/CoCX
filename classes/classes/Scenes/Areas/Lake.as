@@ -168,6 +168,16 @@ use namespace CoC;
 				},
 				call: findBlessedShield
 			}, {
+				name: "holywhip",
+				label : "Holy Whip",
+				kind  : 'item',
+				chance: 0.05,
+				unique: 'holyitem', // only one enc with unique:holyitem can appear
+				when: function():Boolean {
+					return !player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake) && !player.hasStatusEffect(StatusEffects.TookBlessedWhip) && !player.hasStatusEffect(StatusEffects.BWhipBroken) && player.hasPerk(PerkLib.JobSeducer);
+				},
+				call: findBlessedWhip
+			}, {
 				name: "ponies",
 				label : "Ponies",
 				kind  : 'event',
@@ -420,6 +430,10 @@ use namespace CoC;
 		private function findBlessedShield():void {
 			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
 			swordInStone.findShieldInStone();
+		}
+		private function findBlessedWhip():void {
+			player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 0, 0, 0, 0);
+			swordInStone.findWhipInStone();
 		}
 
 		private function walkAroundLake():void {

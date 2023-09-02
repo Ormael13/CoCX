@@ -61,7 +61,7 @@ public class AbyssalSharkRace extends Race {
 				.legType(LowerBody.ABYSSAL_SHARK, +2)
 				.rearType(RearBody.SHARK_FIN, +1)
 				.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
-				//.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
+				.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hairColor1(ANY(AbyssalSharkHairColors), +1)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
@@ -70,7 +70,7 @@ public class AbyssalSharkRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.biggestTitSize > 18 || body.biggestCockSize > 17
 						}, +1)
-				.hasPerk(PerkLib.DantianPhylactery, +1, -10);//21+1
+				.hasPerk(PerkLib.DantianPhylactery, +1, -10);//22+1
 		
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		

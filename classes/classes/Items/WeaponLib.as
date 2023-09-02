@@ -76,6 +76,7 @@ public final class WeaponLib extends ItemConstants
 		public const AWL_   :Weapon = new Weapon("Awl    ","Awl","awl","an awl","pierce",3,240,"A typical awl used to pierce magic hides when making magic armors or... to pierce organic object ;)", "Small, Bleed45", "Exotic");
 		public const B_STAFF:BeautifulStaff = new BeautifulStaff();
 		public const B_SWORD:BeautifulSword = new BeautifulSword();
+		public const B_WHIP :BeautifulWhip = new BeautifulWhip();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", WT_SWORD);
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const BCLAWS:BlizzardClaws = new BlizzardClaws();
