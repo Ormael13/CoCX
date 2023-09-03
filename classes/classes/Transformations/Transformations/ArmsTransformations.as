@@ -1244,8 +1244,10 @@ public class ArmsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing and your nails sharpen into curved claws. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. ";
-				desc += "You hastily remove your [armor] just in time before a strange large fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have abyssal shark arms.</b>";
+				desc += "You watch, spellbound as your arms gradually change its entire outer-structure into a plain, almost human-like form, if not for the parts between your fingers forming fresh webbing and your nails sharpening into curved claws. Immediately following this, your begin to sweat profusely as your breathing grows ragged and rapid. ";
+				desc += "The space between your elbows begins to shift as you "+(player.isNaked()?"watch":"remove your armor")+" just in time to see strange fin-like structures burst from your forearms. You examine them  carefully. It'd seem any armor you wear will need to adjust to fit within them.";
+				if (player.isNaked()) desc += " Perhaps that's not as big of an issue as it could be.";
+				desc += " <b>You now have abyssal shark arms.</b>";
 
 				player.arms.type = Arms.ABYSSAL_SHARK;
 				if (doOutput) outputText(desc);

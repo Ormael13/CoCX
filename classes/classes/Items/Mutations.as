@@ -5204,7 +5204,6 @@ public final class Mutations extends MutationsHelper {
                     var color:String;
                     if (!InCollection(player.scaleColor, SharkRace.SharkScaleColors))
                         color = (rand(9) == 0)? "rough gray" : randomChoice(SharkRace.SharkScaleColors);
-
                     transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color:color}).applyEffect();
                     outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
                     outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");

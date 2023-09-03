@@ -425,8 +425,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Whip Grapple
-			if (player.isWeaponsForWhipping()) {
-				bd = buttons.add("Grapple(W)", whipGrapple).hint("Attempt to grapple a foe with your whip.");
+			if (player.hasPerk(PerkLib.PrestigeJobBindmaster) && (player.isWeaponsForWhipping() || player.weapon == weapons.D_FLAIL)) {
+				bd = buttons.add("Grapple(W)", whipGrapple).hint("Attempt to grapple a foe with your "+(player.weapon == weapons.D_FLAIL?"flail":"whip")+".");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				else if (monster.plural) bd.disable("You cannot grapple more than one foe at once.");
 			}
@@ -1993,7 +1993,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 				doFireDamage(damage, true, true);
 				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) {
 					var psmultismack:Number = (player.tailCount - 1);
-					while (psmultismack-->0) doFireDamage(damage, true, true);
+					while (psmultismack-->0) {
+						doFireDamage(damage, true, true);
+						if (player.statStore.hasBuff("FoxflamePelt")) monster.teased(lustDmg, false);
+					}
 				}
 				outputText(" damage! ");
 				damage *= 2;
@@ -3687,7 +3690,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
 			clearOutput();
-			outputText("You just don't have the energy to wrap your whip so tightly around someone right now...");
+			outputText("You just don't have the energy to wrap your "+(player.weapon == weapons.D_FLAIL?"flail":"whip")+" so tightly around someone right now...");
 			//Gone		menuLoc = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);
@@ -3703,7 +3706,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(10, USEFATG_PHYSICAL);
 		if (combat.checkConcentration()) return; //Amily concentration
-		outputText("You entangle your opponent with your whip, attempting to bind its movement. ");
+		outputText("You entangle your opponent with your "+(player.weapon == weapons.D_FLAIL?"flail":"whip")+", attempting to bind its movement. ");
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
 			outputText("[monster a] [monster name] is tied up!");

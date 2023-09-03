@@ -1142,7 +1142,8 @@ public class FaceTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
-				desc += "Your [face] explodes with agony, reshaping into a more human-like visage. You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them! They even scare you a little.\n(Gain: 'Bite' special attack)";
+				desc += "Your [face] explodes in a shot of agony, reshaping into a more human-like visage. Your face might as well be sloughing off, hacked off piece by piece as your entire facial structure reshapes itself more. Your grasp at your mouth, intense pain wracking your oral cavity. Your gums shift as your jawline readjusts itself. You try to feel around your cheeks, your forehead... everything slowly begins setting into place. You can open your eyes as the pain recedes, almost as quickly as it came. ";
+				desc += "You need a moment to adjust to your vision before you look at your reflection in the nearest source of water. A set of retractable shark fangs have grown over your normal teeth, and your face has elongated a little to accomdate them! That's not the worst part, as your eyes are no longer located deep within your skull, but at the bony extrusions of your upper face bones. Your head more closely resembles the shape of a hammer. This'll take a bit to get used to.\n(Gain: 'Bite' special attack)";
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.ABYSSAL_SHARK;

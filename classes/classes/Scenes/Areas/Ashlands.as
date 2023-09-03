@@ -99,14 +99,16 @@ public class Ashlands extends BaseContent
 			call: findNothing,
 			label:'Walk',
 			kind:'walk'
-		}/*, {
+		}, {
 			name: "demonProjects",
+			label : "DemLab Subject",
+			kind  : 'monster',
 			chance: 0.2,
 			when: function ():Boolean {
-				return DemonLab.MainAreaComplete >= 4;
+				return SceneLib.exploration.demonLabProjectEncountersEnabled();
 			},
 			call: SceneLib.exploration.demonLabProjectEncounters
-		}*/);
+		});
 	}
 	
 	public const areaLevel:int = 35;

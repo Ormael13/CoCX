@@ -153,6 +153,15 @@ use namespace CoC;
 				label : "Walk",
 				kind  : 'walk',
 				call: findNothing
+			}, {
+				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
+				chance: 0.2,
+				when: function ():Boolean {
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
+				},
+				call: curry(SceneLib.exploration.demonLabProjectEncounters, 1)
 			})
 		}
 		

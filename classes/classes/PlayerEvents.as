@@ -2795,7 +2795,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					flags[kFLAGS.AURORA_LVL] = 0.1;
 					EngineCore.doNext(playerMenu);
 					return true;
-				}
+				}/*
+				if (SceneLib.vapula.vapulaSlave() && flags[kFLAGS.SLEEP_WITH] == "Vapula") {
+					dreams.fuckedUpCockDreamChange();
+					return true;
+				}*/
 				if (player.lib > (player.libStat.max * 0.5) || player.lust > (player.maxLust() * 0.4)) { //Randomly generated dreams here
 					if (dreams.dreamSelect()) return true;
 				}

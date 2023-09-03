@@ -195,6 +195,7 @@ private function payKihaTribute():void {
 			label: "Inq. Cache",
 			kind: "treasure",
 			chance: 0.1,
+			unique: true,
 			when: function():Boolean {
 				return flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 0 || flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 1
 			},

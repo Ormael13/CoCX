@@ -2854,7 +2854,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         doNext(camp.returnToCampUseEightHours);
     }
 
-
     private function KihaTalkTown():void {
         clearOutput();
         if (DemonLab.MainAreaComplete < 4) {
@@ -2863,28 +2862,30 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             eachMinuteCount(15);
             doNext(TalkWithKiha)
         }
-        if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount > 0 && FlameSpreaderKillCount < 5) {
-            outputText("“<i>Finding those abominations has been hard.</i>” She admits. “<i>They’re fast, and hard to kill.</i>” She gives you a wry smile. “<i>But you seem to just run into them, don’t you, my idiot?</i>” Her smile fades. “<i>I’ve dug graves for them, and… Made some markers. Now… I just need to fill them. Those people are gone, and there’s no way to bring them back… But at least I can make sure they rest.</i>”\n\n");
-            eachMinuteCount(15);
-            doNext(TalkWithKiha)
-        }
-        if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 5 && !FlameSpreaderBossKilled) {
-            outputText("“<i>You’ve been a great help, [name]</i>”. Kiha leans in, for once giving you the hug. Her naked breasts press into your [chest], and she rests her head on your shoulder. “… It feels odd. With each one we kill… I feel lighter. You take this to mean your dragon-lover is doing better, and you hug back. Her cunt drools, her leavings dripping down your thigh, and you give her a small smile.\n\n");
-            menu();
-            addButton(1, "Sex", KihaTownSex);
-            addButton(2, "Hug", KihaTownHug);
-        }
-        if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 10 && FlameSpreaderBossKilled) {
-            outputText("Kiha gives you a small smile, her shoulders loose. “<i>… I’ve been thinking.</i>” She sits down on a log, patting it. You sit down beside her, and she leans in, resting her head against your shoulder. “<i>… We’ve been burying the past for a while now… </i>” She looks down, towards the center of camp. “<i>… Or… should I say… We’ve been burying my past.</i>” Kiha sits back up, and you turn to look at her. Kiha’s hugging herself, gaze fixed on the horizon. “<i>… I’ve been thinking… about everything.</i>” She looks at you, her eyes wet with unshed tears… But for once, a smile crosses her face. Not the usual smirk or half-smile, but a genuine, happy smile. “<i>… You didn’t have to help me, [name]. You could have just killed me, or let me die in the swamps. You didn’t have to help me bury my past… Or let me into your home… But you did.</i>”\n\n");
-            outputText("Kiha, despite her heat, shivers. “<i>… You’re an idiot, [name]. I could have been… a demon soldier, or a spy, or… </i>” She looks to the horizon. “<i>When I escaped from the lab, I told myself that this world would devour anyone who showed weakness. So… When you came into my swamp, and just… Talked… </i>” She laughs. “<i>You kicked my ass… and then just… talked. It spit in the face of everything I’d lived by, since my escape.</i>”\n\n");
-            outputText("You scootch over, putting a hand on your dragoness’s shoulder. You tell her that to be fair, she didn’t immediately attack, like everything else there. “<i>Well… Yeah… But I wasn’t exactly good to you, [name]. You put up with a lot of shit from me.</i>” She closes her eyes, turning away. “<i>And… You’ve been helping me with everything. I live in your camp, with others again, and… </i>” She exhales a little bit of fire. “<i>And you. Because of you… I have friends, a home, and… </i>”\n\n");
-            outputText("Kiha’s unusually bashful, but you’re silent, waiting for her to continue. “<i>… Honestly… I owe you so much, [name]… which makes it even worse… That I haven’t… Had out with this yet. Seriously, how weak am I, that I haven’t had the guts to say… what I want to say?</i>”\n\n");
-            outputText("Your dragoness spreads her arms, turning towards you, letting you take in her dripping pussy, dusky skin, and looking into your eyes. “<i>I don’t think I’ve ever said this, my doofus… But I love you. I didn’t think… I would… But… There it is. I love you. It’s not just that you’re good in bed, either… That’s what I thought at first, but… there’s more to it.</i>” Kiha shudders again, looking into your eyes. Her tail whips behind her, and she’s clearly nervous at how you’ll respond.\n\n");
-            outputText("\n\n");
-            outputText("\n\n");
-            menu();
-            addButton(1, "LoveBack", KihaLoveRecip);
-            addButton(2, "Casual", KihaLoveCasual);
+        if (DemonLab.MainAreaComplete == 4) {
+			if (FlameSpreaderKillCount > 0 && FlameSpreaderKillCount < 5) {
+				outputText("“<i>Finding those abominations has been hard.</i>” She admits. “<i>They’re fast, and hard to kill.</i>” She gives you a wry smile. “<i>But you seem to just run into them, don’t you, my idiot?</i>” Her smile fades. “<i>I’ve dug graves for them, and… Made some markers. Now… I just need to fill them. Those people are gone, and there’s no way to bring them back… But at least I can make sure they rest.</i>”\n\n");
+				eachMinuteCount(15);
+				doNext(TalkWithKiha)
+			}
+			if (FlameSpreaderKillCount >= 5 && !FlameSpreaderBossKilled) {
+				outputText("“<i>You’ve been a great help, [name]</i>”. Kiha leans in, for once giving you the hug. Her naked breasts press into your [chest], and she rests her head on your shoulder. “… It feels odd. With each one we kill… I feel lighter. You take this to mean your dragon-lover is doing better, and you hug back. Her cunt drools, her leavings dripping down your thigh, and you give her a small smile.\n\n");
+				menu();
+				addButton(1, "Sex", KihaTownSex);
+				addButton(2, "Hug", KihaTownHug);
+			}
+			if (FlameSpreaderKillCount >= 10 && FlameSpreaderBossKilled) {
+				outputText("Kiha gives you a small smile, her shoulders loose. “<i>… I’ve been thinking.</i>” She sits down on a log, patting it. You sit down beside her, and she leans in, resting her head against your shoulder. “<i>… We’ve been burying the past for a while now… </i>” She looks down, towards the center of camp. “<i>… Or… should I say… We’ve been burying my past.</i>” Kiha sits back up, and you turn to look at her. Kiha’s hugging herself, gaze fixed on the horizon. “<i>… I’ve been thinking… about everything.</i>” She looks at you, her eyes wet with unshed tears… But for once, a smile crosses her face. Not the usual smirk or half-smile, but a genuine, happy smile. “<i>… You didn’t have to help me, [name]. You could have just killed me, or let me die in the swamps. You didn’t have to help me bury my past… Or let me into your home… But you did.</i>”\n\n");
+				outputText("Kiha, despite her heat, shivers. “<i>… You’re an idiot, [name]. I could have been… a demon soldier, or a spy, or… </i>” She looks to the horizon. “<i>When I escaped from the lab, I told myself that this world would devour anyone who showed weakness. So… When you came into my swamp, and just… Talked… </i>” She laughs. “<i>You kicked my ass… and then just… talked. It spit in the face of everything I’d lived by, since my escape.</i>”\n\n");
+				outputText("You scootch over, putting a hand on your dragoness’s shoulder. You tell her that to be fair, she didn’t immediately attack, like everything else there. “<i>Well… Yeah… But I wasn’t exactly good to you, [name]. You put up with a lot of shit from me.</i>” She closes her eyes, turning away. “<i>And… You’ve been helping me with everything. I live in your camp, with others again, and… </i>” She exhales a little bit of fire. “<i>And you. Because of you… I have friends, a home, and… </i>”\n\n");
+				outputText("Kiha’s unusually bashful, but you’re silent, waiting for her to continue. “<i>… Honestly… I owe you so much, [name]… which makes it even worse… That I haven’t… Had out with this yet. Seriously, how weak am I, that I haven’t had the guts to say… what I want to say?</i>”\n\n");
+				outputText("Your dragoness spreads her arms, turning towards you, letting you take in her dripping pussy, dusky skin, and looking into your eyes. “<i>I don’t think I’ve ever said this, my doofus… But I love you. I didn’t think… I would… But… There it is. I love you. It’s not just that you’re good in bed, either… That’s what I thought at first, but… there’s more to it.</i>” Kiha shudders again, looking into your eyes. Her tail whips behind her, and she’s clearly nervous at how you’ll respond.\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+				menu();
+				addButton(1, "LoveBack", KihaLoveRecip);
+				addButton(2, "Casual", KihaLoveCasual);
+			}
         }
     }
 
@@ -2902,7 +2903,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     public function emberInteraction():void {
         emberStart();
-
         function emberStart():void {
             EmberInteractionHappened = true;
             clearOutput();

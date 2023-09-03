@@ -64,13 +64,14 @@ public class AbyssalSharkRace extends Race {
 				.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hairColor1(ANY(AbyssalSharkHairColors), +1)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
+				.skinColor1(ANY(AbyssalSharkScaleColors), +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
 				.height(AT_LEAST(108), +1)
 				.customRequirement("",'H-cup tits (or bigger) or 18"+ long cock',
 						function (body:BodyData):Boolean {
 							return body.biggestTitSize > 18 || body.biggestCockSize > 17
 						}, +1)
-				.hasPerk(PerkLib.DantianPhylactery, +1, -10);//22+1
+				.hasPerk(PerkLib.DantianPhylactery, +1, -10);//23+1
 		
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
@@ -85,7 +86,7 @@ public class AbyssalSharkRace extends Race {
 				})
 				.withExtraBonuses("+150 Max Hunger")
 				.end();
-				
+		
 		buildTier(18, "elder abyssal shark-morph")
 				.requirePreviousTier()
 				.buffs({

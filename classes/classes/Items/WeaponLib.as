@@ -108,6 +108,7 @@ public final class WeaponLib extends ItemConstants
 		public const DORSOUL:DorcSouls = new DorcSouls();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
+		public const D_FLAIL:DemonFlail = new DemonFlail();
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
 		public const D_LANCE:DualLance = new DualLance();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();

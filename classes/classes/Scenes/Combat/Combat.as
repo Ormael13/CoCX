@@ -6317,7 +6317,11 @@ public class Combat extends BaseContent {
                             whipLustDmg = (10 + player.cor / 5) * (hasArcaneLash ? 2.0 : 1); // 10-30 (20-60 w/perk)
                             whipCorSelf = 0.6;
                             whipLustSelf = (rand(4) == 0) ? 0 : 1; // 75% +1
-                        }
+                        } else if (player.weapon == weapons.D_FLAIL) {
+							whipLustDmg = (10 + player.cor / 10); // 10-20
+							whipCorSelf = 0.5;
+                            whipLustSelf = 0;
+						}
                         if (player.armor == armors.ELFDRES && player.isElf()) whipLustDmg *= 2;
                         if (player.armor == armors.FMDRESS && player.isWoodElf()) whipLustDmg *= 2;
                         if (whipLustDmg > 0) {

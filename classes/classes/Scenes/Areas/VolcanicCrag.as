@@ -157,17 +157,19 @@ public class VolcanicCrag extends BaseContent
 					VolcanicCragConditions();
 					SceneLib.etnaScene.repeatYandereEnc();
 				}
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: function ():void {
 					VolcanicCragConditions();
 					SceneLib.exploration.demonLabProjectEncounters()
 				}
-			}*/);
+			});
 		}
 		
 		public function exploreVolcanicCrag():void {
