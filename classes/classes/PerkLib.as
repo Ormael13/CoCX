@@ -1294,8 +1294,8 @@ public class PerkLib
 				"",
 				"You've chosen the 'Epic Libido' perk.").withBuffs({'lib.mult':0.35});
 		public static const EpicLifeline:PerkType = mk("Epic Lifeline", "Epic Lifeline",
-				"Increases self healing by 240 out of combat and by 120 in combat (using defend option will double it).",
-				"You've chosen the 'Epic Lifeline' perk, increasing your self healing to epic level.");
+				"Increases health recovery by (16 * level) out of combat and by (8 * level) in combat (using defend option will double it).",
+				"You've chosen the 'Epic Lifeline' perk, increasing your health recovery to epic level.");
 		public static const EpicSelfControl:PerkType = mk("Epic Self-Control", "Epic Self-Control",
 				"Increases maximum lust by 6750.",
 				"You've chosen the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 6750!")
@@ -1610,8 +1610,8 @@ public class PerkLib
 				"A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.",
 				"You've chosen the 'Greater harvest' perk. A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.");
 		public static const GreaterLifeline:PerkType = mk("Greater Lifeline", "Greater Lifeline",
-				"Increases self healing by 180 out of combat and by 90 in combat (using defend option will double it).",
-				"You've chosen the 'Greater Lifeline' perk, greatly increasing your self healing.");
+				"Increases health recovery by (12 * level) out of combat and by (6 * level) in combat (using defend option will double it).",
+				"You've chosen the 'Greater Lifeline' perk, greatly increasing your health recovery.");
 		public static const GreaterSharedPower:PerkType = mk("Greater shared power", "Greater shared power",
 				"Double the effect of Shared power.",
 				"You've chosen the 'Greater shared power' perk. ");
@@ -1856,8 +1856,8 @@ public class PerkLib
 				"Increases chances of evading enemy attacks. (+10% to evasion)",
 				"You've chosen the 'Improved Evade' perk, allowing you to avoid enemy attacks more often! (+10% to evasion)");
 		public static const ImprovedLifeline:PerkType = mk("Improved Lifeline", "Improved Lifeline",
-				"Increases self healing by 120 out of combat and by 60 in combat (using defend option will double it).",
-				"You've chosen the 'Improved Lifeline' perk, improving your self healing.");
+				"Increases health recovery by (8 * level) out of combat and by (4 * level) in combat (using defend option will double it).",
+				"You've chosen the 'Improved Lifeline' perk, improving your health recovery.");
 		public static const ImprovedManaShield:PerkType = mk("Improved Mana Shield", "Improved Mana Shield",
 				"Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)",
 				"You've chosen the 'Improved Mana Shield' perk, increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)");
@@ -2072,8 +2072,8 @@ public class PerkLib
 				"",
 				"You've chosen the 'Legendary Wisdom' perk.").withBuffs({'wis.mult':0.50});
 		public static const Lifeline:PerkType = mk("Lifeline", "Lifeline",
-				"Increases self healing by 90 out of combat and by 45 in combat (using defend option will double it).",
-				"You've chosen the 'Lifeline' perk, increasing your self healing.");
+				"Increases health recovery by (6 * level) out of combat and by (3 * level) in combat (using defend option will double it).",
+				"You've chosen the 'Lifeline' perk, increasing your health recovery.");
 		public static const LightningReload:PerkType = mk("Lightning Reload", "Lightning Reload",
 				"Allows you to reload in middle of shooting as long PC have enough fatigue for that without ending turn and decrease reload fatigue cost by 50%.",
 				"You've chosen the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols and decrease reload fatigue cost by 50%.")

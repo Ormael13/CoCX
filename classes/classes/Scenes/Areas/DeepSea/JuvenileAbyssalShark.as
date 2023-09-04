@@ -136,7 +136,10 @@ public class JuvenileAbyssalShark extends Monster
 			this.lustVuln = .2;
 			this.level = 73;
 			this.gems = 0;
-			this.drop = new WeightedDrop(consumables.ASTOOTH, 1);
+			this.drop = new WeightedDrop()
+					.add(consumables.BAGOCA1,1)
+					.add(consumables.SHARK_T,1)
+					.add(consumables.ASTOOTH,3);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

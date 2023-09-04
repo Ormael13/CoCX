@@ -41,8 +41,11 @@ public class Changelog extends BaseContent
 			outputText("-New tier 30 misc lvl-up perk: Fellowship. Req. Small Army perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New mutation perk: Anubi Heart. Req. having free heart mutation slot, anubis race. Effects: Increase Soulskills power by 20%.\n");
 			outputText("-New mutation perk: Fera's Birthright. Req. having free adaptation mutation slot, werewolf/wereshark race. Effects: Increases HP regeneration 0.5-2% based on moon phase. (New moon - 0.5%, Half moon - 1%, Full moon - 2%)\n");
+			outputText("-New mutation perk: Anubi Heart (Primitive). Req. Anubi Heart and lvl 30+. Effects: Increase Soulskills power by 30%. Soul skills cost 50% more but are twice as effective when above 80% Soulforce.\n");
 			outputText("-New mutation perk: Fera's Birthright (Primitive). Req. Fera's Birthright and lvl 30+. Effects: Increases HP regeneration 1-4% based on moon phase. Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it.\n");
+			outputText("-New mutation perk: Anubi Heart (Evolved). Req. Anubi Heart (Primitive) and lvl 60+. Effects: Increase Soulskills power by 40%. Soul skills cost 50% more but are twice as effective when above 70% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. This effect can only happen once per round.\n");
 			outputText("-New mutation perk: Fera's Birthright (Evolved). Req. Fera's Birthright (Primitive) and lvl 60+. Effects: Increases HP regeneration 1.5-6% based on moon phase (doubled when in Crinos Shape). Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it, once each fight when HP drops below 0 it would trigger Regeneration Surge (+20% regen for 2 turns).\n");
+			outputText("-New mutation perk: Anubi Heart (Final Form). Req. Anubi Heart (Evolved) and lvl 90+. Effects: Increase Soulskills power by 50%. Soul skills cost 50% more but are twice as effective when above 60% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. ");
 			outputText("-New mutation perk: Fera's Birthright (Final Form). Req. Fera's Birthright (Evolved) and lvl 90+. Effects: Increases HP regeneration 2-8% based on moon phase (doubled when in Crinos Shape). Double bonuses to unarmed/armor/wrath gains in crinos form & half the cost of maintaining it, ");
 			outputText("once each fight when HP drops below 0 it would trigger Regeneration Surge (+40% regen for 3 turns), +20% OverMax HP.\n");
 			outputText("-New mutation perk: Gorgon Eyes (Evolved). Req. Gorgon Eyes (Primitive) and lvl 60+. Effects: Increase duration of petrify on enemies by 1 turn (if PC have gorgon hair it add additional round and on single enemy it also add rounded up half of curent mutation tier), same bonus as Eyes of the Hunter (Ex) perk but with limit to 5(10 w/ gorgon hair) lvl's, ");
@@ -53,6 +56,10 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Eyes (Final Form). Req. Human Eyes (Evolved) and lvl 90+. Effects: Increase precision of all attacks by 20%. Same bonus as Eyes of the Hunter (Ex) perk but with limit to 60 lvl's. 10% less penalty to acc per each next attack during multiattack.\n");
 			outputText("-New event perk: Intermediate Leadership. Gained by finishing two 2 on 2 fights in challange section of soul arena. Effects: Allow to form 3 people party.\n");
 			outputText("-New event perk: Archmage (Ex). Gained by use of the Pocket Watch when req. are meet. Effects: Increases base spell strength by 105%, mana pool by 600 and lust bar by 135.\n");
+			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
+			outputText("-New event perk: Soul Nexus. Req. having 20+ in anubis score. Effects: An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.\n");
+			outputText("-New event perk: Mummy Lord. Req. having 15+ in anubis score and 50+ corruption. Effects: Can control and gather mummies (up to 5). Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Each mummy under your control increases soulskill power by 5%. Alpha Howl also increases the amount of mummies under your control (5 * tier).\n");
+			outputText("-New event perk: Dormant Mummy Lord. Req. having 1+ mummies when loosing Mummy Lord perk. Effects: Hmmmm.... none it just let you know your mummies awaits when your PC become able to control mummies again.\n");
 			outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
 			outputText("-New History/Past Life Perk - History: Thief - give Job: Rogue for free and increase sneak attack multiplier by +1.\n");
 			outputText("-New melee weapon (by Ormael): Dual Dagger Whips - can be gained by combining 2x Dagger Whip weapon. Cost 400 gems. Base atk is 5. It's dual small weapon belonging to dagger type, can use whipping special with them.\n");
@@ -69,6 +76,8 @@ public class Changelog extends BaseContent
 			outputText("-New usable item: bandages. Costing 25 gems and it's obtainable from Anubis enemies or bought at Tailor shop in Tel'Adre.\n");
 			outputText("-New key Item (by Aimozg): Tel'Adre Magazine Issue 2 - Increase 2x Alchemy EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-New key item: Herbs Bag (Low grade). Buyable at Giacomo when pc have lvl 5+ in farming skill. Costs 500 gems and would increase slots cap to 10 and open 2 additional slots for 2 new herb types.\n");
+			outputText("-New magic soulskill: Soul drain. Accessable by having 20+ in anubis racial score. Effects: Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen. (True Damage)\n");
+			outputText("-New magic soulskill: Finger of death. Accessable by having 20+ in anubis racial score. Effects: Once per 6 rounds inflict massive damage. Also damage the opponent's toughness and strength by 10. Ineffective on foes who lack a soul.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
 			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Fennec Fox Ears (Werefox TF), Jackal Ears (Anubis TF), Glyph Tattoos (Anubis TF).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
@@ -116,22 +125,13 @@ public class Changelog extends BaseContent
 			outputText("Werefox (F) - lvl 19. Encounterable in Inner Desert at night; Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter); Juvenile Abyssal Shark - lvl 73. Encounterable in Ocean.\n");
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Ancient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200/250% to Tou multi, +40/70/100/130% to Spe multi, +100/180/260/340% to Wis multi, +70/140/210/280 to Sens, -10% to max lust multi, +100/150/200/250% to max soulforce multi, -40% to max mana multi.\n");
-			outputText("-New event perk: Death Priest. Req. having 20+ in anubis score. Effects: Add 100% of wisdom as a modifier to hit points and intelligence.\n");
-			outputText("-New event perk: Soul Nexus. Req. having 20+ in anubis score. Effects: An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.\n");
-			outputText("-New mutation perk: Anubi Heart (Primitive). Req. Anubi Heart and lvl 30+. Effects: Increase Soulskills power by 30%. Soul skills cost 50% more but are twice as effective when above 80% Soulforce.\n");
-			outputText("-New magic soulskill: Soul drain. Accessable by having 20+ in anubis racial score. Effects: Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen. (True Damage)\n");
-			outputText("-New magic soulskill: Finger of death. Accessable by having 20+ in anubis racial score. Effects: Once per 6 rounds inflict massive damage. Also damage the opponent's toughness and strength by 10. Ineffective on foes who lack a soul.\n");
-			outputText("-New event perk: Mummy Lord. Req. having 15+ in anubis score and 50+ corruption. Effects: Can control and gather mummies (up to 5). Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Each mummy under your control increases soulskill power by 5%. Alpha Howl also increases the amount of mummies under your control (5 * tier).\n");
-			outputText("-New event perk: Dormant Mummy Lord. Req. having 1+ mummies when loosing Mummy Lord perk. Effects: Hmmmm.... none it just let you know your mummies awaits when your PC become able to control mummies again.\n");
-			outputText("-New Unique Sexscene: Mummy Curse - req. to be anubi with mummy curse/lord perks and having badge in inventory. Also can be only used against enemies that are sentient, humanoid and with soul. After scene PC will gain new mummy minion up to cap of 5 mummies.\n");
 			outputText("-New tf item (by Ormael): Wolf Pepper. Dropped by werewolf enemies or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werewolf but only physicaly. To gain curse/lycantophy perk still need to find some werewolf to bite PC.\n");
+			outputText("-New Unique Sexscene: Mummy Curse - req. to be anubi with mummy curse/lord perks and having badge in inventory. Also can be only used against enemies that are sentient, humanoid and with soul. After scene PC will gain new mummy minion up to cap of 5 mummies.\n");
 			outputText("-Feral Eyes & Wolf Collar options could be stored with genetic memory.\n");
 			outputText("-New event perk: Vulpesthropy. Req. having fennec fox ears, fox fangs and feral eyes when using desert berry. Your skin is more resistant to magical damage and you can naturaly absorb ambient soulforce. (+1%)\n");
 			outputText("-New event perk: Dormant Vulpesthropy. When PC not qualify as werefox Vulpesthropy would be replaced by this perk. It's like the one for werewolf. Werebeast nature just slumber inside PC ready to become active again.\n");
 			outputText("-New mutation perk: White-Faced One Birthright. Req. having free adaptation mutation slot, werefox race. Effects: Increases soulforce recovery 0.25-1% Soulforce regen per tail you posses (New moon / Half moon / Full moon)\n");
 			outputText("-New mutation perk: White-Faced One Birthright (Primitive). Req. White-Faced One Birthright and lvl 30+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +50% to magical soulskills power (doubled if you have 3+ tails)\n");
-			outputText("-New mutation perk: Anubi Heart (Evolved). Req. Anubi Heart (Primitive) and lvl 60+. Effects: Increase Soulskills power by 40%. Soul skills cost 50% more but are twice as effective when above 70% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. This effect can only happen once per round.\n");
-			outputText("-New mutation perk: Anubi Heart (Final Form). Req. Anubi Heart (Evolved) and lvl 90+. Effects: Increase Soulskills power by 50%. Soul skills cost 50% more but are twice as effective when above 60% Soulforce. Soul skills become vampiric in nature, healing the user for 10% of their hp on use. ");
 			outputText("This effect can only happen once per round. While below half health, soul skill inflicts 50% more damage and leech twice as many hit points.\n");
 			outputText("-New Masturbation option: Mummy Sex. Req. 50%+ Soulfroce, be Anubi and have 3+ mummies. Beside typical effects it would drain those 50% of SF and increase mummies attack (2x) for 24 hours. (In case PC loose control over mummies in that time timer would be still ticking down each hour so regaining control ove rmummies would keep boost for remaining time until full day would pass by)\n");
 			outputText("-Shark race could gain +1 race score for having human tongue and for human hair. Also their got 3rd tier of racial bonuses - elder tigershark-morph: +90% str multi, +130% spe multi, +50% lib multi, +200 to lust\n");
@@ -164,10 +164,10 @@ public class Changelog extends BaseContent
 			outputText("-New tier 0 libido lvl-up perk: Broad Selection. Req. Job: Seducer perk and at least two different types of penises. Effect: Increasing the Tease damage by 25% for each different type of penis that you have.\n");
 			outputText("-New melee weapon (by Ormael): Beautiful Whip - obtained by finding it at Lake. 5 atk, costing 400 gems, can't be used above 33 (+ corruption tolerance bonus) corruption and the less corruption PC have the bigger bonus to atk (max 7)\n");
 			outputText("-Enemy of gigantic/collosal type hit by AoE spell would take increased damage as if it was used vs group enemy, hit by Grey AoE spells with Convergence/Super Convergence it would strike 3x more times (6/9 times).\n");
-			outputText("-New melee weapon (by Ormael): Demon flail - gained when making Vapula submit and become PC slave. Base atk is 25. It's large mace/hammer type weapon. Can be used for whirlwind special and have +10% chance to stun target (on top of default mace/hammer weapons stun chance). Could also be used with grapple enemies (req. Bindmaster job) and deal lust/phys dmg (like whips).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Ormael): Demon flail - gained when making Vapula submit and become PC slave. Base atk is 25. It's large mace/hammer type weapon. Can be used for whirlwind special and have +10% chance to stun target (on top of default mace/hammer weapons stun chance). Could also be used for grappling enemies (req. Bindmaster job) and deal lust/phys dmg (like whips).\n");
+			outputText("-Mirror doppelganger progress toward big final lust hit been spread to happen over ~2x more turns (so around 10 not 5), stunning it would actualy stop the progress for stun duration. Final massive lust attack would deal enough lust to fill from 0 to max overlust value, which would mean this time this attack would be more serious and eEven Supercharged state won't protect PC from defeat.\n");
+			outputText("-Human Parathyroid Gland desc changed and health recovery effect changed to 10/20/40 * level HP in combat and twice more out of combat. Lifeline perks effects changed to 3/4/6/8 * level HP.\n");
+			outputText("-Violet Pupil Transformation effect changed to 5% max SF per turn to get 5% of max HP. Unicorn race would change ration from 5:5 to 4:5 and alicorn race would change ration to 3:6.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -188,10 +188,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
-			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood\n");
+			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -252,9 +258,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -286,7 +290,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -632,9 +635,9 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Human Adrenal Glands. Req. having free adrenal glands mutation slot, human race (17+). Effects: Your human adrenal glands are giving you slight boost to your natural stamina and increasing Diehard limit by 5%\n");
 			outputText("-New mutation perk: Human Adrenal Glands (Primitive). Req. Human Adrenal Glands and lvl 30+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed and increasing Diehard limit by 10%\n");
 			outputText("-New mutation perk: Human Adrenal Glands (Evolved). Req. Human Adrenal Glands (Primitive) and lvl 60+. Effects: Your human adrenal glands are giving you slight boost to your natural stamina, strength, speed, wrath gained naturaly and rising Diehard limit by 25%\n");
-			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race (17+). Effects: Increases self healing by 300 out of combat and by 150 in combat (using defend option will double it)\n");
-			outputText("-New mutation perk: Human Parathyroid Gland (Primitive). Req. Human Parathyroid Gland and lvl 30+. Effects: Increases self healing by 600 out of combat and by 300 in combat (using defend option will double it)\n");
-			outputText("-New mutation perk: Human Parathyroid Glands (Evolved). Req. Human Parathyroid Glands (Primitive) and lvl 60+. Effects: Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.\n");
+			outputText("-New mutation perk: Human Parathyroid Gland. Req. having free parathyroid glands mutation slot, human race (17+). Effects: Increases self healing by 600 out of combat and by 300 in combat (using defend option will double it)\n");
+			outputText("-New mutation perk: Human Parathyroid Gland (Primitive). Req. Human Parathyroid Gland and lvl 30+. Effects: Increases self healing by 1200 out of combat and by 600 in combat (using defend option will double it)\n");
+			outputText("-New mutation perk: Human Parathyroid Glands (Evolved). Req. Human Parathyroid Glands (Primitive) and lvl 60+. Effects: Increases self healing by 2400 out of combat and by 1200 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.\n");
 			outputText("-New mutation perk: Human Thyroid Gland Req. having free thyroid glands mutation slot, human race (17+). Effects: Regenerates 2% of max HP/hour and 1% of max HP/round.\n");
 			outputText("-New mutation perk: Human Thyroid Gland (Primitive). Req. Human Thyroid Gland and lvl 30+. Effects: Regenerates 4% of max HP/hour and 2% of max HP/round.\n");
 			outputText("-New mutation perk: Human Thyroid Glands (Evolved). Req. Human Thyroid Glands (Primitive) and lvl 60+. Effects: Regenerates 6% of max HP/hour and 3% of max HP/round. Gain soulforce recovery equal to 1% of your total soulforce and mana recovery increased by 0,5% of max mana.\n");

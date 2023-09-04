@@ -354,8 +354,12 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd = buttons.add("Deactiv VPT", DeactivateVioletPupilTransformation)
 					   .hint("Deactivate Violet Pupil Transformation.");
 			} else {
-				bd = buttons.add("V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art. While it drains your SoulForce constantly, it allows one to rapidly heal their injuries.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn. (with some perks or races it could be more than 200)");
-				if (player.soulforce < 100) {
+				bd = buttons.add("V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art. While it drains your SoulForce constantly, it allows one to rapidly heal their injuries.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: <i>5% of max soulforce</i> regenerating <b>5% of max HP</b> per turn. (some perks or races could lower SF cost or increase HP regen)");
+				var cm1:Number = 0.05;
+				if (player.isRaceCached(Races.UNICORN, 2)) cm1 -= 0.01;
+				if (player.isRaceCached(Races.ALICORN, 2)) cm1 -= 0.01;
+				var cost1:Number = Math.round(player.maxSoulforce()*cm1);
+				if (player.soulforce < cost1) {
 					bd.disable("<b>Your current soulforce is too low.</b>");
 				}
 			}

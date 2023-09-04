@@ -98,6 +98,18 @@ public class AbyssalSharkRace extends Race {
 				})
 				.withExtraBonuses("+300 Max Hunger")
 				.end();
+		
+		buildTier(26, "ancient abyssal shark-morph")
+				.requirePreviousTier()
+				.buffs({
+					"str.mult": +2.90,
+					"spe.mult": +1.50,
+					"wis.mult": +1.20,
+					"lib.mult": -0.20,
+					"sens": +150
+				})
+				.withExtraBonuses("+450 Max Hunger")
+				.end();
 	}
 }
 }

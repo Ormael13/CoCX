@@ -10106,15 +10106,18 @@ public class Combat extends BaseContent {
         //Spell buffs
         //Violet Pupil Transformation
         if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
-            if (player.soulforce < 100) {
+			var cm1:Number = 0.05;
+			if (player.isRaceCached(Races.UNICORN, 2)) cm1 -= 0.01;
+            if (player.isRaceCached(Races.ALICORN, 2)) cm1 -= 0.01;
+			var cost1:Number = Math.round(player.maxSoulforce()*cm1);
+            if (player.soulforce < cost1) {
                 player.removeStatusEffect(StatusEffects.VioletPupilTransformation);
                 outputText("<b>Your soulforce is too low to continue using Violet Pupil Transformation. </b>\n\n");
             } else {
-                var soulforcecost:int = 100;
-                player.soulforce -= soulforcecost;
-                var hpChange1:int = 200;
-                if (player.isRaceCached(Races.UNICORN, 2)) hpChange1 += 150;
-                if (player.isRaceCached(Races.ALICORN, 2)) hpChange1 += 200;
+                EngineCore.SoulforceChange(-cost1);
+				var hcm1:Number = 0.05;
+                if (player.isRaceCached(Races.ALICORN, 2)) hcm1 += 0.01;
+                var hpChange1:int = Math.round(player.maxHP()*hcm1);
                 outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation's regenerative power spreading throughout your body. ([font-heal]+" + hpChange1 + "[/font])</b>\n\n");
                 HPChange(hpChange1, false);
             }
@@ -11156,13 +11159,13 @@ public class Combat extends BaseContent {
 
     public function nonPercentBasedRegeneration():Number {
         var maxNonPercentRegen:Number = 0;
-        if (player.hasPerk(PerkLib.Lifeline)) maxNonPercentRegen += 45 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(PerkLib.ImprovedLifeline)) maxNonPercentRegen += 60 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(PerkLib.GreaterLifeline)) maxNonPercentRegen += 90 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(PerkLib.EpicLifeline)) maxNonPercentRegen += 120 * (1 + player.newGamePlusMod());
-		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 300 * (1 + player.newGamePlusMod());
-		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 300 * (1 + player.newGamePlusMod());
-		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 600 * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.Lifeline)) maxNonPercentRegen += 3 * player.level * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.ImprovedLifeline)) maxNonPercentRegen += 4 * player.level * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.GreaterLifeline)) maxNonPercentRegen += 6 * player.level * (1 + player.newGamePlusMod());
+        if (player.hasPerk(PerkLib.EpicLifeline)) maxNonPercentRegen += 8 * player.level * (1 + player.newGamePlusMod());
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 1 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 10 * player.level * (1 + player.newGamePlusMod());
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 2 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 10 * player.level * (1 + player.newGamePlusMod());
+		if (player.perkv1(IMutationsLib.HumanParathyroidGlandIM) >= 3 && player.racialScore(Races.HUMAN) > 17) maxNonPercentRegen += 20 * player.level * (1 + player.newGamePlusMod());
         if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) maxNonPercentRegen *= 2;
         return maxNonPercentRegen;
     }
@@ -12344,6 +12347,10 @@ public function combatIsOver():Boolean {
         return true;
     }
     if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged")) {
+        doNext(endLustLoss);
+        return true;
+    }
+    if (player.lust >= player.maxOverLust() && player.statStore.hasBuff("Supercharged") && monster is Doppleganger) {
         doNext(endLustLoss);
         return true;
     }

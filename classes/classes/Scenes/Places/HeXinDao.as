@@ -1573,11 +1573,11 @@ public function soularena():void {
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
 		else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
-		else addButton(1, "Buy", buyItemEnergyCoreYes);
+		else addButton(1, "Buy", curry(buyItemEnergyCoreYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
-	private function buyItemEnergyCoreYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 520 / 5;
+	private function buyItemEnergyCoreYes(cost:Number):void {
+		flags[kFLAGS.SPIRIT_STONES] -= cost;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1592,11 +1592,11 @@ public function soularena():void {
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
 		else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
-		else addButton(1, "Buy", buyItemMechanismYes);
+		else addButton(1, "Buy", curry(buyItemMechanismYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
-	private function buyItemMechanismYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 700 / 5;
+	private function buyItemMechanismYes(cost:Number):void {
+		flags[kFLAGS.SPIRIT_STONES] -= cost;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1610,11 +1610,11 @@ public function soularena():void {
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
-		else addButton(1, "Buy", curry(buyItemYes,odd));
+		else addButton(1, "Buy", curry(buyItemYes,odd,cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
-	private function buyItemYes(odd:ItemType):void {
-		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;
+	private function buyItemYes(odd:ItemType, cost:Number):void {
+		flags[kFLAGS.SPIRIT_STONES] -= cost;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business: Anything else you want to buy?</i>\"\n\n");

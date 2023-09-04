@@ -5283,7 +5283,6 @@ public final class Mutations extends MutationsHelper {
 				}
 				if (player.basetallness < 132 && changes < changeLimit && rand(3) == 0) {
 					var heightGain:int = rand(15) + 5;
-					//Flavor texts.  Flavored like 1950's cigarettes. Yum.
 					if (heightGain < 10) outputText("[pg]You shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
 					else if (heightGain >= 10 && heightGain < 20) outputText("[pg]You feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
 					else if (heightGain == 20) outputText("[pg]Staggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
@@ -15748,13 +15747,11 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("[pg]You feel smarter and clearer of mind then before, however as you finish the Sage medecine the legendary gear in your inventory begins to radiate along with your "+
                 (player.hasPerk(PerkLib.Phylactery) ? "Phylactery":"chest") + " as your very soul begin shining.\n\n");
-
         if (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery)) {
             outputText("You begin crying torrent as emotions overflow your mind again, no longer dimmed by the phylactery and all encompassing. Like a beating heart the pendant press against your chest, the gem slowly going through like if your body was fluid until it rest at your core where it has always belonged, the gem fusing with the flesh of your torso as body and soul are reunited.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
         }
         outputText("As the holy item within your hand is turned to purifying energies, the black of any remaining corruption is washed away from you like night by the morning sun, your body surging with raw magic. Your powers feel boundless, only restricted by your imagination and how you plan to use them. Overcome by the torrent of swirling emotions, flowing power, and the pleasure brought on by the change, you achieve what may be the greatest orgasm in your life, cumming without reserve or shame. Is this what they call true fulfillment?\n\n");
-
         //transformation texts
         if (player.hasPhysicalWings()) outputText("Your wings change color and shape, turning into large feathery white wings larger then your old wings. ");
         else outputText("A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of immaculate white feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].");
@@ -15765,13 +15762,11 @@ public final class Mutations extends MutationsHelper {
         outputText("Your hair also changes color to match this becoming immaculate white, wich is the color of purity come to think of it. Your fangs retract, your mouth becoming more human and you can't help but smile serenely at the idea of your body being purged of all that nasty stuff leaving space for the perfect you.");
         if (player.tail.type == Tail.DEMONIC)
             outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you. [pg]");
-
         //int change
         if (MutagenBonus("int", 3) || MutagenBonus("wis", 3)) {
         }
         player.createPerk(PerkLib.SageMedicine,0,0,0,0);
         dynStats("cor", -10);
-
         //physical changes
         //legs
         if (player.lowerBody != LowerBody.HOOFED || !player.lowerBodyPart.isBiped()) {
@@ -15788,13 +15783,11 @@ public final class Mutations extends MutationsHelper {
              transformations.WingsPureDevilfeather.applyEffect(false);
             changes++;
         }
-
         //arms
         if (player.arms.type != Arms.DEVIL) {
             transformations.ArmsDevil.applyEffect(false);
             changes++;
         }
-
         //Ears
         if (player.ears.type != Ears.GOAT) {
             transformations.EarsGoat.applyEffect(false);
@@ -15814,10 +15807,8 @@ public final class Mutations extends MutationsHelper {
             else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
             changes++;
         }
-
         if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
         else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
-
         if (!player.hasPerk(PerkLib.Phylactery)) {
             outputText("Finaly your soul begins to resonate with your next form, its power coalescing into a large gem that manifests on your toso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina's own gem come to think of it.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
@@ -15825,45 +15816,30 @@ public final class Mutations extends MutationsHelper {
         outputText("As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
         if (silly()) outputText("Well friendship is magic as they say and love is the ultimate weapon. The ponies at the lake would applaud your statement.");
         outputText("Nothing can compare to the sheer joy of being delivered from your corrupt self, this time you hope for good.[pg]");
-
         outputText("You became a shining light in the darkness, an ascendant who transcended and triumphed over evil that of yours and others. A being beyond the demons power with none of the flaws. You are now an Azazel.\n\n");
         player.consumeItem(item);
-
         if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
             outputText("[pg]Your Obsidian Heart mutation has transformed to Diamond heart!");
             player.createPerk(IMutationsLib.DiamondHeartIM, player.perkv1(IMutationsLib.ObsidianHeartIM),0,0,0);
             player.removePerk(IMutationsLib.ObsidianHeartIM);
         }
         IMutationsLib.DiamondHeartIM.trueMutation = true;
-
         //TODO add Azazel perks effects
         outputText("\n<b>Obtained ability: Judgement Flare</b>  The counterpart to infernal flare.");
-
         outputText("\n<b>Obtained ability: Exorcism</b>  Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.");
-
         player.createPerk(PerkLib.Immortality, 0,0,0,0);
         outputText("\n<b>Obtained perk: Immortality</b>  "+PerkLib.Immortality.desc());
-
         player.createPerk(PerkLib.SealSin, 0,0,0,0); //TODO add Azazel perks effects
         outputText("\n<b>Obtained perk: Seal Sin</b>  "+PerkLib.SealSin.desc());
-
         outputText("\n<b>Obtained ability: Perfect Clarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.");
-
         player.createPerk(PerkLib.Purifier, 0,0,0,0);
         outputText("\n<b>Obtained perk: Purifier</b>  "+PerkLib.Purifier.desc());
-
         player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
         outputText("\n<b>Obtained perk: Conviction Of Purpose</b>  "+PerkLib.ConvictionOfPurpose.desc());
-
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
         player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
-
-
-        if (player.hasPerk(PerkLib.RacialParagon))
-            flags[kFLAGS.APEX_SELECTED_RACE] = Races.AZAZEL;
-
+        if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.AZAZEL;
         player.removeAllRacialMutation();
-
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
         mainViewManager.updateCharviewIfNeeded();
