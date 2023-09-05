@@ -1519,7 +1519,7 @@ public class CombatTeases extends BaseCombatContent {
 				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
 			}
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
-			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
+			else if (monster is Doppleganger && !monster.monsterIsStunned()) (monster as Doppleganger).mirrorTease(damage, true);
 			else if (!justText) {
 				monster.teased(damage);
 				if (crit) outputText(" <b>Critical!</b>");
@@ -1536,7 +1536,7 @@ public class CombatTeases extends BaseCombatContent {
 		else {
 			if (!justText && !SceneLib.urtaQuest.isUrta()) player.SexXP(1);
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
-			else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
+			else if (monster is Doppleganger && !monster.monsterIsStunned()) (monster as Doppleganger).mirrorTease(0, false);
 			else if (!justText) outputText("\n[Themonster] seems unimpressed.");
 		}
 		outputText("\n\n");

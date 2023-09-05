@@ -18,6 +18,7 @@ import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
+import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.SceneLib;
 
@@ -1076,7 +1077,7 @@ public function soularena():void {
 		if (page == 2) {
 			//addButton(0, "Kitty", arenaSelection, Veronika);
 			//addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
-			//addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err Ayotech weapons.");
+			addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy gremlin girl wearing lots of belts... err Ayotech weapons.");
 			//addButton(5, "Macho Mander", arenaSelection,Syth).hint("He's Macho & Mander.");
 			//if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
 			//else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");

@@ -1200,12 +1200,12 @@ public class Combat extends BaseContent {
 					}
 				}
 				else {
-					addButton(10, "Send P.Gol/1", combat.pspecials.sendPermanentGolem)
+					addButton(10, "Send P.Gol/1", combat.pspecials.sendPermanentGolem, 1, true)
 						.hint("Send one stone golem from your bag to attack the enemy.");
 					if (monster.plural) {
-						if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) addButton(11, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3)
+						if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) addButton(11, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3, true)
 							.hint("Send three stone golems from your bag to attack the enemy.");
-						if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) addButton(12, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5)
+						if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) addButton(12, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5, true)
 							.hint("Send five stone golems from your bag to attack the enemy.");
 					}
 				}
@@ -1215,32 +1215,32 @@ public class Combat extends BaseContent {
 		}
 		if (page == 2) {
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
-				addButton(0, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1)
+				addButton(0, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1, true)
 					.hint("Send one improved stone golem from your bag to attack the enemy.");
 				if (monster.plural) {
-					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) addButton(1, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3)
+					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) addButton(1, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3, true)
 						.hint("Send three improved stone golems from your bag to attack the enemy.");
-					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) addButton(2, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5)
+					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) addButton(2, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5, true)
 						.hint("Send five improved stone golems from your bag to attack the enemy.");
 				}
 			}
 			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-				addButton(5, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem, 1)
+				addButton(5, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem, 1, true)
 					.hint("Send one steel golem from your bag to attack the enemy.");
 				if (monster.plural) {
-					if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 3) addButton(6, "Send S.Gol/3", combat.pspecials.sendPermanentSteelGolem, 3)
+					if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 3) addButton(6, "Send S.Gol/3", combat.pspecials.sendPermanentSteelGolem, 3, true)
 						.hint("Send three steel golems from your bag to attack the enemy.");
-					if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 5) addButton(7, "Send S.Gol/5", combat.pspecials.sendPermanentSteelGolem, 5)
+					if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] >= 5) addButton(7, "Send S.Gol/5", combat.pspecials.sendPermanentSteelGolem, 5, true)
 						.hint("Send five steel golems from your bag to attack the enemy.");
 				}
 			}
 			if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-				addButton(10, "Send S.Gol/1", combat.pspecials.sendPermanentImprovedSteelGolem, 1)
+				addButton(10, "Send S.Gol/1", combat.pspecials.sendPermanentImprovedSteelGolem, 1, true)
 					.hint("Send one improved steel golem from your bag to attack the enemy.");
 				if (monster.plural) {
-					if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 3) addButton(11, "Send I.S.Gol/3", combat.pspecials.sendPermanentImprovedSteelGolem, 3)
+					if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 3) addButton(11, "Send I.S.Gol/3", combat.pspecials.sendPermanentImprovedSteelGolem, 3, true)
 						.hint("Send three improved steel golems from your bag to attack the enemy.");
-					if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 5) addButton(12, "Send I.S.Gol/5", combat.pspecials.sendPermanentImprovedSteelGolem, 5)
+					if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] >= 5) addButton(12, "Send I.S.Gol/5", combat.pspecials.sendPermanentImprovedSteelGolem, 5, true)
 						.hint("Send five improved steel golems from your bag to attack the enemy.");
 				}
 			}
@@ -5996,7 +5996,7 @@ public class Combat extends BaseContent {
                 damage = Math.round(damage);
                 // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
                 if (monster is Doppleganger) {
-                    if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
+                    if (!monster.monsterIsStunned()) {
                         if (damage > 0) {
                             damage = itemsBonusDamageDamage(damage);
                             damage = statusEffectBonusDamage(damage);
@@ -7196,7 +7196,7 @@ public class Combat extends BaseContent {
             }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
-                if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
+                if (!monster.monsterIsStunned()) {
                     if (damage > 0) {
                         doPhysicalDamage(damage, false);
                         (monster as Doppleganger).mirrorAttack(damage);
@@ -14508,6 +14508,7 @@ public function VampiricBite():void {
     if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) drinked += 1;
     if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) drinked += 3;
     if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) drinked *= 2;
+	if (player.racialScore(Races.VAMPIRE) >= 10) drinked *= 2;
     thirst.drink(drinked);
     if (monster.gender != 0 && monster.lustVuln != 0) {
         var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
@@ -16793,4 +16794,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

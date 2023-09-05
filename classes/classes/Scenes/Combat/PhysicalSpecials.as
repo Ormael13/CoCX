@@ -504,7 +504,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + combat.flightDurationNatural() + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			}
 			if (player.shieldName == "Battle Net") {
-				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 8 rounds before it can be used again)");
+				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 5 rounds before it can be used again)");
 				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -721,7 +721,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.shieldName == "Battle Net") {
-				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 8 rounds before it can be used again)");
+				bd = buttons.add("Entangle", netEntangle).hint("Toss your net at the enemy to entangle it. (cooldown of 5 rounds before it can be used again)");
 				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
 				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -2789,7 +2789,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		return dmgamp;
 	}
 
-	public function sendPermanentGolem(cnt:int = 1):void {
+	public function sendPermanentGolem(cnt:int = 1, doit:Boolean = false):void {
 		if (cnt != 1 && cnt != 3 && cnt != 5) throw new Error("Invalid golem count!");
 		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
 		else outputText("\n\n");
@@ -2820,9 +2820,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
+		if (doit) enemyAI();
 	}
 
-	public function sendPermanentImprovedGolem(cnt:int = 1):void {
+	public function sendPermanentImprovedGolem(cnt:int = 1, doit:Boolean = false):void {
 		if (cnt != 1 && cnt != 3 && cnt != 5) throw new Error("Invalid golem count!");
 		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
 		else outputText("\n\n");
@@ -2855,9 +2856,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
+		if (doit) enemyAI();
 	}
 
-	public function sendPermanentSteelGolem(cnt:int = 1):void {
+	public function sendPermanentSteelGolem(cnt:int = 1, doit:Boolean = false):void {
 		if (cnt != 1 && cnt != 3 && cnt != 5) throw new Error("Invalid golem count!");
 		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
 		else outputText("\n\n");
@@ -2888,9 +2890,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
+		if (doit) enemyAI();
 	}
 
-	public function sendPermanentImprovedSteelGolem(cnt:int = 1):void {
+	public function sendPermanentImprovedSteelGolem(cnt:int = 1, doit:Boolean = false):void {
 		if (cnt != 1 && cnt != 3 && cnt != 5) throw new Error("Invalid golem count!");
 		if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) clearOutput();
 		else outputText("\n\n");
@@ -2925,6 +2928,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		}
+		if (doit) enemyAI();
 	}
 
 	public function notSendAnyGolem():void {
@@ -5675,7 +5679,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function netEntangle():void {
 		clearOutput();
 		outputText("You skillfully toss your net at [themonster] restraining [monster his] movement.");
-		player.createStatusEffect(StatusEffects.CooldownNet,8,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownNet,5,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		enemyAI();
 	}

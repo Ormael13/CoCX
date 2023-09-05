@@ -22,9 +22,7 @@ import classes.VaginaClass;
 		public function mirrorAttack(damage:Number):void
 		{
 			this.createStatusEffect(StatusEffects.MirroredAttack, 0, 0, 0, 0);
-			
 			outputText("As you swing your [weapon] at the doppleganger, [he] smiles mockingly, and mirrors your move exactly, lunging forward with [his] duplicate " + weaponName + ".");
-			
 			// Cribbing from combat mechanics - if the number we got here is <= 0, it was deflected, blocked or otherwise missed.
 			// We'll use this as our primary failure to hit, and then mix in a bit of random.
 			// tl;dr this avoids a bunch of weapon effects and perks, but given the specific means of attack, I think it actually makes sense overall. (Basically having to pull back from what you would normally do mid-attack to successfully land any kind of hit).
@@ -36,7 +34,6 @@ import classes.VaginaClass;
 				if (player.weaponName == "fists") outputText(" [weapon]");
 				else outputText(" [weapon]s");
 				outputText(" meet with a bone-jarring impact, and you are sent staggering backwards by a force exactly equal to your own.");
-
 				outputText("\n\n\"<i>Try again, [name],</i>\" the doppelganger sneers, derisively miming your falter. \"<i>C’mon. Really test yourself.</i>\"");
 				this.createStatusEffect(StatusEffects.MirroredAttack, 0, 0, 0, 0);
 			}
@@ -46,21 +43,14 @@ import classes.VaginaClass;
 		{
 			clearOutput();
 			outputText("You move your hands seductively over your body, and - you stop. The doppelganger stops too, staring at you with wicked coyness, " + player.mf("his", "her") +" hands frozen on " + player.mf("his", "her") +" form exactly where yours are. Glaring back, you begin your slow, lustful motions again, as your reflection does the exact same thing. It’s a lust off!");
-			
-			if (damage > 0 && successful)
-			{
+			if (damage > 0 && successful) {
 				outputText("\n\nYou determinedly display and twist your carnality to what you know are its best advantages, ignoring what the doppelganger is doing- you’re extremely familiar with it, after all. After a few slow seconds crawl past a blush settles upon your reflection’s face, and "+ player.mf("he", "she") +" hands falter and stop being able to follow yours as "+ player.mf("he", "she") +" stares at what you’re doing.");
-
 				outputText("\n\n\"<i>It’s- it’s been so long,</i>\" " + player.mf("he", "she") +" groans, managing to break away to stare into your smirking, smouldering eyes with lust-filled rage. \"<i>But I’ll have that, I’ll have everything soon enough!</i>\"");
-				
 				this.applyTease(damage);
 			}
-			else
-			{
+			else {
 				outputText("You keep moving and displaying your body as best you can, but an overwhelming amount of self-awareness creeps in as your doppelganger mockingly copies you. Is that really what you look like when you do this? It looks so cheap, so clumsy, so desperate. As a blush climbs onto your face you feel a vague sense of vertigo as control of the situation shifts- you copy the doppelganger as "+ player.mf("he", "she") +" cruelly continues to slide "+ player.mf("his", "her") +" hands over "+ player.mf("his", "her") +" body exaggeratedly.");
-
 				outputText("\n\n\"<i>What’s the matter, [name]?</i>\" " + player.mf("he", "she") +" breathes, staring lustfully into your eyes as " + player.mf("he", "she") +" sinks both hands into " + player.mf("his", "her") +" crotch and bends forward, forcing you close to " + player.mf("his", "her") +" face. \"<i>Never tried it in front of a mirror? You were missing out on the nasty little tramp you are.</i>\"");
-				
 				player.takeLustDamage(damage + (rand(7) - 3), true);
 			}
 		}
@@ -179,8 +169,7 @@ import classes.VaginaClass;
 		
 		override public function doAI():void
 		{
-			if (hasStatusEffect(StatusEffects.Stunned)) {
-				removeStatusEffect(StatusEffects.Stunned);
+			if (monsterIsStunned()) {
 				outputText("Your duplicate is too stunned, buying you another round!");
 				return;
 			}

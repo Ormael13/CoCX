@@ -5357,7 +5357,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		thirst.modSatiety(-stack);
-		outputText("You call on the power of your tainted blood (Lia is already notified to write in future some fancy text here on converted taken blood into HP).");
+		outputText("You convert some of your stolen blood back to health.");
 		if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.addStatusValue(StatusEffects.VampThirstStacksHPMana,1,1);
 		else player.createStatusEffect(StatusEffects.VampThirstStacksHPMana,1,0,0,0);
 		HPChange(Math.round(player.maxHP()*0.05*stack), false);
@@ -5367,7 +5367,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		thirst.modSatiety(-stack);
-		outputText("You call on the power of your tainted blood (Lia is already notified to write in future some fancy text here on converted taken blood into Mana).");
+		outputText("You convert some of your stolen blood back to energy.");
 		if (player.hasStatusEffect(StatusEffects.VampThirstStacksHPMana)) player.addStatusValue(StatusEffects.VampThirstStacksHPMana,2,1);
 		else player.createStatusEffect(StatusEffects.VampThirstStacksHPMana,0,1,0,0);
 		EngineCore.ManaChange(Math.round(player.maxMana()*0.05*stack));

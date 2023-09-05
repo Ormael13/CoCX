@@ -78,6 +78,8 @@ public class Changelog extends BaseContent
 			outputText("-New key item: Herbs Bag (Low grade). Buyable at Giacomo when pc have lvl 5+ in farming skill. Costs 500 gems and would increase slots cap to 10 and open 2 additional slots for 2 new herb types.\n");
 			outputText("-New magic soulskill: Soul drain. Accessable by having 20+ in anubis racial score. Effects: Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen. (True Damage)\n");
 			outputText("-New magic soulskill: Finger of death. Accessable by having 20+ in anubis racial score. Effects: Once per 6 rounds inflict massive damage. Also damage the opponent's toughness and strength by 10. Ineffective on foes who lack a soul.\n");
+			outputText("-New magical soulskill: Create Element (Basic). Req. buying manual from golem merchant for 20 spirit stones. Create ball of fire / water / air / earth and throw it at enemy. Base cost: 60 soulforce.\n");
+			outputText("-New magical soulskill: Create Element (Advanced). Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Create Element (Basic). Create ball of ice / lightning / darkness and throw it at enemy. Base cost: 60 soulforce.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
 			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Fennec Fox Ears (Werefox TF), Jackal Ears (Anubis TF), Glyph Tattoos (Anubis TF).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
@@ -136,8 +138,6 @@ public class Changelog extends BaseContent
 			outputText("-New Masturbation option: Mummy Sex. Req. 50%+ Soulfroce, be Anubi and have 3+ mummies. Beside typical effects it would drain those 50% of SF and increase mummies attack (2x) for 24 hours. (In case PC loose control over mummies in that time timer would be still ticking down each hour so regaining control ove rmummies would keep boost for remaining time until full day would pass by)\n");
 			outputText("-Shark race could gain +1 race score for having human tongue and for human hair. Also their got 3rd tier of racial bonuses - elder tigershark-morph: +90% str multi, +130% spe multi, +50% lib multi, +200 to lust\n");
 			outputText("-Spider/Bee/Mantis races could gain + race score for having insect ears. Spider race bonuses been slight changed and added 2nd tier of bonuses - spider-morph/elder spider-morph (10/16): +30/60% str multi, +40/70% tou multi, +20/50% spe multi, +60% int multi\n");
-			outputText("-New magical soulskill: Create Element (Basic). Req. buying manual from golem merchant for 20 spirit stones. Create ball of fire / water / air / earth and throw it at enemy. Base cost: 60 soulforce.\n");
-			outputText("-New magical soulskill: Create Element (Advanced). Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Create Element (Basic). Create ball of ice / lightning / darkness and throw it at enemy. Base cost: 60 soulforce.\n");
 			outputText("-Weapons Combining/Separating menu redone. (Jtecx) (added grey out buttons for combining, etc.)\n");
 			outputText("-Added option to combine and seperate katana weapons. Still combining two katana/daggers that may have bonus effects on them from randomn items system would cause it to loose those bonus effects.\n");
 			outputText("-New mutation perk: White-Faced One Birthright (Evolved). Req. White-Faced One Birthright (Primitive) and lvl 60+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails), SF gains per level/Wisdom stat increased to 200%.\n");
@@ -165,9 +165,17 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Beautiful Whip - obtained by finding it at Lake. 5 atk, costing 400 gems, can't be used above 33 (+ corruption tolerance bonus) corruption and the less corruption PC have the bigger bonus to atk (max 7)\n");
 			outputText("-Enemy of gigantic/collosal type hit by AoE spell would take increased damage as if it was used vs group enemy, hit by Grey AoE spells with Convergence/Super Convergence it would strike 3x more times (6/9 times).\n");
 			outputText("-New melee weapon (by Ormael): Demon flail - gained when making Vapula submit and become PC slave. Base atk is 25. It's large mace/hammer type weapon. Can be used for whirlwind special and have +10% chance to stun target (on top of default mace/hammer weapons stun chance). Could also be used for grappling enemies (req. Bindmaster job) and deal lust/phys dmg (like whips).\n");
-			outputText("-Mirror doppelganger progress toward big final lust hit been spread to happen over ~2x more turns (so around 10 not 5), stunning it would actualy stop the progress for stun duration. Final massive lust attack would deal enough lust to fill from 0 to max overlust value, which would mean this time this attack would be more serious and eEven Supercharged state won't protect PC from defeat.\n");
+			outputText("-Mirror doppelganger progress toward big final lust hit been spread to happen over ~2x more turns (so around 10 not 5), stunning it would actualy stop the progress for stun duration. Final massive lust attack would deal enough lust to fill from 0 to max overlust value, which would mean this time this attack would be more serious and even Supercharged state won't protect PC from defeat.\n");
 			outputText("-Human Parathyroid Gland desc changed and health recovery effect changed to 10/20/40 * level HP in combat and twice more out of combat. Lifeline perks effects changed to 3/4/6/8 * level HP.\n");
 			outputText("-Violet Pupil Transformation effect changed to 5% max SF per turn to get 5% of max HP. Unicorn race would change ration from 5:5 to 4:5 and alicorn race would change ration to 3:6.\n");
+			outputText("-Entangle from using Battle Net have it cooldown reduced from 8 to 5 turns.\n");
+			outputText("-Reaching at least first tier of vampire race would double vampire thirst stacks gains from using vampire bite.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -186,18 +194,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
-			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items\n");
+			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
