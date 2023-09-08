@@ -1304,8 +1304,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomC15, null, null, null);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(11, "Down", roomD07);
-			else addButtonDisabled(11, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(11, "Down", roomD07);
+			//else addButtonDisabled(11, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomC21():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_21;
@@ -1787,8 +1787,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
 			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
-			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
+			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
+			//else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
 			//5
 			addButton(14, "Back", roomA01);
 		}
@@ -1798,8 +1798,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButtonDisabled(1, "Floor 2", "You're currently at Floor 2.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
 			else addButtonDisabled(2, "Floor 3", "You need to beat the guardian of floor 2 to use this teleport.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
-			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
+			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
+			//else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
 			//5
 			addButton(14, "Back", roomB01);
 		}
@@ -1808,8 +1808,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButton(0, "Floor 1", teleportToFloor1);
 			addButton(1, "Floor 2", teleportToFloor2);
 			addButtonDisabled(2, "Floor 3", "You're currently at Floor 3.");
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
-			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
+			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
+			//else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
 			//5
 			addButton(14, "Back", roomC01);
 		}

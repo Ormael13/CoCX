@@ -8008,14 +8008,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Acid Spit
-        if (!player.hasPerk(PerkLib.AcidSpit) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM, false) > 4) {
+        if (!player.hasPerk(PerkLib.AcidSpit) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM, false) > 7) {
             outputText("[pg]Your endowment begins to feel increasingly pleasurable to the point you drool small glowing blue drop of saliva on the ground lost in the pleasure of your oozing vagina/ and / dripping penis. You lose all desire as your eyes zero in on the smoking vegetation progressively corroded by your fluorescent drool. <b>It seems you now can drool acid!</b>\n");
             outputText("(<b>Perk Gained: Acid Spit</b>)");
             player.createPerk(PerkLib.AcidSpit, 0, 0, 0, 0);
             changes++;
         }
         //Azureflame Breath
-        if (!player.hasPerk(PerkLib.AzureflameBreath) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM, false) > 4) {
+        if (!player.hasPerk(PerkLib.AzureflameBreath) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM, false) > 7) {
             outputText("[pg]You suddenly belch a long neon blue flame in front of you roasting the nearby vegetation. It didn't hurt your throat however so you shrug. <b>Well you will have to control your blue fire breath better not to set fire to your own camp.</b>\n");
             outputText("(<b>Perk Gained: Azureflame Breath</b>)");
             player.createPerk(PerkLib.AzureflameBreath, 0, 0, 0, 0);

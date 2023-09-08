@@ -1954,10 +1954,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Acid Spit and Azureflame Breath
-			if (player.racialScore(Races.CAVEWYRM) < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath) && !player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
+			if (player.racialScore(Races.CAVEWYRM) < 7 && (player.hasPerk(PerkLib.AcidSpit) || player.hasPerk(PerkLib.AzureflameBreath)) && !player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
 				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic properties until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
-				player.removePerk(PerkLib.AcidSpit);
-				player.removePerk(PerkLib.AzureflameBreath);
+				if (player.hasPerk(PerkLib.AcidSpit)) player.removePerk(PerkLib.AcidSpit);
+				if (player.hasPerk(PerkLib.AzureflameBreath)) player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
 			}
 			//Titan Might

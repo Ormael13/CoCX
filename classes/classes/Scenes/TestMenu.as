@@ -1254,6 +1254,8 @@ public class TestMenu extends BaseContent
 		if (player.level < CoC.instance.levelCap - 9) addButton(1, "Add 10 LvL's", addsubLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
 		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (with stat and perk points).");
 		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (with stat and perk points).");
+		var negativeLevel:int = player.negativeLevel;
+		if (negativeLevel > 0 && player.level >= CoC.instance.levelCap) addButton(4, "-1 Neg LvL", recoverNegativeLevels).hint("Substract 1 Negative Level.");
 		addButton(14, "Back", SoulforceCheats);
 	}
 	public function BodyStateMenu():void {
@@ -2315,6 +2317,12 @@ public class TestMenu extends BaseContent
 			player.perkPoints -= cAmt;
 			outputText("\n\n<b>You have lost " + cAmt + " levels!</b>");
 		}
+		doNext(LevelDeLevel);
+	}
+	
+	public function recoverNegativeLevels():void {
+		player.recoverNegativeLevel(1);
+		outputText("\n\n<b>You now have recovered 1 negative level!</b>");
 		doNext(LevelDeLevel);
 	}
 
