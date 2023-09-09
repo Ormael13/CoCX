@@ -71,6 +71,16 @@ public class CaveWyrmRace extends Race {
 					"lib.mult": +0.50
 				})
 				.end();
+		
+		buildTier(16, "elder cave wyrm")
+				.namesTauric("elder cave wyrm", "elder cave wyrm-taur")
+				.buffs({
+					"str.mult": +0.90,
+					"tou.mult": +1.15,
+					"wis.mult": -0.30,
+					"lib.mult": +0.65
+				})
+				.end();
 	}
 }
 }

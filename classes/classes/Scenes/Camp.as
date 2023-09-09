@@ -2318,19 +2318,19 @@ public class Camp extends NPCAwareContent{
 		submenu(bd, menuForCombiningAndSeperating,0,false);
 	}
 	
-	public function menuCombining(weapon1: Weapon, weapon2: Weapon):void {
+	public function menuCombining(weapon1: *, weapon2: *):void {
 		clearOutput();
 		outputText("Combining.\n\n");
 		player.destroyItems(weapon1, 2);
 		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}
-	public function menuSeparating(weapon1: Weapon, weapon2: Weapon):void {
+	public function menuSeparating(weapon1: *, weapon2: *):void {
 		clearOutput();
 		outputText("Separating.\n\n");
 		player.destroyItems(weapon1, 1);
 		inventory.takeItem(weapon2, curry(menuSeparating1a, weapon2));
 	}
-	public function menuSeparating1a(weapon2: Weapon):void {
+	public function menuSeparating1a(weapon2: *):void {
 		outputText("\n\n");
 		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}

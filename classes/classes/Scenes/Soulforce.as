@@ -711,6 +711,7 @@ public class Soulforce extends BaseContent
 
 	public function corChange(change:int):void {
 		var cost:int = Math.abs(change) * 100;
+		if (change > 0) cost *= 0.5;
 		clearOutput();
 		if (player.soulforce >= cost) {
 			outputText("Consuming a little of soulforce, you adjust your corruption.");

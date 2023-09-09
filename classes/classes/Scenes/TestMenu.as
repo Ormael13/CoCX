@@ -1744,6 +1744,8 @@ public class TestMenu extends BaseContent
 			addButton(5, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
 			addButton(6, "D.ARC", AddDilutedArcaneRegenConcotion).hint("Add 1 diluted Arcane Regen Concotion.");
 			addButton(7, "A.R.CON", AddArcaneRegenConcotion).hint("Add 1 Arcane Regen Concotion.");
+			addButton(8, consumables.METHIRC.shortName, addConsumable, consumables.METHIRC).hint("Add 1 " + consumables.METHIRC.longName + ".");
+			addButton(9, consumables.P_M_CUM.shortName, addConsumable, consumables.P_M_CUM).hint("Add 1 " + consumables.P_M_CUM.longName + ".");
 			addButton(10, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 			addButton(11, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 			addButton(12, "-1-", NonEquipmentMenu, page - 2);
