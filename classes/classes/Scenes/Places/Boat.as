@@ -6,6 +6,7 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Lake.*;
 import classes.Scenes.NPCs.BelisaFollower;
@@ -141,26 +142,31 @@ public class Boat extends AbstractLakeContent
 
 		public function boatExplore():void
 		{
-			SceneLib.exploration.counters.boat++;
-			clearOutput();
-			outputText("You reach the dock without any incident and board the small rowboat.  The water is calm and placid, perfect for rowing.  ");
+			explorer.prepareArea(boatEncounter);
+			explorer.setTags("boat", "lakeBoat", "water");
+			explorer.prompt = "You explore the lake.";
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-				outputText("The water appears somewhat muddy and has a faint pungent odor.  ");
-				if (player.inte > 40) outputText("You realize what it smells like – sex.  ");
+				explorer.prompt += "The water appears somewhat muddy and has a faint pungent odor.  ";
+				if (player.inte > 40) explorer.prompt += "You realize what it smells like – sex.  ";
 			}
-			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n");
-			boatEncounter.execEncounter();
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.boat++;
+			}
+			explorer.leave.hint("Return to the shore");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		private function fishing():void {
 			outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
 			outputText("<b>You got a fish!</b>");
-			inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.FREFISH, explorer.done);
 		}
 
 		private function rowBoat():void {
 			if (rand(2) == 0) outputText("You row for nearly an hour, until your arms practically burn with exhaustion from all the rowing.");
 			else outputText("You give up on finding anything interesting, and decide to go check up on your camp.");
+			endEncounter(60);
 		}
 	}
 }
