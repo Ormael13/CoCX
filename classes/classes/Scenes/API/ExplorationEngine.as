@@ -214,6 +214,8 @@ public class ExplorationEngine extends BaseContent {
 			} else {
 				timePassedMinutes = ExplorationEntry.EncounterKinds[currentEntry.kind].time;
 			}
+		}
+		if (timePassedMinutes > 0) {
 			advanceMinutes(timePassedMinutes);
 		}
 		markEncounterDone();
