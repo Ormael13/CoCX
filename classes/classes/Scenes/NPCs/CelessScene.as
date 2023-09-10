@@ -352,8 +352,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("<i>\""+ player.mf("Dad", "Mom") +", is something wrong?\"</i>\n" +
 		"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
 		"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
-		explorer.stopExploring();
-		doNext(camp.returnToCampUseFourHours);
+		endEncounter(120);
 	}
 
 	//dialogue: 0 for Celess.
@@ -767,7 +766,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		findArmor();
 		inventory.takeItem(armors.CTPALAD, explorer.done);
 	}
-	
+
 	public function nightmareDefeated():void {
 		_age = _ageDidPregnancy;
 		_questFinished = _finishedNightmare;
@@ -1008,7 +1007,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 		}
 	}
-	
+
 	private function get myLocals():*{
 		return {
 			$name : _name,

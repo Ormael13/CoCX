@@ -29,7 +29,7 @@ public class HeXinDao extends BaseContent
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
 
     public function HeXinDao() {}
-	
+
 	public function riverislandVillageStuff0():void {
 		spriteSelect(null);
         clearOutput();
@@ -77,7 +77,7 @@ public class HeXinDao extends BaseContent
 		clearOutput();
 		outputText("The local restaurant seems to be offering some local specialties, and best of all; it's free! Some " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + "-morphs are serving the meal. You proceed to grab a plate of these strange ravioli the people calls jiǎozi, taking the rice dessert they call niángāo right after. The meal is comforting. For a moment, you could believe everything in Mareth was going fine... Until you look up, into the red sky, clouds roiling above the festival.");
 		player.refillHunger(50);
-		eachMinuteCount(30);
+		advanceMinutes(30);
 		doNext(riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing():void {
@@ -300,7 +300,7 @@ public class HeXinDao extends BaseContent
 			}
 			outputText(" in your camp.</b>")
 		}
-		
+
 		function buyAlembic(tier:int, priceGems:int):void {
 			Crafting.alembicLevel = tier;
 			player.gems -= priceGems;
@@ -315,7 +315,7 @@ public class HeXinDao extends BaseContent
 			statScreenRefresh();
 			doNext(alchemyTools);
 		}
-		
+
 		menu();
 		button(0).show("Alembic I", curry(buyAlembic, Crafting.ALEMBIC_LEVEL_SIMPLE, Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value))
 				 .hint("Buy a simple alembic to refine substances from ingredients.\n\nCost: "+Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value+" gems.")
@@ -810,7 +810,7 @@ public class HeXinDao extends BaseContent
         statScreenRefresh();
         inventory.takeItem(itype, soulequipmentshelf5);
     }
-	
+
 	public function entranceToRiverDungeon():void {
 		clearOutput();
 		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) {
@@ -866,7 +866,7 @@ public class HeXinDao extends BaseContent
         addButton(7, weaponsrange.SHURIKE.shortName, weaponrangeBuy2, weaponsrange.SHURIKE);
         addButton(14, "Back", ermaswiftarrowmerchant);
     }
-	
+
     private function weaponrangeBuy1(itype:ItemType):void {
         clearOutput();
         outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
@@ -903,7 +903,7 @@ public class HeXinDao extends BaseContent
         statScreenRefresh();
         inventory.takeItem(itype, ermaswiftarrowmerchantshelf2);
     }
-	
+
 	public function ermaswiftarrowmerchantarcherytraining():void {
 		clearOutput();
 		if (flags[kFLAGS.ERMA_ARCHERY_TRAINING] > 0) outputText("\"<i>Need more training? Sure, but it's 10 spirit stones, paid up front, if you would.</i>\"");
@@ -940,7 +940,7 @@ public class HeXinDao extends BaseContent
 			}
 		}
 	}
-	
+
 	public function qimerchant():void {
         clearOutput();
         outputText("After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. ");
@@ -958,7 +958,7 @@ public class HeXinDao extends BaseContent
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
-	
+
     private function flyingswordBuy(itype:ItemType):void {
         clearOutput();
         outputText("The flesh golem nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
@@ -1425,7 +1425,7 @@ public function soularena():void {
 		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseTwoHours);
 	}
- 
+
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 20;
@@ -1486,7 +1486,7 @@ public function soularena():void {
 		player.createKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil", 0, 0, 0, 0);
 		doNext(missAkemiManualsShop);
 	}
-	
+
 	private function golemancershop():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.GolemancerShop)) {
@@ -1621,7 +1621,7 @@ public function soularena():void {
 		outputText("\"<i>Always happy to do business: Anything else you want to buy?</i>\"\n\n");
 		inventory.takeItem(odd, golemancershopRepeat);
 	}
-	
+
     public function restaurantShiraOfTheEast():void {
         clearOutput();
         outputText("You arrive at the exotic food restaurant, ‘Shira of the east’ and look at the menu posted on the outside. Would you like get something to eat?");

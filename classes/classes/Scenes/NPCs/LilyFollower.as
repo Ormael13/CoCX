@@ -12,7 +12,7 @@ import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 
 use namespace CoC;
-	
+
 	public class LilyFollower extends NPCAwareContent implements SaveableState {
 		public static var LilyHairColor:String;
 		public static var LilySkinTone:String;
@@ -115,7 +115,7 @@ use namespace CoC;
 			startCombat(new Lily());
 			//doNext(playerMenu);
 		}
-		
+
 		public function LilyAfterBattle():void {
 			clearOutput();
 			if (LilySubmissivenessMeter<=20) outputText("The Drider Woman falls onto her side, baring her teeth at you. <i>\"I...Won’t…\"</i> She draws her bow back, aiming with shaking hands, but the arrow flies past. <i>\"Damn you\"</i>. She watches, anger in her gaze, as you approach. <i>\"Well...What do you want?\"</i>\n\n");
@@ -213,7 +213,7 @@ use namespace CoC;
 			lilyAffection(5);
 			cleanupAfterCombat();
 		}
-		
+
 		public function LilySubComeCamp():void {
 			clearOutput();
 			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
@@ -227,7 +227,7 @@ use namespace CoC;
 				.disableIf(player.isGenderless(), "Not for genderless ones.")
 				.disableIf(TyrantiaFollower.TyrantiaFollowerStage < 4, "Maybe there's an alternative?", "???");
 		}
-		
+
 		public function LilyTyrantia3some1st():void {
 			clearOutput();
 			outputText("Struck by a fun idea, you decide to leave your Drider-toy tied up to a tree outside camp. You tell your toy that you’ll be back soon, and that she’d better be ready for a fucking.\n\n");
@@ -244,7 +244,7 @@ use namespace CoC;
 			addButton(1, "Fuck", LilyTyrantia3Fuck).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(2, "LickYou", LilyTyrantia3Lick).disableIf(!player.hasVagina(), "Req. a vagina!");
 		}
-		
+
 		public function LilyTyrantia3some():void {
 			clearOutput();
 			outputText("You leave Lily tied up at a small tree, not far from camp, and come back in, getting your giantess lover’s attention. You ask her if she’d like to have some family bonding time with you and her little sister. Tyrantia grabs her Dick, giving you a thumbs up. She follows you out to the tree, whistling in appreciation at the sight of her little sister, bound, gagged and blindfolded.\n\n");
@@ -253,7 +253,7 @@ use namespace CoC;
 			addButton(1, "Fuck", LilyTyrantia3Fuck).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(2, "LickYou", LilyTyrantia3Lick).disableIf(!player.hasVagina(), "Req. a vagina!");
 		}
-		
+
 		public function LilyTyrantia3Fuck():void {
 			outputText("You undress slowly, then step in. Practically whining with need, Lily’s bound hands quiver as she tries to bring them to her soaking quim. You take your time, then as she struggles with her bindings, you bring your hand to her slit, rubbing the length of her womanhood with one finger. Lily shivers, chitin-covered knees quivering.\n\n");
 			outputText("She bites down on a moan of arousal as you bring a second finger in, sinking your fingers in, just to the first knuckle. She quivers as you begin fingering her, slowly teasing Lily with your hands. She tries to hold herself back, but Lily begins panting, quad breasts shaking as you slowly pick up the pace, sinking your fingers deeper, flicking her clit with your tongue.\n\n");
@@ -281,7 +281,7 @@ use namespace CoC;
 			if (!LilyFollowerState || recalling) LilyTyrantiaAfterFirst();
 			else LilyTyrantiaAfterSex();
 		}
-		
+
 		public function LilyTyrantiaAfterFirst():void {
 			outputText("<i>\"Wh-who else was there? I...You’re my [master], but I didn’t...I didn’t...want…Anyone else to-\"</i> She takes the blindfold off, and her mouth flies open as she beholds your giantess lover beside you, licking Lily’s leavings off her Dick.\n\n");
 			outputText("<i>\"Oh, hey sis.\"</i> Tyrantia says, swallowing some of her sister’s spunk. <i>\"Fancy meeting you here.\"</i>\n\n");
@@ -292,7 +292,7 @@ use namespace CoC;
 			outputText("<i>\"Now we’ve had our fun, can I show her around?\"</i> Tyrantia asks, and you nod. Tyrantia takes her sister by the hand. <i>\"Well, you’ve already sampled the best part, but the rest of this place isn’t bad either.\"</i> The two Driders saunter towards Tyrantia’s section of camp.\n\n");
 			doNext(recalling ? recallWakeUp : LilyComeCampConclusion);
 		}
-		
+
 		public function LilyTyrantiaAfterSex():void {
 			outputText("Tyrantia unbinds her little sister, who simply stares up at her, tongue out and eyes glazed over. <i>\"Good girl,\"</i> your giantess says simply, patting Lily’s head. The smaller Drider looks over at you, a blissed out look on her face.\n\n");
 			outputText("<i>\"[master], that…was…\"</i> Lily shakes, and you reach to her face, cupping her cheek in your palm. You tell your pet she did well, and Lily smiles, eyes closing as she flops the rest of the way to the ground.\n\n");
@@ -300,7 +300,7 @@ use namespace CoC;
 			endEncounter();
 		}
 
-		
+
 		public function LilyEnterCamp():void {
 			clearOutput();
 			outputText("You bring Lily near your camp, and turn around again to look at your Drider-toy. Her legs are shaking, and her quad tits tremble as she’s working at her blindfold with her elbows. She manages to lever the blindfold off, and she looks at the camp with a somewhat impressed look on her face. <i>\"[master], is this your camp?\"</i> She asks, and you smile, taking your pet’s face in your hands.\n\n");
@@ -309,7 +309,7 @@ use namespace CoC;
 			outputText("You give Lily a gentle shove, and she nods, understanding what you mean. She runs towards a tree near the river, not far from camp. You head back into camp, and as you turn back towards Lily’s Tree, you can already see her spinning out threads.\n\n");
 			LilyComeCampConclusion();
 		}
-		
+
 		public function LilyBringCamp():void {
 			clearOutput();
 			outputText("You ask Lily about her life in the swamp. She shrugs, looking around. <i>\"It’s nice for a Drider like me, although to be honest, the neighbors aren’t exactly ideal\".</i> She looks at you, a pained smile on her face. <i>\"I enjoy a good tussle or lay as much as the next gal, but...Those...Things aren’t even a good fuck. They’re all for tying you up, but they’ve got no finesse...Not to mention the dicks on them. I like a good lay, but they’re...Wrong\".</i> She looks down at herself. <i>\"Not that I can really talk...I became like them, living in the swamp.\"</i>\n\n");
@@ -322,7 +322,7 @@ use namespace CoC;
 			outputText("You leave Lily to her own devices, as she begins to spin her thread, scuttling up the trunk and weaving lines between the branches. You know from experience it won’t take her long to finish her construction, if her thread-volume before is anything to judge by.\n\n");
 			LilyComeCampConclusion();
 		}
-		
+
 		private function LilyComeCampConclusion():void {
 			if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) {
 				outputText("As you watch Lily leave to make her house, your mousey lover pokes her head out from a nearby rock. <i>\"Uh…Hey.\"</i> Amily comes out, keeping one eye on Lily. <i>\"Can I talk with you for a second?\"</i> You nod, and she sits down.\n\n");
@@ -353,7 +353,7 @@ use namespace CoC;
 			DriderTown.LilyKidsPCPregnancy = 0;
 			cleanupAfterCombat(explorer.done);
 		}
-		
+
 		public function LilySex():void {
 			clearOutput();
 			if (LilyFollowerState) outputText("You step in, slipping one hand into Lily’s sopping quim. She gasps, shuddering, and you take a step back. Lily gives you a smirk, rubbing one of her nipples. <i>\"Oh, are we in the mood for some fun, [name]?</i>\n\n");
@@ -378,7 +378,7 @@ use namespace CoC;
 			addButton(1, "ThrFuck", LilyThroatFuck).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(2, "Facemount", LilyFaceSit).disableIf(!player.hasVagina(), "Req. a vagina!");
 		}
-		
+
 		public function LilyThroatFuck():void {
 			clearOutput();
 			outputText("You put both of your hands on her shoulders, pushing down. Her legs fold underneath her, and she closes her mouth, apparently anticipating your next move. You shake your head, grabbing the Drider’s nose and pinning her nostrils shut with one hand. You grab her hair with your other hand, shaking her head roughly.\n\n");
@@ -391,7 +391,7 @@ use namespace CoC;
 			player.sexReward("saliva","Dick");
             cleanupAfterCombat();
 		}
-		
+
 		public function LilyFaceSit():void {
 			clearOutput();
 			outputText("Taking calm strides around your trussed up spider-slut, you drop your hands between your own legs. Gently, you rub your [clit], giving your captive a nice, long look at your pussy. You ask the Drider if she can see what’s wrong.\n\n");
@@ -409,7 +409,7 @@ use namespace CoC;
 			player.sexReward("saliva");
             cleanupAfterCombat();
 		}
-		
+
 		public function LilyJillOff():void {
 			clearOutput();
 			outputText("You walk up to her, forcing the drider back. Despite her best efforts, her legs are still weak, and all she does is fall backward, arching her back over her spider half.\n\n");
@@ -444,7 +444,7 @@ use namespace CoC;
 				.disableIf(LilySubmissivenessMeter < 100, "Maybe if she's a full sub?", "???")
 				.disableIf(!LilyFollowerState, "Not yet!", "???");
 		}
-		
+
 		public function LilyBondageTree():void {
 			clearOutput();
 			outputText("You decide that there is no time like the present. You roughly pull Lily over to a nearby tree, shoving her Drider back half up against the hardwood. Blind, backed into a wall, and horny, Lily pushes back ever so slightly. You press harder, getting an aroused moan from the Drider. Lily’s protests subside, and you can see a bit of drool running down her cheek.\n\n");
@@ -452,7 +452,7 @@ use namespace CoC;
 			addButton(1, "Vagfuck", LilyBondageTreeVagfuck).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(2, "LegJill", LilyBondageTreeLilyLegs).disableIf(!player.hasVagina(), "Req. a vagina!");
 		}
-		
+
 		public function LilyBondageCabin():void {
 			clearOutput();
 			outputText("You take Lily by the chain on her four, pierced nipples, forcing her to blindly follow you into your cabin. Catching sight of one of the ceiling beams, you make a loop out of spider-silk, tossing your crude rope over the beam. Belisa squirms, letting out a surprised moan as her arms are lifted, forced up and over her head.\n\n");
@@ -463,7 +463,7 @@ use namespace CoC;
 			addButton(2, "Fuck", LilyBondageCabinFuck).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(4, "Tease", LilyBondageCabinTease);
 		}
-		
+
 		public function LilyBondageCabinWait():void {
 			clearOutput();
 			outputText("For a few minutes, you stay perfectly still and quiet, letting her skitter around the cabin on her leash. She hits the bed with her frontmost legs, then slows down, whimpering. Her pussy is still drooling, but her whimpers of arousal begin to get lower, and sadder. You watch as she begins to think you abandoned her there, blind and gagged, with nobody to come and get her.\n\n");
@@ -477,7 +477,7 @@ use namespace CoC;
 			addButton(2, "Fuck", LilyBondageCabinFuck).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(4, "Tease", LilyBondageCabinTease);
 		}
-		
+
 		public function LilyBondageCabinAssDangle():void {
 			clearOutput();
 			outputText("You grin, an idea forming in your head. You run your hands along her womanly back, her black hair. Lily pulls at her bindings, but you slap her thorax, right next to her silk-hole. You tell Lily to make more silk, and are rewarded with a spurt of crude strands. You slap her again, getting more silk, and you grin, wrapping several strands around each of your Drider-pet’s legs, twisting the strands together, then tossing the rope over one of the cabin’s support beams. You come back around to her front, still holding your improvised ropes. Lily tilts her head, slightly confused.\n\n");
@@ -498,7 +498,7 @@ use namespace CoC;
 			lilyAffection(5);
 			endEncounter();
 		}
-		
+
 		public function LilyBondageCabinDildo():void {
 			clearOutput();
 			outputText("<i></i>\n\n");
@@ -507,7 +507,7 @@ use namespace CoC;
 			player.sexReward("vaginalFluids","Pussy");
 			endEncounter();
 		}
-		
+
 		public function LilyBondageCabinFuck():void {
 			clearOutput();
 			outputText("You whisper into her ear, asking her if she wants your big, [cock] inside you. If she wants to be stuffed, filled with cum, bred like the little spider-bitch she is. Lily groans, sticking her quad breasts in your direction. <i>\"Mmm!\"</i> You remove the gag, informing her that you can’t hear her.\n\n");
@@ -523,7 +523,7 @@ use namespace CoC;
 			player.sexReward("vaginalFluids","Dick");
 			inventory.takeItem(useables.T_SSILK, explorer.done);
 		}
-		
+
 		public function LilyBondageCabinTease():void {
 			clearOutput();
 			outputText("You grin, an idea forming in your head. You run your hands along her womanly back, her black hair. Lily pulls at her bindings, but you slap her thorax, right next to her silk-hole. You tell Lily to make more silk, and are rewarded with a spurt of crude strands. You slap her again, getting more silk, and you grin, wrapping several strands around each of your Drider-pet’s legs, twisting the strands together, then tossing the rope over one of the cabin’s support beams. You come back around to her front, still holding your improvised ropes. Lily tilts her head, slightly confused.\n\n");
@@ -547,7 +547,7 @@ use namespace CoC;
 			player.sexReward("vaginalFluids");
 			endEncounter();
 		}
-		
+
 		public function Lily3Somes():void {
 			clearOutput();
 			outputText("You grin at your submissive Drider-bitch, telling her to hold on a second. You know that she wants some fun, but you grin, telling her that she’s going to have some other company tonight. Lily’s eyes widen in excitement, and she rubs her hands together.\n\n");
@@ -576,14 +576,14 @@ use namespace CoC;
 			addButton(0, "S.Sandwich", SandwichSidonie).disableIf(!player.hasCock(), "Req. a cock!");
 			addButton(1, "S.Dom", SidonieDom);
 		}
-		
+
 		public function LilySpitRoast():void {
 			clearOutput();
 			outputText("\n\n");
 			player.sexReward("vaginalFluids");
 			endEncounter();
 		}
-		
+
 		public function SandwichSidonie():void {
 			clearOutput();
 			outputText("You undress, your [cock] already rock hard. You give yourself a pump, then slide over to Sidonie. You slowly strip your equine lover, giving Lily plenty of time to take in the luscious breasts, the heavy muscles, and most of all, the massive tool of Sidonie. You tell Sidonie that she gets her turn first, and that you’ll jump in after you...warm yourself up.\n\n");
@@ -606,7 +606,7 @@ use namespace CoC;
 			LilyAffectionMeter += 10;
 			endEncounter();
 		}
-		
+
 		public function SidonieDom():void {
 			clearOutput();
 			outputText("Slipping your hand down Sidonie’s hotpants, you grip her tool. She flinches, but doesn’t move. You tell Sidonie that you’ve always wondered what Lily saw in being the bottom...Until now. You slowly, sensually begin to stroke Sidonie off, rubbing the tip of her glorious tool until she pulls her hotpants down, her veiny rod on full display. Lily, watching, blushes bright red, her own cooter still dripping with lust.\n\n");
@@ -733,10 +733,10 @@ use namespace CoC;
 			outputText("You point at Joy, somewhat curious as to what the bumbling bimbo will choose to do. Joy squeals with delight, leaping onto your Drider-toy’s back, grabbing her shoulders and slapping her spinnerets hard.\n\n");
 			outputText("<i>\"Cmon, try and throw me off!\"</i> She yells, and Lily is all too happy to comply. She throws herself into the air, wiggles from side to side, and keeps changing angles. Joy holds on for dear life, eyes widening and mouth wide open as her furry ass slams repeatedly into Lily’s hard carapace. After a particularly wide buck and hard jump, one of Joy’s hands is wrenched from Lily’s shoulder. Once that happens, it isn’t long before your mouse-bimbo is sent flying.\n\n");
 			outputText("<i>\"WHEEEEEEeeeee...\"</i> she’s thrown a good twenty feet, hitting the grass rolling. Bruised but unharmed, Joy springs back up, giggling as she dances from side to side.\n\n");
-			eachMinuteCount(15);
+			advanceMinutes(15);
 			doNext(playerMenu);
 		}
-		
+
 		public function LilyBondageTreeVagfuck():void {
 			clearOutput();
 			outputText("You step in, slapping Lily’s front legs aside. Smiling, you disrobe, pulling your [cock] out. Taking your shaft in one hand, you rub yourself, blood rushing to your [cock]. Now rock-hard, you look at your tied up fucktoy as she moans, her pussy already dripping.\n\n");
@@ -750,7 +750,7 @@ use namespace CoC;
 			lilyAffection(5);
             cleanupAfterCombat();
 		}
-		
+
 		public function LilyBondageTreeLilyLegs():void {
 			clearOutput();
 			outputText("Eyeing the Drider-woman’s spider-legs, you get an idea. You put your hands on her shoulders, forcing the Drider to lie down. You take the tip of her leg in one hand, running your fingers along the smooth chitin.\n\n");
@@ -768,7 +768,7 @@ use namespace CoC;
 			addButton(1, "No", LilyDenied);
 			addButton(2, "Sure", LilyReward);
 		}
-		
+
 		public function LilyDenied():void {
 			clearOutput();
 			outputText("You laugh, saying that if she’s a good girl and isn’t so needy next time, you’ll consider it. She wails, flailing angrily against the restraints as you redress and walk away.\n\n");
@@ -776,7 +776,7 @@ use namespace CoC;
 			lilyAffection(-5);
             cleanupAfterCombat();
 		}
-		
+
 		public function LilyReward():void {
 			clearOutput();
 			outputText("You stand, shakily, and lean in. You pull the gag aside, further down her neck, and you remove the blindfold. Lily’s eyes are widened, worried, but as you bring a hand to her dripping pussy, flicking her black button, the relief on your Drider-toy’s face is obvious.\n\n");
@@ -792,7 +792,7 @@ use namespace CoC;
 			lilyAffection(5);
             cleanupAfterCombat();
 		}
-		
+
 		private function chanceToFail():Number {
 			var chance:Number = 10;
 			chance += Math.min(player.cumQ() / 25,40);
@@ -805,7 +805,7 @@ use namespace CoC;
 				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Lily is pregnant!</b>");
 			}
 		}
-		
+
 		public function LilyCampFollower(back:Boolean = false):void {
 			clearOutput();
 			if (!back) {
@@ -826,7 +826,7 @@ use namespace CoC;
 			if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 			addButton(14, "Leave", camp.campLoversMenu);
 		}
-		
+
 		public function LilyFollowerSex():void {
 			clearOutput();
 			outputText("You give Lily a waggle of your eyebrows, before stepping in, grabbing the chain crossing her chest and pulling. Lily gives you a moan, but says nothing. Her body, however, is honest. Lily's cunt begins drooling almost immediately, and her back legs tap rapidly.\n\n");
@@ -840,7 +840,7 @@ use namespace CoC;
 				.disableIf(!LilyFollowerState, "Not yet!", "???");
 			addButton(4, "Back",LilyCampFollower, true);
 		}
-		
+
 		public function LilyAppearance():void {
 			clearOutput();
 			outputText("Lily is a Drider, at first glance not that different from the others in the swamp. Her six eyes are violet, glowing slightly when it’s dark. Her dark lips shimmer, with twin fangs poking out from the upper lips. Her " + LilySkinTone + " skin is smooth, and her nakedness lets you see all of it, from her forehead down to her waist, where the supple skin smoothly transitions into shining black chitin. Her human hands transition into the same black chitin at her forearms, then back at her shoulders, almost like she’s wearing chitin bracers.\n\n");
@@ -849,7 +849,7 @@ use namespace CoC;
 			outputText("As she sees you looking at her, Lily gives you a sly three-eyed wink, sliding a hand down her waist, making eye contact with you as she rubs her rapidly swelling ebony pussy lips with one hand.\n\n");
 			doNext(LilyCampFollower, true);
 		}
-		
+
 		public function LearningWithLily():void {
 			clearOutput();
 			if (LilyTalked > 4) {
@@ -888,7 +888,7 @@ use namespace CoC;
 			outputText("You tell Lily that you’d rather not right now, and that you wanted to get to know her better. Your lover-toy nods, shuddering.\n\n");
 			outputText("\"<i>I want...Are you sure?</i>\"\n\n");
 			outputText("You assure her that you’re not interested in plundering her booty right now. Lily throws a glob of old webbing at you, and you chuckle to yourself as you climb down the tree, walking away from Lily’s home.\n\n");
-			eachMinuteCount(10);
+			advanceMinutes(10);
 			doNext(playerMenu);
 		}
 		public function LearningWithLilyYes(book:Number):void {
@@ -913,10 +913,10 @@ use namespace CoC;
 				default:
 					outputText("You have encounterd a BUG and i not mean drider-bug but just... BUG. Report to Ormale/Aimozg this (not at all drider) BUG.");
 			}
-			eachMinuteCount(30);
+			advanceMinutes(30);
 			doNext(playerMenu);
 		}
-		
+
 		public function LilySpar():void {
 			spriteSelect(SpriteDb.s_drider);
 			clearOutput();

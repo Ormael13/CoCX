@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
@@ -21,11 +21,11 @@ public class DungeonEngine extends DungeonAbstractContent {
     public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
     public var beehive:BeeHive = new BeeHive;
     public var demonLab:DemonLab = new DemonLab();
-    
+
     public var map:DungeonMaps = new DungeonMaps;
-    
+
     public function DungeonEngine() {}
-    
+
     public function getRoomFunc(dungeonLoc:int):Function {
         switch(dungeonLoc) {
             //Cabin
@@ -262,7 +262,7 @@ public class DungeonEngine extends DungeonAbstractContent {
     public function checkRoom():void {
         getRoomFunc(dungeonLoc)(); //no null-checking - error will be already thrown
     }
-    
+
     public function checkFactoryClear():Boolean {
         return (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] > 0 && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] > 0 && (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] > 0 || flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0));
     }
@@ -326,8 +326,8 @@ public class DungeonEngine extends DungeonAbstractContent {
         return flags[kFLAGS.EBON_LABYRINTH_RECORD] >= nextAwardEL();
         //return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
     }
-    
-    
+
+
     public function canFindDeepCave():Boolean {
         return flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0
                 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0;
@@ -335,17 +335,17 @@ public class DungeonEngine extends DungeonAbstractContent {
     public function canFindDenOfDesire():Boolean {
         return flags[kFLAGS.GAR_NAME] != 0;
     }
-    
+
     public function navigateToRoom(room:Function = null):void {
-        eachMinuteCount(5);
+        advanceMinutes(5);
         room();
     }
     public function navigateToRoomRD(room:Function = null):void {
         if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-        eachMinuteCount(5);
+        advanceMinutes(5);
         room();
     }
-    
+
     /**
      * Set the top buttons for use while in dungeons.
      */
@@ -356,7 +356,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         mainView.hideMenuButton( MainView.MENU_DATA );
         SceneLib.camp.setLevelButton(true);
     }
-    
+
     /**
      * Set the buttons for use in dungeons. The parameters can be used to connect to rooms.
      * @param	northFunction
@@ -400,13 +400,13 @@ public class DungeonEngine extends DungeonAbstractContent {
     */
 
     //Old button function here. The function itself was moved into EL, but can be brought back for new dungeons.
-	
+
 	//IT"S FOR NEW DUNGEON SIMILAR TO BOTH EL AND RD SO PLEASE NOT KEEP TRYING TO DELETE THAT CODE -.-
     /*
     public function navigateToRoomEL(room:Function = null):void {
         if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
         player.addStatusValue(StatusEffects.EbonLabyrinthB, 1, 1);
-        eachMinuteCount(15);
+        advanceTimeNoEvents(15);
         room();
     }
     public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {

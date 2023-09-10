@@ -33,11 +33,11 @@ import classes.internals.Utils;
 			EngineCore.doNext.apply(null, [func].concat(args));
 		}
 		protected function rand(n:Number):int { return Utils.rand(n); }
-		
+
 		override public function get category():String {
 			return CATEGORY_CONSUMABLE;
 		}
-		
+
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);
 		}
@@ -64,7 +64,7 @@ import classes.internals.Utils;
 		protected function dynStats(... args):void {
 			game.player.dynStats.apply(game.player, args);
 		}
-		
+
 		// Random drop table: [weight:number, essence:int][];
 		public var essences: /*Number[]*/Array = null;
 		// Random drop table: [weight:number, essence:int][];
@@ -73,7 +73,7 @@ import classes.internals.Utils;
 		public var residues: /*Number[]*/Array = null;
 		// Random drop table: [weight:number, pigment:String][];
 		public var pigments: /*Array*/Array = null;
-		
+
 		public function getRefineReagents(type:int):/*AlchemyReagent*/Array {
 			var result:/*AlchemyReagent*/Array = [];
 			var source:/*Array*/Array;
@@ -96,7 +96,7 @@ import classes.internals.Utils;
 					getRefineReagents(AlchemyLib.RT_SUBSTANCE)
 			)
 		}
-		
+
 		public function get isRefinable():Boolean {
 			return essences || substances || residues || pigments;
 		}
@@ -114,16 +114,26 @@ import classes.internals.Utils;
 				residues:/*Number[]*/Array = null,
 				pigments:Array = null
 		):Consumable {
+			var i:int;
 			if (substances && substances.length > 0) {
 				if (!this.substances) this.substances = [];
+				for each (i in substances) {
+					if (!AlchemyLib.Substances[i]) throw new Error("Ingredient "+id+" has invalid refineableInto substance "+i);
+				}
 				pushAll(this.substances, substances);
 			}
 			if (essences && essences.length > 0) {
 				if (!this.essences) this.essences = [];
+				for each (i in essences) {
+					if (!AlchemyLib.Essences[i]) throw new Error("Ingredient "+id+" has invalid refineableInto essence "+i);
+				}
 				pushAll(this.essences, essences);
 			}
 			if (residues && residues.length > 0) {
 				if (!this.residues) this.residues = [];
+				for each (i in residues) {
+					if (!AlchemyLib.Residues[i]) throw new Error("Ingredient "+id+" has invalid refineableInto residue "+i);
+				}
 				pushAll(this.residues, residues);
 			}
 			if (pigments && pigments.length > 0) {
@@ -145,7 +155,7 @@ import classes.internals.Utils;
 					}
 				}
 				// merge duplicates
-				for (var i:int = 0; i < this.pigments.length; i++) {
+				for (i=0; i < this.pigments.length; i++) {
 					for (var j:int = this.pigments.length-1; j > i; j--) {
 						if (this.pigments[i][1] == this.pigments[j][1]) {
 							this.pigments[i][0] += this.pigments[j][0];

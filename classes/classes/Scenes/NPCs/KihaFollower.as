@@ -2441,8 +2441,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger).\n\n");
         outputText("As you reach camp, Kiha puts a hand on each of your shoulders. \"<i>… One more thing.</i>\" She says. \"<i>The ring… It can tell you where I am… and the other way around.</i>\" She blushes, and you can hear her voice waver. \"<i>… Just in case.</i>\"\n\n");
         ProposalStatus = 3;
-        explorer.stopExploring();
-        doNext(camp.returnToCampUseTwoHours);
+        endEncounter(120);
     }
 
     public function KihaProposalDelay():void {
@@ -2450,8 +2449,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("Stunned into silence, you sit back down without another word. After a few seconds, Kiha whispers your name, and you look back at her. “W-well?” You tell Kiha that this is really sudden. You didn’t expect this… hell, you didn’t expect to find love here, let alone something like this. Kiha’s tail lies still behind her, and her eyes moisten. “So… that’s a no?” She’s almost whispering at this point, her dusky skin sallow and the color draining from her scales. \n\n"+
                     "You kneel down in front of Kiha, and you tell her that you’re sorry. You need some time to process all this. You tell the distraught dragoness that you love her, you do, but that you’re a bit overwhelmed. “O-oh… ” Kiha seems a little better at that, but she clearly was hoping to win you over tonight. You pick her up off the ground, giving your lover a hug. Kiha hugs back, but you can feel her tears on your back. “Well… Tell me when you make up your mind… I’ll be at camp if you need me.”");
         ProposalStatus = 4;
-        explorer.stopExploring();
-        doNext(camp.returnToCampUseTwoHours);
+        endEncounter(120);
     }
 
     public function KihaProposalNo():void {
@@ -2460,8 +2458,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("\"<i>… So I really am just another piece in your harem.</i>\" Kiha closes her eyes. \"<i>… Thank you for telling me earlier.</i>\" Her sarcasm is bitter, and you can all but see her walls going back up. You reach a hand out to Kiha, but the hot-headed dragoness lets loose a gout of flame. You jump back, and Kiha glares at you. \"<i>Just… leave me alone, [name]. Go back to camp.</i>\" You delay, and she roars her rage, spitting more flame at you. \"<i>GO!!!</i>\"\n\n");
         outputText("You head back to camp, her angered voice ringing in your ears.\n\n");
         ProposalStatus = 6;
-        explorer.stopExploring();
-        doNext(camp.returnToCampUseTwoHours);
+        endEncounter(120);
     }
 
     public function KihaMarriedHug():void {
@@ -2859,13 +2856,13 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (DemonLab.MainAreaComplete < 4) {
             outputText("“<i>… Well, I’m working on some stuff… Mainly just trying to find out what happened… Put up some gravestones… Maybe a shrine?</i>” Kiha seems at a loss. “<i>… Mainly just… I want anyone who comes by to… see that there were people there.</i>” She sighs. “<i>Thanks for worrying, though… It means a lot to me, even if I don’t show it.</i>”\n\n");
             outputText("\n\n");
-            eachMinuteCount(15);
+            advanceMinutes(15);
             doNext(TalkWithKiha);
         }
         if (DemonLab.MainAreaComplete == 4) {
 			if (FlameSpreaderKillCount > 0 && FlameSpreaderKillCount < 5) {
 				outputText("“<i>Finding those abominations has been hard.</i>” She admits. “<i>They’re fast, and hard to kill.</i>” She gives you a wry smile. “<i>But you seem to just run into them, don’t you, my idiot?</i>” Her smile fades. “<i>I’ve dug graves for them, and… Made some markers. Now… I just need to fill them. Those people are gone, and there’s no way to bring them back… But at least I can make sure they rest.</i>”\n\n");
-				eachMinuteCount(15);
+				advanceMinutes(15);
 				doNext(TalkWithKiha);
 			}
 			if (FlameSpreaderKillCount >= 5 && !FlameSpreaderBossKilled) {
@@ -2940,7 +2937,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
                 + "“<i>Okay, fine. I’ll play nice.</i>” Kiha mutters. “<i>You’re lucky [name]’s around.</i>” \n"
                 + "\n"
                 + "“<i>Funny, I was going to say the same to you.</i>” Ember fires back");
-            eachMinuteCount(15);
+            advanceMinutes(15);
             doNext(playerMenu);
         }
 
@@ -2949,7 +2946,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             outputText("You tell Ember to lay off Kiha. Just because she wasn’t born a dragon doesn’t make her flames any less real. \n"
                 + "\n"
                 + "“<i>Almost like I’ve been saying that since you hatched!</i>” Kiha throws her hands into the air. “<i>Get it through your thick head! Just because you’re a dragon doesn’t mean shit anymore!</i>” Ember staggers back, as if punched. [Ember ey] looks down, then opens [ember eir] mouth, spewing flame at you and Kiha. You cover your eyes, and by the time you open them again, Ember’s already taken off. Kiha gives you a respectful nod.");
-            eachMinuteCount(15);
+            advanceMinutes(15);
             doNext(playerMenu);
         }
 
@@ -2958,7 +2955,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             outputText("You sheepishly tell Kiha that Ember does have a point. While Kiha is a dragon now, she wasn’t born one. \n"
                 + "\n"
                 + "“<i>See, even [name] can recognize the difference between us.</i>” Ember laughs haughtily. “<i>So leave me be, faker.</i>” Kiha gives you a heated glare, then spits on the ground at Ember’s feet. “<i>We never should have sheltered your kind.</i>” She turns her back, heading back to her section of the camp.");
-            eachMinuteCount(15);
+            advanceMinutes(15);
             doNext(playerMenu);
         }
 
@@ -2977,7 +2974,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
                 + "“<i>And what is it, fake dragon?</i>” Ember scowls, rolling her eyes, and in that moment, Kiha strikes, landing a solid uppercut along Ember’s jaw. You watch as Ember, launched backwards by Kiha’s strength, hits [ember eir] head on a tree. \n"
                 + "\n"
                 + "“<i>Fucking stop calling me that, you arrogant shit!</i>” Kiha takes off towards the forest. Ember growls, kicking off and baring her talons as she chases after.");
-            eachMinuteCount(15);
+            advanceMinutes(15);
             doNext(playerMenu);
         }
     }
@@ -2997,7 +2994,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "“<i>W-well, I suppose you’re an adequate sparring partner.</i>” Kiha says, rubbing her wing. “<i>Good to see you’ve kept the rust off.</i>” \n"
             + "\n"
             + "You clear your throat, and the two monstrous ladies turn. You grin, saying that you’re glad you have such powerful allies. They seem to enjoy the praise, Tyrantia blushing and Kiha nodding, a small smile forming.\n\n");
-        eachMinuteCount(15);
+        advanceMinutes(15);
         if (fromTyrantia) outputText("You say that you came to check up on the resident giantess, and Kiha nods, rubbing her wing. “<i>I’ll just be down by the water.</i>”");
         else outputText("You tell Kiha that you came to see her, and she nods. “<i>Alright. What do you want, doofus?</i>” Tyrantia excuses herself, heading down to the river to wash up.");
     }
@@ -3035,7 +3032,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "\n"
             + "“<i>Only if we hunt on the way.</i>” Kiha chimes in, still glowering at Sidonie. “<i>I’m still hungry.</i>” \n"
             + "The two women walk off towards the woods, axes in hand, but from the tone, you’re confident they won’t kill each other at least.\n");
-        eachMinuteCount(15);
+        advanceMinutes(15);
         doNext(playerMenu);
     }
 
@@ -3112,7 +3109,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "Kiha almost laughs at your spider-girl’s nervousness. “<i>Lots of talking. Some pointless, some not. Look, I’m not gonna try and burn your house down… And I’m… Sorry if I insulted your weaving.</i>” \n"
             + "\n"
             + "“<i>You’re not?</i>” Belisa seems to relax a little at that. “<i>Okay… I guess that’s a start… </i>”  The two start talking, and you excuse yourself. They’re not fighting, good enough.");
-        eachMinuteCount(15);
+        advanceMinutes(15);
         doNext(playerMenu);
     }
 
@@ -3160,7 +3157,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
                 "“<i>… She’s not the only one who has to deal with that. With those fucking demons, there’s a lot of pent up lust to go around. And the last thing I want is to get some of those stupid fuzzy ears, just because SHE couldn’t keep her juice to herself.</i>” Kiha huffs, sending a bit of smoke into the air. [pg]"+
                 "You ask Kiha if she has trouble dealing with that sort of thing, and she gives you a glare. “<i>Pervert</i>”, she says simply, before taking off."
         );
-        eachMinuteCount(15);
+        advanceMinutes(15);
         doNext(playerMenu);
     }
 

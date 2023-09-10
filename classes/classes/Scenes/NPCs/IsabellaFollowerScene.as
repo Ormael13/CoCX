@@ -1413,8 +1413,7 @@ private function isabellaBarnFuckPartII():void {
 	dynStats("sen", -3);
 	fatigue(-25);
 	isabellaKnockUpAttempt();
-	explorer.stopExploring();
-	doNext(camp.returnToCampUseTwoHours);
+	endEncounter(120);
 }
 
 //------------

@@ -12,10 +12,10 @@ import coc.view.ButtonDataList;
 
 public class Michiko extends NPCAwareContent
 	{
-		
+
 		public function Michiko()
 		{}
-		
+
 public function firstMeetingMichiko():void {
 	clearOutput();
 	outputText("Entering the humble eastern establishment exposes you to the confounding scents of a foreign land. Your confusion only draws you in, wanting to experience these foods for yourself, your feet moving in step with your mind towards the origin of the mystifying aromas.\n\n");
@@ -95,7 +95,7 @@ public function campMichikoMainMenu():void {
 			menu();
 			submenu(buttons, camp.campFollowers, 0, false);
 		}
-		
+
 		public function identifyItem(item:ItemSlotClass):void {
 			clearOutput();
 			var oldItem:ItemType = item.itype;
@@ -174,7 +174,7 @@ public function campMichikoTalkRegionWasteland():void {
 	outputText("You inquire about the Mareth wasteland. The endless expanse of nothingness that spans most of the area.\n\n");
 	outputText("\"<i>Mareth is a big place, [name], but just because it appears empty, does not mean it is. Several people have been spotted wandering the area, including that weirdo merchant Giacomo. There's also rumors that  a goblin trader has set up shop there somewhere, that is if you can find her of course. It's also possible one or more of the cave systems in the area could be inhabited.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionForest():void {
 	clearOutput();
@@ -182,7 +182,7 @@ public function campMichikoTalkRegionForest():void {
 	outputText("\"<i>The woods are both one of the purest areas of Mareth and one of the most corrupt. Depending on your luck you could either run across a bee girl or a Tentacle beast. The bees, despite using hypnosis and such to lull victims into accepting their eggs, are actually pure of soul and intentions. I've heard several rumors about the area such as that a monk in exile wanders the place trying to cleanse the corruption ");
 	outputText("or that a weird hybrid between a plant and cow wanders about. There’s even rumors that somewhere in the woods is a hidden pure grove guarded by a unicorn, for all I know the race is almost extinct. Should you seek the unicorn out I would advise you come to it as a virgin, they are more trustful of virgins, never knew why.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionDeepwood():void {
 	clearOutput();
@@ -190,7 +190,7 @@ public function campMichikoTalkRegionDeepwood():void {
 	outputText("\"<i>Yea I kind of do, the place is nasty as it's pretty much the source of all the corruption in the forest. At first you would think it’s just that sealed demon Akhbal but truth be told it goes way deeper than that, it's like the deepwoods became a refuge for fiends ranging from the infamous Erlking’s Wyld hunt to the dark mistress of the twilight grove. Speaking of grove watch out for tentacle beast and more then anything watch out for alraunes, ");
 	outputText("they just seem to grow all over the place. Amidst all this corruption the kitsunes somehow still manage to thrive in secrecy while the fairies flutter around. Be wary of who you trust in those woods.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionLake():void {
 	clearOutput();
@@ -198,7 +198,7 @@ public function campMichikoTalkRegionLake():void {
 	outputText("\"<i>Well aside from old Whitney’s farm, there's the ruins of an old mousefolk town, they say it’s haunted. On the side of the locals though a large community of shark girls reside in the lake and you may run across a slime girl or two, also from the lake. I highly advise against swimming there unless you would favor getting stung by an anemone. Now that’s the nicer locales, amongst the nasties are the Ooze, ");
 	outputText("always at war with the slimes, and the cultist of the fetish, a faction of sex crazed lunatics worshiping demonised ex gods. There's a rumor Marae might still live somewhere on an island at the center of the lake, might be worth investigating.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionDesert():void {
 	clearOutput();
@@ -206,7 +206,7 @@ public function campMichikoTalkRegionDesert():void {
 	outputText("\"<i>Ain't much to see there, the place is almost as empty as the wasteland, at least at a first glance. Empty is a very suggestive word because several things hints at the presence of a hidden city somewhere in the desert aside from the many ant fortresses. If you are the adventuring sort you may run into Sand witches across the desert, they may or may not be helpful. Aside from them there has been spottings of a Naga or two living in there. ");
 	outputText("I recommend you keep watch for traps and most of all sand traps when wandering around there, these bugs live for a chance to stick their eggs down someone’s butt. Demons like almost everywhere else also have been spotted partying in the desert.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionMountains():void {
 	clearOutput();
@@ -214,7 +214,7 @@ public function campMichikoTalkRegionMountains():void {
 	outputText("\"<i>It’s minotaur territory, if you plan on heading there avoid them best you can. The demons also have a strong presence there due to a local factory, expect to run into one or two. I heard there's an old castle somewhere around there, an old ruin of the old days though I don't know if anyone lives there. Last but not least avoid entering caves and watch out for anything that sounds like thunder, ");
 	outputText("raiju's tend to live in area closer to the clouds and they will jump on whatever can sate their uncontrollable need to discharge.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionHighMountains():void {
 	clearOutput();
@@ -222,7 +222,7 @@ public function campMichikoTalkRegionHighMountains():void {
 	outputText("\"<i>Well for one the minotaurs don't thread there, thank Marae for that. This said the harpies who nest up there are not really that fond of strangers and the basilisks that constantly steal their eggs only makes them more prone to attack anything that closes in on them. Aside from that, There’s an oni who apparently took residence up there, you also have good odds of finding what remains of the old temple of the divine ");
 	outputText("that used to once be Mareth’s greatest holy site until the demons damaged it. If the demons do have a fortress it’s likely located somewhere up there.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionPlains():void {
 	clearOutput();
@@ -230,7 +230,7 @@ public function campMichikoTalkRegionPlains():void {
 	outputText("The plains of Mareth are home to many tribes both good and bad. I know there's at least one remaining village of sheep morphs and several kangaroo morphs hunting there though odds are good, you will never find their burrows as they hide underground at night. Of all the tribes though avoid the gnolls, they are highly territorial and enjoy dominating males above anything else. \"<i>");
 	outputText("Finally there's also a demonic camp somewhere which acts as a trade hub for people of questionable morality.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkRegionSwamp():void {
 	clearOutput();
@@ -238,7 +238,7 @@ public function campMichikoTalkRegionSwamp():void {
 	outputText("\"<i>The swamps of Mareth are old [name]. The dragon tribes used to reside there until they became extinct or so I think. No one has seen a dragon in years but if an artefact of the dragon does exist it’s likely hidden somewhere in the swamp away from the gaze of the lesser races. The spider morphs and driders are the local nuisances there and they are as random as a coin. ");
 	outputText("Either they attack you or they talk to you. I generally prefer to flee rather then find out.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalkMarriage():void {
 	clearOutput();
@@ -249,56 +249,56 @@ public function campMichikoTalkMarriage():void {
 	outputText("\"<i>That you do but a fair bit of warning, weddings attracts a lot of people and are handled in public churches dedicated to Marae thus it also tends to drag the attention of troublemakers. Your foes will be well aware of the wedding going on just as well as if you would have screamed it out loud, they simply will know. Be prepared to defend your happy day at any time, I've yet to see one going well from start to finish.</i>\"\n\n");
 	if (flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 0) flags[kFLAGS.MICHIKO_TALK_MARRIAGE] = 1;
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalk7():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalk6():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalk5():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalk4():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalk3():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalk2():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function campMichikoTalk1():void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
 	doNext(campMichikoTalkMM);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 	}
 }

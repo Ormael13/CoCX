@@ -5,7 +5,7 @@ import classes.BodyParts.Face;
 
 public class GorgonScene extends BaseContent
 	{
-		
+
 		public function GorgonScene()
 		{
 		}
@@ -65,7 +65,7 @@ public function gorgonEncounter():void {
 				//[player has three or more dicks]
 				if(player.cockTotal() >= 3) outputText("She takes one in each hand, stroking them slowly and making sure to pay attention to the tip. Every so often she switches to a different dick to make sure that each and every one of your throbbing cocks has some love given to them. ");
 				outputText("A hiss of pleasure escapes your lips as the gorgon strokes your [cocks], her talented fingers bringing you further into a state of arousal. She stops her caress and brings her hand to a scaly covering at her crotch, spreading it wide to reveal her soft pussy.\n\n");
-				
+
 				//[player has one dick]
 				if(player.cockTotal() == 1) outputText("She carefully lines it up with your member and starts to tease the tip before gently inserting the first few inches. ");
 				//[player has two dicks]
@@ -78,7 +78,7 @@ public function gorgonEncounter():void {
 				if(player.cumQ() > 250) outputText("You quickly fill her with your seed to the point where she overflows, leaving her pussy dripping with semen afterwards.");
 				//[JIZZ, JIZZ EVERYWHERE]
 				else if(player.cumQ() > 1000) outputText("Her stomach quickly swells from the sheer volume of seed pumped into her. The sperm that her womb is unable to hold starts to gush out from her stuffed cunt.");
-				
+
 				outputText("\n\nThe two of you lay there for a moment, basking in the warm glow of orgasm. Eventually the gorgon slowly unwraps her tail from your own and gives you a kiss on the forehead. \"<i>I look forward to our next encounter,</i>\" she whispers softly into your ear before slithering off into the desert.  You watch as she leaves and wave her a kiss goodbye before she disappears from your sight.\n\n");
 			}
 			player.sexReward("Default","Default",true,false);
@@ -105,8 +105,7 @@ public function gorgonEncounter():void {
 			player.cuntChange(30,true,false,true);
 			player.sexReward("Default","Default",true,false);
 			outputText("You think it would be a very good idea to come to the desert more often.");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseFourHours);
+			endEncounter(120);
 			return;
 		}
 		//Genderleast
@@ -146,6 +145,6 @@ public function gorgonEncounter():void {
 	startCombat(new Gorgon());
 }
 
-	
+
 	}
 }

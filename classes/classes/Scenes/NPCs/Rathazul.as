@@ -17,7 +17,7 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 		{
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -32,12 +32,12 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 			}
 			return false;
 		}
-	
+
 		public function timeChangeLarge():Boolean {
 			return false;
 		}
 		//End of Interface Implementation
-		
+
 		public function returnToRathazulMenu():void {
 			if (player.hasStatusEffect(StatusEffects.CampRathazul))
 				campRathazul();
@@ -151,7 +151,7 @@ public function campRathazul():void {
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");
 	//player.createStatusEffect(StatusEffects.metRathazul,0,0,0,0);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 	offered = rathazulWorkOffer();
 	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"");
@@ -345,10 +345,10 @@ private function rathazulWorkOffer():Boolean {
 	}
 	return false;
 }
-	
+
 	private function askForTools():void {
 		clearOutput();
-		
+
 		outputText("<i>(todo writeme)</i> ");
 		outputText("Having an interest in doing alchemy yourself, you ask Rathazul if you can borrow some of his tools. ");
 		// high int or HistoryAlchemist: free
@@ -401,7 +401,7 @@ private function oneTimeOptions():void {
 	}
 	if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
 		addButton(6, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
-	
+
 	}
 	if (flags[kFLAGS.MITZI_RECRUITED] == 2) {
 		if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(7, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
@@ -419,7 +419,7 @@ private function TyrantiaEggQuestRathazul():void {
 	outputText("You bring Ralthazul back to Tyrantia, and you ask him to fill her in. The old mouse puts a hand on Tyrantia’s leg, telling her what he told you. Your giantess looks at you, eyes gleaming, and both hands in front of her mouth.\n\n");
 	outputText("\"<i>Really?!</i>\" She pats the alchemist’s head, somewhat dazed. \"<i>...I...Okay.</i>\" She turns to you, inhaling nervously. \"<i>...I trust you. If you think Ralthzul can stop me from ruining our podlings, then...I’ll do it.</i>\"\n\n");
 	TyrantiaFollower.TyrantiaFollowerStage = 6;
-	eachMinuteCount(15);
+	advanceMinutes(15);
 	doNext(playerMenu);
 }
 

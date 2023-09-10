@@ -20,7 +20,7 @@ use namespace CoC;
 	{
 		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
-		
+
 		public const areaLevel:int = 35;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.tundra > 0;
@@ -31,7 +31,7 @@ use namespace CoC;
 		public function timesExplored():int {
 			return SceneLib.exploration.counters.tundra;
 		}
-		
+
 		public function Tundra()
 		{
 			onGameInit(init);
@@ -119,7 +119,7 @@ use namespace CoC;
 				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 		}
-		
+
 		public function exploreTundra():void {
 			explorer.prepareArea(tundraEncounter);
 			explorer.setTags("tundra");
@@ -131,7 +131,7 @@ use namespace CoC;
 			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
-		
+
 		public function nothingEncounter():void {
 			clearOutput();
 			outputText("You spend one hour exploring tundra but you don't manage to find anything interesting.");
@@ -142,7 +142,7 @@ use namespace CoC;
 			dynStats("tou", .5);
 			endEncounter();
 		}
-		
+
 		public function alabasterEncounter():void {
 			clearOutput();
 			outputText("You stumble across a vein of Alabaster, this looks like suitable material for your gargoyle form.\n");
@@ -151,13 +151,13 @@ use namespace CoC;
 			addButton(0, "Yes", tundraSiteMine);
 			addButton(1, "No", explorer.done);
 		}
-		
+
 		public function golemEncounters():void {
 			clearOutput();
 			outputText("As you take a stroll, from nearby trees emerge huge golem. Looks like you have encountered 'true ice golem'! You ready your [weapon] for a fight!");
 			startCombat(new GolemTrueIce());
 		}
-		
+
 		public function snowLilyEncounter():void {
 			clearOutput();
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
@@ -169,21 +169,21 @@ use namespace CoC;
 				alrauneScene.alrauneGlacialRift();
 			}
 		}
-		
+
 		public function frostGiantEncounter():void {
 			clearOutput();
 			outputText("You wander the chilling landscape of the Tundra. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Young Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
 			startCombat(new YoungFrostGiant());
 		}
-		
+
 		public function valkyrieEncounter():void {
 			clearOutput();
 			outputText("Making your way across the tundra, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n");
 			outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weapon] for a fight!");
 			startCombat(new Valkyrie());
 		}
-		
-		
+
+
 		private function tundraSiteMine():void {
 			if (Forgefather.materialsExplained != 1) endEncounter();
 			else {
@@ -200,8 +200,6 @@ use namespace CoC;
 				SceneLib.forgefatherScene.incrementAlabasterSupply(minedStones);
 				player.mineXP(player.MiningMulti());
 				findGem();
-				explorer.stopExploring();
-				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
 
@@ -211,20 +209,19 @@ use namespace CoC;
 		}
 
 		private function findGem():void {
-			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
-					inventory.takeItem(useables.SAPPGEM, camp.returnToCampUseTwoHours);
+					inventory.takeItem(useables.SAPPGEM, curry(explorer.done,120));
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Sapphires you ended with unusable piece.");
-					doNext(camp.returnToCampUseTwoHours);
+					endEncounter(120);
 				}
 			}
 			else {
 				outputText(" Your mining skill is too low to find any Sapphires.");
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
 	}

@@ -36,7 +36,7 @@ public class Crafting extends BaseContent implements SaveableState
 			successChance: 75,
 			value        : 25000
 		});
-		
+
 		public static const FURNACE_LEVELS:/*EnumValue*/Array = [];
 		public static const FURNACE_LEVEL_NONE:int            = EnumValue.add(FURNACE_LEVELS, 0, "NONE", {
 			name         : "no pill furnace",
@@ -62,9 +62,9 @@ public class Crafting extends BaseContent implements SaveableState
 			stoneLimit   : 8,
 			value        : 25000
 		});
-		
+
 		// State
-		
+
 		public static var BagSlot01:Number;
 		public static var BagSlot01Cap:Number;//Cooper Ore
 		public static var BagSlot02:Number;
@@ -145,7 +145,7 @@ public class Crafting extends BaseContent implements SaveableState
 		public static var BagSlot39Cap:Number;
 		public static var BagSlot40:Number;
 		public static var BagSlot40Cap:Number;
-		
+
 		public static var alembicLevel:int = 0;
 		// Catalyst currently in the alembic, or null
 		public static var alembicCatalyst:AlembicCatalyst = null;
@@ -154,7 +154,7 @@ public class Crafting extends BaseContent implements SaveableState
 		public static var xmcLuck:int = 0;
 		// Amount of 'stinky goo' produced when refining ingredients
 		public static var gooProduced:int = 0;
-		
+
 		// Map of substanceId -> count
 		public static var substanceStock:Object = {};
 		// Map of essenceId -> count
@@ -163,7 +163,7 @@ public class Crafting extends BaseContent implements SaveableState
 		public static var residueStock:Object = {};
 		// Map of pigment color -> count
 		public static var pigmentStock:Object = {};
-		
+
 		// Map of itemId -> reagentType -> set of reagent id
 		// ex. { FoxJewl: { RT_ESSENCE: { AE_FOX: true } } }
 		// It is saved in a compressed form
@@ -258,7 +258,7 @@ public class Crafting extends BaseContent implements SaveableState
 			BagSlot39Cap = 0;
 			BagSlot40 = 0;
 			BagSlot40Cap = 0;
-			
+
 			alembicLevel = 0;
 			alembicCatalyst = null;
 			furnaceLevel = 0;
@@ -357,7 +357,7 @@ public class Crafting extends BaseContent implements SaveableState
 				"BagSlot39Cap": BagSlot39Cap,
 				"BagSlot40": BagSlot40,
 				"BagSlot40Cap": BagSlot40Cap,
-				
+
 				"xmcLuck": xmcLuck,
 				"gooProduced": gooProduced,
 				"alembicLevel": alembicLevel,
@@ -454,7 +454,7 @@ public class Crafting extends BaseContent implements SaveableState
 				BagSlot39Cap = o["BagSlot39Cap"];
 				BagSlot40 = o["BagSlot40"];
 				BagSlot40Cap = o["BagSlot40Cap"];
-				
+
 				xmcLuck = intOr(o["xmcLuck"], 0);
 				gooProduced = intOr(o["gooProduced"], 0);
 				alembicLevel = intOr(o["alembicLevel"], 0);
@@ -464,6 +464,16 @@ public class Crafting extends BaseContent implements SaveableState
 				essenceStock = objectOr(o["essenceStock"], {});
 				residueStock = objectOr(o["residueStock"], {});
 				pigmentStock = objectOr(o["pigmentStock"], {});
+				// Delete invalid elements
+				for each (var k:String in keys(substanceStock)) {
+					if (!AlchemyLib.Substances[k]) delete substanceStock[k];
+				}
+				for each (k in keys(essenceStock)) {
+					if (!AlchemyLib.Essences[k]) delete essenceStock[k];
+				}
+				for each (k in keys(residueStock)) {
+					if (!AlchemyLib.Residues[k]) delete residueStock[k];
+				}
 				uncompressTfPillKnowledge(o["tfPillKnowledge"]);
 				uncompressIngredientKnowledge(o["ingredientKnowledge"]);
 			} else {
@@ -471,20 +481,20 @@ public class Crafting extends BaseContent implements SaveableState
 				resetState();
 			}
 		}
-		
+
 		public function isLuckyXianxiaMC():Boolean {
 			return xmcLuck < 10 && flags[kFLAGS.GAME_DIFFICULTY] == 4;
 		}
 		public function useXianxiaMCLuck():void {
 			xmcLuck++;
 		}
-		
+
 		/*
 		public static const TYPE_ALCHEMY:int = 0;
 		public static const TYPE_COOKING:int = 1;
 		public static const TYPE_SMITHING:int = 2;
 		public static const TYPE_TAILORING:int = 3;
-		
+
 		private var item1:ItemType = null;
 		private var item1Quantity:int = 0;
 		private var item2:ItemType = null;
@@ -495,15 +505,15 @@ public class Crafting extends BaseContent implements SaveableState
 		private var item4Quantity:int = 0;
 		private var itemResult:ItemType = null;
 		*/
-		
+
 		public const alchemyExtraction:AlchemyExtraction = new AlchemyExtraction();
 		public const mutagenPillCrafting:MutagenPillCrafting = new MutagenPillCrafting();
 		public const statPillCrafting:StatPillCrafting = new StatPillCrafting();
-		
+
 		public function Crafting() {
 			Saves.registerSaveableState(this);
 		}
-		
+
 public function accessCraftingMaterialsBag():void {
 	clearOutput();
 	outputText("Would you like to put some crafting materials into the bag, and if so, with ones?\n\n");
@@ -546,7 +556,7 @@ public function accessCraftingMaterialsBag():void {
 		else addButtonDisabled(7, "IronOre", "You don't have any iron ore to store.");
 	}
 	else addButtonDisabled(7, "IronOre", "You can't store more iron ore in your bag.");
-	
+
 	if (BagSlot04 > 0) addButton(8, "IronOre", craftingMaterialsIronOre1Down);
 	else addButtonDisabled(8, "IronOre", "You don't have any iron ore in your bag.");
 	//Ebon Ingot
@@ -555,7 +565,7 @@ public function accessCraftingMaterialsBag():void {
 		else addButtonDisabled(10, "EbonIngot", "You don't have any ebon ingot to store.");
 	}
 	else addButtonDisabled(10, "EbonIngot", "You can't store more ebon ingots in your bag.");
-	
+
 	if (BagSlot06 > 0) addButton(11, "EbonIngot", craftingMaterialsEbonIngot1Down);
 	else addButtonDisabled(11, "EbonIngot", "You don't have any ebon ingot in your bag.");
 	//Moonstone
@@ -564,7 +574,7 @@ public function accessCraftingMaterialsBag():void {
 		else addButtonDisabled(12, "Moonstone", "You don't have any moonstone to store.");
 	}
 	else addButtonDisabled(12, "Moonstone", "You can't store more moonstones in your bag.");
-	
+
 	if (BagSlot07 > 0) addButton(13, "Moonstone", craftingMaterialsMoonstone1Down);
 	else addButtonDisabled(13, "Moonstone", "You don't have any moonstone in your bag.");
 	addButton(14, "Back", craftingMain);
@@ -635,20 +645,20 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("What would you like to craft?");
 			menu();
 			if (type == TYPE_ALCHEMY) {
-			
+
 			}
 			else if (type == TYPE_COOKING) {
-			
+
 			}
 			else if (type == TYPE_SMITHING) {
-			
+
 			}
 			else if (type == TYPE_TAILORING) {
-			
+
 			}
 			addButton(14, "Back", campActions);
 		}
-		
+
 		private function createCraftingRecipe(item:*, recipe:Array):void {
 			var button:int = 0;
 			var temp:int = 0;
@@ -663,7 +673,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			addButton(button, item.shortName, displayCraftingRequirement, item, recipe);
 		}
-		
+
 		private function meetsItemRequirement(id:int):Boolean {
 			if (id == 1) {
 				if (item1 == null) return true;
@@ -683,7 +693,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			return false;
 		}
-		
+
 		private function displayCraftingRequirement(item:ItemType, recipe:Array):void {
 			//Item #1
 			if (recipe[0] != undefined) item1 = recipe[0];
@@ -737,7 +747,7 @@ private function craftingMaterialsMoonstone1Down():void {
 				doNext(accessCraftingMenu);
 			}
 		}
-		
+
 		private function craftItem():void {
 			clearOutput();
 			if (item1 != null) player.destroyItems(item1, item1Quantity);
@@ -839,10 +849,10 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			return false;
 		}
-		
+
 		public function craftingMain():void {
 			clearOutput();
-			
+
 			if (alembicLevel > 0) {
 				outputText("You can use your "+alchemyExtraction.alembicName()+" to extract alchemical reagents from consumable items.\n");
 			}
@@ -850,9 +860,9 @@ private function craftingMaterialsMoonstone1Down():void {
 				outputText("With "+mutagenPillCrafting.furnaceName()+" you can refine alchemical reagents into pills.\n");
 			}
 			outputText("If you have pigments and foundations, you can mix them into hair dyes and eye drops.\n")
-			
+
 			outputText("\nWhat will you do?");
-			
+
 			menu();
 			// [Extract ] [Mut.Pill] [StatPill] [Dyes    ] [Stock   ]
 			// [        ] [        ] [        ] [        ] [        ]
@@ -880,10 +890,10 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			button(14).show("Back", camp.campActions).icon("Back");
 		}
-		
+
 		public function checkStock(withMenu:Boolean=false):void {
 			clearOutput();
-			
+
 			function printAlchemyReagentStock(type:int):void {
 				var a:Array;
 				// Array of [AlchemyReagent, quantity:int, name:String]
@@ -915,7 +925,7 @@ private function craftingMaterialsMoonstone1Down():void {
 				button(14).show("Back",craftingMain).icon("Back");
 			}
 		}
-		
+
 		private function craftingCheats():void {
 			clearOutput();
 			outputText("You have:");
@@ -942,7 +952,7 @@ private function craftingMaterialsMoonstone1Down():void {
 				for (i = 1; i < AlchemyLib.Residues.length; i++) {
 					if (AlchemyLib.Residues[i]) addResidue(i, 10);
 				}
-				
+
 				craftingMain();
 				checkStock();
 			}
@@ -996,16 +1006,17 @@ private function craftingMaterialsMoonstone1Down():void {
 					  .hint("Spawn items like alembic catalysts.");
 			button(14).show("Back", craftingMain);
 		}
-		
+
 		//=========//
 		// ALCHEMY //
 		//=========//
-		
-		
+
+
 		public function maxReagentCount():int {
 			return 100
 		}
 		public function addSubstance(id:int, change:int =+1):int {
+			if (!AlchemyLib.Substances[id]) throw new Error("Invalid alchemical substance "+id);
 			var count:int = substanceStock[id];
 			count = boundInt(0, count + change, maxReagentCount());
 			if (count > 0) substanceStock[id] = count;
@@ -1013,6 +1024,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			return count;
 		}
 		public function addEssence(id:int, change:int=+1):int {
+			if (!AlchemyLib.Essences[id]) throw new Error("Invalid alchemical essence "+id);
 			var count:int = essenceStock[id];
 			count = boundInt(0, count + change, maxReagentCount());
 			if (count > 0) essenceStock[id] = count;
@@ -1020,6 +1032,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			return count;
 		}
 		public function addResidue(id:int, change:int=+1):int {
+			if (!AlchemyLib.Residues[id]) throw new Error("Invalid alchemical residue "+id);
 			var count:int = residueStock[id];
 			count = boundInt(0, count + change, maxReagentCount());
 			if (count > 0) residueStock[id] = count;
@@ -1079,7 +1092,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			return result;
 		}
-		
+
 		//================================//
 		// ALCHEMY - KNOWLEDGE MANAGEMENT //
 		//================================//
@@ -1169,7 +1182,7 @@ private function craftingMaterialsMoonstone1Down():void {
 				tfPillKnowledge[tf] = true;
 			}
 		}
-		
+
 		public function isTfPillKnown(substance:int, essence:int):Boolean {
 			return !!tfPillKnowledge["TF_"+substance+"_"+essence];
 		}
@@ -1228,14 +1241,14 @@ private function craftingMaterialsMoonstone1Down():void {
 				}
 				outputText("</ul>");
 			}
-			
+
 			menu();
 			button(14).show("Back", backFn).icon("Back");
 		}
 		//======================//
 		// ALCHEMY - DYE MIXING //
 		//======================//
-		
+
 		private var selectedPigment:String = "";
 		private function selectPigment(pigment:String):void {
 			if (selectedPigment) {
@@ -1247,7 +1260,7 @@ private function craftingMaterialsMoonstone1Down():void {
 		}
 		public function dyeCraftingMenu():void {
 			clearOutput();
-			
+
 			// if we're returning from crafting and used last pigment
 			if (int(pigmentStock[selectedPigment]) <= 0) selectedPigment = "";
 			var dyeFnd:int = player.itemCount(useables.DYE_FOUNDATION);
@@ -1259,14 +1272,14 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("\n<b>Dye foundations</b>: "+dyeFnd);
 			outputText("\n<b>Skin oil foundations</b>: "+oilFnd);
 			outputText("\n<b>Eyedrop foundations</b>: "+dropFnd);
-			
+
 			if (keys(pigmentStock).length == 0) {
 				outputText("\n\n<b>You don't have any pigments. Pigments can be extracted from consumables.</b> ");
 			}
 			if (dyeFnd == 0 && oilFnd == 0 && dropFnd == 0) {
 				outputText("\n\n<b>You have no foundations. Buy some from hair dye vendor.</b>")
 			}
-			
+
 			menu();
 			button(0).show("Pigment", curry(selectReagent, AlchemyLib.RT_PIGMENT, selectPigment, dyeCraftingMenu, selectedPigment))
 					 .hint("Select a pigment to use")
@@ -1286,7 +1299,7 @@ private function craftingMaterialsMoonstone1Down():void {
 					 .icon("I_EyeDye")
 					 .disableIf(dropFnd == 0, "++\n<b>You need an eyedrop foundation!</b>")
 					 .disableIf(!selectedPigment, "Select a pigment");
-			
+
 			button(14).show("Back",function():void {
 				if (selectedPigment) {
 					addPigment(selectedPigment);

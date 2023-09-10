@@ -16,13 +16,13 @@ public class Ingnam extends BaseContent
 		public var ingnamFarm:IngnamFarm = new IngnamFarm();
 		public var thiefScene:ThiefScene = new ThiefScene();
 		public var soulforce:Soulforce = new Soulforce();
-		
+
 		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM]; }
-		
+
 		public function Ingnam()
 		{
 		}
-		
+
 		//Main Ingnam menu.
 		public function menuIngnam():void {
 			//Force autosave
@@ -87,7 +87,7 @@ public class Ingnam extends BaseContent
             }
 			if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
 		}
-		
+
 		//The end of prologue, starts the game.
 		public function getBanishedToMareth():void {
 			var hasWeapon:Boolean = false;
@@ -98,33 +98,33 @@ public class Ingnam extends BaseContent
 			flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] = 1;
 			doNext(CoC.instance.charCreation.arrival);
 		}
-		
+
 		public function returnToMareth():void {
 			clearOutput();
 			outputText("You make your journey to Mount Ilgast, walk through the portal back to Mareth and return to your camp.");
 			flags[kFLAGS.IN_INGNAM] = 0;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function returnToIngnam():void {
 			clearOutput();
 			outputText("You enter the portal and make your return to Ingnam, thanks to the debug powers.");
 			flags[kFLAGS.IN_INGNAM] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		//Explore Ingnam
 		public function exploreIngnam():void {
 			hideMenus();
 			clearOutput();
 			if (rand(4) == 0) {
 				outputText("You explore the village of Ingnam for a while but you don't find anything interesting.");
-				eachMinuteCount(15);
+				advanceMinutes(15);
 				doNext(camp.doCamp);
 			}
 			else thiefScene.encounterThief();
 		}
-		
+
 		//Shopping time!
 		public function menuShops():void {
 			hideMenus();
@@ -138,7 +138,7 @@ public class Ingnam extends BaseContent
 			addButton(4, "Black Market", shopBlackMarket);
 			addButton(14, "Back", menuIngnam);
 		}
-		
+
 		public function shopBlacksmith():void {
 			clearOutput();
 			outputText("You enter the armor shop, noting the sign depicting armors. Some armor is proudly displayed on racks. You can hear the sound of hammering although it stops shortly after you enter. The local blacksmith, Ben, comes from the rear door, stepping up to the counter as he wipes the sweat from his brow, face red from the heat of his forge. \"<i>Welcome to my shop. Are you in need of protection? Or something sharp?</i>\"");
@@ -177,7 +177,7 @@ public class Ingnam extends BaseContent
 			addShopItem(weapons.A_WAND, 225, 2);
 			addButton(14, "Leave", menuShops);
 		}
-		
+
 		public function shopTailor():void {
 			clearOutput();
 			outputText("You enter the tailor’s. The interior is laden with mannequins wearing half-finished works. Clothes are displayed on racks without obvious flaws. A fastidious, well-groomed young man with an immaculate blue three-piece suit topped with a measuring tape draping around his collar stands behind the counter and smiles at you with deference.");
@@ -195,7 +195,7 @@ public class Ingnam extends BaseContent
 			addShopItem(armors.T_BSUIT, 75, 3);
 			addButton(14, "Leave", menuShops);
 		}
-		
+
 		public function shopAlchemist():void {
 			clearOutput();
 			if (flags[kFLAGS.INGNAM_ALCHEMIST_TALKED] <= 0) {
@@ -228,7 +228,7 @@ public class Ingnam extends BaseContent
 			}
 			addButton(14, "Leave", menuShops);
 		}
-		
+
 		public function shopTradingPost():void {
 			clearOutput();
 			outputText("The trading post is one of the larger buildings in the village, with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods, from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
@@ -355,7 +355,7 @@ public class Ingnam extends BaseContent
 			statScreenRefresh();
 			doNext(sellAtTradingPost);
 		}
-		
+
 		public function shopBlackMarket():void {
 			clearOutput();
 			if (flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] <= 0) {
@@ -380,7 +380,7 @@ public class Ingnam extends BaseContent
 			addShopItem(consumables.RINGFIG, 75, 6);
 			addButton(14, "Leave", menuShops);
 		}
-		
+
 		//Transaction for buying items.
 		public function transactionItemConfirmation(item:ItemType, price:int, shop:int):void {
 			clearOutput();
@@ -430,7 +430,7 @@ public class Ingnam extends BaseContent
 			else if (shop == 6) shopBlackMarket();
 			else shopBlackMarket();
 		}
-		
+
 		public function addShopItem(item:ItemType, price:int, shop:int):void {
 			outputText("\n" + capitalizeFirstLetter(item.longName) + " - " + price + " gems");
 			var button:int = 0;
@@ -439,7 +439,7 @@ public class Ingnam extends BaseContent
 			}
 			addButton(button, item.shortName, transactionItemConfirmation, item, price, shop);
 		}
-		
+
 		//Temple
 		public function menuTemple():void {
 			hideMenus();
@@ -452,7 +452,7 @@ public class Ingnam extends BaseContent
 			addButton(0, "Meditate", SceneLib.masturbation.meditate);
 			addButton(14, "Leave", menuIngnam);
 		}
-		
+
 		//Tavern
 		public function menuTavern():void {
 			hideMenus();
@@ -473,7 +473,7 @@ public class Ingnam extends BaseContent
 			//if (player.hasPerk(PerkLib.HistoryWhore)) addButton(5, "Prostitute", whoreForGems).hint("Seek someone who's willing to have sex with you for profit.");
 			addButton(14, "Leave", menuIngnam);
 		}
-		
+
 		public function welcomeBack():void {
 			clearOutput();
 			outputText("The innkeeper looks at you and says, \"<i>Welcome back! I've missed you! How did your adventures go?</i>\"");
@@ -496,7 +496,7 @@ public class Ingnam extends BaseContent
 			flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] = 1;
 			doNext(menuTavern);
 		}
-		
+
 		public function appearanceFreakout():void {
 			clearOutput();
 			outputText("The innkeeper stands up to see that there's something unusual with your appearance.");
@@ -525,7 +525,7 @@ public class Ingnam extends BaseContent
 			doNext(menuTavern);
 		}
 
-		
+
 		public function orderDrink():void {
 			clearOutput();
 			outputText("What kind of drink would you like?");
@@ -540,7 +540,7 @@ public class Ingnam extends BaseContent
 			addButton(2, "Root Beer", buyRootBeer);
 			addButton(14, "Back", menuTavern);
 		}
-		
+
 		public function buyBeer():void {
 			clearOutput();
 			if (player.gems < 5) {
@@ -613,7 +613,7 @@ public class Ingnam extends BaseContent
 			cheatTime(1/12);
 			doNext(menuTavern);
 		}
-		
+
 		public function orderFood():void { //Order food, because you need to be able to fill hunger.
 			clearOutput();
 			outputText("You take a seat and look at the menu. What would you like?");
@@ -629,7 +629,7 @@ public class Ingnam extends BaseContent
 			addButton(3, "Trail Mix", buyTrailMix);
 			addButton(14, "Back", menuTavern);
 		}
-		
+
 		public function buySandwich():void { //Eat sandwich, refill hunger. The reason it's ambiguous is to let you imagine what sandwich you're eating.
 			clearOutput();
 			if (player.gems < 5) {
@@ -645,7 +645,7 @@ public class Ingnam extends BaseContent
 			cheatTime(1/12);
 			doNext(menuTavern);
 		}
-		
+
 		public function buySoup():void { //Eat soup. Again, it's vague to let you imagine what soup you're eating.
 			clearOutput();
 			if (player.gems < 3) {
@@ -661,7 +661,7 @@ public class Ingnam extends BaseContent
 			cheatTime(1/12);
 			doNext(menuTavern);
 		}
-		
+
 		private function buyHardBiscuits():void {
 			clearOutput();
 			if(player.gems < 5) {
@@ -687,7 +687,7 @@ public class Ingnam extends BaseContent
 			statScreenRefresh();
 			inventory.takeItem(consumables.TRAILMX, orderFood);
 		}
-		
+
 		public function hearRumors():void { //Hear rumors. Will be altered after defeating Lethice so he will say "Welcome back".
 			clearOutput();
 			var rumor:int = rand(4);
@@ -712,7 +712,7 @@ public class Ingnam extends BaseContent
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 	}
 
 }
