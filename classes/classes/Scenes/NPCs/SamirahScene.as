@@ -272,7 +272,7 @@ public function samirahTalkHer():void {
 		outputText("\"<i>Actually, yes. Albeit uncommon, it can happens to very gifted individuals. The few born within this rare breed have a gaze so strong it turns prey to stone. I guess the snake hair is just a symptom of it.</i>\"\n\n");
 	}*/
 	outputText("You thank Samirah for her time and go back to your things.\n\n");
-	eachMinuteCount(10);
+	advanceMinutes(10);
 	doNext(samirahMainTalkMenu);
 }
 public function samirahTalkHomeworld():void {
@@ -281,7 +281,7 @@ public function samirahTalkHomeworld():void {
 	outputText("\"<i>I’m from Gobis, a world of sun and sand. Well it’s a large land of sandy dunes with an oasis every now and then. We travel between sandstorms for sustenance and resources, as not to despoil the land of everything. Even then, a naga can survive alone in the Gobis desert for several weeks before running out of water or food.</i>\"\n\n");
 	outputText("So, wait, they never experienced any cold weather there?\n\n");
 	outputText("\"<i>Of course not! Else we would spend our days hibernating. Nights in the world of Gobis are cold and us naga spend all of it sleeping, otherwise, we would be hunting night and day.</i>\"\n\n");
-	eachMinuteCount(10);
+	advanceMinutes(10);
 	doNext(samirahMainTalkMenu);
 }
 public function samirahTalkHypnosis():void {
@@ -294,11 +294,11 @@ public function samirahTalkHypnosis():void {
 		outputText("Samirah gives you the ABC of proper hypnosis, starting with the gaze."+(player.isFemale() ? " You never thought a proper belly dance would help maintain an opponent captive of your gaze either, is the whole thing just about capturing the target attention?" : "")+"\n\n");
 		outputText("\"<i>The point is to give a show the target wants to see so to force its gaze toward you and capture it. Once its attention is caught it should be easy for you to maintain it for as long as you want. Once that is done you can do tons of things to your prey and even go so far as to have it do things to you.</i>\"\n\n");
 		flags[kFLAGS.SAMIRAH_HYPNOSIS] = 1;
-		eachMinuteCount(20);
+		advanceMinutes(20);
 	}
 	else {
 		outputText("You nod, thanking her for the information.\n\n");
-		eachMinuteCount(10);
+		advanceMinutes(10);
 	}
 	doNext(samirahMainTalkMenu);
 }
@@ -330,12 +330,12 @@ public function samirahTalkClothes():void {
 		}
 		else {
 			outputText(" Of course, despite how nice it would look on you, it was made with a snake tail in mind and your current body simply won’t allow you to wear it.");
-			eachMinuteCount(60);
+			advanceMinutes(60);
 			doNext(samirahMainTalkMenu);
 		}
 	}
 	else {
-		eachMinuteCount(60);
+		advanceMinutes(60);
 		doNext(samirahMainTalkMenu);
 	}
 }

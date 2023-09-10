@@ -119,8 +119,7 @@ public function encounterRogarSwamp():void {
 			//set Ro'gar phase = 2
 			flags[kFLAGS.ROGAR_PHASE] = 2;
 			dynStats("lus", 30, "scale", false);
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 			return;
 		}
 		//((high femininity or breasts >=B-cup, libido less than 50))
@@ -133,8 +132,7 @@ public function encounterRogarSwamp():void {
 			outputText("  You just grin and shake your head at his politeness.  \"<i>It's been too long since I got ta talk with any decent folk.</i>\" Ro'gar says, grinning.  Soon you both have empty mugs.  You can't help but sway where you sit from the alcohol, stronger than anything you've had before.  Ro'gar gives a hearty laugh at you, clearly enjoying your inebriated state.  \"<i>You don't look the heavy drinkin' type.</i>\" Ro'gar smirks, as you sway.  Frowning, you assure him that you can handle it, all the while punctuating your sentences with small hiccups which cause both of you to break out in laughter.  \"<i>Ya know, I've been in this swamp here for so long.  I'm getting' the itch ta go out inta the world and find greener grass, if'n ya know what I'm sayin'.  Listenin' to yer stories about yer travels ain't helpin' none, either.</i>\"  His tone of voice is distant, almost sounding disappointed with himself.  He gets to his feet with a grunt as he rises.  \"<i>Yer lookin' like yer needin' some shut eye.</i>\"  He helps you to your feet; you manage to get your balance somehow and walk to the door.  \"<i>Y'alright?</i>\" he asks, looking you over.  Through a dumb grin you manage to assure him that you're fine.  \"<i>Well allll-right.</i>\"  Ro'gar nods at you as you turn to leave.  \"<i>Ya take care now.</i>\"  He watches you walk off with concern in his eyes, but you make it back to camp just fine.\n\n");
 			//set Ro'gar phase = 2
 			flags[kFLAGS.ROGAR_PHASE] = 2;
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 			return;
 		}
 		//((androgynous or masculine and breasts <= A-cup, libido less than 50))
@@ -280,8 +278,7 @@ private function waitForChunkyOrcLoe():void {
 		outputText("<b>You can now find Ro'gar's hut when wandering the swamp occasionally!</b>");
 		//pass 2 hours, set Ro'gar phase flag = 1
 		flags[kFLAGS.ROGAR_PHASE] = 1;
-		explorer.stopExploring();
-		doNext(camp.returnToCampUseTwoHours);
+		endEncounter(120);
 	}
 }
 
@@ -297,8 +294,7 @@ private function ewwwRogarIsGay():void {
 	outputText("Declining in a clipped manner, you get to your feet and make for the door, doing your best to ignore Ro'gar's disappointed face.  He calls out to you, but it only falls on deaf ears as you shut the door quickly behind you, your legs powering through the swamp as you run with all the speed you can muster.  Only once you get back to camp do you realize you've lost the crude map... either in Ro'gar's hut or in the trackless swamp.");
 	//<set Crying Game = 1>
 	flags[kFLAGS.ROGAR_DISABLED] = 1;
-	explorer.stopExploring();
-	doNext(camp.returnToCampUseTwoHours);
+	endEncounter(120);
 }
 
 //((No thanks bro))
@@ -309,8 +305,7 @@ private function noSlowBroIDontWantPokeSex():void {
 	//<Continue without sex, set Dirt Mc Girt flag = 1 and Ro'gar phase = 2>
 	flags[kFLAGS.ROGAR_DIRT] = 1;
 	flags[kFLAGS.ROGAR_PHASE] = 2;
-	explorer.stopExploring();
-	doNext(camp.returnToCampUseTwoHours);
+	endEncounter(120);
 }
 
 //((Ok))
@@ -347,8 +342,7 @@ private function okayBroLetsHaveAGayCarwash():void {
 	flags[kFLAGS.ROGAR_DIRT] = 2;
 	flags[kFLAGS.ROGAR_PHASE] = 2;
 	if(player.inte < 30) {
-		explorer.stopExploring();
-		doNext(camp.returnToCampUseTwoHours);
+		endEncounter(120);
 	}
 	//lose 3 hours instead of 1 if int<30
 	else endEncounter();

@@ -22,7 +22,7 @@ use namespace CoC;
 	{
 		public var demonScene:DemonScene = new DemonScene();
 		public var demonSoldierScene:DemonSoldierScene = new DemonSoldierScene();
-		
+
 		public const areaLevel:int = 36;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.defiledRavine > 0;
@@ -33,7 +33,7 @@ use namespace CoC;
 		public function timesExplored():int {
 			return SceneLib.exploration.counters.defiledRavine;
 		}
-		
+
 		public function DefiledRavine() {
 			onGameInit(init);
 		}
@@ -123,7 +123,7 @@ use namespace CoC;
 				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 		}
-		
+
 		public function exploreDefiledRavine():void {
 			explorer.prepareArea(defiledRavineEncounter);
 			explorer.setTags("defiledRavine");
@@ -194,20 +194,19 @@ use namespace CoC;
 		}
 
 		private function findGem():void {
-			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
-					inventory.takeItem(useables.TPAZGEM, camp.returnToCampUseTwoHours);
+					inventory.takeItem(useables.TPAZGEM, curry(explorer.done,120));
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Topaz you ended with unusable piece.");
-					doNext(camp.returnToCampUseTwoHours);
+					endEncounter(120);
 				}
 			}
 			else {
 				outputText(" Your mining skill is too low to find any Topaz.");
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
 

@@ -932,7 +932,7 @@ public class Masturbation extends BaseContent {
 				}
 			}
 			if (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && player.companionsInPCParty()) {
-				eachMinuteCount(60);
+				advanceMinutes(60);
 				doNext(playerMenu);
 			}
 			else endEncounter();
@@ -1791,7 +1791,7 @@ public class Masturbation extends BaseContent {
 				if (player.cocks.length > 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your loins.  ");
                     var multiTypedIndex:int;
-					
+
 					if ((multiTypedIndex = player.findCockWithType(CockTypesEnum.HORSE)) >= 0) { //Primary Horse
 						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(multiTypedIndex) + "s.  Pre-cum pours from your " + player.cockDescript(multiTypedIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
 					}
@@ -2766,7 +2766,7 @@ public class Masturbation extends BaseContent {
             eggDickNormal();
         }
 
-		
+
 			//Bee Eggs in Huge Cock + Exgartuan: Finished (Slywyn)(edited)
 			public function eggExgartuan():void {
                 clearOutput();

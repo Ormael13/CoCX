@@ -95,7 +95,7 @@ public class Kuru extends TrollVillageAbstractContent{
         else{
             outputText("You decide to head home for the time being\n");
         }
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 }
 }

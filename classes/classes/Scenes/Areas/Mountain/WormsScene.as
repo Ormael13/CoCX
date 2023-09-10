@@ -2,7 +2,7 @@
 //const CAME_WORMS_AFTER_COMBAT:int = 788;
 /*
  LICENSE
- 
+
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him to this project permission to alter the text to conform with current and new game functions, only. Dxasmodeus retains exclusive rights to alter or change the core contents of the events and no other developer may alter, change or use the events without permission from dxasmodeus. Fenoxo agrees to include Dxasmodeus' name in the credits with indications to the specific contribution made to the licensor. This license must appear
 either at the beginning or the end of the primary file in the source code and cannot be deleted by a third party. This license is also retroactive to include all versions of the game code including events created by dxasmodeus.
@@ -33,11 +33,11 @@ import classes.display.SpriteDb;
 
 public class WormsScene extends BaseContent
 	{
-		
+
 		public function WormsScene()
 		{
 		}
-		
+
 		public function wormEncounter():void {
 			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
@@ -91,7 +91,7 @@ public class WormsScene extends BaseContent
 			player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
 			endEncounter();
 		}
-		
+
 		private function wormsConfront():void {
 			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
@@ -165,11 +165,10 @@ public class WormsScene extends BaseContent
 					}
 				}
 			}
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
-			
+			endEncounter(120);
+
 		}
-		
+
 		public function playerInfest():void {
 			spriteSelect(SpriteDb.s_dickworms);
 			//Keep logic sane if this attack brings victory
@@ -180,7 +179,7 @@ public class WormsScene extends BaseContent
 				enemyAI();
 				return;
 			}
-			
+
 			//(if PC uses Infest)
 			if(monster.short == "Izma") {
 				fatigue(40, USEFATG_PHYSICAL);
@@ -248,7 +247,7 @@ public class WormsScene extends BaseContent
 			outputText(" open and vulnerable to the piles of spunk-hungry parasites, and as you look on in shock, you see four of them slide into your worm-packed tunnel");
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(", one after another!  No!  You reach for your [cock biggest] to somehow try and stop the infestation, but it's a futile gesture.  The worm pile on your [legs] is as big as the rest of you.  Worse still, you doubt you can pull out the ones that have already crawled inside.");
-			
+
 			outputText("\n\nGrabbing hold of [oneCock] with both hands, you pinch your fingers around ");
 			if(player.cocks[player.biggestCockIndex()].cockThickness >= 6) outputText("as tight around the girth as you can");
 			else outputText("tightly around your girth");
@@ -270,17 +269,17 @@ public class WormsScene extends BaseContent
 				outputText(" filled to the brim with moist wigglers.");
 			}
 			outputText("  You can feel narrow, tapered heads pushing at where you've pressed your urethra closed, and they try to force their way under again and again while more of their brethren pile in behind.  You stay resolute in your efforts to prevent the coming infection, pinching so hard it's painful and crying out as a result.  The pressure on your [cock biggest] wars with the way your body is reacting to the other sensations assaulting it.  Your [cock biggest] spasms powerfully when a big, fat worm perches on your [cockHead biggest], slithering all around it, leaving behind a trail of slimy gunk and sending accompanying tingles of delight through your rigid pole.");
-			
+
 			outputText("\n\nThe surge of blood into your erection shifts your grip just enough that one - no, two worms slip through.  Oh nooo!  They wriggle deeper inside you, little tails lashing at the side of your sensitive, innermost flesh, massaging your concentration away with each motion they make.  Your grip fails completely, and the torrent of parasites flows unimpeded past your pleasure-weakened digits.  They move through your urethra, getting deeper by the second.  At the same time, the big, heavy worm, arguably the king of this little colony, pushes its thick, white head into your piss-hole.  Your flagging resolve shatters as you're stretched wide by the insectile invasion, utterly penetrated.   The littler worms have already started to move into your prostate, and once there, they start to convulse, each slapping its head and tail against the sensitive organ again and again.");
-			
+
 			outputText("\n\nMoaning, you look on as the distended bulge makes its way down your [cock biggest], thrashing slightly when it disappears into your crotch, the sensations far stronger once it passes beyond your sight.  This is it... you're definitely infested now.  The worms are inside of you, and they're going to make you cum.  Lying back while your [hips] fruitlessly twitch upward, you let your eyes close and give in to the knowledge that soon, you'll be another horny worm-factory, roaming around and spraying them out at every opportunity.  That big, slithering blob joins the rest in your prostate, stretching it dangerously, and it starts to shake, thumping at the sides of your innermost organ.");
-			
+
 			outputText("\n\nThe painful pressure and erotic horror rise with the onslaught of spasming ecstasy in your reproductive organs, peaking when that huge intruder nestles itself completely inside you, squeezing your organ until you're wailing and bucking your hips, slapping [eachCock] on your belly while you cum.  The torrent of cum that you loose is unexpectedly voluminous, splattering off your [chest] and chin, dripping onto the ground in gooey streams.  Reacting quickly, the rest of the colony smushes over your spurting boner");
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(" to absorb the sensual nutrition.  Some of them even slop off the sides after the dripping whiteness, to get to it before it absorbs into the brittle, wasted earth.  You cum and cum, almost without end, yet each thick jet is slurped into the writhing mass immediately, leaving behind just the parasitic, clear slime.");
-			
+
 			outputText("\n\nThe big one bathes in your jism, moving faster and faster to spur you to release even more.  Glittering spunk drains out of your tip mixed with a few white creatures until [eachCock] is twitching against you, convulsing with pleasure but unable to leak a single drop.  Only after you've given everything does the internal prostate massage subside, the uncomfortable weight settling into a steady throb.  They feel so good, and a hot wave of contentment slowly rolls through you.  Maternal pride wells up unbidden - these things are a part of you now, and keeping them fed feels so good.");
-			
+
 			outputText("\n\nYou relax in the afterglow, pondering just how you'll handle living with the constant desire, barely noticing the colony slinking off, freshly lubricated by your sexual fluids.  You drink into a lusty slumber, absently fingering [oneCock].");
 			outputText("\n\n<b>You are infested, again!</b>");
 			//Reinfest
@@ -296,7 +295,7 @@ public class WormsScene extends BaseContent
 			}
 			doNext(playerMenu);
 		}
-		
+
 	}
 
 }

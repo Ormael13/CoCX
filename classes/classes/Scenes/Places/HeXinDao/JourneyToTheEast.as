@@ -229,7 +229,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				player.statPoints -= 5;
 				player.perkPoints += 1;
 				doNext(enteringInn,false);
-				eachMinuteCount(30);
+				advanceMinutes(30);
 			}
 		}
 		private function workHoursTemptress():Boolean {
@@ -276,7 +276,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				player.statPoints += 5;
 				player.perkPoints -= 1;
 				doNext(enteringInn,false);
-				eachMinuteCount(30);
+				advanceMinutes(30);
 			}
 		}
 

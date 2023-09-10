@@ -18,7 +18,7 @@ use namespace CoC;
 	{
 		public function AnzuScene()
 		{}
-		
+
 		public function anzuAffection(amount:int = 0):int {
 			flags[kFLAGS.ANZU_AFFECTION] += amount;
 			if (flags[kFLAGS.ANZU_AFFECTION] < 0) flags[kFLAGS.ANZU_AFFECTION] = 0;
@@ -32,8 +32,8 @@ use namespace CoC;
 		public function anzuSexCounter():int {
 			return flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER] + flags[kFLAGS.ANZU_VAGINAL_CATCH_COUNTER] + flags[kFLAGS.ANZU_BLOWN_YOU_COUNTER] + flags[kFLAGS.ANZU_SUCKED_OFF_COUNTER] + flags[kFLAGS.ANZU_ANAL_PITCH_COUNTER] + flags[kFLAGS.ANZU_FED_COUNTER];
 		}
-		
-		
+
+
 		//INTRO
 		public function initialPalaceEncounter():void {
 			clearOutput();
@@ -46,7 +46,7 @@ use namespace CoC;
 			addButton(0, "Approach", apporachInitialPalace);
 			addButton(1, "Leave", leaveInitialPalace);
 		}
-		
+
 		private function apporachInitialPalace():void {
 			clearOutput();
 			outputText("What could go wrong? You’re the Champion of Ingnam after all. If you’ve survived minotaurs, demons, giants and everything else that Mareth has to offer, whatever lives in that building shouldn’t be a problem if it decides to attack you. ");
@@ -115,15 +115,15 @@ use namespace CoC;
 			}
 			outputText("\n\n<b>Anzu's Palace is now accessible from Dungeons submenu under Places menu.</b>");
 			flags[kFLAGS.ANZU_PALACE_UNLOCKED] = 1;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function leaveInitialPalace():void {
 			clearOutput();
 			outputText("Well, if this place looks dangerous enough to keep giants away, then it probably means whatever lives here is something that you want to avoid. Since it doesn’t look like an area inhabited by demons, it's none of your business.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		public function anzuTransition():void {
 			if (anzuRelationshipLevel() == 1) {
 				outputText("Coming back to the avian’s home, you wander around the insides for a while without finding Anzu. When you’re almost leaving, you hear a noise in the upper floor. On the third floor, you quickly recognize the sound of the beating of wings. You go upstairs until reaching the roof. There, you finally spot Anzu, who is flying over the building. When he sees you there, he waves to you. After drawing a few circles in the air, he lands next to you.");
@@ -225,16 +225,16 @@ use namespace CoC;
 			outputText("\n\n\"<i>It’s okay. The champion thing and all that, right?</i>\" He answers \"<i>Well, by now, you should have memorized where this place is so you can visit me anytime you want. I really enjoy when you’re here. And please, over all things, [name], keep yourself safe.</i>\"");
 			outputText("\n\nWaving goodbye to the avian, you return to you camp.");
 			dynStats("lus", 40, "scale", false);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function anzuRelatLvl3Dont():void {
 			clearOutput();
 			outputText("Excusing yourself, you ask him if he needs to attend something, you’ll give him the time.");
 			outputText("\n\n\"<i>Oh, thanks…</i>\" he says, quickly catching your idea. \"<i>Suddenly, I feel as if my bladder is full. I need to use the bathroom as soon as I can.</i>\"");
 			outputText("\n\nHurrying to the mentioned room, the avian leaves you alone in the living room, enjoying the warmness of the fireplace. After a few seconds, the obvious sound of someone jerking off is heard across the hall. Judging from the size of Anzu’s...attributes, he’ll have much to clean up after he finishes.");
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function anzuRelatLvl4Sex():void {
 			clearOutput();
 			outputText("You answer him that you love him back too. The avian lowers himself until both of you meet eye to eye. His arms surround you, and soon you’re in the warmness of his embrace. Soon, the force of his grip becomes so strong it threatens to leave you without air.");
@@ -260,9 +260,9 @@ use namespace CoC;
 			outputText("\n\nYou say your goodbyes to Anzu, and return to the camp, leaving your avian friend to his own thoughts.");
 			flags[kFLAGS.ANZU_AFFECTION] = 50;
 			flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] = 3;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		//MENU & INTERACTIONS
 		public function anzuMenus():void {
 			clearOutput();
@@ -281,7 +281,7 @@ use namespace CoC;
 			}
 			addButton(14, "Back", playerMenu);
 		}
-		
+
 		//Appearance
 		private function anzuAppearance():void {
 			clearOutput();
@@ -294,7 +294,7 @@ use namespace CoC;
 			outputText("\n\nFor clothing, he usually wears a white shirt and dark brown pants, and over them he has a luxurious purple robe, decorated in gold and amethyst.");
 			doNext(anzuMenus);
 		}
-		
+
 		//Talk
 		private function anzuTalkMenu():void {
 			clearOutput();
@@ -307,7 +307,7 @@ use namespace CoC;
 			addButton(4, "Marae & Lethice", anzuTalkMaraeAndLethice).hint("Ask Anzu what he thinks about Marae and Lethice.");
 			addButton(14, "Back", anzuMenus);
 		}
-		
+
 		private function anzuTalkPast():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-talk-past"));
@@ -474,7 +474,7 @@ use namespace CoC;
 			flags[kFLAGS.ANZU_TALKED_GODS] = 1;
 			doNext(playerMenu);
 		}
-		
+
 		//Sex
 		private function anzuSexMenu(showText:Boolean = true):void {
 			if (showText) {
@@ -514,7 +514,7 @@ use namespace CoC;
 			else addButtonDisabled(5, "Feed Him", "This option is only available if you have lactating breasts.");
 			addButton(14, "Back", anzuMenus);
 		}
-		
+
 		private function catchAnalPart1():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-sex-anal-catch"));
@@ -546,7 +546,7 @@ use namespace CoC;
 			}
 			doNext(catchAnalPart2);
 		}
-		
+
 		private function catchAnalPart2():void {
 			clearOutput();
 			var wasVirgin:Boolean = player.ass.analLooseness < 1;
@@ -622,9 +622,9 @@ use namespace CoC;
 			player.slimeFeed();
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function catchVaginal():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-sex-vaginal-catch"));
@@ -672,9 +672,9 @@ use namespace CoC;
 			player.slimeFeed();
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_VAGINAL_CATCH_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function getBlown():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-sex-give-blowjob"));
@@ -711,9 +711,9 @@ use namespace CoC;
 			player.orgasm();
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_BLOWN_YOU_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function suckOffDeitysCock():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-sex-receive-blowjob"));
@@ -767,9 +767,9 @@ use namespace CoC;
 			dynStats("lus", 30, "scale", false);
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_SUCKED_OFF_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function fuckGodlyBirdButt():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-sex-analpitch"));
@@ -809,9 +809,9 @@ use namespace CoC;
 			outputText("\n\nTired, you fall asleep over him, using his body as a huge pillow. He covers you with his wings, while both of you take a nap.");
 			player.orgasm();
 			flags[kFLAGS.ANZU_ANAL_PITCH_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function feedAnzu():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-sex-feeding"));
@@ -870,9 +870,9 @@ use namespace CoC;
 			dynStats("lus", 20, "sen", -1);
 			player.milked();
 			flags[kFLAGS.ANZU_FED_COUNTER]++;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		//Dinner
 		public function dinnerWithAnzu():void {
 			clearOutput();
@@ -928,9 +928,9 @@ use namespace CoC;
 				}
 				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
 			}
-			
+
 		}
-		
+
 		private function eatFoodWithAnzu():void {
 			clearOutput();
 			//Determine amount to refill hunger
@@ -989,7 +989,7 @@ use namespace CoC;
 				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
 			}
 			inDungeon = false;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function dontEatFoodWithAnzu():void {
 			clearOutput();
@@ -1010,10 +1010,10 @@ use namespace CoC;
 				outputText("\n\nLeaving Anzu with the cake, you wave off him and return to your camp.");
 			}
 			inDungeon = false;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
-		
+
 		//------------
 		// BATHING (2PM)
 		//------------
@@ -1033,7 +1033,7 @@ use namespace CoC;
 			outputText("\n\nSeems like the bird want to take his bath with you, but knowing him, you’ll probably end a bit sticky throughout your bath. What do you say?");
 			doYesNo(anzuBathTimeAccept, anzuBathTimeDecline);
 		}
-		
+
 		private function anzuBathTimeAccept():void {
 			clearOutput();
 			outputText("Well, a warm bath sounds nice at this time of the day, and Anzu seems to be enjoying it, so, why not? " + player.clothedOrNaked("Leaving your " + player.armorDescript() + "aside, on a nearby table, y", "Y") + "ou get in the pool, not without making sure that Anzu gets a good view of your naked body when entering on it. When you return the look, you manage to see his avian manhood under the water, hanging limp and lazy between his legs. Even in its unaroused state, it remains quite impressive. Under it, a pair of huge, feather-covered, nuts lie, moving slightly with the water.");
@@ -1055,7 +1055,7 @@ use namespace CoC;
 			addButton(0, "Sexy times", anzuBathTimeSex);
 			addButton(1, "Just relax", anzuBathTimeRelax);
 		}
-		
+
 		private function anzuBathTimeSex():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-bathtime-sex"));
@@ -1069,7 +1069,7 @@ use namespace CoC;
 			player.fatigue -= 30;
 			anzuSexMenu(false);
 		}
-		
+
 		private function anzuBathTimeRelax():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-bathtime-relax"));
@@ -1085,15 +1085,15 @@ use namespace CoC;
 			dynStats("lus", 20, "scale", false);
 			player.fatigue -= 30;
 			inDungeon = false;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 		private function anzuBathTimeDecline():void {
 			clearOutput();
 			outputText("Not in the mood of getting your " + player.skin.desc + " wet (and sticky) at this time of day, you thank him for his offer but explain that you’re not exactly in the mood to get wet. Bidding him farewell, you leave him to his own matters and return to your camp.");
 			inDungeon = false;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		//------------
 		// SLEEPING (8PM)
 		//------------
@@ -1109,15 +1109,15 @@ use namespace CoC;
 			outputText("\n\nWell, the truth is that your camp isn’t the major target of the demon forces, and since your arrival there hasn’t been anything interesting around it besides the random imp or goblin. Maybe you should consider Anzu’s offer and spend a relaxed night in love and luxury instead of a night on the wastelands. What do you say?");
 			doYesNo(acceptSleepingWithAnzu, declineSleepingWithAnzu);
 		}
-		
+
 		private function declineSleepingWithAnzu():void {
 			clearOutput();
 			outputText("Tired as you are, a task is a task. You answer the avian that sadly, you have to keep guard tonight on the portal, so it will be on another time. Though a bit disappointed, the avian quickly cheers up and nuzzles your neck playfully, then he hugs you again and helps you to stand up. Gathering your things, you make it to the door, not without getting another playful nibble as you leave.");
 			outputText("\n\n\"<i>Be careful on your way to the camp, little friend</i>\" he says from the door while waving you. Waving him back you cross the Rift and return to your camp.");
 			inDungeon = false;
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		private function acceptSleepingWithAnzu():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-bed-mid"));
@@ -1145,7 +1145,7 @@ use namespace CoC;
 			outputText("\n\nSoon enough, you mind slips away, carried by many days of fatigue, as you fall asleep on bed, with your feathered companion at your side...");
 			doNext(sleepingWithAnzuPart2);
 		}
-		
+
 		private function sleepingWithAnzuPart2():void {
 			clearOutput();
 			outputText("<b>At some moment, near midnight…</b>");
@@ -1156,7 +1156,7 @@ use namespace CoC;
 			outputText("\n\nDo you attempt to get some midnight 'snack' or just go back to sleep?");
 			doYesNo(sleepingWithAnzuBlowjob, sleepingWithAnzuNoBJ);
 		}
-	
+
 		private function sleepingWithAnzuBlowjob():void {
 			clearOutput();
 			//outputText(images.showImage("anzu-bed-blowjob"));
@@ -1183,13 +1183,13 @@ use namespace CoC;
 			dynStats("lus", 20, "scale", false);
 			doNext(wakeUpWithAnzuGoodMorningBirdie);
 		}
-		
+
 		private function sleepingWithAnzuNoBJ():void {
 			clearOutput();
 			outputText("You shake your head and close your eyes. It takes quite a while but eventually, you succeed in catching your sleep again and make your way back to the dreamland.");
 			doNext(wakeUpWithAnzuGoodMorningBirdie);
 		}
-		
+
 		private function wakeUpWithAnzuGoodMorningBirdie():void {
 			clearOutput();
 			camp.cheatSleepUntilMorning();
@@ -1200,7 +1200,7 @@ use namespace CoC;
 			inDungeon = false;
 			doNext(playerMenu);
 		}
-		
+
 	}
 
 }

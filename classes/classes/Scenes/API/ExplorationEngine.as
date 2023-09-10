@@ -1,6 +1,7 @@
 package classes.Scenes.API {
 import classes.BaseContent;
 import classes.CoC;
+import classes.EngineCore;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -24,7 +25,7 @@ public class ExplorationEngine extends BaseContent {
 	private static const LINE_DISABLED:String = "#888888";
 	private static const LINE_COLOR:String = "#884444";
 	private static const LINE_NEXT:String  = "#0080ff";
-	
+
 	private function filterUnique(e:SimpleEncounter):Boolean {
 		if (e.unique) {
 			var group:String = e.unique as String;
@@ -54,12 +55,12 @@ public class ExplorationEngine extends BaseContent {
 		return soulSenseCheck(e) && filterUnique(e);
 	}
 	private const filters:/*Function*/Array = [filterForStart, filterForMid, filterForEnd];
-	
+
 	public function ExplorationEngine() {
 		const SIZE:Number = ExplorationEntry.RADIUS * 2;
 		const XGAP:Number = (MainView.TEXTZONE_W) / (MAXDEPTH + 1) - SIZE;
 		const YGAP:Number = SIZE * 1.5;
-		
+
 		startPos       = new ExplorationEntry(-1, -1, XGAP / 2, YGAP + (NROADS - 1) * (SIZE + YGAP) / 2);
 		startPos.label = "Start";
 		var y:Number   = YGAP;
@@ -76,7 +77,7 @@ public class ExplorationEngine extends BaseContent {
 		initialized = true; // for clear() to work
 		clear();
 	}
-	
+
 	/**
 	 * This properties can be set after prepareArea() and before doExplore()
 	 */
@@ -124,7 +125,7 @@ public class ExplorationEngine extends BaseContent {
 	public var areaTags:Object       = {};
 	public var branchChance:Number   = 0;
 	public var crossingAllowed:Boolean = false;
-	
+
 	private var maxDepth:int         = MAXDEPTH;
 	private var source:GroupEncounter               = new GroupEncounter("UNUSED", []);
 	private var playerEntry:ExplorationEntry        = null;
@@ -140,7 +141,7 @@ public class ExplorationEngine extends BaseContent {
 	private var finished:Boolean                    = false;
 	private var startPos:ExplorationEntry;
 	private var nextNodes:/*ExplorationEntry*/Array = [];
-	
+
 	/**
 	 * Switch to clear, uninitialized state.
 	 */
@@ -182,7 +183,9 @@ public class ExplorationEngine extends BaseContent {
 	/**
 	 * Switch to "finished" state where data is still kept but exploration cannot proceed.
 	 *
-	 * This function can be called in encounters that finish exploration early (e.g. combat loss)
+	 * This function can be called in encounters that finish exploration early (e.g. combat loss).
+	 *
+	 * This function does not display any menus!
 	 */
 	public function stopExploring():void {
 		trace("explorer.stopExploring");
@@ -196,12 +199,24 @@ public class ExplorationEngine extends BaseContent {
 	 * This function can be used as a callback when finishing the encounter.
 	 *
 	 * If there is no encounter, return to camp using 1 hour.
+	 *
+	 * @param timePassedMinutes Advance time, -1 for default value
 	 */
-	public function done():void {
+	public function done(timePassedMinutes:int = -1):void {
 		trace("explorer.done");
 		if (!initialized) {
 			defaultReturn();
 			return;
+		}
+		if (timePassedMinutes < 0) {
+			if (currentEntry == null) {
+				timePassedMinutes = 0;
+			} else {
+				timePassedMinutes = ExplorationEntry.EncounterKinds[currentEntry.kind].time;
+			}
+		}
+		if (timePassedMinutes > 0) {
+			advanceMinutes(timePassedMinutes);
 		}
 		markEncounterDone();
 		if (finished) onEnd.callback();
@@ -223,7 +238,10 @@ public class ExplorationEngine extends BaseContent {
 			trace("explorer.doExplore(ended)")
 			stopExploring();
 			onEnd.callback();
-		} else */{
+		} else */if (timeQueued) {
+			trace("explorer.doExplore(timeQueued)");
+			goNext(false);
+		} else {
 			trace("explorer.doExplore(normal)")
 			validate();
 			showUI();
@@ -256,14 +274,14 @@ public class ExplorationEngine extends BaseContent {
 			}
 		}
 	}
-	
+
 	private function defaultReturn():void {
 		camp.returnToCampUseOneHour();
 	}
 	private function get maxRevealLevel():int {
 		return canRevealFull ? ExplorationEntry.REVEAL_FULL : ExplorationEntry.REVEAL_KIND;
 	}
-	
+
 	/**
 	 * Current entry that is being executed - after player starts the encounter and before stopExploring()/markEncounterDone()/done()
 	 */
@@ -273,6 +291,10 @@ public class ExplorationEngine extends BaseContent {
 	public function get inEncounter():Boolean {
 		return !!currentEntry;
 	}
+
+	/**
+	 * True if exploration engine is currently active - whether on a map or inside an encounter.
+	 */
 	public function get isActive():Boolean {
 		return initialized && !finished;
 	}
@@ -294,7 +316,7 @@ public class ExplorationEngine extends BaseContent {
 		}
 		return 0;
 	}
-	
+
 	public function findByName(name:String):ExplorationEntry {
 		for (var i:int = 0; i < N; i++) {
 			if (!flatList[i].isDisabled && flatList[i].encounterName == name) return flatList[i];
@@ -407,7 +429,7 @@ public class ExplorationEngine extends BaseContent {
 			if (nextNodes.indexOf(entry) >= 0) execEntry(entry);
 		}
 	}
-	
+
 	private function execEntry(entry:ExplorationEntry):void {
 		trace("explorer.execEntry", entry.encounterName);
 		clearOutput();
@@ -437,14 +459,14 @@ public class ExplorationEngine extends BaseContent {
 	private function createMap():Sprite {
 		var map:Sprite = new Sprite();
 		var g:Graphics = map.graphics;
-		
+
 		if (roadIndex < 0) {
 			startPos.isPlayerHere = true;
 			playerEntry           = startPos;
 		}
 		startPos.redraw();
 		map.addChild(startPos.sprite);
-		
+
 		for (var i:int = 0; i < NROADS; i++) {
 			for (var j:int = 0; j < MAXDEPTH; j++) {
 				var node:ExplorationEntry = roads[i][j];
@@ -491,20 +513,32 @@ public class ExplorationEngine extends BaseContent {
 				}
 			}
 		}
-		
+
 		return map;
 	}
 	private function showUI(message:String = ""):void {
 		var i:int;
-		for (i = 0; i < N; i++) {
-			// If there is an encounter with chance ALWAYS, stop the exploration and execute it immediately
+		var e:Encounter = null;
+		// If there is an encounter with chance ALWAYS, stop the exploration and execute it immediately
+		for (i = 0; e == null && i < N; i++) {
 			if (flatList[i].encounter && !flatList[i].isDisabled && flatList[i].encounter.encounterChance() == Encounters.ALWAYS) {
-				stopExploring();
-				flatList[i].encounter.execEncounter();
-				return;
+				e = flatList[i].encounter;
 			}
 		}
-		
+		// Check to pool for same
+		for (i = 0; e == null && i < source.components.length; i++) {
+			if (source.components[i].encounterChance() >= Encounters.ALWAYS) {
+				e = source.components[i];
+			}
+		}
+		if (e != null) {
+			stopExploring();
+			if (onEncounter != null) {
+				onEncounter(e);
+			}
+			e.execEncounter();
+		}
+
 		// Buttons
 		// [Forward/Path 1] [Path 2] [Path 3] [Path 4] [Path 5]
 		// [   SoulSense  ] [      ] [      ] [      ] [      ]
@@ -563,26 +597,27 @@ public class ExplorationEngine extends BaseContent {
 				button(12).disable("You're too aroused to explore!");
 			}
 		}
-		
+
 		if (debug) {
 			button(14).show("Menu", cheatMenu);
 		} else {
 			if (leave && !finished && !isAtEnd) leave.applyTo(button(14));
 		}
 		if (onMenu != null) onMenu();
+		mainViewManager.updateCharviewIfNeeded();
 	}
 	public function cheatMenu():void {
 		function cheatReveal(level:int):void {
 			revealAll(level);
 			showUI();
 		}
-		
+
 		function cheatReroll():void {
 			for (var i:int = 0; i < N; i++) flatList[i].isPlayerHere = false;
 			generateAll();
 			showUI();
 		}
-		
+
 		statScreenRefresh();
 		menu();
 		button(0).show("Reveal(0)", curry(cheatReveal, 0))
@@ -595,11 +630,11 @@ public class ExplorationEngine extends BaseContent {
 								.hint("Recreate the map")
 		button(4).show("Camp", camp.returnToCampUseOneHour)
 				 .hint("Return to camp");
-		
+
 		if (leave && !finished && !isAtEnd) leave.applyTo(button(13));
 		button(14).show("Back", showUI).icon("Back");
 	}
-	
+
 	/**
 	 *
 	 * @param entry
@@ -697,13 +732,13 @@ public class ExplorationEngine extends BaseContent {
 			}
 		}
 	}
-	
+
 	public function skillBasedReveal(areaLevel:Number, timesExplored:Number):void {
 		var n:Number = 0;
-		
+
 		// +1 reveal per 100 area explorations
 		n += timesExplored / 100;
-		
+
 		// Wisdom-based reveal:
 		// * first reveal costs 10 wisdom, scaled with NG+ and area level
 		// * each following reveal costs 5% more wis
@@ -711,7 +746,7 @@ public class ExplorationEngine extends BaseContent {
 		wisFactor *= 1 + 4 * (areaLevel - 1) / 99; // x1 on area level 1, x4 on area level 100
 		wisFactor *= (1 + 0.2 * CoC.instance.newGamePlusMod()); // +20% per NG level
 		n += solveSum(player.wis, wisFactor, wisFactor*0.05);
-		
+
 		// +1 reveal per Eyes of the Hunter rank
 		if (player.hasPerk(PerkLib.EyesOfTheHunterNovice)) n += 1;
 		if (player.hasPerk(PerkLib.EyesOfTheHunterAdept)) n += 1;
@@ -720,7 +755,7 @@ public class ExplorationEngine extends BaseContent {
 		if (player.hasPerk(PerkLib.EyesOfTheHunterGrandMaster)) n += 1;
 		if (player.hasPerk(PerkLib.EyesOfTheHunterEx)) n += 1;
 		if (player.hasPerk(PerkLib.EyesOfTheHunterSu)) n += 1;
-		
+
 		revealMultiple(n);
 	}
 	public function soulSenseCost():Number {
@@ -732,7 +767,7 @@ public class ExplorationEngine extends BaseContent {
 	public function doSoulSense():void {
 		player.soulforce -= soulSenseCost();
 		statScreenRefresh();
-		
+
 		var candidates:/*ExplorationEntry*/Array = [];
 		var message:String = "";
 		for (var i:int = 0; i < N; i++) {
@@ -764,10 +799,10 @@ public class ExplorationEngine extends BaseContent {
 				message = "You've found something!";
 			}
 		}
-		
+
 		showUI(message);
 	}
-	
+
 	/**
 	 * Add an encounter at the end of the road
 	 * @param encounter

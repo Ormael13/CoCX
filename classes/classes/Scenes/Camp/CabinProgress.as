@@ -11,11 +11,11 @@ import classes.Scenes.SceneLib;
 	 * @author Kitteh6660
 	 */
 	public class CabinProgress extends BaseContent {
-		
+
 		public function CabinProgress() {
-		
+
 		}
-		
+
 		public function initiateCabin():void {
 			clearOutput();
 			//if (player.hasKeyItem("Nails") >= 0) player.removeKeyItem("Nails");
@@ -53,7 +53,7 @@ import classes.Scenes.SceneLib;
 				doNext(playerMenu);
 			}
 		}
-		
+
 		//Error message
 		public function errorNotEnough():void {
 			outputText("\n\n<b>You do not have sufficient resources. You may buy more nails from the carpentry shop in Tel'Adre, get more wood from either the Forest or the Deepwoods and get more stones from some quarry or if you found someone to help you dig some from underground.</b>")
@@ -61,15 +61,15 @@ import classes.Scenes.SceneLib;
 		public function errorNotHave():void {
 			outputText("\n\n<b>You do not have the tools to build.</b>")
 		}
-		
-		
+
+
 		//STAGE 1 - A wild idea appears!
 		public function startWork():void {
 			outputText("You wander around your camp for a good few moments when suddenly, something crosses your mind. Yes, that's it! A cabin! Just what you would need to live comfortably instead of your tent. You wander for a good while until you find a suitable location to build your cabin. You memorize the location.");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
 			doNext(camp.returnToCampUseTwoHours);
 		}
-		
+
 		//STAGE 2 - Survey and clear area for cabin site.
 		private function startLayout():void {
 			outputText("You finally decide to begin your project: a cabin.  A comfortable cabin, come complete with a bed and nightstand along with some furniture. \n\nYou begin clearing away loose debris by picking up loose rocks and sticks and move them somewhere. It takes one hour and you feel a bit exhausted but you've finished creating a space.");
@@ -77,7 +77,7 @@ import classes.Scenes.SceneLib;
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 3;
 			endEncounter();
 		}
-		
+
 		//STAGE 3 - Think of materials. Obviously, wood.
 		private function startThinkingOfMaterials():void {
 			outputText("Now that you have cleared an area for your cabin, you'll have to figure out how to get the resources you need. You look at the trees in the distance. Clearly, you'll need something to cut down trees. Maybe there's a shop somewhere?");
@@ -180,8 +180,7 @@ import classes.Scenes.SceneLib;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
 		//Cut down the tree yourself with Machined greatsword.
 		private function cutTreeMechTIMBER():void {
@@ -206,11 +205,10 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
 				incrementWoodSupply(13 + Math.floor(player.str / 7));
 				fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
-				explorer.stopExploring();
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
-		
+
 		public function quarrySite():void {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) outputText("You return to the mountain area where you found before a very good mineral formation.");
@@ -275,9 +273,8 @@ import classes.Scenes.SceneLib;
 			}
 			findOre(nightExploration);
 		}
-		
+
 		private function findOre(nightExploration:Boolean = false):void {
-			explorer.stopExploring();
 			if (player.miningLevel > 0) {
 				if (rand(4) == 0) {
 					var itype:ItemType;
@@ -301,16 +298,16 @@ import classes.Scenes.SceneLib;
 						default:
 							outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
 					}
-					inventory.takeItem(itype, camp.returnToCampUseTwoHours);
+					inventory.takeItem(itype, curry(explorer.done,120));
 				}
 				else {
 					outputText(" After attempt to mine ore vein you ended with unusable piece.");
-					doNext(camp.returnToCampUseTwoHours);
+					endEncounter(120);
 				}
 			}
 			else {
 				outputText(" Your mining skill is too low to find any ore.");
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
 
@@ -328,7 +325,7 @@ import classes.Scenes.SceneLib;
 			}
 			endEncounter(); //- wadą tego etapu to brak menu lub menu za wcześnie?
 		}
-		
+
 		//Get help from Kiha.
 		private function getHelpFromKiha():void {
             clearOutput();
@@ -340,10 +337,9 @@ import classes.Scenes.SceneLib;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (20 + Math.floor(player.str / 5));
 			incrementWoodSupply(20 + Math.floor(player.str / 5));
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
-		
+
 		private function noThanks():void {
 			outputText("Deciding not to cut down the tree at the moment, you return to your camp. ");
 			endEncounter();
@@ -352,7 +348,7 @@ import classes.Scenes.SceneLib;
 			outputText("Deciding not to work on your cabin right now, you return to the center of your camp.");
 			doNext(playerMenu);
 		}
-		
+
 		public function incrementWoodSupply(amount:int):void {
 			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
@@ -362,7 +358,7 @@ import classes.Scenes.SceneLib;
 			}
 			outputText(")</b>");
 		}
-		
+
 		public function incrementStoneSupply(amount:int):void {
 			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += amount;
@@ -372,7 +368,7 @@ import classes.Scenes.SceneLib;
 			}
 			outputText(")</b>");
 		}
-		
+
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.
 		private function startCabinPart2():void {
 			outputText("You take out a paper, feather pen, and ink quill to draw some plans and diagrams. You spend one hour editing and perfecting your plans, reviewing and making some final changes to your plan before you fold the paper and put it away.");
@@ -410,7 +406,7 @@ import classes.Scenes.SceneLib;
 				doNext(playerMenu);
 			}
 		}
-		
+
 		private function doCabinWork1():void {
 			clearOutput();
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 100;
@@ -434,7 +430,7 @@ import classes.Scenes.SceneLib;
 			fatigue(gatherWoodsORquarrySiteMineCost()*2);
 			doNext(camp.returnToCampUseEightHours);
 		}
-		
+
 		//Stage 9 - Build cabin part 2.
 		private function buildCabinPart2():void {
 			clearOutput();
@@ -471,7 +467,7 @@ import classes.Scenes.SceneLib;
 			fatigue(gatherWoodsORquarrySiteMineCost()*2);
 			doNext(camp.returnToCampUseEightHours);
 		}
-		
+
 		//Stage 10 - Build cabin part 3 - Install door and window.
 		private function buildCabinPart3():void {
 			clearOutput();
@@ -508,7 +504,7 @@ import classes.Scenes.SceneLib;
 			fatigue(gatherWoodsORquarrySiteMineCost()*2);
 			doNext(camp.returnToCampUseFourHours);
 		}
-		
+
 		//Stage 11 - Build cabin part 4 - Install flooring.
 		private function buildCabinPart4():void {
 			clearOutput();

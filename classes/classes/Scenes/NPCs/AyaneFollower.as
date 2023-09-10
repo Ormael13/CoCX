@@ -102,7 +102,7 @@ public function ayaneTalkPriestess():void
 	outputText("You would like to discuss various things with Ayane; starting with her role as priestess.\n\n");
 	outputText("\"<i>My role? Um... Well, while most kitsune are satisfied enjoying a simple life, caught between a good prank and good lovemaking, one needs to remember to thank the one who made us who and what we are. Taoth, like any god, has worshipers; and by studying The Trickster's pranks and dogma, one can attain some form of personal enlightenment. Life is a farce, in and of itself; a game to be played to the bitter end, best to take it with a smile rather than tears.</i>\"\n\n");
 	doNext(ayaneTalkMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 
 public function ayaneTalkTaoth():void
@@ -113,7 +113,7 @@ public function ayaneTalkTaoth():void
 	outputText("So in theory the reason he's the prankster of the pantheon is because everyone else is way too serious?\n\n");
 	outputText("Ayane nods at this statement. \"<i>Deities could do with smiling more or with knowing how to have a good time. Taoth is here to remind them and us that order cannot exist without chaos, otherwise the world would be a bleak place indeed.</i>\"\n\n");
 	doNext(ayaneTalkMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 
 public function ayaneTalkPrayer():void
@@ -128,7 +128,7 @@ public function ayaneTalkPrayer():void
 		outputText("You have no idea, but you are quite sure he’s out there, preparing yet another huge prank for the demons.\n\n");
 	}
 	doNext(ayaneTalkMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 
 public function ayaneShop():void {
@@ -443,7 +443,7 @@ private function BelisaAyaneTalk():void {
 	outputText("You ask your resident priestess about curing cursed injuries. Immediately, Ayane springs up, eyes wide as she looks you up and down. \"<i>My " + player.mf("lord", "lady") + ", are you hurt?!</i>\" You hastily explain that it’s not for you, but rather, for a friend. Ayane listens as you describe Belisa’s predicament, and she shakes her head sadly. ");
 	outputText("\"<i>I’m afraid I cannot help you. Curses tied to specific injuries are rather difficult to remove, and I sadly don’t have the ability to cure such maladies yet.</i>\" You thank Ayane for her assistance, and she shakes her head sadly. \"<i>I did nothing, [name].</i>\"\n\n");
 	doNext(ayaneCampMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //======================================================================================================

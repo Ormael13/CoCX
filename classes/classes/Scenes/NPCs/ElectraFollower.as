@@ -144,6 +144,7 @@ public function ElectraRecruitingSure():void {
 	flags[kFLAGS.ELECTRA_LVL_UP] = 1;
 	flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
 	flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] = 0;
+	explorer.stopExploring();
 	doNext(playerMenu);
 }
 public function ElectraRecruitingNah():void {

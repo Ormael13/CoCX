@@ -9,9 +9,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
-	
+
 	use namespace CoC;
-	
+
 	public class DriderTown extends NPCAwareContent implements SaveableState {
 		public static var DriderTownComplete:Boolean;
 		public static var SisterBangEnabled:Boolean;
@@ -44,7 +44,7 @@ import classes.internals.SaveableState;
 		public static var TyrantiaKidsEggsHatching:Number;
 		public static var TyrantiaKidsEggsHatching1:Number;
 		public static var TyrantiaKidsEggsHatching2:Number;
-		
+
 		public function stateObjectName():String {
 			return "DriderTown";
 		}
@@ -226,7 +226,7 @@ public function BelisaBroodmotherMoment():void {
 	outputText("You nod, wrapping your arms around Belisa’s upper body, holding her close. The expectant broodmother lets out a little sigh. \"<i>Sorry, but...I needed that.</i>\" She walks back to her house, and you watch her, slightly concerned. At least the pregnancy won’t last long.\n\n");
 	BelisaPregnancy -= 24;
 	doNext(playerMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 public function BelisaEggLaying():void {
 	clearOutput();
@@ -250,7 +250,7 @@ public function BelisaEggLaying():void {
 		BelisaKidsEggsHatching = 120;
 	}
 	doNext(playerMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function BelisaEggsHatched():void {
 	clearOutput();
@@ -274,7 +274,7 @@ public function BelisaEggsHatched():void {
 		BelisaKidsEggs2 = 0;
 	}
 	doNext(playerMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 
 public function LilyEggLayingPC():void {
@@ -301,7 +301,7 @@ public function LilyEggLayingPC():void {
 		LilyKidsPCEggsHatching = 120;
 	}
 	doNext(playerMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 public function LilyEggsHatchedPC():void {
 	clearOutput();
@@ -325,7 +325,7 @@ public function LilyEggsHatchedPC():void {
 		LilyKidsPCEggs2 = 0;
 	}
 	doNext(playerMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 public function TyrantiaBroodmotherMoment():void {
@@ -335,7 +335,7 @@ public function TyrantiaBroodmotherMoment():void {
 	outputText("<i>“I love you.”</i> She lets go of you, going back to her hutch. <i>“Even though you made it so I can’t fight for another day.”</i> She rubs the top of your head. <i>“Asshole.”</i> Her smile takes the sting entirely out of those words. You can tell that, despite everything, your Drider giantess is very happy.\n\n");
 	TyrantiaPregnancy -= 24;
 	doNext(playerMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 public function TyrantiaEggLaying():void {
 	clearOutput();
@@ -359,7 +359,7 @@ public function TyrantiaEggLaying():void {
 		TyrantiaKidsEggsHatching = 120;
 	}
 	doNext(playerMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function TyrantiaEggsHatched():void {
     var kidsHatched:int =
@@ -412,7 +412,7 @@ public function TyrantiaEggsHatched():void {
 		TyrantiaKidsEggs2 = 0;
 	}
 	doNext(playerMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 
 public function SpooderSleep():void {
