@@ -613,7 +613,7 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 	}
 	//if (!(SceneLib.crafting.hasMaterial(itype) && SceneLib.crafting.useMaterial(itype))) player.destroyItems(itype, 1);
 	//else SceneLib.crafting.feedAetherTwinsMaterialFromOreBag(itype);
-	if (SceneLib.crafting.hasMaterial(itype)) SceneLib.crafting.feedAetherTwinsMaterialFromOreBag(itype);
+	if (SceneLib.crafting.hasMaterial(itype) > 0) SceneLib.crafting.feedAetherTwinsMaterialFromOreBag(itype);
 	else player.destroyItems(itype, 1);
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);

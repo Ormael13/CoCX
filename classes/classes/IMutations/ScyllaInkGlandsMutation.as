@@ -70,8 +70,8 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['str.mult'] = 0.1;
-            //else if (pTier == 2) pBuffs['int.mult'] = 0;
-            //else if (pTier == 3) pBuffs['int.mult'] = 0;
+            //else if (pTier == 2) pBuffs['str.mult'] = 0;
+            //else if (pTier == 3) pBuffs['str.mult'] = 0;
             return pBuffs;
         }
 

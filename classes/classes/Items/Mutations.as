@@ -873,11 +873,10 @@ public final class Mutations extends MutationsHelper {
     public function packOfNails(player:Player):void {
         clearOutput();
         var nails:Number = 10 + rand(21);
-        outputText("You open the pack to find " + nails + " nails inside.");
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
         if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > SceneLib.campUpgrades.checkMaterialsCapNails()) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapNails();
-        
+        outputText("You open the pack to find " + nails + " nails inside. <b>("+flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]+"/"+SceneLib.campUpgrades.checkMaterialsCapNails()+" total!)</b>");
     }
 
     public function packOfDemonBones(player:Player):void {
@@ -1081,9 +1080,9 @@ public final class Mutations extends MutationsHelper {
 		//Minotaur cum addiction
         var changingaddition:Number = 7;
         if (purified) {
-			changingaddition -= 10;
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) changingaddition -= 8;
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) changingaddition -= 16;
+			changingaddition -= 14;
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) changingaddition -= 10;
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) changingaddition -= 20;
 		}
         player.minoCumAddiction(changingaddition);
         outputText("As soon as you crack the seal on the bottled white fluid, a ");
@@ -5574,7 +5573,7 @@ public final class Mutations extends MutationsHelper {
         if (type != 3) {
             outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.  Minutes pass as you start wishing you had water with you, to get rid of the ");
             if (type == 0) outputText("aftertaste.");
-            if (type == 1 || type == 2) outputText("strange mixed taste.");
+            else outputText("strange mixed taste.");
         }
         else outputText("You apply the hydra scale against your chest, unsure of what will happen. It suddenly adheres and begins to merge into your body, vanishing beneath your skin.");
         //STAT CHANGES
@@ -5599,7 +5598,7 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) changeLimit = 0;
 
         //Snek Penis and Gina
-        if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(3) == 0) {
             //Find the first non-lizzy dick
             for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
@@ -5664,7 +5663,7 @@ public final class Mutations extends MutationsHelper {
                 player.vaginas[0].vaginalLooseness++;
                 changes++;
             }
-            if (player.lowerBody == LowerBody.NAGA && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
+            if ((player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
                 transformations.VaginaNaga().applyEffect();
                 changes++;
             }
@@ -5691,22 +5690,22 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Snake lower body
-        if (transformations.LowerBodySnake.isPossible() && rand(4) == 0 && changes < changeLimit) {
+        if (transformations.LowerBodySnake.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.LowerBodySnake.applyEffect();
             changes++;
         }
-        if (transformations.TailHydra.isPossible() && rand(4) == 0 && changes < changeLimit && type == 3) {
+        if (transformations.TailHydra.isPossible() && rand(3) == 0 && changes < changeLimit && type == 3) {
             transformations.TailHydra.applyEffect();
             changes++;
         }
-        if (player.lowerBody == LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit && type == 3) {
+        if (player.lowerBody == LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(3) == 0 && changes < changeLimit && type == 3) {
             outputText("[pg]");
             transformations.LowerBodyHydra.applyEffect();
             changes++;
         }
         //Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-        if (!player.hasPartialCoat(Skin.SCALES) && player.lowerBody == LowerBody.NAGA && changes < changeLimit && rand(5) == 0) {
+        if (!player.hasPartialCoat(Skin.SCALES) && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && changes < changeLimit && rand(3) == 0) {
             if (rand(10) == 0) {
                 colors = ["purple", "silver"];
             } else {
@@ -5716,20 +5715,14 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinScales(Skin.COVERAGE_LOW, {colors: colors}).applyEffect();
             changes++;
         }
-        //Snake eyes for hydra
-        if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.EyesSnake.applyEffect();
-            changes++;
-        }
         //Snake eyes
-        if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
+        if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesSnake.applyEffect();
             changes++;
         }
         //Ears!
-        if ((type == 0 || type == 2) && player.ears.type != Ears.SNAKE && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.SNAKE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsSnake.applyEffect();
             changes++;
@@ -5744,12 +5737,6 @@ public final class Mutations extends MutationsHelper {
         if (type == 0 && player.hairType == Hair.GORGON && player.eyes.type == Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesGorgon.applyEffect();
-            changes++;
-        }
-        //Snake eyes for hydra
-        if (type == 3 && player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]");
-            transformations.EyesSnake.applyEffect();
             changes++;
         }
         //-Existing horns become draconic, max of 4, max length of 1'
@@ -5828,43 +5815,25 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel very sore. However, you doubt you'll be able to force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
             changes++;
-        }/*
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
-            outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
-            player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
-            changes++;
         }
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonLightningBreath)) {
-            outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
-            player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
-            changes++;
-        }
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonDarknessBreath)) {
-            outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
-            player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
-            changes++;
-        }*/
         if (type == 3 && player.isRace(Races.HYDRA, 1, false) && changes < changeLimit && !player.hasPerk(PerkLib.HydraAcidBreath)) {
             outputText("[pg]You feel sick, like very sick as if your stomach was bubbling up. You spontaneously vomit from all the heads below your waist but what comes out is not vomit. Your hydra heads retches out on the ground in front of you which is doused with smoking green fluids which begins to smoke right away as your powerful acid begin to dissolve whatever is beneath it. <b>It would seem you have developed the ability to use the hydra's infamous breath weapon.</b>  (<b>Gained Perk: Hydra acid breath!</b>)");
             player.createPerk(PerkLib.HydraAcidBreath, 0, 0, 0, 0);
             changes++;
         }
         //Propah Wings
-        if (type == 2 && player.wings.type == Wings.NONE && player.lowerBody == LowerBody.NAGA && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(4) == 0) {
+        if (type == 2 && player.wings.type == Wings.NONE && player.lowerBody == LowerBody.NAGA && changes < changeLimit && (type == 1 || player.arms.type == Arms.HARPY) && rand(3) == 0) {
             outputText("[pg]");
 			transformations.WingsCouatl.applyEffect();
             changes++;
         }
         //Remove old wings
-        if (type == 2 && player.wings.type != Wings.COUATL && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && player.wings.type != Wings.COUATL && player.wings.type > Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
-        if (type == 3 && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
+        if (type == 3 && player.wings.type > Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -5876,27 +5845,26 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Feathery Arms
-        if (type == 2 && !InCollection(player.arms.type, Arms.HARPY) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && !InCollection(player.arms.type, Arms.HARPY) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]When you go to wipe your mouth form remains of the oil, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
             transformations.ArmsHarpy.applyEffect();
             changes++;
         }
         //Hydra Arms
-        if (type == 3 && !InCollection(player.arms.type, Arms.HYDRA) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
+        if (type == 3 && !InCollection(player.arms.type, Arms.HYDRA) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsHydra.applyEffect();
             changes++;
         }
 
         //Feathery Hair
-        if (type == 2 && transformations.HairFeather.isPossible() && player.wings.type == Wings.COUATL && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && transformations.HairFeather.isPossible() && player.wings.type == Wings.COUATL && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.HairFeather.applyEffect();
             changes++;
         }
-
         //Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-        if (!player.hasFullCoatOfType(Skin.SCALES) && ((type == 0 && player.eyes.type == Eyes.GORGON) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
+        if (!player.hasFullCoatOfType(Skin.SCALES) && ((type == 0 && player.eyes.type == Eyes.GORGON) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(4) == 0) {
             if (rand(10) == 0) {
                 colors = ["purple", "silver"];
             } else {

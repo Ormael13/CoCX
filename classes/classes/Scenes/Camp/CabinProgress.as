@@ -350,8 +350,8 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function incrementWoodSupply(amount:int):void {
-			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
+			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"! "+flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]+"/"+SceneLib.campUpgrades.checkMaterialsCapWood()+" total!");
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapWood()) {
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapWood();
 				outputText(" Your wood capacity is full.")
@@ -360,8 +360,8 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function incrementStoneSupply(amount:int):void {
-			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += amount;
+			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"! "+flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]+"/"+SceneLib.campUpgrades.checkMaterialsCapStones()+" total!");
 			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= SceneLib.campUpgrades.checkMaterialsCapStones()) {
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = SceneLib.campUpgrades.checkMaterialsCapStones();
 				outputText(" Your stone capacity is full.")

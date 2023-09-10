@@ -13439,6 +13439,7 @@ public function ScyllaSqueeze():void {
         damage *= player.effectiveTallness / 25;
         damage += player.str;
     }
+	//if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) x
     damage = statusEffectBonusDamage(damage);
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();

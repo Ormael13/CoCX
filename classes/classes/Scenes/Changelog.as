@@ -33,6 +33,7 @@ public class Changelog extends BaseContent
 			clearOutput();
 			//0 of 11 pages
 			outputText("<b>Version 0.8t2:</b>\n\n");
+			outputText("-New tier 0 libido lvl-up perk: Broad Selection. Req. Job: Seducer perk and at least two different types of penises. Effect: Increasing the Tease damage by 25% for each different type of penis that you have.\n");
 			outputText("-New tier 1 misc lvl-up perk: History Buff. Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 4 misc lvl-up perk: Guerrilla Tactics. Req. History Buff perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 7 misc lvl-up perk: Strength in Numbers. Req. Guerrilla Tactics perk. Effect: +10% minions/pets damage.\n");
@@ -60,10 +61,14 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Soul Nexus. Req. having 20+ in anubis score. Effects: An anubis never truly runs out of soul force and regenerates 5% of its total soul force per round from absorbing ambient wandering soul energy.\n");
 			outputText("-New event perk: Mummy Lord. Req. having 15+ in anubis score and 50+ corruption. Effects: Can control and gather mummies (up to 5). Each mummy under your control reduces building and gathering fatigue cost by 5% (Maximum 100%). Each mummy under your control increases soulskill power by 5%. Alpha Howl also increases the amount of mummies under your control (5 * tier).\n");
 			outputText("-New event perk: Dormant Mummy Lord. Req. having 1+ mummies when loosing Mummy Lord perk. Effects: Hmmmm.... none it just let you know your mummies awaits when your PC become able to control mummies again.\n");
+			outputText("-New event perk: Blood Afinity. Gained by been race like vampires. Effects: Increase all damage dealt with blood spells/soulskills or amount of damage blood shield can absorb by 100%.\n");
 			outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP / Lust effect of 5% magnitude.\n");
 			outputText("-New History/Past Life Perk - History: Thief - give Job: Rogue for free and increase sneak attack multiplier by +1.\n");
 			outputText("-New melee weapon (by Ormael): Dual Dagger Whips - can be gained by combining 2x Dagger Whip weapon. Cost 400 gems. Base atk is 5. It's dual small weapon belonging to dagger type, can use whipping special with them.\n");
 			outputText("-New melee weapon (by Liadri): Judge staff - obtained by beating Anubis. Cost 1600 gems. Base atk is 10. It's large staff type weapon. Increase magic soulskill power by 80% and spellpower by 20%.\n");
+			outputText("-New melee weapon (by Ormael): Beautiful Whip - obtained by finding it at Lake. 5 atk, costing 400 gems, can't be used above 33 (+ corruption tolerance bonus) corruption and the less corruption PC have the bigger bonus to atk (max 7)\n");
+			outputText("-New melee weapon (by Ormael): Demon flail - gained when making Vapula submit and become PC slave. Base atk is 25. It's large mace/hammer type weapon. Can be used for whirlwind special and have +10% chance to stun target (on top of default mace/hammer weapons stun chance). Could also be used for grappling enemies (req. Bindmaster job) and deal lust/phys dmg (like whips).\n");
+			outputText("-New range weapon (by Ormael): Twin Six Shooter - can be gained by combining 2x Six Shooter weapon. Cost 1160 gems. Base atk is 20 and ammo clip size 6. It's Dual Firearm type range weapon.\n");
 			outputText("-New armor (by Ormael): Red gel armor - craftable by Konstantin using 5 pieces of red gel. Cost 1200 gems, 10 armor, -20% soulskills cost.\n");
 			outputText("-New armor (by Liadri): Death Prince Outfit - obtained by beating Anubis. Cost 500 gems, 5 magic resistance, +50% Magic Soulskill power, grants 2% regeneration when soulforce is above half.\n");
 			outputText("-New armor (by Liadri): Death Prince Golden Armor - obtainable by giving Death Prince Outfit to Corrupted Celess to corrupt. Cost 19200 gems, 20 armor, 40 magic resistance, empowers Anubi ability by 50%, +200% Magic Soulskill power, grants 5% regeneration when soulforce is above half.\n");
@@ -80,6 +85,11 @@ public class Changelog extends BaseContent
 			outputText("-New magic soulskill: Finger of death. Accessable by having 20+ in anubis racial score. Effects: Once per 6 rounds inflict massive damage. Also damage the opponent's toughness and strength by 10. Ineffective on foes who lack a soul.\n");
 			outputText("-New magical soulskill: Create Element (Basic). Req. buying manual from golem merchant for 20 spirit stones. Create ball of fire / water / air / earth and throw it at enemy. Base cost: 60 soulforce.\n");
 			outputText("-New magical soulskill: Create Element (Advanced). Req. buying manual from golem merchant for 80 spirit stones after PC reach Soul Personage and knowing Create Element (Basic). Create ball of ice / lightning / darkness and throw it at enemy. Base cost: 60 soulforce.\n");
+			outputText("-New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 5% of max health per turn. Selfbuff that boost str/tou/spe/int/wis (physical stats are boosted 2x higher), when it's active would allow to use without cooldown Charge special with cost been HP equal to 200% of normal fatigue cost.\n");
+			outputText("-New Masturbation option: Mummy Sex. Req. 50%+ Soulfroce, be Anubi and have 3+ mummies. Beside typical effects it would drain those 50% of SF and increase mummies attack (2x) for 24 hours. (In case PC loose control over mummies in that time timer would be still ticking down each hour so regaining control ove rmummies would keep boost for remaining time until full day would pass by)\n");
+			outputText("-New Unique Sexscene: Mummy Curse - req. to be anubi with mummy curse/lord perks and having badge in inventory. Also can be only used against enemies that are sentient, humanoid and with soul. After scene PC will gain new mummy minion up to cap of 5 mummies.\n");
+			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Anubis - lvl 24. Encounterable in Inner Desert; Werefox (F) - lvl 19. Encounterable in Inner Desert at night; ");
+			outputText("Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter); Juvenile Abyssal Shark - lvl 73. Encounterable in Ocean.\n");
 			outputText("-Lumi can now refine 'Vial of snake oil' into 'Vial of refined snake oil'. Using it would slowly turn PC into Apophis - new type in snake/naga races family. That race can access Venomancy perk as long corruption is high enough (other race to access that perk is Atlach Nacha perm race) TF and item by Liadri.\n");
 			outputText("-New bodyparts: Fiendish eyes (eyes)(Apophis tf), Cobra hood (rear body)(Apophis tf), Fennec Fox Ears (Werefox TF), Jackal Ears (Anubis TF), Glyph Tattoos (Anubis TF).\n");
 			outputText("-Mutation items give 2 base chances to get effect (aside few that got so little effects or was more meant to be one effect at time). Also addtional chances to get effect proc all got now 50% to happen from previous 33-10%\n");
@@ -103,9 +113,24 @@ public class Changelog extends BaseContent
 			outputText("-Moon phases been divided further from Full Moon day and rest into Full Moon (8th day of the cycle), New Moon (4th day of the cycle) and Half Moon (rest of the days) with stats page tracker for moon cycle day indicating which moon cycle phase is currently.\n");
 			outputText("-Alpha Howl i.mutation can be picked by Anubis race too.\n");
 			outputText("-Dominated by werewolf/cerberus female werewolf and enslaved by anubi mummies would count toward current camp population. In case PC loose ability to control mummies due to loosing Mummy Lord perk their population won't count toward total population counter. Also both types of 'camp members' would be listed in player info section under camp population section.\n");
+			outputText("-Feral Eyes & Wolf Collar options could be stored with genetic memory.\n");
+			outputText("-Shark race could gain +1 race score for having human tongue and for human hair. Also their got 3rd tier of racial bonuses - elder tigershark-morph: +90% str multi, +130% spe multi, +50% lib multi, +200 to lust\n");
+			outputText("-Spider/Bee/Mantis races could gain + race score for having insect ears. Spider race bonuses been slight changed and added 2nd tier of bonuses - spider-morph/elder spider-morph (10/16): +30/60% str multi, +40/70% tou multi, +20/50% spe multi, +60% int multi\n");
+			outputText("-Added option to combine and seperate katana weapons. Still combining two katana/daggers that may have bonus effects on them from randomn items system would cause it to loose those bonus effects.\n");
+			outputText("-Tier 3 Dragon bonus to max hunger increased from 100 to 150.\n");
+			outputText("-Bonus to Charge/Great Dive from Natural Jouster perk and it upgraded version was fixed due to last melee changes that made perk useless. Also jouster effect would now include also polearms type weapons and not just spears, but polearm weapons would have 25% lower bonus from jouster perks.\n");
+			outputText("-Bite special gained additional scaling from bonus str and spe.\n");
+			outputText("-Added new setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP. From measy 1,25x more HP up to even 10x more hp depending on setting and enemy type.\n");
+			outputText("-Vampire Thirst stacks can be used in new way: convertion to HP/Mana - 1 stack = 5% max HP/max Mana. Could pick option to use 1 stack or 5 stacks. Can be used once a turn (each option no matter how many stacks changed at once) and it will not take turn allowing to still act after that.\n");
+			outputText("-Gorgon lvl increased from 24 to 31 and she req. PC to be lvl 31+ to find her. Like fellow companion (elder werefox) she too temporaly ventured into inner desert from deper regions.\n");
+			outputText("-On stats page in section listing all camp population was added counter for werewolfs / hellhounds in pack and mummies under control in case pc is capable to control / have any of those three type of minions.\n");
+			outputText("-Some enemy attacks or actions before or after combat could lead to PC gaining status called 'combat wounds'. Until healed it would be lowering maximum possible amount of healing (for ex. 5% in combat wounds would mean pc heal up to only 95% of max/overmax HP). On status page under ongoing status effects would be listed how severe (%) is this status currently in case of PC gaining it. ");
+			outputText("It can be healed outside combat by healer npc's (Luna, Diana) and during combat by effect of spells like: Tears of Denial (fully heal of current combat wounds status), Heal (up to of 3%), Regenerate (1% per turn), Restore (up to 3% upfront then 1% per turn). Poultice on top of healing would remove up to 4% of combat wound status.\n");
 			outputText("-Fixing various text errors reported by people on discord.\n");
 			outputText("-Death Prince Regalia, outfit and Golden armor & Anubis glyph tattoo sprited. (Liadri)\n");
+			outputText("-Implementation of wereraces human form. (Liadri) (out of combat of most of sex scenes pc sprite would look 100% humanlike if current race is one of wereraces even partialy)\n");
 			outputText("-Fix Cheshire cat and some invalid cat fur colors. (Liadri)\n");
+			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
 			outputText("-100+ new item icons, Consumable items are tagged with 'tf', Setting to toggle icons (aimozg)\n");
 			outputText("-Tease and masteries XP gains show notifications below the stat bar. Item stack buttons show quantities over the icon. (aimozg)\n");
 			outputText("-New exploration engine, exploration nodes can branch, new merchant UI, new perk menu, added touch scrolling for perk menu, extra offset for mobile tooltips, can buy to/sell from pearl storage in new mechant interface, reduced common encounters chance outside main exploration, Popups for spellcasting, mining, farming, herbalism XP. (aimozg)\n");
@@ -118,53 +143,28 @@ public class Changelog extends BaseContent
 			outputText("-Can refine consumable items into alchemical substances, essences, residues, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. Dye crafting. Alchemy skill increases extraction yield. (fellow daoist aimozg)\n");
 			outputText("-Evangeline can craft diluted E-Ichor. Can craft pills that give Mutagen Bonus (D.E.Ichor + herb + stat residue) (fellow daoist aimozg)\n");
 			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
+			outputText("-After finishing Demon Laboratory dungeon some of projects kept there would start to roam Mareth giving PC chance to encounter 3 different boss tier enemies. (Snas)\n");
+			outputText("-Weapons Combining/Separating menu redone. (Jtecx) (added grey out buttons for combining, etc.)\n");
 			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Anubis - lvl 24. Encounterable in Inner Desert; Werefox (F) - lvl 19. Encounterable in Inner Desert at night; ");
-			outputText("Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter); Juvenile Abyssal Shark - lvl 73. Encounterable in Ocean.\n");
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Ancient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200/250% to Tou multi, +40/70/100/130% to Spe multi, +100/180/260/340% to Wis multi, +70/140/210/280 to Sens, -10% to max lust multi, +100/150/200/250% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New tf item (by Ormael): Wolf Pepper. Dropped by werewolf enemies or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werewolf but only physicaly. To gain curse/lycantophy perk still need to find some werewolf to bite PC.\n");
-			outputText("-New Unique Sexscene: Mummy Curse - req. to be anubi with mummy curse/lord perks and having badge in inventory. Also can be only used against enemies that are sentient, humanoid and with soul. After scene PC will gain new mummy minion up to cap of 5 mummies.\n");
-			outputText("-Feral Eyes & Wolf Collar options could be stored with genetic memory.\n");
 			outputText("-New event perk: Vulpesthropy. Req. having fennec fox ears, fox fangs and feral eyes when using desert berry. Your skin is more resistant to magical damage and you can naturaly absorb ambient soulforce. (+1%)\n");
 			outputText("-New event perk: Dormant Vulpesthropy. When PC not qualify as werefox Vulpesthropy would be replaced by this perk. It's like the one for werewolf. Werebeast nature just slumber inside PC ready to become active again.\n");
 			outputText("-New mutation perk: White-Faced One Birthright. Req. having free adaptation mutation slot, werefox race. Effects: Increases soulforce recovery 0.25-1% Soulforce regen per tail you posses (New moon / Half moon / Full moon)\n");
 			outputText("-New mutation perk: White-Faced One Birthright (Primitive). Req. White-Faced One Birthright and lvl 30+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +50% to magical soulskills power (doubled if you have 3+ tails)\n");
 			outputText("This effect can only happen once per round. While below half health, soul skill inflicts 50% more damage and leech twice as many hit points.\n");
-			outputText("-New Masturbation option: Mummy Sex. Req. 50%+ Soulfroce, be Anubi and have 3+ mummies. Beside typical effects it would drain those 50% of SF and increase mummies attack (2x) for 24 hours. (In case PC loose control over mummies in that time timer would be still ticking down each hour so regaining control ove rmummies would keep boost for remaining time until full day would pass by)\n");
-			outputText("-Shark race could gain +1 race score for having human tongue and for human hair. Also their got 3rd tier of racial bonuses - elder tigershark-morph: +90% str multi, +130% spe multi, +50% lib multi, +200 to lust\n");
-			outputText("-Spider/Bee/Mantis races could gain + race score for having insect ears. Spider race bonuses been slight changed and added 2nd tier of bonuses - spider-morph/elder spider-morph (10/16): +30/60% str multi, +40/70% tou multi, +20/50% spe multi, +60% int multi\n");
-			outputText("-Weapons Combining/Separating menu redone. (Jtecx) (added grey out buttons for combining, etc.)\n");
-			outputText("-Added option to combine and seperate katana weapons. Still combining two katana/daggers that may have bonus effects on them from randomn items system would cause it to loose those bonus effects.\n");
 			outputText("-New mutation perk: White-Faced One Birthright (Evolved). Req. White-Faced One Birthright (Primitive) and lvl 60+. Effects: Increases soulforce recovery 0.5-2% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +75% to magical soulskills power (doubled if you have 3+ tails), SF gains per level/Wisdom stat increased to 200%.\n");
 			outputText("-New mutation perk: White-Faced One Birthright (Final Form). Req. White-Faced One Birthright (Evolved) and lvl 90+. Effects: Increases soulforce recovery 0.75-3% Soulforce regen per tail you posses (New moon / Half moon / Full moon), +100% to magical soulskills power (doubled if you have 3+ tails), -10% of soulskills cost, SF gains per level/Wisdom stat increased to 300%, +20% to OverMax Soulforce.\n");
-			outputText("-New event perk: Blood Afinity. Gained by been race like vampires. Effects: Increase all damage dealt with blood spells/soulskills or amount of damage blood shield can absorb by 100%.\n");
-			outputText("-Tier 3 Dragon bonus to max hunger increased from 100 to 150.\n");
-			outputText("-New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 5% of max health per turn. Selfbuff that boost str/tou/spe/int/wis (physical stats are boosted 2x higher), when it's active would allow to use without cooldown Charge special with cost been HP equal to 200% of normal fatigue cost.\n");
-			outputText("-Bonus to Charge/Great Dive from Natural Jouster perk and it upgraded version was fixed due to last melee changes that made perk useless. Also jouster effect would now include also polearms type weapons and not just spears, but polearm weapons would have 25% lower bonus from jouster perks.\n");
-			outputText("-Bite special gained additional scaling from bonus str and spe.\n");
-			outputText("-Added new setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP. From measy 1,25x more HP up to even 10x more hp depending on setting and enemy type.\n");
-			outputText("-Implementation of wereraces human form. (Liadri) (out of combat of most of sex scenes pc sprite would look 100% humanlike if current race is one of wereraces even partialy)\n");
-			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
-			outputText("-Vampire Thirst stacks can be used in new way: convertion to HP/Mana - 1 stack = 5% max HP/max Mana. Could pick option to use 1 stack or 5 stacks. Can be used once a turn (each option no matter how many stacks changed at once) and it will not take turn allowing to still act after that.\n");
-			outputText("-Gorgon lvl increased from 24 to 31 and she req. PC to be lvl 31+ to find her. Like fellow companion (elder werefox) she too temporaly ventured into inner desert from deper regions.\n");
-			outputText("-On stats page in section listing all camp population was added counter for werewolfs / hellhounds in pack and mummies under control in case pc is capable to control / have any of those three type of minions.\n");
-			outputText("-Some enemy attacks or actions before or after combat could lead to PC gaining status called 'combat wounds'. Until healed it would be lowering maximum possible amount of healing (for ex. 5% in combat wounds would mean pc heal up to only 95% of max/overmax HP). On status page under ongoing status effects would be listed how severe (%) is this status currently in case of PC gaining it. ");
-			outputText("It can be healed outside combat by healer npc's (Luna, Diana) and during combat by effect of spells like: Tears of Denial (fully heal of current combat wounds status), Heal (up to of 3%), Regenerate (1% per turn), Restore (up to 3% upfront then 1% per turn). Poultice on top of healing would remove up to 4% of combat wound status.\n");
 			outputText("-Smol fixes, and adds Super Human stat buff. (Our Godfather-Emperor of Gigachad Humanity - Jtecx)\n");
 			outputText("-Shark Olfactory System (Primitive) would lower cost of shark bite to 0 fatigue, Shark Olfactory System (Final Form) would now allow to use shark bite once a turn without ending combat turn.\n");
 			outputText("-Shark / Orce / Vicious / Tripple Bite specials fatigue cost and damage been doubled.\n");
-			outputText("-New range weapon (by Ormael): Twin Six Shooter - can be gained by combining 2x Six Shooter weapon. Cost 1160 gems. Base atk is 20 and ammo clip size 6. It's Dual Firearm type range weapon.\n");
-			outputText("-After finishing Demon Laboratory dungeon some of projects kept there would start to roam Mareth giving PC chance to encounter 3 different boss tier enemies. (Snas)\n");
 			outputText("-For all those that wanted PC marry some bit rough pseudo-dragoness there is possibilty now to do this. Added marriage option to Kiha. (Snas)\n");
-			outputText("-New tier 0 libido lvl-up perk: Broad Selection. Req. Job: Seducer perk and at least two different types of penises. Effect: Increasing the Tease damage by 25% for each different type of penis that you have.\n");
-			outputText("-New melee weapon (by Ormael): Beautiful Whip - obtained by finding it at Lake. 5 atk, costing 400 gems, can't be used above 33 (+ corruption tolerance bonus) corruption and the less corruption PC have the bigger bonus to atk (max 7)\n");
 			outputText("-Enemy of gigantic/collosal type hit by AoE spell would take increased damage as if it was used vs group enemy, hit by Grey AoE spells with Convergence/Super Convergence it would strike 3x more times (6/9 times).\n");
-			outputText("-New melee weapon (by Ormael): Demon flail - gained when making Vapula submit and become PC slave. Base atk is 25. It's large mace/hammer type weapon. Can be used for whirlwind special and have +10% chance to stun target (on top of default mace/hammer weapons stun chance). Could also be used for grappling enemies (req. Bindmaster job) and deal lust/phys dmg (like whips).\n");
 			outputText("-Mirror doppelganger progress toward big final lust hit been spread to happen over ~2x more turns (so around 10 not 5), stunning it would actualy stop the progress for stun duration. Final massive lust attack would deal enough lust to fill from 0 to max overlust value, which would mean this time this attack would be more serious and even Supercharged state won't protect PC from defeat.\n");
 			outputText("-Human Parathyroid Gland desc changed and health recovery effect changed to 10/20/40 * level HP in combat and twice more out of combat. Lifeline perks effects changed to 3/4/6/8 * level HP.\n");
 			outputText("-Violet Pupil Transformation effect changed to 5% max SF per turn to get 5% of max HP. Unicorn race would change ration from 5:5 to 4:5 and alicorn race would change ration to 3:6.\n");
@@ -173,6 +173,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed a line at Aimozg recommandation to properly update racial cache (Liadri)\n");
 			outputText("-Temporaly disabled two events in Journey to the East until 'more flesh' added to them.\n");
 			outputText("-Added Elder Cave Wyrm racial bonuses tier (16+): +90% to Str multi, +115% to Tou multi, -30% to Wis multi, +65% to Lib multi. Azureflame Breath and Acid Spit now would req. 10+ in race score and lost when score drops below 10 (naturaly evolved cave wyrm lungs i.mutation can still prevent loosing those perks).\n");
+			outputText("-When cutting wood, mining stones, opening packs of nails OR finding metal plates summary would include current post activity state of warehouse for that material.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -190,8 +191,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; 
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
@@ -199,8 +199,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -208,7 +208,8 @@ public class Changelog extends BaseContent
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
 			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends, ");
-			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error\n");
+			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error, some of blessings from temple disply wrong ");
+			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

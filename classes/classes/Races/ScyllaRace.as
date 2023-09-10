@@ -55,6 +55,7 @@ public class ScyllaRace extends Race {
 				.skinColor1("ghostly pale", +1)
 				.rearType(RearBody.KRAKEN, +1)
 				.height(GREATER_THAN(96), +1)
+				.height(GREATER_THAN(120), +1)
 				.vaginaType(VaginaClass.SCYLLA, +1)
 				.customRequirement("legs","scylla or kraken lower body",
 						function (body:BodyData): Boolean {
@@ -68,6 +69,7 @@ public class ScyllaRace extends Race {
 						function (body:BodyData): Boolean {
 							return body.player.isKraken();
 						}, +4)
+				.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hasPerk(PerkLib.InkSpray, +1);
 		addConditionedScores(function (body:BodyData):Boolean {
 			return body.player.isScylla() || body.player.isKraken();
