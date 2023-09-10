@@ -3171,12 +3171,38 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         else outputText("You ask Kiha if she has a moment, and she nods. Electra leaves, and your fiery dragoness smiles slightly. ");
     }
 
-
     public function kihaHenchmanOption():void
+	{
+		menu();
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha" || flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") addButtonDisabled(0, "Team (1)", "You already have Kiha accompany you.");
+			else addButton(0, "Team (1)", kihaHenchmanOption2, 1).hint("Ask Kiha to join you in adventures outside camp.");
+		}
+		else {
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") addButton(5, "Team (1)", kihaHenchmanOption2, 21).hint("Ask Kiha to stay in camp.");
+			else addButtonDisabled(5, "Team (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Kiha about accompaning you as first party member.");
+		}
+		if (player.hasPerk(PerkLib.IntermediateLeadership)) {
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha" || flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") addButtonDisabled(1, "Team (2)", "You already have Kiha accompany you.");
+				else addButton(1, "Team (2)", kihaHenchmanOption2, 2).hint("Ask Kiha to join you in adventures outside camp.");
+			}
+			else {
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") addButton(6, "Team (2)", kihaHenchmanOption2, 22).hint("Ask Kiha to stay in camp.");
+				else addButtonDisabled(6, "Team (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Kiha about accompaning you as second party member.");
+			}
+		}
+		else {
+			addButtonDisabled(1, "Team (2)", "Req. Intermediate Leadership.");
+			addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
+		}
+		addButton(14, "Back", warmLoverKihaIntro);
+	}
+	public function kihaHenchmanOption2(slot:Number = 1):void
     {
         clearOutput();
-        if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
-            outputText("\"<i>Hey my idiot. Want me to tarry along and scorch their hides? Why not, give those demons what they deserve!</i>\"\n\n");
+		if (slot < 21) {
+			outputText("\"<i>Hey my idiot. Want me to tarry along and scorch their hides? Why not, give those demons what they deserve!</i>\"\n\n");
             outputText("Kiha is now following you around.\n\n");
             var strKiha:Number = 85;
             var meleeAtkKiha:Number = 28
@@ -3188,12 +3214,14 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             strKiha = Math.round(strKiha);
             meleeAtkKiha += (1 + (int)(meleeAtkKiha / 5)) * player.newGamePlusMod();
             player.createStatusEffect(StatusEffects.CombatFollowerKiha, strKiha, meleeAtkKiha, 0, 0);
-            flags[kFLAGS.PLAYER_COMPANION_1] = "Kiha";
-        }
-        else {
+            if (slot == 2) flags[kFLAGS.PLAYER_COMPANION_2] = "Kiha";
+			if (slot == 1) flags[kFLAGS.PLAYER_COMPANION_1] = "Kiha";
+		}
+		else {
             outputText("Kiha is no longer following you around.\n\n");
             player.removeStatusEffect(StatusEffects.CombatFollowerKiha);
-            flags[kFLAGS.PLAYER_COMPANION_1] = "";
+			if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";
+			if (slot == 21) flags[kFLAGS.PLAYER_COMPANION_1] = "";
         }
         doNext(warmLoverKihaIntro);
         cheatTime(1/12);

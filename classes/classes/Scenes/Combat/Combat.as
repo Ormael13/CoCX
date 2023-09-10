@@ -2090,7 +2090,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) {
+        if (((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) && !monster.monsterIsStunned()) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -2707,7 +2707,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
         }
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
-        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
+        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= monster.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
         if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
         if (player.hasMutation(IMutationsLib.HumanEyesIM) && player.racialScore(Races.HUMAN) > 17) {
@@ -4979,7 +4979,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) {
+        if (((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges))) && !monster.monsterIsStunned()) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");

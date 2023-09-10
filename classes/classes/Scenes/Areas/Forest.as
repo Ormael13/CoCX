@@ -44,8 +44,8 @@ use namespace CoC;
 		public function Forest() {
 			onGameInit(init);
 		}
-		public const areaLevelOuter:int = 1;
-		public const discoverLevelOuter:int = 1;
+		public const areaLevelOuter:int = 0;
+		public const discoverLevelOuter:int = 0;
 		public function isDiscoveredOuter():Boolean {
 			return SceneLib.exploration.counters.forestOuter > 0;
 		}

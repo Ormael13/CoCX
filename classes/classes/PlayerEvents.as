@@ -63,24 +63,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			checkedHellhound = 0;
 			checkedImp = 0;
 			checkedDream = 0;
-
 			//Hunger! No effect if hunger is disabled, even if your hunger is at 0/100.
 			Begin("PlayerEvents","hourlyHunger");
 			hourlyHunger();
 			End("PlayerEvents","hourlyHunger");
-
 			//hourly timers, statusEffect and stat adjustments
 			Begin("PlayerEvents","hourlyTimersProc");
 			hourlyTimersProc();
 			End("PlayerEvents","hourlyTimersProc");
-
 			Begin("PlayerEvents","hourlyCheckEvents");
-			needNext ||= hourlyCheckEvents();
+			/*needNext ||= */hourlyCheckEvents();
 			End("PlayerEvents","hourlyCheckEvents");
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
-			needNext ||= hourlyCheckRacialPerks();
+			/*needNext ||= */hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
-
 			if (needNext) mainViewManager.updateCharviewIfNeeded();
 			return needNext;
 		}
@@ -1343,13 +1339,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					HarvestMoonScenes.harvestmoonstageBF += 1;
 				}
 			}
-
 			return needNext;
 		}
 
 		private function hourlyCheckEvents():Boolean {
 			var needNext:Boolean = false;
-
 			//Soul Sense
 			if (!player.hasPerk(PerkLib.SoulSense) && player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage)) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
@@ -1358,7 +1352,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
 			}
-
 			//
 			for each (var clone:StatusEffectType in Soulforce.clones) {
 				if (player.hasStatusEffect(clone)) {
@@ -1468,7 +1461,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-
 			return needNext;
 		}
 		private function hourlyCheckRacialPerks():Boolean {
@@ -1493,8 +1485,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
-			if (player.needToUpdateRacialCache())
-				player.updateRacialCache();
+			player.updateRacialCache();
 			//Demonic hunger perk
 			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL) || player.hasPerk(PerkLib.Phylactery), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
 			needNext ||= player.gainOrLosePerk(PerkLib.SoulEater, player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery), "You begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power!", "Due to your miraculous soul recovery you have lost the ability to consume souls!");
@@ -1949,16 +1940,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Ferocity
-			if (!player.isRaceCached(Races.ORC) && player.hasPerk(PerkLib.Ferocity) && !player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) {
+			if (!player.isRaceCached(Races.ORC) && player.hasPerk(PerkLib.Ferocity) && (!player.hasMutation(IMutationsLib.OrcAdrenalGlandsIM) || player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) < 3)) {
 				outputText("\nYour natural ferocity starts vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, which might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
 				player.removePerk(PerkLib.Ferocity);
 				needNext = true;
 			}
 			//Acid Spit and Azureflame Breath
-			if (player.racialScore(Races.CAVEWYRM) < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath) && !player.perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3) {
+			if (!player.isRaceCached(Races.CAVEWYRM) && (player.hasPerk(PerkLib.AcidSpit) || player.hasPerk(PerkLib.AzureflameBreath)) && (!player.hasMutation(IMutationsLib.CaveWyrmLungsIM) || player.perkv1(IMutationsLib.CaveWyrmLungsIM) < 3)) {
 				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic properties until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
-				player.removePerk(PerkLib.AcidSpit);
-				player.removePerk(PerkLib.AzureflameBreath);
+				if (player.hasPerk(PerkLib.AcidSpit)) player.removePerk(PerkLib.AcidSpit);
+				if (player.hasPerk(PerkLib.AzureflameBreath)) player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
 			}
 			//Titan Might
@@ -2054,7 +2045,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && (player.perkv1(IMutationsLib.NaturalPunchingBagIM) < 3 || player.tallness > 12*4)) {
+			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && ((!player.hasMutation(IMutationsLib.NaturalPunchingBagIM) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) < 3) || player.tallness > 12*4)) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
@@ -2258,13 +2249,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
 				else outputText("bicorn");
 				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away what's left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on Mareth.</b>\n");
-
 				if (player.hasPerk(PerkLib.AvatorOfPurity)) player.removePerk(PerkLib.AvatorOfPurity);
 				player.createPerk(PerkLib.AvatorOfCorruption, 0, 0, 0, 0);
 				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
 				if(player.hasPerk(PerkLib.AuraOfPurity)) player.removePerk(PerkLib.AuraOfPurity);
 				player.cor = 100;
-
 				// TFs from scene for possible Metamorph unlock texts afterwards
 				if (player.horns.type == Horns.UNICORN) {
 					CoC.instance.transformations.HornsBicorn.applyEffect(false);

@@ -123,8 +123,8 @@ public class Changelog extends BaseContent
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Anubis - lvl 24. Encounterable in Inner Desert; ");
-			outputText("Werefox (F) - lvl 19. Encounterable in Inner Desert at night; Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter); Juvenile Abyssal Shark - lvl 73. Encounterable in Ocean.\n");
+			outputText("-New enemies: Red Ooze - lvl 4. Encounterable on 1st floor of River Dungeon (they replace Green Slime enemies there); Anubis - lvl 24. Encounterable in Inner Desert; Werefox (F) - lvl 19. Encounterable in Inner Desert at night; ");
+			outputText("Elder Werefox (F) - lvl 43. Encounterable in Inner Desert at night (she temporaly came from deeper desert regions and req. lvl 43+ to encounter); Juvenile Abyssal Shark - lvl 73. Encounterable in Ocean.\n");
 			outputText("-New tf item (by Ormael): Desert Berry. Dropped by werefox enemies, founded when exploring Outer/Inner Desert or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werefox. Werefox Cub/Werefox/Elder werefox/Ancient werefox bonuses at 12/18/24/30 pts in racial score (scalable): ");
 			outputText("+10% to Str multi, +100/150/200/250% to Tou multi, +40/70/100/130% to Spe multi, +100/180/260/340% to Wis multi, +70/140/210/280 to Sens, -10% to max lust multi, +100/150/200/250% to max soulforce multi, -40% to max mana multi.\n");
 			outputText("-New tf item (by Ormael): Wolf Pepper. Dropped by werewolf enemies or gained when placing offering to bowl located at west section of dilapidated shrine. Using this item will gradualy turn PC into werewolf but only physicaly. To gain curse/lycantophy perk still need to find some werewolf to bite PC.\n");
@@ -170,6 +170,9 @@ public class Changelog extends BaseContent
 			outputText("-Violet Pupil Transformation effect changed to 5% max SF per turn to get 5% of max HP. Unicorn race would change ration from 5:5 to 4:5 and alicorn race would change ration to 3:6.\n");
 			outputText("-Entangle from using Battle Net have it cooldown reduced from 8 to 5 turns.\n");
 			outputText("-Reaching at least first tier of vampire race would double vampire thirst stacks gains from using vampire bite.\n");
+			outputText("-Fixed a line at Aimozg recommandation to properly update racial cache (Liadri)\n");
+			outputText("-Temporaly disabled two events in Journey to the East until 'more flesh' added to them.\n");
+			outputText("-Added Elder Cave Wyrm racial bonuses tier (16+): +90% to Str multi, +115% to Tou multi, -30% to Wis multi, +65% to Lib multi. Azureflame Breath and Acid Spit now would req. 10+ in race score and lost when score drops below 10 (naturaly evolved cave wyrm lungs i.mutation can still prevent loosing those perks).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -185,19 +188,27 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");//New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; 
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
 			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
-			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends\n");
+			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends, ");
+			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -256,11 +267,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -290,8 +297,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

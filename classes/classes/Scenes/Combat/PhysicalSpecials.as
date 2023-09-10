@@ -1576,7 +1576,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You ready your [weapon] and prepare to spin it around trying to hit as many [themonster] as possible.  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
+		if (((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");

@@ -1183,14 +1183,6 @@ public class Exploration extends BaseContent implements SaveableState
 						call  : SceneLib.helScene.helSexualAmbush,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
-						name  : "NPC (New)",
-						kind  : "npc",
-						unique: true,
-						when  : function ():Boolean {
-							return flags[kFLAGS.ALVINA_FOLLOWER] < 1
-						},
-						call  : SceneLib.alvinaFollower.alvinaFirstEncounter
-					}, {
 						name  : "HeXinDao",
 						kind  : "place",
 						unique: true,
@@ -1323,6 +1315,11 @@ public class Exploration extends BaseContent implements SaveableState
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
+			if (SceneLib.exploration.counters.explore <= 0) {
+				SceneLib.exploration.counters.explore++;
+				SceneLib.alvinaFollower.alvinaFirstEncounter();
+				return;
+			}
 			explorer.prepareArea(_explorationEncounters);
 			explorer.setTags("explore");
 			explorer.onEncounter = function(e:ExplorationEntry):void {

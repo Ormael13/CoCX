@@ -95,12 +95,12 @@ public class ScyllaRace extends Race {
 				})
 				.end();
 		
-		buildTier(17, "elder kraken")
+		buildTier(18, "elder kraken")
 				.buffs({
-					"str.mult": +1.35,
+					"str.mult": +1.50,
 					"tou.mult": +0.60,
 					"int.mult": +0.60,
-					"maxhp_base": +150
+					"maxhp_base": +300
 				})
 				.end();
 	}

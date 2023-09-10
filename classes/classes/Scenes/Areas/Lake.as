@@ -29,7 +29,7 @@ use namespace CoC;
 		public var swordInStone:SwordInStone = new SwordInStone();
 		
 		public const discoverLevel:int = 0;
-		public const areaLevel:int = 1;
+		public const areaLevel:int = 0;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.lake > 0;
 		}

@@ -7918,12 +7918,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Asshole Start Glowing:
-        if (transformations.AssholeGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
+        if (transformations.AssholeGlowing.isPossible() && rand(3) == 0 && changes < changeLimit) {
             transformations.AssholeGlowing.applyEffect();
             changes++;
         }
         //Nipples Start Glowing:
-        if (transformations.NipplesGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
+        if (transformations.NipplesGlowing.isPossible() && rand(3) == 0 && changes < changeLimit) {
             transformations.NipplesGlowing.applyEffect();
             changes++;
         }
@@ -7956,7 +7956,7 @@ public final class Mutations extends MutationsHelper {
             transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
-        if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.FaceHuman.applyEffect();
             changes++;
@@ -7968,13 +7968,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Remove odd eyes
-        if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.CAVE_WYRM) {
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.CAVE_WYRM) {
             outputText("[pg]");
             transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Ears
-        if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.CAVE_WYRM && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.EarsCaveWyrm.applyEffect();
             changes++;
@@ -7996,26 +7996,26 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect();
             changes++;
         }
-        if (!player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
+        if (!player.hasPartialCoat(Skin.SCALES) && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Skin color change
-        if (player.skinColor != "grayish-blue" && changes < changeLimit && rand(4) == 0) {
+        if (player.skinColor != "grayish-blue" && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]You skin begin to itch as it darkens taking on <b>a grayish-blue color.</b>");
             player.skinColor = "grayish-blue";
             changes++;
         }
         //Acid Spit
-        if (!player.hasPerk(PerkLib.AcidSpit) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM, false) > 4) {
+        if (!player.hasPerk(PerkLib.AcidSpit) && changes < changeLimit && rand(3) == 0 && player.isRace(Races.CAVEWYRM, 1, false)) {
             outputText("[pg]Your endowment begins to feel increasingly pleasurable to the point you drool small glowing blue drop of saliva on the ground lost in the pleasure of your oozing vagina/ and / dripping penis. You lose all desire as your eyes zero in on the smoking vegetation progressively corroded by your fluorescent drool. <b>It seems you now can drool acid!</b>\n");
             outputText("(<b>Perk Gained: Acid Spit</b>)");
             player.createPerk(PerkLib.AcidSpit, 0, 0, 0, 0);
             changes++;
         }
         //Azureflame Breath
-        if (!player.hasPerk(PerkLib.AzureflameBreath) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM, false) > 4) {
+        if (!player.hasPerk(PerkLib.AzureflameBreath) && changes < changeLimit && rand(3) == 0 && player.isRace(Races.CAVEWYRM, 1, false)) {
             outputText("[pg]You suddenly belch a long neon blue flame in front of you roasting the nearby vegetation. It didn't hurt your throat however so you shrug. <b>Well you will have to control your blue fire breath better not to set fire to your own camp.</b>\n");
             outputText("(<b>Perk Gained: Azureflame Breath</b>)");
             player.createPerk(PerkLib.AzureflameBreath, 0, 0, 0, 0);

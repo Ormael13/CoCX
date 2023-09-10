@@ -2276,11 +2276,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.09) {
 				if (SceneLib.vapula.vapulaSlave()) inventory.takeItem(weapons.D_FLAIL, promptSaveUpdate);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.09;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.10) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.10;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.10) {
+				if (SceneLib.exploration.counters.explore > 0 && flags[kFLAGS.ALVINA_FOLLOWER] < 1) flags[kFLAGS.ALVINA_FOLLOWER] = 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.10;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.11) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.11;
@@ -2288,6 +2288,14 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.12) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.12;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.13) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.13;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.14) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
