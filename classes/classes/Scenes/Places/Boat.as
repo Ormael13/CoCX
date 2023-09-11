@@ -87,7 +87,7 @@ public class Boat extends AbstractLakeContent
 				unique: true,
 				chance: 3,
 				when: function():Boolean {
-					return flags[kFLAGS.MARAE_ISLAND];
+					return flags[kFLAGS.MARAE_ISLAND] < 1;
 				},
 				night: false,
 				call: marae.encounterMarae
