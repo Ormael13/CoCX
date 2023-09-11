@@ -518,17 +518,19 @@ public class ExplorationEngine extends BaseContent {
 	}
 	private function showUI(message:String = ""):void {
 		var i:int;
-		var e:Encounter = null;
+		var e:ExplorationEntry = null;
 		// If there is an encounter with chance ALWAYS, stop the exploration and execute it immediately
 		for (i = 0; e == null && i < N; i++) {
 			if (flatList[i].encounter && !flatList[i].isDisabled && flatList[i].encounter.encounterChance() == Encounters.ALWAYS) {
-				e = flatList[i].encounter;
+				e = flatList[i];
 			}
 		}
 		// Check to pool for same
 		for (i = 0; e == null && i < source.components.length; i++) {
 			if (source.components[i].encounterChance() >= Encounters.ALWAYS) {
-				e = source.components[i];
+				e = new ExplorationEntry(roadIndex,roadPos,0,0);
+				e.setupForEncounter(source.components[i] as SimpleEncounter);
+				e.revealFull();
 			}
 		}
 		if (e != null) {
@@ -536,7 +538,7 @@ public class ExplorationEngine extends BaseContent {
 			if (onEncounter != null) {
 				onEncounter(e);
 			}
-			e.execEncounter();
+			e.encounter.execEncounter();
 		}
 
 		// Buttons
