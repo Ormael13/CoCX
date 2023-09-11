@@ -820,8 +820,8 @@ private function LvLUp():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && EvangelineGemsPurse >= 450) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && EvangelineGemsPurse >= 800) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineGemsPurse >= 800 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineGemsPurse >= 800 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineGemsPurse >= 1250) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");

@@ -2064,16 +2064,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if ((player.gender == 2 || player.gender == 3) && player.isScylla()) outputText("lift a few tentacle ");
 		outputText("spraying your foe face in ink.  It start trashing its arm about attempting to remove the ink.\n");
 		outputText(" <b>[Themonster] is blinded!</b>");
+		var ispray:Number = 2;
+		if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) ispray += 2;
 		if (player.hasPerk(PerkLib.KrakenBlackDress)) {
-			monster.createStatusEffect(StatusEffects.InkBlind, 3, 0, 0, 0);
-			monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.InkBlind, (ispray * 1.5), 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Stunned, (ispray * 1.5), 0, 0, 0);
 		}
 		else {
-			monster.createStatusEffect(StatusEffects.InkBlind, 2, 0, 0, 0);
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.InkBlind, ispray, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Stunned, ispray, 0, 0, 0);
 		}
 		if (monster.lustVuln > 0) {
 			var lustDmg:Number = 2 + player.teaseLevel + rand(5);
+			if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) lustDmg *= 2;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 			monster.teased(Math.round(monster.lustVuln * lustDmg));

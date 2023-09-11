@@ -50,7 +50,7 @@ use namespace CoC;
 			return SceneLib.exploration.counters.forestOuter > 0;
 		}
 		public function canDiscoverOuter():Boolean {
-			return !isDiscoveredOuter() && adjustedPlayerLevel() >= discoverLevelOuter;
+			return !isDiscoveredOuter() && adjustedPlayerLevel() >= discoverLevelOuter && flags[kFLAGS.ALVINA_FOLLOWER] >= 1;
 		}
 		public function timesExploredOuter():int {
 			return SceneLib.exploration.counters.forestOuter;

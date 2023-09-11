@@ -26,11 +26,12 @@ public final class HeadJewelryLib extends ItemConstants
 		public static const MODIFIER_LUST_R:int = 			HEADEFF_LUST_R;
 		public static const MODIFIER_PHYS_R:int = 			HEADEFF_PHYS_R;
 		
-		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase up to 2x cost
+		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase cost by 2x
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
 		public const AQBREATH:HeadJewelry = new HeadJewelry("AqBreath", "Aqua breather", "Aqua breather", "an Aqua breather", 0, 0, 200, "This unfashionable, yet very practical, goblin device allows to breathe underwater. A must have for any underwater expedition.",HJT_HELMET);
+		public const BESTBLAA:BestialBlademasterAccoutrements = new BestialBlademasterAccoutrements();
 		public const COWHAT :HeadJewelry = new HeadJewelry("CGHAT", "C.G.Hat", "cow girl hat", "cow girl hat", 0, 0, 200, "This hat was retrieved from an offworld gunslinger who became a cow. As such aside from its powerful enchantment that increase firearms potency it also raise milk production.",HJT_HELMET);
 		public const DEATHPR:DeathPrinceRegalia = new DeathPrinceRegalia();
 		public const DMONSKUL:SkullOrnament = new SkullOrnament();

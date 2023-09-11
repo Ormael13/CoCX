@@ -3238,6 +3238,12 @@ public class PerkLib
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
+		public static const InfernalRage:PerkType = mk("Infernal Rage", "Infernal Rage",
+				"Increases fire damage based on percent of wrath bar full.");
+		public static const SereneMind:PerkType = mk("Serene Mind", "Serene Mind",
+				"Increased defenses, damage output, and evasion whilst in a berserker/lustzerker state (stacks with cold(er) fury/lust)");
+		public static const BestialBlademaster:PerkType = mk("Bestial Blademaster", "Bestial Blademaster",
+				"Allows for the wearer to better make use of their beast form to increase effectiveness of weapon strikes (chrinos shape unarmed buff applies to weapons)");
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of mana!",null,true);
@@ -3741,10 +3747,10 @@ public class PerkLib
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage and you can naturaly absorb ambient soulforce. (+1%)");
 		public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
 				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again.");
-		public static const Karchariathropy:PerkType = mk("Karchariathropy", "Karchariathropy",
+		public static const Selachimorphanthropy:PerkType = mk("Selachimorphanthropy", "Selachimorphanthropy",
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, .");
-		public static const KarchariathropyDormant:PerkType = mk("Dormant Karchariathropy", "Dormant Karchariathropy",
-				"You sometimes hear echoes of the call of the moon. If you were more of a wereshark you likely would feel its pull again. A karchariathrope is never truly cured.");
+		public static const SelachimorphanthropyDormant:PerkType = mk("Dormant Selachimorphanthropy", "Dormant Selachimorphanthropy",
+				"You sometimes hear echoes of the call of the moon. If you were more of a wereshark you likely would feel its pull again. A selachimorphanthrope is never truly cured.");
 		public static const Araneathropy:PerkType = mk("Araneathropy", "Araneathropy",
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, .");
 		public static const AraneathropyDormant:PerkType = mk("Dormant Araneathropy", "Dormant Araneathropy",

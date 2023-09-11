@@ -328,12 +328,10 @@ public class Exploration extends BaseContent implements SaveableState
 				doNext(tryDiscover);
 				return;
 			} else if (SceneLib.exploration.counters.explore > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.\n");
-
 			if (flags[kFLAGS.EXPLORE_MENU_STYLE] == 1) {
 				oldExploreMenu();
 				return;
 			}
-			
 			hideMenus();
 			menu();
 			var bd:ButtonDataList = new ButtonDataList();
@@ -1183,6 +1181,15 @@ public class Exploration extends BaseContent implements SaveableState
 						call  : SceneLib.helScene.helSexualAmbush,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
+						name  : "NPC (New)",
+						kind  : "npc",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.ALVINA_FOLLOWER] < 1
+						},
+						call  : SceneLib.alvinaFollower.alvinaFirstEncounter
+					}, {
 						name  : "HeXinDao",
 						kind  : "place",
 						unique: true,
@@ -1315,11 +1322,6 @@ public class Exploration extends BaseContent implements SaveableState
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
-			if (SceneLib.exploration.counters.explore <= 0) {
-				SceneLib.exploration.counters.explore++;
-				SceneLib.alvinaFollower.alvinaFirstEncounter();
-				return;
-			}
 			explorer.prepareArea(_explorationEncounters);
 			explorer.setTags("explore");
 			explorer.onEncounter = function(e:ExplorationEntry):void {

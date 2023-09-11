@@ -13439,13 +13439,13 @@ public function ScyllaSqueeze():void {
         damage *= player.effectiveTallness / 25;
         damage += player.str;
     }
-	//if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2) x
     damage = statusEffectBonusDamage(damage);
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
     if (monster.plural) damage *= 5;
     if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
     if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
+	if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2 && player.isKraken()) damage *= player.perkv1(IMutationsLib.ScyllaInkGlandsIM);
     if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
     //Squeeze -
     outputText("You start squeezing your");

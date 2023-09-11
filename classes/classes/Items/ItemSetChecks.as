@@ -68,5 +68,12 @@ public function unequipNecroItemsSet():void {
 	}
 }
 
+public function equipBestialBlademasterItemsSet():void {
+	player.createPerk(PerkLib.BestialBlademaster, 0, 0, 0, 0);
+}
+public function unequipBestialBlademasterItemsSet():void {
+	player.removePerk(PerkLib.BestialBlademaster);
+}
+
 }
 }

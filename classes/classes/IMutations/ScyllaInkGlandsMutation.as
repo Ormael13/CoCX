@@ -18,10 +18,16 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength";
+                descS += "Your Scylla Ink Glands increase rate at which your body produce ink";
             }
             if (pTier >= 2){
-                descS += ", ";
+                descS += ", duration ink spray affect enemies and lust damage";
+            }
+            if (pTier >= 1){
+                descS += " by 100%, boost to your natural strength";
+            }
+            if (pTier >= 2){
+                descS += " and toughness, Scylla Squeeze damage during grapple as Kraken would be multiplied by "+pTier+"x";
             }
             if (pTier >= 3){
                 descS += ", ";
@@ -70,13 +76,16 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['str.mult'] = 0.1;
-            //else if (pTier == 2) pBuffs['str.mult'] = 0;
+            else if (pTier == 2) {
+				pBuffs['str.mult'] = 0.3;
+				pBuffs['tou.mult'] = 0.05;
+			}
             //else if (pTier == 3) pBuffs['str.mult'] = 0;
             return pBuffs;
         }
 
         public function ScyllaInkGlandsMutation() {
-            super(mName + " IM", mName, SLOT_ADAPTATIONS, 1);
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 2);
         }
         
     }
