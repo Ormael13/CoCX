@@ -6502,12 +6502,12 @@
 		</if>
 
 		<!--Lizan Blademaster set -->
-		<if test="BESTBLAA">
+		<if test="bestialBlademasterAccoutrements">
 			<show part="clotheUnderAmulet/LizBladeAcc"/>
 			<show part="tailAccessory/LizBladeAccClothFront"/>
 			<show part="clothCape/LizBladeAccClothBack"/>
 		</if>
-		<if test="BESTBLA">
+		<if test="bestialBlademasterArmor">
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
