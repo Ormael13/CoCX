@@ -1556,6 +1556,10 @@ use namespace CoC;
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
 				else attack += Math.round(statusEffectv1(StatusEffects.AttackPotion));
 			}
+			if (statStore.hasBuff("CrinosShape") && hasPerk(PerkLib.BestialBlademaster)) {
+				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 2) attack *= 1.2;
+				else attack *= 1.1;
+			}
 			attack = Math.round(attack);
 			return attack;
 		}

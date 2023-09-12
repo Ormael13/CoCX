@@ -539,6 +539,7 @@ public class ExplorationEngine extends BaseContent {
 				onEncounter(e);
 			}
 			e.encounter.execEncounter();
+			return;
 		}
 
 		// Buttons

@@ -2468,7 +2468,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("Struck by a sudden curiosity, you let go with one hand, running your fingertips along the slender outer-bone of Kiha’s batlike wings. This gets an immediate reaction from your dragoness lover, and she shivers, her tail wrapping around your leg. Despite this, she doesn’t tell you to stop, and so you return your hand to her wing. Her breath catches in her throat as you trace a line down her wing with two fingers, one on each side of the fingerlike bone.\n\n");
         outputText("\"<i>Wh-what are you doing?</i>\" Kiha asks, her low, hushed tone very different from her normal, domineering personality. You tell Kiha that you’re admiring her wings. You say that despite how strong they are, they seem so delicate like this. \"<i>If you say so.</i>\" Kiha shudders as you lean in, kissing the side of her neck. \"<i>Really? You’re into my wings now?</i>\" She doesn’t have any real force behind those words, however, her tail caressing your thigh. \"<i>Pervert.</i>\"\n\n");
         outputText("You tell her that her wings are a part of her, and that you like them… Just like the rest of her. She blushes even hotter, and you feel a bit of heat behind you as she exhales a bit of her fire breath. You continue playing with her wings, rubbing the thin bones, tickling the soft, leathery membranes. Kiha lets you, but the rapidly dampening patch against your thigh, coupled with the muffled exhales, let you know that your dragoness is enjoying this.\n\n");
-        outputText("\"<i>Idiot.</i>\" Kiha’s voice is low, but tender. She slowly folds her wings, and you put your hands on her hips. (if playerheight<6ft) You look into her dark red eyes, and she puts a hand on your cheek. You jokingly remind Kiha that she chose to be here, with you. At this, she rolls her eyes, popping you on the thigh with her tail.\n\n");
+        outputText("\"<i>Idiot.</i>\" Kiha’s voice is low, but tender. She slowly folds her wings, and you put your hands on her hips"+(player.tallness < 72 ? ". You look into her dark red eyes, and she puts a hand on your cheek" : "")+". You jokingly remind Kiha that she chose to be here, with you. At this, she rolls her eyes, popping you on the thigh with her tail.\n\n");
         outputText("\"<i>Yeah… I did.</i>\" For a few minutes, the two of you stay like this, just… Together. Kiha eventually pushes your shoulders, signalling that the moment’s passed. \"<i>… I forgot what this was like.</i>\" Kiha says to you, not trying to hide her feelings for once. \"<i>Just… Holding someone.</i>\" She smiles slightly, shaking her head. \"<i>You give good hugs… My idiot.</i>\" She walks away, generous ass swaying and tail swishing, back into camp. She seems happier than before.\n\n");
         endEncounter();
     }
@@ -2481,7 +2481,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You jokingly call Kiha an idiot, and tell her that you love her. She may be loud, and mean sometimes, and a bit of a hothead, but you love her anyway.\n\n");
         outputText("Your dusky dragoness’s eyes moisten at that, and she turns her head so you can’t see her tears. \"<i>… Damn it. Why is this so hard?</i>\" You give her a small smile. You tell Kiha that you’ve been asking yourself that question for quite some time now. She’s shocked, and you seize that moment, bringing your lips to hers.\n\n");
         outputText("Kiha’s dusky skin flushes bright red, but as she leans in, wrapping one arm around your head, you feel her tongue slip past your lips. She moans into your mouth, other arm reaching down to your [ass]. You feel her wrap one leg around your waist, and as she pulls her head back, giving you a smoldering look, you feel your breath catch in your throat.\n\n");
-        outputText("<i>“I hope you realise what comes next.”</i> Kiha murmurs, eyes half-lidded, her slavering muff rubbing against the front of your [clothing]. <i>“Because you’re not going anywhere.”</i> Your dragoness exhales a puff of fire, just enough to send a burst of warmth into your chest. <i>“Lover.”</i>\n\n");
+        outputText("<i>“I hope you realise what comes next.”</i> Kiha murmurs, eyes half-lidded"+(player.isNaked()?"":", her slavering muff rubbing against the front of your [armor]")+". <i>“Because you’re not going anywhere.”</i> Your dragoness exhales a puff of fire, just enough to send a burst of warmth into your chest. <i>“Lover.”</i>\n\n");
         ProposalStatus = 1;
         doNext(kihaSexMenu);
     }
@@ -2494,6 +2494,9 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         endEncounter();
     }
 
+	public function KihaWedding2():void {
+		inventory.UseItemNow(CoC.instance.jewelries.STARBAND, KihaWedding);
+	}
     public function KihaWedding():void {
         clearOutput();
         kihaSprite();
@@ -2504,7 +2507,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("As the sun begins to fall, the first of your guests arrive. You recognize some of the Dragonoids you rescued, who all wish you well on your big day..\n\n");
         outputText("Members of your camp show up, each greeting you happily.\n\n");
         outputText("You can tell some of your harem are a little jealous, but they’re still happy for you.\n\n");
-
         outputText("The ceremony starts with a small song, played on a traditional Lizan bone-flute. You stand at the altar of the divines, and as your assembled guests stand, you see Kiha’s dragonoid friend walking down the isle towards you. Beside her… You’ve never seen Kiha wear anything, let alone a dress… But this dress fits like it was made for her. A veil of black silk hides her face from you, tiny pearls like stars, woven into the veil.\n\n");
         outputText("A hole in the breast shows off Kiha’s notable cleavage, and she notices you staring, her reptilian eyes smoldering. Generous hips swaying, Kiha joins you at the altar. A lizan priest in fine robes steps out from behind the dais, and he begins the ceremony in a tender, low tone.\n\n");
         outputText("\"<i> [Name], champion from beyond this world, Slayer of demons, chosen warrior of Marae: Do you take Kiha to be yours, for better or for worse? To love, lose and be as one, until the skyfire sets on your last day?</i>\"\n\n");
@@ -2521,11 +2523,10 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("Kiha looks up, into the dragonoid’s eyes… and she sees the black joy there, the lust in his gaze as he eyes her breasts. \"<i>They changed you, Mags. I’m sorry I couldn’t come back… I was too late.</i>\"\n\n");
         outputText("\"<i>For once, you’re right… But it’s okay, stubborn scales. You couldn’t come then… But I’ll make you come now. Now and forever. You’ll be late many times… Mmm… </i>\" His black, scaled dong rises, tip nearly as high as your bride’s face. \"<i>You’ll be mine, Kiha. As you were always meant to be.</i>\"\n\n");
         outputText("You take a step down from the altar, raising your [weapon]. You tell the demon-dragon to leave your bride alone. You order him to leave, and never return if he wants to keep his head.\n\n");
-        outputText("The amusement drops from his gaze, and the giant looks at you, blue flames rising from his nose. \"<i>… So this wasn’t a joke, then… Or a way to get my attention.</i>\" He levels his maul at you, rage in his reptilian eyes. \"<i>Fine then, my love. Witness the death of your [bride/groom]. Watch me crush them… and they can watch me consummate our love after.</i>\"\n\n");
+        outputText("The amusement drops from his gaze, and the giant looks at you, blue flames rising from his nose. \"<i>… So this wasn’t a joke, then… Or a way to get my attention.</i>\" He levels his maul at you, rage in his reptilian eyes. \"<i>Fine then, my love. Witness the death of your "+player.mf("bride","groom")+". Watch me crush them… and they can watch me consummate our love after.</i>\"\n\n");
         outputText("Kiha flaps her wings, launching herself towards the imposing dragon… only to be caught midair by the friend beside her. \"<i>Oh, no you don’t!</i>\" She declares. \"<i>That dress was my mother’s, and you are NOT getting it ruined!</i>\" Kiha struggles, but her friend is joined by several other dragonoids from the village. They carry Kiha, kicking and screaming, into the back.\n\n");
         outputText("\"<i>[Name]! [NAME]!!! Don’t you DARE die on me now!</i>\" Kiha breathes fire, but the others don’t care about the heat.\n\n");
         outputText("\"<i>So… You’re the one who made my Kiha an oathbreaker.</i>\" The massive dragonoid stands before you, eyes filled with hatred. \"<i>Don’t worry. Once her lethicite is in my hands, she won’t remember you.</i>\"");
-
         startCombat(new Magnar);
     }
 
@@ -2583,7 +2584,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("“<i>Do you know why female dragons were considered the most dangerous?</i>” She asks you, sliding in, eyes dangerously close to yours as she exhales, the faintest hint of flame on her breath. You respond neutrally, telling Kiha that you don’t know… But you have every intention of finding out tonight.\n\n");
         outputText("“<i>Good answer</i>”. Kiha says, giving you a light push towards the bed. Not wanting to waste any time, you begin disrobing, your dragoness tapping one foot impatiently. “<i>… It’s been all I can stand, you know. Knowing that you’re mine, but those hours… I wanted to kick that priest out and bend you over the altar myself.</i>” You finish undressing, and Kiha tackles you. Playing along, you let her pin you down to the bed back-first, her hands on your forearms and wings spread wide.\n\n");
         outputText("“<i>Mine.</i>” She looks you up and down, almost drooling. “<i>I still can’t believe we're married… but… You’re mine.</i>” Kiha’s sharp teeth glint, her reptilian eyes gleaming.\n\n");
-
         sceneHunter.marry("Kiha"); menu();
         if (player.hasCock()) {
             addButton(1, "MaleSex", KihaMaleWeddingNight);
@@ -2612,7 +2612,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("… Holding her upside down against a wall, her legs around your neck and the taste of her pussy overwhelming, your tongue deep inside her while she throats your [cock]… \n\n");
         outputText("… Her lips on yours, burning alcohol mixing with your saliva as she trickles brandy into your mouth with her flexible tongue.\n\n");
         outputText("You open your eyes, head pounding. The room seems to swim around you, and you don’t even try to roll over, your body aching all over. Your chest heaves, and you feel like you can barely breathe… You look down at your chest, and you see Kiha, splayed out on top of you. One arm is around your neck, her tail wrapped clumsily around your [legs], but her other limbs are limp, thrown randomly around.\n\n");
-
         cleanupAfterCombat();
     }
 
@@ -2621,7 +2620,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You take Kiha’s tail in your hands, rubbing the scaly appendage. Smiling slightly, you take the tip, guiding it to your own delta.\n\n");
         outputText("Snas is having technical difficulties writing this scene, as he does not have the equipment to adequately imagine what is going on here. Please, for the love of Dragon Waifus, someone help me with lesbian scenes.\n\n");
         outputText("PLEASE.\n\n");
-
         cleanupAfterCombat();
     }
 
@@ -2744,34 +2742,26 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         clearOutput();
         outputText("You tell Kiha that you only want to talk with her right now, and she rolls her eyes slightly, exhaling a bit of fire from her nose.\n\n");
         outputText("<i>\" Okay… Since you seem addicted to the concept, I might as well.\"</i> She leans back. <i>\"What's on your mind?</i>\"\n\n");
-        menu();
-        if (totalKihaChildren() == 0) {
-            addButton(1, "Family", KihaTalkFamily);
-        }
-        if (totalKihaChildren() > 0) {
-            addButton (1, "Kids", KihaTalkKids); //TODO
-        }
-        if (KihaTownState == 1 && !FlameSpreaderBossKilled) {
-            addButton(2, "Town", KihaTalkTown);
-        }
-        if (KihaTownState == 0) {
-            addButton(2, "Home", KihaTalkHome);
-        }
+		menu();
+        if (totalKihaChildren() == 0) addButton(1, "Family", KihaTalkFamily);
+        if (totalKihaChildren() > 0) addButton (1, "Kids", KihaTalkKids); //TODO
+        if (KihaTownState == 1 && ProposalStatus < 1) addButton(2, "Town", KihaTalkTown);
+        if (KihaTownState == 0) addButton(2, "Home", KihaTalkHome);
         addButton (3, "Campmates", KihaTalkCampmates);
         if (ProposalStatus == 1) {
             addButton(5, "Propose", KihaProposal)
                     .disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
         }
         if (ProposalStatus == 3) {
-            addButton(5, "WeddingReady", KihaWedding)
+            addButton(5, "WeddingReady", KihaWedding2)
                     .disableIf(!SceneLib.templeofdivine.canMarry(), "You need to repair the temple first!")
                     .disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
         }
         if (ProposalStatus == 4) {
-
             addButton(5, "Propose", KihaProposal)
                     .disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
         }
+		addButton(14, "Back", warmLoverKihaIntro);
     }
 
     private function visitKids():void {
@@ -2848,7 +2838,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("<i>Thank you… My idiot.</i>\n\n");
         outputText("The moment is over, but Kiha points at the rubble, mentioning a few buildings. Slowly, she tells you more about the town, and you listen intently, pride filling your chest. Eventually, Kiha sighs, giving you a slow, tender kiss. <i>\"Thank you… </i>\" Her voice is a bare whisper, low and tender. <i>\"My Idiot… </i> You ask her if she wants to go home, and Kiha's eyes shimmer. She lets loose a small burst of heat as she exhales, and nods. Hand in hand, you walk home in silence. While you see a few of Mareth's denizens, none seem willing to approach.\n\n");
         explorer.stopExploring();
-        doNext(camp.returnToCampUseEightHours);
+        doNext(camp.returnToCampUseSixHours);
     }
 
     private function KihaTalkTown():void {

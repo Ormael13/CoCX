@@ -199,7 +199,7 @@ use namespace CoC;
 			SceneLib.exploration.counters.battlefieldBoundary = 1;
 			clearOutput();
 			outputText("While exploring you run into the sight of endless field, littered with the remains of fallen soldiers from what appears to have been the demon war, this much do the horned skeletons tells. You can see some golem husk on the ground as well. It’s very plausible the war is still ongoing.\n\n<b>You've discovered the Battlefield (Boundary)!</b>");
-			endEncounter();
+			endEncounter(60);
 		}
 		
 		

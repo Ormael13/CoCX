@@ -118,7 +118,7 @@ public class Changelog extends BaseContent
 			outputText("-Some small tweaking to p.specials in relation to pc or enemy/ies flying letting some special been used from ground or when flying.\n");
 			outputText("-History: Alchemist or Past Life: Alchemist would start with lvl 5 in alchemy skill.\n");
 			outputText("-Added options for making 5 bronze ore/ebon ignots by Konstantine. But it req. to have enough space left in ore bag.\n");
-			outputText("-Using Crinos Shape as werebeast (wolf/fox/shark) would add bonus to boost from special depending on moon phase (from no bonus to 40%/60%). Reaching higher tier of race like elder/ancient would double/tripple that bonus.\n");
+			outputText("-Using Crinos Shape as werebeast (wolf/fox) would add bonus to boost from special depending on moon phase (from no bonus to 40%/60%). Reaching higher tier of race like elder/ancient would double/tripple that bonus.\n");
 			outputText("-Wereraces bonuses related to moon phase would be now instead of flat bonuses a multi bonuses, for ex. +10 str > +10% str multi.\n");
 			outputText("-Moon phases been divided further from Full Moon day and rest into Full Moon (8th day of the cycle), New Moon (4th day of the cycle) and Half Moon (rest of the days) with stats page tracker for moon cycle day indicating which moon cycle phase is currently.\n");
 			outputText("-Alpha Howl i.mutation can be picked by Anubis race too.\n");
@@ -174,10 +174,10 @@ public class Changelog extends BaseContent
 			outputText("-Temporaly disabled two events in Journey to the East until 'more flesh' added to them.\n");
 			outputText("-Added Elder Cave Wyrm racial bonuses tier (16+): +90% to Str multi, +115% to Tou multi, -30% to Wis multi, +65% to Lib multi. Azureflame Breath and Acid Spit now would req. 10+ in race score and lost when score drops below 10 (naturaly evolved cave wyrm lungs i.mutation can still prevent loosing those perks).\n");
 			outputText("-When cutting wood, mining stones, opening packs of nails OR finding metal plates summary would include current post activity state of warehouse for that material.\n");
-			outputText("-At least 10 ft. tall and Bioluminescnece skin pattern each would add +1 to scylla/kraken score. Added also next tier of racial bonuses - ancient kraken (24+): +220% to str multi, +70% to tou/int multi, +600 max HP (scalable)\n");
+			outputText("-At least 10 ft. tall and Bioluminescence skin pattern each would add +1 to scylla/kraken score. Added also next tier of racial bonuses - ancient kraken (24+): +220% to str multi, +70% to tou/int multi, +600 max HP (scalable)\n");
 			outputText("-New mutation perk: Scylla Ink Glands (Primitive). Req. Scylla Ink Glands and lvl 30+. Effects: Your Scylla Ink Glands increase rate at which your body produce ink, duration ink spray affect enemies and lust damage by 100%, boost to your natural strength and toughness, Scylla Squeeze damage during grapple as Kraken would be multiplied by current i.mutation tier.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Lizan Blademaster set sprites implementation, adjusted alignment of fran's cloak and jabberwocky wings sprites. (Lord Shadeogorath)\n");
+			outputText("-New perk for enemies: Colossal-sized type enemy. Increase monster str/tou/spe/atk/phys and mag defense values compared to the same much smaller monster.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -198,9 +198,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath)
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -209,7 +209,7 @@ public class Changelog extends BaseContent
 			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
 			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends, ");
 			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error, some of blessings from temple disply wrong ");
-			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors, some of custom names not giving starting gems bonus\n");
+			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors, some of custom names not giving starting gems bonus, one of Demon Lab bosses infinite grapple\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

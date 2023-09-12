@@ -36,7 +36,7 @@ use namespace CoC;
 			clearOutput();
 			SceneLib.exploration.counters.plains = 1;
 			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
-			endEncounter();
+			explorer.done(60);
 		}
 		
 		

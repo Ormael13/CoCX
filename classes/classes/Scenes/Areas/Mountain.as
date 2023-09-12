@@ -840,13 +840,13 @@ public class Mountain extends BaseContent
 			outputText("While exploring the hill you come upon a particular trail. It looks to lead deeper into the mountain range. Having met the many unsavory denizens of the hill already you clench your fist ready for a new challenge as you take up the trail toward the mountain. The atmosphere changes quickly as plants become scarcer and rocky formation more common. ");
 			outputText("Caves previously a rare occurrence now are a regular sight. You have found the way to the low mountain range area.\n\n(<b>Low Mountain exploration location unlocked!</b>)");
 			SceneLib.exploration.counters.mountainsLow = 1;
-			endEncounter();
+			explorer.done(60);
 		}
 		public function discoverM():void {
 			clearOutput();
 			outputText("As you explore the low mountain range you hear thunder booming overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it. Forward is a path leading deeper higher into the mountains and possibly harder trials.\n\n<b>You've discovered the Mountain!</b>");
 			SceneLib.exploration.counters.mountainsMid = 1;
-			endEncounter();
+			explorer.done(60);
 		}
 		private function hike():void {
 			clearOutput();

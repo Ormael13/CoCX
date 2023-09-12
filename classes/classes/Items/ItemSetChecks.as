@@ -68,11 +68,19 @@ public function unequipNecroItemsSet():void {
 	}
 }
 
+public function equippedBestialBlademasterSetItems():int {
+	var eBBSI:int = 0;
+	if (player.armor == armors.BESTBLA) eBBSI++;
+	if (player.headJewelry == headjewelries.BESTBLAA) eBBSI++;
+	return eBBSI;
+}
 public function equipBestialBlademasterItemsSet():void {
-	player.createPerk(PerkLib.BestialBlademaster, 0, 0, 0, 0);
+	var count:int = equippedBestialBlademasterSetItems();
+	if (count == 2) player.createPerk(PerkLib.BestialBlademaster, 0, 0, 0, 0);
 }
 public function unequipBestialBlademasterItemsSet():void {
-	player.removePerk(PerkLib.BestialBlademaster);
+	var count:int = equippedBestialBlademasterSetItems();
+	if (count == 1) player.removePerk(PerkLib.BestialBlademaster);
 }
 
 }

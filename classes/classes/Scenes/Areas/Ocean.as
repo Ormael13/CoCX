@@ -44,7 +44,7 @@ use namespace CoC;
 			if(player.cor > 60) outputText(" or fuck");
 			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
 			outputText("<b>You have discovered the sea boat!</b>");
-			endEncounter();
+			endEncounter(120);
 		}
 		
 		

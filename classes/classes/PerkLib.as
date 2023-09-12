@@ -3243,7 +3243,7 @@ public class PerkLib
 		public static const SereneMind:PerkType = mk("Serene Mind", "Serene Mind",
 				"Increased defenses, damage output, and evasion whilst in a berserker/lustzerker state (stacks with cold(er) fury/lust)");
 		public static const BestialBlademaster:PerkType = mk("Bestial Blademaster", "Bestial Blademaster",
-				"Allows for the wearer to better make use of their beast form to increase effectiveness of weapon strikes (chrinos shape unarmed buff applies to weapons)");
+				"Allows for the wearer to better make use of their beast form to increase effectiveness of weapon strikes. (weapon base attack increased by 10% while chrinos shape is active)");
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of mana!",null,true);
@@ -4267,7 +4267,7 @@ public class PerkLib
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
 		public static const EnemyChampionType:PerkType = mk("Champion-type enemy", "Champion-type enemy", "");//NYU
-		public static const EnemyColossalType:PerkType = mk("Colossal-sized type enemy", "Colossal-sized type enemy", "");//50+ ft. tall   //NYU
+		public static const EnemyColossalType:PerkType = mk("Colossal-sized type enemy", "Colossal-sized type enemy", "");//50+ ft. tall
 		public static const EnemyConstructType:PerkType = mk("Construct-type enemy", "Construct-type enemy", "");
 		public static const EnemyElementalType:PerkType = mk("Elemental-type enemy", "Elemental-type enemy", "");
 		public static const EnemyEliteType:PerkType = mk("Elite-type enemy", "Elite-type enemy", "");

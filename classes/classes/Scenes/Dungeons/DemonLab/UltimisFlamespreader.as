@@ -80,6 +80,7 @@ public class UltimisFlamespreader extends Monster {
             gunner1Alive = false;
             outputText("[Themonster] shakes the platform free from its shoulders now that it is empty. <b>The dragon’s scales harden, moving closer together with an odd clicking noise.</b>\n");
             this.armorDef *= 2;
+			this.armorMDef *= 2;
         }
         randomiseAction();
     }
@@ -141,13 +142,12 @@ public class UltimisFlamespreader extends Monster {
         createBreastRow(Appearance.breastCupInverse("DD"));
         this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
         this.ass.analWetness = AssClass.WETNESS_DRY;
-        this.tallness = (9*3*12);
+        this.tallness = (50*12);
         this.hips.type = Hips.RATING_CURVY;
         this.butt.type = Butt.RATING_NOTICEABLE;
         this.bodyColor = "red";
         this.hairColor = "black";
         this.hairLength = 16;
-        this.level = 85;
         initStrTouSpeInte(950, 1200, 1000, 420);
         initWisLibSensCor(200, 1600, 500, 60);
         this.weaponName = "tail";
@@ -160,12 +160,13 @@ public class UltimisFlamespreader extends Monster {
         this.bonusHP = 50000;
         this.bonusLust = 8000;
         this.lustVuln = 0.8;
-        this.level = 110;
+        this.level = 85;
         this.gems = rand(50) + 75;
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(jewelries.POWRRNG, 1);
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyColossalType, 0, 0, 0, 0);
         checkMonster();
     }
 }

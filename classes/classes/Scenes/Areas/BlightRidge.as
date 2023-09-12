@@ -176,8 +176,7 @@ use namespace CoC;
 				outputText("\n\n");
 			}
 			outputText("<b>You've discovered the Blight Ridge!</b>");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(60);
 		}
 		
 		public function exploreBlightRidge():void {
@@ -249,8 +248,7 @@ use namespace CoC;
 			outputText("What's the worst that could happen? Treading through the valley, the faint sound of flowing water hits your ears. The sound is quickly followed by the scent of sweat, milk and semen. This is not unlike the usual smells you get in the Blight Ridge, but it's far more condensed and sour here. One step closer to the source.\n\n");
 			outputText("<b>You've discovered the Defiled Ravine!</b>");
 			SceneLib.exploration.counters.defiledRavine = 1;
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			explorer.done(60);
 		}
 		
 		public function findDefiledRavineNo():void {
