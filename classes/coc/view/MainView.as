@@ -772,7 +772,7 @@ public class MainView extends Block {
 		if (this.customElement) {
 			this.removeElement(this.customElement);
 			this.customElement = null;
-			this.scrollBar.visible = true;
+			this.scrollBar.activated = true;
 		}
 		this.hotkeysDisabled = false;
 		this.mainText.htmlText = '';
