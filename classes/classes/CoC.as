@@ -521,7 +521,7 @@ public class CoC extends MovieClip
         EngineCore.rawOutputText(txt);
         // On the next animation frame
         setTimeout(function():void {
-            mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
+            mainView.scrollBar.value = mainView.scrollBar.maximum;
         },0);
     }
     /*
