@@ -1193,11 +1193,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							break;
 					}
 					if (player.hasPerk(PerkLib.Lycanthropy)) {
-						player.statStore.replaceBuffObject({ 'str.mult': changeV*ngMult,'tou.mult': changeV*0.6*ngMult,'spe.mult': changeV*0.4*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
+						player.statStore.replaceBuffObject({ 'str.mult': changeV*0.1*ngMult,'tou.mult': changeV*0.06*ngMult,'spe.mult': changeV*0.04*ngMult, 'minlustx': changeV * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 						player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
 					}
 					if (player.hasPerk(PerkLib.Vulpesthropy)) {
-						player.statStore.replaceBuffObject({ 'str.mult': changeV*0.1*ngMult,'tou.mult': changeV*ngMult,'spe.mult': changeV*0.4*ngMult, 'minlustx': changeV * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+						player.statStore.replaceBuffObject({ 'str.mult': changeV*0.01*ngMult,'tou.mult': changeV*0.1*ngMult,'spe.mult': changeV*0.04*ngMult, 'minlustx': changeV * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 						player.setPerkValue(PerkLib.Vulpesthropy,1,changeV);
 					}
 					needNext = true;
