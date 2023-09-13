@@ -637,7 +637,7 @@ public function mainCampMenu():void {
 	}
 	addButton(8, "Uncurse", uncurseItemsMenu)
 			.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
-	
+
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
@@ -724,7 +724,7 @@ public function HealingScene():void {
 	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
 	doNext(mainCampMenu);
-	eachMinuteCount(45);
+	advanceMinutes(45);
 }
 
 public function CuringCurseScene1():void {	//value related curses removal
@@ -741,7 +741,7 @@ public function CuringCurseScene1():void {	//value related curses removal
 		player.removeCurse(stat, 10,3);
 	}
 	doNext(mainCampMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
@@ -759,7 +759,7 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 		}
 	}
 	doNext(mainCampMenu);
-	eachMinuteCount(30);
+	advanceMinutes(30);
 }
 
 public function mainSexMenu():void {

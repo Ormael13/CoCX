@@ -73,11 +73,11 @@ public class ProjectTyrant extends Monster {
         outputText("The Drider-monster charges again. You ready yourself to dodge the meaty fists, but instead, it charges head-on into you, shoulder first. You’re thrown back by the impact, but as you hit the ground, you feel an immense weight press down on you. You are pinned underneath the Drider-beast’s weight, and it begins to crush you!\n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
-        player.createStatusEffect(StatusEffects.Pounced, 5, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.Pounced)) player.createStatusEffect(StatusEffects.Pounced, 5, 0, 0, 0);
     }
 
     public function TackleGrappleStruggle():void {
-        if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) TackleGrappleSuccess();
+        if (rand(3) == 0 || (rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) TackleGrappleSuccess();
         else TackleGrapple();
         SceneLib.combat.enemyAIImpl();
     }

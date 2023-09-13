@@ -50,7 +50,7 @@ use namespace CoC;
 			return SceneLib.exploration.counters.forestOuter > 0;
 		}
 		public function canDiscoverOuter():Boolean {
-			return !isDiscoveredOuter() && adjustedPlayerLevel() >= discoverLevelOuter;
+			return !isDiscoveredOuter() && adjustedPlayerLevel() >= discoverLevelOuter && flags[kFLAGS.ALVINA_FOLLOWER] >= 1;
 		}
 		public function timesExploredOuter():int {
 			return SceneLib.exploration.counters.forestOuter;
@@ -59,7 +59,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old-looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>");
 			SceneLib.exploration.counters.forestOuter = 1;
-			endEncounter();
+			explorer.done(60);
 		}
 		
 		
@@ -1113,7 +1113,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n");
 			outputText("<b>Deepwoods exploration unlocked!</b>");
-			endEncounter();
+			explorer.done(60);
 		}
 		public function bigJunkChance():Number {
 			var temp:Number = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;

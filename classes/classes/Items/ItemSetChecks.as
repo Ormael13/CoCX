@@ -68,5 +68,20 @@ public function unequipNecroItemsSet():void {
 	}
 }
 
+public function equippedBestialBlademasterSetItems():int {
+	var eBBSI:int = 0;
+	if (player.armor == armors.BESTBLA) eBBSI++;
+	if (player.headJewelry == headjewelries.BESTBLAA) eBBSI++;
+	return eBBSI;
+}
+public function equipBestialBlademasterItemsSet():void {
+	var count:int = equippedBestialBlademasterSetItems();
+	if (count == 2) player.createPerk(PerkLib.BestialBlademaster, 0, 0, 0, 0);
+}
+public function unequipBestialBlademasterItemsSet():void {
+	var count:int = equippedBestialBlademasterSetItems();
+	if (count == 1) player.removePerk(PerkLib.BestialBlademaster);
+}
+
 }
 }

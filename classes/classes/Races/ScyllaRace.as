@@ -55,6 +55,7 @@ public class ScyllaRace extends Race {
 				.skinColor1("ghostly pale", +1)
 				.rearType(RearBody.KRAKEN, +1)
 				.height(GREATER_THAN(96), +1)
+				.height(GREATER_THAN(120), +1)
 				.vaginaType(VaginaClass.SCYLLA, +1)
 				.customRequirement("legs","scylla or kraken lower body",
 						function (body:BodyData): Boolean {
@@ -68,6 +69,7 @@ public class ScyllaRace extends Race {
 						function (body:BodyData): Boolean {
 							return body.player.isKraken();
 						}, +4)
+				.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hasPerk(PerkLib.InkSpray, +1);
 		addConditionedScores(function (body:BodyData):Boolean {
 			return body.player.isScylla() || body.player.isKraken();
@@ -82,7 +84,8 @@ public class ScyllaRace extends Race {
 		buildTier(7, "scylla")
 				.buffs({
 					"str.mult": +0.65,
-					"int.mult": +0.40,
+					"tou.mult": +0.20,
+					"int.mult": +0.20,
 					"maxhp_base": +50
 				})
 				.end();
@@ -90,17 +93,27 @@ public class ScyllaRace extends Race {
 		buildTier(12, "kraken")
 				.buffs({
 					"str.mult": +1.20,
-					"int.mult": +0.60,
+					"tou.mult": +0.30,
+					"int.mult": +0.30,
 					"maxhp_base": +150
 				})
 				.end();
 		
 		buildTier(18, "elder kraken")
 				.buffs({
-					"str.mult": +1.50,
-					"tou.mult": +0.60,
-					"int.mult": +0.60,
+					"str.mult": +1.70,
+					"tou.mult": +0.50,
+					"int.mult": +0.50,
 					"maxhp_base": +300
+				})
+				.end();
+		
+		buildTier(24, "ancient kraken")
+				.buffs({
+					"str.mult": +2.20,
+					"tou.mult": +0.70,
+					"int.mult": +0.70,
+					"maxhp_base": +600
 				})
 				.end();
 	}

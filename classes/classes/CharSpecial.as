@@ -451,7 +451,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 
 		private function customGundam():void {
 			outputText("You're fabulously rich, thanks to a rather well-placed bet on who would be the champion.  Hopefully you can buy yourself out of any trouble you might get in.");
-			player.gems = 1500 + rand(1000);
+			player.gems += (1500 + rand(1000));
 			//for my custom character profile i want the name to be gundam all i want is to start out with around 1000-2500 gems like as a gift from the elder or something to help me out.
 		}
 
@@ -991,7 +991,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			//3 starting perk points
 			player.perkPoints = 3;
 			//some starting gems (just go ahead and surprise me on the amount)
-			player.gems = rand(800);
+			player.gems += rand(800);
 			//Specific Character
 			//-Female... with a dog cock
 			//11"" long, 2"" wide, 2.4"" knot

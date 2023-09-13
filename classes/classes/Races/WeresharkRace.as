@@ -61,7 +61,7 @@ public class WeresharkRace extends Race {
 				.corruption(AT_LEAST(20), +1)
 				.corruption(AT_LEAST(50), +1)
 				.corruption(AT_LEAST(80), +1)
-				.hasPerk(PerkLib.Karchariathropy, +2, -11);
+				.hasPerk(PerkLib.Selachimorphanthropy, +2, -11);
 		
 		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.SharkOlfactorySystemIM);

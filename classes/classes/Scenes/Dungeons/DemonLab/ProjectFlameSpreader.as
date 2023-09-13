@@ -66,7 +66,7 @@ public class ProjectFlameSpreader extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        outputText("While the area around you is scorched by the Flamespreader’s breath, you walk over to the injured creature as it lies on its back. It wiggles its shapely ass, presenting itself to you. It still shoots fire from its mouth, and you take no chances. You bring your [weapon] down onto the Flamespreader’s head, ending its life. As the light fades from its eyes, the malice seems to fade, and the sinister smile becomes something more genuine. [pg]");
+        outputText("[pg]While the area around you is scorched by the Flamespreader’s breath, you walk over to the injured creature as it lies on its back. It wiggles its shapely ass, presenting itself to you. It still shoots fire from its mouth, and you take no chances. You bring your [weapon] down onto the Flamespreader’s head, ending its life. As the light fades from its eyes, the malice seems to fade, and the sinister smile becomes something more genuine.[pg]");
         outputText("“<i>Thank…</i>” The creature can’t say anything more...But you know what it was going to say.[pg]");
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha")
             outputText("You turn back to see Kiha looking down at the creature, a mixture of sadness and anger on her face. She hefts her axe, and without a word, she cleaves a small tree in two. Wordlessly, you and your dragoness carry the body back to the village, where she already has a grave marked. Kiha nods in thanks, and you leave her, heading back to camp.");
@@ -77,7 +77,7 @@ public class ProjectFlameSpreader extends Monster {
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        outputText("You fall back from a particularly brutal blow. The flamespreader walks slowly over, licking her lips.");
+        outputText("[pg]You fall back from a particularly brutal blow. The flamespreader walks slowly over, licking her lips.");
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha" || flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha" || flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") outputText(" Kiha roars, swinging her axe at the slutty dragoness, but she too is weakened from the fight, and the flamespreader easily parries. She knocks Kiha out with a single strike, and looms over you.");
 		outputText("[pg]“<i>How…delicious.</i>” She looms over you, her cunt drooling and C cups bouncing slightly with each step.[pg]");
 		if (player.hasCock()) {

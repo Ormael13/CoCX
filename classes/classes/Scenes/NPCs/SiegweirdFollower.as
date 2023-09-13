@@ -12,7 +12,7 @@ import classes.display.SpriteDb;
 
 public class SiegweirdFollower extends NPCAwareContent
 	{
-		
+
 		public function SiegweirdFollower()
 		{}
 
@@ -237,7 +237,7 @@ public function addIngredientText():void {
 	outputText("Siegweird gives you a suspicious glance before redirecting his attention to the item in your grasp, \"<i>I… Um… Okay… Go ahead, [name]. I don’t really see an issue with that ingredient. </i>\"");
 	outputText("You drop it in the soup as Siegweird scratches the back of his head nervously, \"<i>I’m sure the magic within will make the soup a little stronger.</i>\"\n\n");
 	doNext(siegweirdMainCampMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //adds the 'val' value of 'effect' and consumes the 'item'
@@ -291,7 +291,7 @@ public function siegweirdCampSoup():void
 		HPChange(Math.round(player.maxHP() * recoveryV), true);
 		EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * recoveryV)));
 		doNext(camp.campFollowers);
-		eachMinuteCount(15);
+		advanceMinutes(15);
 	}
 	else {
 		outputText("The smell of Siegwierd’s soup is amazing. He did offer to share it with you, so perhaps now isn’t a bad time?\n\nYou decide to approach him.\n\n");
@@ -319,7 +319,7 @@ public function siegweirdCampStudy():void
 		outputText("Siegweird eyes you narrowly, \"<i>I’m sorry, [name]... but I cannot teach someone who cannot learn. Please, if you seek to study then you must purge yourself from excess corruption. </i>\"\n\n");
 		outputText("You nod your head, you shouldn’t be surprised a paladin can’t teach the impure.")
 		doNext(camp.campFollowers);
-		eachMinuteCount(5);
+		advanceMinutes(5);
 	}
 	else {
 		outputText("Seigweird eyes you narrowly, \"<i>Yes, you are ready to learn, we shall work together. </i>\"\n\n");
@@ -378,7 +378,7 @@ public function siegweirdAdvancedStudy_0():void {
         player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
     }
     doNext(camp.campFollowers);
-    eachMinuteCount(5);
+    advanceMinutes(5);
 }
 
 public function siegweirdAdvancedStudy_1_choose():void {
@@ -414,7 +414,7 @@ public function siegweirdAdvancedStudy_1(usePearl:Boolean):void {
 	}
     player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
     doNext(camp.campFollowers);
-    eachMinuteCount(5);
+    advanceMinutes(5);
 }
 
 //Holy symbol
@@ -428,7 +428,7 @@ public function siegweirdAdvancedStudy_2():void {
     player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
     player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
     doNext(camp.campFollowers);
-    eachMinuteCount(5);
+    advanceMinutes(5);
 }
 
 //Alvina reward
@@ -446,7 +446,7 @@ public function siegweirdAdvancedStudy_3():void {
     outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");
     player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
     inventory.takeItem(consumables.MET_SHO, camp.campFollowers);
-    eachMinuteCount(5);
+    advanceMinutes(5);
 }
 
 	}

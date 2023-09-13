@@ -2,21 +2,21 @@
  * ...
  * @author Ormael, Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	
+
 	public class NeisaFollower extends NPCAwareContent implements TimeAwareInterface
 	{
-		
-		public function NeisaFollower() 
+
+		public function NeisaFollower()
 		{
 			EventParser.timeAwareClassAdd(this);
 		}//between 6 and 15 she get her counter go up by 1 each night and if it hit 15 she leave at the morning xD
 		//neisa follower flag: 1-3 - first exploring river dungeon, 4 i 5 - after first exploring, 6 - left camp due to not paid weekly paycheck (to make her return to camp req. to pay her that mercenary fee with all costs for delay so 10 days of fee not 7 - also her affection should drop to 0/pretty low after leaving camp due to not paid weekly paycheck),
 		//7 to 16 - hired and staying in camp (7 to 13 - with PC having not yet paid her weekly paycheck - up to 3 days after deadline stays this way, 14 to 16 - when she's paid in time), 18 - after her affection rise high enough and she move from mercenary to camp member
-	
+
 //Implementation of TimeAwareInterface
 public function timeChange():Boolean
 {
@@ -111,7 +111,7 @@ public function neisaMorningPaycheckCall():void {
 			outputText("\"<i>Heh, I don't mind if you are paying late, mistakes happen. Just make sure you got my pay for tomorrow as well as the missing spirit stones of today.</i>\"\n\n");
 		}
 	}
-	eachMinuteCount(5);
+	advanceMinutes(5);
 	doNext(playerMenu);
 }
 
@@ -236,7 +236,7 @@ public function neisaHenchmanOption():void {
 		addButtonDisabled(6, "Team (2)", "Req. Intermediate Leadership.");
 	}
 	addButton(14, "Back", neisaCampMenu);
-	
+
 }
 public function neisaHenchmanOption2(slot:Number = 1):void {
 	clearOutput();

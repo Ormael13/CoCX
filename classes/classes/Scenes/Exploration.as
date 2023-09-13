@@ -328,12 +328,10 @@ public class Exploration extends BaseContent implements SaveableState
 				doNext(tryDiscover);
 				return;
 			} else if (SceneLib.exploration.counters.explore > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.\n");
-
 			if (flags[kFLAGS.EXPLORE_MENU_STYLE] == 1) {
 				oldExploreMenu();
 				return;
 			}
-			
 			hideMenus();
 			menu();
 			var bd:ButtonDataList = new ButtonDataList();
@@ -890,7 +888,7 @@ public class Exploration extends BaseContent implements SaveableState
 				startCombat(new ProjectFlameSpreader());
 			}
 			function ultimisEcounter():void {
-				outputText("You and your dragoness lover travel through [place], stopping for a moment. The air smells vaguely of sulphur...and it’s getting stronger. Casting your gaze skyward, you see a massive form, bright red, flying low to the ground...and heading right towards you. You barely have any time at all to react, but you manage to leap to the side, narrowly dodging a veritable pillar of flame. Kiha roars her rage, taking to the sky, but as she does, no less than five Flamespreaders fly in, forcing her to evade their deadly spears. Kiha looks back at you for a moment, before banking away, taking all five of the fakers with her.");
+				outputText("You and your dragoness lover travel through area, stopping for a moment. The air smells vaguely of sulphur...and it’s getting stronger. Casting your gaze skyward, you see a massive form, bright red, flying low to the ground...and heading right towards you. You barely have any time at all to react, but you manage to leap to the side, narrowly dodging a veritable pillar of flame. Kiha roars her rage, taking to the sky, but as she does, no less than five Flamespreaders fly in, forcing her to evade their deadly spears. Kiha looks back at you for a moment, before banking away, taking all five of the fakers with her.");
 				if (silly()) outputText("[pg]Having seen plenty of Kiha’s ass, child-bearing hips and bountiful breasts, you conclude that they’re not even good enough to be Kiha’s fakes! You just hope she doesn’t eat those words.");
 				outputText("[pg]“<b>You are now fighting the Ultimis Flamespreader.</b>”");
 				startCombat(new UltimisFlamespreader());
@@ -1183,6 +1181,15 @@ public class Exploration extends BaseContent implements SaveableState
 						call  : SceneLib.helScene.helSexualAmbush,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
+						name  : "NPC (New)",
+						kind  : "npc",
+						unique: true,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.ALVINA_FOLLOWER] < 1
+						},
+						call  : SceneLib.alvinaFollower.alvinaFirstEncounter
+					}, {
 						name  : "HeXinDao",
 						kind  : "place",
 						unique: true,
@@ -1315,11 +1322,6 @@ public class Exploration extends BaseContent implements SaveableState
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
-			if (SceneLib.exploration.counters.explore <= 0) {
-				SceneLib.exploration.counters.explore++;
-				SceneLib.alvinaFollower.alvinaFirstEncounter();
-				return;
-			}
 			explorer.prepareArea(_explorationEncounters);
 			explorer.setTags("explore");
 			explorer.onEncounter = function(e:ExplorationEntry):void {

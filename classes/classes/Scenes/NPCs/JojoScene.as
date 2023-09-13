@@ -22,7 +22,7 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 	public static const JOJO_NOSEX_2:int      = -2;
 	// Jojo agreed to sex
 	public static const JOJO_SEXED:int        = -3;
-	
+
 
     public static var monk:Number = JOJO_NOT_MET;
 
@@ -1885,8 +1885,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("As you move away from the mouse, you step into a huge puddle of Jojo's creamy rodent cum and look back. You see that his dick, still trapped under his body and pointing behind the two of you, blasted long ropes of thick mouse spunk far into the depths of the forest.  Feeling beyond satisfied, you give your mouse slut a quick scratch behind the ear as he passes out – cum splattered and smiling.");
 			}
 			player.sexReward("no", "Dick");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
 
 //Bee on C. Jojo: Finished (Fenoxo) (Zedit)
@@ -1966,7 +1965,7 @@ public function lowCorruptionJojoEncounter():void
 		outputText("The blow does little more than leave you momentarily dazed but isn’t enough to knock you over.  You shake it off and ready your [weapon] as you assume a fighting stance.\n\n");
 	else // Was originally isNaga() only, but this will also cover Drider just as well
 		outputText("You recoil as you are struck, but the force of the blow does little more than leave you momentarily dazed. You assume a fighting stance, ready to defend yourself.\n\n");
-	
+
 	outputText("To your surprise you are greeted with the visage of a rather surprised mouse.\n\n");
 
 	outputText("\"<i>Oh... erm... I’m sorry.  You spooked me,</i>\" he says apologetically, rubbing the back of his neck in embarrassment.\n\n");
@@ -2111,8 +2110,7 @@ public function meditateInForest():void {
 				//get a small talisman if not have one
 				player.createKeyItem("Jojo's Talisman", 0, 0, 0, 0);
 			}
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 			return;
 		}
 		else
@@ -2121,13 +2119,10 @@ public function meditateInForest():void {
 	if (player.statusEffectv1(StatusEffects.JojoMeditationCount) % 5 == 0)
 	{
 		outputText("\n\nYou ponder and get an idea - the mouse could stay at your camp.  There's safety in numbers, and it would be easier for the two of you to get together for meditation sessions.  Do you want Jojo's company at camp?");
-		explorer.stopExploring();
-		doYesNo(jojoScene.acceptJojoIntoYourCamp, camp.returnToCampUseTwoHours);
-		return;
+		doYesNo(jojoScene.acceptJojoIntoYourCamp, curry(explorer.done,120));
 	} else {
 		outputText("\n\nHe bows his head sadly and dismisses you.");
-		explorer.stopExploring();
-		doNext(camp.returnToCampUseTwoHours);
+		endEncounter(120);
 	}
 }
 
@@ -2290,7 +2285,7 @@ private function TyrantiaEggQuestJoJo():void {
 	clearOutput();
 	outputText("You ask Jojo about his holy mantras and abilities, and if he could purify the unborn in such a way. You tell him about Tyrantia’s desire to have a family, and her guilt over her own corruption and how that’d affect a child.\n\n");
 	outputText("Jojo shakes his head, sending a ripple through his fur. \"<i>My methods draw upon a conscious desire to be free from taint and corruption.</i>\" He sits down. \"<i>I will meditate on your request, but I do not believe that I can help you.</i>\" You thank Jojo for his time and walk away, heavy-hearted.");
-	eachMinuteCount(15);
+	advanceMinutes(15);
 	doNext(talkMenu);
 }
 
@@ -2319,7 +2314,7 @@ public function jojoTalkVillage():void
 		outputText("Looks like Jojo’s childhood wasn’t so bad. A little sickly sweet and void of wet pussies and drooling dicks but not bad. You tell him you’re happy to have him near you and he smiles for ear to ear, ignorant of your thoughts.\n\n");
 	}
 	doNext(talkMenu); // Dunno where exactly to kick back to, fuck it, back to camp yo!
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //Joining the Monks convo
@@ -2335,7 +2330,7 @@ public function jojoTalkJoiningTheMonks():void
 	outputText("\"<i>The temple became very important to me.  I read about the world, I spoke to the clergy and I sat and thought.  I was enraptured with learning but I didn’t want to be a priest, I don’t know why... I guess it just didn’t appeal to me.  When I first saw the monks visiting the temple, it was like dawn breaking.  After that I waited until I was old enough to join and made the short pilgrimage to the Monastery of the Celestial Lotus.</i>\"\n\n");
 	outputText("Jojo wears this quiet little smile as he finishes.  Then he chuckles and says, \"<i>Thank you for the memories, [name].  I enjoy our talks.</i>\"\n\n");
 	doNext(talkMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //Fall of the Monks convo
@@ -2352,7 +2347,7 @@ public function jojoTalkFallOfTheMonks():void
 	outputText("You try to comfort Jojo, telling him he couldn’t have made a difference being but a single mouse, but he waves you off.  He tells you he is fine and thanks you for your concern.\n\n");
 	outputText("You can tell the story has affected him, but you’re surprised to hear the resolve in his voice and see the defiant strength in his eyes. Excusing yourself, you rise and leave him to do as he will.\n\n");
 	doNext(talkMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //Forest Convo
@@ -2398,7 +2393,7 @@ public function jojoTalkForestConvo():void
 	outputText("He gives you an appraising look before looking away, \"<i>Until I met you, [name], my only purpose had been to find the demons who destroyed my order and make them pay for the lives they took.  That is why I was in the forest, I was in the middle of a harsh training regimen to increase my power and skill so that I may seek out those evil brutes who took everything I loved away from me... but vengeance is not the way of the Celestial Lotus.  The Celestial doesn’t train bullies or assassins.  Finding you and aiding in your quest to protect your village from these demonic creatures of perversion gave me new purpose and would make my departed brothers and sisters proud.  I can’t honestly say I’ve given up on having my vengeance but... I will aid you in your quest first if for nothing more than to honor our friendship and honor the memory of the order and its teachings.</i>\n\n");
 	outputText("Looking renewed and at peace despite the emotional storm you know must be raging within his tiny frame Jojo returns to what he was doing after thanking you for giving him new purpose.\n\n");
 	doNext(talkMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //Yourself
@@ -2462,7 +2457,7 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	}
 	outputText("Jojo smiles now that he has gotten to know you a little better. After a little bit more small talk, the two of you decide the conversation is over and part ways.\n\n");
 	doNext(talkMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //Dungeon Convo: Factory
@@ -2486,7 +2481,7 @@ public function jojoTalkFactory():void
 	}
 	outputText("Once the two of you are done discussing the demonic factory Jojo excuses himself to think on what you’ve told him.\n\n");
 	doNext(talkMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //Dungeon Convo: Sand Cave
@@ -2575,7 +2570,7 @@ public function jojoTalkSandCave():void
 	}
 	outputText("Having concluded the conversation the two of you stand and Jojo gives you an appreciative pat on the shoulder, seeming more fond of you.\n\n");
 	doNext(talkMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 
 //Training

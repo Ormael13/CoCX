@@ -288,13 +288,16 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Rut - " + Math.round(player.statusEffectv3(StatusEffects.Rut)) + " hours remaining\n";
 
 		if (player.statusEffectv1(StatusEffects.BlessingOfDivineFera) > 0)
-			statEffects += "Blessing of Divine Agency - Fera: " + player.statusEffectv1(StatusEffects.BlessingOfDivineFera) + " hours remaining (Your lust resistance and corruption gains are empowered by 15% and 100% under the guidance of Fera)\n";
+			statEffects += "Blessing of Divine Agency - Fera: " + player.buff('FerasBlessing').getRemainingTicks() + " hours remaining (Your lust resistance and corruption gains are empowered by 15% and 100% under the guidance of Fera)\n";
 
 		if (player.statusEffectv1(StatusEffects.BlessingOfDivineMarae) > 0)
 			statEffects += "Blessing of Divine Agency - Marae: " + player.statusEffectv1(StatusEffects.BlessingOfDivineMarae) + " hours remaining (Your white magic is empowered by " + player.statusEffectv2(StatusEffects.BlessingOfDivineMarae)*100 + "% under the guidance of Marae)\n";
 
-		if (player.statusEffectv1(StatusEffects.BlessingOfDivineTaoth) > 0)
-			statEffects += "Blessing of Divine Agency - Taoth: " + player.statusEffectv1(StatusEffects.BlessingOfDivineTaoth) + " hours remaining (Your speed is empowered by ~10% under the guidance of Taoth)\n";
+		if (player.statStore.hasBuff("TaothBlessing"))
+			statEffects += "Blessing of Divine Agency - Taoth: " + player.buff('TaothBlessing').getRemainingTicks() + " days remaining (Your speed is empowered by ~10% under the guidance of Taoth)\n";
+
+		if (player.statStore.hasBuff("FenrirBlessing"))
+			statEffects += "Blessing of Divine Agency - Fenrir: " + player.buff('FenrirBlessing').getRemainingTicks() + " days remaining (Your strenght & toughness is empowered by ~10% under the guidance of Fenrir)\n";
 
 		if (player.statusEffectv1(StatusEffects.Luststick) > 0)
 			statEffects += "Luststick - " + Math.round(player.statusEffectv1(StatusEffects.Luststick)) + " hours remaining\n";

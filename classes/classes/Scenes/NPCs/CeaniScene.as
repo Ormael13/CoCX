@@ -72,8 +72,7 @@ public function basicarcherytraining2():void
 		outputText("Ceani pulls you in, kiss your cheek and walk away, swiftly jumping back into the sea. What a thoughtful gift.\n\n");
 		flags[kFLAGS.CEANI_ARCHERY_TRAINING] = 4;
 		bowSkill(10);
-		explorer.stopExploring();
-		inventory.takeItem(weaponsrange.SHUNHAR, camp.returnToCampUseTwoHours);
+		inventory.takeItem(weaponsrange.SHUNHAR, curry(explorer.done,120));
 	}
 	else if ((flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 2 || flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 3)) {
 		outputText("You seek out Ceani and ask her if she could resume your training. Both of you head to the training ground. Once there, she helps you to position yourself properly and show you how to throw the javelins. You do so for a few hours, moving to recover your weapon every few shots. ");
@@ -85,8 +84,7 @@ public function basicarcherytraining2():void
 		if (flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 2) flags[kFLAGS.CEANI_ARCHERY_TRAINING] = 3;
 		flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
 		bowSkill(10);
-		explorer.stopExploring();
-		doNext(camp.returnToCampUseTwoHours);
+		endEncounter(120);
 	}
 	else {
 		outputText("You seek out Ceani and ask her if she could train you in the use of ranged weapons.\n\n");
@@ -104,8 +102,7 @@ public function basicarcherytraining2():void
 			player.createStatusEffect(StatusEffects.Kelt, 10, 0, 0, 0);
 		}
 		else bowSkill(10);
-		explorer.stopExploring();
-		inventory.takeItem(weaponsrange.TRJAVEL, camp.returnToCampUseTwoHours);
+		inventory.takeItem(weaponsrange.TRJAVEL, curry(explorer.done,120));
 	}
 }
 
@@ -137,8 +134,7 @@ public function beachInteractionsAfterArcheryTraining():void
 			outputText("\"<i>Well, better luck next time champ. Still, how about we share a meal? There is more than enough for both of us.</i>\"\n\n");
 			outputText("You eat with Ceani, sharing stories of your recent adventures. After the dinner is over you head back to camp.\n\n");
 			player.refillHunger(25);
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
 	}
 	else if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
@@ -416,8 +412,7 @@ public function underwaterDateMaleVer():void
 	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
 	outputText("\n\n");
 	player.sexReward("vaginalFluids","Dick");
-	explorer.stopExploring();
-	doNext(camp.returnToCampUseTwoHours);
+	endEncounter(120);
 }
 
 public function underwaterDateFemaleVer():void
@@ -441,8 +436,7 @@ public function underwaterDateFemaleVer():void
 		player.sexReward("vaginalFluids");
 		ceaniAffection(6);
 	}
-	explorer.stopExploring();
-	doNext(camp.returnToCampUseTwoHours);
+	endEncounter(120);
 }
 
 public function beachInteractionsDateOnTheBeach0():void
@@ -533,8 +527,7 @@ public function beachDateMaleVer():void {
 	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
 	outputText("\n\n");
 	player.sexReward("vaginalFluids","Dick");
-	explorer.stopExploring();
-	doNext(camp.returnToCampUseTwoHours);
+	endEncounter(120);
 }
 
 public function beachDateFemaleVer():void {
@@ -561,8 +554,7 @@ public function beachDateFemaleVer():void {
 		ceaniAffection(6);
 	}
 	player.sexReward("vaginalFluids", "Lips");
-	explorer.stopExploring();
-	doNext(camp.returnToCampUseTwoHours);
+	endEncounter(120);
 }
 
 public function come2campCeani():void

@@ -84,9 +84,11 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 		}
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
+			var smth:Number = 3;
+			if (flags[kFLAGS.FOUND_WIZARD_STAFF] > 0) smth += 2;
 			_extra = (1 + rand(3));
 			if (rand(2) == 0) _roulette1 = rand(4);
-			if (rand(2) == 0) _roulette2 = rand(3);
+			if (rand(2) == 0) _roulette2 = rand(smth);//3-5
 			if (rand(2) == 0) _roulette3 = rand(6);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {// && !flags[kFLAGS.DINAH_ATTACKED_TODAY]
@@ -277,6 +279,8 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (_roulette2 == 0) addButtonDisabled(2, "???", "Dud. Shame, shame.");
 			if (_roulette2 == 1) addButton(2, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
 			if (_roulette2 == 2) addButton(2, "InferMouseR", buyItem5, 46).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+			if (_roulette2 == 3) addButton(2, "BestBlaAr", buyItem5, 47).hint("Bestial Blademaster armor - .");
+			if (_roulette2 == 4) addButton(2, "BestBlaAc", buyItem5, 48).hint("Bestial Blademaster accoutrements - .");
 			if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
 			if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
 			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
@@ -319,6 +323,8 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (item == 42) catChimeraBuy5(weapons.UDKDEST);
 			if (item == 45) catChimeraBuy5(jewelries.FLLIRNG);
 			if (item == 46) catChimeraBuy5(jewelries.INMORNG);
+			if (item == 47) catChimeraBuy5(armors.BESTBLA);
+			if (item == 48) catChimeraBuy5(headjewelries.BESTBLAA);
 			if (item == 50) catChimeraBuy5(headjewelries.HBHELM);
 			if (item == 51) catChimeraBuy5(armors.HBARMOR);
 			if (item == 52) catChimeraBuy5(undergarments.HBSHIRT);

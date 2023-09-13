@@ -16,14 +16,14 @@ import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
-	
+
 	public class Caves extends BaseContent
 	{
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		public var cavewyrmScene:CaveWyrmScene = new CaveWyrmScene();
 		public var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
 		public var darkslimeScene:DarkSlimeScene = new DarkSlimeScene();
-		
+
 		public function Caves() {
 			onGameInit(init);
 		}
@@ -164,7 +164,7 @@ use namespace CoC;
 				call: curry(SceneLib.exploration.demonLabProjectEncounters, 1)
 			})
 		}
-		
+
 		public const areaLevel:int = 30;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.caves > 0;
@@ -180,11 +180,10 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
 			outputText("<b>You've discovered the Caves!</b>");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
-		
-		
+
+
 		public function exploreCaves():void {
 			explorer.prepareArea(cavesEncounter);
 			explorer.setTags("caves");
@@ -296,20 +295,19 @@ use namespace CoC;
 		}
 
 		private function findGem():void {
-			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
-					inventory.takeItem(useables.AMEGEM, camp.returnToCampUseTwoHours);
+					inventory.takeItem(useables.AMEGEM, curry(explorer.done,120));
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Amethysts you ended with unusable piece.");
-					doNext(camp.returnToCampUseTwoHours);
+					endEncounter(120);
 				}
 			}
 			else {
 				outputText(" Your mining skill is too low to find any Amethysts.");
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
 

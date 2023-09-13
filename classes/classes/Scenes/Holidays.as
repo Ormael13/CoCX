@@ -848,8 +848,7 @@ public class Holidays extends BaseContent {
         function noThanksTurkeyGal():void {
             clearOutput();
             outputText("You reluctantly push her away.  You've no need to ram your dick down some new monstrosity's gullet.  The girl forlornly gobbles one last time, then prances off into the fading evening light, globular ass jiggling.");
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //Baste Her -McGirt, reluctantly
@@ -924,8 +923,7 @@ public class Holidays extends BaseContent {
                 player.createPerk(PerkLib.PilgrimsBounty, 0, 0, 0, 0);
                 outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
             }
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //Let her Approach:
@@ -1003,8 +1001,7 @@ public class Holidays extends BaseContent {
             //HP set to full, fatigue to 0?
             fatigue(-100);
             HPChange(3000, false);
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //Turkey Girl II: Return of the Cockgobbler (Cockwielders)
@@ -1153,8 +1150,7 @@ public class Holidays extends BaseContent {
                 + "\n\n\"<i>Gobble,</i>\" you agree, wrapping the giddy turkey up in your arms and planting one last kiss on her big ol' boob.  She stares sedately at you with big, blue eyes, a cute little smile on her lips as you withdraw from her, wiping the last of your spunk on her feathery thigh.  Running your hand through the turkey-girl’s hair, you whisper what a good little cockgobbler she is.  However, you soon find that the poor thing’s passed out, your rut finally over with.  Still, she's left you with a nice soft tit-pillow to lay your head down upon as you pick up the lunch you’d been preparing to eat before the eager slut arrived."
                 + "\n\n\"<i>That’ll do, turkey,</i>\" you say, patting her jiggling tit and scraping some of the excess gravy out of your lunch.  \"<i>That’ll do.</i>\"");
             player.orgasm();
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
     }
 
@@ -1352,8 +1348,7 @@ public class Holidays extends BaseContent {
             outputText("\n\nYou sigh");
             if (changed) outputText(", feeling your body expand as you waddle out back towards camp with belly full of sweet syrup");
             outputText(". For only one gem, that was a pretty good time...");
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
     }
 
@@ -1439,8 +1434,7 @@ public class Holidays extends BaseContent {
             //With no other things to do, you go back to camp to rest.
             //{Small Lust Increase, return to camp, go to sleep}
             player.dynStats("lus", 10, "scale", false);
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //([Scylla])
@@ -1496,8 +1490,7 @@ public class Holidays extends BaseContent {
                 outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
                 player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
             }
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //[Make out]
@@ -1547,8 +1540,7 @@ public class Holidays extends BaseContent {
                 outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
                 player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
             }
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //[Feed Her!]
@@ -1562,8 +1554,7 @@ public class Holidays extends BaseContent {
                 outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
                 player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
             }
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
 
@@ -1632,8 +1623,7 @@ public class Holidays extends BaseContent {
 
             player.orgasm();
             player.dynStats("sen", -3);
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //{PLEASURE HER}
@@ -1661,8 +1651,7 @@ public class Holidays extends BaseContent {
             }
 
             player.dynStats("lus", 80, "scale", false);
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //([Pastie])
@@ -1681,8 +1670,7 @@ public class Holidays extends BaseContent {
                 if (player.hasVagina()) addButton(3, "Pussy", pastieValentineIntro, "vag");
             } else {
                 outputText("\n\nYou tell Pastie that, regrettably, you only have what she sees.  She nods and says, \"<i>Too bad.  I think I'll better get going, then.  It's been somewhat fun, and I finally get a chance to go to sleep sober and wake up without a hangover.\"</i>");
-                explorer.stopExploring();
-                doNext(SceneLib.camp.returnToCampUseTwoHours);
+                endEncounter(120);
             }
         }
 
@@ -1784,8 +1772,7 @@ public class Holidays extends BaseContent {
             }
             player.orgasm();
             player.dynStats("sen", -2);
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //[RubDick]
@@ -1817,8 +1804,7 @@ public class Holidays extends BaseContent {
             }
             player.orgasm();
             player.dynStats("sen", -2);
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
 
         //[Pussy Dive]
@@ -1849,8 +1835,7 @@ public class Holidays extends BaseContent {
 
             player.orgasm();
             player.dynStats("sen", -2);
-            explorer.stopExploring();
-            doNext(SceneLib.camp.returnToCampUseTwoHours);
+            endEncounter(120);
         }
     }
 

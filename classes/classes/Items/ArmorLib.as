@@ -60,11 +60,12 @@ public final class ArmorLib extends ItemConstants
 		public const B_CHANG:Armor = new Armor("B.Chang","BlueChangshan","Blue Lunar new year dress (m)","a Blue Lunar new year dress (m)",0,0,100,"A simple yet elegant blue changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
 		public const B_QIPAO:Armor = new Armor("B.Qipao","BlueQipao","Blue Lunar new year dress (f)","a Blue Lunar new year dress (f)",0,0,100,"A simple yet elegant blue qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
-		public const BEEARMR:Armor = new BeeArmor();
+		public const BEEARMR:BeeArmor = new BeeArmor();
 		public const BERA:Armor = new Armor("B.Armor","B.Armor","berserker armor","a berserker armor",12,0,30720,"A sturdy albeith skimpy armor made of leather and metal plates tied up to the body with straps. While it offers limited protections it also does not hinder the movement of its owner allowing for greater agility then most armors.","Medium")
 				.withBuffs({'teasedmg':8})
 				.withPerk(PerkLib.BerserkerArmor, 0, 0, 0, 0)
 				.withTag(ItemTags.A_AGILE) as Armor;
+		public const BESTBLA:BestialBlademasterArmor = new BestialBlademasterArmor();
 		public const BIMBOSK:Armor = new Armor("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light", false, false)
 				.withBuffs({'teasedmg': 10})
 				.withTag(ItemTags.A_REVEALING) as Armor;

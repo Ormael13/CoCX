@@ -11,22 +11,22 @@ public class MutagenPillCrafting extends AbstractPillCraftingContent {
 	public function get furnaceLevel():int {
 		return Crafting.furnaceLevel;
 	}
-	
+
 	public function MutagenPillCrafting() {
 	}
-	
+
 	// Runtime state variables - not saved, must be cleared when you leave the scene
 	private var furnaceSubstance:int = AlchemyLib.AE_NONE;
 	private var furnaceEssence:int   = AlchemyLib.AS_NONE;
-	
+
 	public override function craftingMenu():void {
 		clearOutput();
-		
+
 		outputText("<b>Tool quality</b>: " + furnaceName());
 		outputText("\n<b>Substance</b>: " + (furnaceSubstance ? AlchemyLib.Substances[furnaceSubstance].name : "<i>none</i>"));
 		outputText("\n<b>Essence</b>: " + (furnaceEssence ? AlchemyLib.Essences[furnaceEssence].name : "<i>none</i>"));
 		printStonesInFurnace();
-		
+
 		outputText("\n<b>Skill</b>: " + player.alchemySkillLevel);
 		outputText("\n<b>Result</b>: ");
 		if (debug || crafting.isTfPillKnown(furnaceSubstance, furnaceEssence)) {
@@ -40,7 +40,7 @@ public class MutagenPillCrafting extends AbstractPillCraftingContent {
 			outputText("???")
 		}
 		printRefinementChances();
-		
+
 		// [ Refine!] [Substanc] [Essence ] [        ] [        ]
 		// [Add SS  ] [Take SS ] [        ] [        ] [        ]
 		// [        ] [        ] [        ] [ Clean  ] [ Back   ]
@@ -67,13 +67,13 @@ public class MutagenPillCrafting extends AbstractPillCraftingContent {
 		craftingMenu();
 	}
 	private function selectEssence(i:int):void {
-		if (furnaceEssence) crafting.addSubstance(furnaceEssence);
+		if (furnaceEssence) crafting.addEssence(furnaceEssence);
 		furnaceEssence = i;
 		craftingMenu();
 	}
 	private function doRefinePill():void {
 		clearOutput();
-		
+
 		outputText("The soulforce-powered furnace roars and dissolves the ingredients into tiny particles. They circle in complicated orbits, intertwine and recombine in seemingly chaotic ways until forming a turbulent cloud. ");
 		if (furnaceStones > 0) {
 			outputText("The " + (furnaceStones > 1 ? "spirit stones" : "spirit stone") + " crumble and release the soulforce, fueling the process and empowering the mixture. ");
@@ -144,6 +144,6 @@ public class MutagenPillCrafting extends AbstractPillCraftingContent {
 		}
 		super.cleanTheFurnace();
 	}
-	
+
 }
 }

@@ -114,11 +114,11 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                     outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n");
                     if (player.lib + player.cor > 80) {
                         outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?");
-                        simpleChoices("Boob", grabHerBoob, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-                    } else doNext(camp.returnToCampUseOneHour);
+                        simpleChoices("Boob", grabHerBoob, "", null, "", null, "", null, "Leave", explorer.done);
+                    } else endEncounter();
                     return;
                 }
-                doNext(camp.returnToCampUseOneHour);
+                endEncounter();
             }
             //Second meeting
             else {
@@ -126,12 +126,12 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 if (player.cor > 66 + player.corruptionTolerance) {
                     outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
                     if (player.level >= 130) outputText(" Of course, you could probably try to overthrow her.");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
                 } else {
                     //If youve taken her quest already
                     if (flags[kFLAGS.MARAE_QUEST_START] >= 1) {
                         outputText("Marae reminds you, \"<i>You need to disable the demonic factory!  It's located in the foothills of the mountain.  Please, I do not know how long I can resist.</i>\"");
-                        doNext(camp.returnToCampUseOneHour);
+                        endEncounter();
                     }
                     //If not
                     else {
@@ -149,8 +149,8 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                         outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n");
                         if (player.lib + player.cor > 80) {
                             outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?");
-                            simpleChoices("Boob", grabHerBoob, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-                        } else doNext(camp.returnToCampUseOneHour);
+                            simpleChoices("Boob", grabHerBoob, "", null, "", null, "", null, "Leave", explorer.done);
+                        } else endEncounter();
                     }
                 }
             }
@@ -163,7 +163,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 outputText("\"<i>Thank you,</i>\" she says, breaking the hug and turning back to her tree, \"<i>The onslaught has lessened, and I feel more myself already.  Let me thank you for your heroic deeds.</i>\"\n\n");
                 outputText("She plunges a hand inside the tree and pulls out a small pearl.  \"<i>This is a pearl from the very depths of the lake, infused with my purity.  If you eat it, it will grant you my aid in resisting the lust and corruption of this land.</i>\"\n\n");
                 outputText("Marae pushes the pearl into your hand, and closes your fingers over it gently.  \"<i>Go now, there is still much to be done.  With luck, we will not need each other again but I will leave something in your camp for you to remember about your good deed,</i>\" commands the goddess as she slips back into her tree.  ");
-                inventory.takeItem(consumables.P_PEARL, camp.returnToCampUseOneHour);
+                inventory.takeItem(consumables.P_PEARL, explorer.done);
                 flags[kFLAGS.MARAE_QUEST_COMPLETE] = 1;
             }
             //Corrupt!
@@ -241,7 +241,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     private function alraunezeMeNo():void {
         clearOutput();
         outputText("\n\nYou politely decline, telling her that you only wanted to pay a visit. Still, it is a tempting offer, one you will consider while you head back to camp. Such decisions are not to be taken in the heat of the moment. You tell her as much, which she accepts with a smile and a nod.");
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     private function alraunezeMeYes():void {
@@ -318,7 +318,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         player.vaginaType(VaginaClass.ALRAUNE);
 		Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.ALRAUNE));
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
-        doNext(camp.returnToCampUseTwoHours);
+        explorer.done(120);
     }
 
     //Prompts
@@ -337,7 +337,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
     private function promptFightMarae3():void {
         clearOutput();
         outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.");
-        doYesNo(initiateFightMarae, camp.returnToCampUseOneHour);
+        doYesNo(initiateFightMarae, explorer.done);
     }
 
     //FIGHT!
@@ -392,7 +392,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
             flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
             cleanupAfterCombat();
-            inventory.takeItem(useables.TBAPLAT, camp.returnToCampUseOneHour);
+            inventory.takeItem(useables.TBAPLAT, explorer.done);
         } else {
             if (monster.HP <= 0) outputText("Marae reels back from the incredible amount of damage you've dealt to her.");
             else outputText("Marae clearly shows signs of her overwhelming arousal and reels back.");
@@ -402,7 +402,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
             flags[kFLAGS.PURE_MARAE_ENDGAME] = 2;
             cleanupAfterCombat();
-            inventory.takeItem(useables.DBAPLAT, camp.returnToCampUseOneHour);
+            inventory.takeItem(useables.DBAPLAT, explorer.done);
         }
     }
 
@@ -445,7 +445,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.");
             outputText("\n<b>(Key Item Acquired: Marae's Lethicite!)</b>");
             if (!recalling) player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-            doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+            doNext(recalling ? recallWakeUp : explorer.done);
         }
         //(FAIL)
         else {
@@ -494,7 +494,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                     player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
                     player.sexReward("no", "Dick");
 					if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
-                    doNext(camp.returnToCampUseTwoHours);
+                    explorer.done(120);
                 } else doNext(recallWakeUp);
             }
 
@@ -518,7 +518,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                     }
                     player.sexReward("no", "Vaginal");
 					if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
-                    doNext(camp.returnToCampUseOneHour);
+                    endEncounter();
                 } else doNext(recallWakeUp);
             }
         }
@@ -839,14 +839,14 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 }
             }
         }
-        doNext(recalling ? recallWakeUp : camp.returnToCampUseTwoHours);
+        doNext(recalling ? recallWakeUp : curry(explorer.done,120));
     }
 
     private function MaraeIIFlyAway():void {
         spriteSelect(SpriteDb.s_marae);
         clearOutput();
         outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!");
-        doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+        doNext(recalling ? recallWakeUp : explorer.done);
     }
 
     //Only procs when you have both perks. Rare.
@@ -857,20 +857,20 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         menu();
         addButton(0, "Fight Her", promptFightMarae3).hint("Fight Marae the corrupted goddess!");
         addButton(1, "Stay With Her", maraeBadEnd).hint("Stay with Marae and end your adventures?");
-        addButton(4, "Leave", camp.returnToCampUseOneHour);
+        addButton(4, "Leave", explorer.done);
     }
 
     private function grabHerBoob():void {
         clearOutput();
         outputText("You reach forward to cop a feel. The goddess' eyes go wide with fury as a massive branch swings down, catching you in the sternum. It hits you hard enough that you land in your boat and float back a few feet into the water. Nothing to do but leave and hope for another chance at her breasts...");
         player.takePhysDamage(player.HP - 1);
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     private function runFromPervertedGoddess():void {
         clearOutput();
         outputText("You turn and run for the boat, leaving the corrupt goddess behind. High-pitched laugher seems to chase you as you row away from the island.");
-        doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+        doNext(recalling ? recallWakeUp : explorer.done);
     }
 
     public function talkToMaraeAboutMinervaPurification():void {
@@ -890,7 +890,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         player.createKeyItem("Marae's Seed", 0, 0, 0, 0);
         flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 3;
         flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] = 2;
-        doNext(camp.returnToCampUseOneHour);
+        endEncounter();
     }
 
     public function encounterPureMaraeEndgame():void {
@@ -907,7 +907,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         flags[kFLAGS.PURE_MARAE_ENDGAME] = 1;
         menu();
         addButton(0, "Bring it on!", initiateFightMarae).hint("Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 60+");
-        addButton(1, "Not yet!", camp.returnToCampUseOneHour);
+        addButton(1, "Not yet!", explorer.done);
     }
 }
 }

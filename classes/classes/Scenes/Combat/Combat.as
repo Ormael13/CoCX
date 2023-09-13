@@ -8287,6 +8287,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
+        if (player.hasPerk(PerkLib.InfernalRage)) damage *= (1 + (player.wrath100 * 0.01));
         if (player.shieldName == "Nekonomicon") damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -13445,6 +13446,7 @@ public function ScyllaSqueeze():void {
     if (monster.plural) damage *= 5;
     if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
     if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
+	if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 2 && player.isKraken()) damage *= player.perkv1(IMutationsLib.ScyllaInkGlandsIM);
     if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
     //Squeeze -
     outputText("You start squeezing your");

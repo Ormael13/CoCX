@@ -198,6 +198,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const BIOLUMINESCENCE:int = _partid++;
+		EnumValue.add(Memories, BIOLUMINESCENCE, "BIOLUMINESCENCE", {
+			id: "Bioluminescent Patterns",
+			name: "Bioluminescent Patterns",
+			cost: 100,
+			title: "Bioluminescence",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.SkinPatternBioluminescence
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

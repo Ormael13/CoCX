@@ -80,7 +80,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     public var bossTracker:int  = 0;
     //containts the references... right?
     private var bossPool:Array;
-    
+
     public function EbonLabyrinth() {
         //init boss arrays.
         bossPool = [];
@@ -162,7 +162,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         outputText("<b>Are you sure about that?</b>");
         doYesNo(exitDungeon, playerMenu);
     }
-		
+
     //Player menu. Doesn't start any encounters.
     //Can print stuff is called with 'true' and new direction.
     public function roomStatic(move:Boolean = false, newDir:int = DIR_DOWN):void {
@@ -198,14 +198,14 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         //unique buttons
         if (fountainRoom) addButton(10, "Fountain", encountersUpgradeFountain, true);
     }
-	
+
     //Navigation function. Increments the counter and checks the encounters.
     public function navigateToRoomEL(newDir:int):void {
         //clear room-specific
         fountainRoom = false;
         //move
         ++room;
-        eachMinuteCount(15);
+        advanceMinutes(15);
         //modify enemy level
         if (newDir == DIR_DOWN)
             ++depth;
@@ -263,7 +263,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     public function doSleepEL():void {
         clearOutput();
         if (rand(2) == 0) {
-            eachMinuteCount(15);
+            advanceMinutes(15);
             outputText("You ready your bedroll and go to sleep, keen on continuing your exploration tomorrow. Sadly as you prepare to lay down, a creature from the labyrinth stumbles upon your makeshift camp and you are forced to defend yourself.\n");
             enemySelector(false);
             return;
@@ -334,7 +334,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         addButton(0, "Dip Item", CelessScene.itemImproveMenu, 1, fountainCorrupt);
         addButton(4, "Back", playerMenu);
     }
-	
+
     private function encountersFountainOfPurity():void {
         player.addStatusValue(StatusEffects.RathazulAprilFool, 3, 1);
         clearOutput();
@@ -383,13 +383,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         var choices:Array = [displacerEL, darkSlimeEL, succubusEL, incubusEL, amogusEL, tentabeastEL, minotaurEL, mindbreakerEL];
         choices[rand(choices.length)](print);
     }
-    
+
     //==================================================================================================
     //Random enemy attacks (one-liners, not worth moving into classes)
     //==================================================================================================
-    
+
     private function displacerEL(print:Boolean = true):void {
-        
+
         if (print) {
             clearOutput();
             outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.");
@@ -469,7 +469,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     //==================================================================================================
     //Shit
     //==================================================================================================
-	
+
     //rework this to SceneLib, please
     public function defeatedByStrayDemon():void {
         clearOutput();//succubus, incibus or omnibus

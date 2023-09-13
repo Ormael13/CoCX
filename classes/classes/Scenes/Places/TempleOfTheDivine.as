@@ -205,7 +205,6 @@ public class TempleOfTheDivine extends BaseContent {
 			outputText("You pray to the trickster patron Taoth. As you word out your prayer, suggestions of pranks flow into your mind, both playful and troublemaking, as you feel the laughter of the god cheer you up, healing your wounds and washing away corrupt thoughts. You also feel the blessing of the deity empowering your agility.\n");
 			loseBlessing("Taoth");
 			outputText("<b>You gained the Blessing of Divine Agency - Taoth for 7 days</b>");
-			player.createStatusEffect(StatusEffects.BlessingOfDivineTaoth, 169, 0, 0, 0);
 			mainView.statsView.showStatUp('spe');
 			player.statStore.replaceBuffObject({ 'spe.mult': 0.1 }, 'TaothBlessing', {
 				text: 'Taoth Blessing',

@@ -269,7 +269,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 0) EvangelineTalks = 1;
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 private function TalkDemons():void {
 	clearOutput();
@@ -281,7 +281,7 @@ private function TalkDemons():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 1) EvangelineTalks = 2;
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 private function TalkPastLife1():void {
 	clearOutput();
@@ -297,7 +297,7 @@ private function TalkPastLife1():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 2) EvangelineTalks = 3;
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 private function TalkYourFather():void {
 	clearOutput();
@@ -312,7 +312,7 @@ private function TalkYourFather():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 3) EvangelineTalks = 4;
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }/*
 private function TalkPastLife2():void {
 	clearOutput();
@@ -321,7 +321,7 @@ private function TalkPastLife2():void {
 	evangelineAffection(1);zajmie miejsce PastTalk1 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceTimeNoEvents(15);
 }
 private function TalkPastLife3():void {
 	clearOutput();
@@ -329,7 +329,7 @@ private function TalkPastLife3():void {
 	evangelineAffection(1);zajmie miejsce PastTalk2 w menu
 	if (EvangelineTalks == 0) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceTimeNoEvents(15);
 }
 private function TalkYourEyes():void {
 	clearOutput();
@@ -337,7 +337,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 4) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceTimeNoEvents(15);
 }
 private function TalkYourEyes():void {
 	clearOutput();
@@ -345,7 +345,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 5) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceTimeNoEvents(15);
 }
 private function TalkYourEyes():void {
 	clearOutput();
@@ -353,7 +353,7 @@ private function TalkYourEyes():void {
 	evangelineAffection(1);
 	if (EvangelineTalks == 6) EvangelineTalks += 1;//ustalić na jakiej wartości flagi bedzie sie pokazywać
 	doNext(evangelineTalkMenu);
-	eachMinuteCount(15);
+	advanceTimeNoEvents(15);
 }
 */
 private function evangelineSexMenu():void {
@@ -808,7 +808,7 @@ private function MakingWhiteAbyssalInkPotion():void {
 		inventory.tryAddMultipleItemsToPlayer(useables.D_E_ICHOR, 10);
 		doNext(ingredientsMenu);
 	}
-	
+
 private function LvLUp():void {
 	clearOutput();
 	outputText("\"<i>So [name] how much gems will you give me this time for my recovery or new experiments?</i>\" Asks Evangeline waiting for your decision.");
@@ -820,8 +820,8 @@ private function LvLUp():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 1 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2 && EvangelineGemsPurse >= 450) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && EvangelineGemsPurse >= 800) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineGemsPurse >= 800 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && EvangelineGemsPurse >= 800 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && EvangelineGemsPurse >= 1250) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && EvangelineGemsPurse >= 400) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
 	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && EvangelineGemsPurse >= 150) addButton(5, "Just Do It!", JustDoIt).hint("JUST DO IT!");
@@ -965,7 +965,7 @@ private function curingWendigo():void {
 		outputText("\"<i>Look, I will need five pure peaches and five purity philters to fix this up, how you get the two is up to you.</i>\"\n\n");
 		player.addPerkValue(PerkLib.WendigoCurse, 1, 1);
 		doNext(camp.campFollowers);
-		eachMinuteCount(15);
+		advanceMinutes(15);
 	}
 }
 
@@ -1050,7 +1050,7 @@ private function curingJiangshi():void {
 		outputText("\"<i>Look, I will need five vitality tinctures and five purity philters to fix this up, how you get the two is up to you.</i>\"\n\n");
 		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
 		doNext(camp.campFollowers);
-		eachMinuteCount(15);
+		advanceMinutes(15);
 	}
 }
 
@@ -1221,7 +1221,7 @@ private function IMutationsSelector(page:int = 0):void {
 		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
 		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
 		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your organ as it slowly changes to acquire new inhuman property. The transformation was successful.");
-		eachMinuteCount(15);
+		advanceMinutes(15);
 		doNext(InternalMutations);
 	}
 }

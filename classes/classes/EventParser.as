@@ -130,7 +130,8 @@ public class EventParser {
     private static function goNextWrapped(needNext:Boolean):Boolean {
         var player:Player = CoC.instance.player;
         //clearOutput();
-        if (timeAwareLargeLastEntry >= 0 && !DungeonAbstractContent.inDungeon) { //Finish calling timeChangeLarge before advancing the hour again
+        if (timeAwareLargeLastEntry >= 0 && (!DungeonAbstractContent.inDungeon && !SceneLib.explorationEngine.isActive)) {
+            //Finish calling timeChangeLarge before advancing the hour again
             for (; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
                 var item:TimeAwareInterface = _timeAwareClassList[timeAwareLargeLastEntry];
                 var classname:String = getQualifiedClassName(item);
@@ -605,7 +606,11 @@ public class EventParser {
         }
         EngineCore.statScreenRefresh();
     }
-	public static function eachMinuteCount(time:Number, needNext:Boolean = false):void {
+    /**
+     * Advance time by `time` minutes. If overflows into next hour, delay this until next EngineCode.goNext call
+     * @param time
+     */
+	public static function advanceMinutes(time:Number):void {
         // Ex. minutes = 45, time = 20, overflow = 6
         var overflow:Number = (CoC.instance.model.time.minutes + time) - 59;
         if (overflow > 0) {

@@ -91,7 +91,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		{
 			Saves.registerSaveableState(this);
 		}
-	
+
 		public function zenjiPerspectiveOnPlayer(changes:Number = 0):Number
 		{
 			if (flags[kFLAGS.ZENJI_PROGRESS] < 7) flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] += changes;
@@ -99,11 +99,11 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] < 0) flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 0;
 			return flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER];
 		}
-		
+
 		private var spellBookButtons:ButtonDataList = new ButtonDataList();
-		
+
 		//PART 1
-		
+
 		public function part1TrollEncounter():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -137,14 +137,14 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(3, "Fight", part1TrollEncounterFight);
 			addButton(4, "Leave", part1TrollEncounterLeave);
 		}
-		
+
 		public function part1TrollEncounterLeave():void {
 			outputText("You decide that it's not worth paying whatever he's demanding to venture into who knows where.\n\n");
 			outputText("\"<i>Eh? You’re just gonna leave me like dat? You don' want ta even try to fight me?</i>\" he chuckles, \"<i>Your loss.</i>\"\n\n");
 			outputText("You return back to your camp following the path that you made along your way.\n\n");
 			endEncounter();
 		}
-		
+
 		public function part1TrollEncounterFight():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -154,7 +154,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			startCombat(new Zenji());
 			doNext(playerMenu);
 		}
-		
+
 		public function part1TrollEncounterFightPCDefeated():void {
 			clearOutput();
 			zenjiPerspectiveOnPlayer(-4);
@@ -169,7 +169,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			cleanupAfterCombat();
 		}
-		
+
 		public function part1TrollEncounterFightZenjiDefeated():void {
 			clearOutput();
 			outputText("The troll staggers backward, unable to fight anymore. \"<i>Heh... ya bested me...</i>\" he coughs, \"<i>Go on, ya can enter... I jus need a break...</i>\"\n\n");
@@ -180,7 +180,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else addButtonDisabled(1, "???", "Need 50+ corruption.");
 			addButton(3, "Leave", cleanupAfterCombat);
 		}
-		
+
 		public function part1TrollEncounterFightZenjiDefeatedHuntHim():void {
 			if (player.spe < 180 && player.wis < 180) {
 				outputText("You chase after the troll, unwilling to let your prey elude you. Afterall, what’s the point in a little combat if you can’t claim your spoils by slaying your foe?\n\n");
@@ -203,7 +203,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			startCombat(new Zenji());
 			doNext(playerMenu);
 		}
-		
+
 		public function part1TrollEncounterFightTOTHEDEATHPCDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -226,7 +226,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				EventParser.gameOver();
 			}
 		}
-		
+
 		public function part1TrollEncounterFightTOTHEDEATHZenjiDefeated():void {
 			clearOutput();
 			outputText("The troll falls to the ground, severely wounded, unable to fight any longer. He struggles to regain his footing, desperately clinging onto the spear he has impaled to the ground.\n\n");
@@ -265,7 +265,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\"<i>I… will neva die..! I will hunt you down! I… I will…</i>\" His voice rings through the thicket before dying out slowly. Words are meaningless when it comes from the dirt beneath you anyway.\n\n");
 			cleanupAfterCombat();
 		}
-		
+
 		public function part1TrollEncounterChallange():void {
 			outputText("You look up to him and ask just what did he mean by 'challenge'?\n\n");
 			outputText("He hops down from the tree, standing just over a foot away from you. \"<i>Heheh, I challenge you to a battle of skill, if you can beat me at ma own game, den I’ll let you pass.</i>\"\n\n");
@@ -507,7 +507,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			zenjiPerspectiveOnPlayer(-6);
 			endEncounter();
 		}
-		
+
 		public function part1TrollEncounterSex():void {
 			outputText("You eye him once more, he's tall, easily standing over 8 feet, he's only dressed in a loin cloth and some fur bracers as the rest of his muscular body is covered in light green fuzz. It could be worse, his chiseled face definitely is rather handsome.\n\n");
 			outputText("You take him on his offer and decide that you're willing to pay his toll with your body.\n\n");
@@ -518,14 +518,14 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(1, "Challenge?", part1TrollEncounterChallange);
 			addButton(3, "Leave", part1TrollEncounterLeave);
 		}
-		
+
 		public function part1TrollEncounterPayWithGems():void {
 			player.gems -= 25;
 			outputText("You pull out 25 gems from your gem pouch as you do so he hops down from the tree. He holds out a four-fingered palm, awaiting your payment and you fork the gems over. The entire time he looks directly into your eyes, but at the same time there seems to be a tinge of disappointment within his.\n\n");
 			outputText("As you enter the opening in the bog you search around the area and wonder what makes it so special that he wanted to guard it against you.\n\n");
 			part1TrollEncounterRewards();
 		}
-		
+
 		public function part1TrollEncounterRewards():void {
 			var event:Number = rand(10);
 			var itype:ItemType;
@@ -538,9 +538,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You decide to head back home afterwards as there doesn't appear to be anything else of interest right now.\n\n");
 			inventory.takeItem(itype, explorer.done);
 		}
-		
+
 		//PART 2
-		
+
 		public function part2TrollEncounterFirst():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -567,20 +567,20 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				addButton(3, "Leave", part2TrollEncounterLeave);
 			}
 		}
-		
+
 		public function part2TrollEncounterFirstDecline():void {
 			flags[kFLAGS.ZENJI_PROGRESS] = -1;
 			outputText("\"<i>Ah, so be it den, I shall go somewhere else for a real challenge, all I see here are cowards.</i>\" Zenji leans back and climbs on top of a nearby tree, he quickly vanishes into the canopy where you can't see him anymore.\n\n");
 			endEncounter();
 		}
-		
+
 		public function part2TrollEncounterFirstFight():void {
 			if (flags[kFLAGS.ZENJI_PROGRESS] < 5) flags[kFLAGS.ZENJI_PROGRESS] = 5;
 			outputText("If he really wants a fight, then so be it, who knows, it could be fun after all.\n\n");
 			startCombat(new Zenji());
 			doNext(playerMenu);
 		}
-		
+
 		public function part2TrollEncounterFirstFightPCDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -589,7 +589,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\"<i>Ahah... So... dat's why ya didn' want ta fight? Perhap I shouldn’ta fought so hard on ya... Forgive me, I just didn' expect someone out here in de bog to be so weak.</i>\" He shakes his head, \"<i>Ya be safe now, I don' want ya ta get hurt out dere.</i>\"\n\n");
 			cleanupAfterCombat();
 		}
-		
+
 		public function part2TrollEncounterFirstFightZenjiDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -599,7 +599,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You make your way back to camp as the troll takes a moment to rest.\n\n");
 			cleanupAfterCombat();
 		}
-		
+
 		public function part2TrollEncounterRepeat():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -615,13 +615,13 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] <= 30) addButton(3, "Talk", part2TrollEncounterTalk);
 			addButton(4, "Leave", part2TrollEncounterLeave);
 		}
-		
+
 		public function part2TrollEncounterLeave():void {
 			outputText("You tell Zenji that you are not in the mood for sticking around with him at the moment.\n\n");
 			outputText("\"<i>Eh? Then whatcha here for? Go on den, no reason to stay if ya don' wanna be here.</i>\"\n\n");
 			endEncounter();
 		}
-		
+
 		public function part2TrollEncounterTalk():void {
 			outputText("Zenji seems hesitant while near you, perhaps there’s something he wants to talk about?\n\n");
 			outputText("You continue to eye him, causing his stoic exterior to collapse again. \"<i>[name], is everything alright? I just…</i>\"\n\n");
@@ -635,7 +635,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			zenjiPerspectiveOnPlayer(-3);
 			endEncounter();
 		}
-		
+
 		public function part2TrollEncounterRepeatFight():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -643,7 +643,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			startCombat(new Zenji());
 			doNext(playerMenu);
 		}
-		
+
 		public function part2TrollEncounterRepeatFightPCDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -663,7 +663,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			cleanupAfterCombat();
 		}
-		
+
 		public function part2TrollEncounterRepeatFightZenjiDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -672,7 +672,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji leans back against a tree and sits down, he rubs his hands along his tusks as if they were sore from combat.\n\n");
 			cleanupAfterCombat();
 		}
-		
+
 		public function part2TrollEncounterTrain():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -682,7 +682,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(2, "Toughness", part2TrollEncounterTrainToughness);
 			addButton(3, "Speed", part2TrollEncounterTrainSpeed);
 		}
-		
+
 		public function part2TrollEncounterTrainStrength():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -705,7 +705,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			endEncounter();
 		}
-		
+
 		public function part2TrollEncounterTrainToughness():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -728,7 +728,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			endEncounter();
 		}
-		
+
 		public function part2TrollEncounterTrainSpeed():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -753,9 +753,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			endEncounter();
 		}
-		
+
 		//ZENJI FOLLOWER
-		
+
 		public function followerZenjiFirstTimeOffer():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -766,7 +766,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(1, "Yes", followerZenjiOfferYes);
 			addButton(3, "No", followerZenjiOfferNo);
 		}
-		
+
 		public function followerZenjiRepeatOffer():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -777,14 +777,14 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(4, "Leave", part2TrollEncounterLeave);
 			addButton(7, "Yes", followerZenjiOfferYes);
 		}
-		
+
 		public function followerZenjiOfferNo():void {
 			outputText("You tell Zenji that you don't want him to hang out around your camp.\n\n");
 			outputText("\"<i>Ah, dat is a shame, if ya don't want ta, I undastand, I still got all dis land to maself at least.</i>\"\n\n");
 			flags[kFLAGS.ZENJI_PROGRESS]++;
 			endEncounter();
 		}
-		
+
 		public function followerZenjiOfferYes():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -797,7 +797,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			flags[kFLAGS.ZENJI_PROGRESS] = 8;
 			endEncounter();
 		}
-		
+
 		public function followerZenjiMainCampMenu():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -812,7 +812,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else addButtonDisabled(5, "Spar", "You can spar with him, but you need to build a sparring ring first!");
 			addButton(14, "Leave", followerZenjiMainCampMenuLeave);
 		}
-		
+
 		public function followerZenjiMainCampMenuAppearance():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -825,7 +825,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(14, "Back", followerZenjiMainCampMenu);
 		}
-		
+
 		public function followerZenjiMainCampMenuTraining():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -845,7 +845,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				addButton(4, "Wisdom", followerZenjiMainCampMenuTrainingWisdom);
 			}
 		}
-		
+
 		public function followerZenjiMainCampMenuTrainingStrength():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -862,7 +862,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
-		
+
 		public function followerZenjiMainCampMenuTrainingToughness():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -881,7 +881,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
-		
+
 		public function followerZenjiMainCampMenuTrainingSpeed():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -899,7 +899,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
-		
+
 		public function followerZenjiMainCampMenuTrainingIntelligence():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -922,7 +922,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
-		
+
 		public function followerZenjiMainCampMenuTrainingWisdom():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -944,7 +944,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			followerZenjiMainCampMenuTrainingPerks();
 			endEncounter();
 		}
-		
+
 		public function followerZenjiMainCampMenuTrainingPerks():void {
 			if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) < 30) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 3, 1);
 			if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 5 || player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 15 || player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 30) outputText("After you're done training, you feel different, you can't explain it, but something has surely changed, almost as if the training you've done with Zenji is really speaking to you.\n\n");
@@ -961,7 +961,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				player.createPerk(PerkLib.ZenjisInfluence3,0,0,0,0);
 			}
 		}
-		
+
 		public function followerZenjiSpar():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -969,7 +969,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			startCombat(new Zenji());
 			doNext(playerMenu);
 		}
-		
+
 		public function followerZenjiSparPCDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -983,7 +983,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			cleanupAfterCombat();
 		}
-		
+
 		public function followerZenjiSparZenjiDefeated():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -991,7 +991,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You tell Zenji you'd need a moment before you could consider fighting him again.\n\n");
 			cleanupAfterCombat();
 		}
-		
+
 		public function followerZenjiTalks():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1008,7 +1008,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 
 			addButton(14, "Back", followerZenjiMainCampMenu);
 		}
-		
+
 		public function followerZenjiTalksHimself():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1019,7 +1019,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji spends the rest of the hour talking about new experiences in the camp and other things about himself that he can recall.\n\n");
 			endEncounter();
 		}
-		
+
 		public function followerZenjiTalksTrolls():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1029,7 +1029,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji spends the rest of the hour talking about trolls and other nuances about his kind from the other trolls.\n\n");
 			endEncounter();
 		}
-		
+
 		public function followerZenjiTalksYourself():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1041,7 +1041,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You spend the rest of the hour talking about yourself and sharing old stories back in Ingnam with Zenji.\n\n");
 			endEncounter();
 		}
-		
+
 		public function followerZenjiSex():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1059,7 +1059,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			doNext(followerZenjiMainCampMenu);
 		}
-		
+
 		public function followerZenjiGlades():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1075,15 +1075,15 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			doNext(followerZenjiMainCampMenu);
 		}
-		
+
 		public function followerZenjiMainCampMenuLeave():void {
 			outputText("You realize that you don’t have anything you need from him at this moment, you apologize and take your leave.\n\n");
 			outputText("Zenji gives you a small nod as he dismisses you.\n\n");
 			doNext(camp.campFollowers);
 		}
-		
+
 		//ZENJI LOVER
-		
+
 		public function loverZenjiFirstTimeOffer():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1096,7 +1096,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(1, "Yes", loverZenjiOfferYes);
 			addButton(3, "No", loverZenjiOfferNo);
 		}
-		
+
 		public function loverZenjiRepeatOffer():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1107,13 +1107,13 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(4, "Leave", part2TrollEncounterLeave);
 			addButton(7, "Yes", loverZenjiOfferYes);
 		}
-		
+
 		public function loverZenjiOfferNo():void {
 			outputText("Zenji's eyes grow watery, \"<i>You are a brave soul, I tell ya dat.</i>\" He slowly moves closer to you and puts his hands on your shoulders. \"<i>Stay safe out dere, I will remain here if ya need me.</i>\"\n\n");
 			flags[kFLAGS.ZENJI_PROGRESS] = 10;
 			endEncounter();
 		}
-		
+
 		public function loverZenjiOfferYes():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1130,7 +1130,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			flags[kFLAGS.ZENJI_PROGRESS] = 11;
 			endEncounter();
 		}
-		
+
 		public function loverZenjiMainCampMenu2():void {
 			if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaZenji();
@@ -1138,7 +1138,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			else loverZenjiMainCampMenu();
 		}
-		
+
 		public function loverZenjiMainCampMenu():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1182,7 +1182,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else addButton(7, "Sleep Alone", zenjiSleepToggle).hint("Stop sleeping with Zenji.");
 			addButton(14, "Leave", loverZenjiMainCampMenuLeave);
 		}
-		
+
 		public function loverZenjiMainCampMenuAppearance():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1200,7 +1200,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(14, "Back", loverZenjiMainCampMenu);
 		}
-		
+
 		public function loverZenjiTalks():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1232,7 +1232,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			addButton(14, "Back", loverZenjiMainCampMenu);
 		}
-		
+
 		public function loverZenjiTalksHimself():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1245,7 +1245,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			ZenjiTalkCount++;
 			endEncounter();
 		}
-		
+
 		public function loverZenjiTalksTrolls():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1257,7 +1257,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			ZenjiTalkCount++;
 			endEncounter();
 		}
-		
+
 		public function loverZenjiTalksYourself():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1271,7 +1271,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			ZenjiTalkCount++;
 			endEncounter();
 		}
-		
+
 		public function loverZenjiTalksChildren():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1285,7 +1285,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			ZenjiTalkCount++;
 			endEncounter();
 		}
-		
+
 		public function loverZenjiShowoff():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1450,7 +1450,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\n\n");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiComfort():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1480,9 +1480,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
 			ZenjiTalkCount++;
 			doNext(loverZenjiTalks);
-			eachMinuteCount(5);
+			advanceMinutes(5);
 		}
-		
+
 		public function loverZenjiFood():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1495,9 +1495,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			ZenjiFood = true;
 			inventory.takeItem(consumables.ZENJI_H, loverZenjiTalks);
 			ZenjiTalkCount++;
-			eachMinuteCount(5);
+			advanceMinutes(5);
 		}
-		
+
 		public function loverZenjiGiveItem():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1515,7 +1515,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else addButtonDisabled(3, "TrollFig", "You do not have this item to offer");
 			addButton(4, "Back", loverZenjiGiveItemBack);
 		}
-		
+
 		public function loverZenjiGiveItemLotion():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1566,7 +1566,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Alright, alright, jus' tell me when ya want ta do someting later, Dere's someting I need ta check up on. \"\n\n");
 			doNext(loverZenjiGiveItem);
 		}
-		
+
 		public function loverZenjiGiveItemGroPlus():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1629,7 +1629,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji nods respectfully.\n\n");
 			doNext(loverZenjiGiveItem);
 		}
-		
+
 		public function loverZenjiGiveItemReducto():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1692,7 +1692,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji nods respectfully.\n\n");
 			doNext(loverZenjiGiveItem);
 		}
-		
+
 		public function loverZenjiGiveItemBack():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1700,7 +1700,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji gives you a sideways glance, \"<i>Alright den, if ya change your mind or find someting special fa me, I'll be here.</i>\" He pulls you in for a hug, \"<i>I'll always be here for you...</i>\" He whispers before releasing you.\n\n");
 			doNext(loverZenjiMainCampMenu);
 		}
-		
+
 		public function loverZenjiGiveItemTrollFig():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1736,7 +1736,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else outputText("As he pulls away, Zenji looks down at his groin, \"<i>Aha, I didn’t expect someting like dis from you, [name]. Dat’s one of de weird, wild figs…</i>\" He chuckles softly before looking back at you, \"<i>Let’s just say you’ll be in for a little surprise later…</i>\"\n\n");
 			doNext(loverZenjiGiveItem);
 		}
-		
+
 		public function loverZenjiSex():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1803,7 +1803,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				addButtonDisabled(10, "Get Blown", "You aren't turned on enough to consider this.");
 			}
 		}
-		
+
 		public function loverZenjiTakeAnal():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1847,7 +1847,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.sexReward("cum","Anal");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiTakeVaginal():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1889,7 +1889,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 			endEncounter();
 		}
-		
+
 		public function loverZenjiPitchAnal():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1927,7 +1927,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.sexReward("no", "Dick");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexBlowHim():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -1977,7 +1977,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			dynStats("lust", 25);
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexCuddle():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2017,7 +2017,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			dynStats("cor", -0.25);
 			endEncounter();
 		}
-		
+
 		public function loverZenjiPregnantSex():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2071,7 +2071,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.sexReward("cum", "Vaginal");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiHotSpring():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2169,7 +2169,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexGetFingered():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2190,7 +2190,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.sexReward("no", "Vaginal");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexGetHandjob():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2209,7 +2209,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.sexReward("no", "Dick");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexGetLicked():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2228,7 +2228,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.sexReward("no", "Vaginal");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexGetBlown():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2260,7 +2260,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.sexReward("no", "Dick");
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexTease():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2320,7 +2320,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 			endEncounter();
 		}
-		
+
 		public function loverZenjiSexNevermind():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2338,7 +2338,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			doNext(loverZenjiMainCampMenu);
 		}
-		
+
 		private function zenjiSleepToggle():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2355,7 +2355,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(0,"Next", loverZenjiMainCampMenu);
 		}
-		
+
 		public function loverZenjiSleepWithMorning():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2529,7 +2529,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			ZenjiSleepCount += 1;
 			doNext(playerMenu);
 		}
-		
+
 		public function loverZenjiGlades():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2545,7 +2545,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			doNext(loverZenjiMainCampMenu);
 		}
-		
+
 		public function loverZenjiNightWatch():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2561,7 +2561,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			doNext(loverZenjiMainCampMenu);
 		}
-		
+
 		public function zenjiHenchmanOption():void {
 			menu();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
@@ -2626,13 +2626,13 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			doNext(loverZenjiMainCampMenu);
 			cheatTime(1/12);
 		}
-		
+
 		public function loverZenjiMainCampMenuLeave():void {
 			outputText("You realize that you don’t have anything you need from him at this moment, you apologize and take your leave.\n\n");
 			outputText("Zenji gives you a small nod as he dismisses you.\n\n");
 			doNext(camp.campLoversMenu);
 		}
-		
+
 		public function loverZenjiHalloweenEvent():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2730,7 +2730,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			player.addStatusValue(StatusEffects.ZenjiZList, 4, -2);
 			endEncounter();
 		}
-		
+
 		public function birthScene():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
@@ -2790,8 +2790,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			clearOutput();
 			outputText("\"<i>"+(Z2ndKid ? ""+Z2ndKid+"":""+Z1stKid+"")+"... I like dat name…'</i>\" he states with a smile.\n\n");
 			outputText("Zenji relaxes by your side as you drift off to sleep within his protection, exhausted from giving birth.");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
 		private function applyZenjikidName2():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -2799,8 +2798,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			flags[kFLAGS.ZENJI_KIDS]++;
 			outputText("Zenji gives you a gentle stare as he gently caresses your child, \"<i>Actually, Ya know... I was thinkin’, and I thought I should name dem dis time.</i>\"\n\n");
 			outputText("He scoops up your baby once they detach from your breast. \"<i>What will daddy name you?</i>\" he croons, taking his child to his nest.\n\n");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
 		private function applyZenjikidName3():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -2811,10 +2809,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You groan in pain as you spread your legs, ready to give birth, hoping for a healthy child.\n\n");
 			outputText("After an hour of pain and screaming, you successfully give birth to your child. She is doing just fine, taking her first breath as she cries.\n\n");
 			outputText("Maternal pride overwhelms you. You manage to collect yourself enough to bring your baby to your breast to comfort her. She latches on reflexively as you take a moment to rest.\n\n");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
-		
+
 		public function mishapsLunaZenji():void {
 			clearOutput();
 			outputText("You notice Zenji surveying the camp for potential danger. As he hops off the tree he usually resides on top of, you notice a rope trap quickly close in on his ankle. Zenji is swept clean off his feet from the ground and hung upside down.\n\n");
@@ -2828,7 +2825,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 			doNext(playerMenu);
 		}
-		
+
 		public function zenjiVillageProblems():void{
 			clearOutput();
 			outputText("You ask Zenji if he’s ready to talk about his problems with you.\n" +
@@ -2865,12 +2862,12 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 					"He gives you a sincere grin, the sight warms you to your core. You feel like you can breathe a little easier as well knowing he's taken a weight off his chest.");
 			doNext(playerMenu);
 		}
-		
+
 		//ZENJI MARRIAGE
 		public function ZenjiMarriagePreCheck():Boolean{
 			return player.hasKeyItem("Jabala's Charm") > 0 && TrollVillage.ZenjiVillageStage > 0 && ZenjiSleepCount >= 5 && ZenjiTalkCount >= 15 && ZenjiLoverDays >= 20;
 		}
-		
+
 		public function ZenjiProposalScene():void{
 			if (!sceneHunter.canMarry()){
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"<i>You called?</i>\"\n" +
@@ -2888,7 +2885,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"His rejection stings, but his words carry meaning.\n" +
 						"\n" +
 						"Zenji rests a hand on your shoulder, \"<i>Never disgrace love, [name],</i>\" he states before leaving you alone for the time being.");
-				eachMinuteCount(15);
+				advanceMinutes(15);
 				doNext(loverZenjiTalks);
 			}
 			else{
@@ -2931,7 +2928,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				doNext(ZenjiMarriageSceneUno);
 			}
 		}
-	
+
 		private function ZenjiMarriageSceneUno():void{
 			clearOutput();
 			outputText("Zenji guides you back to the troll village, holding your hand tightly in a mix of love and anticipation. He guides you to his parent’s home, knocking on the door when he finally reaches the hut.\n" +
@@ -3565,7 +3562,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			doNext(ZenjiMarriageSexTime3, options);
 		}
-		
+
 		private function ZenjiMarriageSexTime3(options:int):void{
 			clearOutput();
 			outputText("<b>Next Morning</b>");

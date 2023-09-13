@@ -21,7 +21,7 @@ import classes.Scenes.SceneLib;
 //import classes.Scenes.NPCs.CaiLin;
 
 	use namespace CoC;
-	
+
 	public class Beach extends BaseContent
 	{
 		public var ceaniScene:CeaniScene = new CeaniScene();
@@ -29,7 +29,7 @@ import classes.Scenes.SceneLib;
 		public var demonsPack:DemonPackBeachScene = new DemonPackBeachScene();
 		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
-		
+
 		public const areaLevel:int = 25;
 		public function isDiscovered():Boolean {
 			return SceneLib.exploration.counters.beach > 0;
@@ -46,10 +46,9 @@ import classes.Scenes.SceneLib;
 			outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.");
 			outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.");
 			outputText("\n\n<b>You've discovered the Beach and the Ocean!</b>");
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
-		
+
 		public function Beach()
 		{
 			onGameInit(init);
@@ -235,7 +234,7 @@ import classes.Scenes.SceneLib;
 			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
-	
+
 		public function beachChance():Number {
 			var temp:Number = 0.2;
 			temp *= player.npcChanceToEncounter();
@@ -271,7 +270,7 @@ import classes.Scenes.SceneLib;
 			endEncounter();
 		}
 
-		
+
 		public function partsofHarpoonGun():void {
 			clearOutput();
 			outputText("As you explore the beach you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
@@ -280,7 +279,7 @@ import classes.Scenes.SceneLib;
 			player.createKeyItem("Harpoon gun", 0, 0, 0, 0);
 			endEncounter();
 		}
-		
+
 		public function findBeachSite():void {
 			clearOutput();
             outputText("You stumble across a vein of Sandstone, this looks like suitable material for your gargoyle form.\n");
@@ -310,20 +309,19 @@ import classes.Scenes.SceneLib;
 		}
 
 		private function findGem():void {
-			explorer.stopExploring();
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
-					inventory.takeItem(useables.EMDGEM, camp.returnToCampUseTwoHours);
+					inventory.takeItem(useables.EMDGEM, curry(explorer.done,120));
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Emeralds you ended with unusable piece.");
-					doNext(camp.returnToCampUseTwoHours);
+					endEncounter(120);
 				}
 			}
 			else {
 				outputText(" Your mining skill is too low to find any Emeralds.");
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
 	}

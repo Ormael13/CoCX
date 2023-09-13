@@ -137,7 +137,7 @@ public class Camp extends NPCAwareContent{
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
-	
+
 	/**
 	 * @return 0: normal lust, 1: over lust, 2: over lust, can't do anything
 	 */
@@ -159,7 +159,7 @@ public class Camp extends NPCAwareContent{
 		}
 		return 0;
 	}
-	
+
 	public function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
 
@@ -2275,7 +2275,7 @@ public class Camp extends NPCAwareContent{
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		doNext(campMiscActions);
 	}
-	
+
 	public function menuForCombiningAndSeperating():void {
 		clearOutput();
 		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons. <b>(WARNING: ENCHANTED ITEMS WOULD IRREVERSABLE LOOSE ENCHANTMENTS DURING COMBINING!!!)</b>");
@@ -2317,7 +2317,7 @@ public class Camp extends NPCAwareContent{
 		}
 		submenu(bd, menuForCombiningAndSeperating,0,false);
 	}
-	
+
 	public function menuCombining(weapon1: *, weapon2: *):void {
 		clearOutput();
 		outputText("Combining.\n\n");
@@ -2334,7 +2334,7 @@ public class Camp extends NPCAwareContent{
 		outputText("\n\n");
 		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}
-	
+
 	public function mainPagePocketWatch(page:int = 1):void {
 		clearOutput();
 		outputText("Which perks would you like to combine using the watch?");
@@ -2751,7 +2751,7 @@ public class Camp extends NPCAwareContent{
 			doNext(VisitFishery);
 		}
 	}
-	
+
 	public function FisheryDailyProduction():Number {
 		var fishproduction:Number = 0;
 		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") {
@@ -3332,12 +3332,12 @@ public class Camp extends NPCAwareContent{
 
 	private function useGryphonStatuette():void {
 		CoC.instance.mutations.skybornSeed(1, player);
-		eachMinuteCount(5);
+		advanceMinutes(5);
 		doNext(playerMenu);
 	}
 	private function usePeacockStatuette():void {
 		CoC.instance.mutations.skybornSeed(2, player);
-		eachMinuteCount(5);
+		advanceMinutes(5);
 		doNext(playerMenu);
 	}
 
@@ -3384,7 +3384,7 @@ public class Camp extends NPCAwareContent{
 		bonus += 0.5*(hours*(hours-1)/2); // 0 + 0.5 + 1 + 1.5 + ...
 		return bonus;
 	}
-	
+
 	public function rest():void {
 		campQ = true;
 		IsWaitingResting = true;

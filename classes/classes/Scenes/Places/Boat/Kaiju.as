@@ -542,7 +542,7 @@ public class Kaiju extends AbstractLakeContent {
 		clearOutput();
 		kaijuSprite();
 		outputText("You shake your head no, politely responding that you do not want to get her off right now.  \"<i>Oh, okay. I understand,</i>\" the giantess states, looking somewhat crestfallen.  You row away, leaving her and her new addition to themselves for the time being.");
-		doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
+		doNext(recalling ? recallWakeUp : explorer.done);
 	}
 
 	//[If Mock]

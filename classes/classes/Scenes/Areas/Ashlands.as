@@ -110,7 +110,7 @@ public class Ashlands extends BaseContent
 			call: SceneLib.exploration.demonLabProjectEncounters
 		});
 	}
-	
+
 	public const areaLevel:int = 35;
 	public function isDiscovered():Boolean {
 		return SceneLib.exploration.counters.ashlands > 0;
@@ -121,7 +121,7 @@ public class Ashlands extends BaseContent
 	public function timesExplored():int {
 		return SceneLib.exploration.counters.ashlands;
 	}
-	
+
 	public function exploreAshlands():void {
 		explorer.prepareArea(ashlandsEncounter);
 		explorer.setTags("ashlands");
@@ -139,8 +139,7 @@ public class Ashlands extends BaseContent
 		clearOutput();
 		outputText("You walk for some time, roaming the ashlands. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
 		outputText("<b>You've discovered the Volcanic Crag!</b>");
-		explorer.stopExploring();
-		doNext(camp.returnToCampUseTwoHours);
+		explorer.done(120);
 	}
 
 	private function findNothing():void {
@@ -209,20 +208,19 @@ public class Ashlands extends BaseContent
 		}
 	}
 	private function findGem():void {
-		explorer.stopExploring();
 		if (player.miningLevel > 4) {
 			if (rand(4) == 0) {
-				inventory.takeItem(useables.RBYGEM, camp.returnToCampUseTwoHours);
+				inventory.takeItem(useables.RBYGEM, curry(explorer.done,120));
 				player.mineXP(player.MiningMulti() * 2);
 			}
 			else {
 				outputText("After attempt to mine Rubies you ended with unusable piece.");
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
 		else {
 			outputText(" Your mining skill is too low to find any Rubies.");
-			doNext(camp.returnToCampUseTwoHours);
+			endEncounter(120);
 		}
 	}
 }

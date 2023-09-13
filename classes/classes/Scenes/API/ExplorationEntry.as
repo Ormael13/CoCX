@@ -30,19 +30,19 @@ public class ExplorationEntry {
 	private static const BORDER_PLAYER:String  = "#ffaa00";
 	private static const COLOR_DISABLED:String = "#666666";
 	private static const COLOR_DEFAULT:String  = "#aaaaaa";
-	private static const EncounterKinds:Object = {
-		"walk"    : {label: "Walk", color: "#eeeeee"},
-		"item"    : {label: "Item", color: "#00ff00"},
-		"treasure": {label: "Treasure", color: "#80ff00"},
-		"npc"     : {label: "NPC", color: "#ff80ff"},
-		"place"   : {label: "Place", color: "#88aaff"},
-		"special" : {label: "Special", color: "#ff00ff"},
-		"event"   : {label: "Event", color: "#eeee00"},
-		"monster" : {label: "Monster", color: "#aa0000"},
-		"boss"    : {label: "Boss", color: "#ff0000"},
-		"trap"    : {label: "Trap", color: "#ff8000"}
+	public static const EncounterKinds:Object = {
+		"walk"    : {label: "Walk", color: "#eeeeee", time: 30},
+		"item"    : {label: "Item", color: "#00ff00", time: 10},
+		"treasure": {label: "Treasure", color: "#80ff00", time: 15},
+		"npc"     : {label: "NPC", color: "#ff80ff", time: 30},
+		"place"   : {label: "Place", color: "#88aaff", time: 30},
+		"special" : {label: "Special", color: "#ff00ff", time: 30},
+		"event"   : {label: "Event", color: "#eeee00", time: 15},
+		"monster" : {label: "Monster", color: "#aa0000", time: 15},
+		"boss"    : {label: "Boss", color: "#ff0000", time: 30},
+		"trap"    : {label: "Trap", color: "#ff8000", time: 15}
 	}
-	
+
 	public var encounter:SimpleEncounter;
 	public var kind:String;
 	public var color:String;
@@ -64,7 +64,7 @@ public class ExplorationEntry {
 	public var roadIndex:int;
 	public var roadPos:int;
 	public var nextNodes:/*ExplorationEntry*/Array = [];
-	
+
 	public function get isFullyRevealed():Boolean { return revealLevel == REVEAL_FULL }
 	public function get encounterName():String { return encounter ? encounter.encounterName() : "(null)"}
 	public function ExplorationEntry(
@@ -80,7 +80,7 @@ public class ExplorationEntry {
 		createUI();
 		setEmpty();
 	}
-	
+
 	private function createUI():void {
 		sprite = new Sprite();
 		tfLabel         = UIUtils.newTextField({
@@ -91,7 +91,7 @@ public class ExplorationEntry {
 		});
 //		tfLabel.filters       = [UIUtils.outlineFilter(LABEL_OUTLINE)];
 		sprite.addChild(tfLabel);
-		
+
 		sprite.mouseChildren = false;
 		sprite.addEventListener(MouseEvent.CLICK, onClick);
 		sprite.addEventListener(MouseEvent.ROLL_OVER, onHover);
@@ -101,20 +101,20 @@ public class ExplorationEntry {
 	}
 	public function redraw():void {
 		var g:Graphics = sprite.graphics;
-		
+
 		var borderColor:uint = Color.convertColor32(
 				isPlayerHere ? BORDER_PLAYER
 						: isDisabled ? BORDER_CLEARED
 								: isNext ? BORDER_NEXT
 										: isCleared ? BORDER_CLEARED : BORDER_UNKNOWN
 		);
-		
+
 		g.clear();
 		g.lineStyle(BORDER_WIDTH, borderColor);
 		g.beginFill(Color.convertColor32(isPlayerHere ? COLOR_DISABLED : color));
 		g.drawCircle(RADIUS, RADIUS, RADIUS);
 		g.endFill();
-		
+
 		var mainTextFormat:TextFormat = CoC.instance.mainView.mainText.defaultTextFormat;
 		tfLabel.defaultTextFormat = UIUtils.convertTextFormat({
 			font : mainTextFormat.font,
@@ -123,10 +123,10 @@ public class ExplorationEntry {
 			align: 'center'
 		});
 		tfLabel.text = label;
-		
+
 		sprite.buttonMode = isNext;
 	}
-	
+
 	private function onClick(event:MouseEvent):void {
 		if (encounter && !isDisabled) SceneLib.explorationEngine.entryClick(this);
 	}
@@ -137,7 +137,7 @@ public class ExplorationEntry {
 	private function onDim(event:MouseEvent):void {
 		CoC.instance.mainView.toolTipView.hide();
 	}
-	
+
 	public function setEmpty():void {
 		encounter     = null;
 		kind          = null;
@@ -159,7 +159,7 @@ public class ExplorationEntry {
 	public function link(e:ExplorationEntry):void {
 		nextNodes.push(e);
 	}
-	
+
 	public function setupForEncounter(e:SimpleEncounter):void {
 		encounter  = e;
 		kind       = e.getKind();
@@ -206,7 +206,7 @@ public class ExplorationEntry {
 			revealFull();
 		}
 	}
-	
+
 	public function revealFull():void {
 		revealKind();
 		revealLevel   = REVEAL_FULL;
@@ -214,7 +214,7 @@ public class ExplorationEntry {
 		tooltipHeader = encounter.getTooltipHeader();
 		tooltipText   = encounter.getTooltipHint();
 	}
-	
+
 	public function markCleared():void {
 		revealFull();
 		color         = COLOR_DISABLED;

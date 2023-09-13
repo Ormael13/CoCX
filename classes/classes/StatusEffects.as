@@ -272,7 +272,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BlessedItemAtTheLake:StatusEffectType           = mk("Blessed Item At The Lake");
 		public static const BlessingOfDivineFera:StatusEffectType			= mk("Blessing of Divine Agency - Fera");
 		public static const BlessingOfDivineMarae:StatusEffectType			= mk("Blessing of Divine Agency - Marae");
-		public static const BlessingOfDivineTaoth:StatusEffectType			= mk("Blessing of Divine Agency - Taoth");
 		public static const BloodCultivator:StatusEffectType           		= mk("Blood Cultivator");
 		public static const BloodMage:StatusEffectType            	   		= mk("Blood Mage");
 		public static const BlowjobOn:StatusEffectType                      = mk("BlowjobOn");

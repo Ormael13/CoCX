@@ -183,7 +183,7 @@ public class Konstantin extends NPCAwareContent
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}
-		
+
 		public function KonstantinMainCampMenu():void {
 			clearOutput();
 			outputText("Wanting to chat with the large bear-morph, you reach around where he is. Konstantin waves at you and beckons you to sit near him.\n\n");
@@ -197,7 +197,7 @@ public class Konstantin extends NPCAwareContent
 			addButton(7, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
 			addButton(14, "Leave", camp.campFollowers);
 		}
-		
+
 		public function KonstantinAppearance():void {
 			clearOutput();
 			outputText("Konstantin is a 8ft 10in tall bear-morph. He has a thick, soft layer of caramel brown fur covering almost every bit of his body, except on his underbelly, where the brown acquires a sandy coloration. The overall fluffy look of his fur makes you immediately think of a giant teddy bear. He covers himself in a simple, white cotton shirt, and covers his lower body with a working overall. Girding his ursine feet he has two black, sturdy boots. When he’s not working he opts for using an attire which is a bit more relaxed, with a loose, colorful shirt and baggy shorts.\n\n");
@@ -208,7 +208,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Between his nice derriere, Konstantin has a tight-looking anus, right where it belongs.");
 			doNext(KonstantinMainCampMenu);
 		}
-		
+
 		public function KonstantinTalkMenu():void {
 			clearOutput();
 			outputText("You sit at his side, and tell him that you want to chat with him a bit. He stops what he’s doing and sits to your side.\n\n");
@@ -233,7 +233,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("Wanting to divert my mind from the loneliness feeling, I focus on improved my smithing skill, so I spent the next couple of years practicing. Every now and then a customer passed through the forest me and requested my services, and then one day, one of them kept coming with more regularity...but I bet that you know what happened after that.</i>\"\n\n");
 			outputText("With a smirk, you answer that you do. Thanking him for his conversation, you return to your taks.\n\n");
 			doNext(KonstantinTalkMenu);
-			eachMinuteCount(5);
+			advanceMinutes(5);
 		}
 		public function KonstantinTalkHisWork():void {
 			clearOutput();
@@ -259,7 +259,7 @@ public class Konstantin extends NPCAwareContent
 			}
 			outputText(".</i>\"\n\nThanking him for his conversation, you leave Konstantin to his own things.\n\n");
 			doNext(KonstantinTalkMenu);
-			eachMinuteCount(5);
+			advanceMinutes(5);
 		}
 		public function KonstantinTalkTheCamp():void {
 			clearOutput();
@@ -287,7 +287,7 @@ public class Konstantin extends NPCAwareContent
 				outputText("\"<i>So all in all, I think that this is a great places. Good company, no demons in the proximity, and a great potential for the years to come.</i>\"\n\n");
 			}
 			doNext(KonstantinTalkMenu);
-			eachMinuteCount(5);
+			advanceMinutes(5);
 		}
 		public function KonstantinTalkBetterSmiting():void {
 			clearOutput();
@@ -297,9 +297,9 @@ public class Konstantin extends NPCAwareContent
 			outputText("<b>Unlocked Smelting!</b>\n\n");
 			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 3;
 			doNext(KonstantinTalkMenu);
-			eachMinuteCount(5);
+			advanceMinutes(5);
 		}
-		
+
 		public function KonstantinSmithingMenu():void {
 			clearOutput();
 			outputText("Seeing how Konstantin is working with armor and plating pieces, you happen to ask him if he could assemble some of the materials that you’ve found during your travels in Mareth into something useful to wear and protect yourself.\n\n");
@@ -417,7 +417,7 @@ public class Konstantin extends NPCAwareContent
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)) addButton(12, "Ascensus", KonstantinCraftingDepravitoAscensus);
 			addButton(14, "Back", KonstantinSmithingMenu);
 		}
-		
+
 		private function KonstantinCraftingNotEnoughMaterials1():void {
 			clearOutput();
 			outputText("\"<i>Nah, " + player.mf("man", "girl") + ". I’ll need more of that stuff to start doing something. Five pieces, as I’ve said. If you happen to gather them somehow, look for me and we’ll work something.</i>\"\n\n");
@@ -909,7 +909,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("<b>Got "+atype+" arrowheads!</b>\n\n");
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
-		
+
 		private function KonstantinCraftingThePhalluspear():void {
 			clearOutput();
 			player.destroyItems(weapons.SPEAR, 1);
@@ -982,7 +982,7 @@ public class Konstantin extends NPCAwareContent
 			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
 			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
 		}
-		
+
 		public function KonstantinSmeltingMenu():void {
 			clearOutput();
 			outputText("Konstantin eyes you expectantly.\n\n");
@@ -1040,12 +1040,12 @@ public class Konstantin extends NPCAwareContent
 				Crafting.BagSlot03 += 5;
 				break;
 			case 3: //1 Ebonbloom
-				if (Crafting.BagSlot05 > 0) Crafting.BagSlot05 -= 1; 
+				if (Crafting.BagSlot05 > 0) Crafting.BagSlot05 -= 1;
 				else player.destroyItems(useables.EBONBLO, 1);
 				itype = useables.EBONING;
 				break;
 			case 4: //5 Ebonblooms
-				if (Crafting.BagSlot05 > 4) Crafting.BagSlot05 -= 5; 
+				if (Crafting.BagSlot05 > 4) Crafting.BagSlot05 -= 5;
 				else player.destroyItems(useables.EBONBLO, 5);
 				Crafting.BagSlot06 += 5;
 				break;
@@ -1055,7 +1055,7 @@ public class Konstantin extends NPCAwareContent
 			if (craft == 2 || craft == 4) doNext(camp.returnToCampUseOneHour);
 			else inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
-		
+
 		public function KonstantinTinkeringMenu():void {
 			clearOutput();
 			outputText("You pay another visit to Konstantine, and find him working on his furnace near his tent. He smiles warmly and greets you, after what you ask him if he can help you with your stuff.\n\n");
@@ -1069,7 +1069,7 @@ public class Konstantin extends NPCAwareContent
 			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
 			addButton(2, "Nothing", meetKonstantinAtForestNothing);
 		}
-		
+
 		public function KonstantinSexMenu():void {
 			clearOutput();
 			if (flags[kFLAGS.KONSTANTIN_SEX_MENU] == 1) {
