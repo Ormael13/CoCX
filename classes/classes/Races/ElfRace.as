@@ -74,6 +74,9 @@ public class ElfRace extends Race {
 		
 		buildTier(11, "elf")
                 .namesTauric("elf", "elf-taur")
+				.require("elf ears", function (body:BodyData):Boolean {
+					return body.earType == Ears.ELVEN
+				})
                 .buffs({
                     "str.mult": -0.10,
                     "tou.mult": -0.15,

@@ -1691,7 +1691,7 @@ public class TestMenu extends BaseContent
 			//4
 			//5
 			//6
-			//7
+			addButton(7, "BerserkerSet", AddTheBBS).hint("Add set of items for Berserker set.");//7
 			addButton(8, "CheckWeapon", TestWeaponType).hint("Detect Weapon Type Equiped for sprite and battle testing.");
 			addButton(9, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
 			addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
@@ -1700,6 +1700,14 @@ public class TestMenu extends BaseContent
 			addButton(13, "-1-", EquipmentMenu, page - 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
+	}
+	public function AddTheBBS():void {
+		outputText("\n\n<b>(Gained set of items to make berseker set!)</b>\n\n");
+		inventory.takeItem(armors.BESTBLA, AddTheBBS1);
+	}
+	public function AddTheBBS1():void {
+		outputText("\n\n");
+		inventory.takeItem(headjewelries.BESTBLAA, curry(EquipmentMenu, 2));
 	}
 	public function NonEquipmentMenu(page:int = 1):void {
 		menu();
