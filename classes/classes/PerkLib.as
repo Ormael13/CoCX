@@ -3239,9 +3239,9 @@ public class PerkLib
 		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 		public static const InfernalRage:PerkType = mk("Infernal Rage", "Infernal Rage",
-				"Increases fire damage based on percent of wrath bar full.");
+				"Increases fire damage based on percent of wrath bar fullness.");
 		public static const SereneMind:PerkType = mk("Serene Mind", "Serene Mind",
-				"Increased defenses, damage output, and evasion whilst in a berserker/lustzerker state (stacks with cold(er) fury/lust)");
+				"Increased chance (+10%) to block/parry/evade whilst in a berserker/lustzerker state. These actions would also grant 1% wrath when successful.");
 		public static const BestialBlademaster:PerkType = mk("Bestial Blademaster", "Bestial Blademaster",
 				"Allows for the wearer to better make use of their beast form to increase effectiveness of weapon strikes. (weapon base attack increased by 10% while chrinos shape is active)");
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");

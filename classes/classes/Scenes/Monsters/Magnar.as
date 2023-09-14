@@ -284,12 +284,6 @@ import classes.internals.*;
 			this.long = "This giant is the apex of the Flamespreader project. Wings armored with steel, chiselled body and immense strength, if his warhammer is anything to judge by. He fights naked, chiselled abs and dragon-dick belied by the crazed look in his crimson, reptilian eyes.";
 			initStrTouSpeInte(540, 540, 400, 190);
 			initWisLibSensCor(190, 400, 200, 100);
-			this.weaponAttack = 250;
-			this.armorDef = 120;
-			this.armorMDef = 90;
-			this.bonusHP = 2000;
-			this.bonusLust = 800;
-			this.level = 100;
 			if (KihaFollower.DergKidnapped == 1) {
 				if (KihaFollower.MagnarState == 1) {
 					cantFly = true;
@@ -306,10 +300,18 @@ import classes.internals.*;
 				this.bonusHP = 1700;
 				this.bonusLust = 600;
 				this.level = 85;
-
+				this.createPerk(PerkLib.OverMaxHP, 85, 0, 0, 0);
+			}
+			else {
+				this.weaponAttack = 250;
+				this.armorDef = 120;
+				this.armorMDef = 90;
+				this.bonusHP = 2000;
+				this.bonusLust = 800;
+				this.level = 100;
+				this.createPerk(PerkLib.OverMaxHP, 100, 0, 0, 0);
 			}
 			this.additionalXP = 300;
-			this.createPerk(PerkLib.OverMaxHP, 60, 0, 0, 0);
 			this.createCock(24,4);
 			this.balls = 2;
 			this.ballSize = 5;

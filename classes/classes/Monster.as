@@ -1864,6 +1864,7 @@ import flash.utils.getQualifiedClassName;
 				var dodge:int = player.speedDodge(this);
 				if (dodge>0) {
 					outputPlayerDodged(dodge);
+					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
 				}
 				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
@@ -1872,11 +1873,13 @@ import flash.utils.getQualifiedClassName;
 					outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]'");
 					if (!plural) outputText("s");
 					outputText(" attack.\n");
+					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
 				}
 				//("Misdirection"
 				if (evasionResult == EVASION_MISDIRECTION) {
 					outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.\n");
+					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
 				}
 				//Determine if cat'ed
@@ -1884,10 +1887,12 @@ import flash.utils.getQualifiedClassName;
 					outputText("With your incredible flexibility, you squeeze out of the way of [themonster]");
 					if (plural) outputText("' attacks.\n");
 					else outputText("'s attack.\n");
+					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
 				}
 				if (evasionResult != null) { // Failsafe fur unhandled
 					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
+					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
 				}
 				//Zenji parry enemy attack
@@ -1916,6 +1921,7 @@ import flash.utils.getQualifiedClassName;
 						outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
 						SceneLib.combat.basemeleeattacks();
 					}
+					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
 				}
 				//Block with shield
@@ -1926,6 +1932,7 @@ import flash.utils.getQualifiedClassName;
 						SceneLib.combat.pspecials.shieldBash();
 					}
 					SceneLib.combat.ShieldsStatusProcs();
+					if (player.zerkSereneMind()) EngineCore.WrathChange(Math.round(player.maxWrath()*0.01));
 					return true;
 				}
 				return false;
@@ -3894,3 +3901,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
+

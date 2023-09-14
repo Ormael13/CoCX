@@ -11523,8 +11523,12 @@ public final class Mutations extends MutationsHelper {
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
 			if (player.hasPerk(PerkLib.VulpesthropyDormant)) player.removePerk(PerkLib.VulpesthropyDormant);
             player.createPerk(PerkLib.Vulpesthropy, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Lycanthropy)) {
+				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
+				player.removePerk(PerkLib.Lycanthropy);
+			}
 			player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
-			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.1*ngM,'tou.mult': bonusStats*ngM,'spe.mult': bonusStats*0.4*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
+			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.01*ngM,'tou.mult': bonusStats*0.1*ngM,'spe.mult': bonusStats*0.04*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 			player.trainStat('str', +5, 100);
 			player.trainStat('tou', +5, 100);
 			player.trainStat('spe', +5, 100);

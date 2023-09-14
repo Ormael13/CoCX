@@ -1339,6 +1339,10 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.AlphaHowlIM) >= 1) mCL += (perkv1(IMutationsLib.AlphaHowlIM) * 5);
 			return mCL;
 		}
+		public function zerkSereneMind():Boolean
+		{
+			return (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking)));
+		}
 
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
