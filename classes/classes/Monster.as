@@ -2580,7 +2580,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			result +=".\n\n";
 			// COMBAT AND OTHER STATS
-			result += Hehas + "str=" + this.strStat.core.value + ", tou=" + /*this.touStat.core.value*/this.touStat.max + ", spe=" + this.speStat.core.value +", inte=" + this.intStat.core.value +", wis=" + this.wisStat.core.value +", lib=" + this.libStat.core.value + ", sens=" + sens + ", cor=" + cor + ".\n";
+			result += Hehas + "str=" + this.strStat.core.value + ", tou=" + this.touStat.core.value + ", spe=" + this.speStat.core.value +", inte=" + this.intStat.core.value +", wis=" + this.wisStat.core.value +", lib=" + this.libStat.core.value + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
 			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";

@@ -14,7 +14,7 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog47();
+			Changelog48();
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog50():void {
@@ -31,6 +31,50 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog48():void {
 			clearOutput();
+			outputText("(Part 2/2) <b>Version 0.8t2:</b>\n\n");
+			outputText("-Human Parathyroid Gland desc changed and health recovery effect changed to 10/20/40 * level HP in combat and twice more out of combat. Lifeline perks effects changed to 3/4/6/8 * level HP.\n");
+			outputText("-Violet Pupil Transformation effect changed to 5% max SF per turn to get 5% of max HP. Unicorn race would change ration from 5:5 to 4:5 and alicorn race would change ration to 3:6.\n");
+			outputText("-Entangle from using Battle Net have it cooldown reduced from 8 to 5 turns.\n");
+			outputText("-Reaching at least first tier of vampire race would double vampire thirst stacks gains from using vampire bite.\n");
+			outputText("-Temporaly disabled two events in Journey to the East until 'more flesh' added to them.\n");
+			outputText("-Added Elder Cave Wyrm racial bonuses tier (16+): +90% to Str multi, +115% to Tou multi, -30% to Wis multi, +65% to Lib multi. Azureflame Breath and Acid Spit now would req. 10+ in race score and lost when score drops below 10 (naturaly evolved cave wyrm lungs i.mutation can still prevent loosing those perks).\n");
+			outputText("-When cutting wood, mining stones, opening packs of nails OR finding metal plates summary would include current post activity state of warehouse for that material.\n");
+			outputText("-At least 10 ft. tall and Bioluminescence skin pattern each would add +1 to scylla/kraken score. Added also next tier of racial bonuses - ancient kraken (24+): +220% to str multi, +70% to tou/int multi, +600 max HP (scalable)\n");
+			outputText("-New perk for enemies: Colossal-sized type enemy. Increase monster str/tou/spe/atk/phys and mag defense values compared to the same much smaller monster.\n");
+			outputText("-Elf race score bonuses req. to have elf ears.\n");
+			outputText("-Fixing various text errors reported by people on discord.\n");
+			outputText("-Death Prince Regalia, outfit and Golden armor & Anubis glyph tattoo sprited. (Liadri)\n");
+			outputText("-Implementation of wereraces human form. (Liadri) (out of combat of most of sex scenes pc sprite would look 100% humanlike if current race is one of wereraces even partialy)\n");
+			//1 of 11 pages
+			outputText("-Fix Cheshire cat and some invalid cat fur colors. (Liadri)\n");
+			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
+			outputText("-Fixed a line at Aimozg recommandation to properly update racial cache (Liadri)\n");
+			outputText("-100+ new item icons, Consumable items are tagged with 'tf', Setting to toggle icons (aimozg)\n");
+			outputText("-Tease and masteries XP gains show notifications below the stat bar. Item stack buttons show quantities over the icon. (aimozg)\n");
+			outputText("-New exploration engine, exploration nodes can branch, new merchant UI, new perk menu, added touch scrolling for perk menu, extra offset for mobile tooltips, can buy to/sell from pearl storage in new mechant interface, reduced common encounters chance outside main exploration, Popups for spellcasting, mining, farming, herbalism XP. (aimozg)\n");
+			outputText("-Fixed new game after bad-end on NG+ carrying some data from old character, infinite perk exploit through old menu. (aimozg)\n");
+			outputText("-Giacomo can buy from player (40%/80% of item value) (aimozg)\n");
+			outputText("-Rest HP recovery accelerates +50% each hour (resting 8 hours gives total 22 hours of HP regen). Heal on level up. (aimozg)\n");
+			outputText("-Creating clone now give 'negative levels' status effect - no hp recovery or point gain (aimozg)\n");
+			outputText("-Soul Sense is now an exploration ability that reveals 1 NPC for 100 SF & Soul Sense can spawn extra encounters. (aimozg) It's change only for npc's founded previously during exploring areas/general explore. (orm)\n");
+			outputText("-HXD golem merchant sells basic alchemical equipment. Animated stat bars (can be toggled on/off). (aimozg)\n");
+			outputText("-Can refine consumable items into alchemical substances, essences, residues, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. Dye crafting. Alchemy skill increases extraction yield. (fellow daoist aimozg)\n");
+			outputText("-Evangeline can craft diluted E-Ichor. Can craft pills that give Mutagen Bonus (D.E.Ichor + herb + stat residue) (fellow daoist aimozg)\n");
+			outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
+			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
+			outputText("-After finishing Demon Laboratory dungeon some of projects kept there would start to roam Mareth giving PC chance to encounter 3 different boss tier enemies. (Snas)\n");
+			outputText("-For all those that wanted PC marry some bit rough pseudo-dragoness there is possibilty now to do this. Added marriage option to Kiha. (Snas)\n");
+			outputText("-Weapons Combining/Separating menu redone. (Jtecx) (added grey out buttons for combining, etc.)\n");
+			outputText("-Smol fixes and adds Super Human stat buff. (Our Godfather-Emperor of Gigachad Humanity - Jtecx)\n");
+			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
+			outputText("-Lizan Blademaster set sprites implementation, adjusted alignment of fran's cloak and jabberwocky wings sprites. (Lord Shadeogorath)\n");
+			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
+			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
+			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
+			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends, ");
+			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error, some of blessings from temple disply wrong ");
+			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors, some of custom names not giving starting gems bonus, one of Demon Lab bosses infinite grapple\n");
+			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u:</b>\n\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
@@ -55,7 +99,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u2:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Fixed bugs: \n");
@@ -178,8 +221,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog47():void {
 			clearOutput();
-			//0 of 11 pages
-			outputText("<b>Version 0.8t2:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8t2:</b>\n\n");
 			outputText("-New tier 0 libido lvl-up perk: Broad Selection. Req. Job: Seducer perk and at least two different types of penises. Effect: Increasing the Tease damage by 25% for each different type of penis that you have.\n");
 			outputText("-New tier 1 misc lvl-up perk: History Buff. Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 4 misc lvl-up perk: Guerrilla Tactics. Req. History Buff perk. Effect: +10% minions/pets damage.\n");
@@ -294,47 +336,6 @@ public class Changelog extends BaseContent
 			outputText("-Shark / Orce / Vicious / Tripple Bite specials fatigue cost and damage been doubled.\n");
 			outputText("-Enemy of gigantic/collosal type hit by AoE spell would take increased damage as if it was used vs group enemy, hit by Grey AoE spells with Convergence/Super Convergence it would strike 3x more times (6/9 times).\n");
 			outputText("-Mirror doppelganger progress toward big final lust hit been spread to happen over ~2x more turns (so around 10 not 5), stunning it would actualy stop the progress for stun duration. Final massive lust attack would deal enough lust to fill from 0 to max overlust value, which would mean this time this attack would be more serious and even Supercharged state won't protect PC from defeat.\n");
-			outputText("-Human Parathyroid Gland desc changed and health recovery effect changed to 10/20/40 * level HP in combat and twice more out of combat. Lifeline perks effects changed to 3/4/6/8 * level HP.\n");
-			outputText("-Violet Pupil Transformation effect changed to 5% max SF per turn to get 5% of max HP. Unicorn race would change ration from 5:5 to 4:5 and alicorn race would change ration to 3:6.\n");
-			outputText("-Entangle from using Battle Net have it cooldown reduced from 8 to 5 turns.\n");
-			outputText("-Reaching at least first tier of vampire race would double vampire thirst stacks gains from using vampire bite.\n");
-			outputText("-Temporaly disabled two events in Journey to the East until 'more flesh' added to them.\n");
-			outputText("-Added Elder Cave Wyrm racial bonuses tier (16+): +90% to Str multi, +115% to Tou multi, -30% to Wis multi, +65% to Lib multi. Azureflame Breath and Acid Spit now would req. 10+ in race score and lost when score drops below 10 (naturaly evolved cave wyrm lungs i.mutation can still prevent loosing those perks).\n");
-			outputText("-When cutting wood, mining stones, opening packs of nails OR finding metal plates summary would include current post activity state of warehouse for that material.\n");
-			outputText("-At least 10 ft. tall and Bioluminescence skin pattern each would add +1 to scylla/kraken score. Added also next tier of racial bonuses - ancient kraken (24+): +220% to str multi, +70% to tou/int multi, +600 max HP (scalable)\n");
-			outputText("-New perk for enemies: Colossal-sized type enemy. Increase monster str/tou/spe/atk/phys and mag defense values compared to the same much smaller monster.\n");
-			outputText("-Elf race score bonuses req. to have elf ears.\n");
-			outputText("-Fixing various text errors reported by people on discord.\n");
-			outputText("-Death Prince Regalia, outfit and Golden armor & Anubis glyph tattoo sprited. (Liadri)\n");
-			outputText("-Implementation of wereraces human form. (Liadri) (out of combat of most of sex scenes pc sprite would look 100% humanlike if current race is one of wereraces even partialy)\n");
-			outputText("-Fix Cheshire cat and some invalid cat fur colors. (Liadri)\n");
-			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
-			outputText("-Fixed a line at Aimozg recommandation to properly update racial cache (Liadri)\n");
-			outputText("-100+ new item icons, Consumable items are tagged with 'tf', Setting to toggle icons (aimozg)\n");
-			outputText("-Tease and masteries XP gains show notifications below the stat bar. Item stack buttons show quantities over the icon. (aimozg)\n");
-			outputText("-New exploration engine, exploration nodes can branch, new merchant UI, new perk menu, added touch scrolling for perk menu, extra offset for mobile tooltips, can buy to/sell from pearl storage in new mechant interface, reduced common encounters chance outside main exploration, Popups for spellcasting, mining, farming, herbalism XP. (aimozg)\n");
-			outputText("-Fixed new game after bad-end on NG+ carrying some data from old character, infinite perk exploit through old menu. (aimozg)\n");
-			outputText("-Giacomo can buy from player (40%/80% of item value) (aimozg)\n");
-			outputText("-Rest HP recovery accelerates +50% each hour (resting 8 hours gives total 22 hours of HP regen). Heal on level up. (aimozg)\n");
-			outputText("-Creating clone now give 'negative levels' status effect - no hp recovery or point gain (aimozg)\n");
-			outputText("-Soul Sense is now an exploration ability that reveals 1 NPC for 100 SF & Soul Sense can spawn extra encounters. (aimozg) It's change only for npc's founded previously during exploring areas/general explore. (orm)\n");
-			outputText("-HXD golem merchant sells basic alchemical equipment. Animated stat bars (can be toggled on/off). (aimozg)\n");
-			outputText("-Can refine consumable items into alchemical substances, essences, residues, and pigments. Can merge substances and essences into transformative pills targeting specific body part and type. Dye crafting. Alchemy skill increases extraction yield. (fellow daoist aimozg)\n");
-			outputText("-Evangeline can craft diluted E-Ichor. Can craft pills that give Mutagen Bonus (D.E.Ichor + herb + stat residue) (fellow daoist aimozg)\n");
-			outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-Fix: Etna infidelity repeat encounter rate, fur/feather racial colour checks, butt pregnancy appearance screen rescue (EragonX)\n");
-			outputText("-After finishing Demon Laboratory dungeon some of projects kept there would start to roam Mareth giving PC chance to encounter 3 different boss tier enemies. (Snas)\n");
-			outputText("-For all those that wanted PC marry some bit rough pseudo-dragoness there is possibilty now to do this. Added marriage option to Kiha. (Snas)\n");
-			outputText("-Weapons Combining/Separating menu redone. (Jtecx) (added grey out buttons for combining, etc.)\n");
-			outputText("-Smol fixes and adds Super Human stat buff. (Our Godfather-Emperor of Gigachad Humanity - Jtecx)\n");
-			outputText("-Fixes two bugs. Marble 'Follow Tail' and 'Oswald Inventory slot Next'. Reverses checks to prevent clitDesc when no vagina found. (Jtecx)\n");
-			outputText("-Lizan Blademaster set sprites implementation, adjusted alignment of fran's cloak and jabberwocky wings sprites. (Lord Shadeogorath)\n");
-			outputText("-Fixed bugs: Eye Of The Tiger 3rd/4th tier multi bonuses mess and adding to magic crit chance, Elven mutation affecting all magic crit chance checks not only spell ones, specials involving skeleton minions attacking not taking into account dmg bonus from History/Past Life: Tactician, Dreaming of 'nothing', missing any default event that proc during inner desert exploration, ");
-			outputText("Diva not leaving vampire blood vial after meantiong this in post combat scene, Etna toggle not removing her been set as sleeping companion, Kid A not wanting to get weapon from any inventory page after 1st, What Is Reality? not ignoring supercharged state lust defeat immunity, 'Gotta Camp them ALL' mode and Samirah quest, Honeydew Cake training str/tou instead of ");
-			outputText("applying mutagen bonus, chameleon girl post fight lust+sens draft option, % HP regeneration potentialy been higher than max % regeneration cap, white eggs use text meantioning lower undergarments instead of upper undergarments in case armor isn't present, missing Kiha text for dish Mino King helper, reversed Cow Gunslinger Outfit corruption scaling, elemental golems ");
-			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends, ");
-			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error, some of blessings from temple disply wrong ");
-			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors, some of custom names not giving starting gems bonus, one of Demon Lab bosses infinite grapple\n");
 			menu();
 			addButton(0, "Next", Changelog46);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
