@@ -82,67 +82,80 @@ public class Masturbation extends BaseContent {
 			addButton(14, "Back", playerMenu);
 		}
 
-		private function specialOptions():void {
+		private function specialOptions(page:int = 1):void {
 			sceneHunter.print("Many scenes are repeatable. Use it.");
 			menu();
-			addButton(0, "Lick Cock", catAutoLick)
-				.disableIf(!player.hasPerk(PerkLib.Flexibility) && flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] == 0,"<b>You're not flexible enough to try this.</b>" +
-					"\n\nRequires 'Flexibility' (cat-morph) perk.")
-				.disableIf(!player.hasCock(), "You can't suck lick cock without having one.");
-			addButton(1, "Lick Pussy", lickYerGirlParts)
-				.disableIf(!player.hasPerk(PerkLib.Flexibility) && flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] == 0,"<b>You're not flexible enough to try this.</b>" +
-					"\n\nRequires 'Flexibility' (cat-morph) perk.")
-				.disableIf(!player.hasVagina(), "You can't lick your vagina without having one.");
-			addButton(2, "LayBunnyEggs", EasterBunnyLayEggs)
-				.disableIf(player.ballSize <= 3, "Your balls are too small for this.")
-				.disableIf(player.balls < 2, "You would need at least two balls.")
-				.disableIf(!player.hasCock(), "You also need a cock.")
-				.disableIf(!player.hasPerk(PerkLib.EasterBunnyBalls), "Requires to have Easter Bunny balls.");
-			addButton(3, "EggsInCock", getHugeEggsInCawk)
-				.disableIf(player.findCock(1, 100, -1) < 0,
-					"Req. a cock with area larger than 100")
-				.disableIf(!player.canOvipositBee(), "Req. a bee ovipositor.");
-			addButton(4, "EggsInTits", layEggsInYerTits)
-				.disableIf(player.biggestTitSize() < 21, "You would need bigger tits for this.")
-				.disableIf(!player.canOviposit(), "Req. an ovipositor.");
-			addButton(5, "TentacleFun", tentacleSelfFuck2)
-				.hint("Fuck yourself with your tentacle limbs!")
-				.disableIf(!player.hasVagina(), "You need a vagina to 'have fun' with.")
-				.disableIf(!player.isScylla() && !player.isKraken(), "Requires to have Scylla or Kraken lower body.");
-			//TODO: make sure stamens also work!
-			//TODO: stamens are copypasted... right?
-			addButton(6, "TentInPussy", tentacleSelfFuck)
-				.hint("Fuck your pussy with your tentacle cocks!")
-				.disableIf(!player.hasVagina(), "You would need a pussy first.")
-				.disableIf(player.countCocksWithType(CockTypesEnum.TENTACLE) == 0, "Req. tentacle cocks");
-			addButton(7, "TentInButt", tentacleGoesUpYerPooperNewsAtEleven)
-				.hint("Fuck your ass with your tentacle dicks!")
-				.disableIf(player.countCocksWithType(CockTypesEnum.TENTACLE) == 0, "Req. tentacle cocks");
-			addButton(8, "StamenPussy", stamenSelfFuck)
-				.hint("Fuck your pussy with your stamens!")
-				.disableIf(!player.hasVagina(), "You would need a vagina first.")
-				.disableIf(player.countCocksWithType(CockTypesEnum.STAMEN) == 0, "Req. stamen cocks")
-				.disableIf(!player.isAlraune(), "Req. to be an Alraune.");
-			addButton(9, "StamenButt", stamenGoesUpYerPooperNewsAtEleven)
-				.hint("Fuck your ass with your stamens!")
-				.disableIf(player.countCocksWithType(CockTypesEnum.STAMEN) == 0, "Req. stamen cocks")
-				.disableIf(!player.isAlraune(), "Req. to be an Alraune.");
-			addButton(10, "TwinYuri", twinYuri)
-				.hint("Fuck your vagina with your stamens!")
-				.disableIf(!player.hasVagina(), "You would need a vagina first.")
-				.disableIf(!player.isLiliraune(), "Req. to be a Liliraune.");
-			addButton(11, "Impregnator", gobomechImpregnator1)
-				.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
-				.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
-				.disableIf(!player.hasVagina(), "First of all, you need a vagina.");
-			addButton(12, "Fuck Machine", gobomechFuckingMachine)
-				.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
-				.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
-				.disableIf(!player.hasVagina(), "First of all, you need a vagina.");
-			addButton(13, "Goo Sat", gooeySatisfaction)
-				.hint("Play with your malleable body in a new way.", "Gooey Satisfaction")
-				.disableIf(!player.isGoo(), "Req. goo body.");
-			addButton(14, "Back", masturbateMenu);
+			if (page == 1) {
+				addButton(0, "Lick Cock", catAutoLick)
+					.disableIf(!player.hasPerk(PerkLib.Flexibility) && flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] == 0,"<b>You're not flexible enough to try this.</b>" +
+						"\n\nRequires 'Flexibility' (cat-morph) perk.")
+					.disableIf(!player.hasCock(), "You can't suck lick cock without having one.");
+				addButton(1, "Lick Pussy", lickYerGirlParts)
+					.disableIf(!player.hasPerk(PerkLib.Flexibility) && flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] == 0,"<b>You're not flexible enough to try this.</b>" +
+						"\n\nRequires 'Flexibility' (cat-morph) perk.")
+					.disableIf(!player.hasVagina(), "You can't lick your vagina without having one.");
+				addButton(2, "EggsInCock", getHugeEggsInCawk)
+					.disableIf(player.findCock(1, 100, -1) < 0,
+						"Req. a cock with area larger than 100")
+					.disableIf(!player.canOvipositBee(), "Req. a bee ovipositor.");
+				addButton(3, "EggsInTits", layEggsInYerTits)
+					.disableIf(player.biggestTitSize() < 21, "You would need bigger tits for this.")
+					.disableIf(!player.canOviposit(), "Req. an ovipositor.");
+				addButton(4, "TentacleFun", tentacleSelfFuck2)
+					.hint("Fuck yourself with your tentacle limbs!")
+					.disableIf(!player.hasVagina(), "You need a vagina to 'have fun' with.")
+					.disableIf(!player.isScylla() && !player.isKraken(), "Requires to have Scylla or Kraken lower body.");
+				//TODO: make sure stamens also work!
+				//TODO: stamens are copypasted... right?
+				addButton(5, "TentInPussy", tentacleSelfFuck)
+					.hint("Fuck your pussy with your tentacle cocks!")
+					.disableIf(!player.hasVagina(), "You would need a pussy first.")
+					.disableIf(player.countCocksWithType(CockTypesEnum.TENTACLE) == 0, "Req. tentacle cocks");
+				addButton(6, "TentInButt", tentacleGoesUpYerPooperNewsAtEleven)
+					.hint("Fuck your ass with your tentacle dicks!")
+					.disableIf(player.countCocksWithType(CockTypesEnum.TENTACLE) == 0, "Req. tentacle cocks");
+				addButton(13, "-2-", specialOptions, page + 1);
+				addButton(14, "Back", masturbateMenu);
+			}
+			if (page == 2) {
+				addButton(0, "LayBunnyEggs", EasterBunnyLayEggs)
+					.disableIf(player.ballSize <= 3, "Your balls are too small for this.")
+					.disableIf(player.balls < 2, "You would need at least two balls.")
+					.disableIf(!player.hasCock(), "You also need a cock.")
+					.disableIf(!player.hasPerk(PerkLib.EasterBunnyBalls), "Requires to have Easter Bunny balls.");
+				addButton(1, "StamenPussy", stamenSelfFuck)
+					.hint("Fuck your pussy with your stamens!")
+					.disableIf(!player.hasVagina(), "You would need a vagina first.")
+					.disableIf(player.countCocksWithType(CockTypesEnum.STAMEN) == 0, "Req. stamen cocks")
+					.disableIf(!player.isAlraune(), "Req. to be an Alraune.");
+				addButton(2, "StamenButt", stamenGoesUpYerPooperNewsAtEleven)
+					.hint("Fuck your ass with your stamens!")
+					.disableIf(player.countCocksWithType(CockTypesEnum.STAMEN) == 0, "Req. stamen cocks")
+					.disableIf(!player.isAlraune(), "Req. to be an Alraune.");
+				addButton(3, "TwinYuri", twinYuri)
+					.hint("Fuck your vagina with your stamens!")
+					.disableIf(!player.hasVagina(), "You would need a vagina first.")
+					.disableIf(!player.isLiliraune(), "Req. to be a Liliraune.");
+				addButton(4, "Impregnator", gobomechImpregnator1)
+					.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
+					.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
+					.disableIf(!player.hasVagina(), "First of all, you need a vagina.");
+				addButton(5, "Fuck Machine", gobomechFuckingMachine)
+					.disableIf(player.keyItemvX("Cum Reservoir", 1) != 4, "Your cum reservoir is not full yet!")
+					.disableIf(!player.isInGoblinMech(), "You need to be inside a goblin mech for this!")
+					.disableIf(!player.hasVagina(), "First of all, you need a vagina.");
+				addButton(6, "Goo Sat", gooeySatisfaction)
+					.hint("Play with your malleable body in a new way.", "Gooey Satisfaction")
+					.disableIf(!player.isGoo(), "Req. goo body.");
+				addButton(7, "Mummy Sex", mummySex)
+					.disableIf(player.gender == 0, "Req. to not be genderless.")
+					.disableIf(player.soulforce < Math.round(player.maxSoulforce() * 0.5), "Req. 50% of max soulforce.")
+					.disableIf(player.racialScore(Races.ANUBIS) < 15, "Req. to be Anubi race.")
+					.disableIf(player.perkv2(PerkLib.MummyLord) > 0, "Last mummy sex effect not yet wear off.")
+					.disableIf((player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) < 3), "Req. to have 3+ mummies.");
+				addButton(13, "-1-", specialOptions, page - 1);
+				addButton(14, "Back", masturbateMenu);
+			}
 		}
 
 		private function fappingItems():void {
@@ -919,7 +932,7 @@ public class Masturbation extends BaseContent {
 				}
 			}
 			if (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && player.companionsInPCParty()) {
-				eachMinuteCount(60);
+				advanceMinutes(60);
 				doNext(playerMenu);
 			}
 			else endEncounter();
@@ -1778,7 +1791,7 @@ public class Masturbation extends BaseContent {
 				if (player.cocks.length > 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your loins.  ");
                     var multiTypedIndex:int;
-					
+
 					if ((multiTypedIndex = player.findCockWithType(CockTypesEnum.HORSE)) >= 0) { //Primary Horse
 						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(multiTypedIndex) + "s.  Pre-cum pours from your " + player.cockDescript(multiTypedIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
 					}
@@ -2753,7 +2766,7 @@ public class Masturbation extends BaseContent {
             eggDickNormal();
         }
 
-		
+
 			//Bee Eggs in Huge Cock + Exgartuan: Finished (Slywyn)(edited)
 			public function eggExgartuan():void {
                 clearOutput();
@@ -3643,6 +3656,22 @@ public class Masturbation extends BaseContent {
 				+ "\n"
 				+ "You finally fall into a puddle on the ground as you achieve release, [skin color] goo spewing everywhere from your cocks, breasts and cunts. Obviously, you take care to recover the fluid as you ready yourself back for adventure, thoroughly satisfied albeit not sated.\n");
 			player.sexReward("no", "Default");
+			endEncounter();
+		}
+
+		private function mummySex():void {
+			clearOutput();
+			outputText("Feeling antsy, you remove your clothes and order your slaves to do their jobs. The dim-witted mummies lumber toward your exposed genitals like a thirsty desert dweller toward an oasis.\n\n");
+			if (player.hasCock()) outputText("One of the mummies grabs hold of your now fully erect [cock] and begins to lick the tip"+(player.hasBalls()?", while another daring zombie kneels beneath your legs and begins suckling on your balls, the mummy aphrodisiac-laden saliva causing them to churn and increase in size with a steadily growing reward for your pets. You're going to cum far more than usual, and your pets will take it to the last drop":"")+". You grab the meat slave’s head and pull it onto your needy prick, incentivizing it to deepthroat you. On cue, the mummy eagerly wraps its tongue around your cock and pulls you in, letting you enjoy the full deal of its throat massage as it attempts to milk you off your excess energy.\n\n");
+			outputText((player.gender == 3?"While your cock is being taken care of, a":"A")+" mummy stretches backwards between your legs and grabs your tights to get easy access to your needy snatch, its black tongue slithering in to leech at your excess soul force. You gladly let the intruder in, savoring as it laps at your button to quench its insatiable thirst.\n\n");
+			outputText((player.hasBreasts()?"You knead your own nipple, grabbing your breasts with both hands and pulling hard in order to maximize the crashing wave of pleasures as your servants’’ tingling touches drive you over the edge. ":"")+"You cum hard "+(player.gender == 3?"both ":"")+"from your "+(player.hasCock()?"overwhelmed cock "+(player.hasBalls()?"and nuts ":"")+"":"")+(player.gender == 3?", as well as ":"")+(player.hasVagina()?"drenched [pussy] ":"")+"feeding your servants with a torrent of soul force, albeit just enough to power them up and keep them well addicted to you. Now fed with energy they will be extra vicious for a while.\n\n");
+			outputText("Satisfied, you order your pets off and redress, ready to go back to your adventures.");
+			EngineCore.SoulforceChange( -Math.round(player.maxSoulforce() * 0.5));
+			player.addPerkValue(PerkLib.MummyLord,2,24);
+			flags[kFLAGS.TIMES_MASTURBATED]++;
+			if (player.gender == 3) masturGasm("Dick", "Vaginal");
+			if (player.gender == 2) masturGasm("Vaginal");
+			else masturGasm("Dick");
 			endEncounter();
 		}
 	}

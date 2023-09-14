@@ -218,14 +218,8 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
 		else combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) {
-			if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
-				if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
-				else btnPSpecials.disable("There is no way you could reach an opponent in the air with p. specials.");
-			}
-			else {
-				if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
-				else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
-			}
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		}
 		// Submenu - Magical Specials
 		combat.mspecials.buildMenu(magspButtons);
@@ -265,7 +259,7 @@ public class CombatUI extends BaseCombatContent {
 
 		// Modifications - full or partial replacements
 		//==============================================================================================================
-		//ALLIES - 'smart' ones (wisps & henchmen). Do not depend on PC to do anything. Call them first!
+		//ALLIES - 'smart' ones (wisps & mummies & henchmen). Do not depend on PC to do anything. Call them first!
 		var playerBusy:Boolean = true; //changed to true if 'stupid' allies can help.
 		//no elses - Simpturn works without 'Next'!
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
@@ -274,6 +268,8 @@ public class CombatUI extends BaseCombatContent {
 		//Others
 		if (isWispTurn())
 			doWispTurn();
+		else if (isMummyTurn())
+			doMummyTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
 		else if (isCompanionTurn(1))
@@ -597,6 +593,14 @@ public class CombatUI extends BaseCombatContent {
 		}
 	}
 
+	public function isMummyTurn():Boolean {
+		return player.hasPerk(PerkLib.MummyLord) && player.perkv1(PerkLib.MummyLord) > 0 && flags[kFLAGS.IN_COMBAT_PLAYER_MUMMY_ATTACKED] != 1;
+	}
+	
+	public function doMummyTurn():void {
+		combat.mummyattacks();
+	}
+
 	public function isGolemTurn():Boolean {
 		return player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost();
 	}
@@ -851,7 +855,7 @@ public class CombatUI extends BaseCombatContent {
 	private function buildAbilityMenu(abilities:/*CombatAbility*/Array, buttons:ButtonDataList):void {
 		for each(var ability:CombatAbility in abilities) {
 			if (ability.isKnown) {
-				buttons.list.push(ability.createButton(monster));
+				buttons.append(ability.createButton(monster));
 			}
 		}
 	}

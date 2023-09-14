@@ -41,17 +41,17 @@ public class CheshireRace extends Race{
 				.faceType(Face.CHESHIRE, +2)
 				.faceType(Face.CHESHIRE_SMILE, +2)
 				.eyeType(Eyes.CAT, +1)
-				.eyeColor(ANY("Yellow"), +1)
+				.eyeColor("yellow", +1)
 				.earType(Ears.CAT, +1)
 				.tongueType(Tongue.CAT, +1)
 				.tailType(Tail.CAT, +1)
 				.armType(Arms.CAT, +1)
 				.legType(LowerBody.CAT, +1)
 				.skinCoatType(Skin.FUR, +1)
-				.customRequirement("", "lilac and white hair and fur",
+				.customRequirement("", "light purple secondary hair and fur and any primary color hair and fur",
 						function (body:BodyData):Boolean {
-							return body.hairColors == "lilac and white" &&
-									body.furColors == "lilac and white"
+							return body.hairColor2 == "light purple" &&
+									body.furColor2 == "light purple"
 						}, +2)
 				.hasPerk(PerkLib.Flexibility, +1)
 				.hasPerk(PerkLib.Insanity, +1)

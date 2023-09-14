@@ -637,7 +637,7 @@ public function mainCampMenu():void {
 	}
 	addButton(8, "Uncurse", uncurseItemsMenu)
 			.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
-	
+
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
@@ -720,10 +720,11 @@ public function HealingScene():void {
 	outputText("Diana starts to rub her chest against yours, causing more of the strange tingling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move up your inner thigh, sparks of pleasure shooting up your spine as she runs her fingertips across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. All your wounds and injuries have closed up, as if they never existed. You're healed, but now you feel rather aroused.\n\n");
 	dynStats("lus", 33, "scale", false);
+	if (player.hasStatusEffect(StatusEffects.CombatWounds)) player.removeStatusEffect(StatusEffects.CombatWounds);
 	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
 	doNext(mainCampMenu);
-	eachMinuteCount(45);
+	advanceMinutes(45);
 }
 
 public function CuringCurseScene1():void {	//value related curses removal
@@ -740,7 +741,7 @@ public function CuringCurseScene1():void {	//value related curses removal
 		player.removeCurse(stat, 10,3);
 	}
 	doNext(mainCampMenu);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
@@ -758,7 +759,7 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 		}
 	}
 	doNext(mainCampMenu);
-	eachMinuteCount(30);
+	advanceMinutes(30);
 }
 
 public function mainSexMenu():void {

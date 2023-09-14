@@ -827,13 +827,41 @@ public class FaceTransformations extends MutationsHelper {
 			// apply effect
 			function (doOutput: Boolean): void {
 				var desc: String = "";
+				var startsWithWolfFace: Boolean = player.faceType === Face.WOLF;
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+
+				if (!startsWithWolfFace) desc += "You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf-like canines.</b>";
+				else desc += "However, your mouth remains filled with wolf-like canines."
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.WOLF_FANGS;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.WOLF_FANGS));
 			},
 			// is present
 			function (): Boolean {
 				return player.faceType === Face.WOLF_FANGS;
+			}
+	);
+
+	public const FaceFoxFangs: Transformation = new SimpleTransformation("Fox Fangs Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+				var startsWithFoxFace: Boolean = player.faceType === Face.FOX;
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+
+				if (!startsWithFoxFace) desc += "You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with fox-like canines.</b>";
+				else desc += "However, your mouth remains filled with fox-like canines."
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.FOX_FANGS;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FOX_FANGS));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.FOX_FANGS;
 			}
 	);
 
@@ -1106,7 +1134,25 @@ public class FaceTransformations extends MutationsHelper {
 				return player.faceType === Face.ANT;
 			}
 	);
-	/*
-  */
+
+	public const FaceAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
+
+				desc += "Your [face] explodes in a shot of agony, reshaping into a more human-like visage. Your face might as well be sloughing off, hacked off piece by piece as your entire facial structure reshapes itself more. Your grasp at your mouth, intense pain wracking your oral cavity. Your gums shift as your jawline readjusts itself. You try to feel around your cheeks, your forehead... everything slowly begins setting into place. You can open your eyes as the pain recedes, almost as quickly as it came. ";
+				desc += "You need a moment to adjust to your vision before you look at your reflection in the nearest source of water. A set of retractable shark fangs have grown over your normal teeth, and your face has elongated a little to accomdate them! That's not the worst part, as your eyes are no longer located deep within your skull, but at the bony extrusions of your upper face bones. Your head more closely resembles the shape of a hammer. This'll take a bit to get used to.\n(Gain: 'Bite' special attack)";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.ABYSSAL_SHARK;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ABYSSAL_SHARK));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.ABYSSAL_SHARK;
+			}
+	);
 }
 }

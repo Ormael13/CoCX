@@ -273,6 +273,11 @@ public class Hair extends BodyPart {
 		adjective: "twin ribbon"
 	});
 
+	public static const DESERTGRACE:int  = 11;
+	EnumValue.add(Styles, DESERTGRACE, "DESERTGRACE", {
+		name: "desert grace",
+		adjective: "desert grace"
+	});
 
 	public var color:String = "no";
 	public var length:Number = 0.0;

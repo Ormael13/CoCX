@@ -650,7 +650,15 @@ public class Creature extends Utils
 				if (tou >= 61) max += Math.round(tou);
 				if (tou >= 81) max += Math.round(tou);
 				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
-			}
+				if (hasPerk(PerkLib.DeathPriest)) {
+					max += int(wis * 2 + 50);
+					if (wis >= 21) max += Math.round(wis);
+					if (wis >= 41) max += Math.round(wis);
+					if (wis >= 61) max += Math.round(wis);
+					if (wis >= 81) max += Math.round(wis);
+					if (wis >= 101) max += Math.round(wis) * Math.floor( (wis-100)/50 + 1);
+				}
+			} 
 			if (hasPerk(PerkLib.IcyFlesh)) {
 				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
@@ -675,7 +683,15 @@ public class Creature extends Utils
 				if (hasPerk(PerkLib.TankIII)) max += Math.round(tou*12);
 				if (hasPerk(PerkLib.TankIV)) max += Math.round(tou*12);
 				if (hasPerk(PerkLib.TankV)) max += Math.round(tou*12);
-				if (hasPerk(PerkLib.TankVI)) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankVI)) max += Math.round(tou * 12);
+				if (hasPerk(PerkLib.DeathPriest)) {
+					if (hasPerk(PerkLib.TankI)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankII)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankIII)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankIV)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankV)) max += Math.round(wis*12);
+					if (hasPerk(PerkLib.TankVI)) max += Math.round(wis*12);
+				}
 			}
 			if (hasPerk(PerkLib.GoliathI)) max += Math.round(str*8);
 			if (hasPerk(PerkLib.GoliathII)) max += Math.round(str*8);
@@ -816,7 +832,8 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				maxOver2 += (0.01 * bonus);
 			}
-			maxOver *= maxOver2;//~220%
+			if (perkv1(IMutationsLib.FerasBirthrightIM) >= 4) maxOver2 += 0.2;
+			maxOver *= maxOver2;//~270%
 			maxOver = Math.round(maxOver);
 			return Math.min(21999999,maxOver);
 		}
@@ -1176,6 +1193,12 @@ public class Creature extends Utils
 		public function get hairColor2():String {
 			return bodyMaterials[BodyMaterial.HAIR].color2;
 		}
+		public function set hairColor1(value:String):void {
+			bodyMaterials[BodyMaterial.HAIR].color1 = value;
+		}
+		public function set hairColor2(value:String):void {
+			bodyMaterials[BodyMaterial.HAIR].color2 = value;
+		}
 		public function set hairColor(value:String):void {
 			bodyMaterials[BodyMaterial.HAIR].color = value;
 		}
@@ -1435,7 +1458,7 @@ public class Creature extends Utils
 		//Sexual Stuff
 		//MALE STUFF
 		//public var cocks:Array;
-		public var cocks:Array;
+		public var cocks:/*Cock*/Array;
 		//balls
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
@@ -4330,6 +4353,7 @@ public class Creature extends Utils
 				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
 				else chance -= 30;
 			}
+			if (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking))) chance += 10;
 			chance += evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1);
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasPerk(PerkLib.ElementalBody)) {
@@ -4749,3 +4773,4 @@ public class Creature extends Utils
 		}
 	}
 }
+

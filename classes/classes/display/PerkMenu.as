@@ -25,9 +25,11 @@ import coc.view.Block;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 import coc.view.MainView;
+import coc.view.UIUtils;
 
 import flash.events.MouseEvent;
 import flash.events.TextEvent;
+import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.utils.Dictionary;
 
@@ -899,7 +901,7 @@ public class PerkMenu extends BaseContent {
 				}
 				outputText("\nRequirements for next tier: " + reqs.join(", "));
 
-				if (player.perkv3(mutation) == 1) outputText(" Your Mutation is empowered, and provides you with a much greater buff!\n");
+				if (player.perkv3(mutation) == 1) outputText("\nYour Mutation is empowered, and provides you with a much greater buff!\n");
 
 				if (pMutateLvl > 0) {
 					outputText("\nCurrent Tier Description: ");
@@ -978,6 +980,84 @@ public class PerkMenu extends BaseContent {
 		}
 		return n;
 	}
+	
+	// Cached table display elements
+	private var blocksCache:/*DisplayObject[]*/Array = [];
+	private var perkMenuStyle:int = 2; // 0: desc below name, 1: desc in tooltip, 2: desc in separate column
+	private function addRow(perkgrid:Block, row:int, pc:PerkClass):void {
+		var perk:PerkType = pc.ptype;
+		var btn:CoCButton;
+		var text1:TextField;
+		var text2:TextField;
+		if (blocksCache[row]) {
+			btn = blocksCache[row][0] as CoCButton;
+			text1 = blocksCache[row][1] as TextField;
+			text2 = blocksCache[row][2] as TextField;
+		} else {
+			btn = new CoCButton({square:true});
+			text1 = UIUtils.newTextField({
+				defaultTextFormat: mainView.mainText.defaultTextFormat,
+				wordWrap: true,
+				autoSize: TextFieldAutoSize.LEFT
+			});
+			text2 = UIUtils.newTextField({
+				defaultTextFormat: mainView.mainText.defaultTextFormat,
+				wordWrap: true,
+				autoSize: TextFieldAutoSize.LEFT
+			});
+			blocksCache[row] = [btn,text1,text2];
+		}
+		var textwidth:Number = MainView.TEXTZONE_W - MainView.BTN_H - 16;
+		btn.show("", curry(CoC.instance.playerInfo.applyPerk, pc)).icon("Right");
+		
+		var perkName:String = "<b>"+pc.perkName+"</b>";
+		if (perk.tierList) {
+			var n:int = perk.tierList.length - perk.tierPos() - 1;
+			perkName += (perkMenuStyle == 0) ? " " : "\n";
+			perkName += "<b>(+"+n+" follow-up "+(n>1?"perks":"perk")+")</b>";
+		}
+		
+		var desc:String = Parser.recursiveParser(pc.perkDesc);
+		var reqs:String = player.hasPerk(perk) ? "" : formatPerkRequirements(perk, true);
+		if (reqs) reqs = "\n" + reqs;
+		if (player.hasPerk(perk)) {
+			btn.disable();
+			btn.text("");
+			btn.icon("Yes");
+		} else if (!perk.available(player)) {
+			btn.disable();
+			btn.icon("");
+			btn.labelText = "?";
+		} else if (player.perkPoints <= 0) {
+			btn.disable();
+			btn.icon("");
+		}
+		switch (perkMenuStyle) {
+			case 0:
+				text1.width    = textwidth;
+				text1.htmlText = perkName+": \n"+desc+reqs
+				perkgrid.addElement(btn);
+				perkgrid.addElement(text1);
+				break;
+			case 1:
+				text1.width    = textwidth;
+				text1.htmlText = perkName+reqs;
+				btn.hint(desc);
+				perkgrid.addElement(btn);
+				perkgrid.addElement(text1);
+				break;
+			case 2:
+				text1.width    = textwidth / 3;
+				text1.htmlText = perkName;
+				text2.width    = textwidth * 2 / 3;
+				text2.htmlText = desc + reqs;
+				perkgrid.addElement(btn);
+				perkgrid.addElement(text1);
+				perkgrid.addElement(text2);
+				break;
+		}
+	}
+	
 	public function newPerkMenu(category:*=null):void {
 		preferOld = false;
 		mainView.toolTipView.hide();
@@ -1112,83 +1192,24 @@ public class PerkMenu extends BaseContent {
 		perks = sortedBy(perks, sorterRelativeDistance);
 		
 		var nperks:int = 0, navail:int = 0;
-		var style:int = 2; // 0: desc below name, 1: desc in tooltip, 2: desc in separate column
 		var perkgrid:Block = new Block({
 			layoutConfig: {
 				type: "grid",
-				setWidth: true,
-				columns: style == 2 ? [40, -1, -2] : [40, -1],
+				//setWidth: true,
+				columns: perkMenuStyle == 2 ? [40, -1, -2] : [40, -1],
 				gap: 2
 			},
 			width: MainView.TEXTZONE_W - 16
 		});
+		var row:int = 0;
 		for each (perk in perks) {
 			var pc:PerkClass = new PerkClass(perk, perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
-			btn = new CoCButton({square:true})
-					.show("", curry(CoC.instance.playerInfo.applyPerk, pc))
-					.icon("Right");
-			var text:String;
-			text = "<b>"+pc.perkName+"</b>"
-			if (perk.tierList) {
-				n = perk.tierList.length - perk.tierPos() - 1;
-				if (style != 0) text += "\n";
-				text += " <b>(+"+n+" follow-up "+(n>1?"perks":"perk")+")</b>";
-			}
-			if (style == 1) {
-				btn.hint(Parser.recursiveParser(pc.perkDesc), pc.perkName);
-			}
-			if (style == 0) {
-				text += ": ";
-				text += Parser.recursiveParser(pc.perkDesc);
-			}
-			
-			var reqs:String = formatPerkRequirements(perk, true);
-			if (!player.hasPerk(perk) && reqs && style != 2) {
-				text += "\n" + reqs;
-			}
-			if (player.hasPerk(perk)) {
-				btn.disable();
-				btn.text("");
-				btn.icon("Yes");
-			} else if (!perk.available(player)) {
-				btn.disable();
-				btn.icon("");
-				btn.labelText = "?";
-			} else if (player.perkPoints <= 0) {
+			row++;
+			addRow(perkgrid, row, pc);
+			if (player.hasPerk(perk) && perk.available(player)) {
 				navail++;
-				btn.disable();
-				btn.icon("");
-			} else {
-				navail++;
-//				btn.toolTipHeader = "Click to purchase.";
 			}
 			nperks++;
-			perkgrid.addElement(btn);
-			
-			var textwidth:Number = MainView.TEXTZONE_W - MainView.BTN_H - 16;
-			if (style == 2) textwidth /= 2;
-			perkgrid.addTextField({
-				defaultTextFormat: mainView.mainText.defaultTextFormat,
-				htmlText: text,
-				x: btn.width + 4,
-				y: 0,
-				width: textwidth,
-				wordWrap: true,
-				autoSize: TextFieldAutoSize.LEFT
-			});
-			if (style == 2) {
-				text = Parser.recursiveParser(pc.perkDesc);
-				if (!player.hasPerk(perk) && reqs) text += "\n" + reqs;
-				perkgrid.addTextField({
-					defaultTextFormat: mainView.mainText.defaultTextFormat,
-					htmlText: text,
-					x: btn.width + 4,
-					y: 0,
-					width: textwidth,
-					wordWrap: true,
-					autoSize: TextFieldAutoSize.LEFT
-				});
-			}
 		}
 		perkgrid.doLayout();
 		
@@ -1208,6 +1229,7 @@ public class PerkMenu extends BaseContent {
 		
 		flushOutputTextToGUI();
 		mainView.setCustomElement(contentBlock,true,false, true);
+		contentBlock.doLayout();
 		
 		menu();
 		button(1).show(player.perkPoints > 0 ? "Skip" : "Exit", playerMenu);

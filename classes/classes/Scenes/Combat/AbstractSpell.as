@@ -324,7 +324,7 @@ public class AbstractSpell extends CombatAbility {
 			}
 		}
 		if (monster != null) {
-			if (hasTag(TAG_AOE) && monster.plural) damage *= 5;
+			if (hasTag(TAG_AOE) && (monster.plural || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 5;
 			if (category == CAT_SPELL_WHITE || category == CAT_SPELL_DIVINE) {
 				if (player.hasPerk(PerkLib.DivineKnowledge) && monster.cor > 65) {
 					damage *= 1.2;
@@ -448,6 +448,12 @@ public class AbstractSpell extends CombatAbility {
 		return sAV;
 	}
 	
+	public function bloodAffinityBoost():Number {
+		var bAB:Number = 1;
+		if (player.hasPerk(PerkLib.BloodAffinity)) bAB += 1;
+		return bAB;
+	}
+	
 	/**
 	 * Do a crit roll and apply crit multiplier.
 	 * Deal damage once or repeatedly (if Omnicaster and param set). Does NOT apply Omnicaster damage downscale!
@@ -516,6 +522,7 @@ public class AbstractSpell extends CombatAbility {
 		if (convergenceRepeat && player.hasPerk(PerkLib.Convergence) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.Enemy300Type)) {
 			if (player.hasPerk(PerkLib.SuperConvergence)) repeats *= 3;
 			else repeats *= 2;
+			if (monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType)) repeats *= 3;
 		}
 		var i:int = repeats;
 		while (i-->0) {

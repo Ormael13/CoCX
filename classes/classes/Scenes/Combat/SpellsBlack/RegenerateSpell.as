@@ -59,6 +59,10 @@ public class RegenerateSpell extends AbstractBlackSpell {
 			}
 		} else {
 			player.addStatusValue(StatusEffects.PlayerRegenerate, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.01) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.01);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
+			}
 			var hpChange2:Number = calcHeal();
 			if (display) {
 				outputText("<b>Regenerate healing power spreading in your body. (<font color=\"#008000\">+" + hpChange2 + "</font>)</b>\n\n");

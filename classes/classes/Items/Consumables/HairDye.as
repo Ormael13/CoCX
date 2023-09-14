@@ -5,6 +5,7 @@ import classes.BodyParts.Skin;
 import classes.CoC;
 import classes.EngineCore;
 import classes.ItemType;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
 
@@ -24,10 +25,11 @@ public class HairDye extends Consumable
 			var color:String = params.color;
 			var rarity:int = params.rarity;
 			_color = color.toLowerCase();
-			var shortName:String = color + " Dye";
+			var shortName:String = capitalizeFirstLetter(color) + " Dye";
 			var longName:String = "a vial of " + _color + " hair dye";
 			var description:String = "This bottle of dye will allow you to change the color of your hair, fur, scales, chitin, or feathers.";
 			super(id, shortName, longName, RARITY_TO_VALUE[rarity] || 6, description);
+			refineableInto([[1, AlchemyLib.AS_HAIR]], [], [], [_color]);
 		}
 		
 		override public function canUse():Boolean {
@@ -94,8 +96,8 @@ public class HairDye extends Consumable
 
 			var bm:BodyMaterial = player.bodyMaterials[material];
 			if (slot == "") {
+				clearOutput();
 				if (bm.binary) {
-					clearOutput();
 					outputText("Do you want to dye primary color (" + bm.color1 + "), secondary (" + bm.color2 + "), or both?");
 					EngineCore.menu();
 					EngineCore.addButton(0, "Primary", curry(dye, material, itemReq, itemCnt, "color1"));
@@ -104,7 +106,12 @@ public class HairDye extends Consumable
 					EngineCore.addButton(14, "Never mind", dyeCancel);
 					return;
 				} else {
-					slot = "color";
+					outputText("Do you want to dye solid " + _color +" or add it as a secondary color?");
+					EngineCore.menu();
+					EngineCore.addButton(0, "Solid", curry(dye, material, itemReq, itemCnt, "color"));
+					EngineCore.addButton(1, "Secondary", curry(dye, material, itemReq, itemCnt, "color2"));
+					EngineCore.addButton(14, "Never mind", dyeCancel);
+					return;
 				}
 			}
 			

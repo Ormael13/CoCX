@@ -34,7 +34,7 @@ public class BloodMissilesSpell extends AbstractBloodSpell {
 	
 	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number {
 		var damage:Number = adjustSpellDamage(
-				scalingBonusIntelligence(randomize),
+				scalingBonusIntelligence(randomize)*bloodAffinityBoost(),
 				DamageType.MAGICAL,
 				CAT_SPELL_BLOOD,
 				target,

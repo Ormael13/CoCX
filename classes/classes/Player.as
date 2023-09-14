@@ -53,6 +53,7 @@ import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
+import classes.Stats.Skills.AlchemySkill;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.RutEffect;
@@ -128,6 +129,8 @@ use namespace CoC;
 			for each (var slot:EnumValue in ItemConstants.EquipmentSlots) {
 				_equipment[slot.value] = slot.nothing();
 			}
+			alchemySkillStat = new AlchemySkill(this);
+			statStore.addStat(alchemySkillStat);
 		}
 
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -206,6 +209,10 @@ use namespace CoC;
 		//Teasing attributes
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
+		
+		// Alchemy skill
+		public var alchemySkillStat:AlchemySkill;
+		public function get alchemySkillLevel():Number { return alchemySkillStat.level }
 
 		//Only used in survival and realistic mode
 		public var hunger:Number = 0;
@@ -222,12 +229,6 @@ use namespace CoC;
 		public var tempInt:Number = 0;
 		public var tempWis:Number = 0;
 		public var tempLib:Number = 0;
-		//Number of times explored for new areas
-		public var explored:Number = 0;
-		public var exploredForest:Number = 0;
-		public var exploredDesert:Number = 0;
-		public var exploredMountain:Number = 0;
-		public var exploredLake:Number = 0;
 
 		//Player pregnancy variables and functions
 		private var pregnancy:Pregnancy = new Pregnancy();
@@ -618,6 +619,9 @@ use namespace CoC;
 		public function isWearingBra():Boolean {
 			return !upperGarment.isNothing;
 		}
+		public function humanForm():Boolean {
+			return (getStatusValue(StatusEffects.HumanForm, 1) == 1);
+		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
 		}
@@ -854,8 +858,14 @@ use namespace CoC;
 				armorDef += 1;
 			}
 			if (statStore.hasBuff("CrinosShape") && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)) {
-				armorDef = Math.round(armorDef * 1.1);
-				armorDef += 1;
+				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 2) {
+					armorDef = Math.round(armorDef * 1.2);
+					armorDef += 2;
+				}
+				else {
+					armorDef = Math.round(armorDef * 1.1);
+					armorDef += 1;
+				}
 			}
 			armorDef = Math.round(armorDef);
 			return armorDef;
@@ -913,7 +923,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.FEY_DRAGON) armorMDef += (2 * newGamePlusMod);
 			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorMDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.YGG_ROOT_CLAWS) armorMDef += (4 * newGamePlusMod);
-			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
+			if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
 				if (Forgefather.refinement == 0) armorMDef *= (1.15);
@@ -1297,17 +1307,15 @@ use namespace CoC;
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
-             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster)) || (spe >= 150 && hasPerk(PerkLib.Naturaljouster));
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
-             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade)) || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade));
 		}
 		public function haveWeaponForJouster():Boolean
 		{
-			return isSpearTypeWeapon();
+			return (isSpearTypeWeapon() || isPolearmTypeWeapon());
 		}
 		public function playerIsBlinded():Boolean
 		{
@@ -1324,6 +1332,16 @@ use namespace CoC;
 		public function ElectrifyWeaponActive():Boolean
 		{
 			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+		}
+		public function mummyControlLimit():Number
+		{
+			var mCL:Number = 5;
+			if (perkv1(IMutationsLib.AlphaHowlIM) >= 1) mCL += (perkv1(IMutationsLib.AlphaHowlIM) * 5);
+			return mCL;
+		}
+		public function zerkSereneMind():Boolean
+		{
+			return (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking)));
 		}
 
 		public function allEquipment():/*ItemType*/Array {
@@ -1541,6 +1559,19 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.AttackPotion)) {
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
 				else attack += Math.round(statusEffectv1(StatusEffects.AttackPotion));
+			}
+			if (statStore.hasBuff("CrinosShape") && hasPerk(PerkLib.BestialBlademaster)) {
+				var bbb:Number = 0.1;
+				if (hasStatusEffect(StatusEffects.Berzerking)) {
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Berzerking) >= 1) bbb += (0.1 * statusEffectv2(StatusEffects.Berzerking));
+					bbb += 0.1;
+				}
+				if (hasStatusEffect(StatusEffects.Lustzerking)) {
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Lustzerking) >= 1) bbb += (0.1 * statusEffectv2(StatusEffects.Lustzerking));
+					bbb += 0.1;
+				}
+				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 2) bbb *= 2;
+				attack *= (1+bbb);
 			}
 			attack = Math.round(attack);
 			return attack;
@@ -2681,6 +2712,7 @@ use namespace CoC;
 			}
 		}
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
+			if (hasPerk(PerkLib.BloodAffinity)) damage = Math.round(damage*0.5);
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
 				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
@@ -3252,6 +3284,7 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) mult -= 10;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) mult -= 30;
 			if (hasPerk(PerkLib.AquaticAffinity) || hasPerk(PerkLib.AffinityUndine)) mult += 100;
+			if (hasPerk(PerkLib.DarknessAffinity)) mult += 100;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_lightning') && jewelry2.hasBuff('res_lightning') && jewelry3.hasBuff('res_lightning') && jewelry4.hasBuff('res_lightning') && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
@@ -3297,6 +3330,7 @@ use namespace CoC;
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasPerk(PerkLib.DarknessAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.LightningAffinity)) mult += 00;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
 			if (jewelry1.hasBuff('res_darkness') && jewelry2.hasBuff('res_darkness') && jewelry3.hasBuff('res_darkness') && jewelry4.hasBuff('res_darkness') && headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R && necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= 15;
@@ -4528,19 +4562,18 @@ use namespace CoC;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
-
 			//Turn off withdrawal
 			//if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 1;
 			//Reset counter
 			flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] = 0;
 			//If highly addicted, rises slower
-			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 60) raw /= 2;
-			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 80) raw /= 2;
-			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 90) raw /= 2;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 60 && raw > 0) raw /= 2;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 80 && raw > 0) raw /= 2;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 90 && raw > 0) raw /= 2;
 			if(hasPerk(PerkLib.MinotaurCumResistance) || hasPerk(PerkLib.ManticoreCumAddict) || hasPerk(PerkLib.HaltedVitals) || hasPerk(PerkLib.LactaBovineImmunity)) raw *= 0;
 			//If in withdrawl, readdiction is potent!
-			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;
+			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
 			raw = Math.round(raw * 100)/100;
 			//PUT SOME CAPS ON DAT' SHIT
 			if(raw > 50) raw = 50;
@@ -5164,6 +5197,8 @@ use namespace CoC;
 			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
+			if (hasPerk(PerkLib.DeathPriest)) statStore.replaceBuffObject({'int.mult':Math.round(wisStat.mult.value)}, 'Death Priest', { text: 'Death Priest' });
+			if (!hasPerk(PerkLib.DeathPriest) && statStore.hasBuff('Death Priest')) statStore.removeBuffs('Death Priest');
 			if (hasPerk(PerkLib.LustingWarrior) && hasStatusEffect(StatusEffects.Overheat)) statStore.replaceBuffObject({'str.mult':Math.round(libStat.mult.value)}, 'Lusting Warrior', { text: 'Lusting Warrior' });
 			if (!hasPerk(PerkLib.LustingWarrior) && statStore.hasBuff('Lusting Warrior')) statStore.removeBuffs('Lusting Warrior');
 			if (hasPerk(PerkLib.AvatorOfCorruption) && isRaceCached(Races.UNICORN,2)) statStore.replaceBuffObject({'lib.mult':Math.round(intStat.mult.value/2)}, 'Avatar Of Corruption', { text: 'Avatar Of Corruption' });
@@ -5865,8 +5900,37 @@ use namespace CoC;
 				trace( "increaseEachCock at: " + i);
 				totalGrowth += growCock(i as Number, lengthDelta);
 			}
-
 			return totalGrowth;
+		}
+		
+		public function differentTypesOfCocks():Number
+		{
+			var dTOC:Number = 0;
+			if (anemoneCocks() > 0) dTOC += 1;
+			if (foamingCocks() > 0) dTOC += 1;
+			if (catCocks() > 0) dTOC += 1;
+			if (demonCocks() > 0) dTOC += 1;
+			if (displacerCocks() > 0) dTOC += 1;
+			if (eldritchCocks() > 0) dTOC += 1;
+			if (dogCocks() > 0) dTOC += 1;
+			if (dragonCocks() > 0) dTOC += 1;
+			if (foxCocks() > 0) dTOC += 1;
+			if (wolfCocks() > 0) dTOC += 1;
+			if (horseCocks() > 0) dTOC += 1;
+			if (kirinCocks() > 0) dTOC += 1;
+			if (kangaCocks() > 0) dTOC += 1;
+			if (lizardCocks() > 0) dTOC += 1;
+			if (cavewyrmCocks() > 0) dTOC += 1;
+			if (raijuCocks() > 0) dTOC += 1;
+			if (pigCocks() > 0) dTOC += 1;
+			if (normalCocks() > 0) dTOC += 1;
+			if (tentacleCocks() > 0) dTOC += 1;
+			if ((tentacleCocks() - stamenCocks()) > 0) dTOC += 1;
+			if (avianCocks() > 0) dTOC += 1;
+			if (gryphonCocks() > 0) dTOC += 1;
+			if (beeCocks() > 0) dTOC += 1;
+			if (insectCocks() > 0) dTOC += 1;
+			return dTOC;
 		}
 
 		// Attempts to put the player in heat (or deeper in heat).
@@ -6263,6 +6327,14 @@ use namespace CoC;
 			return herbMlt;
 		}
 		
+		public function giveAlchemyXP(XP:Number):void {
+			var alchMlt:Number = 1;
+			if (hasMutation(IMutationsLib.HumanVersatilityIM) && racialScore(Races.HUMAN) > 17) alchMlt += perkv1(IMutationsLib.HumanVersatilityIM);
+			if (hasKeyItem("Tel'Adre Magazine Issue 2") >= 0) alchMlt *= 2;
+			if (alchMlt > 1) XP *= alchMlt;
+			alchemySkillStat.giveXp(XP);
+		}
+		
 		public function usePotion(pt:PotionType):void {
 			pt.effect();
 			changeNumberOfPotions(pt, -1);
@@ -6637,23 +6709,30 @@ use namespace CoC;
 			return additionalTransformationChancesCounter;
 		}
 
-		public function MutagenBonus(statName: String, bonus: Number, applyEffect: Boolean = true):Boolean
+		public function MutagenBonusCap100():Number {
+			var cap:Number = 20;
+			if (hasPerk(PerkLib.Enhancement)) cap += 2;
+			if (hasPerk(PerkLib.Fusion)) cap += 2;
+			if (hasPerk(PerkLib.Enchantment)) cap += 2;
+			if (hasPerk(PerkLib.Refinement)) cap += 2;
+			if (hasPerk(PerkLib.Saturation)) cap += 2;
+			if (hasPerk(PerkLib.Perfection)) cap += 2;
+			if (hasPerk(PerkLib.Creationism)) cap += 2;
+			if (hasPerk(PerkLib.TransformationAcclimation)) cap += 2;
+			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 5;
+			return cap
+		}
+		public function GetMutagenBonus(statName:String):Number {
+			return buff("Mutagen").getValueOfStatBuff(statName+".mult");
+		}
+		public function MutagenBonus(statName: String, bonus: Number, applyEffect: Boolean = true, extraCap:Number = 0):Boolean
 		{
-			var cap:Number = 0.2;
-			if (hasPerk(PerkLib.Enhancement)) cap += 0.02;
-			if (hasPerk(PerkLib.Fusion)) cap += 0.02;
-			if (hasPerk(PerkLib.Enchantment)) cap += 0.02;
-			if (hasPerk(PerkLib.Refinement)) cap += 0.02;
-			if (hasPerk(PerkLib.Saturation)) cap += 0.02;
-			if (hasPerk(PerkLib.Perfection)) cap += 0.02;
-			if (hasPerk(PerkLib.Creationism)) cap += 0.02;
-			if (hasPerk(PerkLib.TransformationAcclimation)) cap += 0.02;
-			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
-            if (bonus == 0)
+			var cap:Number = 0.01*(MutagenBonusCap100() + extraCap);
+			if (bonus == 0)
                 return false; //no bonus - no effect
             if (applyEffect && removeCurse(statName, bonus, 1) > 0)
                 return false; //remove existing curses
-            var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
+            var current:Number = GetMutagenBonus(statName);
             var bonus_sign:Number = (bonus > 0) ? 1 : -1;
             var current_sign:Number = (current > 0) ? 1 : -1;
             if ((bonus_sign == current_sign) && Math.abs(current) >= cap) //already max and matching signs
@@ -6856,6 +6935,7 @@ use namespace CoC;
 				if (dcor > 0 && weapon == game.weapons.HNTCANE) dcor *= 0.5;
 				if (hasPerk(PerkLib.AscensionMoralShifter)) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 				if (hasPerk(PerkLib.Lycanthropy)) dcor *= 1.2;
+				if (hasPerk(PerkLib.Vulpesthropy)) dcor *= 0.8;
 				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
 				if (sens > 50 && dsens > 0) dsens /= 2;
 				if (sens > 75 && dsens > 0) dsens /= 2;

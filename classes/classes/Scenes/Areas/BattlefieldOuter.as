@@ -21,6 +21,17 @@ use namespace CoC;
 public class BattlefieldOuter extends BaseContent
 {
 	public var battlefieldEnemiesScene:BattlefieldEnemiesScenes = new BattlefieldEnemiesScenes();
+	
+	public const areaLevel:int = 19;
+	public function isDiscovered():Boolean {
+		return SceneLib.exploration.counters.battlefieldOuter > 0;
+	}
+	public function canDiscover():Boolean {
+		return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+	}
+	public function timesExplored():int {
+		return SceneLib.exploration.counters.battlefieldOuter;
+	}
 
 	public function BattlefieldOuter()
 	{
@@ -147,21 +158,23 @@ public class BattlefieldOuter extends BaseContent
 			chance: 0.4,
 			call: battlefieldEnemiesScene.encounterZombies,
 			when: battlefieldEnemiesScene.canEncounterZombies
-		}/*, {
+		}, {
 			name: "demonProjects",
+			label : "DemLab Subject",
+			kind  : 'monster',
 			chance: 0.2,
 			when: function ():Boolean {
-				return DemonLab.MainAreaComplete >= 4;
+				return SceneLib.exploration.demonLabProjectEncountersEnabled();
 			},
 			call: SceneLib.exploration.demonLabProjectEncounters
-		}*/);
+		});
 	}
 
-	public function isDiscovered():Boolean {
-		return flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0;
-	}
-	public function timesExplored():int {
-		return flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD];
+	public function discover():void {
+		SceneLib.exploration.counters.battlefieldOuter = 1;
+		clearOutput();
+		outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
+		endEncounter(60);
 	}
 
 
@@ -170,10 +183,10 @@ public class BattlefieldOuter extends BaseContent
 		explorer.setTags("battlefield", "battlefieldOuter");
 		explorer.prompt = "You explore the outer battlefield.";
 		explorer.onEncounter = function(e:ExplorationEntry):void {
-			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
+			SceneLib.exploration.counters.battlefieldOuter++;
 		}
 		explorer.leave.hint("Leave the outer battlefield");
-		explorer.skillBasedReveal(18, flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]);
+		explorer.skillBasedReveal(areaLevel, timesExplored());
 		explorer.doExplore();
 	}
 	
@@ -205,7 +218,6 @@ public class BattlefieldOuter extends BaseContent
 
 	private function discoverInner():void {
 		flags[kFLAGS.DISCOVERED_INNER_BATTLEFIELD] = 1;
-		player.explored++;
 		clearOutput();
 		outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
 		explorer.stopExploring();

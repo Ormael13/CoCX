@@ -66,7 +66,7 @@ public class ProjectFlameSpreader extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        outputText("While the area around you is scorched by the Flamespreader’s breath, you walk over to the injured creature as it lies on its back. It wiggles its shapely ass, presenting itself to you. It still shoots fire from its mouth, and you take no chances. You bring your [weapon] down onto the Flamespreader’s head, ending its life. As the light fades from its eyes, the malice seems to fade, and the sinister smile becomes something more genuine. [pg]");
+        outputText("[pg]While the area around you is scorched by the Flamespreader’s breath, you walk over to the injured creature as it lies on its back. It wiggles its shapely ass, presenting itself to you. It still shoots fire from its mouth, and you take no chances. You bring your [weapon] down onto the Flamespreader’s head, ending its life. As the light fades from its eyes, the malice seems to fade, and the sinister smile becomes something more genuine.[pg]");
         outputText("“<i>Thank…</i>” The creature can’t say anything more...But you know what it was going to say.[pg]");
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha")
             outputText("You turn back to see Kiha looking down at the creature, a mixture of sadness and anger on her face. She hefts her axe, and without a word, she cleaves a small tree in two. Wordlessly, you and your dragoness carry the body back to the village, where she already has a grave marked. Kiha nods in thanks, and you leave her, heading back to camp.");
@@ -77,7 +77,19 @@ public class ProjectFlameSpreader extends Monster {
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        cleanupAfterCombat();
+        outputText("[pg]You fall back from a particularly brutal blow. The flamespreader walks slowly over, licking her lips.");
+		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha" || flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha" || flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") outputText(" Kiha roars, swinging her axe at the slutty dragoness, but she too is weakened from the fight, and the flamespreader easily parries. She knocks Kiha out with a single strike, and looms over you.");
+		outputText("[pg]“<i>How…delicious.</i>” She looms over you, her cunt drooling and C cups bouncing slightly with each step.[pg]");
+		if (player.hasCock()) {
+			outputText("The flamespreader uses her talons to bare your [cock]. You try to move, but she plants one talon on your chest, leaning heavily on it.[pg]");
+			outputText("“<i>No…You’re my toy now.</i>” She grabs your neck, and begins to choke the life out of you! You struggle, grabbing her arms, but you’re too weak to resist as she wraps her tail around your neck, "+(player.isNaked()?"":"removing your [armor] ")+"drawing a thin line down your chest with a single talon.[pg]");
+			outputText("You begin to black out, spots filling your vision. You feel the scaly noose around your neck loosen, and you breathe, gasping for air…only to stop, stunned, as the demon-dragoness slams herself onto your [cock].[pg]");
+			outputText("“<i>Not bad. Shame it’s wasted on a weakling like you.</i>” You open your mouth to respond, but she chokes you again, planting her feet on either side of your hips while her tail remains firmly around your neck. Despite yourself, her slender body is arousing, and you can see everything.[pg]");
+			outputText("Now properly situated, the dragoness begins pumping herself up and down your [cock], while you fade in and out of consciousness. At some point, you feel yourself twitching, the weight upon your pelvis begins to lift.[pg]");
+			outputText("“<i>Mm…I wish all of Mareth could put up a fight like that.</i>” You hear, before the flamespreader flies off. You can barely even keep your eyes open, and you faint again.[pg]");
+		}
+		else outputText("She dives towards your groin, but to her displeasure, finds no cock there. She scoffs, shaking her head. “<i>Useless cunt</i>” , she mutters. You try to stand, but she ruthlessly kicks you across the face. You lie back, dazed, only to see the rapidly approaching shadow of her taloned foot again.[pg]");
+		cleanupAfterCombat();
     }
 
     public function ProjectFlameSpreader() {

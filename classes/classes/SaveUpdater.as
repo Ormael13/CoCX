@@ -11,6 +11,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Items.*;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
@@ -102,34 +103,51 @@ public class SaveUpdater extends NPCAwareContent {
 			["Chimera Squad", kACHIEVEMENTS.STORY_CHIMERA_SQUAD, player.hasKeyItem("Map to the Lethice’s Fortress") >= 0],
 			["Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, flags[kFLAGS.LETHICE_DEFEATED] > 0],
 			//Zones
-			["Explorer", kACHIEVEMENTS.ZONE_EXPLORER, player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && flags[kFLAGS.DISCOVERED_CAVES] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_TUNDRA] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_ASHLANDS] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0],
+			["Explorer", kACHIEVEMENTS.ZONE_EXPLORER,
+				SceneLib.forest.timesExploredOuter() > 0
+				&& SceneLib.forest.timesExploredInner() > 0
+				&& SceneLib.forest.timesExploredDeepwoods() > 0
+				&& SceneLib.lake.timesExplored() > 0
+				&& SceneLib.desert.timesExploredOuter() > 0
+				&& SceneLib.mountain.timesExploredMid() > 0
+				&& SceneLib.plains.timesExplored() > 0
+				&& SceneLib.swamp.timesExplored() > 0
+				&& SceneLib.blightridge.timesExplored() > 0
+				&& SceneLib.battlefiledouter.timesExplored() > 0
+				&& SceneLib.caves.timesExplored() > 0
+				&& SceneLib.highMountains.timesExplored() > 0
+				&& SceneLib.bog.timesExplored() > 0
+				&& SceneLib.tundra.timesExplored() > 0
+				&& SceneLib.glacialRift.timesExplored() > 0
+				&& SceneLib.ashlands.timesExplored() > 0
+				&& SceneLib.volcanicCrag.timesExplored() > 0],
 			["Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER, camp.placesCount() >= 10],
-			["Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I, player.explored >= 1],
-			["Forest Ranger", kACHIEVEMENTS.ZONE_FOREST_RANGER, player.exploredForest >= 100],
-			["We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100],
-			["Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, player.exploredLake >= 100],
-			["Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, player.exploredDesert >= 100],
-			["Bedouin", kACHIEVEMENTS.ZONE_BEDOUIN, flags[kFLAGS.DISCOVERED_INNER_DESERT] >= 100],
-			["Rookie", kACHIEVEMENTS.ZONE_ROOKIE, flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 100],
-			["Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] >= 100],
-			["Hiking", kACHIEVEMENTS.ZONE_HIKING, flags[kFLAGS.DISCOVERED_HILLS] >= 100],
-			["Trekking", kACHIEVEMENTS.ZONE_TREKKING, flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] >= 100],
-			["Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER, player.exploredMountain >= 100],
-			["Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100],
-			["Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS, flags[kFLAGS.TIMES_EXPLORED_PLAINS] >= 100],
-			["Wet All Over", kACHIEVEMENTS.ZONE_WET_ALL_OVER, flags[kFLAGS.TIMES_EXPLORED_SWAMP] >= 100],
-			["All murky", kACHIEVEMENTS.ZONE_ALL_MURKY, flags[kFLAGS.BOG_EXPLORED] >= 100],
-			["Tainted", kACHIEVEMENTS.ZONE_TAINTED, flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] >= 100],
-			["Defiled", kACHIEVEMENTS.ZONE_DEFILED, flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] >= 100],
-			["Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, flags[kFLAGS.DISCOVERED_BEACH] >= 100],
-			["Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR, flags[kFLAGS.DISCOVERED_OCEAN] >= 100],
-			["Diver", kACHIEVEMENTS.ZONE_DIVER, flags[kFLAGS.DISCOVERED_DEEP_SEA] >= 100],
-			["Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, flags[kFLAGS.DISCOVERED_CAVES] >= 100],
-			["Sub-Zero", kACHIEVEMENTS.ZONE_SUB_ZERO, flags[kFLAGS.DISCOVERED_TUNDRA] >= 100],
-			["Frozen", kACHIEVEMENTS.ZONE_FROZEN, flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100],
-			["Ashes to ashes, dust to dust", kACHIEVEMENTS.ZONE_ASHES_TO_ASHES_DUST_TO_DUST, flags[kFLAGS.DISCOVERED_ASHLANDS] >= 100],
-			["Roasted", kACHIEVEMENTS.ZONE_ROASTED, flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] >= 100],
-			["Sailor", kACHIEVEMENTS.ZONE_SEA_LEGS, player.statusEffectv1(StatusEffects.BoatDiscovery) >= 15],
+			["Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I, SceneLib.exploration.counters.explore >= 1],
+			["Forest Ranger", kACHIEVEMENTS.ZONE_FOREST_RANGER, SceneLib.forest.timesExploredOuter()+SceneLib.forest.timesExploredInner() >= 100],
+			["We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, SceneLib.forest.timesExploredDeepwoods() >= 100],
+			["Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, SceneLib.lake.timesExplored() >= 100],
+			["Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, SceneLib.desert.timesExploredOuter() >= 100],
+			["Bedouin", kACHIEVEMENTS.ZONE_BEDOUIN, SceneLib.desert.timesExploredInner() >= 100],
+			["Rookie", kACHIEVEMENTS.ZONE_ROOKIE, SceneLib.battlefiledboundary.timesExplored() >= 100],
+			["Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, SceneLib.battlefiledboundary.timesExplored() >= 100],
+			["Hiking", kACHIEVEMENTS.ZONE_HIKING, SceneLib.mountain.timesExploredHills() >= 100],
+			["Trekking", kACHIEVEMENTS.ZONE_TREKKING, SceneLib.mountain.timesExploredLow() >= 100],
+			["Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER, SceneLib.mountain.timesExploredMid() >= 100],
+			["Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, SceneLib.highMountains.timesExplored() >= 100],
+			["Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS, SceneLib.plains.timesExplored() >= 100],
+			["Wet All Over", kACHIEVEMENTS.ZONE_WET_ALL_OVER, SceneLib.swamp.timesExplored() >= 100],
+			["All murky", kACHIEVEMENTS.ZONE_ALL_MURKY, SceneLib.bog.timesExplored() >= 100],
+			["Tainted", kACHIEVEMENTS.ZONE_TAINTED, SceneLib.blightridge.timesExplored() >= 100],
+			["Defiled", kACHIEVEMENTS.ZONE_DEFILED, SceneLib.defiledravine.timesExplored() >= 100],
+			["Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, SceneLib.beach.timesExplored() >= 100],
+			["Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR, SceneLib.ocean.timesExplored() >= 100],
+			["Diver", kACHIEVEMENTS.ZONE_DIVER, SceneLib.exploration.counters.deepSea >= 100],
+			["Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, SceneLib.caves.timesExplored() >= 100],
+			["Sub-Zero", kACHIEVEMENTS.ZONE_SUB_ZERO, SceneLib.tundra.timesExplored() >= 100],
+			["Frozen", kACHIEVEMENTS.ZONE_FROZEN, SceneLib.glacialRift.timesExplored() >= 100],
+			["Ashes to ashes, dust to dust", kACHIEVEMENTS.ZONE_ASHES_TO_ASHES_DUST_TO_DUST, SceneLib.ashlands.timesExplored() >= 100],
+			["Roasted", kACHIEVEMENTS.ZONE_ROASTED, SceneLib.volcanicCrag.timesExplored() >= 100],
+			["Sailor", kACHIEVEMENTS.ZONE_SEA_LEGS, SceneLib.boat.timesExplored() >= 15],
 			["Farmer", kACHIEVEMENTS.ZONE_FARMER, player.statusEffectv1(StatusEffects.MetWhitney) >= 30],
 			["Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST, flags[kFLAGS.AMILY_VILLAGE_EXPLORED] >= 15],
 			//Levels
@@ -2170,26 +2188,164 @@ public class SaveUpdater extends NPCAwareContent {
 				if(player.eggs() >= 40) player.buff("EggFever").setStat("minlust", 0.2).withText("Egg Fever");
 				else if(player.eggs() >= 20) player.buff("EggFever").setStat("minlust", 0.1).withText("Egg Fever");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.057;
-			}/*
+			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.058) {
-				
+				// deepwoods, boat - handled by onUnknownStatusEffect()
+				// explore, forestOuter, forestInner, lake, desertOuter - handled by postLoadSaveObject()
+				SceneLib.exploration.counters.desertInner         = flags[kFLAGS.WEREFOX_EXTRAS];
+				SceneLib.exploration.counters.battlefieldBoundary = flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY];
+				SceneLib.exploration.counters.battlefieldOuter    = flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD];
+				// mountainsMid - handled by postLoadSaveObject()
+				SceneLib.exploration.counters.hills               = flags[kFLAGS.DISCOVERED_HILLS];
+				SceneLib.exploration.counters.mountainsLow        = flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN];
+				SceneLib.exploration.counters.highMountains       = flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN];
+				SceneLib.exploration.counters.plains              = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131];
+				SceneLib.exploration.counters.swamp               = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272];
+				SceneLib.exploration.counters.bog                 = flags[kFLAGS.BOG_EXPLORED];
+				SceneLib.exploration.counters.blightRidge         = flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE];
+				SceneLib.exploration.counters.defiledRavine       = flags[kFLAGS.DISCOVERED_DEFILED_RAVINE];
+				SceneLib.exploration.counters.beach               = flags[kFLAGS.DISCOVERED_BEACH];
+				SceneLib.exploration.counters.ocean               = flags[kFLAGS.DISCOVERED_OCEAN];
+				SceneLib.exploration.counters.caves               = flags[kFLAGS.DISCOVERED_CAVES];
+				SceneLib.exploration.counters.tundra              = flags[kFLAGS.DISCOVERED_TUNDRA];
+				SceneLib.exploration.counters.glacialRiftOuter    = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059];
+				SceneLib.exploration.counters.ashlands            = flags[kFLAGS.DISCOVERED_ASHLANDS];
+				SceneLib.exploration.counters.volcanicCragOuter   = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060];
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.058;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.059) {
-				
+				outputText("\n\nFree alchemy skill lvl-up's for pc's with alchemy background. Wohooo you're going into 5 lvl alchemy territory.");
+				if ((player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) && player.alchemySkillStat.level < 5) {
+					player.alchemySkillStat.level = 5;
+					player.alchemySkillStat.xp = 0;
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.059;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.060) {
-				
+				outputText("\n\nSeparating 'white and brown'-like pigments in two.");
+				// Fix "x and y" pigments in stock
+				var pigmentStock:Object = Crafting.pigmentStock;
+				for each (var s:String in keys(pigmentStock)) {
+					if (s.indexOf(" and ") > 0) {
+						var c1:String = s.substring(0, s.indexOf(" and "));
+						var c2:String = s.substring(s.indexOf(" and ") + 5);
+						SceneLib.crafting.addPigment(c1, pigmentStock[s]);
+						SceneLib.crafting.addPigment(c2, pigmentStock[s]);
+						delete pigmentStock[s];
+					}
+				}
+				// Fix "x and y" pigments in knowledge
+				var ingredientKnowledge:Object = Crafting.ingredientKnowledge;
+				for each (var item:String in keys(ingredientKnowledge)) {
+					var pigmentKnowledge:Object = ingredientKnowledge[item][AlchemyLib.RT_PIGMENT];
+					if (!pigmentKnowledge) continue;
+					for each (s in keys(pigmentKnowledge)) {
+						if (s.indexOf(" and ") > 0) {
+							c1 = s.substring(0, s.indexOf(" and "));
+							c2 = s.substring(s.indexOf(" and ") + 5);
+							pigmentKnowledge[c1] = true;
+							pigmentKnowledge[c2] = true;
+							delete pigmentKnowledge[s];
+						}
+					}
+				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.060;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.061) {
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.070) {
+				outputText("\n\nIf you not werewolf nothing to worry here...");
+				if (player.hasPerk(PerkLib.Lycanthropy)) {
+					var ngM:Number = (player.newGamePlusMod() + 1);
+					var bonusStats2:Number = 0;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats2 += 10;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats2 += 20;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats2 += 30;
+					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats2 += 40;
+					player.removePerk(PerkLib.Lycanthropy);
+					player.createPerk(PerkLib.Lycanthropy,bonusStats2,0,0,0);
+					player.statStore.replaceBuffObject({ 'str.mult': bonusStats2*ngM,'tou.mult': bonusStats2*0.6*ngM,'spe.mult': bonusStats2*0.4*ngM, 'minlustx': bonusStats2 * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.070;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.080) {
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2059] = 0;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2060] = 0;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0131] = 0;
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] != 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0272] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.080;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.09) {
+				if (SceneLib.vapula.vapulaSlave()) inventory.takeItem(weapons.D_FLAIL, promptSaveUpdate);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.09;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.10) {
+				if (SceneLib.exploration.counters.explore > 0 && flags[kFLAGS.ALVINA_FOLLOWER] < 1) flags[kFLAGS.ALVINA_FOLLOWER] = 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.10;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.11) {
 				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.061;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.11;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.12) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.12;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.13) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.13;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.14) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
+	}
+	
+	private var updateQueue:/*Function*/Array = [];
+	public function onUnknownPerk(player:Player, savedata:Object, id:String, value1:Number,value2:Number, value3:Number,value4:Number):void {
+		CoC_Settings.error("Unknown perk id: " + id);
+	}
+	public function onUnknownStatusEffect(player:Player, savedata:Object, id:String, value1:Number, value2:Number, value3:Number, value4:Number):void {
+		switch (id) {
+			case "exploredDeepwoods":
+				// We can't set variable now because status effects are loaded before saveable states.
+				// Schedule the update after SS are loaded, instead
+				updateQueue.push(function ():void {
+					SceneLib.exploration.counters.deepwoods = value1;
+				});
+				return;
+			case "Boat Discovery":
+				updateQueue.push(function ():void {
+					SceneLib.exploration.counters.boat = 1 + value1;
+				});
+				return;
+		}
+		CoC_Settings.error("Cannot find status effect '" + id + "'");
+	}
+	public function onUnknownInventoryItem(player:Player, savedata:Object, itemId:String, savedShortName:String, quantity:Number, storageSlot:ItemSlotClass):void {
+		storageSlot.emptySlot();
+	}
+	public function onUnknownEquipmentItem(player:Player, savedata:Object, slot:int, savedId:String, savedName:String, defaultValue:Equipable):Boolean {
+		player.internalEquipItem(slot, defaultValue, false, true);
+		return false;
+	}
+	/**
+	 * This is called after everything was loaded, but before stat update
+	 */
+	public function postLoadSaveObject(player:Player, savedata:Object):void {
+		if (!(savedata.ss && savedata.ss["Exploration"])) {
+			SceneLib.exploration.counters.lake         = savedata.exploredLake;
+			SceneLib.exploration.counters.mountainsMid = savedata.exploredMountain;
+			SceneLib.exploration.counters.forestInner  = int(savedata.exploredForest/2);
+			SceneLib.exploration.counters.forestOuter  = int(savedata.exploredForest/2);
+			SceneLib.exploration.counters.desertOuter  = savedata.exploredDesert;
+			SceneLib.exploration.counters.explore      = savedata.explored;
+		}
+		for each (var fn:Function in updateQueue) {
+			fn();
+		}
+		updateQueue = [];
 	}
 
 	public function refundPerk(perk:PerkType):void {

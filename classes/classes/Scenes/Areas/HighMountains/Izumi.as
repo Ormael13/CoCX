@@ -125,6 +125,7 @@ public class Izumi extends Monster
 			this.lustVuln = 0.33;
 			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 1) this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 3) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

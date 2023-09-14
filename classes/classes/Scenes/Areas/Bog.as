@@ -34,8 +34,9 @@ public class Bog extends BaseContent
 				label : "(Hallow) Phouka",
 				kind  : 'event',
 				unique: true,
+				chance: 0.25,
 				when: function ():Boolean {
-					return (isHalloween() && (date.fullYear > flags[kFLAGS.TREACLE_MINE_YEAR_DONE]) && flags[kFLAGS.BOG_EXPLORED] % 4 == 0) && (flags[kFLAGS.PHOUKA_LORE] > 0)
+					return (isHalloween() && (date.fullYear > flags[kFLAGS.TREACLE_MINE_YEAR_DONE])) && (flags[kFLAGS.PHOUKA_LORE] > 0)
 				},
 				call: phoukaScene.phoukaHalloween
 			}, {
@@ -122,33 +123,46 @@ public class Bog extends BaseContent
 				},
 				chance: bogChance,
 				call: zenjiEncounterFn
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
-
+		
+		public const areaLevel:int = 23;
 		public function isDiscovered():Boolean {
-			return flags[kFLAGS.BOG_EXPLORED] > 0;
+			return SceneLib.exploration.counters.bog > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
 		}
 		public function timesExplored():int {
-			return flags[kFLAGS.BOG_EXPLORED];
+			return SceneLib.exploration.counters.bog;
 		}
-
+		public function discover():void {
+			clearOutput();
+			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)");
+			SceneLib.exploration.counters.bog++;
+			endEncounter(60);
+		}
+		
+		
 		public function exploreBog():void
 		{
 			explorer.prepareArea(bogEncounter);
 			explorer.setTags("bog");
 			explorer.prompt = "You explore the dark bog.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.BOG_EXPLORED]++;
+				SceneLib.exploration.counters.bog++;
 			}
 			explorer.leave.hint("Leave the dark bog");
-			explorer.skillBasedReveal(23, flags[kFLAGS.BOG_EXPLORED]);
+			explorer.skillBasedReveal(areaLevel, timesExplored());
 			explorer.doExplore();
 		}
 	

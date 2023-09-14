@@ -24,7 +24,7 @@ public class Color {
 	public static function convertColorEx(input:Object,alpha:Boolean):uint {
 		var s:String = input as String;
 		if (s) return parseColorString(s);
-		if (input is Number) return uint(input);
+		if (input is Number) return int(input);
 		if (!input) return INVALID_COLOR;
 		if ('r' in input && 'g' in input && 'b' in input) {
 			var r:Number = input.r;
@@ -145,6 +145,20 @@ public class Color {
 		var hsl:Object = toHsl(color);
 		hsl.l = Utils.boundFloat(0,hsl.l+amount,100);
 		return fromHsl(hsl);
+	}
+	public static function interpolate(startARGB:Object, endARGB:Object, t:Number):uint {
+		var deltaARGB:Object = {
+			a: endARGB.a - startARGB.a,
+			r: endARGB.r - startARGB.r,
+			g: endARGB.g - startARGB.g,
+			b: endARGB.b - startARGB.b
+		};
+		return fromArgbFloat(
+						Utils.lerp(startARGB.a, deltaARGB.a, t),
+						Utils.lerp(startARGB.r, deltaARGB.r, t),
+						Utils.lerp(startARGB.g, deltaARGB.g, t),
+						Utils.lerp(startARGB.b, deltaARGB.b, t)
+				);
 	}
 	private static const KnownColors:Object = {
 		transparent: "#00000000",

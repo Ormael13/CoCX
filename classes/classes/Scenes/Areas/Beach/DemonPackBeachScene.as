@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.Beach 
+package classes.Scenes.Areas.Beach
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -11,7 +11,7 @@ package classes.Scenes.Areas.Beach
 	public class DemonPackBeachScene extends BaseContent
 	{
 		
-		public function DemonPackBeachScene() 
+		public function DemonPackBeachScene()
 		{
 		}
 
@@ -39,7 +39,7 @@ private function beachRunAway():void {
 	//Run away successfully if fast enough.  160 speed = autosuccess.
 	if(player.spe > 30 && player.spe/2 > rand(80)) {
 		outputText("You bolt out from under your bush and scramble away over the sand. Before long the swishing sounds of pursuit fade away and looking back you see the few demons with the gusto to follow you tramping back to the bay.");
-		doNext(camp.returnToCampUseOneHour);
+		endEncounter();
 	}
 	else {
 		outputText("You scramble away from the demons, but are too late. A swift demon with canine features tackles you to the ground.  Luckily he loses his grip as you tumble onto the sand and you slither free, stand up and wheel to face the host of leering demons which begin to advance with malicious intent.");
@@ -47,7 +47,7 @@ private function beachRunAway():void {
 		doNext(playerMenu);
 	}
 }
-		
+	
 	}
 
 }

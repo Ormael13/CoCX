@@ -43,7 +43,14 @@ use namespace CoC;
 			else {
 				var damage:Number = 0;
 				damage += this.weaponRangeAttack * 100;
-				//jeśli pc ma team atak jest traktowany jako aoe ^^
+				if (player.companionsInPCParty()) {
+					var splash:Number = 1;
+					if (flags[kFLAGS.PLAYER_COMPANION_0] != "") splash += 1;
+					if (flags[kFLAGS.PLAYER_COMPANION_1] != "") splash += 1;
+					if (flags[kFLAGS.PLAYER_COMPANION_2] != "") splash += 1;
+					if (flags[kFLAGS.PLAYER_COMPANION_3] != "") splash += 1;
+					damage *= splash;
+				}
 				player.takePhysDamage(damage, true);
 			}
 			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";
@@ -54,25 +61,39 @@ use namespace CoC;
 		private function jinxAyotechPistol():void {
 			if (EngineCore.silly()) this.weaponRangeName = "Zapper";
 			else this.weaponRangeName = "ayotech pistol";
+			outputText("Ayotech maniac casually fires " + this.weaponRangeName+" at you with high skill. ");
 			var damage:Number = 0;
 			damage += this.weaponRangeAttack * 20;
 			player.takePhysDamage(damage, true);
+			if (player.buff("Zapped").isPresent()) player.buff("Zapped").addStats({spe: -20}).addDuration(2);
+			else player.buff("Zapped").addStats( {"spe": -20} ).withText("Zapped").combatTemporary(2);
 			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";
 			else this.weaponRangeName = "ayotech minigun";
-			outputText("\n\n");//speed debuff on pc for few rounds
+			outputText("\n\n");
 		}
 		
 		private function jinxAyotechGrenades():void {
 			outputText("Ayotech maniac casually throws "+(EngineCore.silly()?"Flame Chompers":"ayotech grenades")+" at you with high skill. ");//stun for 1-2 turns
+			
+			if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned,(1+rand(2)),0,0,0);
 		}
 		
 		private function jinxAyotechSuperRocket():void {
 			if (EngineCore.silly()) this.weaponRangeName = "Super Mega Death Rocket";
-			else this.weaponRangeName = "ayotech rocket";
+			else this.weaponRangeName = "large ayotech rocket";
+			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
+			outputText("Ayotech maniac with high precision fires "+this.weaponRangeName+" at you. ");
 			var damage:Number = 0;
-			damage += this.weaponRangeAttack * 20;
+			damage += this.weaponRangeAttack * 500;
+			if (player.companionsInPCParty()) {
+				var splash:Number = 1;
+				if (flags[kFLAGS.PLAYER_COMPANION_0] != "") splash += 1;
+				if (flags[kFLAGS.PLAYER_COMPANION_1] != "") splash += 1;
+				if (flags[kFLAGS.PLAYER_COMPANION_2] != "") splash += 1;
+				if (flags[kFLAGS.PLAYER_COMPANION_3] != "") splash += 1;
+				damage *= splash;
+			}
 			player.takePhysDamage(damage, true);
-			//jeśli pc ma team atak jest traktowany jako aoe ^^
 			if (EngineCore.silly()) this.weaponRangeName = "Pow-Pow";
 			else this.weaponRangeName = "ayotech minigun";
 			outputText("\n\n");
@@ -80,15 +101,18 @@ use namespace CoC;
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(2);
+			var choice:Number = rand(5);
 			if (choice == 0) jinxBaseAttack();
 			if (choice == 1) {
 				if ((mana - 50) >= 0) jinxAyotechCanon();
 				else jinxBaseAttack();
 			}
-			//if (choice == 2) jinxAyotechPistol();
-			//if (choice == 3) jinxAyotechGrenades();
-			//if (choice == 4) jinxAyotechSuperRocket();
+			if (choice == 2) jinxAyotechPistol();
+			if (choice == 3) jinxAyotechGrenades();
+			if (choice == 4) {
+				if (hasStatusEffect(StatusEffects.AbilityCooldown1)) jinxBaseAttack();
+				else jinxAyotechSuperRocket();
+			}
 		}
 		
 		public function Jinx() 
@@ -96,7 +120,7 @@ use namespace CoC;
 			this.a = "the ";
 			this.short = "ayotech maniac";
 			this.imageName = "ayotech maniac";
-			this.long = "You're currently fighting an ayotech maniac.";//change Jinx to Minx???
+			this.long = "You're currently fighting gremlin ayotech maniac. For some weird reason she wears alot more belts than you would expect.";//change Jinx to Minx???
 			this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("A"));
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
@@ -122,14 +146,14 @@ use namespace CoC;
 			this.armorName = "light ayo armor";//zamienić na coś innego?
 			this.armorDef = 30;
 			this.armorMDef = 5;
-			//this.bonusHP = 200;
+			this.bonusHP = 200;
 			this.bonusLust = 45;
 			this.lustVuln = 0.85;
 			this.drop = NO_DROP;
 			//this.drop = new ChainedDrop()
 			//		.add(useables.GOLCORE, 1/4);
 			this.level = 15;
-			//this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			//this.createPerk(PerkLib., 0, 0, 0, 0);
 			checkMonster();
 		}
 		

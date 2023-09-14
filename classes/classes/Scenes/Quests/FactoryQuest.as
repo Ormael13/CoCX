@@ -44,7 +44,7 @@ public class FactoryQuest extends AbstractQuest {
 	}
 	override public function objectives():Array {
 		if (status != STATUS_IN_PROGRESS) return [];
-		var obj1:Array  = [STATUS_IN_PROGRESS, "Find the factory at the foot of the mountains."];
+		var obj1:Array  = [STATUS_IN_PROGRESS, "Find the factory at the hills."];
 		var obj2:Array  = [STATUS_NOT_STARTED, "Defeat the factory boss."];
 		var obj3:Array  = [STATUS_NOT_STARTED, "Clear the factory."];
 		var obj4a:Array = [STATUS_UNKNOWN, "Option A: Shut down the factory."];

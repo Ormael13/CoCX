@@ -1,12 +1,12 @@
 package classes.Items.Consumables
 {
+import classes.BodyParts.*;
 import classes.EngineCore;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
-import classes.PerkLib;
-import classes.BodyParts.*;
 
 /**
 	 * Body lotions, courtesy of Foxxling.
@@ -24,6 +24,7 @@ import classes.BodyParts.*;
 			var value:int = ConsumableLib.DEFAULT_VALUE;
 			var description:String = "A small wooden flask filled with a " + longAdj + " . A label across the front says, \"" + adj + " Lotion.\"";
 			super(id, shortName, longName, value, description);
+			refineableInto([[1, AlchemyLib.AS_SKIN]],[]);
 		}
 
 		private function liquidDesc():String {

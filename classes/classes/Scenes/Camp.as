@@ -73,6 +73,9 @@ public class Camp extends NPCAwareContent{
 
 	public function returnToCamp(timeUsed:int):void {
 		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.HumanForm) && player.statusEffectv1(StatusEffects.HumanForm) <= 0){
+			player.addStatusValue(StatusEffects.HumanForm, 1, 1);
+		}
 		if (explorer.inEncounter) {
 			if (timeUsed == 1) {
 				// Encounter ended with returnToCampUsingOneHour.
@@ -134,7 +137,7 @@ public class Camp extends NPCAwareContent{
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
-	
+
 	/**
 	 * @return 0: normal lust, 1: over lust, 2: over lust, can't do anything
 	 */
@@ -156,9 +159,10 @@ public class Camp extends NPCAwareContent{
 		}
 		return 0;
 	}
-	
+
 	public function doCamp():void { //Only called by playerMenu
 		//Force autosave on HARDCORE MODE! And level-up.
+
 		if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) {
 			trace("Autosaving to slot: " + player.slotName);
 
@@ -1044,6 +1048,9 @@ public class Camp extends NPCAwareContent{
 		}
 
 		//Menu
+		// [Explore  ] [Places    ] [Inventory] [Stash       ] [      ]
+		// [Followers] [Lovers    ] [Slaves   ] [Camp Actions] [Cabin ]
+		// [SF/Morph ] [Masturbate] [Wait/R/S ] [            ] [Cheats]
 
 		menu();
 		addButton(0, "Explore", exploreEvent).hint("Explore to find new regions and visit any discovered regions.");
@@ -1074,7 +1081,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		if (!CoC.instance.lockCheats) addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+		//if (!CoC.instance.lockCheats) addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
 
 		//Remove buttons according to conditions.
 		if (isNightTime) {
@@ -1797,10 +1804,13 @@ public class Camp extends NPCAwareContent{
 				outputText("\n\n");
 				buttons.add("Vapula", vapula.callSlaveVapula);
 			}
-			//Galia
+			//Galia Slave
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 1 && EvangelineFollower.EvangelineFollowerStage >= 1) {
-				if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
-				else outputText("Nothing to see here yet.\n\n");
+				if (flags[kFLAGS.GALIA_AFFECTION] < 2) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
+				else {
+					outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
+					buttons.add("Galia", SceneLib.galiaFollower.GaliaCampMainMenuSlave).hint("Visit Galia.");
+				}
 			}
 			//Excellia Slave
 			if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2) {
@@ -2137,6 +2147,9 @@ public class Camp extends NPCAwareContent{
 	public function campActions():void {
 		hideMenus();
 		menu();
+		// [Build   ] [Winions] [Misc     ] [SpendTime] [NPC's     ]
+		// [Crafting] [Garden ] [Herbalism] [         ] [Quest Loot]
+		// [Questlog] [Recall ] [Dummy    ] [Ascension] [Back      ]
 		clearOutput();
 		outputText("What would you like to do?");
 		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.").disableIf(isNightTime,"It's too dark for that!");
@@ -2144,16 +2157,15 @@ public class Camp extends NPCAwareContent{
 		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
 		addButton(3, "Spend Time", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
 		addButton(4, "NPC's", SparrableNPCsMenu);
-		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
+		addButton(5, "Crafting", SceneLib.crafting.craftingMain).hint("Craft some items.");
 		//addButtonDisabled(6, "Garden", "Local Committee of Alraunes took over this place for re-nationalization.");
 		if (SceneLib.garden.canAccessGarden()) addButton(6, "Garden", SceneLib.garden.accessGarden).hint("Manage your garden of medicinal plants.");
 		else addButtonDisabled(6, "Garden", "Req. to have Herb bag of any sort.");
 		addButton(7, "Herbalism", SceneLib.garden.herbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.").disableIf(isNightTime,"It's too dark to do any gardening!").disableIf(!player.hasStatusEffect(StatusEffects.CampRathazul),"Would you kindly find Rathazul first?");
-		addButton(8, "Materials", SceneLib.crafting.accessCraftingMaterialsBag).hint("Manage your bag with crafting materials.").disableIf(Crafting.BagSlot01Cap <= 0, "You'll need a bag to do that.");
 		addButton(9, "Quest Loot", SceneLib.adventureGuild.questItemsBag).hint("Manage your bag with quest items.").disableIf(!AdventurerGuild.playerInGuild, "Join the Adventure Guild for a quest bag!");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
-		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
+		if (SceneLib.exploration.counters.explore >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.").disableIf(isNightTime,"It's too dark for that!");
 		addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures. The game depending on your choice would also get harder. If you have Sky Poison Pearl could carry over some items to new adventure.").disableIf(flags[kFLAGS.LETHICE_DEFEATED] <= 0, "Don't you have a job to finish first? Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
 	}
@@ -2245,7 +2257,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
-		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
+		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(12, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
 		addButton(13, "C & S", menuForCombiningAndSeperating).hint("Combining & Seperating");
 		addButton(14, "Back", campActions);
 	}
@@ -2263,51 +2275,66 @@ public class Camp extends NPCAwareContent{
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		doNext(campMiscActions);
 	}
-	
+
 	public function menuForCombiningAndSeperating():void {
 		clearOutput();
-		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons.");
+		outputText("You can combine two single weapons into one dual weapon or separate dual weapons into two single weapons. <b>(WARNING: ENCHANTED ITEMS WOULD IRREVERSABLE LOOSE ENCHANTMENTS DURING COMBINING!!!)</b>");
 		menu();
-		var btn:int = 0;
-		if (player.itemCount(weapons.KAMA) > 1) addButton(btn++, "D.Kama", menuCombining, weapons.KAMA, weapons.D_KAMA).hint("Combine 2 Kama into Dual Kama");
-		if (player.itemCount(weapons.D_KAMA) > 0) addButton(btn++, "Kama", menuSeparating, weapons.D_KAMA, weapons.KAMA).hint("Separate Dual Kama into 2 Kama");
-		if (player.itemCount(weapons.DAGGER) > 1) addButton(btn++, "D.Daggers", menuCombining, weapons.DAGGER, weapons.DDAGGER).hint("Combine 2 Daggers into Dual Daggers");
-		if (player.itemCount(weapons.DDAGGER) > 0) addButton(btn++, "Dagger", menuSeparating, weapons.DDAGGER, weapons.DAGGER).hint("Separate Dual Daggers into 2 Daggers");
-		if (player.itemCount(weapons.ANGSTD1) > 1) addButton(btn++, "A.Daggers", menuCombining, weapons.ANGSTD1, weapons.ANGSTD).hint("Combine 2 Angst Dagger(s) into Angst Daggers");
-		if (player.itemCount(weapons.ANGSTD) > 0) addButton(btn++, "A.Dagger", menuSeparating, weapons.ANGSTD, weapons.ANGSTD1).hint("Separate Angst Daggers into 2 Angst Dagger(s)");
-		if (player.itemCount(weapons.BFSWORD) > 1) addButton(btn++, "D.BF Swords", menuCombining, weapons.BFSWORD, weapons.DBFSWO).hint("Combine 2 BF Swords into Dual BF Swords");
-		if (player.itemCount(weapons.DBFSWO) > 0) addButton(btn++, "BF Sword", menuSeparating, weapons.DBFSWO, weapons.BFSWORD).hint("Separate Dual BF Swords into 2 BF Swords");
-		if (player.itemCount(weapons.BFTHSWORD) > 1) addButton(btn++, "D.BFTH Swords", menuCombining, weapons.BFTHSWORD, weapons.DBFTHSWO).hint("Combine 2 BF Two-Handed Swords into Dual BF Two-Handed Swords");
-		if (player.itemCount(weapons.DBFTHSWO) > 0) addButton(btn++, "BFTH Sword", menuSeparating, weapons.DBFTHSWO, weapons.BFTHSWORD).hint("Separate Dual BF Two-Handed Swords into 2 BF Two-Handed Swords");
-		if (player.itemCount(weapons.BFWHIP) > 1) addButton(btn++, "D.BF Whips", menuCombining, weapons.BFWHIP, weapons.DBFWHIP).hint("Combine 2 BF Whips into Dual BF Whips");
-		if (player.itemCount(weapons.DBFWHIP) > 0) addButton(btn++, "BF Whip", menuSeparating, weapons.DBFWHIP, weapons.BFWHIP).hint("Separate Dual BF Whips into 2 BF Whips");
-		if (player.itemCount(weapons.NODACHI) > 1) addButton(btn++, "D.Nodachi", menuCombining, weapons.NODACHI, weapons.DNODACHI).hint("Combine 2 Nodachi into Dual Nodachi");
-		if (player.itemCount(weapons.DNODACHI) > 0) addButton(btn++, "Nodachi", menuSeparating, weapons.DNODACHI, weapons.NODACHI).hint("Separate Dual Nodachi into 2 Nodachi");
-		if (player.itemCount(weapons.WHIP) > 1) addButton(btn++, "D. Whip", menuCombining, weapons.WHIP, weapons.PWHIP).hint("Combine 2 Whip into Dual Whip");
-		if (player.itemCount(weapons.PWHIP) > 0) addButton(btn++, "Whip", menuSeparating, weapons.PWHIP, weapons.WHIP).hint("Separate Dual Whip into 2 Whips");
-		if (player.itemCount(weapons.WARHAMR) > 1) addButton(btn++, "D.HWhamm", menuCombining, weapons.WARHAMR, weapons.D_WHAM_).hint("Combine 2 Huge Warahmmers into Dual Huge Warahmmer");
-		if (player.itemCount(weapons.D_WHAM_) > 0) addButton(btn++, "HWhamm", menuSeparating, weapons.D_WHAM_, weapons.WARHAMR).hint("Separate Dual Huge Warahmmer into 2 Huge Warahmmers");
-		if (player.itemCount(weapons.SUCWHIP) > 1) addButton(btn++, "P.S.Whips", menuCombining, weapons.SUCWHIP, weapons.PSWHIP).hint("Combine 2 Succubi Whips into Pair of Succubi Whips");
-		if (player.itemCount(weapons.PSWHIP) > 0) addButton(btn++, "S.Whips", menuSeparating, weapons.PSWHIP, weapons.SUCWHIP).hint("Separate Pair of Succubi Whips into 2 Succubi Whips");
+		var weaponList: Array = [
+			[weapons.KAMA, weapons.D_KAMA],
+			[weapons.DAGGER, weapons.DDAGGER],
+			[weapons.ANGSTD1, weapons.ANGSTD],
+			[weapons.DAGWHIP, weapons.DDAGWHIP],
+			[weapons.BFSWORD, weapons.DBFSWO],
+			[weapons.BFTHSWORD, weapons.DBFTHSWO],
+			[weapons.BFWHIP, weapons.DBFWHIP],
+			[weapons.NODACHI, weapons.DNODACHI],
+			[weapons.WHIP, weapons.PWHIP],
+			[weapons.WARHAMR, weapons.D_WHAM_],
+			[weapons.SUCWHIP, weapons.PSWHIP],
+			[weapons.KATANA, weapons.DKATANA],
+			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS]
+		];
+		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
+		addButton(4,"Seperate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
 	}
-	public function menuCombining(weapon1: Weapon, weapon2: Weapon):void {
+
+	public function menuCombineStaging(weaponList:Array):void{
+		menu();
+		var bd:ButtonDataList = new ButtonDataList();
+		for each(var weapongroup:Array in weaponList){
+			bd.add(weapongroup[0].name,curry(menuCombining, weapongroup[0], weapongroup[1])).disableIf(player.itemCount(weapongroup[0]) < 2, "You need more than one " + weapongroup[0].name + "to make a " + weapongroup[1].name + "!").hint("Combine 2 "+ weapongroup[0].name + " into a " + weapongroup[1].name)
+		}
+		submenu(bd, menuForCombiningAndSeperating,0,false);
+	}
+
+	public function menuSeperateStaging(weaponList:Array):void{
+		menu();
+		var bd:ButtonDataList = new ButtonDataList();
+		for each(var weapongroup:Array in weaponList){
+			bd.add(weapongroup[1].name,curry(menuSeparating, weapongroup[1], weapongroup[0])).disableIf(player.itemCount(weapongroup[1]) == 0, "You need at least one " + weapongroup[1].name + "to break back down to two " + weapongroup[0].name + "!").hint("Disassemble "+ weapongroup[1].name + " to get 2 " + weapongroup[0].name)
+		}
+		submenu(bd, menuForCombiningAndSeperating,0,false);
+	}
+
+	public function menuCombining(weapon1: *, weapon2: *):void {
 		clearOutput();
 		outputText("Combining.\n\n");
 		player.destroyItems(weapon1, 2);
 		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}
-	public function menuSeparating(weapon1: Weapon, weapon2: Weapon):void {
+	public function menuSeparating(weapon1: *, weapon2: *):void {
 		clearOutput();
 		outputText("Separating.\n\n");
 		player.destroyItems(weapon1, 1);
 		inventory.takeItem(weapon2, curry(menuSeparating1a, weapon2));
 	}
-	public function menuSeparating1a(weapon2: Weapon):void {
+	public function menuSeparating1a(weapon2: *):void {
 		outputText("\n\n");
 		inventory.takeItem(weapon2, menuForCombiningAndSeperating);
 	}
-	
+
 	public function mainPagePocketWatch(page:int = 1):void {
 		clearOutput();
 		outputText("Which perks would you like to combine using the watch?");
@@ -2335,6 +2362,7 @@ public class Camp extends NPCAwareContent{
 			addButtonIfTrue(11, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx, "Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) && player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx));
 		}
 		if (page == 2) {
+			addButtonIfTrue(5, "Archmage (Ex)", mainPagePocketWatchArchmageEx, "Req. Archmage perk / Or you already got this merged perk", player.hasPerk(PerkLib.Archmage));
 			addButtonIfTrue(10, "G.Diehard (Ex)", mainPagePocketWatchGreaterDiehardEx, "Req. Greater Diehard perk / Or you already got this merged perk", player.hasPerk(PerkLib.GreaterDiehard));
 			addButton(9, "Previous", mainPagePocketWatch, page - 1);
 		}
@@ -2448,16 +2476,18 @@ public class Camp extends NPCAwareContent{
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints += 2;
 		doNext(mainPagePocketWatch, 2);
-	}/*
-	private function mainPagePocketWatch():void {
-		clearOutput();
-		outputText("Perks combined: '' perk attained.");
-		player.removePerk(PerkLib.);
-		player.createPerk(PerkLib.);
-		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
-		player.perkPoints++;
-		doNext(mainPagePocketWatch, 1);
 	}
+	private function mainPagePocketWatchArchmageEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Archmage (Ex)' perk attained.");
+		player.removePerk(PerkLib.Mage);
+		player.removePerk(PerkLib.GrandMage);
+		player.removePerk(PerkLib.Archmage);
+		player.createPerk(PerkLib.ArchmageEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 1);
+	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();
 		outputText("Perks combined: '' perk attained.");
@@ -2721,7 +2751,7 @@ public class Camp extends NPCAwareContent{
 			doNext(VisitFishery);
 		}
 	}
-	
+
 	public function FisheryDailyProduction():Number {
 		var fishproduction:Number = 0;
 		if (flags[kFLAGS.FOLLOWER_AT_FISHERY_1] != "") {
@@ -3302,12 +3332,12 @@ public class Camp extends NPCAwareContent{
 
 	private function useGryphonStatuette():void {
 		CoC.instance.mutations.skybornSeed(1, player);
-		eachMinuteCount(5);
+		advanceMinutes(5);
 		doNext(playerMenu);
 	}
 	private function usePeacockStatuette():void {
 		CoC.instance.mutations.skybornSeed(2, player);
-		eachMinuteCount(5);
+		advanceMinutes(5);
 		doNext(playerMenu);
 	}
 
@@ -3354,7 +3384,7 @@ public class Camp extends NPCAwareContent{
 		bonus += 0.5*(hours*(hours-1)/2); // 0 + 0.5 + 1 + 1.5 + ...
 		return bonus;
 	}
-	
+
 	public function rest():void {
 		campQ = true;
 		IsWaitingResting = true;
@@ -4834,6 +4864,9 @@ public function rebirthFromBadEnd():void {
 		if (player.weapon == weapons.AETHERD) pop++; //Include Aether D twin if you're wearing her.
 		if (player.shield == shields.AETHERS) pop++; //Include Aether S twin if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
+		if (player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)) pop += LunaFollower.WerewolfPackMember;
+		if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) pop += LunaFollower.HellhoundPackMember;
+		if (player.hasPerk(PerkLib.MummyLord)) pop += player.perkv1(PerkLib.MummyLord);
 		//------------
 		//Children check!
 		//Followers

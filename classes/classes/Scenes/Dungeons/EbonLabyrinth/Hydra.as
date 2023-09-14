@@ -58,7 +58,7 @@ use namespace CoC;
 			damage = Math.round(damage);
 			damage = player.takePhysDamage(damage, true);
 			if (!player.hasStatusEffect(StatusEffects.Poison)) {
-				var multiplier:Number = this.tailCount; //more heads -> more venom
+				var multiplier:Number = this.statusEffectv1(StatusEffects.HydraTails); //more heads -> more venom
 				player.createStatusEffect(StatusEffects.Poison, 0, multiplier, 0, 0);
 			}
 		}

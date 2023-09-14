@@ -55,6 +55,10 @@ public class HealSpell extends AbstractWhiteSpell {
 			heal *= 1.75;
 		}
 		heal = Math.round(heal);
+		if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+			if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.03) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.03);
+			else player.removeStatusEffect(StatusEffects.CombatWounds);
+		}
 		outputText("<b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
 		if (crit) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(heal,false);

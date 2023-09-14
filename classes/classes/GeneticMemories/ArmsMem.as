@@ -681,6 +681,28 @@ import classes.CoC;
             }
         });
 
+        public static const CANINE:int = _partid++;
+        EnumValue.add(Memories, CANINE, "CANINE", {
+            id: "Canine Arms",
+            name: "Canine Arms",
+            cost: 100,
+            title: "Canine",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsCanine;
+            }
+        });
+
+        public static const ABYSSAL_SHARK:int = _partid++;
+        EnumValue.add(Memories, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+            id: "Abyssal Shark Arms",
+            name: "Abyssal Shark Arms",
+            cost: 100,
+            title: "A.Shark",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsAbyssalShark;
+            }
+        });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

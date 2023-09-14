@@ -427,7 +427,12 @@ use namespace CoC;
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			cleanupAfterCombat();
-			if (!player.isRace(Races.JIANGSHI, 1, false)){
+			if (player.racialScore(Races.JIANGSHI) >= 15 && player.hasPerk(PerkLib.Rigidity)) { //Needs a better explanation, cause why can't jiangshi wear armour again?
+				outputText("\nYou try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
+				flags[kFLAGS.VALERIA_AT_CAMP] = 1;
+				doNext(camp.returnToCampUseOneHour);
+			}
+			else {
 				var item:Armor = player.setArmor(armors.GOOARMR, true, true); //Item is now the player's old armor
 				//(\"<i>You gained ValeriaArmor!</i>\")
 				//(\"<i>You put a (previous armorName) in your X pouch)
@@ -445,11 +450,6 @@ use namespace CoC;
 					else inventory.takeItem(item, camp.returnToCampUseOneHour);
 				}
                 CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			}
-			else{ //Needs a better explanation, cause why can't jiangshi wear armour again?
-				outputText("\nYou try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
-				flags[kFLAGS.VALERIA_AT_CAMP] = 1
-				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 

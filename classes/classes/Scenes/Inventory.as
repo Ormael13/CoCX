@@ -591,14 +591,14 @@ use namespace CoC;
 					bd.add("Prev", function ():void {
 						playerPage--;
 						show();
-					}).hint("Prev inventory page").disableIf(playerPage == 0)
+					}).hint("Prev inventory page").disableIf(playerPage == 0).icon("Left")
 					bd.add("");
 					bd.add("");
 					bd.add("");
 					bd.add("Next", function ():void {
 						playerPage++;
 						show();
-					}).hint("Next inventory page").disableIf(playerPage == playerPageMax-1)
+					}).hint("Next inventory page").disableIf(playerPage == playerPageMax-1).icon("Right")
 				}
 				
 				// Spacer
@@ -752,6 +752,18 @@ use namespace CoC;
 				return 2;
 			}
 			return 0;
+		}
+		/**
+		 * Tries to add `qty` items to player. Does not produce any output. Halts when out of inventory space
+		 * @return Number of items added
+		 */
+		public function tryAddMultipleItemsToPlayer(itype:ItemType, qty:int):int {
+			var n:int = 0;
+			while (qty-->0) {
+				if (tryAddItemToPlayer(itype) == 0) break;
+				n++;
+			}
+			return n
 		}
 		/**
 		 * Tries to transfer 1 item from [source], reducing its quantity, to player.

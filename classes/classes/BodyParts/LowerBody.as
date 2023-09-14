@@ -380,15 +380,12 @@ public class LowerBody extends SaveableBodyPart {
 		name: "shark",
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = ""
-
 			if (player.isBiped()) {
 				desc += "Your two legs are mostly human save for the webbing between your toes.";
 			}
-
 			if (player.isTaur()) {
 				desc += "Your four legs end in three-toed scaled paws with webbing between the toes, and an even larger webbing running on the entire length."
 			}
-
 			return desc;
 		},
 		canTaur: true
@@ -573,7 +570,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const FIRE_SNAIL:int = 52;
 	EnumValue.add(Types, FIRE_SNAIL, "FIRE_SNAIL", {
 		name: "fire snail",
-		appearanceDesc: "Below your waist your flesh is fused together into the fat tail of a snail, with a flat wet underbelly that glistens continuously."
+		appearanceDesc: "Below your waist your flesh is fused together into the fat tail of a snail, with a flat wet underbelly that glistens continuously.",
+		noLowerGarment: true
 	});
 
 	public static const GHOST:int = 53;
@@ -840,6 +838,12 @@ public class LowerBody extends SaveableBodyPart {
 		tail: true,
 		chitin: true,
 		isNaga: true
+	});
+
+	public static const ABYSSAL_SHARK:int = 79;
+	EnumValue.add(Types, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+		name: "abyss shark",
+		appearanceDesc: "Your legs are fairly human, save for the webbing between your toes and a pair of fins that have sprouted on each of your thighs, just below the hips."
 	});
 
 	override public function set type(value:int):void {

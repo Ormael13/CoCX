@@ -182,7 +182,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			eachMinuteCount(15);
+			advanceMinutes(15);
 		}
 		public function talkMenuLunaWhatCanSheDo():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -195,7 +195,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 5)flags[kFLAGS.LUNA_FOLLOWER] = 5;
 			lunaJealousy(-100);
 			doNext(talkMenuLuna);
-			eachMinuteCount(15);
+			advanceMinutes(15);
 		}
 		public function talkMenuLunaHuman():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -235,7 +235,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			eachMinuteCount(15);
+			advanceMinutes(15);
 		}
 		public function talkMenuLunaCampThoughts():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -246,7 +246,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			eachMinuteCount(15);
+			advanceMinutes(15);
 		}
 		public function talkMenuLunaStopJealousy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -264,7 +264,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			eachMinuteCount(15);
+			advanceMinutes(15);
 		}
 		public function talkMenuLunaLycanthropy():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -285,7 +285,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			lunaJealousy(-100);
 			lunaAffection(2);
 			doNext(talkMenuLuna);
-			eachMinuteCount(15);
+			advanceMinutes(15);
 		}
 		public function talkMenuBiteMe():void {
 			spriteSelect(SpriteDb.s_luna_maid);
@@ -335,13 +335,19 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					player.thickenCock(selectedCockValue, 2);
 				}
 			}
+			var ngM:Number = (player.newGamePlusMod() + 1);
 			var bonusStats:Number = 0;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
+			if (player.hasPerk(PerkLib.Vulpesthropy)) {
+				player.createPerk(PerkLib.VulpesthropyDormant,0,0,0,0);
+				player.removePerk(PerkLib.Vulpesthropy);
+			}
 			if (!player.hasPerk(PerkLib.Lycanthropy)) player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
-			player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
+			if (player.hasPerk(PerkLib.LycanthropyDormant)) player.removePerk(PerkLib.LycanthropyDormant);
+			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.1*ngM,'tou.mult': bonusStats*0.06*ngM,'spe.mult': bonusStats*0.04*ngM, 'minlustx': bonusStats * 0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 			player.trainStat('str', +5, 100);
 			player.trainStat('tou', +5, 100);
 			player.trainStat('spe', +5, 100);
@@ -443,6 +449,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			lunaJealousy(-100);
 			lunaAffection(5);
+			if (player.hasStatusEffect(StatusEffects.CombatWounds)) {
+				if (player.statusEffectv1(StatusEffects.CombatWounds) > 0.05) player.addStatusValue(StatusEffects.CombatWounds, 1, -0.05);
+				else player.removeStatusEffect(StatusEffects.CombatWounds);
+			}
 			HPChange(Math.round(player.maxHP() * .1), true);
 			Nursed = true;
 			NursedCooldown = 24;
@@ -712,8 +722,13 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					player.thickenCock(selectedCockValue, 2);
 				}
 			}
+			if (player.hasPerk(PerkLib.Vulpesthropy)) {
+				player.createPerk(PerkLib.VulpesthropyDormant,0,0,0,0);
+				player.removePerk(PerkLib.Vulpesthropy);
+			}
 			player.createPerk(PerkLib.Lycanthropy,40,0,0,0);
 			player.dynStats("cor", 20);
+			flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			statScreenRefresh();
 			outputText("The process complete, you begin seething with newfound strength, of body and of lust. You push out of Luna's embrace, reeling backward, but quickly lunge at her again. She emits a half-frightened, half-aroused yip as you bowl her over, with you on top. Your pack-mate, your bitch... you must take her, make her yours... NOW!\n\n");
 			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
@@ -1072,6 +1087,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			clearOutput();
 			spriteSelect(SpriteDb.s_Luna_Mooning);
 			sceneHunter.selectGender(dickF, vagF);
+			if (player.hasPerk(PerkLib.Lycanthropy)){
+				if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,0,0,0,0);
+				else player.addStatusValue(StatusEffects.HumanForm, 1, -1);
+				CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			}
 
 			//==================================
 			function dickF():void {
@@ -1185,6 +1205,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			function sharedEnd():void {
 				lunaJealousy(-100);
 				lunaAffection(2);
+				if (player.hasPerk(PerkLib.Lycanthropy)){
+					if (!player.hasStatusEffect(StatusEffects.HumanForm)) player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
+				}
 				if (!mooning) {
                     outputText("She speaks up again after a moment. " +
                         "\"<i>Really,[Master], thank you so much for this. I've never had a master or mistress who... accepted me, the way you do; not even before I came to Mareth and became... what I am. It means so much to me that you accept all of me, and that you take such good care of my needs... even if I wish you would stop relying on other people so often when I'm here for you.</i>\"" +

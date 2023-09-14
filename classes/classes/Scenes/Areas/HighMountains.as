@@ -20,6 +20,17 @@ public class HighMountains extends BaseContent {
     public var lightelfScene:LightElfScene = new LightElfScene();
     public var cockatriceScene:CockatriceScene = new CockatriceScene();
     public var nekobakeInn:NekobakeInn = new NekobakeInn();
+    
+    public const areaLevel:int = 55;
+    public function isDiscovered():Boolean {
+        return SceneLib.exploration.counters.highMountains > 0;
+    }
+    public function canDiscover():Boolean {
+        return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+    }
+    public function timesExplored():int {
+        return SceneLib.exploration.counters.highMountains;
+    }
 
     public function HighMountains() {
         onGameInit(init);
@@ -138,25 +149,23 @@ public class HighMountains extends BaseContent {
                 return !player.blockingBodyTransformations();
             },
             call: nekobakeInn.encounterNekobakeInn
-        }/*, {
+        }, {
             name: "demonProjects",
+			label : "DemLab Subject",
+			kind  : 'monster',
             chance: 0.2,
             when: function ():Boolean {
-                return DemonLab.MainAreaComplete >= 4;
+                return SceneLib.exploration.demonLabProjectEncountersEnabled();
             },
             call: SceneLib.exploration.demonLabProjectEncounters
-        }*/);
-    }
-
-    public function isDiscovered():Boolean {
-        return flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0;
+        });
     }
 
     public function discover():void {
         clearOutput();
         outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)");
-        flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-        endEncounter();
+        SceneLib.exploration.counters.highMountains++;
+        endEncounter(120);
     }
 
     //Explore High Mountain
@@ -165,10 +174,10 @@ public class HighMountains extends BaseContent {
         explorer.setTags("mountain","highMountain");
         explorer.prompt = "You explore the high mountains.";
         explorer.onEncounter = function(e:ExplorationEntry):void {
-            flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
+            SceneLib.exploration.counters.highMountains++;
         }
         explorer.leave.hint("Leave the high mountains");
-        explorer.skillBasedReveal(55, flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]);
+        explorer.skillBasedReveal(areaLevel, timesExplored());
         explorer.doExplore();
     }
 

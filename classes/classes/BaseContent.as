@@ -40,15 +40,20 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.cheatTime(time, needNext);
 		}
-		protected function eachMinuteCount(time:Number, needNext:Boolean = false):void
+
+		/**
+		 * Advance time by `time` minutes. If overflows into next hour, delay this until next EngineCode.goNext call
+		 * @param time
+		 */
+		protected function advanceMinutes(time:Number):void
 		{
-			EventParser.eachMinuteCount(time, needNext);
+			EventParser.advanceMinutes(time);
 		}
 		protected static function get timeQ():Number
 		{
-			return CoC.instance.timeQ + (CoC.instance.timeQmin%60);
+			return CoC.instance.timeQ + Math.floor(CoC.instance.timeQmin/60);
 		}
-		
+
 		/**
 		 * Time advancement is planned
 		 */
@@ -59,7 +64,7 @@ import coc.xxc.StoryContext;
 		public static function get isNightTime():Boolean {
 			return (model.time.hours + timeQ <= 5 || model.time.hours + timeQ >= 22);
 		}
-		
+
 		/**
 		 * Examples:
 		 * - isTimeBetween(12, 16) - 12:00..15:59
@@ -81,7 +86,7 @@ import coc.xxc.StoryContext;
 		protected function get d3():D3 {
 			return SceneLib.d3;
 		}
-		
+
 		/**
 		 * Advance queued time and execute scheduled events. Then go to playerMenu (camp/Ingnam)
 		 * @param defNext Require [Next] button, otherwise can display the playerMenu right away
@@ -224,12 +229,18 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
+			if (player.hasStatusEffect(StatusEffects.HumanForm) && player.statusEffectv1(StatusEffects.HumanForm) >= 1){
+				player.addStatusValue(StatusEffects.HumanForm, 1, -1);
+			}
 			SceneLib.combat.startCombatImpl(monster_,plotFight_);
 		}
 
 
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
+			if (player.hasStatusEffect(StatusEffects.HumanForm) && player.statusEffectv1(StatusEffects.HumanForm) >= 1){
+				player.addStatusValue(StatusEffects.HumanForm, 1, -1);
+			}
 			SceneLib.combat.startCombatImmediateImpl(monster, _plotFight);
 		}
 
@@ -246,7 +257,7 @@ import coc.xxc.StoryContext;
 		protected static function mkLink(linkText:String, eventArgument:String):String {
 			return '<u><a href="event:'+encodeURI(eventArgument)+'">'+linkText+"</a></u>";
 		}
-		
+
 		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
@@ -699,7 +710,7 @@ import coc.xxc.StoryContext;
 		protected function get vehicles():VehiclesLib{
 			return CoC.instance.vehicles;
 		}
-		
+
 		protected static function get questLib():QuestLib {
 			return CoC.instance.questLib;
 		}
@@ -726,7 +737,7 @@ import coc.xxc.StoryContext;
 		{
 			return CoC.instance.mainViewManager;
 		}
-		
+
 		protected static function get notificationView():NotificationView {
 			return CoC.instance.mainView.notificationView;
 		}
@@ -799,7 +810,7 @@ import coc.xxc.StoryContext;
 		protected function buttonIsVisible(index:int):Boolean {
 			return EngineCore.buttonIsVisible(index);
 		}
-		
+
 		protected static function get shiftKeyDown():Boolean {
 			return flags[kFLAGS.SHIFT_KEY_DOWN];
 		}
@@ -819,8 +830,16 @@ import coc.xxc.StoryContext;
 		protected static function get explorer():ExplorationEngine {
 			return SceneLib.explorationEngine;
 		}
-		protected function endEncounter():void {
-			doNext(explorer.done);
+		/**
+		 * [Next] to camp or exploration map
+		 * @param timePassedMinutes Advance time, -1 for default value
+		 * */
+		protected function endEncounter(timePassedMinutes:int = -1):void {
+			doNext(curry(explorer.done,timePassedMinutes));
+		}
+
+		protected function adjustedPlayerLevel():int {
+			return player.level + combat.playerLevelAdjustment();
 		}
 
 		public static var submenuPage:int = 0;
@@ -868,7 +887,7 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(bi++).show("Back",back);
 		}
-		
+
 		/**
 		 * Display a 5xN button grid after the current text.
 		 * @param bd Button data, row-by-row.

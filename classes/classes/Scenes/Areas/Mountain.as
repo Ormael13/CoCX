@@ -39,6 +39,48 @@ public class Mountain extends BaseContent
 		public var basiliskScene:BasiliskScene = new BasiliskScene();
 		public var harpyScene:HarpyScene = new HarpyScene();
 		
+		
+		
+		public const areaLevelHills:int = 5;
+		public function isDiscoveredHills():Boolean {
+			return SceneLib.exploration.counters.hills > 0;
+		}
+		public function canDiscoverHills():Boolean {
+			return !isDiscoveredHills() && adjustedPlayerLevel() >= areaLevelHills && SceneLib.battlefiledboundary.isDiscovered();
+		}
+		public function timesExploredHills():int {
+			return SceneLib.exploration.counters.hills;
+		}
+		public function discoverHills():void {
+			SceneLib.exploration.counters.hills = 1;
+			clearOutput();
+			outputText("As you walk the large open wasteland of mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
+			endEncounter();
+		}
+		
+		
+		public const areaLevelLow:int = 15;
+		public function isDiscoveredLow():Boolean {
+			return SceneLib.exploration.counters.mountainsLow > 0;
+		}
+		public function canDiscoverLow():Boolean {
+			return !isDiscoveredLow() && adjustedPlayerLevel() >= areaLevelLow;
+		}
+		public function timesExploredLow():int {
+			return SceneLib.exploration.counters.mountainsLow;
+		}
+		
+		public const areaLevelMid:int = 30;
+		public function isDiscoveredMid():Boolean {
+			return SceneLib.exploration.counters.mountainsMid > 0;
+		}
+		public function canDiscoverMid():Boolean {
+			return !isDiscoveredMid() && adjustedPlayerLevel() >= areaLevelMid;
+		}
+		public function timesExploredMid():int {
+			return SceneLib.exploration.counters.mountainsMid;
+		}
+		
 		public function Mountain()
 		{
 			onGameInit(init);
@@ -48,19 +90,19 @@ public class Mountain extends BaseContent
 		//Mountains: lvl 35-55
 		private var _hillsEncounter:GroupEncounter = null;
 		private var _lowmountainEncounter:GroupEncounter = null;
-		private var _mountainEncounter:GroupEncounter = null;
+		private var _midMountainEncounter:GroupEncounter = null;
 		public function get hillsEncounter():GroupEncounter {
 			return _hillsEncounter;
 		}
 		public function get lowMountainEncounter():GroupEncounter {
 			return _lowmountainEncounter;
 		}
-		public function get mountainEncounter():GroupEncounter {
-			return _mountainEncounter;
+		public function get midMountainEncounter():GroupEncounter {
+			return _midMountainEncounter;
 		}
 		private function init():void {
-            const fn:FnHelpers = Encounters.fn;
-			_hillsEncounter = Encounters.group("hills",
+            const fn:FnHelpers    = Encounters.fn;
+			_hillsEncounter       = Encounters.group("hills",
 					SceneLib.exploration.commonEncounters.withChanceFactor(0.1),
 					SceneLib.exploration.angelEncounters.wrap(fn.ifLevelMin(5), [0.05]),
 			{
@@ -144,10 +186,7 @@ public class Mountain extends BaseContent
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] <= 0
-						   && ((player.level + combat.playerLevelAdjustment()) >= 15)
-				},
+				when: canDiscoverLow,
 				call: discoverLM,
 				chance: Encounters.ALWAYS
 			},{
@@ -221,6 +260,7 @@ public class Mountain extends BaseContent
 				when: SceneLib.tedScene.canEncounterTed
 			}, {
 				name:"hikeh",
+				label : "Hike",
 				chance:0.2,
 				kind:'walk',
 				call:hikeh
@@ -231,14 +271,16 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}/*, {
+			}, {
 				name: "demonProjects",
-						chance: 0.2,
-						when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+				label : "DemLab Subject",
+				kind  : 'monster',
+				chance: 0.2,
+				when: function ():Boolean {
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 			_lowmountainEncounter = Encounters.group("low mountains",
 					SceneLib.exploration.commonEncounters.withChanceFactor(0.1), {
 				//Helia monogamy fucks
@@ -262,10 +304,7 @@ public class Mountain extends BaseContent
 				label : "New Area",
 				kind  : 'place',
 				unique: true,
-				when: function ():Boolean {
-					return player.exploredMountain <= 0
-						   && ((player.level + combat.playerLevelAdjustment()) >= 30)
-				},
+				when: canDiscoverMid,
 				call: discoverM,
 				chance: Encounters.ALWAYS
 			},{
@@ -448,15 +487,17 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
-			_mountainEncounter = Encounters.group("mountain", {
+			});
+			_midMountainEncounter = Encounters.group("mountain", {
 				name: "demonlab",
 				label : "Demon Laboratory",
 				kind  : 'place',
@@ -610,14 +651,16 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
 		public function findMindbreakerChance():Number {
 			var fMC:Number = 5;
@@ -625,15 +668,15 @@ public class Mountain extends BaseContent
 			return fMC;
 		}
 		//Explore Mountain
-		public function exploreMountain():void {
-			explorer.prepareArea(mountainEncounter);
+		public function exploreMidMountain():void {
+			explorer.prepareArea(midMountainEncounter);
 			explorer.setTags("mountain","mountainMid");
 			explorer.prompt = "You explore the mountain.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				player.exploredMountain++;
+				SceneLib.exploration.counters.mountainsMid++;
 			}
 			explorer.leave.hint("Leave the mountain");
-			explorer.skillBasedReveal(30, player.exploredMountain);
+			explorer.skillBasedReveal(areaLevelMid, timesExploredMid());
 			explorer.doExplore();
 		}
 		public function exploreLowMountain():void {
@@ -641,10 +684,10 @@ public class Mountain extends BaseContent
 			explorer.setTags("mountain","mountainLow");
 			explorer.prompt = "You explore the low mountains.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
+				SceneLib.exploration.counters.mountainsLow++;
 			}
 			explorer.leave.hint("Leave the low mountains");
-			explorer.skillBasedReveal(15, flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]);
+			explorer.skillBasedReveal(areaLevelLow, timesExploredLow());
 			explorer.doExplore();
 		}
 		public function exploreHills():void {
@@ -655,10 +698,10 @@ public class Mountain extends BaseContent
 			explorer.setTags("hills");
 			explorer.prompt = "You explore the hills.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.DISCOVERED_HILLS]++;
+				SceneLib.exploration.counters.hills++;
 			}
 			explorer.leave.hint("Leave the hills");
-			explorer.skillBasedReveal(5, flags[kFLAGS.DISCOVERED_HILLS]);
+			explorer.skillBasedReveal(areaLevelHills, timesExploredHills());
 			explorer.doExplore();
 		}
 		public function ceraphFn():void {
@@ -796,14 +839,14 @@ public class Mountain extends BaseContent
 			clearOutput();
 			outputText("While exploring the hill you come upon a particular trail. It looks to lead deeper into the mountain range. Having met the many unsavory denizens of the hill already you clench your fist ready for a new challenge as you take up the trail toward the mountain. The atmosphere changes quickly as plants become scarcer and rocky formation more common. ");
 			outputText("Caves previously a rare occurrence now are a regular sight. You have found the way to the low mountain range area.\n\n(<b>Low Mountain exploration location unlocked!</b>)");
-			flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
-			endEncounter();
+			SceneLib.exploration.counters.mountainsLow = 1;
+			endEncounter(60);
 		}
 		public function discoverM():void {
 			clearOutput();
 			outputText("As you explore the low mountain range you hear thunder booming overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it. Forward is a path leading deeper higher into the mountains and possibly harder trials.\n\n<b>You've discovered the Mountain!</b>");
-			player.exploredMountain = 1;
-			endEncounter();
+			SceneLib.exploration.counters.mountainsMid = 1;
+			endEncounter(60);
 		}
 		private function hike():void {
 			clearOutput();

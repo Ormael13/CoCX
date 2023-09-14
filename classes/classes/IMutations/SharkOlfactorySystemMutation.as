@@ -19,7 +19,6 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
             var bleedCent:int = 0;
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Increase bleed damage by 25%, allows non-sharks to use blood frenzy";
                 perkCent += 10;
 				bleedCent += 25;
             }
@@ -35,8 +34,10 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
                 perkCent += 25;
 				bleedCent += 25;
             }
-            if (pTier >= 2) descS += ", Bite becomes free and increases bleed damage by " + bleedCent + " %";
-            if (pTier >= 1) descS += "and increase melee damage against bleeding enemies by " + perkCent + " %";
+			if (pTier >= 1) descS += "Increase bleed damage by " + bleedCent + "%, allows non-sharks to use blood frenzy";
+            if (pTier >= 2) descS += ", Bite no longer use fatigue";
+            if (pTier >= 2) descS += " and can be used once a turn without ending player turn";
+            if (pTier >= 1) descS += " increase melee damage against bleeding enemies by " + perkCent + " %";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -68,7 +69,7 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requirePeripheralNervSysMutationSlot()
-                    .requireAnyRace(Races.SHARK, Races.SIREN);
+                    .requireAnyRace(Races.SHARK, Races.ABYSSAL_SHARK, Races.WERESHARK, Races.SIREN);
                 }
                 else{
                     var pLvl:int = pTier * 30;

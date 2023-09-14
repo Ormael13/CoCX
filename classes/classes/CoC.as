@@ -68,10 +68,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8t2.37";
+    public var debugGameVer:String = "v0.8t2";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.057;
+    public var modSaveVersion:Number = 36.10;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b></b>)";
+			ver += " (<b>Exploration rework, Alchemy system, Expanding party size, Anubis & Werefox TF's, Werewolf minor rework, minor soulforce power rework, field/area bosses</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

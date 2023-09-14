@@ -352,8 +352,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("<i>\""+ player.mf("Dad", "Mom") +", is something wrong?\"</i>\n" +
 		"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
 		"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
-		explorer.stopExploring();
-		doNext(camp.returnToCampUseFourHours);
+		endEncounter(120);
 	}
 
 	//dialogue: 0 for Celess.
@@ -394,7 +393,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[CoC.instance.armors.WKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
 			[CoC.instance.armors.SPKIMO, CoC.instance.armors.OEKIMO, CoC.instance.armors.OTKIMO],
 			[CoC.instance.armors.CTPALAD, CoC.instance.armors.CTHPALA, CoC.instance.armors.CTBGUAR],
-			[CoC.instance.armors.LTHRPNT, null, CoC.instance.armors.CGUNSLI]
+			[CoC.instance.armors.LTHRPNT, null, CoC.instance.armors.CGUNSLI],
+			[CoC.instance.armors.DEATHPO, null, CoC.instance.armors.DEATHPGA]
 		];
 		var selectfrom:int = corrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
@@ -445,6 +445,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function AboutRadiantShard():void {
+		clearOutput();
 		outputText("You ask " + _name + " what are radiant shards exactly."+
 				"\n\n<i>\"Well, from what I think I may know, they are the remains of artifacts of past legend. Items long-lost to time that were probably used in the mythical age. They are useless by themselves, just small fragment of lost power, but if you were to bring in multiple, as well as a base for the shards to fuse with, I could weave back the lost item to life.\"</i>"+
 				"\n\nTruly, your little girl talking about such grown up subject so early both makes you proud and creeps you out.");
@@ -765,7 +766,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		findArmor();
 		inventory.takeItem(armors.CTPALAD, explorer.done);
 	}
-	
+
 	public function nightmareDefeated():void {
 		_age = _ageDidPregnancy;
 		_questFinished = _finishedNightmare;
@@ -1006,7 +1007,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 		}
 	}
-	
+
 	private function get myLocals():*{
 		return {
 			$name : _name,

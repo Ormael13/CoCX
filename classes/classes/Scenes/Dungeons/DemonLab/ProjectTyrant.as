@@ -73,11 +73,11 @@ public class ProjectTyrant extends Monster {
         outputText("The Drider-monster charges again. You ready yourself to dodge the meaty fists, but instead, it charges head-on into you, shoulder first. You’re thrown back by the impact, but as you hit the ground, you feel an immense weight press down on you. You are pinned underneath the Drider-beast’s weight, and it begins to crush you!\n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
-        player.createStatusEffect(StatusEffects.Pounced, 5, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.Pounced)) player.createStatusEffect(StatusEffects.Pounced, 5, 0, 0, 0);
     }
 
     public function TackleGrappleStruggle():void {
-        if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) TackleGrappleSuccess();
+        if (rand(3) == 0 || (rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) TackleGrappleSuccess();
         else TackleGrapple();
         SceneLib.combat.enemyAIImpl();
     }
@@ -158,12 +158,24 @@ public class ProjectTyrant extends Monster {
 
     override public function defeated(hpVictory:Boolean):void {
         if (inDungeon) SceneLib.dungeons.demonLab.PrTyrantVictory();
-        else cleanupAfterCombat();
+        else {
+			outputText("The injured creature that was once a Drider collapses, its legs folding. On its back, the Incubus begins to panic, but the injured Drider-beast drops its weapons, grabbing the demon as he tries to flee.[pg]");
+			outputText("“<i>N-N-No…You...Stay...</i>” To your shock, the Drider speaks, in a muddled, shaky voice. It holds the demon in its massive fists, squeezing his neck. The demon barely manages a squeak before his steel neck guard crumples, folding in and crushing the unfortunate demon’s windpipe. Blood trickles from the luckless demon, and you brace yourself.[pg]");
+			outputText("Shuddering, the massive creature roars, its black corruption aura spreading. It rips at its own body, ripping the steel plates off it by main strength, heedless of the cuts it inflicts onto itself. After it sheds the armour from its upper body, it rips the helmet off, breaking one of its horns clean off. The monster that used to be a Drider looks at you, its eyes strangely lucid for such a corrupt being.[pg]");
+			outputText("“<i>D-d-do...it.</i>” The massive beast bares its heavily muscled neck, barely able to keep its upper body up. It shakes, as if restraining itself.[pg]");
+			if (player.cor <= 10) outputText("You reluctantly step in, bringing your [weapon] down into the creature’s bare neck. As it dies, you can feel your heart sink. It’s...No, <i>they’re</i> dead. They died a free, sentient creature.[pg]");
+			else if (player.cor <= 40) outputText("You hesitate only slightly before sheathing your [weapon]. You pull a dagger from your pack, and you slit the Drider creature’s throat.[pg]");
+			else outputText("Without hesitation, you take one of the creature’s fallen weapons, and bring it down onto the creature’s mangled head.[pg]");
+			cleanupAfterCombat();
+		}
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
         if (inDungeon) SceneLib.dungeons.demonLab.BadEndExperiment();
-        else cleanupAfterCombat();
+        else {
+			outputText("You slump to the ground, unable to continue the fight. You hear a muffled, gutteral laugh, and the pounding of legs getting closer…but keeping your eyes open is too much to bear. You barely feel the Tyrant slam into you, bodily throwing your limp frame across the ground.[pg]");
+			cleanupAfterCombat();
+		}
     }
 }
 

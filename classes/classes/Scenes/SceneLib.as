@@ -6,6 +6,7 @@ import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
+import classes.Scenes.Areas.DeepSea.AbyssalSharkScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
@@ -253,6 +254,8 @@ public class SceneLib {
 
     public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
 
+    public static var werefoxScene:WerefoxScene = new WerefoxScene();
+
     public static var woodElves:WoodElves = new WoodElves();
 
     public static var mindbreaker:Mindbreaker = new Mindbreaker();
@@ -262,6 +265,8 @@ public class SceneLib {
     public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
 
     public static var scyllaScene:ScyllaScene = new ScyllaScene();
+
+    public static var abyssalsharkScene:AbyssalSharkScene = new AbyssalSharkScene();
 
     public static var trollVillage:TrollVillage = new TrollVillage();
 

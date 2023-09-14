@@ -4,6 +4,8 @@
 package classes.Items
 {
 import classes.CoC;
+import classes.Items.Alchemy.AlchemyLib;
+import classes.Items.Alchemy.AlembicCatalyst;
 import classes.Items.Other.DebugWand;
 import classes.Items.Other.SimpleUseable;
 import classes.Scenes.SceneLib;
@@ -45,7 +47,7 @@ use namespace CoC;
 		public const GREENGL:SimpleUseable = new SimpleUseable("GreenGl", "GreenGl", "a clump of green gel", 50,
 			"This tough substance has no obvious use that you can discern.",
 			"You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.");
-		public const RED_GEL:SimpleUseable = new SimpleUseable("RedGel", "RedGel", "a clump of red gel", 50,
+		public const RED_GEL:SimpleUseable = new SimpleUseable("RedGel", "RedGel", "a clump of red gel", 100,
 			"This malleable substance has no obvious use that you can discern.",
 			"You examine the gel thoroughly, noting it is malleable, yet extremely reactive to soulforce.  Somehow you know eating it would not be a good idea.");
 		public const T_SSILK:SimpleUseable = new SimpleUseable("T.SSilk", "T.SSilk", "a bundle of tough spider-silk", 200,
@@ -91,8 +93,11 @@ use namespace CoC;
 			"An Elemental Core.",
 			"You look at the elemental core. It occasionally glows gently in your hand.  Rare treasure that have wide range of uses for elementalists.");
 		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
-			"An vial of E-Ichor.",
+			"A vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
+		public const D_E_ICHOR:SimpleUseable = new SimpleUseable("D.E.Ichor", "D.E-Ichor vial", "a vial of diluted E-Ichor", 1,
+			"A vial of diluted E-Ichor.",
+			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for crafting pills.");
 		public const BTSOLUTION:SimpleUseable = new SimpleUseable("BTSolution", "Body Tempering Solution vial", "a vial of Body Tempering solution", 100,
 			"An vial of Body Tempering solution.",
 			"You look at the vial of substance called Body Tempering solution. It's only usefull for Body Cultivators and probably harmfull for anyone else.");
@@ -205,6 +210,50 @@ use namespace CoC;
 		public const TEDDY:SimpleUseable = new SimpleUseable("TeddyBear", "TeddyBear", "a Teddy bear", 200,
 				"An old Teddy bear with a small paper with the name Mister Paw tied to it.",
 				"You look at an old Teddy bear and see there is a small paper with the name Mister Paw tied to it.");
+		public const BANDAGE:SimpleUseable = new SimpleUseable("Bandage", "Bandages", "a Bandages", 25,
+			"A Bandages.",
+			"A roll of bandages. What are you gonna do with this anyway?");
+		// Alchemical catalysts:
+		// Substance/Essence/Residue/Pigment
+		// Minor/Common/Major
+		public const MIN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_SUB_ACAT", AlchemyLib.RT_SUBSTANCE, 1);
+		public const CMN_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_SUB_ACAT", AlchemyLib.RT_SUBSTANCE, 2);
+		public const MAJ_SUB_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_SUB_ACAT", AlchemyLib.RT_SUBSTANCE, 3);
+		public const MIN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_ESS_ACAT", AlchemyLib.RT_ESSENCE, 1);
+		public const CMN_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_ESS_ACAT", AlchemyLib.RT_ESSENCE, 2);
+		public const MAJ_ESS_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_ESS_ACAT", AlchemyLib.RT_ESSENCE, 3);
+		public const MIN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_RES_ACAT", AlchemyLib.RT_RESIDUE, 1);
+		public const CMN_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_RES_ACAT", AlchemyLib.RT_RESIDUE, 2);
+		public const MAJ_RES_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_RES_ACAT", AlchemyLib.RT_RESIDUE, 3);
+		public const MIN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MIN_PIG_ACAT", AlchemyLib.RT_PIGMENT, 1);
+		public const CMN_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("CMN_PIG_ACAT", AlchemyLib.RT_PIGMENT, 2);
+		public const MAJ_PIG_ACAT:AlembicCatalyst = new AlembicCatalyst("MAJ_PIG_ACAT", AlchemyLib.RT_PIGMENT, 3);
+		
+		public const DYE_FOUNDATION:SimpleUseable = new SimpleUseable("DyeFoundation", "Dye Found", "a vial of dye foundation", 50,
+				"Alchemical reagent to turn pigments into hair dyes.",
+				"You inspect the transparent liquid in the vial.\n\n<i>(Use Crafting menu to create hair dyes from this item)</i>");
+		public const OIL_FOUNDATION:SimpleUseable = new SimpleUseable("OilFoundation", "Oil Found", "a bottle of skin oil foundation", 100,
+				"Alchemical reagent to turn pigments into skin oils.",
+				"You inspect the transparent liquid in the ottle.\n\n<i>(Use Crafting menu to create skin oils from this item)</i>");
+		public const DROP_FOUNDATION:SimpleUseable = new SimpleUseable("DropFoundation", "Drop Found", "a vial of eyedrop foundation", 150,
+				"Alchemical reagent to turn pigments into iris-recoloring eyedrops.",
+				"You inspect the transparent liquid in the vial.\n\n<i>(Use Crafting menu to create eyedrops from this item)</i>");
+		
+		public const List_AllCatalysts:/*ItemType*/Array = [
+				MIN_SUB_ACAT,
+				CMN_SUB_ACAT,
+				MAJ_SUB_ACAT,
+				MIN_ESS_ACAT,
+				CMN_ESS_ACAT,
+				MAJ_ESS_ACAT,
+				MIN_RES_ACAT,
+				CMN_RES_ACAT,
+				MAJ_RES_ACAT,
+				MIN_PIG_ACAT,
+				CMN_PIG_ACAT,
+				MAJ_PIG_ACAT
+		];
+		
 		//CHEAT ITEM
 		public const DBGWAND:DebugWand = new DebugWand();
 	}

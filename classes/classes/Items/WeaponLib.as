@@ -76,6 +76,7 @@ public final class WeaponLib extends ItemConstants
 		public const AWL_   :Weapon = new Weapon("Awl    ","Awl","awl","an awl","pierce",3,240,"A typical awl used to pierce magic hides when making magic armors or... to pierce organic object ;)", "Small, Bleed45", "Exotic");
 		public const B_STAFF:BeautifulStaff = new BeautifulStaff();
 		public const B_SWORD:BeautifulSword = new BeautifulSword();
+		public const B_WHIP :BeautifulWhip = new BeautifulWhip();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", WT_SWORD);
 		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const BCLAWS:BlizzardClaws = new BlizzardClaws();
@@ -98,6 +99,7 @@ public final class WeaponLib extends ItemConstants
 		public const DBFTHSWO:DualBFTHSword = new DualBFTHSword();
 		public const DBFWHIP:DualBFWhip = new DualBFWhip();
 		public const DDAGGER:DualDaggers = new DualDaggers();
+		public const DDAGWHIP:DualDaggerWhips = new DualDaggerWhips();
 		public const DEMSCYT:DemonicScythe = new DemonicScythe();
 		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 12, 1920, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption. (-15% spell cost, x2.5 black spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
@@ -106,6 +108,7 @@ public final class WeaponLib extends ItemConstants
 		public const DORSOUL:DorcSouls = new DorcSouls();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
+		public const D_FLAIL:DemonFlail = new DemonFlail();
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
 		public const D_LANCE:DualLance = new DualLance();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
@@ -136,6 +139,10 @@ public final class WeaponLib extends ItemConstants
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
+		public const JUDGE_S:Weapon = new Weapon("Judge S", "JudgeStaff", "Judge staff", "a Judge staff", "smack", 10, 1600, "An ornamental staff favored by the desert anubi. A remnant of the god of death fate, these staves allowed their wielders to judge the weight of a soul or so legend says. Greatly empower soul skills but also improve spells.", "Large, Staff", WT_STAFF).withBuffs({
+			'spellpower': +0.2,
+			'msoulskillpower': +0.8
+		}) as Weapon;
 		public const KAMA   :Weapon = new Weapon("Kama","Kama", "kama", "a kama", "slash", 4,320, "The kama is a simple and elegant hand scythe weapon. Preferred weapon for the ninja fans.", "Small, Bleed10", "Scythe");
 		public const KAMAWHIP:Weapon = new Weapon("KamaWhip","KamaWhip","kama whip","a kama whip","whip-like slash",3,240,"A small kama-like weapon with two scythe blades that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping, Bleed10", "Scythe, Thrown").withBuffs({'teasedmg': 30}) as Weapon;
 		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun50", WT_GAUNTLET).withBuffs({

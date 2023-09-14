@@ -93,7 +93,7 @@ public static const JOJO_RATHAZUL_INTERACTION_COUNTER:int                       
 public static const MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT:int                          =   85; // Which came first?  Marble(1) or Amily(2) - Freakout at Camp if both Marble and Amily present.    1=true, 2=No freakout
 public static const AMILY_NOT_FREAKED_OUT:int                                       =   86; // Amily Freakout Session
 public static const RATHAZUL_CAMP_INTERACTION_COUNTDOWN:int                         =   87; // Rathazul inter-follower countdown timer
-public static const DISCOVERED_HIGH_MOUNTAIN:int                                    =   88; // DISCOVER HIGH MOUNTAIN (Rangers, what a terrible TV show)
+public static const DISCOVERED_HIGH_MOUNTAIN:int                                    =   88; // No longer used
 public static const COMBAT_BONUS_XP_VALUE:int                                       =   89; // Sekrit Bonus XP Pass
 public static const MET_SOPHIE_COUNTER:int                                          =   90; // Met Sophie?
 public static const FUCKED_SOPHIE_COUNTER:int                                       =   91; // Times Had Sex With Sophie
@@ -136,7 +136,7 @@ public static const TIMES_PC_DEFEATED_VALA_AND_RAEPED:int                       
 public static const ZETAZ_DEFEATED_AND_KILLED:int                                   =  128; // Zetaz Killed
 public static const ZETAZ_LAIR_TOOK_BONDAGE_STRAPS:int                              =  129; // Bondage Straps Taken
 public static const ZETAZ_LAIR_DEMON_VENDOR_PRESENT:int                             =  130; // Sean Demon Vendor Here
-public static const TIMES_EXPLORED_PLAINS:int                                       =  131; // Times Explored Plains
+public static const UNKNOWN_FLAG_NUMBER_0131:int                                    =  131; // No longer used
 public static const MET_BUNBUN:int                                                  =  132; // Met Bunbun
 public static const RAPHEAL_COUNTDOWN_TIMER:int                                     =  133; // Raphael Countdown (Time till Quiksilver Fawkes.  Set to -1 betrayed, set to -2 if covered for.
 public static const RAPHAEL_MET:int                                                 =  134; // Raphael Met? (1 = Y)
@@ -277,7 +277,7 @@ public static const PLAYER_DISARMED_WEAPON_ID:int                               
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
 public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                             =  270; // Times encountered spiderbitches
 public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                     =  271; // Spider Preggo Timer
-public static const TIMES_EXPLORED_SWAMP:int                                        =  272; // Times Explored Swamp
+public static const UNKNOWN_FLAG_NUMBER_0272:int                                    =  272; // No longer used
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const RATHAZUL_ARMOR_TYPE:int                                   		=  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
@@ -1021,7 +1021,7 @@ public static const RUBI_BONDAGE_STRAPS:int                                     
 public static const RUBI_INQUISITORS_CORSET:int                                     = 1013; //
 public static const RUBI_SETUP:int                                                  = 1014; //
 public static const EXPLORATION_PAGE:int                                            = 1015; //
-public static const BOG_EXPLORED:int                                                = 1016; //
+public static const BOG_EXPLORED:int                                                = 1016; // No longer used
 public static const TIMES_ENCOUNTERED_FROG:int                                      = 1017; //
 public static const FERAS_GLADE_EXPLORED_YEAR:int                                   = 1018;
 public static const FERAS_TRAP_SPRUNG_YEAR:int                                      = 1019;
@@ -2064,8 +2064,8 @@ public static const CODEX_ENTRY_SUCCUBUS:int                                    
 public static const PIG_SLUT_DISABLED:int                                           = 2056;
 public static const MARBLE_CORRUPT_MARAE_STORY:int                                  = 2057;
 public static const CAMP_PORTAL_PROGRESS:int                                        = 2058; //Will eventually allow you to travel back to Ingnam.
-public static const DISCOVERED_GLACIAL_RIFT:int                                     = 2059;
-public static const DISCOVERED_VOLCANO_CRAG:int                                     = 2060;
+public static const UNKNOWN_FLAG_NUMBER_2059:int                                    = 2059; // No longer used
+public static const UNKNOWN_FLAG_NUMBER_2060:int                                    = 2060; // No longer used
 public static const MET_YETI_FIRST_TIME:int                                         = 2061;
 public static const VALERIA_FOUND_IN_GLACIAL_RIFT:int                               = 2062;
 public static const SHEILA_LETHICITE_FORGE_DAY:int                                  = 2063; //Scarred Blade forge progress.
@@ -2289,15 +2289,15 @@ public static const KINDRA_DEFEATS_COUNTER:int 			                            = 
 public static const KINDRA_02281:int            		                        = 2281;		//Not Yet Used Flag
 public static const KINDRA_02282:int                       			            = 2282;		//Not Yet Used Flag
 public static const SOUL_CULTIVATION:int               		      	                = 2283;
-public static const DISCOVERED_BLIGHT_RIDGE:int               	                    = 2284;
-public static const DISCOVERED_OUTER_BATTLEFIELD:int   	                            = 2285;
+public static const DISCOVERED_BLIGHT_RIDGE:int               	                    = 2284; // No longer used
+public static const DISCOVERED_OUTER_BATTLEFIELD:int   	                            = 2285; // No longer used
 public static const DISCOVERED_INNER_BATTLEFIELD:int                   			   	= 2286;	//Not Yet Used Flag
-public static const DISCOVERED_DEFILED_RAVINE:int                                   = 2287;
+public static const DISCOVERED_DEFILED_RAVINE:int                                   = 2287; // No longer used
 public static const DISCOVERED_BATTLEFIELD_BOUNDARY:int                             = 2288;
-public static const DISCOVERED_02289:int                          		   = 2289;			//Not Yet Used Flag //for Pit or Abyss area
-public static const DISCOVERED_BEACH:int                        		   			= 2290;
-public static const DISCOVERED_OCEAN:int                           		            = 2291;
-public static const DISCOVERED_DEEP_SEA:int                           		        = 2292;
+public static const IN_COMBAT_PLAYER_MUMMY_ATTACKED:int                          	= 2289;
+public static const DISCOVERED_BEACH:int                        					= 2290; // No longer used
+public static const DISCOVERED_OCEAN:int                           		            = 2291; // No longer used
+public static const DISCOVERED_DEEP_SEA:int                           		        = 2292; // Not used
 public static const DISCOVERED_SEABED:int                                   		= 2293;	//Not Yet Used Flag
 public static const HEXINDAO_UNLOCKED:int                          		            = 2294;
 public static const UNKNOWN_FLAG_NUMBER_02295:int                                   = 2295;	//Not Yet Used Flag	//for wuxia related place 2
@@ -2672,11 +2672,11 @@ public static const ARIA_02663:int                                              
 public static const IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED:int                     = 2664;
 public static const DISPLACER_BEAST_WINS:int                                   		= 2665;
 public static const HERM_CAVE_WYRM:int                                   			= 2666;
-public static const DISCOVERED_CAVES:int                                   			= 2667;
-public static const DISCOVERED_ASHLANDS:int                                   		= 2668;
-public static const DISCOVERED_TUNDRA:int                                   		= 2669;
+public static const DISCOVERED_CAVES:int                                   			= 2667; // No longer used
+public static const DISCOVERED_ASHLANDS:int                                   		= 2668; // No longer used
+public static const DISCOVERED_TUNDRA:int                                   		= 2669; // No longer used
 public static const DISCOVERED_HILLS:int                                   			= 2670;
-public static const DISCOVERED_LOW_MOUNTAIN:int                                   	= 2671;
+public static const DISCOVERED_LOW_MOUNTAIN:int                                   	= 2671; // No longer used
 public static const AURORA_LVL:int                                   				= 2672;
 public static const AURORA_DEFEATS_COUNTER:int                                   	= 2673;
 public static const AURORA_02674:int                                                = 2674;	//Not Yet Used Flag
@@ -2776,7 +2776,7 @@ public static const PABLO_USED_YOUR_PUSSY:int                                   
 public static const PABLO_USED_YOUR_ASS:int                                   		= 2768;
 public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2769;
 public static const WEREWOLF_PACK_PITY_SYSTEM:int                                   = 2770;
-public static const UNKNOWN_FLAG_NUMBER_02771:int                                   = 2771;
+public static const IN_COMBAT_PLAYER_USED_SHARK_BITE:int                            = 2771;
 public static const UNKNOWN_FLAG_NUMBER_02772:int                                   = 2772;
 public static const UNKNOWN_FLAG_NUMBER_02773:int                                   = 2773;
 public static const UNKNOWN_FLAG_NUMBER_02774:int                                   = 2774;
@@ -2802,11 +2802,11 @@ public static const UNKNOWN_FLAG_NUMBER_02793:int                               
 public static const UNKNOWN_FLAG_NUMBER_02794:int                                   = 2794;
 public static const UNKNOWN_FLAG_NUMBER_02795:int                                   = 2795;
 public static const UNKNOWN_FLAG_NUMBER_02796:int                                   = 2796;
-public static const DISCOVERED_INNER_DESERT:int                                   	= 2797;
+public static const WEREFOX_EXTRAS:int                                   			= 2797;
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene
-public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801; // No longer used
+public static const IN_COMBAT_PLAYER_ANUBI_HEART_LEECH:int                          = 2801;
 public static const E_ICHOR_PITY_SYSTEM:int                                   		= 2802;
 public static const NECROMANCER_SKELETONS:int                                   	= 2803;
 public static const IN_COMBAT_PLAYER_SKELETONS_ATTACKED:int                         = 2804;
@@ -2950,7 +2950,7 @@ public static const UNKNOWN_FLAG_NUMBER_02941:int                               
 public static const UNKNOWN_FLAG_NUMBER_02942:int                                   = 2942;
 public static const UNKNOWN_FLAG_NUMBER_02943:int                                   = 2943;
 public static const UNKNOWN_FLAG_NUMBER_02944:int                                   = 2944;
-public static const UNKNOWN_FLAG_NUMBER_02945:int                                   = 2945;
+public static const STATBAR_ANIMATIONS:int                                          = 2945; // 0: animate bar, 1: disable
 public static const BUTTON_ICONS_DISABLED:int                                       = 2946;
 public static const COMBAT_TEASE_HEALING:int                                        = 2947;
 public static const USSDISPLAY_STYLE:int                                  			= 2948;
@@ -2966,7 +2966,7 @@ public static const SCENEHUNTER_OTHER:int                                    		=
 public static const SCENEHUNTER_DICK_SELECT:int                                     = 2958;
 public static const SCENEHUNTER_UNI_HERMS:int                                       = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
-public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
+public static const BOSS_CHAMPION_ELITE_SCALING:int                                 = 2961;
 public static const NEWPERKSDISPLAY:int                                   			= 2962;//Perks Display cleanup
 public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
 public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling
@@ -3012,7 +3012,8 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	WATERSPORTS_ENABLED, LVL_UP_FAST, MUTATIONS_SPOILERS, NEWPERKSDISPLAY, INVT_MGMT_TYPE, CHARVIEWER_ENABLED,
 	CHARVIEW_STYLE, CHARVIEW_ARMOR_HIDDEN, USE_OLD_FONT, BACKGROUND_STYLE, IMAGEPACK_OFF, SPRITE_STYLE, USE_12_HOURS,
 	WATERSPORTS_ENABLED, USE_METRICS, AUTO_LEVEL, STRENGTH_SCALING, SPEED_SCALING, WISDOM_SCALING, INTELLIGENCE_SCALING,
-	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS
+	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS,
+		BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
 ];
 	}
 }

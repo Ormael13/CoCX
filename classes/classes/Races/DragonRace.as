@@ -144,7 +144,7 @@ public class DragonRace extends Race {
 					"def": +10,
 					"mdef": +10
 				})
-				.withExtraBonuses("+100 Max Hunger")
+				.withExtraBonuses("+150 Max Hunger")
 				.end();
 	}
 }

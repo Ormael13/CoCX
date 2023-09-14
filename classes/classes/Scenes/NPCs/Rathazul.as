@@ -1,6 +1,9 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.MerchantMenu;
+import classes.Scenes.Crafting;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
@@ -14,7 +17,7 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 		{
 			EventParser.timeAwareClassAdd(this);
 		}
-		
+
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -29,12 +32,12 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 			}
 			return false;
 		}
-	
+
 		public function timeChangeLarge():Boolean {
 			return false;
 		}
 		//End of Interface Implementation
-		
+
 		public function returnToRathazulMenu():void {
 			if (player.hasStatusEffect(StatusEffects.CampRathazul))
 				campRathazul();
@@ -148,7 +151,7 @@ public function campRathazul():void {
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");
 	//player.createStatusEffect(StatusEffects.metRathazul,0,0,0,0);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 	offered = rathazulWorkOffer();
 	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"");
@@ -309,6 +312,9 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Will you take him up on an offer or leave?");
 		//In camp has no time passage if left.
 		menu();
+		// [ Shop   ] [ Purify ] [        ] [Make Dye] [Debimbo ]
+		// [ MindUp ] [AlchThun] [        ] [        ] [        ]
+		// [AlchTool] [Lethicit] [ Flirt  ] [ Rares  ] [ Leave  ]
 		//Shop sub-menu
 		if (dyes || philters || reductos)
 			addButton(0, "Shop", rathazulShopMenu).hint("Check Rathazul's wares.");
@@ -326,6 +332,10 @@ private function rathazulWorkOffer():Boolean {
 			if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(7, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
 			else addButtonDisabled(7, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
 		}
+		/*
+		addButton(10, "Alch.Tools", askForTools).hint("Ask Rathazul to lend his alchemical tools, so you can dabble in alchemy yourself")
+										   .disableIf(Crafting.alembicLevel >= Crafting.ALEMBIC_LEVEL_SIMPLE, "You already have an alembic!");
+		 */
 		if (lethiciteDefense != null) addButton(11, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(12, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
 		addButton(13, "Rare offers", oneTimeOptions).hint("All the one time options.");
@@ -335,6 +345,45 @@ private function rathazulWorkOffer():Boolean {
 	}
 	return false;
 }
+
+	private function askForTools():void {
+		clearOutput();
+
+		outputText("<i>(todo writeme)</i> ");
+		outputText("Having an interest in doing alchemy yourself, you ask Rathazul if you can borrow some of his tools. ");
+		// high int or HistoryAlchemist: free
+		// medium int: 50 gems
+		// low int:
+		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) {
+			outputText("<i>(todo writeme: free if History:Alchemist)</i> ");
+			outputText("You tell him your history as an alchemist's assistant back in Ingnam. ");
+			doNext(curry(getAlembic, 0));
+		} else if (player.inte >= 25) {
+			var cost:int = Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value;
+			outputText("<i>(todo writeme: int >= 25, can buy)</i> ");
+			menu();
+			addButton(0,"Buy", curry(getAlembic, cost))
+					.hint("Buy alembic for "+cost+" gems.")
+					.disableIf(player.gems < cost, "You need "+cost+" gems");
+			addButton(1, "Cancel", rathazulWorkOffer);
+		} else {
+			outputText("<i>(todo writeme: int < 25, can't buy)</i> ");
+			if (player.inte < 16 && silly()) outputText("You have been fascinated with alchemy ever since you saw mixing blue and yellow paint into green one. But the village alchemists never allowed you to perform such sciences. Envious of your talent, they kept making excuses about <i>'keeping braindead brutes away from fragile equipment'</i>. You enthusiastically tell this story to Rathazul, expecting understanding from a fellow alchemist. ");
+			doNext(rathazulWorkOffer);
+		}
+	}
+	private function getAlembic(price:int):void {
+		clearOutput();
+		outputText("<i>(todo writeme: got/bought equipment from Rathazul)</i> ");
+		if (price > 0) {
+			player.gems -= price;
+			statScreenRefresh();
+		}
+		outputText("\n\n<b>You now can use "+SceneLib.crafting.alchemyExtraction.alembicName()+" to refine consumable items into alchemical reagents!</b> ");
+		if (Crafting.furnaceLevel == 0) outputText("For a full set of alchemical tools, you need a furnace.")
+		Crafting.alembicLevel = Crafting.ALEMBIC_LEVEL_SIMPLE;
+		doNext(playerMenu);
+	}
 
 private function oneTimeOptions():void {
 	spriteSelect(SpriteDb.s_rathazul);
@@ -352,7 +401,7 @@ private function oneTimeOptions():void {
 	}
 	if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
 		addButton(6, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
-	
+
 	}
 	if (flags[kFLAGS.MITZI_RECRUITED] == 2) {
 		if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(7, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
@@ -370,7 +419,7 @@ private function TyrantiaEggQuestRathazul():void {
 	outputText("You bring Ralthazul back to Tyrantia, and you ask him to fill her in. The old mouse puts a hand on Tyrantia’s leg, telling her what he told you. Your giantess looks at you, eyes gleaming, and both hands in front of her mouth.\n\n");
 	outputText("\"<i>Really?!</i>\" She pats the alchemist’s head, somewhat dazed. \"<i>...I...Okay.</i>\" She turns to you, inhaling nervously. \"<i>...I trust you. If you think Ralthzul can stop me from ruining our podlings, then...I’ll do it.</i>\"\n\n");
 	TyrantiaFollower.TyrantiaFollowerStage = 6;
-	eachMinuteCount(15);
+	advanceMinutes(15);
 	doNext(playerMenu);
 }
 
@@ -698,6 +747,9 @@ private function purifyMinoCum():void{
 //------------
 private function rathazulShopMenu():void {
 	menu();
+	// [HairDyes] [SkinOils] [BLotions] [Reducto ] [GroPlus ]
+	// [NumbOil ] [PuriPhil] [H.Pill  ] [M.H.Pill] [B.H.Pill]
+	// [ProLacta] [Scorpinm] [        ] [        ] [Back    ]
 	//Dyes
 	if (dyes) {
 		addButton(0, "Hair Dyes", buyDyes).hint("Ask him to make a dye for you. \n\nCost: 50 Gems.");
@@ -744,66 +796,36 @@ private function rathazulShopMenu():void {
 	addButton(14, "Back", returnToRathazulMenu);
 }
 //Hair dyes
-private function buyDyes(fromPage2:Boolean = false):void {
+private function buyDyes():void {
 	clearOutput();
-	if (!fromPage2) {
-		spriteSelect(SpriteDb.s_rathazul);
-		outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
-		outputText("\n\n<b>(-50 Gems)</b>");
-		player.gems -= 50;
-		statScreenRefresh();
-	}
-	menu();
-	addButton(0, "Auburn", buyDye, consumables.AUBURND);
-	addButton(1, "Black", buyDye, consumables.BLACK_D);
-	addButton(2, "Blond", buyDye, consumables.BLOND_D);
-	addButton(3, "Brown", buyDye, consumables.BROWN_D);
-	addButton(5, "Red", buyDye, consumables.RED_DYE);
-	addButton(6, "White", buyDye, consumables.WHITEDY);
-	addButton(7, "Gray", buyDye, consumables.GRAYDYE);
+	spriteSelect(SpriteDb.s_rathazul);
+	var merchantMenu:MerchantMenu = new MerchantMenu();
+	merchantMenu.prompt = "Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?";
+	merchantMenu.addItem(useables.REAGENT, 50);
+	merchantMenu.addItem(useables.DYE_FOUNDATION);
+	merchantMenu.addItem(useables.OIL_FOUNDATION);
+	merchantMenu.addItem(useables.DROP_FOUNDATION);
+	merchantMenu.addItem(consumables.AUBURND, 50);
+	merchantMenu.addItem(consumables.BLACK_D, 50);
+	merchantMenu.addItem(consumables.BLOND_D, 50);
+	merchantMenu.addItem(consumables.BROWN_D, 50);
+	merchantMenu.addItem(consumables.RED_DYE, 50);
+	merchantMenu.addItem(consumables.WHITEDY, 50);
+	merchantMenu.addItem(consumables.GRAYDYE, 50);
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) {
-		addButton(4, "Next", buyDyesPage2);
-		addButton(8, "Blue", buyDye, consumables.BLUEDYE);
-		addButton(9, "Green", buyDye, consumables.GREEN_D);
-		addButton(10, "Orange", buyDye, consumables.ORANGDY);
-		addButton(11, "Purple", buyDye, consumables.PURPDYE);
-		addButton(12, "Pink", buyDye, consumables.PINKDYE);
+		merchantMenu.addItem(consumables.BLUEDYE, 50);
+		merchantMenu.addItem(consumables.GREEN_D, 50);
+		merchantMenu.addItem(consumables.ORANGDY, 50);
+		merchantMenu.addItem(consumables.PURPDYE, 50);
+		merchantMenu.addItem(consumables.PINKDYE, 50);
+		merchantMenu.addItem(consumables.RUSSDYE, 50);
+		merchantMenu.addItem(consumables.RAINDYE, 50);
 	}
-	addButton(13, "Reagent", buyDye, useables.REAGENT);
-	addButton(14, "Never mind", buyDyeNevermind);
-}
-private function buyDyesPage2():void {
-	clearOutput();
-	if (player.statusEffectv2(StatusEffects.MetRathazul) < 8) { // Failsafe, should probably never happen (Stadler76)
-		buyDyes(true);
-		return;
+	merchantMenu.afterPurchase = function(itype:ItemType,qty:int,next:Function):void {
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+		next();
 	}
-	spriteSelect(SpriteDb.s_rathazul);
-	menu();
-	addButton(0, "Russet", buyDye, consumables.RUSSDYE);
-	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
-		addButton(1, "Rainbow", buyDye, consumables.RAINDYE);
-	}
-	addButton(4, "Previous", buyDyes, true);
-	addButton(14, "Never mind", buyDyeNevermind);
- }
-
-private function buyDye(dye:ItemType):void {
-	spriteSelect(SpriteDb.s_rathazul);
-	clearOutput();
-	outputText(images.showImage("rathazul-buy-dye"));
-	inventory.takeItem(dye, rathazulShopMenu);
-	statScreenRefresh();
-	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
-}
-
-private function buyDyeNevermind():void {
-	spriteSelect(SpriteDb.s_rathazul);
-	clearOutput();
-	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
-	player.gems += 50;
-	statScreenRefresh();
-	rathazulShopMenu();
+	merchantMenu.show(rathazulShopMenu);
 }
 
 //Scales dyes

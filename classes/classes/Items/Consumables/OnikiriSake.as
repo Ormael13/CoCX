@@ -12,6 +12,7 @@ import classes.BodyParts.Skin;
 import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 
@@ -20,6 +21,10 @@ public class OnikiriSake extends Consumable {
 	{
 		super("OniSake", "Onikiri Sake", "a bottle of Onikiri Sake", 6, "A drink favored by oni.");
 		withTag(ItemTags.U_TF);
+		refineableInto(
+				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+				AlchemyLib.DEFAULT_ESSENCE_DROP_TABLE(AlchemyLib.AE_ONI)
+		)
 	}
 
 	override public function get description():String {
@@ -169,7 +174,7 @@ public class OnikiriSake extends Consumable {
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\n");
-      CoC.instance.transformations.SkinPatternOni.applyEffect();
+			CoC.instance.transformations.SkinPatternOni.applyEffect();
 			changes++;
 		}
 		//});

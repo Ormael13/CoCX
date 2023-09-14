@@ -99,7 +99,7 @@ public class EnchantmentLib extends ItemConstants {
 			"Sensitive ", " of Sensitivity", "Sn", RARITY_MAGICAL,
 			2, 3, 6, 2, 0, 150)
 			.setSpawnChance(SPAWN_COMMON);
-	public static const StrengthMinus:EnchantmentType     = new StatEnchantmentType(8, "Strength+",
+	public static const StrengthMinus:EnchantmentType     = new StatEnchantmentType(8, "Strength-",
 			false, "str.mult",
 			"Weak ", " of Weakness", "St-", RARITY_MAGICAL,
 			// minLevel, minPower, maxPower, statPerPower, value, valuePerPower, valueX, valueXPerPower

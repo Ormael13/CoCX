@@ -281,6 +281,18 @@ public class Skin extends SaveableBodyPart {
 		appearanceDesc: "Your body is covered with glowing runic tattoos.",
 		base:true
 	});
+	public static const PATTERN_GLYPH_TATTOO: int = 17;
+	EnumValue.add(PatternTypes, PATTERN_GLYPH_TATTOO, "GLYPH_TATTOO", {
+		name:"glyph tattoo",
+		appearanceDesc: "Your body is covered with glyph tattoos.",
+		base:true
+	});
+	public static const PATTERN_BIOLUMINESCENCE: int = 18;
+	EnumValue.add(PatternTypes, PATTERN_BIOLUMINESCENCE, "PATTERN_BIOLUMINESCENCE", {
+		name:"bioluminescence tattoo",
+		appearanceDesc: "You have strange ushi-oni tattoos on your belly, chest, breasts, shoulders and even face; some are like a black sheen plate, while others are just fur.",
+		base:true
+	});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 
 	public var base:SkinLayer;
@@ -556,6 +568,12 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function hasUshiOniTattoo():Boolean {
 		return base.pattern == PATTERN_USHI_ONI_TATTOO;
+	}
+	public function hasGlyphTattoo():Boolean {
+		return base.pattern == PATTERN_GLYPH_TATTOO;
+	}
+	public function hasBioluminescence():Boolean {
+		return base.pattern == PATTERN_BIOLUMINESCENCE;
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;

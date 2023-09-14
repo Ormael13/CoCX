@@ -3,6 +3,7 @@
  */
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.Weapons.Tidarion;
 import classes.Monster;
 import classes.PerkLib;
@@ -288,13 +289,77 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 			
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsCreateElementBasic)) {
+			bd = buttons.add("Create E. (Fire)", curry(CreateElement, "fire")).hint("Form ball of fire elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			bd = buttons.add("Create E. (Water)", curry(CreateElement, "water")).hint("Form ball of water elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			bd = buttons.add("Create E. (Air)", curry(CreateElement, "air")).hint("Form ball of air elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			bd = buttons.add("Create E. (Earth)", curry(CreateElement, "earth")).hint("Form ball of earth elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			if (player.hasStatusEffect(StatusEffects.KnowsCreateElementAdvanced)) {
+				bd = buttons.add("Create E. (Ice)", curry(CreateElement, "ice")).hint("Form ball of ice elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+				if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+					bd.disable("Your hp is too low to use this soulskill.");
+				}
+				bd = buttons.add("Create E. (Lightning)", curry(CreateElement, "lightning")).hint("Form ball of lightning elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+				if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+					bd.disable("Your hp is too low to use this soulskill.");
+				}
+				bd = buttons.add("Create E. (Darkness)", curry(CreateElement, "darkness")).hint("Form ball of darkness elemental energy to toss at the enemy.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+				if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+				} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+					bd.disable("Your current soulforce is too low.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (60 * soulskillCost() * soulskillcostmulti())) {
+					bd.disable("Your hp is too low to use this soulskill.");
+				}
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
 			if (player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
 				bd = buttons.add("Deactiv VPT", DeactivateVioletPupilTransformation)
 					   .hint("Deactivate Violet Pupil Transformation.");
 			} else {
-				bd = buttons.add("V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art. While it drains your SoulForce constantly, it allows one to rapidly heal their injuries.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn. (with some perks or races it could be more than 200)");
-				if (player.soulforce < 100) {
+				bd = buttons.add("V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art. While it drains your SoulForce constantly, it allows one to rapidly heal their injuries.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: <i>5% of max soulforce</i> regenerating <b>5% of max HP</b> per turn. (some perks or races could lower SF cost or increase HP regen)");
+				var cm1:Number = 0.05;
+				if (player.isRaceCached(Races.UNICORN, 2)) cm1 -= 0.01;
+				if (player.isRaceCached(Races.ALICORN, 2)) cm1 -= 0.01;
+				var cost1:Number = Math.round(player.maxSoulforce()*cm1);
+				if (player.soulforce < cost1) {
 					bd.disable("<b>Your current soulforce is too low.</b>");
 				}
 			}
@@ -310,6 +375,32 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else {
 				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
 			}
+		}
+		if (player.racialScore(Races.ANUBIS) >= 20) {
+			bd = buttons.add("Soul drain", SoulDrain).hint("Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+			if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
+				bd.disable("You can't use this soulskill on somoene truly souless.");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if (player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			}
+			
+		}
+		if (player.racialScore(Races.ANUBIS) >= 20) {
+			bd = buttons.add("Finger of death", FingerOfDeath).hint("Inflict massive damage. Also damage the opponent's toughness and strength by 10%. Ineffective on foes who lack a soul.  \n\nWould go into cooldown after use for: 6 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(200 * soulskillCost() * soulskillcostmulti()));
+			if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
+				bd.disable("You can't use this soulskill on somoene truly souless.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownFingerOfDeath)) {
+				bd.disable("You need more time before you can use Grandiose Hail of Blades again.");
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
+				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
+			} else if ((player.soulforce < 300 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (200 * soulskillCost() * soulskillcostmulti())) {
+				bd.disable("Your hp is too low to use this soulskill.");
+			}
+			
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
 			bd = buttons.add("Blood Swipe", bloodSwipe)
@@ -447,9 +538,13 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
+			if (!player.statStore.hasBuff("ScarletSpiritCharge")) bd = buttons.add("ScarletSpiritCharge", ScarletSpiritCharge).hint("Activate Scarlet Spirit Charge state, which enhances your physical and mental abilities.  Allow to use during it Charge action.  \n\n(MAGICAL SOULSKILL)  \n\nBlood Cost: 5% of max HP per turn");
+			else bd = buttons.add("DeActSSCharge", DeactivateScarletSpiritCharge).hint("Deactivate Scarlet Spirit Charge.");
+		}
 	}
 	private function monsterDodgeSkill(skillName:String):Boolean {
-		if ((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) {
+		if (((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your " + skillName + "!");
 			else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges your " + skillName + " with superior quickness!");
 			else outputText("[Themonster] deftly avoids your slow " + skillName + ".");
@@ -457,6 +552,19 @@ public class CombatSoulskills extends BaseCombatContent {
 			return true;
 		}
 		return false;
+	}
+	private function anubiHeartLeeching(dmg:Number):void {
+		flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] = 1;
+		var leech:Number = dmg;
+		var leechCap:Number = 0.1;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) {
+			leechCap *= 2;
+			leech *= 0.2;
+		}
+		else leech *= 0.1;
+		leech = Math.round(leech);
+		if (leech > Math.round(player.maxHP() * leechCap)) leech = Math.round(player.maxHP() * leechCap);
+		HPChange(leech, false);
 	}
 
 	public function TripleThrust():void {
@@ -484,6 +592,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(" damage!");
 		}
 		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		enemyAI();
@@ -514,6 +623,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(" damage!");
 		}
 		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		enemyAI();
@@ -544,6 +654,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(" damage!");
 		}
 		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -585,6 +696,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= soulskillPhysicalMod();
 		//other bonuses
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.weapon.isNothing && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);
 		damage = combat.statusEffectBonusDamage(damage);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
@@ -668,7 +780,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
 		if (player.haveWeaponForJouster()) {
-			//if (player.isPolearmTypeWeapon()) damage *= 0.75;
+			if (player.isPolearmTypeWeapon()) damage *= 0.75;
 			if (player.isTaur() || player.isDrider()) damage *= 2;
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
@@ -704,6 +816,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.weapon.isNothing && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -778,6 +891,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= combat.soulskillMagicalMod();
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -803,6 +917,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
@@ -826,6 +941,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.plural) damage *= 5;
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatMagicalCritical();
@@ -842,6 +958,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
@@ -860,6 +977,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var hob1:Number = 6;
 		while (hob1-->0) BladesD();
 		outputText(" damage!\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -885,6 +1003,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var hob2:Number = 9;
 		while (hob2-->0) BladesD(2);
 		outputText(" damage!\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -910,6 +1029,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var hob3:Number = 19;
 		while (hob3-->0) BladesD(4);
 		outputText(" damage!\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(flags[kFLAGS.HERO_BANE_DAMAGE_BANK]);
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -923,6 +1043,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= combat.soulskillMagicalMod();
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -961,6 +1082,77 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
+	}
+
+	public function CreateElement(type:String):void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You concentrate, focusing on the power of your soul. You infuse a bit of soulforce into a finger, light blue energy covering the tip. You draw a simple rune in the air, the energy from your finger dissipating into it. A moment later, the rune swells, energy forming into a small ball of "+type+". You motion, sending the ball flying toward [themonster].  ");
+		if (monsterDodgeSkill("ball")) return;
+		var soulforcecost:Number = 60 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
+		else player.soulforce -= soulforcecost;
+		var damage:Number = scalingBonusWisdom();
+		if (damage < 10) damage = 10;
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		outputText("The tossed projectile hits [themonster], dealing ");
+		switch (type) {
+			case "fire":
+				damage = Math.round(damage*combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+				break;
+			case "water":
+				damage = Math.round(damage*combat.waterDamageBoostedByDao());
+				doWaterDamage(damage, true, true);
+				break;
+			case "air":
+				damage = Math.round(damage*combat.windDamageBoostedByDao());
+				doWindDamage(damage, true, true);
+				break;
+			case "earth":
+				damage = Math.round(damage*combat.earthDamageBoostedByDao());
+				doEarthDamage(damage, true, true);
+				break;
+			case "ice":
+				damage = Math.round(damage*combat.iceDamageBoostedByDao());
+				doIceDamage(damage, true, true);
+				break;
+			case "lightning":
+				damage = Math.round(damage*combat.lightningDamageBoostedByDao());
+				doLightingDamage(damage, true, true);
+				break;
+			case "darkness":
+				damage = Math.round(damage*combat.darknessDamageBoostedByDao());
+				doDarknessDamage(damage, true, true);
+				break;
+			default:
+				damage = Math.round(damage*combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+				break;
+		}
+		outputText(" damage! ");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
+		combat.heroBaneProc(damage);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
 	}
 
 	public function CleansingPalm():void {
@@ -1005,6 +1197,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= soulskillMod();
 		damage *= corruptionMulti;
 		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (damage > 0) {
 			outputText("You thrust your palm forward, creating a blast of pure energy that erupts from your palm, slamming into [themonster], tossing");
 			if ((monster as Monster).plural) outputText(" them");
@@ -1032,6 +1225,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		else outputText("You thrust your palm forward, causing a blast of pure energy to slam against [themonster], which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
 		combat.WrathGenerationPerHit2(5);
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		statScreenRefresh();
@@ -1059,6 +1253,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -1094,6 +1289,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else monster.buff("FrozenSolid").addStats({spe: -20}).withText("Frozen Solid").combatTemporary(2);
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(5);
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		outputText("\n\n");
@@ -1124,6 +1320,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -1259,6 +1456,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatMagicalCritical();
@@ -1283,6 +1481,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
@@ -1311,6 +1510,47 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		outputText("Deciding you not need for now to constantly using Violet Pupil Transformation you concentrate and deactivating it.");
 		player.removeStatusEffect(StatusEffects.VioletPupilTransformation);
+		enemyAI();
+	}
+	
+	private static const ScarletSpiritChargeABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
+	public function ScarletSpiritCharge():void {
+		clearOutput();
+		var doEffect:Function = function():* {
+			var ScarletSpiritChargeBoost:Number = 10;
+			ScarletSpiritChargeBoost += player.wisStat.core.value;
+			ScarletSpiritChargeBoost *= spellModBlood();
+			if (ScarletSpiritChargeBoost < 10) ScarletSpiritChargeBoost = 10;
+			ScarletSpiritChargeBoost = FnHelpers.FN.logScale(ScarletSpiritChargeBoost,ScarletSpiritChargeABC,10);
+			ScarletSpiritChargeBoost = Math.round(ScarletSpiritChargeBoost);
+			tempStrTouSpe = ScarletSpiritChargeBoost;
+			mainView.statsView.showStatUp('str');
+			// strUp.visible = true;
+			// strDown.visible = false;
+			mainView.statsView.showStatUp('tou');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			mainView.statsView.showStatUp('spe');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			mainView.statsView.showStatUp('inte');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			mainView.statsView.showStatUp('wis');
+			// touUp.visible = true;
+			// touDown.visible = false;
+			player.buff("ScarletSpiritCharge").addStats({"str.mult":(ScarletSpiritChargeBoost*0.02),"tou.mult":(ScarletSpiritChargeBoost*0.02),"spe.mult":(ScarletSpiritChargeBoost*0.02),"int.mult":(ScarletSpiritChargeBoost*0.01),"wis.mult":(ScarletSpiritChargeBoost*0.01)}).withText("Scarlet Spirit Charge").combatPermanent();
+			statScreenRefresh();
+		}
+		var tempStrTouSpe:Number = 0;
+		outputText("You focus the power of your blood and soul, allowing the scarlet energy fill your being. Your [skin] begins to glow as the power within you coalesces, whirling within you with the force of a tsunami.\n");
+		doEffect.call();
+		enemyAI();
+	}
+	public function DeactivateScarletSpiritCharge():void {
+		clearOutput();
+		outputText("You disrupt the flow of blood within you, your body slumps as the glow radiating from your [skin] dissipates back into your natural hue.");
+		player.statStore.removeBuffs("ScarletSpiritCharge");
 		enemyAI();
 	}
 	
@@ -1435,6 +1675,86 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText(".\n\n");
 		enemyAI();
 	}
+
+	public function SoulDrain():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You reach out with your magic and attempt to tear a part of your opponent soul. [monster his] scream in pain and horror as you attack [monster his] very essence!  ");
+		var soulforcecost:Number = 100 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		var damage:Number = scalingBonusWisdom();
+		if (damage < 10) damage = 10;
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+		if (player.armor == armors.DEATHPGA) damage *= 1.5;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		checkAchievementDamage(damage);
+		HPChange(Math.round(player.maxHP() * 0.2), true);
+		monster.addSoulforce(-Math.round(monster.maxSoulforce() * 0.2)); 
+		outputText("\n\n");
+		anubiHeartLeeching(damage);
+		combat.heroBaneProc(damage);
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function FingerOfDeath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You point a finger at your opponent condemning [monster his] soul as you call on to the power of death to claim a part of [monster him] early! A ghastly claw appears and pierce through [themonster] body tearing [monster his] soul appart.  ");
+		var soulforcecost:Number = 300 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
+		else player.soulforce -= soulforcecost;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4) player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 4, 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 6, 0, 0, 0);
+		var damage:Number = player.wis * 1.5;
+		damage += scalingBonusWisdom() * 1.5;
+		if (damage < 15) damage = 15;
+		//soulskill mod effect
+		damage *= combat.soulskillMagicalMod();
+		//other bonuses
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
+		if (player.armor == armors.DEATHPGA) damage *= 1.5;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//final touches
+		damage *= (monster.damagePercent() / 100);
+		outputText(" ");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		monster.statStore.addBuffObject({str:-10,tou:-10}, "Finger of death",{text:"Finger of death"});
+		checkAchievementDamage(damage);
+		outputText("\n\n");
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
+		combat.heroBaneProc2();
+		combat.EruptingRiposte2();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
 	
 	public function bloodSwipe():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -1444,6 +1764,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You concentrate, focusing on the power of your blood. You swipe your hand across your chest. Three trails of blood pour from your fingertips, condensing into thin crimson blades. You point your clawlike blades at your foe, and they detach with a small crunch, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
 		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1462,7 +1784,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
-
 		endTurnByBloodSkillUse(damage);
 	}
 	public function bloodSwipeSF():void {
@@ -1475,7 +1796,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF,3,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, before swiping your hand across your chest. Three trails of blood pour from your fingertips, condensing into thin crimson blades. You point your clawlike blades at your foe, and they detach with a small crunch, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 3;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//Determine if critical hit!
@@ -1507,6 +1830,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, spreading your fingers wide. Within an instant, a large blood dripping spear forms in your hand. You motion, sending the spear flying toward [themonster]'s vitals.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1533,7 +1858,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeekerSF,4,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, spreading your fingers wide. Within an instant, a large blood dripping spear forms in your hand. You motion, sending the spear flying toward [themonster]'s vitals.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1560,6 +1887,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1592,8 +1921,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF,3,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward the enem"+(monster.plural?"ies":"y")+". Blood spurts from your fingertips, beads of crimson darkening as they harden. You close your eyes for a moment, sending soulforce into the pellets. You flick your wrist, sending the blood pellets flying towards [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 1.5;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
 		if (monster.plural) damage *= 5;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//Determine if critical hit!
@@ -1627,6 +1958,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands, precise movements sending power blazing through your body. Within an instant, large, blood dripping pillars form above [themonster]. The pillars begin to fall, and [themonster] looks up in shock, too late to dodge such a large projectile. \n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1654,9 +1987,10 @@ public class CombatSoulskills extends BaseCombatContent {
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF,5,0,0,0);
 		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands, precise movements sending power blazing through your body. You pour Soulforce into your hands, and they glow blue with each gesture, power pulsing with your heartbeat. Within an instant, large, blood dripping pillars form above [themonster]. The pillars begin to fall, and [themonster] looks up in shock, too late to dodge such a large projectile. \n\n");
-		
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
-		if (damage < 10) damage = 10;
+		if (damage < 30) damage = 30;
+		if (player.hasPerk(PerkLib.BloodAffinity)) damage *= 2;
+		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1681,6 +2015,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
+		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1978,3 +2313,4 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }*/
 }
 }
+

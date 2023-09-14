@@ -39,11 +39,12 @@ public class CockTransformations extends MutationsHelper {
 		}
 	}
 
-	public function CockNone(cock:int = 0): Transformation {
+	public function CockNone(index:int = 0): Transformation {
 		return new SimpleTransformation("Remove Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = (index < 0) ? rand(player.cocks.length) : index;
 
 					desc += "You have a strange feeling as your crotch tingles.  Opening your [armor], <b>you realize that one of your cocks have vanished completely!</b>";
 					if (doOutput) outputText(desc);
@@ -52,7 +53,7 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock >= player.cockTotal();
+					return index < 0 ? player.cockTotal() > 0 : index >= player.cockTotal();
 				}
 		);
 	}
@@ -66,11 +67,25 @@ public class CockTransformations extends MutationsHelper {
 		return desc;
 	}
 
-	public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	// convert -1 to 'first not of that type'
+	private function cockIndex(cock:int, type:CockTypesEnum):int {
+		if (cock >= 0) return cock;
+		for (cock = 0; cock < player.cocks.length; cock++) if (player.cocks[cock].cockType != type) return cock;
+		return 0
+	}
+	// -1: are all cocks this type
+	private function isPresentCock(index:int, type:CockTypesEnum):Boolean {
+		if (player.cocks.length == 0) return false;
+		if (index == -1) return player.countCocksOfType(type) == player.cocks.length;
+		return index < player.cocks.length && player.cocks[index].cockType == type;
+	}
+	
+	public function CockHuman(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Human Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.HUMAN);
 
 					if (player.cocks.length > cock){
 						desc += "A strange tingling begins behind your [cock], slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your [armor] to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, "+
@@ -92,16 +107,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.HUMAN;
+					return isPresentCock(index, CockTypesEnum.HUMAN);
 				}
 		);
 	}
 
-	public function CockHorse(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockHorse(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Horse Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.HORSE);
 
 					if (player.cockTotal() > cock){
 						desc += "Your [cock "+(cock+1)+"] begins to feel strange.  You pull down your clothes to take a look and see it darkening";
@@ -133,16 +149,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.HORSE;
+					return isPresentCock(index, CockTypesEnum.HORSE)
 				}
 		);
 	}
 
-	public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockKirin(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Kirin Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.KIRIN);
 
 					if (player.isTaur()){
 						desc += "You moan in confusion as changes rushes to your rapidly hardening [cock "+(cock+1)+"] which begins unloading shots after shots of neon blue cum." +
@@ -185,16 +202,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.KIRIN;
+					return isPresentCock(index, CockTypesEnum.KIRIN)
 				}
 		);
 	}
 
-	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation {
+	public function CockDog(index:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation {
 		return new SimpleTransformation("Dog Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.DOG);
 
 					if (player.cocks.length > cock){
 						if (player.cocks[cock].cockType == CockTypesEnum.HORSE) {
@@ -204,7 +222,7 @@ public class CockTransformations extends MutationsHelper {
 							else player.cocks[cock].cockLength -= .5;
 							player.cocks[cock].cockThickness += .5;
 						}
-						else if (["tentacle","plant"].indexOf(CockTypesEnum.ParseConstant(player.cocks[cock].cockType)) >= 0)
+						else if (["tentacle","plant"].indexOf(player.cocks[cock].cockType.Group) >= 0)
 							desc += "Your [cock "+(cock+1)+"] coils in on itself, reshaping and losing its coloration, becoming a shiny red. You";
 						else desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"
 						desc += " shudder as the crown of your [cock "+(cock+1)+"] reshapes into a point, the sensations nearly too much for you. "
@@ -235,16 +253,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DOG;
+					return isPresentCock(index, CockTypesEnum.DOG)
 				}
 		);
 	}
 
-	public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockDemon(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Demon Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.DEMON);
 
 					if (player.cocks.length > cock){
 
@@ -279,16 +298,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DEMON;
+					return isPresentCock(index, CockTypesEnum.DEMON)
 				}
 		);
 	}
 
-	public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockTentacle(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Tentacle Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.TENTACLE);
 
 					if (player.cocks.length > cock){
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
@@ -314,16 +334,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.TENTACLE;
+					return isPresentCock(index, CockTypesEnum.TENTACLE)
 				}
 		);
 	}
 
-	public function CockScylla(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockScylla(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Scylla Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.SCYLLATENTACLE);
 
 					if (player.cocks.length > cock){
 						desc += "Your feel your [cock "+(cock+1)+"] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ";
@@ -345,16 +366,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.SCYLLATENTACLE;
+					return isPresentCock(index, CockTypesEnum.SCYLLATENTACLE)
 				}
 		);
 	}
 
-	public function CockCat(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockCat(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Cat Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.CAT);
 
 					if (player.cocks.length > cock){
 						desc += "One of your penises begins to feel strange.  You pull down your clothes to take a look and see your [cock "+(cock+1)+"] swells up with near-painful arousal and begin to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your [cock "+(cock+1)+"] and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.";
@@ -387,16 +409,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.CAT;
+					return isPresentCock(index, CockTypesEnum.CAT)
 				}
 		);
 	}
 
-	public function CockCancer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockCancer(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Cancer Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.CANCER);
 
 					if (player.cocks.length > cock) {
 						desc += "Your [cock] begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
@@ -421,16 +444,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.CANCER;
+					return isPresentCock(index, CockTypesEnum.CANCER)
 				}
 		);
 	}
 
-	public function CockLizard(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockLizard(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Lizard Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.LIZARD);
 
 					if (player.cocks.length > cock){
 						if (player.lizardCocks() > 0) {
@@ -487,16 +511,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.LIZARD;
+					return isPresentCock(index, CockTypesEnum.LIZARD)
 				}
 		);
 	}
 
-	public function CockCaveWyrm(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockCaveWyrm(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Cave Wyrm Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.CAVE_WYRM);
 
 					if (player.cocks.length > cock){
 						desc += "You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your [cock "+(cock+1)+"] you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>";
@@ -523,16 +548,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.CAVE_WYRM;
+					return isPresentCock(index, CockTypesEnum.CAVE_WYRM)
 				}
 		);
 	}
 
-	public function CockAnemone(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockAnemone(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Anemone Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.ANEMONE);
 
 					if (player.cocks.length > cock) {
 						desc += "A strange tingling begins at the base of your [cock], slowly crawling up across its entire length.  You shift nervously as the feeling intensifies.  You undo your [armor] to check, and see  small blue-green tendrils emerging all around the base of your cock and  as it too shifts colour. The tentacles wave about"+
@@ -604,16 +630,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.ANEMONE;
+					return isPresentCock(index, CockTypesEnum.ANEMONE)
 				}
 		);
 	}
 
-	public function CockKangaroo(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockKangaroo(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Kangaroo Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.KANGAROO);
 
 					if (player.cocks.length > cock){
 						desc += "You feel a sharp pinch at the end of your penis and whip down your clothes to check.  Before your eyes, the tip of it collapses into a narrow point and the shaft begins to tighten behind it, assuming a conical shape before it retracts into ";
@@ -641,16 +668,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.KANGAROO;
+					return isPresentCock(index, CockTypesEnum.KANGAROO)
 				}
 		);
 	}
 
-	public function CockDragon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockDragon(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Dragon Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.DRAGON);
 
 					if (player.cocks.length > cock){
 						desc += "Your " + player.cockDescript(cock) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ";
@@ -681,16 +709,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DRAGON;
+					return isPresentCock(index, CockTypesEnum.DRAGON)
 				}
 		);
 	}
 
-	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation {
+	public function CockDisplacer(index:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation {
 		return new SimpleTransformation("Displacer Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.DISPLACER);
 
 					if (player.cocks.length > cock){
 						desc += "You feel an incessant hardness beneath you and realize your cock is dangling out of its sheath.";
@@ -718,16 +747,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DISPLACER;
+					return isPresentCock(index, CockTypesEnum.DISPLACER)
 				}
 		);
 	}
 
-	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation {
+	public function CockFox(index:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation {
 		return new SimpleTransformation("Fox Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.FOX);
 
 					if (player.cocks.length > cock){
 						if (player.cocks[cock].cockType == CockTypesEnum.HORSE) {
@@ -737,7 +767,7 @@ public class CockTransformations extends MutationsHelper {
 							else player.cocks[cock].cockLength -= .5;
 							player.cocks[cock].cockThickness += .5;
 						}
-						else if (["tentacle","plant"].indexOf(CockTypesEnum.ParseConstant(player.cocks[cock].cockType)) >= 0)
+						else if (["tentacle","plant"].indexOf(player.cocks[cock].cockType.Group) >= 0)
 							desc += "Your [cock "+(cock+1)+"] coils in on itself, reshaping and losing its coloration, becoming a shiny red. You";
 						else desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"
 						desc += " shudder as the crown of your [cock "+(cock+1)+"] reshapes into a point, the sensations nearly too much for you. "
@@ -768,16 +798,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.FOX;
+					return isPresentCock(index, CockTypesEnum.FOX)
 				}
 		);
 	}
 
-	public function CockBee(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockBee(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Bee Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.BEE);
 
 					if (player.cocks.length > cock){
 						desc += "Your huge [cock "+(cock+1)+"] suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.  ";
@@ -803,16 +834,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.BEE;
+					return isPresentCock(index, CockTypesEnum.BEE)
 				}
 		);
 	}
 
-	public function CockPig(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockPig(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Pig Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.PIG);
 
 					if (player.cocks.length > cock){
 						desc += "You feel an uncomfortable pinching sensation in your [cock "+(cock+1)+"]. " + player.clothedOrNakedLower("You pull open your [armor]", "You look down at your exposed groin") + ", watching as it warps and changes. As the transformation completes, you’re left with a shiny, pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>";
@@ -834,16 +866,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.PIG;
+					return isPresentCock(index, CockTypesEnum.PIG)
 				}
 		);
 	}
 
-	public function CockAvian(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockAvian(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Avian Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.AVIAN);
 
 					if (player.cocks.length > cock){
 						desc += "A warm tingling on your nethers makes you check down if the transformative had an effect on your genitals. Giving them a thorough check, you notice that, effectively, your " + cockDescript(cock) + " has changed.  ";
@@ -866,16 +899,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.AVIAN;
+					return isPresentCock(index, CockTypesEnum.AVIAN)
 				}
 		);
 	}
 
-	public function CockRhino(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation {
+	public function CockRhino(index:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation {
 		return new SimpleTransformation("Rhino Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.RHINO);
 
 					if (player.cocks.length > cock){
 						desc += "You feel a stirring in your loins as your [cock "+(cock+1)+"] grows rock hard. ";
@@ -900,16 +934,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.RHINO;
+					return isPresentCock(index, CockTypesEnum.RHINO)
 				}
 		);
 	}
 
-	public function CockEchidna(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation {
+	public function CockEchidna(index:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation {
 		return new SimpleTransformation("Echidna Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.ECHIDNA);
 
 					if (player.cocks.length > cock){
 						desc += "Your [cock "+(cock+1)+"] suddenly becomes rock hard out of nowhere. You " + player.clothedOrNakedLower("pull it out from your [armor]"+(inBlackCock?", right in the middle of the food tent":"")+", watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become four heads. " + (player.hasSheath() ? "" : "The transformation finishes off with a fleshy sheath forming at the base.") + " It ejaculates before going limp, retreating into your sheath.";
@@ -933,16 +968,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.ECHIDNA;
+					return isPresentCock(index, CockTypesEnum.ECHIDNA)
 				}
 		);
 	}
 
-	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation {
+	public function CockWolf(index:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation {
 		return new SimpleTransformation("Wolf Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.WOLF);
 
 					if (player.cocks.length > cock){
 						desc += "Your " + cockDescript(cock) + " clenches painfully, becoming achingly, throbbingly erect. ";
@@ -973,16 +1009,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.WOLF;
+					return isPresentCock(index, CockTypesEnum.WOLF)
 				}
 		);
 	}
 
-	public function CockStamen(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockStamen(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Stamen Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.STAMEN);
 
 					if (player.cocks.length > cock){
 						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [color] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a";
@@ -1007,16 +1044,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.STAMEN;
+					return isPresentCock(index, CockTypesEnum.STAMEN)
 				}
 		);
 	}
 
-	public function CockRedPanda(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockRedPanda(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Red Panda Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.RED_PANDA);
 
 					if (player.cocks.length > cock){
 						desc += "The skin surrounding your penis folds, encapsulating it and turning itself into a protective sheath.  ";
@@ -1042,16 +1080,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.RED_PANDA;
+					return isPresentCock(index, CockTypesEnum.RED_PANDA)
 				}
 		);
 	}
 
-	public function CockGryphon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockGryphon(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Gryphon Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.GRYPHON);
 
 					if (player.cocks.length > cock){
 						desc += "Your nethers tingle under its effect.[pg]Giving them a glimpse, the first thing that becomes obvious if that your " + cockDescript(cock) + " becames a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. ";
@@ -1075,16 +1114,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.GRYPHON;
+					return isPresentCock(index, CockTypesEnum.GRYPHON)
 				}
 		);
 	}
 
-	public function CockCentipede(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockCentipede(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Centipede Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.OOMUKADE);
 
 					if (player.cocks.length > cock){
 						if (player.hasSheath()) {
@@ -1114,16 +1154,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.OOMUKADE;
+					return isPresentCock(index, CockTypesEnum.OOMUKADE)
 				}
 		);
 	}
 
-	public function CockRaiju(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockRaiju(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Raiju Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.RAIJU);
 
 					if (player.cocks.length > cock){
 						desc += "You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your [cock] you discover its tip not only has changed color to neon blue but is now tappered with a sheath like that of a raiju. Furthermore it seems to naturally glow in the dark like the plasma that naturaly drips out of it. <b>You now have a neon blue raiju cock that glow in the dark.</b>";
@@ -1146,16 +1187,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.RAIJU;
+					return isPresentCock(index, CockTypesEnum.RAIJU)
 				}
 		);
 	}
 
-	public function CockUshiOni(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockUshiOni(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Ushi Oni Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.USHI_ONI);
 
 					if (player.cocks.length > cock){
 						desc += "[pg]<b>HOW THE HELL, IT DOES NOT EXIST YET</b>[pg]" +
@@ -1179,16 +1221,17 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.USHI_ONI;
+					return isPresentCock(index, CockTypesEnum.USHI_ONI)
 				}
 		);
 	}
 
-	public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockInsect(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Insect Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.INSECT);
 
 					if (player.cocks.length > cock){
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer";
@@ -1215,7 +1258,7 @@ public class CockTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.INSECT;
+					return isPresentCock(index, CockTypesEnum.INSECT)
 				}
 		);
 	}

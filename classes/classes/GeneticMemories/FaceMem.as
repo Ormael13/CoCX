@@ -627,6 +627,39 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const FOX_FANGS:int = _partid++;
+		EnumValue.add(Memories, FOX_FANGS, "FOX_FANGS", {
+			id: "Fox Fangs Face",
+			name: "Fox Fangs",
+			cost: 100,
+			title: "Fox Fangs",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceFoxFangs;
+			}
+		});
+
+		public static const WOLF_FANGS:int = _partid++;
+		EnumValue.add(Memories, WOLF_FANGS, "WOLF_FANGS", {
+			id: "Wolf Fangs Face",
+			name: "Wolf Fangs",
+			cost: 100,
+			title: "Wolf Fangs",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceWolfFangs;
+			}
+		});
+
+		public static const ABYSSAL_SHARK:int = _partid++;
+		EnumValue.add(Memories, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+			id: "Abyssal Shark Face",
+			name: "Abyssal Shark Face",
+			cost: 100,
+			title: "A. Shark Face",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceAbyssalShark;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

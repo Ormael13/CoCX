@@ -136,7 +136,7 @@ public class ValaScene extends BaseContent implements SaveableState
                     doNext(playerMenu);
                 }
                 else doNext(recallWakeUp);
-                
+
             }
             function vagF_2():void {
 			    clearOutput();
@@ -145,7 +145,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("It's a hopeless race, however, as she quickly zeros in on your g-spot, curling her tongue to coil thickly inside of you. You grab her head by its purple hair and crush it into your crotch, crushing her nose on your " + clitDescript() + ", momentarily forgetting about the fairy's pussy as she tongue-rapes yours. When you cum, your body tenses and you hold your breath as your " + hipDescript() + " threaten to draw the small girl's whole head into your " + vaginaDescript(0) + ". You hear a slurping and realize she's drinking your girl cum. The thought is enough to remind you about the fairy slit at eye-level just as she climaxes from the taste of your body. She squirts wildly into your face, small jets of hot, sticky liquid spraying into your mouth, over your cheeks, and into your eyes.\n\n");
 
 				outputText("You blink, and give the little brat a bump on the back of the head for her sneaky facial. She flutters right-side up again and when you see her face, your heart leaps in your chest. Your orgasm has washed her visage clean and you realize she's breathtaking. The soft curves of her heart-shaped face, the timeless alabaster of her flawless skin, and most surprisingly, the glimmers in her almond-shaped, pink eyes. She kisses you, softly this time, almost affectionately. Perhaps your exchange unlocked the memory of sweeter days with her fairy sisters? Your heart sinks when you realize she'll never be able to recapture those lost days in her state and you resolve to make sure she finds her way out of this place once you've defeated its dark master. You return her kiss and redress as she finally gets some long-delayed, restful sleep.");
-                
+
                 if (!recalling) {
                     player.sexReward("vaginalFluids", "Lips");
                     player.sexReward("saliva", "Vaginal");
@@ -415,7 +415,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			}
 			else {
 				outputText("\n\nSome time passes...");
-				eachMinuteCount(30);
+				advanceMinutes(30);
 				doNext(SceneLib.dungeons.deepcave.fightValaVictory);
 			}
 		}
@@ -712,7 +712,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					player.tallness++;
 					if(player.cor > 40) dynStats("cor", -.3);
 				}
-				eachMinuteCount(30);
+				advanceMinutes(30);
 				doNext(SceneLib.telAdre.barTelAdre);
 			}
 			function vagF_2():void {
@@ -736,7 +736,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					//[Player grows 1", lust drops to 0, corruption drops by 2]
 					if(player.cor > 40) dynStats("cor", -.5);
 				}
-				eachMinuteCount(30);
+				advanceMinutes(30);
 				doNext(SceneLib.telAdre.barTelAdre);
 			}
 		}
@@ -891,7 +891,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("\n\n");
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n");
-			eachMinuteCount(30);
+			advanceMinutes(30);
 			player.sexReward("saliva", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -910,7 +910,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("When you finally calm down enough to swallow your spittle, wipe the slick sweat from your face and body, and release the fairy girl from the death-grip between your " + hipDescript() + ", you try to ask what happened to the petals inside your body. The fae girl gives your " + clitDescript() + " a little kiss and places her lips on your pussy. She puffs her cheeks and whispers a string of strange words into your quivering cunt. All at once, the soft petals inside you meld into one warm, hard shape, perfectly mirroring your pussy, labia to cervix. Very carefully, Vala draws the verdant shaft from your body and produces the most intricately ridged, molded dildo that you've ever seen. It's a soft pink color, matching your engorged genitals, and even gently pulses with your every heartbeat.\n\n");
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.");
-			eachMinuteCount(30);
+			advanceMinutes(30);
 			player.sexReward("saliva", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}

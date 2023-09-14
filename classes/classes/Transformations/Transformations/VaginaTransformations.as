@@ -31,6 +31,25 @@ public class VaginaTransformations extends MutationsHelper {
 			default: break;
 		}
 	}
+	
+	// -1: first not this type
+	private function vaginaIndex(index:int, type:int):int {
+		if (index < 0) {
+			for (index = 0; index < player.vaginas.length; index++)
+				if (player.vaginas[index].type != type) return index;
+		}
+		if (index >= player.vaginas.length) index = 0;
+		return index;
+	}
+	// -1: are all vaginas this type
+	private function isPresentVagina(index:int, type:int):Boolean {
+		if (player.vaginas.length == 0) return false;
+		if (index == -1) {
+			for (index = 0; index < player.vaginas.length; index++)
+				if (player.vaginas[index].type != type) return false;
+		}
+		return index < player.vaginas.length && player.vaginas[index].type == type;
+	}
 
 	public function VaginaNone(vagina:int = 0): Transformation {
 		return new SimpleTransformation("Remove Vagina",
@@ -120,11 +139,12 @@ public class VaginaTransformations extends MutationsHelper {
 		);
 	}
 
-	public function VaginaHuman(vagina:int = 0): Transformation {
+	public function VaginaHuman(index:int = 0): Transformation {
 		return new SimpleTransformation("Human Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "";
+					var vagina:int = vaginaIndex(index, VaginaClass.HUMAN);
 
 					if (player.vaginas.length > vagina){
 						desc += "Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your [vagina "+(vagina+1)+"] and see it changing back to its ";
@@ -144,16 +164,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.HUMAN;
+					return isPresentVagina(index, VaginaClass.HUMAN);
 				}
 		);
 	}
 
-	public function VaginaHorse(vagina:int = 0): Transformation {
+	public function VaginaHorse(index:int = 0): Transformation {
 		return new SimpleTransformation("Equine Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.EQUINE);
 
 					if (player.vaginas.length > vagina){
 						desc += "You grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina "+(vagina+1)+"] has grown larger, in depth AND size. To your absolute surprise, it suddenly resume deepening inside your body. " +
@@ -175,16 +196,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.EQUINE;
+					return isPresentVagina(index, VaginaClass.EQUINE);
 				}
 		);
 	}
 
-	public function VaginaKirin(vagina:int = 0): Transformation {
+	public function VaginaKirin(index:int = 0): Transformation {
 		return new SimpleTransformation("Kirin Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.KIRIN);
 
 					if (player.vaginas.length > vagina){
 						desc += "You grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina "+(vagina+1)+"] has grown larger, in depth AND size. To your absolute surprise, it suddenly resume deepening inside your body. " +
@@ -218,16 +240,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.KIRIN;
+					return isPresentVagina(index, VaginaClass.KIRIN);
 				}
 		);
 	}
 
-	public function VaginaSandTrap(vagina:int = 0): Transformation {
+	public function VaginaSandTrap(index:int = 0): Transformation {
 		return new SimpleTransformation("Sand Trap Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.BLACK_SAND_TRAP);
 
 					if (player.vaginas.length > vagina){
 						desc += "Your [vagina] feels... odd.  You undo your clothes and gingerly inspect your nether regions.  The tender pink color of your sex has disappeared, replaced with smooth, marble blackness starting at your lips and working inwards.";
@@ -252,16 +275,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.BLACK_SAND_TRAP;
+					return isPresentVagina(index, VaginaClass.BLACK_SAND_TRAP);
 				}
 		);
 	}
 
-	public function VaginaCaveWyrm(vagina:int = 0): Transformation {
+	public function VaginaCaveWyrm(index:int = 0): Transformation {
 		return new SimpleTransformation("Cave Wyrm Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.CAVE_WYRM);
 
 					if (player.vaginas.length > vagina){
 						desc += "You feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue fluids. Wait, what? When you inspect your [vagina] you discover it too has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  <b>You now have a neon blue pussy that glow in the dark.</b>";
@@ -279,16 +303,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.CAVE_WYRM;
+					return isPresentVagina(index, VaginaClass.CAVE_WYRM);
 				}
 		);
 	}
 
-	public function VaginaCentipede(vagina:int = 0): Transformation {
+	public function VaginaCentipede(index:int = 0): Transformation {
 		return new SimpleTransformation("Centipede Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.VENOM_DRIPPING);
 
 					if (player.vaginas.length > vagina){
 						desc += "You double over as an overwhelming heat pools in your groin ";
@@ -316,16 +341,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.VENOM_DRIPPING;
+					return isPresentVagina(index, VaginaClass.VENOM_DRIPPING);
 				}
 		);
 	}
 
-	public function VaginaManticore(vagina:int = 0): Transformation {
+	public function VaginaManticore(index:int = 0): Transformation {
 		return new SimpleTransformation("Manticore Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.MANTICORE);
 
 					if (player.vaginas.length > vagina){
 						desc +="You suddenly became exceedingly aware of your surroundings, feeling the caress of the wind on your skin and especially its passage next to your [pussy]. " +
@@ -347,16 +373,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.MANTICORE;
+					return isPresentVagina(index, VaginaClass.MANTICORE);
 				}
 		);
 	}
 
-	public function VaginaCancer(vagina:int = 0): Transformation {
+	public function VaginaCancer(index:int = 0): Transformation {
 		return new SimpleTransformation("Cancer Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.CANCER);
 
 					if (player.vaginas.length > vagina){
 						desc += "Your pussy starts foaming bubbles for a few seconds, juice slowly flowing out. You cannot resist as your hands dive into your [vagina]. Your pussy gushes, foaming more and more bubbles until you suddenly shoot a powerful bubble jet. You make a dopey smile at the many uses of this you can already think of. <b>You now have an cancer vagina</b>.";
@@ -380,16 +407,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.CANCER;
+					return isPresentVagina(index, VaginaClass.CANCER);
 				}
 		);
 	}
 
-	public function VaginaDemonic(vagina:int = 0): Transformation {
+	public function VaginaDemonic(index:int = 0): Transformation {
 		return new SimpleTransformation("Demonic Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.DEMONIC);
 
 					if (player.vaginas.length > vagina) {
 					}
@@ -407,16 +435,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.DEMONIC;
+					return isPresentVagina(index, VaginaClass.DEMONIC);
 				}
 		);
 	}
 
-	public function VaginaScylla(vagina:int = 0): Transformation {
+	public function VaginaScylla(index:int = 0): Transformation {
 		return new SimpleTransformation("Scylla Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.SCYLLA);
 
 					if (player.vaginas.length > vagina){
 						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. "+
@@ -438,7 +467,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.SCYLLA;
+					return isPresentVagina(index, VaginaClass.SCYLLA);
 				},
 				function ():Boolean {
 					return player.lowerBody == LowerBody.SCYLLA;
@@ -446,11 +475,12 @@ public class VaginaTransformations extends MutationsHelper {
 		);
 	}
 
-	public function VaginaNaga(vagina:int = 0): Transformation {
+	public function VaginaNaga(index:int = 0): Transformation {
 		return new SimpleTransformation("Naga Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.NAGA);
 
 					if (player.vaginas.length > vagina) {
 						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail.  "+
@@ -472,20 +502,21 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.NAGA;
+					return isPresentVagina(index, VaginaClass.NAGA);
 				},
 				// is possible
 				function ():Boolean {
-					return (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginaType(-1, vagina) != VaginaClass.NAGA;
+					return (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && !isPresentVagina(index, VaginaClass.NAGA);
 				}
 		);
 	}
 
-	public function VaginaShark(vagina:int = 0): Transformation {
+	public function VaginaShark(index:int = 0): Transformation {
 		return new SimpleTransformation("Shark Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.SHARK);
 
 					if (player.vaginas.length > vagina){
 						desc += "Something invisible brushes against your sex, making you twinge. Undoing your clothes, you take a look at your vagina. It looks normal at a first glance despite the odd sensation but inserting your fingers inside reveals that your walls are now covered with small sensitive tendril-like feelers. " +
@@ -507,16 +538,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.SHARK;
+					return isPresentVagina(index, VaginaClass.SHARK);
 				}
 		);
 	}
 
-	public function VaginaRaiju(vagina:int = 0): Transformation {
+	public function VaginaRaiju(index:int = 0): Transformation {
 		return new SimpleTransformation("Raiju Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.RAIJU);
 
 					if (player.vaginas.length > vagina){
 						desc += "You feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue plasma. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  "+
@@ -535,16 +567,17 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.RAIJU;
+					return isPresentVagina(index, VaginaClass.RAIJU);
 				}
 		);
 	}
 
-	public function VaginaAlraune(vagina:int = 0): Transformation {
+	public function VaginaAlraune(index:int = 0): Transformation {
 		return new SimpleTransformation("Alraune Vagina",
 				// apply effect
 				function (doOutput:Boolean):void {
 					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.ALRAUNE);
 
 					if (player.vaginas.length > vagina){
 						desc += "Insert Text for Alraune Vagina TF";
@@ -561,7 +594,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.ALRAUNE;
+					return isPresentVagina(index, VaginaClass.ALRAUNE);
 				}
 		);
 	}

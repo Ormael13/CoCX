@@ -38,7 +38,7 @@ public function gargoylesTheShowNowOnWBNetwork():void {
 	//(When using the \"Explore\" option; perhaps a 15-25% chance of discovery per go)
 	outputText("You set off in search of new horizons, setting off from camp in a completely new direction than you've ever tried before.  Away from the parts of Mareth you have thus far discovered, much of the world seems to be a barren wasteland");
 	//if Desert is discovered:
-	if(player.exploredDesert > 0) outputText(", making even the desert seem healthy and full of life");
+	if(SceneLib.desert.isDiscoveredOuter() > 0) outputText(", making even the desert seem healthy and full of life");
 	outputText(".  Your trip soon begins to seem unproductive, having found no new areas of Mareth or any contact with its inhabitants.  You sigh and turn back towards camp.");
 	
 	outputText("\n\nHowever, soon you catch the faintest glimpse of <b>something</b> in the distance!  Squinting, you shield your eyes from the sun and try to discern the strange glint on the horizon, but it's simply too far away.  Well, whatever it is, it certainly merits a check – it could be anything, perhaps a city, ");

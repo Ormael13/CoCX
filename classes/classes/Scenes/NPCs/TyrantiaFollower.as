@@ -434,7 +434,7 @@ public function repeatEncounterBattlefieldTalkHerHowUDoing():void {
 		outputText("\"<i>...Our kids are happy and safe.</i>\" She gives you a big hug, a single tear going down her face. \"<i>I might be corrupt, but they…They’re not. This meadow formed nearby, and they…Every time I visit them, play with our kids, I feel…Cleaner. I don’t think it’ll cure me, not by a long shot…But they’re counteracting my corrupt aura. As they grow, they’ll only get stronger…</i>\" She looks down at your children, playing in their meadow. \"<i>...Even if I can’t be cured, they’ll make up for my corruption…Just by existing.</i>\" You assure your giantess that she doesn’t need to ‘make up’ for anything. That her corruption aura isn’t her fault.\n\n");
 		outputText("\"<i>I know…</i>\" She lets you go, gently shoving you back towards camp. \"<i>Go on, my champion. Make the world a better place, eh?</i>\"\n\n");
 	}
-	eachMinuteCount(15);
+	advanceMinutes(15);
 	doNext(repeatEncounterBattlefieldTalkHer);
 }
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemons():void {
@@ -474,7 +474,7 @@ public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNo():void {
 	outputText("She takes a moment to breathe. \"<i>They tied me down, slathered me in their juices, and made me beg for it...But I never fell all the way, like some of the others. That got some of them thinking. They wanted to turn me into a war machine, wind me up and unleash me onto the world...They got some of that right.</i>\"\n\n");
 	if (TyrantiaFollowerStage > 1) {
 		outputText("Tyrantia shakes herself, armor pieces clattering loudly. \"<i>But anyways, that’s in the past. Now I’m here…With you.</i>\" She gives you a grin.\n\n");
-		eachMinuteCount(15);
+		advanceMinutes(15);
 		endEncounter();
 	}
 	else {
@@ -546,7 +546,7 @@ public function talkHerKids():void {
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo could be of some assistance, perhaps.\n\n");
 	if (arianScene.arianFollower()) outputText("Arian has purification powers.\n\n");
 	tyraniaAffection(5);
-	eachMinuteCount(15);
+	advanceMinutes(15);
 	doNext(repeatEncounterBattlefieldTalk);
 }
 public function talkThePhalluspear():void {
@@ -558,7 +558,7 @@ public function talkThePhalluspear():void {
 	outputText("She explains that this isn’t a social call, and that the two of you had been looking for a way to recreate her Phalluspear. Konstantine holds his hand out, and your giant lover hands him the weapon.\n\n");
 	outputText("\"<i>Ah. This weapon is quite interesting!</i>\" Konstantine declares. \"<i>Yes, I can make it for you…But I’ll need some materials and assistance to do so.</i>\" He ponders for a moment. \"<i>I’ll need 5 LustDrafts, to start. The basis of this weapon’s poison is the same.</i>\" He flicks the weapon’s head, and he nods. \"<i>Two…No…Three metal plates, and some tough silk to make the mechanism. I’ll also need a base to work with. A simple spear should do the trick.</i>\"\n\n");
 	TyraniaThePhalluspear = true;
-	eachMinuteCount(15);
+	advanceMinutes(15);
 	doNext(playerMenu);
 }
 public function TyraniaAndFlitzyScene():void {
@@ -1289,7 +1289,7 @@ public function TyrantiaHenchmanOption():void {
 		addButtonDisabled(6, "JoinMe (2)", "Req. Intermediate Leadership.");
 	}
 	addButton(14, "Back", TyrantiaAtCamp);
-	
+
 }
 public function TyrantiaHenchmanOption2(slot:Number = 1):void {
 	clearOutput();
@@ -1332,7 +1332,7 @@ public function unlockingCorruptLegendariesOption():void {
 	outputText("You ask if she’d be willing to upgrade your weapons, and she nods. \"<i>But I can’t do much with it right now. Give me some time to figure it out.</i>\"\n\n");
 	TyraniaCorrupteedLegendaries = 1;
 	doNext(playerMenu);
-	eachMinuteCount(5);
+	advanceMinutes(5);
 }
 public function itemImproveMenuCorrupt():void {
 	var improvableItems:Array = [
@@ -1361,7 +1361,8 @@ public function itemImproveMenuCorrupt():void {
 		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
 		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
 		[armors.CTPALAD, armors.CTHPALA, armors.CTBGUAR],
-		[armors.LTHRPNT, null, armors.CGUNSLI]
+		[armors.LTHRPNT, null, armors.CGUNSLI],
+		[armors.DEATHPO, null, armors.DEATHPGA]
 	];
 	clearOutput();
 	outputText("You ask your Drider lover if she’d be willing to upgrade a piece of your gear. She nods simply, bringing out a trough on wheels, filled with ebony liquid that bubbles, despite being under no heat.\n\n");// legendary
@@ -1388,7 +1389,7 @@ public function itemImproveMenuCorrupt():void {
 		}
 	}
 	submenu(selectMenu, TyrantiaAtCamp);
-	
+
 	function improveItem(item:ItemType, from:ItemType):void {
 		clearOutput();
 		outputText("\"<i>You sure about this?”</i>\" Tyrantia asks, hesitant. You nod, and she sighs, relieved. \"<i>Okay, just making sure.</i>\" You hand her the base item, and she takes it in her meaty hands, turning it over. Tyrantia closes her eyes, a black aura growing from her horns. It focuses, darkening further, until with a grunt, Tyrantia’s horns fire twin beams of black energy, converging on the item in her hands.\n\n");

@@ -6,6 +6,9 @@ public class ButtonDataList {
 	public var list:/*ButtonData*/Array = [];
 	public function ButtonDataList() {
 	}
+	public function append(bd:ButtonData):void {
+		list.push(bd);
+	}
 	public function add(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String =""):ButtonData {
 		var bd:ButtonData = new ButtonData(text,callback,toolTipText,toolTipHeader);
 		list.push(bd);

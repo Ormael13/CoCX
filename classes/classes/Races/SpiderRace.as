@@ -39,9 +39,10 @@ public class SpiderRace extends Race {
 	public override function setup():void {
 		addScores()
 				.eyeType(Eyes.SPIDER, +1)
+				.earType(Ears.INSECT, +1)
 				.faceType(Face.SPIDER_FANGS, +1)
 				.armType(Arms.SPIDER, +1)
-				.legType(LowerBody.CHITINOUS_SPIDER_LEGS,+1)
+				.legType(LowerBody.CHITINOUS_SPIDER_LEGS, +1)
 				.legType(LowerBody.DRIDER, +2)
 				.tailType(Tail.SPIDER_ADBOMEN, +1)
 		addScoresAfter(4)
@@ -53,15 +54,29 @@ public class SpiderRace extends Race {
 		addMutation(IMutationsLib.VenomGlandsIM);
 		addMutation(IMutationsLib.ArachnidBookLungIM);
 		
-		buildTier(7, "spider-morph")
+		buildTier(10, "spider-morph")
 				.customNamingFunction(function (body:BodyData):String {
 					if (body.isDrider) return "drider";
 					return body.mf("spider-morph", "spider-girl");
 				})
 				.buffs({
-					"str.mult": -0.20,
-					"tou.mult": +0.50,
-					"int.mult": +0.75
+					"str.mult": +0.30,
+					"tou.mult": +0.40,
+					"spe.mult": +0.20,
+					"int.mult": +0.60
+				})
+				.end();
+		
+		buildTier(16, "elder spider-morph")
+				.customNamingFunction(function (body:BodyData):String {
+					if (body.isDrider) return "elder drider";
+					return body.mf("elder spider-morph", "elder spider-girl");
+				})
+				.buffs({
+					"str.mult": +0.60,
+					"tou.mult": +0.70,
+					"spe.mult": +0.50,
+					"int.mult": +0.60
 				})
 				.end();
 	}

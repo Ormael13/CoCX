@@ -66,9 +66,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.HOOFED ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -107,9 +107,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.KIRIN ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -148,9 +148,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				if (!legCount) legCount = player.legCount;
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CAT ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 				var desc: String = "";
 
@@ -207,9 +207,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LIZARD ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -257,9 +257,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.FOX ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				if (legCount == 2 && player.lowerBody !== LowerBody.FOX) {
@@ -313,9 +313,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.DRAGON ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				desc += "\n\n";
@@ -458,9 +458,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CLOVEN_HOOFED ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -511,9 +511,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SALAMANDER ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -561,9 +561,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.MANTIS ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -603,9 +603,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SHARK ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -645,9 +645,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LION ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -687,9 +687,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.ORCA ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -729,7 +729,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.RAIJU ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
 					else if (legCount === 1) legCount = 2;
 				}
@@ -771,8 +771,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 					if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.DOG ){
-						if (toggleTaur && legCount === 2) legCount = 4; 
-						else if (toggleTaur && legCount >= 4) legCount = 2; 
+						if (toggleTaur && legCount === 2) legCount = 4;
+						else if (toggleTaur && legCount >= 4) legCount = 2;
 					}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -827,8 +827,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 					if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.WOLF ){
-						if (toggleTaur && legCount === 2) legCount = 4; 
-						else if (toggleTaur && legCount >= 4) legCount = 2; 
+						if (toggleTaur && legCount === 2) legCount = 4;
+						else if (toggleTaur && legCount >= 4) legCount = 2;
 					}
 
 				desc += "\n\n";
@@ -873,9 +873,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 
 				if(player.lowerBody == LowerBody.WEASEL ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -918,9 +918,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 
 				if(player.lowerBody == LowerBody.BEAR ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -962,9 +962,9 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 
 				if(player.lowerBody == LowerBody.SEA_DRAGON ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -1005,11 +1005,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				var desc: String = "";
 				if(player.lowerBody == LowerBody.GRYPHON ){
-					if (toggleTaur && legCount === 2) legCount = 4; 
+					if (toggleTaur && legCount === 2) legCount = 4;
 					else if (toggleTaur && legCount >= 4) legCount = 2;
-					else if (legCount === 1) legCount = 2; 
+					else if (legCount === 1) legCount = 2;
 				}
-					
+				
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
 					desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.furColor2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
@@ -1053,7 +1053,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 	/*
       */
 	public const LowerBodyBipedal: Transformation = new SimpleTransformation("Bipedal Lower Body",
-		// apply effect	
+		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
 
@@ -1065,6 +1065,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			if (doOutput) outputText(desc);
 			if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 			player.legCount = 2;
+			if (player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.NAGA) player.lowerBody = LowerBody.HUMAN;
 		},
 		// is present
 		function (): Boolean {
@@ -2209,6 +2210,28 @@ public class LowerBodyTransformations extends MutationsHelper {
 		// is present
 		function (): Boolean {
 			return player.lowerBody === LowerBody.YGG_ROOT_CLAWS && player.legCount === 2;
+		}
+	);
+	
+	public const LowerBodyAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Lower Body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
+			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+			desc += "You feel your [feet] tingle, and you can only watch as they morph into a webbed, reptilian-like form. With all this webbing between your toes, it'll surely help you swim even faster, right? Before you have time to dwell on the thought, a torrent of sweat begins streaming from your forehead as you gasp and swallow for air, panting loudly. ";
+			desc += "The area around your hips shifts a"+(player.isNaked()?"s you can only endure and watch your body more as fin-like protrusions rise from your thighs":"bout as you hastily remove your [armor] with just enough time before fin-like protrusions rise from your thighs")+". You examine your hips warily, touching the fins that jut from your thighs lightly. They're firm and dense, but flexible as you'd expect. You think about how difficult it may be to restructure apparel to fit your new body.";
+			if (player.isNaked()) desc += " Though, perhaps that's the least of your concerns.";
+			desc += " <b>You now have webbed abyssal shark feet!</b>";
+
+			if (doOutput) outputText(desc);
+			player.lowerBody = LowerBody.ABYSSAL_SHARK;
+			player.legCount = 2;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ABYSSAL_SHARK));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.ABYSSAL_SHARK && player.legCount === 2;
 		}
 	);
 	

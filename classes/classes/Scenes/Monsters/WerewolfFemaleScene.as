@@ -15,15 +15,13 @@ public class WerewolfFemaleScene extends BaseContent
 	{
 
 		public function WerewolfFemaleScene()
-		{
-
-		}
+		{}
 		
 		public function introWerewolfFemale():void {
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
 			outputText("As you explore the sleeping land of Mareth, you begin to feel as if something was stalking you, a presence just out of your line of sight.");
-			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("Your night-adapted eyes allow you to quickly notice a silver-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
+			if (player.hasDarkVision()) outputText("Your night-adapted eyes allow you to quickly notice a silver-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
 			else outputText("Out of nowhere a fur-covered figure hits you from the side, bringing you down to the ground. You quickly shove it off, you manage to shove her back, and you see your assailant clearly for the first time. She appears to be a wolf girl of some sort.");
 			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. This She-wolf seems intent on fighting you.");
 			startCombat(new WerewolfFemale());
@@ -33,7 +31,7 @@ public class WerewolfFemaleScene extends BaseContent
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
 			outputText("As you explore the sleeping land of Mareth, you begin to feel as if something was stalking you, a presence just out of your line of sight.");
-			if (player.isRaceCached(Races.YUKIONNA) || player.isRaceCached(Races.JIANGSHI) || player.isRaceCached(Races.VAMPIRE) || player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.WENDIGO)) outputText("Your night-adapted eyes allow you to quickly notice a silver-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
+			if (player.hasDarkVision()) outputText("Your night-adapted eyes allow you to quickly notice a silver-furred female figure skulking towards you, the shadows doing a decent job at concealing her...But not from you. She pounces at you, but you saw her coming. You easily dodge her attack, readying for battle.");
 			else outputText("Out of nowhere a shadowy pounce on you and it’s barely if you manage to shove her back after overcoming the surprise attack. You focus your vision on your opponent and determine it to be a wolf girl of some sort.");
 			outputText("She growls at you as she circles your position, claws and fangs out in a menacing display as she looks for an opening. This She-wolf seems intent on fighting you.");
 			startCombat(new WerewolfHuntress());
@@ -42,9 +40,8 @@ public class WerewolfFemaleScene extends BaseContent
 		public function lostToWerewolf():void {
 			clearOutput();
 			//spriteSelect(SpriteDb.s_DarkElf);
-
 			outputText("As you hit the ground, the werewolf approaches you with a vicious smile.\n\n");
-			outputText("\"<i>It's your lucky night intruder. My alpha happens to be too lazy to leave the den and claim his prizes himself. He might want to claim another bitch like you...</i>\" She scowls, shaking her head. \"<i> But I have no need of a new bitch begging and competing with me for my man's dick. He's MINE. </i>\"\n\n");
+			outputText("\"<i>It's your lucky night intruder. My alpha happens to be too lazy to leave the den and claim his prizes himself. He might want to claim another bitch like you...</i>\" She scowls, shaking her head. \"<i>But I have no need of a new bitch begging and competing with me for my man's dick. He's MINE.</i>\"\n\n");
 			outputText("Relieved, you begin to relax. You begin to get off your back, but she growls, pinning your chest down with one foot. You freeze, instinctively, and she nods, firmly stepping over your chest, positioning her wolf-like cunt above your face.\n\n");
 			outputText("\"<i>Who said I was done with you slut? You want your freedom? Well, my man isn't here. You get to service me instead, bitch.</i>\" She slams her cunt down onto your mouth, growling slightly.\"<i> Get to it...Oh. And don't get any ideas. Bite anything, slack off...If you do ANYthing other than give me a proper tonguing, I'll rip your fucking arms off.</i>\"\n\n");
 			outputText("Knowing the crazies on Mareth, she's serious! You don't second guess her, extending your [tongue] and diving into her needy pussy like your life depends on it." +
@@ -52,7 +49,6 @@ public class WerewolfFemaleScene extends BaseContent
 					" You barely register her lifting up and taking distance as she leaves a last warning.\n\n");
 			outputText("\"<i>By the way, loser... If my lazy Alpha somehow ever manages to acquire you, I've already marked your face as my sub. Don't you ever get the crazy idea that you could get ahead of me. I'll use your subby face as my toilet as many times as it takes until I get that through your skull if I have to.</i>\"\n\n");
 			outputText("You barely register her departure as you slowly lift up and drag your sorry self back to camp.\n\n");
-
 			cleanupAfterCombat();
 		}
 		
@@ -66,11 +62,11 @@ public class WerewolfFemaleScene extends BaseContent
 		}
 
 		public function rapeMenu():void {
-			menu()
-			addButtonDisabled(0, "Dominate", "This scene requires you to have a cock.", "Dominate");
-			addButtonDisabled(1, "Femdom", "This scene requires you to have a vagina.", "Femdom");
-			if (player.hasCock())addButton(0, "Dominate", domWithCock).hint("Show that pup who's the boss.");
+			menu();
+			if (player.hasCock()) addButton(0, "Dominate", domWithCock).hint("Show that pup who's the boss.");
+			else addButtonDisabled(0, "Dominate", "This scene requires you to have a cock.", "Dominate");
 			if (player.hasVagina()) addButton(1, "Femdom", femDom).hint("You're top girl here. It's time to show it!");
+			else addButtonDisabled(1, "Femdom", "This scene requires you to have a vagina.", "Femdom");
 			addButton(14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeMenu);
 		}
@@ -114,7 +110,7 @@ public class WerewolfFemaleScene extends BaseContent
 			}
 			outputText("Thoroughly satisfied by this nightly encounter you head back to camp.");
 			if(player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM)){
-				outputText(" Your pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
+				outputText(" Your werewolf pack is currently "+LunaFollower.WerewolfPackMember+" member strong.");
 			}
 			outputText("\n\n");
 			cleanupAfterCombat();
@@ -139,7 +135,6 @@ public class WerewolfFemaleScene extends BaseContent
 			if(player.isRaceCached(Races.WEREWOLF)) outputText(" while you howl to the moon, savoring your mind blowing orgasm");
 			outputText(".\n\n")
 			outputText("That said, you are far from done. The moment you recover, you resume using [monster him] several times until dawn finally breaks.\n\n")
-
 			if(player.isAnyRaceCached(Races.WEREWOLF, Races.CERBERUS) && player.hasMutation(IMutationsLib.AlphaHowlIM) && (LunaFollower.WerewolfPackMember < 5*player.perkv1(IMutationsLib.AlphaHowlIM)) && rand(100)>=80){
 				outputText("The exhausted werewolf, now a broken mess, is merely able to pitifully wag [monster his] tail." +
 						" Knowing theres still space for loyal bitches in your pack you order [monster him] to stand up and follow you back to your camp." +

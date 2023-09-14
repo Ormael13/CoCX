@@ -247,7 +247,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
-						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						addButton((x-10), player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
 						foundItem = true;
 					}
 				}
@@ -257,7 +257,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			if (page == 3) {
 				for (x = 20; x < 30; x++) {
 					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
-						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						addButton((x-20), player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
 						foundItem = true;
 					}
 				}
@@ -267,7 +267,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			if (page == 4) {
 				for (x = 30; x < 40; x++) {
 					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
-						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						addButton((x-30), player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
 						foundItem = true;
 					}
 				}
@@ -277,7 +277,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			if (page == 5) {
 				for (x = 40; x < 50; x++) {
 					if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
-						addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+						addButton((x-40), player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
 						foundItem = true;
 					}
 				}

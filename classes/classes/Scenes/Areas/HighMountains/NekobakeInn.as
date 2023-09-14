@@ -24,7 +24,6 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		outputText("As you explore the High Mountain you come upon a curious sight. As the mist parts away, an inn with eastern thematics and décor appears before you. Advertised outside by an ardoise are hot springs, warm meals and well made beds. A clean, freshly painted sign featuring a sleeping cat announces this place as the Nekobake Inn.[pg]");
 		outputText("This place looks sketchy as can be, but you really could use some me time right now. Do you go in?[pg]");
 		outputText("[pg]");
-
 		doYesNo(enterTheInn, avoidTheInn);
 	}
 
@@ -38,7 +37,6 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		clearOutput();
 		outputText("You approach the inn, glad to have found this oasis in the hellscape that is nowaday Mareth. As you enter you are surprised by the presence of several human women all wearing Yukata. One standing out from the rest greets you as you enter.[pg]");
 		outputText("\"<i>Welcome to the Nekobake Inn. I am Tsaabi, and I will be taking care of all your needs today. We have baths, food and bed. Would you like to have dinner or use the baths first?</i>\"[pg]");
-
 		menu();
 		addButton(0, "Dinner", dinner);
 		addButton(1, "Bath", bath);
@@ -48,7 +46,6 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 	private function justPassingBy():void {
 		clearOutput();
 		outputText("A little unsure about your initial choice, you decide it would be wise not to linger and say you just wanted in to see what's inside and will be on your way. The ladies in yukata sigh in a united disappointment but bid you a good day as you leave, requesting you to come back soon.[pg]");
-
 		endEncounter();
 	}
 
@@ -100,14 +97,11 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 
 	private function bath():void {
 		clearOutput();
-		transform();
 		outputText("Your body is all sweaty from the constant trekking all across Mareth, you could use a relaxing warm bath at the hotspring.[pg]");
 		outputText("\"<i>Please use the door to your left for the hotspring "+player.mf("mister", "miss")+". You will have the location to yourself for a while, call for us at any time you want something, anything.</i>\"[pg]");
 		outputText("You nod as you head past the sliding door into the spring area[if (hasarmor), removing your gear] to prepare for the much needed bath. The first thing you do as you approach the hot spring is leap in it. The warm water swiftly envelopes your form like a caring lover, soothing your muscles in just the right way. You feel limper, lighter and rejuvenated. Yet amidst this blissful moment, something feels… off?[pg]");
-		outputText("You get half way out of the water revealing your lean, still dripping and warm body to check on your things, every item is there, no theft happened while you were bathing. Your furry cat ears twitch in an attempt to pick up any suspicious noise as your eyes focus, looking for would be intruders, maybe a peeping tom looking to get a glance of your still glistening [if (hasbreasts)"+player.breastCup(0)+"|D-cup ] breasts or your heart shaped ass. " +
-				"Your furry tail bobs from side to side in agitation and your claws extend from your furry paws, ready to tear some idiot to shreds, yet as you fail to find any sign of a peeper you sigh in relief and sink back into the warm water. A few minutes later, you crawl out trying to refresh yourself only to find out you can't. You're warmer than an oven right now and your cunt is practically juicing itself with need. Your ");
-
-
+		outputText("You get half way out of the water revealing your lean, still dripping and warm body to check on your things, every item is there, no theft happened while you were bathing. Your furry cat ears twitch in an attempt to pick up any suspicious noise as your eyes focus, looking for would be intruders, maybe a peeping tom looking to get a glance of your still glistening [if (hasbreasts)"+player.breastCup(0)+"|D-cup ] breasts or your heart shaped ass. ");
+		outputText("Your furry tail bobs from side to side in agitation and your claws extend from your furry paws, ready to tear some idiot to shreds, yet as you fail to find any sign of a peeper you sigh in relief and sink back into the warm water. A few minutes later, you crawl out trying to refresh yourself only to find out you can't. You're warmer than an oven right now and your cunt is practically juicing itself with need. Your ");
 		female2(true);
 	}
 
@@ -119,7 +113,6 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		outputText("The heat deep down within you continues building, the onslaught of your climax inching nearer. Without any hesitation, you hilt every last inch into her as you empty your balls into the slut, flooding her thirsty canal with your feline seed until your balls can't offer anything else. [if (cumextreme) The poor kitten is left mewling helplessly as her stomach inflates from the sheer volume of seed you're pouring into her. It's not long until she's left gasping, barely hanging on for dear life.] " +
 				"That said, this alone is hardly enough to satisfy your need, and perhaps your partner heard your thoughts as she simply begs, \"<i>Please do me again.</i>\" and you are most happy to oblige.[pg]");
 		outputText("Inevitably, you lose count of how many cat girls you fucked that day but this matters little, so long as you have the energy and hardness to do so. Heck, maybe they fed you some energy drink to keep you going too. It’s not like you could grow tired of their sweet drinks.[pg]");
-
 		for (var i:int=0; i < player.cocks.length; i++)
 			transformations.CockCat(1).applyEffect(false);
 		transform();
@@ -146,12 +139,10 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		outputText("His rod slowly deflates as you're left panting on top of him before his penis slips out past your lips. You rest your head against his thick pectorals as he tenderly strokes your back. His tail once again reaches for yours, gently wrapping around you as you take the moment to collect yourself now that your heat has been utterly sated.[pg]");
 		outputText("His deep voice reverberates through you, \"<i>I hope you enjoyed... I'll be around if you need my services again, just ring the bell.</i>\"[pg]");
 		outputText("He slowly lifts himself, taking you with him briefly before resting you on a carpet. Once he leaves, you take the time to recollect yourself and grab your equipment.[pg]");
-
 		while (player.hasCock()) player.killCocks(-1, false);
 		if (!player.hasVagina()) transformations.VaginaHuman().applyEffect(false);
 		if (!player.hasBreasts()) transformations.CreateBreastRow(BreastCup.D).applyEffect(false);
 		transform();
-
 		var x:int=20;
 		while (x-->0) player.sexReward("Cum", "Vagina");
 		doNext(exitCafe);
@@ -161,7 +152,6 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		clearOutput();
 		outputText("Once you're finished, you take your leave. As you head to the entryway to pay your tab, the catgirl at the guest booth waves you off, \"<i>Don't worry about the tab. We currently have a policy that allows people to rent for free for a limited time. Just promise to come again. If anything, you could even stay at the resort permanently. We have job vacancies available.</i>\"[pg]");
 		outputText("The lusty stare in the receptionist's eyes tells you everything you need to know about the innuendo in her invitation. Another night like those would be great, but you got work to do. You politely decline the offer before you head out, returning to your camp.[pg]");
-
 		for each (var stat:String in ["spe","tou","lib"]) {
 			if (stat != "sens")
 			{
@@ -174,7 +164,6 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 			}
 		}
 		player.dynStats("cor", 20, "spe", 5, "tou", 5, "lib", 5);
-
 		explorer.stopExploring();
 		doNext(camp.returnToCampUseFourHours);
 	}

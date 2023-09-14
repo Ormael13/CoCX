@@ -118,9 +118,10 @@
             <icon>PPhiltr</icon>
             <icon>Bottle_Blue</icon>
             <icon>HairDye</icon>
-            <icon>Generic_SkinOil</icon>
+            <icon>SkinOil</icon>
             <icon>Generic_Lotion</icon>
             <icon>PrnsPkr</icon>
+            <icon>EyeDye</icon>
         </row>
         <row><!-- Row 4 - pills and similar -->
             <icon>Pill_Unknown</icon>
@@ -138,7 +139,7 @@
             <icon>E5Pearl</icon>
             <icon>E7Pearl</icon>
             <icon>SAPill</icon>
-            <icon>BAPill</icon>
+            <icon>MAPill</icon>
             <icon>BAPill</icon>
             <icon>H. Pill</icon>
             <icon>MH.Pill</icon>
@@ -146,7 +147,19 @@
             <icon>SPPearl</icon>
             <icon>E P Bot.</icon>
         </row>
-        <row><!-- Row 5 - non-consumable misc items -->
+        <row><!-- Row 6 - craftable pills -->
+            <icon>MutagenPill_1</icon>
+            <icon>MutagenPill_2</icon>
+            <icon>MutagenPill_3</icon>
+            <icon>MutagenPill_4</icon>
+            <icon>MutagenPill_5</icon>
+            <icon>StatBonusPill_1</icon>
+            <icon>StatBonusPill_2</icon>
+            <icon>StatBonusPill_3</icon>
+            <icon>StatBonusPill_4</icon>
+            <icon>StatBonusPill_5</icon>
+        </row>
+        <row><!-- Row 6 - non-consumable misc items -->
             <icon>GenericUnknownItem</icon>
             <icon>B.Chitn</icon>
             <icon>D.Scale</icon>
@@ -163,8 +176,11 @@
             <icon>RubyGem</icon>
             <icon>Emd.Gem</icon>
             <icon>Sap.Gem</icon>
+            <icon>GolCore</icon>
+            <icon>E.Ichor</icon>
+            <icon>D.E.Ichor</icon>
         </row>
-        <row><!-- Row 6 - eggs -->
+        <row><!-- Row 7 - eggs -->
             <icon>EggBig_Unknown</icon>
             <icon>DrgnEgg</icon>
             <icon>NPnkEgg</icon>
@@ -181,7 +197,7 @@
             <icon>L.WhtEg</icon>
             <icon>WhiteEg</icon>
         </row>
-        <row><!-- Row 7 - food -->
+        <row><!-- Row 8 - food -->
             <icon>Fruit_Unknown</icon>
             <icon>S.Gossr</icon>
             <icon>B.Gossr</icon>
@@ -214,7 +230,7 @@
             "W.Pddng"
             -->
         </row>
-        <row><!-- Row 8 - liquid mutagens (1), cum and milk -->
+        <row><!-- Row 9 - liquid mutagens (1), cum and milk -->
             <icon>LargeVial_Empty</icon>
             <icon>LargeSquareBottle_Empty</icon>
             <icon>MinoCum</icon>
@@ -242,7 +258,7 @@
             <icon>P.LBova</icon>
             <icon>ProBova</icon>
         </row>
-        <row><!-- Row 9 - liquid mutagens (2) -->
+        <row><!-- Row 10 - liquid mutagens (2) -->
             <icon>SmallVial_Empty</icon>
             <icon>Equinum</icon>
             <icon>Unicorn</icon>
@@ -264,7 +280,7 @@
             <icon>VouiOil</icon>
             <icon>TrapOil</icon>
         </row>
-        <row><!-- Row 10 - books and scrolls -->
+        <row><!-- Row 11 - books and scrolls -->
             <icon>Book_Unknown</icon>
             <icon>Book_Red</icon>
             <icon>Book_Blue</icon>
@@ -275,7 +291,7 @@
             <icon>Scroll_Text</icon>
             <icon>Scroll_Rune</icon>
         </row>
-        <row><!-- Row 11 - melee weapons - swords, daggers, and other blades -->
+        <row><!-- Row 12 - melee weapons - swords, daggers, and other blades -->
             <icon>Sword_Unknown</icon>
             <icon>GenericWeapon_Sword</icon>
             <icon>AClaymo</icon>
@@ -321,15 +337,6 @@
         ============-->
         <alias alias="I_GenericItem_consumable" icon="I_Fruit_Unknown"/>
 
-        <!-- Skin oils -->
-        <alias alias="I_DarkOil" icon="I_Generic_SkinOil"/>
-        <alias alias="I_EbonyOl" icon="I_Generic_SkinOil"/>
-        <alias alias="I_FairOil" icon="I_Generic_SkinOil"/>
-        <alias alias="I_LightOl" icon="I_Generic_SkinOil"/>
-        <alias alias="I_MahogOl" icon="I_Generic_SkinOil"/>
-        <alias alias="I_OliveOl" icon="I_Generic_SkinOil"/>
-        <alias alias="I_RussOil" icon="I_Generic_SkinOil"/>
-        <alias alias="I_Tan Oil" icon="I_Generic_SkinOil"/>
         <!-- Body lotions -->
         <alias alias="I_ClearLn" icon="I_Generic_Lotion"/>
         <alias alias="I_RoughLn" icon="I_Generic_Lotion"/>
@@ -443,6 +450,7 @@
         <alias alias="herbXP" icon="I_Herb_Green"/>
         <alias alias="mineXP" icon="I_BronzeB"/>
         <alias alias="spellXP" icon="I_Book_Red"/>
+        <alias alias="alchemyXP" icon="I_MutagenPill_5"/>
         <!-- Mastery icons: 'CombatMastery' + player.combatMastery[i].combat -->
         <alias alias="CombatMastery" icon="I_GenericWeapon_Sword"/>
         <alias alias="CombatMasteryFeral" icon="CombatMastery"/>

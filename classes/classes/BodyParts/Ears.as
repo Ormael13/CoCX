@@ -274,6 +274,18 @@ public class Ears extends BodyPart {
 		name: "big",
 		appearanceDesc: "Your oversized ears almost look comical on your head. They are long and very mobile and tend to move up and down, flapping around when you have a burst of emotion or when you deliver a vengeful spell at the reaction of them being mocked."
 	});
+	public static const FENNEC_FOX: int = 45;
+	EnumValue.add(Types, FENNEC_FOX, "FENNEC_FOX", {
+		name: "fennec fox",
+		appearanceDesc: "A pair of unusual large, adept fox ears sit high on your head, always listening.",
+		fur: true
+	});
+	public static const JACKAL: int = 46;
+	EnumValue.add(Types, JACKAL, "JACKAL", {
+		name: "jackal fox",
+		appearanceDesc: "A pair of jackal ears that gives you an austere outlook. With that kind of getup no one can question that you are the one in charge.",
+		fur: true
+	});
 	
 	public static const HoleEars:/*String*/Array = [LIZARD, DRAGON, ORCA2, AVIAN, INSECT];
 	

@@ -7,6 +7,8 @@ import classes.*;
 
 import flash.utils.describeType;
 
+import mx.formatters.NumberFormatter;
+
 public class Utils extends Object
 	{
 		public static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
@@ -140,12 +142,22 @@ public class Utils extends Object
 			var base:Number = ipow(10, decimals);
 			return Math.round(value*base)/base;
 		}
+		public static function formatNumber(value:Number, options:Object = null):String {
+			var nf:NumberFormatter = new NumberFormatter();
+			return nf.format(value);
+		}
 		public static function boundInt(min:int, x:int, max:int):int {
 			return x < min ? min : x > max ? max : x;
 		}
 		public static function boundFloat(min:Number, x:Number, max:Number):Number {
 			if (!isFinite(x)) return min;
 			return x < min ? min : x > max ? max : x;
+		}
+		/**
+		 * Linear interpolation from v0 at t=0 to v1 at t=1
+		 */
+		public static function lerp(v0:Number, v1:Number, t:Number):Number {
+			return (1-t)*v0 + t*v1;
 		}
 		/**
 		 * Mimics JS Object.keys
@@ -162,7 +174,7 @@ public class Utils extends Object
 					}
 				}
 			} else {
-				for (var k:String in o) r.push(k);
+				for (var k:* in o) r.push(k);
 			}
 			return r;
 		}
@@ -173,7 +185,17 @@ public class Utils extends Object
 		public static function values(o:Object, reflect:Boolean = false):Array {
 			var r:Array = [];
 			var ks:Array = keys(o, reflect);
-			for each(var k:String in ks) r.push(o[k]);
+			for each(var k:* in ks) r.push(o[k]);
+			return r;
+		}
+		/**
+		 * Mimics JS Object.entries
+		 * For non-dynamic objects and/or getting all defined properties, set reflect = true
+		 */
+		public static function objectEntries(o:Object, reflect:Boolean = false):/*Array*/Array {
+			var r:Array = [];
+			var ks:Array = keys(o, reflect);
+			for each(var k:* in ks) r.push([k,o[k]]);
 			return r;
 		}
 		/**
@@ -182,6 +204,33 @@ public class Utils extends Object
 		public static function pushAll(target:Array, values:Array):Array {
 			target.push.apply(target, values);
 			return target;
+		}
+		
+		/**
+		 * Concatenate into single array.
+		 *
+		 * If only 1 argument provider, concatenate its contents:
+		 * `concat(A, B, C) === concat([A, B, C)`
+		 */
+		public static function concat(...arrays:/*Array*/Array):Array {
+			if (arrays.length == 1) return concat.apply(null, arrays);
+			var result:Array = [];
+			for each (var array:Array in arrays) result = result.concat(array);
+			return result;
+		}
+		/**
+		 * Concatenate into single array, omitting duplicates.
+		 *
+		 * If only 1 argument provider, concatenate its contents:
+		 * `concat(A, B, C) === concat([A, B, C)`
+		*/
+		public static function concatUnique(...arrays:/*Array*/Array):Array {
+			if (arrays.length == 1) return concatUnique.apply(null, arrays);
+			var result:Array = [];
+			for each (var array:Array in arrays)
+				for each (var el:* in array)
+					if (result.indexOf(el) == -1) result.push(el);
+			return result;
 		}
 		
 		/**
@@ -400,12 +449,33 @@ public class Utils extends Object
 			return dest;
 		}
 		/**
+		 * @example
+		 * [ "a", "b", "c" ] -> { "a": true, "b": true, "c": true }
+		 */
+		public static function toSet(src:/*String*/Array):Object {
+			var result:Object = {};
+			for each (var s:String in src) result[s] = true;
+			return result;
+		}
+		/**
+		 * @example
+		 * [ {id: "a"}, {id: "b"}, {id: "c"} ] -> { "a": true, "b": true, "c": true }
+		 */
+		public static function mapPropToSet(src:/*String*/Array, propname:String):Object {
+			var result:Object = {};
+			for each (var o:* in src) result[o[propname]] = true;
+			return result;
+		}
+		
+		/**
+		 * @example
 		 * [ [key1,value1], [key2, value2], ... ] -> { key1: value1, key2: value2, ... }
 		 */
 		public static function createMapFromPairs(src:Array):Object {
 			return multipleMapsFromPairs(src)[0];
 		}
 		/**
+		 * @example
 		 * [ [key1, value1_1, value1_2, ...],
 		 *   [key2, value2_1, value2_2, ...], ... ]
 		 *   ->
@@ -551,6 +621,18 @@ public class Utils extends Object
 			return ""+input;
 		}
 
+		//
+		/**
+		 * randomIncrement(3.14) = 3 + (1 in 14% rolls)
+		 *
+		 * Return x or (x+1); P(x+1) = x-floor(x)
+		 */
+		public static function randomIncrement(x:Number):Number {
+			var i:Number = Math.floor(x);
+			if (Math.random() < x - i) i++;
+			return i;
+		}
+		
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
 		// Accepts any type.
 		// Can also accept a *single* array of items, in which case it picks from the array instead.
@@ -605,7 +687,7 @@ public class Utils extends Object
 		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
 		 */
 		public static function weightedRandom(...pairs):* {
-			if (pairs.length == 0) {
+			if (pairs.length == 0 || !pairs[0]) {
 				return null;
 			}
 			if (pairs.length == 1) {
@@ -660,6 +742,26 @@ public class Utils extends Object
 				if (roll <= 0) break;
 			}
 			return valueKey ? item[valueKey] : item;
+		}
+		/**
+		 * Normalize array, making sum of its elements = norm
+		 * @param array
+		 * @param norm
+		 * @param key If non-empty, then source array is array of tuples/objects. Normalize their `key` properties
+		 */
+		public static function normalizeArray(array:Array,norm:Number=1,key:String=""):Array {
+			var sum:Number = 0;
+			for (var i:int = 0; i <array.length; i++) {
+				if (key) sum += array[i][key];
+				else sum += array[i];
+			}
+			if (sum != 0) {
+				for (i = 0; i < array.length; i++) {
+					if (key) array[i][key] *= norm/sum;
+					else array[i] *= norm/sum;
+				}
+			}
+			return array;
 		}
 
 		/**

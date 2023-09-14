@@ -113,7 +113,17 @@ public class DilapidatedShrine extends BaseContent
 						outputText("and in the other bowl sits a small, glowing syringe.");
 						inventory.takeItem(useables.E_ICHOR, westSection);
 						break;
+					case 2:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("and a single Desert Berry rests in the other bowl.");
+						inventory.takeItem(consumables.DESERTB, westSection);
+						break;
 					case 3:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("and a single Wolf Pepper rests in the other bowl.");
+						inventory.takeItem(consumables.WOLF_PP, westSection);
+						break;
+					case 4:
 						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
 						outputText("replaced by a bottle of Nocello sitting in front of the statue.");
 						inventory.takeItem(consumables.NOCELIQ, westSection);

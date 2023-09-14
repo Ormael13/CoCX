@@ -104,8 +104,8 @@ public class SimpleGuildQuest extends AbstractQuest {
 		if (value == SE_T1_NOT_STARTED) return STATUS_NOT_STARTED;
 		if (value == SE_T1_STARTED || value == SE_T2_STARTED || value == SE_T3_STARTED) return STATUS_IN_PROGRESS;
 		// Because you can start next quest tier right away, completed II = not started III
-		if (value == SE_T1_COMPLETED || value == SE_T2_COMPLETED) return STATUS_NOT_STARTED;
-		if (value == SE_T3_COMPLETED) return STATUS_COMPLETED;
+		if (value == SE_T1_COMPLETED || value == SE_T2_COMPLETED && _numbers.length > 2) return STATUS_NOT_STARTED;
+		if (value == SE_T3_COMPLETED || value == SE_T2_COMPLETED && _numbers.length == 2) return STATUS_COMPLETED;
 		return STATUS_INVALID;
 	}
 	

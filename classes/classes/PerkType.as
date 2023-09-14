@@ -717,7 +717,7 @@ public class PerkType extends BaseContent
                     }
                     return allPerksYes;
                 },
-				text: text.join(" or "),
+				text: "Blocked by " + (text.length>1?"perks: ":"perk ") + text.join(", "),
 				type: "noperks",
 				perks: perks
 			});

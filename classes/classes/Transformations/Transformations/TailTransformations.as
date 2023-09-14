@@ -561,7 +561,7 @@ public class TailTransformations extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
-				desc += "Jets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.";
+				desc += "Jets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with <b>your brand new shark tail.</b>";
 				player.tailVenom = 0;
 				player.tailRecharge = 0;
 				player.tailType = Tail.SHARK;
@@ -573,6 +573,30 @@ public class TailTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.tailType === Tail.SHARK;
+			}
+	);
+
+	public const TailAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "Jets of pain shoot down your spine, forcing a surprised gasp as you fall to your knees, reeling as your hands clutch the ground beneath you. A bulging sensation gathers at the base of your back as you "+(player.isNaked()?"":"lower your [armor] and ")+"look at your backside to see a shark tail quickly start to form. Fins burst out as the tail grows out at the base, spreading out from you as a pair of smaller fins sproud at the mid-section of the tail. You're surprised how flexible it is as you sway it around seamlessly. With a few modifications to your armor, you'll be ready to advance with the <b>abyssal shark tail</b> at your behind.";
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.ABYSSAL_SHARK;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ABYSSAL_SHARK));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.ABYSSAL_SHARK;
 			}
 	);
 
@@ -1251,13 +1275,13 @@ public class TailTransformations extends MutationsHelper {
 
 					desc += " <b>You now have " + Utils.num2Text(tailCount) + " fox tail" + ((tailCount > 1) ? "s" : "") + "!</b>"
 
-					if (tailCount == 2) (desc += "<b>\nYour next tail will be available at level 6, provided you have 30 Intelligence and 30 Wisdom.</b>")
-					else if (tailCount == 3) (desc += "<b>\nYour next tail will be available at level 12, provided you have 45 Intelligence and 45 Wisdom.</b>")
-					else if (tailCount == 4) (desc += "<b>\nYour next tail will be available at level 18, provided you have 60 Intelligence and 60 Wisdom.</b>")
-					else if (tailCount == 5) (desc += "<b>\nYour next tail will be available at level 24, provided you have 75 Intelligence and 75 Wisdom.</b>")
-					else if (tailCount == 6) (desc += "<b>\nYour next tail will be available at level 30, provided you have 90 Intelligence and 90 Wisdom.\nOnly the truly corrupted would continue gaining tails by directly using the jewels. Pure kitsune should offer up the jewels to Taoth.</b>")
-					else if (tailCount == 7) (desc += "<b>\nYour next tail will be available at level 36, provided you have 105 Intelligence and 105 Wisdom.</b>")
-					else if (tailCount == 8) (desc += "<b>\nYour final tail will be available at level 42, provided you have 120 Intelligence and 120 Wisdom.</b>")
+					if (tailCount == 2) (desc += "<b>\nYour next tail will be available at level 6, provided you have: 30 Intelligence and 30 Wisdom (kitsune) OR 60 Wisdom (werefox).</b>")
+					else if (tailCount == 3) (desc += "<b>\nYour next tail will be available at level 12, provided you have: 45 Intelligence and 45 Wisdom (kitsune) OR 90 Wisdom (werefox).</b>")
+					else if (tailCount == 4) (desc += "<b>\nYour next tail will be available at level 18, provided you have: 60 Intelligence and 60 Wisdom (kitsune) OR 120 Wisdom (werefox).</b>")
+					else if (tailCount == 5) (desc += "<b>\nYour next tail will be available at level 24, provided you have: 75 Intelligence and 75 Wisdom (kitsune) OR 150 Wisdom (werefox).</b>")
+					else if (tailCount == 6) (desc += "<b>\nYour next tail will be available at level 30, provided you have: 90 Intelligence and 90 Wisdom (kitsune) OR 180 Wisdom (werefox).\nOnly the truly corrupted would continue gaining tails by directly using the jewels. Pure kitsune should offer up the jewels to Taoth.</b>")
+					else if (tailCount == 7) (desc += "<b>\nYour next tail will be available at level 36, provided you have: 105 Intelligence and 105 Wisdom (kitsune) OR 210 Wisdom (werefox).</b>")
+					else if (tailCount == 8) (desc += "<b>\nYour final tail will be available at level 42, provided you have: 120 Intelligence and 120 Wisdom (kitsune) OR 240 Wisdom (werefox).</b>")
 
 					player.tailCount = tailCount;
 					if (doOutput) outputText(desc);

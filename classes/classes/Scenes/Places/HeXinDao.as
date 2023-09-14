@@ -8,16 +8,17 @@
 package classes.Scenes.Places {
 
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Crafting;
 import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
-import classes.Scenes.NPCs.ChiChiFollower;
+import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.SceneLib;
 
@@ -28,7 +29,7 @@ public class HeXinDao extends BaseContent
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
 
     public function HeXinDao() {}
-	
+
 	public function riverislandVillageStuff0():void {
 		spriteSelect(null);
         clearOutput();
@@ -76,7 +77,7 @@ public class HeXinDao extends BaseContent
 		clearOutput();
 		outputText("The local restaurant seems to be offering some local specialties, and best of all; it's free! Some " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + "-morphs are serving the meal. You proceed to grab a plate of these strange ravioli the people calls jiǎozi, taking the rice dessert they call niángāo right after. The meal is comforting. For a moment, you could believe everything in Mareth was going fine... Until you look up, into the red sky, clouds roiling above the festival.");
 		player.refillHunger(50);
-		eachMinuteCount(30);
+		advanceMinutes(30);
 		doNext(riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing():void {
@@ -152,7 +153,7 @@ public class HeXinDao extends BaseContent
         outputText("\n\nAt the West end of He'Xin'Dao you see one of the biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses.
         outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each.\n\n");
 		outputText("At first glance these people seem random. Some wield bows, others daggers, a few with no weapons at all... But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention.\n\n");
-		outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n"); 
+		outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n");
 		//outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
         riverislandMenuShow();
     }
@@ -205,7 +206,6 @@ public class HeXinDao extends BaseContent
         if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "4th Stall", TierIII).hint("Check out the fourth stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
 		else addButtonDisabled(3, "4th Stall", "You need to be at least a Soul Sprite to check those items.");
 
-
         var hasSoulCultivator:Boolean = player.hasPerk(PerkLib.JobSoulCultivator);
         var hasSoulPersonage:Boolean = player.hasPerk(PerkLib.SoulPersonage);
         var hasSoulSprite:Boolean = player.hasPerk(PerkLib.SoulSprite);
@@ -238,7 +238,8 @@ public class HeXinDao extends BaseContent
             addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN, sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  ").hint("Draco Sweep Manual.").disableIf(!hasSoulCultivator);
             addButton(7, "Many Birds", buyItem2,consumables.MABIMAN, sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ").hint("Many Birds Manual.").disableIf(!hasSoulCultivator);
             addButton(8, "Hail of Blades", buyItem2,consumables.HOB1MAN, sayLine2(consumables.HOB1MAN,"It's a manual for Hail of Blades. This simple technique allows you to form several etheral weapons, then launch them at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you are not certain.  ").hint("Hail of Blades Manual.").disableIf(!hasSoulCultivator);
-			addButton(10, "FlamesOfLove", buyItem1,consumables.FOLBMAN, sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Flames of Love (Rankless) Manual.");
+			addButton(9, "Create E (B)", buyItem2,consumables.CEB_MAN, sayLine2(consumables.CEB_MAN,"It's a manual for Create Element (Basic). This very simple technique allows you to unleash ball of basic element (fire, water, air, earth)."), "\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like the name of the manual wasn't influenced by this realm's nature... either that or it's just a coincidence.").hint("Create Element (Basic).").disableIf(!hasSoulCultivator);
+            addButton(10, "FlamesOfLove", buyItem1,consumables.FOLBMAN, sayLine1(consumables.FOLBMAN,"It's a manual for Flames of Love (Rankless), this simple technique allows you to convert excess lust into flames."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Flames of Love (Rankless) Manual.");
 			addButton(11, "IciclesOfLove", buyItem1,consumables.IOLBMAN, sayLine1(consumables.IOLBMAN,"It's a manual for Icicles of Love (Rankless), this simple technique allows you to covert excess lust into icicles."), "\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Icicles of Love (Rankless) Manual.");
 			addButton(12, "SoSisterhood", buyItem1,consumables.SOSBMAN, sayLine1(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Rankless), this simple technique allows you to convert excess wrath into lighting."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Storm of Sisterhood (Rankless) Manual.");
 			addButton(13, "NoBrotherhood", buyItem1,consumables.NOBBMAN, sayLine1(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Rankless), this simple technique allows you to covert excess wrath into darkness."), "\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does rankless mean?  Is there a higher rank for this soulskill?  ").hint("Night of Brotherhood (Rankless) Manual.");
@@ -253,7 +254,7 @@ public class HeXinDao extends BaseContent
 			addButton(6, "V P Trans", buyItem2,consumables.VPTRMAN,sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  ").hint("Violet Pupil Transformation Manual.");
             addButton(7, "Sextuple Thrust", buyItem2,consumables.SEXTMAN, sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Sextuple Thrust Manual.").disableIf(!hasSoulPersonage);
             addButton(8, "Grandiose Hail of Blades", buyItem2,consumables.HOB2MAN, sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ").hint("Grandiose Hail of Blades Manual.").disableIf(!hasSoulSprite);
-
+			addButton(9, "Create E (A)", buyItem2,consumables.CEA_MAN,sayLine2(consumables.CEA_MAN,"It's a manual for Create Element (Advanced), this technique allows you to unleash ball of advanced element (ice, lightning, darkness), it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when enemies resistant to more basic elements. Best to be prepared. ").hint("Create Element (Advanced).");
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
@@ -276,11 +277,57 @@ public class HeXinDao extends BaseContent
             "\n\nYou've already gone this far into Soulforce, so why not? A 'few' more weapons formed will not hurt at this point, right?  "
         ).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
       }*/
-      addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
-      addButton(14, "Back", riverislandVillageStuff);
+		addButton(10, "Alch.Tools", alchemyTools).hint("Check out alchemy equipment.");
+		addButton(13, "IncenOfInsig", buyItem1,consumables.INCOINS, sayLine1(consumables.INCOINS,"These incenses are useful. They will grant you visions for a short moment while meditating. This should help you find the wisdom and insight you need.")).hint("Incense of Insight.");
+		addButton(14, "Back", riverislandVillageStuff);
 
         statScreenRefresh();
     }
+	private function alchemyTools():void {
+		clearOutput();
+		outputText("You check out the stall with the alchemic equipment. It seems that only most basic tools are present - if you need higher quality devies, you need to look somewhere else.");
+		outputText("\n\n");
+		outputText("<b>You have ")
+		if (Crafting.alembicLevel == 0 && Crafting.furnaceLevel == 0) {
+			outputText("no alchemical equipment in your camp.</b>")
+		} else {
+			if (Crafting.alembicLevel > 0) {
+				outputText(SceneLib.crafting.alchemyExtraction.alembicName());
+				if (Crafting.furnaceLevel > 0) outputText(" and ");
+			}
+			if (Crafting.furnaceLevel > 0) {
+				outputText(SceneLib.crafting.mutagenPillCrafting.furnaceName());
+			}
+			outputText(" in your camp.</b>")
+		}
+
+		function buyAlembic(tier:int, priceGems:int):void {
+			Crafting.alembicLevel = tier;
+			player.gems -= priceGems;
+			outputText("\n\n<b>"+capitalizeFirstLetter(Crafting.ALEMBIC_LEVELS[tier].name)+" purchased!</b>");
+			statScreenRefresh();
+			doNext(alchemyTools);
+		}
+		function buyFurnace(tier:int, priceGems:int):void {
+			Crafting.furnaceLevel = tier;
+			player.gems -= priceGems;
+			outputText("\n\n<b>"+capitalizeFirstLetter(Crafting.FURNACE_LEVELS[tier].name)+" purchased!</b>");
+			statScreenRefresh();
+			doNext(alchemyTools);
+		}
+
+		menu();
+		button(0).show("Alembic I", curry(buyAlembic, Crafting.ALEMBIC_LEVEL_SIMPLE, Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value))
+				 .hint("Buy a simple alembic to refine substances from ingredients.\n\nCost: "+Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value+" gems.")
+				.disableIf(player.gems < Crafting.ALEMBIC_LEVELS[Crafting.ALEMBIC_LEVEL_SIMPLE].value, "++\n\n<b>Not enough gems!</b>")
+				.disableIf(Crafting.alembicLevel >= Crafting.ALEMBIC_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>")
+		;
+		button(1).show("Furnace I", curry(buyFurnace, Crafting.FURNACE_LEVEL_SIMPLE, Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value))
+				 .hint("Buy a simple alchemic furnace to combine substances into pills.\n\nCost: "+Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value+" gems.")
+				.disableIf(player.gems < Crafting.FURNACE_LEVELS[Crafting.FURNACE_LEVEL_SIMPLE].value)
+				 .disableIf(Crafting.furnaceLevel >= Crafting.FURNACE_LEVEL_SIMPLE, "++\n\n<b>You don't need that!</b>");
+		button(14).show("Back", golemmerchant);
+	}
     private function debitItem1(returnFunc:Function,shopKeep:String,priceRate:int,itype:ItemType,onBuy:String):void{
         var value:int = itype.value * priceRate;
         if (player.gems < value) {
@@ -763,7 +810,7 @@ public class HeXinDao extends BaseContent
         statScreenRefresh();
         inventory.takeItem(itype, soulequipmentshelf5);
     }
-	
+
 	public function entranceToRiverDungeon():void {
 		clearOutput();
 		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) {
@@ -819,7 +866,7 @@ public class HeXinDao extends BaseContent
         addButton(7, weaponsrange.SHURIKE.shortName, weaponrangeBuy2, weaponsrange.SHURIKE);
         addButton(14, "Back", ermaswiftarrowmerchant);
     }
-	
+
     private function weaponrangeBuy1(itype:ItemType):void {
         clearOutput();
         outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
@@ -856,7 +903,7 @@ public class HeXinDao extends BaseContent
         statScreenRefresh();
         inventory.takeItem(itype, ermaswiftarrowmerchantshelf2);
     }
-	
+
 	public function ermaswiftarrowmerchantarcherytraining():void {
 		clearOutput();
 		if (flags[kFLAGS.ERMA_ARCHERY_TRAINING] > 0) outputText("\"<i>Need more training? Sure, but it's 10 spirit stones, paid up front, if you would.</i>\"");
@@ -893,7 +940,7 @@ public class HeXinDao extends BaseContent
 			}
 		}
 	}
-	
+
 	public function qimerchant():void {
         clearOutput();
         outputText("After entering the shop with a sign saying 'Flying Swords are always with you!' over the doors you see a few shelves filled with various flying swords. ");
@@ -911,7 +958,7 @@ public class HeXinDao extends BaseContent
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
-	
+
     private function flyingswordBuy(itype:ItemType):void {
         clearOutput();
         outputText("The flesh golem nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
@@ -1030,7 +1077,7 @@ public function soularena():void {
 		if (page == 2) {
 			//addButton(0, "Kitty", arenaSelection, Veronika);
 			//addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
-			//addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err Ayotech weapons.");
+			//addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy gremlin girl wearing lots of belts... err Ayotech weapons.");
 			//addButton(5, "Macho Mander", arenaSelection,Syth).hint("He's Macho & Mander.");
 			//if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
 			//else addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
@@ -1164,7 +1211,7 @@ public function soularena():void {
         clearOutput();
 		soularenafightsbetween();
 		outputText("\n\nAs the tentacle beast whimpers and crawls away, the crowd cheers for you. Here comes the final round.\n\n");
-        outputText("\"<i>This contestant is smaller than the last two... She's smarter, and most of all, extremely deadly. She’s paid a handsome sack of gems to kick the ass of anyone who reaches this stage. This femme fatale is by far the deadliest combatant of her division. The crowd favorite huntress from the dark woods... Merisiel the dark elf!!!</i>\"\n\n");
+        outputText("\"<i>This contestant is smaller than the last two... She's smarter, and most of all, extremely deadly. She’s paid a handsome sack of gems to kick the ass of anyone who reaches this stage. This femme fatale is by far the deadliest combatant of her division. The crowd favorite huntress from the dark woods... Elodie the light elf!!!</i>\"\n\n");
         outputText("A woman with light skin walks by the entrance of the arena with only a bow for a weapon. She sure does look like an elf. However, she’s nothing like the gentle creature from your childhood stories. She observes you with a cruel, calculating gaze. The light elf readies her bow, smirking.\n\n");
         flags[kFLAGS.DARK_OR_LIGHT_ELF_SUBTYPE] = 10;
 		startCombat(new LightElfs());
@@ -1255,24 +1302,24 @@ public function soularena():void {
 		else if (player.hasPerk(PerkLib.JobSoulCultivator)) addButtonDisabled(0, "1st", "You've already learned the basics of soul cultivation.");
 		else if (player.wis < 10) addButtonDisabled(0, "1st", "Your wisdom isn't high enough to grasp these concepts.");
 		else addButtonDisabled(0, "1st", "You don't have enough gems to attend today's lecture.");
-		if (!player.hasPerk(PerkLib.Dantain) && player.hasPerk(PerkLib.SoulApprentice)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 5) addButton(1, "2nd", mrsShigureLecturesFirst).hint("Mrs. Shigure's lecture on the first step of soul cultivation.");
-			else addButtonDisabled(1, "2nd", "You don't have enough spirit stones (5) to listen to today's lecture.");
+		if (!player.hasPerk(PerkLib.Dantain)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 5 && player.hasPerk(PerkLib.SoulApprentice)) addButton(1, "2nd", mrsShigureLecturesFirst).hint("Mrs. Shigure's lecture on the first step of soul cultivation.");
+			else addButtonDisabled(1, "2nd", "You don't have enough spirit stones (5) or not yet reached Early Soul Apprentice to listen to today's lecture.");
 		}
 		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(1, "2nd", "You've already taken the first steps of soul cultivation.");
-		if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulPersonage)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(2, "3rd", mrsShigureLecturesSecond).hint("Mrs. Shigure's lecture on the second step of soul cultivation.");
-			else addButtonDisabled(2, "3rd", "You don't have enough spirit stones (10) to listen to today's lecture.");
+		if (!player.hasPerk(PerkLib.SoulSense)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 10 && player.hasPerk(PerkLib.SoulPersonage)) addButton(2, "3rd", mrsShigureLecturesSecond).hint("Mrs. Shigure's lecture on the second step of soul cultivation.");
+			else addButtonDisabled(2, "3rd", "You don't have enough spirit stones (10) or not yet reached Early Soul Personage to listen to today's lecture.");
 		}
 		else if (player.hasPerk(PerkLib.SoulSense)) addButtonDisabled(2, "3rd", "You've already taken the second step of soul cultivation.");
-		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") < 0 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.hasPerk(PerkLib.SoulWarrior)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 15) addButton(3, "4th", mrsShigureLecturesThird).hint("Mrs. Shigure's lecture on the third step of soul cultivation.");
-			else addButtonDisabled(3, "4th", "You don't have enough spirit stones (15) to listen to today's lecture.");
+		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") < 0 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 15 && player.hasPerk(PerkLib.SoulWarrior)) addButton(3, "4th", mrsShigureLecturesThird).hint("Mrs. Shigure's lecture on the third step of soul cultivation.");
+			else addButtonDisabled(3, "4th", "You don't have enough spirit stones (15) or not yet reached Early Soul Warrior to listen to today's lecture.");
 		}
 		else if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 || player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(3, "4th", "You've already taken the third step of soul cultivation.");
-		if (player.hasKeyItem("A summary of Marethian Sects") < 0 && player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 20) addButton(4, "5th", mrsShigureLecturesFourth).hint("Mrs. Shigure's lecture on the fourth step of soul cultivation.");
-			else addButtonDisabled(4, "5th", "You don't have enough spirit stones (20) to listen to today's lecture.");
+		if (player.hasKeyItem("A summary of Marethian Sects") < 0) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 20 && player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(4, "5th", mrsShigureLecturesFourth).hint("Mrs. Shigure's lecture on the fourth step of soul cultivation.");
+			else addButtonDisabled(4, "5th", "You don't have enough spirit stones (20) or not surtvived your first tribulation to listen to today's lecture.");
 		}
 		else if (player.hasKeyItem("A summary of Marethian Sects") >= 0) addButtonDisabled(4, "5th", "You already taken the fourth step of soul cultivation.");
 		if (player.hasPerk(PerkLib.Dantain)) addButton(13, "MissAkemi", missAkemiManualsShop);
@@ -1369,7 +1416,7 @@ public function soularena():void {
 		outputText("\"<i>Today we shall discuss tribulations. It's something that each of us must face in their life at least once. If you feel you're unable to pass even the most basic of tribulations, it may been a mistake to even start. Not all are cut out for the cultivator's path.</i>\" She sits comfortably behind the desk, tails swishing as she looks out on her students.\n\n");
 		outputText("\"<i>Each time us cultivators face a trial, the objective is simple. The world around you will hold nothing back, and you must not either. To pass is to live. To fail...is to die.</i>\" A few students' eyes widen, and several more murmur, seemingly shocked. \"<i>Please, students. Nothing in this world is risk-free.</i>\" She sighs. \"<i>While it is a risk, one could easily argue that every day on Mareth is its own trial, nowadays. And when a cultivator passes, they will be rewarded, not only with possibility to progress further on the endless road, but maybe even gain something else, something...special.</i>\" She looks over the gathered before continuing.\n\n");
 		outputText("\"<i>However, survival isn't always your only focus in such a trial. While risky, it'\s sometimes possible to fight back, rather than simply surviving the trial. While it can leave you vulnerable, should you fail, a cultivator will often gain more by excelling at a trial, defeating it outright, as opposed to simply surviving.</i>\" At that moment some lizan interrupts, raising his hand.\n\n");
-		outputText("\"<i> Ms. Shigure, are you speaking from experience? Or is this word of mouth from other cultivators?</i>\"\n\n"); 
+		outputText("\"<i> Ms. Shigure, are you speaking from experience? Or is this word of mouth from other cultivators?</i>\"\n\n");
 		outputText("\"<i>Hmmmm...</i>\" she pauses, giving the Lizan a favorable smile. \"<i>Yes, I speak from experience. While my first tribulation, I simply sought to live, my subsequent trials were...easier for me. When I realized this, I took a more aggressive approach, dispelling the clouds with my own power. </i>\" She continues the lecture, describing what happened during her tribulations, and those of other cultivators. From there, she moves on to practical matters,  describing the tribulation's lightning, and how a cultivator could avoid or defend against such attacks.\n\n");
 		outputText("\"<i>When the time will come each of you should feel the approaching tribulation. Some feel it in their Dantain, others have noted a strong metallic smell in the air. Luckily for us, it takes time to build up a proper storm... well beside some rare, extreme, cases, it would take a few hours, at least. So be sure to find a good, open place to face it. Ahh and be careful to not involve others in your trial. Tribulations tend to get much harder if more than one cultivator faces it. Pets or minions should be fine, but trials are unfortunately not group projects.</i>\"\n\n");
 		outputText("The lecture continues for the next hour or so, as your busty teacher speaks in detail about her own tribulations, also using the words and stories from other cultivators. <i>While my second trial was like the first, a heavenly storm, Elder Namaste had a surge of water rise, nearly drowning him. Elder Lemouse, on the other hand, had a volcano erupt, spreading sacred ash around that slowed his movements, while also raining droplets of magma. </i>\n\n");
@@ -1378,16 +1425,17 @@ public function soularena():void {
 		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseTwoHours);
 	}
-    
+
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 20;
 		outputText("\"<i>Greetings, everyone. Is it just me, or does it smell like Ozone in here? It’s like every single one of you has been hit by lightning recently. </i>\" She waves her hand daintily in front of her nose, getting some laughs.\n\n");
-		outputText("\"<i>Congratulations everyone! From the feel of you, everyone here has survived your first tribulation.</i>\" She gives you a few claps, and some students join in, a small token applause echoing around the lecture hall. She sternly stares at those clapping, flicking her tails as a small scowl forms on her face. \"<i>Don't let it go to your heads. This was by far the easiest trial, and there will be more.</i>\" She inhales deeply, nodding sagely.  \"<i>After each of the three major levels of Cultivation, there will be another trial.</i>\" There are a few gasps, some groans, and she stares those students down, golden eyes deadly serious. \"<i> Three heavenly trials to pass, getting stronger as you do. No matter how powerful you feel, remember that your Tribulation will rise to meet you, no matter what.</i>\"\n\n");
+		outputText("\"<i>Congratulations everyone! From the feel of you, everyone here has survived your first tribulation.</i>\" She gives you a few claps, and some students join in, a small token applause echoing around the lecture hall. She sternly stares at those clapping, flicking her tails as a small scowl forms on her face. \"<i>Don't let it go to your heads. This was by far the easiest trial, and there will be more.</i>\" She inhales deeply, nodding sagely.  \"<i>After each of the three major levels of Cultivation, there will be another trial.</i>\" There are a few gasps, some groans, and she stares those students down, golden eyes deadly serious. \"<i>Three heavenly trials to pass, getting stronger as you do. No matter how powerful you feel, remember that your Tribulation will rise to meet you, no matter what.</i>\"\n\n");
 		outputText("\"<i>Now some of you may feel a stronger connection to some of the world's energies. We call such energy Dao, and you can find it in nearly anything. From the sky, the ground or even living beings, almost everything has a Dao. Some races, such as the Salamanders or Ice Wolves, have a natural affinity to their element. This makes it easier to comprehend, and makes that form of elemental dao easier for them to work with. So, for those of you without such natural advantages, don't be afraid to spend some time working with elemental energies. Such efforts can give you increased damage with that element, and");
 		outputText(" even some minor protection from it. But the last part may be not noticable until ending early stages of comprehension.</i>\" She continue her explanations on elemental daos giving even some examples.\n\n");
 		outputText("\"<i>Second matter I would like to mention is sects. Some maybe heard about them or maybe not. In simpler words it's groups of similar minded cultivators with patriarch leader, it direct subordinates like elders and common members been disciplines. Now that you all have passed your first major trial, you could try joining a cultivator sect. Naturally, joining one would reduce the freedom you enjoy now as rogue cultivators but there are benefits to membership. Joining a sect will give access to better materials or ");
-		outputText("various manuals. Some will even fight alongside their members, granting some measure of protection. I must warn you, however, of some of the dangers of being in such an alliance.</i>\" The busty kitsune sighs, leaning on her podium. \"<i> While we cultivators are wiser than most...or so we like to think</i>\". This gets a few chuckles. \"<i>Unfortunately, we fight like any other mortals. Many sects have rivalries, alliances or even hatred, bad blood that only gets put aside when everything we all love is at stake.</i>\" She lowers her head, and drops her voice, closing her golden eyes. \"<i>One of the only times we've ever united the sects...Was the war that shall not be named.</i>\" Shigure visibly shivers, revealing a vulnerable side for the first time. \"<i> As cultivators, we can draw power from our surroundings, strength from the earth itself, and take to the sky...But even the mightiest of us can be felled by numbers. As it was against the demons.</i>\" She opens her eyes, tails glowing orange. \"<i>After the goblin city fell, the council of the State of Azoh called for us, everyone who could fight...and we answered, souls blazing. While we were outnumbered, hundreds to one, the demons were not strong individually, and our Dao hearts were firm.</i>\" Ms. Shigure inhales, shaking her head. \"<i>...Too firm. We were so focused on the battle, on stopping those monstrosities...that we drew power from the land, more than it could sustain. Inch by inch, the land was robbed of power, of the SoulForce around it...To say nothing of what the demons did.\"</i> Ms. Shigure grips the podium with both hands, her golden tails limp. \"<i> You younger ones likely know this blighted place only as 'The Battlefield'...But now you know of its true story...And hopefully, you learn from our mistakes.</i>\" The younger Kitsune assistant puts a hand on Ms. Shigure's shoulder, and she shudders, visibly pulling herself back together. \"<i>Anyways, let's get into more lighthearted topics, shall we?</i>\" She goes on for another ten to twenty minutes talking about the various benefits or obligations that comes with several different sects of cultivators.\n\n");
+		outputText("various manuals. Some will even fight alongside their members, granting some measure of protection. I must warn you, however, of some of the dangers of being in such an alliance.</i>\" The busty kitsune sighs, leaning on her podium. \"<i> While we cultivators are wiser than most...or so we like to think</i>\". This gets a few chuckles. \"<i>Unfortunately, we fight like any other mortals. Many sects have rivalries, alliances or even hatred, bad blood that only gets put aside when everything we all love is at stake.</i>\" She lowers her head, and drops her voice, closing her golden eyes. \"<i>One of the only times we've ever united the sects...Was the war that shall not be named.</i>\" Shigure visibly shivers, revealing a vulnerable side for the first time. \"<i>As cultivators, we can draw power from our surroundings, strength from the earth itself, and take to the sky...But even the mightiest of us can be felled by numbers. As it was against the demons.</i>\" She opens her eyes, tails glowing orange. ");
+		outputText("\"<i>After the goblin city fell, the council of the State of Azoh called for us, everyone who could fight...and we answered, souls blazing. While we were outnumbered, hundreds to one, the demons were not strong individually, and our Dao hearts were firm.</i>\" Ms. Shigure inhales, shaking her head. \"<i>...Too firm. We were so focused on the battle, on stopping those monstrosities...that we drew power from the land, more than it could sustain. Inch by inch, the land was robbed of power, of the SoulForce around it...To say nothing of what the demons did.\"</i> Ms. Shigure grips the podium with both hands, her golden tails limp. \"<i>You younger ones likely know this blighted place only as 'The Battlefield'...But now you know of its true story...And hopefully, you learn from our mistakes.</i>\" The younger Kitsune assistant puts a hand on Ms. Shigure's shoulder, and she shudders, visibly pulling herself back together. \"<i>Anyways, let's get into more lighthearted topics, shall we?</i>\" She goes on for another ten to twenty minutes talking about the various benefits or obligations that comes with several different sects of cultivators.\n\n");
 		outputText("\"<i>As a parting gift, since this is our last lecture, I would like to give you all this small booklet. Inside is a pamphlet for most of our local sects. And if fate allows, we may meet again somewhere in State of Azoh. May your dao be endless,</i>\" with this she ends lecture and leaves, waving goodbye.\n\n");
 		outputText("<b>Gained Key Item: A summary of Marethian Sects</b>");
 		player.createKeyItem("A summary of Marethian Sects", 0, 0, 0, 0);
@@ -1438,7 +1486,7 @@ public function soularena():void {
 		player.createKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil", 0, 0, 0, 0);
 		doNext(missAkemiManualsShop);
 	}
-	
+
 	private function golemancershop():void {
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.GolemancerShop)) {
@@ -1526,11 +1574,11 @@ public function soularena():void {
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
 		else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
-		else addButton(1, "Buy", buyItemEnergyCoreYes);
+		else addButton(1, "Buy", curry(buyItemEnergyCoreYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
-	private function buyItemEnergyCoreYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 520 / 5;
+	private function buyItemEnergyCoreYes(cost:Number):void {
+		flags[kFLAGS.SPIRIT_STONES] -= cost;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
@@ -1545,17 +1593,17 @@ public function soularena():void {
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
 		else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
-		else addButton(1, "Buy", buyItemMechanismYes);
+		else addButton(1, "Buy", curry(buyItemMechanismYes, cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
-	private function buyItemMechanismYes():void {
-		flags[kFLAGS.SPIRIT_STONES] -= 700 / 5;
+	private function buyItemMechanismYes(cost:Number):void {
+		flags[kFLAGS.SPIRIT_STONES] -= cost;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES]++;
 		doNext(golemancershopRepeat);
-	}	
+	}
 	private function buyItem(odd:ItemType):void {
 		clearOutput();
 		var cost:int = odd.value / 5;
@@ -1563,17 +1611,17 @@ public function soularena():void {
 		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
-		else addButton(1, "Buy", curry(buyItemYes,odd));
+		else addButton(1, "Buy", curry(buyItemYes,odd,cost));
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
-	private function buyItemYes(odd:ItemType):void {
-		flags[kFLAGS.SPIRIT_STONES] -= odd.value / 5;
+	private function buyItemYes(odd:ItemType, cost:Number):void {
+		flags[kFLAGS.SPIRIT_STONES] -= cost;
 		statScreenRefresh();
 		outputText("She counts the stones before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business: Anything else you want to buy?</i>\"\n\n");
 		inventory.takeItem(odd, golemancershopRepeat);
 	}
-	
+
     public function restaurantShiraOfTheEast():void {
         clearOutput();
         outputText("You arrive at the exotic food restaurant, ‘Shira of the east’ and look at the menu posted on the outside. Would you like get something to eat?");

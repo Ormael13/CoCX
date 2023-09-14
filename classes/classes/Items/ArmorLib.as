@@ -60,11 +60,12 @@ public final class ArmorLib extends ItemConstants
 		public const B_CHANG:Armor = new Armor("B.Chang","BlueChangshan","Blue Lunar new year dress (m)","a Blue Lunar new year dress (m)",0,0,100,"A simple yet elegant blue changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
 		public const B_QIPAO:Armor = new Armor("B.Qipao","BlueQipao","Blue Lunar new year dress (f)","a Blue Lunar new year dress (f)",0,0,100,"A simple yet elegant blue qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
-		public const BEEARMR:Armor = new BeeArmor();
+		public const BEEARMR:BeeArmor = new BeeArmor();
 		public const BERA:Armor = new Armor("B.Armor","B.Armor","berserker armor","a berserker armor",12,0,30720,"A sturdy albeith skimpy armor made of leather and metal plates tied up to the body with straps. While it offers limited protections it also does not hinder the movement of its owner allowing for greater agility then most armors.","Medium")
 				.withBuffs({'teasedmg':8})
 				.withPerk(PerkLib.BerserkerArmor, 0, 0, 0, 0)
 				.withTag(ItemTags.A_AGILE) as Armor;
+		public const BESTBLA:BestialBlademasterArmor = new BestialBlademasterArmor();
 		public const BIMBOSK:Armor = new Armor("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light", false, false)
 				.withBuffs({'teasedmg': 10})
 				.withTag(ItemTags.A_REVEALING) as Armor;
@@ -94,7 +95,9 @@ public final class ArmorLib extends ItemConstants
 		public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
 		public const CTHPALA:CentaurPaladinArmor = new CentaurPaladinArmor();
 		public const CTPALAD:CentaurArmor = new CentaurArmor();
-		public const DBARMOR:Armor = new PureMaraeArmor();
+		public const DBARMOR:PureMaraeArmor = new PureMaraeArmor();
+		public const DEATHPGA:DeathPrinceGoldenArmor = new DeathPrinceGoldenArmor();
+		public const DEATHPO:DeathPrinceOutfit = new DeathPrinceOutfit();
 		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 10, 10, 800, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
 		public const DSCLROB:Armor = new Armor("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 0, 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light")
 				.withBuffs({'spellcost': -0.20}) as Armor;
@@ -120,12 +123,19 @@ public final class ArmorLib extends ItemConstants
 				.withBuffs({'spellcost': -0.15}) as Armor;
 		public const EWROBE_:Armor = new Armor("EWRobe","E.W. Robe","ebonweave robe","an ebonweave robe",2,10,600,"This robe is ebonweave, created using refined ebonbloom petals. This robe is as comfortable as cloth yet more protective than chainmail. The cloth has a mystic aura, helpful when working magic.","Light")
 				.withBuffs({'spellcost': -0.30}) as Armor;
+		public const FCLOAK:Armor = new Armor("F.Cloak","F.Cloak","black cloak","Francesca's Black Cloak",12,12,6000,"A cloak rumored to have been worn by the black cat adventurer Francesca the heavenly black tiger. Not exactly a strong armor per say, its true ability is to conceal its owner body's true location through a mix of glamor and illusion spell improving the users evasiveness by leaps and bound. Francesca was a famous sword mage and as thus the cloak greatly reinforces spells casted through the medium of a weapon.","Light")
+				.withBuffs({
+					'spellcost': -0.40,
+					'evade': 2
+				})
+				.withPerk(PerkLib.Misdirection)
+				.withTag(ItemTags.A_AGILE)
+				.withTag(ItemTags.A_REVEALING) as Armor;
 		public const FCLOTHS:Armor =  new Armor("FCloths","Fur Clothes","Fur Clothes","fur clothes",1,0,40,"Generic brown fur clothing that trolls wear. It’s made to be form fitting and suit anyone of reasonable size or shape.\n","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
 		public const FMDRESS:Armor = new Armor("FMageDress","Forest Mage Dress","Forest Mage Dress","a Forest Mage Dress",0,0,800,"The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.","Light")
 				.withBuffs({
-					'spellcost': -0.10,
-					'soulskillcost': -0.60
+					'spellcost': -0.10
 				}) as Armor;	//Effect: Slutty Seduction 10, Wizard Endurance 60. Increase tease total damage by x 2 when worn by a wood elf. Inflicting Tease damage reduces the wielder's own lust by a small amount.
 		public const FQR:Armor = new Armor("F.Q.Regalia","F.Q.Regalia","Fairy Queen Regalia","a Fairy Queen Regalia",0,30,6000,"This long dress has full glove sleeves to match, and changes color depending on your mood. It is lighter than air and about almost as transparent. Modeled after its people carefree nature this dress barely conceal anything though it still hide your assets just enough that you don’t appear outright naked. It also magicaly enhances one's ability to evade and is especially useful when worn by someone trained in the art of misdirection or fey magic. It comes with an assorted Tiara and choker.","Light")
 				.withBuffs({
@@ -140,6 +150,10 @@ public final class ArmorLib extends ItemConstants
 		public const G_DIVES:Armor = new Armor("G.DiveS","GreenDivingSuit","Green Diving Suit","a Green Diving Suit",25,5,1800,"A green diving suit. Good for diving, stomping splicers or slaying demons.","Heavy");
 		public const G_QIPAO:Armor = new Armor("G.Qipao","GreenQipao","Green Lunar new year dress (f)","a Green Lunar new year dress (f)",0,0,100,"A simple yet elegant green qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,0,600,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.","Heavy");
+		public const GELCARM:Armor = new Armor("GelCArm","GelCArm","glistening crimson gel-armor plates","a suit of crimson gel armor",10,0,1200,"This suit of interlocking plates is made from a strange red material.  It feels spongy to the touch but is amazingly resiliant and very reactive to soulforce.","Heavy")
+				.withBuffs({
+					'soulskillcost': -0.20
+				}) as Armor;
 		public const GTECHC_:GoblinTechnomancerClothes = new GoblinTechnomancerClothes();
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const H_GARB_:Armor = new Armor("H. Garb","Heretic‘s Garb","Heretic‘s Garb","an Heretic‘s Garb",0,6,480,"Weathered traveling clothes, covered by a duster.  Wards and arcane glyphs inscribed in the duster facilitates magic while providing significant defense.  A feather tipped trilby completes the look.","Light", true, true)
@@ -272,14 +286,6 @@ public final class ArmorLib extends ItemConstants
 					'teasedmg': 15
 				})
 				.withPerk(PerkLib.WalpurgisIzaliaRobe,0,0,0,0) as Armor;
-		public const FCLOAK:Armor = new Armor("F.Cloak","F.Cloak","black cloak","Francesca's Black Cloak",12,12,6000,"A cloak rumored to have been worn by the black cat adventurer Francesca the heavenly black tiger. Not exactly a strong armor per say, its true ability is to conceal its owner body's true location through a mix of glamor and illusion spell improving the users evasiveness by leaps and bound. Francesca was a famous sword mage and as thus the cloak greatly reinforces spells casted through the medium of a weapon.","Light")
-				.withBuffs({
-					'spellcost': -0.40,
-					'evade': 2
-				})
-				.withPerk(PerkLib.Misdirection)
-				.withTag(ItemTags.A_AGILE)
-				.withTag(ItemTags.A_REVEALING) as Armor;
 		public const WKIMONO:Armor = new Armor("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light")
 				.withBuffs({
 					'spellcost': -0.20,

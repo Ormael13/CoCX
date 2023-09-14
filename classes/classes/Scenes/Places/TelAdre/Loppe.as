@@ -2407,12 +2407,12 @@ private function loppePregMenu():void {
 	//Special Training (Available after talking about \"<i>Your Job</i>\" at least once)
 	//Meet Uma (Must have spoken about Loppe's mother and shagged Loppe at least once before.)
 	menu();
-	addButton(0,"Appearance",appearanceOfLoppe);
-	addButton(1,"Talk",talkWithLoppe);
-	addButton(2,"Sex",loppePreggoSexChoice)
+	addButton(0, "Appearance",appearanceOfLoppe);
+	addButton(1, "Talk",talkWithLoppe);
+	addButton(2, "Sex",loppePreggoSexChoice)
 			.disable("Scenes not yet written but placeholders to give ideas. Please contribute if you can");
 	 addButton(3, "Contraception", toggleContraception).hint("Currently: "+(flags[kFLAGS.LOPPE_FERTILE] == 1?"Off":"On"), "Contraceptives");
-	addButton(4,"Leave",telAdre.telAdreMenu);	//Leave (Return to Tel'Adre menu)
+	addButton(4, "Leave",telAdre.telAdreMenu);	//Leave (Return to Tel'Adre menu)
 	addButton(5, "Snuggle", loppePreggoSnuggle);
 	addButton(6, "Massage", loppePreggoMassage)
 			.disable("Scenes not yet written but placeholders to give ideas. Please contribute if you can");
@@ -2488,7 +2488,7 @@ private function loppePreggoSnuggle():void {
 	}
 	menu();
 	addButton(0, "Take a nap", snuggleNap);
-	addButton(0, "Lewd it up", snuggleLewds)
+	addButton(1, "Lewd it up", snuggleLewds)
 			.disable("Scenes written but not yet added");
 }
 

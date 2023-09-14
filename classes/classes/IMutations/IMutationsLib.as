@@ -43,8 +43,11 @@ public class IMutationsLib
 		public static const SlimeMetabolismIM:IMutationPerkType = new SlimeMetabolismMutation();
 		public static const NekomataThyroidGlandIM:IMutationPerkType = new NekomataThyroidGlandMutation();
 		public static const HellcatParathyroidGlandsIM:IMutationPerkType = new HellcatParathyroidGlandMutation();
+		public static const HengeyokaiBirthrightIM:IMutationPerkType = new HengeyokaiBirthrightMutation();
+		public static const AnanasaBirthrightIM:IMutationPerkType = new AnanasaBirthrightMutation();
 		//Mutations start here.
 		public static const AlphaHowlIM:IMutationPerkType = new AlphaHowlMutation();
+		public static const AnubiHeartIM:IMutationPerkType = new AnubiHeartMutation();
 		public static const ArachnidBookLungIM:IMutationPerkType = new ArachnidBookLungMutation();
 		public static const BlackHeartIM:IMutationPerkType = new BlackHeartMutation();
 		public static const CatLikeNimblenessIM:IMutationPerkType = new CatLikeNimblenessMutation();
@@ -59,14 +62,15 @@ public class IMutationsLib
 		public static const EclipticMindIM:IMutationPerkType = new EclipticMindMutation();
 		public static const ElvishPeripheralNervSysIM:IMutationPerkType = new ElvishPeripheralNervSysMutation();
 		public static const EyeOfTheTigerIM:IMutationPerkType = new EyeOfTheTigerMutation();
+		public static const FerasBirthrightIM:IMutationPerkType = new FerasBirthrightMutation();
 		public static const FeyArcaneBloodstreamIM:IMutationPerkType = new FeyArcaneBloodstreamMutation();
 		public static const FloralOvariesIM:IMutationPerkType = new FloralOvariesMutation();
 		public static const FrozenHeartIM:IMutationPerkType = new FrozenHeartMutation();
 		public static const GazerEyesIM:IMutationPerkType = new GazerEyesMutation();
 		public static const GorgonEyesIM:IMutationPerkType = new GorgonEyesMutation();
 		public static const HarpyHollowBonesIM:IMutationPerkType = new HarpyHollowBonesMutation();
-		public static const HellhoundFireBallsIM:IMutationPerkType = new HellHoundFireBallsMutation();
 		public static const HeartOfTheStormIM:IMutationPerkType = new HeartOfTheStormMutation();
+		public static const HellhoundFireBallsIM:IMutationPerkType = new HellHoundFireBallsMutation();
 		public static const HinezumiBurningBloodIM:IMutationPerkType = new HinezumiBurningBloodMutation();
 		public static const HollowFangsIM:IMutationPerkType = new HollowFangsMutation();
 		public static const HumanAdrenalGlandsIM:IMutationPerkType = new HumanAdrenalGlandsMutation();
@@ -105,6 +109,7 @@ public class IMutationsLib
 		public static const VampiricBloodstreamIM:IMutationPerkType = new VampiricBloodstreamMutation();
 		public static const VenomGlandsIM:IMutationPerkType = new VenomGlandsMutation();
 		public static const WhaleFatIM:IMutationPerkType = new WhaleFatMutation();
+		public static const WhiteFacedOneBirthrightIM:IMutationPerkType = new WhiteFacedOneBirthrightMutation();
 		public static const YetiFatIM:IMutationPerkType = new YetiFatMutation();
 
 		/**

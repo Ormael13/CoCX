@@ -1,6 +1,10 @@
 package classes.Items {
 import classes.ItemTemplate;
+import classes.Items.Alchemy.MutagenPill;
+import classes.Items.Alchemy.StatBonusPill;
+import classes.Items.Consumables.EyeDye;
 import classes.Items.Consumables.HairDye;
+import classes.Items.Consumables.SkinOil;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicRing;
 import classes.Items.Dynamic.DynamicShield;
@@ -15,12 +19,58 @@ public class ItemTemplateLib {
 		params: [
 			{name: "color", type: "text", value: "White"},
 			/** Affects price */
-			{name: "rarity", type: "number", value: 1, min: 1, max: 4},
+			{name: "rarity", type: "number", value: 1, min: 1, max: 4}
 		]
 	});
 	
 	public function createHairDye(color:String, rarity:int):HairDye {
 		return THairDye.createItem({color: color, rarity: rarity}) as HairDye;
+	}
+	
+	public const TSkinOil:ItemTemplate = mk("SkinOil", "Skin Oil", SkinOil, {
+		category: "consumable",
+		params: [
+			{name: "color", type: "text", value: "white"}
+		]
+	});
+	
+	public function createSkinOil(color:String):SkinOil {
+		return TSkinOil.createItem({color: color}) as SkinOil;
+	}
+	
+	public const TEyeDye:ItemTemplate = mk("EyeDye", "Eye Dye", EyeDye, {
+		category: "consumable",
+		params: [
+			{name: "color", type: "text", value: "white"}
+		]
+	});
+	
+	public function createEyeDye(color:String):EyeDye {
+		return TEyeDye.createItem({color: color}) as EyeDye;
+	}
+	
+	public const TMutagenPill:ItemTemplate = mk("MutagenPill", "Mutagen Pill", MutagenPill, {
+		category: "consumable",
+		params: [
+			{name:"tf", type:"text", value:"TF_1_1"},
+			{name:"p", type:"number",value:1, min:1, max:5}
+		]
+	})
+	
+	public function createMutagenPill(substance:int, essence:int, power:int):MutagenPill {
+		return TMutagenPill.createItem({tf:"TF_"+substance+"_"+essence,p:power}) as MutagenPill;
+	}
+	
+	public const TStatBonussPill:ItemTemplate = mk("StatBonusPill", "Stat Bonus Pill", StatBonusPill, {
+		category: "consumable",
+		params: [
+			{name:"r", type:"number", value:1, min: 1, max: 12},
+			{name:"p", type:"number",value:1, min:1, max:5}
+		]
+	});
+	
+	public function createStatBonusPill(residue:int, power:int):StatBonusPill {
+		return TStatBonussPill.createItem({r:residue,p:power}) as StatBonusPill;
 	}
 	
 	// Generic dynamic items

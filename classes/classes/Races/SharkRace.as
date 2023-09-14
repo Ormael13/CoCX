@@ -46,13 +46,19 @@ public class SharkRace extends Race {
 				.gillType(Gills.FISH, +1)
 				.earType(Ears.SHARK, +1)
 				.rearType(RearBody.SHARK_FIN, +1)
+				.rearType(NOT(RearBody.ABYSSAL_SHARK_FIN), 0, -1)
 				.armType(Arms.SHARK, +1)
 				.legType(LowerBody.SHARK, +1)
+				.legType(NOT(LowerBody.ABYSSAL_SHARK), 0, -1)
 				.tailType(Tail.SHARK, +1)
-				.hairTypeAndColor1(Hair.NORMAL, "silver", +1)
-				.skinCoatTypeAndColor1(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), ANY(SharkScaleColors), +1)
+				.hairTypeAndColor1(Hair.NORMAL, ANY(SharkHairColors), +1)
+				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
+				.skinColor1(ANY(SharkScaleColors), +1)
 				.skinCoatPattern(Skin.PATTERN_TIGER_STRIPES, +1)
 				.eyeType(Eyes.HUMAN, +1)
+				.eyeType(NOT(Eyes.DEVIL), 0, -1)
+				.eyeType(NOT(Eyes.FERAL), 0, -11)
+				.tongueType(Tongue.HUMAN, +1)
 				.gender(Gender.GENDER_HERM, +1)
 				.vaginaType(VaginaClass.SHARK, +1)
 				.wingType(NOT(Wings.FEATHERED_LARGE), 0, -1000);
@@ -62,13 +68,13 @@ public class SharkRace extends Race {
 		buildTier(10, "shark-morph")
 				.namesTauric("shark-morph", "shark-taur")
 				.buffs({
-					"str.mult": +0.40,
-					"spe.mult": +1.00,
+					"str.mult": +0.50,
+					"spe.mult": +0.90,
 					"lib.mult": +0.10
 				})
 				.end();
 		
-		buildTier(11, "tigershark-morph")
+		buildTier(12, "tigershark-morph")
 				.namesTauric("tigershark-morph", "tigershark-taur")
 				.require("hermaprhodite", function(body:BodyData):Boolean {
 					return body.gender == Gender.GENDER_HERM;
@@ -77,10 +83,26 @@ public class SharkRace extends Race {
 					return body.skinCoatPattern == Skin.PATTERN_TIGER_STRIPES;
 				})
 				.buffs({
-					"str.mult": +0.60,
+					"str.mult": +0.70,
 					"spe.mult": +1.00,
-					"lib.mult": +0.10,
+					"lib.mult": +0.30,
 					"maxlust_base": +50
+				})
+				.end();
+		
+		buildTier(18, "elder tigershark-morph")
+				.namesTauric("elder tigershark-morph", "elder tigershark-taur")
+				.require("hermaprhodite", function(body:BodyData):Boolean {
+					return body.gender == Gender.GENDER_HERM;
+				})
+				.require("tiger stripes", function(body:BodyData):Boolean{
+					return body.skinCoatPattern == Skin.PATTERN_TIGER_STRIPES;
+				})
+				.buffs({
+					"str.mult": +0.90,
+					"spe.mult": +1.30,
+					"lib.mult": +0.50,
+					"maxlust_base": +200
 				})
 				.end();
 	}

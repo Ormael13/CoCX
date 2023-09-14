@@ -35,6 +35,7 @@ public class ArmsTransformations extends MutationsHelper {
 					case Arms.BEAR:
 					case Arms.RACCOON:
 					case Arms.RAIJU_PAWS:
+					case Arms.CANINE:
 						desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [fur color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.";
 						break;
 					case Arms.DISPLACER:
@@ -750,7 +751,7 @@ public class ArmsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into dog like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
 
 				player.arms.type = Arms.HOUND;
 				if (doOutput) outputText(desc);
@@ -1192,6 +1193,69 @@ public class ArmsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.arms.type === Arms.TINY;
+			}
+	);
+
+	public const ArmsCanine: Transformation = new SimpleTransformation("Canine Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into canine like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+
+				player.arms.type = Arms.CANINE;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CANINE));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.CANINE;
+			}
+	);
+/*
+	public const ArmsWerespider: Transformation = new SimpleTransformation("Werespider Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny carapace</b>.  A second pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+				else if (player.arms.type == Arms.BEE) desc += "A second pair of arms starts sprouting underneath your original pair, and the fizz covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+				else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "A second pair of arms starts sprouting underneath your original pair, and the scales covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+				else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, leaving you with shiny, chitonous but humanoid arms. A second pair then starts to sprout out below";
+				else if (player.arms.type == Arms.SPIDER) desc += "There's a sudden swelling below your armpits, and you look to see a second pair of chitinous arms sprouting below your main pair."
+				else {
+					TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+					desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny  carapace</b>. A econd pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+				}
+
+				player.arms.type = Arms.ANT;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ANT));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.ANT;
+			}
+	);*/
+
+	public const ArmsAbyssalShark: Transformation = new SimpleTransformation("Abyssal Shark Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You watch, spellbound as your arms gradually change its entire outer-structure into a plain, almost human-like form, if not for the parts between your fingers forming fresh webbing and your nails sharpening into curved claws. Immediately following this, your begin to sweat profusely as your breathing grows ragged and rapid. ";
+				desc += "The space between your elbows begins to shift as you "+(player.isNaked()?"watch":"remove your armor")+" just in time to see strange fin-like structures burst from your forearms. You examine them  carefully. It'd seem any armor you wear will need to adjust to fit within them.";
+				if (player.isNaked()) desc += " Perhaps that's not as big of an issue as it could be.";
+				desc += " <b>You now have abyssal shark arms.</b>";
+
+				player.arms.type = Arms.ABYSSAL_SHARK;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ABYSSAL_SHARK));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.ABYSSAL_SHARK;
 			}
 	);
 	/*

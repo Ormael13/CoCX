@@ -181,9 +181,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(7, "Grey Book", pitchGreyBook);
 			addButton(8, "Red Manuscript", pitchRedManuscript);
 			addButton(9, "Crimson Jade", pitchCrimsonJade);
-			addButton(10, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
-			addButton(11, "TelAdreMagI8", pitchTelAdreMagazineIssue8).hint("Tel'Adre Magazine Issue 8");
-			addButton(12, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
+			addButton(10, "TelAdreMagI2", pitchTelAdreMagazineIssue2).hint("Tel'Adre Magazine Issue 2");
+			addButton(11, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
+			addButton(12, "TelAdreMagI8", pitchTelAdreMagazineIssue8).hint("Tel'Adre Magazine Issue 8");
+			addButton(13, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -209,8 +210,12 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
-			if (Garden.IngrediantBagSlot01Cap == 0) addButton(8, "Herb Bag (LowG)", pitchHerbsBag).hint("Herbs Bag (Lowest Grade)");
-			if (Garden.PotionsBagSlot01Cap == 0) addButton(9, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
+			if (Garden.IngrediantBagSlot01Cap == 0) addButton(6, "Herb Bag (LLowG)", pitchLLHerbsBag).hint("Herbs Bag (Lowest Grade)");
+			if (Garden.IngrediantBagSlot07Cap == 0) {
+				if (player.farmingLevel >= 5) addButton(7, "Herb Bag (LowG)", pitchLHerbsBag).hint("Herbs Bag (Low Grade)");
+				else addButtonDisabled(7, "Herb Bag (LowG)", "Herbs Bag (Low Grade) Req. lvl 5 in Farming.");
+			}
+			if (Garden.PotionsBagSlot01Cap == 0) addButton(8, "Pot Bag (LowG)", pitchPotionsBag).hint("Potions Bag (Lowest Grade)");
 			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
@@ -447,6 +452,33 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			doNext(bookMenu);
 		}
 		
+		private function pitchTelAdreMagazineIssue2():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 2") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 2'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 2nd issue of Tel'Adre Magazine.  It dive into matters of distilling moonshine and mixing dyes... I mean, refining alchemical ingredients and medicine-crafting.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your alchemic horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue2, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue2():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("Giacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("You consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in producing stinky goo... and sometimes, alchemical products. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 2", 0, 0, 0, 0);
+			}
+		}
+		
 		private function pitchTelAdreMagazineIssue5():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -455,7 +487,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				return;
 			}
-			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 5th issue of Tel'Adre Magazine.  I dive into matters of so called fifth finger or green thumb.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your herbalism horizons?</i>\"");
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 5th issue of Tel'Adre Magazine.  It dive into matters of so called fifth finger or green thumb.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your herbalism horizons?</i>\"");
 			doYesNo(buyTelAdreMagazineIssue5, bookMenu);
 		}
 		
@@ -482,7 +514,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				return;
 			}
-			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 8th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... err well sometimes just eight to hold your farming tools.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your farming horizons?</i>\"");
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 8th issue of Tel'Adre Magazine.  It dive into matters of so benefits of having all ten fingers... err well sometimes just eight to hold your farming tools.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your farming horizons?</i>\"");
 			doYesNo(buyTelAdreMagazineIssue8, bookMenu);
 		}
 		
@@ -509,7 +541,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 				return;
 			}
-			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 10th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... like to hold your pickaxe.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your mining horizons?</i>\"");
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 10th issue of Tel'Adre Magazine.  It dive into matters of so benefits of having all ten fingers... like to hold your pickaxe.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your mining horizons?</i>\"");
 			doYesNo(buyTelAdreMagazineIssue10, bookMenu);
 		}
 		
@@ -528,14 +560,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 		}
 		
-		private function pitchHerbsBag():void {
+		private function pitchLLHerbsBag():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("\"<i>I see you keep herbs between your other stuff. Why not you buy this one bag that is much better to keep them in one place? Only 300 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
-			doYesNo(buyHerbsBag, miscMenu);
+			doYesNo(buyLLHerbsBag, miscMenu);
 		}
 		
-		private function buyHerbsBag():void {
+		private function buyLLHerbsBag():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 300) {
@@ -552,6 +584,37 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				Garden.IngrediantBagSlot04Cap = 5;
 				Garden.IngrediantBagSlot05Cap = 5;
 				Garden.IngrediantBagSlot06Cap = 5;
+				doNext(miscMenu);
+			}
+		}
+		
+		private function pitchLHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you keep herbs between your other stuff. Why not you buy this one bag that is much better then the one you already have to keep them in one place? Only 500 gems and i assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyLHerbsBag, miscMenu);
+		}
+		
+		private function buyLHerbsBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 500) {
+				outputText("\n\nGiacomo sighs, indicating you need 400 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. <b>You acquired Herbs Bag (Low grade).</b>");
+				player.gems -= 500;
+				player.removeKeyItem("Herbs Bag (Lowest grade)");
+				player.createKeyItem("Herbs Bag (Low grade)", 0, 0, 0, 0);
+				Garden.IngrediantBagSlot01Cap = 10;
+				Garden.IngrediantBagSlot02Cap = 10;
+				Garden.IngrediantBagSlot03Cap = 10;
+				Garden.IngrediantBagSlot04Cap = 10;
+				Garden.IngrediantBagSlot05Cap = 10;
+				Garden.IngrediantBagSlot06Cap = 10;
+				Garden.IngrediantBagSlot07Cap = 10;
+				Garden.IngrediantBagSlot08Cap = 10;
 				doNext(miscMenu);
 			}
 		}

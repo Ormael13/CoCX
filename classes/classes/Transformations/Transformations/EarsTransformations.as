@@ -779,6 +779,41 @@ public class EarsTransformations extends MutationsHelper {
 				return player.ears.type === Ears.BIG;
 			}
 	);
+
+	public const EarsFennecFox: Transformation = new SimpleTransformation("Fennec Fox Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN || player.ears.type == Ears.LIZARD) desc += "The sides of your face painfully stretch as your ears elongate and begin to push past your hairline, toward the top of your head. They elongate, becoming large and oversized vulpine triangles covered in bushy fur. <b>You now have fennec fox ears.</b>";
+				else desc += "Your ears change, shifting from their current shape to become vulpine in nature. <b>You now have fennec fox ears.</b>";
+
+				player.ears.type = Ears.FENNEC_FOX;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.FENNEC_FOX));
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.FENNEC_FOX;
+			}
+	);
+
+	public const EarsJackal: Transformation = new SimpleTransformation("Jackal Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You moan as your ears suddenly become extremely sensitive making you twitch uncontrollably as they migrate toward the top of your head, growing pointier and bigger. Putting your hands to your new ears you discover they are now covered with a fair amount of fur. <b>You now have jackals ears.</b>";
+
+				player.ears.type = Ears.JACKAL;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.JACKAL));
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.JACKAL;
+			}
+	);
 	/*
   */
 }

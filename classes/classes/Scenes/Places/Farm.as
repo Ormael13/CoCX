@@ -188,7 +188,7 @@ private function talkWhitney():void {
 	}
 
 	// Requires: PC has found High Mountain
-	if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] == 0 && flags[kFLAGS.WHITNEY_TALK_TELADRE] == 1)
+	if (SceneLib.highMountains.isDiscovered() && flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] == 0 && flags[kFLAGS.WHITNEY_TALK_TELADRE] == 1)
 	{
 		flags[kFLAGS.WHITNEY_TALK_HIGH_MOUNTAIN] = 1;
 		

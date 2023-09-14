@@ -5,6 +5,7 @@ import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Alchemy.AlchemyLib;
 import classes.Items.Consumable;
 import classes.Items.ItemTags;
 import classes.Races.AntRace;
@@ -13,6 +14,12 @@ public class HoneydewCake extends Consumable {
 	public function HoneydewCake() {
 		super("HDewCake", "HDewCake", "a cake flavored with honeydew", 6, "A very sweet cake beloved by Antmorphs.");
 		withTag(ItemTags.U_TF);
+		refineableInto(
+				AlchemyLib.DEFAULT_SUBSTANCES_DROP_TABLE,
+				AlchemyLib.MULTIRACE_ESSENCE_DROP_TABLE(AlchemyLib.AE_ANT),
+				[],
+				AntRace.AntChitinColors
+		);
         }
 	public override function useItem():Boolean {
 		var changes:Number = 0;

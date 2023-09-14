@@ -4,16 +4,15 @@
  * Currently a Work in Progress.
  */
 
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Forgefather;
@@ -22,8 +21,8 @@ import classes.Scenes.SceneLib;
 //import classes.Scenes.NPCs.CaiLin;
 
 	use namespace CoC;
-	
-	public class Beach extends BaseContent 
+
+	public class Beach extends BaseContent
 	{
 		public var ceaniScene:CeaniScene = new CeaniScene();
 		public var cancerScene:CancerAttackScene = new CancerAttackScene();
@@ -31,7 +30,26 @@ import classes.Scenes.SceneLib;
 		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
 
-		public function Beach() 
+		public const areaLevel:int = 25;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.beach > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel && SceneLib.blightridge.isDiscovered();
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.beach;
+		}
+		public function discover():void {
+			SceneLib.exploration.counters.beach = 1;
+			clearOutput();
+			outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.");
+			outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.");
+			outputText("\n\n<b>You've discovered the Beach and the Ocean!</b>");
+			endEncounter(120);
+		}
+
+		public function Beach()
 		{
 			onGameInit(init);
 		}
@@ -40,6 +58,9 @@ import classes.Scenes.SceneLib;
 		private function init():void {
 			_beachEncounters = Encounters.group("beach",{
 				name: "harpoonGun",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 0 && player.hasKeyItem("Harpoon gun") < 0;
 				},
@@ -48,6 +69,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: beachChance,
@@ -55,6 +79,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Etna
 				name  : "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				call  : function():void {
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					SceneLib.etnaScene.repeatYandereEnc();
@@ -66,6 +93,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani
 				name: "ceani",
+				label : "Ceani",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -83,6 +113,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani post training
 				name: "ceani post training",
+				label : "Ceani",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -95,6 +128,9 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Pinchou swimwear shop
 				name: "pinchou shop",
+				label : "Pinchou",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -105,6 +141,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Beach demons
 				name: "beach demons",
+				label : "Demons",
+				kind : 'monster',
 				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
@@ -114,6 +152,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Cancer ambush
 				name: "cancer ambush",
+				label : "Cancer",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					cancerScene.encounter();
@@ -122,6 +162,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Beach goo girl
 				name: "beach goo girl",
+				label : "Goo Girl",
+				kind : 'monster',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					gooGirlScene.encounterGooGirlBeach();
@@ -130,17 +172,17 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Discover boat
 				name: "discover boat",
-				call: function ():void {
-					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
-					discoverSeaBoat();
-				},
-				when: function ():Boolean {
-					return flags[kFLAGS.DISCOVERED_BEACH] >= 10 && flags[kFLAGS.DISCOVERED_OCEAN] <= 0;
-				},
+				label : "New Area",
+				kind  : 'place',
+				unique: true,
+				call: SceneLib.ocean.discover,
+				when: SceneLib.ocean.canDiscover,
 				chance: Encounters.ALWAYS
 			}, {
 				// Find Orca sunscreen
 				name: "orca sunscreen",
+				label : "Orca Sunscreen",
+				kind  : 'item',
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					orcaSunscreenFound();
@@ -149,6 +191,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Nothing Happens
 				name: "nothing Happens",
+				label:'Walk',
+				kind:'walk',
 						call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					NothingHappened();
@@ -157,6 +201,8 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Find Sandstone
 				name: "find Sandstone",
+				label : "Mine",
+				kind  : 'place',
 						call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					findBeachSite();
@@ -165,24 +211,30 @@ import classes.Scenes.SceneLib;
 					return (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained);
 				},
 				chance: 1
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			}*/);
+			});
 		}
 
 		public function exploreBeach():void {
-			clearOutput();
-			flags[kFLAGS.DISCOVERED_BEACH]++;
-			doNext(camp.returnToCampUseOneHour);
-			_beachEncounters.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(_beachEncounters);
+			explorer.setTags("beach", "water");
+			explorer.prompt = "You explore the sunny beach.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.beach++;
+			}
+			explorer.leave.hint("Leave the sunny beach");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
-	
+
 		public function beachChance():Number {
 			var temp:Number = 0.2;
 			temp *= player.npcChanceToEncounter();
@@ -197,7 +249,7 @@ import classes.Scenes.SceneLib;
 		public function orcaSunscreenFound():void {
 			clearOutput();
 			outputText("As you walk on the beach you find a weird black bottle with a white line and a cap. You pick it up and read the tag. It claims to be 'Orca sunscreen'. ");
-			inventory.takeItem(consumables.ORCASUN, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.ORCASUN, explorer.done);
 		}
 
 		public function NothingHappened():void {
@@ -215,35 +267,26 @@ import classes.Scenes.SceneLib;
 					dynStats("tou", .5);
 				}
 			}
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
-		public function discoverSeaBoat():void {
-			flags[kFLAGS.DISCOVERED_OCEAN] = 1;
-			clearOutput();
-			outputText("You journey around the beach, seeking demons to fight");
-			if(player.cor > 60) outputText(" or fuck");
-			outputText(".  The air is fresh, and the sand is cool under your feet.   Soft waves lap against the muddy sand of the sea-shore.   You pass around a few dunes carefully, being wary of hidden 'surprises', and come upon a small dock.  The dock is crafted from old growth trees lashed together with some crude rope.  Judging by the appearance of the rope, it is very old and has not been seen to in quite some time.  Tied to the dock is a small rowboat, only about seven feet long and three feet wide.   The boat appears in much better condition than the dock, and appears to be brand new.\n\n");
-			outputText("<b>You have discovered the sea boat!</b>");
-			doNext(camp.returnToCampUseOneHour);
-		}
-		
+
 		public function partsofHarpoonGun():void {
 			clearOutput();
 			outputText("As you explore the beach you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Harpoon gun in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Harpoon gun", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
-		
+
 		public function findBeachSite():void {
 			clearOutput();
             outputText("You stumble across a vein of Sandstone, this looks like suitable material for your gargoyle form.\n");
             outputText("Do you wish to mine it?");
             menu();
             addButton(0, "Yes", beachSiteMine);
-            addButton(1, "No", camp.returnToCampUseOneHour);
+            addButton(1, "No", explorer.done);
 		}
 
 		private function beachSiteMine():void {
@@ -252,7 +295,7 @@ import classes.Scenes.SceneLib;
 				clearOutput();
 				if (player.fatigue > player.maxFatigue() - 50) {
 					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
-					doNext(camp.returnToCampUseOneHour);
+					endEncounter();
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the sandstone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
@@ -262,25 +305,25 @@ import classes.Scenes.SceneLib;
 				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);
 				player.mineXP(player.MiningMulti());
 				findGem();
-				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
 
 		private function findGem():void {
 			if (player.miningLevel > 4) {
 				if (rand(4) == 0) {
-					inventory.takeItem(useables.EMDGEM, camp.returnToCampUseTwoHours);
+					inventory.takeItem(useables.EMDGEM, curry(explorer.done,120));
 					player.mineXP(player.MiningMulti() * 2);
 				}
 				else {
 					outputText("After attempt to mine Emeralds you ended with unusable piece.");
-					doNext(camp.returnToCampUseTwoHours);
+					endEncounter(120);
 				}
 			}
 			else {
 				outputText(" Your mining skill is too low to find any Emeralds.");
-				doNext(camp.returnToCampUseTwoHours);
+				endEncounter(120);
 			}
 		}
 	}
 }
+

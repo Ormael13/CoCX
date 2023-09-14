@@ -459,7 +459,8 @@ public class Arms extends BodyPart {
 		name:"ant",
 		appearanceDesc: "Where a normal creature would have only two arms, you instead have four, with shining [chitin color] exoskeleton covering them from the biceps down, resembling a pair of long [chitin color] gloves from a distance.",
 		armCount: 4,
-		claw: true
+		claw: true,
+		chitin: true
 	});
 
 	public static const FEY_DRACONIC:int = 59;
@@ -483,6 +484,20 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, TINY, "TINY", {
 		name:"tiny",
 		appearanceDesc: "Your arms look human save for the disproportion between your clawed hands and body which make them look way too large for the limbs they are attached to.",
+		claw: true
+	});
+
+	public static const CANINE:int = 62;
+	EnumValue.add(Types, CANINE, "CANINE", {
+		name:"canine",
+		appearanceDesc: "Your arms are covered in thick [fur color] fur ending up with clawed hands with animal like paw pads.",
+		claw: true
+	});
+
+	public static const ABYSSAL_SHARK:int = 63;
+	EnumValue.add(Types, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+		name:"a.shark",
+		appearanceDesc: "A pair of large shark fins have sprouted on each of your forearms, just past the elbows. The skin between your fingers has become webbed to further assist with your swimming. At the tip of your fingers, you have sharp, deadly claws that allow you to  shred and impale foes with ease.",
 		claw: true
 	});
 

@@ -25,7 +25,7 @@ public class FrozenHeartMutation extends IMutationPerkType
             else if (pTier >= 2){
                 descS += "hungering cold last for 1 additional turn and recharge 1 turn faster";
             }
-            if (pTier >= 1) descS += "and increase their damage by" + 10 * pTier + "%";
+            if (pTier >= 1) descS += "and increase their damage by " + 10 * pTier + "%";
             if (descS != "")descS += ".";
             return descS;
         }

@@ -1,9 +1,9 @@
 package classes.Transformations {
 /**
  * TFs grouped with "OR".
- * is present - any present
- * is possible - any possible
- * apply effect - pick random possible
+ * - is present - any present
+ * - is possible - any possible
+ * - apply effect - pick random possible
  */
 public class TransformationGroupAny extends Transformation {
 	

@@ -4,6 +4,7 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
 
 public class WerewolfRace extends Race {
     public static const RaceBody:/*String*/Array = [
@@ -38,8 +39,8 @@ public class WerewolfRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(Face.WOLF_FANGS, +1)
-				.eyeType(Eyes.FERAL, +1)
+				.faceType(Face.WOLF_FANGS, +2)
+				.eyeType(Eyes.FERAL, +2)
 				.eyeType(NOT(Eyes.FENRIR), 0,-7)
 				.earType(Ears.WOLF, +1)
 				.tongueType(Tongue.DOG, +1)
@@ -49,29 +50,42 @@ public class WerewolfRace extends Race {
 				.skinCoatType(Skin.FUR, +1)
 				.rearType(RearBody.WOLF_COLLAR, +1)
 				.rearType(NOT(RearBody.FENRIR_ICE_SPIKES), 0, -7)
-				.corruption(AT_LEAST(20), +2)
-				.hasPerk(PerkLib.Lycanthropy, +1)
-				//.hasPerk(PerkLib.LycanthropyDormant, -11)
+				.cockOrVaginaOfType(CockTypesEnum.WOLF, VaginaClass.HUMAN, +1)
+				.noWings(+4)
+				.corruption(AT_LEAST(20), +1)
+				.corruption(AT_LEAST(50), +1)
+				.corruption(AT_LEAST(80), +1)
+				.hasPerk(PerkLib.Lycanthropy, +2, -11);
+		
+		addMutation(IMutationsLib.FerasBirthrightIM);
 		addMutation(IMutationsLib.AlphaHowlIM);
-		addScoresAfter(1)
-				.hasCockOfType(CockTypesEnum.WOLF, +1)
 		
 		buildTier(12, "werewolf")
+                .requirePerk(PerkLib.Lycanthropy)
 				.buffs({
 					"str.mult": +1.00,
-					"tou.mult": +0.40,
-					"spe.mult": +0.60,
+					"tou.mult": +0.60,
+					"spe.mult": +0.40,
 					"int.mult": -0.20
 				})
 				.end();
-		buildTier(16, "greater werewolf")
+		buildTier(18, "elder werewolf")
+				.requirePreviousTier()
 				.buffs({
-					"str.mult": +1.30,
-					"tou.mult": +0.55,
-					"spe.mult": +0.75,
+					"str.mult": +1.45,
+					"tou.mult": +0.90,
+					"spe.mult": +0.55,
 					"int.mult": -0.20
 				})
-                .requirePerk(PerkLib.Lycanthropy)
+				.end();
+		buildTier(24, "ancient werewolf")
+				.requirePreviousTier()
+				.buffs({
+					"str.mult": +1.90,
+					"tou.mult": +1.20,
+					"spe.mult": +0.70,
+					"int.mult": -0.20
+				})
 				.end();
 	}
 }

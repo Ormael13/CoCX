@@ -804,6 +804,17 @@ import classes.CoC;
 			}
 		});
 
+		public static const ABYSSAL_SHARK:int = _partid++;
+		EnumValue.add(Memories, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
+			id: "Abyssal Shark Tail",
+			name: "A.Shark Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "A.Shark",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailAbyssalShark;
+			}
+		});
+
 		public static function getTailCost(startTails:int, endTails:int):int {
 			return Math.abs(startTails - endTails)*100 || 100;
 		}

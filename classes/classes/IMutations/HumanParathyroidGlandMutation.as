@@ -16,15 +16,16 @@ public class HumanParathyroidGlandMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
+			var perkCent:int = 0;
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier == 1){
-                descS += "Increases self healing by 300 out of combat and by 150 in combat. (using defend option will double it)";
+			if (pTier >= 1) perkCent += 1;
+			if (pTier >= 2) perkCent += 1;
+			if (pTier >= 3) perkCent += 2;
+            if (pTier >= 1){
+                descS += "Increases health recovery by (" + (2 * perkCent) + "0 * level) out of combat and by (" + perkCent + "0 * level) in combat. (using defend option will double it)";
             }
-            if (pTier == 2){
-                descS += "Increases self healing by 600 out of combat and by 300 in combat. (using defend option will double it)";
-            }
-            if (pTier == 3){
-                descS += "Increases self healing by 1200 out of combat and by 600 in combat. (using defend option will double it) Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.";
+            if (pTier >= 3){
+                descS += " Fatigue recovery increased and reduces the fatigue cost of physical specials by 10%.";
             }
             return descS;
         }

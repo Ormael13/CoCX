@@ -478,7 +478,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         eggMenu();
 
     }
-    
+
     private function eggDescribe():void {
         var genderColor:Array = ["white", "blue", "pink", "lavender"];
         outputText("\nThe egg has a " +genderColor[flags[kFLAGS.EMBER_GENDER]]+ " tone");
@@ -2847,8 +2847,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
 
         outputText("\n\nYour decency restored, you return to camp.");
         flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT]++;
-        explorer.stopExploring();
-        doNext(camp.returnToCampUseTwoHours);
+        endEncounter(120);
     }
 
     //Get Penetrated - also horse-proof, sorry folks! (Z)
@@ -4153,8 +4152,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\nYou head off yourself, ready to resume the rest of your day.");
         //2 hours pass, PC's fatigue is healed some, Libido is reduced.
         fatigue(-20);
-        explorer.stopExploring();
-        doNext(camp.returnToCampUseTwoHours);
+        endEncounter(120);
     }
 
     //Sleep with Ember!

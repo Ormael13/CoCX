@@ -171,6 +171,11 @@ public class RearBody extends BodyPart {
 		name: "hellhound furry neck",
 		appearanceDesc: "Around your neck, there is a thick coat of [fur color] fur."
 	});
+	public static const ABYSSAL_SHARK_FIN: int = 28;
+	EnumValue.add(Types, ABYSSAL_SHARK_FIN, "ABYSSAL_SHARK_FIN", {
+		name: "abyss shark fin",
+		appearanceDesc: "A large, shark-like fin has sprouted between your shoulders, and a second, smaller fin beneath it at the height of your navel. With them, you have much a easier ability to swim around."
+	});
 
 	public function RearBody(creature:Creature) {
 		super(creature, null);

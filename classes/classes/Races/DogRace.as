@@ -56,7 +56,9 @@ public class DogRace extends Race {
 		buildTier(4, "dog-morph")
 				.namesMaleFemaleMorphTaur("dog-boy", "dog-girl", "dog-morph", "dog-taur")
 				.buffs({
-					"spe.mult": +0.15,
+					"str.mult": +0.15,
+					"tou.mult": +0.15,
+					"spe.mult": +0.35,
 					"int.mult": -0.05
 				})
 				.end();

@@ -829,7 +829,7 @@ public class SkinTransformations extends MutationsHelper {
 				if (player.isFurCovered()) desc += "You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ";
 				if (player.isGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ";
 				if (player.isScaleCovered()) desc += "You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ";
-				desc += "Your skin starts to change, turning [skin color1]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>";
+				desc += "Your skin starts to change, turning [skin color1]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to forms underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>";
 				player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEA_DRAGON_UNDERBODY});
 				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SEA_DRAGON_UNDERBODY));
@@ -856,6 +856,41 @@ public class SkinTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.skin.base.pattern === Skin.PATTERN_ARCH_IMP_RUNIC_TATTOO;
+			}
+	);
+
+	public const SkinPatternAnubis: Transformation = new SimpleTransformation("Anubis Skin Pattern",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You suddenly feel a searing warmth all over your skin as white patterns not unlike those of the desert anubis appear as if branded onto your flesh. Well you might as well proudly display your <b>Anubis glyph like tattoo.</b>";
+				player.skin.base.adj = "tattooed";
+				player.skin.base.pattern = Skin.PATTERN_GLYPH_TATTOO;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.GLYPH));
+			},
+			// is present
+			function (): Boolean {
+				return player.skin.base.pattern === Skin.PATTERN_GLYPH_TATTOO;
+			}
+	);
+
+	public const SkinPatternBioluminescence: Transformation = new SimpleTransformation("Bioluminescence Skin Pattern",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Specks of light forms underneath your arms, spreading to your underbelly and your legs all along the length of your body. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>You have gained bioluminescent patterns like those of a deep sea creature!</b>";
+				player.skin.base.pattern = Skin.PATTERN_BIOLUMINESCENCE;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BIOLUMINESCENCE));
+			},
+			// is present
+			function (): Boolean {
+				return player.skin.base.pattern === Skin.PATTERN_BIOLUMINESCENCE;
 			}
 	);
 	/*

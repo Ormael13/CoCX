@@ -3,14 +3,14 @@ package classes.Scenes.Places.Ingnam
 	import classes.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
-	
+
 	public class ThiefScene extends BaseContent
 	{
-		
+
 		public function ThiefScene()
 		{
 		}
-		
+
 		public function encounterThief():void {
 			clearOutput();
 			outputText("You wander the village of Ingnam until you feel something pressing against your shoulder and you look around to see the thief. \"<i>Your money or your life,</i>\" he demands.");
@@ -18,7 +18,7 @@ package classes.Scenes.Places.Ingnam
 			addButton(0, "Fight", startCombatImmediate, new Thief);
 			addButton(1, "Give Gems", giveGems);
 		}
-		
+
 		private function giveGems():void {
 			clearOutput();
 			outputText("You reach into your gem pouch");
@@ -34,10 +34,10 @@ package classes.Scenes.Places.Ingnam
 				player.gems -= 5;
 			}
 			statScreenRefresh();
-			eachMinuteCount(15);
+			advanceMinutes(15);
 			doNext(camp.doCamp);
 		}
-		
+
 		public function winAgainstThief():void {
 			clearOutput();
 			outputText("The thief collapses from his " + (monster.lust >= monster.maxOverLust() ? "overwhelming desires": "injuries") + ". You smile in satisfaction as you rummage through his gem pouch");
@@ -60,10 +60,10 @@ package classes.Scenes.Places.Ingnam
 		}
 		private function thiefEncEnd():void {
 			cleanupAfterCombat();
-			eachMinuteCount(15);
+			advanceMinutes(15);
 			doNext(camp.doCamp);
 		}
-		
+
 		private function rapeThiefAnally():void {
 			var x:int = player.cockThatFits(monster.analCapacity());
 			clearOutput();
@@ -74,10 +74,10 @@ package classes.Scenes.Places.Ingnam
 			player.orgasm();
 			cleanupAfterCombat();
 			statScreenRefresh();
-			eachMinuteCount(15);
+			advanceMinutes(15);
 			doNext(camp.doCamp);
 		}
-		
+
 		private function getLicked():void {
 			clearOutput();
 			outputText("You drag the unconscious thief into one of the alleys. The thief wakes up and realize what you're going to do. You " + (!player.armor.isNothing || !player.lowerGarment.isNothing ? "remove the bottom half of your [armor]" : "") + " to reveal your [vagina]" + (player.hasCock() ? " and " + player.cockDescript(): "") + ".");
@@ -88,7 +88,7 @@ package classes.Scenes.Places.Ingnam
 			player.orgasm();
 			cleanupAfterCombat();
 			statScreenRefresh();
-			eachMinuteCount(15);
+			advanceMinutes(15);
 			doNext(camp.doCamp);
 		}
 	}

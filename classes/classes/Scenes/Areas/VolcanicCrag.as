@@ -9,11 +9,10 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
+import classes.Scenes.API.ExplorationEntry;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.Areas.VolcanicCrag.*;
-import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -25,7 +24,18 @@ public class VolcanicCrag extends BaseContent
 		public function VolcanicCrag() {
 			onGameInit(init);
 		}
-
+		
+		public const areaLevel:int = 65;
+		public function isDiscovered():Boolean {
+			return SceneLib.exploration.counters.volcanicCragOuter > 0;
+		}
+		public function canDiscover():Boolean {
+			return !isDiscovered() && adjustedPlayerLevel() >= areaLevel;
+		}
+		public function timesExplored():int {
+			return SceneLib.exploration.counters.volcanicCragOuter;
+		}
+		
 		private var _volcanicCragEncounter:GroupEncounter = null;
 		public function get volcanicCragEncounter():GroupEncounter {
 			return _volcanicCragEncounter;
@@ -34,6 +44,9 @@ public class VolcanicCrag extends BaseContent
 		private function init():void {
 			_volcanicCragEncounter = Encounters.group("volcaniccrag", {
 				name: "gunparts",
+				label : "Gun Parts",
+				kind  : 'item',
+				unique: true,
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 0 && player.hasKeyItem("Tripxi Fatbilly") < 0
 				},
@@ -41,6 +54,9 @@ public class VolcanicCrag extends BaseContent
 				call: partsofTripxiFatbilly
 			}, {
 				name: "aprilfools",
+				label : "Extreme Zones DLC",
+				kind  : 'event',
+				unique: true,
 				when: function ():Boolean {
 					return isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0
 				},
@@ -49,6 +65,9 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "forgefather1",
+				label : "Forgefather",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return ((player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) && flags[kFLAGS.MET_FORGEFATHER] == 0
 				},
@@ -58,6 +77,9 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "forgefather2",
+				label : "Forgefather",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return ((player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) && flags[kFLAGS.MET_FORGEFATHER] > 0
 				},
@@ -67,12 +89,18 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "nothing",
-				call: findNothing
+				call: findNothing,
+				label:'Walk',
+				kind:'walk'
 			}, {
 				name: "finddrakeheart",
+				label : "Drake Heart",
+				kind  : 'item',
 				call: findDrakeHeart
 			}, {
 				name: "truefiregolem",
+				label : "True Fire Golems",
+				kind : 'monster',
 				call: fireGolemEncounter
 			}, /*{//Magma Slime
 				name: "",
@@ -85,6 +113,8 @@ public class VolcanicCrag extends BaseContent
 				}
 			},*/ {
 				name: "phoenix",
+				label : "Quasi-Phoenix",
+				kind  : 'monster',
 				when: function ():Boolean {
 					return flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0
 				},
@@ -95,10 +125,15 @@ public class VolcanicCrag extends BaseContent
 				}
 			}, {
 				name: "behemoth",
+				label : "Behemoth",
+				kind : 'monster',
 				call: behemothScene.behemothIntro
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				label : "Helia",
+				kind  : 'npc',
+				unique: true,
 				night : false,
 				call  : function ():void {
 					VolcanicCragConditions();
@@ -108,6 +143,9 @@ public class VolcanicCrag extends BaseContent
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
+				label : "Etna",
+				kind  : 'npc',
+				unique: true,
 				when: function ():Boolean {
 					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
@@ -119,25 +157,32 @@ public class VolcanicCrag extends BaseContent
 					VolcanicCragConditions();
 					SceneLib.etnaScene.repeatYandereEnc();
 				}
-			}/*, {
+			}, {
 				name: "demonProjects",
+				label : "DemLab Subject",
+				kind  : 'monster',
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.MainAreaComplete >= 4;
+					return SceneLib.exploration.demonLabProjectEncountersEnabled();
 				},
 				call: function ():void {
 					VolcanicCragConditions();
 					SceneLib.exploration.demonLabProjectEncounters()
 				}
-			}*/);
+			});
 		}
 		
 		public function exploreVolcanicCrag():void {
-			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
-			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
-			doNext(camp.returnToCampUseOneHour);
-			volcanicCragEncounter.execEncounter();
-			flushOutputTextToGUI();
+			explorer.prepareArea(volcanicCragEncounter);
+			explorer.setTags("volcanicCrag","volcanicCragOuter");
+			explorer.prompt = "You explore the infernal volcanic crag.";
+			explorer.onEncounter = function(e:ExplorationEntry):void {
+				SceneLib.exploration.counters.volcanicCragOuter++;
+				if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
+			}
+			explorer.leave.hint("Leave the infernal volcanic crag");
+			explorer.skillBasedReveal(areaLevel, timesExplored());
+			explorer.doExplore();
 		}
 
 		public function volcanicCragChance():Number {
@@ -154,13 +199,13 @@ public class VolcanicCrag extends BaseContent
 				player.trainStat("spe", +1, player.trainStatCap("spe",50));
 			}
 			dynStats("spe", .5);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 		private function findDrakeHeart():void {
 			clearOutput();
 			outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
-			inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
+			inventory.takeItem(consumables.DRAKHRT, explorer.done);
 		}
 
 		private function fireGolemEncounter():void {
@@ -190,7 +235,7 @@ public class VolcanicCrag extends BaseContent
 			outputText("You carefully put the pieces of the Tripxi Fatbilly in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Tripxi Fatbilly", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
+			endEncounter();
 		}
 
 	}

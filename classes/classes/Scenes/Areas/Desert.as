@@ -4,6 +4,7 @@
 package classes.Scenes.Areas
 {
 import classes.*;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.ExplorationEntry;
@@ -18,6 +19,7 @@ use namespace CoC;
 	public class Desert extends BaseContent
 	{
 		public var antsScene:AntsScene = new AntsScene();
+		public var anubisScene:AnubisScene = new AnubisScene();
 		public var nagaScene:NagaScene = new NagaScene();
 		public var gorgonScene:GorgonScene = new GorgonScene();
 		public var oasis:Oasis = new Oasis();
@@ -27,30 +29,63 @@ use namespace CoC;
 		public var wanderer:Wanderer = new Wanderer();
 		//public var gorgonScene:GorgonScene = new GorgonScene();przenieść do deep desert potem
 		
+		public const discoverLevelOuter:int = 0;
+		public const areaLevelOuter:int = 1;
+		public function isDiscoveredOuter():Boolean {
+			return SceneLib.exploration.counters.desertOuter > 0;
+		}
+		public function canDiscoverOuter():Boolean {
+			return !isDiscoveredOuter() && adjustedPlayerLevel() >= discoverLevelOuter && SceneLib.lake.isDiscovered();
+		}
+		public function timesExploredOuter():int {
+			return SceneLib.exploration.counters.desertOuter;
+		}
+		public function discoverOuter():void {
+			clearOutput();
+			outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
+			if (player.lowerBody == LowerBody.HOOFED) outputText("in your hooves");
+			else if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
+			else if (player.isNaga()) outputText("in your scales");
+			else outputText("inside your footwear, between your toes");
+			outputText(".\n\n<b>You've discovered the Desert (Outer)!</b>");
+			SceneLib.exploration.counters.desertOuter = 1;
+			endEncounter(60);
+		}
+		
+		
+		public const areaLevelInner:int = 10;
+		public function isDiscoveredInner():Boolean {
+			return SceneLib.exploration.counters.desertInner > 0;
+		}
+		public function canDiscoverInner():Boolean {
+			return !isDiscoveredInner() && adjustedPlayerLevel() >= areaLevelInner;
+		}
+		public function timesExploredInner():int {
+			return SceneLib.exploration.counters.desertInner;
+		}
+		
 		public function Desert()
 		{
 			onGameInit(init);
 		}
 		
-		private var _desertEncounter:GroupEncounter = null;
-		public function get desertEncounter():GroupEncounter {
-			return _desertEncounter;
+		private var _desertOuterEncounter:GroupEncounter = null;
+		public function get desertOuterEncounter():GroupEncounter {
+			return _desertOuterEncounter;
 		}
-		private var _innerdesertEncounter:GroupEncounter = null;
-		public function get innerdesertEncounter():GroupEncounter {
-			return _innerdesertEncounter;
+		private var _desertInnerEncounter:GroupEncounter = null;
+		public function get desertInnerEncounter():GroupEncounter {
+			return _desertInnerEncounter;
 		}
 		private function init():void {
-            const fn:FnHelpers = Encounters.fn;
-			_desertEncounter = Encounters.group("desert",
+            const fn:FnHelpers    = Encounters.fn;
+			_desertOuterEncounter = Encounters.group("desert",
 				{
 					name: "discoverinnerdesert",
 					label : "New Area",
 					kind  : 'place',
 					unique: true,
-					when: function ():Boolean {
-						return (player.level + combat.playerLevelAdjustment()) >= 10 && flags[kFLAGS.DISCOVERED_INNER_DESERT] == 0
-					},
+					when: canDiscoverInner,
 					chance: 30,
 					call: discoverInnerDesert
 				}, {
@@ -124,7 +159,7 @@ use namespace CoC;
 					kind  : 'place',
 					unique: true,
 					when: function ():Boolean {
-						return (player.level >= 4 || player.exploredDesert > 45)
+						return (player.level >= 4 || timesExploredOuter() > 45)
 							   && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
 					},
 					call: SceneLib.dungeons.desertcave.enterDungeon
@@ -230,28 +265,57 @@ use namespace CoC;
 					label : "Cake",
 					kind  : 'item',
 					chance: 0.3,
-					call  : findDesertLoot
-				}/*, {
+					call  : findDesertLoot1
+				}, {
+					name  : "desertloot2",
+					label : "Berry",
+					kind  : 'item',
+					chance: 0.3,
+					call  : findDesertLoot3
+				}, {
 					name: "demonProjects",
+					label : "DemLab Subject",
+					kind  : 'monster',
 					chance: 0.2,
 					when: function ():Boolean {
-						return DemonLab.MainAreaComplete >= 4;
+						return SceneLib.exploration.demonLabProjectEncountersEnabled();
 					},
 					call: SceneLib.exploration.demonLabProjectEncounters
-				}*/);
-			_innerdesertEncounter = Encounters.group("inner desert",
+				});
+			_desertInnerEncounter = Encounters.group("inner desert",
 				{
 					name: "gorgon",
 					label : "Gorgon",
 					kind  : 'monster',
-					when: fn.ifLevelMin(14),
+					when: fn.ifLevelMin(31),
 					call: gorgonScene.gorgonEncounter
+				}, {
+					name  : "werefoxEFemale",
+					label : "E.Werefox (F)",
+					kind : 'monster',
+					day : false,
+					when: fn.ifLevelMin(43),
+					call  : SceneLib.werefoxScene.werefoxOuterDeepDesertEncounter,
+					chance: 0.50
 				}, {
 					name: "sandworm",
 					label : "Sandworm",
 					kind  : 'monster',
 					night: false,
 					call: sandWormScene.SandWormEncounter
+				}, {
+					name: "anubis",
+					label : "Anubis",
+					kind  : 'monster',
+					night: false,
+					call: anubisScene.anubisEncounter
+				}, {
+					name  : "werefoxFemale",
+					label : "Werefox (F)",
+					kind : 'monster',
+					day : false,
+					call  : SceneLib.werefoxScene.werefoxInnerDesertEncounter,
+					chance: 0.50
 				}, {
 					name: "etna",
 					label : "Etna",
@@ -305,47 +369,67 @@ use namespace CoC;
 					call: SceneLib.tedScene.introPostHiddenCave,
 					when: SceneLib.tedScene.canEncounterTed
 				}, {
-					name  : "desertloot",
+					name  : "desertloot1",
 					label : "Cake",
 					kind  : 'item',
 					chance: 0.3,
-					call  : findDesertLoot
-				}/*, {
+					call  : findDesertLoot1
+				}, {
+					name  : "desertloot2",
+					label : "Date",
+					kind  : 'item',
+					chance: 0.3,
+					call  : findDesertLoot2
+				}, {
+					name  : "desertloot3",
+					label : "Berry",
+					kind  : 'item',
+					chance: 0.3,
+					call  : findDesertLoot3
+				}, {
+					name  : "desertruins",
+					label : "Ruins",
+					kind  : 'event',
+					chance: 0.2,
+					call  : findDesertRuins
+				}, {
 					name: "demonProjects",
+					label : "DemLab Subject",
+					kind  : 'monster',
 					chance: 0.2,
 					when: function ():Boolean {
-						return DemonLab.MainAreaComplete >= 4;
+						return SceneLib.exploration.demonLabProjectEncountersEnabled();
 					},
 					call: SceneLib.exploration.demonLabProjectEncounters
-				}*/);
+				});
 		}
 		//Explore desert
-		public function exploreDesert():void
+		public function exploreOuterDesert():void
 		{
-			explorer.prepareArea(desertEncounter);
+			explorer.prepareArea(desertOuterEncounter);
 			explorer.soulSenseCheck = function (e:SimpleEncounter):Boolean {
 				return e.getKind() == "npc" || e.encounterName() == "ants";
 			}
 			explorer.setTags("desert", "desertOuter");
 			explorer.prompt = "You explore the outer desert.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				player.exploredDesert++;
+				SceneLib.exploration.counters.desertOuter++;
 			}
 			explorer.leave.hint("Leave the desert");
-			explorer.skillBasedReveal(1, player.exploredDesert);
+			explorer.skillBasedReveal(areaLevelOuter, timesExploredOuter());
 			explorer.doExplore();
 		}
 		
 		public function exploreInnerDesert():void
 		{
-			explorer.prepareArea(innerdesertEncounter);
+			explorer.prepareArea(desertInnerEncounter);
 			explorer.setTags("desert", "desertInner");
 			explorer.prompt = "You explore the inner desert.";
 			explorer.onEncounter = function(e:ExplorationEntry):void {
-				flags[kFLAGS.DISCOVERED_INNER_DESERT]++;
+				SceneLib.exploration.counters.desertInner++;
 			}
 			explorer.leave.hint("Leave the desert");
-			explorer.skillBasedReveal(10, flags[kFLAGS.DISCOVERED_INNER_DESERT]);
+			explorer.skillBasedReveal(areaLevelInner, timesExploredInner());
 			explorer.doExplore();
 		}
 	
@@ -359,9 +443,8 @@ use namespace CoC;
 			clearOutput();
 			outputText("While exploring the desert you notice that the sandy dunes begins to grow larger and more intimidating. The heat has also ramped up you will have to carry some waterskins on you. ");
 			outputText("<b>It would seem you found the inner desert area!</b>");
-			flags[kFLAGS.DISCOVERED_INNER_DESERT]++;
-			explorer.stopExploring();
-			doNext(camp.returnToCampUseTwoHours);
+			SceneLib.exploration.counters.desertInner++;
+			endEncounter(120);
 		}
 
 		public function sandWitchPregnancyEvent():void {
@@ -461,10 +544,29 @@ use namespace CoC;
 			endEncounter();
 		}
 
-		private function findDesertLoot():void {
+		private function findDesertLoot1():void {
 			clearOutput();
 			outputText("Miraculously, you spot a lone pouch lying in the sand. Opening it, you find a neatly wraped cake!\n");
 			inventory.takeItem(consumables.HDEWCAK, explorer.done);
+		}
+		private function findDesertLoot2():void {
+			clearOutput();
+			outputText("While exploring the desert you walk into an oasis with clear fresh water and the some date tree. It seems to be your lucky day as this is no mirage.\n");
+			inventory.takeItem(consumables.JACKALD, explorer.done);
+		}
+		private function findDesertLoot3():void {
+			clearOutput();
+			outputText("While exploring the desert you walk into an oasis with clear fresh water and the some spiny, sprawling shrub plants. It seems to be your lucky day as this is no mirage.\n");
+			inventory.takeItem(consumables.DESERTB, explorer.done);
+		}
+		
+		private function findDesertRuins():void {
+			clearOutput();
+			var gemsFound:int = 150 + rand(50);
+			outputText("While exploring the desert you find some old sandy ruins battered by time. Inside is a half buried treasure chest filled with some gems. (" + String(gemsFound) + ")");
+			player.gems += gemsFound;
+			statScreenRefresh();
+			endEncounter();
 		}
 	}
 }

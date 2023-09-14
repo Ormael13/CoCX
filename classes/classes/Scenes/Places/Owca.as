@@ -1045,7 +1045,6 @@ private function subdueVapula():void {
 private function disbandHorde():void {
 	clearOutput();
 	outputText("You start speaking in a calm, measured voice.  \"<i>Here we are again.  I cannot count how often we've been in this same situation: you're struggling before me, powerless.  How often do you need to be reminded your place?  Back off.  We don't want your kind here.  Go find some other prey; fuck each other for all I care.  Just stop bothering us.  If I see you or your minions hanging around this village again, you will regret it.  All of you.</i>\"");
-	
 	outputText("\n\nHer eyes are progressively filling with fear as you deliver your ultimatum, conscious of finding someone with more power than her.  She squirms uncomfortably in your grasp and nods feebly.");
 	outputText("\n\nYou give the wanton succubus a loud slap for good measure and discard her.");
 	outputText("\n\n\"<i>Begone.  Leave, all of you.  Out of my sight.</i>\"");
@@ -1099,6 +1098,7 @@ private function enslaveVapulaShared():void {
 	outputText("\n\n<b>Looting from Vapula inventory you find a shard of metal that seems to radiate untold power. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
 	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = weapons.D_FLAIL.id;
 	cleanupAfterCombat();
 
 }

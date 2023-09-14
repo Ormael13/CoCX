@@ -1,7 +1,7 @@
 package classes.BodyParts {
 import classes.Creature;
-import classes.internals.EnumValue;
 import classes.PerkLib;
+import classes.internals.EnumValue;
 
 public class Eyes extends BodyPart {
 	/**
@@ -260,11 +260,20 @@ public class Eyes extends BodyPart {
 		name:"fiendish snake",
 		appearanceDesc: "Your [eyecolor] eyes have slitted pupils like that of a snake with black schlera wich betray your corrupted nature."
 	});
+	public static const WERESPIDER: int = 43;
+	EnumValue.add(Types, WERESPIDER, "WERESPIDER", {
+		name:"werespider",
+		appearanceDesc: "In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead. In your eyes, sometimes a green light is visibly dancing. Hinting at the beast within. It encompasses your entire pupil when you let it loose.",
+		Darkvision: true
+	});
 
 	public var count:int;
 	public var colour:String = "brown";
 	public function Eyes(creature:Creature) {
 		super(creature, null);
+	}
+	public function get noun():String {
+		return type == MONOEYE ? "eye" : "eyes";
 	}
 
 	public static function getAppearanceDescription(creature: *):String {
