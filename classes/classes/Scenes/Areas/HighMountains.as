@@ -165,7 +165,7 @@ public class HighMountains extends BaseContent {
         clearOutput();
         outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)");
         SceneLib.exploration.counters.highMountains++;
-        explorer.done(120);
+        endEncounter(120);
     }
 
     //Explore High Mountain

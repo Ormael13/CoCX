@@ -49,7 +49,7 @@ use namespace CoC;
 			else outputText("inside your footwear, between your toes");
 			outputText(".\n\n<b>You've discovered the Desert (Outer)!</b>");
 			SceneLib.exploration.counters.desertOuter = 1;
-			explorer.done(60);
+			endEncounter(60);
 		}
 		
 		
@@ -444,7 +444,7 @@ use namespace CoC;
 			outputText("While exploring the desert you notice that the sandy dunes begins to grow larger and more intimidating. The heat has also ramped up you will have to carry some waterskins on you. ");
 			outputText("<b>It would seem you found the inner desert area!</b>");
 			SceneLib.exploration.counters.desertInner++;
-			explorer.done(120);
+			endEncounter(120);
 		}
 
 		public function sandWitchPregnancyEvent():void {
