@@ -174,7 +174,7 @@ public class BattlefieldOuter extends BaseContent
 		SceneLib.exploration.counters.battlefieldOuter = 1;
 		clearOutput();
 		outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
-		explorer.done(60);
+		endEncounter(60);
 	}
 
 

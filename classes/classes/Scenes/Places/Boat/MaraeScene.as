@@ -318,7 +318,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         player.vaginaType(VaginaClass.ALRAUNE);
 		Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.ALRAUNE));
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
-        explorer.done(120);
+        endEncounter(120);
     }
 
     //Prompts
@@ -494,7 +494,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                     player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
                     player.sexReward("no", "Dick");
 					if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
-                    explorer.done(120);
+                    endEncounter(120);
                 } else doNext(recallWakeUp);
             }
 

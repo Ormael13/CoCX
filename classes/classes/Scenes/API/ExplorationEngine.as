@@ -534,7 +534,7 @@ public class ExplorationEngine extends BaseContent {
 			}
 		}
 		if (e != null) {
-			stopExploring();
+			// stopExploring(); // Encounter is responsible for stopping the exploration, if needed
 			if (onEncounter != null) {
 				onEncounter(e);
 			}

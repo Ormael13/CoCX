@@ -139,7 +139,7 @@ public class Ashlands extends BaseContent
 		clearOutput();
 		outputText("You walk for some time, roaming the ashlands. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
 		outputText("<b>You've discovered the Volcanic Crag!</b>");
-		explorer.done(120);
+		endEncounter(120);
 	}
 
 	private function findNothing():void {
