@@ -89,6 +89,7 @@ public class ElfRace extends Race {
                 .end();
         buildTier(17, "high elf")
                 .namesTauric("high elf", "high elf-taur")
+				.requirePreviousTier()
                 .buffs({
                     "str.mult": -0.20,
                     "tou.mult": -0.30,

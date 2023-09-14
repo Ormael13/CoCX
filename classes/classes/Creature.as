@@ -4353,7 +4353,7 @@ public class Creature extends Utils
 				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
 				else chance -= 30;
 			}
-			if (hasPerk(PerkLib.SereneMind)) chance += 10;
+			if (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking))) chance += 10;
 			chance += evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1);
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasPerk(PerkLib.ElementalBody)) {
@@ -4773,3 +4773,4 @@ public class Creature extends Utils
 		}
 	}
 }
+

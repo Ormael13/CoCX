@@ -7811,7 +7811,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance2 += 10;
         if (player.hasPerk(PerkLib.CatchTheBlade) && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance2 += 15;
         if (player.hasPerk(PerkLib.Backlash) && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance2 += 5;
-		if (player.hasPerk(PerkLib.SereneMind)) parryChance2 += 10;
+		if (player.hasPerk(PerkLib.SereneMind) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) parryChance2 += 10;
         return parryChance2;
     }
 
@@ -7931,7 +7931,7 @@ public class Combat extends BaseContent {
         }
 		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand() || player.isPartiallyStaffTypeWeapon()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) blockChance += 10;
 		if (player.hasStatusEffect(StatusEffects.Aegis)) blockChance += player.statusEffectv1(StatusEffects.Aegis);
-		if (player.hasPerk(PerkLib.SereneMind)) blockChance += 10;
+		if (player.hasPerk(PerkLib.SereneMind) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) blockChance += 10;
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
 		var wrathShieldSize:int = 6;
@@ -16798,4 +16798,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

@@ -2733,7 +2733,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("As you fall asleep, holding her close, you're almost overwhelmed by the warm, cozy feelings coursing through your mind. You chuckle gently, only one thought seems appropriate. You whisper it warmly in her ear, something you've always wanted to say to her face.\n\n");
         outputText("<i>God Damn it, Kiha… </i>.\n\n");
         DergKidnapped = 2;
-        cleanupAfterCombat();//unless is should still make game go for 'wedding night' scene
+        cleanupAfterCombat();
     }
 
 
