@@ -17,6 +17,7 @@ import classes.EngineCore;
 
 
 import com.bit101.components.ComboBox;
+import com.bit101.components.TextFieldVScroll;
 import com.bit101.components.VScrollBar;
 import com.bit101.components.ScrollPane;
 import flash.display.BitmapData;
@@ -250,7 +251,7 @@ public class MainView extends Block {
 	public var levelButton:CoCButton;
 	public var perksButton:CoCButton;
 	public var appearanceButton:CoCButton;
-	public var scrollBar:VScrollBar;
+	public var scrollBar:TextFieldVScroll;
 
 	protected var callbacks:Object = {};
 	protected var options:Object;
@@ -347,7 +348,7 @@ public class MainView extends Block {
 		mainText.addEventListener(TextEvent.LINK, function(e:TextEvent):void {
 			if (linkHandler != null) linkHandler(decodeURI(e.text));
 		});
-		scrollBar = new VScrollBar();
+		scrollBar = new TextFieldVScroll(mainText);
 		UIUtils.setProperties(scrollBar,{
 			name: "scrollBar",
 			direction: "vertical",
@@ -452,7 +453,7 @@ public class MainView extends Block {
 
 	protected function formatMiscItems():void {
 
-		this.aCb               = new ComboBox();
+		this.aCb               = new ComboBox(this);
 		this.aCb.width         = 200;
 		this.aCb.scaleY        = 1.1;
 		this.aCb.move(-1250, -1550);
@@ -915,6 +916,7 @@ public class MainView extends Block {
 
 	public function showComboBox(items:Array,propmt:String,onChange:Function):void {
 		aCb.items = items;
+		aCb.numVisibleItems = 15;
 		aCb.defaultLabel = propmt;
 		comboboxHandler = onChange;
 		if (aCb.parent == null) {
