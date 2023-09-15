@@ -144,6 +144,12 @@ public class YourCabin extends DungeonAbstractContent
 				dynStats("int", 2);
 				player.KnowledgeBonus("int",2);
 			}
+			else if(choice == 2) {
+				outputText("You learn a few new fast striking stances that seem decent.");
+				//(+2 Speed)
+				dynStats("spe", 2);
+				player.KnowledgeBonus("spe",2);
+			}
 			else {
 				outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
 				//(+2 Strength)
