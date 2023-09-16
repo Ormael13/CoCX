@@ -116,7 +116,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
 					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS
 
-					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE,
+					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.DKATANA,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
 					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE,
 
