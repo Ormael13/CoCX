@@ -1952,7 +1952,7 @@ public class PlayerInfo extends BaseContent {
 		var selected:PerkClass = selectedItem.perk;
 		outputText("You have selected the following perk:\n");
 		outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
-        CoC.instance.placeComboBoxAfterText();
+        //CoC.instance.placeComboBoxAfterText();
         var unlocks:Array = CoC.instance.perkTree.listUnlocks(selected.ptype);
         if (unlocks.length > 0) {
 			outputText("<b>Unlocks:</b> <ul>");
