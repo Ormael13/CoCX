@@ -457,7 +457,7 @@ public class MainView extends Block {
 		this.aCb.width         = 200;
 		this.aCb.scaleY        = 1.1;
 		this.aCb.move(-1250, -1550);
-		this.aCb.addEventListener(Event.CHANGE, function (event:Event):void {
+		this.aCb.addEventListener(Event.SELECT, function (event:Event):void {
 			if (comboboxHandler != null) comboboxHandler(ComboBox(event.target).selectedItem);
 		});
 
