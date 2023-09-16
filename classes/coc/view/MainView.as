@@ -453,7 +453,7 @@ public class MainView extends Block {
 
 	protected function formatMiscItems():void {
 
-		this.aCb               = new ComboBox(this);
+		this.aCb               = new ComboBox();
 		this.aCb.width         = 200;
 		this.aCb.scaleY        = 1.1;
 		this.aCb.move(-1250, -1550);
