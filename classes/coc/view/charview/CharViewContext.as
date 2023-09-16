@@ -98,7 +98,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASword: player.isSwordTypeWeapon(),
 					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE || player.weapon == game.weapons.T_HEART || player.weapon == game.weapons.ARMAGED,
 					PlayerHasASwordUnholy: player.weapon == game.weapons.EBNYBLD || player.weapon == game.weapons.DORSOUL || player.weapon == game.weapons.CHAOSEA,
-					PlayerHasASwordMoonGS: player.weapon == game.weapons.MGSWORD
+					PlayerHasASwordMoonGS: player.weapon == game.weapons.MGSWORD,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
@@ -114,7 +114,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpear: player.isSpearTypeWeapon(), //until polearm have their own sprite they share sprite with spears
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
-					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS
+					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS,
 
 					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.DKATANA,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
@@ -124,7 +124,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasNodachiHoly:player.weapon == game.weapons.MASAMUN,
 					PlayerHasNodachiUnholy:player.weapon == game.weapons.BLETTER,
 
-					PlayerHasDaisho: player.weapon == game.weapon.DAISHO
+					PlayerHasDaisho: player.weapon == game.weapons.DAISHO,
 
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
@@ -242,9 +242,9 @@ public class CharViewContext extends ExecContext {
 					elfWizardDress: player.armor == game.armors.FMDRESS,
 					CowGirlOutfit: player.armor == game.armors.CGUNSLI,
 					greenAdventurerClothes: player.armor == game.armors.ADVCLTH,
-					nurseClothing: player.armor == game.armors.NURSECL
-					SamuraiArmor: player.armor == game.armors.SAMUARM
-					scalemail: player.armor == game.armors.SCALEML
+					nurseClothing: player.armor == game.armors.NURSECL,
+					SamuraiArmor: player.armor == game.armors.SAMUARM,
+					scalemail: player.armor == game.armors.SCALEML,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,

@@ -194,7 +194,7 @@ package classes.GeneticMemories {
 			cost: 100,
 			title: "Anubis",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.SkinPatternOni
+				return CoC.instance.transformations.SkinPatternAnubis
 			}
 		});
 
