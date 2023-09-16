@@ -1561,8 +1561,17 @@ use namespace CoC;
 				else attack += Math.round(statusEffectv1(StatusEffects.AttackPotion));
 			}
 			if (statStore.hasBuff("CrinosShape") && hasPerk(PerkLib.BestialBlademaster)) {
-				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 2) attack *= 1.2;
-				else attack *= 1.1;
+				var bbb:Number = 0.1;
+				if (hasStatusEffect(StatusEffects.Berzerking)) {
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Berzerking) >= 1) bbb += (0.1 * statusEffectv2(StatusEffects.Berzerking));
+					bbb += 0.1;
+				}
+				if (hasStatusEffect(StatusEffects.Lustzerking)) {
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Lustzerking) >= 1) bbb += (0.1 * statusEffectv2(StatusEffects.Lustzerking));
+					bbb += 0.1;
+				}
+				if (perkv1(IMutationsLib.FerasBirthrightIM) >= 2) bbb *= 2;
+				attack *= (1+bbb);
 			}
 			attack = Math.round(attack);
 			return attack;

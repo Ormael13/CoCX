@@ -9,7 +9,7 @@ package classes.Items.Jewelries
 		public function StarfireBand()
 		{
 			super("StarfireBand", "Starfire Band", "Starfire Band", "Starfire Band", 0, 0, 1200, "The engagement ring given to you by Kiha");
-			withBuffs({'res_fire':20,'res_physical':3,'res_magic':3}, true);
+			withBuffs({'res_fire':40,'res_physical':10,'res_magic':10}, true);
 		}
 
 		override public function afterEquip(doOutput:Boolean):void {

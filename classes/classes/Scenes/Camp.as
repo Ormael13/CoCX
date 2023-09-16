@@ -4051,7 +4051,7 @@ public class Camp extends NPCAwareContent{
 		bd.add("Temple", SceneLib.templeofdivine.repeatvisitintro)
 				.hint("Visit the temple in the high mountains where Sapphire resides.")
 				.disableIf(!flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE], "Search the high mountains.", null, "???");
-		bd.add("Chicken Harpy", SceneLib.highMountains.chickenHarpy)
+		bd.add("Chicken Harpy", SceneLib.mountain.chickenHarpy)
 				.hint("Visit Chicken Harpy in the High Mountains.")
 				.disableIf(!player.hasItem(consumables.OVIELIX), "You need to have at least 1-2 ovi elixirs to have reason to look for her.")
 				.disableIf(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 1, "Search the high mountains with ovi elixir.", null, "???");
@@ -4191,7 +4191,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "Explore the realm.");
 		if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] > 1) {
-			if (player.hasItem(consumables.OVIELIX)) addButton(11, "Chicken Harpy", SceneLib.highMountains.chickenHarpy).hint("Visit Chicken Harpy in the High Mountains.");
+			if (player.hasItem(consumables.OVIELIX)) addButton(11, "Chicken Harpy", SceneLib.mountain.chickenHarpy).hint("Visit Chicken Harpy in the High Mountains.");
 			else addButtonDisabled(11, "Chicken Harpy", "You need to have at least 1-2 ovi elixirs to have reason to look for her.");
 		}
 		else addButtonDisabled(11, "???", "Search the high mountains with ovi elixir.");

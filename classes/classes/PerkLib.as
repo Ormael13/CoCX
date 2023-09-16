@@ -3238,12 +3238,8 @@ public class PerkLib
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
-		public static const InfernalRage:PerkType = mk("Infernal Rage", "Infernal Rage",
-				"Increases fire damage based on percent of wrath bar fullness.");
-		public static const SereneMind:PerkType = mk("Serene Mind", "Serene Mind",
-				"Increased chance (+10%) to block/parry/evade whilst in a berserker/lustzerker state. These actions would also grant 1% wrath when successful.");
 		public static const BestialBlademaster:PerkType = mk("Bestial Blademaster", "Bestial Blademaster",
-				"Allows for the wearer to better make use of their beast form to increase effectiveness of weapon strikes. (weapon base attack increased by 10% while chrinos shape is active)");
+				"Allows for the wearer to better make use of their beast form to increase effectiveness of weapon strikes. Weapon base attack increased by 10% while chrinos shape is active, being in a berserker or lustzerker state would increase this effect, having Fera's Birthright at least at primitive tier would double final bonus.");
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of mana!",null,true);
@@ -3251,6 +3247,8 @@ public class PerkLib
 				"Misdirection, Slutty seduction 10, Increase Fae storm chances to proc multiple status,reduce spellcasting cost by 60%.");
 		public static const IceQueenGown:PerkType = mk("Ice Queen Gown", "Ice Queen Gown",
 				"Freeze the heart of the wielder and grant a weakness to fire and a resistance to ice but double cold and light damage. A yuki onna also gains greater regeneration and the black frost aura.");
+		public static const InfernalRage:PerkType = mk("Infernal Rage", "Infernal Rage",
+				"Increases fire damage based on percent of wrath bar fullness.");
 		public static const KrakenBlackDress:PerkType = mk("Kraken black dress", "Kraken black dress",
 				"Increase ink spray duration by 1 round and doubles Grapple damage.",null,true);
 		public static const LastResort:PerkType = mk("Last Resort", "Last Resort",
@@ -3263,9 +3261,11 @@ public class PerkLib
 		public static const OniTyrantKimono:PerkType = mk("Oni Tyrant Kimono", "Oni Tyrant Kimono",
 				"Increase rampage duration by 5 rounds and add +100% to melee physical damage.");
 		public static const Sanctuary:PerkType = mk("Sanctuary", "Sanctuary", "Regenerates 1% of HP.");
-		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
 				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",null,true);
+		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
+		public static const SereneMind:PerkType = mk("Serene Mind", "Serene Mind",
+				"Increased chance (+10%) to block/parry/evade whilst in a berserker/lustzerker state. These actions would also grant 1% wrath when successful.");
 		public static const SkullOrnament:PerkType = mk("Skull hair ornament", "Skull hair ornament",
 				"Raise magic damage by up to 60% based on user corruption.",null,true);
 		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
@@ -3279,10 +3279,12 @@ public class PerkLib
 			var gPerks:Array = [];
 			gPerks.push(Ambition);
 			gPerks.push(BerserkerArmor);
+			gPerks.push(BestialBlademaster);
 			gPerks.push(BlindImmunity);
 			gPerks.push(BloodMage);
 			gPerks.push(FairyQueenRegalia);
 			gPerks.push(IceQueenGown);
+			gPerks.push(InfernalRage);
 			gPerks.push(KrakenBlackDress);
 			gPerks.push(LastResort);
 			gPerks.push(Obsession);
@@ -3290,8 +3292,9 @@ public class PerkLib
 			gPerks.push(OniEnlightenedKimono);
 			gPerks.push(OniTyrantKimono);
 			gPerks.push(Sanctuary);
-			gPerks.push(SeersInsight);
 			gPerks.push(ScandalousSuccubusClothing);
+			gPerks.push(SeersInsight);
+			gPerks.push(SereneMind);
 			gPerks.push(SkullOrnament);
 			gPerks.push(WalpurgisIzaliaRobe);
 			gPerks.push(WellspringOfLust);

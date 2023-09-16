@@ -36,7 +36,8 @@ import classes.internals.*;
 
 		public function darkMaul():void {
 			outputText("With a glint in his red, reptilian eyes, the giant flaps his wings, coming at you, maul raised.");
-			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
+			var damage:Number = 0;
+			damage += (((weaponAttack + str + 275) * 24) - rand(player.touStat.core.value) - player.armorDef);
 			if (hasStatusEffect(StatusEffects.Hypermode)) damage *= 10;
 			if (player.getEvasionRoll())
 			{
@@ -45,7 +46,6 @@ import classes.internals.*;
 			else
 			{
 				outputText("  You try to dodge, but the demon adjusts his arc, landing a solid hit. Seeing stars, you reel back.");
-
 				if (rand(100) < 40 && !player.hasPerk(PerkLib.Resolute)) {
 					outputText("The impact from the shield has left you with a concussion. <b>You are stunned.</b> ");
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -56,10 +56,11 @@ import classes.internals.*;
 
 		public function pinDown():void {
 			outputText("Magnar roars, rushing towards you. His right hand holds his massive maul, and you dodge the reckless downward swing, jumping to the left.");
-			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
-			if (player.getEvasionRoll() && ! Combat.playerWaitsOrDefends()) {
+			var damage:Number = 0;
+			damage += (((weaponAttack + str + 175) * 12) - rand(player.touStat.core.value) - player.armorDef);
+			if (player.getEvasionRoll() && !Combat.playerWaitsOrDefends()) {
 				outputText("  His left hand, fingers spread out, lash down towards your neck. You see it coming at the last second, bending your knees. The attempt at a grab foiled, he rears back, kicking you in the chest. You bring a forearm up, blocking, but you’re still thrown back by the impact.");
-				damage *= 2/3;
+				damage = Math.round(damage * 0.6);
 				if (rand(100) < 40 && !player.hasPerk(PerkLib.Resolute)) {
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
@@ -106,7 +107,6 @@ import classes.internals.*;
 			//If succeed:
 			else {
 				player.removeStatusEffect(StatusEffects.MagnarPinned);
-
 				if (player.hasStatusEffect(StatusEffects.MagnarDominated) && player.statusEffectv1(StatusEffects.MagnarSlam) > 5) {
 					//success stage 5+
 					outputText("With your arms braced against the wall, your [breasts] bruising on the stone, and the dull warmth spreading from your womb, you know you don’t have much time until this… Overwhelming dick stops you from feeling your legs. Even now, you can feel him, his claws wrapping possessively around your [ass], his thighs moving in, to cut off your last movements. Through the pheromones filling your mind with lust, your stretching, dripping pussy and the dominating presence forcing you down, your mind latches onto a single word. \n\n" +
@@ -126,7 +126,6 @@ import classes.internals.*;
 		public function slam():void {	//(Only option if PC is male or maleherm)
 			outputText("Magnar laughs maniacally as you struggle, effortlessly keeping his grip on your neck. He pulls you in, punching you in the gut with his free hand before slamming you back into the statue. \n" +
 					"Fire washes from his maw, leaving you burning… and aroused");
-
 			if (player.hasStatusEffect(StatusEffects.MagnarSlam)) {
 				outputText("You feel something give in the stone, and it crumbles, leaving your attacker off-balance. You open your mouth, biting his exposed fingers until you taste the coppery tang of blood. \n" +
 						"He roars, releasing your neck and checking his hand for bite marks.\n");
@@ -150,13 +149,11 @@ import classes.internals.*;
 				player.createStatusEffect(StatusEffects.MagnarDominated, 0 ,0, 0, 0);
 			}
 			if (player.statusEffectv1(StatusEffects.MagnarDominated) > maxDominationLevel) maxDominationLevel++;
-
 			//Fail stage 1 if have aromor
 			if (player.statusEffectv1(StatusEffects.MagnarDominated) == 1) {
 				if (!player.armor.isNothing || !player.lowerGarment.isNothing) {
 					if (!player.armor.isNothing ) outputText("The massive dragon-demon ignores your struggles and cries, ripping off the lower half of your [armor]. You look up into his eyes, spots flashing on your vision as he bears down, tapered dragon dong rubbing your inner thigh. ");
 					if (!player.lowerGarment.isNothing) outputText("  Your [lowergarment] is slid to one side by his draconid erection, exposing your now flushing lips to the world.");
-
 					//(DoT, Lust damage, lose your armor and lower garment for the rest of the fight)
 					player.takeLustDamage(player.effectiveSensitivity() / 10 + 2, true);
 				} else	//play next scene direcly if no armor equipped
@@ -204,7 +201,6 @@ import classes.internals.*;
 				player.dynStats("cor", 1);
 			}
 			player.addStatusValue(StatusEffects.MagnarDominated,1,1);
-
 			var damage:int = int((str) - rand(player.tou) - player.armorDef);
 			player.takePhysDamage(damage, true);	//He is choking and violently pounding you into the wall after all
 		}
@@ -214,13 +210,11 @@ import classes.internals.*;
 					//"\n(+80% STR, -40% INT/WIS, +40% SPD, activates a flame aura that reduces INT and SPD, but does only a small amount of damage)" +
 					"“Deal with this, pretender!” he cackles.\n\n");
 			outputText("The flame burns, black and violet fire sinking into the church around you. Your head spins, and you feel lightheaded, the flames slackening your muscles and slowing your mind. ");
-
 			createStatusEffect(StatusEffects.Hypermode, 4, 10, 0, 0);
 			addCurse("str.mult", -0.80);
 			addCurse("int.mult", 0.40,3);
 			addCurse("wis.mult", 0.40,3);
 			addCurse("spe.mult", -0.40,3);
-
 			addCurse("str.mult", 0.30,1);
 			addCurse("spe.mult", 0.30,1);
 
@@ -236,7 +230,6 @@ import classes.internals.*;
 					removeStatusEffect(StatusEffects.Uber);
 			}
 			else heatWave();
-
 			var choice:Number = rand(3);
 			if (player.hasStatusEffect(StatusEffects.MagnarPinned) && player.hasStatusEffect(StatusEffects.MagnarDominated))
 				choice = 2;
@@ -248,7 +241,6 @@ import classes.internals.*;
 				outputText("[Themonster] seems to have trouble finding you, putting one hand over his injured eye, resting the other on his massive hammer.");
 				return;
 			}
-
 			if (choice == 0) eAttack();
 			if (choice == 1) darkMaul();
 			if (choice == 2) pinDown();
