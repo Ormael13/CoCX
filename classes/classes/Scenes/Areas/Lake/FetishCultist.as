@@ -5,7 +5,6 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class FetishCultist extends Monster
@@ -65,7 +64,7 @@ public class FetishCultist extends Monster
 					break;
 			}
 			//Talk abouts it mang!
-			if(changed) outputText("The fetish cultist's clothing shifts and twists, taking on the appearance of a " + armorName + ".\n\n");
+			if(changed) outputText("The fetish "+this.short+"'s clothing shifts and twists, taking on the appearance of a " + armorName + ".\n\n");
 			lust += lustVuln * 3;
 		}
 
@@ -84,7 +83,9 @@ public class FetishCultist extends Monster
 			else {
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.");
 			}
-			player.takeLustDamage((player.lib/10 + player.cor/20)+4, true);
+			var mlt:Number = 10;
+			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 3) mlt -= 5;
+			player.takeLustDamage((player.lib/mlt + player.cor/(mlt*2))+4, true);
 			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(SceneLib.combat.combatMenu);
@@ -107,7 +108,9 @@ public class FetishCultist extends Monster
 				else if(player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and streams down your [cocks], painfully hardened by a vast amount of blood rushing to your groin.");
 				if(player.gender == 0) outputText("  Your genderless body is suddenly filled by a perverted warmth.");
 				outputText("\n\nYou notice that the young woman seems to have calmed down some.");
-				player.takeLustDamage((lust/3 * (1 + player.cor/300)), true);
+				var mlt:Number = 3;
+				if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 3) mlt -= 1;
+				player.takeLustDamage((lust/mlt * (1 + player.cor/(mlt*100))), true);
 				lust -= 50;
 				if(lust < 0) lust = 10;
 			}
@@ -127,7 +130,7 @@ public class FetishCultist extends Monster
 				super.won(hpVictory,pcCameWorms);
 			} else {
 				if (pcCameWorms){
-					outputText("\n\nThe cultist giggles as she watches you struggling.\n\n");
+					outputText("\n\nThe "+this.short+" giggles as she watches you struggling.\n\n");
 				}
 				SceneLib.lake.fetishCultistScene.cultistRapesYou();
 			}
@@ -142,7 +145,30 @@ public class FetishCultist extends Monster
 		{
 			trace("FetishCultist Constructor!");
 			this.a = "the ";
-			this.short = "fetish cultist";
+			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 0) {
+				this.short = "fetish cultist";
+				initStrTouSpeInte(40, 25, 30, 1);
+				initWisLibSensCor(1, 75, 80, 90);
+				this.armorDef = 1;
+				this.armorMDef = 1;
+				this.weaponAttack = 1;
+				this.bonusLust = 158;
+				this.level = 3;
+				this.gems = 5+rand(10);
+			}
+			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 3) {
+				this.short = "fetish evangelist";
+				initStrTouSpeInte(240, 250, 300, 1);
+				initWisLibSensCor(1, 255, 300, 90);
+				this.armorDef = 65;
+				this.armorMDef = 20;
+				this.weaponAttack = 20;
+				this.bonusHP = 1000;
+				this.bonusLust = 620;
+				this.level = 65;
+				this.gems = 105+rand(10);
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			}
 			this.imageName = "fetishcultist";
 			this.long = "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.";
 			// this.plural = false;
@@ -156,18 +182,10 @@ public class FetishCultist extends Monster
 			this.bodyColor = "pale";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(40, 25, 30, 1);
-			initWisLibSensCor(1, 75, 80, 90);
 			this.weaponName = "whip";
 			this.weaponVerb = "whip-crack";
-			this.weaponAttack = 1;
 			this.armorName = FETISHY_OUTFIT;
-			this.armorDef = 1;
-			this.armorMDef = 1;
-			this.bonusLust = 158;
 			this.lust = 25;
-			this.level = 3;
-			this.gems = 5+rand(10);
 			this.drop = new WeightedDrop().add(consumables.LABOVA_,1)
 					.add(weapons.RIDINGC,1)
 					.add(consumables.OVIELIX,2)

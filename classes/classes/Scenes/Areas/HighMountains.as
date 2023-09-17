@@ -127,6 +127,16 @@ public class HighMountains extends BaseContent {
             chance: 0.5,
             call: lightelfScene.introLightELfSniper
         }, {
+			name: "fetishevangelist",
+			label : "F.Evangelist",
+			kind  : 'monster',
+			call: SceneLib.lake.fetishCultistScene.fetishCultistHMEncounter
+		}, {
+			name: "fetishpriest",
+			label : "F.Priest",
+			kind  : 'monster',
+			call: SceneLib.lake.fetishZealotScene.zealotHighMountains
+		}, {
             name: "nekobakeInn",
 			label : "Nekobake Inn",
 			kind  : 'place',
@@ -157,7 +167,7 @@ public class HighMountains extends BaseContent {
 
     //Explore High Mountain
     public function exploreHighMountain():void {
-        explorer.prepareArea(highMountainsEncounter, 0.1, 3);
+        explorer.prepareArea(highMountainsEncounter);
         explorer.setTags("mountain","highMountain");
         explorer.prompt = "You explore the high mountains.";
         explorer.onEncounter = function(e:ExplorationEntry):void {

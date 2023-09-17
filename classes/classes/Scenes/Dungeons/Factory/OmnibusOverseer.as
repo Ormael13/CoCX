@@ -111,7 +111,7 @@ public class OmnibusOverseer extends Monster
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: lustAura, type: ABILITY_TEASE, range: RANGE_SELF, tags:[]},
 				{ call: milkAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
-			]
+			];
 			this.wings.type = Wings.BAT_LIKE_TINY;
 			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;

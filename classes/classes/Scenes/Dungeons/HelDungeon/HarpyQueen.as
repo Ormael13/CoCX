@@ -136,7 +136,7 @@ public class HarpyQueen extends Monster
 				{ call: lustSpikeAttack, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
 				{ call: windSlamAttack, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[]},
 				{ call: whitefire, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FIRE], condition: function():Boolean { return mana >= spellCostWhitefire }}
-			]
+			];
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Mage, 0, 0, 0, 0);

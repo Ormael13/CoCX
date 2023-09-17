@@ -25,6 +25,7 @@ import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Dungeons.RiverDungeon.TwinBosses;
 import classes.Scenes.Monsters.AngelLR;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
@@ -550,9 +551,13 @@ public class CombatUI extends BaseCombatContent {
 					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
 					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
 				}
-				else if (monster is AngelLR) {
+				else if (monster is AngelLR && player.hasStatusEffect(StatusEffects.SoulArena)) {
 					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelperIL);
 					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of second angel!");
+				}
+				else if (monster is TwinBosses) {
+					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.dungeons.riverdungeon.dishHelperTB);
+					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of other twin!");
 				}
 				else if (monster is Lethice) {
 					var lethice:Lethice = monster as Lethice;

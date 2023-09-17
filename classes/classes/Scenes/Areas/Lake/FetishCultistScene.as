@@ -31,16 +31,32 @@ public class FetishCultistScene extends AbstractLakeContent
 			clearOutput();
 			outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
+			flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] = 0;
 			startCombat(new FetishCultist());
 			spriteSelect(SpriteDb.s_fetish_cultist);
 			doNext(playerMenu);
+		}
+		public function fetishCultistHMEncounter():void
+		{
+			clearOutput();
+			outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
+			flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] = 3;
+			startCombat(new FetishCultist());
+			spriteSelect(SpriteDb.s_fetish_cultist);
+			doNext(playerMenu);
+		}
+		private function cname():String
+		{
+			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 3) return "evangelist";
+			else return "cultist";
 		}
 
 		public function cultistRapesYou():void
 		{
 			monster.lust = 1;
 			monster.HP = 10;
-			outputText("The thoughts of fetishes have become so strong that they override everything else.  You see the cultist moving towards you, but you can't possibly fight anymore.  She reaches out and touches you, and you fall to the ground as the multitudes of thoughts cascade into one.\n\n");
+			outputText("The thoughts of fetishes have become so strong that they override everything else.  You see the "+cname()+" moving towards you, but you can't possibly fight anymore.  She reaches out and touches you, and you fall to the ground as the multitudes of thoughts cascade into one.\n\n");
 			if (sceneHunter.lossSelect) {
 				//cool selector
 				menu();
@@ -174,7 +190,7 @@ public class FetishCultistScene extends AbstractLakeContent
 
 			function nurse():void {
 				clearOutput();
-				outputText("You stand up and look over at the cultist. She is now wearing a nurse's uniform with bared breasts.  You notice that your [armor] changed into a bizarre cross between a patient's gown and a collection of black straps with buckles.  While tight in some places, it doesn't hinder your movement or hide your more sexual parts at all.");
+				outputText("You stand up and look over at the "+cname()+". She is now wearing a nurse's uniform with bared breasts.  You notice that your [armor] changed into a bizarre cross between a patient's gown and a collection of black straps with buckles.  While tight in some places, it doesn't hinder your movement or hide your more sexual parts at all.");
 				if (player.isTaur()) {
 					outputText("  It also dawns to your fogged mind that you now have a human-looking lower body, though your sexual organs are unchanged.");
 					if (player.cockTotal() > 0) outputText("  As you see your [cocks], 'incredibly large' is the only qualifier you can think of.");
@@ -382,7 +398,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			if (player.inte <= 10 && rand(2) == 0) cultistBadEnd();
 			//(ending after all cultist rape scenes)
 			else {
-				outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the cultist that you saw earlier.  ");
+				outputText("A few hours later your mind finally returns to reality.  You look around, but can see no sign of the "+cname()+" that you saw earlier.  ");
 				if (player.armor == armors.C_CLOTH) outputText("You find your [armor] back on your body with no sign of the strange clothes you were wearing before.  ");
 				else outputText("You are still wearing the [armor] that she gave you, and there is no sign of your old clothes.  ");
 				outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
@@ -408,7 +424,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			else outputText("manage to get your monster cock further and further inside her.  To your immense shock, she manages to take the whole thing, without it seeming to warp her body at all!");
 			outputText("  Her slick interior seems to fit your shaft perfectly, and with the way she is squirming around you, you're getting one hell of a ride.\n\n");
 
-			outputText("After all the foreplay, the two of you are already reaching your peaks thanks to her incredible, tight cunt and its ministrations to your member.  The cultist is screaming in pleasure, telling you to look at her, to fondle her, and to fuck her; you happily oblige her.  Her interior contracts about your " + cockDescript(x) + " as you loose the proof of your orgasm deep inside her.");
+			outputText("After all the foreplay, the two of you are already reaching your peaks thanks to her incredible, tight cunt and its ministrations to your member.  The "+cname()+" is screaming in pleasure, telling you to look at her, to fondle her, and to fuck her; you happily oblige her.  Her interior contracts about your " + cockDescript(x) + " as you loose the proof of your orgasm deep inside her.");
 			if (player.cockTotal() > 1) {
 				outputText("  Your remaining cock");
 				if (player.cockTotal() == 2) outputText(" lets loose its load");
@@ -421,7 +437,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			}
 			outputText("\n\n");
 
-			outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The cultist, on the other hand, collapses in a quivering pile of pleasure on the ground.");
+			outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The "+cname()+", on the other hand, collapses in a quivering pile of pleasure on the ground.");
 			//set PC's lust to minimum
 			player.sexReward("vaginalFluids","Dick");
 			cleanupAfterCombat();
@@ -431,7 +447,7 @@ public class FetishCultistScene extends AbstractLakeContent
 		private function swimsuitVibrators():void
 		{
 			clearOutput();
-			outputText("You suggest that you're interested in trying the vaginal vibrators she offered.  The cultist nods, and turns to face you holding two surprisingly large toys in her hands.  They're shaped like a long tube, with a small arm on the side near the handle that points towards the end.  You aren't sure where they came from, but you'd guess she used the same magic that she uses to shift her clothing to get them.\n\n");
+			outputText("You suggest that you're interested in trying the vaginal vibrators she offered.  The "+cname()+" nods, and turns to face you holding two surprisingly large toys in her hands.  They're shaped like a long tube, with a small arm on the side near the handle that points towards the end.  You aren't sure where they came from, but you'd guess she used the same magic that she uses to shift her clothing to get them.\n\n");
 			//if (player.vaginalCapacity() <= 30) {//PC does not have a very loose or looser vagina)
 			//reverted to looseness check for now
 			if (player.looseness() <= VaginaClass.LOOSENESS_LOOSE) {
@@ -440,8 +456,8 @@ public class FetishCultistScene extends AbstractLakeContent
 				outputText("You certainly aren't going to be the one to saying no to some fun, so you tell the girl to get to it.  She giggles and hands you one of the massive vibrators before stepping away from you and activating her own, sensually rubbing the vibrating instrument against the small strap over her nether lips.  She gives a loud exaggerated moan from the stimulation and smiles at you lewdly.  She then uses her free hand to slip her suit to the side and pushes the oversized toy up to the arm inside her, making sure to put the arm onto her engorged clitoris, continuing to moan the whole way.\n\n");
 				//end section
 
-				outputText("The cultist lets go of the toy inside her and saunters over to you, her hips swinging, moaning the whole way.  She takes the device she handed you earlier and activates it.  \"<i>Here we go!</i>\" she says as ");
-				outputText("she puts the vibrating toy to the entrance to your " + vaginaDescript(0) + ".  The next instant leaves you on your back as the cultist roughly shoves the thing inside you, forcing you to painfully stretch around the toy.");
+				outputText("The "+cname()+" lets go of the toy inside her and saunters over to you, her hips swinging, moaning the whole way.  She takes the device she handed you earlier and activates it.  \"<i>Here we go!</i>\" she says as ");
+				outputText("she puts the vibrating toy to the entrance to your " + vaginaDescript(0) + ".  The next instant leaves you on your back as the "+cname()+" roughly shoves the thing inside you, forcing you to painfully stretch around the toy.");
 				//if (PC was a virgin)
 				if (player.vaginas[0].virgin) {
 					outputText("\n\n<b>Hell of a way to lose your virginity.</b>\n\n");
@@ -451,7 +467,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					player.cuntChange(50, true, true, false);
 					outputText("\n\n");
 				}
-				outputText("For hours, you're left on the ground writhing in pain and pleasure from the cultist roughly forcing the false cock in and out of you while she moans with pleasure around the quivering shaft inside her.  The sensations are too much for you, and you can do nothing but just lie there and take it.  The cultist brings you to multiple orgasms before you finally pass out from the pain and overstimulation.");
+				outputText("For hours, you're left on the ground writhing in pain and pleasure from the "+cname()+" roughly forcing the false cock in and out of you while she moans with pleasure around the quivering shaft inside her.  The sensations are too much for you, and you can do nothing but just lie there and take it.  The "+cname()+" brings you to multiple orgasms before you finally pass out from the pain and overstimulation.");
 				//victory becomes a defeat, even event
 				hideUpDown();
 				monster.lust = 98;
@@ -464,22 +480,22 @@ public class FetishCultistScene extends AbstractLakeContent
 			}
 			else {
 				sceneHunter.print("Check passed (?): loose vagina");
-				outputText("You're quite pleased with the size of the toy, it should fit inside your \"trained\" vagina quite well.  You inform the cultist at your pleasure of the toys she has presented.  She nods to you vigorously and hands you one of them, then she slips the strap that blocks her waiting cunny and moves the toy to the entrance.  She smiles at you and you nod back, putting the tip of the toy she handed to you to your waiting lips as well.\n\n");
+				outputText("You're quite pleased with the size of the toy, it should fit inside your \"trained\" vagina quite well.  You inform the "+cname()+" at your pleasure of the toys she has presented.  She nods to you vigorously and hands you one of them, then she slips the strap that blocks her waiting cunny and moves the toy to the entrance.  She smiles at you and you nod back, putting the tip of the toy she handed to you to your waiting lips as well.\n\n");
 
-				outputText("The cultist shows you how to activate the toy and they hum to life.  Quivering slightly, the two of you push the vibrating toys deep inside of yourselves.  The feeling of the toy filling up your " + vaginaDescript(0) + " is quite an experience.  ");
+				outputText("The "+cname()+" shows you how to activate the toy and they hum to life.  Quivering slightly, the two of you push the vibrating toys deep inside of yourselves.  The feeling of the toy filling up your " + vaginaDescript(0) + " is quite an experience.  ");
 				if (player.vaginalCapacity() < 75) outputText("It takes some effort to get it inside you, but is well worth the effort.");
 				else outputText("It easily slips inside your well-stretched hole.");
-				outputText("  The cultist giggles at you and then starts to moan in an exaggerated manner from the feeling of being filled.  You can't help but let out your own (albeit less exaggerated) moan of pleasure when the arm comes into contact with your " + clitDescript() + ".  If feels so damn good having this massive false cock firmly clamped inside your " + vaginaDescript(0) + " as it wriggles and jiggles around inside you, and its arm teases your clit...");
+				outputText("  The "+cname()+" giggles at you and then starts to moan in an exaggerated manner from the feeling of being filled.  You can't help but let out your own (albeit less exaggerated) moan of pleasure when the arm comes into contact with your " + clitDescript() + ".  If feels so damn good having this massive false cock firmly clamped inside your " + vaginaDescript(0) + " as it wriggles and jiggles around inside you, and its arm teases your clit...");
 				player.cuntChange(50, true, true, false);
 				outputText("\n\n");
 
-				outputText("\"<i>Oh wow, you're totally loving this, even though you just put it inside you!</i>\" the cultist squeals with glee.  \"<i>Just wait, it gets better,</i>\" she continues, taking a firm grip on the handle again while playing with her breasts with her free hand.  She starts to twist the toy around a bit, and then starts to pull it in and out.  You mimic her motions, wondering what might make this even better.  You soon realize just what she was getting at, and are surprised when the sensations start to make you squeal with glee as well.\n\n");
+				outputText("\"<i>Oh wow, you're totally loving this, even though you just put it inside you!</i>\" the "+cname()+" squeals with glee.  \"<i>Just wait, it gets better,</i>\" she continues, taking a firm grip on the handle again while playing with her breasts with her free hand.  She starts to twist the toy around a bit, and then starts to pull it in and out.  You mimic her motions, wondering what might make this even better.  You soon realize just what she was getting at, and are surprised when the sensations start to make you squeal with glee as well.\n\n");
 
 				outputText("It doesn't take much longer for you to let loose the proof of your orgasm onto the magically humming rod between your legs.  At the same time, you suddenly feel a cool liquid spray the inside of the furnace that is your " + vaginaDescript(0) + " and the vibrator spills out of you along with ");
 				if (player.wetness() < 3) outputText("a trickle");
 				else if (player.wetness() <= 4) outputText("a wave");
 				else outputText("a torrent");
-				outputText(" of your lady juices.  You shudder for a moment and look down at it on the ground.  It seems to have, deflated a bit?  There is a clear fluid flowing out of the top of the toy.  A thump sound brings the cultist back to your attention, but only briefly as you see she is writhing on the ground in pleasure from the toy still inside her.  You shake your head and get dressed again.");
+				outputText(" of your lady juices.  You shudder for a moment and look down at it on the ground.  It seems to have, deflated a bit?  There is a clear fluid flowing out of the top of the toy.  A thump sound brings the "+cname()+" back to your attention, but only briefly as you see she is writhing on the ground in pleasure from the toy still inside her.  You shake your head and get dressed again.");
 				//end scene
 				player.sexReward("Default","Default",true,false);
 				dynStats("lib", 1, "sen", -3);
@@ -499,22 +515,22 @@ public class FetishCultistScene extends AbstractLakeContent
 			clearOutput();
 			outputText("On a hill sits a large cathedral overlooking a river that feeds into a massive lake.  It is a surprisingly grand structure in a land almost devoid of any signs of civilization in any direction.  The design is quite clear; its entrance lined with statues of lewd naked figures and its windows are made of stain glass depicting acts of sexuality.  Even without hearing the sounds of ecstasy that usually emanate from inside, it is quite clear this is a place of debauchery.\n\n");
 			outputText("Within, a ");
-			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + ", who was once a champion, and the fetish cultist who corrupted [him] step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n");
+			outputText(genderTag + " sits in the confessional.  It is clear this " + genderTag + "'s mind is devoid of conscious thoughts, but they have a clear purpose.  Feelings of anticipation and need surround this person as they open their mouth.  \"<i>Holy mother,</i>\" they speak to the woman sitting across from them with apprehension,\"<i>I have such strange thoughts and needs, they arouse me in ways that they probably shouldn't.  Is there anywhere where I can find my place?</i>\"\n\n\"<i>It's quite all right.</i>\" she replies.  \"<i>This is a sanctuary to those who have desires that others would call strange or bizarre, we welcome any who share our needs.  All that we ask is that you be willing to share those desires with those that you find.</i>\"  The other brightens and says, \"<i>Of course, I would love nothing more!</i>\"  The " + player.mf("man", "woman") + ", who was once a champion, and the fetish "+cname()+" who corrupted [him] step out of the confessional, and soon the sounds of a massive orgy can be heard from the cathedral, as the followers of the fetish welcome their new member.\n\n");
 
 			outputText("Your mind has fallen prey to the followers of the fetish, and you are now one yourself.  You have completely forgotten who or what you were, including why you came to this world in the first place.  Perhaps the next champion will not lose their sense of self so easily.");
 			EventParser.gameOver();
 		}
 
 		public function cultistDefeated():void{
-			if (monster.HP < 1) outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.");
-			else outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.");
+			if (monster.HP < 1) outputText("Hurt too much to continue controlling her powers, the "+cname()+" collapses helplessly.");
+			else outputText("Overwhelmed by her lusts, the "+cname()+" loses the ability to control herself and collapses.");
 			if (player.lust >= 33) {
 				outputText("\n\nDo you want to take advantage of her vulnerable state to sate your lusts?");
 				menu();
 				addButtonIfTrue(0, "Yes", playerRapesCultist, "Not genderless!", player.gender > 0);
 				addButtonIfTrue(2, "B.Feed", fetishCultistHasAMilkFetish,"Req. 'Feeder' perk",
 					player.hasStatusEffect(StatusEffects.Feeder),"Empty your heavy jugs.");
-				addButtonIfTrue(3, "Mindbreak", mindbreakFemaleCultist, "You don't know how and why... yet?", Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB, "Toy with the cultist's brain.");
+				addButtonIfTrue(3, "Mindbreak", mindbreakFemaleCultist, "You don't know how and why... yet?", Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB, "Toy with the "+cname()+"'s brain.");
 				addButton(4, "Convert Elf", SceneLib.woodElves.CaptureCultist).hint("Take the slut to the Sacred Tree to become a new sister!").disableIf(!player.isWoodElf(), "Wood elves only!");
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(cultistDefeated);
@@ -528,7 +544,7 @@ public class FetishCultistScene extends AbstractLakeContent
 		public function playerRapesCultist():void
 		{
 			clearOutput();
-			sceneHunter.print("FYI, the outcome depends on the cultist's clothing.");
+			sceneHunter.print("FYI, the outcome depends on the "+cname()+"'s clothing.");
 			if (monster.armorName == "pervy nun's clothing")
 				nunPlay();
 			else if (monster.armorName == "swimsuit")
@@ -537,11 +553,11 @@ public class FetishCultistScene extends AbstractLakeContent
 
 			//=================================================================
 			function nunPlay():void {
-				outputText("You see that the cultist's outfit has fixed on a naughty nun outfit with specially placed holes over her sexual parts.  As you get close to her, she goes down on her hands and knees and says to you, \"<i>Mighty sex god, who have shown me your power; please, take my body!</i>\"\n\n");
+				outputText("You see that the "+cname()+"'s outfit has fixed on a naughty nun outfit with specially placed holes over her sexual parts.  As you get close to her, she goes down on her hands and knees and says to you, \"<i>Mighty sex god, who have shown me your power; please, take my body!</i>\"\n\n");
 				if (player.cor < 40) outputText("You are rather taken aback by this odd declaration, but in the end you decide: <i>what the hell, I'm horny.</i>\n\n");
 				else outputText("You nod to yourself thinking: <i>that's right, I am a sex god.</i>\n\n");
 				outputText("You stride over to her and loosen your [armor] and let them drop to the ground before sitting down in front of her.  \"<i>Show me your affections, then maybe I'll be willing to take you,</i>\" you tell her.  She looks over your naked body with a sort of reverence before bowing her head and saying, \"<i>Of course my lord.</i>\"  With that, she gets to work on you.\n\n");
-				outputText("She takes one of your arms and begins kissing it, from your shoulder to your hand.  Each kiss sends a short quiver of pleasure through you, one you could swear the cultist was also feeling.  When she gets to your hands she kisses each of your fingers, then takes each one into her mouth in turn, sucking on them and licking them with passion.  Her lustful acts are intense, and you can feel yourself getting close to your peak, just from her playing with your fingers.  With a shudder from the sensations, you haltingly tell her, \"<i>Good, now the other arm.</i>\"  With no hesitation, she complies.  Before too long, the fingers on your other hand are being teased and cleaned by her mouth, and again you are brought to the brink.  You shakily pull your hand back and tell her that she has done enough; you are willing to take her now.\n\n");
+				outputText("She takes one of your arms and begins kissing it, from your shoulder to your hand.  Each kiss sends a short quiver of pleasure through you, one you could swear the "+cname()+" was also feeling.  When she gets to your hands she kisses each of your fingers, then takes each one into her mouth in turn, sucking on them and licking them with passion.  Her lustful acts are intense, and you can feel yourself getting close to your peak, just from her playing with your fingers.  With a shudder from the sensations, you haltingly tell her, \"<i>Good, now the other arm.</i>\"  With no hesitation, she complies.  Before too long, the fingers on your other hand are being teased and cleaned by her mouth, and again you are brought to the brink.  You shakily pull your hand back and tell her that she has done enough; you are willing to take her now.\n\n");
 				sceneHunter.selectGender(dickF, player.isTaur() ? vagTaurF : vagF, null, null, 0);
 
 				function dickF():void {
@@ -563,29 +579,29 @@ public class FetishCultistScene extends AbstractLakeContent
 						}
 						else outputText(".  ");
 					}
-					outputText("Fully inside her, you begin to fuck her in earnest, and her eager moans soon fill the air.  Within moments the cultist climaxes unexpectedly quickly, and the feeling soon rushes through you as well, culminating in an incredibly huge orgasm that shakes your whole body. You ejaculate deep into her welcoming cunt, filling it up completely");
+					outputText("Fully inside her, you begin to fuck her in earnest, and her eager moans soon fill the air.  Within moments the "+cname()+" climaxes unexpectedly quickly, and the feeling soon rushes through you as well, culminating in an incredibly huge orgasm that shakes your whole body. You ejaculate deep into her welcoming cunt, filling it up completely");
 					if (player.cumQ() < 50) outputText(".");
 					if (player.cumQ() >= 50 && player.cumQ() < 200) outputText(" before streams of cum begin to run down her thighs.");
 					if (player.cumQ() >= 200) outputText(" before torrents of cum begin to run down her legs and onto the ground.");
-					outputText("  You pull out, and the cultist slumps onto the ground contentedly, massaging her well-fucked, cum-filled pussy.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
+					outputText("  You pull out, and the "+cname()+" slumps onto the ground contentedly, massaging her well-fucked, cum-filled pussy.  Looking at the "+cname()+" you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
 					player.sexReward("vaginalFluids", "Dick");
 					sharedEnd();
 				}
 				//(if player has a vagina)
 				function vagF():void {
 					sceneHunter.print("Check failed: taur lower body");
-					outputText("She meekly lies back on the ground and spreads her legs, one slightly in the air.  You have a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please scissor me!</i>\" she begs you.  You stand and stride over to her. \"<i>Yes little girl, accept my divine lips on your pussy,</i>\" you reply.  You grab the leg she had in the air and pull yourself between her legs, pressing your " + vaginaDescript(0) + " against her own.  With a firm tug on her leg, you begin to push and rub your pussies together in earnest, and her eager moans soon fill the air.  The cultist climaxes unexpectedly quickly, and the feeling soon rushes through you as well.  You pull back, and the cultist slumps onto the ground contentedly.  Looking at the cultist you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
+					outputText("She meekly lies back on the ground and spreads her legs, one slightly in the air.  You have a clear view of her needy hole through the large opening in her clothing.  \"<i>My lord, please scissor me!</i>\" she begs you.  You stand and stride over to her. \"<i>Yes little girl, accept my divine lips on your pussy,</i>\" you reply.  You grab the leg she had in the air and pull yourself between her legs, pressing your " + vaginaDescript(0) + " against her own.  With a firm tug on her leg, you begin to push and rub your pussies together in earnest, and her eager moans soon fill the air.  The "+cname()+" climaxes unexpectedly quickly, and the feeling soon rushes through you as well.  You pull back, and the "+cname()+" slumps onto the ground contentedly.  Looking at the "+cname()+" you wonder if she was able to make you spontaneously orgasm just from having an orgasm herself, or if she has the power of a real sex god?\n\n");
 					player.sexReward("vaginalFluids", "Vaginal");
 					sharedEnd();
 				}
 				//Horsey
 				function vagTaurF():void {
-					outputText("She meekly looks at your bestial lower body, obviously unused to it, and tentatively asks if she can lick your pussy. Smiling, you present your buttocks to her and say, \"<i>Yes little girl, you can pleasure my divine lips with your tongue.</i>\" She happily gets to it, and you hear eager licking and sucking sounds as a warmth diffuses in your nether parts. She sure knows how to handle a cunt, and you find yourself cumming very quickly, as an incredibly huge orgasm shakes your whole body, sending girl-cum all over her face. You turn around and see the cultist with a look of utter bliss on her face, as if she's just been blessed.  You wonder from the quality of the orgasm she just gave you if she has the power of a real sex god.\n\n");
+					outputText("She meekly looks at your bestial lower body, obviously unused to it, and tentatively asks if she can lick your pussy. Smiling, you present your buttocks to her and say, \"<i>Yes little girl, you can pleasure my divine lips with your tongue.</i>\" She happily gets to it, and you hear eager licking and sucking sounds as a warmth diffuses in your nether parts. She sure knows how to handle a cunt, and you find yourself cumming very quickly, as an incredibly huge orgasm shakes your whole body, sending girl-cum all over her face. You turn around and see the "+cname()+" with a look of utter bliss on her face, as if she's just been blessed.  You wonder from the quality of the orgasm she just gave you if she has the power of a real sex god.\n\n");
 					player.sexReward("saliva", "Vaginal");
 					sharedEnd();
 				}
 				function sharedEnd():void {
-					outputText("You get dressed and notice that the cultist is still lying on the ground in the perverted nun outfit, with a look of utter bliss on her face.  ");
+					outputText("You get dressed and notice that the "+cname()+" is still lying on the ground in the perverted nun outfit, with a look of utter bliss on her face.  ");
 					outputText("Satisfied, you continue on your way.");
 					cleanupAfterCombat();
 				}
@@ -594,7 +610,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			function swimsuitPlay():void {
 				//(scene requires that the PC not be genderless)
 				//foreplay
-				outputText("You advance on the defeated cultist, whose outfit seems to have fixated on such a ridiculously skimpy swimming suit that she might as well be naked.  She looks up at you with a worried expression as you take a closer look at her.  The cultist slowly starts to speak, \"\"<i>Ah, hey there " + player.mf("mister", "miss") + ", what a surprise to see you here!</i>\"  Embarrassed, she tries to make her incredibly revealing swimming suit somewhat less obscene while blushing furiously.  \"<i>Oh mercy me, just thinking about how much of me that you can see is turning me on.</i>\"  You arch an eyebrow: is this girl an exhibitionist?\n\n");
+				outputText("You advance on the defeated "+cname()+", whose outfit seems to have fixated on such a ridiculously skimpy swimming suit that she might as well be naked.  She looks up at you with a worried expression as you take a closer look at her.  The "+cname()+" slowly starts to speak, \"\"<i>Ah, hey there " + player.mf("mister", "miss") + ", what a surprise to see you here!</i>\"  Embarrassed, she tries to make her incredibly revealing swimming suit somewhat less obscene while blushing furiously.  \"<i>Oh mercy me, just thinking about how much of me that you can see is turning me on.</i>\"  You arch an eyebrow: is this girl an exhibitionist?\n\n");
 
 				outputText("You slowly ask her why, if she likes it so much, is she covering herself up?  She looks around a little nervously for a moment before pulling her hands away and giving you a good look at her body.  You see her breathing becoming more rapid.  \"<i>Oh fuck yeah, look at me in this slutty outfit,</i>\" she says, starting to shiver.  She giggles and does a stretch while \"accidentally\" getting part of her suit to slip off.  \"<i>Oops, you can totally see my nipple now, can't you?</i>\" she says breathlessly, her crotch now visibly soaked with her arousal.\n\n");
 				//if (PC is an exhibitionist)
@@ -608,7 +624,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				//end of the foreplay
 
 				//sex to be written here
-				outputText("The cultist turns around, presenting her rear end to you, looking over her shoulder.  ");
+				outputText("The "+cname()+" turns around, presenting her rear end to you, looking over her shoulder.  ");
 				if (player.hasCock()) {
 					outputText("Her eyes lock onto your very erect maleness.  \"<i>I got that thing that hard?  Oh fuck yes!</i>\"  She wraps her arms around her body and rocks back and forth.  ");
 					//if (PC has a vagina)
@@ -629,7 +645,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			}
 
 			function regularPlay():void {
-				outputText("You see that the cultist's outfit has fixed on what looks remarkably similar to a farmhand from your village.  Filled with desire, you approach her.  She cries out in fear and says \"<i>Please don't hurt me!  Even though I knew there were bandits coming, I couldn't leave my mother behind.  Take whatever you want, I won't get in your way, but please leave us alone!</i>\"\n\n");
+				outputText("You see that the "+cname()+"'s outfit has fixed on what looks remarkably similar to a farmhand from your village.  Filled with desire, you approach her.  She cries out in fear and says \"<i>Please don't hurt me!  Even though I knew there were bandits coming, I couldn't leave my mother behind.  Take whatever you want, I won't get in your way, but please leave us alone!</i>\"\n\n");
 				if (player.cor < 40) outputText("You stop, thinking that maybe you should let her go, but she grabs your hand and gives you a look of desperation.  Deciding to finish the job, you push her to her knees, and the look of fear returns to her face.  ");
 				else outputText("With a wicked smile, you push her to her knees.  ");
 				if (player.gender == 0) {
@@ -645,7 +661,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					//[if not corrupted]
 					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror, and her body becomes completely tense.  As you move back to her, her body relaxes, and her expression returns to the tear-stricken face.  Obviously this is an act, and she would be far more bothered by you if you left her without finishing the job.  ");
 					outputText("Filled with new determination, you push your [cock] into her love hole and start to rape her roughly.  Despite the tears, she starts moaning, clearly enjoying the rough treatment.  A little while into the rape, she starts to move against you, almost lovingly.  It is quite clear that she has a lot of experience, but is giving you free rein to do whatever you want.   Feeling in complete control, you decide that this game isn't too bad.  Before long you reach your orgasm, and you blow your load deep inside her.");
-					outputText("\n\nYou get dressed and notice that the cultist is still lying on the ground with her farm hand outfit torn from her, with a look of utter bliss on her face.  Satisfied, you continue on your way.");
+					outputText("\n\nYou get dressed and notice that the "+cname()+" is still lying on the ground with her farm hand outfit torn from her, with a look of utter bliss on her face.  Satisfied, you continue on your way.");
 					player.sexReward("vaginalFluids","Dick");
 					cleanupAfterCombat();
 				}
@@ -654,7 +670,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					outputText("She screams for help and starts struggling against your grip, but you tell her that no one is going to save her now.  You feel her tongue go in, and she hesitantly gives a lick.  You pull her head back by the hair and look into her eyes.  She is crying!  ");
 					if (player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror, and her body becomes completely tense.  As you move back to her, her body relaxes, and her expression returns to the tear stricken face.  Obviously this is an act, and she would be far more bothered by you if you left her without finishing the job.  ");
 					outputText("With new determination, you yell at her to lick harder, and to push in as much as she can, or her mother will die.  This time when she starts licking you, she does it almost lovingly.  It is quite clear that she has a lot of experience and, regardless of her words, she obviously wants this.  Feeling in complete control, you think that this game isn't too bad.  Under her expert flicks, you quickly reach a climax.  You pull her head back and tell her that now she has to clean you up.  You specify that she can't just lick this time, she has to drink your excretions.\n\n");
-					outputText("A few minutes later, you close your [armor] back up, and look back at the cultist.  She is lying on the ground in her farm hand outfit with a look of utter bliss on her face.  Satisfied, you continue on your way.");
+					outputText("A few minutes later, you close your [armor] back up, and look back at the "+cname()+".  She is lying on the ground in her farm hand outfit with a look of utter bliss on her face.  Satisfied, you continue on your way.");
 					player.sexReward("saliva","Vaginal");
 					cleanupAfterCombat();
 				}
@@ -664,13 +680,13 @@ public class FetishCultistScene extends AbstractLakeContent
 		public function fetishCultistHasAMilkFetish():void
 		{
 			clearOutput();
-			outputText("You remove your [armor], standing naked in front of the beaten fetish-girl with your lactating " + breastDescript(0) + " dripping milk. You pick the cultist up and sit down on the ground with her resting on your lap, her soft warm ass up against your thighs. You hold the nipple up to her mouth; she suckles on it without the slightest sign of rebellion.\n\n");
+			outputText("You remove your [armor], standing naked in front of the beaten fetish-girl with your lactating " + breastDescript(0) + " dripping milk. You pick the "+cname()+" up and sit down on the ground with her resting on your lap, her soft warm ass up against your thighs. You hold the nipple up to her mouth; she suckles on it without the slightest sign of rebellion.\n\n");
 
-			outputText("Minutes later, the landscape around you slowly changes into a cozy cabin. There's a fireplace with a bear rug in front of it, and you're on a rocking chair in the corner with the Cultist on your lap, still nursing from your breasts. She has a bonnet on with two long black pigtails falling down her milky white body. A black lacy thong is barely covering her pussy with the back string disappearing between her two pleasant cheeks. Black & white striped knee socks cover her legs. Her grateful eyes look up at you, and you notice that they have black eyeliner on that makes her hazel eyes pop like fire.\n\n");
+			outputText("Minutes later, the landscape around you slowly changes into a cozy cabin. There's a fireplace with a bear rug in front of it, and you're on a rocking chair in the corner with the "+cname()+" on your lap, still nursing from your breasts. She has a bonnet on with two long black pigtails falling down her milky white body. A black lacy thong is barely covering her pussy with the back string disappearing between her two pleasant cheeks. Black & white striped knee socks cover her legs. Her grateful eyes look up at you, and you notice that they have black eyeliner on that makes her hazel eyes pop like fire.\n\n");
 
 			outputText("\"<i>Thank you [Master] for letting me have some of your special milk after doing all my chores.</i>\"\n\n");
 
-			outputText("What is she talking about? [Master]? Chores? What the hell is going on? Your mind races with confusion as you try to figure out what's happening. The scene around you then changes back to the lake. The cultist, who looks like she normally would, sees your confusion.\n\n");
+			outputText("What is she talking about? [Master]? Chores? What the hell is going on? Your mind races with confusion as you try to figure out what's happening. The scene around you then changes back to the lake. The "+cname()+", who looks like she normally would, sees your confusion.\n\n");
 
 			outputText("\"<i>Zee merechaing ong?</i>\"\n\n");
 
@@ -678,7 +694,7 @@ public class FetishCultistScene extends AbstractLakeContent
 
 			outputText("\"<i>Ummmmm... no? Please return to your reward.</i>\"\n\n");
 
-			outputText("The cultist girl continues to nurse; this relaxes your mind a little and everything slowly changes back to the cozy cabin. You look around the cabin; it becomes a transparent mix with the lake whenever you concentrate on a single detail, you can make out a maid outfit thrown on the floor and two milk filled buckets on a table. Your surveying ends when the cultist begins taking deep hard suckles and circles your nipple with her tongue before lightly biting it. Her hand is playing with your other boob, wobbling and squeezing it like it was some toy.\n\n");
+			outputText("The "+cname()+" girl continues to nurse; this relaxes your mind a little and everything slowly changes back to the cozy cabin. You look around the cabin; it becomes a transparent mix with the lake whenever you concentrate on a single detail, you can make out a maid outfit thrown on the floor and two milk filled buckets on a table. Your surveying ends when the "+cname()+" begins taking deep hard suckles and circles your nipple with her tongue before lightly biting it. Her hand is playing with your other boob, wobbling and squeezing it like it was some toy.\n\n");
 
 			outputText("Soon her thong becomes wet with arousal, and her mouth comes off your " + nippleDescript(0) + " to ask, \"<i>Please [Master], will you fix the aching in my loins?</i>\"\n\n");
 
@@ -697,7 +713,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			//[Genderless]
 			else outputText("Your entire body tenses up, like you're approaching an orgasm. The release of this tension flows through your body as she cums into the palm of your hand. You sigh with relief as the phantom orgasm lingers.\n\n");
 
-			outputText("You both keep playing with each other as you moan with ecstasy, having one orgasm after the other. You and the cultist stop after the 10th simultaneous climax, both of you soaked with milk, spit, cum, and sweat. The cultist cuddles up to you and falls asleep, smelling of sex. You sit her down on the rocking chair and make your way out of the fantasy. It's difficult, as if each orgasm made the fantasy more and more real to you.  You focus hard... ");
+			outputText("You both keep playing with each other as you moan with ecstasy, having one orgasm after the other. You and the "+cname()+" stop after the 10th simultaneous climax, both of you soaked with milk, spit, cum, and sweat. The "+cname()+" cuddles up to you and falls asleep, smelling of sex. You sit her down on the rocking chair and make your way out of the fantasy. It's difficult, as if each orgasm made the fantasy more and more real to you.  You focus hard... ");
 			//[Low Int]
 			if (player.inte < 33) {
 				outputText("but nothing happens. You even try to open the door of the cabin, but it's locked. You poke around, when a brilliant idea comes to you. You place your hand in your mouth and bite down hard. The intense pain brings you back to reality.  ");
@@ -711,7 +727,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			//[High Int]
 			else outputText("and everything goes back to normal.  ");
 
-			outputText("You see the cultist is sleeping on the ground, still in the fantasy she created.");
+			outputText("You see the "+cname()+" is sleeping on the ground, still in the fantasy she created.");
 			//set lust to 0, increase sensitivity slightly
 			player.sexReward("Default","Default",true,false);
 			dynStats("lib", .2);
@@ -727,7 +743,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			outputText("She looks quite desperate for a fuck already." +
 					" It wouldn’t be too hard to just rape her and go back to your things, but why rape when you can enslave and convert her already weak mind to the will of the sorority?" +
 					" Leaving her to the Church of the Fetish would be a shame, especially because of how easy it would be to break those attachments and make her switch her allegiance." +
-					"\n\nYou pull in the fetish cultist for a surprise kiss, which takes her entirely off guard, and you use this distraction to slide your tentacles inside her head." +
+					"\n\nYou pull in the fetish "+cname()+" for a surprise kiss, which takes her entirely off guard, and you use this distraction to slide your tentacles inside her head." +
 					" While the Church of the Fetish is clearly great at brainwashing, you’re even better, and you start to remodel her thoughts and desires into a more appropriate form." +
 					"\n\n\"<i>What is loud smell beautiful blue happened? AAahn I am banana!</i>\"" +
 					"\n\nTurning her into a subservient slut who lives only to have her brain fucked and get fucked by you, or those you dictate proves to be almost too easy." +

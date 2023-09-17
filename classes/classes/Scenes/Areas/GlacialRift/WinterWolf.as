@@ -130,7 +130,7 @@ public class WinterWolf extends Monster
 				{ call: wolfHold, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: function():Boolean { return player.tallness < 96 && !player.hasStatusEffect(StatusEffects.WolfHold) } },
 				{ call: paw, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: function():Boolean { return player.tallness < 72 && !hasStatusEffect(StatusEffects.AbilityCooldown1) } },
 				{ call: frostbite, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_ICE], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.WolfHold) }, weight:Infinity },
-			]
+			];
 			checkMonster();
 		}
 

@@ -185,7 +185,7 @@ use namespace CoC;
 				{ call: gooThrow, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_FLUID,TAG_ACID]},
 				{ call: darkslimeMagic, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FLUID,TAG_ACID]},
 				{ call: darkslimePoison, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FLUID]}
-			]
+			];
 			checkMonster();
 		}
 	}

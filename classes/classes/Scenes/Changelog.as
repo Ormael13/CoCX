@@ -75,11 +75,11 @@ public class Changelog extends BaseContent
 			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error, some of blessings from temple disply wrong ");
 			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors, some of custom names not giving starting gems bonus, one of Demon Lab bosses infinite grapple\n\n");
 			outputText("<b>Version 0.8u:</b>\n\n");
+			outputText("-Chicken Harpy moved her area of activity from 'high mountains' to 'mountians and low mountains'. She's also not so overwhelmingly everpresent if PC got (too) many ovi elixirs.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Chicken Harpy moved her area of activity from 'high mountains' to 'mountians and low mountains'. She's also not so overwhelmingly everpresent if PC got (too) many ovi elixirs.\n");
-			outputText("-Due to smaller pool of possible options High Mountain explore tree have shortened by a bit over 50% length of each path.\n");
+			outputText("-New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Fetish Evangelist - lvl 65, Fetish Priest - lvl 87. Encounterable at High Mountains; Fetish Inquisitor - lvl 22. Encounterable at Swamp;\n");
 			outputText("-Implemented sprites for (Lord Shadeogorath): nurse outfit, samurai outfit, and moonlight greatsword (by Mister GRaM); phalluspear (by Snas); scale mail (by Desro); green adventurer outfit (by Lia);\n");
 			outputText("-Various tweaks and bugfixes: dual katana and daisho should now show sprites when equipped, offhand firebuff sprites should now show for weapons that have them, some pure/corrupt weapons that were not showing the appropriate sprite should now do so, dual massive weapons should now properly show an offhand sprite if applicable (Lord Shadeogorath)\n");
 			outputText("-\n");
@@ -87,21 +87,21 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; 
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern\n");
+			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u2:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

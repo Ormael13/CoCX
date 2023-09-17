@@ -103,7 +103,7 @@ use namespace CoC;
 					add(consumables.D_FRUIT,0.7);
 			this.abilities = [
 				{ call: moveDisplacerBeastPhaseStrike, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY] },
-			]
+			];
 			this.createStatusEffect(StatusEffects.EvasiveTeleport, 190, 0, 0, 0);
 			checkMonster();
 		}

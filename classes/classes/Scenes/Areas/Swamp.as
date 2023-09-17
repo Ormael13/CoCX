@@ -127,6 +127,11 @@ use namespace CoC;
 				kind  : 'monster',
 				call: corruptedDriderScene.driderEncounter
 			}, {
+				name: "fetishinquisitor",
+				label : "F.Inquisitor",
+				kind  : 'monster',
+				call: SceneLib.lake.fetishZealotScene.zealotSwamp
+			}, {
 				name: "rogar",
 				label : "Ro'gar",
 				kind  : 'npc',

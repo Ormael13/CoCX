@@ -86,7 +86,7 @@ public class Rangiku extends Monster
 		{
 			var str:String = "";
 			str += "You are fighting an oni – a little over seven foot tall woman with pale skin.  Her strawberry blonde hair accents her sapphire eyes, while her body covers black robe.  Her dual large axes are raised to her side, looking for any hole in your guard.";
-			if (hasStatusEffect(StatusEffects.Hypermode))
+			if (hasStatusEffect(StatusEffects.OniRampage))
 			{
 				str += "\n\n<b>Looking at her posture and gaze indicates that she's currently under effect of some sort of rampage state.</b>";
 			}

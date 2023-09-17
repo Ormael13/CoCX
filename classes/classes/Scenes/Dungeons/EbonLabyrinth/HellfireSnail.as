@@ -113,7 +113,7 @@ use namespace CoC;
 				{ call: hellfireSnailSpitMagma, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FLUID,]},
 				{ call: hellfireSnailEngulph, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return !player.hasStatusEffect(StatusEffects.GooBind) }},
 				{ call: hellfireSnailBurningEmbrace, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.GooBind) }, weight:Infinity}
-			]
+			];
 			checkMonster();
 		}
 	}

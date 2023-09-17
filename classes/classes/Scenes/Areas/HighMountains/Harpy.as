@@ -135,7 +135,7 @@ public class Harpy extends Monster
 				{ call: harpyTease, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: harpyUberCharge, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: harpyUberCharge, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: hasUber, weight: Infinity}
-			]
+			];
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
 			checkMonster();
 		}

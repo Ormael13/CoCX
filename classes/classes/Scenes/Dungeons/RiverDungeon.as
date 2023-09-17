@@ -573,6 +573,14 @@ public class RiverDungeon extends DungeonAbstractContent
 			}
 			else player.addStatusValue(StatusEffects.RiverDungeonA, 1, 10);
 		}
+		public function defeatTwinBosses():void {
+			clearOutput();
+			
+			if (player.hasKeyItem("Black Crystal") >= 0) player.removeKeyItem("Black Crystal");
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			cleanupAfterCombat();
+			doNext(playerMenu);
+		}
 		public function defeatedByRedMistOoze():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
@@ -603,7 +611,15 @@ public class RiverDungeon extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_07;
 			cleanupAfterCombat();
 		}
-		public function defeatedBy4thFloorDualBoss():void {
+		public function almostdefeatedByTwinBosses():void {
+			clearOutput();
+			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
+			if (player.hasKeyItem("Black Crystal") >= 0) player.removeKeyItem("Black Crystal");
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]--;
+			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_05;
+			cleanupAfterCombat();
+		}
+		public function defeatedByTwinBosses():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			//[GAME OVER]
@@ -1304,8 +1320,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Roiling Mist covers your surroundings, making you unable to see anything past a few feet.");
 			dungeons.setDungeonButtonsRD(roomC15, null, null, null);
-			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(11, "Down", roomD07);
-			//else addButtonDisabled(11, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(11, "Down", roomD07);
+			else addButtonDisabled(11, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomC21():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_21;
@@ -1464,9 +1480,14 @@ public class RiverDungeon extends DungeonAbstractContent
 			dungeons.setDungeonButtonsRD(null, roomC33, null, roomC30);
 		}
 		public function roomD01():void {
-			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_01;
+			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_01;//boss room
 			clearOutput();
-			encountersRuletteD();
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] == 10) {
+				outputText("Soon there will be twin bosses intro here.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+				startCombat(new TwinBosses(), true);
+			}
+			else if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) encountersRuletteD();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Room</b>\n");
 			outputText("In this room, the stone appears to have been worn away, and more of the pulsing, purple structures are laid bare. They pulsate visibly now, the light ebbing and flowing as they move. You feel your [skin] crawling with each pulse, an involuntary shiver running up your spine. At the end of this room, there appears to be some kind of circular structure, grown into the wall from the pulsing purple...stuff. The circle itself writhes with each pulse, sending the light from before out...It emits a squishing, wet sound with each pulse, not unlike a heartbeat.\n\nWhatever this place is...you seem to have found the literal heart of it.");
@@ -1510,7 +1531,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 9) dungeons.setDungeonButtonsRD(roomD01, roomD08, null, null);
 			else {
 				dungeons.setDungeonButtonsRD(null, roomD08, null, null);
-				addButtonDisabled(6, "North", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution?");
+				if (player.hasKeyItem("Black Crystal") >= 0) addButton(6, "North", useBlackCrystal).hint("Would you like to use Black Crystal here?");
+				else addButtonDisabled(6, "North", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution?");
 			}
 		}
 		public function roomD06():void {
@@ -1577,6 +1599,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("In this room, the stone appears to have been worn away, and more of the pulsing, purple structures are laid bare. They pulsate visibly now, the light ebbing and flowing as they move. You feel your [skin] crawling with each pulse, an involuntary shiver running up your spine. At the end of this room, there appears to be some kind of circular structure, grown into the wall from the pulsing purple...stuff. The circle itself writhes with each pulse, sending the light from before out...It emits a squishing, wet sound with each pulse, not unlike a heartbeat.");
 			dungeons.setDungeonButtonsRD(null, roomD16, null, null);
+			//if (anvilMaterialsCheck()) addButton(0, "Anvil", anvilUncrafting).hint("Now you have needed materials. Do you uncraft them?");
+			//else addButtonDisabled(0, "Anvil", "Would you kindly find the materials first?");
 		}
 		public function roomD13():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_13;
@@ -1780,6 +1804,71 @@ public class RiverDungeon extends DungeonAbstractContent
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomC32);
 		}
+		private function anvilMaterialsCheck():Boolean {
+			return (//(player.hasItem(useables.PCSHARD, 6)) ||
+					//(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||
+					(player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)));
+		}
+		private function anvilUncrafting():void {
+			clearOutput();
+			outputText("You put [item] at the anvil centre and reaching toward the hammer. Rising it high above you focus and slamm the item on it. Both tools power activate as the item split into six smaller objects that appears around centre of impact at the corneres of perfectly shaped hexagon. You then put the hammer away and reaching toward the items to put them into your bag.\n\n");
+			if (player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) {
+				player.destroyItems(useables.RED_GEL, 1);
+				player.destroyItems(consumables.CHOCBOX, 1);
+				player.destroyItems(consumables.LETHITE, 1);
+				player.destroyItems(consumables.SALAMFW, 1);
+				player.destroyItems(useables.SRESIDUE, 1);
+				player.destroyItems(consumables.ONISAKE, 1);
+				player.createKeyItem("Black Crystal", 0, 0, 0, 0);
+				outputText("<b>You have gained Key Item: Black Crystal</b>");
+			}
+			doNext(roomD12);
+		}
+		private function useBlackCrystal():void {
+			clearOutput();
+			outputText("You walk toward the massive rumble and taking out the Black Crystal you toos it toward it. When it crash into the blockage the outer solid shell crackle and black liquid spills around. Few seconds later whole section starts to quake a bit and then time in the corridor begane to rewind reverting all the damage done to passage. Looks like you can now progress to the boss room.\n\n");
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			doNext(roomD05);
+		}
+		public function dishHelperTB():void {
+			clearOutput();
+			player.createStatusEffect(StatusEffects.MinoKing,0,0,0,0);
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
+				outputText("You tell Neisa you need her to keep the suspended angel from recovering!\n\n");
+				outputText("Neisa nods, \"<i>A great stratagem, leave it to me!</i>\" She raises her shield before charging at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", repeatedly bashing the angel with her shield to keep them out of the fight.\n\n");
+				if (silly()) outputText("She speaks through her exertion, \"<i>Stop resisting! I said stop resisting! You angels think you’re so high and mighty, just above the law don’t you?!</i>\"\n\n");
+				else outputText("She speaks through her exertion, \"<i>I need you to stay down!</i>\"\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
+				outputText("Wasting no time, The manticore leaps with a hungry lunge, diving at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" as she quickly wraps her tail around them to keep them out of the fight.\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
+				outputText("\"<i>Prevention is the best method to stop danger, now, let’s put a halt to this nuisance.</i>\"\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
+				outputText("A faint grin curls up her face, \"<i>It’s so easy to keep them locked down…</i>\"\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
+				outputText("Furxia, Lidea, Mitzi and Roxy rush "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", trapping them within their onslaught as they try to keep the angel pinned and out of the fight.\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
+				outputText("You tell Excellia you need her to keep the suspended angel from recovering!\n\n");
+				outputText("Excellia rolls her shoulders briefly, \"<i>I can handle that easily.</i>\" Without further hesitation, she rushes in, using the weight of her body to smash into "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" and keep them out of the fight.\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
+				outputText("Amily quickly rushes to "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" before driving her dagger into them to keep them out of the fight. \"<i>Now I just need to make sure they don’t get up… Let’s hope I have enough to last.</i>\"\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
+				outputText("He readies his spear before pouncing on "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", smacking them with the blunt side of his spear to keep them out of the fight.\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") {
+				outputText("She scoffs teasingly, \"<i>Oh, an idiot like you can’t manage against multiple foes? Yeah, don’t worry, I’ll totally take care of it.</i>\" Axe in hand, Kiha charges at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", bashing the angel with the blunt side of her axe to keep them out of the fight.\n\n");
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") {
+				outputText("\"<i>Oh…I am all OVER that.</i>\" Tyrantia lets out a guttural roar, shooting a glob of her “webbing” at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+". The angel dodges, but her black and pink aura flares, and she rushes in, black aura hiding the angel’s light from your view.\n\n");
+			}
+			SceneLib.combat.enemyAIImpl();
+		}
 		private function teleportCircleFloor1():void {
 			menu();
 			addButtonDisabled(0, "Floor 1", "You're currently at Floor 1.");
@@ -1787,8 +1876,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
 			else addButtonDisabled(2, "Floor 3", "You still need to beat guardian of floor 2 to use this teleport option.");
-			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
-			//else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
+			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
 			//5
 			addButton(14, "Back", roomA01);
 		}
@@ -1798,8 +1887,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButtonDisabled(1, "Floor 2", "You're currently at Floor 2.");
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
 			else addButtonDisabled(2, "Floor 3", "You need to beat the guardian of floor 2 to use this teleport.");
-			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
-			//else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
+			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
 			//5
 			addButton(14, "Back", roomB01);
 		}
@@ -1808,8 +1897,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButton(0, "Floor 1", teleportToFloor1);
 			addButton(1, "Floor 2", teleportToFloor2);
 			addButtonDisabled(2, "Floor 3", "You're currently at Floor 3.");
-			//if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
-			//else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8) addButton(3, "Floor 4", teleportToFloor4);
+			else addButtonDisabled(3, "Floor 4", "You still need to beat guardian of floor 3 to use this teleport option.");
 			//5
 			addButton(14, "Back", roomC01);
 		}
@@ -1856,4 +1945,4 @@ public class RiverDungeon extends DungeonAbstractContent
 			playerMenu();
 		}
 	}
-}
+}

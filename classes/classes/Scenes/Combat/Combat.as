@@ -39,6 +39,7 @@ import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.Dungeons.DemonLab.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
+import classes.Scenes.Dungeons.RiverDungeon.TwinBosses;
 import classes.Scenes.Monsters.Magnar;
 import classes.Scenes.Monsters.WerewolfFemale;
 import classes.Scenes.Monsters.WerewolfHuntress;
@@ -14913,10 +14914,12 @@ public function runAway(callHook:Boolean = true):void {
             inCombat = false;
             clearStatuses(false);
             doNext(playerMenu);
-        } else {
+        } else if (monster is TwinBosses) {
+			SceneLib.dungeons.riverdungeon.almostdefeatedByTwinBosses();
+		} else {
             outputText("You're trapped in your foe's domain - there is nowhere to run!\n\n");
             enemyAI();
-        }
+		}
         return;
     }
     //Attempt texts!

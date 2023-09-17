@@ -158,7 +158,7 @@ public class GoblinAssassin extends Monster
 				{ call: dualShot, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_WEAPON]},
 				{ call: goblinExplosion, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FIRE]},
 				{ call: lustNeedle, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_WEAPON]},
-			]
+			];
 			checkMonster();
 		}
 

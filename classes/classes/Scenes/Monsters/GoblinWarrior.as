@@ -100,7 +100,7 @@ public class GoblinWarrior extends Goblin
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
 				{ call: goblinTeaseAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 				{ call: warriorSpecial, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
-			]
+			];
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			checkMonster();
 		}
