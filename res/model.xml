@@ -901,11 +901,11 @@
 		<cell rect="1472,1620,80,90" name="weapon/nodachiGeneric" dx="38" dy="55"/>
 		<cell rect="1472,1726,80,90" name="weapon/nodachiHoly" dx="38" dy="55"/>
         <cell rect="1472,1832,80,90" name="weapon/nodachiUnholy" dx="38" dy="55"/>
-		<cell rect="1472,1938,80,90" name="weaponBuff/nodachiFireBuff" dx="27" dy="35"/>
+		<cell rect="1472,1938,80,90" name="weaponBuff/nodachiFireBuff" dx="28" dy="37"/>
         <cell rect="1562,1620,80,90" name="weapon/nodachiGenericOH" dx="82" dy="55"/>
         <cell rect="1562,1726,80,90" name="weapon/nodachiHolyOH" dx="82" dy="55"/>
         <cell rect="1562,1832,80,90" name="weapon/nodachiUnholyOH" dx="82" dy="55"/>
-		<cell rect="1562,1938,80,90" name="weaponBuff/nodachiFireBuffOH" dx="92" dy="38"/>
+		<cell rect="1562,1938,80,90" name="weaponBuff/nodachiFireBuffOH" dx="91" dy="38"/>
 		
 		<cell rect="1292,1620,87,107" name="weapon/scytheShaftGeneric" dx="39" dy="53"/>
         <cell rect="1292,1729,87,107" name="weapon/scytheShaftHoly" dx="39" dy="53"/>
@@ -935,11 +935,11 @@
         <cell rect="1112,1620,80,90" name="weapon/daggerGeneric" dx="38" dy="55"/>
         <cell rect="1112,1726,80,90" name="weapon/daggerHoly" dx="38" dy="55"/>
         <cell rect="1112,1832,80,90" name="weapon/daggerUnholy" dx="38" dy="55"/>
-        <cell rect="1022,1832,80,90" name="weaponBuff/daggerFireBuff" dx="34" dy="31"/>
+        <cell rect="1022,1832,80,90" name="weaponBuff/daggerFireBuff" dx="39" dy="55"/>
         <cell rect="1112,1938,80,90" name="weapon/daggerGenericOH" dx="82" dy="55"/>
         <cell rect="1112,2044,80,90" name="weapon/daggerHolyOH" dx="82" dy="55"/>
         <cell rect="1112,2150,80,90" name="weapon/daggerUnholyOH" dx="82" dy="55"/>
-        <cell rect="1022,1938,80,90" name="weaponBuff/daggerFireBuffOH" dx="86" dy="31"/>
+        <cell rect="1022,1938,80,90" name="weaponBuff/daggerFireBuffOH" dx="81" dy="55"/>
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
@@ -2075,10 +2075,10 @@
 					<if test="PlayerHasDaisho">
 						<show part="weapon/katanaGeneric"/>
 						<show part="weapon/daishoOH"/>
-					</if>
-					<if test="FireBuff">
-						<show part="weaponBuff/katanaFireBuff"/>
-						<show part="weaponBuff/daishoFireBuffOH"/>
+						<if test="FireBuff">
+							<show part="weaponBuff/katanaFireBuff"/>
+							<show part="weaponBuff/daishoFireBuffOH"/>
+						</if>
 					</if>
 					
 					<!-- Nodachi -->
@@ -6733,6 +6733,8 @@
 			<hide part="breasts/*"/>
 			<if test="showClothing">
 				<show part="clothe/TwinkShirt"/>
+				<show part="clotheHead/TwinkHatFront"/>
+				<show part="clotheHead_bg/TwinkHatBack"/>
 				<if test="showArmClothing">
 					<show part="clothLeftArm/TwinkLeftArm"/>
 					<show part="clothRightArm/TwinkRightArm"/>
