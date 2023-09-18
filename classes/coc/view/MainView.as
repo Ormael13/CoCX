@@ -20,6 +20,8 @@ import com.bit101.components.ComboBox;
 import com.bit101.components.TextFieldVScroll;
 import com.bit101.components.VScrollBar;
 import com.bit101.components.ScrollPane;
+
+import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
@@ -795,6 +797,9 @@ public class MainView extends Block {
 		var innerElement:DisplayObject = element;
 		if (scroll) {
 			var container:ScrollPane = new ScrollPane();
+			var pic:Bitmap = new Background1();
+
+			container._background.addChild(pic);
 			//container.setStyle("upSkin", new MovieClip());
 			//container.horizontalScrollPolicy = ScrollPolicy.OFF;
 			//container.verticalPageScrollSize = mainText.height - 64;
@@ -803,6 +808,8 @@ public class MainView extends Block {
 			element = container;
 			if (innerElement is Block) {
 				innerElement.addEventListener(Block.ON_LAYOUT, function(e:Event):void {
+					pic.width = container.width;
+					pic.height = container.height;
 					container.update();
 				})
 			}
