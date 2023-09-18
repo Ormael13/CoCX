@@ -82,9 +82,9 @@ public class Changelog extends BaseContent
 			outputText("-New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Fetish Evangelist - lvl 65, Fetish Priest - lvl 87. Encounterable at High Mountains; Fetish Inquisitor - lvl 22. Encounterable at Swamp;\n");
 			outputText("-Implemented sprites for (Lord Shadeogorath): nurse outfit, samurai outfit, and moonlight greatsword (by Mister GRaM); phalluspear (by Snas); scale mail (by Desro); green adventurer outfit (by Lia);\n");
 			outputText("-Various tweaks and bugfixes: dual katana and daisho should now show sprites when equipped, offhand firebuff sprites should now show for weapons that have them, some pure/corrupt weapons that were not showing the appropriate sprite should now do so, dual massive weapons should now properly show an offhand sprite if applicable (Lord Shadeogorath)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fetish followers enemies at Lake and Boat will no longer req. to first finish Factory to start appearing.\n");
+			outputText("-Dominika cooldown on spell teaching decreased from 7-9 days to 3-4 days.\n");
+			outputText("-Excellia scene to choose fixing or keeping slave got 3rd option to delay decision and keeping her slave geet added additional req. to have any genitalia to pick it.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -101,7 +101,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath)
 			outputText("-\n");
-			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids\n");
+			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids, Uma Handjob & Get Blown options not accesable for cockwielders, ");
+			outputText("Tamains Daughters scene sending back to camp\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u2:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

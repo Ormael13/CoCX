@@ -192,10 +192,8 @@ use namespace CoC;
 				name: "cultist",
 				label : "Fetish Cultist",
 				kind : 'monster',
-				when: function ():Boolean {
-					return player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0
-				},
 				chance: 0.2,
+				mods: [fn.ifLevelMin(3)],
 				night: false,
 				call: fetishCultist
 			}, {

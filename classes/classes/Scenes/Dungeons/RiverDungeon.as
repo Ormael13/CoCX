@@ -1531,8 +1531,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 9) dungeons.setDungeonButtonsRD(roomD01, roomD08, null, null);
 			else {
 				dungeons.setDungeonButtonsRD(null, roomD08, null, null);
-				if (player.hasKeyItem("Black Crystal") >= 0) addButton(6, "North", useBlackCrystal).hint("Would you like to use Black Crystal here?");
-				else addButtonDisabled(6, "North", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution?");
+				/*if (player.hasKeyItem("Black Crystal") >= 0) addButton(6, "North", useBlackCrystal).hint("Would you like to use Black Crystal here?");
+				else */addButtonDisabled(6, "North", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution?");
 			}
 		}
 		public function roomD06():void {
