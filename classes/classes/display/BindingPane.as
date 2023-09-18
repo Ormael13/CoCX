@@ -3,7 +3,6 @@ package classes.display
 import classes.InputManager;
 
 import coc.view.Block;
-import coc.view.MainView;
 
 import com.bit101.components.ScrollPane
 
@@ -56,10 +55,8 @@ import flash.utils.describeType;
 			setSize(width,height);
 			
 			// Cheap hack to remove the stupid styling elements of the stock ScrollPane
-			var pic:Bitmap = new MainView.Background1();
-			pic.width = width;
-			pic.height = height;
-			_background.addChild(pic);
+			PanelAlpha = 0;
+			color = 0xCCCCC;
 			// Initiate a new container for content that will be placed in the scroll pane
 			_content = new Block({layoutConfig:{
 				type: Block.LAYOUT_FLOW,

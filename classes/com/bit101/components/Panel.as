@@ -35,7 +35,7 @@ package com.bit101.components
 	public class Panel extends Component
 	{
 		protected var _mask:Sprite;
-		public var _background:Sprite;
+		protected var _background:Sprite;
 		protected var _color:int = -1;
 		protected var _alpha:int = 100;
 		protected var _shadow:Boolean = true;
@@ -203,7 +203,13 @@ package com.bit101.components
 		{
 			return _color;
 		}
-
+		public function set PanelAlpha(c:int):void {
+			_alpha = c;
+			invalidate();
+		}
+		public function get PanelAlpha():int {
+			return _alpha;
+		}
 		/**
 		 * Sets / gets the size of the grid.
 		 */
