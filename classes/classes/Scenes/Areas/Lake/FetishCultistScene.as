@@ -223,7 +223,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					if (player.hasFuckableNipples()) nipples();
 					else if (player.cocks.length > 0) cock();
 					else if (player.biggestTitSize() > 1) breasts();
-					else if (player.vaginas.length > 0) vagina();
+					else if (player.hasVagina()) vagina();
 					else if (player.gender == 0) nothing();
 				}
 
@@ -343,7 +343,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				}
 				function dickF():void {
 					outputText("  You see that your [armor] have become a nice looking, if simple, frilled white shirt and bow tie along with black pants and matching shoes.  They make you look like you would be at home in a manor attending the needs of a noble, if it were not for the flaps on the front and back of your pants that give easy access to your " + multiCockDescriptLight());
-					if (player.vaginas.length) outputText(", your " + vaginaDescript(0) + ",");
+					if (player.hasVagina()) outputText(", your " + vaginaDescript(0) + ",");
 					outputText(" and your [butt].  Any undergarments you had are now gone.\n\n");
 					if (player.armor == armors.C_CLOTH) player.modArmorName = "cute servant's clothes";
 					outputText("'Boy, I am feeling aroused.' she says to you in an authoritative voice. 'I want you to please me.'\n\n");
@@ -352,7 +352,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					outputText("Eager to please your mistress, now reclining on a lovely chair, you crawl to her, remove her shoes, and start to massage her feet.  Your hands seem to move with the will of some outside force, and they expertly work to please your mistress.  Pushed on by her approving groans, you work your way up her legs, removing clothing as you go, until you reach her hips.  There, to your mistress' great delight, you run your hands over her hips, butt, and then start to rub her hips, lower lips, and clit.\n\n");
 					outputText("After a minute of this, she stops you and says, 'Good, I am now ready to have you inside of me boy.  Show me your [cocks] that I keep you here for.'\n\n");
 					outputText("With a cry of joy you lift the front flap on your pants revealing your very erect [cocks] and lie on the ground ready to please your mistress the best way you can.  You watch your mistress rise off her chair and slowly lower herself onto your [cock] moaning in pleasure.  Her interior is so familiar and so wonderful.  ");
-					if (player.vaginas.length > 0) outputText("You feel desire start to well up in your " + vaginaDescript(0) + ", but you resist the urge to act on it; that's not why your mistress keeps you. ");
+					if (player.hasVagina()) outputText("You feel desire start to well up in your " + vaginaDescript(0) + ", but you resist the urge to act on it; that's not why your mistress keeps you. ");
 					outputText("She starts to rock back and forth, your [cock] bringing her to the height of pleasure. ");
 					if (player.cocks.length == 2) outputText("Your " + cockDescript(1) + " rubs against her skin pleasantly.  ");
 					if (player.cocks.length > 2) outputText("The rest of your [cocks] rub against her skin pleasantly.  ");
