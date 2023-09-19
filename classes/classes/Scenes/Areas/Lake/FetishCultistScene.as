@@ -223,7 +223,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					if (player.hasFuckableNipples()) nipples();
 					else if (player.cocks.length > 0) cock();
 					else if (player.biggestTitSize() > 1) breasts();
-					else if (player.vaginas.length > 0) vagina();
+					else if (player.hasVagina()) vagina();
 					else if (player.gender == 0) nothing();
 				}
 
