@@ -138,6 +138,10 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAScytheHoly:player.weapon == game.weapons.LHSCYTH,
 					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weapon == game.weapons.HELRAIS,
 
+					PlayerHasADaggerTwin: player.hasAetherTwinsTierWeapon(),
+					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),
+					PlayerHasAnOffhandDaggerTwin: player.hasAetherTwinsTierLeftDagger(),
+
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
@@ -243,8 +247,9 @@ public class CharViewContext extends ExecContext {
 					CowGirlOutfit: player.armor == game.armors.CGUNSLI,
 					greenAdventurerClothes: player.armor == game.armors.ADVCLTH,
 					nurseClothing: player.armor == game.armors.NURSECL,
-					SamuraiArmor: player.armor == game.armors.SAMUARM,
-					scalemail: player.armor == game.armors.SCALEML,
+					SamuraiArmor: armorSubtype == "samurai" || player.armor == game.armors.SAMUARM,
+					scalemail: armorSubtype == "scalemail" || player.armor == game.armors.SCALEML,
+					chainMail: armorSubtype == "fullchain" || player.armor == game.armors.FULLCHN,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
@@ -281,6 +286,7 @@ public class CharViewContext extends ExecContext {
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
+					kabutoMempo: player.headJewelry == game.headjewelries.KABUMEMP,
 
 					// Viewable amulet Accessory lists
 					GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||

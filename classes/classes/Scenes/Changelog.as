@@ -80,12 +80,12 @@ public class Changelog extends BaseContent
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Fetish Evangelist - lvl 65, Fetish Priest - lvl 87. Encounterable at High Mountains; Fetish Inquisitor - lvl 22. Encounterable at Swamp;\n");
-			outputText("-Implemented sprites for (Lord Shadeogorath): nurse outfit, samurai outfit, and moonlight greatsword (by Mister GRaM); phalluspear (by Snas); scale mail (by Desro); green adventurer outfit (by Lia);\n");
+			outputText("-Implemented sprites for (Lord Shadeogorath): nurse outfit, samurai outfit, moonlight greatsword, samurai helmet (by Mister GRaM); phalluspear, chainmail armor (by Snas); scale mail (by Desro); green adventurer outfit (by Lia);\n");
 			outputText("-Various tweaks and bugfixes: dual katana and daisho should now show sprites when equipped, offhand firebuff sprites should now show for weapons that have them, some pure/corrupt weapons that were not showing the appropriate sprite should now do so, dual massive weapons should now properly show an offhand sprite if applicable (Lord Shadeogorath)\n");
 			outputText("-Fetish followers enemies at Lake and Boat will no longer req. to first finish Factory to start appearing.\n");
 			outputText("-Dominika cooldown on spell teaching decreased from 7-9 days to 3-4 days.\n");
-			outputText("-Excellia scene to choose fixing or keeping slave got 3rd option to delay decision and keeping her slave geet added additional req. to have any genitalia to pick it.\n");
-			outputText("-\n");
+			outputText("-Excellia scene to choose fixing or keeping slave got 3rd option to delay decision and keeping her slave get added additional req. to have any genitalia to pick it.\n");
+			outputText("-Set eggs hatching to properly have text spacing. (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
