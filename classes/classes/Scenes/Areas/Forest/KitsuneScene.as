@@ -2412,6 +2412,7 @@ public class KitsuneScene extends BaseContent
 		private function AyaneCome2Camp():void {
 			clearOutput();
 			outputText("\"<i>Thank you " + player.mf("lord", "lady") + " [name] please allow me to tend to your every need from now on.</i>\"");
+			Ayane9tailsPCMMfix();
 			outputText("\n\nAyane packs her belongings in a weird bag that seems to never be fuller or emptier and starts to follow you around.");
 			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
 			outputText("\n\n<b>As if remembering something Ayane pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
@@ -2427,6 +2428,7 @@ public class KitsuneScene extends BaseContent
 			clearOutput();
 			outputText("\n\nAyane looks disappointed but nods regardless. \"<i>I accept your choice... maybe I was too hasty. Come back and see me again, should you be in need of counsel or a servant, my " + player.mf("lordship", "ladyship") + ".</i>\"");
 			flags[kFLAGS.AYANE_FOLLOWER] = 1;
+			Ayane9tailsPCMMfix();
 			endEncounter();
 		}
 		private function AyaneServant():void {
@@ -2448,6 +2450,20 @@ public class KitsuneScene extends BaseContent
 			//dynStats("cor", 10); - dodawać czy nie to?
 			flags[kFLAGS.AYANE_FOLLOWER] = 2;
 			endEncounter();
+		}
+
+		private function Ayane9tailsPCMMfix():void{
+			//clearOutput();
+			if(player.racialScore(Races.KITSUNE) >= 8 && (player.tailType == Tail.FOX && player.tailCount == 9) && !player.hasPerk(PerkLib.StarSphereMastery)){ //Should check for if player is kitsune, has 9 tails, and without starsphere
+				outputText("\nAs she turns around, she notices something off about you, and turns back around, walking right up to you. She looks up and down, and walks around you, studiously looking at oyur body, and occasionally even sniffing, which makes you feel a little bad for not having showered yet today, before she finishes right back in front of you.\n\n");
+				outputText("[name].... I don't know how I missed this before, but your ascent into becoming one of our divine status, feels off. Don't worry though, because we have had records of similar situations happening. But you must come with me <b>NOW</b>, so you can attain your proper status.");
+				outputText("\nAyane then turns back around, grabs your arm and pulls you towards the direction of the forest, and you go with her, the surroundings blending and melting, until you suddenly arrive at a shrine, with a golden statue. She points you to the front of the statue as she goes around, scavenging in a small room to the side of the shrine, her tails swaying about as she finally finds a spare fox jewel and plops it onto your hand.");
+				outputText("\nYou are about to ask her what was going on when the jewel glows brightly in your hand, before it morphs into a star sphere, and your head fills with all the arcane knowledge you didn't get from your unnatural transformation. As the lights dim, Akane walks up to you, and gives you a curtsy, before she smiles and rushes off.\n");
+				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
+					outputText("\nYou have also learnt where the kitsune shrine is!\n");
+					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] = 1;
+				}
+			}
 		}
 
 //[Steal Statue]
