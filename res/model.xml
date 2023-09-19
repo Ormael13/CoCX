@@ -647,6 +647,7 @@
 		<cell rect="1742,57,35,40" name="clotheHead/anubisRoyalDressRight" dx="106" dy="52"/>
 		<cell rect="1932,70,41,30" name="clotheHead/TwinkHatFront" dx="85" dy="33"/>
 		<cell rect="2024,70,26,14" name="clotheHead/nurseClothingHat" dx="90" dy="31"/>
+		<cell rect="2247,325,77,44" name="clotheHead/kabutoMempoFront" dx="65" dy="31"/>
 		<cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
 		<cell rect="1704,57,35,40" name="clotheHead_bg/anubisRoyalDressLeft" dx="67" dy="52"/>
 		<cell rect="1782,12,49,88" name="clotheHead_bg/TwinkHatBack" dx="85" dy="18"/>
@@ -707,6 +708,7 @@
 		<cell rect="1837,325,80,108" name="clothe/francescaClothes" dx="66" dy="33"/>
 		<cell rect="1837,434,80,108" name="clothe/LizBladeArmor" dx="64" dy="55"/>
 		<cell rect="1832,12,49,88" name="clothe/TwinkShirt" dx="79" dy="44"/>
+		<cell rect="2153,434,49,88" name="clothe/chainmailchest" dx="81" dy="48"/>
 		<cell rect="2222,12,49,37" name="clothe/samuraiShirt" dx="80" dy="61"/>
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
@@ -736,6 +738,7 @@
 		<cell rect="1882,12,49,88" name="clotheLegs/TwinkPants" dx="79" dy="93"/>
 		<cell rect="2024,12,41,57" name="clotheLegs/nurseClothinglegs" dx="85" dy="120"/>
 		<cell rect="2272,12,49,88" name="clotheLegs/samuraiLegs" dx="81" dy="88"/>
+		<cell rect="2104,434,48,58" name="clotheLegs/chainmailLegs" dx="81" dy="115"/>
         <cell rect="776,12,45,27" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="728,12,45,27" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="833,12,45,27" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
@@ -759,6 +762,9 @@
 		<cell rect="1919,524,49,29" name="armorNeck/LizBladeTopLarge" dx="80" dy="66"/>
 		<cell rect="2123,12,48,29" name="armorNeck/scalemailTopSmall" dx="80" dy="66"/>
 		<cell rect="2066,12,56,29" name="armorNeck/scalemailTopLarge" dx="76" dy="66"/>
+		<cell rect="2104,493,49,29" name="armorNeck/chainmailChestSmall" dx="80" dy="68"/>
+		<cell rect="2047,493,56,29" name="armorNeck/chainmailChestMedium" dx="76" dy="69"/>
+		<cell rect="2203,434,49,29" name="armorNeck/chainmailChestLarge" dx="79" dy="68"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="1161,42,45,58" name="armorChest/blackFullplatebottom" dx="82" dy="75"/>
 		<cell rect="1446,42,45,58" name="armorChest/gooplatebottom" dx="82" dy="75"/>
@@ -777,7 +783,6 @@
         <cell rect="1104,42,25,55" name="armorLeftArm/blackFullplateleftarm" dx="78" dy="66"/>
 		<cell rect="1389,42,25,55" name="armorLeftArm/gooplateleftarm" dx="78" dy="66"/>
 		<cell rect="2066,42,27,58" name="armorLeftArm/scalemailLeftArm" dx="78" dy="66"/>
-		<cell rect="2322,12,27,58" name="armorLeftArm/samuraiLeftArm" dx="78" dy="67"/>
         <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="81" dy="68"/>
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
         <cell rect="1234,158,20,55" name="clothLeftArm/vampireClothingleftArm" dx="81" dy="68"/>
@@ -794,11 +799,12 @@
 		<cell rect="2116,158,20,55" name="clothLeftArm/priestPrayer" dx="82" dy="53"/>
 		<cell rect="2200,158,20,55" name="clothLeftArm/francesca" dx="78" dy="70"/>
 		<cell rect="1932,12,20,57" name="clothLeftArm/TwinkLeftArm" dx="81" dy="68"/>
+		<cell rect="2322,12,27,58" name="clothLeftArm/samuraiLeftArm" dx="78" dy="67"/>
+		<cell rect="2047,434,27,58" name="clothLeftArm/chainmailLeftArm" dx="75" dy="62"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="1132,42,25,55" name="armorRightArm/blackFullplaterightarm" dx="102" dy="66"/>
 		<cell rect="1417,42,25,55" name="armorRightArm/gooplaterightarm" dx="102" dy="66"/>
 		<cell rect="2094,42,28,58" name="armorRightArm/scalemailRightArm" dx="102" dy="66"/>
-		<cell rect="2350,12,28,58" name="armorRightArm/samuraiRightArm" dx="101" dy="67"/>
         <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="109" dy="69"/>
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1759,158,20,55" name="clothRightArm/elfClothingRightArm" dx="108" dy="68"/>
@@ -817,6 +823,8 @@
 		<cell rect="2221,158,20,55" name="clothRightArm/francesca" dx="111" dy="70"/>
 		<cell rect="2001,325,80,108" name="clothRightArm/cowgirlClothe" dx="63" dy="49"/>
 		<cell rect="1953,12,20,57" name="clothRightArm/TwinkRightArm" dx="108" dy="68"/>
+		<cell rect="2350,12,28,58" name="clothRightArm/samuraiRightArm" dx="101" dy="67"/>
+		<cell rect="2075,434,28,58" name="clothRightArm/chainmailRightArm" dx="104" dy="63"/>
         <cell rect="818,798,173,156" name="clothCape/walpurgisClothesBack" dx="19" dy="12"/>
         <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
@@ -948,6 +956,7 @@
         <cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
 		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="10"/>
         <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="32"/>
+		<cell rect="2325,325,77,44" name="backAccessory/kabutoMempoBack" dx="67" dy="32"/>
         <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
         <cell rect="1022,1776,80,45" name="weapon/LactoblasterMilker" dx="59" dy="62"/>
 		<cell rect="1022,2044,80,45" name="weapon/LactoblasterMilkerMega" dx="59" dy="62"/>
@@ -2177,6 +2186,25 @@
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff_bg/scytheFireBuff"/>
+						</if>
+					</if>
+					
+					<!-- Aether Twins -->
+					<if test="PlayerHasADaggerTwin">
+						<show part="weapon/daggerGeneric"/>
+						<if test="FireBuff">
+							<show part="weaponBuff/daggerFireBuff"/>
+						</if>
+					</if>
+					
+					<if test="PlayerHasAShieldTwin">
+						<show part="shield/shieldGeneric"/>
+					</if>
+					
+					<if test="PlayerHasAnOffhandDaggerTwin">
+						<show part="weapon/daggerGenericOH"/>
+						<if test="FireBuff">
+							<show part="weaponBuff/daggerFireBuffOH"/>
 						</if>
 					</if>
 					
@@ -5747,6 +5775,11 @@
 		</if>
 
 		<!-- Samurai set -->
+		<if test="kabutoMempo">
+			<show part="clotheHead/kabutoMempoFront"/>
+			<show part="backAccessory/kabutoMempoBack"/>
+		</if>
+		
 		<if test="SamuraiArmor">
 			<if test="showClothing">
 				<if test="breastRows.length gt 0">
@@ -5784,8 +5817,8 @@
 					</if>
 				</if>
 				<if test="showArmClothing">
-					<show part="armorLeftArm/samuraiLeftArm"/>
-					<show part="armorRightArm/samuraiRightArm"/>
+					<show part="clothLeftArm/samuraiLeftArm"/>
+					<show part="clothRightArm/samuraiRightArm"/>
 				</if>
 			</if>
 		</if>
@@ -5869,26 +5902,26 @@
 		<!--Taur armor -->
 		<if test="centaurPaladinArmor">
 			<if test="breastRows.length gt 0">
-			<switch>
-				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					<show part="armorNeck/fullplatetopMale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-					<show part="armorNeck/fullplatetopMale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-					<show part="armorNeck/fullplatetopFemale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-					<show part="armorNeck/fullplatetopFemale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-					<show part="armorNeck/fullplatetopFemaleLarge"/>
-				</case>
-				<default>
-					<show part="armorNeck/fullplatetopFemaleLarge"/>
-				</default>
-			</switch>
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="armorNeck/fullplatetopMale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="armorNeck/fullplatetopMale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="armorNeck/fullplatetopFemale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="armorNeck/fullplatetopFemale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="armorNeck/fullplatetopFemaleLarge"/>
+					</case>
+					<default>
+						<show part="armorNeck/fullplatetopFemaleLarge"/>
+					</default>
+				</switch>
 			</if>
 			<show part="armorChest/fullplatebottom"/>
 			<if test="showArmClothing">
@@ -5902,26 +5935,26 @@
 
 		<if test="centaurBlackGuardArmor">
 			<if test="breastRows.length gt 0">
-			<switch>
-				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					<show part="armorNeck/blackFullplatetopMale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-					<show part="armorNeck/blackFullplatetopMale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-					<show part="armorNeck/blackFullplatetopFemale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-					<show part="armorNeck/blackFullplatetopFemale"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-					<show part="armorNeck/blackFullplatetopFemaleLarge"/>
-				</case>
-				<default>
-					<show part="armorNeck/blackFullplatetopFemaleLarge"/>
-				</default>
-			</switch>
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="armorNeck/blackFullplatetopMale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="armorNeck/blackFullplatetopMale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="armorNeck/blackFullplatetopFemale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="armorNeck/blackFullplatetopFemale"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="armorNeck/blackFullplatetopFemaleLarge"/>
+					</case>
+					<default>
+						<show part="armorNeck/blackFullplatetopFemaleLarge"/>
+					</default>
+				</switch>
 			</if>
 			<show part="armorChest/blackFullplatebottom"/>
 			<if test="showArmClothing">
@@ -5937,29 +5970,29 @@
 		<if test="scalemail">
 			<if test="showClothing">
 				<if test="breastRows.length gt 0">
-				<switch>
-					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="armorNeck/scalemailTopSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<hide part="breasts/*"/>
-						<show part="armorNeck/scalemailTopSmall"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="armorNeck/scalemailTopLarge"/>
-					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<hide part="breasts/*"/>
-						<show part="armorNeck/scalemailTopLarge"/>
-					</case>
-					<default>
-						<show part="armorNeck/scalemailTopLarge"/>
-					</default>
-				</switch>
-			</if>
-			<show part="armorChest/scalemail"/>
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="armorNeck/scalemailTopSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<hide part="breasts/*"/>
+							<show part="armorNeck/scalemailTopSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="armorNeck/scalemailTopLarge"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<hide part="breasts/*"/>
+							<show part="armorNeck/scalemailTopLarge"/>
+						</case>
+						<default>
+							<show part="armorNeck/scalemailTopLarge"/>
+						</default>
+					</switch>
+				</if>	
+				<show part="armorChest/scalemail"/>
 				<if test="showLegClothing">
 					<if test="isTaur()">
 						<else>
@@ -5977,6 +6010,47 @@
 				</if>
 			</if>
 		</if>	
+
+		<!--Full Chainmail set -->
+		<if test="chainMail">
+			<if test="showClothing">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="armorNeck/chainmailChestSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="armorNeck/chainmailChestMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="armorNeck/chainmailChestMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="armorNeck/chainmailChestLarge"/>
+						</case>
+						<default>
+							<show part="armorNeck/chainmailChestLarge"/>
+						</default>
+					</switch>
+				</if>
+				<show part="clothe/chainmailchest"/>
+				<if test="isTaur()">
+					<else>
+						<show part="clotheLegs/chainmailLegs"/>
+						<hide part="penis/*"/>
+						<hide part="balls/*"/>
+						<hide part="pussy/*"/>
+						<hide part="overpussy/*"/>
+					</else>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothLeftArm/chainmailLeftArm"/>
+					<show part="clothRightArm/chainmailRightArm"/>
+				</if>
+			</if>
+		</if>
 
 		<!--Goblinmancer set -->
 		<if test="goblinTechnomancerClothe">
@@ -6757,7 +6831,7 @@
 		<if test="redQipao">
 			<show part="clothe/qipaoRedClothe"/>
 			<if test="breastRows.length gt 0">
-			<switch>
+				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 						<show part="bra_fg/qipaoRedBraSmall"/>
 					</case>
@@ -6782,7 +6856,7 @@
 		<if test="purpleQipao">
 			<show part="clothe/qipaoPurpleClothe"/>
 			<if test="breastRows.length gt 0">
-			<switch>
+				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 						<show part="bra_fg/qipaoPurpleBraSmall"/>
 					</case>
@@ -6807,7 +6881,7 @@
 		<if test="greenQipao">
 			<show part="clothe/qipaoGreenClothe"/>
 			<if test="breastRows.length gt 0">
-			<switch>
+				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 						<show part="bra_fg/qipaoGreenBraSmall"/>
 					</case>
@@ -6832,52 +6906,52 @@
 		<if test="blueQipao">
 			<show part="clothe/qipaoBlueClothe"/>
 			<if test="breastRows.length gt 0">
-			<switch>
-				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					<show part="bra_fg/qipaoBlueBraSmall"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-					<show part="bra_fg/qipaoBlueBraSmall"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-					<show part="bra_fg/qipaoBlueBraMedium"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-					<show part="bra_fg/qipaoBlueBraMedium"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-					<show part="bra_fg/qipaoBlueBraLarge"/>
-				</case>
-				<default>
-					<show part="bra_fg/qipaoBlueBraLarge"/>
-				</default>
-			</switch>
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra_fg/qipaoBlueBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra_fg/qipaoBlueBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra_fg/qipaoBlueBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra_fg/qipaoBlueBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra_fg/qipaoBlueBraLarge"/>
+					</case>
+					<default>
+						<show part="bra_fg/qipaoBlueBraLarge"/>
+					</default>
+				</switch>
 			</if>
 		</if>
 
 
         <if test="krakenBlackDress">
 			<if test="breastRows.length gt 0">
-			<switch>
-				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					<show part="clothe/krakenS"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-					<show part="clothe/krakenS"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-					<show part="clothe/krakenM"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-					<show part="clothe/krakenM"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-					<show part="clothe/krakenL"/>
-				</case>
-				<default>
-					<show part="clothe/krakenL"/>
-				</default>
-			</switch>
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="clothe/krakenS"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="clothe/krakenS"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="clothe/krakenM"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="clothe/krakenM"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="clothe/krakenL"/>
+					</case>
+					<default>
+						<show part="clothe/krakenL"/>
+					</default>
+				</switch>
 			</if>
         </if>
 
@@ -7382,26 +7456,26 @@
 
 		<if test="chainMailBikini">
 			<if test="breastRows.length gt 0">
-			<switch>
-				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-					<show part="bra/chainMailBraSmall"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-					<show part="bra/chainMailBraSmall"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-					<show part="bra/chainMailBraMedium"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-					<show part="bra/chainMailBraMedium"/>
-				</case>
-				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-					<show part="bra/chainMailBraLarge"/>
-				</case>
-				<default>
-					<show part="bra/chainMailBraLarge"/>
-				</default>
-			</switch>
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/chainMailBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/chainMailBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/chainMailBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/chainMailBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/chainMailBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/chainMailBraLarge"/>
+					</default>
+				</switch>
 			</if>
 			<if test="showClothing">
 				<if test="showLegClothing">
