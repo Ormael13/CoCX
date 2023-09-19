@@ -3036,7 +3036,7 @@ public class Pregnancy extends NPCAwareContent {
                     SophieFollowerScene.HarpyKids += 1;
                     player.knockUpForce(0, 0, 1); //Clear Pregnancy
                 }
-                outputText("As the dawn rises over mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
+                outputText("\nAs the dawn rises over mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
                         "\n\nWith tender care you help remove the egg shards so that she can move out without hurting herself." +
                         " Harpies are no regular birds, it's the mother's duty to help her child leave the egg harmlessly seeing as the border could leave harmful cuts on the chick." +
                         " Satisfied that your daughter successfully got out of the egg you cradle her in your wings and keep her warm while her duvet dries up." +
@@ -3047,7 +3047,7 @@ public class Pregnancy extends NPCAwareContent {
                 if (SophieFollowerScene.HarpyKids > 1) outputText(" with your other daughters");
                 outputText(" using a rocky cliff as her nesting ground." +
                         " Well while keeping her from trying to bug any male in your camp could be a challenge in the near future at least you can keep on watching her like the good parent you are." +
-                        " Come to think about it, you blush as fantasies of getting your womb filled with a brand new egg fills your mind causing your stretched harpy pusy to drip in anticipation." +
+                        " Come to think about it, you blush as fantasies of getting your womb filled with a brand new egg fills your mind causing your stretched harpy pussy to drip in anticipation." +
                         " Guess it's back to milking males of their semens for you.");
                 SophieFollowerScene.HarpyEggReady = false
                 displayedUpdate = true;
