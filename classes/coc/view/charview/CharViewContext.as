@@ -140,7 +140,7 @@ public class CharViewContext extends ExecContext {
 
 					PlayerHasADaggerTwin: player.hasAetherTwinsTierWeapon(),
 					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),
-					PlayerHasAnOffhandDaggerTwin: hasAetherTwinsTierLeftDagger(),
+					PlayerHasAnOffhandDaggerTwin: player.hasAetherTwinsTierLeftDagger(),
 
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
@@ -286,7 +286,7 @@ public class CharViewContext extends ExecContext {
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
-					kabutoMempo: player.headJewelry == player.headjewelries.KABUMEMP,
+					kabutoMempo: player.headJewelry == game.headjewelries.KABUMEMP,
 
 					// Viewable amulet Accessory lists
 					GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||
