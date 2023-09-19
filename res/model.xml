@@ -2189,6 +2189,25 @@
 						</if>
 					</if>
 					
+					<!-- Aether Twins -->
+					<if test="PlayerHasADaggerTwin">
+						<show part="weapon/daggerGeneric"/>
+						<if test="FireBuff">
+							<show part="weaponBuff/daggerFireBuff"/>
+						</if>
+					</if>
+					
+					<if test="PlayerHasAShieldTwin">
+						<show part="shield/shieldGeneric"/>
+					</if>
+					
+					<if test="PlayerHasAnOffhandDaggerTwin">
+						<show part="weapon/daggerGenericOH"/>
+						<if test="FireBuff">
+							<show part="weaponBuff/daggerFireBuffOH"/>
+						</if>
+					</if>
+					
 				</if>
 				<!-- Shield -->
 				<if test="PlayerHasAShield">
