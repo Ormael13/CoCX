@@ -36,7 +36,7 @@ public class BloodFieldSpell extends AbstractBloodSpell {
 	}
 	
 	public function calcPower():Number {
-		return Math.round(player.maxOverHP() * 0.01)
+		return Math.round(player.maxOverHP() * 0.01);
 	}
 	
 	override public function advance(display:Boolean):void {

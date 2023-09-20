@@ -7,7 +7,9 @@ package classes.Scenes.Dungeons
 import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
+import classes.ItemType;
 import classes.Items.Shield;
+import classes.Items.UseableLib;
 import classes.Items.Weapon;
 import classes.PerkLib;
 import classes.Scenes.Areas.BlightRidge.Omnibus;
@@ -1599,8 +1601,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("In this room, the stone appears to have been worn away, and more of the pulsing, purple structures are laid bare. They pulsate visibly now, the light ebbing and flowing as they move. You feel your [skin] crawling with each pulse, an involuntary shiver running up your spine. At the end of this room, there appears to be some kind of circular structure, grown into the wall from the pulsing purple...stuff. The circle itself writhes with each pulse, sending the light from before out...It emits a squishing, wet sound with each pulse, not unlike a heartbeat.");
 			dungeons.setDungeonButtonsRD(null, roomD16, null, null);
-			//if (anvilMaterialsCheck()) addButton(0, "Anvil", anvilUncrafting).hint("Now you have needed materials. Do you uncraft them?");
-			//else addButtonDisabled(0, "Anvil", "Would you kindly find the materials first?");
+			if (anvilMaterialsCheck()) addButton(0, "Anvil", anvilUncrafting).hint("Now you have needed materials. Do you uncraft them?");
+			else addButtonDisabled(0, "Anvil", "Would you kindly find the materials first?");
+			addButton(1, "BP's", anvilMaterialsList).hint("Can't be more obvious what it's does it?");
 		}
 		public function roomD13():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_13;
@@ -1805,13 +1808,23 @@ public class RiverDungeon extends DungeonAbstractContent
 			doNext(roomC32);
 		}
 		private function anvilMaterialsCheck():Boolean {
-			return (//(player.hasItem(useables.PCSHARD, 6)) ||
-					//(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||
+			return ((player.hasItem(useables.PCSHARD, 6)) ||
+					(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||
 					(player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)));
+		}
+		private function anvilMaterialsList():void {
+			clearOutput();
+			outputText("<b>BP's</b>:");
+			outputText("\n<i>-1x clump of red gel + 1x box of chocolate + 1x chunk of lethicite + 1x hip flask of Salamander Firewater + 1x Soul Residue + 1x bottle of Onikiri Sake</i>");
+			outputText("\n<i>-3x purple crystal shards + 3x Soul Residues</i>");
+			outputText("\n<i>-6x purple crystal shards</i>");
+			doNext(roomD12);
 		}
 		private function anvilUncrafting():void {
 			clearOutput();
-			outputText("You put [item] at the anvil centre and reaching toward the hammer. Rising it high above you focus and slamm the item on it. Both tools power activate as the item split into six smaller objects that appears around centre of impact at the corneres of perfectly shaped hexagon. You then put the hammer away and reaching toward the items to put them into your bag.\n\n");
+			var mainitem:String = "item";
+			var splititems:String = "six small item";
+			var item:ItemType;
 			if (player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) {
 				player.destroyItems(useables.RED_GEL, 1);
 				player.destroyItems(consumables.CHOCBOX, 1);
@@ -1820,9 +1833,26 @@ public class RiverDungeon extends DungeonAbstractContent
 				player.destroyItems(useables.SRESIDUE, 1);
 				player.destroyItems(consumables.ONISAKE, 1);
 				player.createKeyItem("Black Crystal", 0, 0, 0, 0);
-				outputText("<b>You have gained Key Item: Black Crystal</b>");
+				mainitem = "Black Crystal";
+				splititems = "clump of red gel, box of chocolate, chunk of lethicite, hip flask of Salamander Firewater, Soul Residue and bottle of Onikiri Sake";
 			}
-			doNext(roomD12);
+			else if (player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) {
+				player.destroyItems(useables.PCSHARD, 3);
+				player.destroyItems(useables.SRESIDUE, 3);
+				mainitem = "Large Purple Soul Crystal Shard";
+				splititems = "three small Purple Crystal Shards and Soul Residues";
+				item = useables.LPSCSHA;
+			}
+			else if (player.hasItem(useables.PCSHARD, 6)) {
+				player.destroyItems(useables.PCSHARD, 6);
+				mainitem = "Purple Crystal";
+				splititems = "six small Purple Crystal Shards";
+				item = useables.PCRYSTA;
+			}
+			outputText("Gathering the "+splititems+", you place them on the center of the anvil, reaching to the hammer. The anvil seems to be altering the flow of time in the thick mist around you as you raise the tool, focusing your intents before you smash them with the hammer. All six of the scattered pieces immediately coalesce, reforming a larger whole as "+mainitem+" returns to what it was before it shattered. Putting the hammer away, you reach toward the single piece to stow in your bag. ");
+			if (mainitem == "Black Crystal") outputText("<b>You have gained Key Item: Black Crystal</b>");
+			if (mainitem == "Black Crystal") doNext(roomD12);
+			else inventory.takeItem(item, roomD12);
 		}
 		private function useBlackCrystal():void {
 			clearOutput();

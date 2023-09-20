@@ -76,18 +76,18 @@ public class Changelog extends BaseContent
 			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors, some of custom names not giving starting gems bonus, one of Demon Lab bosses infinite grapple\n\n");
 			outputText("<b>Version 0.8u:</b>\n\n");
 			outputText("-Chicken Harpy moved her area of activity from 'high mountains' to 'mountians and low mountains'. She's also not so overwhelmingly everpresent if PC got (too) many ovi elixirs.\n");
+			outputText("-Fetish followers enemies at Lake and Boat will no longer req. to first finish Factory to start appearing.\n");
+			outputText("-Dominika cooldown on spell teaching decreased from 7-9 days to 3-4 days.\n");
+			outputText("-Excellia scene to choose fixing or keeping slave got 3rd option to delay decision and keeping her slave get added additional req. to have any genitalia to pick it.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Fetish Evangelist - lvl 65, Fetish Priest - lvl 87. Encounterable at High Mountains; Fetish Inquisitor - lvl 22. Encounterable at Swamp;\n");
 			outputText("-Implemented sprites for (Lord Shadeogorath): nurse outfit, samurai outfit, moonlight greatsword, samurai helmet (by Mister GRaM); phalluspear, chainmail armor (by Snas); scale mail (by Desro); green adventurer outfit (by Lia);\n");
 			outputText("-Various tweaks and bugfixes: dual katana and daisho should now show sprites when equipped, offhand firebuff sprites should now show for weapons that have them, some pure/corrupt weapons that were not showing the appropriate sprite should now do so, dual massive weapons should now properly show an offhand sprite if applicable (Lord Shadeogorath)\n");
-			outputText("-Fetish followers enemies at Lake and Boat will no longer req. to first finish Factory to start appearing.\n");
-			outputText("-Dominika cooldown on spell teaching decreased from 7-9 days to 3-4 days.\n");
-			outputText("-Excellia scene to choose fixing or keeping slave got 3rd option to delay decision and keeping her slave get added additional req. to have any genitalia to pick it.\n");
 			outputText("-Set eggs hatching to properly have text spacing. (Liadri)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Evangeline Experiments shall stay hidden for time being. There would be some other goodies when time come so the wait would be worth... we promise ^^\n");
+			outputText("-Kitsune metamorph sequence break fix. (Jtecx)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -100,6 +100,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids, Uma Handjob & Get Blown options not accesable for cockwielders, ");
 			outputText("Tamains Daughters scene sending back to camp\n");
@@ -161,9 +164,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -193,7 +194,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -80,6 +80,12 @@ use namespace CoC;
 		public const PCSHARD:SimpleUseable = new SimpleUseable("PCShard", "Purple Crystal Shard", "a Purple Crystal Shard", 1,
 			"A Purple Crystal Shard.",
 			"You look at the purple crystal shard. It occasionally glows gently in your hand, but you can't seem to find a use for the shard.");
+		public const PCRYSTA:SimpleUseable = new SimpleUseable("PCrysta", "Purple Crystal", "a Purple Crystal", 5,
+			"A Purple Crystal.",
+			"You look at the purple crystal. It occasionally glows gently in your hand, but you can't seem to find a use for the crystal.");
+		public const LPSCSHA:SimpleUseable = new SimpleUseable("LPSCSha", "Large Purple Soul Crystal Shard", "a Large Purple Soul Crystal Shard", 5,
+			"A Large Purple Soul Crystal Shard.",
+			"You look at the large purple soul crystal shard. It occasionally glows gently in your hand highlighting the fine poweder embedded inside, but you can't seem to find a use for the shard. Not like someone would try take a bit of it, right?");
 		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 1,
 			"An Elemental Shard.",
 			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
