@@ -9793,6 +9793,17 @@ public final class Mutations extends MutationsHelper {
             player.skin.setBaseOnly({type: Skin.PLAIN, color: tone, adj: adj});
             changes++;
         }
+        //Transparent skin
+        if (player.hasPlainSkinOnly() && !player.isGhostSkin() && rand(3) == 0 && changes < changeLimit && type == 1) {
+            transformations.SkinTransparent.applyEffect();
+            changes++;
+        }
+        //Skin pattern - black or white veins pattern - adv ghost tf
+        if (!player.skin.hasWhiteBlackVeins() && player.isGhostSkin() && (player.skinColor == "white" || player.skinColor == "sable") && rand(3) == 0 && changes < changeLimit && type == 1) {
+            outputText("[pg]");
+            transformations.SkinPatternWhiteBlackVeins.applyEffect();
+            changes++;
+        }
         //Legs
         if (player.lowerBody == LowerBody.GHOST && player.lowerBody != LowerBody.GHOST_2 && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("[pg]");
@@ -9874,17 +9885,6 @@ public final class Mutations extends MutationsHelper {
         if (player.wings.type == Wings.NONE && player.rearBody.type == RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
             outputText("[pg]");
             transformations.WingsEthereal.applyEffect();
-            changes++;
-        }
-        //Transparent skin
-        if (player.hasPlainSkinOnly() && !player.isGhostSkin() && rand(3) == 0 && changes < changeLimit && type == 1) {
-            transformations.SkinTransparent.applyEffect();
-            changes++;
-        }
-        //Skin pattern - black or white veins pattern - adv ghost tf
-        if (!player.skin.hasWhiteBlackVeins() && player.isGhostSkin() && (player.skinColor == "white" || player.skinColor == "sable") && rand(3) == 0 && changes < changeLimit && type == 1) {
-            outputText("[pg]");
-            transformations.SkinPatternWhiteBlackVeins.applyEffect();
             changes++;
         }
         //Effect Script 8: 100% chance of healing

@@ -9,7 +9,6 @@ import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
 import classes.Items.Shield;
-import classes.Items.UseableLib;
 import classes.Items.Weapon;
 import classes.PerkLib;
 import classes.Scenes.Areas.BlightRidge.Omnibus;

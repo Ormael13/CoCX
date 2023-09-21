@@ -2859,17 +2859,17 @@ public class Camp extends NPCAwareContent{
 		var clone:int;
 
 		clearOutput();
-		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) > 0) {
-			/*if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
+		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) {
+			/*if (player.statusEffectv3(StatusEffects.PCClone) < 4) {
 				outputText("Your clone is ");
-				if (player.statusEffectv4(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
-				else if (player.statusEffectv4(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
+				if (player.statusEffectv3(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
+				else if (player.statusEffectv3(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
 				else outputText("looking like you covered with black chitin-like carapace");
 				outputText(". Would you work on completing it?");
 			}
 			else {*/		//that part will be later used for primaltwin - note for Svalkash
-			outputText("Your clone" + (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "s are" : " is") + " wandering around [camp]. What would you ask "
-				+ (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "them" : "[him]") + " to do?\n\n");
+			outputText("Your clone" + (player.statusEffectv3(StatusEffects.PCClone) > 0 ? "s are" : " is") + " wandering around [camp]. What would you ask "
+				+ (player.statusEffectv3(StatusEffects.PCClone) > 0 ? "them" : "[him]") + " to do?\n\n");
 			for (clone = 0; clone < Soulforce.clones.length; ++clone) {
 				outputText("Current clone (" + (clone + 1) + ") task: ");
 				if (player.statusEffectv1(Soulforce.clones[clone]) > 10 && player.statusEffectv1(Soulforce.clones[clone]) < 21) {
@@ -2891,7 +2891,7 @@ public class Camp extends NPCAwareContent{
 		if (button(4).enabled && player.hasStatusEffect(StatusEffects.PCClone)) button(4)
 			.disableIf(player.statusEffectv3(StatusEffects.PCClone) > 0,
 				"You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone))
-			.disableIf(player.statusEffectv4(StatusEffects.PCClone) == 4, "You cannot have more than four clones.");
+			.disableIf(player.statusEffectv3(StatusEffects.PCClone) == 4, "You cannot have more than four clones.");
 		for (clone = 0; clone < Soulforce.clones.length; ++clone) {
 			addButton(clone, "Contempl. (" + (clone + 1) + ")", cloneContemplateDao, clone)
 				.hint("Task your clone (" + (clone + 1) + ") with contemplating one of the Daos you know.")
@@ -2907,7 +2907,7 @@ public class Camp extends NPCAwareContent{
 	private function CreateClone():void {
 		menu();
 		if (player.HP > player.maxHP() * 0.9 && player.soulforce >= player.maxSoulforce()) {
-			if (!player.hasStatusEffect(StatusEffects.PCClone) || (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) < maximumClonesCount())) addButton(0, "Form", FormClone);
+			if (!player.hasStatusEffect(StatusEffects.PCClone) || (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) < maximumClonesCount())) addButton(0, "Form", FormClone);
 			else addButtonDisabled(0, "Form", "You can't form new clone.");
 		}
 		else {
@@ -2932,8 +2932,7 @@ public class Camp extends NPCAwareContent{
 		FormCLoneText();
 		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[newClone + 2]+".\n\n");
 		outputText("<b>Your clone (" + (newClone + 1) + ") is fully formed.</b>\n\n");
-		player.addStatusValue(StatusEffects.PCClone, 3, 9);
-		player.addStatusValue(StatusEffects.PCClone, 4, 1);
+		player.addStatusValue(StatusEffects.PCClone, 3, 1);
 		player.createStatusEffect(Soulforce.clones[newClone], 0, 0, 0, 0);
 		EngineCore.SoulforceChange(-player.maxSoulforce());
 		HPChange(-(player.maxHP() * 0.9), true);
@@ -2955,7 +2954,7 @@ public class Camp extends NPCAwareContent{
 	private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			if (player.statusEffectv4(StatusEffects.PCClone) == 3) {
+			if (player.statusEffectv3(StatusEffects.PCClone) == 3) {
 				outputText("It's time to finish what you started. Your clone won't simply create itself. With the black carapace-like layer in front of you, you resume focusing on transferring your life essence and soulforce to the clone.\n\n");
 				outputText("Minutes draw by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
 				outputText("Soon after the heartbeat, other rapid changes begin inside the clone. The body itself begins to animate as the clone takes its first breaths. With the transfer nearly completely, the new life is on the verge of its complete vitality.\n\n");
@@ -2964,18 +2963,17 @@ public class Camp extends NPCAwareContent{
 				outputText("It's not long until you're properly attuned to your clone. The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
 				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of two.\n\n");
 				outputText("<b>Your clone is fully formed.</b>\n\n");
-				player.addStatusValue(StatusEffects.PCClone, 4, 1);
-				player.addStatusValue(StatusEffects.PCClone, 3, 30);
+				player.addStatusValue(StatusEffects.PCClone, 3, 1);
 				EngineCore.SoulforceChange(-player.maxSoulforce());
 				HPChange(-(player.maxHP() * 0.5), true);
 				player.addNegativeLevels(30);
 			}
-			else if (player.statusEffectv4(StatusEffects.PCClone) == 2) {
+			else if (player.statusEffectv3(StatusEffects.PCClone) == 2) {
 				outputText("You return to work on completing your clone. Compared to the previous form of the large sphere, it now looks more like you. You begin the process for the third time.\n\n");
 				outputText("The outer layer steadily begins to change into the form of a translucent cocoon. It's barely noticeable, but you can see the vital organs form inside the incubator.\n\n");
 				outputText("Six hours pass as the cocoon hardens into a substance akin to hard, black chitin until the cocoon is opaque. A small part of the layer around the navel keeps some translucent properties.\n\n");
 				outputText("Fatigue steadily overwhelms you after expending such intense amounts of your life energy. You lie down and rest for an hour before you decide to resume.\n\n");
-				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				player.addStatusValue(StatusEffects.PCClone, 3, 1);
 				EngineCore.SoulforceChange(-player.maxSoulforce());
 				HPChange(-(player.maxHP() * 0.5), true);
 			}
@@ -2985,7 +2983,7 @@ public class Camp extends NPCAwareContent{
 				outputText("A few hours later, the sphere begins to take the shape of your body with the energy you've guided into it. It is slightly larger than you, with the outer layer being nothing more than something to prevent the essences you've given it from escaping.\n\n");
 				outputText("With the second phase completed, you slowly break the connection with your clone. Your mind and body wrack from the expended essence you've given to your clone. You decide to take the time to rest.\n\n");
 				outputText("After a couple of hours, you rise before leaving the half-finished creation in the corner of your [camp].\n\n");
-				player.addStatusValue(StatusEffects.PCClone, 4, 1);
+				player.addStatusValue(StatusEffects.PCClone, 3, 1);
 				EngineCore.SoulforceChange(-player.maxSoulforce());
 				HPChange(-(player.maxHP() * 0.5), true);
 			}
@@ -2994,7 +2992,7 @@ public class Camp extends NPCAwareContent{
 			outputText("You close your eyes with the intent of forming the core of your clone. Minutes pass as the sensation of your soul force and life essence slowly escapes from your being.\n\n");
 			outputText("An hour passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
 			outputText("The process is slow. While nourishing the core of the clone, you find yourself unable to expend any more of your life essence or risk being completely drained of soul essence.\n\n");
-			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
+			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 1, 0);
 			EngineCore.SoulforceChange(-(player.maxSoulforce()));
 			HPChange(-(player.maxHP() * 0.5), true);
 		}
@@ -4388,8 +4386,8 @@ public function rebirthFromBadEnd():void {
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
 	statScreenRefresh();
-	player.addStatusValue(StatusEffects.PCClone, 4, -1);
-	if (player.statusEffectv4(StatusEffects.PCClone) <= 0) player.removeStatusEffect(StatusEffects.PCClone);
+	player.addStatusValue(StatusEffects.PCClone, 3, -1);
+	if (player.statusEffectv3(StatusEffects.PCClone) <= 0) player.removeStatusEffect(StatusEffects.PCClone);
 	if (player.hasStatusEffect(StatusEffects.PCClone4th)) player.removeStatusEffect(StatusEffects.PCClone4th);
 	else if (player.hasStatusEffect(StatusEffects.PCClone3rd)) player.removeStatusEffect(StatusEffects.PCClone3rd);
 	else if (player.hasStatusEffect(StatusEffects.PCClone2nd)) player.removeStatusEffect(StatusEffects.PCClone2nd);

@@ -221,6 +221,9 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.TIMES_BAD_ENDED] > 0)
 			miscStats += "<b>Times Bad-Ended:</b> " + flags[kFLAGS.TIMES_BAD_ENDED] + "\n";
 
+		if (SceneLib.erlkingScene.playerHuntScore() > 0)
+			miscStats += "<b>Wild Hunt score:</b> " + SceneLib.erlkingScene.playerHuntScore() + "\n";
+
 		if (flags[kFLAGS.TIMES_ORGASMED] > 0)
 			miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";
 
@@ -1615,7 +1618,6 @@ public class PlayerInfo extends BaseContent {
 		} else {
 			player.perkPoints++;
 			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
-			if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone, 3, -1);
 		}
 	}
 	public function lUFSMAP():void {
