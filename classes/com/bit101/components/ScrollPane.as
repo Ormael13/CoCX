@@ -60,6 +60,7 @@ package com.bit101.components
 		{
 			super.init();
 			addEventListener(Event.RESIZE, onResize);
+			addEventListener(MouseEvent.MOUSE_WHEEL, MouseScrollEvent);
 			_background.addEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown);
 			_background.useHandCursor = true;
 			_background.buttonMode = true;
@@ -179,6 +180,11 @@ package com.bit101.components
 		{
 			_hScrollbar.value = -content.x;
 			_vScrollbar.value = -content.y;
+		}
+		private function MouseScrollEvent(e:MouseEvent):void
+		{
+			_vScrollbar.value += -( e.delta * 8 );
+			update();
 		}
 		
 		protected function onMouseGoUp(event:MouseEvent):void
