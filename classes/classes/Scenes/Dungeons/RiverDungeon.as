@@ -1821,10 +1821,18 @@ public class RiverDungeon extends DungeonAbstractContent
 		}
 		private function anvilUncrafting():void {
 			clearOutput();
+			menu();
+			if (player.hasItem(useables.PCSHARD, 6)) addButton(0, "???", anvilUncrafting2, 2).hint("Purple Crystal");
+			if (player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) addButton(1, "???", anvilUncrafting2, 3).hint("Large Purple Soul Crystal Shard");
+			if ((player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) && !player.hasKeyItem("Black Crystal")) addButton(7, "Black Crystal", anvilUncrafting2, 1);
+			addButton(14, "Back", roomD12);
+		}
+		private function anvilUncrafting2(type:Number = 0):void {
+			clearOutput();
 			var mainitem:String = "item";
 			var splititems:String = "six small item";
 			var item:ItemType;
-			if (player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) {
+			if (type == 1) {
 				player.destroyItems(useables.RED_GEL, 1);
 				player.destroyItems(consumables.CHOCBOX, 1);
 				player.destroyItems(consumables.LETHITE, 1);
@@ -1835,23 +1843,23 @@ public class RiverDungeon extends DungeonAbstractContent
 				mainitem = "Black Crystal";
 				splititems = "clump of red gel, box of chocolate, chunk of lethicite, hip flask of Salamander Firewater, Soul Residue and bottle of Onikiri Sake";
 			}
-			else if (player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) {
+			if (type == 2) {
+				player.destroyItems(useables.PCSHARD, 6);
+				mainitem = "Purple Crystal";
+				splititems = "six small Purple Crystal Shards";
+				item = useables.PCRYSTA;
+			}
+			if (type == 3) {
 				player.destroyItems(useables.PCSHARD, 3);
 				player.destroyItems(useables.SRESIDUE, 3);
 				mainitem = "Large Purple Soul Crystal Shard";
 				splititems = "three small Purple Crystal Shards and Soul Residues";
 				item = useables.LPSCSHA;
 			}
-			else if (player.hasItem(useables.PCSHARD, 6)) {
-				player.destroyItems(useables.PCSHARD, 6);
-				mainitem = "Purple Crystal";
-				splititems = "six small Purple Crystal Shards";
-				item = useables.PCRYSTA;
-			}
 			outputText("Gathering the "+splititems+", you place them on the center of the anvil, reaching to the hammer. The anvil seems to be altering the flow of time in the thick mist around you as you raise the tool, focusing your intents before you smash them with the hammer. All six of the scattered pieces immediately coalesce, reforming a larger whole as "+mainitem+" returns to what it was before it shattered. Putting the hammer away, you reach toward the single piece to stow in your bag. ");
 			if (mainitem == "Black Crystal") outputText("<b>You have gained Key Item: Black Crystal</b>");
-			if (mainitem == "Black Crystal") doNext(roomD12);
-			else inventory.takeItem(item, roomD12);
+			if (mainitem == "Black Crystal") doNext(anvilUncrafting);
+			else inventory.takeItem(item, anvilUncrafting);
 		}
 		private function useBlackCrystal():void {
 			clearOutput();
