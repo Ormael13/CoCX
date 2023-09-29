@@ -475,6 +475,7 @@ internal function IzmaWins():void {
 	}
 	else if (flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= -5) finalIzmaSubmission();
 	else {
+		flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] -= 1;
 		voluntary = false;
 		submitToLakeIzma();
 	}

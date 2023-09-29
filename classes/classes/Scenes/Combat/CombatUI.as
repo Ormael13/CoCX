@@ -273,11 +273,11 @@ public class CombatUI extends BaseCombatContent {
 			doMummyTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
-		else if (isCompanionTurn(1))
+		else if (isCompanionTurn(1) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 1)
 			doCompanionTurn(1);
-		else if (isCompanionTurn(2))
+		else if (isCompanionTurn(2) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 2)
 			doCompanionTurn(2);
-		else if (isCompanionTurn(3))
+		else if (isCompanionTurn(3) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 3)
 			doCompanionTurn(3);
 		//PC: is busy with something
 		else if (isPlayerBound()) {
@@ -548,7 +548,7 @@ public class CombatUI extends BaseCombatContent {
 				}
 				else if (monster is MinotaurKing) {
 					var minoking:MinotaurKing = monster as MinotaurKing;
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
+					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelper);
 					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
 				}
 				else if (monster is AngelLR && player.hasStatusEffect(StatusEffects.SoulArena)) {
@@ -749,7 +749,7 @@ public class CombatUI extends BaseCombatContent {
 				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION];
 				break;
 		}
-		return present && !acted && !player.hasStatusEffect(StatusEffects.MinoKing);
+		return present && !acted;
 	}
 
 	public function doCompanionTurn(num:int, clearAndNext:Boolean = true):void {
