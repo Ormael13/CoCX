@@ -192,7 +192,7 @@ import classes.internals.*;
 				{ call: hyenaJavelinAttack, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON]},
 				{ call: hyenaSnapKicku, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: hyenaArousalAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
-			]
+			];
 			checkMonster();
 		}
 	}

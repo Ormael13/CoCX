@@ -373,7 +373,7 @@ private function fuckYoDaughtersHomie():void {
 		player.cumMultiplier += .3;
 		explorer.stopExploring();
 		if (CoC.instance.inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseFourHours);
+		else endEncounter();
 	}
 }
 
@@ -736,11 +736,8 @@ private function legTamanisDaughtersRAEPYou():void {
 		knockUpDaughters();
 		explorer.stopExploring();
 		if (CoC.instance.inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseFourHours);
+		else endEncounter();
 	}
-
-
-
 }
 
 //[Lose Combat, Get Your Dick DRAINED]

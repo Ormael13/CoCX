@@ -773,7 +773,7 @@ use namespace CoC;
 		 */
 		public function transferOneItemToPlayer(source:ItemSlotClass):int {
 			var i:int = tryAddItemToPlayer(source.itype);
-			if (i >= 0) {
+			if (i > 0) {
 				source.removeOneItem()
 			}
 			return i;
@@ -817,7 +817,7 @@ use namespace CoC;
 		 */
 		public function transferOneItemToStorage(source:ItemSlotClass, storage:/*ItemSlotClass*/Array, startInclusive:int, endExclusive:int, storageName:String):int {
 			var i:int = tryAddOneItemToStorage(source.itype, storage, startInclusive, endExclusive, storageName);
-			if (i >= 0) {
+			if (i > 0) {
 				source.removeOneItem();
 			}
 			return i;

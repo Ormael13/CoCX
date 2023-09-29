@@ -25,6 +25,7 @@ import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Dungeons.RiverDungeon.TwinBosses;
 import classes.Scenes.Monsters.AngelLR;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
@@ -272,11 +273,11 @@ public class CombatUI extends BaseCombatContent {
 			doMummyTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
-		else if (isCompanionTurn(1))
+		else if (isCompanionTurn(1) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 1)
 			doCompanionTurn(1);
-		else if (isCompanionTurn(2))
+		else if (isCompanionTurn(2) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 2)
 			doCompanionTurn(2);
-		else if (isCompanionTurn(3))
+		else if (isCompanionTurn(3) && !player.hasStatusEffect(StatusEffects.MinoKing) && player.statusEffectv1(StatusEffects.MinoKing) != 3)
 			doCompanionTurn(3);
 		//PC: is busy with something
 		else if (isPlayerBound()) {
@@ -547,12 +548,16 @@ public class CombatUI extends BaseCombatContent {
 				}
 				else if (monster is MinotaurKing) {
 					var minoking:MinotaurKing = monster as MinotaurKing;
-					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
+					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelper);
 					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of "+(player.hasStatusEffect(StatusEffects.SoulArena)?"cow maid":"Excellia")+"!");
 				}
-				else if (monster is AngelLR) {
+				else if (monster is AngelLR && player.hasStatusEffect(StatusEffects.SoulArena)) {
 					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.hexindao.dishHelperIL);
 					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of second angel!");
+				}
+				else if (monster is TwinBosses) {
+					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", SceneLib.dungeons.riverdungeon.dishHelperTB);
+					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of other twin!");
 				}
 				else if (monster is Lethice) {
 					var lethice:Lethice = monster as Lethice;
@@ -744,7 +749,7 @@ public class CombatUI extends BaseCombatContent {
 				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION];
 				break;
 		}
-		return present && !acted && !player.hasStatusEffect(StatusEffects.MinoKing);
+		return present && !acted;
 	}
 
 	public function doCompanionTurn(num:int, clearAndNext:Boolean = true):void {

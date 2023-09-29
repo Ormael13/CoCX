@@ -1129,6 +1129,185 @@ public function soularena():void {
 		player.createPerk(PerkLib.IntermediateLeadership, 0, 0, 0, 0);
         cleanupAfterCombat();
 	}
+	public function dishHelper():void {
+		menu();
+		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButton(0, "1st", dishHelper2, 1).hint("Ask your first henchman to deal with it.");
+		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") addButton(1, "2nd", dishHelper2, 2).hint("Ask your second henchman to deal with it.");
+	}
+	public function dishHelper2(henchman:Number = 0):void
+	{
+		clearOutput();
+		player.createStatusEffect(StatusEffects.MinoKing,henchman,0,0,0);
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Neisa you need her to handle the bova girl so you can fight the Minotaur Challanger alone.\n\n");
+				outputText("Neisa nods, \"<i>A sound stratagem, leave it to me!</i>\" She raises her shield before ramming into the bova girl. The stun knocks her out cold.\n\n");
+				outputText("Neisa turns back, giving you a thumbs up along with an excited smile.\n\n");
+				outputText("Now it’s just you and the Minotaur Challanger.\n\n");
+			}
+			else {
+				outputText("You tell Neisa you need her to handle Excellia so you can fight the Minotaur King alone.\n\n");
+				outputText("Neisa nods, \"<i>A sound stratagem, leave it to me!</i>\"\n\n");
+				outputText("Neisa raises her shield before ramming into Excellia. The stun knocks Excellia off her feet before she rises, ready to fight her new foe.\n\n");
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Etna")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Etna you need her to take care of bova girl so you can focus your assault on the Minotaur Challanger.\n\n");
+				outputText("Etna smirks, \"<i>Let’s see if her face will enjoy my tail.</i>\"\n\n");
+				outputText("She wastes no time flying into the air before dive-bombing into the bova girl, quickly wrapping the cow girl within her tail. It doesn’t take long for the bova girl to succumb to the venom, enthralled by Etna’s presence.\n\n");
+				outputText("Etna speaks out to you, \"<i>I’ll keep this little toy occupied, you have fun, [name].</i>\"\n\n");
+				outputText("Now it’s just you and the Minotaur Challanger.\n\n");
+			}
+			else {
+				outputText("You tell Etna you need her to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
+				outputText("Etna smirks, \"<i>Let’s see if her face will enjoy my tail.</i>\"\n\n");
+				outputText("She wastes no time flying into the air before dive-bombing into Excellia, doing her best to wrap her within her tail, and envenom the cow girl.\n\n");
+				outputText("Excellia fights back, evidently stronger than she appears.\n\n");
+				outputText("\"<i>You won’t take me that easily!</i>\" Excellia shouts.\n\n");
+				outputText("Etna raises her claws, \"<i>Just give in, it’ll be so much easier for us.</i>\"\n\n");
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Aurora you need her to take care of the bova girl so you can focus your assault on the Minotaur Challanger.\n\n");
+				outputText("Aurora nods before raising her wings before swooping down onto the Bova girl, pinning her beneath her stone frame. The bova girl is quickly pinned down.\n\n");
+				outputText("Aurora calls out to you, \"<i>I’ll just watch from here, this girl won’t be doing anything now.</i>\"\n\n");
+			}
+			else {
+				outputText("You tell Aurora you need her to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
+				outputText("Aurora nods before raising her wings before swooping down onto Excellia, pinning her beneath her stone frame. Excellia struggles and manages to throw Aurora off of her.\n\n");
+				outputText("\"<i>You’re not going to take me that easily.</i>\"\n\n");
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Alvina you need her to handle the Bova girl so you can focus your assault on the Minotaur Challanger.\n\n");
+				outputText("Alvina rolls her eyes, \"<i>Fine, I’ll just keep her restrained for now.</i>\"\n\n");
+				outputText("She sets down her scythe before drawing somatic symbols with a single finger. The girl is forcibly risen, hoisted further into the air before vanishing in an instant.\n\n");
+				outputText("\"<i>That’ll keep her contained, it’s so much easier when they’re a weak-willed slave like her. I’ll just keep this focused so I don’t kill her… yet…</i>\"\n\n");
+				outputText("Now it’s just you and the Minotaur Challanger.\n\n");
+			}
+			else {
+				outputText("You tell Alvina you need her to handle Excellia so you can focus your assault on the Minotaur King.\n\n");
+				outputText("Alvina rolls her eyes, \"<i>Fine, I’ll just keep her restrained for now.</i>\"\n\n");
+				outputText("She sets down her scythe before drawing somatic symbols with a single finger. Excellia is forcibly risen, hoisted further into the air before vanishing in an instant.\n\n");
+				outputText("\"<i>That’ll keep her contained, I’ll just keep this focused so I don’t kill her… yet…</i>\"\n\n");
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Mizti and her daughters you need them to take care of bova girl so you can focus your assault on the Minotaur Challanger.\n\n");
+				outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that slut!</i>\"\n\n");
+				outputText("Furxia, Lidea, Mizti, and Roxy rush the bova girl, flanking her from every direction.\n\n");
+				outputText("The Bova girl holds up her hands, \"<i>Please, have mercy!</i>\"\n\n");
+				outputText("The goblins exchange sinister glances with each other. It would seem they have their prey all to themselves.\n\n");
+				outputText("Now it’s just you and the Minotaur Challanger.\n\n");
+			}
+			else {
+				outputText("You tell Mizti and her daughters you need them to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
+				outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that slut!</i>\"\n\n");
+				outputText("Furxia, Lidea, Mizti, and Roxy rush Excellia, flanking her from every direction.\n\n");
+				outputText("Excellia braces herself, trying to fight back against the determined goblin horde.\n\n");
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Excellia you need her to take care of the bova girl.\n\n");
+				outputText("Excellia readies herself, \"<i>I can handle that with ease.</i>\"\n\n");
+				outputText("She barges in, slamming her weight against the bova girl as she’s quickly knocked out.\n\n");
+				outputText("Excellia turns to you, \"<i>I’ll stay here and make sure she stays down. You can handle this, [name].</i>\"\n\n");
+			}
+			else {
+				outputText("You tell Excellia you need her to take care of her past self.\n\n");
+				if (EngineCore.silly()) {
+					outputText("Excellia frowns, \"<i>You really wanted to cheat and see what happens when you use me against myself? How pathetic. Fine, I’ll do it. Now go share this screenshot with everyone so you can gain clout on the internet.</i>\"\n\n");
+					outputText("Excellia saunters up to herself. Because this scene isn’t canon in the slightest, the past Excellia is confused and is promptly vaporized due to a coding error or something.\n\n");
+					outputText("<b>*poof*</b>\n\n");
+				}
+				else {
+					outputText("Excellia rolls her eyes, \"<i>Next time you shouldn’t cheat just to see what happens.</i>\"\n\n");
+					outputText("Excellia rushes in, using the weight of her body to smash into herself.\n\n");
+				}
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Amily")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You ask Amily if she can take care of the Bova girl so you can focus on fighting the Minotaur Challanger alone.\n\n");
+				outputText("Amily nods before coating her daggers in some poison, \"<i>I got this, you can count on me.</i>\"\n\n");
+				outputText("She rushes through, evading the Minotaur King before throwing a knife at the girl. The bova girl stumbles back as Amily wastes no time recovering her knife while keeping up the pressure.\n\n");
+				outputText("\"<i>Ah, you bitch!</i>\" The girl shouts as she’s pinned to the ground.\n\n");
+				outputText("Amily calls back to you, \"<i>You got this, [name]! I’ll stay here and make sure she does not do anything stupid, but I won’t take her out just yet.</i>\"\n\n");
+				outputText("Now it’s just you and the Minotaur Challanger.\n\n");
+			}
+			else {
+				outputText("You ask Amily if she can take care of Excellia so you can focus on fighting the Minotaur King alone.\n\n");
+				outputText("Amily nods before coating her daggers in some poison, \"<i>I got this, you can count on me.</i>\"\n\n");
+				outputText("She rushes through, evading the Minotaur King before throwing a knife at Excellia. Excellia stumbles back as Amily wastes no time recovering her knife while keeping up the pressure.\n\n");
+				outputText("\"<i>You bitch!</i>\" Excellia shouts, trying to brush off her wound before reading herself to fight back.\n\n");
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Zenji you need him to hold back Excellia so you can take care of the Minotaur Challanger.\n\n");
+				outputText("Zenji nods, \"<i>Leave it ta me, champion!</i>\"\n\n");
+				outputText("He readies his spear before pouncing on the bova girl, keeping her pinned beneath his weight.\n\n");
+				outputText("\"<i>Stay down!</i>\" he shouts.\n\n");
+				if (EngineCore.silly()) outputText("\"<i>Yes daddy, harder!</i>\" she grunts.\n\n");
+				else outputText("She moans lewdly, not resisting him in the slightest.\n\n");
+				outputText("\"<i>No! Bad!</i>\" Zenji retorts before knocking her out with the butt of his spear.\n\n");
+				outputText("Zenji calls out to you, \"<i>I will keep dis brat down, ya can do dis, [name]!</i>\"\n\n");
+				outputText("Now it’s just you and the Minotaur Challanger.\n\n");
+			}
+			else {
+				outputText("You tell Zenji you need him to hold back Excellia so you can take care of the Minotaur King.\n\n");
+				outputText("Zenji nods, \"<i>Leave it ta me, champion!</i>\"\n\n");
+				outputText("He readies his spear before pouncing on Excellia, keeping her pinned beneath his weight.\n\n");
+				outputText("\"<i>Stay down!</i>\" he shouts.\n\n");
+				outputText("Excellia struggles before throwing him off, \"<i>Why don’t you make me?!</i>\"\n\n");
+				outputText("Zenji chuckles, \"<i>Haha, I will den.</i>\"\n\n");
+				outputText("You redirect your attention back to your fight now that they’re occupied. Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You tell Kiha you need her to take care of the Bova Girl so you can focus your assault on the Minotaur.\n\n");
+				outputText("She scoffs teasingly, \"<i>What, an idiot like you needs a distraction. Yeah, don’t worry, I got this.</i>\" Kiha throws her weapon in the air before charging at Excellia, \"<i>Hope you like a goof fight, bitch! You sure as hell won’t stop me from getting to Lethice!</i>\"\n\n");
+				outputText("The bova girl quivers as Kiha picks up her axe in mid-air, swinging it down to barely an inch from the girl’s face. The bova girl faints in distress dramatically as she brings her hand to her forehead.\n\n");
+				outputText("Kiha grins as she taps her axe, \"<i>Pssh, that’s what I thought.</i>\"\n\n");
+			}
+			else {
+				outputText("You tell Kiha you need her to take care of Excellia so you can focus your assault on the Minotaur King.\n\n");
+				outputText("She scoffs teasingly, \"<i>What, an idiot like you needs a distraction. Yeah, don’t worry, I got this.</i>\" Kiha throws her weapon in the air before charging at Excellia, \"<i>Hope you like a goof fight, bitch! You sure as hell won’t stop me from getting to Lethice!</i>\"\n\n");
+				outputText("Excellia quickly spins amidst the quarrel, bashing her shoulder into Kiha. The dragon-woman recoils before she catches her axe, trying to slam it down against Excellia before the woman moves out of the way, pieces of her hair sliced off from the blade.\n\n");
+				outputText("Excellia grits her teeth, \"<i>Oh, it is on!</i>\"\n\n");
+			}
+		}
+		if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia")) {
+			if (player.hasStatusEffect(StatusEffects.SoulArena)) {
+				outputText("You look at bova girl, realizing the problem she poses. Turning to Tyrantia, you tell your amazoness to stop her from interfering.\n\n");
+				outputText("Swinging her spear, Tyrantia rolls her seven working eyes. \"<i>I’m not a cattle rancher, [name]</i>\", she mutters, before giving you a thumbs-up \"<i>But that cow doesn’t stand a chance.</i>\"\n\n");
+				outputText("Tyrantia charges, her spear hitting bova girl in the gut. As the bovine is stunned, Tyrantia follows through with a shoulder charge, slamming them both into a wall.\n\n");
+				outputText("\"<i>Kick his ass, [name]!</i>\" She calls back, as bova girl tries to gore her. Tyrantia dodges, but the effort seems to piss her off. Tyrantia grabs bova girl by the horns, and begins to bodily toss the unfortunate bovine around like a ragdoll.\n\n");
+				outputText("Now it’s just you and the Minotaur Challanger.\n\n");
+			}
+			else {
+				outputText("You look at Excellia, realizing the problem she poses. Turning to Tyrantia, you tell your amazoness to stop her from interfering.\n\n");
+				outputText("Swinging her spear, Tyrantia rolls her seven working eyes. \"<i>I’m not a cattle rancher, [name]</i>\", she mutters, before giving you a thumbs-up \"<i>But that cow doesn’t stand a chance.</i>\"\n\n");
+				outputText("Tyrantia charges, her spear hitting Excellia in the gut. As the bovine is stunned, Tyrantia follows through with a shoulder charge, slamming them both into a wall.\n\n");
+				outputText("\"<i>Kick his ass, [name]!</i>\" She calls back, as Excellia tries to gore her. Tyrantia dodges, but the effort seems to piss her off. Tyrantia grabs Excellia by the horns, and begins to bodily toss the unfortunate bovine around like a ragdoll.\n\n");
+				outputText("Now it’s just you and the Minotaur King.\n\n");
+			}
+		}
+		SceneLib.combat.enemyAIImpl();
+	}
 	public function dishHelperIL():void {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.MinoKing,0,0,0,0);
@@ -1184,7 +1363,7 @@ public function soularena():void {
 			outputText("\"<i>Oh…I am all OVER that.</i>\" Tyrantia lets out a guttural roar, shooting a glob of her “webbing” at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+". The angel dodges, but her black and pink aura flares, and she rushes in, black aura hiding the angel’s light from your view.\n\n");
 		}
 		SceneLib.combat.enemyAIImpl();
-        }
+    }
     public function gaunletchallange1fight1():void {
         clearOutput();
         outputText("You register for the gauntlet challenge, and wait patiently until you are called. You're motioned forward quickly, and move out beyond the arena gate to face your opponent. The crowd is big, you certainly have quite the audience! A man with a necktie and a weird stick screams across the area.\n\n");

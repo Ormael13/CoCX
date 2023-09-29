@@ -175,7 +175,7 @@ public class GoblinShaman extends Goblin
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
 				{ call: goblinTeaseAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 				{ call: castSpell, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[], weight:2},
-			]
+			];
 			checkMonster();
 		}
 		

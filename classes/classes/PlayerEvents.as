@@ -1319,7 +1319,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.cor += 5;
 				}
 				//Reset clone creation tracker
-				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) == 0 && player.statusEffectv4(StatusEffects.PCClone) == 0) player.removeStatusEffect(StatusEffects.PCClone);
+				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
 			//Process crops harvest moon
 			if (CoC.instance.model.time.hours == 24){
@@ -1404,9 +1404,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				if (SophieFollowerScene.HarpyEggHatching) { //Egg progression
-					if (SophieFollowerScene.HarpyEggDay <= 2) outputText(" The proximity of your egg is soothing to your motherly instincts.");
-					else if (SophieFollowerScene.HarpyEggDay <= 4) outputText(" Your egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
-					else if (SophieFollowerScene.HarpyEggDay <= 7) outputText(" Snuggling the egg you instinctively know your precious child is almost ready to be born.");
+					if (SophieFollowerScene.HarpyEggDay <= 2) outputText("\nThe proximity of your egg is soothing to your motherly instincts.");
+					else if (SophieFollowerScene.HarpyEggDay <= 4) outputText("\nYour egg is probably halfway through hatching now you can almost hear your child moving inside once in a while.");
+					else if (SophieFollowerScene.HarpyEggDay <= 7) outputText("\nSnuggling the egg you instinctively know your precious child is almost ready to be born.");
 					SophieFollowerScene.HarpyEggDay += 1;
 					if (SophieFollowerScene.HarpyEggDay == 7){
 						SophieFollowerScene.HarpyEggDay = 0;
@@ -2818,4 +2818,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

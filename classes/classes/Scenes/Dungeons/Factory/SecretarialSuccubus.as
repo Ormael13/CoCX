@@ -71,7 +71,7 @@ public class SecretarialSuccubus extends AbstractSuccubus
 				{ call: kissAttack, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: seduceAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 				{ call: whipAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]}
-			]
+			];
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);

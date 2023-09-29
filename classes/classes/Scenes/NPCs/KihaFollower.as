@@ -2527,7 +2527,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("Kiha flaps her wings, launching herself towards the imposing dragon… only to be caught midair by the friend beside her. \"<i>Oh, no you don’t!</i>\" She declares. \"<i>That dress was my mother’s, and you are NOT getting it ruined!</i>\" Kiha struggles, but her friend is joined by several other dragonoids from the village. They carry Kiha, kicking and screaming, into the back.\n\n");
         outputText("\"<i>[Name]! [NAME]!!! Don’t you DARE die on me now!</i>\" Kiha breathes fire, but the others don’t care about the heat.\n\n");
         outputText("\"<i>So… You’re the one who made my Kiha an oathbreaker.</i>\" The massive dragonoid stands before you, eyes filled with hatred. \"<i>Don’t worry. Once her lethicite is in my hands, she won’t remember you.</i>\"");
-        startCombat(new Magnar);
+        ProposalStatus = 5;
+		startCombat(new Magnar);
     }
 
     public function KihaWeddingVictory():void {
@@ -3214,4 +3215,4 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     }
 }
 }
-
+

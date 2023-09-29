@@ -116,7 +116,7 @@ public class Boat extends AbstractLakeContent
 				kind: 'monster',
 				night: false,
 				when: function():Boolean {
-					return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2 && player.hasStatusEffect(StatusEffects.FetishOn)
+					return player.level > 2 && player.hasStatusEffect(StatusEffects.FetishOn)
 				},
 				call: lake.fetishZealotScene.zealotBoat
 			}, {

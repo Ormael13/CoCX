@@ -39,7 +39,6 @@ package classes.Scenes.Monsters
 			removeStatusEffect(StatusEffects.TrueFormAngel);
 			if (this.short == "Gabriel") this.short = "Uriel";
 			else this.short = "Gabriel";
-			
 			if (hasStatusEffect(StatusEffects.Stunned)) removeStatusEffect(StatusEffects.Stunned);
 			if (hasStatusEffect(StatusEffects.StunnedTornado)) removeStatusEffect(StatusEffects.StunnedTornado);
 			if (hasStatusEffect(StatusEffects.InkBlind)) removeStatusEffect(StatusEffects.InkBlind);

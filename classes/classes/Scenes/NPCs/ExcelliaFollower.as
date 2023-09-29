@@ -77,7 +77,9 @@ public function ExcelliaPathChoice2():void {
 	flags[kFLAGS.EXCELLIA_LA_BOVA] = 0;
 	menu();
 	addButton(1, "Fix Her", ExcelliaPathChoiceFixHer);
-	addButton(3, "Make Slave", ExcelliaPathChoiceMakeSlave);
+	addButton(2, "Later", playerMenu).hint("Why to decide now? Let return later to this decision.");
+	if (player.hasCock() || player.hasVagina()) addButton(3, "Make Slave", ExcelliaPathChoiceMakeSlave);
+	else addButtonDisabled(3, "Make Slave", "Not for genderless.");
 }
 public function ExcelliaPathChoiceFixHer():void {
 	clearOutput();

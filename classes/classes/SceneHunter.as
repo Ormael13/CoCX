@@ -794,7 +794,7 @@ public class SceneHunter extends BaseContent {
             addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight)
                 .hint("The punishment for Marble's bitchy sister.");
         //Excellia slave first scene
-        if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2 && player.gender > 0)
+        if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2 && (player.hasCock() || player.hasVagina()))
             addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave)
                 .hint("Excellia acknowledges herself as your slave.");
         //Phylla demon fuck

@@ -152,7 +152,7 @@ public class Naga extends Monster
 				{ call: nagaPoisonBiteAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
 				{ call: nagaConstrict, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
 				{ call: nagaTailWhip, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]}
-			]
+			];
 			checkMonster();
 		}
 

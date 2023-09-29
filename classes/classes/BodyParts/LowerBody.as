@@ -846,6 +846,12 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "Your legs are fairly human, save for the webbing between your toes and a pair of fins that have sprouted on each of your thighs, just below the hips."
 	});
 
+	public static const WERESHARK:int = 80;
+	EnumValue.add(Types, WERESHARK, "WERESHARK", {
+		name: "wereshark",
+		appearanceDesc: "Lia would add it later OKAY???."
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count

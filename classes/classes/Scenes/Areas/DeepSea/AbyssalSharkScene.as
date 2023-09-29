@@ -31,6 +31,7 @@ public function oceanJuvenileAbyssalSharkEncounter():void {
 
 public function oceanJuvenileAbyssalSharkDefeated():void {
 	clearOutput();
+	cleanupAfterCombat();
 	outputText("Just as you manage to surmount him, he turns tail and torpedos away. You almost begin to chase after him, yet are swiftly cut off by the nearby swarm of sharks closing the distance upon you, giving him a chance to escape, seemingly as he had anticipated.\n\n");
 	outputText("The hunting pack leader reveals a devious, toothy grin upon commanding the offense. Looks like you're in for more as the pack closes in for a fight!\n\n");
 	outputText("You are under attack by a shark girls pack!");

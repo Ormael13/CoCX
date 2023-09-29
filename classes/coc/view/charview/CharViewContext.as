@@ -96,8 +96,9 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAWandUnholy: player.weapon == game.weapons.ECLIPSE,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
-					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
-					PlayerHasASwordunholy: player.weapon == game.weapons.EBNYBLD,
+					PlayerHasASwordHoly: player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE || player.weapon == game.weapons.T_HEART || player.weapon == game.weapons.ARMAGED,
+					PlayerHasASwordUnholy: player.weapon == game.weapons.EBNYBLD || player.weapon == game.weapons.DORSOUL || player.weapon == game.weapons.CHAOSEA,
+					PlayerHasASwordMoonGS: player.weapon == game.weapons.MGSWORD,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
@@ -113,14 +114,17 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpear: player.isSpearTypeWeapon(), //until polearm have their own sprite they share sprite with spears
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
+					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS,
 
-					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE,
+					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.DKATANA,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
 					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE,
 
 					PlayerHasNodachi: (weaponSubtype == "katana" && weaponSubtype != "uchigatana") || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.DNODACHI || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
 					PlayerHasNodachiHoly:player.weapon == game.weapons.MASAMUN,
 					PlayerHasNodachiUnholy:player.weapon == game.weapons.BLETTER,
+
+					PlayerHasDaisho: player.weapon == game.weapons.DAISHO,
 
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
@@ -133,6 +137,10 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAScythe: player.isScytheTypeWeapon() || player.weapon == game.weapons.DEMSCYT || player.weapon == game.weapons.KAMA || player.weapon == game.weapons.KAMAWHIP || player.weapon == game.weapons.D_KAMA,
 					PlayerHasAScytheHoly:player.weapon == game.weapons.LHSCYTH,
 					PlayerHasAScytheUnholy: player.weapon == game.weapons.ATWINSCY || player.weapon == game.weapons.HELRAIS,
+
+					PlayerHasADaggerTwin: player.hasAetherTwinsTierWeapon(),
+					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),
+					PlayerHasAnOffhandDaggerTwin: player.hasAetherTwinsTierLeftDagger(),
 
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
@@ -237,6 +245,11 @@ public class CharViewContext extends ExecContext {
 					franRegalia: player.armor == game.armors.FCLOAK,
 					elfWizardDress: player.armor == game.armors.FMDRESS,
 					CowGirlOutfit: player.armor == game.armors.CGUNSLI,
+					greenAdventurerClothes: player.armor == game.armors.ADVCLTH,
+					nurseClothing: player.armor == game.armors.NURSECL,
+					SamuraiArmor: armorSubtype == "samurai" || player.armor == game.armors.SAMUARM,
+					scalemail: armorSubtype == "scalemail" || player.armor == game.armors.SCALEML,
+					chainMail: armorSubtype == "fullchain" || player.armor == game.armors.FULLCHN,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
@@ -273,6 +286,7 @@ public class CharViewContext extends ExecContext {
 					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 					cowGirlHat: player.headJewelry == game.headjewelries.COWHAT,
+					kabutoMempo: player.headJewelry == game.headjewelries.KABUMEMP,
 
 					// Viewable amulet Accessory lists
 					GoldStatAmulet: player.necklace == game.necklaces.NECKINT || player.necklace == game.necklaces.NECKLIB || player.necklace == game.necklaces.NECKSEN ||

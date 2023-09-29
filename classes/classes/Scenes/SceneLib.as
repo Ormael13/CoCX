@@ -7,6 +7,7 @@ import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.DeepSea.AbyssalSharkScene;
+import classes.Scenes.Areas.Forest.ErlKingScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
@@ -147,6 +148,8 @@ public class SceneLib {
     public static var electraScene:ElectraFollower = new ElectraFollower();
 
     public static var emberScene:EmberScene = new EmberScene();
+	
+	public static var erlkingScene:ErlKingScene = new ErlKingScene();
 
     public static var etnaScene:EtnaFollower = new EtnaFollower();
 

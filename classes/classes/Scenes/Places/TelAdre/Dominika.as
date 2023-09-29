@@ -17,7 +17,7 @@ public function fellatrixBarApproach():void {
 	clearOutput();
 	outputText(images.showImage("dominika-first-meeting-at-bar"));
 	//Get the emporerors new groove (sword)
-	//Req's d2 finished
+	//Req's d1 finished
 	if(fellatrixSucked() && flags[kFLAGS.DOMINIKA_MET] > 0 && SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
 		dominikaSpellblade();
 		return;
@@ -25,9 +25,7 @@ public function fellatrixBarApproach():void {
 	//[First encounter, player is minotaur (If you lose minotaur characteristics and come back, Dominika will not recognize you and do a regular first encounter)]
 	if(player.isRace(Races.MINOTAUR, 1, false) && player.faceType == Face.COW_MINOTAUR && player.gender == 1) {
 		outputText("You approach the woman, delivering what you consider a polite greeting. Icily she turns to you, raises an eyebrow, and in a low husky voice snarls \"<i>Don't bother. I'm not interested in being your bimbo.</i>\" She turns away from you, and ignores any further attempts to start a conversation.\n\n");
-
 		outputText("A tavern maid with shaggy dreadlocks and a long tongue she can barely fit in her mouth waves you over. \"<i>Don't wowwy 'bout Dominika,</i>\" she says through her lisp, \"<i>The's a liddle wacist against, you know, your type. Thays you're only interethted in wape. Motht of uth aren't like dat.</i>\"\n\n");
-
 		outputText("You nod slightly, glancing back at Dominika, then shrug.");
 		//TO THE BAR
 		cheatTime(1);
@@ -37,13 +35,9 @@ public function fellatrixBarApproach():void {
 	//[First encounter]
 	if(flags[kFLAGS.DOMINIKA_MET] == 0) {
 		outputText("You approach the woman, delivering a polite greeting. She glances back at you and you think she might be smirking beneath the veil, but can't tell. \"<i>Hello to you as well,</i>\" she replies, with a low and husky voice, gesturing to a seat across from her. \"<i>You're a new face, no?</i>\"\n\n");
-
 		outputText("You accept the seat and begin to make small talk with her. \"<i>I'm Dominika,</i>\" she adds after a chuckle at a joke. \"<i>Just Dominika now, I'm afraid.</i>\" You introduce yourself as well. \"<i>If I'm not mistaken, you'd be from... Ingnam, yes?</i>\" You nod, and ask if she's familiar with your homeland. \"<i>I'm afraid not,</i>\" she replies, \"<i>But I do my best to learn about the world. Ingnam has sent a champion every year for about... oh goodness, longer than I know. I've spoken with another during my time here, and you've both got a very distinctive accent.</i>\"  She can't help but chuckle again when she sees your reaction. \"<i>Oh, don't worry, it's not that thick.</i>\"\n\n");
-
 		outputText("Blushing slightly, you ask her about her own home. She leans back in her chair and gazes off for a moment before responding. \"<i>I come from... far away. Farther than most the people here know. Far enough that it's unlikely I'll be returning.</i>\" You hear a familiar longing in her voice, one that you have known on some dark nights, and feel a certain solidarity with her. She looks back at you and shrugs. You suspect that beneath the cloth she is giving you a half-smile. \"<i>Perhaps, if circumstances work in my favor, one day... I make the best of my situation here.</i>\"\n\n");
-
 		outputText("The two of you chat for a while longer, making small talk about the things you've seen in the Demon Realm. Eventually you can't help but observe that she doesn't seem to be sporting massive breasts, or thirty cocks, or be mad with lust, and you ask why. She looks you up and down once and laughs. \"<i>You don't have to put everything you find in your mouth, you know,</i>\" she finally answers.\n\n");
-
 		outputText("After a bit more conversation she glances outside and says she should go. \"<i>It has been nice, though,</i>\" she adds, \"<i>I would enjoy speaking with you again.</i>\" She rests a hand on your shoulder as she leaves. Her eyes tell you she's smiling at you before she goes.");
 		doNext(camp.returnToCampUseOneHour);
 		flags[kFLAGS.DOMINIKA_MET]++;
@@ -52,9 +46,7 @@ public function fellatrixBarApproach():void {
 	else if(!player.isBiped()) {
 		if(flags[kFLAGS.DOMINIKA_MET] == 1) {
 			outputText("You make your way over to Dominika's table again, saying hello once more. The two of you talk about your exploits for a time, before you ask her what she has been up to. \"<i>Research, mostly,</i>\" she explains. \"<i>I try to document what this land has, in the hopes that it may be useful to someone one day. I do consider myself somewhat of a learned woman which... seems to be something of a rarity here, so there are few qualified to do the job.</i>\"\n\n");
-
 			outputText("Intrigued, you ask her to elaborate on what she's learned. \"<i>Well, goodness, that could take a while,</i>\" she laughs. \"<i>Mm. Free tip though. Stay away from minotaur cum. That stuff will get you. There's a merchant out there who has some of my work, if you can find him. Other than that I mean, teaching requires a more intimate setting than 'the Wet Bitch'.</i>\" She rolls her eyes slightly at the name. \"<i>I'd be surprised if there's a single college on this entire continent though. Ah well.</i>\"\n\n");
-
 			outputText("\"<i>Although...</i>\" she seems to think about something, glancing over at you for a few seconds, then waves her hand dismissively. \"<i>No, no. That wouldn't work. Don't worry about it.</i>\" She seems to sigh slightly, and though you continue talking, you can tell she's become less invested in the conversation. After a few minutes you excuse yourself.");
 			flags[kFLAGS.DOMINIKA_MET]++;
 		}//[Follow-up encounters, player has naga tail/centaur body/slime body]
@@ -67,11 +59,8 @@ public function fellatrixBarApproach():void {
 	//Second encounter]
 	else if(flags[kFLAGS.DOMINIKA_MET] == 1) {
 		outputText("You make your way over to Dominika's table again, saying hello once more. The two of you talk about your exploits for a time, before you ask her what she has been up to. \"<i>Research, mostly,</i>\" she explains. \"<i>I try to document what this land has, in the hopes that it may be useful to someone one day. I do consider myself somewhat of a learned woman which... seems to be something of a rarity here, so there are few qualified to do the job.</i>\"\n\n");
-
 		outputText("Intrigued, you ask her to elaborate on what she's learned. \"<i>Well, goodness, that could take a while,</i>\" she laughs. \"<i>Mm. Free tip though. Stay away from minotaur cum. That stuff will get you. There's a merchant out there who has some of my work, if you can find him. Other than that I mean, teaching requires a more intimate setting than 'the Wet Bitch'.</i>\" She rolls her eyes slightly at the name. \"<i>I'd be surprised if there's a single college on this entire continent though. Ah well.</i>\"\n\n");
-
 		outputText("\"<i>Although...</i>\" she seems to think about something, glancing over at you for a few seconds. After a pause, she adds \"<i>If you'd like, my place is just a few blocks down, I could... impart some knowledge on you there.</i>\"\n\n");
-
 		simpleChoices("Sure", acceptDominikasKnowledge, "No Thanks", turnDownDominikasKnowledge, "", null, "", null, "", null);
 	}
 	//[Follow-up Introduction]
@@ -96,11 +85,8 @@ private function acceptDominikasKnowledge():void {
 	flags[kFLAGS.DOMINIKA_MET]++;
 	if(flags[kFLAGS.DOMINIKA_MET] == 2) {
 		outputText("Dominika smiles with her eyes again. She leaves some payment on the table, then escorts you out into the desert city. \"<i>It's not far,</i>\" she says, \"<i>We'll be there in just a few minutes.</i>\"\n\n");
-
 		outputText("True to her word, she ducks into an alley just a few blocks down, climbing a ladder leading up to a balcony. \"<i>This city has been co-opted a bit haphazardly,</i>\" she observes as she leads you up, \"<i>So apologies for the irregular front door.</i>\" Glancing up as you climb, you see her pale bare legs, and a glint of metal between them. She helps you onto the balcony, turning and opening the door to her home.\n\n");
-
 		outputText("Inside you see a number of books left piled on desks and shelves, as well as maps and diagrams of such a variety you don't even recognize most of them. Dominika lights some oil lamps and briefly reorganizes some fallen books before beginning to disrobe. She unwinds the turban around her head and from the back you see brilliant blonde hair reveal itself, most of it tied into a compact bun. Her top lowers from her shoulders – the skirt around her legs appears to be a separate piece - revealing the pale skin you expected and a surprise beyond that. Her back is covered in tattoos, eccentric circles marked with unknown runes and symbols. Though you do not recognize them you can sense that their placement is intentional even though little space remains. The tattoo runs down her arms to the elbow and over her shoulders, and as she turns you see that it runs over her collarbone and completely covers one half of her front, breast and all. The other half is curiously uncovered.\n\n");
-
 		outputText("Despite the revelation of her multiple intricate tattoos, your eyes find themselves drawn elsewhere. Nearly pitch black, her lips shine with moisture and sit plump and full on her face. It says a great deal about their prominence that between them and the fact that she stands topless before you, you stare at her face!\n\n");
 	}
 	else {
@@ -108,17 +94,14 @@ private function acceptDominikasKnowledge():void {
 		if(!fellatrixSucked()) outputText("learning more arcane lore.");
 		else outputText("getting to feel those black lips on your skin once again.");
 		outputText("  You let her lead the way inside, and oogle her pale bare legs as she climbs up before you follow.\n\n");
-
 		outputText("The inside of her place is unchanged; it's full of books, tomes, and parchments scattered over numerous desks and shelves.  With her tutelage you're able to recognize some of them, but you doubt you'll ever have her encyclopedic knowledge.  ");
 		if(player.inte >= 80) outputText("Not due to lack of intellect, but due to lack of time.  You're all too aware of your mental skill.  ");
 		outputText("Dominika unwinds her turban and lets her hair fall free.  She even undoes her top, revealing the curves of her breasts and her strange tattoos.  Despite the revelation of her multiple intricate tattoos, your eyes find themselves drawn elsewhere once again. Nearly pitch black, her lips shine with moisture and sit plump and full on her face. It says a great deal about their prominence that between them and the fact that she stands topless before you, you stare at her face!\n\n");
 	}
-
 	//If no dominika cooldown up
 	if(flags[kFLAGS.DOMINIKA_MAGIC_COOLDOWN] == 0) {
-		flags[kFLAGS.DOMINIKA_MAGIC_COOLDOWN] = 7 + rand(3);
+		flags[kFLAGS.DOMINIKA_MAGIC_COOLDOWN] = 3 + rand(2);
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n");
-
 		//false - black, true - white
 		var spells:Array = [
 			//single-target damage spells

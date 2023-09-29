@@ -62,7 +62,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			clearOutput();
 			outputText("As you get close to your boat, you are surprised to find someone standing at the end of the dock.  As you get closer, you see that it's a man wearing some kind of bizarre religious outfit.  He turns to face you as you approach and says \"<i>This has been claimed by the Followers of the Fetish for security reasons, leave at once.</i>\"\n\n\"<i>What?  This is my boat!</i>\" you cry out in surprise.  The zealot seems to take this as an aggressive action on your part and moves to attack you.");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
-			//next button, go to zealot fight
+			flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] = 1;
 			startCombat(new FetishZealot());
 			spriteSelect(SpriteDb.s_fetish_zealot);
 		}
@@ -73,8 +73,34 @@ public class FetishZealotScene extends AbstractLakeContent
 		{
 			clearOutput();
 			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
+			flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] = 1;
 			startCombat(new FetishZealot());
 			spriteSelect(SpriteDb.s_fetish_zealot);
+		}
+		public function zealotHighMountains():void
+		{
+			clearOutput();
+			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this priest has been tasked to guard, and now you must fight him.");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
+			flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] = 2;
+			startCombat(new FetishZealot());
+			spriteSelect(SpriteDb.s_fetish_zealot);
+		}
+		public function zealotSwamp():void
+		{
+			clearOutput();
+			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this inquisitor has been tasked to guard, and now you must fight him.");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
+			flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] = 4;
+			startCombat(new FetishZealot());
+			spriteSelect(SpriteDb.s_fetish_zealot);
+		}
+		private function cname():String
+		{
+			if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 4) return "inquisitor";
+			else if (flags[kFLAGS.FETISH_FOLLOWER_SUBTYPE] == 2) return "priest";
+			else return "zealot";
 		}
 
 //Raping the player
@@ -82,10 +108,10 @@ public class FetishZealotScene extends AbstractLakeContent
 			clearOutput();
 			//Pre Rape Scene - lose by hp
 			if (player.HP < 1)
-				outputText("You collapse from the pain of the zealot's attacks.  You feel your head swimming from the aphrodisiac; it seems to be having a stronger and stronger effect on you.  Soon your head is swimming with images of fetish scenes of all kinds.  The zealot walks up to you and puts his hand on your forehead.  Suddenly, all the images cascade into one.\n\n");
+				outputText("You collapse from the pain of the "+cname()+"'s attacks.  You feel your head swimming from the aphrodisiac; it seems to be having a stronger and stronger effect on you.  Soon your head is swimming with images of fetish scenes of all kinds.  The "+cname()+" walks up to you and puts his hand on your forehead.  Suddenly, all the images cascade into one.\n\n");
 			//Pre Rape Scene – lose by lust
 			else
-				outputText("The constant images of fetishes overwhelm you, and you fall to your knees, unable to resist the temptation. The zealot walks up to you and puts his hand on your forehead.  Suddenly all the images cascade into one.\n\n");
+				outputText("The constant images of fetishes overwhelm you, and you fall to your knees, unable to resist the temptation. The "+cname()+" walks up to you and puts his hand on your forehead.  Suddenly all the images cascade into one.\n\n");
 
 			//Student rape
 			//Zealot in a student costume, the player is in a teacher costume.  The zealot asks for a sex aid lesson in a very nervous way.  The player is afraid of what his parents may do to them if they refuse, so they agree to help him.
@@ -238,7 +264,7 @@ public class FetishZealotScene extends AbstractLakeContent
 					//Otherwise, continue on here
 				//continue on to Cultist bad end.  I'll expand these later when where doing the cathedral.
 				else {
-					outputText("A few hours later your mind finally returns to reality.  You look around and realize that you are no longer in the same place you were before, and the zealot is nowhere to be seen.");
+					outputText("A few hours later your mind finally returns to reality.  You look around and realize that you are no longer in the same place you were before, and the "+cname()+" is nowhere to be seen.");
 				}
 				//If there were changes to the player's genitals
 				//same as cultist
@@ -261,9 +287,9 @@ public class FetishZealotScene extends AbstractLakeContent
 		public function zealotDefeated():void
 		{
 			//Defeated by health
-			if (monster.HP < 1) outputText("The zealot collapses from his wounds, too hurt to continue controlling his powers.");
+			if (monster.HP < 1) outputText("The "+cname()+" collapses from his wounds, too hurt to continue controlling his powers.");
 			//Defeated by lust
-			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.");
+			else outputText("The "+cname()+" quivers for a moment before collapsing, his desires becoming too great for even him to control.");
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
 				menu();
@@ -285,12 +311,12 @@ public class FetishZealotScene extends AbstractLakeContent
 		{
 			clearOutput();
 			//Religious Costume Rape
-			outputText("The zealot's attire seems to have settled on an outfit similar to those commonly worn by members of religious orders, though you aren't too surprised to see that it has a slit running down the front and back of the outfit that gives you full access to his sizable cock and asshole.\n\n");
+			outputText("The "+cname()+"'s attire seems to have settled on an outfit similar to those commonly worn by members of religious orders, though you aren't too surprised to see that it has a slit running down the front and back of the outfit that gives you full access to his sizable cock and asshole.\n\n");
 			sceneHunter.selectGender(dickF, vagF, null, null, 0);
 
 			function dickF():void {
 				outputText("As you move towards him, he drops onto all fours with his head down and ass in the air.  He seems to have started making a prayer: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ");
-				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out to you, \"<i>Please, let me finish my prayer, put your [cock] in my ass.</i>\"  Well, he did ask you...\n\n");
+				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the "+cname()+" looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out to you, \"<i>Please, let me finish my prayer, put your [cock] in my ass.</i>\"  Well, he did ask you...\n\n");
 				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n");
 				outputText("You remove your [armor] and stride up behind him, and grab his rear end to line up your [cock] with his loose hole as he continues his prayer: \"<i>Soon a man will violate my ass, like so many others have done in your holy worship.  Woe is me, to be treated like this by someone who doesn't follow us.</i>\" You shake your head at this absurdity and plunge your [cock] inside his waiting hole.  Amazingly, his hole somehow manages to fit you perfectly.  Since he seems to have no problem taking you, you waste no time in getting the anal rape on.\n\n");
 				outputText("\"<i>My shame brings the one within me their pleasure; such a tragedy has befallen me.</i>\" he continues.  \"<i>Shut up and take it like a man!</i>\" you tell him, and start fucking him more and more roughly.  You reach around him and grab his balls, and start to grip them painfully.    He isn't perturbed, and continues his prayers between his gasps: \"<i>Agh, The horror, I'm being tortur- ah, while being raped ungh, and I'm loving every moment.  Oug!</i>\"  Having had enough, you squeeze his sack hard, at the same time as you cum inside his ass.\n\n");
@@ -300,9 +326,9 @@ public class FetishZealotScene extends AbstractLakeContent
 			}
 			function vagF():void {
 				outputText("As you move towards him, he lays back onto the ground, his cock almost pointing straight up in the air.  He clasps his hands in front of his face and starts praying: \"<i>Forgive me my lord, for I have failed to protect your holdings and will now accept your punishment by being violated by the one who defeated me.</i>\" ");
-				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the zealot looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out at you, \"<i>Please, let me finish my prayer, take me within your " + vaginaDescript(0) + " for your own pleasure.</i>\"  Well, he did ask you...\n\n");
+				if (player.cor < 50) outputText("You stop and stare at him for a moment, in complete disbelief at this bizarre 'prayer'.  You consider just leaving him alone, but sensing your hesitation, the "+cname()+" looks up to you with a horrified expression.  \"<i>You must violate me!</i>\"  He cries out at you, \"<i>Please, let me finish my prayer, take me within your " + vaginaDescript(0) + " for your own pleasure.</i>\"  Well, he did ask you...\n\n");
 				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n");
-				outputText("You remove your [armor] and stride over top of him, looking down at the defeated zealot as he continues his prayer.  \"<i>I am a wretched man to have allowed a woman like you to have defeated me.  Woe is me, lying at your feet.</i>\"  You shake your head at this absurdity and lower yourself down to get to the fun part.  You eagerly grab his cock and guide it towards your " + vaginaDescript(0) + ", awaiting the pleasure you are sure it will bring you.  \"<i>Look at me, so eager to be violated despite why it is happening to me, and yet she teases me and draws it out, making it so much more painful.</i>\"\n\n");
+				outputText("You remove your [armor] and stride over top of him, looking down at the defeated "+cname()+" as he continues his prayer.  \"<i>I am a wretched man to have allowed a woman like you to have defeated me.  Woe is me, lying at your feet.</i>\"  You shake your head at this absurdity and lower yourself down to get to the fun part.  You eagerly grab his cock and guide it towards your " + vaginaDescript(0) + ", awaiting the pleasure you are sure it will bring you.  \"<i>Look at me, so eager to be violated despite why it is happening to me, and yet she teases me and draws it out, making it so much more painful.</i>\"\n\n");
 				outputText("With a laugh, you impale yourself on his cock and despite how ");
 				if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE) outputText("tight");
 				else outputText("loose");

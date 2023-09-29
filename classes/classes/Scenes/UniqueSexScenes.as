@@ -383,11 +383,17 @@ public class UniqueSexScenes extends BaseContent
         private function USSAnubiMummyCurse():Array{
             var btnSet:Array = ["Mummy Curse!!"];
             if (player.hasPerk(PerkLib.MummyCurse) && AnubiMummyCurseNotWrongEnemyType() && player.hasItem(useables.BANDAGE, 1) && player.perkv1(PerkLib.MummyLord) < player.mummyControlLimit()) btnSet.push(anubisMummyCurse, "");
-            else btnSet.push(false, "Req. to be a Anubi.");
+            else {
+				if (!player.hasPerk(PerkLib.MummyCurse)) btnSet.push(false, "Req. to have Mummy Curse perk.");
+				else if (!AnubiMummyCurseNotWrongEnemyType()) btnSet.push(false, "Req. enemy to be bipedal with soul. (No constructs/elementals)");
+				else if (!player.hasItem(useables.BANDAGE, 1)) btnSet.push(false, "Req. to have at least 1 bandage.");
+				else btnSet.push(false, "Req. to be able to control more mummies.");
+			}
             return btnSet;
         }
 		private function AnubiMummyCurseNotWrongEnemyType():Boolean{
-			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) && !monster.hasPerk(PerkLib.EnemyGooType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyPlantType) && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType));
+			return (!monster.hasPerk(PerkLib.Enemy300Type) && !monster.hasPerk(PerkLib.EnemyConstructType) && !monster.hasPerk(PerkLib.EnemyElementalType) && !monster.hasPerk(PerkLib.EnemyFleshConstructType) && !monster.hasPerk(PerkLib.EnemyGhostType) && !monster.hasPerk(PerkLib.EnemyGooType) &&
+			!monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.EnemyPlantType) && !monster.hasPerk(PerkLib.EnemyTrueAngel) && !monster.hasPerk(PerkLib.EnemyTrueDemon) && !monster.hasPerk(PerkLib.EnemyUndeadType) && !monster.hasPerk(PerkLib.UniqueNPC));
 		}
 
 		public function RaijuRapeSupercharged():void {

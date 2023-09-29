@@ -68,10 +68,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8t2";
+    public var debugGameVer:String = "v0.8u";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.10;
+    public var modSaveVersion:Number = 36.11;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>Exploration rework, Alchemy system, Expanding party size, Anubis & Werefox TF's, Werewolf minor rework, minor soulforce power rework, field/area bosses</b>)";
+			ver += " (<b>4th floor of River Dungeon, new sprites, new monsters at High Mountains/Swamp and bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

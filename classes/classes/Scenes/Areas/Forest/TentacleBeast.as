@@ -181,7 +181,7 @@ public class TentacleBeast extends Monster
 			this.abilities = [
 				{ call: tentaclePhysicalAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[], condition: function():Boolean { return hasStatusEffect(StatusEffects.TentacleCoolDown) }},
 				{ call: tentacleEntwine, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
-			]
+			];
 			this.tailType = Tail.DEMONIC;
 			checkMonster();
 		}
