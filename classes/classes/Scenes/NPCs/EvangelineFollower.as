@@ -195,8 +195,8 @@ public function meetEvangeline():void {
 	}
 	addButton(5, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
 	addButton(6, "Ingredients", ingredientsMenu).hint("Ask Evangeline to make some alchemy ingredients");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
-	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	//else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);

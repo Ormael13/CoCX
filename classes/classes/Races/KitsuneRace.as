@@ -141,6 +141,7 @@ public class KitsuneRace extends Race {
 		buildTier(15, "nine-tailed kitsune")
 				.namesTauric("nine-tailed kitsune", "nine-tailed kitsune-taur")
 				.requirePreviousTier()
+				.requirePerk(PerkLib.StarSphereMastery)
 				.requireTailCount(9)
 				.buffs({
 					"str.mult": -0.40,

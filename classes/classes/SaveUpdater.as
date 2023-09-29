@@ -2280,11 +2280,18 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.10) {
 				if (SceneLib.exploration.counters.explore > 0 && flags[kFLAGS.ALVINA_FOLLOWER] < 1) flags[kFLAGS.ALVINA_FOLLOWER] = 1;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.10;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.11) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.11;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.11) {
+				outputText("\n\nIf you not have any clones nothing to worry here...");
+				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) >= 1) {
+					var a1:Number = player.statusEffectv4(StatusEffects.PCClone);
+					var a2:Number = player.statusEffectv3(StatusEffects.PCClone);
+					if (a2 > 0) player.addStatusValue(StatusEffects.PCClone, 3, -a2);
+					player.addStatusValue(StatusEffects.PCClone, 4, -a1);
+					player.addStatusValue(StatusEffects.PCClone, 3, a1);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.11;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.12) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.12;

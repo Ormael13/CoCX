@@ -125,13 +125,8 @@ use namespace CoC;
 		private function onisunetwinRampage():void {
 			if (hasStatusEffect(StatusEffects.AbilityChanneled)) {
 				removeStatusEffect(StatusEffects.AbilityChanneled);
-				if (monsterIsStunned() || monsterIsConstricted() || hasStatusEffect(StatusEffects.Fear)) {
-					outputText(capitalA + short + " reels in frustration as his concentration breaks under your assaults.\n\n");
-				}
-				else {
-					outputText("A terrifying red aura of power shroud his body as he shout a loud thundering war cry and enter a murderous rampage.\n\n");
-					createStatusEffect(StatusEffects.OniRampage,12,0,0,0);
-				}
+				outputText("A terrifying red aura of power shroud his body as he shout a loud thundering war cry and enter a murderous rampage.\n\n");
+				createStatusEffect(StatusEffects.OniRampage,12,0,0,0);
 			}
 			else {
 				fatigue += 50;
@@ -202,9 +197,7 @@ use namespace CoC;
 			var twinBelow40:Boolean = (HP < maxHP() * 0.4);
 			return "You’re facing one of onisune twins. He's wearing a "+
 					(twinBelow40?("torn "):"") +
-					"white kimono, flickering with magical flames. "+
-					(hasStatusEffect(StatusEffects.KnowsChargeA)?"It seems he's using a variant of charged armor. ":"") +
-					"His left hand is lit up by an aura of blue flames, ready to flare up into gouts of foxfire at a moment’s notice. In his right hand is Oni Tetsubo, foxfire burning at it’s tip." +
+					"white kimono, flickering with magical flames. His left hand is lit up by an aura of blue flames, ready to flare up into gouts of foxfire at a moment’s notice. In his right hand is Oni Tetsubo, foxfire burning at it’s tip." +
 					(hasStatusEffect(StatusEffects.OniRampage)?"\n\n<b>Looking at his posture and gaze indicates that he's currently under effect of some sort of rampage state.</b>":"");
 		}
 		

@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons
 import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
+import classes.ItemType;
 import classes.Items.Shield;
 import classes.Items.Weapon;
 import classes.PerkLib;
@@ -575,8 +576,31 @@ public class RiverDungeon extends DungeonAbstractContent
 		}
 		public function defeatTwinBosses():void {
 			clearOutput();
-			
-			if (player.hasKeyItem("Black Crystal") >= 0) player.removeKeyItem("Black Crystal");
+			outputText("Both of the odd Kitsune-Onis fall, unable to continue the fight. As they do, you hear an odd sound, like the grinding of gears. Looking up at you, the two defeated people shudder, their whole bodies vibrating.\n\n");
+			outputText("<i>TICK.</i>\n\n");
+			outputText("The next moment, wounds open up on them, as if cut by a sword. The wounds you KNOW you inflicted are gone. Suddenly, they shake again, unnaturally fast.\n\n");
+			outputText("<i>TOCK.</i>\n\n");
+			outputText("The next instant, they’re uninjured, jerking themselves off while trying to hide themselves with their many tails.\n\n");
+			outputText("<i>TICK.</i>\n\n");
+			outputText("They’re bruised now, as if pummelled by tiny fists. One keels over and retches.\n\n");
+			outputText("<i>TOCK.</i>\n\n");
+			outputText("And now they’re surrounded by golems…No, skeletons…No…Your head begins to split, and you <i>feel</i> countless injuries pressing in on you. Your body seems fluid, limbs, horns and features passing in an agonizing, dizzying blur. You close your eyes, screaming in silence as your mouth changes thousands of times…\n\n");
+			outputText("<i>DING.</i> A reverberating sound, like the chime of a clock. The pain is gone, and the two defeated Kitsune-Onis are at your feet, like before. In the moment you need to collect your thoughts, two identical doors open, in the middle of the empty room. They walk…backwards? Out of the portal.\n\n");
+			outputText("\"<i>Always too early</i>\", one of the Onis jokes, despite the state he’s in. As the newcomers approach, your body suddenly feels sluggish, your [legs] barely responding to your commands. You try to lunge at the beaten Onis, but you’re too late, all but freezing in place.\n\n");
+			outputText("<i>TICK.</i>\n\n");
+			outputText("The newcomers walk backwards, past the Onis you just defeated. One even passes <i>through</i> you, leaving you chilled where your bodies touched.\n\n");
+			outputText("\"<i>?od su evah uoy dluow tahW</i>\" One says, facing the Onis. Suddenly, the Oni simply…vanishes, body reappearing in a slightly different place, uninjured, as if they’d never even met you…Wait…They almost look… <i>Younger.</i>\n\n");
+			outputText("<i>TOCK.</i>\n\n");
+			outputText("\"<i>.stops lausu eht ni snoissessop rieht evaeL .sdnecsA ohw eno eht rof ecalp siht eraperP .htiw tlaed neeb ydaerla evah srerutnevda ehT</i>\"\n\n");
+			outputText("The other newcomer speaks. \"<i>?erefretni yehT fi tahw dnA</i>\"\n\n");
+			outputText("<i>TICK.</i>\n\n");
+			outputText("The second Oni gives you a smirk before vanishing, reappearing in this…Extremely odd conversation.\n\n");
+			outputText("\"<i>.deraperp eb tsum sdnecsA ohW enO ehT .nac ew lla enod evah ll'eW</i>\"\n\n");
+			outputText("<i>TOCK.</i>\n\n");
+			outputText("Suddenly released, you feel yourself lunge forward, as if your body had suddenly caught up with all the commands you’d been giving it for the past few seconds. Despite your clumsy rush, you grab nothing but air, as the Onis, the newcomers, the portals and even the mess from your fight just…begin to vanish.\n\n");
+			outputText("The Onis look at you with mild contempt as they fade away, leaving you alone in the restored room. The ticking stops, fading away with them.\n\n");
+			outputText("You feel slightly dizzy, disoriented from the sudden, rapid changes. You flex a muscle that you recall having, and nothing happens. You shake yourself off, collecting your thoughts, and slowly the nausea, the feeling of <i>otherness</i> fades, leaving you…You’re not sure how to feel about this.\n\n");
+			outputText("You’ve…Won, you suppose. The dungeon’s depths are open to you now.\n\n");
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			cleanupAfterCombat();
 			doNext(playerMenu);
@@ -613,15 +637,24 @@ public class RiverDungeon extends DungeonAbstractContent
 		}
 		public function almostdefeatedByTwinBosses():void {
 			clearOutput();
-			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
-			if (player.hasKeyItem("Black Crystal") >= 0) player.removeKeyItem("Black Crystal");
+			outputText("You turn, attempting to flee from this odd chamber, and these equally enigmatic foes!\n\n");
+			outputText("You realise a few steps in that they aren’t even attempting to stop you. One simply turns, slamming his spiked club into one of the room’s supporting pillars. Immediately the room rumbles, and you flee outside.\n\n");
+			outputText("\"<i>Leaving already?</i>\" He calls, moving to the next pillar. The air seems to shudder and shake around you, as the rock begins to fall, seemingly starting to bury them both. As the entrance to the passageway is filling with rocks, you hear the other Oni’s voice calling out to you.\n\n");
+			outputText("\"<i>Bring another of the crystals!</i>\"\n\n");
+			outputText("The sound of the falling rocks suddenly stops, as if those stones had never moved in the first place.\n\n");
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]--;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_05;
 			cleanupAfterCombat();
 		}
 		public function defeatedByTwinBosses():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("You collapse, your "+(player.HP <= player.minHP()?"wounds":"lust")+" burdening your body too much to continue.\n\n");
+			outputText("You hear an echoing ringing through your ears, like the bell of a massive alarm clock. The two odd creatures start to walk towards you, but you notice that they walk unevenly, their footsteps echoing out of synch with their movements. Your head begins to pound, and they stand over you. One of them looks down with…a wistful expression? Like they know you from somewhere. The other seems indifferent, scowling slightly.\n\n");
+			outputText("\"<i>Every battle you’ve fought, loss or victory, was to bring you here.</i>\" The indifferent one says simply. Behind them, a violet portal opens, swirling violently…or is that your head? That ticking noise is starting up again, and to your shock, two new forms walk backwards, out of the portal.\n\n");
+			outputText("The wistful one speaks, placing a cool hand on your forehead. \"<i>Try not to resent us, champion. From the beginning, you were fated to come here.</i>\" You blink, trying to shake the disorientation. These beings…Their outlines are blurring, and you can see…Is that them? Back behind the ones speaking to you, outlines starting from where they were, and rapidly flitting to their current places. The two other beings from the portal slowly walk backwards, vanishing into another pair of portals.\n\n");
+			outputText("\"<i>You’ll be the one to make this right.</i>\" The scowling one says, fox-tails lashing behind him. \"<i>In the…Future?</i>\" He looks at the other, who shakes his head. \"<i>The past, then.</i>\" You begin to see an outline…of You. Fighting the two beings…But it plays out differently. This you looks different, and you…never dodged that way before! You close your eyes, and the world feels like you’re on a boat in a violently thrashing ocean.\n\n");
+			outputText("The wistful one winces. \"<i>I hate this part</i>\", he says simply, as the scowling one steps towards you, raising his Tetsubo.\n\n");
+			outputText("\"<i>We’ll meet again</i>\", the scowling one says, swinging his club down. You see stars…and your consciousness fades.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
@@ -1519,7 +1552,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Many fine pebbles coat your path, crunching softly beneath your presence. The dilapidated walls are sloughing off pebbles seemingly in response to each movement you make, causing faint echoes to ring all around you.\n\nVeins of purple lights mark the ground beneath you, breathing in and out with a faint glow almost as if it were alive, beating like a living heart.");
 			dungeons.setDungeonButtonsRD(null, null, null, roomD03);
-			addButtonDisabled(10, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10) addButtonDisabled(10, "Down", "Stairs down are blocked by massive rimble and even use of Black Crystal seems to not able to undone the damage.");//addButton(10, "Down", roomD07);
+			else addButtonDisabled(10, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomD05():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_05;
@@ -1531,8 +1565,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 9) dungeons.setDungeonButtonsRD(roomD01, roomD08, null, null);
 			else {
 				dungeons.setDungeonButtonsRD(null, roomD08, null, null);
-				/*if (player.hasKeyItem("Black Crystal") >= 0) addButton(6, "North", useBlackCrystal).hint("Would you like to use Black Crystal here?");
-				else */addButtonDisabled(6, "North", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution?");
+				if (player.hasKeyItem("Black Crystal") >= 0) addButton(6, "North", useBlackCrystal).hint("Would you like to use Black Crystal here?");
+				else addButtonDisabled(6, "North", "There are massive rumble that even with any previous visitors attempts seems to be not clearable. Looking like whole celling just caved in and blocked passage to room behind it. So how could you go to check what is on the other end of passage? Maybe somewhere on this floor you can find the solution?");
 			}
 		}
 		public function roomD06():void {
@@ -1599,8 +1633,9 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("In this room, the stone appears to have been worn away, and more of the pulsing, purple structures are laid bare. They pulsate visibly now, the light ebbing and flowing as they move. You feel your [skin] crawling with each pulse, an involuntary shiver running up your spine. At the end of this room, there appears to be some kind of circular structure, grown into the wall from the pulsing purple...stuff. The circle itself writhes with each pulse, sending the light from before out...It emits a squishing, wet sound with each pulse, not unlike a heartbeat.");
 			dungeons.setDungeonButtonsRD(null, roomD16, null, null);
-			//if (anvilMaterialsCheck()) addButton(0, "Anvil", anvilUncrafting).hint("Now you have needed materials. Do you uncraft them?");
-			//else addButtonDisabled(0, "Anvil", "Would you kindly find the materials first?");
+			if (anvilMaterialsCheck()) addButton(0, "Anvil", anvilUncrafting).hint("Now you have needed materials. Do you uncraft them?");
+			else addButtonDisabled(0, "Anvil", "Would you kindly find the materials first?");
+			addButton(1, "BP's", anvilMaterialsList).hint("Can't be more obvious what it's does it?");
 		}
 		public function roomD13():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_13;
@@ -1809,10 +1844,28 @@ public class RiverDungeon extends DungeonAbstractContent
 					//(player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) ||
 					(player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)));
 		}
+		private function anvilMaterialsList():void {
+			clearOutput();
+			outputText("<b>BP's</b>:");
+			outputText("\n<i>-1x clump of red gel + 1x box of chocolate + 1x chunk of lethicite + 1x hip flask of Salamander Firewater + 1x Soul Residue + 1x bottle of Onikiri Sake</i>");
+			//outputText("\n<i>-3x purple crystal shards + 3x Soul Residues</i>");
+			//outputText("\n<i>-6x purple crystal shards</i>");
+			doNext(roomD12);
+		}
 		private function anvilUncrafting():void {
 			clearOutput();
-			outputText("You put [item] at the anvil centre and reaching toward the hammer. Rising it high above you focus and slamm the item on it. Both tools power activate as the item split into six smaller objects that appears around centre of impact at the corneres of perfectly shaped hexagon. You then put the hammer away and reaching toward the items to put them into your bag.\n\n");
-			if (player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) {
+			menu();
+			//if (player.hasItem(useables.PCSHARD, 6)) addButton(0, "???", anvilUncrafting2, 2).hint("Purple Crystal");
+			//if (player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) addButton(1, "???", anvilUncrafting2, 3).hint("Large Purple Soul Crystal Shard");
+			if ((player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) && !player.hasKeyItem("Black Crystal")) addButton(7, "Black Crystal", anvilUncrafting2, 1);
+			addButton(14, "Back", roomD12);
+		}
+		private function anvilUncrafting2(type:Number = 0):void {
+			clearOutput();
+			var mainitem:String = "item";
+			var splititems:String = "six small item";
+			var item:ItemType;
+			if (type == 1) {
 				player.destroyItems(useables.RED_GEL, 1);
 				player.destroyItems(consumables.CHOCBOX, 1);
 				player.destroyItems(consumables.LETHITE, 1);
@@ -1820,52 +1873,98 @@ public class RiverDungeon extends DungeonAbstractContent
 				player.destroyItems(useables.SRESIDUE, 1);
 				player.destroyItems(consumables.ONISAKE, 1);
 				player.createKeyItem("Black Crystal", 0, 0, 0, 0);
-				outputText("<b>You have gained Key Item: Black Crystal</b>");
+				mainitem = "Black Crystal";
+				splititems = "clump of red gel, box of chocolate, chunk of lethicite, hip flask of Salamander Firewater, Soul Residue and bottle of Onikiri Sake";
 			}
-			doNext(roomD12);
+			if (type == 2) {
+				player.destroyItems(useables.PCSHARD, 6);
+				mainitem = "Purple Crystal";
+				splititems = "six small Purple Crystal Shards";
+				item = useables.PCRYSTA;
+			}
+			if (type == 3) {
+				player.destroyItems(useables.PCSHARD, 3);
+				player.destroyItems(useables.SRESIDUE, 3);
+				mainitem = "Large Purple Soul Crystal Shard";
+				splititems = "three small Purple Crystal Shards and Soul Residues";
+				item = useables.LPSCSHA;
+			}
+			outputText("Gathering the "+splititems+", you place them on the center of the anvil, reaching to the hammer. The anvil seems to be altering the flow of time in the thick mist around you as you raise the tool, focusing your intents before you smash them with the hammer. All six of the scattered pieces immediately coalesce, reforming a larger whole as "+mainitem+" returns to what it was before it shattered. Putting the hammer away, you reach toward the single piece to stow in your bag. ");
+			if (mainitem == "Black Crystal") outputText("<b>You have gained Key Item: Black Crystal</b>");
+			if (mainitem == "Black Crystal") doNext(anvilUncrafting);
+			else inventory.takeItem(item, anvilUncrafting);
 		}
 		private function useBlackCrystal():void {
 			clearOutput();
-			outputText("You walk toward the massive rumble and taking out the Black Crystal you toos it toward it. When it crash into the blockage the outer solid shell crackle and black liquid spills around. Few seconds later whole section starts to quake a bit and then time in the corridor begane to rewind reverting all the damage done to passage. Looks like you can now progress to the boss room.\n\n");
+			outputText("You approach the ceiling-high pile of rubble blocking your path. Taking the Black crystal from your pocket, you throw it at the top of the pile. The crystal shatters, the sound far louder than it has any right to be, echoing through the cavern. Black liquid pours from the point of impact, spreading down, seeping into the displaced stone below. Your [hair] stands on end, as static fills the air, white sparks popping from the black liquid.\n\n");
+			outputText("<i>Tick…</i> The sound echoes, far louder than the shattering before. The stone rumbles, quivering slightly.\n\n");
+			outputText("<i>Tock…</i> The stone begins to rise, slowly at first.\n\n");
+			outputText("<i>Tick…</i> The stone leaps skyward, merging seamlessly with the ceiling above it. The ticking sounds get faster and faster, the cacophony of falling stone echoing in reverse, an unnatural sound that makes your [skin] crawl. You close your eyes instinctively as a stone from the other side of the cavern shoots into the pile, narrowly missing your head.\n\n");
+			outputText("<i>Tock. Tick. Tock. TICKTOCKTICKTOCKTICKTOCK</i>\n\n");
+			outputText("...\n\n");
+			outputText("Silence fills the cave. You open your [eyes]. A black and white tiled room is on the other side of where that stone had once been. The ceiling is pristine, like it had never collapsed at all. Your path forward is clear.\n\n");
+			if (player.hasKeyItem("Black Crystal") >= 0) player.removeKeyItem("Black Crystal");
 			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomD05);
 		}
 		public function dishHelperTB():void {
+			menu();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButton(0, "1st", dishHelperTB2, 1).hint("Ask your first henchman to deal with it.");
+			if (flags[kFLAGS.PLAYER_COMPANION_2] != "") addButton(1, "2nd", dishHelperTB2, 2).hint("Ask your second henchman to deal with it.");
+		}
+		public function dishHelperTB2(henchman:Number = 0):void {
 			clearOutput();
-			player.createStatusEffect(StatusEffects.MinoKing,0,0,0,0);
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
-				outputText("You tell Neisa you need her to keep the suspended angel from recovering!\n\n");
-				outputText("Neisa nods, \"<i>A great stratagem, leave it to me!</i>\" She raises her shield before charging at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", repeatedly bashing the angel with her shield to keep them out of the fight.\n\n");
-				if (silly()) outputText("She speaks through her exertion, \"<i>Stop resisting! I said stop resisting! You angels think you’re so high and mighty, just above the law don’t you?!</i>\"\n\n");
+			player.createStatusEffect(StatusEffects.MinoKing,henchman,0,0,0);
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa")) {
+				outputText("You tell Neisa you need her to keep the suspended onisune from recovering!\n\n");
+				outputText("Neisa nods, \"<i>A great stratagem, leave it to me!</i>\" She raises her shield before charging at onisune, repeatedly bashing it with her shield to keep them out of the fight.\n\n");
+				if (silly()) outputText("She speaks through her exertion, \"<i>Stop resisting! I said stop resisting! You onisunes think you’re so high and mighty, just above the law don’t you?!</i>\"\n\n");
 				else outputText("She speaks through her exertion, \"<i>I need you to stay down!</i>\"\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
-				outputText("Wasting no time, The manticore leaps with a hungry lunge, diving at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" as she quickly wraps her tail around them to keep them out of the fight.\n\n");
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Etna")) {
+				outputText("You tell Etna you need her to keep the suspended onisune from recovering!\n\n");
+				outputText("Etna smirks, \"<i>Hmm, how long can an onisune last against my tail? Time to find out!</i>\"\n\n");
+				outputText("Wasting no time, The manticore leaps with a hungry lunge, diving at onisune as she quickly wraps her tail around them to keep them out of the fight.\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora")) {
+				outputText("You tell Aurora you need her to keep the suspended onisune from recovering!\n\n");
+				outputText("Aurora nods, raising her wings before swooping down onto onisune, pinning them beneath her stone frame, keeping them out of the fight.\n\n");
 				outputText("\"<i>Prevention is the best method to stop danger, now, let’s put a halt to this nuisance.</i>\"\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina")) {
+				outputText("You tell Alvina you need her to handle one of the onisunes before you.\n\n");
+				outputText("Alvina rolls her eyes, \"<i>Oh, why, of course… Leave me to do the dirty work.</i>\"\n\n");
+				outputText("She sets down her scythe before drawing somatic symbols with a single finger. Onisune is imprisoned in shadowy chains as they’re thrust into the ground.\n\n");
 				outputText("A faint grin curls up her face, \"<i>It’s so easy to keep them locked down…</i>\"\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
-				outputText("Furxia, Lidea, Mitzi and Roxy rush "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", trapping them within their onslaught as they try to keep the angel pinned and out of the fight.\n\n");
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi")) {
+				outputText("You tell Mitzi and her daughters that you need them to keep the suspended onisune from recovering!\n\n");
+				outputText("Mitzi raises her fist as her several daughters cheer, \"<i>Let’s get that bitch!</i>\"\n\n");
+				outputText("Furxia, Lidea, Mitzi and Roxy rush onisune, trapping them within their onslaught as they try to keep it pinned and out of the fight.\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
-				outputText("You tell Excellia you need her to keep the suspended angel from recovering!\n\n");
-				outputText("Excellia rolls her shoulders briefly, \"<i>I can handle that easily.</i>\" Without further hesitation, she rushes in, using the weight of her body to smash into "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" and keep them out of the fight.\n\n");
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia")) {
+				outputText("You tell Excellia you need her to keep the suspended onisune from recovering!\n\n");
+				outputText("Excellia rolls her shoulders briefly, \"<i>I can handle that easily.</i>\" Without further hesitation, she rushes in, using the weight of her body to smash into onisune and keep them out of the fight.\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
-				outputText("Amily quickly rushes to "+(monster.short == "Uriel"?"Gabriel":"Uriel")+" before driving her dagger into them to keep them out of the fight. \"<i>Now I just need to make sure they don’t get up… Let’s hope I have enough to last.</i>\"\n\n");
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Amily")) {
+				outputText("You tell Amily you need her to keep the suspended onisune from recovering!\n\n");
+				outputText("Amily nods before coating a dagger in some poison, \"<i>A little more paralytic poison should do the trick…</i>\"\n\n");
+				outputText("Amily quickly rushes to onisune before driving her dagger into them to keep them out of the fight. \"<i>Now I just need to make sure they don’t get up… Let’s hope I have enough to last.</i>\"\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
-				outputText("He readies his spear before pouncing on "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", smacking them with the blunt side of his spear to keep them out of the fight.\n\n");
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji")) {
+				outputText("You tell Zenji you need him to keep the suspended onisune from recovering!\n\n");
+				outputText("Zenji nods, \"<i>Leave it to me, champion!</i>\"\n\n");
+				outputText("He readies his spear before pouncing on onisune, smacking them with the blunt side of his spear to keep them out of the fight.\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") {
-				outputText("She scoffs teasingly, \"<i>Oh, an idiot like you can’t manage against multiple foes? Yeah, don’t worry, I’ll totally take care of it.</i>\" Axe in hand, Kiha charges at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+", bashing the angel with the blunt side of her axe to keep them out of the fight.\n\n");
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha")) {
+				outputText("You tell Kiha you need her to keep the suspended onisune from recovering!\n\n");
+				outputText("She scoffs teasingly, \"<i>Oh, an idiot like you can’t manage against multiple foes? Yeah, don’t worry, I’ll totally take care of it.</i>\" Axe in hand, Kiha charges at onisune, bashing it with the blunt side of her axe to keep them out of the fight.\n\n");
 			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") {
-				outputText("\"<i>Oh…I am all OVER that.</i>\" Tyrantia lets out a guttural roar, shooting a glob of her “webbing” at "+(monster.short == "Uriel"?"Gabriel":"Uriel")+". The angel dodges, but her black and pink aura flares, and she rushes in, black aura hiding the angel’s light from your view.\n\n");
+			if ((henchman == 1 && flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") || (henchman == 2 && flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia")) {
+				outputText("You notice the onisunes eyeing your Drider giantess, disgust all over their expressions. In response, you can <i>feel</i> her aura thickening, her eyes narrowing.\n\n");
+				outputText("\"<i>What?!</i>\" She demands, the hairs on her legs standing straight up. \"<i>WHAT?!</i>\"\n\n");
+				outputText("You point at onisune, telling your Amazoness that you need her to keep him down, so you can focus on the other.\n\n");
+				outputText("\"<i>Oh…I am all OVER that.</i>\" Tyrantia lets out a guttural roar, shooting a glob of her “webbing” at onisune. He dodges, but her black and pink aura flares, and she rushes in, black aura hiding the onisune’s light from your view.\n\n");
 			}
 			SceneLib.combat.enemyAIImpl();
 		}

@@ -66,15 +66,13 @@ public class PoltergeistRace extends Race{
 							return body.player.hasPlainSkinOnly() &&
 									(body.skinBaseAdj == "milky" && body.skinColor1 == "white" ||
 											body.skinBaseAdj == "ashen" && body.skinColor1 == "sable")
-						}, +1
-						)
+						}, +1)
 				.customRequirement("skin",
 						"milky or ashen ghost skin",
 						function (body:BodyData):Boolean {
 							return body.player.isGhostSkin() &&
 									(body.skinBaseAdj == "milky" || body.skinBaseAdj == "ashen")
-						}, +1
-						)
+						}, +1)
 				.hasPerk(PerkLib.Incorporeality, +1)
 				.hasPerk(PerkLib.Ghostslinger, +1)
 				.hasPerk(PerkLib.PhantomShooting, +1)
