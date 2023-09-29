@@ -20,9 +20,9 @@ import classes.internals.*;
 		public function Wereshark() 
 		{
 			this.a = "the ";
-			this.short = "gorgon";
-			this.imageName = "gorgon";
-			this.long = "You are fighting a gorgon. She resembles a slender woman from the waist up, with green scale covered hair hanging down to her neck. Her whole body is covered with shiny green scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round D-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
+			this.short = "wereshark";
+			this.imageName = "sharkgirl";
+			this.long = "You are fighting a wereshark.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 60, 0, 0, 0);

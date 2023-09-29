@@ -758,6 +758,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const LowerBodyTiny: Transformation 			    = lowerBody.LowerBodyTiny.registerTf(AS_LEGS, AE_IMP);
     public const LowerBodyWorm: Transformation 			    = lowerBody.LowerBodyWorm.registerTf(AS_LEGS, AE_SAND_WORM);
     public const LowerBodyAbyssalShark: Transformation 		= lowerBody.LowerBodyAbyssalShark.registerTf(AS_LEGS, AE_ABYSSAL_SHARK);
+    public const LowerBodyWereshark: Transformation 		= lowerBody.LowerBodyWereshark.registerTf(AS_LEGS, AE_WERESHARK);
     public const LowerBodyYgddrasilRootClaws: Transformation 	= lowerBody.LowerBodyYgddrasilRootClaws.registerTf(AS_LEGS, AE_YGGDRASIL);
 
 

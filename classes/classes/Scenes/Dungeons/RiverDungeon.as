@@ -1516,7 +1516,13 @@ public class RiverDungeon extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_RIVER_FLOOR_04_ROOM_01;//boss room
 			clearOutput();
 			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] == 10) {
-				outputText("Soon there will be twin bosses intro here.\n\n");
+				outputText("The heartbeat you’ve been hearing throughout the dungeon is even louder now, echoing through the passage. As you enter, the sound suddenly changes, like…it’s reversed. The purple veins on the ceiling are flowing backwards.\n\n");
+				outputText("Something about this place is wrong, but you’ve come too far to back down now. You enter the room, raising your [weapon].\n\n");
+				outputText("Two portals are the first thing you notice, spiralling purple, hovering over two cylindrical, steel podiums. In unison, two beings walk through the portals, looking calmly down at you, as if they knew you’d be there.\n\n");
+				outputText("The beings look like an odd cross between Kitsune and Oni, with 5 fox-tails swishing behind each. They both hold tetsubos, looking down at you with an odd familiarity. Purple mist seems to emanate from their bodies, which for some reason, doesn’t obscure them from your gaze.\n\n");
+				outputText("\"<i>You’re late.</i>\" You ready your [weapon], since everything else in this place seems to fight, but the smaller Oni looks at the other in confusion.\n\n");
+				outputText("\"<i>No. They’re early.</i>\" The larger one smacks his head, looking down at you with annoyance. In unison, they step down from their podiums, their odd weapons suddenly blazing into violet fire.\n\n");
+				outputText("\"<i>It matters not. This was fated to occur.</i>\" The larger of the two runs towards you, the smaller dashing to one side, ready to flank you. It’s a fight!\n\n");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				startCombat(new TwinBosses(), true);
 			}
@@ -1552,7 +1558,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Many fine pebbles coat your path, crunching softly beneath your presence. The dilapidated walls are sloughing off pebbles seemingly in response to each movement you make, causing faint echoes to ring all around you.\n\nVeins of purple lights mark the ground beneath you, breathing in and out with a faint glow almost as if it were alive, beating like a living heart.");
 			dungeons.setDungeonButtonsRD(null, null, null, roomD03);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10) addButtonDisabled(10, "Down", "Stairs down are blocked by massive rimble and even use of Black Crystal seems to not able to undone the damage.");//addButton(10, "Down", roomD07);
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 10) addButtonDisabled(10, "Down", "Stairs down are blocked by massive rumble.");//addButton(10, "Down", roomD07);
 			else addButtonDisabled(10, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 		}
 		public function roomD05():void {
@@ -1857,7 +1863,10 @@ public class RiverDungeon extends DungeonAbstractContent
 			menu();
 			//if (player.hasItem(useables.PCSHARD, 6)) addButton(0, "???", anvilUncrafting2, 2).hint("Purple Crystal");
 			//if (player.hasItem(useables.PCSHARD, 3) && player.hasItem(useables.SRESIDUE, 3)) addButton(1, "???", anvilUncrafting2, 3).hint("Large Purple Soul Crystal Shard");
-			if ((player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) && !player.hasKeyItem("Black Crystal")) addButton(7, "Black Crystal", anvilUncrafting2, 1);
+			if (player.hasItem(useables.RED_GEL, 1) && player.hasItem(consumables.CHOCBOX, 1) && player.hasItem(consumables.LETHITE, 1) && player.hasItem(consumables.SALAMFW, 1) && player.hasItem(useables.SRESIDUE, 1) && player.hasItem(consumables.ONISAKE, 1)) {
+				if (player.hasKeyItem("Black Crystal") >= 0) addButtonDisabled(7, "Black Crystal", "You can't craft 2nd one until you use the one you have.");
+				else addButton(7, "Black Crystal", anvilUncrafting2, 1);
+			}
 			addButton(14, "Back", roomD12);
 		}
 		private function anvilUncrafting2(type:Number = 0):void {
