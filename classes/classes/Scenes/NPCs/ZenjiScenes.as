@@ -2566,19 +2566,19 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
 				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji" || flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") addButtonDisabled(0, "Assist Me (1)", "You already have Zenji accompany you.");
-				else addButton(0, "Assist Me (1)", zenjiHenchmanOption2, 1).hint("Ask Zenji to join you in adventures outside camp.");
+				else addButton(0, "Assist Me (1)", zenjiHenchmanOption2, false, 1).hint("Ask Zenji to join you in adventures outside camp.");
 			}
 			else {
-				if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") addButton(5, "Assist Me (1)", zenjiHenchmanOption2, 21).hint("Ask Zenji to stay in camp.");
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") addButton(5, "Assist Me (1)", zenjiHenchmanOption2, false, 21).hint("Ask Zenji to stay in camp.");
 				else addButtonDisabled(5, "Assist Me (1)", "You already have other henchman accompany you as first party member. Ask him/her to stay at camp before you talk with Zenji about accompaning you as first party member.");
 			}
 			if (player.hasPerk(PerkLib.IntermediateLeadership)) {
 				if (flags[kFLAGS.PLAYER_COMPANION_2] == "") {
 					if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji" || flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") addButtonDisabled(1, "Assist Me (2)", "You already have Zenji accompany you.");
-					else addButton(1, "Assist Me (2)", zenjiHenchmanOption2, 2).hint("Ask Zenji to join you in adventures outside camp.");
+					else addButton(1, "Assist Me (2)", zenjiHenchmanOption2, false, 2).hint("Ask Zenji to join you in adventures outside camp.");
 				}
 				else {
-					if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") addButton(6, "Assist Me (2)", zenjiHenchmanOption2, 22).hint("Ask Zenji to stay in camp.");
+					if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") addButton(6, "Assist Me (2)", zenjiHenchmanOption2, false, 22).hint("Ask Zenji to stay in camp.");
 					else addButtonDisabled(6, "Assist Me (2)", "You already have other henchman accompany you as second party member. Ask him/her to stay at camp before you talk with Zenji about accompaning you as second party member.");
 				}
 			}
@@ -2617,7 +2617,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				if (!textBypass){
 					outputText("You tell Zenji that you don't want him to assist you in combat anymore.\n\n");
 					outputText("Zenji raises an eyebrow at you, \"<i>If dat's whatchu want, I will guard de camp, but you stay safe out dere.</i>\"\n\n");
-					outputText("Aurora is no longer following you around.\n\n");
+					outputText("Zenji is no longer following you around.\n\n");
 				}
 				player.removeStatusEffect(StatusEffects.CombatFollowerZenji);
 				if (slot == 22) flags[kFLAGS.PLAYER_COMPANION_2] = "";

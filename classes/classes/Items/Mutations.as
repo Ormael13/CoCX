@@ -11527,6 +11527,10 @@ public final class Mutations extends MutationsHelper {
 				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
 				player.removePerk(PerkLib.Lycanthropy);
 			}
+			if (player.hasPerk(PerkLib.Selachimorphanthropy)) {
+				player.createPerk(PerkLib.SelachimorphanthropyDormant,0,0,0,0);
+				player.removePerk(PerkLib.Selachimorphanthropy);
+			}
 			player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
 			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.01*ngM,'tou.mult': bonusStats*0.1*ngM,'spe.mult': bonusStats*0.04*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
 			player.trainStat('str', +5, 100);

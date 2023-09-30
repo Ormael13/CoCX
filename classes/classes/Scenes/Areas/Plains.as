@@ -121,7 +121,7 @@ use namespace CoC;
 					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 				},
 				chance: plainsChance,
-				call: SceneLib.dianaScene.repeatEnc
+				call: SceneLib.nadiaScene.repeatEnc
 			}, {
 				name: "dianaName",
 				label : "Diana",
@@ -132,7 +132,7 @@ use namespace CoC;
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
 				chance: plainsChance,
-				call: SceneLib.dianaScene.postNameEnc
+				call: SceneLib.nadiaScene.postNameEnc
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",

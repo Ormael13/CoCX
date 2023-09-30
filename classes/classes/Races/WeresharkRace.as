@@ -10,7 +10,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class WeresharkRace extends Race {
-    public static const SharkScaleColors:/*String*/Array = ["rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"];
+    public static const SharkScaleColors:/*String*/Array = ["rough gray","dark gray","iridescent gray","ashen grayish-blue","gray"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",

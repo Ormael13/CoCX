@@ -846,8 +846,8 @@ public class Soulforce extends BaseContent
 		SceneLib.izmaScene.meetIzmaAtLake();
 	}
 	public function shyHealer():void {
-		if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) SceneLib.dianaScene.postNameEnc();
-		else SceneLib.dianaScene.repeatEnc();
+		if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) SceneLib.nadiaScene.postNameEnc();
+		else SceneLib.nadiaScene.repeatEnc();
 	}
 	public function germanCow():void {
 		SceneLib.isabellaScene.isabellaGreeting();

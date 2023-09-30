@@ -2497,14 +2497,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			if (player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
 				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
-				var bonusStats:Number = 0;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
-				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+				var ngMWW:Number = (player.newGamePlusMod() + 1);
+				var bonusStats1:Number = 0;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats1 += 10;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats1 += 20;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats1 += 30;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats1 += 40;
+				player.createPerk(PerkLib.Lycanthropy,bonusStats1,0,0,0);
 				player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
-				player.statStore.replaceBuffObject({ 'str.mult': bonusStats,'tou.mult': bonusStats,'spe.mult': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
+				player.statStore.replaceBuffObject({'str.mult': bonusStats1*0.1*ngMWW,'tou.mult': bonusStats1*0.06*ngMWW,'spe.mult': bonusStats1*0.04*ngMWW,'minlustx': bonusStats1*0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
 			}
@@ -2522,6 +2523,28 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.statStore.removeBuffs("Vulpesthropy");
 				player.removeStatusEffect(StatusEffects.HumanForm);
 				player.removePerk(PerkLib.Vulpesthropy);
+				needNext = true;
+			}
+			if (player.isRaceCached(Races.WERESHARK) && player.hasPerk(PerkLib.SelachimorphanthropyDormant)) {
+				outputText("\nAs you become shark enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Selachimorphanthropy.</b>\n");
+				var ngMWS:Number = (player.newGamePlusMod() + 1);
+				var bonusStats2:Number = 0;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats2 += 10;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats2 += 20;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats2 += 30;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats2 += 40;
+				player.createPerk(PerkLib.Selachimorphanthropy,bonusStats2,0,0,0);
+				player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
+				player.statStore.replaceBuffObject({'str.mult': bonusStats2*0.1*ngMWS,'tou.mult': bonusStats2*0.05*ngMWS,'spe.mult': bonusStats2*0.05*ngMWS,'minlustx': bonusStats2*0.01}, 'Selachimorphanthropy', { text: 'Selachimorphanthropy'});
+				player.removePerk(PerkLib.SelachimorphanthropyDormant);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.WERESHARK) && player.hasPerk(PerkLib.Selachimorphanthropy)) {
+				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the wereshark you once were. <b>Gained Dormant selachimorphanthropy.</b>\n");
+				player.createPerk(PerkLib.SelachimorphanthropyDormant,0,0,0,0);
+				player.statStore.removeBuffs("Selachimorphanthropy");
+				player.removeStatusEffect(StatusEffects.HumanForm);
+				player.removePerk(PerkLib.Selachimorphanthropy);
 				needNext = true;
 			}
 

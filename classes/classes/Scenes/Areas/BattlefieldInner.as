@@ -60,7 +60,7 @@ public class BattlefieldInner extends BaseContent
 				return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 			},
 			chance: battlefieldInnerChance,
-			call: SceneLib.dianaScene.repeatEnc
+			call: SceneLib.nadiaScene.repeatEnc
 		}, {
 			name: "dianaName",
 			night : false,
@@ -68,7 +68,7 @@ public class BattlefieldInner extends BaseContent
 				return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 			},
 			chance: battlefieldInnerChance,
-			call: SceneLib.dianaScene.postNameEnc
+			call: SceneLib.nadiaScene.postNameEnc
 		}, {
 			name: "ted",
 			call: SceneLib.tedScene.introPostHiddenCave,

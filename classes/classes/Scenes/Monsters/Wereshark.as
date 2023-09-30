@@ -8,7 +8,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
-//import classes.BodyParts.LowerBody;
+import classes.BodyParts.LowerBody;
 //import classes.BodyParts.Skin;
 import classes.Scenes.Areas.Desert.AnubisScene;
 import classes.Stats.Buff;
@@ -22,39 +22,42 @@ import classes.internals.*;
 			this.a = "the ";
 			this.short = "wereshark";
 			this.imageName = "sharkgirl";
-			this.long = "You are fighting a wereshark.";
+			this.long = "You are fighting a male wereshark. (because there is no male sprite just pretend that this sharkgirl is sharkboy okay?)";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
-			this.createStatusEffect(StatusEffects.BonusVCapacity, 60, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
+			this.createCock(20,2.5);
+			this.balls = 2;
+			this.ballSize = 4;
+			this.cumMultiplier = 6;
+			this.hoursSinceCum = 400;
+			createBreastRow();
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 6*12+2;
-			this.hips.type = Hips.RATING_AMPLE + 2;
-			this.butt.type = Butt.RATING_LARGE;
-			//this.lowerBody = LowerBody.NAGA;
-			//this.skin.growCoat(Skin.SCALES,{color:"green"});
-			this.hairColor = "green";
-			this.hairLength = 16;
-			initStrTouSpeInte(91, 125, 110, 75);
-			initWisLibSensCor(75, 72, 55, 40);
-			this.weaponName = "claws";
-			this.weaponVerb="claw-slash";
-			this.weaponAttack = 31;
-			this.armorName = "scales";
+			this.hips.type = Hips.RATING_SLENDER;
+			this.butt.type = Butt.RATING_TIGHT;
+			this.lowerBody = LowerBody.WERESHARK;
+			this.bodyColor = "gray";
+			this.hairColor = "silver";
+			this.hairLength = 10;
+			initStrTouSpeInte(295, 210, 210, 111);
+			initWisLibSensCor(111, 104, 35, 85);
+			this.weaponName = "shark teeth";
+			this.weaponVerb="bite";
+			this.weaponAttack = 37;
+			this.armorName = "tough skin";
 			this.armorDef = 31;
 			this.armorMDef = 10;
 			this.bonusHP = 500;
-			this.bonusLust = 151;
+			this.bonusLust = 206;
 			this.lust = 30;
-			this.level = 24;
-			this.gems = rand(16) + 30;
+			this.level = 67;
+			this.gems = rand(26) + 130;
 			this.drop = new WeightedDrop().
-					add(null,1).
-					add(consumables.REPTLUM,2).
-					add(consumables.GORGOIL,5);
-			//this.faceType = Face.SNAKE_FANGS;
+					add(consumables.L_DRAFT,3).
+					//add(armors.S_SWMWR,1).
+					add(consumables.SHARK_T,5).
+					add(null,1);
+			this.faceType = Face.SHARK_TEETH;
 			checkMonster();
 		}
 		
