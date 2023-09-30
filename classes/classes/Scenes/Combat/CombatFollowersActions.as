@@ -126,6 +126,34 @@ import classes.StatusEffects;
 
 		}
 		
+		public function nadiaCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.CombatFollowerNadia) > 0) {
+				var choice2:Number = rand(20);
+				if (choice2 < 10) outputText("\n\n");
+				if (choice2 >= 10 && choice2 < 14) outputText("\n\n");
+				if (choice2 >= 14 && choice2 < 17) outputText("\n\n");
+				if (choice2 == 17 || choice2 == 18) outputText("\n\n");
+				if (choice2 == 19) outputText("\n\n");
+			}
+			else {
+				outputText("\n\n");
+				player.createStatusEffect(StatusEffects.CombatFollowerNadia, 0, 0, 0, 0);
+			}
+		}
+		public function nadiaCombatActions0():void {
+
+		}
+		public function nadiaCombatActions1():void {
+
+		}
+		public function nadiaCombatActions2():void {
+
+		}
+		public function nadiaCombatActions3():void {
+
+		}
+		
 		public function etnaCombatActions():void {
 			if (player.statusEffectv4(StatusEffects.CombatFollowerEtna) > 0) {
 				var choice3:Number = rand(20);

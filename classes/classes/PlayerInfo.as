@@ -647,18 +647,17 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS] > 0)
 			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) + "\n";
 
-		if (flags[kFLAGS.DIANA_LVL_UP] > 0) {
-            if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4)
-			    interpersonStats += "<b>Diana Progress:</b>: LOCKED (you've taken her virginity)\n";
-            else if (flags[kFLAGS.DIANA_FOLLOWER] < 6)
-			    interpersonStats += "<b>Diana Progress:</b> " + Math.round(flags[kFLAGS.DIANA_LVL_UP] / 8 * 100) + "%\n";
+		if (flags[kFLAGS.NADIA_LVL_UP] > 0) {
+            if (flags[kFLAGS.NADIA_FOLLOWER] == 3 || flags[kFLAGS.NADIA_FOLLOWER] == 4)
+			    interpersonStats += "<b>Nadia Progress:</b>: LOCKED (you've taken her virginity)\n";
+            else if (flags[kFLAGS.NADIA_FOLLOWER] < 6)
+			    interpersonStats += "<b>Nadia Progress:</b> " + Math.round(flags[kFLAGS.NADIA_LVL_UP] / 8 * 100) + "%\n";
             else
-                interpersonStats += "<b>Diana Progress:</b> LOVER\n";
-			interpersonStats += "<b>Diana Spells Casted:</b> " + flags[kFLAGS.DIANA_SPELLS_CASTED] + "\n";
-			if (flags[kFLAGS.DIANA_LVL_UP] == 16) interpersonStats += "<b>Diana lvl:</b> 75\n";
-			if (flags[kFLAGS.DIANA_LVL_UP] == 15) interpersonStats += "<b>Diana lvl:</b> 69 (current max lvl)\n";
-			else if (flags[kFLAGS.DIANA_LVL_UP] < 1) interpersonStats += "<b>Diana lvl:</b> 3\n";
-			else interpersonStats += getNPCLevel("Diana", 3, 0, 15, 3, flags[kFLAGS.DIANA_LVL_UP]);
+                interpersonStats += "<b>Nadia Progress:</b> LOVER\n";
+			if (flags[kFLAGS.NADIA_LVL_UP] == 16) interpersonStats += "<b>Nadia lvl:</b> 75\n";
+			if (flags[kFLAGS.NADIA_LVL_UP] == 15) interpersonStats += "<b>Nadia lvl:</b> 69 (current max lvl)\n";
+			else if (flags[kFLAGS.NADIA_LVL_UP] < 1) interpersonStats += "<b>Nadia lvl:</b> 3\n";
+			else interpersonStats += getNPCLevel("Nadia", 3, 0, 15, 3, flags[kFLAGS.NADIA_LVL_UP]);
 		}
 
 		if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
@@ -966,8 +965,8 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.chichiScene.pregnancy.isPregnant)
 			pregnancies += "<b>Chi Chi</b> \n";
 
-		//if (SceneLib.dianaScene.pregnancy.isPregnant)	//TODO Diana preggers
-		//	pregnancies += "<b>Diana</b> \n";
+		//if (SceneLib.nadiaScene.pregnancy.isPregnant)	//TODO Nadia preggers
+		//	pregnancies += "<b>Nadia</b> \n";
 
 		if (flags[kFLAGS.FEMOIT_EGGS] != 0)
 			pregnancies += "<b>Benoit</b> \n";
@@ -1275,6 +1274,7 @@ public class PlayerInfo extends BaseContent {
 		possiblePregs += "Marble\n";
 		possiblePregs += "Minerva\n"
 		possiblePregs += "Mitzi\n";
+	//	possiblePregs += "Nadia\n";
 		possiblePregs += "Phylla\n";
 		possiblePregs += "Phylla eggs\n";
 		possiblePregs += "Sophie\n";

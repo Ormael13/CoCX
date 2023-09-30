@@ -96,7 +96,7 @@ public class Changelog extends BaseContent
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night;\n");
 			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
-			outputText("-SInce Liadri showed concern over cveless been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
+			outputText("-Since Liadri showed concern over cveless been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -112,7 +112,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for\n\n");
+			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

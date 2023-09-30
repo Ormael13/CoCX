@@ -1939,7 +1939,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.034) {
 				// reclaiming prison flags just in case
-				for (var prisonFlag:int = kFLAGS.UNKNOWN_FLAG_NUMBER_02141; prisonFlag <= kFLAGS.UNKNOWN_FLAG_NUMBER_02159; ++prisonFlag)
+				for (var prisonFlag:int = kFLAGS.UNKNOWN_FLAG_NUMBER_02141; prisonFlag <= kFLAGS.NADIA_FOLLOWER; ++prisonFlag)
 					flags[prisonFlag] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.034;
 			}
@@ -2291,11 +2291,22 @@ public class SaveUpdater extends NPCAwareContent {
 					player.addStatusValue(StatusEffects.PCClone, 3, a1);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.11;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.12) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.12;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.12) {
+				outputText("\n\nYou all thought it was Diana but it's Nadia!!! (her older twin sister)");
+				if (player.hasStatusEffect(StatusEffects.DianaOff)) {
+					player.removeStatusEffect(StatusEffects.DianaOff);
+					player.createStatusEffect(StatusEffects.NadiaOff, 0, 0, 0, 0);
+				}
+				flags[kFLAGS.NADIA_FOLLOWER] = flags[kFLAGS.DIANA_FOLLOWER];
+				flags[kFLAGS.DIANA_FOLLOWER] = 0;
+				flags[kFLAGS.NADIA_LVL_UP] = flags[kFLAGS.DIANA_LVL_UP];
+				flags[kFLAGS.DIANA_LVL_UP] = 0;
+				flags[kFLAGS.NADIA_CURE_COOLDOWN] = flags[kFLAGS.DIANA_CURE_COOLDOWN];
+				flags[kFLAGS.DIANA_CURE_COOLDOWN] = 0;
+				flags[kFLAGS.DIANA_SPELLS_CASTED] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.12;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.13) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.13;
@@ -2303,6 +2314,14 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.14) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.15) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.16) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

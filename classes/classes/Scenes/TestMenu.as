@@ -382,9 +382,9 @@ public class TestMenu extends BaseContent
 			++cnt2;
 			outputText("\nChi Chi");
 		}
-		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) {
+		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6) {
 			++cnt2;
-			outputText("\nDiana");
+			outputText("\nNadia");
 		}
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
 			++cnt2;

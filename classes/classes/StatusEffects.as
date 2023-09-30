@@ -299,7 +299,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampLunaMishaps3:StatusEffectType				= mk("Camp Luna Mishaps 3");
 		public static const CampSparingDinah:StatusEffectType				= mk("Camp Sparing Dinah");
 		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");//Ember / Isabella / Kiha / Etna
-		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
+		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Nadia
 		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna / Galia / Dinah /?Cai'Lin?
 		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / Aurora / Electra / Neisa
 		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//Tyrantia / Lily / Belisa / x
@@ -318,6 +318,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CombatFollowerKiha:StatusEffectType				= mk("Combat Follower: Kiha");
 		public static const CombatFollowerMidoka:StatusEffectType			= mk("Combat Follower: Midoka");
 		public static const CombatFollowerMitzi:StatusEffectType			= mk("Combat Follower: Mitzi");
+		public static const CombatFollowerNadia:StatusEffectType			= mk("Combat Follower: Nadia");
 		public static const CombatFollowerNeisa:StatusEffectType			= mk("Combat Follower: Neisa");
 		public static const CombatFollowerSiegweird:StatusEffectType		= mk("Combat Follower: Siegweird");
 		public static const CombatFollowerTyrantia:StatusEffectType			= mk("Combat Follower: Tyrantia");
@@ -727,6 +728,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const HeliaOff:StatusEffectType            = mk("Helia Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
+		public static const NadiaOff:StatusEffectType            = mk("Nadia Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
 		public static const VenusOff:StatusEffectType            = mk("Venus Off");
 		public static const SophieOff:StatusEffectType           = mk("Sophie Off");

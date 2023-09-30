@@ -870,7 +870,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Other removeCurse cooldowns
 			if (flags[kFLAGS.AYANE_CURE_COOLDOWN] > 0) --flags[kFLAGS.AYANE_CURE_COOLDOWN];
-			if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) --flags[kFLAGS.DIANA_CURE_COOLDOWN];
+			if (flags[kFLAGS.NADIA_CURE_COOLDOWN] > 0) --flags[kFLAGS.NADIA_CURE_COOLDOWN];
 			//Luna nursing reset
 			if (LunaFollower.Nursed) {
 				LunaFollower.NursedCooldown -= 1

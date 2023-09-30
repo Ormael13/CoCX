@@ -2250,7 +2250,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			if (doOutput) outputText(desc);
 			player.lowerBody = LowerBody.WERESHARK;
 			player.legCount = 1;
-			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ABYSSAL_SHARK));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.WERESHARK));
 		},
 		// is present
 		function (): Boolean {
@@ -2262,3 +2262,4 @@ public class LowerBodyTransformations extends MutationsHelper {
   */
 }
 }
+

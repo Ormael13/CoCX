@@ -7,6 +7,7 @@ package classes.Scenes.Monsters
 import classes.*;
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Races.WeresharkRace;
 
 	public class WeresharkScene extends BaseContent
 	{
@@ -15,14 +16,14 @@ import classes.GlobalFlags.kFLAGS;
 		{}
 
 private function wsG():Boolean {
-	return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02796] < 2;//male ones wereshark enemies
+	return flags[kFLAGS.WERESHARKS_EXTRAS] < 2;//male ones wereshark enemies
 }
 public function weresharkEncounter():void {
 	clearOutput();
 	outputText("As you steadily row your boat through the moonlit ocean, you spot a figure looming close to the surface in the distance. Before you can assess the situation, the figure seemingly disappears deeper into the water.\n\n");
 	outputText("With your guard raised, you slow down, preparing for anything that could happen. In moments, something erupts from beneath you, knocking you out of the boat as your vessel capsizes. The ocean's cool embrace envelops you as you plunge into the water. You're met with several rows of teeth from a creature in the water before you.\n\n");
 	outputText("You struggle to regain your composure, trying not to give it an advantage over you. Rubbing your eyes as you resurface, you prepare for a fight against the shark-like creature!\n\n");
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02796] = 1;
+	flags[kFLAGS.WERESHARKS_EXTRAS] = 1;
 	startCombat(new Wereshark());
 }
 public function lostToWereshark():void {
@@ -82,13 +83,12 @@ public function lostToWereshark():void {
 			outputText("His erection is pulsating within you as he picks up the tempo eagerly to catch his release. Unable to take it any longer, your thoughts swimming in the lack of air, you clench down fervently."+(player.hasCock()?" With a heavy moan, your erection thrums as it grinds against his abs before you cum, shooting several ropes of your seed into the open water.":"")+" ");
 			outputText("You clench your ass tighter on his member as the height of your orgasm rocks through you. He heaves a low growl as his chest heaves, brushing up against you as he cums, forcing you to take in wave after wave of his warm seed, contrasting the cool ocean.\n\n");
 		}
-		doNext(tfIntoWereshark);
+		tfIntoWereshark();
 		outputText("Spent, he slowly loosens his grasp on you, allowing you to float back to the surface. Not without giving you a final, mocking lick across your face, he swims away, leaving you to float back to shore.\n\n");
 	}
 	cleanupAfterCombat();
 }
 private function tfIntoWereshark():void {
-	clearOutput();
 	outputText("You feel your body being overcome by a strange sensation as the bite wound in your shoulder begins to heat up… at first tingling then with a pleasurable sensation. You sink into the water bathing in moonlight as your face and nose take on triangular features, your mouth filling in with rows of sharp teeths as strands of silvers run across your"+(player.hairType == Hair.NORMAL?"":" now very")+" human hairs. Your skin begins to feel strange as ");
 	if (player.hasCoat()) {
 		outputText("your ");
@@ -101,18 +101,22 @@ private function tfIntoWereshark():void {
 	outputText(" shark scales with a lighter underbelly and a rough side. Your arms bone structures change as your hands gain webbed fingers and your forearms extend themselves into a pair of large blade-like fins. ");
 	if (player.hasCock()) outputText("Your "+(player.normalCocks() == 0?"now fully human ":"")+"cock fattens and grows in size and length"+(player.balls <= 2?", a sloshing quartet of gonads forming beneath your twitching shaft":", a second pair of orbs falling into your ballsack and sloshing with fresh cum")+" as you harden to full mast shooting your semen into the moonlit water. ");
 	outputText((player.hasVagina()?"Your vaginal lips begins to quiver uncontrollably opening and closing like a fish mouth as your walls tingle with pleasure covering with feelers like those of sharks that causes you to almost lose your mind. ":"")+"You roar to the moon, your mouthful of shark tooth glistening in the silvery light into a powerful almighty orgasm, your legs finally merging together into a powerful shark tail, your transformation into a fearsome wereshark complete!\n\n");
-	CoC.instance.transformations.LowerBodyWereshark.applyEffect(false);
 	CoC.instance.transformations.RearBodySharkFin.applyEffect(false);
 	CoC.instance.transformations.ArmsShark.applyEffect(false);
-	CoC.instance.transformations.FaceWolfFangs.applyEffect(false);
+	CoC.instance.transformations.FaceSharkTeeth.applyEffect(false);
 	CoC.instance.transformations.LowerBodyWereshark.applyEffect(false);
 	CoC.instance.transformations.EarsShark.applyEffect(false);
 	CoC.instance.transformations.EyesFeral.applyEffect(false);
 	CoC.instance.transformations.TongueHuman.applyEffect(false);
+	CoC.instance.transformations.GillsFish.applyEffect(false);
 	CoC.instance.transformations.WingsNone.applyEffect(false);
 	CoC.instance.transformations.AntennaeNone.applyEffect(false);
 	CoC.instance.transformations.HornsNone.applyEffect(false);
-	CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
+	var color:String;
+    color = randomChoice(WeresharkRace.WeresharkScaleColors);
+    CoC.instance.transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color:color}).applyEffect(false);
+	CoC.instance.transformations.HairChangeColor(["silver"]).applyEffect(false);
+	CoC.instance.transformations.HairHuman.applyEffect(false);
 	if (player.hasCock() && player.normalCocks() < 1) {
 		var selectedCockValue:int = -1;
 		for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
@@ -124,7 +128,7 @@ private function tfIntoWereshark():void {
 			}
 		}
 		if (selectedCockValue != -1) {
-			transformations.CockWolf(selectedCockValue).applyEffect(false);
+			transformations.CockHuman(selectedCockValue).applyEffect(false);
 			player.thickenCock(selectedCockValue, 2);
 		}
 	}

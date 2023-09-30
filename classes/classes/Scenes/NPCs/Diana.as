@@ -19,8 +19,6 @@ package classes.Scenes.NPCs
 	
 	public class Diana extends Monster
 	{
-		public var dianaScene:DianaFollower = SceneLib.dianaScene;
-		
 		private function spellCostMultiplier():Number {
 			var multiplier:Number = 1;
 			if (flags[kFLAGS.DIANA_SPELLS_CASTED] >= 10) multiplier -= 0.1;
@@ -321,24 +319,24 @@ package classes.Scenes.NPCs
 				}
 			}
 		}
-		
+		/*
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6)
-                dianaScene.wonOverDianaSpar();
+                SceneLib.dianaScene.wonOverDianaSpar();
             else if (flags[kFLAGS.DIANA_FOLLOWER] == 5 && (player.hasCock() || !player.blockingBodyTransformations()))
-                dianaScene.beMyStallionRepeat();
+                SceneLib.dianaScene.beMyStallionRepeat();
 			else if (flags[kFLAGS.DIANA_FOLLOWER] < 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8 && (player.hasCock() || !player.blockingBodyTransformations()))
-				dianaScene.beMyStallion();
-			else dianaScene.wonOverDiana();
+				SceneLib.dianaScene.beMyStallion();
+			else SceneLib.dianaScene.wonOverDiana();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) dianaScene.lostToDianaSpar();
-			else dianaScene.lostToDiana();
+			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) SceneLib.dianaScene.lostToDianaSpar();
+			else SceneLib.dianaScene.lostToDiana();
 		}
-		
+		*/
 		public function Diana()
 		{
 			if (flags[kFLAGS.DIANA_LVL_UP] == 0) {
