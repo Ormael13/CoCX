@@ -103,6 +103,7 @@ public class DebugMenu extends BaseContent
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
 	            addButton(8, "Test Scene", testScene);
 	            addButton(9, "Test Tf", testTfMenu);
+	            addButton(10, "Debug set var", debugSetVarMenu);
 				addButton(14, "Exit", playerMenu);
 			}
             if (CoC.instance.inCombat) {
@@ -111,7 +112,58 @@ public class DebugMenu extends BaseContent
 				doNext(playerMenu);
 			}
 		}
-		private function  dumpEffectsMenu():void {
+		
+		/**
+		 * Sets an inputted variable to specified value
+		 * all parameters are strings
+		 * @param	objName name of desired object (player)
+		 * @param	varName name of desired variable (XP)
+		 * @param	varVal value to set
+		 * @return true if obj.var exists, otherwise false
+		 */public function debugVarSet(objName:String, varName:String, varVal:String):Boolean {
+			if (!BaseContent[objName].hasOwnProperty(varName)) {
+				outputText("Invalid " + objName + "or" + varName);
+				return false;
+			} else {
+				BaseContent[objName][varName] = varVal;
+				return true;
+			}
+		}
+		/**
+		 * Accepts a simple assignment string like player.XP=10
+		 * can also read text box in debug menu
+		 * @param	input String to parse, no fancy interpreting
+		 * @return true unless textbox empty, otherwise false
+		 */public function debugVarParse(input:String = null):Boolean {
+			if (input == null) input = mainView.nameBox.text;
+			if (input == "") return false;
+			mainView.nameBox.visible = false;
+			mainView.nameBox.text = "";
+			var regex:RegExp = /[.=]/;
+			var inputa:Array = input.split(regex);
+			outputText("\n\n"+input+" became "+inputa[0]+", "+inputa[1]+", "+inputa[2]+".");
+			return debugVarSet(inputa[0], inputa[1], inputa[2]);
+		}
+		
+		private function debugSetVarMenu():void {
+			clearOutput();
+			mainView.nameBox.visible = true;
+			mainView.nameBox.width = 165;
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+			mainView.nameBox.text = "";
+			mainView.nameBox.maxChars = 999;
+			mainView.nameBox.restrict = null;
+			outputText("\n\n\n\n\nThis is not intelligent, please use the format: obj.var=val\n"
+				+"For example, player.XP=10\nValues are <b>case-sensitive</b> and basically only strings or numbers.\n"
+				+"Note that values may not visibly update until a refresh is called in some way.\n");
+			menu();
+			addButton(0, "Enter", debugVarParse);
+			addButton(1, "Cancel", accessDebugMenu);
+			addButton(2, "Refresh", debugSetVarMenu);
+		}
+		
+		private function dumpEffectsMenu():void {
 			clearOutput();
 			for each (var effect:StatusEffectClass in player.statusEffects) {
 				outputText("'"+effect.stype.id+"': "+effect.value1+" "+effect.value2+" "+effect.value3+" "+effect.value4+"\n");
