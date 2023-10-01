@@ -253,7 +253,7 @@ public class BattlefieldOuter extends BaseContent
 		outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plates draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
 		outputText("<b>You found "+mpa+" metal plates.</b>");
 		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += mpa;
-		outputText("<b>(Metal plates: "+flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]+"/200 total!</b>");//"+SceneLib.campUpgrades.checkMaterialsCapStones()+"
+		outputText("<b>(Metal plates: "+flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]+"/200 total)</b>");//"+SceneLib.campUpgrades.checkMaterialsCapStones()+"
 		endEncounter();
 	}
 

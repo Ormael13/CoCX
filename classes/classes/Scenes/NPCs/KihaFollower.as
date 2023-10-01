@@ -924,10 +924,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 				if (canKihaGetPregnant()) outputText("\n\n<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilise her and become a father.</b>");
 			}
 		}
-		if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0) addButton(5, "Give Underwear", giveKihaUndergarmentsPrompt)
-			.hint("Give Kiha something to wear to conceal her nether regions?")
-			.disableIf(!player.hasItem(undergarments.SSPANTY) && !player.hasItem(undergarments.SS_LOIN),
-				"Requires spider-silk panties or loincloth.");
+        if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", kihaHenchmanOption).hint("Ask Kiha to join you in adventures outside camp.");
+        else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 		if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(6,"Stop Guard",guardMyCampKiha).hint("Request her to stop guarding.");
 		else addButton(6,"Guard Camp",guardMyCampKiha).hint("Request her to guard your camp.");
 		if (CorruptedGlade.canBeDestroyed()) {
@@ -943,11 +941,10 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 				.disableIf(player.isGenderless(), "Not for genderless!"); //avoiding weirdness in defeat scene
         addButton(10, "Talk", TalkWithKiha).hint("Talk to Kiha… but would she want to talk?");
         if (CanVisitKids) addButton(11, "Kids", visitKids);
-        if (player.hasPerk(PerkLib.BasicLeadership)) {
-            if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to join you in adventures outside camp.");
-            else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to stay in camp.");
-            else addButtonDisabled(12, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-        }
+		if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0) addButton(12, "Give Underwear", giveKihaUndergarmentsPrompt)
+			.hint("Give Kiha something to wear to conceal her nether regions?")
+			.disableIf(!player.hasItem(undergarments.SSPANTY) && !player.hasItem(undergarments.SS_LOIN),
+				"Requires spider-silk panties or loincloth.");
 	} else {
 		if (output) {
 			clearOutput();
@@ -3215,4 +3212,3 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     }
 }
 }
-

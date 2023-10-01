@@ -1273,4 +1273,3 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		}
 	}
 }
-

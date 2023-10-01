@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.display.SpriteDb;
+import classes.Scenes.SceneLib;
 
 public class Lumi extends BaseContent {
 
@@ -1160,7 +1161,11 @@ public class Lumi extends BaseContent {
 					player.addStatusValue(StatusEffects.LumiWorkshop,1,1);
 				}
 			}
-			outputText("Which blueprints will you work on today?\n\n");
+			SceneLib.camp.campUpgrades.checkMaterials();
+			outputText("Metal Pieces: " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n");
+			outputText("Mechanisms: " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "/200" + "\n");
+			outputText("Energy Cores: " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "/200" + "\n");
+			outputText("\nWhich blueprints will you work on today?\n\n");
 			if (player.hasKeyItem("Blueprint - Potent Drug injectors") >= 0) outputText("Potent Drug injectors - Req. 100+ int, Improved Drug injectors, 3 metal pieces, 30 nails, 15 Lust Drafts.\n");
 			if (player.hasKeyItem("Blueprint - Improved Drug injectors") >= 0) outputText("Improved Drug injectors - Req. 75+ int, Drug injectors, 2 metal pieces, 20 nails, 10 Lust Drafts.\n");
 			if (player.hasKeyItem("Blueprint - Drug injectors") >= 0) outputText("Drug injectors - Req. 50+ int, Toolbelt, 1 metal piece, 10 nails, 5 Lust Drafts.\n");
