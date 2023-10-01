@@ -2293,10 +2293,14 @@ public class Camp extends NPCAwareContent{
 			[weapons.WARHAMR, weapons.D_WHAM_],
 			[weapons.SUCWHIP, weapons.PSWHIP],
 			[weapons.KATANA, weapons.DKATANA],
+			[weapons.L__AXE, weapons.DL_AXE_],
+			[weapons.MACGRSW, weapons.TMACGRSW],
+			[weapons.RIPPER1, weapons.TRIPPER1],
+			[weapons.RIPPER2, weapons.TRIPPER2],
 			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS]
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
-		addButton(4,"Seperate Weapons", menuSeperateStaging, weaponList)
+		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
 	}
 

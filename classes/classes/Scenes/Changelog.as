@@ -97,12 +97,12 @@ public class Changelog extends BaseContent
 			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night;\n");
 			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
 			outputText("-Since Liadri showed concern over cveless been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Diana been renamed to Nadia. Her spells cost no longer been fluctuating from spell casted (not even game tracking this) keeping it locked to max reduction now.\n");
+			outputText("-Can find metal plates now in outer battlefield too (3-5). Finding metal plate in boundary battlefield changed to give 2-3 plates instead of just 1.\n");
+			outputText("-New melee weapon (by Ormael): Twin Machine Greatswords - can be gained by combining 2x Machine Greatsword weapon. Cost 5440 gems. Base atk is 19. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ripper 1.0 - can be gained by combining 2x Ripper 1.0 weapon. Cost 16520 gems. Base atk is 24. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ripper 2.0 - can be gained by combining 2x Ripper 2.0 weapon. Cost 34720 gems. Base atk is 29. It's dual large weapon belonging to exotic type, 100% bleed chance and would apply burn DoT at enemies.\n");
+			outputText("-Two Dual Axes can be now combined into Dual Large Axes and seperated back into 2 Large Axes.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -112,6 +112,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
@@ -172,7 +181,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -203,6 +218,9 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

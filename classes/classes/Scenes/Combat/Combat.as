@@ -6352,7 +6352,7 @@ public class Combat extends BaseContent {
                     }
                     //Weapon Procs!
                     WeaponMeleeStatusProcs();
-                    if (player.weapon == weapons.RIPPER2) {
+                    if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
                         outputText("  Reeling in pain [themonster] begins to burn.");
                         if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
                         else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
@@ -7519,9 +7519,9 @@ public class Combat extends BaseContent {
                 if (monster is LivingStatue) outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
                 else outputText("Despite the gashes you've torn in its exterior, [themonster] does not bleed.");
             } else {
-                if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) {
+                if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
 					if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
-                    if (player.weapon == weapons.MACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
+                    if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
                     else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
                 } else {
                     if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) {

@@ -42,6 +42,10 @@ import classes.Scenes.NPCs.Galia;
 			clearOutput();
 			menu();
 			addButton(0, "Appearance", GaliaCampMainMenuSlaveAppearance);
+			//1 - talk
+			addButton(2, "Spar", GaliaSparring).hint("Get into a quick battle with Galia!").disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
+			//3 - sex
+			//4 v 9 - give items
 			addButton(14, "Back", camp.campSlavesMenu);
 		}
 		
