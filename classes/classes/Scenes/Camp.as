@@ -2956,7 +2956,7 @@ public class Camp extends NPCAwareContent{
 			else {*/		//that part will be later used for primaltwin - note for Svalkash
 			
 			
-	/*private function OldCloneFlavorText():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
+	/*private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv3(StatusEffects.PCClone) == 3) {
