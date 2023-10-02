@@ -387,6 +387,8 @@ public class Soulforce extends BaseContent
 		StatusEffects.PCClone3rd,
 		StatusEffects.PCClone4th,
 	];
+	
+	public static const clonelevelcost:int = 9;
 
 	public function DaoContemplations():void {
 		clearOutput();

@@ -32,7 +32,7 @@ internal class ControlBindings {
                 "Show the level up page when available",
                 function ():void {
                     if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_LEVEL) && CoC.instance.player.str > 0) {
-                        CoC.instance.playerInfo.levelUpGo();
+                        CoC.instance.playerInfo.levelUpMenu();
                     }
                 },
                 mainView.levelButton);

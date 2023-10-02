@@ -98,6 +98,7 @@ public class TestMenu extends BaseContent
 		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
 		bd.add("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		bd.add("ClickItTwice", golemArmy, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
+		bd.add("FixClones", fixClones, "If you have messed up clones or negative levels or related outdated data this will clear it all away.");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 	
@@ -619,6 +620,17 @@ public class TestMenu extends BaseContent
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
 		doNext(SoulforceCheats);
 	}
+	public function fixClones():void {
+		if (camp.gcc(true)) player.removeStatusEffect(StatusEffects.PCClone)
+		if (player.hasStatusEffect(StatusEffects.NegativeLevel)) {
+			player.removeStatusEffect(StatusEffects.NegativeLevel);
+		}
+		if (player.negativeLevel > 0) player.negativeLevel = 0;
+		if (player.hasStatusEffect(StatusEffects.PCClone1st)) player.removeStatusEffect(StatusEffects.PCClone1st);
+		if (player.hasStatusEffect(StatusEffects.PCClone2nd)) player.removeStatusEffect(StatusEffects.PCClone2nd);
+		if (player.hasStatusEffect(StatusEffects.PCClone3rd)) player.removeStatusEffect(StatusEffects.PCClone3rd);
+		if (player.hasStatusEffect(StatusEffects.PCClone4th)) player.removeStatusEffect(StatusEffects.PCClone4th);		
+	}	
 	public function hiddenPJ():void {
 		outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 		if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
@@ -1238,10 +1250,9 @@ public class TestMenu extends BaseContent
 		menu();
 		if (player.level < CoC.instance.levelCap) addButton(0, "Add 1 LvL", addsubLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
 		if (player.level < CoC.instance.levelCap - 9) addButton(1, "Add 10 LvL's", addsubLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
-		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (with stat and perk points).");
-		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (with stat and perk points).");
-		var negativeLevel:int = player.negativeLevel;
-		if (negativeLevel > 0 && player.level >= CoC.instance.levelCap) addButton(4, "-1 Neg LvL", recoverNegativeLevels).hint("Substract 1 Negative Level.");
+		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (keeping stat and perk points).");
+		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (keeping stat and perk points).");
+		if (player.negativeLevel > 0) addButton(4, "-1 Neg LvL (" + player.negativeLevel + ")", function _():void{ player.negativeLevel -= 1; LevelDeLevel(); }).hint("Recover 1 negative level.");
 		addButton(14, "Back", SoulforceCheats);
 	}
 	public function BodyStateMenu():void {
@@ -2302,23 +2313,15 @@ public class TestMenu extends BaseContent
 	public function addsubLvl(type:String, cAmt:int):void{
 		clearOutput();
 		if (type == "Lvl"){
-			player.level += cAmt;
-			player.statPoints += 5*cAmt;
-			player.perkPoints += cAmt;
+			for (var i:int = 0; i < cAmt; i++){
+				CoC.instance.playerInfo.levelUp(true);
+			}
 			outputText("\n\n<b>You now have " + player.level + " levels!</b>");
 		}
 		else if (type == "DLvl"){
-			player.level -= cAmt;
-			player.statPoints -= 5*cAmt;
-			player.perkPoints -= cAmt;
-			outputText("\n\n<b>You have lost " + cAmt + " levels!</b>");
+			player.setLevelDirectly(player.level-cAmt);
+			outputText("\n\n<b>You have lost " + cAmt + " levels and are now " + player.level + "!</b>");
 		}
-		doNext(LevelDeLevel);
-	}
-	
-	public function recoverNegativeLevels():void {
-		player.recoverNegativeLevel(1);
-		outputText("\n\n<b>You now have recovered 1 negative level!</b>");
 		doNext(LevelDeLevel);
 	}
 

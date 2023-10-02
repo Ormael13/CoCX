@@ -1302,6 +1302,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyGroupType)) minXP *= 5;
 				if (hasPerk(PerkLib.EnemyLargeGroupType)) minXP *= 10;
 				if (hasPerk(PerkLib.Enemy300Type)) minXP *= 15;
+				if (player.level == CoC.instance.levelCap) minXP *= 30; // Make regaining negative levels reasonable
 				if (this.humanityBoostExpValue() > 0) minXP += this.humanityBoostExpValue();
 				return Math.round(minXP);
 			}

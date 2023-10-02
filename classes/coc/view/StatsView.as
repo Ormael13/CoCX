@@ -342,6 +342,7 @@ public class StatsView extends Block {
 
 		corner.advancementText.htmlText = "<b>Advancement</b>";
 		corner.levelBar.value           = player.level;
+		if (player.negativeLevel) corner.levelBar.valueText = "(-" + player.negativeLevel + ") " + player.level;
 		if (player.level < CoC.instance.levelCap) {
 			corner.xpBar.maxValue = player.requiredXP();
 			corner.xpBar.value    = player.XP;
