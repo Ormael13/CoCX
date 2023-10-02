@@ -2306,11 +2306,24 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.DIANA_CURE_COOLDOWN] = 0;
 				flags[kFLAGS.DIANA_SPELLS_CASTED] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.12;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.13) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.13;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.13) {
+				if (player.hasStatusEffect(StatusEffects.PCClone) || 
+				player.hasStatusEffect(StatusEffects.PCClone1st) || 
+				player.hasStatusEffect(StatusEffects.PCClone2nd) || 
+				player.hasStatusEffect(StatusEffects.PCClone3rd) || 
+				player.hasStatusEffect(StatusEffects.PCClone4th) || 
+				player.hasStatusEffect(StatusEffects.NegativeLevel)) {
+					outputText("\n\n Mysteriously your clones seem to have disappeared... you'll need to reform them in camp!");
+				}
+				player.removeStatusEffect(StatusEffects.PCClone); 
+				player.removeStatusEffect(StatusEffects.PCClone1st); 
+				player.removeStatusEffect(StatusEffects.PCClone2nd); 
+				player.removeStatusEffect(StatusEffects.PCClone3rd); 
+				player.removeStatusEffect(StatusEffects.PCClone4th); 
+				player.removeStatusEffect(StatusEffects.NegativeLevel); 
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.13;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.14) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
