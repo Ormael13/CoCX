@@ -1808,7 +1808,7 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 1 && EvangelineFollower.EvangelineFollowerStage >= 1) {
 				if (flags[kFLAGS.GALIA_AFFECTION] < 2) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 				else {
-					outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
+					outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping Galia. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 					buttons.add("Galia", SceneLib.galiaFollower.GaliaCampMainMenuSlave).hint("Visit Galia.");
 				}
 			}
@@ -2293,10 +2293,14 @@ public class Camp extends NPCAwareContent{
 			[weapons.WARHAMR, weapons.D_WHAM_],
 			[weapons.SUCWHIP, weapons.PSWHIP],
 			[weapons.KATANA, weapons.DKATANA],
+			[weapons.L__AXE, weapons.DL_AXE_],
+			[weapons.MACGRSW, weapons.TMACGRSW],
+			[weapons.RIPPER1, weapons.TRIPPER1],
+			[weapons.RIPPER2, weapons.TRIPPER2],
 			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS]
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
-		addButton(4,"Seperate Weapons", menuSeperateStaging, weaponList)
+		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
 	}
 
@@ -4907,4 +4911,3 @@ public function rebirthFromBadEnd():void {
 
 }
 }
-

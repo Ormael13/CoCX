@@ -88,6 +88,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(10, "Neisa", NeisabutPCgotKOd);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(10, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(10, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
+			addButtonDisabled(11, "???", "You see a horse woman sitting at a table on your left.");//Diana
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 

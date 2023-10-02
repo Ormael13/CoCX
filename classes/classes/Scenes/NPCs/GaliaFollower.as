@@ -40,8 +40,13 @@ import classes.Scenes.NPCs.Galia;
 		
 		public function GaliaCampMainMenuSlave():void {
 			clearOutput();
+			outputText("\"<i>What?</i>\" Galia ask you while looking very bored.");
 			menu();
 			addButton(0, "Appearance", GaliaCampMainMenuSlaveAppearance);
+			//1 - talk
+			addButton(2, "Spar", GaliaSparring).hint("Get into a quick battle with Galia!").disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
+			//3 - sex
+			//4 v 9 - give items
 			addButton(14, "Back", camp.campSlavesMenu);
 		}
 		
@@ -49,7 +54,7 @@ import classes.Scenes.NPCs.Galia;
 			clearOutput();
 			outputText("Galia is short, only 2 feet 3 inches tall female feral imp. Her formely unkempt mane of shaggy platinum blond hair, parted by two short curved horns, is now braided into few ponytails to keep her longer then her height hair, gained from recent transformation, from keep dragged over the ground. Her eyes are solid black, save for tiny red irises.\n\n");
 			outputText("Her breasts are around DD cup sized, which given her super short figure makes them appear way bigger. Her extremely well-muscled body is nowhere to be seen replaced by much soft one, much to her unhappiness. Her hips are now much wider causing to give her slow, swaying gait when moving coupled with swelled butt, which jiggles along with each step.\n\n");
-			outputText("A pair of tiny but functional wings occasionally flap from her back. Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her chest, her feet are covered by tiny wooden sandals, and her hands tipped with sharp claws.\n\n");
+			outputText("A pair of tiny but functional wings occasionally flap from her back. Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her chest, her feet are covered by tiny wooden sandals, and her hands tipped with still sharp and long claws, even after transformation.\n\n");
 			menu();
 			addButton(14, "Back", GaliaCampMainMenuSlave);
 		}  
@@ -68,7 +73,7 @@ import classes.Scenes.NPCs.Galia;
 		public function GaliaLostSparring():void {
 			clearOutput();
 			outputText("After a longer moment Galia calm down and only say few words with low voice before walking away to her resting place. \"<i>You won this time but I'll win next time.</i>\"");
-			/*if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.GALIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.GALIA_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.GALIA_DEFEATS_COUNTER] = 1;
 				if (flags[kFLAGS.GALIA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.GALIA_LVL_UP] == 1) {
@@ -88,14 +93,14 @@ import classes.Scenes.NPCs.Galia;
 					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0);
 					flags[kFLAGS.GALIA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.GALIA_LVL_UP] = 4;
-				}
+				}/*
 				if (flags[kFLAGS.GALIA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.GALIA_LVL_UP] == 4) {
 					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
 					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0);
 					flags[kFLAGS.GALIA_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.GALIA_LVL_UP] = 5
-				}
-			}*/
+				}*/
+			}
 			cleanupAfterCombat();
 		}
 	}
