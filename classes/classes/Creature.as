@@ -586,11 +586,30 @@ public class Creature extends Utils
 		public var wrath:Number = 0;
 
 		//Level Stats
-		public var XP:Number = 0;
-		public var level:Number = 0;
+		//public var XP:Number = 0;
+		private var _xp:Number = 0
+		public function get XP():Number { return _xp; } //Returns the object
+		public function set XP(value:Number):void { _xp = value; }
+		
+		// public var level:Number = 0;
+		private var _level:Number = 0;
+		public function get level():Number { return _level; }
+		public function set level(value:Number):void { _level = value; }
+		// Can't imagine why you would want to do this but it's there to bypass player override
+		public function setLevelDirectly(value:Number):void { _level = value; }
+		
+		// TODO: (lvl) Implement stat scaling to negative levels -- and for monsters? Maybe some kind of level drain mechanics?
+		private var _negativeLevel:Number = 0;
+		public function get negativeLevel():Number { return _negativeLevel; }
+		public function set negativeLevel(value:Number):void { _negativeLevel = value; }
+		
+		//public var additionalXP:Number = 0;
+		private var _additionalXP:Number = 0;
+		public function get additionalXP():Number { return _additionalXP; }
+		public function set additionalXP(value:Number):void { _additionalXP = value; }
 		public var gems:Number = 0;
-		public var additionalXP:Number = 0;
-
+		
+		
 		public function get str100():Number { return 100*str/strStat.max; }
 		public function get tou100():Number { return 100*tou/touStat.max; }
 		public function get spe100():Number { return 100*spe/speStat.max; }
@@ -607,7 +626,7 @@ public class Creature extends Utils
 
 		private var _savedHPRatio:Number = 1;
 		public function saveHPRatio():void {
-			_savedHPRatio = HP/maxHP();
+			_savedHPRatio = HP / maxHP();
 		}
 		public function restoreHPRatio():void {
 			HP = _savedHPRatio*maxHP();
@@ -2541,7 +2560,7 @@ public class Creature extends Utils
 				changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
 		}
-		public function boostLactation(todo:Number, directIncrease:Boolean = false):Number
+		public function boostLactation(remaining:Number, directIncrease:Boolean = false):Number
 		{
 			if (breastRows.length == 0)
 				return 0;
@@ -2550,11 +2569,11 @@ public class Creature extends Utils
 			var changes:Number = 0;
 			var temp2:Number = 0;
 			//Prevent lactation decrease if lactating.
-			if (todo >= 0 && hasStatusEffect(StatusEffects.LactationReduction))
+			if (remaining >= 0 && hasStatusEffect(StatusEffects.LactationReduction))
 					changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-			if (todo > 0)
+			if (remaining > 0)
 			{
-				while (todo > 0)
+				while (remaining > 0)
 				{
 					counter = breastRows.length;
                     //select breast row with the lowest lactation
@@ -2564,8 +2583,8 @@ public class Creature extends Utils
 						if (breastRows[index].lactationMultiplier > breastRows[counter].lactationMultiplier)
 							index = counter;
 					}
-					temp2 = todo > .1 ? .1 : todo;
-					todo -= temp2;
+					temp2 = remaining > .1 ? .1 : remaining;
+					remaining -= temp2;
                     //diminishing increase - NOT INCLUDING LACTAID, IT WORKS WELL
                     if (!directIncrease) {
                         if (breastRows[index].lactationMultiplier > 1.5)
@@ -2581,7 +2600,7 @@ public class Creature extends Utils
 			}
 			else
 			{
-				while (todo < 0)
+				while (remaining < 0)
 				{
 					counter = breastRows.length;
 					index = 0;
@@ -2592,8 +2611,8 @@ public class Creature extends Utils
                         if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
                             index = counter;
                     }
-                    temp2 = todo < -.1 ? -.1 : todo;
-                    todo -= temp2;
+                    temp2 = remaining < -.1 ? -.1 : remaining;
+                    remaining -= temp2;
                     //normal decrease
                     changes += temp2;
                     breastRows[index].lactationMultiplier += temp2;
@@ -4530,7 +4549,7 @@ public class Creature extends Utils
 		public function get vagorass():IOrifice {
 			return hasVagina() ? vaginas[0] : ass;
 		}
-
+		
 		/**
 		 * Generate increments for stats
 		 *

@@ -1319,7 +1319,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.cor += 5;
 				}
 				//Reset clone creation tracker
-				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) == 0) player.removeStatusEffect(StatusEffects.PCClone);
+				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
 			//Process crops harvest moon
 			if (CoC.instance.model.time.hours == 24){

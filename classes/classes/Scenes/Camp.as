@@ -2253,7 +2253,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(!player.hasItem(bottles[i][0], 10) || !player.hasItem(useables.E_P_BOT, 1),
 					"You need one empty pill bottle and ten "+bottles[i][2]+"-grade soulforce recovery pills.");
 		}
-		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone(s).");
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", CloneMenu).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2858,24 +2858,31 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(pills, 10);
 		inventory.takeItem(result, campMiscActions);
 	}
+	
+	/**
+	 * Gets clone count (or buff existence)
+	 * @param	buffexist If true, returns player.hasStatusEffect(StatusEffects.PCClone) 0=no, 1=yes instead
+	 * @return player.statusEffectv3(StatusEffects.PCClone) aka "clone count", 0 if no buff
+	 */public function gcc(buffexist:Boolean = false):Number {
+		 if (buffexist) return player.hasStatusEffect(StatusEffects.PCClone) ? 1 : 0;
+		 if (player.hasStatusEffect(StatusEffects.PCClone)) return player.statusEffectv3(StatusEffects.PCClone);
+		 return 0;
+	}
+	public function maximumClonesCount(absolutemax:Boolean = false):Number {
+		// Don't forget to extend Soulforce.clones[] and related buffs if increasing
+		if (absolutemax) return Soulforce.clones.length;
+		var mCC:Number = Soulforce.clones.length;
+		if (!player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) mCC = 1;
+		return mCC;
+	}
 
-	private function VisitClone():void {
+	private function CloneMenu():void {
 		var clone:int;
-
 		clearOutput();
-		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) {
-			/*if (player.statusEffectv3(StatusEffects.PCClone) < 4) {
-				outputText("Your clone is ");
-				if (player.statusEffectv3(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
-				else if (player.statusEffectv3(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
-				else outputText("looking like you covered with black chitin-like carapace");
-				outputText(". Would you work on completing it?");
-			}
-			else {*/		//that part will be later used for primaltwin - note for Svalkash
-			outputText("Your clone" + (player.statusEffectv3(StatusEffects.PCClone) > 0 ? "s are" : " is") + " wandering around [camp]. What would you ask "
-				+ (player.statusEffectv3(StatusEffects.PCClone) > 0 ? "them" : "[him]") + " to do?\n\n");
+		if (gcc() > 0) {
+			outputText("Your clone" + (gcc() > 1 ? "s are" : " is") + " wandering around [camp]. What would you ask "+ (gcc() > 1 ? "them" : "[him]") + " to do?\n\n");
 			for (clone = 0; clone < Soulforce.clones.length; ++clone) {
-				outputText("Current clone (" + (clone + 1) + ") task: ");
+				outputText("\nCurrent clone (" + (clone + 1) + ") task: ");
 				if (player.statusEffectv1(Soulforce.clones[clone]) > 10 && player.statusEffectv1(Soulforce.clones[clone]) < 21) {
 					outputText("Contemplating Dao of ");
 					for (var d:int = 0; d < Soulforce.daos.length; ++d) {
@@ -2885,77 +2892,71 @@ public class Camp extends NPCAwareContent{
 				} else outputText("Nothing");
 				outputText("\n\n");
 			}
-			//}
-		}
-		else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
+		} else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
 		outputText("\n\n");
 		menu();
-		addButton(4, "Create", CreateClone)
-			.disableIf(player.isGargoyle(), "Your can't clone your stone body!");
-		if (button(4).enabled && player.hasStatusEffect(StatusEffects.PCClone)) button(4)
-			.disableIf(player.statusEffectv3(StatusEffects.PCClone) > 0,
-				"You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone))
-			.disableIf(player.statusEffectv3(StatusEffects.PCClone) == 4, "You cannot have more than four clones.");
+		addButton(13, "Create", FormClone)
+			.disableIf(player.isGargoyle(), "You can't clone your stone body!")
+			.disableIf(player.negativeLevel > 0, "You need to regain your power before you can create another clone. Unrecovered levels: " + player.negativeLevel)
+			.disableIf(gcc() >= maximumClonesCount(), "You cannot have more than " + maximumClonesCount() + " clone" + (maximumClonesCount() > 1 ? "s" : "") + " right now.")
+			.disableIf(gcc() >= maximumClonesCount(true), "You cannot have more than " + maximumClonesCount() + " clones.")
+			.disableIf(player.HP <= player.maxHP() * 0.9, "Your HP is too low.")
+			.disableIf(player.soulforce < player.maxSoulforce() * 0.9, "Your Soulforce is too low.");
+		
 		for (clone = 0; clone < Soulforce.clones.length; ++clone) {
+			if (clone > 12) continue; // short circuit for too many, maybe add pagination if clone cap gets upped for some reason
 			addButton(clone, "Contempl. (" + (clone + 1) + ")", cloneContemplateDao, clone)
 				.hint("Task your clone (" + (clone + 1) + ") with contemplating one of the Daos you know.")
 				.disableIf(!player.hasStatusEffect(Soulforce.clones[clone]), "Req. fully formed clone (" + (clone + 1) + ").");
 		}
 		addButton(14, "Back", campMiscActions);
 	}
-	private function maximumClonesCount():Number {
-		var mCC:Number = 1;
-		if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) mCC += 3;
-		return mCC;
-	}
-	private function CreateClone():void {
-		menu();
-		if (player.HP > player.maxHP() * 0.9 && player.soulforce >= player.maxSoulforce()) {
-			if (!player.hasStatusEffect(StatusEffects.PCClone) || (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) < maximumClonesCount())) addButton(0, "Form", FormClone);
-			else addButtonDisabled(0, "Form", "You can't form new clone.");
-		}
-		else {
-			if (player.soulforce < player.maxSoulforce()) addButtonDisabled(0, "Form", "Your soulforce is too low.");
-			else addButtonDisabled(0, "Form", "Your health is too low.");
-		}
-		addButton(4, "Back", VisitClone);
-	}
+	
 	private function FormClone():void {
+		clearOutput();
 		var newClone:int;
-		if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			for (var i:int = 1; i < Soulforce.clones.length; ++i) {
-				if (!player.hasStatusEffect(Soulforce.clones[i])) {
-					newClone = i;
-				}
+		if (gcc(true)) {
+			for (var i:int = gcc(); i < maximumClonesCount(); i++) {
+				if (player.hasStatusEffect(Soulforce.clones[i-1])) newClone = i;
 			}
 		} else {
 			newClone = 0;
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 0);
 		}
-		clearOutput();
-		FormCLoneText();
-		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[newClone + 2]+".\n\n");
-		outputText("<b>Your clone (" + (newClone + 1) + ") is fully formed.</b>\n\n");
 		player.addStatusValue(StatusEffects.PCClone, 3, 1);
 		player.createStatusEffect(Soulforce.clones[newClone], 0, 0, 0, 0);
-		EngineCore.SoulforceChange(-player.maxSoulforce());
-		HPChange(-(player.maxHP() * 0.9), true);
-		player.addNegativeLevels(9);
+		FormCloneText();
+		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[newClone+2]+".\n\n");
+		EngineCore.SoulforceChange(-player.maxSoulforce()*0.85);
+		HPChange(-(player.maxHP() * 0.85), true);
+		player.negativeLevel += Soulforce.clonelevelcost;
 		doNext(camp.returnToCampUseEightHours);
 	}
-	private function FormCLoneText():void {
-		outputText("You close your eyes with the intent of forming your clone. Minutes pass as the sensation of your soul force and life essence slowly escapes from your being.\n\n");
-		outputText("Time passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
+	private function FormCloneText():void {
+		outputText("You close your eyes with the intent of forming your " + (gcc(true) ? "next" : "first") + " clone. Minutes pass as the sensation of soul force and life essence slowly escapes from your being.\n\n");
+		outputText("Time passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling energy, you guide more of the essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
 		outputText("An hour later, the sphere begins to take the shape of your body with the energy you've guided into it. It is slightly larger than you, with the outer layer being nothing more than something to prevent the essences you've given it from escaping.\n\n");
 		outputText("The outer layer steadily begins to change into the form of a translucent cocoon. It's barely noticeable, but you can see the vital organs form inside the incubator.\n\n");
 		outputText("Two hours pass as the cocoon hardens into a substance akin to hard, black chitin until the cocoon is opaque. A small part of the layer around the navel keeps some translucent properties.\n\n");
-		outputText("Minutes draw by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
+		outputText("Minutes go by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
 		outputText("Soon after the heartbeat, other rapid changes begin inside the clone. The body itself begins to animate as the clone takes its first breaths. With the transfer nearly completely, the new life is on the verge of its complete vitality.\n\n");
-		outputText("Now that the body is full of life, you need to link it to your soul. The process is foreign, almost invasive as you link your essence to something alien, but as the minutes pass, the feeling steadily becomes more natural. ");
-		outputText("It's not long until the clone feels like an extension of your body, almost as if you could move it yourself. ");
-		outputText("It's not long until you're properly attuned to your clone. The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
+		outputText("Now that the body is full of life, you need to link it to your soul. The process is foreign, almost invasive as you link your essence to something alien, but as the minutes pass, the feeling steadily becomes more natural.\n\n");
+		outputText("Suddenly, the clone has begun to feel like an extension of your body, almost as if you could move it yourself. It's not long until you're properly attuned to your clone.\n\n");
+		outputText("The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
 	}
-	private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
+	/*
+	 * old primaltwin flavor	 * 
+			/*if (player.statusEffectv3(StatusEffects.PCClone) < 4) {
+				outputText("Your clone is ");
+				if (player.statusEffectv3(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
+				else if (player.statusEffectv3(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
+				else outputText("looking like you covered with black chitin-like carapace");
+				outputText(". Would you work on completing it?");
+			}
+			else {*/		//that part will be later used for primaltwin - note for Svalkash
+			
+			
+	/*private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv3(StatusEffects.PCClone) == 3) {
@@ -3002,7 +3003,7 @@ public class Camp extends NPCAwareContent{
 		}
 		doNext(camp.returnToCampUseEightHours);
 	}
-
+	*/
 	private function cloneContemplateDao(clone:int):void {
 		clearOutput();
 		outputText("Maybe your clone ("+clone+") could contemplate one of the Daos you know while you adventure outside the [camp]? But which one it should be?");
@@ -3014,7 +3015,7 @@ public class Camp extends NPCAwareContent{
 		}
 		addButton(13, "None", cloneContemplateDaoSet, clone, 10)
 			.disableIf(player.statusEffectv1(Soulforce.clones[clone]) == 10, "Your clone ("+clone+") is currently not contemplating any Dao.");
-		addButton(14, "Back", VisitClone);
+		addButton(14, "Back", CloneMenu);
 	}
 
 	private function cloneContemplateDaoSet(clone:int, newdao:Number):void {
@@ -4757,7 +4758,7 @@ public function rebirthFromBadEnd():void {
         return total;
     }
 	public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
-		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
+		var levelup:Boolean = player.XP >= player.requiredXP() && (player.level < CoC.instance.levelCap || player.negativeLevel > 0);
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
 			if (!levelup) {
 				if (player.statPoints > 0) {
@@ -4768,78 +4769,16 @@ public function rebirthFromBadEnd():void {
 					mainView.levelButton.toolTipText = "Spend your perk points on a new perk. \n\nYou currently have " + String(player.perkPoints) + ".";
 				}
 			} else {
-				mainView.setMenuButton(MainView.MENU_LEVEL, "Level Up");
-				var hp:int = 60;
-				var fatigue:int = 5;
-				var mana:int = 10;
-				var soulforce:int = 5;
-				var wrath:int = 5;
-				var lust:int = 3;
-				var statpoints:int = 5;
-				var perkpoints:int = 1;
-				if (player.level <= 6) {
-					hp += 60;
-					fatigue += 5;
-					mana += 10;
-					soulforce += 5;
-					wrath += 5;
-					lust += 3;
+				if (player.negativeLevel > 0) {
+					mainView.setMenuButton(MainView.MENU_LEVEL, "Restore Lvl");
+				} else {
+					mainView.setMenuButton(MainView.MENU_LEVEL, "Level Up");
 				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential)) {
-					hp += 80;
-					lust += 6;
-					fatigue += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) {
-					wrath += 10;
-					mana += 12;
-					soulforce += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) {
-					hp += 80;
-					lust += 6;
-					fatigue += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) {
-					wrath += 10;
-					mana += 12;
-					soulforce += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX);
-				if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockBody4thStage)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockEndurance)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockEndurance2ndStage)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockEndurance3rdStage)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockEndurance4thStage)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockForce)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockForce2ndStage)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockForce3rdStage)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockForce4thStage)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockSpirit)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockSpirit2ndStage)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockSpirit3rdStage)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockSpirit4thStage)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockId)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockId2ndStage)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockId3rdStage)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockId4thStage)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockArdor)) lust += 3;
-				if (player.hasPerk(PerkLib.UnlockArdor2ndStage)) lust += 3;
-				if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
-				if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
-				if (player.level < 6) {
-					statpoints *= 2;
-					perkpoints *= 2;
-				}
-				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk point"+(perkpoints>1?"s":"")+".";
+				mainView.levelButton.toolTipText = getLevelUpStatsForButton();
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
-					CoC.instance.playerInfo.levelUpGo();
+					CoC.instance.playerInfo.levelUpMenu();
 					return true; //True indicates that you should be routed to level-up.
 				}
-
 			}
 			mainView.showMenuButton(MainView.MENU_LEVEL);
 			mainView.statsView.showLevelUp();
@@ -4851,6 +4790,51 @@ public function rebirthFromBadEnd():void {
 			mainView.statsView.hideLevelUp();
 		}
 		return false;
+	}
+	
+	public function getLevelUpStatsForButton():String {
+		// This is all just display for the button text and affects nothing directly
+		var statpoints:int = 5;
+		var perkpoints:int = 1;
+		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX) * 4;
+		if (player.level < 1) statpoints *= 3, perkpoints *= 3;
+		if (player.level < 9) statpoints *= 2, perkpoints *= 2;
+		var output:String = "";
+		output = "Level up to increase your base stats,\nas well as gain <b>"+num2Text(statpoints,100)+"</b> stat points and <b>"+num2Text(perkpoints,100)+"</b> perk points!";
+		return output;
+		// If someone with more free time than I wants to go dig through and update/verify info feel free to re-add it
+		// Honestly it's not worth the processing time though since this gets redrawn a *lot* ?
+		//var hp:int = 60, fatigue:int = 5, mana:int = 10, soulforce:int = 5, wrath:int = 5, lust:int = 3;
+		//if (player.level <= 6) hp += 60, fatigue += 5, mana += 10, soulforce += 5, wrath += 5, lust += 3;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential)) hp += 80, lust += 6, fatigue += 6;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) wrath += 10, mana += 12, soulforce += 6;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) hp += 80, lust += 6, fatigue += 6;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) wrath += 10, mana += 12, soulforce += 6;
+		//if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockBody4thStage)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockEndurance)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockEndurance2ndStage)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockEndurance3rdStage)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockEndurance4thStage)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockForce)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockForce2ndStage)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockForce3rdStage)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockForce4thStage)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockSpirit)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockSpirit2ndStage)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockSpirit3rdStage)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockSpirit4thStage)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockId)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockId2ndStage)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockId3rdStage)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockId4thStage)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockArdor)) lust += 3;
+		//if (player.hasPerk(PerkLib.UnlockArdor2ndStage)) lust += 3;
+		//if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
+		//if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
+		//output += "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk point" + 		(perkpoints > 1?"s":"") + ".";
 	}
 
 //Camp population!

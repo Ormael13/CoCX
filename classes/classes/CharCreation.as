@@ -434,7 +434,6 @@ import coc.view.MainView;
 					player.createKeyItem(keyItemTemp[i].keyName, keyItemTemp[i].value1, keyItemTemp[i].value2, keyItemTemp[i].value3, keyItemTemp[i].value4);
 				}
 			}
-			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
             //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {

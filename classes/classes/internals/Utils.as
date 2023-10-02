@@ -11,9 +11,47 @@ import mx.formatters.NumberFormatter;
 
 public class Utils extends Object
 	{
-		public static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-		public static const NUMBER_WORDS_CAPITAL:Array		= ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
-		public static const NUMBER_WORDS_POSITIONAL:Array	= ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
+		// One hundred because with math you can craft 0-999 yes i'm a psychopath who typed positional manually don't @ me
+		public static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", 
+			"eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", 
+			"twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", "thirty", 
+			"thirty-one", "thirty-two", "thirty-three", "thirty-four", "thirty-five", "thirty-six", "thirty-seven", "thirty-eight", "thirty-nine", "forty", 
+			"forty-one", "forty-two", "forty-three", "forty-four", "forty-five", "forty-six", "forty-seven", "forty-eight", "forty-nine", "fifty", 
+			"fifty-one", "fifty-two", "fifty-three", "fifty-four", "fifty-five", "fifty-six", "fifty-seven", "fifty-eight", "fifty-nine", "sixty", 
+			"sixty-one", "sixty-two", "sixty-three", "sixty-four", "sixty-five", "sixty-six", "sixty-seven", "sixty-eight", "sixty-nine", "seventy", 
+			"seventy-one", "seventy-two", "seventy-three", "seventy-four", "seventy-five", "seventy-six", "seventy-seven", "seventy-eight", "seventy-nine", "eighty", 
+			"eighty-one", "eighty-two", "eighty-three", "eighty-four", "eighty-five", "eighty-six", "eighty-seven", "eighty-eight", "eighty-nine", "ninety", 
+			"ninety-one", "ninety-two", "ninety-three", "ninety-four", "ninety-five", "ninety-six", "ninety-seven", "ninety-eight", "ninety-nine", "hundred"];
+		public static const NUMBER_WORDS_CAPITAL:Array		= ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
+			"Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty", 
+			"Twenty-one", "Twenty-two", "Twenty-three", "Twenty-four", "Twenty-five", "Twenty-six", "Twenty-seven", "Twenty-eight", "Twenty-nine", "Thirty", 
+			"Thirty-one", "Thirty-two", "Thirty-three", "Thirty-four", "Thirty-five", "Thirty-six", "Thirty-seven", "Thirty-eight", "Thirty-nine", "Forty", 
+			"Forty-one", "Forty-two", "Forty-three", "Forty-four", "Forty-five", "Forty-six", "Forty-seven", "Forty-eight", "Forty-nine", "Fifty", 
+			"Fifty-one", "Fifty-two", "Fifty-three", "Fifty-four", "Fifty-five", "Fifty-six", "Fifty-seven", "Fifty-eight", "Fifty-nine", "Sixty", 
+			"Sixty-one", "Sixty-two", "Sixty-three", "Sixty-four", "Sixty-five", "Sixty-six", "Sixty-seven", "Sixty-eight", "Sixty-nine", "Seventy", 
+			"Seventy-one", "Seventy-two", "Seventy-three", "Seventy-four", "Seventy-five", "Seventy-six", "Seventy-seven", "Seventy-eight", "Seventy-nine", "Eighty", 
+			"Eighty-one", "Eighty-two", "Eighty-three", "Eighty-four", "Eighty-five", "Eighty-six", "Eighty-seven", "Eighty-eight", "Eighty-nine", "Ninety", 
+			"Ninety-one", "Ninety-two", "Ninety-three", "Ninety-four", "Ninety-five", "Ninety-six", "Ninety-seven", "Ninety-eight", "Ninety-nine", "Hundred"];
+		public static const NUMBER_WORDS_POSITIONAL:Array	= ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", 
+			"eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth", 
+			"twenty-first", "twenty-second", "twenty-third", "twenty-fourth", "twenty-fifth", "twenty-sixth", "twenty-seventh", "twenty-eighth", "twenty-ninth", "thirtieth", 
+			"thirty-first", "thirty-second", "thirty-third", "thirty-fourth", "thirty-fifth", "thirty-sixth", "thirty-seventh", "thirty-eighth", "thirty-ninth", "fortieth", 
+			"forty-first", "forty-second", "forty-third", "forty-fourth", "forty-fifth", "forty-sixth", "forty-seventh", "forty-eighth", "forty-ninth", "fiftieth", 
+			"fifty-first", "fifty-second", "fifty-third", "fifty-fourth", "fifty-fifth", "fifty-sixth", "fifty-seventh", "fifty-eighth", "fifty-ninth", "sixtieth", 
+			"sixty-first", "sixty-second", "sixty-third", "sixty-fourth", "sixty-fifth", "sixty-sixth", "sixty-seventh", "sixty-eighth", "sixty-ninth", "seventieth", 
+			"seventy-first", "seventy-second", "seventy-third", "seventy-fourth", "seventy-fifth", "seventy-sixth", "seventy-seventh", "seventy-eighth", "seventy-ninth", "eightieth", 
+			"eighty-first", "eighty-second", "eighty-third", "eighty-fourth", "eighty-fifth", "eighty-sixth", "eighty-seventh", "eighty-eighth", "eighty-ninth", "ninetieth", 
+			"ninety-first", "ninety-second", "ninety-third", "ninety-fourth", "ninety-fifth", "ninety-sixth", "ninety-seventh", "ninety-eighth", "ninety-ninth", "hundredth"];
+		public static const NUMBER_WORDS_POSITIONAL_CAPITAL:Array	= ["zeroth", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth", 
+			"Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth", "Eighteenth", "Nineteenth", "Twentieth", 
+			"Twenty-First", "Twenty-Second", "Twenty-Third", "Twenty-Fourth", "Twenty-Fifth", "Twenty-Sixth", "Twenty-Seventh", "Twenty-Eighth", "Twenty-Ninth", "Thirtieth", 
+			"Thirty-First", "Thirty-Second", "Thirty-Third", "Thirty-Fourth", "Thirty-Fifth", "Thirty-Sixth", "Thirty-Seventh", "Thirty-Eighth", "Thirty-Ninth", "Fortieth", 
+			"Forty-First", "Forty-Second", "Forty-Third", "Forty-Fourth", "Forty-Fifth", "Forty-Sixth", "Forty-Seventh", "Forty-Eighth", "Forty-Ninth", "Fiftieth", 
+			"Fifty-First", "Fifty-Second", "Fifty-Third", "Fifty-Fourth", "Fifty-Fifth", "Fifty-Sixth", "Fifty-Seventh", "Fifty-Eighth", "Fifty-Ninth", "Sixtieth", 
+			"Sixty-First", "Sixty-Second", "Sixty-Third", "Sixty-Fourth", "Sixty-Fifth", "Sixty-Sixth", "Sixty-Seventh", "Sixty-Eighth", "Sixty-Ninth", "Seventieth", 
+			"Seventy-First", "Seventy-Second", "Seventy-Third", "Seventy-Fourth", "Seventy-Fifth", "Seventy-Sixth", "Seventy-Seventh", "Seventy-Eighth", "Seventy-Ninth", "Eightieth", 
+			"Eighty-First", "Eighty-Second", "Eighty-Third", "Eighty-Fourth", "Eighty-Fifth", "Eighty-Sixth", "Eighty-Seventh", "Eighty-Eighth", "Eighty-Ninth", "Ninetieth", 
+			"Ninety-First", "Ninety-Second", "Ninety-Third", "Ninety-Fourth", "Ninety-Fifth", "Ninety-Sixth", "Ninety-Seventh", "Ninety-Eighth", "Ninety-Ninth", "Hundredth"];
 
 		//returns logical XOR of two values without much fuckery
 		public static function xor(a:Boolean, b:Boolean):Boolean {
@@ -532,14 +570,13 @@ public class Utils extends Object
 			});
 		}
 		
-		public static function num2Text(number:int):String {
-			if (number >= 0 && number <= 10) return NUMBER_WORDS_NORMAL[number];
+		public static function num2Text(number:int, maxnumber:int = 10, onehundred:Boolean = true):String {
+			if (number >= 0 && number <= maxnumber && (number < NUMBER_WORDS_NORMAL.length)) return ((onehundred && number==100) ? NUMBER_WORDS_NORMAL[1]+" " : "")+NUMBER_WORDS_NORMAL[number];
 			return number.toString();
 		}
-
-		public static function num2Text2(number:int):String {
+		public static function num2Text2(number:int, maxnumber:int = 10, onehundred:Boolean = true):String {
 			if (number < 0) return number.toString(); //Can't really have the -10th of something
-			if (number <= 10) return NUMBER_WORDS_POSITIONAL[number];
+			if (number <= maxnumber && number < NUMBER_WORDS_POSITIONAL.length) return ((onehundred && number==100) ? NUMBER_WORDS_NORMAL[1]+" " : "")+NUMBER_WORDS_POSITIONAL[number];
 			switch (number % 10) {
 				case 1: return number.toString() + "st";
 				case 2: return number.toString() + "nd";
@@ -548,10 +585,20 @@ public class Utils extends Object
 			}
 			return number.toString() + "th";
 		}
-
-		public static function Num2Text(number:int):String {
-			if (number >= 0 && number <= 10) return NUMBER_WORDS_CAPITAL[number];
+		public static function Num2Text(number:int, maxnumber:int = 10, onehundred:Boolean = true):String {
+			if (number >= 0 && number <= maxnumber && (number < NUMBER_WORDS_CAPITAL.length)) return ((onehundred && number==100) ? NUMBER_WORDS_CAPITAL[1]+" "+NUMBER_WORDS_NORMAL[number] : NUMBER_WORDS_CAPITAL[number]);
 			return number.toString();
+		}
+		public static function Num2Text2(number:int, maxnumber:int = 10, onehundred:Boolean = true):String {
+			if (number < 0) return number.toString(); //Can't really have the -10th of something
+			if (number <= maxnumber && number < NUMBER_WORDS_POSITIONAL.length) return ((onehundred && number==100) ? NUMBER_WORDS_CAPITAL[1]+" "+NUMBER_WORDS_POSITIONAL[number] : NUMBER_WORDS_POSITIONAL_CAPITAL[number]);
+			switch (number % 10) {
+				case 1: return number.toString() + "st";
+				case 2: return number.toString() + "nd";
+				case 3: return number.toString() + "rd";
+				default:
+			}
+			return number.toString() + "th";
 		}
 
 		public static function addComma(num:int):String{

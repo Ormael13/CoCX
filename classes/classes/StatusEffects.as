@@ -564,12 +564,12 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MitziPregnant:StatusEffectType                	= mk("Mitzi Pregnant");
 		public static const Naga:StatusEffectType                           = mk("Naga");
 		public static const NakedOn:StatusEffectType                        = mk("NakedOn");
-		public static const NegativeLevel:StatusEffectType                  = mk("Negative Level");
+		public static const NegativeLevel:StatusEffectType                  = mk("Negative Level"); //deprecated do not use, only left in for save compatibility, use player.negativeLevel
 		public static const NoJojo:StatusEffectType                         = mk("noJojo");
 		public static const NoMoreMarble:StatusEffectType                   = mk("No More Marble");
 		public static const Oswald:StatusEffectType                         = mk("Oswald");
 		public static const Overheat:StatusEffectType                		= mk("Overheat");
-		public static const PCClone:StatusEffectType            			= mk("PC Clone");
+		public static const PCClone:StatusEffectType            			= mk("PC Clone"); // ?, ?, clone count, ? -- negative levels are player.negativeLevel
 		public static const PCClone1st:StatusEffectType            			= mk("PC Clone 1st");
 		public static const PCClone2nd:StatusEffectType            			= mk("PC Clone 2nd");
 		public static const PCClone3rd:StatusEffectType            			= mk("PC Clone 3rd");

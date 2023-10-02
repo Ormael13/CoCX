@@ -1502,50 +1502,60 @@ public class PlayerInfo extends BaseContent {
 	//------------
 	// LEVEL UP
 	//------------
-	public function levelUpGo():void {
+	public function levelUp(ignoreXPCost:Boolean = false):void {
+		if (!ignoreXPCost) player.XP -= player.requiredXP(); // Custom characters?
+		if (player.negativeLevel > 0) {
+			player.level += 1; // handles level cap and negative levels automatically in Player.as
+			return; // if player had negative, leave
+		}
+		player.level += 1; 
+		HPChange(player.maxHP(), false);
+		//if (player.level % 2 == 0) player.ascensionPerkPoints++;
+		//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
+		var gainedPerks:Number = 1;
+		var gainedStats:Number = 5;
+		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) gainedStats += (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4);
+		// Perks: New character starts with 1 background perk or free point, 1 free point from character creation, (so 2) on top of these; at level 0
+		if (player.level <= 9) gainedPerks *= 2, gainedStats *= 2;
+		if (player.level == 1) gainedPerks *= 3, gainedStats *= 3;
+		player.perkPoints += gainedPerks;
+		player.statPoints += gainedStats;
+	}
+	public function levelUpMenu():void {
 		clearOutput();
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
-			if (flags[kFLAGS.LVL_UP_FAST] == 1){
-				lvlUpFastSubMenu();
-				return;	//Not sure if this is what's stopping the thing from moving on, not bothered to check.
-			}
-			else if (flags[kFLAGS.LVL_UP_FAST] == 2){
-				lUFSMM(999);
-			}
+		// we do not reach levelUpMenu besides button (which only shows if available) or hotkey or autolevel, so this should only be through hotkey. 
+		if (player.level >= CoC.instance.levelCap && player.negativeLevel < 1) {
+			if (player.statPoints > 0) { attributeMenu(); }
+			else if (player.perkPoints > 0) { perkBuyMenu(); }
 			else {
-				player.XP -= player.requiredXP();
-				player.level++;
-				var gainedPerks:Number = 1;
-				//if (player.level % 2 == 0) player.ascensionPerkPoints++;
-				//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
-				var gainedStats:Number = 5;
-				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) gainedStats += (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4);
-				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
-				clearOutput();
-				outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
-				if (player.level <= 1) {
-					gainedPerks *= 3;
-					gainedStats *= 3;
-				}
-				if (player.level <= 9) {
-					gainedPerks *= 2;
-					gainedStats *= 2;
-				}
-				player.perkPoints += gainedPerks;
-				player.statPoints += gainedStats;
-				outputText("\n\nYou have gained " + num2Text(gainedStats) + " attribute points and " + num2Text(gainedPerks) + " perk point"+(gainedPerks > 1 ? "s":"")+"!");
-				//What is this one for? V	I not sure myself either so commented it out just in case
-				//if (player.level > 6) outputText("\n\nYou have gained one perk point!");
-				//else outputText("\n\nYou have gained two perk points!");
+				outputText("\n<b>You have reached maximum level and have no levels to restore.</b>");
+				doNext(playerMenu); 
+			return;
 			}
-			if (player.statPoints > 0) {
-				doNext(attributeMenu);
-			} else if (player.perkPoints > 0) {
-				doNext(perkBuyMenu);
-			} else {
-				doNext(playerMenu);
+		}
+		if (player.XP >= player.requiredXP()) {
+			if (flags[kFLAGS.LVL_UP_FAST] == 1){ // multi
+				levelUpFastMenu();
+			} else if (flags[kFLAGS.LVL_UP_FAST] == 2){ // instant
+				lUFSMM();
+				if (player.statPoints > 0) { doNext(attributeMenu); }
+				else if (player.perkPoints > 0) { doNext(perkBuyMenu); }
+				else { doNext(playerMenu); }
+			} else { // 1 at a time
+				clearOutput();
+				if (player.negativeLevel > 0) {
+					levelUp();
+					outputText("<b>You have restored " + (player.negativeLevel > 0 ? "one negative level leaving "+num2Text(player.negativeLevel)+" to go." : "the last negative level, regaining your full power!") + "</b>");					
+					doNext(playerMenu);
+					return;
+				} else {
+					levelUp();
+					outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
+					outputText("\n\nYou have " + num2Text(player.statPoints) + " attribute points and " + num2Text(player.perkPoints) + " perk point" + (player.perkPoints > 1 ? "s":"") + "!");
+					doNext(attributeMenu);
+				}
 			}
 		}
 		//Spend attribute points
@@ -1561,64 +1571,32 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
-
-	//Sub-menus for limited levelling.
-	public function lvlUpFastSubMenu():void {
+	public function levelUpFastMenu():void {
 		spriteSelect(null);
-		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.");
-		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");
+		outputText("Fast leveling, click the button repeatedly to level up that many times. Press LvlMax to instantly spend all experience.");
+		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");		
 		menu();
 		addButton(0, "Lvl +1", lUFSMM, 1);
 		addButton(1, "Lvl +2", lUFSMM, 2);
 		addButton(2, "Lvl +5", lUFSMM, 5);
 		addButton(3, "Lvl +10", lUFSMM, 10);
-		addButton(4, "LvlMax", lUFSMM, 999);
+		addButton(4, "LvlMax", lUFSMM, CoC.instance.levelCap);
 		addButton(14, "Done", lUFSMAP);
 	}
-
-	public function lUFSMM(incmax:int = 999):void{
-		var lvlinc:int = 0;		//Level increment tracking
-		var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
-		var statLvl:int = player.statPoints;
-		clearOutput();
-		if (player.XP < player.requiredXP()){
-			outputText("Max level reached. Unable to increase further.\n\n");
+	public function lUFSMM(incmax:int = CoC.instance.levelCap):void {
+		if (player.negativeLevel > 0 && player.XP >= player.requiredXP()) outputText("\n<b>Recovered negative levels.</b>");
+		if (incmax == CoC.instance.levelCap) incmax += player.negativeLevel;
+		for (var i:int = 1; i <= incmax; i++) {
+			if (player.XP >= player.requiredXP() && (player.level < CoC.instance.levelCap || player.negativeLevel > 0)) levelUp();
 		}
-		else {
-			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
-				lvlinc++;
-				levelUp();
-			}
-			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
-			var perkRes:int = player.perkPoints - perkLvl;
-			var statRes:int = player.statPoints - statLvl;
-			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n");
-			statScreenRefresh();
-		}
-		lvlUpFastSubMenu();
-	}
-	
-	// Reduce XP, increase level, give points, recover HP
-	private function levelUp():void {
-		player.XP -= player.requiredXP();
-		player.level++;
-		var negativeLevel:int = player.negativeLevel;
-		if (negativeLevel > 0) {
-			player.recoverNegativeLevel(1);
-			return;
-		}
-		HPChange(player.maxHP(), false);
-		if (player.level <= 1) {
-			player.perkPoints += 6;
-			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 6;
-		}
-		if (player.level <= 9) {
-			player.perkPoints += 2;
-			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 2;
+		if (player.negativeLevel == 0) {
+			outputText("\n<b>You are now level " + num2Text(player.level) + "!</b>");
+			outputText("\n\nYou have " + num2Text(player.statPoints) + " attribute points and " + num2Text(player.perkPoints) + " perk point" + (player.perkPoints > 1 ? "s":"") + "!");
 		} else {
-			player.perkPoints++;
-			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
+			outputText("\n\n"+Num2Text(player.negativeLevel,100)+" negative level"+(player.negativeLevel > 1 ? "s" : "")+" remaining.");
 		}
+		statScreenRefresh();
+		if (flags[kFLAGS.LVL_UP_FAST] == 1) levelUpFastMenu();
 	}
 	public function lUFSMAP():void {
 		if (player.statPoints > 0) {
