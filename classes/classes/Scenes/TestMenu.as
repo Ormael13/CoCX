@@ -2313,13 +2313,11 @@ public class TestMenu extends BaseContent
 	public function addsubLvl(type:String, cAmt:int):void{
 		clearOutput();
 		if (type == "Lvl"){
-			for (var i:int = 0; i < cAmt; i++){
-				CoC.instance.playerInfo.levelUp(true);
-			}
+			CoC.instance.playerInfo.levelUpMultipleTimes(cAmt);
 			outputText("\n\n<b>You now have " + player.level + " levels!</b>");
 		}
 		else if (type == "DLvl"){
-			player.setLevelDirectly(player.level-cAmt);
+			player.level -= cAmt;
 			outputText("\n\n<b>You have lost " + cAmt + " levels and are now " + player.level + "!</b>");
 		}
 		doNext(LevelDeLevel);

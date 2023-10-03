@@ -235,7 +235,7 @@ public class PlayerInfo extends BaseContent {
 		}
 		miscStats += "<b>Ebon Labyrinth:</b> Explored up to " + flags[kFLAGS.EBON_LABYRINTH_RECORD] + " room\n";
 		miscStats += "<b>Exp needed to lvl up:</b> ";
-		if (player.level < CoC.instance.levelCap) miscStats += "" + player.requiredXP() + "\n";
+		if (player.level < CoC.instance.levelCap || player.negativeLevel > 0) miscStats += "" + player.requiredXP() + "\n";
 		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (currently possessed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
@@ -1505,9 +1505,10 @@ public class PlayerInfo extends BaseContent {
 	public function levelUp(ignoreXPCost:Boolean = false):void {
 		if (!ignoreXPCost) player.XP -= player.requiredXP(); // Custom characters?
 		if (player.negativeLevel > 0) {
-			player.level += 1; // handles level cap and negative levels automatically in Player.as
+			player.negativeLevel -= 1;
 			return; // if player had negative, leave
 		}
+		if (player.level >= CoC.instance.levelCap) return;
 		player.level += 1; 
 		HPChange(player.maxHP(), false);
 		//if (player.level % 2 == 0) player.ascensionPerkPoints++;
@@ -1521,6 +1522,13 @@ public class PlayerInfo extends BaseContent {
 		player.perkPoints += gainedPerks;
 		player.statPoints += gainedStats;
 	}
+	public function levelUpTo(value:int):void {
+		if (value > player.level) lUFSMM(value-player.level, true);
+	}
+	public function levelUpMultipleTimes(value:int):void {
+		lUFSMM(value, true);
+	}
+	
 	public function levelUpMenu():void {
 		clearOutput();
 		hideMenus();
@@ -1571,10 +1579,20 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
-	public function levelUpFastMenu():void {
+	public function levelUpFastMenu(leveled:Boolean=false):void {
 		spriteSelect(null);
-		outputText("Fast leveling, click the button repeatedly to level up that many times. Press LvlMax to instantly spend all experience.");
+		statScreenRefresh();
+		clearOutput();
+		outputText("\nFast leveling, click the button repeatedly to level up that many times. Press LvlMax to instantly spend all experience.");
 		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");		
+		if (leveled) {			
+			if (player.negativeLevel == 0) {
+				outputText("\n\n<b>You are now level " + num2Text(player.level) + "!</b>");
+				outputText("\n\nYou have " + num2Text(player.statPoints) + " attribute points and " + num2Text(player.perkPoints) + " perk point" + (player.perkPoints > 1 ? "s":"") + "!");
+			} else {
+				outputText("\n\n"+Num2Text(player.negativeLevel,100)+" negative level"+(player.negativeLevel > 1 ? "s" : "")+" remaining.");
+			}
+		}
 		menu();
 		addButton(0, "Lvl +1", lUFSMM, 1);
 		addButton(1, "Lvl +2", lUFSMM, 2);
@@ -1583,20 +1601,13 @@ public class PlayerInfo extends BaseContent {
 		addButton(4, "LvlMax", lUFSMM, CoC.instance.levelCap);
 		addButton(14, "Done", lUFSMAP);
 	}
-	public function lUFSMM(incmax:int = CoC.instance.levelCap):void {
-		if (player.negativeLevel > 0 && player.XP >= player.requiredXP()) outputText("\n<b>Recovered negative levels.</b>");
+	public function lUFSMM(incmax:int = CoC.instance.levelCap, noxpcost:Boolean = false ):void {
+		if (player.negativeLevel > 0 && (player.XP >= player.requiredXP() || noxpcost)) outputText("\n<b>Recovered negative levels.</b>");
 		if (incmax == CoC.instance.levelCap) incmax += player.negativeLevel;
 		for (var i:int = 1; i <= incmax; i++) {
-			if (player.XP >= player.requiredXP() && (player.level < CoC.instance.levelCap || player.negativeLevel > 0)) levelUp();
+			if ((player.XP >= player.requiredXP() || noxpcost) && (player.level < CoC.instance.levelCap || player.negativeLevel > 0)) levelUp(noxpcost);
 		}
-		if (player.negativeLevel == 0) {
-			outputText("\n<b>You are now level " + num2Text(player.level) + "!</b>");
-			outputText("\n\nYou have " + num2Text(player.statPoints) + " attribute points and " + num2Text(player.perkPoints) + " perk point" + (player.perkPoints > 1 ? "s":"") + "!");
-		} else {
-			outputText("\n\n"+Num2Text(player.negativeLevel,100)+" negative level"+(player.negativeLevel > 1 ? "s" : "")+" remaining.");
-		}
-		statScreenRefresh();
-		if (flags[kFLAGS.LVL_UP_FAST] == 1) levelUpFastMenu();
+		if (flags[kFLAGS.LVL_UP_FAST] == 1 && !noxpcost) levelUpFastMenu(true);
 	}
 	public function lUFSMAP():void {
 		if (player.statPoints > 0) {

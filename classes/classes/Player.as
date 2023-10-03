@@ -229,41 +229,6 @@ use namespace CoC;
 		public var tempInt:Number = 0;
 		public var tempWis:Number = 0;
 		public var tempLib:Number = 0;
-
-		override public function get level():Number 
-		{
-			return super.level;
-		}
-		override public function set level(value:Number):void
-		{
-			// Handle negativeLevels, and when more than 1 level is granted
-			// There is more elegant writing but this is more readable
-			
-			// 0 for Character creation
-			if (value == 0) super.level = 0;
-			// discard negative/fractions; use setLevelDirectly(x) for those poor choices
-			if (value < 1) return;
-			// If wanting to set player level directly, use setLevelDirectly(x)
-			value = value - super.level; // value will almost always be passed as level+1, so this will almost always be 1
-			if (value > 1) { // levels should be going through levelUp but if passed directly this will handle it
-				// TODO: (lvl) In theory supports custom characters out of the box, since they overwrite their stat/perk points after if non-default anyway; but double-check.
-				while (negativeLevel > 0 && value > 0) {
-					negativeLevel -= 1;
-					value -= 1;
-				}
-				while (value > 0) {
-					value -= 1;
-					CoC.instance.playerInfo.levelUp(true); // dancing around in circles until my little feet fall off
-				}
-			} else if (value == 1) {
-				// Everything below this line are what is usually run for any player level up
-				if (negativeLevel > 0) {
-					negativeLevel -= 1;
-				} else {
-					if (super.level < CoC.instance.levelCap) super.level = super.level + 1;
-				}
-			}
-		}
 		
 		//Player pregnancy variables and functions
 		private var pregnancy:Pregnancy = new Pregnancy();
