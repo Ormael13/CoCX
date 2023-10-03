@@ -1522,6 +1522,12 @@ public class PlayerInfo extends BaseContent {
 		player.perkPoints += gainedPerks;
 		player.statPoints += gainedStats;
 	}
+	public function levelUpTo(value:int):void {
+		if (value > player.level) lUFSMM(value-player.level, true);
+	}
+	public function levelUpMultipleTimes(value:int):void {
+		lUFSMM(value, true);
+	}
 	
 	public function levelUpMenu():void {
 		clearOutput();
@@ -1595,13 +1601,13 @@ public class PlayerInfo extends BaseContent {
 		addButton(4, "LvlMax", lUFSMM, CoC.instance.levelCap);
 		addButton(14, "Done", lUFSMAP);
 	}
-	public function lUFSMM(incmax:int = CoC.instance.levelCap):void {
-		if (player.negativeLevel > 0 && player.XP >= player.requiredXP()) outputText("\n<b>Recovered negative levels.</b>");
+	public function lUFSMM(incmax:int = CoC.instance.levelCap, noxpcost:Boolean = false ):void {
+		if (player.negativeLevel > 0 && (player.XP >= player.requiredXP() || noxpcost)) outputText("\n<b>Recovered negative levels.</b>");
 		if (incmax == CoC.instance.levelCap) incmax += player.negativeLevel;
 		for (var i:int = 1; i <= incmax; i++) {
-			if (player.XP >= player.requiredXP() && (player.level < CoC.instance.levelCap || player.negativeLevel > 0)) levelUp();
+			if ((player.XP >= player.requiredXP() || noxpcost) && (player.level < CoC.instance.levelCap || player.negativeLevel > 0)) levelUp(noxpcost);
 		}
-		if (flags[kFLAGS.LVL_UP_FAST] == 1) levelUpFastMenu(true);
+		if (flags[kFLAGS.LVL_UP_FAST] == 1 && !noxpcost) levelUpFastMenu(true);
 	}
 	public function lUFSMAP():void {
 		if (player.statPoints > 0) {

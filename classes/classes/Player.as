@@ -229,16 +229,6 @@ use namespace CoC;
 		public var tempInt:Number = 0;
 		public var tempWis:Number = 0;
 		public var tempLib:Number = 0;
-
-		override public function get level():Number 
-		{
-			return super.level;
-		}
-		override public function set level(value:Number):void
-		{
-			if (value > CoC.instance.levelCap) value = CoC.instance.levelCap;
-			super.level = value;
-		}
 		
 		//Player pregnancy variables and functions
 		private var pregnancy:Pregnancy = new Pregnancy();
