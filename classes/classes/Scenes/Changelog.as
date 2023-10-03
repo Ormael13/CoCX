@@ -91,20 +91,27 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids, Uma Handjob & Get Blown options not accesable for cockwielders, ");
 			outputText("Tamains Daughters scene sending back to camp, clone creating not causing unremovable negative levels, faerie dragon tf not giving pinkish purple scales color, Izma bad end not triggering after PC lost to her many times, Juvenile Abyssal Sharks runnign away without leaving behind any loot\n\n");
 			outputText("<b>Version 0.8u2:</b>\n\n");
+			outputText("-New melee weapon (by Ormael): Twin Machine Greatswords - can be gained by combining 2x Machine Greatsword weapon. Cost 5440 gems. Base atk is 19. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ripper 1.0 - can be gained by combining 2x Ripper 1.0 weapon. Cost 16520 gems. Base atk is 24. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ripper 2.0 - can be gained by combining 2x Ripper 2.0 weapon. Cost 34720 gems. Base atk is 29. It's dual large weapon belonging to exotic type, 100% bleed chance and would apply burn DoT at enemies.\n");
+			outputText("-Diana been renamed to Nadia. Her spells cost no longer been fluctuating from spell casted (not even game tracking this) keeping it locked to max reduction now.\n");
+			outputText("-Can find metal plates now in outer battlefield too (3-5). Finding metal plate in boundary battlefield changed to give 2-3 plates instead of just 1.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night;\n");
 			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
 			outputText("-Since Liadri showed concern over Celess been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
-			outputText("-Diana been renamed to Nadia. Her spells cost no longer been fluctuating from spell casted (not even game tracking this) keeping it locked to max reduction now.\n");
-			outputText("-Can find metal plates now in outer battlefield too (3-5). Finding metal plate in boundary battlefield changed to give 2-3 plates instead of just 1.\n");
-			outputText("-New melee weapon (by Ormael): Twin Machine Greatswords - can be gained by combining 2x Machine Greatsword weapon. Cost 5440 gems. Base atk is 19. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
-			outputText("-New melee weapon (by Ormael): Twin Ripper 1.0 - can be gained by combining 2x Ripper 1.0 weapon. Cost 16520 gems. Base atk is 24. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
-			outputText("-New melee weapon (by Ormael): Twin Ripper 2.0 - can be gained by combining 2x Ripper 2.0 weapon. Cost 34720 gems. Base atk is 29. It's dual large weapon belonging to exotic type, 100% bleed chance and would apply burn DoT at enemies.\n");
 			outputText("-Two Large Axes can be now combined into Dual Large Axes and seperated back into two Large Axes.\n");
 			outputText("-Lumi workshop menu include list of materials PC have in storage (from wood to energy cores).\n");
 			outputText("-Leveling up and Clones code changes. (Xetaxheb)\n");
+			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
+			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
+			outputText("-Using Dual Large Axes, Twin Machine Greatswords, Twin Ripper 1.0 or Twin Ripper 2.0 would give ~50% more wood.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -119,13 +126,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander\n\n");
 			/*ostatni punkt changelogu
