@@ -108,10 +108,10 @@ public class Changelog extends BaseContent
 			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-Using Dual Large Axes, Twin Machine Greatswords, Twin Ripper 1.0 or Twin Ripper 2.0 would give ~50% more wood.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Ormael): Twin Amethyst Claymores - can be gained by combining 2x Amethyst Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain darkness affinity, dual large type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ruby Claymores - can be gained by combining 2x Ruby Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain fire affinity, dual large type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Sapphire Claymores - can be gained by combining 2x Sapphire Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain ice affinity, dual large type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Topaz Claymore - can be gained by combining 2x Topaz Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain lightning affinity, dual large type weapon.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -126,6 +126,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander\n\n");
 			/*ostatni punkt changelogu
@@ -191,7 +201,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -226,6 +238,7 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
