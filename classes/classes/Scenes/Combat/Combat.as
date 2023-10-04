@@ -7388,6 +7388,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) damage *= 1.25;
         if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
         damage *= 2;
         damage = Math.round(damage);
         doLightingDamage(damage, true, true);
@@ -11022,6 +11023,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.RacialParagon)) dmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) dmg *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) dmg *= 2;
         if (player.armor == armors.ELFDRES && player.isElf()) dmg *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) dmg *= 2;
 		var arve:Number = 1;
@@ -12853,6 +12855,7 @@ public function SingDevastatingAria():void {
     }
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
     if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) damage *= 1.2;
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= 1.3;
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= 1.4;

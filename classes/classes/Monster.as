@@ -2030,6 +2030,10 @@ import flash.utils.getQualifiedClassName;
 					if (!handleFear()) return;
 				}
 			}
+			if (hasStatusEffect(StatusEffects.ConfusionM)) {
+				addStatusValue(StatusEffects.ConfusionM, 1, -1);
+				if (!handleConfusion() && rand(2) == 0) return;
+			}
 			//Exgartuan gets to do stuff!
 			if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			if (monsterIsConstricted()) {
@@ -2236,6 +2240,21 @@ import flash.utils.getQualifiedClassName;
 		private function ControlFreakStacking():void {
 			if (player.hasStatusEffect(StatusEffects.ControlFreak)) player.addStatusValue(StatusEffects.ControlFreak, 1, 0.5);
 			else player.createStatusEffect(StatusEffects.ControlFreak, 1.5, 0, 0, 0);
+		}
+
+		/**
+		 * Called if monster is under confusion. Should return true if confusion ignored and need to proceed with ai
+		 */
+		protected function handleConfusion():Boolean
+		{
+			interruptAbility();
+			if (statusEffectv1(StatusEffects.ConfusionM) == 0) {
+				removeStatusEffect(StatusEffects.ConfusionM);
+				if (plural) EngineCore.outputText("Your foes shake free of their confusion and ready themselves for battle.");
+				else EngineCore.outputText("Your foe shakes free of its confusion and readies itself for battle.");
+			}
+			else EngineCore.outputText("[Enemy name] wobble about in confusion!");
+			return false;
 		}
 
 		/**
@@ -3902,4 +3921,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
-
+

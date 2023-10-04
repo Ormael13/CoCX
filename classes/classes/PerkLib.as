@@ -3637,6 +3637,8 @@ public class PerkLib
 				"Allows access to a jabberwocky poisonous lust breath attack.");
 		public static const DragonPoisonBreath:PerkType = mk("Dragon poison breath", "Dragon poison breath",
 				"Allows access to a dragon poisonous breath attack.");
+		public static const DragonRegalBreath:PerkType = mk("Dragon regal breath", "Dragon regal breath",
+				"Allows access to a dragonne regal breath attack.");
 		public static const DragonWaterBreath:PerkType = mk("Dragon water breath", "Dragon water breath",
 				"Allows access to a sea dragon water breath attack. Mixing water with electricity may yield surprising results.");
 		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
@@ -3742,6 +3744,8 @@ public class PerkLib
 				"You become more powerful the more you know about Mareth. Increase spell and physical damage by a percentage based on how much of the codex was read.");
 		public static const LifeLeech:PerkType = mk("Life leech", "Life leech",
 				"Your unarmed strike steals vital energy from your victims, dealing 5% extra damage and restoring 1% mana, health, fatigue and soulforce per hit.");
+		public static const LionHeart:PerkType = mk("Lion Heart", "Lion Heart",
+				"Add 50% of your speed to your strength score. Double all natural attacks damage dealt.");
 		public static const Lycanthropy:PerkType = mk("Lycanthropy", "Lycanthropy",
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to physical damage and your claws are sharper than normal.");
 		public static const LycanthropyDormant:PerkType = mk("Dormant Lycanthropy", "Dormant Lycanthropy",

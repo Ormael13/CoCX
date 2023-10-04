@@ -1051,6 +1051,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonRoyalBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonRoyalBreathCooldown);
 				//Reset Mara Fruit daily counter
 				flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Alraune flags
@@ -1951,6 +1952,21 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.AcidSpit)) player.removePerk(PerkLib.AcidSpit);
 				if (player.hasPerk(PerkLib.AzureflameBreath)) player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
+			}
+			//Dragon regal breath and King of the Jungle
+			if (player.isRaceCached(Races.DRAGONNE)) {
+				if (!player.hasPerk(PerkLib.LionHeart)) {
+					outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+					outputText("[pg]It seems drake flower has awoken some kind of power within you... your throat and chest feel very sore. However, you doubt you'll be able to force out more than one such blast before resting.  (<b>Gained Perk"+(player.hasPerk(PerkLib.DragonRegalBreath)?":":"s: Dragon regal breath and King of the Jungle")+"!</b>)");
+					player.createPerk(PerkLib.LionHeart, 0, 0, 0, 0);
+					needNext = true;
+				}
+			} else {
+				if (player.hasPerk(PerkLib.LionHeart)) {
+					outputText("\nYou are no longer enough of a dragonne and have lost your special abilities!\n\n<b>(Lost the Lion Heart perk!)</b>\n");
+					player.removePerk(PerkLib.LionHeart);
+					needNext = true;
+				}
 			}
 			//Titan Might
 			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
