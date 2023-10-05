@@ -819,6 +819,7 @@ private function buyDyes():void {
 		merchantMenu.addItem(consumables.PURPDYE, 50);
 		merchantMenu.addItem(consumables.PINKDYE, 50);
 		merchantMenu.addItem(consumables.RUSSDYE, 50);
+		merchantMenu.addItem(consumables.GOLDB_D, 50);
 		merchantMenu.addItem(consumables.RAINDYE, 50);
 	}
 	merchantMenu.afterPurchase = function(itype:ItemType,qty:int,next:Function):void {

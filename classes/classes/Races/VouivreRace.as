@@ -50,7 +50,9 @@ public class VouivreRace extends Race {
 				.eyeType(Eyes.SNAKE, +1)
 				.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)
 				.hornType(Horns.DRACONIC_X2, +1)
-				.wingType(ANY(Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE,Wings.DRACONIC_HUGE), +4, -1000)
+				.wingType(Wings.DRACONIC_SMALL, +2, -1000)
+				.wingType(Wings.DRACONIC_LARGE, +4, -1000)
+				.wingType(Wings.DRACONIC_HUGE, +6, -1000)
 				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {

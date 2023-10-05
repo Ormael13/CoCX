@@ -107,7 +107,11 @@ public final class ConsumableLib extends AlchemyLib
 		public const RED_DYE:HairDye = ItemTemplateLib.instance.createHairDye("Red", 1);
 		public const WHITEDY:HairDye = ItemTemplateLib.instance.createHairDye("White", 1);
 		public const RUSSDYE:HairDye = ItemTemplateLib.instance.createHairDye("Russet", 1);
+		public const YELLDYE:HairDye = ItemTemplateLib.instance.createHairDye("Yellow", 1);
+		public const GOLDB_D:HairDye = ItemTemplateLib.instance.createHairDye("Golden Blonde", 1);
 		public const SNOWW_D:HairDye = ItemTemplateLib.instance.createHairDye("Snow White", 2);
+		public const SILVDYE:HairDye = ItemTemplateLib.instance.createHairDye("Silver", 2);
+		public const GOLDDYE:HairDye = ItemTemplateLib.instance.createHairDye("Golden", 2);
 		public const QWHITED:HairDye = ItemTemplateLib.instance.createHairDye("Quartz White", 3);
 
 		//SKIN OILS & BODY LOTIONS

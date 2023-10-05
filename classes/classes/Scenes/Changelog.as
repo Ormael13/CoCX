@@ -96,15 +96,15 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Twin Ripper 2.0 - can be gained by combining 2x Ripper 2.0 weapon. Cost 34720 gems. Base atk is 29. It's dual large weapon belonging to exotic type, 100% bleed chance and would apply burn DoT at enemies.\n");
 			outputText("-Diana been renamed to Nadia. Her spells cost no longer been fluctuating from spell casted (not even game tracking this) keeping it locked to max reduction now.\n");
 			outputText("-Can find metal plates now in outer battlefield too (3-5). Finding metal plate in boundary battlefield changed to give 2-3 plates instead of just 1.\n");
+			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
+			outputText("-Leveling up and Clones code changes. (Xetaxheb)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night;\n");
-			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
 			outputText("-Since Liadri showed concern over Celess been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
 			outputText("-Two Large Axes can be now combined into Dual Large Axes and seperated back into two Large Axes.\n");
 			outputText("-Lumi workshop menu include list of materials PC have in storage (from wood to energy cores).\n");
-			outputText("-Leveling up and Clones code changes. (Xetaxheb)\n");
 			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-Using Dual Large Axes, Twin Machine Greatswords, Twin Ripper 1.0 or Twin Ripper 2.0 would give ~50% more wood.\n");
@@ -115,6 +115,10 @@ public class Changelog extends BaseContent
 			outputText("-Dragonne is no longer joke or meme race and have now proper req. for bodyparts, racial bonuses and specials. Dragonne / Elder dragonne / Ancient dragonne (at 16 / 24 / 32): +70/105/140% to str multi, +60/90/120% to tou multi, +100/150/200% to spe multi -30/45/60% to int multi, +30/45/60% to lib multi, +1/4/10 to armor/magic resistance.\n");
 			outputText("-New event perk: Dragon regal breath. Gained by been dragonne (16+ score). Effects: Allows access to a dragonne regal breath attack. (phys damage, longer stun than other breaths, apply bleed and confusion (similary to fear but not makes enemy skipping turns just giving 50% to skip turn))\n");
 			outputText("-New event perk: Lion Heart. Gained by been dragonne (16+ score). Effects: Add 50% of your speed to your strength score. Double all natural attacks damage dealt.\n");
+			outputText("-Rathazul can sell golden blonde dye and Salon yellow dye.\n");
+			outputText("-Dragon, Fairy Dragon, Sea Dragon, Vouivre, Yggdrassil races would have changed calculation from wings part (most cases it would give slight more points than before).\n");
+			outputText("-Draconic Heart Internal Mutation no longer req. Draconic Bones Internal Mutation and to req. races group been added Jabberwocky.\n");
+			outputText("-Yggdrasil can gain now Oak Horns. (+1 to race score)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -125,19 +129,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb)
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander\n\n");
+			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

@@ -55,7 +55,7 @@ public class SeaDragonRace extends Race{
 				.skinPlainOnly(+1)
 				.skinBaseAdj("glossy", +1)
 				.skinBasePattern(Skin.PATTERN_SEA_DRAGON_UNDERBODY, +1)
-				.wingType(Wings.SEA_DRAGON, +4, -1000)
+				.wingType(Wings.SEA_DRAGON, +6, -1000)
 				.customRequirement("body","not toned",
 						function (body:BodyData):Boolean {
 							return body.player.tone < 10;
