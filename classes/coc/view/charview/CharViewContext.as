@@ -142,11 +142,20 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),
 					PlayerHasAnOffhandDaggerTwin: player.hasAetherTwinsTierLeftDagger(),
 
-					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
+					PlayerHasAShield: player.shield == game.shields.KITE_SH || player.shield == game.shields.SPIL_SH || player.shield == game.shields.BSHIELD,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
-					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
-					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
-					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
+					//PlayerHasAShieldHoly: player.shield == game.shields.SANCTYL,
+					//PlayerHasAShieldUnholy: player.shield == game.shields.SANCTYD,
+					PlayerHasAShieldSm: player.shield == game.shields.BUCKLER || player.shield == game.shields.TRASBUC || player.shield == game.shields.NECROSH,
+					//PlayerHasAShieldSmHoly: player.shield == game.shields.SANCTYL,
+					//PlayerHasAShieldSmUnholy: player.shield == game.shields.SANCTYD,
+					PlayerHasAShieldLg: player.shield == game.shields.DRGNSHL || player.shield == game.shields.GREATSH || player.shield == game.shields.SANCTYN || player.shield == game.shields.SPIH_SH,
+					PlayerHasAShieldLgHoly: player.shield == game.shields.SANCTYL,
+					PlayerHasAShieldLgUnholy: player.shield == game.shields.SANCTYD,
+					PlayerHasAShieldMs: player.shield == game.shields.SPIM_SH || player.shield == game.shields.TOWERSH,
+					//PlayerHasAShieldMsHoly: player.shield == game.shields.SANCTYL,
+					//PlayerHasAShieldMsUnholy: player.shield == game.shields.SANCTYD,
+
 					PlayerhasACasterTome:player.shield == game.shields.IMPTOME || player.shield == game.shields.NEKONOM,
 
 					PlayerHasABow: player.isBowTypeWeapon(),
@@ -261,9 +270,11 @@ public class CharViewContext extends ExecContext {
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
-					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
+					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY,
 					cowPanty: player.lowerGarment == game.undergarments.COW_PANTY,
 					blackCatPanty: player.lowerGarment == game.undergarments.BN_SKIRT,
+					brownLoincloth: player.lowerGarment == game.undergarments.C_LOIN || player.lowerGarment == game.undergarments.FURLOIN,
+					whiteLoincloth: player.lowerGarment == game.undergarments.F_LOIN_ || player.lowerGarment == game.undergarments.SS_LOIN,
 
 					// Unique misc Accessories
 					oniGourd: player.countMiscJewelry(game.miscjewelries.ONI_GOURD) > 0,
