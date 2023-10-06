@@ -402,7 +402,7 @@ public class Combat extends BaseContent {
     }
 
     public function maxCurrentRangeAttacks():int {
-        if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") return maxFirearmsAttacks();
+        if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") return maxFirearmsAttacks();
         else if (player.weaponRangePerk == "Throwing") return maxThrowingAttacks();
         else if (player.weaponRangePerk == "Crossbow") return maxCrossbowAttacks();
         else if (player.weaponRangePerk == "Bow")return maxBowAttacks();
@@ -2877,8 +2877,8 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
 		faccmod += Math.round((masteryFirearmsLevel() - 1) / 2);
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
-		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
-		if (player.weaponRangePerk == "Dual Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
+		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
+		if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
         return faccmod;
     }
 
@@ -2896,9 +2896,9 @@ public class Combat extends BaseContent {
 	public function firearmsDualWieldAccuracyPenalty():Number {
 		var accfdwmodpenalty:Number = -25;
 		if (player.weaponSpecials("Dual Firearms")) {
-			if (player.hasPerk(PerkLib.DualWieldSmall)) accfdwmodpenalty += 10;
+			if (player.hasPerk(PerkLib.DualWieldFirearms)) accfdwmodpenalty += 10;
 		}
-        if (player.weaponSpecials("Quad Firearms")) {
+        if (player.weaponSpecials("Dual 2H Firearms")) {
 			accfdwmodpenalty -= 50;
 		}
         return accfdwmodpenalty;
@@ -2910,7 +2910,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.DualWieldFirearms)) dmgfdwmodpenalty -= 0.3;
 			else dmgfdwmodpenalty -= 0.5;
 		}
-        if (player.weaponSpecials("Quad Firearms")) {
+        if (player.weaponSpecials("Dual 2H Firearms")) {
 			dmgfdwmodpenalty -= 0.9;
 		}
         return dmgfdwmodpenalty;
@@ -3008,7 +3008,7 @@ public class Combat extends BaseContent {
             else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
         }
-        else if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
+        else if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
             if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
             else if (flags[kFLAGS.MULTISHOT_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
@@ -3017,7 +3017,7 @@ public class Combat extends BaseContent {
 				if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
 			}
-			else if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
+			else if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
 			else if (player.weaponRange == weaponsrange.GOODSAM || player.weaponRange == weaponsrange.BADOMEN) {
 				var recoil:Number = 1;
@@ -3045,7 +3045,7 @@ public class Combat extends BaseContent {
 				}
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 			}
-            if (player.weaponRangePerk == "Dual Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
+            if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
         }
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
         var ammoWord:String = weaponRangeAmmo;
@@ -3105,7 +3105,7 @@ public class Combat extends BaseContent {
             }
             throwWeapon();
         }
-        if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") shootWeapon();
+        if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") shootWeapon();
 		if (player.vehicles == vehicles.HB_MECH) multiArrowsStrike();
     }
 
@@ -4102,7 +4102,8 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
 		if (!player.hasPerk(PerkLib.PrimedClipWarp) || (player.hasPerk(PerkLib.PrimedClipWarp) && rand(4) > 0)) {
 			if (player.hasPerk(PerkLib.PhantomShooting)) {
-				if (player.weaponRange == weaponsrange.M1CERBE) player.takePhysDamage(150);
+				if (player.weaponRange == weaponsrange.TM1CERB) player.takePhysDamage(300);
+				else if (player.weaponRange == weaponsrange.M1CERBE) player.takePhysDamage(150);
 				else player.takePhysDamage(25);
 			}
 			else {
@@ -4167,16 +4168,16 @@ public class Combat extends BaseContent {
             }
             //Weapon addition!
             damage = rangeAttackModifier(damage);
-			if (player.weaponRangePerk == "Dual Firearms") damage *= firearmsDualWieldDamagePenalty();
+			if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.DBDRAGG) damage *= 2;
                 if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.DERPLAU) damage *= 5;
             }
             //other effects
-            if (player.weaponRange == weaponsrange.M1CERBE) damage *= 6;
+            if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) damage *= 6;
             if (player.weaponRange == weaponsrange.HARPGUN && player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) damage *= 1.2;
-            if (player.weaponRangePerk == "Dual Firearms") damage *= (1 + (0.01 * dualWFLevel()));
+            if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") damage *= (1 + (0.01 * dualWFLevel()));
             if (player.armor == armors.GTECHC_ && !player.isInGoblinMech()) damage *= 1.2;
             if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
             if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
@@ -4283,7 +4284,7 @@ public class Combat extends BaseContent {
 				else doPhysicalDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				firearmsXP(rangeMasteryEXPgained(crit));
-				if (player.weaponRangePerk == "Dual Firearms") {
+				if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
 					dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 				}
                 outputText("\n\n");
@@ -4298,10 +4299,10 @@ public class Combat extends BaseContent {
 					}
 					else doPhysicalDamage(damage, true, true);
 					firearmsXP(rangeMasteryEXPgained(crit));
-					if (player.weaponRangePerk == "Dual Firearms") {
+					if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
 						dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 					}
-					if (player.weaponRange == weaponsrange.M1CERBE) {
+					if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
 						if (player.hasPerk(PerkLib.AmateurGunslinger)) {
 							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doPhysicalDamage(damage, true, true);
@@ -4385,7 +4386,7 @@ public class Combat extends BaseContent {
 								monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 							}
 							else doPhysicalDamage(damage, true, true);
-							if (player.weaponRange == weaponsrange.M1CERBE) {
+							if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
 								if (player.hasPerk(PerkLib.AmateurGunslinger)) {
 									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 										doPhysicalDamage(damage, true, true);
@@ -4449,7 +4450,7 @@ public class Combat extends BaseContent {
 							}
 						}
 						firearmsXP(rangeMasteryEXPgained(crit));
-						if (player.weaponRangePerk == "Dual Firearms") {
+						if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
 							dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 						}
                     }
@@ -4590,6 +4591,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
+        if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 1;
         if (player.weaponRange == weaponsrange.HARPGUN) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TRFATBI) player.ammo = 1;
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
@@ -4638,7 +4640,7 @@ public class Combat extends BaseContent {
                 outputText("\n\n");
                 shootWeapon();
             } else {
-                if (player.weaponRange != weaponsrange.M1CERBE && player.weaponRange != weaponsrange.TRFATBI && player.weaponRange != weaponsrange.HARPGUN && player.weaponRange != weaponsrange.SNIPPLE && player.weaponRange != weaponsrange.TOUHOM3 && player.weaponRange != weaponsrange.DERPLAU && player.weaponRange != weaponsrange.DUEL_P_
+                if (player.weaponRange != weaponsrange.M1CERBE && player.weaponRange != weaponsrange.TM1CERB && player.weaponRange != weaponsrange.TRFATBI && player.weaponRange != weaponsrange.HARPGUN && player.weaponRange != weaponsrange.SNIPPLE && player.weaponRange != weaponsrange.TOUHOM3 && player.weaponRange != weaponsrange.DERPLAU && player.weaponRange != weaponsrange.DUEL_P_
                         && player.weaponRange != weaponsrange.FLINTLK && player.weaponRange != weaponsrange.HARKON1) outputText(" Due to slow reloading you spent rest of your round on it and can't act until next turn.");
                 outputText("\n\n");
                 enemyAI();
@@ -11781,6 +11783,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
+        if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 1;
         if (player.weaponRange == weaponsrange.HARPGUN) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TRFATBI) player.ammo = 1;
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;

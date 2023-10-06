@@ -213,6 +213,7 @@ public class ItemConstants extends Utils {
 	public static const WT_PISTOL:String        = "Pistol";
 	public static const WT_RIFLE:String         = "Rifle";
 	public static const WT_2H_FIREARM:String    = "2H Firearm";
+	public static const WT_DUAL_2H_FIREARMS:String = "Dual 2H Firearms";
 	
 	// Weapon 'perks' (specials)
 	public static const WP_DUAL:String         = "Dual";

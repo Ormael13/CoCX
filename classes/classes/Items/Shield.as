@@ -51,7 +51,7 @@ public class Shield extends Equipable
 		
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if (game.player.weaponRangePerk == "Dual Firearms") {
+			if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "Dual 2H Firearms") {
 				if (doOutput) outputText("Your current range weapons requires two hands. Unequip your current range weapons or switch to one-handed before equipping this shield. ");
 				return false;
 			}
@@ -86,7 +86,7 @@ public class Shield extends Equipable
 						|| game.player.weaponSpecials("Dual Massive")) {
 					SceneLib.inventory.unequipWeapon();
 				}
-				if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "2H Firearm") SceneLib.inventory.unequipWeaponRange();
+				if (game.player.weaponRangePerk == "Dual Firearms" || game.player.weaponRangePerk == "2H Firearm" || game.player.weaponRangePerk == "Dual 2H Firearms") SceneLib.inventory.unequipWeaponRange();
 			}
 			super.afterEquip(doOutput);
 		}

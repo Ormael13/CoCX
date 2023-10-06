@@ -96,6 +96,8 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Twin Ripper 2.0 - can be gained by combining 2x Ripper 2.0 weapon. Cost 34720 gems. Base atk is 29. It's dual large weapon belonging to exotic type, 100% bleed chance and would apply burn DoT at enemies.\n");
 			outputText("-Diana been renamed to Nadia. Her spells cost no longer been fluctuating from spell casted (not even game tracking this) keeping it locked to max reduction now.\n");
 			outputText("-Can find metal plates now in outer battlefield too (3-5). Finding metal plate in boundary battlefield changed to give 2-3 plates instead of just 1.\n");
+			outputText("-Two Large Axes can be now combined into Dual Large Axes and seperated back into two Large Axes.\n");
+			outputText("-Lumi workshop menu include list of materials PC have in storage (from wood to energy cores).\n");
 			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
 			outputText("-Leveling up and Clones code changes. (Xetaxheb)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -103,8 +105,6 @@ public class Changelog extends BaseContent
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night;\n");
 			outputText("-Since Liadri showed concern over Celess been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
-			outputText("-Two Large Axes can be now combined into Dual Large Axes and seperated back into two Large Axes.\n");
-			outputText("-Lumi workshop menu include list of materials PC have in storage (from wood to energy cores).\n");
 			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-Using Dual Large Axes, Twin Machine Greatswords, Twin Ripper 1.0 or Twin Ripper 2.0 would give ~50% more wood.\n");
@@ -119,23 +119,30 @@ public class Changelog extends BaseContent
 			outputText("-Dragon, Fairy Dragon, Sea Dragon, Vouivre, Yggdrassil races would have changed calculation from wings part (most cases it would give slight more points than before).\n");
 			outputText("-Draconic Heart Internal Mutation no longer req. Draconic Bones Internal Mutation and to req. races group been added Jabberwocky.\n");
 			outputText("-Yggdrasil can gain now Oak Horns. (+1 to race score)\n");
+			outputText("-New range weapon (by Ormael): Twin M1 Cerberuses - can be gained by combining 2x M1 Cerberus weapon. Cost 1860 gems. Base atk is 45 and ammo clip size 1. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
+			outputText("-Use const values instead of magic numbers (jfmherokiller)\n");
+			outputText("-Sprite implementations: all by me this time (but mostly were made by copying and altering existing sprites); loincloths, most loincloths should have a sprite now. (aside from the dragonscale one, that one wasn't turning out very good, I'll come back to it later); more shield variants, shields should now show sprites reflecting their size either by description or type ");
+			outputText("(small,normal,large,massive) Aether Sin now uses the small shield sprite while the twins are in dagger and shield form; offhand corrupt scythe, can now have a certain NG+ hardcore boss weapon show in its full glory now. (Lord Shadeogorath)\n");
+			outputText("-Fixes: G-cup sprites not showing if the player is a werewolf/fox in human form (Lord Shadeogorath)\n");
+			outputText("-Jojo options to talk him as uncorrupted mouse into sex checking corruption would take into account ascension: corruption tolerance effects.\n");
+			outputText("-Removed from Rathazul conditions to offer option to come to camp corruption check.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb)
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog\n\n");
 			/*ostatni punkt changelogu
@@ -200,11 +207,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -238,8 +241,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

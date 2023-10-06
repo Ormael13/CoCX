@@ -1352,7 +1352,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You shoot [themonster] vitals with your [weaponrange]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
-		if (player.weaponRange == weaponsrange.M1CERBE) SAMulti += 4;
+		if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) SAMulti += 4;
 		if (player.weaponRange == weaponsrange.SNIPPLE) SAMulti += 6;
 		//if (player.weaponRange == weaponsrange.Sakuno M2) SAMulti += 8;
 		//if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
@@ -1379,7 +1379,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
 		}
 		else {
-			if (player.weaponRange == weaponsrange.M1CERBE) {
+			if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
 				var M1:Number = 1;
 				if (player.hasPerk(PerkLib.AmateurGunslinger)) damage += 1;
 				if (player.hasPerk(PerkLib.ExpertGunslinger)) damage += 1;

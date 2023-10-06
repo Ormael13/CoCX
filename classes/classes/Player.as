@@ -1242,7 +1242,7 @@ use namespace CoC;
 		}
 		public function haveWeaponForSneakAttackRange():Boolean
 		{
-			return weaponRangePerk == "Bow" || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.SNIPPLE;
+			return weaponRangePerk == "Bow" || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TM1CERB || weaponRange == game.weaponsrange.SNIPPLE;
 		}
 		//(dla Sword Immortal gra musi sprawdzić czy używa Sword type lub Dueling sword type weapons bo tak)
 		//Throwable melee weapons
@@ -1274,7 +1274,7 @@ use namespace CoC;
 		public function isUsingGoblinMechFriendlyFirearms():Boolean
 		{
 			return weaponRange == game.weaponsrange.ADBSCAT || weaponRange == game.weaponsrange.ADBSHOT || weaponRange == game.weaponsrange.BLUNDER || weaponRange == game.weaponsrange.DESEAGL || weaponRange == game.weaponsrange.DUEL_P_ || weaponRange == game.weaponsrange.FLINTLK || weaponRange == game.weaponsrange.HARPGUN || weaponRange == game.weaponsrange.IVIARG_
-			 || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
+			 || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TM1CERB || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
 		}
 		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
 		public function isInNonGoblinMech():Boolean
@@ -1614,7 +1614,7 @@ use namespace CoC;
 		//Is DualWield
 		public function isDualWield():Boolean
 		{
-			return weaponRangePerk == "Dual Firearms" || weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
+			return weaponRangePerk == "Dual Firearms" || weaponRangePerk == "Dual 2H Firearms" || weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
 		}
 		//Artifacts Bows
 		public function isArtifactBow():Boolean

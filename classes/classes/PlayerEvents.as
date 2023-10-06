@@ -1958,6 +1958,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasPerk(PerkLib.LionHeart)) {
 					outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 					outputText("[pg]It seems drake flower has awoken some kind of power within you... your throat and chest feel very sore. However, you doubt you'll be able to force out more than one such blast before resting.  (<b>Gained Perk"+(player.hasPerk(PerkLib.DragonRegalBreath)?":":"s: Dragon regal breath and King of the Jungle")+"!</b>)");
+					if (!player.hasPerk(PerkLib.DragonRegalBreath)) player.createPerk(PerkLib.DragonRegalBreath, 0, 0, 0, 0);
 					player.createPerk(PerkLib.LionHeart, 0, 0, 0, 0);
 					needNext = true;
 				}

@@ -2301,7 +2301,8 @@ public class Camp extends NPCAwareContent{
 			[weapons.RCLAYMO, weapons.TRCLAYM],
 			[weapons.SCLAYMO, weapons.TSCLAYM],
 			[weapons.TCLAYMO, weapons.TTCLAYM],
-			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS]
+			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
+			[weaponsrange.M1CERBE, weaponsrange.TM1CERB]
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)

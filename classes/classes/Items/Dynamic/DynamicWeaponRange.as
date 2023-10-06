@@ -251,7 +251,7 @@ public class DynamicWeaponRange extends WeaponRange implements IDynamicItem {
 			name: "2h firearm",
 			shortName: "2h Firearm",
 			verb: "slash",
-			desc: "A highly accurate tifle.",
+			desc: "A highly accurate rifle.",
 			perk: WT_2H_FIREARM,
 			attack: 10,
 			qattack: 0.25,
