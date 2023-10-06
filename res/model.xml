@@ -5480,23 +5480,97 @@
 					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
 						<show part="breasts/Bhuman"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
 						<show part="breasts/Dhuman"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
 						<show part="breasts/Dhuman"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 						<show part="breasts/Fhuman"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+						<show part="breasts/Fhuman"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+						<if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit">
+								<if test="PlayerHasBreastViewOutfit == false">
+									<show part="breasts/Fhuman"/>
+									<else>
+										<if test="PlayerHasABra == false">
+											<show part="breasts/Ghuman"/>
+											<else>
+												<if test="cowBra">
+													<show part="breasts/Ghuman"/>
+													<else>
+														<show part="breasts/Fhuman"/>
+													</else>
+												</if>
+											</else>
+										</if>
+									</else>
+								</if>
+								<else>							
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Ghuman"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Ghuman"/>
+												<else>
+													<show part="breasts/Fhuman"/>
+												</else>
+											</if>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="breasts/Fhuman"/>
+							</else>
+						</if>
 					</case>
 					<default>
-						<show part="breasts/Fhuman"/>
+						<if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit">
+								<if test="PlayerHasBreastViewOutfit == false">
+									<show part="breasts/Fhuman"/>
+									<else>
+										<if test="PlayerHasABra == false">
+											<show part="breasts/Ghuman"/>
+											<else>
+												<if test="cowBra">
+													<show part="breasts/Ghuman"/>
+													<else>
+														<show part="breasts/Fhuman"/>
+													</else>
+												</if>
+											</else>
+										</if>
+									</else>
+								</if>
+								<else>							
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Ghuman"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Ghuman"/>
+												<else>
+													<show part="breasts/Fhuman"/>
+												</else>
+											</if>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="breasts/Fhuman"/>
+							</else>
+						</if>
 					</default>
 				</switch>
-				<else>
-					<show part="breasts/0"/>
-                </else>
 			</if>
+
 			<if test="hasCock()">
 				<if test="big">
                     <show part="penis/humanbig"/>
