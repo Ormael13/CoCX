@@ -46,10 +46,10 @@ public class CharViewContext extends ExecContext {
 			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
 
 			function showLegClothing():Boolean {
-				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
 			}
 			function showPanty():Boolean {
-				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
 			}
 
 			super([
@@ -80,8 +80,8 @@ public class CharViewContext extends ExecContext {
 					PlayerIsInHumanForm: player.humanForm(),
 					playerHasWeaponBannedArms: [Arms.GAZER, Arms.YETI, Arms.DISPLACER, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
 					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
-					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
-					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
+					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.WERESHARK].indexOf(player.lowerBody) != -1,
+					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.WERESHARK].indexOf(player.lowerBody) != -1,
 					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
 
 					//Detect Weapon Skins
