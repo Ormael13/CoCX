@@ -2225,7 +2225,7 @@
 					</if>
 					
 					<if test="PlayerHasAShieldTwin">
-						<show part="shield/shieldGeneric"/>
+						<show part="shield/shieldSmGeneric"/>
 					</if>
 					
 					<if test="PlayerHasAnOffhandDaggerTwin">
