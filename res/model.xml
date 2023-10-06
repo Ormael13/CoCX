@@ -4151,6 +4151,10 @@
                 <hide part="legs/*"/>
                 <show part="legs/melkie"/>
             </case>
+			<case values="LowerBody.WERESHARK">
+				<hide part="legs/*"/>
+				<show part="legs_fg/Wereshark"/>
+			</case>
             <!--<case values="LowerBody.DEMONIC_HIGH_HEELS">TODO </case>-->
             <!--<case values="LowerBody.DEMONIC_CLAWS"">TODO </case>-->
             <case values="LowerBody.BEE,LowerBody.CRAB">
