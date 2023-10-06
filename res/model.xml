@@ -922,6 +922,11 @@
         <cell rect="1382,1729,87,107" name="weapon_bg/scytheBladeHoly" dx="53" dy="39"/>
         <cell rect="1382,1838,87,107" name="weapon_bg/scytheBladeUnholy" dx="53" dy="39"/>
 		<cell rect="1382,1947,87,107" name="weaponBuff_bg/scytheFireBuff" dx="53" dy="1"/>
+		<cell rect="1382,2165,89,108" name="weapon/scytheShaftGenericOH" dx="81" dy="53"/>
+		<cell rect="1292,2165,89,108" name="weapon_bg/scytheBladeGenericOH" dx="67" dy="39"/>
+		<cell rect="1382,2056,89,108" name="weapon/scytheShaftUnholyOH" dx="81" dy="53"/>
+		<cell rect="1292,2056,89,108" name="weapon_bg/scytheBladeUnholyOH" dx="67" dy="39"/>
+		<cell rect="1292,1947,89,108" name="weaponBuff_bg/scytheFireBuffOH" dx="67" dy="1"/>
 		
         <cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
         <cell rect="662,1726,80,90" name="weapon/rapierHoly" dx="38" dy="55"/>
@@ -951,9 +956,18 @@
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
+		<cell rect="572,2256,89,105" name="shield/shieldSmGeneric" dx="66" dy="60"/>
+		<cell rect="482,2256,89,105" name="shield/shieldSmHoly" dx="66" dy="60"/>
+		<cell rect="662,2256,89,105" name="shield/shieldSmUnholy" dx="66" dy="60"/>
         <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
-        <cell rect="572,1726,80,90" name="shield/shieldHoly" dx="66" dy="60"/>
-        <cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
+		<cell rect="572,2044,88,105" name="shield/shieldHoly" dx="66" dy="60"/>
+		<cell rect="662,2044,89,105" name="shield/shieldUnholy" dx="66" dy="60"/>
+		<cell rect="572,2150,89,105" name="shield/shieldLgGeneric" dx="66" dy="60"/>
+        <cell rect="572,1726,80,90" name="shield/shieldLgHoly" dx="66" dy="60"/>
+        <cell rect="572,1832,80,90" name="shield/shieldLgUnholy" dx="66" dy="60"/>
+		<cell rect="572,2362,89,105" name="shield/shieldMsGeneric" dx="66" dy="60"/>
+		<cell rect="482,2362,89,105" name="shield/shieldMSHoly" dx="66" dy="60"/>
+		<cell rect="662,2362,89,105" name="shield/shieldMSUnholy" dx="66" dy="60"/>
 		<cell rect="572,1938,88,90" name="shield/CasterTomeOfImps" dx="80" dy="10"/>
         <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="32"/>
 		<cell rect="2325,325,77,44" name="backAccessory/kabutoMempoBack" dx="67" dy="32"/>
@@ -1500,6 +1514,8 @@
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
         <cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
 		<cell rect="1161,500,49,29" name="panty/cowPanty" dx="79" dy="99"/>
+		<cell rect="411,530,49,59" name="overGenitals/loincloth" dx="80" dy="96"/>
+		<cell rect="461,530,49,59" name="overGenitals/loinclothWhite" dx="80" dy="96"/>
 		
 		<cell rect="11,599,49,29" name="pussy/human" dx="80" dy="99"/>
 		<cell rect="11,599,49,29" name="pussy/goo" dx="80" dy="99"/>
@@ -2178,14 +2194,25 @@
 							<if test="PlayerHasAScytheUnholy">
 								<show part="weapon/scytheShaftUnholy"/>
 								<show part="weapon_bg/scytheBladeUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/scytheShaftUnholyOH"/>
+									<show part="weapon_bg/scytheBladeUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/scytheShaftGeneric"/>
 								<show part="weapon_bg/scytheBladeGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/scytheShaftGenericOH"/>
+									<show part="weapon_bg/scytheBladeGenericOH"/>
+								</if>
 							</else>
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff_bg/scytheFireBuff"/>
+							<if test="PlayerHasADualWeapon">
+								<show part="weaponBuff_bg/scytheFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 					
@@ -2198,7 +2225,7 @@
 					</if>
 					
 					<if test="PlayerHasAShieldTwin">
-						<show part="shield/shieldGeneric"/>
+						<show part="shield/shieldSmGeneric"/>
 					</if>
 					
 					<if test="PlayerHasAnOffhandDaggerTwin">
@@ -2211,19 +2238,44 @@
 				</if>
 				<!-- Shield -->
 				<if test="PlayerHasAShield">
-					<if test="PlayerHasSanctuary">
-						<if test="PlayerHasSanctuaryHoly or PlayerHasSanctuaryCorrupt">
-							<if test="PlayerHasSanctuaryHoly">
-								<show part="shield/shieldHoly"/>
-							</if>
-							<if test="PlayerHasSanctuaryCorrupt">
-								<show part="shield/shieldUnholy"/>
-							</if>
-							<else>
-								<show part="shield/shieldGeneric"/>
-							</else>
-						</if>
-					</if>
+					<switch>
+						<case test="PlayerHasAShieldHoly">
+							<show part="shield/shieldHoly"/>
+						</case>
+						<case test="PlayerHasAShieldUnholy">
+							<show part="shield/shieldUnholy"/>
+						</case>
+						<case test="PlayerHasAShieldSm">
+							<show part="shield/shieldSmGeneric"/>
+						</case>
+						<case test="PlayerHasAShieldSmHoly">
+							<show part="shield/shieldSmHoly"/>
+						</case>
+						<case test="PlayerHasAShieldSmUnholy">
+							<show part="shield/shieldSmUnholy"/>
+						</case>
+						<case test="PlayerHasAShieldLg">
+							<show part="shield/shieldLgGeneric"/>
+						</case>
+						<case test="PlayerHasAShieldLgHoly">
+							<show part="shield/shieldLgHoly"/>
+						</case>
+						<case test="PlayerHasAShieldLgUnholy">
+							<show part="shield/shieldLgUnholy"/>
+						</case>
+						<case test="PlayerHasAShieldMs">
+							<show part="shield/shieldMsGeneric"/>
+						</case>
+						<case test="PlayerHasAShieldMsHoly">
+							<show part="shield/shieldMSHoly"/>
+						</case>
+						<case test="PlayerHasAShieldMsUnholy">
+							<show part="shield/shieldMSUnholy"/>
+						</case>
+						<default>
+							<show part="shield/shieldGeneric"/>
+						</default>
+					</switch>
 				</if>
 				
 				<!-- Tomes -->
@@ -4099,6 +4151,10 @@
                 <hide part="legs/*"/>
                 <show part="legs/melkie"/>
             </case>
+			<case values="LowerBody.WERESHARK">
+				<hide part="legs/*"/>
+				<show part="legs_fg/Wereshark"/>
+			</case>
             <!--<case values="LowerBody.DEMONIC_HIGH_HEELS">TODO </case>-->
             <!--<case values="LowerBody.DEMONIC_CLAWS"">TODO </case>-->
             <case values="LowerBody.BEE,LowerBody.CRAB">
@@ -5424,23 +5480,97 @@
 					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
 						<show part="breasts/Bhuman"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
 						<show part="breasts/Dhuman"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
 						<show part="breasts/Dhuman"/>
 					</case>
-					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 						<show part="breasts/Fhuman"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+						<show part="breasts/Fhuman"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+						<if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit">
+								<if test="PlayerHasBreastViewOutfit == false">
+									<show part="breasts/Fhuman"/>
+									<else>
+										<if test="PlayerHasABra == false">
+											<show part="breasts/Ghuman"/>
+											<else>
+												<if test="cowBra">
+													<show part="breasts/Ghuman"/>
+													<else>
+														<show part="breasts/Fhuman"/>
+													</else>
+												</if>
+											</else>
+										</if>
+									</else>
+								</if>
+								<else>							
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Ghuman"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Ghuman"/>
+												<else>
+													<show part="breasts/Fhuman"/>
+												</else>
+											</if>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="breasts/Fhuman"/>
+							</else>
+						</if>
 					</case>
 					<default>
-						<show part="breasts/Fhuman"/>
+						<if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit">
+								<if test="PlayerHasBreastViewOutfit == false">
+									<show part="breasts/Fhuman"/>
+									<else>
+										<if test="PlayerHasABra == false">
+											<show part="breasts/Ghuman"/>
+											<else>
+												<if test="cowBra">
+													<show part="breasts/Ghuman"/>
+													<else>
+														<show part="breasts/Fhuman"/>
+													</else>
+												</if>
+											</else>
+										</if>
+									</else>
+								</if>
+								<else>							
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Ghuman"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Ghuman"/>
+												<else>
+													<show part="breasts/Fhuman"/>
+												</else>
+											</if>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="breasts/Fhuman"/>
+							</else>
+						</if>
 					</default>
 				</switch>
-				<else>
-					<show part="breasts/0"/>
-                </else>
 			</if>
+
 			<if test="hasCock()">
 				<if test="big">
                     <show part="penis/humanbig"/>
@@ -5582,6 +5712,20 @@
 		</if>
 		<if test="redScarf">
 			<show part="clotheScarf/scarfRed"/>
+		</if>
+		
+		<!-- Loincloths -->
+		<if test="brownLoincloth">
+			<show part="overGenitals/loincloth"/>
+			<hide part="penis/*"/>
+			<hide part="pussy/*"/>
+			<hide part="overpussy/*"/>
+		</if>
+		<if test="whiteLoincloth">
+			<show part="overGenitals/loinclothWhite"/>
+			<hide part="penis/*"/>
+			<hide part="pussy/*"/>
+			<hide part="overpussy/*"/>
 		</if>
 
 		<!-- Sphinx Regalia -->
@@ -6202,6 +6346,10 @@
 					</switch>
 				</if>
 				<if test="showLegClothing">
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+					<hide part="pussy/*"/>
+					<hide part="overpussy/*"/>
 					<if test="femininity &gt;=40">
 						<show part="clotheLegs/merchantClotheBoots"/>
 						<else>
@@ -6929,7 +7077,7 @@
 			</if>
 		</if>
 
-
+		<!-- Kraken Dress -->
         <if test="krakenBlackDress">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -6955,6 +7103,7 @@
 			</if>
         </if>
 
+		<!-- Walpurgis Cloak -->
 		<if test="walpurgisIzaliaCloak">
 			<hide part="horns/*"/>
 			<hide part="ears/*"/>
@@ -6977,6 +7126,7 @@
 			<show part="clothCape/walpurgisClothesBack"/>
         </if>
 		
+		<!-- Fran Cloak -->
 		<if test="franRegalia">
 			<hide part="breasts/*"/>
 			<show part="armorNeck/francescaClothes"/>
@@ -7034,6 +7184,7 @@
 			</if>
 		</if>
 
+		<!-- Scandalous Succubus set -->
         <if test="scandalousSuccubusClothing">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -7114,6 +7265,7 @@
 			</if>
 		</if>
 
+		<!-- elf sets -->
 		<if test="elfClothing">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -7286,7 +7438,7 @@
 			</if>
 		</if>
 
-
+		<!-- Vampire set -->
 		<if test="vladimirRegalia">
 			<if test="breastRows.length gt 0">
 				<switch>
@@ -7368,6 +7520,7 @@
 			</if>
 		</if>
 
+		<!-- fairy set -->
 		<if test="fairyQueenRegalia">
 			<show part="clothe/fairyQueenDressFront"/>
 			<show part="clothLeftArm/fairyqueendressleftarmAndLeg"/>
@@ -7392,6 +7545,7 @@
 			</if>
 		</if>
 
+		<!-- Berserker set -->
         <if test="berserkerArmor">
             <if test="breastRows.length gt 0">
                 <switch>
@@ -7454,6 +7608,7 @@
             </if>
         </if>
 
+		<!-- chainmail bikini -->
 		<if test="chainMailBikini">
 			<if test="breastRows.length gt 0">
 				<switch>
