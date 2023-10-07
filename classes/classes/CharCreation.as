@@ -3284,4 +3284,3 @@ import coc.view.MainView;
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	} // what the fuck are those weird comments here? ^
 }
-
