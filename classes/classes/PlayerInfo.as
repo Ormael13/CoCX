@@ -647,18 +647,7 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS] > 0)
 			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) + "\n";
 
-		if (flags[kFLAGS.NADIA_LVL_UP] > 0) {
-            if (flags[kFLAGS.NADIA_FOLLOWER] == 3 || flags[kFLAGS.NADIA_FOLLOWER] == 4)
-			    interpersonStats += "<b>Nadia Progress:</b>: LOCKED (you've taken her virginity)\n";
-            else if (flags[kFLAGS.NADIA_FOLLOWER] < 6)
-			    interpersonStats += "<b>Nadia Progress:</b> " + Math.round(flags[kFLAGS.NADIA_LVL_UP] / 8 * 100) + "%\n";
-            else
-                interpersonStats += "<b>Nadia Progress:</b> LOVER\n";
-			if (flags[kFLAGS.NADIA_LVL_UP] == 16) interpersonStats += "<b>Nadia lvl:</b> 75\n";
-			if (flags[kFLAGS.NADIA_LVL_UP] == 15) interpersonStats += "<b>Nadia lvl:</b> 69 (current max lvl)\n";
-			else if (flags[kFLAGS.NADIA_LVL_UP] < 1) interpersonStats += "<b>Nadia lvl:</b> 3\n";
-			else interpersonStats += getNPCLevel("Nadia", 3, 0, 15, 3, flags[kFLAGS.NADIA_LVL_UP]);
-		}
+		//Diana
 
 		if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
 			interpersonStats += "<b>Dinah Affection:</b> " + Math.round(flags[kFLAGS.DINAH_AFFECTION]) + "%\n";
@@ -765,6 +754,19 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.hasStatusEffect(StatusEffects.Marble))
 			interpersonStats += "<b>Marble Affection:</b> " + Math.round(player.statusEffectv1(StatusEffects.Marble)) + "%\n";
+
+		if (flags[kFLAGS.NADIA_LVL_UP] > 0) {
+            if (flags[kFLAGS.NADIA_FOLLOWER] == 3 || flags[kFLAGS.NADIA_FOLLOWER] == 4)
+			    interpersonStats += "<b>Nadia Progress:</b>: LOCKED (you've taken her virginity)\n";
+            else if (flags[kFLAGS.NADIA_FOLLOWER] < 6)
+			    interpersonStats += "<b>Nadia Progress:</b> " + Math.round(flags[kFLAGS.NADIA_LVL_UP] / 8 * 100) + "%\n";
+            else
+                interpersonStats += "<b>Nadia Progress:</b> LOVER\n";
+			if (flags[kFLAGS.NADIA_LVL_UP] == 16) interpersonStats += "<b>Nadia lvl:</b> 75\n";
+			if (flags[kFLAGS.NADIA_LVL_UP] == 15) interpersonStats += "<b>Nadia lvl:</b> 69 (current max lvl)\n";
+			else if (flags[kFLAGS.NADIA_LVL_UP] < 1) interpersonStats += "<b>Nadia lvl:</b> 3\n";
+			else interpersonStats += getNPCLevel("Nadia", 3, 0, 15, 3, flags[kFLAGS.NADIA_LVL_UP]);
+		}
 
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
 			if (flags[kFLAGS.NEISA_AFFECTION] > 50) interpersonStats += "<b>Neisa Affection:</b> " + (flags[kFLAGS.NEISA_AFFECTION] - 50) + "%\n";

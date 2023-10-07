@@ -152,6 +152,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	player.createPerk(PerkLib.TransformationImmunityBeeHandmaiden, 0, 0, 0, 0);
 	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, player.maxEggs, 0, 0, 0);
 	else player.setPerkValue(PerkLib.BeeOvipositor, 1, player.maxEggs);
+	player.fertilizeEggs();
 	dynStats("lus", ((40 + rand(21)) * 0.01 * player.maxLust()), "scale", false);
 	if (player.cor >= 50) player.cor -= 50;
 	else player.cor = 0;
@@ -264,6 +265,7 @@ public function tifaMainMenuSexWithTheQueen():void {
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted and mushy from the ordeal. It's time to head out now and find someone to carry these.\n\n");
 	player.sexReward("no", "Vaginal");
 	player.setPerkValue(PerkLib.BeeOvipositor, 1, player.maxEggs); //get the eggs
+	player.fertilizeEggs();
 	player.trainStat("lib", +1, player.trainStatCap("lib",100));
 	player.dynStats("cor", -10);
 	doNext(tifaMainMenuTalkReturn);

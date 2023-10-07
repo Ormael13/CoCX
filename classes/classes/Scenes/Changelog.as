@@ -128,6 +128,12 @@ public class Changelog extends BaseContent
 			outputText("-Removed from Rathazul conditions to offer option to come to camp corruption check.\n");
 			outputText("-Ezekiel or Kratia accesories got added small parts in tooltips desc their effects.\n");
 			outputText("-Added greyed out button to Sophie post fight menu indicating indirectly req. to bimbofy her.\n");
+			outputText("-In Ebon Labirinth after reaching at least 3rd boss room and clearing it succesfully enable option to meet some potentialy familiar cat-morph when entering dungeon in future runs. It's very nice cat giving option to skip few rooms in exploration and starting form much deeper room count. Ohh and it all for small price to face one of skipped section bosses.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -150,14 +156,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
-			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water\n\n");
+			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
