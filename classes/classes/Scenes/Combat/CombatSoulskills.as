@@ -2313,4 +2313,3 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }*/
 }
 }
-
