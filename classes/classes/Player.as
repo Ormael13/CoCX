@@ -7115,4 +7115,3 @@ use namespace CoC;
 		}		
 	}
 }
-
