@@ -8,7 +8,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class AzazelRace extends Race {
-	public static const AzazelEyeColors:/*String*/Array = ["golden","pure blue"];
+	public static const AzazelEyeColors:/*String*/Array = ["gold","pure blue"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -56,8 +56,14 @@ public class AzazelRace extends Race {
 						}, 0, -1000)
 				.eyeColor(ANY(AzazelEyeColors), +1)
 				.hairTypeAndColor1(ANY(Hair.NORMAL),ANY("immaculate white"), +2)
-				.featherColor1(ANY("immaculate white"), +1)
-				.furColor1(ANY("immaculate white"), +1)
+				.customRequirement("","immaculate white colored feather",
+						function (body:BodyData):Boolean {
+							return body.player.featherColor == "immaculate white";
+						}, +1)
+				.customRequirement("","immaculate white colored fur",
+						function (body:BodyData):Boolean {
+							return body.player.furColor == "immaculate white";
+						}, +1)
 				.height(LESS_THAN(48), +1)
 				.corruption(0, +3)
 				.hasPerk(PerkLib.InnerPhylactery, +5)

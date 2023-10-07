@@ -2863,7 +2863,7 @@ public final class Mutations extends MutationsHelper {
         player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
 
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
-        player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
+        player.createPerk(PerkLib.TransformationImmunity2, 6, 0, 0, 0);
 
         if (player.hasPerk(PerkLib.RacialParagon))
             flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
@@ -15779,8 +15779,6 @@ public final class Mutations extends MutationsHelper {
         //Eyes
         if (!transformations.EyesGoat.isPresent()) {
             transformations.EyesGoat.applyEffect(false);
-            if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
-            else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
             changes++;
         }
         if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
@@ -15813,7 +15811,7 @@ public final class Mutations extends MutationsHelper {
         player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
         outputText("\n<b>Obtained perk: Conviction Of Purpose</b>  "+PerkLib.ConvictionOfPurpose.desc());
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
-        player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
+        player.createPerk(PerkLib.TransformationImmunity2, 5, 0, 0, 0);
         if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.AZAZEL;
         player.removeAllRacialMutation();
         player.refillHunger(10);

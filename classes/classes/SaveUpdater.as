@@ -12,6 +12,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Items.*;
 import classes.Items.Alchemy.AlchemyLib;
+import classes.Races.GargoyleRace;
+import classes.Races.ImpRace;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
@@ -485,6 +487,170 @@ public class SaveUpdater extends NPCAwareContent {
 			player.removeStatusEffect(StatusEffects.TakenGroPlus);
 		}
 		if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
+	}
+	
+	private var updateQueue:/*Function*/Array = [];
+	public function onUnknownPerk(player:Player, savedata:Object, id:String, value1:Number,value2:Number, value3:Number,value4:Number):void {
+		CoC_Settings.error("Unknown perk id: " + id);
+	}
+	public function onUnknownStatusEffect(player:Player, savedata:Object, id:String, value1:Number, value2:Number, value3:Number, value4:Number):void {
+		switch (id) {
+			case "exploredDeepwoods":
+				// We can't set variable now because status effects are loaded before saveable states.
+				// Schedule the update after SS are loaded, instead
+				updateQueue.push(function ():void {
+					SceneLib.exploration.counters.deepwoods = value1;
+				});
+				return;
+			case "Boat Discovery":
+				updateQueue.push(function ():void {
+					SceneLib.exploration.counters.boat = 1 + value1;
+				});
+				return;
+		}
+		CoC_Settings.error("Cannot find status effect '" + id + "'");
+	}
+	public function onUnknownInventoryItem(player:Player, savedata:Object, itemId:String, savedShortName:String, quantity:Number, storageSlot:ItemSlotClass):void {
+		storageSlot.emptySlot();
+	}
+	public function onUnknownEquipmentItem(player:Player, savedata:Object, slot:int, savedId:String, savedName:String, defaultValue:Equipable):Boolean {
+		player.internalEquipItem(slot, defaultValue, false, true);
+		return false;
+	}
+	/**
+	 * This is called after everything was loaded, but before stat update
+	 */
+	public function postLoadSaveObject(player:Player, savedata:Object):void {
+		if (!(savedata.ss && savedata.ss["Exploration"])) {
+			SceneLib.exploration.counters.lake         = savedata.exploredLake;
+			SceneLib.exploration.counters.mountainsMid = savedata.exploredMountain;
+			SceneLib.exploration.counters.forestInner  = int(savedata.exploredForest/2);
+			SceneLib.exploration.counters.forestOuter  = int(savedata.exploredForest/2);
+			SceneLib.exploration.counters.desertOuter  = savedata.exploredDesert;
+			SceneLib.exploration.counters.explore      = savedata.explored;
+		}
+		for each (var fn:Function in updateQueue) {
+			fn();
+		}
+		updateQueue = [];
+	}
+
+	public function refundPerk(perk:PerkType):void {
+		if (player.hasPerk(perk)) {
+			player.removePerk(perk);
+			player.perkPoints += 1;
+		}
+	}
+
+	public function furColorSelection1():void {
+		menu();
+		addButton(0, "Brown", chooseFurColorSaveUpdate, "brown");
+		addButton(1, "Chocolate", chooseFurColorSaveUpdate, "chocolate");
+		addButton(2, "Auburn", chooseFurColorSaveUpdate, "auburn");
+		addButton(3, "Orange", chooseFurColorSaveUpdate, "orange");
+
+		addButton(5, "Caramel", chooseFurColorSaveUpdate, "caramel");
+		addButton(6, "Peach", chooseFurColorSaveUpdate, "peach");
+		addButton(7, "Sandy Brown", chooseFurColorSaveUpdate, "sandy brown");
+		addButton(8, "Golden", chooseFurColorSaveUpdate, "golden");
+
+		addButton(4, "Next", furColorSelection2);
+	}
+
+	private function furColorSelection2():void {
+		menu();
+		addButton(0, "Midnight black", chooseFurColorSaveUpdate, "midnight black");
+		addButton(1, "Black", chooseFurColorSaveUpdate, "black");
+		addButton(2, "Dark gray", chooseFurColorSaveUpdate, "dark gray");
+		addButton(3, "Gray", chooseFurColorSaveUpdate, "gray");
+
+		addButton(5, "Light gray", chooseFurColorSaveUpdate, "light gray");
+		addButton(6, "Silver", chooseFurColorSaveUpdate, "silver");
+		addButton(7, "White", chooseFurColorSaveUpdate, "white");
+
+		addButton(10, "Orange&White", chooseFurColorSaveUpdate, "orange and white");
+		addButton(11, "Brown&White", chooseFurColorSaveUpdate, "brown and white");
+		addButton(12, "Black&White", chooseFurColorSaveUpdate, "black and white");
+		addButton(13, "Gray&White", chooseFurColorSaveUpdate, "gray and white");
+
+		addButton(9, "Previous", furColorSelection1);
+	}
+
+	private function chooseFurColorSaveUpdate(color:String):void {
+		clearOutput();
+		outputText("You now have " + color + " fur. You will be returned to your [camp] now and you can continue your usual gameplay.");
+		player.furColor = color;
+		doNext(camp.doCamp);
+	}
+
+	public function eyesColorSelection():void {
+		menu();
+		addButton(0, "Black", chooseEyesColorSaveUpdate, "black");
+		addButton(1, "Green", chooseEyesColorSaveUpdate, "green");
+		addButton(2, "Blue", chooseEyesColorSaveUpdate, "blue");
+		addButton(3, "Red", chooseEyesColorSaveUpdate, "red");
+		addButton(4, "White", chooseEyesColorSaveUpdate, "white");
+		addButton(5, "Brown", chooseEyesColorSaveUpdate, "brown");
+		addButton(6, "Yellow", chooseEyesColorSaveUpdate, "yellow");
+		addButton(7, "Grey", chooseEyesColorSaveUpdate, "grey");
+		addButton(8, "Purple", chooseEyesColorSaveUpdate, "purple");
+		addButton(10, "Silver", chooseEyesColorSaveUpdate, "silver");
+		addButton(11, "Golden", chooseEyesColorSaveUpdate, "golden");
+	}
+
+	private function chooseEyesColorSaveUpdate(color:String):void {
+		clearOutput();
+		CoC.instance.transformations.EyesChangeColor([color]).applyEffect(false);
+		outputText("You now have [eyecolor] eyes. You will be returned to your [camp] now and you can continue your usual gameplay.");
+		doNext(camp.doCamp);
+	}
+
+	public function jiangshiBuggedItemsCleanUpCrew():void {
+		if (!player.weapon.isNothing) {
+			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+				player.unequipWeapon(false,true);
+				jiangshiBuggedItemsCleanUpCrew();
+				return;
+			}
+			else {
+				inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew);
+				return;
+			}
+		}
+		if (!player.weaponRange.isNothing) {
+			inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (!player.shield.isNothing) {
+			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
+				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+				player.unequipShield(false,true);
+				jiangshiBuggedItemsCleanUpCrew();
+				return;
+			}
+			else {
+				inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew);
+				return;
+			}
+		}
+		if (!player.armor.isNothing) {
+			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (!player.lowerGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (!player.upperGarment.isNothing) {
+			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew);
+			return;
+		}
+		if (!player.headJewelry.isNothing) {
+			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
+		}
+		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
+		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 
 	public function promptSaveUpdate():void {
@@ -2323,11 +2489,27 @@ public class SaveUpdater extends NPCAwareContent {
 				player.removeStatusEffect(StatusEffects.PCClone4th); 
 				player.removeStatusEffect(StatusEffects.NegativeLevel); 
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.13;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.14) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.14) {
+				if (player.hasPerk(PerkLib.TransformationImmunity2) && player.perkv1(PerkLib.TransformationImmunity2) == 1 && player.hairColor !="midnight purple") player.hairColor = "midnight purple";
+				if (player.hasPerk(PerkLib.TransformationImmunity2) && player.hasPerk(PerkLib.Immortality)) {
+					player.addPerkValue(PerkLib.TransformationImmunity2, 1, 5);
+					if (player.hairColor != "immaculate white") player.hairColor = "immaculate white";
+				}
+				if (player.hasPerk(PerkLib.TransformationImmunity2) && player.perkv1(PerkLib.TransformationImmunity2) == 3 && player.hairColor != "midnight black") player.hairColor = "midnight black";
+				if (player.hasPerk(PerkLib.TransformationImmunity) && !InCollection(player.hairColor1, GargoyleRace.GargoyleHairColors)) transformations.HairChangeColor(GargoyleRace.GargoyleHairColors).applyEffect(false);
+				if (player.hasPerk(PerkLib.TransformationImmunity2) && player.hasPerk(PerkLib.ImpNobility)) {
+					player.addPerkValue(PerkLib.TransformationImmunity2, 1, 6);
+					if (!InCollection(player.hairColor1, ImpRace.ImpHairColors)) transformations.HairChangeColor(ImpRace.ImpHairColors).applyEffect(false);
+				}
+				if (player.hasPerk(PerkLib.TransformationImmunity2) && player.perkv1(PerkLib.TransformationImmunity2) == 2 && player.hairColor != "purple") player.hairColor = "purple";
+				if (player.hasPerk(PerkLib.TransformationImmunity2) && player.lowerBody == LowerBody.SANDWORM) {
+					player.addPerkValue(PerkLib.TransformationImmunity2, 1, 7);
+					if (player.hairColor != "pink") player.hairColor = "pink";
+				}
+				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && player.hairColor != "golden blonde") player.hairColor = "golden blonde";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.15) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
@@ -2335,174 +2517,26 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.16) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.17) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.18) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.19) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.20) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.21;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
-	}
-	
-	private var updateQueue:/*Function*/Array = [];
-	public function onUnknownPerk(player:Player, savedata:Object, id:String, value1:Number,value2:Number, value3:Number,value4:Number):void {
-		CoC_Settings.error("Unknown perk id: " + id);
-	}
-	public function onUnknownStatusEffect(player:Player, savedata:Object, id:String, value1:Number, value2:Number, value3:Number, value4:Number):void {
-		switch (id) {
-			case "exploredDeepwoods":
-				// We can't set variable now because status effects are loaded before saveable states.
-				// Schedule the update after SS are loaded, instead
-				updateQueue.push(function ():void {
-					SceneLib.exploration.counters.deepwoods = value1;
-				});
-				return;
-			case "Boat Discovery":
-				updateQueue.push(function ():void {
-					SceneLib.exploration.counters.boat = 1 + value1;
-				});
-				return;
-		}
-		CoC_Settings.error("Cannot find status effect '" + id + "'");
-	}
-	public function onUnknownInventoryItem(player:Player, savedata:Object, itemId:String, savedShortName:String, quantity:Number, storageSlot:ItemSlotClass):void {
-		storageSlot.emptySlot();
-	}
-	public function onUnknownEquipmentItem(player:Player, savedata:Object, slot:int, savedId:String, savedName:String, defaultValue:Equipable):Boolean {
-		player.internalEquipItem(slot, defaultValue, false, true);
-		return false;
-	}
-	/**
-	 * This is called after everything was loaded, but before stat update
-	 */
-	public function postLoadSaveObject(player:Player, savedata:Object):void {
-		if (!(savedata.ss && savedata.ss["Exploration"])) {
-			SceneLib.exploration.counters.lake         = savedata.exploredLake;
-			SceneLib.exploration.counters.mountainsMid = savedata.exploredMountain;
-			SceneLib.exploration.counters.forestInner  = int(savedata.exploredForest/2);
-			SceneLib.exploration.counters.forestOuter  = int(savedata.exploredForest/2);
-			SceneLib.exploration.counters.desertOuter  = savedata.exploredDesert;
-			SceneLib.exploration.counters.explore      = savedata.explored;
-		}
-		for each (var fn:Function in updateQueue) {
-			fn();
-		}
-		updateQueue = [];
-	}
-
-	public function refundPerk(perk:PerkType):void {
-		if (player.hasPerk(perk)) {
-			player.removePerk(perk);
-			player.perkPoints += 1;
-		}
-	}
-
-	public function furColorSelection1():void {
-		menu();
-		addButton(0, "Brown", chooseFurColorSaveUpdate, "brown");
-		addButton(1, "Chocolate", chooseFurColorSaveUpdate, "chocolate");
-		addButton(2, "Auburn", chooseFurColorSaveUpdate, "auburn");
-		addButton(3, "Orange", chooseFurColorSaveUpdate, "orange");
-
-		addButton(5, "Caramel", chooseFurColorSaveUpdate, "caramel");
-		addButton(6, "Peach", chooseFurColorSaveUpdate, "peach");
-		addButton(7, "Sandy Brown", chooseFurColorSaveUpdate, "sandy brown");
-		addButton(8, "Golden", chooseFurColorSaveUpdate, "golden");
-
-		addButton(4, "Next", furColorSelection2);
-	}
-
-	private function furColorSelection2():void {
-		menu();
-		addButton(0, "Midnight black", chooseFurColorSaveUpdate, "midnight black");
-		addButton(1, "Black", chooseFurColorSaveUpdate, "black");
-		addButton(2, "Dark gray", chooseFurColorSaveUpdate, "dark gray");
-		addButton(3, "Gray", chooseFurColorSaveUpdate, "gray");
-
-		addButton(5, "Light gray", chooseFurColorSaveUpdate, "light gray");
-		addButton(6, "Silver", chooseFurColorSaveUpdate, "silver");
-		addButton(7, "White", chooseFurColorSaveUpdate, "white");
-
-		addButton(10, "Orange&White", chooseFurColorSaveUpdate, "orange and white");
-		addButton(11, "Brown&White", chooseFurColorSaveUpdate, "brown and white");
-		addButton(12, "Black&White", chooseFurColorSaveUpdate, "black and white");
-		addButton(13, "Gray&White", chooseFurColorSaveUpdate, "gray and white");
-
-		addButton(9, "Previous", furColorSelection1);
-	}
-
-	private function chooseFurColorSaveUpdate(color:String):void {
-		clearOutput();
-		outputText("You now have " + color + " fur. You will be returned to your [camp] now and you can continue your usual gameplay.");
-		player.furColor = color;
-		doNext(camp.doCamp);
-	}
-
-	public function eyesColorSelection():void {
-		menu();
-		addButton(0, "Black", chooseEyesColorSaveUpdate, "black");
-		addButton(1, "Green", chooseEyesColorSaveUpdate, "green");
-		addButton(2, "Blue", chooseEyesColorSaveUpdate, "blue");
-		addButton(3, "Red", chooseEyesColorSaveUpdate, "red");
-		addButton(4, "White", chooseEyesColorSaveUpdate, "white");
-		addButton(5, "Brown", chooseEyesColorSaveUpdate, "brown");
-		addButton(6, "Yellow", chooseEyesColorSaveUpdate, "yellow");
-		addButton(7, "Grey", chooseEyesColorSaveUpdate, "grey");
-		addButton(8, "Purple", chooseEyesColorSaveUpdate, "purple");
-		addButton(10, "Silver", chooseEyesColorSaveUpdate, "silver");
-		addButton(11, "Golden", chooseEyesColorSaveUpdate, "golden");
-	}
-
-	private function chooseEyesColorSaveUpdate(color:String):void {
-		clearOutput();
-		CoC.instance.transformations.EyesChangeColor([color]).applyEffect(false);
-		outputText("You now have [eyecolor] eyes. You will be returned to your [camp] now and you can continue your usual gameplay.");
-		doNext(camp.doCamp);
-	}
-
-	public function jiangshiBuggedItemsCleanUpCrew():void {
-		if (!player.weapon.isNothing) {
-			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
-				flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				player.unequipWeapon(false,true);
-				jiangshiBuggedItemsCleanUpCrew();
-				return;
-			}
-			else {
-				inventory.takeItem(player.unequipWeapon(false,true), jiangshiBuggedItemsCleanUpCrew);
-				return;
-			}
-		}
-		if (!player.weaponRange.isNothing) {
-			inventory.takeItem(player.unequipWeaponRange(false,true), jiangshiBuggedItemsCleanUpCrew);
-			return;
-		}
-		if (!player.shield.isNothing) {
-			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
-				flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				player.unequipShield(false,true);
-				jiangshiBuggedItemsCleanUpCrew();
-				return;
-			}
-			else {
-				inventory.takeItem(player.unequipShield(false,true), jiangshiBuggedItemsCleanUpCrew);
-				return;
-			}
-		}
-		if (!player.armor.isNothing) {
-			inventory.takeItem(player.setArmor(armors.TRADITC,false,true), jiangshiBuggedItemsCleanUpCrew);
-			return;
-		}
-		if (!player.lowerGarment.isNothing) {
-			inventory.takeItem(player.unequipUnderBottom(false,true), jiangshiBuggedItemsCleanUpCrew);
-			return;
-		}
-		if (!player.upperGarment.isNothing) {
-			inventory.takeItem(player.unequipUnderTop(false,true), jiangshiBuggedItemsCleanUpCrew);
-			return;
-		}
-		if (!player.headJewelry.isNothing) {
-			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-		}
-		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
-		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 	}
 
 	//Due to a bug, it's possible to get multiple Deluxe Dildos. This should clean off most of them

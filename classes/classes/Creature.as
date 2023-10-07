@@ -3066,7 +3066,8 @@ public class Creature extends Utils
 		//PC can swim underwater?
 		public function canSwimUnderwater():Boolean
 		{
-			if (gills.type != Gills.NONE || lowerBody == LowerBody.SCYLLA || hasStatusEffect(StatusEffects.Airweed) || game.player.necklaceName == "Magic coral and pearl necklace" || game.player.headjewelryName == "Aqua breather" || (game.player.isInGoblinMech() && game.player.hasKeyItem("Safety bubble") >= 0))
+			if (gills.type != Gills.NONE || lowerBody == LowerBody.SCYLLA || lowerBody == LowerBody.KRAKEN || lowerBody == LowerBody.MELKIE || rearBody.type == RearBody.ORCA_BLOWHOLE || hasStatusEffect(StatusEffects.Airweed) || game.player.necklaceName == "Magic coral and pearl necklace" || game.player.headjewelryName == "Aqua breather" || 
+				(game.player.isInGoblinMech() && game.player.hasKeyItem("Safety bubble") >= 0) || game.player.hasPerk(PerkLib.Undeath))
 				return true;	//efekt of itemów dające oddych. pod wodą
 			return false;
 		}

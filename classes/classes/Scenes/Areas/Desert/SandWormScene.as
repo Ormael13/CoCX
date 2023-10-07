@@ -98,7 +98,7 @@ public class SandWormScene extends BaseContent
 		outputText("Gained combat ability: <b>Devastating Bite</b>: Strike for massive the damage as a bite natural weapon.\n\n");
 		outputText("Gained combat ability: <b>Acidic Bite</b>: Your saliva has dissolving and aphrodisiac properties. Creatures stuck in your mouth take heavy periodic teases and acid damage based on your combined strength, toughness and libido modifier.\n\n");
 		outputText("Gained combat ability: <b>Sting</b>: Inflict sand worm venom and minor damage, sand worm venom deals heavy strength and tease damage over time.\n\n");
-		player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
+		player.createPerk(PerkLib.TransformationImmunity2, 7, 0, 0, 0);
 		outputText("<b>Gained Perk: Transformation Immunity</b>\n\n");
 
 		cleanupAfterCombatTFEvent()

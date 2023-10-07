@@ -126,6 +126,13 @@ public class Changelog extends BaseContent
 			outputText("-Fixes: G-cup sprites not showing if the player is a werewolf/fox in human form (Lord Shadeogorath)\n");
 			outputText("-Jojo options to talk him as uncorrupted mouse into sex checking corruption would take into account ascension: corruption tolerance effects.\n");
 			outputText("-Removed from Rathazul conditions to offer option to come to camp corruption check.\n");
+			outputText("-Ezekiel or Kratia accesories got added small parts in tooltips desc their effects.\n");
+			outputText("-Added greyed out button to Sophie post fight menu indicating indirectly req. to bimbofy her.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -134,17 +141,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog\n\n");
+			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
+			outputText("PC's with kraken lower body or melkie lower body or undeath perk drowning in the water\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

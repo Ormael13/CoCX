@@ -15,16 +15,20 @@ public class MelkieLungMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
+			var perkCent1:int = 5;
+			var perkCent2:int = 20;
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier == 1){
-                descS = "Increase damage reduction against spells by 5% and increase the power of compelling aria by 20%. Compelling Aria is kept at all time";
-            }
-            if (pTier == 2){
-                descS = "Increase damage reduction against spells by 15% and increase the power of compelling aria by 50%. Compelling Aria now has an Intelligence scaling";
-            }
-            if (pTier == 3){
-                descS = "Increase damage reduction against spells by 30% and increase the power of compelling aria by 90%. Compelling Aria intelligence scaling is doubled";
-            }
+			if (pTier >= 2) {
+				perkCent1 += 10;
+				perkCent2 += 30;
+			}
+			if (pTier >= 3) {
+				perkCent1 += 15;
+				perkCent2 += 40;
+			}
+            if (pTier >= 1) descS += "Increase damage reduction against spells by " + perkCent1 + "% and increase the power of compelling aria by " + perkCent2 + "%. Compelling Aria is kept at all time";
+            if (pTier >= 2) descS += ". Compelling Aria now has an Intelligence scaling";
+            if (pTier >= 3) descS += " and it's doubled";
             if (descS != "")descS += ".";
             return descS;
         }
