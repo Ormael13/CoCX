@@ -31,7 +31,6 @@ import classes.Scenes.NPCs.Galia;
 			//(Siegweird) outputText("\n\nSiegweird propose to skip the dissection and simply kill it now.\n\n");
 			outputText("Yea no one is going to perform any experiment or dissection on this imp until you authorize it. This much you make clear to Evangeline. She is disappointed at first but reply regardless.\n\n");
 			outputText("\"<i>When you care enough about the progress of science tell me and we'll proceed with the tests.</i>\"\n\n");
-			//outputText("(<b>Galia has been added to the Slaves menu!</b>)\n\n");w innej późniejszej scenie wspomnieć to
 			flags[kFLAGS.GALIA_TALKS] = 1;
 			flags[kFLAGS.GALIA_LVL_UP] = 1;
 			flags[kFLAGS.GALIA_AFFECTION] = 1;
@@ -40,7 +39,8 @@ import classes.Scenes.NPCs.Galia;
 		
 		public function GaliaCampMainMenuSlave():void {
 			clearOutput();
-			outputText("\"<i>What?</i>\" Galia ask you while looking very bored.");
+			outputText("Galia glances at you, eyes dulled with boredom, but still slightly miffed.\n\n");
+			outputText("She sighs before speaking curtly to you, \"<i>What?</i>\"");
 			menu();
 			addButton(0, "Appearance", GaliaCampMainMenuSlaveAppearance);
 			//1 - talk
@@ -52,27 +52,29 @@ import classes.Scenes.NPCs.Galia;
 		
 		public function GaliaCampMainMenuSlaveAppearance():void {
 			clearOutput();
-			outputText("Galia is short, only 2 feet 3 inches tall female feral imp. Her formely unkempt mane of shaggy platinum blond hair, parted by two short curved horns, is now braided into few ponytails to keep her longer then her height hair, gained from recent transformation, from keep dragged over the ground. Her eyes are solid black, save for tiny red irises.\n\n");
-			outputText("Her breasts are around DD cup sized, which given her super short figure makes them appear way bigger. Her extremely well-muscled body is nowhere to be seen replaced by much soft one, much to her unhappiness. Her hips are now much wider causing to give her slow, swaying gait when moving coupled with swelled butt, which jiggles along with each step.\n\n");
-			outputText("A pair of tiny but functional wings occasionally flap from her back. Her skin is bright red unencumbered by clothing or armor, save for a small loincloth at her belt and wrap around her chest, her feet are covered by tiny wooden sandals, and her hands tipped with still sharp and long claws, even after transformation.\n\n");
+			outputText("Galia is a short, two-foot, three-inch tall feral imp. Her shaggy, unkempt mane still harbors some elegance to it, with the platinum blonde locks parted by the dual set of curved horns. To prevent her hair from dragging across the ground, she has braided it into twin tails for her stature to be taller than the length of her hair. Her eyes are a solid black, save for tiny red irises that peer toward you judgmentally, still in resentment from the transformation.\n\n");
+			outputText("Her breasts are about DD cups, which, given her diminutive figure, makes them seem almost too large for her shape. Her once athletic, toned body has long been replaced by soft, pliable flesh, much to her chagrin. Her wide, womanly hips almost force a sluggish, swaying gait as she moves around, coupled with the difficulty of all the mass in her ass that jiggles slightly with each step.\n\n");
+			outputText("A pair of tiny, yet functional wings flap occasionally from her back. Her skin is a bright red hue, unobstructed by clothing or armor, save for a small loincloth tied at her waist that wraps up to her chest. Her feet are protected by tiny wooden sandals, and her hands are tipped with a set of dangerous claws, even post-transformation.\n\n");
 			menu();
 			addButton(14, "Back", GaliaCampMainMenuSlave);
 		}  
 		
 		public function GaliaSparring():void {
 			clearOutput();
-			outputText("\"<i>Good. I was feeling a bit itchy lately. You won't hold grunge if I go a bit too 'rough' on you, right?</i>\" And without even waiting for your answer Galia starts to crack her fists.");
+			outputText("She nods as you ask her to fight, \"<i>Good. I was feeling a bit itchy lately... You won't hold a grudge if I didn't hold back on you, right? It's going to get rough!</i>\"\n\n");
+			outputText("Without your input, she rushes in, ready to start another fight.");
 			startCombat(new Galia());
 		}
 		public function GaliaWonSparring():void {
 			clearOutput();
-			outputText("\"<i>To the winners goes the spoils,</i>\" and before you even have chance to protest Galia starts second round of beating. This time a bit shorter and less violent than the first one.");
+			outputText("She hovers over you defiantly, \"<i>To the winners goes the spoils.</i>\"\n\n");
+			outputText("Before you're offered a chance to recover, Galia begins another round of beating, albeit slightly less violent than before.");
 			HPChange(player.maxHP() * 0.1, false);
 			cleanupAfterCombat();
 		}
 		public function GaliaLostSparring():void {
 			clearOutput();
-			outputText("After a longer moment Galia calm down and only say few words with low voice before walking away to her resting place. \"<i>You won this time but I'll win next time.</i>\"");
+			outputText("After some time, Galia calms down, her voice struggling not to break as she trods off to her resting place, \"<i>You... won this time... but I'll have the next... I swear...</i>\"");
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.GALIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.GALIA_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.GALIA_DEFEATS_COUNTER] = 1;

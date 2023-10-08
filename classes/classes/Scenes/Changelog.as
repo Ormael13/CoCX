@@ -129,6 +129,12 @@ public class Changelog extends BaseContent
 			outputText("-Ezekiel or Kratia accesories got added small parts in tooltips desc their effects.\n");
 			outputText("-Added greyed out button to Sophie post fight menu indicating indirectly req. to bimbofy her.\n");
 			outputText("-In Ebon Labirinth after reaching at least 3rd boss room and clearing it succesfully enable option to meet some potentialy familiar cat-morph when entering dungeon in future runs. It's very nice cat giving option to skip few rooms in exploration and starting form much deeper room count. Ohh and it all for small price to face one of skipped section bosses.\n");
+			outputText("-Evangeline can level up 2 more times (reaching lvl 24). This opening her Experiments tab.\n");
+			outputText("-Option to make better bimbo liquer/bro brew in Evangeline Experiments tab: req. to have item or her having enought gems (500+). Can force feed the created concoction to feral female imp.\n");
+			outputText("-After feral female imp been <u>force</u> feed Evangeline concoction it can be interacted as Galia located in Slaves tab. Current interactions includes: Appearance, Spar. After enough amount of sparrings (amd enabled training mode for npc's) Galia can level up up to three times.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -149,12 +155,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized\n\n");
