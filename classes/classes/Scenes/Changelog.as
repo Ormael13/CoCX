@@ -132,6 +132,7 @@ public class Changelog extends BaseContent
 			outputText("-Evangeline can level up 2 more times (reaching lvl 24). This opening her Experiments tab.\n");
 			outputText("-Option to make better bimbo liquer/bro brew in Evangeline Experiments tab: req. to have item or her having enought gems (500+). Can force feed the created concoction to feral female imp.\n");
 			outputText("-After feral female imp been <u>force</u> feed Evangeline concoction it can be interacted as Galia located in Slaves tab. Current interactions includes: Appearance, Spar. After enough amount of sparrings (amd enabled training mode for npc's) Galia can level up up to three times.\n");
+			outputText("-Cow & Minotaur race scores would get points for few more things and 2nd tier of their race scores req. now 16 not 15 pts (with matching stats changes).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -149,13 +150,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized\n\n");
 			/*ostatni punkt changelogu

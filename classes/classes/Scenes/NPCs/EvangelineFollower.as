@@ -1095,9 +1095,10 @@ private function Experiments():void {
 	outputText("\"<i>So [name] what project you think should be handled first? Or maybe you want another vial of mixture from one of the finished project?</i>\" Asks Evangeline waiting for your decision. \"<i>Since you covered all expenses it's your choice.</i>\"");
 	outputText("\n\nEvangeline gem purse: " + EvangelineGemsPurse + " gems");
 	menu();
-	if (flags[kFLAGS.GALIA_LVL_UP] < 1) addButtonDisabled(0, "BL/BB Plus", "Bimbo Liquer Plus / Bro Brew Plus");
-	else addButton(0, "BL/BB Plus", ExperimentsBLBBPlus);
+	if (flags[kFLAGS.GALIA_LVL_UP] < 1) addButtonDisabled(0, "BL/BB Plus", "Progress require sacrif... test subjects. Like feral imps...");
+	else addButton(0, "BL/BB Plus", ExperimentsBLBBPlus).hint("Bimbo Liquer Plus / Bro Brew Plus");
 	//addButtonDisabled(1, "Amazon L.", "Amazon Liquer");
+	//addButtonDisabled(10, "F.B.TF", "Full body transformation items.");
 	addButton(13, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her experiments expenses.");
 	addButton(14, "Back", meetEvangeline);
 }
@@ -1198,6 +1199,7 @@ private function ExperimentsBLBBPlusBimbo1():void {
 		outputText("You can feel your vagina clench slightly, it’s a weird sensation, but you’ve never felt so ripe and fertile before. Your [vagina] is moist and tingly, you almost would touch it if not for Evangeline studying you so heavily.\n\n");
 		outputText("Your hair develops with the rest of you into long locks of silky platinum blonde hair that reach just above your full ass.\n\n");
 		outputText("You examine your body, every inch of you is radiant. Soft, smooth skin. A supple, voluptuous build and fine strands of platinum blonde hair. You have the look of a perfect bimbo, yet your mind is wholly intact. You look at Evangeline, she is blushing slightly, gaze averting from you.\n\n");
+		player.createPerk(PerkLib.BimboBody,0,0,0,0);
 		if (player.hairLength < 36) player.hairLength = 36;
 		if (!player.hasVagina()) {
 			CoC.instance.transformations.VaginaHuman().applyEffect(false);
@@ -1277,6 +1279,7 @@ private function ExperimentsBLBBPlusBro1():void {
 		outputText("Your chest is strong and manly, with a pair of powerful pectorals that you can bounce rhythmically with an effortless ease. You give your pecs another generous grope, admiring the shapeliness and definition of your forearms as you do so. Everything is so defined. Obliques, abdominals, pectorals, your torso is the pinnacle of perfection.\n\n");
 		outputText("Heat slowly rises in your loins as you feel your girthy erection begin to rise. Your balls feel full, fuller than they’ve ever been, begging and aching for release. You thrust your hips slightly as a dribble of precum drools out of your dick as your balls slap against your thick thighs. Your legs are powerfully built and sturdy, the contour of your thighs rigid with pronounced muscle, and your calves are mighty slabs of pure power, supporting the rest of your build effortlessly.\n\n");
 		outputText("You examine your body, you are the image of pinnacle masculinity, a rippling body, broad, chiseled form, strapping and imposing, you can’t help but grin, enjoying the changes. All of this, and your mind is intact, too. You’re the perfect package… in more ways than one. You glance at Evangeline, to which she immediately blushes, her gaze averting from you.\n\n");
+		player.createPerk(PerkLib.BroBody,0,0,0,0);
 		if (!player.hasCock()) {
             transformations.CockHuman(0, 10, 2).applyEffect(false);
             if (player.balls == 0) {
@@ -1524,4 +1527,3 @@ private function IMutationsSelector(page:int = 0):void {
 }
 }
 }
-
