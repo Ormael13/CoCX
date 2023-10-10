@@ -4,6 +4,7 @@
  */
 package classes.Items
 {
+import classes.Items.Weapons.DualBFSword;
 import classes.Items.WeaponsRange.*;
 import classes.PerkLib;
 
@@ -51,6 +52,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const BOWLIGH:WeaponRange = new WeaponRange("BowLigh", "BowLigh", "light bow", "a light bow", "shot", 5, 250, "This is a light bow. It's average in every way.", WT_BOW).withBuffs({'rangedaccuracy':-40}) as WeaponRange;
 		public const BOWLONG:WeaponRange = new WeaponRange("BowLong", "BowLong", "longbow", "a longbow", "shot", 20, 1000, "This is a longbow. It allows to shoot arrows with greater speed dealing more damage at cost of slight lowered accuracy compared to hunter's bow.", WT_BOW).withBuffs({'rangedaccuracy':-30}) as WeaponRange;
 		public const BOWOLD_:WeaponRange = new WeaponRange("BowOld ", "BowOld ", "old bow", "an old bow", "shot", 1, 50, "This is an old bow. It's barely effective even at short range not to meantion it poor accuracy.", WT_BOW).withBuffs({'rangedaccuracy':-50}) as WeaponRange;
+		public const DALAKABL:DuAlakablam = new DuAlakablam();
 		public const DBDRAGG:WeaponRange = new WeaponRange("DBDragG", "DoubleBarreledDragonGun", "Double barreled dragon gun", "a Double barreled dragon gun", "shot", 50, 1060, "Also called shotguns the dragon gun can hit multiple targets in a spray shot.", WT_2H_FIREARM);
 		public const DERPLAU:WeaponRange = new WeaponRange("DerpLau", "DerpnadeLauncher", "Derpnade Launcher", "a Derpnade Launcher", "shot", 100, 2030, "A firearm as deadly to others as it is to the user. Launches bouncing explosives which deals aoe damage but can also bounce back if not careful!", WT_2H_FIREARM);
 		public const DESEAGL:WeaponRange = new WeaponRange("DesEagl", "DesertEagle", "Desert Eagle", "a Desert Eagle", "shot", 25, 620, "A single hand firearm, the desert eagle has the largest bullets out of the pistol family. Its shots are deadly and precises through the gun has one hell of a recoil.", "Pistol");

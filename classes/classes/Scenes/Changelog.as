@@ -108,10 +108,10 @@ public class Changelog extends BaseContent
 			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-Using Dual Large Axes, Twin Machine Greatswords, Twin Ripper 1.0 or Twin Ripper 2.0 would give ~50% more wood.\n");
-			outputText("-New melee weapon (by Ormael): Twin Amethyst Claymores - can be gained by combining 2x Amethyst Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain darkness affinity, dual large type weapon.\n");
-			outputText("-New melee weapon (by Ormael): Twin Ruby Claymores - can be gained by combining 2x Ruby Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain fire affinity, dual large type weapon.\n");
-			outputText("-New melee weapon (by Ormael): Twin Sapphire Claymores - can be gained by combining 2x Sapphire Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain ice affinity, dual large type weapon.\n");
-			outputText("-New melee weapon (by Ormael): Twin Topaz Claymore - can be gained by combining 2x Topaz Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain lightning affinity, dual large type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Amethyst Claymores - can be gained by combining 2x Amethyst Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain darkness affinity, dual large sword type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ruby Claymores - can be gained by combining 2x Ruby Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain fire affinity, dual large sword type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Sapphire Claymores - can be gained by combining 2x Sapphire Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain ice affinity, dual large sword type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Topaz Claymore - can be gained by combining 2x Topaz Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain lightning affinity, dual large sword type weapon.\n");
 			outputText("-Dragonne is no longer joke or meme race and have now proper req. for bodyparts, racial bonuses and specials. Dragonne / Elder dragonne / Ancient dragonne (at 16 / 24 / 32): +70/105/140% to str multi, +60/90/120% to tou multi, +100/150/200% to spe multi -30/45/60% to int multi, +30/45/60% to lib multi, +1/4/10 to armor/magic resistance.\n");
 			outputText("-New event perk: Dragon regal breath. Gained by been dragonne (16+ score). Effects: Allows access to a dragonne regal breath attack. (phys damage, longer stun than other breaths, apply bleed and confusion (similary to fear but not makes enemy skipping turns just giving 50% to skip turn))\n");
 			outputText("-New event perk: Lion Heart. Gained by been dragonne (16+ score). Effects: Add 50% of your speed to your strength score. Double all natural attacks damage dealt.\n");
@@ -133,8 +133,8 @@ public class Changelog extends BaseContent
 			outputText("-Option to make better bimbo liquer/bro brew in Evangeline Experiments tab: req. to have item or her having enought gems (500+). Can force feed the created concoction to feral female imp.\n");
 			outputText("-After feral female imp been <u>force</u> feed Evangeline concoction it can be interacted as Galia located in Slaves tab. Current interactions includes: Appearance, Spar. After enough amount of sparrings (amd enabled training mode for npc's) Galia can level up up to three times.\n");
 			outputText("-Cow & Minotaur race scores would get points for few more things and 2nd tier of their race scores req. now 16 not 15 pts (with matching stats changes).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Ormael): Twin Storm Rulers - can be gained by combining 2x Storm Ruler weapon. Base atk is 14. It's dual large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (40%) perk.\n");
+			outputText("-New range weapon (by Lord Shadeogorath): DuAlakablam - can be gained by combining 2x Alakablam weapon. Cost 1520 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 20%. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -157,7 +157,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
-			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized\n\n");
+			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

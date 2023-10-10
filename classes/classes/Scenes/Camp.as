@@ -2292,7 +2292,7 @@ public class Camp extends NPCAwareContent{
 			[weapons.WHIP, weapons.PWHIP],
 			[weapons.WARHAMR, weapons.D_WHAM_],
 			[weapons.SUCWHIP, weapons.PSWHIP],
-			[weapons.KATANA, weapons.DKATANA],
+			[weapons.KATANA, weapons.DKATANA],//1st page
 			[weapons.L__AXE, weapons.DL_AXE_],
 			[weapons.MACGRSW, weapons.TMACGRSW],
 			[weapons.RIPPER1, weapons.TRIPPER1],
@@ -2301,8 +2301,10 @@ public class Camp extends NPCAwareContent{
 			[weapons.RCLAYMO, weapons.TRCLAYM],
 			[weapons.SCLAYMO, weapons.TSCLAYM],
 			[weapons.TCLAYMO, weapons.TTCLAYM],
+			[weapons.S_RULER, weapons.TSRULER],
 			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
-			[weaponsrange.M1CERBE, weaponsrange.TM1CERB]
+			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
+			[weaponsrange.ALAKABL, weaponsrange.DALAKABL]//2nd page
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)

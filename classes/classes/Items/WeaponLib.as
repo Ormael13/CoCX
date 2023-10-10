@@ -232,6 +232,7 @@ public final class WeaponLib extends ItemConstants
 		public const TRSTSWO:Weapon = new Weapon("TrStSwo","TruestrikeSword", "Truestrike sword", "a Truestrike sword", "slash", 5, 400, "Lia will write desc of it...soon.", "", "Sword");
 		public const TACLAYM:TwinAmethystClaymores = new TwinAmethystClaymores();
 		public const TRCLAYM:TwinRubyClaymores = new TwinRubyClaymores();
+		public const TSRULER:TwinStormRulers = new TwinStormRulers();
 		public const TSCLAYM:TwinSapphireClaymores = new TwinSapphireClaymores();
 		public const TTCLAYM:TwinTopazClaymores = new TwinTopazClaymores();
 		public const U_STAFF:UnicornStaff = new UnicornStaff();
