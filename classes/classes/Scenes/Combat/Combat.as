@@ -4576,23 +4576,23 @@ public class Combat extends BaseContent {
         }
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
+        if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
-        if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 6;
         if (player.weaponRange == weaponsrange.SIXSHOT) player.ammo = 6;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
         if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
+        if (player.weaponRange == weaponsrange.DALAKABL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
-        if (player.weaponRange == weaponsrange.DALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
 		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
+        if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 1;
         if (player.weaponRange == weaponsrange.HARPGUN) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TRFATBI) player.ammo = 1;
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
@@ -11769,23 +11769,23 @@ public class Combat extends BaseContent {
         }
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
+        if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 12;
         if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
-        if (player.weaponRange == weaponsrange.TWINSIXS) player.ammo = 6;
         if (player.weaponRange == weaponsrange.SIXSHOT) player.ammo = 6;
         if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
         if (player.weaponRange == weaponsrange.GOODSAM) player.ammo = 4;
         if (player.weaponRange == weaponsrange.BADOMEN) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
+        if (player.weaponRange == weaponsrange.DALAKABL) player.ammo = 4;
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
-        if (player.weaponRange == weaponsrange.DALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ALAKABL) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
+        if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 1;
         if (player.weaponRange == weaponsrange.HARPGUN) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TRFATBI) player.ammo = 1;
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
@@ -16809,4 +16809,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}
