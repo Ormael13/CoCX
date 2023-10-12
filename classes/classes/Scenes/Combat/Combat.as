@@ -5866,9 +5866,9 @@ public class Combat extends BaseContent {
         //Sneak attack checks
         if (player.isDaggerTypeWeapon()){
             if (monster.isIncapacitated()){
-                if (player.hasPerk(PerkLib.SneakyAttack)) damageMult *= 2;
-                if (player.hasPerk(PerkLib.DeadlySneaker)) damageMult *= 2;
-                if (player.hasPerk(PerkLib.Slayer)) damageMult *= 3;
+				if (player.hasPerk(PerkLib.SneakyAttack)) damageMult += 1;
+                if (player.hasPerk(PerkLib.DeadlySneaker)) damageMult += 2;
+                if (player.hasPerk(PerkLib.Slayer)) damageMult += 3;
             }
         }
         return damageMult;
@@ -7323,12 +7323,12 @@ public class Combat extends BaseContent {
 				else curseLib = Math.round(curseLib);
 				player.addCurse("lib", curseLib, 1);
 			}
-        }
+        }/*
         wrathregeneration1();
         fatigueRecovery1();
         manaregeneration1();
         soulforceregeneration1();
-		venomCombatRecharge1();
+		venomCombatRecharge1();*/
     }
 
     public function flyingSwordAttackModifier(damage:Number):Number {
