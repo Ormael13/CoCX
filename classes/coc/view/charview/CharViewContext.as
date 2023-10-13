@@ -142,7 +142,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),
 					PlayerHasAnOffhandDaggerTwin: player.hasAetherTwinsTierLeftDagger(),
 
-					PlayerHasAShield: player.shield == game.shields.KITE_SH || player.shield == game.shields.SPIL_SH || player.shield == game.shields.BSHIELD,
+					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					//PlayerHasAShieldHoly: player.shield == game.shields.SANCTYL,
 					//PlayerHasAShieldUnholy: player.shield == game.shields.SANCTYD,
