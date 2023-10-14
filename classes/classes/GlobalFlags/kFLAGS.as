@@ -2493,7 +2493,7 @@ public static const AUTO_CAST_MIGHT_DISABLED:int                               	
 public static const AUTO_CAST_BLINK_DISABLED:int                                	= 2485;
 public static const SOUL_SENSE_WORLD_TREE:int             	     	                = 2486;
 public static const SOUL_SENSE_GIACOMO:int                                   		= 2487; // No longer used
-public static const SOUL_SENSE_PRISCILLA:int                                   		= 2488; // No longer used
+public static const AUTO_CAST_CHARGE_R_WEAPON_DISABLED:int                          = 2488;
 public static const SOUL_SENSE_2489:int                                             = 2489;			//Not Yet Used Flag
 public static const KITSUNE_SHRINE_UNLOCKED:int               	                    = 2490;
 public static const VENOM_TIMES_USED:int                	                        = 2491;

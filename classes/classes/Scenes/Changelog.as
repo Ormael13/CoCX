@@ -136,6 +136,12 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Twin Storm Rulers - can be gained by combining 2x Storm Ruler weapon. Base atk is 14. It's dual large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (40%) perk.\n");
 			outputText("-New range weapon (by Lord Shadeogorath): DuAlakablam - can be gained by combining 2x Alakablam weapon. Cost 1520 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 20%. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
 			outputText("-All Raging Inferno, Glacial Storm, High Voltage & Eclipsing Shadow perks have their effects increase/loose doubled. Also each first perks have cap of 5 stacks, Ex ones have 15 stacks and Su ones have 75 stacks limit.\n");
+			outputText("-New Sprite for Pure Alvina. (Liadri)\n");
+			outputText("-New tier 2 intelligence lvl-up perk: Spellbow. Req. Job: Enchanter & Channeling perks, Charge Range weapons spell, 80+ int. Effect: Start every battle with Charge Range Weapon enabled, if you meet White Magic requirements before it starts.\n");
+			outputText("-Spellarmor perk req. was changed to req. either Spellsword or Spellbow instead of only Spellsword.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -156,12 +162,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP, Twin Six Shooter using ammo 2x faster\n\n");
 			/*ostatni punkt changelogu

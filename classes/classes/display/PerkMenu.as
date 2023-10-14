@@ -94,7 +94,7 @@ public class PerkMenu extends BaseContent {
 			addButton(6, "Range Opt",rangedOptions);
 		}
 		if (player.hasPerk(PerkLib.Venomancy) || player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)||
-			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
+			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
 			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
 			addButton(7, "Magic Opt",MagicOption);
 		}
@@ -141,7 +141,7 @@ public class PerkMenu extends BaseContent {
 			outputText("<b>You can adjust your Venomancy.</b>\n");
 			addButton(1, "Venomancy Opt",VenomancyOption);
 		}
-		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
+		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellbow) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
 			outputText("<b>You can adjust your spell autocast settings.</b>\n");
 			addButton(2, "Spells Opt",spellOptions);
 		}
@@ -405,6 +405,7 @@ public class PerkMenu extends BaseContent {
 		var autocasts:Array = [
 			// Name, flag, requirement
 			["Charge Weapon", kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED, PerkLib.Spellsword],
+			["Charge R Weapon", kFLAGS.AUTO_CAST_CHARGE_R_WEAPON_DISABLED, PerkLib.Spellbow],
 			["Charge Armor", kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED, PerkLib.Spellarmor],
 			["Might", kFLAGS.AUTO_CAST_MIGHT_DISABLED, PerkLib.Battlemage],
 			["Blink", kFLAGS.AUTO_CAST_BLINK_DISABLED, PerkLib.Battleflash],
