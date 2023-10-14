@@ -762,7 +762,7 @@
 		<cell rect="1919,524,49,29" name="armorNeck/LizBladeTopLarge" dx="80" dy="66"/>
 		<cell rect="2123,12,48,29" name="armorNeck/scalemailTopSmall" dx="80" dy="66"/>
 		<cell rect="2066,12,56,29" name="armorNeck/scalemailTopLarge" dx="76" dy="66"/>
-		<cell rect="2104,493,49,29" name="armorNeck/chainmailChestSmall" dx="80" dy="68"/>
+		<cell rect="2104,493,48,29" name="armorNeck/chainmailChestSmall" dx="80" dy="68"/>
 		<cell rect="2047,493,56,29" name="armorNeck/chainmailChestMedium" dx="76" dy="69"/>
 		<cell rect="2203,434,49,29" name="armorNeck/chainmailChestLarge" dx="79" dy="68"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
@@ -1514,8 +1514,8 @@
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
         <cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
 		<cell rect="1161,500,49,29" name="panty/cowPanty" dx="79" dy="99"/>
-		<cell rect="411,530,49,59" name="overGenitals/loincloth" dx="80" dy="96"/>
-		<cell rect="461,530,49,59" name="overGenitals/loinclothWhite" dx="80" dy="96"/>
+		<cell rect="411,530,49,59" name="panty/loincloth" dx="80" dy="96"/>
+		<cell rect="461,530,49,59" name="panty/loinclothWhite" dx="80" dy="96"/>
 		
 		<cell rect="11,599,49,29" name="pussy/human" dx="80" dy="99"/>
 		<cell rect="11,599,49,29" name="pussy/goo" dx="80" dy="99"/>
@@ -5716,14 +5716,16 @@
 		
 		<!-- Loincloths -->
 		<if test="brownLoincloth">
-			<show part="overGenitals/loincloth"/>
+			<show part="panty/loincloth"/>
 			<hide part="penis/*"/>
+			<hide part="balls/*"/>
 			<hide part="pussy/*"/>
 			<hide part="overpussy/*"/>
 		</if>
 		<if test="whiteLoincloth">
-			<show part="overGenitals/loinclothWhite"/>
+			<show part="panty/loinclothWhite"/>
 			<hide part="penis/*"/>
+			<hide part="balls/*"/>
 			<hide part="pussy/*"/>
 			<hide part="overpussy/*"/>
 		</if>
