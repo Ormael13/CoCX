@@ -904,7 +904,8 @@
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
         <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
-		<cell rect="482,1947,89,158" name="weapon/spearPhallus" dx="31" dy="16"/>
+		<cell rect="482,1947,89,154" name="weapon/spearPhallus" dx="35" dy="19"/>
+		<cell rect="482,2102,89,153" name="weapon/spearPhallusOH" dx="86" dy="20"/>
 		
 		<cell rect="1472,1620,80,90" name="weapon/nodachiGeneric" dx="38" dy="55"/>
 		<cell rect="1472,1726,80,90" name="weapon/nodachiHoly" dx="38" dy="55"/>
@@ -2059,6 +2060,9 @@
 							</case>
 							<case test="PlayerHasASpearPhallus">
 								<show part="weapon/spearPhallus"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/spearPhallusOH"/>
+								</if>
 							</case>
 							<default>
 								<show part="weapon/spearGeneric"/>
