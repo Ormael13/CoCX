@@ -32,7 +32,7 @@ internal class ControlBindings {
                 "Show the level up page when available",
                 function ():void {
                     if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_LEVEL) && CoC.instance.player.str > 0) {
-                        CoC.instance.playerInfo.levelUpGo();
+                        CoC.instance.playerInfo.levelUpMenu();
                     }
                 },
                 mainView.levelButton);
@@ -402,7 +402,7 @@ internal class ControlBindings {
                     "Cheat code to access debug menu and spawn ANY items or change stats.",
                     function (keyCode:int):void {
                         if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 0) {
-                            if (keyCode == 68) {
+                            if (keyCode == Keyboard.D) {
                                 CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
@@ -410,7 +410,7 @@ internal class ControlBindings {
                             }
                         }
                         else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 1) {
-                            if (keyCode == 69) {
+                            if (keyCode == Keyboard.E) {
                                 CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
@@ -418,7 +418,7 @@ internal class ControlBindings {
                             }
                         }
                         else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 2) {
-                            if (keyCode == 66) {
+                            if (keyCode == Keyboard.B) {
                                 CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
@@ -426,7 +426,7 @@ internal class ControlBindings {
                             }
                         }
                         else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 3) {
-                            if (keyCode == 85) {
+                            if (keyCode == Keyboard.U) {
                                 CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
                             }
                             else {
@@ -434,7 +434,7 @@ internal class ControlBindings {
                             }
                         }
                         else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4) {
-                            if (keyCode == 71) {
+                            if (keyCode == Keyboard.G) {
                                 if (CoC.instance.player && CoC.instance.player.str > 0 && CoC.instance.mainView.getButtonText(0).indexOf("Game Over") == -1 && (CoC.instance.debug && CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !CoC.instance.lockCheats) {
                                     SceneLib.debugMenu.accessDebugMenu();
                                 }

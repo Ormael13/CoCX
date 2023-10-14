@@ -514,7 +514,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("You think to yourself, who could help you figure this out?\n\n");
 		outputText("The old alchemist is an obvious choice.\n\n");
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) outputText("Ayane can heal curses. She'd be more than willing to help if she could.\n\n");
-		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana should be able to heal such a curse. You make a note to ask her.\n\n");
+		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("Nadia should be able to heal such a curse. You make a note to ask her.\n\n");
 		BelisaAffection(5);
 		BelisaQuestOn = true;
 		endEncounter();

@@ -44,7 +44,6 @@ public class Changelog extends BaseContent
 			outputText("-Elf race score bonuses req. to have elf ears.\n");
 			outputText("-Fixing various text errors reported by people on discord.\n");
 			outputText("-Death Prince Regalia, outfit and Golden armor & Anubis glyph tattoo sprited. (Liadri)\n");
-			//1 of 11 pages
 			outputText("-Implementation of wereraces human form. (Liadri) (out of combat of most of sex scenes pc sprite would look 100% humanlike if current race is one of wereraces even partialy)\n");
 			outputText("-Fix Cheshire cat and some invalid cat fur colors. (Liadri)\n");
 			outputText("-Fixed a bug in luna sex scenes preventing sex if you choose to resist her. (Liadri)\n");
@@ -74,23 +73,69 @@ public class Changelog extends BaseContent
 			outputText("fight been unaccessable due to many times running away from them & them dropping any other item instead of pearl, Great Dive not accesable for half-fairy PC, Incense of Insight giving spe bonus not wis for PC with Goblinoid Blood, Golemancer shop inconsistency between shop price and real price of some items, Izumi convertable to Wood Elf, Golems attacking without turn ends, ");
 			outputText("cost of rising corruption with use of SF, enemy with evasive teleportation ability checking for player evasive teleportation instead when lowering PC accuracy, Acid Spit & Azurflame breath perks not been removed for non Cave Wyrms, checking for evasion to happen when monster is under any type of stun, KidA item giving menu error, some of blessings from temple disply wrong ");
 			outputText("counter at states page, Aether Twins eating properly metals/gems, deeper withdrawl stages of mino cum addition affecting negatively attempts to cure with purified mino cum, Hydra TF errors, some of custom names not giving starting gems bonus, one of Demon Lab bosses infinite grapple\n\n");
-			outputText("<b>Version 0.8u:</b>\n\n");
+			outputText("<b>Version 0.8u (4th floor of River Dungeon, new sprites, new monsters at High Mountains/Swamp and bugfixes):</b>\n\n");
+			outputText("-New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Fetish Evangelist - lvl 65, Fetish Priest - lvl 87. Encounterable at High Mountains; Fetish Inquisitor - lvl 22. Encounterable at Swamp;\n");
 			outputText("-Chicken Harpy moved her area of activity from 'high mountains' to 'mountians and low mountains'. She's also not so overwhelmingly everpresent if PC got (too) many ovi elixirs.\n");
 			outputText("-Fetish followers enemies at Lake and Boat will no longer req. to first finish Factory to start appearing.\n");
 			outputText("-Dominika cooldown on spell teaching decreased from 7-9 days to 3-4 days.\n");
+			//4 of 11 pages
 			outputText("-Excellia scene to choose fixing or keeping slave got 3rd option to delay decision and keeping her slave get added additional req. to have any genitalia to pick it.\n");
 			outputText("-Evangeline Experiments shall stay hidden for time being. There would be some other goodies when time come so the wait would be worth... we promise ^^\n");
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New enemies: Low rank Angel of Mist - lvl 42, Red Mist Ooze - lvl 44, Mist Phouka - lvl 46, Mist Omnibus - lvl 48, Mist Oni - lvl 50, Mist Salamander - lvl 52. Encounterable on 4th floor of River Dungeon; Fetish Evangelist - lvl 65, Fetish Priest - lvl 87. Encounterable at High Mountains; Fetish Inquisitor - lvl 22. Encounterable at Swamp;\n");
-			outputText("-Implemented sprites for (Lord Shadeogorath): nurse outfit, samurai outfit, moonlight greatsword, samurai helmet (by Mister GRaM); phalluspear, chainmail armor (by Snas); scale mail (by Desro); green adventurer outfit (by Lia);\n");
-			outputText("-Various tweaks and bugfixes: dual katana and daisho should now show sprites when equipped, offhand firebuff sprites should now show for weapons that have them, some pure/corrupt weapons that were not showing the appropriate sprite should now do so, dual massive weapons should now properly show an offhand sprite if applicable (Lord Shadeogorath)\n");
-			outputText("-Set eggs hatching to properly have text spacing. (Liadri)\n");
-			outputText("-Kitsune metamorph sequence break fix. (Jtecx)\n");
 			outputText("-Added Wild Hunt score to stats page (Erlking related).\n");
 			outputText("-Can explore and clear 4th floor of River Dungeon. It have monsters from lvl 42 to 52 and bosses are lvl 55.\n");
 			outputText("-When PC can make party with 2 henchman and can use option to ask one to disable some enemy in tag fights could now choose which one henchman would do this and it would only disable this one helper actions not other one.\n");
+			outputText("-Set eggs hatching to properly have text spacing. (Liadri)\n");
+			outputText("-Kitsune metamorph sequence break fix. (Jtecx)\n");
+			outputText("-Implemented sprites for (Lord Shadeogorath): nurse outfit, samurai outfit, moonlight greatsword, samurai helmet (by Mister GRaM); phalluspear, chainmail armor (by Snas); scale mail (by Desro); green adventurer outfit (by Lia);\n");
+			outputText("-Various tweaks and bugfixes: dual katana and daisho should now show sprites when equipped, offhand firebuff sprites should now show for weapons that have them, some pure/corrupt weapons that were not showing the appropriate sprite should now do so, dual massive weapons should now properly show an offhand sprite if applicable (Lord Shadeogorath)\n");
+			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids, Uma Handjob & Get Blown options not accesable for cockwielders, ");
+			outputText("Tamains Daughters scene sending back to camp, clone creating not causing unremovable negative levels, faerie dragon tf not giving pinkish purple scales color, Izma bad end not triggering after PC lost to her many times, Juvenile Abyssal Sharks runnign away without leaving behind any loot\n\n");
+			outputText("<b>Version 0.8u2:</b>\n\n");
+			outputText("-New melee weapon (by Ormael): Twin Machine Greatswords - can be gained by combining 2x Machine Greatsword weapon. Cost 5440 gems. Base atk is 19. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ripper 1.0 - can be gained by combining 2x Ripper 1.0 weapon. Cost 16520 gems. Base atk is 24. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ripper 2.0 - can be gained by combining 2x Ripper 2.0 weapon. Cost 34720 gems. Base atk is 29. It's dual large weapon belonging to exotic type, 100% bleed chance and would apply burn DoT at enemies.\n");
+			outputText("-Diana been renamed to Nadia. Her spells cost no longer been fluctuating from spell casted (not even game tracking this) keeping it locked to max reduction now.\n");
+			outputText("-Can find metal plates now in outer battlefield too (3-5). Finding metal plate in boundary battlefield changed to give 2-3 plates instead of just 1.\n");
+			outputText("-Two Large Axes can be now combined into Dual Large Axes and seperated back into two Large Axes.\n");
+			outputText("-Lumi workshop menu include list of materials PC have in storage (from wood to energy cores).\n");
+			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
+			outputText("-Leveling up and Clones code changes. (Xetaxheb)\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night;\n");
+			outputText("-Since Liadri showed concern over Celess been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
+			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
+			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
+			outputText("-Using Dual Large Axes, Twin Machine Greatswords, Twin Ripper 1.0 or Twin Ripper 2.0 would give ~50% more wood.\n");
+			outputText("-New melee weapon (by Ormael): Twin Amethyst Claymores - can be gained by combining 2x Amethyst Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain darkness affinity, dual large sword type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Ruby Claymores - can be gained by combining 2x Ruby Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain fire affinity, dual large sword type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Sapphire Claymores - can be gained by combining 2x Sapphire Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain ice affinity, dual large sword type weapon.\n");
+			outputText("-New melee weapon (by Ormael): Twin Topaz Claymore - can be gained by combining 2x Topaz Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain lightning affinity, dual large sword type weapon.\n");
+			outputText("-Dragonne is no longer joke or meme race and have now proper req. for bodyparts, racial bonuses and specials. Dragonne / Elder dragonne / Ancient dragonne (at 16 / 24 / 32): +70/105/140% to str multi, +60/90/120% to tou multi, +100/150/200% to spe multi -30/45/60% to int multi, +30/45/60% to lib multi, +1/4/10 to armor/magic resistance.\n");
+			outputText("-New event perk: Dragon regal breath. Gained by been dragonne (16+ score). Effects: Allows access to a dragonne regal breath attack. (phys damage, longer stun than other breaths, apply bleed and confusion (similary to fear but not makes enemy skipping turns just giving 50% to skip turn))\n");
+			outputText("-New event perk: Lion Heart. Gained by been dragonne (16+ score). Effects: Add 50% of your speed to your strength score. Double all natural attacks damage dealt.\n");
+			outputText("-Rathazul can sell golden blonde dye and Salon yellow dye.\n");
+			outputText("-Dragon, Fairy Dragon, Sea Dragon, Vouivre, Yggdrassil races would have changed calculation from wings part (most cases it would give slight more points than before).\n");
+			outputText("-Draconic Heart Internal Mutation no longer req. Draconic Bones Internal Mutation and to req. races group been added Jabberwocky.\n");
+			outputText("-Yggdrasil can gain now Oak Horns. (+1 to race score)\n");
+			outputText("-New range weapon (by Ormael): Twin M1 Cerberuses - can be gained by combining 2x M1 Cerberus weapon. Cost 1860 gems. Base atk is 45 and ammo clip size 1. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
+			outputText("-Use const values instead of magic numbers (jfmherokiller)\n");
+			outputText("-Sprite implementations: all by me this time (but mostly were made by copying and altering existing sprites); loincloths, most loincloths should have a sprite now. (aside from the dragonscale one, that one wasn't turning out very good, I'll come back to it later); more shield variants, shields should now show sprites reflecting their size either by description or type ");
+			outputText("(small,normal,large,massive) Aether Sin now uses the small shield sprite while the twins are in dagger and shield form; offhand corrupt scythe, can now have a certain NG+ hardcore boss weapon show in its full glory now. (Lord Shadeogorath)\n");
+			outputText("-Fixes: G-cup sprites not showing if the player is a werewolf/fox in human form (Lord Shadeogorath)\n");
+			outputText("-Jojo options to talk him as uncorrupted mouse into sex checking corruption would take into account ascension: corruption tolerance effects.\n");
+			outputText("-Removed from Rathazul conditions to offer option to come to camp corruption check.\n");
+			outputText("-Ezekiel or Kratia accesories got added small parts in tooltips desc their effects.\n");
+			outputText("-Added greyed out button to Sophie post fight menu indicating indirectly req. to bimbofy her.\n");
+			outputText("-In Ebon Labirinth after reaching at least 3rd boss room and clearing it succesfully enable option to meet some potentialy familiar cat-morph when entering dungeon in future runs. It's very nice cat giving option to skip few rooms in exploration and starting form much deeper room count. Ohh and it all for small price to face one of skipped section bosses.\n");
+			outputText("-Evangeline can level up 2 more times (reaching lvl 24). This opening her Experiments tab.\n");
+			outputText("-Option to make better bimbo liquer/bro brew in Evangeline Experiments tab: req. to have item or her having enought gems (500+). Can force feed the created concoction to feral female imp.\n");
+			outputText("-After feral female imp been <u>force</u> feed Evangeline concoction it can be interacted as Galia located in Slaves tab. Current interactions includes: Appearance, Spar. After enough amount of sparrings (amd enabled training mode for npc's) Galia can level up up to three times.\n");
+			outputText("-Cow & Minotaur race scores would get points for few more things and 2nd tier of their race scores req. now 16 not 15 pts (with matching stats changes).\n");
+			outputText("-New melee weapon (by Ormael): Twin Storm Rulers - can be gained by combining 2x Storm Ruler weapon. Base atk is 14. It's dual large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (40%) perk.\n");
+			outputText("-New range weapon (by Lord Shadeogorath): DuAlakablam - can be gained by combining 2x Alakablam weapon. Cost 1520 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 20%. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
+			outputText("-All Raging Inferno, Glacial Storm, High Voltage & Eclipsing Shadow perks have their effects increase/loose doubled. Also each first perks have cap of 5 stacks, Ex ones have 15 stacks and Su ones have 75 stacks limit.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -103,18 +148,26 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath)
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids, Uma Handjob & Get Blown options not accesable for cockwielders, ");
-			outputText("Tamains Daughters scene sending back to camp, clone creating not causing unremovable negative levels, faerie dragon tf not giving pinkish purple scales color, Izma bad end not triggering after PC lost to her many times, Juvenile Abyssal Sharks runnign away without leaving behind any loot\n");
+			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
+			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP, Twin Six Shooter using ammo 2x faster\n\n");
 			/*ostatni punkt changelogu
-			outputText("<b>Version 0.8u2:</b>\n\n");
+			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-Fixed bugs: \n");
+			outputText("-Fixed bugs: \n\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP / Lust effect of 10% magnitude.\n");
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -167,13 +220,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -201,9 +248,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

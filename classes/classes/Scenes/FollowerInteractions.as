@@ -415,7 +415,7 @@ internal function marbleVsAmilyFreakout():void {
 	
 	//Player choices how they want to respond.
 	//Stay silent (A1), pimp (B1), or explain (C1).
-	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Pimp", beAPimpMarbleLovesIt, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null);
+	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Pimp", beAPimpMarbleLovesIt, "Explain", AmilyMarbleThreesomeWhen, "", null, "", null);
 }
 
 //Stay silent like a douche
@@ -460,7 +460,7 @@ private function beAPimpMarbleLovesIt():void {
 	if(player.hasPerk(PerkLib.MarblesMilk)) {
 		outputText("Marble blinks before saying \"<i>[name], try again, I know you're better than that.</i>\"  You blink in response and wonder yourself what possessed you to say that.\n\n");
 		//Player chooses stay silent (A1) or explain (C1)
-		simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null, "", null);
+		simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", AmilyMarbleThreesomeWhen, "", null, "", null, "", null);
 	}
 	//Pimp -> PC is not addicted (B3)
 	else {
@@ -503,10 +503,10 @@ private function jokeAboutPimpularness():void {
 	clearOutput();
 	outputText("You assure them that you thought a joke might help them calm down.  The two of them seem to disagree with you on that sentiment, but wait for you to say something else.");
 	//Player chooses stay silent (A1) or explain (C1)
-	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null, "", null);
+	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", AmilyMarbleThreesomeWhen, "", null, "", null, "", null);
 }
 
-private function LucyYouGotSomeSplainingToDo():void {
+private function AmilyMarbleThreesomeWhen():void {
 	clearOutput();
 	//Explain (C1)
 	outputText("You spend some time trying to explain to the two of them why you never told either of them about each other.  ");

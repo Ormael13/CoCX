@@ -892,6 +892,7 @@ internal function sophieLostCombat():void {
 			}
 		} else sceneHunter.print("Check failed: need higher corruption");
 	}
+	else addButtonDisabled(4, "???", "Req. 33+ corruption and bottle of Bimbo Liqueur.");
     //check min lust and gender
     if (player.gender == 0)
         outputText("\n\nYou miss the required parts to rape her.");

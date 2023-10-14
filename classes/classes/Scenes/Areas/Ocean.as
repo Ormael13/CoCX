@@ -142,6 +142,13 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					abyssalsharkScene.oceanJuvenileAbyssalSharkEncounter();
 				}
+			}, {
+				name  : "weresharkMale",
+				label : "Wereshark (M)",
+				kind : 'monster',
+				day : false,
+				call  : SceneLib.weresharkScene.weresharkEncounter,
+				chance: 0.50
 			})
 		}
 

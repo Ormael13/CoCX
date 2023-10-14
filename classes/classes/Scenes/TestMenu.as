@@ -26,6 +26,7 @@ import classes.Scenes.NPCs.Carrera;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.Galia;
 import classes.Scenes.NPCs.Lilith;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
@@ -97,6 +98,7 @@ public class TestMenu extends BaseContent
 		bd.add("BeliConfFix", belisatest2, "Belisa Confession Fix").disableIf(TyrantiaFollower.isLover() && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed);
 		bd.add("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		bd.add("ClickItTwice", golemArmy, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
+		bd.add("FixClones", fixClones, "If you have messed up clones or negative levels or related outdated data this will clear it all away.");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 	
@@ -382,9 +384,9 @@ public class TestMenu extends BaseContent
 			++cnt2;
 			outputText("\nChi Chi");
 		}
-		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) {
+		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6) {
 			++cnt2;
-			outputText("\nDiana");
+			outputText("\nNadia");
 		}
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
 			++cnt2;
@@ -618,6 +620,17 @@ public class TestMenu extends BaseContent
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
 		doNext(SoulforceCheats);
 	}
+	public function fixClones():void {
+		if (camp.gcc(true)) player.removeStatusEffect(StatusEffects.PCClone)
+		if (player.hasStatusEffect(StatusEffects.NegativeLevel)) {
+			player.removeStatusEffect(StatusEffects.NegativeLevel);
+		}
+		if (player.negativeLevel > 0) player.negativeLevel = 0;
+		if (player.hasStatusEffect(StatusEffects.PCClone1st)) player.removeStatusEffect(StatusEffects.PCClone1st);
+		if (player.hasStatusEffect(StatusEffects.PCClone2nd)) player.removeStatusEffect(StatusEffects.PCClone2nd);
+		if (player.hasStatusEffect(StatusEffects.PCClone3rd)) player.removeStatusEffect(StatusEffects.PCClone3rd);
+		if (player.hasStatusEffect(StatusEffects.PCClone4th)) player.removeStatusEffect(StatusEffects.PCClone4th);		
+	}	
 	public function hiddenPJ():void {
 		outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 		if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
@@ -703,30 +716,15 @@ public class TestMenu extends BaseContent
 		outputText("Entering battle with Lethice! Enjoy ^^");
 		startCombat(new Lethice());
 	}
-	public function FightAlvina():void {
+	public function FightGalia():void {
 		clearOutput();
-		outputText("Entering battle with Alvina! Enjoy ^^");
-		startCombat(new Alvina());
+		outputText("Entering battle with Galia! Enjoy ^^");
+		startCombat(new Galia());
 	}
 	public function FightChaosChimera():void {
 		clearOutput();
 		outputText("Entering battle with Chaos Chimera! Enjoy ^^");
 		startCombat(new ChaosChimera());
-	}
-	public function FightDarkSlimeEmpress():void {
-		clearOutput();
-		outputText("Entering battle with Dark Slime Empress! Enjoy ^^");
-		startCombat(new DarkSlimeEmpress());
-	}
-	public function FightHydra():void {
-		clearOutput();
-		outputText("Entering battle with Hydra! Enjoy ^^");
-		startCombat(new Hydra());
-	}
-	public function FightHellfireSnail():void {
-		clearOutput();
-		outputText("Entering battle with Hellfire Snail! Enjoy ^^");
-		startCombat(new HellfireSnail());
 	}
 	public function ChimeraBodyUltimateStage():void {
 		if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage)) {
@@ -1252,10 +1250,9 @@ public class TestMenu extends BaseContent
 		menu();
 		if (player.level < CoC.instance.levelCap) addButton(0, "Add 1 LvL", addsubLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
 		if (player.level < CoC.instance.levelCap - 9) addButton(1, "Add 10 LvL's", addsubLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
-		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (with stat and perk points).");
-		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (with stat and perk points).");
-		var negativeLevel:int = player.negativeLevel;
-		if (negativeLevel > 0 && player.level >= CoC.instance.levelCap) addButton(4, "-1 Neg LvL", recoverNegativeLevels).hint("Substract 1 Negative Level.");
+		if (player.level > 0) addButton(2, "Sub 1 LvL", addsubLvl, "DLvl", 1).hint("Substract 1 Level (keeping stat and perk points).");
+		if (player.level > 9) addButton(3, "Sub 10 LvL's", addsubLvl, "DLvl", 10).hint("Substract 10 Levels (keeping stat and perk points).");
+		if (player.negativeLevel > 0) addButton(4, "-1 Neg LvL (" + player.negativeLevel + ")", function _():void{ player.negativeLevel -= 1; LevelDeLevel(); }).hint("Recover 1 negative level.");
 		addButton(14, "Back", SoulforceCheats);
 	}
 	public function BodyStateMenu():void {
@@ -1808,13 +1805,13 @@ public class TestMenu extends BaseContent
 		menu();
 		if (page == 1) {
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
-			addButton(1, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
-			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(2, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
-			addButton(3, "B.Monke", FightWaizAbi).hint("You not even want to let the innocent bimbo monke free? <i>*sigh*</i>");
+			addButton(1, "B.Monke", FightWaizAbi).hint("You not even want to let the innocent bimbo monke free? <i>*sigh*</i>");
+			if (player.level >= 45) addButton(2, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
+			//3
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 			addButton(5, "Sand Mother", FightSandMother).hint("Test fight with Sand Mother.");
 			addButton(6, "GothGirl", FightLilith).hint("Fight with devilish cute goth girl.");
-			if (player.level >= 45) addButton(7, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
+			//7
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(10, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
@@ -1824,9 +1821,9 @@ public class TestMenu extends BaseContent
 			addButton(14, "Back", SoulforceCheats);
 		}
 		if (page == 2)  {
-			addButton(0, "DarkSlimeEmpress", FightDarkSlimeEmpress).hint("Test fight with Dark Slime Empress.");
-			addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
-			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
+			addButton(0, "Galia", FightGalia).hint("Test fight with Galia.");
+			//1
+			//2
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
 			addButton(4, "AnotSucc", FightCarrera).hint("Fight with probably another succubus out there...");
 			addButton(5, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
@@ -1836,7 +1833,7 @@ public class TestMenu extends BaseContent
 			addButton(9, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
 			addButton(10, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
 			addButton(11, "Pierce", FightPierce).hint("Test fight with Pierce.");
-			addButton(12, "Alvina", FightAlvina).hint("Test fight with Alvina.");
+			//12
 			addButton(13, "-1-", EnemiesMenu, page - 1);
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -2316,23 +2313,13 @@ public class TestMenu extends BaseContent
 	public function addsubLvl(type:String, cAmt:int):void{
 		clearOutput();
 		if (type == "Lvl"){
-			player.level += cAmt;
-			player.statPoints += 5*cAmt;
-			player.perkPoints += cAmt;
+			CoC.instance.playerInfo.levelUpMultipleTimes(cAmt);
 			outputText("\n\n<b>You now have " + player.level + " levels!</b>");
 		}
 		else if (type == "DLvl"){
 			player.level -= cAmt;
-			player.statPoints -= 5*cAmt;
-			player.perkPoints -= cAmt;
-			outputText("\n\n<b>You have lost " + cAmt + " levels!</b>");
+			outputText("\n\n<b>You have lost " + cAmt + " levels and are now " + player.level + "!</b>");
 		}
-		doNext(LevelDeLevel);
-	}
-	
-	public function recoverNegativeLevels():void {
-		player.recoverNegativeLevel(1);
-		outputText("\n\n<b>You now have recovered 1 negative level!</b>");
 		doNext(LevelDeLevel);
 	}
 
@@ -2430,11 +2417,6 @@ public class TestMenu extends BaseContent
 		clearOutput();
 		outputText("Entering battle with Pierce! Enjoy ^^");
 		startCombat(new Pierce());
-	}
-	public function FightBelisa():void {
-		clearOutput();
-		outputText("Entering battle with Mana Weaver! Enjoy ^^");
-		startCombat(new Belisa());
 	}
 	public function FightIridesian():void {
 		SceneLib.iridesianFollower.firstMeetingIridesian();
@@ -2687,13 +2669,6 @@ public class TestMenu extends BaseContent
 	}
 	public function lilytest():void {
 		SceneLib.lily.lilyEncounter();
-	}
-	public function FightTyrantia():void {
-		clearOutput();
-		if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrantia.repeatEncounterBattlefield();
-		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrantia.encounterBattlefieldAfter40Affection();
-		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrantia.repeatEncounterBattlefield();
-		else SceneLib.tyrantia.firstEncounter();
 	}
 	}
 }

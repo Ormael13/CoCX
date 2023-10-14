@@ -205,6 +205,8 @@ public class SceneLib {
 
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
 
+    public static var nadiaScene:NadiaFollower = new NadiaFollower();
+
     public static var neisaFollower:NeisaFollower = new NeisaFollower();
 
     public static var mitziFollower:MitziFollower = new MitziFollower();
@@ -258,6 +260,10 @@ public class SceneLib {
     public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
 
     public static var werefoxScene:WerefoxScene = new WerefoxScene();
+
+    public static var werespiderScene:WerespiderScene = new WerespiderScene();
+
+    public static var weresharkScene:WeresharkScene = new WeresharkScene();
 
     public static var woodElves:WoodElves = new WoodElves();
 

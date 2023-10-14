@@ -299,7 +299,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampLunaMishaps3:StatusEffectType				= mk("Camp Luna Mishaps 3");
 		public static const CampSparingDinah:StatusEffectType				= mk("Camp Sparing Dinah");
 		public static const CampSparingNpcsTimers1:StatusEffectType			= mk("Camp Sparing Npc's Timers 1");//Ember / Isabella / Kiha / Etna
-		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
+		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Nadia
 		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna / Galia / Dinah /?Cai'Lin?
 		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / Aurora / Electra / Neisa
 		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//Tyrantia / Lily / Belisa / x
@@ -318,6 +318,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CombatFollowerKiha:StatusEffectType				= mk("Combat Follower: Kiha");
 		public static const CombatFollowerMidoka:StatusEffectType			= mk("Combat Follower: Midoka");
 		public static const CombatFollowerMitzi:StatusEffectType			= mk("Combat Follower: Mitzi");
+		public static const CombatFollowerNadia:StatusEffectType			= mk("Combat Follower: Nadia");
 		public static const CombatFollowerNeisa:StatusEffectType			= mk("Combat Follower: Neisa");
 		public static const CombatFollowerSiegweird:StatusEffectType		= mk("Combat Follower: Siegweird");
 		public static const CombatFollowerTyrantia:StatusEffectType			= mk("Combat Follower: Tyrantia");
@@ -353,6 +354,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DragonIceBreathCooldown:StatusEffectType        = mk("Dragon Ice Breath Cooldown");
 		public static const DragonLightningBreathCooldown:StatusEffectType  = mk("Dragon Lightning Breath Cooldown");
 		public static const DragonPoisonBreathCooldown:StatusEffectType   	= mk("Dragon Poison Breath Cooldown");
+		public static const DragonRoyalBreathCooldown:StatusEffectType   	= mk("Dragon Royal Breath Cooldown");
 		public static const DragonWaterBreathCooldown:StatusEffectType   	= mk("Dragon Water Breath Cooldown");
 		public static const DrunkenPower:StatusEffectType                   = mk("Drunken Power");
 		public static const Dysfunction:StatusEffectType                    = mk("dysfunction");
@@ -563,12 +565,12 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MitziPregnant:StatusEffectType                	= mk("Mitzi Pregnant");
 		public static const Naga:StatusEffectType                           = mk("Naga");
 		public static const NakedOn:StatusEffectType                        = mk("NakedOn");
-		public static const NegativeLevel:StatusEffectType                  = mk("Negative Level");
+		public static const NegativeLevel:StatusEffectType                  = mk("Negative Level"); //deprecated do not use, only left in for save compatibility, use player.negativeLevel
 		public static const NoJojo:StatusEffectType                         = mk("noJojo");
 		public static const NoMoreMarble:StatusEffectType                   = mk("No More Marble");
 		public static const Oswald:StatusEffectType                         = mk("Oswald");
 		public static const Overheat:StatusEffectType                		= mk("Overheat");
-		public static const PCClone:StatusEffectType            			= mk("PC Clone");
+		public static const PCClone:StatusEffectType            			= mk("PC Clone"); // ?, ?, clone count, ? -- negative levels are player.negativeLevel
 		public static const PCClone1st:StatusEffectType            			= mk("PC Clone 1st");
 		public static const PCClone2nd:StatusEffectType            			= mk("PC Clone 2nd");
 		public static const PCClone3rd:StatusEffectType            			= mk("PC Clone 3rd");
@@ -727,6 +729,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const HeliaOff:StatusEffectType            = mk("Helia Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
+		public static const NadiaOff:StatusEffectType            = mk("Nadia Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
 		public static const VenusOff:StatusEffectType            = mk("Venus Off");
 		public static const SophieOff:StatusEffectType           = mk("Sophie Off");
@@ -763,10 +766,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BowCooldown:StatusEffectType        	= mk("Bow Cooldown");
 		public static const BowDisabled:StatusEffectType        	= mk("Bow Disabled");
 		public static const CancerGrab:StatusEffectType         	= mk("Cancer Pincer grapple");
-		public static const Charged:StatusEffectType            	= mk("Charged");
 		public static const CallOutKiha:StatusEffectType            = mk("Call Out Kiha");
+		public static const Charged:StatusEffectType            	= mk("Charged");
 		public static const Climbed:StatusEffectType            	= mk("Climbed");
 		public static const Concentration:StatusEffectType      	= mk("Concentration");
+		public static const ConfusionM:StatusEffectType             = mk("ConfusionM");
 		public static const Constricted:StatusEffectType        	= mk("Constricted");
 		public static const ConstrictedScylla:StatusEffectType  	= mk("Constricted Scylla");
 		public static const ConstrictedWhip:StatusEffectType  		= mk("Constricted Whip");

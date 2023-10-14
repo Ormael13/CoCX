@@ -68,11 +68,11 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8u.08(final)";
+    public var debugGameVer:String = "v0.8u2.18";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.11;
-    public var levelCap:Number = 185;
+    public var modSaveVersion:Number = 36.14;
+    public const levelCap:Number = 185;
 
     //Lock cheats menus from public
     // builds.
@@ -249,7 +249,7 @@ public class CoC extends MovieClip
         this.mainView.onNewGameClick = charCreation.newGameGo;
         this.mainView.onAppearanceClick = playerAppearance.appearance;
         this.mainView.onDataClick = saves.saveLoad;
-        this.mainView.onLevelClick = playerInfo.levelUpGo;
+        this.mainView.onLevelClick = playerInfo.levelUpMenu;
         this.mainView.onPerksClick = perkMenu.displayPerks;
         this.mainView.onStatsClick = playerInfo.displayStats;
         this.mainView.onBottomButtonClick = function(i:int, button:CoCButton):void {

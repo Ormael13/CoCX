@@ -152,6 +152,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         addButtonIfTrue(0, "Sleep", doSleepEL, "It's still too early to go to sleep.",
                 isNightTime,  "Turn yourself in for the night. May result in monster ambush!");
         SceneLib.masturbation.masturButton(5);
+		if (room == 1) addButtonIfTrue(7, "Cat", shortcuts, "You not even beaten 3 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 150, "Talk to the cat only if you plan skip some rooms.");
         addButton(9, "Inventory", inventory.inventoryMenu);
         addButton(14, "Exit", confirmExit);
         dungeons.setTopButtons();
@@ -162,6 +163,16 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         outputText("<b>Are you sure about that?</b>");
         doYesNo(exitDungeon, playerMenu);
     }
+	
+	public function shortcuts():void {
+		statScreenRefresh();
+        hideUpDown();
+        spriteSelect(null);
+		outputText("\n\nYou are facing a cat-morph. She would looks quite averange if not for black stripes on purple fur. Without any sound she points behind her and then vanishing.");
+        menu();
+		addButton(0, "150", navigateToRoomELTier1).hint("Skip 150 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(1, "300", navigateToRoomELTier2, "You not even beaten 6 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 150, "Skip 300 rooms but beware of the boss at the end of this detour.");
+	}
 
     //Player menu. Doesn't start any encounters.
     //Can print stuff is called with 'true' and new direction.
@@ -220,6 +231,30 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         roomStatic(true, newDir);
         goNext(false);
     }
+	public function navigateToRoomELTier1():void {
+		//clear room-specific
+        fountainRoom = false;
+        //move
+        room += 150;
+		resetEncChance();
+        //if not completed - select from tiers
+        if (!dungeons.checkEbonLabyrinthClear())
+            bossSelector(1);
+        else//cleared - anything, but avoid making tier2 bosses too weak
+            bossSelector(enemyLevelMod < 3 ? 1 : 0);
+	}
+	public function navigateToRoomELTier2():void {
+		//clear room-specific
+        fountainRoom = false;
+        //move
+        room += 300;
+		resetEncChance();
+        //if not completed - select from tiers
+        if (!dungeons.checkEbonLabyrinthClear())
+            bossSelector(2);
+        else//cleared - anything, but avoid making tier2 bosses too weak
+            bossSelector(enemyLevelMod < 3 ? 1 : 0);
+	}
 
     //if a new highscore is set, checks achievements
     public function highScore():void {

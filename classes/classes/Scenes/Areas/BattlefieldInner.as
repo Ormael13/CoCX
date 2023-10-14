@@ -54,21 +54,21 @@ public class BattlefieldInner extends BaseContent
 			chance: battlefieldInnerChance,
 			call: SceneLib.etnaScene.repeatYandereEnc
 		},  {
-			name: "diana",
+			name: "nadia",
 			night : false,
 			when: function():Boolean {
-				return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
+				return flags[kFLAGS.NADIA_FOLLOWER] < 6 && !(flags[kFLAGS.NADIA_FOLLOWER] != 3 && flags[kFLAGS.NADIA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.NadiaOff);
 			},
 			chance: battlefieldInnerChance,
-			call: SceneLib.dianaScene.repeatEnc
+			call: SceneLib.nadiaScene.repeatEnc
 		}, {
-			name: "dianaName",
+			name: "nadiaName",
 			night : false,
 			when: function():Boolean {
-				return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+				return ((flags[kFLAGS.NADIA_FOLLOWER] < 3 || flags[kFLAGS.NADIA_FOLLOWER] == 5) && flags[kFLAGS.NADIA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.NadiaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 			},
 			chance: battlefieldInnerChance,
-			call: SceneLib.dianaScene.postNameEnc
+			call: SceneLib.nadiaScene.postNameEnc
 		}, {
 			name: "ted",
 			call: SceneLib.tedScene.introPostHiddenCave,

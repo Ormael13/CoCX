@@ -69,12 +69,6 @@ use namespace CoC;
 				kind  : 'item',
 				chance: 0.17,
 				call: curry(findItem, consumables.VDARCON)
-			}, {
-				name: "metal",
-				label : "Scrap",
-				kind  : 'item',
-				chance: 0.4,
-				call: findMetalScrap
 			});
 			_battlefieldBoundaryEncounter = Encounters.group("batllefieldboundary", {
 				//Discover Outer Battlefield
@@ -85,6 +79,12 @@ use namespace CoC;
 				chance: 30,
 				when: SceneLib.battlefiledouter.canDiscover,
 				call: SceneLib.battlefiledouter.discover
+			}, {
+				name: "metal",
+				label : "Scrap",
+				kind  : 'item',
+				chance: 0.4,
+				call: findMetalScrapBoundary
 			}, {
 				//Find Tripxi gun parts
 				name: "gunPart",
@@ -137,27 +137,27 @@ use namespace CoC;
 				chance: battlefieldBoundaryChance,
 				call: SceneLib.etnaScene.repeatYandereEnc
 			},  {
-				name: "diana",
-				label : "Diana",
+				name: "nadia",
+				label : "Nadia",
 				kind  : 'npc',
 				unique: true,
 				night : false,
 				when: function():Boolean {
-					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
+					return flags[kFLAGS.NADIA_FOLLOWER] < 6 && !(flags[kFLAGS.NADIA_FOLLOWER] != 3 && flags[kFLAGS.NADIA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.NadiaOff);
 				},
 				chance: battlefieldBoundaryChance,
-				call: SceneLib.dianaScene.repeatEnc
+				call: SceneLib.nadiaScene.repeatEnc
 			}, {
-				name: "dianaName",
-				label : "Diana",
+				name: "nadiaName",
+				label : "Nadia",
 				kind  : 'npc',
 				unique: true,
 				night : false,
 				when: function():Boolean {
-					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+					return ((flags[kFLAGS.NADIA_FOLLOWER] < 3 || flags[kFLAGS.NADIA_FOLLOWER] == 5) && flags[kFLAGS.NADIA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.NadiaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
 				chance: battlefieldBoundaryChance,
-				call: SceneLib.dianaScene.postNameEnc
+				call: SceneLib.nadiaScene.postNameEnc
 			}, {
 				name: "ted",
 				label : "Dragon-Boy",
@@ -228,12 +228,13 @@ use namespace CoC;
 			outputText(". ");
 			inventory.takeItem(item, explorer.done);
 		}
-		private function findMetalScrap():void {
+		private function findMetalScrapBoundary():void {
 			clearOutput();
-			outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
-			outputText("<b>You found a metal plate.</b>");
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
-			outputText("<b>(Metal plates: "+flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]+"/200 total!</b>");//"+SceneLib.campUpgrades.checkMaterialsCapStones()+"
+			var mpa:Number = 2 + rand(2);
+			outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plates draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
+			outputText("<b>You found "+mpa+" metal plates.</b>");
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += mpa;
+			outputText("<b>(Metal plates: "+flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]+"/200 total)</b>");//"+SceneLib.campUpgrades.checkMaterialsCapStones()+"
 			endEncounter();
 		}
 

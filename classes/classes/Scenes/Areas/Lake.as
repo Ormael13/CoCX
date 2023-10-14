@@ -304,27 +304,27 @@ use namespace CoC;
 				chance: lakeChance,
 				call: SceneLib.etnaScene.repeatYandereEnc
 			},  {
-				name: "diana",
-				label : "Diana",
+				name: "nadia",
+				label : "Nadia",
 				kind  : 'npc',
 				unique: true,
 				night : false,
 				when: function():Boolean {
-					return player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
+					return player.level >= 3 && flags[kFLAGS.NADIA_FOLLOWER] < 6 && !(flags[kFLAGS.NADIA_FOLLOWER] != 3 && flags[kFLAGS.NADIA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.NadiaOff);
 				},
 				chance: lakeChance,
-				call: SceneLib.dianaScene.repeatEnc
+				call: SceneLib.nadiaScene.repeatEnc
 			}, {
-				name: "dianaName",
-				label : "Diana",
+				name: "nadiaName",
+				label : "Nadia",
 				kind  : 'npc',
 				unique: true,
 				night : false,
 				when: function():Boolean {
-					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+					return ((flags[kFLAGS.NADIA_FOLLOWER] < 3 || flags[kFLAGS.NADIA_FOLLOWER] == 5) && flags[kFLAGS.NADIA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.NadiaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
 				chance: lakeChance,
-				call: SceneLib.dianaScene.postNameEnc
+				call: SceneLib.nadiaScene.postNameEnc
 			}, {
 				name: "demonProjects",
 				label : "DemLab Subject",

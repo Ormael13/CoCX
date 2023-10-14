@@ -2235,6 +2235,29 @@ public class LowerBodyTransformations extends MutationsHelper {
 		}
 	);
 	
+	public const LowerBodyWereshark: Transformation = new SimpleTransformation("Wereshark Lower Body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
+			// Doesn't support tails
+			TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+			desc += "You feel your [feet] tingle, and you can only watch as they morph into a webbed, reptilian-like form. With all this webbing between your toes, it'll surely help you swim even faster, right? Before you have time to dwell on the thought, a torrent of sweat begins streaming from your forehead as you gasp and swallow for air, panting loudly. Whoa! Something weird is happening with your legs... Without warning, you trip over, stumbling in confusion as your legs fail you. ";
+			desc += "You check to see what is going on; you discover your legs have been replaced by what appears to be a shark tail. You idly ponder on the possibility of moving on land now, but as it turns out, your new muscles are powerful enough to simply propel yourself through the sheer power of throwing your body forward and jumping. Well, you guess you won’t have trouble hopping around overland or swimming in the depths of the sea with your <b>brand-new wereshark tail.</b>";
+
+			if (doOutput) outputText(desc);
+			player.lowerBody = LowerBody.WERESHARK;
+			player.legCount = 1;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.WERESHARK));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.WERESHARK;
+		}
+	);
+	
 	/*
   */
 }

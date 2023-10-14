@@ -38,7 +38,6 @@ public class WoodElfRace extends Race{
 	public override function setup():void {
 		
 		addScores()
-				.hasPerk(PerkLib.BlessingOfTheAncestorTree, +4, -1000)
 				.earType(Ears.ELVEN, +1)
 				.eyeType(Eyes.ELF, +1)
 				.faceType(Face.ELF, +1)
@@ -64,7 +63,8 @@ public class WoodElfRace extends Race{
 				.corruption(AT_LEAST(50), +1, -1000)
 				.hasPerk(PerkLib.FlawlessBody, +1)
 				.hasPerk(PerkLib.ElvenSense, +1)
-				.hasPerk(PerkLib.NaturalSpellcasting, +1);
+				.hasPerk(PerkLib.NaturalSpellcasting, +1)
+				.hasPerk(PerkLib.BlessingOfTheAncestorTree, +4, -1000);
 		
 		addBloodline(PerkLib.ElfsDescendant,PerkLib.BloodlineElf);
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM, +3);

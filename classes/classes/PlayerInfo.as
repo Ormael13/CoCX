@@ -235,7 +235,7 @@ public class PlayerInfo extends BaseContent {
 		}
 		miscStats += "<b>Ebon Labyrinth:</b> Explored up to " + flags[kFLAGS.EBON_LABYRINTH_RECORD] + " room\n";
 		miscStats += "<b>Exp needed to lvl up:</b> ";
-		if (player.level < CoC.instance.levelCap) miscStats += "" + player.requiredXP() + "\n";
+		if (player.level < CoC.instance.levelCap || player.negativeLevel > 0) miscStats += "" + player.requiredXP() + "\n";
 		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (currently possessed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
@@ -647,19 +647,7 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS] > 0)
 			interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_OWNED_DICKS] + flags[kFLAGS.CERAPH_OWNED_PUSSIES] + flags[kFLAGS.CERAPH_OWNED_TITS]) + "\n";
 
-		if (flags[kFLAGS.DIANA_LVL_UP] > 0) {
-            if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4)
-			    interpersonStats += "<b>Diana Progress:</b>: LOCKED (you've taken her virginity)\n";
-            else if (flags[kFLAGS.DIANA_FOLLOWER] < 6)
-			    interpersonStats += "<b>Diana Progress:</b> " + Math.round(flags[kFLAGS.DIANA_LVL_UP] / 8 * 100) + "%\n";
-            else
-                interpersonStats += "<b>Diana Progress:</b> LOVER\n";
-			interpersonStats += "<b>Diana Spells Casted:</b> " + flags[kFLAGS.DIANA_SPELLS_CASTED] + "\n";
-			if (flags[kFLAGS.DIANA_LVL_UP] == 16) interpersonStats += "<b>Diana lvl:</b> 75\n";
-			if (flags[kFLAGS.DIANA_LVL_UP] == 15) interpersonStats += "<b>Diana lvl:</b> 69 (current max lvl)\n";
-			else if (flags[kFLAGS.DIANA_LVL_UP] < 1) interpersonStats += "<b>Diana lvl:</b> 3\n";
-			else interpersonStats += getNPCLevel("Diana", 3, 0, 15, 3, flags[kFLAGS.DIANA_LVL_UP]);
-		}
+		//Diana
 
 		if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
 			interpersonStats += "<b>Dinah Affection:</b> " + Math.round(flags[kFLAGS.DINAH_AFFECTION]) + "%\n";
@@ -766,6 +754,19 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.hasStatusEffect(StatusEffects.Marble))
 			interpersonStats += "<b>Marble Affection:</b> " + Math.round(player.statusEffectv1(StatusEffects.Marble)) + "%\n";
+
+		if (flags[kFLAGS.NADIA_LVL_UP] > 0) {
+            if (flags[kFLAGS.NADIA_FOLLOWER] == 3 || flags[kFLAGS.NADIA_FOLLOWER] == 4)
+			    interpersonStats += "<b>Nadia Progress:</b>: LOCKED (you've taken her virginity)\n";
+            else if (flags[kFLAGS.NADIA_FOLLOWER] < 6)
+			    interpersonStats += "<b>Nadia Progress:</b> " + Math.round(flags[kFLAGS.NADIA_LVL_UP] / 8 * 100) + "%\n";
+            else
+                interpersonStats += "<b>Nadia Progress:</b> LOVER\n";
+			if (flags[kFLAGS.NADIA_LVL_UP] == 16) interpersonStats += "<b>Nadia lvl:</b> 75\n";
+			if (flags[kFLAGS.NADIA_LVL_UP] == 15) interpersonStats += "<b>Nadia lvl:</b> 69 (current max lvl)\n";
+			else if (flags[kFLAGS.NADIA_LVL_UP] < 1) interpersonStats += "<b>Nadia lvl:</b> 3\n";
+			else interpersonStats += getNPCLevel("Nadia", 3, 0, 15, 3, flags[kFLAGS.NADIA_LVL_UP]);
+		}
 
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
 			if (flags[kFLAGS.NEISA_AFFECTION] > 50) interpersonStats += "<b>Neisa Affection:</b> " + (flags[kFLAGS.NEISA_AFFECTION] - 50) + "%\n";
@@ -895,6 +896,12 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Galia Stats
 		var galiaStats:String = "";
+		if (flags[kFLAGS.GALIA_AFFECTION] >= 2) {
+			if (flags[kFLAGS.GALIA_LVL_UP] == 4) galiaStats += "<b>Galia lvl:</b> 19 (current max lvl)\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 3) galiaStats += "<b>Galia lvl:</b> 13\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] == 2) galiaStats += "<b>Galia lvl:</b> 7\n";
+			if (flags[kFLAGS.GALIA_LVL_UP] < 2) galiaStats += "<b>Galia lvl:</b> 1\n";
+		}
 		if (galiaStats != "")
 			outputText("\n<b><u>Galia Stats</u></b>\n" + galiaStats);
 		// End Galia Stats
@@ -966,8 +973,8 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.chichiScene.pregnancy.isPregnant)
 			pregnancies += "<b>Chi Chi</b> \n";
 
-		//if (SceneLib.dianaScene.pregnancy.isPregnant)	//TODO Diana preggers
-		//	pregnancies += "<b>Diana</b> \n";
+		//if (SceneLib.nadiaScene.pregnancy.isPregnant)	//TODO Nadia preggers
+		//	pregnancies += "<b>Nadia</b> \n";
 
 		if (flags[kFLAGS.FEMOIT_EGGS] != 0)
 			pregnancies += "<b>Benoit</b> \n";
@@ -1275,6 +1282,7 @@ public class PlayerInfo extends BaseContent {
 		possiblePregs += "Marble\n";
 		possiblePregs += "Minerva\n"
 		possiblePregs += "Mitzi\n";
+	//	possiblePregs += "Nadia\n";
 		possiblePregs += "Phylla\n";
 		possiblePregs += "Phylla eggs\n";
 		possiblePregs += "Sophie\n";
@@ -1502,50 +1510,68 @@ public class PlayerInfo extends BaseContent {
 	//------------
 	// LEVEL UP
 	//------------
-	public function levelUpGo():void {
+	public function levelUp(ignoreXPCost:Boolean = false):void {
+		if (!ignoreXPCost) player.XP -= player.requiredXP(); // Custom characters?
+		if (player.negativeLevel > 0) {
+			player.negativeLevel -= 1;
+			return; // if player had negative, leave
+		}
+		if (player.level >= CoC.instance.levelCap) return;
+		player.level += 1; 
+		HPChange(player.maxHP(), false);
+		//if (player.level % 2 == 0) player.ascensionPerkPoints++;
+		//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
+		var gainedPerks:Number = 1;
+		var gainedStats:Number = 5;
+		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) gainedStats += (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4);
+		// Perks: New character starts with 1 background perk or free point, 1 free point from character creation, (so 2) on top of these; at level 0
+		if (player.level <= 9) gainedPerks *= 2, gainedStats *= 2;
+		if (player.level == 1) gainedPerks *= 3, gainedStats *= 3;
+		player.perkPoints += gainedPerks;
+		player.statPoints += gainedStats;
+	}
+	public function levelUpTo(value:int):void {
+		if (value > player.level) lUFSMM(value-player.level, true);
+	}
+	public function levelUpMultipleTimes(value:int):void {
+		lUFSMM(value, true);
+	}
+	
+	public function levelUpMenu():void {
 		clearOutput();
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
-			if (flags[kFLAGS.LVL_UP_FAST] == 1){
-				lvlUpFastSubMenu();
-				return;	//Not sure if this is what's stopping the thing from moving on, not bothered to check.
-			}
-			else if (flags[kFLAGS.LVL_UP_FAST] == 2){
-				lUFSMM(999);
-			}
+		// we do not reach levelUpMenu besides button (which only shows if available) or hotkey or autolevel, so this should only be through hotkey. 
+		if (player.level >= CoC.instance.levelCap && player.negativeLevel < 1) {
+			if (player.statPoints > 0) { attributeMenu(); }
+			else if (player.perkPoints > 0) { perkBuyMenu(); }
 			else {
-				player.XP -= player.requiredXP();
-				player.level++;
-				var gainedPerks:Number = 1;
-				//if (player.level % 2 == 0) player.ascensionPerkPoints++;
-				//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
-				var gainedStats:Number = 5;
-				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) gainedStats += (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4);
-				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
-				clearOutput();
-				outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
-				if (player.level <= 1) {
-					gainedPerks *= 3;
-					gainedStats *= 3;
-				}
-				if (player.level <= 9) {
-					gainedPerks *= 2;
-					gainedStats *= 2;
-				}
-				player.perkPoints += gainedPerks;
-				player.statPoints += gainedStats;
-				outputText("\n\nYou have gained " + num2Text(gainedStats) + " attribute points and " + num2Text(gainedPerks) + " perk point"+(gainedPerks > 1 ? "s":"")+"!");
-				//What is this one for? V	I not sure myself either so commented it out just in case
-				//if (player.level > 6) outputText("\n\nYou have gained one perk point!");
-				//else outputText("\n\nYou have gained two perk points!");
+				outputText("\n<b>You have reached maximum level and have no levels to restore.</b>");
+				doNext(playerMenu); 
+			return;
 			}
-			if (player.statPoints > 0) {
-				doNext(attributeMenu);
-			} else if (player.perkPoints > 0) {
-				doNext(perkBuyMenu);
-			} else {
-				doNext(playerMenu);
+		}
+		if (player.XP >= player.requiredXP()) {
+			if (flags[kFLAGS.LVL_UP_FAST] == 1){ // multi
+				levelUpFastMenu();
+			} else if (flags[kFLAGS.LVL_UP_FAST] == 2){ // instant
+				lUFSMM();
+				if (player.statPoints > 0) { doNext(attributeMenu); }
+				else if (player.perkPoints > 0) { doNext(perkBuyMenu); }
+				else { doNext(playerMenu); }
+			} else { // 1 at a time
+				clearOutput();
+				if (player.negativeLevel > 0) {
+					levelUp();
+					outputText("<b>You have restored " + (player.negativeLevel > 0 ? "one negative level leaving "+num2Text(player.negativeLevel)+" to go." : "the last negative level, regaining your full power!") + "</b>");					
+					doNext(playerMenu);
+					return;
+				} else {
+					levelUp();
+					outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
+					outputText("\n\nYou have " + num2Text(player.statPoints) + " attribute points and " + num2Text(player.perkPoints) + " perk point" + (player.perkPoints > 1 ? "s":"") + "!");
+					doNext(attributeMenu);
+				}
 			}
 		}
 		//Spend attribute points
@@ -1561,64 +1587,35 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
-
-	//Sub-menus for limited levelling.
-	public function lvlUpFastSubMenu():void {
+	public function levelUpFastMenu(leveled:Boolean=false):void {
 		spriteSelect(null);
-		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.");
-		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");
+		statScreenRefresh();
+		clearOutput();
+		outputText("\nFast leveling, click the button repeatedly to level up that many times. Press LvlMax to instantly spend all experience.");
+		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");		
+		if (leveled) {			
+			if (player.negativeLevel == 0) {
+				outputText("\n\n<b>You are now level " + num2Text(player.level) + "!</b>");
+				outputText("\n\nYou have " + num2Text(player.statPoints) + " attribute points and " + num2Text(player.perkPoints) + " perk point" + (player.perkPoints > 1 ? "s":"") + "!");
+			} else {
+				outputText("\n\n"+Num2Text(player.negativeLevel,100)+" negative level"+(player.negativeLevel > 1 ? "s" : "")+" remaining.");
+			}
+		}
 		menu();
 		addButton(0, "Lvl +1", lUFSMM, 1);
 		addButton(1, "Lvl +2", lUFSMM, 2);
 		addButton(2, "Lvl +5", lUFSMM, 5);
 		addButton(3, "Lvl +10", lUFSMM, 10);
-		addButton(4, "LvlMax", lUFSMM, 999);
+		addButton(4, "LvlMax", lUFSMM, CoC.instance.levelCap);
 		addButton(14, "Done", lUFSMAP);
 	}
-
-	public function lUFSMM(incmax:int = 999):void{
-		var lvlinc:int = 0;		//Level increment tracking
-		var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
-		var statLvl:int = player.statPoints;
-		clearOutput();
-		if (player.XP < player.requiredXP()){
-			outputText("Max level reached. Unable to increase further.\n\n");
+	public function lUFSMM(incmax:int = CoC.instance.levelCap, noxpcost:Boolean = false ):void {
+		if (player.negativeLevel > 0 && (player.XP >= player.requiredXP() || noxpcost)) outputText("\n<b>Recovered negative levels.</b>");
+		if (incmax == CoC.instance.levelCap) incmax += player.negativeLevel;
+		for (var i:int = 1; i <= incmax; i++) {
+			if ((player.XP >= player.requiredXP() || noxpcost) && (player.level < CoC.instance.levelCap || player.negativeLevel > 0)) levelUp(noxpcost);
 		}
-		else {
-			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
-				lvlinc++;
-				levelUp();
-			}
-			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
-			var perkRes:int = player.perkPoints - perkLvl;
-			var statRes:int = player.statPoints - statLvl;
-			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n");
-			statScreenRefresh();
-		}
-		lvlUpFastSubMenu();
-	}
-	
-	// Reduce XP, increase level, give points, recover HP
-	private function levelUp():void {
-		player.XP -= player.requiredXP();
-		player.level++;
-		var negativeLevel:int = player.negativeLevel;
-		if (negativeLevel > 0) {
-			player.recoverNegativeLevel(1);
-			return;
-		}
-		HPChange(player.maxHP(), false);
-		if (player.level <= 1) {
-			player.perkPoints += 6;
-			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 6;
-		}
-		if (player.level <= 9) {
-			player.perkPoints += 2;
-			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4)) * 2;
-		} else {
-			player.perkPoints++;
-			player.statPoints += (5 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 4));
-		}
+		if (flags[kFLAGS.LVL_UP_FAST] == 1 && !noxpcost) levelUpFastMenu(true);
 	}
 	public function lUFSMAP():void {
 		if (player.statPoints > 0) {

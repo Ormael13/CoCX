@@ -2162,9 +2162,9 @@ public static const UNKNOWN_FLAG_NUMBER_02153:int                               
 public static const UNKNOWN_FLAG_NUMBER_02154:int                             		= 2154;
 public static const UNKNOWN_FLAG_NUMBER_02155:int                            		= 2155;
 public static const UNKNOWN_FLAG_NUMBER_02156:int                                   = 2156;
-public static const UNKNOWN_FLAG_NUMBER_02157:int                                   = 2157;
-public static const UNKNOWN_FLAG_NUMBER_02158:int                                   = 2158;
-public static const UNKNOWN_FLAG_NUMBER_02159:int                                   = 2159;
+public static const NADIA_CURE_COOLDOWN:int                                   		= 2157;
+public static const NADIA_LVL_UP:int                                   				= 2158;
+public static const NADIA_FOLLOWER:int                                   			= 2159;
 public static const MET_BEHEMOTH:int                                                = 2160;
 public static const BEHEMOTH_ANAL_PITCH:int                                         = 2161;
 public static const BEHEMOTH_ANAL_CATCH:int                                         = 2162;
@@ -2382,12 +2382,12 @@ public static const JENIFFER_LVL_UP:int                             		        = 
 public static const JENIFFER_DEFEATS_COUNTER:int                                   	= 2374;	//Not Yet Used Flag
 public static const JENIFFER_02375:int                                   = 2375;			//Not Yet Used Flag
 public static const JENIFFER_02376:int                                   = 2376;			//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02377:int                                  		        = 2377; //Not Yet Used
-public static const DIANA_FOLLOWER:int     			                                = 2378;
-public static const DIANA_LVL_UP:int                      			                = 2379;
-public static const DIANA_CURE_COOLDOWN:int                                   		= 2380;
-public static const DIANA_SPELLS_CASTED:int                                   		= 2381;
-public static const UNKNOWN_FLAG_NUMBER_02385:int                                   = 2382;				//Not Yet Used Flag
+public static const UNKNOWN_FLAG_NUMBER_02377:int                                  		        = 2377; //Not Yet Used Flag
+public static const DIANA_FOLLOWER:int     			                                = 2378; //Not Yet Used Flag
+public static const DIANA_LVL_UP:int                      			                = 2379; //Not Yet Used Flag
+public static const DIANA_CURE_COOLDOWN:int                                   		= 2380; //Not Yet Used Flag
+public static const DIANA_SPELLS_CASTED:int                                   		= 2381; //Not Yet Used Flag
+public static const UNKNOWN_FLAG_NUMBER_02385:int                                   = 2382;	//Not Yet Used Flag
 public static const CAMILLA_AFFECTION:int                                  		    = 2383;	//Not Yet Used Flag
 public static const CAMILLA_FOLLOWER:int                            		        = 2384;	//Not Yet Used Flag
 public static const CAMILLA_LVL_UP:int                                   			= 2385;	//Not Yet Used Flag
@@ -2801,7 +2801,7 @@ public static const UNKNOWN_FLAG_NUMBER_02792:int                               
 public static const UNKNOWN_FLAG_NUMBER_02793:int                                   = 2793;
 public static const UNKNOWN_FLAG_NUMBER_02794:int                                   = 2794;
 public static const UNKNOWN_FLAG_NUMBER_02795:int                                   = 2795;
-public static const UNKNOWN_FLAG_NUMBER_02796:int                                   = 2796;
+public static const WERESHARKS_EXTRAS:int                                   		= 2796;
 public static const WEREFOX_EXTRAS:int                                   			= 2797;
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
@@ -3012,8 +3012,8 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	WATERSPORTS_ENABLED, LVL_UP_FAST, MUTATIONS_SPOILERS, NEWPERKSDISPLAY, INVT_MGMT_TYPE, CHARVIEWER_ENABLED,
 	CHARVIEW_STYLE, CHARVIEW_ARMOR_HIDDEN, USE_OLD_FONT, BACKGROUND_STYLE, IMAGEPACK_OFF, SPRITE_STYLE, USE_12_HOURS,
 	WATERSPORTS_ENABLED, USE_METRICS, AUTO_LEVEL, STRENGTH_SCALING, SPEED_SCALING, WISDOM_SCALING, INTELLIGENCE_SCALING,
-	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS,
-		BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
+	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, BOSS_CHAMPION_ELITE_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS,
+	BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
 ];
 	}
 }

@@ -10,7 +10,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class WeresharkRace extends Race {
-    public static const SharkScaleColors:/*String*/Array = ["rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"];
+    public static const WeresharkScaleColors:/*String*/Array = ["rough gray","dark gray","iridescent gray","ashen grayish-blue","gray"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -51,11 +51,10 @@ public class WeresharkRace extends Race {
 				.tongueType(Tongue.HUMAN, +1)
 				.rearType(RearBody.SHARK_FIN, +1)
 				.armType(Arms.SHARK, +1)
-				//.legType(LowerBody.SHARK, +1)
-				//.tailType(Tail.SHARK, +1)
-				.hairTypeAndColor1(Hair.NORMAL, "silver", +1)
+				.legType(LowerBody.WERESHARK, +3)
+				.hairTypeAndColor1(Hair.NORMAL, "silver", +2)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
-				.skinColor1(ANY(SharkScaleColors), +1)
+				.scaleColor1(ANY(WeresharkScaleColors), +1)
 				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
 				.noWings(+4)
 				.corruption(AT_LEAST(20), +1)

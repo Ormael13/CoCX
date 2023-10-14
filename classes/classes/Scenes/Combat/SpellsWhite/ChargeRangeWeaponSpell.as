@@ -58,6 +58,7 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Rifle") ab12r *= 2;
 		if (player.weaponRangePerk == "Throwing") ab12r *= 2.5;
 		if (player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") ab12r *= 3;
+		if (player.weaponRangePerk == "Dual 2H Firearm") ab12r *= 5;
 		return ab12r;
 	}
 	private function weaponSizeManaCost():Number {
@@ -65,6 +66,7 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Rifle") ba21r *= 2;
 		if (player.weaponRangePerk == "Throwing") ba21r *= 2.5;
 		if (player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") ba21r *= 3;
+		if (player.weaponRangePerk == "Dual 2H Firearm") ba21r *= 5;
 		return ba21r;
 	}
 	

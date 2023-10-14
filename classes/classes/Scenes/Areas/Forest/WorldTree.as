@@ -9,6 +9,7 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
@@ -237,6 +238,12 @@ public class WorldTree extends BaseContent
 			{
 				outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
 				player.hairColor = "green";
+			}
+			//horns
+			if (player.horns.type != Horns.OAK && (player.hairType == Hair.LEAF || player.hairType == Hair.GRASS || player.hairType == Hair.ANEMONE) && changes < changeLimit) {
+				outputText("\n\n");
+				CoC.instance.transformations.HornsOak.applyEffect();
+				changes++;
 			}
 			//Vines/tentacles arms
 			if (player.cor >= 66) {

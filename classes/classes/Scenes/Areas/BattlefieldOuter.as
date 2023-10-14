@@ -67,6 +67,12 @@ public class BattlefieldOuter extends BaseContent
 			},
 			call:SceneLib.iridesianFollower.firstMeetingIridesian
 		},*/ {
+			name: "metal",
+			label : "Scrap",
+			kind  : 'item',
+			chance: 0.4,
+			call: findMetalScrapOuter
+		}, {
 			name: "tyrantia",
 			label : "Tyrantia",
 			kind  : 'npc',
@@ -116,27 +122,27 @@ public class BattlefieldOuter extends BaseContent
 			chance: battlefieldOuterChance,
 			call: SceneLib.etnaScene.repeatYandereEnc
 		},  {
-			name: "diana",
-			label : "Diana",
+			name: "nadia",
+			label : "Nadia",
 			kind  : 'npc',
 			unique: true,
 			night : false,
 			when: function():Boolean {
-				return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
+				return flags[kFLAGS.NADIA_FOLLOWER] < 6 && !(flags[kFLAGS.NADIA_FOLLOWER] != 3 && flags[kFLAGS.NADIA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.NadiaOff);
 			},
 			chance: battlefieldOuterChance,
-			call: SceneLib.dianaScene.repeatEnc
+			call: SceneLib.nadiaScene.repeatEnc
 		}, {
-			name: "dianaName",
-			label : "Diana",
+			name: "nadiaName",
+			label : "Nadia",
 			kind  : 'npc',
 			unique: true,
 			night : false,
 			when: function():Boolean {
-				return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+				return ((flags[kFLAGS.NADIA_FOLLOWER] < 3 || flags[kFLAGS.NADIA_FOLLOWER] == 5) && flags[kFLAGS.NADIA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.NadiaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 			},
 			chance: battlefieldOuterChance,
-			call: SceneLib.dianaScene.postNameEnc
+			call: SceneLib.nadiaScene.postNameEnc
 		}, {
 			name: "ted",
 			label : "Dragon-Boy",
@@ -239,6 +245,16 @@ public class BattlefieldOuter extends BaseContent
 			outputText("Sadly, there's no way you could bring this back to camp by yourself without dismantling it. It's far too clunky, and without care, you could easily cause irreparable damage. You leave it be for the time being, perhaps there'll be an opportunity in the future.");
 			doNext(playerMenu);
 		}
+	}
+	
+	private function findMetalScrapOuter():void {
+		clearOutput();
+		var mpa:Number = 3 + rand(3);
+		outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plates draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
+		outputText("<b>You found "+mpa+" metal plates.</b>");
+		flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += mpa;
+		outputText("<b>(Metal plates: "+flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]+"/200 total)</b>");//"+SceneLib.campUpgrades.checkMaterialsCapStones()+"
+		endEncounter();
 	}
 
 	/*
