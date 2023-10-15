@@ -1418,4 +1418,3 @@ doNext(camp.returnToCamp);
 }*/
 }
 }
-
