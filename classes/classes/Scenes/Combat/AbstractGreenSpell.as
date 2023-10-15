@@ -19,7 +19,7 @@ public class AbstractGreenSpell extends AbstractSpell {
 	}
 	
 	override public function manaCost():Number {
-		return spellCostWhite(baseManaCost);
+		return spellCostGreen(baseManaCost);
 	}
 	
 	override protected function usabilityCheck():String {

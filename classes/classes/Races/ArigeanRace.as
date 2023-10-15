@@ -9,7 +9,7 @@ import classes.GeneticMemories.RaceMem;
 import classes.Race;
 import classes.VaginaClass;
 
-public class AbyssalRace extends Race {
+public class ArigeanRace extends Race {
 	//public static const AbyssalSharkScaleColors:/*String*/Array = ["rough gray","dark gray","iridescent gray","ashen","gray","black"];
 	//public static const AbyssalSharkHairColors:/*String*/Array = ["silver","purplish black","dark purple","iridescent"];
 	public static const RaceBody:/*String*/Array = [
@@ -37,8 +37,8 @@ public class AbyssalRace extends Race {
         /*Vagina*/		"Human",
         /*Perks*/		"Human"];
 		
-	public function AbyssalRace(id:int) {
-		super("Abyssal", id, []);//RaceBody);
+	public function ArigeanRace(id:int) {
+		super("Arigean", id, []);//RaceBody);
 		//disabled = true;
 	}
 	
@@ -51,8 +51,8 @@ public class AbyssalRace extends Race {
 				.faceType(Face.ABYSSAL_SHARK, +2)
 				.hairType(Hair.NORMAL, +1)
 				.tongueType(Tongue.HUMAN, +1)
-				.tailType(Tail.ABYSSAL_SHARK, +2)
-				.armType(Arms.ABYSSAL_SHARK, +2)*/
+				.tailType(Tail.ABYSSAL_SHARK, +2)*/
+				.armType(Arms.ARMORED_FOREARMS, +1)
 				.legType(LowerBody.ARMORED_LEGS, +1);
 				/*.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
 				.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
@@ -69,7 +69,7 @@ public class AbyssalRace extends Race {
 		
 		//addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		
-		buildTier(16, "abyssal")
+		buildTier(16, "arigean")
                 //.requirePerk(PerkLib.DantianPhylactery)
 				.buffs({
 					"str.mult": +1.00,

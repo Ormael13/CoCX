@@ -195,6 +195,10 @@ public class Combat extends BaseContent {
         return magic.spellCostBloodImpl(mod);
     }
 
+    public function spellCostGreen(mod:Number):Number {
+        return magic.spellCostWhiteImpl(mod);
+    }
+
     public function healCost(mod:Number):Number {
         return magic.healCostImpl(mod);
     }
@@ -341,6 +345,10 @@ public class Combat extends BaseContent {
 
     public function spellGenericCooldown():Number {
         return magic.spellGenericCooldownImpl();
+    }
+
+    public function spellModGreen():Number {
+        return magic.spellModGreenImpl();
     }
 
     public function healMod():Number {
@@ -6193,7 +6201,7 @@ public class Combat extends BaseContent {
                         doMagicDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 					}
-                    else if (player.weapon == weapons.PHALLUS) {
+                    else if (player.weapon == weapons.PHALLUS || player.weapon == weapons.PHALUSS) {
                         if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) {
 							monster.teased(Math.round(monster.lustVuln * damage * 0.05));
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -8764,6 +8772,7 @@ public class Combat extends BaseContent {
     public static const USEMANA_MAGIC_HEAL:int = 9;
     public static const USEMANA_WHITE_HEAL:int = 10;
     public static const USEMANA_BLACK_HEAL:int = 11;
+    public static const USEMANA_GREEN:int = 12;
 
     public function finalSpellCost(base:Number, type:int = USEMANA_NORMAL):Number {
         switch (type) {
@@ -8785,6 +8794,8 @@ public class Combat extends BaseContent {
                 return healCostWhite(base);
             case USEMANA_BLACK_HEAL:
                 return healCostBlack(base);
+            case USEMANA_GREEN:
+                return spellCostGreen(base);
             default: // including normal
                 return base;
         }

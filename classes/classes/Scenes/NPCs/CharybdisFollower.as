@@ -116,7 +116,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	public function charyFirstSpeak():void {
 		clearOutput();
 		outputText("You raise your hands in mock surrender, cracking a joke about the music man and eyeing those knives of his. That gets a guffaw from the stocky octopus, and he lowers his knives. <i>\"Okay, fair enough.\"</i> He puts the knives away, looking back at you. <i>\"So, if you’re not with those horned-y orgy bastards, who are ya, and what’re you doing on the beach?\"</i>\n\n");
-		outputText("You explain that you’re the champion of Ingnam, from another world, and your adventures so far. He listens intently, and when you’re done, he nods sagely. <i>\"You’re a brave soul, [Name]. I only fight when I have to. Seeking them out like that?\"</i> He smiles, baring his teeth. <i>\"Almost makes me feel like getting my blades wet again\"</i>. He blinks, turning back to you. <i>\"I’m Charybdis, but my friends call me Chery\"</i>.\n\n");
+		outputText("You explain that you’re the champion of Ingnam, from another world, and your adventures so far. He listens intently, and when you’re done, he nods sagely. <i>\"You’re a brave soul, [name]. I only fight when I have to. Seeking them out like that?\"</i> He smiles, baring his teeth. <i>\"Almost makes me feel like getting my blades wet again\"</i>. He blinks, turning back to you. <i>\"I’m Charybdis, but my friends call me Chery\"</i>.\n\n");
 		outputText("You make a little small talk, but you excuse yourself soon, heading back to camp. Charybdis seems a little put out, but waves you off, wishing you well as you head back to camp.\n\n"); 
 		endEncounter();
 	}
@@ -131,7 +131,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	
 	public function charyBeachMeetings():void {
 		clearOutput();
-		if (flags[kFLAGS.CEANI_FOLLOWER] < 1 && rand(4) > 0) {
+		/*if (flags[kFLAGS.CEANI_FOLLOWER] < 1 && rand(4) > 0) {
 			outputText("You find yourself wandering to Charybis’s cove. You hear a female voice saying muffled words of encouragement, and the familiar Whizz *thunk* of target practice. You turn the corner to see Charybdis throwing his multiple knives, two or three at a time, while Ceani watches, her mouth full of fish.\n\n");
 			outputText("<i>\"Watch your stance, you’re too far forward\",</i> she says, and then sees you. <i>\"Oh hey, it’s [name]. I’d ask if you want to join us, but that’s Chary’s call.\"</i>\n\n");
 			outputText("<i>\"The more the merrier, I say!\"</i> Charybdis cries, taking a break for a moment. <i>\"Don’t worry, I’ll pay ya extra.\"</i>\n\n");
@@ -140,7 +140,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			//addButton(1, "Stay", charyRangedTraining);
 			addButton(3, "Leave", explorer.done);
 		}
-		else charyBeachMeetings2();
+		else */charyBeachMeetings2();
 	}
 	public function charyBeachMeetings2():void {
 		if (rand(2) == 0) {
@@ -185,7 +185,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		if (CharyAffectionMeter >= 20 && CharyAffectionMeter < 40) outputText(" <i>\"Well...I had a lot of sisters growing up, so...Had to deal with a lot of that\".</i> He rolls his shoulders. <i>\"Enough of the past, my friend. How about a song to liven the day, eh?\"</i>\n\n");
 		if (CharyAffectionMeter >= 40) {
 			outputText("<i>\"...Okay, I guess I can tell ya.\"</i> He looks down at his lute. <i>\"My mom and sisters wanted to trade me to another tribe. They decided that since they had too many people, and another male, they’d lump me in with some girls I’d never met, toss me out of the cave, and that I’d shack up with them, give them tons of babies, and never leave the cave.\"</i> You look at him oddly, and he throws his hands up into the air.\n\n");
-			outputText("<i>\"Well, that’s what happens, when the tribe’s run by women who need their fix, and…\"</i> He stops, looking at you. <i>\""+(player.gender == 2?"I didn’t mean you. You’re cool, [player]. I just…":"")+"Not that it matters anymore, eh?\"</i>\n\n");
+			outputText("<i>\"Well, that’s what happens, when the tribe’s run by women who need their fix, and…\"</i> He stops, looking at you. <i>\""+(player.gender == 2?"I didn’t mean you. You’re cool, [name]. I just…":"")+"Not that it matters anymore, eh?\"</i>\n\n");
 			outputText("You tell him that he doesn’t need to continue if he doesn’t want to, and that you’re not like them. He smiles, putting a hand on your shoulder. \"No, you certainly aren’t.\"\n\n");
 		}
 		charyAffection(5);
@@ -220,7 +220,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		outputText("You tell your Scylla friend that you’d enjoy taking a break for a bit and spending some time with him. At this, Charybdis’s eyes light up, and he gives you a winning grin, his tentacle-legs moving slightly more than before. <i>\"Alright then!\"</i> He rubs his hands together. <i>\"What did you have in mind?\"</i>\n\n");
 		menu();
 		addButton(1, "JamSesh", charyJamOut);
-		//if (CharyAffectionMeter >= 30) addButton(2, "Instruments", charyInstruments);
+		addButtonIfTrue(2, "Instruments", charyInstruments, "Req. 30%+ affection", CharyAffectionMeter >= 30);
 		//if (CharyAffectionMeter >= 50) addButton(3, "Vocals", CharyVocalTraining);
 		//if (CharyAffectionMeter >= 60) addButton(4, "Sail", CharySail);
 		addButton(14, "Back", charyBeachMeetings2);
@@ -235,18 +235,42 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	public function charyJamOut():void {
 		clearOutput();
 		outputText("Charybdis leans back on his box-drum-seat thing, offering you one of a plethora of instruments. Picking a shell-shaker, you join Charybdis for a few songs. The merry Scylla keeps you going, and an hour passes before you know it. You excuse yourself, somewhat reluctantly, but before you can leave, he offers a vial to you, filled with a black fluid. <i>\"Thanks for the company [name],\"</i> he says simply. <i>\"If you ever want to find me in the Ocean, or grow a few extra limbs of your own, drink a few of these.\"</i> He smiles. <i>\"Or don’t. You’re fine either way.\"</i>\n\n"); 
+		charyAffection(5);
+		CharyJammed += 1;
+		endEncounter(60);
+	}
+
+	public function charyInstruments():void {
+		clearOutput();
+		outputText("You ask about his instruments, and he grins his crooked grin. He walks you through several stringed instruments, a few percussion ones, and a brass tube with a funnel at the end. <i>\"I’d be happy to teach ya a few tricks, if ya want.\"</i>\n\n");
+		menu();
+		addButton(1, "Drums", charyDrums).hint("Percussion Training (train str+)");
+		addButton(2, "Guitar", charyGuitar).hint("String Training (train spe+)");
+		addButton(3, "Trumpet", charyTrumpet).hint(" (train tou+)");
+	}
+	public function charyDrums():void {
+		outputText("<i>\"Oh, the drums? Good choice. It’s a great workout for your arms…But if you really know what you’re doing, it’s your wrists that gain the most.\"</i>\n\n");
+		outputText("Charybdis spends an hour with you, going through the minutia of drumming. Despite your experience in slaying, you come away with your wrists burning from the workout. You feel like you could put a little more force into a blow without breaking your wrists.\n\n");
+		player.trainStat("str", 5, player.trainStatCap("str",100));
+		endEncounter(60);
+	}
+	public function charyGuitar():void {
+		outputText("<i>\"Ah, there’s nothing in the world quite like a well-tuned violin, or the thrum of a cello.” Charybdis shakes himself. “Let’s start with something more…natural.\"</i>\n\n");
+		outputText("and a brass tube with a funnel at the end. <i>\"if ya want.\"</i>\n\n");
+		if (player.hasClaws()) outputText("<i>\"No need for a guitar pick for you.\"</i> He chuckles. <i>\"You’ve got a nice set of them already.\"</i>\n\n");
+		outputText("Charybdis pulls out a guitar, old and worn, and gently places it into your hands. <i>\"I’ve had that old thing since before I left the cave.\"</i> He gives you a smile. <i>\"Let’s see what we can do.\"</i>\n\n");
+		outputText("For an hour, he teaches you the basics of the guitar, from chord progressions to basic runs. When you excuse yourself, you pass the guitar back, thanking him for his time.\n\n");
+		outputText("<i>\"I should say the same for you,\"</i> he fires back cheerfully. <i>\"It’s nice, knowing that a busy G"+player.mf("uy","irl")+" like you is still willing to waste a bit of time with me.\"</i>\n\n");
+		player.trainStat("spe", 5, player.trainStatCap("spe",100));
+		endEncounter(60);
+	}
+	public function charyTrumpet():void {
+		outputText("<i>\"Ah, the brass section. Not for the faint of heart, weak of lips, or short on air.\"</i> He laughs at his bad joke. <i>\"Not really something we used, under the sea. Passing water through these things doesn’t really work.\"</i> He shrugs. <i>\"I’m nowhere near as good with these as the others, but sure, we can mess around.\"</i> He produces two trumpets from his boat, and the two of you spend an hour or so just goofing around, making goofy sound effects and little noises with the trumpets.\n\n");
+		outputText("You excuse yourself, and Charybdis looks almost disappointed. <i>\"I get it.\"</i> He says. <i>\"You’ve got your own life to live, no time to waste with the likes of me…\"</i> He then sticks his tongue out, blowing a massive raspberry through the trumpet. <i>\"Just kiddin’,\"</i> he says. <i>\"Give ‘em hell, [player].\"</i>\n\n");
+		player.trainStat("tou", 5, player.trainStatCap("tou",100));
 		endEncounter(60);
 	}
 /*
-public function CharyInstruments():void {
-		clearOutput();
-		outputText("You ask about his instruments, and he grins his crooked grin. He walks you through several stringed instruments, a few percussion ones, and a brass tube with a funnel at the end. \"I’d be happy to teach ya a few tricks, if ya want\".\n\n");
-menu();
-addButton(1, "Drums", CharyDrums);
-addButton(2, "Guitar", CharyGuitar);
-addButton(3, "Trumpet", CharyTrumpet);
-}
-
 public function CharyVocalTraining():void {
 		clearOutput();
 		outputText("Charybdis smiles as you raise the subject. <i>\"The voice is a wonderful thing, so vibrant, and changing. Every voice is unique, and…\"</i> He trails off, a tinge of red coming to his cheeks. <i>\"Sorry, you don’t want me to blather on, I’d bore ya.\"</i> You fire back that no, you’d be interested in learning. Hearing this, his smile comes back, and he hugs you with three tendrils, quickly backing off.\n\n");

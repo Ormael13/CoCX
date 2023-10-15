@@ -854,7 +854,7 @@ public class LowerBody extends SaveableBodyPart {
 
 	public static const ARMORED_LEGS:int = 81;
 	EnumValue.add(Types, ARMORED_LEGS, "ARMORED_LEGS", {
-		name: "abyssal",
+		name: "arigean",
 		appearanceDesc: "Your legs are human in shape and form but are covered in a protective natural, black metal armor half way up your thighs, a series of complex plates seem to rest at your joints allowing for movement with black, fragile skin underneath."
 	});
 

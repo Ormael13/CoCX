@@ -145,9 +145,7 @@ public final class WeaponLib extends ItemConstants
 		}) as Weapon;
 		public const KAMA   :Weapon = new Weapon("Kama","Kama", "kama", "a kama", "slash", 4,320, "The kama is a simple and elegant hand scythe weapon. Preferred weapon for the ninja fans.", "Small, Bleed10", "Scythe");
 		public const KAMAWHIP:Weapon = new Weapon("KamaWhip","KamaWhip","kama whip","a kama whip","whip-like slash",3,240,"A small kama-like weapon with two scythe blades that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping, Bleed10", "Scythe, Thrown").withBuffs({'teasedmg': 30}) as Weapon;
-		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun50", WT_GAUNTLET).withBuffs({
-			'psoulskillpower': +1.5
-		}) as Weapon;
+		public const KARMTOU:KarmicTouch = new KarmicTouch();
 		public const KATANA :DynamicWeapon = findCommonDynamicWeapon("katana");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large", "Axe");
 		public const L__AXE :LargeAxe = new LargeAxe();
@@ -176,6 +174,7 @@ public final class WeaponLib extends ItemConstants
 		public const NPHBLDE:NephilimBlade = new NephilimBlade();
 		public const OTETSU :OniTetsubo = new OniTetsubo();
 		public const PHALLUS:ThePhalluspear = new ThePhalluspear();
+		public const PHALUSS:ThePhalluspears = new ThePhalluspears();
 		//public const RCHEEP:Weapon = new ReaperCheep(); TODO: finish!
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",2,80,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.","", "Mace/Hammer");
 		public const POCDEST:PurifiedOniChieftainDestroyer = new PurifiedOniChieftainDestroyer();
@@ -255,9 +254,7 @@ public final class WeaponLib extends ItemConstants
 				})
 				.withPerk(PerkLib.MageWarden) as Weapon;
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
-		public const YAMARG :Weapon = new Weapon("YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 1600, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", "", WT_GAUNTLET).withBuffs({
-			'psoulskillpower': +1.5
-		}) as Weapon;
+		public const YAMARG :YamaRajaGrasp = new YamaRajaGrasp();
 		public const ZWNDER :Zweihander = new Zweihander();
 		//Spellcasting weapon
 		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "", "Sword, StaffPart").withBuff('spellpower', +0.40) as Weapon;

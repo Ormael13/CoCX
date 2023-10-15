@@ -202,6 +202,19 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
+	internal function spellCostGreenImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_white();
+		//Addiditive mods
+		if (spellModGreenImpl() > 1) costPercent += Math.round(spellModGreenImpl() - 1) * 10;
+		//Limiting it and multiplicative mods
+		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
+		mod *= costPercent / 100;
+		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
+		else if (mod < 2) mod = 2;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
     internal function modChange_all():Number {
 		var mod:Number = player.spellpowerStat.value - 1; // spellpower stat starts with 1
         if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -386,6 +399,14 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
 		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
 		if (player.weapon == weapons.DEPRAVA) mod *= 2.5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function spellModGreenImpl():Number {
+		var mod:Number = 1;
+		if (spellModWhiteImpl() > 1) mod += (spellModWhiteImpl() - 1);
+		if (player.hasPerk(PerkLib.OneWiththeForest) && player.perkv2(PerkLib.OneWiththeForest) > 0) mod += (0.05 * player.perkv2(PerkLib.OneWiththeForest));
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}

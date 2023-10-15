@@ -6848,6 +6848,8 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.showStatUp("inte");
 				CoC.instance.mainView.statsView.showStatUp("wis");
 				CoC.instance.mainView.statsView.showStatUp("lib");
+				setPerkValue(PerkLib.OneWiththeForest, 1, ElfSistersBonus);
+				if (ElfSistersBonus >= 10) setPerkValue(PerkLib.OneWiththeForest, 2, Math.round((ElfSistersBonus-5)*0.1));
 			}
 		}
 

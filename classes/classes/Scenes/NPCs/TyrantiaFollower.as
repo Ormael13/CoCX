@@ -1385,7 +1385,7 @@ public function itemImproveMenuCorrupt():void {
 			var from:ItemType = improvableItems[i][0];
 			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need "+from.longName+" as a base to create this item")
 			.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
-			.disableIf(player.gems < 20000,"You need at least 10 000 gems in order to create this item");
+			.disableIf(player.gems < 20000,"You need at least 20 000 gems in order to create this item");
 		}
 	}
 	submenu(selectMenu, TyrantiaAtCamp);
@@ -1418,3 +1418,4 @@ doNext(camp.returnToCamp);
 }*/
 }
 }
+

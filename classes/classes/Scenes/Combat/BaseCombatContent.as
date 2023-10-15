@@ -216,6 +216,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellCostGrey(mod:Number):Number {
 		return combat.magic.spellCostGreyImpl(mod);
 	}
+	public function spellCostGreen(mod:Number):Number {
+		return combat.magic.spellCostGreenImpl(mod);
+	}
 	protected function healCost(mod:Number):Number {
 		return combat.magic.healCostImpl(mod);
 	}
@@ -242,6 +245,9 @@ public class BaseCombatContent extends BaseContent {
 	}
 	protected function spellModBlood():Number {
 		return combat.magic.spellModBloodImpl();
+	}
+	protected function spellModGreen():Number {
+		return combat.magic.spellModGreenImpl();
 	}
 	protected function spellBlackCooldown():Number {
 		return combat.magic.spellBlackCooldownImpl();

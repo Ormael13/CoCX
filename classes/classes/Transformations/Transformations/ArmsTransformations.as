@@ -1258,6 +1258,23 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.ABYSSAL_SHARK;
 			}
 	);
+
+	public const ArmsArigean: Transformation = new SimpleTransformation("Arigean Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.arms.type = Arms.ARMORED_FOREARMS;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ARIGEAN));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.ARMORED_FOREARMS;
+			}
+	);
 	/*
   */
 }

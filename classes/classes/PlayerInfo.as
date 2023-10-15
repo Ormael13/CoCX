@@ -447,6 +447,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Grey Spells Cooldown (tier 2):</b> " + combat.spellGreyTier2Cooldown() + " turns\n";
 		combatStats += "<b>Blood Spells/Soulskills Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlood()) + "%\n";
 		combatStats += "<b>Blood Spells/Soulskills Cost:</b> " + combat.spellCostBlood(100) + "%\n";
+		combatStats += "<b>Green Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModGreen()) + "%\n";
+		combatStats += "<b>Green Spells Cost:</b> " + combat.spellCostGreen(100) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
 		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";

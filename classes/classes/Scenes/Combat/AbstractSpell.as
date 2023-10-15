@@ -178,7 +178,7 @@ public class AbstractSpell extends CombatAbility {
 			case CAT_SPELL_NECRO:
 				return spellModBlack();
 			case CAT_SPELL_GREEN:
-				return spellModWhite();
+				return spellModGreen();
 			default:
 				return spellMod();
 		}
