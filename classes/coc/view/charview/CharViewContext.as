@@ -114,7 +114,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpear: player.isSpearTypeWeapon(), //until polearm have their own sprite they share sprite with spears
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
-					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS,
+					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS || player.weapon == game.weapons.PHALUSS,
 
 					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.DKATANA,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
