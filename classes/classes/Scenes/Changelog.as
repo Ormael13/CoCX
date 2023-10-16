@@ -118,6 +118,7 @@ public class Changelog extends BaseContent
 			outputText("-In Ebon Labirinth after reaching at least 3rd boss room and clearing it succesfully enable option to meet some potentialy familiar cat-morph when entering dungeon in future runs. It's very nice cat giving option to skip few rooms in exploration and starting from much deeper room count. Ohh and it all for small price to face one of skipped section bosses.\n");
 			outputText("-Minor word fix to harpy chick birthing scenes and adding a tab space, Centaur paladin armor now visible in viewer. (Liadri)\n");
 			outputText("-Leveling up and Clones code changes. (Xetaxheb)\n");
+			outputText("-Use const values instead of magic numbers (jfmherokiller)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -125,7 +126,6 @@ public class Changelog extends BaseContent
 			outputText("-Since Liadri showed concern over Celess been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
 			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
-			outputText("-Use const values instead of magic numbers (jfmherokiller)\n");
 			outputText("-Sprite implementations: all by me this time (but mostly were made by copying and altering existing sprites); loincloths, most loincloths should have a sprite now. (aside from the dragonscale one, that one wasn't turning out very good, I'll come back to it later); more shield variants, shields should now show sprites reflecting their size either by description or type ");
 			outputText("(small,normal,large,massive) Aether Sin now uses the small shield sprite while the twins are in dagger and shield form; offhand corrupt scythe, can now have a certain NG+ hardcore boss weapon show in its full glory now. Offhand sprite for dual phalluspear added. (Lord Shadeogorath)\n");
 			outputText("-Fixes: G-cup sprites not showing if the player is a werewolf/fox in human form (Lord Shadeogorath)\n");
@@ -142,7 +142,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Canadian Snas): The Phalluspears - can be gained by combining 2x The Phalluspear weapon. Cost 2600 gems. Base atk is 40. It's dual large sized weapon belonging to spear type. Can toggle between dealing 25% and 100% as lust dmg.\n");
 			outputText("-One with the forest perk will have now new effect: +5% green spellpower for each 10 converted sisters.\n");
 			outputText("-Added Green spellpower and costs tracker on Stats.\n");
-			outputText("-\n");
+			outputText("-UI remake. (jfmherokiller)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

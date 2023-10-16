@@ -33,7 +33,6 @@ public class Face extends SaveableBodyPart {
 		name: "horse",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
-
 			if (!creature.hasCoat()) {
 				desc += "Your face is equine in shape and structure. The odd visage is hairless and covered with [skin base]";
 			} else if (creature.hasFullCoatOfType(Skin.FUR)) {
@@ -41,7 +40,6 @@ public class Face extends SaveableBodyPart {
 			} else {
 				desc += "You have the face and head structure of a horse, overlaid with glittering [skin coat].";
 			}
-
 			return desc;
 		},
 		hasMuzzle: true
@@ -51,7 +49,6 @@ public class Face extends SaveableBodyPart {
 		name: "dog",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
-
 			if (!creature.hasCoat()) {
 				desc += "You have a dog-like face, complete with a wet nose. The odd visage is hairless and covered with [skin base].";
 			} else if (creature.hasFullCoatOfType(Skin.FUR)) {
@@ -59,7 +56,6 @@ public class Face extends SaveableBodyPart {
 			} else {
 				desc += "You have the facial structure of a dog, wet nose and all, but overlaid with glittering patches of [skin coat]";
 			}
-
 			return desc;
 		},
 		bite: true,
@@ -70,7 +66,6 @@ public class Face extends SaveableBodyPart {
 		name: "cow",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
-
 			if (!creature.hasCoat()) {
 				desc += "You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose. Despite your lack of fur elsewhere, your visage does have a short layer of [haircolor] fuzz.";
 			} else if (creature.hasFullCoatOfType(Skin.FUR)) {
@@ -80,7 +75,6 @@ public class Face extends SaveableBodyPart {
 			} else {
 				desc += "Your face resembles a minotaur's, though strangely it is covered small patches of shimmering [skin coat], right up to the flat cow-like nose that protrudes from your face.";
 			}
-
 			return desc;
 		}
 	});
@@ -103,7 +97,6 @@ public class Face extends SaveableBodyPart {
 		name: "cat",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
-
 			if (!creature.hasCoat()) {
 				desc += "You have a cat-like face, complete with a cute, moist nose and whiskers. The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face.";
 			} else if (creature.hasFullCoatOfType(Skin.FUR)) {
@@ -684,6 +677,12 @@ public class Face extends SaveableBodyPart {
 		name: "abyss shark",
 		appearanceDesc: "Your face is of a hammer-head shark in both shape and structure. A razor-sharp set of retractable teeth fill your large mouth, giving your visage an angular silhouette.",
 		bite: true
+	});
+	public static const ARIGEAN: int = 63;
+	EnumValue.add(Types, ARIGEAN, "ARIGEAN", {
+		name: "arigean",
+		appearanceDesc: "Your face is human in shape and structure except for the insides of your mouth which seem to be a light blue instead of the traditional pink, most likely caused by your blue blood.",
+		humanShaped: true
 	});
 
 	public function Face(creature:Creature) {

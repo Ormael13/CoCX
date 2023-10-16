@@ -47,9 +47,9 @@ public class ArigeanRace extends Race {
 		addScores()
 				/*.gillType(Gills.FISH, +1)
 				.earType(Ears.SHARK, +1)
-				.eyeType(Eyes.DEVIL, +2)
-				.faceType(Face.ABYSSAL_SHARK, +2)
-				.hairType(Hair.NORMAL, +1)
+				.eyeType(Eyes.DEVIL, +2)*/
+				.faceType(Face.ARIGEAN, +1)
+				/*.hairType(Hair.NORMAL, +1)
 				.tongueType(Tongue.HUMAN, +1)
 				.tailType(Tail.ABYSSAL_SHARK, +2)*/
 				.armType(Arms.ARMORED_FOREARMS, +1)
