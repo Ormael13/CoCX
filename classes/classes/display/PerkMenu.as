@@ -999,12 +999,14 @@ public class PerkMenu extends BaseContent {
 			text1 = UIUtils.newTextField({
 				defaultTextFormat: mainView.mainText.defaultTextFormat,
 				wordWrap: true,
-				autoSize: TextFieldAutoSize.LEFT
+				autoSize: TextFieldAutoSize.LEFT,
+				mouseEnabled: false
 			});
 			text2 = UIUtils.newTextField({
 				defaultTextFormat: mainView.mainText.defaultTextFormat,
 				wordWrap: true,
-				autoSize: TextFieldAutoSize.LEFT
+				autoSize: TextFieldAutoSize.LEFT,
+				mouseEnabled: false
 			});
 			blocksCache[row] = [btn,text1,text2];
 		}
@@ -1226,7 +1228,7 @@ public class PerkMenu extends BaseContent {
 			});
 			contentBlock.addElement(perkgrid);
 		}
-		contentBlock.width = MainView.TEXTZONE_W;
+		contentBlock.width = MainView.TEXTZONE_W - MainView.VSCROLLBAR_W;
 		
 		flushOutputTextToGUI();
 		mainView.setCustomElement(contentBlock,true,false, true);

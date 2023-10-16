@@ -13,14 +13,17 @@
 
 package coc.view {
 import classes.CoC;
+import classes.CoC_Settings;
 import classes.EngineCore;
 
-import fl.containers.ScrollPane;
-import fl.controls.ComboBox;
-import fl.controls.ScrollPolicy;
-import fl.controls.UIScrollBar;
-import fl.data.DataProvider;
 
+import com.bit101.components.ComboBox;
+import com.bit101.components.ScrollBar;
+import com.bit101.components.TextFieldVScroll;
+import com.bit101.components.VScrollBar;
+import com.bit101.components.ScrollPane;
+
+import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
@@ -151,7 +154,7 @@ public class MainView extends Block {
 	
 	// Misc properties
 	internal static const TOPROW_NUMBTNS:Number   = 6;
-	internal static const VSCROLLBAR_W:Number     = 15;
+	public static const VSCROLLBAR_W:Number     = ScrollBar.VWIDTH;
 	internal static const BOTTOM_COLS:Number      = 5;
 	internal static const BOTTOM_ROWS:Number      = 3;
 	internal static const BOTTOM_BUTTON_COUNT:int = BOTTOM_COLS * BOTTOM_ROWS;
@@ -252,7 +255,7 @@ public class MainView extends Block {
 	public var levelButton:CoCButton;
 	public var perksButton:CoCButton;
 	public var appearanceButton:CoCButton;
-	public var scrollBar:UIScrollBar;
+	public var scrollBar:TextFieldVScroll;
 
 	protected var callbacks:Object = {};
 	protected var options:Object;
@@ -349,7 +352,7 @@ public class MainView extends Block {
 		mainText.addEventListener(TextEvent.LINK, function(e:TextEvent):void {
 			if (linkHandler != null) linkHandler(decodeURI(e.text));
 		});
-		scrollBar = new UIScrollBar();
+		scrollBar = new TextFieldVScroll(mainText);
 		UIUtils.setProperties(scrollBar,{
 			name: "scrollBar",
 			direction: "vertical",
@@ -455,12 +458,10 @@ public class MainView extends Block {
 	protected function formatMiscItems():void {
 
 		this.aCb               = new ComboBox();
-		this.aCb.dropdownWidth = 200;
 		this.aCb.width         = 200;
 		this.aCb.scaleY        = 1.1;
-		this.aCb.rowCount = 15;
 		this.aCb.move(-1250, -1550);
-		this.aCb.addEventListener(Event.CHANGE, function (event:Event):void {
+		this.aCb.addEventListener(Event.SELECT, function (event:Event):void {
 			if (comboboxHandler != null) comboboxHandler(ComboBox(event.target).selectedItem);
 		});
 
@@ -776,11 +777,11 @@ public class MainView extends Block {
 		if (this.customElement) {
 			this.removeElement(this.customElement);
 			this.customElement = null;
-			this.scrollBar.visible = true;
+			this.scrollBar.activated = true;
 		}
 		this.hotkeysDisabled = false;
 		this.mainText.htmlText = '';
-		this.scrollBar.update();
+		this.scrollBar.draw();
 	}
 	
 	/**
@@ -798,11 +799,15 @@ public class MainView extends Block {
 		var innerElement:DisplayObject = element;
 		if (scroll) {
 			var container:ScrollPane = new ScrollPane();
-			container.setStyle("upSkin", new MovieClip());
-			container.horizontalScrollPolicy = ScrollPolicy.OFF;
-			container.verticalPageScrollSize = mainText.height - 64;
-			container.verticalLineScrollSize = 16;
-			container.source = innerElement;
+			container.autoHideScrollBar = true;
+			container.PanelAlpha = 0;
+			container.color = 0xCCCCC;
+			container.border = false;
+			//container.setStyle("upSkin", new MovieClip());
+			//container.horizontalScrollPolicy = ScrollPolicy.OFF;
+			//container.verticalPageScrollSize = mainText.height - 64;
+			//container.verticalLineScrollSize = 16;
+			container.addChild(innerElement);
 			element = container;
 			if (innerElement is Block) {
 				innerElement.addEventListener(Block.ON_LAYOUT, function(e:Event):void {
@@ -810,21 +815,24 @@ public class MainView extends Block {
 				})
 			}
 			scrollBar.visible = false;
-			Multitouch.inputMode = MultitouchInputMode.GESTURE;
-			container.addEventListener(TransformGestureEvent.GESTURE_PAN, function(e:TransformGestureEvent):void {
-				if (e.phase == GesturePhase.UPDATE) {
-					container.verticalScrollPosition -= e.offsetY;
-				}
-			});
+			if (CoC_Settings.mobileBuild) {
+				container.dragContent = true;
+				Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+//				container.addEventListener(TransformGestureEvent.GESTURE_PAN, function (e:TransformGestureEvent):void {
+//					if (e.phase == GesturePhase.UPDATE) {
+//						this._vScrollbar.value += -(e.offsetY);
+//					}
+//				});
+			}
 		}
 		element.x = mainText.x;
 		element.y = afterText ? mainText.y + mainText.textHeight : mainText.y;
 		if (stretch || scroll) {
-			element.width = mainText.width + (scroll ? scrollBar.width : 0);
+			element.width = TEXTZONE_W;
 			element.height = mainText.y + mainText.height - element.y;
 		}
 		if (scroll && stretch) {
-			innerElement.width = container.width - container.verticalScrollBar.width;
+			//innerElement.width = container.width - container.verticalScrollBar.width;
 			// innerElement.height = container.height;
 		}
 		this.addElement(element);
@@ -841,7 +849,7 @@ public class MainView extends Block {
 		fmt.underline = false;
 		this.mainText.htmlText += text;
 		this.mainText.defaultTextFormat = fmt;
-		this.scrollBar.update();
+		this.scrollBar.draw();
 	}
 
 	// I think font ones are 90% false reports (because of some Flash weirdness)
@@ -872,7 +880,7 @@ public class MainView extends Block {
 				fontKostyl = false;
 			}
 		}
-		this.scrollBar.update();
+		this.scrollBar.draw();
 	}
 
 	public function hideSprite():void {
@@ -889,7 +897,7 @@ public class MainView extends Block {
 //		this.eventTestInput.type       = TextFieldType.INPUT;
 		this.eventTestInput.visible    = true;
 
-		this.scrollBar.scrollTarget = this.eventTestInput;
+		this.scrollBar.value = this.eventTestInput.y;
 
 	}
 
@@ -905,7 +913,7 @@ public class MainView extends Block {
 //		this.eventTestInput.type       = TextFieldType.DYNAMIC;
 		this.eventTestInput.visible    = false;
 
-		this.scrollBar.scrollTarget = this.mainText;
+		this.scrollBar.value = this.mainText.y;
 
 	}
 
@@ -918,8 +926,9 @@ public class MainView extends Block {
 	}
 
 	public function showComboBox(items:Array,propmt:String,onChange:Function):void {
-		aCb.dataProvider = new DataProvider(items);
-		aCb.prompt = propmt;
+		aCb.items = items;
+		aCb.numVisibleItems = 15;
+		aCb.defaultLabel = propmt;
 		comboboxHandler = onChange;
 		if (aCb.parent == null) {
 			addElement(aCb);
