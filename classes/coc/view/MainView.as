@@ -13,10 +13,12 @@
 
 package coc.view {
 import classes.CoC;
+import classes.CoC_Settings;
 import classes.EngineCore;
 
 
 import com.bit101.components.ComboBox;
+import com.bit101.components.ScrollBar;
 import com.bit101.components.TextFieldVScroll;
 import com.bit101.components.VScrollBar;
 import com.bit101.components.ScrollPane;
@@ -152,7 +154,7 @@ public class MainView extends Block {
 	
 	// Misc properties
 	internal static const TOPROW_NUMBTNS:Number   = 6;
-	internal static const VSCROLLBAR_W:Number     = 15;
+	public static const VSCROLLBAR_W:Number     = ScrollBar.VWIDTH;
 	internal static const BOTTOM_COLS:Number      = 5;
 	internal static const BOTTOM_ROWS:Number      = 3;
 	internal static const BOTTOM_BUTTON_COUNT:int = BOTTOM_COLS * BOTTOM_ROWS;
@@ -797,8 +799,10 @@ public class MainView extends Block {
 		var innerElement:DisplayObject = element;
 		if (scroll) {
 			var container:ScrollPane = new ScrollPane();
+			container.autoHideScrollBar = true;
 			container.PanelAlpha = 0;
 			container.color = 0xCCCCC;
+			container.border = false;
 			//container.setStyle("upSkin", new MovieClip());
 			//container.horizontalScrollPolicy = ScrollPolicy.OFF;
 			//container.verticalPageScrollSize = mainText.height - 64;
@@ -811,17 +815,20 @@ public class MainView extends Block {
 				})
 			}
 			scrollBar.visible = false;
-			Multitouch.inputMode = MultitouchInputMode.GESTURE;
-			container.addEventListener(TransformGestureEvent.GESTURE_PAN, function(e:TransformGestureEvent):void {
-				if (e.phase == GesturePhase.UPDATE) {
-					this._vScrollbar.value += -( e.offsetY);
-				}
-			});
+			if (CoC_Settings.mobileBuild) {
+				container.dragContent = true;
+				Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+//				container.addEventListener(TransformGestureEvent.GESTURE_PAN, function (e:TransformGestureEvent):void {
+//					if (e.phase == GesturePhase.UPDATE) {
+//						this._vScrollbar.value += -(e.offsetY);
+//					}
+//				});
+			}
 		}
 		element.x = mainText.x;
 		element.y = afterText ? mainText.y + mainText.textHeight : mainText.y;
 		if (stretch || scroll) {
-			element.width = mainText.width + (scroll ? scrollBar.width : 0);
+			element.width = TEXTZONE_W;
 			element.height = mainText.y + mainText.height - element.y;
 		}
 		if (scroll && stretch) {

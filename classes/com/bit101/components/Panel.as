@@ -36,6 +36,7 @@ package com.bit101.components
 	{
 		protected var _mask:Sprite;
 		protected var _background:Sprite;
+		protected var _border:Boolean = true;
 		protected var _color:int = -1;
 		protected var _alpha:int = 100;
 		protected var _shadow:Boolean = true;
@@ -122,7 +123,9 @@ package com.bit101.components
 		{
 			super.draw();
 			_background.graphics.clear();
-			_background.graphics.lineStyle(1, 0, 0.1);
+			if (_border) {
+				_background.graphics.lineStyle(1, 0, 0.1);
+			}
 			if(_color == -1)
 			{
 				_background.graphics.beginFill(Style.PANEL);
@@ -170,6 +173,14 @@ package com.bit101.components
 		///////////////////////////////////
 		// getter/setters
 		///////////////////////////////////
+		
+		public function set border(b:Boolean):void {
+			_border = b;
+			invalidate();
+		}
+		public function get border():Boolean {
+			return _border;
+		}
 		
 		/**
 		 * Gets / sets whether or not this Panel will have an inner shadow.

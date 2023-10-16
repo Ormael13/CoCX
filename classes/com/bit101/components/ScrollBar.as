@@ -38,8 +38,11 @@ package com.bit101.components
 	[Event(name="change", type="flash.events.Event")]
 	public class ScrollBar extends Component
 	{
+		public static const WIDTH:int = 10;
+		public static const VWIDTH:int = 15;
+
 		protected const DELAY_TIME:int = 500;
-		protected const REPEAT_TIME:int = 100; 
+		protected const REPEAT_TIME:int = 100;
 		protected const UP:String = "up";
 		protected const DOWN:String = "down";
 
@@ -78,16 +81,16 @@ package com.bit101.components
 		 */
 		override protected function addChildren():void
 		{
-			_scrollSlider = new ScrollSlider(_orientation, this, 0, 10, onChange);
+			_scrollSlider = new ScrollSlider(_orientation, this, 0, WIDTH, onChange);
 			_upButton = new PushButton(this, 0, 0, "");
 			_upButton.addEventListener(MouseEvent.MOUSE_DOWN, onUpClick);
-			_upButton.setSize(10, 10);
+			_upButton.setSize(WIDTH, WIDTH);
 			var upArrow:Shape = new Shape();
 			_upButton.addChild(upArrow);
 			
 			_downButton = new PushButton(this, 0, 0, "");
 			_downButton.addEventListener(MouseEvent.MOUSE_DOWN, onDownClick);
-			_downButton.setSize(10, 10);
+			_downButton.setSize(WIDTH, WIDTH);
 			var downArrow:Shape = new Shape();
 			_downButton.addChild(downArrow);
 			
@@ -131,11 +134,11 @@ package com.bit101.components
 			super.init();
 			if(_orientation == Slider.HORIZONTAL)
 			{
-				setSize(100, 10);
+				setSize(100, WIDTH);
 			}
 			else
 			{
-				setSize(10, 100);
+				setSize(WIDTH, 100);
                 this.scaleX += 0.5;
             }
 			_delayTimer = new Timer(DELAY_TIME, 1);
@@ -178,19 +181,19 @@ package com.bit101.components
 			if(_orientation == Slider.VERTICAL)
 			{
 				_scrollSlider.x = 0;
-				_scrollSlider.y = 10;
-				_scrollSlider.width = 10;
-				_scrollSlider.height = _height - 20;
+				_scrollSlider.y = WIDTH;
+				_scrollSlider.width = WIDTH;
+				_scrollSlider.height = _height - 2*WIDTH;
 				_downButton.x = 0;
-				_downButton.y = _height - 10;
+				_downButton.y = _height - WIDTH;
 			}
 			else
 			{
-				_scrollSlider.x = 10;
+				_scrollSlider.x = WIDTH;
 				_scrollSlider.y = 0;
-				_scrollSlider.width = _width - 20;
-				_scrollSlider.height = 10;
-				_downButton.x = _width - 10;
+				_scrollSlider.width = _width - 2*WIDTH;
+				_scrollSlider.height = WIDTH;
+				_downButton.x = _width - WIDTH;
 				_downButton.y = 0;
 			}
 			_scrollSlider.draw();

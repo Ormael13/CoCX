@@ -33,9 +33,11 @@ package com.bit101.components
 	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.events.TouchEvent;
 	import flash.geom.Rectangle;
-	
-	public class ScrollPane extends Panel
+	import flash.utils.setTimeout;
+
+public class ScrollPane extends Panel
 	{
 		protected var _vScrollbar:VScrollBar;
 		protected var _hScrollbar:HScrollBar;
@@ -102,9 +104,9 @@ package com.bit101.components
 			super.draw();
 			
 			var vPercent:Number = (_height - 10) / content.height;
-			var hPercent:Number = (_width - 10) / content.width; 
+			var hPercent:Number = (_width - 10) / content.width;
 			
-			_vScrollbar.x = width - 5;
+			_vScrollbar.x = width - 15;
 			_hScrollbar.y = height - 10;
 			
 			if(hPercent >= 1)
@@ -169,29 +171,60 @@ package com.bit101.components
 			invalidate();
 		}
 		
+		protected var isMouseDown:Boolean = false;
+		protected var isTouchDown:Boolean = false;
 		protected function onMouseGoDown(event:MouseEvent):void
 		{
-			content.startDrag(false, new Rectangle(0, 0, Math.min(0, _width - content.width - 10), Math.min(0, _height - content.height - 10)));
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			isMouseDown = true;
+			setTimeout(function():void {
+				if (!isMouseDown) return;
+				content.startDrag(false, new Rectangle(0, 0, Math.min(0, _width - content.width - 10), Math.min(0, _height - content.height - 10)));
+				stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			}, 100);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
 		}
 		
+		protected function onTouchBegin(event:TouchEvent):void
+		{
+			isTouchDown = true;
+			setTimeout(function():void {
+				if (!isTouchDown) return;
+				content.startTouchDrag(event.touchPointID, false, new Rectangle(0, 0, Math.min(0, _width - content.width - 10), Math.min(0, _height - content.height - 10)));
+				stage.addEventListener(TouchEvent.TOUCH_MOVE, onTouchMove);
+			},100);
+			stage.addEventListener(TouchEvent.TOUCH_END, onTouchEnd);
+		}
+
 		protected function onMouseMove(event:MouseEvent):void
 		{
 			_hScrollbar.value = -content.x;
 			_vScrollbar.value = -content.y;
 		}
-		private function MouseScrollEvent(e:MouseEvent):void
+		protected function onTouchMove(event:TouchEvent):void
 		{
-			_vScrollbar.value += -( e.delta * 8 );
-			update();
+			_hScrollbar.value = -content.x;
+			_vScrollbar.value = -content.y;
 		}
 		
 		protected function onMouseGoUp(event:MouseEvent):void
 		{
+			isMouseDown = false;
 			content.stopDrag();
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
+		}
+		protected function onTouchEnd(event:TouchEvent):void
+		{
+			isTouchDown = false;
+			content.stopTouchDrag(event.touchPointID);
+			stage.removeEventListener(TouchEvent.TOUCH_MOVE, onTouchMove);
+			stage.removeEventListener(TouchEvent.TOUCH_END, onTouchEnd);
+		}
+
+		private function MouseScrollEvent(e:MouseEvent):void
+		{
+			_vScrollbar.value += -( e.delta * 8 );
+			update();
 		}
 
 		public function set dragContent(value:Boolean):void
@@ -199,13 +232,15 @@ package com.bit101.components
 			_dragContent = value;
 			if(_dragContent)
 			{
-				_background.addEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown);
+				this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown, true);
+				this.addEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin, true);
 				_background.useHandCursor = true;
 				_background.buttonMode = true;
 			}
 			else
 			{
-				_background.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown);
+				this.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown);
+				this.removeEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin);
 				_background.useHandCursor = false;
 				_background.buttonMode = false;
 			}
