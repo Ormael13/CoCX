@@ -5689,7 +5689,7 @@ public class Combat extends BaseContent {
         //Weapon addition!
         damage = weaponAttackModifier(damage);
 		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR)
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
 		if (isPureWeapon()  || Forgefather.purePearlEaten) {
 			damage = monsterPureDamageBonus(damage);
@@ -6325,7 +6325,7 @@ public class Combat extends BaseContent {
                             whipLustDmg = (20 + player.cor / 15) * (hasArcaneLash ? 1.8 : 1); // 20-26.7 (36-48 w/perk)
                             whipCorSelf = 0.3;
                             whipLustSelf = (rand(2) == 0) ? 0 : 1; // 50% +1
-                        } else if (player.weapon == weapons.L_WHIP) {
+                        } else if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) {
                             whipLustDmg = (10 + player.cor / 5) * (hasArcaneLash ? 2.0 : 1); // 10-30 (20-60 w/perk)
                             whipCorSelf = 0.6;
                             whipLustSelf = (rand(4) == 0) ? 0 : 1; // 75% +1
@@ -6355,7 +6355,7 @@ public class Combat extends BaseContent {
                     if ((player.weapon == weapons.HELRAIS || player.weapon == weapons.EBNYBLD) && player.cor < 90) dynStats("cor", 1);
                     //Selfpurifying and Lust lowering weapons
                     if ((player.weapon == weapons.LHSCYTH || player.weapon == weapons.NPHBLDE) && player.cor > 10) dynStats("cor", -1);
-                    if (player.weapon == weapons.EXCALIB) {
+                    if (player.weapon == weapons.EXCALIB || player.weapon == weapons.DEXCALI) {
                         if (player.cor > 10) dynStats("cor", -0.3);
                         var excaliburLustSelf:Number;
                         excaliburLustSelf = (rand(2) == 0) ? 0 : 1;

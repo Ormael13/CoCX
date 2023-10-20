@@ -2303,8 +2303,11 @@ public class Camp extends NPCAwareContent{
 			[weapons.TCLAYMO, weapons.TTCLAYM],
 			[weapons.S_RULER, weapons.TSRULER],
 			[weapons.PHALLUS, weapons.PHALUSS],
+			[weapons.L_WHIP, weapons.DL_WHIP],
+			[weapons.B_SWORD, weapons.DBSWORD],//2nd page
+			[weapons.EXCALIB, weapons.DEXCALI],
 			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
-			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],//2nd page
+			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
 			[weaponsrange.ALAKABL, weaponsrange.DALAKABL]
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);

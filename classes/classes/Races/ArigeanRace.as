@@ -10,8 +10,8 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class ArigeanRace extends Race {
-	//public static const AbyssalSharkScaleColors:/*String*/Array = ["rough gray","dark gray","iridescent gray","ashen","gray","black"];
-	//public static const AbyssalSharkHairColors:/*String*/Array = ["silver","purplish black","dark purple","iridescent"];
+	public static const ArigeanSkinColors:/*String*/Array = ["albino"];
+	public static const ArigeanHairColors:/*String*/Array = ["snowy white","white","silver"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -45,30 +45,32 @@ public class ArigeanRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				/*.gillType(Gills.FISH, +1)
-				.earType(Ears.SHARK, +1)
-				.eyeType(Eyes.DEVIL, +2)*/
+				//.gillType(Gills.FISH, +1)
+				.earType(Ears.ELVEN, +1)
+				//.eyeType(Eyes.DEVIL, +2)
 				.faceType(Face.ARIGEAN, +1)
 				/*.hairType(Hair.NORMAL, +1)
 				.tongueType(Tongue.HUMAN, +1)
 				.tailType(Tail.ABYSSAL_SHARK, +2)*/
 				.armType(Arms.ARMORED_FOREARMS, +1)
-				.legType(LowerBody.ARMORED_LEGS, +1);
-				/*.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
-				.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
-				.hairColor1(ANY(AbyssalSharkHairColors), +1)
-				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
-				.skinColor1(ANY(AbyssalSharkScaleColors), +1)
-				.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
-				.height(AT_LEAST(108), +1)
-				.customRequirement("",'H-cup tits (or bigger) or 18"+ long cock',
+				.legType(LowerBody.ARMORED_LEGS, +1)
+				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
+				//.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
+				.hairColor1(ANY(ArigeanHairColors), +1)
+				//.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
+				.plainSkinOfColor1(ANY(ArigeanSkinColors), +1)
+				/*.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
+				.customRequirement("",'60+ feminity',
 						function (body:BodyData):Boolean {
-							return body.biggestTitSize > 18 || body.biggestCockSize > 17
+							return body.player.femininity >= 60
 						}, +1)
-				.hasPerk(PerkLib.DantianPhylactery, +1, -10);*/
+				.corruption(AT_LEAST(10), +1);*/
 		
 		//addMutation(IMutationsLib.SharkOlfactorySystemIM);
-		
+		/*
+		buildTier(9, "half arigean")
+				.end();
+		*/
 		buildTier(16, "arigean")
                 //.requirePerk(PerkLib.DantianPhylactery)
 				.buffs({
@@ -77,34 +79,32 @@ public class ArigeanRace extends Race {
 					"spe.mult": +1.00,
 					"int.mult": -0.10,
 					"wis.mult": -0.20,
-					"def": +3,
-					"mdef": +3
+					"def": +3
 				})
-				//.withExtraBonuses("+150 Max Hunger")
 				.end();
 		/*
-		buildTier(18, "elder abyssal shark-morph")
-				.requirePreviousTier()
+		buildTier(18, "arigean elite")
+				//.requirePerk(PerkLib.DantianPhylactery)
 				.buffs({
-					"str.mult": +1.90,
-					"spe.mult": +1.20,
-					"wis.mult": +0.80,
-					"lib.mult": -0.20,
-					"sens": +100
+					"str.mult": +1.30,
+					"tou.mult": +0.80,
+					"spe.mult": +1.30,
+					"int.mult": -0.30,
+					"wis.mult": -0.40,
+					"def": +4
 				})
-				.withExtraBonuses("+300 Max Hunger")
 				.end();
 		
-		buildTier(26, "ancient abyssal shark-morph")
-				.requirePreviousTier()
+		buildTier(20, "arigean countess")
+				//.requirePerk(PerkLib.DantianPhylactery)
 				.buffs({
-					"str.mult": +2.90,
-					"spe.mult": +1.50,
-					"wis.mult": +1.20,
-					"lib.mult": -0.20,
-					"sens": +150
+					"str.mult": +1.00,
+					"tou.mult": +0.70,
+					"spe.mult": +1.00,
+					"int.mult": -0.10,
+					"wis.mult": -0.20,
+					"def": +6
 				})
-				.withExtraBonuses("+450 Max Hunger")
 				.end();*/
 	}
 }

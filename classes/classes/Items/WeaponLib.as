@@ -98,10 +98,12 @@ public final class WeaponLib extends ItemConstants
 		public const DBFSWO :DualBFSword = new DualBFSword();
 		public const DBFTHSWO:DualBFTHSword = new DualBFTHSword();
 		public const DBFWHIP:DualBFWhip = new DualBFWhip();
+		public const DBSWORD:DualBeautifulSword = new DualBeautifulSword();
 		public const DDAGGER:DualDaggers = new DualDaggers();
 		public const DDAGWHIP:DualDaggerWhips = new DualDaggerWhips();
 		public const DEMSCYT:DemonicScythe = new DemonicScythe();
 		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 12, 1920, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption. (-15% spell cost, x2.5 black spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
+		public const DEXCALI:DualExcalibur = new DualExcalibur();
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
 		public const DKATANA:DualKatana = new DualKatana();
 		public const DNODACHI:DualNodachi = new DualNodachi();
@@ -112,6 +114,7 @@ public final class WeaponLib extends ItemConstants
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
 		public const D_LANCE:DualLance = new DualLance();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
+		public const DL_WHIP:DualLethiciteWhip = new DualLethiciteWhip();
 		public const DOCDEST:DefiledOniChieftainDestroyer = new DefiledOniChieftainDestroyer();
 		public const DSWORD_:DualSwords = new DualSwords();
 		public const DSSPEAR:DemonSnakespear = new DemonSnakespear();

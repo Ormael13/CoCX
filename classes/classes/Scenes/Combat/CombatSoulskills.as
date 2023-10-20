@@ -667,7 +667,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//weapon bonus
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
@@ -791,7 +791,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (combat.isCorruptWeapon()) {
 			damage = combat.monsterCorruptDamageBonus(damage);
 		}
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
