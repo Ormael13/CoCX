@@ -2253,7 +2253,7 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText("Your foes shake free of their confusion and ready themselves for battle.");
 				else EngineCore.outputText("Your foe shakes free of its confusion and readies itself for battle.");
 			}
-			else EngineCore.outputText("[Enemy name] wobble about in confusion!");
+			else EngineCore.outputText("[Themonster] wobble about in confusion!");
 			return false;
 		}
 

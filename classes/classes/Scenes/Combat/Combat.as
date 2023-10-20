@@ -1699,6 +1699,7 @@ public class Combat extends BaseContent {
 
     public function mummyattacks():void {
 		var mummyDamage:Number = 10;
+        //mummyDamage += intwisscaling() * 0.1;
         mummyDamage *= player.perkv1(PerkLib.MummyLord);
 		mummyDamage *= soulskillMod();
         //if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) mummyamplification *= historyTacticianBonus();
@@ -5937,13 +5938,13 @@ public class Combat extends BaseContent {
         if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
         if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
         if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
-        if (player.weaponSpecials("Dual Small")) dualWieldSmallXP(meleeMasteryEXPgains);
+        if (player.weaponSpecials("Dual Small") || player.hasAetherTwinsTierS2()) dualWieldSmallXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Massive")) dualWieldMassiveXP(meleeMasteryEXPgains);
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
-        else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
+        else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small") || player.hasAetherTwinsTierWeapon() || player.hasAetherTwinsTierWeapon2()) weaponSmallMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large")) weaponLargeMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) weaponMassiveMastery(meleeMasteryEXPgains);
         else weaponNormalMastery(meleeMasteryEXPgains);

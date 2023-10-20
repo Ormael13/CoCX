@@ -91,6 +91,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids, Uma Handjob & Get Blown options not accesable for cockwielders, ");
 			outputText("Tamains Daughters scene sending back to camp, clone creating not causing unremovable negative levels, faerie dragon tf not giving pinkish purple scales color, Izma bad end not triggering after PC lost to her many times, Juvenile Abyssal Sharks runnign away without leaving behind any loot\n\n");
 			outputText("<b>Version 0.8u2:</b>\n\n");
+			outputText("-New tier 2 intelligence lvl-up perk: Spellbow. Req. Job: Enchanter & Channeling perks, Charge Range weapons spell, 80+ int. Effect: Start every battle with Charge Range Weapon enabled, if you meet White Magic requirements before it starts.\n");
 			outputText("-New event perk: Dragon regal breath. Gained by been dragonne (16+ score). Effects: Allows access to a dragonne regal breath attack. (phys damage, longer stun than other breaths, apply bleed and confusion (similary to fear but not makes enemy skipping turns just giving 50% to skip turn))\n");
 			outputText("-New event perk: Lion Heart. Gained by been dragonne (16+ score). Effects: Add 50% of your speed to your strength score. Double all natural attacks damage dealt.\n");
 			outputText("-New melee weapon (by Ormael): Twin Machine Greatswords - can be gained by combining 2x Machine Greatsword weapon. Cost 5440 gems. Base atk is 19. It's dual large weapon belonging to exotic type, 100% bleed chance.\n");
@@ -102,6 +103,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Twin Topaz Claymore - can be gained by combining 2x Topaz Claymore weapon. 15 atk (below 40 str atk drops to 7), costs 2400 gems, when under charge weapon spell will gain lightning affinity, dual large sword type weapon.\n");
 			outputText("-New melee weapon (by Ormael): Twin Storm Rulers - can be gained by combining 2x Storm Ruler weapon. Cost 9600 gems. Base atk is 14. It's dual large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (40%) perk.\n");
 			outputText("-New range weapon (by Ormael): Twin M1 Cerberuses - can be gained by combining 2x M1 Cerberus weapon. Cost 1860 gems. Base atk is 45 and ammo clip size 1. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
+			outputText("-New range weapon (by Lord Shadeogorath): DuAlakablam - can be gained by combining 2x Alakablam weapon. Cost 1520 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 20%. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
 			outputText("-Diana been renamed to Nadia. Her spells cost no longer been fluctuating from spell casted (not even game tracking this) keeping it locked to max reduction now.\n");
 			outputText("-Can find metal plates now in outer battlefield too (3-5). Finding metal plate in boundary battlefield changed to give 2-3 plates instead of just 1.\n");
 			outputText("-Two Large Axes can be now combined into Dual Large Axes and seperated back into two Large Axes.\n");
@@ -134,10 +136,8 @@ public class Changelog extends BaseContent
 			outputText("-Option to make better bimbo liquer/bro brew in Evangeline Experiments tab: req. to have item or her having enought gems (500+). Can force feed the created concoction to feral female imp.\n");
 			outputText("-After feral female imp been <u>force</u> feed Evangeline concoction it can be interacted as Galia located in Slaves tab. Current interactions includes: Appearance, Spar. After enough amount of sparrings (amd enabled training mode for npc's) Galia can level up up to three times.\n");
 			outputText("-Cow & Minotaur race scores would get points for few more things and 2nd tier of their race scores req. now 16 not 15 pts (with matching stats changes).\n");
-			outputText("-New range weapon (by Lord Shadeogorath): DuAlakablam - can be gained by combining 2x Alakablam weapon. Cost 1520 gems. Base atk is 20 and ammo clip size 2. It deals magic damage but also lower shoots accuracy by 20%. It's Dual 2H Firearm type range weapon, req. way to wield 2H firearm in one arm.\n");
 			outputText("-All Raging Inferno, Glacial Storm, High Voltage & Eclipsing Shadow perks have their effects increase/loose doubled. Also each first perks have cap of 5 stacks, Ex ones have 15 stacks and Su ones have 75 stacks limit.\n");
 			outputText("-New Sprite for Pure Alvina. (Liadri)\n");
-			outputText("-New tier 2 intelligence lvl-up perk: Spellbow. Req. Job: Enchanter & Channeling perks, Charge Range weapons spell, 80+ int. Effect: Start every battle with Charge Range Weapon enabled, if you meet White Magic requirements before it starts.\n");
 			outputText("-Spellarmor perk req. was changed to req. either Spellsword or Spellbow instead of only Spellsword.\n");
 			outputText("-New melee weapon (by Canadian Snas): The Phalluspears - can be gained by combining 2x The Phalluspear weapon. Cost 2600 gems. Base atk is 40. It's dual large sized weapon belonging to spear type. Can toggle between dealing 25% and 100% as lust dmg.\n");
 			outputText("-One with the forest perk will have now new effect: +5% green spellpower for each 10 converted sisters.\n");
@@ -146,7 +146,7 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Dual Lethicite Whips - can be gained by combining 2x Lethicite Whip weapon. Cost 3200 gems. Base atk is 20. It's dual normal sized weapon belonging to whip type dealing fire damage.\n");
 			outputText("-New melee weapon (by Ormael): Dual Beautiful Swords - can be gained by combining 2x Beautiful Sword weapon. Cost 1120 gems. Base atk is 7. It's dual normal sized weapon belonging to sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Excalibur - can be gained by combining 2x Excalibur weapon. Cost 1600 gems. Base atk is 40. It's dual normal sized weapon belonging to sword type.\n");
-			outputText("-\n");
+			outputText("-Ice Fist / Fire Punch can be used if pc have both elemental affinity perks like Fire Affinity / Ifrit fusion form and Cold Affinity/Mastery.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -164,7 +164,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP, Twin Six Shooter using ammo 2x faster, Yama-Raja Grasp gloves & Karmic Touch gloves not req. lvl 54+, ");
-			outputText("One with the forest perk tier not updating correctly\n\n");
+			outputText("One with the forest perk tier not updating correctl, Arcane Regeneration (Major) conflicting req., Confusion on enemy text parser error, Cold Mastery not giving pretection for negative effects of using Blizzard Kimono/Claws, Blizzard Claws not enabling use of feral combat mode\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

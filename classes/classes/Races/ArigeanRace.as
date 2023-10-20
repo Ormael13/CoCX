@@ -58,13 +58,13 @@ public class ArigeanRace extends Race {
 				//.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hairColor1(ANY(ArigeanHairColors), +1)
 				//.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
-				.plainSkinOfColor1(ANY(ArigeanSkinColors), +1)
+				.plainSkinOfColor1(ANY(ArigeanSkinColors), +1);
 				/*.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
 				.customRequirement("",'60+ feminity',
 						function (body:BodyData):Boolean {
 							return body.player.femininity >= 60
 						}, +1)
-				.corruption(AT_LEAST(10), +1);*/
+				.corruption(AT_LEAST(10), +1)*/
 		
 		//addMutation(IMutationsLib.SharkOlfactorySystemIM);
 		/*

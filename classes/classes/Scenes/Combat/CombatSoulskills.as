@@ -40,7 +40,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsIceFist)) {
 			bd = buttons.add("Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) {
+			if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity))) {
 				bd.disable("When you try to use this technique, you shudder in revulsion. Ice, that close to your body? You're a creature of fire!");
 			} else if (!player.isFistOrFistWeapon()) {
 				bd.disable("<b>Your [weapon] can't be used with this soulskill.</b>");
@@ -52,7 +52,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFirePunch)) {
 			bd = buttons.add("Fire Punch", FirePunch).hint("Ignite your opponents dealing fire damage and setting them ablaze.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
-			if (player.hasPerk(PerkLib.ColdAffinity)) {
+			if ((player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis))) {
 				bd.disable("You call upon the power of flame...and you begin to sweat. You aren't built for the heat, and your body knows it. ");
 			} else if (!player.isFistOrFistWeapon()) {
 				bd.disable("<b>Your [weapon] can't be used with this soulskill.</b>");
@@ -668,10 +668,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+			damage = combat.FireTypeDamageBonus(damage);
 		}
 		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (combat.isPureWeapon()) {

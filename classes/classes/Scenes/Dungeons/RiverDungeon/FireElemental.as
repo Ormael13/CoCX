@@ -26,7 +26,7 @@ public class FireElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 			}
 		}
 		
@@ -43,10 +43,10 @@ public class FireElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The blazing fists connect with your body. Talk about Pyromania! ");
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 			}
 		}
 		
@@ -61,22 +61,22 @@ public class FireElemental extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The flaming spheres explode upon impact with you. Talk about Pyromania! ");
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 			}
 		}
 		

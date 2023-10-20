@@ -5713,7 +5713,6 @@ public class PerkLib
                     .requirePerk(HalfStepToImprovedSpirituality)
                     .requireLevel(12);
             ArcaneRegenerationMajor.requireAnyPerk(GrandMage, ArchmageEx, GreyMage)
-					.requirePerk(GrandMage)
 					.requirePerk(ArcaneRegenerationMinor)
                     .requireInt(75)
                     .requireLevel(12);
