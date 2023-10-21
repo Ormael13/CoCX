@@ -10,7 +10,7 @@ import classes.VaginaClass;
 
 public class KirinRace extends Race {
 	public static const KirinEyeColors:/*String*/Array = ["red","light blue","turquoise"];
-	public static const KirinHairColors:/*String*/Array = ["silver", "silver-white", "white", "snow white", "golden blond"];
+	public static const KirinHairColors:/*String*/Array = ["silver", "silver-white", "white", "snow white", "golden blonde"];
 	public static const KirinScaleColors:/*String*/Array = ["light blue", "silver", "silver-white", "metallic golden"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
