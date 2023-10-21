@@ -497,8 +497,14 @@ public class Arms extends BodyPart {
 	public static const ABYSSAL_SHARK:int = 63;
 	EnumValue.add(Types, ABYSSAL_SHARK, "ABYSSAL_SHARK", {
 		name:"a.shark",
-		appearanceDesc: "A pair of large shark fins have sprouted on each of your forearms, just past the elbows. The skin between your fingers has become webbed to further assist with your swimming. At the tip of your fingers, you have sharp, deadly claws that allow you to  shred and impale foes with ease.",
+		appearanceDesc: "A pair of large shark fins have sprouted on each of your forearms, just past the elbows. The skin between your fingers has become webbed to further assist with your swimming. At the tip of your fingers, you have sharp, deadly claws that allow you to shred and impale foes with ease.",
 		claw: true
+	});
+
+	public static const ARMORED_FOREARMS:int = 64;
+	EnumValue.add(Types, ARMORED_FOREARMS, "ARMORED_FOREARMS", {
+		name:"arigean",
+		appearanceDesc: "Your arms are identical to those of a human, However your forearms seem to be covered in fragments of a black, glossy metal acting as natural bracers."
 	});
 
 	public static function canFly(id: int): Boolean {

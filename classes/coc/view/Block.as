@@ -4,9 +4,8 @@
 package coc.view {
 import classes.internals.Utils;
 
-import fl.controls.ComboBox;
-import fl.controls.TextInput;
-import fl.data.DataProvider;
+import com.bit101.components.ComboBox;
+import com.bit101.components.InputText;
 
 import flash.display.DisplayObject;
 import flash.display.Sprite;
@@ -440,8 +439,8 @@ public class Block extends Sprite {
 	 * @param options.bindNumber [object, keyName]. On change set object[keyName]=parseFloat(value) if not NaN
 	 * @param hint Layout hint
 	 */
-	public function addTextInput(options:Object, hint:Object = null):TextInput {
-		var e:TextInput = new TextInput();
+	public function addTextInput(options:Object, hint:Object = null):InputText {
+		var e:InputText = new InputText();
 		UIUtils.setProperties(e, options);
 		if ('bindText' in options) {
 			var obj:Object = options.bindText[0];
@@ -501,7 +500,7 @@ public class Block extends Sprite {
 			items.push(entry);
 			i++;
 		}
-		e.dataProvider = new DataProvider(items);
+		e.items = items;
 		if (bindObject) {
 			e.addEventListener(Event.CHANGE, function(event:Event):void {
 				event.preventDefault();

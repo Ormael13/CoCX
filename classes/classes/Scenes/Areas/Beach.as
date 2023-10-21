@@ -126,6 +126,21 @@ import classes.Scenes.SceneLib;
 					return (model.time.hours >= 6 && model.time.hours <= 11) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4;
 				}
 			}, {
+				// 
+				name  : "charyb",
+				label : "Charybdis",
+				kind  : 'npc',
+				unique: true,
+				call  : function():void {
+					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+					if (flags[kFLAGS.CHARYBDIS_FOLLOWER] < 1) SceneLib.charybdisScene.charyFirstEncounter();
+					else SceneLib.charybdisScene.charyBeachMeetings();
+				},
+				chance: beachChance,
+				when  : function():Boolean {
+					return SceneLib.dungeons.checkDeepCaveClear() && flags[kFLAGS.CHARYBDIS_FOLLOWER] < 2;
+				}
+			}, {
 				// Pinchou swimwear shop
 				name: "pinchou shop",
 				label : "Pinchou",

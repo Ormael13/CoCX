@@ -46,10 +46,11 @@ import coc.view.Block;
 import coc.view.ButtonDataList;
 import coc.view.Color;
 import coc.view.MainView;
-
-import fl.controls.ComboBox;
-import fl.controls.TextInput;
-import fl.data.DataProvider;
+import com.bit101.components.ComboBox;
+import com.bit101.components.InputText;
+//import fl.controls.ComboBox;
+//import fl.controls.TextInput;
+//import fl.data.DataProvider;
 
 import flash.display.DisplayObject;
 import flash.events.Event;
@@ -930,21 +931,21 @@ public class DebugMenu extends BaseContent
 		}
 		private function addBeComboBox(label:String, items:Array, selectedItem:*, callback:Function):void {
 			var cb:ComboBox = new ComboBox();
-			cb.dataProvider = new DataProvider(items);
+			cb.items = items;
 			for (var i:int = 0; i < items.length; i++) {
 				if (selectedItem == items[i] || 'data' in items[i] && items[i].data == selectedItem) {
 					cb.selectedIndex = i;
 					break;
 				}
 			}
-			cb.addEventListener(Event.CHANGE, function(event:Event):void {
+			cb.addEventListener(Event.SELECT, function(event:Event):void {
 				event.preventDefault();
 				callback(cb.selectedItem);
 			});
 			addBeControl(label, cb);
 		}
 		private function addBeTextInput(label:String, value:String, callback:Function):void {
-			var ti:TextInput = new TextInput();
+			var ti:InputText = new InputText();
 			ti.text = value;
 			ti.addEventListener(Event.CHANGE, function (event:Event):void {
 				event.preventDefault();

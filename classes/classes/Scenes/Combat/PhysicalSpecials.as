@@ -808,7 +808,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
@@ -1654,7 +1654,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function whipping():void {
-		if (player.weapon == weapons.L_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
@@ -1720,7 +1720,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] whipped few of [themonster], dealing ");
-		if (player.weapon == weapons.L_WHIP) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 		}
@@ -6607,4 +6607,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

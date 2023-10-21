@@ -2493,7 +2493,7 @@ public static const AUTO_CAST_MIGHT_DISABLED:int                               	
 public static const AUTO_CAST_BLINK_DISABLED:int                                	= 2485;
 public static const SOUL_SENSE_WORLD_TREE:int             	     	                = 2486;
 public static const SOUL_SENSE_GIACOMO:int                                   		= 2487; // No longer used
-public static const SOUL_SENSE_PRISCILLA:int                                   		= 2488; // No longer used
+public static const AUTO_CAST_CHARGE_R_WEAPON_DISABLED:int                          = 2488;
 public static const SOUL_SENSE_2489:int                                             = 2489;			//Not Yet Used Flag
 public static const KITSUNE_SHRINE_UNLOCKED:int               	                    = 2490;
 public static const VENOM_TIMES_USED:int                	                        = 2491;
@@ -2698,7 +2698,7 @@ public static const AETHER_DEXTER_TWIN_AT_CAMP:int                              
 public static const AETHER_SINISTER_TWIN_AT_CAMP:int                                = 2690;
 public static const EBON_LABYRINTH_RECORD:int                                   	= 2691; //Maximum EL room reached
 public static const UNKNOWN_FLAG_NUMBER_02692:int                                   = 2692;	//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02693:int                                   = 2693;	//Not Yet Used Flag
+public static const CHARYBDIS_FOLLOWER:int                                   		= 2693;
 public static const RIVER_DUNGEON_ELEMENTAL_MIXER:int                               = 2694;
 public static const ALVINA_DIARY:int                                   				= 2695;
 public static const HELLFIRE_SNAIL_ENC:int                                   		= 2696;
@@ -3017,4 +3017,3 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 ];
 	}
 }
-

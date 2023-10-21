@@ -65,6 +65,7 @@ import classes.internals.ChainedDrop;
 			this.short = "Demonic bee";
 			this.long = "This bee guard is severely corrupted clearly having become an omnibus. Her bat shaped bee wings, unholy cock and demonic horns is a testament to how far she has fallen.";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
+			createBreastRow(Appearance.breastCupInverse("D"));
 			this.createCock(12,2,CockTypesEnum.DEMON);
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;

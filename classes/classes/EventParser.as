@@ -300,6 +300,11 @@ public class EventParser {
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
+        if ((player.weapon == CoC.instance.weapons.DEXCALI || player.weapon == CoC.instance.weapons.DBSWORD) && player.cor >= 33 + player.corruptionTolerance) {
+            EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop them.  Whatever power inhabits those weapons appears to be unhappy with you.  Touching them gingerly, you realize they are no longer hot, but as soon as you go to grab the hilts, they nearly burns you.\n\nYou realize you won't be able to use them right now, but you could probably keep them in your inventory.</b>\n\n");
+            SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
+            return true;
+        }
         //Drop beautiful bow if corrupted!
         if (player.weaponRange == CoC.instance.weaponsrange.BEA_BOW && player.cor >= 33 + player.corruptionTolerance) {
             EngineCore.outputText("<b>\nThe <u>[weaponrange]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this range weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the riser, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");

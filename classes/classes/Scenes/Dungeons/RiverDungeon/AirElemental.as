@@ -24,7 +24,7 @@ public class AirElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
 			}
 		}
 		
@@ -39,12 +39,12 @@ public class AirElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" Each hit connets, nearly causing you to spin from the force of the trauma. ");
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
 			}
 		}
 		
@@ -57,30 +57,30 @@ public class AirElemental extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The wind slices through you. ");
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
-				damage = player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
+				player.takeWindDamage(damage, true);
 			}
 		}
 		

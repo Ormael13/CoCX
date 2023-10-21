@@ -68,7 +68,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8u2.18";
+    public var debugGameVer:String = "v0.8u2.25";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.14;
@@ -521,7 +521,7 @@ public class CoC extends MovieClip
         EngineCore.rawOutputText(txt);
         // On the next animation frame
         setTimeout(function():void {
-            mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
+            mainView.scrollBar.value = mainView.scrollBar.maximum;
         },0);
     }
     /*

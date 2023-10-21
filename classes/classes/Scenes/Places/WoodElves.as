@@ -1645,7 +1645,6 @@ public class WoodElves extends BaseContent implements SaveableState {
 				if (!player.hasPerk(PerkLib.OneWiththeForest)) {
 					outputText("<b>You acquired the Perk One with the forest</b>.");
 					player.createPerk(PerkLib.OneWiththeForest, 1, 0, 0, 0);
-
 					player.statStore.addBuffObject({
 						"str.mult": 0.01,
 						"tou.mult": 0.01,

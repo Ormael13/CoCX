@@ -137,6 +137,8 @@ public class SceneLib {
 
     public static var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 
+    public static var charybdisScene:CharybdisFollower = new CharybdisFollower();
+
     public static var chichiScene:ChiChiFollower = new ChiChiFollower();
 
     public static var ceaniScene:CeaniScene = new CeaniScene();

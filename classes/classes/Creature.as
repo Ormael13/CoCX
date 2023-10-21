@@ -3061,6 +3061,10 @@ public class Creature extends Utils
 		{
 			return (LowerBody.Types[lowerBody].canPounce && Arms.Types[arms.type].canPounce);
 		}
+		public function hasClaws():Boolean
+		{
+			return Arms.Types[arms.type].claw;
+		}
 
 
 		//PC can swim underwater?

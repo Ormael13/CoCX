@@ -660,6 +660,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const ARIGEAN:int = _partid++;
+		EnumValue.add(Memories, ARIGEAN, "ARIGEAN", {
+			id: "Arigean Face",
+			name: "Arigean Face",
+			cost: 100,
+			title: "Arigean Face",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceArigean;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

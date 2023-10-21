@@ -171,7 +171,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 		outputText("\n\nYou are facing a cat-morph. She would looks quite averange if not for black stripes on purple fur. Without any sound she points behind her and then vanishing.");
         menu();
 		addButton(0, "150", navigateToRoomELTier1).hint("Skip 150 rooms but beware of the boss at the end of this detour.");
-		addButtonIfTrue(1, "300", navigateToRoomELTier2, "You not even beaten 6 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 150, "Skip 300 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(1, "300", navigateToRoomELTier2, "You not even beaten 6 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 300, "Skip 300 rooms but beware of the boss at the end of this detour.");
 	}
 
     //Player menu. Doesn't start any encounters.

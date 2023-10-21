@@ -25,7 +25,7 @@ public class HumanBloodstreamMutation extends IMutationPerkType
                 descS += "10. Increase a bit fatigue recovery and wrath generation.";
             }
             if (pTier == 3){
-                descS += "10, maximum trainable Int/Wis by 20%. Increase a bit fatigue recovery and wrath generation.";
+                descS += "10, maximum trainable Spe/Libs by 20%. Increase a bit fatigue recovery and wrath generation.";
             }
             return descS;
         }

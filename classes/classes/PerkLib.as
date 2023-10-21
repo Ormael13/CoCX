@@ -402,6 +402,9 @@ public class PerkLib
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
+		public static const Spellbow:PerkType = mk("Spellbow", "Spellbow",
+				"Start every battle with Charge Range Weapon enabled, if you meet White Magic requirements before it starts.",
+				"You've chosen the 'Spellbow' perk. You start every battle with Charge Range Weapon effect, as long as your Lust is not preventing you from casting it before battle.");
 		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
 				"Allows you to control flying swords. With spending enough soulforce can even fly on them.",
 				"You've chosen the 'Flying Sword Path' perk. Allows you to control flying swords. With spending enough soulforce can even fly on them.")
@@ -5688,6 +5691,11 @@ public class PerkLib
                     .requirePerks(JobEnchanter, Channeling)
                     .requireInt(80)
                     .requireStatusEffect(StatusEffects.KnowsCharge, "Charge spell");
+            // Spellbow: auto-use Charge Range Weapon
+            Spellbow.requireLevel(12)
+                    .requirePerks(JobEnchanter, Channeling)
+                    .requireInt(80)
+                    .requireStatusEffect(StatusEffects.KnowsChargeR, "Charge Range spell");
             ManaAffinityIV.requirePerk(ManaAffinityIII)
                     .requireInt(110)
                     .requireNGPlus(3)
@@ -5705,7 +5713,6 @@ public class PerkLib
                     .requirePerk(HalfStepToImprovedSpirituality)
                     .requireLevel(12);
             ArcaneRegenerationMajor.requireAnyPerk(GrandMage, ArchmageEx, GreyMage)
-					.requirePerk(GrandMage)
 					.requirePerk(ArcaneRegenerationMinor)
                     .requireInt(75)
                     .requireLevel(12);
@@ -5727,7 +5734,7 @@ public class PerkLib
                     .requireStatusEffect(StatusEffects.KnowsBlink, "Blink spell");
             // Spellarmor: auto-use Charge Armor
             Spellarmor.requireLevel(18)
-                    .requirePerk(Spellsword)
+                    .requireAnyPerk(Spellsword, Spellbow)
                     .requireInt(90)
                     .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
             TraditionalMageI.requireLevel(18)

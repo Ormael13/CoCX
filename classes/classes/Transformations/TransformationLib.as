@@ -181,6 +181,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsTiny: Transformation 			    = arms.ArmsTiny.registerTf(AS_ARMS, AE_IMP);
 	public const ArmsCanine: Transformation 			= arms.ArmsCanine.registerTf(AS_ARMS, AE_ANUBIS);
 	public const ArmsAbyssalShark: Transformation 		= arms.ArmsAbyssalShark.registerTf(AS_ARMS, AE_ABYSSAL_SHARK);
+	public const ArmsArigean: Transformation 			= arms.ArmsArigean.registerTf(AS_ARMS, AE_ARIGEAN);
 
 
 //ASS
@@ -544,6 +545,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FaceAnt: Transformation 				= face.FaceAnt.registerTf(AS_FACE, AE_ANT);
     public const FaceFoxFangs: Transformation 			= face.FaceFoxFangs.registerTf(AS_FACE, AE_WEREFOX);
     public const FaceAbyssalShark: Transformation 		= face.FaceAbyssalShark.registerTf(AS_FACE, AE_ABYSSAL_SHARK);
+    public const FaceArigean: Transformation 			= face.FaceArigean.registerTf(AS_FACE, AE_ARIGEAN);
 
 
 //GILLS
@@ -708,58 +710,59 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function LowerBodyGryphon(legCount: int = undefined): Transformation 				{ return lowerBody.LowerBodyGryphon(legCount); }
 	public const LowerBodyGryphonBipedal:Transformation = LowerBodyGryphon(2).registerTf(AS_LEGS, AE_GRYPHON);
     public function LowerBodyGryphonToggle(toggleTaur:Boolean = false): Transformation 			{ return lowerBody.LowerBodyGryphon(player.legCount, toggleTaur); }
-    public const LowerBodyAnt: Transformation 				= lowerBody.LowerBodyAnt.registerTf(AS_LEGS, AE_ANT);
-    public const LowerBodyAtlach: Transformation 			= lowerBody.LowerBodyAtlach.registerTf(AS_LEGS, AE_ATLACH_NACHA);
-    public const LowerBodyAtlachNacha: Transformation 		= lowerBody.LowerBodyAtlachNacha.registerTf(AS_LEGS, AE_ATLACH_NACHA);
-    public const LowerBodyBee: Transformation 				= lowerBody.LowerBodyBee.registerTf(AS_LEGS, AE_BEE);
-    public const LowerBodyBipedal: Transformation 			= lowerBody.LowerBodyBipedal;
-    public const LowerBodyCentipede: Transformation 		= lowerBody.LowerBodyCentipede.registerTf(AS_LEGS, AE_CENTIPEDE);
-    public const LowerBodyDemonClawed: Transformation 		= lowerBody.LowerBodyDemonClawed.registerTf(AS_LEGS, AE_DEMON);
-    public const LowerBodyDemonHighHeels: Transformation 	= lowerBody.LowerBodyDemonHighHeels.registerTf(AS_LEGS, AE_DEMON);
-    public const LowerBodyDrider: Transformation 			= lowerBody.LowerBodyDrider.registerTf(AS_LEGS, AE_DRIDER);
-    public const LowerBodyElf: Transformation 				= lowerBody.LowerBodyElf.registerTf(AS_LEGS, AE_ELF);
-    public const LowerBodyFerret: Transformation 			= lowerBody.LowerBodyFerret.registerTf(AS_LEGS, AE_FERRET);
-    public const LowerBodyGoo: Transformation 				= lowerBody.LowerBodyGoo.registerTf(AS_LEGS, AE_GOO);
-    public const LowerBodyHarpy: Transformation 			= lowerBody.LowerBodyHarpy.registerTf(AS_LEGS, AE_HARPY);
-    public const LowerBodyHuman: Transformation 			= lowerBody.LowerBodyHuman.registerTf(AS_LEGS, AE_HUMAN);
-    public const LowerBodyJiangshi: Transformation 			= lowerBody.LowerBodyJiangshi.registerTf(AS_LEGS, AE_JIANGSHI);
-    public const LowerBodyOni: Transformation 				= lowerBody.LowerBodyOni.registerTf(AS_LEGS, AE_ONI);
-    public const LowerBodyOrc: Transformation 				= lowerBody.LowerBodyOrc.registerTf(AS_LEGS, AE_ORC);
-    public const LowerBodyPlantFlower: Transformation 		= lowerBody.LowerBodyPlantFlower.registerTf(AS_LEGS, AE_PLANT);
-    public const LowerBodyPlantHighHeels: Transformation 	= lowerBody.LowerBodyPlantHighHeels.registerTf(AS_LEGS, AE_PLANT);
-    public const LowerBodyPlantRootClaws: Transformation 	= lowerBody.LowerBodyPlantRootClaws.registerTf(AS_LEGS, AE_PLANT);
-    public const LowerBodyRedPanda: Transformation 			= lowerBody.LowerBodyRedPanda.registerTf(AS_LEGS, AE_RED_PANDA);
-    public const LowerBodySpider: Transformation 			= lowerBody.LowerBodySpider.registerTf(AS_LEGS, AE_SPIDER);
-    public const LowerBodyWendigo: Transformation 			= lowerBody.LowerBodyWendigo.registerTf(AS_LEGS, AE_WENDIGO);
-    public const LowerBodyYukiOnna: Transformation 			= lowerBody.LowerBodyYukiOnna.registerTf(AS_LEGS, AE_YUKI_ONNA);
-    public const LowerBodyScylla: Transformation 			= lowerBody.LowerBodyScylla.registerTf(AS_LEGS, AE_SCYLLA);
-    public const LowerBodyKraken: Transformation 			= lowerBody.LowerBodyKraken.registerTf(AS_LEGS, AE_KRAKEN);
-    public const LowerBodyHydra: Transformation 			= lowerBody.LowerBodyHydra.registerTf(AS_LEGS, AE_HYDRA);
-    public const LowerBodyAvian: Transformation 			= lowerBody.LowerBodyAvian.registerTf(AS_LEGS, AE_AVIAN);
-    public const LowerBodyMelkie: Transformation 			= lowerBody.LowerBodyMelkie.registerTf(AS_LEGS, AE_MELKIE);
-    public const LowerBodyUshiOni: Transformation 			= lowerBody.LowerBodyUshiOni.registerTf(AS_LEGS, AE_USHI_ONI);
-    public const LowerBodyMouse: Transformation 			= lowerBody.LowerBodyMouse.registerTf(AS_LEGS, AE_MOUSE);
-    public const LowerBodyHinezumi: Transformation 			= lowerBody.LowerBodyHinezumi.registerTf(AS_LEGS, AE_HINEZUMI);
-    public const LowerBodyYeti: Transformation 				= lowerBody.LowerBodyYeti.registerTf(AS_LEGS, AE_YETI);
-    public const LowerBodyGhost: Transformation 			= lowerBody.LowerBodyGhost.registerTf(AS_LEGS, AE_GHOST);
-    public const LowerBodyGhost2: Transformation 			= lowerBody.LowerBodyGhost2.registerTf(AS_LEGS, AE_GHOST);
-    public const LowerBodyGazer: Transformation 			= lowerBody.LowerBodyGazer.registerTf(AS_LEGS, AE_GAZER);
-    public const LowerBodyFireSnail: Transformation 		= lowerBody.LowerBodyFireSnail.registerTf(AS_LEGS, AE_FIRE_SNAIL);
-    public const LowerBodyFrostwyrm: Transformation 		= lowerBody.LowerBodyFrostwyrm.registerTf(AS_LEGS, AE_FROST_WYRM);
-    public const LowerBodyRaccoon: Transformation 			= lowerBody.LowerBodyRaccoon.registerTf(AS_LEGS, AE_RACCOON);
-    public const LowerBodySquirrel: Transformation 			= lowerBody.LowerBodySquirrel.registerTf(AS_LEGS, AE_SQUIRREL);
-    public const LowerBodyKangaroo: Transformation 			= lowerBody.LowerBodyKangaroo.registerTf(AS_LEGS, AE_KANGAROO);
-    public const LowerBodyCaveWyrm: Transformation 			= lowerBody.LowerBodyCaveWyrm.registerTf(AS_LEGS, AE_CAVE_WYRM);
-    public const LowerBodyBunny: Transformation 			= lowerBody.LowerBodyBunny.registerTf(AS_LEGS, AE_BUNNY);
-    public const LowerBodyJabberwocky: Transformation 		= lowerBody.LowerBodyJabberwocky.registerTf(AS_LEGS, AE_JABBERWOCKY);
-    public const LowerBodyCrab: Transformation 				= lowerBody.LowerBodyCrab.registerTf(AS_LEGS, AE_CANCER);
-    public const LowerBodyCancer: Transformation 			= lowerBody.LowerBodyCancer.registerTf(AS_LEGS, AE_CANCER);
-    public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake.registerTf(AS_LEGS, AE_SNAKE);
-    public const LowerBodyTiny: Transformation 			    = lowerBody.LowerBodyTiny.registerTf(AS_LEGS, AE_IMP);
-    public const LowerBodyWorm: Transformation 			    = lowerBody.LowerBodyWorm.registerTf(AS_LEGS, AE_SAND_WORM);
-    public const LowerBodyAbyssalShark: Transformation 		= lowerBody.LowerBodyAbyssalShark.registerTf(AS_LEGS, AE_ABYSSAL_SHARK);
-    public const LowerBodyWereshark: Transformation 		= lowerBody.LowerBodyWereshark.registerTf(AS_LEGS, AE_WERESHARK);
-    public const LowerBodyYgddrasilRootClaws: Transformation 	= lowerBody.LowerBodyYgddrasilRootClaws.registerTf(AS_LEGS, AE_YGGDRASIL);
+    public const LowerBodyAnt: Transformation 					= lowerBody.LowerBodyAnt.registerTf(AS_LEGS, AE_ANT);
+    public const LowerBodyAtlach: Transformation 				= lowerBody.LowerBodyAtlach.registerTf(AS_LEGS, AE_ATLACH_NACHA);
+    public const LowerBodyAtlachNacha: Transformation 			= lowerBody.LowerBodyAtlachNacha.registerTf(AS_LEGS, AE_ATLACH_NACHA);
+    public const LowerBodyBee: Transformation 					= lowerBody.LowerBodyBee.registerTf(AS_LEGS, AE_BEE);
+    public const LowerBodyBipedal: Transformation 				= lowerBody.LowerBodyBipedal;
+    public const LowerBodyCentipede: Transformation 			= lowerBody.LowerBodyCentipede.registerTf(AS_LEGS, AE_CENTIPEDE);
+    public const LowerBodyDemonClawed: Transformation 			= lowerBody.LowerBodyDemonClawed.registerTf(AS_LEGS, AE_DEMON);
+    public const LowerBodyDemonHighHeels: Transformation 		= lowerBody.LowerBodyDemonHighHeels.registerTf(AS_LEGS, AE_DEMON);
+    public const LowerBodyDrider: Transformation 				= lowerBody.LowerBodyDrider.registerTf(AS_LEGS, AE_DRIDER);
+    public const LowerBodyElf: Transformation 					= lowerBody.LowerBodyElf.registerTf(AS_LEGS, AE_ELF);
+    public const LowerBodyFerret: Transformation 				= lowerBody.LowerBodyFerret.registerTf(AS_LEGS, AE_FERRET);
+    public const LowerBodyGoo: Transformation 					= lowerBody.LowerBodyGoo.registerTf(AS_LEGS, AE_GOO);
+    public const LowerBodyHarpy: Transformation 				= lowerBody.LowerBodyHarpy.registerTf(AS_LEGS, AE_HARPY);
+    public const LowerBodyHuman: Transformation 				= lowerBody.LowerBodyHuman.registerTf(AS_LEGS, AE_HUMAN);
+    public const LowerBodyJiangshi: Transformation 				= lowerBody.LowerBodyJiangshi.registerTf(AS_LEGS, AE_JIANGSHI);
+    public const LowerBodyOni: Transformation 					= lowerBody.LowerBodyOni.registerTf(AS_LEGS, AE_ONI);
+    public const LowerBodyOrc: Transformation 					= lowerBody.LowerBodyOrc.registerTf(AS_LEGS, AE_ORC);
+    public const LowerBodyPlantFlower: Transformation 			= lowerBody.LowerBodyPlantFlower.registerTf(AS_LEGS, AE_PLANT);
+    public const LowerBodyPlantHighHeels: Transformation 		= lowerBody.LowerBodyPlantHighHeels.registerTf(AS_LEGS, AE_PLANT);
+    public const LowerBodyPlantRootClaws: Transformation 		= lowerBody.LowerBodyPlantRootClaws.registerTf(AS_LEGS, AE_PLANT);
+    public const LowerBodyRedPanda: Transformation 				= lowerBody.LowerBodyRedPanda.registerTf(AS_LEGS, AE_RED_PANDA);
+    public const LowerBodySpider: Transformation 				= lowerBody.LowerBodySpider.registerTf(AS_LEGS, AE_SPIDER);
+    public const LowerBodyWendigo: Transformation 				= lowerBody.LowerBodyWendigo.registerTf(AS_LEGS, AE_WENDIGO);
+    public const LowerBodyYukiOnna: Transformation 				= lowerBody.LowerBodyYukiOnna.registerTf(AS_LEGS, AE_YUKI_ONNA);
+    public const LowerBodyScylla: Transformation 				= lowerBody.LowerBodyScylla.registerTf(AS_LEGS, AE_SCYLLA);
+    public const LowerBodyKraken: Transformation 				= lowerBody.LowerBodyKraken.registerTf(AS_LEGS, AE_KRAKEN);
+    public const LowerBodyHydra: Transformation 				= lowerBody.LowerBodyHydra.registerTf(AS_LEGS, AE_HYDRA);
+    public const LowerBodyAvian: Transformation 				= lowerBody.LowerBodyAvian.registerTf(AS_LEGS, AE_AVIAN);
+    public const LowerBodyMelkie: Transformation 				= lowerBody.LowerBodyMelkie.registerTf(AS_LEGS, AE_MELKIE);
+    public const LowerBodyUshiOni: Transformation 				= lowerBody.LowerBodyUshiOni.registerTf(AS_LEGS, AE_USHI_ONI);
+    public const LowerBodyMouse: Transformation 				= lowerBody.LowerBodyMouse.registerTf(AS_LEGS, AE_MOUSE);
+    public const LowerBodyHinezumi: Transformation 				= lowerBody.LowerBodyHinezumi.registerTf(AS_LEGS, AE_HINEZUMI);
+    public const LowerBodyYeti: Transformation 					= lowerBody.LowerBodyYeti.registerTf(AS_LEGS, AE_YETI);
+    public const LowerBodyGhost: Transformation 				= lowerBody.LowerBodyGhost.registerTf(AS_LEGS, AE_GHOST);
+    public const LowerBodyGhost2: Transformation 				= lowerBody.LowerBodyGhost2.registerTf(AS_LEGS, AE_GHOST);
+    public const LowerBodyGazer: Transformation 				= lowerBody.LowerBodyGazer.registerTf(AS_LEGS, AE_GAZER);
+    public const LowerBodyFireSnail: Transformation 			= lowerBody.LowerBodyFireSnail.registerTf(AS_LEGS, AE_FIRE_SNAIL);
+    public const LowerBodyFrostwyrm: Transformation 			= lowerBody.LowerBodyFrostwyrm.registerTf(AS_LEGS, AE_FROST_WYRM);
+    public const LowerBodyRaccoon: Transformation 				= lowerBody.LowerBodyRaccoon.registerTf(AS_LEGS, AE_RACCOON);
+    public const LowerBodySquirrel: Transformation 				= lowerBody.LowerBodySquirrel.registerTf(AS_LEGS, AE_SQUIRREL);
+    public const LowerBodyKangaroo: Transformation 				= lowerBody.LowerBodyKangaroo.registerTf(AS_LEGS, AE_KANGAROO);
+    public const LowerBodyCaveWyrm: Transformation 				= lowerBody.LowerBodyCaveWyrm.registerTf(AS_LEGS, AE_CAVE_WYRM);
+    public const LowerBodyBunny: Transformation 				= lowerBody.LowerBodyBunny.registerTf(AS_LEGS, AE_BUNNY);
+    public const LowerBodyJabberwocky: Transformation 			= lowerBody.LowerBodyJabberwocky.registerTf(AS_LEGS, AE_JABBERWOCKY);
+    public const LowerBodyCrab: Transformation 					= lowerBody.LowerBodyCrab.registerTf(AS_LEGS, AE_CANCER);
+    public const LowerBodyCancer: Transformation 				= lowerBody.LowerBodyCancer.registerTf(AS_LEGS, AE_CANCER);
+    public const LowerBodySnake: Transformation 				= lowerBody.LowerBodySnake.registerTf(AS_LEGS, AE_SNAKE);
+    public const LowerBodyTiny: Transformation 			    	= lowerBody.LowerBodyTiny.registerTf(AS_LEGS, AE_IMP);
+    public const LowerBodyWorm: Transformation 			    	= lowerBody.LowerBodyWorm.registerTf(AS_LEGS, AE_SAND_WORM);
+    public const LowerBodyAbyssalShark: Transformation 			= lowerBody.LowerBodyAbyssalShark.registerTf(AS_LEGS, AE_ABYSSAL_SHARK);
+    public const LowerBodyWereshark: Transformation 			= lowerBody.LowerBodyWereshark.registerTf(AS_LEGS, AE_WERESHARK);
+    public const LowerBodyYgddrasilRootClaws: Transformation	= lowerBody.LowerBodyYgddrasilRootClaws.registerTf(AS_LEGS, AE_YGGDRASIL);
+    public const LowerBodyArigean: Transformation 				= lowerBody.LowerBodyArigean.registerTf(AS_LEGS, AE_ARIGEAN);
 
 
 
@@ -1211,4 +1214,4 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		trace("\n"+dump.join("\n"));
 	}
 }
-}
+}

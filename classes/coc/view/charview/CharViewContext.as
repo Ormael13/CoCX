@@ -114,7 +114,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpear: player.isSpearTypeWeapon(), //until polearm have their own sprite they share sprite with spears
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
-					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS,
+					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS || player.weapon == game.weapons.PHALUSS,
 
 					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.DKATANA,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
@@ -142,7 +142,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasAShieldTwin: player.hasAetherTwinsTierLeftShield(),
 					PlayerHasAnOffhandDaggerTwin: player.hasAetherTwinsTierLeftDagger(),
 
-					PlayerHasAShield: player.shield == game.shields.KITE_SH || player.shield == game.shields.SPIL_SH || player.shield == game.shields.BSHIELD,
+					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					//PlayerHasAShieldHoly: player.shield == game.shields.SANCTYL,
 					//PlayerHasAShieldUnholy: player.shield == game.shields.SANCTYD,

@@ -5,6 +5,7 @@ import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.CharybdisFollower;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.NPCs.EvangelineFollower;
@@ -446,6 +447,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Grey Spells Cooldown (tier 2):</b> " + combat.spellGreyTier2Cooldown() + " turns\n";
 		combatStats += "<b>Blood Spells/Soulskills Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlood()) + "%\n";
 		combatStats += "<b>Blood Spells/Soulskills Cost:</b> " + combat.spellCostBlood(100) + "%\n";
+		combatStats += "<b>Green Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModGreen()) + "%\n";
+		combatStats += "<b>Green Spells Cost:</b> " + combat.spellCostGreen(100) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
 		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";
@@ -617,12 +620,19 @@ public class PlayerInfo extends BaseContent {
 
 		if (SceneLib.bazaar.benoit.benoitAffection() > 0)
             interpersonStats += "<b>" + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(SceneLib.bazaar.benoit.benoitAffection()) + "%\n";
-        if (flags[kFLAGS.BROOKE_MET] > 0)
+        
+		if (flags[kFLAGS.BROOKE_MET] > 0)
             interpersonStats += "<b>Brooke Affection:</b> " + Math.round(SceneLib.telAdre.brooke.brookeAffection()) + "\n";
-        if (flags[kFLAGS.CEANI_AFFECTION] > 0)
+        
+		if (flags[kFLAGS.CEANI_AFFECTION] > 0)
 			interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.CEANI_FOLLOWER] == 1)
 				interpersonStats += getNPCLevel("Ceani", 35, 0, 9, 7, flags[kFLAGS.CEANI_LVL_UP]);
+        
+		if (flags[kFLAGS.CHARYBDIS_FOLLOWER] > 0)
+			interpersonStats += "<b>Charybdis Affection:</b> " + CharybdisFollower.CharyAffectionMeter + "%\n";
+		//	if (flags[kFLAGS.CEANI_FOLLOWER] == 1)
+		//		interpersonStats += getNPCLevel("Ceani", 35, 0, 9, 7, flags[kFLAGS.CEANI_LVL_UP]);
 
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] > 0) {
 			interpersonStats += "<b>Chi Chi Affection:</b> " + Math.round(flags[kFLAGS.CHI_CHI_AFFECTION]) + "%\n";
@@ -708,7 +718,6 @@ public class PlayerInfo extends BaseContent {
 				interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
 			else
 				interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusEffectv2(StatusEffects.Kelt) / 130 * 100) + "%\n";
-
 		}
 
 		if (flags[kFLAGS.ANEMONE_KID] > 0)

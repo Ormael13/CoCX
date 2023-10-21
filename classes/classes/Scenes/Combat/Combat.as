@@ -195,6 +195,10 @@ public class Combat extends BaseContent {
         return magic.spellCostBloodImpl(mod);
     }
 
+    public function spellCostGreen(mod:Number):Number {
+        return magic.spellCostWhiteImpl(mod);
+    }
+
     public function healCost(mod:Number):Number {
         return magic.healCostImpl(mod);
     }
@@ -341,6 +345,10 @@ public class Combat extends BaseContent {
 
     public function spellGenericCooldown():Number {
         return magic.spellGenericCooldownImpl();
+    }
+
+    public function spellModGreen():Number {
+        return magic.spellModGreenImpl();
     }
 
     public function healMod():Number {
@@ -1691,6 +1699,7 @@ public class Combat extends BaseContent {
 
     public function mummyattacks():void {
 		var mummyDamage:Number = 10;
+        //mummyDamage += intwisscaling() * 0.1;
         mummyDamage *= player.perkv1(PerkLib.MummyLord);
 		mummyDamage *= soulskillMod();
         //if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) mummyamplification *= historyTacticianBonus();
@@ -5681,7 +5690,7 @@ public class Combat extends BaseContent {
         //Weapon addition!
         damage = weaponAttackModifier(damage);
 		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR)
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
 		if (isPureWeapon()  || Forgefather.purePearlEaten) {
 			damage = monsterPureDamageBonus(damage);
@@ -5929,13 +5938,13 @@ public class Combat extends BaseContent {
         if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
         if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
         if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
-        if (player.weaponSpecials("Dual Small")) dualWieldSmallXP(meleeMasteryEXPgains);
+        if (player.weaponSpecials("Dual Small") || player.hasAetherTwinsTierS2()) dualWieldSmallXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Massive")) dualWieldMassiveXP(meleeMasteryEXPgains);
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
-        else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
+        else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small") || player.hasAetherTwinsTierWeapon() || player.hasAetherTwinsTierWeapon2()) weaponSmallMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large")) weaponLargeMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) weaponMassiveMastery(meleeMasteryEXPgains);
         else weaponNormalMastery(meleeMasteryEXPgains);
@@ -6193,7 +6202,7 @@ public class Combat extends BaseContent {
                         doMagicDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
 					}
-                    else if (player.weapon == weapons.PHALLUS) {
+                    else if (player.weapon == weapons.PHALLUS || player.weapon == weapons.PHALUSS) {
                         if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) {
 							monster.teased(Math.round(monster.lustVuln * damage * 0.05));
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6317,7 +6326,7 @@ public class Combat extends BaseContent {
                             whipLustDmg = (20 + player.cor / 15) * (hasArcaneLash ? 1.8 : 1); // 20-26.7 (36-48 w/perk)
                             whipCorSelf = 0.3;
                             whipLustSelf = (rand(2) == 0) ? 0 : 1; // 50% +1
-                        } else if (player.weapon == weapons.L_WHIP) {
+                        } else if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) {
                             whipLustDmg = (10 + player.cor / 5) * (hasArcaneLash ? 2.0 : 1); // 10-30 (20-60 w/perk)
                             whipCorSelf = 0.6;
                             whipLustSelf = (rand(4) == 0) ? 0 : 1; // 75% +1
@@ -6347,7 +6356,7 @@ public class Combat extends BaseContent {
                     if ((player.weapon == weapons.HELRAIS || player.weapon == weapons.EBNYBLD) && player.cor < 90) dynStats("cor", 1);
                     //Selfpurifying and Lust lowering weapons
                     if ((player.weapon == weapons.LHSCYTH || player.weapon == weapons.NPHBLDE) && player.cor > 10) dynStats("cor", -1);
-                    if (player.weapon == weapons.EXCALIB) {
+                    if (player.weapon == weapons.EXCALIB || player.weapon == weapons.DEXCALI) {
                         if (player.cor > 10) dynStats("cor", -0.3);
                         var excaliburLustSelf:Number;
                         excaliburLustSelf = (rand(2) == 0) ? 0 : 1;
@@ -8764,6 +8773,7 @@ public class Combat extends BaseContent {
     public static const USEMANA_MAGIC_HEAL:int = 9;
     public static const USEMANA_WHITE_HEAL:int = 10;
     public static const USEMANA_BLACK_HEAL:int = 11;
+    public static const USEMANA_GREEN:int = 12;
 
     public function finalSpellCost(base:Number, type:int = USEMANA_NORMAL):Number {
         switch (type) {
@@ -8785,6 +8795,8 @@ public class Combat extends BaseContent {
                 return healCostWhite(base);
             case USEMANA_BLACK_HEAL:
                 return healCostBlack(base);
+            case USEMANA_GREEN:
+                return spellCostGreen(base);
             default: // including normal
                 return base;
         }
@@ -16809,4 +16821,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

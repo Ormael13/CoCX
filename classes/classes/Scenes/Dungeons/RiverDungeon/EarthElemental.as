@@ -24,7 +24,7 @@ public class EarthElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
 			}
 		}
 		
@@ -39,8 +39,8 @@ public class EarthElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The strikes connect, hitting you directly in the chest. ");
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
 			}
 		}
 		
@@ -53,14 +53,14 @@ public class EarthElemental extends Monster
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The razor-like rocks cut into you. ");
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
-				damage = player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
+				player.takeEarthDamage(damage, true);
 			}
 		}
 		

@@ -1154,5 +1154,20 @@ public class FaceTransformations extends MutationsHelper {
 				return player.faceType === Face.ABYSSAL_SHARK;
 			}
 	);
+
+	public const FaceArigean: Transformation = new SimpleTransformation("Arigean Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.ARIGEAN;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ARIGEAN));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.ARIGEAN;
+			}
+	);
 }
 }

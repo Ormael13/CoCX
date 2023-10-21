@@ -98,10 +98,12 @@ public final class WeaponLib extends ItemConstants
 		public const DBFSWO :DualBFSword = new DualBFSword();
 		public const DBFTHSWO:DualBFTHSword = new DualBFTHSword();
 		public const DBFWHIP:DualBFWhip = new DualBFWhip();
+		public const DBSWORD:DualBeautifulSword = new DualBeautifulSword();
 		public const DDAGGER:DualDaggers = new DualDaggers();
 		public const DDAGWHIP:DualDaggerWhips = new DualDaggerWhips();
 		public const DEMSCYT:DemonicScythe = new DemonicScythe();
 		public const DEPRAVA:Weapon = new Weapon("Depravatio", "Depravatio", "Depravatio", "Depravatio, Element of Corruption", "smack", 12, 1920, "This staff is made from sacred wood, infused with Marae’s bark. Tentacles run along the staff, and attempt to grope you when they think you’re not watching. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff seethes with corruption. (-15% spell cost, x2.5 black spellpower / healpower)", "Large, Staff", WT_STAFF).withBuff('spellpower',0.6) as Weapon;
+		public const DEXCALI:DualExcalibur = new DualExcalibur();
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
 		public const DKATANA:DualKatana = new DualKatana();
 		public const DNODACHI:DualNodachi = new DualNodachi();
@@ -112,6 +114,7 @@ public final class WeaponLib extends ItemConstants
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
 		public const D_LANCE:DualLance = new DualLance();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
+		public const DL_WHIP:DualLethiciteWhip = new DualLethiciteWhip();
 		public const DOCDEST:DefiledOniChieftainDestroyer = new DefiledOniChieftainDestroyer();
 		public const DSWORD_:DualSwords = new DualSwords();
 		public const DSSPEAR:DemonSnakespear = new DemonSnakespear();
@@ -145,9 +148,7 @@ public final class WeaponLib extends ItemConstants
 		}) as Weapon;
 		public const KAMA   :Weapon = new Weapon("Kama","Kama", "kama", "a kama", "slash", 4,320, "The kama is a simple and elegant hand scythe weapon. Preferred weapon for the ninja fans.", "Small, Bleed10", "Scythe");
 		public const KAMAWHIP:Weapon = new Weapon("KamaWhip","KamaWhip","kama whip","a kama whip","whip-like slash",3,240,"A small kama-like weapon with two scythe blades that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping, Bleed10", "Scythe, Thrown").withBuffs({'teasedmg': 30}) as Weapon;
-		public const KARMTOU:Weapon = new Weapon("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Stun50", WT_GAUNTLET).withBuffs({
-			'psoulskillpower': +1.5
-		}) as Weapon;
+		public const KARMTOU:KarmicTouch = new KarmicTouch();
 		public const KATANA :DynamicWeapon = findCommonDynamicWeapon("katana");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large", "Axe");
 		public const L__AXE :LargeAxe = new LargeAxe();
@@ -176,6 +177,7 @@ public final class WeaponLib extends ItemConstants
 		public const NPHBLDE:NephilimBlade = new NephilimBlade();
 		public const OTETSU :OniTetsubo = new OniTetsubo();
 		public const PHALLUS:ThePhalluspear = new ThePhalluspear();
+		public const PHALUSS:ThePhalluspears = new ThePhalluspears();
 		//public const RCHEEP:Weapon = new ReaperCheep(); TODO: finish!
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",2,80,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.","", "Mace/Hammer");
 		public const POCDEST:PurifiedOniChieftainDestroyer = new PurifiedOniChieftainDestroyer();
@@ -255,9 +257,7 @@ public final class WeaponLib extends ItemConstants
 				})
 				.withPerk(PerkLib.MageWarden) as Weapon;
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
-		public const YAMARG :Weapon = new Weapon("YamaRG", "YamaRajaGrasp", "Yama-Raja gloves", "a pair of Yama-Raja gloves", "punch", 0, 1600, "These black gloves are made in black leather and an ebony alloy. Their corrupt touch seeks to destroy the pure and innocent. As such, it will seek the weak points of its victims when striking.", "", WT_GAUNTLET).withBuffs({
-			'psoulskillpower': +1.5
-		}) as Weapon;
+		public const YAMARG :YamaRajaGrasp = new YamaRajaGrasp();
 		public const ZWNDER :Zweihander = new Zweihander();
 		//Spellcasting weapon
 		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "", "Sword, StaffPart").withBuff('spellpower', +0.40) as Weapon;
