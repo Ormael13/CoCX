@@ -15,6 +15,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 	public static var CharyAffectionMeter:int;
 	public static var CharyLandShipQuestState:int;
 	public static var CharyMet:Boolean;
+	public static var CharySpar:Boolean;
 	public static var CharySeenSkulls:Boolean;
 	public static var CharyAnalEnabled:Boolean;
 	public static var CharyJammed:int;
@@ -35,6 +36,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		CharyAffectionMeter = 0;
 		CharyLandShipQuestState = 0;
 		CharyMet = false;
+		CharySpar = false;
 		CharySeenSkulls = false;
 		CharyAnalEnabled = false;
 		CharyJammed = 0;
@@ -52,6 +54,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			"CharyAffectionMeter":CharyAffectionMeter,
 			"CharyLandShipQuestState":CharyLandShipQuestState,
 			"CharyMet":CharyMet,
+			"CharySpar":CharySpar,
 			"CharySeenSkulls":CharySeenSkulls,
 			"CharyAnalEnabled":CharyAnalEnabled,
 			"CharyJammed":CharyJammed,
@@ -71,6 +74,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			CharyAffectionMeter = o["CharyAffectionMeter"];
 			CharyLandShipQuestState = o["CharyLandShipQuestState"];
 			CharyMet = o["CharyMet"];
+			CharySpar = valueOr(o["CharySpar"], false);
 			CharySeenSkulls = o["CharySeenSkulls"];
 			CharyAnalEnabled = o["CharyAnalEnabled"];
 			CharyJammed = o["CharyJammed"];
@@ -110,7 +114,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "Speak", charyFirstSpeak);
 		addButton(2, "Sing", charyFirstSing);
-		//addButton(3, "Attack!", CharyFight);
+		addButton(3, "Attack!", charyFirstFight);
 	}
 		
 	public function charyFirstSpeak():void {
@@ -127,6 +131,88 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>\"Anyone who can break out spontaneously like that, faced with nearly a dozen angry knives, no less, is good in my book\"</i>. The Scylla grins good naturedly. <i>\"I’m Charybdis, but my friends call me Chary\"</i>.\n\n");
 		outputText("You introduce yourself, and the two of you chat for a little while. You excuse yourself and head back to camp.\n\n"); 
 		endEncounter();
+	}
+	
+	public function charyFirstFight():void {
+		clearOutput();
+		outputText("Charybdis’s eyes widen as his tendrils stop their usual playful movements, wrapping around weapons hidden inside his drum-seat. He pulls the knives free, brandishing them with the same precision he showed playing his instruments. Despite their small size, there’s eight blades, and he knows how to use them.\n\n"); 
+		startCombat(new Charybdis());
+	}
+	public function charyWin():void {
+		clearOutput();
+		if (CharySpar) {
+			CharySpar = false;
+			outputText("Cherybdis falls backwards, tendrils splaying out on the sand around him. He tries to rise, but you’re on him before he can, your [weapon] pointed at his throat. He raises his hands in surrender, the red light faded from his eyes. <i>\"You’re good, champion.\"</i> His head lowers towards your "+(player.hasCock()?"[cocks]":"[cunt]")+", his eyes a mix of worry and arousal. <i>\"Well, I guess you have options now.\"</i>\n\n");
+			menu();
+			//addButton(1, "", );
+			//addButton(2, "", );
+			addButton(3, "Leave", cleanupAfterCombat);
+			/*outputText("The Scylla grins good naturedly. \n\n");
+			outputText("The Scylla grins good naturedly. <i>\"\"</i>\n\n");
+			outputText("\n\n");
+			outputText("\n\n");
+			outputText("\n\n");
+			outputText("\n\n");
+			outputText("\n\n");
+			outputText("\n\n");*/
+		}
+		else {
+			outputText("The scylla is defeated, 'ops we got no text for this so come back later when we got it ^^'");
+			/*if (player.canSwimUnderwater()) {
+				outputText("You could take advantage of her and punish her for trying to impose herself on you. Do you rape her?\n\n");
+				menu();
+				addButton(14, "No", oceanScyllaWin2);
+				if (player.lust >= 33 && player.gender > 0) {
+					addButton(0, "Fuck Her", oceanScyllaWin3);
+					SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanScyllaWin);
+				}
+				else outputText("You're not aroused enough to rape her.");
+			}
+			else {
+				outputText("You could rape her but, sadly, you would have trouble fucking anything underwater without drowning in the first place. Therefore, you head back to your boat and row back to the beach.");
+				*/doNext(cleanupAfterCombat);
+			//}
+		}
+	}
+	public function charyLoss():void {
+		clearOutput();
+		if (CharySpar) {
+			CharySpar = false;
+			outputText("You kneel, your [legs] shaking with exhaustion. You black out, and when you come to, your body itches. You sit up, but your head pounds. <i>\"Black Algae;\"</i> he explains apologetically. <i>\"Sticks to your injuries, and staunches the bleeding.\"</i> He offers you an unarmored hand, and helps you to your feet. <i>\"Sorry about that. I…\"</i> He waves his hand. <i>\"You were out for a while.\"</i>\n\n");
+			HPChange(Math.round(player.maxHP() * 0.5), false);
+			cleanupAfterCombat();
+		}
+		else {
+			if (player.cor > 80) {
+				outputText("You snarl your anger, sinking to your knees as the Scylla stands over you, tentacles still wrapped around his knives. His eyes have turned reddish, glowing brighter than before, and he clenches his teeth in a snarling scowl.\n\n");
+				outputText("<i>\"You would have raped me, had I lost,\"</i> he mutters to himself, looking down at the sand. <i>\"Only seems fair I respond in kind.\"</i> Your head falls, and although you try to dodge, his tendrils are far too fast, wrapping around your arms and pulling you up by them. He then pushes you onto your back on the sands, easily pinning you down. You try and wiggle your [ass], presenting yourself, but this seems to anger him further. You realize, with a sudden burst of fear, that he’s still got his knives out.\n\n");
+				outputText("You cry out in fear and realization as the first knife falls, the entire world turning red as the jagged edge rips through your back. You barely have time to register the pain before the second, and third, open gashes just underneath your ribs. You roll, bringing your arms up to shield your face, but the fourth and fifth open your arms up, pouring your precious blood into the thirsty sands.\n\n");
+				outputText("You stop feeling anything about seven stabs in, by the fifteenth, you’re all but dead, coughing what little blood you have left from your lungs. Your arms and legs are unfeeling hunks of meat at this point, and you can dreamily see one of your ribs being pulled out of its cage. With a sudden *SNAP* you stop feeling entirely.\n\n");
+				outputText("Charybdis hangs your head over the entrance to his cove, your skull providing a warning for others who’d try to harm him.\n\n");
+				outputText("<b>YOU ARE DEAD.</b>\n\n");
+				EventParser.gameOver();
+			}
+			else {
+				outputText("As you sink to the ground, defeated, The short Scylla stands over you, a dark scowl on his face. His elvish ears twitch, and as he looms over you, he hits upon an idea. He grins devilishly, tendrils lifting your dead-tired body. He fishes around in his boat, pulling out a rope. He hogties you, binding your hands and feet, leaving no slack whatsoever. You struggle, but he slaps your face with his tentacle. <i>\"No.\"</i> ");
+				outputText("He rumbles. <i>\"You behaved like a demon, but you aren’t one. You’re going to take your punishment and leave my home.\"</i> He wraps a much thicker rope around your torso, binding your arms to your sides, then dragging you over to a nearby tree. ");
+				if (player.gender > 0) outputText("Despite (or maybe because of) the rough treatment, your "+(player.hasCock()?"[cock] begins to throb ":"")+(player.gender == 3?"and ":"")+(player.hasVagina()?"cooter begins to drool a little":"")+".");
+				outputText("\n\nThe Scylla hangs you from the rope around your torso, the crude rope digging into your stomach. You can’t see him anymore, and for a few seconds, nothing happens. Then you hear a sound like a whip cracking. A burst of hot pain erupts on your back. You hold in your groan, but a second burst of pain comes in right after, making you groan in pain. He didn’t give you anything to bite down on, so as he begins slapping your ass with his tendrils, you have no choice but to moan or risk losing your teeth.\n\n");
+				if (player.gender > 0) {
+					outputText("You quickly lose track of time, your first orgasm hitting you like a minotaur charge to the gut."+(player.hasCock()?" Your [cock] spurts your off-white spooge onto the ground as you buck, whether from pain or arousal you honestly can’t tell.":"")+(player.hasVagina()?" Your vaginal muscles contract hard, but there’s nothing for them to milk. You drool a steady drip of vaginal fluids onto the sand below.":"")+"\n\n");
+					outputText("You lose track of how many orgasms he forces out of you, your mind slipping in and out of consciousness, but ");
+				}
+				if (rand(2) == 0) {
+					outputText("you come to with the sun almost completely gone from the sky, unbound, just outside of Charybdis’s cove. As you sit up, a pair of purple eyes gleam at you from the dark. Your armor is unceremoniously tossed at you, hitting you in the breast, and a deep voice rumbles in anger.\n\n");
+					outputText("<i>\"You’re lucky. Much more corruption, and I’d have killed you.\"</i> You decide not to press your luck with the pissed off music man, donning your [armor] and beating a hasty retreat.\n\n");
+				}
+				else {
+					outputText("you come to, wrapped in a blanket on the sand. Your clothing is right next to you, and as you look up, Charybdis looks away from you. <i>\"Sorry if I overdid it.\"</i> he mutters. You laugh, standing, still naked, and playfully slug the Scylla on the shoulder. You tell him that you asked for it, and judging from the boner he still has, he enjoyed it too.\n\n");
+					outputText("Chary blushes at that. <i>\"Okay, maybe I did.\"</i> He sighs. <i>\"Just because it was you, though.\"</i> He wraps his tendrils around you in a warm (if moist) hug. <i>\"Just look after yourself [name], I don’t want any demons having that kind of fun with you, eh?\"</i>\n\n");
+					outputText("You don your [armor] and leave the cove, Chary waving you off. You grin and head back to camp. You had quite a bit of fun with your Scylla pal today!\n\n");
+				}
+				cleanupAfterCombat();
+			}
+		}
 	}
 	
 	public function charyBeachMeetings():void {
@@ -153,8 +239,8 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "Talk", charyTalk);
 		addButton(2, "Hang", charyHang);
-		/*addButton(3, "Spar", charySpar);
-		addButton(4, "Music", charyMusic);
+		addButton(3, "Spar", charySpar);
+		/*addButton(4, "Music", charyMusic);
 		addButton(5, "Sex", charySex);
 		if (CharySeenSkulls = true) addButton(6, "Skulls", charyGiveSkulls);*/
 		addButton(14, "Leave", explorer.done);
@@ -228,8 +314,10 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 
 	public function charySpar():void {
 		clearOutput();
-		outputText("You ask Charybdis to bring out his knives. He looks at you, his eyes saddening. <i>\"Everything, either fight or fuck.\"</i> He shakes his head, scowling. You assure him that you just want to get stronger, so you can fulfil your duties as champion. This seems to make him feel a little better, but he’s still reluctant, drawing his knives slowly. His purple eyes darken, his gills flaring up as he lowers his stance. <i>\"Come on then, Champion,\"</i> he says roughly, his eyes flashing red. <i>\"Let us duel.\"</i>\n\n");
-		//startCombat(new Charybdis());	
+		CharySpar = true;
+		outputText("You ask Charybdis to bring out his knives. He looks at you, his eyes saddening. <i>\"Everything, either fight or fuck.\"</i> He shakes his head, scowling. You assure him that you just want to get stronger, so you can fulfil your duties as champion. This seems to make him feel a little better, but he’s still reluctant, drawing his knives slowly. His purple eyes darken, his gills flaring up as he lowers his stance.\n\n");
+		outputText("<i>\"Come on then, Champion,\"</i> he says roughly, his eyes flashing red. <i>\"Let us duel.\"</i>\n\n");
+		startCombat(new Charybdis());	
 	}
 
 	public function charyJamOut():void {
