@@ -125,7 +125,7 @@ public class Changelog extends BaseContent
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night;\n");
+			outputText("-New enemies: Wereshark (M) - lvl 67. Encounterable in Ocean at night; Arigean Countess - lvl 70. Encounterable in Ocean.\n");
 			outputText("-Since Liadri showed concern over Celess been accesable too easily then other options it will be made sure she not founded earlier than at least next possible option which is lvl 45+.\n");
 			outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
@@ -157,16 +157,16 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP, Twin Six Shooter using ammo 2x faster, Yama-Raja Grasp gloves & Karmic Touch gloves not req. lvl 54+, ");

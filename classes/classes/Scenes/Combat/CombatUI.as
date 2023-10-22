@@ -286,9 +286,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
 			menu();
 			addButton(0, "Recover", combat.wait);
-			if (CombatAbilities.ClearMind.isKnown) {
-				CombatAbilities.ClearMind.createButton(monster).applyTo(button(1));
-			}
+			if (CombatAbilities.ClearMind.isKnown) CombatAbilities.ClearMind.createButton(monster).applyTo(button(1));
 			addButton(13, "Surrender(H)", combat.surrenderByHP).hint("Stop defending up to the point enemy would beat you down to minimal HP.");
 			addButton(14, "Surrender(L)", combat.surrenderByLust).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
 		} else if (player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
@@ -898,6 +896,10 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
 			btnStruggle.call((monster as Izumi).titSmotherStruggle);
 			btnBoundWait.call((monster as Izumi).titSmotherWait);
+		}
+		if (player.hasStatusEffect(StatusEffects.Terrorize)) {
+			btnStruggle.call((monster as Grayda).graydaTerrorizeStruggle);
+			btnBoundWait.call((monster as Grayda).graydaTerrorizeWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Pounced)) {
 			if (monster is Tyrantia) {

@@ -184,7 +184,7 @@ public function meetEvangeline():void {
 	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
 	// [Appearan] [ Talk   ] [   Sex  ] [ Spar   ] [GiveGems]
 	// [Alchemy ] [Ingreds ] [        ] [I.Mutati] [Experime]
-	// [        ] [ Wendigo] [Jiangshi] [Soul Gem] [ Back   ]
+	// [Arigean ] [Wendigo ] [Jiangshi] [Soul Gem] [ Back   ]
 	menu();
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
@@ -205,6 +205,8 @@ public function meetEvangeline():void {
 	addButton(6, "Ingredients", ingredientsMenu).hint("Ask Evangeline to make some alchemy ingredients");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
+	if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) addButton(10, "Arigean I.", curingArigean);
+	else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -957,6 +959,43 @@ private function JustDoIt():void {
 		EvangelineGemsPurse -= 150;
 	}
 	doNext(camp.returnToCampUseOneHour);
+}
+
+private function curingArigean():void {
+	clearOutput();
+	outputText("\"<i>Hey [name]! Is everything alright? You're looking a little pale, would you mind if I looked you over?</i>\" Her tone showing worry before she continues. \"<i>It should only take a quick moment of your time.</i>\"\n\n");
+	outputText("Clearly she has your best health in mind, and you have been feeling a little under the weather as of late. It’s just a small look over, so what’s the worst that could happen?\n\n");
+	outputText("\"<i>Alright [name] just dress down, and sit right there. I need to go grab something so i’ll be right back!</i>\" She shouts as she jogs somewhere towards the camp’s border.\n\n");
+	outputText("After roughly a few minutes of you idly thinking about what you plan to do for the rest of the day, Evangeline approaches you with a handful of instruments and tools.\n\n");
+	outputText("\"<i>Okay [name] i'm going to need you to stand up straight, and hold out your arms.</i>\" She instructs as she goes to probing parts of your body, and sticking one of her instruments in your mouth.\n\n");
+	
+	outputText("\"<i>What’s this black spot right here?</i>\" you feel her press into a spot on your spine just above your [butt], earning a hiss from the soreness it causes. She grabs the instrument giving it a look before a frown appears on her face.\n\n");
+	outputText("\"<i>It seems you have some parasites in your system. It shouldn’t take too much to remove them from your system, and I recommend you do so before your case worsens.</i>\" She grabs a paper and quill and starts writing down a list on it.\n\n");
+	
+	outputText("\"<i>750 gems should be enough to cover the costs of the materials needed. I highly recommend we do this now before your case gets any worse.</i>\" She says taking a seat while waiting for you to make up your mind.\n\n");
+	menu();
+	addButtonIfTrue(1, "Yes", curingArigeanYes, "Req. 750 gems.", player.gems >= 750);
+	addButton(3, "No", curingArigeanNo);
+}
+private function curingArigeanYes():void {
+	clearOutput();
+	outputText("You present her with her payment, and she responds by grabbing it before hurriedly jogging off to grab some things from her encampment. After waiting for about 10 minutes she returns with a vial in hand.\n\n");
+	outputText("\"<i>Here you go [name]! Don’t mind the smell… or taste.</i>\" She presents you the vial which holds a foul smelling, yellow liquid that you can’t help but gag upon smelling it.\n\n");
+	outputText("\"<i>Down the hatch.</i>\" you murmur as you attempt to drink down the foul liquid all in one go while not throwing it back up.\n\n");
+	
+	//outputText("\"<i></i>\"\n\n");
+	
+	outputText("A burning sensation makes you feel like your stomach is attempting to digest itself, and before long you can no longer keep it down as you hack up a thick, black, Viscous liquid. <b>It seems you're no longer a host to a parasite.</b>\n\n");
+	
+	player.gems -= 750;
+	statScreenRefresh();
+	player.removeStatusEffect(StatusEffects.ArigeanInfected);
+	doNext(camp.campFollowers);
+	advanceMinutes(15);
+}
+private function curingArigeanNo():void {
+	outputText("\"<i>Suit yourself, but it’s going to cost much more to remove it should your case worsen.</i>\"\n\n");
+	doNext(meetEvangeline);
 }
 
 private function curingWendigo():void {

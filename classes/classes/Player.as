@@ -6407,8 +6407,8 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)
-					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath)
+					|| hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected);
 		}
 
 		public function manticoreFeed():void {

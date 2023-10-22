@@ -671,6 +671,7 @@ public class Combat extends BaseContent {
             StatusEffects.Straddle,
             StatusEffects.DragonsNom,
             StatusEffects.Devoured,
+            StatusEffects.Terrorize,
         ];
         var monsterStatuses:Array = [
             StatusEffects.QueenBind,

@@ -167,6 +167,8 @@ public class SceneLib {
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
 
+    public static var graydaScene:GraydaRetainer = new GraydaRetainer();
+
     public static var helFollower:HelFollower = new HelFollower();
 
     public static var helScene:HelScene = new HelScene();
