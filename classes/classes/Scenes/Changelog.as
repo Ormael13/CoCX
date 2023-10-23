@@ -148,8 +148,8 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Dual Excalibur - can be gained by combining 2x Excalibur weapon. Cost 1600 gems. Base atk is 40. It's dual normal sized weapon belonging to sword type.\n");
 			outputText("-Ice Fist / Fire Punch can be used if pc have both elemental affinity perks like Fire Affinity / Ifrit fusion form and Cold Affinity/Mastery.\n");
 			outputText("-Mummies minions of Anubi PC would have now int/wis based scaling and affected by bonuses from using weapons or perks that increase damage of minions. (No more wet noodles are they? ^^)\n");
-			outputText("-Small fix for kirin race hair colors. (Liadri)\n");
-			outputText("-\n");
+			outputText("-Small fix for kirin race hair colors. Dragonne can still get minimal points for having huge dragon wing this is only for cosmetic purpose and dragonne does not benefit from them. (Liadri)\n");
+			outputText("-Fix: all cat race not benefiting from eye of the tiger, Vouivre score not functionning, bug preventing dragonne capscore (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -168,9 +168,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP, Twin Six Shooter using ammo 2x faster, Yama-Raja Grasp gloves & Karmic Touch gloves not req. lvl 54+, ");
-			outputText("One with the forest perk tier not updating correctl, Arcane Regeneration (Major) conflicting req., Confusion on enemy text parser error, Cold Mastery not giving pretection for negative effects of using Blizzard Kimono/Claws, Blizzard Claws not enabling use of feral combat mode\n\n");
+			outputText("One with the forest perk tier not updating correctl, Arcane Regeneration (Major) conflicting req., Confusion on enemy text parser error, Cold Mastery not giving pretection for negative effects of using Blizzard Kimono/Claws, Blizzard Claws not enabling use of feral combat mode, combat book from Izma doesn't give strength knowledge when readed in cabin\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -226,7 +231,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -253,6 +262,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

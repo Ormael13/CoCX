@@ -367,6 +367,9 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.CombatWounds)) 
 			statEffects += "Combat wounds - missing " + player.statusEffectv1(StatusEffects.CombatWounds) + " % of max health.\n";
 
+		if (player.hasStatusEffect(StatusEffects.ArigeanInfected))
+			statEffects += "Arigean Infected: You would slowly change into Arigean each night.\n";
+
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
 			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv3(StatusEffects.Bammed1) + " hours remaining. (Disables melee attacks)\n";
