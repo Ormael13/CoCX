@@ -52,6 +52,7 @@ public class DragonneRace extends Race{
 				.tongueType(Tongue.CAT, +1)
 				.wingType(Wings.DRACONIC_SMALL, +2)
 				.wingType(Wings.DRACONIC_LARGE, +4)
+				.wingType(Wings.DRACONIC_HUGE, +4)
 				.hornType(Horns.DRACONIC_X2, +1)
 				.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)
 				.legType(LowerBody.LION, +1)
