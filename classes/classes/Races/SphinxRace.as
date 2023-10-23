@@ -76,6 +76,7 @@ public class SphinxRace extends Race {
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 		addMutation(IMutationsLib.CatLikeNimblenessIM, +1);
+		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		
 		buildTier(14, "sphinx")
 				.buffs({
