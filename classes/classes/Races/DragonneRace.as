@@ -59,7 +59,7 @@ public class DragonneRace extends Race{
 				.rearType(RearBody.LION_MANE, +1)
 				.skinCoatType(Skin.DRAGON_SCALES, +1)
 				.scaleColor1(ANY(DragonneScaleColors), +1)
-				.furColor1(ANY(DragonneFurColors), +1)
+				.furColor01(ANY(DragonneFurColors), +1)
 				.customRequirement("",'vagina and C+ tits or 16\"+ long cock',
 						function (body:BodyData):Boolean {
 							return body.hasVagina && body.biggestTitSize >= 3 || body.biggestCockSize > 16
