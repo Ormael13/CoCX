@@ -54,6 +54,7 @@ public class HellcatRace extends Race{
 						CatRace.isHellcatSubrace,0,-1000
 				);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
+		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		buildTier(10, "hellcat")
 				.buffs({
 					"spe.mult": +0.40,
