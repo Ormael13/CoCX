@@ -671,6 +671,7 @@ public class Combat extends BaseContent {
             StatusEffects.Straddle,
             StatusEffects.DragonsNom,
             StatusEffects.Devoured,
+            StatusEffects.Terrorize,
         ];
         var monsterStatuses:Array = [
             StatusEffects.QueenBind,
@@ -1699,12 +1700,12 @@ public class Combat extends BaseContent {
 
     public function mummyattacks():void {
 		var mummyDamage:Number = 10;
-        //mummyDamage += intwisscaling() * 0.1;
+        mummyDamage += intwisscaling() * 0.4;
         mummyDamage *= player.perkv1(PerkLib.MummyLord);
 		mummyDamage *= soulskillMod();
-        //if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) mummyamplification *= historyTacticianBonus();
+        if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) mummyamplification *= historyTacticianBonus();
         var mummyamplification:Number = 1;
-        //if (player.weapon == weapons.SCECOMM) mummyamplification += 0.5;
+        if (player.weapon == weapons.SCECOMM) mummyamplification += 0.5;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
             mummyamplification += 0.1;
             if (player.hasPerk(PerkLib.WispLieutenant)) mummyamplification += 0.2;
@@ -2367,9 +2368,15 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
             clearOutput();
-            outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing your sensitive place quite a bit, giving you a knowing grin.");
-            player.takeLustDamage(player.effectiveSensitivity() / 4 + 20, true);
-            player.takePhysDamage(100 + rand(40));
+			if (monster is Charybdis) {
+				outputText("Instead of squeezing, as you’d assumed he would, a sharp stabbing pain in your flank reminds you that he’s still holding knives. As you struggle, his knives stab into your flesh.");
+				
+			}
+			else {
+				outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing your sensitive place quite a bit, giving you a knowing grin.");
+				player.takeLustDamage(player.effectiveSensitivity() / 4 + 20, true);
+				player.takePhysDamage(100 + rand(40));
+			}
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
             clearOutput();
@@ -2578,10 +2585,12 @@ public class Combat extends BaseContent {
             clearOutput();
             outputText("You struggle to get free from the [monster name]'s mighty tentacles. ");
             if (rand(3) == 0 || rand(120) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
-                outputText("As force alone seems ineffective, you bite one of her tentacles and she screams in surprise, releasing you.");
+                if (monster is Charybdis) outputText("You grunt with effort, struggling against the muscular bands of his tentacles. You loosen his grip by just enough, popping out of his embrace with a roar of effort. You slide along the ground for a moment, getting to your feet.");
+				else outputText("As force alone seems ineffective, you bite one of her tentacles and she screams in surprise, releasing you.");
                 player.removeStatusEffect(StatusEffects.ScyllaBind);
             } else {
-                outputText("Despite all of your struggles, she manages to maintain her hold on you.");
+                if (monster is Charybdis) outputText("His limbs tighten around you. The sucker-tipped limbs hold firm against your attempt to loosen them, and you slump, exhausted.");
+				else outputText("Despite all of your struggles, she manages to maintain her hold on you.");
                 player.takeLustDamage(player.effectiveSensitivity() / 5 + 5, true);
                 player.takePhysDamage(100 + rand(80));
             }
@@ -12078,7 +12087,6 @@ public class Combat extends BaseContent {
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.lustVuln += 0.05;
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
-
             if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
             if (combatIsOver()) return;
         }

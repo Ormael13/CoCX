@@ -264,6 +264,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AteEgg:StatusEffectType                         = mk("ateEgg");
 		public static const AnemoneArousal:StatusEffectType                 = mk("Anemone Arousal");
 		public static const ArcaneCircle:StatusEffectType               	= mk("Arcane Circle");
+		public static const ArigeanInfected:StatusEffectType               	= mk("Arigean Infected");
 		public static const BimboChampagne:StatusEffectType                 = mk("Bimbo Champagne");
 		public static const Birthed:StatusEffectType                        = mk("Birthed");
 		public static const BirthedImps:StatusEffectType                    = mk("Birthed Imps");
@@ -1257,6 +1258,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const HealingSiegweird:StatusEffectType      = mkCombat("Healing Siegweird");
 		public static const CHCompellingAria:StatusEffectType      = mkCombat("Corrupted Handmaidens Compelling Aria");
 		public static const LockingCurse:StatusEffectType          = mkCombat("Locking Curse");
+		public static const Terrorize:StatusEffectType             = mkCombat("Terrorize");
 		
 		// enchanted item stuff
 		

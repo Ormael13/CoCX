@@ -143,6 +143,12 @@ use namespace CoC;
 					abyssalsharkScene.oceanJuvenileAbyssalSharkEncounter();
 				}
 			}, {
+				name  : "arigean",
+				label : "Arigean",
+				kind : 'monster',
+				call  : SceneLib.graydaScene.graydaEncounter,
+				chance: 5
+			}, {
 				name  : "weresharkMale",
 				label : "Wereshark (M)",
 				kind : 'monster',

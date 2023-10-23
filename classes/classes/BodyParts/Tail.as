@@ -481,6 +481,13 @@ public class Tail extends SaveableBodyPart {
 		tailSlam: true,
 		isLong: true
 	});
+	public static const ARIGEAN_GREEN: int = 57;
+	EnumValue.add(Types, ARIGEAN_GREEN, "ARIGEAN_GREEN", {
+		name:"arigean (G)",
+		appearanceDesc: "A duo of black, parasitic-like organisms seem to sprout from the end of your tailbone with an additional skeletal tail sporting green highlights, each seems to sport a large set of teeth, and are covered in black armor-like skin with glowing green markings. You seem to feel everything they feel.",
+		//tailSlam: true,
+		isLong: true
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;
