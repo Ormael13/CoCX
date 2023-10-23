@@ -50,10 +50,13 @@ public class VouivreRace extends Race {
 				.eyeType(Eyes.SNAKE, +1)
 				.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)
 				.hornType(Horns.DRACONIC_X2, +1)
-				.wingType(Wings.DRACONIC_SMALL, +2, -1000)
-				.wingType(Wings.DRACONIC_LARGE, +4, -1000)
-				.wingType(Wings.DRACONIC_HUGE, +6, -1000)
+				.wingType(Wings.DRACONIC_SMALL, +2)
+				.wingType(Wings.DRACONIC_LARGE, +4)
+				.wingType(Wings.DRACONIC_HUGE, +6)
 				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
+				.customRequirement("","Must have dragon wings",
+						hasDragonWing,0,-1000
+				)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
 							return !(body.player.racialScore(Races.NAGA) > 10
@@ -106,6 +109,11 @@ public class VouivreRace extends Race {
 				&& (body.wingType == Wings.DRACONIC_SMALL
 					|| body.wingType == Wings.DRACONIC_LARGE
 					|| body.wingType == Wings.DRACONIC_HUGE)
+	}
+
+	public static function hasDragonWing(body:BodyData):Boolean {
+		return (body.wingType == Wings.DRACONIC_SMALL
+						|| body.wingType == Wings.DRACONIC_LARGE || body.wingType == Wings.DRACONIC_HUGE)
 	}
 }
 }

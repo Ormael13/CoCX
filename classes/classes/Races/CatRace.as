@@ -91,6 +91,7 @@ public class CatRace extends Race {
 				.hasPerk(PerkLib.Flexibility, +1);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
+		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		
 		buildTier(8, "cat")
 				.customNamingFunction(function(body:BodyData):String {

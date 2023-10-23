@@ -56,6 +56,7 @@ public class NekomataRace extends Race{
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
+		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		
 		buildTier(10, "nekomata")
 				.buffs({
