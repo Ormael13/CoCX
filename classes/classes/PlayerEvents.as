@@ -454,14 +454,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.MummyCurse) && player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 20) {
-				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				outputText("\nAs your power over death increase you aquire the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.createPerk(PerkLib.MummyCurse,0,0,0,0);
 				player.createPerk(PerkLib.DeathPriest,0,0,0,0);
 				player.createPerk(PerkLib.SoulNexus,0,0,0,0);
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.MummyCurse) && player.racialScore(Races.ANUBIS) < 20) {
-				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Lost Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				outputText("\nAs your power over death wanes you lose the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Lost Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.removePerk(PerkLib.MummyCurse);
 				player.removePerk(PerkLib.DeathPriest);
 				player.removePerk(PerkLib.SoulNexus);
