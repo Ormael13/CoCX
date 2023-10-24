@@ -1556,7 +1556,7 @@
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail_bg/manticore" dx="20" dy="40"/>
-        <cell rect="1,71,60,139" name="tail_front/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,60,139" name="tail/manticore" dx="20" dy="40"/>
         <cell rect="507,71,168,139" name="tail/manticore_taur" dx="45" dy="82"/>
         <cell rect="676,71,168,139" name="tail_front/manticore_taur" dx="45" dy="82"/>
         <cell rect="1,211,83,139" name="tail/orca" dx="78" dy="39"/>
@@ -4583,8 +4583,8 @@
 				</if>
             </case>
             <case values="Wings.DRACONIC_SMALL,Wings.DRACONIC_LARGE">
-                <show part="wings_bg/scales"/>
                 <show part="wings/scales"/>
+				<show part="wings_bg/scales"/>
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/scales"/>
 				</if>
@@ -4893,8 +4893,8 @@
 					<show part="tail/manticore_taur"/>
 					<show part="tail_front/manticore_taur"/>
 				<else>
+					<show part="tail/manticore"/>
 					<show part="tail_bg/manticore"/>
-					<show part="tail_front/manticore"/>
 				</else>
 				</if>
             </case>
