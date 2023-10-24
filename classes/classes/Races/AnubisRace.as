@@ -7,6 +7,8 @@ import classes.CoC;
 import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
+
 //import classes.VaginaClass;
 
 public class AnubisRace extends Race {
@@ -59,7 +61,7 @@ public class AnubisRace extends Race {
 				.skinBasePattern(Skin.PATTERN_GLYPH_TATTOO, +1)
 				.furColor01(ANY(AnubisFurColors), +1)
 				.hairColor1(ANY(AnubisHairColors), +1)
-				.hasCockOfType(CockTypesEnum.DOG, +1)//.cockOrVaginaOfType(CockTypesEnum.DOG, VaginaClass.cat,1)
+				.cockOrVaginaOfType(CockTypesEnum.DOG,VaginaClass.HUMAN, +1)//.cockOrVaginaOfType(CockTypesEnum.DOG, VaginaClass.cat,1)
 				.skinColor1(ANY(AnubisSkinColors), +1)
 				.corruption(AT_LEAST(50), +1)
 				.hasPerk(PerkLib.MummyLord, +1);
