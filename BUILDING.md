@@ -43,6 +43,9 @@ java.args=-Xmx384m -Dsun.io.useCanonCaches=false
 ### IntelliJ Idea
 The main problem with it is that you still need the SDK, and you *can't* download it with IJ. So you need to find it somewhere else, or download it using FlashDevelop first. The same goes for Adobe Flash Player.
 
+#### Direct link extracted from FD
+https://fpdownload.adobe.com/pub/flex/sdk/builds/flex4.6/flex_sdk_4.6.0.23201B.zip
+
 #### Flex SDK - without FD, EragonX method
 You can download the 4.16.1 Flex SDK from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
 The player (both regular and debug versions) can be downloaded from Xianxia discord server.
