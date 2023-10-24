@@ -1556,7 +1556,7 @@
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail_bg/manticore" dx="20" dy="40"/>
-        <cell rect="1,71,60,139" name="tail/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,80,139" name="tail/manticore" dx="20" dy="40"/>
         <cell rect="507,71,168,139" name="tail/manticore_taur" dx="45" dy="82"/>
         <cell rect="676,71,168,139" name="tail_front/manticore_taur" dx="45" dy="82"/>
         <cell rect="1,211,83,139" name="tail/orca" dx="78" dy="39"/>
