@@ -5224,7 +5224,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Arms
-            if ((player.lowerBody == LowerBody.SHARK || player.lowerBody == LowerBody.ABYSSAL_SHARK) && !InCollection(player.arms.type, Arms.SHARK, Arms.SEA_DRAGON) && changes < changeLimit && rand(3) == 0) {
+            if ((player.lowerBody == LowerBody.SHARK || player.lowerBody == LowerBody.ABYSSAL_SHARK) && !InCollection(player.arms.type, Arms.SHARK, Arms.ABYSSAL_SHARK) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.ArmsShark.applyEffect();
                 changes++;
@@ -5236,7 +5236,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
 			if (type == 2 && player.hasPerk(PerkLib.DantianPhylactery)) {
-				if (type != 2 && player.faceType != Face.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
+				if (player.faceType != Face.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.FaceAbyssalShark.applyEffect();
 					changes++;

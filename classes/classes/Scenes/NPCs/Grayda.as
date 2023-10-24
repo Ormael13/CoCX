@@ -48,24 +48,17 @@ public class Grayda extends Monster
 			player.takeMagicDamage(damage, true);
 		}
 		private function graydaFlyingConstruct():void {
-			outputText("The "+this.short+" raises her staff and summons a small group of levitating bird shaped constructs. A Construct fires at you before fizzling out of existence. ");
+			outputText("The "+this.short+" raises her staff and summons a small group of levitating bird shaped constructs. ");
 			var damage:Number = 0;
 			damage += this.str;
 			damage += eBaseDamage();
 			damage += eBaseStrengthDamage();
 			damage *= 4;
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
-			player.takeMagicDamage(damage, true);
+			var fC:Number = 12;
+			while (fC-->0) {
+				outputText("A construct firing at you before fizzling out of existence. ");
+				player.takeMagicDamage(damage, true);
+			}
 		}
 		private function graydaTerrorize():void {
 			outputText("The Arigean’s Countess eyes glow a strong yellow before she waves her staff, causing the fog in the area to grow even denser, obscuring her from your sight. You attempt to move but find your feet have been frozen in place. ");

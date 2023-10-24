@@ -131,7 +131,7 @@ public class YourCabin extends DungeonAbstractContent
 			clearOutput();
 			outputText("You take the book titled 'Combat Manual' from the bookshelf and sit down on the chair while you lay the book on the desk.  You open the book and study its content.\n\n");
 			//(One of the following random effects happens)
-			var choice:Number = rand(3);
+			var choice:Number = rand(4);
 			if(choice == 0) {
 				outputText("You learn a few new guarding stances that seem rather promising.");
 				//(+2 Toughness)
@@ -150,7 +150,7 @@ public class YourCabin extends DungeonAbstractContent
 				dynStats("spe", 2);
 				player.KnowledgeBonus("spe",2);
 			}
-			else {
+			else if(choice == 3) {
 				outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.");
 				//(+2 Strength)
 				dynStats("str", 2);
