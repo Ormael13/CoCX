@@ -13042,13 +13042,21 @@ public function StraddleTease():void {
 
     //Select the scene
     var TeaseFunctionList:Array = [RandomTeaseKiss];
-    if (monster.hasCock() > 0) {
+    if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
+    if (monster.hasVagina()) {
+        TeaseFunctionList.push(RandomTeaseViolateOpponentPussy);
+        if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) TeaseFunctionList.push(RandomTeaseLongTongue);
+    }
+    if (monster.hasCock()) {
         if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) TeaseFunctionList.push(RandomTeaseStranglingTail);
         if (player.tail.type == Tail.MANTICORE_PUSSYTAIL) TeaseFunctionList.push(RandomTeaseManticoreTailfuckInitiate);
+        if (player.hasVagina() && !player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
+        TeaseFunctionList.push(RandomTeaseIfEnnemyCock);
     }
     if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseManticoreTailSpike);
+    if (player.hairType == Hair.MINDBREAKERMALE) TeaseFunctionList.push(RandomTeaseMindflayerCriticalOverload);
     if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);
-    if (player.lowerBody == LowerBody.PLANT_FLOWER){
+    if (player.lowerBody == LowerBody.PLANT_FLOWER || player.lowerBody == LowerBody.FLOWER_LILIRAUNE){
         if (player.isLiliraune()) TeaseFunctionList.push(RandomTeaseLiliraune);
         else TeaseFunctionList.push(RandomTeaseAlraune);
     }
@@ -13063,15 +13071,6 @@ public function StraddleTease():void {
     if (player.isAnyRace(Races.HarpylikeRaces)) TeaseFunctionList.push(RandomTeaseHarpy);
     if (player.isRaceCached(Races.KITSUNE)) TeaseFunctionList.push(RandomTeaseKitsune);
     if (player.perkv1(IMutationsLib.BlackHeartIM) > 0) TeaseFunctionList.push(RandomTeaseLustStrike);
-    if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
-    if (monster.hasVagina()) {
-        TeaseFunctionList.push(RandomTeaseViolateOpponentPussy);
-        if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.SNAKE) TeaseFunctionList.push(RandomTeaseLongTongue);
-    }
-    if (monster.hasCock()) {
-        TeaseFunctionList.push(RandomTeaseIfEnnemyCock);
-        if (player.hasVagina() && !player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
-    }
     var ChosenTease:Function = randomChoice(TeaseFunctionList);
     ChosenTease();
     combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -13183,12 +13182,36 @@ public function RandomTeaseLongTongue():void {
     player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, +1);
 }
 
-public function RandomTeaseManticoreTailSpike():void {
+    public function RandomTeaseMindflayerCriticalOverload():void {
+        outputText("Immobilizing your opponent with your arms you lock [monster him] into a kiss as you insert your tentacles inside [themonster]'s head and wrap them around [monster his] brain," +
+                " giving your victim a glimpse at every depraved lewd act your body has felt and done to others and the infinite maddening pleasure your insane mind has gone through " +
+                "gifting your victim with the first hand experience of everything you have endured." +
+                " Your opponent shove you off in panic but the damage is already done and you smile knowingly as you spot telltale sign of [monster his] increased arousal.");
+        var Multiplier:Number = 1;
+        if (player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) Multiplier += player.perkv1(PerkLib.MindbreakerBrain1toX)*0.5;
+        StraddleDamage *= 1+(scalingBonusIntelligence()*2/100);
+        StraddleDamage *= Multiplier;
+        monster.teased(StraddleDamage, false);
+        monster.lustVuln += 0.05;
+        if (Randomcrit) outputText(" <b>Critical!</b>");
+    }
+
+    public function RandomTeaseManticoreTailSpike():void {
     outputText("Taking advantage of your opponent's precarious position, you reach back and grab one of your back-spikes. " +
             "You grin widely as you bring your hand down, stabbing your opponent with your venomous spike. You bat aside their clumsy attempt at a block, stabbing them again and again. With each stab, venom frothes from the spike, and blood spills from the deep injuries." +
             "Your victim eventually rallies, blocking your wrist, then knocking the spike from your hand. You jump off them before they can strike you, but as they fight their way upright, you can tell that it was worth it");
     if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
-    monster.teased(StraddleDamage, false);
+        var Multiplier:Number = 1;
+        if (player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) Multiplier += 0.5;
+        StraddleDamage *= Multiplier;
+        monster.teased(StraddleDamage, false);
     if (Randomcrit) outputText(" <b>Critical!</b>");
     var dam4Ba:Number = 1;
     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Ba *= 2;
