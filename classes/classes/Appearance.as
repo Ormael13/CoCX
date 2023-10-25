@@ -690,6 +690,13 @@ public class Appearance extends Utils
 						"dripping eldritch shaft",
 						"tapered eldritch shaft");
 			}
+			else if (cockType == CockTypesEnum.ARIGEAN) {
+				return randomChoice("light blue dick",
+					"light blue cock",
+					"light blue prick",
+					"light blue member",
+					"light blue shaft");
+			}
 			return randomChoice("cock",
 				"prick",
 				"pecker",
@@ -1329,6 +1336,12 @@ public class Appearance extends Utils
 				if (description != "") description += ", ";
 				options = ["neon blue luminescent",
 					"neon blue glowing"];
+				description += randomChoice(options);
+			}
+			if (i_creature.vaginaType() == 19 && (forceDesc || Math.floor(Math.random() * 2) == 0)) {
+				if (description != "") description += ", ";
+				options = ["light blue luminescent",
+					"light blue glowing"];
 				description += randomChoice(options);
 			}
 

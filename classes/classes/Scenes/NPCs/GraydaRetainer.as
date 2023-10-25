@@ -49,8 +49,8 @@ private function graydaEncounterWinMale():void {
 private function graydaEncounterWinSharedEnd():void {
 	outputText("Afterward, she allows you a brief moment of respite before propping you up in her lap maintaining a firm grip on your arms, and before your even capable of protesting a tentacle-like appendage is forced down your throat, and a cold viscous liquid is pumped through it into your gullet, before long you're unable to keep your eyes open and pass out in her lap.\n\n");
 	outputText("You awake several hours later with a bitter taste in your mouth, a stomach ache, and a few gems shorter.\n\n");
-	outputText("<b>You may also get infected with... something.</b>\n\n");
-	player.createStatusEffect(StatusEffects.ArigeanInfected, 0, 0, 0, 0);
+	outputText("<b>Your Stomach aches, you may want to rest.</b>\n\n");
+	if (!player.blockingBodyTransformations()) player.createStatusEffect(StatusEffects.ArigeanInfected, 0, 0, 0, 0);
 	cleanupAfterCombat();
 }
 public function graydaEncounterLoss():void {

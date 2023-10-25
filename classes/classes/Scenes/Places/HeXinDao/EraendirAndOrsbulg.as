@@ -74,12 +74,12 @@ public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 			addButton(3, weapons.OTETSU.shortName, itemBuy2, weapons.OTETSU);
 			addButton(4, weapons.DWARWA.shortName, itemBuy2, weapons.DWARWA);
 			addButton(5, weapons.SKYPIER.shortName, itemBuy2, weapons.SKYPIER);
-			addButton(6, weapons.TB_SCYT.shortName, itemBuy2, weapons.TB_SCYT);
-			addButton(7, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
-			addButton(8, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
-			addButton(9, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
-			//10
-			//11
+			addButton(6, weapons.GUANDAO.shortName, itemBuy2, weapons.GUANDAO);
+			addButton(7, weapons.TB_SCYT.shortName, itemBuy2, weapons.TB_SCYT);
+			addButton(8, weapons.BFGAUNT.shortName, itemBuy2, weapons.BFGAUNT);
+			//9
+			addButton(10, weaponsrange.B_F_BOW.shortName, itemBuy2, weaponsrange.B_F_BOW);
+			addButton(11, weaponsrange.BFXBOW_.shortName, itemBuy2, weaponsrange.BFXBOW_);
 			//12
 			//13
 			addButton(14, "Back", OrsbulgMainMenu);

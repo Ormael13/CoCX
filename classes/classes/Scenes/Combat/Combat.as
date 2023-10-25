@@ -14194,7 +14194,7 @@ public function spiderBiteAttack():void {
         }
     }
     outputText("\n\n");
-    combat.WrathGenerationPerHit2(5);
+    WrathGenerationPerHit2(5);
     player.tailVenom -= player.VenomWebCost() * 5;
     flags[kFLAGS.VENOM_TIMES_USED] += 1;
     if (!combatIsOver()) enemyAI();

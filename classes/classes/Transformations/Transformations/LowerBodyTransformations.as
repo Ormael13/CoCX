@@ -2265,7 +2265,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				// No special text outside the event
 			}
 			player.lowerBody = LowerBody.ARMORED_LEGS;
-			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ATLACH_NACHA));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ARIGEAN));
 		},
 		// is present
 		function (): Boolean {
@@ -2276,4 +2276,4 @@ public class LowerBodyTransformations extends MutationsHelper {
 	/*
   */
 }
-}
+}

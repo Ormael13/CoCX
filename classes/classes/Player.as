@@ -4962,6 +4962,11 @@ use namespace CoC;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
+			if (isRace(Races.ARIGEAN), 1) minCor += 5;
+			if (isRace(Races.ARIGEAN), 2) minCor += 5;
+			if (isRace(Races.ARIGEAN), 3) minCor += 15;
+			if (isRace(Races.ARIGEAN), 4) minCor += 20;
+			if (isRace(Races.ARIGEAN), 5) minCor += 20;
 			if (minLib < 1) minLib = 1;
 			if (minCor < 0) minCor = 0;
 			if (minCor > 100) minCor = 100;
@@ -6407,8 +6412,8 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath)
-					|| hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected);
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity) || hasStatusEffect(StatusEffects.ArigeanInfected) || tailType == Tail.ARIGEAN_GREEN;
 		}
 
 		public function manticoreFeed():void {
