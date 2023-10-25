@@ -121,7 +121,7 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		outputText("Inevitably, you lose count of how many cat girls you fucked that day but this matters little, so long as you have the energy and hardness to do so. Heck, maybe they fed you some energy drink to keep you going too. It’s not like you could grow tired of their sweet drinks.[pg]");
 		for (var i:int=0; i < player.cocks.length; i++)
 			transformations.CockCat(1).applyEffect(false);
-		if (!player.isAnyRace(NekomataRace,CatRace,ManticoreRace,SphinxRace,HellcatRace,CheshireRace)) transform();
+		if (!player.isAnyRace(Races.NEKOMATA, Races.CAT, Races.SPHINX,Races.MANTICORE,Races.HELLCAT,Races.CHESHIRE)) transform();
 		var x:int=20;
 		while (x-->0) player.sexReward("VaginalFluids", "Dick");
 		doNext(exitCafe);
@@ -148,7 +148,7 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		while (player.hasCock()) player.killCocks(-1, false);
 		if (!player.hasVagina()) transformations.VaginaHuman().applyEffect(false);
 		if (!player.hasBreasts()) transformations.CreateBreastRow(BreastCup.D).applyEffect(false);
-		if (!player.isAnyRace(NekomataRace,CatRace,ManticoreRace,SphinxRace,HellcatRace,CheshireRace)) transform();
+		if (!player.isAnyRace(Races.NEKOMATA, Races.CAT, Races.SPHINX,Races.MANTICORE,Races.HELLCAT,Races.CHESHIRE)) transform();
 		var x:int=20;
 		while (x-->0) player.sexReward("Cum", "Vagina");
 		doNext(exitCafe);
