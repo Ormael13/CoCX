@@ -151,12 +151,12 @@ public class Changelog extends BaseContent
 			outputText("-Small fix for kirin race hair colors. Dragonne can still get minimal points for having huge dragon wing this is only for cosmetic purpose and dragonne does not benefit from them. (Liadri)\n");
 			outputText("-Fix: all cat race not benefiting from eye of the tiger, Vouivre score not functionning, bug preventing dragonne capscore (Liadri)\n");
 			outputText("-Guan Dao weapon class changed from Large to Massive. It comes with increase to max atk from 25 (at 100+ str) to 75 (at 300+ str) and trippling it cost. It also been moved to be sold at Orsbulg shop instead of general show with weapons in HXD.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Mindbreaker now has a devastating straddle option. (Liadri)\n");
+			outputText("-Fixed: bug preventing Liliraune from straddling properly, gaining and losing mummies text, fix to manticore tail sprite. (Liadri)\n");
+			outputText("-Anubis magic now scales of magic as well as soulforce and deals dark damage which is affected by Dao of dark. Anubis Finger of death now work as advertised and inflict 10% of the monster total toughness and strength rather then just 10. (Liadri)\n");
+			outputText("-Female Anubis now possible witheout penality. (Honestly human vagina works because anubis are half human jackals) (Liadri)\n");
+			outputText("-Nekobake will now check if you are a proper cat already before attempting to change all your bodyparts randomly. (Liadri)\n");
+			outputText("-New event perk: Miracle Metal. Gained by been arigean (16+ score). Effects: You gain natural magic defense based on 35% of your natural physical defense, however defense gained from armor is reduced by 40%. You also gain an appetite for metals.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

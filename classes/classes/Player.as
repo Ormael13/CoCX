@@ -657,6 +657,7 @@ use namespace CoC;
 			armorDef += armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
+			if (hasPerk(PerkLib.MiracleMetal)) armorDef = Math.round(armorDef * 0.6);
 			var tier:int;
 			//Blacksmith history!
 			if (armorDef > 0 && (hasPerk(PerkLib.HistorySmith) || hasPerk(PerkLib.PastLifeSmith))) {
@@ -1046,6 +1047,7 @@ use namespace CoC;
 				}
 			}
 			armorMDef = Math.round(armorMDef);
+			if (hasPerk(PerkLib.MiracleMetal)) armorMDef += Math.round((armorDef - armor.def - upperGarment.armorDef - lowerGarment.armorDef) * 0.35);
 			//Berzerking/Lustzerking removes magic resistance
 			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColderFury)) armorMDef = 0;
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColderLust)) armorMDef = 0;
@@ -4962,11 +4964,11 @@ use namespace CoC;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
-			if (isRace(Races.ARIGEAN), 1) minCor += 5;
-			if (isRace(Races.ARIGEAN), 2) minCor += 5;
-			if (isRace(Races.ARIGEAN), 3) minCor += 15;
-			if (isRace(Races.ARIGEAN), 4) minCor += 20;
-			if (isRace(Races.ARIGEAN), 5) minCor += 20;
+			if (racialScore(Races.ARIGEAN) >= 9) minCor += 5;
+			if (racialScore(Races.ARIGEAN) >= 16) minCor += 5;
+			if (racialScore(Races.ARIGEAN) >= 18) minCor += 15;
+			if (racialScore(Races.ARIGEAN) >= 20) minCor += 20;
+			if (racialScore(Races.ARIGEAN) >= 23) minCor += 20;
 			if (minLib < 1) minLib = 1;
 			if (minCor < 0) minCor = 0;
 			if (minCor > 100) minCor = 100;

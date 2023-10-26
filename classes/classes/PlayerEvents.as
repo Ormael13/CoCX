@@ -1326,7 +1326,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Reset clone creation tracker
 				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 				//Arigean transformation
-				if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv1(StatusEffects.ArigeanInfected) < 5) {
+				if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) {
 					var arigeanProgress:Number = 0;
 					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 0) {
 						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as you find that you cannot move your body, the pain becomes nearly unbearable as you fall unconscious.\n");
@@ -1391,34 +1391,31 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						if (!InCollection(player.hairColor, ArigeanRace.ArigeanHairColors)) player.hairColor = randomChoice(ArigeanRace.ArigeanHairColors);
 						outputText("\nYour restful slumber is cut short as you awaken to a tingling sensation across your scalp and a mild burning sensation across your body, the latter of which seems to mostly subside within a few seconds save for your nethers and mouth. Upon further inspection, at the nearby stream, you discover the inside of your mouth and tongue has become a dark blue, and your hair has become " + player.hairColor + " color. Meanwhile, you look down to see what exactly has changed. ");
 						outputText((player.hasCock()?"You find your penis still looks human except for the tip which has taken on a light blue color":"")+(player.gender == 3?" and looking under y":"Y")+(player.hasVagina()?"ou find the lips of your seemingly normal muff has taken on the same light blue color your mouth has":"")+". The presence of the dark sky reminds you it’s still late into the night and a champion needs their sleep should they wish to get anything done, and with that in mind you head back off to bed.\n");
-						if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
+						if (player.hasVagina()) transformations.VaginaArigean().applyEffect(false);
 						if (player.hasCock()) transformations.CockArigean().applyEffect(false);
 						transformations.TongueArigean.applyEffect(false);
 						transformations.FaceArigean.applyEffect(false);
-						transformations.EyesArigean.applyEffect(false);
 						transformations.EarsElven.applyEffect(false);
 						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
 						arigeanProgress += 1;
-					}/*
+					}
 					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 5 && arigeanProgress == 0) {
-						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as\n");
-						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as\n");
-						
+						outputText("\n You awaken again to a sharp pain coming from your abdomen however it quickly fades into soreness and ");
+						if (player.gender == 2) outputText("eventually stops, however you think it might be best to stay up to see if any other monstrous transformation is going to be brought upon you. Nothing happens and you eventually drift back off into a deep rest.\n");
+						else {
+							SceneLib.theTrench.nightSixChoice();
+							outputText(" You head back to sleep opting to deal with the problems of your new body later and when you're more awake.\n");
+						}
 						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
 						arigeanProgress += 1;
 					}
-					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 5 && arigeanProgress == 0) {
-						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as\n");
-						
-						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
-						arigeanProgress += 1;
+					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 6 && arigeanProgress == 0) {
+						outputText("\nAs you open your eyes you find you are standing somewhere pitch black with the feeling of running water at your feet, and you decide it might be a better choice to kneel down so you can get a better sense of your surroundings. Slowly your visibility of the area starts to return as you swiftly realize it’s not pitch black as you thought it was, and you had momentarily gone blind, but upon further looking at your reflection on the water’s your attention is immediately drawn to your eyes, which seem to be giving off a soft nearly otherworldly glow and almost seem to be entirely white if it weren’t for that glow. After idly loitering in the surprisingly soothing stream, you realize it’s one, extremely dark, and two you're seemingly doing nothing in the stream near the camp for no good reason so you decide to head back. ");
+						outputText("And as you step onto the solid ground you feel something churn in your guts, it seems your parasite is now ready for combat... combat? You hear a loud blast as a streak of scorching magic seems to fly out of one of the mouths of your new parasitic friend as if to emphasize that intrusive thought. You think it might be best to return to bed and away from the carnage of a destroyed tree, but not before long a strong wave of anxiety seems to grip at your heart, and a desire to return to that strange woman at the ocean who you now seem to resemble, after all <b>as a new type Ne-Class Arigean, it should be your duty to report to your superior....</b> wait... where did that thought come from?\n");
+						transformations.EyesArigean.applyEffect(false);
+						player.createPerk(PerkLib.MiracleMetal, 0, 0, 0, 0);
+						player.removeStatusEffect(StatusEffects.ArigeanInfected);
 					}
-					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 5 && arigeanProgress == 0) {
-						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as\n");
-						
-						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
-						arigeanProgress += 1;
-					}*/
 				}
 			}
 			//Process crops harvest moon

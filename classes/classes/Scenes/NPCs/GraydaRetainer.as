@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Canadian Snas
+ * @author Ohaxer & Sylabt
  */
 package classes.Scenes.NPCs 
 {
