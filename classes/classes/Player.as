@@ -2833,7 +2833,7 @@ use namespace CoC;
 							break;
 						case 13: // acid
 							if (damagePercentMRes() > 1) damage *= (1 / damagePercentMRes());
-							damage = reducePoisonDamage(damage);
+							damage = reduceAcidDamage(damage);
 							break;
 						default:
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());

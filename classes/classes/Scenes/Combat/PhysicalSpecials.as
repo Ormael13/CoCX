@@ -200,6 +200,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 						bd = buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
+					//Crunch
+					if (player.racialScore(Races.ARIGEAN) >= 16) {
+						bd = buttons.add("Crunch", arigeanCrunch).hint("Deals Physical Damage based on Strength, also lowers opponent's physical defense by 30% for 3 turns.");
+						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+					}
 				}
 				//Grab & Slam
 				if (player.isRaceCached(Races.BEARANDPANDA) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
@@ -3977,6 +3982,93 @@ public class PhysicalSpecials extends BaseCombatContent {
 				return;
 			}
 		}
+		outputText("\n\n");
+		enemyAI();
+	}
+
+	public function arigeanCrunch():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.fatigue + physicalCost(100) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to pounce at anyone right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if (monster is EncapsulationPod) {
+			clearOutput();
+			outputText("You can't pounce something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(100, USEFATG_PHYSICAL);
+		if (combat.checkConcentration()) return; //Amily concentration
+		outputText("You rush forward and bite down on your opponent with your extra mouth" + (player.tail.count > 1 ? "s" : "") + ".");
+		if (40 + rand(player.spe) > monster.spe) {
+			outputText("[Themonster]’s armor is broken from the force! Dealing ");
+			var damage:Number = 0;
+			//str bonuses
+			damage += player.str;
+			damage += scalingBonusStrength();
+			//addictive bonuses
+			if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsIII)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsIV)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsV)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsVI)) damage += 10;
+			if (player.hasPerk(PerkLib.JobBrawler)) damage += (5 * (1 + player.newGamePlusMod()));
+			if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
+			if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+			if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+			//multiplicative bonuses
+			if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
+			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+			if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+			if (player.hasPerk(PerkLib.JobBeastWarrior)) damage *= 1.1;
+			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
+			if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+			if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
+			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			damage *= 1.6;
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combat.combatPhysicalCritical();
+			if (player.hasPerk(PerkLib.Blademaster)) critChance += 5;
+			if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+			if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				var buffMultiplier:Number = 0;
+				buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
+				damage *= (1.75 + buffMultiplier);
+			}
+			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
+			damage = Math.round(damage);
+			doDamage(damage, true);
+			outputText(" damage!");
+			if (monster.hasStatusEffect(StatusEffects.DefPDebuff)) monster.addStatusValue(StatusEffects.DefPDebuff, 1, 1);
+			else {
+				var debuff:Number = Math.round(monster.armorDef * 0.3);
+				monster.armorDef -= debuff;
+				monster.createStatusEffect(StatusEffects.DefPDebuff, 3, debuff, 0, 0);
+			}
+		}
+		else outputText("[Themonster] moves back just in time to avoid being crushed.");
 		outputText("\n\n");
 		enemyAI();
 	}

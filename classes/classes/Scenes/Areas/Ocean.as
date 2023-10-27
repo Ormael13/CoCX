@@ -146,6 +146,9 @@ use namespace CoC;
 				name  : "arigean",
 				label : "Arigean",
 				kind : 'monster',
+				when: function ():Boolean {
+					return flags[kFLAGS.THE_TRENCH_ENTERED] == 0
+				},
 				call  : SceneLib.graydaScene.graydaEncounter,
 				chance: 5
 			}, {

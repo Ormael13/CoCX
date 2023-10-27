@@ -3712,6 +3712,14 @@ import flash.utils.getQualifiedClassName;
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
 			}
+			//lowered physical defense
+			if (hasStatusEffect(StatusEffects.DefPDebuff)) {
+				if (statusEffectv1(StatusEffects.DefPDebuff) <= 0) {
+					armorDef += statusEffectv2(StatusEffects.DefPDebuff);
+					removeStatusEffect(StatusEffects.DefPDebuff);
+				}
+				else addStatusValue(StatusEffects.DefPDebuff,1,-1);
+			}
 		}
 
 		public function handleAwardItemText(itype:ItemType):ItemType

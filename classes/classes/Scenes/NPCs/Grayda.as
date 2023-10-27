@@ -126,7 +126,7 @@ public class Grayda extends Monster
 			this.hairColor = "white";
 			this.hairLength = 16;
 			initStrTouSpeInte(230, 190, 210, 290);
-			initWisLibSensCor(290, 106, 75, 40);
+			initWisLibSensCor(290, 106, 75, 45);
 			this.weaponName = "staff";
 			this.weaponVerb="bite";
 			this.weaponAttack = 35;

@@ -363,6 +363,18 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Hypnosis", NagaHypnosis).hint("Lull your opponent into a trance but only allow a limited set of options.", "Hypnosis");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.racialScore(Races.ARIGEAN) >= 16) {
+				bd = buttons.add("Mana Shot", manaShot).hint("Fire a single blast from "+(player.tailCount>1?"one of your extra maws":"your large extra mouth")+". \n");
+				bd.requireMana(spellCost(40), true);
+				if (player.hasStatusEffect(StatusEffects.CooldownManaShot)) {
+					bd.disable("You need more time before you can use Mana Shot again.\n\n");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				bd = buttons.add("Mana Barrage", manaBarrage).hint("Fire a barrage of blasts from your extra maw"+(player.tailCount>1?"s":"")+". \n");
+				bd.requireMana(spellCost(200), true);
+				if (player.hasStatusEffect(StatusEffects.CooldownManaBarrage)) {
+					bd.disable("You need more time before you can use Mana Barrage again.\n\n");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 		}
 		if (player.hasPerk(PerkLib.DarkCharm)) {
 			// Fascinate
@@ -3974,6 +3986,143 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		enemyAI();
+	}
+
+	public function manaShot():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		useMana(40, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
+		if (monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			enemyAI();
+			return;
+		}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownManaShot, 3, 0, 0, 0);
+		outputText("You focus your eyes upon your target and fire a single blast from " + (player.tailCount > 1?"one of your extra maws":"your large extra mouth") + ". ");
+		if (40 + rand(player.spe) > monster.spe) {
+			var damage:Number = player.str;
+			damage += scalingBonusStrength();
+			damage *= spellMod();
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combatMagicalCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			//High damage to goes.
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			damage = Math.round(damage);
+			outputText("It hits its mark dealing ");
+			doMagicDamage(damage, true, true);
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
+			outputText(" damage!\n\n");
+			checkAchievementDamage(damage);
+			combat.heroBaneProc(damage);
+			statScreenRefresh();
+		}
+		else outputText("Your target evades out of the way causing the shot to go wide.\n\n");
+		if (monster.HP <= monster.minHP())
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+
+	public function manaBarrage():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		useMana(200, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
+		if (monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			enemyAI();
+			return;
+		}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownManaBarrage, 3, 0, 0, 0);
+		outputText("You focus your eyes upon your target and fire a barrage of blasts from your extra maw" + (player.tailCount > 1?"s":"") + ". ");
+		if (40 + rand(player.spe) > monster.spe) {
+			var damage:Number = player.str;
+			damage += scalingBonusStrength();
+			damage *= spellMod();
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combatMagicalCritical();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			//High damage to goes.
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			damage = Math.round(damage);
+			outputText("Your target is unable to avoid the barrage of blasts and takes ");
+			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, true);
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
+			outputText(" damage!\n\n");
+			damage *= 5;
+			checkAchievementDamage(damage);
+			combat.heroBaneProc(damage);
+			statScreenRefresh();
+		}
+		else outputText("Your target evades out of the way causing the barrage to go wide.\n\n");
+		if (monster.HP <= monster.minHP())
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
 	}
 
 	public function hydraAcidBreath():void {

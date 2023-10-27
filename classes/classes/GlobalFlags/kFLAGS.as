@@ -1335,7 +1335,7 @@ public static const UNKNOWN_FLAG_NUMBER_01326:int                               
 public static const UNKNOWN_FLAG_NUMBER_01327:int                                   = 1327;
 public static const UNKNOWN_FLAG_NUMBER_01328:int                                   = 1328;
 public static const UNKNOWN_FLAG_NUMBER_01329:int                                   = 1329;
-public static const UNKNOWN_FLAG_NUMBER_01330:int                                   = 1330;
+public static const THE_TRENCH_ENTERED:int                                   		= 1330;
 public static const UNKNOWN_FLAG_NUMBER_01331:int                                   = 1331;
 public static const UNKNOWN_FLAG_NUMBER_01332:int                                   = 1332;
 public static const UNKNOWN_FLAG_NUMBER_01333:int                                   = 1333;

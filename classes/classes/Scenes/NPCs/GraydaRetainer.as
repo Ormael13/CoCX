@@ -1,11 +1,13 @@
 /**
  * ...
- * @author Ohaxer & Sylabt
+ * @author Sylabt & Ohaxer
  */
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Eyes;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 	
 public class GraydaRetainer extends NPCAwareContent
 	{
@@ -17,10 +19,14 @@ public class GraydaRetainer extends NPCAwareContent
 
 public function graydaEncounter():void {
 	clearOutput();
-	outputText("Whilst sailing along the ocean’s waters, a thick fog rolls in that’s so dense you’ll fear it will cause you to get lost at sea should you not turn back. Suddenly something sizzling files overhead, missing the boat and audibly hitting the water, you snap your head in the direction it came from and ready your weapon. A woman wearing a strange hat with tentacle-like appendages seems to walk out of the fog on the water’s surface, A dark patch of yellow fog seems to cling to her skin, as she summons another bird-shaped projectile you realize...\n\n");
-	startCombat(new Grayda());
+	//if (player.eyes.type == Eyes.ARIGEAN) SceneLib.theTrench.graydaEncounterTheTrench();
+	//else {
+		outputText("Whilst sailing along the ocean’s waters, a thick fog rolls in that’s so dense you’ll fear it will cause you to get lost at sea should you not turn back. Suddenly something sizzling files overhead, missing the boat and audibly hitting the water, you snap your head in the direction it came from and ready your weapon. A woman wearing a strange hat with tentacle-like appendages seems to walk out of the fog on the water’s surface, A dark patch of yellow fog seems to cling to her skin, as she summons another bird-shaped projectile you realize...\n\n");
+		startCombat(new Grayda());
+	//}
 }
 public function graydaEncounterWin():void {
+	clearOutput();
 	outputText("A final blow from your opponent sends you off your boat and into the water and with your body as tired as it is, you're unable to keep your head above the water. however the Arigean decides to spare you from a watery grave, Picking you up out of the water and carrying your tired body onto the boat, she ungraciously drops you onto the deck. Struggling to look up you find she’s very quickly pinned you to the floor, her cheeks are flushed blue and her breathing is heavy, it’s clear what her intentions are.\n\n");
 	if (player.gender == 3) {
 		if (player.hasVagina() && rand(2) == 0) graydaEncounterWinFemale();

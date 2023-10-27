@@ -10523,6 +10523,22 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownGreenCovenant, 1, -1);
             }
         }
+        //Mana Shot
+        if (player.hasStatusEffect(StatusEffects.CooldownManaShot)) {
+            if (player.statusEffectv1(StatusEffects.CooldownManaShot) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownManaShot);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownManaShot, 1, -1);
+            }
+        }
+        //Mana Barrage
+        if (player.hasStatusEffect(StatusEffects.CooldownManaBarrage)) {
+            if (player.statusEffectv1(StatusEffects.CooldownManaBarrage) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownManaBarrage);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownManaBarrage, 1, -1);
+            }
+        }
         //Hydra Acid Breath
         if (player.hasStatusEffect(StatusEffects.CooldownHydraAcidBreath)) {
             if (player.statusEffectv1(StatusEffects.CooldownHydraAcidBreath) <= 0) {

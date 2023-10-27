@@ -92,7 +92,7 @@ public class ArigeanRace extends Race {
 				.end();
 		/*
 		buildTier(18, "arigean elite")
-				//.requirePerk(PerkLib.DantianPhylactery)
+				.requireTailType(Tail.ARIGEAN_RED)
 				.buffs({
 					"str.mult": +1.30,
 					"tou.mult": +0.80,
