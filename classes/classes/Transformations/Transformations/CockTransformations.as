@@ -1226,6 +1226,39 @@ public class CockTransformations extends MutationsHelper {
 		);
 	}
 
+	public function CockArigean(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+		return new SimpleTransformation("Arigean Cock",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "[pg]";
+					var cock:int = cockIndex(index, CockTypesEnum.ARIGEAN);
+
+					if (player.cocks.length > cock){
+						desc += "[pg]<b>HOW THE HELL, IT DOES NOT EXIST YET</b>[pg]" +
+								"<b> You now have an Arigean cock!</b>";
+					}
+					else {
+						desc += GrowCockGenericText();
+						desc += "[pg]<b>HOW THE HELL, IT DOES NOT EXIST YET</b>[pg]" +
+								"<b> You now have an Arigean cock!</b>";
+						player.createCock();
+					}
+					if (doOutput) outputText(desc);
+					if (length != 5.5)
+						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
+					player.cocks[cock].cockType = CockTypesEnum.ARIGEAN;
+
+					transformations.UnlockCocks();
+				},
+				// is present
+				function ():Boolean {
+					return isPresentCock(index, CockTypesEnum.ARIGEAN)
+				}
+		);
+	}
+
 	public function CockInsect(index:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Insect Cock",
 				// apply effect
@@ -1420,3 +1453,4 @@ public class CockTransformations extends MutationsHelper {
 */
 }
 }
+

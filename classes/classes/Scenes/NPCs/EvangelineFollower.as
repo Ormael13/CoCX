@@ -186,7 +186,8 @@ public function meetEvangeline():void {
 		outputText("Zenji nods and gives you a brief hug before leaving you alone with Evangeline.\n\n");
 	}
 	else outputText("Deciding to visit your camp’s transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
-	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0) curingArigean();
+	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0) curingArigean1();
+	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0) curingArigean2();
 	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
 	// [Appearan] [ Talk   ] [   Sex  ] [ Spar   ] [GiveGems]
 	// [Alchemy ] [Ingreds ] [        ] [I.Mutati] [Experime]
@@ -212,7 +213,10 @@ public function meetEvangeline():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
 	if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) addButtonIfTrue(10, "Arigean I.", curingArigeanYes, "Req. 750 gems.", player.gems >= 750);
-	else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
+	else {
+		if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.tailType == Tail.ARIGEAN_GREEN) addButtonIfTrue(10, "Arigean I.", curingArigean2a, "Req. 1000 gems.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3)));
+		else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
+	}
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -967,7 +971,7 @@ private function JustDoIt():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-private function curingArigean():void {
+private function curingArigean1():void {
 	outputText("\"<i>Hey [name]! Is everything alright? You're looking a little pale, would you mind if I looked you over?</i>\" Her tone showing worry before she continues. \"<i>It should only take a quick moment of your time.</i>\"\n\n");
 	outputText("Clearly she has your best health in mind, and you have been feeling a little under the weather as of late. It’s just a small look over, so what’s the worst that could happen?\n\n");
 	outputText("\"<i>Alright [name] just dress down, and sit right there. I need to go grab something so i’ll be right back!</i>\" She shouts as she jogs somewhere towards the camp’s border.\n\n");
@@ -997,6 +1001,7 @@ private function curingArigeanYes():void {
 	if (player.tailType == Tail.ARIGEAN_GREEN) {
 		outputText("A burning sensation crawling up your spine is all you feel as the creature attached to you starts screeching viscously before detaching from you, and withering away on the floor. leaving a nasty gash in its wake. <b>You no longer have a parasite attached to you.</b>\n\n");
 		if (EvangelineCuringArigeanInfection == 0) EvangelineCuringArigeanInfection += 1;
+		player.tailType = Tail.NONE;
 	}
 	else outputText("A burning sensation makes you feel like your stomach is attempting to digest itself, and before long you can no longer keep it down as you hack up a thick, black, Viscous liquid. <b>It seems you're no longer a host to a parasite.</b>\n\n");
 	player.gems -= 750;
@@ -1008,6 +1013,25 @@ private function curingArigeanYes():void {
 private function curingArigeanNo():void {
 	outputText("\"<i>Suit yourself, but it’s going to cost much more to remove it should your case worsen.</i>\"\n\n");
 	doNext(meetEvangeline);
+}
+private function curingArigean2():void {
+	outputText("\"<i>Eh… [name]? It looks like your condition has worsened a bit, it should still be relatively easy to remove, but i'm going to need you to find a few exotic materials for me.</i>\" She takes out a piece of paper and quill, writing a small list down. \"<i>Bring me… 3 bottles of pure spring water and 1000 gems.</i>\"\n\n");
+	doNext(meetEvangeline);
+}
+private function curingArigean2a():void {
+	clearOutput();
+	outputText("You present her with her payment, items, and she responds by grabbing them before hurriedly jogging off to grab some things from her encampment. After waiting for about 10 minutes she returns with a vial in hand.\n\n");
+	outputText("\"<i>Here you go [name]! Don’t mind the smell… or taste.</i>\" She presents you the vial which holds a foul smelling, purple liquid that you can’t help but gag upon smelling it.\n\n");
+	outputText("\"<i>Down the hatch.</i>\" you murmur as you attempt to drink down the foul liquid all in one go while not throwing it back up.\n\n");
+	outputText("A burning sensation crawling up your spine is all you feel as the creature attached to you starts screeching viscously before detaching from you, and withering away on the floor, leaving a nasty gash in its wake. You can’t help but feel a little saddened at the sight. <b>You no longer have a parasite attached to you.</b>\n\n");
+	if (EvangelineCuringArigeanInfection == 0) EvangelineCuringArigeanInfection += 1;
+	player.destroyItems(consumables.S_WATER, 3);
+	player.removePerk(PerkLib.MiracleMetal);
+	player.tailType = Tail.NONE;
+	player.gems -= 1000;
+	statScreenRefresh();
+	doNext(camp.campFollowers);
+	advanceMinutes(15);
 }
 
 private function curingWendigo():void {

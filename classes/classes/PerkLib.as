@@ -3982,6 +3982,8 @@ public class PerkLib
 				"Requires you to drink LaBova milk frequently or eventually die.  You cannot shake this addiction.");
 		public static const MightyFist:PerkType = mk("Mighty Fist", "Mighty Fist",
 				"Regular fist attacks now have a chance to cause stun and fist damage is increased by 5 (x NG tier).");
+		public static const MiracleMetal:PerkType = mk("Miracle Metal", "Miracle Metal",
+				"You gain natural magic defense based on 35% of your natural physical defense, however defense gained from armor is reduced by 40%. You also gain an appetite for metals.");
 		public static const Misdirection:PerkType = mk("Misdirection", "Misdirection",
 				"Grants additional evasion chances while wearing Raphael's red bodysuit or any other agile armor.");
 		public static const MorphicWeaponry:PerkType = mk("Morphic Weaponry", "Morphic Weaponry",
