@@ -14,7 +14,7 @@ package classes.Items.Weapons
 		
 		public function ThePhalluspears() 
 		{
-			super("Phallus", "Phalluspears", "The Phalluspears", "The Phalluspears", "piercing stab", 40, 2600,
+			super("D.Phallus", "Phalluspears", "The Phalluspears", "The Phalluspears", "piercing stab", 40, 2600,
 				"Those spears are a polearms with a dick-shaped point. You can rotate the shaft to reveal or conceal a wicked, poison-dripping blade hidden within the phalluses. Pleasure or pain, this weapon can do both.",
 				"Dual Large", "Spear"
 			);

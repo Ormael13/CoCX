@@ -334,6 +334,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const CockAnyUshiOni:Transformation = CockUshiOni(-1).registerTf(AS_COCK, AE_USHI_ONI);
     public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockInsect(cock, length, thickness); }
 	public const CockAnyInsect:Transformation = CockInsect(-1).registerTfMultiple(AS_COCK, AE_BEE, AE_ANT, AE_MANTIS);
+    public function CockArigean(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 		{ return cocks.CockArigean(cock, length, thickness); }
+	public const CockAnyArigean:Transformation = CockArigean(-1).registerTf(AS_COCK, AE_ARIGEAN);
     public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation 	{ return cocks.GrowKnot(cock, crit, mod, div); }
     public function CockChangeType(type:CockTypesEnum, grow:Boolean, oneByOne:Boolean=false):Transformation 	{ return cocks.CockChangeType(type, grow, oneByOne); }
 
@@ -446,6 +448,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesSpider: Transformation			= eyes.EyesSpider.registerTf(AS_EYES, AE_SPIDER);
 	public const EyesWeasel: Transformation			= eyes.EyesWeasel.registerTf(AS_EYES, AE_WEASEL);
     public const EyesVampire: Transformation		= eyes.EyesVampire.registerTf(AS_EYES, AE_VAMPIRE);
+    public const EyesArigean: Transformation		= eyes.EyesArigean.registerTf(AS_EYES, AE_ARIGEAN);
 //=================================
 //                                =
 //   EYE COLORS                   =
@@ -1000,6 +1003,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TongueRatatoskr: Transformation 	= tongue.TongueRatatoskr.registerTf(AS_TONGUE, AE_SQUIRREL);
 	public const TongueMelkie: Transformation 		= tongue.TongueMelkie.registerTf(AS_TONGUE, AE_MELKIE);
 	public const TongueImp: Transformation 			= tongue.TongueImp.registerTf(AS_TONGUE, AE_IMP);
+	public const TongueArigean: Transformation 		= tongue.TongueArigean.registerTf(AS_TONGUE, AE_ARIGEAN);
 
 
 //VAGINA
@@ -1046,6 +1050,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const VaginaAnyRaiju:Transformation = VaginaRaiju(-1).registerTf(AS_VAGINA, AE_RAIJU);
     public function VaginaAlraune(vagina:int = 0): Transformation { return vaginas.VaginaAlraune(vagina); }
 	public const VaginaAnyAlraune:Transformation = VaginaAlraune(-1).registerTf(AS_VAGINA, AE_ALRAUNE);
+    public function VaginaArigean(vagina:int = 0): Transformation { return vaginas.VaginaArigean(vagina); }
+	public const VaginaAnyArigean:Transformation = VaginaArigean(-1).registerTf(AS_VAGINA, AE_ARIGEAN);
 
 
 //WINGS

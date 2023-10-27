@@ -45,21 +45,21 @@ public class ArigeanRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				//.gillType(Gills.FISH, +1)
 				.earType(Ears.ELVEN, +1)
-				//.eyeType(Eyes.DEVIL, +2)
+				.eyeType(Eyes.ARIGEAN, +1)
+				//.eyeType(Eyes.ARIGEANPRINCESS, +2)
 				.faceType(Face.ARIGEAN, +1)
-				/*.hairType(Hair.NORMAL, +1)
-				.tongueType(Tongue.HUMAN, +1)
-				.tailType(Tail.ABYSSAL_SHARK, +2)*/
+				//.hairType(Hair.NORMAL, +1)
+				.tongueType(Tongue.ARIGEAN, +1)
+				.tailType(Tail.ARIGEAN_GREEN, +5)
 				.armType(Arms.ARMORED_FOREARMS, +1)
 				.legType(LowerBody.ARMORED_LEGS, +1)
 				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
 				//.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hairColor1(ANY(ArigeanHairColors), +1)
-				//.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
+				.skinBaseType(Skin.PLAIN, +1)
 				.plainSkinOfColor1(ANY(ArigeanSkinColors), +1)
-				//.cockOrVaginaOfType(CockTypesEnum.HUMAN, VaginaClass.SHARK, +1)
+				.cockOrVaginaOfType(CockTypesEnum.ARIGEAN, VaginaClass.ARIGEAN, +1)
 				.customRequirement("",'60+ feminity',
 						function (body:BodyData):Boolean {
 							return body.player.femininity >= 60
@@ -67,12 +67,20 @@ public class ArigeanRace extends Race {
 				.corruption(AT_LEAST(10), +1);
 		
 		//addMutation(IMutationsLib.SharkOlfactorySystemIM);
-		/*
+		
 		buildTier(9, "half arigean")
+				.buffs({
+					"str.mult": +0.55,
+					"tou.mult": +0.40,
+					"spe.mult": +0.55,
+					"int.mult": -0.05,
+					"wis.mult": -0.10,
+					"def": +1
+				})
 				.end();
-		*/
+		
 		buildTier(16, "arigean")
-                //.requirePerk(PerkLib.DantianPhylactery)
+                .requireTailType(Tail.ARIGEAN_GREEN)
 				.buffs({
 					"str.mult": +1.00,
 					"tou.mult": +0.70,

@@ -59,6 +59,7 @@ package classes
 		public static const RAIJU:CockTypesEnum = new CockTypesEnum("raiju","mammal");
 		public static const USHI_ONI:CockTypesEnum = new CockTypesEnum("ushi-oni","other");
 		public static const INSECT:CockTypesEnum = new CockTypesEnum("insect","insect");
+		public static const ARIGEAN:CockTypesEnum = new CockTypesEnum("arigean","");
 		public static const UNDEFINED:CockTypesEnum = new CockTypesEnum("undefined","");
 		
 		function CockTypesEnum(

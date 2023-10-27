@@ -12,7 +12,7 @@ package classes.Items.WeaponsRange
 		
 		public function DuAlakablam() 
 		{
-			super("Alakabl", "DuAlakablam", "DuAlakablam", "a DuAlakablam", "shot", 20, 1520, "This is a two double barrel shotguns. Not the most accurate weapons but each slug deal magical damege.", "Dual 2H Firearms");
+			super("D.Alakabl", "DuAlakablam", "DuAlakablam", "a DuAlakablam", "shot", 20, 1520, "This is a two double barrel shotguns. Not the most accurate weapons but each slug deal magical damege.", "Dual 2H Firearms");
 			withBuffs({'rangedaccuracy':-40});
 		}
 		

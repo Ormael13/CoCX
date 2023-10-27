@@ -18,6 +18,7 @@ import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Dynamic.Effects.RaceTfEnchantmentType;
+import classes.Races.ArigeanRace;
 import classes.Races.UnicornRace;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.Garden;
@@ -454,14 +455,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.MummyCurse) && player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 20) {
-				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				outputText("\nAs your power over death increase you aquire the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.createPerk(PerkLib.MummyCurse,0,0,0,0);
 				player.createPerk(PerkLib.DeathPriest,0,0,0,0);
 				player.createPerk(PerkLib.SoulNexus,0,0,0,0);
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.MummyCurse) && player.racialScore(Races.ANUBIS) < 20) {
-				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Lost Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				outputText("\nAs your power over death wanes you lose the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Lost Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.removePerk(PerkLib.MummyCurse);
 				player.removePerk(PerkLib.DeathPriest);
 				player.removePerk(PerkLib.SoulNexus);
@@ -1325,17 +1326,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Reset clone creation tracker
 				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 				//Arigean transformation
-				if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv1(StatusEffects.ArigeanInfected) < 4) {
+				if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) {
 					var arigeanProgress:Number = 0;
 					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 0) {
 						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as you find that you cannot move your body, the pain becomes nearly unbearable as you fall unconscious.\n");
 						outputText("When you wake up, you inspect yourself and find that <b>you seem to be as human as when you first came to this place.</b>\n");
 						transformations.HairHuman.applyEffect(false);
-						player.arms.type = Arms.HUMAN;
+						if (player.arms.type != Arms.ARMORED_FOREARMS) player.arms.type = Arms.HUMAN;
 						player.eyes.type = Eyes.HUMAN;
 						player.antennae.type = Antennae.NONE;
 						transformations.FaceHuman.applyEffect(false);
-						player.lowerBody = LowerBody.HUMAN;
+						if (player.lowerBody != LowerBody.ARMORED_LEGS) player.lowerBody = LowerBody.HUMAN;
 						player.legCount = 2;
 						player.wings.type = Wings.NONE;
 						player.tailType = Tail.NONE;
@@ -1343,51 +1344,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.horns.count = 0;
 						player.horns.type = Horns.NONE;
 						player.ears.type = Ears.HUMAN;
-						player.skin.setBaseOnly();
-						player.skinAdj = "";
+						transformations.SkinPlain.applyEffect(false);
 						player.tongue.type = Tongue.HUMAN;
-						var virgin:Boolean = false;
-						while (player.cocks.length > 0) {
-							player.removeCock(0, 1);
-							trace("1 cock purged.");
-						}
-						if (player.gender == 1 || player.gender == 3) {
-							player.createCock();
-							player.cocks[0].cockLength = 6;
-							player.cocks[0].cockThickness = 1;
-							player.ballSize = 2;
-							if (player.balls > 2) player.balls = 2;
-						}
-						else {
-							player.balls = 0;
-							player.ballSize = 2;
-						}
-						while (player.vaginas.length > 0) {
-							virgin = player.vaginas[0].virgin;
-							player.removeVagina(0, 1);
-							trace("1 vagina purged.");
-						}
-						if (player.gender >= 2) {
-							transformations.VaginaHuman().applyEffect(false);
-							player.clitLength = .25;
-						}
-						player.butt.type = 2;
-						player.hips.type = 2;
-						if (player.ass.analLooseness > 1) player.ass.analLooseness = 1;
-						if (player.ass.analWetness > 1) player.ass.analWetness = 1;
-						player.breastRows = [];
-						player.createBreastRow();
-						player.nippleLength = .25;
-						if (player.gender > 2) {
-							player.breastRows[0].breastRating = 2;
-						} else player.breastRows[0].breastRating = 0;
 						player.gills.type = Gills.NONE;
 						player.rearBody.type = RearBody.NONE;
+						if (player.hasCock()) {
+							player.killCocks(-1, false);
+							transformations.CockHuman().applyEffect();
+						}
+						if (player.hasVagina() && player.vaginaType() != VaginaClass.HUMAN) player.vaginaType(0);
 						player.removeStatusEffect(StatusEffects.Uniball);
 						player.removeStatusEffect(StatusEffects.BlackNipples);
 						player.removeStatusEffect(StatusEffects.GlowingAsshole);
 						player.removeStatusEffect(StatusEffects.GlowingNipples);
-						player.vaginaType(0);
 						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
 						arigeanProgress += 1;
 					}
@@ -1409,25 +1378,44 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						arigeanProgress += 1;
 					}
 					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 3 && arigeanProgress == 0) {
-						outputText("\nYour sleep is disturbed with a particularly strong soreness coming from your knees, and as you move to see if you injured your knees, you find you are completely unable to move your legs. A burning sensation seems to spread from your toes up to your thighs as the skin seems to thicken and turn black, gaining a slight gloss reflected by the moonlight. After the ordeal, you attempt to bend your knees or move your feet, and with a loud <i>crack</i> as well as a sharp stab of pain you find some of the covering has given way around your joints allowing you to move freely again. With a few experimental hits, you find you <b>now have armored legs.</b>\n");
-						transformations.LowerBodyArigean.applyEffect(false);
-						outputText("However it doesn’t seem to stop there, a multitude of stabbing pains seem to randomly come from your forearms as black metal fragments like those on your legs break through your skin with a decent amount of blood. A small investigation proves they offer a decent amount of protection from blows, It seems <b>you now have natural bracers.</b>\n");
-						transformations.ArmsArigean.applyEffect(false);
+						if (player.arms.type != Arms.ARMORED_FOREARMS && player.lowerBody != LowerBody.ARMORED_LEGS) {
+							outputText("\nYour sleep is disturbed with a particularly strong soreness coming from your knees, and as you move to see if you injured your knees, you find you are completely unable to move your legs. A burning sensation seems to spread from your toes up to your thighs as the skin seems to thicken and turn black, gaining a slight gloss reflected by the moonlight. After the ordeal, you attempt to bend your knees or move your feet, and with a loud <i>crack</i> as well as a sharp stab of pain you find some of the covering has given way around your joints allowing you to move freely again. With a few experimental hits, you find you <b>now have armored legs.</b>\n");
+							transformations.LowerBodyArigean.applyEffect(false);
+							outputText("However it doesn’t seem to stop there, a multitude of stabbing pains seem to randomly come from your forearms as black metal fragments like those on your legs break through your skin with a decent amount of blood. A small investigation proves they offer a decent amount of protection from blows, It seems <b>you now have natural bracers.</b>\n");
+							transformations.ArmsArigean.applyEffect(false);
+							arigeanProgress += 1;
+						}
 						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
-						arigeanProgress += 1;
-					}/*
+					}
 					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 4 && arigeanProgress == 0) {
-						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as\n");
-						
+						if (!InCollection(player.hairColor, ArigeanRace.ArigeanHairColors)) player.hairColor = randomChoice(ArigeanRace.ArigeanHairColors);
+						outputText("\nYour restful slumber is cut short as you awaken to a tingling sensation across your scalp and a mild burning sensation across your body, the latter of which seems to mostly subside within a few seconds save for your nethers and mouth. Upon further inspection, at the nearby stream, you discover the inside of your mouth and tongue has become a dark blue, and your hair has become " + player.hairColor + " color. Meanwhile, you look down to see what exactly has changed. ");
+						outputText((player.hasCock()?"You find your penis still looks human except for the tip which has taken on a light blue color":"")+(player.gender == 3?" and looking under y":"Y")+(player.hasVagina()?"ou find the lips of your seemingly normal muff has taken on the same light blue color your mouth has":"")+". The presence of the dark sky reminds you it’s still late into the night and a champion needs their sleep should they wish to get anything done, and with that in mind you head back off to bed.\n");
+						if (player.hasVagina()) transformations.VaginaArigean().applyEffect(false);
+						if (player.hasCock()) transformations.CockArigean().applyEffect(false);
+						transformations.TongueArigean.applyEffect(false);
+						transformations.FaceArigean.applyEffect(false);
+						transformations.EarsElven.applyEffect(false);
 						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
 						arigeanProgress += 1;
 					}
 					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 5 && arigeanProgress == 0) {
-						outputText("\nYour rest is brief as you awaken, your body being racked with immense pain as\n");
-						
+						outputText("\n You awaken again to a sharp pain coming from your abdomen however it quickly fades into soreness and ");
+						if (player.gender == 2) outputText("eventually stops, however you think it might be best to stay up to see if any other monstrous transformation is going to be brought upon you. Nothing happens and you eventually drift back off into a deep rest.\n");
+						else {
+							SceneLib.theTrench.nightSixChoice();
+							outputText(" You head back to sleep opting to deal with the problems of your new body later and when you're more awake.\n");
+						}
 						player.addStatusValue(StatusEffects.ArigeanInfected, 1, 1);
 						arigeanProgress += 1;
-					}*/
+					}
+					if (player.statusEffectv1(StatusEffects.ArigeanInfected) == 6 && arigeanProgress == 0) {
+						outputText("\nAs you open your eyes you find you are standing somewhere pitch black with the feeling of running water at your feet, and you decide it might be a better choice to kneel down so you can get a better sense of your surroundings. Slowly your visibility of the area starts to return as you swiftly realize it’s not pitch black as you thought it was, and you had momentarily gone blind, but upon further looking at your reflection on the water’s your attention is immediately drawn to your eyes, which seem to be giving off a soft nearly otherworldly glow and almost seem to be entirely white if it weren’t for that glow. After idly loitering in the surprisingly soothing stream, you realize it’s one, extremely dark, and two you're seemingly doing nothing in the stream near the camp for no good reason so you decide to head back. ");
+						outputText("And as you step onto the solid ground you feel something churn in your guts, it seems your parasite is now ready for combat... combat? You hear a loud blast as a streak of scorching magic seems to fly out of one of the mouths of your new parasitic friend as if to emphasize that intrusive thought. You think it might be best to return to bed and away from the carnage of a destroyed tree, but not before long a strong wave of anxiety seems to grip at your heart, and a desire to return to that strange woman at the ocean who you now seem to resemble, after all <b>as a new type Ne-Class Arigean, it should be your duty to report to your superior....</b> wait... where did that thought come from?\n");
+						transformations.EyesArigean.applyEffect(false);
+						player.createPerk(PerkLib.MiracleMetal, 0, 0, 0, 0);
+						player.removeStatusEffect(StatusEffects.ArigeanInfected);
+					}
 				}
 			}
 			//Process crops harvest moon

@@ -598,6 +598,32 @@ public class VaginaTransformations extends MutationsHelper {
 				}
 		);
 	}
+
+	public function VaginaArigean(index:int = 0): Transformation {
+		return new SimpleTransformation("Arigean Vagina",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "[pg]";
+					var vagina:int = vaginaIndex(index, VaginaClass.ARIGEAN);
+
+					if (player.vaginas.length > vagina){
+						desc += "Insert Text for Arigean Vagina TF";
+					}
+					else {
+						desc += GrowVaginaGenericText();
+						desc += "Insert Text for Arigean Vagina TF";
+					}
+					if (doOutput) outputText(desc);
+					player.vaginaType(VaginaClass.ARIGEAN, vagina);
+
+					transformations.UnlockVagina();
+				},
+				// is present
+				function ():Boolean {
+					return isPresentVagina(index, VaginaClass.ARIGEAN);
+				}
+		);
+	}
 	/*
 */
 }

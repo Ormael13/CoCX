@@ -266,6 +266,16 @@ public class Eyes extends BodyPart {
 		appearanceDesc: "In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead. In your eyes, sometimes a green light is visibly dancing. Hinting at the beast within. It encompasses your entire pupil when you let it loose.",
 		Darkvision: true
 	});
+	public static const ARIGEAN: int = 44;
+	EnumValue.add(Types, ARIGEAN, "ARIGEAN", {
+		name:"arigean",
+		appearanceDesc: "Your milky white eyes give off an alien [eyecolor] glow on the iris."
+	});
+	public static const ARIGEANPRINCESS: int = 45;
+	EnumValue.add(Types, ARIGEANPRINCESS, "ARIGEANPRINCESS", {
+		name:"arigean princess",
+		appearanceDesc: "Your milky white eyes have a slit down the middle resembling that of a cat, the iris gives off a rich, blue, alien glow."
+	});
 
 	public var count:int;
 	public var colour:String = "brown";
