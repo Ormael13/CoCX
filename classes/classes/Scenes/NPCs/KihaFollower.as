@@ -2652,8 +2652,11 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("He laughs, standing up with Kiha limply hanging off him. “<i>Be thankful I leave you alive. Don’t come looking for us. She’s taken care of.</i>” Kiha’s eyes are blank, but she reaches out towards you with one hand, drool dripping from her mouth as the demon takes off, black wings carrying him and Kiha away.\n\n");
         outputText("As he flies away, you struggle to your [feet], Kiha’s ring flaring in your hands. Humiliation, anger and fear fill your mind, but as you begin to tear up, falling back down to slam a fist into the church grounds, you realise something, through your anger and pain. Your ring still pulls your hand, ever so slightly. The gift Kiha had given you, the ring… It’ll lead you to her!\n\n");
         outputText("Knowing Kiha can feel your emotions, you clamp down on your humiliation, let your fear fade to one side. You project anger, glaring up at the sky. You will never give up on your dragoness. After all you and Kiha have been through, you will not let this bastard take your love away. You can feel her fear, the fear she never shows anyone but you… The arousal, the sick heat. You know what he’s going to do, and so does Kiha… But you can’t fight in your current state. You send the pain of your injuries through, then determination. You’re trying to tell her that you’ll come for her… and a sliver of relief comes back, the fear weakens. Kiha knows you’re on your way.\n\n");
-        DergKidnapped = 1;
-        cleanupAfterCombat();
+        if (recalling) recallWakeUp();
+        else {
+            DergKidnapped = 1;
+            cleanupAfterCombat();
+        }
     }
 
     public function KihaWeddingDominated():void {
