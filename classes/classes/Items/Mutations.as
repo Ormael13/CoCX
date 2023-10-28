@@ -4863,7 +4863,7 @@ public final class Mutations extends MutationsHelper {
             outputText(" turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
         }
         //Face!
-        if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.ELFIN) {
+        if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.BIG) {
             if (player.faceType != Face.ANIMAL_TOOTHS) {
                 outputText("[pg]");
                 transformations.FaceAnimalTeeth.applyEffect();
@@ -4878,6 +4878,12 @@ public final class Mutations extends MutationsHelper {
         if (player.ears.type != Ears.BIG && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsBig.applyEffect();
+            changes++;
+        }
+        //Removes tail
+        if (player.tailType > Tail.NONE && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailNone.applyEffect();
             changes++;
         }
         // Remove gills
@@ -17362,6 +17368,68 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(30);
         fatigue(-20);
         HPChange(Math.round(player.maxHP() * 0.1), true);
+    }
+
+    public function stomiidaeFillet(player:Player):void {
+        clearOutput();
+        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+        player.refillHunger(15);
+    }
+
+    public function calamariSteak(player:Player):void {
+        clearOutput();
+        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+        player.refillHunger(15);
+    }
+
+    public function coelacanthJerky(player:Player):void {
+        clearOutput();
+        outputText("You bite down on the waxy piece of jerky, and while bitter at first the salt helps make the flavor bearable. It doesn’t fill you up much, but it should help stave off hunger.");
+        player.refillHunger(15);
+    }
+
+    public function softIronIngot(player:Player):void {
+        clearOutput();
+		if (!player.hasPerk(PerkLib.MiracleMetal)) {
+            outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
+            outputText("\n\n<b>Requires perk: Miracle Metal</b>");
+            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+        }
+		else {
+			outputText("Quickly scarfing down the metal, you find it has a pleasant, sweet flavor that invigorates your body. You feel like not even a building falling on you would scratch your armor.");
+			player.refillHunger(80);
+			HPChange(Math.round(player.maxHP() * 0.2), true);
+			if (player.buff("SoftIronIgnotPhysicalDefenseBuff").isPresent()) player.buff("SoftIronIgnotPhysicalDefenseBuff").remove();
+			player.buff("SoftIronIgnotPhysicalDefenseBuff").forHours(24);
+		}
+    }
+
+    public function lightBronzeBar(player:Player):void {
+        clearOutput();
+        if (!player.hasPerk(PerkLib.MiracleMetal)) {
+            outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
+            outputText("\n\n<b>Requires perk: Miracle Metal</b>");
+            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+        }
+		else {
+			outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+			player.refillHunger(100);
+			HPChange(Math.round(player.maxHP() * 0.4), true);
+		}
+    }
+
+    public function ebonbloomAlloyIngot(player:Player):void {
+        clearOutput();
+        if (!player.hasPerk(PerkLib.MiracleMetal)) {
+            outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
+            outputText("\n\n<b>Requires perk: Miracle Metal</b>");
+            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+        }
+		else {
+			outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+			player.refillHunger(120);
+			HPChange(Math.round(player.maxHP() * 0.9), true);
+		}
     }
 
     //ALCHEMICAL ITEMS

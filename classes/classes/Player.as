@@ -657,7 +657,11 @@ use namespace CoC;
 			armorDef += armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
-			if (hasPerk(PerkLib.MiracleMetal)) armorDef = Math.round(armorDef * 0.6);
+			if (hasPerk(PerkLib.MiracleMetal)) {
+				var aD2:Number = armorDef;
+				if (armor.name == "Arigean Ne-Class Uniform") aD2 -= armor.def;
+				armorDef = Math.round(armorDef * 0.6);
+			}
 			var tier:int;
 			//Blacksmith history!
 			if (armorDef > 0 && (hasPerk(PerkLib.HistorySmith) || hasPerk(PerkLib.PastLifeSmith))) {
@@ -840,6 +844,7 @@ use namespace CoC;
 					if (keyItemvX("HB Armor Plating", 1) == 4) armorDef += 45;
 				}
 			}
+			if (buff("SoftIronIgnotPhysicalDefenseBuff").isPresent()) armorDef *= 1.15;
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColdFury)) armorDef = 0;

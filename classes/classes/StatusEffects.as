@@ -860,6 +860,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Swallowed:StatusEffectType				= mk("Swallowed yuor opponent");
 		public static const TailSlamWhip:StatusEffectType       	= mk("Tail Slam Whip");
 		public static const TentacleCoolDown:StatusEffectType   	= mk("TentacleCoolDown");
+		public static const Trench:StatusEffectType              	= mk("Trench");
 		public static const Timer:StatusEffectType              	= mk("Timer");
 		public static const TimesBashed:StatusEffectType        	= mk("TimesBashed");
 		public static const TimesCharmed:StatusEffectType       	= mk("TimesCharmed");

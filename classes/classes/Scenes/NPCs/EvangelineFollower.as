@@ -214,7 +214,7 @@ public function meetEvangeline():void {
 	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
 	if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) addButtonIfTrue(10, "Arigean I.", curingArigeanYes, "Req. 750 gems.", player.gems >= 750);
 	else {
-		if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.tailType == Tail.ARIGEAN_GREEN) addButtonIfTrue(10, "Arigean I.", curingArigean2a, "Req. 1000 gems.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3)));
+		if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.tailType == Tail.ARIGEAN_GREEN) addButtonIfTrue(10, "Arigean I.", curingArigean2a, "Req. 1000 gems and 3 spring waters.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3)));
 		else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
 	}
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
@@ -1025,6 +1025,7 @@ private function curingArigean2a():void {
 	outputText("\"<i>Down the hatch.</i>\" you murmur as you attempt to drink down the foul liquid all in one go while not throwing it back up.\n\n");
 	outputText("A burning sensation crawling up your spine is all you feel as the creature attached to you starts screeching viscously before detaching from you, and withering away on the floor, leaving a nasty gash in its wake. You can’t help but feel a little saddened at the sight. <b>You no longer have a parasite attached to you.</b>\n\n");
 	if (EvangelineCuringArigeanInfection == 0) EvangelineCuringArigeanInfection += 1;
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 1) flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
 	player.destroyItems(consumables.S_WATER, 3);
 	player.removePerk(PerkLib.MiracleMetal);
 	player.tailType = Tail.NONE;

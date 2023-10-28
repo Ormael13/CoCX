@@ -4000,6 +4000,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) places++;
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) places++;
 		if (flags[kFLAGS.YU_SHOP] == 2) places++;
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 0) places++;
 		if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
 			if (player.statusEffectv1(StatusEffects.ResourceNode1) >= 5) places++;
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) places++;
@@ -4037,12 +4038,10 @@ public class Camp extends NPCAwareContent{
 		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
 				.hint("Visit the Troll Village.")
 				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "You have not visited this place yet.", null, "???");
-		// Row 2 - places/NPCs 1-5
-		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
-				.hint(flags[kFLAGS.GAR_NAME] == 0
-						? "Visit the ruined cathedral you've recently discovered."
-						: "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.")
-				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm", null, "???");
+		// Row 2 - towns/places/NPCs 1-5
+		bd.add("The Trench", SceneLib.theTrench.theTrenchEntrance)
+				.hint("Visit the Trench where the Arigeans hang out.")
+				.disableIf(flags[kFLAGS.THE_TRENCH_ENTERED] <= 0, "Only for Arigeans.", null, "???");
 		bd.add("Lumi's Lab", SceneLib.lumi.lumiEncounter)
 				.hint("Visit Lumi's laboratory.")
 				.disableIf(flags[kFLAGS.LUMI_MET] <= 0, "Explore the realm", null, "???");
@@ -4092,6 +4091,11 @@ public class Camp extends NPCAwareContent{
 		bd.add("Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon)
 				.hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.")
 				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
+		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
+				.hint(flags[kFLAGS.GAR_NAME] == 0
+						? "Visit the ruined cathedral you've recently discovered."
+						: "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.")
+				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm", null, "???");
 		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
 				.hint("You need to explore Forest more to unlock this place.")
 				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Forest more to unlock this place.", null, "???")
@@ -4100,7 +4104,6 @@ public class Camp extends NPCAwareContent{
 				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
 				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
 				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
-		bd.add("");
 		bd.add("");
 		// Row 6 - separator between places and dungeons
 		if (debug) {
@@ -4200,7 +4203,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(7, "???", "Search the plains.");
 		if (TrollVillage.ZenjiVillageStage > 0) addButton(8, "Troll Village", SceneLib.trollVillage.EnterTheVillage).hint("Visit the Troll Village.");
 		else addButtonDisabled(8, "???", "Clear the factory first.");
-		//9 - ???
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 0) addButton(9, "The Trench", SceneLib.theTrench.theTrenchEntrance).hint("Visit the Trench where the Arigeans hang out.");
+		else addButtonDisabled(9, "???", "Only for Arigeans.");
 
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "Explore the realm.");

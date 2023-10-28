@@ -48,9 +48,10 @@ public final class ArmorLib extends ItemConstants
 		}
 
 		//25 za 1 ptk robes, 20 dla light, 40 dla medium, 60 dla heavy, 80 dla light ayo, 100 dla heavy ayo i 150 dla ultra heavy ayo, z perkiem/dod. efektem podwaja koszt za każdy
-		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
 		public const A_ROBE_:Armor = new Armor("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light")
 				.withBuffs({'spellcost': -0.10}) as Armor;
+		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
+		public const ANE_UNI:Armor = new Armor("ANe.Uni","ArigeanNCUni","Arigean Ne-Class Uniform","an Arigean Ne-Class Uniform",9,0,720,"A waterproof uniform designed to fit your body type, it seems to only consist of what looks like a black tank top with a built in mantle coming off the collar and metal fragments to help cover your squishy bits. it doesn’t seem to come with anything to cover your downstairs region however.","Light");
 		public const ARCBANG:Armor = new Armor("ArcaBangl","ArcaneBangles","arcane bangles","a set of arcane bangles",0,1,150,"Silver bangles to be worn from the wrists and ankles, inscribed with arcane runes.  For some reason, you feel like wearing these with armor or clothes is somehow wrong.","Light")
 				.withBuffs({
 					'spellcost':-0.20,

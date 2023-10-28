@@ -282,7 +282,7 @@ public class PlayerInfo extends BaseContent {
 			outputText("\n<b><u>Addictions</u></b>\n" + addictStats);
 		// End Addition Stats
 
-		// Begin Ongoing Stat Effects
+		// Begin Ongoing Stat Effects / Buffs
 		var statEffects:String = "";
 
 		if (player.inHeat)
@@ -369,6 +369,9 @@ public class PlayerInfo extends BaseContent {
 
 		if (player.hasStatusEffect(StatusEffects.ArigeanInfected))
 			statEffects += "Mysterious Infection: You feel a bit under the weather...you should likely rest until it passes.\n";
+		
+		if (player.buff("SoftIronIgnotPhysicalDefenseBuff").isPresent())
+			statEffects += "Physical Defense Buff (+15%) - " + player.buff('Soft Iron Ignot Physical Defense Buff').getRemainingTicks() + " hours remaining.\n";
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
 			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks permanently)</b>\n";
@@ -388,8 +391,8 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (statEffects != "")
-			outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects);
-		// End Ongoing Stat Effects
+			outputText("\n<b><u>Ongoing Status Effects / Buffs</u></b>\n" + statEffects);
+		// End Ongoing Stat Effects / Buffs
 		statsMenu(5);
 		if (player.statPoints > 0) {
 			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");

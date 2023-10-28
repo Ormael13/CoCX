@@ -4059,7 +4059,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
-			doDamage(damage, true);
+			doDamage(damage, true, true);
 			outputText(" damage!");
 			if (monster.hasStatusEffect(StatusEffects.DefPDebuff)) monster.addStatusValue(StatusEffects.DefPDebuff, 1, 1);
 			else {

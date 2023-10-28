@@ -18,6 +18,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.internals.Utils;
 import classes.Races.ArigeanRace;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
@@ -165,29 +166,110 @@ private function nightSixChoiceEnding():void {
 	if (!player.hasVagina()) transformations.VaginaArigean().applyEffect();
 	if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
 	if (player.hasPerk(PerkLib.BroBrains)) player.removePerk(PerkLib.BroBrains);
+	if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
+	if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
 	if (player.breastRows[0].breastRating < 2) player.breastRows[0].breastRating = 2;
 	outputText(" You head back to sleep opting to deal with the problems of your new body later and when you're more awake.\n");
 	doNext(playerMenu);
 }
 public function graydaEncounterTheTrench():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("After sailing quite a far from shore distance from shore a bold idea you would never even consider trying crosses your mind, walking on water. The idea seems absurd at first however you recall that strange woman being able to walk on the water’s surface, surely you should be able to do the same seeing as you're now the same race. You start with carefully hanging your legs off the boat and slowly step down as if you were just getting off the boat onto land, and surprisingly you find yourself standing on the water instead of in it.\n\n");
+	outputText("You carefully take a few steps forward before getting a hang of walking on the somewhat shaky surface, and before long you find yourself running around without a care in the world. However after having your fun you decide it would be best to head back to camp, but you can’t seem to find your boat anywhere, after a bit of wandering a thick layer of fog seems to come out of nowhere and sudden panic floods your system, you could be attacked from any direction including from underneath. But why should you be afraid of anything out here? Clearly they should be afraid of an apex creature like yourself! You shake your head, such... overconfidence could get you killed, or much worse...\n\n");
+	outputText("\"<i>So, you’ve come back.</i>\" A calm voice speaks, originating somewhere behind you.\n\n");
+	outputText("You quickly move to face the speaker, and place a hand on your weapon readying yourself for combat, but you can’t seem to draw your weapon, afterall it would be disrespectful to draw a weapon on your superior… You grip at your head as you wonder where these strange thoughts have been coming from, but for now it’s best to pay attention to your potential opponent. It appears to be the strange woman from before.\n\n");
+	outputText("\"<i>Relax, I mean you no harm.</i>\" Her posture seems more relaxed then when you first encountered her, and you can’t help but feel at ease in her presence. She places both of her hands on her staff, \"<i>I'm sorry for violating you like that… And stealing your gems, it was uncalled for. However, I don’t regret infecting you, as you might even grow to like having such a form.</i>\"\n\n");
+	outputText("A small tinge of fear seems to trickle down your spine at her words, something about her seems far too serene, is it possible she’s cast some sort of charm on you?\n\n");
+	outputText("\"<i>So ‘recruit’ will you follow me? I know this may seem sudden, but there is someplace I wish to show you, and I’ll be able to properly compensate you there.</i>\"\n\n");
+	outputText("She presents you her open hand, most likely to lead you to where she wishes to take you. You feel compelled to accept her offer, but something in the back of your mind is telling you that this is wrong, and you should not follow her under any circumstance. <b>Do you take her hand?</b>\n\n");
+	menu();
+	addButton(1, "Yes", graydaEncounterTheTrenchYes);
+	addButton(3, "Flee", graydaEncounterTheTrenchFlee);
 }
-public function graydaEncounterTheTrenchYes():void {
+private function graydaEncounterTheTrenchYes():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("You take her hand, and she responds by firmly grasping yours in turn, and begins to lead the way somewhere deeper into the fog.\n\n");
+	outputText("\"<i>Stay close behind me, and try to pay attention to where we’re going.</i>\" She orders while maintaining a steady pace with you in hand. Eventually she stops in what seems to be the center of the veil of fog, and releases her grip on your hand before diving into the depths.\n\n");
+	outputText("You take a deep breath, and hesitantly dive after her. She seems to be leading you straight down towards a crack on the ocean floor, and it isn’t until a few minutes down it do two things dawn on you, not only have you stopped holding your breath, but are also somehow breathing, and despite the lack of light this far down the trench you are still able to see clear as day. Suddenly she stops in front of what looks like a cave opening before turning around to make sure you're still behind her, and together you enter the cave surfacing into what looks like a giant chamber that still possesses breathable air.\n\n");
+	outputText("\"<i>Your clothes are wet… Would you like some dry ones?</i>\" She gestures to your now sodden [armor]. Notably her one piece, cloak and boots don’t seem soaked at all with water rolling off their surfaces.\n\n");
+	outputText("You attempt to explain that it won’t be necessary, but before you can say anything she takes off through a carved doorway on your left, leaving you alone to inspect the chamber as you wait. You notice there are a few carved doorways around the chamber, all of them seem to be decently lit with some sort of soft white light, a commotion can be heard from the door on your right meaning you and that woman are not the only ones who are currently here. Before long she emerges from the door on your left with a small sack, and what looks like a neatly folded set of black clothing.\n\n");
+	outputText("\"<i>Here, this uniform should be worth the same value as the gems I took from you, and this should prove to be more water-proof than your current equipment.</i>\" She hands you your items before continuing. \"<i>I'm afraid if you lose these clothes you’ll have to pay for new ones. We can’t afford to keep giving out equipment just because someone lost theirs.</i>\" She says in a stern tone.\n\n");
+	outputText("\"<i>We?</i>\"\n\n");
+	outputText("\"<i>There are others of our kind here.</i>\" She pauses for a moment to make sure her glowing yellow eyes are locked with your green, only now do you realize her above average height. \"<i>Our kind are on the verge of extinction, In all of Mareth I estimate our numbers to not even be in the triple digits, this place is just one of two shelters to offer safety for our kind from the rampant corruption on the surface, and from the other horrors that stalk the seas. We hope to form a proper society but… the land walkers are less than accepting of our kind, most fail to understand our kind, after all. Perhaps you might not understand yet, but in time I trust you will.</i>\" ");
+	outputText("She takes a few steps to the door on the right before continuing with a small smile. \"<i>You are free to rest here for as long as you choose, rooms with beds are on the left, small supply shops are to the right, and the center door is the commons. I also have a few jobs open should you wish to contribute, welcome to the trench…</i>\" The small smile she wears quickly turns blank \"<i>I don’t believe i’ve caught your name.</i>\"\n\n");
+	outputText("\"<i>[name]</i>\"\n\n");
+	outputText("\"<i>Welcome [name]. Im Grayda, the one who is currently acting leader of those here.</i>\"\n\n");
+	outputText("<b>You have unlocked The Trench in Places menu!</b>\n\n");
+	player.createStatusEffect(StatusEffects.Trench, 0, 0, 0, 0);
+	flags[kFLAGS.THE_TRENCH_ENTERED] = 1;
+	explorer.stopExploring();
+	SceneLib.inventory.takeItem(armors.ANE_UNI, theTrenchMain);
 }
-public function graydaEncounterTheTrenchFlee():void {
+private function graydaEncounterTheTrenchFlee():void {
 	clearOutput();
 	outputText("You shake your head, you assume this thing is trying to charm you. You run back to the camp, but to your surprise, she doesn’t give chase. Instead, she simply sighs and goes into the water...perhaps she wasn’t trying to charm you?\n\n");
-}/*
-public function graydaEncounterTheTrench():void {
+	endEncounter();
+}
+public function theTrenchEntrance():void {
+	clearOutput();
+	outputText("Following the path Grayda showed you, you navigate yourself through the dark underwater chasm, and soon find yourself within the small community lovingly named ‘The Trench’. It’s a series of rooms carved out of the stone walls of the underwater cave, notably divided into three different sections which serve different purposes. A few plants seem to line some of the walls which produce a soft, white light, and a general feeling of safety and passiveness seems to fill you at the thought of other Arigeans being around.\n\n");
+	theTrenchMain1();
+	menu();
+	addButton(2, "Food Stand", theTrenchFoodStand);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
+}
+private function theTrenchMain():void {
+	clearOutput();
+	theTrenchMain1();
+	menu();
+	addButton(2, "Food Stand", theTrenchFoodStand);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
+}
+private function theTrenchMain1():void {
+	outputText("The left path seems to lead into multiple different rooms which serve as shared quarters between several individuals per room. While most of the rooms seem to be unoccupied or hosting sleeping Arigeans, you can hear the chatting of a couple individuals behind some of the closed doors.\n\n");
+	outputText("The right path seems to lead to a market area which contains multiple different shops or services. It seems like you could find replacement equipment here should you ever happen to lose the clothing Grayda gifted you. A heavenly smell of roasted meat seems to waft from some sort of food shop from down there.\n\n");
+	outputText("The central path leads down towards a common area in which you can see several Arigeans lounging, reading or simply just conversing with each other. You can see Grayda holding a few papers while talking with two Arigeans who possess a red and black coloring, which seems to be a uncommon coloring many of the individuals here possess.\n\n");
+}
+private function theTrenchFoodStand():void {
+	clearOutput();
+	outputText("Attracted to the smell of cooked meat, you allow your nose to lead the way to the marketing section.");
+	if (player.statusEffectv2(StatusEffects.Trench) == 0) {
+		outputText(" Thanks to the efforts of your nose, and additional partner, you find your way to the source, which is a stand housing various hanging meats, and a few metal ingots presented in a fashion one might expect to find fruit, however the owner of the shop doesn’t seem to be currently present.\n\n");
+		outputText("Or at first sight it doesn't! A massive woman with giant chitin-like clawed hands turns from her current activity of cutting a section of meat to you. Her glowing red eyes, single horn and red vein like markings on her skin do an effective job at intimidating you, however her and her plus one both seem to be missing the natural armor your kind normally possess, and her skin lacking any sort of muscle definition.\n\n");
+		outputText("\"<i>Ah~ has my cooking attracted a new customer?</i>\" she sits down on her knees to attempt to be at the same level as you. \"<i>Awww, you're sooo cute! Are you new around here? I surely would have remembered a cute face like yours~</i>\" one of her pale, clawed hands seems to reach and gently pinch your cheek.\n\n");
+		outputText("\"<i>I actually was wondering what you serve here?</i>\" you attempt to say as you struggle to remove her talons from your cheeks.\n\n");
+		outputText("\"<i>Ah! I sell freshly hunted meats, seafood and metal ingots!</i>\"\n\n");
+		outputText("\"<i>Metal?</i>\"\n\n");
+		outputText("\"<i>You haven’t tried it yet? Metals are quite critical for an Arigean to remain healthy, you shouldn’t have any issues chewing it up, and digesting it too.</i>\" As if to put emphasis on her point, she picks up what looks like an iron ingot before taking a large bite out of it, and swallowing while showing you a toothy smile. \"<i>See? Perfectly safe.</i>\"");
+		player.addStatusValue(StatusEffects.Trench, 2, 1);
+	}
+	outputText("\n\n\"<i>So what can I get you cutie?</i>\"\n\n");
+	menu();
+	addButton(2, "CJ", theTrenchFoodStandCoelacanthJerky).hint("Coelacanth Jerky");
+	addButton(3, "SII", theTrenchFoodStandSoftIronIngot).hint("Soft Iron Ingot");
+	addButton(14, "Back", theTrenchMain);
+}
+private function theTrenchFoodStandCoelacanthJerky():void {
+	outputText("\"<i>Coelacanth normally don’t taste very great, but they are slow, big and get some nice flavoring with a bit of salt. 5 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.C_JERKY), theTrenchFoodStand);
+}
+private function theTrenchFoodStandSoftIronIngot():void {
+	outputText("\"<i>Ah, soft iron~ My personal favorite! You’ll find it’s soft and easy to chew on the go, and your body will go straight to work on healing itself with the extra nutrients, it’s also pretty decent stomach filler too! 70 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.SIINGOT), theTrenchFoodStand);
+}
+public function theTrenchFoodStandBuy(itype:ItemType):void {
+	clearOutput();
+	player.gems -= itype.value;
+	statScreenRefresh();
+	inventory.takeItem(itype, theTrenchFoodStand);
+}
+private function theTrench():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
 }
-public function graydaEncounterTheTrench():void {
+public function theTrench111():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
-}*/
+}
 	}
 }
