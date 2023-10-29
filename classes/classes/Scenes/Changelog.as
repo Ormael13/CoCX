@@ -166,6 +166,12 @@ public class Changelog extends BaseContent
 			outputText("-New M. Special: Mana Barrage. Req. to be Arigean (16+). Str scaling range attack costing mana (~200) and dealing magic damage.\n");
 			outputText("-After been defeated by Arigean Countess PC can notice something about Mysterious Infection at the stats page. Not visting Evangeline would trigger up to 7 tf events always happening at night. Also unless cured that infection would render pc body unmutable similary to perm tf's. After reaching end of the event PC can visit ocean again to get offer to be lead to location called 'The Trench'.\n");
 			outputText("-New race option: Arigean. Racial bonuses (Half Arigean/Arigean) at 9/16 points: +55/100% to str/spe multi, +40/70% to tou multi, -5/10% to int multi, -10/20% to wis multi, +1/3 armor, +5/10 min corruption.\n");
+			outputText("-New event perk: Blood Mastery. Gained by been Vampire (10+ score). Double the potency and gain of blood drain and blood magic.\n");
+			outputText("-New M. Special: Telekinetic Grab. Req. to be Vampire (10+). Allow to immobilize enemy similary to mystic web. Cooldown of 6 turns before reusing.\n");
+			outputText("-Impale perk effects changed to match closer orginal authro intent. It would now req. still jouster compatibile weapon and 100+ speed but would apply to melee normal, p. specials, p. soulskills. Max multi of 2x reached at 2,000 speed.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
@@ -173,16 +179,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Zenji not wanting to leave PC party when repeadly asked for, sharks aqua scales color not counting toward race score, cat gloves not giving feral mastery when used in feral stance, Kiha not wanting to come to team if she not bestest henchmander, missing frog enc in bog, azazel errors in race score calculations, perm TF's allowing Sand Witches spell to affect PC, ");
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP, Twin Six Shooter using ammo 2x faster, Yama-Raja Grasp gloves & Karmic Touch gloves not req. lvl 54+, ");
 			outputText("One with the forest perk tier not updating correctl, Arcane Regeneration (Major) conflicting req., Confusion on enemy text parser error, Cold Mastery not giving pretection for negative effects of using Blizzard Kimono/Claws, Blizzard Claws not enabling use of feral combat mode, combat book from Izma doesn't give strength knowledge when readed in cabin, ");
-			outputText("goblin ale face tf checking for wrong ear type\n\n");
+			outputText("goblin ale face tf checking for wrong ear type, pair of succubi whips tease dmg, Asumaki incorect cost in spirit stones, Ferocity perk gain req. req. on top of other things min orc race score, Cleave able to apply bleed to enemies that can't bleed, normal melee attack able to apply bleed to all bleed immune enemies beside constructs\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8u3:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -243,7 +243,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -275,6 +283,10 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

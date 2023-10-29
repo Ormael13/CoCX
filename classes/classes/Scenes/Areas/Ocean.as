@@ -149,8 +149,7 @@ use namespace CoC;
 				when: function ():Boolean {
 					return flags[kFLAGS.THE_TRENCH_ENTERED] == 0
 				},
-				call  : SceneLib.graydaScene.graydaEncounter,
-				chance: 5
+				call  : SceneLib.graydaScene.graydaEncounter
 			}, {
 				name  : "weresharkMale",
 				label : "Wereshark (M)",

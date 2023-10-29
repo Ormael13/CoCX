@@ -252,6 +252,7 @@ public class AbstractSpell extends CombatAbility {
 			}
 			case DamageType.MAGICAL: {
 				if (category == CAT_SPELL_BLOOD) {
+					if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 					damage *= combat.bloodDamageBoostedByDao();
 				}
 				break;

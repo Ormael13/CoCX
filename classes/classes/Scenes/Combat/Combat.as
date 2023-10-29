@@ -2198,7 +2198,8 @@ public class Combat extends BaseContent {
             crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
         }
         //Apply AND DONE!
         damage *= (monster.damagePercent() / 100);
@@ -3735,7 +3736,8 @@ public class Combat extends BaseContent {
             if (rand(100) < critChance) {
                 crit = true;
 				critDmg += bonusCriticalDamageFromMissingHP();
-                damage *= critDmg;
+                if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= (critDmg * impaleMultiplier());
+				else damage *= critDmg;
             }
 		}
 		else {
@@ -5823,7 +5825,8 @@ public class Combat extends BaseContent {
         if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
         if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
         if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
-		if (player.hasPerk(PerkLib.SkilledFighterEx) && calculateCrit() > 100) {
+		if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critDamage *= impaleMultiplier();
+        if (player.hasPerk(PerkLib.SkilledFighterEx) && calculateCrit() > 100) {
 			if (calculateCrit() > 200) critDamage *= 3;
 			else critDamage *= 2;
 		}
@@ -7189,7 +7192,8 @@ public class Combat extends BaseContent {
             var critDamage:Number = 1.75;
             critChance += combatPhysicalCritical();
 			critDamage += bonusCriticalDamageFromMissingHP();
-            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+            if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critDamage *= impaleMultiplier();
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
                 crit = true;
                 if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 3) {
@@ -7537,7 +7541,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyUndeadType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
         if (bleed) {
-            if (monster.hasPerk(PerkLib.EnemyConstructType)) {
+            if (monster.canMonsterBleed()) {
                 if (monster is LivingStatue) outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
                 else outputText("Despite the gashes you've torn in its exterior, [themonster] does not bleed.");
             } else {
@@ -10690,6 +10694,14 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownPinDown, 1, -1);
             }
         }
+        //Telekinetic Grab
+        if (player.hasStatusEffect(StatusEffects.CooldownTelekineticGrab)) {
+            if (player.statusEffectv1(StatusEffects.CooldownTelekineticGrab) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownTelekineticGrab);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownTelekineticGrab, 1, -1);
+            }
+        }
         //Tazer
         if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
             if (player.statusEffectv1(StatusEffects.CooldownTazer) <= 0) {
@@ -12621,7 +12633,8 @@ public function OrcaImpale():void {
             damage *= critMulti;
             var buffMultiplier:Number = 0;
             buffMultiplier += bonusCriticalDamageFromMissingHP();
-            damage *= (1.75 + buffMultiplier);
+            if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
         }
         damage = Math.round(damage);
         //Dealing damage -
@@ -14580,6 +14593,7 @@ public function VampiricBite():void {
     if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) drinked += 1;
     if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) drinked += 3;
     if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) drinked *= 2;
+	if (player.hasPerk(PerkLib.BloodMastery)) drinked *= 2;
 	if (player.racialScore(Races.VAMPIRE) >= 10) drinked *= 2;
     thirst.drink(drinked);
     if (monster.gender != 0 && monster.lustVuln != 0) {
@@ -15534,8 +15548,8 @@ public function greatDive():void {
         crit = true;
         var buffMultiplier:Number = 0;
         buffMultiplier += bonusCriticalDamageFromMissingHP();
-        if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) buffMultiplier *= 2;
-        damage *= (1.75 + buffMultiplier);
+        if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * impaleMultiplier());
+        else damage *= (1.75 + buffMultiplier);
     }
     outputText(".");
     damage = Math.round(damage);
@@ -15558,6 +15572,17 @@ public function greatDive():void {
     }
     checkAchievementDamage(damage);
     enemyAI();
+}
+
+public function impaleMultiplier():Number {
+	var impaleM:Number = 0;
+	if (player.spe >= 2000) impaleM += 2;
+	else {
+		impaleM += Math.round(player.spe * 0.05);
+		impaleM *= 0.01;
+		impaleM += 1;
+	}
+    return impaleM;
 }
 
 public function flamesOfLoveLC():Number {
@@ -15702,6 +15727,7 @@ public function bloodSwipeBloodPuppies():void {
         damage *= ((puppies / 2) + 1.25);
     }
     if (monster.plural) damage *= 2;
+	if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
     damage = Math.round(damage * bloodDamageBoostedByDao());
     outputText("[Themonster] takes ");
     doMinionPhysDamage(damage, true, true);
@@ -15753,6 +15779,7 @@ public function heartSeekerBloodPuppies():void {
         crit = true;
         damage *= ((puppies / 2) + 1.25);
     }
+	if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
     damage = Math.round(damage * bloodDamageBoostedByDao());
     outputText("[Themonster] takes ");
     doTrueDamage(damage, true, true);
@@ -15797,6 +15824,7 @@ public function bloodDewdropsBloodPuppies():void {
         damage *= ((puppies / 2) + 1.25);
     }
     if (monster.plural) damage *= 10;
+	if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
     damage = Math.round(damage * bloodDamageBoostedByDao());
     outputText("[Themonster] takes ");
     doPhysicalDamage(damage, true, true);
@@ -16868,4 +16896,4 @@ private function touSpeStrScale(stat:int):Number {
         return player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater) || explorer.areaTags.water;
     }
 }
-}
+}

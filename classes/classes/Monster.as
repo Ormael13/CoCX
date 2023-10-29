@@ -1051,7 +1051,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function canMonsterBleed():Boolean
 		{
-			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType) || !hasPerk(PerkLib.EnemyUndeadType);
+			return !hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.EnemyPlantType) && !hasPerk(PerkLib.EnemyGooType) && !hasPerk(PerkLib.EnemyGhostType) && !hasPerk(PerkLib.EnemyUndeadType);
 		}
 
 		/**
@@ -1968,6 +1968,7 @@ import flash.utils.getQualifiedClassName;
 				StatusEffects.GrabBear,
 				StatusEffects.CancerGrab,
 				StatusEffects.MysticWeb,
+				StatusEffects.TelekineticGrab,
 				StatusEffects.Entangled,
 				StatusEffects.Swallowed,
 			]
@@ -2086,6 +2087,17 @@ import flash.utils.getQualifiedClassName;
 					EngineCore.outputText("[Themonster] struggle to get free and manage to shove you break off your webbing.");
 					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 					removeStatusEffect(StatusEffects.MysticWeb);
+				}
+				addStatusValue(StatusEffects.MysticWeb, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
+			}
+			if (hasStatusEffect(StatusEffects.TelekineticGrab)) {
+				EngineCore.outputText("[Themonster] struggle to get free from your telekinetic grasp!");
+				if (statusEffectv1(StatusEffects.TelekineticGrab) <= 0) {
+					EngineCore.outputText("[Themonster] struggle to get free and manage to free from your telekinetic grasp.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.TelekineticGrab);
 				}
 				addStatusValue(StatusEffects.MysticWeb, 1, -1);
 				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();

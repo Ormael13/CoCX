@@ -718,7 +718,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -824,7 +825,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -1778,6 +1780,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1813,6 +1816,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1844,6 +1848,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doTrueDamage(damage, true, true);
@@ -1873,6 +1878,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doTrueDamage(damage, true, true);
@@ -1901,6 +1907,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1939,6 +1946,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1972,6 +1980,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -2003,6 +2012,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
