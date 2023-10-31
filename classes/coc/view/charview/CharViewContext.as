@@ -130,7 +130,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
 					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasDagger: player.isDaggerTypeWeapon(),
+					PlayerHasDagger: player.isDaggerTypeWeapon() && player.weapon != game.weapons.AETHERD && player.shield != game.shields.AETHERS,
 					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
 					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
 
@@ -172,6 +172,8 @@ public class CharViewContext extends ExecContext {
 					PlayerHasLactoBlaster:player.weaponRange == game.weaponsrange.LBLASTR,
 
 					PlayerHasADualWeapon: player.isDualWield(),
+					PlayerHasADualMeleeWeapon: player.isDualWieldMelee(),
+					PlayerHasADualRangedWeapon: player.isDualWieldRanged(),
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					BoobDisplay: game.flags[kFLAGS.BOOB_DISPLAY_FLAG],
