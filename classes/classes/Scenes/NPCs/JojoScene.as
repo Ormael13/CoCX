@@ -2269,7 +2269,7 @@ public function talkMenu():void
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift).hint("Ask him if he's willing to train you.");
 	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", SceneLib.mountain.minervaScene.minervaPurification.purificationByJojoPart1).hint("Ask him if he can exorcise the demonic parasite infesting Minerva.");
 	//Sex button
-	if (player.cor <= 10 && player.lust >= 33) {
+	if (player.cor <= (10 + player.corruptionTolerance) && player.lust >= 33) {
 		addButton(9, "Sex?", offerSexFirstTime).hint("Ask him if he's willing to have sex with you.");
 		if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] < 4) addButtonDisabled(9, "Sex?", "You should socialize with Jojo a bit more.");
 		//if (player.hasStatusEffect(StatusEffects.EverRapedJojo)) addButtonDisabled(9, "Sex?". "You've raped Jojo in the past, now you can't ask him out.");
@@ -2835,7 +2835,7 @@ public function offerSexFirstTimeHighAffection():void {
 	menu();
 	addButton(0, "Meditate", jojoFollowerMeditate);
 	addButton(1, "Drop It", noThanksToMeditate);
-	if (player.inte >= 60 && player.cor <= 10) addButton(2, "Confront", confrontChastity);
+	if (player.inte >= 60 && player.cor <= (10+ player.corruptionTolerance)) addButton(2, "Confront", confrontChastity);
 }
 
 public function confrontChastity():void {

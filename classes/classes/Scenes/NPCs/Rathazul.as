@@ -68,7 +68,7 @@ public function encounterRathazul(meet:Boolean = true):void {
 		player.createStatusEffect(StatusEffects.MetRathazul,0,0,0,0);
 	}
 	//Camp offer!
-	if(player.statusEffectv2(StatusEffects.MetRathazul) >= 2 && player.statusEffectv3(StatusEffects.MetRathazul) != 1 && player.cor < 75 && meet) {
+	if(player.statusEffectv2(StatusEffects.MetRathazul) >= 2 && player.statusEffectv3(StatusEffects.MetRathazul) != 1 && meet) {
 		outputText("\"<i>You know, I think I might be able to do this worn-out world a lot more good from your camp than by wandering around this lake.  What do you say?</i>\" asks the rat.\n\n(Move Rathazul into your camp?)");
 		doYesNo(rathazulMoveToCamp, rathazulMoveDecline);
 		//Set rathazul flag that he has offered to move in (1 time offer)
@@ -819,6 +819,7 @@ private function buyDyes():void {
 		merchantMenu.addItem(consumables.PURPDYE, 50);
 		merchantMenu.addItem(consumables.PINKDYE, 50);
 		merchantMenu.addItem(consumables.RUSSDYE, 50);
+		merchantMenu.addItem(consumables.GOLDB_D, 50);
 		merchantMenu.addItem(consumables.RAINDYE, 50);
 	}
 	merchantMenu.afterPurchase = function(itype:ItemType,qty:int,next:Function):void {

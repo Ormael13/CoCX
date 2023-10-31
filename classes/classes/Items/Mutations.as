@@ -2863,7 +2863,7 @@ public final class Mutations extends MutationsHelper {
         player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
 
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
-        player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
+        player.createPerk(PerkLib.TransformationImmunity2, 6, 0, 0, 0);
 
         if (player.hasPerk(PerkLib.RacialParagon))
             flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
@@ -4863,7 +4863,7 @@ public final class Mutations extends MutationsHelper {
             outputText(" turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
         }
         //Face!
-        if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.ELFIN) {
+        if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.BIG) {
             if (player.faceType != Face.ANIMAL_TOOTHS) {
                 outputText("[pg]");
                 transformations.FaceAnimalTeeth.applyEffect();
@@ -4878,6 +4878,12 @@ public final class Mutations extends MutationsHelper {
         if (player.ears.type != Ears.BIG && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsBig.applyEffect();
+            changes++;
+        }
+        //Removes tail
+        if (player.tailType > Tail.NONE && rand(3) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.TailNone.applyEffect();
             changes++;
         }
         // Remove gills
@@ -5224,7 +5230,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Arms
-            if ((player.lowerBody == LowerBody.SHARK || player.lowerBody == LowerBody.ABYSSAL_SHARK) && !InCollection(player.arms.type, Arms.SHARK, Arms.SEA_DRAGON) && changes < changeLimit && rand(3) == 0) {
+            if ((player.lowerBody == LowerBody.SHARK || player.lowerBody == LowerBody.ABYSSAL_SHARK) && !InCollection(player.arms.type, Arms.SHARK, Arms.ABYSSAL_SHARK) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.ArmsShark.applyEffect();
                 changes++;
@@ -5236,7 +5242,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
 			if (type == 2 && player.hasPerk(PerkLib.DantianPhylactery)) {
-				if (type != 2 && player.faceType != Face.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
+				if (player.faceType != Face.ABYSSAL_SHARK && changes < changeLimit && rand(3) == 0) {
 					outputText("[pg]");
 					transformations.FaceAbyssalShark.applyEffect();
 					changes++;
@@ -10186,7 +10192,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPatternOrc.applyEffect();
             changes++;
         }
-        if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && player.isRace(Races.ORC, 1, false) && !player.hasPerk(PerkLib.Ferocity) && changes < changeLimit) {
+        if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && !player.hasPerk(PerkLib.Ferocity) && changes < changeLimit) {
             outputText("[pg]You feel a limitless energy fill your orcish limbs, as your body tenses, rippling muscle making your scar-like tattoos look even more realistic. Your [face] gains a look of reverence has you hear the all mighty words of your goddess, telling you to go and claim new lands, conquer all living things, bring them beneath your rule.");
             outputText("[pg]She tells you that as long as you bear her blessing, you will not fall in battle, even if fatal blows are dealt. Go forth and prove that puny human who said people die when they are killed wrong.");
             outputText("[pg]<b>(Gained Perk: Ferocity</b>)");
@@ -11526,6 +11532,10 @@ public final class Mutations extends MutationsHelper {
 			if (player.hasPerk(PerkLib.Lycanthropy)) {
 				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
 				player.removePerk(PerkLib.Lycanthropy);
+			}
+			if (player.hasPerk(PerkLib.Selachimorphanthropy)) {
+				player.createPerk(PerkLib.SelachimorphanthropyDormant,0,0,0,0);
+				player.removePerk(PerkLib.Selachimorphanthropy);
 			}
 			player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
 			player.statStore.replaceBuffObject({ 'str.mult': bonusStats*0.01*ngM,'tou.mult': bonusStats*0.1*ngM,'spe.mult': bonusStats*0.04*ngM, 'minlustx': bonusStats * 0.005}, 'Vulpesthropy', { text: 'Vulpesthropy'});
@@ -15775,8 +15785,6 @@ public final class Mutations extends MutationsHelper {
         //Eyes
         if (!transformations.EyesGoat.isPresent()) {
             transformations.EyesGoat.applyEffect(false);
-            if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
-            else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
             changes++;
         }
         if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
@@ -15809,7 +15817,7 @@ public final class Mutations extends MutationsHelper {
         player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
         outputText("\n<b>Obtained perk: Conviction Of Purpose</b>  "+PerkLib.ConvictionOfPurpose.desc());
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
-        player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
+        player.createPerk(PerkLib.TransformationImmunity2, 5, 0, 0, 0);
         if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.AZAZEL;
         player.removeAllRacialMutation();
         player.refillHunger(10);
@@ -17360,6 +17368,68 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(30);
         fatigue(-20);
         HPChange(Math.round(player.maxHP() * 0.1), true);
+    }
+
+    public function stomiidaeFillet(player:Player):void {
+        clearOutput();
+        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+        player.refillHunger(15);
+    }
+
+    public function calamariSteak(player:Player):void {
+        clearOutput();
+        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+        player.refillHunger(15);
+    }
+
+    public function coelacanthJerky(player:Player):void {
+        clearOutput();
+        outputText("You bite down on the waxy piece of jerky, and while bitter at first the salt helps make the flavor bearable. It doesn’t fill you up much, but it should help stave off hunger.");
+        player.refillHunger(15);
+    }
+
+    public function softIronIngot(player:Player):void {
+        clearOutput();
+		if (!player.hasPerk(PerkLib.MiracleMetal)) {
+            outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
+            outputText("\n\n<b>Requires perk: Miracle Metal</b>");
+            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+        }
+		else {
+			outputText("Quickly scarfing down the metal, you find it has a pleasant, sweet flavor that invigorates your body. You feel like not even a building falling on you would scratch your armor.");
+			player.refillHunger(80);
+			HPChange(Math.round(player.maxHP() * 0.2), true);
+			if (player.buff("SoftIronIgnotPhysicalDefenseBuff").isPresent()) player.buff("SoftIronIgnotPhysicalDefenseBuff").remove();
+			player.buff("SoftIronIgnotPhysicalDefenseBuff").forHours(24);
+		}
+    }
+
+    public function lightBronzeBar(player:Player):void {
+        clearOutput();
+        if (!player.hasPerk(PerkLib.MiracleMetal)) {
+            outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
+            outputText("\n\n<b>Requires perk: Miracle Metal</b>");
+            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+        }
+		else {
+			outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+			player.refillHunger(100);
+			HPChange(Math.round(player.maxHP() * 0.4), true);
+		}
+    }
+
+    public function ebonbloomAlloyIngot(player:Player):void {
+        clearOutput();
+        if (!player.hasPerk(PerkLib.MiracleMetal)) {
+            outputText("As you greedily try to take a bite out of the delicious metal bar full force, you painfully find that your teeth don’t go through the metal and start to ache greatly…OW! The hell!? You quickly try to take more bites but your teeth just…CAN’T pass though the metal. And this is the softest of the metal bars you got!");
+            outputText("\n\n<b>Requires perk: Miracle Metal</b>");
+            SceneLib.inventory.returnItemToInventory(consumables.SIINGOT);
+        }
+		else {
+			outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
+			player.refillHunger(120);
+			HPChange(Math.round(player.maxHP() * 0.9), true);
+		}
     }
 
     //ALCHEMICAL ITEMS

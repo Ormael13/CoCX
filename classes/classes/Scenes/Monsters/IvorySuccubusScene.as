@@ -24,7 +24,7 @@ public class IvorySuccubusScene extends BaseContent
             menu();
             addButton(0, "Fight", fightAgainstSuccubus);
             addButton(1, "Accept", loseToSuccubus, false);
-            addButton(4, "Run", tryToFlee);
+            addButton(4, "Leave", tryToFlee);
         }
         else {
             outputText("She starts to close the distance by charging at you! It's a fight!");

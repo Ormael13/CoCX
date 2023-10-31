@@ -535,6 +535,13 @@ package classes.GeneticMemories {
           title: "Wereshark Legs",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyWereshark}});
 
+      public static const ARIGEAN: int = _partid++;
+      EnumValue.add(Memories, ARIGEAN, "ARIGEAN", {
+          id: "Arigean Lower Body",name: "Arigean Legs",
+          cost: 100,
+          title: "Arigean Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyArigean}});
+
 
 
 

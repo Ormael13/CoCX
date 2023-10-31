@@ -137,6 +137,8 @@ public class SceneLib {
 
     public static var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 
+    public static var charybdisScene:CharybdisFollower = new CharybdisFollower();
+
     public static var chichiScene:ChiChiFollower = new ChiChiFollower();
 
     public static var ceaniScene:CeaniScene = new CeaniScene();
@@ -164,6 +166,8 @@ public class SceneLib {
 	public static var forgefatherScene:Forgefather = new Forgefather();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
+
+    public static var graydaScene:GraydaRetainer = new GraydaRetainer();
 
     public static var helFollower:HelFollower = new HelFollower();
 
@@ -204,6 +208,8 @@ public class SceneLib {
     public static var midokaScene:MidokaScene = new MidokaScene();
 
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
+
+    public static var nadiaScene:NadiaFollower = new NadiaFollower();
 
     public static var neisaFollower:NeisaFollower = new NeisaFollower();
 
@@ -259,6 +265,10 @@ public class SceneLib {
 
     public static var werefoxScene:WerefoxScene = new WerefoxScene();
 
+    public static var werespiderScene:WerespiderScene = new WerespiderScene();
+
+    public static var weresharkScene:WeresharkScene = new WeresharkScene();
+
     public static var woodElves:WoodElves = new WoodElves();
 
     public static var mindbreaker:Mindbreaker = new Mindbreaker();
@@ -271,6 +281,8 @@ public class SceneLib {
 
     public static var abyssalsharkScene:AbyssalSharkScene = new AbyssalSharkScene();
 
+    public static var ghoulishVampireServant:GhoulishVampireServant = new GhoulishVampireServant();
+
     public static var trollVillage:TrollVillage = new TrollVillage();
 
     public static var bazaar:Bazaar = new Bazaar();
@@ -282,6 +294,8 @@ public class SceneLib {
     public static var owca:Owca = new Owca();
 
     public static var telAdre:TelAdre = new TelAdre();
+
+    public static var theTrench:TheTrench = new TheTrench();
 
     public static var ruinedTown:RuinedTownRebuilt = new RuinedTownRebuilt();
 

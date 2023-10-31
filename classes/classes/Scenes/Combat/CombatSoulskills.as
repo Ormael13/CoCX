@@ -40,7 +40,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsIceFist)) {
 			bd = buttons.add("Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
-			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) {
+			if ((player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) && (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity))) {
 				bd.disable("When you try to use this technique, you shudder in revulsion. Ice, that close to your body? You're a creature of fire!");
 			} else if (!player.isFistOrFistWeapon()) {
 				bd.disable("<b>Your [weapon] can't be used with this soulskill.</b>");
@@ -52,7 +52,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFirePunch)) {
 			bd = buttons.add("Fire Punch", FirePunch).hint("Ignite your opponents dealing fire damage and setting them ablaze.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
-			if (player.hasPerk(PerkLib.ColdAffinity)) {
+			if ((player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis))) {
 				bd.disable("You call upon the power of flame...and you begin to sweat. You aren't built for the heat, and your body knows it. ");
 			} else if (!player.isFistOrFistWeapon()) {
 				bd.disable("<b>Your [weapon] can't be used with this soulskill.</b>");
@@ -377,7 +377,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.racialScore(Races.ANUBIS) >= 20) {
-			bd = buttons.add("Soul drain", SoulDrain).hint("Damage victim’s soul force directly, inflicting suffering both physical and spiritual. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Soul drain", SoulDrain).hint("Damage victim’s soul force directly, inflicting suffering both physical and spiritual in the form of heavy dark damage. Ineffective on foes who lack a soul. Gain Healing as a percentage of the soul force stolen.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 			if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
 				bd.disable("You can't use this soulskill on somoene truly souless.");
 			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
@@ -388,7 +388,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			
 		}
 		if (player.racialScore(Races.ANUBIS) >= 20) {
-			bd = buttons.add("Finger of death", FingerOfDeath).hint("Inflict massive damage. Also damage the opponent's toughness and strength by 10%. Ineffective on foes who lack a soul.  \n\nWould go into cooldown after use for: 6 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(200 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Finger of death", FingerOfDeath).hint("Inflict massive dark damage. Also damage the opponent's toughness and strength by 10 percent. Ineffective on foes who lack a soul.  \n\nWould go into cooldown after use for: 6 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(200 * soulskillCost() * soulskillcostmulti()));
 			if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
 				bd.disable("You can't use this soulskill on somoene truly souless.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownFingerOfDeath)) {
@@ -400,7 +400,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (200 * soulskillCost() * soulskillcostmulti())) {
 				bd.disable("Your hp is too low to use this soulskill.");
 			}
-			
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
 			bd = buttons.add("Blood Swipe", bloodSwipe)
@@ -667,11 +666,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		//weapon bonus
 		damage = combat.weaponAttackModifierSpecial(damage);
 		//All special weapon effects like...fire/ice
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
-			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
+			damage = combat.FireTypeDamageBonus(damage);
 		}
 		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (combat.isPureWeapon()) {
@@ -722,7 +718,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -791,7 +788,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (combat.isCorruptWeapon()) {
 			damage = combat.monsterCorruptDamageBonus(damage);
 		}
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
@@ -828,7 +825,8 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
@@ -1683,14 +1681,18 @@ public class CombatSoulskills extends BaseCombatContent {
 		var soulforcecost:Number = 100 * soulskillCost() * soulskillcostmulti();
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
-		var damage:Number = scalingBonusWisdom();
+		combat.darkRitualCheckDamage();
+		var damage:Number = scalingBonusWisdom() + scalingBonusIntelligence();
 		if (damage < 10) damage = 10;
-		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		//soulspell mod effect
+		damage *= spellMod();
+		damage *= soulskillMagicalMod();
+		damage = calcEclypseMod(damage, true);
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.armor == armors.DEATHPGA) damage *= 1.5;
+		damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1702,7 +1704,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		//final touches
 		damage *= (monster.damagePercent() / 100);
-		doTrueDamage(damage, true, true);
+		doDarknessDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		HPChange(Math.round(player.maxHP() * 0.2), true);
@@ -1723,15 +1725,18 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4) player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 4, 0, 0, 0);
 		else player.createStatusEffect(StatusEffects.CooldownFingerOfDeath, 6, 0, 0, 0);
-		var damage:Number = player.wis * 1.5;
-		damage += scalingBonusWisdom() * 1.5;
+		combat.darkRitualCheckDamage();
+		var damage:Number = (scalingBonusWisdom() * 1.5) + (scalingBonusIntelligence() * 1.5);
 		if (damage < 15) damage = 15;
 		//soulskill mod effect
-		damage *= combat.soulskillMagicalMod();
+		damage *= spellMod();
+		damage *= soulskillMagicalMod();
+		damage = calcEclypseMod(damage, true);
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
 		if (player.armor == armors.DEATHPGA) damage *= 1.5;
+		damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1744,9 +1749,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		outputText(" ");
-		doMagicDamage(damage, true, true);
+		doDarknessDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		monster.statStore.addBuffObject({str:-10,tou:-10}, "Finger of death",{text:"Finger of death"});
+		monster.statStore.addBuffObject({str:-10*(monster.str/100),tou:-10*(monster.tou/100)}, "Finger of death",{text:"Finger of death"});
 		checkAchievementDamage(damage);
 		outputText("\n\n");
 		if (!player.hasStatusEffect(StatusEffects.BloodCultivator) && flags[kFLAGS.IN_COMBAT_PLAYER_ANUBI_HEART_LEECH] == 0) anubiHeartLeeching(damage);
@@ -1775,6 +1780,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1810,6 +1816,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1841,6 +1848,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doTrueDamage(damage, true, true);
@@ -1870,6 +1878,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doTrueDamage(damage, true, true);
@@ -1898,6 +1907,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1936,6 +1946,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -1969,6 +1980,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -2000,6 +2012,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
+		if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText("[Themonster] takes ");
 		doDamage(damage, true, true);
@@ -2313,4 +2326,3 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }*/
 }
 }
-

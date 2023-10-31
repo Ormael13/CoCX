@@ -697,6 +697,14 @@ public class AlchemyLib extends BaseContent {
 		short: "AShark",
 		name : "Abyssal Shark"
 	});
+	public static const AE_DRAGONNE:int        = EnumValue.add(Essences, 213, "DRAGONNE", {
+		short: "Drgne",
+		name : "Dragonne"
+	});
+	public static const AE_ARIGEAN:int        = EnumValue.add(Essences, 214, "ARIGEAN", {
+		short: "Arig",
+		name : "Arigean"
+	});
 	
 	public static function DEFAULT_ESSENCE_DROP_TABLE(mainEssencee:int, withHuman:Boolean = false):Array {
 		var result:Array = [

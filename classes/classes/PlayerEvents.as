@@ -1,9 +1,11 @@
 package classes {
 
+import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
 import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
@@ -451,14 +453,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.MummyCurse) && player.hasPerk(PerkLib.MummyLord) && player.racialScore(Races.ANUBIS) >= 20) {
-				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				outputText("\nAs your power over death increase you aquire the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Gained Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.createPerk(PerkLib.MummyCurse,0,0,0,0);
 				player.createPerk(PerkLib.DeathPriest,0,0,0,0);
 				player.createPerk(PerkLib.SoulNexus,0,0,0,0);
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.MummyCurse) && player.racialScore(Races.ANUBIS) < 20) {
-				outputText("\nLia would surely bring fine text for this next time.\n\n(<b>Lost Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
+				outputText("\nAs your power over death wanes you lose the ability to control and command mummies as the Anubis dark priest do.\n\n(<b>Lost Mummy Curse, Death Priest, Soul Nexus Perks!</b>)\n");
 				player.removePerk(PerkLib.MummyCurse);
 				player.removePerk(PerkLib.DeathPriest);
 				player.removePerk(PerkLib.SoulNexus);
@@ -870,7 +872,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Other removeCurse cooldowns
 			if (flags[kFLAGS.AYANE_CURE_COOLDOWN] > 0) --flags[kFLAGS.AYANE_CURE_COOLDOWN];
-			if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) --flags[kFLAGS.DIANA_CURE_COOLDOWN];
+			if (flags[kFLAGS.NADIA_CURE_COOLDOWN] > 0) --flags[kFLAGS.NADIA_CURE_COOLDOWN];
 			//Luna nursing reset
 			if (LunaFollower.Nursed) {
 				LunaFollower.NursedCooldown -= 1
@@ -1051,6 +1053,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
 				if (player.hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonRoyalBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1) player.removeStatusEffect(StatusEffects.DragonRoyalBreathCooldown);
 				//Reset Mara Fruit daily counter
 				flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Alraune flags
@@ -1319,7 +1322,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.cor += 5;
 				}
 				//Reset clone creation tracker
-				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) == 0) player.removeStatusEffect(StatusEffects.PCClone);
+				if (camp.gcc(true) && camp.gcc() == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
 			//Process crops harvest moon
 			if (CoC.instance.model.time.hours == 24){
@@ -1504,13 +1507,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.", player.perkv4(PerkLib.DarkCharm) == 0);
 			//Flexibility perk
 			needNext ||= player.gainOrLosePerk(PerkLib.Flexibility, (Tail.hasFelineTail(player) && LowerBody.hasFelineLegs(player) && Arms.hasFelineArms(player)) || player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1, "While stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?", "You notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.", player.perkv4(PerkLib.Flexibility) == 0);
-
 			//Ghost-slinger perk
 			needNext ||= player.gainOrLosePerk(PerkLib.Ghostslinger, player.isRaceCached(Races.POLTERGEIST, 2), "Your head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.", "Your supernatural knowledge fades along with the abilities that came with it as you become more corporeal.");
 			needNext ||= player.gainOrLosePerk(PerkLib.Telekinesis, player.isRaceCached(Races.POLTERGEIST, 2));
 			//Phantom Shooting perk
 			needNext ||= player.gainOrLosePerk(PerkLib.PhantomShooting, player.isRaceCached(Races.POLTERGEIST), (player.weaponRangePerk == "Throwing" || player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle")? "With your expanded otherworldly knowledge, a thought comes to mind. You apply your ghostly abilities to your " + player.weaponRangeName + " then "+(player.weaponRangePerk == "Throwing" ? "throw it":"shoot")+" at a nearby rock. You can feel a small piece of yourself leave, but the impact of your weapon all but shatters the rock. Using a bit of your ectoplasm instead of basic ammunition definitely made your " + player.weaponRangeName + " stronger.":"With your expanded otherworldly knowledge, a thought comes to mind. If you used some of your ectoplasm instead of basic ammunition for a firearm or throwing weapon, perhaps your weapons will have more of an impact.", "As you become more corporeal again, the otherworldly knowledge you once held begins to fade along with your ectoplasm. Looks like it's back to using normal ammunition for your firearms and throwing weapons again...");
-
+			//Blood Mastery
+			needNext ||= player.gainOrLosePerk(PerkLib.BloodMastery, player.isRaceCached(Races.VAMPIRE), "Your head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.", "Your supernatural knowledge fades along with the abilities that came with it as you become more corporeal.");
 			//Easter bunny egg balls Loosing
 			needNext ||= player.gainOrLosePerk(PerkLib.EasterBunnyBalls, player.isRaceCached(Races.EASTERBUNNY) || player.perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1, "", "Something changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.");
 			//Easter bunny egg balls Cumming the eggs out
@@ -1951,6 +1954,22 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.AcidSpit)) player.removePerk(PerkLib.AcidSpit);
 				if (player.hasPerk(PerkLib.AzureflameBreath)) player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
+			}
+			//Dragon regal breath and King of the Jungle
+			if (player.isRaceCached(Races.DRAGONNE)) {
+				if (!player.hasPerk(PerkLib.LionHeart)) {
+					outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+					outputText("[pg]It seems drake flower has awoken some kind of power within you... your throat and chest feel very sore. However, you doubt you'll be able to force out more than one such blast before resting.  (<b>Gained Perk"+(player.hasPerk(PerkLib.DragonRegalBreath)?":":"s: Dragon regal breath and King of the Jungle")+"!</b>)");
+					if (!player.hasPerk(PerkLib.DragonRegalBreath)) player.createPerk(PerkLib.DragonRegalBreath, 0, 0, 0, 0);
+					player.createPerk(PerkLib.LionHeart, 0, 0, 0, 0);
+					needNext = true;
+				}
+			} else {
+				if (player.hasPerk(PerkLib.LionHeart)) {
+					outputText("\nYou are no longer enough of a dragonne and have lost your special abilities!\n\n<b>(Lost the Lion Heart perk!)</b>\n");
+					player.removePerk(PerkLib.LionHeart);
+					needNext = true;
+				}
 			}
 			//Titan Might
 			needNext ||= player.gainOrLosePerk(PerkLib.TitanicSize,(player.tallness >= 80 && (player.isRaceCached(Races.SCYLLA, 2) || player.isAnyRaceCached(Races.HYDRA, Races.FROSTWYRM, Races.SANDWORM))), "Whoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.",
@@ -2497,14 +2516,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			if (player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
 				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
-				var bonusStats:Number = 0;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
-				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+				var ngMWW:Number = (player.newGamePlusMod() + 1);
+				var bonusStats1:Number = 0;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats1 += 10;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats1 += 20;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats1 += 30;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats1 += 40;
+				player.createPerk(PerkLib.Lycanthropy,bonusStats1,0,0,0);
 				player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
-				player.statStore.replaceBuffObject({ 'str.mult': bonusStats,'tou.mult': bonusStats,'spe.mult': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
+				player.statStore.replaceBuffObject({'str.mult': bonusStats1*0.1*ngMWW,'tou.mult': bonusStats1*0.06*ngMWW,'spe.mult': bonusStats1*0.04*ngMWW,'minlustx': bonusStats1*0.01}, 'Lycanthropy', { text: 'Lycanthropy'});
 				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
 			}
@@ -2522,6 +2542,28 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.statStore.removeBuffs("Vulpesthropy");
 				player.removeStatusEffect(StatusEffects.HumanForm);
 				player.removePerk(PerkLib.Vulpesthropy);
+				needNext = true;
+			}
+			if (player.isRaceCached(Races.WERESHARK) && player.hasPerk(PerkLib.SelachimorphanthropyDormant)) {
+				outputText("\nAs you become shark enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Selachimorphanthropy.</b>\n");
+				var ngMWS:Number = (player.newGamePlusMod() + 1);
+				var bonusStats2:Number = 0;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats2 += 10;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats2 += 20;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats2 += 30;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats2 += 40;
+				player.createPerk(PerkLib.Selachimorphanthropy,bonusStats2,0,0,0);
+				player.createStatusEffect(StatusEffects.HumanForm,1,0,0,0);
+				player.statStore.replaceBuffObject({'str.mult': bonusStats2*0.1*ngMWS,'tou.mult': bonusStats2*0.05*ngMWS,'spe.mult': bonusStats2*0.05*ngMWS,'minlustx': bonusStats2*0.01}, 'Selachimorphanthropy', { text: 'Selachimorphanthropy'});
+				player.removePerk(PerkLib.SelachimorphanthropyDormant);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.WERESHARK) && player.hasPerk(PerkLib.Selachimorphanthropy)) {
+				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the wereshark you once were. <b>Gained Dormant selachimorphanthropy.</b>\n");
+				player.createPerk(PerkLib.SelachimorphanthropyDormant,0,0,0,0);
+				player.statStore.removeBuffs("Selachimorphanthropy");
+				player.removeStatusEffect(StatusEffects.HumanForm);
+				player.removePerk(PerkLib.Selachimorphanthropy);
 				needNext = true;
 			}
 
@@ -2818,4 +2860,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

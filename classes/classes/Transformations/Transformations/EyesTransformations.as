@@ -752,6 +752,24 @@ public class EyesTransformations extends MutationsHelper {
 			}
 	);
 
+	public const EyesArigean: Transformation = new SimpleTransformation("Arigean Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["green"]), false);
+
+				desc += "";
+
+				player.eyes.type = Eyes.ARIGEAN;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.ARIGEAN;
+			}
+	);
+
 // EYE COLORS
 
 	public function EyesChangeColor(colors: /*String*/ Array): Transformation {

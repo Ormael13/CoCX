@@ -703,6 +703,17 @@ import classes.CoC;
             }
         });
 
+        public static const ARIGEAN:int = _partid++;
+        EnumValue.add(Memories, ARIGEAN, "ARIGEAN", {
+            id: "Arigean Arms",
+            name: "Arigean Arms",
+            cost: 100,
+            title: "Arigean",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsAbyssalShark;
+            }
+        });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

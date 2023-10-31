@@ -1335,8 +1335,8 @@ public static const UNKNOWN_FLAG_NUMBER_01326:int                               
 public static const UNKNOWN_FLAG_NUMBER_01327:int                                   = 1327;
 public static const UNKNOWN_FLAG_NUMBER_01328:int                                   = 1328;
 public static const UNKNOWN_FLAG_NUMBER_01329:int                                   = 1329;
-public static const UNKNOWN_FLAG_NUMBER_01330:int                                   = 1330;
-public static const UNKNOWN_FLAG_NUMBER_01331:int                                   = 1331;
+public static const THE_TRENCH_ENTERED:int                                   		= 1330;
+public static const GHOULISH_VAMPIRE_SERVANT_NAME:int                               = 1331;  
 public static const UNKNOWN_FLAG_NUMBER_01332:int                                   = 1332;
 public static const UNKNOWN_FLAG_NUMBER_01333:int                                   = 1333;
 public static const UNKNOWN_FLAG_NUMBER_01334:int                                   = 1334;
@@ -2162,9 +2162,9 @@ public static const UNKNOWN_FLAG_NUMBER_02153:int                               
 public static const UNKNOWN_FLAG_NUMBER_02154:int                             		= 2154;
 public static const UNKNOWN_FLAG_NUMBER_02155:int                            		= 2155;
 public static const UNKNOWN_FLAG_NUMBER_02156:int                                   = 2156;
-public static const UNKNOWN_FLAG_NUMBER_02157:int                                   = 2157;
-public static const UNKNOWN_FLAG_NUMBER_02158:int                                   = 2158;
-public static const UNKNOWN_FLAG_NUMBER_02159:int                                   = 2159;
+public static const NADIA_CURE_COOLDOWN:int                                   		= 2157;
+public static const NADIA_LVL_UP:int                                   				= 2158;
+public static const NADIA_FOLLOWER:int                                   			= 2159;
 public static const MET_BEHEMOTH:int                                                = 2160;
 public static const BEHEMOTH_ANAL_PITCH:int                                         = 2161;
 public static const BEHEMOTH_ANAL_CATCH:int                                         = 2162;
@@ -2382,12 +2382,12 @@ public static const JENIFFER_LVL_UP:int                             		        = 
 public static const JENIFFER_DEFEATS_COUNTER:int                                   	= 2374;	//Not Yet Used Flag
 public static const JENIFFER_02375:int                                   = 2375;			//Not Yet Used Flag
 public static const JENIFFER_02376:int                                   = 2376;			//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02377:int                                  		        = 2377; //Not Yet Used
-public static const DIANA_FOLLOWER:int     			                                = 2378;
-public static const DIANA_LVL_UP:int                      			                = 2379;
-public static const DIANA_CURE_COOLDOWN:int                                   		= 2380;
-public static const DIANA_SPELLS_CASTED:int                                   		= 2381;
-public static const UNKNOWN_FLAG_NUMBER_02385:int                                   = 2382;				//Not Yet Used Flag
+public static const UNKNOWN_FLAG_NUMBER_02377:int                                  		        = 2377; //Not Yet Used Flag
+public static const DIANA_FOLLOWER:int     			                                = 2378; //Not Yet Used Flag
+public static const DIANA_LVL_UP:int                      			                = 2379; //Not Yet Used Flag
+public static const DIANA_CURE_COOLDOWN:int                                   		= 2380; //Not Yet Used Flag
+public static const DIANA_SPELLS_CASTED:int                                   		= 2381; //Not Yet Used Flag
+public static const UNKNOWN_FLAG_NUMBER_02385:int                                   = 2382;	//Not Yet Used Flag
 public static const CAMILLA_AFFECTION:int                                  		    = 2383;	//Not Yet Used Flag
 public static const CAMILLA_FOLLOWER:int                            		        = 2384;	//Not Yet Used Flag
 public static const CAMILLA_LVL_UP:int                                   			= 2385;	//Not Yet Used Flag
@@ -2493,7 +2493,7 @@ public static const AUTO_CAST_MIGHT_DISABLED:int                               	
 public static const AUTO_CAST_BLINK_DISABLED:int                                	= 2485;
 public static const SOUL_SENSE_WORLD_TREE:int             	     	                = 2486;
 public static const SOUL_SENSE_GIACOMO:int                                   		= 2487; // No longer used
-public static const SOUL_SENSE_PRISCILLA:int                                   		= 2488; // No longer used
+public static const AUTO_CAST_CHARGE_R_WEAPON_DISABLED:int                          = 2488;
 public static const SOUL_SENSE_2489:int                                             = 2489;			//Not Yet Used Flag
 public static const KITSUNE_SHRINE_UNLOCKED:int               	                    = 2490;
 public static const VENOM_TIMES_USED:int                	                        = 2491;
@@ -2698,7 +2698,7 @@ public static const AETHER_DEXTER_TWIN_AT_CAMP:int                              
 public static const AETHER_SINISTER_TWIN_AT_CAMP:int                                = 2690;
 public static const EBON_LABYRINTH_RECORD:int                                   	= 2691; //Maximum EL room reached
 public static const UNKNOWN_FLAG_NUMBER_02692:int                                   = 2692;	//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02693:int                                   = 2693;	//Not Yet Used Flag
+public static const CHARYBDIS_FOLLOWER:int                                   		= 2693;
 public static const RIVER_DUNGEON_ELEMENTAL_MIXER:int                               = 2694;
 public static const ALVINA_DIARY:int                                   				= 2695;
 public static const HELLFIRE_SNAIL_ENC:int                                   		= 2696;
@@ -2801,7 +2801,7 @@ public static const UNKNOWN_FLAG_NUMBER_02792:int                               
 public static const UNKNOWN_FLAG_NUMBER_02793:int                                   = 2793;
 public static const UNKNOWN_FLAG_NUMBER_02794:int                                   = 2794;
 public static const UNKNOWN_FLAG_NUMBER_02795:int                                   = 2795;
-public static const UNKNOWN_FLAG_NUMBER_02796:int                                   = 2796;
+public static const WERESHARKS_EXTRAS:int                                   		= 2796;
 public static const WEREFOX_EXTRAS:int                                   			= 2797;
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
@@ -3012,9 +3012,8 @@ public static const GLOBAL_FLAGS_ARRAY:Array = [
 	WATERSPORTS_ENABLED, LVL_UP_FAST, MUTATIONS_SPOILERS, NEWPERKSDISPLAY, INVT_MGMT_TYPE, CHARVIEWER_ENABLED,
 	CHARVIEW_STYLE, CHARVIEW_ARMOR_HIDDEN, USE_OLD_FONT, BACKGROUND_STYLE, IMAGEPACK_OFF, SPRITE_STYLE, USE_12_HOURS,
 	WATERSPORTS_ENABLED, USE_METRICS, AUTO_LEVEL, STRENGTH_SCALING, SPEED_SCALING, WISDOM_SCALING, INTELLIGENCE_SCALING,
-	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS,
-		BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
+	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, BOSS_CHAMPION_ELITE_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS,
+	BUTTON_ICONS_DISABLED,STATBAR_ANIMATIONS
 ];
 	}
 }
-

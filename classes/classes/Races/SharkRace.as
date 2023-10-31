@@ -53,7 +53,7 @@ public class SharkRace extends Race {
 				.tailType(Tail.SHARK, +1)
 				.hairTypeAndColor1(Hair.NORMAL, ANY(SharkHairColors), +1)
 				.skinCoatType(ANY(Skin.SCALES, Skin.AQUA_SCALES, Skin.DRAGON_SCALES), +1)
-				.skinColor1(ANY(SharkScaleColors), +1)
+				.scaleColor1(ANY(SharkScaleColors), +1)
 				.skinCoatPattern(Skin.PATTERN_TIGER_STRIPES, +1)
 				.eyeType(Eyes.HUMAN, +1)
 				.eyeType(NOT(Eyes.DEVIL), 0, -1)

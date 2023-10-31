@@ -128,6 +128,10 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         return false;
     }
 
+    public function isMarried():Boolean {
+        return ProposalStatus == 6;
+    }
+
     //End of Interface Implementation
 
     //Lover Path:
@@ -890,7 +894,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	menu();
 	addButton(0, "Appearance", kihaCampAppearance).hint("Examine Kiha's appearance.");
 	addButton(1, "Hang Out", hangOutWithKiha).hint("Spend some quality time with Kiha.");
-	addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
+	addButton(2, "Hug", isMarried() ? KihaMarriedHug : hugFriendWarmKiha).hint("Give the dragoness a hug.");
 	addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.")
 		.disableIf(player.lust < 33, "Not aroused enough!");
 	addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!")
@@ -924,10 +928,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 				if (canKihaGetPregnant()) outputText("\n\n<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilise her and become a father.</b>");
 			}
 		}
-		if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0) addButton(5, "Give Underwear", giveKihaUndergarmentsPrompt)
-			.hint("Give Kiha something to wear to conceal her nether regions?")
-			.disableIf(!player.hasItem(undergarments.SSPANTY) && !player.hasItem(undergarments.SS_LOIN),
-				"Requires spider-silk panties or loincloth.");
+        if (player.hasPerk(PerkLib.BasicLeadership)) addButton(5, "Team", kihaHenchmanOption).hint("Ask Kiha to join you in adventures outside camp.");
+        else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 		if(flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(6,"Stop Guard",guardMyCampKiha).hint("Request her to stop guarding.");
 		else addButton(6,"Guard Camp",guardMyCampKiha).hint("Request her to guard your camp.");
 		if (CorruptedGlade.canBeDestroyed()) {
@@ -943,11 +945,10 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 				.disableIf(player.isGenderless(), "Not for genderless!"); //avoiding weirdness in defeat scene
         addButton(10, "Talk", TalkWithKiha).hint("Talk to Kiha… but would she want to talk?");
         if (CanVisitKids) addButton(11, "Kids", visitKids);
-        if (player.hasPerk(PerkLib.BasicLeadership)) {
-            if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to join you in adventures outside camp.");
-            else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to stay in camp.");
-            else addButtonDisabled(12, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-        }
+		if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0) addButton(12, "Give Underwear", giveKihaUndergarmentsPrompt)
+			.hint("Give Kiha something to wear to conceal her nether regions?")
+			.disableIf(!player.hasItem(undergarments.SSPANTY) && !player.hasItem(undergarments.SS_LOIN),
+				"Requires spider-silk panties or loincloth.");
 	} else {
 		if (output) {
 			clearOutput();
@@ -2585,7 +2586,11 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("“<i>Do you know why female dragons were considered the most dangerous?</i>” She asks you, sliding in, eyes dangerously close to yours as she exhales, the faintest hint of flame on her breath. You respond neutrally, telling Kiha that you don’t know… But you have every intention of finding out tonight.\n\n");
         outputText("“<i>Good answer</i>”. Kiha says, giving you a light push towards the bed. Not wanting to waste any time, you begin disrobing, your dragoness tapping one foot impatiently. “<i>… It’s been all I can stand, you know. Knowing that you’re mine, but those hours… I wanted to kick that priest out and bend you over the altar myself.</i>” You finish undressing, and Kiha tackles you. Playing along, you let her pin you down to the bed back-first, her hands on your forearms and wings spread wide.\n\n");
         outputText("“<i>Mine.</i>” She looks you up and down, almost drooling. “<i>I still can’t believe we're married… but… You’re mine.</i>” Kiha’s sharp teeth glint, her reptilian eyes gleaming.\n\n");
-        sceneHunter.marry("Kiha"); menu();
+        if (!recalling) {
+            ProposalStatus = 6;
+            sceneHunter.marry("Kiha");
+        }
+        menu();
         if (player.hasCock()) {
             addButton(1, "MaleSex", KihaMaleWeddingNight);
         }
@@ -2613,7 +2618,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("… Holding her upside down against a wall, her legs around your neck and the taste of her pussy overwhelming, your tongue deep inside her while she throats your [cock]… \n\n");
         outputText("… Her lips on yours, burning alcohol mixing with your saliva as she trickles brandy into your mouth with her flexible tongue.\n\n");
         outputText("You open your eyes, head pounding. The room seems to swim around you, and you don’t even try to roll over, your body aching all over. Your chest heaves, and you feel like you can barely breathe… You look down at your chest, and you see Kiha, splayed out on top of you. One arm is around your neck, her tail wrapped clumsily around your [legs], but her other limbs are limp, thrown randomly around.\n\n");
-        cleanupAfterCombat();
+        if (recalling) recallWakeUp();
+        else cleanupAfterCombat();
     }
 
     public function KihaLesbWeddingNight():void {
@@ -2621,15 +2627,19 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You take Kiha’s tail in your hands, rubbing the scaly appendage. Smiling slightly, you take the tip, guiding it to your own delta.\n\n");
         outputText("Snas is having technical difficulties writing this scene, as he does not have the equipment to adequately imagine what is going on here. Please, for the love of Dragon Waifus, someone help me with lesbian scenes.\n\n");
         outputText("PLEASE.\n\n");
-        cleanupAfterCombat();
+        if (recalling) recallWakeUp();
+        else cleanupAfterCombat();
     }
 
     public function KihaWeddingDefeat():void {
         clearOutput();
-        if (player.hasStatusEffect(StatusEffects.MagnarPinned) && player.hasStatusEffect(StatusEffects.MagnarDominated) && player.statusEffectv1(StatusEffects.MagnarDominated) >= 5)
-            KihaWeddingDominated();
-        else
-            KihaWeddingBeaten();
+
+        sceneHunter.selectLossMenu([
+                [0, "Dominated", KihaWeddingDominated, "Req. to be dominated!", player.hasStatusEffect(StatusEffects.MagnarPinned) && player.hasStatusEffect(StatusEffects.MagnarDominated) && player.statusEffectv1(StatusEffects.MagnarDominated) >= 5],
+                [1, "Beaten", KihaWeddingBeaten]
+            ],
+            "\n\nAnd how exactly are you going to 'enjoy yourself'?"
+        );
     }
 
     public function KihaWeddingBeaten():void {
@@ -2642,8 +2652,11 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("He laughs, standing up with Kiha limply hanging off him. “<i>Be thankful I leave you alive. Don’t come looking for us. She’s taken care of.</i>” Kiha’s eyes are blank, but she reaches out towards you with one hand, drool dripping from her mouth as the demon takes off, black wings carrying him and Kiha away.\n\n");
         outputText("As he flies away, you struggle to your [feet], Kiha’s ring flaring in your hands. Humiliation, anger and fear fill your mind, but as you begin to tear up, falling back down to slam a fist into the church grounds, you realise something, through your anger and pain. Your ring still pulls your hand, ever so slightly. The gift Kiha had given you, the ring… It’ll lead you to her!\n\n");
         outputText("Knowing Kiha can feel your emotions, you clamp down on your humiliation, let your fear fade to one side. You project anger, glaring up at the sky. You will never give up on your dragoness. After all you and Kiha have been through, you will not let this bastard take your love away. You can feel her fear, the fear she never shows anyone but you… The arousal, the sick heat. You know what he’s going to do, and so does Kiha… But you can’t fight in your current state. You send the pain of your injuries through, then determination. You’re trying to tell her that you’ll come for her… and a sliver of relief comes back, the fear weakens. Kiha knows you’re on your way.\n\n");
-        DergKidnapped = 1;
-        cleanupAfterCombat();
+        if (recalling) recallWakeUp();
+        else {
+            DergKidnapped = 1;
+            cleanupAfterCombat();
+        }
     }
 
     public function KihaWeddingDominated():void {
@@ -2662,9 +2675,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("He leads you down a small hallway, into a room identical to yours. Inside, a familiar red dragoness lies down in her bed. Other than her red scales and dusky skin, she looks identical to you… But unlike you, her belly’s swollen, and she’s clearly enjoying the fullness. “<i>Lie down beside her, [name], and let’s get started. I want you both to feel my love inside you.</i>” You happily obey, lifting your tail so your stud can get at your slavering pussy.\n\n");
         outputText("You live the rest of your life with Kiha, as you had vowed before your wedding was interrupted… Not that you ever remembered. You spend your days in orgasmic bliss, recieving daily fucks that leave you comatose, then being a broodmother to the next race of demonic dragons. You and Kiha, in each other’s arms, hatch an army that conquers Mareth’s skies, leaving no safe place left.\n\n");
         //BAD END HERE
-        EventParser.gameOver();
-        cleanupAfterCombat();
-
+        if (recalling) recallWakeUp();
+        else EventParser.gameOver();
     }
 
     //replaces Kiha in Lovers Menu if she was kidnapped (aka you lost)
@@ -3215,4 +3227,3 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     }
 }
 }
-

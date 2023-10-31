@@ -112,7 +112,8 @@ public class DivaScene extends XXCNPC {
             + "\n"
             + "\"<i>Not unless you drink some of my blood or blood I drank from. My bite is not viral but can leave my prey weak and sometimes close to death from blood loss. Now if thou would excuse me I need to prepare for tonight.</i>\"\n"
             + "\n"
-            + "You nod and let the vampire to her thing going back to yours.")
+            + "You nod and let the vampire to her thing going back to yours.");
+		if (!player.hasStatusEffect(StatusEffects.Familiar)) player.createStatusEffect(StatusEffects.Familiar,0,0,0,0);
         doNext(talkMenu);
     }
 

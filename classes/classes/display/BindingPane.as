@@ -4,7 +4,9 @@ import classes.InputManager;
 
 import coc.view.Block;
 
-import fl.containers.ScrollPane;
+import com.bit101.components.ScrollPane
+
+import flash.display.Bitmap;
 
 import flash.display.MovieClip;
 import flash.display.Stage;
@@ -53,9 +55,8 @@ import flash.utils.describeType;
 			setSize(width,height);
 			
 			// Cheap hack to remove the stupid styling elements of the stock ScrollPane
-			var blank:MovieClip = new MovieClip();
-			this.setStyle("upSkin", blank);
-			
+			PanelAlpha = 0;
+			color = 0xCCCCC;
 			// Initiate a new container for content that will be placed in the scroll pane
 			_content = new Block({layoutConfig:{
 				type: Block.LAYOUT_FLOW,
@@ -64,7 +65,7 @@ import flash.utils.describeType;
 			}});
 			_content.name = "controlContent";
 			_content.addEventListener(Block.ON_LAYOUT,function(e:Event):void{
-				if (source) {
+				if (content) {
 					update();
 				}
 			});
@@ -98,7 +99,8 @@ import flash.utils.describeType;
 		
 		private function MouseScrollEvent(e:MouseEvent):void
 		{
-			this.verticalScrollPosition += -( e.delta * 8 );
+			this._vScrollbar.value += -( e.delta * 8 );
+			update();
 		}
 		
 		public function ListBindingOptions():void
@@ -111,8 +113,8 @@ import flash.utils.describeType;
 			{
 				UpdateContentObjects();
 			}
-			
-			this.source = _content;
+
+			this.content.addChild(_content);
 			update();
 		}
 		

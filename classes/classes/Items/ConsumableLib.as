@@ -107,7 +107,11 @@ public final class ConsumableLib extends AlchemyLib
 		public const RED_DYE:HairDye = ItemTemplateLib.instance.createHairDye("Red", 1);
 		public const WHITEDY:HairDye = ItemTemplateLib.instance.createHairDye("White", 1);
 		public const RUSSDYE:HairDye = ItemTemplateLib.instance.createHairDye("Russet", 1);
+		public const YELLDYE:HairDye = ItemTemplateLib.instance.createHairDye("Yellow", 1);
+		public const GOLDB_D:HairDye = ItemTemplateLib.instance.createHairDye("Golden Blonde", 1);
 		public const SNOWW_D:HairDye = ItemTemplateLib.instance.createHairDye("Snow White", 2);
+		public const SILVDYE:HairDye = ItemTemplateLib.instance.createHairDye("Silver", 2);
+		public const GOLDDYE:HairDye = ItemTemplateLib.instance.createHairDye("Golden", 2);
 		public const QWHITED:HairDye = ItemTemplateLib.instance.createHairDye("Quartz White", 3);
 
 		//SKIN OILS & BODY LOTIONS
@@ -175,6 +179,8 @@ public final class ConsumableLib extends AlchemyLib
 		public const URTACUM: Consumable = mk("UrtaCum", "UrtaCum", "a sealed bottle of Urta's cum", 15, "This bottle of Urta's cum looks thick and viscous.  It's quite delicious.", m.urtaCum);
 		public const W_PDDNG: Consumable = mk("W.Pddng", "W.Pudding", "a slice of winter pudding", 35, "A slice of delicious Winter Pudding.  It smells delicious. \n\nNote: Eating this might cause antlers to grow from your head.", m.winterPudding);
 		public const ZENJI_H: Consumable = mk("Zenji H", "ZenjiHunt", "a Zenji's Hunt", 30, "Presumably the seared meat of a smaller creature, a gift from your loving troll.", m.zenjiHunt);
+		public const C_JERKY: Consumable = mk("C.Jerky", "C.Jerky", "a Coelacanth Jerky", 5, "A piece of jerky with a bit of extra salt, supposedly it’s from a deep sea fish. It keeps quite well.", m.coelacanthJerky);
+		public const SIINGOT: Consumable = mk("SIIngot", "SoftIronIngot", "a Soft Iron Ingot", 70, "An ingot of soft iron, while still hard it should be softer than most metals. (Requires Miracle Metal to use)", m.softIronIngot);
 
 		//GROWERS/SHRINKERS
 		public const REDUCTO:Consumable = new Reducto();

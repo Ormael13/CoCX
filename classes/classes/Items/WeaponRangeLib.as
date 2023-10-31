@@ -4,6 +4,7 @@
  */
 package classes.Items
 {
+import classes.Items.Weapons.DualBFSword;
 import classes.Items.WeaponsRange.*;
 import classes.PerkLib;
 
@@ -51,6 +52,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const BOWLIGH:WeaponRange = new WeaponRange("BowLigh", "BowLigh", "light bow", "a light bow", "shot", 5, 250, "This is a light bow. It's average in every way.", WT_BOW).withBuffs({'rangedaccuracy':-40}) as WeaponRange;
 		public const BOWLONG:WeaponRange = new WeaponRange("BowLong", "BowLong", "longbow", "a longbow", "shot", 20, 1000, "This is a longbow. It allows to shoot arrows with greater speed dealing more damage at cost of slight lowered accuracy compared to hunter's bow.", WT_BOW).withBuffs({'rangedaccuracy':-30}) as WeaponRange;
 		public const BOWOLD_:WeaponRange = new WeaponRange("BowOld ", "BowOld ", "old bow", "an old bow", "shot", 1, 50, "This is an old bow. It's barely effective even at short range not to meantion it poor accuracy.", WT_BOW).withBuffs({'rangedaccuracy':-50}) as WeaponRange;
+		public const DALAKABL:DuAlakablam = new DuAlakablam();
 		public const DBDRAGG:WeaponRange = new WeaponRange("DBDragG", "DoubleBarreledDragonGun", "Double barreled dragon gun", "a Double barreled dragon gun", "shot", 50, 1060, "Also called shotguns the dragon gun can hit multiple targets in a spray shot.", WT_2H_FIREARM);
 		public const DERPLAU:WeaponRange = new WeaponRange("DerpLau", "DerpnadeLauncher", "Derpnade Launcher", "a Derpnade Launcher", "shot", 100, 2030, "A firearm as deadly to others as it is to the user. Launches bouncing explosives which deals aoe damage but can also bounce back if not careful!", WT_2H_FIREARM);
 		public const DESEAGL:WeaponRange = new WeaponRange("DesEagl", "DesertEagle", "Desert Eagle", "a Desert Eagle", "shot", 25, 620, "A single hand firearm, the desert eagle has the largest bullets out of the pistol family. Its shots are deadly and precises through the gun has one hell of a recoil.", "Pistol");
@@ -81,6 +83,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const STKNIFE:WeaponRange = new WeaponRange("STKnife", "S.ThrowingKnife", "sapphire throwing knife", "a sapphire throwing knife", "shot", 3, 300, "A small knife made of azure metal and richly decorated with sapphires and silver engravings that could be thrown. The magic within this azure blade will radiate magical frost when charged with magic. You can carry up to 15 on you and need to retrieve them after battles.", "Throwing");
 		public const T_KNIFE:WeaponRange = new WeaponRange("T.Knife", "ThrowingKnife", "throwing knife", "a throwing knife", "shot", 2, 100, "A small knife that could be thrown.  Preferred weapon for the rogues. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const TDPISTO:TwinDartPistol = new TwinDartPistol();
+		public const TM1CERB:TwinM1Cerberuses = new TwinM1Cerberuses();
 		public const TOUHOM3:WeaponRange = new WeaponRange("TouhoM3", "TouhounaM3", "Touhouna M3", "a Touhouna M3", "shot", 20, 430, "Pinnacle of goblin engineering, the Touhouna is what goblins call a mechagun. Never needing to be reloaded it shoots bullets in very fast succession achieving with sheer shot number what way more unwieldy or hazardous gun do.", WT_2H_FIREARM);
 		public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "Tripxi has one moto… if you can't aim right, deliver an artillery shot so wide it hit everything in the next 200 yard reliably.", WT_2H_FIREARM);
 		public const TRJAVEL:WeaponRange = new WeaponRange("TrJavel", "Tra.Javelins", "training javelins", "a training javelins", "shot", 5, 250, "A standard training javelin for ranged combat. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");

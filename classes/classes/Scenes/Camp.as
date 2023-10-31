@@ -1081,7 +1081,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		//addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+		addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
 
 		//Remove buttons according to conditions.
 		if (isNightTime) {
@@ -1188,6 +1188,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) counter++;
 		if (ceraphIsFollower()) counter++;
 		if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
+		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.SLAVE)) {
 				counter++;
@@ -1213,7 +1214,7 @@ public class Camp extends NPCAwareContent{
 		if (TyrantiaFollower.isLover()) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
 		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
@@ -1253,7 +1254,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 		if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
-
+		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) counter++;
 		return counter;
 	}
 
@@ -1268,7 +1269,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
 		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
@@ -1310,7 +1311,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.VALERIA_AT_CAMP] == 1) counter++;
 		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
-		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+		if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
@@ -1435,11 +1436,6 @@ public class Camp extends NPCAwareContent{
 				outputText("You can see Chi Chi " + (player.hasStatusEffect(StatusEffects.PureCampJojo) ?  "not so far from Jojo's place" : "near the center of your camp") + ". She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within the next twenty-four hours.\n\n");
 				if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0, "Wet.");
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
-			}
-			//Diana
-			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) {
-				outputText("Diana is resting next to her many medical tools and medicines.\n\n");
-				buttons.add("Diana", SceneLib.dianaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
 			//Electra
 			if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) {
@@ -1683,6 +1679,11 @@ public class Camp extends NPCAwareContent{
 				outputText("\n\n");
 				if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) buttons.add("Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
 			}
+			//Nadia
+			if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) {
+				outputText("Nadia is resting next to her many medical tools and medicines.\n\n");
+				buttons.add("Nadia", SceneLib.nadiaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
+			}
 			//Phylla
 			if (flags[kFLAGS.ANT_WAIFU] > 0) {
 				outputText("You see Phylla's anthill in the distance.  Every now and then you see");
@@ -1808,7 +1809,7 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.GALIA_LVL_UP] >= 1 && EvangelineFollower.EvangelineFollowerStage >= 1) {
 				if (flags[kFLAGS.GALIA_AFFECTION] < 2) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 				else {
-					outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
+					outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping Galia. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 					buttons.add("Galia", SceneLib.galiaFollower.GaliaCampMainMenuSlave).hint("Visit Galia.");
 				}
 			}
@@ -1838,6 +1839,11 @@ public class Camp extends NPCAwareContent{
 			if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && !player.hasStatusEffect(StatusEffects.SophieOff)) {
 				sophieBimbo.sophieCampLines();
 				buttons.add("Sophie", sophieBimbo.approachBimboSophieInCamp);
+			}
+			//Ghoulish Vampire servant
+			if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) {
+				//outputText(".\n\n");
+				buttons.add(""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"", SceneLib.ghoulishVampireServant.ghoulishVampireServantMain).hint("Visit your ghoulish vampire servant.");
 			}
 		}
 		for each(var npc:XXCNPC in _campFollowers) {
@@ -2253,7 +2259,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(!player.hasItem(bottles[i][0], 10) || !player.hasItem(useables.E_P_BOT, 1),
 					"You need one empty pill bottle and ten "+bottles[i][2]+"-grade soulforce recovery pills.");
 		}
-		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone(s).");
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", CloneMenu).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2292,11 +2298,26 @@ public class Camp extends NPCAwareContent{
 			[weapons.WHIP, weapons.PWHIP],
 			[weapons.WARHAMR, weapons.D_WHAM_],
 			[weapons.SUCWHIP, weapons.PSWHIP],
-			[weapons.KATANA, weapons.DKATANA],
-			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS]
+			[weapons.KATANA, weapons.DKATANA],//1st page
+			[weapons.L__AXE, weapons.DL_AXE_],
+			[weapons.MACGRSW, weapons.TMACGRSW],
+			[weapons.RIPPER1, weapons.TRIPPER1],
+			[weapons.RIPPER2, weapons.TRIPPER2],
+			[weapons.ACLAYMO, weapons.TACLAYM],
+			[weapons.RCLAYMO, weapons.TRCLAYM],
+			[weapons.SCLAYMO, weapons.TSCLAYM],
+			[weapons.TCLAYMO, weapons.TTCLAYM],
+			[weapons.S_RULER, weapons.TSRULER],
+			[weapons.PHALLUS, weapons.PHALUSS],
+			[weapons.L_WHIP, weapons.DL_WHIP],
+			[weapons.B_SWORD, weapons.DBSWORD],//2nd page
+			[weapons.EXCALIB, weapons.DEXCALI],
+			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
+			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
+			[weaponsrange.ALAKABL, weaponsrange.DALAKABL]
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
-		addButton(4,"Seperate Weapons", menuSeperateStaging, weaponList)
+		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
 		addButton(14, "Back", campMiscActions);
 	}
 
@@ -2854,24 +2875,31 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(pills, 10);
 		inventory.takeItem(result, campMiscActions);
 	}
+	
+	/**
+	 * Gets clone count (or buff existence)
+	 * @param	buffexist If true, returns player.hasStatusEffect(StatusEffects.PCClone) 0=no, 1=yes instead
+	 * @return player.statusEffectv3(StatusEffects.PCClone) aka "clone count", 0 if no buff
+	 */public function gcc(buffexist:Boolean = false):Number {
+		 if (buffexist) return player.hasStatusEffect(StatusEffects.PCClone) ? 1 : 0;
+		 if (player.hasStatusEffect(StatusEffects.PCClone)) return player.statusEffectv3(StatusEffects.PCClone);
+		 return 0;
+	}
+	public function maximumClonesCount(absolutemax:Boolean = false):Number {
+		// Don't forget to extend Soulforce.clones[] and related buffs if increasing
+		if (absolutemax) return Soulforce.clones.length;
+		var mCC:Number = Soulforce.clones.length;
+		if (!player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) mCC = 1;
+		return mCC;
+	}
 
-	private function VisitClone():void {
+	private function CloneMenu():void {
 		var clone:int;
-
 		clearOutput();
-		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) {
-			/*if (player.statusEffectv3(StatusEffects.PCClone) < 4) {
-				outputText("Your clone is ");
-				if (player.statusEffectv3(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
-				else if (player.statusEffectv3(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
-				else outputText("looking like you covered with black chitin-like carapace");
-				outputText(". Would you work on completing it?");
-			}
-			else {*/		//that part will be later used for primaltwin - note for Svalkash
-			outputText("Your clone" + (player.statusEffectv3(StatusEffects.PCClone) > 0 ? "s are" : " is") + " wandering around [camp]. What would you ask "
-				+ (player.statusEffectv3(StatusEffects.PCClone) > 0 ? "them" : "[him]") + " to do?\n\n");
+		if (gcc() > 0) {
+			outputText("Your clone" + (gcc() > 1 ? "s are" : " is") + " wandering around [camp]. What would you ask "+ (gcc() > 1 ? "them" : "[him]") + " to do?\n\n");
 			for (clone = 0; clone < Soulforce.clones.length; ++clone) {
-				outputText("Current clone (" + (clone + 1) + ") task: ");
+				outputText("\nCurrent clone (" + (clone + 1) + ") task: ");
 				if (player.statusEffectv1(Soulforce.clones[clone]) > 10 && player.statusEffectv1(Soulforce.clones[clone]) < 21) {
 					outputText("Contemplating Dao of ");
 					for (var d:int = 0; d < Soulforce.daos.length; ++d) {
@@ -2881,77 +2909,71 @@ public class Camp extends NPCAwareContent{
 				} else outputText("Nothing");
 				outputText("\n\n");
 			}
-			//}
-		}
-		else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
+		} else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
 		outputText("\n\n");
 		menu();
-		addButton(4, "Create", CreateClone)
-			.disableIf(player.isGargoyle(), "Your can't clone your stone body!");
-		if (button(4).enabled && player.hasStatusEffect(StatusEffects.PCClone)) button(4)
-			.disableIf(player.statusEffectv3(StatusEffects.PCClone) > 0,
-				"You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone))
-			.disableIf(player.statusEffectv3(StatusEffects.PCClone) == 4, "You cannot have more than four clones.");
+		addButton(13, "Create", FormClone)
+			.disableIf(player.isGargoyle(), "You can't clone your stone body!")
+			.disableIf(player.negativeLevel > 0, "You need to regain your power before you can create another clone. Unrecovered levels: " + player.negativeLevel)
+			.disableIf(gcc() >= maximumClonesCount(), "You cannot have more than " + maximumClonesCount() + " clone" + (maximumClonesCount() > 1 ? "s" : "") + " right now.")
+			.disableIf(gcc() >= maximumClonesCount(true), "You cannot have more than " + maximumClonesCount() + " clones.")
+			.disableIf(player.HP <= player.maxHP() * 0.9, "Your HP is too low.")
+			.disableIf(player.soulforce < player.maxSoulforce() * 0.9, "Your Soulforce is too low.");
+		
 		for (clone = 0; clone < Soulforce.clones.length; ++clone) {
+			if (clone > 12) continue; // short circuit for too many, maybe add pagination if clone cap gets upped for some reason
 			addButton(clone, "Contempl. (" + (clone + 1) + ")", cloneContemplateDao, clone)
 				.hint("Task your clone (" + (clone + 1) + ") with contemplating one of the Daos you know.")
 				.disableIf(!player.hasStatusEffect(Soulforce.clones[clone]), "Req. fully formed clone (" + (clone + 1) + ").");
 		}
 		addButton(14, "Back", campMiscActions);
 	}
-	private function maximumClonesCount():Number {
-		var mCC:Number = 1;
-		if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) mCC += 3;
-		return mCC;
-	}
-	private function CreateClone():void {
-		menu();
-		if (player.HP > player.maxHP() * 0.9 && player.soulforce >= player.maxSoulforce()) {
-			if (!player.hasStatusEffect(StatusEffects.PCClone) || (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) < maximumClonesCount())) addButton(0, "Form", FormClone);
-			else addButtonDisabled(0, "Form", "You can't form new clone.");
-		}
-		else {
-			if (player.soulforce < player.maxSoulforce()) addButtonDisabled(0, "Form", "Your soulforce is too low.");
-			else addButtonDisabled(0, "Form", "Your health is too low.");
-		}
-		addButton(4, "Back", VisitClone);
-	}
+	
 	private function FormClone():void {
+		clearOutput();
 		var newClone:int;
-		if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			for (var i:int = 1; i < Soulforce.clones.length; ++i) {
-				if (!player.hasStatusEffect(Soulforce.clones[i])) {
-					newClone = i;
-				}
+		if (gcc(true)) {
+			for (var i:int = gcc(); i < maximumClonesCount(); i++) {
+				if (player.hasStatusEffect(Soulforce.clones[i-1])) newClone = i;
 			}
 		} else {
 			newClone = 0;
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 0);
 		}
-		clearOutput();
-		FormCLoneText();
-		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[newClone + 2]+".\n\n");
-		outputText("<b>Your clone (" + (newClone + 1) + ") is fully formed.</b>\n\n");
 		player.addStatusValue(StatusEffects.PCClone, 3, 1);
 		player.createStatusEffect(Soulforce.clones[newClone], 0, 0, 0, 0);
-		EngineCore.SoulforceChange(-player.maxSoulforce());
-		HPChange(-(player.maxHP() * 0.9), true);
-		player.addNegativeLevels(9);
+		FormCloneText();
+		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[newClone+2]+".\n\n");
+		EngineCore.SoulforceChange(-player.maxSoulforce()*0.85);
+		HPChange(-(player.maxHP() * 0.85), true);
+		player.negativeLevel += Soulforce.clonelevelcost;
 		doNext(camp.returnToCampUseEightHours);
 	}
-	private function FormCLoneText():void {
-		outputText("You close your eyes with the intent of forming your clone. Minutes pass as the sensation of your soul force and life essence slowly escapes from your being.\n\n");
-		outputText("Time passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
+	private function FormCloneText():void {
+		outputText("You close your eyes with the intent of forming your " + (gcc(true) ? "next" : "first") + " clone. Minutes pass as the sensation of soul force and life essence slowly escapes from your being.\n\n");
+		outputText("Time passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling energy, you guide more of the essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
 		outputText("An hour later, the sphere begins to take the shape of your body with the energy you've guided into it. It is slightly larger than you, with the outer layer being nothing more than something to prevent the essences you've given it from escaping.\n\n");
 		outputText("The outer layer steadily begins to change into the form of a translucent cocoon. It's barely noticeable, but you can see the vital organs form inside the incubator.\n\n");
 		outputText("Two hours pass as the cocoon hardens into a substance akin to hard, black chitin until the cocoon is opaque. A small part of the layer around the navel keeps some translucent properties.\n\n");
-		outputText("Minutes draw by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
+		outputText("Minutes go by as time slowly passes. Your energies enter the clone through the only malleable part of the carapace around the navel. After around five hours, you notice a dull rhythm. A heart beats with increasing life as the moments pass.\n\n");
 		outputText("Soon after the heartbeat, other rapid changes begin inside the clone. The body itself begins to animate as the clone takes its first breaths. With the transfer nearly completely, the new life is on the verge of its complete vitality.\n\n");
-		outputText("Now that the body is full of life, you need to link it to your soul. The process is foreign, almost invasive as you link your essence to something alien, but as the minutes pass, the feeling steadily becomes more natural. ");
-		outputText("It's not long until the clone feels like an extension of your body, almost as if you could move it yourself. ");
-		outputText("It's not long until you're properly attuned to your clone. The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
+		outputText("Now that the body is full of life, you need to link it to your soul. The process is foreign, almost invasive as you link your essence to something alien, but as the minutes pass, the feeling steadily becomes more natural.\n\n");
+		outputText("Suddenly, the clone has begun to feel like an extension of your body, almost as if you could move it yourself. It's not long until you're properly attuned to your clone.\n\n");
+		outputText("The shell cracks before your clone emerges from the incubator. It's a glorious reflection of you, though it seems to have the common decency to give itself a simple grey robe before presenting its barren body.\n\n");
 	}
-	private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
+	/*
+	 * old primaltwin flavor	 * 
+			/*if (player.statusEffectv3(StatusEffects.PCClone) < 4) {
+				outputText("Your clone is ");
+				if (player.statusEffectv3(StatusEffects.PCClone) == 1) outputText("slowly rotating basketball sized sphere of soul and life essences");
+				else if (player.statusEffectv3(StatusEffects.PCClone) == 2) outputText("looking like you, albeit with translucent body");
+				else outputText("looking like you covered with black chitin-like carapace");
+				outputText(". Would you work on completing it?");
+			}
+			else {*/		//that part will be later used for primaltwin - note for Svalkash
+			
+			
+	/*private function FormPrimalTwin():void {//cringe name of function - change it later on but need it for other death/bad end evade option for cultivators - note for.... err he know it's for him by now, right?
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
 			if (player.statusEffectv3(StatusEffects.PCClone) == 3) {
@@ -2998,7 +3020,7 @@ public class Camp extends NPCAwareContent{
 		}
 		doNext(camp.returnToCampUseEightHours);
 	}
-
+	*/
 	private function cloneContemplateDao(clone:int):void {
 		clearOutput();
 		outputText("Maybe your clone ("+clone+") could contemplate one of the Daos you know while you adventure outside the [camp]? But which one it should be?");
@@ -3010,7 +3032,7 @@ public class Camp extends NPCAwareContent{
 		}
 		addButton(13, "None", cloneContemplateDaoSet, clone, 10)
 			.disableIf(player.statusEffectv1(Soulforce.clones[clone]) == 10, "Your clone ("+clone+") is currently not contemplating any Dao.");
-		addButton(14, "Back", VisitClone);
+		addButton(14, "Back", CloneMenu);
 	}
 
 	private function cloneContemplateDaoSet(clone:int, newdao:Number):void {
@@ -3046,11 +3068,11 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) outputText("Relax Mode\n");
 		}
 		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("\nChi Chi: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.DianaOff)) outputText("\nDiana: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.DivaOff)) outputText("\nDiva: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("\nElectra: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("\nNadia: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.SophieOff)) outputText("\nSophie: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.HeliaOff)) outputText("\nHelia: <font color=\"#800000\"><b>Disabled</b></font>");
@@ -3063,7 +3085,7 @@ public class Camp extends NPCAwareContent{
 		SparrableNPCsMenuText();
 		menu();
 		addButton(0, "Chi Chi", toggleNPCStatus, StatusEffects.ChiChiOff).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(1, "Diana", toggleNPCStatus, StatusEffects.DianaOff).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(1, "Nadia", toggleNPCStatus, StatusEffects.NadiaOff).hint("Enable or Disable Nadia. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(2, "Diva", toggleNPCStatus, StatusEffects.DivaOff).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(3, "Electra", toggleNPCStatus, StatusEffects.ElectraOff).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(4, "Etna", toggleEtna).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
@@ -3984,6 +4006,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) places++;
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) places++;
 		if (flags[kFLAGS.YU_SHOP] == 2) places++;
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 0) places++;
 		if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
 			if (player.statusEffectv1(StatusEffects.ResourceNode1) >= 5) places++;
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) places++;
@@ -4021,12 +4044,10 @@ public class Camp extends NPCAwareContent{
 		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
 				.hint("Visit the Troll Village.")
 				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "You have not visited this place yet.", null, "???");
-		// Row 2 - places/NPCs 1-5
-		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
-				.hint(flags[kFLAGS.GAR_NAME] == 0
-						? "Visit the ruined cathedral you've recently discovered."
-						: "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.")
-				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm", null, "???");
+		// Row 2 - towns/places/NPCs 1-5
+		bd.add("The Trench", SceneLib.theTrench.theTrenchEntrance)
+				.hint("Visit the Trench where the Arigeans hang out.")
+				.disableIf(flags[kFLAGS.THE_TRENCH_ENTERED] <= 0, "Only for Arigeans.", null, "???");
 		bd.add("Lumi's Lab", SceneLib.lumi.lumiEncounter)
 				.hint("Visit Lumi's laboratory.")
 				.disableIf(flags[kFLAGS.LUMI_MET] <= 0, "Explore the realm", null, "???");
@@ -4076,6 +4097,11 @@ public class Camp extends NPCAwareContent{
 		bd.add("Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon)
 				.hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.")
 				.disableIf(flags[kFLAGS.ANZU_PALACE_UNLOCKED] <= 0, "???", null, "???");
+		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
+				.hint(flags[kFLAGS.GAR_NAME] == 0
+						? "Visit the ruined cathedral you've recently discovered."
+						: "Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.")
+				.disableIf(!flags[kFLAGS.FOUND_CATHEDRAL], "Explore the realm", null, "???");
 		bd.add("Woodcutting", camp.cabinProgress.gatherWoods)
 				.hint("You need to explore Forest more to unlock this place.")
 				.disableIf(player.statusEffectv1(StatusEffects.ResourceNode1) < 5, "You need to explore Forest more to unlock this place.", null, "???")
@@ -4084,7 +4110,6 @@ public class Camp extends NPCAwareContent{
 				.hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>")
 				.disableIf(player.statusEffectv2(StatusEffects.ResourceNode1) < 5, "You need to explore Mountains more to unlock this place.", null, "???")
 				.disableIf(!player.hasStatusEffect(StatusEffects.ResourceNode1), "Search the mountains.", null, "???");
-		bd.add("");
 		bd.add("");
 		// Row 6 - separator between places and dungeons
 		if (debug) {
@@ -4184,7 +4209,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(7, "???", "Search the plains.");
 		if (TrollVillage.ZenjiVillageStage > 0) addButton(8, "Troll Village", SceneLib.trollVillage.EnterTheVillage).hint("Visit the Troll Village.");
 		else addButtonDisabled(8, "???", "Clear the factory first.");
-		//9 - ???
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] > 0) addButton(9, "The Trench", SceneLib.theTrench.theTrenchEntrance).hint("Visit the Trench where the Arigeans hang out.");
+		else addButtonDisabled(9, "???", "Only for Arigeans.");
 
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "Explore the realm.");
@@ -4665,11 +4691,11 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 3) performancePointsPrediction++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 || flags[kFLAGS.CHI_CHI_FOLLOWER] == 5 || player.hasStatusEffect(StatusEffects.ChiChiOff)) performancePointsPrediction++;
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == 3) performancePointsPrediction++;
-		if (player.hasStatusEffect(StatusEffects.DianaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.DivaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.ElectraOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) performancePointsPrediction++;
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) performancePointsPrediction++;
+		if (player.hasStatusEffect(StatusEffects.NadiaOff)) performancePointsPrediction++;
 		//Dungeons
 		if (SceneLib.dungeons.checkFactoryClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
@@ -4753,7 +4779,7 @@ public function rebirthFromBadEnd():void {
         return total;
     }
 	public function setLevelButton(allowAutoLevelTransition:Boolean):Boolean {
-		var levelup:Boolean = player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap;
+		var levelup:Boolean = player.XP >= player.requiredXP() && (player.level < CoC.instance.levelCap || player.negativeLevel > 0);
 		if (levelup || player.perkPoints > 0 || player.statPoints > 0) {
 			if (!levelup) {
 				if (player.statPoints > 0) {
@@ -4764,78 +4790,16 @@ public function rebirthFromBadEnd():void {
 					mainView.levelButton.toolTipText = "Spend your perk points on a new perk. \n\nYou currently have " + String(player.perkPoints) + ".";
 				}
 			} else {
-				mainView.setMenuButton(MainView.MENU_LEVEL, "Level Up");
-				var hp:int = 60;
-				var fatigue:int = 5;
-				var mana:int = 10;
-				var soulforce:int = 5;
-				var wrath:int = 5;
-				var lust:int = 3;
-				var statpoints:int = 5;
-				var perkpoints:int = 1;
-				if (player.level <= 6) {
-					hp += 60;
-					fatigue += 5;
-					mana += 10;
-					soulforce += 5;
-					wrath += 5;
-					lust += 3;
+				if (player.negativeLevel > 0) {
+					mainView.setMenuButton(MainView.MENU_LEVEL, "Restore Lvl");
+				} else {
+					mainView.setMenuButton(MainView.MENU_LEVEL, "Level Up");
 				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential)) {
-					hp += 80;
-					lust += 6;
-					fatigue += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) {
-					wrath += 10;
-					mana += 12;
-					soulforce += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) {
-					hp += 80;
-					lust += 6;
-					fatigue += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) {
-					wrath += 10;
-					mana += 12;
-					soulforce += 6;
-				}
-				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX);
-				if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockBody4thStage)) hp += 60;
-				if (player.hasPerk(PerkLib.UnlockEndurance)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockEndurance2ndStage)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockEndurance3rdStage)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockEndurance4thStage)) fatigue += 5;
-				if (player.hasPerk(PerkLib.UnlockForce)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockForce2ndStage)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockForce3rdStage)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockForce4thStage)) mana += 10;
-				if (player.hasPerk(PerkLib.UnlockSpirit)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockSpirit2ndStage)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockSpirit3rdStage)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockSpirit4thStage)) soulforce += 5;
-				if (player.hasPerk(PerkLib.UnlockId)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockId2ndStage)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockId3rdStage)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockId4thStage)) wrath += 5;
-				if (player.hasPerk(PerkLib.UnlockArdor)) lust += 3;
-				if (player.hasPerk(PerkLib.UnlockArdor2ndStage)) lust += 3;
-				if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
-				if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
-				if (player.level < 6) {
-					statpoints *= 2;
-					perkpoints *= 2;
-				}
-				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk point"+(perkpoints>1?"s":"")+".";
+				mainView.levelButton.toolTipText = getLevelUpStatsForButton();
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
-					CoC.instance.playerInfo.levelUpGo();
+					CoC.instance.playerInfo.levelUpMenu();
 					return true; //True indicates that you should be routed to level-up.
 				}
-
 			}
 			mainView.showMenuButton(MainView.MENU_LEVEL);
 			mainView.statsView.showLevelUp();
@@ -4847,6 +4811,51 @@ public function rebirthFromBadEnd():void {
 			mainView.statsView.hideLevelUp();
 		}
 		return false;
+	}
+	
+	public function getLevelUpStatsForButton():String {
+		// This is all just display for the button text and affects nothing directly
+		var statpoints:int = 5;
+		var perkpoints:int = 1;
+		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX) * 4;
+		if (player.level < 1) statpoints *= 3, perkpoints *= 3;
+		if (player.level < 9) statpoints *= 2, perkpoints *= 2;
+		var output:String = "";
+		output = "Level up to increase your base stats,\nas well as gain <b>"+num2Text(statpoints,100)+"</b> stat points and <b>"+num2Text(perkpoints,100)+"</b> perk points!";
+		return output;
+		// If someone with more free time than I wants to go dig through and update/verify info feel free to re-add it
+		// Honestly it's not worth the processing time though since this gets redrawn a *lot* ?
+		//var hp:int = 60, fatigue:int = 5, mana:int = 10, soulforce:int = 5, wrath:int = 5, lust:int = 3;
+		//if (player.level <= 6) hp += 60, fatigue += 5, mana += 10, soulforce += 5, wrath += 5, lust += 3;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential)) hp += 80, lust += 6, fatigue += 6;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) wrath += 10, mana += 12, soulforce += 6;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) hp += 80, lust += 6, fatigue += 6;
+		//if (player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) wrath += 10, mana += 12, soulforce += 6;
+		//if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockBody4thStage)) hp += 60;
+		//if (player.hasPerk(PerkLib.UnlockEndurance)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockEndurance2ndStage)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockEndurance3rdStage)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockEndurance4thStage)) fatigue += 5;
+		//if (player.hasPerk(PerkLib.UnlockForce)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockForce2ndStage)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockForce3rdStage)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockForce4thStage)) mana += 10;
+		//if (player.hasPerk(PerkLib.UnlockSpirit)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockSpirit2ndStage)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockSpirit3rdStage)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockSpirit4thStage)) soulforce += 5;
+		//if (player.hasPerk(PerkLib.UnlockId)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockId2ndStage)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockId3rdStage)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockId4thStage)) wrath += 5;
+		//if (player.hasPerk(PerkLib.UnlockArdor)) lust += 3;
+		//if (player.hasPerk(PerkLib.UnlockArdor2ndStage)) lust += 3;
+		//if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
+		//if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
+		//output += "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk point" + 		(perkpoints > 1?"s":"") + ".";
 	}
 
 //Camp population!
@@ -4906,5 +4915,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
-
+}

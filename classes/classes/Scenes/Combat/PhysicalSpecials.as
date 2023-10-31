@@ -200,6 +200,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 						bd = buttons.add("Pounce", catPounce).hint("Pounce and rend your enemy using your claws, this initiate a grapple combo.");
 						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					}
+					//Crunch
+					if (player.racialScore(Races.ARIGEAN) >= 16) {
+						bd = buttons.add("Crunch", arigeanCrunch).hint("Deals Physical Damage based on Strength, also lowers opponent's physical defense by 30% for 3 turns.");
+						if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+					}
 				}
 				//Grab & Slam
 				if (player.isRaceCached(Races.BEARANDPANDA) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
@@ -808,7 +813,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
@@ -918,7 +923,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= (2.5 + (2 * buffMultiplier));
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
 			else damage *= 1.75 + buffMultiplier;
 		}
 		checkForElementalEnchantmentAndDoDamage(damage);
@@ -975,7 +980,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
 			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage = Math.round(damage);
 		doDamage(damage, true, true);
@@ -1042,7 +1048,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage = Math.round(damage);
 		if (player.weapon == weapons.PRURUMI) {
@@ -1137,7 +1144,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
 			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
-			damage *= (critMulti + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (critMulti + buffMultiplier);
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -1352,7 +1360,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You shoot [themonster] vitals with your [weaponrange]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
-		if (player.weaponRange == weaponsrange.M1CERBE) SAMulti += 4;
+		if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) SAMulti += 4;
 		if (player.weaponRange == weaponsrange.SNIPPLE) SAMulti += 6;
 		//if (player.weaponRange == weaponsrange.Sakuno M2) SAMulti += 8;
 		//if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
@@ -1379,7 +1387,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
 		}
 		else {
-			if (player.weaponRange == weaponsrange.M1CERBE) {
+			if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
 				var M1:Number = 1;
 				if (player.hasPerk(PerkLib.AmateurGunslinger)) damage += 1;
 				if (player.hasPerk(PerkLib.ExpertGunslinger)) damage += 1;
@@ -1511,7 +1519,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
 		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critMulti += 0.75;
+		if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) critMulti *= combat.impaleMultiplier();
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= critMulti;
@@ -1622,7 +1630,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		//add bonus for using aoe special
 		var bonusmultiplier:Number = 5;
@@ -1654,7 +1663,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function whipping():void {
-		if (player.weapon == weapons.L_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
@@ -1706,7 +1715,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		//add bonus for using aoe special
 		var bonusmultiplier:Number = 5;
@@ -1720,7 +1730,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] whipped few of [themonster], dealing ");
-		if (player.weapon == weapons.L_WHIP) {
+		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 		}
@@ -1804,7 +1814,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		//add bonus for using aoe special
 		var bonusmultiplier:Number = 5;
@@ -1880,6 +1891,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(player.hairLength >= 36) hairDamage += 1;
 			if (player.hasPerk(PerkLib.RacialParagon)) hairDamage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) hairDamage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) hairDamage *= 2;
 			while(hairDamage > 0) {
 				hairDamage--;
 				damage += 5 + rand(6);
@@ -1969,6 +1981,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = combat.statusEffectBonusDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
@@ -2102,6 +2115,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (player.lust100 * 0.01);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.upperGarment == player.game.undergarments.COW_BRA) damage *= 1.50;
 		damage = Math.round(damage);
 		if (damage < 1) damage = 1;
@@ -2139,6 +2153,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= (player.lust100 * 0.01);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		doDamage(damage);
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
@@ -2199,6 +2214,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.PigBoarFatIM) >= 3) slamDmg *= 2;
 		if (player.hasPerk(PerkLib.RacialParagon)) slamDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) slamDmg *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) slamDmg *= 2;
 		slamDmg *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		slamDmg = Math.round(slamDmg);
 		doDamage(slamDmg);
@@ -2341,6 +2357,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = combat.statusEffectBonusDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 				if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 				else damage *= 2;
@@ -2985,6 +3002,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -3183,6 +3201,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		damage *= 2;
 		//Determine if critical hit!
@@ -3197,7 +3216,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
@@ -3266,6 +3286,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		damage *= 1.6;
 		//Determine if critical hit!
@@ -3280,7 +3301,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
@@ -3346,6 +3368,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		damage *= 1.5;
 		//Determine if critical hit!
@@ -3360,7 +3383,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
@@ -3428,6 +3452,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		damage *= 1.5;
 		//Determine if critical hit!
@@ -3442,7 +3467,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
@@ -3501,6 +3527,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		damage *= 1.5;
 		//Determine if critical hit!
@@ -3515,7 +3542,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
@@ -3575,6 +3603,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. [Themonster] is caught in it and carried into the windstorm taking hit from various other flying objects. ");
 		doWindDamage(damage);
@@ -3968,6 +3997,94 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function arigeanCrunch():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (player.fatigue + physicalCost(100) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to pounce at anyone right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if (monster is EncapsulationPod) {
+			clearOutput();
+			outputText("You can't pounce something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(100, USEFATG_PHYSICAL);
+		if (combat.checkConcentration()) return; //Amily concentration
+		outputText("You rush forward and bite down on your opponent with your extra mouth" + (player.tail.count > 1 ? "s" : "") + ".");
+		if (40 + rand(player.spe) > monster.spe) {
+			outputText("[Themonster]’s armor is broken from the force! Dealing ");
+			var damage:Number = 0;
+			//str bonuses
+			damage += player.str;
+			damage += scalingBonusStrength();
+			//addictive bonuses
+			if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsIII)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsIV)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsV)) damage += 10;
+			if (player.hasPerk(PerkLib.IronFistsVI)) damage += 10;
+			if (player.hasPerk(PerkLib.JobBrawler)) damage += (5 * (1 + player.newGamePlusMod()));
+			if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
+			if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+			if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+			//multiplicative bonuses
+			if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
+			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+			if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+			if (player.hasPerk(PerkLib.JobBeastWarrior)) damage *= 1.1;
+			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
+			if (player.hasPerk(PerkLib.OniTyrantKimono)) damage *= 2;
+			if (player.hasPerk(PerkLib.OniEnlightenedKimono)) damage *= 1.5;
+			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
+			damage *= 1.6;
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combat.combatPhysicalCritical();
+			if (player.hasPerk(PerkLib.Blademaster)) critChance += 5;
+			if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+			if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				var buffMultiplier:Number = 0;
+				buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
+				if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+				else damage *= (1.75 + buffMultiplier);
+			}
+			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
+			damage = Math.round(damage);
+			doDamage(damage, true, true);
+			outputText(" damage!");
+			if (monster.hasStatusEffect(StatusEffects.DefPDebuff)) monster.addStatusValue(StatusEffects.DefPDebuff, 1, 1);
+			else {
+				var debuff:Number = Math.round(monster.armorDef * 0.3);
+				monster.armorDef -= debuff;
+				monster.createStatusEffect(StatusEffects.DefPDebuff, 3, debuff, 0, 0);
+			}
+		}
+		else outputText("[Themonster] moves back just in time to avoid being crushed.");
+		outputText("\n\n");
+		enemyAI();
+	}
+
 	public function bearGrab():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -4064,6 +4181,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= 1.6;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -4077,7 +4195,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
@@ -4163,6 +4282,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			//Determine if critical hit!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -4175,7 +4295,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				crit = true;
 				var buffMultiplier:Number = 0;
 				buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-				damage *= (1.75 + buffMultiplier);
+				if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+				else damage *= (1.75 + buffMultiplier);
 			}
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
@@ -4275,6 +4396,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) HBD *= 1.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) HBD *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) HBD *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) HBD *= 2;
 		HBD *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		HBD = Math.round(HBD);
 		doDamage(HBD, true, true);
@@ -4509,6 +4631,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage = combat.itemsBonusDamageDamage(damage);
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+				if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 				damage = Math.round(damage);
 				doDamage(damage);
@@ -4591,6 +4714,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= combat.meleePhysicalForce();
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -4606,7 +4730,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			var buffMultiplier:Number = 0;
 			buffMultiplier += combat.bonusCriticalDamageFromMissingHP();
-			damage *= (1.75 + buffMultiplier);
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * combat.impaleMultiplier());
+			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//final touches
@@ -4736,6 +4861,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (damage >= 100) outputText(" With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(damage, true, true);
@@ -4882,6 +5008,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (damage >= 100) outputText("With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			doDamage(damage, true, true);
 			doLightingDamage(Math.round(damage*0.1), true, true);
 			if (player.hasPerk(PerkLib.PhantomStrike)) {
@@ -4981,6 +5108,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage = int(damage);
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+				if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 					damage = Math.round(damage * combat.fireDamageBoostedByDao());
 					doFireDamage(damage, true, true);
@@ -5072,6 +5200,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += 20;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 			damage *= dBd3c;
@@ -5129,6 +5258,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) damage *= 2;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= combat.rangePhysicalForce();
 		if (player.level < 10) damage += 20 + (player.level * 3);
 		else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
@@ -5335,6 +5465,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 		//Add status if not already drugged
@@ -5412,6 +5543,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = combat.itemsBonusDamageDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
 			var totalDamage:Number;
@@ -5585,6 +5717,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//Reduce damage
 		damage *= monster.damagePercent() / 100;
@@ -6581,4 +6714,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

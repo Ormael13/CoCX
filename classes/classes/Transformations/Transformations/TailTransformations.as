@@ -1527,6 +1527,28 @@ public class TailTransformations extends MutationsHelper {
 				return player.tailType === Tail.YGGDRASIL;
 			}
 	);
+
+	public const TailArigeanGreen: Transformation = new SimpleTransformation("Arigean Tail (Green)",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				desc += "";
+
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.ARIGEAN_GREEN;
+				player.tailCount = 2;
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.ARIGEAN_GREEN;
+			}
+	);
 	/*
   */
 }

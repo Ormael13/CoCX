@@ -5,6 +5,7 @@ import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.NPCs.KihaFollower;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.PatchouliScene;
 import classes.Scenes.SceneLib;
@@ -522,6 +523,8 @@ public class SceneHunter extends BaseContent {
                 flags[kFLAGS.ZENJI_PROGRESS] = 12;
             if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_ALVINA && flags[kFLAGS.MARRIAGE_FLAG] != "Alvina")
                 flags[kFLAGS.ALVINA_FOLLOWER] = 21;
+            if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_KIHA && flags[kFLAGS.MARRIAGE_FLAG] != "Kiha")
+                KihaFollower.ProposalStatus = 6;
             //Enable Polygamy
             flags[kFLAGS.MARRIAGE_FLAG] = "POLYGAMY"; //just to break anything that doesn't support it
             flags[kFLAGS.SCENEHUNTER_POLYGAMY] ^= POLYGAMY_ENABLED;
@@ -542,6 +545,8 @@ public class SceneHunter extends BaseContent {
                     flags[kFLAGS.ALVINA_FOLLOWER] = 20;
                     if (flags[kFLAGS.SLEEP_WITH] == "Alvina") flags[kFLAGS.SLEEP_WITH] = "";
                 }
+                if (flags[kFLAGS.SCENEHUNTER_POLYGAMY] & POLYGAMY_KIHA && singleBit != POLYGAMY_ALVINA)
+                    KihaFollower.ProposalStatus = 1;
             }
             //set marriage flag
             flags[kFLAGS.MARRIAGE_FLAG] = singleName;
@@ -907,6 +912,13 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.ZENJI_PROGRESS] >= 12)
             addButton(6, "ZenjiMarry", SceneLib.zenjiScene.ZenjiMarriageSceneCinco)
                 .hint("Zenji marriage sex.");
+        if (SceneLib.kihaFollower.isMarried()) {
+            addButton(7, "KihaMarry", SceneLib.kihaFollower.KihaWeddingVictory)
+                .hint("Kiha marriage sex.");
+            addButton(8, "KihaMLose", SceneLib.kihaFollower.KihaWeddingDefeat)
+                .hint("Kiha marriage fight - defeat!");
+
+        }
         addButton(14, "Back", recallScenes);
     }
 

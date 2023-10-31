@@ -68,11 +68,11 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8u";
+    public var debugGameVer:String = "v0.8u2.34.final";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.11;
-    public var levelCap:Number = 185;
+    public var modSaveVersion:Number = 36.14;
+    public const levelCap:Number = 185;
 
     //Lock cheats menus from public
     // builds.
@@ -249,7 +249,7 @@ public class CoC extends MovieClip
         this.mainView.onNewGameClick = charCreation.newGameGo;
         this.mainView.onAppearanceClick = playerAppearance.appearance;
         this.mainView.onDataClick = saves.saveLoad;
-        this.mainView.onLevelClick = playerInfo.levelUpGo;
+        this.mainView.onLevelClick = playerInfo.levelUpMenu;
         this.mainView.onPerksClick = perkMenu.displayPerks;
         this.mainView.onStatsClick = playerInfo.displayStats;
         this.mainView.onBottomButtonClick = function(i:int, button:CoCButton):void {
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>4th floor of River Dungeon, new sprites, new monsters at High Mountains/Swamp and bugfixes</b>)";
+			ver += " (<b>Wereshark & Arigean TF's, many new dual variants of weapons, Dragonne race rework, Small expansion involving Evangeline and Galia, many QoL changes and bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
@@ -521,7 +521,7 @@ public class CoC extends MovieClip
         EngineCore.rawOutputText(txt);
         // On the next animation frame
         setTimeout(function():void {
-            mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
+            mainView.scrollBar.value = mainView.scrollBar.maximum;
         },0);
     }
     /*

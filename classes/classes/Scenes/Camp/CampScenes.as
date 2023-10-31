@@ -164,7 +164,7 @@ public function PeepingTom3():void {
 		else outputText("While she was not always a girl, Izma is womanly enough that she was still accepted in the bath.\n\n");
 	}
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga, Samirah takes a lot of space in the bath. You're glad you made it big enough to hold as many people.\n\n");
-	if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
+	if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("Nadia is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content [exc moo] as she lays back letting the warm waters wash over her.\n\n");
@@ -235,7 +235,7 @@ public function HaveAGirlBath():void {
 		outputText(".\n\n");
 	}
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga Samirah takes a lot of space in the bath. You're glad you made your pool as large as you could.\n\n");
-	if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath. Can’t say this is not welcome.\n\n");
+	if (flags[kFLAGS.NADIA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.NadiaOff)) outputText("Nadia is resting next to a set of medicinal and aromatic oils she regularly spray in the bath. Can’t say this is not welcome.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content [exc moo] as she lays back letting the warm waters wash over her.\n\n");

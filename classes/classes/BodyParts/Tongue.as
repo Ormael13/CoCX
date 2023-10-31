@@ -99,6 +99,11 @@ public class Tongue extends BodyPart{
 		name:"impish",
 		appearanceDesc: "Your voice is far higher pitched than your old human one possibly because it's fit to a small imp body."
 	});
+	public static const ARIGEAN: int = 17;
+	EnumValue.add(Types, ARIGEAN, "ARIGEAN", {
+		name:"arigean",
+		appearanceDesc: "Your tongue is identical to that of a human’s save for it’s light blue color, most likely caused by your blue blood."
+	});
 
 	public function Tongue(creature:Creature) {
 		super(creature, null);

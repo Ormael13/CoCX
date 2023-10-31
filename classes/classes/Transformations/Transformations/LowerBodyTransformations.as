@@ -2250,15 +2250,30 @@ public class LowerBodyTransformations extends MutationsHelper {
 			if (doOutput) outputText(desc);
 			player.lowerBody = LowerBody.WERESHARK;
 			player.legCount = 1;
-			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ABYSSAL_SHARK));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.WERESHARK));
 		},
 		// is present
 		function (): Boolean {
 			return player.lowerBody === LowerBody.WERESHARK;
 		}
 	);
+
+	public const LowerBodyArigean: Transformation = new SimpleTransformation("Arigean lower body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			if (doOutput) {
+				// No special text outside the event
+			}
+			player.lowerBody = LowerBody.ARMORED_LEGS;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ARIGEAN));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.ARMORED_LEGS;
+		}
+	);
 	
 	/*
   */
 }
-}
+}

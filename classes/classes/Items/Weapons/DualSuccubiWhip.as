@@ -14,7 +14,7 @@ package classes.Items.Weapons
 		public function DualSuccubiWhip()
 		{
 			super("PSWhip","P.SucWhip","pair of succubi whips","a pair of succubi whips","sexy whipping",10,800,"This pair of coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.  However, it might slowly warp the mind of wielder.", "Dual, Whipping", "Whip");
-			withBuffs({'teasedmg': 40});
+			withBuffs({'teasedmg': 90});
 		}
 		
 		override public function get attack():Number {

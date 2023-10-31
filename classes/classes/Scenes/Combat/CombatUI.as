@@ -175,6 +175,7 @@ public class CombatUI extends BaseCombatContent {
 			case "Rifle":
 			case "2H Firearm":
 			case "Dual Firearms":
+			case "Dual 2H Firearms":
 				if (player.ammo <= 0)
 					btnRanged.show("Reload", combat.reloadWeapon1, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.").icon("A_Ranged");
 				else btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("A_Ranged");
@@ -187,7 +188,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying() && (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly)){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
-				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
+				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") {
 					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon. <b>AMMO LEFT: "+player.ammo+"</b>").icon("A_Ranged");
 					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
 				}
@@ -285,9 +286,7 @@ public class CombatUI extends BaseCombatContent {
 		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
 			menu();
 			addButton(0, "Recover", combat.wait);
-			if (CombatAbilities.ClearMind.isKnown) {
-				CombatAbilities.ClearMind.createButton(monster).applyTo(button(1));
-			}
+			if (CombatAbilities.ClearMind.isKnown) CombatAbilities.ClearMind.createButton(monster).applyTo(button(1));
 			addButton(13, "Surrender(H)", combat.surrenderByHP).hint("Stop defending up to the point enemy would beat you down to minimal HP.");
 			addButton(14, "Surrender(L)", combat.surrenderByLust).hint("Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
 		} else if (player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
@@ -446,6 +445,16 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
+			menu();
+			if (player.faceType == Face.VAMPIRE || player.perkv1(IMutationsLib.HollowFangsIM) >= 1) {
+				addButton(0, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
+				if (player.fatigueLeft() <= combat.physicalCost(20)) {
+					button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
+				}
+			}
+			else addButtonDisabled(0, "Bite", "If only you had fangs.");
+			//addButton(4, "Release", combat.VampireLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.MysticWeb)) {
 			menu();
 			addButton(0, "Tease", combat.WebTease).hint("Toy with your opponent");
@@ -897,6 +906,10 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
 			btnStruggle.call((monster as Izumi).titSmotherStruggle);
 			btnBoundWait.call((monster as Izumi).titSmotherWait);
+		}
+		if (player.hasStatusEffect(StatusEffects.Terrorize)) {
+			btnStruggle.call((monster as Grayda).graydaTerrorizeStruggle);
+			btnBoundWait.call((monster as Grayda).graydaTerrorizeWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Pounced)) {
 			if (monster is Tyrantia) {

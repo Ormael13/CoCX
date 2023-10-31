@@ -139,10 +139,11 @@ public class Races {
 	public static const WERESPIDER:WerespiderRace          = new WerespiderRace(114);
 	public static const WERESHARK:WeresharkRace            = new WeresharkRace(115);
 	public static const ABYSSAL_SHARK:AbyssalSharkRace     = new AbyssalSharkRace(116);
+	public static const ARIGEAN:ArigeanRace                = new ArigeanRace(117);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
-			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX, MANTICORE
+			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX, MANTICORE, DRAGONNE
 	];
 	public static const SnakelikeRaces:/*Race*/Array = [
 			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS

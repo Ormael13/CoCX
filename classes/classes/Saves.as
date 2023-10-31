@@ -899,6 +899,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//LEVEL STATS
 		saveFile.data.XP = player.XP;
 		saveFile.data.level = player.level;
+		saveFile.data.negativeLevel = player.negativeLevel;
 		saveFile.data.gems = player.gems;
 		saveFile.data.perkPoints = player.perkPoints;
 		saveFile.data.statPoints = player.statPoints;
@@ -1750,6 +1751,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.level = CoC.instance.levelCap;
 			spillyFix = true;
 		} else player.level = saveFile.data.level;
+		if (saveFile.data.negativeLevel == undefined) {
+			player.negativeLevel = 0; // TODO: (lvl) handle save upgrading for old clone buff v3/v4 in save updater?
+		} else {
+			player.negativeLevel = saveFile.data.negativeLevel;
+		}
 
 		if (saveFile.data.statPoints == undefined)
 			player.statPoints = 0;

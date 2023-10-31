@@ -175,6 +175,10 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.FrozenSolid)) removeStatusEffect(StatusEffects.InkBlind);
 			if (hasStatusEffect(StatusEffects.Sleep)) removeStatusEffect(StatusEffects.InkBlind);
 			if (hasStatusEffect(StatusEffects.Polymorphed)) removeStatusEffect(StatusEffects.Polymorphed);
+			if (hasStatusEffect(StatusEffects.JabberwockyVenom)) {
+				removeStatusEffect(StatusEffects.JabberwockyVenom);
+				buff("Poison").remove();
+			}
 			SceneLib.combat.combatRoundOver();
 		}
 		

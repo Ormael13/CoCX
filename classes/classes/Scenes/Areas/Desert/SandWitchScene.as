@@ -50,7 +50,11 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 				outputText(" as you yank your [armor] back into place.  You're in charge here, not some possessed appendage!   Exgartuan yells something snide, but it's muffled too much to understand.  You look up in time to sidestep an attack from the Sand Witch.  It looks like you'll have to fight her!");
 				startCombat(new SandWitch());
 			}
-			else doYesNo(allowSandWitchMagic, refuseSandWitchMagic);
+			else {
+				menu();
+				addButtonIfTrue(0, "Yes", allowSandWitchMagic, "Your body no longer can be altered by her magic.", !player.blockingBodyTransformations());
+				addButton(3, "No", refuseSandWitchMagic);
+			}
 		}
 		
 		private function allowSandWitchMagic():void {

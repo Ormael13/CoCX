@@ -5,12 +5,17 @@
 package classes.Scenes.Dungeons.BeeHive 
 {
 import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
-import classes.Scenes.Areas.Forest.BeeGirl;
 
-	public class BeeGuards extends BeeGirl {
+	public class BeeGuards extends Monster {
 		
 		public function beeGuardsStinger():void {
 			outputText("One of the guards strikes through your defenses, trying to burrow her stinger in. ");
@@ -61,10 +66,23 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 			this.a = "";
 			this.short = "Bee guards";
 			this.long = "These two bee guards are trying to prevent you from entering the Hive. While most bees are covered in chitin-like plating, these girls look even tougher than their less combative counterparts.";
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.tallness = rand(14) + 59;
+			this.hips.type = Hips.RATING_CURVY + 3;
+			this.butt.type = Butt.RATING_EXPANSIVE;
+			this.lowerBody = LowerBody.BEE;
+			this.bodyColor = "yellow";
+			this.hairColor = randomChoice("black","black and yellow");
+			this.hairLength = 6;
 			initStrTouSpeInte(70, 220, 90, 35);
 			initWisLibSensCor(35, 170, 125, 0);
+			this.weaponName = "chitin-plated fist";
+			this.weaponVerb="armored punch";
 			this.weaponAttack = 15;
+			this.armorName = "chitin";
 			this.armorDef = 50;
 			this.armorMDef = 20;
 			this.bonusHP = 1000;
@@ -75,6 +93,10 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 					.add(consumables.W__BOOK, 1 / 3)
 					.add(consumables.BEEHONY, 1 / 2)
 					.elseDrop(useables.B_CHITN);
+			this.antennae.type = Antennae.BEE;
+			this.wings.type = Wings.BEE_SMALL;
+			this.tailType = Tail.BEE_ABDOMEN;
+			this.tailVenom = 100;
 			checkMonster();
 		}
 		

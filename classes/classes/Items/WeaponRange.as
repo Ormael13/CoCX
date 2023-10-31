@@ -51,7 +51,7 @@ public class WeaponRange extends Equipable
 			else if (perk == "Rifle") desc += "(Rifle)";
 			else if (perk == "2H Firearm") desc += "(2H Firearm)";
 			else if (perk == "Dual Firearms") desc += "(Dual Firearms)";
-			else if (perk == "Quad Firearms") desc += "(Quad Firearms)";
+			else if (perk == "Dual 2H Firearms") desc += "(Dual 2H Firearms)";
 			else if (perk == "Throwing") desc += "(Throwing)";
 			else if (perk == "Tome") desc += "(Tome)";
 			//Attack

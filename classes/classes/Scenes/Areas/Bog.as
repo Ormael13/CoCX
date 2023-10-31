@@ -54,7 +54,7 @@ public class Bog extends BaseContent
 				label : "Frog girl",
 				kind  : 'event',
 				when: function ():Boolean {
-					return flags[kFLAGS.TIMES_ENCOUNTERED_FROG] != -1 && player.buttPregnancyIncubation != 0
+					return flags[kFLAGS.TIMES_ENCOUNTERED_FROG] != -1 && player.buttPregnancyIncubation == 0
 				},
 				call: frogGirlScene.findTheFrogGirl
 			}, {

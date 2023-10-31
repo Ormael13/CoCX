@@ -719,7 +719,7 @@ public class HeXinDao extends BaseContent
 		addButton(3, weapons.RULER.shortName, weaponBuy5, weapons.RULER);
 		addButton(4, weapons.NRSABER.shortName, weaponBuy5, weapons.NRSABER);
 		addButton(5, weapons.RIBBON.shortName, weaponBuy5, weapons.RIBBON);
-        addButton(6, weapons.GUANDAO.shortName, weaponBuy5, weapons.GUANDAO);
+		//6
         addButton(7, weapons.HSWORDS.shortName, weaponBuy5, weapons.HSWORDS);
 		addButton(8, weapons.SNAKESW.shortName, weaponBuy5, weapons.SNAKESW);
 		//addButton(9, Changdao

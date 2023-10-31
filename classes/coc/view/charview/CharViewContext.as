@@ -46,10 +46,10 @@ public class CharViewContext extends ExecContext {
 			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
 
 			function showLegClothing():Boolean {
-				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.JABBERWOCKY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
 			}
 			function showPanty():Boolean {
-				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.humanForm() || ([LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2, LowerBody.WERESHARK].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing());
 			}
 
 			super([
@@ -80,8 +80,8 @@ public class CharViewContext extends ExecContext {
 					PlayerIsInHumanForm: player.humanForm(),
 					playerHasWeaponBannedArms: [Arms.GAZER, Arms.YETI, Arms.DISPLACER, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
 					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
-					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
-					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
+					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.WERESHARK].indexOf(player.lowerBody) != -1,
+					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.WERESHARK].indexOf(player.lowerBody) != -1,
 					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
 
 					//Detect Weapon Skins
@@ -114,7 +114,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasASpear: player.isSpearTypeWeapon(), //until polearm have their own sprite they share sprite with spears
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
-					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS,
+					PlayerHasASpearPhallus: player.weapon == game.weapons.PHALLUS || player.weapon == game.weapons.PHALUSS,
 
 					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.DKATANA,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT,
@@ -130,7 +130,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
 					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
 
-					PlayerHasDagger: player.isDaggerTypeWeapon(),
+					PlayerHasDagger: player.isDaggerTypeWeapon() && player.weapon != game.weapons.AETHERD && player.shield != game.shields.AETHERS,
 					//PlayerHasDaggerHoly:player.weapon == game.weapons.Q_GUARD,
 					//PlayerHasDaggerUnholy:player.weapon == game.weapons.B_WIDOW,
 
@@ -144,9 +144,18 @@ public class CharViewContext extends ExecContext {
 
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
 					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.AETHERS && player.shield != game.shields.BATTNET && player.shield != game.shields.MABRACE && player.shield != game.shields.SPI_FOC && player.shield != game.shields.Y_U_PAN,
-					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
-					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
-					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
+					//PlayerHasAShieldHoly: player.shield == game.shields.SANCTYL,
+					//PlayerHasAShieldUnholy: player.shield == game.shields.SANCTYD,
+					PlayerHasAShieldSm: player.shield == game.shields.BUCKLER || player.shield == game.shields.TRASBUC || player.shield == game.shields.NECROSH,
+					//PlayerHasAShieldSmHoly: player.shield == game.shields.SANCTYL,
+					//PlayerHasAShieldSmUnholy: player.shield == game.shields.SANCTYD,
+					PlayerHasAShieldLg: player.shield == game.shields.DRGNSHL || player.shield == game.shields.GREATSH || player.shield == game.shields.SANCTYN || player.shield == game.shields.SPIH_SH,
+					PlayerHasAShieldLgHoly: player.shield == game.shields.SANCTYL,
+					PlayerHasAShieldLgUnholy: player.shield == game.shields.SANCTYD,
+					PlayerHasAShieldMs: player.shield == game.shields.SPIM_SH || player.shield == game.shields.TOWERSH,
+					//PlayerHasAShieldMsHoly: player.shield == game.shields.SANCTYL,
+					//PlayerHasAShieldMsUnholy: player.shield == game.shields.SANCTYD,
+
 					PlayerhasACasterTome:player.shield == game.shields.IMPTOME || player.shield == game.shields.NEKONOM,
 
 					PlayerHasABow: player.isBowTypeWeapon(),
@@ -163,6 +172,8 @@ public class CharViewContext extends ExecContext {
 					PlayerHasLactoBlaster:player.weaponRange == game.weaponsrange.LBLASTR,
 
 					PlayerHasADualWeapon: player.isDualWield(),
+					PlayerHasADualMeleeWeapon: player.isDualWieldMelee(),
+					PlayerHasADualRangedWeapon: player.isDualWieldRanged(),
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					BoobDisplay: game.flags[kFLAGS.BOOB_DISPLAY_FLAG],
@@ -199,7 +210,7 @@ public class CharViewContext extends ExecContext {
 					armStanceNonBannedList: player.armor == game.armors.SCANSC || player.armor == game.armors.ERA || player.armor == game.armors.FMDRESS || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
 					sleevelessList: player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
 					playerWearsAStanceBannedDress: player.armor == game.armors.BLIZZ_K || player.armor == game.armors.SPKIMO || player.armor == game.armors.WKIMONO || player.armor == game.armors.BKIMONO || player.armor == game.armors.RKIMONO || player.armor == game.armors.PKIMONO || player.armor == game.armors.BLKIMONO || player.armor == game.armors.KBDRESS || player.armor == game.armors.GTECHC_ || player.armor == game.armors.IBKIMO || player.armor == game.armors.TCKIMO || player.armor == game.armors.OEKIMO || player.armor == game.armors.OTKIMO,
-					playerWearsAStanceBannedArmor: armorSubtype == "fullplate" || player.armor == game.armors.CTPALAD || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
+					playerWearsAStanceBannedArmor: armorSubtype == "fullplate" || player.armor == game.armors.CTPALAD || player.armor == game.armors.CTHPALA || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					ComfyCLothes: armorSubtype == "clothes" || player.armor == game.armors.C_CLOTH,
 					deathPrinceOutfit: player.armor == game.armors.DEATHPO || player.armor == game.armors.DEATHPGA,
@@ -217,7 +228,7 @@ public class CharViewContext extends ExecContext {
 					greenQipao: player.armor == game.armors.G_QIPAO,
 					purpleQipao: player.armor == game.armors.P_QIPAO,
 					redQipao: player.armor == game.armors.R_QIPAO,
-					centaurPaladinArmor: player.armor == game.armors.CTPALAD,
+					centaurPaladinArmor: player.armor == game.armors.CTPALAD || player.armor == game.armors.CTHPALA,
 					centaurBlackGuardArmor: player.armor == game.armors.CTBGUAR,
 					goblinTechnomancerClothe: player.armor == game.armors.GTECHC_,
 					sexyAquamarineBikini: player.armor == game.armors.SAQBIKNI,
@@ -261,9 +272,11 @@ public class CharViewContext extends ExecContext {
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
-					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
+					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY,
 					cowPanty: player.lowerGarment == game.undergarments.COW_PANTY,
 					blackCatPanty: player.lowerGarment == game.undergarments.BN_SKIRT,
+					brownLoincloth: player.lowerGarment == game.undergarments.C_LOIN || player.lowerGarment == game.undergarments.FURLOIN,
+					whiteLoincloth: player.lowerGarment == game.undergarments.F_LOIN_ || player.lowerGarment == game.undergarments.SS_LOIN,
 
 					// Unique misc Accessories
 					oniGourd: player.countMiscJewelry(game.miscjewelries.ONI_GOURD) > 0,

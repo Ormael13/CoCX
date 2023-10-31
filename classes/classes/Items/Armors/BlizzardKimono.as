@@ -19,7 +19,7 @@ package classes.Items.Armors
 		}
 		
 		override public function equipText():void {
-			if (!game.player.hasPerk(PerkLib.ColdAffinity)) outputText("Is it just you or you are freezing within that Kimono. Without proper resistance to cold, the blizzard kimono begins to sap your body warmth.\n\n");
+			if (!game.player.hasPerk(PerkLib.ColdMastery) && !game.player.hasPerk(PerkLib.ColdAffinity)) outputText("Is it just you or you are freezing within that Kimono. Without proper resistance to cold, the blizzard kimono begins to sap your body warmth.\n\n");
 			else outputText("You equip " + longName + ".  ");
 		}
 		

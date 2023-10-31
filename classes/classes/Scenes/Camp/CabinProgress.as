@@ -96,7 +96,8 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function canGatherWoods():Boolean {
-			return (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE || player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < SceneLib.campUpgrades.checkMaterialsCapWood() && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
+			return (player.weapon == weapons.L__AXE || player.weapon == weapons.DL_AXE_ || player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2
+			|| player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.isInGoblinMech()) && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < SceneLib.campUpgrades.checkMaterialsCapWood() && player.statusEffectv1(StatusEffects.ResourceNode1) < 5;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
@@ -114,7 +115,7 @@ import classes.Scenes.SceneLib;
 				endEncounter();
 				return;
 			}
-			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") {
+			if (player.hasItem(weapons.L__AXE) || player.weapon == weapons.DL_AXE_ || player.weaponName == "large axe") {
 				outputText("You are carrying a large axe with you.");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
@@ -130,12 +131,12 @@ import classes.Scenes.SceneLib;
 				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
 				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
 			}
-			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) {
-				if (player.weapon == weapons.RIPPER2) {
+			if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
+				if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
 					outputText("You are carrying a Ripper 2.0 with you.\n");
 					addButton(3, "Ripper 2.0", cutTreeMechTIMBER);
 				}
-				else if (player.weapon == weapons.RIPPER1) {
+				else if (player.weapon == weapons.RIPPER1 || player.weapon == weapons.TRIPPER1) {
 					outputText("You are carrying a Ripper 1.0 with you.\n");
 					addButton(3, "Ripper 1.0", cutTreeMechTIMBER);
 				}
@@ -175,10 +176,13 @@ import classes.Scenes.SceneLib;
 		private function cutTreeTIMBER():void {
 			clearOutput();
 			if (player.weaponName == "large axe") outputText("You ready your oversized axe. ");
+			else if (player.weapon == weapons.DL_AXE_) outputText("You ready your oversized axes. ");
 			else outputText("You ready your axe. ");
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
-			incrementWoodSupply(10 + Math.floor(player.str / 8));
+			var cTT:Number = (10 + Math.floor(player.str / 8));
+			if (player.weapon == weapons.DL_AXE_) cTT = Math.round(cTT*1.5);
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += cTT;
+			incrementWoodSupply(cTT);
 			fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 			endEncounter(120);
 		}
@@ -189,7 +193,10 @@ import classes.Scenes.SceneLib;
 			if (player.isInGoblinMech()) outputText("chainsaw");
 			else {
 				if (player.weapon == weapons.RIPPER2) outputText("Ripper 2.0");
+				else if (player.weapon == weapons.TRIPPER2) outputText("Twin Ripper 2.0");
 				else if (player.weapon == weapons.RIPPER1) outputText("Ripper 1.0");
+				else if (player.weapon == weapons.TRIPPER1) outputText("Twin Ripper 1.0");
+				else if (player.weapon == weapons.TMACGRSW) outputText("chainsaw swords");
 				else outputText("chainsaw sword");
 			}
 			outputText(" as the metal teeth begin to spin. ");
@@ -202,8 +209,10 @@ import classes.Scenes.SceneLib;
 				endEncounter();
 			}
 			else {
-				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (13 + Math.floor(player.str / 7));
-				incrementWoodSupply(13 + Math.floor(player.str / 7));
+				var cTMT:Number = (13 + Math.floor(player.str / 7));
+				if (player.weapon == weapons.TMACGRSW || player.weapon == weapons.TRIPPER1 || player.weapon == weapons.TRIPPER2) cTMT = Math.round(cTMT*1.5);
+				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += cTMT;
+				incrementWoodSupply(cTMT);
 				fatigue(gatherWoodsORquarrySiteMineCost(), USEFATG_PHYSICAL);
 				endEncounter(120);
 			}

@@ -1071,7 +1071,7 @@ private function talkCathedralA():void {
 	//(Display Options: [Pointless] [Encourage])
 	menu();
 	addButton(0,"Pointless",pointlessGargoylesArePointless);
-	addButton(1,"Encourage",encourageGargoyleWaifuToDoSomething);
+	addButton(1,"Encourage",encourageGargoyleWaifuToAct);
 }
 
 //[b]Pointless[/b]
@@ -1090,7 +1090,7 @@ private function pointlessGargoylesArePointless():void {
 
 //[b]Encourage[/b]
 //(Confidence +2)
-private function encourageGargoyleWaifuToDoSomething():void {
+private function encourageGargoyleWaifuToAct():void {
 	clearOutput();
 	gargoyleConfidence(10);
 	outputText("You give " + flags[kFLAGS.GAR_NAME] + " a pat on the head and tell her it's a wonderful idea.  She makes a happy squeak and immediately flutters over to a pile of debris and starts cleaning it up.  Before you know it, the little gargoyle's on a roll, whistling a jaunty tune as she starts repairing some of the more obvious damage.  Seeing her so engrossed, you can't help but smile.  You wander over and start to give her a hand.");

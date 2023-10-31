@@ -88,6 +88,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 3) addButton(10, "Neisa", NeisabutPCgotKOd);
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(10, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(10, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
+			addButtonDisabled(11, "???", "You see a horse woman sitting at a table on your left.");//Diana
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 
@@ -106,7 +107,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_, 1).hint("1 spirit stone");
 			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW, 1).hint("1 spirit stone");
 			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ, 2).hint("2 spirit stones");
-			addButton(8, "Asumaki", buyDrink, consumables.ASKIRIN, 1).hint("2 spirit stones");
+			addButton(8, "Asumaki", buyDrink, consumables.ASKIRIN, 2).hint("2 spirit stones");
 			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ, 100).hint("100 spirit stones");
 			addButton(13, "BroBrew", buyDrink, consumables.BROBREW, 100).hint("100 spirit stones");
 			addButton(14, "Back", notThirsty);

@@ -365,7 +365,7 @@ public function alvinaThirdEncounterYesNeverLost():void
 	if (AlvinaFightingToCorruptYou) {
 		outputText("You wake up with Alvina towering over you.[pg]");
 		outputText("\"<i>You are really hopeless aren't you… it's fine I'll fix your mess for you this one time, but don't do that ever again or I will end you.</i>\"");
-		outputText("Forcefully taking your phylactery into her clawed grasp, she pours a torrent of corruption into you straight through your soul. The effect is instantanious, stripping you of your defiance, with teh added effect of healing the scar left by the artifact in the purification ritual.[pg]");
+		outputText("Forcefully taking your phylactery into her clawed grasp, she pours a torrent of corruption into you straight through your soul. The effect is instantanious, stripping you of your defiance, with the added effect of healing the scar left by the artifact in the purification ritual.[pg]");
 		outputText("\"<i>You don't need purity, moral conduct or a sense of justice concieved by others, all you need is me, [name].</i>\"[pg]");
 		outputText("And you guess she's right, and she always was. As such you take the decision not to disappoint her again.");
 		player.removeStatusEffect(StatusEffects.DevilPurificationScar);
@@ -408,13 +408,13 @@ public function alvinaThirdEncounterTakeHer():void
 		return (GiftCooldown > 0);
 	}
 	public function alvinaGiftCooldownDescription():void {
-		outputText("\n\nYou wonder why Alvna ran out of the bar like she did and when you will see her again.")
+		outputText("\n\nYou wonder why Alvina ran out of the bar like she did and when you will see her again.")
 	}
 	public function alvinaWaitingAtRavine():Boolean {
 		return SecondDateSuccess && !AlvinaPurified && flags[kFLAGS.ALVINA_FOLLOWER] == 12;
 	}
 	public function alvinaWaitingAtRavineDescription():void {
-		outputText("\n\nAlvina told you to find her at the Defiled Ravine, yuo suppose tht means the end of her meeting you here at the bar.")
+		outputText("\n\nAlvina told you to find her at the Defiled Ravine, you suppose that means the end of her meeting you here at the bar.")
 	}
 	public function alvinaBarDescription():void {
 		if (!MetAlvinaAtBar) outputText("\n\nA tall but slim figure in a hooded robe sits by the bar reading a book while nursing a mug of ale.");
@@ -730,7 +730,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("She might pretend she's a demon but her soul still exists albeit outside her body. While she is indeed deeply corrupted there's no telling that a powerful purifying agent couldn't fix her up so long as she genuinely wishes to change, her demonic nature as a natural shapeshifter should play itself up and assist it, though you have no idea of what a purified demon would look like. \n\n");
 		outputText("\"<i>The very notion is ludicrous, absurd. You're telling me that if I reject my own corrupted nature hard enough it will just work? What kind of whimsical way of thinking is that?! Do you hear yourself talk here?! Well know what, just to humor you I'll try, and if I fail I can always just off myself as I had originally planned.</i>\"\n\n");
 		outputText("Alvina grabs the pearl from your hands, her fell eyes reflecting on the surface before she gulps it down. She begin to focus, closing her eyes and at first nothing seems to happen. You're about to sigh in disappointment when the tips of her pitch black hair strands begin to bleach, growing increasingly pale. At first the white gains a few centimeters before the black slightly swallows it back, but it is like pushing back against a tidal wave as the white begins creeping all the way up to the root. While she doesn't exactly become human again, many of her fiendish traits are revised into something more natural and noble, turning her into some kind of new chimeric hybrid. Her demon tail writhes and changes shape before covering in immaculate white fur and draconic scales. Finally Alvina's skin tone lightens up slightly as her fleshy wings membranes melt and change, covered with feathers of pure white. Alvina opens her formerly embery, now golden horizontal slitted eyes in absolute confusion marveling as her entire body is reshaped.\n\n");
-		outputText("\"<i>I… I am one with myself and the world, I've seen the depths of wants but also acquired the understanding. This feeling [name], it's like staring at the world first the first time, a dimension beneath the dimensions where all rules of creation converge. It's like I stand as a grain of sand in the middle of everything so small but capable of altering the fabrics of reality so long as it keep flowing harmoniously with the natural order. Is this godhood? No it is not… gods are limited in what they can do… their wants are restrained by their own petty desires and lack of imagination. To see what I see right now [name]. I have to concentrate not to lose myself into the sea of possible past futures and alternatives. It is as you first said, Mareth is damaged… wounded but not beyond repair. The gods can't fix this, heck if no one does anything the wound will only get worse. But I can… I and my descendents can fix this wound caused by the corruption. </i>\"\n\n");
+		outputText("\"<i>I… I am one with myself and the world, I've seen the depths of wants but also acquired the understanding to use it with control and restraint. This feeling [name], it's like staring at the world first the first time, a dimension beneath the dimensions where all rules of creation converge. It's like I stand as a grain of sand in the middle of everything so small but capable of altering the fabrics of reality so long as it keep flowing harmoniously with the natural order. Is this godhood? No it is not… gods are limited in what they can do… their wants are restrained by their own petty desires and lack of imagination. To see what I see right now [name]. I have to concentrate not to lose myself into the sea of possible past futures and alternatives. It is as you first said, Mareth is damaged… wounded but not beyond repair. The gods can't fix this, heck if no one does anything the wound will only get worse. But I can… I and my descendents can fix this wound caused by the corruption. </i>\"\n\n");
 		outputText("\"<i>Removing the demon's will not fix Mareth; the corruption has run too deep; it's literally in the mind of the denizens now. Even if we remove the plant and kill all the demon's new demons could easily arise from the remaining corrupted roots. All it takes is for a particularly lusty mortal to go on a lust craze and spontaneously lose their soul and we will be back to square one. As for you [name], you may think you are but a human, but within you rests a spark capable of rewriting history as we see it.</i>\"\n\n");
 		outputText("\"<i>The power to beat impossible odds and change yourself infinitely, to rewrite your own mistakes into success to the desired outcome and change the future… only… are you even aware of your own power? Maybe you use it subconsciously to begin with. You are an anomaly [name], one of the few beings capable of changing their own fates and that of others at will. I see now what I must do, and it starts by pledging my body and souls to you so as to ensure that you may accomplish everything you set your goals upon. Undo past mistakes and put Mareth onto the right track. You embody everything I've worked so hard to see.</i>\"\n\n");
 		outputText("She kneels in front of you, her golden eyes staring directly into yours, you see her unshakable determination firsthand. However you didn't wan't Alvina to be your servant, what you did was out of love for her.\n\n");
@@ -778,7 +778,8 @@ public function alvinaThirdEncounterTakeHer():void
 
 public function alvinaMainCampMenu():void
 {
-	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	if (AlvinaPurified) spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
+	else spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
 	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");
 	if (player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
@@ -1708,7 +1709,8 @@ private function noSleep():void {
 }
 
 public function postMarriageSleep():void {
-	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	if (AlvinaPurified) spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
+	else spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
 	outputText("You head to Alvina’s place and wave at her.\n"
 		+ "\n"
@@ -1747,7 +1749,7 @@ public function postMarriageSleep():void {
 
 	public function alvinaPureMainCampMenuAppearance():void
 	{
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		clearOutput();
 		outputText("From your knowledge Alvina is of a rare demonic offshoot known as devils, though she has now been puified. While you are aware that, like most demons, she has advanced shapeshifting abilities, Alvina favors the appearance of a little girl several centuries younger than her true age, mostly for convenience. Alvina’s immaculate white hair is parted by two heavy goat horns and small furry ears, you ponder at the time why ");
 		outputText("demons and devils develop such variants in their physiognomy. Beneath her hair, seeming like liquid gold stare back at you from behind a pair of glasses, or at least they do when she's not busy reading some dusty arcane text. Her innocent-looking face brings you joy every time she smiles, as though peace radiates from her.\n\n");
@@ -1765,7 +1767,7 @@ public function postMarriageSleep():void {
 	}
 
 	public function alvinaPureMainCampMenu():void {
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		clearOutput();
 		outputText("You head over to Alvina in her part of camp. She is reading a book, as usual.\n\n");
 		if (AlvinaInfernalOilCooldown > 0) {
@@ -1786,7 +1788,7 @@ public function postMarriageSleep():void {
 	}
 
 	public function alvinaPureInfernalOil():void {
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		clearOutput();
 		if (!AlvinaInfernalOilAsked) {
 			outputText("You hand over the potion to Alvina and ask her if she can do something with the item.\n\n");
@@ -1820,7 +1822,7 @@ public function postMarriageSleep():void {
 
 	private function alvinaTalkMagic():void {
 		clearOutput();
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		outputText("You ask Alvina if there's anything useful she could teach you.[pg]");
 		outputText("Alvina lights up at your question and searches her belongings for something before answering \"<i>While most of my research is on the topic of black magic, something I wish you to use carefully and with restraints, I did devise a few powerful spells, though learning them requires an immense amount of talent.</i>\" [pg]");
 		if (AlvinaGaveScroll) {
@@ -1840,7 +1842,7 @@ public function postMarriageSleep():void {
 	}
 
 	public function alvinaPureSexMenu():void {
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		clearOutput();
 		outputText("Feeling Antsy you decide to ask Alvina out. She blush wildly but adjust her glasses.\n\n");
 		outputText("\"<i>I mean [name] we are in the middle of the camp in front of everyone it's not that I don't want to but…</i>\"\n\n");
@@ -1856,7 +1858,7 @@ public function postMarriageSleep():void {
 
 	private function alvinaPureTakeHer(x:int):void
 	{  //Male or Herm
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		clearOutput();
 		outputText("You proceed to remove your gear and ");
 		if (player.cocks[x].cockLength > 20) remarkTooBigCock();
@@ -1884,7 +1886,7 @@ public function postMarriageSleep():void {
 	}
 	private function alvinaPureLetHerTakeYou():void
 	{  //Female or Herm
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		clearOutput();
 		outputText("At the suggestion Alvina makes an mischievous smile.\n\n");
 		outputText("\"<i>Well under all normal law of reality, a girl cannot fuck another girl with a penis she outright lacks. Fortunately for us I happen to disagree with this, so with a little effort I can get us just the thing down here, though you will have to coax it out.</i>\"\n\n");
@@ -1908,7 +1910,7 @@ public function postMarriageSleep():void {
 	}
 	private function alvinaPureMakeOut():void
 	{  //Girl on Girl
-		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
+		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle_Pure_16bit);
 		clearOutput();
 		outputText("Pending scene text");
 		endEncounter();

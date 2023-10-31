@@ -6,7 +6,7 @@
 
 import coc.view.MainView;
 
-import fl.controls.UIScrollBar;
+import com.bit101.components.TextFieldVScroll;
 
 import flash.display.Loader;
 	import flash.display.Stage;
@@ -304,7 +304,7 @@ import flash.display.Loader;
 			e.target.removeEventListener(Event.COMPLETE, doFixup);
 			var imgRef:Loader = e.target.loader as Loader;
 			var mainText:TextField = _mainView.mainText;
-			var scrollBar:UIScrollBar = _mainView.scrollBar;
+			var scrollBar:TextFieldVScroll = _mainView.scrollBar;
 
 			var imgRefTopY:int = imgRef.getBounds(mainText).y; 							// 272
 			var imgHeight:int = getImageHeight(imgRef.contentLoaderInfo.url); 			// 400
@@ -331,7 +331,7 @@ import flash.display.Loader;
 				padding += "\n";
 			}
 			mainText.htmlText += padding;
-			scrollBar.update();
+			scrollBar.draw();
 		}
 	}
 }

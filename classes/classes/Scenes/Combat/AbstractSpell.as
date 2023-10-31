@@ -178,7 +178,7 @@ public class AbstractSpell extends CombatAbility {
 			case CAT_SPELL_NECRO:
 				return spellModBlack();
 			case CAT_SPELL_GREEN:
-				return spellModWhite();
+				return spellModGreen();
 			default:
 				return spellMod();
 		}
@@ -252,6 +252,7 @@ public class AbstractSpell extends CombatAbility {
 			}
 			case DamageType.MAGICAL: {
 				if (category == CAT_SPELL_BLOOD) {
+					if (player.hasPerk(PerkLib.BloodMastery)) damage *= 2;
 					damage *= combat.bloodDamageBoostedByDao();
 				}
 				break;
