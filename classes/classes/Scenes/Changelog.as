@@ -14,7 +14,7 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog48();
+			Changelog49();
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog51():void {
@@ -39,18 +39,19 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			//outputText("-Pureblood vampire PC that talked with Diva about vampirism gaining ability to create ghoulish vampire servant. It would be as event in general explore during the night.\n");
-			outputText("-Fixed bugs: \n");
+			outputText("-New range weapon (by Ormael): Twin Desert Eagles - can be gained by combining 2x Desert Eagle weapon. Cost 1240 gems. Base atk is 25 and ammo clip size 4. It's Dual Firearm type range weapon.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: \n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -170,6 +171,16 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog48);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -234,7 +245,7 @@ public class Changelog extends BaseContent
 			outputText("-Various tweaks and bugfixes: dual katana and daisho should now show sprites when equipped, offhand firebuff sprites should now show for weapons that have them, some pure/corrupt weapons that were not showing the appropriate sprite should now do so, dual massive weapons should now properly show an offhand sprite if applicable (Lord Shadeogorath)\n");
 			outputText("-Fixed bugs: Izma C.Manual spe multi bonus not gained properly from reading with her or from bought copy, Kiha wedding possible to keep repeating, Anubis Glyph Pattern metamorph giving Oni pattern, Mummy Curse tooltip when greyed out, needless option for out of Soul Arena low ranker angeloids, Uma Handjob & Get Blown options not accesable for cockwielders, ");
 			outputText("Tamains Daughters scene sending back to camp, clone creating not causing unremovable negative levels, faerie dragon tf not giving pinkish purple scales color, Izma bad end not triggering after PC lost to her many times, Juvenile Abyssal Sharks runnign away without leaving behind any loot\n\n");
-			outputText("<b>Version 0.8u2:</b>\n\n");
+			outputText("<b>Version 0.8u2 (Wereshark & Arigean TF's, many new dual variants of weapons, Dragonne race rework, Small expansion involving Evangeline and Galia, many QoL changes and bugfixes):</b>\n\n");
 			outputText("-New tier 2 intelligence lvl-up perk: Spellbow. Req. Job: Enchanter & Channeling perks, Charge Range weapons spell, 80+ int. Effect: Start every battle with Charge Range Weapon enabled, if you meet White Magic requirements before it starts.\n");
 			outputText("-New event perk: Dragon regal breath. Gained by been dragonne (16+ score). Effects: Allows access to a dragonne regal breath attack. (phys damage, longer stun than other breaths, apply bleed and confusion (similary to fear but not makes enemy skipping turns just giving 50% to skip turn))\n");
 			outputText("-New event perk: Lion Heart. Gained by been dragonne (16+ score). Effects: Add 50% of your speed to your strength score. Double all natural attacks damage dealt.\n");
@@ -315,16 +326,6 @@ public class Changelog extends BaseContent
 			outputText("PC's with kraken lower body or melkie lower body or fused with water elemental or undeath perk drowning in the water, bee handmaiden eggs from tifa count as unfertilized, ocassional reset of setting for increase all above normal enemy tiers (like elite/champion/boss) enemies HP, Twin Six Shooter using ammo 2x faster, Yama-Raja Grasp gloves & Karmic Touch gloves not req. lvl 54+, ");
 			outputText("One with the forest perk tier not updating correctl, Arcane Regeneration (Major) conflicting req., Confusion on enemy text parser error, Cold Mastery not giving pretection for negative effects of using Blizzard Kimono/Claws, Blizzard Claws not enabling use of feral combat mode, combat book from Izma doesn't give strength knowledge when readed in cabin, ");
 			outputText("goblin ale face tf checking for wrong ear type, pair of succubi whips tease dmg, Asumaki incorect cost in spirit stones, Ferocity perk gain req. req. on top of other things min orc race score, Cleave able to apply bleed to enemies that can't bleed, normal melee attack able to apply bleed to all bleed immune enemies beside constructs\n\n");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog47);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

@@ -82,6 +82,7 @@ public final class WeaponRangeLib extends ItemConstants
 		public const SIXSHOT:WeaponRange = new WeaponRange("SixShot", "SixShooter", "Six shooter", "a Six shooter", "shot", 20, 580, "A revolver with six chambers. Its shots are deadly and precise.", "Pistol");
 		public const STKNIFE:WeaponRange = new WeaponRange("STKnife", "S.ThrowingKnife", "sapphire throwing knife", "a sapphire throwing knife", "shot", 3, 300, "A small knife made of azure metal and richly decorated with sapphires and silver engravings that could be thrown. The magic within this azure blade will radiate magical frost when charged with magic. You can carry up to 15 on you and need to retrieve them after battles.", "Throwing");
 		public const T_KNIFE:WeaponRange = new WeaponRange("T.Knife", "ThrowingKnife", "throwing knife", "a throwing knife", "shot", 2, 100, "A small knife that could be thrown.  Preferred weapon for the rogues. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
+		public const TDEEAGL:TwinDesertEagles = new TwinDesertEagles();
 		public const TDPISTO:TwinDartPistol = new TwinDartPistol();
 		public const TM1CERB:TwinM1Cerberuses = new TwinM1Cerberuses();
 		public const TOUHOM3:WeaponRange = new WeaponRange("TouhoM3", "TouhounaM3", "Touhouna M3", "a Touhouna M3", "shot", 20, 430, "Pinnacle of goblin engineering, the Touhouna is what goblins call a mechagun. Never needing to be reloaded it shoots bullets in very fast succession achieving with sheer shot number what way more unwieldy or hazardous gun do.", WT_2H_FIREARM);

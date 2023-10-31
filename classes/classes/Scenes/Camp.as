@@ -1081,7 +1081,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		//addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+		addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
 
 		//Remove buttons according to conditions.
 		if (isNightTime) {
@@ -2314,7 +2314,8 @@ public class Camp extends NPCAwareContent{
 			[weapons.EXCALIB, weapons.DEXCALI],
 			[weaponsrange.SIXSHOT, weaponsrange.TWINSIXS],
 			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
-			[weaponsrange.ALAKABL, weaponsrange.DALAKABL]
+			[weaponsrange.ALAKABL, weaponsrange.DALAKABL],
+			[weaponsrange.DESEAGL, weaponsrange.TDEEAGL]
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)
