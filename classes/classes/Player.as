@@ -1620,10 +1620,18 @@ use namespace CoC;
 			return (temp.indexOf(pWeaponSpecials) >= 0);
 		}
 		//Is DualWield
-		public function isDualWield():Boolean
-		{
-			return weaponRangePerk == "Dual Firearms" || weaponRangePerk == "Dual 2H Firearms" || weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
-		}
+		public function isDualWieldMelee():Boolean
+        	{
+            		return weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
+        	}
+        	public function isDualWieldRanged():Boolean
+        	{
+            		return weaponRangePerk == "Dual Firearms" || weaponRangePerk == "Dual 2H Firearms";
+        	}
+        	public function isDualWield():Boolean
+        	{
+            	return isDualWieldMelee() || isDualWieldRanged();
+        	}
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
 		{
