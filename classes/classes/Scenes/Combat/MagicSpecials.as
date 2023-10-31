@@ -949,7 +949,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
 		}
 		//Telekinetic Grab
-		if (player.isRaceCached(Races.VAMPIRE) && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
+		if (player.racialScore(Races.VAMPIRE) >= 20 && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
 			bd = buttons.add("Telekinetic Grab", TelekineticGrab, "Use telekinesis to hold your opponent. \n\nWould go into cooldown after use for: 6 rounds");
 			bd.requireMana(spellCost(50));
 			if (player.hasStatusEffect(StatusEffects.CooldownTelekineticGrab)) {

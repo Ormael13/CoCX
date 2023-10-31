@@ -1360,7 +1360,6 @@ public class Exploration extends BaseContent implements SaveableState
 				*/
 		}
 		
-		
 		private function discoverHXD():void {
 			clearOutput();
 			outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into a strange area.");
@@ -1373,6 +1372,27 @@ public class Exploration extends BaseContent implements SaveableState
 			outputText("\n\nAfterwards, you're left alone.  You wander around, checking a few places of interest before you decide it's time to return to your camp.  With the guide in your hands, you're sure you'll find this place again with ease if you need to.");
 			outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
 			flags[kFLAGS.HEXINDAO_UNLOCKED] = 1;
+			explorer.stopExploring();
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		private function creatingTheServant():void {
+			clearOutput();
+			outputText("While traveling the world a sudden thirst overtakes you. And here you thought you had your fill of blood recently!");
+			outputText("\n\nDesperate for a quick drink you listen for a heartbeat and fly straight to the nearest one spotting a vague form drudging through the wilderness. Seeing red with hunger you wrap your wings around the humanoid and bite straight into her neck. As you slowly regain your sanity a closer look reveals your victim for what it was.");
+			outputText("\n\nThis peachy vulnerable skin, normal face and round ears. These five toed clawless feet and 5 fingered hands. The absence of a tail or wings. No matter how you look at it, that's a damn human you just drank from, one of your own kind!.. Err well, former kind, ain't much anything remotely human about you anymore. You check and confirm that at least she wasn't a virgin or it would have made you feel even worse!");
+			if (player.cor >= 50) outputText("\n\nThat human ain't going to survive much longer, you're about to throw the body into a ditch when a sinister idea comes to your mind suggested by your instinct. You first bite your palm then begin to forcefully feed her your blood to her.");
+			else outputText("\n\nWell fuck by the look of her she's going to die any minute now from anemia! A small nagging thought appears in the back of your mind. Diva did mention vampire blood being infectious right? What if you simply turned that human into a vampire it would solve all of your problems! Without hesitating you cut your hand and begin to force feed your blood to the human in your arms attempting for a last ditch save before you formally become a murderer!");
+			outputText("\n\nThe reaction is instantaneous as her body begins to shake and convulse. Her body does start by becoming more curvy and sexually appealing like the original vampire transformation but the following changes confuse you what's going on? You watch as the girl's nails deform into sharp claws, her teeth sharpening into vicious needles as your corrupted blood taint her eyes red with hunger. Her ears do become pointed not unlike those of a vampire but her form is anything but. ");
+			outputText("To complete this her tongue suddenly elongates to ridiculous length and becomes quite dexterous as it licks your palm obscenely, trying to catch any remaining drop of blood before your regeneration kicks in. Instinctively you already know something went hell of wrong with her transformation and it might have to do with something in your blood or maybe some other factor.");
+			outputText("\n\nThe crouching ghoul before you, because what else could this fiendish looking damaged soul of an undead be, licks your hand amorously like a well trained dog. Feeling a little awkward at your new pet you pause thinking about what to do with it now. To your surprise though the soul broken undead speaks up intelligently with a refined voice that does not exactly match its behavior and feral look.");
+			outputText("\n\n\"<i>"+player.mf("Master","Mistress")+" I await your order…please tell me your will.</i>\"");
+			outputText("\n\nWell the thing turns out to be quite obedient and well behaved. Perhaps with some clothing you could even make it pass for a maid or a butler. You tell your new pet to head to your camp asap once there you will think what to do with her.");
+			outputText("\n\n\"<i>As the good "+player.mf("master","mistress")+" command!</i>\"");
+			outputText("\n\nThe ghoul leap into the shadows how it will find your camp you don't know but somehow the blood tells you it will.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText(" You ponder in amusement how your maid is going to react to this new servant sharing her chore and turf. Luna is in for a funny surprise you guess.");
+			flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME] = "Helia";
+			player.addStatusValue(StatusEffects.Familiar, 3, 1);
 			explorer.stopExploring();
 			doNext(camp.returnToCampUseTwoHours);
 		}

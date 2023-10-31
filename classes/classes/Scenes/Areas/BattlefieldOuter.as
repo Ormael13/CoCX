@@ -78,7 +78,7 @@ public class BattlefieldOuter extends BaseContent
 			kind  : 'npc',
 			unique: true,
 			when: function ():Boolean {
-				return player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)
+				return player.level >= 25 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)
 			},
 			chance: battlefieldOuterChance,
 			call: tyrantiaEncounterFn

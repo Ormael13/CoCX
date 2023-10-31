@@ -140,9 +140,9 @@ public class Grayda extends Monster
 			this.level = 70;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop()
-					.add(consumables.BAGOCA1,1)
-					.add(consumables.SHARK_T,1)
-					.add(consumables.ASTOOTH,3);
+					//.add(consumables.BAGOCA1,1)
+					.add(consumables.C_JERKY,1)
+					.add(consumables.SIINGOT,3);
 			//this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

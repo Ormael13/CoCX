@@ -373,6 +373,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Exgartuan:StatusEffectType                      = mk("Exgartuan");
 		public static const FaerieFemFuck:StatusEffectType                  = mk("Faerie Fem Fuck");
 		public static const FaerieFucked:StatusEffectType                   = mk("Faerie Fucked");
+		public static const Familiar:StatusEffectType                       = mk("Familiar");
 		public static const FappedGenderless:StatusEffectType               = mk("fapped genderless");
 		public static const FastingPill:StatusEffectType					= mk("Fasting Pill");
 		public static const Feeder:StatusEffectType                         = mk("Feeder");

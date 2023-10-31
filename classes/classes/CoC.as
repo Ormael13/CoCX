@@ -68,7 +68,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8u2.33";
+    public var debugGameVer:String = "v0.8u2.34.final";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.14;
@@ -285,7 +285,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b></b>)";
+			ver += " (<b>Wereshark & Arigean TF's, many new dual variants of weapons, Dragonne race rework, Small expansion involving Evangeline and Galia, many QoL changes and bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

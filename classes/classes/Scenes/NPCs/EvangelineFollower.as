@@ -1041,7 +1041,7 @@ private function curingWendigo():void {
 		player.destroyItems(consumables.PURPEAC, 5);
 		player.destroyItems(consumables.PPHILTR, 5);
 		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your chest. For the first time since you were cursed you finally can feel the gnawing hunger becoming more tolerable as your form becomes more malleable again provided you transform you might even be able to get rid of it entirely. Sure you still look like a wendigo but now you can actually do something about your appearance, you just need to get some transformatives first.\n\n");
-		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent)</b>\n\n");
+		outputText("<b>(Lost Perk: Wendigo Curse)</b>\n\n");
 		player.removePerk(PerkLib.WendigoCurse);
 		doNext(camp.returnToCampUseTwoHours);
 	}

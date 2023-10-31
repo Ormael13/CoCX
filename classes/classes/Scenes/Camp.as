@@ -1188,6 +1188,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) counter++;
 		if (ceraphIsFollower()) counter++;
 		if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) counter++;
+		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.SLAVE)) {
 				counter++;
@@ -1253,7 +1254,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 		if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
-
+		if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) counter++;
 		return counter;
 	}
 
@@ -1838,6 +1839,11 @@ public class Camp extends NPCAwareContent{
 			if (bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && !player.hasStatusEffect(StatusEffects.SophieOff)) {
 				sophieBimbo.sophieCampLines();
 				buttons.add("Sophie", sophieBimbo.approachBimboSophieInCamp);
+			}
+			//Ghoulish Vampire servant
+			if (player.hasStatusEffect(StatusEffects.Familiar) && player.statusEffectv3(StatusEffects.Familiar) > 0 && player.statusEffectv3(StatusEffects.Familiar) < 4) {
+				//outputText(".\n\n");
+				buttons.add(""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"", SceneLib.ghoulishVampireServant.ghoulishVampireServantMain).hint("Visit your ghoulish vampire servant.");
 			}
 		}
 		for each(var npc:XXCNPC in _campFollowers) {
@@ -4909,4 +4915,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
