@@ -437,9 +437,11 @@ public class PerkMenu extends BaseContent {
 
 	public function summonsbehaviourOptions(page:int = 1):void {
         var attackingElementalTypeFlag:int = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
+		var attackingEpicElementalTypeFlag:int = flags[kFLAGS.ATTACKING_EPIC_ELEMENTAL_TYPE];
         var elementalConjuerSummons:int = flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS];
         var setflag:Function = curry(setFlag,summonsbehaviourOptions);
         var attackingElementalType:Function = curry(setflag,kFLAGS.ATTACKING_ELEMENTAL_TYPE);
+		var attackingEpicElementalType:Function = curry(setflag,kFLAGS.ATTACKING_EPIC_ELEMENTAL_TYPE);
 		clearOutput();
 		menu();
 		outputText("You can choose how your summoned elementals will behave during each fight.\n\n");
@@ -464,7 +466,20 @@ public class PerkMenu extends BaseContent {
             case 12: outputText("Purity"); break;
             case 13: outputText("Corruption"); break;
 		}
+		outputText("\n\n<b>Epic Elemental, which would attack in case option to them helping in attacks is enabled:</b>\n");
+        switch(attackingEpicElementalTypeFlag){
+			case 31: outputText("Air"); break;
+            case 32: outputText("Earth"); break;
+            case 33: outputText("Fire"); break;
+            case 34: outputText("Water"); break;
+		}
+		//TODO add interim menu to allow options between basic and elementals
+		//TODO Change Epic attack to take care of new flag
 		if (page == 1) {
+			if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) addButton(0, "Basic", selectBasicElementalType);
+			if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(0, "Epic", selectEpicElementalType);
+		}
+		if (page == 2) {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir) && attackingElementalTypeFlag != 1) addButton(0, "Air", attackingElementalType,1);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && attackingElementalTypeFlag != 2) addButton(1, "Earth", attackingElementalType,2);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && attackingElementalTypeFlag != 3) addButton(2, "Fire", attackingElementalType,3);
@@ -474,7 +489,7 @@ public class PerkMenu extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal) && attackingElementalTypeFlag != 9) addButton(6, "Metal", attackingElementalType, 9);
 			addButton(9, "2nd", summonsbehaviourOptions, page + 1);
 		}
-		if (page == 2)  {
+		if (page == 3)  {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce) && attackingElementalTypeFlag != 5) addButton(0, "Ice", attackingElementalType,5);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning) && attackingElementalTypeFlag != 6) addButton(1, "Lightning", attackingElementalType,6);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness) && attackingElementalTypeFlag != 7) addButton(2, "Darkness", attackingElementalType,7);
@@ -482,6 +497,12 @@ public class PerkMenu extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity) && attackingElementalTypeFlag != 12) addButton(4, "Purity", attackingElementalType,12);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption) && attackingElementalTypeFlag != 13) addButton(5, "Corruption", attackingElementalType, 13);
 			addButton(9, "1st", summonsbehaviourOptions, page - 1);
+		}
+		if (page == 4) {
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir) && attackingElementalTypeFlag != 1) addButton(0, "Air", attackingElementalType,31);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth) && attackingElementalTypeFlag != 2) addButton(1, "Earth", attackingElementalType,32);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire) && attackingElementalTypeFlag != 3) addButton(2, "Fire", attackingElementalType,33);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater) && attackingElementalTypeFlag != 4) addButton(3, "Water", attackingElementalType,34);
 		}
 		if (elementalConjuerSummons > 1) addButton(10, "NotHelping", setflag, kFLAGS.ELEMENTAL_CONJUER_SUMMONS, 1);
 		if (player.hasStatusEffect(StatusEffects.SummonedElementals)) {
@@ -500,8 +521,14 @@ public class PerkMenu extends BaseContent {
 			addButtonDisabled(12, "Helping", "Req. to have summoned at least 1 elemental.");
 			addButtonDisabled(13, "Melee+Help", "Req. to have summoned at least 1 elemental.");
 		}
-		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
-        else addButton(14, "Back", displayPerks);
+		if (page == 1) {
+					if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
+					else addButton(14, "Back", displayPerks);
+		}
+		else {
+			addButton(14, "Back", summonsbehaviourOptions, 1);
+		}
+
         function elementalAttackReplacingPCmeleeAttack():void {
             flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 2;
             if (flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] == 0) {
