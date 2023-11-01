@@ -1610,56 +1610,55 @@ public class Combat extends BaseContent {
             else bestGolem[0]();
         }
         if (ui.isEpicElementalTurn()) {
-            //array of epic elementals
-            // [Req. status, body type (Elemental), function type]
-            // Oversimplified?
-            var epicArray:Array = [
-                [StatusEffects.SummonedElementalsAirE   , AIR   , AIR_E],
-                [StatusEffects.SummonedElementalsEarthE , EARTH , EARTH_E],
-                [StatusEffects.SummonedElementalsFireE  , FIRE  , FIRE_E],
-                [StatusEffects.SummonedElementalsWaterE , WATER , WATER_E]
-            ]
-            //Find the best rank & elect possible sources
-            var epicRank:int = -1;
-            var epicChoices:Array = [];
-            for each (var epic:Array in epicArray)
-                if (player.hasStatusEffect(epic[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != epic[1])) //can use
-                    //compare ranks
-                    if (player.statusEffectv2(epic[0]) > epicRank) {
-                        epicChoices = [epic[2]];
-                        epicRank = player.statusEffectv2(epic[0]);
-                    }
-                    else if (player.statusEffectv2(epic[0]) == epicRank)
-                        epicChoices.push(epic[2]);
-            outputText("\n\n");
-            if (epicChoices.length == 0) baseelementalattacks(NONE_E);
-            else baseelementalattacks(epicChoices[rand(epicChoices.length)]);
+            
+            var attackingEpicElementalTypeFlag:int = flags[kFLAGS.ATTACKING_EPIC_ELEMENTAL_TYPE];
+
+            var epicElementalObj:Object = {
+                31: [StatusEffects.SummonedElementalsAirE, AIR],
+                32: [StatusEffects.SummonedElementalsEarthE, EARTH],
+                33: [StatusEffects.SummonedElementalsFireE, FIRE],
+                34: [StatusEffects.SummonedElementalsWaterE, WATER]
+            }
+
+            if (epicElementalObj.hasOwnProperty(attackingEpicElementalTypeFlag)) {
+                var elementalEpicSelection:Array = epicElementalObj[attackingEpicElementalTypeFlag];
+                //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
+                if (!player.hasStatusEffect(elementalEpicSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalEpicSelection[1])) {
+                    ui.doEpicElementalTurn();
+                } else {
+                    baseelementalattacks(attackingEpicElementalTypeFlag);
+                }
+            }
         }
         if (ui.isElementalTurn()) {
-            //array of elementals
-            // [Req. status, function type]
-            // Oversimplified?
-            var elemArray:Array = [
-                [StatusEffects.SummonedElementalsAir    , AIR],
-                [StatusEffects.SummonedElementalsEarth  , EARTH],
-                [StatusEffects.SummonedElementalsFire   , FIRE],
-                [StatusEffects.SummonedElementalsWater  , WATER]
-            ]
-            //Find the best rank & elect possible sources
-            var elemRank:int = -1;
-            var elemChoices:Array = [];
-            for each (var elem:Array in elemArray)
-                if (player.hasStatusEffect(elem[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != elem[1])) //can use
-                    //compare ranks
-                    if (player.statusEffectv2(elem[0]) > elemRank) {
-                        elemChoices = [elem[1]];
-                        elemRank = player.statusEffectv2(elem[0]);
-                    }
-                    else if (player.statusEffectv2(elem[0]) == elemRank)
-                        elemChoices.push(elem[1]);
-            outputText("\n\n");
-            if (elemChoices.length == 0) baseelementalattacks(NONE);
-            else baseelementalattacks(elemChoices[rand(elemChoices.length)]);
+            
+            var attackingElementalTypeFlag:int = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
+
+            var baseElementalObj:Object = {
+                1: [StatusEffects.SummonedElementalsAir, AIR],
+                2: [StatusEffects.SummonedElementalsEarth, EARTH],
+                3: [StatusEffects.SummonedElementalsFire, FIRE],
+                4: [StatusEffects.SummonedElementalsWater, WATER],
+                5: [StatusEffects.SummonedElementalsIce, ICE],
+                6: [StatusEffects.SummonedElementalsLightning, LIGHTNING],
+                7: [StatusEffects.SummonedElementalsDarkness, DARKNESS],
+                8: [StatusEffects.SummonedElementalsWood, WOOD],
+                9: [StatusEffects.SummonedElementalsMetal, METAL],
+                10: [StatusEffects.SummonedElementalsEther, ETHER],
+                11: [StatusEffects.SummonedElementalsPoison, POISON],
+                12: [StatusEffects.SummonedElementalsPurity, PURITY],
+                13: [StatusEffects.SummonedElementalsCorruption, CORRUPTION]
+            }
+
+            if (baseElementalObj.hasOwnProperty(attackingElementalTypeFlag)) {
+                var elementalSelection:Array = baseElementalObj[attackingElementalTypeFlag];
+                //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
+                if (!player.hasStatusEffect(elementalSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalSelection[1])) {
+                    ui.doElementalTurn();
+                } else {
+                    baseelementalattacks(attackingElementalTypeFlag);
+                }
+            }
         }
         flushOutputTextToGUI();
     }
@@ -1739,9 +1738,9 @@ public class Combat extends BaseContent {
     public function baseelementalattacks(elementType:int = -1):void {
         if (elementType == -1) {
             elementType = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
-        } else {
+        } /*else {
             flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = elementType;
-        }
+        }*/
         var summonedElementals:int;
 		var summonedElementalsMulti:Number = 1;
 		var summonedEpicElemental:Boolean = false;
