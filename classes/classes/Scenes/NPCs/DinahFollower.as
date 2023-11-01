@@ -244,6 +244,8 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
 			addButton(10, consumables.MADMENK.shortName, buyItem3, 11).hint("Buy a Madmen knowledge.");
+			if (player.hasItem(weaponsrange.HARKON1, 2)) addButton(12, "Harkonnen II", getHarkonnenIIMade);
+			else addButtonDisabled(12, "???", "Req. to have 2x Harkonnen and 4,500 gems.");
 			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(13, consumables.PODBONE.shortName, buyItem1, 10).hint("Buy a pack of demon bones.");
 			else addButtonDisabled(13, "???", "Offers only for Necromancers.");
 			addButton(14, "Back", DinahShopMainMenu);
@@ -417,6 +419,16 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			player.gems -= itype.value * _extra;
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu3);
+		}
+		
+		public function getHarkonnenIIMade():void{
+			clearOutput();
+			player.destroyItems(weaponsrange.HARKON1, 2);
+			player.gems -= 4500;
+			statScreenRefresh();
+			outputText("Text will arrive shortly so stay tuned.");
+			inventory.takeItem(weaponsrange.HARKON2, DinahShopMainMenu1);
+			cheatTime(1/2);
 		}
 		
 		public function buyHowlingBansheeMechAndUpgrades():void {

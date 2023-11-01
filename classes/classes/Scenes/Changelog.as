@@ -40,8 +40,8 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			//outputText("-Pureblood vampire PC that talked with Diva about vampirism gaining ability to create ghoulish vampire servant. It would be as event in general explore during the night.\n");
 			outputText("-New range weapon (by Ormael): Twin Desert Eagles - can be gained by combining 2x Desert Eagle weapon. Cost 1240 gems. Base atk is 25 and ammo clip size 4. It's Dual Firearm type range weapon.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Starting traits desc on choice screen corrected to avoid misleading players (they are most of the time +50% stat multi bonuses (or jsut 50 sens) not +x% to maximum.\n");
+			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -51,7 +51,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
-			outputText("-Fixed bugs: \n\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: Telekinetic Grasp have unlimted powe... duration\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");

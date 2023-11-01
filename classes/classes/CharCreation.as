@@ -1157,7 +1157,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentStrength():void {
 			clearOutput();
-			outputText("Are you stronger than normal? (+"+(50 * (player.newGamePlusMod() + 1))+" max Strength)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
+			outputText("Are you stronger than normal? (+50% to strength multi)\n\nStrength increases your combat damage, and your ability to hold on to an enemy or pull yourself away.");
 			menu();
 			addButton(0, "Yes", setEndowmentStrength);
 			addButton(1, "No", chooseEndowment, true);
@@ -1165,7 +1165,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentThoughness():void {
 			clearOutput();
-			outputText("Are you unusually tough? (+"+(50 * (player.newGamePlusMod() + 1))+" max Toughness)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
+			outputText("Are you unusually tough? (+50% to toughness multi)\n\nToughness gives you more HP and increases the chances an attack against you will fail to wound you.");
 			menu();
 			addButton(0, "Yes", setEndowmentToughness);
 			addButton(1, "No", chooseEndowment, true);
@@ -1173,7 +1173,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSpeed():void {
 			clearOutput();
-			outputText("Are you very quick?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Speed)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
+			outputText("Are you very quick?  (+50% to speed multi)\n\nSpeed makes it easier to escape combat and grapples.  It also boosts your chances of evading an enemy attack and successfully catching up to enemies who try to run.");
 			menu();
 			addButton(0, "Yes", setEndowmentSpeed);
 			addButton(1, "No", chooseEndowment, true);
@@ -1181,7 +1181,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentSmarts():void {
 			clearOutput();
-			outputText("Are you a quick learner?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Intellect)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
+			outputText("Are you a quick learner?  (+50% to intellect multi)\n\nIntellect can help you avoid dangerous monsters or work with machinery.  It will also boost the power of any spells you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentSmarts);
 			addButton(1, "No", chooseEndowment, true);
@@ -1189,7 +1189,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentWise():void {
 			clearOutput();
-			outputText("Are you a wise person?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Wisdom)\n\nWisdom can help you understand mysterious objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
+			outputText("Are you a wise person?  (+50% to wisdom multi)\n\nWisdom can help you understand mysterious objects or work with soulforce.  It will also boost the power of any soulskills you may learn in your travels.");
 			menu();
 			addButton(0, "Yes", setEndowmentWise);
 			addButton(1, "No", chooseEndowment, true);
@@ -1197,7 +1197,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentLibido():void {
 			clearOutput();
-			outputText("Do you have an unusually high sex-drive?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Libido)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
+			outputText("Do you have an unusually high sex-drive?  (+50% to libido multi)\n\nLibido affects how quickly your lust builds over time.  You may find a high libido to be more trouble than it's worth...");
 			menu();
 			addButton(0, "Yes", setEndowmentLibido);
 			addButton(1, "No", chooseEndowment, true);
@@ -1205,7 +1205,7 @@ import coc.view.MainView;
 
 		private function confirmEndowmentTouch():void {
 			clearOutput();
-			outputText("Is your skin unusually sensitive?  (+"+(50 * (player.newGamePlusMod() + 1))+" max Sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
+			outputText("Is your skin unusually sensitive?  (+50 current sensitivity)\n\nSensitivity affects how easily touches and certain magics will raise your lust.  Very low sensitivity will make it difficult to orgasm.");
 			menu();
 			addButton(0, "Yes", setEndowmentTouch);
 			addButton(1, "No", chooseEndowment, true);

@@ -4362,7 +4362,7 @@ public class Combat extends BaseContent {
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
-                        if (player.weaponRange == weaponsrange.HARKON1) {
+                        if (player.weaponRange == weaponsrange.HARKON1 || player.weaponRange == weaponsrange.HARKON2) {
 							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doTrueDamage(damage, true, true);
 								doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -4611,6 +4611,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
 		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 2;
+        if (player.weaponRange == weaponsrange.HARKON2) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
@@ -4663,7 +4664,7 @@ public class Combat extends BaseContent {
                 shootWeapon();
             } else {
                 if (player.weaponRange != weaponsrange.M1CERBE && player.weaponRange != weaponsrange.TM1CERB && player.weaponRange != weaponsrange.TRFATBI && player.weaponRange != weaponsrange.HARPGUN && player.weaponRange != weaponsrange.SNIPPLE && player.weaponRange != weaponsrange.TOUHOM3 && player.weaponRange != weaponsrange.DERPLAU && player.weaponRange != weaponsrange.DUEL_P_
-                        && player.weaponRange != weaponsrange.FLINTLK && player.weaponRange != weaponsrange.HARKON1) outputText(" Due to slow reloading you spent rest of your round on it and can't act until next turn.");
+                        && player.weaponRange != weaponsrange.FLINTLK && player.weaponRange != weaponsrange.HARKON1 && player.weaponRange != weaponsrange.HARKON2) outputText(" Due to slow reloading you spent rest of your round on it and can't act until next turn.");
                 outputText("\n\n");
                 enemyAI();
             }
@@ -11834,6 +11835,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.TM1CERB) player.ammo = 2;
+        if (player.weaponRange == weaponsrange.HARKON2) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;

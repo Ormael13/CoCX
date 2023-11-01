@@ -2316,6 +2316,7 @@ public class Camp extends NPCAwareContent{
 			[weaponsrange.M1CERBE, weaponsrange.TM1CERB],
 			[weaponsrange.ALAKABL, weaponsrange.DALAKABL],
 			[weaponsrange.DESEAGL, weaponsrange.TDEEAGL]
+			//[weaponsrange.HARKON1, weaponsrange.HARKON2],
 		];
 		addButton(0, "Combine Weapons", menuCombineStaging, weaponList);
 		addButton(4, "Seperate Weapons", menuSeperateStaging, weaponList)

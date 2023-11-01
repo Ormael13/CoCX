@@ -2099,7 +2099,7 @@ import flash.utils.getQualifiedClassName;
 					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 					removeStatusEffect(StatusEffects.TelekineticGrab);
 				}
-				addStatusValue(StatusEffects.MysticWeb, 1, -1);
+				addStatusValue(StatusEffects.TelekineticGrab, 1, -1);
 				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 				return false;
 			}
