@@ -4251,7 +4251,7 @@
                 <hide part="legs/*"/>
                 <show part="legs/chitin"/>
             </case>
-			<case test="lowerBody==LowerBody.ARMORED_LEGS">
+			<case values="LowerBody.ARMORED_LEGS">
 				<show part="feet/arigean"/>
 			</case>
             <!--<case values="LowerBody.GARGOYLE">TODO </case>-->
