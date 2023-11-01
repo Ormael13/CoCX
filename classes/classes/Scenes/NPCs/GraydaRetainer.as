@@ -9,6 +9,7 @@ import classes.BodyParts.Eyes;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 	
 public class GraydaRetainer extends NPCAwareContent
 	{
@@ -19,6 +20,7 @@ public class GraydaRetainer extends NPCAwareContent
 		}
 
 public function graydaEncounter():void {
+	spriteSelect(SpriteDb.s_grayda);
 	clearOutput();
 	if (player.eyes.type == Eyes.ARIGEAN && player.tailType == Tail.ARIGEAN_GREEN) SceneLib.theTrench.graydaEncounterTheTrench();
 	else {
@@ -27,6 +29,7 @@ public function graydaEncounter():void {
 	}
 }
 public function graydaEncounterWin():void {
+	spriteSelect(SpriteDb.s_grayda);
 	clearOutput();
 	outputText("A final blow from your opponent sends you off your boat and into the water and with your body as tired as it is, you're unable to keep your head above the water. however the Arigean decides to spare you from a watery grave, Picking you up out of the water and carrying your tired body onto the boat, she ungraciously drops you onto the deck. Struggling to look up you find she’s very quickly pinned you to the floor, her cheeks are flushed blue and her breathing is heavy, it’s clear what her intentions are.\n\n");
 	if (player.gender == 3) {
