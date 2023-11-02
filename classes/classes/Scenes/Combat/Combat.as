@@ -5655,11 +5655,6 @@ public class Combat extends BaseContent {
      */
 	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
 		var damage:Number = 0;
-		//------------
-		// DAMAGE
-		//------------
-		//Determine damage
-		//BASIC DAMAGE STUFF
 		if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)) {
 			damage += player.tou;
 			damage += scalingBonusToughness() * 0.2;
@@ -5762,6 +5757,38 @@ public class Combat extends BaseContent {
             damage *= AFAAM;
         }
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
+		damage *= meleePhysicalForce();
+		return damage;
+	}
+	public function meleeUnarmedDamageNoLagSingle():Number {
+		var damage:Number = 0;
+		if (player.hasPerk(PerkLib.VerdantMight)){
+            damage += player.tou;
+            damage += scalingBonusToughness() * 0.25;
+        }
+        else{
+            damage += player.str;
+            damage += scalingBonusStrength() * 0.25;
+        }
+        if (player.hasPerk(PerkLib.SpeedDemon)) {
+            damage += player.spe;
+            damage += scalingBonusSpeed() * 0.20;
+        }
+        damage += unarmedAttack();
+        damage = harpyDamageBonus(damage);
+        damage = itemsBonusDamageDamage(damage);
+        damage = statusEffectBonusDamage(damage);
+        //PERKS
+        if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+        if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+            if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+            if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+            if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+        }
+        if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet))) damage *= 2;
+		damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
 		damage *= meleePhysicalForce();
 		return damage;
 	}
@@ -5976,6 +6003,22 @@ public class Combat extends BaseContent {
         else if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) weaponMassiveMastery(meleeMasteryEXPgains);
         else weaponNormalMastery(meleeMasteryEXPgains);
     }
+	public function meleeUnarmedMasteryGain(hit:int, crit:int):void{
+		var baseMasteryXP:Number = 1;
+		if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
+            var bMXPMulti:Number = 1;
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) bMXPMulti += 1.5;
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) bMXPMulti += 2;
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 4) bMXPMulti += 2.5;
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 5) bMXPMulti += 3;
+            if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 6) bMXPMulti += 5;
+			baseMasteryXP *= bMXPMulti;
+        }
+		var masteryXPCrit:Number = baseMasteryXP * crit * 2;
+        var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
+        var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
+		unarmedCombatXP(meleeMasteryEXPgains);
+	}
 
     /**
      * Do melee attack
@@ -12456,13 +12499,10 @@ public function OrcaJuggle():void {
         addButton(0, "Next", combatMenu, false);
     } else {
         fatigue(20, USEFATG_PHYSICAL);
-        var damage:Number = unarmedAttack();
-        damage += player.str;
-        damage += scalingBonusStrength() * 0.25;
+        var damage:Number = 0;
+        damage += meleeUnarmedDamageNoLagSingle();
         if (damage < 10) damage = 10;
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-        damage = itemsBonusDamageDamage(damage);
-        damage = statusEffectBonusDamage(damage);
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
             damage *= 1.50;
@@ -12509,9 +12549,8 @@ public function OrcaCleanup():void {
     player.addStatusValue(StatusEffects.OrcaPlayRoundLeft, 1, -1);
     if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0) {
         outputText("\n\nUnable to prolong the game further you finally let your opponent drop to the ground. ");
-        var damage:Number = unarmedAttack();
-        damage += player.str;
-        damage += scalingBonusStrength() * 0.25;
+        var damage:Number = 0;
+        damage += meleeUnarmedDamageNoLagSingle();
         doPhysicalDamage(damage, true, true);
         outputText(" damage. ");
         outputText("[monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
@@ -12541,13 +12580,10 @@ public function OrcaWack():void {
         addButton(0, "Next", combatMenu, false);
     } else {
         fatigue(20, USEFATG_PHYSICAL);
-        var damage:Number = unarmedAttack();
-        damage += player.str;
-        damage += scalingBonusStrength() * 0.25;
+        var damage:Number = 0;
+        damage += meleeUnarmedDamageNoLagSingle();
         if (damage < 10) damage = 10;
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-        damage = itemsBonusDamageDamage(damage);
-        damage = statusEffectBonusDamage(damage);
         if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
             damage *= 1.50;
             monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -12615,7 +12651,7 @@ public function OrcaSmash():void {
 
 public function OrcaImpale():void {
     clearOutput();
-    if (player.isSpearTypeWeapon() || player.isSwordTypeWeapon()) {
+    if (player.isSpearTypeWeapon() || player.isSwordTypeWeapon() || player.isDuelingTypeWeapon()) {
         outputText("You cannot impale your foe without a piercing weapon.");
         addButton(0, "Next", combatMenu, false);
     } else {
@@ -12674,9 +12710,8 @@ public function OrcaImpale():void {
         outputText(". ");
         //Enemy faints -
         outputText("You finish the game by swinging your opponent off your weapon, brutaly tossing [monster him] to the side. ");
-        damage = unarmedAttack();
-        damage += player.str;
-        damage += scalingBonusStrength() * 0.25;
+        damage = 0;
+        damage += meleeUnarmedDamageNoLagSingle();
         doPhysicalDamage(damage, true, true);
         outputText(" damage. ");
         combat.checkAchievementDamage(damage);
@@ -12700,9 +12735,8 @@ public function OrcaImpale():void {
 public function OrcaLeggoMyEggo():void {
     clearOutput();
     outputText("You let [themonster] drop, tired of playing.");
-    var damage:Number = unarmedAttack();
-    damage += player.str;
-    damage += scalingBonusStrength() * 0.25;
+    var damage:Number = 0;
+    damage += meleeUnarmedDamageNoLagSingle();
     doPhysicalDamage(damage, true, true);
     outputText(" damage. ");
     monster.removeStatusEffect(StatusEffects.OrcaPlay);
@@ -12827,10 +12861,9 @@ public function Tremor():void {
     fatigue(10, USEFATG_PHYSICAL);
     //WRAP IT UPPP
     outputText("You wriggle underground, collapsing the tunnel behind you. You shake, causing some serious seismic activity. [themonster] loses [monster his] balance, falling to the ground, dazed. ");
-    damage = unarmedAttack();
+    damage = 0;
+	damage += meleeUnarmedDamageNoLagSingle();
     damage *= player.effectiveTallness / 10;
-    damage *= scalingBonusStrength() * 0.5;
-    damage = statusEffectBonusDamage(damage);
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
     if (monster.plural) damage *= 5;
     damage = Math.round(damage);
@@ -13501,10 +13534,8 @@ public function Guillotine():void {
         }
     }
     fatigue(20, USEFATG_PHYSICAL);
-    var damage:int = (monster.maxHP() * (.10 + rand(15) / 100) * 1.5) + unarmedAttack();
-    damage *= scalingBonusStrength()*0.4;
-    damage *= scalingBonusToughness()*0.2;
-    damage = statusEffectBonusDamage(damage);
+    var damage:int = (monster.maxHP() * (.10 + rand(15) / 100) * 1.5) + meleeUnarmedDamageNoLagSingle();
+    damage += scalingBonusToughness()*0.2;
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
     if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
@@ -14662,9 +14693,8 @@ public function VampireLeggoMyEggo():void {
 
 //Claws Rend
 public function clawsRendDamage():void {
-    var damage:int;
-    damage = unarmedAttack();
-    damage += scalingBonusStrength() * 0.5;
+    var damage:int = 0;
+    damage += meleeUnarmedDamageNoLagSingle();
     if (player.arms.type == Arms.DISPLACER) damage*= 2; //Displacers got extra limbs to rend
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -14829,9 +14859,8 @@ public function HypnosisMaintain():void {
 public function bearHug():void {
     fatigue(30, USEFATG_PHYSICAL);
     outputText("You squeeze [themonster] with a mighty hug, slowly crushing the life out of [monster him]. ");
-    var damage:int = unarmedAttack();
-    damage += player.str;
-    damage += scalingBonusStrength() * 0.5;
+    var damage:int = 0;
+    damage += meleeUnarmedDamageNoLagSingle();
     if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
         damage += player.str;
         damage += scalingBonusStrength() * 0.5;
@@ -15496,14 +15525,13 @@ public function greatDive():void {
     doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
     fatigue(50, USEFATG_PHYSICAL);
-    var damage:Number = unarmedAttack();
-    damage += player.str;
+    var damage:Number = 0;
+    damage += meleeUnarmedDamageNoLagSingle();
     damage += player.spe * 2;
     if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
         damage += player.str;
         damage += player.spe * 2;
     }
-    damage = statusEffectBonusDamage(damage);
     if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
     if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.5;
     if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3) damage *= 2;
@@ -16002,18 +16030,15 @@ public function asurasXFingersOfDestruction(fingercount:String):void {
     if (player.hasPerk(PerkLib.PrestigeJobBerserker)) FoDMulti *= 2;
     if (player.hasPerk(PerkLib.VexedNocking)) FoDMulti *= 2;
     player.wrath -= Math.round(player.maxWrath() * 0.5);
-    var damage:Number = unarmedAttack();
-    damage += player.str;
+    var damage:Number = 0;
+    damage += meleeUnarmedDamageNoLagSingle();
     damage += ghostStrength();
-    damage += scalingBonusStrength() * 0.25;
     if (damage < 50) damage = 50;
     if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
         if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
         else damage *= 2;
     }
     if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-    damage = itemsBonusDamageDamage(damage);
-    damage = statusEffectBonusDamage(damage);
     damage *= (1 + FoDMulti);
     var crit:Boolean = false;
     var critChance:int = 65;

@@ -1312,12 +1312,12 @@ use namespace CoC;
 		}
 		public function usingSingleFlyingSword():Boolean
 		{
-			return weaponFlyingSwordsPerk == "Small" || weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Massive";
+			return weaponFlyingSwordsPerk == "Small" || weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Massive";//weaponSpecials("Dual Massive") ||  || 
 		}
 		//Hold with Both Hands checks
 		public function gaindHoldWithBothHandBonus():Boolean
 		{
-			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (isDualWieldMelee() && playerHasFourArms() && hasPerk(PerkLib.GigantGripSu)));
+			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (playerHasFourArms() && (weaponSpecials("Dual Small") || weaponSpecials("Dual") || (weaponSpecials("Dual Large") && hasPerk(PerkLib.GigantGripSu)))));
 		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
