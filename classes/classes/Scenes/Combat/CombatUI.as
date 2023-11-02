@@ -454,7 +454,20 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
+			btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.").icon("A_Tease");
+			if (combat.isEnemyInvisible) btnTease.disable("You cannot tease an opponent you cannot see or target, heck is it even looking at you right now?");
 			//addButton(4, "Release", combat.VampireLeggoMyEggo);
+			//combat.mspecials.buildMenu(magspButtons);
+			if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
+			if (combat.isPlayerSilenced()) {
+				btnMSpecials.disable();
+			}
+			// Submenu - Spells
+			//BuildSpellBookMenu(spellBookButtons);
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("A_Magic")
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
+			} else if (!combat.canUseMagic()) btnMagic.disable().icon("A_Magic")
 		} else if (monster.hasStatusEffect(StatusEffects.MysticWeb)) {
 			menu();
 			addButton(0, "Tease", combat.WebTease).hint("Toy with your opponent");

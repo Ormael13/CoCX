@@ -12,7 +12,7 @@ package classes.Items.WeaponsRange
 		
 		public function TwinDesertEagles() 
 		{
-			super("TDeEagl", "TDesertEagles", "Twin Desert Eagles", "a Twin Desert Eagles", "shot", 25, 1240, "A twin hand firearms, the desert eagles has the largest bullets out of the pistol family. Their shots are deadly and precises through the guns has one hell of a recoil.", "Dual Firearms");
+			super("TDeEagl", "TDesertEagles", "Twin Desert Eagles", "a Twin Desert Eagles", "shot", 25, 1240, "A twin hand firearms, the desert eagles has the largest bullets out of the pistol family. Their shots are deadly and precises through the guns has one hell of a recoil.\n\nGoblin Mech Compatibile", "Dual Firearms");
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
