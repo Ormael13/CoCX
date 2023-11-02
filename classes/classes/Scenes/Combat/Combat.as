@@ -8104,6 +8104,77 @@ public class Combat extends BaseContent {
     }
 
     //DEAL DAMAGE
+    public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        if (damage < 1) damage = 1;
+		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
+        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            if (player.armor == armors.SCANSC) {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+            dynStats("lus", 3);
+        }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            var bonusDamageFromMissingHP:Number = 1;
+            if (player.hp100 < 100) {
+                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+            }
+            damage *= bonusDamageFromMissingHP;
+        }
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+            if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+            if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
+        }
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(camp.codex.checkUnlocked() / 100) * 3));
+			else damage *= (1 + Math.round(camp.codex.checkUnlocked() / 100));
+		}
+		damage *= EyesOfTheHunterDamageBonus();
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+        if (apply) {
+            monster.HP -= damage;
+			var WrathGains:Number = 0;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
+            else WrathGains += Math.round((damage / 10) * BonusWrathMult);
+			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
+				player.HP += damage;
+				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
+				EngineCore.WrathChange(WrathGains);
+			}
+			else monster.wrath += WrathGains;
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
+        }
+        if (display) CommasForDigits(damage);
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+    }
+
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
@@ -8180,7 +8251,7 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
+	public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
         if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && MonsterIsBleeding()) {
 			var ddd:Number = 1.1;
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) ddd += 0.15;
@@ -8704,77 +8775,6 @@ public class Combat extends BaseContent {
 		doLightingDamage(ldamage, apply, display);
 		return split;
 	}
-
-	public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        if (damage < 1) damage = 1;
-		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            if (player.armor == armors.SCANSC) {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-            dynStats("lus", 3);
-        }
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
-            if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-            if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
-        }
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
-		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(camp.codex.checkUnlocked() / 100) * 3));
-			else damage *= (1 + Math.round(camp.codex.checkUnlocked() / 100));
-		}
-		damage *= EyesOfTheHunterDamageBonus();
-        if (damage == 0) MSGControllForEvasion = true;
-        if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
-            doNext(endHpVictory);
-        }
-        damage = Math.round(damage);
-        if (damage < 0) damage = 1;
-        if (apply) {
-            monster.HP -= damage;
-			var WrathGains:Number = 0;
-            var BonusWrathMult:Number = 1;
-            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
-            if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
-            else WrathGains += Math.round((damage / 10) * BonusWrathMult);
-			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
-				player.HP += damage;
-				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				EngineCore.WrathChange(WrathGains);
-			}
-			else monster.wrath += WrathGains;
-            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
-        }
-        if (display) CommasForDigits(damage);
-        //Interrupt gigaflare if necessary.
-        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
-        //Keep shit in bounds.
-        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
-        return damage;
-    }
 
     public static const USEMANA_NORMAL:int = 0;
     public static const USEMANA_MAGIC:int = 1;

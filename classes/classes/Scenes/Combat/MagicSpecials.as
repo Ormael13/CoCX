@@ -4879,7 +4879,7 @@ public class MagicSpecials extends BaseCombatContent {
 		useMana(50);
 		outputText("You weave your hand causing [themonster] body to levitate and fly to you as you use telekinesis to hold your opponent.\n\n");
 		monster.createStatusEffect(StatusEffects.TelekineticGrab, 4 + rand(2), 0, 0, 0);
-		player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 6, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.CooldownTelekineticGrab, 12, 0, 0, 0);
 		enemyAI();
 	}
 

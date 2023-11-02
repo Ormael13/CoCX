@@ -12,7 +12,7 @@ package classes.Items.WeaponsRange
 		
 		public function TwinM1Cerberuses() 
 		{
-			super("TM1Cerb", "TwinM1Cerberuses", "Twin M1 Cerberuses", "a Twin M1 Cerberuses", "shot", 45, 1860, "A twin rifles prized for their precision and versatility, the Cerberuses shoots multiple bullet in salvo ensuring that if one shot land all the others do with minimal recoil.", "Dual 2H Firearms");
+			super("TM1Cerb", "TwinM1Cerberuses", "Twin M1 Cerberuses", "a Twin M1 Cerberuses", "shot", 45, 1860, "A twin rifles prized for their precision and versatility, the Cerberuses shoots multiple bullet in salvo ensuring that if one shot land all the others do with minimal recoil.\n\nGoblin Mech Compatibile", "Dual 2H Firearms");
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
