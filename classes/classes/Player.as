@@ -1314,6 +1314,11 @@ use namespace CoC;
 		{
 			return weaponFlyingSwordsPerk == "Small" || weaponFlyingSwordsPerk == "Large" || weaponFlyingSwordsPerk == "Massive";
 		}
+		//Hold with Both Hands checks
+		public function gaindHoldWithBothHandBonus():Boolean
+		{
+			return hasPerk(PerkLib.HoldWithBothHands) && !isFistOrFistWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && (!isDualWieldMelee() || (isDualWieldMelee() && playerHasFourArms() && hasPerk(PerkLib.GigantGripSu)));
+		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
@@ -1519,7 +1524,7 @@ use namespace CoC;
 					attack += SceneLib.combat.unarmedAttack();
 				}
 			}
-			if (hasPerk(PerkLib.PrestigeJobTempest) && (weaponSpecials("Dual Small") || weaponSpecials("Dual") || weaponSpecials("Dual Large") || weapon == game.weapons.DAISHO)) {
+			if (hasPerk(PerkLib.PrestigeJobTempest) && (isDualWieldMelee() || weapon == game.weapons.DAISHO)) {
 				attack += (5 * newGamePlusMod);
 			}
 			//Konstantine buff
@@ -1621,17 +1626,17 @@ use namespace CoC;
 		}
 		//Is DualWield
 		public function isDualWieldMelee():Boolean
-        	{
-            		return weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
-        	}
-        	public function isDualWieldRanged():Boolean
-        	{
-            		return weaponRangePerk == "Dual Firearms" || weaponRangePerk == "Dual 2H Firearms";
-        	}
-        	public function isDualWield():Boolean
-        	{
-            	return isDualWieldMelee() || isDualWieldRanged();
-        	}
+        {
+        	return weaponSpecials("Dual Massive") || weaponSpecials("Dual Large") || weaponSpecials("Dual Small") || weaponSpecials("Dual");
+        }
+        public function isDualWieldRanged():Boolean
+        {
+        	return weaponRangePerk == "Dual Firearms" || weaponRangePerk == "Dual 2H Firearms";
+        }
+        public function isDualWield():Boolean
+        {
+			return isDualWieldMelee() || isDualWieldRanged();
+        }
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
 		{

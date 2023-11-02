@@ -2201,8 +2201,6 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= ((1.75 + buffMultiplier) * impaleMultiplier());
 			else damage *= (1.75 + buffMultiplier);
         }
-        //Apply AND DONE!
-        damage *= (monster.damagePercent() / 100);
         //One final round
         damage = Math.round(damage);
         if (damage <= 0) {
@@ -5682,7 +5680,6 @@ public class Combat extends BaseContent {
 			}
 		}
         damage = harpyDamageBonus(damage);
-        if (damage < 10) damage = 10;
 		if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
 			damage *= 2;
 			if (player.perkv1(IMutationsLib.YetiFatIM) >= 2) damage *= 1.5;
@@ -5697,11 +5694,13 @@ public class Combat extends BaseContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		if (player.gaindHoldWithBothHandBonus()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand() || player.isPartiallyStaffTypeWeapon()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
 		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive")) damage *= meleeDualWieldDamagePenalty();
         //Weapon addition!
         damage = weaponAttackModifier(damage);
+		damage *= calculateMeleeDamageMultiplier();
+        if (damage < 10) damage = 10;
 		//All special weapon effects like...fire/ice
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR)
             damage = FireTypeDamageBonus(damage);
@@ -5742,7 +5741,8 @@ public class Combat extends BaseContent {
         if ((player.weapon == weapons.S_RULER || player.weapon == weapons.TSRULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
 		if (monster.hasStatusEffect(StatusEffects.Stunned) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.Backbreaker)) damage *= 1.5;
         // Mastery bonus damage
-		damage *= MasteryBonusDamageMelee(true);
+		if (IsFeralCombat) damage *= MasteryBonusDamageMelee(true);
+		else damage *= MasteryBonusDamageMelee();
 		//Thunderous Strikes
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
@@ -5884,10 +5884,23 @@ public class Combat extends BaseContent {
         return critDamage;
     }
 	
-    private function calculateDamageMultiplier():Number{
+    private function calculateMeleeDamageMultiplier():Number{
         var damageMult:Number = 1;
         //Sneak attack checks
         if (player.isDaggerTypeWeapon()){
+            if (monster.isIncapacitated()){
+				if (player.hasPerk(PerkLib.SneakyAttack)) damageMult += 1;
+                if (player.hasPerk(PerkLib.DeadlySneaker)) damageMult += 2;
+                if (player.hasPerk(PerkLib.Slayer)) damageMult += 3;
+            }
+        }
+        return damageMult;
+    }
+	
+    public function calculateRangeDamageMultiplier():Number{
+        var damageMult:Number = 1;
+        //Sneak attack checks
+        if (player.hasPerk(PerkLib.MarkedForDeath) && player.haveWeaponForSneakAttackRange()){
             if (monster.isIncapacitated()){
 				if (player.hasPerk(PerkLib.SneakyAttack)) damageMult += 1;
                 if (player.hasPerk(PerkLib.DeadlySneaker)) damageMult += 2;
@@ -5996,15 +6009,12 @@ public class Combat extends BaseContent {
         var critChance:Number = calculateCrit();
         var critDamage:Number = calculateCritDamage();
         var hitCounter:int = 0;
-        var damageMultBase:Number = calculateDamageMultiplier();
-        var damageMult:Number = damageMultBase;
         var fireDamage:Number = fireDamageBoostedByDao();
         var iceDamage:Number = iceDamageBoostedByDao();
         var lightningDamage:Number = lightningDamageBoostedByDao();
         var darkDamage:Number = darknessDamageBoostedByDao();
         if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage for current mana.. okay, get it, multi-attackers-fuckers!
         for(var i:int = 1; i <= flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]; i++){
-            damageMult = damageMultBase * (monster.damagePercent() / 100);
             damage = 0;
             if (rand(100) < accMelee) { // Attack hits... do stuff
                 //  get the raw damage value here
@@ -6019,7 +6029,6 @@ public class Combat extends BaseContent {
                 crit = rand(100) < critChance;
                 if(crit) damage *= critDamage;
                 hitCounter++;
-                damage *= damageMult;
                 damage = Math.round(damage);
                 // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
                 if (monster is Doppleganger) {
@@ -7210,8 +7219,6 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.VorpalClaw)) damage *= 2;
                 damage *= critDamage;
             }
-            //Apply AND DONE!
-            damage *= (monster.damagePercent() / 100);
             //One final round
             damage = Math.round(damage);
             if (SpecialEffect == "KamaitachiScythe"){
@@ -7358,41 +7365,42 @@ public class Combat extends BaseContent {
     public function flyingSwordAttackModifier(damage:Number):Number {
         var wAttack:Number = player.weaponFlyingSwordsAttack;
         if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
-        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
-        else if (wAttack < 151) damage *= (3.75 + ((wAttack - 100) * 0.02));
-        else if (wAttack < 201) damage *= (4.75 + ((wAttack - 150) * 0.015));
-        else damage *= (5.5 + ((wAttack - 200) * 0.01));
+        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.0275));
+        else if (wAttack < 151) damage *= (3.875 + ((wAttack - 100) * 0.025));
+        else if (wAttack < 201) damage *= (5.125 + ((wAttack - 150) * 0.0225));
+        else if (wAttack < 251) damage *= (6.25 + ((wAttack - 200) * 0.02));
+        else if (wAttack < 301) damage *= (7.25 + ((wAttack - 250) * 0.0175));
+        else if (wAttack < 351) damage *= (8.125 + ((wAttack - 300) * 0.015));
+        else if (wAttack < 401) damage *= (8.875 + ((wAttack - 350) * 0.0125));
+        else damage *= (9.5 + ((wAttack - 400) * 0.01));
         return damage;
     }
 
     public function weaponAttackModifier(damage:Number):Number {
         var wAttack:Number = player.weaponAttack;
         if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
-        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
-        else if (wAttack < 151) damage *= (3.75 + ((wAttack - 100) * 0.02));
-        else if (wAttack < 201) damage *= (4.75 + ((wAttack - 150) * 0.015));
-        else damage *= (5.5 + ((wAttack - 200) * 0.01));
-        return damage;
-    }
-
-    public function weaponAttackModifierSpecial(damage:Number):Number {
-        var wAttack:Number = player.weaponAttack;
-        if (wAttack < 51) damage *= (1 + (wAttack * 0.04));
-        else if (wAttack < 101) damage *= (3 + ((wAttack - 50) * 0.035));
-        else if (wAttack < 151) damage *= (4.75 + ((wAttack - 100) * 0.03));
-        else if (wAttack < 201) damage *= (6.25 + ((wAttack - 150) * 0.025));
-        else damage *= (7.5 + ((wAttack - 200) * 0.02));
+        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.0275));
+        else if (wAttack < 151) damage *= (3.875 + ((wAttack - 100) * 0.025));
+        else if (wAttack < 201) damage *= (5.125 + ((wAttack - 150) * 0.0225));
+        else if (wAttack < 251) damage *= (6.25 + ((wAttack - 200) * 0.02));
+        else if (wAttack < 301) damage *= (7.25 + ((wAttack - 250) * 0.0175));
+        else if (wAttack < 351) damage *= (8.125 + ((wAttack - 300) * 0.015));
+        else if (wAttack < 401) damage *= (8.875 + ((wAttack - 350) * 0.0125));
+        else damage *= (9.5 + ((wAttack - 400) * 0.01));
         return damage;
     }
 
     public function rangeAttackModifier(damage:Number):Number {
         var wAttack:Number = player.weaponRangeAttack;
         if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
-        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
-        else if (wAttack < 151) damage *= (3.75 + ((wAttack - 100) * 0.02));
-        else if (wAttack < 201) damage *= (4.75 + ((wAttack - 150) * 0.015));
-        else if (wAttack < 251) damage *= (5.5 + ((wAttack - 200) * 0.01));
-        else damage *= (6 + ((wAttack - 250) * 0.005));
+        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.0275));
+        else if (wAttack < 151) damage *= (3.875 + ((wAttack - 100) * 0.025));
+        else if (wAttack < 201) damage *= (5.125 + ((wAttack - 150) * 0.0225));
+        else if (wAttack < 251) damage *= (6.25 + ((wAttack - 200) * 0.02));
+        else if (wAttack < 301) damage *= (7.25 + ((wAttack - 250) * 0.0175));
+        else if (wAttack < 351) damage *= (8.125 + ((wAttack - 300) * 0.015));
+        else if (wAttack < 401) damage *= (8.875 + ((wAttack - 350) * 0.0125));
+        else damage *= (9.5 + ((wAttack - 400) * 0.01));
         return damage;
     }
 
@@ -8178,6 +8186,7 @@ public class Combat extends BaseContent {
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+		damage *= (monster.damagePercent() / 100);
 		if (damage < 1) damage = 1;
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
@@ -8383,6 +8392,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon === weapons.R_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
         damage = FireTypeDamageBonus(damage);
@@ -8440,6 +8450,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
 		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
         if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
@@ -8490,6 +8501,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.T_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
@@ -8542,6 +8554,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
         if (player.weapon == weapons.A_STAFF) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
@@ -8588,6 +8601,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8627,6 +8641,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8662,6 +8677,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8701,6 +8717,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -8736,6 +8753,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         damage = doElementalDamageMultiplier(damage);
+		damage *= (monster.damageMagicalPercent() / 100);
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -12577,7 +12595,7 @@ public function OrcaSmash():void {
         fatigue(20, USEFATG_PHYSICAL);
         var damage:Number = player.str;
         damage += scalingBonusStrength() * 0.25;
-        if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+        if (player.gaindHoldWithBothHandBonus()) damage *= 1.5;
         if (damage < 10) damage = 10;
         damage = weaponAttackModifier(damage);
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
@@ -12625,7 +12643,7 @@ public function OrcaImpale():void {
         if (player.level >= 30) SAMulti += 1;
         if (player.level >= 36) SAMulti += 1;
         damage += scalingBonusStrength() * 0.25;
-        if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+        if (player.gaindHoldWithBothHandBonus()) damage *= 1.5;
         if (damage < 10) damage = 10;
         damage = weaponAttackModifier(damage);
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
