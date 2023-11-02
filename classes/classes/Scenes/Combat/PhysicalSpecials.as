@@ -882,32 +882,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				PAMulti += 0.5;
 			}
 		}
-		damage += player.str;
-		damage += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-			damage += player.spe;
-			damage += scalingBonusSpeed() * 0.20;
-		}
-		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
-			damage += (player.spe / 2);
-			damage += scalingBonusSpeed() * 0.10;
-		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
-		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
-		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
-		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
-		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
-			else damage *= 2;
-		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
-		if (player.isFeralCombat()) damage *= combat.MasteryBonusDamageMelee(true);
-		else damage *= combat.MasteryBonusDamageMelee();
-		damage *= combat.meleePhysicalForce();
 		damage *= PAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1020,20 +997,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("foes. ");
 		else outputText("foe. ");
 		var damage:Number = 0;
-		damage += player.str;
-		damage += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
-		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
-		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
-		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
-		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 3;
 		if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-		damage *= combat.meleePhysicalForce();
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -1110,27 +1078,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.ANGSTD1 || player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
+		if (combat.calculateRangeDamageMultiplier() > 1) SAMulti += (combat.calculateRangeDamageMultiplier() - 1);
 		if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) SAMulti *= 2;
-		damage += player.str;
-		damage += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-			damage += player.spe;
-			damage += scalingBonusSpeed() * 0.20;
-		}
-		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
-			damage += (player.spe / 2);
-			damage += scalingBonusSpeed() * 0.10;
-		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
-		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
-		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
-		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
-		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);
-		damage *= combat.meleePhysicalForce();
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1470,25 +1423,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var PAM2:Number = 1;
 		PAM2 += combat.PASPAS();
-		damage += player.str * 1.2;
-		damage += scalingBonusStrength() * 0.4;
-		damage += player.spe * 1.2;
-		damage += scalingBonusSpeed() * 0.4
-		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-			damage += player.spe;
-			damage += scalingBonusSpeed() * 0.20;
-		}
-		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
-			damage += (player.spe / 2);
-			damage += scalingBonusSpeed() * 0.10;
-		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
-		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
-		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
-		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
-		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+		damage *= 3;
 		if (player.haveWeaponForJouster()) {
 			var JousterDamageMod:Number = 1;
 			if (player.isMeetingNaturalJousterReq()) JousterDamageMod += 2;
@@ -1498,7 +1435,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= JousterDamageMod;
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.isTaur() || player.isDrider()) {
 			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) {
 				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 4) damage *= 3;
@@ -1509,7 +1445,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DevastatingCharge)) damage *= 1.5;
 		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
-		damage *= combat.meleePhysicalForce();
 		damage *= PAM2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1592,18 +1527,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		var damage:Number = 0;
-		damage += player.str;
-		if (player.hasPerk(PerkLib.Whirlwind)) damage += scalingBonusStrength() * 0.2;
+		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
-		//weapon bonus
-		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
-		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
+		if (player.hasPerk(PerkLib.Whirlwind)) damage *= 1.2;
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.PowerSweep)) {
 			if (player.isWeaponForWhirlwind()) damage *= 1.25;
 			else damage *= 0.75;
@@ -1613,7 +1541,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.25;
 		}
 		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")) || (player.hasPerk(PerkLib.GigantGripSu) && player.weaponSpecials("Dual Massive")))) damage *= 1.25;
-		damage *= combat.meleePhysicalForce();
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1681,16 +1608,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		var damage:Number = 0;
-		damage += player.str;
-		if (player.hasPerk(PerkLib.Whipping)) damage += scalingBonusStrength() * 0.2;
-		if (damage < 10) damage = 10;
-		//weapon bonus
-		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
-		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
+		damage += combat.meleeDamageNoLagSingle();
+		if (player.hasPerk(PerkLib.Whipping)) damage *= 1.2;
 		//other bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) {
@@ -1698,7 +1618,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.25;
 		}
 		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")))) damage *= 1.25;
-		damage *= combat.meleePhysicalForce();
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3186,7 +3105,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -3271,7 +3189,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -4037,7 +3954,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 			//multiplicative bonuses
-			if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
 			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -4166,7 +4082,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.HoldWithBothHands)) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
@@ -6714,4 +6629,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}
