@@ -10805,6 +10805,20 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodRequiem)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodRequiem) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodRequiem);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodRequiem, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodRequiemSF) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodRequiemSF, 1, -1);
+            }
+        }
 		//Mutant Incubus Venom
 		if (player.hasStatusEffect(StatusEffects.MutantIncubusVenom)) {
             if (player.statusEffectv1(StatusEffects.MutantIncubusVenom) <= 0) {
