@@ -1262,55 +1262,68 @@ public class Combat extends BaseContent {
 		menu();
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) addButtonDisabled(0, "Air E.Asp", "You've already used the air elemental aspect in this fight!");
-			else addButton(0, "Air E.Asp", combat.mspecials.ElementalAspectAir);
+			else addButton(0, "Air E.Asp", combat.mspecials.ElementalAspectAir)
+            .hint("Creates a Wind Wall that deflects incoming projectiles for few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEarth)) addButtonDisabled(1, "Earth E.Asp", "You've already used the earth elemental aspect in this fight!");
-			else addButton(1, "Earth E.Asp", combat.mspecials.ElementalAspectEarth);
+			else addButton(1, "Earth E.Asp", combat.mspecials.ElementalAspectEarth)
+            .hint("Creates an Earth armor around PC, increasing armor and magic resistance for a few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) addButtonDisabled(2, "Fire E.Asp", "You've already used the fire elemental aspect in this fight!");
-			else addButton(2, "Fire E.Asp", combat.mspecials.ElementalAspectFire);
+			else addButton(2, "Fire E.Asp", combat.mspecials.ElementalAspectFire)
+            .hint("Stronger version of fire attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWater)) addButtonDisabled(3, "Water E.Asp", "You've already used the water elemental aspect in this fight!");
-			else addButton(3, "Water E.Asp", combat.mspecials.ElementalAspectWater);
+			else addButton(3, "Water E.Asp", combat.mspecials.ElementalAspectWater)
+            .hint("Heals PC.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEther)) addButtonDisabled(4, "Ether E.Asp", "You've already used the ether elemental aspect in this fight!");
-			else addButton(4, "Ether E.Asp", combat.mspecials.ElementalAspectEther);
+			else addButton(4, "Ether E.Asp", combat.mspecials.ElementalAspectEther)
+            .hint("Deals increased damage as a bonus to enemy if enemy is weak to any of the four major elements.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWood)) addButtonDisabled(5, "Wood E.Asp", "You've already used the wood elemental aspect in this fight!");
-			else addButton(5, "Wood E.Asp", combat.mspecials.ElementalAspectWood);
+			else addButton(5, "Wood E.Asp", combat.mspecials.ElementalAspectWood)
+            .hint("PC (Minor) Healing and small increase to armor / magic resistance for a few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectMetal)) addButtonDisabled(6, "Metal E.Asp", "You've already used the metal elemental aspect in this fight!");
-			else addButton(6, "Metal E.Asp", combat.mspecials.ElementalAspectMetal);
+			else addButton(6, "Metal E.Asp", combat.mspecials.ElementalAspectMetal)
+            .hint("Increases PC unarmed damage for a few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) addButtonDisabled(7, "Ice E.Asp", "You've already used the ice elemental aspect in this fight!");
-			else addButton(7, "Ice E.Asp", combat.mspecials.ElementalAspectIce);
+			else addButton(7, "Ice E.Asp", combat.mspecials.ElementalAspectIce)
+            .hint("Stronger version of ice attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) addButtonDisabled(8, "Lightning E.Asp", "You've already used the lightning elemental aspect in this fight!");
-			else addButton(8, "Lightning E.Asp", combat.mspecials.ElementalAspectLightning);
+			else addButton(8, "Lightning E.Asp", combat.mspecials.ElementalAspectLightning)
+            .hint("Stronger version of lightning attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) addButtonDisabled(9, "Darkness E.Asp", "You've already used the darkness elemental aspect in this fight!");
-			else addButton(9, "Darkness E.Asp", combat.mspecials.ElementalAspectDarkness);
+			else addButton(9, "Darkness E.Asp", combat.mspecials.ElementalAspectDarkness)
+            .hint("Stronger version of darkness attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPoison)) addButtonDisabled(10, "Poison E.Asp", "You've already used the poison elemental aspect in this fight!");
-			else addButton(10, "Poison E.Asp", combat.mspecials.ElementalAspectPoison);
+			else addButton(10, "Poison E.Asp", combat.mspecials.ElementalAspectPoison)
+            .hint("Stronger version of poison attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPurity)) addButtonDisabled(11, "Purity E.Asp", "You've already used the purity elemental aspect in this fight!");
-			else addButton(11, "Purity E.Asp", combat.mspecials.ElementalAspectPurity);
+			else addButton(11, "Purity E.Asp", combat.mspecials.ElementalAspectPurity)
+            .hint("Stronger version of purity attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectCorruption)) addButtonDisabled(12, "Corruption E.Asp", "You've already used the corruption elemental aspect in this fight!");
-			else addButton(12, "Corruption E.Asp", combat.mspecials.ElementalAspectCorruption);
+			else addButton(12, "Corruption E.Asp", combat.mspecials.ElementalAspectCorruption)
+            .hint("Stronger version of corruption attributed attack.");
 		}
 		//?lust?
 		addButton(14, "Back", combat.combatMenu, false);
