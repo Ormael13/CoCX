@@ -4917,4 +4917,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

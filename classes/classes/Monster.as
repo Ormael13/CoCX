@@ -1039,13 +1039,15 @@ import flash.utils.getQualifiedClassName;
 			//--BASE--
 			mult -= armorMMod;
 			mult -= resMagicStat.value;
+			mult -= damagePercentShared();
 			//--PERKS--
 			//--STATUS AFFECTS--
 			if (statusEffectv1(StatusEffects.OniRampage) > 0) {
 				mult -= 20;
 			}
-			//Caps damage reduction at 100%.
-			if (mult < 0) mult = 0;
+			//Caps damage reduction at 80/99%.
+			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
+			if (mult < capForDmgReduction()) mult = capForDmgReduction();
 			return mult;
 		}
 

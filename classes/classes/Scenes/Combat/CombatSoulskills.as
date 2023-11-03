@@ -2278,4 +2278,4 @@ public class CombatSoulskills extends BaseCombatContent {
 	 else enemyAI();
 	 }*/
 }
-}
+}
