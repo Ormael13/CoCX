@@ -4,7 +4,7 @@ import classes.BodyParts.*;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GeneticMemories.RaceMem;
-//import classes.IMutations.IMutationsLib;
+import classes.IMutations.IMutationsLib;
 //import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
@@ -49,9 +49,9 @@ public class ArigeanRace extends Race {
 				.eyeType(Eyes.ARIGEAN, +1)
 				//.eyeType(Eyes.ARIGEANPRINCESS, +2)
 				.faceType(Face.ARIGEAN, +1)
-				//.hairType(Hair.NORMAL, +1)
 				.tongueType(Tongue.ARIGEAN, +1)
 				.tailType(Tail.ARIGEAN_GREEN, +5)
+				.tailType(Tail.ARIGEAN_RED, +6)
 				.armType(Arms.ARMORED_FOREARMS, +1)
 				.legType(LowerBody.ARMORED_LEGS, +1)
 				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
@@ -66,7 +66,7 @@ public class ArigeanRace extends Race {
 						}, +1)
 				.corruption(AT_LEAST(10), +1);
 		
-		//addMutation(IMutationsLib.SharkOlfactorySystemIM);
+		addMutation(IMutationsLib.ArigeanAssociationCortexIM);
 		
 		buildTier(9, "half arigean")
 				.buffs({
@@ -90,7 +90,7 @@ public class ArigeanRace extends Race {
 					"def": +3
 				})
 				.end();
-		/*
+		
 		buildTier(18, "arigean elite")
 				.requireTailType(Tail.ARIGEAN_RED)
 				.buffs({
@@ -102,7 +102,7 @@ public class ArigeanRace extends Race {
 					"def": +4
 				})
 				.end();
-		
+		/*
 		buildTier(20, "arigean countess")
 				//.requirePerk(PerkLib.DantianPhylactery)
 				.buffs({

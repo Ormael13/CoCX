@@ -860,8 +860,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		if (silly ()) {
 			outputText("You snap your fingers, and at once every bird lends their high pitched voice to a unified, glass shattering cry:");
 			outputText("\n\n\"<i>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</i>\" ([themonster] takes ");
@@ -910,7 +908,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		//final touches
-		damage *= (monster.damagePercent() / 100);
 		outputText("Comet fragments hits [themonster], dealing ");
 		doMagicDamage(damage, true, true);
 		outputText(" damage! ");
@@ -1015,8 +1012,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		var d2:Number = 0.9;
 		d2 += (rand(21) * 0.01);
 		damage *= d2;
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		outputText(" ");
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -1067,8 +1062,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		outputText("The tossed projectile hits [themonster], dealing ");
 		switch (type) {
 			case "fire":
@@ -1142,7 +1135,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			corruptionMulti += ((monster.cor - 57.5) / 100); //The increase to multiplier is diminished.
 		}
 		var damage:Number = int(10 + (player.wis / 3 + rand(player.wis / 2)));
-		damage += unarmedAttack();
+		damage += combat.meleeUnarmedDamageNoLagSingle();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
@@ -1199,9 +1192,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
-		var damage:Number = unarmedAttack();
-		damage += player.str;
-		damage += scalingBonusStrength();
+		var damage:Number = 0;
+		damage += combat.meleeUnarmedDamageNoLagSingle();
 		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
 			damage += player.str;
 			damage += scalingBonusStrength();
@@ -1222,8 +1214,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		outputText("The air around your fist seems to lose all heat as you dash at [themonster]. You place your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
@@ -1263,9 +1253,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
-		var damage:Number = unarmedAttack();
-		damage += player.str;
-		damage += scalingBonusStrength();
+		var damage:Number = 0;
+		damage += combat.meleeUnarmedDamageNoLagSingle();
 		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
 			damage += player.str;
 			damage += scalingBonusStrength();
@@ -1289,8 +1278,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		outputText("Setting your fist ablaze, you rush at [themonster] and scorch [monster him] with your searing flames. ");
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -1348,13 +1335,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
-		var damage:Number = unarmedAttack();
-		damage += player.str;
-		damage += scalingBonusStrength();
-		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
-			damage += player.str;
-			damage += scalingBonusStrength();
-		}
+		var damage:Number = 0;
+		damage += combat.meleeUnarmedDamageNoLagSingle();
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
@@ -1379,8 +1361,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		damage = Math.round(damage);
 		monster.createStatusEffect(StatusEffects.PunishingKick, 5, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownPunishingKick, 10, 0, 0, 0);
@@ -1424,8 +1404,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		player.createStatusEffect(StatusEffects.CooldownSoulBlast, 15, 0, 0, 0);
 		outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. [Themonster] can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. ");
 		damage = Math.round(damage);
@@ -1663,8 +1641,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		doDarknessDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
@@ -1707,8 +1683,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		outputText(" ");
 		doDarknessDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -2179,8 +2153,6 @@ public class CombatSoulskills extends BaseCombatContent {
 	 crit = true;
 	 damage *= 1.75;
 	 }
-	 //final touches
-	 damage *= (monster.damagePercent() / 100);
 	 doDamage(damage);
 	 outputText("Your scythes swiftly sweeps against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
@@ -2266,8 +2238,6 @@ public class CombatSoulskills extends BaseCombatContent {
 	 damage *= 3;
 	 //soulskill mod effect
 	 damage *= soulskillPhysicalMod();
-	 //final touches
-	 damage *= (monster.damagePercent() / 100);
 	 doDamage(damage);
 	 outputText("Your [weapon] hits thrice against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 	 checkAchievementDamage(damage);

@@ -365,14 +365,12 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.racialScore(Races.ARIGEAN) >= 16) {
 				bd = buttons.add("Mana Shot", manaShot).hint("Fire a single blast from "+(player.tailCount>1?"one of your extra maws":"your large extra mouth")+". \n");
-				if (player.armor == armors.FMDRESS) bd.requireMana(spellCost(32), true);
-				else bd.requireMana(spellCost(40), true);
+				bd.requireMana(spellCost(40*arigeanMagicSpecialsCost()), true);
 				if (player.hasStatusEffect(StatusEffects.CooldownManaShot)) {
 					bd.disable("You need more time before you can use Mana Shot again.\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				bd = buttons.add("Mana Barrage", manaBarrage).hint("Fire a barrage of blasts from your extra maw"+(player.tailCount>1?"s":"")+". \n");
-				if (player.armor == armors.FMDRESS) bd.requireMana(spellCost(160), true);
-				else bd.requireMana(spellCost(200), true);
+				bd.requireMana(spellCost(200*arigeanMagicSpecialsCost()), true);
 				if (player.hasStatusEffect(StatusEffects.CooldownManaBarrage)) {
 					bd.disable("You need more time before you can use Mana Barrage again.\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -4003,8 +4001,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.armor == armors.FMDRESS) useMana(32, Combat.USEMANA_MAGIC);
-		else useMana(40, Combat.USEMANA_MAGIC);
+		useMana((40*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
 		combat.darkRitualCheckDamage();
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
@@ -4040,7 +4037,8 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-			if (player.armor == armors.FMDRESS) damage *= 1.2;
+			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("It hits its mark dealing ");
 			doMagicDamage(damage, true, true);
@@ -4065,14 +4063,12 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 	}
-
 	public function manaBarrage():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.armor == armors.FMDRESS) useMana(160, Combat.USEMANA_MAGIC);
-		else useMana(200, Combat.USEMANA_MAGIC);
+		useMana((200*arigeanMagicSpecialsCost()), Combat.USEMANA_MAGIC);
 		combat.darkRitualCheckDamage();
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
@@ -4108,7 +4104,8 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-			if (player.armor == armors.FMDRESS) damage *= 1.2;
+			if (player.armor == armors.ANE_UNI) damage *= 1.2;
+			if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) damage *= arigeanAssociationCortexBoost();
 			damage = Math.round(damage);
 			outputText("Your target is unable to avoid the barrage of blasts and takes ");
 			doMagicDamage(damage, true, true);
@@ -4137,6 +4134,17 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			enemyAI();
 		}
+	}
+	private function arigeanAssociationCortexBoost():Number {
+		var aACB:Number = 1.2;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) aACB += 0.3;
+		return aACB;
+	}
+	private function arigeanMagicSpecialsCost():Number {
+		var aMSC:Number = 1;
+		if (player.armor == armors.ANE_UNI) aMSC -= 0.2;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aMSC -= 0.2;
+		return aMSC;
 	}
 
 	public function hydraAcidBreath():void {

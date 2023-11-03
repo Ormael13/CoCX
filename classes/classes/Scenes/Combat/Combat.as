@@ -5760,7 +5760,7 @@ public class Combat extends BaseContent {
 		damage *= meleePhysicalForce();
 		return damage;
 	}
-	public function meleeUnarmedDamageNoLagSingle():Number {
+	public function meleeUnarmedDamageNoLagSingle(subtype:Number = 0):Number {
 		var damage:Number = 0;
 		if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
@@ -5770,11 +5770,16 @@ public class Combat extends BaseContent {
             damage += player.str;
             damage += scalingBonusStrength() * 0.25;
         }
-        if (player.hasPerk(PerkLib.SpeedDemon)) {
+        if (subtype == 1) {
+            damage += player.tou;
+            damage += scalingBonusToughness() * 0.25;
+        }
+        if (subtype == 2) {
             damage += player.spe;
-            damage += scalingBonusSpeed() * 0.20;
+            damage += scalingBonusSpeed() * 0.25;
         }
         damage += unarmedAttack();
+		if (damage < 10) damage = 10;
         damage = harpyDamageBonus(damage);
         damage = itemsBonusDamageDamage(damage);
         damage = statusEffectBonusDamage(damage);
@@ -12596,7 +12601,6 @@ public function OrcaWack():void {
         fatigue(20, USEFATG_PHYSICAL);
         var damage:Number = 0;
         damage += meleeUnarmedDamageNoLagSingle();
-        if (damage < 10) damage = 10;
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
         if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
             damage *= 1.50;
@@ -12629,14 +12633,9 @@ public function OrcaSmash():void {
         addButton(0, "Next", combatMenu, false);
     } else {
         fatigue(20, USEFATG_PHYSICAL);
-        var damage:Number = player.str;
-        damage += scalingBonusStrength() * 0.25;
-        if (player.gaindHoldWithBothHandBonus()) damage *= 1.5;
-        if (damage < 10) damage = 10;
-        damage = weaponAttackModifier(damage);
+        var damage:Number = 0;
+        damage += meleeUnarmedDamageNoLagSingle();
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-        damage = itemsBonusDamageDamage(damage);
-        damage = statusEffectBonusDamage(damage);
         if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
             damage *= 1.50;
             monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -12670,7 +12669,7 @@ public function OrcaImpale():void {
         addButton(0, "Next", combatMenu, false);
     } else {
         fatigue(20, USEFATG_PHYSICAL);
-        var damage:Number = player.str;
+        var damage:Number = 0;
         var SAMulti:Number = 1;
         if (player.level >= 6) SAMulti += 1;
         if (player.level >= 12) SAMulti += 1;
@@ -12678,13 +12677,8 @@ public function OrcaImpale():void {
         if (player.level >= 24) SAMulti += 1;
         if (player.level >= 30) SAMulti += 1;
         if (player.level >= 36) SAMulti += 1;
-        damage += scalingBonusStrength() * 0.25;
-        if (player.gaindHoldWithBothHandBonus()) damage *= 1.5;
-        if (damage < 10) damage = 10;
-        damage = weaponAttackModifier(damage);
+        damage += meleeDamageNoLagSingle();
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-        damage = itemsBonusDamageDamage(damage);
-        damage = statusEffectBonusDamage(damage);
         if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
             damage *= 1.50;
             monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);

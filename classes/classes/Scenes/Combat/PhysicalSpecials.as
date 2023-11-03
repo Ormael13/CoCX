@@ -1082,7 +1082,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1569,7 +1568,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= bonusmultiplier;
 		//final touches
 		damage = Math.round(damage);
-		damage *= (monster.damagePercent() / 100);
 		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText("Your [weapon] hits few of [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit) {
@@ -1611,7 +1609,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Whipping)) damage *= 1.2;
 		//other bonuses
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
@@ -1646,7 +1643,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= bonusmultiplier;
 		//final touches
 		damage = Math.round(damage);
-		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] whipped few of [themonster], dealing ");
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -1688,14 +1684,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		var damage:Number = 0;
-		damage += (scalingBonusStrength() * 0.3) + ((player.str + unarmedAttack()) * 1.5);
-		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += (scalingBonusStrength() * 0.3) + ((player.str + unarmedAttack()) * 1.5);
-		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += (scalingBonusStrength() * 0.15) + ((player.str + unarmedAttack()) * 0.75);
-		if (damage < 15) damage = 15;
-		//weapon bonus
-		if (player.weaponAttack < 101) damage *= (1 + (player.weaponAttack * 0.02));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 201) damage *= (2 + ((player.weaponAttack - 100) * 0.015));
-		else damage *= (3.5 + ((player.weaponAttack - 200) * 0.01));
+		damage += (combat.meleeUnarmedDamageNoLagSingle() * 2);
+		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += (combat.meleeUnarmedDamageNoLagSingle() * 2);
+		if (player.hasPerk(PerkLib.WhirlwindFeral)) damage += combat.meleeUnarmedDamageNoLagSingle();
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -1711,11 +1702,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 		}
-		//other bonuses
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
-		damage *= combat.meleePhysicalForce();
 		//crit
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1746,7 +1733,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weaponName == "fists" && player.haveNaturalClaws()) damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//final touches
 		damage = Math.round(damage);
-		damage *= (monster.damagePercent() / 100);
 		outputText("Your claws hits few of [themonster], dealing ");
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -1875,9 +1861,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			if(!monster.plural) outputText("  Twirling like a top, you bat your opponent with your tail"+kitshoo+".");
 			else outputText("  Twirling like a top, you bat your opponents with your tail"+kitshoo+".");
-			var damage:Number = unarmedAttack();
-			damage += player.str;
-			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
+			var damage:Number = 0;
+			damage += combat.meleeUnarmedDamageNoLagSingle();
 			damage = calcInfernoMod(damage, true);
 			if (player.statStore.hasBuff("FoxflamePelt")) {
 				var foxfiremulti:Number = 1;
@@ -1896,7 +1881,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
-			damage = combat.statusEffectBonusDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2267,12 +2251,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			if(!monster.plural) outputText("Twirling like a top, you slap your opponent with your wings.");
 			else outputText("Twirling like a top, you slap your opponents with your wings.");
-			var damage:Number = unarmedAttack();
-			if (player.thirdtierWingsForWingSlap()) damage += unarmedAttack();
-			//if (tu jak byłyby 4th tier wings dodane) damage += unarmedAttack();
-			damage += player.str;
-			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
-			damage = combat.statusEffectBonusDamage(damage);
+			var damage:Number = combat.meleeUnarmedDamageNoLagSingle();
+			if (player.thirdtierWingsForWingSlap()) damage += combat.meleeUnarmedDamageNoLagSingle();
+			//if (tu jak byłyby 4th tier wings dodane) damage += combat.meleeUnarmedDamageNoLagSingle();
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -2932,10 +2913,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function blazingRocketKick():void {
 		clearOutput();
 		outputText("You propel yourself up and kick [themonster] in the face leaving burns in the process. ");
-		var damage:Number = player.str;
-		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
-		if (damage < 10) damage = 10;
-		damage += (unarmedAttack() * 2);
+		var damage:Number = 0;
+		damage += (combat.meleeUnarmedDamageNoLagSingle() * 2);
 		damage *= (spellMod() * 2);
 		damage = Math.round(damage);
 		outputText(" ");
@@ -3086,12 +3065,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownStoneClaw,2,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownStoneClaw,3,0,0,0);
 		var damage:Number = 0;
-		//str bonuses
-		damage += player.str;
-		damage += scalingBonusStrength();
-		//tou bonuses
-		damage += player.tou;
-		damage += scalingBonusToughness();
+		damage += combat.meleeUnarmedDamageNoLagSingle(1);
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -3104,7 +3078,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -3119,7 +3092,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-		damage *= combat.meleePhysicalForce();
 		damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -3170,12 +3142,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownStoneFist,2,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownStoneFist,3,0,0,0);
 		var damage:Number = 0;
-		//str bonuses
-		damage += player.str;
-		damage += scalingBonusStrength();
-		//tou bonuses
-		damage += player.tou;
-		damage += scalingBonusToughness();
+		damage += combat.meleeUnarmedDamageNoLagSingle(1);
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -3188,7 +3155,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -3203,7 +3169,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-		damage *= combat.meleePhysicalForce();
 		damage *= 1.6;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -3258,19 +3223,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownTailSlam,4,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownTailSlam,5,0,0,0);
 		var damage:Number = 0;
-		//str bonuses
-		damage += player.str;
-		damage += scalingBonusStrength();
-		//tou bonuses
-		damage += player.tou;
-		damage += scalingBonusToughness();
+		damage += combat.meleeUnarmedDamageNoLagSingle(1);
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.JobBrawler)) damage += (5 * (1 + player.newGamePlusMod()));
 		if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -3285,7 +3244,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-		damage *= combat.meleePhysicalForce();
 		damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -3342,19 +3300,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownTailCleave,4,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownTailCleave,5,0,0,0);
 		var damage:Number = 0;
-		//str bonuses
-		damage += player.str;
-		damage += scalingBonusStrength();
-		//tou bonuses
-		damage += player.tou;
-		damage += scalingBonusToughness();
+		damage += combat.meleeUnarmedDamageNoLagSingle(1);
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.JobBrawler)) damage += (5 * (1 + player.newGamePlusMod()));
 		if (player.hasPerk(PerkLib.JobMonk)) damage += (10 * (1 + player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -3369,7 +3321,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-		damage *= combat.meleePhysicalForce();
 		damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -3426,10 +3377,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownWingBuffet,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownWingBuffet,6,0,0,0);
 		var damage:Number = 0;
-		damage += player.str;
-		damage += player.tou;
+		damage += combat.meleeUnarmedDamageNoLagSingle(1);
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -3444,7 +3393,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-		damage *= combat.meleePhysicalForce();
 		damage *= 1.5;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -3938,9 +3886,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("[Themonster]’s armor is broken from the force! Dealing ");
 			var damage:Number = 0;
-			//str bonuses
-			damage += player.str;
-			damage += scalingBonusStrength();
+			damage += combat.meleeUnarmedDamageNoLagSingle();
 			//addictive bonuses
 			if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 			if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -3953,7 +3899,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 			//multiplicative bonuses
-			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -4066,9 +4011,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownSlamBear,8,0,0,0);
 		if (combat.checkConcentration()) return; //Amily concentration
 		var damage:Number = 0;
-		//str bonuses
-		damage += player.str;
-		damage += scalingBonusStrength();
+		damage += combat.meleeUnarmedDamageNoLagSingle(1);
 		//addictive bonuses
 		if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 		if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -4081,7 +4024,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -4164,12 +4106,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			var damage:Number = 0;
-			//str bonuses
-			damage += player.str;
-			damage += scalingBonusStrength() * 0.5;
-			//tou bonuses
-			damage += player.spe;
-			damage += scalingBonusSpeed() * 0.5;
+			damage += combat.meleeUnarmedDamageNoLagSingle(2);
 			//addictive bonuses
 			if (player.hasPerk(PerkLib.IronFistsI)) damage += 10;
 			if (player.hasPerk(PerkLib.IronFistsII)) damage += 10;
@@ -4182,7 +4119,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 			//multiplicative bonuses
-			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -4301,12 +4237,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function hydraBiteAttackpoweeeeer():void {
 		var HBD:Number = 0;
-		HBD += player.str;
-		HBD += scalingBonusStrength() * 0.25;
-		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) HBD *= 2;
-		HBD += combat.unarmedAttack();
-		if (HBD < 10) HBD = 10;
-		HBD = combat.itemsBonusDamageDamage(HBD);
+		HBD += combat.meleeUnarmedDamageNoLagSingle();
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) HBD *= 1.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) HBD *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) HBD *= 1.50;
@@ -4531,7 +4462,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else monster.createStatusEffect(StatusEffects.Frostbite, 1, 0, 0, 0);
 			var damage:Number = 0;
 			//Determine damage - str modified by enemy toughness!
-			damage = int((player.str + player.spe) * 5 * (monster.damagePercent() / 100));
+			damage = 0;
+			damage += combat.meleeUnarmedDamageNoLagSingle();
 			if (!monster.isImmuneToBleed()) {
 				if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
 				else {
@@ -4542,7 +4474,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Deal damage and update based on perks
 			if(damage > 0) {
 				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-				damage = combat.itemsBonusDamageDamage(damage);
 				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 				if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -4613,9 +4544,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 	public function mantisMultipleAttacks():void {
 		var damage:Number = 0;
-		damage += player.spe;
-		damage += scalingBonusSpeed() * 0.2;
-		if (damage < 10) damage = 10;
+		damage += combat.meleeUnarmedDamageNoLagSingle(2);
 		//adjusting to be used 60/100% of base speed while attacking depending on insect-related perks possesed
 		if (!player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) damage *= 0.6;
 		//bonuses if fighting multiple enemies
@@ -4624,8 +4553,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1 && player.perkv1(IMutationsLib.TrachealSystemIM) >= 2) damage *= 1.5;
 		}
 		//other bonuses
-		damage += player.weaponAttack;
-		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -4648,8 +4575,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= (1.75 + buffMultiplier);
 		}
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
-		//final touches
-		damage *= (monster.damagePercent() / 100);
 		doDamage(damage);
 		outputText("Your scythes swiftly sweeps against [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit) {
@@ -4732,8 +4657,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var horns:Number = player.horns.count;
 			if (player.horns.count > 40) player.horns.count = 40;
 			//Determine damage - str modified by enemy toughness!
-			damage = int((unarmedAttack() + player.str + player.spe + horns) * 2 * (monster.damagePercent() / 100));
-			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += (player.str * (monster.damagePercent() / 100));
+			damage = 0;
+			damage += ((combat.meleeUnarmedDamageNoLagSingle() + horns) * 2);
 			if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
 			else {
 				monster.removeStatusEffect(StatusEffects.GoreBleed);
@@ -4756,13 +4681,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("The fury of your rut lent you strength, increasing the damage! ");
 				damage *= 1.1;
 			}
-			//Reduced by armor
-			damage *= monster.damagePercent() / 100;
-			if (damage < 0) damage = 5;
 			//Deal damage and update based on perks
 			if (damage > 0) {
 				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-				damage = combat.itemsBonusDamageDamage(damage);
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 					if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
@@ -4881,8 +4802,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var horns:Number = player.horns.count;
 			if (player.horns.count > 40) player.horns.count = 40;
 			//Determine damage - str modified by enemy toughness!
-			damage = int((unarmedAttack() + player.str + player.spe + horns) * 2 * (monster.damagePercent() / 100));
-			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += (player.str * (monster.damagePercent() / 100));
+			damage = 0;
+			damage += ((combat.meleeUnarmedDamageNoLagSingle() + horns) * 2);
 			if (!monster.hasStatusEffect(StatusEffects.GoreBleed)) monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
 			else {
 				monster.removeStatusEffect(StatusEffects.GoreBleed);
@@ -4907,13 +4828,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				outputText("The fury of your rut lent you strength, increasing the damage!  ");
 				damage *= 1.1;
 			}
-			//Reduced by armor
-			damage *= monster.damagePercent() / 100;
-			if (damage < 0) damage = 5;
 			//Deal damage and update based on perks
 			if (damage > 0) {
 				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-				damage = combat.itemsBonusDamageDamage(damage);
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			}
 			//Different horns damage messages
@@ -4991,8 +4908,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		chance += player.spe/2;
 		//Hit & calculation
 		if(chance >= rand(100)) {
-			if (player.horns.count > 40) player.horns.count = 40;
-			damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horns length bonus
+			damage = 0;
+			damage += ((combat.meleeUnarmedDamageNoLagSingle() + player.horns.count) * 1.2); //As normal attack + horns length bonus
 			if(damage < 0) damage = 5;
 			//Normal
 			outputText("You hurl yourself towards [enemy] with your head low and jerk your head upward, every muscle flexing as you send [enemy] flying. ");
@@ -5012,7 +4929,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//CAP 'DAT SHIT
 			if (damage > player.level * 10 + 100) damage = player.level * 10 + 100;
 			if (damage > 0) {
-				damage = combat.itemsBonusDamageDamage(damage);
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 					if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
@@ -5164,11 +5080,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function tailspikedamage():void{
 		//Phys dmg!
-		var damage:Number = unarmedAttack();
-		damage += player.str;
-		damage += scalingBonusSpeed() * 0.2;
-		if (damage < 10) damage = 10;
-		damage = combat.statusEffectBonusDamage(damage);
+		var damage:Number = 0;
+		damage += combat.meleeUnarmedDamageNoLagSingle();
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) damage *= 2;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -5435,13 +5348,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		//Determine damage - str modified by enemy toughness!
-		damage += player.str * 6;
-		damage += combat.scalingBonusStrength() * 0.5;
-		damage += player.spe * 6;
-		damage += combat.scalingBonusSpeed() * 0.5;
+		damage += combat.meleeUnarmedDamageNoLagSingle(2) * 3;
 		if (player.faceType == Face.ABYSSAL_SHARK) damage *= 2;
-		damage *= (monster.damagePercent() / 100);
 		damage = Math.round(damage);
 		if (!monster.isImmuneToBleed()) {
 			if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
@@ -5454,7 +5362,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Deal damage and update based on perks
 		if(damage > 0) {
 			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-			damage = combat.itemsBonusDamageDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
@@ -5615,26 +5522,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Determine damage
 		//Base:
-		var damage:Number = unarmedAttack();
-		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += scalingBonusStrength();
-		else damage += scalingBonusStrength() * 0.5;
-		damage += scalingBonusSpeed() * 0.5;
+		var damage:Number = 0;
+		damage += combat.meleeUnarmedDamageNoLagSingle(2);
 		//Leg bonus
 		//Bunny - 20, 1 hoof = 30, 2 hooves = 40, Kangaroo - 50
-		if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.PONY || player.lowerBody == LowerBody.CLOVEN_HOOFED)
-			damage += 30;
+		if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.PONY || player.lowerBody == LowerBody.CLOVEN_HOOFED) damage += 30;
 		else if (player.lowerBody == LowerBody.BUNNY) damage += 20;
 		else if (player.lowerBody == LowerBody.KANGAROO) damage += 50;
 		if (player.isTaur()) damage += 10;
 		//Damage post processing!
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
-		//Reduce damage
-		damage *= monster.damagePercent() / 100;
 		//(None yet!)
 		damage = Math.round(damage);
 		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -5697,7 +5598,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = combat.statusEffectBonusDamage(damage);
 		if (player.shieldPerk == "Large") damage *= 2;
 		if (player.shieldPerk == "Massive") damage *= 5;
-		damage *= (monster.damagePercent() / 100);
 		var chance:int = Math.floor(monster.statusEffectv1(StatusEffects.TimesBashed) + 1);
 		if (chance > 10) chance = 10;
 		doDamage(damage);
@@ -6579,9 +6479,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You launch the mech springed glove at [themonster] hitting [monster his] straight in the face for a K.O. [themonster] is hit for ");
 		player.createStatusEffect(StatusEffects.CooldownDynapunchGlove,8,0,0,0);
 		var damage:Number = 0;
-		damage += player.str;
-		damage += scalingBonusStrength() * 0.25;
-		if (damage < 10) damage = 10;
+		damage += combat.meleeUnarmedDamageNoLagSingle();
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
@@ -6595,10 +6493,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= critDamage;
 		}
-		//Apply AND DONE!
-		damage *= (monster.damagePercent() / 100);
 		damage = Math.round(damage);
-		if (damage < 10) damage = 10;
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -6606,11 +6501,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.JobBeastWarrior)) damage *= 1.1;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.hasPerk(PerkLib.GoblinoidBlood)) {
-			if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
-			if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
-			if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
-		}
 		doDamage(damage);
 		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b> damage");
 		if (!monster.hasPerk(PerkLib.Resolute)) {

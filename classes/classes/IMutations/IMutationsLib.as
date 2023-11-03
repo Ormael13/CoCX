@@ -49,6 +49,7 @@ public class IMutationsLib
 		public static const AlphaHowlIM:IMutationPerkType = new AlphaHowlMutation();
 		public static const AnubiHeartIM:IMutationPerkType = new AnubiHeartMutation();
 		public static const ArachnidBookLungIM:IMutationPerkType = new ArachnidBookLungMutation();
+		public static const ArigeanAssociationCortexIM:IMutationPerkType = new ArigeanAssociationCortexMutation();
 		public static const BlackHeartIM:IMutationPerkType = new BlackHeartMutation();
 		public static const CatLikeNimblenessIM:IMutationPerkType = new CatLikeNimblenessMutation();
 		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();

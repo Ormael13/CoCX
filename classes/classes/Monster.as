@@ -319,9 +319,9 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			if ((hasPerk(PerkLib.EnemyEliteType) || hasPerk(PerkLib.EnemyChampionType) || hasPerk(PerkLib.EnemyBossType)) && flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING] > 0) {
-				if (hasPerk(PerkLib.EnemyEliteType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*1.25);
-				if (hasPerk(PerkLib.EnemyChampionType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*2.5);
-				if (hasPerk(PerkLib.EnemyBossType)) temp *= (flags[kFLAGS.GAME_DIFFICULTY]*5);
+				if (hasPerk(PerkLib.EnemyEliteType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*1.25);
+				if (hasPerk(PerkLib.EnemyChampionType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*2.5);
+				if (hasPerk(PerkLib.EnemyBossType)) temp *= (flags[kFLAGS.BOSS_CHAMPION_ELITE_SCALING]*5);
 			}
 			temp *= stats_multi_based_on_misc();
 			if (this.level < 9) {

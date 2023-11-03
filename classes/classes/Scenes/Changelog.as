@@ -36,6 +36,8 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Ormael): Twin Desert Eagles - can be gained by combining 2x Desert Eagle weapon. Cost 1240 gems. Base atk is 25 and ammo clip size 4. It's Dual Firearm type range weapon.\n");
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-Starting traits desc on choice screen corrected to avoid misleading players (they are most of the time +50% stat multi bonuses (or jsut 50 sens) not +x% to maximum.\n");
+			outputText("-While using Telekinetic Grab can do much more than simple biting like.. teasing, using m. specials or spellcasting. Also cooldown for using it increased from 6 to 12 turns.\n");
+			outputText("-Due to confusion which range weapon can be used when in goblin mech with upgraded range weapon part all compatibile weapons have now added line in description stating they are compatibile with it.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -43,13 +45,17 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			//outputText("-Pureblood vampire PC that talked with Diva about vampirism gaining ability to create ghoulish vampire servant. It would be as event in general explore during the night.\n");
 			outputText("-Fixed a problem where arigean legs were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. (Lord Shadeogorath)\n");
-			outputText("-While using Telekinetic Grab can do much more than simple biting like.. teasing, using m. specials or spellcasting. Also cooldown for using it increased from 6 to 12 turns.\n");
-			outputText("-Due to confusion which range weapon can be used when in goblin mech with upgraded range weapon part all compatibile weapons have now added line in description stating they are compatibile with it.\n");
 			outputText("-Marked for Death perk can now allow to add multiplier effect from Sneaky Attack, Deadly Sneaker & Slayer perks if pc use sneak attack and enemy is stunned.\n");
 			outputText("-Hold with Both Hands perk effect changed to: Gain +50% base damage modifier with melee weapons when using both hands. For dual wield it can only apply if PC wield both weapons using two hands per weapon ;)\n");
 			outputText("-Melee physical attacks/specials/soulskills using weapons code been changed. Any non base melee atk would have now base of melee atk dmg included with their own specific bonuses added on top of it.\n");
 			outputText("-True damage attacks that PC deal to enemies should be now... not be affected by enemy defenses. Otherwise why would it be true damage over phys/mag damage?\n");
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills. (Demojay)\n");
+			outputText("-New mutation perk: Arigean Association Cortex. Req. having free nerv system mutation slot, arigean race. Effects: Overtime your way of thinking has changed to be more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 20% more damage.\n");
+			outputText("-New mutation perk: Arigean Association Cortex (Primitive). Req. Arigean Association Cortex and lvl 30+. Effects: Your way of thinking has become even more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 50% more damage and now cost 20% less mana.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -62,15 +68,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller)
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration\n\n");
+			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
@@ -132,7 +132,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -165,6 +173,10 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
