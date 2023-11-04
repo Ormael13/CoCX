@@ -386,9 +386,7 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.Cupid)) {
 			outputText("\n\nIf you know 'Arouse' spell, you can add its effect to the projectiles. (Works only with bows and crosbows)"
-				+ "\nArouse effect added: <b>" + (flags[kFLAGS.CUPID_ARROWS] ? "Yes" : "No") + "</b>");
-			if (flags[kFLAGS.CUPID_ARROWS] == 0) outputText("\n\nArouse effect added: <b>None</b>");
-			if (flags[kFLAGS.CUPID_ARROWS] == 1) outputText("\n\nBlack Magic effect added: <b>Arouse</b>");
+				+ "\nArouse effect added: <b>" + (flags[kFLAGS.CUPID_ARROWS] > 0 ? "Yes" : "No") + "</b>");
 			bd.add("Arouse", curry(toggleFlagRanged, kFLAGS.CUPID_ARROWS))
 				.disableIf(!player.hasStatusEffect(StatusEffects.KnowsArouse), "You don't know the required spell.");
 		}

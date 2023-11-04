@@ -268,7 +268,7 @@ public function etnaRapeIntro():void
 	menu();
 	addButton(0, "Yes (M)", etnaRapeYesM).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(1, "Yes (F)", etnaRapeYesF).disableIf(!player.hasVagina(), "Req. a vagina!");
-	addButton(2, "Fill her up!", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(2, "Fill her up!", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to have alraune lower body.");
 	addButton(4, "No", etnaRapeNo);
 }
 
@@ -904,7 +904,7 @@ public function etnaSexMenu():void
 	addButton(2, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(3, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(4, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
-	addButton(5, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(5, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to have alraune lower body.");
 	addButton(6, "TailExplor", tailExploration)
 		.hint("Play with her tail using your goo body!", "Tail Exploration")
 		.disableIf(!player.isGoo(), "Req. goo body.");
@@ -1142,7 +1142,7 @@ private function etnaJumpsPCinCamp():void {
 	addButton(2, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(3, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(6, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
-	addButton(7, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(7, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to have alraune lower body.");
 	addButton(8, "TailExplor", tailExploration)
 			.hint("Play with her tail using your goo body!", "Tail Exploration")
 			.disableIf(!player.isGoo(), "Req. goo body.");

@@ -206,7 +206,7 @@ public final class WeaponLib extends ItemConstants
 		public const S_STAFF:Weapon = new Weapon("S.Staff", "S. Staff", "sapphire staff", "a sapphire staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has sapphire embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
 		public const SCARBLD:ScarredBlade = new ScarredBlade();
 		public const SCECOMM:Weapon = new Weapon("SceComm", "SceptreOfCom", "Sceptre of Command", "a Sceptre of Command", "smack", 4, 600, "This enchanted scepter empowers the abilities and control of summoners over their minions.");
-		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.", "", "Sword");
+		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.", "", "Dueling");
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
 		public const SDAGGER:Weapon = new Weapon("SDagger","S.Dagger","sapphire dagger","a sapphire dagger","stab",3,240,"This dagger is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Small", "Dagger");
 		public const SESPEAR:SeraphicSpear = new SeraphicSpear();

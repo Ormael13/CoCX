@@ -2680,8 +2680,11 @@ import flash.utils.getQualifiedClassName;
 
 		public function combatRoundUpdate():void
 		{
-
-			//regeneration perks for monsters
+			//Adjusting current HP/SF/Mana if it's for whatever reason beyond overMax cap
+			if (this.HP > maxOverHP()) this.HP = maxOverHP();
+			if (this.soulforce > maxOverSoulforce()) this.soulforce = maxOverSoulforce();
+			if (this.mana > maxOverMana()) this.mana = maxMana();
+			//health, soulforce and mana regeneration for monsters
 			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.FerasBirthrightIM) >= 1 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage)
 			|| hasPerk(PerkLib.MonsterRegeneration) || hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.GclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)
@@ -2784,7 +2787,6 @@ import flash.utils.getQualifiedClassName;
 					addHP(temp2);
 				}
 			}
-			//soulforce and mana regeneration for monsters
 			if (hasPerk(PerkLib.JobSoulCultivator) && this.soulforce < maxOverSoulforce()) {
 				var soulforceRecovery:Number = 0;
 				var soulforceRecoveryMulti:Number = 1;

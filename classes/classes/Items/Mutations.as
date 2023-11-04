@@ -10911,9 +10911,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (player.lowerBody == LowerBody.PLANT_FLOWER && !player.blockingBodyTransformations()) {
             outputText("Having no idea of what could happen when you take a whiff of this obviously corrupted plant, you head to the forest in order to find some privacy.");
-            if (silly()) {
-                outputText(" You have the feeling you might be taunting Murphy.");
-            }
+            if (silly()) outputText(" You have the feeling you might be taunting Murphy.");
             outputText("[pg]Finally, you smell the flower, glorious! A giddy smile grows on your face as arousal flushes your skin. As the unknown aphrodisiac gets to work on you,  " +
                     "you begin to release thick clouds of pollen all around you. " +
                     "The clouds spread a good distance with your aphrodisiac, trying to draw in anything to fuck you. Your efforts are rewarded when a clearly aroused succubus comes out of the nearby bush, " +
@@ -10923,40 +10921,29 @@ public final class Mutations extends MutationsHelper {
                     " The succubus coos and starts to kiss you as you, in turn, wrap yourself around her, pulling her deeper into your bath, kissing all the way." +
                     " The two of you go at it with reckless abandon, grinding your cunts and splashing nectar everywhere, grabbing each other’s breasts, and drinking them dry of milk and nectar." +
                     " You eventually doze off in the arms of your blind date, falling asleep for a while.[pg]" +
-
                     "You wake up a good while later, your flower is still closed, so you decide to open it to let some sunlight in. " +
                     "You suddenly feel your hand touching your leftmost petal, but that shouldn’t be possible, since you are still on the far right of your flower. " +
                     "As you look over in confusion, you notice you’re no longer alone in your flower. " +
                     "On the other side is a second girl who happens to have exactly the same appearance as you. You poke her side, causing her to jump, startled by the contact. " +
                     "Once she recovers she shoots you a dirty look and speaks at the exact same time as you.[pg]" +
-
                     "\"<i>The fuck are you doing in my flower!? Out! Now!</i>\"[pg]" +
                     "\"<i>The fuck are you saying, you damn squatter?! This is <i>my</i> flower!</i>\"[pg]" +
-
                     "And you find yourself looking at your spitting image, much to your confusion. " +
                     "Apparently, you are not alone in that feeling, since she looks just as confused, prompting both of you to start trying to figure out what the fuck happened. " +
                     "You recall coming to the forest, smelling that weird flower, getting horny, fucking that succubus, and finally going off to sleep with her still in the flower. Meanwhile, your clone has absolutely no memory aside from waking up here in this flower. " +
                     "No memory doesn’t mean she doesn’t know anything since it’s evident you both share all your knowledge, abilities, and even your name.[pg]" +
-
                     "You try to figure out how this could have happened, coming to the conclusion that you probably assimilated the succubus’ soulless body into yours, converting it into your double." +
                     " Creepy... After the alarm fades off, you finally realize this is the perfect opportunity to make true a crazy fantasy you never thought you would be able to: literally fucking yourself." +
                     " No, masturbation doesn’t count, and since you two are sharing one body and soul, she should be having this very same idea as well, right? The thought is confirmed when you both dive in to kiss each other at the same time." +
                     " The two of you begin to make out and play with each other’s pussy, moving fingers with the perfect coordination only possible for those having shared senses. You never thought fucking yourself would feel so good." +
                     " You can feel everything she does and vice versa, riding a double orgasm as both your pussies gush with nectar, the pair of you cumming in perfect sync." +
                     " You and your sister sit in the flower bath, still tangled together from your recent fuck as you come to a conclusion.[pg]" +
-
                     "\"<i>Since we’re in this together we might as well team-up. We are stronger when we’re in sync.</i>\"[pg]" +
-
                     "She nods and adds.\"<i>Good! Perhaps the quicker one can utilize weapons more and the other can support with vines.</i>\"[pg]" +
-
                     "\"<i>What about sex? Do we take turns fucking, with some sharing thrown in from time to time?</i>\"[pg]" +
-
                     "\"<i>That works for me long as you don’t hog all the stamens.</i>\"[pg]" +
-
                     "\"<i>Does it even matter since whoever gets to fuck will share her senses with the other anyways?</i>\"[pg]" +
-
                     "\"<i>Fine, whoever is the benchwarmer gets priority the next time.</i>\"[pg]" +
-
                     "It then occurs to you one has to take the lead else there will be disputes. The obvious answer is to switch lead on every morning, something your twin agrees to right away. In town whoever leads gets to speak to people, and the other will need to stay under the nectar to avoid weirding everyone out." +
                     "Satisfied with the rules, the two of you do a high-five and head back to camp ready to tag-team your adventure. <b>You are now two but one, one but two. You have become a Liliraune.</b>");
             player.createPerk(PerkLib.DualMind, 0, 0, 0, 0);
