@@ -15105,10 +15105,20 @@ public function runAway(callHook:Boolean = true):void {
 			enemyAI();
 			return;
 		}
-		if (player.statusEffectv1(StatusEffects.LockingCurse) == 0 && !player.isFlying() && !monster.hasStatusEffect(StatusEffects.Dig)) {
-			outputText("The anubis has you surrounded by h"+(monster.hasVagina()?"er":"is")+" pet, there is no escape by land!");
-			enemyAI();
-			return;
+		if (player.statusEffectv1(StatusEffects.LockingCurse) == 0 && !monster.hasStatusEffect(StatusEffects.Dig)) {
+			if (player.canFly()) {
+				clearOutput();
+				outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  Wasting no time you fly away.");
+				inCombat = false;
+				clearStatuses(false);
+				endEncounter();
+				return;
+			}
+			else {
+				outputText("The anubis has you surrounded by h"+(monster.hasVagina()?"er":"is")+" pet, there is no escape by land!");
+				enemyAI();
+				return;
+			}
 		}
 	}
     else if (player.canFly()) {

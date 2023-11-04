@@ -575,8 +575,11 @@ public function TyraniaAndFlitzyScene():void {
 		outputText("\"<i>Sorry you two. I gotta head back to the Salon. Mom gets pissy if we’re gone for too long.</i>\" You bid your new goblin friend farewell, and as she skips off into the forest, Tyrantia turns to you, a lazy grin on her face.\n\n");
 		outputText("\"<i>Gotta say, I like seeing you all wet.</i>\" Your drider giantess seems in the mood for some fun. What do you say?\n\n");
 		menu();
-		if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
-		else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+		if (TyraniaPostFinalKissScene) {
+			if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
+			else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+		}
+		else addButtonDisabled(2, "Sex", "Req. special scene after reaching 40%+ affection.");
 		if (TyrantiaAffectionMeter >= 40) addButton(3, "Flirt", TyraniaAndFlitzySceneFlirt);
 		else addButtonDisabled(3, "Flirt", "Req. 40%+ affection.");
 		addButton(4, "Leave", explorer.done);
@@ -595,8 +598,11 @@ public function TyraniaAndFlitzyScene():void {
 		outputText("You decide to come closer, raising your hands in surrender. Seeing you, Tyrantia’s eyes widen, and she covers her waterfall dampened pussy with one hand. \"<i>Y-you?!</i>\" She glares at you, less intimidating than usual, but her size makes up for the compromising situation. \"<i>Why are you-? Why would you-?</i>\" She is clearly very flustered, and the normally serious warrior is on the back-foot.\n\n");
 		menu();
 		addButton(0, "Apologize", TyraniaAndFlitzySceneApologize);
-		if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
-		else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+		if (TyraniaPostFinalKissScene) {
+			if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
+			else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+		}
+		else addButtonDisabled(2, "Sex", "Req. special scene after reaching 40%+ affection.");
 		if (TyrantiaAffectionMeter >= 40) addButton(3, "Flirt", TyraniaAndFlitzySceneFlirt);
 		else addButtonDisabled(3, "Flirt", "Req. 40%+ affection.");
 		addButton(4, "Leave", explorer.done);
@@ -621,8 +627,11 @@ public function TyraniaAndFlitzySceneFlirtFuzzy():void {
 	outputText("\"<i>Well...Anything else you want?</i>\" Tyrantia asks, giving you a warm, almost pure, smile.\n\n");
 	menu();
 	addButton(1, "Hug", TyraniaAndFlitzySceneHug);
-	if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
-	else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+	if (TyraniaPostFinalKissScene) {
+		if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
+		else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+	}
+	else addButtonDisabled(2, "Sex", "Req. special scene after reaching 40%+ affection.");
 	addButton(4, "Leave", explorer.done);
 }
 public function TyraniaAndFlitzySceneFlirtSmooth():void {
@@ -630,8 +639,11 @@ public function TyraniaAndFlitzySceneFlirtSmooth():void {
 	outputText("You ask her, teasingly, whether she’s thinking about something else as well, and she pulls her leg away from you, turning so her naked upper half is facing you head on. Her pussy is soaked, with more than just water, and her nipples are clearly erect. She looms over you, gently pulling your hand to her needy quim. \"<i>What do you think, my little friend?</i>\" She coos. Your Drider giantess is clearly in the mood for some fun. What do you want to do?\n\n");
 	menu();
 	addButton(1, "Hug", TyraniaAndFlitzySceneHug);
-	if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
-	else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+	if (TyraniaPostFinalKissScene) {
+		if (player.gender > 0) addButton(2, "Sex", TyrantiaSexMenu);
+		else addButtonDisabled(2, "Sex", "Not for genderless ones.");
+	}
+	else addButtonDisabled(2, "Sex", "Req. special scene after reaching 40%+ affection.");
 	addButton(4, "Leave", explorer.done);
 }
 public function TyraniaAndFlitzySceneFlirtYouChoose():void {

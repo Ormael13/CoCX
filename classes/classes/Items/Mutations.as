@@ -5728,7 +5728,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears!
-        if (player.ears.type != Ears.SNAKE && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.SNAKE && changes < changeLimit && rand(3) == 0 && type != 1) {
             outputText("[pg]");
 			transformations.EarsSnake.applyEffect();
             changes++;
@@ -5870,7 +5870,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-        if (!player.hasFullCoatOfType(Skin.SCALES) && ((type == 0 && player.eyes.type == Eyes.GORGON) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(4) == 0) {
+        if (!player.hasFullCoatOfType(Skin.SCALES) && ((type == 0 && player.eyes.type == Eyes.GORGON) || (type == 2 && player.hairType == 1)) && type != 1 && changes < changeLimit && rand(3) == 0) {
             if (rand(10) == 0) {
                 colors = ["purple", "silver"];
             } else {
