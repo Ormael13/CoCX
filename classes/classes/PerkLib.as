@@ -359,9 +359,9 @@ public class PerkLib
 		public static const PenetratingThrow:PerkType = mk("Penetrating throw", "Penetrating throw",
 				"Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)",
 				"You've chosen the 'Penetrating throw' perk. Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)");
-		public static const PowerShotEx:PerkType = mk("Power Shoot (Ex)", "Power Shoot (Ex)",
-				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)",
-				"You've chosen the 'Power Shoot (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)");
+		public static const PowerShotEx:PerkType = mk("Power Shot (Ex)", "Power Shot (Ex)",
+				"Power Shot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)",
+				"You've chosen the 'Power Shot (Ex)' perk. Power Shot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)");
 		public static const RangeWeaponsAttackMultiplier:PerkType = mk("Range Weapons Attack Multiplier", "Skilled Ranger",
 				"+5% range physical attacks multiplier and then adds 50% on top of final result.",
 				"You've chosen the 'Range Weapons Attack Multiplier' perk. +5% range physical attacks multiplier and then adds 50% on top of final result.");
@@ -508,14 +508,14 @@ public class PerkLib
 				"Increasing the Tease damage by 25% for each different type of penis that you have.",
 				"You've chosen the 'Broad Selection' perk, increasing the Tease damage by 25% for each different type of penis that you have.");
 		public static const PowerAttack:PerkType = mk("Power Attack", "Power Attack",
-				"Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)",
-				"You've chosen the 'Power Shot' perk. Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)");
+				"Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)",
+				"You've chosen the 'Power Shot' perk. Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)");
 		public static const PowerAttackEx:PerkType = mk("Power Attack (Ex)", "Power Attack (Ex)",
-				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)",
-				"You've chosen the 'Power Attack (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)");
+				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% melee physical attacks multiplier)",
+				"You've chosen the 'Power Attack (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% melee physical attacks multiplier)");
 		public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
-				".",
-				"You've chosen the 'Twin Thunder' perk, .");
+				"When two weapon fighting power attack/strike now delivers two strikes instead of one.",
+				"You've chosen the 'Twin Thunder' perk. When two weapon fighting power attack/strike now delivers two strikes instead of one.");
 	//	public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
 	//			".",
 	//			"You've chosen the 'Twin Thunder' perk, .");
@@ -2499,8 +2499,8 @@ public class PerkLib
 				"You are famous for your acts of sex, with many teenagers dreaming of having a chance with you. All the tips you learned help your tease damage by 15%.",
 				"You've chosen the 'Pornstar' perk, gaining +15% tease dmg.");
 		public static const PowerShot:PerkType = mk("Power Shot", "Power Shot",
-				"Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)",
-				"You've chosen the 'Power Shot' perk. Enable Power Shoot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)");
+				"Enable Power Shot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)",
+				"You've chosen the 'Power Shot' perk. Enable Power Shot p. special. Add some of your strength (~40% of str scaling value) to bow damage. (+5% range physical attacks multiplier)");
 		public static const PowerSweep:PerkType = mk("Power Sweep", "Power Sweep",
 				"Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).",
 				"You've chosen the 'Power Sweep' perk. Allows the use of whirlwind using one handed weapons at 75% of the normal effect. Large weapon gain a 25% bonus to whirlwind damage (Does not include fist).");
@@ -4656,6 +4656,7 @@ public class PerkLib
             UnlockId.requireStr(20);
             ChallengingShout.requireStr(25)
                     .requirePerk(JobWarrior);
+            PowerAttack.requirePerk(JobWarrior);
             //Tier 1 Strength Perks
             ThunderousStrikes.requireLevel(6)
                     .requireStr(80)

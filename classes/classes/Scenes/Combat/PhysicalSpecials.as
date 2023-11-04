@@ -42,9 +42,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
 			if (player.isFlying() == monster.isFlying()) {
-				bd = buttons.add("PowerAttack", powerAttack).hint("Do a single way more powerfull wrath-enhanced melee strike.");
-				if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Attack (below 1%)");
-				else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				if (player.hasPerk(PerkLib.PowerAttack)) {
+					bd = buttons.add("PowerAttack", powerAttack).hint("Do a single way more powerfull wrath-enhanced melee strike.");
+					if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Attack (below 1%)");
+					else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
 				if (player.statStore.hasBuff("AsuraForm")) {
 					bd = buttons.add("Asura's Howl", combat.asurasHowl).hint("Unleash a howl before giving enemy good punching. \n\nWrath Cost: 50");
 					if (player.wrath < 50) {
@@ -396,8 +398,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.PowerShot)) {
 				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerfull wrath-enhanced range strike.");
 				if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Shot (below 1%)");
-				else if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Throwing") {
-					bd.disable("<b>You need to use bow or throwing weapon before you can use Power Shoot.</b>\n\n");
+				else if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Crossbow" && player.weaponRangePerk != "Throwing") {
+					bd.disable("<b>You need to use bow, crossbow or throwing weapon before you can use Power Shoot.</b>\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if ((player.hasPerk(PerkLib.MarkedForDeath) && player.haveWeaponForSneakAttackRange() && (monster.monsterIsStunned()
@@ -697,8 +699,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.PowerShot)) {
 				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerfull wrath-enhanced range strike.");
 				if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Shot (below 1%)");
-				else if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Throwing") {
-					bd.disable("<b>You need to use bow or throwing weapon before you can use Power Shoot.</b>\n\n");
+				else if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Crossbow" && player.weaponRangePerk != "Throwing") {
+					bd.disable("<b>You need to use bow, crossbow or throwing weapon before you can use Power Shoot.</b>\n\n");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasVagina() && (player.isRaceCached(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1 || (player.perkv1(IMutationsLib.HumanOvariesIM) >= 3 && player.racialScore(Races.HUMAN) > 17)) && !player.hasPerk(PerkLib.ElementalBody)) {
@@ -922,7 +924,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function powerShoot():void {
 		clearOutput();
-		outputText("With one smooth motion you draw, nock, and fire your deadly arrow at one of your opponent"+(monster.plural ? "s":"")+" ");
+		outputText("With one smooth motion you fire your deadly projectile at one of your opponent"+(monster.plural ? "s":"")+" ");
 		var damage:Number = 0;
 		var PSMulti:Number = 1;
 		PSMulti += combat.PASPAS();

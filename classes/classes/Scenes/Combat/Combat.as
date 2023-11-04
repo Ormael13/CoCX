@@ -5686,6 +5686,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusStrength() * 0.2;
 			}
 		}
+		if (PerkLib.PowerAttack) damage *= 1.2;
         damage = harpyDamageBonus(damage);
 		if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
 			damage *= 2;
@@ -16369,7 +16370,6 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.JobRogue)) mod += .2;
     if (player.hasPerk(PerkLib.JobMonk)) mod += .2;
     if (player.hasPerk(PerkLib.JobBeastWarrior)) mod += .2;
-	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) mod += .05;
     if (player.hasPerk(PerkLib.ThunderousStrikes)) mod += .05;
     if (player.hasPerk(PerkLib.BrutalBlows)) mod += .05;
     if (player.hasPerk(PerkLib.FuriousStrikes)) mod += .05;
@@ -16378,6 +16378,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.IronFistsIII)) mod += .05;
     if (player.hasPerk(PerkLib.Brute)) mod += .05;
     if (player.hasPerk(PerkLib.Brawn)) mod += .05;
+	if (player.hasPerk(PerkLib.PowerAttack)) mod += .05;
     if (player.hasPerk(PerkLib.IronFistsIV)) mod += .1;
     if (player.hasPerk(PerkLib.IronFistsV)) mod += .1;
     if (player.hasPerk(PerkLib.IronFistsVI)) mod += .1;
@@ -16417,6 +16418,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.VampiricBlade)) mod += .2;
     if (player.hasPerk(PerkLib.TwinRiposte)) mod += .2;
     if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//830~880~970% up to here
+	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) mod += .05;
 	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) {
 		if (player.hasPerk(PerkLib.SkilledFighterEx)) {
 			mod += .15;

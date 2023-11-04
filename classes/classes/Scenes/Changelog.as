@@ -38,6 +38,7 @@ public class Changelog extends BaseContent
 			outputText("-Starting traits desc on choice screen corrected to avoid misleading players (they are most of the time +50% stat multi bonuses (or jsut 50 sens) not +x% to maximum.\n");
 			outputText("-While using Telekinetic Grab can do much more than simple biting like.. teasing, using m. specials or spellcasting. Also cooldown for using it increased from 6 to 12 turns.\n");
 			outputText("-Due to confusion which range weapon can be used when in goblin mech with upgraded range weapon part all compatibile weapons have now added line in description stating they are compatibile with it.\n");
+			outputText("-Marked for Death perk can now allow to add multiplier effect from Sneaky Attack, Deadly Sneaker & Slayer perks if pc use sneak attack and enemy is stunned.\n");
 			outputText("-Various minor corections/bugfixes.\n");
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills. (Demojay)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -46,8 +47,7 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			//outputText("-Pureblood vampire PC that talked with Diva about vampirism gaining ability to create ghoulish vampire servant. It would be as event in general explore during the night.\n");
-			outputText("-Fixed a problem where arigean legs were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. (Lord Shadeogorath)\n");
-			outputText("-Marked for Death perk can now allow to add multiplier effect from Sneaky Attack, Deadly Sneaker & Slayer perks if pc use sneak attack and enemy is stunned.\n");
+			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. (Lord Shadeogorath)\n");
 			outputText("-Hold with Both Hands perk effect changed to: Gain +50% base damage modifier with melee weapons when using both hands. For dual wield it can only apply if PC wield both weapons using two hands per weapon ;)\n");
 			outputText("-Melee physical attacks/specials/soulskills using weapons code been changed. Any non base melee atk would have now base of melee atk dmg included with their own specific bonuses added on top of it.\n");
 			outputText("-True damage attacks that PC deal to enemies should be now... not be affected by enemy defenses. Otherwise why would it be true damage over phys/mag damage?\n");
@@ -56,8 +56,8 @@ public class Changelog extends BaseContent
 			outputText("-Scimitar was changed to dueling sword type from sword type.\n");
 			outputText("-Changed behaviour of Elementals under Simplified Pre Turn so that the elemental chosen is no longer random, but selected by the player. (Demojay)\n");
 			outputText("-Added tooltips to the 'Elemental Aspects' menu so that the user knows what each option does in combat. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 0 strength lvl-up perk: Power Attack. Req. Job: Warrior perk. Effect: Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)\n");
+			outputText("-Power Shot special can be used with crossbows too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
