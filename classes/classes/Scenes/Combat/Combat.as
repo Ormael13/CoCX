@@ -1262,55 +1262,68 @@ public class Combat extends BaseContent {
 		menu();
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) addButtonDisabled(0, "Air E.Asp", "You've already used the air elemental aspect in this fight!");
-			else addButton(0, "Air E.Asp", combat.mspecials.ElementalAspectAir);
+			else addButton(0, "Air E.Asp", combat.mspecials.ElementalAspectAir)
+            .hint("Creates a Wind Wall that deflects incoming projectiles for few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEarth)) addButtonDisabled(1, "Earth E.Asp", "You've already used the earth elemental aspect in this fight!");
-			else addButton(1, "Earth E.Asp", combat.mspecials.ElementalAspectEarth);
+			else addButton(1, "Earth E.Asp", combat.mspecials.ElementalAspectEarth)
+            .hint("Creates an Earth armor around PC, increasing armor and magic resistance for a few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) addButtonDisabled(2, "Fire E.Asp", "You've already used the fire elemental aspect in this fight!");
-			else addButton(2, "Fire E.Asp", combat.mspecials.ElementalAspectFire);
+			else addButton(2, "Fire E.Asp", combat.mspecials.ElementalAspectFire)
+            .hint("Stronger version of fire attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWater)) addButtonDisabled(3, "Water E.Asp", "You've already used the water elemental aspect in this fight!");
-			else addButton(3, "Water E.Asp", combat.mspecials.ElementalAspectWater);
+			else addButton(3, "Water E.Asp", combat.mspecials.ElementalAspectWater)
+            .hint("Heals PC.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEther)) addButtonDisabled(4, "Ether E.Asp", "You've already used the ether elemental aspect in this fight!");
-			else addButton(4, "Ether E.Asp", combat.mspecials.ElementalAspectEther);
+			else addButton(4, "Ether E.Asp", combat.mspecials.ElementalAspectEther)
+            .hint("Deals increased damage as a bonus to enemy if enemy is weak to any of the four major elements.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWood)) addButtonDisabled(5, "Wood E.Asp", "You've already used the wood elemental aspect in this fight!");
-			else addButton(5, "Wood E.Asp", combat.mspecials.ElementalAspectWood);
+			else addButton(5, "Wood E.Asp", combat.mspecials.ElementalAspectWood)
+            .hint("PC (Minor) Healing and small increase to armor / magic resistance for a few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectMetal)) addButtonDisabled(6, "Metal E.Asp", "You've already used the metal elemental aspect in this fight!");
-			else addButton(6, "Metal E.Asp", combat.mspecials.ElementalAspectMetal);
+			else addButton(6, "Metal E.Asp", combat.mspecials.ElementalAspectMetal)
+            .hint("Increases PC unarmed damage for a few turns.\n\nDuration depends on elemental rank.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) addButtonDisabled(7, "Ice E.Asp", "You've already used the ice elemental aspect in this fight!");
-			else addButton(7, "Ice E.Asp", combat.mspecials.ElementalAspectIce);
+			else addButton(7, "Ice E.Asp", combat.mspecials.ElementalAspectIce)
+            .hint("Stronger version of ice attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) addButtonDisabled(8, "Lightning E.Asp", "You've already used the lightning elemental aspect in this fight!");
-			else addButton(8, "Lightning E.Asp", combat.mspecials.ElementalAspectLightning);
+			else addButton(8, "Lightning E.Asp", combat.mspecials.ElementalAspectLightning)
+            .hint("Stronger version of lightning attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) addButtonDisabled(9, "Darkness E.Asp", "You've already used the darkness elemental aspect in this fight!");
-			else addButton(9, "Darkness E.Asp", combat.mspecials.ElementalAspectDarkness);
+			else addButton(9, "Darkness E.Asp", combat.mspecials.ElementalAspectDarkness)
+            .hint("Stronger version of darkness attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPoison)) addButtonDisabled(10, "Poison E.Asp", "You've already used the poison elemental aspect in this fight!");
-			else addButton(10, "Poison E.Asp", combat.mspecials.ElementalAspectPoison);
+			else addButton(10, "Poison E.Asp", combat.mspecials.ElementalAspectPoison)
+            .hint("Stronger version of poison attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPurity)) addButtonDisabled(11, "Purity E.Asp", "You've already used the purity elemental aspect in this fight!");
-			else addButton(11, "Purity E.Asp", combat.mspecials.ElementalAspectPurity);
+			else addButton(11, "Purity E.Asp", combat.mspecials.ElementalAspectPurity)
+            .hint("Stronger version of purity attributed attack.");
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) {
 			if (player.hasStatusEffect(StatusEffects.CooldownEAspectCorruption)) addButtonDisabled(12, "Corruption E.Asp", "You've already used the corruption elemental aspect in this fight!");
-			else addButton(12, "Corruption E.Asp", combat.mspecials.ElementalAspectCorruption);
+			else addButton(12, "Corruption E.Asp", combat.mspecials.ElementalAspectCorruption)
+            .hint("Stronger version of corruption attributed attack.");
 		}
 		//?lust?
 		addButton(14, "Back", combat.combatMenu, false);
@@ -1610,56 +1623,55 @@ public class Combat extends BaseContent {
             else bestGolem[0]();
         }
         if (ui.isEpicElementalTurn()) {
-            //array of epic elementals
-            // [Req. status, body type (Elemental), function type]
-            // Oversimplified?
-            var epicArray:Array = [
-                [StatusEffects.SummonedElementalsAirE   , AIR   , AIR_E],
-                [StatusEffects.SummonedElementalsEarthE , EARTH , EARTH_E],
-                [StatusEffects.SummonedElementalsFireE  , FIRE  , FIRE_E],
-                [StatusEffects.SummonedElementalsWaterE , WATER , WATER_E]
-            ]
-            //Find the best rank & elect possible sources
-            var epicRank:int = -1;
-            var epicChoices:Array = [];
-            for each (var epic:Array in epicArray)
-                if (player.hasStatusEffect(epic[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != epic[1])) //can use
-                    //compare ranks
-                    if (player.statusEffectv2(epic[0]) > epicRank) {
-                        epicChoices = [epic[2]];
-                        epicRank = player.statusEffectv2(epic[0]);
-                    }
-                    else if (player.statusEffectv2(epic[0]) == epicRank)
-                        epicChoices.push(epic[2]);
-            outputText("\n\n");
-            if (epicChoices.length == 0) baseelementalattacks(NONE_E);
-            else baseelementalattacks(epicChoices[rand(epicChoices.length)]);
+            
+            var attackingEpicElementalTypeFlag:int = flags[kFLAGS.ATTACKING_EPIC_ELEMENTAL_TYPE];
+
+            var epicElementalObj:Object = {
+                31: [StatusEffects.SummonedElementalsAirE, AIR],
+                32: [StatusEffects.SummonedElementalsEarthE, EARTH],
+                33: [StatusEffects.SummonedElementalsFireE, FIRE],
+                34: [StatusEffects.SummonedElementalsWaterE, WATER]
+            }
+
+            if (epicElementalObj.hasOwnProperty(attackingEpicElementalTypeFlag)) {
+                var elementalEpicSelection:Array = epicElementalObj[attackingEpicElementalTypeFlag];
+                //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
+                if (!player.hasStatusEffect(elementalEpicSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalEpicSelection[1])) {
+                    ui.doEpicElementalTurn();
+                } else {
+                    baseelementalattacks(attackingEpicElementalTypeFlag);
+                }
+            }
         }
         if (ui.isElementalTurn()) {
-            //array of elementals
-            // [Req. status, function type]
-            // Oversimplified?
-            var elemArray:Array = [
-                [StatusEffects.SummonedElementalsAir    , AIR],
-                [StatusEffects.SummonedElementalsEarth  , EARTH],
-                [StatusEffects.SummonedElementalsFire   , FIRE],
-                [StatusEffects.SummonedElementalsWater  , WATER]
-            ]
-            //Find the best rank & elect possible sources
-            var elemRank:int = -1;
-            var elemChoices:Array = [];
-            for each (var elem:Array in elemArray)
-                if (player.hasStatusEffect(elem[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != elem[1])) //can use
-                    //compare ranks
-                    if (player.statusEffectv2(elem[0]) > elemRank) {
-                        elemChoices = [elem[1]];
-                        elemRank = player.statusEffectv2(elem[0]);
-                    }
-                    else if (player.statusEffectv2(elem[0]) == elemRank)
-                        elemChoices.push(elem[1]);
-            outputText("\n\n");
-            if (elemChoices.length == 0) baseelementalattacks(NONE);
-            else baseelementalattacks(elemChoices[rand(elemChoices.length)]);
+            
+            var attackingElementalTypeFlag:int = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
+
+            var baseElementalObj:Object = {
+                1: [StatusEffects.SummonedElementalsAir, AIR],
+                2: [StatusEffects.SummonedElementalsEarth, EARTH],
+                3: [StatusEffects.SummonedElementalsFire, FIRE],
+                4: [StatusEffects.SummonedElementalsWater, WATER],
+                5: [StatusEffects.SummonedElementalsIce, ICE],
+                6: [StatusEffects.SummonedElementalsLightning, LIGHTNING],
+                7: [StatusEffects.SummonedElementalsDarkness, DARKNESS],
+                8: [StatusEffects.SummonedElementalsWood, WOOD],
+                9: [StatusEffects.SummonedElementalsMetal, METAL],
+                10: [StatusEffects.SummonedElementalsEther, ETHER],
+                11: [StatusEffects.SummonedElementalsPoison, POISON],
+                12: [StatusEffects.SummonedElementalsPurity, PURITY],
+                13: [StatusEffects.SummonedElementalsCorruption, CORRUPTION]
+            }
+
+            if (baseElementalObj.hasOwnProperty(attackingElementalTypeFlag)) {
+                var elementalSelection:Array = baseElementalObj[attackingElementalTypeFlag];
+                //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
+                if (!player.hasStatusEffect(elementalSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalSelection[1])) {
+                    ui.doElementalTurn();
+                } else {
+                    baseelementalattacks(attackingElementalTypeFlag);
+                }
+            }
         }
         flushOutputTextToGUI();
     }
@@ -1739,9 +1751,9 @@ public class Combat extends BaseContent {
     public function baseelementalattacks(elementType:int = -1):void {
         if (elementType == -1) {
             elementType = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
-        } else {
+        } /*else {
             flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = elementType;
-        }
+        }*/
         var summonedElementals:int;
 		var summonedElementalsMulti:Number = 1;
 		var summonedEpicElemental:Boolean = false;
