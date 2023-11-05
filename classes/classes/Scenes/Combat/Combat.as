@@ -5689,13 +5689,6 @@ public class Combat extends BaseContent {
 				damage += scalingBonusStrength() * 0.2;
 			}
 		}
-		if (PerkLib.PowerAttack) damage *= 1.2;
-        damage = harpyDamageBonus(damage);
-		if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
-			damage *= 2;
-			if (player.perkv1(IMutationsLib.YetiFatIM) >= 2) damage *= 1.5;
-			if (player.perkv1(IMutationsLib.YetiFatIM) >= 3) damage *= 1.5;
-		}
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
@@ -5704,6 +5697,16 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
+		}
+		if (PerkLib.PowerAttack) {
+			if (PerkLib.PowerAttackEx) damage *= 1.5;
+			else damage *= 1.2;
+		}
+        damage = harpyDamageBonus(damage);
+		if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
+			damage *= 2;
+			if (player.perkv1(IMutationsLib.YetiFatIM) >= 2) damage *= 1.5;
+			if (player.perkv1(IMutationsLib.YetiFatIM) >= 3) damage *= 1.5;
 		}
 		if (player.gaindHoldWithBothHandBonus()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand() || player.isPartiallyStaffTypeWeapon()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
@@ -5811,6 +5814,19 @@ public class Combat extends BaseContent {
         if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet))) damage *= 2;
 		damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
 		damage *= meleePhysicalForce();
+		return damage;
+	}
+	
+	public function rangeDamageNoLagSingle(subtype:Number = 0):Number {
+		var damage:Number = 0;
+		
+		damage *= rangePhysicalForce();
+		return damage;
+	}
+	public function firearmsDamageNoLagSingle(subtype:Number = 0):Number {
+		var damage:Number = 0;
+		
+		damage *= firearmsForce();
 		return damage;
 	}
 	
@@ -16391,6 +16407,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.ImprovedBrawn)) mod += .1;
     if (player.hasPerk(PerkLib.ThirstForBlood)) mod += .15;
     if (player.hasPerk(PerkLib.GigantGripEx)) mod += .15;
+    if (player.hasPerk(PerkLib.PowerAttackEx)) mod += .15;
     if (player.hasPerk(PerkLib.GreaterBrute)) mod += .15;
     if (player.hasPerk(PerkLib.GreaterBrawn)) mod += .15;
     if (player.hasPerk(PerkLib.GigantGripSu)) mod += .2;
@@ -16400,7 +16417,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.LegendaryBrute)) mod += .25;
     if (player.hasPerk(PerkLib.LegendaryBrawn)) mod += .25;
     if (player.hasPerk(PerkLib.MythicalBrute)) mod += .3;
-    if (player.hasPerk(PerkLib.MythicalBrawn)) mod += .3;//500% up to here
+    if (player.hasPerk(PerkLib.MythicalBrawn)) mod += .3;//515% up to here
     if (player.hasPerk(PerkLib.PrestigeJobBerserker)) {
         mod += .8;
         if (player.hasPerk(PerkLib.FuelForTheFire)) {
@@ -16420,7 +16437,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.WarCaster)) mod += .2;
     if (player.hasPerk(PerkLib.VampiricBlade)) mod += .2;
     if (player.hasPerk(PerkLib.TwinRiposte)) mod += .2;
-    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//830~880~970% up to here
+    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//845~895~985% up to here
 	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) mod += .05;
 	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) {
 		if (player.hasPerk(PerkLib.SkilledFighterEx)) {

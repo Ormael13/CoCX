@@ -885,7 +885,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		damage += combat.meleeDamageNoLagSingle();
-		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.PowerAttackEx)) {
+			PAMulti += Math.round(PAMulti*0.3);
+			damage *= 2;
+		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -906,6 +909,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.75 + buffMultiplier;
 		}
 		checkForElementalEnchantmentAndDoDamage(damage);
+		if (player.hasPerk(PerkLib.TwinThunder) && player.isDualWieldMelee()) checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -924,20 +928,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function powerShoot():void {
 		clearOutput();
-		outputText("With one smooth motion you fire your deadly projectile at one of your opponent"+(monster.plural ? "s":"")+" ");
+		outputText("With one smooth motion you "+(player.weaponRangePerk == "Throwing"?"throw":"fire")+" your deadly projectile at one of your opponent"+(monster.plural ? "s":"")+" ");
 		var damage:Number = 0;
 		var PSMulti:Number = 1;
 		PSMulti += combat.PASPAS();
 		damage += player.spe;
 		damage += scalingBonusSpeed() * 0.2;
 		damage += scalingBonusStrength() * 0.4;
-		if (player.hasPerk(PerkLib.PowerShotEx)) {
-			damage += player.spe * 1.5;
-			damage += scalingBonusSpeed() * 0.3;
-			damage += scalingBonusStrength() * 0.6;
-		}
 		if (damage < 10) damage = 10;
+		if (player.hasPerk(PerkLib.PowerShotEx)) damage *= 2.5;
 		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage = combat.rangeAttackModifier(damage);
 		damage *= player.jewelryRangeModifier();
 		damage = combat.archerySkillDamageMod(damage);
@@ -964,6 +965,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		doDamage(damage, true, true);
+		//if (player.hasPerk(PerkLib.TwinThunder) && ) doDamage(damage, true, true);
+		if (player.weaponRangeName == "Avelynn") {
+			doDamage(damage, true, true);
+			doDamage(damage, true, true);
+		}
 		outputText(" damage. ");
 		if (crit) {
 			outputText("<b>Critical! </b>");
@@ -1570,8 +1576,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= bonusmultiplier;
 		//final touches
 		damage = Math.round(damage);
+		outputText("Your [weapon] hits few of [themonster], dealing ");
 		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText("Your [weapon] hits few of [themonster], dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
+		outputText(" damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -1646,11 +1653,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//final touches
 		damage = Math.round(damage);
 		outputText("Your [weapon] whipped few of [themonster], dealing ");
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP) {
-			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, true);
-		}
-		else doDamage(damage, true, true);
+		checkForElementalEnchantmentAndDoDamage(damage);
 		outputText(" damage! ");
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
