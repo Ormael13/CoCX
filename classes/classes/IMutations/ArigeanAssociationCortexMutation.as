@@ -25,14 +25,14 @@ public class ArigeanAssociationCortexMutation extends IMutationPerkType
             if (pTier >= 1) descS += ". Charged shot, Mana shot and Mana Barrage all deal ";
             if (pTier == 1) descS += "20%";
             if (pTier == 2) descS += "50%";
+            if (pTier == 3) descS += "90%";
             if (pTier >= 1) descS += " more damage";
-            if (pTier >= 2) descS += " and now cost 20% less mana";/*
-            if (pTier >= 3){
-                descS += ", increases your natural evasion, and decrease melee/range accuracy penalty when using multiattack options. Elven signature abilities will keep working regardless if you are a full blooded elf or not";
-            }
-            if (pTier >= 4){
-                descS += ". Heal for an amount of hit points equal to the mana cost when spending mana. Spells have a 10% increased critical chance";
-            }*/
+            if (pTier >= 2) descS += " and now cost ";
+            if (pTier == 2) descS += "20%";
+            if (pTier == 3) descS += "30%";
+            if (pTier >= 2) descS += " less mana";
+            if (pTier >= 3) descS += ", additionally your mana regen is increased by 10% of your toughness";
+            //if (pTier >= 4)descS += ". Heal for an amount of hit points equal to the mana cost when spending mana. Spells have a 10% increased critical chance";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -85,7 +85,7 @@ public class ArigeanAssociationCortexMutation extends IMutationPerkType
         }
 
         public function ArigeanAssociationCortexMutation() {
-            super(mName + " IM", mName, SLOT_NERVSYS, 2);
+            super(mName + " IM", mName, SLOT_NERVSYS, 3);
         }
 
     }
