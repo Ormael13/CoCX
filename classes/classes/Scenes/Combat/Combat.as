@@ -1750,6 +1750,7 @@ public class Combat extends BaseContent {
 
     public function baseelementalattacks(elementType:int = -1):void {
         if (elementType == -1) {
+            clearOutput();
             elementType = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
         } /*else {
             flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = elementType;
@@ -2020,6 +2021,8 @@ public class Combat extends BaseContent {
 				}
 			}
         } else {
+            //If monster is dead, prevent further elemental attack calls
+            flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             else doNext(endLustVictory);
         }
