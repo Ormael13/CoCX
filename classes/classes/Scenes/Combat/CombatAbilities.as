@@ -7,6 +7,7 @@ import classes.Scenes.Combat.SpellsDivine.*;
 import classes.Scenes.Combat.SpellsNecro.*;
 import classes.Scenes.Combat.SpellsGrey.*;
 import classes.Scenes.Combat.SpellsBlood.*;
+import classes.Scenes.Combat.Soulskills.*;
 
 public class CombatAbilities {
 	
@@ -235,6 +236,26 @@ public class CombatAbilities {
 			.concat(ALL_BLOOD_SPELLS)
 			.concat(ALL_GREEN_SPELLS)
 	;
+
+	public static const CleansingPalm:CleansingPalmSkill 		= new CleansingPalmSkill();
+	public static const IceFist:IceFistSkill					= new IceFistSkill()
+	public static const FirePunch:FirePunchSkill				= new FirePunchSkill();
+	public static const HurricaneDance:HurricaneDanceSkill		= new HurricaneDanceSkill();
+	public static const EarthStance:EarthStanceSkill			= new EarthStanceSkill();
+	public static const PunishingKick:PunishingKickSkill		= new PunishingKickSkill();
+	public static const SoulBlast:SoulBlastSkill				= new SoulBlastSkill();
+	public static const Overlimit:OverlimitSkill				= new OverlimitSkill();
+
+	public static const ALL_SOULSKILLS:/*CombatAbility*/Array = [
+		CleansingPalm,
+		IceFist,
+		FirePunch,
+		HurricaneDance,
+		EarthStance,
+		PunishingKick,
+		SoulBlast,
+		Overlimit
+	]
 	
 	/*
 	 * Difference from CombatAbility.Registry:
@@ -243,6 +264,7 @@ public class CombatAbilities {
 	 */
 	public static const ALL:/*CombatAbility*/Array = []
 			.concat(ALL_SPELLS)
+			.concat(ALL_SOULSKILLS)
 	;
 	
 	function CombatAbilities() {

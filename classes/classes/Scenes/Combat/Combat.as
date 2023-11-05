@@ -11025,7 +11025,7 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpectralScream, 1, -1);
             }
         }
-        //Hurricane Dance
+        /*//Hurricane Dance
         if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
             if (player.statusEffectv1(StatusEffects.CooldownHurricaneDance) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownHurricaneDance);
@@ -11052,7 +11052,7 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.EarthStance);
                 outputText("<b>Earth Stance effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EarthStance, 1, -1);
-        }
+        } */
         //Punishing Kick
         if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
             if (player.statusEffectv1(StatusEffects.CooldownPunishingKick) <= 0) {
