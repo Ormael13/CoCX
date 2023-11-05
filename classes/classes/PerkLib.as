@@ -509,13 +509,13 @@ public class PerkLib
 				"You've chosen the 'Broad Selection' perk, increasing the Tease damage by 25% for each different type of penis that you have.");
 		public static const PowerAttack:PerkType = mk("Power Attack", "Power Attack",
 				"Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)",
-				"You've chosen the 'Power Shot' perk. Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)");
+				"You've chosen the 'Power Attack' perk. Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)");
 		public static const PowerAttackEx:PerkType = mk("Power Attack (Ex)", "Power Attack (Ex)",
-				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% melee physical attacks multiplier)",
-				"You've chosen the 'Power Attack (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% melee physical attacks multiplier)");
+				"Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)",
+				"You've chosen the 'Power Attack (Ex)' perk. Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)");
 		public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
-				"When two weapon fighting power attack/strike now delivers two strikes instead of one.",
-				"You've chosen the 'Twin Thunder' perk. When two weapon fighting power attack/strike now delivers two strikes instead of one.");
+				"When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.",
+				"You've chosen the 'Twin Thunder' perk. When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.");
 	//	public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
 	//			".",
 	//			"You've chosen the 'Twin Thunder' perk, .");
@@ -4775,6 +4775,8 @@ public class PerkLib
                     .requireSpe(40)
                     .requirePerk(ImprovedTranquilness)
                     .requireLevel(18);
+            PowerAttackEx.requirePerk(PowerAttack)
+					.requireLevel(18);
             //Tier 4 Strength Perks
             WeaponGrandMastery.requirePerk(WeaponMastery)
                     .requireStr(140)
@@ -5503,6 +5505,8 @@ public class PerkLib
                     .requireSpe(160)
                     .requireStr(120)
                     .requireLevel(36);
+        //    PowerShotEx.requirePerk(PowerShotEx)
+		//			.requireLevel(36);
             //Tier 7 Speed Perks
             //Tier 8 Speed Perks
             //Tier 9 Speed Perks
@@ -7020,6 +7024,8 @@ public class PerkLib
             DualWield.requireLevel(6);
             Diehard.requireNotThosePerks(GreaterDiehardEx)
 					.requireLevel(6);
+            TwinThunder.requireLevel(6)
+                    .requireAnyPerk(PowerAttack, PowerShot);
             Survivalist.requireLevel(6)
                     .requireHungerEnabled();
             ResistanceII.requirePerk(ResistanceI)

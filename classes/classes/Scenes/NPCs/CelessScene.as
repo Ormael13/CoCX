@@ -863,6 +863,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"Satisfied with it, you then proceed to put the thing in your mouth proper. " + _name + " moans as her horse dong throbs in appreciation for the attention you’re giving it. "+
 		"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.\n\n"+
 		"Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach.");
+		player.sexReward("cum","Lips", false);
 		doHeatOrRut();
 		endEncounter();
 	}
@@ -883,6 +884,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (player.hasVirginVagina()) outputText("Checking on your privates, you’re not surprised to discover you did, indeed, keep your virginity in spite of the crazy ride the young centauress gave you. "+
 		"By now you already figured this is a common thing among unicorns.");
 		outputText("You feel something change in you as the corrupted cum reaches your womb.");
+		player.sexReward("cum", "Vaginal");
 		doHeatOrRut();
 		endEncounter();
 	}
@@ -937,6 +939,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"In the end, you manage to outlast her. With a scream, you orgasm, a handful of seconds after she does. You flood her thirsty cunt with your cum, making her moan in delight.\n"+
 		"As expected, nothing spills out of her pussy, even after both of you lay down in the grass to rest.\n\n" +
 		"You snuggle for a time with "+ _name +" then head back to your daily routine. ");
+		player.sexReward("vaginalFluids","Dick");
 		doHeatOrRut();
 		endEncounter();
 	}
