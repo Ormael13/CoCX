@@ -4137,13 +4137,15 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	private function arigeanAssociationCortexBoost():Number {
 		var aACB:Number = 1.2;
-		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 1) aACB += 0.3;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aACB += 0.3;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aACB += 0.4;
 		return aACB;
 	}
 	private function arigeanMagicSpecialsCost():Number {
 		var aMSC:Number = 1;
 		if (player.armor == armors.ANE_UNI) aMSC -= 0.2;
 		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 2) aMSC -= 0.2;
+		if (player.perkv1(IMutationsLib.ArigeanAssociationCortexIM) >= 3) aMSC -= 0.1;
 		return aMSC;
 	}
 
