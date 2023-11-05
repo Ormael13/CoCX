@@ -1750,6 +1750,7 @@ public class Combat extends BaseContent {
 
     public function baseelementalattacks(elementType:int = -1):void {
         if (elementType == -1) {
+            clearOutput();
             elementType = flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE];
         } /*else {
             flags[kFLAGS.ATTACKING_ELEMENTAL_TYPE] = elementType;
