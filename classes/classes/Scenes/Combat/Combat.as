@@ -2020,6 +2020,8 @@ public class Combat extends BaseContent {
 				}
 			}
         } else {
+            //If monster is dead, prevent further elemental attack calls
+            flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             else doNext(endLustVictory);
         }
