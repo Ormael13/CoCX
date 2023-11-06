@@ -42,8 +42,8 @@ public class BaseCombatContent extends BaseContent {
 	// ==================
 	// APPLY EFFECTS
 	// ==================
-	protected function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-		return combat.doDamage(damage, apply, display);
+	protected function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
+		return combat.doDamage(damage, apply, display, ignoreDR);
 	}
 	protected function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doMagicDamage(damage, apply, display);
