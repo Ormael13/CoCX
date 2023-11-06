@@ -7275,8 +7275,6 @@ public class Combat extends BaseContent {
             damage = meleeDamageNoLagSingle(true);
             //Apply special modifiers
             if (damage < 10) damage = 10;
-            //Weapon addition!
-            damage = weaponAttackModifier(damage);
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //Determine if critical hit!
