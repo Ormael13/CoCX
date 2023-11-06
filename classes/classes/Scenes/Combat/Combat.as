@@ -5779,7 +5779,8 @@ public class Combat extends BaseContent {
 		damage *= meleePhysicalForce();
 		return damage;
 	}
-	public function meleeUnarmedDamageNoLagSingle(subtype:Number = 0):Number {
+
+	public function meleeUnarmedDamageNoLagSingle(subtype:Number = 0, IsFeralCombat:Boolean = false):Number {
 		var damage:Number = 0;
 		if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
@@ -5812,11 +5813,12 @@ public class Combat extends BaseContent {
             if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
         }
         if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet))) damage *= 2;
-		damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
+		if (!IsFeralCombat) damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
+        else damage *= (1 + (0.01 * masteryFeralCombatLevel()));
 		damage *= meleePhysicalForce();
 		return damage;
 	}
-	
+
 	public function rangeDamageNoLagSingle(subtype:Number = 0):Number {
 		var damage:Number = 0;
 		
@@ -7270,11 +7272,9 @@ public class Combat extends BaseContent {
             // DAMAGE
             //------------
             //Determine damage
-            damage = CalcBaseDamageUnarmed();
+            damage = meleeDamageNoLagSingle(true);
             //Apply special modifiers
             if (damage < 10) damage = 10;
-            //Weapon addition!
-            damage = weaponAttackModifier(damage);
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //Determine if critical hit!
@@ -12752,7 +12752,7 @@ public function OrcaImpale():void {
         //Enemy faints -
         outputText("You finish the game by swinging your opponent off your weapon, brutaly tossing [monster him] to the side. ");
         damage = 0;
-        damage += meleeUnarmedDamageNoLagSingle();
+        damage += meleeDamageNoLagSingle();
         doPhysicalDamage(damage, true, true);
         outputText(" damage. ");
         combat.checkAchievementDamage(damage);
@@ -12777,7 +12777,7 @@ public function OrcaLeggoMyEggo():void {
     clearOutput();
     outputText("You let [themonster] drop, tired of playing.");
     var damage:Number = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     doPhysicalDamage(damage, true, true);
     outputText(" damage. ");
     monster.removeStatusEffect(StatusEffects.OrcaPlay);
@@ -12903,7 +12903,7 @@ public function Tremor():void {
     //WRAP IT UPPP
     outputText("You wriggle underground, collapsing the tunnel behind you. You shake, causing some serious seismic activity. [themonster] loses [monster his] balance, falling to the ground, dazed. ");
     damage = 0;
-	damage += meleeUnarmedDamageNoLagSingle();
+	damage += meleeUnarmedDamageNoLagSingle(0,true);
     damage *= player.effectiveTallness / 10;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
     if (monster.plural) damage *= 5;
@@ -13575,7 +13575,7 @@ public function Guillotine():void {
         }
     }
     fatigue(20, USEFATG_PHYSICAL);
-    var damage:int = (monster.maxHP() * (.10 + rand(15) / 100) * 1.5) + meleeUnarmedDamageNoLagSingle();
+    var damage:int = (monster.maxHP() * (.10 + rand(15) / 100) * 1.5) + meleeUnarmedDamageNoLagSingle(0,true);
     damage += scalingBonusToughness()*0.2;
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -14735,7 +14735,7 @@ public function VampireLeggoMyEggo():void {
 //Claws Rend
 public function clawsRendDamage():void {
     var damage:int = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     if (player.arms.type == Arms.DISPLACER) damage*= 2; //Displacers got extra limbs to rend
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -14901,7 +14901,7 @@ public function bearHug():void {
     fatigue(30, USEFATG_PHYSICAL);
     outputText("You squeeze [themonster] with a mighty hug, slowly crushing the life out of [monster him]. ");
     var damage:int = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
         damage += player.str;
         damage += scalingBonusStrength() * 0.5;
@@ -15577,7 +15577,7 @@ public function greatDive():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
     fatigue(50, USEFATG_PHYSICAL);
     var damage:Number = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     damage += player.spe * 2;
     if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
         damage += player.str;
