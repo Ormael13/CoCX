@@ -3178,19 +3178,8 @@ public class Combat extends BaseContent {
 				damage += scalingBonusSpeed() * 0.4;
 			}
 			else {
-				if (weaponRangePerk == "Bow") {
-					damage += player.spe * 2;
-					damage += scalingBonusSpeed() * 0.4;
-					if (player.hasPerk(PerkLib.PowerShotEx)) {
-						damage += scalingBonusStrength() * 0.4;
-						damage += scalingBonusSpeed() * 0.1;
-					}
-					if (damage < 20) damage = 20;
-				}
-				if (weaponRangePerk == "Crossbow") {
-					damage += player.weaponRangeAttack * 20;
-					damage += (player.speStat.core.value + player.speStat.train.value) * 2;
-				}
+				if (player.weaponRangePerk == "Bow") rangeDamageNoLagSingle(0);
+				if (player.weaponRangePerk == "Crossbow") rangeDamageNoLagSingle(1);
 			}
             if (damage == 0) {
                 if (monster.inte > 0) {
@@ -3226,8 +3215,6 @@ public class Combat extends BaseContent {
                     }
                 }
             }
-            //Weapon addition!
-            damage = rangeAttackModifier(damage);
             if (player.isInNonGoblinMech()) {
                 if (player.vehicles == vehicles.HB_MECH) {
                     if (player.armor == armors.HBARMOR) damage *= 1.5;
@@ -3243,14 +3230,10 @@ public class Combat extends BaseContent {
                     if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
                 }
             }
-            damage *= (1 + (0.01 * masteryArcheryLevel()));
-            damage = archerySkillDamageMod(damage);
-            if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
             if (weaponRangePerk == "Bow"){
                 if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
                 if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
             }
-            damage *= player.jewelryRangeModifier();
             if (weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.FletchingTable)) {
                 if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv1(StatusEffects.FletchingTable)));
                 if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.FletchingTable)));
@@ -3575,7 +3558,8 @@ public class Combat extends BaseContent {
 			doAcidDamage(damage, true, true);
 		}
         else {
-			doPhysicalDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.DeadlyAim) && player.weaponRangePerk == "Bow") doPhysicalDamage(damage, true, true, true);
+			else doPhysicalDamage(damage, true, true);
 		}
 		if (player.statStore.hasBuff("FoxflamePelt")) {
 			doFireDamage((damage*2), true, true);
@@ -3882,22 +3866,9 @@ public class Combat extends BaseContent {
         while (currentShot < numberOfExtraShots) {
             if (rand(100) < accRange) {
                 var damage:Number = 0;
-                damage += player.str;
-                damage += ghostStrength();
-                damage += scalingBonusStrength() * 0.4;
-                if (player.hasPerk(PerkLib.Telekinesis)) {
-                    damage += player.inte;
-                    damage += scalingBonusIntelligence() * 0.4;
-                }
-				if (player.hasPerk(PerkLib.PowerShotEx)) {
-					damage += scalingBonusSpeed() * 0.4;
-					damage += scalingBonusStrength() * 0.1;
-				}
-                if (damage < 20) damage = 20;
-                if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
+				rangeDamageNoLagSingle(2);
 				damage *= 1.5;
                 //Weapon addition!
-                damage = rangeAttackModifier(damage);
                 if (player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.GOODSAM || Forgefather.purePearlEaten) {
                     damage = monsterPureDamageBonus(damage);
                 }
@@ -3905,12 +3876,8 @@ public class Combat extends BaseContent {
                     damage = monsterCorruptDamageBonus(damage);
                 }
 				if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
-                damage *= (1 + (0.01 * masteryThrowingLevel()));
                 if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
                 if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-                damage *= player.jewelryRangeModifier();
-                damage = statusEffectBonusDamage(damage);
-                damage = archerySkillDamageMod(damage);
                 //Determine if critical hit!
                 var crit:Boolean = false;
                 var critChance:Number = calculateCritRange();
@@ -3994,19 +3961,7 @@ public class Combat extends BaseContent {
         }
         if (rand(100) < accRange) {
             var damage:Number = 0;
-            damage += player.str;
-            damage += ghostStrength();
-            damage += scalingBonusStrength() * 0.4;
-            if (player.hasPerk(PerkLib.Telekinesis)){
-                damage += player.inte;
-                damage += scalingBonusIntelligence() * 0.4;
-            }
-			if (player.hasPerk(PerkLib.PowerShotEx)) {
-				damage += scalingBonusSpeed() * 0.4;
-				damage += scalingBonusStrength() * 0.1;
-			}
-            if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
-            if (damage < 20) damage = 20;
+			rangeDamageNoLagSingle(2);
 			damage *= 1.5;
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if (damage == 0) {
@@ -4042,22 +3997,16 @@ public class Combat extends BaseContent {
                 }
             }
             //Weapon addition!
-            damage = rangeAttackModifier(damage);
             if (player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.GOODSAM || Forgefather.purePearlEaten) {
                 damage = monsterPureDamageBonus(damage);
             }
             if (player.weaponRange == weaponsrange.LEVHARP || player.weaponRange == weaponsrange.BADOMEN || Forgefather.lethiciteEaten) {
                 damage = monsterCorruptDamageBonus(damage);
             }
-            damage *= (1 + (0.01 * masteryThrowingLevel()));
-            damage = archerySkillDamageMod(damage);
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
             if (player.countMiscJewelry(miscjewelries.ATLATL_) > 0) damage *= 1.25;
-            damage *= player.jewelryRangeModifier();
-            damage = statusEffectBonusDamage(damage);
-            damage *= rangePhysicalForce();
             //Determine if critical hit!
             var crit:Boolean;
             var critChance:Number = calculateCritRange();
@@ -5779,7 +5728,8 @@ public class Combat extends BaseContent {
 		damage *= meleePhysicalForce();
 		return damage;
 	}
-	public function meleeUnarmedDamageNoLagSingle(subtype:Number = 0):Number {
+
+	public function meleeUnarmedDamageNoLagSingle(subtype:Number = 0, IsFeralCombat:Boolean = false):Number {
 		var damage:Number = 0;
 		if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
@@ -5812,14 +5762,49 @@ public class Combat extends BaseContent {
             if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
         }
         if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet))) damage *= 2;
-		damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
+		if (!IsFeralCombat) damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
+        else damage *= (1 + (0.01 * masteryFeralCombatLevel()));
 		damage *= meleePhysicalForce();
 		return damage;
 	}
-	
+
 	public function rangeDamageNoLagSingle(subtype:Number = 0):Number {
-		var damage:Number = 0;
-		
+		var damage:Number = 0;//0 - bow, 1 - crossbow, 2 - thrown
+		if (subtype == 0) {
+			damage += player.spe * 2;
+			damage += scalingBonusSpeed() * 0.4;
+			if (player.hasPerk(PerkLib.PowerShotEx)) {
+				damage += scalingBonusStrength() * 0.4;
+				damage += scalingBonusSpeed() * 0.1;
+			}
+			if (damage < 20) damage = 20;
+            damage *= (1 + (0.01 * masteryArcheryLevel()));
+		}
+		if (subtype == 1) {
+			damage += player.weaponRangeAttack * 20;
+			damage += (player.speStat.core.value + player.speStat.train.value) * 2;
+			damage *= (1 + (0.01 * masteryArcheryLevel()));
+		}
+		if (subtype == 2) {
+			damage += player.str;
+            damage += ghostStrength();
+            damage += scalingBonusStrength() * 0.4;
+            if (player.hasPerk(PerkLib.Telekinesis)){
+                damage += player.inte;
+                damage += scalingBonusIntelligence() * 0.4;
+            }
+			if (player.hasPerk(PerkLib.PowerShotEx)) {
+				damage += scalingBonusSpeed() * 0.4;
+				damage += scalingBonusStrength() * 0.1;
+			}
+            if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
+            if (damage < 20) damage = 20;
+            damage *= (1 + (0.01 * masteryThrowingLevel()));
+            damage = statusEffectBonusDamage(damage);
+		}
+        damage = rangeAttackModifier(damage);
+        damage = archerySkillDamageMod(damage);
+        damage *= player.jewelryRangeModifier();
 		damage *= rangePhysicalForce();
 		return damage;
 	}
@@ -7270,11 +7255,7 @@ public class Combat extends BaseContent {
             // DAMAGE
             //------------
             //Determine damage
-            damage = CalcBaseDamageUnarmed();
-            //Apply special modifiers
-            if (damage < 10) damage = 10;
-            //Weapon addition!
-            damage = weaponAttackModifier(damage);
+            damage = meleeDamageNoLagSingle(true);
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //Determine if critical hit!
@@ -7631,7 +7612,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyUndeadType)) bleedChance = 0;
         if (rand(100) < bleedChance) bleed = true;
         if (bleed) {
-            if (monster.canMonsterBleed()) {
+            if (!monster.canMonsterBleed()) {
                 if (monster is LivingStatue) outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
                 else outputText("Despite the gashes you've torn in its exterior, [themonster] does not bleed.");
             } else {
@@ -8263,10 +8244,10 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+    public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		damage *= (monster.damagePercent() / 100);
+		if (!ignoreDR) damage *= (monster.damagePercent() / 100);
 		if (damage < 1) damage = 1;
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
@@ -8340,7 +8321,7 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-	public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
+	public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false, ignoreDR:Boolean = false):void {
         if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && MonsterIsBleeding()) {
 			var ddd:Number = 1.1;
 			if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) ddd += 0.15;
@@ -8362,7 +8343,7 @@ public class Combat extends BaseContent {
             if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
             if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
         }
-		doDamage(damage, apply, display);
+		doDamage(damage, apply, display, ignoreDR);
     }
 
     public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
@@ -12752,7 +12733,7 @@ public function OrcaImpale():void {
         //Enemy faints -
         outputText("You finish the game by swinging your opponent off your weapon, brutaly tossing [monster him] to the side. ");
         damage = 0;
-        damage += meleeUnarmedDamageNoLagSingle();
+        damage += meleeDamageNoLagSingle();
         doPhysicalDamage(damage, true, true);
         outputText(" damage. ");
         combat.checkAchievementDamage(damage);
@@ -12777,7 +12758,7 @@ public function OrcaLeggoMyEggo():void {
     clearOutput();
     outputText("You let [themonster] drop, tired of playing.");
     var damage:Number = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     doPhysicalDamage(damage, true, true);
     outputText(" damage. ");
     monster.removeStatusEffect(StatusEffects.OrcaPlay);
@@ -12903,7 +12884,7 @@ public function Tremor():void {
     //WRAP IT UPPP
     outputText("You wriggle underground, collapsing the tunnel behind you. You shake, causing some serious seismic activity. [themonster] loses [monster his] balance, falling to the ground, dazed. ");
     damage = 0;
-	damage += meleeUnarmedDamageNoLagSingle();
+	damage += meleeUnarmedDamageNoLagSingle(0,true);
     damage *= player.effectiveTallness / 10;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
     if (monster.plural) damage *= 5;
@@ -13575,7 +13556,7 @@ public function Guillotine():void {
         }
     }
     fatigue(20, USEFATG_PHYSICAL);
-    var damage:int = (monster.maxHP() * (.10 + rand(15) / 100) * 1.5) + meleeUnarmedDamageNoLagSingle();
+    var damage:int = (monster.maxHP() * (.10 + rand(15) / 100) * 1.5) + meleeUnarmedDamageNoLagSingle(0,true);
     damage += scalingBonusToughness()*0.2;
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -14735,7 +14716,7 @@ public function VampireLeggoMyEggo():void {
 //Claws Rend
 public function clawsRendDamage():void {
     var damage:int = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     if (player.arms.type == Arms.DISPLACER) damage*= 2; //Displacers got extra limbs to rend
     if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -14901,7 +14882,7 @@ public function bearHug():void {
     fatigue(30, USEFATG_PHYSICAL);
     outputText("You squeeze [themonster] with a mighty hug, slowly crushing the life out of [monster him]. ");
     var damage:int = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
         damage += player.str;
         damage += scalingBonusStrength() * 0.5;
@@ -15577,7 +15558,7 @@ public function greatDive():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
     fatigue(50, USEFATG_PHYSICAL);
     var damage:Number = 0;
-    damage += meleeUnarmedDamageNoLagSingle();
+    damage += meleeUnarmedDamageNoLagSingle(0,true);
     damage += player.spe * 2;
     if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) {
         damage += player.str;

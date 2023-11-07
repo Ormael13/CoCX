@@ -885,6 +885,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		damage += combat.meleeDamageNoLagSingle();
+		if (player.calculateMultiAttacks() > 1) damage *= player.calculateMultiAttacks();
 		if (player.hasPerk(PerkLib.PowerAttackEx)) {
 			PAMulti += Math.round(PAMulti*0.3);
 			damage *= 2;
@@ -920,7 +921,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		player.wrath = 0;
+		if (player.wrath > player.maxWrath()) EngineCore.WrathChange( -player.maxWrath());
+		else player.wrath = 0;
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -932,21 +934,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		var PSMulti:Number = 1;
 		PSMulti += combat.PASPAS();
-		damage += player.spe;
-		damage += scalingBonusSpeed() * 0.2;
-		damage += scalingBonusStrength() * 0.4;
-		if (damage < 10) damage = 10;
+		if (player.weaponRangePerk == "Bow") {
+			damage += combat.rangeDamageNoLagSingle(0);
+			if (combat.maxBowAttacks() > 1) damage *= combat.maxBowAttacks();
+		}
+		if (player.weaponRangePerk == "Crossbow") {
+			damage += combat.rangeDamageNoLagSingle(1);
+			if (combat.maxCrossbowAttacks() > 1) damage *= combat.maxCrossbowAttacks();
+		}
+		if (player.weaponRangePerk == "Throwing") {
+			damage += combat.rangeDamageNoLagSingle(2);
+			if (combat.maxThrowingAttacks() > 1) damage *= combat.maxThrowingAttacks();
+		}
 		if (player.hasPerk(PerkLib.PowerShotEx)) damage *= 2.5;
-		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		damage = combat.rangeAttackModifier(damage);
-		damage *= player.jewelryRangeModifier();
-		damage = combat.archerySkillDamageMod(damage);
 		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
-		if (player.weaponRangePerk == "Throwing") damage *= (1 + (0.01 * combat.masteryThrowingLevel()));
-		else damage *= (1 + (0.01 * combat.masteryArcheryLevel()));
-		damage *= combat.rangePhysicalForce();
 		damage *= PSMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -964,7 +967,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= (1.75 + buffMultiplier);
 		}
 		damage = Math.round(damage);
-		doDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.DeadlyAim) && (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow")) doDamage(damage, true, true, true);
+		else doDamage(damage, true, true);
 		//if (player.hasPerk(PerkLib.TwinThunder) && ) doDamage(damage, true, true);
 		if (player.weaponRangeName == "Avelynn") {
 			doDamage(damage, true, true);
@@ -980,7 +984,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		player.wrath = 0;
+		if (player.wrath > player.maxWrath()) EngineCore.WrathChange( -player.maxWrath());
+		else player.wrath = 0;
 		combat.heroBaneProc(damage);
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
@@ -1328,7 +1333,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weaponRangePerk == "Bow") {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.2;
-			if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
 			if (damage < 10) damage = 10;
 		}
 		else {
@@ -1381,8 +1385,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= critMulti+buffMultiplier;
 		}
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		if (player.hasPerk(PerkLib.DeadlyAim) && player.weaponRangePerk == "Bow") doDamage(damage, true, true, true);
+		else doDamage(damage, true, true);
+		outputText(" ");
 		if (crit) outputText("<b>Critical! </b>");
 		outputText("\n\n");
 		combat.checkAchievementDamage(damage);
@@ -5663,7 +5668,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage += scalingBonusSpeed() * 0.2;
 				if (damage < 10) damage = 10;
 			}
-			if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
 			//Weapon addition!
 			damage = combat.rangeAttackModifier(damage);
 			if (player.isInNonGoblinMech()) {
@@ -5815,7 +5819,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.spe;
 		damage += scalingBonusSpeed() * 0.2;
 		if (damage < 10) damage = 10;
-		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damagePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
 		//Weapon addition!
 		damage = combat.rangeAttackModifier(damage);
 		//add bonus for attacking animal-morph or beast enemy
@@ -6098,7 +6101,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		dmgBarrage += player.spe;
 		dmgBarrage += scalingBonusSpeed() * 0.2;
 		if (dmgBarrage < 60) dmgBarrage = 60;
-		if (!player.hasPerk(PerkLib.DeadlyAim)) dmgBarrage *= (monster.damagePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
 		//Weapon addition!
 		dmgBarrage = combat.rangeAttackModifier(dmgBarrage);
 		//add bonus for using aoe special
