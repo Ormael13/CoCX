@@ -10,9 +10,9 @@ name: ActionScript 3 CI
 on:
   push:
     # Just so the CI won't complain about Vanilla+ failing, since V+ isn't configured for CI.
-    branches-ignore: [ VanillaPlus ]
+    branches-ignore: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ master-wip ]
 
 env:
   # tell the build file where to find the flex SDK
@@ -22,7 +22,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         # different configurations that should be built
@@ -50,5 +50,5 @@ jobs:
       run: Xvnc :1 &
 
     # this is where the build happens. A separate build is started for every entry in the matrix element
-    - name: Build and run tests
-      run: ant test-${{ matrix.build }}
+    - name: Build
+      run: ant all

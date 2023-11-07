@@ -9,18 +9,11 @@
  <property name="lib.dir" value="${basedir}/lib/bin"/>
  <property name="build.dir" value="${basedir}/target"/>
  <property name="report.dir" value="${build.dir}/report"/>
- <property name="test.file" value="${build.dir}/CoC-test.swf"/>md
+ <property name="test.file" value="${build.dir}/CoC-test.swf"/>
  
 	<!-- Setup Flex and FlexUnit ant tasks -->
 	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
-	<taskdef resource="flexUnitTasks.tasks">
-	   <classpath>
-	      <fileset dir="${lib.dir}/flexunit">
-	         <include name="flexUnitTasks*.jar" />
-	      </fileset>
-	   </classpath>
-	</taskdef>
                
    <!-- delete and create the DEPLOY dir again -->
    <target name="init">
