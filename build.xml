@@ -1,0 +1,62 @@
+<project name="Corruption of Champions Build Script" default="debug">
+
+ <!-- Create a environment variable FLEX_HOME that points to the flex SDK -->
+ <property environment="env" />
+ <property name="FLEX_HOME" location="${env.FLEX_HOME}" />
+ 
+ <property name="main.src.dir" value="${basedir}/classes"/>
+ <property name="test.src.dir" value="${basedir}/test"/>
+ <property name="lib.dir" value="${basedir}/lib/bin"/>
+ <property name="build.dir" value="${basedir}/target"/>
+ <property name="report.dir" value="${build.dir}/report"/>
+ <property name="test.file" value="${build.dir}/CoC-test.swf"/>md
+ 
+	<!-- Setup Flex and FlexUnit ant tasks -->
+	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef resource="flexUnitTasks.tasks">
+	   <classpath>
+	      <fileset dir="${lib.dir}/flexunit">
+	         <include name="flexUnitTasks*.jar" />
+	      </fileset>
+	   </classpath>
+	</taskdef>
+               
+   <!-- delete and create the DEPLOY dir again -->
+   <target name="init">
+      <delete dir="${build.dir}" />
+      <mkdir dir="${build.dir}" />
+	  <mkdir dir="${report.dir}" />       
+   </target>
+   
+	<macrodef name="build-game-binary">
+		<attribute name="debug-flag"/>
+		<attribute name="release-flag"/>
+		<attribute name="binary-name"/>
+		<sequential>
+			  <!-- build the game binary -->
+		      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
+		         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+		         <source-path path-element="${FLEX_HOME}/frameworks"/>
+				 <source-path path-element="${main.src.dir}/"/>
+		         <compiler.debug>@{debug-flag}</compiler.debug>
+		        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+				<define name="CONFIG::release" value="@{release-flag}"/>
+				<define name="CONFIG::debug" value="@{debug-flag}"/>
+				<define name="CONFIG::AIR" value="false"/>
+				<define name="CONFIG::STANDALONE" value="true"/>
+		      </mxmlc>
+		</sequential>
+	</macrodef>
+	
+   <target name="release" depends="init" description="Build with release flags">
+      <build-game-binary debug-flag="false" release-flag="true" binary-name="CoC-release.swf"></build-game-binary>
+   </target>
+   
+   <target name="debug" depends="init" description="Build with debug flags">
+   		<build-game-binary debug-flag="true" release-flag="false" binary-name="CoC-debug.swf"></build-game-binary>
+   </target>
+   
+   <target name="all" depends="init,release,debug" description="Build all swf versions">
+   </target>
+</project>
