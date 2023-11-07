@@ -52,3 +52,9 @@ jobs:
     # this is where the build happens. A separate build is started for every entry in the matrix element
     - name: Build
       run: ant all
+
+    - name: preserve Data
+      uses: actions/upload-artifact@v3
+      with:
+        name: swfs
+        path: target/*
