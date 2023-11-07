@@ -53,8 +53,14 @@ jobs:
     - name: Build
       run: ant all
 
-    - name: preserve Data
+    - name: save debug swf
       uses: actions/upload-artifact@v3
       with:
-        name: swfs
-        path: target/*
+        name: debug-swf
+        path: target/CoC-debug.swf
+
+    - name: save release swf
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-swf
+        path: target/CoC-release.swf
