@@ -297,5 +297,8 @@ public class BaseCombatContent extends BaseContent {
 	protected function calcEclypseMod(damage:Number, incCnt:Boolean):Number {
 		return combat.magic.calcEclypseModImpl(damage, incCnt);
 	}
+	protected function calcTideMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcTideModImpl(damage, incCnt);
+	}
 }
 }

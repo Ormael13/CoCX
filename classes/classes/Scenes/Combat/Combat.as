@@ -3790,6 +3790,7 @@ public class Combat extends BaseContent {
                 break;
             case ElementalRace.ELEMENT_UNDINE:
                 outputText("You unleash an arrow of lethally pressurized water. ");
+				damage = magic.calcTideModImpl(damage, true);
                 damage *= waterDamageBoostedByDao();
 				doWaterDamage(damage, true, true);
                 break;
@@ -9186,6 +9187,14 @@ public class Combat extends BaseContent {
                 }
                 player.removeStatusEffect(StatusEffects.LethicesRapeTentacles);
             }
+        }
+        if (player.hasStatusEffect(StatusEffects.CounterHighTide)) {
+            if (player.statusEffectv1(StatusEffects.CounterHighTide) > 0 && player.statusEffectv2(StatusEffects.CounterHighTide) == 0 && player.statusEffectv3(StatusEffects.CounterHighTide) == 0) {
+				if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 1, -2);
+				else if (player.hasPerk(PerkLib.HighTideEx)) player.addStatusValue(StatusEffects.CounterHighTide, 1, -3);
+				player.addStatusValue(StatusEffects.CounterHighTide, 1, -4);
+			}
+			if (player.statusEffectv2(StatusEffects.CounterEclipsingShadow) > 0) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, -1);
         }
         if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
             if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0 && player.statusEffectv2(StatusEffects.CounterEclipsingShadow) == 0 && player.statusEffectv3(StatusEffects.CounterEclipsingShadow) == 0) {

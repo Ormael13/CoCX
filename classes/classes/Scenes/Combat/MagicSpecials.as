@@ -2526,6 +2526,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence();
 		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
+		damage = calcTideMod(damage, true);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -2761,6 +2762,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = calcGlacialMod(damage, true);
 			damage = calcVoltageMod(damage, true);
 			damage = calcEclypseMod(damage, true);
+			damage = calcTideMod(damage, true);
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 3;
@@ -6779,6 +6781,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (type == 4) {
 			outputText("You push both of your palms toward your opponent, your arms turning to a pair of powerful water jets that batters [themonster] with rock crushing pressure! ");
+			damage = calcTideMod(damage, true);
 			doWaterDamage(damage, true, true);
 			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
 				monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});

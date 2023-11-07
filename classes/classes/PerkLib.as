@@ -516,6 +516,12 @@ public class PerkLib
 		public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
 				"When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.",
 				"You've chosen the 'Twin Thunder' perk. When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.");
+		public static const PowerAttackSu:PerkType = mk("", "",
+				".",
+				"You've chosen the 'Power Attack (Su)' perk. Enable Power Attack p. special. .");
+		public static const PowerShotSu:PerkType = mk("", "",
+				".",
+				"You've chosen the 'Power Shot (Su)' perk. Enable Power Shot p. special. .");
 	//	public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
 	//			".",
 	//			"You've chosen the 'Twin Thunder' perk, .");
@@ -526,6 +532,12 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -5709,16 +5721,16 @@ public class PerkLib
                                 || player.hasPerk(DragonDarknessBreath);
                     }, "Any darkness spell")
                     .requireLevel(12)
-                    .requireInt(75);/*
+                    .requireInt(75);
             HighTide.requireAnyPerk(GrandMage, ArchmageEx)
 					.requirePerk(Channeling)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWaterBall)
                                 || player.hasStatusEffect(StatusEffects.KnowsWaterSphere)
                                 || player.hasPerk(DragonWaterBreath);
-                    }, "Any lightning spell")
+                    }, "Any water spell")
                     .requireLevel(12)
-                    .requireInt(75);*/
+                    .requireInt(75);
             // Spell-boosting perks
             // Battlemage: auto-use Might
             Battlemage.requireLevel(12)
@@ -5856,7 +5868,7 @@ public class PerkLib
 					.requirePerk(ArcaneRegenerationEpic)
                     .requireInt(125)
                     .requireLevel(24);
-			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow)
+			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow, HighTide)
                     .requireInt(125)
                     .requireLevel(24);
             WarMageAdept.requirePerk(WarMageApprentice)
@@ -5908,6 +5920,9 @@ public class PerkLib
                     .requireLevel(30)
                     .requireInt(150);
             EclipsingShadowEx.requirePerks(GrandArchmage, EclipsingShadow)
+                    .requireLevel(30)
+                    .requireInt(150);
+            HighTideEx.requirePerks(GrandArchmage, HighTide)
                     .requireLevel(30)
                     .requireInt(150);/*
             SpellpowerGrey.requirePerk(SpellpowerGrey)
@@ -5997,6 +6012,9 @@ public class PerkLib
                     .requireLevel(54)
                     .requireInt(300);
             EclipsingShadowSu.requirePerks(GrandArchmage3rdCircle, EclipsingShadowEx)
+                    .requireLevel(54)
+                    .requireInt(300);
+            HighTideSu.requirePerks(GrandArchmage3rdCircle, HighTideEx)
                     .requireLevel(54)
                     .requireInt(300);
             //Tier 10 Intelligence perks
@@ -7839,4 +7857,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

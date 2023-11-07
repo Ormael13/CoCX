@@ -305,6 +305,7 @@ public class AbstractSpell extends CombatAbility {
 				break;
 			}
 			case DamageType.WATER: {
+				damage = calcTideMod(damage, casting);
 				damage *= combat.waterDamageBoostedByDao();
 				break;
 			}

@@ -783,6 +783,45 @@ public class CombatMagic extends BaseCombatContent {
         }
 		return modDmg;
     }
+
+    internal function calcTideModImpl(damage:Number, casting:Boolean = true):int {
+        var modDmg:Number = damage;
+        //v1 is counter value in 5% (for later tiers),
+		if (player.hasPerk(PerkLib.HighTide)) { //if has perk
+            if (casting) {
+                if (player.hasStatusEffect(StatusEffects.CounterHighTide)) { //counter created
+                    var cap:Number = 40;
+					if (player.hasPerk(PerkLib.HighTideEx)) cap += 80;
+					if (player.hasPerk(PerkLib.HighTideSu)) cap += 480;
+                    //calculating damage
+                    if (player.statusEffectv1(StatusEffects.CounterHighTide) > 0)
+                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterHighTide) * 0.05));
+                    //fancy messages
+                    if (player.statusEffectv1(StatusEffects.CounterHighTide) == 0)
+                        outputText("\nUnfortunately, traces of your previously used water magic are too weak to be used.\n\n");
+                    else
+					    outputText("\nTraces of your previously used water magic are still here, and you use them to empower another spell!\n\n");
+                    //increasing counters
+					var increase:Number = 8;
+					if (player.hasPerk(PerkLib.HighTideEx)) increase += 4;
+					if (player.statusEffectv1(StatusEffects.CounterHighTide) < cap) {
+						player.addStatusValue(StatusEffects.CounterHighTide, 1, increase);
+						player.addStatusValue(StatusEffects.CounterHighTide, 2, 1);
+					}
+                }
+                else {
+                    if (player.hasPerk(PerkLib.HighTideEx))
+                        player.createStatusEffect(StatusEffects.CounterHighTide,12,1,0,0);
+                    else
+                        player.createStatusEffect(StatusEffects.CounterHighTide,8,1,0,0);
+                }
+            }
+            else //just calc damage
+                if (player.hasStatusEffect(StatusEffects.CounterHighTide) && player.statusEffectv1(StatusEffects.CounterHighTide) > 0)
+                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterHighTide) * 0.05));
+        }
+		return modDmg;
+    }
 	
 	public function MagicPrefixEffect():void {
 		//if (player.hasPerk(PerkLib.Spellsong) && player.hasStatusEffect(StatusEffects.Sing)) {
@@ -940,6 +979,11 @@ public class CombatMagic extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
+			if (player.hasStatusEffect(StatusEffects.CounterHighTide)) {
+				if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 2);
+				else if (player.hasPerk(PerkLib.HighTideEx)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 3);
+				player.addStatusValue(StatusEffects.CounterHighTide, 1, 4);
+			}
 			if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
 				if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 2);
 				else if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 3);
@@ -959,11 +1003,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 2);
 				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 3);
 				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
-			}
-			if (player.hasStatusEffect(StatusEffects.CounterHighTide)) {
-				if (player.hasPerk(PerkLib.HighTideSu)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 2);
-				else if (player.hasPerk(PerkLib.HighTideEx)) player.addStatusValue(StatusEffects.CounterHighTide, 1, 3);
-				player.addStatusValue(StatusEffects.CounterHighTide, 1, 4);
 			}
 		}
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
