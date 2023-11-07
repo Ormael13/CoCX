@@ -614,14 +614,14 @@ public class PerkMenu extends BaseContent {
 				else addButton(6, "Activate", golemsPoisonedWeaponMode, 2);
 			}
 		}
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
-		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "Attacking", golemsAttacking, true);
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "G. Waiting", golemsAttacking,false).hint("Golems will not attack at the beginning of the turn.");
+		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] != 1) addButton(11, "G. Attacking", golemsAttacking, true).hint("Golems will attack at the beginning of the turn.");
 		if (player.hasPerk(PerkLib.FirstAttackSkeletons) && (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0 || player.perkv1(PerkLib.GreaterHarvest) > 0 || player.perkv2(PerkLib.GreaterHarvest) > 0)) {
 			outputText("\n\n<b>Skeletons attack pattern behavious:</b>\n");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) outputText("Attacking at the begining of each turn.");
 			if (flags[kFLAGS.NECROMANCER_SKELETONS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
-			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(10, "Waiting", skeletonsAttacking,false);
-			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(11, "Attacking", skeletonsAttacking, true);
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] == 1) addButton(12, "S. Waiting", skeletonsAttacking,false).hint("Skeletons will not attack at the beginning of the turn.");
+			if (flags[kFLAGS.NECROMANCER_SKELETONS] != 1) addButton(13, "S. Attacking", skeletonsAttacking, true).hint("Skeletons will attack at the beginning of the turn.");
 		}
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
 		else addButton(14, "Back", displayPerks);

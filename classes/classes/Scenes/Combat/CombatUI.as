@@ -551,12 +551,13 @@ public class CombatUI extends BaseCombatContent {
 				doGolemTurn();
 			if (isSkeletonsTurn())
 				combat.sendSkeletonToFight();
-			else if (isEpicElementalTurn())
+			if (isEpicElementalTurn())
 				doEpicElementalTurn();
-			else if (isElementalTurn())
+			if (isElementalTurn())
 				doElementalTurn();
+			flushOutputTextToGUI();
 			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
-			else {
+			{
 				if (monster is SandTrap) {
 					btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
 				}
