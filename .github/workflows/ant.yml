@@ -39,7 +39,7 @@ jobs:
 
     # install VNC and xfce4 so we have a desktop, as the flash player requires one:
     - name: Install desktop
-      run: sudo apt-get install vnc4server xfce4 ant ant-optional -y
+      run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
 
     # So flexunit can find the player and the ant build file does not have to be modified  
     - name: Copy flashplayer to correct location
