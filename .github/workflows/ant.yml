@@ -1,0 +1,54 @@
+# This workflow will build a Java project with Ant
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-ant
+
+name: ActionScript 3 CI
+
+# Github worflows do not support actionscript directly.
+# However the build uses ant, which is usually used to build java projects.
+# The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
+
+on:
+  push:
+    # Just so the CI won't complain about Vanilla+ failing, since V+ isn't configured for CI.
+    branches-ignore: [ VanillaPlus ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  # tell the build file where to find the flex SDK
+  FLEX_HOME: "build-dep/bin/flex/"
+  # this is to trick the flash player into thinking it is running on a desktop
+  DISPLAY: ":1"
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        # different configurations that should be built
+        build: [ release, debug ]
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    # install VNC and xfce4 so we have a desktop, as the flash player requires one:
+    - name: Install desktop
+      run: sudo apt-get install vnc4server xfce4 ant ant-optional -y
+
+    # So flexunit can find the player and the ant build file does not have to be modified  
+    - name: Copy flashplayer to correct location
+      run: sudo cp build-dep/bin/flashplayer /usr/local/bin/gflashplayer
+
+    # start a VNC session, this will be the desktop for tests
+    - name: Start VNC
+      run: Xvnc :1 &
+
+    # this is where the build happens. A separate build is started for every entry in the matrix element
+    - name: Build and run tests
+      run: ant test-${{ matrix.build }}
