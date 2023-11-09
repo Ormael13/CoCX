@@ -44,8 +44,8 @@ jobs:
         run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
 
       # So flexunit can find the player and the ant build file does not have to be modified
-      - name: Copy flashplayer to correct location
-        run: sudo cp build-dep/bin/flashplayer /usr/local/bin/gflashplayer
+      #- name: Copy flashplayer to correct location
+      #  run: sudo cp build-dep/bin/flashplayer /usr/local/bin/gflashplayer
 
       # start a VNC session, this will be the desktop for tests
       - name: Start VNC
