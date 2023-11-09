@@ -488,10 +488,17 @@ public class Tail extends SaveableBodyPart {
 		//tailSlam: true,
 		isLong: true
 	});
-	public static const ARIGEAN_RED: int = 58
+	public static const ARIGEAN_RED: int = 58;
 	EnumValue.add(Types, ARIGEAN_RED, "ARIGEAN_RED", {
 		name:"arigean (R)",
 		appearanceDesc: "Your duo of slack Symbiotes sprout from the end of your tailbone with an additional skeletal tail bearing red highlights, each seems to sport a large set of teeth, and are covered in black armor-like skin with glowing red markings. You feel everything they feel and are able to communicate with ease.",
+		//tailSlam: true,
+		isLong: true
+	});
+	public static const ARIGEAN_YELLOW: int = 59;
+	EnumValue.add(Types, ARIGEAN_YELLOW, "ARIGEAN_YELLOW", {
+		name:"arigean (Y)",
+		appearanceDesc: "Your duo of black, Beautiful Symbiotes sprout from the end of your tailbone with an additional skeletal bearing yellow highlights, each sports a lovely, large set of lethal teeth to bite through foes, and are covered in reliable black armor-like skin with glowing yellow markings. You're able to coordinate with them as if they were just extra limbs.",
 		//tailSlam: true,
 		isLong: true
 	});

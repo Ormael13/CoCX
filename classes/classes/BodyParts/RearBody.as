@@ -176,6 +176,16 @@ public class RearBody extends BodyPart {
 		name: "abyss shark fin",
 		appearanceDesc: "A large, shark-like fin has sprouted between your shoulders, and a second, smaller fin beneath it at the height of your navel. With them, you have much a easier ability to swim around."
 	});
+	public static const ARIGEAN_RED_AURA: int = 29;
+	EnumValue.add(Types, ARIGEAN_RED_AURA, "ARIGEAN_RED_AURA", {
+		name: "arigean aura (R)",
+		appearanceDesc: "A black and red haze is exhaled from your symbiotic partners, sticking close to your form giving you an intimidating aura to help frighten your foes."
+	});
+	public static const ARIGEAN_YELLOW_AURA: int = 30;
+	EnumValue.add(Types, ARIGEAN_YELLOW_AURA, "ARIGEAN_YELLOW_AURA", {
+		name: "arigean aura (Y)",
+		appearanceDesc: "A black and yellow haze is exhaled from your symbiotic partners, sticking close to your form giving you an intimidating aura to help frighten your foes."
+	});
 
 	public function RearBody(creature:Creature) {
 		super(creature, null);
