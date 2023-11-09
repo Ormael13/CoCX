@@ -237,14 +237,24 @@ public class CombatAbilities {
 			.concat(ALL_GREEN_SPELLS)
 	;
 
-	public static const CleansingPalm:CleansingPalmSkill 		= new CleansingPalmSkill();
-	public static const IceFist:IceFistSkill					= new IceFistSkill()
-	public static const FirePunch:FirePunchSkill				= new FirePunchSkill();
-	public static const HurricaneDance:HurricaneDanceSkill		= new HurricaneDanceSkill();
-	public static const EarthStance:EarthStanceSkill			= new EarthStanceSkill();
-	public static const PunishingKick:PunishingKickSkill		= new PunishingKickSkill();
-	public static const SoulBlast:SoulBlastSkill				= new SoulBlastSkill();
-	public static const Overlimit:OverlimitSkill				= new OverlimitSkill();
+	public static const CleansingPalm:CleansingPalmSkill 			= new CleansingPalmSkill();
+	public static const IceFist:IceFistSkill						= new IceFistSkill()
+	public static const FirePunch:FirePunchSkill					= new FirePunchSkill();
+	public static const HurricaneDance:HurricaneDanceSkill			= new HurricaneDanceSkill();
+	public static const EarthStance:EarthStanceSkill				= new EarthStanceSkill();
+	public static const PunishingKick:PunishingKickSkill			= new PunishingKickSkill();
+	public static const SoulBlast:SoulBlastSkill					= new SoulBlastSkill();
+	public static const Overlimit:OverlimitSkill					= new OverlimitSkill();
+	public static const TripleThrust:MultiThrustSkill				= new MultiThrustSkill(1);
+	public static const SextupleThrust:MultiThrustSkill				= new MultiThrustSkill(2);
+	public static const NonupleThrust:MultiThrustSkill				= new MultiThrustSkill(3);
+	public static const DracoSweep:DracoSweepSkill					= new DracoSweepSkill();
+	public static const FlamesOfLove:FlamesOfLoveSkill				= new FlamesOfLoveSkill();
+	public static const IciclesOfLove:IciclesOfLoveSkill			= new IciclesOfLoveSkill();
+	public static const StormOfSisterhood:StormOfSisterhoodSkill	= new StormOfSisterhoodSkill();
+	public static const NightOfBrotherhood:NightOfBrotherhoodSkill	= new NightOfBrotherhoodSkill();
+	public static const Devourer:DevourerSkill						= new DevourerSkill();
+
 
 	public static const ALL_SOULSKILLS:/*CombatAbility*/Array = [
 		CleansingPalm,
@@ -254,7 +264,16 @@ public class CombatAbilities {
 		EarthStance,
 		PunishingKick,
 		SoulBlast,
-		Overlimit
+		Overlimit,
+		TripleThrust,
+		SextupleThrust,
+		NonupleThrust,
+		DracoSweep,
+		FlamesOfLove,
+		IciclesOfLove,
+		StormOfSisterhood,
+		NightOfBrotherhood,
+		Devourer
 	]
 	
 	/*

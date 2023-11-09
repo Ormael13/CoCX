@@ -91,7 +91,6 @@ public class AbstractSoulSkill extends CombatAbility {
 			if ((monster.spe - player.spe < 8) && display) outputText("[Themonster] narrowly avoids your " + skillName + "!");
 			else if ((monster.spe-player.spe < 20) && display) outputText("[Themonster] dodges your " + skillName + " with superior quickness!");
 			else if (display) outputText("[Themonster] deftly avoids your slow " + skillName + ".");
-			enemyAI();
 			return true;
 		}
 		return false;
