@@ -22,7 +22,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Set up JDK
@@ -47,8 +47,8 @@ jobs:
           accept-air-license: true
 
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
-      - name: Install desktop
-        run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
+      #- name: Install desktop
+      #  run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
 
       # So flexunit can find the player and the ant build file does not have to be modified
       #- name: Copy flashplayer to correct location
@@ -60,7 +60,7 @@ jobs:
 
       # this is where the build happens. A separate build is started for every entry in the matrix element
       - name: Build
-        run: ant all
+        run: ant allCI
 
       - name: save debug swf
         uses: actions/upload-artifact@v3
@@ -74,14 +74,14 @@ jobs:
           name: release-swf
           path: target/CoC-release.swf
 
-#      - name: save android armv7 apk
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: mobile-apk
-#          path: target/CoC-Mobile-armv7.apk
-#
-#      - name: save android armv8 apk
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: mobile-apk
-#          path: target/CoC-Mobile-arm8.apk
+      - name: save android armv7 apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-apk
+          path: target/CoC-Mobile-armv7.apk
+
+      - name: save android armv8 apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-apk
+          path: target/CoC-Mobile-arm8.apk
