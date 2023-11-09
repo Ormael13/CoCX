@@ -64,10 +64,25 @@
 			<arg line="-storepass 123456" />
 			<arg line="${build.dir}/CoC-Mobile.apk" />
 			<arg line="${basedir}/CoC-Android.xml" />
-			<arg line="-C ${build.dir}/CoC-Mobile.swf" />
-			<arg line="${basedir}/devTools/icons"/>
+            <arg line="-C ${build.dir} CoC-Mobile.swf" />
+            <arg line="-C ${basedir}"/>
+            <arg line="devTools/icons"/>
 		</exec>
 	</target>
+    <target name="airApkLin" description="Create the AIR package" depends="airMobile,checkos" if="isLinux">
+        <exec executable="${FLEX_HOME}/bin/adt" failonerror="true">
+            <arg line="-package" />
+            <arg line="-target apk-captive-runtime" />
+            <arg line="-storetype pkcs12" />
+            <arg line="-keystore ${basedir}/coc.keystore" />
+            <arg line="-storepass 123456" />
+            <arg line="${build.dir}/CoC-Mobile.apk" />
+            <arg line="${basedir}/CoC-Android.xml" />
+            <arg line="-C ${build.dir} CoC-Mobile.swf" />
+            <arg line="-C ${basedir}"/>
+            <arg line="devTools/icons"/>
+        </exec>
+    </target>
 
     <target name="release" depends="init" description="Build with release flags">
         <build-game-binary debug-flag="false" release-flag="true" air-flag="false" binary-name="CoC-release.swf"></build-game-binary>
@@ -80,6 +95,6 @@
 		<build-game-binary debug-flag="false" release-flag="false" air-flag="false" binary-name="CoC-Mobile.swf"></build-game-binary>
 	</target>
 
-    <target name="all" depends="init,release,debug,airMobile" description="Build all swf versions">
-    </target>
+    <target name="all" depends="init,release,debug,airMobile" description="Build all swf versions"/>
+    <target name="makeMobileAir" depends="init,airMobile,airApkLin,airApkWin" description=" build mobile App"/>
 </project>
