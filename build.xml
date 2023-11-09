@@ -1,55 +1,85 @@
 <project name="Corruption of Champions Build Script" default="debug">
 
- <!-- Create a environment variable FLEX_HOME that points to the flex SDK -->
- <property environment="env" />
- <property name="FLEX_HOME" location="${env.FLEX_HOME}" />
- 
- <property name="main.src.dir" value="${basedir}/classes"/>
- <property name="test.src.dir" value="${basedir}/test"/>
- <property name="lib.dir" value="${basedir}/lib/bin"/>
- <property name="build.dir" value="${basedir}/target"/>
- <property name="report.dir" value="${build.dir}/report"/>
- <property name="test.file" value="${build.dir}/CoC-test.swf"/>
- 
-	<!-- Setup Flex and FlexUnit ant tasks -->
-	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
-	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
-               
-   <!-- delete and create the DEPLOY dir again -->
-   <target name="init">
-      <delete dir="${build.dir}" />
-      <mkdir dir="${build.dir}" />
-	  <mkdir dir="${report.dir}" />       
-   </target>
-   
+    <!-- Create a environment variable FLEX_HOME that points to the flex SDK -->
+    <property environment="env"/>
+    <property name="FLEX_HOME" location="${env.FLEX_HOME}"/>
+
+    <property name="main.src.dir" value="${basedir}/classes"/>
+    <property name="test.src.dir" value="${basedir}/test"/>
+    <property name="lib.dir" value="${basedir}/lib/bin"/>
+    <property name="build.dir" value="${basedir}/target"/>
+    <property name="report.dir" value="${build.dir}/report"/>
+    <property name="test.file" value="${build.dir}/CoC-test.swf"/>
+
+    <!-- Setup Flex and FlexUnit ant tasks -->
+    <!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
+    <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+
+    <!-- delete and create the DEPLOY dir again -->
+    <target name="init">
+        <delete dir="${build.dir}"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${report.dir}"/>
+    </target>
+	<!-- check os, this is needed to handle if running on windows or running in the ci-->
+	<target name="checkos">
+		<condition property="isWindows" value="true">
+			<os family="windows" />
+		</condition>
+
+		<condition property="isLinux" value="true">
+			<os family="unix" />
+		</condition>
+	</target>
+
 	<macrodef name="build-game-binary">
-		<attribute name="debug-flag"/>
-		<attribute name="release-flag"/>
-		<attribute name="binary-name"/>
-		<sequential>
-			  <!-- build the game binary -->
-		      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
-		         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
-		         <source-path path-element="${FLEX_HOME}/frameworks"/>
-				 <source-path path-element="${main.src.dir}/"/>
-		         <compiler.debug>@{debug-flag}</compiler.debug>
-		        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
-				<define name="CONFIG::release" value="@{release-flag}"/>
-				<define name="CONFIG::debug" value="@{debug-flag}"/>
-				<define name="CONFIG::AIR" value="false"/>
-				<define name="CONFIG::STANDALONE" value="true"/>
-		      </mxmlc>
-		</sequential>
-	</macrodef>
-	
-   <target name="release" depends="init" description="Build with release flags">
-      <build-game-binary debug-flag="false" release-flag="true" binary-name="CoC-release.swf"></build-game-binary>
-   </target>
-   
-   <target name="debug" depends="init" description="Build with debug flags">
-   		<build-game-binary debug-flag="true" release-flag="false" binary-name="CoC-debug.swf"></build-game-binary>
-   </target>
-   
-   <target name="all" depends="init,release,debug" description="Build all swf versions">
-   </target>
+        <attribute name="debug-flag"/>
+        <attribute name="release-flag"/>
+		<attribute name="air-flag"/>
+        <attribute name="binary-name"/>
+        <sequential>
+            <!-- build the game binary -->
+            <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
+                <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+                <source-path path-element="${FLEX_HOME}/frameworks"/>
+                <source-path path-element="${main.src.dir}/"/>
+                <compiler.debug>@{debug-flag}</compiler.debug>
+                <library-path dir="${FLEX_HOME}/frameworks/libs" includes="*.swc" append="true"/>
+                <library-path dir="${FLEX_HOME}/frameworks/libs/air" includes="*.swc" append="true"/>
+                <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+                <define name="CONFIG::release" value="@{release-flag}"/>
+                <define name="CONFIG::debug" value="@{debug-flag}"/>
+                <define name="CONFIG::AIR" value="@{air-flag}"/>
+                <define name="CONFIG::STANDALONE" value="true"/>
+            </mxmlc>
+        </sequential>
+    </macrodef>
+	<!-- Now create the AIR package using the ADT utility -->
+	<target name="airApkWin" description="Create the AIR package" depends="airMobile,checkos" if="isWindows">
+		<exec executable="${FLEX_HOME}/bin/adt.bat" failonerror="true">
+			<arg line="-package" />
+			<arg line="-target apk-captive-runtime" />
+			<arg line="-storetype pkcs12" />
+			<arg line="-keystore ${basedir}/coc.keystore" />
+			<arg line="-storepass 123456" />
+			<arg line="${build.dir}/CoC-Mobile.apk" />
+			<arg line="${basedir}/CoC-Android.xml" />
+			<arg line="-C ${build.dir}/CoC-Mobile.swf" />
+			<arg line="${basedir}/devTools/icons"/>
+		</exec>
+	</target>
+
+    <target name="release" depends="init" description="Build with release flags">
+        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" binary-name="CoC-release.swf"></build-game-binary>
+    </target>
+
+    <target name="debug" depends="init" description="Build with debug flags">
+        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" binary-name="CoC-debug.swf"></build-game-binary>
+    </target>
+	<target name="airMobile" depends="init" description="Build air release">
+		<build-game-binary debug-flag="false" release-flag="false" air-flag="false" binary-name="CoC-Mobile.swf"></build-game-binary>
+	</target>
+
+    <target name="all" depends="init,release,debug,airMobile" description="Build all swf versions">
+    </target>
 </project>
