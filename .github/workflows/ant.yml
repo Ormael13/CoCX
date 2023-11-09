@@ -43,44 +43,44 @@ jobs:
       - name: Set up environment
         run: |
           echo "export PATH=\$PATH:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/build-tools" >> $GITHUB_ENV
+      
 
+      # install VNC and xfce4 so we have a desktop, as the flash player requires one:
+      - name: Install desktop
+        run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
 
-    # install VNC and xfce4 so we have a desktop, as the flash player requires one:
-    - name: Install desktop
-      run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
+      # So flexunit can find the player and the ant build file does not have to be modified
+      - name: Copy flashplayer to correct location
+        run: sudo cp build-dep/bin/flashplayer /usr/local/bin/gflashplayer
 
-    # So flexunit can find the player and the ant build file does not have to be modified  
-    - name: Copy flashplayer to correct location
-      run: sudo cp build-dep/bin/flashplayer /usr/local/bin/gflashplayer
+      # start a VNC session, this will be the desktop for tests
+      - name: Start VNC
+        run: Xvnc :1 &
 
-    # start a VNC session, this will be the desktop for tests
-    - name: Start VNC
-      run: Xvnc :1 &
+      # this is where the build happens. A separate build is started for every entry in the matrix element
+      - name: Build
+        run: ant allCI
 
-    # this is where the build happens. A separate build is started for every entry in the matrix element
-    - name: Build
-      run: ant allCI
+      - name: save debug swf
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-swf
+          path: target/CoC-debug.swf
 
-    - name: save debug swf
-      uses: actions/upload-artifact@v3
-      with:
-        name: debug-swf
-        path: target/CoC-debug.swf
+      - name: save release swf
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-swf
+          path: target/CoC-release.swf
 
-    - name: save release swf
-      uses: actions/upload-artifact@v3
-      with:
-        name: release-swf
-        path: target/CoC-release.swf
+      - name: save android armv7 apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-apk
+          path: target/CoC-Mobile-armv7.apk
 
-    - name: save android armv7 apk
-      uses: actions/upload-artifact@v3
-      with:
-        name: mobile-apk
-        path: target/CoC-Mobile-armv7.apk
-
-    - name: save android armv8 apk
-      uses: actions/upload-artifact@v3
-      with:
-        name: mobile-apk
-        path: target/CoC-Mobile-arm8.apk
+      - name: save android armv8 apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-apk
+          path: target/CoC-Mobile-arm8.apk
