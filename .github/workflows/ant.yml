@@ -51,7 +51,7 @@ jobs:
 
     # this is where the build happens. A separate build is started for every entry in the matrix element
     - name: Build
-      run: ant all
+      run: ant allCI
 
     - name: save debug swf
       uses: actions/upload-artifact@v3
@@ -64,3 +64,9 @@ jobs:
       with:
         name: release-swf
         path: target/CoC-release.swf
+
+    - name: save android apk
+      uses: actions/upload-artifact@v3
+      with:
+        name: mobile-apk
+        path: target/CoC-Mobile.apk

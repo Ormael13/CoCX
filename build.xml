@@ -97,4 +97,5 @@
 
     <target name="all" depends="init,release,debug,airMobile" description="Build all swf versions"/>
     <target name="makeMobileAir" depends="init,airMobile,airApkLin,airApkWin" description=" build mobile App"/>
+    <target name="allCI" depends="init,release,debug,makeMobileAir" description="Build all swf versions"/>
 </project>
