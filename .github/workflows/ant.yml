@@ -39,28 +39,6 @@ jobs:
       - name: Download and install Android SDK
         uses: android-actions/setup-android@v3
 
-
-      - name: Set up environment
-        run: |
-          echo "export PATH=\$PATH:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/build-tools" >> $GITHUB_ENV
-
-      #add flex and air sdk
-      - name: Download and install Adobe AIR SDK
-        run: |
-          AIR_VERSION="33.1.1.626"
-          wget https://airsdk.harman.com/download/airsdk-linux-x64-v${AIR_VERSION}.tar.gz
-          tar -xzvf airsdk-linux-x64-v${AIR_VERSION}.tar.gz
-          echo "export AIR_HOME=$PWD" >> $GITHUB_ENV
-          echo "export PATH=\$PATH:$AIR_HOME/bin" >> $GITHUB_ENV
-
-      - name: Download and install Apache Flex SDK
-        run: |
-          FLEX_VERSION="4.16.1"
-          wget https://archive.apache.org/dist/flex/${FLEX_VERSION}/apache-flex-sdk-${FLEX_VERSION}-bin.tar.gz
-          tar -xzvf apache-flex-sdk-${FLEX_VERSION}-bin.tar.gz
-          echo "export FLEX_HOME=$PWD/apache-flex-sdk-${FLEX_VERSION}" >> $GITHUB_ENV
-          echo "export PATH=\$PATH:$FLEX_HOME/bin" >> $GITHUB_ENV
-
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
       - name: Install desktop
         run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
