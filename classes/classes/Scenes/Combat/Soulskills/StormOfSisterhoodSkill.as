@@ -54,7 +54,7 @@ public class StormOfSisterhoodSkill extends AbstractSoulSkill {
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var damage:Number = baseDamage * (5 * player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood));
-		if (monster.plural) damage *= 2;
+		if (monster && monster.plural) damage *= 2;
 		damage *= combat.lightningDamageBoostedByDao();
 		return Math.round(damage);
 	}

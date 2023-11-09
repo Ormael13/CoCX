@@ -40,7 +40,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
 		}
-		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) {
+		if ((player.weapon == weapons.L_WHIP || player.weapon == weapons.DL_WHIP || player.weapon == weapons.TIDAR) && monster) {
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
@@ -55,7 +55,7 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//group enemies bonus
-		if (monster.plural) damage *= 5;
+		if (monster && monster.plural) damage *= 5;
 		//other bonuses
 		if (player.armor.name == "some taur paladin armor" || player.armor.name == "some taur blackguard armor") damage *= 2;
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;

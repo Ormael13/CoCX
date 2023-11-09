@@ -65,7 +65,7 @@ public class MultiThrustSkill extends AbstractSoulSkill {
 
 		//other bonuses
 		if (player.perkv1(IMutationsLib.AnubiHeartIM) >= 4 && player.HP < Math.round(player.maxHP() * 0.5)) damage *= 1.5;
-		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
+		if (monster) if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
 		return damage;
 	}
 

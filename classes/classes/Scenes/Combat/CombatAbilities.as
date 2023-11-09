@@ -254,6 +254,15 @@ public class CombatAbilities {
 	public static const StormOfSisterhood:StormOfSisterhoodSkill	= new StormOfSisterhoodSkill();
 	public static const NightOfBrotherhood:NightOfBrotherhoodSkill	= new NightOfBrotherhoodSkill();
 	public static const Devourer:DevourerSkill						= new DevourerSkill();
+	public static const ManyBirds:ManyBirdsSkill					= new ManyBirdsSkill();
+	public static const ResonanceVolley:ResonanceVolleySkill		= new ResonanceVolleySkill();
+	public static const AvatarOfTheSong:AvatarOfTheSongSkill		= new AvatarOfTheSongSkill();
+	public static const BeatOfWar:BeatOfWarSkill					= new BeatOfWarSkill();
+	public static const Comet:CometSkill							= new CometSkill();
+	public static const BladeDance:BladeDanceSkill					= new BladeDanceSkill();
+	public static const HailOfBlades:BladeHailSkill					= new BladeHailSkill(1);
+	public static const GrandioseHailOfBlades:BladeHailSkill		= new BladeHailSkill(2);
+	public static const GrandioseHailOfMoonBlades:BladeHailSkill	= new BladeHailSkill(3);
 
 
 	public static const ALL_SOULSKILLS:/*CombatAbility*/Array = [
@@ -273,7 +282,16 @@ public class CombatAbilities {
 		IciclesOfLove,
 		StormOfSisterhood,
 		NightOfBrotherhood,
-		Devourer
+		Devourer,
+		ManyBirds,
+		ResonanceVolley,
+		AvatarOfTheSong,
+		BeatOfWar,
+		Comet,
+		BladeDance,
+		HailOfBlades,
+		GrandioseHailOfBlades,
+		GrandioseHailOfMoonBlades
 	]
 	
 	/*

@@ -54,7 +54,7 @@ public class NightOfBrotherhoodSkill extends AbstractSoulSkill {
 
 	public function calcDamage(monster:Monster, baseDamage: Number):Number {
 		var damage:Number = baseDamage * (5 * player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood));
-		if (monster.plural) damage *= 2;
+		if (monster && monster.plural) damage *= 2;
 		damage *= combat.darknessDamageBoostedByDao();
 		return Math.round(damage);
 	}

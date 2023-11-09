@@ -88,9 +88,9 @@ public class AbstractSoulSkill extends CombatAbility {
 
 	protected function monsterDodgeSkill(skillName:String, display:Boolean):Boolean {
 		if (((player.playerIsBlinded() && rand(2) == 0) || ((monster.getEvasionRoll(false, player.spe) && !monster.hasPerk(PerkLib.NoDodges)))) && !monster.monsterIsStunned()) {
-			if ((monster.spe - player.spe < 8) && display) outputText("[Themonster] narrowly avoids your " + skillName + "!");
-			else if ((monster.spe-player.spe < 20) && display) outputText("[Themonster] dodges your " + skillName + " with superior quickness!");
-			else if (display) outputText("[Themonster] deftly avoids your slow " + skillName + ".");
+			if ((monster.spe - player.spe < 8) && display) outputText("[Themonster] narrowly avoids your " + skillName + "!\n\n");
+			else if ((monster.spe-player.spe < 20) && display) outputText("[Themonster] dodges your " + skillName + " with superior quickness!\n\n");
+			else if (display) outputText("[Themonster] deftly avoids your slow " + skillName + ".\n\n");
 			return true;
 		}
 		return false;
