@@ -22,20 +22,28 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        # different configurations that should be built
-        build: [ release, debug ]
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Download and install Android SDK
+        uses: android-actions/setup-android@v3
+
+
+      - name: Set up environment
+        run: |
+          echo "export PATH=\$PATH:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/build-tools" >> $GITHUB_ENV
+
 
     # install VNC and xfce4 so we have a desktop, as the flash player requires one:
     - name: Install desktop
@@ -65,8 +73,14 @@ jobs:
         name: release-swf
         path: target/CoC-release.swf
 
-    - name: save android apk
+    - name: save android armv7 apk
       uses: actions/upload-artifact@v3
       with:
         name: mobile-apk
-        path: target/CoC-Mobile.apk
+        path: target/CoC-Mobile-armv7.apk
+
+    - name: save android armv8 apk
+      uses: actions/upload-artifact@v3
+      with:
+        name: mobile-apk
+        path: target/CoC-Mobile-arm8.apk
