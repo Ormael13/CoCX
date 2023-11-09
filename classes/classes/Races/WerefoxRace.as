@@ -6,6 +6,7 @@ import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.internals.race.RaceUtils;
 
 public class WerefoxRace extends Race {
     public static const RaceBody:/*String*/Array = [
@@ -59,12 +60,13 @@ public class WerefoxRace extends Race {
 				.skinCoatType(Skin.FUR, +1)
 				.rearType(RearBody.WOLF_COLLAR, +1)
 				.noWings(+4)
-				.hasPerk(PerkLib.Vulpesthropy, +2, -11);
+				.hasAnyPerk([PerkLib.Vulpesthropy, PerkLib.VulpesthropyDormant], +2, -11);
 		
 		addMutation(IMutationsLib.WhiteFacedOneBirthrightIM);
 		
 		buildTier(12, "werefox cub")
-                .requirePerk(PerkLib.Vulpesthropy)
+				.require("Vulpesthropy or Dormant Vulpesthropy perk", 
+					RaceUtils.hasAnyPerkFn([PerkLib.Vulpesthropy, PerkLib.VulpesthropyDormant]))
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +1.00,
