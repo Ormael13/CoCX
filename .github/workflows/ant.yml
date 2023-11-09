@@ -39,6 +39,12 @@ jobs:
       - name: Download and install Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: install flex sdk
+        uses: joshtynjala/setup-apache-flex-action@v2
+        with:
+          flex-version: "4.16.1"
+          air-version: "50.0.1.1"
+          accept-air-license: true
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
       - name: Install desktop
         run: sudo apt-get install tightvncserver xfce4 ant ant-optional -y
