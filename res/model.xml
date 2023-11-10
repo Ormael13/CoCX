@@ -461,6 +461,8 @@
         <cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
 		<cell rect="1101,270,49,59" name="hands_bg/arigean" dx="56" dy="64"/>
         <cell rect="351,270,49,59" name="overhands_bg/fire" dx="56" dy="64"/>
+		<cell rect="301,853,49,59" name="overhands_bg/arigeanRedAura" dx="56" dy="64"/>
+		<cell rect="351,853,49,59" name="overhands_bg/arigeanYellowAura" dx="56" dy="64"/>
         <cell rect="1,330,49,59" name="hands/fur" dx="104" dy="64"/>
         <cell rect="601,330,49,59" name="hands/furracoon" dx="104" dy="64"/>
         <cell rect="51,330,49,59" name="hands/devil" dx="104" dy="64"/>
@@ -493,6 +495,8 @@
         <cell rect="351,330,49,59" name="overhands/fire" dx="104" dy="64"/>
         <cell rect="851,270,49,59" name="overhands/ratatoskrLeft" dx="56" dy="64"/>
         <cell rect="851,330,49,59" name="overhands/ratatoskrRight" dx="104" dy="64"/>
+		<cell rect="301,913,49,59" name="overhands/arigeanRedAura" dx="104" dy="64"/>
+		<cell rect="351,913,49,59" name="overhands/arigeanYellowAura" dx="104" dy="64"/>
         <cell rect="1,390,49,59" name="legs/human" dx="79" dy="115"/>
         <cell rect="51,390,49,59" name="legs/fur" dx="79" dy="115"/>
         <cell rect="101,390,49,59" name="legs/chitin" dx="79" dy="115"/>
@@ -559,6 +563,8 @@
 		<cell rect="901,390,49,59" name="feet/arigean" dx="79" dy="115"/>
         <cell rect="1002,611,90,90" name="legs_bg/gnome" dx="58" dy="93"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="79" dy="115"/>
+		<cell rect="301,793,49,59" name="overfeet/arigeanRedAura" dx="79" dy="115"/>
+		<cell rect="351,793,49,59" name="overfeet/arigeanYellowAura" dx="79" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="79" dy="64"/>
         <cell rect="1201,90,49,59" name="fullbodyMuscle/muscleignis" dx="79" dy="64"/>
         <cell rect="1251,90,49,59" name="fullbodyMuscle/muscleundine" dx="79" dy="64"/>
@@ -636,7 +642,9 @@
         <cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
-		<cell rect="1340,1114,173,156" name="rearbody/arigean" dx="15" dy="45"/>
+		<cell rect="1340,1114,173,156" name="tail/arigean" dx="14" dy="16"/>
+		<cell rect="1340,1272,173,156" name="tail_fg/arigeanRedAura" dx="17" dy="-7"/>
+		<cell rect="1514,1272,173,156" name="tail_fg/arigeanYellowAura" dx="19" dy="-4"/>
         <cell rect="992,641,173,156" name="backtentacles/gazer" dx="22" dy="10"/>
         <cell rect="296,641,173,156" name="aura/windyaura" dx="21" dy="28"/>
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="21" dy="28"/>
@@ -2669,6 +2677,30 @@
 			<case values="RearBody.GHOSTLY_AURA">
                 <show part="aura/ghostlyaura"/>
             </case>
+			<case values="RearBody.ARIGEAN_RED_AURA">
+				<if test="arms.type == Arms.ARMORED_FOREARMS">
+					<show part="overhands/arigeanRedAura"/>
+					<show part="overhands_bg/arigeanRedAura"/>
+				</if>	
+				<if test="lowerBody == LowerBody.ARMORED_LEGS">
+					<show part="overfeet/arigeanRedAura"/>
+				</if>
+				<if test="tailType == Tail.ARIGEAN_RED">
+					<show part="tail_fg/arigeanRedAura"/>
+				</if>
+			</case>
+			<case values="RearBody.ARIGEAN_YELLOW_AURA">
+				<if test="arms.type == Arms.ARMORED_FOREARMS">
+					<show part="overhands/arigeanYellowAura"/>
+					<show part="overhands_bg/arigeanYellowAura"/>
+				</if>	
+				<if test="lowerBody == LowerBody.ARMORED_LEGS">
+					<show part="overfeet/arigeanYellowAura"/>
+				</if>
+				<if test="tailType == Tail.ARIGEAN_YELLOW">
+					<show part="tail_fg/arigeanYellowAura"/>
+				</if>
+			</case>
 			<case values="RearBody.YETI_FUR">
                 <show part="overskinpanty/yetipanty"/>
 				<if test="breastRows.length gt 0">
@@ -5011,8 +5043,8 @@
 					</else>
 				</if>
             </case>
-			<case values="Tail.ARIGEAN_GREEN">
-				<show part="rearbody/arigean"/>
+			<case values="Tail.ARIGEAN_GREEN,Tail.ARIGEAN_RED,Tail.ARIGEAN_YELLOW">
+				<show part="tail/arigean"/>
 			</case>
             <default>
             </default>
