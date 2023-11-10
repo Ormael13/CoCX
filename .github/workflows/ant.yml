@@ -84,4 +84,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: mobile-arm8-64bit-apk
-          path: target/CoC-Mobile-arm8.apk
+          path: target/CoC-Mobile-armv8.apk
