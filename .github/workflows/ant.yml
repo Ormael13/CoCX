@@ -77,11 +77,11 @@ jobs:
       - name: save android armv7 apk
         uses: actions/upload-artifact@v3
         with:
-          name: mobile-arm7-apk
+          name: mobile-arm7-32bit-apk
           path: target/CoC-Mobile-armv7.apk
 
       - name: save android armv8 apk
         uses: actions/upload-artifact@v3
         with:
-          name: mobile-arm8-apk
+          name: mobile-arm8-64bit-apk
           path: target/CoC-Mobile-arm8.apk
