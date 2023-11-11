@@ -3260,7 +3260,7 @@ public class Combat extends BaseContent {
             //Section for item damage modifiers
             if (player.weaponRange is WildHunt && (player.level + playerLevelAdjustment()) > monster.level) damage *= 2;
             if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
-            damage = elementalArrowDamageMod(damage);
+            if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) damage = elementalArrowDamageMod(damage);
 			//Determine if critical hit!
             var crit:Boolean;
             var critChance:Number = 0;
@@ -3571,37 +3571,35 @@ public class Combat extends BaseContent {
     }
 
     public function elementalArrowDamageMod(damage:Number):Number {
-        if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) {
-            damage += Math.round(player.inte * 0.1);
-            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
-            if (player.weaponRange is Artemis) damage *= 1.5;
-            if (player.armorName == "FrancescaCloak") damage *= 2;
-            switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
-                case 1:
-                    damage *= fireDamageBoostedByDao();
-                    break;
-                case 2:
-                    damage *= iceDamageBoostedByDao();
-                    break;
-                case 3:
-                    damage *= lightningDamageBoostedByDao();
-                    break;
-                case 4:
-                    damage *= darknessDamageBoostedByDao();
-                    break;
-                case 5:
-                    damage *= waterDamageBoostedByDao();
-                    break;
-                case 6:
-                    damage *= windDamageBoostedByDao();
-                    break;
-                case 7:
-                    damage *= earthDamageBoostedByDao();
-                    break;
-                case 8:
-                    damage *= acidDamageBoostedByDao();
-                    break;
-            }
+        damage += Math.round(player.inte * 0.1);
+        if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+        if (player.weaponRange is Artemis) damage *= 1.5;
+        if (player.armorName == "FrancescaCloak") damage *= 2;
+        switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
+            case 1:
+                damage *= fireDamageBoostedByDao();
+                break;
+            case 2:
+                damage *= iceDamageBoostedByDao();
+                break;
+            case 3:
+                damage *= lightningDamageBoostedByDao();
+                break;
+            case 4:
+                damage *= darknessDamageBoostedByDao();
+                break;
+            case 5:
+                damage *= waterDamageBoostedByDao();
+                break;
+            case 6:
+                damage *= windDamageBoostedByDao();
+                break;
+            case 7:
+                damage *= earthDamageBoostedByDao();
+                break;
+            case 8:
+                damage *= acidDamageBoostedByDao();
+                break;
         }
         return damage;
     }
@@ -4096,16 +4094,7 @@ public class Combat extends BaseContent {
         var ammoWord:String = weaponRangeAmmo;
         if (rand(100) < accRange) {
             var damage:Number = 0;
-            damage += player.weaponRangeAttack * 2;
-			damage += player.speStat.core.value + player.intStat.core.value + player.wisStat.core.value;
-            if (player.hasPerk(PerkLib.JobGunslinger)) damage *= 2;
-            if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.5;
-            if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.25;
-			if (player.hasPerk(PerkLib.SaintOfZariman)) {
-				damage += scalingBonusSpeed() * 0.25;
-				damage += scalingBonusIntelligence() * 0.25;
-				damage += scalingBonusWisdom() * 0.5;
-			}
+            damage += firearmsDamageNoLagSingle();
             //[Describe shot]
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
@@ -4149,8 +4138,6 @@ public class Combat extends BaseContent {
                     else outputText("You casually fire an " + ammoWord + " at [themonster] with supreme skill");
                 }
             }
-            //Weapon addition!
-            damage = rangeAttackModifier(damage);
 			if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
@@ -4227,9 +4214,6 @@ public class Combat extends BaseContent {
                     }
 				}
             }
-
-			damage *= (1 + (0.01 * masteryFirearmsLevel()));
-            damage = archerySkillDamageMod(damage);
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
             if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 2;
             if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
@@ -5648,8 +5632,8 @@ public class Combat extends BaseContent {
 			damage += (player.spe / 2);
 			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (PerkLib.PowerAttack) {
-			if (PerkLib.PowerAttackEx) damage *= 1.5;
+		if (player.hasPerk(PerkLib.PowerAttack)) {
+			if (player.hasPerk(PerkLib.PowerAttackEx)) damage *= 1.5;
 			else damage *= 1.2;
 		}
         damage = harpyDamageBonus(damage);
@@ -5772,36 +5756,35 @@ public class Combat extends BaseContent {
 	public function rangeDamageNoLagSingle(subtype:Number = 0):Number {
 		var damage:Number = 0;//0 - bow, 1 - crossbow, 2 - thrown
 		if (subtype == 0) {
+			damage += player.str;
+            damage += scalingBonusStrength() * 0.2;
 			damage += player.spe * 2;
 			damage += scalingBonusSpeed() * 0.4;
-			if (player.hasPerk(PerkLib.PowerShotEx)) {
-				damage += scalingBonusStrength() * 0.4;
-				damage += scalingBonusSpeed() * 0.1;
-			}
 			if (damage < 20) damage = 20;
             damage *= (1 + (0.01 * masteryArcheryLevel()));
 		}
 		if (subtype == 1) {
 			damage += player.weaponRangeAttack * 20;
-			damage += (player.speStat.core.value + player.speStat.train.value) * 2;
+			damage += player.spe * 2;
 			damage *= (1 + (0.01 * masteryArcheryLevel()));
 		}
 		if (subtype == 2) {
-			damage += player.str;
-            damage += ghostStrength();
+			damage += player.str * 2;
             damage += scalingBonusStrength() * 0.4;
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.2;
             if (player.hasPerk(PerkLib.Telekinesis)){
                 damage += player.inte;
                 damage += scalingBonusIntelligence() * 0.4;
             }
-			if (player.hasPerk(PerkLib.PowerShotEx)) {
-				damage += scalingBonusSpeed() * 0.4;
-				damage += scalingBonusStrength() * 0.1;
-			}
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
             if (damage < 20) damage = 20;
             damage *= (1 + (0.01 * masteryThrowingLevel()));
             damage = statusEffectBonusDamage(damage);
+		}
+		if (player.hasPerk(PerkLib.PowerShot)) {
+			if (player.hasPerk(PerkLib.PowerShotEx)) damage *= 1.5;
+			else damage *= 1.2;
 		}
         damage = rangeAttackModifier(damage);
         damage = archerySkillDamageMod(damage);
@@ -5811,7 +5794,20 @@ public class Combat extends BaseContent {
 	}
 	public function firearmsDamageNoLagSingle(subtype:Number = 0):Number {
 		var damage:Number = 0;
-		
+		damage += player.weaponRangeAttack * 2;
+		damage += player.speStat.core.value + player.intStat.core.value + player.wisStat.core.value;
+        if (player.hasPerk(PerkLib.JobGunslinger)) damage *= 2;
+        if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.5;
+        if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.25;
+		if (player.hasPerk(PerkLib.SaintOfZariman)) {
+			damage += scalingBonusSpeed() * 0.25;
+			damage += scalingBonusIntelligence() * 0.25;
+			damage += scalingBonusWisdom() * 0.5;
+		}
+		damage *= (1 + (0.01 * masteryFirearmsLevel()));
+        damage = rangeAttackModifier(damage);
+        damage = archerySkillDamageMod(damage);
+        damage *= player.jewelryRangeModifier();
 		damage *= firearmsForce();
 		return damage;
 	}
