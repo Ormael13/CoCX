@@ -1262,7 +1262,6 @@ private function craftingMaterialsMoonstone1Down():void {
 			clearOutput();
 
 			// if we're returning from crafting and used last pigment
-			if (int(pigmentStock[selectedPigment]) <= 0) selectedPigment = "";
 			var dyeFnd:int = player.itemCount(useables.DYE_FOUNDATION);
 			var oilFnd:int = player.itemCount(useables.OIL_FOUNDATION);
 			var dropFnd:int = player.itemCount(useables.DROP_FOUNDATION);
@@ -1314,6 +1313,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("You pour the pigment into foundation and stir it with a spoon. The viscous mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the vial.\n");
 			player.destroyItems(useables.DYE_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createHairDye(selectedPigment, 1), dyeCraftingMenu);
+			selectedPigment = "";
 		}
 		private function craftSkinDye():void {
 			clearOutput();
@@ -1321,6 +1321,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("You pour the pigment into foundation and stir it with a spoon. The viscous mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the bottle.\n");
 			player.destroyItems(useables.OIL_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createSkinOil(selectedPigment), dyeCraftingMenu);
+			selectedPigment = "";
 		}
 		private function craftEyeDye():void {
 			clearOutput();
@@ -1328,6 +1329,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			outputText("You pour the pigment into foundation and stir it with a spoon. The mixture quickly turns "+selectedPigment+". You stir it for one more minute to get a uniform coloring, and then cork the vial.\n");
 			player.destroyItems(useables.DROP_FOUNDATION, 1, true);
 			inventory.takeItem(itemTemplates.createEyeDye(selectedPigment), dyeCraftingMenu);
+			selectedPigment = "";
 		}
 	}
 }
