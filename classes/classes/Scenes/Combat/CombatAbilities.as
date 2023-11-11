@@ -274,6 +274,15 @@ public class CombatAbilities {
 	public static const Trance:TranceSkill											= new TranceSkill();
 	public static const VioletPupilTransformation:VioletPupilTransformationSkill	= new VioletPupilTransformationSkill();
 	public static const FingerOfDeath:FingerOfDeathSkill							= new FingerOfDeathSkill();
+	public static const BloodSwipe:BloodSwipeSkill									= new BloodSwipeSkill();
+	public static const BloodSwipeSF:BloodSwipeSkill								= new BloodSwipeSkill(true);
+	public static const BloodDewdrops:BloodDewdropsSkill							= new BloodDewdropsSkill();
+	public static const BloodDewdropsSF:BloodDewdropsSkill							= new BloodDewdropsSkill(true);
+	public static const HeartSeeker:HeartSeekerSkill								= new HeartSeekerSkill();
+	public static const HeartSeekerSF:HeartSeekerSkill								= new HeartSeekerSkill(true);
+	public static const BloodRequiem:BloodReqiuemSkill								= new BloodReqiuemSkill();
+	public static const BloodRequiemSF:BloodReqiuemSkill							= new BloodReqiuemSkill(true);
+	public static const ScarletSpiritCharge:ScarletSpiritChargeSkill				= new ScarletSpiritChargeSkill();
 
 
 
@@ -314,7 +323,16 @@ public class CombatAbilities {
 		SoulDrain,
 		Trance,
 		VioletPupilTransformation,
-		FingerOfDeath
+		FingerOfDeath,
+		BloodSwipe,
+		BloodSwipeSF,
+		BloodDewdrops,
+		BloodDewdropsSF,
+		HeartSeeker,
+		HeartSeekerSF,
+		BloodRequiem,
+		BloodRequiemSF,
+		ScarletSpiritCharge
 	]
 	
 	/*
