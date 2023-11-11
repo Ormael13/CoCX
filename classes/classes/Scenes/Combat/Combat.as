@@ -16123,9 +16123,10 @@ public function sendSkeletonToFight():void {
     if (!monster.isFlying()) outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "their":"his")+" blade"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" around. ");
     var damage:Number = 0;
     var dmgamp:Number = 1;
-    damage += 500 + rand(151);
-    damage += scalingBonusIntelligence() * 0.2;
-    damage += scalingBonusWisdom() * 0.4;
+    damage += 1500 + rand(451);
+    damage += scalingBonusIntelligence() * 0.6;
+    damage += scalingBonusWisdom() * 1.2;
+	damage *= soulskillMod();
 	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) damage *= historyTacticianBonus();
     if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
@@ -16187,9 +16188,10 @@ public function skeletonSmash():void {
     outputText("Your Skeletons upon command gang up on [themonster] swarming from all side and leaving [monster him] stunned. ");
     var damage:Number = 0;
     var dmgamp:Number = 1;
-    damage += 500 + rand(151);
-    damage += scalingBonusIntelligence() * 0.2;
-    damage += scalingBonusWisdom() * 0.4;
+    damage += 1500 + rand(451);
+    damage += scalingBonusIntelligence() * 0.6;
+    damage += scalingBonusWisdom() * 1.2;
+	damage *= soulskillMod();
 	if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) damage *= historyTacticianBonus();
     if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
     if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;

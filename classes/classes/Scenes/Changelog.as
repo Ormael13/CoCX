@@ -35,6 +35,9 @@ public class Changelog extends BaseContent
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-New tier 0 strength lvl-up perk: Power Attack. Req. Job: Warrior perk. Effect: Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)\n");
 			outputText("-New tier 1 misc lvl-up perk: Twin Thunder. Req. Power Attack or Power Shot perk. Effect: When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.\n");
+			outputText("-New tier 2 intelligence lvl-up perk: High Tide. Req. Grand Mage & Channeling perks, 75+ int and any water spell or special. Effect: Cumulative 40% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
+			outputText("-New tier 5 intelligence lvl-up perk: High Tide (Ex). Req. High Tide & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted water spell decreased by 10%. Maximum 15 stacks.\n");
+			outputText("-New tier 9 intelligence lvl-up perk: High Tide (Su). Req. High Tide (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-New mutation perk: Arigean Association Cortex. Req. having free nerv system mutation slot, arigean race. Effects: Overtime your way of thinking has changed to be more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 20% more damage.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Primitive). Req. Arigean Association Cortex and lvl 30+. Effects: Your way of thinking has become even more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 50% more damage and now cost 20% less mana.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Evolved). Req. Arigean Association Cortex (Primitive) and lvl 30+. Effects: Your way of thinking has become identical to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 90% more damage and now cost 30% less mana, additionally your mana regen is increased by 10% of your toughness.\n");
@@ -66,14 +69,19 @@ public class Changelog extends BaseContent
 			outputText("-A player whose werewolf score has gone under 12 while having the Dormant Lycanthropy perk can now become a werewolf again upon increasing their racial score once more. (Demojay)\n");
 			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
 			outputText("-Power Attack and Power Shot used when wrath is over 100% would only drain 100% of wrath (that could only happen if PC have any source of overMax Wrath).\n");
-			outputText("-New tier 2 intelligence lvl-up perk: High Tide. Req. Grand Mage & Channeling perks, 75+ int and any water spell or special. Effect: Cumulative 40% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
-			outputText("-New tier 5 intelligence lvl-up perk: High Tide (Ex). Req. High Tide & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted water spell decreased by 10%. Maximum 15 stacks.\n");
-			outputText("-New tier 9 intelligence lvl-up perk: High Tide (Su). Req. High Tide (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-Added to Elemental Bolt req. for one of perks High Tide perk.\n");
 			outputText("-Fixed bugs: Skeleton pre-turn attack text would not properly display to the user, text positioning so that Skeleton warrior and archer pre-turn texts are generated on separate lines, buttons to choose whether Golems and Skeletons will attack pre-turn were overlapping, causing it to become unclear what selecting the button would do, ");
 			outputText("game showing that the user was still a Soul Scholar on the cultivation screen, when they were actually a Soul Grandmaster (Demojay)\n");
 			outputText("-Added to tooltips to Golem/Skeleton pre-turn button to make each function more clear. (Demojay)\n");
 			outputText("-Werefox Race now takes Dormant Vulpesthropy into account for racial scores. Wereshark Race now takes Dormant Selachimorphanthropy into account for racial scores. (Demojay)\n");
+			outputText("-Using Pigment in crafting now properly removes the pigment. Selecting the last pigment in your inventory for crafting doesn't automatically remove it. (Demojay)\n");
+			outputText("-Necromancer minions base damege increased 3x and added Soulskill Effect Multiplier to them.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -96,14 +104,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable\n\n");
 			/*ostatni punkt changelogu
@@ -171,7 +171,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -196,7 +200,7 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
-			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Scorpion-morph
+			outputText("\n");full stats bonuses not added yet to: Echidna, Ferret-morph, Scorpion-morph
 			outputText("\n");
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
@@ -208,6 +212,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
