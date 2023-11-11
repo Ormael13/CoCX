@@ -10,7 +10,8 @@ public class ResonanceVolleySkill extends AbstractSoulSkill {
             TARGET_ENEMY,
             TIMING_INSTANT,
             [TAG_DAMAGING],
-            null
+            null,
+			false
         )
 		baseSFCost = 150;
     }

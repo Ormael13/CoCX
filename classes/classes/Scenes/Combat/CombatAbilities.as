@@ -237,32 +237,44 @@ public class CombatAbilities {
 			.concat(ALL_GREEN_SPELLS)
 	;
 
-	public static const CleansingPalm:CleansingPalmSkill 			= new CleansingPalmSkill();
-	public static const IceFist:IceFistSkill						= new IceFistSkill()
-	public static const FirePunch:FirePunchSkill					= new FirePunchSkill();
-	public static const HurricaneDance:HurricaneDanceSkill			= new HurricaneDanceSkill();
-	public static const EarthStance:EarthStanceSkill				= new EarthStanceSkill();
-	public static const PunishingKick:PunishingKickSkill			= new PunishingKickSkill();
-	public static const SoulBlast:SoulBlastSkill					= new SoulBlastSkill();
-	public static const Overlimit:OverlimitSkill					= new OverlimitSkill();
-	public static const TripleThrust:MultiThrustSkill				= new MultiThrustSkill(1);
-	public static const SextupleThrust:MultiThrustSkill				= new MultiThrustSkill(2);
-	public static const NonupleThrust:MultiThrustSkill				= new MultiThrustSkill(3);
-	public static const DracoSweep:DracoSweepSkill					= new DracoSweepSkill();
-	public static const FlamesOfLove:FlamesOfLoveSkill				= new FlamesOfLoveSkill();
-	public static const IciclesOfLove:IciclesOfLoveSkill			= new IciclesOfLoveSkill();
-	public static const StormOfSisterhood:StormOfSisterhoodSkill	= new StormOfSisterhoodSkill();
-	public static const NightOfBrotherhood:NightOfBrotherhoodSkill	= new NightOfBrotherhoodSkill();
-	public static const Devourer:DevourerSkill						= new DevourerSkill();
-	public static const ManyBirds:ManyBirdsSkill					= new ManyBirdsSkill();
-	public static const ResonanceVolley:ResonanceVolleySkill		= new ResonanceVolleySkill();
-	public static const AvatarOfTheSong:AvatarOfTheSongSkill		= new AvatarOfTheSongSkill();
-	public static const BeatOfWar:BeatOfWarSkill					= new BeatOfWarSkill();
-	public static const Comet:CometSkill							= new CometSkill();
-	public static const BladeDance:BladeDanceSkill					= new BladeDanceSkill();
-	public static const HailOfBlades:BladeHailSkill					= new BladeHailSkill(1);
-	public static const GrandioseHailOfBlades:BladeHailSkill		= new BladeHailSkill(2);
-	public static const GrandioseHailOfMoonBlades:BladeHailSkill	= new BladeHailSkill(3);
+	public static const CleansingPalm:CleansingPalmSkill 							= new CleansingPalmSkill();
+	public static const IceFist:IceFistSkill										= new IceFistSkill()
+	public static const FirePunch:FirePunchSkill									= new FirePunchSkill();
+	public static const HurricaneDance:HurricaneDanceSkill							= new HurricaneDanceSkill();
+	public static const EarthStance:EarthStanceSkill								= new EarthStanceSkill();
+	public static const PunishingKick:PunishingKickSkill							= new PunishingKickSkill();
+	public static const SoulBlast:SoulBlastSkill									= new SoulBlastSkill();
+	public static const Overlimit:OverlimitSkill									= new OverlimitSkill();
+	public static const TripleThrust:MultiThrustSkill								= new MultiThrustSkill(1);
+	public static const SextupleThrust:MultiThrustSkill								= new MultiThrustSkill(2);
+	public static const NonupleThrust:MultiThrustSkill								= new MultiThrustSkill(3);
+	public static const DracoSweep:DracoSweepSkill									= new DracoSweepSkill();
+	public static const FlamesOfLove:FlamesOfLoveSkill								= new FlamesOfLoveSkill();
+	public static const IciclesOfLove:IciclesOfLoveSkill							= new IciclesOfLoveSkill();
+	public static const StormOfSisterhood:StormOfSisterhoodSkill					= new StormOfSisterhoodSkill();
+	public static const NightOfBrotherhood:NightOfBrotherhoodSkill					= new NightOfBrotherhoodSkill();
+	public static const Devourer:DevourerSkill										= new DevourerSkill();
+	public static const ManyBirds:ManyBirdsSkill									= new ManyBirdsSkill();
+	public static const ResonanceVolley:ResonanceVolleySkill						= new ResonanceVolleySkill();
+	public static const AvatarOfTheSong:AvatarOfTheSongSkill						= new AvatarOfTheSongSkill();
+	public static const BeatOfWar:BeatOfWarSkill									= new BeatOfWarSkill();
+	public static const Comet:CometSkill											= new CometSkill();
+	public static const BladeDance:BladeDanceSkill									= new BladeDanceSkill();
+	public static const HailOfBlades:BladeHailSkill									= new BladeHailSkill(1);
+	public static const GrandioseHailOfBlades:BladeHailSkill						= new BladeHailSkill(2);
+	public static const GrandioseHailOfMoonBlades:BladeHailSkill					= new BladeHailSkill(3);
+	public static const ElementAir:CreateElementSkill								= new CreateElementSkill("Air", 1);
+	public static const ElementEarth:CreateElementSkill								= new CreateElementSkill("Earth", 1);
+	public static const ElementFire:CreateElementSkill								= new CreateElementSkill("Fire", 1);
+	public static const ElementWater:CreateElementSkill								= new CreateElementSkill("Water", 1);
+	public static const ElementIce:CreateElementSkill								= new CreateElementSkill("Ice", 2);
+	public static const ElementLightning:CreateElementSkill							= new CreateElementSkill("Lightning", 2);
+	public static const ElementDarkness:CreateElementSkill							= new CreateElementSkill("Darkness", 2);
+	public static const SoulDrain:SoulDrainSkill									= new SoulDrainSkill();
+	public static const Trance:TranceSkill											= new TranceSkill();
+	public static const VioletPupilTransformation:VioletPupilTransformationSkill	= new VioletPupilTransformationSkill();
+	public static const FingerOfDeath:FingerOfDeathSkill							= new FingerOfDeathSkill();
+
 
 
 	public static const ALL_SOULSKILLS:/*CombatAbility*/Array = [
@@ -291,7 +303,18 @@ public class CombatAbilities {
 		BladeDance,
 		HailOfBlades,
 		GrandioseHailOfBlades,
-		GrandioseHailOfMoonBlades
+		GrandioseHailOfMoonBlades,
+		ElementAir,
+		ElementDarkness,
+		ElementEarth,
+		ElementFire,
+		ElementIce,
+		ElementLightning,
+		ElementWater,
+		SoulDrain,
+		Trance,
+		VioletPupilTransformation,
+		FingerOfDeath
 	]
 	
 	/*

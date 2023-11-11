@@ -2,13 +2,13 @@ package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
 import classes.StatusEffectType;
 import classes.StatusEffects;
-import classes.Monster;
 import classes.PerkLib;
 import classes.IMutations.IMutationsLib;
 
 public class AbstractSoulSkill extends CombatAbility {
     protected var statusEffect:StatusEffectType;
     public var baseSFCost:Number = 0;
+    protected var canUseBlood:Boolean;
 
     public function AbstractSoulSkill (
             name:String,
@@ -16,10 +16,12 @@ public class AbstractSoulSkill extends CombatAbility {
             targetType:int,
             timingType:int,
             tags:/*int*/Array,
-            statusEffect:StatusEffectType
+            statusEffect:StatusEffectType,
+            canUseBlood:Boolean = true
     ) {
         super(name, desc, targetType, timingType, tags);
         this.statusEffect = statusEffect;
+        this.canUseBlood = canUseBlood;
     }
 
     override public function get category():int {
@@ -38,11 +40,11 @@ public class AbstractSoulSkill extends CombatAbility {
         var uc:String =  super.usabilityCheck();
         if (uc) return uc;
 
-        if ((player.soulforce < sfCost()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+        if ((player.soulforce < sfCost()) && (!player.hasStatusEffect(StatusEffects.BloodCultivator) || !canUseBlood)) {
             return "Your current soulforce is too low."
         }
 
-        if (player.hasStatusEffect(StatusEffects.BloodCultivator) && ((player.HP - player.minHP()) - 1) < (sfCost())) {
+        if (canUseBlood && player.hasStatusEffect(StatusEffects.BloodCultivator) && ((player.HP - player.minHP()) - 1) < (sfCost())) {
             return "Your hp is too low to use this soulskill."
         }
 

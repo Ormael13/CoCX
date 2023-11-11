@@ -11,7 +11,8 @@ public class AvatarOfTheSongSkill extends AbstractSoulSkill {
             TARGET_SELF,
             TIMING_INSTANT,
             [TAG_BUFF, TAG_HEALING],
-            null
+            null,
+			false
         )
 		baseSFCost = 200;
     }
