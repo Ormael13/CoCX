@@ -95,15 +95,25 @@ public class Appearance extends Utils
 		 * @return    A beautiful description of a tongue.
 		 */
 		public static function tongueDescription(i_character:Creature):String {
-			if (i_character.tongue.type == 1) return "serpentine tongue";
-			else if (i_character.tongue.type == 2) return "demonic tongue";
-			else if (i_character.tongue.type == 3) return "draconic tongue";
-			else if (i_character.tongue.type == 4) return "echidna tongue";
-			else if (i_character.tongue.type == 5) return "feline tongue";
-			else if (i_character.tongue.type == 6) return "elf tongue";
-			else if (i_character.tongue.type == 7) return "canine tongue";
-			else if (i_character.tongue.type == 8) return "draconic tongue that glow in the dark";
-			else return "tongue";
+			var tongueTypes:Array = [
+				"tongue",
+				"serpentine tongue",
+				"demonic tongue",
+				"draconic tongue",
+				"echidna tongue",
+				"feline tongue",
+				"elf tongue",
+				"canine tongue",
+				"draconic tongue that glow in the dark"
+			];
+
+			var type:int = i_character.tongue.type;
+
+			if (type >= 1 && type < tongueTypes.length) {
+				return tongueTypes[type];
+			} else {
+				return "tongue";
+			}
 		}
 
 		public static function nippleDescription(i_creature:Creature, i_rowNum:Number):String {
