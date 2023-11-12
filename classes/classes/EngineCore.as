@@ -424,7 +424,9 @@ public class EngineCore {
         if (func == null) {
             CoC_Settings.error("createCallBackFunction(null," + arg + ")");
         }
-        if (arg == -9000 || arg == null) {
+        var somagicnumber:Number = -9000;
+        
+        if (arg == somagicnumber || arg == null) {
             return function ():* {
                 if (CoC_Settings.haltOnErrors)
                     logFunctionInfo(func, arg);
@@ -432,7 +434,7 @@ public class EngineCore {
             };
         }
         else {
-            if (arg2 == -9000 || arg2 == null) {
+            if (arg2 == somagicnumber || arg2 == null) {
                 return function ():* {
                     if (CoC_Settings.haltOnErrors)
                         logFunctionInfo(func, arg);
@@ -440,7 +442,7 @@ public class EngineCore {
                 };
             }
             else {
-                if (arg3 == -9000 || arg3 == null) {
+                if (arg3 == somagicnumber || arg3 == null) {
                     return function ():* {
                         if (CoC_Settings.haltOnErrors)
                             logFunctionInfo(func, arg, arg2);
