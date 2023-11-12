@@ -93,16 +93,18 @@ public class Utils extends Object
 				return func.apply(thiz,args2);
 			}
 		}
-		public static function formatStringArray(stringList:Array):String { //Changes an array of values into "1", "1 and 2" or "1, (x, )y and z"
+		public static function formatStringArray(stringList:Array):String {
 			switch (stringList.length) {
-				case  0: return "";
-				case  1: return stringList[0];
-				case  2: return stringList[0] + " and " + stringList[1];
+				case 0:
+					return "";
+				case 1:
+					return stringList[0];
+				case 2:
+					return stringList.join(" and ");
 				default:
+					var concat:String = stringList.slice(0, -1).join(", ");
+					return concat + " and " + stringList[stringList.length - 1];
 			}
-			var concat:String = stringList[0];
-			for (var x:int = 1; x < stringList.length - 1; x++) concat += ", " + stringList[x];
-			return concat + " and " + stringList[stringList.length - 1];
 		}
 
 		/**
