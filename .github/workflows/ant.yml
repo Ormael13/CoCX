@@ -43,7 +43,7 @@ jobs:
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
-          air-version: "50.2.3.8"
+          air-version: "33.1.1.345"
           accept-air-license: true
 
       # install VNC and xfce4 so we have a desktop, as the flash player requires one:
