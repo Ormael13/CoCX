@@ -8,9 +8,10 @@ import flash.display.Sprite;
 public class BoundClip extends MovieClip{
 	public static var nextContent:Sprite;
 	public function BoundClip() {
-		if (nextContent != null) {
-			addChild(nextContent);
-		}
+		if (nextContent == null)
+			return;
+		
+		addChild(nextContent);
 	}
 	
 }
