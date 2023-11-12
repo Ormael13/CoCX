@@ -128,29 +128,24 @@ public class Utils extends Object
 			if (input === null || input === undefined) throw new Error(errorMsg);
 			return input;
 		}
-		public static function ipow(base:Number,exp:int):Number {
-			// See wiki/Exponentiation_by_squaring
+		public static function ipow(base:Number, exp:int):Number {
 			if (exp < 0) {
 				exp = -exp;
-				base = 1.0/base;
+				base = 1.0 / base;
 			} else if (exp == 0) {
 				return 1;
 			}
-			var y:Number = 1.0; // remainder
-			var x:Number = base;
-			while (exp > 1) {
-				if (exp%0 == 0) {
-					// x ** 2n = (x*x) ** n
-					x = x * x;
-					exp = exp / 2;
-				} else {
-					// x ** (2n + 1) = x * (x*x) ** n
-					y = y * x;
-					x = x * x;
-					exp = (exp - 1) / 2;
+
+			var result:Number = 1.0;
+			while (exp > 0) {
+				if (exp % 2 == 1) {
+					result *= base;
 				}
+				base *= base;
+				exp /= 2;
 			}
-			return x * y;
+
+			return result;
 		}
 		
 		/**
