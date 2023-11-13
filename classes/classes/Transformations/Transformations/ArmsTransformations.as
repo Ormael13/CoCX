@@ -42,6 +42,7 @@ public class ArmsTransformations extends MutationsHelper {
 						desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [fur color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.\n\nYou feel highly uncomfortable as your extra set of arms vanishes into your body following the loss of your leonine paw hands. Guess your back with only two arms now.";
 						break;
 					case Arms.ELF:
+					case Arms.DEMON:
 					case Arms.KITSUNE:
 					case Arms.ONI:
 					case Arms.ORC:
@@ -1273,6 +1274,23 @@ public class ArmsTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.arms.type === Arms.ARMORED_FOREARMS;
+			}
+	);
+
+	public const ArmsDemon: Transformation = new SimpleTransformation("Demon Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "A sharp pain runs through your hands as your nail suddenly grows longer and pointier like those of a demon. <b>You now have demonic nails!</b>";
+				player.arms.type = Arms.DEMON;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.DEMON));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.DEMON;
 			}
 	);
 	/*

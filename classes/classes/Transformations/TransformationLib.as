@@ -182,6 +182,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsCanine: Transformation 			= arms.ArmsCanine.registerTf(AS_ARMS, AE_ANUBIS);
 	public const ArmsAbyssalShark: Transformation 		= arms.ArmsAbyssalShark.registerTf(AS_ARMS, AE_ABYSSAL_SHARK);
 	public const ArmsArigean: Transformation 			= arms.ArmsArigean.registerTf(AS_ARMS, AE_ARIGEAN);
+	public const ArmsDemon: Transformation 				= arms.ArmsDemon.registerTf(AS_ARMS, AE_DEMON);
 
 
 //ASS
@@ -449,6 +450,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesWeasel: Transformation			= eyes.EyesWeasel.registerTf(AS_EYES, AE_WEASEL);
     public const EyesVampire: Transformation		= eyes.EyesVampire.registerTf(AS_EYES, AE_VAMPIRE);
     public const EyesArigean: Transformation		= eyes.EyesArigean.registerTf(AS_EYES, AE_ARIGEAN);
+    public const EyesDemon: Transformation			= eyes.EyesDemon.registerTf(AS_EYES, AE_DEMON);
 //=================================
 //                                =
 //   EYE COLORS                   =
@@ -471,6 +473,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesSeadragonColors: Transformation 		= eyes.EyesSeadragonColors;
 	public const EyesFireSnailColors: Transformation 		= eyes.EyesFireSnailColors;
 	public const EyesFenrirColor: Transformation 			= eyes.EyesFenrirColor;
+	public const EyesDemonColors: Transformation 			= eyes.EyesDemonColors;
 	public const EyesSpiderAndMutagenInt: Transformation 	= eyes.EyesSpiderAndMutagenInt;
 
 
@@ -549,6 +552,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const FaceFoxFangs: Transformation 			= face.FaceFoxFangs.registerTf(AS_FACE, AE_WEREFOX);
     public const FaceAbyssalShark: Transformation 		= face.FaceAbyssalShark.registerTf(AS_FACE, AE_ABYSSAL_SHARK);
     public const FaceArigean: Transformation 			= face.FaceArigean.registerTf(AS_FACE, AE_ARIGEAN);
+    public const FaceDemon: Transformation 				= face.FaceArigean.registerTf(AS_FACE, AE_DEMON);
 
 
 //GILLS
@@ -766,6 +770,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const LowerBodyWereshark: Transformation 			= lowerBody.LowerBodyWereshark.registerTf(AS_LEGS, AE_WERESHARK);
     public const LowerBodyYgddrasilRootClaws: Transformation	= lowerBody.LowerBodyYgddrasilRootClaws.registerTf(AS_LEGS, AE_YGGDRASIL);
     public const LowerBodyArigean: Transformation 				= lowerBody.LowerBodyArigean.registerTf(AS_LEGS, AE_ARIGEAN);
+    public const LowerBodyDemonGracefulFeet: Transformation 	= lowerBody.LowerBodyDemonGracefulFeet.registerTf(AS_LEGS, AE_DEMON);
 
 
 

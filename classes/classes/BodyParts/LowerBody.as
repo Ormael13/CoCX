@@ -858,6 +858,13 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "Your legs are human in shape and form but are covered in a protective natural, black metal armor half way up your thighs, a series of complex plates seem to rest at your joints allowing for movement with black, fragile skin underneath."
 	});
 
+	public static const DEMONIC_GRACEFUL_FEET:int = 82;
+	EnumValue.add(Types, DEMONIC_GRACEFUL_FEET, "DEMONIC_GRACEFUL_FEET", {
+		name: "demonic graceful feet",
+		feet: "demonic graceful feet",
+		appearanceDesc: "Your {legCount} perfect lissom legs end in delicate, clawed feet allowing you to move with supernatural grace."
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count

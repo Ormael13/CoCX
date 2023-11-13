@@ -9723,7 +9723,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
             outputText("[Themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
             var bonusDamage:int = 10;
-            var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
+            var LustDamage:int = calculateBasicTeaseDamage(20+rand(bonusDamage));
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
             var Randomcrit:Boolean = false;
@@ -12927,7 +12927,7 @@ public function SingArouse(Bee:Boolean = false):void {
     clearOutput();
     outputText("You continue singing. Your compelling voice reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
     var bonusDamage:int = 10;
-    var LustDamage:int = combat.calculateBasicTeaseDamage(20+rand(bonusDamage));
+    var LustDamage:int = calculateBasicTeaseDamage(20+rand(bonusDamage));
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
     var Randomcrit:Boolean = false;
@@ -12976,7 +12976,7 @@ public function SingDevastatingAria():void {
     clearOutput();
     outputText("You unleash a devastating wave of sound!");
     var bonusDamage:int = 10;
-        var damage:Number = (combat.calculateBasicTeaseDamage(20+rand(bonusDamage)));
+        var damage:Number = (calculateBasicTeaseDamage(20+rand(bonusDamage)));
         if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= scalingBonusIntelligence();
         if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= scalingBonusIntelligence();
         damage *= player.statusEffectv1(StatusEffects.Sing);

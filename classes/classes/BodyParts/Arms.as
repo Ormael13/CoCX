@@ -507,6 +507,13 @@ public class Arms extends BodyPart {
 		appearanceDesc: "Your arms are identical to those of a human, However your forearms seem to be covered in fragments of a black, glossy metal acting as natural bracers."
 	});
 
+	public static const DEMON:int = 65;
+	EnumValue.add(Types, DEMON, "DEMON", {
+		name:"demon",
+		appearanceDesc: "Your arms and hands are human in appearance save for your pointy claw like demonic nails.",
+		claw: true
+	});
+
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}

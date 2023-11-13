@@ -40,7 +40,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 9 intelligence lvl-up perk: High Tide (Su). Req. High Tide (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-New mutation perk: Arigean Association Cortex. Req. having free nerv system mutation slot, arigean race. Effects: Overtime your way of thinking has changed to be more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 20% more damage.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Primitive). Req. Arigean Association Cortex and lvl 30+. Effects: Your way of thinking has become even more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 50% more damage and now cost 20% less mana.\n");
-			outputText("-New mutation perk: Arigean Association Cortex (Evolved). Req. Arigean Association Cortex (Primitive) and lvl 30+. Effects: Your way of thinking has become identical to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 90% more damage and now cost 30% less mana, additionally your mana regen is increased by 10% of your toughness.\n");
+			outputText("-New mutation perk: Arigean Association Cortex (Evolved). Req. Arigean Association Cortex (Primitive) and lvl 60+. Effects: Your way of thinking has become identical to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 90% more damage and now cost 30% less mana, additionally your mana regen is increased by 10% of your toughness.\n");
 			outputText("-New range weapon (by Ormael): Twin Desert Eagles - can be gained by combining 2x Desert Eagle weapon. Cost 1240 gems. Base atk is 25 and ammo clip size 4. It's Dual Firearm type range weapon.\n");
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-Starting traits desc on choice screen corrected to avoid misleading players (they are most of the time +50% stat multi bonuses (or jsut 50 sens) not +x% to maximum.\n");
@@ -77,11 +77,12 @@ public class Changelog extends BaseContent
 			outputText("-Using Pigment in crafting now properly removes the pigment. Selecting the last pigment in your inventory for crafting doesn't automatically remove it. (Demojay)\n");
 			outputText("-Necromancer minions base damage increased 3x and added Soulskill Effect Multiplier to them.\n");
 			outputText("-Power Shot effects changed to: Enable Power Shot p. special. Add ~20% of base stat scaling value to range (not for firearms) damage. Power Shot (Ex) effects changed to: Power Shot p. special damage increased by ~2x. Add ~30% of base stat scaling value to range (not for firearms) damage & power attack multi factor. Range physical attacks multiplier increased not changed for both perks.\n");
-			outputText("-Bows/Crossbows/Throwing range weapons base dmg sclaing been chneged and specials using those wepaons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing wepaons.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Bows/Crossbows/Throwing range weapons base dmg scaling been changed and specials using those weapons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing weapons.\n");
+			outputText("-New mutation perk: Black Heart (Final Form). Req. Black Heart (Evolved) and lvl 90+. Effect: Increased Lust strike power, empower Fascinate, adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 2, adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). ");
+			outputText("Facinate Stun lasts 2 turns, count your lust for twice as high when using Lust strike and it’s now benefit from all effects that pertain to the tease action.\n");
+			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
+			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF)\n");
+			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses l;ike max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -8,8 +8,9 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class DemonRace extends Race {
-	public static const DemonSkinColors:/*String*/Array = ["shiny black", "sky blue", "indigo", "ghostly white", "leaf green", "light green", "light purple", "purple", "red", "grey", "blue"];
-    public static const RaceBody:/*String*/Array = [
+	public static const DemonSkinColors:/*String*/Array = ["shiny black", "sky blue", "indigo", "ghostly white", "leaf green", "light green", "light purple", "purple", "red", "grey", "blue", "snow white", "midnight black"];
+    public static const DemonEyeColors:/*String*/Array = ["fiendish pink", "pink", "red", "yellow", "blue", "turquoise", "light green"];
+	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
         /*Balls*/		"Human",
@@ -44,33 +45,37 @@ public class DemonRace extends Race {
 		addScores()
 				.hornType(Horns.DEMON, +1)
 				.hornType(NOT(Horns.GOAT), 0, -10)
+				.faceType(Face.DEMON, +1)
+				.tongueType(Tongue.DEMONIC, +1)
+				.earType(ANY(Ears.ELFIN, Ears.ELVEN), +1)
+				.eyeType(Eyes.DEMON, +1)
+				.eyeColor(ANY(DemonEyeColors), +1)
+				.armType(Arms.DEMON, +1)
+				.legType(ANY(LowerBody.DEMONIC_HIGH_HEELS, LowerBody.DEMONIC_GRACEFUL_FEET, LowerBody.DEMONIC_CLAWS), +1)
 				.tailType(Tail.DEMONIC, +1)
 				.wingType(Wings.BAT_LIKE_TINY, +2)
 				.wingType(Wings.BAT_LIKE_LARGE, +4)
-				.tongueType(Tongue.DEMONIC, +1)
-				.earType(ANY(Ears.ELFIN, Ears.ELVEN, Ears.HUMAN), +1)
-				.legType(ANY(LowerBody.DEMONIC_HIGH_HEELS, LowerBody.DEMONIC_CLAWS), +1)
-				.cockOrVaginaOfType(CockTypesEnum.DEMON, VaginaClass.DEMONIC, +1);
-		addScoresAfter(5)
-				.hasPerk(PerkLib.DemonicLethicite, +1)
-				.hasPerk(PerkLib.Phylactery, +5);
-		addConditionedScores(function (body:BodyData):Boolean {
-			return body.player.cor >= 50;
-		}, "cor 50+;", 5)
-				.hornTypeAndCount(Horns.DEMON, GREATER_THAN(4), +4)
 				.plainSkinOfAdj(NOT("slippery"), +1)
 				.skinColor1(ANY(DemonSkinColors), +1)
-				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS, Face.DEVIL_FANGS), +1)
-				.armType(Arms.HUMAN, +1);
+				.cockOrVaginaOfType(CockTypesEnum.DEMON, VaginaClass.DEMONIC, +1)
+				.customRequirement("",'vagina and D+ tits or 12\"+ long cock',
+						function (body:BodyData):Boolean {
+							return body.hasVagina && body.biggestTitSize >= 4 || body.biggestCockSize > 12
+						}, +1)
+				.hornTypeAndCount(Horns.DEMON, GREATER_THAN(4), +4)
+				.corruption(AT_LEAST(50), +1)
+				.corruption(AT_LEAST(100), +1)
+				.hasPerk(PerkLib.DemonicLethicite, +1)
+				.hasPerk(PerkLib.Soulless, +4);
 		
 		addMutation(IMutationsLib.BlackHeartIM);
 		
-		buildTier(11, "succubi-kin/incubi-kin")
+		buildTier(15, "succubi-kin/incubi-kin")
 				.namesMaleFemaleTaur("incubi-kin", "succubi-kin", "incubi-kintaur", "succubi-kintaur")
 				.buffs({
-					"spe.mult": +0.30,
-					"int.mult": +0.35,
-					"lib.mult": +1.00,
+					"spe.mult": +0.25,
+					"int.mult": +0.50,
+					"lib.mult": +1.50,
 					"maxmana_mult": +0.8,
 					"maxwrath_mult": -0.3,
 					"maxsf_mult": -0.8,
@@ -78,16 +83,16 @@ public class DemonRace extends Race {
 				})
 				.end();
 		
-		buildTier(16, "succubus/incubus")
+		buildTier(21, "succubus/incubus")
 				.namesMaleFemaleTaur("incubus","succubus","incubi-taur","succubi-taur")
-				.requirePerk(PerkLib.Phylactery)
+				.requirePerk(PerkLib.Soulless)
 				.buffs({
-					"spe.mult": +0.40,
-					"int.mult": +0.60,
-					"lib.mult": +1.40,
+					"spe.mult": +0.65,
+					"int.mult": +0.70,
+					"lib.mult": +2.00,
+					"sens": +20,
 					"maxmana_mult": +1.2,
 					"maxwrath_mult": -0.45,
-					"maxsf_mult": -0.8,
 					"maxlust_mult": +1.2
 				})
 				.end();

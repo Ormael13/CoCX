@@ -470,6 +470,17 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.EyesFiendish;
 			}
 		});
+
+		public static const DEMON:int = _partid++;
+		EnumValue.add(Memories, DEMON, "DEMON", {
+			id: "Demon Eyes",
+			name: "Demon Eyes",
+			cost: 100,
+			title: "Demon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EyesDemon;
+			}
+		});
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

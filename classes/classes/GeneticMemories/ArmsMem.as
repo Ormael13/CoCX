@@ -714,6 +714,17 @@ import classes.CoC;
             }
         });
 
+		public static const DEMON:int = _partid++;
+		EnumValue.add(Memories, DEMON, "DEMON", {
+			id: "Demon Arms",
+			name: "Demon Claws (Arms)",
+			cost: 100,
+			title: "Demon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsDevil;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

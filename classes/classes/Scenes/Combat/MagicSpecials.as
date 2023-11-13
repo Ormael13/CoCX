@@ -5290,6 +5290,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(30, USEFATG_PHYSICAL);
 		var FascCD:Number = 4;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 2) FascCD -= 1;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) FascCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) FascCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownFascinate,FascCD,0,0,0);
 		outputText("You start with first pose to attract [themonster] attention.  Then you follow with second and then third pose of your enchanting dance.");
@@ -5344,7 +5345,9 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		outputText("You start drawing symbols in the air toward [themonster].");
-		var lustDmg:Number = player.lust / 10 + player.lib / 10;
+		var lustRatio:Number = 10;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustRatio -= 5;
+		var lustDmg:Number = player.lust / lustRatio + player.lib / 10;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 1) lustDmg += player.inte / 10;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 2) lustDmg += player.wis / 10;
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 3) lustDmg += player.sens / 10;
@@ -5375,6 +5378,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.takeLustDamage(Math.round(-lustDmg)/40, true);
 			lustDmg *= 1.2;
 		}
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustDmg = combat.calculateBasicTeaseDamage(lustDmg);
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());

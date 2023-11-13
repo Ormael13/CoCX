@@ -1135,7 +1135,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 		}
 	);
 
-	public const LowerBodyDemonHighHeels: Transformation = new SimpleTransformation("Demon High Heels  Lower Body",
+	public const LowerBodyDemonHighHeels: Transformation = new SimpleTransformation("Demon High Heels Lower Body",
 		// apply effect
 		function (doOutput: Boolean): void {
 			var desc: String = "";
@@ -2270,6 +2270,26 @@ public class LowerBodyTransformations extends MutationsHelper {
 		// is present
 		function (): Boolean {
 			return player.lowerBody === LowerBody.ARMORED_LEGS;
+		}
+	);
+
+	public const LowerBodyDemonGracefulFeet: Transformation = new SimpleTransformation("Demon Graceful Feet Lower Body",
+		// apply effect
+		function (doOutput: Boolean): void {
+			var desc: String = "";
+
+			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+			desc += "Something in your legs suddenly shifts and you fall over, losing balance. Standing up you realize the way you walk has changed dramatically. While your nails elongate a little taking on a demonic claw-like appearance the real change is the seductive grace in your steps which is nothing short of supernatural. Those legs belong on a succubus confidant and sure of her ability to seduce anything and anyone. <b>You now have graceful demonic feet.</b>";
+
+			if (doOutput) outputText(desc);
+			player.legCount = 2;
+			player.lowerBody = LowerBody.DEMONIC_GRACEFUL_FEET;
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DEMONIC_GRACEFUL_FEET));
+		},
+		// is present
+		function (): Boolean {
+			return player.lowerBody === LowerBody.DEMONIC_GRACEFUL_FEET;
 		}
 	);
 	

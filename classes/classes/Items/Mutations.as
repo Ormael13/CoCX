@@ -2727,7 +2727,7 @@ public final class Mutations extends MutationsHelper {
 
         if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
             outputText("[pg]");
-            CoC.instance.transformations.AntennaeNone.applyEffect();
+            transformations.AntennaeNone.applyEffect();
             changes++;
         }
 
@@ -2840,7 +2840,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (player.antennae.type != Antennae.NONE) {
-            CoC.instance.transformations.AntennaeNone.applyEffect(false);
+            transformations.AntennaeNone.applyEffect(false);
             changes++;
         }
 
@@ -5472,7 +5472,7 @@ public final class Mutations extends MutationsHelper {
         //Should the enemy "kill" you during the transformation, it skips the scene and immediately goes to the rape scene. (Now that I'm thinking about it, we should add some sort of appendix where the player realizes how much he's/she's changed. -Ace)
         if (transformations.LowerBodySnake.isPossible() && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
-            CoC.instance.transformations.LowerBodySnake.applyEffect();
+            transformations.LowerBodySnake.applyEffect();
             changes++;
         }
         //Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
@@ -12932,19 +12932,22 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //remove fur
-        if ((player.faceType != Face.HUMAN || !player.hasPlainSkinOnly()) && rand(2) == 0) {
-            //Remove face before fur!
-            if (player.faceType != Face.HUMAN) {
-                outputText("[pg]");
-                transformations.FaceHuman.applyEffect();
-            }
-            //De-fur
-            else if (!player.hasPlainSkinOnly()) {
-                outputText("[pg]");
-                if (player.isFurCovered()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.");
-                if (player.isScaleCovered()) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinColor + " skin</b> underneath.");
-                player.skin.setBaseOnly({type: Skin.PLAIN});
-            }
+        if (!player.hasPlainSkinOnly() && rand(2) == 0) {
+            outputText("[pg]");
+            if (player.isFurCovered()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.");
+            if (player.isScaleCovered()) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinColor + " skin</b> underneath.");
+            player.skin.setBaseOnly({type: Skin.PLAIN});
+            flags[kFLAGS.TIMES_TRANSFORMED]++;
+        }
+        //Demon face
+        if (player.faceType != Face.HUMAN && player.faceType != Face.DEMON && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.FaceHuman.applyEffect();
+            flags[kFLAGS.TIMES_TRANSFORMED]++;
+        }
+        if (player.faceType == Face.HUMAN && rand(2) == 0) {
+            outputText("[pg]");
+            transformations.FaceDemon.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Demon tongue
@@ -12953,12 +12956,28 @@ public final class Mutations extends MutationsHelper {
             transformations.TongueDemonic.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
+		//Demon eyes
+		if (player.faceType == Face.DEMON && (transformations.EyesDemon.isPossible() || transformations.EyesDemonColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
+			if (transformations.EyesDemonColors.isPossible()) {
+				transformations.EyesDemonColors.applyEffect();
+			}
+			if (transformations.EyesDemon.isPossible()) {
+				transformations.EyesDemon.applyEffect();
+			}
+			changes++;
+		}
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
         }
+		//arms changes - requires furless
+		if (player.hasPlainSkinOnly() && player.arms.type == Arms.HUMAN && player.arms.type != Arms.DEMON && rand(3) == 0) {
+			outputText("[pg]");
+            transformations.ArmsDemon.applyEffect();
+            changes++;
+		}
         //foot changes - requires furless
         if (player.hasPlainSkinOnly() && rand(3) == 0) {
             //Males/genderless get clawed feet
@@ -12969,9 +12988,10 @@ public final class Mutations extends MutationsHelper {
                 }
             }
             //Females/futa get high heels
-            else if (player.lowerBody != LowerBody.DEMONIC_HIGH_HEELS) {
+            else if (player.lowerBody != LowerBody.DEMONIC_HIGH_HEELS && player.lowerBody != LowerBody.DEMONIC_GRACEFUL_FEET) {
                 outputText("[pg]");
-                transformations.LowerBodyDemonHighHeels.applyEffect();
+                if (rand(2) == 0) transformations.LowerBodyDemonHighHeels.applyEffect();
+				else transformations.LowerBodyDemonGracefulFeet.applyEffect();
             }
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
@@ -15378,7 +15398,7 @@ public final class Mutations extends MutationsHelper {
         //legs
         if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.HOOFED) {
             outputText("[pg]");
-            CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
+            transformations.LowerBodyHoofed(2).applyEffect();
             changes++;
         }
         //tail
@@ -15652,7 +15672,7 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasGlyphTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\n");
-			CoC.instance.transformations.SkinPatternAnubis.applyEffect();
+			transformations.SkinPatternAnubis.applyEffect();
 			changes++;
 		}
 		//Remove odd eyes
@@ -15739,7 +15759,7 @@ public final class Mutations extends MutationsHelper {
         //physical changes
         //legs
         if (player.lowerBody != LowerBody.HOOFED || !player.lowerBodyPart.isBiped()) {
-            CoC.instance.transformations.LowerBodyHoofed(2).applyEffect(false);
+            transformations.LowerBodyHoofed(2).applyEffect(false);
             changes++;
         }
         //tail
@@ -17528,3 +17548,4 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
+

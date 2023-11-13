@@ -542,9 +542,12 @@ package classes.GeneticMemories {
           title: "Arigean Legs",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyArigean}});
 
-
-
-
+      public static const DEMONIC_GRACEFUL_FEET: int = _partid++;
+      EnumValue.add(Memories, DEMONIC_GRACEFUL_FEET, "DEMONIC_GRACEFUL_FEET", {
+          id: "Demon Graceful Feet Lower Body",name: "Demonic Graceful Feet",
+          cost: 100,
+          title: "Dem. G. Feet",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDemonGracefulFeet}});
 
       public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

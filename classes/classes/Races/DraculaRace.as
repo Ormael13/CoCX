@@ -1,9 +1,11 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.VaginaClass;
 
 public class DraculaRace extends Race {
     public static const RaceBody:/*String*/Array = [
@@ -40,40 +42,44 @@ public class DraculaRace extends Race {
 		addScores()
                 .earType(Ears.VAMPIRE, +1, -1000)
 				.wingType(Wings.VAMPIRE, +4)
-				.faceType(Face.VAMPIRE, +2)
+				.faceType(Face.VAMPIRE, +1)
 				.eyeType(Eyes.VAMPIRE, +1)
 				.eyeColor("blood-red", +1)
 				.skinColor1("pale", +1)
-				//.noTail(+1)
-				//.noHorns(+1)
-				//.noAntennae(+1);
-				//.armType(Arms.HUMAN, +1)
-				//.legType(LowerBody.HUMAN, +1)
+				.tongueType(Tongue.DEMONIC, +1)
+				.hornType(Horns.DEMON, +1)
+				.hornType(NOT(Horns.GOAT), 0, -10)
+				.hairType(Hair.SILKEN, +1)
+				.tailType(Tail.DEMONIC, +1)
+				.armType(Arms.DEMON, +1)
+				.legType(ANY(LowerBody.DEMONIC_HIGH_HEELS, LowerBody.DEMONIC_GRACEFUL_FEET, LowerBody.DEMONIC_CLAWS), +1)
+				.cockOrVaginaOfType(CockTypesEnum.DEMON, VaginaClass.DEMONIC, +1)
 				.corruption(AT_LEAST(50), +1)
 				.corruption(AT_LEAST(75), +1)
-				.corruption(AT_LEAST(100), +1);
+				.corruption(AT_LEAST(100), +1)
+				.hasPerk(PerkLib.Soulless, +2);
 		
-		//addBloodline(PerkLib.VampiresDescendant,PerkLib.BloodlineVampire);
+		addBloodline(PerkLib.VampiresDescendant,PerkLib.BloodlineVampire);
 		addMutation(IMutationsLib.BlackHeartIM);
 		addMutation(IMutationsLib.VampiricBloodstreamIM);
 		addMutation(IMutationsLib.HollowFangsIM);
 		
-		buildTier(20, "dracula")
-				.namesMaleFemale("dracula", "draculina")
+		buildTier(22, "fiendish vampire")
 				.buffs({
-					"str.mult": +0.70,
-					"spe.mult": +0.70,
-					"int.mult": +0.70,
-					"lib.mult": +0.90
+					"str.mult": +2.40,
+					"spe.mult": +2.40,
+					"int.mult": +2.40,
+					"lib.mult": +2.70
 				})
 				.end();
 		/*
-		buildTier(20, "pureblood vampire")
+		buildTier(34, "dracula")
+				.namesMaleFemale("dracula", "draculina")
 				.buffs({
-					"str.mult": +0.70,
-					"spe.mult": +0.70,
-					"int.mult": +0.70,
-					"lib.mult": +0.90
+					"str.mult": +3.60,
+					"spe.mult": +3.60,
+					"int.mult": +3.60,
+					"lib.mult": +4.50
 				})
 				.end();*/
 	}
