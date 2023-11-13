@@ -8,8 +8,9 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class DemonRace extends Race {
-	public static const DemonSkinColors:/*String*/Array = ["shiny black", "sky blue", "indigo", "ghostly white", "leaf green", "light green", "light purple", "purple", "red", "grey", "blue", "snow white", "midnight black"];
-    public static const DemonEyeColors:/*String*/Array = ["fiendish pink", "pink", "red", "yellow", "blue", "turquoise", "light green"];
+	public static const DemonSkinColors:/*String*/Array = ["olive", "tan", "fair", "shiny black", "sky blue", "indigo", "ghostly white", "leaf green", "light green", "light purple", "purple", "red", "grey", "blue", "snow white", "midnight black"];
+    public static const DemonSkin2Colors:/*String*/Array = ["light pink", "purple", "turquoise", "light green"];
+	public static const DemonEyeColors:/*String*/Array = ["fiendish pink", "pink", "red", "yellow", "blue", "turquoise", "light green"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -57,6 +58,7 @@ public class DemonRace extends Race {
 				.wingType(Wings.BAT_LIKE_LARGE, +4)
 				.plainSkinOfAdj(NOT("slippery"), +1)
 				.skinColor1(ANY(DemonSkinColors), +1)
+				.skinColor2(ANY(DemonSkin2Colors), +1)
 				.cockOrVaginaOfType(CockTypesEnum.DEMON, VaginaClass.DEMONIC, +1)
 				.customRequirement("",'vagina and D+ tits or 12\"+ long cock',
 						function (body:BodyData):Boolean {
