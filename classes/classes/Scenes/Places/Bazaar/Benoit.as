@@ -39,14 +39,9 @@ public function benoitMF(stringM:String,stringF:String):String {
 }
 private function benoitLover():Boolean {
 	return flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] >= 2;
-}
-public function benoitAffection(changes:Number = 0):Number {
-	if(changes != 0) {
-		flags[kFLAGS.BENOIT_AFFECTION] += changes;
-		if(flags[kFLAGS.BENOIT_AFFECTION] > 100) flags[kFLAGS.BENOIT_AFFECTION] = 100;
-		else if(flags[kFLAGS.BENOIT_AFFECTION] < 0) flags[kFLAGS.BENOIT_AFFECTION] = 0;
-	}
-	return flags[kFLAGS.BENOIT_AFFECTION];
+}public function benoitAffection(changes:Number = 0):Number {
+		flags[kFLAGS.BENOIT_AFFECTION] = Math.max(0, Math.min(100, flags[kFLAGS.BENOIT_AFFECTION] + changes));
+		return flags[kFLAGS.BENOIT_AFFECTION];
 }
 
 private function benoitKnocksUpPCCheck():void {
