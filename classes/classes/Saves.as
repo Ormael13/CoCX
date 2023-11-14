@@ -923,6 +923,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.beardLength = player.beardLength;
 		saveFile.data.eyeType = player.eyes.type;
 		saveFile.data.eyeColor = player.eyes.colour;
+		saveFile.data.skinColor3 = player.skinColor3;
 		saveFile.data.beardStyle = player.beardStyle;
 		saveFile.data.tongueType = player.tongue.type;
 		saveFile.data.earType = player.ears.type;
@@ -1922,6 +1923,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
 		else
 			CoC.instance.transformations.EyesChangeColor([saveFile.data.eyeColor]).applyEffect(false);
+		if (saveFile.data.skinColor3 == undefined)
+			player.skinColor3 = "black";
+		else
+			player.skinColor3 = saveFile.data.skinColor3;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;
