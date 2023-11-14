@@ -14223,7 +14223,8 @@ public function GooTease():void {
             if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
             if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
             if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-            damage *= damagemultiplier;
+			if (player.perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) damage *= (1 + (0.25 * player.perkv1(IMutationsLib.SlimeMetabolismIM)));
+			damage *= damagemultiplier;
             //Determine if critical tease!
             var crit:Boolean = false;
             var critChance:int = 5;

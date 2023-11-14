@@ -52,6 +52,8 @@ public class Changelog extends BaseContent
 			outputText("-True damage attacks that PC deal to enemies should be now... not be affected by enemy defenses. Otherwise why would it be true damage over phys/mag damage?\n");
 			outputText("-Scimitar was changed to dueling sword type from sword type.\n");
 			outputText("-Power Shot special can be used with crossbows too. When using Avelynn with power shot it would deal dmg 3 times.\n");
+			outputText("-Power Attack and Power Shot used when wrath is over 100% would only drain 100% of wrath (that could only happen if PC have any source of overMax Wrath).\n");
+			outputText("-Added to Elemental Bolt req. for one of perks High Tide perk.\n");
 			outputText("-Various minor corections/bugfixes.\n");
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills. (Demojay)\n");
 			outputText("-Changed behaviour of Elementals under Simplified Pre Turn so that the elemental chosen is no longer random, but selected by the player. (Demojay)\n");
@@ -68,8 +70,6 @@ public class Changelog extends BaseContent
 			outputText("-Defeating a Phoenix will now have their defeated scene properly clear previous text. (Demojay)\n");
 			outputText("-A player whose werewolf score has gone under 12 while having the Dormant Lycanthropy perk can now become a werewolf again upon increasing their racial score once more. (Demojay)\n");
 			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
-			outputText("-Power Attack and Power Shot used when wrath is over 100% would only drain 100% of wrath (that could only happen if PC have any source of overMax Wrath).\n");
-			outputText("-Added to Elemental Bolt req. for one of perks High Tide perk.\n");
 			outputText("-Fixed bugs: Skeleton pre-turn attack text would not properly display to the user, text positioning so that Skeleton warrior and archer pre-turn texts are generated on separate lines, buttons to choose whether Golems and Skeletons will attack pre-turn were overlapping, causing it to become unclear what selecting the button would do, ");
 			outputText("game showing that the user was still a Soul Scholar on the cultivation screen, when they were actually a Soul Grandmaster (Demojay)\n");
 			outputText("-Added to tooltips to Golem/Skeleton pre-turn button to make each function more clear. (Demojay)\n");
@@ -83,6 +83,14 @@ public class Changelog extends BaseContent
 			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
 			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF)\n");
 			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses like max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
+			outputText("-New mutation perk: Slime Metabolism. Req. having free metabolism mutation slot, one of slime races. Effects: When taking an intake of fluid heal for 2% of your hp, mana and fatigue.\n");
+			outputText("-New mutation perk: Slime Metabolism (Primitive). Req. Slime Metabolism and lvl 30+. Effects: When taking an intake of fluid heal for 3% of your hp, mana and fatigue. Increase all grappling tease damage by 50%.\n");
+			outputText("-New mutation perk: Slime Fluid. Req. having free bloodsteam mutation slot, one of slime races. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated.\n");
+			outputText("-New mutation perk: Slime Fluid (Primitive). Req. Slime Fluid and lvl 30+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take half as much damage from Acid.\n");
+			outputText("-Goo type enemies gained immunity to bleed effects \o/\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -105,14 +113,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable\n\n");
 			/*ostatni punkt changelogu

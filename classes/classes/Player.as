@@ -1358,6 +1358,10 @@ use namespace CoC;
 		{
 			return (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking)));
 		}
+		public function immuneToBleed():Boolean
+		{
+			return perkv1(IMutationsLib.SlimeFluidIM) >= 1;
+		}
 
 		public function allEquipment():/*ItemType*/Array {
 			var result:Array = [];
@@ -3622,6 +3626,9 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) {
+				damage = Math.round(damage*0.5);
+			}
 			//Apply acid damage resistance percentage.
 			damage *= damageAcidPercent() / 100;
 			return damage;
@@ -4573,6 +4580,13 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Diapause)) {
 				flags[kFLAGS.DIAPAUSE_FLUID_STORE] += 3 + rand(3);
 				flags[kFLAGS.DIAPAUSE_DISPLAYED] = 1;
+			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 1) {
+				var percent:Number = 0.01;
+				percent += (0.01 * perkv1(IMutationsLib.SlimeMetabolismIM));
+				EngineCore.HPChange(Math.round(maxHP() * percent), true);
+				EngineCore.ManaChange(Math.round(maxHP() * percent));
+				EngineCore.changeFatigue(-Math.round(maxFatigue() * percent));
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
@@ -6566,7 +6580,6 @@ use namespace CoC;
 			var finalType:String = orgasmFinalType(type);
 			dynStats("lus=", 0, "sca", false);
 			hoursSinceCum = 0;
-			if (hasPerk(PerkLib.DemonEnergyThirst)) addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
 				if (CoC.instance.inCombat) if (hasPerk(PerkLib.DominantAlpha)) createOrAddStatusEffect(StatusEffects.DominantAlpha, 1, 3)
@@ -7142,4 +7155,4 @@ use namespace CoC;
 			}
 		}		
 	}
-}
+}

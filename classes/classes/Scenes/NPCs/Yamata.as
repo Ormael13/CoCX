@@ -41,8 +41,10 @@ import classes.internals.*;
 			
 			player.takePhysDamage(damage, true);
 			yamataSodomasochistApply(damage);
-			if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-			else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+			if (!player.immuneToBleed()) {
+				if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+				else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+			}
 		}
 		
 		private function yamataDarkFoxfire():void

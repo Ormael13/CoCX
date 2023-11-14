@@ -39,7 +39,7 @@ import classes.internals.*;
 				outputText("" + this.capitalA + this.short + " manages to slash you with h"+(flags[kFLAGS.GALIA_LVL_UP] >= 1?"er":"is")+" deadly claws!");
 				var damage:int = eBaseStrengthDamage() + rand(50) + str + weaponAttack;
 				if (damage < 50) damage = 50; //Min-cap damage.
-				if (damage >= 250) {
+				if (damage >= 250 && !player.immuneToBleed()) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				}

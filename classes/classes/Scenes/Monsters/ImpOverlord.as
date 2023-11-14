@@ -172,7 +172,7 @@ public class ImpOverlord extends Imp
 				outputText("The imp manages to slash you with his scimitar and his deadly claws!");
 				var damage:int = rand(100) + (str * 1.5) + weaponAttack;
 				if (damage < 30) damage = 30; //Min-cap damage.
-				if (damage >= 50) {
+				if (damage >= 50 && !player.immuneToBleed()) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				}

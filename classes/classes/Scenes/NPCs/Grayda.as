@@ -16,7 +16,7 @@ public class Grayda extends Monster
 			damage += eBaseStrengthDamage();
 			damage *= 2;
 			player.takePhysDamage(damage, true);
-			if (rand(4) == 0) {
+			if (rand(4) == 0 && !player.immuneToBleed()) {
 				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 				else player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.05, 0, 0);
 			}

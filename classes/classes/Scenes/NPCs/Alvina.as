@@ -65,7 +65,7 @@ public class Alvina extends Monster
 					outputText("The room gets darker as lights are snuffed out, and it gets colder by the second. ");
 					if (flags[kFLAGS.GAME_DIFFICULTY] >= 2){
 						outputText("Alvina snaps her fingers and large spear-like shards of ice form all around you before raining from all directions. You are impaled from all sides by spears, your blood dripping on the floor. This is, however, only the first phase of this terrifying spell. ");
-						player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+						if (!player.immuneToBleed()) player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
 					}
 					outputText("You barely have time to scream as the air around you freezes solid. You are encased in a thick layer of black ice! ");
 					player.takeIceDamage(damage, true);//, true
@@ -172,8 +172,10 @@ public class Alvina extends Monster
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
 			outputText("Large crystalline shards of ice form in a fan around Alvina. She waves her scythe in an arc launching them in a barrage at you. You are impaled several times over, your wounds bleeding grievously. ");
 			player.takeIceDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
-			else player.createStatusEffect(StatusEffects.IzmaBleed,SceneLib.combat.debuffsOrDoTDuration(5),0,0,0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
+				else player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(5), 0, 0, 0);
+			}
 			statScreenRefresh();
 			outputText("\n");
 		}

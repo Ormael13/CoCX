@@ -40,7 +40,6 @@ public class IMutationsLib
 		//This one does nothing, and is simply to showcase and used as a dummy mutation to use for buffs..
 		public static const MutationsTemplateIM:IMutationPerkType = new MutationTemplate();
 		//Disabled mutations here. The contents are not filled. Please fill them in first.
-		public static const SlimeMetabolismIM:IMutationPerkType = new SlimeMetabolismMutation();
 		public static const NekomataThyroidGlandIM:IMutationPerkType = new NekomataThyroidGlandMutation();
 		public static const HellcatParathyroidGlandsIM:IMutationPerkType = new HellcatParathyroidGlandMutation();
 		public static const HengeyokaiBirthrightIM:IMutationPerkType = new HengeyokaiBirthrightMutation();
@@ -105,6 +104,8 @@ public class IMutationsLib
 		public static const SalamanderAdrenalGlandsIM:IMutationPerkType = new SalamanderAdrenalGlandsMutation();
 		public static const ScyllaInkGlandsIM:IMutationPerkType = new ScyllaInkGlandsMutation();
 		public static const SharkOlfactorySystemIM:IMutationPerkType = new SharkOlfactorySystemMutation();
+		public static const SlimeFluidIM:IMutationPerkType = new SlimeFluidMutation();
+		public static const SlimeMetabolismIM:IMutationPerkType = new SlimeMetabolismMutation();
 		public static const TrachealSystemIM:IMutationPerkType = new TrachealSystemMutation();
 		public static const TwinHeartIM:IMutationPerkType = new TwinHeartMutation();
 		public static const VampiricBloodstreamIM:IMutationPerkType = new VampiricBloodstreamMutation();
