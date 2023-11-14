@@ -397,6 +397,15 @@ public class BodyData {
 		return data[SLOT_SKIN_COLOR1];
 	}
 	
+	public static const SLOT_SKIN_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SKIN_COLOR2, "SKIN_COLOR2", {
+		name: "skin secondary color",
+		suffix: "skin"
+	});
+	public function get skinColor2():String {
+		return data[SLOT_SKIN_COLOR2];
+	}
+	
 	public static const SLOT_SKIN_COVERAGE:int = _slotid++;
 	
 	EnumValue.add(Slots,SLOT_SKIN_COVERAGE, "SKIN_COVERATE", {

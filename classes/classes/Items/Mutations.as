@@ -1028,6 +1028,15 @@ public final class Mutations extends MutationsHelper {
                     player.shrinkTits();
                     player.shrinkTits();
                 }
+				if (!InCollection(player.skinColor1, DemonRace.DemonSkinColors) && !InCollection(player.skinColor2, DemonRace.DemonSkin2Colors)) {
+					var choice1:String = randomChoice(DemonRace.DemonSkinColors);
+                    var choice2:String = randomChoice(DemonRace.DemonSkin2Colors);
+                    player.skinColor1 = choice1;
+                    player.skinColor2 = choice2;
+                    outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become [skin color] in color.</b>");
+                    if (tainted) dynStats("cor", 1);
+                    else dynStats("cor", 0);
+				}
             }
             //Demonic changes - higher chance with higher corruption.
             if (rand(40) + (player.cor + player.corruptionTolerance) / 2 > 40 && tainted) demonChanges(player);
@@ -1308,7 +1317,7 @@ public final class Mutations extends MutationsHelper {
                 }
             }
             if (rando >= 90-randomod && changeLimit != 0) {
-                if (InCollection(player.skinColor, DemonRace.DemonSkinColors)) {
+                if (InCollection(player.skinColor1, DemonRace.DemonSkinColors) && InCollection(player.skinColor2, DemonRace.DemonSkin2Colors)) {
                     if (player.hasVagina()) {
                         outputText("[pg]Your heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
                         if (player.clitLength > 3 && !player.hasPerk(PerkLib.BigClit)) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
@@ -1323,9 +1332,10 @@ public final class Mutations extends MutationsHelper {
                         transformations.VaginaHuman().applyEffect();
                     }
                 } else {
-                    var choice:String = randomChoice(DemonRace.DemonSkinColors);
-                    player.skinColor1 = choice;
-                    player.skinColor2 = choice;
+                    var choice1:String = randomChoice(DemonRace.DemonSkinColors);
+                    var choice2:String = randomChoice(DemonRace.DemonSkin2Colors);
+                    player.skinColor1 = choice1;
+                    player.skinColor2 = choice2;
                     outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become [skin color] in color.</b>");
                     if (tainted) dynStats("cor", 1);
                     else dynStats("cor", 0);

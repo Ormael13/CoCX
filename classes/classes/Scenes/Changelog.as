@@ -82,7 +82,7 @@ public class Changelog extends BaseContent
 			outputText("Facinate Stun lasts 2 turns, count your lust for twice as high when using Lust strike and it’s now benefit from all effects that pertain to the tease action.\n");
 			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
 			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF)\n");
-			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses l;ike max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
+			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses like max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
