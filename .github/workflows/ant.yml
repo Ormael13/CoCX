@@ -46,6 +46,10 @@ jobs:
           air-version: "33.1.1.345"
           accept-air-license: true
 
+      - name: add git hash
+        shell: pwsh
+        run: |
+          .\devTools\insertRevInfo.ps1
       # this is where the build happens. A separate build is started for every entry in the matrix element
       - name: Build
         run: ant allCI
