@@ -36,10 +36,22 @@ jobs:
         with:
           submodules: true
 
-      #- name: Download and install Android SDK
-      #  uses: android-actions/setup-android@v3
-
-      - name: install flex sdk
+      - name: Cache FlexSdk Install
+        uses: actions/cache@v3
+        with:
+          key: apache-stuff
+          path: |
+            C:/ApacheFlexSDK
+        id: "cacheme"
+        #handle cache found
+      - if: ${{ steps.cacheme.outputs.cache-hit == 'true' }}
+        name: fix env
+        shell: pwsh
+        run : |
+          echo "FLEX_HOME=C:/ApacheFlexSDK" >> $env:GITHUB_ENV
+      #handle cache failed
+      - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
+        name: install flex sdk
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
