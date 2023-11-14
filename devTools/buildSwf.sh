@@ -17,7 +17,7 @@ fi
 
 # pull out the version so we can use it for the filename.
 COC_VERSION=$(gawk 'match($0, /^[\s\t]+ver = \"(.+)\";/, n) { print n[1] }' < classes/classes/CoC.as)
-COC_VERSION_APK=$(echo ${COC_VERSION} | awk -F- '{ print $1 }')
+COC_VERSION_APK=$(echo "${COC_VERSION}" | awk -F- '{ print $1 }')
 SWF_NAME="CoC-${COC_VERSION}.swf"
 
 echo "Build version = ${COC_VERSION}"
@@ -50,11 +50,11 @@ COMMON_OPTS="\
 # Build standalone SWF
 echo "Build standalone ${SWF_NAME}"
 ${FLEX_ROOT}/bin/amxmlc \
-${COMMON_OPTS} \
+"${COMMON_OPTS}" \
 -debug \
 -define+=CONFIG::AIR,false \
 -define+=CONFIG::STANDALONE,true \
--o ./swfRepo/CoC-${COC_VERSION}.swf \
+-o ./swfRepo/CoC-"${COC_VERSION}".swf \
 classes/classes/CoC.as
 
 # Build the Android package

@@ -9,7 +9,7 @@
 echo Reverting any local changes to CoC.as file
 git checkout -- ./classes/classes/CoC.as
 
-export GIT_REV=`git rev-parse  --short HEAD`
+export GIT_REV=$(git rev-parse  --short HEAD)
 
 echo Done. Splicing in release info
 /bin/sed -i -r "s/^([\s\\t]+ver\s?=\s?\".+)\";/\1-A-${GIT_REV}\"\;/" ./classes/classes/CoC.as
