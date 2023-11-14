@@ -5563,6 +5563,39 @@
 										</default>
 									</switch>
 								</case>
+								<case values="Arms.LION, Arms.DISPLACER">
+									<switch value="lowerBody">
+										<case values="LowerBody.LION">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.WOLF">
+									<switch value="lowerBody">
+										<case values="LowerBody.WOLF">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.DRAGON">
+									<switch value="lowerBody">
+										<case values="LowerBody.DRAGON">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
 								<default>
 								</default>
 							</switch>
