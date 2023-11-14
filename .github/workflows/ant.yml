@@ -39,7 +39,7 @@ jobs:
       #- name: Download and install Android SDK
       #  uses: android-actions/setup-android@v3
 
-      - name: install flex sdk
+      - name: Install Flex SDK
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
@@ -50,25 +50,25 @@ jobs:
       - name: Build
         run: ant allCI
 
-      - name: save debug swf
+      - name: Save Debug SWF
         uses: actions/upload-artifact@v3
         with:
           name: debug-swf
           path: target/CoC-debug.swf
 
-      - name: save release swf
+      - name: Save Release SWF
         uses: actions/upload-artifact@v3
         with:
           name: release-swf
           path: target/CoC-release.swf
 
-      - name: save android armv7 apk
+      - name: Save Android armv7 APK
         uses: actions/upload-artifact@v3
         with:
           name: mobile-arm7-32bit-apk
           path: target/CoC-Mobile-armv7.apk
 
-      - name: save android armv8 apk
+      - name: Save Android armv8 APK
         uses: actions/upload-artifact@v3
         with:
           name: mobile-arm8-64bit-apk
