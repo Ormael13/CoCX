@@ -73,3 +73,10 @@ jobs:
         with:
           name: mobile-arm8-64bit-apk
           path: target/CoC-Mobile-armv8.apk
+
+      - name: Discord notification to channel
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        continue-on-error: true
