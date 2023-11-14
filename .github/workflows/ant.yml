@@ -74,6 +74,7 @@ jobs:
           name: mobile-arm8-64bit-apk
           path: target/CoC-Mobile-armv8.apk
 
+      # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
       - name: Discord notification to channel
         uses: sarisia/actions-status-discord@v1
         if: always()
