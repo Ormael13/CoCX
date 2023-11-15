@@ -3,7 +3,7 @@
 
 name: ActionScript 3 CI
 
-# Github worflows do not support actionscript directly.
+# Github workflows do not support actionscript directly.
 # However the build uses ant, which is usually used to build java projects.
 # The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
 
@@ -16,7 +16,7 @@ on:
 
 env:
   # tell the build file where to find the flex SDK
-  FLEX_HOME: "build-dep/bin/flex/"
+  FLEX_HOME: "C:/ApacheFlexSDK"
   # this is to trick the flash player into thinking it is running on a desktop
   DISPLAY: ":1"
 
@@ -36,14 +36,21 @@ jobs:
         with:
           submodules: true
 
-      #- name: Download and install Android SDK
-      #  uses: android-actions/setup-android@v3
+      - name: Cache FlexSDK Install
+        uses: actions/cache@v3
+        with:
+          key: apache-stuff
+          path: |
+            C:/ApacheFlexSDK
+        id: "cacheme"
 
-      - name: Install Flex SDK
+        #handle cache failed
+      - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
+        name: Install Flex SDK
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
-          air-version: "33.1.1.345"
+          air-version: "33.1.1.935"
           accept-air-license: true
 
       # this is where the build happens. A separate build is started for every entry in the matrix element
