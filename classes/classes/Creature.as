@@ -1258,6 +1258,9 @@ public class Creature extends Utils
 		public function set skinColor2(value:String):void {
 			bodyMaterials[BodyMaterial.SKIN].color2 = value;
 		}
+
+		public var skinColor3:String = "black";
+
 		public function get furColor():String {
 			return bodyMaterials[BodyMaterial.FUR].color;
 		}
