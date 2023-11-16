@@ -249,7 +249,7 @@ use namespace CoC;
 				return;
 			}
 			if (CoC.instance.inCombat) SceneLib.combat.combatMenu(false);
-			playerMenu();
+			else playerMenu();
 		}
 		
 		public function showItemTooltipLinkHandler(itemid:String):void {
