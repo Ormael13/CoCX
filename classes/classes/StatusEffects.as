@@ -316,6 +316,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CombatFollowerExcellia:StatusEffectType			= mk("Combat Follower: Excellia");
 		public static const CombatFollowerDiana:StatusEffectType			= mk("Combat Follower: Diana");
 		public static const CombatFollowerDiva:StatusEffectType				= mk("Combat Follower: Diva");
+		public static const CombatFollowerGVampServ:StatusEffectType		= mk("Combat Follower: Ghoulish Vampire Servant");
 		public static const CombatFollowerKiha:StatusEffectType				= mk("Combat Follower: Kiha");
 		public static const CombatFollowerMidoka:StatusEffectType			= mk("Combat Follower: Midoka");
 		public static const CombatFollowerMitzi:StatusEffectType			= mk("Combat Follower: Mitzi");
@@ -1288,3 +1289,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
+

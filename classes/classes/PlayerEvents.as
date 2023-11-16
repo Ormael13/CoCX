@@ -466,6 +466,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.SoulNexus);
 				needNext = true;
 			}
+			if (!player.hasPerk(PerkLib.Familiar) && player.racialScore(Races.VAMPIRE) >= 20) {
+				outputText("\nBecoming a vampire again seems to have drawn a familiar figure back to camp. Your ghoulish servant is home again.\n");
+				player.createPerk(PerkLib.Familiar,0,0,0,0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.Familiar) && player.racialScore(Races.VAMPIRE) < 20) {
+				outputText("\nAs you become less and less of a vampire, your ghoulish servant begins to take its distance from you. It appears it has to do with the fact it needs to find its sustenance in soulforce elsewhere. For the time being, it seems your ghoul servant will be away from camp.\n");
+				if (flags[kFLAGS.PLAYER_COMPANION_1] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") flags[kFLAGS.PLAYER_COMPANION_1] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_3] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+				player.removePerk(PerkLib.Familiar);
+				needNext = true;
+			}
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
 					outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n");

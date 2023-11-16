@@ -8349,6 +8349,7 @@ public class Combat extends BaseContent {
     public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+		damage *= (monster.damageMagicalPercent() / 100);
 		if (monster.damageReductionBasedOnDifficulty() > 1) damage *= (1 / monster.damageReductionBasedOnDifficulty());
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
@@ -16808,6 +16809,9 @@ private function ghostRealStrengthCompanion():Number {
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerGVampServ);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerGVampServ);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerGVampServ);
     if (flags[kFLAGS.PLAYER_COMPANION_0] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
@@ -16870,11 +16874,11 @@ private function ghostRealToughness():Number {
     return ghostRealTou;
 }
 private function ghostRealToughnessCompanion():Number {
-    var ghostRealStrCompanion:Number = 0;
-    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") ghostRealStrCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
-    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") ghostRealStrCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
-    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") ghostRealStrCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
-    return ghostRealStrCompanion;
+    var ghostRealTouCompanion:Number = 0;
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") ghostRealTouCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") ghostRealTouCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") ghostRealTouCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAurora);
+    return ghostRealTouCompanion;
 }
 
 private function ghostRealIntelligenceCompanion():Number {

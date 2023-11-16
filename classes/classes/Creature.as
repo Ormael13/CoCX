@@ -3120,7 +3120,7 @@ public class Creature extends Utils
 		//Bleed immunity
 		public function isImmuneToBleed():Boolean
 		{
-			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType))
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType) || game.monster.hasPerk(PerkLib.EnemyGooType))
 				return true;
 			return false;
 		}

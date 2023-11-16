@@ -41,6 +41,8 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Arigean Association Cortex. Req. having free nerv system mutation slot, arigean race. Effects: Overtime your way of thinking has changed to be more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 20% more damage.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Primitive). Req. Arigean Association Cortex and lvl 30+. Effects: Your way of thinking has become even more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 50% more damage and now cost 20% less mana.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Evolved). Req. Arigean Association Cortex (Primitive) and lvl 60+. Effects: Your way of thinking has become identical to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 90% more damage and now cost 30% less mana, additionally your mana regen is increased by 10% of your toughness.\n");
+			outputText("-New mutation perk: Slime Fluid. Req. having free bloodsteam mutation slot, one of slime races. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated.\n");
+			outputText("-New mutation perk: Slime Metabolism. Req. having free metabolism mutation slot, one of slime races. Effects: When taking an intake of fluid heal for 2% of your hp, mana and fatigue.\n");
 			outputText("-New range weapon (by Ormael): Twin Desert Eagles - can be gained by combining 2x Desert Eagle weapon. Cost 1240 gems. Base atk is 25 and ammo clip size 4. It's Dual Firearm type range weapon.\n");
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-Starting traits desc on choice screen corrected to avoid misleading players (they are most of the time +50% stat multi bonuses (or jsut 50 sens) not +x% to maximum.\n");
@@ -58,6 +60,9 @@ public class Changelog extends BaseContent
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills. (Demojay)\n");
 			outputText("-Changed behaviour of Elementals under Simplified Pre Turn so that the elemental chosen is no longer random, but selected by the player. (Demojay)\n");
 			outputText("-Added tooltips to the 'Elemental Aspects' menu so that the user knows what each option does in combat. (Demojay)\n");
+			outputText("-The menu for choosing an Elemental attack will now no longer appear is the enemy is already dead. Using an attack helped by an Elemental will now properly clear previous text. (Demojay)\n");
+			outputText("-Defeating a Phoenix will now have their defeated scene properly clear previous text. (Demojay)\n");
+			outputText("-A player whose werewolf score has gone under 12 while having the Dormant Lycanthropy perk can now become a werewolf again upon increasing their racial score once more. (Demojay)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -66,9 +71,6 @@ public class Changelog extends BaseContent
 			//outputText("-Pureblood vampire PC that talked with Diva about vampirism gaining ability to create ghoulish vampire servant. It would be as event in general explore during the night.\n");
 			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. Implemented arigean aura(s), and added Sylabt's edits/improvements to my arigean sprites. (Lord Shadeogorath)\n");
 			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
-			outputText("-The menu for choosing an Elemental attack will now no longer appear is the enemy is already dead. Using an attack helped by an Elemental will now properly clear previous text. (Demojay)\n");
-			outputText("-Defeating a Phoenix will now have their defeated scene properly clear previous text. (Demojay)\n");
-			outputText("-A player whose werewolf score has gone under 12 while having the Dormant Lycanthropy perk can now become a werewolf again upon increasing their racial score once more. (Demojay)\n");
 			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
 			outputText("-Fixed bugs: Skeleton pre-turn attack text would not properly display to the user, text positioning so that Skeleton warrior and archer pre-turn texts are generated on separate lines, buttons to choose whether Golems and Skeletons will attack pre-turn were overlapping, causing it to become unclear what selecting the button would do, ");
 			outputText("game showing that the user was still a Soul Scholar on the cultivation screen, when they were actually a Soul Grandmaster (Demojay)\n");
@@ -83,18 +85,16 @@ public class Changelog extends BaseContent
 			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
 			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF)\n");
 			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses like max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
-			outputText("-New mutation perk: Slime Metabolism. Req. having free metabolism mutation slot, one of slime races. Effects: When taking an intake of fluid heal for 2% of your hp, mana and fatigue.\n");
 			outputText("-New mutation perk: Slime Metabolism (Primitive). Req. Slime Metabolism and lvl 30+. Effects: When taking an intake of fluid heal for 3% of your hp, mana and fatigue. Increase all grappling tease damage by 50%.\n");
-			outputText("-New mutation perk: Slime Fluid. Req. having free bloodsteam mutation slot, one of slime races. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated.\n");
 			outputText("-New mutation perk: Slime Fluid (Primitive). Req. Slime Fluid and lvl 30+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take half as much damage from Acid.\n");
-			outputText("-Goo type enemies gained immunity to bleed effects \o/\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Goo type enemies gained immunity to bleed effects.\n");
+			outputText("-New event perk: Familiar. Gained by becoming pureblood vampire (tier 2 vampire) and talking about vampirism with Diva OR by becoming fiendish vampire (tier 1 dracula/lina). Effects: Your blood is highly infectious feeding it to a willing or unwilling creature can either turn them into a lesser vampire or a ghoul.\n");
+			outputText("-When having Familiar perk and exploring at night PC can encounter human npc, whcich could be turned into ghoul servant.\n");
+			outputText("-Ghoulish Vampire Servant would move in to camp to server PC as long pc is tier 2 vampire or dracula. It can assist in combat never been lazy to not do anything outside first turn it prepare to fight alongside PC. It can also help in combat help pc by stealing health, soulforce or even filling vampire thirst stack during it attacks.\n");
+			outputText("-Ground for Succubus tatoo and fix a bug or two in viewer code. (Liadri)\n");
+			outputText("-Warden Weapons now display their correct SoulSkill. Changed the description display function of Ranged Weapons so their format matches Melee Weapons. Consuming a Jabberwocky Scale now properly shows the player gaining the 'Insanity' perk. Added Fix: 'Returning from the inventory in combat no longer causes a new combat round' (Demojay)\n");
+			outputText("-Small bugfix from parser being checked even without being valid. (Jtecx)\n");
+			outputText("-Some small fixes for combat (jfmherokiller)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -114,7 +114,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
-			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable\n\n");
+			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
