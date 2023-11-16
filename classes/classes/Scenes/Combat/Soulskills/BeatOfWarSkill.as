@@ -1,12 +1,13 @@
 package classes.Scenes.Combat.Soulskills {
 import classes.Scenes.Combat.AbstractSoulSkill;
 import classes.Monster;
+import classes.PerkLib;
 
 public class BeatOfWarSkill extends AbstractSoulSkill {
     public function BeatOfWarSkill() {
         super(
             "Beat of War",
-            "Form a small sphere inscribed by symbols to drain from enemy a bit of lust and/or wrath.",
+            "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",
             TARGET_ENEMY,
             TIMING_INSTANT,
             [TAG_DAMAGING, TAG_BUFF],
@@ -20,7 +21,7 @@ public class BeatOfWarSkill extends AbstractSoulSkill {
 	}
 
 	override public function get isKnown():Boolean {
-		return player.weapon == weapons.WGSWORD;
+		return player.hasPerk(PerkLib.StrifeWarden);
 	}
 
 	override public function describeEffectVs(target:Monster):String {

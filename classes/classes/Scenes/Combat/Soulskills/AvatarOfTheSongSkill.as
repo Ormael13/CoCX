@@ -2,6 +2,7 @@ package classes.Scenes.Combat.Soulskills {
 import classes.Scenes.Combat.AbstractSoulSkill;
 import classes.StatusEffects;
 import classes.Scenes.Combat.CombatAbilities;
+import classes.PerkLib;
 
 public class AvatarOfTheSongSkill extends AbstractSoulSkill {
     public function AvatarOfTheSongSkill() {
@@ -22,7 +23,7 @@ public class AvatarOfTheSongSkill extends AbstractSoulSkill {
 	}
 
 	override public function get isKnown():Boolean {
-		return player.weapon == weapons.WDSTAFF;
+		return player.hasPerk(PerkLib.MageWarden);
 	}
 
 	override protected function usabilityCheck():String {

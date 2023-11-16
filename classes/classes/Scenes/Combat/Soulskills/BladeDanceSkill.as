@@ -3,6 +3,7 @@ import classes.Scenes.Combat.AbstractSoulSkill;
 import classes.StatusEffects;
 import classes.Monster;
 import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
 
 public class BladeDanceSkill extends AbstractSoulSkill {
     public function BladeDanceSkill() {
@@ -22,7 +23,7 @@ public class BladeDanceSkill extends AbstractSoulSkill {
 	}
 
 	override public function get isKnown():Boolean {
-		return player.weapon == weapons.WDBLADE;
+		return player.hasPerk(PerkLib.BladeWarden);
 	}
 
 	override public function describeEffectVs(target:Monster):String {

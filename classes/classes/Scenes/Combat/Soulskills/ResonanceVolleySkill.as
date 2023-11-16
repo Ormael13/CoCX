@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.Soulskills {
 import classes.Scenes.Combat.AbstractSoulSkill;
 import classes.StatusEffects;
+import classes.PerkLib;
 
 public class ResonanceVolleySkill extends AbstractSoulSkill {
     public function ResonanceVolleySkill() {
@@ -21,7 +22,7 @@ public class ResonanceVolleySkill extends AbstractSoulSkill {
 	}
 
 	override public function get isKnown():Boolean {
-		return player.weaponRangeName == "Warden’s bow";
+		return player.hasPerk(PerkLib.WildWarden);
 	}
 
 	override public function sfCost():int {
