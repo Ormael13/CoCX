@@ -91,7 +91,7 @@ public class AbstractGargoyle extends Monster
 		outputText(", dealing ");
 		player.takePhysDamage(damage, true);
 		outputText(" damage! The attack leaves you bleeding from deep wounds!");
-		player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+		if (!player.immuneToBleed()) player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 	}

@@ -132,6 +132,7 @@
             <color name="ashen grayish-blue">#93b6c8</color>
             <color name="creamy-white">#f2ebde</color>
             <color name="crimson platinum">#d56c6c</color>
+			<color name="fiendish crimson">#d56c6c</color>
             <color name="blood-red">#d56c6c</color>
             <color name="blazing red">#ff6224</color>
             <color name="dark blue">#3d529e</color>
@@ -190,6 +191,7 @@
             <color name="black and yellow">#000000</color>
             <color name="abyssal black">#000000</color>
             <color name="white and black">#eff3f6</color>
+			<color name="fiendish pink">#ffccf3</color>
         </common>
         <property name="hair" src="hairColor1" default="#ffffff">
             <color name="red">#d85741</color>
@@ -231,6 +233,9 @@
             <color name="pale">#f2e8e3</color>
         </property>
         <property name="skin2" src="skinColor2" default="#ffffff">
+            <color name="pale">#f2e8e3</color>
+        </property>
+		<property name="skin3" src="skinColor3" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <property name="iris" src="eyes.colour" default="#0000ff">
@@ -297,6 +302,14 @@
         <key src="#BB7777" base="skin2" transform="darken(25)"/>
         <key src="#884444" base="skin2" transform="darken(50)"/>
         <key src="#221111" base="skin2" transform="darken(75)"/>
+		
+		<key src="#ffccea" base="skin3" transform="lighten(25)"/>
+        <key src="#ff99d5" base="skin3"/>
+		<key src="#eb8dc4" base="skin3" transform="darken(8)"/>
+        <key src="#bb779f" base="skin3" transform="darken(25)"/>
+        <key src="#88446c" base="skin3" transform="darken(50)"/>
+        <key src="#22111b" base="skin3" transform="darken(75)"/>
+		
 		<key src="#FF0000" base="iris"/>
 		<key src="#AA0000" base="iris" transform="darken(25)"/>
         <key src="#FBCAAE" base="skin" transform="darken(25);saturate(25);shiftTo(0,25,25)"/>
@@ -340,6 +353,7 @@
         <cell rect="951,90,49,59" name="breasts_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="1051,90,49,59" name="torso_pattern/Bbioluminescence" dx="80" dy="61"/>
+		<cell rect="1501,90,49,59" name="torso_pattern/Bdemonic" dx="79" dy="64"/>
         <cell rect="101,1304,99,119" name="full_pattern/gnome" dx="53" dy="20"/>
         <cell rect="201,1304,99,119" name="full_pattern/undine" dx="56" dy="21"/>
         <cell rect="301,1304,99,119" name="full_patternUnder/undine" dx="56" dy="21"/>
@@ -378,6 +392,7 @@
         <cell rect="501,150,49,59" name="arms_bg_pattern/Blightning" dx="56" dy="64"/>
         <cell rect="601,150,49,59" name="arms_bg_pattern/Btatoo" dx="56" dy="64"/>
         <cell rect="951,150,49,59" name="arms_bg_pattern/Bvenom" dx="56" dy="64"/>
+		<cell rect="1301,150,49,59" name="arms_bg_pattern/Bdemonic" dx="56" dy="64"/>
         <cell rect="1,1364,49,59" name="arms_bg/gazer" dx="65" dy="65"/>
 		<cell rect="1201,150,49,55" name="arms_bg/prayer" dx="78" dy="64"/>
         <cell rect="1,210,49,59" name="arms/human" dx="104" dy="64"/>
@@ -434,6 +449,7 @@
         <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="104" dy="64"/>
         <cell rect="1001,150,49,59" name="arms_pattern/undine" dx="59" dy="35"/>
         <cell rect="1001,210,49,59" name="arms_pattern/Bvenom" dx="104" dy="64"/>
+		<cell rect="1301,210,49,59" name="arms_pattern/Bdemonic" dx="104" dy="64"/>
         <cell rect="1,270,49,59" name="hands_bg/fur" dx="56" dy="64"/>
         <cell rect="601,270,49,59" name="hands_bg/furracoon" dx="56" dy="64"/>
         <cell rect="51,270,49,59" name="hands_bg/devil" dx="56" dy="64"/>
@@ -547,6 +563,7 @@
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
         <cell rect="601,390,49,59" name="legs_pattern/Btatoo" dx="79" dy="115"/>
         <cell rect="801,390,49,59" name="legs_pattern/BwindScars" dx="79" dy="115"/>
+		<cell rect="951,390,49,59" name="legs_pattern/Bdemonic" dx="79" dy="115"/>
         <cell rect="51,450,49,59" name="feet/fur" dx="78" dy="115"/>
         <cell rect="101,450,49,59" name="feet/scales" dx="79" dy="115"/>
         <cell rect="551,450,49,59" name="feet/furracoon" dx="79" dy="115"/>
@@ -5409,9 +5426,28 @@
 				<show part="legs_pattern/Btatoo"/>
             </case>
 			<case values="Skin.PATTERN_LIGHTNING_SHAPED_TATTOO">
-				<show part="breasts_pattern/Blightning"/>
-				<show part="breasts_pattern/Bplightning"/>
-				<show part="breasts_pattern/Bllightning"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="breasts_pattern/Blightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="breasts_pattern/Blightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="breasts_pattern/Bplightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="breasts_pattern/Bplightning"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="breasts_pattern/Bllightning"/>
+						</case>
+						<default>
+							<show part="breasts_pattern/Bllightning"/>
+						</default>
+					</switch>
+				</if>
 				<show part="torso_pattern/Blightning"/>
 				<show part="arms_pattern/Blightning"/>
 				<show part="arms_bg_pattern/Blightning"/>
@@ -5422,13 +5458,56 @@
 				<show part="legs_pattern/BwindScars"/>
             </case>
 			<case values="Skin.PATTERN_TIGER_STRIPES">
-				<show part="breasts_pattern/Bstripe"/>
-				<show part="breasts_pattern/Bpstripe"/>
-				<show part="breasts_pattern/Blstripe"/>
+				<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="breasts_pattern/Bstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="breasts_pattern/Bstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="breasts_pattern/Bpstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="breasts_pattern/Bpstripe"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="breasts_pattern/Blstripe"/>
+						</case>
+						<default>
+							<show part="breasts_pattern/Blstripe"/>
+						</default>
+					</switch>
 				<show part="torso_pattern/Bstripe"/>
 				<show part="arms_pattern/Bstripe"/>
 				<show part="arms_bg_pattern/Bstripe"/>
 				<show part="legs_pattern/Bstripe"/>
+            </case>
+			<case values="Skin.PATTERN_DEMONIC_STRIPES">
+				<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="breasts_pattern/Bdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="breasts_pattern/Bdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="breasts_pattern/Bpdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="breasts_pattern/Bpdemonic"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="breasts_pattern/Bldemonic"/>
+						</case>
+						<default>
+							<show part="breasts_pattern/Bldemonic"/>
+						</default>
+					</switch>
+				<show part="torso_pattern/Bdemonic"/>
+				<show part="arms_pattern/Bdemonic"/>
+				<show part="arms_bg_pattern/Bdemonic"/>
+				<show part="legs_pattern/Bdemonic"/>
             </case>
             <case values="Skin.PATTERN_VENOMOUS_MARKINGS">
                 <show part="torso_pattern/Bvenom"/>
@@ -5476,6 +5555,39 @@
 								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE">
 									<switch value="lowerBody">
 										<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.LION, Arms.DISPLACER">
+									<switch value="lowerBody">
+										<case values="LowerBody.LION">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.WOLF">
+									<switch value="lowerBody">
+										<case values="LowerBody.WOLF">
+											<hide part="arms_pattern/*"/>
+											<hide part="arms_bg_pattern/*"/>
+											<hide part="legs_pattern/*"/>
+										</case>
+										<default>
+										</default>
+									</switch>
+								</case>
+								<case values="Arms.DRAGON">
+									<switch value="lowerBody">
+										<case values="LowerBody.DRAGON">
 											<hide part="arms_pattern/*"/>
 											<hide part="arms_bg_pattern/*"/>
 											<hide part="legs_pattern/*"/>

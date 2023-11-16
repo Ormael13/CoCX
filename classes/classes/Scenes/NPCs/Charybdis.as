@@ -30,8 +30,10 @@ public class Charybdis extends Monster
 			while (hibD-->0) daggers();
 			statScreenRefresh();
 			outputText(" They reappear in his hands, and you look down at the floor. The daggers that had hit you are gone.\n");
-			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
-            else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				else player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+			}
 		}
 		private function daggers():void {
 			var damage:Number = weaponAttack;

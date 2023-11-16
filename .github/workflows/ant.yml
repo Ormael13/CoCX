@@ -3,7 +3,7 @@
 
 name: ActionScript 3 CI
 
-# Github worflows do not support actionscript directly.
+# Github workflows do not support actionscript directly.
 # However the build uses ant, which is usually used to build java projects.
 # The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
 
@@ -36,7 +36,8 @@ jobs:
         with:
           submodules: true
 
-      - name: Cache FlexSdk Install
+
+      - name: Cache FlexSDK Install
         uses: actions/cache@v3
         with:
           key: apache-stuff
@@ -44,13 +45,14 @@ jobs:
             C:/ApacheFlexSDK
         id: "cacheme"
 
-      #handle cache failed
+
+        #handle cache failed
       - if: ${{ steps.cacheme.outputs.cache-hit != 'true' }}
-        name: install flex sdk
+        name: Install Flex SDK
         uses: joshtynjala/setup-apache-flex-action@v2
         with:
           flex-version: "4.16.1"
-          air-version: "33.1.1.345"
+          air-version: "33.1.1.935"
           accept-air-license: true
 
       - name: add git hash
@@ -61,26 +63,34 @@ jobs:
       - name: Build
         run: ant allCI
 
-      - name: save debug swf
+      - name: Save Debug SWF
         uses: actions/upload-artifact@v3
         with:
           name: debug-swf
           path: target/CoC-debug.swf
 
-      - name: save release swf
+      - name: Save Release SWF
         uses: actions/upload-artifact@v3
         with:
           name: release-swf
           path: target/CoC-release.swf
 
-      - name: save android armv7 apk
+      - name: Save Android armv7 APK
         uses: actions/upload-artifact@v3
         with:
           name: mobile-arm7-32bit-apk
           path: target/CoC-Mobile-armv7.apk
 
-      - name: save android armv8 apk
+      - name: Save Android armv8 APK
         uses: actions/upload-artifact@v3
         with:
           name: mobile-arm8-64bit-apk
           path: target/CoC-Mobile-armv8.apk
+
+      # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
+      - name: Discord notification to channel
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        continue-on-error: true

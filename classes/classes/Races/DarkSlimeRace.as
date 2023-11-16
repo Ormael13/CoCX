@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.StatusEffects;
@@ -62,6 +63,9 @@ public class DarkSlimeRace extends Race {
 				.noAntennae(+1)
 				.noWings(+1)
 				.noGills(+1);
+		
+		addMutation(IMutationsLib.SlimeMetabolismIM);
+		addMutation(IMutationsLib.SlimeFluidIM);
 		
 		buildTier(12, "dark slime")
 				.namesMaleFemale("dark slime boi", "dark slime girl")

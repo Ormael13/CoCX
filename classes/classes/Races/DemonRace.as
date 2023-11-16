@@ -9,7 +9,7 @@ import classes.VaginaClass;
 
 public class DemonRace extends Race {
 	public static const DemonSkinColors:/*String*/Array = ["olive", "tan", "fair", "shiny black", "sky blue", "indigo", "ghostly white", "leaf green", "light green", "light purple", "purple", "red", "grey", "blue", "snow white", "midnight black"];
-    public static const DemonSkin2Colors:/*String*/Array = ["light pink", "purple", "turquoise", "light green"];
+    public static const DemonSkin2Colors:/*String*/Array = ["light pink", "purple", "turquoise", "light green", "snow white"];
 	public static const DemonEyeColors:/*String*/Array = ["fiendish pink", "pink", "red", "yellow", "blue", "turquoise", "light green"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",

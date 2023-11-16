@@ -58,7 +58,7 @@ public class FeralImps extends Monster
 					var damage1:int = rand(50) + str + weaponAttack;
 					damage1 *= 5;
 					if (damage1 < 100) damage1 = 100; //Min-cap damage.
-					if (damage1 >= 250) {
+					if (damage1 >= 250 && !player.immuneToBleed()) {
 						outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
 						player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 					}
@@ -69,7 +69,7 @@ public class FeralImps extends Monster
 					outputText("The " + this.short + " manages to slash you with his sword and deadly claws!");
 					var damage2:int = rand(50) + str + weaponAttack;
 					if (damage2 < 20) damage2 = 20; //Min-cap damage.
-					if (damage2 >= 50) {
+					if (damage2 >= 50 && !player.immuneToBleed()) {
 						outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
 						player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 					}
