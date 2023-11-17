@@ -672,7 +672,8 @@ public class Combat extends BaseContent {
             StatusEffects.DragonsNom,
             StatusEffects.Devoured,
             StatusEffects.Terrorize,
-                //Monster statuses
+        ];
+        var monsterStatuses:Array = [
             StatusEffects.QueenBind,
             StatusEffects.PCTailTangle,
             StatusEffects.MinotaurEntangled,
@@ -682,10 +683,10 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.Tentagrappled)) outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
         if (player.hasStatusEffect(StatusEffects.Straddle) && monster is ProjectNightwalker) (monster as ProjectNightwalker).faceSittingDescript();
         if (player.hasStatusEffect(StatusEffects.DragonsNom)) outputText("\n<b>The Dragon has you firmly clamped between its jaws!</b>");
-        var foundStatus:Boolean = playerStatuses.some(function (status:StatusEffectType):Boolean {
-            return player.hasStatusEffect(status);
-        });
-        return foundStatus;
+        var status:StatusEffectType;
+        for each (status in playerStatuses) if (player.hasStatusEffect(status)) return true;
+        for each (status in monsterStatuses) if (monster.hasStatusEffect(status)) return true;
+        return false;
     }
 
     public function isPlayerStunned():Boolean {
@@ -1632,7 +1633,7 @@ public class Combat extends BaseContent {
                 34: [StatusEffects.SummonedElementalsWaterE, WATER]
             }
 
-            if (epicElementalObj.hasOwnProperty(String(attackingEpicElementalTypeFlag))) {
+            if (epicElementalObj.hasOwnProperty(attackingEpicElementalTypeFlag)) {
                 var elementalEpicSelection:Array = epicElementalObj[attackingEpicElementalTypeFlag];
                 //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
                 if (!player.hasStatusEffect(elementalEpicSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalEpicSelection[1])) {
@@ -1662,7 +1663,7 @@ public class Combat extends BaseContent {
                 13: [StatusEffects.SummonedElementalsCorruption, CORRUPTION]
             }
 
-            if (baseElementalObj.hasOwnProperty(String(attackingElementalTypeFlag))) {
+            if (baseElementalObj.hasOwnProperty(attackingElementalTypeFlag)) {
                 var elementalSelection:Array = baseElementalObj[attackingElementalTypeFlag];
                 //Force user to choose if currently fused if Elemental, or does not known currently chosen Epic Elemental
                 if (!player.hasStatusEffect(elementalSelection[0]) || (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == elementalSelection[1])) {
