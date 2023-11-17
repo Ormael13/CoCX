@@ -17,7 +17,7 @@ public class CorrosiveWaveSpell extends AbstractGreySpell {
 				: "Condense part of the ambient moisture into acid wave to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_ACID, TAG_AOE]
+			[TAG_DAMAGING, TAG_ACID, TAG_AOE, TAG_TIER2]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;

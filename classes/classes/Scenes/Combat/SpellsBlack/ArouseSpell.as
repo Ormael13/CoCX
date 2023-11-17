@@ -12,7 +12,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 			"The arouse spell draws on your own inner lust in order to enflame the enemy's passions.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_LUSTDMG]);
+			[TAG_LUSTDMG, TAG_TIER1]);
 		baseManaCost = 20;
 	}
 	

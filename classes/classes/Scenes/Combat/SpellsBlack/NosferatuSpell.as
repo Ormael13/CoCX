@@ -12,7 +12,7 @@ public class NosferatuSpell extends AbstractBlackSpell {
 			"Vampirise the health of your foe, dealing damage and healing you back for 100% of the damage done.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_HEALING]
+			[TAG_DAMAGING, TAG_HEALING, TAG_TIER2]
 		);
 		baseManaCost           = 50;
 		useManaType            = Combat.USEMANA_BLACK_HEAL;
