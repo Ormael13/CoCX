@@ -682,7 +682,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.Tentagrappled)) outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
         if (player.hasStatusEffect(StatusEffects.Straddle) && monster is ProjectNightwalker) (monster as ProjectNightwalker).faceSittingDescript();
         if (player.hasStatusEffect(StatusEffects.DragonsNom)) outputText("\n<b>The Dragon has you firmly clamped between its jaws!</b>");
-        var foundStatus:Boolean = playerStatuses.some(function (status:StatusEffectType):Boolean {
+        var foundStatus:Boolean = playerStatuses.some(function (status:StatusEffectType, index:int, array:Array):Boolean {
             return player.hasStatusEffect(status);
         });
         return foundStatus;
