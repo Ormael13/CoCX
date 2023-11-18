@@ -46,6 +46,8 @@ public class DraculaRace extends Race {
 				.eyeType(Eyes.VAMPIRE, +1)
 				.eyeColor("blood-red", +1)
 				.skinColor1("pale", +1)
+				.skinBasePattern(Skin.PATTERN_BLOOD_MAGIC_TATTOO, +1)
+				.rearType(RearBody.THIRSTY_NECK, +1)
 				.tongueType(Tongue.DEMONIC, +1)
 				.hornType(Horns.DEMON, +1)
 				.hornType(NOT(Horns.GOAT), 0, -10)
@@ -65,6 +67,8 @@ public class DraculaRace extends Race {
 		addMutation(IMutationsLib.HollowFangsIM);
 		
 		buildTier(22, "fiendish vampire")
+                .requirePerk(PerkLib.Soulless)
+				.requirePerk(PerkLib.TransformationImmunity2)
 				.buffs({
 					"str.mult": +2.40,
 					"spe.mult": +2.40,
@@ -72,8 +76,9 @@ public class DraculaRace extends Race {
 					"lib.mult": +2.70
 				})
 				.end();
-		/*
+		
 		buildTier(34, "dracula")
+                .requirePreviousTier()
 				.namesMaleFemale("dracula", "draculina")
 				.buffs({
 					"str.mult": +3.60,
@@ -81,7 +86,7 @@ public class DraculaRace extends Race {
 					"int.mult": +3.60,
 					"lib.mult": +4.50
 				})
-				.end();*/
+				.end();
 	}
 }
 }

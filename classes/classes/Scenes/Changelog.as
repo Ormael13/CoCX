@@ -56,7 +56,9 @@ public class Changelog extends BaseContent
 			outputText("-Power Shot special can be used with crossbows too. When using Avelynn with power shot it would deal dmg 3 times.\n");
 			outputText("-Power Attack and Power Shot used when wrath is over 100% would only drain 100% of wrath (that could only happen if PC have any source of overMax Wrath).\n");
 			outputText("-Added to Elemental Bolt req. for one of perks High Tide perk.\n");
+			outputText("-Necromancer minions base damage increased 3x and added Soulskill Effect Multiplier to them.\n");
 			outputText("-Various minor corections/bugfixes.\n");
+			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
 			outputText("-Added Cooldown Code for Blood Requiem and Blood Requiem (SF) Blood Soulskills. (Demojay)\n");
 			outputText("-Changed behaviour of Elementals under Simplified Pre Turn so that the elemental chosen is no longer random, but selected by the player. (Demojay)\n");
 			outputText("-Added tooltips to the 'Elemental Aspects' menu so that the user knows what each option does in combat. (Demojay)\n");
@@ -71,13 +73,11 @@ public class Changelog extends BaseContent
 			//outputText("-Pureblood vampire PC that talked with Diva about vampirism gaining ability to create ghoulish vampire servant. It would be as event in general explore during the night.\n");
 			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. Implemented arigean aura(s), and added Sylabt's edits/improvements to my arigean sprites. (Lord Shadeogorath)\n");
 			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
-			outputText("-Fix some attack and ability scaling of unarmed Dao instead of feral Dao otherwise changed Feral itherative to properly use unarmed strike new damage calculation formulae. (Liadri)\n");
 			outputText("-Fixed bugs: Skeleton pre-turn attack text would not properly display to the user, text positioning so that Skeleton warrior and archer pre-turn texts are generated on separate lines, buttons to choose whether Golems and Skeletons will attack pre-turn were overlapping, causing it to become unclear what selecting the button would do, ");
 			outputText("game showing that the user was still a Soul Scholar on the cultivation screen, when they were actually a Soul Grandmaster (Demojay)\n");
 			outputText("-Added to tooltips to Golem/Skeleton pre-turn button to make each function more clear. (Demojay)\n");
 			outputText("-Werefox Race now takes Dormant Vulpesthropy into account for racial scores. Wereshark Race now takes Dormant Selachimorphanthropy into account for racial scores. (Demojay)\n");
 			outputText("-Using Pigment in crafting now properly removes the pigment. Selecting the last pigment in your inventory for crafting doesn't automatically remove it. (Demojay)\n");
-			outputText("-Necromancer minions base damage increased 3x and added Soulskill Effect Multiplier to them.\n");
 			outputText("-Power Shot effects changed to: Enable Power Shot p. special. Add ~20% of base stat scaling value to range (not for firearms) damage. Power Shot (Ex) effects changed to: Power Shot p. special damage increased by ~2x. Add ~30% of base stat scaling value to range (not for firearms) damage & power attack multi factor. Range physical attacks multiplier increased not changed for both perks.\n");
 			outputText("-Bows/Crossbows/Throwing range weapons base dmg scaling been changed and specials using those weapons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing weapons.\n");
 			outputText("-New mutation perk: Black Heart (Final Form). Req. Black Heart (Evolved) and lvl 90+. Effect: Increased Lust strike power, empower Fascinate, adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 2, adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). ");
@@ -95,7 +95,7 @@ public class Changelog extends BaseContent
 			outputText("-Warden Weapons now display their correct SoulSkill. Changed the description display function of Ranged Weapons so their format matches Melee Weapons. Consuming a Jabberwocky Scale now properly shows the player gaining the 'Insanity' perk. Added Fix: 'Returning from the inventory in combat no longer causes a new combat round' (Demojay)\n");
 			outputText("-Small bugfix from parser being checked even without being valid. (Jtecx)\n");
 			outputText("-Some small fixes for combat (jfmherokiller)\n");
-			outputText("-\n");
+			outputText("-Losing as virgin or vampire to Draculina boss in EL would result in change into dracula/lina race member. They gets bonuses for 22+/34+ pts as fiendish vampire/dracula,draculina: +240%/+360% to str/spe/int multi, +270%/+450% to lib multi\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -108,19 +108,19 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New tier 6 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: .
 			outputText("-\n");//New tier 6 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: .
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF\n\n");

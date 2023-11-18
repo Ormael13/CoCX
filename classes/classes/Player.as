@@ -1461,7 +1461,7 @@ use namespace CoC;
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = weapon.attack;
-			if (hasPerk(PerkLib.JobSwordsman) && weaponSpecials("Large")) {
+			if (hasPerk(PerkLib.JobSwordsman) && (weaponSpecials("Large") || hasAetherTwinsTier2())) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
@@ -1478,7 +1478,7 @@ use namespace CoC;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.HiddenMomentum) && (weaponSpecials("Large") || (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive"))) && str >= 75 && spe >= 50) {
+			if (hasPerk(PerkLib.HiddenMomentum) && (weaponSpecials("Large") || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive"))) && str >= 75 && spe >= 50) {
 				attack += (((str + spe) - 100) * 0.2);
 			}//30-70-110
 			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponSpecials("Dual Large") && str >= 150 && spe >= 100) {

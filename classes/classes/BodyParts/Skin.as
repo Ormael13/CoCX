@@ -260,7 +260,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_SCAR_WINDSWEPT: int = 13;
 	EnumValue.add(PatternTypes, PATTERN_SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {
 		name:"windswept scars",
-		appearanceDesc: "Your body is covered with scars as if your skin was cut in various place by a windstorm",
+		appearanceDesc: "Your body is covered with scars as if your skin was cut in various place by a windstorm.",
 		base:true
 	});
 	public static const PATTERN_OIL: int = 14;
@@ -291,6 +291,19 @@ public class Skin extends SaveableBodyPart {
 	EnumValue.add(PatternTypes, PATTERN_BIOLUMINESCENCE, "PATTERN_BIOLUMINESCENCE", {
 		name:"bioluminescence tattoo",
 		appearanceDesc: "You have strange ushi-oni tattoos on your belly, chest, breasts, shoulders and even face; some are like a black sheen plate, while others are just fur.",
+		base:true
+	});
+	//19
+	public static const PATTERN_DEMONIC_PLEASURE_RUNE: int = 20;
+	EnumValue.add(PatternTypes, PATTERN_DEMONIC_PLEASURE_RUNE, "PATTERN_DEMONIC_PLEASURE_RUNE", {
+		name:"demonic pleasure rune",
+		appearanceDesc: "Your body is covered with various demonic pleasure runes.",
+		base:true
+	});
+	public static const PATTERN_BLOOD_MAGIC_TATTOO: int = 21;
+	EnumValue.add(PatternTypes, PATTERN_BLOOD_MAGIC_TATTOO, "PATTERN_BLOOD_MAGIC_TATTOO", {
+		name:"blood magic tattoo",
+		appearanceDesc: "Your body is covered with blood magic tattoos.",
 		base:true
 	});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES

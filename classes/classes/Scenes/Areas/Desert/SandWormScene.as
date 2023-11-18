@@ -87,7 +87,7 @@ public class SandWormScene extends BaseContent
 		if (player.bRows() > 1) transformations.BreastRowsOne.applyEffect(false);
 		if (player.biggestTitSize() < 2) player.growTits(2, 1, false, 3);
 		if (player.femininity < 80) player.femininity = 80;
-		player.tallness = 11*12
+		player.tallness = 11 * 12;
 		transformations.LowerBodyWorm.applyEffect(false);
 		player.skin.setBaseOnly({ type: Skin.PLAIN, color1:"light pink", adj: "slippery" });
 		IMutationsLib.TrachealSystemIM.trueMutation = true;
@@ -100,8 +100,7 @@ public class SandWormScene extends BaseContent
 		outputText("Gained combat ability: <b>Sting</b>: Inflict sand worm venom and minor damage, sand worm venom deals heavy strength and tease damage over time.\n\n");
 		player.createPerk(PerkLib.TransformationImmunity2, 7, 0, 0, 0);
 		outputText("<b>Gained Perk: Transformation Immunity</b>\n\n");
-
-		cleanupAfterCombatTFEvent()
+		cleanupAfterCombatTFEvent();
 	}
 
 	public function transformationImmune():void {
