@@ -8,11 +8,15 @@ name: ActionScript 3 CI
 # The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
 
 on:
+  #Pushes/changes to CoC.as should trigger this. Which should basically only consist of version updates, and maybe the rare settings change.
   push:
-    # Just so the CI won't complain about Vanilla+ failing, since V+ isn't configured for CI.
-    branches-ignore: [ master ]
-  pull_request:
-    branches: [ master-wip ]
+    paths:
+      - 'classes/classes/CoC.as'
+  #Manual trigger run. Only works once this is in the main branch.
+  workflow_dispatch:
+  #Scheduled run. Only works once this is in the main branch.
+  schedule:
+    - cron: "0 22 * * *"
 
 env:
   # tell the build file where to find the flex SDK
