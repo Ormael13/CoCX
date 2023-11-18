@@ -3231,7 +3231,7 @@ public class Combat extends BaseContent {
             }
             if (weaponRangePerk == "Bow"){
                 if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
+                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.25;
             }
             if (weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.FletchingTable)) {
                 if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv1(StatusEffects.FletchingTable)));
@@ -8070,6 +8070,7 @@ public class Combat extends BaseContent {
             if ((monLvl - plaLvl) < 50) damagereduction -= 0.02 * (monLvl - plaLvl);
             else damagereduction = 0;
         }
+		//if (monster is Draculina && ) damagereduction = 0;
         return damagereduction;
     }
 

@@ -466,12 +466,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.SoulNexus);
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.Familiar) && player.racialScore(Races.VAMPIRE) >= 20) {
+			if (!player.hasPerk(PerkLib.Familiar) && (player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22)) {
 				outputText("\nBecoming a vampire again seems to have drawn a familiar figure back to camp. Your ghoulish servant is home again.\n");
 				player.createPerk(PerkLib.Familiar,0,0,0,0);
 				needNext = true;
 			}
-			if (player.hasPerk(PerkLib.Familiar) && player.racialScore(Races.VAMPIRE) < 20) {
+			if (player.hasPerk(PerkLib.Familiar) && player.racialScore(Races.VAMPIRE) < 20 && player.racialScore(Races.DRACULA) < 22) {
 				outputText("\nAs you become less and less of a vampire, your ghoulish servant begins to take its distance from you. It appears it has to do with the fact it needs to find its sustenance in soulforce elsewhere. For the time being, it seems your ghoul servant will be away from camp.\n");
 				if (flags[kFLAGS.PLAYER_COMPANION_1] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") flags[kFLAGS.PLAYER_COMPANION_1] = "";
 				if (flags[kFLAGS.PLAYER_COMPANION_2] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"") flags[kFLAGS.PLAYER_COMPANION_2] = "";
@@ -1503,7 +1503,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			player.updateRacialCache();
 			//Demonic hunger perk
-			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL) || player.hasPerk(PerkLib.Phylactery), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DemonEnergyThirst, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL, Races.DRACULA) || player.hasPerk(PerkLib.Phylactery), "You begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners.", "Your mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate.");
 			needNext ||= player.gainOrLosePerk(PerkLib.SoulEater, player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery), "You begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power!", "Due to your miraculous soul recovery you have lost the ability to consume souls!");
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
@@ -1515,7 +1515,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed);
 			}
 			//DarkCharm
-			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.", player.perkv4(PerkLib.DarkCharm) == 0);
+			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DRACULA) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.", player.perkv4(PerkLib.DarkCharm) == 0);
 			//Flexibility perk
 			needNext ||= player.gainOrLosePerk(PerkLib.Flexibility, (Tail.hasFelineTail(player) && LowerBody.hasFelineLegs(player) && Arms.hasFelineArms(player)) || player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1, "While stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?", "You notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.", player.perkv4(PerkLib.Flexibility) == 0);
 			//Ghost-slinger perk
@@ -1524,7 +1524,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Phantom Shooting perk
 			needNext ||= player.gainOrLosePerk(PerkLib.PhantomShooting, player.isRaceCached(Races.POLTERGEIST), (player.weaponRangePerk == "Throwing" || player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle")? "With your expanded otherworldly knowledge, a thought comes to mind. You apply your ghostly abilities to your " + player.weaponRangeName + " then "+(player.weaponRangePerk == "Throwing" ? "throw it":"shoot")+" at a nearby rock. You can feel a small piece of yourself leave, but the impact of your weapon all but shatters the rock. Using a bit of your ectoplasm instead of basic ammunition definitely made your " + player.weaponRangeName + " stronger.":"With your expanded otherworldly knowledge, a thought comes to mind. If you used some of your ectoplasm instead of basic ammunition for a firearm or throwing weapon, perhaps your weapons will have more of an impact.", "As you become more corporeal again, the otherworldly knowledge you once held begins to fade along with your ectoplasm. Looks like it's back to using normal ammunition for your firearms and throwing weapons again...");
 			//Blood Mastery
-			needNext ||= player.gainOrLosePerk(PerkLib.BloodMastery, player.isRaceCached(Races.VAMPIRE), "Your head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.", "Your supernatural knowledge fades along with the abilities that came with it as you become more corporeal.");
+			needNext ||= player.gainOrLosePerk(PerkLib.BloodMastery, player.isAnyRaceCached(Races.VAMPIRE, Races.DRACULA), "Your head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.", "Your supernatural knowledge fades along with the abilities that came with it as you become more corporeal.");
 			//Easter bunny egg balls Loosing
 			needNext ||= player.gainOrLosePerk(PerkLib.EasterBunnyBalls, player.isRaceCached(Races.EASTERBUNNY) || player.perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1, "", "Something changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.");
 			//Easter bunny egg balls Cumming the eggs out
@@ -1758,9 +1758,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Blood Affinity
-			needNext ||= player.gainOrLosePerk(PerkLib.BloodAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.WERESPIDER), "Your ability to hone the power of the red, flowing essence heightens. Hemophilia is a delightful chance for you to revel in the hemorrhage of freshly spilt blood.", "The sight of blood no longer fuels you with the same rousing sensations you once had. Any affinity you carried for the crimson fluid is now lost.");
+			needNext ||= player.gainOrLosePerk(PerkLib.BloodAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.WERESPIDER, Races.DRACULA), "Your ability to hone the power of the red, flowing essence heightens. Hemophilia is a delightful chance for you to revel in the hemorrhage of freshly spilt blood.", "The sight of blood no longer fuels you with the same rousing sensations you once had. Any affinity you carried for the crimson fluid is now lost.");
 			//Dark Affinity
-			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.APOPHIS, Races.ANUBIS), "You are at home while shrouded in darkness, seeing clearly within the shadows as if it were broad daylight.", "The inky black darkness grows hostile toward you once more as your affinity for it is lost.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DarknessAffinity, player.isAnyRaceCached(Races.VAMPIRE, Races.APOPHIS, Races.ANUBIS, Races.DRACULA), "You are at home while shrouded in darkness, seeing clearly within the shadows as if it were broad daylight.", "The inky black darkness grows hostile toward you once more as your affinity for it is lost.");
 			//Compelling Aria
 			needNext ||= player.gainOrLosePerk(PerkLib.HarpySong, player.isAnyRaceCached(Races.SIREN, Races.HARPY, Races.PHOENIX, Races.THUNDERBIRD) || player.hasMutation(IMutationsLib.HarpyHollowBonesIM), "Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.");
 			needNext ||= player.gainOrLosePerk(PerkLib.MelkieSong, player.tongue.type == Tongue.MELKIE || player.hasMutation(IMutationsLib.MelkieLungIM), "Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of a Melkie adapting even your tongue and voice. Well you could always go sit on a rock and sing in case some sailor came by.", "Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria.")

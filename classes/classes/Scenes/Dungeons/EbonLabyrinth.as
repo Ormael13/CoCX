@@ -24,7 +24,7 @@ import classes.display.SpriteDb;
 public class EbonLabyrinth extends DungeonAbstractContent {
     //FLAGS:
     //EBON_LABYRINTH: 0 - not discovered, 1 - discovered, 50 / 150 / 300 / 150*x - AWARDED levels
-    //EBON_LABYRINTH_RECORD — max reached level. Used for achievements only.
+    //EBON_LABYRINTH_RECORD — max reached level. Used for achievements or unlocking waypoints.
 
     //Current room number
     public var room:int = 1;
@@ -68,6 +68,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     public var eyeTyrantScene:EyeTyrantScene = new EyeTyrantScene();
     public var atlachNachaScene:AtlachNachaScene = new AtlachNachaScene();
     public var livingFailureScene:LivingFailureScene = new LivingFailureScene();
+	
+    public var draculinaScene:DraculinaScene = new DraculinaScene();
 
     /*
     //Boss tracker
@@ -339,6 +341,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         else if (room >= 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0) {
             incEncChance();
             encountersFountainOfPurity();
+            return true;
+        }
+		else if (room == 9) {
+            draculinaScene.encounter();
             return true;
         }
         //Rooms AFTER boss, difficulty > 300 (max level).
