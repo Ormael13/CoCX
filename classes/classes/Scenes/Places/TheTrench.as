@@ -223,6 +223,7 @@ private function theTrenchMain():void {
 	theTrenchMain1();
 	menu();
 	addButton(2, "Food Stand", theTrenchFoodStand);
+	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 private function theTrenchMain1():void {
@@ -245,9 +246,19 @@ private function theTrenchFoodStand():void {
 	}
 	outputText("\n\n\"<i>So what can I get you cutie?</i>\"\n\n");
 	menu();
+	addButton(0, "SF", theTrenchFoodStandCoelacanthJerky).hint("Stomiidae fillet");
+	addButton(1, "CS", theTrenchFoodStandCalamariSteak).hint("Calamari Steak");
 	addButton(2, "CJ", theTrenchFoodStandCoelacanthJerky).hint("Coelacanth Jerky");
 	addButton(3, "SII", theTrenchFoodStandSoftIronIngot).hint("Soft Iron Ingot");
 	addButton(14, "Back", theTrenchMain);
+}
+private function theTrenchFoodStandStomiidaeFillet():void {
+	outputText("\"<i>Stomiidae aren’t very big, But they are easy for us to catch down here, and even if they are a bit freaky, they do taste good! 10 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.SFILLET), theTrenchFoodStand);
+}
+private function theTrenchFoodStandCalamariSteak():void {
+	outputText("\"<i>Squid seem to like hiding down here during the daylight, so while finding them is easy, catching them can be a bit tricky. 15 gems each.</i>\"\n\n");
+	doYesNo(Utils.curry(theTrenchFoodStandBuy,consumables.C_STEAK), theTrenchFoodStand);
 }
 private function theTrenchFoodStandCoelacanthJerky():void {
 	outputText("\"<i>Coelacanth normally don’t taste very great, but they are slow, big and get some nice flavoring with a bit of salt. 5 gems each.</i>\"\n\n");
@@ -263,9 +274,168 @@ public function theTrenchFoodStandBuy(itype:ItemType):void {
 	statScreenRefresh();
 	inventory.takeItem(itype, theTrenchFoodStand);
 }
-private function theTrench():void {
+private function theTrenchGraydaQuestNPC():void {
+	clearOutput();
+	outputText("You walk through the commons and approach Grayda, who turns her attention towards you, as the two she was talking to wander off to fulfill whatever tasks they've been assigned.\n\n");
+	outputText("\"<i>Is there something I can help you with [name]?</i>\" her glowing yellow eyes inquisitively looking you over.\n\n");
+	menu();
+	addButton(1, "Appearance", theTrenchGraydaQuestNPCAppearance);
+	addButton(2, "Talk", theTrenchGraydaQuestNPCTalk);
+	addButton(3, "Missions", theTrenchGraydaQuestNPCMissions);
+	addButton(14, "Back", theTrenchMain);
+}
+private function theTrenchGraydaQuestNPCAppearance():void {
+	clearOutput();
+	outputText("Grayda is a 6ft 3in Arigean Countess, and currently the one in charge of the individuals of ‘The Trench’. Her height is increased even further by the large hat-like symbiote which rests on her waist-long white hair, four light gray tentacles hang limply from the organism. Her two glowing yellow eyes are often filled with a steadfast, or determined gleam. Her face, adorned with near albino skin, normally retains a neutral look.\n\n");
+	outputText("Grayda’s body is nearly identical to that of a human’s, save for her legs which are covered up to her hips in natural, black metal armor. Her proportions are fairly normal for what one would expect from a human with a pair of C cup breasts, however her body does seem to have some muscle definition. She normally wears what appears to be a white one-piece swimsuit, a pair of gloves, boots and a dark gray cloak which is attached to a jaw-like piece of collar armor.\n\n");
+	outputText("A soft, black, and yellow haze seems to occasionally be exhaled from her symbiotic partner, which clings to her skin. It intensifies when she’s angered or in combat, effectively giving her a protective layer of mist to help mask her movement, and appearance.\n\n");
+	outputText("She confidently wields a dark metal staff with a bladed end, effectively allowing her to have a weapon to defend herself for close quarters, and to help cast spells.\n\n");
+	outputText("\"<i>[name]? Are you alright? You’re spacing off again.</i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPC);
+}
+private function theTrenchGraydaQuestNPCTalk():void {
+	clearOutput();
+	outputText("You ask Grayda if she wouldn’t mind answering some of your questions.\n\n");
+	outputText("\"<i>I don’t have any tasks that I need to complete currently, so I don’t mind. What would you like to discuss?</i>\"\n\n");
+	menu();
+	addButton(0, "Arigeans", theTrenchGraydaQuestNPCTalkArigeans);
+	addButton(14, "Back", theTrenchGraydaQuestNPC);
+}
+private function theTrenchGraydaQuestNPCTalkArigeans():void {
+	clearOutput();
+	outputText("\"<i>So you wish to know more about our kind? Very well, I will divulge what I know, but there is still much I don’t even know.</i>\" She walks over to a nearby table and pulls out a chair gesturing for you to sit with her.\n\n");
+	outputText("\"<i>So let’s start with the basics, Arigeans are not one being, but two, surely you know this by now. however you and your ‘Partner’ will have an effect on each other, by now you’ve noticed the more obvious physical ones that allow you to be a better host, but there are more subtle ones which may not be so apparent yet.</i>\"\n\n");
+	outputText("\"<i>Could you be more blunt?</i>\"\n\n");
+	outputText("\"<i>Your body and ‘Partner’ may still be undergoing unpredictable changes, This is why Arigeans are so diverse in appearance.</i>\"\n\n");
+	outputText("Looking back on the Arigeans you’ve seen so far, or even the ones currently in the commons, it would explain the wide diversity. There’s even one who’s ‘Partner’ looks like a giant naga tail with a mouth attached to the end. \"<i>Where do Arigeans originate from? Surely not Mareth since their numbers are so low.</i>\"\n\n");
+	outputText("She rests her chin on her hand as she closes her eyes for a few moments. \"<i>This would be something I don’t know, maybe one of the two princesses up north would. What I do know however is that they do originate from Mareth.</i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCTalk2():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCTalk3():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCTalk4():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	doNext(theTrenchGraydaQuestNPCTalk);
+	advanceMinutes(5);
+}
+private function theTrenchGraydaQuestNPCMissions():void {
+	clearOutput();
+	outputText("\"<i>[name] I have a few jobs available if you feel like contributing.</i>\"\n\n");
+	menu();
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 2) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 3) addButtonDisabled(0, "Getting Stronger", "You already finished Training Quest 1.");
+		else {
+			if (player.hasItem(useables.IMPSKLL, 3, true) && player.hasItem(useables.GOBOEAR, 4, true)) addButton(0, "Getting Stronger", theTrenchGraydaQuestNPCMissionsGettingStronger).hint("Training Quest 1");
+			else addButtonDisabled(0, "Getting Stronger", "You still need to gather 3 imp skulls and 4 goblin ears.");
+		}
+	}
+	else addButton(0, "Getting Stronger", theTrenchGraydaQuestNPCMissionsGettingStronger).hint("Training Quest 1");
+	if (player.level >= 6 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 3) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 4) {
+			if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 5) addButtonDisabled(1, "Proving Yourself", "You already finished Promotion Quest 1.");
+			else {
+				if (player.hasItem(useables.SEVTENT, 2, true)) addButton(1, "Proving Yourself", theTrenchGraydaQuestNPCMissionsProvingYourself).hint("Promotion Quest 1");
+				else addButtonDisabled(1, "Proving Yourself", "You still need to gather 2 severed tentacles.");
+			}
+		}
+		else addButton(1, "Proving Yourself", theTrenchGraydaQuestNPCMissionsProvingYourself).hint("Promotion Quest 1");
+	}
+	else addButtonDisabled(1, "???", "Req. to finish previous mission and have lvl 6+.");
+	if (player.level >= 12 && flags[kFLAGS.THE_TRENCH_ENTERED] >= 5) {
+		if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 6) {
+			if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 7) addButtonDisabled(2, "Continued Improvement", "You already finished Training Quest 2.");
+			else {
+				if (player.hasItem(useables.THHTONG, 4, true) && player.hasItem(useables.MINOHOR, 3, true)) addButton(2, "Continued Improvement", theTrenchGraydaQuestNPCMissionsContinuedImprovement).hint("Training Quest 2");
+				else addButtonDisabled(2, "Continued Improvement", "You still need to gather 4 hellhound tongues and 3 minotaur horns.");
+			}
+		}
+		else addButton(2, "Continued Improvement", theTrenchGraydaQuestNPCMissionsContinuedImprovement).hint("Training Quest 2");
+	}
+	else addButtonDisabled(2, "???", "Req. to finish previous mission and have lvl 12+.");
+	addButton(14, "Back", theTrenchGraydaQuestNPC);
+}
+private function theTrenchGraydaQuestNPCMissionsGettingStronger():void {
+	clearOutput();
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 2 && player.hasItem(useables.IMPSKLL, 3, true) && player.hasItem(useables.GOBOEAR, 4, true)) {
+		outputText("Grayda looks at the Trophies in your hand and nods.\n\n");
+		outputText("\"<i>Well done, [name], you proved you are capable of fighting.</i>\"\n\n");
+		player.destroyItems(useables.IMPSKLL, 3, true);
+		player.destroyItems(useables.GOBOEAR, 4, true);
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 3;
+	}
+	else {
+		outputText("\"<i>[name], as you are a recruit, I must test you to see if you are capable of fighting for our race. Go to the surface and bring back some trophies from well-earned kills. Three imp skulls and four goblin ears should do.</i>\"\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 2;
+	}
+	doNext(theTrenchGraydaQuestNPCMissions);
+}
+private function theTrenchGraydaQuestNPCMissionsProvingYourself():void {
+	clearOutput();
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 4 && player.hasItem(useables.SEVTENT, 2, true)) {
+		outputText("You hand the trophies over, which Grayda returns with one of her rare smiles. \"<i>Well done, Recruit! I think you deserve a nice drink as a reward for your efforts.</i>\" She brandishes a bottle with deep crimson contents from seeming somewhere behind her cloak and gently swishes it side to side for emphasis as she offers you.\n\n");
+		outputText("You slowly take the offered drink. Although it is suspicious, it’s most likely just wine, and it would be rude to decline such a generous offer from your superior. You pop the cork off as a very sweet scent enters your nose, tempting you to take a sip. But before you give in, you can’t help but give her a questioning glance.\n\n");
+		outputText("\"<i>Go on. Drink up.</i>\"\n\n");
+		outputText("And without a second thought, you take an experimental sip to find… It's extremely sweet! And the taste is very addicting. Before long you’ve downed the whole bottle with a heat building at your cheeks, Did Grayda always have a twin? ");
+		outputText("And were you always this close to the floor, wait… did Grayda... drug you? Before you're able to continue your train of thought you lose your balance and allow the dark to swallow you up.\n\n");
+		outputText("You open your eyes, only to be greeted by a blast of light and a throbbing migraine… where are you? You're laying down somewhere, but where?\n\n");
+		outputText("\"<i>Finally awake are we?</i>\"\n\n");
+		outputText("\"<i>...Yes ma’am.</i>\" are the words that nearly automatically leave your mouth as you slowly attempt to prop yourself up, besides feeling hungover… something feels very wrong. The other person in the unfamiliar room with you is none other than Grayda herself, sitting in a chair reading a book of some sort.\n\n");
+		outputText("\"<i>Well I'll leave you to get dressed, surely you don’t plan to sleep any longer than you already have, right? Your equipment should be at the foot of the bed.</i>\" and with that, she leaves the somewhat decently decorated room.\n\n");
+		outputText("Only now looking down do you notice that you're completely naked, but that’s not the only thing that draws your attention. A thick black and red haze seems to lightly cling to your skin, it seems to originate from the mouths of your symbiotic partner which has gained red highlights during your time asleep, ");
+		outputText("but that doesn’t seem to be all as your skeletal tail has gained a matching color scheme as your symbiotic partner, and a nearby mirror shows your eyes now glow the same color.\n\n");
+		outputText("Whatever was in that drink must’ve altered you in such a way, but surely it’s not bad? You feel stronger and more durable than ever! But a voice within you is screaming that something is wrong, but what? And the hangover certainly isn’t helping you figure out what it is.\n\n");
+		outputText("Deciding you’ve lingered long enough, you re-equip your gear and leave what you can only assume is Grayda’s room. You could ask her directly what exactly it is she’s done to you, but something about that just feels disrespectful. This definitely seems to be an improvement after all.\n\n");
+		transformations.TailArigeanRed.applyEffect(false);
+		transformations.RearBodyArigeanAuraRed.applyEffect(false);
+		player.destroyItems(useables.SEVTENT, 2, true);
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 5;
+		advanceMinutes(90);
+	}
+	else {
+		outputText("\"<i>I have another task for you Recruit, I need you to hunt down two Tentacle beasts and bring back their severed tentacles as proof. I want to test how clever you are at hunting larger prey, and I promise a nice reward should you return with proof of your victories.</i>\"\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 4;
+	}
+	doNext(theTrenchGraydaQuestNPCMissions);
+}
+private function theTrenchGraydaQuestNPCMissionsContinuedImprovement():void {
+	clearOutput();
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 6 && player.hasItem(useables.THHTONG, 4, true) && player.hasItem(useables.MINOHOR, 3, true)) {
+		outputText("Showing your newly acquired ‘prizes’ to Grayda, she returns them with a nod.\n\n");
+		outputText("\"<i>Well done Elite, it seems you're still well on the path of improvement.</i>\"\n\n");
+		player.destroyItems(useables.THHTONG, 4, true);
+		player.destroyItems(useables.MINOHOR, 3, true);
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 7;
+	}
+	else {
+		outputText("\"<i>There you are Recruit or should I say Elite? Now that you’ve had some time to adjust to your new form, I want to see how much you’ve improved. Bring me 4 hellhound tongues and 3 minotaur horns, as proof of your conquests.</i>\"\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 6;
+	}
+	doNext(theTrenchGraydaQuestNPCMissions);
+}
+private function theTrenchGraydaQuestNPCMissions1():void {
+	clearOutput();
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 6 && player.hasItem(useables.SEVTENT, 2, true)) {
+		outputText("\"<i></i>\"\n\n");
+		player.destroyItems(useables.SEVTENT, 2, true);
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 7;
+	}
+	else {
+		outputText("\"<i></i>\"\n\n");
+		flags[kFLAGS.THE_TRENCH_ENTERED] = 6;
+	}
+	doNext(theTrenchGraydaQuestNPCMissions);
 }
 public function theTrench111():void {
 	clearOutput();

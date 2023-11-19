@@ -831,6 +831,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const RearBodyWolfCollar: Transformation 		= rearBody.RearBodyWolfCollar.registerTfMultiple(AS_REAR, AE_WOLF, AE_WEREWOLF, AE_WEREFOX);
 	public const RearBodyHellhoundCollar: Transformation 	= rearBody.RearBodyHellhoundCollar.registerTf(AS_REAR, AE_CERBERUS);
 	public const RearBodyAbyssalSharkFin: Transformation 	= rearBody.RearBodyAbyssalSharkFin.registerTf(AS_REAR, AE_ABYSSAL_SHARK);
+	public const RearBodyArigeanAuraRed: Transformation 	= rearBody.RearBodyArigeanAuraRed.registerTf(AS_REAR, AE_ARIGEAN);
+	public const RearBodyArigeanAuraYellow: Transformation 	= rearBody.RearBodyArigeanAuraYellow.registerTf(AS_REAR, AE_ARIGEAN);
 
 
 //SKIN
@@ -974,6 +976,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailYgddrasil: Transformation 					= tail.TailYgddrasil.registerTf(AS_TAIL, AE_YGGDRASIL);
 	public const TailAbyssalShark: Transformation 				= tail.TailAbyssalShark.registerTf(AS_TAIL, AE_ABYSSAL_SHARK);
 	public const TailArigeanGreen: Transformation 				= tail.TailArigeanGreen.registerTf(AS_TAIL, AE_ARIGEAN);
+	public const TailArigeanRed: Transformation 				= tail.TailArigeanRed.registerTf(AS_TAIL, AE_ARIGEAN);
+	public const TailArigeanYellow: Transformation 				= tail.TailArigeanYellow.registerTf(AS_TAIL, AE_ARIGEAN);
 	/**
 	 * @param tailCount target tail count
 	 * @param magnitude max. number of added/removed tails

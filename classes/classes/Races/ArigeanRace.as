@@ -54,7 +54,7 @@ public class ArigeanRace extends Race {
 				.tailType(Tail.ARIGEAN_RED, +6)
 				.armType(Arms.ARMORED_FOREARMS, +1)
 				.legType(LowerBody.ARMORED_LEGS, +1)
-				//.rearType(RearBody.ABYSSAL_SHARK_FIN, +2)
+				.rearType(RearBody.ARIGEAN_RED_AURA, +1)
 				//.skinBasePattern(Skin.PATTERN_BIOLUMINESCENCE, +1)
 				.hairColor1(ANY(ArigeanHairColors), +1)
 				.skinBaseType(Skin.PLAIN, +1)
@@ -104,6 +104,7 @@ public class ArigeanRace extends Race {
 				.end();
 		/*
 		buildTier(20, "arigean countess")
+				.requireTailType(Tail.ARIGEAN_YELLOW)
 				//.requirePerk(PerkLib.DantianPhylactery)
 				.buffs({
 					"str.mult": +1.00,

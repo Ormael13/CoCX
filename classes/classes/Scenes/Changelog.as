@@ -96,9 +96,9 @@ public class Changelog extends BaseContent
 			outputText("-Small bugfix from parser being checked even without being valid. (Jtecx)\n");
 			outputText("-Some small fixes for combat (jfmherokiller)\n");
 			outputText("-Losing as virgin or vampire to Draculina boss in EL would result in change into dracula/lina race member. They gets bonuses for 22+/34+ pts as fiendish vampire/dracula,draculina: +240%/+360% to str/spe/int multi, +270%/+450% to lib multi\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New consumable (by Sylabt & Ohaxer): Stomiidae fillet. Cost 10 gems. Can be bought at food stand in Trench. Eating it would restore 30 hunger.\n");
+			outputText("-New consumable (by Sylabt & Ohaxer): Calamari Steak. Cost 15 gems. Can be bought at food stand in Trench. Eating it would restore 45 hunger.\n");
+			outputText("-Added in Trench option to interact with Grayda. She have Appearance, Talk & Missions interactions. Mission section allow to progress in Arigean TF from recruit rank toward higher ranks like Elite or beyond.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -116,19 +116,19 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");//New tier 6 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: .
 			outputText("-\n");//New tier 6 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: .
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");

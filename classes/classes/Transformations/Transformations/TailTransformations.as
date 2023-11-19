@@ -1549,6 +1549,50 @@ public class TailTransformations extends MutationsHelper {
 				return player.tailType === Tail.ARIGEAN_GREEN;
 			}
 	);
+
+	public const TailArigeanRed: Transformation = new SimpleTransformation("Arigean Tail (Red)",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				desc += "";
+
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.ARIGEAN_RED;
+				player.tailCount = 2;
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.ARIGEAN_RED;
+			}
+	);
+
+	public const TailArigeanYellow: Transformation = new SimpleTransformation("Arigean Tail (Yellow)",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				desc += "";
+
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.ARIGEAN_YELLOW;
+				player.tailCount = 2;
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.ARIGEAN_YELLOW;
+			}
+	);
 	/*
   */
 }

@@ -10,6 +10,7 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
@@ -187,7 +188,8 @@ public function meetEvangeline():void {
 	}
 	else outputText("Deciding to visit your camp’s transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
 	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0) curingArigean1();
-	if (player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0) curingArigean2();
+	if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0 && player.tailType == Tail.ARIGEAN_GREEN) curingArigean2();
+	if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.statusEffectv3(StatusEffects.ArigeanInfected) == 0 && player.tailType == Tail.ARIGEAN_RED) curingArigean3();
 	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
 	// [Appearan] [ Talk   ] [   Sex  ] [ Spar   ] [GiveGems]
 	// [Alchemy ] [Ingreds ] [        ] [I.Mutati] [Experime]
@@ -214,7 +216,10 @@ public function meetEvangeline():void {
 	else addButtonDisabled(9, "???", "Req. Evangeline been lvl 16+.");
 	if (player.hasStatusEffect(StatusEffects.ArigeanInfected)) addButtonIfTrue(10, "Arigean I.", curingArigeanYes, "Req. 750 gems.", player.gems >= 750);
 	else {
-		if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && player.tailType == Tail.ARIGEAN_GREEN) addButtonIfTrue(10, "Arigean I.", curingArigean2a, "Req. 1000 gems and 3 spring waters.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3)));
+		if (!player.hasStatusEffect(StatusEffects.ArigeanInfected) && (player.tailType == Tail.ARIGEAN_GREEN || player.tailType == Tail.ARIGEAN_RED)) {
+			addButtonIfTrue(10, "Arigean I.", curingArigean2a, "Req. 1000 gems and 3 spring waters.", (player.gems >= 1000 && player.hasItem(consumables.S_WATER, 3) && player.tailType == Tail.ARIGEAN_GREEN));
+			addButtonIfTrue(10, "Arigean I.", curingArigean3a, "Req. 1250 gems, 4 pure honey and 4 spring waters.", (player.gems >= 1250 && player.hasItem(consumables.PURHONY, 4) && player.hasItem(consumables.S_WATER, 4) && player.tailType == Tail.ARIGEAN_RED));
+		}
 		else addButtonDisabled(10, "???", "Req. to be infected by Arigean.");
 	}
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
@@ -1025,11 +1030,33 @@ private function curingArigean2a():void {
 	outputText("\"<i>Down the hatch.</i>\" you murmur as you attempt to drink down the foul liquid all in one go while not throwing it back up.\n\n");
 	outputText("A burning sensation crawling up your spine is all you feel as the creature attached to you starts screeching viscously before detaching from you, and withering away on the floor, leaving a nasty gash in its wake. You can’t help but feel a little saddened at the sight. <b>You no longer have a parasite attached to you.</b>\n\n");
 	if (EvangelineCuringArigeanInfection == 0) EvangelineCuringArigeanInfection += 1;
-	if (flags[kFLAGS.THE_TRENCH_ENTERED] == 1) flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 1) flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
 	player.destroyItems(consumables.S_WATER, 3);
 	player.removePerk(PerkLib.MiracleMetal);
 	player.tailType = Tail.NONE;
 	player.gems -= 1000;
+	statScreenRefresh();
+	doNext(camp.campFollowers);
+	advanceMinutes(15);
+}
+private function curingArigean3():void {
+	outputText("\"<i>Uh...[name]...there is...fog, all around you, I don't think you should go back to...whatever place did this to you.</i>\" She takes out a piece of paper, quill and begins writing a list down. \"<i>Your condition has worsened, and it’s going to be even harder than before to remove your parasite. I need you to bring me 4 jars of purified bee honey, 4 bottles of pure spring water, and 1250 gems to cover materials.</i>\"\n\n");
+	doNext(meetEvangeline);
+}
+private function curingArigean3a():void {
+	clearOutput();
+	outputText("You present her with her payment, items, and she responds by grabbing them before hurriedly jogging off to grab some things from her encampment. After waiting for about 10 minutes she returns with a vial in hand.\n\n");
+	outputText("\"<i>Here you go [name]! Don’t mind the smell… or taste.</i>\" She presents you the vial which holds a foul smelling, light blue liquid that you can’t help but gag upon smelling it.\n\n");
+	outputText("\"<i>Down the hatch.</i>\" you murmur as you attempt to drink down the foul liquid all in one go while not throwing it back up.\n\n");
+	outputText("A burning sensation crawling up your spine is all you feel as the creature attached to you starts screeching viscously before detaching from you, and withering away on the floor. leaving a nasty gash in its wake. An immense feeling of guilt grips your heart as you watch your former partner dissolve into nothingness. <b>You no longer have a parasite attached to you.</b>\n\n");
+	if (EvangelineCuringArigeanInfection == 0) EvangelineCuringArigeanInfection += 1;
+	if (flags[kFLAGS.THE_TRENCH_ENTERED] >= 1) flags[kFLAGS.THE_TRENCH_ENTERED] = 0;
+	player.destroyItems(consumables.S_WATER, 4);
+	player.destroyItems(consumables.PURHONY, 4);
+	player.removePerk(PerkLib.MiracleMetal);
+	player.rearBody.type = RearBody.NONE;
+	player.tailType = Tail.NONE;
+	player.gems -= 1250;
 	statScreenRefresh();
 	doNext(camp.campFollowers);
 	advanceMinutes(15);

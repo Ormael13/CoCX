@@ -17389,14 +17389,14 @@ public final class Mutations extends MutationsHelper {
 
     public function stomiidaeFillet(player:Player):void {
         clearOutput();
-        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
-        player.refillHunger(15);
+        outputText("You unwrap the fillet, and take a bite of the juicy meat, before long you realise there’s no more left. It fills your stomach little, but nothing more.");
+        player.refillHunger(30);
     }
 
     public function calamariSteak(player:Player):void {
         clearOutput();
-        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
-        player.refillHunger(15);
+        outputText("Munching down on the cooked squid, you find it to be tender and slimy. However it fills your stomach quite well.");
+        player.refillHunger(45);
     }
 
     public function coelacanthJerky(player:Player):void {
