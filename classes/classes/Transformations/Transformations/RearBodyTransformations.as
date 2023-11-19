@@ -444,6 +444,38 @@ public class RearBodyTransformations extends MutationsHelper {
 				return player.rearBody.type === RearBody.ABYSSAL_SHARK_FIN;
 			}
 	);
+
+	public const RearBodyArigeanAuraRed: Transformation = new SimpleTransformation("Arigean Red Aura",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.rearBody.type = RearBody.ARIGEAN_RED_AURA;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.ARIGEAN_RED_AURA;
+			}
+	);
+
+	public const RearBodyArigeanAuraYellow: Transformation = new SimpleTransformation("Arigean Yellow Aura",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.rearBody.type = RearBody.ARIGEAN_YELLOW_AURA;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.ARIGEAN_YELLOW_AURA;
+			}
+	);
 	/*
   */
 }
