@@ -123,7 +123,6 @@ public class DraculinaScene extends BaseContent {
 		}
 		player.legCount = 2;
 		player.skin.setBaseOnly({type:Skin.PLAIN, color1:"pale", pattern: Skin.PATTERN_BLOOD_MAGIC_TATTOO});
-		transformations.HornsDemonic.applyEffect(false);
 		transformations.TailDemonic.applyEffect(false);
 		transformations.HairSilky.applyEffect(false);
 		transformations.FaceVampire.applyEffect(false);
@@ -132,7 +131,7 @@ public class DraculinaScene extends BaseContent {
 		transformations.ArmsDemon.applyEffect(false);
 		transformations.TongueDemonic.applyEffect(false);
 		transformations.EarsVampire.applyEffect(false);
-		transformations.HornsNone.applyEffect(false);
+		transformations.HornsDemonic.applyEffect(false);
 		transformations.AntennaeNone.applyEffect(false);
 		transformations.GillsNone.applyEffect(false);
 		transformations.WingsVampire.applyEffect(false);
@@ -147,6 +146,7 @@ public class DraculinaScene extends BaseContent {
         player.removeAllRacialMutation();
         outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
         player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);
+		player.createPerk(PerkLib.Undeath, 0, 0, 0, 0);
         player.createPerk(PerkLib.TransformationImmunity2,8,0,0,0);
 		outputText("\n<b>Gained Perk: Transformation Immunity</b>\n\n");
 		if (combat.inCombat) cleanupAfterCombatTFEvent();

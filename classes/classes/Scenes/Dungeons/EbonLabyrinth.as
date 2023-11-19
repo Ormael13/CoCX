@@ -64,11 +64,9 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     public var darkSlimeEmpressScene:DarkSlimeEmpressScene = new DarkSlimeEmpressScene();
     public var hydraScene:HydraScene = new HydraScene();
     public var hellfireSnailScene:HellfireSnailScene = new HellfireSnailScene();
-
     public var eyeTyrantScene:EyeTyrantScene = new EyeTyrantScene();
     public var atlachNachaScene:AtlachNachaScene = new AtlachNachaScene();
     public var livingFailureScene:LivingFailureScene = new LivingFailureScene();
-	
     public var draculinaScene:DraculinaScene = new DraculinaScene();
 
     /*
@@ -94,7 +92,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         bossPool[2] = [
             [3, eyeTyrantScene.encounter],
             [4, atlachNachaScene.encounter],
-            [5, livingFailureScene.encounter]
+            [5, livingFailureScene.encounter],
+			[6, draculinaScene.encounter]
         ];
         bossPool[0] = bossPool[1].concat(bossPool[2]);
     }
@@ -154,7 +153,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         addButtonIfTrue(0, "Sleep", doSleepEL, "It's still too early to go to sleep.",
                 isNightTime,  "Turn yourself in for the night. May result in monster ambush!");
         SceneLib.masturbation.masturButton(5);
-		if (room == 1) addButtonIfTrue(7, "Cat", shortcuts, "You not even beaten 3 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 150, "Talk to the cat only if you plan skip some rooms.");
+		if (room == 1) addButtonIfTrue(7, "Cat", shortcuts, "You not even beaten ANY boss yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 50, "Talk to the cat only if you plan skip some rooms.");
         addButton(9, "Inventory", inventory.inventoryMenu);
         addButton(14, "Exit", confirmExit);
         dungeons.setTopButtons();
@@ -172,8 +171,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         spriteSelect(null);
 		outputText("\n\nYou are facing a cat-morph. She would looks quite averange if not for black stripes on purple fur. Without any sound she points behind her and then vanishing.");
         menu();
-		addButton(0, "150", navigateToRoomELTier1).hint("Skip 150 rooms but beware of the boss at the end of this detour.");
-		addButtonIfTrue(1, "300", navigateToRoomELTier2, "You not even beaten 6 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 300, "Skip 300 rooms but beware of the boss at the end of this detour.");
+		addButton(0, "50", navigateToRoomEL050).hint("Skip 50 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(1, "100", navigateToRoomEL100, "You not even beaten 2 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 100, "Skip 100 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(2, "150", navigateToRoomEL150, "You not even beaten 3 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 150, "Skip 150 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(3, "200", navigateToRoomEL200, "You not even beaten 4 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 200, "Skip 200 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(4, "250", navigateToRoomEL250, "You not even beaten 5 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 250, "Skip 250 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(5, "300", navigateToRoomEL300, "You not even beaten 6 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 300, "Skip 300 rooms but beware of the boss at the end of this detour.");
+		addButtonIfTrue(6, "350", navigateToRoomEL350, "You not even beaten 7 bosses yet.", flags[kFLAGS.EBON_LABYRINTH_RECORD] >= 350, "Skip 350 rooms but beware of the boss at the end of this detour.");
 	}
 
     //Player menu. Doesn't start any encounters.
@@ -233,29 +237,46 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         roomStatic(true, newDir);
         goNext(false);
     }
-	public function navigateToRoomELTier1():void {
+	public function navigateToRoomEL050():void {
 		//clear room-specific
         fountainRoom = false;
-        //move
-        room += 150;
-		resetEncChance();
-        //if not completed - select from tiers
-        if (!dungeons.checkEbonLabyrinthClear())
-            bossSelector(1);
-        else//cleared - anything, but avoid making tier2 bosses too weak
-            bossSelector(enemyLevelMod < 3 ? 1 : 0);
+        navigateToXRoom(50);
 	}
-	public function navigateToRoomELTier2():void {
+	public function navigateToRoomEL100():void {
 		//clear room-specific
         fountainRoom = false;
-        //move
-        room += 300;
+        navigateToXRoom(100);
+	}
+	public function navigateToRoomEL150():void {
+		//clear room-specific
+        fountainRoom = false;
+        navigateToXRoom(150);
+	}
+	public function navigateToRoomEL200():void {
+		//clear room-specific
+        fountainRoom = false;
+        navigateToXRoom(200);
+	}
+	public function navigateToRoomEL250():void {
+		//clear room-specific
+        fountainRoom = false;
+        navigateToXRoom(250);
+	}
+	public function navigateToRoomEL300():void {
+		//clear room-specific
+        fountainRoom = false;
+        navigateToXRoom(300);
+	}
+	public function navigateToRoomEL350():void {
+		//clear room-specific
+        fountainRoom = false;
+        navigateToXRoom(350);
+	}
+	private function navigateToXRoom(rooms:Number = 50):void {
+		//move
+        room += rooms;
 		resetEncChance();
-        //if not completed - select from tiers
-        if (!dungeons.checkEbonLabyrinthClear())
-            bossSelector(2);
-        else//cleared - anything, but avoid making tier2 bosses too weak
-            bossSelector(enemyLevelMod < 3 ? 1 : 0);
+        bossSelector(0);
 	}
 
     //if a new highscore is set, checks achievements
@@ -317,12 +338,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     public function selectEncounter():Boolean {
         //Every 50 levels - boss
         if (room % 50 == 0) {
-            resetEncChance();
+            resetEncChance();/*
             //if not completed - select from tiers
             if (!dungeons.checkEbonLabyrinthClear())
                 bossSelector(room <= 150 ? 1 : 2);
             else//cleared - anything, but avoid making tier2 bosses too weak
-                bossSelector(enemyLevelMod < 3 ? 1 : 0);
+                bossSelector(enemyLevelMod < 3 ? 1 : 0);*/
+			bossSelector(0);
             return true;
         }
         //Every 10 rooms (not boss) - chest
