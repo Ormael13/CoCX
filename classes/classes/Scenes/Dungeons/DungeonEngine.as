@@ -308,7 +308,7 @@ public class DungeonEngine extends DungeonAbstractContent {
 
     //returns the room required for clearing
     public function clearRoomEL():int {
-        return 301;
+        return 351;
     }
     //returns the room required for the next award
     public function nextAwardEL():int {
