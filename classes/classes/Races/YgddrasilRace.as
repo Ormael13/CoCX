@@ -33,7 +33,7 @@ public class YgddrasilRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function YgddrasilRace(id:int) {
-		super("Yggdrassil", id, []);//RaceBody);
+		super("Yggdrasil", id, []);//RaceBody);
 		mutationThreshold = 6;
 	}
 	
