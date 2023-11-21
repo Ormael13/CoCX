@@ -17,8 +17,12 @@ import classes.Races;
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
 			var pAcc:int = 50;
+			var pAccc:int = 1;
 			if (pTier >= 3) pAcc += 25;
-			if (pTier >= 4) pAcc += 25;
+			if (pTier >= 4) {
+				pAcc += 25;
+				pAccc += 1;
+			}
             if (pTier >= 1){
                 descS += "When taking an intake of fluid heal for "+(1+pTier)+"% of your hp, mana and fatigue";
             }
@@ -26,7 +30,10 @@ import classes.Races;
                 descS += ". Increase all grappling tease damage by " + pAcc + "%";
             }
             if (pTier >= 3){
-                descS += ", ";
+                descS += ". Gain temporary regeneration +" + pAccc + "% after a fluid intake for one hour";
+            }
+            if (pTier >= 3){
+                descS += ". Fluid intake heals all status damage, drains and weakening by 5% per intake";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -41,6 +48,9 @@ import classes.Races;
                     break;
                 case 3:
                     sufval = "(Evolved)";
+                    break;
+                case 4:
+                    sufval = "(Final Form)";
                     break;
                 default:
                     sufval = "";
@@ -78,7 +88,7 @@ import classes.Races;
         }
 
         public function SlimeMetabolismMutation() {
-            super(mName + " IM", mName, SLOT_METABOLISM, 2);
+            super(mName + " IM", mName, SLOT_METABOLISM, 4);
         }
         
     }

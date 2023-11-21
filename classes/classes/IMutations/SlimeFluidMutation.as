@@ -22,8 +22,8 @@ import classes.Races;
             if (pTier >= 1){
                 descS += "Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated";
             }
-            if (pTier == 2){
-                descS += ". You take half as much damage from Acid";
+            if (pTier >= 2){
+                descS += ". You take " + pAcc + "% less damage from Acid";
             }
             if (pTier >= 3){
                 descS += ", ";
@@ -42,6 +42,9 @@ import classes.Races;
                 case 3:
                     sufval = "(Evolved)";
                     break;
+                case 4:
+                    sufval = "(Final Form)";
+                    break;
                 default:
                     sufval = "";
             }
@@ -55,7 +58,7 @@ import classes.Races;
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireMetabolismMutationSlot()
+                    this.requireBloodsteamMutationSlot()
                     .requireAnyRace(Races.SLIME, Races.DARKSLIME, Races.MAGMASLIME);
                 }
                 else{

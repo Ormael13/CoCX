@@ -2511,7 +2511,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.15) {
-				
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) transformations.SkinPatternBeeStripes.applyEffect();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.16) {

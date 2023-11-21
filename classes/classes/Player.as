@@ -3595,6 +3595,11 @@ use namespace CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
 			if (hasStatusEffect(StatusEffects.DaoOfAcid) && (statusEffectv2(StatusEffects.DaoOfAcid) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfAcid) - 3));
+			if (perkv1(IMutationsLib.SlimeFluidIM) >= 2) {
+				mult -= 50;
+				if (perkv1(IMutationsLib.SlimeFluidIM) >= 3) mult -= 25;
+				if (perkv1(IMutationsLib.SlimeFluidIM) >= 4) mult -= 25;
+			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -4589,6 +4594,20 @@ use namespace CoC;
 				EngineCore.HPChange(Math.round(maxHP() * percent), true);
 				EngineCore.ManaChange(Math.round(maxHP() * percent));
 				EngineCore.changeFatigue(-Math.round(maxFatigue() * percent));
+			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 3 && !hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) createStatusEffect(StatusEffects.PostfluidIntakeRegeneration, 0, 0, 0, 0);
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 4 && (statStore.hasBuff("Weakened") || statStore.hasBuff("Drained") || statStore.hasBuff("Damaged"))) {
+				for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+					removeCurse(stat, 5,1);
+					removeCurse(stat, 5,2);
+					removeCurse(stat, 5,3);
+				}
+				if (stat != "sens")
+				{
+					removeCurse(stat+".mult", 0.05,1);
+					removeCurse(stat+".mult", 0.05,2);
+					removeCurse(stat+".mult", 0.05,3);
+				}
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();

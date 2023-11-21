@@ -144,7 +144,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	player.horns.type = Horns.NONE;
 	player.horns.count = 0;
 	player.rearBody.type = RearBody.BEE_HANDMAIDEN;
-	player.skin.setBaseOnly({type:Skin.CHITIN, pattern: Skin.PATTERN_BEE_STRIPES});
+	transformations.SkinPatternBeeStripes.applyEffect();
 	player.killCocks( -1);
 	player.vaginaType(VaginaClass.BEE);
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;

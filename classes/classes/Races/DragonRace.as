@@ -58,6 +58,7 @@ public class DragonRace extends Race {
 				.tailType(Tail.DRACONIC, +1)
 				.tailType(NONE(Tail.FEY_DRACONIC, Tail.CAT), 0, -10)
 				.tongueType(Tongue.DRACONIC, +1)
+				.tongueType(NOT(Tongue.CAT), 0, -10)
 				.wingType(Wings.DRACONIC_SMALL, +2)
 				.wingType(Wings.DRACONIC_LARGE, +4)
 				.wingType(Wings.DRACONIC_HUGE, +6)

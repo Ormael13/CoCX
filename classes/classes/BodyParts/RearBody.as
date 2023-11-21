@@ -194,7 +194,7 @@ public class RearBody extends BodyPart {
 	public static const THIRSTY_NECK: int = 32;
 	EnumValue.add(Types, THIRSTY_NECK, "THIRSTY_NECK", {
 		name: "thirsty neck",
-		appearanceDesc: "Liadri will write this bodypart desc when she feels like she want i guess."
+		appearanceDesc: "Your throat is constantly parched, aching for the sweet taste of blood. It’s difficult for you to not go crazy when the liquid is spilled nearby and at time you even fully lose control. The exact spot where your sire has bitten you is still marked by a pair of faint scars, the only wound on your entire body that won’t fully heal no matter how much you try."
 	});
 
 	public function RearBody(creature:Creature) {
