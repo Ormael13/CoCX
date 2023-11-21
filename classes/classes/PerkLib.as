@@ -3639,7 +3639,7 @@ public class PerkLib
 		public static const ChimericalBodySemiSuperiorStageEx:PerkType = mk("Chimerical Body: Semi-Superior (Ex) Stage", "Chimerical Body: Semi-Superior (Ex) Stage",
 				"Your chimerical body attained Semi-Superior (Ex) Stage. (negate up to 56 racial perk points negative effects // +1/+2 to racial score when PC have first/second racial specific mutation perk)").withBuffs({'str.mult':0.55,'tou.mult':0.55,'spe.mult':0.55,'int.mult':0.35,'wis.mult':0.40,'lib.mult':0.35,'sens':35});
 		public static const ChimericalBodySemiEpicStageEx:PerkType = mk("Chimerical Body: Semi-Epic (Ex) Stage", "Chimerical Body: Semi-Epic (Ex) Stage",
-				"Your chimerical body attained Semi-Epic (Ex) Stage. (negate up to 126 racial perk points negative effects // +1/+2/+3 to racial score when PC have first/second/third racial specific mutation perk)").withBuffs({'str.mult':1.1,'tou.mult':1.1,'spe.mult':1.1,'int.mult':0.7,'wis.mult':0.75,'lib.mult':0.65,'sens':70});
+				"Your chimerical body attained Semi-Epic (Ex) Stage. (negate up to 118 racial perk points negative effects // +1/+2/+3 to racial score when PC have first/second/third racial specific mutation perk)").withBuffs({'str.mult':1.1,'tou.mult':1.1,'spe.mult':1.1,'int.mult':0.7,'wis.mult':0.75,'lib.mult':0.65,'sens':70});
 		public static const ColdAffinity:PerkType = mk("Cold Affinity", "Cold Affinity",
 				"You have high resistance to cold effects, immunity to the frozen condition, and mastery over ice abilities and magic. However, you are highly susceptible to fire.");
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",

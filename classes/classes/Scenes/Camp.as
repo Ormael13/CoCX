@@ -2388,7 +2388,8 @@ public class Camp extends NPCAwareContent{
 			}
 			else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
 
-			addButton(3, "DotE (layer 4)", mainPagePocketWatchDaoOfTheElementsPerkLayer4)
+			//Additional layers removed until additional elemental perks have been made
+			/*addButton(3, "DotE (layer 4)", mainPagePocketWatchDaoOfTheElementsPerkLayer4)
 			.disableIf(!player.hasPerk(PerkLib.DaoOfTheElements) || player.perkv1(PerkLib.DaoOfTheElements) < 3 || !player.hasPerk(PerkLib.ElementalContractRank18),
 						"Req. Elemental Contract Rank 18 & Dao of the Elements (layer 3) perks.")
 			.disableIf(player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 4, "You already have this merged perk.");
@@ -2406,7 +2407,7 @@ public class Camp extends NPCAwareContent{
 			addButton(6, "DotE (layer 7)", mainPagePocketWatchDaoOfTheElementsPerkLayer7)
 			.disableIf(!player.hasPerk(PerkLib.DaoOfTheElements) || player.perkv1(PerkLib.DaoOfTheElements) < 6 || !player.hasPerk(PerkLib.ElementalContractRank31),
 						"Req. Elemental Contract Rank 31 & Dao of the Elements (layer 6) perks.")
-			.disableIf(player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 7, "You already have this merged perk.");
+			.disableIf(player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 7, "You already have this merged perk."); */
 
 			addButton(13, "Next", mainPagePocketWatch, page + 1);
 		}
