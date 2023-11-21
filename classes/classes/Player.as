@@ -3981,6 +3981,8 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 18;
 			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx))//+2 racials
 				internalChimeraRatingCounter -= 56;
+			if (hasPerk(PerkLib.ChimericalBodySemiEpicStageEx))//+3 racials
+				internalChimeraRatingCounter -= 118;
 			if (hasPerk(PerkLib.HumanSupremacyInitial))
 				internalChimeraRatingCounter -= 5;
 			if (hasPerk(PerkLib.HumanSupremacyBasic))

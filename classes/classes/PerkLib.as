@@ -3638,6 +3638,8 @@ public class PerkLib
 				"Your chimerical body attained Semi-Improved (Ex) Stage. (negate up to 18 racial perk points negative effects // +1 to racial score when PC have first racial specific mutation perk)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10});
 		public static const ChimericalBodySemiSuperiorStageEx:PerkType = mk("Chimerical Body: Semi-Superior (Ex) Stage", "Chimerical Body: Semi-Superior (Ex) Stage",
 				"Your chimerical body attained Semi-Superior (Ex) Stage. (negate up to 56 racial perk points negative effects // +1/+2 to racial score when PC have first/second racial specific mutation perk)").withBuffs({'str.mult':0.55,'tou.mult':0.55,'spe.mult':0.55,'int.mult':0.35,'wis.mult':0.40,'lib.mult':0.35,'sens':35});
+		public static const ChimericalBodySemiEpicStageEx:PerkType = mk("Chimerical Body: Semi-Epic (Ex) Stage", "Chimerical Body: Semi-Epic (Ex) Stage",
+				"Your chimerical body attained Semi-Epic (Ex) Stage. (negate up to 118 racial perk points negative effects // +1/+2/+3 to racial score when PC have first/second/third racial specific mutation perk)").withBuffs({'str.mult':1.1,'tou.mult':1.1,'spe.mult':1.1,'int.mult':0.7,'wis.mult':0.75,'lib.mult':0.65,'sens':70});
 		public static const ColdAffinity:PerkType = mk("Cold Affinity", "Cold Affinity",
 				"You have high resistance to cold effects, immunity to the frozen condition, and mastery over ice abilities and magic. However, you are highly susceptible to fire.");
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",
@@ -6449,7 +6451,8 @@ public class PerkLib
             ElementalContractRank13.requireOrPerks(ElementalContractRank12, DaoOfTheElements, 3)
                     .requireWis(325)
                     .requireLevel(72);
-            StrongerElementalBondEx.requirePerks(StrongerElementalBond, ElementalContractRank13)
+            StrongerElementalBondEx.requirePerk(StrongerElementalBond)
+					.requireOrPerks(ElementalContractRank13, DaoOfTheElements, 4)
                     .requireWis(325)
                     .requireLevel(72)
 					.requirePerk(JobElementalConjurer);
@@ -6472,7 +6475,8 @@ public class PerkLib
 			ElementalContractRank16.requirePerk(ElementalContractRank15)
                     .requireWis(400)
                     .requireLevel(90);
-            StrongerElementalBondSu.requirePerks(StrongerElementalBondEx, ElementalContractRank16)
+            StrongerElementalBondSu.requirePerk(StrongerElementalBondEx)
+					.requireOrPerks(ElementalContractRank16, DaoOfTheElements, 4)
                     .requireWis(400)
                     .requireLevel(90)
 					.requirePerk(JobElementalConjurer);
@@ -6484,7 +6488,7 @@ public class PerkLib
                     .requirePerk(LegendaryWisdom)
                     .requireLevel(96);
 			///Tier 17 Wisdom perks
-			ElementalContractRank18.requirePerk(ElementalContractRank17)
+			ElementalContractRank18.requireOrPerks(ElementalContractRank17, DaoOfTheElements, 4)
                     .requireWis(450)
                     .requireLevel(102);
 			///Tier 18 Wisdom perks
@@ -6495,7 +6499,8 @@ public class PerkLib
 			ElementalContractRank20.requirePerk(ElementalContractRank19)
                     .requireWis(500)
                     .requireLevel(114);
-            StrongestElementalBond.requirePerks(StrongerElementalBondSu, ElementalContractRank20)
+            StrongestElementalBond.requirePerk(StrongerElementalBondSu)
+					.requireOrPerks(ElementalContractRank20, DaoOfTheElements, 5)
                     .requireWis(500)
                     .requireLevel(90)
 					.requirePerk(JobElementalConjurer);
@@ -6508,14 +6513,15 @@ public class PerkLib
                     .requireWis(550)
                     .requireLevel(126);
 			///Tier 22 Wisdom perks
-			ElementalContractRank23.requirePerk(ElementalContractRank22)
+			ElementalContractRank23.requireOrPerks(ElementalContractRank22, DaoOfTheElements, 5)
                     .requireWis(575)
                     .requireLevel(132);
 			///Tier 23 Wisdom perks
 			ElementalContractRank24.requirePerk(ElementalContractRank23)
                     .requireWis(600)
                     .requireLevel(138);
-            StrongestElementalBondEx.requirePerks(StrongestElementalBond, ElementalContractRank24)
+            StrongestElementalBondEx.requirePerk(StrongestElementalBond)
+					.requireOrPerks(ElementalContractRank24, DaoOfTheElements, 6)
                     .requireWis(600)
                     .requireLevel(138)
 					.requirePerk(JobElementalConjurer);
@@ -6532,10 +6538,11 @@ public class PerkLib
                     .requireWis(675)
                     .requireLevel(156);
 			///Tier 27 Wisdom perks
-			ElementalContractRank28.requirePerk(ElementalContractRank27)
+			ElementalContractRank28.requireOrPerks(ElementalContractRank27, DaoOfTheElements, 6)
                     .requireWis(700)
                     .requireLevel(162);
-            StrongestElementalBondSu.requirePerks(StrongestElementalBondEx, ElementalContractRank28)
+            StrongestElementalBondSu.requirePerk(StrongestElementalBondEx)
+					.requireOrPerks(ElementalContractRank28, DaoOfTheElements, 7)
                     .requireWis(700)
                     .requireLevel(162)
 					.requirePerk(JobElementalConjurer);
@@ -7030,7 +7037,7 @@ public class PerkLib
 					.requireSpe(30);
             //Tier 1
 			ChimericalBodyInitialStage.requireLevel(6)
-					.requireNotThosePerks(ChimericalBodySemiImprovedStageEx, ChimericalBodySemiSuperiorStageEx)
+					.requireNotThosePerks(ChimericalBodySemiImprovedStageEx, ChimericalBodySemiSuperiorStageEx, ChimericalBodySemiEpicStageEx)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
                     }, "Two of any race internal mutations");
@@ -7697,7 +7704,7 @@ public class PerkLib
 			LimitBreakerBody2ndStage.requireLevel(72)
 					.requirePerk(LimitBreakerSoul1stStage);
             //Tier 13
-            ChimericalBodyEpicStage.requirePerk(ChimericalBodySemiEpicStage)
+            ChimericalBodyEpicStage.requireAnyPerk(ChimericalBodySemiEpicStage, ChimericalBodySemiEpicStageEx)
                     .requireLevel(78)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 99;

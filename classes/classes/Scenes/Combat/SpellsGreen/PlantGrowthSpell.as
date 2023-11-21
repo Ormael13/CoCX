@@ -19,7 +19,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust posion damage"
+		return "~" + calcDamage(target, false, false) + " lust poison damage"
 	}
 	
 	override public function calcCooldown():int {
