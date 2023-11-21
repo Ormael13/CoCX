@@ -38,6 +38,7 @@
 		<attribute name="air-flag"/>
         <attribute name="standalone-flag"/>
         <attribute name="binary-name"/>
+        <attribute name="should-optimize"/>
         <sequential>
             <!-- build the game binary -->
             <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
@@ -45,6 +46,7 @@
                 <source-path path-element="${FLEX_HOME}/frameworks"/>
                 <source-path path-element="${main.src.dir}/"/>
                 <compiler.debug>@{debug-flag}</compiler.debug>
+                <compiler.optimize>@{should-optimize}</compiler.optimize>
                 <library-path dir="${FLEX_HOME}/frameworks/libs" includes="*.swc" append="true"/>
                 <library-path dir="${FLEX_HOME}/frameworks/libs/air" includes="*.swc" append="true"/>
                 <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
@@ -89,14 +91,14 @@
 
 
     <target name="release" depends="init" description="Build with release flags">
-        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" binary-name="CoC-release.swf"></build-game-binary>
+        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" should-optimize="true" binary-name="CoC-release.swf"></build-game-binary>
     </target>
 
     <target name="debug" depends="init" description="Build with debug flags">
-        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" binary-name="CoC-debug.swf"></build-game-binary>
+        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" should-optimize="false" binary-name="CoC-debug.swf"></build-game-binary>
     </target>
 	<target name="airMobile" depends="init" description="Build air release">
-		<build-game-binary debug-flag="true" release-flag="true" air-flag="true" standalone-flag="false" binary-name="CoC-Mobile.swf"></build-game-binary>
+		<build-game-binary debug-flag="true" release-flag="true" air-flag="true" standalone-flag="false" should-optimize="true" binary-name="CoC-Mobile.swf"></build-game-binary>
 	</target>
 
     <target name="all" depends="init,release,debug,airMobile" description="Build all swf versions"/>
