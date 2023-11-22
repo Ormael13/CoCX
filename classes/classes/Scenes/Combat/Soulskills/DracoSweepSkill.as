@@ -88,28 +88,28 @@ public class DracoSweepSkill extends AbstractSoulSkill {
 		if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.flameBladeActive()) {
 			if (player.flameBladeActive()) damage += scalingBonusLibido() * 0.20;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, display);
 		}
 		else if (combat.isIceTypeWeapon()) {
 			damage = Math.round(damage * combat.iceDamageBoostedByDao());
-			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, display);
 		}
 		else if (combat.isLightningTypeWeapon()) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
-			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, display);
 		}
 		else if (combat.isDarknessTypeWeapon()) {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
-			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, display);
 		}
-		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
-		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, true);
+		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, display);
+		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, display);
 		else {
-			doDamage(damage, true, true);
-			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
+			doDamage(damage, true, display);
+			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, display);
 			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				doDamage(damage, true, true);
-				doDamage(damage, true, true);
+				doDamage(damage, true, display);
+				doDamage(damage, true, display);
 				damage *= 3;
 			}
 		}

@@ -122,23 +122,23 @@ public class BladeHailSkill extends AbstractSoulSkill {
 		damage *= d2;
 
 		if (display) outputText(" ");
-		doMagicDamage(damage, true, true);
+		doMagicDamage(damage, true, display);
 		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 		if (hits == 2) {
 			if (display) outputText(" ");
-			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, display);
 			if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 			damage *= 2;
 		}
 		if (hits == 4) {
 			if (display) outputText(" ");
-			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, display);
 			if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 			if (display) outputText(" ");
-			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, display);
 			if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 			if (display) outputText(" ");
-			doMagicDamage(damage, true, true);
+			doMagicDamage(damage, true, display);
 			if (crit && display) outputText(" <b>*Critical Hit!*</b>");
 			damage *= 4;
 		}
