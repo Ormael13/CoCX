@@ -43,7 +43,7 @@ public class DraculinaScene extends BaseContent {
 			outputText("\"<i>Oh my… What a cute morsel I just got here. I can't believe you made it all the way down here and alive nonetheless, what with being oblivious and all. A shame I'm hungry at the time, as one minotaur is hardly enough to satiate me.</i>\"\n\n");
 			outputText("You struggle against her but she has a grip stronger then steel.\n\n");
 			outputText("Your batty tormentor gives you a charming, if not fanged, smile as she takes a whiff of your neck.\n\n");
-			if (!player.blockingBodyTransformations() && player.gender > 0 && (player.vaginas[0].virgin || player.racialScore(Races.VAMPIRE) >= 10)) becomeDracula();
+			if (!player.blockingBodyTransformations() && player.gender > 0 && ((player.hasVagina() && player.vaginas[0].virgin) || player.racialScore(Races.VAMPIRE) >= 10)) becomeDracula();
 			else defeatedBadEnd();
 		}
     }
@@ -51,7 +51,7 @@ public class DraculinaScene extends BaseContent {
     public function defeatedBy():void {
         clearOutput();
         outputText("As you fall down defeated, a soft, gentle hand picks and holds your back, just as you're about to hit the ground. Your batty tormentor gives you a charming, if not fanged, smile as she takes a whiff of your neck.\n\n");
-        if (!player.blockingBodyTransformations() && player.gender > 0 && (player.vaginas[0].virgin || player.racialScore(Races.VAMPIRE) >= 10)) {
+        if (!player.blockingBodyTransformations() && player.gender > 0 && ((player.hasVagina() && player.vaginas[0].virgin) || player.racialScore(Races.VAMPIRE) >= 10)) {
 			outputText("As you fall to the ground, defeated, a soft, gentle hand lifts you in a soft embrace as you're about to hit the ground. Your batty tormentor gives you a charming, if not fanged, smile as she takes a whiff of your neck.\n\n");
 			becomeDracula();
 		}
@@ -138,11 +138,11 @@ public class DraculinaScene extends BaseContent {
 		player.rearBody.type = RearBody.THIRSTY_NECK;
 		if (player.hasCock()) transformations.CockDemon().applyEffect(false);
 		if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
-        if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.DRACULA;
         if (!player.hasPerk(PerkLib.Familiar)) player.createPerk(PerkLib.Familiar,0,0,0,0);
 		IMutationsLib.BlackHeartIM.trueMutation = true;
         IMutationsLib.VampiricBloodstreamIM.trueMutation = true;
         IMutationsLib.HollowFangsIM.trueMutation = true;
+        if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.DRACULA;
         player.removeAllRacialMutation();
         outputText("\n<b>Gained Perk: Soulless!</b> "+PerkLib.Soulless.desc());
         player.createPerk(PerkLib.Soulless, 0, 0, 0, 0);

@@ -125,17 +125,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New monster perk: Darkness Vulnerability - decrease darkness dmg done to monster by 50% and increase lightning dmg by 100%. Currently given to Anubis enemy.
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");

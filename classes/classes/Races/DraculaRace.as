@@ -59,6 +59,7 @@ public class DraculaRace extends Race {
 				.corruption(AT_LEAST(50), +1)
 				.corruption(AT_LEAST(75), +1)
 				.corruption(AT_LEAST(100), +1)
+				.hasPerk(PerkLib.Undeath, +1)
 				.hasPerk(PerkLib.Soulless, +2);
 		
 		addBloodline(PerkLib.VampiresDescendant,PerkLib.BloodlineVampire);
