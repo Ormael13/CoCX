@@ -1116,11 +1116,11 @@ use namespace CoC;
 		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (isRace(Races.HARPY) || isRace(Races.THUNDERBIRD) || isRace(Races.PHOENIX)); }
-		public function isWerewolf():Boolean { return isRace(Races.WEREWOLF); }
-		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || isRace(Races.BAT) || isRace(Races.JIANGSHI)); }
+		public function isWerebeast():Boolean { return (isRace(Races.WEREWOLF) || isRace(Races.WERESHARK)); }
+		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || isRace(Races.BAT) || isRace(Races.JIANGSHI) || isRace(Races.DRACULA)); }
 		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
-		public function isTechSavvyPC():Boolean { return (isGoblinoid() || (hasPerk(IMutationsLib.HumanSmartsIM) && perkv1(IMutationsLib.HumanSmartsIM) >= 2)); }
+		public function isTechSavvyPC():Boolean { return (isGoblinoid() || (hasPerk(IMutationsLib.HumanSmartsIM) && perkv1(IMutationsLib.HumanSmartsIM) >= 2) || isRace(Races.WEREFOX)); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{

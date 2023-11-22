@@ -67,7 +67,7 @@ public class HollowFangsMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
                     }, "Vampire fangs")
-                    .requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
+                    .requireAnyRace(Races.VAMPIRE, Races.DRACULA);//, Races.WERESPIDER
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -77,7 +77,7 @@ public class VampiricBloodstreamMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.VampireThirst);
                     }, "Vampire Thirst")
-                    .requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
+                    .requireAnyRace(Races.VAMPIRE, Races.DRACULA);//, Races.WERESPIDER
                 }
                 else{
                     var pLvl:int = pTier * 30;

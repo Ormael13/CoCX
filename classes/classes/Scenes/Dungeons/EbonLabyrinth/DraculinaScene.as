@@ -137,7 +137,7 @@ public class DraculinaScene extends BaseContent {
 		transformations.WingsVampire.applyEffect(false);
 		player.rearBody.type = RearBody.THIRSTY_NECK;
 		if (player.hasCock()) transformations.CockDemon().applyEffect(false);
-		if (player.hasVagina()) transformations.VaginaDemonic(0).applyEffect(false);
+		if (player.hasVagina()) transformations.VaginaDemonic().applyEffect(false);
         if (player.hasPerk(PerkLib.RacialParagon)) flags[kFLAGS.APEX_SELECTED_RACE] = Races.DRACULA;
         if (!player.hasPerk(PerkLib.Familiar)) player.createPerk(PerkLib.Familiar,0,0,0,0);
 		IMutationsLib.BlackHeartIM.trueMutation = true;

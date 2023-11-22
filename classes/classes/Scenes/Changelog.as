@@ -75,6 +75,9 @@ public class Changelog extends BaseContent
 			outputText("-A player whose werewolf score has gone under 12 while having the Dormant Lycanthropy perk can now become a werewolf again upon increasing their racial score once more. (Demojay)\n");
 			outputText("-Added to tooltips to Golem/Skeleton pre-turn button to make each function more clear. (Demojay)\n");
 			outputText("-Werefox Race now takes Dormant Vulpesthropy into account for racial scores. Wereshark Race now takes Dormant Selachimorphanthropy into account for racial scores. (Demojay)\n");
+			outputText("-Fixed bugs: Skeleton pre-turn attack text would not properly display to the user, text positioning so that Skeleton warrior and archer pre-turn texts are generated on separate lines, buttons to choose whether Golems and Skeletons will attack pre-turn were overlapping, causing it to become unclear what selecting the button would do, ");
+			outputText("game showing that the user was still a Soul Scholar on the cultivation screen, when they were actually a Soul Grandmaster (Demojay)\n");
+			outputText("-Using Pigment in crafting now properly removes the pigment. Selecting the last pigment in your inventory for crafting doesn't automatically remove it. (Demojay)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -82,9 +85,6 @@ public class Changelog extends BaseContent
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. Implemented arigean aura(s), and added Sylabt's edits/improvements to my arigean sprites. (Lord Shadeogorath)\n");
 			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
-			outputText("-Fixed bugs: Skeleton pre-turn attack text would not properly display to the user, text positioning so that Skeleton warrior and archer pre-turn texts are generated on separate lines, buttons to choose whether Golems and Skeletons will attack pre-turn were overlapping, causing it to become unclear what selecting the button would do, ");
-			outputText("game showing that the user was still a Soul Scholar on the cultivation screen, when they were actually a Soul Grandmaster (Demojay)\n");
-			outputText("-Using Pigment in crafting now properly removes the pigment. Selecting the last pigment in your inventory for crafting doesn't automatically remove it. (Demojay)\n");
 			outputText("-Power Shot effects changed to: Enable Power Shot p. special. Add ~20% of base stat scaling value to range (not for firearms) damage. Power Shot (Ex) effects changed to: Power Shot p. special damage increased by ~2x. Add ~30% of base stat scaling value to range (not for firearms) damage & power attack multi factor. Range physical attacks multiplier increased not changed for both perks.\n");
 			outputText("-Bows/Crossbows/Throwing range weapons base dmg scaling been changed and specials using those weapons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing weapons.\n");
 			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");

@@ -514,6 +514,24 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
+	public static const DEER:int = 66;
+	EnumValue.add(Types, DEER, "DEER", {
+		name:"deer",
+		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending in hands with paw pads.",
+		//claw: true,
+		//canPounce: true,
+		fur: true
+	});
+
+	public static const REINDEER:int = 67;
+	EnumValue.add(Types, REINDEER, "REINDEER", {
+		name:"reindeer",
+		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending up with hands with animal like paw pads.",
+		//claw: true,
+		//canPounce: true,
+		fur: true
+	});
+
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}
