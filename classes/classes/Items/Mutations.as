@@ -16980,7 +16980,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
 		//wis change
-        if (rand(4) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
+        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
             outputText("[pg]You feel a tremendous rush of mental celerity, as if your mind were clear of all doubt.");
             changes++;
         }

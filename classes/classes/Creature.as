@@ -654,7 +654,7 @@ public class Creature extends Utils
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
 				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) max *= 1.5;
 			}
-			else if (hasPerk(PerkLib.HaltedVitals)) {
+			else if (hasPerk(PerkLib.HaltedVitals) || hasPerk(PerkLib.Undeath)) {
 				max += int(lib * 2 + 50);
 				if (lib >= 21) max += Math.round(lib);
 				if (lib >= 41) max += Math.round(lib);

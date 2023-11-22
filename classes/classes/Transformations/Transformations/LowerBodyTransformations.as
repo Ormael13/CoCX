@@ -466,16 +466,16 @@ public class LowerBodyTransformations extends MutationsHelper {
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
 					desc += "You feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of cloven hoofed legs</b>.";
-					legCount = 4
+					legCount = 4;
 				}
 				// Case 2: Bipedal TF
 				else if (legCount === 2) {
 					if (player.lowerBody == LowerBody.NAGA) {
-						desc += "You scream in agony as a horrible pain racks the entire length of your snake-like coils. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a snake. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>";
+						desc += "You scream in agony as a horrible pain racks the entire length of your snake-like coils. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a snake. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have deer legs!</b>";
 						player.lowerBody = LowerBody.CLOVEN_HOOFED;
 						transformations.LowerBodyBipedal.applyEffect(false);
 					} else if (player.lowerBody == LowerBody.MELKIE) {
-						desc += "You scream in agony as a horrible pain racks the entire length of your seal-like tail. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a seal. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>";
+						desc += "You scream in agony as a horrible pain racks the entire length of your seal-like tail. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a seal. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have deer legs!</b>";
 						player.lowerBody = LowerBody.CLOVEN_HOOFED;
 						transformations.LowerBodyBipedal.applyEffect(false);
 					}
@@ -1036,6 +1036,59 @@ public class LowerBodyTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return !Metamorph.checkTaurUnlock() && player.lowerBody === LowerBody.GRYPHON;
+			}
+		)
+	}
+	
+	public function LowerBodyReindeer(legCount: int = undefined, toggleTaur: Boolean = false): Transformation {
+		return new SimpleTransformation("Reindeer Lower Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				if (!legCount) legCount = player.legCount;
+				var desc: String = "";
+				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CLOVEN_HOOFED_2 ){
+					if (toggleTaur && legCount === 2) legCount = 4;
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2;
+				}
+
+				// Case 1: Morph Taur legs without changing leg count
+				if (player.isTaur() && legCount >= 4) {
+					desc += "You feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Thick fur grows on your legs and soon you're looking at a <b>new pair of reindeer legs</b>.";
+					legCount = 4;
+				}
+				// Case 2: Bipedal TF
+				else if (legCount === 2) {
+					if (player.lowerBody == LowerBody.NAGA) {
+						desc += "You scream in agony as a horrible pain racks the entire length of your snake-like coils. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a snake. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have reindeer legs!</b>";
+						player.lowerBody = LowerBody.CLOVEN_HOOFED_2;
+						transformations.LowerBodyBipedal.applyEffect(false);
+					} else if (player.lowerBody == LowerBody.MELKIE) {
+						desc += "You scream in agony as a horrible pain racks the entire length of your seal-like tail. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a seal. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have reindeer legs!</b>";
+						player.lowerBody = LowerBody.CLOVEN_HOOFED_2;
+						transformations.LowerBodyBipedal.applyEffect(false);
+					}
+
+					TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyBipedal, doOutput);
+
+					// Display TF text if the player is obtaining this part instead of only changing leg count and didn't hit any special text
+					if (player.lowerBody !== LowerBody.CLOVEN_HOOFED_2) {
+						desc += "\n\nYou scream in agony as the bones in your legs break and rearrange. Once the pain subsides, you inspect your legs, finding that they are digitigrade and ending in cloven hooves. <b>You now have a pair of reindeer legs!</b>";
+					}
+				}
+				// Case 3: Taur TF
+				else if (!player.isTaur() && legCount >= 4) {
+					transformations.LowerBodyTaur(LowerBody.CLOVEN_HOOFED_2).applyEffect(doOutput);
+				}
+
+				if (doOutput) outputText(desc);
+				player.lowerBody = LowerBody.CLOVEN_HOOFED_2;
+				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CLOVEN_HOOFED_2));
+			},
+			// is present
+			function (): Boolean {
+				return !Metamorph.checkTaurUnlock() && player.lowerBody === LowerBody.CLOVEN_HOOFED_2;
 			}
 		)
 	}

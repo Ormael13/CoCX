@@ -309,7 +309,8 @@ public class LowerBody extends SaveableBodyPart {
 		name: "cloven-hoofed",
 		legsPrefixes: ["pig-like", "cloven-hoofed", "", ""],
 		appearanceDesc: "{legCount} digitigrade legs form below your [hips], ending in cloven hooves.",
-		canTaur: true
+		canTaur: true,
+		fur: true
 	});
 
 	//public static const :int = 22;not used anywhere legs number likely ^^
@@ -863,6 +864,15 @@ public class LowerBody extends SaveableBodyPart {
 		name: "demonic graceful feet",
 		feet: "demonic graceful feet",
 		appearanceDesc: "Your {legCount} perfect lissom legs end in delicate, clawed feet allowing you to move with supernatural grace."
+	});
+
+	public static const CLOVEN_HOOFED_2:int = 83;
+	EnumValue.add(Types, CLOVEN_HOOFED_2, "CLOVEN_HOOFED_2", {
+		name: "reindeer",
+		legsPrefixes: ["deer-like", "cloven-hoofed", "", ""],
+		appearanceDesc: "{legCount} digitigrade legs covered with thick [fur color] fur form below your [hips], ending in cloven hooves.",
+		canTaur: true,
+		fur: true
 	});
 
 	override public function set type(value:int):void {

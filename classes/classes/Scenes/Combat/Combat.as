@@ -8944,7 +8944,7 @@ public class Combat extends BaseContent {
         if (mod < 0) {
             mod *= fatigueRecoveryMultiplier();
         }
-        if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) return;
+        if (mod > 0 && (player.hasStatusEffect(StatusEffects.AlterBindScroll3) || player.hasStatusEffect(StatusEffects.AlterBindScroll5) || player.hasPerk(PerkLib.Undeath))) return;
 		else player.fatigue += mod;
         if (mod < 0) {
             mainView.statsView.showStatUp('fatigue');
@@ -9437,7 +9437,7 @@ public class Combat extends BaseContent {
 				outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>([font-damage]" + slap + "[/font])</b></b>\n\n");
 			}
         }
-        if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity) && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
+        if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity) && !player.hasStatusEffect(StatusEffects.AlterBindScroll5)) {
 			player.addCurse("int.mult", monster.statusEffectv1(StatusEffects.AuraOfMadness)/100,3);//non bosses have it 5
 			player.addCurse("wis.mult", monster.statusEffectv2(StatusEffects.AuraOfMadness)/100,3);//bosses have it at 20
             outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");

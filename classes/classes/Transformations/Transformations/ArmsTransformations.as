@@ -1293,6 +1293,40 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.DEMON;
 			}
 	);
+
+	public const ArmsDeer: Transformation = new SimpleTransformation("Deer Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms and hands start covering in thin fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into hoof like claws so no wonder you felt it that much. <b>You now have deer arms.</b>";
+
+				player.arms.type = Arms.DEER;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CANINE));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.DEER;
+			}
+	);
+
+	public const ArmsReindeer: Transformation = new SimpleTransformation("Reindeer Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms and hands start covering in thick fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into hoof like claws so no wonder you felt it that much. <b>You now have reindeer arms.</b>";
+
+				player.arms.type = Arms.REINDEER;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.CANINE));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.REINDEER;
+			}
+	);
 	/*
   */
 }

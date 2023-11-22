@@ -225,7 +225,6 @@ public class AsumaKirin extends Consumable {
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.KIRIN && changes < changeLimit && rand(3) == 0) {
 			CoC.instance.transformations.VaginaKirin().applyEffect();
 		}
-
 		//classic horse-taur version
 		if (changes < changeLimit && rand(2) == 0 && player.lowerBody != LowerBody.KIRIN && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur()) {
 			outputText("\n\n");
@@ -351,7 +350,6 @@ public class AsumaKirin extends Consumable {
 			if (CoC.instance.transformations.EyesDraconic.isPossible()) CoC.instance.transformations.EyesDraconic.applyEffect();
 			changes++;
 		}
-
 		//Physical changes:
 		//Nipples Start Glowing:
 		if (CoC.instance.transformations.AssholeGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
@@ -373,7 +371,6 @@ public class AsumaKirin extends Consumable {
 			CoC.instance.transformations.AssholeGlowing.applyEffect();
 			changes++;
 		}
-
 		player.refillHunger(10);
 		return false;
 	}

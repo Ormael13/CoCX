@@ -88,7 +88,7 @@ public class Changelog extends BaseContent
 			outputText("-Power Shot effects changed to: Enable Power Shot p. special. Add ~20% of base stat scaling value to range (not for firearms) damage. Power Shot (Ex) effects changed to: Power Shot p. special damage increased by ~2x. Add ~30% of base stat scaling value to range (not for firearms) damage & power attack multi factor. Range physical attacks multiplier increased not changed for both perks.\n");
 			outputText("-Bows/Crossbows/Throwing range weapons base dmg scaling been changed and specials using those weapons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing weapons.\n");
 			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
-			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF); Arigean Tail (Red), Arigean Aura (Red) (all of those bodyparts from Arigean Quests)\n");
+			outputText("-New bodyparts: Demonic Graceful Feet, Demonic clawed hands, Demon face, Demon Eyes (& demon eye colors) (all of those bodyparts from Demon TF); Arigean Tail (Red), Arigean Aura (Red) (all of those bodyparts from Arigean Quests); Deer Arms (from Deer TF (Golden Rind))\n");
 			outputText("-Demon score req. changed from 11/16 to 15/21 with change to stat bonuses (other bonuses like max resource bar changes are the same): +25%/65% to spe multi, +50%/70% to int multi, +150%/200% to lib multi, +0/20 to sens. Req. of Phylactery perk for 2nd tier of race bonuses been replaced with req. of Soulless perk.\n");
 			outputText("-Goo type enemies gained immunity to bleed effects.\n");
 			outputText("-When having Familiar perk and exploring at night PC can encounter human npc, whcich could be turned into ghoul servant.\n");
@@ -102,19 +102,19 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Slime Metabolism (Evolved). Req. Slime Metabolism (Primitive) and lvl 60+. Effects: When taking an intake of fluid heal for 4% of your hp, mana and fatigue. Increase all grappling tease damage by 75%. Gain temporary regeneration +1% after a fluid intake for one hour.\n");
 			outputText("-New mutation perk: Slime Metabolism (Final Form). Req. Slime Metabolism (Evolved) and lvl 90+. Effects: When taking an intake of fluid heal for 5% of your hp, mana and fatigue. Increase all grappling tease damage by 100%. Gain temporary regeneration +2% after a fluid intake for one hour. Fluid intake heals all status damage, drains and weakening by 5% per intake.\n");
 			outputText("-Altered Pocket Watch menu to categorize merged perks. Added Chimerial Body merged perk for perks up to Semi-Epic stage. Added Fix: Fixed Yggdrasil spelling mistake on Racial Scores menu. (Demojay)\n");
-			//outputText("-New mutation perk: Slime Fluid (Evolved). Req. Slime Fluid (Primitive) and lvl 60+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 75% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent.\n");
+			outputText("-Added to Undeath perk additional effect: Furthermore you have unlimited fatigue.\n");
+			outputText("-Deer race bonuses been updated to current races standards. At 8+ points in racial score they getting bonuses (deer): +25% to str & tou multi, +50% to spe multi, -20% to int multi and +40% to wis multi.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			//outputText("-New mutation perk: Slime Fluid (Evolved). Req. Slime Fluid (Primitive) and lvl 60+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 75% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent.");
 			//outputText("-New mutation perk: Slime Fluid (Final Form). Req. Slime Fluid (Evolved) and lvl 90+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 100% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent. ");
-			//outputText("Your melee unarmed and feral attack gains tease damage property when you are below 100% health.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			//outputText("Your melee unarmed and feral attack gains tease damage property when you are below 100% health.\n\n");
 			outputText("-\n");//New tier 6 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: .
 			outputText("-\n");//New tier 6 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: .
 			outputText("-\n");
@@ -139,7 +139,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
-			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses\n\n");
+			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req., races with Undeath perk ");
+			outputText("scaling HP from tou instead of lib\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
