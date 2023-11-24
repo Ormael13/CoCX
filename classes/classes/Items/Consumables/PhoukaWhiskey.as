@@ -97,7 +97,7 @@ public class PhoukaWhiskey extends Consumable {
         
         public function phoukaWhiskeyAddStatus(player:Player):void
         {
-			var libidoChange:int = (player.lib + 25 > 100 ? 100 - player.lib : 25);
+			var libidoChange:int = (player.lib < 25 ? player.lib : 25);
 			var sensChange:int = (player.sens < 10 ? player.sens : 10);
 			var speedChange:int = (player.spe < 20 ? player.spe : 20);
 			var intChange:int = (player.inte < 20 ? player.inte : 20);
@@ -114,7 +114,7 @@ public class PhoukaWhiskey extends Consumable {
 				game.player.dynStats("sens", -sensChange);
 				player.addCurse("spe", speedChange,1);
 				player.addCurse("int", intChange,1);
-				player.MutagenBonus("lib", libidoChange);
+				game.player.buff("Phouka Whiskey").addLib(libidoChange);
 			}
 			else { //First time
 				player.createStatusEffect(StatusEffects.PhoukaWhiskeyAffect, 8, 1, 256 * libidoChange + sensChange, 256 * speedChange + intChange);
@@ -122,7 +122,7 @@ public class PhoukaWhiskey extends Consumable {
 				game.player.dynStats("sens", -sensChange);
 				player.addCurse("spe", speedChange,1);
 				player.addCurse("int", intChange,1);
-				player.MutagenBonus("lib", libidoChange);
+				game.player.buff("Phouka Whiskey").addLib(libidoChange);
 			}
 			EngineCore.statScreenRefresh();
         }
@@ -137,7 +137,9 @@ public class PhoukaWhiskey extends Consumable {
 			var libidoChange:int = (libidoSensCombined - sensChange) / 256;
 			var intChange:int = intSpeedCombined & 255;
 			var speedChange:int = (intSpeedCombined - intChange) / 256;
+
 			player.dynStats("sens", sensChange, "spe", speedChange, "int", intChange); //Get back all the stats you lost
+			game.player.buff("Phouka Whiskey").remove();
 			player.addCurse("lib", libidoChange,1);
 			player.removeStatusEffect(StatusEffects.PhoukaWhiskeyAffect);
 			if (numDrunk > 3)
