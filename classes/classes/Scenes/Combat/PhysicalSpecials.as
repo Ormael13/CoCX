@@ -6218,21 +6218,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on [themonster], covering the entire area with explosions for ");
 		else outputText("You deploy the missile launcher and aim at [themonster], for a big explosion. ");
-		//var damage:Number = 300 + rand(121);
-		var damage:Number = firearmsDamageNoLagSingle();
-		//damage += player.weaponRangeAttack * 20;
-		//if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack;
-		//if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
-		//if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.12;
-		//if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.18;
+
+		var damage:Number = combat.firearmsDamageNoLagSingle();
+		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
 		//Weapon addition!
-		//damage = combat.rangeAttackModifier(damage);
-		//if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
-		//if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
-		//if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
-		//if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
+		if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
+		if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
+		if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
+		if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType)) {
-			//if (player.hasPerk(PerkLib.ExplosiveCartridge)) damage *= 2;
+			if (player.hasPerk(PerkLib.ExplosiveCartridge)) damage *= 2;
 			if (player.hasKeyItem("Omni Missile") >= 0) damage *= 10;
 			else damage *= 5;
 		}
@@ -6296,6 +6291,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownGravityShots,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
+
+		damage = calcEclypseMod(damage, true);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
@@ -6329,6 +6326,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
+
+		damage = calcVoltageMod(damage, true);
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
@@ -6377,6 +6377,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
+
+		damage = calcGlacialMod(damage, true);
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
@@ -6417,6 +6419,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
+
+		damage = calcInfernoMod(damage, true);
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
 		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;

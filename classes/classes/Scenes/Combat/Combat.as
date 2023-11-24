@@ -4769,7 +4769,6 @@ public class Combat extends BaseContent {
         damage = damage * monster.lustVuln;
         damage = Math.round(damage);
         if (player.hasKeyItem("Lustnade Launcher") >= 0) {
-            player.createStatusEffect(StatusEffects.CooldownLustnadeLauncher, 5, 0, 0, 0);
             outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + Math.round(damage) + " lust damage.");
             monster.teased(Math.round(damage));
         } else {
