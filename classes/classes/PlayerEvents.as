@@ -96,6 +96,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
 				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
 				if (player.hasPerk(PerkLib.Survivalist3)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.Metabolization)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.ImprovedMetabolization)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.GreaterMetabolization)) multiplier -= 0.2;
 				if (player.hasPerk(PerkLib.HighlyVenomousDiet) && player.tailVenom < player.maxVenom()) {
 					if (player.maxHunger() > 1600) multiplier += 0.25;
 					else if (player.maxHunger() > 800) multiplier += 0.25;
@@ -918,7 +921,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
-					if (vthirst.value2 > 0) vthirst.value2--;
+					if (vthirst.value2 > 0) {
+						var delay:Number = 0;
+						if (player.hasPerk(PerkLib.Metabolization)) delay += 1;
+						if (player.hasPerk(PerkLib.ImprovedMetabolization)) delay += 1;
+						if (player.hasPerk(PerkLib.GreaterMetabolization)) delay += 1;
+						if (vthirst.value3 < delay) vthirst.value3++;
+						else {
+							vthirst.value3 -= delay;
+							vthirst.value2--;
+						}
+					}
 					if (vthirst.value2 <= 0) {
 						if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) vthirst.value2 = 3;
 						else if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2) vthirst.value2 = 2;
@@ -2525,7 +2538,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 			}
-
 			if (player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
 				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
 				var ngMWW:Number = (player.newGamePlusMod() + 1);
@@ -2578,7 +2590,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Selachimorphanthropy);
 				needNext = true;
 			}
-
 			if (player.hasPerk(PerkLib.FutaForm)) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
@@ -2691,7 +2702,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-
+			if (flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] > 0) flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] -= 1;
 			//Wrap it up
 			return needNext;
 		}

@@ -26,7 +26,10 @@ import classes.Races;
                 descS += ". You take " + pAcc + "% less damage from Acid";
             }
             if (pTier >= 3){
-                descS += ", ";
+                descS += ". Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent";
+            }
+            if (pTier >= 4){
+                descS += ". Your melee unarmed and feral attack gains tease damage property when you are below 100% health";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -82,7 +85,7 @@ import classes.Races;
 
         public function SlimeFluidMutation() 
 		{
-			super(mName + " IM", mName, SLOT_BLOODSTREAM, 2);
+			super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
         }
         
     }

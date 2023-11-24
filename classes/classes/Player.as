@@ -2771,6 +2771,7 @@ use namespace CoC;
 			// 7: lightning, 8: darkness, 9: poison
 			// 10: wind, 11: water, 12: earth
 			damage = difficultyDamageMultiplier(damage);
+			var physTeaseDmg:Boolean = false;
 			//all dmg reduction effect(s)
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.EnergyDrain)) damage *= 0.8;
 			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
@@ -2801,18 +2802,22 @@ use namespace CoC;
 				if (damage > 0) {
 					switch (damagetype) {
 						case 0: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 1: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 2: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 3: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
@@ -2870,6 +2875,7 @@ use namespace CoC;
 					if (display) SceneLib.combat.CommasForDigits(damage);
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
+					if (physTeaseDmg) CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					dynStats("lus", int(damage / 2), "scale", false);
@@ -6474,18 +6480,22 @@ use namespace CoC;
 
 		public function manticoreFeed():void {
 			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 1) {
+				var duration:Number = 10;
+				if (hasPerk(PerkLib.Metabolization)) duration += 10;
+				if (hasPerk(PerkLib.ImprovedMetabolization)) duration += 10;
+				if (hasPerk(PerkLib.GreaterMetabolization)) duration += 10;
 				if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) {
 					var PowerMultiplier:Number = 1;
 					if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) PowerMultiplier *= 2;
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < (0.50*PowerMultiplier) + (0.5 * (1 + newGamePlusMod()))) {
-						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
+						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(duration*1.5);
 					}
 					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= (1.50*PowerMultiplier) + (1.5 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addDuration(3);
 					}
 				} else {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
-						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(duration);
 					}
 					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= 1.50) {
 						buff("Feeding Euphoria").addDuration(2);
@@ -6506,16 +6516,20 @@ use namespace CoC;
 
 		public function displacerFeed():void {
 			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) {
+				var duration:Number = 10;
+				if (hasPerk(PerkLib.Metabolization)) duration += 10;
+				if (hasPerk(PerkLib.ImprovedMetabolization)) duration += 10;
+				if (hasPerk(PerkLib.GreaterMetabolization)) duration += 10;
 				if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) {
 					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.25 + (0.25 * (1 + newGamePlusMod()))) {
-						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(15);
+						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(duration*1.5);
 					}
 					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75 + (0.75 * (1 + newGamePlusMod()))) {
 						buff("Milking Euphoria").addDuration(3);
 					}
 				} else {
 					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.25) {
-						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(10);
+						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(duration);
 					}
 					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75) {
 						buff("Milking Euphoria").addDuration(2);

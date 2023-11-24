@@ -9,7 +9,6 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
-import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Items.EnchantmentLib;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
@@ -5285,11 +5284,11 @@ public class Combat extends BaseContent {
         {
             if (player.wings.type == Wings.THUNDEROUS_AURA){
                 outputText("You zap your opponent with your aura, delivering a barrage of arousing discharge");
-                LustyEnergyNaturalWeaponAttack(0.20)
-                LustyEnergyNaturalWeaponAttack(0.20)
-                LustyEnergyNaturalWeaponAttack(0.20)
-                LustyEnergyNaturalWeaponAttack(0.20)
-                LustyEnergyNaturalWeaponAttack(0.20)
+                LustyEnergyNaturalWeaponAttack(0.20);
+                LustyEnergyNaturalWeaponAttack(0.20);
+                LustyEnergyNaturalWeaponAttack(0.20);
+                LustyEnergyNaturalWeaponAttack(0.20);
+                LustyEnergyNaturalWeaponAttack(0.20);
             }
             else{
                 if (player.wings.type == Wings.WINDY_AURA){
@@ -5397,7 +5396,8 @@ public class Combat extends BaseContent {
                 monster.teased(Math.round(monster.lustVuln * lustdamage2), false);
                 combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                 if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
-                else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (lustDmg3*5), 0);
+                else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (lustDmg3 * 5), 0);
+				if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
                 outputText("\n")
             }
 			if (player.tail.type == Tail.GARGOYLE || player.tail.type == Tail.GARGOYLE_2){
@@ -6247,8 +6247,10 @@ public class Combat extends BaseContent {
                         damage = Math.round(damage * fireDamage);
 						doFireDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
 						doFireDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
 						if (player.playerHasFourArms()) {
 							doFireDamage(damage, true, true);
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6260,8 +6262,10 @@ public class Combat extends BaseContent {
 						damage = Math.round(damage * iceDamage);
                         doIceDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
                         doIceDamage(damage, true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
 						if (player.playerHasFourArms()) {
 							doIceDamage(damage, true, true);
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
@@ -6295,13 +6299,15 @@ public class Combat extends BaseContent {
 							if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
                         }
                     }
-					else if (player.isUnarmedCombat()) {
+					else if (player.isUnarmedCombat() || IsFeralCombat) {
 						doPhysicalDamage(damage, true, true);
 						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
 						doPhysicalDamage(damage, true, true);
 						if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
 						if (player.statStore.hasBuff("FoxflamePelt")) layerFoxflamePeltOnThis(damage);
+						if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage());
 						if (player.playerHasFourArms()) {
 							doPhysicalDamage(damage, true, true);
 							if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -6372,7 +6378,7 @@ public class Combat extends BaseContent {
                 if (player.weapon is HuntsmansCane) {
                     flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER]++;
                     //Break cane
-                    if (flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] >= 10 && rand(20) == 0) {
+                    if (flags[kFLAGS.ERLKING_CANE_ATTACK_COUNTER] >= 50 && rand(20) == 0) {
                         outputText("\n<b>The cane you're wielding finally snaps! It looks like you won't be able to use it anymore.</b>");
                         player.setWeapon(WeaponLib.FISTS);
                     }
@@ -7410,6 +7416,7 @@ public class Combat extends BaseContent {
 				else curseLib = Math.round(curseLib);
 				player.addCurse("lib", curseLib, 1);
 			}
+			if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
         }/*
         wrathregeneration1();
         fatigueRecovery1();
@@ -7564,6 +7571,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
             }
         }
+		if (player.perkv1(IMutationsLib.SlimeFluidIM) >= 4 && player.HP < player.maxHP()) monster.teased(combat.teases.teaseBaseLustDamage(), false);
     }
 
     public function WeaponMeleeStatusProcs():void {
@@ -9722,8 +9730,7 @@ public class Combat extends BaseContent {
         //Sing
         if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
             outputText("[Themonster] slowly succumbs to [monster his] basest desires as your continous singing compels [monster him] toward increasingly lustful thoughts.");
-            var bonusDamage:int = 10;
-            var LustDamage:int = calculateBasicTeaseDamage(20+rand(bonusDamage));
+            var LustDamage:int = combat.teases.teaseBaseLustDamage();
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
             if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
             var Randomcrit:Boolean = false;
@@ -12156,7 +12163,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = calculateBasicTeaseDamage();
+            damage1B = combat.teases.teaseBaseLustDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -12183,7 +12190,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = calculateBasicTeaseDamage();
+            damage1B = combat.teases.teaseBaseLustDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -12212,7 +12219,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = calculateBasicTeaseDamage();
+            damage1B = combat.teases.teaseBaseLustDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -12240,7 +12247,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            damage1B = calculateBasicTeaseDamage();
+            damage1B = combat.teases.teaseBaseLustDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -12928,8 +12935,7 @@ public function SingIntensify(Bee:Boolean = false):void {
 public function SingArouse(Bee:Boolean = false):void {
     clearOutput();
     outputText("You continue singing. Your compelling voice reaches far up to your opponent’s ears insidiously increasing [monster his] lust for you.");
-    var bonusDamage:int = 10;
-    var LustDamage:int = calculateBasicTeaseDamage(20+rand(bonusDamage));
+    var LustDamage:int = combat.teases.teaseBaseLustDamage();
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) LustDamage += scalingBonusIntelligence();
     if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) LustDamage += scalingBonusIntelligence();
     var Randomcrit:Boolean = false;
@@ -12977,11 +12983,10 @@ public function SingCaptivate():void {
 public function SingDevastatingAria():void {
     clearOutput();
     outputText("You unleash a devastating wave of sound!");
-    var bonusDamage:int = 10;
-        var damage:Number = (calculateBasicTeaseDamage(20+rand(bonusDamage)));
-        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= scalingBonusIntelligence();
-        if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= scalingBonusIntelligence();
-        damage *= player.statusEffectv1(StatusEffects.Sing);
+    var damage:Number = combat.teases.teaseBaseLustDamage();
+    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) damage *= scalingBonusIntelligence();
+    if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) damage *= scalingBonusIntelligence();
+    damage *= player.statusEffectv1(StatusEffects.Sing);
     //Determine if critical hit!
     var crit:Boolean = false;
     var critChance:int = 5;
@@ -13010,75 +13015,6 @@ public function SingOut():void {
     outputText("You stop singing and resume fighting normally.\n\n");
     player.removeStatusEffect(StatusEffects.Sing);
     enemyAI();
-}
-
-public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
-    var damage:Number = BaseTeaseDamage + rand(6);
-    var bimbo:Boolean = false;
-    var bro:Boolean = false;
-    var futa:Boolean = false;
-
-    if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
-    if (player.hasPerk(PerkLib.BroBody)) bro = true;
-    if (player.hasPerk(PerkLib.FutaForm)) futa = true;
-
-    if (player.hasPerk(PerkLib.SensualLover)) damage += 6;
-    if (player.hasPerk(PerkLib.Seduction)) damage += 15;
-    damage += (2 * player.teaseDmgStat.value);
-    if (bimbo || bro || futa) {
-        damage += 15;
-    }
-    //partial skins bonuses
-    switch (player.coatType()) {
-        case Skin.FUR:
-            damage += (1 + player.newGamePlusMod());
-            break;
-        case Skin.SCALES:
-            damage += (2 * (1 + player.newGamePlusMod()));
-            break;
-        case Skin.CHITIN:
-            damage += (3 * (1 + player.newGamePlusMod()));
-            break;
-        case Skin.BARK:
-            damage += (4 * (1 + player.newGamePlusMod()));
-            break;
-    }
-    if (player.hasPerk(PerkLib.FlawlessBody)) damage += 20;
-    damage += scalingBonusLibido() * 0.2;
-    if (player.hasPerk(PerkLib.GracefulBeauty)) damage += scalingBonusSpeed() * 0.1;
-    if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
-    else damage += player.teaseLevel * 2;
-    if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
-
-    var damagemultiplier:Number = 1;
-    if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
-    if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-    if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
-    if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
-    if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) damage *= (1 + ((10 + rand(11)) / 100));
-    if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
-    if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-    if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
-    if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
-	if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
-    damage *= damagemultiplier;
-    if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-    if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
-    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-        outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-        player.takeLustDamage(Math.round(-damage)/40, true);
-        damage *= 1.2;
-    }
-    if (player.perkv1(PerkLib.ImpNobility) > 0) {
-        damage *= (100+player.perkv1(PerkLib.ImpNobility))/100;
-    }
-    for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
-        damage *= f.power * (player.isRaceCached(f.race)? 3:2);
-    }
-    damage = (damage * monster.lustVuln);
-    if (SceneLib.urtaQuest.isUrta()) damage *= 2;
-    damage = Math.round(damage);
-    return damage;
 }
 
 public function Straddle():void {
@@ -13133,8 +13069,7 @@ private var StraddleDamage:Number
 private var Randomcrit:Boolean;
 public function StraddleTease():void {
     clearOutput();
-    var bonusDamage:int = 10;
-    StraddleDamage = calculateBasicTeaseDamage(20+rand(bonusDamage));
+    StraddleDamage = combat.teases.teaseBaseLustDamage();
     if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
     //Determine if critical tease!
     Randomcrit = false;
@@ -13688,7 +13623,7 @@ public function ScyllaTease():void {
         //==============================
         //Determine basic damage.
         //==============================
-        damage = calculateBasicTeaseDamage(6 + rand(10));
+        damage = combat.teases.teaseBaseLustDamage();
         chance += 2;
         //Specific cases for slimes and demons, as the normal ones would make no sense
         if (monster.short == "demons") {
@@ -13851,7 +13786,7 @@ public function SwallowTease():void {
         //==============================
         //Determine basic damage.
         //==============================
-        damage = calculateBasicTeaseDamage(6 + rand(10));
+        damage = combat.teases.teaseBaseLustDamage();
         chance += 2;
         //Specific cases for slimes and demons, as the normal ones would make no sense
         if (monster is GreenSlime) {

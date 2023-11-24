@@ -5089,7 +5089,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
 		else damage += 80;
 		//Lust damage!
-		var lustdamage:Number = combat.calculateBasicTeaseDamage(35);
+		var lustdamage:Number = combat.teases.teaseBaseLustDamage();
 		if (player.hasPerk(PerkLib.JobSeducer)) lustdamage += player.teaseLevel * 3;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustdamage *= 1.50;

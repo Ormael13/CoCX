@@ -2509,16 +2509,17 @@ public class SaveUpdater extends NPCAwareContent {
 					if (player.hairColor != "pink") player.hairColor = "pink";
 				}
 				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && player.hairColor != "golden blonde") player.hairColor = "golden blonde";
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.14;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.16) {
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) transformations.SkinPatternBeeStripes.applyEffect();
 				var libStat:BuffableStat = player.statStore.findBuffableStat("lib");
 				var currentWeakness:Number = libStat.valueOfBuff("Weakened");
 				if (currentWeakness > 0) libStat.removeBuff("Weakened");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.17) {
-				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) transformations.SkinPatternBeeStripes.applyEffect();
+				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.18) {

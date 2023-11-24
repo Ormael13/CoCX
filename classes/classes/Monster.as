@@ -3360,7 +3360,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.Swallowed)) {
 				if (rand(3)) {
 					outputText("The many fleshy tentacles lining your inner walls slither around [themonster], seeking out and caressing [monster his] vulnerable endowments as you insidiously try to draw [monster him] closer to cumming.\n\n");
-					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(7)));
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage());
 				}
 				if (!hasStatusEffect(StatusEffects.SandWormAcid))
 					createStatusEffect(StatusEffects.SandWormAcid, 1, 0, 0, 0);
@@ -3485,7 +3485,7 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store18 *= 1.2;
 					store18 = SceneLib.combat.fixPercentDamage(store18);
 					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
-					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(3)));
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage());
 					outputText("\n\n");
 				}
 			}
