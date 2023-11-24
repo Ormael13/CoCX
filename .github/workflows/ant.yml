@@ -6,12 +6,16 @@ name: ActionScript 3 CI
 # Github workflows do not support actionscript directly.
 # However the build uses ant, which is usually used to build java projects.
 # The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
+permissions:
+  contents: write
 
 on:
   #Pushes/changes to CoC.as should trigger this. Which should basically only consist of version updates, and maybe the rare settings change.
   push:
     paths:
       - 'classes/classes/CoC.as'
+    tags:
+      - 'v0\.8[A-Za-z]\.[A-Za-z0-9]+'
   #Manual trigger run. Only works once this is in the main branch.
   workflow_dispatch:
   #Scheduled run. Only works once this is in the main branch.
