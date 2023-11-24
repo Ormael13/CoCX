@@ -6218,7 +6218,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on [themonster], covering the entire area with explosions for ");
 		else outputText("You deploy the missile launcher and aim at [themonster], for a big explosion. ");
-		var damage:Number = 300 + rand(121);
+		//var damage:Number = 300 + rand(121);
+		var damage:Number = firearmsDamageNoLagSingle();
 		//damage += player.weaponRangeAttack * 20;
 		//if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack;
 		//if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza

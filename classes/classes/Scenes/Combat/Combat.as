@@ -2157,9 +2157,7 @@ public class Combat extends BaseContent {
         // DAMAGE
         //------------
         //Determine damage
-        //BASIC DAMAGE STUFF
-        damage += player.str;
-        damage += scalingBonusStrength() * 0.25;
+        //BASIC DAMAGE STUFF        
         if (player.hasKeyItem("HB Agility") >= 0) {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
@@ -2168,6 +2166,10 @@ public class Combat extends BaseContent {
 				damage += scalingBonusSpeed() * 0.10;
 			}
 		}
+
+        damage += meleeDamageNoLagSingle();
+
+
         if (damage < 10) damage = 10;
 		if (player.isInGoblinMech()) {
 			damage *= 1.3;
@@ -4105,13 +4107,13 @@ public class Combat extends BaseContent {
             if (monster is EncapsulationPod) {
                 outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
                 if (player.isInGoblinMech()) {
-                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot the pod with your mech’s repeater gun for ");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun for ");
+                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot the pod with your mech’s repeater gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun");
                 }
             } else if (monster.plural) {
                 if (player.isInGoblinMech()) {
-                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent with your mech’s repeater gun for ");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun for ");
+                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent with your mech’s repeater gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun");
                 } else {
                     var textChooser1:int = rand(12);
                     if (textChooser1 >= 9) {
@@ -4126,8 +4128,8 @@ public class Combat extends BaseContent {
                 }
             } else {
                 if (player.isInGoblinMech()) {
-                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun for ");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun for ");
+                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun");
                 } else {
                     var textChooser2:int = rand(12);
                     if (textChooser2 >= 9) outputText("[Themonster] looks down at the mark left by the " + ammoWord + " on it body");
@@ -4301,6 +4303,7 @@ public class Combat extends BaseContent {
 							}
 							else doPhysicalDamage(damage, true, true);
 						}
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
 					}
                 } else {
                     if (!MSGControll) {
@@ -4772,10 +4775,11 @@ public class Combat extends BaseContent {
         } else {
             outputText("You spray a cloud of aphrodisiac with your gas gun. [themonster] tries to pinch [monster his] nose and hold [monster his] breath ");
             if (rand(100) > 25) {
-                outputText("but it’s too late and you can see arousal flushing [themonster] skin for " + Math.round(monster.lustVuln * damage) + " lust damage.");
+                outputText("but it’s too late and you can see arousal flushing [themonster] skin.\n");
                 monster.teased(Math.round(damage));
             } else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
         }
+        outputText("\n\n")
         if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
         enemyAI();
     }
