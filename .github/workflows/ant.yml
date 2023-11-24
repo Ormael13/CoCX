@@ -96,3 +96,14 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
         continue-on-error: true
+
+      - name: Release step
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          generate_release_notes: true
+          files: |
+            target/CoC-Mobile-armv8.apk
+            target/CoC-Mobile-armv7.apk
+            target/CoC-release.swf
+            target/CoC-debug.swf
