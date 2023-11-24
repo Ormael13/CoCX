@@ -4554,7 +4554,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
-		damage *= combat.meleePhysicalForce();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;

@@ -20,6 +20,7 @@ import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
+import classes.Stats.BuffableStat;
 
 use namespace CoC;
 
@@ -2509,28 +2510,30 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && player.hairColor != "golden blonde") player.hairColor = "golden blonde";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.15;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.15) {
-				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) transformations.SkinPatternBeeStripes.applyEffect();
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.16) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
-			}
+				var libStat:BuffableStat = player.statStore.findBuffableStat("lib");
+				var currentWeakness:Number = libStat.valueOfBuff("Weakened");
+				if (currentWeakness > 0) libStat.removeBuff("Weakened");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.17) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) transformations.SkinPatternBeeStripes.applyEffect();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.18) {
 				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.19) {
 				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.20) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.21) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.21;
 			}*/

@@ -4220,8 +4220,6 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
             if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage*=1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
-            damage *= player.jewelryRangeModifier();
-            damage *= firearmsForce();
             //Determine if critical hit!
 			var crit:Boolean;
             var critChance:Number = calculateCritFirearms();
