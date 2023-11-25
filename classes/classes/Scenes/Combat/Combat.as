@@ -2234,8 +2234,30 @@ public class Combat extends BaseContent {
             }
         }
         outputText("\n");
-        meleeMasteryGain(1, crit? 1 : 0);
-        WeaponMeleeStatusProcs();
+
+        //Chainsword weapon procs
+        if (monster.canMonsterBleed() && (player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2)) {
+            if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+            if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
+            else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+
+            if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [weapon] leave behind.");
+            else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] left behind.");
+        }
+
+        if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
+            outputText("\nReeling in pain [themonster] begins to burn.");
+            if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+            else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+        }
+
+        //Gain weapon experience when using goblin weapons
+        if (player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2 || player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) {
+            var hitCounter:int = player.vehicles == vehicles.HB_MECH? 2: 1;
+            var critCounter:int = crit? 1: 0;
+            meleeMasteryGain(hitCounter, critCounter);
+        }
+
         checkAchievementDamage(damage);
 		WrathGenerationPerHit2(5);
         heroBaneProc(damage);
@@ -2248,7 +2270,7 @@ public class Combat extends BaseContent {
             doNext(endLustVictory);
             return;
         }
-        outputText("\n");
+        outputText("\n\n");
         wrathregeneration1();
         fatigueRecovery1();
         manaregeneration1();
@@ -7616,12 +7638,12 @@ public class Combat extends BaseContent {
         }
         //Burn chances
         if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
-            outputText("  Reeling in pain [themonster] begins to burn.");
+            outputText("\nReeling in pain [themonster] begins to burn.");
             if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
             else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
         }
         if (player.weapon == weapons.ATWINSCY) {
-            outputText("  Reeling in pain [themonster] begins to burn.");
+            outputText("\nReeling in pain [themonster] begins to burn.");
             if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,3);
             else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
             if (monster.mana > 100)
@@ -7708,20 +7730,20 @@ public class Combat extends BaseContent {
 			}
 		}
         if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
-                        var lust0damage:Number = 35 + rand(player.lib / 10);
-                        lust0damage *= 0.14;
-                        if (player.armor == armors.ELFDRES && player.isElf()) lust0damage *= 2;
-                        if (player.armor == armors.FMDRESS && player.isWoodElf()) lust0damage *= 2;
-                        monster.teased(Math.round(monster.lustVuln * lust0damage));
-                        monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                        if (player.hasPerk(PerkLib.WoundPoison)){
-                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
-                            else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
-                        }
-                    }
+            var lust0damage:Number = 35 + rand(player.lib / 10);
+            lust0damage *= 0.14;
+            if (player.armor == armors.ELFDRES && player.isElf()) lust0damage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) lust0damage *= 2;
+            monster.teased(Math.round(monster.lustVuln * lust0damage));
+            monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
+            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+                monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+            if (player.hasPerk(PerkLib.WoundPoison)){
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
+                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+            }
+        }
     }
 
     public function WeaponRangeStatusProcs():void {
