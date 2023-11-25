@@ -95,12 +95,22 @@ import classes.StatusEffects.VampireThirstEffect;
 			player.createStatusEffect(StatusEffects.CompBoostingPCArmorValue, 0, 0, 0, 0);
 		}
 		public function neisaCombatActions3():void {
-			outputText("Neisa smashes her shield on [themonster]’s head, stunning it.\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			outputText("Neisa smashes her shield on [themonster]’s head, ");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				outputText("stunning it.\n\n");
+			} else {
+				outputText("but the enemy endured it.\n\n");
+			}
 		}
 		public function neisaCombatActions4():void {
-			outputText("Neisa viciously ram her shield on [themonster], dazing it.\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			outputText("Neisa viciously rams her shield on [themonster], ");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				outputText("dazing it.\n\n");
+			} else {
+				outputText("but the enemy endured it.\n\n");
+			}
 		}
 		
 		public function dianaCombatActions():void {
@@ -210,8 +220,13 @@ import classes.StatusEffects.VampireThirstEffect;
 			outputText("\n\n");
 		}
 		public function etnaCombatActions3():void {
-			outputText("Etna dives at [themonster] and crashes boob first into [monster his] face, staggering it before taking flight again.\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			outputText("Etna dives at [themonster] and crashes boob first into [monster his] face, ");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				outputText("staggering it before taking flight again.\n\n");
+			} else {
+				outputText("but the enemy shook off the blow.\n\n");
+			}
 		}
 		
 		public function auroraCombatActions():void {
@@ -291,8 +306,12 @@ import classes.StatusEffects.VampireThirstEffect;
 			dmg3a = Math.round(dmg3a * increasedEfficiencyOfAttacks());
 			outputText("Aurora flaps her huge bat wings at [themonster] trying to knock it down. ");
 			doDamage(dmg3a, true, true);
-			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				outputText("\n\n");
+			} else {
+				outputText("However, [themonster] was able to stand their ground.\n\n");
+			}
 		}
 		
 		public function ghoulishVampServCombatActions():void {
@@ -345,7 +364,11 @@ import classes.StatusEffects.VampireThirstEffect;
 				dmg03 = Math.round(dmg03 * increasedEfficiencyOfAttacks());
 				outputText("[Themonster] is pinned under your ghoulish partner's body!");
 				doDamage(dmg03, true, true);
-				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				} else {
+					outputText("\nHowever, [Themonster] was able to get free!");
+				}
 			}
 			else outputText("[Themonster] manages to shove your servant back!");
 			outputText("\n\n");
@@ -475,8 +498,12 @@ import classes.StatusEffects.VampireThirstEffect;
 			damage1 = Math.round(damage1 * increasedEfficiencyOfAttacks());
 			outputText("Alvina incants a spell and freezes the enemy solid, now's your chance! ");
 			doIceDamage(damage1, true, true);
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			} else {
+				outputText("\nHowever, [Themonster] was able to break out of its prison!");
+			}
 			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		public function alvinaCombatActions2():void {
 			var lustDmg:Number = Math.round(player.statusEffectv2(StatusEffects.CombatFollowerAlvina) / 3);
@@ -509,9 +536,13 @@ import classes.StatusEffects.VampireThirstEffect;
 			damage2 += scalingBonusIntelligenceCompanion() * 4;
 			damage2 = Math.round(damage2 * increasedEfficiencyOfAttacks());
 			if (monster.plural) damage2 *= 5;
+			outputText("Alvina sighs in annoyance and tosses a fireball which explodes on impact, setting "+(monster.plural ? "all ":"")+"the enem"+(monster.plural ? "ies ":"y")+" on fire!\n\n");
 			doFireDamage(damage2);
-			outputText("Alvina sighs in annoyance and tosses a fireball which explodes on impact, setting "+(monster.plural ? "all ":"")+"the enem"+(monster.plural ? "ies ":"y")+" on fire! (<b><font color=\"#800000\">" + String(damage2) + "</font></b>)\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			} else {
+				outputText("However, [Themonster] quickly regains their bearings!\n\n");
+			}
 		}
 		public function alvinaCombatActions5():void {
 			var dmg:Number = player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
@@ -897,10 +928,14 @@ import classes.StatusEffects.VampireThirstEffect;
 			else if (weaponZenji >= 151 && weaponZenji < 201) dmg13 *= (4.75 + ((weaponZenji - 150) * 0.015));
 			else dmg13 *= (5.5 + ((weaponZenji - 200) * 0.01));
 			dmg13 = Math.round(dmg13 * increasedEfficiencyOfAttacks());
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			outputText("Zenji charges at [themonster], knocking them down and pinning them beneath him with his spear. ");
 			doDamage(dmg13, true, true);
-			outputText(" Zenji has [themonster] pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. [Themonster] struggles beneath him before finally shaking him off.\n\n");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				outputText(" Zenji has [themonster] pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts.\n\n");
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			} else {
+				outputText(" Zenji has [themonster] pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. [Themonster] struggles beneath him before finally shaking him off.\n\n");
+			}
 		}
 		public function zenjiCombatActions5():void {
 			outputText("Seeing your injuries, Zenji quickly rushes to your side, \"<i>It’s okay [name]... I’m here for you…</i>\" he says, wrapping you within his arms, completely shielding you from your enemies. ");
