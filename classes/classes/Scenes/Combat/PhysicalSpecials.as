@@ -873,7 +873,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 1;
-		PAMulti += combat.PASPAS();
+		PAMulti += combat.PASPAS(1);
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry1 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 			if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
 				PAMulti += 0.5;
@@ -921,8 +921,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.wrath > player.maxWrath()) EngineCore.WrathChange( -player.maxWrath());
-		else player.wrath = 0;
+		var PAC:Number = 0;
+		if (player.hasPerk(PerkLib.PowerAttackSu)) PAC += Math.round(player.wrath * 0.5);
+		else {
+			if (player.wrath > player.maxWrath()) PAC += player.maxWrath();
+			else PAC += player.wrath;
+		}
+		EngineCore.WrathChange(-PAC);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -933,7 +938,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("With one smooth motion you "+(player.weaponRangePerk == "Throwing"?"throw":"fire")+" your deadly projectile at one of your opponent"+(monster.plural ? "s":"")+" ");
 		var damage:Number = 0;
 		var PSMulti:Number = 1;
-		PSMulti += combat.PASPAS();
+		PSMulti += combat.PASPAS(2);
 		if (player.weaponRangePerk == "Bow") {
 			damage += combat.rangeDamageNoLagSingle(0);
 			if (combat.maxBowAttacks() > 1) damage *= combat.maxBowAttacks();
@@ -987,8 +992,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
-		if (player.wrath > player.maxWrath()) EngineCore.WrathChange( -player.maxWrath());
-		else player.wrath = 0;
+		var PSC:Number = 0;
+		if (player.hasPerk(PerkLib.PowerAttackSu)) PSC += Math.round(player.wrath * 0.5);
+		else {
+			if (player.wrath > player.maxWrath()) PSC += player.maxWrath();
+			else PSC += player.wrath;
+		}
+		EngineCore.WrathChange(-PSC);
 		combat.heroBaneProc(damage);
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
@@ -1421,7 +1431,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You take some distance before making a U-turn and charge at your opponent with all your might, impaling them on your [weapon]. ");
 		var damage:Number = 0;
 		var PAM2:Number = 1;
-		PAM2 += combat.PASPAS();
+		PAM2 += combat.PASPAS(1);
 		damage += combat.meleeDamageNoLagSingle();
 		if (damage < 10) damage = 10;
 		damage *= 3;
