@@ -31,7 +31,6 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog49():void {
 			clearOutput();
-			//0 of 11 pages
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-New tier 0 strength lvl-up perk: Power Attack. Req. Job: Warrior perk. Effect: Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)\n");
 			outputText("-New tier 1 misc lvl-up perk: Twin Thunder. Req. Power Attack or Power Shot perk. Effect: When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.\n");
@@ -45,8 +44,11 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Slime Fluid (Primitive). Req. Slime Fluid and lvl 30+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 50% less damage from Acid.\n");
 			outputText("-New mutation perk: Slime Metabolism (Primitive). Req. Slime Metabolism and lvl 30+. Effects: When taking an intake of fluid heal for 3% of your hp, mana and fatigue. Increase all grappling tease damage by 50%.\n");
 			outputText("-New mutation perk: Arigean Association Cortex (Evolved). Req. Arigean Association Cortex (Primitive) and lvl 60+. Effects: Your way of thinking has become identical to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 90% more damage and now cost 30% less mana, additionally your mana regen is increased by 10% of your toughness.\n");
+			outputText("-New mutation perk: Slime Fluid (Evolved). Req. Slime Fluid (Primitive) and lvl 60+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 75% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent.\n");
 			outputText("-New mutation perk: Slime Metabolism (Evolved). Req. Slime Metabolism (Primitive) and lvl 60+. Effects: When taking an intake of fluid heal for 4% of your hp, mana and fatigue. Increase all grappling tease damage by 75%. Gain temporary regeneration +1% after a fluid intake for one hour.\n");
 			outputText("-New mutation perk: Black Heart (Final Form). Req. Black Heart (Evolved) and lvl 90+. Effect: Increased Lust strike power, empower Fascinate, adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 2, adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). ");
+			outputText("-New mutation perk: Slime Fluid (Final Form). Req. Slime Fluid (Evolved) and lvl 90+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 100% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent. ");
+			outputText("Your melee unarmed and feral attack gains tease damage property when you are below 100% health.\n");
 			outputText("-New mutation perk: Slime Metabolism (Final Form). Req. Slime Metabolism (Evolved) and lvl 90+. Effects: When taking an intake of fluid heal for 5% of your hp, mana and fatigue. Increase all grappling tease damage by 100%. Gain temporary regeneration +2% after a fluid intake for one hour. Fluid intake heals all status damage, drains and weakening by 5% per intake.\n");
 			outputText("Facinate Stun lasts 2 turns, count your lust for twice as high when using Lust strike and it’s now benefit from all effects that pertain to the tease action.\n");
 			outputText("-New event perk: Familiar. Gained by becoming pureblood vampire (tier 2 vampire) and talking about vampirism with Diva OR by becoming fiendish vampire (tier 1 dracula/lina). Effects: Your blood is highly infectious feeding it to a willing or unwilling creature can either turn them into a lesser vampire or a ghoul.\n");
@@ -54,6 +56,7 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen II - gained by giving Dinah 2x Harkonnen weapons and 4,500 gems for workers work fee (no she's outsourcing the work force and need to pay them... they can't run only on strong alcohol do they?). Cost 10,460 gems. Base atk is 260 and ammo clip size 2. Lowering range accuracy by 50%. It's Dual 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Stomiidae fillet. Cost 10 gems. Can be bought at food stand in Trench. Eating it would restore 30 hunger.\n");
 			outputText("-New consumable (by Sylabt & Ohaxer): Calamari Steak. Cost 15 gems. Can be bought at food stand in Trench. Eating it would restore 45 hunger.\n");
+			//3 of 11 pages
 			outputText("-Starting traits desc on choice screen corrected to avoid misleading players (they are most of the time +50% stat multi bonuses (or just 50 sens) not +x% to maximum.\n");
 			outputText("-While using Telekinetic Grab can do much more than simple biting like.. teasing, using m. specials or spellcasting. Also cooldown for using it increased from 6 to 12 turns.\n");
 			outputText("-Due to confusion which range weapon can be used when in goblin mech with upgraded range weapon part all compatibile weapons have now added line in description stating they are compatibile with it.\n");
@@ -106,9 +109,6 @@ public class Changelog extends BaseContent
 			outputText("-Deer race bonuses been updated to current races standards. At 8+ points in racial score they getting bonuses (deer): +25% to str & tou multi, +50% to spe multi, -20% to int multi and +40% to wis multi.\n");
 			outputText("-The 'charview armor' toggle in the display settings should now work as intended. Fixed kirin horn being mis-aligned compared to unicorn horn. (Lord Shadeogorath)\n");
 			outputText("-All the tease related dmg calculation been unified to use one function. It may make some specials weaker or stronger but also made them all easier to compare and adjust.\n");
-			outputText("-New mutation perk: Slime Fluid (Evolved). Req. Slime Fluid (Primitive) and lvl 60+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 75% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent.\n");
-			outputText("-New mutation perk: Slime Fluid (Final Form). Req. Slime Fluid (Evolved) and lvl 90+. Effects: Your bodily fluids are self conscious and do not leave you easily. All bleed damage taken is negated. You take 100% less damage from Acid. Your blood takes on aphrodisiac property when taking melee physical damage your blood lash out teasing your opponent. ");
-			outputText("Your melee unarmed and feral attack gains tease damage property when you are below 100% health.\n");
 			outputText("-Erlking Cane durability increased from 10 to 50 and now it would slowly over time restore itself by 1 durability per hour.\n");
 			outputText("-New tier 0 misc lvl-up perk: Metabolization. Req. Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
 			outputText("-New tier 3 misc lvl-up perk: Improved Metabolization. Req. Metabolization perk; Slime, Manticore, Displacer beast, Vampire, Dracula race or hunger enabled. Effect: Increase the duration of lingering nourishment effects by an extra 100% of base duration. And slows hunger progression if any(note does not raise racial scores).\n");
@@ -117,8 +117,9 @@ public class Changelog extends BaseContent
 			outputText("-Feeding Euphoria and Milking Euphoria speed bonus would be now based on speed value rather then been speed multi bonus.\n");
 			outputText("-New tier 7 speed lvl-up perk: Power Shot (Su). Req. Power Shot (Ex). Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
 			outputText("-New tier 7 strength lvl-up perk: Power Attack (Su). Req. Power Attack (Ex) perk. Effect: Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).\n");
-			outputText("-\n");
-			outputText("-\n");
+			//8.11
+			outputText("-Changed manaShieldAbsorb function. (NUZ/Shirane)\n");
+			outputText("-Goblin mech code changes. Fixed text formatting errors for shooting from a goblin mech. Mech melee damage now scales from int. Mech melee attacks gain weapon experience and weapon procs when using mech weapons. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -136,6 +137,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
@@ -196,11 +203,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -227,8 +230,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

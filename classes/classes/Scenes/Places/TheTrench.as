@@ -216,6 +216,7 @@ public function theTrenchEntrance():void {
 	theTrenchMain1();
 	menu();
 	addButton(2, "Food Stand", theTrenchFoodStand);
+	addButton(3, "Grayda", theTrenchGraydaQuestNPC);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 private function theTrenchMain():void {
