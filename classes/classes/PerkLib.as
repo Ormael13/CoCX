@@ -409,9 +409,9 @@ public class PerkLib
 		public static const PowerShotSu:PerkType = mk("Power Shot (Su)", "Power Shot (Su)",
 				"Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
 				"You've chosen the 'Power Shot (Su)' perk. Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
-	//	public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
-	//			".",
-	//			"You've chosen the 'Twin Thunder' perk, .");
+		public static const Penetrator:PerkType = mk("Penetrator", "Penetrator",
+				"Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)",
+				"You've chosen the 'Penetrator' perk. Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)");
 		
 		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -6148,6 +6148,9 @@ public class PerkLib
 					.requireLevel(6);*/
             MagiculesTheory.requireWis(50)
                     .requireLevel(6);
+            Penetrator.requireWis(60)
+                    .requirePerks(JobRanger, Precision)
+					.requireLevel(6);
             JobMonk.requireAdvancedJobSlot()
 					.requirePerk(JobSoulCultivator)
 					.requireWis(40)

@@ -6223,9 +6223,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on [themonster], covering the entire area with explosions for ");
 		else outputText("You deploy the missile launcher and aim at [themonster], for a big explosion. ");
-
 		var damage:Number = combat.firearmsDamageNoLagSingle();
-		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
+		if (!player.hasPerk(PerkLib.Penetrator)) damage *= (monster.damageRangePercent() / 100);
 		//Weapon addition!
 		if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
 		if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;

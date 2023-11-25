@@ -35,6 +35,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 0 strength lvl-up perk: Power Attack. Req. Job: Warrior perk. Effect: Enable Power Attack p. special. Add ~20% of base stat scaling value to melee damage. (+5% melee physical attacks multiplier)\n");
 			outputText("-New tier 1 misc lvl-up perk: Twin Thunder. Req. Power Attack or Power Shot perk. Effect: When using more than one weapon at once power attack/strike now delivers as many hits as used weapons.\n");
 			outputText("-New tier 2 intelligence lvl-up perk: High Tide. Req. Grand Mage & Channeling perks, 75+ int and any water spell or special. Effect: Cumulative 40% damage increase for every subsequent water spell. Each turn without cast water spell lower damage by 40% down to normal (100%) damage. Maximum 5 stacks.\n");
+			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
 			outputText("-New tier 5 intelligence lvl-up perk: High Tide (Ex). Req. High Tide & Grand Archmage perks, 150+ int. Effect: Increase to cumulative damage by 20%. Penalty for turn without casted water spell decreased by 10%. Maximum 15 stacks.\n");
 			outputText("-New tier 9 intelligence lvl-up perk: High Tide (Su). Req. High Tide (Ex) & Grand Archmage (3rd circle) perks, 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling water based attack. Penalty for turn without casted water spell decreased by another 10%. Maximum 75 stacks.\n");
 			outputText("-New mutation perk: Arigean Association Cortex. Req. having free nerv system mutation slot, arigean race. Effects: Overtime your way of thinking has changed to be more alike to that of an Arigean. Charged shot, Mana shot and Mana Barrage all deal 20% more damage.\n");
@@ -85,11 +86,10 @@ public class Changelog extends BaseContent
 			outputText("-Using Pigment in crafting now properly removes the pigment. Selecting the last pigment in your inventory for crafting doesn't automatically remove it. (Demojay)\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-\n");
 			//outputText("-New usable item: Purple Crystal. Costing 5 gems and it's obtainable from uncrafting 6 purple crystal shards. Can be used to disturb time flow or given to npc's that could use it for something to benefit pc.\n");
 			//outputText("-New usable item: Large Purple Soul Crystal Shard. Costing 5 gems and it's obtainable from uncrafting 3 purple crystal shards and 3 Soul Residues. Can be used as food / nurishment by some of mist beings.\n");
 			outputText("-Fixed a problem where arigean legs sprite were doing a hostile takeover of people's legs. Also Grayda NPC sprite implementation. Implemented arigean aura(s), and added Sylabt's edits/improvements to my arigean sprites. (Lord Shadeogorath)\n");
-			outputText("-New tier 3 strength lvl-up perk: Power Attack (Ex). Req. Power Attack perk. Effect: Power Attack p. special damage increased by ~2x. Add ~30% of base stat scaling value to melee damage & power attack multi factor. (+15% melee physical attacks multiplier)\n");
 			outputText("-Power Shot effects changed to: Enable Power Shot p. special. Add ~20% of base stat scaling value to range (not for firearms) damage. Power Shot (Ex) effects changed to: Power Shot p. special damage increased by ~2x. Add ~30% of base stat scaling value to range (not for firearms) damage & power attack multi factor. Range physical attacks multiplier increased not changed for both perks.\n");
 			outputText("-Bows/Crossbows/Throwing range weapons base dmg scaling been changed and specials using those weapons also use that new scaling. Spe (x2) + Str (x1) for bows, Spe (x2) + range weapon atk (x20) for crossbows, Spe (x1) + Str (x2) for throwing weapons.\n");
 			outputText("-Added snow white & midnight black colors to demon skin choices when using tf item.\n");
@@ -120,8 +120,9 @@ public class Changelog extends BaseContent
 			//8.11
 			outputText("-Changed manaShieldAbsorb function. (NUZ/Shirane)\n");
 			outputText("-Goblin mech code changes. Fixed text formatting errors for shooting from a goblin mech. Mech melee damage now scales from int. Mech melee attacks gain weapon experience and weapon procs when using mech weapons. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 1 wisdom lvl-up perk: Penetrator. Req. Job: Ranger & Precision perks, 60+ wis. Effect: Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)\n");
+			outputText("-Followers can no longer stun resolute enemies. Boss/Elite/Champion Type enemies gain a temporary resistance to stuns for 2 rounds after coming out of stun, except for Alvina when preparing an ultimate attack. Alvina's 'Beyond gods and mortals' achievement now activates when beating her in the pure route in Xianxia mode. ");
+			outputText("Blonde Kitsune sex scenes can no longer be done if the player doesn't have a cock, preventing errors. (Demojay)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

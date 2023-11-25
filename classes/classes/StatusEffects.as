@@ -1290,4 +1290,3 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
-
