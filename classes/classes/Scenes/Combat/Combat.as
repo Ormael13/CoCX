@@ -2252,7 +2252,7 @@ public class Combat extends BaseContent {
         }
 
         //Gain weapon experience when using goblin weapons
-        if (player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2 || player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) {
+        if (player.isUsingMechMeleeWeapons()) {
             var hitCounter:int = player.vehicles == vehicles.HB_MECH? 2: 1;
             var critCounter:int = crit? 1: 0;
             meleeMasteryGain(hitCounter, critCounter);
