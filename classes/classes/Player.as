@@ -2715,11 +2715,34 @@ use namespace CoC;
 		}
 		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
 			var magicmult:Number = 1;
+			var returnDamage:Number = 0;
+
 			if (hasPerk(PerkLib.ImprovedManaShield)) magicmult *= 0.25;
 			// if magical damage, double efficiency
 			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
+			// Begin of mana/damage absorb calculation
+			// Could restructure that have defend greysage intelligence perk just reduce damage to 0
+			// And put back mana to 0 if less than 0 at the end
+			mana -= damage * magicmult;
+
+			if(mana < 0)
+			{
+				// If dont have following perk, calculating leftover damage
+				if(!(hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))){
+					returnDamage = Math.round(mana / magicmult);
+				}
+				mana = 0;
+			}
+
+			if(display) SceneLib.combat.CommasForDigits(damage - returnDamage, false, "Absorbed ");
+
+			game.mainView.statsView.showStatDown('mana');
+			dynStats("lus", 0);
+
+			return returnDamage;
+			/* Legacy backup in case of shit wrong
 			if ((damage * magicmult <= mana) || (hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))) {
 				if (damage * magicmult > mana) mana = 0;
 				else mana -= (damage * magicmult);
@@ -2737,6 +2760,7 @@ use namespace CoC;
 				dynStats("lus", 0); //Force display arrow.
 				return damage;
 			}
+			*/
 		}
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
 			if (hasPerk(PerkLib.BloodAffinity)) damage = Math.round(damage*0.5);
