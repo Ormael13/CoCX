@@ -2517,11 +2517,13 @@ public class SaveUpdater extends NPCAwareContent {
 				var currentWeakness:Number = libStat.valueOfBuff("Weakened");
 				if (currentWeakness > 0) libStat.removeBuff("Weakened");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.16;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.17) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.17) {
+				if (player.statStore.hasBuff('Feeding Euphoria')) player.buff("Feeding Euphoria").remove();
+				if (player.statStore.hasBuff('Milking Euphoria')) player.buff("Milking Euphoria").remove();
+				outputText("\n\n Mysteriously your Feeding Euphoria and/or Milking Euphoria you may have seem to have disappeared... you'll need to feed again to get them!");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.17;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.18) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;

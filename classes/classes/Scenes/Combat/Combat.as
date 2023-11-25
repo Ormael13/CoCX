@@ -7775,11 +7775,14 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) addedWrath += Math.round(player.maxWrath() * 0.01);
 		EngineCore.WrathChange(addedWrath);
 	}
-	public function PASPAS():Number {
+	public function PASPAS(type:Number = 1):Number {
 		var PAS:Number = 0.5;
 		var Wr100:Number = player.wrath100;
-		if (Wr100 > 100) Wr100 = 100;
-		PAS += Wr100 * 0.02;
+		var overE:Boolean = true;
+		if ((type == 1 && player.hasPerk(PerkLib.PowerAttackSu)) || (type == 2 && player.hasPerk(PerkLib.PowerShotSu))) overE = false;
+		if ((Wr100 > 100) && overE) Wr100 = 100;
+		if ((type == 1 && player.hasPerk(PerkLib.PowerAttackSu)) || (type == 2 && player.hasPerk(PerkLib.PowerShotSu))) PAS += Wr100 * 0.04;
+		else PAS += Wr100 * 0.02;
 		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAS *= 2.5;
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAS *= 2;
 		if (player.hasPerk(PerkLib.VexedNocking)) PAS *= 2;
@@ -15539,7 +15542,7 @@ public function greatDive():void {
 			if (player.thirdtierWingsForWingSlap()) JousterDamageMod *= 2;
 			damage *= JousterDamageMod;
         }
-        damage *= (1 + PASPAS());
+        damage *= (1 + PASPAS(1));
     } else {
         if (player.lowerBody == LowerBody.HARPY && player.statusEffectv2(StatusEffects.Flying) != 1) {
             outputText(" making a bloody trail with your talons");

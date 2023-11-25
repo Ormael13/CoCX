@@ -403,12 +403,12 @@ public class PerkLib
 		public static const GreaterMetabolization:PerkType = mk("Greater Metabolization", "Greater Metabolization",
 				"Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).",
 				"You've chosen the 'Greater Metabolization' perk. Increase the duration of lingering nourishment effects by another 100% of base duration. And slows hunger progression even further if any(note does not raise racial scores).");
-		public static const PowerAttackSu:PerkType = mk("", "",
-				".",
-				"You've chosen the 'Power Attack (Su)' perk. Enable Power Attack p. special. .");
-		public static const PowerShotSu:PerkType = mk("", "",
-				".",
-				"You've chosen the 'Power Shot (Su)' perk. Enable Power Shot p. special. .");
+		public static const PowerAttackSu:PerkType = mk("Power Attack (Su)", "Power Attack (Su)",
+				"Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Attack (Su)' perk. Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power attack increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
+		public static const PowerShotSu:PerkType = mk("Power Shot (Su)", "Power Shot (Su)",
+				"Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).",
+				"You've chosen the 'Power Shot (Su)' perk. Allow to use wrath above normal maximum to calculate bonus (overwrath) and effectivness of power shot increased fourfold (would cost only 50% of wrath and ratio of conversion doubled (2% > 4%)).");
 	//	public static const TwinThunder:PerkType = mk("Twin Thunder", "Twin Thunder",
 	//			".",
 	//			"You've chosen the 'Twin Thunder' perk, .");
@@ -4871,8 +4871,8 @@ public class PerkLib
             EpicBrute.requireLevel(42)
                     .requireStr(150)
                     .requirePerk(GreaterBrute);
-        //    PowerAttackSu.requirePerk(PowerAttackEx)
-		//			.requireLevel(42);
+            PowerAttackSu.requirePerk(PowerAttackEx)
+					.requireLevel(42);
             //Tier 8 Strength Perks
             PeerlessTranquilness.requireStr(270)
                     .requireTou(90)
@@ -5525,8 +5525,8 @@ public class PerkLib
                     .requireStr(120)
                     .requireLevel(36);
             //Tier 7 Speed Perks
-        //    PowerShotSu.requirePerk(PowerShotEx)
-		//			.requireLevel(42);
+            PowerShotSu.requirePerk(PowerShotEx)
+					.requireLevel(42);
             //Tier 8 Speed Perks
             //Tier 9 Speed Perks
             PrestigeJobArcaneArcher.requirePrestigeJobSlot()
@@ -7882,4 +7882,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

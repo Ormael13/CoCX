@@ -1641,10 +1641,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				else { //Slime core reduces fluid need rate
-					if (player.isSlime())
-						player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
+					var delay:Number = 18;
+					if (player.hasPerk(PerkLib.Metabolization)) delay += 18;
+					if (player.hasPerk(PerkLib.ImprovedMetabolization)) delay += 18;
+					if (player.hasPerk(PerkLib.GreaterMetabolization)) delay += 18;
+					if (player.isSlime()) player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
 					else player.addStatusValue(StatusEffects.SlimeCraving, 1, 1);
-					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
+					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= delay) {
 						if (!player.hasStatusEffect(StatusEffects.SlimeCravingOutput)) { //Protects against this warning appearing multiple times in the output
 							player.createStatusEffect(StatusEffects.SlimeCravingOutput, 0, 0, 0, 0);
 							outputText("\n<b>Bigger... stronger, each intake of fluid you take only makes you more starved for the next as you grow in power each time, the need to fuck and feed slowly overwriting any other desire you may have.</b>\n");
@@ -2796,7 +2799,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(".  It's not long until you feel ");
 					if (player.hasVagina()) outputText("her pussy clenching around you as you orgasm explosively inside, followed by ");
 					outputText("the sensation of warm wetness in your own vagina.  Your prisoner groans as " + player.mf("his","her") + " cock twitches and spasms inside you, spraying your insides with seed; warm, delicious, sticky seed for your eggs.  You can feel it drawing closer to your unfertilized clutch, and as the gooey heat pushes toward them, your head swims, and you finally look into your prey's [face]...");
-
 					outputText("\n\nYour eyes flutter open.  What a strange dream... aw, dammit.  You can feel your [armor] rubbing against your crotch, sodden with cum.  ");
 					if (player.cumQ() > 1000) outputText("It's all over your bedroll, too...");
 					outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to snare her with your web; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
@@ -2859,8 +2861,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18 && player.str <= 1) { //Bad end!
-                SceneLib.lake.gooGirlScene.slimeBadEnd();
-                return true;
+                var delay:Number = 18;
+				if (player.hasPerk(PerkLib.Metabolization)) delay += 18;
+				if (player.hasPerk(PerkLib.ImprovedMetabolization)) delay += 18;
+				if (player.hasPerk(PerkLib.GreaterMetabolization)) delay += 18;
+				if (player.statusEffectv1(StatusEffects.SlimeCraving) >= delay) {
+					SceneLib.lake.gooGirlScene.slimeBadEnd();
+					return true;
+				}
 			}
 			//Pussytail Bad End
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && player.hasCock() && !debug) {
