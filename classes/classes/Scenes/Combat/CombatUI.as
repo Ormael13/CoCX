@@ -246,7 +246,6 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
 				btnTease.show("Lustnade Launcher", combat.goboLustnadeLauncher, "Launch Lustnade at enemy, dealing really heavy lust damage.").icon("A_Tease");
-				if (player.hasStatusEffect(StatusEffects.CooldownLustnadeLauncher)) btnTease.disable("<b>You need more time before you can use Lustnade Launcher again.</b>").icon("A_Tease");
 			}
 			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.").icon("A_Tease");
 			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");

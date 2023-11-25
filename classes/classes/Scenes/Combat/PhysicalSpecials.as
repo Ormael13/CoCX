@@ -6119,9 +6119,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6164,9 +6162,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6191,6 +6187,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You press the lightning button and aim, smirking at [themonster], your mech delivering a ");
 		player.createStatusEffect(StatusEffects.CooldownTazer,8,0,0,0);
 		if (player.hasKeyItem("Taser overcharge battery") >= 0) {
+			flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 			var damage:Number = scalingBonusIntelligence() * spellModWhite();
 			//Determine if critical hit!
 			var crit:Boolean = false;
@@ -6204,9 +6201,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//High damage to goes.
 			damage = calcVoltageMod(damage, true);
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-			if (player.armor == armors.GTECHC_) damage *= 1.5;
-			if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-			if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+			damage = combat.goblinDamageBonus(damage);
 			damage *= 0.5;
 			damage = Math.round(damage);
 			outputText("potent discharge ");
@@ -6225,29 +6220,23 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function mechOmniMissile():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		if (player.hasKeyItem("Omni Missile") >= 0) outputText("You deploy the omni Missile and rain death on [themonster], covering the entire area with explosions for ");
 		else outputText("You deploy the missile launcher and aim at [themonster], for a big explosion. ");
-		var damage:Number = 300 + rand(121);
-		//damage += player.weaponRangeAttack * 20;
-		//if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack;
-		//if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
-		//if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.12;
-		//if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.18;
+
+		var damage:Number = combat.firearmsDamageNoLagSingle();
+		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
 		//Weapon addition!
-		//damage = combat.rangeAttackModifier(damage);
-		//if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
-		//if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
-		//if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
-		//if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
+		if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
+		if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
+		if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
+		if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType)) {
-			//if (player.hasPerk(PerkLib.ExplosiveCartridge)) damage *= 2;
+			if (player.hasPerk(PerkLib.ExplosiveCartridge)) damage *= 2;
 			if (player.hasKeyItem("Omni Missile") >= 0) damage *= 10;
 			else damage *= 5;
 		}
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6300,15 +6289,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function mechGravityShots():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		outputText("You press the spiral button and aim, unleashing the gravity sphere at [themonster]. ");
 		player.createStatusEffect(StatusEffects.CooldownGravityShots,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
+
+		damage = calcEclypseMod(damage, true);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6333,15 +6322,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function mechRaijinBlaster():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		outputText("You press the BIG lightning button and aim, smirking wide as the Raijin blaster power up your mech zapping [themonster] for ");
 		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
+
+		damage = calcVoltageMod(damage, true);
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6381,14 +6371,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function mechSnowballGenerator():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		outputText("You activate the snowball generator, taking aim and launching a volley of snowballs at the [themonster] for ");
 		player.createStatusEffect(StatusEffects.CooldownSnowballGenerator,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModBlack() * 8;
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+
+		damage = calcGlacialMod(damage, true);
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6411,7 +6401,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function mechWhitefireBeamCannon():void {
 		clearOutput();
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_SPELL;
 		outputText("You shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer"+((player.keyItemvX("HB Dragon's Breath Flamer", 2) == 2)?"s":"")+"":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
 		if (player.vehicles == vehicles.HB_MECH) {
 			if (player.keyItemvX("HB Dragon's Breath Flamer", 2) == 2) {
@@ -6426,9 +6416,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+
+		damage = calcInfernoMod(damage, true);
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -6453,13 +6443,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function mechDynapunchGlove():void {
 		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
 		outputText("You launch the mech springed glove at [themonster] hitting [monster his] straight in the face for a K.O. [themonster] is hit for ");
 		player.createStatusEffect(StatusEffects.CooldownDynapunchGlove,8,0,0,0);
 		var damage:Number = 0;
-		damage += combat.meleeUnarmedDamageNoLagSingle();
-		if (player.armor == armors.GTECHC_) damage *= 1.5;
-		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		damage += combat.meleeUnarmedDamageNoLagSingle(3);
+		damage = combat.goblinDamageBonus(damage);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 15;

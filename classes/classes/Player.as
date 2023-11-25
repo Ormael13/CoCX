@@ -1284,6 +1284,10 @@ use namespace CoC;
 			return weaponRange == game.weaponsrange.ADBSCAT || weaponRange == game.weaponsrange.ADBSHOT || weaponRange == game.weaponsrange.BLUNDER || weaponRange == game.weaponsrange.DESEAGL || weaponRange == game.weaponsrange.TDEEAGL || weaponRange == game.weaponsrange.DUEL_P_ || weaponRange == game.weaponsrange.FLINTLK || weaponRange == game.weaponsrange.HARPGUN
 			 || weaponRange == game.weaponsrange.IVIARG_ || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TM1CERB || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
 		}
+		public function isUsingMechMeleeWeapons():Boolean
+		{
+			return weapon == game.weapons.RIPPER1 ||  weapon == game.weapons.TRIPPER1 || weapon == game.weapons.RIPPER2 || weapon == game.weapons.TRIPPER2 || weapon == game.weapons.MACGRSW || weapon == game.weapons.TMACGRSW;
+		}
 		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
 		public function isInNonGoblinMech():Boolean
 		{

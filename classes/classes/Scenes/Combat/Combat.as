@@ -2157,9 +2157,7 @@ public class Combat extends BaseContent {
         // DAMAGE
         //------------
         //Determine damage
-        //BASIC DAMAGE STUFF
-        damage += player.str;
-        damage += scalingBonusStrength() * 0.25;
+        //BASIC DAMAGE STUFF        
         if (player.hasKeyItem("HB Agility") >= 0) {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
@@ -2168,12 +2166,14 @@ public class Combat extends BaseContent {
 				damage += scalingBonusSpeed() * 0.10;
 			}
 		}
+
+        damage += meleeDamageNoLagSingle(false, damage);
+
+
         if (damage < 10) damage = 10;
 		if (player.isInGoblinMech()) {
 			damage *= 1.3;
-			if (player.armor == armors.GTECHC_) damage *= 1.5;
-			if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-			if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+			damage = goblinDamageBonus(damage);
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
 			if (player.vehicles == vehicles.GS_MECH) damage *= 1.25;
 		}
@@ -2234,6 +2234,30 @@ public class Combat extends BaseContent {
             }
         }
         outputText("\n");
+
+        //Chainsword weapon procs
+        if (monster.canMonsterBleed() && (player.weapon == weapons.RIPPER1 ||  player.weapon == weapons.TRIPPER1 || player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2)) {
+            if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+            if (player.weapon == weapons.MACGRSW || player.weapon == weapons.TMACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
+            else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+
+            if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [weapon] leave behind.");
+            else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] left behind.");
+        }
+
+        if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
+            outputText("\nReeling in pain [themonster] begins to burn.");
+            if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+            else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+        }
+
+        //Gain weapon experience when using goblin weapons
+        if (player.isUsingMechMeleeWeapons()) {
+            var hitCounter:int = player.vehicles == vehicles.HB_MECH? 2: 1;
+            var critCounter:int = crit? 1: 0;
+            meleeMasteryGain(hitCounter, critCounter);
+        }
+
         checkAchievementDamage(damage);
 		WrathGenerationPerHit2(5);
         heroBaneProc(damage);
@@ -2246,7 +2270,7 @@ public class Combat extends BaseContent {
             doNext(endLustVictory);
             return;
         }
-        outputText("\n");
+        outputText("\n\n");
         wrathregeneration1();
         fatigueRecovery1();
         manaregeneration1();
@@ -4105,13 +4129,13 @@ public class Combat extends BaseContent {
             if (monster is EncapsulationPod) {
                 outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
                 if (player.isInGoblinMech()) {
-                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot the pod with your mech’s repeater gun for ");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun for ");
+                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot the pod with your mech’s repeater gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at pod using the mech’s machine gun");
                 }
             } else if (monster.plural) {
                 if (player.isInGoblinMech()) {
-                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent with your mech’s repeater gun for ");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun for ");
+                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent with your mech’s repeater gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] with your mech’s machine gun");
                 } else {
                     var textChooser1:int = rand(12);
                     if (textChooser1 >= 9) {
@@ -4126,8 +4150,8 @@ public class Combat extends BaseContent {
                 }
             } else {
                 if (player.isInGoblinMech()) {
-                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun for ");
-                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun for ");
+                    if (player.hasKeyItem("Repeater Gun") >= 0) outputText("You shoot your opponent using the mech repeater gun");
+                    if (player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) outputText("You fire metal rounds at [themonster] using the mech machine gun");
                 } else {
                     var textChooser2:int = rand(12);
                     if (textChooser2 >= 9) outputText("[Themonster] looks down at the mark left by the " + ammoWord + " on it body");
@@ -4151,9 +4175,7 @@ public class Combat extends BaseContent {
             if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
             if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
             if (player.isInGoblinMech()) {
-                if (player.armor == armors.GTECHC_) damage *= 1.5;
-                if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-                if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+                damage = goblinDamageBonus(damage);
                 if (player.hasKeyItem("Repeater Gun") >= 0) {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.3;
@@ -4301,6 +4323,7 @@ public class Combat extends BaseContent {
 							}
 							else doPhysicalDamage(damage, true, true);
 						}
+                        if (crit) outputText(" <b>*Critical Hit!*</b>");
 					}
                 } else {
                     if (!MSGControll) {
@@ -4758,24 +4781,22 @@ public class Combat extends BaseContent {
             damage *= 2;
         }
         if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-        if (player.armor == armors.GTECHC_) damage *= 1.5;
-        if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
-        if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+        damage = goblinDamageBonus(damage);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage = damage * monster.lustVuln;
         damage = Math.round(damage);
         if (player.hasKeyItem("Lustnade Launcher") >= 0) {
-            player.createStatusEffect(StatusEffects.CooldownLustnadeLauncher, 5, 0, 0, 0);
             outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + Math.round(damage) + " lust damage.");
             monster.teased(Math.round(damage));
         } else {
             outputText("You spray a cloud of aphrodisiac with your gas gun. [themonster] tries to pinch [monster his] nose and hold [monster his] breath ");
             if (rand(100) > 25) {
-                outputText("but it’s too late and you can see arousal flushing [themonster] skin for " + Math.round(monster.lustVuln * damage) + " lust damage.");
+                outputText("but it’s too late and you can see arousal flushing [themonster] skin.\n");
                 monster.teased(Math.round(damage));
             } else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
         }
+        outputText("\n\n")
         if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
         enemyAI();
     }
@@ -5597,10 +5618,10 @@ public class Combat extends BaseContent {
      * 1. Basic damage (feral: tou, Elf spear: inte, MGE: inte, else str)
      * 2. Bonus from perks & weapontype, weapon, mastery, perks, status effects, items, melee perks
      * @param IsFeralCombat
+     * @param damage
      * @return damage calulation
      */
-	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
-		var damage:Number = 0;
+	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false, damage:Number = 0):Number {
 		if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)) {
 			damage += player.tou;
 			damage += scalingBonusToughness() * 0.2;
@@ -5611,7 +5632,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
+			else if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion || player.isInGoblinMech() || player.isInNonGoblinMech()) {
 				damage += player.inte;
 				damage += scalingBonusIntelligence() * 0.2;
 			}
@@ -5728,6 +5749,10 @@ public class Combat extends BaseContent {
         if (subtype == 2) {
             damage += player.spe;
             damage += scalingBonusSpeed() * 0.25;
+        }
+        if (subtype == 3) {
+            damage += player.inte;
+			damage += scalingBonusIntelligence() * 0.25;
         }
         damage += unarmedAttack();
 		if (damage < 10) damage = 10;
@@ -6452,35 +6477,6 @@ public class Combat extends BaseContent {
                     }
                     //Weapon Procs!
                     WeaponMeleeStatusProcs();
-                    if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
-                        outputText("  Reeling in pain [themonster] begins to burn.");
-                        if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
-                        else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
-                    }
-                    if (player.weapon == weapons.ATWINSCY) {
-                        outputText("  Reeling in pain [themonster] begins to burn.");
-                        if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,3);
-                        else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
-                        if (monster.mana > 100)
-                        outputText("\n\nYour scythes also strip away measure of the enemies mana");
-                        monster.mana -= 100;
-                        if (monster.mana <0) monster.mana = 0;
-                    }
-                    if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
-                        var lust0damage:Number = 35 + rand(player.lib / 10);
-                        lust0damage *= 0.14;
-                        if (player.armor == armors.ELFDRES && player.isElf()) lust0damage *= 2;
-                        if (player.armor == armors.FMDRESS && player.isWoodElf()) lust0damage *= 2;
-                        monster.teased(Math.round(monster.lustVuln * lust0damage));
-                        monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                        if (player.hasPerk(PerkLib.WoundPoison)){
-                            if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
-                            else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
-                        }
-                    }
                 }
                 if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
                     if (player.tailVenom >= player.VenomWebCost()) {
@@ -7036,6 +7032,13 @@ public class Combat extends BaseContent {
             if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.3;
             if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3) damage *= 1.5;
         }
+        return damage;
+    }
+
+    public function goblinDamageBonus(damage:Number):Number {
+        if (player.armor == armors.GTECHC_) damage *= 1.5;
+		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
+		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
         return damage;
     }
 
@@ -7633,6 +7636,21 @@ public class Combat extends BaseContent {
                 else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] left behind.");
             }
         }
+        //Burn chances
+        if (player.weapon == weapons.RIPPER2 || player.weapon == weapons.TRIPPER2) {
+            outputText("\nReeling in pain [themonster] begins to burn.");
+            if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+            else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+        }
+        if (player.weapon == weapons.ATWINSCY) {
+            outputText("\nReeling in pain [themonster] begins to burn.");
+            if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,3);
+            else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+            if (monster.mana > 100)
+            outputText("\n\nYour scythes also strip away measure of the enemies mana");
+            monster.mana -= 100;
+            if (monster.mana <0) monster.mana = 0;
+        }
         if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.T_HEART || player.weapon == weapons.DORSOUL || player.weapon == weapons.LHSCYTH || player.weapon == weapons.ARMAGED) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 			var restoreamount:Number = 0;
 			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
@@ -7711,6 +7729,21 @@ public class Combat extends BaseContent {
 				else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
 			}
 		}
+        if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
+            var lust0damage:Number = 35 + rand(player.lib / 10);
+            lust0damage *= 0.14;
+            if (player.armor == armors.ELFDRES && player.isElf()) lust0damage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) lust0damage *= 2;
+            monster.teased(Math.round(monster.lustVuln * lust0damage));
+            monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
+            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+                monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+            if (player.hasPerk(PerkLib.WoundPoison)){
+                if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
+                else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+            }
+        }
     }
 
     public function WeaponRangeStatusProcs():void {
