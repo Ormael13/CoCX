@@ -56,6 +56,7 @@ public class Alvina extends Monster
 				outputText("Alvina starts incanting a spell. While nothing visible happens, you feel a chill in the air.");
 				PolarMidnightSequance++;
 				createStatusEffect(StatusEffects.Uber, 0, 0,0,0);
+				clearTempResolute(false);
 			}
 			else {
 				if (PolarMidnightSequance == 1) {
@@ -105,6 +106,7 @@ public class Alvina extends Monster
 				outputText("Alvina weaves her scythe above her head tracing complicated arcane signs.");
 				MeteorStormSequence++;
 				createStatusEffect(StatusEffects.Uber, 0, 0,0,0);
+				clearTempResolute(false);
 			} else {
 				var damage:Number = 0;
 				damage += eBaseIntelligenceDamage() * 10;
@@ -147,6 +149,7 @@ public class Alvina extends Monster
 				outputText("\"<i>Most demons steal souls through sex. I have a more academic approach to it. Do not worry, you will still writhe in pleasure and reach orgasm as I tear it out of your chest!</i>\"\n\n");
 				outputText("You see a set of dark tendrils of black magic surging around her body, like grasping claws, ready to bury themselves in you. You need to stop that incantation before she strikes you with it!\n\n");
 				SoulTearInitiated = true;
+				clearTempResolute(false);
 			}
 		}
 
