@@ -2731,7 +2731,7 @@ use namespace CoC;
 			{
 				// If dont have following perk, calculating leftover damage
 				if(!(hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))){
-					returnDamage = Math.round(mana / magicmult);
+					returnDamage = Math.round(-mana / magicmult);
 				}
 				mana = 0;
 			}
@@ -7221,4 +7221,4 @@ use namespace CoC;
 			}
 		}		
 	}
-}
+}
