@@ -106,3 +106,23 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
         continue-on-error: true
+
+      - name: Release step
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          generate_release_notes: true
+          files: |
+            target/CoC-Mobile-Beta-32bit.apk
+            target/CoC-Mobile-Beta-64bit.apk
+            target/CoC-Mobile-Release-32bit.apk
+            target/CoC-Mobile-Release-64bit.apk
+            target/CoC-release.swf
+            target/CoC-debug.swf
+
+        #cleanup only keep last 5 releases
+      - uses: dev-drprasad/delete-older-releases@v0.3.2
+        with:
+          keep_latest: 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
