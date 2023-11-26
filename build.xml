@@ -63,7 +63,7 @@
     <macrodef name="createAirApk">
         <attribute name="platform" />
         <attribute name="specialArch"/>
-        <attribute name="swf-name"/>
+        <attribute name="swf-name-postfix"/>
         <attribute name="SpecialPostfix"/>
         <sequential>
             <exec executable="${FLEX_HOME}/bin/adt@{platform}" failonerror="true">
@@ -74,8 +74,8 @@
                 <arg line="-keystore ${basedir}/coc.keystore" />
                 <arg line="-storepass 123456" />
                 <arg line="${build.dir}/CoC-Mobile-@{SpecialPostfix}.apk" />
-                <arg line="${basedir}/CoC-Android.xml" />
-                <arg line="-C ${build.dir} @{swf-name}.swf" />
+                <arg line="${basedir}/CoC-Android-@{swf-name-postfix}.xml" />
+                <arg line="-C ${build.dir} CoC-Mobile-@{swf-name-postfix}.swf" />
                 <arg line="-C ${basedir}" />
                 <arg line="devTools/icons" />
             </exec>
@@ -83,21 +83,21 @@
     </macrodef>
 
     <target name="airApkWinRelease" description="Create the AIR package" depends="CoCMobileRelease,checkos" if="isWindows">
-        <createAirApk platform=".bat" specialArch="armv7" swf-name="CoC-Mobile-Release" SpecialPostfix="Release-32bit"/>
-        <createAirApk platform=".bat" specialArch="armv8" swf-name="CoC-Mobile-Release" SpecialPostfix="Release-64bit"/>
+        <createAirApk platform=".bat" specialArch="armv7" swf-name-postfix="Release" SpecialPostfix="Release-32bit"/>
+        <createAirApk platform=".bat" specialArch="armv8" swf-name-postfix="Release" SpecialPostfix="Release-64bit"/>
     </target>
     <target name="airApkWinDebug" description="Create the AIR package" depends="CoCMobileBeta,checkos" if="isWindows">
-        <createAirApk platform=".bat" specialArch="armv7" swf-name="CoC-Mobile-Beta" SpecialPostfix="Beta-32bit"/>
-        <createAirApk platform=".bat" specialArch="armv8" swf-name="CoC-Mobile-Beta" SpecialPostfix="Beta-64bit"/>
+        <createAirApk platform=".bat" specialArch="armv7" swf-name-postfix="Beta" SpecialPostfix="Beta-32bit"/>
+        <createAirApk platform=".bat" specialArch="armv8" swf-name-postfix="Beta" SpecialPostfix="Beta-64bit"/>
     </target>
 
     <target name="airApkLinRelease" description="Create the AIR package" depends="CoCMobileRelease,checkos" if="isLinux">
-        <createAirApk platform="" specialArch="armv7" swf-name="CoC-Mobile-Release" SpecialPostfix="Release-32bit"/>
-        <createAirApk platform="" specialArch="armv8" swf-name="CoC-Mobile-Release" SpecialPostfix="Release-64bit"/>
+        <createAirApk platform="" specialArch="armv7" swf-name-postfix="Release" SpecialPostfix="Release-32bit"/>
+        <createAirApk platform="" specialArch="armv8" swf-name-postfix="Release" SpecialPostfix="Release-64bit"/>
     </target>
     <target name="airApkLinDebug" description="Create the AIR package" depends="CoCMobileBeta,checkos" if="isLinux">
-        <createAirApk platform="" specialArch="armv7" swf-name="CoC-Mobile-Beta" SpecialPostfix="Beta-32bit"/>
-        <createAirApk platform="" specialArch="armv8" swf-name="CoC-Mobile-Beta" SpecialPostfix="Beta-64bit"/>
+        <createAirApk platform="" specialArch="armv7" swf-name-postfix="Beta" SpecialPostfix="Beta-32bit"/>
+        <createAirApk platform="" specialArch="armv8" swf-name-postfix="Beta" SpecialPostfix="Beta-64bit"/>
     </target>
 
     <echo>building standalone swfs</echo>
