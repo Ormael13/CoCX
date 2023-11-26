@@ -6,6 +6,8 @@ name: ActionScript 3 CI
 # Github workflows do not support actionscript directly.
 # However the build uses ant, which is usually used to build java projects.
 # The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
+permissions:
+  contents: write
 
 on:
   #Pushes/changes to CoC.as should trigger this. Which should basically only consist of version updates, and maybe the rare settings change.
