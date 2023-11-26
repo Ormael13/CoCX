@@ -80,12 +80,12 @@
         </sequential>
     </macrodef>
 
-    <target name="airApkWin" description="Create the AIR package" depends="airMobile,checkos" if="isWindows">
+    <target name="airApkWin" description="Create the AIR package" depends="airMobileOrigin,checkos" if="isWindows">
         <createAirApk platform=".bat" specialArch="armv7"/>
         <createAirApk platform=".bat" specialArch="armv8"/>
     </target>
 
-    <target name="airApkLin" description="Create the AIR package" depends="airMobile,checkos" if="isLinux">
+    <target name="airApkLin" description="Create the AIR package" depends="airMobileOrigin,checkos" if="isLinux">
         <createAirApk platform="" specialArch="armv7"/>
         <createAirApk platform="" specialArch="armv8"/>
     </target>
@@ -98,11 +98,11 @@
     <target name="debug" depends="init" description="Build with debug flags">
         <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" should-optimize="false" binary-name="CoC-debug.swf"></build-game-binary>
     </target>
-	<target name="airMobile" depends="init" description="Build air release">
+	<target name="airMobileOrigin" depends="init" description="Build air release">
 		<build-game-binary debug-flag="true" release-flag="true" air-flag="true" standalone-flag="false" should-optimize="true" binary-name="CoC-Mobile.swf"></build-game-binary>
 	</target>
 
-    <target name="all" depends="init,release,debug,airMobile" description="Build all swf versions"/>
-    <target name="makeMobileAir" depends="init,airMobile,airApkLin,airApkWin" description=" build mobile App"/>
+    <target name="all" depends="init,release,debug,airMobileOrigin" description="Build all swf versions"/>
+    <target name="makeMobileAir" depends="init,airMobileOrigin,airApkLin,airApkWin" description=" build mobile App"/>
     <target name="allCI" depends="init,release,debug,makeMobileAir" description="Build all swf versions"/>
 </project>
