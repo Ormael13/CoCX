@@ -4,10 +4,10 @@ import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.PerkLib;
 import classes.IMutations.IMutationsLib;
+import classes.PerkType;
 
 public class AbstractSoulSkill extends CombatAbility {
-    protected var statusEffect:StatusEffectType;
-    public var baseSFCost:Number = 0;
+    protected var knownCondition:*;
     protected var canUseBlood:Boolean;
 
     public function AbstractSoulSkill (
@@ -16,24 +16,16 @@ public class AbstractSoulSkill extends CombatAbility {
             targetType:int,
             timingType:int,
             tags:/*int*/Array,
-            statusEffect:StatusEffectType,
+            knownCondition:*,
             canUseBlood:Boolean = true
     ) {
         super(name, desc, targetType, timingType, tags);
-        this.statusEffect = statusEffect;
+        this.knownCondition = knownCondition;
         this.canUseBlood = canUseBlood;
     }
 
     override public function get category():int {
         return CAT_SOULSKILL;
-    }
-
-    override public function costDescription():Array {
-        var costs:/*String*/Array = super.costDescription().concat();
-        if (sfCost() > 0) {
-            costs.push("Soulforce Cost: "+sfCost());
-        }
-        return costs;
     }
 
     override protected function usabilityCheck():String {
@@ -51,17 +43,21 @@ public class AbstractSoulSkill extends CombatAbility {
         return "";
     }  
 
-    public function sfCost():int {
+    override public function sfCost():int {
         var soulforcecost:Number = baseSFCost * soulskillCost() * soulskillcostmulti();
         return Math.round(soulforcecost);
     }
 
     override public function get isKnown():Boolean {
-        return player.hasStatusEffect(statusEffect);
+        if (knownCondition is StatusEffectType)
+            return player.hasStatusEffect(knownCondition);
+        if (knownCondition is PerkType)
+            return player.hasPerk(knownCondition);
+        return false;
     }
 
     override public function useResources():void {
-        if (player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+        if (player.hasStatusEffect(StatusEffects.BloodCultivator) && canUseBlood) {
             player.takePhysDamage(sfCost());
         } 
         else {

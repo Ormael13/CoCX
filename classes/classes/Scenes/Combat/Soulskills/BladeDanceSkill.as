@@ -13,17 +13,14 @@ public class BladeDanceSkill extends AbstractSoulSkill {
             TARGET_ENEMY,
             TIMING_INSTANT,
             [TAG_DAMAGING],
-            null
+            PerkLib.BladeWarden
         )
 		baseSFCost = 50;
+		processPostCallback = false;
     }
 
 	override public function get buttonName():String {
 		return "Blade Dance";
-	}
-
-	override public function get isKnown():Boolean {
-		return player.hasPerk(PerkLib.BladeWarden);
 	}
 
 	override public function describeEffectVs(target:Monster):String {
@@ -40,15 +37,5 @@ public class BladeDanceSkill extends AbstractSoulSkill {
 		player.createStatusEffect(StatusEffects.BladeDance,0,0,0,0);
 		combat.basemeleeattacks();
     }
-
-	//Prevent default enemyAI function call, since post ability cleanup will be handled by combat.basemeleeattacks()
-	override public function buttonCallback():void {
-		combat.callbackBeforeAbility(this);
-		if (timingType == TIMING_TOGGLE && isActive()) {
-			toggleOff();
-		} else {
-			perform();
-		}
-	}
 }
 }

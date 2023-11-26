@@ -89,7 +89,7 @@ public class CombatAbility extends BaseCombatContent {
 	});
 	public static const CAT_SOULSKILL:int   = EnumValue.add(AllCategories, 3, "SOULSKILL", {
 		name:"Soulskill",
-		group:"spell"
+		group:"soulskill"
 	});
 	public static const CAT_SPELL_WHITE:int = EnumValue.add(AllCategories, 4, "SPELL_WHITE", {
 		name:"White Spell",
@@ -123,6 +123,10 @@ public class CombatAbility extends BaseCombatContent {
 		name:"Green Spell",
 		group:"spell"
 	});
+	public static const CAT_BLOOD_SOULSKILL:int   = EnumValue.add(AllCategories, 12, "BLOOD_SOULSKILL", {
+		name:"Blood Soulskill",
+		group:"soulskill"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -143,19 +147,19 @@ public class CombatAbility extends BaseCombatContent {
 	});
 	public static const TAG_FIRE:int = EnumValue.add(AllTags, 4, 'FIRE', {
 		name: 'Fire',
-		desc: "This ability primary element is Fire"
+		desc: "This ability's primary element is Fire"
 	});
 	public static const TAG_LIGHTNING:int = EnumValue.add(AllTags, 5, 'LIGHTNING', {
 		name: 'Lightning',
-		desc: "This ability primary element is Lightning"
+		desc: "This ability's primary element is Lightning"
 	});
 	public static const TAG_ICE:int = EnumValue.add(AllTags, 6, 'ICE', {
 		name: 'Ice',
-		desc: "This ability primary element is Ice"
+		desc: "This ability's primary element is Ice"
 	});
 	public static const TAG_DARKNESS:int = EnumValue.add(AllTags, 7, 'DARKNESS', {
 		name: 'Darkness',
-		desc: "This ability primary element is Darkness"
+		desc: "This ability's primary element is Darkness"
 	});
 	public static const TAG_HEALING:int = EnumValue.add(AllTags, 8, 'HEALING', {
 		name: 'Healing',
@@ -171,19 +175,19 @@ public class CombatAbility extends BaseCombatContent {
 	});
 	public static const TAG_WATER:int = EnumValue.add(AllTags, 11, 'WATER', {
 		name: 'Water',
-		desc: "This ability primary element is Water"
+		desc: "This ability's primary element is Water"
 	});
 	public static const TAG_WIND:int = EnumValue.add(AllTags, 12, 'WIND', {
 		name: 'Wind',
-		desc: "This ability primary element is Wind"
+		desc: "This ability's primary element is Wind"
 	});
 	public static const TAG_EARTH:int = EnumValue.add(AllTags, 13, 'EARTH', {
 		name: 'Earth',
-		desc: "This ability primary element is Earth"
+		desc: "This ability's primary element is Earth"
 	});
 	public static const TAG_ACID:int = EnumValue.add(AllTags, 14, 'ACID', {
 		name: 'Acid',
-		desc: "This ability primary element is Acid"
+		desc: "This ability's primary element is Acid"
 	});
 	public static const TAG_TIER1:int = EnumValue.add(AllTags, 15, 'TIER1', {
 		name: 'Tier1',
@@ -197,6 +201,14 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Tier3',
 		desc: "This ability is tier 3"
 	});
+	public static const TAG_PHYSICAL:int = EnumValue.add(AllTags, 18, 'PHYSICAL', {
+		name: 'Physical',
+		desc: "This ability deals physical damage"
+	});
+	public static const TAG_MAGICAL:int = EnumValue.add(AllTags, 19, 'MAGICAL', {
+		name: 'Magical',
+		desc: "This ability deals magical damage"
+	});
 	
 	/**
 	 * Unique id of this ability.
@@ -209,6 +221,9 @@ public class CombatAbility extends BaseCombatContent {
 	private var _tags:/*Boolean*/Array;
 	public var baseManaCost:Number = 0;
 	public var baseWrathCost:Number = 0;
+	public var baseSFCost:Number = 0;
+	public var baseFatigueCost:Number = 0;
+	public var processPostCallback:Boolean = true;
 	
 	public function CombatAbility(
 			name:String,
@@ -308,6 +323,12 @@ public class CombatAbility extends BaseCombatContent {
 		if (hpCost() > 0) {
 			costs.push("HP Cost: " + hpCost());
 		}
+		if (fatigueCost() > 0) {
+			costs.push("Fatigue Cost: " + fatigueCost());
+		}
+		if (sfCost() > 0) {
+            costs.push("Soulforce Cost: "+sfCost());
+        }
 		var cd:int = calcCooldown();
 		if (cd > 0) {
 			costs.push("Cooldown: "+cd);
@@ -394,7 +415,8 @@ public class CombatAbility extends BaseCombatContent {
 		} else {
 			perform();
 		}
-		combat.callbackAfterAbility(this);
+		//Allows for some abilities to handle post-ability handling in their own "doeffect()" function - e.g. if the ability calls the standard physical attack function
+		if (processPostCallback) combat.callbackAfterAbility(this);
 	}
 	
 	/**
@@ -458,6 +480,14 @@ public class CombatAbility extends BaseCombatContent {
 	
 	public function hpCost():Number {
 		return 0;
+	}
+
+	public function sfCost():int {
+        return baseSFCost;
+    }
+
+	public function fatigueCost():int {
+		return baseFatigueCost;
 	}
 	
 	/**

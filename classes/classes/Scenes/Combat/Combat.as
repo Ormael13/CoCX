@@ -67,7 +67,6 @@ public class Combat extends BaseContent {
     public var mspecials:MagicSpecials = new MagicSpecials();
     public var magic:CombatMagic = new CombatMagic();
     public var teases:CombatTeases = new CombatTeases();
-    public var soulskills:CombatSoulskills = new CombatSoulskills();
     public var comfoll:CombatFollowersActions = new CombatFollowersActions();
     public var ui:CombatUI = new CombatUI();
 	public var meleeDamageNoLag:Number = 0;

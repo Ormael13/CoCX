@@ -1,11 +1,11 @@
 package classes.Scenes.Combat.Soulskills {
-import classes.Scenes.Combat.AbstractSoulSkill;
+import classes.Scenes.Combat.AbstractBloodSoulSkill;
 import classes.StatusEffects;
 import classes.Monster;
 import classes.Races;
 import classes.Scenes.API.FnHelpers;
 
-public class ScarletSpiritChargeSkill extends AbstractSoulSkill {
+public class ScarletSpiritChargeSkill extends AbstractBloodSoulSkill {
 	private static const ScarletSpiritChargeABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
     public function ScarletSpiritChargeSkill() {
         super(
@@ -33,6 +33,10 @@ public class ScarletSpiritChargeSkill extends AbstractSoulSkill {
 	override public function describeEffectVs(target:Monster):String {
 		return "Increases all stats, reduces health by 5% per round";
 	}
+
+	override public function sfCost():int {
+        return baseSFCost;
+    }
 
 	override public function toggleOff(display:Boolean = true):void {
 		if (display) outputText("You disrupt the flow of blood within you, your body slumps as the glow radiating from your [skin] dissipates back into your natural hue.");

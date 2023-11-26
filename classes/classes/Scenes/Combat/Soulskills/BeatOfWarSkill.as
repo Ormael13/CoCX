@@ -11,17 +11,14 @@ public class BeatOfWarSkill extends AbstractSoulSkill {
             TARGET_ENEMY,
             TIMING_INSTANT,
             [TAG_DAMAGING, TAG_BUFF],
-            null
+            PerkLib.StrifeWarden
         )
 		baseSFCost = 50;
+		processPostCallback = false;
     }
 
 	override public function get buttonName():String {
 		return "Beat of War";
-	}
-
-	override public function get isKnown():Boolean {
-		return player.hasPerk(PerkLib.StrifeWarden);
 	}
 
 	override public function describeEffectVs(target:Monster):String {
@@ -30,20 +27,11 @@ public class BeatOfWarSkill extends AbstractSoulSkill {
 
     override public function doEffect(display:Boolean = true):void {		
 		if (!player.statStore.hasBuff("BeatOfWar"))
-		mainView.statsView.showStatUp('str');
+			mainView.statsView.showStatUp('str');
 		player.buff("BeatOfWar").addStats({"str.mult":0.15}).withText("Beat of War").combatPermanent();
-		if (display) outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm. You feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.\n\n");
+		if (display) 
+			outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm. You feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.\n\n");
 		combat.basemeleeattacks();
     }
-
-	//Prevent default enemyAI function call, since post ability cleanup will be handled by combat.basemeleeattacks()
-	override public function buttonCallback():void {
-		combat.callbackBeforeAbility(this);
-		if (timingType == TIMING_TOGGLE && isActive()) {
-			toggleOff();
-		} else {
-			perform();
-		}
-	}
 }
 }

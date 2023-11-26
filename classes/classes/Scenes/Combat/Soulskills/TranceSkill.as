@@ -14,7 +14,7 @@ public class TranceSkill extends AbstractSoulSkill {
             TARGET_SELF,
             TIMING_TOGGLE,
             [TAG_RECOVERY],
-            null,
+            PerkLib.Trance,
 			false
         )
 		baseSFCost = 100;
@@ -37,10 +37,6 @@ public class TranceSkill extends AbstractSoulSkill {
 
         return "";
     }
-
-	override public function get isKnown():Boolean {
-		return player.hasPerk(PerkLib.Trance);
-	}
 
 	override public function sfCost():int {
 		return baseSFCost;

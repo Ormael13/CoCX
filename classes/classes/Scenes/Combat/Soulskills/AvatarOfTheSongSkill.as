@@ -12,7 +12,7 @@ public class AvatarOfTheSongSkill extends AbstractSoulSkill {
             TARGET_SELF,
             TIMING_INSTANT,
             [TAG_BUFF, TAG_HEALING],
-            null,
+            PerkLib.MageWarden,
 			false
         )
 		baseSFCost = 200;
@@ -20,10 +20,6 @@ public class AvatarOfTheSongSkill extends AbstractSoulSkill {
 
 	override public function get buttonName():String {
 		return "AvatarOfTheSong";
-	}
-
-	override public function get isKnown():Boolean {
-		return player.hasPerk(PerkLib.MageWarden);
 	}
 
 	override protected function usabilityCheck():String {

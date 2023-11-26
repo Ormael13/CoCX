@@ -20,6 +20,10 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
         this.sfInfusion = sfInfusion;
     }
 
+    override public function get category():int {
+        return CAT_BLOOD_SOULSKILL;
+    }
+
     override protected function usabilityCheck():String {
         //Soulforce check will be handled in this class instead of AbstractSoulForce
         var uc:String =  super.usabilityCheck();
@@ -53,7 +57,7 @@ public class AbstractBloodSoulSkill extends AbstractSoulSkill {
         //Remove addition from Abstract soulSkill Implementation
         if (sfCost() > 0) {
             costs.pop();
-            if (sfInfusion) costs.push("Soulforce Cost: "+sfCost());
+            if (sfInfusion) costs.push("Soulforce Cost: "+super.sfCost());
             costs.push("Blood Cost: "+sfCost());
         }
         return costs;

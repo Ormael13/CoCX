@@ -11,18 +11,15 @@ public class ResonanceVolleySkill extends AbstractSoulSkill {
             TARGET_ENEMY,
             TIMING_INSTANT,
             [TAG_DAMAGING],
-            null,
+            PerkLib.WildWarden,
 			false
         )
 		baseSFCost = 150;
+		processPostCallback = false;
     }
 
 	override public function get buttonName():String {
 		return "Resonance Volley";
-	}
-
-	override public function get isKnown():Boolean {
-		return player.hasPerk(PerkLib.WildWarden);
 	}
 
 	override public function sfCost():int {
@@ -34,15 +31,5 @@ public class ResonanceVolleySkill extends AbstractSoulSkill {
 		player.createStatusEffect(StatusEffects.ResonanceVolley,0,0,0,0);
 		combat.fireBow();
     }
-
-	//Prevent default enemyAI function call, since post ability cleanup will be handled by combat.basemeleeattacks()
-	override public function buttonCallback():void {
-		combat.callbackBeforeAbility(this);
-		if (timingType == TIMING_TOGGLE && isActive()) {
-			toggleOff();
-		} else {
-			perform();
-		}
-	}
 }
 }

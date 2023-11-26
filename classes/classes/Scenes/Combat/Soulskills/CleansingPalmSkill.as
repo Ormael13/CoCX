@@ -19,7 +19,7 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
             TARGET_ENEMY,
             TIMING_INSTANT,
             [TAG_DAMAGING],
-            null //Skill uses a perk rather than a status effect to determine knowledge
+            PerkLib.CleansingPalm
         )
 		baseSFCost = 30;
     }
@@ -38,10 +38,6 @@ public class CleansingPalmSkill extends AbstractSoulSkill {
 	override public function get buttonName():String {
 		return "C.Palm";
 	}
-
-    override public function get isKnown():Boolean {
-        return player.hasPerk(PerkLib.CleansingPalm);
-    }
 
 	override public function describeEffectVs(target:Monster):String {
 		return "~" + calcDamage(target) + " magical damage"
