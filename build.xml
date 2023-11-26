@@ -55,6 +55,7 @@
                 <define name="CONFIG::AIR" value="@{air-flag}"/>
                 <define name="CONFIG::STANDALONE" value="@{standalone-flag}"/>
                 <swf-version>41</swf-version>
+                <use-network>false</use-network>
             </mxmlc>
         </sequential>
     </macrodef>
