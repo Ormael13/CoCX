@@ -5243,7 +5243,7 @@ use namespace CoC;
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;
 				if (isRaceCached(Races.MINOTAUR, 2)) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
-				statStore.replaceBuffObject({'str.mult':(Math.round(power*100))/100}, 'Bull Strength', { text: 'Bull Strength' });
+				statStore.replaceBuffObject({'str.mult':Math.round(strStat.mult.value*power)}, 'Bull Strength', { text: 'Bull Strength' });
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
