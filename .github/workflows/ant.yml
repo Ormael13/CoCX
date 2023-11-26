@@ -73,17 +73,29 @@ jobs:
           name: release-swf
           path: target/CoC-release.swf
 
-      - name: Save Android armv7 APK
+      - name: Save Android armv7 Beta APK
         uses: actions/upload-artifact@v3
         with:
           name: mobile-arm7-32bit-apk
-          path: target/CoC-Mobile-armv7.apk
+          path: target/CoC-Mobile-Beta-32bit.apk
 
-      - name: Save Android armv8 APK
+      - name: Save Android armv8 Beta APK
         uses: actions/upload-artifact@v3
         with:
           name: mobile-arm8-64bit-apk
-          path: target/CoC-Mobile-armv8.apk
+          path: target/CoC-Mobile-Beta-64bit.apk
+
+      - name: Save Android armv7 Release APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-arm7-32bit-apk
+          path: target/CoC-Mobile-Release-32bit.apk
+
+      - name: Save Android armv8 Release APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-arm8-64bit-apk
+          path: target/CoC-Mobile-Release-64bit.apk
 
       # discord notifier to tell us if build succeeded or failed, and the link to download the artifacts.
       - name: Discord notification to channel
