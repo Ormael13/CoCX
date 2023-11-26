@@ -45,6 +45,8 @@ public class SwordInStone extends AbstractLakeContent
 				outputText("The blade itself is three and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful blade.\n\n");
 				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(weapons.B_SWORD, explorer.done);
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
+				else player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 1, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.TookBlessedSword,0,0,0,0);
 			}
 		}
@@ -86,6 +88,8 @@ public class SwordInStone extends AbstractLakeContent
 				outputText("The bow itself is three and a half feet of the purest, wood you have ever seen.  It truly is a beautiful bow.\n\n");
 				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(weaponsrange.BEA_BOW, explorer.done);
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
+				else player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 1, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.TookBlessedBow,0,0,0,0);
 			}
 		}
@@ -127,6 +131,8 @@ public class SwordInStone extends AbstractLakeContent
 				outputText("The staff itself is four and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful staff.\n\n");
 				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(weapons.B_STAFF, explorer.done);
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
+				else player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 1, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.TookBlessedStaff,0,0,0,0);
 			}
 		}
@@ -168,6 +174,8 @@ public class SwordInStone extends AbstractLakeContent
 				outputText("The shield itself is made from purest, shining steel you have ever seen.  It truly is a beautiful shield.\n\n");
 				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(shields.BSHIELD, explorer.done);
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
+				else player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 1, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.TookBlessedShield,0,0,0,0);
 			}
 		}
@@ -209,6 +217,8 @@ public class SwordInStone extends AbstractLakeContent
 				outputText("The whip itself is made from purest, shining leather you have ever seen.  It truly is a beautiful whip.\n\n");
 				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(weapons.B_WHIP, explorer.done);
+				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
+				else player.createStatusEffect(StatusEffects.BlessedItemAtTheLake, 1, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.TookBlessedWhip,0,0,0,0);
 			}
 		}

@@ -156,6 +156,7 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (player.hasKeyItem("Radiant shard") >= 0) miscStats += "<b>Radiant Shards:</b> " + player.keyItemvX("Radiant shard", 1) + "\n";
+		if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) miscStats += "<b>Collected Beautiful Items:</b> " + player.statusEffectv1(StatusEffects.BlessedItemAtTheLake) + "\n";
 
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
 			miscStats += "<b>Fishery daily production:</b> " + camp.FisheryDailyProduction() + "\n";

@@ -16422,6 +16422,8 @@ public function rangePhysicalForce():Number {
     if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
     if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) mod += .05;
     if (player.hasPerk(PerkLib.Sharpshooter)) mod += .05;
+    if (player.hasPerk(PerkLib.DeadlyAim)) mod += .05;
+    if (player.hasPerk(PerkLib.Penetrator)) mod += .05;
     if (player.hasPerk(PerkLib.PowerShot)) mod += .05;
     if (player.hasPerk(PerkLib.ColdAim)) mod += .1;
     if (player.hasPerk(PerkLib.DeadlyThrow)) mod += .1;

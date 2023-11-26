@@ -123,6 +123,12 @@ public class Changelog extends BaseContent
 			outputText("-New tier 1 wisdom lvl-up perk: Penetrator. Req. Job: Ranger & Precision perks, 60+ wis. Effect: Thrown weapons and firearms (+ mech weapons) ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red). (+5% range physical attacks multiplier)\n");
 			outputText("-Followers can no longer stun resolute enemies. Boss/Elite/Champion Type enemies gain a temporary resistance to stuns for 2 rounds after coming out of stun, except for Alvina when preparing an ultimate attack. Alvina's 'Beyond gods and mortals' achievement now activates when beating her in the pure route in Xianxia mode. ");
 			outputText("Blonde Kitsune sex scenes can no longer be done if the player doesn't have a cock, preventing errors. (Demojay)\n");
+			outputText("-Now it's possible to find all beautiful items at the Lake. Still only one of them if req. are meet will appear during exploration. B.Sword now addtionaly req. Warrior job to find. On stats page was added counter how many beautiful items PC found.\n");
+			outputText("-When exploring areas can reroll explore grid without need to leave back to camp and re-entering area explore. But it still come with some time wasted, namely 30 min.\n");
+			outputText("-Fix a bug with minotaur and lacta bovine bull strength not granting as much strength as it should our beloved bovines are now stronk again. (Liadri)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -137,13 +143,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX) (Canadian Snas) (Jtecx) (Furrin Gok) (khovel) (Chibizs) (Lord Shadeogorath) (Xetaxheb) (jfmherokiller) (Demojay) (NUZ/Shirane)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
