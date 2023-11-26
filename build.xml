@@ -63,6 +63,8 @@
     <macrodef name="createAirApk">
         <attribute name="platform" />
         <attribute name="specialArch"/>
+        <attribute name="swf-name"/>
+        <attribute name="SpecialPostfix"/>
         <sequential>
             <exec executable="${FLEX_HOME}/bin/adt@{platform}" failonerror="true">
                 <arg line="-package" />
@@ -71,9 +73,9 @@
                 <arg line="-storetype pkcs12" />
                 <arg line="-keystore ${basedir}/coc.keystore" />
                 <arg line="-storepass 123456" />
-                <arg line="${build.dir}/CoC-Mobile-@{specialArch}.apk" />
+                <arg line="${build.dir}/CoC-Mobile-@{SpecialPostfix}.apk" />
                 <arg line="${basedir}/CoC-Android.xml" />
-                <arg line="-C ${build.dir} CoC-Mobile.swf" />
+                <arg line="-C ${build.dir} @{swf-name}.swf" />
                 <arg line="-C ${basedir}" />
                 <arg line="devTools/icons" />
             </exec>
@@ -81,13 +83,13 @@
     </macrodef>
 
     <target name="airApkWin" description="Create the AIR package" depends="airMobileOrigin,checkos" if="isWindows">
-        <createAirApk platform=".bat" specialArch="armv7"/>
-        <createAirApk platform=".bat" specialArch="armv8"/>
+        <createAirApk platform=".bat" specialArch="armv7" swf-name="CoC-Mobile" SpecialPostfix="armv7"/>
+        <createAirApk platform=".bat" specialArch="armv8" swf-name="CoC-Mobile" SpecialPostfix="armv8"/>
     </target>
 
     <target name="airApkLin" description="Create the AIR package" depends="airMobileOrigin,checkos" if="isLinux">
-        <createAirApk platform="" specialArch="armv7"/>
-        <createAirApk platform="" specialArch="armv8"/>
+        <createAirApk platform="" specialArch="armv7" swf-name="CoC-Mobile" SpecialPostfix="armv7"/>
+        <createAirApk platform="" specialArch="armv8" swf-name="CoC-Mobile" SpecialPostfix="armv8"/>
     </target>
 
     <echo>building standalone swfs</echo>
