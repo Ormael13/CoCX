@@ -1,5 +1,6 @@
 package classes.Scenes.Combat.Soulskills {
 import classes.Scenes.Combat.AbstractSoulSkill;
+import classes.Scenes.Combat.CombatAbility;
 import classes.StatusEffects;
 import classes.Monster;
 
@@ -25,7 +26,10 @@ public class HurricaneDanceSkill extends AbstractSoulSkill {
 	}
 
     override public function advance(display:Boolean):void {
-        advanceDuration(StatusEffects.HurricaneDance, display, "<b>Hurricane Dance effect wore off!</b>\n\n");
+        function endFunction(ability:CombatAbility, display:Boolean):void {
+            if (display) outputText("<b>Hurricane Dance effect wore off!</b>\n\n");
+        }
+        advanceDuration(StatusEffects.HurricaneDance, endFunction, display);
     }
 
     override public function calcCooldown():int {

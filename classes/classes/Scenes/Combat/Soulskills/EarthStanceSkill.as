@@ -1,5 +1,6 @@
 package classes.Scenes.Combat.Soulskills {
 import classes.Scenes.Combat.AbstractSoulSkill;
+import classes.Scenes.Combat.CombatAbility;
 import classes.StatusEffects;
 import classes.Monster;
 
@@ -25,7 +26,10 @@ public class EarthStanceSkill extends AbstractSoulSkill {
 	}
 
     override public function advance(display:Boolean):void {
-        advanceDuration(StatusEffects.EarthStance, display, "<b>Earth Stance effect wore off!</b>\n\n");
+        function endFunction(ability:CombatAbility, display:Boolean):void {
+            if (display) outputText("<b>Earth Stance effect wore off!</b>\n\n");
+        }
+        advanceDuration(StatusEffects.EarthStance, endFunction, display);
     }
 
     override public function calcCooldown():int {

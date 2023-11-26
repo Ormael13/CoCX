@@ -1,6 +1,7 @@
 package classes.Scenes.Combat {
 import classes.Monster;
 import classes.internals.EnumValue;
+import classes.StatusEffectType;
 
 import coc.view.ButtonData;
 
@@ -527,5 +528,22 @@ public class CombatAbility extends BaseCombatContent {
 	protected function toggleOffUsabilityCheck():String {
 		return "";
 	}
+
+	/**
+	 * Function to be used within the advance() function to handle the statuseffect associated with an ability's duration
+	 * @param statusEffect - StatusEffectType responsible for ability effect duration
+	 * @param endFunction - Function that will be called when the ability's duration ends. Function signature must be of the format
+	 * "function endFunction(ability:CombatAbility, display:Boolean):void"
+	 * @param display - To be passed to the endFunction parameter to determine if text should be displayed to the user
+	 */
+	protected function advanceDuration(statusEffect:StatusEffectType, endFunction:Function = null, display:Boolean = true):void {
+        if (player.hasStatusEffect(statusEffect)) {
+            if (player.statusEffectv1(statusEffect) <= 0) {
+                player.removeStatusEffect(statusEffect);
+                if (endFunction != null)
+                    endFunction(this, display);
+            } else player.addStatusValue(statusEffect, 1, -1);
+        }
+    }
 }
 }

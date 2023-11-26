@@ -113,16 +113,6 @@ public class AbstractSoulSkill extends CombatAbility {
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(15);
 		combat.heroBaneProc(damage);
-	}
-
-    protected function advanceDuration(statusEffect:StatusEffectType, display:Boolean, endMessage:String = ""):void {
-        if (player.hasStatusEffect(statusEffect)) {
-            if (player.statusEffectv1(statusEffect) <= 0) {
-                player.removeStatusEffect(statusEffect);
-                if (endMessage && display)
-                    outputText(endMessage);
-            } else player.addStatusValue(statusEffect, 1, -1);
-        }
-    }    
+	}    
 }
 }
