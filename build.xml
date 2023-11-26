@@ -90,19 +90,25 @@
         <createAirApk platform="" specialArch="armv8"/>
     </target>
 
-
+    <echo>building standalone swfs</echo>
     <target name="release" depends="init" description="Build with release flags">
-        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" should-optimize="true" binary-name="CoC-release.swf"></build-game-binary>
+        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" should-optimize="true" binary-name="CoC-release.swf"/>
     </target>
 
     <target name="debug" depends="init" description="Build with debug flags">
-        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" should-optimize="false" binary-name="CoC-debug.swf"></build-game-binary>
+        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" should-optimize="false" binary-name="CoC-debug.swf"/>
     </target>
-	<target name="airMobileOrigin" depends="init" description="Build air release">
-		<build-game-binary debug-flag="true" release-flag="true" air-flag="true" standalone-flag="false" should-optimize="true" binary-name="CoC-Mobile.swf"></build-game-binary>
+    <echo> building mobile/air swfs</echo>
+	<target name="airMobileOrigin" depends="init" description="Build air">
+		<build-game-binary debug-flag="true" release-flag="true" air-flag="true" standalone-flag="false" should-optimize="true" binary-name="CoC-Mobile.swf"/>
 	</target>
-
-    <target name="all" depends="init,release,debug,airMobileOrigin" description="Build all swf versions"/>
+    <target name="CoCMobileBeta" depends="init" description="Build air">
+        <build-game-binary air-flag="true" standalone-flag="false" debug-flag="true" release-flag="false" should-optimize="true" binary-name="CoC-Mobile-Beta.swf"/>
+    </target>
+    <target name="CoCMobileRelease" depends="init" description="Build air">
+        <build-game-binary air-flag="true" standalone-flag="false" debug-flag="false" release-flag="true" should-optimize="true" binary-name="CoC-Mobile-Release.swf"/>
+    </target>
+    <target name="all" depends="init,release,debug,CoCMobileBeta,CoCMobileRelease,airMobileOrigin" description="Build all swf versions"/>
     <target name="makeMobileAir" depends="init,airMobileOrigin,airApkLin,airApkWin" description=" build mobile App"/>
     <target name="allCI" depends="init,release,debug,makeMobileAir" description="Build all swf versions"/>
 </project>
