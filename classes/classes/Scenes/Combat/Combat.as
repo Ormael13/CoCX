@@ -1883,27 +1883,9 @@ public class Combat extends BaseContent {
         if (summonedElementals >= 9) elementalDamage += baseDamage;
         if (summonedElementals >= 13) elementalDamage += baseDamage;
         if (elementalDamage < 10) elementalDamage = 10;
-        if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) elementalDamage *= historyTacticianBonus();
-        if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) {
-            if (summonedElementals >= 9) elementalDamage *= 4;
-            else if (summonedElementals >= 5) elementalDamage *= 3;
-            else elementalDamage *= 2;
-        }
-        var elementalamplification:Number = 1;
-        if (player.hasPerk(PerkLib.ElementalConjurerResolve)) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-        if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-        if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-        if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
-		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
-        if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
-        if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
-            elementalamplification += 0.1;
-            if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
-            if (player.hasPerk(PerkLib.WispCaptain)) elementalamplification += 0.3;
-            if (player.hasPerk(PerkLib.WispMajor)) elementalamplification += 0.4;
-            if (player.hasPerk(PerkLib.WispColonel)) elementalamplification += 0.5;
-        }
-        elementalDamage *= elementalamplification;
+        
+        elementalDamage *= elementalAmplificationMod(summonedElementals);
+
         //Determine if critical hit!
         var crit:Boolean = false;
         var critChance:int = 5;
@@ -1926,7 +1908,7 @@ public class Combat extends BaseContent {
                     break;
             }
         }
-        if (elementType != AIR && elementType != AIR_E && elementType != ETHER) elementalDamage *= (monster.damagePercent() / 100);
+        
         elementalDamage = Math.round(elementalDamage);
         switch (elementType) {
             case EARTH:
@@ -7082,6 +7064,32 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
         if (player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.AffinityUndine)) damage *= 2;
         return damage;
+    }
+
+    public function elementalAmplificationMod(summonedElementals:int):Number {
+        var elementalamplification:Number = 1;
+        if (player.hasPerk(PerkLib.ElementalConjurerResolve)) elementalamplification += 0.1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+        if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+        if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+        if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
+		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
+        if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
+        if (flags[kFLAGS.WILL_O_THE_WISP] == 2) {
+            elementalamplification += 0.1;
+            if (player.hasPerk(PerkLib.WispLieutenant)) elementalamplification += 0.2;
+            if (player.hasPerk(PerkLib.WispCaptain)) elementalamplification += 0.3;
+            if (player.hasPerk(PerkLib.WispMajor)) elementalamplification += 0.4;
+            if (player.hasPerk(PerkLib.WispColonel)) elementalamplification += 0.5;
+        }
+        if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) elementalamplification += (1 - historyTacticianBonus());
+        
+        if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) {
+            if (summonedElementals >= 9) elementalamplification += 3;
+            else if (summonedElementals >= 5) elementalamplification += 2;
+            else elementalamplification += 1;
+        }
+
+        return elementalamplification;
     }
 
     public function lustDamageCalc():Number {
