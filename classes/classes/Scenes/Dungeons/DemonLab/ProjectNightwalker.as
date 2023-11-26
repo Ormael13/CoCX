@@ -217,7 +217,7 @@ public class ProjectNightwalker extends Monster {
         this.lustVuln = 0.8;
         this.level = 60;
         this.gems = rand(50) + 75;
-        this.drop = new WeightedDrop().add(consumables.REDVIAL, 5).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(consumables.VAMPBLD, 5).add(jewelries.POWRRNG, 1);
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);

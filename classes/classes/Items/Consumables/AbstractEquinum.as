@@ -568,13 +568,13 @@ public class AbstractEquinum extends Consumable {
 		//Alicorn wings
 		if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && player.horns.type == Horns.UNICORN && rand(4) == 0) {
 			outputText("\n\n");
-      CoC.instance.transformations.WingsFeatheredAlicorn.applyEffect();
+			CoC.instance.transformations.WingsFeatheredAlicorn.applyEffect();
 			changes++;
 		}
 		//Nightmare wings
 		if (type == 2 && player.wings.type == Wings.NONE && changes < changeLimit && (player.horns.type == Horns.UNICORN || player.horns.type == Horns.BICORN) && player.cor > 89 && rand(4) == 0) {
 			outputText("\n\n");
-      CoC.instance.transformations.WingsNightmare.applyEffect();
+			CoC.instance.transformations.WingsNightmare.applyEffect();
 			changes++;
 		}
 		//Remove old wings

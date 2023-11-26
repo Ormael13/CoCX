@@ -44,7 +44,7 @@ use namespace CoC;
 			damage += 1.2;
 			damage = Math.round(damage);
 			damage = player.takePhysDamage(damage, true);
-			if (rand(10) == 0) {
+			if (rand(10) == 0 && !player.immuneToBleed()) {
 				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 				else {
 					player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(3), 0.05, 0, 0);

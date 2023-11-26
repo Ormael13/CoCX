@@ -13,7 +13,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			"The arouse spell draws on your own inner lust in order to enflame the enemies passions.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_LUSTDMG, TAG_AOE]);
+			[TAG_LUSTDMG, TAG_AOE, TAG_TIER1]);
 		baseManaCost = 100;
 	}
 	

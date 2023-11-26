@@ -1469,7 +1469,7 @@ public class BeeGirlScene extends BaseContent
 			addButtonIfTrue(0, "Use Cock", rapeTheBeeGirlWithADick, "Req. cock area smaller than " + monster.vaginalCapacity(), dicksFit > 0, "Fuck her with your dick.");
 			addButtonIfTrue(1, "Multicock", rapeTheBeeMultiCockStuff, "Req. at least 2 cocks with area smaller than " + monster.vaginalCapacity(), dicksFit > 1, "More dicks, more fun!");
 			//vag
-			addButtonIfTrue(2, "Use Vagina", rapeABeeGirlWithYourVagina, "Req. a vagina", player.hasVagina(), "You could make her get off your [vagina].");
+			addButtonIfTrue(2, "Use Vagina", rapeABeeGirlWithYourVagina, "Req. a vagina", player.hasVagina(), "You could make her get off your honeypot?");
 			//herm
 			addButtonIfTrue(3, "Herm Style", futaRapesBeeGirl, "Req. a vagina and a dick", player.isHerm(), "You could try to please both your 'male' and 'female' halves on the bee."); //can be non-fitting and non-taur
 			//corrupt

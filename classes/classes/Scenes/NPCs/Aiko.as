@@ -29,9 +29,10 @@ import classes.internals.*;
 				player.takePhysDamage(damage - rand(10), true);
 				player.takePhysDamage(damage - rand(9), true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 2));
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 2);
+				}
 			}
 			//Determine if evaded
 			else if (player.getEvasionRoll()) {
@@ -47,10 +48,10 @@ import classes.internals.*;
 				outputText(" with deadly precision! It protrudes from your body painfully, making it somewhat difficult to move around.  ");
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else
-					player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				}
 			}
 		}
 		
@@ -144,9 +145,10 @@ import classes.internals.*;
 				var damage:int = int(str) + rand(15);
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				}
 			}
 		}
 		
@@ -345,9 +347,10 @@ import classes.internals.*;
 				player.takePhysDamage((str + rand(10)), true);
 				outputText(" ");
 				player.addCombatBuff("spe", -2, "Combat Debuff", "CombatDebuffSpe");
-				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
-				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
+				if (!player.immuneToBleed()) {
+					if (!player.hasStatusEffect(StatusEffects.IzmaBleed)) player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
+					else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
+				}
 			}
 		}
 		

@@ -189,6 +189,14 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Tier1',
 		desc: "This ability is tier 1"
 	});
+	public static const TAG_TIER2:int = EnumValue.add(AllTags, 16, 'TIER2', {
+		name: 'Tier2',
+		desc: "This ability is tier 2"
+	});
+	public static const TAG_TIER3:int = EnumValue.add(AllTags, 17, 'TIER3', {
+		name: 'Tier3',
+		desc: "This ability is tier 3"
+	});
 	
 	/**
 	 * Unique id of this ability.

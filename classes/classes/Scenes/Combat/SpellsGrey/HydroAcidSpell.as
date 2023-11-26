@@ -11,7 +11,7 @@ public class HydroAcidSpell extends AbstractGreySpell {
 			"Condense part of the ambient moisture into acid spray to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_ACID]
+			[TAG_DAMAGING, TAG_ACID, TAG_TIER2]
 		);
 		baseManaCost = 100;
 	}

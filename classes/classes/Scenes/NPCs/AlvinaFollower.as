@@ -746,6 +746,8 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("<b>Alvina has joined you as a follower.</b>\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 		awardAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT);
+		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4)
+			awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 
 		alvinaMakeLovePure();
 	}

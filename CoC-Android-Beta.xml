@@ -4,7 +4,7 @@
   <name>Corruption of Champion X</name>
   <versionNumber>0.0.0</versionNumber>
   <initialWindow>
-    <content>CoC-Mobile.swf</content>
+    <content>CoC-Mobile-Beta.swf</content>
     <visible>true</visible>
     <autoOrients>true</autoOrients>
     <fullScreen>true</fullScreen>

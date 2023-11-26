@@ -4,6 +4,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Items.*;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
@@ -31,33 +32,69 @@ public class CombatTeases extends BaseCombatContent {
 	}
 	
 	public function teaseBaseLustDamage():Number {
-		var tBLD:Number = 27 + rand(9);
-		tBLD = combat.calculateBasicTeaseDamage(tBLD);
-		//if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
-		//if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
-		//tBLD += (2 * player.teaseDmgStat.value);
-		//if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
-		//if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
-		//tBLD += scalingBonusLibido() * 0.2;
-		//if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
-		//else tBLD += player.teaseLevel * 2;
-		//if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
-		//switch (player.coatType()) {
-		//	case Skin.FUR:
-		//		tBLD += (2 * (1 + player.newGamePlusMod()));
-		//		break;
-		//	case Skin.SCALES:
-		//		tBLD += (4 * (1 + player.newGamePlusMod()));
-		//		break;
-		//	case Skin.CHITIN:
-		//		tBLD += (6 * (1 + player.newGamePlusMod()));
-		//		break;
-		//	case Skin.BARK:
-		//		tBLD += (8 * (1 + player.newGamePlusMod()));
-		//		break;
-		//}
-		//if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
-		//if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
+		var tBLD:Number = 27 + rand(15);
+		var bimbo:Boolean = false;
+		var bro:Boolean = false;
+		var futa:Boolean = false;
+		if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
+		if (player.hasPerk(PerkLib.BroBody)) bro = true;
+		if (player.hasPerk(PerkLib.FutaForm)) futa = true;
+		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
+		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
+		tBLD += (2 * player.teaseDmgStat.value);
+		if (bimbo || bro || futa) {
+			tBLD += 15;
+		}
+		//partial skins bonuses
+		switch (player.coatType()) {
+			case Skin.FUR:
+				tBLD += (1 + player.newGamePlusMod());
+				break;
+			case Skin.SCALES:
+				tBLD += (2 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.CHITIN:
+				tBLD += (3 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				tBLD += (4 * (1 + player.newGamePlusMod()));
+				break;
+		}
+		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
+		tBLD += scalingBonusLibido() * 0.2;
+		if (player.hasPerk(PerkLib.GracefulBeauty)) tBLD += scalingBonusSpeed() * 0.1;
+		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
+		if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
+		else tBLD += player.teaseLevel * 2;
+		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
+		var damagemultiplier:Number = 1;
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
+		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
+		if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
+		if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
+		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
+		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+		if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
+		if (player.hasStatusEffect(StatusEffects.TeasePotion)) damagemultiplier += 0.05;
+		tBLD *= damagemultiplier;
+		if (player.hasPerk(PerkLib.ChiReflowLust)) tBLD *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) tBLD *= 1.5;
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
+			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+			player.takeLustDamage(Math.round(-tBLD)/40, true);
+			tBLD *= 1.2;
+		}
+		if (player.perkv1(PerkLib.ImpNobility) > 0) {
+			tBLD *= (100+player.perkv1(PerkLib.ImpNobility))/100;
+		}
+		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
+			tBLD *= f.power * (player.isRaceCached(f.race)? 3:2);
+		}
+		tBLD = (tBLD * monster.lustVuln);
+		if (SceneLib.urtaQuest.isUrta()) tBLD *= 2;
+		tBLD = Math.round(tBLD);
 		return tBLD;
 	}
 

@@ -12,7 +12,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 			"Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times.\n<b>Req. 1 turn channeling. Cooldown: 12 turns.</b>",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING,TAG_FIRE,TAG_AOE]
+			[TAG_DAMAGING,TAG_FIRE,TAG_AOE, TAG_TIER3]
 		);
 		baseManaCost = 1250;
 	}

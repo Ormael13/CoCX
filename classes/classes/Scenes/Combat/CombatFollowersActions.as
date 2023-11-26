@@ -4,10 +4,15 @@
 package classes.Scenes.Combat 
 {
 import classes.CoC;
+import classes.EngineCore;
+import classes.Races;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.Scenes.SceneLib;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.StatusEffects.VampireThirstEffect;
 
 	public class CombatFollowersActions extends BaseCombatContent
 	{
@@ -90,12 +95,22 @@ import classes.StatusEffects;
 			player.createStatusEffect(StatusEffects.CompBoostingPCArmorValue, 0, 0, 0, 0);
 		}
 		public function neisaCombatActions3():void {
-			outputText("Neisa smashes her shield on [themonster]’s head, stunning it.\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			outputText("Neisa smashes her shield on [themonster]’s head, ");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				outputText("stunning it.\n\n");
+			} else {
+				outputText("but the enemy endured it.\n\n");
+			}
 		}
 		public function neisaCombatActions4():void {
-			outputText("Neisa viciously ram her shield on [themonster], dazing it.\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			outputText("Neisa viciously rams her shield on [themonster], ");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				outputText("dazing it.\n\n");
+			} else {
+				outputText("but the enemy endured it.\n\n");
+			}
 		}
 		
 		public function dianaCombatActions():void {
@@ -205,8 +220,13 @@ import classes.StatusEffects;
 			outputText("\n\n");
 		}
 		public function etnaCombatActions3():void {
-			outputText("Etna dives at [themonster] and crashes boob first into [monster his] face, staggering it before taking flight again.\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			outputText("Etna dives at [themonster] and crashes boob first into [monster his] face, ");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				outputText("staggering it before taking flight again.\n\n");
+			} else {
+				outputText("but the enemy shook off the blow.\n\n");
+			}
 		}
 		
 		public function auroraCombatActions():void {
@@ -286,8 +306,90 @@ import classes.StatusEffects;
 			dmg3a = Math.round(dmg3a * increasedEfficiencyOfAttacks());
 			outputText("Aurora flaps her huge bat wings at [themonster] trying to knock it down. ");
 			doDamage(dmg3a, true, true);
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				outputText("\n\n");
+			} else {
+				outputText("However, [themonster] was able to stand their ground.\n\n");
+			}
+		}
+		
+		public function ghoulishVampServCombatActions():void {
+			if (player.statusEffectv4(StatusEffects.CombatFollowerGVampServ) > 0) {
+				var choice5:Number = rand(3);
+				if (choice5 == 0) ghoulishVampServCombatActions1();
+				if (choice5 == 1) ghoulishVampServCombatActions2();
+				if (choice5 == 2) ghoulishVampServCombatActions3();
+			}
+			else {
+				outputText(flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+" assume combat stance.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerGVampServ, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == ""+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+"" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
+		}
+		public function ghoulishVampServCombatActions1():void {
+			var dmg02:Number = player.statusEffectv1(StatusEffects.CombatFollowerGVampServ);
+			var weaponGhoul1:Number = player.statusEffectv2(StatusEffects.CombatFollowerGVampServ);
+			dmg02 += scalingBonusStrengthCompanion() * 0.5;
+			dmg02 *= (1 + (weaponGhoul1 * 0.03));
+			dmg02 = Math.round(dmg02 * increasedEfficiencyOfAttacks());
+			outputText(flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+" leaps into the fray, delivering a deadly slash with "+(SceneLib.ghoulishVampireServant.ghoulGender()?"her":"his")+" clawed hand. [Themonster] begins to bleed ");
+			doDamage(dmg02, true, true);
+			if (monster.canMonsterBleed()) {
+				outputText(" profusely");
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+                monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.01, 0, 0);
+			}
+			outputText(".");
+			if (player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) {
+				outputText(" The blood being redirected and absorbed by you!");
+				HPChange(dmg02, true);
+				var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+				var drinked:Number = 1;
+				if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) drinked += 1;
+				if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) drinked += 3;
+				if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) drinked *= 2;
+				if (player.hasPerk(PerkLib.BloodMastery)) drinked *= 2;
+				thirst.drink(drinked);
+			}
 			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		}
+		public function ghoulishVampServCombatActions2():void {
+			outputText(flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+" leaps onto your opponent, attempting to hold it in place as "+flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+" tries to get in a vicious bite! ");
+			if (rand(3) > 0) {
+				var dmg03:Number = scalingBonusStrengthCompanion() * 0.4;
+				dmg03 = Math.round(dmg03 * increasedEfficiencyOfAttacks());
+				outputText("[Themonster] is pinned under your ghoulish partner's body!");
+				doDamage(dmg03, true, true);
+				if (!monster.hasPerk(PerkLib.Resolute)) {
+					monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				} else {
+					outputText("\nHowever, [Themonster] was able to get free!");
+				}
+			}
+			else outputText("[Themonster] manages to shove your servant back!");
+			outputText("\n\n");
+		}
+		public function ghoulishVampServCombatActions3():void {
+			var dmg04:Number = scalingBonusStrengthCompanion() * 0.4;
+			var weaponGhoul2:Number = player.statusEffectv2(StatusEffects.CombatFollowerGVampServ);
+			dmg04 *= (1 + (weaponGhoul2 * 0.02));
+			dmg04 = Math.round(dmg04 * increasedEfficiencyOfAttacks());
+			outputText(flags[kFLAGS.GHOULISH_VAMPIRE_SERVANT_NAME]+" charges from a wide angle, surprising your opponent and biting straight into "+(monster.hasCock()?"his":"her")+" flesh to extract some of its soul force. The ghoul is pushed back, but still manages to steal a bite and some soul force from "+(SceneLib.ghoulishVampireServant.ghoulGender()?"her":"his")+" victim! ");
+			doDamage(dmg04, true, true);
+			HPChange(dmg04, true);
+			EngineCore.SoulforceChange(Math.round(dmg04 * 0.2));
+			var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+			var drinked:Number = 1;
+			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) drinked += 1;
+			if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) drinked += 3;
+			if (player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 4) drinked *= 2;
+			if (player.hasPerk(PerkLib.BloodMastery)) drinked *= 2;
+			thirst.drink(drinked);
+			outputText("\n\n");
 		}
 		
 		public function ayaneCombatActions():void {
@@ -396,8 +498,12 @@ import classes.StatusEffects;
 			damage1 = Math.round(damage1 * increasedEfficiencyOfAttacks());
 			outputText("Alvina incants a spell and freezes the enemy solid, now's your chance! ");
 			doIceDamage(damage1, true, true);
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			} else {
+				outputText("\nHowever, [Themonster] was able to break out of its prison!");
+			}
 			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		}
 		public function alvinaCombatActions2():void {
 			var lustDmg:Number = Math.round(player.statusEffectv2(StatusEffects.CombatFollowerAlvina) / 3);
@@ -430,9 +536,13 @@ import classes.StatusEffects;
 			damage2 += scalingBonusIntelligenceCompanion() * 4;
 			damage2 = Math.round(damage2 * increasedEfficiencyOfAttacks());
 			if (monster.plural) damage2 *= 5;
+			outputText("Alvina sighs in annoyance and tosses a fireball which explodes on impact, setting "+(monster.plural ? "all ":"")+"the enem"+(monster.plural ? "ies ":"y")+" on fire!\n\n");
 			doFireDamage(damage2);
-			outputText("Alvina sighs in annoyance and tosses a fireball which explodes on impact, setting "+(monster.plural ? "all ":"")+"the enem"+(monster.plural ? "ies ":"y")+" on fire! (<b><font color=\"#800000\">" + String(damage2) + "</font></b>)\n\n");
-			monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			} else {
+				outputText("However, [Themonster] quickly regains their bearings!\n\n");
+			}
 		}
 		public function alvinaCombatActions5():void {
 			var dmg:Number = player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
@@ -818,10 +928,14 @@ import classes.StatusEffects;
 			else if (weaponZenji >= 151 && weaponZenji < 201) dmg13 *= (4.75 + ((weaponZenji - 150) * 0.015));
 			else dmg13 *= (5.5 + ((weaponZenji - 200) * 0.01));
 			dmg13 = Math.round(dmg13 * increasedEfficiencyOfAttacks());
-			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			outputText("Zenji charges at [themonster], knocking them down and pinning them beneath him with his spear. ");
 			doDamage(dmg13, true, true);
-			outputText(" Zenji has [themonster] pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. [Themonster] struggles beneath him before finally shaking him off.\n\n");
+			if (!monster.hasPerk(PerkLib.Resolute)) {
+				outputText(" Zenji has [themonster] pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts.\n\n");
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			} else {
+				outputText(" Zenji has [themonster] pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. [Themonster] struggles beneath him before finally shaking him off.\n\n");
+			}
 		}
 		public function zenjiCombatActions5():void {
 			outputText("Seeing your injuries, Zenji quickly rushes to your side, \"<i>It’s okay [name]... I’m here for you…</i>\" he says, wrapping you within his arms, completely shielding you from your enemies. ");

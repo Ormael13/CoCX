@@ -13,7 +13,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 			"\n<b>Req. 1 turn channeling. Cooldown: 12 turns</b>",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_ICE, TAG_AOE]
+			[TAG_DAMAGING, TAG_ICE, TAG_AOE, TAG_TIER3]
 		);
 		baseManaCost = 1250;
 	}

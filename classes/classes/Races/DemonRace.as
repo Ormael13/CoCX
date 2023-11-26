@@ -9,7 +9,7 @@ import classes.VaginaClass;
 
 public class DemonRace extends Race {
 	public static const DemonSkinColors:/*String*/Array = ["olive", "tan", "fair", "shiny black", "sky blue", "indigo", "ghostly white", "leaf green", "light green", "light purple", "purple", "red", "grey", "blue", "snow white", "midnight black"];
-    public static const DemonSkin2Colors:/*String*/Array = ["light pink", "purple", "turquoise", "light green"];
+    public static const DemonSkin2Colors:/*String*/Array = ["light pink", "purple", "turquoise", "light green", "snow white"];
 	public static const DemonEyeColors:/*String*/Array = ["fiendish pink", "pink", "red", "yellow", "blue", "turquoise", "light green"];
 	public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
@@ -47,6 +47,7 @@ public class DemonRace extends Race {
 				.hornType(Horns.DEMON, +1)
 				.hornType(NOT(Horns.GOAT), 0, -10)
 				.faceType(Face.DEMON, +1)
+				.faceType(NOT(Face.VAMPIRE), 0, -10)
 				.tongueType(Tongue.DEMONIC, +1)
 				.earType(ANY(Ears.ELFIN, Ears.ELVEN), +1)
 				.eyeType(Eyes.DEMON, +1)
@@ -56,6 +57,7 @@ public class DemonRace extends Race {
 				.tailType(Tail.DEMONIC, +1)
 				.wingType(Wings.BAT_LIKE_TINY, +2)
 				.wingType(Wings.BAT_LIKE_LARGE, +4)
+				.wingType(NOT(Wings.VAMPIRE), 0, -10)
 				.plainSkinOfAdj(NOT("slippery"), +1)
 				.skinColor1(ANY(DemonSkinColors), +1)
 				.skinColor2(ANY(DemonSkin2Colors), +1)

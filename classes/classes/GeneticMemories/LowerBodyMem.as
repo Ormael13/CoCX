@@ -549,6 +549,13 @@ package classes.GeneticMemories {
           title: "Dem. G. Feet",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDemonGracefulFeet}});
 
+      public static const CLOVEN_HOOFED_2: int = _partid++;
+      EnumValue.add(Memories, CLOVEN_HOOFED_2, "CLOVEN_HOOFED_2", {
+          id: "Reindeer Lower Body",name: "Reindeer Legs",
+          cost: 200,
+          title: "Reindeer Legs",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyReindeerToggle(true)}});
+
       public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

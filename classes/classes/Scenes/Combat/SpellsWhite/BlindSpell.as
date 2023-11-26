@@ -2,6 +2,7 @@ package classes.Scenes.Combat.SpellsWhite {
 import classes.Scenes.Combat.AbstractWhiteSpell;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Scenes.Dungeons.EbonLabyrinth.Draculina;
 import classes.Scenes.NPCs.Diva;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -52,6 +53,8 @@ public class BlindSpell extends AbstractWhiteSpell{
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
 				if(monster is Diva){
 					(monster as Diva).handlePlayerSpell("blind");
+				} else if(monster is Draculina){
+					(monster as Draculina).handlePlayerSpell("blind");
 				} else if(monster.short == "Isabella") {
 					if (display) {
 						if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");

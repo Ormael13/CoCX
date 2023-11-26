@@ -283,6 +283,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LightningNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.RiverDungeonA)) this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if (flags[kFLAGS.ELECTRA_LVL_UP] > 1 || flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			if (flags[kFLAGS.ELECTRA_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);

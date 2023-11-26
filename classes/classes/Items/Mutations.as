@@ -176,7 +176,7 @@ public final class Mutations extends MutationsHelper {
 		//-Madness
         if (!player.hasPerk(PerkLib.Insanity) && rand(20) == 0) {
             outputText("[pg]");
-			outputText(" As you drink the last sip of the vials you suddenly have an epiphany. The reason you've been feeling so limited is because of limits you have yourself placed over your own line of thoughts. Nothing is impossible to anyone who dismisses the very notion of impossibility. Crazy is just a word for enlightened and the mads have knowledge and truth the sanes are too stubborn to see. ");
+			outputText("As you drink the last sip of the vials you suddenly have an epiphany. The reason you've been feeling so limited is because of limits you have yourself placed over your own line of thoughts. Nothing is impossible to anyone who dismisses the very notion of impossibility. Crazy is just a word for enlightened and the mads have knowledge and truth the sanes are too stubborn to see. ");
 			outputText("With this knowledge you decide to discard aside your stuck up principes and embrace the all encompassing truth that is madness.  (<b>Gained Perk: Insanity!</b>)");
             player.createPerk(PerkLib.Insanity,0,0,0,0);
             changes++;
@@ -7088,7 +7088,7 @@ public final class Mutations extends MutationsHelper {
         //-Madness
         if (!player.hasPerk(PerkLib.Insanity) && changes < changeLimit) {
             outputText("[pg]");
-			outputText(" You begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? ");
+			outputText("You begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? ");
 			outputText("People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.  (<b>Gained Perk: Insanity!</b>)");
             player.createPerk(PerkLib.Insanity,0,0,0,0);
             changes++;
@@ -15989,8 +15989,8 @@ public final class Mutations extends MutationsHelper {
         //-Madness
         if (!player.hasPerk(PerkLib.Insanity) && changes < changeLimit) {
             outputText("[pg]");
-            outputText(" You begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? ");
-			outputText("People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.  (<b>Gained Perk: Dragon lust poison breath!</b>)");
+            outputText("You begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? ");
+			outputText("People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.  (<b>Gained Perk: Insanity!</b>)");
             player.createPerk(PerkLib.Insanity,0,0,0,0);
             changes++;
         }
@@ -16980,7 +16980,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
 		//wis change
-        if (rand(4) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
+        if (rand(3) == 0 && changes < changeLimit && MutagenBonus("wis", 1)) {
             outputText("[pg]You feel a tremendous rush of mental celerity, as if your mind were clear of all doubt.");
             changes++;
         }
@@ -17389,14 +17389,14 @@ public final class Mutations extends MutationsHelper {
 
     public function stomiidaeFillet(player:Player):void {
         clearOutput();
-        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
-        player.refillHunger(15);
+        outputText("You unwrap the fillet, and take a bite of the juicy meat, before long you realise there’s no more left. It fills your stomach little, but nothing more.");
+        player.refillHunger(30);
     }
 
     public function calamariSteak(player:Player):void {
         clearOutput();
-        outputText("You eat the flavorless biscuits. It satisfies your hunger a bit, but not much else.");
-        player.refillHunger(15);
+        outputText("Munching down on the cooked squid, you find it to be tender and slimy. However it fills your stomach quite well.");
+        player.refillHunger(45);
     }
 
     public function coelacanthJerky(player:Player):void {
@@ -17558,4 +17558,3 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
-

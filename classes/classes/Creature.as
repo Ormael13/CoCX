@@ -654,7 +654,7 @@ public class Creature extends Utils
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
 				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) max *= 1.5;
 			}
-			else if (hasPerk(PerkLib.HaltedVitals)) {
+			else if (hasPerk(PerkLib.HaltedVitals) || hasPerk(PerkLib.Undeath)) {
 				max += int(lib * 2 + 50);
 				if (lib >= 21) max += Math.round(lib);
 				if (lib >= 41) max += Math.round(lib);
@@ -913,7 +913,7 @@ public class Creature extends Utils
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
-			return Math.min(199999,max);
+			return Math.min(399999,max);
 		}
 		public function maxOverLust():Number {
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
@@ -931,7 +931,7 @@ public class Creature extends Utils
 			if (perkv1(IMutationsLib.HumanOvariesIM) >= 4) max2 += 0.1;
 			max1 *= max2;//~170%
 			max1 = Math.round(max1);
-			return Math.min(339999,max1);
+			return Math.min(579999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;
@@ -3120,7 +3120,7 @@ public class Creature extends Utils
 		//Bleed immunity
 		public function isImmuneToBleed():Boolean
 		{
-			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType))
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType) || game.monster.hasPerk(PerkLib.EnemyGhostType) || game.monster.hasPerk(PerkLib.EnemyUndeadType) || game.monster.hasPerk(PerkLib.EnemyGooType))
 				return true;
 			return false;
 		}

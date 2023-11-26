@@ -36,8 +36,10 @@ package classes.Scenes.Camp
 			var damage:Number = 0;
 			damage += eBaseDamage();
 			player.takePhysDamage(damage, true);
-			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.removeStatusEffect(StatusEffects.Hemorrhage);
-			player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(10),0.1,0,0);
+			if (!player.immuneToBleed()) {
+				if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.removeStatusEffect(StatusEffects.Hemorrhage);
+				player.createStatusEffect(StatusEffects.Hemorrhage, SceneLib.combat.debuffsOrDoTDuration(10), 0.1, 0, 0);
+			}
 		}
 		
 		private function TakeFlight():void {

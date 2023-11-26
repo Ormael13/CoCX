@@ -37,7 +37,7 @@ import classes.Scenes.SceneLib;
 			if(player.armorDef >= 10 || damage == 0) {
 				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 4-10% of health for the next three turns if successful)
 				outputText("writhe as she painfully drags the blades of her glove down your back");
-				player.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
+				if (!player.immuneToBleed()) player.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back");
 			outputText(" before breaking her embrace and leaping away. ");

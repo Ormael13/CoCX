@@ -38,6 +38,7 @@
 		<attribute name="air-flag"/>
         <attribute name="standalone-flag"/>
         <attribute name="binary-name"/>
+        <attribute name="should-optimize"/>
         <sequential>
             <!-- build the game binary -->
             <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
@@ -45,6 +46,7 @@
                 <source-path path-element="${FLEX_HOME}/frameworks"/>
                 <source-path path-element="${main.src.dir}/"/>
                 <compiler.debug>@{debug-flag}</compiler.debug>
+                <compiler.optimize>@{should-optimize}</compiler.optimize>
                 <library-path dir="${FLEX_HOME}/frameworks/libs" includes="*.swc" append="true"/>
                 <library-path dir="${FLEX_HOME}/frameworks/libs/air" includes="*.swc" append="true"/>
                 <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
@@ -53,6 +55,7 @@
                 <define name="CONFIG::AIR" value="@{air-flag}"/>
                 <define name="CONFIG::STANDALONE" value="@{standalone-flag}"/>
                 <swf-version>41</swf-version>
+                <use-network>false</use-network>
             </mxmlc>
         </sequential>
     </macrodef>
@@ -60,6 +63,8 @@
     <macrodef name="createAirApk">
         <attribute name="platform" />
         <attribute name="specialArch"/>
+        <attribute name="swf-name-postfix"/>
+        <attribute name="SpecialPostfix"/>
         <sequential>
             <exec executable="${FLEX_HOME}/bin/adt@{platform}" failonerror="true">
                 <arg line="-package" />
@@ -68,38 +73,49 @@
                 <arg line="-storetype pkcs12" />
                 <arg line="-keystore ${basedir}/coc.keystore" />
                 <arg line="-storepass 123456" />
-                <arg line="${build.dir}/CoC-Mobile-@{specialArch}.apk" />
-                <arg line="${basedir}/CoC-Android.xml" />
-                <arg line="-C ${build.dir} CoC-Mobile.swf" />
+                <arg line="${build.dir}/CoC-Mobile-@{SpecialPostfix}.apk" />
+                <arg line="${basedir}/CoC-Android-@{swf-name-postfix}.xml" />
+                <arg line="-C ${build.dir} CoC-Mobile-@{swf-name-postfix}.swf" />
                 <arg line="-C ${basedir}" />
                 <arg line="devTools/icons" />
             </exec>
         </sequential>
     </macrodef>
 
-    <target name="airApkWin" description="Create the AIR package" depends="airMobile,checkos" if="isWindows">
-        <createAirApk platform=".bat" specialArch="armv7"/>
-        <createAirApk platform=".bat" specialArch="armv8"/>
+    <target name="airApkWinRelease" description="Create the AIR package" depends="CoCMobileRelease,checkos" if="isWindows">
+        <createAirApk platform=".bat" specialArch="armv7" swf-name-postfix="Release" SpecialPostfix="Release-32bit"/>
+        <createAirApk platform=".bat" specialArch="armv8" swf-name-postfix="Release" SpecialPostfix="Release-64bit"/>
+    </target>
+    <target name="airApkWinDebug" description="Create the AIR package" depends="CoCMobileBeta,checkos" if="isWindows">
+        <createAirApk platform=".bat" specialArch="armv7" swf-name-postfix="Beta" SpecialPostfix="Beta-32bit"/>
+        <createAirApk platform=".bat" specialArch="armv8" swf-name-postfix="Beta" SpecialPostfix="Beta-64bit"/>
     </target>
 
-    <target name="airApkLin" description="Create the AIR package" depends="airMobile,checkos" if="isLinux">
-        <createAirApk platform="" specialArch="armv7"/>
-        <createAirApk platform="" specialArch="armv8"/>
+    <target name="airApkLinRelease" description="Create the AIR package" depends="CoCMobileRelease,checkos" if="isLinux">
+        <createAirApk platform="" specialArch="armv7" swf-name-postfix="Release" SpecialPostfix="Release-32bit"/>
+        <createAirApk platform="" specialArch="armv8" swf-name-postfix="Release" SpecialPostfix="Release-64bit"/>
+    </target>
+    <target name="airApkLinDebug" description="Create the AIR package" depends="CoCMobileBeta,checkos" if="isLinux">
+        <createAirApk platform="" specialArch="armv7" swf-name-postfix="Beta" SpecialPostfix="Beta-32bit"/>
+        <createAirApk platform="" specialArch="armv8" swf-name-postfix="Beta" SpecialPostfix="Beta-64bit"/>
     </target>
 
-
+    <echo>building standalone swfs</echo>
     <target name="release" depends="init" description="Build with release flags">
-        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" binary-name="CoC-release.swf"></build-game-binary>
+        <build-game-binary debug-flag="false" release-flag="true" air-flag="false" standalone-flag="true" should-optimize="true" binary-name="CoC-release.swf"/>
     </target>
 
     <target name="debug" depends="init" description="Build with debug flags">
-        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" binary-name="CoC-debug.swf"></build-game-binary>
+        <build-game-binary debug-flag="true" release-flag="false" air-flag="false" standalone-flag="true" should-optimize="false" binary-name="CoC-debug.swf"/>
     </target>
-	<target name="airMobile" depends="init" description="Build air release">
-		<build-game-binary debug-flag="true" release-flag="true" air-flag="true" standalone-flag="false" binary-name="CoC-Mobile.swf"></build-game-binary>
-	</target>
-
-    <target name="all" depends="init,release,debug,airMobile" description="Build all swf versions"/>
-    <target name="makeMobileAir" depends="init,airMobile,airApkLin,airApkWin" description=" build mobile App"/>
+    <echo> building mobile/air swfs</echo>
+    <target name="CoCMobileBeta" depends="init" description="Build air">
+        <build-game-binary air-flag="true" standalone-flag="false" debug-flag="true" release-flag="false" should-optimize="true" binary-name="CoC-Mobile-Beta.swf"/>
+    </target>
+    <target name="CoCMobileRelease" depends="init" description="Build air">
+        <build-game-binary air-flag="true" standalone-flag="false" debug-flag="false" release-flag="true" should-optimize="true" binary-name="CoC-Mobile-Release.swf"/>
+    </target>
+    <target name="all" depends="init,release,debug,CoCMobileBeta,CoCMobileRelease" description="Build all swf versions"/>
+    <target name="makeMobileAir" depends="init,airApkLinDebug,airApkLinRelease,airApkWinRelease,airApkWinDebug" description=" build mobile App"/>
     <target name="allCI" depends="init,release,debug,makeMobileAir" description="Build all swf versions"/>
 </project>

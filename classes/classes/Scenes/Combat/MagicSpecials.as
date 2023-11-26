@@ -947,7 +947,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Sing", SingInitiate).hint("Begin singing. While singing, you may add various powerful effects to your tune.\n.");
 		}
 		//Telekinetic Grab
-		if (player.racialScore(Races.VAMPIRE) >= 20 && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
+		if ((player.racialScore(Races.VAMPIRE) >= 20 || player.racialScore(Races.DRACULA) >= 22) && !monster.hasStatusEffect(StatusEffects.TelekineticGrab)) {
 			bd = buttons.add("Telekinetic Grab", TelekineticGrab, "Use telekinesis to hold your opponent. \n\nWould go into cooldown after use for: 6 rounds");
 			bd.requireMana(spellCost(50));
 			if (player.hasStatusEffect(StatusEffects.CooldownTelekineticGrab)) {
@@ -1373,7 +1373,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You achieve a thundering orgasm, lightning surging out of your body as you direct it toward [themonster], gleefully zapping [monster him] body with your accumulated lust! Your desire, however, only continues to ramp up.\n\n");
 			temp2 = 5 + rand(player.lib / 5 + player.cor / 10);
 			dynStats("lus", temp2, "scale", false);
-			var lustDmgF:Number = combat.calculateBasicTeaseDamage(120);
+			var lustDmgF:Number = combat.teases.teaseBaseLustDamage();
 			var lustBoostToLustDmg:Number = 0;
 			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) {
@@ -1468,7 +1468,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical Hit!*</b>");
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
-		var lustDmgF:Number = combat.calculateBasicTeaseDamage();
+		var lustDmgF:Number = combat.teases.teaseBaseLustDamage();
 		var lustBoostToLustDmg:Number = 0;
 		lustBoostToLustDmg += lustDmgF * 0.01;
 		if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
@@ -1531,7 +1531,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.LionHeart)) damage *= 2;
 		damage = Math.round(damage);
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
-		var lustDmgF:Number = combat.calculateBasicTeaseDamage();
+		var lustDmgF:Number = combat.teases.teaseBaseLustDamage();
 		var lustBoostToLustDmg:Number = 0;
 		lustBoostToLustDmg += lustDmgF * 0.01;
 		lustDmgF *= 0.2;
@@ -1600,7 +1600,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
-				var CumLustDmg:Number = combat.calculateBasicTeaseDamage();
+				var CumLustDmg:Number = combat.teases.teaseBaseLustDamage();
 				CumLustDmg += player.cumQ()/100;
 				CumLustDmg *= (player.lust100 * 0.01);
 				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) CumLustDmg *= 1.20;
@@ -1622,7 +1622,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
-				var MilkLustDmg:Number = combat.calculateBasicTeaseDamage();
+				var MilkLustDmg:Number = combat.teases.teaseBaseLustDamage();
 				MilkLustDmg += player.lactationQ()/100;
 				MilkLustDmg *= (player.lust100 * 0.01);
 				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) MilkLustDmg *= 1.20;
@@ -1646,7 +1646,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doPlasmaDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
-				var MilkCumLustDmg:Number = combat.calculateBasicTeaseDamage();
+				var MilkCumLustDmg:Number = combat.teases.teaseBaseLustDamage();
 				MilkCumLustDmg += player.lactationQ()/100;
 				MilkCumLustDmg += player.cumQ()/100;
 				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) MilkCumLustDmg *= 1.20;
@@ -2853,7 +2853,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
 			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
 			var d2Bdcc:Number = 2;
-			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
+			var lustDmg2:Number = combat.teases.teaseBaseLustDamage();
 			var poisonScaling:Number = 1;
 			if (monster.plural){
 				d2Bdcc *=5;
@@ -3010,7 +3010,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var fireDamage:Number;
 		damage *= combat.pcScalingBonusCorruption(player.cor);
 		damage *= spellModBlack();
-		lustDamage = combat.calculateBasicTeaseDamage(damage * lustDamagePercent);
+		lustDamage = combat.teases.teaseBaseLustDamage() * lustDamagePercent;
 		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue) {
@@ -5378,7 +5378,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.takeLustDamage(Math.round(-lustDmg)/40, true);
 			lustDmg *= 1.2;
 		}
-		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustDmg = combat.calculateBasicTeaseDamage(lustDmg);
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 4) lustDmg += combat.teases.teaseBaseLustDamage();
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -6397,11 +6397,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
-		if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6461,10 +6456,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");
@@ -6524,10 +6515,6 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage += scalingBonusIntelligence() * multiInt;
 		damage += scalingBonusWisdom() * multiWis;
-		if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
-		if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
-		if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
-		if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
 		damage = Math.round(damage);
 		/*if(!monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back.");

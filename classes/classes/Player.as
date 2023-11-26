@@ -1116,11 +1116,11 @@ use namespace CoC;
 		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (isRace(Races.HARPY) || isRace(Races.THUNDERBIRD) || isRace(Races.PHOENIX)); }
-		public function isWerewolf():Boolean { return isRace(Races.WEREWOLF); }
-		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || isRace(Races.BAT) || isRace(Races.JIANGSHI)); }
+		public function isWerebeast():Boolean { return (isRace(Races.WEREWOLF) || isRace(Races.WERESHARK)); }
+		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || isRace(Races.BAT) || isRace(Races.JIANGSHI) || isRace(Races.DRACULA)); }
 		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
-		public function isTechSavvyPC():Boolean { return (isGoblinoid() || (hasPerk(IMutationsLib.HumanSmartsIM) && perkv1(IMutationsLib.HumanSmartsIM) >= 2)); }
+		public function isTechSavvyPC():Boolean { return (isGoblinoid() || (hasPerk(IMutationsLib.HumanSmartsIM) && perkv1(IMutationsLib.HumanSmartsIM) >= 2) || isRace(Races.WEREFOX)); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -1284,6 +1284,10 @@ use namespace CoC;
 			return weaponRange == game.weaponsrange.ADBSCAT || weaponRange == game.weaponsrange.ADBSHOT || weaponRange == game.weaponsrange.BLUNDER || weaponRange == game.weaponsrange.DESEAGL || weaponRange == game.weaponsrange.TDEEAGL || weaponRange == game.weaponsrange.DUEL_P_ || weaponRange == game.weaponsrange.FLINTLK || weaponRange == game.weaponsrange.HARPGUN
 			 || weaponRange == game.weaponsrange.IVIARG_ || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TM1CERB || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
 		}
+		public function isUsingMechMeleeWeapons():Boolean
+		{
+			return weapon == game.weapons.RIPPER1 ||  weapon == game.weapons.TRIPPER1 || weapon == game.weapons.RIPPER2 || weapon == game.weapons.TRIPPER2 || weapon == game.weapons.MACGRSW || weapon == game.weapons.TMACGRSW;
+		}
 		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
 		public function isInNonGoblinMech():Boolean
 		{
@@ -1357,6 +1361,10 @@ use namespace CoC;
 		public function zerkSereneMind():Boolean
 		{
 			return (hasPerk(PerkLib.SereneMind) && (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking)));
+		}
+		public function immuneToBleed():Boolean
+		{
+			return perkv1(IMutationsLib.SlimeFluidIM) >= 1;
 		}
 
 		public function allEquipment():/*ItemType*/Array {
@@ -1457,7 +1465,7 @@ use namespace CoC;
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var attack:Number = weapon.attack;
-			if (hasPerk(PerkLib.JobSwordsman) && weaponSpecials("Large")) {
+			if (hasPerk(PerkLib.JobSwordsman) && (weaponSpecials("Large") || hasAetherTwinsTier2())) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
 					else attack *= 1.5;
@@ -1474,7 +1482,7 @@ use namespace CoC;
 				}
 				else attack *= 1.25;
 			}
-			if (hasPerk(PerkLib.HiddenMomentum) && (weaponSpecials("Large") || (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive"))) && str >= 75 && spe >= 50) {
+			if (hasPerk(PerkLib.HiddenMomentum) && (weaponSpecials("Large") || hasAetherTwinsTier2() || (hasPerk(PerkLib.GigantGripEx) && weaponSpecials("Massive"))) && str >= 75 && spe >= 50) {
 				attack += (((str + spe) - 100) * 0.2);
 			}//30-70-110
 			if (hasPerk(PerkLib.HiddenDualMomentum) && weaponSpecials("Dual Large") && str >= 150 && spe >= 100) {
@@ -1911,7 +1919,7 @@ use namespace CoC;
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || (shield == game.shields.AETHERS && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"));
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Dagger and Shield"));
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -2711,11 +2719,34 @@ use namespace CoC;
 		}
 		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
 			var magicmult:Number = 1;
+			var returnDamage:Number = 0;
+
 			if (hasPerk(PerkLib.ImprovedManaShield)) magicmult *= 0.25;
 			// if magical damage, double efficiency
 			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
+			// Begin of mana/damage absorb calculation
+			// Could restructure that have defend greysage intelligence perk just reduce damage to 0
+			// And put back mana to 0 if less than 0 at the end
+			mana -= damage * magicmult;
+
+			if(mana < 0)
+			{
+				// If dont have following perk, calculating leftover damage
+				if(!(hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))){
+					returnDamage = Math.round(-mana / magicmult);
+				}
+				mana = 0;
+			}
+
+			if(display) SceneLib.combat.CommasForDigits(damage - returnDamage, false, "Absorbed ");
+
+			game.mainView.statsView.showStatDown('mana');
+			dynStats("lus", 0);
+
+			return returnDamage;
+			/* Legacy backup in case of shit wrong
 			if ((damage * magicmult <= mana) || (hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.GreySageIntelligence))) {
 				if (damage * magicmult > mana) mana = 0;
 				else mana -= (damage * magicmult);
@@ -2733,6 +2764,7 @@ use namespace CoC;
 				dynStats("lus", 0); //Force display arrow.
 				return damage;
 			}
+			*/
 		}
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
 			if (hasPerk(PerkLib.BloodAffinity)) damage = Math.round(damage*0.5);
@@ -2767,6 +2799,7 @@ use namespace CoC;
 			// 7: lightning, 8: darkness, 9: poison
 			// 10: wind, 11: water, 12: earth
 			damage = difficultyDamageMultiplier(damage);
+			var physTeaseDmg:Boolean = false;
 			//all dmg reduction effect(s)
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.EnergyDrain)) damage *= 0.8;
 			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
@@ -2797,18 +2830,22 @@ use namespace CoC;
 				if (damage > 0) {
 					switch (damagetype) {
 						case 0: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 1: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 2: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
 						case 3: // physical
+							if (perkv1(IMutationsLib.SlimeFluidIM) >= 3 && !isFlying() && !CoC.instance.monster.isFlying()) physTeaseDmg = true;
 							if (damagePercentArmor() > 1) damage *= (1 / damagePercentArmor());
 							damage = reducePhysDamage(damage);
 							break;
@@ -2866,6 +2903,7 @@ use namespace CoC;
 					if (display) SceneLib.combat.CommasForDigits(damage);
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
+					if (physTeaseDmg) CoC.instance.monster.teased(SceneLib.combat.teases.teaseBaseLustDamage());
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					dynStats("lus", int(damage / 2), "scale", false);
@@ -3591,6 +3629,11 @@ use namespace CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
 			if (hasStatusEffect(StatusEffects.DaoOfAcid) && (statusEffectv2(StatusEffects.DaoOfAcid) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfAcid) - 3));
+			if (perkv1(IMutationsLib.SlimeFluidIM) >= 2) {
+				mult -= 50;
+				if (perkv1(IMutationsLib.SlimeFluidIM) >= 3) mult -= 25;
+				if (perkv1(IMutationsLib.SlimeFluidIM) >= 4) mult -= 25;
+			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -3621,6 +3664,9 @@ use namespace CoC;
 				var dr:Number = damage * bouncybodyDR();
 				damage -= dr;
 				damage = Math.round(damage);
+			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 2) {
+				damage = Math.round(damage*0.5);
 			}
 			//Apply acid damage resistance percentage.
 			damage *= damageAcidPercent() / 100;
@@ -3974,6 +4020,8 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 18;
 			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx))//+2 racials
 				internalChimeraRatingCounter -= 56;
+			if (hasPerk(PerkLib.ChimericalBodySemiEpicStageEx))//+3 racials
+				internalChimeraRatingCounter -= 118;
 			if (hasPerk(PerkLib.HumanSupremacyInitial))
 				internalChimeraRatingCounter -= 5;
 			if (hasPerk(PerkLib.HumanSupremacyBasic))
@@ -4573,6 +4621,27 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Diapause)) {
 				flags[kFLAGS.DIAPAUSE_FLUID_STORE] += 3 + rand(3);
 				flags[kFLAGS.DIAPAUSE_DISPLAYED] = 1;
+			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 1) {
+				var percent:Number = 0.01;
+				percent += (0.01 * perkv1(IMutationsLib.SlimeMetabolismIM));
+				EngineCore.HPChange(Math.round(maxHP() * percent), true);
+				EngineCore.ManaChange(Math.round(maxHP() * percent));
+				EngineCore.changeFatigue(-Math.round(maxFatigue() * percent));
+			}
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 3 && !hasStatusEffect(StatusEffects.PostfluidIntakeRegeneration)) createStatusEffect(StatusEffects.PostfluidIntakeRegeneration, 0, 0, 0, 0);
+			if (perkv1(IMutationsLib.SlimeMetabolismIM) >= 4 && (statStore.hasBuff("Weakened") || statStore.hasBuff("Drained") || statStore.hasBuff("Damaged"))) {
+				for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+					removeCurse(stat, 5,1);
+					removeCurse(stat, 5,2);
+					removeCurse(stat, 5,3);
+				}
+				if (stat != "sens")
+				{
+					removeCurse(stat+".mult", 0.05,1);
+					removeCurse(stat+".mult", 0.05,2);
+					removeCurse(stat+".mult", 0.05,3);
+				}
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
@@ -5481,6 +5550,7 @@ use namespace CoC;
 			if(statusEffectv4(StatusEffects.CombatFollowerExcellia) > 0) addStatusValue(StatusEffects.CombatFollowerExcellia, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiana) > 0) addStatusValue(StatusEffects.CombatFollowerDiana, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiva) > 0) addStatusValue(StatusEffects.CombatFollowerDiva, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerGVampServ) > 0) addStatusValue(StatusEffects.CombatFollowerGVampServ, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerKiha) > 0) addStatusValue(StatusEffects.CombatFollowerKiha, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerMidoka) > 0) addStatusValue(StatusEffects.CombatFollowerMidoka, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) addStatusValue(StatusEffects.CombatFollowerMitzi, 4, -1);
@@ -6438,20 +6508,27 @@ use namespace CoC;
 
 		public function manticoreFeed():void {
 			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 1) {
+				var duration:Number = 10;
+				var baseSpeed:Number = speStat.value;
+				if (hasPerk(PerkLib.Metabolization)) duration += 10;
+				if (hasPerk(PerkLib.ImprovedMetabolization)) duration += 10;
+				if (hasPerk(PerkLib.GreaterMetabolization)) duration += 10;
+				if (statStore.hasBuff('Feeding Euphoria')) baseSpeed -= buff("Feeding Euphoria").getValueOfStatBuff("spe");
+				if (statStore.hasBuff('Milking Euphoria')) baseSpeed -= buff("Milking Euphoria").getValueOfStatBuff("spe");
 				if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) {
 					var PowerMultiplier:Number = 1;
 					if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) PowerMultiplier *= 2;
-					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < (0.50*PowerMultiplier) + (0.5 * (1 + newGamePlusMod()))) {
-						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
+					if (buff("Feeding Euphoria").getValueOfStatBuff("spe") < Math.round((baseSpeed*0.5*PowerMultiplier) + (0.5 * (1 + newGamePlusMod())))) {
+						buff("Feeding Euphoria").addStats({"spe": Math.round(baseSpeed*0.5)}).withText("Feeding Euphoria!").forHours(duration*1.5);
 					}
-					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= (1.50*PowerMultiplier) + (1.5 * (1 + newGamePlusMod()))) {
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe") >= Math.round((baseSpeed*1.5*PowerMultiplier) + (1.5 * (1 + newGamePlusMod())))) {
 						buff("Feeding Euphoria").addDuration(3);
 					}
 				} else {
-					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
-						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+					if (buff("Feeding Euphoria").getValueOfStatBuff("spe") < Math.round(baseSpeed*0.5)) {
+						buff("Feeding Euphoria").addStats({"spe": Math.round(baseSpeed*0.5)}).withText("Feeding Euphoria!").forHours(duration);
 					}
-					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= 1.50) {
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe") >= 1.50) {
 						buff("Feeding Euphoria").addDuration(2);
 					}
 				}
@@ -6470,18 +6547,25 @@ use namespace CoC;
 
 		public function displacerFeed():void {
 			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) {
+				var duration:Number = 10;
+				var baseSpeed:Number = speStat.value;
+				if (hasPerk(PerkLib.Metabolization)) duration += 10;
+				if (hasPerk(PerkLib.ImprovedMetabolization)) duration += 10;
+				if (hasPerk(PerkLib.GreaterMetabolization)) duration += 10;
+				if (statStore.hasBuff('Feeding Euphoria')) baseSpeed -= buff("Feeding Euphoria").getValueOfStatBuff("spe");
+				if (statStore.hasBuff('Milking Euphoria')) baseSpeed -= buff("Milking Euphoria").getValueOfStatBuff("spe");
 				if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) {
-					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.25 + (0.25 * (1 + newGamePlusMod()))) {
-						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(15);
+					if (buff("Milking Euphoria").getValueOfStatBuff("spe") < Math.round(baseSpeed*(0.25 + (0.25 * (1 + newGamePlusMod()))))) {
+						buff("Milking Euphoria").addStats({"str.mult": 0.5, "spe": Math.round(baseSpeed*0.25), "int.mult": -0.25}).withText("Milking Euphoria!").forHours(duration*1.5);
 					}
-					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75 + (0.75 * (1 + newGamePlusMod()))) {
+					else if (buff("Milking Euphoria").getValueOfStatBuff("spe") >= Math.round(baseSpeed*(0.75 + (0.75 * (1 + newGamePlusMod()))))) {
 						buff("Milking Euphoria").addDuration(3);
 					}
 				} else {
-					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.25) {
-						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(10);
+					if (buff("Milking Euphoria").getValueOfStatBuff("spe") < Math.round(baseSpeed*0.25)) {
+						buff("Milking Euphoria").addStats({"str.mult": 0.5, "spe": Math.round(baseSpeed*0.25), "int.mult": -0.25}).withText("Milking Euphoria!").forHours(duration);
 					}
-					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75) {
+					else if (buff("Milking Euphoria").getValueOfStatBuff("spe") >= Math.round(baseSpeed*0.75)) {
 						buff("Milking Euphoria").addDuration(2);
 					}
 				}
@@ -6566,7 +6650,6 @@ use namespace CoC;
 			var finalType:String = orgasmFinalType(type);
 			dynStats("lus=", 0, "sca", false);
 			hoursSinceCum = 0;
-			if (hasPerk(PerkLib.DemonEnergyThirst)) addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
 				if (CoC.instance.inCombat) if (hasPerk(PerkLib.DominantAlpha)) createOrAddStatusEffect(StatusEffects.DominantAlpha, 1, 3)

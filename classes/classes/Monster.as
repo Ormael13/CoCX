@@ -175,6 +175,9 @@ import flash.utils.getQualifiedClassName;
 		public var special2:Function = null;
 		public var special3:Function = null;
 
+		//Amount of turns an enemy may gain a temporary resolute perk coming out of stun
+		public var resoluteBuffDuration:int = 2; 
+
 		/**
 		 * Monster ability descriptors.
 		 * Structure:
@@ -2012,6 +2015,14 @@ import flash.utils.getQualifiedClassName;
 					addStatusValue(StatusEffects.AbilityCooldown4,1,-1);
 				}
 			}
+			if (hasTempResolute()) {
+				var currentDuration:int = getPerkValue(PerkLib.Resolute, 4);
+				if (currentDuration <= 0) {
+					clearTempResolute();
+				} else {
+					setPerkValue(PerkLib.Resolute, 4, currentDuration - 1);
+				}
+			}
 			if (hasStatusEffect(StatusEffects.Lustzerking)) {
 				this.wrath += 5;
 				if (statusEffectv1(StatusEffects.Lustzerking) > 1) addStatusValue(StatusEffects.Lustzerking, 1, -1);
@@ -2304,10 +2315,14 @@ import flash.utils.getQualifiedClassName;
 		protected function handleStun():Boolean
 		{
 			interruptAbility();
-			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
+			if (statusEffectv1(StatusEffects.Stunned) <= 0) {
+				handleStunEnd(StatusEffects.Stunned);
+			} 
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
 			if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Stunned,1,-5);
-			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
+			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) {
+				handleStunEnd(StatusEffects.StunnedTornado);
+			}
 			else {
 				EngineCore.outputText("[Themonster] is still caught in the tornado.");
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
@@ -2320,7 +2335,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.Fascinated)) {
 				if (plural) EngineCore.outputText("Your opponents stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
 				else EngineCore.outputText("Your opponent stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
-				removeStatusEffect(StatusEffects.Fascinated);
+				handleStunEnd(StatusEffects.Fascinated);
 			}
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
@@ -2347,6 +2362,29 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			return false;
+		}
+
+		public function handleStunEnd(effect:StatusEffectType):void {
+			if (hasStatusEffect(effect) && canGainTempStunImmunity()) {
+				createPerk(PerkLib.Resolute, 0, 0, 1, resoluteBuffDuration);
+				outputText("<b>[Themonster] is now temporarily resistant to being stunned!</b>\n\n");
+			}
+			removeStatusEffect(effect);
+		}
+
+		public function canGainTempStunImmunity():Boolean {
+			return (hasPerk(PerkLib.EnemyBossType) || hasPerk(PerkLib.EnemyChampionType) || hasPerk(PerkLib.EnemyEliteType)) && !hasPerk(PerkLib.Resolute);
+		}
+
+		public function clearTempResolute(display:Boolean = true):void {
+			if (hasPerk(PerkLib.Resolute) && getPerkValue(PerkLib.Resolute, 3) == 1) {
+				removePerk(PerkLib.Resolute);
+				if (display) outputText("<b>[Themonster] is no longer resistant to being stunned!</b>\n\n");
+			}
+		}
+
+		public function hasTempResolute():Boolean {
+			return hasPerk(PerkLib.Resolute) && getPerkValue(PerkLib.Resolute, 3) == 1;
 		}
 
 		/**
@@ -2923,7 +2961,7 @@ import flash.utils.getQualifiedClassName;
 				if(statusEffectv1(StatusEffects.FrozenSolid) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n");
 					statStore.removeBuffs("FrozenSolid");
-					removeStatusEffect(StatusEffects.FrozenSolid);
+					handleStunEnd(StatusEffects.FrozenSolid);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n");
 			}
@@ -2932,7 +2970,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Polymorphed,1,-5);
 				if(statusEffectv1(StatusEffects.Polymorphed) <= 0) {
 					outputText("<b>[Themonster] has freed " + pronoun2 + "self from the curse!</b>\n\n");
-					removeStatusEffect(StatusEffects.Polymorphed);
+					handleStunEnd(StatusEffects.Polymorphed);
 				}
 				else outputText("<b>[Themonster] is fighting against the curse.</b>\n\n");
 			}
@@ -2941,7 +2979,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Sleep,1,-5);
 				if(statusEffectv1(StatusEffects.Sleep) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer asleep!</b>\n\n");
-					removeStatusEffect(StatusEffects.Sleep);
+					handleStunEnd(StatusEffects.Sleep);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently asleep!</b>\n\n");
 			}
@@ -2956,7 +2994,7 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
 				if(statusEffectv1(StatusEffects.InvisibleOrStealth) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " have" : " has") + " found you!</b>\n\n");
-					removeStatusEffect(StatusEffects.InvisibleOrStealth);
+					handleStunEnd(StatusEffects.InvisibleOrStealth);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " looking for you!</b>\n\n");
 			}
@@ -2974,7 +3012,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.HypnosisNaga,1,-5);
 				if(statusEffectv1(StatusEffects.HypnosisNaga) <= 0) {
 					outputText("<b>You try to prolong the trance but [themonster] finally snaps out.</b>\n\n");
-					removeStatusEffect(StatusEffects.HypnosisNaga);
+					handleStunEnd(StatusEffects.HypnosisNaga);
 				}
 				else outputText("<b>[Themonster] is lost in your gaze unable to act.</b>\n\n");
 			}
@@ -3360,7 +3398,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.Swallowed)) {
 				if (rand(3)) {
 					outputText("The many fleshy tentacles lining your inner walls slither around [themonster], seeking out and caressing [monster his] vulnerable endowments as you insidiously try to draw [monster him] closer to cumming.\n\n");
-					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(7)));
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage());
 				}
 				if (!hasStatusEffect(StatusEffects.SandWormAcid))
 					createStatusEffect(StatusEffects.SandWormAcid, 1, 0, 0, 0);
@@ -3485,7 +3523,7 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store18 *= 1.2;
 					store18 = SceneLib.combat.fixPercentDamage(store18);
 					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
-					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(3)));
+					if (!lustVuln <= 0) teased(SceneLib.combat.teases.teaseBaseLustDamage());
 					outputText("\n\n");
 				}
 			}

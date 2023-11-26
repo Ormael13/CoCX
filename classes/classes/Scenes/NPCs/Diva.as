@@ -44,7 +44,7 @@ public class Diva extends Monster {
         this.bonusLust = levelBonus * 8;
         this.lustVuln = 1;
         this.level = levelBonus;
-        this.drop = new ChainedDrop(consumables.REDVIAL);
+        this.drop = new ChainedDrop(consumables.VAMPBLD);
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         checkMonster();
     }
