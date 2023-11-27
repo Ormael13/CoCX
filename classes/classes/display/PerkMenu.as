@@ -89,7 +89,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",meleeOptions);
 		}
-		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.hasPerk(PerkLib.AmateurGunslinger)) {
+		if (player.calculateMultiAttacks(false) > 1 || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot)) {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",rangedOptions);
 		}
@@ -349,6 +349,10 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		outputText("Current number of projectiles per shot: " + (currentProj + 1) + "\n");
 		outputText("Maximum number of projectiles per shot with your current weapon: " + maxProj + "\n");
+		var nba:int = player.nextBonusAttack(false);
+		if (nba < 0) outputText("You've reached the maximum number of bonus attacks from mastery!");
+		else outputText("Next bonus attack at mastery level " + nba);
+		outputText("\n\nHow many attacks would you like to deal?");
 		menu();
 		var atk:int = 0;
 		while (atk < maxProj) {

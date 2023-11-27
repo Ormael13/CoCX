@@ -1653,12 +1653,21 @@ use namespace CoC;
 		//Is Bows
 		public function isBowTypeWeapon():Boolean
 		{
-			return weaponRangePerk == "Bow";
+			return weaponRangePerk == ItemConstants.WT_BOW;
+		}
+		//Is Crossbow
+		public function isCrossbowTypeWeapon():Boolean
+		{
+			return weaponRangePerk == ItemConstants.WT_CROSSBOW;
 		}
 		//Is Thrown
 		public function isThrownTypeWeapon():Boolean
 		{
 			return weaponRangePerk == "Throwing";
+		}
+		//Using Firearms
+		public function isFirearmTypeWeapon():Boolean {
+			return weaponRangePerk == ItemConstants.WT_PISTOL || weaponRangePerk == ItemConstants.WT_RIFLE || weaponRangePerk == ItemConstants.WT_2H_FIREARM || isDualWieldRanged();
 		}
 		//Using Tome
 		public function isUsingTome():Boolean
@@ -6175,7 +6184,7 @@ use namespace CoC;
 			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
 				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
 				// remember the last value
-				var masteryArrays:Array = masteryBonusAttacks;
+				var masteryArrays:Array = melee? masteryBonusAttacksMelee: masteryBonusAttacksRanged;
 				for each (var masteryArr:Array in masteryArrays) {
 					// if matches index, used right now
 					if (masteryArr[0] == index && masteryArr[1]) {
@@ -6195,7 +6204,7 @@ use namespace CoC;
 			}
 		}
 
-		public function get masteryBonusAttacks():Array {
+		public function get masteryBonusAttacksMelee():Array {
 			return [
 				// Mastery, condition, array of attack boosts (from +1)
 				[Combat.MASTERY_FERAL, isFeralCombat(), [10, 20, 30, 40]],
@@ -6209,8 +6218,19 @@ use namespace CoC;
 			];
 		}
 
-		public function nextBonusAttack():int {
-			var masteryArrays:Array = masteryBonusAttacks;
+		public function get masteryBonusAttacksRanged():Array {
+			return [
+				// Mastery, condition, array of attack boosts (from +1)
+				[Combat.MASTERY_ARCHERY, isBowTypeWeapon(), [10, 20, 30, 40, 50]],
+				[Combat.MASTERY_ARCHERY, isCrossbowTypeWeapon(), [15, 30]],
+				[Combat.MASTERY_THROWING, isThrownTypeWeapon(), [15, 30]],
+				[Combat.MASTERY_FIREARMS, isFirearmTypeWeapon(), [10, 20, 30, 40]],
+				[Combat.MASTERY_RANGED, true, [10, 25, 40]] //the last one for "everything else"
+			];
+		}
+
+		public function nextBonusAttack(meleeOrRanged:Boolean = true):int {
+			var masteryArrays:Array = meleeOrRanged? masteryBonusAttacksMelee: masteryBonusAttacksRanged;
 			for each (var masteryArr:Array in masteryArrays) {
 				if (masteryArr[1]) {
 					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
@@ -6223,9 +6243,23 @@ use namespace CoC;
 			return -1; // attack not found
 		}
 
-		public function calculateMultiAttacks():int {
+		public function calculateMaxAttacksForClass(meleeOrRanged:Boolean, classIndex:int):int {
+			var masteryArrays:Array = meleeOrRanged? masteryBonusAttacksMelee: masteryBonusAttacksRanged;
+			var masteryArr:Array = masteryArrays[classIndex];
+
+			var rval:int = 1;
+			if (masteryArr) {
+				for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+					if (combatMastery[masteryArr[0]].level >= masteryArr[2][bonusPos]) ++rval;
+					else break;
+				}
+			}
+			return rval;
+		}
+
+		public function calculateMultiAttacks(meleeOrRanged:Boolean = true):int {
 			var rval:Number = 1;
-            var masteryArrays:Array = masteryBonusAttacks;
+            var masteryArrays:Array = meleeOrRanged? masteryBonusAttacksMelee: masteryBonusAttacksRanged;
 			for each (var masteryArr:Array in masteryArrays) {
 				if (masteryArr[1]) {
 					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
@@ -6235,17 +6269,26 @@ use namespace CoC;
 					break;
 				}
 			}
-			// Spear gains a few extra due to Spear Dancing Flurry
-			if(isSpearTypeWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && isElf()) {
-                rval += perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
-            }
-			// Feral starts off with +1 with history perk
-			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
-                rval += 1;
-			}
-			// Flurry of Blows gets +2
-			if(isUnarmedCombat() && hasPerk(PerkLib.FlurryOfBlows)){
-                rval += 2;
+
+			//Melee additional attacks
+			if (meleeOrRanged) {
+				// Spear gains a few extra due to Spear Dancing Flurry
+				if(isSpearTypeWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && isElf()) {
+					rval += perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
+				}
+				// Feral starts off with +1 with history perk
+				if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
+					rval += 1;
+				}
+				// Flurry of Blows gets +2
+				if(isUnarmedCombat() && hasPerk(PerkLib.FlurryOfBlows)){
+					rval += 2;
+				}
+			} else {
+				//Bow gain +1 from Elf Master Shot
+				if(isBowTypeWeapon() && hasPerk(PerkLib.ELFMasterShot)) {
+					rval += 1;
+				}
 			}
 			return rval;
 		}

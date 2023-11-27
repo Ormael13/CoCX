@@ -5505,7 +5505,7 @@ public class PerkLib
                     .requireSpe(80)
                     .requireLevel(24);
             //Tier 5 Speed Perks
-            Multishot.requirePerk(WildQuiver)
+            Multishot.requireAnyPerk(WildQuiver, LockAndLoad)
                     .requireSpe(150)
                     .requireLevel(30);
             PenetratingThrow.requirePerk(ImpactThrow)
