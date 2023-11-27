@@ -5718,7 +5718,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else if (monster.plural)
 					outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
 				else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-				combat.doArcheryDamage(damage);
+				if (player.isInNonGoblinMech()) combat.doArcheryDamage(damage, 1);
+				else combat.doArcheryDamage(damage, 0);
 				if (crit) outputText(" <b>*Critical Hit!*</b>");
 				combat.archeryXP(combat.rangeMasteryEXPgained(crit));
 				outputText("\n\n");
@@ -5734,7 +5735,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (!combat.MSGControll) {
 					outputText(".  It's clearly very painful. ");
-					combat.doArcheryDamage(damage);
+					if (player.isInNonGoblinMech()) combat.doArcheryDamage(damage, 1);
+					else combat.doArcheryDamage(damage, 0);
 					combat.archeryXP(combat.rangeMasteryEXPgained(crit));
 				}
 				if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -5821,7 +5823,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("You shoot the projectile toward your opponent the bolt flying at such speed and velocity all you see is a flash of light as it reach [themonster] and explode the blast projecting dirt and rock everywhere. It takes an entire minute for the smoke to settle. ");
-		combat.doArcheryDamage(damage);
+		combat.doArcheryDamage(damage, 0);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		combat.cupidArrowsEffect();
 		EnvenomedBoltEffects();
@@ -6020,7 +6022,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("Holding your weapon horizontally, you shoot them all, spraying [themonster] with a projectile. ");
-		damage = doDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.DeadlyAim)) combat.doPhysicalDamage(damage, true, true, true);
+		else combat.doPhysicalDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		combat.cupidArrowsEffect();
@@ -6059,9 +6062,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("Then do it another time showering them with an extra volley of arrows. ");
-		combat.doArcheryDamage(damage);
+		combat.doArcheryDamage(damage, 0);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-
 		combat.cupidArrowsEffect();
 		if (monster.plural) EnvenomedBoltEffects(6);
 		else EnvenomedBoltEffects();

@@ -166,7 +166,7 @@ public class Zetaz extends Monster
 			createBreastRow(0);
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.tallness = 4*12+1;
+			this.tallness = 56;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
