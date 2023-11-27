@@ -68,7 +68,6 @@ public class Combat extends BaseContent {
     public var mspecials:MagicSpecials = new MagicSpecials();
     public var magic:CombatMagic = new CombatMagic();
     public var teases:CombatTeases = new CombatTeases();
-    public var soulskills:CombatSoulskills = new CombatSoulskills();
     public var comfoll:CombatFollowersActions = new CombatFollowersActions();
     public var ui:CombatUI = new CombatUI();
 	public var meleeDamageNoLag:Number = 0;
@@ -869,43 +868,20 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.Flying) == 2) buttons.add("Land", landAfterUsingSoulforce);
             buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
         }
-        if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
-            bd = buttons.add("Flames of Love", flamesOfLove).hint("Turn your burning lust into literal flames of passion. Can your enemies take your heat?  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsFlamesOfLove))+" round  \n\nLust cost: "+flamesOfLoveLC()+"% of current lust");
-            if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
-                bd.disable("You need more time before you can use Flames of Love again.");
-            } else if (player.lust < 50) {
-                bd.disable("Your current lust is too low.");
-            }
+        if (CombatAbilities.FlamesOfLove.isKnown) {
+            buttons.append(CombatAbilities.FlamesOfLove.createButton(monster));
         }
-        if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
-            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Crystalise your lust into cold spikes. Impale your foes with love!  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsIciclesOfLove))+" round  \n\nLust cost: "+iciclesOfLoveLC()+"% of current lust");
-            if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
-                bd.disable("You need more time before you can use Icicles of Love again.");
-            } else if (player.lust < 50) {
-                bd.disable("Your current lust is too low.");
-            }
+        if (CombatAbilities.IciclesOfLove.isKnown) {
+            buttons.append(CombatAbilities.IciclesOfLove.createButton(monster));
         }
-		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
-			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Focus your wrath into the storm of sisterhood.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood))+" round  \n\nWrath cost: "+stormOfSisterhoodWC()+"% of current wrath");
-			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
-				bd.disable("You need more time before you can use Storm of Sisterhood again.");
-			} else if (player.wrath < 50) {
-				bd.disable("Your current wrath is too low.");
-			}
+		if (CombatAbilities.StormOfSisterhood.isKnown) {
+            buttons.append(CombatAbilities.StormOfSisterhood.createButton(monster));
 		}
-		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
-			bd = buttons.add("Night of Brotherhood", nightOfBrotherhood).hint("Condense your wrath into a wreath of shadows, filled with the hate of your brotherhood.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood))+" round  \n\nWrath cost: "+nightOfBrotherhoodWC()+"% of current wrath");
-			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
-				bd.disable("You need more time before you can use Night of Brotherhood again.");
-			} else if (player.wrath < 50) {
-				bd.disable("Your current wrath is too low.");
-			}
+		if (CombatAbilities.NightOfBrotherhood.isKnown) {
+            buttons.append(CombatAbilities.NightOfBrotherhood.createButton(monster));
 		}
-        if (player.hasStatusEffect(StatusEffects.KnowsHeavensDevourer)) {
-            bd = buttons.add("Devourer", heavensDevourer).hint("Form a small sphere inscribed by symbols to drain from enemy a bit of lust and/or wrath.  \n\nWould go into cooldown after use for: 3 rounds");
-            if (player.hasStatusEffect(StatusEffects.CooldownHeavensDevourer)) {
-                bd.disable("You need more time before you can use Devourer again.");
-            }
+        if (CombatAbilities.Devourer.isKnown) {
+            buttons.append(CombatAbilities.Devourer.createButton(monster));
         }
 		if ((monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.Polymorphed) || monster.hasStatusEffect(StatusEffects.Sleep) || monster.hasStatusEffect(StatusEffects.Fascinated)) && (player.fatigueLeft() > combat.physicalCost(20)) && player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 			bd = buttons.add("Bite", VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
@@ -2163,11 +2139,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusSpeed() * 0.10;
 			}
 		}
-
         damage += meleeDamageNoLagSingle(false, damage);
-
-
-        if (damage < 10) damage = 10;
 		if (player.isInGoblinMech()) {
 			damage *= 1.3;
 			damage = goblinDamageBonus(damage);
@@ -3157,7 +3129,7 @@ public class Combat extends BaseContent {
         }
         if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
             if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at [monster name].\n\n");
-            multiArrowsStrike();
+            multiArrowsStrike(0);
         }
         else if (player.weaponRangePerk == "Throwing"){
             if (player.hasPerk(PerkLib.Telekinesis)) {
@@ -3182,7 +3154,7 @@ public class Combat extends BaseContent {
      * - do damage, apply status effects
      * 3. Repeat if Multi-shot style > 1
      */
-    public function multiArrowsStrike():void {
+    public function multiArrowsStrike(type:Number = 0):void {
         var accRange:Number = 0;
         accRange += (arrowsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
@@ -3315,7 +3287,8 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                doArcheryDamage(damage);
+                if (type == 1) doArcheryDamage(damage, 1);
+                else doArcheryDamage(damage, 0);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				archeryXP(rangeMasteryEXPgained(crit));
                 outputText("\n\n");
@@ -3331,7 +3304,8 @@ public class Combat extends BaseContent {
                     else outputText("Your radiant shots blinded [monster him]");
                 }
                 if (!MSGControll) outputText(".  It's clearly very painful. ");
-                doArcheryDamage(damage);
+				if (type == 1) doArcheryDamage(damage, 1);
+                else doArcheryDamage(damage, 0);
                 archeryXP(rangeMasteryEXPgained(crit));
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				WeaponRangeStatusProcs();
@@ -3546,7 +3520,7 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
             flags[kFLAGS.ARROWS_ACCURACY] += arrowsAccuracyPenalty();
-            multiArrowsStrike();
+            multiArrowsStrike(type);
         }
     }
 
@@ -3563,7 +3537,7 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doArcheryDamage(damage:Number):void {
+    public function doArcheryDamage(damage:Number, type:Number = 0):void {
         if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
 			doFireDamage(damage, true, true);
 		}
@@ -3589,7 +3563,7 @@ public class Combat extends BaseContent {
 			doAcidDamage(damage, true, true);
 		}
         else {
-			if (player.hasPerk(PerkLib.DeadlyAim) && player.weaponRangePerk == "Bow") doPhysicalDamage(damage, true, true, true);
+			if ((player.hasPerk(PerkLib.DeadlyAim) && type == 0) || (player.hasPerk(PerkLib.Penetrator) && type == 1)) doPhysicalDamage(damage, true, true, true);
 			else doPhysicalDamage(damage, true, true);
 		}
 		if (player.statStore.hasBuff("FoxflamePelt")) {
@@ -3896,7 +3870,7 @@ public class Combat extends BaseContent {
         while (currentShot < numberOfExtraShots) {
             if (rand(100) < accRange) {
                 var damage:Number = 0;
-				rangeDamageNoLagSingle(2);
+				damage += rangeDamageNoLagSingle(2);
 				damage *= 1.5;
                 //Weapon addition!
                 if (player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.GOODSAM || Forgefather.purePearlEaten) {
@@ -10933,7 +10907,7 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpectralScream, 1, -1);
             }
         }
-        //Hurricane Dance
+        /*//Hurricane Dance
         if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
             if (player.statusEffectv1(StatusEffects.CooldownHurricaneDance) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownHurricaneDance);
@@ -10960,7 +10934,7 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.EarthStance);
                 outputText("<b>Earth Stance effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EarthStance, 1, -1);
-        }
+        } */
         //Punishing Kick
         if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
             if (player.statusEffectv1(StatusEffects.CooldownPunishingKick) <= 0) {

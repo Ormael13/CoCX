@@ -130,7 +130,7 @@ public class ImpLord extends Imp
 			this.pronoun3 = "his";
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = rand(14) + 40;
+			this.tallness = rand(12) + 34;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;

@@ -86,7 +86,7 @@ public class ImpWarlord extends Imp
 			createBreastRow(0);
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = rand(14) + 40;
+			this.tallness = rand(13) + 37;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
