@@ -3,6 +3,8 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
+import classes.Scenes.Combat.AbstractSpell;
+import classes.Scenes.Combat.AbstractSoulSkill;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CharybdisFollower;
@@ -37,7 +39,7 @@ public class PlayerInfo extends BaseContent {
 	private function statsMenu(currentButton:int):void {
 		menu();
 		addButton(0, "Next", playerMenu);
-		if (player.knownAbilities().length > 0) {
+		if (player.hasknownAbilities()) {
 			addButton(4, "Abilities", displayStatsAbilities);
 		}
 		addButton(5, "General", displayStats);
@@ -47,6 +49,20 @@ public class PlayerInfo extends BaseContent {
 		addButton(9, "Mastery", displayStatsmastery);
 		if (currentButton >= 4 && currentButton <= 9) {
 			button(currentButton).disable("You are currently at this stats page.");
+		}
+		if (currentButton == 4 || (currentButton >= 10 && currentButton <= 13)) {
+			button(4).disable("You are currently at this stats page.");
+			if (currentButton == 4) {
+				//Should show all abilities by default
+				currentButton = 10;
+			}
+			addButton(10, "All", displayStatsAbilities);
+			addButtonIfTrue(11, "Spells", curry(displayStatsAbilities, AbstractSpell, 11), "You currently have no spells", player.hasknownAbilitiesOfClass(AbstractSpell));
+			addButtonIfTrue(12, "SoulSkills", curry(displayStatsAbilities, AbstractSoulSkill, 12), "You currently have no soulskills", player.hasknownAbilitiesOfClass(AbstractSoulSkill));
+
+			if (currentButton != 4){
+				button(currentButton).disable("You are currently viewing this category.");
+			}
 		}
 	}
 	//------------
@@ -404,15 +420,20 @@ public class PlayerInfo extends BaseContent {
 			addButton(1, "Stat Up", attributeMenu);
 		}
 		}
-	public function displayStatsAbilities():void {
+	public function displayStatsAbilities(kLass:Class = null, currentButton:int = 4):void {
 		clearOutput();
-		for each (var ability:CombatAbility in player.knownAbilities()) {
+		var abilities:/*CombatAbility*/Array = [];
+		if (!kLass)
+			abilities = player.knownAbilities();
+		else
+			abilities = player.knownAbilitiesOfClass(kLass);
+		for each (var ability:CombatAbility in abilities) {
 			outputText("<font size=\"24\" face=\"Georgia\"><u><b>"+ability.name+"</b></u></font>");
 			outputText(" "+ability.catObject.name+"\n");
 			outputText(ability.fullDescription(null));
 			outputText("\n\n");
 		}
-		statsMenu(4);
+		statsMenu(currentButton);
 	}
 	public function displayStatsCombat():void {
 		spriteSelect(null);

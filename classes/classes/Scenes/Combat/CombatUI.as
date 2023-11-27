@@ -236,7 +236,8 @@ public class CombatUI extends BaseCombatContent {
 			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("A_Magic")
 		} else if (!combat.canUseMagic()) btnMagic.disable().icon("A_Magic")
 		// Submenu - Soulskills
-		combat.soulskills.buildMenu(soulforceButtons);
+		//combat.soulskills.buildMenu(soulforceButtons);
+		buildAbilityMenu(CombatAbilities.ALL_SOULSKILLS, soulforceButtons);
 		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
 		// Submenu - Other
 		combat.buildOtherActions(otherButtons);
