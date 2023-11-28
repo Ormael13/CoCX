@@ -4282,7 +4282,7 @@ public class Combat extends BaseContent {
 						dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 					}
 					if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
-                        for (var attack:int = 1; attack < maxFirearmAttacks; attack++) {
+                        for (var attack:int = 0; attack < maxFirearmAttacks; attack++) {
                             if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doPhysicalDamage(damage, true, true);
 								doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -4339,7 +4339,7 @@ public class Combat extends BaseContent {
 							}
 							else doPhysicalDamage(damage, true, true);
 							if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
-                                for (var cerbAttack:int = 1; cerbAttack < maxFirearmAttacks; attack++) {
+                                for (var cerbAttack:int = 0; cerbAttack < maxFirearmAttacks; attack++) {
                                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 										doPhysicalDamage(damage, true, true);
 										doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -4366,7 +4366,7 @@ public class Combat extends BaseContent {
                         doPhysicalDamage(damage, true, true);
 						if (crit) outputText(" <b>*Critical Hit!*</b>");
 
-                        for (var touAttack:int = 1; touAttack < maxFirearmAttacks; attack++) {
+                        for (var touAttack:int = 0; touAttack < maxFirearmAttacks; attack++) {
                             outputText(" ");
                             doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
