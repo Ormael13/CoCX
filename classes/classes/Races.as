@@ -162,7 +162,7 @@ public class Races {
 			// populated in load() as AllVisibleRaces - RacesExcludedFromRandomEnchantments
 	];
 	// Don't use these races when generating random enchantment
-	private static const RacesExcludedFromRandomEnchantments:/*RAce*/Array = [
+	private static const RacesExcludedFromRandomEnchantments:/*Race*/Array = [
 			ELEMENTALFUSION
 	];
 	
