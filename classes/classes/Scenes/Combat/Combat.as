@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
 import classes.Items.EnchantmentLib;
+import classes.Items.ItemConstants;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Items.Weapon;
@@ -366,12 +367,12 @@ public class Combat extends BaseContent {
     }
 
     public function maxCurrentAttacks():int {
-        if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand")) return 1;
+        if (player.isStaffTypeWeapon() || player.isWandTypeWeapon()) return 1;
         else return player.calculateMultiAttacks();
     }
 
     public function maxBowAttacks():int {
-        var extraHits:Number = 0;
+        /*var extraHits:Number = 0;
         var baseHits:Number;
         if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot)) extraHits = 1;
         if (player.hasPerk(PerkLib.Multishot)) baseHits = 6;
@@ -380,23 +381,27 @@ public class Combat extends BaseContent {
         else if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) baseHits = 3;
         else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) baseHits = 2;
         else baseHits = 1;
-        return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
+        return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);*/
+        return player.calculateMaxAttacksForClass(false, 0) + 
+            (player.isBowTypeWeapon() && player.hasPerk(PerkLib.ELFMasterShot))? 1: 0;
     }
 
     public function maxCrossbowAttacks():int {
-        if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
+        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
         else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;
+        else return 1;*/
+        return player.calculateMaxAttacksForClass(false, 1);
     }
 
     public function maxThrowingAttacks():int {
-        if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
+        /*if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3;
         else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2;
-        else return 1;
+        else return 1;*/
+        return player.calculateMaxAttacksForClass(false, 2);
     }
 
     public function maxFirearmsAttacks():int {
-		var bonusShots:Number = 0;
+		/*var bonusShots:Number = 0;
 		if (player.hasPerk(PerkLib.LockAndLoad)) {
 			if (player.hasPerk(PerkLib.Multishot)) bonusShots = 2;
 			bonusShots = 1;
@@ -404,15 +409,12 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.MasterGunslinger)) return 4+bonusShots;
         else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3+bonusShots;
         else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2+bonusShots;
-        else return 1;
+        else return 1;*/
+        return player.calculateMaxAttacksForClass(false, 3);
     }
 
     public function maxCurrentRangeAttacks():int {
-        if (player.isFirearmTypeWeapon()) return maxFirearmsAttacks();
-        else if (player.weaponRangePerk == "Throwing") return maxThrowingAttacks();
-        else if (player.weaponRangePerk == "Crossbow") return maxCrossbowAttacks();
-        else if (player.weaponRangePerk == "Bow")return maxBowAttacks();
-        else return 1;
+        return player.calculateMultiAttacks(false);
     }
 
     public function endHpVictory():void {
@@ -822,7 +824,7 @@ public class Combat extends BaseContent {
             ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.meleeOptions, "You can adjust your melee attack settings.");
         }
-        if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.hasPerk(PerkLib.AmateurGunslinger)) {
+        if (player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.calculateMultiAttacks(false) > 1) {
             buttons.add("Range Opt", CoC.instance.perkMenu.rangedOptions, "You can adjust your range strike settings.");
         }
         if (player.hasPerk(PerkLib.JobLeader)) {
@@ -3015,6 +3017,8 @@ public class Combat extends BaseContent {
             return;
         }
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_BOW;
+        var maxRangedAttacks:int = player.calculateMultiAttacks(false);
+
         if (player.vehicles == vehicles.HB_MECH) {
             if (player.hasKeyItem("HB Rapid Reload") >= 0) {
                 if (player.keyItemvX("HB Rapid Reload", 1) == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
@@ -3022,30 +3026,28 @@ public class Combat extends BaseContent {
             }
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
         }
-        else if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
-            if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, 3);
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxBowAttacks());
-			if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
-			if (player.isWoodElf() && player.hasPerk(PerkLib.ELFTwinShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
-            if (player.weaponRangeName == "Avelynn") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
+        else if (player.weaponRangePerk == ItemConstants.WT_BOW) {
+            flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
+			if (player.isWoodElf() && player.hasPerk(PerkLib.ELFTwinShot)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
         }
-        else if (player.weaponRangePerk == "Throwing") {
-            if (flags[kFLAGS.MULTISHOT_STYLE] >= 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
+        else if (player.weaponRangePerk == ItemConstants.WT_CROSSBOW) {
+            flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
+            if (player.weaponRange == weaponsrange.AVELYNN) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
+        }
+        else if (player.weaponRangePerk == ItemConstants.WT_THROWING) {
+            flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
+            /*if (flags[kFLAGS.MULTISHOT_STYLE] >= 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;*/
         }
         else if (player.isFirearmTypeWeapon()) {
-            if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
+            /*if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
             else if (flags[kFLAGS.MULTISHOT_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
             else if (flags[kFLAGS.MULTISHOT_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-			if (flags[kFLAGS.MULTISHOT_STYLE] >= 1 && player.hasPerk(PerkLib.LockAndLoad)) {
-				if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
-				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
-			}
-			else if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
-                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-			else if (player.weaponRange == weaponsrange.GOODSAM || player.weaponRange == weaponsrange.BADOMEN) {
+            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1; */
+            flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxRangedAttacks);
+
+			if (player.weaponRange == weaponsrange.GOODSAM || player.weaponRange == weaponsrange.BADOMEN) {
 				var recoil:Number = 1;
 				if (player.str >= 50) recoil += 1;
 				if (player.str >= 100) recoil += 1;
@@ -3060,6 +3062,7 @@ public class Combat extends BaseContent {
 				else if (flags[kFLAGS.MULTISHOT_STYLE] >= 1 && player.hasPerk(PerkLib.TaintedMagazine)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
 			}
+
             if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.ALAKABL || player.weaponRange == weaponsrange.DALAKABL || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
 				if (flags[kFLAGS.MULTISHOT_STYLE] >= 3 && player.hasPerk(PerkLib.PrimedClipWarp)) {
 					if (flags[kFLAGS.MULTISHOT_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
@@ -3071,7 +3074,17 @@ public class Combat extends BaseContent {
 				}
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 			}
-            if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
+
+            if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1)
+                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+            
+            if (player.isDualWieldRanged()) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
+
+            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2 && player.hasPerk(PerkLib.LockAndLoad)) {
+				/*if (flags[kFLAGS.MULTISHOT_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;*/
+                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += Math.floor(flags[kFLAGS.MULTIPLE_ARROWS_STYLE] / 2);
+			}         
         }
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) flags[kFLAGS.ARROWS_ACCURACY] = 0;
         var ammoWord:String = weaponRangeAmmo;
@@ -3119,11 +3132,11 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
+        if (player.isBowTypeWeapon() || player.isCrossbowTypeWeapon()) {
             if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at [monster name].\n\n");
             multiArrowsStrike(0);
         }
-        if (player.weaponRangePerk == "Throwing"){
+        else if (player.isThrownTypeWeapon()){
             if (player.hasPerk(PerkLib.Telekinesis)) {
                 outputText("Weapons begins to float around you as you draw several projectiles from your arsenal using your powers.\n\n");
                 TelekinesisThrow();
@@ -3131,8 +3144,7 @@ public class Combat extends BaseContent {
             }
             throwWeapon();
         }
-        if (player.isFirearmTypeWeapon()) shootWeapon();
-		if (player.vehicles == vehicles.HB_MECH) multiArrowsStrike(1);
+        else if (player.isFirearmTypeWeapon()) shootWeapon();
     }
 
     /**
@@ -3151,12 +3163,12 @@ public class Combat extends BaseContent {
         var accRange:Number = 0;
         accRange += (arrowsAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
-        if (player.weaponRangeName == "Guided bow" || player.vehicles == vehicles.HB_MECH) accRange = 100;
+        if (player.weaponRange == weaponsrange.BOWGUID || player.vehicles == vehicles.HB_MECH) accRange = 100;
         var weaponRangePerk:String = player.weaponRangePerk;
         var ammoWord:String = weaponRangeAmmo;
         if (rand(100) < accRange) {
             var damage:Number = 0;
-			if (player.vehicles == vehicles.HB_MECH) {
+			/*if (player.vehicles == vehicles.HB_MECH) {
 				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
 					if (player.inte < 201) player.weaponRangeAttack *= (1 + (player.inte / 200));
 					else player.weaponRangeAttack *= 2;
@@ -3172,9 +3184,12 @@ public class Combat extends BaseContent {
 				damage += scalingBonusSpeed() * 0.4;
 			}
 			else {
-				if (player.weaponRangePerk == "Bow") damage += rangeDamageNoLagSingle(0);
-				if (player.weaponRangePerk == "Crossbow") damage += rangeDamageNoLagSingle(1);
-			}
+				if (isBowTypeWeapon()) damage = rangeDamageNoLagSingle(0);
+				else if (isCrossbowTypeWeapon()) damage = rangeDamageNoLagSingle(1);
+			}*/
+            if (player.isBowTypeWeapon()) damage = rangeDamageNoLagSingle(0);
+			else if (player.isCrossbowTypeWeapon()) damage = rangeDamageNoLagSingle(1);
+
             if (damage == 0) {
                 if (monster.inte > 0) {
                     outputText("[Themonster] shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
@@ -3182,6 +3197,7 @@ public class Combat extends BaseContent {
                     outputText("The " + ammoWord + " bounces harmlessly off [themonster].\n\n");
                 }
             }
+
             if (!MSGControll) {
                 if (monster is EncapsulationPod) {
                     outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
@@ -3224,11 +3240,11 @@ public class Combat extends BaseContent {
                     if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
                 }
             }
-            if (weaponRangePerk == "Bow"){
+            if (player.isBowTypeWeapon()){
                 if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
                 if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.25;
             }
-            if (weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.FletchingTable)) {
+            if (player.isBowTypeWeapon() && player.hasStatusEffect(StatusEffects.FletchingTable)) {
                 if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv1(StatusEffects.FletchingTable)));
                 if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.FletchingTable)));
                 if (player.hasPerk(PerkLib.CraftedArrows)) {
@@ -3253,19 +3269,17 @@ public class Combat extends BaseContent {
             }
             //Section for item damage modifiers
             if (player.weaponRange is WildHunt && (player.level + playerLevelAdjustment()) > monster.level) damage *= 2;
-            if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+            if (player.weaponRange == weaponsrange.BOWHODR && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
             if (flags[kFLAGS.ELEMENTAL_ARROWS] > 0) damage = elementalArrowDamageMod(damage);
 			//Determine if critical hit!
             var crit:Boolean;
             var critChance:Number = 0;
 			var critDamage:Number = 0;
             if (player.isInNonGoblinMech() || player.isInGoblinMech()) {
-				damage *= firearmsForce();
 				critChance += calculateCritFirearms();
 				critDamage += calculateCritDamageFirearms();
 			}
 			else {
-				damage *= rangePhysicalForce();
 				critChance += calculateCritRange();
 				critDamage += calculateCritDamageRange();
 			}
@@ -3324,7 +3338,7 @@ public class Combat extends BaseContent {
 						if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.01;
 						HPChange(Math.round(player.maxHP() * 0.05), false);
 					}
-					if (monster.hasStatusEffect(StatusEffects.Rosethorn) && monster.statusEffectv1(StatusEffects.Rosethorn) < 6) monster.addStatusValue(StatusEffects.Rosethorn, 1, 1)
+					if (monster.hasStatusEffect(StatusEffects.Rosethorn) && monster.statusEffectv1(StatusEffects.Rosethorn) < 6) monster.addStatusValue(StatusEffects.Rosethorn, 1, 1);
 					else monster.createStatusEffect(StatusEffects.Rosethorn, 6, 0, 0, 0);
                 }
                 if (player.tailType == Tail.BEE_ABDOMEN) {
@@ -3949,17 +3963,20 @@ public class Combat extends BaseContent {
         accRange += (throwingAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
         if (player.hasPerk(PerkLib.PhantomShooting)) {
-            if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) player.takePhysDamage(fc);
+            if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) {
+                player.takePhysDamage(fc);
+            }
         }
         else {
-            if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) player.ammo--;
+            if (player.weaponRange != weaponsrange.SHUNHAR && player.weaponRange != weaponsrange.KSLHARP && player.weaponRange != weaponsrange.LEVHARP) {
+                player.ammo--;
+            }
         }
         if (rand(100) < accRange) {
             var damage:Number = 0;
 			damage += rangeDamageNoLagSingle(2);
 			damage *= 1.5;
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
-                //if (damage == 0) {
                 if (monster.inte > 0) {
                     outputText("[Themonster] shrugs as the [weaponrange] bounces off them harmlessly.\n\n");
                 } else {
@@ -4134,7 +4151,7 @@ public class Combat extends BaseContent {
                     else outputText("You casually fire an " + ammoWord + " at [themonster] with supreme skill");
                 }
             }
-			if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") damage *= firearmsDualWieldDamagePenalty();
+			if (player.isDualWieldRanged()) damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.DBDRAGG) damage *= 2;
@@ -4143,7 +4160,7 @@ public class Combat extends BaseContent {
             //other effects
             if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) damage *= 6;
             if (player.weaponRange == weaponsrange.HARPGUN && player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) damage *= 1.2;
-            if (player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Dual 2H Firearms") damage *= (1 + (0.01 * dualWFLevel()));
+            if (player.isDualWieldRanged()) damage *= (1 + (0.01 * dualWFLevel()));
             if (player.armor == armors.GTECHC_ && !player.isInGoblinMech()) damage *= 1.2;
             if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
             if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
@@ -4250,8 +4267,11 @@ public class Combat extends BaseContent {
                 doNext(endHpVictory);
                 return;
             } else {
+                var maxFirearmAttacks:int = player.calculateMultiAttacks(false);
+                if (player.hasPerk(PerkLib.LockAndLoad)) maxFirearmAttacks += 1;
+
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
-                    outputText(".  It's clearly very painful. ");
+                    outputText(".  It's clearly very painful. ");             
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 						doPhysicalDamage(damage, true, true);
 						doMagicDamage(Math.round(damage * 0.2), true, true);
@@ -4262,41 +4282,13 @@ public class Combat extends BaseContent {
 						dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 					}
 					if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
-						if (player.hasPerk(PerkLib.AmateurGunslinger)) {
-							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+                        for (var attack:int = 1; attack < maxFirearmAttacks; attack++) {
+                            if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 								doPhysicalDamage(damage, true, true);
 								doMagicDamage(Math.round(damage * 0.2), true, true);
 							}
 							else doPhysicalDamage(damage, true, true);
-						}
-						if (player.hasPerk(PerkLib.ExpertGunslinger)) {
-							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-								doPhysicalDamage(damage, true, true);
-								doMagicDamage(Math.round(damage * 0.2), true, true);
-							}
-							else doPhysicalDamage(damage, true, true);
-						}
-						if (player.hasPerk(PerkLib.MasterGunslinger)) {
-							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-								doPhysicalDamage(damage, true, true);
-								doMagicDamage(Math.round(damage * 0.2), true, true);
-							}
-							else doPhysicalDamage(damage, true, true);
-						}
-						if (player.hasPerk(PerkLib.LockAndLoad)) {
-							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-								doPhysicalDamage(damage, true, true);
-								doMagicDamage(Math.round(damage * 0.2), true, true);
-							}
-							else doPhysicalDamage(damage, true, true);
-						}
-						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
-							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-								doPhysicalDamage(damage, true, true);
-								doMagicDamage(Math.round(damage * 0.2), true, true);
-							}
-							else doPhysicalDamage(damage, true, true);
-						}
+                        }
                         if (crit) outputText(" <b>*Critical Hit!*</b>");
 					}
                 } else {
@@ -4347,8 +4339,8 @@ public class Combat extends BaseContent {
 							}
 							else doPhysicalDamage(damage, true, true);
 							if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
-								if (player.hasPerk(PerkLib.AmateurGunslinger)) {
-									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+                                for (var cerbAttack:int = 1; cerbAttack < maxFirearmAttacks; attack++) {
+                                    if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
 										doPhysicalDamage(damage, true, true);
 										doMagicDamage(Math.round(damage * 0.2), true, true);
 									}
@@ -4358,55 +4350,7 @@ public class Combat extends BaseContent {
 										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
 									}
 									else doPhysicalDamage(damage, true, true);
-								}
-								if (player.hasPerk(PerkLib.ExpertGunslinger)) {
-									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-										doPhysicalDamage(damage, true, true);
-										doMagicDamage(Math.round(damage * 0.2), true, true);
-									}
-									else if (player.statStore.hasBuff("FoxflamePelt")) {
-										doFireDamage((damage * 2), true, true);
-										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
-									}
-									else doPhysicalDamage(damage, true, true);
-								}
-								if (player.hasPerk(PerkLib.MasterGunslinger)) {
-									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-										doPhysicalDamage(damage, true, true);
-										doMagicDamage(Math.round(damage * 0.2), true, true);
-									}
-									else if (player.statStore.hasBuff("FoxflamePelt")) {
-										doFireDamage((damage * 2), true, true);
-										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
-									}
-									else doPhysicalDamage(damage, true, true);
-								}
-								if (player.hasPerk(PerkLib.LockAndLoad)) {
-									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-										doPhysicalDamage(damage, true, true);
-										doMagicDamage(Math.round(damage * 0.2), true, true);
-									}
-									else if (player.statStore.hasBuff("FoxflamePelt")) {
-										doFireDamage((damage * 2), true, true);
-										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
-									}
-									else doPhysicalDamage(damage, true, true);
-								}
-								if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
-									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-										doPhysicalDamage(damage, true, true);
-										doMagicDamage(Math.round(damage * 0.2), true, true);
-									}
-									else if (player.statStore.hasBuff("FoxflamePelt")) {
-										doFireDamage((damage * 2), true, true);
-										if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) doMagicDamage(Math.round(damage * 0.2), true, true);
-										monster.teased((monster.lustVuln * (10 + player.cor / 8)), false);
-									}
-									else doPhysicalDamage(damage, true, true);
-								}
+                                }
 							}
 						}
 						firearmsXP(rangeMasteryEXPgained(crit));
@@ -4421,46 +4365,15 @@ public class Combat extends BaseContent {
 						outputText(" ");
                         doPhysicalDamage(damage, true, true);
 						if (crit) outputText(" <b>*Critical Hit!*</b>");
-						if (player.hasPerk(PerkLib.AmateurGunslinger)) {
-							outputText(" ");
+
+                        for (var touAttack:int = 1; touAttack < maxFirearmAttacks; attack++) {
+                            outputText(" ");
                             doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 							outputText(" ");
                             doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
-						}
-						if (player.hasPerk(PerkLib.ExpertGunslinger)) {
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-						}
-						if (player.hasPerk(PerkLib.MasterGunslinger)) {
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-						}
-						if (player.hasPerk(PerkLib.LockAndLoad)) {
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-						}
-						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-							outputText(" ");
-                            doPhysicalDamage(damage, true, true);
-							if (crit) outputText(" <b>*Critical Hit!*</b>");
-						}
+                        }
 					}
                 }
                 //Lust raising weapon bonuses
@@ -5788,7 +5701,7 @@ public class Combat extends BaseContent {
 		damage *= rangePhysicalForce();
 		return damage;
 	}
-	public function firearmsDamageNoLagSingle(subtype:Number = 0):Number {
+	public function firearmsDamageNoLagSingle():Number {
 		var damage:Number = 0;
 		damage += player.weaponRangeAttack * 2;
 		damage += player.speStat.core.value + player.intStat.core.value + player.wisStat.core.value;
@@ -11422,6 +11335,7 @@ public class Combat extends BaseContent {
 
     public function fatigueRecovery2():Number {
         var fatiguecombatrecovery:Number = 1;
+        var maxFirearmAttacks:int = maxFirearmsAttacks();
         if (player.hasPerk(PerkLib.StarSphereMastery)) fatiguecombatrecovery += player.perkv1(PerkLib.StarSphereMastery);
         if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.EnlightenedNinetails)) fatiguecombatrecovery += 1;
@@ -11437,9 +11351,9 @@ public class Combat extends BaseContent {
 		if (player.perkv1(IMutationsLib.HumanBloodstreamIM) >= 3 && player.racialScore(Races.HUMAN) > 17) fatiguecombatrecovery += 5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
-		if (player.hasPerk(PerkLib.AmateurGunslinger)) fatiguecombatrecovery += 1;
-		if (player.hasPerk(PerkLib.ExpertGunslinger)) fatiguecombatrecovery += 1;
-		if (player.hasPerk(PerkLib.MasterGunslinger)) fatiguecombatrecovery += 1;
+		if (maxFirearmAttacks >= 2) fatiguecombatrecovery += 1;
+		if (maxFirearmAttacks >= 2) fatiguecombatrecovery += 1;
+		if (maxFirearmAttacks >= 2) fatiguecombatrecovery += 1;
 		if (player.hasPerk(PerkLib.AlchemicalCartridge)) fatiguecombatrecovery += 2;
 		if (player.hasPerk(PerkLib.ChurchOfTheGun)) fatiguecombatrecovery += 3;
 		if (player.hasPerk(PerkLib.SaintOfZariman)) fatiguecombatrecovery += 4;
@@ -12441,7 +12355,10 @@ public static const bonusAttackMasteries:Array = [
     MASTERY_LARGE,
     MASTERY_MASSIVE,
     MASTERY_RANGED,
-    MASTERY_NORMAL
+    MASTERY_NORMAL,
+    MASTERY_ARCHERY,
+    MASTERY_THROWING,
+    MASTERY_FIREARMS
 ];
 
 public function feralCombatXP(XP:Number = 0):void       {player.gainCombatXP(MASTERY_FERAL, XP * weaponmasteryXPMulti());}
@@ -16427,10 +16344,11 @@ public function rangePhysicalForce():Number {
 
 public function firearmsForce():Number {
 	var mod:Number = 0;
+    var maxFirearmAttacks:int = maxFirearmsAttacks();
 	if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
-	if (player.hasPerk(PerkLib.AmateurGunslinger)) mod += .05;
-	if (player.hasPerk(PerkLib.ExpertGunslinger)) mod += .1;
-	if (player.hasPerk(PerkLib.MasterGunslinger)) mod += .15;
+	if (maxFirearmAttacks >= 2) mod += .05;
+	if (maxFirearmAttacks >= 3) mod += .1;
+	if (maxFirearmAttacks >= 4) mod += .15;
     if (player.hasPerk(PerkLib.AlchemicalCartridge)) mod += .05;
     if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .1;
     if (player.hasPerk(PerkLib.ExplosiveCartridge)) mod += .1;
