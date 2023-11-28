@@ -6250,12 +6250,12 @@ public class PerkLib
 					.requireWis(95)
 					.requireSpe(60)
 					.requireLevel(20);
-			ExplosiveCartridge.requirePerk(JobGunslinger)
+			ExplosiveCartridge.requirePerk(JobGunslinger)//AmateurGunslinger
 					.requireWis(50)
                     .requireTou(45)
                     .requireSpe(40)
                     .requireLevel(18);
-			TaintedMagazine.requirePerk(JobGunslinger)
+			TaintedMagazine.requirePerk(JobGunslinger)//AmateurGunslinger
 					.requireWis(55)
                     .requireTou(50)
                     .requireSpe(45)
@@ -6306,7 +6306,7 @@ public class PerkLib
                     .requireTou(60)
                     .requireSpe(55)
                     .requireLevel(24);
-            SilverForMonsters.requirePerk(JobGunslinger)
+            SilverForMonsters.requirePerk(JobGunslinger)//ExpertGunslinger
 					.requireWis(70)
                     .requireTou(65)
                     .requireSpe(60)
@@ -6331,12 +6331,12 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 4 or Dao of the Elements (layer 1 or higher) perks");
-			NamedBullet.requirePerk(JobGunslinger)
+			NamedBullet.requirePerk(JobGunslinger)//ExpertGunslinger
 					.requireWis(80)
                     .requireTou(75)
                     .requireSpe(70)
                     .requireLevel(30);
-            LockAndLoad.requirePerk(JobGunslinger)
+            LockAndLoad.requirePerk(JobGunslinger)//ExpertGunslinger
 					.requireWis(80)
                     .requireTou(75)
                     .requireSpe(70)
