@@ -7236,7 +7236,7 @@ public class Combat extends BaseContent {
     /**
      * Call to initialize variables for feral attacks before calling them
      */
-    public function ExtraNaturalWeaponPrep(){
+    public function ExtraNaturalWeaponPrep():void{
         enwa_accMelee = 0;
         enwa_accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) enwa_accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
