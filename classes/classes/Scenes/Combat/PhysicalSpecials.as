@@ -4425,6 +4425,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("You lunge at the foe, intending to bite [monster him] with your circular set of razor-sharp teeth. You manage to catch [themonster] off guard, your fangs, penetrating into [monster his] body. Your acidic spit coating [monster him] before [monster he] manages to react. ");
 			//The following is how the enemy reacts over time to acid. It is displayed after the description paragraph
 			monster.statStore.addBuffObject({tou:-2,spe:-2}, "Sandworm Spit",{text:"Sandworm Spit"});
+			combat.ExtraNaturalWeaponPrep();
 			combat.ExtraNaturalWeaponAttack(10, "acid");
 			if (!monster.hasStatusEffect(StatusEffects.SandWormAcid))
 				monster.createStatusEffect(StatusEffects.SandWormAcid, 2, 0, 0, 0);
