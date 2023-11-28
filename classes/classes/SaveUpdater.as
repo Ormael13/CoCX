@@ -2528,11 +2528,19 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nBeautiful items meant to be gathered not chosen one per game.");
 				if (player.hasStatusEffect(StatusEffects.BlessedItemAtTheLake)) player.addStatusValue(StatusEffects.BlessedItemAtTheLake, 1 , 1);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.18;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.19) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.19) {
+				outputText("\n\nPerks are no longer needed for ranged multi attacks");
+				refundPerk(PerkLib.Multishot);
+				refundPerk(PerkLib.WildQuiver);
+				refundPerk(PerkLib.Manyshot);
+				refundPerk(PerkLib.WeaponRangeTripleStrike);
+				refundPerk(PerkLib.WeaponRangeDoubleStrike);
+				refundPerk(PerkLib.MasterGunslinger);
+				refundPerk(PerkLib.ExpertGunslinger);
+				refundPerk(PerkLib.AmateurGunslinger);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.19;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.20) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.20;

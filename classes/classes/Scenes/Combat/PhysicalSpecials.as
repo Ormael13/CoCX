@@ -941,15 +941,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 		PSMulti += combat.PASPAS(2);
 		if (player.weaponRangePerk == "Bow") {
 			damage += combat.rangeDamageNoLagSingle(0);
-			if (combat.maxBowAttacks() > 1) damage *= combat.maxBowAttacks();
+			var maxBowAttacks:int = combat.maxBowAttacks();
+			if (maxBowAttacks > 1) damage *= maxBowAttacks;
 		}
 		if (player.weaponRangePerk == "Crossbow") {
 			damage += combat.rangeDamageNoLagSingle(1);
-			if (combat.maxCrossbowAttacks() > 1) damage *= combat.maxCrossbowAttacks();
+			var maxCrossBowAttacks:int = combat.maxCrossbowAttacks();
+			if (maxCrossBowAttacks > 1) damage *= maxCrossBowAttacks;
 		}
 		if (player.weaponRangePerk == "Throwing") {
 			damage += combat.rangeDamageNoLagSingle(2);
-			if (combat.maxThrowingAttacks() > 1) damage *= combat.maxThrowingAttacks();
+			var maxThrowAttacks:int = combat.maxThrowingAttacks();
+			if (maxThrowAttacks > 1) damage *= maxThrowAttacks;
 		}
 		if (player.hasPerk(PerkLib.PowerShotEx)) {
 			PSMulti += Math.round(PSMulti*0.3);
@@ -1351,11 +1354,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else {
 			if (player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TM1CERB) {
-				var M1:Number = 1;
-				if (player.hasPerk(PerkLib.AmateurGunslinger)) damage += 1;
-				if (player.hasPerk(PerkLib.ExpertGunslinger)) damage += 1;
-				if (player.hasPerk(PerkLib.MasterGunslinger)) damage += 1;
-				damage *= M1;
+				var multiplier:Number = 1;
+				var maxFirearmAttacks:int = combat.maxFirearmsAttacks();
+				if (maxFirearmAttacks >= 2) multiplier += 1;
+				if (maxFirearmAttacks >= 3) multiplier += 1;
+				if (maxFirearmAttacks >= 4) multiplier += 1;
+				damage *= multiplier;
 			}
 			if (player.armor == armors.GTECHC_ && !player.isInGoblinMech()) damage *= 1.2;
 			if (player.hasKeyItem("Gun Scope") >= 0) damage *= 1.2;
@@ -3049,11 +3053,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("  " + monster.mf("He","She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.","touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
 			EggThrowLustDamageRepeat();
 			if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) EggThrowLustDamageRepeat();
-			if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1){
+			var maxRangedAttacks:int = player.calculateMultiAttacks(false);
+			if (maxRangedAttacks >= 2 && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1){
 				EggThrowLustDamageRepeat();
 				if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) EggThrowLustDamageRepeat();
 			}
-			if (player.hasPerk(PerkLib.WeaponRangeTripleStrike) && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1){
+			if (maxRangedAttacks >= 3 && flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1){
 				EggThrowLustDamageRepeat();
 				if (flags[kFLAGS.EASTER_BUNNY_EGGS_STORED] > 1) EggThrowLustDamageRepeat();
 			}
@@ -5784,11 +5789,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		var costSidewinder:Number = 1;
-		if (player.hasPerk(PerkLib.Multishot)) costSidewinder += 5;
-		else if (player.hasPerk(PerkLib.WildQuiver)) costSidewinder += 4;
-		else if (player.hasPerk(PerkLib.Manyshot)) costSidewinder += 3;
-		else if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) costSidewinder += 2;
-		else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) costSidewinder += 1;
+		var maxRangedAttacks:int = player.calculateMultiAttacks(false);
+		if (maxRangedAttacks >= 6) costSidewinder += 5;
+		else costSidewinder += (maxRangedAttacks - 1);
+
 		if (player.fatigue + bowCost(200 * costSidewinder) > player.maxFatigue()) {
 			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
@@ -5997,7 +6001,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function archerBarrage():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
-		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = combat.maxBowAttacks();
+		var maxBowAttacks:int = combat.maxBowAttacks();
+		flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = maxBowAttacks;
 		clearOutput();
 		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
 			outputText("You are too tired to attack [themonster].");

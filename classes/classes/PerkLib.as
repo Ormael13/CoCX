@@ -5329,9 +5329,9 @@ public class PerkLib
             Agility.requireSpe(75)
                     .requirePerk(Runner)
                     .requireLevel(6);
-            WeaponRangeDoubleStrike.requirePerk(JobRanger)
+            /*WeaponRangeDoubleStrike.requirePerk(JobRanger)
                     .requireSpe(50)
-                    .requireLevel(6);
+                    .requireLevel(6);*/
             Unhindered.requireSpe(75)
                     .requirePerk(Evade)
                     .requireLevel(6);
@@ -5400,9 +5400,9 @@ public class PerkLib
                     .requireLib(50)
                     .requirePerk(Unhindered)
                     .requireLevel(12);
-            WeaponRangeTripleStrike.requirePerk(WeaponRangeDoubleStrike)
+            /*WeaponRangeTripleStrike.requirePerk(WeaponRangeDoubleStrike)
                     .requireSpe(75)
-                    .requireLevel(12);
+                    .requireLevel(12);*/
             JobHunter.requireAdvancedJobSlot()
 					.requirePerks(JobRanger, ArchersStaminaI)
                     .requireSpe(80)
@@ -5445,9 +5445,9 @@ public class PerkLib
                     .requireSpe(90)
                     .requireLevel(12);
             //Tier 3 Speed Perks
-            Manyshot.requirePerks(JobHunter, WeaponRangeTripleStrike)
+            /*Manyshot.requirePerks(JobHunter, WeaponRangeTripleStrike)
                     .requireSpe(100)
-                    .requireLevel(18);
+                    .requireLevel(18);*/
             EnvenomedBolt.requireLevel(18)
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -5487,9 +5487,9 @@ public class PerkLib
 								|| player.perkv1(IMutationsLib.VenomGlandsIM) >= 1 || player.hasKeyItem("Sky Poison Pearl") >= 0;
                     }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation or possesing Sky Poison Pearl");
             //Tier 4 Speed Perks
-            WildQuiver.requirePerk(Manyshot)
+            /*WildQuiver.requirePerk(Manyshot)
                     .requireSpe(125)
-                    .requireLevel(24);
+                    .requireLevel(24);*/
             Slayer.requirePerk(DeadlySneaker)
                     .requireSpe(120)
                     .requireLevel(12);
@@ -5505,9 +5505,9 @@ public class PerkLib
                     .requireSpe(80)
                     .requireLevel(24);
             //Tier 5 Speed Perks
-            Multishot.requirePerk(WildQuiver)
+            /*Multishot.requireAnyPerk(WildQuiver, LockAndLoad)
                     .requireSpe(150)
-                    .requireLevel(30);
+                    .requireLevel(30);*/
             PenetratingThrow.requirePerk(ImpactThrow)
                     .requireSpe(100)
                     .requireLevel(24);
@@ -6213,11 +6213,11 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return (player.hasPerk(PerkLib.ElementalContractRank3) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1)) && !player.hasPerk(PerkLib.StrongElementalBond);
                     }, "Having Elemental Contract Rank 3 or Dao of the Elements (layer 1 or higher) perks");
-            AmateurGunslinger.requirePerk(JobGunslinger)
+            /*AmateurGunslinger.requirePerk(JobGunslinger)
 					.requireWis(35)
 					.requireTou(30)
                     .requireSpe(25)
-                    .requireLevel(12);
+                    .requireLevel(12);*/
             RapidReload.requirePerk(JobGunslinger)
 					.requireWis(35)
                     .requireTou(30)
@@ -6250,12 +6250,12 @@ public class PerkLib
 					.requireWis(95)
 					.requireSpe(60)
 					.requireLevel(20);
-			ExplosiveCartridge.requirePerk(AmateurGunslinger)
+			ExplosiveCartridge.requirePerk(JobGunslinger)//AmateurGunslinger
 					.requireWis(50)
                     .requireTou(45)
                     .requireSpe(40)
                     .requireLevel(18);
-			TaintedMagazine.requirePerk(AmateurGunslinger)
+			TaintedMagazine.requirePerk(JobGunslinger)//AmateurGunslinger
 					.requireWis(55)
                     .requireTou(50)
                     .requireSpe(45)
@@ -6296,17 +6296,17 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 4 or Dao of the Elements (layer 1 or higher) perks");
-            ExpertGunslinger.requirePerk(AmateurGunslinger)
+            /*ExpertGunslinger.requirePerk(AmateurGunslinger)
 					.requireWis(65)
                     .requireTou(60)
                     .requireSpe(55)
-                    .requireLevel(24);
+                    .requireLevel(24);*/
             LightningReload.requirePerk(RapidReload)
 					.requireWis(65)
                     .requireTou(60)
                     .requireSpe(55)
                     .requireLevel(24);
-            SilverForMonsters.requirePerk(ExpertGunslinger)
+            SilverForMonsters.requirePerk(JobGunslinger)//ExpertGunslinger
 					.requireWis(70)
                     .requireTou(65)
                     .requireSpe(60)
@@ -6331,12 +6331,12 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
                         return player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1);
                     }, "Having Elemental Contract Rank 4 or Dao of the Elements (layer 1 or higher) perks");
-			NamedBullet.requirePerk(ExpertGunslinger)
+			NamedBullet.requirePerk(JobGunslinger)//ExpertGunslinger
 					.requireWis(80)
                     .requireTou(75)
                     .requireSpe(70)
                     .requireLevel(30);
-            LockAndLoad.requirePerk(ExpertGunslinger)
+            LockAndLoad.requirePerk(JobGunslinger)//ExpertGunslinger
 					.requireWis(80)
                     .requireTou(75)
                     .requireSpe(70)
@@ -6362,11 +6362,11 @@ public class PerkLib
             AdvancedMagiculesTheory.requirePerk(MagiculesTheory)
                     .requireWis(150)
                     .requireLevel(36);
-            MasterGunslinger.requirePerk(ExpertGunslinger)
+            /*MasterGunslinger.requirePerk(ExpertGunslinger)
 					.requireWis(95)
                     .requireTou(90)
                     .requireSpe(85)
-                    .requireLevel(36);
+                    .requireLevel(36);*/
 			PrimedClipWarp.requirePerk(TaintedMagazine)
 					.requireWis(100)
                     .requireTou(95)

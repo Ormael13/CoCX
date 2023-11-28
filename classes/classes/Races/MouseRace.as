@@ -70,8 +70,8 @@ public class MouseRace extends Race {
 				})
 				.end();
 		
-		buildTier(12, "hinezumi")
-				.namesTauric("hinezumi","hinezumi-taur")
+		buildTier(12, "fire mouse")
+				.namesTauric("fire mouse","fire mouse-taur")
 				.requireArmType(Arms.HINEZUMI)
 				.requireLegType(LowerBody.HINEZUMI)
 				.requireTailType(Tail.HINEZUMI)

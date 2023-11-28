@@ -127,9 +127,9 @@ public class Changelog extends BaseContent
 			outputText("-When exploring areas can reroll explore grid without need to leave back to camp and re-entering area explore. But it still come with some time wasted, namely 30 min.\n");
 			outputText("-Fix a bug with minotaur and lacta bovine bull strength not granting as much strength as it should our beloved bovines are now stronk again. (Liadri)\n");
 			outputText("-Soulskill code revamp. (Demojay)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Converted use of perks for determining ranged multi attack to use Dao mastery instead. (Demojay)\n");
+			outputText("-Fixed damage functions error associated with throwing weapons and bow damage. Bonuses and references previously referring to redundant perks redirected to use Dao mastery instead. (Demojay)\n");
+			outputText("-Name of second tier of mouse/hinezumi race was changed to fire mouse.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -148,7 +148,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-Fixed bugs: Telekinetic Grasp have unlimited powe... duration, 'Elite/Champion/Boss HP bonus' setting, Monsters HP (and Soulforce/Mana) not decreasing on turn end when any effect lowering it, Rathazul keep trying cure Belisa after Nadia done it, Vouivre Oil replacing dragon ears with snake ears & dragon scales with snake scales, Tyrantia & Flitzi forest scene allowing to skip ");
 			outputText("large portion of her storyline, corrupt Celess sex scenes not reseting lust/not giving tease exp, 2nd promotion in Adventure Guld been not accesable, Diva/Project Nightwalker dropping/giving Bat TF instead of Vampire TF, Sky-tier Aether Twins been excluded from some of BFGaunlets bonuses, silly mode event in hills involving minotaurs got it lvl req. below lvl req. for area ");
-			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib\n\n");
+			outputText("(fix was removing the lvl req. on it), races with Undeath perk scaling HP from tou instead of lib, Salamander IM not keeping Lustzerker perk from loosing if no longer race with lustzerker ability\n\n");
 			/*ostatni punkt changelogu
 			outputText("<b>Version 0.8v:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
