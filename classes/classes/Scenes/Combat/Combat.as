@@ -5017,6 +5017,7 @@ public class Combat extends BaseContent {
      * 11. TENTACLE TIME!!!
      */
     public function resolveFeralCombatAdditionnalAttacks():void {
+        ExtraNaturalWeaponPrep();
         //DOING BITE ATTACKS
         if (player.hasABiteAttack()) {
             var biteMultiplier:Number = 0.5;
@@ -5101,7 +5102,6 @@ public class Combat extends BaseContent {
                 }
             }
             outputText(".");
-            ExtraNaturalWeaponPrep();
 
             if (player.hasPerk(PerkLib.HellfireCoat)) ExtraNaturalWeaponAttack(biteMultiplier, "fire");
             else if (player.statStore.hasBuff("FoxflamePelt")) ExtraNaturalWeaponAttack(biteMultiplier, "foxflame");
