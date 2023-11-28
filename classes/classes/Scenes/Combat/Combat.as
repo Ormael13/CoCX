@@ -382,7 +382,8 @@ public class Combat extends BaseContent {
         else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) baseHits = 2;
         else baseHits = 1;
         return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);*/
-        return player.calculateMaxAttacksForClass(false, 0);
+        return player.calculateMaxAttacksForClass(false, 0) + 
+            (player.isBowTypeWeapon() && player.hasPerk(PerkLib.ELFMasterShot))? 1: 0;
     }
 
     public function maxCrossbowAttacks():int {
