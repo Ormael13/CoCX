@@ -1660,6 +1660,11 @@ use namespace CoC;
 		{
 			return weaponRangePerk == "Throwing";
 		}
+		//Is Firearm
+		public function isFirearmTypeWeapon():Boolean
+		{
+			return weaponRangePerk == "Pistol" || weaponRangePerk == "Rifle" || weaponRangePerk == "2H Firearm" || weaponRangePerk == "Dual Firearms" || weaponRangePerk == "Dual 2H Firearms";
+		}
 		//Using Tome
 		public function isUsingTome():Boolean
 		{
@@ -2646,7 +2651,6 @@ use namespace CoC;
 			if(jewelryEffectId4 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
 			if(necklaceEffectId == NecklaceLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
-
 			return attackMod;
 		}
 
@@ -2658,7 +2662,6 @@ use namespace CoC;
 			if(jewelryEffectId4 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
 			if(necklaceEffectId == NecklaceLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
-
 			return attackMod;
 		}
 
@@ -7433,14 +7436,28 @@ use namespace CoC;
 		public function knownAbilities():/*CombatAbility*/Array {
 			return CombatAbilities.ALL.filter(
 					function(ability:CombatAbility,index:int,array:Array):Boolean {
-						return ability.isKnown
+						return ability.isKnown;
 					}
 			)
 		}
 		public function knownAbilitiesOfClass(klass:Class):/*CombatAbility*/Array {
 			return CombatAbilities.ALL.filter(
 					function(ability:CombatAbility,index:int,array:Array):Boolean {
-						return ability is klass && ability.isKnown
+						return ability is klass && ability.isKnown;
+					}
+			)
+		}
+		public function hasknownAbilities():Boolean {
+			return CombatAbilities.ALL.some(
+					function(ability:CombatAbility,index:int,array:Array):Boolean {
+						return ability.isKnown;
+					}
+			)
+		}
+		public function hasknownAbilitiesOfClass(klass:Class):Boolean {
+			return CombatAbilities.ALL.some(
+					function(ability:CombatAbility,index:int,array:Array):Boolean {
+						return ability is klass && ability.isKnown;
 					}
 			)
 		}

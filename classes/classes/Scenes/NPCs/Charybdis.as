@@ -128,7 +128,7 @@ public class Charybdis extends Monster
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.scyllaScene.oceanScyllaLoss();
+			SceneLib.charybdisScene.charyLoss();
 		}
 		
 		override public function get long():String

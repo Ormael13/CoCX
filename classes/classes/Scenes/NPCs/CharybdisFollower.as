@@ -145,11 +145,10 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 			outputText("Cherybdis falls backwards, tendrils splaying out on the sand around him. He tries to rise, but you’re on him before he can, your [weapon] pointed at his throat. He raises his hands in surrender, the red light faded from his eyes. <i>\"You’re good, champion.\"</i> His head lowers towards your "+(player.hasCock()?"[cocks]":"[cunt]")+", his eyes a mix of worry and arousal. <i>\"Well, I guess you have options now.\"</i>\n\n");
 			menu();
 			//addButton(1, "", );
-			//addButton(2, "", );
+			addButton(2, "Help Up", charyWinHelpUp);
 			addButton(3, "Leave", cleanupAfterCombat);
 			/*outputText("The Scylla grins good naturedly. \n\n");
 			outputText("The Scylla grins good naturedly. <i>\"\"</i>\n\n");
-			outputText("\n\n");
 			outputText("\n\n");
 			outputText("\n\n");
 			outputText("\n\n");
@@ -173,6 +172,14 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 				*/doNext(cleanupAfterCombat);
 			//}
 		}
+	}
+	public function charyWinHelpUp():void {
+		clearOutput();
+		outputText("You lean down, offering the squat Scylla your hand. He takes it, and you pull the surprisingly heavy Scylla to his feet.\n\n");
+		outputText("<i>\"Oh, thanks. Whoa…\"</i> He’s shaky on his tentacles, and he nearly falls over again. You catch him, and he gives you a wry grin.\n\n");
+		outputText("<i>\"Kick my ass a little harder, why don’tcha?\"</i> He mutters, still smiling. <i>\"Nah, I can use the practice.\"</i> You spend a few minutes making sure he’s fine, before heading back to camp.\n\n");
+		charyAffection(5);
+		cleanupAfterCombat();
 	}
 	public function charyLoss():void {
 		clearOutput();
@@ -307,7 +314,7 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		menu();
 		addButton(1, "JamSesh", charyJamOut);
 		addButtonIfTrue(2, "Instruments", charyInstruments, "Req. 30%+ affection", CharyAffectionMeter >= 30);
-		//if (CharyAffectionMeter >= 50) addButton(3, "Vocals", CharyVocalTraining);
+		//addButtonIfTrue(3, "Vocals", CharyVocalTraining, "Req. 50%+ affection", CharyAffectionMeter >= 50);
 		//if (CharyAffectionMeter >= 60) addButton(4, "Sail", CharySail);
 		addButton(14, "Back", charyBeachMeetings2);
 	}
@@ -358,15 +365,15 @@ public class CharybdisFollower extends NPCAwareContent implements SaveableState
 		player.trainStat("tou", 5, player.trainStatCap("tou",100));
 		endEncounter(60);
 	}
-/*
-public function CharyVocalTraining():void {
+	public function CharyVocalTraining():void {
 		clearOutput();
 		outputText("Charybdis smiles as you raise the subject. <i>\"The voice is a wonderful thing, so vibrant, and changing. Every voice is unique, and…\"</i> He trails off, a tinge of red coming to his cheeks. <i>\"Sorry, you don’t want me to blather on, I’d bore ya.\"</i> You fire back that no, you’d be interested in learning. Hearing this, his smile comes back, and he hugs you with three tendrils, quickly backing off.\n\n");
 		outputText("<i>\"You mean that?\"</i> He brings one hand to his chin. <i>\"Not sure how much use it’d be for you, champ.\"</i> He puffs out his chest, pride brimming in his voice. <i>\"But if you want, I can teach you how to use your voice to the fullest.\"</i>\n\n");
 		outputText("You spend a few minutes warming your voice up. Chary seems to insist on doing these before every session. You get into a few simple tunes after, and despite yourself, you find the session rather calming. An hour passes, and you can feel your lungs burning slightly, not unlike after a light run.\n\n"); 
-		outputText("You tell Charybdis that you need to leave for now, and he nods simply. <i>\"Then I'll see you again soon, hopefully. Keep a tune in your heart, [name]!\"</i>\n\n"); 
-}
-
+		outputText("You tell Charybdis that you need to leave for now, and he nods simply. <i>\"Then I'll see you again soon, hopefully. Keep a tune in your heart, [name]!\"</i>\n\n");
+		endEncounter(60);
+	}
+/*
 public function CharySail():void {
 		clearOutput();
 		outputText("Charybdis smiles as you bring up his boat. <i>\"I’m kinda glad you brought it up. I’ve wanted to take you on my craft for a while now\".</i> The boat itself is large enough to comfortably house five people on the deck, with a clearly marked ladder to a lower deck inside. There are a variety of heavy fishing rods stored underneath the railings, and he hoists a canvas sail, clearly experienced in its use. He casts off, the salty air running through your [hair] as the boat picks up speed. After a few minutes, he pulls down the sail, turning to you and nodding respectfully. <i>\"So, what do you feel like doing, [name]?\"</i>\n\n");

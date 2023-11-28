@@ -1,0 +1,101 @@
+package classes.Scenes.Combat.Soulskills {
+import classes.PerkLib;
+import classes.Scenes.Combat.AbstractSoulSkill;
+import classes.Races;
+import classes.StatusEffects;
+import classes.Monster;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
+
+public class PunishingKickSkill extends AbstractSoulSkill {
+    public function PunishingKickSkill() {
+        super(
+            "Punishing Kick",
+            "A vicious kick that can daze an opponent, reducing its damage for a while.",
+            TARGET_ENEMY,
+            TIMING_INSTANT,
+            [TAG_DAMAGING, TAG_DEBUFF],
+            StatusEffects.KnowsPunishingKick
+        )
+		baseSFCost = 30;
+    }
+
+    override protected function usabilityCheck():String {
+        var uc:String =  super.usabilityCheck();
+        if (uc) return uc;
+
+        if (player.isDrider() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune()) {
+				return "<b>Your legs do not allow you to use this technique.</b>";
+		}
+
+        return "";
+    }
+
+	override public function get buttonName():String {
+		return "Punishing Kick";
+	}
+
+	override public function describeEffectVs(target:Monster):String {
+		return "~" + calcDamage(target) + " damage, Lowers enemy damage by 50% for " + calcCooldown() + " rounds"
+	}
+
+	override public function calcCooldown():int {
+        return 10;
+    }
+
+	public function calcDuration():int {
+        return 5;
+    }
+
+	public function calcDamage(monster:Monster):Number {
+		var damage:Number = 0;
+		damage += combat.meleeUnarmedDamageNoLagSingle();
+		damage += player.wis;
+		damage += scalingBonusWisdom();
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			else damage *= 2;
+			damage = combat.FireTypeDamageBonusLarge(damage);
+		}
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			damage = combat.FireTypeDamageBonus(damage);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
+			damage *= 1.1;
+		}
+		//other bonuses
+		if (monster) {
+			if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
+			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		}
+		return Math.round(damage);
+
+	}
+
+    override public function doEffect(display:Boolean = true):void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = Combat.LAST_ATTACK_PHYS;
+        
+
+		var damage:Number = calcDamage(monster);
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combat.combatPhysicalCritical();
+		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		monster.createStatusEffect(StatusEffects.PunishingKick, calcDuration(), 0, 0, 0);
+		if (display) outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] is knocked off balance by the ferocious blow! ");
+		doDamage(damage, true, display);
+		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
+			doDamage(damage, true, display);
+			doDamage(damage, true, display);
+			damage *= 3;
+		}
+		if (crit && display) outputText(" <b>*Critical Hit!*</b>");
+		endTurnBySpecialHit(damage, display);
+		
+    }
+}
+}
